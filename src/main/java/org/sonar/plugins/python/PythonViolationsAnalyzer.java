@@ -61,7 +61,7 @@ public class PythonViolationsAnalyzer {
     return lines;
   }
 
-  private List<Issue> parseOutput(List<String> lines) {
+  protected List<Issue> parseOutput(List<String> lines) {
     // Parse the output of pylint. Example of the format:
     //
     // complexity/code_chunks.py:62: [W0104, list_compr] Statement seems to have no effect

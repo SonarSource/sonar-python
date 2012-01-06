@@ -23,38 +23,19 @@ package org.sonar.plugins.python;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.HashMap;
-import java.io.*;
 
 import org.junit.Test;
 
-public class PythonViolationsAnalyzerTest {
+public class PythonViolationsAnalyzerIT {
 
   @Test
   public void violationsTest() {
-    String resourceName = "/org/sonar/plugins/python/complexity/sample_pylint_output.xml";
+    String resourceName = "/org/sonar/plugins/python/complexity/code_chunks.py";
     String pathName = getClass().getResource(resourceName).getPath();
-    List<String> lines = readFile(pathName);
-    List<Issue> issues = new PythonViolationsAnalyzer().parseOutput(lines);
+
+    List<Issue> issues = new PythonViolationsAnalyzer().analyze(pathName);
     assertEquals(issues.size(), 21);
-  }
-
-  private List<String> readFile(String path) {
-    List<String> lines = new LinkedList<String>();
-
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader(path));
-      String s = null;
-
-      while ((s = reader.readLine()) != null) {
-        lines.add(s);
-      }
-    } catch (IOException e) {
-      System.err.println("Cannot read the file '" + path + "'");
-    }
-
-    return lines;
   }
 }
