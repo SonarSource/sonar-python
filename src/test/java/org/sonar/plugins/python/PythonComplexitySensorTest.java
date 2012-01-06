@@ -25,6 +25,7 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +50,8 @@ public class PythonComplexitySensorTest {
     sensor = new PythonComplexitySensor();
     context = mock(SensorContext.class);
     fileSystem = mock(ProjectFileSystem.class);
+    when(fileSystem.getSonarWorkingDirectory()).
+	thenReturn(new File(System.getProperty("java.io.tmpdir")));
   }
 
   @Test

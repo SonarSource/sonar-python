@@ -35,34 +35,39 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
 import org.sonar.api.utils.SonarException;
+import org.sonar.api.utils.ZipUtils;
+import org.sonar.api.resources.ProjectFileSystem;
 
 public class PythonComplexityAnalyzer {
 
   private static final String PYTHON = "python";
   private static final String ARGS = "all -v ";
   private static final String PYGENIE_RESOURCE = "/org/sonar/plugins/python/pygenie/";
-  private static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
-  private static final File FALLBACK_PATH = new File(TEMP_DIR, "pygenie.py");
   private static final Logger LOGGER = LoggerFactory.getLogger(PythonComplexityAnalyzer.class);
 
   private String commandTemplate;
+  private File workDir;
+  private File fallbackPath;
 
-  public PythonComplexityAnalyzer() {
+  public PythonComplexityAnalyzer(ProjectFileSystem projectFileSystem) {
     // TODO: provide the option for using an external pygenie
     //
     // String configuredPath = "";
     // if(!configuredPath.equals("")){
     // pygeniePath = configuredPath;
     // }
-
+      
+    workDir = projectFileSystem.getSonarWorkingDirectory();
+    fallbackPath = new File(workDir, "pygenie.py");
+      
     String pygeniePath = "";
-    if ( !FALLBACK_PATH.exists()) {
-      extractPygenie(TEMP_DIR);
-      if ( !FALLBACK_PATH.exists()) {
-        throw new SonarException(FALLBACK_PATH.getAbsolutePath() + " cannot be found");
+    if ( !fallbackPath.exists()) {
+      extractPygenie(workDir);
+      if ( !fallbackPath.exists()) {
+        throw new SonarException(fallbackPath.getAbsolutePath() + " cannot be found");
       }
     }
-    pygeniePath = FALLBACK_PATH.getAbsolutePath();
+    pygeniePath = fallbackPath.getAbsolutePath();
 
     commandTemplate = PYTHON + " " + pygeniePath + " " + ARGS;
   }
@@ -71,8 +76,8 @@ public class PythonComplexityAnalyzer {
     return parseOutput(callPygenie(path));
   }
 
-  public final void extractPygenie(String targetFolder) {
-    LOGGER.debug("Extracting pygenie to '{}'", targetFolder);
+  protected final void extractPygenie(File targetFolder) {
+    LOGGER.debug("Extracting pygenie to '{}'", targetFolder.getAbsolutePath());
 
     try {
       URL url = PythonComplexityAnalyzer.class.getResource(PYGENIE_RESOURCE);
@@ -80,57 +85,25 @@ public class PythonComplexityAnalyzer {
       if (pygeniePath.exists()) {
         // not packed; probably development environment
         for (File f : FileUtils.listFiles(pygeniePath, null, false)) {
-          FileUtils.copyFileToDirectory(f, new File(targetFolder));
+          FileUtils.copyFileToDirectory(f, targetFolder);
         }
       } else {
         // packed; probably deployed
         File packagePath = new File(StringUtils.substringBefore(url.getFile(), "!").substring(5));
-
-        // this only works without the first '/'
-        extractFromJar(packagePath, PYGENIE_RESOURCE.substring(1), targetFolder);
+	
+	ZipUtils.unzip(packagePath, targetFolder, new ZipUtils.ZipEntryFilter() {
+	    public boolean accept(ZipEntry entry) {
+		// this only works without the first '/'
+		return entry.getName().startsWith(PYGENIE_RESOURCE.substring(1));
+	    }
+	});
       }
     } catch (IOException e) {
-      throw new SonarException("Cannot extract pygenie to '" + targetFolder + "'", e);
+      throw new SonarException("Cannot extract pygenie to '" +
+			       targetFolder.getAbsolutePath() + "'", e);
     }
   }
 
-  protected final void extractFromJar(File archivePath, String entryToExtract, String outdir) throws IOException {
-    LOGGER.debug("Extracting '" + entryToExtract + "' from '" + archivePath + "' to '" + outdir + "'");
-
-    final int bufferSize = 1024;
-    File destFolder = new File(outdir);
-    destFolder.mkdirs();
-
-    ZipFile zip = new ZipFile(archivePath);
-    Enumeration<?> entries = zip.entries();
-    while (entries.hasMoreElements()) {
-      ZipEntry entry = (ZipEntry) entries.nextElement();
-      String currentEntry = entry.getName();
-      if (currentEntry.startsWith(entryToExtract)) {
-        File destFile = new File(destFolder, new File(currentEntry).getName());
-        destFile.getParentFile().mkdirs();
-        if ( !entry.isDirectory()) {
-          BufferedInputStream is = null;
-          BufferedOutputStream dest = null;
-          int bytesRead;
-          byte data[] = new byte[bufferSize];
-          try {
-            is = new BufferedInputStream(zip.getInputStream(entry));
-            dest = new BufferedOutputStream(new FileOutputStream(destFile), bufferSize);
-            while ((bytesRead = is.read(data, 0, bufferSize)) != -1) {
-              dest.write(data, 0, bytesRead);
-            }
-          } finally {
-            if (dest != null) {
-              dest.flush();
-            }
-            IOUtils.closeQuietly(dest);
-            IOUtils.closeQuietly(is);
-          }
-        }
-      }
-    }
-  }
 
   private List<String> callPygenie(String path) {
     List<String> lines = new LinkedList<String>();

@@ -21,15 +21,31 @@
 package org.sonar.plugins.python;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import org.sonar.api.resources.ProjectFileSystem;
+
+import java.io.File;
 
 public class PythonComplexityAnalyzerTest {
 
+  private ProjectFileSystem fileSystem;
+
+  @Before
+  public void init() {
+    fileSystem = mock(ProjectFileSystem.class);
+    when(fileSystem.getSonarWorkingDirectory()).
+	thenReturn(new File(System.getProperty("java.io.tmpdir")));
+  }
+    
   @Test
   public void complexityTest() {
     Map<String, Integer> result_expected = new HashMap<String, Integer>() {
@@ -55,7 +71,7 @@ public class PythonComplexityAnalyzerTest {
     String resourceName = "/org/sonar/plugins/python/complexity/code_chunks.py";
     String pathName = getClass().getResource(resourceName).getPath();
 
-    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer();
+    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(fileSystem);
     List<ComplexityStat> stats = analyzer.analyzeComplexity(pathName);
     stats = stats.subList(1, stats.size());
 

@@ -58,7 +58,7 @@ public final class PythonComplexitySensor implements Sensor {
 
     org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(file, projectFileSystem.getSourceDirs());
 
-    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer();
+    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(projectFileSystem);
 
     // contains global (file scope) complexity
     // as head and function complexity counts as tail
