@@ -23,14 +23,11 @@ package org.sonar.plugins.python;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.LinkedList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.net.URL;
 import java.io.*;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -46,9 +43,7 @@ public class PythonComplexityAnalyzer {
   private static final Logger LOGGER = LoggerFactory.getLogger(PythonComplexityAnalyzer.class);
 
   private String commandTemplate;
-  private File workDir;
-  private File fallbackPath;
-
+ 
   public PythonComplexityAnalyzer(ProjectFileSystem projectFileSystem) {
     // TODO: provide the option for using an external pygenie
     //
@@ -57,8 +52,8 @@ public class PythonComplexityAnalyzer {
     // pygeniePath = configuredPath;
     // }
       
-    workDir = projectFileSystem.getSonarWorkingDirectory();
-    fallbackPath = new File(workDir, "pygenie.py");
+    File workDir = projectFileSystem.getSonarWorkingDirectory();
+    File fallbackPath = new File(workDir, "pygenie.py");
       
     String pygeniePath = "";
     if ( !fallbackPath.exists()) {
@@ -73,7 +68,7 @@ public class PythonComplexityAnalyzer {
   }
 
   public List<ComplexityStat> analyzeComplexity(String path) {
-    return parseOutput(callPygenie(path));
+    return parseOutput(Utils.callCommand(commandTemplate + " " + path));
   }
 
   protected final void extractPygenie(File targetFolder) {
@@ -102,28 +97,6 @@ public class PythonComplexityAnalyzer {
       throw new SonarException("Cannot extract pygenie to '" +
 			       targetFolder.getAbsolutePath() + "'", e);
     }
-  }
-
-
-  private List<String> callPygenie(String path) {
-    List<String> lines = new LinkedList<String>();
-    String command = commandTemplate + " " + path;
-
-    LOGGER.debug("Calling pygenie: '{}'", command);
-
-    try {
-      Process p = Runtime.getRuntime().exec(command);
-      BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-      String s = null;
-
-      while ((s = stdInput.readLine()) != null) {
-        lines.add(s);
-      }
-    } catch (IOException e) {
-      throw new SonarException("Error calling pygenie", e);
-    }
-
-    return lines;
   }
 
   private List<ComplexityStat> parseOutput(List<String> lines) {

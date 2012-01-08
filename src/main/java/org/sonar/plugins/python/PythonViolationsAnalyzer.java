@@ -23,42 +23,17 @@ package org.sonar.plugins.python;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.*;
-
-import org.sonar.api.utils.SonarException;
 
 public class PythonViolationsAnalyzer {
 
   private static final String PYLINT = "pylint -i y -f parseable -r n ";
   private static final Pattern PATTERN = Pattern.compile("([^:]+):([0-9]+): \\[(.*)\\] (.*)");
-  private static final Logger LOGGER = LoggerFactory.getLogger(PythonViolationsAnalyzer.class);
 
   public List<Issue> analyze(String path) {
-    return parseOutput(callPylint(path));
-  }
-
-  private List<String> callPylint(String path) {
-    List<String> lines = new LinkedList<String>();
-    String command = PYLINT + " " + path;
-
-    LOGGER.debug("Calling '{}'", command);
-
-    try {
-      Process p = Runtime.getRuntime().exec(command);
-      BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-      String s = null;
-      while ((s = stdInput.readLine()) != null) {
-        lines.add(s);
-      }
-    } catch (IOException e) {
-      throw new SonarException("Error calling pylint", e);
-    }
-
-    return lines;
+    return parseOutput(Utils.callCommand(PYLINT + " " + path));
   }
 
   protected List<Issue> parseOutput(List<String> lines) {
