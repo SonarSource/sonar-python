@@ -20,11 +20,11 @@
 
 package org.sonar.plugins.python;
 
-import org.sonar.api.resources.Language;
-import org.sonar.api.resources.Resource;
-import org.sonar.api.resources.Qualifiers;
-import org.sonar.api.utils.WildcardPattern;
 import org.sonar.api.resources.Directory;
+import org.sonar.api.resources.Language;
+import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.utils.WildcardPattern;
 
 /** A class that represents a Python package in Sonar */
 public class PythonPackage extends Directory {

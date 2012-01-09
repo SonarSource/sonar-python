@@ -22,10 +22,10 @@ package org.sonar.plugins.python;
 
 import java.util.List;
 
+import org.sonar.api.resources.DefaultProjectFileSystem;
+import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Language;
-import org.sonar.api.resources.Directory;
-import org.sonar.api.resources.DefaultProjectFileSystem;
 
 public class PythonFile extends File {
 

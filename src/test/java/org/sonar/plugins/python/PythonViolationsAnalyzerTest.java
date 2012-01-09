@@ -22,11 +22,11 @@ package org.sonar.plugins.python;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.HashMap;
-import java.io.*;
+import java.util.List;
 
 import org.junit.Test;
 

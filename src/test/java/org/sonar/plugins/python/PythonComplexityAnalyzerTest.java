@@ -24,16 +24,14 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import org.sonar.api.resources.ProjectFileSystem;
-
-import java.io.File;
 
 public class PythonComplexityAnalyzerTest {
 

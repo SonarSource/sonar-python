@@ -20,10 +20,7 @@
 
 package org.sonar.plugins.python;
 
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
 import org.junit.Test;
-
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Resource;
 

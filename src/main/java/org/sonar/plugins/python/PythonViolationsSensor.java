@@ -32,8 +32,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.Violation;
 import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.rules.Violation;
 
 public class PythonViolationsSensor implements Sensor {
 

@@ -21,6 +21,7 @@
 package org.sonar.plugins.python;
 
 import java.util.List;
+
 import org.junit.Test;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.XMLRuleParser;

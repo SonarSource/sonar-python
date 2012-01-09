@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.util.List;
+
 import org.sonar.api.batch.AbstractSourceImporter;
 import org.sonar.api.resources.Resource;
 
