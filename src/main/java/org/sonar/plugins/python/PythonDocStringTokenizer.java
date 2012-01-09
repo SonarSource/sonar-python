@@ -20,38 +20,15 @@
 
 package org.sonar.plugins.python;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.sonar.colorizer.MultilinesDocTokenizer;
 
-import org.sonar.api.Extension;
-import org.sonar.api.Plugin;
+public class PythonDocStringTokenizer extends MultilinesDocTokenizer {
 
-public class PythonPlugin implements Plugin {
-
-  public String getKey() {
-    return "Python Plugin";
+  public PythonDocStringTokenizer(String tagBefore, String tagAfter) {
+    super("\"\"\"", "\"\"\"", tagBefore, tagAfter);
   }
 
-  public String getName() {
-    return "Python";
-  }
-
-  public String getDescription() {
-    return "Analysis of Python projects";
-  }
-
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-
-    list.add(Python.class);
-    list.add(PythonSourceImporter.class);
-    list.add(PythonSquidSensor.class);
-    list.add(PythonComplexitySensor.class);
-    list.add(PythonViolationsSensor.class);
-    list.add(PythonRuleRepository.class);
-    list.add(PythonDefaultProfile.class);
-    list.add(PythonColorizer.class);
-
-    return list;
+  public PythonDocStringTokenizer() {
+    this("", "");
   }
 }
