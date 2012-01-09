@@ -39,8 +39,10 @@ public class PythonComplexityAnalyzer {
 
   private static final String PYTHON = "python";
   private static final String ARGS = "all -v ";
-  private static final String PYGENIE_RESOURCE = "/org/sonar/plugins/python/pygenie/";
-  private static final Logger LOGGER = LoggerFactory.getLogger(PythonComplexityAnalyzer.class);
+  private static final String PYGENIE_DIR = "/org/sonar/plugins/python/pygenie/";
+  private static final String PYGENIE_SCRIPT = "pygenie.py";
+  private static final Logger LOGGER = LoggerFactory
+      .getLogger(PythonComplexityAnalyzer.class);
 
   private String commandTemplate;
  
@@ -53,8 +55,8 @@ public class PythonComplexityAnalyzer {
     // }
       
     File workDir = projectFileSystem.getSonarWorkingDirectory();
-    File fallbackPath = new File(workDir, "pygenie.py");
-      
+    File fallbackPath = new File(workDir, PYGENIE_DIR + PYGENIE_SCRIPT);
+
     String pygeniePath = "";
     if ( !fallbackPath.exists()) {
       extractPygenie(workDir);
@@ -75,23 +77,28 @@ public class PythonComplexityAnalyzer {
     LOGGER.debug("Extracting pygenie to '{}'", targetFolder.getAbsolutePath());
 
     try {
-      URL url = PythonComplexityAnalyzer.class.getResource(PYGENIE_RESOURCE);
+      URL url = PythonComplexityAnalyzer.class.getResource(PYGENIE_DIR);
       File pygeniePath = new File(url.getFile());
       if (pygeniePath.exists()) {
         // not packed; probably development environment
         for (File f : FileUtils.listFiles(pygeniePath, null, false)) {
-          FileUtils.copyFileToDirectory(f, targetFolder);
+          FileUtils.copyFileToDirectory(f, new File(targetFolder,
+              PYGENIE_DIR));
         }
       } else {
         // packed; probably deployed
-        File packagePath = new File(StringUtils.substringBefore(url.getFile(), "!").substring(5));
-	
-	ZipUtils.unzip(packagePath, targetFolder, new ZipUtils.ZipEntryFilter() {
-	    public boolean accept(ZipEntry entry) {
-		// this only works without the first '/'
-		return entry.getName().startsWith(PYGENIE_RESOURCE.substring(1));
-	    }
-	});
+        File packagePath = new File(StringUtils.substringBefore(
+            url.getFile(), "!").substring(5));
+
+        ZipUtils.unzip(packagePath, targetFolder,
+            new ZipUtils.ZipEntryFilter() {
+
+              public boolean accept(ZipEntry entry) {
+                // this only works without the first '/'
+                return entry.getName().startsWith(
+                    PYGENIE_DIR.substring(1));
+              }
+            });
       }
     } catch (IOException e) {
       throw new SonarException("Cannot extract pygenie to '" +
