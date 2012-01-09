@@ -47,6 +47,7 @@ public class PythonViolationsSensor implements Sensor {
     this.ruleFinder = ruleFinder;
   }
 
+  @Override
   public void analyse(Project project, SensorContext sensorContext) {
     for (File pythonFile : project.getFileSystem().getSourceFiles(python)) {
       try {
@@ -69,6 +70,7 @@ public class PythonViolationsSensor implements Sensor {
     }
   }
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     return project.getLanguage().equals(python);
   }

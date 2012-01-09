@@ -33,18 +33,22 @@ public class PythonPackage extends Directory {
     super(key);
   }
 
+  @Override
   public Language getLanguage() {
     return Python.INSTANCE;
   }
 
+  @Override
   public String getScope() {
     return Resource.SCOPE_SPACE;
   }
 
+  @Override
   public String getQualifier() {
     return Qualifiers.PACKAGE;
   }
 
+  @Override
   public Resource getParent() {
     // Interesting: all the Language implementations i saw so far
     // dont implement nested resources, they just show them in
@@ -52,6 +56,7 @@ public class PythonPackage extends Directory {
     return null;
   }
 
+  @Override
   public boolean matchFilePattern(String antPattern) {
     WildcardPattern matcher = WildcardPattern.create(antPattern, "/");
     return matcher.match(getKey());

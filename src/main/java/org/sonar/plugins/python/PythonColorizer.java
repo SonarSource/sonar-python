@@ -62,6 +62,7 @@ public final class PythonColorizer extends CodeColorizerFormat {
     super(Python.KEY);
   }
 
+  @Override
   public List<Tokenizer> getTokenizers() {
     if (tokens == null) {
       tokens = new ArrayList<Tokenizer>();

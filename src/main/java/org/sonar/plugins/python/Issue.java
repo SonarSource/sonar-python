@@ -36,6 +36,7 @@ class Issue {
     this.descr = descr;
   }
 
+  @Override
   public String toString() {
     return "(" + filename + ", " + line + ", " + ruleId + ", " + objname + ", " + descr + ")";
   }

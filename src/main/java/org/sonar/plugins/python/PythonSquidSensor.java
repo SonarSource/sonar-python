@@ -41,10 +41,12 @@ public final class PythonSquidSensor implements Sensor {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PythonSquidSensor.class);
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     return Python.INSTANCE.equals(project.getLanguage());
   }
 
+  @Override
   public void analyse(Project project, SensorContext sensorContext) {
     for (File file : project.getFileSystem().getSourceFiles(Python.INSTANCE)) {
       try {

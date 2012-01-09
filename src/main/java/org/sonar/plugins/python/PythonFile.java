@@ -55,6 +55,7 @@ public class PythonFile extends File {
     return null;
   }
 
+  @Override
   public Directory getParent() {
     if (partOfPackage) {
       if (parentPackage == null) {
@@ -65,6 +66,7 @@ public class PythonFile extends File {
     return super.getParent();
   }
 
+  @Override
   public Language getLanguage() {
     return Python.INSTANCE;
   }

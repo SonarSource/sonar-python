@@ -30,6 +30,7 @@ class ComplexityStat {
     this.count = count;
   }
 
+  @Override
   public String toString() {
     return "[" + name + " " + count + "]";
   }

@@ -28,18 +28,22 @@ import org.sonar.api.Plugin;
 
 public class PythonPlugin implements Plugin {
 
+  @Override
   public String getKey() {
     return "Python Plugin";
   }
 
+  @Override
   public String getName() {
     return "Python";
   }
 
+  @Override
   public String getDescription() {
     return "Analysis of Python projects";
   }
 
+  @Override
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
 

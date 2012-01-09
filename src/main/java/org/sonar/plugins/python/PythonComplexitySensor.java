@@ -40,10 +40,12 @@ public final class PythonComplexitySensor implements Sensor {
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12, 20, 30 };
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     return Python.INSTANCE.equals(project.getLanguage());
   }
 
+  @Override
   public void analyse(Project project, SensorContext sensorContext) {
     for (File file : project.getFileSystem().getSourceFiles(Python.INSTANCE)) {
       try {
