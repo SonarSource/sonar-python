@@ -40,10 +40,9 @@ public class PythonComplexityAnalyzerTest {
   @Before
   public void init() {
     fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSonarWorkingDirectory()).
-	thenReturn(new File(System.getProperty("java.io.tmpdir")));
+    when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File(System.getProperty("java.io.tmpdir")));
   }
-    
+
   @Test
   public void complexityTest() {
     Map<String, Integer> result_expected = new HashMap<String, Integer>() {

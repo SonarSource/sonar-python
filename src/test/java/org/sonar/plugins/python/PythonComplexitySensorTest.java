@@ -50,8 +50,7 @@ public class PythonComplexitySensorTest {
     sensor = new PythonComplexitySensor();
     context = mock(SensorContext.class);
     fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSonarWorkingDirectory()).
-	thenReturn(new File(System.getProperty("java.io.tmpdir")));
+    when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File(System.getProperty("java.io.tmpdir")));
   }
 
   @Test

@@ -30,13 +30,13 @@ import org.sonar.squid.recognizer.LanguageFootprint;
 public class PythonFootprint implements LanguageFootprint {
 
   public Set<Detector> getDetectors() {
-    // Doesnt play a significant role, apparently...
+    // Doesn't play a significant role, apparently...
     // So live for now with this simple implementation
     //
 
     final Set<Detector> detectors = new HashSet<Detector>();
 
-    // wild quess...
+    // wild guess...
     // detectors.add(new EndWithDetector(0.3, ':', ')'));
 
     // reference: keyword.kwlist of Python 2.6.6

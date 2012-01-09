@@ -33,31 +33,33 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 
 public final class Utils {
+
   private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
-  
+
   public static List<String> callCommand(String command) {
     List<String> lines = new LinkedList<String>();
-    
+
     LOGGER.debug("Calling command: '{}'", command);
-    
+
     InputStream is = null;
     try {
       Process p = Runtime.getRuntime().exec(command);
       is = p.getInputStream();
       BufferedReader stdInput = new BufferedReader(new InputStreamReader(is));
       String s = null;
-      
+
       while ((s = stdInput.readLine()) != null) {
-	lines.add(s);
+        lines.add(s);
       }
     } catch (IOException e) {
       throw new SonarException("Error calling command", e);
     } finally {
       IOUtils.closeQuietly(is);
     }
-    
+
     return lines;
   }
-  
-  private Utils() {}
+
+  private Utils() {
+  }
 }
