@@ -34,7 +34,6 @@ public class Python extends AbstractLanguage {
     INSTANCE = this;
   }
 
-  @Override
   public String[] getFileSuffixes() {
     return suffixes;
   }

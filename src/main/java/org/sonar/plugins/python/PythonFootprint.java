@@ -29,7 +29,6 @@ import org.sonar.squid.recognizer.LanguageFootprint;
 
 public class PythonFootprint implements LanguageFootprint {
 
-  @Override
   public Set<Detector> getDetectors() {
     // Doesn't play a significant role, apparently...
     // So live for now with this simple implementation

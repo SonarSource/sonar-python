@@ -89,7 +89,6 @@ public class PythonComplexityAnalyzer {
 
         ZipUtils.unzip(packagePath, targetFolder, new ZipUtils.ZipEntryFilter() {
 
-          @Override
           public boolean accept(ZipEntry entry) {
             // this only works without the first '/'
             return entry.getName().startsWith(PYGENIE_DIR.substring(1));
