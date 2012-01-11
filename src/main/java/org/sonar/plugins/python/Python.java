@@ -23,18 +23,16 @@ package org.sonar.plugins.python;
 import org.sonar.api.resources.AbstractLanguage;
 
 public class Python extends AbstractLanguage {
-
-  private static String[] suffixes = { "py" };
-  public static final String NAME = "Python";
-  public static final String KEY = "py";
-  public static Python INSTANCE;
+  
+  private static final String[] SUFFIXES = { "py" };
+  protected static final String KEY = "py";
+  protected static final Python INSTANCE = new Python();
 
   public Python() {
-    super(KEY, NAME);
-    INSTANCE = this;
+    super(KEY, "Python");
   }
-
+  
   public String[] getFileSuffixes() {
-    return suffixes;
+    return SUFFIXES;
   }
 }
