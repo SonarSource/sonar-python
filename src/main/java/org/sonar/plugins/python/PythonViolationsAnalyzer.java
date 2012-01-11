@@ -20,18 +20,31 @@
 
 package org.sonar.plugins.python;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.sonar.api.utils.SonarException;
+
 public class PythonViolationsAnalyzer {
 
   private static final String PYLINT = "pylint -i y -f parseable -r n ";
   private static final Pattern PATTERN = Pattern.compile("([^:]+):([0-9]+): \\[(.*)\\] (.*)");
-
+  private String commandTemplate = PYLINT;
+  
+  PythonViolationsAnalyzer(String pylintConfig) {
+    if (pylintConfig != null){
+      if(! new File(pylintConfig).exists()){
+	throw new SonarException("Cannot find the pylint configuration file: " + pylintConfig);
+      }
+      commandTemplate += "--rcfile=" + pylintConfig;
+    }
+  }
+  
   public List<Issue> analyze(String path) {
-    return parseOutput(Utils.callCommand(PYLINT + " " + path));
+    return parseOutput(Utils.callCommand(commandTemplate + " " + path));
   }
 
   protected List<Issue> parseOutput(List<String> lines) {

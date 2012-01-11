@@ -29,18 +29,32 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
+import org.sonar.api.utils.SonarException;
 
 public class PythonViolationsAnalyzerTest {
-
   @Test
-  public void violationsTest() {
+  public void shouldParseCorrectly() {
     String resourceName = "/org/sonar/plugins/python/complexity/sample_pylint_output.xml";
     String pathName = getClass().getResource(resourceName).getPath();
+    String pylintConfigPath = null;
     List<String> lines = readFile(pathName);
-    List<Issue> issues = new PythonViolationsAnalyzer().parseOutput(lines);
+    List<Issue> issues = new PythonViolationsAnalyzer(pylintConfigPath).parseOutput(lines);
     assertEquals(issues.size(), 21);
   }
 
+  @Test
+  public void shouldWorkWithValidCustomConfig() {
+    String resourceName = "/org/sonar/plugins/python/complexity/pylintrc_sample";
+    String pylintConfigPath = getClass().getResource(resourceName).getPath();
+    new PythonViolationsAnalyzer(pylintConfigPath);
+  }
+  
+  @Test(expected = SonarException.class)
+  public void shouldFailIfGivenInvalidConfig() {
+    String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
+    new PythonViolationsAnalyzer(pylintConfigPath);
+  }
+  
   private List<String> readFile(String path) {
     List<String> lines = new LinkedList<String>();
 

@@ -27,8 +27,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
+@Properties(
+  @Property(key = PythonPlugin.PYLINT_CONFIG_KEY,
+	    defaultValue = "",
+	    name = "pylint configuration",
+	    description = "Path to the pylint configuration file to use in pylint analysis",
+	    global = true,
+	    project = true)
+)
 public class PythonPlugin implements Plugin {
+  private static final String PROPERTY_PREFIX = "sonar.python.";
+  protected static final String PYLINT_CONFIG_KEY = PROPERTY_PREFIX + "pylint_config";
   protected static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
 
   public String getKey() {

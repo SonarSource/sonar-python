@@ -30,10 +30,13 @@ public class PythonViolationsAnalyzerIT {
 
   @Test
   public void violationsTest() {
-    String resourceName = "/org/sonar/plugins/python/complexity/code_chunks.py";
-    String pathName = getClass().getResource(resourceName).getPath();
+    String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
+    String codeChunksResource = "/org/sonar/plugins/python/complexity/code_chunks.py";
+    
+    String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
+    String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
 
-    List<Issue> issues = new PythonViolationsAnalyzer().analyze(pathName);
+    List<Issue> issues = new PythonViolationsAnalyzer(pylintConfigPath).analyze(codeChunksPathName);
     assertEquals(issues.size(), 21);
   }
 }
