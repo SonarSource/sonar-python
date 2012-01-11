@@ -20,40 +20,19 @@
 
 package org.sonar.plugins.python;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.resources.InputFile;
-import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 
-public final class PythonComplexitySensor implements Sensor {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(PythonComplexitySensor.class);
+public final class PythonComplexitySensor extends PythonSensor {
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12, 20, 30 };
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
-
-  public boolean shouldExecuteOnProject(Project project) {
-    return Python.INSTANCE.equals(project.getLanguage());
-  }
-
-  public void analyse(Project project, SensorContext sensorContext) {
-    for (InputFile inputFile: project.getFileSystem().mainFiles(Python.KEY)) {
-      try {
-        analyzeFile(inputFile, project.getFileSystem(), sensorContext);
-      } catch (Exception e) {
-        LOGGER.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
-      }
-    }
-  }
 
   protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
     org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());

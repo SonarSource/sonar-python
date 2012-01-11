@@ -20,42 +20,20 @@
 
 package org.sonar.plugins.python;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.InputFile;
-import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.text.Source;
 
-public final class PythonSquidSensor implements Sensor {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(PythonSquidSensor.class);
-
-  public boolean shouldExecuteOnProject(Project project) {
-    return Python.INSTANCE.equals(project.getLanguage());
-  }
-
-  public void analyse(Project project, SensorContext sensorContext) {
-    for (InputFile inputFile : project.getFileSystem().mainFiles(Python.KEY)) {
-      try {
-        analyzeFile(inputFile, project.getFileSystem(), sensorContext);
-      } catch (Exception e) {
-        LOGGER.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
-      }
-    }
-  }
-
+public final class PythonSquidSensor extends PythonSensor {
   protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
     // the comment syntax cannot be controlled fully due to poorness of sonar API:
     // the multiline and single-line java syntax are hardcoded, only
