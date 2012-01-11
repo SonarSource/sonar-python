@@ -31,6 +31,7 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
+import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 
@@ -45,24 +46,23 @@ public final class PythonComplexitySensor implements Sensor {
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    for (File file : project.getFileSystem().getSourceFiles(Python.INSTANCE)) {
+    for (InputFile inputFile: project.getFileSystem().mainFiles(Python.KEY)) {
       try {
-        analyzeFile(file, project.getFileSystem(), sensorContext);
+        analyzeFile(inputFile, project.getFileSystem(), sensorContext);
       } catch (Exception e) {
-        LOGGER.error("Cannot analyze the file '{}', details: '{}'", file.getAbsolutePath(), e);
+        LOGGER.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
       }
     }
   }
 
-  protected void analyzeFile(File file, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
-
-    org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(file, projectFileSystem.getSourceDirs());
+  protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
+    org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
 
     PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(projectFileSystem);
 
     // contains global (file scope) complexity
     // as head and function complexity counts as tail
-    List<ComplexityStat> stats = analyzer.analyzeComplexity(file.getPath());
+    List<ComplexityStat> stats = analyzer.analyzeComplexity(inputFile.getFile().getPath());
     ComplexityStat globalScopeStat = stats.get(0);
     List<ComplexityStat> functionStats = stats.subList(1, stats.size());
 

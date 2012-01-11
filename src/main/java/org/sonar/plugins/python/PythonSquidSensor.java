@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.squid.measures.Metric;
@@ -46,16 +47,16 @@ public final class PythonSquidSensor implements Sensor {
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    for (File file : project.getFileSystem().getSourceFiles(Python.INSTANCE)) {
+    for (InputFile inputFile : project.getFileSystem().mainFiles(Python.KEY)) {
       try {
-        analyzeFile(file, project.getFileSystem(), sensorContext);
+        analyzeFile(inputFile, project.getFileSystem(), sensorContext);
       } catch (Exception e) {
-        LOGGER.error("Cannot analyze the file '{}', details: '{}'", file.getAbsolutePath(), e);
+        LOGGER.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
       }
     }
   }
 
-  protected void analyzeFile(File file, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
+  protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
     // the comment syntax cannot be controlled fully due to poorness of sonar API:
     // the multiline and single-line java syntax are hardcoded, only
     // additional single-line comment syntax can be specified. A better
@@ -63,8 +64,8 @@ public final class PythonSquidSensor implements Sensor {
 
     Reader reader = null;
     try {
-      reader = new StringReader(FileUtils.readFileToString(file, projectFileSystem.getSourceCharset().name()));
-      org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(file, projectFileSystem.getSourceDirs());
+      reader = new StringReader(FileUtils.readFileToString(inputFile.getFile(), projectFileSystem.getSourceCharset().name()));
+      org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
       Source source = new Source(reader, new PythonRecognizer(), new String[] { "#" });
 
       sensorContext.saveMeasure(pyfile, CoreMetrics.FILES, 1.0);

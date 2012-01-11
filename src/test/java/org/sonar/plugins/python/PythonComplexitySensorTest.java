@@ -35,6 +35,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.test.IsMeasure;
@@ -56,8 +57,11 @@ public class PythonComplexitySensorTest {
   @Test
   public void testComplexityMeasures() throws URISyntaxException, IOException {
     String resourceName = "/org/sonar/plugins/python/complexity/code_chunks.py";
-    File file = new File(getClass().getResource(resourceName).toURI());
-    sensor.analyzeFile(file, fileSystem, context);
+    File codeChunks = new File(getClass().getResource(resourceName).toURI());
+    InputFile inputFile = mock(InputFile.class);
+    when(inputFile.getFile()).thenReturn(codeChunks);
+    
+    sensor.analyzeFile(inputFile, fileSystem, context);
 
     verify(context).saveMeasure((Resource) anyObject(), eq(CoreMetrics.COMPLEXITY), eq(47.0));
     verify(context).saveMeasure((Resource) anyObject(),

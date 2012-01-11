@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
@@ -40,26 +41,24 @@ public class PythonViolationsSensor implements Sensor {
   private static final Logger LOGGER = LoggerFactory.getLogger(PythonViolationsSensor.class);
 
   private RuleFinder ruleFinder;
-  private Python python;
 
-  public PythonViolationsSensor(Python python, RuleFinder ruleFinder) {
-    this.python = python;
+  public PythonViolationsSensor(RuleFinder ruleFinder) {
     this.ruleFinder = ruleFinder;
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    for (File pythonFile : project.getFileSystem().getSourceFiles(python)) {
+    for (InputFile inputFile : project.getFileSystem().mainFiles(Python.KEY)) {
       try {
-        analyzeFile(pythonFile, project.getFileSystem(), sensorContext);
+        analyzeFile(inputFile, project.getFileSystem(), sensorContext);
       } catch (Exception e) {
-        LOGGER.error("Cannot analyze the file '{}', details: '{}'", pythonFile.getAbsolutePath(), e);
+        LOGGER.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
       }
     }
   }
 
-  protected void analyzeFile(File file, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
-    Resource pyfile = PythonFile.fromIOFile(file, projectFileSystem.getSourceDirs());
-    List<Issue> issues = new PythonViolationsAnalyzer().analyze(file.getPath());
+  protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
+    Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
+    List<Issue> issues = new PythonViolationsAnalyzer().analyze(inputFile.getFile().getPath());
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PythonRuleRepository.REPOSITORY_KEY, issue.ruleId);
       Violation violation = Violation.create(rule, pyfile);
@@ -70,6 +69,6 @@ public class PythonViolationsSensor implements Sensor {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return project.getLanguage().equals(python);
+    return project.getLanguage().equals(Python.INSTANCE);
   }
 }
