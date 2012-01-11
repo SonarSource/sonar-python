@@ -121,11 +121,11 @@ public class PythonComplexityAnalyzer {
       String[] tokens = line.split(" +");
       if (tokens.length == 3) {
         String entityType = tokens[0];
-        if ( !entityType.equals("C")) { // = C means 'class scope'
+        if ( !"C".equals(entityType)) { // = C means 'class scope'
           int count = Integer.parseInt(tokens[2]);
           String name = tokens[1];
           ComplexityStat stat = new ComplexityStat(name, count);
-          if (entityType.equals("X")) { // X means 'module scope'
+          if ( "X".equals(entityType)) { // X means 'module scope'
             fileStat = stat;
           } else {
             stats.add(stat);
