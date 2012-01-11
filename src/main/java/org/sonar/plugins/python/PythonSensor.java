@@ -20,12 +20,8 @@
 
 package org.sonar.plugins.python;
 
-//import java.io.File;
 import java.io.IOException;
-//import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.InputFile;
@@ -33,8 +29,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 
 public abstract class PythonSensor implements Sensor {
-  private static final Logger LOGGER = LoggerFactory.getLogger(PythonSensor.class);
-
   public boolean shouldExecuteOnProject(Project project) {
     return Python.KEY.equals(project.getLanguageKey());
   }
@@ -44,7 +38,7 @@ public abstract class PythonSensor implements Sensor {
       try {
         analyzeFile(inputFile, project.getFileSystem(), sensorContext);
       } catch (Exception e) {
-        LOGGER.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
+        PythonPlugin.LOG.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
       }
     }
   }

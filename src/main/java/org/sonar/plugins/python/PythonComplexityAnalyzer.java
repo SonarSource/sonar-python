@@ -29,8 +29,6 @@ import java.util.zip.ZipEntry;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.ZipUtils;
@@ -41,7 +39,6 @@ public class PythonComplexityAnalyzer {
   private static final String ARGS = "all -v ";
   private static final String PYGENIE_DIR = "/org/sonar/plugins/python/pygenie/";
   private static final String PYGENIE_SCRIPT = "pygenie.py";
-  private static final Logger LOGGER = LoggerFactory.getLogger(PythonComplexityAnalyzer.class);
 
   private String commandTemplate;
 
@@ -73,7 +70,7 @@ public class PythonComplexityAnalyzer {
   }
 
   protected final void extractPygenie(File targetFolder) {
-    LOGGER.debug("Extracting pygenie to '{}'", targetFolder.getAbsolutePath());
+    PythonPlugin.LOG.debug("Extracting pygenie to '{}'", targetFolder.getAbsolutePath());
 
     try {
       URL url = PythonComplexityAnalyzer.class.getResource(PYGENIE_DIR);

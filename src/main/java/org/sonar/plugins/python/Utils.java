@@ -28,18 +28,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 
 public final class Utils {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
-
   public static List<String> callCommand(String command) {
     List<String> lines = new LinkedList<String>();
 
-    LOGGER.debug("Calling command: '{}'", command);
+    PythonPlugin.LOG.debug("Calling command: '{}'", command);
 
     InputStream is = null;
     try {

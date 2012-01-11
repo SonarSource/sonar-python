@@ -23,10 +23,13 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 
 public class PythonPlugin implements Plugin {
+  protected static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
 
   public String getKey() {
     return "Python Plugin";
