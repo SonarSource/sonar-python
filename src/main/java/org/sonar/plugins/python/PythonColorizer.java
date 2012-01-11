@@ -29,34 +29,7 @@ import org.sonar.colorizer.StringTokenizer;
 import org.sonar.colorizer.Tokenizer;
 
 public final class PythonColorizer extends CodeColorizerFormat {
-
-  // The keywords. Reference: keyword.kwlist of Python 2.6.6
-  // self is 'quasy-keyword', the standard emacs-highlighting highlights
-  // it like one
-  public static final String[] KEYWORDS = { "and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except",
-      "exec", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return",
-      "try", "while", "with", "yield", "self" };
-
-  // The builtins. Reference: builtin__-members of Python 2.7.2
-  public static final String[] BUILTINS = { "ArithmeticError", "AssertionError", "AttributeError", "BaseException", "BufferError",
-      "BytesWarning", "DeprecationWarning", "EOFError", "Ellipsis", "EnvironmentError", "Exception", "False", "FloatingPointError",
-      "FutureWarning", "GeneratorExit", "IOError", "ImportError", "ImportWarning", "IndentationError", "IndexError", "KeyError",
-      "KeyboardInterrupt", "LookupError", "MemoryError", "NameError", "None", "NotImplemented", "NotImplementedError", "OSError",
-      "OverflowError", "PendingDeprecationWarning", "ReferenceError", "RuntimeError", "RuntimeWarning", "StandardError", "StopIteration",
-      "SyntaxError", "SyntaxWarning", "SystemError", "SystemExit", "TabError", "True", "TypeError", "UnboundLocalError",
-      "UnicodeDecodeError", "UnicodeEncodeError", "UnicodeError", "UnicodeTranslateError", "UnicodeWarning", "UserWarning", "ValueError",
-      "Warning", "ZeroDivisionError", "_", "__debug__", "__doc__", "__import__", "__name__", "__package__", "abs", "all", "any", "apply",
-      "basestring", "bin", "bool", "buffer", "bytearray", "bytes", "callable", "chr", "classmethod", "cmp", "coerce", "compile", "complex",
-      "copyright", "credits", "delattr", "dict", "dir", "divmod", "enumerate", "eval", "execfile", "exit", "file", "filter", "float",
-      "format", "frozenset", "getattr", "globals", "hasattr", "hash", "help", "hex", "id", "input", "int", "intern", "isinstance",
-      "issubclass", "iter", "len", "license", "list", "locals", "long", "map", "max", "memoryview", "min", "next", "object", "oct", "open",
-      "ord", "pow", "print", "property", "quit", "range", "raw_input", "reduce", "reload", "repr", "reversed", "round", "set", "setattr",
-      "slice", "sorted", "staticmethod", "str", "sum", "super", "tuple", "type", "unichr", "unicode", "vars", "xrange", "zip" };
-
-  // Constants
-  public static final String[] CONSTANTS = { "None", "False", "True" };
-
-  private List<Tokenizer> tokens;
+  private List<Tokenizer> tokenizers;
 
   public PythonColorizer() {
     super(Python.KEY);
@@ -64,12 +37,12 @@ public final class PythonColorizer extends CodeColorizerFormat {
 
   @Override
   public List<Tokenizer> getTokenizers() {
-    if (tokens == null) {
-      tokens = new ArrayList<Tokenizer>();
-      tokens.add(new KeywordsTokenizer("<span class=\"k\">", "</span>", KEYWORDS));
-      tokens.add(new StringTokenizer("<span class=\"s\">", "</span>"));
-      tokens.add(new PythonDocTokenizer("<span class=\"cd\">", "</span>"));
-      tokens.add(new PythonDocStringTokenizer("<span class=\"s\">", "</span>"));
+    if (tokenizers == null) {
+      tokenizers = new ArrayList<Tokenizer>();
+      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", "</span>", Python.KEYWORDS));
+      tokenizers.add(new StringTokenizer("<span class=\"s\">", "</span>"));
+      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", "</span>"));
+      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", "</span>"));
 
       // the following tokenizers don't work, for some reason.
       // tokens.add(new KeywordsTokenizer("<span class=\"c\">", "</span>", CONSTANTS));
@@ -78,6 +51,6 @@ public final class PythonColorizer extends CodeColorizerFormat {
       // TODO:
       // use regexptokenizer to match functions or classes
     }
-    return tokens;
+    return tokenizers;
   }
 }

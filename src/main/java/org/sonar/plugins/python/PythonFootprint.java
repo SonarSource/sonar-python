@@ -39,10 +39,7 @@ public class PythonFootprint implements LanguageFootprint {
     // wild guess...
     // detectors.add(new EndWithDetector(0.3, ':', ')'));
 
-    // reference: keyword.kwlist of Python 2.6.6
-    detectors.add(new KeywordsDetector(0.3, "and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except",
-        "exec", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return",
-        "try", "while", "with", "yield"));
+    detectors.add(new KeywordsDetector(0.3, Python.KEYWORDS));
 
     return detectors;
   }
