@@ -37,22 +37,67 @@ public class PythonViolationsAnalyzerTest {
     String resourceName = "/org/sonar/plugins/python/complexity/sample_pylint_output.xml";
     String pathName = getClass().getResource(resourceName).getPath();
     String pylintConfigPath = null;
+    String pylintPath = null;
     List<String> lines = readFile(pathName);
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintConfigPath).parseOutput(lines);
+    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
     assertEquals(issues.size(), 21);
   }
 
-  @Test
-  public void shouldWorkWithValidCustomConfig() {
-    String resourceName = "/org/sonar/plugins/python/complexity/pylintrc_sample";
-    String pylintConfigPath = getClass().getResource(resourceName).getPath();
-    new PythonViolationsAnalyzer(pylintConfigPath);
-  }
+  // @Test
+  // public void shouldWorkWithValidCustomConfig() {
+  //   String resourceName = "/org/sonar/plugins/python/complexity/pylintrc_sample";
+  //   String pylintConfigPath = getClass().getResource(resourceName).getPath();
+  //   new PythonViolationsAnalyzer(pylintConfigPath);
+  // }
   
-  @Test(expected = SonarException.class)
-  public void shouldFailIfGivenInvalidConfig() {
-    String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
-    new PythonViolationsAnalyzer(pylintConfigPath);
+  // @Test(expected = SonarException.class)
+  // public void shouldFailIfGivenInvalidConfig() {
+  //   String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
+  //   new PythonViolationsAnalyzer(pylintConfigPath);
+  // }
+  
+  @Test
+  public void shouldInstantiateWhenGivenValidParams() {
+    String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
+    String pylintrcPath = getClass().getResource(pylintrcResource).getPath();
+    String executableResource = "/org/sonar/plugins/python/complexity/executable";
+    String executablePath = getClass().getResource(executableResource).getPath();
+    final String[] VALID_PARAMETERS =
+      {
+	null, null,
+	executablePath, null,
+	null, pylintrcPath,
+	executablePath, pylintrcPath
+      };
+    
+    int numberOfParams = VALID_PARAMETERS.length;
+    for(int i = 0; i<numberOfParams-1; i+=2){
+      try{
+	new PythonViolationsAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
+      } catch (SonarException se) {
+	assert(false);
+      }
+    }
+  }
+
+  
+  @Test
+  public void shouldFailIfGivenInvalidParams() {
+    final String NOT_EXISTING_PATH = "notexistingpath";
+    final String[] INVALID_PARAMETERS =
+      {
+	null, NOT_EXISTING_PATH, 
+	NOT_EXISTING_PATH, null,
+	NOT_EXISTING_PATH, NOT_EXISTING_PATH
+      };
+    
+    int numberOfParams = INVALID_PARAMETERS.length;
+    for(int i = 0; i<numberOfParams-1; i+=2){
+      try{
+	new PythonViolationsAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
+	assert(false);
+      } catch (SonarException se) {}
+    }
   }
   
   private List<String> readFile(String path) {

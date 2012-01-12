@@ -43,8 +43,9 @@ public class PythonViolationsSensor extends PythonSensor {
 
   protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
     Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
-    String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, "");
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintConfigPath).analyze(inputFile.getFile().getPath());
+    String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
+    String pylintPath = conf.getString(PythonPlugin.PYLINT_KEY, null);
+    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(inputFile.getFile().getPath());
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PythonRuleRepository.REPOSITORY_KEY, issue.ruleId);
       Violation violation = Violation.create(rule, pyfile);

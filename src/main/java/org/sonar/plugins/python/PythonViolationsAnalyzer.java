@@ -30,20 +30,34 @@ import org.sonar.api.utils.SonarException;
 
 public class PythonViolationsAnalyzer {
 
-  private static final String PYLINT = "pylint -i y -f parseable -r n ";
+  private static final String FALLBACK_PYLINT = "pylint";
+  private static final String ARGS = "-i y -f parseable -r n";
   private static final Pattern PATTERN = Pattern.compile("([^:]+):([0-9]+): \\[(.*)\\] (.*)");
-  private String commandTemplate = PYLINT;
+  private String commandTemplate;
   
-  PythonViolationsAnalyzer(String pylintConfig) {
-    if (pylintConfig != null){
-      if(! new File(pylintConfig).exists()){
-	throw new SonarException("Cannot find the pylint configuration file: " + pylintConfig);
+  PythonViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
+    String pylint = FALLBACK_PYLINT;
+    if (pylintPath != null){
+      if(! new File(pylintPath).exists()){
+	throw new SonarException("Cannot find the pylint executable: " + pylintPath);
       }
-      commandTemplate += "--rcfile=" + pylintConfig;
+      pylint = pylintPath;
+    }
+
+    commandTemplate = pylint + " " + ARGS;
+    
+    if (pylintConfigPath != null){
+      if(! new File(pylintConfigPath).exists()){
+	throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
+      }
+      commandTemplate += " --rcfile=" + pylintConfigPath;
     }
   }
   
   public List<Issue> analyze(String path) {
+    // TODO: evaluate pylints exit code
+    // we are at least interested in 1 which seems to be 'execution error' like
+    // config file content invalid etc.
     return parseOutput(Utils.callCommand(commandTemplate + " " + path));
   }
 

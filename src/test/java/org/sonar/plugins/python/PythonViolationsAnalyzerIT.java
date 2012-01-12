@@ -27,16 +27,15 @@ import java.util.List;
 import org.junit.Test;
 
 public class PythonViolationsAnalyzerIT {
-
   @Test
   public void violationsTest() {
     String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
     String codeChunksResource = "/org/sonar/plugins/python/complexity/code_chunks.py";
-    
     String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
     String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
+    String pylintPath = null;
 
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintConfigPath).analyze(codeChunksPathName);
+    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName);
     assertEquals(issues.size(), 21);
   }
 }
