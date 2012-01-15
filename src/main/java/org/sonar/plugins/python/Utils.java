@@ -20,6 +20,7 @@
 
 package org.sonar.plugins.python;
 
+//import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,11 +37,10 @@ public final class Utils {
 
     PythonPlugin.LOG.debug("Calling command: '{}'", command);
 
-    InputStream is = null;
+    BufferedReader stdInput = null;
     try {
       Process p = Runtime.getRuntime().exec(command);
-      is = p.getInputStream();
-      BufferedReader stdInput = new BufferedReader(new InputStreamReader(is));
+      stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
       String s = null;
 
       while ((s = stdInput.readLine()) != null) {
@@ -49,7 +49,7 @@ public final class Utils {
     } catch (IOException e) {
       throw new SonarException("Error calling command", e);
     } finally {
-      IOUtils.closeQuietly(is);
+      IOUtils.closeQuietly(stdInput);
     }
 
     return lines;
