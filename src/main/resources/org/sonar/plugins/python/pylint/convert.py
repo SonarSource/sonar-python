@@ -64,9 +64,6 @@ def grabDescr(lines):
 
 def header():
     return ('<?xml version="1.0" encoding="ASCII"?>\n'
-            '<!--\n'
-            'Automatically generated from the output of "pylint --list-msgs"\n'
-            '-->\n'
             '<rules>\n')
 
 

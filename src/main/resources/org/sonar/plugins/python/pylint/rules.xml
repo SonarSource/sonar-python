@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
 <rules>
 <rule>
 <key>C0102</key>
@@ -240,30 +241,6 @@
 </description>
 </rule>
 <rule>
-<key>E0501</key>
-<name>E0501</name>
-<configKey>E0501</configKey>
-<description>
-<![CDATA[Used when some non ascii characters are detected but now encoding isspecified, as explicited in the PEP 263.]]>
-</description>
-</rule>
-<rule>
-<key>E0502</key>
-<name>E0502</name>
-<configKey>E0502</configKey>
-<description>
-<![CDATA[Used when a known encoding is specified but the file doesn't seem to beactually in this encoding.]]>
-</description>
-</rule>
-<rule>
-<key>E0503</key>
-<name>E0503</name>
-<configKey>E0503</configKey>
-<description>
-<![CDATA[Used when an encoding is specified, but it's unknown to Python.]]>
-</description>
-</rule>
-<rule>
 <key>E0601</key>
 <name>E0601</name>
 <configKey>E0601</configKey>
@@ -308,7 +285,15 @@
 <name>E0710</name>
 <configKey>E0710</configKey>
 <description>
-<![CDATA[Used when a new style class which doesn't inherit from BaseException raisedsince it's not possible with python < 2.5.]]>
+<![CDATA[Used when a new style class which doesn't inherit from BaseException israised.]]>
+</description>
+</rule>
+<rule>
+<key>E0711</key>
+<name>E0711</name>
+<configKey>E0711</configKey>
+<description>
+<![CDATA[Used when NotImplemented is raised instead of NotImplementedError]]>
 </description>
 </rule>
 <rule>
@@ -496,6 +481,14 @@
 </description>
 </rule>
 <rule>
+<key>F0010</key>
+<name>F0010</name>
+<configKey>F0010</configKey>
+<description>
+<![CDATA[Used when an exception occured while building the ASTNG representation whichcould be handled by astng.]]>
+</description>
+</rule>
+<rule>
 <key>F0202</key>
 <name>F0202</name>
 <configKey>F0202</configKey>
@@ -509,14 +502,6 @@
 <configKey>F0220</configKey>
 <description>
 <![CDATA[Used when a PyLint as failed to find interfaces implemented by a class]]>
-</description>
-</rule>
-<rule>
-<key>F0321</key>
-<name>F0321</name>
-<configKey>F0321</configKey>
-<description>
-<![CDATA[Used when an unexpected error occurred in bad format detection.Please reportthe error if it occurs.]]>
 </description>
 </rule>
 <rule>
@@ -720,6 +705,14 @@
 </description>
 </rule>
 <rule>
+<key>W0106</key>
+<name>W0106</name>
+<configKey>W0106</configKey>
+<description>
+<![CDATA[Used when an expression that is not a function call is assigned to nothing.Probably something else was intended.]]>
+</description>
+</rule>
+<rule>
 <key>W0107</key>
 <name>W0107</name>
 <configKey>W0107</configKey>
@@ -765,6 +758,22 @@
 <configKey>W0142</configKey>
 <description>
 <![CDATA[Used when a function or method is called using `*args` or `**kwargs` todispatch arguments. This doesn't improve readability and should be used withcare.]]>
+</description>
+</rule>
+<rule>
+<key>W0150</key>
+<name>W0150</name>
+<configKey>W0150</configKey>
+<description>
+<![CDATA[Used when a break or a return statement is found inside the finally clause ofa try...finally block: the exceptions raised in the try clause will besilently swallowed instead of being re-raised.]]>
+</description>
+</rule>
+<rule>
+<key>W0199</key>
+<name>W0199</name>
+<configKey>W0199</configKey>
+<description>
+<![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is notempty, and will always evaluate to false if it is.]]>
 </description>
 </rule>
 <rule>
