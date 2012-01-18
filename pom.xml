@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion> 
-  
+
   <parent>
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
     <version>8</version>
     <relativePath>../parent</relativePath>
   </parent>
-  
+
   <artifactId>sonar-python-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
   <version>0.1-SNAPSHOT</version>
@@ -16,7 +16,7 @@
   <description>Enable analysis and reporting on python projects.</description>
   <url>http://docs.codehaus.org/display/SONAR/Python+Plugin</url>
   <inceptionYear>2011</inceptionYear>
-  
+
   <organization>
     <name>Waleri Enns</name>
   </organization>
@@ -28,14 +28,14 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  
+
   <developers>
     <developer>
       <id>wenns</id>
       <name>Waleri Enns</name>
     </developer>
   </developers>
-  
+
   <scm>
     <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/python</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/python</developerConnection>
@@ -63,8 +63,9 @@
       <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <version>${sonar.version}</version>
+      <scope>provided</scope>
     </dependency>
-    
+
     <!-- unit tests -->
     <dependency>
       <groupId>org.codehaus.sonar</groupId>
