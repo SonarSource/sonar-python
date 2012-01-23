@@ -22,25 +22,20 @@ package org.sonar.plugins.python;
 
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.profiles.XMLProfileParser;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.utils.ValidationMessages;
 
 public class PythonDefaultProfile extends ProfileDefinition {
-
-  private PythonRuleRepository repository;
-
-  public PythonDefaultProfile(PythonRuleRepository repository) {
-    this.repository = repository;
+  private XMLProfileParser xmlProfileParser;
+  
+  public PythonDefaultProfile(XMLProfileParser xmlProfileParser) {
+    this.xmlProfileParser = xmlProfileParser;
   }
-
+  
   @Override
-  public RulesProfile createProfile(ValidationMessages validation) {
-    RulesProfile rulesProfile = RulesProfile.create("Default Python Profile", Python.KEY);
-
-    for (Rule rule : repository.createRules()) {
-      rulesProfile.activateRule(rule, null);
-    }
-
-    return rulesProfile;
+  public RulesProfile createProfile(ValidationMessages messages) {
+    return xmlProfileParser.parseResource(getClass().getClassLoader(),
+                                          "org/sonar/plugins/python/profile-default.xml", messages);
   }
 }

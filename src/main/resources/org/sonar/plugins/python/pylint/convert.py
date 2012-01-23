@@ -20,32 +20,32 @@
 
 #
 # Reads pylint --list-msgs from the stdin and writes XML to the stdout.
-# The latter is compatible with sonar rules.xml schema.
+# The latter is compatible with sonar rules.xml-schema.
 #
 
 import sys
 import re
 
-RULEID_PATTERN = ":([A-Z][0-9]{4}):"
+RULEID_PATTERN = ":([A-Z][0-9]{4}): \*(.*)\*"
 
 def parseNextRule(lines):
-    ruleid = grabId(lines)
+    ruleid, rulename = grabIdAndName(lines)
     ruledescr = grabDescr(lines)
     if ruleid:
         if not ruledescr:
             raise Exception("Invalid input")
-        return Rule(ruleid, ruledescr)
+        return Rule(ruleid, rulename, ruledescr)
     return None
 
-def grabId(lines):
+def grabIdAndName(lines):
     if not lines:
         return ""
     currline = lines.pop()
-    ruleid = ""
+    ruleid = rulename = ""
     match = re.match(RULEID_PATTERN, currline)
     if match:
-        ruleid = match.groups()[0]
-    return ruleid
+        ruleid, rulename = match.groups()
+    return ruleid, rulename
 
 def grabDescr(lines):
     def partOfDescr(line):
@@ -72,21 +72,25 @@ def footer():
 
 
 class Rule:
-    def __init__(self, ruleid, ruledescr):
+    def __init__(self, ruleid, rulename, ruledescr):
         self.ruleid = ruleid
+        self.rulename = rulename
         self.ruledescr = ruledescr
 
+    def __lt__(self, other):
+        return self.ruleid < other.ruleid
+        
     def toxml(self):
         rid = self.ruleid
         return ("<rule>\n"
                 "<key>%s</key>\n"
-                "<name>%s</name>\n"
+                "<name><![CDATA[%s]]></name>\n"
                 "<configKey>%s</configKey>\n"
                 "<description>\n"
                 "<![CDATA[%s]]>\n"
                 "</description>\n"
                 "</rule>\n"
-                % (self.ruleid, self.ruleid, self.ruleid, self.ruledescr))
+                % (self.ruleid, self.rulename, self.ruleid, self.ruledescr))
 
 
 lines = sys.stdin.readlines()
@@ -98,7 +102,8 @@ while(lines):
     rule = parseNextRule(lines)
     if rule:
         rules.append(rule)
-
+rules.sort()
+        
 # generate rules-file as expected by sonar
 outstream = sys.stdout
 outstream.write(header())
