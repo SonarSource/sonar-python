@@ -20,6 +20,8 @@
 
 package org.sonar.plugins.python;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -32,6 +34,7 @@ public class PythonRuleRepositoryTest {
   public void createRulesTest() {
     PythonRuleRepository rulerep = new PythonRuleRepository(new XMLRuleParser());
     List<Rule> rules = rulerep.createRules();
-    assert (rules.size() == 140);
+    
+    assertEquals (rules.size(), 144);
   }
 }

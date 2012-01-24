@@ -105,6 +105,14 @@
 </description>
 </rule>
 <rule>
+<key>E0001</key>
+<name><![CDATA[]]></name>
+<configKey>E0001</configKey>
+<description>
+<![CDATA[Used when a syntax error is raised for a module.]]>
+</description>
+</rule>
+<rule>
 <key>E0011</key>
 <name><![CDATA[Unrecognized file option %r]]></name>
 <configKey>E0011</configKey>
@@ -233,6 +241,30 @@
 </description>
 </rule>
 <rule>
+<key>E0501</key>
+<name><![CDATA[Non ascii characters found but no encoding specified (PEP 263)]]></name>
+<configKey>E0501</configKey>
+<description>
+<![CDATA[Used when some non ascii characters are detected but now encoding isspecified, as explicited in the PEP 263.]]>
+</description>
+</rule>
+<rule>
+<key>E0502</key>
+<name><![CDATA[Wrong encoding specified (%s)]]></name>
+<configKey>E0502</configKey>
+<description>
+<![CDATA[Used when a known encoding is specified but the file doesn't seem to beactually in this encoding.]]>
+</description>
+</rule>
+<rule>
+<key>E0503</key>
+<name><![CDATA[Unknown encoding specified (%s)]]></name>
+<configKey>E0503</configKey>
+<description>
+<![CDATA[Used when an encoding is specified, but it's unknown to Python.]]>
+</description>
+</rule>
+<rule>
 <key>E0601</key>
 <name><![CDATA[Using variable %r before assignment]]></name>
 <configKey>E0601</configKey>
@@ -277,15 +309,7 @@
 <name><![CDATA[Raising a new style class which doesn't inherit from BaseException]]></name>
 <configKey>E0710</configKey>
 <description>
-<![CDATA[Used when a new style class which doesn't inherit from BaseException israised.]]>
-</description>
-</rule>
-<rule>
-<key>E0711</key>
-<name><![CDATA[NotImplemented raised - should raise NotImplementedError]]></name>
-<configKey>E0711</configKey>
-<description>
-<![CDATA[Used when NotImplemented is raised instead of NotImplementedError]]>
+<![CDATA[Used when a new style class which doesn't inherit from BaseException raisedsince it's not possible with python < 2.5.]]>
 </description>
 </rule>
 <rule>
@@ -441,6 +465,14 @@
 </description>
 </rule>
 <rule>
+<key>F0001</key>
+<name><![CDATA[]]></name>
+<configKey>F0001</configKey>
+<description>
+<![CDATA[Used when an error occurred preventing the analysis of a module (unable tofind it for instance).]]>
+</description>
+</rule>
+<rule>
 <key>F0002</key>
 <name><![CDATA[%s: %s]]></name>
 <configKey>F0002</configKey>
@@ -465,14 +497,6 @@
 </description>
 </rule>
 <rule>
-<key>F0010</key>
-<name><![CDATA[error while code parsing: %s]]></name>
-<configKey>F0010</configKey>
-<description>
-<![CDATA[Used when an exception occured while building the ASTNG representation whichcould be handled by astng.]]>
-</description>
-</rule>
-<rule>
 <key>F0202</key>
 <name><![CDATA[Unable to check methods signature (%s / %s)]]></name>
 <configKey>F0202</configKey>
@@ -486,6 +510,14 @@
 <configKey>F0220</configKey>
 <description>
 <![CDATA[Used when a PyLint as failed to find interfaces implemented by a class]]>
+</description>
+</rule>
+<rule>
+<key>F0321</key>
+<name><![CDATA[Format detection error in %r]]></name>
+<configKey>F0321</configKey>
+<description>
+<![CDATA[Used when an unexpected error occurred in bad format detection.Please reportthe error if it occurs.]]>
 </description>
 </rule>
 <rule>
@@ -689,14 +721,6 @@
 </description>
 </rule>
 <rule>
-<key>W0106</key>
-<name><![CDATA[Expression "%s" is assigned to nothing]]></name>
-<configKey>W0106</configKey>
-<description>
-<![CDATA[Used when an expression that is not a function call is assigned to nothing.Probably something else was intended.]]>
-</description>
-</rule>
-<rule>
 <key>W0107</key>
 <name><![CDATA[Unnecessary pass statement]]></name>
 <configKey>W0107</configKey>
@@ -742,22 +766,6 @@
 <configKey>W0142</configKey>
 <description>
 <![CDATA[Used when a function or method is called using `*args` or `**kwargs` todispatch arguments. This doesn't improve readability and should be used withcare.]]>
-</description>
-</rule>
-<rule>
-<key>W0150</key>
-<name><![CDATA[%s statement in finally block may swallow exception]]></name>
-<configKey>W0150</configKey>
-<description>
-<![CDATA[Used when a break or a return statement is found inside the finally clause ofa try...finally block: the exceptions raised in the try clause will besilently swallowed instead of being re-raised.]]>
-</description>
-</rule>
-<rule>
-<key>W0199</key>
-<name><![CDATA[Assert called on a 2-uple. Did you mean 'assert x,y'?]]></name>
-<configKey>W0199</configKey>
-<description>
-<![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is notempty, and will always evaluate to false if it is.]]>
 </description>
 </rule>
 <rule>
@@ -926,6 +934,14 @@
 <configKey>W0410</configKey>
 <description>
 <![CDATA[Python 2.5 and greater require __future__ import to be the first non docstringstatement in the module.]]>
+</description>
+</rule>
+<rule>
+<key>W0511</key>
+<name><![CDATA[]]></name>
+<configKey>W0511</configKey>
+<description>
+<![CDATA[Used when a warning note as FIXME or XXX is detected.]]>
 </description>
 </rule>
 <rule>

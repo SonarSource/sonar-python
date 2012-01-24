@@ -105,6 +105,14 @@
     </description>
   </rule>
   <rule>
+    <key>E0001</key>
+    <name><![CDATA[Syntax error]]></name>
+    <configKey>E0001</configKey>
+    <description>
+      <![CDATA[Used when a syntax error is raised for a module.]]>
+    </description>
+  </rule>
+  <rule>
     <key>E0011</key>
     <name><![CDATA[Unrecognized file option]]></name>
     <configKey>E0011</configKey>
@@ -230,6 +238,32 @@
     <configKey>E0222</configKey>
     <description>
       <![CDATA[Used when a method declared in an interface is missing from a class implementing this interface]]>
+    </description>
+  </rule>
+  <rule>
+    <key>E0501</key>
+    <name><![CDATA[Non ascii characters found but no encoding specified (PEP 263)]]></name>
+    <configKey>E0501</configKey>
+    <description>
+      <![CDATA[Used when some non ascii characters are detected but no
+      encoding is specified, as explicited in the PEP 263.]]>
+    </description>
+  </rule>
+  <rule>
+    <key>E0502</key>
+    <name><![CDATA[Wrong encoding specified]]></name>
+    <configKey>E0502</configKey>
+    <description>
+      <![CDATA[Used when a known encoding is specified but the file
+      doesn't seem to be actually in this encoding.]]>
+    </description>
+  </rule>
+  <rule>
+    <key>E0503</key>
+    <name><![CDATA[Unknown encoding specified]]></name>
+    <configKey>E0503</configKey>
+    <description>
+      <![CDATA[Used when an encoding is specified, but it's unknown to Python.]]>
     </description>
   </rule>
   <rule>
@@ -441,6 +475,15 @@
     </description>
   </rule>
   <rule>
+    <key>F0001</key>
+    <name><![CDATA[Analysis failed]]></name>
+    <configKey>F0001</configKey>
+    <description>
+      <![CDATA[Used when an error occurred preventing the analysis of a
+    module (unable to find it for instance).]]>
+    </description>
+  </rule>
+  <rule>
     <key>F0002</key>
     <name><![CDATA[Internal pylint error]]></name>
     <configKey>F0002</configKey>
@@ -486,6 +529,15 @@
     <configKey>F0220</configKey>
     <description>
       <![CDATA[Used when a PyLint as failed to find interfaces implemented by a class]]>
+    </description>
+  </rule>
+  <rule>
+    <key>F0321</key>
+    <name><![CDATA[Format detection error]]></name>
+    <configKey>F0321</configKey>
+    <description>
+      <![CDATA[Used when an unexpected error occurred in bad format
+      detection. Please report the error if it occurs.]]>
     </description>
   </rule>
   <rule>
@@ -926,6 +978,14 @@
     <configKey>W0410</configKey>
     <description>
       <![CDATA[Python 2.5 and greater require __future__ import to be the first non docstringstatement in the module.]]>
+    </description>
+  </rule>
+  <rule>
+    <key>W0511</key>
+    <name><![CDATA[Task marker found]]></name>
+    <configKey>W0511</configKey>
+    <description>
+      <![CDATA[Used when a warning note as FIXME or XXX is detected.]]>
     </description>
   </rule>
   <rule>
