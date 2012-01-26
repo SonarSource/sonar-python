@@ -34,8 +34,6 @@ public abstract class PythonSensor implements Sensor {
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    PythonPlugin.LOG.debug("my.property: '{}'", project.getProperty("my.property"));
-
     for (InputFile inputFile: project.getFileSystem().mainFiles(Python.KEY)) {
       try {
         analyzeFile(inputFile, project, sensorContext);

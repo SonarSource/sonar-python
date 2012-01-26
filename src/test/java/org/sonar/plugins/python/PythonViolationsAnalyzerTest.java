@@ -49,13 +49,13 @@ public class PythonViolationsAnalyzerTest {
   //   String pylintConfigPath = getClass().getResource(resourceName).getPath();
   //   new PythonViolationsAnalyzer(pylintConfigPath);
   // }
-  
+
   // @Test(expected = SonarException.class)
   // public void shouldFailIfGivenInvalidConfig() {
   //   String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
   //   new PythonViolationsAnalyzer(pylintConfigPath);
   // }
-  
+
   @Test
   public void shouldInstantiateWhenGivenValidParams() {
     String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
@@ -69,7 +69,7 @@ public class PythonViolationsAnalyzerTest {
 	null, pylintrcPath,
 	executablePath, pylintrcPath
       };
-    
+
     int numberOfParams = VALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
@@ -80,17 +80,17 @@ public class PythonViolationsAnalyzerTest {
     }
   }
 
-  
+
   @Test
   public void shouldFailIfGivenInvalidParams() {
     final String NOT_EXISTING_PATH = "notexistingpath";
     final String[] INVALID_PARAMETERS =
       {
-	null, NOT_EXISTING_PATH, 
+	null, NOT_EXISTING_PATH,
 	NOT_EXISTING_PATH, null,
 	NOT_EXISTING_PATH, NOT_EXISTING_PATH
       };
-    
+
     int numberOfParams = INVALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
@@ -99,7 +99,7 @@ public class PythonViolationsAnalyzerTest {
       } catch (SonarException se) {}
     }
   }
-  
+
   private List<String> readFile(String path) {
     List<String> lines = new LinkedList<String>();
 

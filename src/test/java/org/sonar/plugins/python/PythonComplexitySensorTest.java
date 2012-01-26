@@ -49,7 +49,7 @@ public class PythonComplexitySensorTest {
   private SensorContext context;
   private Project project;
   private ProjectFileSystem pfs;
-  
+
   @Before
   public void init() {
     sensor = new PythonComplexitySensor();
@@ -66,7 +66,7 @@ public class PythonComplexitySensorTest {
     File codeChunks = new File(getClass().getResource(resourceName).toURI());
     InputFile inputFile = mock(InputFile.class);
     when(inputFile.getFile()).thenReturn(codeChunks);
-    
+
     sensor.analyzeFile(inputFile, project, context);
 
     verify(context).saveMeasure((Resource) anyObject(), eq(CoreMetrics.COMPLEXITY), eq(47.0));

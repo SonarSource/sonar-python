@@ -46,7 +46,7 @@ public class PythonViolationsSensorTest {
   private ProjectFileSystem pfs;
   private RuleFinder ruleFinder;
   private Configuration conf;
-  
+
   @Before
   public void init() {
     ruleFinder = mock(RuleFinder.class);
@@ -54,17 +54,17 @@ public class PythonViolationsSensorTest {
 
     pfs = mock(ProjectFileSystem.class);
     when(pfs.getBasedir()).thenReturn(new File("/tmp"));
-    
+
     project = mock(Project.class);
     when(project.getProperty("sonar.python.path")).thenReturn("path1, path2");
     when(project.getFileSystem()).thenReturn(pfs);
   }
-  
+
   @Test
   public void shouldReturnCorrectEnvironment() {
     sensor = new PythonViolationsSensor(ruleFinder, project, conf);
     String[] env = sensor.getEnvironment(project);
-    
+
     String[] expectedEnv = {"PYTHONPATH=/tmp/path1:/tmp/path2"};
     assertEquals(env, expectedEnv);
   }

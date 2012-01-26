@@ -32,17 +32,17 @@ import org.sonar.api.Property;
 
 @Properties({
   @Property(key = PythonPlugin.PYLINT_CONFIG_KEY,
-	    defaultValue = "",
-	    name = "pylint configuration",
-	    description = "Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.",
-	    global = true,
-	    project = true),
+            defaultValue = "",
+            name = "pylint configuration",
+            description = "Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.",
+            global = true,
+            project = true),
   @Property(key = PythonPlugin.PYLINT_KEY,
-	    defaultValue = "",
-	    name = "pylint executable",
-	    description = "Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.",
-	    global = true,
-	    project = true)
+            defaultValue = "",
+            name = "pylint executable",
+            description = "Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.",
+            global = true,
+            project = true)
   })
 public class PythonPlugin implements Plugin {
   private static final String PROPERTY_PREFIX = "sonar.python.";
@@ -50,7 +50,7 @@ public class PythonPlugin implements Plugin {
   protected static final String PYLINT_KEY = PROPERTY_PREFIX + "pylint";
   protected static final String PYTHON_PATH_KEY = PROPERTY_PREFIX + "path";
   protected static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
-  
+
   public String getKey() {
     return "Python Plugin";
   }

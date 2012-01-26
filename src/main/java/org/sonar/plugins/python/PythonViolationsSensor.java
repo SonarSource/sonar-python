@@ -38,11 +38,11 @@ import org.apache.commons.lang.StringUtils;
 
 public class PythonViolationsSensor extends PythonSensor {
   private final static String PYTHONPATH_ENVVAR = "PYTHONPATH";
-  
+
   private RuleFinder ruleFinder;
   private Configuration conf;
   private String[] environment;
-  
+
   public PythonViolationsSensor(RuleFinder ruleFinder, Project project, Configuration conf) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
@@ -53,7 +53,7 @@ public class PythonViolationsSensor extends PythonSensor {
     Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
     String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
     String pylintPath = conf.getString(PythonPlugin.PYLINT_KEY, null);
-    
+
     PythonViolationsAnalyzer analyzer = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath);
     List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), environment);
     for (Issue issue : issues) {
@@ -65,7 +65,7 @@ public class PythonViolationsSensor extends PythonSensor {
     }
   }
 
-  
+
   protected String[] getEnvironment(Project project){
     String[] environment = null;
     String pythonPathProp = (String)project.getProperty(PythonPlugin.PYTHON_PATH_KEY);
@@ -75,14 +75,14 @@ public class PythonViolationsSensor extends PythonSensor {
       List<String> absPaths = toAbsPaths(parsedPaths, projectRoot);
       String delimiter = System.getProperty("path.separator");
       String pythonPath = StringUtils.join(absPaths, delimiter);
-      
+
       environment = new String[1];
       environment[0] = PYTHONPATH_ENVVAR + "=" + pythonPath;
     }
     return environment;
   }
 
-  
+
   protected List<String> toAbsPaths(String[] pathStrings, File baseDir){
     List<String> result = new LinkedList<String>();
     for(String pathStr: pathStrings){

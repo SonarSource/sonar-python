@@ -23,16 +23,15 @@ package org.sonar.plugins.python;
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.profiles.XMLProfileParser;
-import org.sonar.api.rules.Rule;
 import org.sonar.api.utils.ValidationMessages;
 
 public class PythonDefaultProfile extends ProfileDefinition {
   private XMLProfileParser xmlProfileParser;
-  
+
   public PythonDefaultProfile(XMLProfileParser xmlProfileParser) {
     this.xmlProfileParser = xmlProfileParser;
   }
-  
+
   @Override
   public RulesProfile createProfile(ValidationMessages messages) {
     return xmlProfileParser.parseResource(getClass().getClassLoader(),

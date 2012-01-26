@@ -39,9 +39,9 @@ public final class PythonComplexitySensor extends PythonSensor {
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
     org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(),
                                                                 project.getFileSystem().getSourceDirs());
-    
+
     PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(project);
-    
+
     // contains global (file scope) complexity
     // as head and function complexity counts as tail
     List<ComplexityStat> stats = analyzer.analyzeComplexity(inputFile.getFile().getPath());

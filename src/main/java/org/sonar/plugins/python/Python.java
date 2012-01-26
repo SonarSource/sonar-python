@@ -52,7 +52,7 @@ public class Python extends AbstractLanguage {
 
   // Some language constants suitable for highlighting
   protected static final String[] CONSTANTS = { "None", "False", "True" };
-  
+
   private static final String[] SUFFIXES = { "py" };
   protected static final String KEY = "py";
   protected static final Python INSTANCE = new Python();
@@ -60,7 +60,7 @@ public class Python extends AbstractLanguage {
   public Python() {
     super(KEY, "Python");
   }
-  
+
   public String[] getFileSuffixes() {
     return SUFFIXES;
   }

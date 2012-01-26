@@ -20,10 +20,8 @@
 
 package org.sonar.plugins.python;
 
-//import java.io.Reader;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +32,7 @@ import org.sonar.api.utils.SonarException;
 public final class Utils {
   public static List<String> callCommand(String command, String[] environ) {
     List<String> lines = new LinkedList<String>();
-    
+
     PythonPlugin.LOG.debug("Calling command: '{}'", command);
 
     BufferedReader stdInput = null;
@@ -45,7 +43,7 @@ public final class Utils {
       } else {
         p = Runtime.getRuntime().exec(command, environ);
       }
-        
+
       stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
       String s = null;
 

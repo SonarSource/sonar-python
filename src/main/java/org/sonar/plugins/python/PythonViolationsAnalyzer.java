@@ -34,26 +34,26 @@ public class PythonViolationsAnalyzer {
   private static final String ARGS = "-i y -f parseable -r n";
   private static final Pattern PATTERN = Pattern.compile("([^:]+):([0-9]+): \\[(.*)\\] (.*)");
   private String commandTemplate;
-  
+
   PythonViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
     String pylint = FALLBACK_PYLINT;
     if (pylintPath != null){
       if(! new File(pylintPath).exists()){
-	throw new SonarException("Cannot find the pylint executable: " + pylintPath);
+        throw new SonarException("Cannot find the pylint executable: " + pylintPath);
       }
       pylint = pylintPath;
     }
 
     commandTemplate = pylint + " " + ARGS;
-    
+
     if (pylintConfigPath != null){
       if(! new File(pylintConfigPath).exists()){
-	throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
+        throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
       }
       commandTemplate += " --rcfile=" + pylintConfigPath;
     }
   }
-  
+
   public List<Issue> analyze(String path, String[] environ) {
     // TODO: evaluate pylints exit code
     // we are at least interested in 1 which seems to be 'execution error' like

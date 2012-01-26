@@ -50,7 +50,7 @@ def grabIdAndName(lines):
 def grabDescr(lines):
     def partOfDescr(line):
         return line[:2] == "  "
-    
+
     descr = ""
     while lines:
         currline = lines.pop()
@@ -79,7 +79,7 @@ class Rule:
 
     def __lt__(self, other):
         return self.ruleid < other.ruleid
-        
+
     def toxml(self):
         rid = self.ruleid
         return ("<rule>\n"
@@ -103,7 +103,7 @@ while(lines):
     if rule:
         rules.append(rule)
 rules.sort()
-        
+
 # generate rules-file as expected by sonar
 outstream = sys.stdout
 outstream.write(header())

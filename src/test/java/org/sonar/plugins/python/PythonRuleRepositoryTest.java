@@ -34,7 +34,7 @@ public class PythonRuleRepositoryTest {
   public void createRulesTest() {
     PythonRuleRepository rulerep = new PythonRuleRepository(new XMLRuleParser());
     List<Rule> rules = rulerep.createRules();
-    
+
     assertEquals (rules.size(), 144);
   }
 }
