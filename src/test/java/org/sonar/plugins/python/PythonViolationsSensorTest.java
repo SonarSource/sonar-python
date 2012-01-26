@@ -35,6 +35,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.apache.commons.configuration.Configuration;
 import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.profiles.RulesProfile;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -46,11 +47,13 @@ public class PythonViolationsSensorTest {
   private ProjectFileSystem pfs;
   private RuleFinder ruleFinder;
   private Configuration conf;
-
+  private RulesProfile profile;
+  
   @Before
   public void init() {
     ruleFinder = mock(RuleFinder.class);
     conf = mock(Configuration.class);
+    profile = mock(RulesProfile.class);
 
     pfs = mock(ProjectFileSystem.class);
     when(pfs.getBasedir()).thenReturn(new File("/tmp"));
@@ -62,7 +65,8 @@ public class PythonViolationsSensorTest {
 
   @Test
   public void shouldReturnCorrectEnvironment() {
-    sensor = new PythonViolationsSensor(ruleFinder, project, conf);
+    sensor = new PythonViolationsSensor(ruleFinder, project, conf, profile);
+    
     String[] env = sensor.getEnvironment(project);
 
     String[] expectedEnv = {"PYTHONPATH=/tmp/path1:/tmp/path2"};

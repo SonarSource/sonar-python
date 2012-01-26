@@ -33,6 +33,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.Violation;
 import org.apache.commons.lang.StringUtils;
 
@@ -40,15 +41,23 @@ public class PythonViolationsSensor extends PythonSensor {
   private final static String PYTHONPATH_ENVVAR = "PYTHONPATH";
 
   private RuleFinder ruleFinder;
+  private RulesProfile profile;
   private Configuration conf;
   private String[] environment;
 
-  public PythonViolationsSensor(RuleFinder ruleFinder, Project project, Configuration conf) {
+  public PythonViolationsSensor(RuleFinder ruleFinder, Project project,
+                                Configuration conf, RulesProfile profile) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
+    this.profile = profile;
     this.environment = getEnvironment(project);
   }
 
+  public boolean shouldExecuteOnProject(Project project) {
+    return super.shouldExecuteOnProject(project)
+      && !profile.getActiveRulesByRepository(PythonRuleRepository.REPOSITORY_KEY).isEmpty();
+  }
+  
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
     Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
     String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
@@ -58,10 +67,18 @@ public class PythonViolationsSensor extends PythonSensor {
     List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), environment);
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PythonRuleRepository.REPOSITORY_KEY, issue.ruleId);
-      Violation violation = Violation.create(rule, pyfile);
-      violation.setLineId(issue.line);
-      violation.setMessage(issue.descr);
-      sensorContext.saveViolation(violation);
+      if (rule != null) {
+        if (rule.isEnabled()) {
+          Violation violation = Violation.create(rule, pyfile);
+          violation.setLineId(issue.line);
+          violation.setMessage(issue.descr);
+          sensorContext.saveViolation(violation);
+        } else {
+          PythonPlugin.LOG.debug("Pylint rule '{}' is disabled in Sonar",  issue.ruleId);
+        }
+      } else {
+        PythonPlugin.LOG.warn("Pylint rule '{}' is unknown in Sonar",  issue.ruleId);
+      }
     }
   }
 
