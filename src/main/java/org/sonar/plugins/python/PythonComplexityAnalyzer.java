@@ -29,6 +29,7 @@ import java.util.zip.ZipEntry;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.ZipUtils;
@@ -42,7 +43,7 @@ public class PythonComplexityAnalyzer {
 
   private String commandTemplate;
 
-  public PythonComplexityAnalyzer(ProjectFileSystem projectFileSystem) {
+  public PythonComplexityAnalyzer(Project project) {
     // TODO: provide the option for using an external pygenie
     //
     // String configuredPath = "";
@@ -50,7 +51,7 @@ public class PythonComplexityAnalyzer {
     // pygeniePath = configuredPath;
     // }
 
-    File workDir = projectFileSystem.getSonarWorkingDirectory();
+    File workDir = project.getFileSystem().getSonarWorkingDirectory();
     File fallbackPath = new File(workDir, PYGENIE_DIR + PYGENIE_SCRIPT);
 
     String pygeniePath = "";
@@ -66,7 +67,7 @@ public class PythonComplexityAnalyzer {
   }
 
   public List<ComplexityStat> analyzeComplexity(String path) {
-    return parseOutput(Utils.callCommand(commandTemplate + " " + path));
+    return parseOutput(Utils.callCommand(commandTemplate + " " + path, null));
   }
 
   protected final void extractPygenie(File targetFolder) {

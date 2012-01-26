@@ -29,16 +29,19 @@ import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.resources.Project;
+
 
 public final class PythonComplexitySensor extends PythonSensor {
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12, 20, 30 };
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
 
-  protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
-    org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
-
-    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(projectFileSystem);
-
+  protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
+    org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(),
+                                                                project.getFileSystem().getSourceDirs());
+    
+    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(project);
+    
     // contains global (file scope) complexity
     // as head and function complexity counts as tail
     List<ComplexityStat> stats = analyzer.analyzeComplexity(inputFile.getFile().getPath());

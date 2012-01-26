@@ -31,22 +31,24 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 
 public class PythonComplexityAnalyzerTest {
-
-  private ProjectFileSystem fileSystem;
+  private Project project;
+  private ProjectFileSystem pfs;
 
   @Before
   public void init() {
-    fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File(System.getProperty("java.io.tmpdir")));
+    pfs = mock(ProjectFileSystem.class);
+    when(pfs.getSonarWorkingDirectory()).thenReturn(new File(System.getProperty("java.io.tmpdir")));
+    project = mock(Project.class);
+    when(project.getFileSystem()).thenReturn(pfs);
   }
 
   @Test
   public void complexityTest() {
     Map<String, Integer> result_expected = new HashMap<String, Integer>() {
-
       {
         put("if_else", 3);
         put("if_elif_else", 5);
@@ -68,7 +70,7 @@ public class PythonComplexityAnalyzerTest {
     String resourceName = "/org/sonar/plugins/python/complexity/code_chunks.py";
     String pathName = getClass().getResource(resourceName).getPath();
 
-    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(fileSystem);
+    PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(project);
     List<ComplexityStat> stats = analyzer.analyzeComplexity(pathName);
     stats = stats.subList(1, stats.size());
 

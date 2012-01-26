@@ -36,22 +36,28 @@ import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.InputFile;
+import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.test.IsMeasure;
 
-public class PythonComplexitySensorTest {
+import org.apache.maven.project.MavenProject;
 
+
+public class PythonComplexitySensorTest {
   private PythonComplexitySensor sensor;
   private SensorContext context;
-  private ProjectFileSystem fileSystem;
-
+  private Project project;
+  private ProjectFileSystem pfs;
+  
   @Before
   public void init() {
     sensor = new PythonComplexitySensor();
     context = mock(SensorContext.class);
-    fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File(System.getProperty("java.io.tmpdir")));
+    pfs = mock(ProjectFileSystem.class);
+    when(pfs.getSonarWorkingDirectory()).thenReturn(new File(System.getProperty("java.io.tmpdir")));
+    project = mock(Project.class);
+    when(project.getFileSystem()).thenReturn(pfs);
   }
 
   @Test
@@ -61,7 +67,7 @@ public class PythonComplexitySensorTest {
     InputFile inputFile = mock(InputFile.class);
     when(inputFile.getFile()).thenReturn(codeChunks);
     
-    sensor.analyzeFile(inputFile, fileSystem, context);
+    sensor.analyzeFile(inputFile, project, context);
 
     verify(context).saveMeasure((Resource) anyObject(), eq(CoreMetrics.COMPLEXITY), eq(47.0));
     verify(context).saveMeasure((Resource) anyObject(),

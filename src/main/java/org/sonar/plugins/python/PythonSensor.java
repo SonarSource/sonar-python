@@ -34,14 +34,16 @@ public abstract class PythonSensor implements Sensor {
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
+    PythonPlugin.LOG.debug("my.property: '{}'", project.getProperty("my.property"));
+
     for (InputFile inputFile: project.getFileSystem().mainFiles(Python.KEY)) {
       try {
-        analyzeFile(inputFile, project.getFileSystem(), sensorContext);
+        analyzeFile(inputFile, project, sensorContext);
       } catch (Exception e) {
         PythonPlugin.LOG.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
       }
     }
   }
 
-  protected abstract void analyzeFile(InputFile inputFile, ProjectFileSystem pfs, SensorContext sensorContext) throws IOException;
+  protected abstract void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException;
 }

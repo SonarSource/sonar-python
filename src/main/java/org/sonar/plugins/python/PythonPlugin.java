@@ -48,8 +48,9 @@ public class PythonPlugin implements Plugin {
   private static final String PROPERTY_PREFIX = "sonar.python.";
   protected static final String PYLINT_CONFIG_KEY = PROPERTY_PREFIX + "pylint_config";
   protected static final String PYLINT_KEY = PROPERTY_PREFIX + "pylint";
+  protected static final String PYTHON_PATH_KEY = PROPERTY_PREFIX + "path";
   protected static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
-
+  
   public String getKey() {
     return "Python Plugin";
   }

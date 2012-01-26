@@ -30,11 +30,12 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.resources.Project;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.text.Source;
 
 public final class PythonSquidSensor extends PythonSensor {
-  protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
+  protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
     // the comment syntax cannot be controlled fully due to poorness of sonar API:
     // the multiline and single-line java syntax are hardcoded, only
     // additional single-line comment syntax can be specified. A better
@@ -42,8 +43,8 @@ public final class PythonSquidSensor extends PythonSensor {
 
     Reader reader = null;
     try {
-      reader = new StringReader(FileUtils.readFileToString(inputFile.getFile(), projectFileSystem.getSourceCharset().name()));
-      org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
+      reader = new StringReader(FileUtils.readFileToString(inputFile.getFile(), project.getFileSystem().getSourceCharset().name()));
+      org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
       Source source = new Source(reader, new PythonRecognizer(), new String[] { "#" });
 
       sensorContext.saveMeasure(pyfile, CoreMetrics.FILES, 1.0);

@@ -32,14 +32,20 @@ import org.apache.commons.io.IOUtils;
 import org.sonar.api.utils.SonarException;
 
 public final class Utils {
-  public static List<String> callCommand(String command) {
+  public static List<String> callCommand(String command, String[] environ) {
     List<String> lines = new LinkedList<String>();
-
+    
     PythonPlugin.LOG.debug("Calling command: '{}'", command);
 
     BufferedReader stdInput = null;
     try {
-      Process p = Runtime.getRuntime().exec(command);
+      Process p = null;
+      if(environ == null){
+        p = Runtime.getRuntime().exec(command);
+      } else {
+        p = Runtime.getRuntime().exec(command, environ);
+      }
+        
       stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
       String s = null;
 

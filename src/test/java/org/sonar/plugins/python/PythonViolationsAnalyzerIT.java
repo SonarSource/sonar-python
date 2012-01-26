@@ -35,7 +35,7 @@ public class PythonViolationsAnalyzerIT {
     String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
     String pylintPath = null;
 
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName);
+    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, null);
     assertEquals(issues.size(), 21);
   }
 }

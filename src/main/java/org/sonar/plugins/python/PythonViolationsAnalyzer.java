@@ -54,11 +54,11 @@ public class PythonViolationsAnalyzer {
     }
   }
   
-  public List<Issue> analyze(String path) {
+  public List<Issue> analyze(String path, String[] environ) {
     // TODO: evaluate pylints exit code
     // we are at least interested in 1 which seems to be 'execution error' like
     // config file content invalid etc.
-    return parseOutput(Utils.callCommand(commandTemplate + " " + path));
+    return parseOutput(Utils.callCommand(commandTemplate + " " + path, environ));
   }
 
   protected List<Issue> parseOutput(List<String> lines) {

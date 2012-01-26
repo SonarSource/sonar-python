@@ -21,31 +21,41 @@
 package org.sonar.plugins.python;
 
 import java.io.IOException;
+import java.io.File;
 import java.util.List;
+import java.util.LinkedList;
 
 import org.apache.commons.configuration.Configuration;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.Violation;
+import org.apache.commons.lang.StringUtils;
 
 public class PythonViolationsSensor extends PythonSensor {
+  private final static String PYTHONPATH_ENVVAR = "PYTHONPATH";
+  
   private RuleFinder ruleFinder;
   private Configuration conf;
-
-  public PythonViolationsSensor(RuleFinder ruleFinder, Configuration conf) {
+  private String[] environment;
+  
+  public PythonViolationsSensor(RuleFinder ruleFinder, Project project, Configuration conf) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
+    this.environment = getEnvironment(project);
   }
 
-  protected void analyzeFile(InputFile inputFile, ProjectFileSystem projectFileSystem, SensorContext sensorContext) throws IOException {
-    Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), projectFileSystem.getSourceDirs());
+  protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
+    Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
     String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
     String pylintPath = conf.getString(PythonPlugin.PYLINT_KEY, null);
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(inputFile.getFile().getPath());
+    
+    PythonViolationsAnalyzer analyzer = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath);
+    List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), environment);
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PythonRuleRepository.REPOSITORY_KEY, issue.ruleId);
       Violation violation = Violation.create(rule, pyfile);
@@ -53,5 +63,32 @@ public class PythonViolationsSensor extends PythonSensor {
       violation.setMessage(issue.descr);
       sensorContext.saveViolation(violation);
     }
+  }
+
+  
+  protected String[] getEnvironment(Project project){
+    String[] environment = null;
+    String pythonPathProp = (String)project.getProperty(PythonPlugin.PYTHON_PATH_KEY);
+    if (pythonPathProp != null){
+      File projectRoot = project.getFileSystem().getBasedir();
+      String[] parsedPaths = StringUtils.split(pythonPathProp, ",");
+      List<String> absPaths = toAbsPaths(parsedPaths, projectRoot);
+      String delimiter = System.getProperty("path.separator");
+      String pythonPath = StringUtils.join(absPaths, delimiter);
+      
+      environment = new String[1];
+      environment[0] = PYTHONPATH_ENVVAR + "=" + pythonPath;
+    }
+    return environment;
+  }
+
+  
+  protected List<String> toAbsPaths(String[] pathStrings, File baseDir){
+    List<String> result = new LinkedList<String>();
+    for(String pathStr: pathStrings){
+      pathStr = StringUtils.trim(pathStr);
+      result.add(new File(baseDir, pathStr).getPath());
+    }
+    return result;
   }
 }
