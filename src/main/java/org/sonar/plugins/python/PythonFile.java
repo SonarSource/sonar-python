@@ -34,21 +34,21 @@ public class PythonFile extends File {
   private String parentPath = null;
   private PythonPackage parent = null;
   
-  public PythonFile(String relativePath, String absParentPath) {
-    super(relativePath);
-    if (isPythonPackage(absParentPath)) {
-      String parentCandidate = parentPathOf(relativePath);
+  public PythonFile(String relPath, java.io.File absPath) {
+    super(relPath);
+    if (isInPythonPackage(absPath)) {
+      String parentCandidate = parentPathOf(relPath);
       if (parentCandidate != "") {
-        this.parentPath = parentPathOf(relativePath);
+        this.parentPath = parentPathOf(relPath);
       }
     }
   }
-  
+
   /** Creates a File from an io.file and a list of sources directories */
   public static File fromIOFile(java.io.File file, List<java.io.File> sourceDirs) {
-    String relativePath = DefaultProjectFileSystem.getRelativePath(file, sourceDirs);
-    if (relativePath != null) {
-      return new PythonFile(relativePath, file.getParent());
+    String relPath = DefaultProjectFileSystem.getRelativePath(file, sourceDirs);
+    if (relPath != null) {
+      return new PythonFile(relPath, file);
     }
     return null;
   }
@@ -69,11 +69,11 @@ public class PythonFile extends File {
     return Python.INSTANCE;
   }
 
-  private String parentPathOf(String relativePath){
-    return StringUtils.substringBeforeLast(relativePath, "/");
+  private String parentPathOf(String relPath){
+    return StringUtils.substringBeforeLast(relPath, "/");
   }
   
-  private boolean isPythonPackage(String path){
-    return new java.io.File(path, INITFILE).isFile();
+  private boolean isInPythonPackage(java.io.File absPath){
+    return new java.io.File(absPath.getParentFile(), INITFILE).isFile();
   }
 }

@@ -20,37 +20,56 @@
 
 package org.sonar.plugins.python;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Scopes;
 
 public class PythonFileTest {
-
   @Test
-  public void testOrdinaryFile() throws Exception {
+  public void testStandaloneFile() throws Exception {
     String fname = "main.py";
-    // PythonFile pyfile = new PythonFile(fname, null, false);
-    
-    // assert (pyfile.getParent() != null);
-    // assert (pyfile.getLanguage() == Python.INSTANCE);
-    // assert (pyfile.getName() == fname);
-    // assert (pyfile.getLongName() == fname);
-    // assert (pyfile.getScope() == Scopes.FILE);
-    // assert (pyfile.getQualifier() == Qualifiers.FILE);
+    String relpath = "main.py";
+    testThisCase("/tmp", fname, relpath,
+                 null, fname, relpath);
   }
 
   @Test
   public void testFileInSubDir() throws Exception {
-    String pathname = "subdir/main.py";
-    String basename = "main.py";
-    String dirname = "subdir";
-    // PythonFile pyfile = new PythonFile(pathname, null, false);
+    String fname = "main.py";
+    String relpath = "src/main.py";
+    testThisCase("/tmp", fname, relpath,
+                 null, fname, relpath);
+  }
+
+  @Test
+  public void testFileInPackage() throws Exception {
+    //test with an ad-hoc build python package
+  }
+  
+  @Test
+  public void testFileInSubPackage() throws Exception {
+    //test with an ad-hoc build python package
+  }
+  
+  private void testThisCase(String basedir,
+                            String fname,
+                            String relpath,
+                            PythonPackage parent,
+                            String name,
+                            String longname) throws Exception {
+    PythonFile pyfile = new PythonFile(relpath, new java.io.File(basedir, relpath));
     
-    // assert (pyfile.getParent() != null);
-    // assert (pyfile.getLanguage() == Python.INSTANCE);
-    // assert (pyfile.getName().equals(basename));
-    // assert (pyfile.getLongName().equals(pathname));
-    // assert (pyfile.getScope() == Scopes.FILE);
-    // assert (pyfile.getQualifier() == Qualifiers.FILE);
+    assertEquals (pyfile.getParent(), parent);
+    assertEquals (pyfile.getName(), fname);
+    assertEquals (pyfile.getLongName(), relpath);
+
+    assertEquals (pyfile.getLanguage(), Python.INSTANCE);
+    assertEquals (pyfile.getScope(), Scopes.FILE);
+    assertEquals (pyfile.getQualifier(), Qualifiers.FILE);
   }
 }

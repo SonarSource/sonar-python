@@ -20,22 +20,23 @@
 
 package org.sonar.plugins.python;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Resource;
 
 public class PythonPackageTest {
-
+  
   @Test
   public void testPackage() throws Exception {
-    String fname = "src/package/file";
+    String fname = "src/package";
     PythonPackage pypack = new PythonPackage(fname);
 
-    // assert(pypack.getParent() != null);
-    // assert (pypack.getLanguage() == Python.INSTANCE);
-    // assert (pypack.getName() == fname);
-    // // assert(pypack.getLongName() == fname);
-    // assert (pypack.getScope() == Resource.SCOPE_SPACE);
-    // assert (pypack.getQualifier() == Qualifiers.PACKAGE);
+    assertEquals(pypack.getParent(), null);
+    assertEquals(pypack.getLanguage(), Python.INSTANCE);
+    assertEquals(pypack.getName(), "src.package");
+    assertEquals(pypack.getScope(), Resource.SCOPE_SPACE);
+    assertEquals(pypack.getQualifier(), Qualifiers.PACKAGE);
   }
 }
