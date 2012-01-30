@@ -25,12 +25,13 @@ import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.WildcardPattern;
+import org.apache.commons.lang.StringUtils;
 
 /** A class that represents a Python package in Sonar */
 public class PythonPackage extends Directory {
 
   public PythonPackage(String key) {
-    super(key);
+    super(StringUtils.replace(key, "/", "."));
   }
 
   @Override
@@ -54,11 +55,5 @@ public class PythonPackage extends Directory {
     // dont implement nested resources, they just show them in
     // a flat list. We follow this strategy (at least for now)
     return null;
-  }
-
-  @Override
-  public boolean matchFilePattern(String antPattern) {
-    WildcardPattern matcher = WildcardPattern.create(antPattern, "/");
-    return matcher.match(getKey());
   }
 }

@@ -26,48 +26,54 @@ import org.sonar.api.resources.DefaultProjectFileSystem;
 import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Language;
+import org.apache.commons.lang.StringUtils;
 
 public class PythonFile extends File {
-
   private static final String INITFILE = "__init__.py";
-
-  private boolean partOfPackage = false;
-  private Directory parentPackage;
-  private String packageKey;
-
-  public PythonFile(String key) {
-    this(key, null, false);
+  
+  private String parentPath = null;
+  private PythonPackage parent = null;
+  
+  public PythonFile(String relativePath, String absParentPath) {
+    super(relativePath);
+    if (isPythonPackage(absParentPath)) {
+      String parentCandidate = parentPathOf(relativePath);
+      if (parentCandidate != "") {
+        this.parentPath = parentPathOf(relativePath);
+      }
+    }
   }
-
-  public PythonFile(String key, String packageKey, boolean partOfPackage) {
-    super(key);
-    this.partOfPackage = partOfPackage;
-    this.packageKey = packageKey;
-  }
-
+  
   /** Creates a File from an io.file and a list of sources directories */
   public static File fromIOFile(java.io.File file, List<java.io.File> sourceDirs) {
     String relativePath = DefaultProjectFileSystem.getRelativePath(file, sourceDirs);
     if (relativePath != null) {
-      java.io.File packageInitFile = new java.io.File(file.getParent(), INITFILE);
-      return new PythonFile(relativePath, Directory.parseKey(new java.io.File(relativePath).getParent()), packageInitFile.isFile());
+      return new PythonFile(relativePath, file.getParent());
     }
     return null;
   }
 
   @Override
   public Directory getParent() {
-    if (partOfPackage) {
-      if (parentPackage == null) {
-        parentPackage = new PythonPackage(packageKey);
+    if (parentPath != null) {
+      if (parent == null) {
+        parent = new PythonPackage(parentPath);
       }
-      return parentPackage;
+      return parent;
     }
-    return super.getParent();
+    return null;
   }
 
   @Override
   public Language getLanguage() {
     return Python.INSTANCE;
+  }
+
+  private String parentPathOf(String relativePath){
+    return StringUtils.substringBeforeLast(relativePath, "/");
+  }
+  
+  private boolean isPythonPackage(String path){
+    return new java.io.File(path, INITFILE).isFile();
   }
 }
