@@ -64,18 +64,18 @@ public class PythonViolationsAnalyzerTest {
     String executablePath = getClass().getResource(executableResource).getPath();
     final String[] VALID_PARAMETERS =
       {
-	null, null,
-	executablePath, null,
-	null, pylintrcPath,
-	executablePath, pylintrcPath
+        null, null,
+        executablePath, null,
+        null, pylintrcPath,
+        executablePath, pylintrcPath
       };
 
     int numberOfParams = VALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-	new PythonViolationsAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
+        new PythonViolationsAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
       } catch (SonarException se) {
-	assert(false);
+        assert(false);
       }
     }
   }
@@ -86,16 +86,16 @@ public class PythonViolationsAnalyzerTest {
     final String NOT_EXISTING_PATH = "notexistingpath";
     final String[] INVALID_PARAMETERS =
       {
-	null, NOT_EXISTING_PATH,
-	NOT_EXISTING_PATH, null,
-	NOT_EXISTING_PATH, NOT_EXISTING_PATH
+        null, NOT_EXISTING_PATH,
+        NOT_EXISTING_PATH, null,
+        NOT_EXISTING_PATH, NOT_EXISTING_PATH
       };
 
     int numberOfParams = INVALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-	new PythonViolationsAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
-	assert(false);
+        new PythonViolationsAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
+        assert(false);
       } catch (SonarException se) {}
     }
   }

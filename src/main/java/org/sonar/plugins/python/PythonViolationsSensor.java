@@ -59,7 +59,9 @@ public class PythonViolationsSensor extends PythonSensor {
   }
   
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
+    //Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
+    org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(inputFile.getFile(), project);
+
     String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
     String pylintPath = conf.getString(PythonPlugin.PYLINT_KEY, null);
 

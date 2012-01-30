@@ -32,8 +32,8 @@ public class PythonSourceImporter extends AbstractSourceImporter {
     super(python);
   }
 
-  @Override
-  protected Resource createResource(File file, List<File> sourceDirs, boolean unitTest) {
-    return file != null ? PythonFile.fromIOFile(file, sourceDirs) : null;
-  }
+  // @Override
+  // protected Resource createResource(File file, List<File> sourceDirs, boolean unitTest) {
+  //   return file != null ? PythonFile.fromIOFile(file, sourceDirs) : null;
+  // }
 }
