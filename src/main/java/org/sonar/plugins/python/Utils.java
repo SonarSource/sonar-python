@@ -51,7 +51,8 @@ public final class Utils {
         lines.add(s);
       }
     } catch (IOException e) {
-      throw new SonarException("Error calling command", e);
+      throw new SonarException("Error calling command '" + command +
+                               "', details: '" + e + "'");
     } finally {
       IOUtils.closeQuietly(stdInput);
     }
