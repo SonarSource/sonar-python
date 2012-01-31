@@ -24,7 +24,6 @@ import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Resource;
-import org.sonar.api.utils.WildcardPattern;
 import org.apache.commons.lang.StringUtils;
 
 /** A class that represents a Python package in Sonar */

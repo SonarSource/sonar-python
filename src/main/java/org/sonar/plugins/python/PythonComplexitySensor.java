@@ -28,7 +28,6 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.resources.InputFile;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Project;
 
 
@@ -37,10 +36,7 @@ public final class PythonComplexitySensor extends PythonSensor {
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
 
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    // org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(),
-    //                                                             project.getFileSystem().getSourceDirs());
     org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(inputFile.getFile(), project);
-
     PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(project);
 
     // contains global (file scope) complexity

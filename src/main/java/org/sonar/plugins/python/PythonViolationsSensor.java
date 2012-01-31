@@ -28,9 +28,7 @@ import java.util.LinkedList;
 import org.apache.commons.configuration.Configuration;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.InputFile;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.profiles.RulesProfile;
@@ -59,7 +57,6 @@ public class PythonViolationsSensor extends PythonSensor {
   }
   
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    //Resource pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
     org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(inputFile.getFile(), project);
 
     String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
@@ -85,8 +82,8 @@ public class PythonViolationsSensor extends PythonSensor {
   }
 
 
-  protected String[] getEnvironment(Project project){
-    String[] environment = null;
+  protected final String[] getEnvironment(Project project){
+    String[] environ = null;
     String pythonPathProp = (String)project.getProperty(PythonPlugin.PYTHON_PATH_KEY);
     if (pythonPathProp != null){
       File projectRoot = project.getFileSystem().getBasedir();
@@ -95,14 +92,14 @@ public class PythonViolationsSensor extends PythonSensor {
       String delimiter = System.getProperty("path.separator");
       String pythonPath = StringUtils.join(absPaths, delimiter);
 
-      environment = new String[1];
-      environment[0] = PYTHONPATH_ENVVAR + "=" + pythonPath;
+      environ = new String[1];
+      environ[0] = PYTHONPATH_ENVVAR + "=" + pythonPath;
     }
-    return environment;
+    return environ;
   }
 
 
-  protected List<String> toAbsPaths(String[] pathStrings, File baseDir){
+  private final List<String> toAbsPaths(String[] pathStrings, File baseDir){
     List<String> result = new LinkedList<String>();
     for(String pathStr: pathStrings){
       pathStr = StringUtils.trim(pathStr);

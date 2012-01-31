@@ -29,7 +29,6 @@ import org.apache.commons.io.IOUtils;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.InputFile;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Project;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.text.Source;
@@ -44,10 +43,7 @@ public final class PythonSquidSensor extends PythonSensor {
     Reader reader = null;
     try {
       reader = new StringReader(FileUtils.readFileToString(inputFile.getFile(), project.getFileSystem().getSourceCharset().name()));
-
-      //org.sonar.api.resources.File pyfile = PythonFile.fromIOFile(inputFile.getFile(), project.getFileSystem().getSourceDirs());
       org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(inputFile.getFile(), project);
-
       Source source = new Source(reader, new PythonRecognizer(), new String[] { "#" });
 
       sensorContext.saveMeasure(pyfile, CoreMetrics.FILES, 1.0);

@@ -30,7 +30,6 @@ import java.util.zip.ZipEntry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.ZipUtils;
 
@@ -85,13 +84,7 @@ public class PythonComplexityAnalyzer {
         // packed; probably deployed
         File packagePath = new File(StringUtils.substringBefore(url.getFile(), "!").substring(5));
 
-        ZipUtils.unzip(packagePath, targetFolder, new ZipUtils.ZipEntryFilter() {
-
-          public boolean accept(ZipEntry entry) {
-            // this only works without the first '/'
-            return entry.getName().startsWith(PYGENIE_DIR.substring(1));
-          }
-        });
+        ZipUtils.unzip(packagePath, targetFolder, new PygenieOnlyFilter());
       }
     } catch (IOException e) {
       throw new SonarException("Cannot extract pygenie to '" + targetFolder.getAbsolutePath() + "'", e);
@@ -135,4 +128,11 @@ public class PythonComplexityAnalyzer {
 
     return stats;
   }
+
+  class PygenieOnlyFilter implements ZipUtils.ZipEntryFilter {
+    public boolean accept(ZipEntry entry) {
+      // this only works without the first '/'
+      return entry.getName().startsWith(PYGENIE_DIR.substring(1));
+    }
+  };
 }

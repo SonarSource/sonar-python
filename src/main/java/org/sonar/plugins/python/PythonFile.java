@@ -37,8 +37,8 @@ public class PythonFile extends File {
   public PythonFile(String relPath, java.io.File absPath) {
     super(relPath);
     if (isInPythonPackage(absPath)) {
-      String parentCandidate = parentPathOf(relPath);
-      if (parentCandidate != "") {
+      String parentPathCandidate = parentPathOf(relPath);
+      if (!"".equals(parentPathCandidate)) {
         this.parentPath = parentPathOf(relPath);
       }
     }

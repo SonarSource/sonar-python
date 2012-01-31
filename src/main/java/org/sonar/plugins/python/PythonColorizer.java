@@ -39,10 +39,12 @@ public final class PythonColorizer extends CodeColorizerFormat {
   public List<Tokenizer> getTokenizers() {
     if (tokenizers == null) {
       tokenizers = new ArrayList<Tokenizer>();
-      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", "</span>", Python.KEYWORDS));
-      tokenizers.add(new StringTokenizer("<span class=\"s\">", "</span>"));
-      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", "</span>"));
-      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", "</span>"));
+      
+      String tagAfter = "</span>";
+      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", tagAfter, Python.KEYWORDS));
+      tokenizers.add(new StringTokenizer("<span class=\"s\">", tagAfter));
+      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", tagAfter));
+      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", tagAfter));
 
       // the following tokenizers don't work, for some reason.
       // tokens.add(new KeywordsTokenizer("<span class=\"c\">", "</span>", CONSTANTS));

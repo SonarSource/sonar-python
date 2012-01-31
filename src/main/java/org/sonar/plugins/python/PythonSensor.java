@@ -26,7 +26,6 @@ import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 
 public abstract class PythonSensor implements Sensor {
   public boolean shouldExecuteOnProject(Project project) {
