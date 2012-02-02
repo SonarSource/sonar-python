@@ -26,6 +26,7 @@ import org.sonar.api.resources.DefaultProjectFileSystem;
 import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Language;
+import org.sonar.api.resources.Project;
 import org.apache.commons.lang.StringUtils;
 
 public class PythonFile extends File {
@@ -44,8 +45,13 @@ public class PythonFile extends File {
     }
   }
 
+  /** Creates a File from an io.file and a project */
+  public static PythonFile fromIOFile(java.io.File file, Project project) {
+    return fromIOFile(file, project.getFileSystem().getSourceDirs());
+  }  
+  
   /** Creates a File from an io.file and a list of sources directories */
-  public static File fromIOFile(java.io.File file, List<java.io.File> sourceDirs) {
+  public static PythonFile fromIOFile(java.io.File file, List<java.io.File> sourceDirs) {
     String relPath = DefaultProjectFileSystem.getRelativePath(file, sourceDirs);
     if (relPath != null) {
       return new PythonFile(relPath, file);
