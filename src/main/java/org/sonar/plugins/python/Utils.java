@@ -36,15 +36,15 @@ public final class Utils {
     PythonPlugin.LOG.debug("Calling command: '{}'", command);
 
     BufferedReader stdInput = null;
+    Process process = null;
     try {
-      Process p = null;
       if(environ == null){
-        p = Runtime.getRuntime().exec(command);
+        process = Runtime.getRuntime().exec(command);
       } else {
-        p = Runtime.getRuntime().exec(command, environ);
+        process = Runtime.getRuntime().exec(command, environ);
       }
 
-      stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+      stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
       String s = null;
 
       while ((s = stdInput.readLine()) != null) {
@@ -55,6 +55,11 @@ public final class Utils {
                                "', details: '" + e + "'");
     } finally {
       IOUtils.closeQuietly(stdInput);
+      if (process != null) {
+        IOUtils.closeQuietly(process.getInputStream());
+        IOUtils.closeQuietly(process.getOutputStream());
+        IOUtils.closeQuietly(process.getErrorStream());
+      }
     }
 
     return lines;
