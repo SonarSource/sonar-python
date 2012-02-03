@@ -30,12 +30,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.util.List;
+import java.util.LinkedList;
 
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.apache.commons.configuration.Configuration;
+import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.profiles.XMLProfileParser;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -59,17 +63,67 @@ public class PythonViolationsSensorTest {
     when(pfs.getBasedir()).thenReturn(new File("/tmp"));
 
     project = mock(Project.class);
-    when(project.getProperty("sonar.python.path")).thenReturn("path1, path2");
     when(project.getFileSystem()).thenReturn(pfs);
   }
 
   @Test
-  public void shouldReturnCorrectEnvironment() {
-    sensor = new PythonViolationsSensor(ruleFinder, project, conf, profile);
-    
-    String[] env = sensor.getEnvironment(project);
+  public void shouldntThrowWhenInstantiating() {
+    new PythonViolationsSensor(ruleFinder, project, conf, profile);
+  }
+  
+  @Test
+  public void shouldReturnCorrectEnvironmentIfPropertySet() {
+    when(project.getProperty("sonar.python.path")).thenReturn("path1,path2");
+    String[] env = PythonViolationsSensor.getEnvironment(project);
 
     String[] expectedEnv = {"PYTHONPATH=/tmp/path1:/tmp/path2"};
     assertEquals(env, expectedEnv);
+  }
+
+  @Test
+  public void shouldReturnNullIfPropertyNotSet() {
+    String[] env = PythonViolationsSensor.getEnvironment(project);
+
+    assertEquals(env, null);
+  }
+
+  @Test
+  public void shouldExecuteOnlyWhenNecessary() {
+    // which means: only on python projects and only if
+    // there is at least one active pylint rule
+  
+    Project pythonProject = createProjectForLanguage(Python.KEY);
+    Project foreignProject = createProjectForLanguage("whatever");
+    RulesProfile emptyProfile = mock(RulesProfile.class);
+    RulesProfile pylintProfile =  createPylintProfile();
+    
+    checkNecessityOfExecution(pythonProject, pylintProfile, true);
+    checkNecessityOfExecution(pythonProject, emptyProfile, false);
+    checkNecessityOfExecution(foreignProject, pylintProfile, false);
+    checkNecessityOfExecution(foreignProject, emptyProfile, false);
+  }
+  
+  private void checkNecessityOfExecution(Project project, RulesProfile profile,
+                                         boolean shouldExecute){
+    PythonViolationsSensor sensor =
+      new PythonViolationsSensor(ruleFinder, project, conf, profile);
+    assertEquals(sensor.shouldExecuteOnProject(project), shouldExecute);
+  }
+
+  private static Project createProjectForLanguage(String languageKey){
+    Project project = mock(Project.class);
+    when(project.getLanguageKey()).thenReturn(languageKey);
+    return project;
+  }
+
+  private static RulesProfile createPylintProfile(){
+    List<ActiveRule> rules = new LinkedList<ActiveRule>();
+    rules.add(mock(ActiveRule.class));
+    
+    RulesProfile profile = mock(RulesProfile.class);
+    when(profile.getActiveRulesByRepository(PythonRuleRepository.REPOSITORY_KEY))
+      .thenReturn(rules);
+
+    return profile;
   }
 }

@@ -80,8 +80,7 @@ public class PythonViolationsSensor extends PythonSensor {
     }
   }
 
-
-  protected final String[] getEnvironment(Project project){
+  static protected final String[] getEnvironment(Project project){
     String[] environ = null;
     String pythonPathProp = (String)project.getProperty(PythonPlugin.PYTHON_PATH_KEY);
     if (pythonPathProp != null){
@@ -98,7 +97,7 @@ public class PythonViolationsSensor extends PythonSensor {
   }
 
 
-  private final List<String> toAbsPaths(String[] pathStrings, java.io.File baseDir){
+  static private List<String> toAbsPaths(String[] pathStrings, java.io.File baseDir){
     List<String> result = new LinkedList<String>();
     for(String pathStr: pathStrings){
       pathStr = StringUtils.trim(pathStr);

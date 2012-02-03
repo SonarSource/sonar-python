@@ -129,7 +129,7 @@ public class PythonComplexityAnalyzer {
     return stats;
   }
 
-  class PygenieOnlyFilter implements ZipUtils.ZipEntryFilter {
+  static class PygenieOnlyFilter implements ZipUtils.ZipEntryFilter {
     public boolean accept(ZipEntry entry) {
       // this only works without the first '/'
       return entry.getName().startsWith(PYGENIE_DIR.substring(1));
