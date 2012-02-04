@@ -34,7 +34,7 @@ public class PythonFileTest {
   public void testStandaloneFile() throws Exception {
     String fname = "main.py";
     String relpath = "main.py";
-    testThisCase("/tmp", fname, relpath,
+    checkInstance("/tmp", fname, relpath,
                  null, fname, relpath);
   }
 
@@ -42,7 +42,7 @@ public class PythonFileTest {
   public void testFileInSubDir() throws Exception {
     String fname = "main.py";
     String relpath = "src/main.py";
-    testThisCase("/tmp", fname, relpath,
+    checkInstance("/tmp", fname, relpath,
                  null, fname, relpath);
   }
 
@@ -56,12 +56,13 @@ public class PythonFileTest {
     //test with an ad-hoc build python package
   }
   
-  private void testThisCase(String basedir,
-                            String fname,
-                            String relpath,
-                            PythonPackage parent,
-                            String name,
-                            String longname) throws Exception {
+  
+  private void checkInstance(String basedir,
+                             String fname,
+                             String relpath,
+                             PythonPackage parent,
+                             String name,
+                             String longname) throws Exception {
     PythonFile pyfile = new PythonFile(relpath, new java.io.File(basedir, relpath));
     
     assertEquals (pyfile.getParent(), parent);

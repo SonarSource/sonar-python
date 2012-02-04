@@ -20,19 +20,36 @@
 
 package org.sonar.plugins.python;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Resource;
+import org.sonar.api.utils.WildcardPattern;
 import org.apache.commons.lang.StringUtils;
 
 /** A class that represents a Python package in Sonar */
 public class PythonPackage extends Directory {
-
-  public PythonPackage(String key) {
-    super(StringUtils.replace(key, "/", "."));
+  private static Map<String, PythonPackage> packages
+    = new HashMap<String, PythonPackage>();
+    
+  private PythonPackage(String key) {
+    super(key);
   }
 
+  public static PythonPackage create(String key) {
+    String packageKey = StringUtils.replace(key, "/", ".");
+    PythonPackage pypackage = packages.get(packageKey);
+    if (pypackage == null) {
+      pypackage = new PythonPackage(packageKey);
+      packages.put(packageKey, pypackage);
+    }
+    
+    return pypackage;
+  }
+  
   @Override
   public Language getLanguage() {
     return Python.INSTANCE;
@@ -54,5 +71,11 @@ public class PythonPackage extends Directory {
     // dont implement nested resources, they just show them in
     // a flat list. We follow this strategy (at least for now)
     return null;
+  }
+
+  public boolean matchFilePattern(String antPattern) {
+    String patternWithoutFileSuffix = StringUtils.substringBeforeLast(antPattern, ".");
+    WildcardPattern matcher = WildcardPattern.create(patternWithoutFileSuffix, ".");
+    return matcher.match(getKey());
   }
 }

@@ -27,6 +27,7 @@ import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
+import org.sonar.api.utils.WildcardPattern;
 import org.apache.commons.lang.StringUtils;
 
 public class PythonFile extends File {
@@ -63,7 +64,7 @@ public class PythonFile extends File {
   public Directory getParent() {
     if (parentPath != null) {
       if (parent == null) {
-        parent = new PythonPackage(parentPath);
+        parent = PythonPackage.create(parentPath);
       }
       return parent;
     }
@@ -76,10 +77,21 @@ public class PythonFile extends File {
   }
 
   private String parentPathOf(String relPath){
-    return StringUtils.substringBeforeLast(relPath, "/");
+    String parentPath = "";
+    if (relPath.indexOf("/") != -1) {
+      parentPath = StringUtils.substringBeforeLast(relPath, "/");
+    }
+    
+    return parentPath;
   }
   
   private boolean isInPythonPackage(java.io.File absPath){
     return new java.io.File(absPath.getParentFile(), INITFILE).isFile();
+  }
+
+  public boolean matchFilePattern(String antPattern) {
+    String patternWithoutFileSuffix = StringUtils.substringBeforeLast(antPattern, ".");
+    WildcardPattern matcher = WildcardPattern.create(patternWithoutFileSuffix, ".");
+    return matcher.match(getKey());
   }
 }

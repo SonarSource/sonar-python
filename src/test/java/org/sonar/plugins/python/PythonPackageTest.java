@@ -31,8 +31,8 @@ public class PythonPackageTest {
   @Test
   public void testPackage() throws Exception {
     String fname = "src/package";
-    PythonPackage pypack = new PythonPackage(fname);
-
+    PythonPackage pypack = PythonPackage.create(fname);
+    
     assertEquals(pypack.getParent(), null);
     assertEquals(pypack.getLanguage(), Python.INSTANCE);
     assertEquals(pypack.getName(), "src.package");
