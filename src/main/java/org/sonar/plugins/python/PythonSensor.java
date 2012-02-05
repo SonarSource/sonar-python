@@ -22,10 +22,12 @@ package org.sonar.plugins.python;
 
 import java.io.IOException;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.utils.SonarException;
 
 public abstract class PythonSensor implements Sensor {
   public boolean shouldExecuteOnProject(Project project) {
@@ -37,7 +39,14 @@ public abstract class PythonSensor implements Sensor {
       try {
         analyzeFile(inputFile, project, sensorContext);
       } catch (Exception e) {
-        PythonPlugin.LOG.error("Cannot analyze the file '{}', details: '{}'", inputFile.getFile().getAbsolutePath(), e);
+        String msg = new StringBuilder()
+          .append("Cannot analyse the file '")
+          .append(inputFile.getFile().getAbsolutePath())
+          .append("', details: '")
+          .append(e)
+          .append("'")
+          .toString();
+        throw new SonarException(msg);
       }
     }
   }
