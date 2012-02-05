@@ -57,8 +57,8 @@ public class PythonViolationsSensor extends PythonSensor {
   
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
     PythonFile pyfile = PythonFile.fromIOFile(inputFile.getFile(), project);
-
-    String pylintConfigPath = conf.getString(PythonPlugin.PYLINT_CONFIG_KEY, null);
+    
+    String pylintConfigPath = getPylintConfigPath(project);
     String pylintPath = conf.getString(PythonPlugin.PYLINT_KEY, null);
 
     PythonViolationsAnalyzer analyzer = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath);
@@ -105,4 +105,15 @@ public class PythonViolationsSensor extends PythonSensor {
     }
     return result;
   }
+
+  static protected String getPylintConfigPath(Project project) {
+    String absConfigPath = null;
+    String configPath = (String)project.getProperty(PythonPlugin.PYLINT_CONFIG_KEY);
+    if (configPath != null && !"".equals(configPath)) {
+      java.io.File projectRoot = project.getFileSystem().getBasedir();
+      absConfigPath = new java.io.File(projectRoot.getPath(), configPath).getPath();
+    }
+    
+    return absConfigPath;
+  } 
 }

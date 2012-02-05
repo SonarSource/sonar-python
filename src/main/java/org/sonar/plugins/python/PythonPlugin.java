@@ -35,14 +35,14 @@ import org.sonar.api.Property;
             defaultValue = "",
             name = "pylint configuration",
             description = "Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.",
-            global = true,
+            global = false,
             project = true),
   @Property(key = PythonPlugin.PYLINT_KEY,
             defaultValue = "",
             name = "pylint executable",
             description = "Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.",
             global = true,
-            project = true)
+            project = false)
   })
 public class PythonPlugin implements Plugin {
   private static final String PROPERTY_PREFIX = "sonar.python.";

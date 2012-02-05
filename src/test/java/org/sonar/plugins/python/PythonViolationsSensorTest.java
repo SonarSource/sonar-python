@@ -102,6 +102,25 @@ public class PythonViolationsSensorTest {
     checkNecessityOfExecution(foreignProject, pylintProfile, false);
     checkNecessityOfExecution(foreignProject, emptyProfile, false);
   }
+
+  @Test
+  public void shouldGetCorrectPylintPath() {
+    // which means: null if no property is set
+    // valid absolute path if it is
+
+    Project withOutProperty = createProjectWithProperty(null, null);
+    Project withProperty =
+      createProjectWithProperty(PythonPlugin.PYLINT_CONFIG_KEY, ".pylintrc");
+    Project withEmptyProperty =
+      createProjectWithProperty(PythonPlugin.PYLINT_CONFIG_KEY, "");
+    
+    assertEquals(PythonViolationsSensor.getPylintConfigPath(withProperty),
+                 "/tmp/projectroot/.pylintrc");
+    assertEquals(PythonViolationsSensor.getPylintConfigPath(withOutProperty),
+                 null);
+    assertEquals(PythonViolationsSensor.getPylintConfigPath(withEmptyProperty),
+                 null);
+  } 
   
   private void checkNecessityOfExecution(Project project, RulesProfile profile,
                                          boolean shouldExecute){
@@ -116,6 +135,16 @@ public class PythonViolationsSensorTest {
     return project;
   }
 
+  private static Project createProjectWithProperty(String key, String value){
+    ProjectFileSystem pfs = mock(ProjectFileSystem.class);
+    when(pfs.getBasedir()).thenReturn(new File("/tmp/projectroot")); 
+    Project project = mock(Project.class);
+    when(project.getFileSystem()).thenReturn(pfs);
+    if(key != null) 
+      when(project.getProperty(key)).thenReturn(value);
+    return project;
+  }
+  
   private static RulesProfile createPylintProfile(){
     List<ActiveRule> rules = new LinkedList<ActiveRule>();
     rules.add(mock(ActiveRule.class));
