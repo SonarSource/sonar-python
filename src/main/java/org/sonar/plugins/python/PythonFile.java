@@ -77,12 +77,12 @@ public class PythonFile extends File {
   }
 
   private String parentPathOf(String relPath){
-    String parentPath = "";
-    if (relPath.indexOf("/") != -1) {
-      parentPath = StringUtils.substringBeforeLast(relPath, "/");
+    String parPath = "";
+    if (relPath.indexOf('/') != -1) {
+      parPath = StringUtils.substringBeforeLast(relPath, "/");
     }
     
-    return parentPath;
+    return parPath;
   }
   
   private boolean isInPythonPackage(java.io.File absPath){

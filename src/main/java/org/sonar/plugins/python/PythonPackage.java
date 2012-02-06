@@ -31,7 +31,7 @@ import org.sonar.api.utils.WildcardPattern;
 import org.apache.commons.lang.StringUtils;
 
 /** A class that represents a Python package in Sonar */
-public class PythonPackage extends Directory {
+public final class PythonPackage extends Directory {
   private static Map<String, PythonPackage> packages
     = new HashMap<String, PythonPackage>();
     

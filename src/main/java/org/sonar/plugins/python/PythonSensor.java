@@ -22,7 +22,6 @@ package org.sonar.plugins.python;
 
 import java.io.IOException;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.InputFile;
@@ -46,7 +45,7 @@ public abstract class PythonSensor implements Sensor {
           .append(e)
           .append("'")
           .toString();
-        throw new SonarException(msg);
+        throw new SonarException(msg, e);
       }
     }
   }
