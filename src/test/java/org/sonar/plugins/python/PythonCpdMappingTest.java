@@ -20,20 +20,21 @@
 
 package org.sonar.plugins.python;
 
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+
+import java.net.URISyntaxException;
+
 import org.junit.Test;
 
-public class PythonPluginTest {
-
-  private PythonPlugin plugin;
-
-  @Before
-  public void setUp() throws Exception {
-    plugin = new PythonPlugin();
-  }
+public class PythonCpdMappingTest {
 
   @Test
-  public void testGetExtensions() throws Exception {
-    assert (plugin.getExtensions().size() == 9);
+  public void testMapping() throws URISyntaxException {
+
+    PythonCpdMapping mapping = new PythonCpdMapping();
+    assertEquals(new Python(), mapping.getLanguage());
+    assertEquals(PythonTokenizer.class, mapping.getTokenizer().getClass());
+
   }
+
 }

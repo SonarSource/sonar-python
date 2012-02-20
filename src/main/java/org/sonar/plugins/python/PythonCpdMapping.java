@@ -20,20 +20,26 @@
 
 package org.sonar.plugins.python;
 
-import org.junit.Before;
-import org.junit.Test;
+import net.sourceforge.pmd.cpd.Tokenizer;
+import org.sonar.api.batch.CpdMapping;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.resources.Language;
 
-public class PythonPluginTest {
+import java.util.List;
 
-  private PythonPlugin plugin;
+public class PythonCpdMapping implements CpdMapping {
 
-  @Before
-  public void setUp() throws Exception {
-    plugin = new PythonPlugin();
+  public Tokenizer getTokenizer() {
+    return new PythonTokenizer();
   }
 
-  @Test
-  public void testGetExtensions() throws Exception {
-    assert (plugin.getExtensions().size() == 9);
+  public Resource createResource(java.io.File file,
+      List<java.io.File> sourceDirs) {
+    return PythonFile.fromIOFile(file, sourceDirs);
   }
+
+  public Language getLanguage() {
+    return Python.INSTANCE;
+  }
+
 }

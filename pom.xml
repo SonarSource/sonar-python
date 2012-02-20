@@ -51,6 +51,7 @@
   </ciManagement>
 
   <properties>
+    <sonar.exclusions>org/sonar/plugins/python/antlr/*.java</sonar.exclusions>
     <sonar.version>2.9</sonar.version>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginKey>python</sonar.pluginKey>
@@ -75,6 +76,11 @@
       <artifactId>sonar-testing-harness</artifactId>
       <version>${sonar.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr-runtime</artifactId>
+      <version>3.3</version>
     </dependency>
   </dependencies>
 </project>

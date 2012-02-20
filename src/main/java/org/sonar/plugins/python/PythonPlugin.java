@@ -74,6 +74,7 @@ public class PythonPlugin implements Plugin {
     list.add(PythonRuleRepository.class);
     list.add(PythonDefaultProfile.class);
     list.add(PythonColorizer.class);
+    list.add(PythonCpdMapping.class);
 
     return list;
   }
