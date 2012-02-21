@@ -35,7 +35,7 @@ import org.sonar.api.rules.Violation;
 import org.apache.commons.lang.StringUtils;
 
 public class PythonViolationsSensor extends PythonSensor {
-  private final static String PYTHONPATH_ENVVAR = "PYTHONPATH";
+  private static final String PYTHONPATH_ENVVAR = "PYTHONPATH";
 
   private RuleFinder ruleFinder;
   private RulesProfile profile;
@@ -80,7 +80,7 @@ public class PythonViolationsSensor extends PythonSensor {
     }
   }
 
-  static protected final String[] getEnvironment(Project project){
+  protected static final String[] getEnvironment(Project project){
     String[] environ = null;
     String pythonPathProp = (String)project.getProperty(PythonPlugin.PYTHON_PATH_KEY);
     if (pythonPathProp != null){
@@ -97,7 +97,7 @@ public class PythonViolationsSensor extends PythonSensor {
   }
 
 
-  static private List<String> toAbsPaths(String[] pathStrings, java.io.File baseDir){
+  private static List<String> toAbsPaths(String[] pathStrings, java.io.File baseDir){
     List<String> result = new LinkedList<String>();
     for(String pathStr: pathStrings){
       pathStr = StringUtils.trim(pathStr);
@@ -105,8 +105,8 @@ public class PythonViolationsSensor extends PythonSensor {
     }
     return result;
   }
-
-  static protected String getPylintConfigPath(Project project) {
+  
+  protected static String getPylintConfigPath(Project project) {
     String absConfigPath = null;
     String configPath = (String)project.getProperty(PythonPlugin.PYLINT_CONFIG_KEY);
     if (configPath != null && !"".equals(configPath)) {

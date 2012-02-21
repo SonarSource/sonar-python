@@ -20,18 +20,12 @@
 
 package org.sonar.plugins.python;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-
 import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
 
 import org.antlr.runtime.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.antlr.PythonLexer;
 

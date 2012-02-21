@@ -43,13 +43,6 @@ public class PythonComplexityAnalyzer {
   private String commandTemplate;
 
   public PythonComplexityAnalyzer(Project project) {
-    // TODO: provide the option for using an external pygenie
-    //
-    // String configuredPath = "";
-    // if(!configuredPath.equals("")){
-    // pygeniePath = configuredPath;
-    // }
-
     File workDir = project.getFileSystem().getSonarWorkingDirectory();
     File fallbackPath = new File(workDir, PYGENIE_DIR + PYGENIE_SCRIPT);
 
