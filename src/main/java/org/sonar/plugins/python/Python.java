@@ -24,7 +24,7 @@ import org.sonar.api.resources.AbstractLanguage;
 
 public class Python extends AbstractLanguage {
   // The keywords. Reference: keyword.kwlist of Python 2.6.5
-  protected static final String[] KEYWORDS =
+  static final String[] KEYWORDS =
   {
     "and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except",
     "exec", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return",
@@ -32,7 +32,7 @@ public class Python extends AbstractLanguage {
   };
 
   // The builtins. Reference: __builtin__-members of Python 2.6.5
-  protected static final String[] BUILTINS =
+  static final String[] BUILTINS =
   {
     "ArithmeticError", "AssertionError", "AttributeError", "BaseException", "BufferError",
     "BytesWarning", "DeprecationWarning", "EOFError", "Ellipsis", "EnvironmentError", "Exception", "False", "FloatingPointError",
@@ -51,17 +51,17 @@ public class Python extends AbstractLanguage {
   };
 
   // Some language constants suitable for highlighting
-  protected static final String[] CONSTANTS = { "None", "False", "True" };
+  static final String[] CONSTANTS = { "None", "False", "True" };
 
   private static final String[] SUFFIXES = { "py" };
-  protected static final String KEY = "py";
-  protected static final Python INSTANCE = new Python();
-
+  static final String KEY = "py";
+  static final Python INSTANCE = new Python();
+  
   public Python() {
     super(KEY, "Python");
   }
 
   public String[] getFileSuffixes() {
-    return SUFFIXES;
+    return SUFFIXES.clone();
   }
 }
