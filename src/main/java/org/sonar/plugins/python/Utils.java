@@ -30,13 +30,15 @@ import org.apache.commons.io.IOUtils;
 import org.sonar.api.utils.SonarException;
 
 public final class Utils {
-  public static List<String> callCommand(String command, String[] environ) {
-    List<String> lines = new LinkedList<String>();
-
+  
+  public static int callCommand(String command,
+                                String[] environ,
+                                List<String> output) {
     PythonPlugin.LOG.debug("Calling command: '{}'", command);
 
     BufferedReader stdInput = null;
     Process process = null;
+    int rc = -1;
     try {
       if(environ == null){
         process = Runtime.getRuntime().exec(command);
@@ -48,9 +50,12 @@ public final class Utils {
       String s = null;
 
       while ((s = stdInput.readLine()) != null) {
-        lines.add(s);
+        output.add(s);
       }
-    } catch (IOException e) {
+
+      process.waitFor();
+      rc = process.exitValue();
+    } catch (Exception e) {
       throw new SonarException("Error calling command '" + command +
                                "', details: '" + e + "'");
     } finally {
@@ -61,8 +66,8 @@ public final class Utils {
         IOUtils.closeQuietly(process.getErrorStream());
       }
     }
-
-    return lines;
+    
+    return rc;
   }
 
   private Utils() {

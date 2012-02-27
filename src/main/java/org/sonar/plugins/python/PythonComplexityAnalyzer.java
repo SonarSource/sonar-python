@@ -59,7 +59,21 @@ public class PythonComplexityAnalyzer {
   }
 
   public List<ComplexityStat> analyzeComplexity(String path) {
-    return parseOutput(Utils.callCommand(commandTemplate + " " + path, null));
+    String command = commandTemplate + " " + path;
+    List<String> output = new LinkedList<String>();
+    int rc = Utils.callCommand(command, null, output);
+    if (rc != 0) {
+      String errmsg = new StringBuilder()
+        .append("pygenie returned an error, code: '")
+        .append(rc)
+        .append("'")
+        .append(", output:\n ")
+        .append(StringUtils.join(output, "\n"))
+        .toString();
+      throw new SonarException(errmsg);
+    }
+    
+    return parseOutput(output);
   }
 
   protected final void extractPygenie(File targetFolder) {

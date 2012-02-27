@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.utils.SonarException;
 
 public class PythonViolationsAnalyzer {
@@ -55,10 +56,10 @@ public class PythonViolationsAnalyzer {
   }
 
   public List<Issue> analyze(String path, String[] environ) {
-    // TODO: evaluate pylints exit code
-    // we are at least interested in 1 which seems to be 'execution error' like
-    // config file content invalid etc.
-    return parseOutput(Utils.callCommand(commandTemplate + " " + path, environ));
+    String command = commandTemplate + " " + path;
+    List<String> output = new LinkedList<String>();
+    Utils.callCommand(command, environ, output);
+    return parseOutput(output);
   }
 
   protected List<Issue> parseOutput(List<String> lines) {
