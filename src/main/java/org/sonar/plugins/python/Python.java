@@ -54,9 +54,9 @@ public class Python extends AbstractLanguage {
   static final String[] CONSTANTS = { "None", "False", "True" };
 
   private static final String[] SUFFIXES = { "py" };
-  static final String KEY = "py";
+  public static final String KEY = "py";
   static final Python INSTANCE = new Python();
-  
+
   public Python() {
     super(KEY, "Python");
   }

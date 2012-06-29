@@ -18,26 +18,27 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.pylint;
 
-import org.junit.Test;
-import org.sonar.api.resources.Qualifiers;
-import org.sonar.api.resources.Resource;
+class Issue {
 
-import static org.fest.assertions.Assertions.assertThat;
+  public final String filename;
+  public final int line;
+  public final String ruleId;
+  public final String objname;
+  public final String descr;
 
-public class PythonPackageTest {
+  Issue(String filename, int line, String ruleId, String objname, String descr) {
+    this.filename = filename;
+    this.line = line;
+    this.ruleId = ruleId;
+    this.objname = objname;
+    this.descr = descr;
+  }
 
-  @Test
-  public void testPackage() throws Exception {
-    String fname = "src/package";
-    PythonPackage pypack = PythonPackage.create(fname);
-
-    assertThat(pypack.getParent()).isNull();
-    assertThat(pypack.getLanguage()).isEqualTo(Python.INSTANCE);
-    assertThat(pypack.getName()).isEqualTo("src.package");
-    assertThat(pypack.getScope()).isEqualTo(Resource.SCOPE_SPACE);
-    assertThat(pypack.getQualifier()).isEqualTo(Qualifiers.PACKAGE);
+  @Override
+  public String toString() {
+    return "(" + filename + ", " + line + ", " + ruleId + ", " + objname + ", " + descr + ")";
   }
 
 }

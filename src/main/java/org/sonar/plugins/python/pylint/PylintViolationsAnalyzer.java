@@ -18,7 +18,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.pylint;
+
+import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.python.Utils;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -26,16 +29,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sonar.api.utils.SonarException;
-
-public class PythonViolationsAnalyzer {
+public class PylintViolationsAnalyzer {
 
   private static final String FALLBACK_PYLINT = "pylint";
   private static final String ARGS = "-i y -f parseable -r n";
   private static final Pattern PATTERN = Pattern.compile("([^:]+):([0-9]+): \\[(.*)\\] (.*)");
   private String commandTemplate;
 
-  PythonViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
+  PylintViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
     String pylint = FALLBACK_PYLINT;
     if (pylintPath != null){
       if(! new File(pylintPath).exists()){

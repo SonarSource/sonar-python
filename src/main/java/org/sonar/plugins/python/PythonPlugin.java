@@ -20,62 +20,35 @@
 
 package org.sonar.plugins.python;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Extension;
-import org.sonar.api.Plugin;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
+import org.sonar.api.SonarPlugin;
+import org.sonar.plugins.python.pylint.PylintConfiguration;
+import org.sonar.plugins.python.pylint.PylintRuleRepository;
+import org.sonar.plugins.python.pylint.PylintSensor;
 
-@Properties({
-  @Property(key = PythonPlugin.PYLINT_CONFIG_KEY,
-            defaultValue = "",
-            name = "pylint configuration",
-            description = "Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.",
-            global = false,
-            project = true),
-  @Property(key = PythonPlugin.PYLINT_KEY,
-            defaultValue = "",
-            name = "pylint executable",
-            description = "Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.",
-            global = true,
-            project = false)
-  })
-public class PythonPlugin implements Plugin {
-  private static final String PROPERTY_PREFIX = "sonar.python.";
-  protected static final String PYLINT_CONFIG_KEY = PROPERTY_PREFIX + "pylint_config";
-  protected static final String PYLINT_KEY = PROPERTY_PREFIX + "pylint";
-  protected static final String PYTHON_PATH_KEY = PROPERTY_PREFIX + "path";
-  protected static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
+import java.util.List;
 
-  public String getKey() {
-    return "Python Plugin";
-  }
+public class PythonPlugin extends SonarPlugin {
 
-  public String getName() {
-    return "Python";
-  }
-
-  public String getDescription() {
-    return "Analysis of Python projects";
-  }
+  public static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
 
   public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
+    return ImmutableList.of(
+        Python.class,
+        PythonSourceImporter.class,
+        PythonSquidSensor.class,
+        PythonComplexitySensor.class,
+        PythonDefaultProfile.class,
+        PythonColorizer.class,
+        PythonCpdMapping.class,
 
-    list.add(Python.class);
-    list.add(PythonSourceImporter.class);
-    list.add(PythonSquidSensor.class);
-    list.add(PythonComplexitySensor.class);
-    list.add(PythonViolationsSensor.class);
-    list.add(PythonRuleRepository.class);
-    list.add(PythonDefaultProfile.class);
-    list.add(PythonColorizer.class);
-    list.add(PythonCpdMapping.class);
-
-    return list;
+        // pylint
+        PylintConfiguration.class,
+        PylintSensor.class,
+        PylintRuleRepository.class);
   }
+
 }

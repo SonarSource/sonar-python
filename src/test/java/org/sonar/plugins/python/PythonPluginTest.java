@@ -23,6 +23,8 @@ package org.sonar.plugins.python;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 public class PythonPluginTest {
 
   private PythonPlugin plugin;
@@ -34,6 +36,7 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() throws Exception {
-    assert (plugin.getExtensions().size() == 9);
+    assertThat(plugin.getExtensions().size()).isEqualTo(10);
   }
+
 }

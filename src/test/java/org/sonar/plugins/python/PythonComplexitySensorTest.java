@@ -20,17 +20,6 @@
 
 package org.sonar.plugins.python;
 
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
@@ -41,8 +30,16 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.test.IsMeasure;
 
-import org.apache.maven.project.MavenProject;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class PythonComplexitySensorTest {
   private PythonComplexitySensor sensor;

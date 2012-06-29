@@ -18,41 +18,34 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.pylint;
 
-import static org.junit.Assert.assertEquals;
-
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.util.List;
-import java.util.LinkedList;
-
+import org.apache.commons.configuration.Configuration;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
-import org.apache.commons.configuration.Configuration;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.profiles.XMLProfileParser;
+import org.sonar.plugins.python.Python;
 
-import org.junit.Test;
-import org.junit.Before;
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class PythonViolationsSensorTest {
-  private PythonViolationsSensor sensor;
+public class PylintSensorTest {
+  private PylintSensor sensor;
   private Project project;
   private ProjectFileSystem pfs;
   private RuleFinder ruleFinder;
   private Configuration conf;
   private RulesProfile profile;
-  
+
   @Before
   public void init() {
     ruleFinder = mock(RuleFinder.class);
@@ -68,35 +61,35 @@ public class PythonViolationsSensorTest {
 
   @Test
   public void shouldntThrowWhenInstantiating() {
-    new PythonViolationsSensor(ruleFinder, project, conf, profile);
+    new PylintSensor(ruleFinder, project, conf, profile);
   }
-  
+
   @Test
   public void shouldReturnCorrectEnvironmentIfPropertySet() {
     when(project.getProperty("sonar.python.path")).thenReturn("path1,path2");
-    String[] env = PythonViolationsSensor.getEnvironment(project);
+    String[] env = PylintSensor.getEnvironment(project);
 
     String[] expectedEnv = {"PYTHONPATH=/tmp/path1:/tmp/path2"};
-    assertEquals(env, expectedEnv);
+    assertThat(env).isEqualTo(expectedEnv);
   }
 
   @Test
   public void shouldReturnNullIfPropertyNotSet() {
-    String[] env = PythonViolationsSensor.getEnvironment(project);
+    String[] env = PylintSensor.getEnvironment(project);
 
-    assertEquals(env, null);
+    assertThat(env).isNull();
   }
 
   @Test
   public void shouldExecuteOnlyWhenNecessary() {
     // which means: only on python projects and only if
     // there is at least one active pylint rule
-  
+
     Project pythonProject = createProjectForLanguage(Python.KEY);
     Project foreignProject = createProjectForLanguage("whatever");
     RulesProfile emptyProfile = mock(RulesProfile.class);
-    RulesProfile pylintProfile =  createPylintProfile();
-    
+    RulesProfile pylintProfile = createPylintProfile();
+
     checkNecessityOfExecution(pythonProject, pylintProfile, true);
     checkNecessityOfExecution(pythonProject, emptyProfile, false);
     checkNecessityOfExecution(foreignProject, pylintProfile, false);
@@ -109,49 +102,43 @@ public class PythonViolationsSensorTest {
     // valid absolute path if it is
 
     Project withOutProperty = createProjectWithProperty(null, null);
-    Project withProperty =
-      createProjectWithProperty(PythonPlugin.PYLINT_CONFIG_KEY, ".pylintrc");
-    Project withEmptyProperty =
-      createProjectWithProperty(PythonPlugin.PYLINT_CONFIG_KEY, "");
-    
-    assertEquals(PythonViolationsSensor.getPylintConfigPath(withProperty),
-                 "/tmp/projectroot/.pylintrc");
-    assertEquals(PythonViolationsSensor.getPylintConfigPath(withOutProperty),
-                 null);
-    assertEquals(PythonViolationsSensor.getPylintConfigPath(withEmptyProperty),
-                 null);
-  } 
-  
-  private void checkNecessityOfExecution(Project project, RulesProfile profile,
-                                         boolean shouldExecute){
-    PythonViolationsSensor sensor =
-      new PythonViolationsSensor(ruleFinder, project, conf, profile);
-    assertEquals(sensor.shouldExecuteOnProject(project), shouldExecute);
+    Project withProperty = createProjectWithProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
+    Project withEmptyProperty = createProjectWithProperty(PylintConfiguration.PYLINT_CONFIG_KEY, "");
+
+    assertThat(PylintSensor.getPylintConfigPath(withProperty)).isEqualTo("/tmp/projectroot/.pylintrc");
+    assertThat(PylintSensor.getPylintConfigPath(withOutProperty)).isNull();
+    assertThat(PylintSensor.getPylintConfigPath(withEmptyProperty)).isNull();
   }
 
-  private static Project createProjectForLanguage(String languageKey){
+  private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
+    PylintSensor sensor = new PylintSensor(ruleFinder, project, conf, profile);
+    assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
+  }
+
+  private static Project createProjectForLanguage(String languageKey) {
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn(languageKey);
     return project;
   }
 
-  private static Project createProjectWithProperty(String key, String value){
+  private static Project createProjectWithProperty(String key, String value) {
     ProjectFileSystem pfs = mock(ProjectFileSystem.class);
-    when(pfs.getBasedir()).thenReturn(new File("/tmp/projectroot")); 
+    when(pfs.getBasedir()).thenReturn(new File("/tmp/projectroot"));
     Project project = mock(Project.class);
     when(project.getFileSystem()).thenReturn(pfs);
-    if(key != null) 
+    if (key != null) {
       when(project.getProperty(key)).thenReturn(value);
+    }
     return project;
   }
-  
-  private static RulesProfile createPylintProfile(){
+
+  private static RulesProfile createPylintProfile() {
     List<ActiveRule> rules = new LinkedList<ActiveRule>();
     rules.add(mock(ActiveRule.class));
-    
+
     RulesProfile profile = mock(RulesProfile.class);
-    when(profile.getActiveRulesByRepository(PythonRuleRepository.REPOSITORY_KEY))
-      .thenReturn(rules);
+    when(profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY))
+        .thenReturn(rules);
 
     return profile;
   }

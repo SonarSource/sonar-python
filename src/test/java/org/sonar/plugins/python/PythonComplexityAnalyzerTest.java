@@ -20,19 +20,19 @@
 
 package org.sonar.plugins.python;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.resources.Project;
+import org.sonar.api.resources.ProjectFileSystem;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PythonComplexityAnalyzerTest {
   private Project project;
@@ -74,9 +74,9 @@ public class PythonComplexityAnalyzerTest {
     List<ComplexityStat> stats = analyzer.analyzeComplexity(pathName);
     stats = stats.subList(1, stats.size());
 
-    assertEquals(stats.size(), 14);
+    assertThat(stats.size()).isEqualTo(14);
     for (ComplexityStat stat : stats) {
-      assertEquals((int) result_expected.get(stat.name), stat.count);
+      assertThat(stat.count).isEqualTo(result_expected.get(stat.name));
     }
   }
 

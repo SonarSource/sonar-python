@@ -20,21 +20,19 @@
 
 package org.sonar.plugins.python;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.net.URISyntaxException;
 
-import org.junit.Test;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class PythonCpdMappingTest {
 
   @Test
   public void testMapping() throws URISyntaxException {
-
     PythonCpdMapping mapping = new PythonCpdMapping();
-    assertEquals(new Python(), mapping.getLanguage());
-    assertEquals(PythonTokenizer.class, mapping.getTokenizer().getClass());
-
+    assertThat(mapping.getLanguage()).isEqualTo(new Python());
+    assertThat(mapping.getTokenizer()).isInstanceOf(PythonTokenizer.class);
   }
 
 }

@@ -18,22 +18,24 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
-
-import java.util.List;
+package org.sonar.plugins.python.pylint;
 
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleRepository;
 import org.sonar.api.rules.XMLRuleParser;
+import org.sonar.plugins.python.Python;
 
-public class PythonRuleRepository extends RuleRepository {
+import java.util.List;
+
+public class PylintRuleRepository extends RuleRepository {
 
   public static final String REPOSITORY_NAME = "Pylint";
   public static final String REPOSITORY_KEY = REPOSITORY_NAME;
-  private static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
-  private XMLRuleParser ruleParser;
 
-  public PythonRuleRepository(XMLRuleParser ruleParser) {
+  private static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
+  private final XMLRuleParser ruleParser;
+
+  public PylintRuleRepository(XMLRuleParser ruleParser) {
     super(REPOSITORY_KEY, Python.KEY);
     setName(REPOSITORY_NAME);
     this.ruleParser = ruleParser;
@@ -47,4 +49,5 @@ public class PythonRuleRepository extends RuleRepository {
     }
     return rules;
   }
+
 }

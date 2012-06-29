@@ -18,24 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-
-import org.junit.Test;
-
-public class PythonViolationsAnalyzerIT {
-  @Test
-  public void violationsTest() {
-    String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
-    String codeChunksResource = "/org/sonar/plugins/python/complexity/code_chunks.py";
-    String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
-    String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
-    String pylintPath = null;
-
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, null);
-    assertEquals(issues.size(), 21);
-  }
-}
+/**
+ * Integration with pylint.
+ */
+package org.sonar.plugins.python.pylint;

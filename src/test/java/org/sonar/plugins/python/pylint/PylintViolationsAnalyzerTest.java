@@ -18,9 +18,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.pylint;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.sonar.api.utils.SonarException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,10 +29,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Test;
-import org.sonar.api.utils.SonarException;
+import static org.fest.assertions.Assertions.assertThat;
 
-public class PythonViolationsAnalyzerTest {
+public class PylintViolationsAnalyzerTest {
   @Test
   public void shouldParseCorrectly() {
     String resourceName = "/org/sonar/plugins/python/complexity/sample_pylint_output.xml";
@@ -39,8 +39,8 @@ public class PythonViolationsAnalyzerTest {
     String pylintConfigPath = null;
     String pylintPath = null;
     List<String> lines = readFile(pathName);
-    List<Issue> issues = new PythonViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
-    assertEquals(issues.size(), 21);
+    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
+    assertThat(issues.size()).isEqualTo(21);
   }
 
   // @Test
@@ -73,7 +73,7 @@ public class PythonViolationsAnalyzerTest {
     int numberOfParams = VALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-        new PythonViolationsAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
+        new PylintViolationsAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
       } catch (SonarException se) {
         assert(false);
       }
@@ -94,7 +94,7 @@ public class PythonViolationsAnalyzerTest {
     int numberOfParams = INVALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-        new PythonViolationsAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
+        new PylintViolationsAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
         assert(false);
       } catch (SonarException se) {}
     }

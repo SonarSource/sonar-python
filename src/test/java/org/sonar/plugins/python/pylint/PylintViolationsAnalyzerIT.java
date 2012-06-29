@@ -18,26 +18,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.pylint;
 
-class Issue {
+import org.junit.Test;
 
-  public final String filename;
-  public final int line;
-  public final String ruleId;
-  public final String objname;
-  public final String descr;
+import java.util.List;
 
-  Issue(String filename, int line, String ruleId, String objname, String descr) {
-    this.filename = filename;
-    this.line = line;
-    this.ruleId = ruleId;
-    this.objname = objname;
-    this.descr = descr;
+import static org.fest.assertions.Assertions.assertThat;
+
+public class PylintViolationsAnalyzerIT {
+
+  @Test
+  public void violationsTest() {
+    String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
+    String codeChunksResource = "/org/sonar/plugins/python/complexity/code_chunks.py";
+    String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
+    String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
+    String pylintPath = null;
+
+    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, null);
+    assertThat(issues.size()).isEqualTo(21);
   }
 
-  @Override
-  public String toString() {
-    return "(" + filename + ", " + line + ", " + ruleId + ", " + objname + ", " + descr + ")";
-  }
 }

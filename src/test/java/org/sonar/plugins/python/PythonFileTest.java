@@ -20,14 +20,11 @@
 
 package org.sonar.plugins.python;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Scopes;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class PythonFileTest {
   @Test
@@ -35,7 +32,7 @@ public class PythonFileTest {
     String fname = "main.py";
     String relpath = "main.py";
     checkInstance("/tmp", fname, relpath,
-                 null, fname, relpath);
+        null, fname, relpath);
   }
 
   @Test
@@ -43,20 +40,19 @@ public class PythonFileTest {
     String fname = "main.py";
     String relpath = "src/main.py";
     checkInstance("/tmp", fname, relpath,
-                 null, fname, relpath);
+        null, fname, relpath);
   }
 
   @Test
   public void testFileInPackage() throws Exception {
-    //test with an ad-hoc build python package
+    // test with an ad-hoc build python package
   }
-  
+
   @Test
   public void testFileInSubPackage() throws Exception {
-    //test with an ad-hoc build python package
+    // test with an ad-hoc build python package
   }
-  
-  
+
   private void checkInstance(String basedir,
                              String fname,
                              String relpath,
@@ -64,13 +60,13 @@ public class PythonFileTest {
                              String name,
                              String longname) throws Exception {
     PythonFile pyfile = new PythonFile(relpath, new java.io.File(basedir, relpath));
-    
-    assertEquals (pyfile.getParent(), parent);
-    assertEquals (pyfile.getName(), fname);
-    assertEquals (pyfile.getLongName(), relpath);
 
-    assertEquals (pyfile.getLanguage(), Python.INSTANCE);
-    assertEquals (pyfile.getScope(), Scopes.FILE);
-    assertEquals (pyfile.getQualifier(), Qualifiers.FILE);
+    assertThat(pyfile.getParent()).isEqualTo(parent);
+    assertThat(pyfile.getName()).isEqualTo(fname);
+    assertThat(pyfile.getLongName()).isEqualTo(relpath);
+
+    assertThat(pyfile.getLanguage()).isEqualTo(Python.INSTANCE);
+    assertThat(pyfile.getScope()).isEqualTo(Scopes.FILE);
+    assertThat(pyfile.getQualifier()).isEqualTo(Qualifiers.FILE);
   }
 }

@@ -18,23 +18,24 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
+package org.sonar.plugins.python.pylint;
 
 import org.junit.Test;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.XMLRuleParser;
 
-public class PythonRuleRepositoryTest {
+import java.util.List;
+
+import static org.fest.assertions.Assertions.assertThat;
+
+public class PylintRuleRepositoryTest {
 
   @Test
   public void createRulesTest() {
-    PythonRuleRepository rulerep = new PythonRuleRepository(new XMLRuleParser());
+    PylintRuleRepository rulerep = new PylintRuleRepository(new XMLRuleParser());
     List<Rule> rules = rulerep.createRules();
 
-    assertEquals (rules.size(), 144);
+    assertThat(rules.size()).isEqualTo(144);
   }
+
 }
