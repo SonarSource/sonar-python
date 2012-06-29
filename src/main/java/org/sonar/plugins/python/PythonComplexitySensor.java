@@ -20,15 +20,16 @@
 
 package org.sonar.plugins.python;
 
-import java.io.IOException;
-import java.util.List;
-
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.utils.SonarException;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public final class PythonComplexitySensor extends PythonSensor {
@@ -41,7 +42,14 @@ public final class PythonComplexitySensor extends PythonSensor {
 
     // contains global (file scope) complexity
     // as head and function complexity counts as tail
-    List<ComplexityStat> stats = analyzer.analyzeComplexity(inputFile.getFile().getPath());
+    final List<ComplexityStat> stats;
+    try {
+      stats = analyzer.analyzeComplexity(inputFile.getFile().getPath());
+    } catch (SonarException e) {
+      // FIXME Dirty workaround: analysis should continue, if we unable to execute pygenie
+      PythonPlugin.LOG.error(e.getMessage(), e);
+      return;
+    }
     ComplexityStat globalScopeStat = stats.get(0);
     List<ComplexityStat> functionStats = stats.subList(1, stats.size());
 
