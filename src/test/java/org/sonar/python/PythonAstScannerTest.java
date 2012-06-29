@@ -1,0 +1,65 @@
+/*
+ * Sonar Python Plugin
+ * Copyright (C) 2011 Waleri Enns
+ * dev@sonar.codehaus.org
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ */
+package org.sonar.python;
+
+import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.squid.AstScanner;
+import org.junit.Test;
+import org.sonar.python.api.PythonMetric;
+import org.sonar.python.parser.PythonGrammar;
+import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.api.SourceProject;
+import org.sonar.squid.indexer.QueryByType;
+
+import java.io.File;
+
+import static org.fest.assertions.Assertions.assertThat;
+
+public class PythonAstScannerTest {
+
+  @Test
+  public void files() {
+    AstScanner<PythonGrammar> scanner = PythonAstScanner.create(new PythonConfiguration());
+    scanner.scanFiles(ImmutableList.of(new File("src/test/resources/metrics/lines.py"), new File("src/test/resources/metrics/comments.py")));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+    assertThat(project.getInt(PythonMetric.FILES)).isEqualTo(2);
+  }
+
+  @Test
+  public void comments() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/comments.py"));
+    assertThat(file.getInt(PythonMetric.COMMENT_LINES)).isEqualTo(1);
+    assertThat(file.getInt(PythonMetric.COMMENT_BLANK_LINES)).isEqualTo(2);
+    assertThat(file.getNoSonarTagLines()).contains(3).hasSize(1);
+  }
+
+  @Test
+  public void lines() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/lines.py"));
+    assertThat(file.getInt(PythonMetric.LINES)).isEqualTo(6);
+  }
+
+  @Test
+  public void lines_of_code() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/lines_of_code.py"));
+    assertThat(file.getInt(PythonMetric.LINES_OF_CODE)).isEqualTo(1);
+  }
+
+}

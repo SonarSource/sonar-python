@@ -17,18 +17,26 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.python.parser;
 
-package org.sonar.plugins.python;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Rule;
 
-import org.sonar.colorizer.MultilinesDocTokenizer;
+import static com.sonar.sslr.api.GenericTokenType.EOF;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.anyTokenButNot;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
 
-public class PythonDocStringTokenizer extends MultilinesDocTokenizer {
+public class PythonGrammar extends Grammar {
 
-  public PythonDocStringTokenizer(String tagBefore, String tagAfter) {
-    super("\"\"\"", "\"\"\"", tagBefore, tagAfter);
+  public Rule fileInput;
+
+  public PythonGrammar() {
+    fileInput.is(o2n(anyTokenButNot(EOF)), EOF);
   }
 
-  public PythonDocStringTokenizer() {
-    this("", "");
+  @Override
+  public Rule getRootRule() {
+    return fileInput;
   }
+
 }

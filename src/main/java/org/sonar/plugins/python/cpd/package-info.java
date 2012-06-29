@@ -18,28 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
-
-import net.sourceforge.pmd.cpd.Tokenizer;
-import org.sonar.api.batch.CpdMapping;
-import org.sonar.api.resources.Resource;
-import org.sonar.api.resources.Language;
-
-import java.util.List;
-
-public class PythonCpdMapping implements CpdMapping {
-
-  public Tokenizer getTokenizer() {
-    return new PythonTokenizer();
-  }
-
-  public Resource createResource(java.io.File file,
-      List<java.io.File> sourceDirs) {
-    return PythonFile.fromIOFile(file, sourceDirs);
-  }
-
-  public Language getLanguage() {
-    return Python.INSTANCE;
-  }
-
-}
+/**
+ * Support for detection of duplications.
+ */
+package org.sonar.plugins.python.cpd;

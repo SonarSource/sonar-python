@@ -17,24 +17,27 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.python.parser;
 
-package org.sonar.plugins.python;
+import org.sonar.python.PythonConfiguration;
 
-import org.sonar.api.resources.AbstractLanguage;
+import com.sonar.sslr.impl.Parser;
+import com.sonar.sslr.impl.events.ParsingEventListener;
+import org.sonar.python.lexer.PythonLexer;
 
-public class Python extends AbstractLanguage {
+public class PythonParser {
 
-  public static final String KEY = "py";
-
-  private static final String[] SUFFIXES = { "py" };
-  static final Python INSTANCE = new Python();
-
-  public Python() {
-    super(KEY, "Python");
+  private PythonParser() {
   }
 
-  public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
+  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
+    return create(new PythonConfiguration(), parsingEventListeners);
+  }
+
+  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
+    return Parser.builder(new PythonGrammar())
+        .withLexer(PythonLexer.create(conf))
+        .setParsingEventListeners(parsingEventListeners).build();
   }
 
 }

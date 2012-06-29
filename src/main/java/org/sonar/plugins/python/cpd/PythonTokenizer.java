@@ -18,57 +18,42 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.cpd;
 
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
 import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
+import org.sonar.python.PythonConfiguration;
+import org.sonar.python.lexer.PythonLexer;
 
-import org.antlr.runtime.*;
-import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.python.antlr.PythonLexer;
+import java.io.File;
+import java.nio.charset.Charset;
+import java.util.List;
 
 public class PythonTokenizer implements Tokenizer {
 
-  // override nextToken to set startPos
-  public static class MyLexer extends PythonLexer {
+  private final Charset charset;
 
-    public MyLexer(CharStream lexer) {
-      super(lexer);
-    }
-
-    public Token nextToken() {
-      startPos = getCharPositionInLine();
-      return super.nextToken();
-    }
+  public PythonTokenizer(Charset charset) {
+    this.charset = charset;
   }
 
   public final void tokenize(SourceCode source, Tokens cpdTokens) {
+    Lexer lexer = PythonLexer.create(new PythonConfiguration(charset));
     String fileName = source.getFileName();
-
-    try {
-      PythonLexer tokens = new MyLexer(new ANTLRFileStream(fileName));
-
-      Token token = tokens.nextToken();
-      while (token.getType() != Token.EOF) {
-        if (token.getChannel() == Token.DEFAULT_CHANNEL
-            && token.getType() != PythonLexer.LEADING_WS) {
-          cpdTokens.add(new TokenEntry(token.getText(), fileName, token.getLine()));
-        }
-        token = tokens.nextToken();
-      }
-    } catch (Exception e) {
-      String msg = new StringBuilder()
-          .append("Cannot tokenize the file '")
-          .append(fileName)
-          .append("', details: '")
-          .append(e)
-          .append("'")
-          .toString();
-      throw new SonarException(msg, e);
+    List<Token> tokens = lexer.lex(new File(fileName));
+    for (Token token : tokens) {
+      TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
+      cpdTokens.add(cpdToken);
     }
-
     cpdTokens.add(TokenEntry.getEOF());
   }
+
+  private String getTokenImage(Token token) {
+    return token.getValue();
+  }
+
 }

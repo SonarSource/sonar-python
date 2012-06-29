@@ -20,6 +20,10 @@
 
 package org.sonar.plugins.python;
 
+import org.sonar.plugins.python.colorizer.PythonColorizer;
+
+import org.sonar.plugins.python.cpd.PythonCpdMapping;
+
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

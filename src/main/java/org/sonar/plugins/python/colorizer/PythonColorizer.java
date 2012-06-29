@@ -18,15 +18,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.colorizer;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.sonar.plugins.python.Python;
 
 import org.sonar.api.web.CodeColorizerFormat;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.StringTokenizer;
 import org.sonar.colorizer.Tokenizer;
+import org.sonar.python.api.PythonKeyword;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class PythonColorizer extends CodeColorizerFormat {
   private List<Tokenizer> tokenizers;
@@ -39,9 +42,9 @@ public final class PythonColorizer extends CodeColorizerFormat {
   public List<Tokenizer> getTokenizers() {
     if (tokenizers == null) {
       tokenizers = new ArrayList<Tokenizer>();
-      
+
       String tagAfter = "</span>";
-      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", tagAfter, Python.KEYWORDS));
+      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", tagAfter, PythonKeyword.keywordValues()));
       tokenizers.add(new StringTokenizer("<span class=\"s\">", tagAfter));
       tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", tagAfter));
       tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", tagAfter));
@@ -55,4 +58,5 @@ public final class PythonColorizer extends CodeColorizerFormat {
     }
     return tokenizers;
   }
+
 }

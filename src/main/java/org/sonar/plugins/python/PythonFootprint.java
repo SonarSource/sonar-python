@@ -20,12 +20,13 @@
 
 package org.sonar.plugins.python;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import org.sonar.python.api.PythonKeyword;
 import org.sonar.squid.recognizer.Detector;
 import org.sonar.squid.recognizer.KeywordsDetector;
 import org.sonar.squid.recognizer.LanguageFootprint;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class PythonFootprint implements LanguageFootprint {
 
@@ -39,7 +40,7 @@ public class PythonFootprint implements LanguageFootprint {
     // wild guess...
     // detectors.add(new EndWithDetector(0.3, ':', ')'));
 
-    detectors.add(new KeywordsDetector(0.3, Python.KEYWORDS));
+    detectors.add(new KeywordsDetector(0.3, PythonKeyword.keywordValues()));
 
     return detectors;
   }

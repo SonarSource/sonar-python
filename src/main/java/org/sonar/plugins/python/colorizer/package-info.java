@@ -18,23 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
-
-import org.sonar.api.resources.AbstractLanguage;
-
-public class Python extends AbstractLanguage {
-
-  public static final String KEY = "py";
-
-  private static final String[] SUFFIXES = { "py" };
-  static final Python INSTANCE = new Python();
-
-  public Python() {
-    super(KEY, "Python");
-  }
-
-  public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
-  }
-
-}
+/**
+ * Support for code colorizer.
+ */
+package org.sonar.plugins.python.colorizer;

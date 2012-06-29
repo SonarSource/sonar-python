@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.cpd;
 
 import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
@@ -27,6 +27,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -36,14 +37,12 @@ public class PythonTokenizerTest {
   @Test
   public void shouldWorkOnValidInput() throws URISyntaxException {
     File file = new File(getClass().getResource("/org/sonar/plugins/python/code_chunks_2.py").toURI());
-
     SourceCode source = new SourceCode(new SourceCode.FileCodeLoader(file, "key"));
     Tokens cpdTokens = new Tokens();
-    PythonTokenizer tokenizer = new PythonTokenizer();
+    PythonTokenizer tokenizer = new PythonTokenizer(Charset.forName("UTF-8"));
     tokenizer.tokenize(source, cpdTokens);
     List<TokenEntry> list = cpdTokens.getTokens();
-
-    assertThat(list.size()).isEqualTo(111);
+    assertThat(list.size()).isEqualTo(93);
   }
 
 }

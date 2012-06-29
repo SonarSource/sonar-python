@@ -17,15 +17,36 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.python.api;
 
-package org.sonar.plugins.python;
+import org.sonar.squid.measures.CalculatedMetricFormula;
+import org.sonar.squid.measures.MetricDef;
 
-import org.sonar.colorizer.InlineDocTokenizer;
+public enum PythonMetric implements MetricDef {
+  FILES,
+  LINES,
+  LINES_OF_CODE,
+  COMMENT_LINES,
+  COMMENT_BLANK_LINES;
 
-public class PythonDocTokenizer extends InlineDocTokenizer {
+  public String getName() {
+    return name();
+  }
 
-  public PythonDocTokenizer(String tagBefore, String tagAfter) {
-    super("#", tagBefore, tagAfter);
+  public boolean isCalculatedMetric() {
+    return false;
+  }
+
+  public boolean aggregateIfThereIsAlreadyAValue() {
+    return true;
+  }
+
+  public boolean isThereAggregationFormula() {
+    return true;
+  }
+
+  public CalculatedMetricFormula getCalculatedMetricFormula() {
+    return null;
   }
 
 }

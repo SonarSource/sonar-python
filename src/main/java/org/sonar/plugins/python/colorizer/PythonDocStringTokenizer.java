@@ -18,23 +18,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.colorizer;
 
-import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.colorizer.MultilinesDocTokenizer;
 
-public class Python extends AbstractLanguage {
+public class PythonDocStringTokenizer extends MultilinesDocTokenizer {
 
-  public static final String KEY = "py";
-
-  private static final String[] SUFFIXES = { "py" };
-  static final Python INSTANCE = new Python();
-
-  public Python() {
-    super(KEY, "Python");
-  }
-
-  public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
+  public PythonDocStringTokenizer(String tagBefore, String tagAfter) {
+    super("\"\"\"", "\"\"\"", tagBefore, tagAfter);
   }
 
 }

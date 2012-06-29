@@ -18,21 +18,33 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.cpd;
 
-import org.junit.Test;
+import org.sonar.plugins.python.Python;
 
-import java.net.URISyntaxException;
+import net.sourceforge.pmd.cpd.Tokenizer;
+import org.sonar.api.batch.AbstractCpdMapping;
+import org.sonar.api.resources.Language;
+import org.sonar.api.resources.ProjectFileSystem;
 
-import static org.fest.assertions.Assertions.assertThat;
+import java.nio.charset.Charset;
 
-public class PythonCpdMappingTest {
+public class PythonCpdMapping extends AbstractCpdMapping {
 
-  @Test
-  public void testMapping() throws URISyntaxException {
-    PythonCpdMapping mapping = new PythonCpdMapping();
-    assertThat(mapping.getLanguage()).isEqualTo(new Python());
-    assertThat(mapping.getTokenizer()).isInstanceOf(PythonTokenizer.class);
+  private final Python language;
+  private final Charset charset;
+
+  public PythonCpdMapping(Python language, ProjectFileSystem fs) {
+    this.language = language;
+    this.charset = fs.getSourceCharset();
+  }
+
+  public Tokenizer getTokenizer() {
+    return new PythonTokenizer(charset);
+  }
+
+  public Language getLanguage() {
+    return language;
   }
 
 }

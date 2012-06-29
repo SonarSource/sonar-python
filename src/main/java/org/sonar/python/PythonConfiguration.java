@@ -17,24 +17,29 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.python;
 
-package org.sonar.plugins.python;
+import org.sonar.squid.api.SquidConfiguration;
 
-import org.sonar.api.resources.AbstractLanguage;
+import java.nio.charset.Charset;
 
-public class Python extends AbstractLanguage {
+public class PythonConfiguration extends SquidConfiguration {
 
-  public static final String KEY = "py";
+  private boolean ignoreHeaderComments;
 
-  private static final String[] SUFFIXES = { "py" };
-  static final Python INSTANCE = new Python();
-
-  public Python() {
-    super(KEY, "Python");
+  public PythonConfiguration() {
   }
 
-  public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
+  public PythonConfiguration(Charset charset) {
+    super(charset);
+  }
+
+  public void setIgnoreHeaderComments(boolean ignoreHeaderComments) {
+    this.ignoreHeaderComments = ignoreHeaderComments;
+  }
+
+  public boolean getIgnoreHeaderComments() {
+    return ignoreHeaderComments;
   }
 
 }

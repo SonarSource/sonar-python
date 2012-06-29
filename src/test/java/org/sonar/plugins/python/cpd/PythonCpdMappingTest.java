@@ -18,23 +18,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.python;
+package org.sonar.plugins.python.cpd;
 
-import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.plugins.python.Python;
 
-public class Python extends AbstractLanguage {
+import org.sonar.plugins.python.cpd.PythonCpdMapping;
 
-  public static final String KEY = "py";
+import org.sonar.plugins.python.cpd.PythonTokenizer;
 
-  private static final String[] SUFFIXES = { "py" };
-  static final Python INSTANCE = new Python();
+import org.junit.Test;
+import org.sonar.api.resources.ProjectFileSystem;
 
-  public Python() {
-    super(KEY, "Python");
-  }
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
-  public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
+public class PythonCpdMappingTest {
+
+  @Test
+  public void test() {
+    Python language = mock(Python.class);
+    ProjectFileSystem fs = mock(ProjectFileSystem.class);
+    PythonCpdMapping mapping = new PythonCpdMapping(language, fs);
+    assertThat(mapping.getLanguage()).isSameAs(language);
+    assertThat(mapping.getTokenizer()).isInstanceOf(PythonTokenizer.class);
   }
 
 }

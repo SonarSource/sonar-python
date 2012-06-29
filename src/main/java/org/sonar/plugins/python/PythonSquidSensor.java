@@ -20,10 +20,6 @@
 
 package org.sonar.plugins.python;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.sonar.api.batch.SensorContext;
@@ -32,6 +28,10 @@ import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.text.Source;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 
 public final class PythonSquidSensor extends PythonSensor {
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {

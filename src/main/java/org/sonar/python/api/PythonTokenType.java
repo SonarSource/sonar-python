@@ -17,24 +17,29 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.python.api;
 
-package org.sonar.plugins.python;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.TokenType;
 
-import org.sonar.api.resources.AbstractLanguage;
+public enum PythonTokenType implements TokenType {
+  NUMBER,
+  STRING,
 
-public class Python extends AbstractLanguage {
+  INDENT,
+  DEDENT,
+  NEWLINE;
 
-  public static final String KEY = "py";
-
-  private static final String[] SUFFIXES = { "py" };
-  static final Python INSTANCE = new Python();
-
-  public Python() {
-    super(KEY, "Python");
+  public String getName() {
+    return name();
   }
 
-  public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
+  public String getValue() {
+    return name();
+  }
+
+  public boolean hasToBeSkippedFromAst(AstNode node) {
+    return false;
   }
 
 }
