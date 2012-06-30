@@ -1,0 +1,5 @@
+#
+# Comment
+#
+
+print("Hello world")

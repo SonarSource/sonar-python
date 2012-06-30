@@ -27,6 +27,7 @@ import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
 import org.sonar.python.PythonConfiguration;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.lexer.PythonLexer;
 
 import java.io.File;
@@ -46,8 +47,10 @@ public class PythonTokenizer implements Tokenizer {
     String fileName = source.getFileName();
     List<Token> tokens = lexer.lex(new File(fileName));
     for (Token token : tokens) {
-      TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
-      cpdTokens.add(cpdToken);
+      if (token.getType() != PythonTokenType.NEWLINE && token.getType() != PythonTokenType.DEDENT && token.getType() != PythonTokenType.INDENT) {
+        TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
+        cpdTokens.add(cpdToken);
+      }
     }
     cpdTokens.add(TokenEntry.getEOF());
   }

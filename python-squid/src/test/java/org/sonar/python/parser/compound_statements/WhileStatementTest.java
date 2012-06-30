@@ -17,27 +17,37 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.python.parser.compound_statements;
 
 import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
+import org.junit.Before;
+import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
+import org.sonar.python.parser.PythonParser;
 
-public class PythonParser {
+import static com.sonar.sslr.test.parser.ParserMatchers.parse;
+import static org.junit.Assert.assertThat;
 
-  private PythonParser() {
+/**
+ * http://docs.python.org/release/3.2/reference/compound_stmts.html#the-while-statement
+ */
+public class WhileStatementTest {
+
+  Parser<PythonGrammar> p = PythonParser.create();
+  PythonGrammar g = p.getGrammar();
+
+  @Before
+  public void init() {
+    p.setRootRule(g.while_stmt);
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
+  @Test
+  public void ok() {
+    g.expression.mock();
+    g.suite.mock();
 
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+    assertThat(p, parse("while expression : suite"));
+    assertThat(p, parse("while expression : suite else : suite"));
   }
 
 }

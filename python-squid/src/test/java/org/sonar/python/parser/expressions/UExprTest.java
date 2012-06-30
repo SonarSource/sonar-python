@@ -17,27 +17,40 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.python.parser.expressions;
 
 import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
+import org.junit.Before;
+import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
+import org.sonar.python.parser.PythonParser;
 
-public class PythonParser {
+import static com.sonar.sslr.test.parser.ParserMatchers.parse;
+import static org.junit.Assert.assertThat;
 
-  private PythonParser() {
+public class UExprTest {
+
+  Parser<PythonGrammar> p = PythonParser.create();
+  PythonGrammar g = p.getGrammar();
+
+  @Before
+  public void init() {
+    p.setRootRule(g.u_expr);
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
+  @Test
+  public void ok() {
+    g.power.mock();
+
+    assertThat(p, parse("power"));
+    assertThat(p, parse("- power"));
+    assertThat(p, parse("+ power"));
+    assertThat(p, parse("~ power"));
   }
 
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  @Test
+  public void realLife() {
+    assertThat(p, parse("-2**2"));
   }
 
 }

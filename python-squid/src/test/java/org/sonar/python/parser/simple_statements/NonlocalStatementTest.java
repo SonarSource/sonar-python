@@ -17,26 +17,34 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.python.parser.simple_statements;
 
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.api.Rule;
+import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.api.GenericTokenType.EOF;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.anyTokenButNot;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
+import static com.sonar.sslr.test.parser.ParserMatchers.parse;
+import static org.junit.Assert.assertThat;
 
-public class PythonGrammar extends Grammar {
+/**
+ * http://docs.python.org/release/3.2/reference/simple_stmts.html#grammar-token-nonlocal_stmt
+ */
+public class NonlocalStatementTest {
 
-  public Rule fileInput;
+  Parser<PythonGrammar> p = PythonParser.create();
+  PythonGrammar g = p.getGrammar();
 
-  public PythonGrammar() {
-    fileInput.is(o2n(anyTokenButNot(EOF)), EOF);
+  @Before
+  public void init() {
+    p.setRootRule(g.nonlocal_stmt);
   }
 
-  @Override
-  public Rule getRootRule() {
-    return fileInput;
+  @Test
+  public void ok() {
+    assertThat(p, parse("nonlocal IDENTIFIER"));
+    assertThat(p, parse("nonlocal IDENTIFIER , IDENTIFIER"));
   }
 
 }

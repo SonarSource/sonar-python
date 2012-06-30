@@ -19,25 +19,13 @@
  */
 package org.sonar.python.parser;
 
-import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
+public final class PythonTestUtils {
 
-public class PythonParser {
-
-  private PythonParser() {
+  public static String appendNewLine(String s) {
+    return s + "\n";
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
-
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  private PythonTestUtils() {
   }
 
 }

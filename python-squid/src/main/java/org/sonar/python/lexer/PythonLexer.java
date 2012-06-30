@@ -29,6 +29,8 @@ import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
+import java.util.Stack;
+
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.and;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.commentRegexp;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.o2n;
@@ -46,9 +48,15 @@ public class PythonLexer {
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
 
   public static Lexer create(PythonConfiguration conf) {
+    Stack<Integer> indentationStack = new Stack<Integer>();
+
     return Lexer.builder()
         .withCharset(conf.getCharset())
         .withFailIfNoChannelToConsumeOneCharacter(true)
+
+        .withChannel(new IndentationChannel(indentationStack))
+        .withPreprocessor(new IndentationPreprocessor(indentationStack))
+        .withChannel(regexp(PythonTokenType.NEWLINE, "\\r?\\n|\\r"))
 
         .withChannel(new BlackHoleChannel("\\s++"))
 
