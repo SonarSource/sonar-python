@@ -34,6 +34,7 @@ public class PythonGrammar extends Grammar {
   public Rule sliceop;
   public Rule listmaker;
   public Rule testlist_comp;
+  public Rule dictorsetmaker;
 
   // Expressions
 

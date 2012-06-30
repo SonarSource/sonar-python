@@ -25,18 +25,16 @@ import org.sonar.channel.Channel;
 import org.sonar.channel.CodeReader;
 import org.sonar.python.api.PythonTokenType;
 
-import java.util.Stack;
-
 /**
  * http://docs.python.org/release/3.2/reference/lexical_analysis.html#indentation
  */
 public class IndentationChannel extends Channel<Lexer> {
 
-  private final Stack<Integer> stack;
   private final StringBuilder buffer = new StringBuilder();
+  private final LexerState lexerState;
 
-  public IndentationChannel(Stack<Integer> indentationStack) {
-    this.stack = indentationStack;
+  public IndentationChannel(LexerState lexerState) {
+    this.lexerState = lexerState;
   }
 
   @Override
@@ -51,14 +49,18 @@ public class IndentationChannel extends Channel<Lexer> {
 
     buffer.setLength(0);
     char ch = (char) code.peek();
-    while (ch == ' ' || ch == '\t') {
+    while (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n') {
       buffer.append((char) code.pop());
-      indentationLevel++;
+      if (ch == '\r' || ch == '\n') {
+        indentationLevel = 0;
+      } else {
+        indentationLevel++;
+      }
       ch = (char) code.peek();
     }
 
-    if (indentationLevel > stack.peek()) {
-      stack.push(indentationLevel);
+    if (indentationLevel > lexerState.indentationStack.peek()) {
+      lexerState.indentationStack.push(indentationLevel);
       lexer.addToken(Token.builder()
           .setType(PythonTokenType.INDENT)
           .setValueAndOriginalValue(buffer.toString())
@@ -66,9 +68,9 @@ public class IndentationChannel extends Channel<Lexer> {
           .setLine(line)
           .setColumn(column)
           .build());
-    } else if (indentationLevel < stack.peek()) {
-      while (indentationLevel < stack.peek()) {
-        stack.pop();
+    } else if (indentationLevel < lexerState.indentationStack.peek()) {
+      while (indentationLevel < lexerState.indentationStack.peek()) {
+        lexerState.indentationStack.pop();
         lexer.addToken(Token.builder()
             .setType(PythonTokenType.DEDENT)
             .setValueAndOriginalValue(buffer.toString())

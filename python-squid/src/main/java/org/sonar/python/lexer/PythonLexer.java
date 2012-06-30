@@ -29,8 +29,6 @@ import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
-import java.util.Stack;
-
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.and;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.commentRegexp;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.o2n;
@@ -48,14 +46,16 @@ public class PythonLexer {
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
 
   public static Lexer create(PythonConfiguration conf) {
-    Stack<Integer> indentationStack = new Stack<Integer>();
+    LexerState lexerState = new LexerState();
 
     return Lexer.builder()
         .withCharset(conf.getCharset())
         .withFailIfNoChannelToConsumeOneCharacter(true)
 
-        .withChannel(new IndentationChannel(indentationStack))
-        .withPreprocessor(new IndentationPreprocessor(indentationStack))
+        .withChannel(new NewLineChannel(lexerState))
+
+        .withChannel(new IndentationChannel(lexerState))
+        .withPreprocessor(new IndentationPreprocessor(lexerState))
         .withChannel(regexp(PythonTokenType.NEWLINE, "\\r?\\n|\\r"))
 
         .withChannel(new BlackHoleChannel("\\s++"))
@@ -65,10 +65,9 @@ public class PythonLexer {
 
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
         // TODO 2.7 allows to use U"hello world" and UR"hello world"
+        .withChannel(new LongStringLiteralsChannel())
         .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
         .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
-        .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\'\'\'([^\\\\]*+(\\\\[\\s\\S])?+)*+\'\'\'"))
-        .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\"\"\"([^\\\\]*+(\\\\[\\s\\S])?+)*+\"\"\""))
 
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#floating-point-literals
         .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++\\.[0-9]*+" + EXP + "?+"))
@@ -94,5 +93,4 @@ public class PythonLexer {
 
         .build();
   }
-
 }

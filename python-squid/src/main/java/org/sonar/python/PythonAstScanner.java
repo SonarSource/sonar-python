@@ -89,7 +89,7 @@ public class PythonAstScanner {
           @Override
           public String getContents(String comment) {
             // Comment always starts with "#"
-            return comment.substring(1);
+            return comment.substring(comment.indexOf('#'));
           }
         });
 

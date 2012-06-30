@@ -50,6 +50,7 @@ public class PythonGrammarImpl extends PythonGrammar {
    * http://docs.python.org/release/3.2/reference/expressions.html
    */
   private void expressions() {
+    comprehension.mock();
 
     // attributeref.is(primary, ".", IDENTIFIER);
     attributeref.mock();
@@ -97,7 +98,7 @@ public class PythonGrammarImpl extends PythonGrammar {
 
     // power.is(primary, opt("**", u_expr));
 
-    // Next 9 rules were taken from http://docs.python.org/reference/grammar.html
+    // Next 10 rules were taken from http://docs.python.org/reference/grammar.html
     power.is(atom, o2n(trailer), opt("**", factor));
     factor.is(or(
         and(or("+", "-", "~"), factor),
@@ -115,14 +116,17 @@ public class PythonGrammarImpl extends PythonGrammar {
     atom.override(or(
         and("(", opt(or(yield_expression, testlist_comp)), ")"),
         and("[", opt(listmaker), "]"),
-        // '{' [dictorsetmaker] '}' |
+        and("{", opt(dictorsetmaker), "}"),
         // '`' testlist1 '`' |
         IDENTIFIER,
         literal));
     listmaker.is(
         conditional_expression,
         or( /* list_for , */and(o2n(",", conditional_expression), opt(","))));
-    testlist_comp.is(conditional_expression, or(/* comp_for, */o2n(",", conditional_expression), opt(",")));
+    testlist_comp.is(conditional_expression, or(/* comp_for, */and(o2n(",", conditional_expression), opt(","))));
+    dictorsetmaker.is(or(
+        and(conditional_expression, ":", conditional_expression, or(/* comp_for, */ and(o2n(conditional_expression, ":", conditional_expression), opt(",")))),
+        and(conditional_expression, or(/* comp_for, */and(o2n(",", conditional_expression), opt(","))))));
 
     u_expr.is(or(
         and("-", u_expr),
@@ -214,9 +218,9 @@ public class PythonGrammarImpl extends PythonGrammar {
     continue_stmt.is("continue");
 
     import_stmt.is(or(
-        and("import", module, opt("as", name), o2n(",", module, opt("as", name) )),
-        and("from", relative_module, "import", IDENTIFIER, opt("as", name), o2n( ",", IDENTIFIER, opt("as", name) )),
-        and("from", relative_module, "import", "(", IDENTIFIER, opt("as", name), o2n( ",", IDENTIFIER, opt("as", name) ), opt(","), ")"),
+        and("import", module, opt("as", name), o2n(",", module, opt("as", name))),
+        and("from", relative_module, "import", IDENTIFIER, opt("as", name), o2n(",", IDENTIFIER, opt("as", name))),
+        and("from", relative_module, "import", "(", IDENTIFIER, opt("as", name), o2n(",", IDENTIFIER, opt("as", name)), opt(","), ")"),
         and("from", module, "import", "*")));
     module.is(o2n(IDENTIFIER, "."), IDENTIFIER);
     relative_module.is(or(
@@ -278,7 +282,7 @@ public class PythonGrammarImpl extends PythonGrammar {
     funcname.is(IDENTIFIER);
 
     classdef.is(opt(decorators), "class", classname, opt(inheritance), ":", suite);
-    inheritance.is("(", opt(or(and(argument_list, ","), comprehension)), ")");
+    inheritance.is("(", opt(or(and(argument_list, opt(",")), comprehension)), ")");
     classname.is(IDENTIFIER);
   }
 

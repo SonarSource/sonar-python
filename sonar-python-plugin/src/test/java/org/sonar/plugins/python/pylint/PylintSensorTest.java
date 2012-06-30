@@ -39,7 +39,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PylintSensorTest {
-  private PylintSensor sensor;
   private Project project;
   private ProjectFileSystem pfs;
   private RuleFinder ruleFinder;

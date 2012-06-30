@@ -28,36 +28,34 @@ import org.sonar.python.api.PythonTokenType;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * http://docs.python.org/release/3.2/reference/lexical_analysis.html#indentation
  */
 public class IndentationPreprocessor extends Preprocessor {
 
-  private final Stack<Integer> stack;
+  private final LexerState lexerState;
 
-  public IndentationPreprocessor(Stack<Integer> indentationStack) {
-    this.stack = indentationStack;
+  public IndentationPreprocessor(LexerState lexerState) {
+    this.lexerState = lexerState;
   }
 
   @Override
   public void init() {
-    stack.clear();
-    stack.push(0);
+    lexerState.reset();
   }
 
   @Override
   public PreprocessorAction process(List<Token> tokens) {
     Token token = tokens.get(0);
     if (token.getType() == GenericTokenType.EOF) {
-      if (stack.isEmpty()) {
+      if (lexerState.indentationStack.isEmpty()) {
         return PreprocessorAction.NO_OPERATION;
       }
 
       List<Token> tokensToInject = Lists.newArrayList();
-      while (stack.peek() > 0) {
-        stack.pop();
+      while (lexerState.indentationStack.peek() > 0) {
+        lexerState.indentationStack.pop();
         tokensToInject.add(Token.builder(token)
             .setType(PythonTokenType.DEDENT)
             .setValueAndOriginalValue("")

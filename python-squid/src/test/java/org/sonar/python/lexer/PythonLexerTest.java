@@ -29,6 +29,8 @@ import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class PythonLexerTest {
@@ -46,7 +48,7 @@ public class PythonLexerTest {
   }
 
   @Test
-  public void string_literals() {
+  public void shortstring_literals() {
     assertThat("empty", lexer.lex("''"), hasToken("''", PythonTokenType.STRING));
     assertThat("empty", lexer.lex("\"\""), hasToken("\"\"", PythonTokenType.STRING));
 
@@ -59,9 +61,20 @@ public class PythonLexerTest {
 
     assertThat("escaped single quote", lexer.lex("'\\''"), hasToken("'\\''", PythonTokenType.STRING));
     assertThat("escaped double quote", lexer.lex("\"\\\"\""), hasToken("\"\\\"\"", PythonTokenType.STRING));
+  }
 
-    assertThat("multiline", lexer.lex("'''\\\n'''"), hasToken("'\\\n'", PythonTokenType.STRING));
-    assertThat("multiline", lexer.lex("\"\"\"\\\n\"\"\""), hasToken("\"\\\n\"", PythonTokenType.STRING));
+  @Test
+  public void longstring_literals() {
+    assertThat("multiline", lexer.lex("'''\n'''"), hasToken("'''\n'''", PythonTokenType.STRING));
+    assertThat("multiline", lexer.lex("\"\"\"\n\"\"\""), hasToken("\"\"\"\n\"\"\"", PythonTokenType.STRING));
+
+    assertThat("stringprefix", lexer.lex("r'''\n'''"), hasToken("r'''\n'''", PythonTokenType.STRING));
+    assertThat("stringprefix", lexer.lex("R'''\n'''"), hasToken("R'''\n'''", PythonTokenType.STRING));
+    assertThat("stringprefix", lexer.lex("r\"\"\"\n\"\"\""), hasToken("r\"\"\"\n\"\"\"", PythonTokenType.STRING));
+    assertThat("stringprefix", lexer.lex("R\"\"\"\n\"\"\""), hasToken("R\"\"\"\n\"\"\"", PythonTokenType.STRING));
+
+    assertThat("escaped single quote", lexer.lex("'''\\''''"), hasToken("'''\\''''", PythonTokenType.STRING));
+    assertThat("escaped double quote", lexer.lex("\"\"\"\\\"\"\"\""), hasToken("\"\"\"\\\"\"\"\"", PythonTokenType.STRING));
   }
 
   @Test
@@ -92,6 +105,27 @@ public class PythonLexerTest {
   public void operators_and_delimiters() {
     assertThat(lexer.lex("<<"), hasToken("<<", PythonPunctuator.LEFT_OP));
     assertThat(lexer.lex("+="), hasToken("+=", PythonPunctuator.PLUS_ASSIGN));
+  }
+
+  @Test
+  public void indent_dedent() {
+    assertThat(lexer.lex("    statement\n  statement"), allOf(hasToken("    ", PythonTokenType.INDENT), hasToken("  ", PythonTokenType.DEDENT)));
+  }
+
+  @Test
+  public void implicit_line_joining() {
+    assertThat(lexer.lex("month_names = ['January', \n 'December']"), not(hasToken("\n", PythonTokenType.NEWLINE)));
+  }
+
+  @Test
+  public void explicit_line_joining() {
+    assertThat(lexer.lex("line\r\nline"), hasToken(PythonTokenType.NEWLINE));
+    assertThat(lexer.lex("line\rline"), hasToken(PythonTokenType.NEWLINE));
+    assertThat(lexer.lex("line\nline"), hasToken(PythonTokenType.NEWLINE));
+
+    assertThat(lexer.lex("line\\\r\nline"), not(hasToken(PythonTokenType.NEWLINE)));
+    assertThat(lexer.lex("line\\\rline"), not(hasToken(PythonTokenType.NEWLINE)));
+    assertThat(lexer.lex("line\\\nline"), not(hasToken(PythonTokenType.NEWLINE)));
   }
 
 }
