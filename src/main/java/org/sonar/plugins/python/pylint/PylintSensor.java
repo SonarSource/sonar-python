@@ -24,12 +24,12 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.Violation;
-import org.sonar.plugins.python.PythonFile;
 import org.sonar.plugins.python.PythonPlugin;
 import org.sonar.plugins.python.PythonSensor;
 
@@ -58,7 +58,7 @@ public class PylintSensor extends PythonSensor {
   }
 
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    PythonFile pyfile = PythonFile.fromIOFile(inputFile.getFile(), project);
+    File pyfile = File.fromIOFile(inputFile.getFile(), project);
 
     String pylintConfigPath = getPylintConfigPath(project);
     String pylintPath = conf.getString(PylintConfiguration.PYLINT_KEY, null);

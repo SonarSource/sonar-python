@@ -24,6 +24,7 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
+import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
@@ -31,13 +32,12 @@ import org.sonar.api.utils.SonarException;
 import java.io.IOException;
 import java.util.List;
 
-
 public final class PythonComplexitySensor extends PythonSensor {
-  private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12, 20, 30 };
-  private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
+  private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
+  private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
 
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    PythonFile pyfile = PythonFile.fromIOFile(inputFile.getFile(), project);
+    File pyfile = File.fromIOFile(inputFile.getFile(), project);
     PythonComplexityAnalyzer analyzer = new PythonComplexityAnalyzer(project);
 
     // contains global (file scope) complexity
@@ -68,7 +68,7 @@ public final class PythonComplexitySensor extends PythonSensor {
     fileDistribution.add((double) fileComplexity);
     sensorContext.saveMeasure(pyfile, fileDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
 
-    if ( !functionStats.isEmpty()) {
+    if (!functionStats.isEmpty()) {
       // function complexity
       sensorContext.saveMeasure(pyfile, CoreMetrics.FUNCTION_COMPLEXITY, (double) cumFuncComplexity / functionStats.size());
 

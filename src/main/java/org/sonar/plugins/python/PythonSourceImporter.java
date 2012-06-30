@@ -20,20 +20,12 @@
 
 package org.sonar.plugins.python;
 
-import java.io.File;
-import java.util.List;
-
 import org.sonar.api.batch.AbstractSourceImporter;
-import org.sonar.api.resources.Resource;
 
 public class PythonSourceImporter extends AbstractSourceImporter {
 
   public PythonSourceImporter(Python python) {
     super(python);
   }
-  
-  @Override
-  protected Resource createResource(File file, List<File> sourceDirs, boolean unitTest) {
-    return file != null ? PythonFile.fromIOFile(file, sourceDirs) : null;
-  }
+
 }
