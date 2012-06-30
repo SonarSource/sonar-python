@@ -26,6 +26,9 @@ public enum PythonMetric implements MetricDef {
   FILES,
   LINES,
   LINES_OF_CODE,
+  STATEMENTS,
+  FUNCTIONS,
+  COMPLEXITY,
   COMMENT_LINES,
   COMMENT_BLANK_LINES;
 

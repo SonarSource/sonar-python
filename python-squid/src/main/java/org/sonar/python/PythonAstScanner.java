@@ -19,12 +19,15 @@
  */
 package org.sonar.python;
 
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.CommentAnalyser;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import com.sonar.sslr.squid.SquidAstVisitorContextImpl;
 import com.sonar.sslr.squid.metrics.CommentsVisitor;
+import com.sonar.sslr.squid.metrics.ComplexityVisitor;
+import com.sonar.sslr.squid.metrics.CounterVisitor;
 import com.sonar.sslr.squid.metrics.LinesVisitor;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
@@ -97,6 +100,28 @@ public class PythonAstScanner {
         .withBlankCommentMetric(PythonMetric.COMMENT_BLANK_LINES)
         .withNoSonar(true)
         .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
+        .build());
+    builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
+        .setMetricDef(PythonMetric.STATEMENTS)
+        .subscribeTo(parser.getGrammar().statement)
+        .build());
+
+    AstNodeType[] complexityAstNodeType = new AstNodeType[] {
+      // Entry points
+      parser.getGrammar().funcdef,
+
+      // Branching nodes
+      parser.getGrammar().if_stmt,
+      parser.getGrammar().while_stmt,
+      parser.getGrammar().for_stmt,
+      parser.getGrammar().return_stmt,
+      parser.getGrammar().raise_stmt,
+        // TODO add catch
+        // TODO Expressions: TODO ?, &&, ||
+    };
+    builder.withSquidAstVisitor(ComplexityVisitor.<PythonGrammar> builder()
+        .setMetricDef(PythonMetric.COMPLEXITY)
+        .subscribeTo(complexityAstNodeType)
         .build());
 
     return builder.build();

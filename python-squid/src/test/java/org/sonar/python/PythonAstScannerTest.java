@@ -21,6 +21,7 @@ package org.sonar.python;
 
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.squid.AstScanner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
@@ -60,6 +61,26 @@ public class PythonAstScannerTest {
   public void lines_of_code() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/lines_of_code.py"));
     assertThat(file.getInt(PythonMetric.LINES_OF_CODE)).isEqualTo(1);
+  }
+
+  @Test
+  public void statements() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/statements.py"));
+    assertThat(file.getInt(PythonMetric.STATEMENTS)).isEqualTo(1);
+  }
+
+  @Ignore("not implemented")
+  @Test
+  public void functions() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/functions.py"));
+    assertThat(file.getInt(PythonMetric.FUNCTIONS)).isEqualTo(3);
+  }
+
+  @Ignore("not implemented")
+  @Test
+  public void complexity() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/complexity.py"));
+    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(3);
   }
 
 }
