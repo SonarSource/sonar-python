@@ -20,38 +20,77 @@
 
 package org.sonar.plugins.python;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import com.sonar.sslr.squid.AstScanner;
+import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.resources.InputFile;
+import org.sonar.api.resources.File;
+import org.sonar.api.resources.InputFileUtils;
 import org.sonar.api.resources.Project;
-import org.sonar.squid.measures.Metric;
-import org.sonar.squid.text.Source;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.python.PythonConfiguration;
+import org.sonar.python.api.PythonMetric;
+import org.sonar.python.parser.PythonGrammar;
+import org.sonar.squid.api.SourceCode;
+import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.indexer.QueryByType;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
+import java.util.Collection;
 
-public final class PythonSquidSensor extends PythonSensor {
-  protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    // the comment syntax cannot be controlled fully due to poorness of sonar API:
-    // the multiline and single-line java syntax are hardcoded, only
-    // additional single-line comment syntax can be specified. A better
-    // implementation should be possible with one of the future sonar releases
+public final class PythonSquidSensor implements Sensor {
 
-    Reader reader = null;
-    try {
-      reader = new StringReader(FileUtils.readFileToString(inputFile.getFile(), project.getFileSystem().getSourceCharset().name()));
-      PythonFile pyfile = PythonFile.fromIOFile(inputFile.getFile(), project);
-      Source source = new Source(reader, new PythonRecognizer(), new String[] { "#" });
+  private Project project;
+  private SensorContext context;
+  private AstScanner<PythonGrammar> scanner;
 
-      sensorContext.saveMeasure(pyfile, CoreMetrics.FILES, 1.0);
-      sensorContext.saveMeasure(pyfile, CoreMetrics.LINES, (double) source.getMeasure(Metric.LINES));
-      sensorContext.saveMeasure(pyfile, CoreMetrics.COMMENT_LINES, (double) source.getMeasure(Metric.COMMENT_LINES));
-      sensorContext.saveMeasure(pyfile, CoreMetrics.NCLOC, (double) source.getMeasure(Metric.LINES_OF_CODE));
-    } finally {
-      IOUtils.closeQuietly(reader);
+  public boolean shouldExecuteOnProject(Project project) {
+    return Python.KEY.equals(project.getLanguageKey());
+  }
+
+  public void analyse(Project project, SensorContext context) {
+    this.project = project;
+    this.context = context;
+
+    this.scanner = PythonAstScanner.create(createConfiguration(project));
+    // Collection<SquidCheck> squidChecks = annotationCheckFactory.getChecks();
+    // this.scanner = PythonAstScanner.create(createConfiguration(project), squidChecks.toArray(new SquidCheck[squidChecks.size()]));
+    scanner.scanFiles(InputFileUtils.toFiles(project.getFileSystem().mainFiles(Python.KEY)));
+
+    Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
+    save(squidSourceFiles);
+  }
+
+  private PythonConfiguration createConfiguration(Project project) {
+    return new PythonConfiguration(project.getFileSystem().getSourceCharset());
+  }
+
+  private void save(Collection<SourceCode> squidSourceFiles) {
+    for (SourceCode squidSourceFile : squidSourceFiles) {
+      SourceFile squidFile = (SourceFile) squidSourceFile;
+
+      File sonarFile = File.fromIOFile(new java.io.File(squidFile.getKey()), project);
+
+      // saveFilesComplexityDistribution(sonarFile, squidFile);
+      // saveFunctionsComplexityDistribution(sonarFile, squidFile);
+      saveMeasures(sonarFile, squidFile);
+      // saveViolations(sonarFile, squidFile);
     }
   }
+
+  private void saveMeasures(File sonarFile, SourceFile squidFile) {
+    context.saveMeasure(sonarFile, CoreMetrics.FILES, squidFile.getDouble(PythonMetric.FILES));
+    context.saveMeasure(sonarFile, CoreMetrics.LINES, squidFile.getDouble(PythonMetric.LINES));
+    context.saveMeasure(sonarFile, CoreMetrics.NCLOC, squidFile.getDouble(PythonMetric.LINES_OF_CODE));
+    // context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, squidFile.getDouble(PythonMetric.FUNCTIONS));
+    // context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, squidFile.getDouble(PythonMetric.STATEMENTS));
+    // context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(PythonMetric.COMPLEXITY));
+    context.saveMeasure(sonarFile, CoreMetrics.COMMENT_BLANK_LINES, squidFile.getDouble(PythonMetric.COMMENT_BLANK_LINES));
+    context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, squidFile.getDouble(PythonMetric.COMMENT_LINES));
+  }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName();
+  }
+
 }
