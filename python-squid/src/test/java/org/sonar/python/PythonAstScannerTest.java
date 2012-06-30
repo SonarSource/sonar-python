@@ -21,7 +21,6 @@ package org.sonar.python;
 
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.squid.AstScanner;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
@@ -75,11 +74,10 @@ public class PythonAstScannerTest {
     assertThat(file.getInt(PythonMetric.FUNCTIONS)).isEqualTo(1);
   }
 
-  @Ignore("not implemented")
   @Test
   public void complexity() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/complexity.py"));
-    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(3);
+    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(6);
   }
 
 }

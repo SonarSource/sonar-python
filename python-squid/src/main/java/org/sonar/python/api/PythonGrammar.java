@@ -33,6 +33,7 @@ public class PythonGrammar extends Grammar {
   public Rule subscript;
   public Rule sliceop;
   public Rule listmaker;
+  public Rule testlist_comp;
 
   // Expressions
 

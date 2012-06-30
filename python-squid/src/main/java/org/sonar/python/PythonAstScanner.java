@@ -19,12 +19,11 @@
  */
 package org.sonar.python;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.CommentAnalyser;
 import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.squid.AstScanner;
-import com.sonar.sslr.squid.SquidAstVisitor;
-import com.sonar.sslr.squid.SquidAstVisitorContextImpl;
+import com.sonar.sslr.squid.*;
 import com.sonar.sslr.squid.metrics.CommentsVisitor;
 import com.sonar.sslr.squid.metrics.ComplexityVisitor;
 import com.sonar.sslr.squid.metrics.CounterVisitor;
@@ -34,6 +33,7 @@ import org.sonar.python.api.PythonMetric;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.api.SourceFunction;
 import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
 
@@ -94,6 +94,15 @@ public class PythonAstScanner {
         });
 
     /* Functions */
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<PythonGrammar>(new SourceCodeBuilderCallback() {
+      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
+        String functionName = astNode.findFirstChild(parser.getGrammar().funcname).getChild(0).getTokenValue();
+        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
+        function.setStartAtLine(astNode.getTokenLine());
+        return function;
+      }
+    }, parser.getGrammar().funcdef));
+
     builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
         .setMetricDef(PythonMetric.FUNCTIONS)
         .subscribeTo(parser.getGrammar().funcdef)

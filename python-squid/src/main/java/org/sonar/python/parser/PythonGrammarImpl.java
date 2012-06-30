@@ -97,7 +97,7 @@ public class PythonGrammarImpl extends PythonGrammar {
 
     // power.is(primary, opt("**", u_expr));
 
-    // Next 8 rules were taken from http://docs.python.org/reference/grammar.html
+    // Next 9 rules were taken from http://docs.python.org/reference/grammar.html
     power.is(atom, o2n(trailer), opt("**", factor));
     factor.is(or(
         and(or("+", "-", "~"), factor),
@@ -113,7 +113,7 @@ public class PythonGrammarImpl extends PythonGrammar {
         and(opt(conditional_expression), ":", opt(conditional_expression), opt(sliceop))));
     sliceop.is(":", opt(conditional_expression));
     atom.override(or(
-        // '(' [yield_expr|testlist_comp] ')' |
+        and("(", opt(or(yield_expression, testlist_comp)), ")"),
         and("[", opt(listmaker), "]"),
         // '{' [dictorsetmaker] '}' |
         // '`' testlist1 '`' |
@@ -122,23 +122,24 @@ public class PythonGrammarImpl extends PythonGrammar {
     listmaker.is(
         conditional_expression,
         or( /* list_for , */and(o2n(",", conditional_expression), opt(","))));
+    testlist_comp.is(conditional_expression, or(/* comp_for, */o2n(",", conditional_expression), opt(",")));
 
     u_expr.is(or(
         and("-", u_expr),
         and("+", u_expr),
         and("~", u_expr),
-        power));
+        power)).skipIfOneChild();
 
-    m_expr.is(u_expr, o2n(or("*", "//", "/", "%"), u_expr));
-    a_expr.is(m_expr, o2n(or("+", "-"), m_expr));
+    m_expr.is(u_expr, o2n(or("*", "//", "/", "%"), u_expr)).skipIfOneChild();
+    a_expr.is(m_expr, o2n(or("+", "-"), m_expr)).skipIfOneChild();
 
-    shift_expr.is(a_expr, o2n(or("<<", ">>"), a_expr));
+    shift_expr.is(a_expr, o2n(or("<<", ">>"), a_expr)).skipIfOneChild();
 
-    and_expr.is(shift_expr, o2n("^", shift_expr));
-    xor_expr.is(and_expr, o2n("^", and_expr));
-    or_expr.is(xor_expr, o2n("|", xor_expr));
+    and_expr.is(shift_expr, o2n("^", shift_expr)).skipIfOneChild();
+    xor_expr.is(and_expr, o2n("^", and_expr)).skipIfOneChild();
+    or_expr.is(xor_expr, o2n("|", xor_expr)).skipIfOneChild();
 
-    comparison.is(or_expr, o2n(comp_operator, or_expr));
+    comparison.is(or_expr, o2n(comp_operator, or_expr)).skipIfOneChild();
     comp_operator.is(or(
         "<",
         ">",
@@ -149,11 +150,11 @@ public class PythonGrammarImpl extends PythonGrammar {
         and("is", opt("not")),
         and(opt("not"), "in")));
 
-    or_test.is(and_test, o2n("or", and_test));
-    and_test.is(not_test, o2n("and", not_test));
-    not_test.is(or(comparison, and("not", not_test)));
+    or_test.is(and_test, o2n("or", and_test)).skipIfOneChild();
+    and_test.is(not_test, o2n("and", not_test)).skipIfOneChild();
+    not_test.is(or(comparison, and("not", not_test))).skipIfOneChild();
 
-    conditional_expression.is(or_test, opt("if", or_test, "else", expression));
+    conditional_expression.is(or_test, opt("if", or_test, "else", expression)).skipIfOneChild();
     expression.is(or(conditional_expression, lambda_form));
     expression_nocond.is(or(or_test, lambda_form_nocond));
 

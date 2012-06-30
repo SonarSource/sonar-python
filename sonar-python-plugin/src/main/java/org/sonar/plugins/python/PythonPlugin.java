@@ -20,15 +20,13 @@
 
 package org.sonar.plugins.python;
 
-import org.sonar.plugins.python.colorizer.PythonColorizer;
-
-import org.sonar.plugins.python.cpd.PythonCpdMapping;
-
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Extension;
 import org.sonar.api.SonarPlugin;
+import org.sonar.plugins.python.colorizer.PythonColorizer;
+import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
@@ -44,7 +42,6 @@ public class PythonPlugin extends SonarPlugin {
         Python.class,
         PythonSourceImporter.class,
         PythonSquidSensor.class,
-        PythonComplexitySensor.class,
         PythonDefaultProfile.class,
         PythonColorizer.class,
         PythonCpdMapping.class,

@@ -42,6 +42,7 @@ public class ExpressionTest {
   public void realLife() {
     assertThat(p, parse("1 + 2 * 3"));
     assertThat(p, parse("[1, 2]"));
+    assertThat(p, parse("(1 + 1) * 2"));
   }
 
 }

@@ -24,6 +24,8 @@ import com.sonar.sslr.squid.AstScanner;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.PersistenceMode;
+import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFileUtils;
 import org.sonar.api.resources.Project;
@@ -33,11 +35,16 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.api.SourceFunction;
+import org.sonar.squid.indexer.QueryByParent;
 import org.sonar.squid.indexer.QueryByType;
 
 import java.util.Collection;
 
 public final class PythonSquidSensor implements Sensor {
+
+  private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
+  private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
 
   private Project project;
   private SensorContext context;
@@ -70,8 +77,8 @@ public final class PythonSquidSensor implements Sensor {
 
       File sonarFile = File.fromIOFile(new java.io.File(squidFile.getKey()), project);
 
-      // saveFilesComplexityDistribution(sonarFile, squidFile);
-      // saveFunctionsComplexityDistribution(sonarFile, squidFile);
+      saveFilesComplexityDistribution(sonarFile, squidFile);
+      saveFunctionsComplexityDistribution(sonarFile, squidFile);
       saveMeasures(sonarFile, squidFile);
       // saveViolations(sonarFile, squidFile);
     }
@@ -83,9 +90,24 @@ public final class PythonSquidSensor implements Sensor {
     context.saveMeasure(sonarFile, CoreMetrics.NCLOC, squidFile.getDouble(PythonMetric.LINES_OF_CODE));
     context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, squidFile.getDouble(PythonMetric.FUNCTIONS));
     context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, squidFile.getDouble(PythonMetric.STATEMENTS));
-    // context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(PythonMetric.COMPLEXITY));
+    context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(PythonMetric.COMPLEXITY));
     context.saveMeasure(sonarFile, CoreMetrics.COMMENT_BLANK_LINES, squidFile.getDouble(PythonMetric.COMMENT_BLANK_LINES));
     context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, squidFile.getDouble(PythonMetric.COMMENT_LINES));
+  }
+
+  private void saveFunctionsComplexityDistribution(File sonarFile, SourceFile squidFile) {
+    Collection<SourceCode> squidFunctionsInFile = scanner.getIndex().search(new QueryByParent(squidFile), new QueryByType(SourceFunction.class));
+    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
+    for (SourceCode squidFunction : squidFunctionsInFile) {
+      complexityDistribution.add(squidFunction.getDouble(PythonMetric.COMPLEXITY));
+    }
+    context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+  }
+
+  private void saveFilesComplexityDistribution(File sonarFile, SourceFile squidFile) {
+    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, FILES_DISTRIB_BOTTOM_LIMITS);
+    complexityDistribution.add(squidFile.getDouble(PythonMetric.COMPLEXITY));
+    context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
   }
 
   @Override

@@ -22,6 +22,7 @@ package org.sonar.plugins.python.pylint;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
+import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
@@ -30,14 +31,15 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.Violation;
+import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonPlugin;
-import org.sonar.plugins.python.PythonSensor;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PylintSensor extends PythonSensor {
+public class PylintSensor implements Sensor {
   private static final String PYTHONPATH_ENVVAR = "PYTHONPATH";
 
   private RuleFinder ruleFinder;
@@ -53,8 +55,25 @@ public class PylintSensor extends PythonSensor {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return super.shouldExecuteOnProject(project)
+    return Python.KEY.equals(project.getLanguageKey())
       && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+  }
+
+  public void analyse(Project project, SensorContext sensorContext) {
+    for (InputFile inputFile : project.getFileSystem().mainFiles(Python.KEY)) {
+      try {
+        analyzeFile(inputFile, project, sensorContext);
+      } catch (Exception e) {
+        String msg = new StringBuilder()
+            .append("Cannot analyse the file '")
+            .append(inputFile.getFile().getAbsolutePath())
+            .append("', details: '")
+            .append(e)
+            .append("'")
+            .toString();
+        throw new SonarException(msg, e);
+      }
+    }
   }
 
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
