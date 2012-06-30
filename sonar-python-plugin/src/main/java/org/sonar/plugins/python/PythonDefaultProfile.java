@@ -26,7 +26,8 @@ import org.sonar.api.profiles.XMLProfileParser;
 import org.sonar.api.utils.ValidationMessages;
 
 public class PythonDefaultProfile extends ProfileDefinition {
-  private XMLProfileParser xmlProfileParser;
+
+  private final XMLProfileParser xmlProfileParser;
 
   public PythonDefaultProfile(XMLProfileParser xmlProfileParser) {
     this.xmlProfileParser = xmlProfileParser;
@@ -34,7 +35,7 @@ public class PythonDefaultProfile extends ProfileDefinition {
 
   @Override
   public RulesProfile createProfile(ValidationMessages messages) {
-    return xmlProfileParser.parseResource(getClass().getClassLoader(),
-                                          "org/sonar/plugins/python/profile-default.xml", messages);
+    return xmlProfileParser.parseResource(getClass().getClassLoader(), "org/sonar/plugins/python/profile-default.xml", messages);
   }
+
 }
