@@ -93,6 +93,12 @@ public class PythonAstScanner {
           }
         });
 
+    /* Functions */
+    builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
+        .setMetricDef(PythonMetric.FUNCTIONS)
+        .subscribeTo(parser.getGrammar().funcdef)
+        .build());
+
     /* Metrics */
     builder.withSquidAstVisitor(new LinesVisitor<PythonGrammar>(PythonMetric.LINES));
     builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<PythonGrammar>(PythonMetric.LINES_OF_CODE));

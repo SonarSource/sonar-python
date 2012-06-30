@@ -69,11 +69,10 @@ public class PythonAstScannerTest {
     assertThat(file.getInt(PythonMetric.STATEMENTS)).isEqualTo(1);
   }
 
-  @Ignore("not implemented")
   @Test
   public void functions() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/functions.py"));
-    assertThat(file.getInt(PythonMetric.FUNCTIONS)).isEqualTo(3);
+    assertThat(file.getInt(PythonMetric.FUNCTIONS)).isEqualTo(1);
   }
 
   @Ignore("not implemented")
