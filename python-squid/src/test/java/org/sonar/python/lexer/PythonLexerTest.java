@@ -112,6 +112,19 @@ public class PythonLexerTest {
   }
 
   /**
+   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#imaginary-literals
+   */
+  @Test
+  public void imaginary_literals() {
+    assertThat(lexer.lex("3.14j"), hasToken("3.14j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("10.j"), hasToken("10.j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("10j"), hasToken("10j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex(".001j"), hasToken(".001j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("1e100j"), hasToken("1e100j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("3.14e-10j"), hasToken("3.14e-10j", PythonTokenType.NUMBER));
+  }
+
+  /**
    * http://docs.python.org/release/3.2/reference/lexical_analysis.html#identifiers
    */
   @Test

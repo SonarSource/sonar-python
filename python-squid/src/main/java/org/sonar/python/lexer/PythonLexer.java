@@ -69,9 +69,11 @@ public class PythonLexer {
         .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#floating-point-literals
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++\\.[0-9]*+" + EXP + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++" + EXP + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + EXP))
+        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#imaginary-literals
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++\\.[0-9]*+" + EXP + "?+" + "j?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++" + EXP + "?+" + "j?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + EXP + "j?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + "j"))
 
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#integer-literals
         // TODO 2.7 allows long integer literals, e.g. 3L
