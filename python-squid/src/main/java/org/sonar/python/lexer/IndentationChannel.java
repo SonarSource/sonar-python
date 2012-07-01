@@ -26,7 +26,7 @@ import org.sonar.channel.CodeReader;
 import org.sonar.python.api.PythonTokenType;
 
 /**
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#indentation
+ * http://docs.python.org/reference/lexical_analysis.html#indentation
  */
 public class IndentationChannel extends Channel<Lexer> {
 

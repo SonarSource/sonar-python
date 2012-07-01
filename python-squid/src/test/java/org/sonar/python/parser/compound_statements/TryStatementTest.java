@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/compound_stmts.html#the-try-statement
- */
 public class TryStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -44,15 +41,14 @@ public class TryStatementTest {
   @Test
   public void ok() {
     g.suite.mock();
-    g.expression.mock();
-    g.target.mock();
+    g.test.mock();
+    g.except_clause.mock();
 
-    assertThat(p, parse("try : suite except : suite"));
-    assertThat(p, parse("try : suite except expression as target : suite"));
-    assertThat(p, parse("try : suite except : suite except : suite"));
-    assertThat(p, parse("try : suite except : suite else : suite"));
-    assertThat(p, parse("try : suite except : suite finally : suite"));
-    assertThat(p, parse("try : suite except : suite else : suite finally : suite"));
+    assertThat(p, parse("try : suite except_clause : suite"));
+    assertThat(p, parse("try : suite except_clause : suite except_clause : suite"));
+    assertThat(p, parse("try : suite except_clause : suite else : suite"));
+    assertThat(p, parse("try : suite except_clause : suite finally : suite"));
+    assertThat(p, parse("try : suite except_clause : suite else : suite finally : suite"));
     assertThat(p, parse("try : suite finally : suite"));
   }
 

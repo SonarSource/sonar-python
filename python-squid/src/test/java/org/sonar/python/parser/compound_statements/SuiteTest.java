@@ -29,9 +29,6 @@ import org.sonar.python.parser.PythonTestUtils;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/compound_stmts.html#compound-statements
- */
 public class SuiteTest {
 
   Parser<PythonGrammar> p = PythonParser.create();

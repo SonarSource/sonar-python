@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#grammar-token-raise_stmt
- */
 public class RaiseStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -43,11 +40,22 @@ public class RaiseStatementTest {
 
   @Test
   public void ok() {
-    g.expression.mock();
+    g.test.mock();
 
     assertThat(p, parse("raise"));
-    assertThat(p, parse("raise expression"));
-    assertThat(p, parse("raise expression from expression"));
+    assertThat(p, parse("raise test"));
+
+    assertThat("2.7", p, parse("raise test, test"));
+    assertThat("2.7", p, parse("raise test, test, test"));
+
+    // FIXME
+    // assertThat("3.2", p, parse("raise test from test"));
+  }
+
+  @Test
+  public void realLife() {
+    assertThat(p, parse("raise"));
+    assertThat(p, parse("raise exc_info[1], None, exc_info[2]"));
   }
 
 }

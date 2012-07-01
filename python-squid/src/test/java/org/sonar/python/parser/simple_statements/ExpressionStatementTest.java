@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#expression-statements
- */
 public class ExpressionStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -42,10 +39,10 @@ public class ExpressionStatementTest {
   }
 
   @Test
-  public void ok() {
-    g.expression_list.mock();
-
-    assertThat(p, parse("expression_list"));
+  public void realLife() {
+    assertThat(p, parse("i = 10"));
+    assertThat(p, parse("list[1] = 10"));
+    assertThat(p, parse("self.balance = initial_balance"));
   }
 
 }

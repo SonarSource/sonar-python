@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#grammar-token-assert_stmt
- */
 public class AssertStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -43,10 +40,10 @@ public class AssertStatementTest {
 
   @Test
   public void ok() {
-    g.expression.mock();
+    g.test.mock();
 
-    assertThat(p, parse("assert expression"));
-    assertThat(p, parse("assert expression , expression"));
+    assertThat(p, parse("assert test"));
+    assertThat(p, parse("assert test , test"));
   }
 
   @Test

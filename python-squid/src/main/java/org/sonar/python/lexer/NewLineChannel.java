@@ -26,9 +26,9 @@ import org.sonar.channel.CodeReader;
 import org.sonar.python.api.PythonTokenType;
 
 /**
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#explicit-line-joining
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#implicit-line-joining
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#blank-lines
+ * http://docs.python.org/reference/lexical_analysis.html#explicit-line-joining
+ * http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining
+ * http://docs.python.org/reference/lexical_analysis.html#blank-lines
  */
 public class NewLineChannel extends Channel<Lexer> {
 

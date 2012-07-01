@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/compound_stmts.html#the-if-statement
- */
 public class IfStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -43,12 +40,12 @@ public class IfStatementTest {
 
   @Test
   public void ok() {
-    g.expression.mock();
+    g.test.mock();
     g.suite.mock();
 
-    assertThat(p, parse("if expression : suite"));
-    assertThat(p, parse("if expression : suite elif expression : suite"));
-    assertThat(p, parse("if expression : suite elif expression : suite else : suite"));
+    assertThat(p, parse("if test : suite"));
+    assertThat(p, parse("if test : suite elif test : suite"));
+    assertThat(p, parse("if test : suite elif test : suite else : suite"));
   }
 
 }

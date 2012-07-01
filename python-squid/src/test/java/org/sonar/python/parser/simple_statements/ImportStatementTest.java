@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#the-import-statement
- */
 public class ImportStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();

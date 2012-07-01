@@ -44,6 +44,10 @@ public class PythonLexer {
   }
 
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
+  private static final String STRING_PREFIX = "(ur|uR|u|UR|Ur|U|r|R)";
+  private static final String BYTES_PREFIX = "(br|bR|b|Br|BR|B)";
+  private static final String IMAGINARY_SUFFIX = "(j|J)";
+  private static final String LONG_INTEGER_SUFFIX = "(l|L)";
 
   public static Lexer create(PythonConfiguration conf) {
     LexerState lexerState = new LexerState();
@@ -59,35 +63,38 @@ public class PythonLexer {
 
         .withChannel(new BlackHoleChannel("\\s"))
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#comments
+        // http://docs.python.org/reference/lexical_analysis.html#comments
         .withChannel(commentRegexp("#[^\\n\\r]*+"))
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
-        // TODO 2.7 allows to use U"hello world" and UR"hello world"
+        // http://docs.python.org/reference/lexical_analysis.html#string-literals
         .withChannel(new LongStringLiteralsChannel())
-        .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
-        .withChannel(regexp(PythonTokenType.STRING, "(r|R)?+\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#floating-point-literals
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#imaginary-literals
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++\\.[0-9]*+" + EXP + "?+" + "j?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++" + EXP + "?+" + "j?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + EXP + "j?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + "j"))
+        .withChannel(regexp(PythonTokenType.STRING, STRING_PREFIX + "?+\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
+        .withChannel(regexp(PythonTokenType.STRING, STRING_PREFIX + "?+\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#integer-literals
-        // TODO 2.7 allows long integer literals, e.g. 3L
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[oO][0-7]++"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[xX][0-9a-fA-F]++"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[bB][01]++"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[1-9][0-9]*+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0++"))
+        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
+        .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
+        .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#identifiers
+        // http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
+        // http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++\\.[0-9]*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + EXP + IMAGINARY_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + IMAGINARY_SUFFIX))
+
+        // http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
+        .withChannel(regexp(PythonTokenType.NUMBER, "0[oO]?+[0-7]++" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "0[xX][0-9a-fA-F]++" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "0[bB][01]++" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[1-9][0-9]*+" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "0++" + LONG_INTEGER_SUFFIX + "?+"))
+
+        // http://docs.python.org/reference/lexical_analysis.html#identifiers
         .withChannel(new IdentifierAndKeywordChannel(and("[a-zA-Z_]", o2n("\\w")), true, PythonKeyword.values()))
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#operators
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#delimiters
+        // http://docs.python.org/reference/lexical_analysis.html#operators
+        // http://docs.python.org/reference/lexical_analysis.html#delimiters
         .withChannel(new PunctuatorChannel(PythonPunctuator.values()))
 
         .withChannel(new UnknownCharacterChannel())

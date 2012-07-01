@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#simple-statements
- */
 public class SimpleStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -45,8 +42,6 @@ public class SimpleStatementTest {
   public void ok() {
     g.expression_stmt.mock();
     g.assert_stmt.mock();
-    g.assignment_stmt.mock();
-    g.augmented_assignment_stmt.mock();
     g.pass_stmt.mock();
     g.del_stmt.mock();
     g.return_stmt.mock();
@@ -60,8 +55,6 @@ public class SimpleStatementTest {
 
     assertThat(p, parse("expression_stmt"));
     assertThat(p, parse("assert_stmt"));
-    assertThat(p, parse("assignment_stmt"));
-    assertThat(p, parse("augmented_assignment_stmt"));
     assertThat(p, parse("pass_stmt"));
     assertThat(p, parse("del_stmt"));
     assertThat(p, parse("return_stmt"));
@@ -72,6 +65,11 @@ public class SimpleStatementTest {
     assertThat(p, parse("import_stmt"));
     assertThat(p, parse("global_stmt"));
     assertThat(p, parse("nonlocal_stmt"));
+  }
+
+  @Test
+  public void realLife() {
+    assertThat(p, parse("i += 1"));
   }
 
 }

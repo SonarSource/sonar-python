@@ -42,7 +42,7 @@ public class PythonTokenizerTest {
     PythonTokenizer tokenizer = new PythonTokenizer(Charset.forName("UTF-8"));
     tokenizer.tokenize(source, cpdTokens);
     List<TokenEntry> list = cpdTokens.getTokens();
-    assertThat(list.size()).isEqualTo(93);
+    assertThat(list.size()).isEqualTo(88);
   }
 
 }

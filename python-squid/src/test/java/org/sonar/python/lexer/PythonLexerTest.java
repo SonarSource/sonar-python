@@ -44,7 +44,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#comments
+   * http://docs.python.org/reference/lexical_analysis.html#comments
    */
   @Test
   public void comments() {
@@ -52,7 +52,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
+   * http://docs.python.org/reference/lexical_analysis.html#string-literals
    */
   @Test
   public void shortstring_literals() {
@@ -66,12 +66,15 @@ public class PythonLexerTest {
     assertThat("stringprefix", lexer.lex("r\"hello world\""), hasToken("r\"hello world\"", PythonTokenType.STRING));
     assertThat("stringprefix", lexer.lex("R\"hello world\""), hasToken("R\"hello world\"", PythonTokenType.STRING));
 
+    assertThat("2.7.3 stringprefix", lexer.lex("u'hello world'"), hasToken("u'hello world'", PythonTokenType.STRING));
+    assertThat("2.7.3 stringprefix", lexer.lex("ur'hello world'"), hasToken("ur'hello world'", PythonTokenType.STRING));
+
     assertThat("escaped single quote", lexer.lex("'\\''"), hasToken("'\\''", PythonTokenType.STRING));
     assertThat("escaped double quote", lexer.lex("\"\\\"\""), hasToken("\"\\\"\"", PythonTokenType.STRING));
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
+   * http://docs.python.org/reference/lexical_analysis.html#string-literals
    */
   @Test
   public void longstring_literals() {
@@ -79,16 +82,40 @@ public class PythonLexerTest {
     assertThat("multiline", lexer.lex("\"\"\"\n\"\"\""), hasToken("\"\"\"\n\"\"\"", PythonTokenType.STRING));
 
     assertThat("stringprefix", lexer.lex("r'''\n'''"), hasToken("r'''\n'''", PythonTokenType.STRING));
-    assertThat("stringprefix", lexer.lex("R'''\n'''"), hasToken("R'''\n'''", PythonTokenType.STRING));
     assertThat("stringprefix", lexer.lex("r\"\"\"\n\"\"\""), hasToken("r\"\"\"\n\"\"\"", PythonTokenType.STRING));
-    assertThat("stringprefix", lexer.lex("R\"\"\"\n\"\"\""), hasToken("R\"\"\"\n\"\"\"", PythonTokenType.STRING));
+
+    assertThat("2.7.3 stringprefix", lexer.lex("u'''\n'''"), hasToken("u'''\n'''", PythonTokenType.STRING));
+    assertThat("2.7.3 stringprefix", lexer.lex("ur'''\n'''"), hasToken("ur'''\n'''", PythonTokenType.STRING));
+    assertThat("2.7.3 stringprefix", lexer.lex("u\"\"\"\n\"\"\""), hasToken("u\"\"\"\n\"\"\"", PythonTokenType.STRING));
+    assertThat("2.7.3 stringprefix", lexer.lex("ur\"\"\"\n\"\"\""), hasToken("ur\"\"\"\n\"\"\"", PythonTokenType.STRING));
 
     assertThat("escaped single quote", lexer.lex("'''\\''''"), hasToken("'''\\''''", PythonTokenType.STRING));
     assertThat("escaped double quote", lexer.lex("\"\"\"\\\"\"\"\""), hasToken("\"\"\"\\\"\"\"\"", PythonTokenType.STRING));
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#integer-literals
+   * http://docs.python.org/reference/lexical_analysis.html#string-literals
+   */
+  @Test
+  public void bytes_literal() {
+    assertThat(lexer.lex("br'hello world'"), hasToken("br'hello world'", PythonTokenType.STRING));
+    assertThat(lexer.lex("br\"hello world\""), hasToken("br\"hello world\"", PythonTokenType.STRING));
+  }
+
+  /**
+   * http://docs.python.org/reference/lexical_analysis.html#string-literals
+   */
+  @Test
+  public void longbytes_literal() {
+    assertThat(lexer.lex("b'''\n'''"), hasToken("b'''\n'''", PythonTokenType.STRING));
+    assertThat(lexer.lex("b\"\"\"\n\"\"\""), hasToken("b\"\"\"\n\"\"\"", PythonTokenType.STRING));
+
+    assertThat(lexer.lex("br'''\n'''"), hasToken("br'''\n'''", PythonTokenType.STRING));
+    assertThat(lexer.lex("br\"\"\"\n\"\"\""), hasToken("br\"\"\"\n\"\"\"", PythonTokenType.STRING));
+  }
+
+  /**
+   * http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
    */
   @Test
   public void integer_literals() {
@@ -96,10 +123,17 @@ public class PythonLexerTest {
     assertThat(lexer.lex("0o177"), hasToken("0o177", PythonTokenType.NUMBER));
     assertThat(lexer.lex("0b100110111"), hasToken("0b100110111", PythonTokenType.NUMBER));
     assertThat(lexer.lex("0xdeadbeef"), hasToken("0xdeadbeef", PythonTokenType.NUMBER));
+
+    assertThat("2.7.3 long decimal integer", lexer.lex("9L"), hasToken("9L", PythonTokenType.NUMBER));
+    assertThat("2.7.3 long octal integer", lexer.lex("0x77L"), hasToken("0x77L", PythonTokenType.NUMBER));
+    assertThat("2.7.3 long binary integer", lexer.lex("0b11L"), hasToken("0b11L", PythonTokenType.NUMBER));
+    assertThat("2.7.3 long hex integer", lexer.lex("0xffL"), hasToken("0xffL", PythonTokenType.NUMBER));
+
+    assertThat("2.7.3 octal integer", lexer.lex("0700"), hasToken("0700", PythonTokenType.NUMBER));
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#floating-point-literals
+   * http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
    */
   @Test
   public void floating_point_literals() {
@@ -112,7 +146,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#imaginary-literals
+   * http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
    */
   @Test
   public void imaginary_literals() {
@@ -122,10 +156,11 @@ public class PythonLexerTest {
     assertThat(lexer.lex(".001j"), hasToken(".001j", PythonTokenType.NUMBER));
     assertThat(lexer.lex("1e100j"), hasToken("1e100j", PythonTokenType.NUMBER));
     assertThat(lexer.lex("3.14e-10j"), hasToken("3.14e-10j", PythonTokenType.NUMBER));
+    assertThat("uppercase suffix", lexer.lex("10J"), hasToken("10J", PythonTokenType.NUMBER));
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#identifiers
+   * http://docs.python.org/reference/lexical_analysis.html#identifiers
    */
   @Test
   public void identifiers_and_keywords() {
@@ -134,8 +169,8 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#operators
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#delimiters
+   * http://docs.python.org/reference/lexical_analysis.html#operators
+   * http://docs.python.org/reference/lexical_analysis.html#delimiters
    */
   @Test
   public void operators_and_delimiters() {
@@ -144,7 +179,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#blank-lines
+   * http://docs.python.org/reference/lexical_analysis.html#blank-lines
    */
   @Test
   public void blank_lines() {
@@ -154,7 +189,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#indentation
+   * http://docs.python.org/reference/lexical_analysis.html#indentation
    */
   @Test
   public void indent_dedent() {
@@ -162,7 +197,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#implicit-line-joining
+   * http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining
    */
   @Test
   public void implicit_line_joining() {
@@ -170,7 +205,7 @@ public class PythonLexerTest {
   }
 
   /**
-   * http://docs.python.org/release/3.2/reference/lexical_analysis.html#explicit-line-joining
+   * http://docs.python.org/reference/lexical_analysis.html#explicit-line-joining
    */
   @Test
   public void explicit_line_joining() {

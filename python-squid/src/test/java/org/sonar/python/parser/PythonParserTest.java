@@ -17,40 +17,31 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser.expressions;
+package org.sonar.python.parser;
 
 import com.sonar.sslr.impl.Parser;
-import org.junit.Before;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import java.io.File;
+import java.util.Collection;
 
-public class UExprTest {
+public class PythonParserTest {
 
-  Parser<PythonGrammar> p = PythonParser.create();
-  PythonGrammar g = p.getGrammar();
-
-  @Before
-  public void init() {
-    p.setRootRule(g.u_expr);
-  }
+  private final Parser<PythonGrammar> parser = PythonParser.create();
 
   @Test
-  public void ok() {
-    g.power.mock();
-
-    assertThat(p, parse("power"));
-    assertThat(p, parse("- power"));
-    assertThat(p, parse("+ power"));
-    assertThat(p, parse("~ power"));
+  public void test() {
+    Collection<File> files = listFiles();
+    for (File file : files) {
+      parser.parse(file);
+    }
   }
 
-  @Test
-  public void realLife() {
-    assertThat(p, parse("-2**2"));
+  private static Collection<File> listFiles() {
+    File dir = new File("src/test/resources/parser/");
+    return FileUtils.listFiles(dir, new String[] {"py"}, true);
   }
 
 }

@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#grammar-token-yield_stmt
- */
 public class YieldStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -43,9 +40,9 @@ public class YieldStatementTest {
 
   @Test
   public void ok() {
-    g.yield_expression.mock();
+    g.yield_expr.mock();
 
-    assertThat(p, parse("yield_expression"));
+    assertThat(p, parse("yield_expr"));
   }
 
 }

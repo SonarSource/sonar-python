@@ -35,14 +35,33 @@ public class ExpressionTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.expression);
+    p.setRootRule(g.test);
   }
 
   @Test
   public void realLife() {
     assertThat(p, parse("1 + 2 * 3"));
-    assertThat(p, parse("[1, 2]"));
     assertThat(p, parse("(1 + 1) * 2"));
+
+    assertThat(p, parse("True"));
+    assertThat(p, parse("False"));
+    assertThat(p, parse("None"));
+
+    assertThat(p, parse("list[1]"));
+    assertThat(p, parse("list[1:3]"));
+    assertThat(p, parse("list[:]"));
+
+    assertThat("list", p, parse("[1, 2]"));
+    assertThat("list with trailing comma", p, parse("[1, 2,]"));
+
+    assertThat("dictionary", p, parse("{'foo': 1, 'bar': 2, 'baz': 3,}"));
+    assertThat("dictionary with trailing comma", p, parse("{'foo': 1, 'bar': 2, 'baz': 3,}"));
+
+    assertThat("trailing comma", p, parse("print(something,)"));
+
+    assertThat(p, parse("func(value, parameter = value)"));
+
+    assertThat(p, parse("lambda x: x**2"));
   }
 
 }

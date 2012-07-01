@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#indentation
+ * http://docs.python.org/reference/lexical_analysis.html#indentation
  */
 public class IndentationPreprocessor extends Preprocessor {
 
@@ -57,7 +57,10 @@ public class IndentationPreprocessor extends Preprocessor {
       while (lexerState.indentationStack.peek() > 0) {
         lexerState.indentationStack.pop();
         tokensToInject.add(Token.builder(token)
+            .setURI(token.getURI())
             .setType(PythonTokenType.DEDENT)
+            .setLine(token.getLine())
+            .setColumn(token.getColumn())
             .setValueAndOriginalValue("")
             .build());
       }

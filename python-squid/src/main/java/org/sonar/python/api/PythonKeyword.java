@@ -23,7 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.TokenType;
 
 /**
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#keywords
+ * http://docs.python.org/reference/lexical_analysis.html#keywords
  */
 public enum PythonKeyword implements TokenType {
 

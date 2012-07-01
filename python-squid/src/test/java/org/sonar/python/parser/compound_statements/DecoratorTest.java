@@ -17,40 +17,31 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser.expressions;
+package org.sonar.python.parser.compound_statements;
 
 import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.parser.PythonTestUtils;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-public class AtomTest {
+public class DecoratorTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
   PythonGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.atom);
-  }
-
-  @Test
-  public void ok() {
-    g.literal.mock();
-    g.enclosure.mock();
-
-    assertThat(p, parse("IDENTIFIER"));
-    assertThat(p, parse("literal"));
-    assertThat(p, parse("enclosure"));
+    p.setRootRule(g.decorator);
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("2"));
+    assertThat(p, parse(PythonTestUtils.appendNewLine("@register.filter(is_safe=False)")));
   }
 
 }

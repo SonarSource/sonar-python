@@ -26,20 +26,18 @@ import org.sonar.channel.CodeReader;
 import org.sonar.python.api.PythonTokenType;
 
 /**
- * http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
+ * http://docs.python.org/reference/lexical_analysis.html#string-literals
  */
 public class LongStringLiteralsChannel extends Channel<Lexer> {
 
   private final StringBuilder sb = new StringBuilder();
 
+  private int index;
+  private char ch;
+
   @Override
   public boolean consume(CodeReader code, Lexer output) {
-    int index = 0;
-    char ch = code.charAt(index);
-    if (isStringPrefix(ch)) {
-      index++;
-      ch = code.charAt(index);
-    }
+    readStringPrefix(code);
     if (ch != '\'' && ch != '\"') {
       return false;
     }
@@ -49,6 +47,7 @@ public class LongStringLiteralsChannel extends Channel<Lexer> {
     index++;
     while (!isLookingOn(code, ch, index)) {
       if (code.charAt(index) == '\\') {
+        // escape
         index++;
       }
       index++;
@@ -67,8 +66,17 @@ public class LongStringLiteralsChannel extends Channel<Lexer> {
     return true;
   }
 
-  private static boolean isStringPrefix(char ch) {
-    return ch == 'r' || ch == 'R';
+  private void readStringPrefix(CodeReader code) {
+    index = 0;
+    ch = Character.toUpperCase(code.charAt(index));
+    if (ch == 'U' || ch == 'B') {
+      index++;
+      ch = Character.toUpperCase(code.charAt(index));
+    }
+    if (ch == 'R') {
+      index++;
+      ch = code.charAt(index);
+    }
   }
 
   private static boolean isLookingOn(CodeReader code, char ch, int index) {

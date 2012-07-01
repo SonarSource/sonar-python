@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/simple_stmts.html#the-del-statement
- */
 public class DelStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -43,9 +40,9 @@ public class DelStatementTest {
 
   @Test
   public void ok() {
-    g.target_list.mock();
+    g.exprlist.mock();
 
-    assertThat(p, parse("del target_list"));
+    assertThat(p, parse("del exprlist"));
   }
 
 }

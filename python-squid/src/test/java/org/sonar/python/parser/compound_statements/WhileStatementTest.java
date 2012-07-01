@@ -28,9 +28,6 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/compound_stmts.html#the-while-statement
- */
 public class WhileStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -43,11 +40,11 @@ public class WhileStatementTest {
 
   @Test
   public void ok() {
-    g.expression.mock();
+    g.test.mock();
     g.suite.mock();
 
-    assertThat(p, parse("while expression : suite"));
-    assertThat(p, parse("while expression : suite else : suite"));
+    assertThat(p, parse("while test : suite"));
+    assertThat(p, parse("while test : suite else : suite"));
   }
 
 }

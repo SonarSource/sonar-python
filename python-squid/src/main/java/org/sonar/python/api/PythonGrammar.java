@@ -24,40 +24,42 @@ import com.sonar.sslr.api.Rule;
 
 public class PythonGrammar extends Grammar {
 
-  public Rule yield_expression;
-
-  // TODO
   public Rule factor;
   public Rule trailer;
   public Rule subscriptlist;
   public Rule subscript;
   public Rule sliceop;
-  public Rule listmaker;
   public Rule testlist_comp;
   public Rule dictorsetmaker;
 
+  public Rule arglist;
+  public Rule argument;
+
+  public Rule NAME;
+  public Rule varargslist;
+  public Rule fpdef;
+  public Rule fplist;
+
+  public Rule test;
+  public Rule testlist;
+
+  public Rule comp_for;
+  public Rule comp_iter;
+  public Rule comp_if;
+  public Rule test_nocond;
+  public Rule exprlist;
+  public Rule expr;
+  public Rule star_expr;
+
+  public Rule testlist_star_expr;
+
+  public Rule yield_expr;
+
   // Expressions
 
-  public Rule literal;
-  public Rule enclosure;
-
   public Rule atom;
-  public Rule attributeref;
-  public Rule subscription;
-  public Rule slicing;
-
-  public Rule call;
-  public Rule argument_list;
-  public Rule comprehension;
-  public Rule keyword_arguments;
-  public Rule positional_arguments;
-  public Rule keyword_item;
-
-  // public Rule primary;
 
   public Rule power;
-
-  public Rule u_expr;
 
   public Rule a_expr;
   public Rule m_expr;
@@ -75,28 +77,17 @@ public class PythonGrammar extends Grammar {
   public Rule and_test;
   public Rule not_test;
 
-  public Rule expression;
-  public Rule expression_nocond;
-  public Rule conditional_expression;
-
-  public Rule lambda_form;
-  public Rule lambda_form_nocond;
-
-  public Rule expression_list;
+  public Rule lambdef;
+  public Rule lambdef_nocond;
 
   // Simple statements
 
   public Rule simple_stmt;
   public Rule expression_stmt;
+  public Rule print_stmt;
   public Rule assert_stmt;
 
-  public Rule assignment_stmt;
-  public Rule target_list;
-  public Rule target;
-
-  public Rule augmented_assignment_stmt;
-  public Rule augtarget;
-  public Rule augop;
+  public Rule augassign;
 
   public Rule pass_stmt;
   public Rule del_stmt;
@@ -107,9 +98,12 @@ public class PythonGrammar extends Grammar {
   public Rule continue_stmt;
 
   public Rule import_stmt;
-  public Rule module;
-  public Rule relative_module;
-  public Rule name;
+  public Rule import_name;
+  public Rule import_from;
+  public Rule import_as_name;
+  public Rule dotted_as_name;
+  public Rule import_as_names;
+  public Rule dotted_as_names;
 
   public Rule global_stmt;
   public Rule nonlocal_stmt;
@@ -126,8 +120,7 @@ public class PythonGrammar extends Grammar {
   public Rule for_stmt;
 
   public Rule try_stmt;
-  public Rule try1_stmt;
-  public Rule try2_stmt;
+  public Rule except_clause;
 
   public Rule with_stmt;
   public Rule with_item;
@@ -136,14 +129,9 @@ public class PythonGrammar extends Grammar {
   public Rule decorators;
   public Rule decorator;
   public Rule dotted_name;
-  public Rule parameter_list;
-  public Rule parameter;
-  public Rule defparameter;
   public Rule funcname;
 
   public Rule classdef;
-  public Rule inheritance;
-  public Rule classname;
 
   // Top-level components
 

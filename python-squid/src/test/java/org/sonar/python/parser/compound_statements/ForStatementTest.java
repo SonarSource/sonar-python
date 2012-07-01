@@ -29,9 +29,6 @@ import org.sonar.python.parser.PythonTestUtils;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-/**
- * http://docs.python.org/release/3.2/reference/compound_stmts.html#the-for-statement
- */
 public class ForStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
@@ -44,12 +41,12 @@ public class ForStatementTest {
 
   @Test
   public void ok() {
-    g.target_list.mock();
-    g.expression_list.mock();
+    g.exprlist.mock();
+    g.testlist.mock();
     g.suite.mock();
 
-    assertThat(p, parse("for target_list in expression_list : suite"));
-    assertThat(p, parse("for target_list in expression_list : suite else : suite"));
+    assertThat(p, parse("for exprlist in testlist : suite"));
+    assertThat(p, parse("for exprlist in testlist : suite else : suite"));
   }
 
   @Test
