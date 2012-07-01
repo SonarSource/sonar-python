@@ -17,27 +17,24 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.python.checks;
 
-import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squid.api.SourceFile;
 
-public final class PythonParser {
+import java.io.File;
 
-  private PythonParser() {
-  }
+public class ParsingErrorCheckTest {
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
-
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  @Test
+  public void test() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.py"), new ParsingErrorCheck());
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(1)
+        // .withMessageThat(containsString("NEWLINE expected but \"    \" [INDENT] found"))
+        .noMore();
   }
 
 }

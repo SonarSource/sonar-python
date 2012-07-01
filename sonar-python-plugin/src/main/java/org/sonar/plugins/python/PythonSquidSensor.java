@@ -21,18 +21,24 @@
 package org.sonar.plugins.python;
 
 import com.sonar.sslr.squid.AstScanner;
+import com.sonar.sslr.squid.checks.SquidCheck;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.checks.AnnotationCheckFactory;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFileUtils;
 import org.sonar.api.resources.Project;
+import org.sonar.api.rules.Violation;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
+import org.sonar.python.checks.CheckList;
+import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceFunction;
@@ -40,15 +46,22 @@ import org.sonar.squid.indexer.QueryByParent;
 import org.sonar.squid.indexer.QueryByType;
 
 import java.util.Collection;
+import java.util.Locale;
 
 public final class PythonSquidSensor implements Sensor {
 
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
 
+  private final AnnotationCheckFactory annotationCheckFactory;
+
   private Project project;
   private SensorContext context;
   private AstScanner<PythonGrammar> scanner;
+
+  public PythonSquidSensor(RulesProfile profile) {
+    this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CheckList.REPOSITORY_KEY, CheckList.getChecks());
+  }
 
   public boolean shouldExecuteOnProject(Project project) {
     return Python.KEY.equals(project.getLanguageKey());
@@ -58,9 +71,8 @@ public final class PythonSquidSensor implements Sensor {
     this.project = project;
     this.context = context;
 
-    this.scanner = PythonAstScanner.create(createConfiguration(project));
-    // Collection<SquidCheck> squidChecks = annotationCheckFactory.getChecks();
-    // this.scanner = PythonAstScanner.create(createConfiguration(project), squidChecks.toArray(new SquidCheck[squidChecks.size()]));
+    Collection<SquidCheck> squidChecks = annotationCheckFactory.getChecks();
+    this.scanner = PythonAstScanner.create(createConfiguration(project), squidChecks.toArray(new SquidCheck[squidChecks.size()]));
     scanner.scanFiles(InputFileUtils.toFiles(project.getFileSystem().mainFiles(Python.KEY)));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
@@ -80,7 +92,7 @@ public final class PythonSquidSensor implements Sensor {
       saveFilesComplexityDistribution(sonarFile, squidFile);
       saveFunctionsComplexityDistribution(sonarFile, squidFile);
       saveMeasures(sonarFile, squidFile);
-      // saveViolations(sonarFile, squidFile);
+      saveViolations(sonarFile, squidFile);
     }
   }
 
@@ -108,6 +120,18 @@ public final class PythonSquidSensor implements Sensor {
     RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, FILES_DISTRIB_BOTTOM_LIMITS);
     complexityDistribution.add(squidFile.getDouble(PythonMetric.COMPLEXITY));
     context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+  }
+
+  private void saveViolations(File sonarFile, SourceFile squidFile) {
+    Collection<CheckMessage> messages = squidFile.getCheckMessages();
+    if (messages != null) {
+      for (CheckMessage message : messages) {
+        Violation violation = Violation.create(annotationCheckFactory.getActiveRule(message.getChecker()), sonarFile)
+            .setLineId(message.getLine())
+            .setMessage(message.getText(Locale.ENGLISH));
+        context.saveViolation(violation);
+      }
+    }
   }
 
   @Override

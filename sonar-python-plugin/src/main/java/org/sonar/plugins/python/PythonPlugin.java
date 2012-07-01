@@ -41,10 +41,12 @@ public class PythonPlugin extends SonarPlugin {
     return ImmutableList.of(
         Python.class,
         PythonSourceImporter.class,
-        PythonSquidSensor.class,
-        PythonDefaultProfile.class,
         PythonColorizer.class,
         PythonCpdMapping.class,
+
+        PythonSquidSensor.class,
+        PythonRuleRepository.class,
+        PythonDefaultProfile.class,
 
         // pylint
         PylintConfiguration.class,

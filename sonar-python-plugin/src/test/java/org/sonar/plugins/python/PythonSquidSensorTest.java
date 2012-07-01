@@ -21,9 +21,11 @@ package org.sonar.plugins.python;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class PythonSquidSensorTest {
 
@@ -31,7 +33,7 @@ public class PythonSquidSensorTest {
 
   @Before
   public void setUp() {
-    sensor = new PythonSquidSensor();
+    sensor = new PythonSquidSensor(mock(RulesProfile.class));
   }
 
   @Test

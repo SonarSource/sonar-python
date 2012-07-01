@@ -17,27 +17,25 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.python.checks;
 
-import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
+import com.google.common.collect.ImmutableList;
 
-public final class PythonParser {
+import java.util.List;
 
-  private PythonParser() {
+public final class CheckList {
+
+  public static final String REPOSITORY_KEY = "python";
+
+  public static final String SONAR_WAY_PROFILE = "Sonar way";
+
+  private CheckList() {
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
-
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  public static List<Class> getChecks() {
+    return ImmutableList.<Class> of(
+        ParsingErrorCheck.class,
+        XPathCheck.class);
   }
 
 }

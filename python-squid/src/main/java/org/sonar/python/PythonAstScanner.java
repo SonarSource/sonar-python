@@ -40,7 +40,7 @@ import org.sonar.squid.indexer.QueryByType;
 import java.io.File;
 import java.util.Collection;
 
-public class PythonAstScanner {
+public final class PythonAstScanner {
 
   private PythonAstScanner() {
   }
@@ -138,6 +138,11 @@ public class PythonAstScanner {
         .setMetricDef(PythonMetric.COMPLEXITY)
         .subscribeTo(complexityAstNodeType)
         .build());
+
+    /* External visitors (typically Check ones) */
+    for (SquidAstVisitor<PythonGrammar> visitor : visitors) {
+      builder.withSquidAstVisitor(visitor);
+    }
 
     return builder.build();
   }

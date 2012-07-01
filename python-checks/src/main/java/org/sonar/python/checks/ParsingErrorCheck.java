@@ -17,27 +17,31 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.python.checks;
 
-import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
+import com.sonar.sslr.api.AuditListener;
+import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.check.Priority;
+import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
 
-public final class PythonParser {
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
-  private PythonParser() {
+@Rule(
+  key = "ParsingError",
+  priority = Priority.MAJOR)
+public class ParsingErrorCheck extends SquidCheck<PythonGrammar> implements AuditListener {
+
+  public void processException(Exception e) {
+    StringWriter exception = new StringWriter();
+    e.printStackTrace(new PrintWriter(exception));
+    getContext().createFileViolation(this, exception.toString());
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
-
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  public void processRecognitionException(RecognitionException e) {
+    getContext().createLineViolation(this, e.getMessage(), e.getLine());
   }
 
 }

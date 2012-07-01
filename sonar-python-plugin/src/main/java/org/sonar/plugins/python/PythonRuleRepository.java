@@ -17,27 +17,30 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser;
+package org.sonar.plugins.python;
 
-import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.events.ParsingEventListener;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.lexer.PythonLexer;
+import org.sonar.api.rules.AnnotationRuleParser;
+import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.RuleRepository;
+import org.sonar.python.checks.CheckList;
 
-public final class PythonParser {
+import java.util.List;
 
-  private PythonParser() {
+public class PythonRuleRepository extends RuleRepository {
+
+  private static final String REPOSITORY_NAME = "Sonar";
+
+  private final AnnotationRuleParser annotationRuleParser;
+
+  public PythonRuleRepository(AnnotationRuleParser annotationRuleParser) {
+    super(CheckList.REPOSITORY_KEY, Python.KEY);
+    setName(REPOSITORY_NAME);
+    this.annotationRuleParser = annotationRuleParser;
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
-
-  public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((PythonGrammar) new PythonGrammarImpl())
-        .withLexer(PythonLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  @Override
+  public List<Rule> createRules() {
+    return annotationRuleParser.parse(CheckList.REPOSITORY_KEY, CheckList.getChecks());
   }
 
 }

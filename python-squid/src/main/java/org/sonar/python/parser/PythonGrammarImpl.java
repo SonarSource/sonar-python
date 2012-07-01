@@ -158,8 +158,8 @@ public class PythonGrammarImpl extends PythonGrammar {
    */
   private void simpleStatements() {
     simple_stmt.is(or(
-        expression_stmt,
         print_stmt,
+        expression_stmt,
         assert_stmt,
         pass_stmt,
         del_stmt,

@@ -34,7 +34,7 @@ import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.commentRegexp;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.o2n;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.regexp;
 
-public class PythonLexer {
+public final class PythonLexer {
 
   private PythonLexer() {
   }

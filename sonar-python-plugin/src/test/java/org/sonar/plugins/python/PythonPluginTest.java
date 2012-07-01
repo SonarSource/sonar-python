@@ -36,7 +36,7 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() throws Exception {
-    assertThat(plugin.getExtensions().size()).isEqualTo(9);
+    assertThat(plugin.getExtensions().size()).isEqualTo(10);
   }
 
 }
