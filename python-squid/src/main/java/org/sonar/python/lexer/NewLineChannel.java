@@ -65,7 +65,9 @@ public class NewLineChannel extends Channel<Lexer> {
     if (ch == '\\' && isNewLine(code.charAt(1))) {
       // Explicit line joining
       code.pop();
-      consumeEOL(code);
+      while (Character.isWhitespace(code.peek())) {
+        code.pop();
+      }
       return true;
     }
 

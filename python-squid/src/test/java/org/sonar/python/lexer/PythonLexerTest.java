@@ -148,9 +148,9 @@ public class PythonLexerTest {
    */
   @Test
   public void blank_lines() {
-    assertThat(lexer.lex("    # comment\n").size()).isEqualTo(1);
-    assertThat(lexer.lex("    \n").size()).isEqualTo(1);
-    assertThat(lexer.lex("line\n\n").size()).isEqualTo(3);
+    assertThat(lexer.lex("    # comment\n")).hasSize(1);
+    assertThat(lexer.lex("    \n")).hasSize(1);
+    assertThat(lexer.lex("line\n\n")).hasSize(3);
   }
 
   /**
@@ -181,6 +181,8 @@ public class PythonLexerTest {
     assertThat(lexer.lex("line\\\r\nline"), not(hasToken(PythonTokenType.NEWLINE)));
     assertThat(lexer.lex("line\\\rline"), not(hasToken(PythonTokenType.NEWLINE)));
     assertThat(lexer.lex("line\\\nline"), not(hasToken(PythonTokenType.NEWLINE)));
+
+    assertThat(lexer.lex("line\\\n    line")).hasSize(3);
   }
 
 }
