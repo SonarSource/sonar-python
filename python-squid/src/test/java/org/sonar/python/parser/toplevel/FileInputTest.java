@@ -45,7 +45,7 @@ public class FileInputTest {
     assertThat(p, parse("statement"));
     assertThat(p, parse("statement statement"));
     assertThat(p, parse("\n"));
-    assertThat(p, parse("statement \n statement"));
+    assertThat(p, parse("statement\nstatement"));
   }
 
 }

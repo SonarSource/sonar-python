@@ -19,13 +19,16 @@
  */
 package org.sonar.python.lexer;
 
+import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import org.sonar.channel.Channel;
 import org.sonar.channel.CodeReader;
+import org.sonar.python.api.PythonTokenType;
 
 /**
  * http://docs.python.org/release/3.2/reference/lexical_analysis.html#explicit-line-joining
  * http://docs.python.org/release/3.2/reference/lexical_analysis.html#implicit-line-joining
+ * http://docs.python.org/release/3.2/reference/lexical_analysis.html#blank-lines
  */
 public class NewLineChannel extends Channel<Lexer> {
 
@@ -59,27 +62,52 @@ public class NewLineChannel extends Channel<Lexer> {
         break;
     }
 
-    // Explicit line joining
     if (ch == '\\' && isNewLine(code.charAt(1))) {
+      // Explicit line joining
       code.pop();
-      if (code.charAt(0) == '\r' && code.charAt(1) == '\n') {
-        code.pop();
-        code.pop();
-      } else {
-        code.pop();
-      }
+      consumeEOL(code);
       return true;
     }
 
-    // Implicit line joining
-    if (isNewLine(ch) && isImplicitLineJoining()) {
-      while (Character.isWhitespace(code.peek())) {
-        code.pop();
+    if (isNewLine(ch)) {
+      if (isImplicitLineJoining()) {
+        // Implicit line joining
+        while (Character.isWhitespace(code.peek())) {
+          code.pop();
+        }
+        return true;
       }
+
+      if ((output.getTokens().size() == 0) || (output.getTokens().get(output.getTokens().size() - 1).getType() == PythonTokenType.NEWLINE)) {
+        // Blank line
+        consumeEOL(code);
+        return true;
+      }
+
+      // NEWLINE token
+      output.addToken(Token.builder()
+          .setLine(code.getLinePosition())
+          .setColumn(code.getColumnPosition())
+          .setURI(output.getURI())
+          .setType(PythonTokenType.NEWLINE)
+          .setValueAndOriginalValue("\n")
+          .build());
+      consumeEOL(code);
       return true;
     }
 
     return false;
+  }
+
+  private static void consumeEOL(CodeReader code) {
+    if (code.charAt(0) == '\r' && code.charAt(1) == '\n') {
+      // \r\n
+      code.pop();
+      code.pop();
+    } else {
+      // \r or \n
+      code.pop();
+    }
   }
 
   private static boolean isNewLine(char ch) {

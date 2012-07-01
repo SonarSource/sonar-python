@@ -45,18 +45,24 @@ public class IndentationChannel extends Channel<Lexer> {
 
     int line = code.getLinePosition();
     int column = code.getColumnPosition();
-    int indentationLevel = 0;
+
+    int index = 0;
+    char ch = code.charAt(index);
+    while (ch == ' ' || ch == '\t') {
+      index++;
+      ch = code.charAt(index);
+    }
+
+    if (ch == '\n' || ch == '\r' || ch == '#') {
+      // Blank line
+      return false;
+    }
 
     buffer.setLength(0);
-    char ch = (char) code.peek();
-    while (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n') {
+    int indentationLevel = 0;
+    for (int i = 0; i < index; i++) {
       buffer.append((char) code.pop());
-      if (ch == '\r' || ch == '\n') {
-        indentationLevel = 0;
-      } else {
-        indentationLevel++;
-      }
-      ch = (char) code.peek();
+      indentationLevel++;
     }
 
     if (indentationLevel > lexerState.indentationStack.peek()) {

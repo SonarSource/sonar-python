@@ -56,9 +56,8 @@ public class PythonLexer {
 
         .withChannel(new IndentationChannel(lexerState))
         .withPreprocessor(new IndentationPreprocessor(lexerState))
-        .withChannel(regexp(PythonTokenType.NEWLINE, "\\r?\\n|\\r"))
 
-        .withChannel(new BlackHoleChannel("\\s++"))
+        .withChannel(new BlackHoleChannel("\\s"))
 
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#comments
         .withChannel(commentRegexp("#[^\\n\\r]*+"))
