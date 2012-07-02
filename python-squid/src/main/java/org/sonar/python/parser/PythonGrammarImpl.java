@@ -243,7 +243,8 @@ public class PythonGrammarImpl extends PythonGrammar {
     decorator.is("@", dotted_name, opt("(", opt(arglist), ")"), NEWLINE);
     dotted_name.is(NAME, o2n(".", NAME));
 
-    classdef.is(opt(decorators), "class", NAME, opt("(", opt(testlist), ")"), ":", suite);
+    classdef.is(opt(decorators), "class", classname, opt("(", opt(testlist), ")"), ":", suite);
+    classname.is(NAME);
   }
 
   /**

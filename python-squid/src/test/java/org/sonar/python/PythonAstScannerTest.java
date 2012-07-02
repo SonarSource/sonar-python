@@ -75,6 +75,12 @@ public class PythonAstScannerTest {
   }
 
   @Test
+  public void classes() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/classes.py"));
+    assertThat(file.getInt(PythonMetric.CLASSES)).isEqualTo(1);
+  }
+
+  @Test
   public void complexity() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/complexity.py"));
     assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(6);

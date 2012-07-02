@@ -132,6 +132,7 @@ public class PythonGrammar extends Grammar {
   public Rule funcname;
 
   public Rule classdef;
+  public Rule classname;
 
   // Top-level components
 

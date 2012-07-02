@@ -19,38 +19,15 @@
  */
 package org.sonar.python.api;
 
-import org.sonar.squid.measures.CalculatedMetricFormula;
-import org.sonar.squid.measures.MetricDef;
+import org.junit.Test;
 
-public enum PythonMetric implements MetricDef {
-  FILES,
-  LINES,
-  LINES_OF_CODE,
-  STATEMENTS,
-  FUNCTIONS,
-  CLASSES,
-  COMPLEXITY,
-  COMMENT_LINES,
-  COMMENT_BLANK_LINES;
+import static org.fest.assertions.Assertions.assertThat;
 
-  public String getName() {
-    return name();
-  }
+public class PythonPunctuatorTest {
 
-  public boolean isCalculatedMetric() {
-    return false;
-  }
-
-  public boolean aggregateIfThereIsAlreadyAValue() {
-    return true;
-  }
-
-  public boolean isThereAggregationFormula() {
-    return true;
-  }
-
-  public CalculatedMetricFormula getCalculatedMetricFormula() {
-    return null;
+  @Test
+  public void test() {
+    assertThat(PythonPunctuator.values()).hasSize(43);
   }
 
 }

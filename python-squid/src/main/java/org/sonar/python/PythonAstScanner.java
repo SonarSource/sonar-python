@@ -108,6 +108,21 @@ public final class PythonAstScanner {
         .subscribeTo(parser.getGrammar().funcdef)
         .build());
 
+    /* Classes */
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<PythonGrammar>(new SourceCodeBuilderCallback() {
+      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
+        String functionName = astNode.findFirstChild(parser.getGrammar().classname).getChild(0).getTokenValue();
+        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
+        function.setStartAtLine(astNode.getTokenLine());
+        return function;
+      }
+    }, parser.getGrammar().classdef));
+
+    builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
+        .setMetricDef(PythonMetric.CLASSES)
+        .subscribeTo(parser.getGrammar().classdef)
+        .build());
+
     /* Metrics */
     builder.withSquidAstVisitor(new LinesVisitor<PythonGrammar>(PythonMetric.LINES));
     builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<PythonGrammar>(PythonMetric.LINES_OF_CODE));
