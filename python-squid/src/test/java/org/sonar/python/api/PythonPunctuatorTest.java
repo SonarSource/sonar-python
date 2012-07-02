@@ -27,7 +27,7 @@ public class PythonPunctuatorTest {
 
   @Test
   public void test() {
-    assertThat(PythonPunctuator.values()).hasSize(43);
+    assertThat(PythonPunctuator.values()).hasSize(44);
   }
 
 }

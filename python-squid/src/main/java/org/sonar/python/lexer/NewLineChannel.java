@@ -43,22 +43,16 @@ public class NewLineChannel extends Channel<Lexer> {
     char ch = (char) code.peek();
     switch (ch) {
       case '[':
-        lexerState.squareBrackets++;
+      case '(':
+      case '{':
+        lexerState.brackets++;
         break;
       case ']':
-        lexerState.squareBrackets--;
-        break;
-      case '(':
-        lexerState.parentheses++;
-        break;
       case ')':
-        lexerState.parentheses--;
-        break;
-      case '{':
-        lexerState.curlyBraces++;
-        break;
       case '}':
-        lexerState.curlyBraces--;
+        lexerState.brackets--;
+        break;
+      default:
         break;
     }
 
@@ -68,6 +62,7 @@ public class NewLineChannel extends Channel<Lexer> {
       while (Character.isWhitespace(code.peek())) {
         code.pop();
       }
+      lexerState.joined = true;
       return true;
     }
 
@@ -77,6 +72,7 @@ public class NewLineChannel extends Channel<Lexer> {
         while (Character.isWhitespace(code.peek())) {
           code.pop();
         }
+        lexerState.joined = true;
         return true;
       }
 
@@ -117,7 +113,7 @@ public class NewLineChannel extends Channel<Lexer> {
   }
 
   private boolean isImplicitLineJoining() {
-    return lexerState.parentheses > 0 || lexerState.squareBrackets > 0 || lexerState.curlyBraces > 0;
+    return lexerState.brackets > 0;
   }
 
 }

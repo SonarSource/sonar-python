@@ -42,6 +42,7 @@ public class PrintStatementTest {
   public void realLife() {
     assertThat(p, parse("print 1"));
     assertThat(p, parse("print 1,"));
+    assertThat(p, parse("print >> 1"));
   }
 
 }

@@ -23,19 +23,17 @@ import java.util.Stack;
 
 public class LexerState {
 
-  int parentheses;
-  int curlyBraces;
-  int squareBrackets;
-
   final Stack<Integer> indentationStack = new Stack<Integer>();
+
+  int brackets;
+  boolean joined;
 
   public void reset() {
     indentationStack.clear();
     indentationStack.push(0);
 
-    parentheses = 0;
-    curlyBraces = 0;
-    squareBrackets = 0;
+    brackets = 0;
+    joined = false;
   }
 
 }

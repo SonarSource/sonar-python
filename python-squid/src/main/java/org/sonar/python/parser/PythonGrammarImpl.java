@@ -75,6 +75,7 @@ public class PythonGrammarImpl extends PythonGrammar {
         and("(", opt(or(yield_expr, testlist_comp)), ")"),
         and("[", opt(testlist_comp), "]"),
         and("{", opt(dictorsetmaker), "}"),
+        and("`", test, o2n(",", test), "`"),
         NAME,
         PythonTokenType.NUMBER,
         one2n(PythonTokenType.STRING),
@@ -174,8 +175,8 @@ public class PythonGrammarImpl extends PythonGrammar {
 
     // FIXME not in 3.2:
     print_stmt.is("print", or(
-        and(opt(test, o2n(",", test), opt(","))),
-        and(">>", test, opt(one2n(",", test), opt(",")))));
+        and(">>", test, opt(one2n(",", test), opt(","))),
+        and(opt(test, o2n(",", test), opt(",")))));
 
     assert_stmt.is("assert", test, opt(",", test));
 

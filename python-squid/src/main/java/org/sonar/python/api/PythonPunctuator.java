@@ -48,6 +48,7 @@ public enum PythonPunctuator implements TokenType {
 
   // Delimiters
 
+  BACKTICK("`"),
   LPARENTHESIS("("),
   RPARENTHESIS(")"),
   LBRACKET("["),

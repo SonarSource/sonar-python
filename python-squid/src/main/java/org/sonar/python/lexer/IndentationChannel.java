@@ -39,6 +39,11 @@ public class IndentationChannel extends Channel<Lexer> {
 
   @Override
   public boolean consume(CodeReader code, Lexer lexer) {
+    if (lexerState.joined) {
+      lexerState.joined = false;
+      return false;
+    }
+
     if (code.getColumnPosition() != 0) {
       return false;
     }
