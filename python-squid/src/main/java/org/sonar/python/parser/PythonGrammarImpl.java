@@ -145,6 +145,7 @@ public class PythonGrammarImpl extends PythonGrammar {
         ">=",
         "<=",
         "!=",
+        "<>",
         and("is", opt("not")),
         and(opt("not"), "in")));
 

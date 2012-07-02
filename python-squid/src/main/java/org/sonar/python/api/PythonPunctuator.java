@@ -45,6 +45,7 @@ public enum PythonPunctuator implements TokenType {
   GT_EQU(">="),
   EQU("=="),
   NOT_EQU("!="),
+  NOT_EQU2("<>"),
 
   // Delimiters
 
