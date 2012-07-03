@@ -39,6 +39,7 @@ public final class CheckList {
         LineLengthCheck.class,
         FunctionComplexityCheck.class,
         ClassComplexityCheck.class,
+        FileComplexityCheck.class,
         XPathCheck.class);
   }
 
