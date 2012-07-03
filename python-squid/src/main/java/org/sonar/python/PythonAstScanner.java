@@ -31,10 +31,7 @@ import com.sonar.sslr.squid.metrics.LinesVisitor;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.squid.api.SourceCode;
-import org.sonar.squid.api.SourceFile;
-import org.sonar.squid.api.SourceFunction;
-import org.sonar.squid.api.SourceProject;
+import org.sonar.squid.api.*;
 import org.sonar.squid.indexer.QueryByType;
 
 import java.io.File;
@@ -112,7 +109,7 @@ public final class PythonAstScanner {
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<PythonGrammar>(new SourceCodeBuilderCallback() {
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
         String functionName = astNode.findFirstChild(parser.getGrammar().classname).getChild(0).getTokenValue();
-        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
+        SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
         function.setStartAtLine(astNode.getTokenLine());
         return function;
       }

@@ -19,27 +19,24 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import java.io.File;
 
-public final class CheckList {
+public class ClassComplexityCheckTest {
 
-  public static final String REPOSITORY_KEY = "python";
+  @Test
+  public void test() {
+    ClassComplexityCheck check = new ClassComplexityCheck();
+    check.setMaximumClassComplexityThreshold(2);
 
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
-
-  private CheckList() {
-  }
-
-  public static List<Class> getChecks() {
-    return ImmutableList.<Class> of(
-        ParsingErrorCheck.class,
-        CommentRegularExpressionCheck.class,
-        LineLengthCheck.class,
-        FunctionComplexityCheck.class,
-        ClassComplexityCheck.class,
-        XPathCheck.class);
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/classComplexity.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(1).withMessage("Class has a complexity of 5 which is greater than 2 authorized.")
+        .noMore();
   }
 
 }
