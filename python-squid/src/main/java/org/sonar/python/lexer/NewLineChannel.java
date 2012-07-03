@@ -89,6 +89,7 @@ public class NewLineChannel extends Channel<Lexer> {
           .setURI(output.getURI())
           .setType(PythonTokenType.NEWLINE)
           .setValueAndOriginalValue("\n")
+          .setGeneratedCode(true)
           .build());
       consumeEOL(code);
       return true;
