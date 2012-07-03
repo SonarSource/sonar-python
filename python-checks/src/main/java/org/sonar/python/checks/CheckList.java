@@ -40,6 +40,7 @@ public final class CheckList {
         FunctionComplexityCheck.class,
         ClassComplexityCheck.class,
         FileComplexityCheck.class,
+        NestedIfDepthCheck.class,
         XPathCheck.class);
   }
 
