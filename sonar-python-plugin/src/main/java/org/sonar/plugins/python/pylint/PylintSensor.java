@@ -20,7 +20,6 @@
 
 package org.sonar.plugins.python.pylint;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
@@ -44,10 +43,10 @@ public class PylintSensor implements Sensor {
 
   private RuleFinder ruleFinder;
   private RulesProfile profile;
-  private Configuration conf;
+  private PylintConfiguration conf;
   private String[] environment;
 
-  public PylintSensor(RuleFinder ruleFinder, Project project, Configuration conf, RulesProfile profile) {
+  public PylintSensor(RuleFinder ruleFinder, Project project, PylintConfiguration conf, RulesProfile profile) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
@@ -79,8 +78,8 @@ public class PylintSensor implements Sensor {
   protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
     File pyfile = File.fromIOFile(inputFile.getFile(), project);
 
-    String pylintConfigPath = getPylintConfigPath(project);
-    String pylintPath = conf.getString(PylintConfiguration.PYLINT_KEY, null);
+    String pylintConfigPath = conf.getPylintConfigPath(project);
+    String pylintPath = conf.getPylintPath();
 
     PylintViolationsAnalyzer analyzer = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
     List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), environment);
@@ -125,16 +124,6 @@ public class PylintSensor implements Sensor {
       result.add(new java.io.File(baseDir, pathStr).getPath());
     }
     return result;
-  }
-
-  protected static String getPylintConfigPath(Project project) {
-    String absConfigPath = null;
-    String configPath = (String) project.getProperty(PylintConfiguration.PYLINT_CONFIG_KEY);
-    if (configPath != null && !"".equals(configPath)) {
-      java.io.File projectRoot = project.getFileSystem().getBasedir();
-      absConfigPath = new java.io.File(projectRoot.getPath(), configPath).getPath();
-    }
-    return absConfigPath;
   }
 
 }

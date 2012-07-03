@@ -20,7 +20,6 @@
 
 package org.sonar.plugins.python.pylint;
 
-import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
@@ -42,13 +41,13 @@ public class PylintSensorTest {
   private Project project;
   private ProjectFileSystem pfs;
   private RuleFinder ruleFinder;
-  private Configuration conf;
+  private PylintConfiguration conf;
   private RulesProfile profile;
 
   @Before
   public void init() {
     ruleFinder = mock(RuleFinder.class);
-    conf = mock(Configuration.class);
+    conf = mock(PylintConfiguration.class);
     profile = mock(RulesProfile.class);
 
     pfs = mock(ProjectFileSystem.class);
@@ -95,20 +94,6 @@ public class PylintSensorTest {
     checkNecessityOfExecution(foreignProject, emptyProfile, false);
   }
 
-  @Test
-  public void shouldGetCorrectPylintPath() {
-    // which means: null if no property is set
-    // valid absolute path if it is
-
-    Project withOutProperty = createProjectWithProperty(null, null);
-    Project withProperty = createProjectWithProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
-    Project withEmptyProperty = createProjectWithProperty(PylintConfiguration.PYLINT_CONFIG_KEY, "");
-
-    assertThat(PylintSensor.getPylintConfigPath(withProperty)).isEqualTo("/tmp/projectroot/.pylintrc");
-    assertThat(PylintSensor.getPylintConfigPath(withOutProperty)).isNull();
-    assertThat(PylintSensor.getPylintConfigPath(withEmptyProperty)).isNull();
-  }
-
   private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
     PylintSensor sensor = new PylintSensor(ruleFinder, project, conf, profile);
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
@@ -117,17 +102,6 @@ public class PylintSensorTest {
   private static Project createProjectForLanguage(String languageKey) {
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn(languageKey);
-    return project;
-  }
-
-  private static Project createProjectWithProperty(String key, String value) {
-    ProjectFileSystem pfs = mock(ProjectFileSystem.class);
-    when(pfs.getBasedir()).thenReturn(new File("/tmp/projectroot"));
-    Project project = mock(Project.class);
-    when(project.getFileSystem()).thenReturn(pfs);
-    if (key != null) {
-      when(project.getProperty(key)).thenReturn(value);
-    }
     return project;
   }
 

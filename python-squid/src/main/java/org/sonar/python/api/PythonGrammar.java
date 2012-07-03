@@ -35,7 +35,7 @@ public class PythonGrammar extends Grammar {
   public Rule arglist;
   public Rule argument;
 
-  public Rule NAME;
+  public Rule name;
   public Rule varargslist;
   public Rule fpdef;
   public Rule fplist;

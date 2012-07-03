@@ -76,7 +76,7 @@ public class PythonGrammarImpl extends PythonGrammar {
         and("[", opt(testlist_comp), "]"),
         and("{", opt(dictorsetmaker), "}"),
         and("`", test, o2n(",", test), "`"),
-        NAME,
+        name,
         PythonTokenType.NUMBER,
         one2n(PythonTokenType.STRING),
         "...",
@@ -87,7 +87,7 @@ public class PythonGrammarImpl extends PythonGrammar {
     trailer.is(or(
         and("(", opt(arglist), ")"),
         and("[", subscriptlist, "]"),
-        and(".", NAME)));
+        and(".", name)));
     subscriptlist.is(subscript, o2n(",", subscript), opt(","));
     subscript.is(or(
         and(".", ".", "."),
@@ -113,12 +113,12 @@ public class PythonGrammarImpl extends PythonGrammar {
 
     yield_expr.is("yield", opt(testlist));
 
-    NAME.is(IDENTIFIER);
+    name.is(IDENTIFIER);
     varargslist.is(or(
-        and(o2n(fpdef, opt("=", test), ","), or(and("*", NAME, opt(",", "**", NAME)), and("**", NAME))),
+        and(o2n(fpdef, opt("=", test), ","), or(and("*", name, opt(",", "**", name)), and("**", name))),
         and(fpdef, opt("=", test), o2n(",", fpdef, opt("=", test)), opt(","))));
     fpdef.is(or(
-        NAME,
+        name,
         and("(", fplist, ")")));
     fplist.is(fpdef, o2n(",", fpdef), opt(","));
   }
@@ -195,13 +195,13 @@ public class PythonGrammarImpl extends PythonGrammar {
     import_stmt.is(or(import_name, import_from));
     import_name.is("import", dotted_as_names);
     import_from.is("from", or(and(o2n("."), dotted_name), one2n(".")), "import", or("*", and("(", import_as_names, ")"), import_as_names));
-    import_as_name.is(NAME, opt("as", NAME));
-    dotted_as_name.is(dotted_name, opt("as", NAME));
+    import_as_name.is(name, opt("as", name));
+    dotted_as_name.is(dotted_name, opt("as", name));
     import_as_names.is(import_as_name, o2n(",", import_as_name), opt(","));
     dotted_as_names.is(dotted_as_name, o2n(",", dotted_as_name));
 
-    global_stmt.is("global", NAME, o2n(",", NAME));
-    nonlocal_stmt.is("nonlocal", NAME, o2n(",", NAME));
+    global_stmt.is("global", name, o2n(",", name));
+    nonlocal_stmt.is("nonlocal", name, o2n(",", name));
   }
 
   /**
@@ -239,14 +239,14 @@ public class PythonGrammarImpl extends PythonGrammar {
     with_item.is(test, opt("as", expr));
 
     funcdef.is(opt(decorators), "def", funcname, "(", opt(varargslist), ")", ":", suite);
-    funcname.is(NAME);
+    funcname.is(name);
 
     decorators.is(one2n(decorator));
     decorator.is("@", dotted_name, opt("(", opt(arglist), ")"), NEWLINE);
-    dotted_name.is(NAME, o2n(".", NAME));
+    dotted_name.is(name, o2n(".", name));
 
     classdef.is(opt(decorators), "class", classname, opt("(", opt(testlist), ")"), ":", suite);
-    classname.is(NAME);
+    classname.is(name);
   }
 
   /**
