@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.api.rules.AnnotationRuleParser;
@@ -29,6 +30,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -65,8 +67,12 @@ public class CheckListTest {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("org.sonar.l10n.python", Locale.ENGLISH);
 
+    Set<String> keys = Sets.newHashSet();
     List<Rule> rules = new AnnotationRuleParser().parse("repositoryKey", checks);
     for (Rule rule : rules) {
+      assertThat(keys).as("Duplicate key " + rule.getKey()).excludes(rule.getKey());
+      keys.add(rule.getKey());
+
       resourceBundle.getString("rule." + CheckList.REPOSITORY_KEY + "." + rule.getKey() + ".name");
       assertThat(getClass().getResource("/org/sonar/l10n/python/" + rule.getKey() + ".html"))
           .overridingErrorMessage("No description for " + rule.getKey())
