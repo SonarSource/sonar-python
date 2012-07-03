@@ -31,21 +31,16 @@ import org.sonar.python.api.PythonPunctuator;
   key = "BackticksUsage",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class BackticksUsageCheck extends SquidCheck<PythonGrammar> {
-
-  private int prevLine = -1;
+public class InequalityUsageCheck extends SquidCheck<PythonGrammar> {
 
   @Override
   public void init() {
-    subscribeTo(PythonPunctuator.BACKTICK);
+    subscribeTo(PythonPunctuator.NOT_EQU2);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (prevLine != astNode.getTokenLine()) {
-      prevLine = astNode.getTokenLine();
-      getContext().createLineViolation(this, "Replace backticks by call to repr().", astNode);
-    }
+    getContext().createLineViolation(this, "Replace \"<>\" by \"!=\".", astNode);
   }
 
 }

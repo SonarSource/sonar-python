@@ -19,33 +19,23 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.squid.checks.SquidCheck;
-import org.sonar.check.BelongsToProfile;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squid.api.SourceFile;
 
-@Rule(
-  key = "BackticksUsage",
-  priority = Priority.MAJOR)
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class BackticksUsageCheck extends SquidCheck<PythonGrammar> {
+import java.io.File;
 
-  private int prevLine = -1;
+public class InequalityUsageCheckTest {
 
-  @Override
-  public void init() {
-    subscribeTo(PythonPunctuator.BACKTICK);
-  }
+  @Test
+  public void test() {
+    InequalityUsageCheck check = new InequalityUsageCheck();
 
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (prevLine != astNode.getTokenLine()) {
-      prevLine = astNode.getTokenLine();
-      getContext().createLineViolation(this, "Replace backticks by call to repr().", astNode);
-    }
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/inequalityUsage.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(1).withMessage("Replace \"<>\" by \"!=\".")
+        .noMore();
   }
 
 }

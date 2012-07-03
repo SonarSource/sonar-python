@@ -43,6 +43,7 @@ public final class CheckList {
         NestedIfDepthCheck.class,
         OneStatementPerLineCheck.class,
         BackticksUsageCheck.class,
+        InequalityUsageCheck.class,
         XPathCheck.class);
   }
 
