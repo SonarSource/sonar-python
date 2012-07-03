@@ -19,24 +19,26 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import java.io.File;
 
-public final class CheckList {
+public class CommentRegularExpressionCheckTest {
 
-  public static final String REPOSITORY_KEY = "python";
+  @Test
+  public void test() {
+    CommentRegularExpressionCheck check = new CommentRegularExpressionCheck();
 
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
+    check.regularExpression = "(?i).*TODO.*";
+    check.message = "Avoid TODO";
 
-  private CheckList() {
-  }
-
-  public static List<Class> getChecks() {
-    return ImmutableList.<Class> of(
-        ParsingErrorCheck.class,
-        CommentRegularExpressionCheck.class,
-        XPathCheck.class);
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/commentRegularExpression.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(1).withMessage("Avoid TODO")
+        .noMore();
   }
 
 }
