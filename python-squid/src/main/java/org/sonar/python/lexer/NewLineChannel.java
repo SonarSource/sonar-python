@@ -59,20 +59,14 @@ public class NewLineChannel extends Channel<Lexer> {
     if (ch == '\\' && isNewLine(code.charAt(1))) {
       // Explicit line joining
       code.pop();
-      while (Character.isWhitespace(code.peek())) {
-        code.pop();
-      }
-      lexerState.joined = true;
+      joinLines(code);
       return true;
     }
 
     if (isNewLine(ch)) {
       if (isImplicitLineJoining()) {
         // Implicit line joining
-        while (Character.isWhitespace(code.peek())) {
-          code.pop();
-        }
-        lexerState.joined = true;
+        joinLines(code);
         return true;
       }
 
@@ -96,6 +90,13 @@ public class NewLineChannel extends Channel<Lexer> {
     }
 
     return false;
+  }
+
+  private void joinLines(CodeReader code) {
+    while (Character.isWhitespace(code.peek())) {
+      code.pop();
+    }
+    lexerState.joined = true;
   }
 
   private static void consumeEOL(CodeReader code) {

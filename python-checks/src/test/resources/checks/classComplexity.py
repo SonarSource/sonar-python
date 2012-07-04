@@ -7,3 +7,7 @@ class MyClass:
         if expression:
             pass
         return
+
+class MyClass2:
+    def hello():
+        return

@@ -6,3 +6,6 @@ def hello():
     if expression:
         pass
     return
+
+def hello2():
+    return
