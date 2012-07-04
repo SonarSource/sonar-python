@@ -44,9 +44,15 @@ public class PylintConfigurationTest {
     project.setFileSystem(pfs);
 
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isNull();
+
     conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, "");
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isNull();
+
     conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
+    assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo("/tmp/projectroot/.pylintrc");
+
+    conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, "/absolute/.pylintrc");
+    assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo("/absolute/.pylintrc");
   }
 
 }

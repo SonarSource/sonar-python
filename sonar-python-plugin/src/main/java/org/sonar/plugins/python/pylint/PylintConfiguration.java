@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.pylint;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -58,9 +59,13 @@ public class PylintConfiguration implements BatchExtension {
   public String getPylintConfigPath(Project project) {
     String absConfigPath = null;
     String configPath = conf.getString(PylintConfiguration.PYLINT_CONFIG_KEY);
-    if (configPath != null && !"".equals(configPath)) {
-      File projectRoot = project.getFileSystem().getBasedir();
-      absConfigPath = new File(projectRoot.getPath(), configPath).getPath();
+    if (StringUtils.isNotEmpty(configPath)) {
+      if (new File(configPath).isAbsolute()) {
+        absConfigPath = configPath;
+      } else {
+        File projectRoot = project.getFileSystem().getBasedir();
+        absConfigPath = new File(projectRoot.getPath(), configPath).getPath();
+      }
     }
     return absConfigPath;
   }
