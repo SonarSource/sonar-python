@@ -28,7 +28,7 @@ import org.sonar.python.api.PythonTokenType;
 /**
  * http://docs.python.org/reference/lexical_analysis.html#string-literals
  */
-public class LongStringLiteralsChannel extends Channel<Lexer> {
+public class StringLiteralsChannel extends Channel<Lexer> {
 
   private final StringBuilder sb = new StringBuilder();
 
@@ -37,27 +37,24 @@ public class LongStringLiteralsChannel extends Channel<Lexer> {
 
   @Override
   public boolean consume(CodeReader code, Lexer output) {
+    int line = code.getLinePosition();
+    int column = code.getColumnPosition();
+    index = 0;
     readStringPrefix(code);
     if (ch != '\'' && ch != '\"') {
       return false;
     }
-    if (!isLookingOn(code, ch, index)) {
-      return false;
+    if (isLookingOnLongString(code, ch, index)) {
+      readLongString(code);
+    } else {
+      readString(code);
     }
-    index++;
-    while (!isLookingOn(code, ch, index)) {
-      if (code.charAt(index) == '\\') {
-        // escape
-        index++;
-      }
-      index++;
-    }
-    for (int i = 0; i < index + 3; i++) {
+    for (int i = 0; i < index; i++) {
       sb.append((char) code.pop());
     }
     output.addToken(Token.builder()
-        .setLine(code.getLinePosition())
-        .setColumn(code.getColumnPosition())
+        .setLine(line)
+        .setColumn(column)
         .setURI(output.getURI())
         .setValueAndOriginalValue(sb.toString())
         .setType(PythonTokenType.STRING)
@@ -66,8 +63,31 @@ public class LongStringLiteralsChannel extends Channel<Lexer> {
     return true;
   }
 
+  private void readString(CodeReader code) {
+    index++;
+    while (code.charAt(index) != ch) {
+      if (code.charAt(index) == '\\') {
+        // escape
+        index++;
+      }
+      index++;
+    }
+    index++;
+  }
+
+  private void readLongString(CodeReader code) {
+    index++;
+    while (!isLookingOnLongString(code, ch, index)) {
+      if (code.charAt(index) == '\\') {
+        // escape
+        index++;
+      }
+      index++;
+    }
+    index += 3;
+  }
+
   private void readStringPrefix(CodeReader code) {
-    index = 0;
     ch = Character.toUpperCase(code.charAt(index));
     if (ch == 'U' || ch == 'B') {
       index++;
@@ -79,7 +99,7 @@ public class LongStringLiteralsChannel extends Channel<Lexer> {
     }
   }
 
-  private static boolean isLookingOn(CodeReader code, char ch, int index) {
+  private static boolean isLookingOnLongString(CodeReader code, char ch, int index) {
     return (code.charAt(index) == ch) && (code.charAt(index + 1) == ch) && (code.charAt(index + 2) == ch);
   }
 

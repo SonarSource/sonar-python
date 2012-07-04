@@ -44,7 +44,6 @@ public final class PythonLexer {
   }
 
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
-  private static final String STRING_PREFIX = "(ur|uR|u|UR|Ur|U|r|R)";
   private static final String BYTES_PREFIX = "(br|bR|b|Br|BR|B)";
   private static final String IMAGINARY_SUFFIX = "(j|J)";
   private static final String LONG_INTEGER_SUFFIX = "(l|L)";
@@ -67,10 +66,7 @@ public final class PythonLexer {
         .withChannel(commentRegexp("#[^\\n\\r]*+"))
 
         // http://docs.python.org/reference/lexical_analysis.html#string-literals
-        .withChannel(new LongStringLiteralsChannel())
-
-        .withChannel(regexp(PythonTokenType.STRING, STRING_PREFIX + "?+\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
-        .withChannel(regexp(PythonTokenType.STRING, STRING_PREFIX + "?+\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
+        .withChannel(new StringLiteralsChannel())
 
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
         .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
