@@ -42,10 +42,8 @@ public class SuiteTest {
   @Test
   public void ok() {
     g.stmt_list.mock();
-    g.statement.mock();
 
-    // TODO assertThat(p, parse("stmt_list\n"));
-    // TODO assertThat(p, parse("\n    statement"));
+    assertThat(p, parse("stmt_list\n"));
   }
 
   @Test

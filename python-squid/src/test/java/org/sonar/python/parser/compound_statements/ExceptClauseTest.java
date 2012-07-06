@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.compound_statements;
 
 import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
@@ -28,33 +28,24 @@ import org.sonar.python.parser.PythonParser;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-public class RaiseStatementTest {
+public class ExceptClauseTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
   PythonGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.raise_stmt);
+    p.setRootRule(g.except_clause);
   }
 
   @Test
   public void ok() {
     g.test.mock();
 
-    assertThat(p, parse("raise"));
-    assertThat(p, parse("raise test"));
-
-    assertThat("2.7", p, parse("raise test, test"));
-    assertThat("2.7", p, parse("raise test, test, test"));
-
-    assertThat("3.2", p, parse("raise test from test"));
-  }
-
-  @Test
-  public void realLife() {
-    assertThat(p, parse("raise"));
-    assertThat(p, parse("raise exc_info[1], None, exc_info[2]"));
+    assertThat(p, parse("except"));
+    assertThat(p, parse("except test"));
+    assertThat("3.2", p, parse("except test as test"));
+    assertThat("2.7", p, parse("except test , test"));
   }
 
 }

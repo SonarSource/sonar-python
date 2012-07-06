@@ -146,7 +146,7 @@ public class PythonGrammarImpl extends PythonGrammar {
         ">=",
         "<=",
         "!=",
-        "<>",
+        permissive_2_7("<>"),
         and("is", opt("not")),
         and(opt("not"), "in")));
 
@@ -161,8 +161,8 @@ public class PythonGrammarImpl extends PythonGrammar {
    */
   private void simpleStatements() {
     simple_stmt.is(or(
-        print_stmt,
-        exec_stmt,
+        permissive_2_7(print_stmt),
+        permissive_2_7(exec_stmt),
         expression_stmt,
         assert_stmt,
         pass_stmt,
@@ -176,12 +176,10 @@ public class PythonGrammarImpl extends PythonGrammar {
         global_stmt,
         nonlocal_stmt));
 
-    // FIXME not in 3.2:
     print_stmt.is("print", not("("), or(
         and(">>", test, opt(one2n(",", test), opt(","))),
         and(opt(test, o2n(",", test), opt(",")))));
 
-    // FIXME not in 3.2:
     exec_stmt.is("exec", not("("), expr, opt("in", test, opt(",", test)));
 
     assert_stmt.is("assert", test, opt(",", test));
@@ -190,13 +188,10 @@ public class PythonGrammarImpl extends PythonGrammar {
     del_stmt.is("del", exprlist);
     return_stmt.is("return", opt(testlist));
     yield_stmt.is(yield_expr);
-    // FIXME different in 3.2:
-    // raise_stmt: 'raise' [test ['from' test]]
-    raise_stmt.is("raise", opt(test, opt(",", test, opt(",", test))));
+    raise_stmt.is("raise", opt(test, opt(or(and("from", test), permissive_2_7(",", test, opt(",", test))))));
     break_stmt.is("break");
     continue_stmt.is("continue");
 
-    // FIXME import_stmt different in 3.2:
     import_stmt.is(or(import_name, import_from));
     import_name.is("import", dotted_as_names);
     import_from.is("from", or(and(o2n("."), dotted_name), one2n(".")), "import", or("*", and("(", import_as_names, ")"), import_as_names));
@@ -236,8 +231,6 @@ public class PythonGrammarImpl extends PythonGrammar {
     for_stmt.is("for", exprlist, "in", testlist, ":", suite, opt("else", ":", suite));
 
     try_stmt.is("try", ":", suite, or(and(o2n(except_clause, ":", suite), opt("else", ":", suite), opt("finally", ":", suite)), and("finally", ":", suite)));
-    // FIXME different in 3.2:
-    // except_clause: 'except' [test ['as' NAME]]
     except_clause.is("except", opt(test, opt(or("as", ","), test)));
 
     with_stmt.is("with", with_item, o2n(",", with_item), ":", suite);
@@ -267,6 +260,13 @@ public class PythonGrammarImpl extends PythonGrammar {
    */
   private static Object permissive(Object object) {
     return object;
+  }
+
+  /**
+   * Syntactic sugar, which helps to specify constructs, which are part of Python 2.7.3, but not 3.0.
+   */
+  private static Object permissive_2_7(Object... object) {
+    return and(object);
   }
 
 }
