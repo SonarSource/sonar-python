@@ -19,35 +19,23 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import java.io.File;
 
-public final class CheckList {
+public class PrintStatementUsageCheckTest {
 
-  public static final String REPOSITORY_KEY = "python";
+  @Test
+  public void test() {
+    PrintStatementUsageCheck check = new PrintStatementUsageCheck();
 
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
-
-  private CheckList() {
-  }
-
-  public static List<Class> getChecks() {
-    return ImmutableList.<Class> of(
-        ParsingErrorCheck.class,
-        CommentRegularExpressionCheck.class,
-        LineLengthCheck.class,
-        FunctionComplexityCheck.class,
-        ClassComplexityCheck.class,
-        FileComplexityCheck.class,
-        NestedIfDepthCheck.class,
-        OneStatementPerLineCheck.class,
-        BackticksUsageCheck.class,
-        InequalityUsageCheck.class,
-        LongIntegerWithLowercaseSuffixUsageCheck.class,
-        ExecStatementUsageCheck.class,
-        PrintStatementUsageCheck.class,
-        XPathCheck.class);
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/printStatementUsage.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(1).withMessage("Replace print statement by built-in function.")
+        .noMore();
   }
 
 }
