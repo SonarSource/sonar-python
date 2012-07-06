@@ -28,6 +28,14 @@ public class PythonMetricTest {
   @Test
   public void test() {
     assertThat(PythonMetric.values()).hasSize(9);
+
+    for (PythonMetric metric : PythonMetric.values()) {
+      assertThat(metric.getName()).isEqualTo(metric.name());
+      assertThat(metric.isCalculatedMetric()).isFalse();
+      assertThat(metric.aggregateIfThereIsAlreadyAValue()).isTrue();
+      assertThat(metric.isThereAggregationFormula()).isTrue();
+      assertThat(metric.getCalculatedMetricFormula()).isNull();
+    }
   }
 
 }

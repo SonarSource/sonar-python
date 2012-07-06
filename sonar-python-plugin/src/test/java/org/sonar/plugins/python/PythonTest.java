@@ -17,24 +17,20 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.api;
+package org.sonar.plugins.python;
 
-import com.sonar.sslr.api.AstNode;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
-public class PythonPunctuatorTest {
+public class PythonTest {
 
   @Test
   public void test() {
-    assertThat(PythonPunctuator.values()).hasSize(45);
-
-    AstNode astNode = mock(AstNode.class);
-    for (PythonPunctuator punctuator : PythonPunctuator.values()) {
-      assertThat(punctuator.hasToBeSkippedFromAst(astNode)).isFalse();
-    }
+    Python language = new Python();
+    assertThat(language.getKey()).isEqualTo("py");
+    assertThat(language.getName()).isEqualTo("Python");
+    assertThat(language.getFileSuffixes()).hasSize(1).contains("py");
   }
 
 }

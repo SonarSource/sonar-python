@@ -19,15 +19,24 @@
  */
 package org.sonar.python.api;
 
+import com.sonar.sslr.api.AstNode;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class PythonTokenTypeTest {
 
   @Test
   public void test() {
     assertThat(PythonTokenType.values()).hasSize(5);
+
+    AstNode astNode = mock(AstNode.class);
+    for (PythonTokenType tokenType : PythonTokenType.values()) {
+      assertThat(tokenType.getName()).isEqualTo(tokenType.name());
+      assertThat(tokenType.getValue()).isEqualTo(tokenType.name());
+      assertThat(tokenType.hasToBeSkippedFromAst(astNode)).isFalse();
+    }
   }
 
 }
