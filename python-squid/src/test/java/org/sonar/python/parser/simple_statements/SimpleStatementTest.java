@@ -41,6 +41,7 @@ public class SimpleStatementTest {
   @Test
   public void ok() {
     g.print_stmt.mock();
+    g.exec_stmt.mock();
     g.expression_stmt.mock();
     g.assert_stmt.mock();
     g.pass_stmt.mock();
@@ -55,6 +56,7 @@ public class SimpleStatementTest {
     g.nonlocal_stmt.mock();
 
     assertThat(p, parse("print_stmt"));
+    assertThat(p, parse("exec_stmt"));
     assertThat(p, parse("expression_stmt"));
     assertThat(p, parse("assert_stmt"));
     assertThat(p, parse("pass_stmt"));
@@ -72,6 +74,7 @@ public class SimpleStatementTest {
   @Test
   public void realLife() {
     assertThat(p, parse("print 'Hello world'"));
+    assertThat(p, parse("exec 'print 1'"));
     assertThat(p, parse("i += 1"));
   }
 

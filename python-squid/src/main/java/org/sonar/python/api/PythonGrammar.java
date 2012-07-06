@@ -85,6 +85,7 @@ public class PythonGrammar extends Grammar {
   public Rule simple_stmt;
   public Rule expression_stmt;
   public Rule print_stmt;
+  public Rule exec_stmt;
   public Rule assert_stmt;
 
   public Rule augassign;

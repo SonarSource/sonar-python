@@ -25,46 +25,32 @@ import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-public class PrintStatementTest {
+public class ExecStatementTest {
 
   Parser<PythonGrammar> p = PythonParser.create();
   PythonGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.print_stmt);
+    p.setRootRule(g.exec_stmt);
   }
 
   @Test
   public void ok() {
     g.test.mock();
+    g.expr.mock();
 
-    assertThat(p, parse("print"));
-
-    assertThat(p, parse("print >> test"));
-    assertThat(p, parse("print >> test, test"));
-    assertThat(p, parse("print >> test, test,"));
-
-    assertThat(p, parse("print test"));
-    assertThat(p, parse("print test,"));
-    assertThat(p, parse("print test,test"));
-    assertThat(p, parse("print test,test,"));
-  }
-
-  @Test
-  public void ko() {
-    assertThat(p, notParse("print >>"));
+    assertThat(p, parse("exec expr"));
+    assertThat(p, parse("exec expr in test"));
+    assertThat(p, parse("exec expr in test, test"));
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("print 1"));
-    assertThat(p, parse("print 1,"));
-    assertThat(p, parse("print >> 1"));
+    assertThat(p, parse("exec '1'"));
   }
 
 }

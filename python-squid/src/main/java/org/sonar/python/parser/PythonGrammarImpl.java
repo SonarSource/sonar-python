@@ -161,6 +161,7 @@ public class PythonGrammarImpl extends PythonGrammar {
   private void simpleStatements() {
     simple_stmt.is(or(
         print_stmt,
+        exec_stmt,
         expression_stmt,
         assert_stmt,
         pass_stmt,
@@ -178,6 +179,9 @@ public class PythonGrammarImpl extends PythonGrammar {
     print_stmt.is("print", or(
         and(">>", test, opt(one2n(",", test), opt(","))),
         and(opt(test, o2n(",", test), opt(",")))));
+
+    // FIXME not in 3.2:
+    exec_stmt.is("exec", expr, opt("in", test, opt(",", test)));
 
     assert_stmt.is("assert", test, opt(",", test));
 
