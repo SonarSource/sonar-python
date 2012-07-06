@@ -25,6 +25,7 @@ import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.not;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.and;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.one2n;
@@ -176,12 +177,12 @@ public class PythonGrammarImpl extends PythonGrammar {
         nonlocal_stmt));
 
     // FIXME not in 3.2:
-    print_stmt.is("print", or(
+    print_stmt.is("print", not("("), or(
         and(">>", test, opt(one2n(",", test), opt(","))),
         and(opt(test, o2n(",", test), opt(",")))));
 
     // FIXME not in 3.2:
-    exec_stmt.is("exec", expr, opt("in", test, opt(",", test)));
+    exec_stmt.is("exec", not("("), expr, opt("in", test, opt(",", test)));
 
     assert_stmt.is("assert", test, opt(",", test));
 

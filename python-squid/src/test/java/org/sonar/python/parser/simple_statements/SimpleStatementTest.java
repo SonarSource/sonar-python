@@ -76,6 +76,7 @@ public class SimpleStatementTest {
     assertThat(p, parse("print 'Hello world'"));
     assertThat(p, parse("exec 'print 1'"));
     assertThat(p, parse("i += 1"));
+    assertThat(p, parse("print('something', file=out_file)"));
   }
 
 }

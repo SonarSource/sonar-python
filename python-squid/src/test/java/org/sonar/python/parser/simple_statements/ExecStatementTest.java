@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -51,6 +52,7 @@ public class ExecStatementTest {
   @Test
   public void realLife() {
     assertThat(p, parse("exec '1'"));
+    assertThat(p, notParse("exec('')"));
   }
 
 }
