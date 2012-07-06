@@ -19,6 +19,7 @@
  */
 package org.sonar.python.parser;
 
+import com.sonar.sslr.impl.matcher.GrammarFunctions;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
@@ -47,6 +48,8 @@ public class PythonGrammarImpl extends PythonGrammar {
     toplevel();
 
     grammar();
+
+    GrammarFunctions.enableMemoizationOfMatchesForAllRules(this);
   }
 
   private void grammar() {
