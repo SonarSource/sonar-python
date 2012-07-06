@@ -20,18 +20,18 @@
 
 package org.sonar.plugins.python.colorizer;
 
-import org.sonar.plugins.python.Python;
-
+import com.google.common.collect.Lists;
 import org.sonar.api.web.CodeColorizerFormat;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.StringTokenizer;
 import org.sonar.colorizer.Tokenizer;
+import org.sonar.plugins.python.Python;
 import org.sonar.python.api.PythonKeyword;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class PythonColorizer extends CodeColorizerFormat {
+
   private List<Tokenizer> tokenizers;
 
   public PythonColorizer() {
@@ -41,20 +41,11 @@ public final class PythonColorizer extends CodeColorizerFormat {
   @Override
   public List<Tokenizer> getTokenizers() {
     if (tokenizers == null) {
-      tokenizers = new ArrayList<Tokenizer>();
-
-      String tagAfter = "</span>";
-      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", tagAfter, PythonKeyword.keywordValues()));
-      tokenizers.add(new StringTokenizer("<span class=\"s\">", tagAfter));
-      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", tagAfter));
-      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", tagAfter));
-
-      // the following tokenizers don't work, for some reason.
-      // tokens.add(new KeywordsTokenizer("<span class=\"c\">", "</span>", CONSTANTS));
-      // tokens.add(new KeywordsTokenizer("<span class=\"h\">", "</span>", BUILTINS));
-
-      // TODO:
-      // use regexptokenizer to match functions or classes
+      tokenizers = Lists.newArrayList();
+      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", "</span>", PythonKeyword.keywordValues()));
+      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", "</span>"));
+      tokenizers.add(new StringTokenizer("<span class=\"s\">", "</span>"));
+      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", "</span>"));
     }
     return tokenizers;
   }
