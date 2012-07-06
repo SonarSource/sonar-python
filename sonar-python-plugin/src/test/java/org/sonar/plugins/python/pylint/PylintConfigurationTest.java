@@ -39,7 +39,7 @@ public class PylintConfigurationTest {
     PylintConfiguration pylintConfiguration = new PylintConfiguration(conf);
 
     ProjectFileSystem pfs = mock(ProjectFileSystem.class);
-    when(pfs.getBasedir()).thenReturn(new File("/tmp/projectroot"));
+    when(pfs.getBasedir()).thenReturn(new File("/projectroot"));
     Project project = new Project("foo");
     project.setFileSystem(pfs);
 
@@ -49,10 +49,10 @@ public class PylintConfigurationTest {
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isNull();
 
     conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
-    assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo("/tmp/projectroot/.pylintrc");
+    assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo(new File("/projectroot/.pylintrc").getAbsolutePath());
 
     conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, "/absolute/.pylintrc");
-    assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo("/absolute/.pylintrc");
+    assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo(new File("/absolute/.pylintrc").getAbsolutePath());
   }
 
 }

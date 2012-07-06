@@ -121,7 +121,7 @@ public class PylintSensor implements Sensor {
     List<String> result = new LinkedList<String>();
     for(String pathStr: pathStrings){
       pathStr = StringUtils.trim(pathStr);
-      result.add(new java.io.File(baseDir, pathStr).getPath());
+      result.add(new java.io.File(baseDir, pathStr).getAbsolutePath());
     }
     return result;
   }

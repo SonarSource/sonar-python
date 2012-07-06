@@ -57,17 +57,16 @@ public class PylintConfiguration implements BatchExtension {
   }
 
   public String getPylintConfigPath(Project project) {
-    String absConfigPath = null;
     String configPath = conf.getString(PylintConfiguration.PYLINT_CONFIG_KEY);
-    if (StringUtils.isNotEmpty(configPath)) {
-      if (new File(configPath).isAbsolute()) {
-        absConfigPath = configPath;
-      } else {
-        File projectRoot = project.getFileSystem().getBasedir();
-        absConfigPath = new File(projectRoot.getPath(), configPath).getPath();
-      }
+    if (StringUtils.isEmpty(configPath)) {
+      return null;
     }
-    return absConfigPath;
+    File configFile = new File(configPath);
+    if (!configFile.isAbsolute()) {
+      File projectRoot = project.getFileSystem().getBasedir();
+      configFile = new File(projectRoot.getPath(), configPath);
+    }
+    return configFile.getAbsolutePath();
   }
 
   public String getPylintPath() {

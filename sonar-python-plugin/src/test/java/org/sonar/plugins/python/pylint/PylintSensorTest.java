@@ -67,7 +67,7 @@ public class PylintSensorTest {
     when(project.getProperty("sonar.python.path")).thenReturn("path1,path2");
     String[] env = PylintSensor.getEnvironment(project);
 
-    String[] expectedEnv = {"PYTHONPATH=/tmp/path1:/tmp/path2"};
+    String[] expectedEnv = {"PYTHONPATH=" + new File("/tmp/path1").getAbsolutePath() + System.getProperty("path.separator") + new File("/tmp/path2").getAbsolutePath()};
     assertThat(env).isEqualTo(expectedEnv);
   }
 
