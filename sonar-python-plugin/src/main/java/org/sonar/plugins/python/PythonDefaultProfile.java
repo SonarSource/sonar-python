@@ -20,22 +20,23 @@
 
 package org.sonar.plugins.python;
 
+import org.sonar.api.profiles.AnnotationProfileParser;
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.profiles.XMLProfileParser;
 import org.sonar.api.utils.ValidationMessages;
+import org.sonar.python.checks.CheckList;
 
 public class PythonDefaultProfile extends ProfileDefinition {
 
-  private final XMLProfileParser xmlProfileParser;
+  private final AnnotationProfileParser annotationProfileParser;
 
-  public PythonDefaultProfile(XMLProfileParser xmlProfileParser) {
-    this.xmlProfileParser = xmlProfileParser;
+  public PythonDefaultProfile(AnnotationProfileParser annotationProfileParser) {
+    this.annotationProfileParser = annotationProfileParser;
   }
 
   @Override
   public RulesProfile createProfile(ValidationMessages messages) {
-    return xmlProfileParser.parseResource(getClass().getClassLoader(), "org/sonar/plugins/python/profile-default.xml", messages);
+    return annotationProfileParser.parse(CheckList.REPOSITORY_KEY, CheckList.SONAR_WAY_PROFILE, Python.KEY, CheckList.getChecks(), messages);
   }
 
 }
