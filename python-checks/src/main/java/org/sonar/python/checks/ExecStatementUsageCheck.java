@@ -19,34 +19,27 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.check.BelongsToProfile;
+import org.sonar.check.Priority;
+import org.sonar.check.Rule;
+import org.sonar.python.api.PythonGrammar;
 
-import java.util.List;
+@Rule(
+  key = "ExecStatementUsage",
+  priority = Priority.MAJOR)
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+public class ExecStatementUsageCheck extends SquidCheck<PythonGrammar> {
 
-public final class CheckList {
-
-  public static final String REPOSITORY_KEY = "python";
-
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
-
-  private CheckList() {
+  @Override
+  public void init() {
+    subscribeTo(getContext().getGrammar().exec_stmt);
   }
 
-  public static List<Class> getChecks() {
-    return ImmutableList.<Class> of(
-        ParsingErrorCheck.class,
-        CommentRegularExpressionCheck.class,
-        LineLengthCheck.class,
-        FunctionComplexityCheck.class,
-        ClassComplexityCheck.class,
-        FileComplexityCheck.class,
-        NestedIfDepthCheck.class,
-        OneStatementPerLineCheck.class,
-        BackticksUsageCheck.class,
-        InequalityUsageCheck.class,
-        LongIntegerWithLowercaseSuffixUsageCheck.class,
-        ExecStatementUsageCheck.class,
-        XPathCheck.class);
+  @Override
+  public void visitNode(AstNode astNode) {
+    getContext().createLineViolation(this, "Do not use exec statement.", astNode);
   }
 
 }

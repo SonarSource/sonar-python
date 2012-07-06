@@ -1,0 +1,13 @@
+<p>
+Usage of exec statement might be dangerous, so avoid it.
+Moreover exec statement was removed in Python 3.0, however build-in exec-function can be used instead.
+</p>
+
+<p>
+The following code snippet illustrates this rule :
+</p>
+
+<pre>
+exec 'print 1'   # Non-Compliant
+exec('print 1')  # Compliant
+</pre>
