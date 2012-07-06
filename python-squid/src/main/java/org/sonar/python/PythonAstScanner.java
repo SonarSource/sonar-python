@@ -29,6 +29,7 @@ import com.sonar.sslr.squid.metrics.ComplexityVisitor;
 import com.sonar.sslr.squid.metrics.CounterVisitor;
 import com.sonar.sslr.squid.metrics.LinesVisitor;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.squid.api.*;
@@ -138,13 +139,17 @@ public final class PythonAstScanner {
       parser.getGrammar().funcdef,
 
       // Branching nodes
-      parser.getGrammar().if_stmt,
+      // Note that if_stmt covered by PythonKeyword.IF below
       parser.getGrammar().while_stmt,
       parser.getGrammar().for_stmt,
       parser.getGrammar().return_stmt,
       parser.getGrammar().raise_stmt,
-        // TODO add catch
-        // TODO Expressions: TODO ?, &&, ||
+      parser.getGrammar().except_clause,
+
+      // Expressions
+      PythonKeyword.IF,
+      PythonKeyword.AND,
+      PythonKeyword.OR
     };
     builder.withSquidAstVisitor(ComplexityVisitor.<PythonGrammar> builder()
         .setMetricDef(PythonMetric.COMPLEXITY)

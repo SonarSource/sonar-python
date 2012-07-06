@@ -35,7 +35,15 @@ public enum PythonPunctuator implements TokenType {
   MOD("%"),
   LEFT_OP("<<"),
   RIGHT_OP(">>"),
+
+  /**
+   * Bitwise AND.
+   */
   AND("&"),
+
+  /**
+   * Bitwise OR.
+   */
   OR("|"),
   XOR("^"),
   TILDE("~"),

@@ -83,7 +83,7 @@ public class PythonAstScannerTest {
   @Test
   public void complexity() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/complexity.py"));
-    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(6);
+    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(10);
   }
 
 }

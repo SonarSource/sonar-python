@@ -30,7 +30,12 @@ public enum PythonKeyword implements TokenType {
   FALSE("False"),
   NONE("None"),
   TRUE("True"),
+
+  /**
+   * Logical AND.
+   */
   AND("and"),
+
   AS("as"),
   ASSERT("assert"),
   BREAK("break"),
@@ -52,7 +57,12 @@ public enum PythonKeyword implements TokenType {
   LAMBDA("lambda"),
   NONLOCAL("nonlocal"),
   NOT("not"),
+
+  /**
+   * Logical OR.
+   */
   OR("or"),
+
   PASS("pass"),
   RAISE("raise"),
   RETURN("return"),
