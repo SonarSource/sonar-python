@@ -53,12 +53,12 @@ public class IndentationChannel extends Channel<Lexer> {
 
     int index = 0;
     char ch = code.charAt(index);
-    while (ch == ' ' || ch == '\t') {
+    while ((ch == ' ') || (ch == '\t')) {
       index++;
       ch = code.charAt(index);
     }
 
-    if (ch == '\n' || ch == '\r' || ch == '#') {
+    if ((ch == '\n') || (ch == '\r') || (ch == '#')) {
       // Blank line
       return false;
     }

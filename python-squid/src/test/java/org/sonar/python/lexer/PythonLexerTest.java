@@ -71,6 +71,9 @@ public class PythonLexerTest {
 
     assertThat("escaped single quote", lexer.lex("'\\''"), hasToken("'\\''", PythonTokenType.STRING));
     assertThat("escaped double quote", lexer.lex("\"\\\"\""), hasToken("\"\\\"\"", PythonTokenType.STRING));
+
+    assertThat("unterminated", lexer.lex("'"), hasToken("'", GenericTokenType.UNKNOWN_CHAR));
+    assertThat("unterminated", lexer.lex("\""), hasToken("\"", GenericTokenType.UNKNOWN_CHAR));
   }
 
   /**
@@ -78,6 +81,9 @@ public class PythonLexerTest {
    */
   @Test
   public void longstring_literals() {
+    assertThat("empty", lexer.lex("''''''"), hasToken("''''''", PythonTokenType.STRING));
+    assertThat("empty", lexer.lex("\"\"\"\"\"\""), hasToken("\"\"\"\"\"\"", PythonTokenType.STRING));
+
     assertThat("multiline", lexer.lex("'''\n'''"), hasToken("'''\n'''", PythonTokenType.STRING));
     assertThat("multiline", lexer.lex("\"\"\"\n\"\"\""), hasToken("\"\"\"\n\"\"\"", PythonTokenType.STRING));
 
@@ -91,6 +97,9 @@ public class PythonLexerTest {
 
     assertThat("escaped single quote", lexer.lex("'''\\''''"), hasToken("'''\\''''", PythonTokenType.STRING));
     assertThat("escaped double quote", lexer.lex("\"\"\"\\\"\"\"\""), hasToken("\"\"\"\\\"\"\"\"", PythonTokenType.STRING));
+
+    assertThat("unterminated", lexer.lex("'''"), hasToken("'", GenericTokenType.UNKNOWN_CHAR));
+    assertThat("unterminated", lexer.lex("\"\"\""), hasToken("\"", GenericTokenType.UNKNOWN_CHAR));
   }
 
   /**

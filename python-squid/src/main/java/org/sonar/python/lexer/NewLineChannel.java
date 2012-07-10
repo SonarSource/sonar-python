@@ -56,7 +56,7 @@ public class NewLineChannel extends Channel<Lexer> {
         break;
     }
 
-    if (ch == '\\' && isNewLine(code.charAt(1))) {
+    if ((ch == '\\') && isNewLine(code.charAt(1))) {
       // Explicit line joining
       code.pop();
       joinLines(code);
@@ -100,7 +100,7 @@ public class NewLineChannel extends Channel<Lexer> {
   }
 
   private static void consumeEOL(CodeReader code) {
-    if (code.charAt(0) == '\r' && code.charAt(1) == '\n') {
+    if ((code.charAt(0) == '\r') && (code.charAt(1) == '\n')) {
       // \r\n
       code.pop();
       code.pop();
@@ -111,7 +111,7 @@ public class NewLineChannel extends Channel<Lexer> {
   }
 
   private static boolean isNewLine(char ch) {
-    return ch == '\n' || ch == '\r';
+    return (ch == '\n') || (ch == '\r');
   }
 
   private boolean isImplicitLineJoining() {

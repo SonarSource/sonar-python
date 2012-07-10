@@ -30,6 +30,8 @@ import org.sonar.python.api.PythonTokenType;
  */
 public class StringLiteralsChannel extends Channel<Lexer> {
 
+  private static final char EOF = (char) -1;
+
   private final StringBuilder sb = new StringBuilder();
 
   private int index;
@@ -41,13 +43,11 @@ public class StringLiteralsChannel extends Channel<Lexer> {
     int column = code.getColumnPosition();
     index = 0;
     readStringPrefix(code);
-    if (ch != '\'' && ch != '\"') {
+    if ((ch != '\'') && (ch != '\"')) {
       return false;
     }
-    if (isLookingOnLongString(code, ch, index)) {
-      readLongString(code);
-    } else {
-      readString(code);
+    if (!read(code)) {
+      return false;
     }
     for (int i = 0; i < index; i++) {
       sb.append((char) code.pop());
@@ -63,9 +63,20 @@ public class StringLiteralsChannel extends Channel<Lexer> {
     return true;
   }
 
-  private void readString(CodeReader code) {
+  private boolean read(CodeReader code) {
+    if (isLookingOnLongString(code, ch, index)) {
+      return readLongString(code);
+    } else {
+      return readString(code);
+    }
+  }
+
+  private boolean readString(CodeReader code) {
     index++;
     while (code.charAt(index) != ch) {
+      if (code.charAt(index) == EOF) {
+        return false;
+      }
       if (code.charAt(index) == '\\') {
         // escape
         index++;
@@ -73,11 +84,15 @@ public class StringLiteralsChannel extends Channel<Lexer> {
       index++;
     }
     index++;
+    return true;
   }
 
-  private void readLongString(CodeReader code) {
-    index++;
+  private boolean readLongString(CodeReader code) {
+    index += 3;
     while (!isLookingOnLongString(code, ch, index)) {
+      if (code.charAt(index) == EOF) {
+        return false;
+      }
       if (code.charAt(index) == '\\') {
         // escape
         index++;
@@ -85,11 +100,12 @@ public class StringLiteralsChannel extends Channel<Lexer> {
       index++;
     }
     index += 3;
+    return true;
   }
 
   private void readStringPrefix(CodeReader code) {
     ch = Character.toUpperCase(code.charAt(index));
-    if (ch == 'U' || ch == 'B') {
+    if ((ch == 'U') || (ch == 'B')) {
       index++;
       ch = Character.toUpperCase(code.charAt(index));
     }
