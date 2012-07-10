@@ -59,14 +59,20 @@ public class LineLengthCheck extends SquidCheck<PythonGrammar> implements AstAnd
   public void visitToken(Token token) {
     if (!token.isGeneratedCode()) {
       if (previousToken != null && previousToken.getLine() != token.getLine()) {
-        int length = previousToken.getColumn() + previousToken.getValue().length();
-        if (length > getMaximumLineLength()) {
-          // Note that method from AbstractLineLengthCheck generates other message - see SONARPLUGINS-1809
-          getContext().createLineViolation(this,
-              "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
-              previousToken.getLine(),
-              length,
-              getMaximumLineLength());
+        // Note that AbstractLineLengthCheck doesn't support tokens which span multiple lines - see SONARPLUGINS-2025
+        String[] lines = previousToken.getValue().split("\r?\n|\r", -1);
+        int length = previousToken.getColumn();
+        for (int line = 0; line < lines.length; line++) {
+          length += lines[line].length();
+          if (length > getMaximumLineLength()) {
+            // Note that method from AbstractLineLengthCheck generates other message - see SONARPLUGINS-1809
+            getContext().createLineViolation(this,
+                "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
+                previousToken.getLine(),
+                length,
+                getMaximumLineLength());
+          }
+          length = 0;
         }
       }
       previousToken = token;
