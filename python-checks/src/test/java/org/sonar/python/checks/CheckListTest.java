@@ -1,6 +1,6 @@
 /*
  * Sonar Python Plugin
- * Copyright (C) 2011 Waleri Enns
+ * Copyright (C) 2011 SonarSource and Waleri Enns
  * dev@sonar.codehaus.org
  *
  * This program is free software; you can redistribute it and/or
