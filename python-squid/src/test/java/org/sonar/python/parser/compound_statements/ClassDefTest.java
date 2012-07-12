@@ -43,6 +43,7 @@ public class ClassDefTest {
   public void realLife() {
     assertThat(p, parse(PythonTestUtils.appendNewLine("class Foo: pass")));
     assertThat(p, parse(PythonTestUtils.appendNewLine("class Foo(argument): pass")));
+    assertThat(p, parse(PythonTestUtils.appendNewLine("class Foo(argument=value): pass")));
   }
 
 }
