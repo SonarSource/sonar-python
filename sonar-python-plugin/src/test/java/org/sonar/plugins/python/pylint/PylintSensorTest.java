@@ -62,22 +62,6 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void shouldReturnCorrectEnvironmentIfPropertySet() {
-    when(project.getProperty("sonar.python.path")).thenReturn("path1,path2");
-    String[] env = PylintSensor.getEnvironment(project);
-
-    String[] expectedEnv = {"PYTHONPATH=" + new File("/tmp/path1").getAbsolutePath() + System.getProperty("path.separator") + new File("/tmp/path2").getAbsolutePath()};
-    assertThat(env).isEqualTo(expectedEnv);
-  }
-
-  @Test
-  public void shouldReturnNullIfPropertyNotSet() {
-    String[] env = PylintSensor.getEnvironment(project);
-
-    assertThat(env).isNull();
-  }
-
-  @Test
   public void shouldExecuteOnlyWhenNecessary() {
     // which means: only on python projects and only if
     // there is at least one active pylint rule

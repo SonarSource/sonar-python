@@ -48,7 +48,6 @@ public class PylintConfiguration implements BatchExtension {
 
   public static final String PYLINT_CONFIG_KEY = "sonar.python.pylint_config";
   public static final String PYLINT_KEY = "sonar.python.pylint";
-  public static final String PYTHON_PATH_KEY = "sonar.python.path";
 
   private final Configuration conf;
 

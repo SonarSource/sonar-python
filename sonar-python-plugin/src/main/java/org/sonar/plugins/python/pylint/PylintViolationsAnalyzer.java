@@ -20,7 +20,9 @@
 package org.sonar.plugins.python.pylint;
 
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.python.Utils;
+import org.sonar.api.utils.command.CommandExecutor;
+import org.sonar.api.utils.command.Command;
+import org.sonar.api.utils.command.StreamConsumer;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -28,39 +30,55 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.sonar.plugins.python.PythonPlugin;
+
 public class PylintViolationsAnalyzer {
 
   private static final String FALLBACK_PYLINT = "pylint";
-  private static final String ARGS = "-i y -f parseable -r n";
+  private static final String[] ARGS = {"-i", "y", "-f", "parseable", "-r", "n"};
   private static final Pattern PATTERN = Pattern.compile("([^:]+):([0-9]+): \\[(.*)\\] (.*)");
-  private String commandTemplate;
 
+  private String pylint = null;
+  private String pylintConfigParam = null;
+  
   PylintViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
-    String pylint = FALLBACK_PYLINT;
+    pylint = FALLBACK_PYLINT;
     if (pylintPath != null){
       if(! new File(pylintPath).exists()){
         throw new SonarException("Cannot find the pylint executable: " + pylintPath);
       }
       pylint = pylintPath;
     }
-
-    commandTemplate = pylint + " " + ARGS;
-
+    
     if (pylintConfigPath != null){
       if(! new File(pylintConfigPath).exists()){
         throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
       }
-      commandTemplate += " --rcfile=" + pylintConfigPath;
+      pylintConfigParam = " --rcfile=" + pylintConfigPath;
     }
   }
-
-  public List<Issue> analyze(String path, String[] environ) {
-    String command = commandTemplate + " " + path;
-    List<String> output = new LinkedList<String>();
-    Utils.callCommand(command, environ, output);
-    return parseOutput(output);
+  
+  public List<Issue> analyze(String path) {
+    Command command = Command.create(pylint)
+      .addArguments(ARGS)
+      .addArgument(path);
+    
+    if(pylintConfigParam != null)
+    {
+      command.addArgument(pylintConfigParam);
+    }
+    
+    PythonPlugin.LOG.debug("Calling command: '{}'", command.toString());
+    
+    long timeoutMS = 300000; //=5min
+    MyStreamConsumer stdStreamConsumer = new MyStreamConsumer();
+    CommandExecutor.create().execute(command, stdStreamConsumer,
+                                     new MyStreamConsumer(),
+                                     timeoutMS);
+    
+    return parseOutput(stdStreamConsumer.getData());
   }
-
+  
   protected List<Issue> parseOutput(List<String> lines) {
     // Parse the output of pylint. Example of the format:
     //
@@ -95,5 +113,16 @@ public class PylintViolationsAnalyzer {
     }
 
     return issues;
+  }
+
+  
+  private static class MyStreamConsumer implements StreamConsumer{
+    private List<String> data = new LinkedList<String>();
+    
+    public void consumeLine(String line){
+      data.add(line);
+    }
+    
+    public List<String> getData(){ return data; }
   }
 }

@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
@@ -34,22 +33,17 @@ import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonPlugin;
 
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
 public class PylintSensor implements Sensor {
-  private static final String PYTHONPATH_ENVVAR = "PYTHONPATH";
-
   private RuleFinder ruleFinder;
   private RulesProfile profile;
   private PylintConfiguration conf;
-  private String[] environment;
 
   public PylintSensor(RuleFinder ruleFinder, Project project, PylintConfiguration conf, RulesProfile profile) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
-    this.environment = getEnvironment(project);
   }
 
   public boolean shouldExecuteOnProject(Project project) {
@@ -81,7 +75,7 @@ public class PylintSensor implements Sensor {
     String pylintPath = conf.getPylintPath();
 
     PylintViolationsAnalyzer analyzer = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
-    List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), environment);
+    List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath());
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, issue.ruleId);
       if (rule != null) {
@@ -90,6 +84,7 @@ public class PylintSensor implements Sensor {
           violation.setLineId(issue.line);
           violation.setMessage(issue.descr);
           sensorContext.saveViolation(violation);
+          PythonPlugin.LOG.debug("Saved pylint violation: {}",  issue);
         } else {
           PythonPlugin.LOG.debug("Pylint rule '{}' is disabled in Sonar",  issue.ruleId);
         }
@@ -97,32 +92,6 @@ public class PylintSensor implements Sensor {
         PythonPlugin.LOG.warn("Pylint rule '{}' is unknown in Sonar",  issue.ruleId);
       }
     }
-  }
-
-  protected static final String[] getEnvironment(Project project){
-    String[] environ = null;
-    String pythonPathProp = (String) project.getProperty(PylintConfiguration.PYTHON_PATH_KEY);
-    if (pythonPathProp != null){
-      java.io.File projectRoot = project.getFileSystem().getBasedir();
-      String[] parsedPaths = StringUtils.split(pythonPathProp, ",");
-      List<String> absPaths = toAbsPaths(parsedPaths, projectRoot);
-      String delimiter = System.getProperty("path.separator");
-      String pythonPath = StringUtils.join(absPaths, delimiter);
-
-      environ = new String[1];
-      environ[0] = PYTHONPATH_ENVVAR + "=" + pythonPath;
-    }
-    return environ;
-  }
-
-
-  private static List<String> toAbsPaths(String[] pathStrings, java.io.File baseDir){
-    List<String> result = new LinkedList<String>();
-    for(String pathStr: pathStrings){
-      pathStr = StringUtils.trim(pathStr);
-      result.add(new java.io.File(baseDir, pathStr).getAbsolutePath());
-    }
-    return result;
   }
 
 }

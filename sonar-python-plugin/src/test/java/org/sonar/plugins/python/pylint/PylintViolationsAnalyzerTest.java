@@ -33,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class PylintViolationsAnalyzerTest {
   @Test
   public void shouldParseCorrectly() {
-    String resourceName = "/org/sonar/plugins/python/complexity/sample_pylint_output.xml";
+    String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output.xml";
     String pathName = getClass().getResource(resourceName).getPath();
     String pylintConfigPath = null;
     String pylintPath = null;
@@ -42,24 +42,26 @@ public class PylintViolationsAnalyzerTest {
     assertThat(issues.size()).isEqualTo(21);
   }
 
-  // @Test
-  // public void shouldWorkWithValidCustomConfig() {
-  //   String resourceName = "/org/sonar/plugins/python/complexity/pylintrc_sample";
-  //   String pylintConfigPath = getClass().getResource(resourceName).getPath();
-  //   new PythonViolationsAnalyzer(pylintConfigPath);
-  // }
+  @Test
+  public void shouldWorkWithValidCustomConfig() {
+    String resourceName = "/org/sonar/plugins/python/pylint/pylintrc_sample";
+    String pylintConfigPath = getClass().getResource(resourceName).getPath();
+    String pylintPath = null;
+    new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
+  }
 
-  // @Test(expected = SonarException.class)
-  // public void shouldFailIfGivenInvalidConfig() {
-  //   String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
-  //   new PythonViolationsAnalyzer(pylintConfigPath);
-  // }
+  @Test(expected = SonarException.class)
+  public void shouldFailIfGivenInvalidConfig() {
+    String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
+    String pylintPath = null;
+    new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
+  }
 
   @Test
   public void shouldInstantiateWhenGivenValidParams() {
-    String pylintrcResource = "/org/sonar/plugins/python/complexity/pylintrc_sample";
+    String pylintrcResource = "/org/sonar/plugins/python/pylint/pylintrc_sample";
     String pylintrcPath = getClass().getResource(pylintrcResource).getPath();
-    String executableResource = "/org/sonar/plugins/python/complexity/executable";
+    String executableResource = "/org/sonar/plugins/python/pylint/executable";
     String executablePath = getClass().getResource(executableResource).getPath();
     final String[] VALID_PARAMETERS =
       {
