@@ -21,3 +21,4 @@
  * Integration with pylint.
  */
 package org.sonar.plugins.python.pylint;
+

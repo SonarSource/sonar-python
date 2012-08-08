@@ -40,7 +40,7 @@ public class PylintSensor implements Sensor {
   private RulesProfile profile;
   private PylintConfiguration conf;
 
-  public PylintSensor(RuleFinder ruleFinder, Project project, PylintConfiguration conf, RulesProfile profile) {
+  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
@@ -48,7 +48,7 @@ public class PylintSensor implements Sensor {
 
   public boolean shouldExecuteOnProject(Project project) {
     return Python.KEY.equals(project.getLanguageKey())
-      && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+        && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
@@ -84,12 +84,12 @@ public class PylintSensor implements Sensor {
           violation.setLineId(issue.line);
           violation.setMessage(issue.descr);
           sensorContext.saveViolation(violation);
-          PythonPlugin.LOG.debug("Saved pylint violation: {}",  issue);
+          PythonPlugin.LOG.debug("Saved pylint violation: {}", issue);
         } else {
-          PythonPlugin.LOG.debug("Pylint rule '{}' is disabled in Sonar",  issue.ruleId);
+          PythonPlugin.LOG.debug("Pylint rule '{}' is disabled in Sonar", issue.ruleId);
         }
       } else {
-        PythonPlugin.LOG.warn("Pylint rule '{}' is unknown in Sonar",  issue.ruleId);
+        PythonPlugin.LOG.warn("Pylint rule '{}' is unknown in Sonar", issue.ruleId);
       }
     }
   }

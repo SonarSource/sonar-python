@@ -20,17 +20,16 @@
 package org.sonar.plugins.python.pylint;
 
 import org.sonar.api.utils.SonarException;
-import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.Command;
+import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
+import org.sonar.plugins.python.PythonPlugin;
 
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.sonar.plugins.python.PythonPlugin;
 
 public class PylintViolationsAnalyzer {
 
@@ -40,45 +39,41 @@ public class PylintViolationsAnalyzer {
 
   private String pylint = null;
   private String pylintConfigParam = null;
-  
+
   PylintViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
     pylint = FALLBACK_PYLINT;
-    if (pylintPath != null){
-      if(! new File(pylintPath).exists()){
+    if (pylintPath != null) {
+      if (!new File(pylintPath).exists()) {
         throw new SonarException("Cannot find the pylint executable: " + pylintPath);
       }
       pylint = pylintPath;
     }
-    
-    if (pylintConfigPath != null){
-      if(! new File(pylintConfigPath).exists()){
+
+    if (pylintConfigPath != null) {
+      if (!new File(pylintConfigPath).exists()) {
         throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
       }
       pylintConfigParam = " --rcfile=" + pylintConfigPath;
     }
   }
-  
+
   public List<Issue> analyze(String path) {
-    Command command = Command.create(pylint)
-      .addArguments(ARGS)
-      .addArgument(path);
-    
-    if(pylintConfigParam != null)
-    {
+    Command command = Command.create(pylint).addArguments(ARGS).addArgument(path);
+
+    if (pylintConfigParam != null) {
       command.addArgument(pylintConfigParam);
     }
-    
+
     PythonPlugin.LOG.debug("Calling command: '{}'", command.toString());
-    
-    long timeoutMS = 300000; //=5min
-    MyStreamConsumer stdStreamConsumer = new MyStreamConsumer();
-    CommandExecutor.create().execute(command, stdStreamConsumer,
-                                     new MyStreamConsumer(),
-                                     timeoutMS);
-    
-    return parseOutput(stdStreamConsumer.getData());
+
+    long timeoutMS = 300000; // =5min
+    MyStreamConsumer stdOut = new MyStreamConsumer();
+    MyStreamConsumer stdErr = new MyStreamConsumer();
+    CommandExecutor.create().execute(command, stdOut, stdErr, timeoutMS);
+
+    return parseOutput(stdOut.getData());
   }
-  
+
   protected List<Issue> parseOutput(List<String> lines) {
     // Parse the output of pylint. Example of the format:
     //
@@ -94,7 +89,7 @@ public class PylintViolationsAnalyzer {
     String objname = null;
     String descr = null;
 
-    if ( !lines.isEmpty()) {
+    if (!lines.isEmpty()) {
       for (String line : lines) {
         Matcher m = PATTERN.matcher(line);
         if (m.matches() && m.groupCount() == 4) {
@@ -115,14 +110,16 @@ public class PylintViolationsAnalyzer {
     return issues;
   }
 
-  
-  private static class MyStreamConsumer implements StreamConsumer{
+  private static class MyStreamConsumer implements StreamConsumer {
     private List<String> data = new LinkedList<String>();
-    
-    public void consumeLine(String line){
+
+    public void consumeLine(String line) {
       data.add(line);
     }
-    
-    public List<String> getData(){ return data; }
+
+    public List<String> getData() {
+      return data;
+    }
   }
+
 }

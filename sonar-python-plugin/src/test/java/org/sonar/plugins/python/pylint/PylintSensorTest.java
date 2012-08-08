@@ -37,6 +37,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PylintSensorTest {
+
   private Project project;
   private ProjectFileSystem pfs;
   private RuleFinder ruleFinder;
@@ -58,7 +59,7 @@ public class PylintSensorTest {
 
   @Test
   public void shouldntThrowWhenInstantiating() {
-    new PylintSensor(ruleFinder, project, conf, profile);
+    new PylintSensor(ruleFinder, conf, profile);
   }
 
   @Test
@@ -78,7 +79,7 @@ public class PylintSensorTest {
   }
 
   private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(ruleFinder, project, conf, profile);
+    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile);
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
   }
 
@@ -98,4 +99,5 @@ public class PylintSensorTest {
 
     return profile;
   }
+
 }
