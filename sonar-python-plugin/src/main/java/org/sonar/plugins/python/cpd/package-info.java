@@ -17,7 +17,12 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 /**
  * Support for detection of duplications.
  */
+@ParametersAreNonnullByDefault
 package org.sonar.plugins.python.cpd;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+

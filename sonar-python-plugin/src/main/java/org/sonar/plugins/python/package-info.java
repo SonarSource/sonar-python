@@ -17,11 +17,9 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-/**
- * Support for code colorizer.
- */
+
 @ParametersAreNonnullByDefault
-package org.sonar.plugins.python.colorizer;
+package org.sonar.plugins.python;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
