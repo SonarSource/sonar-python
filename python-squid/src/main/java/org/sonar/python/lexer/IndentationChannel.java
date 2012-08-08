@@ -58,7 +58,7 @@ public class IndentationChannel extends Channel<Lexer> {
       ch = code.charAt(index);
     }
 
-    if ((ch == '\n') || (ch == '\r') || (ch == '#')) {
+    if ((ch == '\n') || (ch == '\r') || (ch == '#') || (ch == (char) -1)) {
       // Blank line
       return false;
     }

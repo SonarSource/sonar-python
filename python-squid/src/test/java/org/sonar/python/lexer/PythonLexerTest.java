@@ -194,6 +194,7 @@ public class PythonLexerTest {
   public void blank_lines() {
     assertThat(lexer.lex("    # comment\n")).hasSize(1);
     assertThat(lexer.lex("    \n")).hasSize(1);
+    assertThat(lexer.lex("    ")).hasSize(1);
     assertThat(lexer.lex("line\n\n")).hasSize(3);
   }
 
