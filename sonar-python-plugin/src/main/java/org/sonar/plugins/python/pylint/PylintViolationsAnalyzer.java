@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
@@ -70,7 +71,14 @@ public class PylintViolationsAnalyzer {
     MyStreamConsumer stdOut = new MyStreamConsumer();
     MyStreamConsumer stdErr = new MyStreamConsumer();
     CommandExecutor.create().execute(command, stdOut, stdErr, timeoutMS);
-
+    
+    // the error stream can contain a line like 'no custom config found, using default'
+    // any bigger output on the error stream is likely a pylint malfunction
+    if(stdErr.getData().size() > 1){
+      PythonPlugin.LOG.warn("Output on the error channel detected: this is probably due to a problem on pylint's side.");
+      PythonPlugin.LOG.warn("Content of the error stream: \n\"{}\"", StringUtils.join(stdErr.getData(), "\n"));
+    }
+    
     return parseOutput(stdOut.getData());
   }
 
@@ -91,23 +99,38 @@ public class PylintViolationsAnalyzer {
 
     if (!lines.isEmpty()) {
       for (String line : lines) {
-        Matcher m = PATTERN.matcher(line);
-        if (m.matches() && m.groupCount() == 4) {
-          filename = m.group(1);
-          linenr = Integer.valueOf(m.group(2));
-          String[] parts = m.group(3).split(",");
-          ruleid = parts[0].trim();
-          if (parts.length == 2) {
-            objname = parts[1].trim();
-          }
+        if (line.length() > 0){
+          if (!isDetail(line)){
+            Matcher m = PATTERN.matcher(line);
+            if (m.matches() && m.groupCount() == 4) {
+              filename = m.group(1);
+              linenr = Integer.valueOf(m.group(2));
+              String[] parts = m.group(3).split(",");
+              ruleid = parts[0].trim();
+              if (parts.length == 2) {
+                objname = parts[1].trim();
+              }
 
-          descr = m.group(4);
-          issues.add(new Issue(filename, linenr, ruleid, objname, descr));
+              descr = m.group(4);
+              issues.add(new Issue(filename, linenr, ruleid, objname, descr));
+            }
+            else{
+              PythonPlugin.LOG.debug("Cannot parse the line: {}", line);
+            }
+          }
+          else{
+            PythonPlugin.LOG.trace("Classifying as detail and ignoring line '{}'", line);
+          }
         }
       }
     }
 
     return issues;
+  }
+    
+  private boolean isDetail(String line){
+    char first = line.charAt(0);
+    return first == ' ' || first == '\t' || first == '\n';
   }
 
   private static class MyStreamConsumer implements StreamConsumer {

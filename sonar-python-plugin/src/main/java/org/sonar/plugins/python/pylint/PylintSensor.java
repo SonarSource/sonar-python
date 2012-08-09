@@ -84,7 +84,7 @@ public class PylintSensor implements Sensor {
           violation.setLineId(issue.line);
           violation.setMessage(issue.descr);
           sensorContext.saveViolation(violation);
-          PythonPlugin.LOG.debug("Saved pylint violation: {}", issue);
+          PythonPlugin.LOG.trace("Saved pylint violation: {}", issue);
         } else {
           PythonPlugin.LOG.debug("Pylint rule '{}' is disabled in Sonar", issue.ruleId);
         }
