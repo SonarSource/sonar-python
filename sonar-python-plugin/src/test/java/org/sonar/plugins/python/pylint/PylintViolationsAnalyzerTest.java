@@ -33,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class PylintViolationsAnalyzerTest {
   @Test
   public void shouldParseCorrectly() {
-    String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output.xml";
+    String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output.txt";
     String pathName = getClass().getResource(resourceName).getPath();
     String pylintConfigPath = null;
     String pylintPath = null;
@@ -42,6 +42,18 @@ public class PylintViolationsAnalyzerTest {
     assertThat(issues.size()).isEqualTo(21);
   }
 
+  @Test
+  public void shouldParseCorrectlyOutputWithWindowsPaths() {
+    String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output_with_win_paths.txt";
+    String pathName = getClass().getResource(resourceName).getPath();
+    String pylintConfigPath = null;
+    String pylintPath = null;
+    List<String> lines = readFile(pathName);
+    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
+    assertThat(issues.size()).isEqualTo(1);
+  }
+
+  
   @Test
   public void shouldWorkWithValidCustomConfig() {
     String resourceName = "/org/sonar/plugins/python/pylint/pylintrc_sample";
