@@ -34,7 +34,7 @@ public class PylintRuleRepositoryTest {
     PylintRuleRepository rulerep = new PylintRuleRepository(new XMLRuleParser());
     List<Rule> rules = rulerep.createRules();
 
-    assertThat(rules.size()).isEqualTo(144);
+    assertThat(rules.size()).isEqualTo(148);
   }
 
 }

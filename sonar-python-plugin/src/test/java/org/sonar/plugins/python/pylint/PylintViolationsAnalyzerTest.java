@@ -53,6 +53,20 @@ public class PylintViolationsAnalyzerTest {
     assertThat(issues.size()).isEqualTo(1);
   }
 
+  @Test
+  public void shouldMapViolationIdsCorrectly  () {
+    String resourceOld = "/org/sonar/plugins/python/pylint/sample_pylint_output_oldids.txt";
+    String resourceNew = "/org/sonar/plugins/python/pylint/sample_pylint_output_newids.txt";
+    String pathNameOld = getClass().getResource(resourceOld).getPath();
+    String pathNameNew = getClass().getResource(resourceNew).getPath();
+    String pylintConfigPath = null;
+    String pylintPath = null;
+    List<String> linesOld = readFile(pathNameOld);
+    List<String> linesNew = readFile(pathNameNew);
+    List<Issue> issuesOld = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(linesOld);
+    List<Issue> issuesNew = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(linesNew);
+    assertThat(getIds(issuesOld)).isEqualTo(getIds(issuesNew));
+  }
   
   @Test
   public void shouldWorkWithValidCustomConfig() {
@@ -128,5 +142,11 @@ public class PylintViolationsAnalyzerTest {
     }
 
     return lines;
+  }
+
+  private List<String> getIds(List<Issue> issues){
+    List<String> ids = new LinkedList<String>();
+    for(Issue issue: issues) ids.add(issue.ruleId);
+    return ids;
   }
 }

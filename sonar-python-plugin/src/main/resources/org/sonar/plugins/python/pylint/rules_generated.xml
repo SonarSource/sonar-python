@@ -393,57 +393,89 @@
 </description>
 </rule>
 <rule>
-<key>E9900</key>
+<key>E1200</key>
+<name><![CDATA[Unsupported logging format character %r (%#02x) at index %d]]></name>
+<configKey>E1200</configKey>
+<description>
+<![CDATA[Used when an unsupported format character is used in a logging statementformat string.]]>
+</description>
+</rule>
+<rule>
+<key>E1201</key>
+<name><![CDATA[Logging format string ends in middle of conversion specifier]]></name>
+<configKey>E1201</configKey>
+<description>
+<![CDATA[Used when a logging statement format string terminates before the end of aconversion specifier.]]>
+</description>
+</rule>
+<rule>
+<key>E1205</key>
+<name><![CDATA[Too many arguments for logging format string]]></name>
+<configKey>E1205</configKey>
+<description>
+<![CDATA[Used when a logging format string is given too few arguments.]]>
+</description>
+</rule>
+<rule>
+<key>E1206</key>
+<name><![CDATA[Not enough arguments for logging format string]]></name>
+<configKey>E1206</configKey>
+<description>
+<![CDATA[Used when a logging format string is given too many arguments]]>
+</description>
+</rule>
+<rule>
+<key>E1300</key>
 <name><![CDATA[Unsupported format character %r (%#02x) at index %d]]></name>
-<configKey>E9900</configKey>
+<configKey>E1300</configKey>
 <description>
 <![CDATA[Used when a unsupported format character is used in a format string.]]>
 </description>
 </rule>
 <rule>
-<key>E9901</key>
+<key>E1301</key>
 <name><![CDATA[Format string ends in middle of conversion specifier]]></name>
-<configKey>E9901</configKey>
+<configKey>E1301</configKey>
 <description>
 <![CDATA[Used when a format string terminates before the end of a conversion specifier.]]>
 </description>
 </rule>
 <rule>
-<key>E9902</key>
+<key>E1302</key>
 <name><![CDATA[Mixing named and unnamed conversion specifiers in format string]]></name>
-<configKey>E9902</configKey>
+<configKey>E1302</configKey>
 <description>
 <![CDATA[Used when a format string contains both named (e.g. '%(foo)d') and unnamed(e.g. '%d') conversion specifiers. This is also used when a named conversionspecifier contains * for the minimum field width and/or precision.]]>
 </description>
 </rule>
 <rule>
-<key>E9903</key>
+<key>E1303</key>
 <name><![CDATA[Expected mapping for format string, not %s]]></name>
-<configKey>E9903</configKey>
+<configKey>E1303</configKey>
 <description>
 <![CDATA[Used when a format string that uses named conversion specifiers is used withan argument that is not a mapping.]]>
 </description>
 </rule>
 <rule>
-<key>E9904</key>
+<key>E1304</key>
 <name><![CDATA[Missing key %r in format string dictionary]]></name>
-<configKey>E9904</configKey>
+<configKey>E1304</configKey>
 <description>
 <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that doesn't contain all the keys required by the format string.]]>
 </description>
 </rule>
 <rule>
-<key>E9905</key>
+<key>E1305</key>
 <name><![CDATA[Too many arguments for format string]]></name>
-<configKey>E9905</configKey>
+<configKey>E1305</configKey>
 <description>
 <![CDATA[Used when a format string that uses unnamed conversion specifiers is given toofew arguments.]]>
 </description>
 </rule>
 <rule>
-<key>E9906</key>
+<key>E1306</key>
 <name><![CDATA[Not enough arguments for format string]]></name>
-<configKey>E9906</configKey>
+<configKey>E1306</configKey>
 <description>
 <![CDATA[Used when a format string that uses unnamed conversion specifiers is given toomany arguments]]>
 </description>
@@ -506,7 +538,7 @@
 </rule>
 <rule>
 <key>F0401</key>
-<name><![CDATA[Unable to import %r]]></name>
+<name><![CDATA[Unable to import %s]]></name>
 <configKey>F0401</configKey>
 <description>
 <![CDATA[Used when pylint has been unable to import a module.]]>
@@ -1097,25 +1129,25 @@
 </description>
 </rule>
 <rule>
-<key>W6501</key>
+<key>W1201</key>
 <name><![CDATA[Specify string format arguments as logging function parameters]]></name>
-<configKey>W6501</configKey>
+<configKey>W1201</configKey>
 <description>
 <![CDATA[Used when a logging statement has a call form of "logging.<loggingmethod>(format_string % (format_args...))". Such calls should leave stringinterpolation to the logging method itself and be written "logging.<loggingmethod>(format_string, format_args...)" so that the program may avoidincurring the cost of the interpolation in those cases in which no messagewill be logged. For more, see http://www.python.org/dev/peps/pep-0282/.]]>
 </description>
 </rule>
 <rule>
-<key>W9900</key>
+<key>W1300</key>
 <name><![CDATA[Format string dictionary key should be a string, not %s]]></name>
-<configKey>W9900</configKey>
+<configKey>W1300</configKey>
 <description>
 <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary whose keys are not all strings.]]>
 </description>
 </rule>
 <rule>
-<key>W9901</key>
+<key>W1301</key>
 <name><![CDATA[Unused key %r in format string dictionary]]></name>
-<configKey>W9901</configKey>
+<configKey>W1301</configKey>
 <description>
 <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that conWtains keys not required by the format string.]]>
 </description>

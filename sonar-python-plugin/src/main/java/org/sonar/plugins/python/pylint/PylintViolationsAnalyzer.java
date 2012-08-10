@@ -27,13 +27,32 @@ import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.plugins.python.PythonPlugin;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PylintViolationsAnalyzer {
-
+  // Pylint 0.24 brings a nasty reidentifying of some rules...
+  // To avoid burdening of users with rule clones we map the ids.
+  // This workaround can die as soon as pylints <= 0.23.X become obsolete.
+  private static final Map<String, String> ID_MAP = new HashMap<String, String>(){
+    {
+      put("E9900", "E1300");
+      put("E9901", "E1301"); 
+      put("E9902", "E1302"); 
+      put("E9903", "E1303"); 
+      put("E9904", "E1304"); 
+      put("E9905", "E1305"); 
+      put("E9906", "E1306"); 
+      put("W6501", "W1201"); 
+      put("W9900", "W1300"); 
+      put("W9901", "W1301");
+    }
+  };
+  
   private static final String FALLBACK_PYLINT = "pylint";
   private static final String[] ARGS = {"-i", "y", "-f", "parseable", "-r", "n"};
   private static final Pattern PATTERN = Pattern.compile("(.+):([0-9]+): \\[(.*)\\] (.*)");
@@ -106,7 +125,12 @@ public class PylintViolationsAnalyzer {
               filename = m.group(1);
               linenr = Integer.valueOf(m.group(2));
               String[] parts = m.group(3).split(",");
+              
               ruleid = parts[0].trim();
+              if(ID_MAP.containsKey(ruleid)){
+                ruleid = ID_MAP.get(ruleid);
+              }
+              
               if (parts.length == 2) {
                 objname = parts[1].trim();
               }
