@@ -257,14 +257,6 @@
 </description>
 </rule>
 <rule>
-<key>E0503</key>
-<name><![CDATA[Unknown encoding specified (%s)]]></name>
-<configKey>E0503</configKey>
-<description>
-<![CDATA[Used when an encoding is specified, but it's unknown to Python.]]>
-</description>
-</rule>
-<rule>
 <key>E0601</key>
 <name><![CDATA[Using variable %r before assignment]]></name>
 <configKey>E0601</configKey>
@@ -309,7 +301,7 @@
 <name><![CDATA[Raising a new style class which doesn't inherit from BaseException]]></name>
 <configKey>E0710</configKey>
 <description>
-<![CDATA[Used when a new style class which doesn't inherit from BaseException raisedsince it's not possible with python < 2.5.]]>
+<![CDATA[Used when a new style class which doesn't inherit from BaseException is raisedsince it's not possible with python >= 2.5.]]>
 </description>
 </rule>
 <rule>
