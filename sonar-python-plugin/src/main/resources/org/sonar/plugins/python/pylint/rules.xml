@@ -7,22 +7,25 @@
     <description>
       <![CDATA[Used when the name is listed in the black list (unauthorized names).]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0103</key>
     <name><![CDATA[Invalid name]]></name>
     <configKey>C0103</configKey>
     <description>
-      <![CDATA[Used when the name doesn't match the regular expression associated to its type(constant, variable, class...).]]>
+      <![CDATA[Used when the name doesn't match the regular expression associated to its type (constant, variable, class...).]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0111</key>
     <name><![CDATA[Missing docstring]]></name>
     <configKey>C0111</configKey>
     <description>
-      <![CDATA[Used when a module, function, class or method has no docstring. Some specialmethods like __init__ doesn't necessary require a docstring.]]>
+      <![CDATA[Used when a module, function, class or method has no docstring. Some special methods like __init__ doesn't necessary require a docstring.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0112</key>
@@ -31,6 +34,7 @@
     <description>
       <![CDATA[Used when a module, function, class or method has an empty docstring (it would be too easy ;).]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0121</key>
@@ -39,6 +43,7 @@
     <description>
       <![CDATA[Used when an attribute required for modules is missing.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0202</key>
@@ -47,6 +52,7 @@
     <description>
       <![CDATA[Used when a class method has an attribute different than "cls" as first argument, to easily differentiate them from regular instance methods.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0203</key>
@@ -55,6 +61,7 @@
     <description>
       <![CDATA[Used when a metaclass method has an attribute different the "mcs" as first argument.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0301</key>
@@ -63,6 +70,7 @@
     <description>
       <![CDATA[Used when a line is longer than a given number of characters.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0302</key>
@@ -71,6 +79,7 @@
     <description>
       <![CDATA[Used when a module has too much lines, reducing its readability.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0321</key>
@@ -79,6 +88,7 @@
     <description>
       <![CDATA[Used when more than one statement are found on the same line.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0322</key>
@@ -87,6 +97,7 @@
     <description>
       <![CDATA[Used when one of the following operator (!= | <= | == | >= | < | > | = | \+= |-= | \*= | /= | %) is not preceded by a space.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0323</key>
@@ -95,6 +106,7 @@
     <description>
       <![CDATA[Used when one of the following operator (!= | <= | == | >= | < | > | = | \+= |-= | \*= | /= | %) is not followed by a space.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>C0324</key>
@@ -103,6 +115,7 @@
     <description>
       <![CDATA[Used when a comma (",") is not followed by a space.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>E0001</key>
@@ -111,6 +124,7 @@
     <description>
       <![CDATA[Used when a syntax error is raised for a module.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0011</key>
@@ -119,6 +133,7 @@
     <description>
       <![CDATA[Used when an unknown inline option is encountered.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0012</key>
@@ -127,6 +142,7 @@
     <description>
       <![CDATA[Used when a bad value for an inline option is encountered.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0100</key>
@@ -135,6 +151,7 @@
     <description>
       <![CDATA[Used when the special class method __init__ is turned into a generator by a yield in its body.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0101</key>
@@ -143,6 +160,7 @@
     <description>
       <![CDATA[Used when the special class method __init__ has an explicit return value.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0102</key>
@@ -151,6 +169,7 @@
     <description>
       <![CDATA[Used when a function / class / method is redefined.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0103</key>
@@ -159,6 +178,7 @@
     <description>
       <![CDATA[Used when break or continue keywords are used outside a loop.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0104</key>
@@ -167,6 +187,7 @@
     <description>
       <![CDATA[Used when a "return" statement is found outside a function or method.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0105</key>
@@ -175,14 +196,16 @@
     <description>
       <![CDATA[Used when a "yield" statement is found outside a function or method.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0106</key>
     <name><![CDATA[Return with argument inside generator]]></name>
     <configKey>E0106</configKey>
     <description>
-      <![CDATA[Used when a "return" statement with an argument is found outside in agenerator function or method (e.g. with some "yield" statements).]]>
+      <![CDATA[Used when a "return" statement with an argument is found outside in a generator function or method (e.g. with some "yield" statements).]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0107</key>
@@ -191,6 +214,7 @@
     <description>
       <![CDATA[Used when you attempt to use the C-style pre-increment or pre-decrement operator -- and ++, which doesn't exist in Python.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0202</key>
@@ -199,6 +223,7 @@
     <description>
       <![CDATA[Used when a class defines a method which is hidden by an instance attribute from an ancestor class.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0203</key>
@@ -207,22 +232,25 @@
     <description>
       <![CDATA[Used when an instance member is accessed before it's actually assigned.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0211</key>
     <name><![CDATA[Method has no argument]]></name>
     <configKey>E0211</configKey>
     <description>
-      <![CDATA[Used when a method which should have the bound instance as first argument hasno argument defined.]]>
+      <![CDATA[Used when a method which should have the bound instance as first argument has no argument defined.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0213</key>
     <name><![CDATA[Method should have "self" as first argument]]></name>
     <configKey>E0213</configKey>
     <description>
-      <![CDATA[Used when a method has an attribute different the "self" as first argument.This is considered as an error since this is a so common convention that youshouldn't break it!]]>
+      <![CDATA[Used when a method has an attribute different the "self" as first argument. This is considered as an error since this is a so common convention that you shouldn't break it!]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0221</key>
@@ -231,6 +259,7 @@
     <description>
       <![CDATA[Used when a class claims to implement an interface which is not a class.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0222</key>
@@ -239,6 +268,7 @@
     <description>
       <![CDATA[Used when a method declared in an interface is missing from a class implementing this interface]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0501</key>
@@ -248,6 +278,7 @@
       <![CDATA[Used when some non ascii characters are detected but no
       encoding is specified, as explicited in the PEP 263.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0502</key>
@@ -257,6 +288,7 @@
       <![CDATA[Used when a known encoding is specified but the file
       doesn't seem to be actually in this encoding.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0503</key>
@@ -265,6 +297,7 @@
     <description>
       <![CDATA[Used when an encoding is specified, but it's unknown to Python.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0601</key>
@@ -273,6 +306,7 @@
     <description>
       <![CDATA[Used when a local variable is accessed before it's assignment.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0602</key>
@@ -281,6 +315,7 @@
     <description>
       <![CDATA[Used when an undefined variable is accessed.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0611</key>
@@ -289,14 +324,16 @@
     <description>
       <![CDATA[Used when a name cannot be found in a module.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0701</key>
     <name><![CDATA[Bad except clauses order]]></name>
     <configKey>E0701</configKey>
     <description>
-      <![CDATA[Used when except clauses are not in the correct order (from the more specificto the more generic). If you don't fix the order, some exceptions may not becatched by the most specific handler.]]>
+      <![CDATA[Used when except clauses are not in the correct order (from the more specific to the more generic). If you don't fix the order, some exceptions may not be catched by the most specific handler.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0702</key>
@@ -305,6 +342,7 @@
     <description>
       <![CDATA[Used when something which is neither a class, an instance or a string is raised (i.e. a 'TypeError' will be raised).]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0710</key>
@@ -313,6 +351,7 @@
     <description>
       <![CDATA[Used when a new style class which doesn't inherit from BaseException is raised.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E0711</key>
@@ -321,6 +360,7 @@
     <description>
       <![CDATA[Used when NotImplemented is raised instead of NotImplementedError]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1001</key>
@@ -329,6 +369,7 @@
     <description>
       <![CDATA[Used when an old style class uses the __slots__ attribute.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1002</key>
@@ -337,6 +378,7 @@
     <description>
       <![CDATA[Used when an old style class uses the super builtin.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1003</key>
@@ -345,6 +387,7 @@
     <description>
       <![CDATA[Used when another argument than the current class is given as first argument of the super builtin.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1101</key>
@@ -353,6 +396,7 @@
     <description>
       <![CDATA[Used when a variable is accessed for an unexistent member.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1102</key>
@@ -361,6 +405,7 @@
     <description>
       <![CDATA[Used when an object being called has been inferred to a non callable object]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1103</key>
@@ -369,6 +414,7 @@
     <description>
       <![CDATA[Used when a variable is accessed for an unexistent member, but astng was notable to interpret all possible types of this variable.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1111</key>
@@ -377,6 +423,7 @@
     <description>
       <![CDATA[Used when an assignment is done on a function call but the inferred function doesn't return anything.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1120</key>
@@ -385,6 +432,7 @@
     <description>
       <![CDATA[Used when a function call passes too few arguments.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1121</key>
@@ -393,6 +441,7 @@
     <description>
       <![CDATA[Used when a function call passes too many positional arguments.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1122</key>
@@ -401,30 +450,34 @@
     <description>
       <![CDATA[Used when a function call passes the same keyword argument multiple times.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1123</key>
     <name><![CDATA[Passing unexpected keyword argument in function call]]></name>
     <configKey>E1123</configKey>
     <description>
-      <![CDATA[Used when a function call passes a keyword argument that doesn't correspond toone of the function's parameter names.]]>
+      <![CDATA[Used when a function call passes a keyword argument that doesn't correspond to one of the function's parameter names.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1124</key>
     <name><![CDATA[Multiple values passed for parameter in function call]]></name>
     <configKey>E1124</configKey>
     <description>
-      <![CDATA[Used when a function call would result in assigning multiple values to afunction parameter, one value from a positional argument and one from akeyword argument.]]>
+      <![CDATA[Used when a function call would result in assigning multiple values to a function parameter, one value from a positional argument and one from a keyword argument.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
-    <key>E1300</key>
+    <key>E9900</key>
     <name><![CDATA[Unsupported format character]]></name>
     <configKey>E1300</configKey>
     <description>
       <![CDATA[Used when a unsupported format character is used in a format string.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1301</key>
@@ -433,46 +486,52 @@
     <description>
       <![CDATA[Used when a format string terminates before the end of a conversion specifier.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1302</key>
     <name><![CDATA[Mixing named and unnamed conversion specifiers in format string]]></name>
     <configKey>E1302</configKey>
     <description>
-      <![CDATA[Used when a format string contains both named (e.g. '%(foo)d') and unnamed(e.g. '%d') conversion specifiers. This is also used when a named conversionspecifier contains * for the minimum field width and/or precision.]]>
+      <![CDATA[Used when a format string contains both named (e.g. '%(foo)d') and unnamed (e.g. '%d') conversion specifiers. This is also used when a named conversion specifier contains * for the minimum field width and/or precision.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1303</key>
     <name><![CDATA[Expected mapping for format string]]></name>
     <configKey>E1303</configKey>
     <description>
-      <![CDATA[Used when a format string that uses named conversion specifiers is used withan argument that is not a mapping.]]>
+      <![CDATA[Used when a format string that uses named conversion specifiers is used with an argument that is not a mapping.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1304</key>
     <name><![CDATA[Missing key in format string dictionary]]></name>
     <configKey>E1304</configKey>
     <description>
-      <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that doesn't contain all the keys required by the format string.]]>
+      <![CDATA[Used when a format string that uses named conversion specifiers is used with a dictionary that doesn't contain all the keys required by the format string.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1305</key>
     <name><![CDATA[Too many arguments for format string]]></name>
     <configKey>E1305</configKey>
     <description>
-      <![CDATA[Used when a format string that uses unnamed conversion specifiers is given toofew arguments.]]>
+      <![CDATA[Used when a format string that uses unnamed conversion specifiers is given too few arguments.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1306</key>
     <name><![CDATA[Not enough arguments for format string]]></name>
     <configKey>E1306</configKey>
     <description>
-      <![CDATA[Used when a format string that uses unnamed conversion specifiers is given toomany arguments]]>
+      <![CDATA[Used when a format string that uses unnamed conversion specifiers is given too many arguments]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0001</key>
@@ -480,24 +539,27 @@
     <configKey>F0001</configKey>
     <description>
       <![CDATA[Used when an error occurred preventing the analysis of a
-    module (unable to find it for instance).]]>
+               module (unable to find it for instance).]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0002</key>
     <name><![CDATA[Internal pylint error]]></name>
     <configKey>F0002</configKey>
     <description>
-      <![CDATA[Used when an unexpected error occurred while building the ASTNG representation. This is usually accompanied by a traceback. Please report sucherrors !]]>
+      <![CDATA[Used when an unexpected error occurred while building the ASTNG representation. This is usually accompanied by a traceback. Please report such errors!]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0003</key>
     <name><![CDATA[Ignored builtin module]]></name>
     <configKey>F0003</configKey>
     <description>
-      <![CDATA[Used to indicate that the user asked to analyze a builtin module which hasbeen skipped.]]>
+      <![CDATA[Used to indicate that the user asked to analyze a builtin module which has been skipped.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0004</key>
@@ -506,6 +568,7 @@
     <description>
       <![CDATA[Used to indicate that some value of an unexpected type has been inferred.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0010</key>
@@ -514,6 +577,7 @@
     <description>
       <![CDATA[Used when an exception occured while building the ASTNG representation which could be handled by astng.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0202</key>
@@ -522,6 +586,7 @@
     <description>
       <![CDATA[Used when PyLint has been unable to check methods signature compatibility foran unexpected reason. Please report this kind if you don't make sense of it.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0220</key>
@@ -530,6 +595,7 @@
     <description>
       <![CDATA[Used when a PyLint as failed to find interfaces implemented by a class]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0321</key>
@@ -537,8 +603,9 @@
     <configKey>F0321</configKey>
     <description>
       <![CDATA[Used when an unexpected error occurred in bad format
-      detection. Please report the error if it occurs.]]>
+               detection. Please report the error if it occurs.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>F0401</key>
@@ -547,6 +614,7 @@
     <description>
       <![CDATA[Used when pylint has been unable to import a module.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>I0001</key>
@@ -555,6 +623,7 @@
     <description>
       <![CDATA[Used to inform that a built-in module has not been checked using the raw checkers.]]>
     </description>
+    <priority>INFO</priority>
   </rule>
   <rule>
     <key>I0010</key>
@@ -563,6 +632,7 @@
     <description>
       <![CDATA[Used when an inline option is either badly formatted or can't be used inside modules.]]>
     </description>
+    <priority>INFO</priority>
   </rule>
   <rule>
     <key>I0011</key>
@@ -571,6 +641,7 @@
     <description>
       <![CDATA[Used when an inline option disables a message or a messages category.]]>
     </description>
+    <priority>INFO</priority>
   </rule>
   <rule>
     <key>I0012</key>
@@ -579,6 +650,7 @@
     <description>
       <![CDATA[Used when an inline option enables a message or a messages category.]]>
     </description>
+    <priority>INFO</priority>
   </rule>
   <rule>
     <key>I0013</key>
@@ -587,14 +659,16 @@
     <description>
       <![CDATA[Used to inform that the file will not be checked]]>
     </description>
+    <priority>INFO</priority>
   </rule>
   <rule>
     <key>R0201</key>
     <name><![CDATA[Method could be a function]]></name>
     <configKey>R0201</configKey>
     <description>
-      <![CDATA[Used when a method doesn't use its bound instance, and so could be written asa function.]]>
+      <![CDATA[Used when a method doesn't use its bound instance, and so could be written a sa function.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0401</key>
@@ -603,6 +677,7 @@
     <description>
       <![CDATA[Used when a cyclic import between two or more modules is detected.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0801</key>
@@ -611,6 +686,7 @@
     <description>
       <![CDATA[Indicates that a set of similar lines has been detected among multiple file. This usually means that the code should be refactored to avoid this duplication.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0901</key>
@@ -619,6 +695,7 @@
     <description>
       <![CDATA[Used when class has too many parent classes, try to reduce this to get a more simple (and so easier to use) class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0902</key>
@@ -627,6 +704,7 @@
     <description>
       <![CDATA[Used when class has too many instance attributes, try to reduce this to get amore simple (and so easier to use) class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0903</key>
@@ -635,30 +713,34 @@
     <description>
       <![CDATA[Used when class has too few public methods, so be sure it's really worth it.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0904</key>
     <name><![CDATA[Too many public methods]]></name>
     <configKey>R0904</configKey>
     <description>
-      <![CDATA[Used when class has too many public methods, try to reduce this to get a moresimple (and so easier to use) class.]]>
+      <![CDATA[Used when class has too many public methods, try to reduce this to get a more simple (and so easier to use) class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0911</key>
     <name><![CDATA[Too many return statements]]></name>
     <configKey>R0911</configKey>
     <description>
-      <![CDATA[Used when a function or method has too many return statement, making it hardto follow.]]>
+      <![CDATA[Used when a function or method has too many return statement, making it hard to follow.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0912</key>
     <name><![CDATA[Too many branches]]></name>
     <configKey>R0912</configKey>
     <description>
-      <![CDATA[Used when a function or method has too many branches, making it hard tofollow.]]>
+      <![CDATA[Used when a function or method has too many branches, making it hard to follow.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0913</key>
@@ -667,6 +749,7 @@
     <description>
       <![CDATA[Used when a function or method takes too many arguments.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0914</key>
@@ -675,14 +758,16 @@
     <description>
       <![CDATA[Used when a function or method has too many local variables.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0915</key>
     <name><![CDATA[Too many statements]]></name>
     <configKey>R0915</configKey>
     <description>
-      <![CDATA[Used when a function or method has too many statements. You should then splitit in smaller functions / methods.]]>
+      <![CDATA[Used when a function or method has too many statements. You should then split it in smaller functions / methods.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0921</key>
@@ -691,6 +776,7 @@
     <description>
       <![CDATA[Used when an abstract class is not used as ancestor anywhere.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0922</key>
@@ -699,6 +785,7 @@
     <description>
       <![CDATA[Used when an abstract class is used less than X times as ancestor.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>R0923</key>
@@ -707,6 +794,7 @@
     <description>
       <![CDATA[Used when an interface class is not implemented anywhere.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0101</key>
@@ -715,14 +803,16 @@
     <description>
       <![CDATA[Used when there is some code behind a "return" or "raise" statement, which will never be accessed.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0102</key>
     <name><![CDATA[Dangerous default value as argument]]></name>
     <configKey>W0102</configKey>
     <description>
-      <![CDATA[Used when a mutable value as list or dictionary is detected in a default valuefor an argument.]]>
+      <![CDATA[Used when a mutable value as list or dictionary is detected in a default value for an argument.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0104</key>
@@ -731,22 +821,25 @@
     <description>
       <![CDATA[Used when a statement doesn't have (or at least seems to) any effect.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0105</key>
     <name><![CDATA[String statement has no effect]]></name>
     <configKey>W0105</configKey>
     <description>
-      <![CDATA[Used when a string is used as a statement (which of course has no effect).This is a particular case of W0104 with its own message so you can easilydisable it if you're using those strings as documentation, instead ofcomments.]]>
+      <![CDATA[Used when a string is used as a statement (which of course has no effect). This is a particular case of W0104 with its own message so you can easily disable it if you're using those strings as documentation, instead of comments.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0106</key>
     <name><![CDATA[Expression is assigned to nothing]]></name>
     <configKey>W0106</configKey>
     <description>
-      <![CDATA[Used when an expression that is not a function call is assigned to nothing.Probably something else was intended.]]>
+      <![CDATA[Used when an expression that is not a function call is assigned to nothing. Probably something else was intended.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0107</key>
@@ -755,14 +848,16 @@
     <description>
       <![CDATA[Used when a "pass" statement that can be avoided is encountered.)]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0108</key>
     <name><![CDATA[Lambda may not be necessary]]></name>
     <configKey>W0108</configKey>
     <description>
-      <![CDATA[Used when the body of a lambda expression is a function call on the sameargument list as the lambda itself; such lambda expressions are in all but afew cases replaceable with the function being called in the body of thelambda.]]>
+      <![CDATA[Used when the body of a lambda expression is a function call on the same argument list as the lambda itself; such lambda expressions are in all but a few cases replaceable with the function being called in the body of the lambda.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0109</key>
@@ -771,22 +866,25 @@
     <description>
       <![CDATA[Used when a dictionary expression binds the same key multiple times.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0122</key>
     <name><![CDATA[Use of the exec statement]]></name>
     <configKey>W0122</configKey>
     <description>
-      <![CDATA[Used when you use the "exec" statement, to discourage its usage. That doesn'tmean you can not use it !]]>
+      <![CDATA[Used when you use the "exec" statement, to discourage its usage. That doesn't mean you can not use it!]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0141</key>
     <name><![CDATA[Used black listed builtin function]]></name>
     <configKey>W0141</configKey>
     <description>
-      <![CDATA[Used when a black listed builtin function is used (see the bad-functionoption). Usual black listed functions are the ones like map, or filter , wherePython offers now some cleaner alternative like list comprehension.]]>
+      <![CDATA[Used when a black listed builtin function is used (see the bad-function option). Usual black listed functions are the ones like map, or filter, where Python offers now some cleaner alternative like list comprehension.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0142</key>
@@ -795,22 +893,25 @@
     <description>
       <![CDATA[Used when a function or method is called using `*args` or `**kwargs` to dispatch arguments. This doesn't improve readability and should be used with care.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0150</key>
     <name><![CDATA[Statement in finally block may swallow exception]]></name>
     <configKey>W0150</configKey>
     <description>
-      <![CDATA[Used when a break or a return statement is found inside the finally clause ofa try...finally block: the exceptions raised in the try clause will besilently swallowed instead of being re-raised.]]>
+      <![CDATA[Used when a break or a return statement is found inside the finally clause of a try...finally block: the exceptions raised in the try clause will be silently swallowed instead of being re-raised.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0199</key>
-    <name><![CDATA[Assert called on a 2-uple. Did you mean 'assert x,y'?]]></name>
+    <name><![CDATA[Assert called on a 2-uple]]></name>
     <configKey>W0199</configKey>
     <description>
-      <![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is not empty, and will always evaluate to false if it is.]]>
+      <![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is not empty, and will always evaluate to false if it is. Did you mean 'assert x,y'?]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0201</key>
@@ -819,6 +920,7 @@
     <description>
       <![CDATA[Used when an instance attribute is defined outside the __init__ method.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0211</key>
@@ -827,14 +929,16 @@
     <description>
       <![CDATA[Used when a static method has "self" or "cls" as first argument.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0212</key>
     <name><![CDATA[Access to a protected member of a client class]]></name>
     <configKey>W0212</configKey>
     <description>
-      <![CDATA[Used when a protected member (i.e. class member with a name beginning with anunderscore) is access outside the class or a descendant of the class whereit's defined.]]>
+      <![CDATA[Used when a protected member (i.e. class member with a name beginning with an underscore) is access outside the class or a descendant of the class where it's defined.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0221</key>
@@ -843,6 +947,7 @@
     <description>
       <![CDATA[Used when a method has a different number of arguments than in the implemented interface or in an overridden method.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0222</key>
@@ -851,6 +956,7 @@
     <description>
       <![CDATA[Used when a method signature is different than in the implemented interface or in an overridden method.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0223</key>
@@ -859,6 +965,7 @@
     <description>
       <![CDATA[Used when an abstract method (i.e. raise NotImplementedError) is not overridden in concrete class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0231</key>
@@ -867,6 +974,7 @@
     <description>
       <![CDATA[Used when an ancestor class method has an __init__ method which is not called by a derived class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0232</key>
@@ -875,14 +983,16 @@
     <description>
       <![CDATA[Used when a class has no __init__ method, neither its parent classes.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0233</key>
     <name><![CDATA[__init__ method from a non direct base class is called]]></name>
     <configKey>W0233</configKey>
     <description>
-      <![CDATA[Used when an __init__ method is called on a class which is not in the directancestors for the analysed class.]]>
+      <![CDATA[Used when an __init__ method is called on a class which is not in the direct ancestors for the analysed class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0301</key>
@@ -891,6 +1001,7 @@
     <description>
       <![CDATA[Used when a statement is ended by a semi-colon (";"), which isn't necessary(that's python, not C ;).]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0311</key>
@@ -899,6 +1010,7 @@
     <description>
       <![CDATA[Used when an unexpected number of indentation's tabulations or spaces has been found.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0312</key>
@@ -907,6 +1019,7 @@
     <description>
       <![CDATA[Used when there are some mixed tabs and spaces in a module.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0331</key>
@@ -915,22 +1028,25 @@
     <description>
       <![CDATA[Used when the deprecated "<>" operator is used instead of "!=".]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0332</key>
     <name><![CDATA[Use l as long integer identifier]]></name>
     <configKey>W0332</configKey>
     <description>
-      <![CDATA[Used when a lower case "l" is used to mark a long integer. You should use aupper case "L" since the letter "l" looks too much like the digit "1"]]>
+      <![CDATA[Used when a lower case "l" is used to mark a long integer. You should use an upper case "L" since the letter "l" looks too much like the digit "1"]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0333</key>
     <name><![CDATA[Use of the `` operator]]></name>
     <configKey>W0333</configKey>
     <description>
-      <![CDATA[Used when the deprecated "``" (backtick) operator is used instead of the str()function.]]>
+      <![CDATA[Used when the deprecated "``" (backtick) operator is used instead of the str() function.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0401</key>
@@ -939,6 +1055,7 @@
     <description>
       <![CDATA[Used when `from module import *` is detected.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0402</key>
@@ -947,6 +1064,7 @@
     <description>
       <![CDATA[Used a module marked as deprecated is imported.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0403</key>
@@ -955,6 +1073,7 @@
     <description>
       <![CDATA[Used when an import relative to the package directory is detected.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0404</key>
@@ -963,22 +1082,25 @@
     <description>
       <![CDATA[Used when a module is reimported multiple times.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0406</key>
-    <name><![CDATA[Module import itself]]></name>
+    <name><![CDATA[Module imports itself]]></name>
     <configKey>W0406</configKey>
     <description>
       <![CDATA[Used when a module is importing itself.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0410</key>
     <name><![CDATA[__future__ import is not the first non docstring statement]]></name>
     <configKey>W0410</configKey>
     <description>
-      <![CDATA[Python 2.5 and greater require __future__ import to be the first non docstringstatement in the module.]]>
+      <![CDATA[Python 2.5 and greater require __future__ import to be the first non docstring statement in the module.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0511</key>
@@ -987,6 +1109,7 @@
     <description>
       <![CDATA[Used when a warning note as FIXME or XXX is detected.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0601</key>
@@ -995,6 +1118,7 @@
     <description>
       <![CDATA[Used when a variable is defined through the "global" statement but the variable is not defined in the module scope.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0602</key>
@@ -1003,22 +1127,25 @@
     <description>
       <![CDATA[Used when a variable is defined through the "global" statement but no assignment to this variable is done.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0603</key>
     <name><![CDATA[Using the global statement]]></name>
     <configKey>W0603</configKey>
     <description>
-      <![CDATA[Used when you use the "global" statement to update a global variable. PyLintjust try to discourage this usage. That doesn't mean you can not use it !]]>
+      <![CDATA[Used when you use the "global" statement to update a global variable. PyLint just tries to discourage this usage. That doesn't mean you can not use it!]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0604</key>
     <name><![CDATA[Using the global statement at the module level]]></name>
     <configKey>W0604</configKey>
     <description>
-      <![CDATA[Used when you use the "global" statement at the module level since it has noeffect]]>
+      <![CDATA[Used when you use the "global" statement at the module level since it has no effect]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0611</key>
@@ -1027,6 +1154,7 @@
     <description>
       <![CDATA[Used when an imported module or variable is not used.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0612</key>
@@ -1035,6 +1163,7 @@
     <description>
       <![CDATA[Used when a variable is defined but not used.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0613</key>
@@ -1043,6 +1172,7 @@
     <description>
       <![CDATA[Used when a function or method argument is not used.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0614</key>
@@ -1051,14 +1181,16 @@
     <description>
       <![CDATA[Used when an imported module or variable is not used from a 'from X import *'style import.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0621</key>
     <name><![CDATA[Redefining name from outer scope]]></name>
     <configKey>W0621</configKey>
     <description>
-      <![CDATA[Used when a variable's name hide a name defined in the outer scope.]]>
+      <![CDATA[Used when a variable's name hides a name defined in the outer scope.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0622</key>
@@ -1067,14 +1199,16 @@
     <description>
       <![CDATA[Used when a variable or function override a built-in.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0631</key>
     <name><![CDATA[Using possibly undefined loop variable]]></name>
     <configKey>W0631</configKey>
     <description>
-      <![CDATA[Used when an loop variable (i.e. defined by a for loop or a list comprehensionor a generator expression) is used outside the loop.]]>
+      <![CDATA[Used when an loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) is used outside the loop.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0701</key>
@@ -1083,6 +1217,7 @@
     <description>
       <![CDATA[Used when a string exception is raised.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0702</key>
@@ -1091,6 +1226,7 @@
     <description>
       <![CDATA[Used when an except clause doesn't specify exceptions type to catch.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0703</key>
@@ -1099,46 +1235,58 @@
     <description>
       <![CDATA[Used when an except catches a too general exception, possibly burying unrelated errors.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0704</key>
     <name><![CDATA[Except doesn't do anything]]></name>
     <configKey>W0704</configKey>
     <description>
-      <![CDATA[Used when an except clause does nothing but "pass" and there is no "else"clause.]]>
+      <![CDATA[Used when an except clause does nothing but "pass" and there is no "else" clause.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W0710</key>
     <name><![CDATA[Exception doesn't inherit from standard "Exception" class]]></name>
     <configKey>W0710</configKey>
     <description>
-      <![CDATA[Used when a custom exception class is raised but doesn't inherit from thebuiltin "Exception" class.]]>
+      <![CDATA[Used when a custom exception class is raised but doesn't inherit from the builtin "Exception" class.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W1001</key>
     <name><![CDATA[Use of "property" on an old style class]]></name>
     <configKey>W1001</configKey>
     <description>
-      <![CDATA[Used when PyLint detect the use of the builtin "property" on an old styleclass while this is relying on new style classes features]]>
+      <![CDATA[Used when PyLint detects the use of the builtin "property" on an old styleclass while this is relying on new style classes features]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W1111</key>
     <name><![CDATA[Assigning to function call which only returns None]]></name>
     <configKey>W1111</configKey>
     <description>
-      <![CDATA[Used when an assignment is done on a function call but the inferred functionreturns nothing but None.]]>
+      <![CDATA[Used when an assignment is done on a function call but the inferred function returns nothing but None.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W1201</key>
     <name><![CDATA[Specify string format arguments as logging function parameters]]></name>
     <configKey>W1201</configKey>
     <description>
-      <![CDATA[Used when a logging statement has a call form of "logging.<loggingmethod>(format_string % (format_args...))". Such calls should leave stringinterpolation to the logging method itself and be written "logging.<loggingmethod>(format_string, format_args...)" so that the program may avoidincurring the cost of the interpolation in those cases in which no messagewill be logged. For more, see http://www.python.org/dev/peps/pep-0282/.]]>
+      <![CDATA[Used when a logging statement has a call form of
+               "logging.<loggingmethod>(format_string % (format_args...))". Such
+               calls should leave string interpolation to the logging method itself
+               and be written "logging.<loggingmethod>(format_string,
+               format_args...)" so that the program may avoid incurring the cost of
+               the interpolation in those cases in which no message will be
+               logged. For more, see http://www.python.org/dev/peps/pep-0282/.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W1300</key>
@@ -1147,6 +1295,7 @@
     <description>
       <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary whose keys are not all strings.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
   <rule>
     <key>W1301</key>
@@ -1155,8 +1304,9 @@
     <description>
       <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that conWtains keys not required by the format string.]]>
     </description>
+    <priority>MINOR</priority>
   </rule>
-  
+
   <!-- removed in in pylint 0.22 -->
   <!-- E0503 (Unknown encoding specified) -->
 
@@ -1174,6 +1324,7 @@
       <![CDATA[Used when an unsupported format character is used in a
                logging statementformat string.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1201</key>
@@ -1183,6 +1334,7 @@
       <![CDATA[Used when a logging statement format string terminates
                before the end of aconversion specifier.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1205</key>
@@ -1191,6 +1343,7 @@
     <description>
       <![CDATA[Used when a logging format string is given too few arguments.]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
   <rule>
     <key>E1206</key>
@@ -1199,5 +1352,6 @@
     <description>
       <![CDATA[Used when a logging format string is given too many arguments]]>
     </description>
+    <priority>MAJOR</priority>
   </rule>
 </rules>
