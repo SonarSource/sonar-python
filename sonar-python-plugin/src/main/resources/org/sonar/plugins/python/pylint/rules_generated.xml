@@ -313,6 +313,14 @@
 </description>
 </rule>
 <rule>
+<key>E0711</key>
+<name><![CDATA[NotImplemented raised - should raise NotImplementedError]]></name>
+<configKey>E0711</configKey>
+<description>
+<![CDATA[Used when NotImplemented is raised instead of NotImplementedError]]>
+</description>
+</rule>
+<rule>
 <key>E1001</key>
 <name><![CDATA[Use __slots__ on an old style class]]></name>
 <configKey>E1001</configKey>
@@ -766,6 +774,22 @@
 <configKey>W0142</configKey>
 <description>
 <![CDATA[Used when a function or method is called using `*args` or `**kwargs` todispatch arguments. This doesn't improve readability and should be used withcare.]]>
+</description>
+</rule>
+<rule>
+<key>W0150</key>
+<name><![CDATA[%s statement in finally block may swallow exception]]></name>
+<configKey>W0150</configKey>
+<description>
+<![CDATA[Used when a break or a return statement is found inside the finally clause ofa try...finally block: the exceptions raised in the try clause will besilently swallowed instead of being re-raised.]]>
+</description>
+</rule>
+<rule>
+<key>W0199</key>
+<name><![CDATA[Assert called on a 2-uple. Did you mean 'assert x,y'?]]></name>
+<configKey>W0199</configKey>
+<description>
+<![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is notempty, and will always evaluate to false if it is.]]>
 </description>
 </rule>
 <rule>
