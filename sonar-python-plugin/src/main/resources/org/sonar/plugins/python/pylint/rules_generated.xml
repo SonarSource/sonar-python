@@ -42,7 +42,7 @@
 </rule>
 <rule>
 <key>C0202</key>
-<name><![CDATA[Class method should have "cls" as first argument]]></name>
+<name><![CDATA[Class method should have %s as first argument]]></name>
 <configKey>C0202</configKey>
 <description>
 <![CDATA[Used when a class method has an attribute different than "cls" as firstargument, to easily differentiate them from regular instance methods.]]>
@@ -194,10 +194,10 @@
 </rule>
 <rule>
 <key>E0202</key>
-<name><![CDATA[An attribute inherited from %s hide this method]]></name>
+<name><![CDATA[An attribute affected in %s line %s hide this method]]></name>
 <configKey>E0202</configKey>
 <description>
-<![CDATA[Used when a class defines a method which is hidden by an instance attributefrom an ancestor class.]]>
+<![CDATA[Used when a class defines a method which is hidden by an instance attributefrom an ancestor class or set by some client code.]]>
 </description>
 </rule>
 <rule>
@@ -298,18 +298,18 @@
 </rule>
 <rule>
 <key>E1001</key>
-<name><![CDATA[Use __slots__ on an old style class]]></name>
+<name><![CDATA[Use of __slots__ on an old style class]]></name>
 <configKey>E1001</configKey>
 <description>
-<![CDATA[Used when an old style class use the __slots__ attribute.]]>
+<![CDATA[Used when an old style class uses the __slots__ attribute.]]>
 </description>
 </rule>
 <rule>
 <key>E1002</key>
-<name><![CDATA[Use super on an old style class]]></name>
+<name><![CDATA[Use of super on an old style class]]></name>
 <configKey>E1002</configKey>
 <description>
-<![CDATA[Used when an old style class use the super builtin.]]>
+<![CDATA[Used when an old style class uses the super builtin.]]>
 </description>
 </rule>
 <rule>
@@ -1090,10 +1090,10 @@
 </rule>
 <rule>
 <key>W0703</key>
-<name><![CDATA[Catch "Exception"]]></name>
+<name><![CDATA[Catching too general exception %s]]></name>
 <configKey>W0703</configKey>
 <description>
-<![CDATA[Used when an except catches Exception instances.]]>
+<![CDATA[Used when an except catches a too general exception, possibly buryingunrelated errors.]]>
 </description>
 </rule>
 <rule>
