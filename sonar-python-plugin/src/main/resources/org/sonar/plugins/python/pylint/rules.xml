@@ -276,7 +276,7 @@
     <configKey>E0501</configKey>
     <description>
       <![CDATA[Used when some non ascii characters are detected but no
-      encoding is specified, as explicited in the PEP 263.]]>
+      encoding is specified, as stated in the PEP 263.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
@@ -391,10 +391,10 @@
   </rule>
   <rule>
     <key>E1101</key>
-    <name><![CDATA[Access of nonexistant member]]></name>
+    <name><![CDATA[Access of nonexistent member]]></name>
     <configKey>E1101</configKey>
     <description>
-      <![CDATA[Used when a variable is accessed for an unexistent member.]]>
+      <![CDATA[Used when a variable is accessed for an nonexistent member.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
@@ -409,10 +409,10 @@
   </rule>
   <rule>
     <key>E1103</key>
-    <name><![CDATA[Accessing nonexistant member (type information incomplete)]]></name>
+    <name><![CDATA[Accessing nonexistent member (type information incomplete)]]></name>
     <configKey>E1103</configKey>
     <description>
-      <![CDATA[Used when a variable is accessed for an unexistent member, but astng was notable to interpret all possible types of this variable.]]>
+      <![CDATA[Used when a variable is accessed for an nonexistent member, but Pylint was not able to interpret all possible types of this variable.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
@@ -575,7 +575,7 @@
     <name><![CDATA[Error while code parsing]]></name>
     <configKey>F0010</configKey>
     <description>
-      <![CDATA[Used when an exception occured while building the ASTNG representation which could be handled by astng.]]>
+      <![CDATA[Used when an exception occurred while building the ASTNG representation which could be handled by ASTNG.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
@@ -584,7 +584,7 @@
     <name><![CDATA[Unable to check methods signature]]></name>
     <configKey>F0202</configKey>
     <description>
-      <![CDATA[Used when PyLint has been unable to check methods signature compatibility foran unexpected reason. Please report this kind if you don't make sense of it.]]>
+      <![CDATA[Used when PyLint has been unable to check methods signature compatibility for an unexpected reason. Please report this kind if you don't make sense of it.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
@@ -666,7 +666,7 @@
     <name><![CDATA[Method could be a function]]></name>
     <configKey>R0201</configKey>
     <description>
-      <![CDATA[Used when a method doesn't use its bound instance, and so could be written a sa function.]]>
+      <![CDATA[Used when a method doesn't use its bound instance, and so could be written as a function.]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -702,7 +702,7 @@
     <name><![CDATA[Too many instance attributes]]></name>
     <configKey>R0902</configKey>
     <description>
-      <![CDATA[Used when class has too many instance attributes, try to reduce this to get amore simple (and so easier to use) class.]]>
+      <![CDATA[Used when class has too many instance attributes, try to reduce this to get a more simple (and so easier to use) class.]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -1260,7 +1260,7 @@
     <name><![CDATA[Use of "property" on an old style class]]></name>
     <configKey>W1001</configKey>
     <description>
-      <![CDATA[Used when PyLint detects the use of the builtin "property" on an old styleclass while this is relying on new style classes features]]>
+      <![CDATA[Used when PyLint detects the use of the builtin "property" on an old style class while this is relying on new style classes features]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -1293,7 +1293,7 @@
     <name><![CDATA[Format string dictionary key should be a string]]></name>
     <configKey>W1300</configKey>
     <description>
-      <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary whose keys are not all strings.]]>
+      <![CDATA[Used when a format string that uses named conversion specifiers is used with a dictionary whose keys are not all strings.]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -1302,7 +1302,7 @@
     <name><![CDATA[Unused key in format string dictionary]]></name>
     <configKey>W1301</configKey>
     <description>
-      <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that conWtains keys not required by the format string.]]>
+      <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that contains keys not required by the format string.]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -1322,7 +1322,7 @@
     <configKey>E1200</configKey>
     <description>
       <![CDATA[Used when an unsupported format character is used in a
-               logging statementformat string.]]>
+               logging statement format string.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
@@ -1332,7 +1332,7 @@
     <configKey>E1201</configKey>
     <description>
       <![CDATA[Used when a logging statement format string terminates
-               before the end of aconversion specifier.]]>
+               before the end of a conversion specifier.]]>
     </description>
     <priority>MAJOR</priority>
   </rule>
