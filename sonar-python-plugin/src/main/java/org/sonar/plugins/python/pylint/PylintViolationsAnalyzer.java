@@ -73,7 +73,7 @@ public class PylintViolationsAnalyzer {
       if (!new File(pylintConfigPath).exists()) {
         throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
       }
-      pylintConfigParam = " --rcfile=" + pylintConfigPath;
+      pylintConfigParam = "--rcfile=" + pylintConfigPath;
     }
   }
 
