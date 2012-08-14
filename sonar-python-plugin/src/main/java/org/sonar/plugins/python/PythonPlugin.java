@@ -29,6 +29,7 @@ import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
+import org.sonar.plugins.python.xunit.PythonXunitSensor;
 
 import java.util.List;
 
@@ -50,7 +51,9 @@ public class PythonPlugin extends SonarPlugin {
         // pylint
         PylintConfiguration.class,
         PylintSensor.class,
-        PylintRuleRepository.class);
+        PylintRuleRepository.class,
+        
+        PythonXunitSensor.class);
   }
 
 }
