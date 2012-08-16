@@ -30,6 +30,7 @@ import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonar.plugins.python.xunit.PythonXunitSensor;
+import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 
 import java.util.List;
 
@@ -53,7 +54,8 @@ public class PythonPlugin extends SonarPlugin {
         PylintSensor.class,
         PylintRuleRepository.class,
         
-        PythonXunitSensor.class);
+        PythonXunitSensor.class,
+        PythonCoverageSensor.class);
   }
 
 }

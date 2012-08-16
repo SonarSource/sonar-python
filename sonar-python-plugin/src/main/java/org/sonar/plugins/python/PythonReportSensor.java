@@ -35,8 +35,8 @@ import org.sonar.plugins.python.Python;
  * {@inheritDoc}
  */
 public abstract class PythonReportSensor implements Sensor {
-  private Configuration conf = null;
-
+  protected Configuration conf = null;
+  
   /**
    * {@inheritDoc}
    */
