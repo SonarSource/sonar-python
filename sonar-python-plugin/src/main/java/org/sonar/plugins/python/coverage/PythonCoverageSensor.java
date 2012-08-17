@@ -27,6 +27,8 @@ import java.util.Map;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.configuration.Configuration;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
@@ -37,14 +39,30 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.PythonPlugin;
 
+@Properties({
+  @Property(
+    key = PythonCoverageSensor.REPORT_PATH_KEY,
+    defaultValue = PythonCoverageSensor.DEFAULT_REPORT_PATH,
+    name = "Path to coverage report(s)",
+    description = "Path to coverage reports, relative to project's root. Ant patterns are accepted. The reports have to conform to the Cobertura XML format.",
+    global = false,
+    project = true),
+  @Property(
+    key = PythonCoverageSensor.IT_REPORT_PATH_KEY,
+    defaultValue = PythonCoverageSensor.IT_DEFAULT_REPORT_PATH,
+    name = "Path to coverage report(s) for integration tests",
+    description = "Path to coverage reports for integration tests, relative to project's root. Ant patterns are accepted. The reports have to conform to the Cobertura XML format.",
+    global = false,
+    project = true)
+})
 /**
  * {@inheritDoc}
  */
 public class PythonCoverageSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
   public static final String IT_REPORT_PATH_KEY = "sonar.python.coverage.itReportPath";
-  private static final String DEFAULT_REPORT_PATH = "coverage-reports/coverage-*.xml";
-  private static final String IT_DEFAULT_REPORT_PATH = "coverage-reports/it-coverage-*.xml";
+  public static final String DEFAULT_REPORT_PATH = "coverage-reports/coverage-*.xml";
+  public static final String IT_DEFAULT_REPORT_PATH = "coverage-reports/it-coverage-*.xml";
   
   private CoberturaParser parser = new CoberturaParser();
   
