@@ -22,6 +22,8 @@ package org.sonar.plugins.python.xunit;
 import java.io.File;
 
 import org.apache.commons.configuration.Configuration;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 import org.sonar.api.batch.AbstractCoverageExtension;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
@@ -35,12 +37,21 @@ import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonPlugin;
 
+@Properties({
+  @Property(
+    key = PythonXunitSensor.REPORT_PATH_KEY,
+    defaultValue = PythonXunitSensor.DEFAULT_REPORT_PATH,
+    name = "Path to xunit report(s)",
+    description = "Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.",
+    global = false,
+    project = true)
+})
 /**
  * {@inheritDoc}
  */
 public class PythonXunitSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
-  private static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
+  public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   private Python lang = null;
   
   /**
