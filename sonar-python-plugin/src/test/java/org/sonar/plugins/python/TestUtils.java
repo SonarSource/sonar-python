@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import static org.junit.Assert.fail;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,17 +26,13 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.sonar.api.resources.InputFile;
+import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
-import org.sonar.api.resources.Language;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.rules.RuleQuery;
 
 public class TestUtils{
   public static File loadResource(String resourceName) {

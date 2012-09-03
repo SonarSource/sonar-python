@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.sonar.api.utils.SonarException;
 
@@ -130,8 +131,9 @@ public class PylintViolationsAnalyzerTest {
   private List<String> readFile(String path) {
     List<String> lines = new LinkedList<String>();
 
+    BufferedReader reader = null;
     try {
-      BufferedReader reader = new BufferedReader(new FileReader(path));
+      reader = new BufferedReader(new FileReader(path));
       String s = null;
 
       while ((s = reader.readLine()) != null) {
@@ -139,6 +141,8 @@ public class PylintViolationsAnalyzerTest {
       }
     } catch (IOException e) {
       System.err.println("Cannot read the file '" + path + "'");
+    } finally {
+    	IOUtils.closeQuietly(reader);
     }
 
     return lines;
