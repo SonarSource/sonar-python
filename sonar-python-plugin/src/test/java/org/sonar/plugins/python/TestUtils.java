@@ -26,6 +26,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,40 +44,43 @@ public class TestUtils{
     } catch (URISyntaxException e) {
       System.out.println("Cannot load resource: " + resourceName);
     }
-    
+
     return resourceAsFile;
   }
-  
+
   /**
    * @return default mock project
    */
   public static Project mockProject() {
     return mockProject(loadResource("/org/sonar/plugins/python/"));
   }
-  
+
   /**
    * Mock project
-   * @param baseDir project base dir
+   * @param baseDir projects base directory
    * @return mocked project
    */
   public static Project mockProject(File baseDir) {
     List<InputFile> mainFiles = new LinkedList<InputFile>();
     List<InputFile> testFiles = new LinkedList<InputFile>();
-    
+    List<File> dirList = Arrays.asList(baseDir);
+
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getBasedir()).thenReturn(baseDir);
     when(fileSystem.getSourceCharset()).thenReturn(Charset.defaultCharset());
     when(fileSystem.mainFiles(Python.KEY)).thenReturn(mainFiles);
     when(fileSystem.testFiles(Python.KEY)).thenReturn(testFiles);
+    when(fileSystem.getSourceDirs()).thenReturn(dirList);
+    when(fileSystem.getTestDirs()).thenReturn(dirList);
 
     Project project = mock(Project.class);
     when(project.getFileSystem()).thenReturn(fileSystem);
     Language lang = mockLanguage();
     when(project.getLanguage()).thenReturn(lang);
-    
+
     return project;
   }
-  
+
   public static Python mockLanguage(){
     Python lang = mock(Python.class);
     return lang;

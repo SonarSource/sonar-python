@@ -29,6 +29,7 @@ import java.util.List;
 public class TestSuite {
 
   private String key;
+  private org.sonar.api.resources.File sonarResource = null;
   private int errors = 0;
   private int skipped = 0;
   private int tests = 0;
@@ -105,6 +106,24 @@ public class TestSuite {
   }
 
   /**
+   * Adds the stats contained by the given test suite to this test suite
+   * @param ts the test suite to add
+   */
+  public TestSuite addMeasures(TestSuite ts){
+    for(TestCase tc: ts.getTestCases()){
+      addTestCase(tc);
+    }
+    return this;
+  }
+  
+  /**
+   * Returnes the testcases contained by this test suite
+   */
+  public List<TestCase> getTestCases(){
+    return testCases;
+  }
+  
+  /**
    * Returns execution details as sonar-conform XML
    */
   public String getDetails() { 
@@ -115,5 +134,13 @@ public class TestSuite {
     }
     details.append("</tests-details>");
     return details.toString();
+  }
+
+  public void setSonarResource(org.sonar.api.resources.File resource) {
+    sonarResource = resource;
+  }
+  
+  public org.sonar.api.resources.File getSonarResource() {
+    return sonarResource;
   }
 }

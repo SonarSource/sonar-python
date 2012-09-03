@@ -29,15 +29,27 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.anyDouble;
 import static org.mockito.Mockito.any;
 
+import org.sonar.api.resources.InputFile;
+
+import java.util.List;
+import java.io.File;
+
+import org.sonar.plugins.python.Python;
+
+import org.sonar.api.measures.Metric;
+
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
+//import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.python.TestUtils;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class PythonXunitSensorTest {
   private PythonXunitSensor sensor;
@@ -53,9 +65,9 @@ public class PythonXunitSensorTest {
   }
 
   @Test
-  public void shouldReportCorrectViolations() {
+  public void shouldSaveCorrectMeasures() {
     sensor.analyse(project, context);
-    
+
     verify(context, times(2)).saveMeasure((Resource) anyObject(),
                                           eq(CoreMetrics.TESTS), anyDouble());
     verify(context, times(2)).saveMeasure((Resource) anyObject(),
@@ -70,13 +82,13 @@ public class PythonXunitSensorTest {
   }
 
   @Test
-  public void shouldReportZeroTestWhenNoReportFound() {
+  public void shouldReportZeroTestsWhenNoReportFound() {
     Configuration config = mock(Configuration.class);
     when(config.getString(PythonXunitSensor.REPORT_PATH_KEY, null)).thenReturn("notexistingpath");
     sensor = new PythonXunitSensor(config, TestUtils.mockLanguage());
-    
+
     sensor.analyse(project, context);
-    
+
     verify(context, times(1)).saveMeasure(eq(CoreMetrics.TESTS), eq(0.0));
   }
 
@@ -86,7 +98,7 @@ public class PythonXunitSensorTest {
     when(config.getString(PythonXunitSensor.REPORT_PATH_KEY, null))
       .thenReturn("xunit-reports/invalid-time-xunit-report.xml");
     sensor = new PythonXunitSensor(config, TestUtils.mockLanguage());
-    
+
     sensor.analyse(project, context);
   }
 }

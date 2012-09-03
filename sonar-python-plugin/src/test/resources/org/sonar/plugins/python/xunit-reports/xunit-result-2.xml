@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite name="nosetests" tests="5" errors="2" failures="1" skip="1"><testcase classname="tests.dir.test_sample.Test_Class" name="test_success" time="0.000"><error type="exceptions.TypeError" message="test_success() takes no arguments (1 given)"><![CDATA[Traceback (most recent call last):
+  File "c:\sdk\win32\1.1\Python26\lib\unittest.py", line 279, in run
+    testMethod()
+  File "c:\sdk\win32\1.1\python26\lib\site-packages\nose-1.1.2-py2.6.egg\nose\case.py", line 197, in runTest
+    self.test(*self.arg)
+TypeError: test_success() takes no arguments (1 given)
+]]></error></testcase><testcase classname="tests.dir.test_sample" name="test_skipped2" time="0.000"><skipped type="nose.plugins.skip.SkipTest" message=""><![CDATA[Traceback (most recent call last):
+  File "c:\sdk\win32\1.1\Python26\lib\unittest.py", line 279, in run
+    testMethod()
+  File "c:\sdk\win32\1.1\python26\lib\site-packages\nose-1.1.2-py2.6.egg\nose\case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "E:\src\pysample\tests\dir\test_sample.py", line 11, in test_skipped2
+    raise SkipTest
+SkipTest
+]]></skipped></testcase><testcase classname="tests.dir.test_sample" name="test_whichcovers" time="0.000" /><testcase classname="tests.dir.test_sample" name="test_failed" time="0.000"><failure type="exceptions.AssertionError" message=""><![CDATA[Traceback (most recent call last):
+  File "c:\sdk\win32\1.1\Python26\lib\unittest.py", line 279, in run
+    testMethod()
+  File "c:\sdk\win32\1.1\python26\lib\site-packages\nose-1.1.2-py2.6.egg\nose\case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "E:\src\pysample\tests\dir\test_sample.py", line 20, in test_failed
+    assert False
+AssertionError
+]]></failure></testcase><testcase classname="tests.dir.test_sample" name="test_error" time="0.000"><error type="exceptions.NameError" message="global name 'not_exising_callable' is not defined"><![CDATA[Traceback (most recent call last):
+  File "c:\sdk\win32\1.1\Python26\lib\unittest.py", line 279, in run
+    testMethod()
+  File "c:\sdk\win32\1.1\python26\lib\site-packages\nose-1.1.2-py2.6.egg\nose\case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "E:\src\pysample\tests\dir\test_sample.py", line 23, in test_error
+    not_exising_callable()
+NameError: global name 'not_exising_callable' is not defined
+]]></error></testcase></testsuite>
