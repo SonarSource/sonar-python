@@ -55,44 +55,34 @@ import org.sonar.plugins.python.PythonPlugin;
     global = false,
     project = true)
 })
-/**
- * {@inheritDoc}
- */
 public class PythonCoverageSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
   public static final String IT_REPORT_PATH_KEY = "sonar.python.coverage.itReportPath";
   public static final String DEFAULT_REPORT_PATH = "coverage-reports/coverage-*.xml";
   public static final String IT_DEFAULT_REPORT_PATH = "coverage-reports/it-coverage-*.xml";
-  
+
   private CoberturaParser parser = new CoberturaParser();
-  
-  /**
-   * {@inheritDoc}
-   */
+
   public PythonCoverageSensor(Configuration conf) {
     super(conf);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public void analyse(Project project, SensorContext context) {
     List<File> reports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
                                     REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     PythonPlugin.LOG.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
     saveMeasures(project, context, coverageMeasures, false);
-    
+
     PythonPlugin.LOG.debug("Parsing integration test coverage reports");
     List<File> itReports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
                                       IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     coverageMeasures = parseReports(itReports);
     saveMeasures(project, context, coverageMeasures, true);
   }
-  
+
   private Map<String, CoverageMeasuresBuilder> parseReports(List<File> reports) {
     Map<String, CoverageMeasuresBuilder>  coverageMeasures = new HashMap<String, CoverageMeasuresBuilder>();
-    
     for (File report : reports) {
       try{
         parser.parseReport(report, coverageMeasures);
@@ -100,7 +90,6 @@ public class PythonCoverageSensor extends PythonReportSensor {
         throw new SonarException("Error parsing the report '" + report + "'", e);
       }
     }
-
     return coverageMeasures;
   }
 
@@ -123,12 +112,11 @@ public class PythonCoverageSensor extends PythonReportSensor {
       }
     }
   }
-    
+
   Measure convertToItMeasure(Measure measure){
     Measure itMeasure = null;
     Metric metric = measure.getMetric();
     Double value = measure.getValue();
-    
     if (CoreMetrics.LINES_TO_COVER.equals(metric)) {
       itMeasure = new Measure(CoreMetrics.IT_LINES_TO_COVER, value);
     } else if (CoreMetrics.UNCOVERED_LINES.equals(metric)) {
@@ -144,11 +132,11 @@ public class PythonCoverageSensor extends PythonReportSensor {
     } else if (CoreMetrics.CONDITIONS_BY_LINE.equals(metric)) {
       itMeasure = new Measure(CoreMetrics.IT_CONDITIONS_BY_LINE, measure.getData());
     }
-    
     return itMeasure;
   }
-  
+
   private boolean fileExist(SensorContext context, org.sonar.api.resources.File file) {
     return context.getResource(file) != null;
   }
+
 }

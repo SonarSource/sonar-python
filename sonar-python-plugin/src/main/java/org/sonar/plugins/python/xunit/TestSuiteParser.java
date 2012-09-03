@@ -33,21 +33,15 @@ import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser.XmlStreamHandler;
 
-/**
- * {@inheritDoc}
- */
 public class TestSuiteParser implements XmlStreamHandler {
-  
+
   private Map<String, TestSuite> testSuites = new HashMap<String, TestSuite>();
-  
-  /**
-   * {@inheritDoc}
-   */
+
   public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
     SMInputCursor testSuiteCursor = rootCursor.constructDescendantCursor(new ElementFilter("testsuite"));
     while (testSuiteCursor.getNext() != null) {
       String testSuiteClassName = testSuiteCursor.getAttrValue("name");
-      
+
       SMInputCursor testCaseCursor = testSuiteCursor.childElementCursor("testcase");
       while (testCaseCursor.getNext() != null) {
         String testClassName = getClassname(testCaseCursor, testSuiteClassName);
@@ -60,7 +54,7 @@ public class TestSuiteParser implements XmlStreamHandler {
       }
     }
   }
-  
+
   /**
    * Returns successfully parsed reports as a collection of TestSuite objects.
    */
@@ -68,47 +62,40 @@ public class TestSuiteParser implements XmlStreamHandler {
     return testSuites.values();
   }
 
-  private String getClassname(SMInputCursor testCaseCursor, String defaultClassname)
-    throws XMLStreamException
-  {
+  private String getClassname(SMInputCursor testCaseCursor, String defaultClassname) throws XMLStreamException {
     String testClassName = testCaseCursor.getAttrValue("classname");
     return testClassName == null ? defaultClassname : testClassName;
   }
-  
-  private TestCase parseTestCaseTag(SMInputCursor testCaseCursor)
-    throws XMLStreamException
-  {
+
+  private TestCase parseTestCaseTag(SMInputCursor testCaseCursor) throws XMLStreamException {
     // TODO: get a decent grammar for the junit format and check the
     // logic inside this method against it.
-    
+
     String name = parseTestCaseName(testCaseCursor);
     Double time = parseTime(testCaseCursor);
     String status = "ok";
     String stack = "";
     String msg = "";
-    
+
     SMInputCursor childCursor = testCaseCursor.childElementCursor();
     if (childCursor.getNext() != null) {
       String elementName = childCursor.getLocalName();
-      if (elementName.equals("skipped")) {
+      if ("skipped".equals(elementName)) {
         status = "skipped";
-      } else if (elementName.equals("failure")) {
+      } else if ("failure".equals(elementName)) {
         status = "failure";
         msg = childCursor.getAttrValue("message");
         stack = childCursor.collectDescendantText();
-      } else if (elementName.equals("error")) {
+      } else if ("error".equals(elementName)) {
         status = "error";
         msg = childCursor.getAttrValue("message");
         stack = childCursor.collectDescendantText();
       }
     }
-    
     return new TestCase(name, time.intValue(), status, stack, msg);
   }
 
-  private double parseTime(SMInputCursor testCaseCursor)
-    throws XMLStreamException
-  {
+  private double parseTime(SMInputCursor testCaseCursor) throws XMLStreamException {
     double time = 0.0;
     try {
       Double tmp = ParsingUtils.parseNumber(testCaseCursor.getAttrValue("time"), Locale.ENGLISH);
@@ -116,7 +103,6 @@ public class TestSuiteParser implements XmlStreamHandler {
     } catch (ParseException e) {
       throw new XMLStreamException(e);
     }
-    
     return time;
   }
 
@@ -128,4 +114,5 @@ public class TestSuiteParser implements XmlStreamHandler {
     }
     return name;
   }
+
 }

@@ -31,22 +31,12 @@ import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonPlugin;
 
-/**
- * {@inheritDoc}
- */
 public class CoberturaParser {
-  /**
-   * {@inheritDoc}
-   */
-  public void parseReport(File xmlFile, final Map<String, CoverageMeasuresBuilder> coverageData)
-    throws XMLStreamException
-  {
+
+  public void parseReport(File xmlFile, final Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
     PythonPlugin.LOG.info("Parsing report '{}'", xmlFile);
-    
+
     StaxParser parser = new StaxParser(new StaxParser.XmlStreamHandler() {
-      /**
-       * {@inheritDoc}
-       */
       public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
         rootCursor.advance();
         collectPackageMeasures(rootCursor.descendantElementCursor("package"), coverageData);
@@ -54,18 +44,14 @@ public class CoberturaParser {
     });
     parser.parse(xmlFile);
   }
-  
-  private void collectPackageMeasures(SMInputCursor pack, Map<String, CoverageMeasuresBuilder> coverageData)
-    throws XMLStreamException
-  {
+
+  private void collectPackageMeasures(SMInputCursor pack, Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
     while (pack.getNext() != null) {
       collectFileMeasures(pack.descendantElementCursor("class"), coverageData);
     }
   }
 
-  private void collectFileMeasures(SMInputCursor clazz, Map<String, CoverageMeasuresBuilder> coverageData)
-    throws XMLStreamException
-  {
+  private void collectFileMeasures(SMInputCursor clazz, Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
     while (clazz.getNext() != null) {
       String fileName = clazz.getAttrValue("filename");
       CoverageMeasuresBuilder builder = coverageData.get(fileName);
@@ -96,4 +82,5 @@ public class CoberturaParser {
   public String toString() {
     return getClass().getSimpleName();
   }
+
 }

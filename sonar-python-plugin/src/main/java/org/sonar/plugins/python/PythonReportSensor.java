@@ -31,29 +31,18 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.Python;
 
-/**
- * {@inheritDoc}
- */
 public abstract class PythonReportSensor implements Sensor {
+
   protected Configuration conf = null;
-  
-  /**
-   * {@inheritDoc}
-   */
+
   public PythonReportSensor(Configuration conf) {
     this.conf = conf;
   }
-  
-  /**
-   * {@inheritDoc}
-   */
+
   public boolean shouldExecuteOnProject(Project project) {
     return Python.KEY.equals(project.getLanguageKey());
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public void analyse(Project project, SensorContext context) {
     try {
       List<File> reports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
@@ -62,7 +51,7 @@ public abstract class PythonReportSensor implements Sensor {
         PythonPlugin.LOG.info("Processing report '{}'", report);
         processReport(project, context, report);
       }
-      
+
       if (reports.isEmpty()) {
         handleNoReportsCase(context);
       }
@@ -89,7 +78,7 @@ public abstract class PythonReportSensor implements Sensor {
     if(reportPath == null){
       reportPath = defaultReportPath;
     }
-    
+
     PythonPlugin.LOG.debug("Using pattern '{}' to find reports", reportPath);
 
     DirectoryScanner scanner = new DirectoryScanner();
@@ -103,18 +92,22 @@ public abstract class PythonReportSensor implements Sensor {
     for (String relPath : relPaths) {
       reports.add(new File(baseDirPath, relPath));
     }
-    
+
     return reports;
   }
 
-  protected void processReport(Project project, SensorContext context, File report)
-    throws
-    javax.xml.stream.XMLStreamException
-  {}
+  protected void processReport(Project project, SensorContext context, File report) throws javax.xml.stream.XMLStreamException {
+  }
 
-  protected void handleNoReportsCase(SensorContext context) {}
-  
-  protected String reportPathKey() { return ""; };
-  
-  protected String defaultReportPath() { return ""; };
+  protected void handleNoReportsCase(SensorContext context) {
+  }
+
+  protected String reportPathKey() {
+    return "";
+  }
+
+  protected String defaultReportPath() {
+    return "";
+  }
+
 }
