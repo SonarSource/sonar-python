@@ -74,7 +74,7 @@ public class CheckListTest {
       keys.add(rule.getKey());
 
       resourceBundle.getString("rule." + CheckList.REPOSITORY_KEY + "." + rule.getKey() + ".name");
-      assertThat(getClass().getResource("/org/sonar/l10n/python/" + rule.getKey() + ".html"))
+      assertThat(getClass().getResource("/org/sonar/l10n/python/rules/python/" + rule.getKey() + ".html"))
           .overridingErrorMessage("No description for " + rule.getKey())
           .isNotNull();
 
