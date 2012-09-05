@@ -49,11 +49,13 @@ public class PythonPlugin extends SonarPlugin {
         PythonRuleRepository.class,
         PythonDefaultProfile.class,
 
+        PythonCommonRulesEngineProvider.class,
+
         // pylint
         PylintConfiguration.class,
         PylintSensor.class,
         PylintRuleRepository.class,
-        
+
         PythonXunitSensor.class,
         PythonCoverageSensor.class);
   }

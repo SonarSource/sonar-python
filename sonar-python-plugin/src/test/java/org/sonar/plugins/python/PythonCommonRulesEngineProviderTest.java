@@ -19,23 +19,19 @@
  */
 package org.sonar.plugins.python;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PythonPluginTest {
-
-  private PythonPlugin plugin;
-
-  @Before
-  public void setUp() throws Exception {
-    plugin = new PythonPlugin();
-  }
+public class PythonCommonRulesEngineProviderTest {
 
   @Test
-  public void testGetExtensions() throws Exception {
-    assertThat(plugin.getExtensions().size()).isEqualTo(13);
+  public void shouldProvideExpectedExtensions() {
+    PythonCommonRulesEngineProvider provider = new PythonCommonRulesEngineProvider();
+    assertThat(provider.provide().size()).isGreaterThan(1);
+
+    provider = new PythonCommonRulesEngineProvider(null);
+    assertThat(provider.provide().size()).isGreaterThan(1);
   }
 
 }

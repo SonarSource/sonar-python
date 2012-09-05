@@ -19,23 +19,31 @@
  */
 package org.sonar.plugins.python;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.sonar.api.resources.Project;
+import org.sonar.commonrules.api.CommonRulesEngine;
+import org.sonar.commonrules.api.CommonRulesEngineProvider;
 
-import static org.fest.assertions.Assertions.assertThat;
+public class PythonCommonRulesEngineProvider extends CommonRulesEngineProvider {
 
-public class PythonPluginTest {
-
-  private PythonPlugin plugin;
-
-  @Before
-  public void setUp() throws Exception {
-    plugin = new PythonPlugin();
+  public PythonCommonRulesEngineProvider() {
+    super();
   }
 
-  @Test
-  public void testGetExtensions() throws Exception {
-    assertThat(plugin.getExtensions().size()).isEqualTo(13);
+  public PythonCommonRulesEngineProvider(Project project) {
+    super(project);
+  }
+
+  @Override
+  protected void doActivation(CommonRulesEngine engine) {
+    engine.activateRule("DuplicatedBlocks");
+    engine.activateRule("InsufficientCommentDensity");
+    engine.activateRule("InsufficientLineCoverage");
+    engine.activateRule("InsufficientBranchCoverage");
+  }
+
+  @Override
+  protected String getLanguageKey() {
+    return Python.KEY;
   }
 
 }
