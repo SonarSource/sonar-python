@@ -80,7 +80,7 @@ public class CheckListTest {
 
       assertThat(rule.getDescription())
           .overridingErrorMessage("Description of " + rule.getKey() + " should be in separate file")
-          .isEmpty();
+          .isNull();
 
       for (RuleParam param : rule.getParams()) {
         resourceBundle.getString("rule." + CheckList.REPOSITORY_KEY + "." + rule.getKey() + ".param." + param.getKey());
