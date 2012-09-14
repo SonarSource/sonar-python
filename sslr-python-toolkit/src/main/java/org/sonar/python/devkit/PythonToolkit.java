@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.devkit;
+package org.sonar.python.toolkit;
 
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.devkit.SsdkGui;
@@ -30,18 +30,18 @@ import org.sonar.python.parser.PythonParser;
 
 import java.util.List;
 
-public final class PythonDevKit {
+public final class PythonToolkit {
 
-  private PythonDevKit() {
+  private PythonToolkit() {
   }
 
   public static void main(String[] args) {
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "SSDK");
     Parser<PythonGrammar> parser = PythonParser.create();
-    SsdkGui cppSsdkGui = new SsdkGui(parser, getPythonTokenizers());
-    cppSsdkGui.setVisible(true);
-    cppSsdkGui.setSize(1000, 800);
-    cppSsdkGui.setTitle("Python : Development Kit");
+    SsdkGui toolkit = new SsdkGui(parser, getPythonTokenizers());
+    toolkit.setVisible(true);
+    toolkit.setSize(1000, 800);
+    toolkit.setTitle("SSLR Python Toolkit");
   }
 
   public static List<Tokenizer> getPythonTokenizers() {
