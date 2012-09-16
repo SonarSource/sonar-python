@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
@@ -30,12 +32,14 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.PythonPlugin;
 
 import java.io.IOException;
 import java.util.List;
 
 public class PylintSensor implements Sensor {
+
+  private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
+
   private RuleFinder ruleFinder;
   private RulesProfile profile;
   private PylintConfiguration conf;
@@ -84,12 +88,12 @@ public class PylintSensor implements Sensor {
           violation.setLineId(issue.line);
           violation.setMessage(issue.descr);
           sensorContext.saveViolation(violation);
-          PythonPlugin.LOG.trace("Saved pylint violation: {}", issue);
+          LOG.trace("Saved pylint violation: {}", issue);
         } else {
-          PythonPlugin.LOG.debug("Pylint rule '{}' is disabled in Sonar", issue.ruleId);
+          LOG.debug("Pylint rule '{}' is disabled in Sonar", issue.ruleId);
         }
       } else {
-        PythonPlugin.LOG.warn("Pylint rule '{}' is unknown in Sonar", issue.ruleId);
+        LOG.warn("Pylint rule '{}' is unknown in Sonar", issue.ruleId);
       }
     }
   }

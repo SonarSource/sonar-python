@@ -19,19 +19,22 @@
  */
 package org.sonar.plugins.python;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.tools.ant.DirectoryScanner;
 import org.apache.commons.configuration.Configuration;
+import org.apache.tools.ant.DirectoryScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.python.Python;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class PythonReportSensor implements Sensor {
+
+  protected Logger log = LoggerFactory.getLogger(getClass());
 
   protected Configuration conf = null;
 
@@ -48,7 +51,7 @@ public abstract class PythonReportSensor implements Sensor {
       List<File> reports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
                                       reportPathKey(), defaultReportPath());
       for (File report : reports) {
-        PythonPlugin.LOG.info("Processing report '{}'", report);
+        log.info("Processing report '{}'", report);
         processReport(project, context, report);
       }
 
@@ -79,7 +82,7 @@ public abstract class PythonReportSensor implements Sensor {
       reportPath = defaultReportPath;
     }
 
-    PythonPlugin.LOG.debug("Using pattern '{}' to find reports", reportPath);
+    log.debug("Using pattern '{}' to find reports", reportPath);
 
     DirectoryScanner scanner = new DirectoryScanner();
     String[] includes = { reportPath };

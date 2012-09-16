@@ -20,11 +20,12 @@
 package org.sonar.plugins.python.pylint;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
-import org.sonar.plugins.python.PythonPlugin;
 
 import java.io.File;
 import java.util.HashMap;
@@ -35,24 +36,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PylintViolationsAnalyzer {
+
+  private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
+
   // Pylint 0.24 brings a nasty reidentifying of some rules...
   // To avoid burdening of users with rule clones we map the ids.
   // This workaround can die as soon as pylints <= 0.23.X become obsolete.
-  private static final Map<String, String> ID_MAP = new HashMap<String, String>(){
+  private static final Map<String, String> ID_MAP = new HashMap<String, String>() {
     {
       put("E9900", "E1300");
-      put("E9901", "E1301"); 
-      put("E9902", "E1302"); 
-      put("E9903", "E1303"); 
-      put("E9904", "E1304"); 
-      put("E9905", "E1305"); 
-      put("E9906", "E1306"); 
-      put("W6501", "W1201"); 
-      put("W9900", "W1300"); 
+      put("E9901", "E1301");
+      put("E9902", "E1302");
+      put("E9903", "E1303");
+      put("E9904", "E1304");
+      put("E9905", "E1305");
+      put("E9906", "E1306");
+      put("W6501", "W1201");
+      put("W9900", "W1300");
       put("W9901", "W1301");
     }
   };
-  
+
   private static final String FALLBACK_PYLINT = "pylint";
   private static final String[] ARGS = {"-i", "y", "-f", "parseable", "-r", "n"};
   private static final Pattern PATTERN = Pattern.compile("(.+):([0-9]+): \\[(.*)\\] (.*)");
@@ -84,20 +88,20 @@ public class PylintViolationsAnalyzer {
       command.addArgument(pylintConfigParam);
     }
 
-    PythonPlugin.LOG.debug("Calling command: '{}'", command.toString());
+    LOG.debug("Calling command: '{}'", command.toString());
 
     long timeoutMS = 300000; // =5min
     MyStreamConsumer stdOut = new MyStreamConsumer();
     MyStreamConsumer stdErr = new MyStreamConsumer();
     CommandExecutor.create().execute(command, stdOut, stdErr, timeoutMS);
-    
+
     // the error stream can contain a line like 'no custom config found, using default'
     // any bigger output on the error stream is likely a pylint malfunction
-    if(stdErr.getData().size() > 1){
-      PythonPlugin.LOG.warn("Output on the error channel detected: this is probably due to a problem on pylint's side.");
-      PythonPlugin.LOG.warn("Content of the error stream: \n\"{}\"", StringUtils.join(stdErr.getData(), "\n"));
+    if (stdErr.getData().size() > 1) {
+      LOG.warn("Output on the error channel detected: this is probably due to a problem on pylint's side.");
+      LOG.warn("Content of the error stream: \n\"{}\"", StringUtils.join(stdErr.getData(), "\n"));
     }
-    
+
     return parseOutput(stdOut.getData());
   }
 
@@ -118,32 +122,30 @@ public class PylintViolationsAnalyzer {
 
     if (!lines.isEmpty()) {
       for (String line : lines) {
-        if (line.length() > 0){
-          if (!isDetail(line)){
+        if (line.length() > 0) {
+          if (!isDetail(line)) {
             Matcher m = PATTERN.matcher(line);
             if (m.matches() && m.groupCount() == 4) {
               filename = m.group(1);
               linenr = Integer.valueOf(m.group(2));
               String[] parts = m.group(3).split(",");
-              
+
               ruleid = parts[0].trim();
-              if(ID_MAP.containsKey(ruleid)){
+              if (ID_MAP.containsKey(ruleid)) {
                 ruleid = ID_MAP.get(ruleid);
               }
-              
+
               if (parts.length == 2) {
                 objname = parts[1].trim();
               }
 
               descr = m.group(4);
               issues.add(new Issue(filename, linenr, ruleid, objname, descr));
+            } else {
+              LOG.debug("Cannot parse the line: {}", line);
             }
-            else{
-              PythonPlugin.LOG.debug("Cannot parse the line: {}", line);
-            }
-          }
-          else{
-            PythonPlugin.LOG.trace("Classifying as detail and ignoring line '{}'", line);
+          } else {
+            LOG.trace("Classifying as detail and ignoring line '{}'", line);
           }
         }
       }
@@ -151,8 +153,8 @@ public class PylintViolationsAnalyzer {
 
     return issues;
   }
-    
-  private boolean isDetail(String line){
+
+  private boolean isDetail(String line) {
     char first = line.charAt(0);
     return first == ' ' || first == '\t' || first == '\n';
   }

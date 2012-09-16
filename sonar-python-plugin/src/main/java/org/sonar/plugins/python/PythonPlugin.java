@@ -20,23 +20,19 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.ImmutableList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.Extension;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.python.colorizer.PythonColorizer;
+import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonar.plugins.python.xunit.PythonXunitSensor;
-import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 
 import java.util.List;
 
 public class PythonPlugin extends SonarPlugin {
-
-  public static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
 
   public List<Class<? extends Extension>> getExtensions() {
     return ImmutableList.of(

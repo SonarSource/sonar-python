@@ -19,13 +19,6 @@
  */
 package org.sonar.plugins.python.coverage;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.stream.XMLStreamException;
-
 import org.apache.commons.configuration.Configuration;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -37,7 +30,13 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.PythonReportSensor;
-import org.sonar.plugins.python.PythonPlugin;
+
+import javax.xml.stream.XMLStreamException;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Properties({
   @Property(
@@ -70,11 +69,11 @@ public class PythonCoverageSensor extends PythonReportSensor {
   public void analyse(Project project, SensorContext context) {
     List<File> reports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
                                     REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
-    PythonPlugin.LOG.debug("Parsing coverage reports");
+    log.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
     saveMeasures(project, context, coverageMeasures, false);
 
-    PythonPlugin.LOG.debug("Parsing integration test coverage reports");
+    log.debug("Parsing integration test coverage reports");
     List<File> itReports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
                                       IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     coverageMeasures = parseReports(itReports);
@@ -102,13 +101,13 @@ public class PythonCoverageSensor extends PythonReportSensor {
       org.sonar.api.resources.File pythonfile =
         org.sonar.api.resources.File.fromIOFile(new File(filePath), project);
       if (fileExist(context, pythonfile)) {
-        PythonPlugin.LOG.debug("Saving coverage measures for file '{}'", filePath);
+        log.debug("Saving coverage measures for file '{}'", filePath);
         for (Measure measure : entry.getValue().createMeasures()) {
           measure = itTest ? convertToItMeasure(measure) : measure;
           context.saveMeasure(pythonfile, measure);
         }
       } else {
-        PythonPlugin.LOG.debug("Cannot find the file '{}', ignoring coverage measures", filePath);
+        log.debug("Cannot find the file '{}', ignoring coverage measures", filePath);
       }
     }
   }

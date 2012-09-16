@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import java.io.File;
-
 import org.apache.commons.configuration.Configuration;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -29,13 +27,14 @@ import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
-import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
-import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.PythonPlugin;
+import org.sonar.plugins.python.PythonReportSensor;
+
+import java.io.File;
 
 @Properties({
   @Property(
@@ -79,7 +78,7 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   private void parseReport(Project project, SensorContext context, File report) throws javax.xml.stream.XMLStreamException {
-    PythonPlugin.LOG.info("Parsing report '{}'", report);
+    log.info("Parsing report '{}'", report);
 
     TestSuiteParser parserHandler = new TestSuiteParser();
     StaxParser parser = new StaxParser(parserHandler, false);
@@ -91,12 +90,12 @@ public class PythonXunitSensor extends PythonReportSensor {
       org.sonar.api.resources.File unitTest =
         org.sonar.api.resources.File.fromIOFile(new File(fileKey), project);
       if (unitTest == null || context.getResource(unitTest) == null) {
-        PythonPlugin.LOG.debug("Cannot find the resource for {}, creating a virtual one",
+        log.debug("Cannot find the resource for {}, creating a virtual one",
                                fileKey);
         unitTest = createVirtualFile(context, fileKey);
       }
 
-      PythonPlugin.LOG.debug("Saving test execution measures for file '{}' under resource '{}'",
+      log.debug("Saving test execution measures for file '{}' under resource '{}'",
                              fileKey, unitTest);
 
       double testsCount = fileReport.getTests() - fileReport.getSkipped();
