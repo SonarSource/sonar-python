@@ -25,6 +25,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.FileLinesContext;
+import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.*;
 
@@ -42,7 +44,10 @@ public class PythonSquidSensorTest {
 
   @Before
   public void setUp() {
-    sensor = new PythonSquidSensor(mock(RulesProfile.class));
+    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+    when(fileLinesContextFactory.createFor(Mockito.any(Resource.class))).thenReturn(fileLinesContext);
+    sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory);
   }
 
   @Test

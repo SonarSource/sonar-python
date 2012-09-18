@@ -19,12 +19,14 @@
  */
 package org.sonar.plugins.python;
 
+import com.google.common.collect.Lists;
 import com.sonar.sslr.squid.AstScanner;
-import com.sonar.sslr.squid.checks.SquidCheck;
+import com.sonar.sslr.squid.SquidAstVisitor;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.profiles.RulesProfile;
@@ -37,6 +39,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.checks.CheckList;
+import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
@@ -45,6 +48,7 @@ import org.sonar.squid.indexer.QueryByParent;
 import org.sonar.squid.indexer.QueryByType;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 public final class PythonSquidSensor implements Sensor {
@@ -53,13 +57,15 @@ public final class PythonSquidSensor implements Sensor {
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
 
   private final AnnotationCheckFactory annotationCheckFactory;
+  private final FileLinesContextFactory fileLinesContextFactory;
 
   private Project project;
   private SensorContext context;
   private AstScanner<PythonGrammar> scanner;
 
-  public PythonSquidSensor(RulesProfile profile) {
+  public PythonSquidSensor(RulesProfile profile, FileLinesContextFactory fileLinesContextFactory) {
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CheckList.REPOSITORY_KEY, CheckList.getChecks());
+    this.fileLinesContextFactory = fileLinesContextFactory;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
@@ -70,8 +76,10 @@ public final class PythonSquidSensor implements Sensor {
     this.project = project;
     this.context = context;
 
-    Collection<SquidCheck> squidChecks = annotationCheckFactory.getChecks();
-    this.scanner = PythonAstScanner.create(createConfiguration(project), squidChecks.toArray(new SquidCheck[squidChecks.size()]));
+    Collection<SquidAstVisitor<PythonGrammar>> squidChecks = annotationCheckFactory.getChecks();
+    List<SquidAstVisitor<PythonGrammar>> visitors = Lists.newArrayList(squidChecks);
+    visitors.add(new FileLinesVisitor(project, fileLinesContextFactory));
+    this.scanner = PythonAstScanner.create(createConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(InputFileUtils.toFiles(project.getFileSystem().mainFiles(Python.KEY)));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
