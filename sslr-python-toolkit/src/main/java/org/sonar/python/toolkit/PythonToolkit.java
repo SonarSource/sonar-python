@@ -20,13 +20,11 @@
 package org.sonar.python.toolkit;
 
 import com.google.common.collect.ImmutableList;
-import com.sonar.sslr.devkit.SsdkGui;
-import com.sonar.sslr.impl.Parser;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.Tokenizer;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.sslr.toolkit.Toolkit;
 
 import java.util.List;
 
@@ -37,11 +35,7 @@ public final class PythonToolkit {
 
   public static void main(String[] args) {
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "SSDK");
-    Parser<PythonGrammar> parser = PythonParser.create();
-    SsdkGui toolkit = new SsdkGui(parser, getPythonTokenizers());
-    toolkit.setVisible(true);
-    toolkit.setSize(1000, 800);
-    toolkit.setTitle("SSLR Python Toolkit");
+    new Toolkit(PythonParser.create(), getPythonTokenizers(), "SSLR Python Toolkit").run();
   }
 
   public static List<Tokenizer> getPythonTokenizers() {
