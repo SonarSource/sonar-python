@@ -19,9 +19,11 @@
  */
 package org.sonar.python.parser;
 
+import com.google.common.base.Charsets;
 import com.sonar.sslr.impl.Parser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 
 import java.io.File;
@@ -29,7 +31,7 @@ import java.util.Collection;
 
 public class PythonParserTest {
 
-  private final Parser<PythonGrammar> parser = PythonParser.create();
+  private final Parser<PythonGrammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
 
   @Test
   public void test() {

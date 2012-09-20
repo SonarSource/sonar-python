@@ -22,10 +22,12 @@ package org.sonar.python.toolkit;
 import com.google.common.collect.ImmutableList;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.Tokenizer;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.sslr.toolkit.Toolkit;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 public final class PythonToolkit {
@@ -35,7 +37,7 @@ public final class PythonToolkit {
 
   public static void main(String[] args) {
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "SSDK");
-    new Toolkit(PythonParser.create(), getPythonTokenizers(), "SSLR Python Toolkit").run();
+    new Toolkit(PythonParser.create(new PythonConfiguration(Charset.defaultCharset())), getPythonTokenizers(), "SSLR Python Toolkit").run();
   }
 
   public static List<Tokenizer> getPythonTokenizers() {

@@ -19,9 +19,11 @@
  */
 package org.sonar.python.parser.compound_statements;
 
+import com.google.common.base.Charsets;
 import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.parser.PythonTestUtils;
@@ -31,7 +33,7 @@ import static org.junit.Assert.assertThat;
 
 public class WithStatementTest {
 
-  Parser<PythonGrammar> p = PythonParser.create();
+  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
   PythonGrammar g = p.getGrammar();
 
   @Before

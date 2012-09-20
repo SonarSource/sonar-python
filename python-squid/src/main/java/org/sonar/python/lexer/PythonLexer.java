@@ -39,10 +39,6 @@ public final class PythonLexer {
   private PythonLexer() {
   }
 
-  public static Lexer create() {
-    return create(new PythonConfiguration());
-  }
-
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
   private static final String BYTES_PREFIX = "(br|bR|b|Br|BR|B)";
   private static final String IMAGINARY_SUFFIX = "(j|J)";

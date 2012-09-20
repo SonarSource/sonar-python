@@ -27,9 +27,6 @@ public class PythonConfiguration extends SquidConfiguration {
 
   private boolean ignoreHeaderComments;
 
-  public PythonConfiguration() {
-  }
-
   public PythonConfiguration(Charset charset) {
     super(charset);
   }

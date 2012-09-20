@@ -19,6 +19,7 @@
  */
 package org.sonar.python;
 
+import com.google.common.base.Charsets;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.CommentAnalyser;
@@ -50,7 +51,7 @@ public final class PythonAstScanner {
     if (!file.isFile()) {
       throw new IllegalArgumentException("File '" + file + "' not found.");
     }
-    AstScanner<PythonGrammar> scanner = create(new PythonConfiguration(), visitors);
+    AstScanner<PythonGrammar> scanner = create(new PythonConfiguration(Charsets.UTF_8), visitors);
     scanner.scanFile(file);
     Collection<SourceCode> sources = scanner.getIndex().search(new QueryByType(SourceFile.class));
     if (sources.size() != 1) {

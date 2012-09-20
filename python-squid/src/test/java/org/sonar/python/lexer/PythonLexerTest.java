@@ -19,10 +19,12 @@
  */
 package org.sonar.python.lexer;
 
+import com.google.common.base.Charsets;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.impl.Lexer;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -40,7 +42,7 @@ public class PythonLexerTest {
 
   @BeforeClass
   public static void init() {
-    lexer = PythonLexer.create();
+    lexer = PythonLexer.create(new PythonConfiguration(Charsets.UTF_8));
   }
 
   /**

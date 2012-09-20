@@ -30,10 +30,6 @@ public final class PythonParser {
   private PythonParser() {
   }
 
-  public static Parser<PythonGrammar> create(ParsingEventListener... parsingEventListeners) {
-    return create(new PythonConfiguration(), parsingEventListeners);
-  }
-
   public static Parser<PythonGrammar> create(PythonConfiguration conf, ParsingEventListener... parsingEventListeners) {
     return Parser.builder((PythonGrammar) new PythonGrammarImpl())
         .withLexer(PythonLexer.create(conf))
