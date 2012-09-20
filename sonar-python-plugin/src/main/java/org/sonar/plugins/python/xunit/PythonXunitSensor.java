@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.xunit;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.batch.AbstractCoverageExtension;
@@ -35,6 +36,9 @@ import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @Properties({
   @Property(
@@ -84,26 +88,20 @@ public class PythonXunitSensor extends PythonReportSensor {
     StaxParser parser = new StaxParser(parserHandler, false);
     parser.parse(report);
 
-    for (TestSuite fileReport : parserHandler.getParsedReports()) {
-      String fileKey = fileReport.getKey();
+    Collection<TestSuite> locatedResources = lookupResources(project, context, parserHandler.getParsedReports());
 
-      org.sonar.api.resources.File unitTest =
-        org.sonar.api.resources.File.fromIOFile(new File(fileKey), project);
-      if (unitTest == null || context.getResource(unitTest) == null) {
-        log.debug("Cannot find the resource for {}, creating a virtual one",
-                               fileKey);
-        unitTest = createVirtualFile(context, fileKey);
-      }
+    for (TestSuite fileReport : locatedResources) {
+      org.sonar.api.resources.File unitTest = fileReport.getSonarResource();
 
       log.debug("Saving test execution measures for file '{}' under resource '{}'",
-                             fileKey, unitTest);
+          fileReport.getKey(), unitTest);
 
       double testsCount = fileReport.getTests() - fileReport.getSkipped();
-      context.saveMeasure(unitTest, CoreMetrics.SKIPPED_TESTS, (double)fileReport.getSkipped());
+      context.saveMeasure(unitTest, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
       context.saveMeasure(unitTest, CoreMetrics.TESTS, testsCount);
-      context.saveMeasure(unitTest, CoreMetrics.TEST_ERRORS, (double)fileReport.getErrors());
-      context.saveMeasure(unitTest, CoreMetrics.TEST_FAILURES, (double)fileReport.getFailures());
-      context.saveMeasure(unitTest, CoreMetrics.TEST_EXECUTION_TIME, (double)fileReport.getTime());
+      context.saveMeasure(unitTest, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
+      context.saveMeasure(unitTest, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
+      context.saveMeasure(unitTest, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
       double passedTests = testsCount - fileReport.getErrors() - fileReport.getFailures();
       if (testsCount > 0) {
         double percentage = passedTests * 100d / testsCount;
@@ -113,9 +111,58 @@ public class PythonXunitSensor extends PythonReportSensor {
     }
   }
 
-  private org.sonar.api.resources.File createVirtualFile(SensorContext context, String filename) {
-    org.sonar.api.resources.File virtualFile =
-      new org.sonar.api.resources.File(this.lang, filename);
+  org.sonar.api.resources.File findResource(Project project, SensorContext context, String fileKey) {
+    return findResourceUsingNosetestsStrategy(project, context, fileKey);
+  }
+
+  org.sonar.api.resources.File findResourceUsingNosetestsStrategy(Project project, SensorContext context, String fileKey) {
+    // a) check assuming the key doesnt contain the class name
+    String actualKey = StringUtils.replace(fileKey, ".", "/") + ".py";
+    org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey),
+        project.getFileSystem().getTestDirs());
+    if (context.getResource(unitTestFile) == null) {
+      // b) check assuming the key *does* contain the class name
+      actualKey = StringUtils.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
+
+      unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey),
+          project.getFileSystem().getTestDirs());
+      if (context.getResource(unitTestFile) == null) {
+        unitTestFile = null;
+      }
+    }
+
+    return unitTestFile;
+  }
+
+  private Collection<TestSuite> lookupResources(Project project, SensorContext context, Collection<TestSuite> testReports) {
+    Map<String, TestSuite> locatedReports = new HashMap<String, TestSuite>();
+
+    for (TestSuite report : testReports) {
+      String fileKey = report.getKey();
+
+      org.sonar.api.resources.File resource = findResource(project, context, fileKey);
+      if (resource == null) {
+        log.debug("Cannot find the resource for {}, creating a virtual one", fileKey);
+        resource = createVirtualFile(context, fileKey);
+      }
+
+      TestSuite summaryReport = locatedReports.get(resource.getKey());
+      if (summaryReport != null) {
+        log.debug("Adding measures of {} to {}", summaryReport.getKey(), report.getKey());
+        summaryReport.addMeasures(report);
+      }
+      else {
+        report.setSonarResource(resource);
+        locatedReports.put(resource.getKey(), report);
+      }
+    }
+
+    return locatedReports.values();
+  }
+
+  private org.sonar.api.resources.File createVirtualFile(SensorContext context,
+      String filename) {
+    org.sonar.api.resources.File virtualFile = new org.sonar.api.resources.File(this.lang, filename);
     virtualFile.setQualifier(Qualifiers.UNIT_TEST_FILE);
     context.saveSource(virtualFile, "<source code could not be found>");
     return virtualFile;

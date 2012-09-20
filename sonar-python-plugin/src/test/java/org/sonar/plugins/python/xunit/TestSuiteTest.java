@@ -122,4 +122,18 @@ public class TestSuiteTest {
     
     assertEquals(suite.getSkipped(), skippedBefore + 1);
   }
+  
+  @Test
+  public void addingAnotherTestSuiteShouldMaintainStatistics() {
+    TestCase tc = mock(TestCase.class);
+    when(tc.isSkipped()).thenReturn(true);
+    TestSuite ts1 = new TestSuite("1");
+    TestSuite ts2 = new TestSuite("2");
+    ts1.addTestCase(tc);
+    ts2.addTestCase(tc);
+    
+    TestSuite summedUp = ts1.addMeasures(ts2);
+    
+    assertEquals(summedUp.getSkipped(), 2);
+  }
 }

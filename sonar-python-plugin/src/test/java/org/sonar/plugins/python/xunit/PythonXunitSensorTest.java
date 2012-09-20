@@ -53,24 +53,24 @@ public class PythonXunitSensorTest {
   }
 
   @Test
-  public void shouldReportCorrectViolations() {
+  public void shouldSaveCorrectMeasures() {
     sensor.analyse(project, context);
-    
-    verify(context, times(2)).saveMeasure((Resource) anyObject(),
-                                          eq(CoreMetrics.TESTS), anyDouble());
-    verify(context, times(2)).saveMeasure((Resource) anyObject(),
-                                          eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
-    verify(context, times(2)).saveMeasure((Resource) anyObject(),
-                                          eq(CoreMetrics.TEST_ERRORS), anyDouble());
-    verify(context, times(2)).saveMeasure((Resource) anyObject(),
-                                          eq(CoreMetrics.TEST_FAILURES), anyDouble());
-    verify(context, times(1)).saveMeasure((Resource) anyObject(),
-                                          eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
-    verify(context, times(2)).saveMeasure((Resource) anyObject(), any(Measure.class));
+
+    verify(context, times(4)).saveMeasure((Resource) anyObject(),
+        eq(CoreMetrics.TESTS), anyDouble());
+    verify(context, times(4)).saveMeasure((Resource) anyObject(),
+        eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
+    verify(context, times(4)).saveMeasure((Resource) anyObject(),
+        eq(CoreMetrics.TEST_ERRORS), anyDouble());
+    verify(context, times(4)).saveMeasure((Resource) anyObject(),
+        eq(CoreMetrics.TEST_FAILURES), anyDouble());
+    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+        eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
+    verify(context, times(4)).saveMeasure((Resource) anyObject(), any(Measure.class));
   }
 
   @Test
-  public void shouldReportZeroTestWhenNoReportFound() {
+  public void shouldReportZeroTestsWhenNoReportFound() {
     Configuration config = mock(Configuration.class);
     when(config.getString(PythonXunitSensor.REPORT_PATH_KEY, null)).thenReturn("notexistingpath");
     sensor = new PythonXunitSensor(config, TestUtils.mockLanguage());
