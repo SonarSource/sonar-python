@@ -47,6 +47,7 @@ public final class CheckList {
         LongIntegerWithLowercaseSuffixUsageCheck.class,
         ExecStatementUsageCheck.class,
         PrintStatementUsageCheck.class,
+        PreIncrementDecrementCheck.class,
         XPathCheck.class);
   }
 
