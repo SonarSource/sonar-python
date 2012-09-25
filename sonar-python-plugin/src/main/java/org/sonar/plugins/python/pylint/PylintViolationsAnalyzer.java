@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.google.common.io.Files;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,8 @@ import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,7 +84,7 @@ public class PylintViolationsAnalyzer {
     }
   }
 
-  public List<Issue> analyze(String path) {
+  public List<Issue> analyze(String path, Charset charset, File out) throws IOException {
     Command command = Command.create(pylint).addArguments(ARGS).addArgument(path);
 
     if (pylintConfigParam != null) {
@@ -101,6 +104,8 @@ public class PylintViolationsAnalyzer {
       LOG.warn("Output on the error channel detected: this is probably due to a problem on pylint's side.");
       LOG.warn("Content of the error stream: \n\"{}\"", StringUtils.join(stdErr.getData(), "\n"));
     }
+
+    Files.write(StringUtils.join(stdOut.getData(), "\n"), out, charset);
 
     return parseOutput(stdOut.getData());
   }

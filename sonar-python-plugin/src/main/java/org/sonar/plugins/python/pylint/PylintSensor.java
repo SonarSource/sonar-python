@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
@@ -33,6 +33,7 @@ import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.Python;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class PylintSensor implements Sensor {
   private RuleFinder ruleFinder;
   private RulesProfile profile;
   private PylintConfiguration conf;
+
 
   public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile) {
     this.ruleFinder = ruleFinder;
@@ -56,9 +58,14 @@ public class PylintSensor implements Sensor {
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
+    File workdir = new File(project.getFileSystem().getSonarWorkingDirectory(), "/pylint/");
+    prepareWorkDir(workdir);
+    int i = 0;
     for (InputFile inputFile : project.getFileSystem().mainFiles(Python.KEY)) {
       try {
-        analyzeFile(inputFile, project, sensorContext);
+        File out = new File(workdir, i + ".out");
+        analyzeFile(inputFile, out, project, sensorContext);
+        i++;
       } catch (Exception e) {
         String msg = new StringBuilder()
             .append("Cannot analyse the file '")
@@ -72,14 +79,14 @@ public class PylintSensor implements Sensor {
     }
   }
 
-  protected void analyzeFile(InputFile inputFile, Project project, SensorContext sensorContext) throws IOException {
-    File pyfile = File.fromIOFile(inputFile.getFile(), project);
+  protected void analyzeFile(InputFile inputFile, File out, Project project, SensorContext sensorContext) throws IOException {
+    org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(inputFile.getFile(), project);
 
     String pylintConfigPath = conf.getPylintConfigPath(project);
     String pylintPath = conf.getPylintPath();
 
     PylintViolationsAnalyzer analyzer = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
-    List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath());
+    List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), project.getFileSystem().getSourceCharset(), out);
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, issue.ruleId);
       if (rule != null) {
@@ -95,6 +102,16 @@ public class PylintSensor implements Sensor {
       } else {
         LOG.warn("Pylint rule '{}' is unknown in Sonar", issue.ruleId);
       }
+    }
+  }
+
+  private static void prepareWorkDir(File dir) {
+    try {
+      FileUtils.forceMkdir(dir);
+      // directory is cleaned, because Sonar 3.0 will not do this for us
+      FileUtils.cleanDirectory(dir);
+    } catch (IOException e) {
+      throw new SonarException("Cannot create directory: " + dir, e);
     }
   }
 

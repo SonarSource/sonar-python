@@ -19,23 +19,31 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.google.common.base.Charsets;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
+import java.io.File;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PylintViolationsAnalyzerIT {
 
+  @Rule
+  TemporaryFolder tempFolder = new TemporaryFolder();
+
   @Test
-  public void violationsTest() {
+  public void violationsTest() throws Exception {
     String pylintrcResource = "/org/sonar/plugins/python/pylint/pylintrc_sample";
     String codeChunksResource = "/org/sonar/plugins/python/code_chunks_2.py";
     String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
     String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
     String pylintPath = null;
-    
-    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName);
+    File out = tempFolder.newFile();
+
+    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, Charsets.UTF_8, out);
     assertThat(issues.size()).isNotEqualTo(0);
   }
 
