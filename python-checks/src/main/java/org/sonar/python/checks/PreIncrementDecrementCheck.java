@@ -40,15 +40,11 @@ public class PreIncrementDecrementCheck extends SquidCheck<PythonGrammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (astNode.getFirstChild().is(PythonPunctuator.PLUS)) {
-      if (astNode.getChild(1).getFirstChild().is(PythonPunctuator.PLUS)) {
-        getContext().createLineViolation(this, "Do not use non-existent pre-increment operator", astNode);
-      }
+    if (astNode.getFirstChild().is(PythonPunctuator.PLUS) &&  astNode.getChild(1).getFirstChild().is(PythonPunctuator.PLUS)) {
+      getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-increment operator", astNode);
     }
-    if (astNode.getFirstChild().is(PythonPunctuator.MINUS)) {
-      if (astNode.getChild(1).getFirstChild().is(PythonPunctuator.MINUS)) {
-        getContext().createLineViolation(this, "Do not use non-existent pre-decrement operator", astNode);
-      }
+    if (astNode.getFirstChild().is(PythonPunctuator.MINUS) && astNode.getChild(1).getFirstChild().is(PythonPunctuator.MINUS)) {
+      getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-decrement operator", astNode);
     }
   }
 

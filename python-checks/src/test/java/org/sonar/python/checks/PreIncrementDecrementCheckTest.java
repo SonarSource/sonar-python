@@ -34,8 +34,8 @@ public class PreIncrementDecrementCheckTest {
   public void test() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/preIncrementDecrement.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(2).withMessage("Do not use non-existent pre-increment operator")
-        .next().atLine(4).withMessage("Do not use non-existent pre-decrement operator")
+        .next().atLine(2).withMessage("This statement doesn't produce the expected result, replace use of non-existent pre-increment operator")
+        .next().atLine(4).withMessage("This statement doesn't produce the expected result, replace use of non-existent pre-decrement operator")
         .noMore();
   }
 
