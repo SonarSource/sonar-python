@@ -34,7 +34,7 @@ import java.util.List;
 
 public class PythonPlugin extends SonarPlugin {
 
-  public List<Class<? extends Extension>> getExtensions() {
+  public List<?> getExtensions() {
     return ImmutableList.of(
         Python.class,
         PythonSourceImporter.class,

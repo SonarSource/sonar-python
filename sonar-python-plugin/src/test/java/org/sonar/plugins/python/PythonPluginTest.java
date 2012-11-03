@@ -19,23 +19,15 @@
  */
 package org.sonar.plugins.python;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PythonPluginTest {
 
-  private PythonPlugin plugin;
-
-  @Before
-  public void setUp() throws Exception {
-    plugin = new PythonPlugin();
-  }
-
   @Test
-  public void testGetExtensions() throws Exception {
-    assertThat(plugin.getExtensions().size()).isEqualTo(13);
+  public void testGetExtensions() {
+    assertThat(new PythonPlugin().getExtensions()).hasSize(13);
   }
 
 }
