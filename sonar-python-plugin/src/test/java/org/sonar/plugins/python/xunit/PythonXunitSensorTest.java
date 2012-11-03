@@ -20,36 +20,43 @@
 
 package org.sonar.plugins.python.xunit;
 
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.anyDouble;
-import static org.mockito.Mockito.any;
-
-import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.CoverageExtension;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.python.TestUtils;
 
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyDouble;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 public class PythonXunitSensorTest {
-  private PythonXunitSensor sensor;
-  private SensorContext context;
-  private Project project;
+  Settings settings;
+  PythonXunitSensor sensor;
+  SensorContext context;
+  Project project;
 
   @Before
   public void setUp() {
-    Configuration config = mock(Configuration.class);
+    settings = new Settings();
     project = TestUtils.mockProject();
-    sensor = new PythonXunitSensor(config, TestUtils.mockLanguage());
+    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage());
     context = mock(SensorContext.class);
+  }
+
+  @Test
+  public void shouldBeExecutedAfterCoverageExtensions() {
+    assertThat(sensor.dependsUponCoverageSensors()).isEqualTo(CoverageExtension.class);
   }
 
   @Test
@@ -71,22 +78,19 @@ public class PythonXunitSensorTest {
 
   @Test
   public void shouldReportZeroTestsWhenNoReportFound() {
-    Configuration config = mock(Configuration.class);
-    when(config.getString(PythonXunitSensor.REPORT_PATH_KEY, null)).thenReturn("notexistingpath");
-    sensor = new PythonXunitSensor(config, TestUtils.mockLanguage());
-    
+    settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "notexistingpath");
+    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage());
+
     sensor.analyse(project, context);
-    
+
     verify(context, times(1)).saveMeasure(eq(CoreMetrics.TESTS), eq(0.0));
   }
 
   @Test(expected=org.sonar.api.utils.SonarException.class)
   public void shouldThrowWhenGivenInvalidTime() {
-    Configuration config = mock(Configuration.class);
-    when(config.getString(PythonXunitSensor.REPORT_PATH_KEY, null))
-      .thenReturn("xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXunitSensor(config, TestUtils.mockLanguage());
-    
+    settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
+    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage());
+
     sensor.analyse(project, context);
   }
 }

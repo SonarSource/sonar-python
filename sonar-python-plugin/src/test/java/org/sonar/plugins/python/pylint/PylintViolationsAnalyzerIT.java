@@ -32,7 +32,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class PylintViolationsAnalyzerIT {
 
   @Rule
-  TemporaryFolder tempFolder = new TemporaryFolder();
+  public TemporaryFolder tempFolder = new TemporaryFolder();
 
   @Test
   public void violationsTest() throws Exception {
@@ -44,7 +44,7 @@ public class PylintViolationsAnalyzerIT {
     File out = tempFolder.newFile();
 
     List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, Charsets.UTF_8, out);
-    assertThat(issues.size()).isNotEqualTo(0);
+    assertThat(issues).isNotEmpty();
   }
 
 }

@@ -19,26 +19,26 @@
  */
 package org.sonar.plugins.python;
 
-import org.apache.commons.configuration.Configuration;
+import com.google.common.collect.Lists;
 import org.apache.tools.ant.DirectoryScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PythonReportSensor implements Sensor {
 
   protected Logger log = LoggerFactory.getLogger(getClass());
 
-  protected Configuration conf = null;
+  protected Settings conf = null;
 
-  public PythonReportSensor(Configuration conf) {
+  public PythonReportSensor(Settings conf) {
     this.conf = conf;
   }
 
@@ -73,11 +73,11 @@ public abstract class PythonReportSensor implements Sensor {
     return getClass().getSimpleName();
   }
 
-  protected List<File> getReports(Configuration conf,
+  protected List<File> getReports(Settings conf,
                                   String baseDirPath,
                                   String reportPathPropertyKey,
                                   String defaultReportPath) {
-    String reportPath = conf.getString(reportPathPropertyKey, null);
+    String reportPath = conf.getString(reportPathPropertyKey);
     if(reportPath == null){
       reportPath = defaultReportPath;
     }
@@ -91,7 +91,7 @@ public abstract class PythonReportSensor implements Sensor {
     scanner.scan();
     String[] relPaths = scanner.getIncludedFiles();
 
-    List<File> reports = new ArrayList<File>();
+    List<File> reports = Lists.newArrayList();
     for (String relPath : relPaths) {
       reports.add(new File(baseDirPath, relPath));
     }

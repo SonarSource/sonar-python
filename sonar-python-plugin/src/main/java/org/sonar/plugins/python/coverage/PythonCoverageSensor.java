@@ -19,10 +19,10 @@
  */
 package org.sonar.plugins.python.coverage;
 
-import org.apache.commons.configuration.Configuration;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.measures.Measure;
@@ -62,7 +62,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
   private CoberturaParser parser = new CoberturaParser();
 
-  public PythonCoverageSensor(Configuration conf) {
+  public PythonCoverageSensor(Settings conf) {
     super(conf);
   }
 

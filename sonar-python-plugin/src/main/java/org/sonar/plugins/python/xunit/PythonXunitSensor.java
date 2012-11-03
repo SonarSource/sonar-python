@@ -19,13 +19,13 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
-import org.sonar.api.batch.AbstractCoverageExtension;
+import org.sonar.api.batch.CoverageExtension;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
@@ -55,14 +55,14 @@ public class PythonXunitSensor extends PythonReportSensor {
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   private Python lang = null;
 
-  public PythonXunitSensor(Configuration conf, Python lang) {
+  public PythonXunitSensor(Settings conf, Python lang) {
     super(conf);
     this.lang = lang;
   }
 
   @DependsUpon
   public Class<?> dependsUponCoverageSensors() {
-    return AbstractCoverageExtension.class;
+    return CoverageExtension.class;
   }
 
   protected String reportPathKey() {

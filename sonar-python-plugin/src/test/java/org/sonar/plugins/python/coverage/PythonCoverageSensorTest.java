@@ -26,24 +26,26 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.python.TestUtils;
 
 public class PythonCoverageSensorTest {
-  private PythonCoverageSensor sensor;
-  private SensorContext context;
-  private Project project;
+  PythonCoverageSensor sensor;
+  SensorContext context;
+  Project project;
+  Settings settings;
 
   @Before
   public void setUp() {
     project = TestUtils.mockProject();
-    sensor = new PythonCoverageSensor(mock(Configuration.class));
+    settings = new Settings();
+    sensor = new PythonCoverageSensor(settings);
     context = mock(SensorContext.class);
     Resource resourceMock = mock(Resource.class);
     when(context.getResource((Resource)anyObject())).thenReturn(resourceMock);
@@ -57,19 +59,15 @@ public class PythonCoverageSensorTest {
 
   @Test(expected=org.sonar.api.utils.SonarException.class)
   public void shouldFailOnInvalidReport() {
-    Configuration config = mock(Configuration.class);
-    when(config.getString(PythonCoverageSensor.REPORT_PATH_KEY, null))
-      .thenReturn("coverage-reports/invalid-coverage-result.xml");
-    sensor = new PythonCoverageSensor(config);
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
+    sensor = new PythonCoverageSensor(settings);
     sensor.analyse(project, context);
   }
 
   @Test(expected=org.sonar.api.utils.SonarException.class)
   public void shouldFailOnInvalidIntegrationReport() {
-    Configuration config = mock(Configuration.class);
-    when(config.getString(PythonCoverageSensor.IT_REPORT_PATH_KEY, null))
-      .thenReturn("coverage-reports/invalid-coverage-result.xml");
-    sensor = new PythonCoverageSensor(config);
+    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
+    sensor = new PythonCoverageSensor(settings);
     sensor.analyse(project, context);
   }
 }

@@ -19,9 +19,8 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.apache.commons.configuration.BaseConfiguration;
-import org.apache.commons.configuration.Configuration;
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 
@@ -35,8 +34,8 @@ public class PylintConfigurationTest {
 
   @Test
   public void shouldGetCorrectPylintPath() {
-    Configuration conf = new BaseConfiguration();
-    PylintConfiguration pylintConfiguration = new PylintConfiguration(conf);
+    Settings settings = new Settings();
+    PylintConfiguration pylintConfiguration = new PylintConfiguration(settings);
 
     ProjectFileSystem pfs = mock(ProjectFileSystem.class);
     when(pfs.getBasedir()).thenReturn(new File("/projectroot"));
@@ -45,14 +44,14 @@ public class PylintConfigurationTest {
 
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isNull();
 
-    conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, "");
+    settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, (String)null);
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isNull();
 
-    conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
+    settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo(new File("/projectroot/.pylintrc").getAbsolutePath());
 
     String absolutePath = new File("/absolute/.pylintrc").getAbsolutePath();
-    conf.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, absolutePath);
+    settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, absolutePath);
     assertThat(pylintConfiguration.getPylintConfigPath(project)).isEqualTo(absolutePath);
   }
 
