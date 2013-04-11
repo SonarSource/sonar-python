@@ -28,15 +28,25 @@ import java.io.File;
 
 public class XPathCheckTest {
 
+  private XPathCheck check = new XPathCheck();
+
   @Test
   public void check() {
-    XPathCheck check = new XPathCheck();
     check.xpathQuery = "//statement";
     check.message = "Avoid statements :)";
 
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/xpath.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(1).withMessage("Avoid statements :)")
+        .noMore();
+  }
+
+  @Test
+  public void parseError() {
+    check.xpathQuery = "//statement";
+
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
         .noMore();
   }
 
