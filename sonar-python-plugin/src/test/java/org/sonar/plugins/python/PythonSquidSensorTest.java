@@ -52,10 +52,11 @@ public class PythonSquidSensorTest {
 
   @Test
   public void should_execute_on_python_project() {
-    Project project = new Project("key");
-    project.setLanguageKey("java");
+    Project project = mock(Project.class);
+    when(project.getLanguageKey()).thenReturn("java");
     assertThat(sensor.shouldExecuteOnProject(project)).isFalse();
-    project.setLanguageKey("py");
+
+    when(project.getLanguageKey()).thenReturn("py");
     assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
   }
 

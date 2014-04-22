@@ -23,7 +23,6 @@
   </scm>
 
   <properties>
-    <sonar.version>3.0</sonar.version>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
   </properties>
@@ -99,7 +98,7 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>1400000</maxsize>
+                  <maxsize>2000000</maxsize>
                   <minsize>1000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
