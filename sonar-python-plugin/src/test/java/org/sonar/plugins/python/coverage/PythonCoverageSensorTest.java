@@ -33,6 +33,7 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.TestUtils;
 
 public class PythonCoverageSensorTest {
@@ -40,12 +41,14 @@ public class PythonCoverageSensorTest {
   SensorContext context;
   Project project;
   Settings settings;
+  ModuleFileSystem fs;
 
   @Before
   public void setUp() {
     project = TestUtils.mockProject();
     settings = new Settings();
-    sensor = new PythonCoverageSensor(settings);
+    fs = TestUtils.mockFileSystem();
+    sensor = new PythonCoverageSensor(settings, fs);
     context = mock(SensorContext.class);
     Resource resourceMock = mock(Resource.class);
     when(context.getResource((Resource)anyObject())).thenReturn(resourceMock);
@@ -60,14 +63,14 @@ public class PythonCoverageSensorTest {
   @Test(expected=org.sonar.api.utils.SonarException.class)
   public void shouldFailOnInvalidReport() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
-    sensor = new PythonCoverageSensor(settings);
+    sensor = new PythonCoverageSensor(settings, fs);
     sensor.analyse(project, context);
   }
 
   @Test(expected=org.sonar.api.utils.SonarException.class)
   public void shouldFailOnInvalidIntegrationReport() {
     settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
-    sensor = new PythonCoverageSensor(settings);
+    sensor = new PythonCoverageSensor(settings, fs);
     sensor.analyse(project, context);
   }
 }

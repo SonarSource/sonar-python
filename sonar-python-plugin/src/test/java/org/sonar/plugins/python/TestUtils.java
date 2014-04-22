@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,10 +31,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 public class TestUtils{
   public static File loadResource(String resourceName) {
@@ -44,17 +48,17 @@ public class TestUtils{
     } catch (URISyntaxException e) {
       System.out.println("Cannot load resource: " + resourceName);
     }
-    
+
     return resourceAsFile;
   }
-  
+
   /**
    * @return default mock project
    */
   public static Project mockProject() {
     return mockProject(loadResource("/org/sonar/plugins/python/"));
   }
-  
+
   /**
    * Mock project
    * @param baseDir projects base directory
@@ -77,12 +81,20 @@ public class TestUtils{
     when(project.getFileSystem()).thenReturn(fileSystem);
     Language lang = mockLanguage();
     when(project.getLanguage()).thenReturn(lang);
-    
+
     return project;
   }
-  
+
   public static Python mockLanguage(){
     Python lang = mock(Python.class);
     return lang;
+  }
+
+  public static ModuleFileSystem mockFileSystem() {
+    ModuleFileSystem fs = mock(ModuleFileSystem.class);
+    when(fs.files(any(FileQuery.class))).thenReturn(ImmutableList.of(new File("/tmp")));
+    when(fs.baseDir()).thenReturn(loadResource("/org/sonar/plugins/python/"));
+
+    return fs;
   }
 }

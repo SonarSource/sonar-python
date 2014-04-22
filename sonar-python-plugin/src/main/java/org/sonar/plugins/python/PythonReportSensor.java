@@ -27,6 +27,8 @@ import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.SonarException;
 
 import java.io.File;
@@ -37,19 +39,20 @@ public abstract class PythonReportSensor implements Sensor {
   protected Logger log = LoggerFactory.getLogger(getClass());
 
   protected Settings conf = null;
+  protected ModuleFileSystem fileSystem;
 
-  public PythonReportSensor(Settings conf) {
+  public PythonReportSensor(Settings conf, ModuleFileSystem fileSystem) {
     this.conf = conf;
+    this.fileSystem = fileSystem;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return Python.KEY.equals(project.getLanguageKey());
+    return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty();
   }
 
   public void analyse(Project project, SensorContext context) {
     try {
-      List<File> reports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
-                                      reportPathKey(), defaultReportPath());
+      List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), reportPathKey(), defaultReportPath());
       for (File report : reports) {
         log.info("Processing report '{}'", report);
         processReport(project, context, report);

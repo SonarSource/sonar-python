@@ -25,11 +25,12 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.Violation;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.Python;
 
@@ -44,32 +45,34 @@ public class PylintSensor implements Sensor {
   private RuleFinder ruleFinder;
   private RulesProfile profile;
   private PylintConfiguration conf;
+  private ModuleFileSystem fileSystem;
 
 
-  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile) {
+  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
+    this.fileSystem = fileSystem;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return Python.KEY.equals(project.getLanguageKey())
+    return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty()
         && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    File workdir = new File(project.getFileSystem().getSonarWorkingDirectory(), "/pylint/");
+    File workdir = new File(fileSystem.workingDir(), "/pylint/");
     prepareWorkDir(workdir);
     int i = 0;
-    for (InputFile inputFile : project.getFileSystem().mainFiles(Python.KEY)) {
+    for (File file : fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY))) {
       try {
         File out = new File(workdir, i + ".out");
-        analyzeFile(inputFile, out, project, sensorContext);
+        analyzeFile(file, out, project, sensorContext);
         i++;
       } catch (Exception e) {
         String msg = new StringBuilder()
             .append("Cannot analyse the file '")
-            .append(inputFile.getFile().getAbsolutePath())
+            .append(file.getAbsolutePath())
             .append("', details: '")
             .append(e)
             .append("'")
@@ -79,14 +82,14 @@ public class PylintSensor implements Sensor {
     }
   }
 
-  protected void analyzeFile(InputFile inputFile, File out, Project project, SensorContext sensorContext) throws IOException {
-    org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(inputFile.getFile(), project);
+  protected void analyzeFile(File file, File out, Project project, SensorContext sensorContext) throws IOException {
+    org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(file, project);
 
     String pylintConfigPath = conf.getPylintConfigPath(project);
     String pylintPath = conf.getPylintPath();
 
     PylintViolationsAnalyzer analyzer = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
-    List<Issue> issues = analyzer.analyze(inputFile.getFile().getPath(), project.getFileSystem().getSourceCharset(), out);
+    List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), project.getFileSystem().getSourceCharset(), out);
     for (Issue issue : issues) {
       Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, issue.ruleId);
       if (rule != null) {

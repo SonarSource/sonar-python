@@ -30,6 +30,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.Python;
@@ -55,8 +56,8 @@ public class PythonXunitSensor extends PythonReportSensor {
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   private Python lang = null;
 
-  public PythonXunitSensor(Settings conf, Python lang) {
-    super(conf);
+  public PythonXunitSensor(Settings conf, Python lang, ModuleFileSystem fileSystem) {
+    super(conf, fileSystem);
     this.lang = lang;
   }
 
@@ -118,14 +119,12 @@ public class PythonXunitSensor extends PythonReportSensor {
   org.sonar.api.resources.File findResourceUsingNosetestsStrategy(Project project, SensorContext context, String fileKey) {
     // a) check assuming the key doesnt contain the class name
     String actualKey = StringUtils.replace(fileKey, ".", "/") + ".py";
-    org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey),
-        project.getFileSystem().getTestDirs());
+    org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey), fileSystem.testDirs());
     if (context.getResource(unitTestFile) == null) {
       // b) check assuming the key *does* contain the class name
       actualKey = StringUtils.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
 
-      unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey),
-          project.getFileSystem().getTestDirs());
+      unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey), fileSystem.testDirs());
       if (context.getResource(unitTestFile) == null) {
         unitTestFile = null;
       }

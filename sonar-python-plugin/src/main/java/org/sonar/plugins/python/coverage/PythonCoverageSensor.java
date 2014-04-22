@@ -28,6 +28,7 @@ import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.PythonReportSensor;
 
@@ -62,20 +63,18 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
   private CoberturaParser parser = new CoberturaParser();
 
-  public PythonCoverageSensor(Settings conf) {
-    super(conf);
+  public PythonCoverageSensor(Settings conf, ModuleFileSystem fileSystem) {
+    super(conf, fileSystem);
   }
 
   public void analyse(Project project, SensorContext context) {
-    List<File> reports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
-                                    REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
+    List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     log.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
     saveMeasures(project, context, coverageMeasures, false);
 
     log.debug("Parsing integration test coverage reports");
-    List<File> itReports = getReports(conf, project.getFileSystem().getBasedir().getPath(),
-                                      IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
+    List<File> itReports = getReports(conf, fileSystem.baseDir().getPath(), IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     coverageMeasures = parseReports(itReports);
     saveMeasures(project, context, coverageMeasures, true);
   }

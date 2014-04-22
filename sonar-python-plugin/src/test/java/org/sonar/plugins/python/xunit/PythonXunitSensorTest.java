@@ -20,6 +20,7 @@
 
 package org.sonar.plugins.python.xunit;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.CoverageExtension;
@@ -29,6 +30,8 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.TestUtils;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -45,12 +48,14 @@ public class PythonXunitSensorTest {
   PythonXunitSensor sensor;
   SensorContext context;
   Project project;
+  ModuleFileSystem fs;
 
   @Before
   public void setUp() {
     settings = new Settings();
     project = TestUtils.mockProject();
-    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage());
+    fs  = TestUtils.mockFileSystem();
+    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
     context = mock(SensorContext.class);
   }
 
@@ -79,7 +84,7 @@ public class PythonXunitSensorTest {
   @Test
   public void shouldReportZeroTestsWhenNoReportFound() {
     settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "notexistingpath");
-    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage());
+    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
 
     sensor.analyse(project, context);
 
@@ -89,7 +94,7 @@ public class PythonXunitSensorTest {
   @Test(expected=org.sonar.api.utils.SonarException.class)
   public void shouldThrowWhenGivenInvalidTime() {
     settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage());
+    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
 
     sensor.analyse(project, context);
   }

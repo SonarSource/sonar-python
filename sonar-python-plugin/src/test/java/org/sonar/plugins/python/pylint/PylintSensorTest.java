@@ -19,13 +19,16 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.google.common.collect.ImmutableList;
+import org.apache.commons.collections.ListUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.Python;
 
 import java.io.File;
@@ -33,13 +36,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PylintSensorTest {
 
-  private Project project;
-  private ProjectFileSystem pfs;
+  private ModuleFileSystem fs;
   private RuleFinder ruleFinder;
   private PylintConfiguration conf;
   private RulesProfile profile;
@@ -50,16 +53,12 @@ public class PylintSensorTest {
     conf = mock(PylintConfiguration.class);
     profile = mock(RulesProfile.class);
 
-    pfs = mock(ProjectFileSystem.class);
-    when(pfs.getBasedir()).thenReturn(new File("/tmp"));
-
-    project = mock(Project.class);
-    when(project.getFileSystem()).thenReturn(pfs);
+    fs = mock(ModuleFileSystem.class);
   }
 
   @Test
   public void shouldntThrowWhenInstantiating() {
-    new PylintSensor(ruleFinder, conf, profile);
+    new PylintSensor(ruleFinder, conf, profile, fs);
   }
 
   @Test
@@ -72,14 +71,17 @@ public class PylintSensorTest {
     RulesProfile emptyProfile = mock(RulesProfile.class);
     RulesProfile pylintProfile = createPylintProfile();
 
+    when(fs.files(any(FileQuery.class))).thenReturn(ImmutableList.of(new File("/tmp")));
     checkNecessityOfExecution(pythonProject, pylintProfile, true);
     checkNecessityOfExecution(pythonProject, emptyProfile, false);
+
+    when(fs.files(any(FileQuery.class))).thenReturn(ListUtils.EMPTY_LIST);
     checkNecessityOfExecution(foreignProject, pylintProfile, false);
     checkNecessityOfExecution(foreignProject, emptyProfile, false);
   }
 
   private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile);
+    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fs);
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
   }
 
@@ -95,7 +97,7 @@ public class PylintSensorTest {
 
     RulesProfile profile = mock(RulesProfile.class);
     when(profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY))
-        .thenReturn(rules);
+      .thenReturn(rules);
 
     return profile;
   }

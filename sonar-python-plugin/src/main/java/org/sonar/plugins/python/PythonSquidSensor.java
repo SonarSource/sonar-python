@@ -34,6 +34,8 @@ import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFileUtils;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Violation;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
@@ -62,14 +64,16 @@ public final class PythonSquidSensor implements Sensor {
   private Project project;
   private SensorContext context;
   private AstScanner<PythonGrammar> scanner;
+  private ModuleFileSystem fileSystem;
 
-  public PythonSquidSensor(RulesProfile profile, FileLinesContextFactory fileLinesContextFactory) {
+  public PythonSquidSensor(RulesProfile profile, FileLinesContextFactory fileLinesContextFactory, ModuleFileSystem fileSystem) {
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CheckList.REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
+    this.fileSystem = fileSystem;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return Python.KEY.equals(project.getLanguageKey());
+    return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty();
   }
 
   public void analyse(Project project, SensorContext context) {
@@ -80,14 +84,14 @@ public final class PythonSquidSensor implements Sensor {
     List<SquidAstVisitor<PythonGrammar>> visitors = Lists.newArrayList(squidChecks);
     visitors.add(new FileLinesVisitor(project, fileLinesContextFactory));
     this.scanner = PythonAstScanner.create(createConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
-    scanner.scanFiles(InputFileUtils.toFiles(project.getFileSystem().mainFiles(Python.KEY)));
+    scanner.scanFiles(fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     save(squidSourceFiles);
   }
 
   private PythonConfiguration createConfiguration(Project project) {
-    return new PythonConfiguration(project.getFileSystem().getSourceCharset());
+    return new PythonConfiguration(fileSystem.sourceCharset());
   }
 
   private void save(Collection<SourceCode> squidSourceFiles) {

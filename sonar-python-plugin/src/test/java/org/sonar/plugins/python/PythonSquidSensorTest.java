@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.ImmutableList;
+import org.apache.commons.collections.ListUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -29,48 +30,57 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.*;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 import java.io.File;
 import java.nio.charset.Charset;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class PythonSquidSensorTest {
 
-  private PythonSquidSensor sensor;
+  private FileLinesContextFactory fileLinesContextFactory;
 
   @Before
   public void setUp() {
-    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+    fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(Resource.class))).thenReturn(fileLinesContext);
-    sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory);
   }
 
   @Test
   public void should_execute_on_python_project() {
     Project project = mock(Project.class);
-    when(project.getLanguageKey()).thenReturn("java");
+    ModuleFileSystem fs = mock(ModuleFileSystem.class);
+    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, fs);
+
+    when(fs.files(any(FileQuery.class))).thenReturn(ListUtils.EMPTY_LIST);
     assertThat(sensor.shouldExecuteOnProject(project)).isFalse();
 
-    when(project.getLanguageKey()).thenReturn("py");
+    when(fs.files(any(FileQuery.class))).thenReturn(ImmutableList.of(new File("/tmp")));
     assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
   }
 
   @Test
   public void should_analyse() {
-    ProjectFileSystem fs = mock(ProjectFileSystem.class);
-    when(fs.getSourceCharset()).thenReturn(Charset.forName("UTF-8"));
-    InputFile inputFile = InputFileUtils.create(
-        new File("src/test/resources/org/sonar/plugins/python"),
-        new File("src/test/resources/org/sonar/plugins/python/code_chunks_2.py"));
-    when(fs.mainFiles(Python.KEY)).thenReturn(ImmutableList.of(inputFile));
+    ModuleFileSystem fs = mock(ModuleFileSystem.class);
+    when(fs.sourceCharset()).thenReturn(Charset.forName("UTF-8"));
+    when(fs.files(any(FileQuery.class))).thenReturn(ImmutableList.of(
+      new File("src/test/resources/org/sonar/plugins/python/code_chunks_2.py")));
+
+    ProjectFileSystem pfs = mock(ProjectFileSystem.class);
+    when(pfs.getSourceDirs()).thenReturn(ImmutableList.of(new File("src/test/resources/org/sonar/plugins/python/")));
+
     Project project = new Project("key");
-    project.setFileSystem(fs);
+    project.setFileSystem(pfs);
     SensorContext context = mock(SensorContext.class);
+    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, fs);
 
     sensor.analyse(project, context);
 
@@ -86,6 +96,7 @@ public class PythonSquidSensorTest {
 
   @Test
   public void test_toString() {
+    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, null);
     assertThat(sensor.toString()).isEqualTo("PythonSquidSensor");
   }
 
