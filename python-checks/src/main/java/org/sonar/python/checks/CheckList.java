@@ -1,5 +1,5 @@
 /*
- * Sonar Python Plugin
+ * SonarQube Python Plugin
  * Copyright (C) 2011 SonarSource and Waleri Enns
  * dev@sonar.codehaus.org
  *
@@ -27,7 +27,7 @@ public final class CheckList {
 
   public static final String REPOSITORY_KEY = "python";
 
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
+  public static final String SONAR_WAY_PROFILE = "SonarQube way";
 
   private CheckList() {
   }

@@ -1,5 +1,5 @@
 /*
- * Sonar Python Plugin
+ * SonarQube Python Plugin
  * Copyright (C) 2011 SonarSource and Waleri Enns
  * dev@sonar.codehaus.org
  *
@@ -31,7 +31,7 @@ public class TestSuiteTest {
   TestSuite suite;
   TestSuite equalSuite;
   TestSuite otherSuite;
-  
+
   @Before
   public void setUp() {
     suite = new TestSuite("key");
@@ -85,7 +85,7 @@ public class TestSuiteTest {
 
     final int EXEC_TIME = 10;
     suite.addTestCase(new TestCase("name", EXEC_TIME, "status", "stack", "msg"));
-    
+
     assertEquals(suite.getTests(), testBefore + 1);
     assertEquals(suite.getTime(), timeBefore + EXEC_TIME);
   }
@@ -95,9 +95,9 @@ public class TestSuiteTest {
     int errorsBefore = suite.getErrors();
     TestCase error = mock(TestCase.class);
     when(error.isError()).thenReturn(true);
-    
+
     suite.addTestCase(error);
-    
+
     assertEquals(suite.getErrors(), errorsBefore + 1);
   }
 
@@ -106,23 +106,23 @@ public class TestSuiteTest {
     int failedBefore = suite.getFailures();
     TestCase failedTC = mock(TestCase.class);
     when(failedTC.isFailure()).thenReturn(true);
-    
+
     suite.addTestCase(failedTC);
-    
+
     assertEquals(suite.getFailures(), failedBefore + 1);
   }
-  
+
   @Test
   public void addingASkippedTestCaseShouldIncrementSkippedStatistic() {
     int skippedBefore = suite.getSkipped();
     TestCase skippedTC = mock(TestCase.class);
     when(skippedTC.isSkipped()).thenReturn(true);
-    
+
     suite.addTestCase(skippedTC);
-    
+
     assertEquals(suite.getSkipped(), skippedBefore + 1);
   }
-  
+
   @Test
   public void addingAnotherTestSuiteShouldMaintainStatistics() {
     TestCase tc = mock(TestCase.class);
@@ -131,9 +131,9 @@ public class TestSuiteTest {
     TestSuite ts2 = new TestSuite("2");
     ts1.addTestCase(tc);
     ts2.addTestCase(tc);
-    
+
     TestSuite summedUp = ts1.addMeasures(ts2);
-    
+
     assertEquals(summedUp.getSkipped(), 2);
   }
 }

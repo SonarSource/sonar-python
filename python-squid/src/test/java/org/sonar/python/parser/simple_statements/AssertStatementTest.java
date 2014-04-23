@@ -1,5 +1,5 @@
 /*
- * Sonar Python Plugin
+ * SonarQube Python Plugin
  * Copyright (C) 2011 SonarSource and Waleri Enns
  * dev@sonar.codehaus.org
  *

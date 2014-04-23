@@ -1,5 +1,5 @@
 /*
- * Sonar Python Plugin
+ * SonarQube Python Plugin
  * Copyright (C) 2011 SonarSource and Waleri Enns
  * dev@sonar.codehaus.org
  *
@@ -30,13 +30,13 @@ public class TestCase {
   private static final String STATUS_ERROR = "error";
   private static final String STATUS_FAILURE = "failure";
   private static final String STATUS_SKIPPED = "skipped";
-  
+
   private String name;
   private String status = STATUS_OK;
   private String stackTrace;
   private String errorMessage;
   private int time = 0;
-  
+
   /**
    * Constructs a testcase instance out of following parameters
    * @param name The name of this testcase
@@ -54,14 +54,14 @@ public class TestCase {
     this.errorMessage = msg;
     this.status = status;
   }
-  
+
   /**
    * Returns true if this testcase is an error, false otherwise
    */
   public boolean isError(){
     return STATUS_ERROR.equals(status);
   }
-  
+
   /**
    * Returns true if this testcase is a failure, false otherwise
    */
@@ -79,7 +79,7 @@ public class TestCase {
   public int getTime() {
     return time;
   }
-  
+
   /**
    * Returns execution details as sonar-conform XML
    */

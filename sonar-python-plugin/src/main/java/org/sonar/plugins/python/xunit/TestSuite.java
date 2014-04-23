@@ -1,5 +1,5 @@
 /*
- * Sonar Python Plugin
+ * SonarQube Python Plugin
  * Copyright (C) 2011 SonarSource and Waleri Enns
  * dev@sonar.codehaus.org
  *
@@ -36,7 +36,7 @@ public class TestSuite {
   private int time = 0;
   private int failures = 0;
   private List<TestCase> testCases;
-  
+
   /**
    * Creates a testsuite instance uniquely identified by the given key
    * @param key The key to construct a testsuite for
@@ -45,7 +45,7 @@ public class TestSuite {
     this.key = key;
     this.testCases = new ArrayList<TestCase>();
   }
-  
+
   public String getKey() {
     return key;
   }
@@ -53,7 +53,7 @@ public class TestSuite {
   public int getErrors() {
     return errors;
   }
-  
+
   public int getSkipped() {
     return skipped;
   }
@@ -69,7 +69,7 @@ public class TestSuite {
   public int getFailures() {
     return failures;
   }
-  
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -78,7 +78,7 @@ public class TestSuite {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    
+
     TestSuite that = (TestSuite) o;
     return key.equals(that.key);
   }
@@ -87,12 +87,12 @@ public class TestSuite {
   public int hashCode() {
     return key.hashCode();
   }
-  
+
   /**
    * Adds the given test case to this testsuite maintaining the internal statistics
    * @param tc the test case to add
    */
-  public void addTestCase(TestCase tc){ 
+  public void addTestCase(TestCase tc){
     if (tc.isSkipped()) {
       skipped++;
     } else if (tc.isFailure()) {
@@ -126,7 +126,7 @@ public class TestSuite {
   /**
    * Returns execution details as sonar-conform XML
    */
-  public String getDetails() { 
+  public String getDetails() {
     StringBuilder details = new StringBuilder();
     details.append("<tests-details>");
     for (TestCase tc: testCases) {
