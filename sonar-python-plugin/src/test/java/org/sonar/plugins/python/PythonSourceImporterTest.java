@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -27,7 +28,7 @@ public class PythonSourceImporterTest {
 
   @Test
   public void test() {
-    Python language = new Python();
+    Python language = new Python(new Settings());
     PythonSourceImporter sourceImporter = new PythonSourceImporter(language);
     assertThat(sourceImporter.getLanguage()).isSameAs(language);
   }

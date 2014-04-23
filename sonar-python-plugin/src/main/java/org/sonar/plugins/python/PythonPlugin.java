@@ -22,6 +22,8 @@ package org.sonar.plugins.python;
 import com.google.common.collect.ImmutableList;
 import org.sonar.api.Extension;
 import org.sonar.api.SonarPlugin;
+import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.colorizer.PythonColorizer;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.cpd.PythonCpdMapping;
@@ -34,8 +36,18 @@ import java.util.List;
 
 public class PythonPlugin extends SonarPlugin {
 
-  public List<?> getExtensions() {
+  public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
+
+  public List getExtensions() {
     return ImmutableList.of(
+
+        PropertyDefinition.builder(FILE_SUFFIXES_KEY)
+          .name("File Suffixes")
+          .description("Comma-separated list of suffixes of Python files to analyze.")
+          .category("Python")
+          .onQualifiers(Qualifiers.PROJECT)
+          .build(),
+
         Python.class,
         PythonSourceImporter.class,
         PythonColorizer.class,

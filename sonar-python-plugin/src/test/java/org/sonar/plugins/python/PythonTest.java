@@ -19,7 +19,11 @@
  */
 package org.sonar.plugins.python;
 
+import com.google.common.collect.Maps;
 import org.junit.Test;
+import org.sonar.api.config.Settings;
+
+import java.util.Map;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -27,10 +31,21 @@ public class PythonTest {
 
   @Test
   public void test() {
-    Python language = new Python();
+    Python language = new Python(new Settings());
     assertThat(language.getKey()).isEqualTo("py");
     assertThat(language.getName()).isEqualTo("Python");
     assertThat(language.getFileSuffixes()).hasSize(1).contains("py");
   }
 
+  @Test
+  public void custom_file_suffixes() {
+    Map<String, String> props = Maps.newHashMap();
+    props.put(PythonPlugin.FILE_SUFFIXES_KEY, "py,python");
+
+    Settings settings = new Settings();
+    settings.addProperties(props);
+
+    Python language = new Python(settings);
+    assertThat(language.getFileSuffixes()).hasSize(2).contains("python");
+  }
 }

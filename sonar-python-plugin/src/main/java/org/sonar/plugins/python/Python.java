@@ -19,20 +19,40 @@
  */
 package org.sonar.plugins.python;
 
+import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.AbstractLanguage;
+
+import java.util.List;
 
 public class Python extends AbstractLanguage {
 
   public static final String KEY = "py";
 
-  private static final String[] SUFFIXES = { "py" };
+  private static final String[] DEFAULT_FILE_SUFFIXES = { "py" };
 
-  public Python() {
+  private Settings settings;
+
+  public Python(Settings settings) {
     super(KEY, "Python");
+    this.settings = settings;
   }
 
   public String[] getFileSuffixes() {
-    return SUFFIXES.clone();
+    String[] suffixes = filterEmptyStrings(settings.getStringArray(PythonPlugin.FILE_SUFFIXES_KEY));
+
+    return suffixes.length == 0 ? Python.DEFAULT_FILE_SUFFIXES : suffixes;
+  }
+
+  private String[] filterEmptyStrings(String[] stringArray) {
+    List<String> nonEmptyStrings = Lists.newArrayList();
+    for (String string : stringArray) {
+      if (StringUtils.isNotBlank(string.trim())) {
+        nonEmptyStrings.add(string.trim());
+      }
+    }
+    return nonEmptyStrings.toArray(new String[nonEmptyStrings.size()]);
   }
 
 }
