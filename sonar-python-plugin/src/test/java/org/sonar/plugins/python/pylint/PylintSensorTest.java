@@ -23,6 +23,7 @@ import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections.ListUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.ActiveRule;
@@ -58,7 +59,7 @@ public class PylintSensorTest {
 
   @Test
   public void shouldntThrowWhenInstantiating() {
-    new PylintSensor(ruleFinder, conf, profile, fs);
+    new PylintSensor(ruleFinder, conf, profile, fs, mock(ResourcePerspectives.class));
   }
 
   @Test
@@ -81,7 +82,7 @@ public class PylintSensorTest {
   }
 
   private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fs);
+    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fs, mock(ResourcePerspectives.class));
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
   }
 

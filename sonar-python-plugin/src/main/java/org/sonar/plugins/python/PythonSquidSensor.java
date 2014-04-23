@@ -25,15 +25,18 @@ import com.sonar.sslr.squid.SquidAstVisitor;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
+import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.issue.Issuable;
+import org.sonar.api.issue.Issue;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
-import org.sonar.api.resources.InputFileUtils;
 import org.sonar.api.resources.Project;
-import org.sonar.api.rules.Violation;
+import org.sonar.api.rule.RuleKey;
+import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.python.PythonAstScanner;
@@ -65,11 +68,13 @@ public final class PythonSquidSensor implements Sensor {
   private SensorContext context;
   private AstScanner<PythonGrammar> scanner;
   private ModuleFileSystem fileSystem;
+  private ResourcePerspectives resourcePerspectives;
 
-  public PythonSquidSensor(RulesProfile profile, FileLinesContextFactory fileLinesContextFactory, ModuleFileSystem fileSystem) {
+  public PythonSquidSensor(RulesProfile profile, FileLinesContextFactory fileLinesContextFactory, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CheckList.REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.fileSystem = fileSystem;
+    this.resourcePerspectives = resourcePerspectives;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
@@ -103,7 +108,7 @@ public final class PythonSquidSensor implements Sensor {
       saveFilesComplexityDistribution(sonarFile, squidFile);
       saveFunctionsComplexityDistribution(sonarFile, squidFile);
       saveMeasures(sonarFile, squidFile);
-      saveViolations(sonarFile, squidFile);
+      saveIssues(sonarFile, squidFile);
     }
   }
 
@@ -133,14 +138,21 @@ public final class PythonSquidSensor implements Sensor {
     context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
   }
 
-  private void saveViolations(File sonarFile, SourceFile squidFile) {
+  private void saveIssues(File sonarFile, SourceFile squidFile) {
     Collection<CheckMessage> messages = squidFile.getCheckMessages();
     if (messages != null) {
       for (CheckMessage message : messages) {
-        Violation violation = Violation.create(annotationCheckFactory.getActiveRule(message.getCheck()), sonarFile)
-            .setLineId(message.getLine())
-            .setMessage(message.getText(Locale.ENGLISH));
-        context.saveViolation(violation);
+        ActiveRule rule = annotationCheckFactory.getActiveRule(message.getCheck());
+        Issuable issuable = resourcePerspectives.as(Issuable.class, sonarFile);
+
+        if (issuable != null) {
+          Issue issue = issuable.newIssueBuilder()
+            .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getRuleKey()))
+            .line(message.getLine())
+            .message(message.getText(Locale.ENGLISH))
+            .build();
+          issuable.addIssue(issue);
+        }
       }
     }
   }

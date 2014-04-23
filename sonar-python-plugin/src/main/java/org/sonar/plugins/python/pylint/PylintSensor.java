@@ -24,11 +24,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.issue.Issuable;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.rules.Violation;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.SonarException;
@@ -46,13 +48,15 @@ public class PylintSensor implements Sensor {
   private RulesProfile profile;
   private PylintConfiguration conf;
   private ModuleFileSystem fileSystem;
+  private ResourcePerspectives resourcePerspectives;
 
 
-  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem) {
+  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
     this.fileSystem = fileSystem;
+    this.resourcePerspectives = resourcePerspectives;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
@@ -88,22 +92,29 @@ public class PylintSensor implements Sensor {
     String pylintConfigPath = conf.getPylintConfigPath(project);
     String pylintPath = conf.getPylintPath();
 
-    PylintViolationsAnalyzer analyzer = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
+    PylintIssuesAnalyzer analyzer = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
     List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), project.getFileSystem().getSourceCharset(), out);
-    for (Issue issue : issues) {
-      Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, issue.ruleId);
+
+    for (Issue pylintIssue : issues) {
+      Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.ruleId);
+
       if (rule != null) {
         if (rule.isEnabled()) {
-          Violation violation = Violation.create(rule, pyfile);
-          violation.setLineId(issue.line);
-          violation.setMessage(issue.descr);
-          sensorContext.saveViolation(violation);
-          LOG.trace("Saved pylint violation: {}", issue);
+          Issuable issuable = resourcePerspectives.as(Issuable.class, pyfile);
+
+          if (issuable != null) {
+            org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
+              .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getKey()))
+              .line(pylintIssue.line)
+              .message(pylintIssue.descr)
+              .build();
+            issuable.addIssue(issue);
+          }
         } else {
-          LOG.debug("Pylint rule '{}' is disabled in Sonar", issue.ruleId);
+          LOG.debug("Pylint rule '{}' is disabled in Sonar", pylintIssue.ruleId);
         }
       } else {
-        LOG.warn("Pylint rule '{}' is unknown in Sonar", issue.ruleId);
+        LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.ruleId);
       }
     }
   }

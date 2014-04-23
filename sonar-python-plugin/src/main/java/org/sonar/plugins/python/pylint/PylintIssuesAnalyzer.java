@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PylintViolationsAnalyzer {
+public class PylintIssuesAnalyzer {
 
   private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
 
@@ -67,7 +67,7 @@ public class PylintViolationsAnalyzer {
   private String pylint = null;
   private String pylintConfigParam = null;
 
-  PylintViolationsAnalyzer(String pylintPath, String pylintConfigPath) {
+  PylintIssuesAnalyzer(String pylintPath, String pylintConfigPath) {
     pylint = FALLBACK_PYLINT;
     if (pylintPath != null) {
       if (!new File(pylintPath).exists()) {

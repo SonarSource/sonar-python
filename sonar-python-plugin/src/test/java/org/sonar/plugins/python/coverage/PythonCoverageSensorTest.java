@@ -55,7 +55,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void shouldReportCorrectViolations() {
+  public void shouldReportCorrectIssues() {
     sensor.analyse(project, context);
     verify(context, times(66)).saveMeasure((Resource) anyObject(), any(Measure.class));
   }

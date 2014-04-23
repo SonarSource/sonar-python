@@ -29,13 +29,13 @@ import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PylintViolationsAnalyzerIT {
+public class PylintIssuesAnalyzerIT {
 
   @Rule
   public TemporaryFolder tempFolder = new TemporaryFolder();
 
   @Test
-  public void violationsTest() throws Exception {
+  public void issuesTest() throws Exception {
     String pylintrcResource = "/org/sonar/plugins/python/pylint/pylintrc_sample";
     String codeChunksResource = "/org/sonar/plugins/python/code_chunks_2.py";
     String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
@@ -43,7 +43,7 @@ public class PylintViolationsAnalyzerIT {
     String pylintPath = null;
     File out = tempFolder.newFile();
 
-    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, Charsets.UTF_8, out);
+    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, Charsets.UTF_8, out);
     assertThat(issues).isNotEmpty();
   }
 

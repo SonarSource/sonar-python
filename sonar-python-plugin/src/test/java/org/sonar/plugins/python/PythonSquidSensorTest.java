@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
@@ -58,7 +59,7 @@ public class PythonSquidSensorTest {
   public void should_execute_on_python_project() {
     Project project = mock(Project.class);
     ModuleFileSystem fs = mock(ModuleFileSystem.class);
-    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, fs);
+    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, fs, mock(ResourcePerspectives.class));
 
     when(fs.files(any(FileQuery.class))).thenReturn(ListUtils.EMPTY_LIST);
     assertThat(sensor.shouldExecuteOnProject(project)).isFalse();
@@ -80,7 +81,7 @@ public class PythonSquidSensorTest {
     Project project = new Project("key");
     project.setFileSystem(pfs);
     SensorContext context = mock(SensorContext.class);
-    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, fs);
+    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, fs, mock(ResourcePerspectives.class));
 
     sensor.analyse(project, context);
 
@@ -96,7 +97,7 @@ public class PythonSquidSensorTest {
 
   @Test
   public void test_toString() {
-    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, null);
+    PythonSquidSensor sensor = new PythonSquidSensor(mock(RulesProfile.class), fileLinesContextFactory, null, mock(ResourcePerspectives.class));
     assertThat(sensor.toString()).isEqualTo("PythonSquidSensor");
   }
 

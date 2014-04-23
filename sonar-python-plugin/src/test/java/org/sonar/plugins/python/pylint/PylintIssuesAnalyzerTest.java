@@ -31,7 +31,7 @@ import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PylintViolationsAnalyzerTest {
+public class PylintIssuesAnalyzerTest {
   @Test
   public void shouldParseCorrectly() {
     String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output.txt";
@@ -39,7 +39,7 @@ public class PylintViolationsAnalyzerTest {
     String pylintConfigPath = null;
     String pylintPath = null;
     List<String> lines = readFile(pathName);
-    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
+    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
     assertThat(issues.size()).isEqualTo(21);
   }
 
@@ -50,12 +50,12 @@ public class PylintViolationsAnalyzerTest {
     String pylintConfigPath = null;
     String pylintPath = null;
     List<String> lines = readFile(pathName);
-    List<Issue> issues = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
+    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
     assertThat(issues.size()).isEqualTo(1);
   }
 
   @Test
-  public void shouldMapViolationIdsCorrectly  () {
+  public void shouldMapIssuesIdsCorrectly() {
     String resourceOld = "/org/sonar/plugins/python/pylint/sample_pylint_output_oldids.txt";
     String resourceNew = "/org/sonar/plugins/python/pylint/sample_pylint_output_newids.txt";
     String pathNameOld = getClass().getResource(resourceOld).getPath();
@@ -64,24 +64,24 @@ public class PylintViolationsAnalyzerTest {
     String pylintPath = null;
     List<String> linesOld = readFile(pathNameOld);
     List<String> linesNew = readFile(pathNameNew);
-    List<Issue> issuesOld = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(linesOld);
-    List<Issue> issuesNew = new PylintViolationsAnalyzer(pylintPath, pylintConfigPath).parseOutput(linesNew);
+    List<Issue> issuesOld = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).parseOutput(linesOld);
+    List<Issue> issuesNew = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).parseOutput(linesNew);
     assertThat(getIds(issuesOld)).isEqualTo(getIds(issuesNew));
   }
-  
+
   @Test
   public void shouldWorkWithValidCustomConfig() {
     String resourceName = "/org/sonar/plugins/python/pylint/pylintrc_sample";
     String pylintConfigPath = getClass().getResource(resourceName).getPath();
     String pylintPath = null;
-    new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
+    new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
   }
 
   @Test(expected = SonarException.class)
   public void shouldFailIfGivenInvalidConfig() {
     String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
     String pylintPath = null;
-    new PylintViolationsAnalyzer(pylintPath, pylintConfigPath);
+    new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
   }
 
   @Test
@@ -101,7 +101,7 @@ public class PylintViolationsAnalyzerTest {
     int numberOfParams = VALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-        new PylintViolationsAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
+        new PylintIssuesAnalyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i+1]);
       } catch (SonarException se) {
         assert(false);
       }
@@ -122,7 +122,7 @@ public class PylintViolationsAnalyzerTest {
     int numberOfParams = INVALID_PARAMETERS.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-        new PylintViolationsAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
+        new PylintIssuesAnalyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i+1]);
         assert(false);
       } catch (SonarException se) {}
     }
