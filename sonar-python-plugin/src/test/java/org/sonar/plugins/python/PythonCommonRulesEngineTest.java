@@ -20,18 +20,24 @@
 package org.sonar.plugins.python;
 
 import org.junit.Test;
+import org.sonar.commonrules.api.CommonRulesRepository;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PythonCommonRulesEngineProviderTest {
+public class PythonCommonRulesEngineTest {
 
   @Test
   public void shouldProvideExpectedExtensions() {
-    PythonCommonRulesEngineProvider provider = new PythonCommonRulesEngineProvider();
-    assertThat(provider.provide().size()).isGreaterThan(1);
+    PythonCommonRulesEngine engine = new PythonCommonRulesEngine();
+    assertThat(engine.provide()).isNotEmpty();
+  }
 
-    provider = new PythonCommonRulesEngineProvider(null);
-    assertThat(provider.provide().size()).isGreaterThan(1);
+  @Test
+  public void enable_common_rules() {
+    PythonCommonRulesEngine engine = new PythonCommonRulesEngine();
+    CommonRulesRepository repo = engine.newRepository();
+    assertThat(repo.rules()).hasSize(4);
+    assertThat(repo.rule(CommonRulesRepository.RULE_INSUFFICIENT_COMMENT_DENSITY)).isNotNull();
   }
 
 }

@@ -20,7 +20,6 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.ImmutableList;
-import org.sonar.api.Extension;
 import org.sonar.api.SonarPlugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
@@ -57,7 +56,7 @@ public class PythonPlugin extends SonarPlugin {
         PythonRuleRepository.class,
         PythonDefaultProfile.class,
 
-        PythonCommonRulesEngineProvider.class,
+        PythonCommonRulesEngine.class,
 
         // pylint
         PylintConfiguration.class,

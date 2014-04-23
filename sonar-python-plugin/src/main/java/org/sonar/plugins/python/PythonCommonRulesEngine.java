@@ -21,29 +21,20 @@ package org.sonar.plugins.python;
 
 import org.sonar.api.resources.Project;
 import org.sonar.commonrules.api.CommonRulesEngine;
-import org.sonar.commonrules.api.CommonRulesEngineProvider;
+import org.sonar.commonrules.api.CommonRulesRepository;
 
-public class PythonCommonRulesEngineProvider extends CommonRulesEngineProvider {
+public class PythonCommonRulesEngine extends CommonRulesEngine {
 
-  public PythonCommonRulesEngineProvider() {
-    super();
-  }
-
-  public PythonCommonRulesEngineProvider(Project project) {
-    super(project);
+  public PythonCommonRulesEngine() {
+    super(Python.KEY);
   }
 
   @Override
-  protected void doActivation(CommonRulesEngine engine) {
-    engine.activateRule("DuplicatedBlocks");
-    engine.activateRule("InsufficientCommentDensity");
-    engine.activateRule("InsufficientLineCoverage");
-    engine.activateRule("InsufficientBranchCoverage");
+  protected void doEnableRules(CommonRulesRepository repository) {
+    repository
+      .enableDuplicatedBlocksRule()
+      .enableInsufficientCommentDensityRule(null)
+      .enableInsufficientLineCoverageRule(null)
+      .enableInsufficientBranchCoverageRule(null);
   }
-
-  @Override
-  protected String getLanguageKey() {
-    return Python.KEY;
-  }
-
 }
