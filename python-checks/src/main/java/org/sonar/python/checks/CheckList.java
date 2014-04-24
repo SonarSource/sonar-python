@@ -27,7 +27,7 @@ public final class CheckList {
 
   public static final String REPOSITORY_KEY = "python";
 
-  public static final String SONAR_WAY_PROFILE = "SonarQube way";
+  public static final String SONAR_WAY_PROFILE = "Sonar way";
 
   private CheckList() {
   }
