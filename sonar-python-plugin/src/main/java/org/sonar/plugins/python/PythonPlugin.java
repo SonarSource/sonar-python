@@ -45,6 +45,7 @@ public class PythonPlugin extends SonarPlugin {
           .description("Comma-separated list of suffixes of Python files to analyze.")
           .category("Python")
           .onQualifiers(Qualifiers.PROJECT)
+          .defaultValue("py")
           .build(),
 
         Python.class,
