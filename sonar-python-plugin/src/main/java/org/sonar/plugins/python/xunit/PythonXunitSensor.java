@@ -119,12 +119,14 @@ public class PythonXunitSensor extends PythonReportSensor {
   org.sonar.api.resources.File findResourceUsingNosetestsStrategy(Project project, SensorContext context, String fileKey) {
     // a) check assuming the key doesnt contain the class name
     String actualKey = StringUtils.replace(fileKey, ".", "/") + ".py";
-    org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey), fileSystem.testDirs());
+
+    org.sonar.api.resources.File unitTestFile = getSonarTestFile(new File(actualKey), project);
+
     if (context.getResource(unitTestFile) == null) {
       // b) check assuming the key *does* contain the class name
       actualKey = StringUtils.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
 
-      unitTestFile = org.sonar.api.resources.File.fromIOFile(new File(actualKey), fileSystem.testDirs());
+      unitTestFile = getSonarTestFile(new File(actualKey), project);
       if (context.getResource(unitTestFile) == null) {
         unitTestFile = null;
       }
@@ -167,4 +169,12 @@ public class PythonXunitSensor extends PythonReportSensor {
     return virtualFile;
   }
 
+  private org.sonar.api.resources.File getSonarTestFile(File file, Project project) {
+    org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(file, project);
+
+    if (unitTestFile == null) {
+      unitTestFile = org.sonar.api.resources.File.fromIOFile(file, fileSystem.testDirs());
+    }
+    return unitTestFile;
+  }
 }
