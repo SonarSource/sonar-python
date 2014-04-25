@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python.colorizer;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.colorizer.CodeColorizer;
 
@@ -56,7 +55,6 @@ public class PythonColorizerTest {
     assertThat(colorize("\"string\"")).contains("<span class=\"s\">\"string\"</span>");
   }
 
-  @Ignore // FIXME
   @Test
   public void should_colorize_longstring_literals() {
     assertThat(colorize("\"\"\"string\"\"\"")).contains("<span class=\"s\">\"\"\"string\"\"\"</span>");

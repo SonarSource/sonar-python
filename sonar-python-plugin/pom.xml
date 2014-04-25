@@ -29,6 +29,12 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>python-squid</artifactId>
       <version>${project.version}</version>
@@ -37,12 +43,6 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>python-checks</artifactId>
       <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.codehaus.sonar</groupId>
-      <artifactId>sonar-plugin-api</artifactId>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
