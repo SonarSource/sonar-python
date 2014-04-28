@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import org.sonar.api.resources.Project;
 import org.sonar.commonrules.api.CommonRulesEngine;
 import org.sonar.commonrules.api.CommonRulesRepository;
 
