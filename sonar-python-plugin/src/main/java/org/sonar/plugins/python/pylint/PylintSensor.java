@@ -89,11 +89,11 @@ public class PylintSensor implements Sensor {
   protected void analyzeFile(File file, File out, Project project, SensorContext sensorContext) throws IOException {
     org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(file, project);
 
-    String pylintConfigPath = conf.getPylintConfigPath(project);
+    String pylintConfigPath = conf.getPylintConfigPath(fileSystem);
     String pylintPath = conf.getPylintPath();
 
     PylintIssuesAnalyzer analyzer = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
-    List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), project.getFileSystem().getSourceCharset(), out);
+    List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.sourceCharset(), out);
 
     for (Issue pylintIssue : issues) {
       Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.ruleId);
