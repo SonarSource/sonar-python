@@ -70,7 +70,7 @@ public class NewLineChannel extends Channel<Lexer> {
         return true;
       }
 
-      if ((output.getTokens().size() == 0) || (output.getTokens().get(output.getTokens().size() - 1).getType() == PythonTokenType.NEWLINE)) {
+      if (output.getTokens().isEmpty() || (output.getTokens().get(output.getTokens().size() - 1).getType() == PythonTokenType.NEWLINE)) {
         // Blank line
         consumeEOL(code);
         return true;

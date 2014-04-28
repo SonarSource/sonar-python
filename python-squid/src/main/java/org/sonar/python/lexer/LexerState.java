@@ -19,11 +19,12 @@
  */
 package org.sonar.python.lexer;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class LexerState {
 
-  final Stack<Integer> indentationStack = new Stack<Integer>();
+  final Deque<Integer> indentationStack = new ArrayDeque<Integer>();
 
   int brackets;
   boolean joined;

@@ -32,7 +32,7 @@ import java.util.List;
 public final class PythonColorizer extends CodeColorizerFormat {
 
   private List<Tokenizer> tokenizers;
-
+  private static final String END_TAG = "</span>";
   public PythonColorizer() {
     super(Python.KEY);
   }
@@ -41,10 +41,10 @@ public final class PythonColorizer extends CodeColorizerFormat {
   public List<Tokenizer> getTokenizers() {
     if (tokenizers == null) {
       tokenizers = Lists.newArrayList();
-      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", "</span>", PythonKeyword.keywordValues()));
-      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", "</span>"));
-      tokenizers.add(new StringTokenizer("<span class=\"s\">", "</span>"));
-      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", "</span>"));
+      tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", END_TAG, PythonKeyword.keywordValues()));
+      tokenizers.add(new PythonDocStringTokenizer("<span class=\"s\">", END_TAG));
+      tokenizers.add(new StringTokenizer("<span class=\"s\">", END_TAG));
+      tokenizers.add(new PythonDocTokenizer("<span class=\"cd\">", END_TAG));
     }
     return tokenizers;
   }

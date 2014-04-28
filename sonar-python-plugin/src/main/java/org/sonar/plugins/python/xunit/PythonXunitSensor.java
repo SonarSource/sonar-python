@@ -62,7 +62,7 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   @DependsUpon
-  public Class<?> dependsUponCoverageSensors() {
+  public Class dependsUponCoverageSensors() {
     return CoverageExtension.class;
   }
 
