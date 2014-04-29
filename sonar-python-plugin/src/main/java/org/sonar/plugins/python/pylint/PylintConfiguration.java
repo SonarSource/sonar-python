@@ -24,7 +24,6 @@ import org.sonar.api.BatchExtension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.config.Settings;
-import org.sonar.api.resources.Project;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 import java.io.File;
