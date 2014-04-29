@@ -19,10 +19,9 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Settings;
-import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 import java.io.File;
@@ -33,17 +32,23 @@ import static org.mockito.Mockito.when;
 
 public class PylintConfigurationTest {
 
+  private Settings settings;
+  private PylintConfiguration pylintConfiguration;
+
+  @Before
+  public void setUp() throws Exception {
+    settings = new Settings();
+    pylintConfiguration = new PylintConfiguration(settings);
+  }
+
   @Test
   public void shouldGetCorrectPylintPath() {
-    Settings settings = new Settings();
-    PylintConfiguration pylintConfiguration = new PylintConfiguration(settings);
-
     ModuleFileSystem fs = mock(ModuleFileSystem.class);
     when(fs.baseDir()).thenReturn(new File("/projectroot"));
 
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isNull();
 
-    settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, (String)null);
+    settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, (String) null);
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isNull();
 
     settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
@@ -54,4 +59,11 @@ public class PylintConfigurationTest {
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isEqualTo(absolutePath);
   }
 
+  @Test
+  public void getPylintPath() {
+    String path = "test/path";
+    settings.setProperty(PylintConfiguration.PYLINT_KEY, path);
+
+    assertThat(pylintConfiguration.getPylintPath()).isEqualTo(path);
+  }
 }
