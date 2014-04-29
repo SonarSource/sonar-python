@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ExceptClauseTest {
 
@@ -44,10 +43,10 @@ public class ExceptClauseTest {
   public void ok() {
     g.test.mock();
 
-    assertThat(p, parse("except"));
-    assertThat(p, parse("except test"));
-    assertThat("3.2", p, parse("except test as test"));
-    assertThat("2.7", p, parse("except test , test"));
+    assertThat(p).matches("except");
+    assertThat(p).matches("except test");
+    assertThat(p).matches("except test as test");
+    assertThat(p).matches("except test , test");
   }
 
 }

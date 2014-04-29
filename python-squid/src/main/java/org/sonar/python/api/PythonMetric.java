@@ -19,8 +19,8 @@
  */
 package org.sonar.python.api;
 
-import org.sonar.squid.measures.CalculatedMetricFormula;
-import org.sonar.squid.measures.MetricDef;
+import org.sonar.squidbridge.measures.CalculatedMetricFormula;
+import org.sonar.squidbridge.measures.MetricDef;
 
 public enum PythonMetric implements MetricDef {
   FILES,
@@ -30,8 +30,7 @@ public enum PythonMetric implements MetricDef {
   FUNCTIONS,
   CLASSES,
   COMPLEXITY,
-  COMMENT_LINES,
-  COMMENT_BLANK_LINES;
+  COMMENT_LINES;
 
   public String getName() {
     return name();

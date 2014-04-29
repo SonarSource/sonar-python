@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class BreakStatementTest {
 
@@ -42,7 +41,7 @@ public class BreakStatementTest {
 
   @Test
   public void realLife() {
-    assertThat(p, parse("break"));
+    assertThat(p).matches("break");
   }
 
 }

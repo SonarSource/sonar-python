@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class YieldStatementTest {
 
@@ -44,7 +43,7 @@ public class YieldStatementTest {
   public void ok() {
     g.yield_expr.mock();
 
-    assertThat(p, parse("yield_expr"));
+    assertThat(p).matches("yield_expr");
   }
 
 }

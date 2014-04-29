@@ -27,9 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ExecStatementTest {
 
@@ -43,18 +41,15 @@ public class ExecStatementTest {
 
   @Test
   public void ok() {
-    g.test.mock();
-    g.expr.mock();
-
-    assertThat(p, parse("exec expr"));
-    assertThat(p, parse("exec expr in test"));
-    assertThat(p, parse("exec expr in test, test"));
+    assertThat(p).matches("exec expr");
+    assertThat(p).matches("exec expr in test");
+    assertThat(p).matches("exec expr in test, test");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("exec '1'"));
-    assertThat(p, notParse("exec('')"));
+    assertThat(p).matches("exec '1'");
+    assertThat(p).notMatches("exec('')");
   }
 
 }

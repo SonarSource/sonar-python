@@ -66,7 +66,7 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
 
     <sonar.version>3.7</sonar.version>
-    <sslr.version>1.15</sslr.version>
+    <sslr.version>1.20</sslr.version>
 
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
@@ -108,7 +108,7 @@
       <dependency>
         <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
         <artifactId>sslr-squid-bridge</artifactId>
-        <version>2.2</version>
+        <version>2.4</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
@@ -134,6 +134,11 @@
         <groupId>org.codehaus.sonar.common-rules</groupId>
         <artifactId>sonar-common-rules</artifactId>
         <version>1.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.6.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

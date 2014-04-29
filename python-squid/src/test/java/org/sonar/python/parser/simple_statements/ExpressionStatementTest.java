@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ExpressionStatementTest {
 
@@ -42,9 +41,9 @@ public class ExpressionStatementTest {
 
   @Test
   public void realLife() {
-    assertThat(p, parse("i = 10"));
-    assertThat(p, parse("list[1] = 10"));
-    assertThat(p, parse("self.balance = initial_balance"));
+    assertThat(p).matches("i = 10");
+    assertThat(p).matches("list[1] = 10");
+    assertThat(p).matches("self.balance = initial_balance");
   }
 
 }

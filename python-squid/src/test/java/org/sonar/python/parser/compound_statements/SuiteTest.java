@@ -28,8 +28,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.parser.PythonTestUtils;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class SuiteTest {
 
@@ -45,14 +44,14 @@ public class SuiteTest {
   public void ok() {
     g.stmt_list.mock();
 
-    assertThat(p, parse("stmt_list\n"));
+    assertThat(p).matches("stmt_list\n");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse(PythonTestUtils.appendNewLine("pass")));
-    assertThat(p, parse(PythonTestUtils.appendNewLine("x = 1")));
-    assertThat(p, parse(PythonTestUtils.appendNewLine("print(x)")));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("x = 1"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("print(x)"));
   }
 
 }

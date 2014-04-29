@@ -20,15 +20,15 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.squid.checks.ChecksHelper;
-import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.squidbridge.checks.ChecksHelper;
+import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
-import org.sonar.squid.api.SourceClass;
+import org.sonar.squidbridge.api.SourceClass;
 
 @Rule(
   key = "ClassComplexity",

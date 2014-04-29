@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ImportStatementTest {
 
@@ -42,8 +41,8 @@ public class ImportStatementTest {
 
   @Test
   public void realLife() {
-    assertThat(p, parse("from boto.s3.connection import S3Connection"));
-    assertThat(p, parse("import sys"));
+    assertThat(p).matches("from boto.s3.connection import S3Connection");
+    assertThat(p).matches("import sys");
   }
 
 }

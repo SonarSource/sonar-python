@@ -81,6 +81,12 @@ public class PylintSensorTest {
     checkNecessityOfExecution(foreignProject, emptyProfile, false);
   }
 
+  @Test
+  public void analyse() {
+
+
+  }
+
   private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
     PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fs, mock(ResourcePerspectives.class));
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);

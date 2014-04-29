@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.squid.checks.AbstractXPathCheck;
+import org.sonar.squidbridge.checks.AbstractXPathCheck;
 import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;

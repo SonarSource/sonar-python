@@ -22,19 +22,19 @@ package org.sonar.python;
 import com.google.common.base.Charsets;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.CommentAnalyser;
+import org.sonar.squidbridge.CommentAnalyser;
 import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.squid.*;
-import com.sonar.sslr.squid.metrics.CommentsVisitor;
-import com.sonar.sslr.squid.metrics.ComplexityVisitor;
-import com.sonar.sslr.squid.metrics.CounterVisitor;
-import com.sonar.sslr.squid.metrics.LinesVisitor;
+import org.sonar.squidbridge.*;
+import org.sonar.squidbridge.metrics.CommentsVisitor;
+import org.sonar.squidbridge.metrics.ComplexityVisitor;
+import org.sonar.squidbridge.metrics.CounterVisitor;
+import org.sonar.squidbridge.metrics.LinesVisitor;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.squid.api.*;
-import org.sonar.squid.indexer.QueryByType;
+import org.sonar.squidbridge.api.*;
+import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
 import java.util.Collection;
@@ -126,7 +126,6 @@ public final class PythonAstScanner {
     builder.withSquidAstVisitor(new LinesVisitor<PythonGrammar>(PythonMetric.LINES));
     builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<PythonGrammar>(PythonMetric.LINES_OF_CODE));
     builder.withSquidAstVisitor(CommentsVisitor.<PythonGrammar> builder().withCommentMetric(PythonMetric.COMMENT_LINES)
-        .withBlankCommentMetric(PythonMetric.COMMENT_BLANK_LINES)
         .withNoSonar(true)
         .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
         .build());

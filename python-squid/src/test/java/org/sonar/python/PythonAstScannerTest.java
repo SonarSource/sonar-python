@@ -21,13 +21,13 @@ package org.sonar.python;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
-import com.sonar.sslr.squid.AstScanner;
+import org.sonar.squidbridge.AstScanner;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
-import org.sonar.squid.api.SourceFile;
-import org.sonar.squid.api.SourceProject;
-import org.sonar.squid.indexer.QueryByType;
+import org.sonar.squidbridge.api.SourceFile;
+import org.sonar.squidbridge.api.SourceProject;
+import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
 
@@ -47,7 +47,6 @@ public class PythonAstScannerTest {
   public void comments() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/metrics/comments.py"));
     assertThat(file.getInt(PythonMetric.COMMENT_LINES)).isEqualTo(1);
-    assertThat(file.getInt(PythonMetric.COMMENT_BLANK_LINES)).isEqualTo(2);
     assertThat(file.getNoSonarTagLines()).contains(3).hasSize(1);
   }
 

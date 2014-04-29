@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class RaiseStatementTest {
 
@@ -42,21 +41,19 @@ public class RaiseStatementTest {
 
   @Test
   public void ok() {
-    g.test.mock();
+    assertThat(p).matches("raise");
+    assertThat(p).matches("raise test");
 
-    assertThat(p, parse("raise"));
-    assertThat(p, parse("raise test"));
+    assertThat(p).matches("raise test, test");
+    assertThat(p).matches("raise test, test, test");
 
-    assertThat("2.7", p, parse("raise test, test"));
-    assertThat("2.7", p, parse("raise test, test, test"));
-
-    assertThat("3.2", p, parse("raise test from test"));
+    assertThat(p).matches("raise test from test");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("raise"));
-    assertThat(p, parse("raise exc_info[1], None, exc_info[2]"));
+    assertThat(p).matches("raise");
+    assertThat(p).matches("raise exc_info[1], None, exc_info[2]");
   }
 
 }

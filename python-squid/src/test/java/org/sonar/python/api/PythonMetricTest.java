@@ -27,7 +27,7 @@ public class PythonMetricTest {
 
   @Test
   public void test() {
-    assertThat(PythonMetric.values()).hasSize(9);
+    assertThat(PythonMetric.values()).hasSize(8);
 
     for (PythonMetric metric : PythonMetric.values()) {
       assertThat(metric.getName()).isEqualTo(metric.name());

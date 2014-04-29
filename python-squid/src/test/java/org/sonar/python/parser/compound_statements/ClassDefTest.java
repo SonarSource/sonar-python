@@ -28,8 +28,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.parser.PythonTestUtils;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ClassDefTest {
 
@@ -43,9 +42,9 @@ public class ClassDefTest {
 
   @Test
   public void realLife() {
-    assertThat(p, parse(PythonTestUtils.appendNewLine("class Foo: pass")));
-    assertThat(p, parse(PythonTestUtils.appendNewLine("class Foo(argument): pass")));
-    assertThat(p, parse(PythonTestUtils.appendNewLine("class Foo(argument=value): pass")));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument): pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument=value): pass"));
   }
 
 }

@@ -26,10 +26,9 @@ import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.sslr.tests.Assertions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PrintStatementTest {
 
@@ -43,31 +42,29 @@ public class PrintStatementTest {
 
   @Test
   public void ok() {
-    g.test.mock();
+    assertThat(p).matches("print");
 
-    assertThat(p, parse("print"));
+    assertThat(p).matches("print >> test");
+    assertThat(p).matches("print >> test, test");
+    assertThat(p).matches("print >> test, test,");
 
-    assertThat(p, parse("print >> test"));
-    assertThat(p, parse("print >> test, test"));
-    assertThat(p, parse("print >> test, test,"));
-
-    assertThat(p, parse("print test"));
-    assertThat(p, parse("print test,"));
-    assertThat(p, parse("print test,test"));
-    assertThat(p, parse("print test,test,"));
+    assertThat(p).matches("print test");
+    assertThat(p).matches("print test,");
+    assertThat(p).matches("print test,test");
+    assertThat(p).matches("print test,test,");
   }
 
   @Test
   public void ko() {
-    assertThat(p, notParse("print >>"));
+    assertThat(p).notMatches("print >>");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("print 1"));
-    assertThat(p, parse("print 1,"));
-    assertThat(p, parse("print >> 1"));
-    assertThat(p, notParse("print('')"));
+    assertThat(p).matches("print 1");
+    assertThat(p).matches("print 1,");
+    assertThat(p).matches("print >> 1");
+    assertThat(p).notMatches("print('')");
   }
 
 }

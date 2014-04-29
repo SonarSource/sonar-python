@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FileInputTest {
 
@@ -44,10 +43,10 @@ public class FileInputTest {
   public void ok() {
     g.statement.mock();
 
-    assertThat(p, parse("statement"));
-    assertThat(p, parse("statement statement"));
-    assertThat(p, parse("\n"));
-    assertThat(p, parse("statement\nstatement"));
+    assertThat(p).matches("statement");
+    assertThat(p).matches("statement statement");
+    assertThat(p).matches("\n");
+    assertThat(p).matches("statement\nstatement");
   }
 
 }

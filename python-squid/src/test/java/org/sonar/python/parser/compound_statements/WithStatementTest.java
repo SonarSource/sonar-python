@@ -28,8 +28,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.parser.PythonTestUtils;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class WithStatementTest {
 
@@ -46,14 +45,14 @@ public class WithStatementTest {
     g.suite.mock();
     g.with_item.mock();
 
-    assertThat(p, parse("with with_item , with_item : suite"));
-    assertThat(p, parse("with with_item : suite"));
+    assertThat(p).matches("with with_item , with_item : suite");
+    assertThat(p).matches("with with_item : suite");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse(PythonTestUtils.appendNewLine("with A() as a : pass")));
-    assertThat(p, parse(PythonTestUtils.appendNewLine("with A() as a, B() as b : pass")));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a : pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a, B() as b : pass"));
   }
 
 }

@@ -21,7 +21,7 @@ package org.sonar.python.metrics;
 
 import com.google.common.collect.Sets;
 import com.sonar.sslr.api.*;
-import com.sonar.sslr.squid.SquidAstVisitor;
+import org.sonar.squidbridge.SquidAstVisitor;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;

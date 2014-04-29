@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TryStatementTest {
 
@@ -46,12 +45,12 @@ public class TryStatementTest {
     g.test.mock();
     g.except_clause.mock();
 
-    assertThat(p, parse("try : suite except_clause : suite"));
-    assertThat(p, parse("try : suite except_clause : suite except_clause : suite"));
-    assertThat(p, parse("try : suite except_clause : suite else : suite"));
-    assertThat(p, parse("try : suite except_clause : suite finally : suite"));
-    assertThat(p, parse("try : suite except_clause : suite else : suite finally : suite"));
-    assertThat(p, parse("try : suite finally : suite"));
+    assertThat(p).matches("try : suite except_clause : suite");
+    assertThat(p).matches("try : suite except_clause : suite except_clause : suite");
+    assertThat(p).matches("try : suite except_clause : suite else : suite");
+    assertThat(p).matches("try : suite except_clause : suite finally : suite");
+    assertThat(p).matches("try : suite except_clause : suite else : suite finally : suite");
+    assertThat(p).matches("try : suite finally : suite");
   }
 
 }

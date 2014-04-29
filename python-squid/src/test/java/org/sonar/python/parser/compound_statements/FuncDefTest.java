@@ -28,8 +28,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.parser.PythonTestUtils;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FuncDefTest {
 
@@ -43,7 +42,7 @@ public class FuncDefTest {
 
   @Test
   public void realLife() {
-    assertThat(p, parse(PythonTestUtils.appendNewLine("def func(): pass")));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("def func(): pass"));
   }
 
 }

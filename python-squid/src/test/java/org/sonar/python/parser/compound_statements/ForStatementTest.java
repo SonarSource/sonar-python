@@ -28,8 +28,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.parser.PythonTestUtils;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ForStatementTest {
 
@@ -47,14 +46,14 @@ public class ForStatementTest {
     g.testlist.mock();
     g.suite.mock();
 
-    assertThat(p, parse("for exprlist in testlist : suite"));
-    assertThat(p, parse("for exprlist in testlist : suite else : suite"));
+    assertThat(p).matches("for exprlist in testlist : suite");
+    assertThat(p).matches("for exprlist in testlist : suite else : suite");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse(PythonTestUtils.appendNewLine("for i in [0,2] : pass")));
-    assertThat(p, parse(PythonTestUtils.appendNewLine("for x in [0,10] : print(x)")));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("for i in [0,2] : pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("for x in [0,10] : print(x)"));
   }
 
 }

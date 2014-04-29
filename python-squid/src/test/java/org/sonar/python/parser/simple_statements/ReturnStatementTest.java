@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ReturnStatementTest {
 
@@ -42,15 +41,13 @@ public class ReturnStatementTest {
 
   @Test
   public void ok() {
-    g.testlist.mock();
-
-    assertThat(p, parse("return"));
-    assertThat(p, parse("return testlist"));
+    assertThat(p).matches("return");
+    assertThat(p).matches("return testlist");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("return"));
+    assertThat(p).matches("return");
   }
 
 }

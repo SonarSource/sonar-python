@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class WhileStatementTest {
 
@@ -45,8 +44,8 @@ public class WhileStatementTest {
     g.test.mock();
     g.suite.mock();
 
-    assertThat(p, parse("while test : suite"));
-    assertThat(p, parse("while test : suite else : suite"));
+    assertThat(p).matches("while test : suite");
+    assertThat(p).matches("while test : suite else : suite");
   }
 
 }

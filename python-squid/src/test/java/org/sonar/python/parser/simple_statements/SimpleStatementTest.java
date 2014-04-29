@@ -26,9 +26,9 @@ import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.sslr.tests.Assertions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class SimpleStatementTest {
 
@@ -42,43 +42,28 @@ public class SimpleStatementTest {
 
   @Test
   public void ok() {
-    g.print_stmt.mock();
-    g.exec_stmt.mock();
-    g.expression_stmt.mock();
-    g.assert_stmt.mock();
-    g.pass_stmt.mock();
-    g.del_stmt.mock();
-    g.return_stmt.mock();
-    g.yield_stmt.mock();
-    g.raise_stmt.mock();
-    g.break_stmt.mock();
-    g.continue_stmt.mock();
-    g.import_stmt.mock();
-    g.global_stmt.mock();
-    g.nonlocal_stmt.mock();
-
-    assertThat(p, parse("print_stmt"));
-    assertThat(p, parse("exec_stmt"));
-    assertThat(p, parse("expression_stmt"));
-    assertThat(p, parse("assert_stmt"));
-    assertThat(p, parse("pass_stmt"));
-    assertThat(p, parse("del_stmt"));
-    assertThat(p, parse("return_stmt"));
-    assertThat(p, parse("yield_stmt"));
-    assertThat(p, parse("raise_stmt"));
-    assertThat(p, parse("break_stmt"));
-    assertThat(p, parse("continue_stmt"));
-    assertThat(p, parse("import_stmt"));
-    assertThat(p, parse("global_stmt"));
-    assertThat(p, parse("nonlocal_stmt"));
+    assertThat(p).matches("print_stmt");
+    assertThat(p).matches("exec_stmt");
+    assertThat(p).matches("expression_stmt");
+    assertThat(p).matches("assert_stmt");
+    assertThat(p).matches("pass_stmt");
+    assertThat(p).matches("del_stmt");
+    assertThat(p).matches("return_stmt");
+    assertThat(p).matches("yield_stmt");
+    assertThat(p).matches("raise_stmt");
+    assertThat(p).matches("break_stmt");
+    assertThat(p).matches("continue_stmt");
+    assertThat(p).matches("import_stmt");
+    assertThat(p).matches("global_stmt");
+    assertThat(p).matches("nonlocal_stmt");
   }
 
   @Test
   public void realLife() {
-    assertThat(p, parse("print 'Hello world'"));
-    assertThat(p, parse("exec 'print 1'"));
-    assertThat(p, parse("i += 1"));
-    assertThat(p, parse("print('something', file=out_file)"));
+    assertThat(p).matches("print 'Hello world'");
+    assertThat(p).matches("exec 'print 1'");
+    assertThat(p).matches("i += 1");
+    assertThat(p).matches("print('something', file=out_file)");
   }
 
 }

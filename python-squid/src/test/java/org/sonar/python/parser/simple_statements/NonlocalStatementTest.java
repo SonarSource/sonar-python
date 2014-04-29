@@ -27,8 +27,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class NonlocalStatementTest {
 
@@ -42,8 +41,8 @@ public class NonlocalStatementTest {
 
   @Test
   public void ok() {
-    assertThat(p, parse("nonlocal IDENTIFIER"));
-    assertThat(p, parse("nonlocal IDENTIFIER , IDENTIFIER"));
+    assertThat(p).matches("nonlocal IDENTIFIER");
+    assertThat(p).matches("nonlocal IDENTIFIER , IDENTIFIER");
   }
 
 }
