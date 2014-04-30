@@ -83,7 +83,7 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   private void parseReport(Project project, SensorContext context, File report) throws javax.xml.stream.XMLStreamException {
-    log.info("Parsing report '{}'", report);
+    LOG.info("Parsing report '{}'", report);
 
     TestSuiteParser parserHandler = new TestSuiteParser();
     StaxParser parser = new StaxParser(parserHandler, false);
@@ -94,8 +94,8 @@ public class PythonXunitSensor extends PythonReportSensor {
     for (TestSuite fileReport : locatedResources) {
       org.sonar.api.resources.File unitTest = fileReport.getSonarResource();
 
-      log.debug("Saving test execution measures for file '{}' under resource '{}'",
-          fileReport.getKey(), unitTest);
+      LOG.debug("Saving test execution measures for file '{}' under resource '{}'",
+        fileReport.getKey(), unitTest);
 
       double testsCount = fileReport.getTests() - fileReport.getSkipped();
       context.saveMeasure(unitTest, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
@@ -143,16 +143,15 @@ public class PythonXunitSensor extends PythonReportSensor {
 
       org.sonar.api.resources.File resource = findResource(project, context, fileKey);
       if (resource == null) {
-        log.debug("Cannot find the resource for {}, creating a virtual one", fileKey);
+        LOG.debug("Cannot find the resource for {}, creating a virtual one", fileKey);
         resource = createVirtualFile(context, fileKey);
       }
 
       TestSuite summaryReport = locatedReports.get(resource.getKey());
       if (summaryReport != null) {
-        log.debug("Adding measures of {} to {}", summaryReport.getKey(), report.getKey());
+        LOG.debug("Adding measures of {} to {}", summaryReport.getKey(), report.getKey());
         summaryReport.addMeasures(report);
-      }
-      else {
+      } else {
         report.setSonarResource(resource);
         locatedReports.put(resource.getKey(), report);
       }
@@ -162,7 +161,7 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   private org.sonar.api.resources.File createVirtualFile(SensorContext context,
-      String filename) {
+                                                         String filename) {
     org.sonar.api.resources.File virtualFile = new org.sonar.api.resources.File(this.lang, filename);
     virtualFile.setQualifier(Qualifiers.UNIT_TEST_FILE);
     context.saveSource(virtualFile, "<source code could not be found>");

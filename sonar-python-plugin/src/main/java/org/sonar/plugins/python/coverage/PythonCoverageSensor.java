@@ -69,11 +69,11 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
   public void analyse(Project project, SensorContext context) {
     List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
-    log.debug("Parsing coverage reports");
+    LOG.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
     saveMeasures(project, context, coverageMeasures, false);
 
-    log.debug("Parsing integration test coverage reports");
+    LOG.debug("Parsing integration test coverage reports");
     List<File> itReports = getReports(conf, fileSystem.baseDir().getPath(), IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     coverageMeasures = parseReports(itReports);
     saveMeasures(project, context, coverageMeasures, true);
@@ -100,13 +100,13 @@ public class PythonCoverageSensor extends PythonReportSensor {
       org.sonar.api.resources.File pythonfile =
         org.sonar.api.resources.File.fromIOFile(new File(filePath), project);
       if (fileExist(context, pythonfile)) {
-        log.debug("Saving coverage measures for file '{}'", filePath);
+        LOG.debug("Saving coverage measures for file '{}'", filePath);
         for (Measure measure : entry.getValue().createMeasures()) {
           measure = itTest ? convertToItMeasure(measure) : measure;
           context.saveMeasure(pythonfile, measure);
         }
       } else {
-        log.debug("Cannot find the file '{}', ignoring coverage measures", filePath);
+        LOG.debug("Cannot find the file '{}', ignoring coverage measures", filePath);
       }
     }
   }

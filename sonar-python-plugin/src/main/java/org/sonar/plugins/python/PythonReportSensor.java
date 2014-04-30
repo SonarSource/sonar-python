@@ -36,7 +36,7 @@ import java.util.List;
 
 public abstract class PythonReportSensor implements Sensor {
 
-  protected Logger log = LoggerFactory.getLogger(getClass());
+  protected static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
 
   protected Settings conf = null;
   protected ModuleFileSystem fileSystem;
@@ -54,7 +54,7 @@ public abstract class PythonReportSensor implements Sensor {
     try {
       List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), reportPathKey(), defaultReportPath());
       for (File report : reports) {
-        log.info("Processing report '{}'", report);
+        LOG.info("Processing report '{}'", report);
         processReport(project, context, report);
       }
 
@@ -85,7 +85,7 @@ public abstract class PythonReportSensor implements Sensor {
       reportPath = defaultReportPath;
     }
 
-    log.debug("Using pattern '{}' to find reports", reportPath);
+    LOG.debug("Using pattern '{}' to find reports", reportPath);
 
     DirectoryScanner scanner = new DirectoryScanner();
     String[] includes = { reportPath };
