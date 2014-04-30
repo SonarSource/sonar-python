@@ -31,7 +31,7 @@ import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.and;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.one2n;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.opt;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.or;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.firstOf;
 import static org.sonar.python.api.PythonTokenType.DEDENT;
 import static org.sonar.python.api.PythonTokenType.INDENT;
 import static org.sonar.python.api.PythonTokenType.NEWLINE;
@@ -55,28 +55,28 @@ public class PythonGrammarImpl extends PythonGrammar {
   private void grammar() {
     expression_stmt.is(
         testlist_star_expr,
-        or(
-            and(augassign, or(yield_expr, testlist)),
-            and(o2n("=", or(yield_expr, testlist_star_expr)))));
-    testlist_star_expr.is(or(test, star_expr), o2n(",", or(test, star_expr)), opt(","));
-    augassign.is(or("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|="));
+        firstOf(
+            and(augassign, firstOf(yield_expr, testlist)),
+            and(o2n("=", firstOf(yield_expr, testlist_star_expr)))));
+    testlist_star_expr.is(firstOf(test, star_expr), o2n(",", firstOf(test, star_expr)), opt(","));
+    augassign.is(firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|="));
 
-    test.is(or(
+    test.is(firstOf(
         and(or_test, opt("if", or_test, "else", test)),
         lambdef));
-    test_nocond.is(or(or_test, lambdef_nocond));
+    test_nocond.is(firstOf(or_test, lambdef_nocond));
     lambdef.is("lambda", opt(varargslist), ":", test);
     lambdef_nocond.is("lambda", opt(varargslist), ":", test_nocond);
 
     star_expr.is("*", expr);
     expr.is(xor_expr, o2n("|", xor_expr));
 
-    factor.is(or(
-        and(or("+", "-", "~"), factor),
+    factor.is(firstOf(
+        and(firstOf("+", "-", "~"), factor),
         power)).skipIfOneChild();
     power.is(atom, o2n(trailer), opt("**", factor));
-    atom.is(or(
-        and("(", opt(or(yield_expr, testlist_comp)), ")"),
+    atom.is(firstOf(
+        and("(", opt(firstOf(yield_expr, testlist_comp)), ")"),
         and("[", opt(testlist_comp), "]"),
         and("{", opt(dictorsetmaker), "}"),
         and("`", test, o2n(",", test), "`"),
@@ -87,41 +87,41 @@ public class PythonGrammarImpl extends PythonGrammar {
         PythonKeyword.NONE,
         PythonKeyword.TRUE,
         PythonKeyword.FALSE));
-    testlist_comp.is(or(test, star_expr), or(comp_for, and(o2n(",", or(test, star_expr)), opt(","))));
-    trailer.is(or(
+    testlist_comp.is(firstOf(test, star_expr), firstOf(comp_for, and(o2n(",", firstOf(test, star_expr)), opt(","))));
+    trailer.is(firstOf(
         and("(", opt(arglist), ")"),
         and("[", subscriptlist, "]"),
         and(".", name)));
     subscriptlist.is(subscript, o2n(",", subscript), opt(","));
-    subscript.is(or(
+    subscript.is(firstOf(
         and(".", ".", "."),
         and(opt(test), ":", opt(test), opt(sliceop)),
         test));
     sliceop.is(":", opt(test));
-    exprlist.is(or(expr, star_expr), o2n(",", or(expr, star_expr)), opt(","));
+    exprlist.is(firstOf(expr, star_expr), o2n(",", firstOf(expr, star_expr)), opt(","));
     testlist.is(test, o2n(",", test), opt(","));
-    dictorsetmaker.is(or(
-        and(test, ":", test, or(comp_for, and(o2n(",", test, ":", test), opt(",")))),
-        and(test, or(comp_for, and(o2n(",", test), opt(","))))));
+    dictorsetmaker.is(firstOf(
+        and(test, ":", test, firstOf(comp_for, and(o2n(",", test, ":", test), opt(",")))),
+        and(test, firstOf(comp_for, and(o2n(",", test), opt(","))))));
 
-    arglist.is(or(
+    arglist.is(firstOf(
             and(o2n(argument, ","), "*", test, o2n(",", argument), opt(",", "**", test)),
             and(o2n(argument, ","), "**", test),
             and(opt(argument, o2n(",", argument), opt(",")))));
-    argument.is(or(
+    argument.is(firstOf(
         and(test, "=", test),
         and(test, opt(comp_for))));
-    comp_iter.is(or(comp_for, comp_if));
+    comp_iter.is(firstOf(comp_for, comp_if));
     comp_for.is("for", exprlist, "in", or_test, opt(comp_iter));
     comp_if.is("if", test_nocond, opt(comp_iter));
 
     yield_expr.is("yield", opt(testlist));
 
     name.is(IDENTIFIER);
-    varargslist.is(or(
-        and(o2n(fpdef, opt("=", test), ","), or(and("*", name, opt(",", "**", name)), and("**", name))),
+    varargslist.is(firstOf(
+        and(o2n(fpdef, opt("=", test), ","), firstOf(and("*", name, opt(",", "**", name)), and("**", name))),
         and(fpdef, opt("=", test), o2n(",", fpdef, opt("=", test)), opt(","))));
-    fpdef.is(or(
+    fpdef.is(firstOf(
         name,
         and("(", fplist, ")")));
     fplist.is(fpdef, o2n(",", fpdef), opt(","));
@@ -132,17 +132,17 @@ public class PythonGrammarImpl extends PythonGrammar {
    * http://docs.python.org/reference/expressions.html
    */
   private void expressions() {
-    m_expr.is(factor, o2n(or("*", "//", "/", "%"), factor)).skipIfOneChild();
-    a_expr.is(m_expr, o2n(or("+", "-"), m_expr)).skipIfOneChild();
+    m_expr.is(factor, o2n(firstOf("*", "//", "/", "%"), factor)).skipIfOneChild();
+    a_expr.is(m_expr, o2n(firstOf("+", "-"), m_expr)).skipIfOneChild();
 
-    shift_expr.is(a_expr, o2n(or("<<", ">>"), a_expr)).skipIfOneChild();
+    shift_expr.is(a_expr, o2n(firstOf("<<", ">>"), a_expr)).skipIfOneChild();
 
     and_expr.is(shift_expr, o2n("&", shift_expr)).skipIfOneChild();
     xor_expr.is(and_expr, o2n("^", and_expr)).skipIfOneChild();
     or_expr.is(xor_expr, o2n("|", xor_expr)).skipIfOneChild();
 
     comparison.is(or_expr, o2n(comp_operator, or_expr)).skipIfOneChild();
-    comp_operator.is(or(
+    comp_operator.is(firstOf(
         "<",
         ">",
         "==",
@@ -155,7 +155,7 @@ public class PythonGrammarImpl extends PythonGrammar {
 
     or_test.is(and_test, o2n("or", and_test)).skipIfOneChild();
     and_test.is(not_test, o2n("and", not_test)).skipIfOneChild();
-    not_test.is(or(comparison, and("not", not_test))).skipIfOneChild();
+    not_test.is(firstOf(comparison, and("not", not_test))).skipIfOneChild();
   }
 
   /**
@@ -163,7 +163,7 @@ public class PythonGrammarImpl extends PythonGrammar {
    * http://docs.python.org/reference/simple_stmts.html
    */
   private void simpleStatements() {
-    simple_stmt.is(or(
+    simple_stmt.is(firstOf(
         permissive_2_7(print_stmt),
         permissive_2_7(exec_stmt),
         expression_stmt,
@@ -179,7 +179,7 @@ public class PythonGrammarImpl extends PythonGrammar {
         global_stmt,
         nonlocal_stmt));
 
-    print_stmt.is("print", not("("), or(
+    print_stmt.is("print", not("("), firstOf(
         and(">>", test, opt(one2n(",", test), opt(","))),
         and(opt(test, o2n(",", test), opt(",")))));
 
@@ -191,13 +191,13 @@ public class PythonGrammarImpl extends PythonGrammar {
     del_stmt.is("del", exprlist);
     return_stmt.is("return", opt(testlist));
     yield_stmt.is(yield_expr);
-    raise_stmt.is("raise", opt(test, opt(or(and("from", test), permissive_2_7(",", test, opt(",", test))))));
+    raise_stmt.is("raise", opt(test, opt(firstOf(and("from", test), permissive_2_7(",", test, opt(",", test))))));
     break_stmt.is("break");
     continue_stmt.is("continue");
 
-    import_stmt.is(or(import_name, import_from));
+    import_stmt.is(firstOf(import_name, import_from));
     import_name.is("import", dotted_as_names);
-    import_from.is("from", or(and(o2n("."), dotted_name), one2n(".")), "import", or("*", and("(", import_as_names, ")"), import_as_names));
+    import_from.is("from", firstOf(and(o2n("."), dotted_name), one2n(".")), "import", firstOf("*", and("(", import_as_names, ")"), import_as_names));
     import_as_name.is(name, opt("as", name));
     dotted_as_name.is(dotted_name, opt("as", name));
     import_as_names.is(import_as_name, o2n(",", import_as_name), opt(","));
@@ -212,7 +212,7 @@ public class PythonGrammarImpl extends PythonGrammar {
    * http://docs.python.org/reference/compound_stmts.html
    */
   private void compoundStatements() {
-    compound_stmt.is(or(
+    compound_stmt.is(firstOf(
         if_stmt,
         while_stmt,
         for_stmt,
@@ -220,10 +220,10 @@ public class PythonGrammarImpl extends PythonGrammar {
         with_stmt,
         funcdef,
         classdef));
-    suite.is(or(
+    suite.is(firstOf(
         and(stmt_list, NEWLINE),
         and(NEWLINE, INDENT, one2n(statement), DEDENT)));
-    statement.is(or(
+    statement.is(firstOf(
         and(stmt_list, NEWLINE),
         compound_stmt,
         permissive(stmt_list)));
@@ -233,8 +233,8 @@ public class PythonGrammarImpl extends PythonGrammar {
     while_stmt.is("while", test, ":", suite, opt("else", ":", suite));
     for_stmt.is("for", exprlist, "in", testlist, ":", suite, opt("else", ":", suite));
 
-    try_stmt.is("try", ":", suite, or(and(o2n(except_clause, ":", suite), opt("else", ":", suite), opt("finally", ":", suite)), and("finally", ":", suite)));
-    except_clause.is("except", opt(test, opt(or("as", ","), test)));
+    try_stmt.is("try", ":", suite, firstOf(and(o2n(except_clause, ":", suite), opt("else", ":", suite), opt("finally", ":", suite)), and("finally", ":", suite)));
+    except_clause.is("except", opt(test, opt(firstOf("as", ","), test)));
 
     with_stmt.is("with", with_item, o2n(",", with_item), ":", suite);
     with_item.is(test, opt("as", expr));
@@ -255,7 +255,7 @@ public class PythonGrammarImpl extends PythonGrammar {
    * http://docs.python.org/reference/toplevel_components.html
    */
   private void toplevel() {
-    file_input.is(o2n(or(NEWLINE, statement)), EOF);
+    file_input.is(o2n(firstOf(NEWLINE, statement)), EOF);
   }
 
   /**
