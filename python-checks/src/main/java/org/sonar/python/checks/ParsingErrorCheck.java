@@ -19,13 +19,12 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AuditListener;
 import com.sonar.sslr.api.RecognitionException;
-import org.sonar.squidbridge.AstScannerExceptionHandler;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.AstScannerExceptionHandler;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
