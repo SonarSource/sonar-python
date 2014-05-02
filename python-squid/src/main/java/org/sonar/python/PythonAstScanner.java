@@ -106,7 +106,7 @@ public final class PythonAstScanner {
     /* Classes */
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getChild(0).getTokenValue();
+        String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild().getTokenValue();
         SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
         function.setStartAtLine(astNode.getTokenLine());
         return function;
@@ -121,7 +121,7 @@ public final class PythonAstScanner {
     /* Functions */
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getChild(0).getTokenValue();
+        String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild().getTokenValue();
         SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
         function.setStartAtLine(astNode.getTokenLine());
         return function;

@@ -166,7 +166,7 @@ public enum PythonGrammar implements GrammarRuleKey {
       TESTLIST_STAR_EXPR,
       b.firstOf(
         b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
-        b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR)))); // FIXME removed b.sequence correct ?
+        b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR))));
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|="));
 
@@ -216,7 +216,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(ARGLIST).is(b.firstOf(
       b.sequence(b.zeroOrMore(ARGUMENT, ","), "*", TEST, b.zeroOrMore(",", ARGUMENT), b.optional(",", "**", TEST)),
       b.sequence(b.zeroOrMore(ARGUMENT, ","), "**", TEST),
-      b.optional(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(",")))); // FIXME removed b.sequence(..) correct ?
+      b.optional(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","))));
     b.rule(ARGUMENT).is(b.firstOf(
       b.sequence(TEST, "=", TEST),
       b.sequence(TEST, b.optional(COMP_FOR))));

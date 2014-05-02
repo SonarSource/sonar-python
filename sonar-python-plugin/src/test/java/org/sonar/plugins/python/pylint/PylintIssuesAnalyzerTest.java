@@ -150,7 +150,7 @@ public class PylintIssuesAnalyzerTest {
 
   private List<String> getIds(List<Issue> issues){
     List<String> ids = new LinkedList<String>();
-    for(Issue issue: issues) ids.add(issue.ruleId);
+    for(Issue issue: issues) ids.add(issue.getRuleId());
     return ids;
   }
 }

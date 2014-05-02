@@ -21,11 +21,11 @@ package org.sonar.plugins.python.pylint;
 
 class Issue {
 
-  public final String filename;
-  public final int line;
-  public final String ruleId;
-  public final String objname;
-  public final String descr;
+  private final String filename;
+  private final int line;
+  private final String ruleId;
+  private final String objname;
+  private final String descr;
 
   Issue(String filename, int line, String ruleId, String objname, String descr) {
     this.filename = filename;
@@ -40,4 +40,23 @@ class Issue {
     return "(" + filename + ", " + line + ", " + ruleId + ", " + objname + ", " + descr + ")";
   }
 
+  String getFilename() {
+    return filename;
+  }
+
+  int getLine() {
+    return line;
+  }
+
+  String getRuleId() {
+    return ruleId;
+  }
+
+  String getObjname() {
+    return objname;
+  }
+
+  String getDescr() {
+    return descr;
+  }
 }

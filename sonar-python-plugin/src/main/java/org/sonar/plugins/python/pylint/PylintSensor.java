@@ -96,7 +96,7 @@ public class PylintSensor implements Sensor {
     List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.sourceCharset(), out);
 
     for (Issue pylintIssue : issues) {
-      Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.ruleId);
+      Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId());
 
       if (rule != null) {
         if (rule.isEnabled()) {
@@ -105,16 +105,16 @@ public class PylintSensor implements Sensor {
           if (issuable != null) {
             org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
               .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getKey()))
-              .line(pylintIssue.line)
-              .message(pylintIssue.descr)
+              .line(pylintIssue.getLine())
+              .message(pylintIssue.getDescr())
               .build();
             issuable.addIssue(issue);
           }
         } else {
-          LOG.debug("Pylint rule '{}' is disabled in Sonar", pylintIssue.ruleId);
+          LOG.debug("Pylint rule '{}' is disabled in Sonar", pylintIssue.getRuleId());
         }
       } else {
-        LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.ruleId);
+        LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
       }
     }
   }
