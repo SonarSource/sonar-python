@@ -21,17 +21,17 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "LineLength",
   priority = Priority.MINOR)
-public class LineLengthCheck extends SquidCheck<PythonGrammar> implements AstAndTokenVisitor {
+public class LineLengthCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
   private static final int DEFAULT_MAXIMUM_LINE_LENHGTH = 80;
 
@@ -67,10 +67,10 @@ public class LineLengthCheck extends SquidCheck<PythonGrammar> implements AstAnd
           if (length > getMaximumLineLength()) {
             // Note that method from AbstractLineLengthCheck generates other message - see SONARPLUGINS-1809
             getContext().createLineViolation(this,
-                "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
-                previousToken.getLine(),
-                length,
-                getMaximumLineLength());
+              "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
+              previousToken.getLine(),
+              length,
+              getMaximumLineLength());
           }
           length = 0;
         }

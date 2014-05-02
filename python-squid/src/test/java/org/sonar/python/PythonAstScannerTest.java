@@ -21,10 +21,10 @@ package org.sonar.python;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
-import org.sonar.squidbridge.AstScanner;
+import com.sonar.sslr.api.Grammar;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
+import org.sonar.squidbridge.AstScanner;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceProject;
 import org.sonar.squidbridge.indexer.QueryByType;
@@ -37,7 +37,7 @@ public class PythonAstScannerTest {
 
   @Test
   public void files() {
-    AstScanner<PythonGrammar> scanner = PythonAstScanner.create(new PythonConfiguration(Charsets.UTF_8));
+    AstScanner<Grammar> scanner = PythonAstScanner.create(new PythonConfiguration(Charsets.UTF_8));
     scanner.scanFiles(ImmutableList.of(new File("src/test/resources/metrics/lines.py"), new File("src/test/resources/metrics/comments.py")));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
     assertThat(project.getInt(PythonMetric.FILES)).isEqualTo(2);

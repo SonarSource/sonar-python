@@ -20,12 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
+import org.sonar.python.api.PythonGrammarBis;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.api.SourceFunction;
 
@@ -33,7 +34,7 @@ import org.sonar.squidbridge.api.SourceFunction;
   key = "FunctionComplexity",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class FunctionComplexityCheck extends SquidCheck<PythonGrammar> {
+public class FunctionComplexityCheck extends SquidCheck<Grammar> {
 
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 10;
 
@@ -44,7 +45,7 @@ public class FunctionComplexityCheck extends SquidCheck<PythonGrammar> {
 
   @Override
   public void init() {
-    subscribeTo(getContext().getGrammar().funcdef);
+    subscribeTo(PythonGrammarBis.FUNCDEF);
   }
 
   @Override

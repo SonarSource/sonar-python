@@ -20,7 +20,6 @@
 
 package org.sonar.plugins.python.xunit;
 
-import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.CoverageExtension;
@@ -30,7 +29,6 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
-import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.TestUtils;
 
@@ -54,7 +52,7 @@ public class PythonXunitSensorTest {
   public void setUp() {
     settings = new Settings();
     project = TestUtils.mockProject();
-    fs  = TestUtils.mockFileSystem();
+    fs = TestUtils.mockFileSystem();
     sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
     context = mock(SensorContext.class);
   }
@@ -69,15 +67,15 @@ public class PythonXunitSensorTest {
     sensor.analyse(project, context);
 
     verify(context, times(4)).saveMeasure((Resource) anyObject(),
-        eq(CoreMetrics.TESTS), anyDouble());
+      eq(CoreMetrics.TESTS), anyDouble());
     verify(context, times(4)).saveMeasure((Resource) anyObject(),
-        eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
+      eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
     verify(context, times(4)).saveMeasure((Resource) anyObject(),
-        eq(CoreMetrics.TEST_ERRORS), anyDouble());
+      eq(CoreMetrics.TEST_ERRORS), anyDouble());
     verify(context, times(4)).saveMeasure((Resource) anyObject(),
-        eq(CoreMetrics.TEST_FAILURES), anyDouble());
+      eq(CoreMetrics.TEST_FAILURES), anyDouble());
     verify(context, times(3)).saveMeasure((Resource) anyObject(),
-        eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
+      eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
     verify(context, times(4)).saveMeasure((Resource) anyObject(), any(Measure.class));
   }
 
@@ -91,7 +89,7 @@ public class PythonXunitSensorTest {
     verify(context, times(1)).saveMeasure(eq(CoreMetrics.TESTS), eq(0.0));
   }
 
-  @Test(expected=org.sonar.api.utils.SonarException.class)
+  @Test(expected = org.sonar.api.utils.SonarException.class)
   public void shouldThrowWhenGivenInvalidTime() {
     settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
     sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);

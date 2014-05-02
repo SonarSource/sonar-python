@@ -20,13 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.squidbridge.checks.ChecksHelper;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.api.SourceFile;
 
@@ -34,7 +34,7 @@ import org.sonar.squidbridge.api.SourceFile;
   key = "FileComplexity",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class FileComplexityCheck extends SquidCheck<PythonGrammar> {
+public class FileComplexityCheck extends SquidCheck<Grammar> {
 
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 80;
 

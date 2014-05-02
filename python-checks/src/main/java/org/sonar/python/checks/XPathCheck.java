@@ -20,18 +20,18 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.squidbridge.checks.AbstractXPathCheck;
 import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
 
 @Rule(
   key = "XPath",
   priority = Priority.MAJOR,
   cardinality = Cardinality.MULTIPLE)
-public class XPathCheck extends AbstractXPathCheck<PythonGrammar> {
+public class XPathCheck extends AbstractXPathCheck<Grammar> {
 
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";

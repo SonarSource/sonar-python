@@ -20,27 +20,28 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.squidbridge.checks.SquidCheck;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonGrammarBis;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "PreIncrementDecrement",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class PreIncrementDecrementCheck extends SquidCheck<PythonGrammar> {
+public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(getContext().getGrammar().factor);
+    subscribeTo(PythonGrammarBis.FACTOR);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (astNode.getFirstChild().is(PythonPunctuator.PLUS) &&  astNode.getChild(1).getFirstChild().is(PythonPunctuator.PLUS)) {
+    if (astNode.getFirstChild().is(PythonPunctuator.PLUS) && astNode.getChild(1).getFirstChild().is(PythonPunctuator.PLUS)) {
       getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-increment operator", astNode);
     }
     if (astNode.getFirstChild().is(PythonPunctuator.MINUS) && astNode.getChild(1).getFirstChild().is(PythonPunctuator.MINUS)) {

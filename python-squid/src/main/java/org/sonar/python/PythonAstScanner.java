@@ -22,19 +22,28 @@ package org.sonar.python;
 import com.google.common.base.Charsets;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
-import org.sonar.squidbridge.CommentAnalyser;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
-import org.sonar.squidbridge.*;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonMetric;
+import org.sonar.python.parser.PythonParser;
+import org.sonar.squidbridge.AstScanner;
+import org.sonar.squidbridge.CommentAnalyser;
+import org.sonar.squidbridge.SourceCodeBuilderCallback;
+import org.sonar.squidbridge.SourceCodeBuilderVisitor;
+import org.sonar.squidbridge.SquidAstVisitor;
+import org.sonar.squidbridge.SquidAstVisitorContextImpl;
+import org.sonar.squidbridge.api.SourceClass;
+import org.sonar.squidbridge.api.SourceCode;
+import org.sonar.squidbridge.api.SourceFile;
+import org.sonar.squidbridge.api.SourceFunction;
+import org.sonar.squidbridge.api.SourceProject;
+import org.sonar.squidbridge.indexer.QueryByType;
 import org.sonar.squidbridge.metrics.CommentsVisitor;
 import org.sonar.squidbridge.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.metrics.CounterVisitor;
 import org.sonar.squidbridge.metrics.LinesVisitor;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonMetric;
-import org.sonar.python.parser.PythonParser;
-import org.sonar.squidbridge.api.*;
-import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
 import java.util.Collection;
@@ -47,11 +56,11 @@ public final class PythonAstScanner {
   /**
    * Helper method for testing checks without having to deploy them on a Sonar instance.
    */
-  public static SourceFile scanSingleFile(File file, SquidAstVisitor<PythonGrammar>... visitors) {
+  public static SourceFile scanSingleFile(File file, SquidAstVisitor<Grammar>... visitors) {
     if (!file.isFile()) {
       throw new IllegalArgumentException("File '" + file + "' not found.");
     }
-    AstScanner<PythonGrammar> scanner = create(new PythonConfiguration(Charsets.UTF_8), visitors);
+    AstScanner<Grammar> scanner = create(new PythonConfiguration(Charsets.UTF_8), visitors);
     scanner.scanFile(file);
     Collection<SourceCode> sources = scanner.getIndex().search(new QueryByType(SourceFile.class));
     if (sources.size() != 1) {
@@ -60,11 +69,11 @@ public final class PythonAstScanner {
     return (SourceFile) sources.iterator().next();
   }
 
-  public static AstScanner<PythonGrammar> create(PythonConfiguration conf, SquidAstVisitor<PythonGrammar>... visitors) {
-    final SquidAstVisitorContextImpl<PythonGrammar> context = new SquidAstVisitorContextImpl<PythonGrammar>(new SourceProject("Python Project"));
-    final Parser<PythonGrammar> parser = PythonParser.create(conf);
+  public static AstScanner<Grammar> create(PythonConfiguration conf, SquidAstVisitor<Grammar>... visitors) {
+    final SquidAstVisitorContextImpl<Grammar> context = new SquidAstVisitorContextImpl<Grammar>(new SourceProject("Python Project"));
+    final Parser<Grammar> parser = PythonParser.create(conf);
 
-    AstScanner.Builder<PythonGrammar> builder = AstScanner.<PythonGrammar> builder(context).setBaseParser(parser);
+    AstScanner.Builder<Grammar> builder = AstScanner.<Grammar>builder(context).setBaseParser(parser);
 
     /* Metrics */
     builder.withMetrics(PythonMetric.values());
@@ -74,90 +83,93 @@ public final class PythonAstScanner {
 
     /* Comments */
     builder.setCommentAnalyser(
-        new CommentAnalyser() {
-          @Override
-          public boolean isBlank(String line) {
-            for (int i = 0; i < line.length(); i++) {
-              if (Character.isLetterOrDigit(line.charAt(i))) {
-                return false;
-              }
+      new CommentAnalyser() {
+        @Override
+        public boolean isBlank(String line) {
+          for (int i = 0; i < line.length(); i++) {
+            if (Character.isLetterOrDigit(line.charAt(i))) {
+              return false;
             }
-            return true;
           }
+          return true;
+        }
 
-          @Override
-          public String getContents(String comment) {
-            // Comment always starts with "#"
-            return comment.substring(comment.indexOf('#'));
-          }
-        });
+        @Override
+        public String getContents(String comment) {
+          // Comment always starts with "#"
+          return comment.substring(comment.indexOf('#'));
+        }
+      });
 
-    /* Functions */
-    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<PythonGrammar>(new SourceCodeBuilderCallback() {
-      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.findFirstChild(parser.getGrammar().funcname).getChild(0).getTokenValue();
-        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
-        function.setStartAtLine(astNode.getTokenLine());
-        return function;
-      }
-    }, parser.getGrammar().funcdef));
 
-    builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
-        .setMetricDef(PythonMetric.FUNCTIONS)
-        .subscribeTo(parser.getGrammar().funcdef)
-        .build());
 
     /* Classes */
-    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<PythonGrammar>(new SourceCodeBuilderCallback() {
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.findFirstChild(parser.getGrammar().classname).getChild(0).getTokenValue();
+        String functionName = astNode.getFirstChild(PythonGrammarBis.CLASSNAME).getChild(0).getTokenValue();
         SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
         function.setStartAtLine(astNode.getTokenLine());
         return function;
       }
-    }, parser.getGrammar().classdef));
+    }, PythonGrammarBis.CLASSDEF));
 
-    builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
-        .setMetricDef(PythonMetric.CLASSES)
-        .subscribeTo(parser.getGrammar().classdef)
-        .build());
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
+      .setMetricDef(PythonMetric.CLASSES)
+      .subscribeTo(PythonGrammarBis.CLASSDEF)
+      .build());
+
+    /* Functions */
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
+      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
+        String functionName = astNode.getFirstChild(PythonGrammarBis.FUNCNAME).getChild(0).getTokenValue();
+        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
+        function.setStartAtLine(astNode.getTokenLine());
+        return function;
+      }
+    }, PythonGrammarBis.FUNCDEF));
+
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
+      .setMetricDef(PythonMetric.FUNCTIONS)
+      .subscribeTo(PythonGrammarBis.FUNCDEF)
+      .build());
 
     /* Metrics */
-    builder.withSquidAstVisitor(new LinesVisitor<PythonGrammar>(PythonMetric.LINES));
-    builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<PythonGrammar>(PythonMetric.LINES_OF_CODE));
-    builder.withSquidAstVisitor(CommentsVisitor.<PythonGrammar> builder().withCommentMetric(PythonMetric.COMMENT_LINES)
-        .withNoSonar(true)
-        .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
-        .build());
-    builder.withSquidAstVisitor(CounterVisitor.<PythonGrammar> builder()
-        .setMetricDef(PythonMetric.STATEMENTS)
-        .subscribeTo(parser.getGrammar().statement)
-        .build());
-
-    AstNodeType[] complexityAstNodeType = new AstNodeType[] {
+    builder.withSquidAstVisitor(new LinesVisitor<Grammar>(PythonMetric.LINES));
+    builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<Grammar>(PythonMetric.LINES_OF_CODE));
+    AstNodeType[] complexityAstNodeType = new AstNodeType[]{
       // Entry points
-      parser.getGrammar().funcdef,
+      PythonGrammarBis.FUNCDEF,
 
       // Branching nodes
-      // Note that if_stmt covered by PythonKeyword.IF below
-      parser.getGrammar().while_stmt,
-      parser.getGrammar().for_stmt,
-      parser.getGrammar().return_stmt,
-      parser.getGrammar().raise_stmt,
-      parser.getGrammar().except_clause,
+      // Note that IF_STMT covered by PythonKeyword.IF below
+      PythonGrammarBis.WHILE_STMT,
+      PythonGrammarBis.FOR_STMT,
+      PythonGrammarBis.RETURN_STMT,
+      PythonGrammarBis.RAISE_STMT,
+      PythonGrammarBis.EXCEPT_CLAUSE,
 
       // Expressions
       PythonKeyword.IF,
       PythonKeyword.AND,
       PythonKeyword.OR
     };
-    builder.withSquidAstVisitor(ComplexityVisitor.<PythonGrammar> builder()
-        .setMetricDef(PythonMetric.COMPLEXITY)
-        .subscribeTo(complexityAstNodeType)
-        .build());
+    builder.withSquidAstVisitor(ComplexityVisitor.<Grammar>builder()
+      .setMetricDef(PythonMetric.COMPLEXITY)
+      .subscribeTo(complexityAstNodeType)
+      .build());
+
+    builder.withSquidAstVisitor(CommentsVisitor.<Grammar>builder().withCommentMetric(PythonMetric.COMMENT_LINES)
+      .withNoSonar(true)
+      .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
+      .build());
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
+      .setMetricDef(PythonMetric.STATEMENTS)
+      .subscribeTo(PythonGrammarBis.STATEMENT)
+      .build());
+
 
     /* External visitors (typically Check ones) */
-    for (SquidAstVisitor<PythonGrammar> visitor : visitors) {
+    for (SquidAstVisitor<Grammar> visitor : visitors) {
       builder.withSquidAstVisitor(visitor);
     }
 

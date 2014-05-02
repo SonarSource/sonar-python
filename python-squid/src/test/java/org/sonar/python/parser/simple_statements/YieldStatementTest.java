@@ -19,31 +19,25 @@
  */
 package org.sonar.python.parser.simple_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class YieldStatementTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class YieldStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.yield_stmt);
+    setRootRule(PythonGrammarBis.YIELD_STMT);
   }
 
   @Test
   public void ok() {
-    g.yield_expr.mock();
+    p.getGrammar().rule(PythonGrammarBis.YIELD_EXPR).mock();
 
-    assertThat(p).matches("yield_expr");
+    assertThat(p).matches("YIELD_EXPR");
   }
 
 }

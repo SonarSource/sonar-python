@@ -205,7 +205,7 @@ public class PythonLexerTest {
    */
   @Test
   public void indent_dedent() {
-    assertThat(lexer.lex("    statement\n  statement"), allOf(hasToken("    ", PythonTokenType.INDENT), hasToken("  ", PythonTokenType.DEDENT)));
+    assertThat(lexer.lex("    STATEMENT\n  STATEMENT"), allOf(hasToken("    ", PythonTokenType.INDENT), hasToken("  ", PythonTokenType.DEDENT)));
   }
 
   /**

@@ -20,18 +20,18 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 
 @Rule(
   key = "LongIntegerWithLowercaseSuffixUsage",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<PythonGrammar> {
+public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {

@@ -21,11 +21,12 @@ package org.sonar.python.checks;
 
 import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
+import org.sonar.python.api.PythonGrammarBis;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
 
 import java.util.Map;
 
@@ -36,13 +37,13 @@ import java.util.Map;
   key = "OneStatementPerLine",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class OneStatementPerLineCheck extends SquidCheck<PythonGrammar> {
+public class OneStatementPerLineCheck extends SquidCheck<Grammar> {
 
   private final Map<Integer, Integer> statementsPerLine = Maps.newHashMap();
 
   @Override
   public void init() {
-    subscribeTo(getContext().getGrammar().simple_stmt, getContext().getGrammar().suite);
+    subscribeTo(PythonGrammarBis.SIMPLE_STMT, PythonGrammarBis.SUITE);
   }
 
   @Override

@@ -20,8 +20,7 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
-import org.sonar.squidbridge.AstScanner;
-import org.sonar.squidbridge.SquidAstVisitor;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
@@ -41,10 +40,11 @@ import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.metrics.FileLinesVisitor;
+import org.sonar.squidbridge.AstScanner;
+import org.sonar.squidbridge.SquidAstVisitor;
 import org.sonar.squidbridge.api.CheckMessage;
 import org.sonar.squidbridge.api.SourceCode;
 import org.sonar.squidbridge.api.SourceFile;
@@ -66,7 +66,7 @@ public final class PythonSquidSensor implements Sensor {
 
   private Project project;
   private SensorContext context;
-  private AstScanner<PythonGrammar> scanner;
+  private AstScanner<Grammar> scanner;
   private ModuleFileSystem fileSystem;
   private ResourcePerspectives resourcePerspectives;
 
@@ -85,8 +85,8 @@ public final class PythonSquidSensor implements Sensor {
     this.project = project;
     this.context = context;
 
-    Collection<SquidAstVisitor<PythonGrammar>> squidChecks = annotationCheckFactory.getChecks();
-    List<SquidAstVisitor<PythonGrammar>> visitors = Lists.newArrayList(squidChecks);
+    Collection<SquidAstVisitor<Grammar>> squidChecks = annotationCheckFactory.getChecks();
+    List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(squidChecks);
     visitors.add(new FileLinesVisitor(project, fileLinesContextFactory));
     this.scanner = PythonAstScanner.create(createConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)));

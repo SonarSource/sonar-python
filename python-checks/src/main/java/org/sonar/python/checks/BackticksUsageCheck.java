@@ -20,18 +20,18 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.squidbridge.checks.SquidCheck;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "BackticksUsage",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class BackticksUsageCheck extends SquidCheck<PythonGrammar> {
+public class BackticksUsageCheck extends SquidCheck<Grammar> {
 
   private int prevLine = -1;
 

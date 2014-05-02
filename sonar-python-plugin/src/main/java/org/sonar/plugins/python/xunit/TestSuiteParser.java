@@ -108,7 +108,7 @@ public class TestSuiteParser implements XmlStreamHandler {
 
   private String parseTestCaseName(SMInputCursor testCaseCursor) throws XMLStreamException {
     String name = testCaseCursor.getAttrValue("name");
-    String classname = testCaseCursor.getAttrValue("classname");
+    String classname = testCaseCursor.getAttrValue("CLASSNAME");
     if (classname != null) {
       name = classname + "/" + name;
     }

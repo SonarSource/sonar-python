@@ -19,24 +19,18 @@
  */
 package org.sonar.python.parser.expressions;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ExpressionTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class ExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.test);
+    setRootRule(PythonGrammarBis.TEST);
   }
 
   @Test

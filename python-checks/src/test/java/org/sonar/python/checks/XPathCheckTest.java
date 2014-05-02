@@ -32,7 +32,7 @@ public class XPathCheckTest {
 
   @Test
   public void check() {
-    check.xpathQuery = "//statement";
+    check.xpathQuery = "//STATEMENT";
     check.message = "Avoid statements :)";
 
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/xpath.py"), check);
@@ -43,7 +43,7 @@ public class XPathCheckTest {
 
   @Test
   public void parseError() {
-    check.xpathQuery = "//statement";
+    check.xpathQuery = "//STATEMENT";
 
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())

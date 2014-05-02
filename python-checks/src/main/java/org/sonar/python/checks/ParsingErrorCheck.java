@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.AstScannerExceptionHandler;
 import org.sonar.squidbridge.checks.SquidCheck;
 
@@ -32,7 +32,7 @@ import java.io.StringWriter;
 @Rule(
   key = "ParsingError",
   priority = Priority.MAJOR)
-public class ParsingErrorCheck extends SquidCheck<PythonGrammar> implements AstScannerExceptionHandler {
+public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScannerExceptionHandler {
 
   public void processException(Exception e) {
     StringWriter exception = new StringWriter();

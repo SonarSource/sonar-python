@@ -27,7 +27,6 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
 
@@ -37,7 +36,7 @@ import java.util.Set;
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES_DATA_KEY} metrics used by the DevCockpit.
  */
-public class FileLinesVisitor extends SquidAstVisitor<PythonGrammar> implements AstAndTokenVisitor {
+public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
   private final Project project;
   private final FileLinesContextFactory fileLinesContextFactory;

@@ -19,34 +19,28 @@
  */
 package org.sonar.python.parser.compound_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
 import org.sonar.python.parser.PythonTestUtils;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class WithStatementTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class WithStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.with_stmt);
+    setRootRule(PythonGrammarBis.WITH_STMT);
   }
 
   @Test
   public void ok() {
-    g.suite.mock();
-    g.with_item.mock();
+    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
+    p.getGrammar().rule(PythonGrammarBis.WITH_ITEM).mock();
 
-    assertThat(p).matches("with with_item , with_item : suite");
-    assertThat(p).matches("with with_item : suite");
+    assertThat(p).matches("with WITH_ITEM , WITH_ITEM : SUITE");
+    assertThat(p).matches("with WITH_ITEM : SUITE");
   }
 
   @Test

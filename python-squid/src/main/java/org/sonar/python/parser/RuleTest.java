@@ -17,30 +17,19 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.checks;
+package org.sonar.python.parser;
 
-import com.sonar.sslr.api.AstNode;
+import com.google.common.base.Charsets;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.check.BelongsToProfile;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammarBis;
-import org.sonar.squidbridge.checks.SquidCheck;
+import com.sonar.sslr.impl.Parser;
+import org.sonar.python.PythonConfiguration;
+import org.sonar.sslr.grammar.GrammarRuleKey;
 
-@Rule(
-  key = "PrintStatementUsage",
-  priority = Priority.MAJOR)
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class PrintStatementUsageCheck extends SquidCheck<Grammar> {
+public class RuleTest {
 
-  @Override
-  public void init() {
-    subscribeTo(PythonGrammarBis.PRINT_STMT);
+  protected Parser<Grammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
+
+  protected void setRootRule(GrammarRuleKey ruleKey) {
+    p.setRootRule(p.getGrammar().rule(ruleKey));
   }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    getContext().createLineViolation(this, "Replace print statement by built-in function.", astNode);
-  }
-
 }

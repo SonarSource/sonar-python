@@ -19,38 +19,32 @@
  */
 package org.sonar.python.parser.compound_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class TryStatementTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class TryStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.try_stmt);
+    setRootRule(PythonGrammarBis.TRY_STMT);
   }
 
   @Test
   public void ok() {
-    g.suite.mock();
-    g.test.mock();
-    g.except_clause.mock();
+    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
+    p.getGrammar().rule(PythonGrammarBis.TEST).mock();
+    p.getGrammar().rule(PythonGrammarBis.EXCEPT_CLAUSE).mock();
 
-    assertThat(p).matches("try : suite except_clause : suite");
-    assertThat(p).matches("try : suite except_clause : suite except_clause : suite");
-    assertThat(p).matches("try : suite except_clause : suite else : suite");
-    assertThat(p).matches("try : suite except_clause : suite finally : suite");
-    assertThat(p).matches("try : suite except_clause : suite else : suite finally : suite");
-    assertThat(p).matches("try : suite finally : suite");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE EXCEPT_CLAUSE : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE finally : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE finally : SUITE");
+    assertThat(p).matches("try : SUITE finally : SUITE");
   }
 
 }

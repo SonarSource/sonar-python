@@ -20,12 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.squidbridge.checks.SquidCheck;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.sslr.grammar.GrammarRuleKey;
 
 /**
  * Note that implementation differs from AbstractNestedIfCheck - see SONARPLUGINS-1855
@@ -34,7 +36,7 @@ import org.sonar.python.api.PythonGrammar;
   key = "NestedIfDepth",
   priority = Priority.MINOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MINOR)
-public class NestedIfDepthCheck extends SquidCheck<PythonGrammar> {
+public class NestedIfDepthCheck extends SquidCheck<Grammar> {
 
   private int nestingLevel;
 
@@ -49,8 +51,8 @@ public class NestedIfDepthCheck extends SquidCheck<PythonGrammar> {
     return maximumNestingLevel;
   }
 
-  public com.sonar.sslr.api.Rule getIfRule() {
-    return getContext().getGrammar().if_stmt;
+  public GrammarRuleKey getIfRule() {
+    return PythonGrammarBis.IF_STMT;
   }
 
   @Override
@@ -63,8 +65,8 @@ public class NestedIfDepthCheck extends SquidCheck<PythonGrammar> {
     nestingLevel++;
     if (nestingLevel == getMaximumNestingLevel() + 1) {
       getContext().createLineViolation(this, "This if has a nesting level of {0}, which is higher than the maximum allowed {1}.", astNode,
-          nestingLevel,
-          getMaximumNestingLevel());
+        nestingLevel,
+        getMaximumNestingLevel());
     }
   }
 

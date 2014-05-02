@@ -19,35 +19,29 @@
  */
 package org.sonar.python.parser.compound_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
 import org.sonar.python.parser.PythonTestUtils;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ForStatementTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class ForStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.for_stmt);
+    setRootRule(PythonGrammarBis.FOR_STMT);
   }
 
   @Test
   public void ok() {
-    g.exprlist.mock();
-    g.testlist.mock();
-    g.suite.mock();
+    p.getGrammar().rule(PythonGrammarBis.EXPRLIST).mock();
+    p.getGrammar().rule(PythonGrammarBis.TESTLIST).mock();
+    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
 
-    assertThat(p).matches("for exprlist in testlist : suite");
-    assertThat(p).matches("for exprlist in testlist : suite else : suite");
+    assertThat(p).matches("for EXPRLIST in TESTLIST : SUITE");
+    assertThat(p).matches("for EXPRLIST in TESTLIST : SUITE else : SUITE");
   }
 
   @Test

@@ -19,33 +19,27 @@
  */
 package org.sonar.python.parser.compound_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class WhileStatementTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class WhileStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.while_stmt);
+    setRootRule(PythonGrammarBis.WHILE_STMT);
   }
 
   @Test
   public void ok() {
-    g.test.mock();
-    g.suite.mock();
+    p.getGrammar().rule(PythonGrammarBis.TEST).mock();
+    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
 
-    assertThat(p).matches("while test : suite");
-    assertThat(p).matches("while test : suite else : suite");
+    assertThat(p).matches("while TEST : SUITE");
+    assertThat(p).matches("while TEST : SUITE else : SUITE");
   }
 
 }

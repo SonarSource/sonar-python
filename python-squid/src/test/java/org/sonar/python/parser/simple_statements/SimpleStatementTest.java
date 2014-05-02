@@ -19,43 +19,36 @@
  */
 package org.sonar.python.parser.simple_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
-import org.sonar.sslr.tests.Assertions;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class SimpleStatementTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class SimpleStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.simple_stmt);
+    setRootRule(PythonGrammarBis.SIMPLE_STMT);
   }
 
   @Test
   public void ok() {
-    assertThat(p).matches("print_stmt");
-    assertThat(p).matches("exec_stmt");
-    assertThat(p).matches("expression_stmt");
-    assertThat(p).matches("assert_stmt");
-    assertThat(p).matches("pass_stmt");
-    assertThat(p).matches("del_stmt");
-    assertThat(p).matches("return_stmt");
-    assertThat(p).matches("yield_stmt");
-    assertThat(p).matches("raise_stmt");
-    assertThat(p).matches("break_stmt");
-    assertThat(p).matches("continue_stmt");
-    assertThat(p).matches("import_stmt");
-    assertThat(p).matches("global_stmt");
-    assertThat(p).matches("nonlocal_stmt");
+    assertThat(p).matches("PRINT_STMT");
+    assertThat(p).matches("EXEC_STMT");
+    assertThat(p).matches("EXPRESSION_STMT");
+    assertThat(p).matches("ASSERT_STMT");
+    assertThat(p).matches("PASS_STMT");
+    assertThat(p).matches("DEL_STMT");
+    assertThat(p).matches("RETURN_STMT");
+    assertThat(p).matches("YIELD_STMT");
+    assertThat(p).matches("RAISE_STMT");
+    assertThat(p).matches("BREAK_STMT");
+    assertThat(p).matches("CONTINUE_STMT");
+    assertThat(p).matches("IMPORT_STMT");
+    assertThat(p).matches("GLOBAL_STMT");
+    assertThat(p).matches("NONLOCAL_STMT");
   }
 
   @Test

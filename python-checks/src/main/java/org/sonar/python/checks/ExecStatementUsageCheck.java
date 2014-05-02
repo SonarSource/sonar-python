@@ -20,21 +20,22 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.squidbridge.checks.SquidCheck;
+import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "ExecStatementUsage",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class ExecStatementUsageCheck extends SquidCheck<PythonGrammar> {
+public class ExecStatementUsageCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(getContext().getGrammar().exec_stmt);
+    subscribeTo(PythonGrammarBis.EXEC_STMT);
   }
 
   @Override

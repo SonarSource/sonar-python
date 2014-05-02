@@ -19,32 +19,26 @@
  */
 package org.sonar.python.parser.compound_statements;
 
-import com.google.common.base.Charsets;
-import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonParser;
+import org.sonar.python.api.PythonGrammarBis;
 import org.sonar.python.parser.PythonTestUtils;
+import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class SuiteTest {
-
-  Parser<PythonGrammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
-  PythonGrammar g = p.getGrammar();
+public class SuiteTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.suite);
+    setRootRule(PythonGrammarBis.SUITE);
   }
 
   @Test
   public void ok() {
-    g.stmt_list.mock();
+    p.getGrammar().rule(PythonGrammarBis.STMT_LIST).mock();
 
-    assertThat(p).matches("stmt_list\n");
+    assertThat(p).matches("STMT_LIST\n");
   }
 
   @Test

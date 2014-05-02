@@ -17,30 +17,40 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.checks;
+package org.sonar.python.metrics;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.check.BelongsToProfile;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammarBis;
-import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonMetric;
+import org.sonar.squidbridge.SquidAstVisitor;
 
-@Rule(
-  key = "PrintStatementUsage",
-  priority = Priority.MAJOR)
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class PrintStatementUsageCheck extends SquidCheck<Grammar> {
+public class ComplexityVisitor extends SquidAstVisitor<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(PythonGrammarBis.PRINT_STMT);
+    subscribeTo(
+      // Entry points
+      PythonGrammarBis.FUNCDEF,
+
+      // Branching nodes
+      // Note that IF_STMT covered by PythonKeyword.IF below
+      PythonGrammarBis.WHILE_STMT,
+      PythonGrammarBis.FOR_STMT,
+      PythonGrammarBis.RETURN_STMT,
+      PythonGrammarBis.RAISE_STMT,
+      PythonGrammarBis.EXCEPT_CLAUSE,
+
+      // Expressions
+      PythonKeyword.IF,
+      PythonKeyword.AND,
+      PythonKeyword.OR);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    getContext().createLineViolation(this, "Replace print statement by built-in function.", astNode);
+    getContext().peekSourceCode().add(PythonMetric.COMPLEXITY, 1);
   }
 
 }
