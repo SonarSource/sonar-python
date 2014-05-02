@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,12 +30,12 @@ public class ExceptClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.EXCEPT_CLAUSE);
+    setRootRule(PythonGrammar.EXCEPT_CLAUSE);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.TEST).mock();
+    p.getGrammar().rule(PythonGrammar.TEST).mock();
 
     assertThat(p).matches("except");
     assertThat(p).matches("except TEST");

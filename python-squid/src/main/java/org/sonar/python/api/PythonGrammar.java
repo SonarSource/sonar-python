@@ -28,7 +28,7 @@ import static org.sonar.python.api.PythonTokenType.DEDENT;
 import static org.sonar.python.api.PythonTokenType.INDENT;
 import static org.sonar.python.api.PythonTokenType.NEWLINE;
 
-public enum PythonGrammarBis implements GrammarRuleKey {
+public enum PythonGrammar implements GrammarRuleKey {
   FACTOR,
   TRAILER,
   SUBSCRIPTLIST,
@@ -142,19 +142,19 @@ public enum PythonGrammarBis implements GrammarRuleKey {
 
   // Top-level components
 
-  file_input;
+  FILE_INPUT;
 
   public static LexerfulGrammarBuilder create() {
     LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
 
-    b.rule(file_input).is(b.zeroOrMore(b.firstOf(NEWLINE, STATEMENT)), EOF);
+    b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(NEWLINE, STATEMENT)), EOF);
 
     grammar(b);
     compoundStatements(b);
     simpleStatements(b);
     expressions(b);
 
-    b.setRootRule(file_input);
+    b.setRootRule(FILE_INPUT);
     b.buildWithMemoizationOfMatchesForAllRules();
 
     return b;
@@ -300,13 +300,14 @@ public enum PythonGrammarBis implements GrammarRuleKey {
     b.rule(DEL_STMT).is("del", EXPRLIST);
     b.rule(RETURN_STMT).is("return", b.optional(TESTLIST));
     b.rule(YIELD_STMT).is(YIELD_EXPR);
-    b.rule(RAISE_STMT).is("raise", b.optional(TEST, b.optional(b.firstOf(b.sequence("from", TEST),b.sequence(",", TEST, b.optional(",", TEST))))));
+    b.rule(RAISE_STMT).is("raise", b.optional(TEST, b.optional(b.firstOf(b.sequence("from", TEST), b.sequence(",", TEST, b.optional(",", TEST))))));
     b.rule(BREAK_STMT).is("break");
     b.rule(CONTINUE_STMT).is("continue");
 
     b.rule(IMPORT_STMT).is(b.firstOf(IMPORT_NAME, IMPORT_FROM));
     b.rule(IMPORT_NAME).is("import", DOTTED_AS_NAMES);
-    b.rule(IMPORT_FROM).is("from", b.firstOf(b.sequence(b.zeroOrMore("."), DOTTED_NAME), b.oneOrMore(".")), "import", b.firstOf("*", b.sequence("(", IMPORT_AS_NAMES, ")"), IMPORT_AS_NAMES));
+    b.rule(IMPORT_FROM).is("from", b.firstOf(b.sequence(b.zeroOrMore("."), DOTTED_NAME), b.oneOrMore(".")), "import",
+      b.firstOf("*", b.sequence("(", IMPORT_AS_NAMES, ")"), IMPORT_AS_NAMES));
     b.rule(IMPORT_AS_NAME).is(NAME, b.optional("as", NAME));
     b.rule(DOTTED_AS_NAME).is(DOTTED_NAME, b.optional("as", NAME));
     b.rule(IMPORT_AS_NAMES).is(IMPORT_AS_NAME, b.zeroOrMore(",", IMPORT_AS_NAME), b.optional(","));
@@ -342,7 +343,12 @@ public enum PythonGrammarBis implements GrammarRuleKey {
     b.rule(WHILE_STMT).is("while", TEST, ":", SUITE, b.optional("else", ":", SUITE));
     b.rule(FOR_STMT).is("for", EXPRLIST, "in", TESTLIST, ":", SUITE, b.optional("else", ":", SUITE));
 
-    b.rule(TRY_STMT).is("try", ":", SUITE, b.firstOf(b.sequence(b.zeroOrMore(EXCEPT_CLAUSE, ":", SUITE), b.optional("else", ":", SUITE), b.optional("finally", ":", SUITE)), b.sequence("finally", ":", SUITE)));
+    b.rule(TRY_STMT).is("try", ":", SUITE, b.firstOf(
+      b.sequence(b.zeroOrMore(EXCEPT_CLAUSE, ":", SUITE),
+        b.optional("else", ":", SUITE),
+        b.optional("finally", ":", SUITE)),
+      b.sequence("finally", ":", SUITE)));
+
     b.rule(EXCEPT_CLAUSE).is("except", b.optional(TEST, b.optional(b.firstOf("as", ","), TEST)));
 
     b.rule(WITH_STMT).is("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE);

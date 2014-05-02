@@ -22,7 +22,7 @@ package org.sonar.python.parser;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.lexer.PythonLexer;
 
 public final class PythonParser {
@@ -31,7 +31,7 @@ public final class PythonParser {
   }
 
   public static Parser<Grammar> create(PythonConfiguration conf) {
-    return Parser.builder((PythonGrammarBis.create().build()))
+    return Parser.builder(PythonGrammar.create().build())
       .withLexer(PythonLexer.create(conf)).build();
   }
 

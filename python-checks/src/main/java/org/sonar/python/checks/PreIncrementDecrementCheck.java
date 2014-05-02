@@ -24,7 +24,7 @@ import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.checks.SquidCheck;
 
@@ -36,7 +36,7 @@ public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(PythonGrammarBis.FACTOR);
+    subscribeTo(PythonGrammar.FACTOR);
   }
 
   @Override

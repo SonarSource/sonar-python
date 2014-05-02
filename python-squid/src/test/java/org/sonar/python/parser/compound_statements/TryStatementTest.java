@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,14 +30,14 @@ public class TryStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.TRY_STMT);
+    setRootRule(PythonGrammar.TRY_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
-    p.getGrammar().rule(PythonGrammarBis.TEST).mock();
-    p.getGrammar().rule(PythonGrammarBis.EXCEPT_CLAUSE).mock();
+    p.getGrammar().rule(PythonGrammar.SUITE).mock();
+    p.getGrammar().rule(PythonGrammar.TEST).mock();
+    p.getGrammar().rule(PythonGrammar.EXCEPT_CLAUSE).mock();
 
     assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE");
     assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE EXCEPT_CLAUSE : SUITE");

@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
@@ -45,7 +45,7 @@ public class FunctionComplexityCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(PythonGrammarBis.FUNCDEF);
+    subscribeTo(PythonGrammar.FUNCDEF);
   }
 
   @Override

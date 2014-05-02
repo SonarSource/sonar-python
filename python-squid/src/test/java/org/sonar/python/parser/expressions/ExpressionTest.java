@@ -21,7 +21,7 @@ package org.sonar.python.parser.expressions;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,7 +30,7 @@ public class ExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.TEST);
+    setRootRule(PythonGrammar.TEST);
   }
 
   @Test

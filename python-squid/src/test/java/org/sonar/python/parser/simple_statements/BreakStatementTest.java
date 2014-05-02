@@ -21,7 +21,7 @@ package org.sonar.python.parser.simple_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,7 +30,7 @@ public class BreakStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.BREAK_STMT);
+    setRootRule(PythonGrammar.BREAK_STMT);
   }
 
   @Test

@@ -24,7 +24,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.parser.PythonParser;
@@ -106,31 +106,31 @@ public final class PythonAstScanner {
     /* Classes */
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammarBis.CLASSNAME).getChild(0).getTokenValue();
+        String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getChild(0).getTokenValue();
         SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
         function.setStartAtLine(astNode.getTokenLine());
         return function;
       }
-    }, PythonGrammarBis.CLASSDEF));
+    }, PythonGrammar.CLASSDEF));
 
     builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.CLASSES)
-      .subscribeTo(PythonGrammarBis.CLASSDEF)
+      .subscribeTo(PythonGrammar.CLASSDEF)
       .build());
 
     /* Functions */
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammarBis.FUNCNAME).getChild(0).getTokenValue();
+        String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getChild(0).getTokenValue();
         SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
         function.setStartAtLine(astNode.getTokenLine());
         return function;
       }
-    }, PythonGrammarBis.FUNCDEF));
+    }, PythonGrammar.FUNCDEF));
 
     builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.FUNCTIONS)
-      .subscribeTo(PythonGrammarBis.FUNCDEF)
+      .subscribeTo(PythonGrammar.FUNCDEF)
       .build());
 
     /* Metrics */
@@ -138,15 +138,15 @@ public final class PythonAstScanner {
     builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<Grammar>(PythonMetric.LINES_OF_CODE));
     AstNodeType[] complexityAstNodeType = new AstNodeType[]{
       // Entry points
-      PythonGrammarBis.FUNCDEF,
+      PythonGrammar.FUNCDEF,
 
       // Branching nodes
       // Note that IF_STMT covered by PythonKeyword.IF below
-      PythonGrammarBis.WHILE_STMT,
-      PythonGrammarBis.FOR_STMT,
-      PythonGrammarBis.RETURN_STMT,
-      PythonGrammarBis.RAISE_STMT,
-      PythonGrammarBis.EXCEPT_CLAUSE,
+      PythonGrammar.WHILE_STMT,
+      PythonGrammar.FOR_STMT,
+      PythonGrammar.RETURN_STMT,
+      PythonGrammar.RAISE_STMT,
+      PythonGrammar.EXCEPT_CLAUSE,
 
       // Expressions
       PythonKeyword.IF,
@@ -164,7 +164,7 @@ public final class PythonAstScanner {
       .build());
     builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.STATEMENTS)
-      .subscribeTo(PythonGrammarBis.STATEMENT)
+      .subscribeTo(PythonGrammar.STATEMENT)
       .build());
 
 

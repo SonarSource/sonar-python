@@ -21,7 +21,7 @@ package org.sonar.python.parser.toplevel;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,12 +30,12 @@ public class FileInputTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.file_input);
+    setRootRule(PythonGrammar.FILE_INPUT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.STATEMENT).mock();
+    p.getGrammar().rule(PythonGrammar.STATEMENT).mock();
 
     assertThat(p).matches("STATEMENT");
     assertThat(p).matches("STATEMENT STATEMENT");

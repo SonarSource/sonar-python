@@ -21,7 +21,7 @@ package org.sonar.python.parser.simple_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,12 +30,12 @@ public class YieldStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.YIELD_STMT);
+    setRootRule(PythonGrammar.YIELD_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.YIELD_EXPR).mock();
+    p.getGrammar().rule(PythonGrammar.YIELD_EXPR).mock();
 
     assertThat(p).matches("YIELD_EXPR");
   }

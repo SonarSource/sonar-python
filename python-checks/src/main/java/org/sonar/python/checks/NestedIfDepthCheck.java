@@ -25,7 +25,7 @@ import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
@@ -52,7 +52,7 @@ public class NestedIfDepthCheck extends SquidCheck<Grammar> {
   }
 
   public GrammarRuleKey getIfRule() {
-    return PythonGrammarBis.IF_STMT;
+    return PythonGrammar.IF_STMT;
   }
 
   @Override

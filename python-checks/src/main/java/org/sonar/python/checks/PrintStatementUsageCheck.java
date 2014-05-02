@@ -24,7 +24,7 @@ import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -35,7 +35,7 @@ public class PrintStatementUsageCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(PythonGrammarBis.PRINT_STMT);
+    subscribeTo(PythonGrammar.PRINT_STMT);
   }
 
   @Override

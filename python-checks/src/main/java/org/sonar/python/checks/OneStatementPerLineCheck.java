@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
@@ -43,7 +43,7 @@ public class OneStatementPerLineCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(PythonGrammarBis.SIMPLE_STMT, PythonGrammarBis.SUITE);
+    subscribeTo(PythonGrammar.SIMPLE_STMT, PythonGrammar.SUITE);
   }
 
   @Override

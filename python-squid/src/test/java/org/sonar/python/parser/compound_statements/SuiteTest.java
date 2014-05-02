@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
@@ -31,12 +31,12 @@ public class SuiteTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.SUITE);
+    setRootRule(PythonGrammar.SUITE);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.STMT_LIST).mock();
+    p.getGrammar().rule(PythonGrammar.STMT_LIST).mock();
 
     assertThat(p).matches("STMT_LIST\n");
   }

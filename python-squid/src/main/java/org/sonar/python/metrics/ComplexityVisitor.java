@@ -21,7 +21,7 @@ package org.sonar.python.metrics;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.SquidAstVisitor;
@@ -32,15 +32,15 @@ public class ComplexityVisitor extends SquidAstVisitor<Grammar> {
   public void init() {
     subscribeTo(
       // Entry points
-      PythonGrammarBis.FUNCDEF,
+      PythonGrammar.FUNCDEF,
 
       // Branching nodes
       // Note that IF_STMT covered by PythonKeyword.IF below
-      PythonGrammarBis.WHILE_STMT,
-      PythonGrammarBis.FOR_STMT,
-      PythonGrammarBis.RETURN_STMT,
-      PythonGrammarBis.RAISE_STMT,
-      PythonGrammarBis.EXCEPT_CLAUSE,
+      PythonGrammar.WHILE_STMT,
+      PythonGrammar.FOR_STMT,
+      PythonGrammar.RETURN_STMT,
+      PythonGrammar.RAISE_STMT,
+      PythonGrammar.EXCEPT_CLAUSE,
 
       // Expressions
       PythonKeyword.IF,

@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -30,13 +30,13 @@ public class IfStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.IF_STMT);
+    setRootRule(PythonGrammar.IF_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.TEST).mock();
-    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
+    p.getGrammar().rule(PythonGrammar.TEST).mock();
+    p.getGrammar().rule(PythonGrammar.SUITE).mock();
 
     assertThat(p).matches("if TEST : SUITE");
     assertThat(p).matches("if TEST : SUITE elif TEST : SUITE");

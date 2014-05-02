@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
@@ -31,7 +31,7 @@ public class ClassDefTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.CLASSDEF);
+    setRootRule(PythonGrammar.CLASSDEF);
   }
 
   @Test

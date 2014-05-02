@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
@@ -31,13 +31,13 @@ public class WithStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.WITH_STMT);
+    setRootRule(PythonGrammar.WITH_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
-    p.getGrammar().rule(PythonGrammarBis.WITH_ITEM).mock();
+    p.getGrammar().rule(PythonGrammar.SUITE).mock();
+    p.getGrammar().rule(PythonGrammar.WITH_ITEM).mock();
 
     assertThat(p).matches("with WITH_ITEM , WITH_ITEM : SUITE");
     assertThat(p).matches("with WITH_ITEM : SUITE");

@@ -21,7 +21,7 @@ package org.sonar.python.parser.compound_statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammarBis;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
@@ -31,14 +31,14 @@ public class ForStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammarBis.FOR_STMT);
+    setRootRule(PythonGrammar.FOR_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammarBis.EXPRLIST).mock();
-    p.getGrammar().rule(PythonGrammarBis.TESTLIST).mock();
-    p.getGrammar().rule(PythonGrammarBis.SUITE).mock();
+    p.getGrammar().rule(PythonGrammar.EXPRLIST).mock();
+    p.getGrammar().rule(PythonGrammar.TESTLIST).mock();
+    p.getGrammar().rule(PythonGrammar.SUITE).mock();
 
     assertThat(p).matches("for EXPRLIST in TESTLIST : SUITE");
     assertThat(p).matches("for EXPRLIST in TESTLIST : SUITE else : SUITE");
