@@ -57,10 +57,6 @@ public abstract class PythonReportSensor implements Sensor {
         LOG.info("Processing report '{}'", report);
         processReport(project, context, report);
       }
-
-      if (reports.isEmpty()) {
-        handleNoReportsCase(context);
-      }
     } catch (javax.xml.stream.XMLStreamException e) {
       String msg = new StringBuilder()
         .append("Cannot feed the data into sonar, details: '")

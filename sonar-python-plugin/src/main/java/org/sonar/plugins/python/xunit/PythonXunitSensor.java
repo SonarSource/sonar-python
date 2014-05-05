@@ -78,10 +78,6 @@ public class PythonXunitSensor extends PythonReportSensor {
     parseReport(project, context, report);
   }
 
-  protected void handleNoReportsCase(SensorContext context) {
-    context.saveMeasure(CoreMetrics.TESTS, 0.0);
-  }
-
   private void parseReport(Project project, SensorContext context, File report) throws javax.xml.stream.XMLStreamException {
     LOG.info("Parsing report '{}'", report);
 

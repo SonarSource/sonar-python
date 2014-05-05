@@ -80,13 +80,13 @@ public class PythonXunitSensorTest {
   }
 
   @Test
-  public void shouldReportZeroTestsWhenNoReportFound() {
+  public void shouldReportNothingWhenNoReportFound() {
     settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "notexistingpath");
     sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
 
     sensor.analyse(project, context);
 
-    verify(context, times(1)).saveMeasure(eq(CoreMetrics.TESTS), eq(0.0));
+    verify(context, times(0)).saveMeasure(eq(CoreMetrics.TESTS), any(Double.class));
   }
 
   @Test(expected = org.sonar.api.utils.SonarException.class)
