@@ -49,7 +49,8 @@ public final class CheckList {
       PrintStatementUsageCheck.class,
       PreIncrementDecrementCheck.class,
       XPathCheck.class,
-      TooManyLinesInFileCheck.class);
+      TooManyLinesInFileCheck.class,
+      ClassNameCheck.class);
   }
 
 }
