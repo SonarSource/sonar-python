@@ -33,22 +33,23 @@ public final class CheckList {
   }
 
   public static List<Class> getChecks() {
-    return ImmutableList.<Class> of(
-        ParsingErrorCheck.class,
-        CommentRegularExpressionCheck.class,
-        LineLengthCheck.class,
-        FunctionComplexityCheck.class,
-        ClassComplexityCheck.class,
-        FileComplexityCheck.class,
-        NestedIfDepthCheck.class,
-        OneStatementPerLineCheck.class,
-        BackticksUsageCheck.class,
-        InequalityUsageCheck.class,
-        LongIntegerWithLowercaseSuffixUsageCheck.class,
-        ExecStatementUsageCheck.class,
-        PrintStatementUsageCheck.class,
-        PreIncrementDecrementCheck.class,
-        XPathCheck.class);
+    return ImmutableList.<Class>of(
+      ParsingErrorCheck.class,
+      CommentRegularExpressionCheck.class,
+      LineLengthCheck.class,
+      FunctionComplexityCheck.class,
+      ClassComplexityCheck.class,
+      FileComplexityCheck.class,
+      NestedIfDepthCheck.class,
+      OneStatementPerLineCheck.class,
+      BackticksUsageCheck.class,
+      InequalityUsageCheck.class,
+      LongIntegerWithLowercaseSuffixUsageCheck.class,
+      ExecStatementUsageCheck.class,
+      PrintStatementUsageCheck.class,
+      PreIncrementDecrementCheck.class,
+      XPathCheck.class,
+      TooManyLinesInFileCheck.class);
   }
 
 }
