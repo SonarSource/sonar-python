@@ -1356,4 +1356,334 @@
     </description>
     <priority>MAJOR</priority>
   </rule>
+  
+  <!-- Added between pylint 0.25 and 1.2.1 -->
+  <rule>
+    <key>C0204</key>
+    <name><![CDATA[Metaclass class method first argument]]></name>
+    <configKey>C0204</configKey>
+    <description>
+      <![CDATA[Used when a metaclass class method has a first argument named differently than the value specified 
+      in valid-metaclass-classmethod-first-arg option (defaultto "mcs"), 
+      recommended to easily differentiate them from regular instancemethods.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>C0303</key>
+    <name><![CDATA[Trailing whitespace]]></name>
+    <configKey>C0303</configKey>
+    <description>
+      <![CDATA[<p>Used when there is whitespace between the end of a line and the newline.</p>
+      <p>Added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>C0304</key>
+    <name><![CDATA[Final newline missing]]></name>
+    <configKey>C0304</configKey>
+    <description>
+      <![CDATA[<p>Used when the last line in a file is missing a newline.</p>
+      <p>Added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>C0325</key>
+    <name><![CDATA[Unnecessary parentheses]]></name>
+    <configKey>C0325</configKey>
+    <description>
+      <![CDATA[<p>Used when a single item in parentheses follows an if, for, or other keyword.</p> 
+      <p>This rule was added in Pylint 1.1.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>C0326</key>
+    <name><![CDATA[Wrong number of spaces around an operator, bracket, or comma, or before a block opener colon]]></name>
+    <configKey>C0326</configKey>
+    <description>
+      <![CDATA[
+        <p>Used when a wrong number of spaces is used around an operator, bracket, or comma, or before a block opener colon.</p>
+        <p>This message belongs to the format checker.</p>
+        <p>In PyLint 1.1.0, this message replaced the older whitespace-related messages 
+        {rule:Pylint:C0322}, {rule:Pylint:C0323}, and {rule:Pylint:C0324}, and now reports some additional situations.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>C0330</key>
+    <name><![CDATA[Bad continuation]]></name>
+    <configKey>C0330</configKey>
+    <description>
+      <![CDATA[<p>Used when continued lines are badly indentend.</p>
+      <p>This rule was added in Pylint 1.2.1.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>C1001</key>
+    <name><![CDATA[Old-style class defined]]></name>
+    <configKey>C1001</configKey>
+    <description>
+      <![CDATA[<p>Used when a class is defined that does not inherit from anotherclass and does not inherit explicitly from “object”. 
+      This message can’t be emitted when using Python >= 3.0.</p>
+      <p>This rule was added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0108</key>
+    <name><![CDATA[Duplicate argument name in function definition]]></name>
+    <configKey>E0108</configKey>
+    <description>
+      <![CDATA[Duplicate argument names in function definitions are syntax errors. 
+        <p>This rule was added in Pylint 0.28.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0109</key>
+    <name><![CDATA[Missing argument to reversed()]]></name>
+    <configKey>E0109</configKey>
+    <description>
+      <![CDATA[Used when reversed() builtin didn't receive an argument.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0111</key>
+    <name><![CDATA[The first reversed() argument is not a sequence]]></name>
+    <configKey>E0111</configKey>
+    <description>
+      <![CDATA[Used when the first argument to reversed() builtin isn't a sequence 
+      (does not implement __reversed__, nor __getitem__ and __len__
+      <p>This rule was added in Pylint 1.2.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0235</key>
+    <name><![CDATA[__exit__ must accept 3 arguments: type, value, traceback]]></name>
+    <configKey>E0235</configKey>
+    <description>
+      <![CDATA[Used when the __exit__ special method, belonging to a context manager, does not accept 3 arguments (type, value, traceback).
+        <p>This rule was added in Pylint 1.1.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0236</key>
+    <name><![CDATA[Invalid object in __slots__, must contain only non empty strings]]></name>
+    <configKey>E0236</configKey>
+    <description>
+      <![CDATA[Used when an invalid (non-string) object occurs in __slots__.
+        <p>This rule was added in Pylint 1.2.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0238</key>
+    <name><![CDATA[Invalid __slots__ object]]></name>
+    <configKey>E0238</configKey>
+    <description>
+      <![CDATA[Used when an invalid __slots__ is found in class. Only a string, an iterable or a sequence is permitted.
+        <p>This rule was added in Pylint 1.2.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0603</key>
+    <name><![CDATA[Undefined variable name in __all__]]></name>
+    <configKey>E0603</configKey>
+    <description>
+      <![CDATA[Used when an undefined variable name is referenced in __all__.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0604</key>
+    <name><![CDATA[Invalid object in __all__, must contain only strings]]></name>
+    <configKey>E0604</configKey>
+    <description>
+      <![CDATA[Used when an invalid (non-string) object occurs in __all__. 
+       <p>This rule was added in Pylint 0.27.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E0712</key>
+    <name><![CDATA[Avoid catching an exception which doesn't inherit from BaseException]]></name>
+    <configKey>E0712</configKey>
+    <description>
+      <![CDATA[Used when a class which doesn't inherit from BaseException is used as an exception in an except clause.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E1004</key>
+    <name><![CDATA[Missing argument to super()]]></name>
+    <configKey>E1004</configKey>
+    <description>
+      <![CDATA[Used when the super builtin didn't receive an argument. This message can't be emitted when using Python >= 3.0.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>E1310</key>
+    <name><![CDATA[Suspicious argument]]></name>
+    <configKey>E1310</configKey>
+    <description>
+      <![CDATA[The argument to a str.{l,r,}strip call contains a duplicate character,
+      <p>This rule was added in Pylint 0.28.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0110</key>
+    <name><![CDATA[map/filter on lambda could be replaced by comprehension]]></name>
+    <configKey>W0110</configKey>
+    <description>
+      <![CDATA[Used when a lambda is the first argument to "map" or "filter". 
+        It could be clearer as a list comprehension or generator expression. This message can't be emitted when using Python >= 3.0.
+        <p>This rule was added in Pylint 0.27.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0120</key>
+    <name><![CDATA[Else clause on loop without a break statement]]></name>
+    <configKey>W0120</configKey>
+    <description>
+      <![CDATA[Loops should only have an else clause if they can exit early with a break statement, 
+        otherwise the statements under else should be on the same scope as the loop itself.
+        <p>This rule was added in Pylint 0.28.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0121</key>
+    <name><![CDATA[Use raise ErrorClass(args) instead of raise ErrorClass, args.]]></name>
+    <configKey>W0121</configKey>
+    <description>
+      <![CDATA[Used when the alternate raise syntax 'raise foo, bar' is used instead of 'raise foo(bar)'. 
+        This message can't be emitted when using Python >= 3.0.
+        <p>This rule was added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0123</key>
+    <name><![CDATA[Use of eval]]></name>
+    <configKey>W0123</configKey>
+    <description>
+      <![CDATA[Used when you use the "eval" function, to discourage its usage. 
+        Consider using `ast.literal_eval` for safely evaluating strings containing Python expressionsfrom untrusted sources.
+        <p>This rule was added in Pylint 1.2.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0234</key>
+    <name><![CDATA[__iter__ returns non-iterator]]></name>
+    <configKey>W0234</configKey>
+    <description>
+      <![CDATA[Used when an __iter__ method returns something which is not an iterable (i.e. has no `next` method).
+        <p>This rule was added in Pylint 1.1.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0512</key>
+    <name><![CDATA[Source line cannot be decoded using the specified source file encoding]]></name>
+    <configKey>W0512</configKey>
+    <description>
+      <![CDATA[Used when a source line cannot be decoded using the specified source file encoding. 
+        This message can't be emitted when using Python >= 3.0.
+        <p>This rule was added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0623</key>
+    <name><![CDATA[Redefining name in exception handler]]></name>
+    <configKey>W0623</configKey>
+    <description>
+      <![CDATA[Used when an exception handler assigns the exception to an existing name]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0632</key>
+    <name><![CDATA[Possible unbalanced tuple unpacking]]></name>
+    <configKey>W0632</configKey>
+    <description>
+      <![CDATA[Used when there is an unbalanced tuple unpacking in assignment. 
+        <p>This rule was added in Pylint 1.1.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0633</key>
+    <name><![CDATA[Attempting to unpack a non-sequence]]></name>
+    <configKey>W0633</configKey>
+    <description>
+      <![CDATA[Used when something which is not a sequence is used in an unpack assignment. 
+        <p>This rule was added in Pylint 1.1.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0711</key>
+    <name><![CDATA[Exception to catch is the result of a binary operation]]></name>
+    <configKey>W0711</configKey>
+    <description>
+      <![CDATA[Used when the exception to catch is of the form "except A or B:". If intending to catch multiple, rewrite as "except (A, B):"]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W0712</key>
+    <name><![CDATA[Implicit unpacking of exceptions is not supported in Python 3]]></name>
+    <configKey>W0712</configKey>
+    <description>
+      <![CDATA[Python3 will not allow implicit unpacking of exceptions in except clauses. 
+        See http://www.python.org/dev/peps/pep-3110/ This message can't be emitted whenusing Python >= 3.0.
+        <p>This rule was added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+<rule>
+  <key>W1401</key>
+  <name><![CDATA[Anomalous backslash escape]]></name>
+  <configKey>W1401</configKey>
+  <description>
+    <![CDATA[Used when a backslash is in a literal string but not as an escape. 
+    <p>This rule was added in Pylint 0.26.0.</p>]]>
+  </description>
+  <priority>MINOR</priority>
+</rule>
+<rule>
+  <key>W1402</key>
+  <name><![CDATA[Anomalous Unicode escape in byte string]]></name>
+  <configKey>W1402</configKey>
+  <description>
+    <![CDATA[Used when an escape like u is encountered in a byte string where it has no effect.
+    <p>This rule was added in Pylint 0.26.0.</p>]]>
+  </description>
+  <priority>MINOR</priority>
+</rule>
+  <rule>
+    <key>W1501</key>
+    <name><![CDATA[Invalid mode for open]]></name>
+    <configKey>W1501</configKey>
+    <description>
+      <![CDATA[Python supports: r, w, a modes with b, +, and U options. 
+        See http://docs.python.org/2/library/functions.html#open
+        <p>This rule was added in Pylint 1.0.0.</p>]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+
 </rules>
