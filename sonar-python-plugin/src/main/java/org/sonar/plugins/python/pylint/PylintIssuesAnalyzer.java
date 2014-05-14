@@ -133,10 +133,7 @@ public class PylintIssuesAnalyzer {
               linenr = Integer.valueOf(m.group(2));
               String[] parts = m.group(3).split(",");
 
-              ruleid = parts[0].trim();
-              if (ID_MAP.containsKey(ruleid)) {
-                ruleid = ID_MAP.get(ruleid);
-              }
+              ruleid = ruleId(parts[0].trim());
 
               if (parts.length == 2) {
                 objname = parts[1].trim();
@@ -155,6 +152,18 @@ public class PylintIssuesAnalyzer {
     }
 
     return issues;
+  }
+
+  private String ruleId(String ruleAndMessageIds) {
+    String ruleid = ruleAndMessageIds;
+    int parenthesisIndex = ruleid.indexOf('(');
+    if (parenthesisIndex > -1) {
+      ruleid = ruleid.substring(0, parenthesisIndex);
+    }
+    if (ID_MAP.containsKey(ruleid)) {
+      ruleid = ID_MAP.get(ruleid);
+    }
+    return ruleid;
   }
 
   private boolean isDetail(String line) {

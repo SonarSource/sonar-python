@@ -44,6 +44,18 @@ public class PylintIssuesAnalyzerTest {
   }
 
   @Test
+  public void shouldParseCorrectlyNewFormat() {
+    String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output_new_format.txt";
+    String pathName = getClass().getResource(resourceName).getPath();
+    String pylintConfigPath = null;
+    String pylintPath = null;
+    List<String> lines = readFile(pathName);
+    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).parseOutput(lines);
+    assertThat(issues.size()).isEqualTo(1);
+    assertThat(issues.get(0).getRuleId()).isEqualTo("C0111");
+  }
+
+  @Test
   public void shouldParseCorrectlyOutputWithWindowsPaths() {
     String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output_with_win_paths.txt";
     String pathName = getClass().getResource(resourceName).getPath();
