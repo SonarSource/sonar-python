@@ -50,7 +50,8 @@ public final class CheckList {
       PreIncrementDecrementCheck.class,
       XPathCheck.class,
       TooManyLinesInFileCheck.class,
-      ClassNameCheck.class);
+      ClassNameCheck.class,
+      MissingDocstringCheck.class);
   }
 
 }
