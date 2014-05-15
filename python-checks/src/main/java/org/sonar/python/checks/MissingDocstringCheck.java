@@ -76,8 +76,9 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
         parent = parent.getParent();
       }
     }
-    String typeName = parent != null && parent.is(PythonGrammar.CLASSDEF) ? "method" : "function";
-    checkFirstSuite(astNode, typeName);
+    if (parent == null || !parent.is(PythonGrammar.CLASSDEF)) {
+      checkFirstSuite(astNode, "function");
+    }
   }
 
   private void checkFirstSuite(AstNode astNode, String typeName) {

@@ -37,7 +37,6 @@ public class MissingDocstringCheckTest {
       .next().atLine(16).withMessage("Add a docstring to this function")
       .next().atLine(21).withMessage("Add a docstring to this function")
       .next().atLine(27).withMessage("Add a docstring to this class")
-      .next().atLine(32).withMessage("Add a docstring to this method")
       .noMore();
   }
 
