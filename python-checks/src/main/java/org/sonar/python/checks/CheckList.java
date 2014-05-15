@@ -51,7 +51,8 @@ public final class CheckList {
       XPathCheck.class,
       TooManyLinesInFileCheck.class,
       ClassNameCheck.class,
-      MissingDocstringCheck.class);
+      MissingDocstringCheck.class,
+      FunctionNameCheck.class);
   }
 
 }

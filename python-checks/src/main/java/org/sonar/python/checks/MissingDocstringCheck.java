@@ -70,13 +70,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
   }
 
   private void visitFuncDef(AstNode astNode) {
-    AstNode parent = astNode.getParent();
-    for (int i = 0; i < 3; i++) {
-      if (parent != null) {
-        parent = parent.getParent();
-      }
-    }
-    if (parent == null || !parent.is(PythonGrammar.CLASSDEF)) {
+    if (!CheckUtils.isMethodDefinition(astNode)) {
       checkFirstSuite(astNode, "function");
     }
   }
