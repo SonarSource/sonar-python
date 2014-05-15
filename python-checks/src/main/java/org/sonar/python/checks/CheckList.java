@@ -52,7 +52,8 @@ public final class CheckList {
       TooManyLinesInFileCheck.class,
       ClassNameCheck.class,
       MissingDocstringCheck.class,
-      FunctionNameCheck.class);
+      FunctionNameCheck.class,
+      MethodNameCheck.class);
   }
 
 }

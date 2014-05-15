@@ -19,25 +19,26 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import org.sonar.check.BelongsToProfile;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squidbridge.api.SourceFile;
+import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
-@Rule(
-  key = "S1542",
-  priority = Priority.MAJOR)
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class FunctionNameCheck extends AbstractFunctionNameCheck {
+import java.io.File;
 
-  @Override
-  public String typeName() {
-    return "function";
-  }
+public class MethodNameCheckTest {
 
-  @Override
-  public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return !CheckUtils.isMethodDefinition(astNode);
+  @Test
+  public void test() throws Exception {
+    MethodNameCheck check = new MethodNameCheck();
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/methodName.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+      .next().atLine(5).withMessage(
+        "Rename method \"Incorrect_Method_Name\" to match the regular expression ^[a-z_][a-z0-9_]{2,30}$.")
+      .next().atLine(8).withMessage(
+        "Rename method \"too_long_method_name_because_it_has_more_than_30_characters\" "
+          + "to match the regular expression ^[a-z_][a-z0-9_]{2,30}$.")
+      .noMore();
   }
 
 }

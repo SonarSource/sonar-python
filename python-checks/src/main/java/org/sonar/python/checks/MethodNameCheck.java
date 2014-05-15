@@ -25,19 +25,19 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 @Rule(
-  key = "S1542",
+  key = "S100",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class FunctionNameCheck extends AbstractFunctionNameCheck {
+public class MethodNameCheck extends AbstractFunctionNameCheck {
 
   @Override
   public String typeName() {
-    return "function";
+    return "method";
   }
 
   @Override
   public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return !CheckUtils.isMethodDefinition(astNode);
+    return CheckUtils.isMethodDefinition(astNode);
   }
 
 }
