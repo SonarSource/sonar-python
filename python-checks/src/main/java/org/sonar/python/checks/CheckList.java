@@ -53,7 +53,8 @@ public final class CheckList {
       ClassNameCheck.class,
       MissingDocstringCheck.class,
       FunctionNameCheck.class,
-      MethodNameCheck.class);
+      MethodNameCheck.class,
+      NewStyleClassCheck.class);
   }
 
 }
