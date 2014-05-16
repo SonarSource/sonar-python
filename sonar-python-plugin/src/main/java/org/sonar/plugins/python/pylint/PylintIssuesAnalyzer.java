@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
-import org.sonar.api.utils.command.StreamConsumer;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,20 +58,18 @@ public class PylintIssuesAnalyzer {
     .build();
 
   private static final String FALLBACK_PYLINT = "pylint";
-  private static final String[] ARGS = {"-i", "y", "-f", "parseable", "-r", "n"};
   private static final Pattern PATTERN = Pattern.compile("(.+):([0-9]+): \\[(.*)\\] (.*)");
 
   private String pylint = null;
   private String pylintConfigParam = null;
+  private PylintArguments pylintArguments;
 
   PylintIssuesAnalyzer(String pylintPath, String pylintConfigPath) {
-    pylint = FALLBACK_PYLINT;
-    if (pylintPath != null) {
-      if (!new File(pylintPath).exists()) {
-        throw new SonarException("Cannot find the pylint executable: " + pylintPath);
-      }
-      pylint = pylintPath;
-    }
+    this(pylintPath, pylintConfigPath, new PylintArguments(Command.create(pylintPathWithDefault(pylintPath))));
+  }
+
+  PylintIssuesAnalyzer(String pylintPath, String pylintConfigPath, PylintArguments arguments) {
+    pylint = pylintPathWithDefault(pylintPath);
 
     if (pylintConfigPath != null) {
       if (!new File(pylintConfigPath).exists()) {
@@ -80,10 +77,22 @@ public class PylintIssuesAnalyzer {
       }
       pylintConfigParam = "--rcfile=" + pylintConfigPath;
     }
+    
+    pylintArguments = arguments;
+  }
+
+  private static String pylintPathWithDefault(String pylintPath) {
+    if (pylintPath != null) {
+      if (!new File(pylintPath).exists()) {
+        throw new SonarException("Cannot find the pylint executable: " + pylintPath);
+      }
+      return pylintPath;
+    }
+    return FALLBACK_PYLINT;
   }
 
   public List<Issue> analyze(String path, Charset charset, File out) throws IOException {
-    Command command = Command.create(pylint).addArguments(ARGS).addArgument(path);
+    Command command = Command.create(pylint).addArguments(pylintArguments.arguments()).addArgument(path);
 
     if (pylintConfigParam != null) {
       command.addArgument(pylintConfigParam);
@@ -92,8 +101,8 @@ public class PylintIssuesAnalyzer {
     LOG.debug("Calling command: '{}'", command.toString());
 
     long timeoutMS = 300000; // =5min
-    MyStreamConsumer stdOut = new MyStreamConsumer();
-    MyStreamConsumer stdErr = new MyStreamConsumer();
+    CommandStreamConsumer stdOut = new CommandStreamConsumer();
+    CommandStreamConsumer stdErr = new CommandStreamConsumer();
     CommandExecutor.create().execute(command, stdOut, stdErr, timeoutMS);
 
     // the error stream can contain a line like 'no custom config found, using default'
@@ -169,18 +178,6 @@ public class PylintIssuesAnalyzer {
   private boolean isDetail(String line) {
     char first = line.charAt(0);
     return first == ' ' || first == '\t' || first == '\n';
-  }
-
-  private static class MyStreamConsumer implements StreamConsumer {
-    private List<String> data = new LinkedList<String>();
-
-    public void consumeLine(String line) {
-      data.add(line);
-    }
-
-    public List<String> getData() {
-      return data;
-    }
   }
 
 }
