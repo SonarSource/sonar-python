@@ -54,7 +54,8 @@ public final class CheckList {
       MissingDocstringCheck.class,
       FunctionNameCheck.class,
       MethodNameCheck.class,
-      NewStyleClassCheck.class);
+      NewStyleClassCheck.class,
+      UselessParenthesisAfterKeywordCheck.class);
   }
 
 }
