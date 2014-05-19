@@ -70,3 +70,8 @@ if not(x):
 
 if not(x and y):
 	pass
+
+# Line continuation: parenthesis are required to be able to split the line
+if (x > 0 and 
+	x < 3):
+	pass

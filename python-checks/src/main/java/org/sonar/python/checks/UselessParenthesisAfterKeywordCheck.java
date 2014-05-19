@@ -99,10 +99,14 @@ public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
   }
 
   private void checkParenthesis(AstNode child, String keyword, AstNode errorNode) {
-    if (child != null && child.getToken().getType() == PythonPunctuator.LPARENTHESIS) {
+    if (child != null && child.getToken().getType() == PythonPunctuator.LPARENTHESIS && isOnASingleLine(child)) {
       getContext().createLineViolation(this,
-        "Remove the parentheses after this \"{0}\"", errorNode, keyword);
+        "Remove the parentheses after this \"{0}\" keyword", errorNode, keyword);
     }
+  }
+
+  private boolean isOnASingleLine(AstNode node) {
+    return node.getTokenLine() == node.getLastToken().getLine();
   }
 
 }
