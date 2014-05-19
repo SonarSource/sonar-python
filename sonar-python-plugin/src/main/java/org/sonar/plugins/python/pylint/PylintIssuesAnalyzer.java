@@ -65,7 +65,7 @@ public class PylintIssuesAnalyzer {
   private PylintArguments pylintArguments;
 
   PylintIssuesAnalyzer(String pylintPath, String pylintConfigPath) {
-    this(pylintPath, pylintConfigPath, new PylintArguments(Command.create(pylintPathWithDefault(pylintPath))));
+    this(pylintPath, pylintConfigPath, new PylintArguments(Command.create(pylintPathWithDefault(pylintPath)).addArgument("--version")));
   }
 
   PylintIssuesAnalyzer(String pylintPath, String pylintConfigPath, PylintArguments arguments) {

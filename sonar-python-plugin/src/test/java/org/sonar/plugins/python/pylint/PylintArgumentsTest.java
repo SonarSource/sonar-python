@@ -19,30 +19,36 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.junit.Ignore;
+import org.apache.commons.lang.SystemUtils;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-@Ignore
 public class PylintArgumentsTest {
 
   @Test
   public void pylint_0_x() {
-    String[] arguments = new PylintArguments(Command.create("echo").addArgument("pylint 0.28.0")).arguments();
+    String[] arguments = new PylintArguments(command("pylint 0.28.0")).arguments();
     assertThat(arguments).containsOnly("-i", "y", "-f", "parseable", "-r", "n");
   }
 
   @Test
   public void pylint_1_x() {
-    String[] arguments = new PylintArguments(Command.create("echo").addArgument("pylint 1.1.0")).arguments();
+    String[] arguments = new PylintArguments(command("pylint 1.1.0")).arguments();
     assertThat(arguments).containsOnly("--msg-template", "{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}", "-r", "n");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void unknown() throws Exception {
-    new PylintArguments(Command.create("echo"));
+    new PylintArguments(command(""));
+  }
+
+  private Command command(String toOutput) {
+    if (SystemUtils.IS_OS_WINDOWS) {
+      return Command.create("cmd.exe").addArguments(new String[] {"/c", "echo", toOutput});
+    }
+    return Command.create("echo").addArgument(toOutput);
   }
 
 }

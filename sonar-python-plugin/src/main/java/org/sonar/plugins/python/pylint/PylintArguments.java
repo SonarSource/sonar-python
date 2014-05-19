@@ -39,7 +39,6 @@ public class PylintArguments {
   }
 
   private static String pylintVersion(Command command) {
-    command.addArgument("--version");
     long timeout = 10000;
     CommandStreamConsumer out = new CommandStreamConsumer();
     CommandStreamConsumer err = new CommandStreamConsumer();
