@@ -34,7 +34,8 @@ import org.sonar.sslr.grammar.GrammarRuleKey;
  */
 @Rule(
   key = "NestedIfDepth",
-  priority = Priority.MINOR)
+  priority = Priority.MINOR,
+  status = org.sonar.api.rules.Rule.STATUS_DEPRECATED)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MINOR)
 public class NestedIfDepthCheck extends SquidCheck<Grammar> {
 
