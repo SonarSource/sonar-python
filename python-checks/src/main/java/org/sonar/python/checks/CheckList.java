@@ -55,7 +55,8 @@ public final class CheckList {
       FunctionNameCheck.class,
       MethodNameCheck.class,
       NewStyleClassCheck.class,
-      UselessParenthesisAfterKeywordCheck.class);
+      UselessParenthesisAfterKeywordCheck.class,
+      TooManyParametersCheck.class);
   }
 
 }
