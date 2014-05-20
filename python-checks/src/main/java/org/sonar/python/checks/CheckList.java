@@ -56,7 +56,8 @@ public final class CheckList {
       MethodNameCheck.class,
       NewStyleClassCheck.class,
       UselessParenthesisAfterKeywordCheck.class,
-      TooManyParametersCheck.class);
+      TooManyParametersCheck.class,
+      NestedControlFlowDepthCheck.class);
   }
 
 }
