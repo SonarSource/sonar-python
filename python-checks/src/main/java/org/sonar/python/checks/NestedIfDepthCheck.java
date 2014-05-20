@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -36,7 +35,6 @@ import org.sonar.sslr.grammar.GrammarRuleKey;
   key = "NestedIfDepth",
   priority = Priority.MINOR,
   status = org.sonar.api.rules.Rule.STATUS_DEPRECATED)
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MINOR)
 public class NestedIfDepthCheck extends SquidCheck<Grammar> {
 
   private int nestingLevel;
