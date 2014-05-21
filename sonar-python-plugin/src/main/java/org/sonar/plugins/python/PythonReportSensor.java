@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.collect.Lists;
-import org.apache.tools.ant.DirectoryScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -30,6 +28,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.SonarException;
+import org.sonar.api.utils.WildcardPattern;
 
 import java.io.File;
 import java.util.List;
@@ -83,19 +82,8 @@ public abstract class PythonReportSensor implements Sensor {
 
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 
-    DirectoryScanner scanner = new DirectoryScanner();
-    String[] includes = { reportPath };
-    scanner.setIncludes(includes);
-    scanner.setBasedir(new File(baseDirPath));
-    scanner.scan();
-    String[] relPaths = scanner.getIncludedFiles();
-
-    List<File> reports = Lists.newArrayList();
-    for (String relPath : relPaths) {
-      reports.add(new File(baseDirPath, relPath));
-    }
-
-    return reports;
+    DirectoryScanner scanner = new DirectoryScanner(new File(baseDirPath), WildcardPattern.create(reportPath));
+    return scanner.getIncludedFiles();
   }
 
   protected void processReport(Project project, SensorContext context, File report) throws javax.xml.stream.XMLStreamException {

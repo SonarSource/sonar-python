@@ -73,13 +73,6 @@
       <artifactId>fest-assert</artifactId>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>ant</groupId>
-      <artifactId>ant</artifactId>
-      <version>1.6</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -97,8 +90,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>2000000</maxsize>
-                  <minsize>1000000</minsize>
+                  <maxsize>800000</maxsize>
+                  <minsize>600000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
