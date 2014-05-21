@@ -21,6 +21,7 @@ package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.sonar.api.utils.WildcardPattern;
@@ -51,7 +52,7 @@ public class DirectoryScanner {
       public boolean accept(File file) {
         String path = file.getAbsolutePath();
         path = path.substring(baseDirAbsolutePath.length());
-        return pattern.match(path);
+        return pattern.match(FilenameUtils.separatorsToUnix(path));
       }
     };
     return Lists.newArrayList(FileUtils.listFiles(baseDir, fileFilter, TrueFileFilter.INSTANCE));
