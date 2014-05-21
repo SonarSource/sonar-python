@@ -67,6 +67,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
     super(conf, fileSystem);
   }
 
+  @Override
   public void analyse(Project project, SensorContext context) {
     List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     LOG.debug("Parsing coverage reports");
@@ -95,10 +96,10 @@ public class PythonCoverageSensor extends PythonReportSensor {
                             SensorContext context,
                             Map<String, CoverageMeasuresBuilder> coverageMeasures,
                             boolean itTest) {
+    FileResolver fileResolver = new FileResolver(project, fileSystem);
     for(Map.Entry<String, CoverageMeasuresBuilder> entry: coverageMeasures.entrySet()) {
       String filePath = entry.getKey();
-      org.sonar.api.resources.File pythonfile =
-        org.sonar.api.resources.File.fromIOFile(new File(filePath), project);
+      org.sonar.api.resources.File pythonfile = fileResolver.getFile(filePath);
       if (fileExist(context, pythonfile)) {
         LOG.debug("Saving coverage measures for file '{}'", filePath);
         for (Measure measure : entry.getValue().createMeasures()) {
