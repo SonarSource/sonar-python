@@ -59,7 +59,8 @@ public final class CheckList {
       TooManyParametersCheck.class,
       NestedControlFlowDepthCheck.class,
       CollapsibleIfStatementsCheck.class,
-      TrailingCommentCheck.class);
+      TrailingCommentCheck.class,
+      BackslashInStringCheck.class);
   }
 
 }
