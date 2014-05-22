@@ -58,7 +58,8 @@ public final class CheckList {
       UselessParenthesisAfterKeywordCheck.class,
       TooManyParametersCheck.class,
       NestedControlFlowDepthCheck.class,
-      CollapsibleIfStatementsCheck.class);
+      CollapsibleIfStatementsCheck.class,
+      TrailingCommentCheck.class);
   }
 
 }
