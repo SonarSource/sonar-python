@@ -34,7 +34,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 public class BackslashInStringCheck extends SquidCheck<Grammar> {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
-  private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n";
+  private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";
 
   @Override
   public void init() {
