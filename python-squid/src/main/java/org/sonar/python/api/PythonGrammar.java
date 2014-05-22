@@ -221,7 +221,7 @@ public enum PythonGrammar implements GrammarRuleKey {
       b.sequence(TEST, "=", TEST),
       b.sequence(TEST, b.optional(COMP_FOR))));
     b.rule(COMP_ITER).is(b.firstOf(COMP_FOR, COMP_IF));
-    b.rule(COMP_FOR).is("for", EXPRLIST, "in", OR_TEST, b.optional(COMP_ITER));
+    b.rule(COMP_FOR).is("for", EXPRLIST, "in", TESTLIST, b.optional(COMP_ITER));
     b.rule(COMP_IF).is("if", TEST_NOCOND, b.optional(COMP_ITER));
 
     b.rule(YIELD_EXPR).is("yield", b.optional(TESTLIST));

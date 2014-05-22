@@ -57,6 +57,9 @@ public class ExpressionTest extends RuleTest {
     assertThat(p).matches("func(value, parameter = value)");
 
     assertThat(p).matches("lambda x: x**2");
+
+    assertThat(p).matches("[x**2 for x in range(10)]");
+    assertThat(p).matches("[x**2 for x in 1, 2, 3]");
   }
 
 }
