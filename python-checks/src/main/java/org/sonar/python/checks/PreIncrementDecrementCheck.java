@@ -28,6 +28,8 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.checks.SquidCheck;
 
+import java.util.List;
+
 @Rule(
   key = "PreIncrementDecrement",
   priority = Priority.MAJOR)
@@ -41,10 +43,13 @@ public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (astNode.getFirstChild().is(PythonPunctuator.PLUS) && astNode.getChild(1).getFirstChild().is(PythonPunctuator.PLUS)) {
+    List<AstNode> children = astNode.getChildren();
+    AstNode firstChild = children.get(0);
+    AstNode secondChild = children.get(1);
+    if (firstChild.is(PythonPunctuator.PLUS) && secondChild.getFirstChild().is(PythonPunctuator.PLUS)) {
       getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-increment operator", astNode);
     }
-    if (astNode.getFirstChild().is(PythonPunctuator.MINUS) && astNode.getChild(1).getFirstChild().is(PythonPunctuator.MINUS)) {
+    if (firstChild.is(PythonPunctuator.MINUS) && secondChild.getFirstChild().is(PythonPunctuator.MINUS)) {
       getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-decrement operator", astNode);
     }
   }
