@@ -51,7 +51,7 @@ public class DirectoryScanner {
       @Override
       public boolean accept(File file) {
         String path = file.getAbsolutePath();
-        path = path.substring(baseDirAbsolutePath.length());
+        path = path.substring(Math.min(baseDirAbsolutePath.length(), path.length()));
         return pattern.match(FilenameUtils.separatorsToUnix(path));
       }
     };

@@ -20,12 +20,18 @@
 package org.sonar.plugins.python;
 
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.sonar.api.utils.WildcardPattern;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class DirectoryScannerTest {
 
@@ -47,8 +53,29 @@ public class DirectoryScannerTest {
     assertThat(scan("**/f1.txt")).containsOnly(new File(baseDir, "dir/f1.txt"), new File(baseDir, "dir/subdir/f1.txt"));
   }
 
+  @Test
+  public void shouldNotFailWhenChildPathIsUnexpectedlyShorterThanBaseDirPath() throws Exception {
+    File dir = mock(File.class);
+    final File matchingFile = new File("/matching/file");
+    when(dir.getAbsolutePath()).thenReturn("/a/somewhat/long/path");
+    when(dir.isDirectory()).thenReturn(true);
+    when(dir.listFiles(any(FileFilter.class))).thenAnswer(new Answer<File[]>() {
+      @Override
+      public File[] answer(InvocationOnMock invocation) throws Throwable {
+        FileFilter filter = (FileFilter) invocation.getArguments()[0];
+        filter.accept(new File("/short/path"));
+        return new File[] {matchingFile};
+      }
+    });
+    assertThat(scan("xxx", dir)).containsOnly(matchingFile);
+  }
+
   private List<File> scan(String pattern) {
-    DirectoryScanner scanner = new DirectoryScanner(baseDir, WildcardPattern.create(pattern));
+    return scan(pattern, baseDir);
+  }
+
+  private List<File> scan(String pattern, File dir) {
+    DirectoryScanner scanner = new DirectoryScanner(dir, WildcardPattern.create(pattern));
     return scanner.getIncludedFiles();
   }
 
