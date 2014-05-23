@@ -49,7 +49,7 @@ public class BackslashInStringCheck extends SquidCheck<Grammar> {
     boolean inPrefix = true;
     for (int i = 0; i < length; i++) {
       char c = string.charAt(i);
-      inPrefix = inPrefix && c != '"' && c != '\'';
+      inPrefix = isInPrefix(inPrefix, c);
       if (inPrefix && (c == 'r' || c == 'R')) {
         return;
       }
@@ -60,6 +60,10 @@ public class BackslashInStringCheck extends SquidCheck<Grammar> {
         isEscaped = c == '\\' && !isEscaped;
       }
     }
+  }
+
+  private boolean isInPrefix(boolean wasInPrefix, char currentChar) {
+    return wasInPrefix && currentChar != '"' && currentChar != '\'';
   }
 
 }

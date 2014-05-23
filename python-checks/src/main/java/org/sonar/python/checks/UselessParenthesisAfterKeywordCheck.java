@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableMap;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.check.BelongsToProfile;
@@ -29,12 +30,18 @@ import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 import java.util.List;
+import java.util.Map;
 
 @Rule(
   key = "S1721",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
+
+  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
+    PythonGrammar.ASSERT_STMT, "assert",
+    PythonGrammar.RAISE_STMT, "raise",
+    PythonGrammar.WHILE_STMT, "while");
 
   @Override
   public void init() {
@@ -53,9 +60,9 @@ public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    AstNode firstTestChild = node.getFirstChild(PythonGrammar.TEST);
-    if (node.is(PythonGrammar.ASSERT_STMT)) {
-      checkParenthesis(firstTestChild, "assert", node);
+    String keyword = KEYWORDS_FOLLOWED_BY_TEST.get(node.getType());
+    if (keyword != null) {
+      checkParenthesis(node.getFirstChild(PythonGrammar.TEST), keyword, node);
     } else if (node.is(PythonGrammar.DEL_STMT)) {
       checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "del", node);
     } else if (node.is(PythonGrammar.IF_STMT)) {
@@ -67,34 +74,38 @@ public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
     } else if (node.is(PythonGrammar.FOR_STMT)) {
       checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "in", node);
-    } else if (node.is(PythonGrammar.RAISE_STMT)) {
-      checkParenthesis(firstTestChild, "raise", node);
     } else if (node.is(PythonGrammar.RETURN_STMT)) {
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "return", node);
-    } else if (node.is(PythonGrammar.WHILE_STMT)) {
-      checkParenthesis(firstTestChild, "while", node);
     } else if (node.is(PythonGrammar.YIELD_EXPR)) {
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "yield", node);
     } else if (node.is(PythonGrammar.EXCEPT_CLAUSE)) {
-      int nbTests = node.select()
-        .children(PythonGrammar.TEST)
-        .children(PythonGrammar.ATOM)
-        .children(PythonGrammar.TESTLIST_COMP)
-        .children(PythonGrammar.TEST)
-        .size();
-      if (nbTests == 1) {
-        checkParenthesis(firstTestChild, "except", node);
-      }
+      visitExceptClause(node);
     } else if (node.is(PythonGrammar.NOT_TEST)) {
-      boolean hasUselessParenthesis = node.select()
-        .children(PythonGrammar.ATOM)
-        .children(PythonGrammar.TESTLIST_COMP)
-        .children(PythonGrammar.TEST)
-        .children(PythonGrammar.ATOM, PythonGrammar.COMPARISON)
-        .isNotEmpty();
-      if (hasUselessParenthesis) {
-        checkParenthesis(node.getFirstChild().getNextSibling(), "not", node);
-      }
+      visitNotTest(node);
+    }
+  }
+
+  private void visitNotTest(AstNode node) {
+    boolean hasUselessParenthesis = node.select()
+      .children(PythonGrammar.ATOM)
+      .children(PythonGrammar.TESTLIST_COMP)
+      .children(PythonGrammar.TEST)
+      .children(PythonGrammar.ATOM, PythonGrammar.COMPARISON)
+      .isNotEmpty();
+    if (hasUselessParenthesis) {
+      checkParenthesis(node.getFirstChild().getNextSibling(), "not", node);
+    }
+  }
+
+  private void visitExceptClause(AstNode node) {
+    int nbTests = node.select()
+      .children(PythonGrammar.TEST)
+      .children(PythonGrammar.ATOM)
+      .children(PythonGrammar.TESTLIST_COMP)
+      .children(PythonGrammar.TEST)
+      .size();
+    if (nbTests == 1) {
+      checkParenthesis(node.getFirstChild(PythonGrammar.TEST), "except", node);
     }
   }
 
