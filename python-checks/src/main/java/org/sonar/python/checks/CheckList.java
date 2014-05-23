@@ -60,7 +60,8 @@ public final class CheckList {
       NestedControlFlowDepthCheck.class,
       CollapsibleIfStatementsCheck.class,
       TrailingCommentCheck.class,
-      BackslashInStringCheck.class);
+      BackslashInStringCheck.class,
+      EmptyNestedBlockCheck.class);
   }
 
 }
