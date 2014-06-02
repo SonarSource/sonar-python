@@ -34,6 +34,12 @@ public class PylintArgumentsTest {
   }
 
   @Test
+  public void pylint_bat_0_x() {
+    String[] arguments = new PylintArguments(command("pylint.bat 0.28.0")).arguments();
+    assertThat(arguments).containsOnly("-i", "y", "-f", "parseable", "-r", "n");
+  }
+
+  @Test
   public void pylint_1_x() {
     String[] arguments = new PylintArguments(command("pylint 1.1.0")).arguments();
     assertThat(arguments).containsOnly("--msg-template", "{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}", "-r", "n");

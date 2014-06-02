@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 public class PylintArguments {
 
-  private static final Pattern PYLINT_VERSION_PATTERN = Pattern.compile(".*pylint ([0-9\\.]+).*");
+  private static final Pattern PYLINT_VERSION_PATTERN = Pattern.compile(".*pylint[^ ]* ([0-9\\.]+).*");
   private static final String[] ARGS_PYLINT_0_X = {"-i", "y", "-f", "parseable", "-r", "n"};
   private static final String[] ARGS_PYLINT_1_X = {"--msg-template", "{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}", "-r", "n"};
 
