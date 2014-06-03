@@ -46,12 +46,12 @@ public class Flake8Sensor implements Sensor {
 
   private RuleFinder ruleFinder;
   private RulesProfile profile;
-  private PylintConfiguration conf;
+  private Flake8Configuration conf;
   private ModuleFileSystem fileSystem;
   private ResourcePerspectives resourcePerspectives;
 
 
-  public Flake8Sensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
+  public Flake8Sensor(RuleFinder ruleFinder, Flake8Configuration conf, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
