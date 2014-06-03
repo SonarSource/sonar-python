@@ -61,7 +61,7 @@ public class Flake8Sensor implements Sensor {
 
   public boolean shouldExecuteOnProject(Project project) {
     return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty()
-        && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+        && !profile.getActiveRulesByRepository(Flake8RuleRepository.REPOSITORY_KEY).isEmpty();
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
@@ -96,7 +96,7 @@ public class Flake8Sensor implements Sensor {
     List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.sourceCharset(), out);
 
     for (Issue flake8Issue : issues) {
-      Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, flake8Issue.getRuleId());
+      Rule rule = ruleFinder.findByKey(Flake8RuleRepository.REPOSITORY_KEY, flake8Issue.getRuleId());
 
       if (rule != null) {
         if (rule.isEnabled()) {
