@@ -20,12 +20,16 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.ImmutableList;
+
 import org.sonar.api.SonarPlugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.colorizer.PythonColorizer;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.cpd.PythonCpdMapping;
+import org.sonar.plugins.python.flake8.Flake8Configuration;
+import org.sonar.plugins.python.flake8.Flake8RuleRepository;
+import org.sonar.plugins.python.flake8.Flake8Sensor;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
@@ -63,6 +67,10 @@ public class PythonPlugin extends SonarPlugin {
         PylintConfiguration.class,
         PylintSensor.class,
         PylintRuleRepository.class,
+
+        Flake8Configuration.class,
+        Flake8Sensor.class,
+        Flake8RuleRepository.class,
 
         PythonXunitSensor.class,
         PythonCoverageSensor.class);

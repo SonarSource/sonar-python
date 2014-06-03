@@ -27,7 +27,7 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() {
-    assertThat(new PythonPlugin().getExtensions()).hasSize(14);
+    assertThat(new PythonPlugin().getExtensions()).hasSize(17);
   }
 
 }
