@@ -55,7 +55,7 @@ public class Flake8Configuration implements BatchExtension {
     this.conf = conf;
   }
 
-  public String getPylintConfigPath(ModuleFileSystem fileSystem) {
+  public String getFlake8ConfigPath(ModuleFileSystem fileSystem) {
     String configPath = conf.getString(Flake8Configuration.FLAKE8_CONFIG_KEY);
     if (StringUtils.isEmpty(configPath)) {
       return null;
@@ -68,7 +68,7 @@ public class Flake8Configuration implements BatchExtension {
     return configFile.getAbsolutePath();
   }
 
-  public String getPylintPath() {
+  public String getFlake8Path() {
     return conf.getString(Flake8Configuration.FLAKE8_KEY);
   }
 

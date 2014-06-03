@@ -89,8 +89,8 @@ public class Flake8Sensor implements Sensor {
   protected void analyzeFile(File file, File out, Project project, SensorContext sensorContext) throws IOException {
     org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(file, project);
 
-    String flake8ConfigPath = conf.getPylintConfigPath(fileSystem);
-    String flake8Path = conf.getPylintPath();
+    String flake8ConfigPath = conf.getFlake8ConfigPath(fileSystem);
+    String flake8Path = conf.getFlake8Path();
 
     Flake8IssuesAnalyzer analyzer = new Flake8IssuesAnalyzer(flake8Path, flake8ConfigPath);
     List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.sourceCharset(), out);
@@ -111,10 +111,10 @@ public class Flake8Sensor implements Sensor {
             issuable.addIssue(issue);
           }
         } else {
-          LOG.debug("Pylint rule '{}' is disabled in Sonar", flake8Issue.getRuleId());
+          LOG.debug("Flake8 rule '{}' is disabled in Sonar", flake8Issue.getRuleId());
         }
       } else {
-        LOG.warn("Pylint rule '{}' is unknown in Sonar", flake8Issue.getRuleId());
+        LOG.warn("Flake8 rule '{}' is unknown in Sonar", flake8Issue.getRuleId());
       }
     }
   }
