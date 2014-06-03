@@ -92,7 +92,7 @@ public class Flake8Sensor implements Sensor {
     String flake8ConfigPath = conf.getPylintConfigPath(fileSystem);
     String flake8Path = conf.getPylintPath();
 
-    PylintIssuesAnalyzer analyzer = new PylintIssuesAnalyzer(flake8Path, flake8ConfigPath);
+    Flake8IssuesAnalyzer analyzer = new Flake8IssuesAnalyzer(flake8Path, flake8ConfigPath);
     List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.sourceCharset(), out);
 
     for (Issue flake8Issue : issues) {
