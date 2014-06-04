@@ -19,9 +19,11 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.google.common.base.Joiner;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,13 +45,17 @@ public class PylintArguments {
     CommandStreamConsumer out = new CommandStreamConsumer();
     CommandStreamConsumer err = new CommandStreamConsumer();
     CommandExecutor.create().execute(command, out, err, timeout);
-    for (String outLine : out.getData()) {
+    List<String> outputLines = out.getData();
+    for (String outLine : outputLines) {
       Matcher matcher = PYLINT_VERSION_PATTERN.matcher(outLine);
       if (matcher.matches()) {
         return matcher.group(1);
       }
     }
-    throw new IllegalArgumentException("Failed to determine pylint version with command: " + command.toCommandLine());
+    String message =
+      "Failed to determine pylint version with command: \"" + command.toCommandLine()
+        + "\", received " + outputLines.size() + " line(s) of output:\n" + Joiner.on('\n').join(outputLines);
+    throw new IllegalArgumentException(message);
   }
 
   public String[] arguments() {
