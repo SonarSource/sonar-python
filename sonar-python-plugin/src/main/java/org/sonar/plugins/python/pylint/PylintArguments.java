@@ -20,10 +20,10 @@
 package org.sonar.plugins.python.pylint;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,7 +45,7 @@ public class PylintArguments {
     CommandStreamConsumer out = new CommandStreamConsumer();
     CommandStreamConsumer err = new CommandStreamConsumer();
     CommandExecutor.create().execute(command, out, err, timeout);
-    List<String> outputLines = out.getData();
+    Iterable<String> outputLines = Iterables.concat(out.getData(), err.getData());
     for (String outLine : outputLines) {
       Matcher matcher = PYLINT_VERSION_PATTERN.matcher(outLine);
       if (matcher.matches()) {
@@ -54,7 +54,7 @@ public class PylintArguments {
     }
     String message =
       "Failed to determine pylint version with command: \"" + command.toCommandLine()
-        + "\", received " + outputLines.size() + " line(s) of output:\n" + Joiner.on('\n').join(outputLines);
+        + "\", received " + Iterables.size(outputLines) + " line(s) of output:\n" + Joiner.on('\n').join(outputLines);
     throw new IllegalArgumentException(message);
   }
 
