@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite name="nosetests" tests="4" errors="1" failures="1" skip="1"><testcase classname="tests.test_prod" name="test_succeeding" time="0.001"></testcase><testcase classname="tests.test_prod" name="test_failing" time="0.000"><failure type="exceptions.AssertionError" message=""><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python2.7/unittest/case.py", line 331, in run
+    testMethod()
+  File "/usr/lib/python2.7/dist-packages/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/home/wenns/src/wenns/sonar-python/integration-tests/testdata/smoketest_project_2/tests/test_prod.py", line 5, in test_failing
+    assert False
+AssertionError
+]]></failure></testcase><testcase classname="tests.test_prod" name="test_crashing" time="0.000"><error type="exceptions.RuntimeError" message=""><![CDATA[Traceback (most recent call last):
+  File "/usr/lib/python2.7/unittest/case.py", line 331, in run
+    testMethod()
+  File "/usr/lib/python2.7/dist-packages/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/home/wenns/src/wenns/sonar-python/integration-tests/testdata/smoketest_project_2/tests/test_prod.py", line 8, in test_crashing
+    raise RuntimeError()
+RuntimeError
+]]></error></testcase><testcase classname="tests.test_prod" name="test_skipped" time="0.000"><skipped type="unittest.case.SkipTest" message=""><![CDATA[SkipTest
+]]></skipped></testcase></testsuite>

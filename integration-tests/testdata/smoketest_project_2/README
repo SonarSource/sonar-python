@@ -1,0 +1,14 @@
+This test projects is used to test the feature "Importing Test Statistics"
+
+The following scenarios are provided:
+
+1. ** importing test statistics skipping the details **
+   GIVEN this project
+   WHEN we analyse this project with skipDetails=true
+   THEN the values of the metrics should be just aggregated from the reports
+
+2. ** importing test statistics considering details, all resources can be located **
+   GIVEN this project
+   WHEN we analyse this project with skipDetails=false
+   THEN the plugin succeeds to locate all resources and save measures in context of them
+      AND the project-level measures are just like in TC1

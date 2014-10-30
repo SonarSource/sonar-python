@@ -1,6 +1,6 @@
 
 This directory contains automated smoke tests for a build of the Sonar
-C++ Community Plugin. This testsuite will check if the current build
+Python Plugin. This testsuite will check if the current build
 (the .jar archive) does basically work (can be installed, can be
 booted with, can run a basic analysis etc.) with Sonar versions you
 care about.
@@ -21,4 +21,4 @@ care about.
 
 
 == Usage ==
-Just run smoketests in a shell.
+Just run 'smoketests' in a shell.

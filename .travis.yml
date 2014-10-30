@@ -6,13 +6,13 @@ jdk:
 
 
 install:
-        - ./sonar-python-plugin/src/test/integration/setup_sonar.sh
+        - integration-tests/setup_sonar.sh
 
 before_script:
-        - cp sonar-python-plugin/src/test/integration/sitedefs_sample.py sonar-python-plugin/src/test/integration/sitedefs.py
+        - cp integration-tests/sitedefs_sample.py integration-tests/sitedefs.py
         - sudo pip install requests
 
 script:
         - mvn install -DskipTests=true
         - mvn test
-        - RAILS_ENV=production PATH=$PATH:/tmp/sonar-runner-2.4/bin sonar-python-plugin/src/test/integration/smoketest
+        - RAILS_ENV=production PATH=$PATH:/tmp/sonar-runner-2.4/bin integration-tests/smoketest

@@ -52,10 +52,7 @@ public abstract class PythonReportSensor implements Sensor {
   public void analyse(Project project, SensorContext context) {
     try {
       List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), reportPathKey(), defaultReportPath());
-      for (File report : reports) {
-        LOG.info("Processing report '{}'", report);
-        processReport(project, context, report);
-      }
+      processReports(project, context, reports);
     } catch (javax.xml.stream.XMLStreamException e) {
       String msg = new StringBuilder()
         .append("Cannot feed the data into sonar, details: '")
@@ -86,7 +83,7 @@ public abstract class PythonReportSensor implements Sensor {
     return scanner.getIncludedFiles();
   }
 
-  protected void processReport(Project project, SensorContext context, File report) throws javax.xml.stream.XMLStreamException {
+  protected void processReports(Project project, SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
   }
 
   protected void handleNoReportsCase(SensorContext context) {
