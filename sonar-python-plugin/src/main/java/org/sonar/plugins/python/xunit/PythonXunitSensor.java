@@ -125,13 +125,13 @@ public class PythonXunitSensor extends PythonReportSensor {
       double successDensity = testsPassed * 100d / testsCount;
       context.saveMeasure(project, CoreMetrics.TEST_SUCCESS_DENSITY,
                           ParsingUtils.scaleValue(successDensity));
+      
+      context.saveMeasure(project, CoreMetrics.TESTS, testsCount);
+      context.saveMeasure(project, CoreMetrics.SKIPPED_TESTS, testsSkipped);
+      context.saveMeasure(project, CoreMetrics.TEST_ERRORS, testsErrors);
+      context.saveMeasure(project, CoreMetrics.TEST_FAILURES, testsFailures);
+      context.saveMeasure(project, CoreMetrics.TEST_EXECUTION_TIME, testsTime);
     }
-
-    context.saveMeasure(project, CoreMetrics.TESTS, testsCount);
-    context.saveMeasure(project, CoreMetrics.SKIPPED_TESTS, testsSkipped);
-    context.saveMeasure(project, CoreMetrics.TEST_ERRORS, testsErrors);
-    context.saveMeasure(project, CoreMetrics.TEST_FAILURES, testsFailures);
-    context.saveMeasure(project, CoreMetrics.TEST_EXECUTION_TIME, testsTime);
   }
   
   private void detailledMode(final Project project, final SensorContext context,

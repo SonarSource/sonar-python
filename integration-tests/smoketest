@@ -25,33 +25,32 @@ JAR_PATH = os.path.normpath(glob(os.path.join(BASEDIR, "../sonar-python-plugin/t
 TEST_PROJECTS_HOME = "testdata"
 
 TEST_PROJECTS = [
-    # ("smoketest_project_1",
-    #  ["-X"],
-    #  {
-    #      "ncloc": 32.0,
-    #      "lines": 47.0,
-    #      "files": 4.0,
-    #      "directories": 2.0,
-    #      "functions": 7.0,
-    #      "comment_lines_density": 5.9,
-    #      "comment_lines": 2.0,
-    #      "duplicated_lines_density": 80.9,
-    #      "duplicated_lines": 38,
-    #      "duplicated_blocks": 2,
-    #      "duplicated_files": 2,
-    #      "complexity": 15.0,
-    #      "function_complexity": 2.1,
-    #      "violations": 3,
-    #      "violations_density": 71.9,
-    #      "coverage": 43.5,
-    #      "line_coverage": 36.8,
-    #      "branch_coverage": 75.0,
-    #      "test_success_density": 33.3,
-    #      "test_failures": 1.0,
-    #      "test_errors": 1.0,
-    #      "tests": 3.0
-    #  }
-    #  ),
+    ("smoketest_project_1",
+     ["-X"],
+     {
+         "ncloc": 32.0,
+         "lines": 47.0,
+         "files": 4.0,
+         "directories": 2.0,
+         "functions": 7.0,
+         "comment_lines_density": 5.9,
+         "comment_lines": 2.0,
+         "duplicated_lines_density": 80.9,
+         "duplicated_lines": 38,
+         "duplicated_blocks": 2,
+         "duplicated_files": 2,
+         "complexity": 15.0,
+         "function_complexity": 2.1,
+         "violations": 3,
+         "coverage": 43.5,
+         "line_coverage": 36.8,
+         "branch_coverage": 75.0,
+         "test_success_density": 33.3,
+         "test_failures": 1.0,
+         "test_errors": 1.0,
+         "tests": 3.0
+     }
+     ),
     ("smoketest_project_2",
      ["-X", "-Dsonar.python.xunit.skipDetails=true"],
      {
@@ -72,6 +71,28 @@ TEST_PROJECTS = [
          "skipped_tests": 1.0,
          "test_success_density": 33.3,
          "test_execution_time": 1.0,
+     }
+     ),
+    ("smoketest_project_2",
+     ["-X", "-Dsonar.python.xunit.skipDetails=true", "-Dsonar.python.xunit.reportPath=missing"],
+     {
+         "tests": None,
+         "test_failures": None,
+         "test_errors": None,
+         "skipped_tests": None,
+         "test_success_density": None,
+         "test_execution_time": None,
+     }
+     ),
+    ("smoketest_project_2",
+     ["-X", "-Dsonar.python.xunit.skipDetails=false", "-Dsonar.python.xunit.reportPath=missing"],
+     {
+         "tests": None,
+         "test_failures": None,
+         "test_errors": None,
+         "skipped_tests": None,
+         "test_success_density": None,
+         "test_execution_time": None,
      }
      ),
     ("smoketest_project_3",
@@ -300,10 +321,6 @@ def runAnalysis(version, parameters, projecthome):
 
 def diffDicts(d1, d2):
     difflist = []
-    #import pprint
-    #pprint.pprint(d1)
-    #pprint.pprint(d2)
-    
     for k1, v1 in d1.iteritems():
         v2 = d2.get(k1, None)
         if v1 != v2:
