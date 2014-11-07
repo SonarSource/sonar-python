@@ -11,7 +11,7 @@ install:
         - unzip sonarqube-4.5.1.zip
         - wget http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/sonar-runner-dist-2.4.zip
         - unzip sonar-runner-dist-2.4.zip
-        cd -
+        - cd -
 
 before_script:
         - sudo pip install requests
