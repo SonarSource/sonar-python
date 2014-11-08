@@ -29,7 +29,8 @@ from behave import given, when, then, model
 from common import analyselog
 
 
-TESTDATADIR = "/home/wenns/src/sonar-python/integration-tests/testdata"
+TESTDATADIR = os.path.normpath(os.path.join(os.path.realpath(__file__),
+                                            "..", "..", "..", "testdata"))
 SONAR_URL = "http://localhost:9000"
 
 

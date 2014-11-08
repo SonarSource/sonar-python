@@ -24,18 +24,18 @@ import subprocess
 import sys
 import time
 import urllib
+import platform
+import re
+
 from glob import glob
 from shutil import copyfile
 from common import analyselog
-import re
 
 SONAR_URL = "http://localhost:9000"
 INDENT = "    "
 BASEDIR = os.path.dirname(os.path.realpath(__file__))
 jarpattern = os.path.join(BASEDIR, "../../sonar-python-plugin/target/*SNAPSHOT.jar")
 JAR_PATH = os.path.normpath(glob(jarpattern)[0])
-RELPATH_STARTSCRIPT = "bin/linux-x86-32/sonar.sh"
-RELPATH_STOPSCRIPT = "bin/linux-x86-32/sonar.sh"
 RELPATH_LOG = "logs/sonar.log"
 RELPATH_PLUGINS = "extensions/plugins"
 didstartsonar = False
@@ -96,8 +96,8 @@ def before_all(context):
 
 
 def after_all(context):
-    sonarhome = "/home/wenns/sonar/sonarqube-4.5.1"
     if didstartsonar:
+        sonarhome = os.environ.get("SONARHOME", None)
         stop_sonar(sonarhome)
 
 
@@ -144,7 +144,7 @@ def start_sonar(sonarhome):
 
 
 def stop_sonar(sonarhome):
-    sys.stdout.write(INDENT + "stopping Sonar ... ")
+    sys.stdout.write(INDENT + "stopping SonarQube ... ")
     sys.stdout.flush()
     rc = subprocess.call(stop_script(sonarhome), stdout=subprocess.PIPE,
                          shell=(os.name == "nt"))
@@ -157,11 +157,18 @@ def stop_sonar(sonarhome):
 
 
 def start_script(sonarhome):
-    return [os.path.join(sonarhome, RELPATH_STARTSCRIPT), "start"]
+    return [os.path.join(sonarhome, _script_relpath()), "start"]
 
 
 def stop_script(sonarhome):
-    return [os.path.join(sonarhome, RELPATH_STOPSCRIPT), "stop"]
+    return [os.path.join(sonarhome, _script_relpath()), "stop"]
+
+
+def _script_relpath():
+    # Linux x86 only for now
+    if(platform.system() == "Linux" and platform.machine() == "x86_64"):
+        return "bin/linux-x86-64/sonar.sh"
+    return "bin/linux-x86-32/sonar.sh"
 
 
 def sonarlog(sonarhome):
