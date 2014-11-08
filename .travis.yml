@@ -21,4 +21,4 @@ before_script:
 script:
         - mvn install -DskipTests=true
         - mvn test
-        - PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.1 behave; tail -n 100 /tmp/sonarqube-4.5.1/logs/sonar.log
+        - RAILS_ENV=production PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.1 behave
