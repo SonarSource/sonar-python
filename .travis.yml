@@ -16,8 +16,9 @@ install:
 before_script:
         - sudo pip install requests
         - sudo pip install behave
+        - sudo pip install colorama
 
 script:
         - mvn install -DskipTests=true
         - mvn test
-        - PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.1 behave 
+        - PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.1 behave; tail -n 100 /tmp/sonarqube-4.5.1/logs/sonar.log

@@ -25,7 +25,6 @@ import sys
 import time
 import urllib
 import platform
-import re
 
 from glob import glob
 from shutil import copyfile
@@ -65,7 +64,7 @@ except ImportError:
 # -----------------------------------------------------------------------------
 def before_all(context):
     global didstartsonar
-    print(BRIGHT + "\nSetting up the test environment" + RESET_ALL)
+    print BRIGHT + "\nSetting up the test environment" + RESET_ALL
 
     if not is_webui_up():
         sonarhome = os.environ.get("SONARHOME", None)
@@ -75,7 +74,7 @@ def before_all(context):
                 install_plugin(sonarhome)
                 started = start_sonar(sonarhome)
                 if not started:
-                    sys.stderr.write(INDENT + RED + "Cannot start SonarQube from '%', exiting"
+                    sys.stderr.write(INDENT + RED + "Cannot start SonarQube from '%s', exiting"
                                      % sonarhome + RESET)
                     sys.exit(-1)
                 didstartsonar = True
@@ -92,7 +91,7 @@ def before_all(context):
                              + RESET)
             sys.exit(-1)
     else:
-        print(INDENT + "using the SonarQube already running on '%s'\n\n" % SONAR_URL)
+        print INDENT + "using the SonarQube already running on '%s'\n\n" % SONAR_URL
 
 
 def after_all(context):
@@ -166,7 +165,7 @@ def stop_script(sonarhome):
 
 def _script_relpath():
     # Linux x86 only for now
-    if(platform.system() == "Linux" and platform.machine() == "x86_64"):
+    if platform.system() == "Linux" and platform.machine() == "x86_64":
         return "bin/linux-x86-64/sonar.sh"
     return "bin/linux-x86-32/sonar.sh"
 
@@ -202,7 +201,7 @@ def checklogs(sonarhome):
     sys.stdout.write(INDENT + "logs check ... ")
     sys.stdout.flush()
     badlines, errors, warnings = analyselog(sonarlog(sonarhome))
-    
+
     reslabel = GREEN + "OK\n"
     if errors > 0 or (errors == 0 and warnings == 0 and len(badlines) > 0):
         reslabel = RED + "FAILED\n"
@@ -217,6 +216,6 @@ def checklogs(sonarhome):
 
     summary_msg = "%i errors and %i warnings\n" % (errors, warnings)
 
-    print(2*INDENT + len(summary_msg) * "-")
-    print(2*INDENT + summary_msg)
+    print 2*INDENT + len(summary_msg) * "-"
+    print 2*INDENT + summary_msg
     return errors == 0
