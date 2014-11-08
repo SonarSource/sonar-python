@@ -216,9 +216,12 @@
     <name><![CDATA[Use of a non-existent operator]]></name>
     <configKey>E0107</configKey>
     <description>
-      <![CDATA[Used when you attempt to use the C-style pre-increment or pre-decrement operator -- and ++, which doesn't exist in Python.]]>
+      <![CDATA[Used when you attempt to use the C-style pre-increment or pre-decrement operator -- and ++, which doesn't exist in Python.
+               <p>This rule is deprecated, use {rule:python:PreIncrementDecrement} instead.</p>
+      ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0202</key>
@@ -742,9 +745,12 @@
     <name><![CDATA[Too many branches]]></name>
     <configKey>R0912</configKey>
     <description>
-      <![CDATA[Used when a function or method has too many branches, making it hard to follow.]]>
+      <![CDATA[Used when a function or method has too many branches, making it hard to follow.
+               <p>This rule is deprecated, use {rule:python:FunctionComplexity} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>R0913</key>
@@ -877,9 +883,12 @@
     <name><![CDATA[Use of the exec statement]]></name>
     <configKey>W0122</configKey>
     <description>
-      <![CDATA[Used when you use the "exec" statement, to discourage its usage. That doesn't mean you can not use it!]]>
+      <![CDATA[Used when you use the "exec" statement, to discourage its usage. That doesn't mean you can not use it!
+               <p>This rule is deprecated, use {rule:python:ExecStatementUsage} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>W0141</key>
@@ -1030,9 +1039,12 @@
     <name><![CDATA[Use of the <> operator]]></name>
     <configKey>W0331</configKey>
     <description>
-      <![CDATA[Used when the deprecated "<>" operator is used instead of "!=".]]>
+      <![CDATA[Used when the deprecated "<>" operator is used instead of "!=".
+               <p>This rule is deprecated, use {rule:python:InequalityUsage} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>W0332</key>
@@ -1048,9 +1060,12 @@
     <name><![CDATA[Use of the `` operator]]></name>
     <configKey>W0333</configKey>
     <description>
-      <![CDATA[Used when the deprecated "``" (backtick) operator is used instead of the str() function.]]>
+      <![CDATA[Used when the deprecated "``" (backtick) operator is used instead of the str() function.
+               <p>This rule is deprecated, use {rule:python:BackticksUsage} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>W0401</key>
