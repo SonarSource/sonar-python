@@ -40,6 +40,9 @@ import static org.mockito.Mockito.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.File;
 
 public class PythonXunitSensorTest {
   Settings settings;
@@ -53,8 +56,15 @@ public class PythonXunitSensorTest {
     settings = new Settings();
     project = TestUtils.mockProject();
     fs = TestUtils.mockFileSystem();
-    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
     context = mock(SensorContext.class);
+
+    sensor = new PythonXunitSensor(settings, fs);
+    ResourceFinder resourceFinder = mock(ResourceFinder.class);
+    when(resourceFinder.findInSonar(
+           any(File.class), any(SensorContext.class),
+           any(ModuleFileSystem.class), any(Project.class))
+      ).thenReturn(new org.sonar.api.resources.File("doesntmatter"));
+    sensor.injectResourceFinder(resourceFinder);
   }
 
   @Test
@@ -66,23 +76,23 @@ public class PythonXunitSensorTest {
   public void shouldSaveCorrectMeasures() {
     sensor.analyse(project, context);
 
-    // verify(context, times(4)).saveMeasure((Resource) anyObject(),
-    //   eq(CoreMetrics.TESTS), anyDouble());
-    // verify(context, times(4)).saveMeasure((Resource) anyObject(),
-    //   eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
-    // verify(context, times(4)).saveMeasure((Resource) anyObject(),
-    //   eq(CoreMetrics.TEST_ERRORS), anyDouble());
-    // verify(context, times(4)).saveMeasure((Resource) anyObject(),
-    //   eq(CoreMetrics.TEST_FAILURES), anyDouble());
-    // verify(context, times(3)).saveMeasure((Resource) anyObject(),
-    //   eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
-    // verify(context, times(4)).saveMeasure((Resource) anyObject(), any(Measure.class));
+    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+      eq(CoreMetrics.TESTS), anyDouble());
+    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+      eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
+    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+      eq(CoreMetrics.TEST_ERRORS), anyDouble());
+    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+      eq(CoreMetrics.TEST_FAILURES), anyDouble());
+    verify(context, times(2)).saveMeasure((Resource) anyObject(),
+      eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
+    verify(context, times(3)).saveMeasure((Resource) anyObject(), any(Measure.class));
   }
 
   @Test
   public void shouldReportNothingWhenNoReportFound() {
     settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "notexistingpath");
-    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
+    sensor = new PythonXunitSensor(settings, fs);
 
     sensor.analyse(project, context);
 
@@ -92,7 +102,7 @@ public class PythonXunitSensorTest {
   @Test(expected = org.sonar.api.utils.SonarException.class)
   public void shouldThrowWhenGivenInvalidTime() {
     settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXunitSensor(settings, TestUtils.mockLanguage(), fs);
+    sensor = new PythonXunitSensor(settings, fs);
 
     sensor.analyse(project, context);
   }

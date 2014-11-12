@@ -30,7 +30,6 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
@@ -51,7 +50,7 @@ import java.util.List;
     description = "Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.",
     global = false,
     project = true),
-    
+
   @Property(
     key = PythonXunitSensor.SKIP_DETAILS,
     type = PropertyType.BOOLEAN,
@@ -66,11 +65,16 @@ public class PythonXunitSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   public static final String SKIP_DETAILS = "sonar.python.xunit.skipDetails";
-  private Python lang = null;
 
-  public PythonXunitSensor(Settings conf, Python lang, ModuleFileSystem fileSystem) {
+  private ResourceFinder resourceFinder = null;
+
+  public PythonXunitSensor(Settings conf, ModuleFileSystem fileSystem) {
     super(conf, fileSystem);
-    this.lang = lang;
+    this.resourceFinder = new DefaultResourceFinder();
+  }
+
+  void injectResourceFinder(ResourceFinder finder){
+    this.resourceFinder = finder;
   }
 
   @DependsUpon
@@ -89,7 +93,6 @@ public class PythonXunitSensor extends PythonReportSensor {
   protected void processReports(final Project project, final SensorContext context, List<File> reports)
     throws javax.xml.stream.XMLStreamException {
 
-    boolean skipDetails = conf.getBoolean(SKIP_DETAILS);
     if(conf.getBoolean(SKIP_DETAILS)){
       simpleMode(project, context, reports);
     }
@@ -99,15 +102,15 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   private void simpleMode(final Project project, final SensorContext context, List<File> reports)
-    throws javax.xml.stream.XMLStreamException 
+    throws javax.xml.stream.XMLStreamException
   {
     TestSuiteParser parserHandler = new TestSuiteParser();
     StaxParser parser = new StaxParser(parserHandler, false);
     for (File report: reports){
       parser.parse(report);
     }
-    
-    double testsCount = 0.0; 
+
+    double testsCount = 0.0;
     double testsSkipped = 0.0;
     double testsErrors = 0.0;
     double testsFailures = 0.0;
@@ -119,13 +122,13 @@ public class PythonXunitSensor extends PythonReportSensor {
       testsFailures += report.getFailures();
       testsTime += report.getTime();
     }
-    
+
     if (testsCount > 0) {
       double testsPassed = testsCount - testsErrors - testsFailures;
       double successDensity = testsPassed * 100d / testsCount;
       context.saveMeasure(project, CoreMetrics.TEST_SUCCESS_DENSITY,
                           ParsingUtils.scaleValue(successDensity));
-      
+
       context.saveMeasure(project, CoreMetrics.TESTS, testsCount);
       context.saveMeasure(project, CoreMetrics.SKIPPED_TESTS, testsSkipped);
       context.saveMeasure(project, CoreMetrics.TEST_ERRORS, testsErrors);
@@ -133,7 +136,7 @@ public class PythonXunitSensor extends PythonReportSensor {
       context.saveMeasure(project, CoreMetrics.TEST_EXECUTION_TIME, testsTime);
     }
   }
-  
+
   private void detailledMode(final Project project, final SensorContext context,
                              List<File> reports)
     throws javax.xml.stream.XMLStreamException {
@@ -143,21 +146,21 @@ public class PythonXunitSensor extends PythonReportSensor {
       parser.parse(report);
 
       LOG.info("Processing report '{}'", report);
-      
+
       processReportDetailled(project, context, parserHandler.getParsedReports());
     }
   }
-  
+
   private void processReportDetailled(Project project, SensorContext context, Collection<TestSuite> parsedReports)
     throws javax.xml.stream.XMLStreamException
   {
     Collection<TestSuite> locatedResources = lookupResources(project, context, parsedReports);
     for (TestSuite fileReport : locatedResources) {
       org.sonar.api.resources.File unitTest = fileReport.getSonarResource();
-      
+
       LOG.debug("Saving test execution measures for '{}' under resource '{}'",
                 fileReport.getKey(), unitTest.getKey());
-      
+
       context.saveMeasure(unitTest, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
       context.saveMeasure(unitTest, CoreMetrics.TESTS, (double) fileReport.getTests() - fileReport.getSkipped());
       context.saveMeasure(unitTest, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
@@ -181,17 +184,14 @@ public class PythonXunitSensor extends PythonReportSensor {
   org.sonar.api.resources.File findResourceUsingNosetestsStrategy(Project project, SensorContext context, String fileKey) {
     // a) check assuming the key doesnt contain the class name
     String candidateKey = StringUtils.replace(fileKey, ".", "/") + ".py";
-    
-    org.sonar.api.resources.File unitTestFile = getSonarTestFile(new File(candidateKey), project);
-    
-    if (context.getResource(unitTestFile) == null) {
+
+    org.sonar.api.resources.File unitTestFile = getSonarTestFile(new File(candidateKey), context, project);
+
+    if (unitTestFile == null) {
       // b) check assuming the key *does* contain the class name
       String candidateKey2 = StringUtils.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
       if(!(candidateKey2.equals(candidateKey))){
-        unitTestFile = getSonarTestFile(new File(candidateKey2), project);
-        if (context.getResource(unitTestFile) == null) {
-          unitTestFile = null;
-        }
+        unitTestFile = getSonarTestFile(new File(candidateKey2), context, project);
       }
     }
 
@@ -224,13 +224,8 @@ public class PythonXunitSensor extends PythonReportSensor {
     return locatedReports.values();
   }
 
-  private org.sonar.api.resources.File getSonarTestFile(File file, Project project) {
+  private org.sonar.api.resources.File getSonarTestFile(File file, SensorContext context, Project project) {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
-    org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(file, project);
-
-    if (unitTestFile == null) {
-      unitTestFile = org.sonar.api.resources.File.fromIOFile(file, fileSystem.testDirs());
-    }
-    return unitTestFile;
+    return resourceFinder.findInSonar(file, context, fileSystem, project);
   }
 }
