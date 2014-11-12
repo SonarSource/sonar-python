@@ -33,7 +33,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
-import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
 
 import java.io.File;
@@ -43,28 +42,26 @@ import java.util.Map;
 import java.util.List;
 
 @Properties({
-  @Property(
-    key = PythonXunitSensor.REPORT_PATH_KEY,
-    defaultValue = PythonXunitSensor.DEFAULT_REPORT_PATH,
-    name = "Path to xunit report(s)",
-    description = "Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.",
-    global = false,
-    project = true),
+    @Property(
+        key = PythonXunitSensor.REPORT_PATH_KEY,
+        defaultValue = PythonXunitSensor.DEFAULT_REPORT_PATH,
+        name = "Path to xunit report(s)",
+        description = "Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.",
+        global = false, project = true),
 
-  @Property(
-    key = PythonXunitSensor.SKIP_DETAILS,
-    type = PropertyType.BOOLEAN,
-    defaultValue = "true",
-    name = "Skip the details when importing the Xunit reports",
-    description = "If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature",
-    global = false,
-    project = true)
-})
+    @Property(
+        key = PythonXunitSensor.SKIP_DETAILS,
+        type = PropertyType.BOOLEAN,
+        defaultValue = "true",
+        name = "Skip the details when importing the Xunit reports",
+        description = "If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature",
+        global = false, project = true) })
 public class PythonXunitSensor extends PythonReportSensor {
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   public static final String SKIP_DETAILS = "sonar.python.xunit.skipDetails";
+  private final static double PERCENT_BASE = 100d;
 
   private ResourceFinder resourceFinder = null;
 
@@ -73,7 +70,7 @@ public class PythonXunitSensor extends PythonReportSensor {
     this.resourceFinder = new DefaultResourceFinder();
   }
 
-  void injectResourceFinder(ResourceFinder finder){
+  void injectResourceFinder(ResourceFinder finder) {
     this.resourceFinder = finder;
   }
 
@@ -91,22 +88,20 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   protected void processReports(final Project project, final SensorContext context, List<File> reports)
-    throws javax.xml.stream.XMLStreamException {
+      throws javax.xml.stream.XMLStreamException {
 
-    if(conf.getBoolean(SKIP_DETAILS)){
+    if (conf.getBoolean(SKIP_DETAILS)) {
       simpleMode(project, context, reports);
-    }
-    else{
+    } else {
       detailledMode(project, context, reports);
     }
   }
 
   private void simpleMode(final Project project, final SensorContext context, List<File> reports)
-    throws javax.xml.stream.XMLStreamException
-  {
+      throws javax.xml.stream.XMLStreamException {
     TestSuiteParser parserHandler = new TestSuiteParser();
     StaxParser parser = new StaxParser(parserHandler, false);
-    for (File report: reports){
+    for (File report : reports) {
       parser.parse(report);
     }
 
@@ -115,7 +110,7 @@ public class PythonXunitSensor extends PythonReportSensor {
     double testsErrors = 0.0;
     double testsFailures = 0.0;
     double testsTime = 0.0;
-    for(TestSuite report: parserHandler.getParsedReports()){
+    for (TestSuite report : parserHandler.getParsedReports()) {
       testsCount += report.getTests() - report.getSkipped();
       testsSkipped += report.getSkipped();
       testsErrors += report.getErrors();
@@ -125,9 +120,8 @@ public class PythonXunitSensor extends PythonReportSensor {
 
     if (testsCount > 0) {
       double testsPassed = testsCount - testsErrors - testsFailures;
-      double successDensity = testsPassed * 100d / testsCount;
-      context.saveMeasure(project, CoreMetrics.TEST_SUCCESS_DENSITY,
-                          ParsingUtils.scaleValue(successDensity));
+      double successDensity = testsPassed * PERCENT_BASE / testsCount;
+      context.saveMeasure(project, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
 
       context.saveMeasure(project, CoreMetrics.TESTS, testsCount);
       context.saveMeasure(project, CoreMetrics.SKIPPED_TESTS, testsSkipped);
@@ -137,10 +131,9 @@ public class PythonXunitSensor extends PythonReportSensor {
     }
   }
 
-  private void detailledMode(final Project project, final SensorContext context,
-                             List<File> reports)
-    throws javax.xml.stream.XMLStreamException {
-    for(File report: reports){
+  private void detailledMode(final Project project, final SensorContext context, List<File> reports)
+      throws javax.xml.stream.XMLStreamException {
+    for (File report : reports) {
       TestSuiteParser parserHandler = new TestSuiteParser();
       StaxParser parser = new StaxParser(parserHandler, false);
       parser.parse(report);
@@ -152,14 +145,12 @@ public class PythonXunitSensor extends PythonReportSensor {
   }
 
   private void processReportDetailled(Project project, SensorContext context, Collection<TestSuite> parsedReports)
-    throws javax.xml.stream.XMLStreamException
-  {
+      throws javax.xml.stream.XMLStreamException {
     Collection<TestSuite> locatedResources = lookupResources(project, context, parsedReports);
     for (TestSuite fileReport : locatedResources) {
       org.sonar.api.resources.File unitTest = fileReport.getSonarResource();
 
-      LOG.debug("Saving test execution measures for '{}' under resource '{}'",
-                fileReport.getKey(), unitTest.getKey());
+      LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), unitTest.getKey());
 
       context.saveMeasure(unitTest, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
       context.saveMeasure(unitTest, CoreMetrics.TESTS, (double) fileReport.getTests() - fileReport.getSkipped());
@@ -170,7 +161,7 @@ public class PythonXunitSensor extends PythonReportSensor {
       double testsRun = fileReport.getTests() - fileReport.getSkipped();
       if (testsRun > 0) {
         double passedTests = fileReport.getTests() - fileReport.getErrors() - fileReport.getFailures() - fileReport.getSkipped();
-        double successDensity = passedTests * 100d / testsRun;
+        double successDensity = passedTests * PERCENT_BASE / testsRun;
         context.saveMeasure(unitTest, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
       }
       context.saveMeasure(unitTest, new Measure(CoreMetrics.TEST_DATA, fileReport.getDetails()));
@@ -190,7 +181,7 @@ public class PythonXunitSensor extends PythonReportSensor {
     if (unitTestFile == null) {
       // b) check assuming the key *does* contain the class name
       String candidateKey2 = StringUtils.replace(StringUtils.substringBeforeLast(fileKey, "."), ".", "/") + ".py";
-      if(!(candidateKey2.equals(candidateKey))){
+      if ( !(candidateKey2.equals(candidateKey))) {
         unitTestFile = getSonarTestFile(new File(candidateKey2), context, project);
       }
     }

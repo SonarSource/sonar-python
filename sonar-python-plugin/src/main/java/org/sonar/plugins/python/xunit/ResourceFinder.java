@@ -26,5 +26,6 @@ import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import java.io.File;
 
 public interface ResourceFinder {
+
   public org.sonar.api.resources.File findInSonar(File file, SensorContext context, ModuleFileSystem fs, Project project);
 }

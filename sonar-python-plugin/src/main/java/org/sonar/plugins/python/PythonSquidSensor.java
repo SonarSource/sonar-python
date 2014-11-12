@@ -88,14 +88,14 @@ public final class PythonSquidSensor implements Sensor {
     Collection<SquidAstVisitor<Grammar>> squidChecks = annotationCheckFactory.getChecks();
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(squidChecks);
     visitors.add(new FileLinesVisitor(project, fileLinesContextFactory));
-    this.scanner = PythonAstScanner.create(createConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
+    this.scanner = PythonAstScanner.create(createConfiguration(), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     save(squidSourceFiles);
   }
 
-  private PythonConfiguration createConfiguration(Project project) {
+  private PythonConfiguration createConfiguration() {
     return new PythonConfiguration(fileSystem.sourceCharset());
   }
 

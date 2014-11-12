@@ -71,7 +71,7 @@ public class PylintSensor implements Sensor {
     for (File file : fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY))) {
       try {
         File out = new File(workdir, i + ".out");
-        analyzeFile(file, out, project, sensorContext);
+        analyzeFile(file, out, project);
         i++;
       } catch (Exception e) {
         String msg = new StringBuilder()
@@ -86,7 +86,7 @@ public class PylintSensor implements Sensor {
     }
   }
 
-  protected void analyzeFile(File file, File out, Project project, SensorContext sensorContext) throws IOException {
+  protected void analyzeFile(File file, File out, Project project) throws IOException {
     org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(file, project);
 
     String pylintConfigPath = conf.getPylintConfigPath(fileSystem);

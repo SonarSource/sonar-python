@@ -26,7 +26,8 @@ import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import java.io.File;
 
 public class DefaultResourceFinder implements ResourceFinder {
-  public org.sonar.api.resources.File findInSonar(File file, SensorContext context, ModuleFileSystem fs, Project project){
+
+  public org.sonar.api.resources.File findInSonar(File file, SensorContext context, ModuleFileSystem fs, Project project) {
     org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(file, project);
     if (unitTestFile == null) {
       unitTestFile = org.sonar.api.resources.File.fromIOFile(file, fs.testDirs());
@@ -38,5 +39,3 @@ public class DefaultResourceFinder implements ResourceFinder {
     return unitTestFile;
   }
 }
-
-

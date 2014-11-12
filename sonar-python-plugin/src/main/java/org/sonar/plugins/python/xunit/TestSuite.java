@@ -23,8 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a unit test suite. Contains testcases, maintains some statistics.
- * Reports testcase details in sonar-conform XML
+ * Represents a unit test suite. Contains testcases, maintains some statistics. Reports testcase details in sonar-conform XML
  */
 public class TestSuite {
 
@@ -39,7 +38,9 @@ public class TestSuite {
 
   /**
    * Creates a testsuite instance uniquely identified by the given key
-   * @param key The key to construct a testsuite for
+   * 
+   * @param key
+   *          The key to construct a testsuite for
    */
   public TestSuite(String key) {
     this.key = key;
@@ -90,9 +91,11 @@ public class TestSuite {
 
   /**
    * Adds the given test case to this testsuite maintaining the internal statistics
-   * @param tc the test case to add
+   * 
+   * @param tc
+   *          the test case to add
    */
-  public void addTestCase(TestCase tc){
+  public void addTestCase(TestCase tc) {
     if (tc.isSkipped()) {
       skipped++;
     } else if (tc.isFailure()) {
@@ -107,10 +110,12 @@ public class TestSuite {
 
   /**
    * Adds the measures contained by the given test suite to this test suite
-   * @param ts the test suite to add the measures from
+   * 
+   * @param ts
+   *          the test suite to add the measures from
    */
-  public TestSuite addMeasures(TestSuite ts){
-    for(TestCase tc: ts.getTestCases()){
+  public TestSuite addMeasures(TestSuite ts) {
+    for (TestCase tc : ts.getTestCases()) {
       addTestCase(tc);
     }
     return this;
@@ -119,7 +124,7 @@ public class TestSuite {
   /**
    * Returns the testcases contained by this test suite
    */
-  public List<TestCase> getTestCases(){
+  public List<TestCase> getTestCases() {
     return testCases;
   }
 
@@ -129,7 +134,7 @@ public class TestSuite {
   public String getDetails() {
     StringBuilder details = new StringBuilder();
     details.append("<tests-details>");
-    for (TestCase tc: testCases) {
+    for (TestCase tc : testCases) {
       details.append(tc.getDetails());
     }
     details.append("</tests-details>");
