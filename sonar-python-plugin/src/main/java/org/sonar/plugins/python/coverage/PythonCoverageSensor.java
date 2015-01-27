@@ -53,13 +53,26 @@ import java.util.Map;
     name = "Path to coverage report(s) for integration tests",
     description = "Path to coverage reports for integration tests, relative to project's root. Ant patterns are accepted. The reports have to conform to the Cobertura XML format.",
     global = false,
+    project = true),
+  @Property(
+    key = PythonCoverageSensor.OVERALL_REPORT_PATH_KEY,
+    defaultValue = PythonCoverageSensor.OVERALL_DEFAULT_REPORT_PATH,
+    name = "Path to overall (combined UT+IT) coverage report(s)",
+    description = "Path to a report containing overall test coverage data (i.e. test coverage gained by all tests of all kinds), relative to projects root. Ant patterns are accepted. The reports have to conform to the Cobertura XML format.",
+    global = false,
     project = true)
 })
 public class PythonCoverageSensor extends PythonReportSensor {
+  private static final int UNIT_TEST_COVERAGE = 0;
+  public static final int IT_TEST_COVERAGE = 1;
+  public static final int OVERALL_TEST_COVERAGE = 2;
+
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
   public static final String IT_REPORT_PATH_KEY = "sonar.python.coverage.itReportPath";
+  public static final String OVERALL_REPORT_PATH_KEY = "sonar.python.coverage.overallReportPath";
   public static final String DEFAULT_REPORT_PATH = "coverage-reports/coverage-*.xml";
   public static final String IT_DEFAULT_REPORT_PATH = "coverage-reports/it-coverage-*.xml";
+  public static final String OVERALL_DEFAULT_REPORT_PATH = "coverage-reports/overall-coverage-*.xml";
 
   private CoberturaParser parser = new CoberturaParser();
 
@@ -69,15 +82,22 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
+    String baseDir = fileSystem.baseDir().getPath();
+
+    List<File> reports = getReports(conf, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     LOG.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
-    saveMeasures(project, context, coverageMeasures, false);
+    saveMeasures(project, context, coverageMeasures, UNIT_TEST_COVERAGE);
 
     LOG.debug("Parsing integration test coverage reports");
-    List<File> itReports = getReports(conf, fileSystem.baseDir().getPath(), IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
+    List<File> itReports = getReports(conf, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     coverageMeasures = parseReports(itReports);
-    saveMeasures(project, context, coverageMeasures, true);
+    saveMeasures(project, context, coverageMeasures, IT_TEST_COVERAGE);
+
+    LOG.debug("Parsing overall test coverage reports");
+    List<File> overallReports = getReports(conf, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
+    Map<String, CoverageMeasuresBuilder> overallCoverageMeasures = parseReports(overallReports);
+    saveMeasures(project, context, overallCoverageMeasures, OVERALL_TEST_COVERAGE);
   }
 
   private Map<String, CoverageMeasuresBuilder> parseReports(List<File> reports) {
@@ -95,7 +115,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
   private void saveMeasures(Project project,
                             SensorContext context,
                             Map<String, CoverageMeasuresBuilder> coverageMeasures,
-                            boolean itTest) {
+                            int coveragetype) {
     FileResolver fileResolver = new FileResolver(project, fileSystem);
     for(Map.Entry<String, CoverageMeasuresBuilder> entry: coverageMeasures.entrySet()) {
       String filePath = entry.getKey();
@@ -103,7 +123,18 @@ public class PythonCoverageSensor extends PythonReportSensor {
       if (fileExist(context, pythonfile)) {
         LOG.debug("Saving coverage measures for file '{}'", filePath);
         for (Measure measure : entry.getValue().createMeasures()) {
-          measure = itTest ? convertToItMeasure(measure) : measure;
+          switch (coveragetype) {
+          case UNIT_TEST_COVERAGE:
+            break;
+          case IT_TEST_COVERAGE:
+            measure = convertToItMeasure(measure);
+            break;
+          case OVERALL_TEST_COVERAGE:
+            measure = convertForOverall(measure);
+            break;
+          default:
+            break;
+          }
           context.saveMeasure(pythonfile, measure);
         }
       } else {
@@ -132,6 +163,28 @@ public class PythonCoverageSensor extends PythonReportSensor {
       itMeasure = new Measure(CoreMetrics.IT_CONDITIONS_BY_LINE, measure.getData());
     }
     return itMeasure;
+  }
+
+  private Measure convertForOverall(Measure measure) {
+    Measure overallMeasure = null;
+
+    if (CoreMetrics.LINES_TO_COVER.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_LINES_TO_COVER, measure.getValue());
+    } else if (CoreMetrics.UNCOVERED_LINES.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_UNCOVERED_LINES, measure.getValue());
+    } else if (CoreMetrics.COVERAGE_LINE_HITS_DATA.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA, measure.getData());
+    } else if (CoreMetrics.CONDITIONS_TO_COVER.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_CONDITIONS_TO_COVER, measure.getValue());
+    } else if (CoreMetrics.UNCOVERED_CONDITIONS.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_UNCOVERED_CONDITIONS, measure.getValue());
+    } else if (CoreMetrics.COVERED_CONDITIONS_BY_LINE.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_COVERED_CONDITIONS_BY_LINE, measure.getData());
+    } else if (CoreMetrics.CONDITIONS_BY_LINE.equals(measure.getMetric())) {
+      overallMeasure = new Measure(CoreMetrics.OVERALL_CONDITIONS_BY_LINE, measure.getData());
+    }
+
+    return overallMeasure;
   }
 
   private boolean fileExist(SensorContext context, org.sonar.api.resources.File file) {
