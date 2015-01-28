@@ -42,14 +42,7 @@ def step_impl(context, project):
 
 @when(u'I run "{command}"')
 def step_impl(context, command):
-    context.log = "_%s_.log" % context.project
-    projecthome = os.path.join(TESTDATADIR, context.project)
-    with open(context.log, "w") as logfile:
-        rc = subprocess.call(command,
-                             cwd=projecthome,
-                             stdout=logfile, stderr=logfile,
-                             shell=True)
-    context.rc = rc
+    _run_command(context, command)
 
 
 @then(u'the analysis finishes successfully')
@@ -60,7 +53,7 @@ def step_impl(context):
 @then(u'the analysis log contains no error or warning messages')
 def step_impl(context):
     badlines, _errors, _warnings = analyselog(context.log)
-    
+
     assert len(badlines) == 0,\
         ("Found following errors and/or warnings lines in the logfile:\n"
          + "".join(badlines)
@@ -115,3 +108,21 @@ def step_impl(context):
             if pattern.match(line):
                 return True
     return False
+
+
+@when(u'I run sonar-runner with following options')
+def step_impl(context):
+    arguments = [line for line in context.text.split("\n") if line != '']
+    command = "sonar-runner " + " ".join(arguments)
+    _run_command(context, command)
+
+
+def _run_command(context, command):
+    context.log = "_%s_.log" % context.project
+    projecthome = os.path.join(TESTDATADIR, context.project)
+    with open(context.log, "w") as logfile:
+        rc = subprocess.call(command,
+                             cwd=projecthome,
+                             stdout=logfile, stderr=logfile,
+                             shell=True)
+    context.rc = rc
