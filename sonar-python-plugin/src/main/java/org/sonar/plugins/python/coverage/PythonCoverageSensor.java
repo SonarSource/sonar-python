@@ -174,7 +174,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
         hitsDataMetric = CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA;
         linesToCoverMetric = CoreMetrics.OVERALL_LINES_TO_COVER;
         uncoveredLinesMetric = CoreMetrics.OVERALL_UNCOVERED_LINES;
-      default:
+        break;
       }
 
       LOG.debug("Zeroing {}coverage measures for file '{}'", coverageKind, filePath);
@@ -220,7 +220,6 @@ public class PythonCoverageSensor extends PythonReportSensor {
           case OVERALL_COVERAGE:
             measure = convertForOverall(measure);
             break;
-          default:
           }
           context.saveMeasure(pythonfile, measure);
         }
