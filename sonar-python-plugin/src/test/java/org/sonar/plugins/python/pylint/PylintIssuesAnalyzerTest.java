@@ -21,7 +21,6 @@ package org.sonar.plugins.python.pylint;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.sonar.api.utils.SonarException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -91,7 +90,7 @@ public class PylintIssuesAnalyzerTest {
     analyzer(pylintPath, pylintConfigPath);
   }
 
-  @Test(expected = SonarException.class)
+  @Test(expected = IllegalStateException.class)
   public void shouldFailIfGivenInvalidConfig() {
     String pylintConfigPath = "xx_path_that_doesnt_exist_xx";
     String pylintPath = null;
@@ -116,7 +115,7 @@ public class PylintIssuesAnalyzerTest {
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
         analyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i + 1]);
-      } catch (SonarException se) {
+      } catch (IllegalStateException se) {
         assert(false);
       }
     }
@@ -138,7 +137,7 @@ public class PylintIssuesAnalyzerTest {
       try{
         analyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i + 1]);
         assert(false);
-      } catch (SonarException se) {}
+      } catch (IllegalStateException se) {}
     }
   }
 

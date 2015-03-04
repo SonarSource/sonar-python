@@ -19,29 +19,22 @@
  */
 package org.sonar.plugins.python.coverage;
 
-import org.apache.commons.io.FilenameUtils;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
-import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
-import org.sonar.api.scan.filesystem.FileQuery;
-import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.PythonReportSensor;
-import org.sonar.plugins.python.Python;
 
 import javax.xml.stream.XMLStreamException;
-
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +86,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
   private CoberturaParser parser = new CoberturaParser();
 
-  public PythonCoverageSensor(Settings conf, ModuleFileSystem fileSystem) {
+  public PythonCoverageSensor(Settings conf, FileSystem fileSystem) {
     super(conf, fileSystem);
   }
 
@@ -104,91 +97,18 @@ public class PythonCoverageSensor extends PythonReportSensor {
     List<File> reports = getReports(conf, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     LOG.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
-    saveMeasures(project, context, coverageMeasures, CoverageType.UT_COVERAGE);
+    saveMeasures(context, coverageMeasures, CoverageType.UT_COVERAGE);
 
     LOG.debug("Parsing integration test coverage reports");
     List<File> itReports = getReports(conf, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     Map<String, CoverageMeasuresBuilder> itCoverageMeasures = parseReports(itReports);
-    saveMeasures(project, context, itCoverageMeasures, CoverageType.IT_COVERAGE);
+    saveMeasures(context, itCoverageMeasures, CoverageType.IT_COVERAGE);
 
     LOG.debug("Parsing overall test coverage reports");
     List<File> overallReports = getReports(conf, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
     Map<String, CoverageMeasuresBuilder> overallCoverageMeasures = parseReports(overallReports);
-    saveMeasures(project, context, overallCoverageMeasures, CoverageType.OVERALL_COVERAGE);
-
-    if (conf.getBoolean(FORCE_ZERO_COVERAGE_KEY)){
-      LOG.debug("Zeroing coverage information for untouched files");
-
-      zeroMeasuresWithoutReports(project, context, coverageMeasures,
-                                 itCoverageMeasures, overallCoverageMeasures);
-    }
+    saveMeasures(context, overallCoverageMeasures, CoverageType.OVERALL_COVERAGE);
   }
-
-  private void zeroMeasuresWithoutReports(Project project,
-                                          SensorContext context,
-                                          Map<String, CoverageMeasuresBuilder> coverageMeasures,
-                                          Map<String, CoverageMeasuresBuilder> itCoverageMeasures,
-                                          Map<String, CoverageMeasuresBuilder> overallCoverageMeasures
-    ) {
-    for (File file : fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY))) {
-      org.sonar.api.resources.File resource = org.sonar.api.resources.File.fromIOFile(file, project);
-      if (fileExist(context, resource)) {
-
-        Path baseDir = Paths.get(FilenameUtils.normalize(fileSystem.baseDir().getPath()));
-        String filePath = baseDir.relativize(Paths.get(file.getAbsolutePath())).toString();
-
-        if (coverageMeasures.get(filePath) == null) {
-          saveZeroValueForResource(resource, filePath, context, CoverageType.UT_COVERAGE);
-        }
-
-        if (itCoverageMeasures.get(filePath) == null) {
-          saveZeroValueForResource(resource, filePath, context, CoverageType.IT_COVERAGE);
-        }
-
-        if (overallCoverageMeasures.get(filePath) == null) {
-          saveZeroValueForResource(resource, filePath, context, CoverageType.OVERALL_COVERAGE);
-        }
-      }
-    }
-  }
-
-  private void saveZeroValueForResource(org.sonar.api.resources.File resource,
-                                        String filePath, SensorContext context,
-                                        CoverageType ctype) {
-    Measure ncloc = context.getMeasure(resource, CoreMetrics.NCLOC);
-    if (ncloc != null && ncloc.getValue() > 0) {
-      String coverageKind = "unit test ";
-      Metric hitsDataMetric = CoreMetrics.COVERAGE_LINE_HITS_DATA;
-      Metric linesToCoverMetric = CoreMetrics.LINES_TO_COVER;
-      Metric uncoveredLinesMetric = CoreMetrics.UNCOVERED_LINES;
-
-      switch(ctype){
-      case IT_COVERAGE:
-        coverageKind = "integration test ";
-        hitsDataMetric = CoreMetrics.IT_COVERAGE_LINE_HITS_DATA;
-        linesToCoverMetric = CoreMetrics.IT_LINES_TO_COVER;
-        uncoveredLinesMetric = CoreMetrics.IT_UNCOVERED_LINES;
-        break;
-      case OVERALL_COVERAGE:
-        coverageKind = "overall ";
-        hitsDataMetric = CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA;
-        linesToCoverMetric = CoreMetrics.OVERALL_LINES_TO_COVER;
-        uncoveredLinesMetric = CoreMetrics.OVERALL_UNCOVERED_LINES;
-        break;
-      }
-
-      LOG.debug("Zeroing {}coverage measures for file '{}'", coverageKind, filePath);
-
-      PropertiesBuilder<Integer, Integer> lineHitsData = new PropertiesBuilder<Integer, Integer>(hitsDataMetric);
-      for (int i = 1; i <= context.getMeasure(resource, CoreMetrics.LINES).getIntValue(); ++i) {
-        lineHitsData.add(i, 0);
-      }
-      context.saveMeasure(resource, lineHitsData.build());
-      context.saveMeasure(resource, linesToCoverMetric, ncloc.getValue());
-      context.saveMeasure(resource, uncoveredLinesMetric, ncloc.getValue());
-    }
-  }
-
 
   private Map<String, CoverageMeasuresBuilder> parseReports(List<File> reports) {
     Map<String, CoverageMeasuresBuilder>  coverageMeasures = new HashMap<String, CoverageMeasuresBuilder>();
@@ -196,32 +116,29 @@ public class PythonCoverageSensor extends PythonReportSensor {
       try{
         parser.parseReport(report, coverageMeasures);
       } catch (XMLStreamException e) {
-        throw new SonarException("Error parsing the report '" + report + "'", e);
+        throw new IllegalStateException("Error parsing the report '" + report + "'", e);
       }
     }
     return coverageMeasures;
   }
 
-  private void saveMeasures(Project project,
-                            SensorContext context,
-                            Map<String, CoverageMeasuresBuilder> coverageMeasures,
-                            CoverageType ctype) {
-    FileResolver fileResolver = new FileResolver(project, fileSystem);
+  private void saveMeasures(SensorContext context, Map<String, CoverageMeasuresBuilder> coverageMeasures, CoverageType coverageType) {
     for(Map.Entry<String, CoverageMeasuresBuilder> entry: coverageMeasures.entrySet()) {
       String filePath = entry.getKey();
-      org.sonar.api.resources.File pythonfile = fileResolver.getFile(filePath);
-      if (fileExist(context, pythonfile)) {
+      InputFile pythonFile = fileSystem.inputFile(fileSystem.predicates().hasPath(filePath));
+      if (pythonFile != null) {
         LOG.debug("Saving coverage measures for file '{}'", filePath);
         for (Measure measure : entry.getValue().createMeasures()) {
-          switch (ctype) {
+          switch (coverageType) {
           case IT_COVERAGE:
             measure = convertToItMeasure(measure);
             break;
           case OVERALL_COVERAGE:
             measure = convertForOverall(measure);
             break;
+          default:
           }
-          context.saveMeasure(pythonfile, measure);
+          context.saveMeasure(pythonFile, measure);
         }
       } else {
         LOG.debug("Cannot find the file '{}', ignoring coverage measures", filePath);
@@ -272,9 +189,4 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
     return overallMeasure;
   }
-
-  private boolean fileExist(SensorContext context, org.sonar.api.resources.File file) {
-    return context.getResource(file) != null;
-  }
-
 }

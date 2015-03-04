@@ -21,14 +21,12 @@ package org.sonar.plugins.python.pylint;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.Settings;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PylintConfigurationTest {
 
@@ -43,8 +41,8 @@ public class PylintConfigurationTest {
 
   @Test
   public void shouldGetCorrectPylintPath() {
-    ModuleFileSystem fs = mock(ModuleFileSystem.class);
-    when(fs.baseDir()).thenReturn(new File("/projectroot"));
+    DefaultFileSystem fs = new DefaultFileSystem();
+    fs.setBaseDir(new File("/projectroot"));
 
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isNull();
 

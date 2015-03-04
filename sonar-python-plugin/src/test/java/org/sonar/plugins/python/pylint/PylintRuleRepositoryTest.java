@@ -20,8 +20,8 @@
 package org.sonar.plugins.python.pylint;
 
 import org.junit.Test;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.XMLRuleParser;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
 import java.util.List;
 
@@ -31,10 +31,13 @@ public class PylintRuleRepositoryTest {
 
   @Test
   public void createRulesTest() {
-    PylintRuleRepository rulerep = new PylintRuleRepository(new XMLRuleParser());
-    List<Rule> rules = rulerep.createRules();
+    PylintRuleRepository ruleRepository = new PylintRuleRepository(new RulesDefinitionXmlLoader());
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    ruleRepository.define(context);
+    List<RulesDefinition.Rule> rules = context.repository(PylintRuleRepository.REPOSITORY_KEY).rules();
 
-    assertThat(rules.size()).isEqualTo(180);
+    assertThat(rules).isNotNull();
+    assertThat(rules).hasSize(180);
   }
 
 }

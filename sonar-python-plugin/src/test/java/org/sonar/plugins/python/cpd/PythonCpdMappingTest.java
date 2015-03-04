@@ -19,14 +19,9 @@
  */
 package org.sonar.plugins.python.cpd;
 
-import org.sonar.plugins.python.Python;
-
-import org.sonar.plugins.python.cpd.PythonCpdMapping;
-
-import org.sonar.plugins.python.cpd.PythonTokenizer;
-
 import org.junit.Test;
-import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.plugins.python.Python;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -36,7 +31,7 @@ public class PythonCpdMappingTest {
   @Test
   public void test() {
     Python language = mock(Python.class);
-    ProjectFileSystem fs = mock(ProjectFileSystem.class);
+    FileSystem fs = mock(FileSystem.class);
     PythonCpdMapping mapping = new PythonCpdMapping(language, fs);
     assertThat(mapping.getLanguage()).isSameAs(language);
     assertThat(mapping.getTokenizer()).isInstanceOf(PythonTokenizer.class);

@@ -23,11 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
-import org.sonar.api.scan.filesystem.FileQuery;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
-import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.WildcardPattern;
 
 import java.io.File;
@@ -38,28 +36,29 @@ public abstract class PythonReportSensor implements Sensor {
   protected static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
 
   protected Settings conf = null;
-  protected ModuleFileSystem fileSystem;
+  protected FileSystem fileSystem;
 
-  public PythonReportSensor(Settings conf, ModuleFileSystem fileSystem) {
+  public PythonReportSensor(Settings conf, FileSystem fileSystem) {
     this.conf = conf;
     this.fileSystem = fileSystem;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty();
+    return fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY));
   }
 
+  @Override
   public void analyse(Project project, SensorContext context) {
     try {
       List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), reportPathKey(), defaultReportPath());
-      processReports(project, context, reports);
+      processReports(context, reports);
     } catch (javax.xml.stream.XMLStreamException e) {
       String msg = new StringBuilder()
-        .append("Cannot feed the data into sonar, details: '")
-        .append(e)
-        .append("'")
-        .toString();
-      throw new SonarException(msg, e);
+          .append("Cannot feed the data into sonar, details: '")
+          .append(e)
+          .append("'")
+          .toString();
+      throw new IllegalStateException(msg, e);
     }
   }
 
@@ -68,12 +67,9 @@ public abstract class PythonReportSensor implements Sensor {
     return getClass().getSimpleName();
   }
 
-  protected List<File> getReports(Settings conf,
-                                  String baseDirPath,
-                                  String reportPathPropertyKey,
-                                  String defaultReportPath) {
+  protected List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
     String reportPath = conf.getString(reportPathPropertyKey);
-    if(reportPath == null){
+    if (reportPath == null) {
       reportPath = defaultReportPath;
     }
 
@@ -83,10 +79,7 @@ public abstract class PythonReportSensor implements Sensor {
     return scanner.getIncludedFiles();
   }
 
-  protected void processReports(Project project, SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
-  }
-
-  protected void handleNoReportsCase(SensorContext context) {
+  protected void processReports(SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
   }
 
   protected String reportPathKey() {

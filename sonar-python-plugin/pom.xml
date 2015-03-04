@@ -25,12 +25,18 @@
   <properties>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
+    <!--<sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>-->
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-plugin-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-deprecated</artifactId>
       <scope>provided</scope>
     </dependency>
 

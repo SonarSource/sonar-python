@@ -20,15 +20,20 @@
 package org.sonar.python.metrics;
 
 import com.google.common.collect.Sets;
-import com.sonar.sslr.api.*;
-import org.sonar.squidbridge.SquidAstVisitor;
+import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.resources.File;
-import org.sonar.api.resources.Project;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.squidbridge.SquidAstVisitor;
 
 import java.util.List;
 import java.util.Set;
@@ -38,15 +43,15 @@ import java.util.Set;
  */
 public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
-  private final Project project;
   private final FileLinesContextFactory fileLinesContextFactory;
 
   private final Set<Integer> linesOfCode = Sets.newHashSet();
   private final Set<Integer> linesOfComments = Sets.newHashSet();
+  private final FileSystem fileSystem;
 
-  public FileLinesVisitor(Project project, FileLinesContextFactory fileLinesContextFactory) {
-    this.project = project;
+  public FileLinesVisitor(FileLinesContextFactory fileLinesContextFactory, FileSystem fileSystem) {
     this.fileLinesContextFactory = fileLinesContextFactory;
+    this.fileSystem = fileSystem;
   }
 
   public void visitToken(Token token) {
@@ -72,8 +77,8 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
   @Override
   public void leaveFile(AstNode astNode) {
-    File sonarFile = File.fromIOFile(getContext().getFile(), project);
-    FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
+    InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(getContext().getFile()));
+    FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
     int fileLength = getContext().peekSourceCode().getInt(PythonMetric.LINES);
     for (int line = 1; line <= fileLength; line++) {

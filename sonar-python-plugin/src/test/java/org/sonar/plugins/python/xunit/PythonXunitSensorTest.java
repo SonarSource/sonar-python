@@ -24,6 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.CoverageExtension;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
@@ -31,7 +34,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.TestUtils;
-import org.sonar.plugins.python.ResourceFinder;
+
+import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.anyObject;
@@ -41,31 +45,22 @@ import static org.mockito.Mockito.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import java.io.File;
-
-public class PythonXunitSensorTest {
+public class PythonXUnitSensorTest {
   Settings settings;
-  PythonXunitSensor sensor;
+  PythonXUnitSensor sensor;
   SensorContext context;
   Project project;
-  ModuleFileSystem fs;
+  DefaultFileSystem fs;
 
   @Before
   public void setUp() {
     settings = new Settings();
-    project = TestUtils.mockProject();
-    fs = TestUtils.mockFileSystem();
+    project = mock(Project.class);
+    fs = new DefaultFileSystem();
+    fs.setBaseDir(new File("src/test/resources/org/sonar/plugins/python"));
     context = mock(SensorContext.class);
-
-    sensor = new PythonXunitSensor(settings, fs);
-    ResourceFinder resourceFinder = mock(ResourceFinder.class);
-    when(resourceFinder.findTestFile(
-           any(File.class), any(SensorContext.class),
-           any(ModuleFileSystem.class), any(Project.class))
-      ).thenReturn(new org.sonar.api.resources.File("doesntmatter"));
-    sensor.injectResourceFinder(resourceFinder);
+    sensor = new PythonXUnitSensor(settings, fs);
   }
 
   @Test
@@ -75,35 +70,37 @@ public class PythonXunitSensorTest {
 
   @Test
   public void shouldSaveCorrectMeasures() {
+    fs.add(new DefaultInputFile("test_sample.py"));
+    fs.add(new DefaultInputFile("tests/dir/test_sample.py"));
     sensor.analyse(project, context);
 
-    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+    verify(context, times(3)).saveMeasure((InputFile) anyObject(),
       eq(CoreMetrics.TESTS), anyDouble());
-    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+    verify(context, times(3)).saveMeasure((InputFile) anyObject(),
       eq(CoreMetrics.SKIPPED_TESTS), anyDouble());
-    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+    verify(context, times(3)).saveMeasure((InputFile) anyObject(),
       eq(CoreMetrics.TEST_ERRORS), anyDouble());
-    verify(context, times(3)).saveMeasure((Resource) anyObject(),
+    verify(context, times(3)).saveMeasure((InputFile) anyObject(),
       eq(CoreMetrics.TEST_FAILURES), anyDouble());
-    verify(context, times(2)).saveMeasure((Resource) anyObject(),
+    verify(context, times(2)).saveMeasure((InputFile) anyObject(),
       eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
-    verify(context, times(3)).saveMeasure((Resource) anyObject(), any(Measure.class));
+    verify(context, times(3)).saveMeasure((InputFile) anyObject(), any(Measure.class));
   }
 
   @Test
   public void shouldReportNothingWhenNoReportFound() {
-    settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "notexistingpath");
-    sensor = new PythonXunitSensor(settings, fs);
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");
+    sensor = new PythonXUnitSensor(settings, fs);
 
     sensor.analyse(project, context);
 
     verify(context, times(0)).saveMeasure(eq(CoreMetrics.TESTS), any(Double.class));
   }
 
-  @Test(expected = org.sonar.api.utils.SonarException.class)
+  @Test(expected = IllegalStateException.class)
   public void shouldThrowWhenGivenInvalidTime() {
-    settings.setProperty(PythonXunitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXunitSensor(settings, fs);
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
+    sensor = new PythonXUnitSensor(settings, fs);
 
     sensor.analyse(project, context);
   }

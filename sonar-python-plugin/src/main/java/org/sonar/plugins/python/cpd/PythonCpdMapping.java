@@ -19,12 +19,11 @@
  */
 package org.sonar.plugins.python.cpd;
 
-import org.sonar.plugins.python.Python;
-
 import net.sourceforge.pmd.cpd.Tokenizer;
 import org.sonar.api.batch.AbstractCpdMapping;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.resources.Language;
-import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.plugins.python.Python;
 
 import java.nio.charset.Charset;
 
@@ -33,9 +32,9 @@ public class PythonCpdMapping extends AbstractCpdMapping {
   private final Python language;
   private final Charset charset;
 
-  public PythonCpdMapping(Python language, ProjectFileSystem fs) {
+  public PythonCpdMapping(Python language, FileSystem fs) {
     this.language = language;
-    this.charset = fs.getSourceCharset();
+    this.charset = fs.encoding();
   }
 
   public Tokenizer getTokenizer() {

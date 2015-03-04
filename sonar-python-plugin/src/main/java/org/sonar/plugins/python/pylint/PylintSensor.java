@@ -25,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.profiles.RulesProfile;
@@ -32,9 +34,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.scan.filesystem.FileQuery;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
-import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.python.Python;
 
 import java.io.File;
@@ -49,12 +48,12 @@ public class PylintSensor implements Sensor {
   private RuleFinder ruleFinder;
   private RulesProfile profile;
   private PylintConfiguration conf;
-  private ModuleFileSystem fileSystem;
+  private FileSystem fileSystem;
   private ResourcePerspectives resourcePerspectives;
   private Settings settings;
 
 
-  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives, Settings settings) {
+  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, FileSystem fileSystem, ResourcePerspectives resourcePerspectives, Settings settings) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
@@ -64,18 +63,19 @@ public class PylintSensor implements Sensor {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty()
-      && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty()
-      && settings.getString(REPORT_PATH_KEY) == null;
+    boolean x1 = fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY)),
+        x2 = !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+    return fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY))
+        && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty() && settings.getString(REPORT_PATH_KEY) == null;
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    File workdir = new File(fileSystem.workingDir(), "/pylint/");
-    prepareWorkDir(workdir);
+    File workDir = new File(fileSystem.baseDir(), "/pylint/");
+    prepareWorkDir(workDir);
     int i = 0;
-    for (File file : fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY))) {
+    for (File file : fileSystem.files(fileSystem.predicates().hasLanguage(Python.KEY))) {
       try {
-        File out = new File(workdir, i + ".out");
+        File out = new File(workDir, i + ".out");
         analyzeFile(file, out, project);
         i++;
       } catch (Exception e) {
@@ -86,26 +86,26 @@ public class PylintSensor implements Sensor {
             .append(e)
             .append("'")
             .toString();
-        throw new SonarException(msg, e);
+        throw new IllegalStateException(msg, e);
       }
     }
   }
 
   protected void analyzeFile(File file, File out, Project project) throws IOException {
-    org.sonar.api.resources.File pyfile = org.sonar.api.resources.File.fromIOFile(file, project);
+    InputFile pyFile = fileSystem.inputFile(fileSystem.predicates().is(file));
 
     String pylintConfigPath = conf.getPylintConfigPath(fileSystem);
     String pylintPath = conf.getPylintPath();
 
     PylintIssuesAnalyzer analyzer = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
-    List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.sourceCharset(), out);
+    List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.encoding(), out);
 
     for (Issue pylintIssue : issues) {
       Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId());
 
       if (rule != null) {
         if (rule.isEnabled()) {
-          Issuable issuable = resourcePerspectives.as(Issuable.class, pyfile);
+          Issuable issuable = resourcePerspectives.as(Issuable.class, pyFile);
 
           if (issuable != null) {
             org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
@@ -130,7 +130,7 @@ public class PylintSensor implements Sensor {
       // directory is cleaned, because Sonar 3.0 will not do this for us
       FileUtils.cleanDirectory(dir);
     } catch (IOException e) {
-      throw new SonarException("Cannot create directory: " + dir, e);
+      throw new IllegalStateException("Cannot create directory: " + dir, e);
     }
   }
 

@@ -19,33 +19,27 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.sonar.api.config.Settings;
-import com.google.common.collect.ImmutableList;
-import org.apache.commons.collections.ListUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.scan.filesystem.FileQuery;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.pylint.PylintRuleRepository;
 
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PylintSensorTest {
-
-  private ModuleFileSystem fs;
   private RuleFinder ruleFinder;
   private PylintConfiguration conf;
   private RulesProfile profile;
@@ -55,13 +49,12 @@ public class PylintSensorTest {
     ruleFinder = mock(RuleFinder.class);
     conf = mock(PylintConfiguration.class);
     profile = mock(RulesProfile.class);
-
-    fs = mock(ModuleFileSystem.class);
   }
 
   @Test
-  public void shouldntThrowWhenInstantiating() {
-    new PylintSensor(ruleFinder, conf, profile, fs, mock(ResourcePerspectives.class), new Settings());
+  public void shouldNotThrowWhenInstantiating() {
+    DefaultFileSystem fileSystem = new DefaultFileSystem();
+    new PylintSensor(ruleFinder, conf, profile, fileSystem, mock(ResourcePerspectives.class), new Settings());
   }
 
   @Test
@@ -69,35 +62,27 @@ public class PylintSensorTest {
     // which means: only on python projects and only if
     // there is at least one active pylint rule
 
-    Project pythonProject = createProjectForLanguage(Python.KEY);
-    Project foreignProject = createProjectForLanguage("whatever");
+    DefaultFileSystem fileSystemPython = new DefaultFileSystem();
+    DefaultFileSystem fileSystemForeign = new DefaultFileSystem();
+    DefaultInputFile inputFile1 = new DefaultInputFile("src/test/resources/example_project/example.swift").setLanguage(Python.KEY);
+    inputFile1.setAbsolutePath((new File("src/test/resources/example_project/example.swift")).getAbsolutePath());
+    fileSystemPython.add(inputFile1);
+
+    Project pythonProject = mock(Project.class);
+    Project foreignProject = mock(Project.class);
     RulesProfile emptyProfile = mock(RulesProfile.class);
     RulesProfile pylintProfile = createPylintProfile();
 
-    when(fs.files(any(FileQuery.class))).thenReturn(ImmutableList.of(new File("/tmp")));
-    checkNecessityOfExecution(pythonProject, pylintProfile, true);
-    checkNecessityOfExecution(pythonProject, emptyProfile, false);
+    checkNecessityOfExecution(pythonProject, pylintProfile, fileSystemPython, true);
+    checkNecessityOfExecution(pythonProject, emptyProfile, fileSystemPython, false);
 
-    when(fs.files(any(FileQuery.class))).thenReturn(ListUtils.EMPTY_LIST);
-    checkNecessityOfExecution(foreignProject, pylintProfile, false);
-    checkNecessityOfExecution(foreignProject, emptyProfile, false);
+    checkNecessityOfExecution(foreignProject, pylintProfile, fileSystemForeign, false);
+    checkNecessityOfExecution(foreignProject, emptyProfile, fileSystemForeign, false);
   }
 
-  @Test
-  public void analyse() {
-
-
-  }
-
-  private void checkNecessityOfExecution(Project project, RulesProfile profile, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fs, mock(ResourcePerspectives.class), new Settings());
+  private void checkNecessityOfExecution(Project project, RulesProfile profile, DefaultFileSystem fileSystem, boolean shouldExecute) {
+    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fileSystem, mock(ResourcePerspectives.class));
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
-  }
-
-  private static Project createProjectForLanguage(String languageKey) {
-    Project project = mock(Project.class);
-    when(project.getLanguageKey()).thenReturn(languageKey);
-    return project;
   }
 
   private static RulesProfile createPylintProfile() {

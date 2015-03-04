@@ -22,11 +22,14 @@ package org.sonar.python.checks;
 import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.sonar.api.rules.AnnotationRuleParser;
+import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.batch.rule.CheckFactory;
+import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -68,7 +71,14 @@ public class CheckListTest {
     ResourceBundle resourceBundle = ResourceBundle.getBundle("org.sonar.l10n.python", Locale.ENGLISH);
 
     Set<String> keys = Sets.newHashSet();
-    List<Rule> rules = new AnnotationRuleParser().parse("repositoryKey", checks);
+
+    ActiveRules activeRules = (new ActiveRulesBuilder())
+        .build();
+    CheckFactory checkFactory = new CheckFactory(activeRules);
+    Collection<Rule> rules = checkFactory
+        .<Rule>create("repositoryKey")
+        .addAnnotatedChecks(CheckList.getChecks())
+        .all();
     for (Rule rule : rules) {
       assertThat(keys).as("Duplicate key " + rule.getKey()).excludes(rule.getKey());
       keys.add(rule.getKey());

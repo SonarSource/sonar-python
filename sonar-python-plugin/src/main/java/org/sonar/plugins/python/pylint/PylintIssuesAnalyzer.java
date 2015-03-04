@@ -23,7 +23,6 @@ import com.google.common.io.Files;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 
@@ -52,7 +51,7 @@ public class PylintIssuesAnalyzer {
 
     if (pylintConfigPath != null) {
       if (!new File(pylintConfigPath).exists()) {
-        throw new SonarException("Cannot find the pylint configuration file: " + pylintConfigPath);
+        throw new IllegalStateException("Cannot find the pylint configuration file: " + pylintConfigPath);
       }
       pylintConfigParam = "--rcfile=" + pylintConfigPath;
     }
@@ -63,7 +62,7 @@ public class PylintIssuesAnalyzer {
   private static String pylintPathWithDefault(String pylintPath) {
     if (pylintPath != null) {
       if (!new File(pylintPath).exists()) {
-        throw new SonarException("Cannot find the pylint executable: " + pylintPath);
+        throw new IllegalStateException("Cannot find the pylint executable: " + pylintPath);
       }
       return pylintPath;
     }

@@ -19,55 +19,62 @@
  */
 package org.sonar.plugins.python.coverage;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.config.Settings;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.resources.Project;
+
+import java.io.File;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.config.Settings;
-import org.sonar.api.measures.Measure;
-import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Resource;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
-import org.sonar.plugins.python.TestUtils;
 
 public class PythonCoverageSensorTest {
   PythonCoverageSensor sensor;
   SensorContext context;
   Project project;
   Settings settings;
-  ModuleFileSystem fs;
+  DefaultFileSystem fs;
 
   @Before
   public void setUp() {
-    project = TestUtils.mockProject();
+    project = mock(Project.class);
     settings = new Settings();
-    fs = TestUtils.mockFileSystem();
+    fs = new DefaultFileSystem();
+    fs.setBaseDir(new File("src/test/resources/org/sonar/plugins/python"));
     sensor = new PythonCoverageSensor(settings, fs);
     context = mock(SensorContext.class);
-    Resource resourceMock = mock(Resource.class);
-    when(context.getResource((Resource)anyObject())).thenReturn(resourceMock);
   }
 
   @Test
   public void shouldReportCorrectIssues() {
+    fs.add(new DefaultInputFile("sources/file1.py"));
+    fs.add(new DefaultInputFile("sources/file2.py"));
+    fs.add(new DefaultInputFile("sources/file3.py"));
+    fs.add(new DefaultInputFile("sources/file4.py"));
+    fs.add(new DefaultInputFile("sources/file5.py"));
+    fs.add(new DefaultInputFile("sources/file6.py"));
+    fs.add(new DefaultInputFile("sources/file7.py"));
     sensor.analyse(project, context);
-    verify(context, times(66)).saveMeasure((Resource) anyObject(), any(Measure.class));
+    verify(context, times(33)).saveMeasure((InputFile) anyObject(), any(Measure.class));
   }
 
-  @Test(expected=org.sonar.api.utils.SonarException.class)
+  @Test(expected=IllegalStateException.class)
   public void shouldFailOnInvalidReport() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
     sensor = new PythonCoverageSensor(settings, fs);
     sensor.analyse(project, context);
   }
 
-  @Test(expected=org.sonar.api.utils.SonarException.class)
+  @Test(expected=IllegalStateException.class)
   public void shouldFailOnInvalidIntegrationReport() {
     settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
     sensor = new PythonCoverageSensor(settings, fs);

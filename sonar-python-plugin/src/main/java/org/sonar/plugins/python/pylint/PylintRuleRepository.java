@@ -19,34 +19,29 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleRepository;
-import org.sonar.api.rules.XMLRuleParser;
+import com.google.common.base.Charsets;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.plugins.python.Python;
 
-import java.util.List;
-
-public class PylintRuleRepository extends RuleRepository {
+public class PylintRuleRepository implements RulesDefinition {
 
   public static final String REPOSITORY_NAME = "Pylint";
   public static final String REPOSITORY_KEY = REPOSITORY_NAME;
 
   private static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
-  private final XMLRuleParser ruleParser;
+  private final RulesDefinitionXmlLoader xmlLoader;
 
-  public PylintRuleRepository(XMLRuleParser ruleParser) {
-    super(REPOSITORY_KEY, Python.KEY);
-    setName(REPOSITORY_NAME);
-    this.ruleParser = ruleParser;
+  public PylintRuleRepository(RulesDefinitionXmlLoader xmlLoader) {
+    this.xmlLoader = xmlLoader;
   }
 
   @Override
-  public List<Rule> createRules() {
-    List<Rule> rules = ruleParser.parse(getClass().getResourceAsStream(RULES_FILE));
-    for (Rule r : rules) {
-      r.setRepositoryKey(REPOSITORY_KEY);
-    }
-    return rules;
+  public void define(Context context) {
+    NewRepository repository = context
+        .createRepository(REPOSITORY_KEY, Python.KEY)
+        .setName(REPOSITORY_NAME);
+    xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), Charsets.UTF_8.name());
+    repository.done();
   }
-
 }

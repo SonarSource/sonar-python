@@ -23,8 +23,8 @@ import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 import java.io.File;
 
@@ -55,7 +55,7 @@ public class PylintConfiguration implements BatchExtension {
     this.conf = conf;
   }
 
-  public String getPylintConfigPath(ModuleFileSystem fileSystem) {
+  public String getPylintConfigPath(FileSystem fileSystem) {
     String configPath = conf.getString(PylintConfiguration.PYLINT_CONFIG_KEY);
     if (StringUtils.isEmpty(configPath)) {
       return null;

@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python.xunit;
 
+import org.sonar.api.batch.fs.InputFile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ import java.util.List;
 public class TestSuite {
 
   private String key;
-  private org.sonar.api.resources.File sonarResource = null;
+  private InputFile inputFile = null;
   private int errors = 0;
   private int skipped = 0;
   private int tests = 0;
@@ -141,11 +143,11 @@ public class TestSuite {
     return details.toString();
   }
 
-  public void setSonarResource(org.sonar.api.resources.File resource) {
-    sonarResource = resource;
+  public void setInputFile(InputFile inputFile) {
+    this.inputFile = inputFile;
   }
 
-  public org.sonar.api.resources.File getSonarResource() {
-    return sonarResource;
+  public InputFile getInputFile() {
+    return inputFile;
   }
 }
