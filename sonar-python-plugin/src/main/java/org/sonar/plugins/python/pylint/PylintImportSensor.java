@@ -19,30 +19,29 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
-import org.sonar.api.config.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FilePredicates;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.config.Settings;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.scan.filesystem.FileQuery;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
-import org.sonar.plugins.python.DefaultResourceFinder;
-import org.sonar.plugins.python.ResourceFinder;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.LinkedList;
 
 @Properties({
   @Property(
@@ -63,22 +62,19 @@ public class PylintImportSensor extends PythonReportSensor  {
   private RulesProfile profile;
   private ResourcePerspectives resourcePerspectives;
 
-  private ResourceFinder resourceFinder = null;
-
-  public PylintImportSensor(Settings conf, RuleFinder ruleFinder, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
+  public PylintImportSensor(Settings conf, RuleFinder ruleFinder, RulesProfile profile, FileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
     super(conf, fileSystem);
 
     this.ruleFinder = ruleFinder;
     this.profile = profile;
     this.resourcePerspectives = resourcePerspectives;
-
-    this.resourceFinder = new DefaultResourceFinder();
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty()
-      && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty()
-      && conf.getString(REPORT_PATH_KEY) != null;
+    FilePredicates p = fileSystem.predicates();
+    boolean hasFiles = fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+    boolean hasRules = !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+    return hasFiles && hasRules && conf.getString(REPORT_PATH_KEY) != null;
   }
 
   protected String reportPathKey() {
@@ -121,10 +117,7 @@ public class PylintImportSensor extends PythonReportSensor  {
   private void saveIssues(List<Issue> issues, SensorContext context, Project project){
     for (Issue pylintIssue : issues) {
       String filepath = pylintIssue.getFilename();
-      org.sonar.api.resources.File pyfile =
-        resourceFinder.findRegularFile(new File(fileSystem.baseDir(), filepath),
-                                       context, fileSystem, project);
-
+      InputFile pyfile = fileSystem.inputFile(fileSystem.predicates().hasPath(filepath));
       if(pyfile != null){
         Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId());
 
