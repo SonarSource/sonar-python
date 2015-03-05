@@ -30,7 +30,9 @@ import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "LineLength",
-  priority = Priority.MINOR)
+  priority = Priority.MINOR,
+  tags = Tags.CONVENTION
+)
 public class LineLengthCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
   private static final int DEFAULT_MAXIMUM_LINE_LENHGTH = 80;

@@ -17,29 +17,18 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import org.sonar.check.BelongsToProfile;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
+public class Tags {
+  public static final String BRAIN_OVERLOAD = "brain-overload";
+  public static final String BUG = "bug";
+  public static final String CLUMSY = "clumsy";
+  public static final String CONVENTION = "convention";
+  public static final String OBSOLETE = "obsolete";
+  public static final String SECURITY = "security";
 
-@Rule(
-  key = "S1542",
-  priority = Priority.MAJOR,
-  tags = Tags.CONVENTION
-)
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class FunctionNameCheck extends AbstractFunctionNameCheck {
-
-  @Override
-  public String typeName() {
-    return "function";
+  private Tags() {
+    // This class only defines constants
   }
-
-  @Override
-  public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return !CheckUtils.isMethodDefinition(astNode);
-  }
-
 }

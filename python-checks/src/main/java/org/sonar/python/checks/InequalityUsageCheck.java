@@ -29,7 +29,9 @@ import org.sonar.python.api.PythonPunctuator;
 
 @Rule(
   key = "InequalityUsage",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.OBSOLETE
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class InequalityUsageCheck extends SquidCheck<Grammar> {
 

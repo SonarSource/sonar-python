@@ -34,7 +34,9 @@ import java.util.regex.Pattern;
 
 @Rule(
   key = "S139",
-  priority = Priority.INFO)
+  priority = Priority.INFO,
+  tags = Tags.CONVENTION
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.INFO)
 public class TrailingCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 

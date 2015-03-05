@@ -32,7 +32,9 @@ import java.util.regex.Pattern;
 
 @Rule(
   key = ClassNameCheck.KEY,
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.CONVENTION
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ClassNameCheck extends SquidCheck<Grammar> {
 

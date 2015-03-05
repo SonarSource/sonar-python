@@ -32,7 +32,9 @@ import org.sonar.squidbridge.api.SourceFile;
 
 @Rule(
   key = "FileComplexity",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.BRAIN_OVERLOAD
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class FileComplexityCheck extends SquidCheck<Grammar> {
 

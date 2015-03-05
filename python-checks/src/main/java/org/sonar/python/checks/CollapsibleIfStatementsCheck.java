@@ -33,7 +33,9 @@ import java.util.List;
 
 @Rule(
   key = "S1066",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.CLUMSY
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class CollapsibleIfStatementsCheck extends SquidCheck<Grammar> {
 

@@ -29,7 +29,9 @@ import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "PrintStatementUsage",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.OBSOLETE
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class PrintStatementUsageCheck extends SquidCheck<Grammar> {
 

@@ -33,7 +33,9 @@ import org.sonar.squidbridge.api.SourceClass;
 
 @Rule(
   key = "ClassComplexity",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.BRAIN_OVERLOAD
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ClassComplexityCheck extends SquidCheck<Grammar> {
 

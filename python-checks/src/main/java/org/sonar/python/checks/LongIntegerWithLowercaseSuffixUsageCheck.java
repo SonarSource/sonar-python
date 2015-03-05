@@ -29,7 +29,9 @@ import org.sonar.python.api.PythonTokenType;
 
 @Rule(
   key = "LongIntegerWithLowercaseSuffixUsage",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.CONVENTION
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<Grammar> {
 

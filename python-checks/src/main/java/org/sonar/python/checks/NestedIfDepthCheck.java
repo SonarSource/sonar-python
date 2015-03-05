@@ -34,6 +34,7 @@ import org.sonar.sslr.grammar.GrammarRuleKey;
 @Rule(
   key = "NestedIfDepth",
   priority = Priority.MINOR,
+  tags = Tags.BRAIN_OVERLOAD,
   status = org.sonar.api.rules.Rule.STATUS_DEPRECATED)
 public class NestedIfDepthCheck extends SquidCheck<Grammar> {
 
