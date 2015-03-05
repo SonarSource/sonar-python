@@ -35,7 +35,9 @@ import java.util.Map;
  */
 @Rule(
   key = "OneStatementPerLine",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.CONVENTION
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class OneStatementPerLineCheck extends SquidCheck<Grammar> {
 

@@ -33,7 +33,9 @@ import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
   key = "S108",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.BUG
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
 

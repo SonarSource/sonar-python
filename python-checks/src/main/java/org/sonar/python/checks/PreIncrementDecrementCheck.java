@@ -32,7 +32,9 @@ import java.util.List;
 
 @Rule(
   key = "PreIncrementDecrement",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.BUG
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
 

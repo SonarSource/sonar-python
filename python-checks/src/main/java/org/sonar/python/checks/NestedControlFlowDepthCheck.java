@@ -30,7 +30,9 @@ import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S134",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.BRAIN_OVERLOAD
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class NestedControlFlowDepthCheck extends SquidCheck<Grammar> {
 

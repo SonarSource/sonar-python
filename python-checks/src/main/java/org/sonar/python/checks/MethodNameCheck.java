@@ -26,7 +26,9 @@ import org.sonar.check.Rule;
 
 @Rule(
   key = "S100",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  tags = Tags.CONVENTION
+)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class MethodNameCheck extends AbstractFunctionNameCheck {
 
