@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.python.xunit;
+package org.sonar.plugins.python;
 
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
@@ -27,7 +27,7 @@ import java.io.File;
 
 public class DefaultResourceFinder implements ResourceFinder {
 
-  public org.sonar.api.resources.File findInSonar(File file, SensorContext context, ModuleFileSystem fs, Project project) {
+  public org.sonar.api.resources.File findTestFile(File file, SensorContext context, ModuleFileSystem fs, Project project) {
     org.sonar.api.resources.File unitTestFile = org.sonar.api.resources.File.fromIOFile(file, project);
     if (unitTestFile == null) {
       unitTestFile = org.sonar.api.resources.File.fromIOFile(file, fs.testDirs());
@@ -37,5 +37,14 @@ public class DefaultResourceFinder implements ResourceFinder {
     }
 
     return unitTestFile;
+  }
+
+  public org.sonar.api.resources.File findRegularFile(File file, SensorContext context, ModuleFileSystem fs, Project project) {
+    org.sonar.api.resources.File regFile = org.sonar.api.resources.File.fromIOFile(file, project);
+    if (context.getResource(regFile) == null) {
+      regFile = null;
+    }
+
+    return regFile;
   }
 }

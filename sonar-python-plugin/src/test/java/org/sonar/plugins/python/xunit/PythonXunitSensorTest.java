@@ -31,6 +31,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.python.TestUtils;
+import org.sonar.plugins.python.ResourceFinder;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.anyObject;
@@ -60,7 +61,7 @@ public class PythonXunitSensorTest {
 
     sensor = new PythonXunitSensor(settings, fs);
     ResourceFinder resourceFinder = mock(ResourceFinder.class);
-    when(resourceFinder.findInSonar(
+    when(resourceFinder.findTestFile(
            any(File.class), any(SensorContext.class),
            any(ModuleFileSystem.class), any(Project.class))
       ).thenReturn(new org.sonar.api.resources.File("doesntmatter"));

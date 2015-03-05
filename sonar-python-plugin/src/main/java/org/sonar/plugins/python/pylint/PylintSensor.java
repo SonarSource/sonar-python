@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import org.sonar.api.config.Settings;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class PylintSensor implements Sensor {
+  public static final String REPORT_PATH_KEY = "sonar.python.pylint.reportPath";
 
   private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
 
@@ -49,19 +51,22 @@ public class PylintSensor implements Sensor {
   private PylintConfiguration conf;
   private ModuleFileSystem fileSystem;
   private ResourcePerspectives resourcePerspectives;
+  private Settings settings;
 
 
-  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
+  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives resourcePerspectives, Settings settings) {
     this.ruleFinder = ruleFinder;
     this.conf = conf;
     this.profile = profile;
     this.fileSystem = fileSystem;
     this.resourcePerspectives = resourcePerspectives;
+    this.settings = settings;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
     return !fileSystem.files(FileQuery.onSource().onLanguage(Python.KEY)).isEmpty()
-        && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+      && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty()
+      && settings.getString(REPORT_PATH_KEY) == null;
   }
 
   public void analyse(Project project, SensorContext sensorContext) {

@@ -34,6 +34,8 @@ import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
+import org.sonar.plugins.python.DefaultResourceFinder;
+import org.sonar.plugins.python.ResourceFinder;
 
 import java.io.File;
 import java.util.Collection;
@@ -217,6 +219,6 @@ public class PythonXunitSensor extends PythonReportSensor {
 
   private org.sonar.api.resources.File getSonarTestFile(File file, SensorContext context, Project project) {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
-    return resourceFinder.findInSonar(file, context, fileSystem, project);
+    return resourceFinder.findTestFile(file, context, fileSystem, project);
   }
 }

@@ -63,6 +63,8 @@ except ImportError:
 # HOOKS:
 # -----------------------------------------------------------------------------
 def before_all(context):
+    context.cleanup_callbacks = []
+
     global didstartsonar
     print BRIGHT + "\nSetting up the test environment" + RESET_ALL
 
@@ -74,13 +76,13 @@ def before_all(context):
                 install_plugin(sonarhome)
                 started = start_sonar(sonarhome)
                 if not started:
-                    sys.stderr.write(INDENT + RED + "Cannot start SonarQube from '%s', exiting"
+                    sys.stderr.write(INDENT + RED + "Cannot start SonarQube from '%s', exiting\n"
                                      % sonarhome + RESET)
                     sys.exit(-1)
                 didstartsonar = True
                 checklogs(sonarhome)
             else:
-                sys.stderr.write(INDENT + RED + "The folder '%s' doesnt exist, exiting"
+                sys.stderr.write(INDENT + RED + "The folder '%s' doesnt exist, exiting\n"
                                  % sonarhome + RESET)
                 sys.exit(-1)
         else:
@@ -98,6 +100,14 @@ def after_all(context):
     if didstartsonar:
         sonarhome = os.environ.get("SONARHOME", None)
         stop_sonar(sonarhome)
+
+
+def after_feature(context, step):
+    try:
+        for callback in context.cleanup_callbacks:
+            callback(context)
+    finally:
+        context.cleanup_callbacks[:] = []
 
 
 # -----------------------------------------------------------------------------

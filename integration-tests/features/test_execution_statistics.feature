@@ -72,7 +72,7 @@ Feature: Providing test execution numbers
       WHEN I run "sonar-runner -Dsonar.python.xunit.reportPath=invalid_report.xml"
 
       THEN the analysis breaks
-          AND the analysis log should contain a line matching:
+          AND the analysis log contains a line matching:
               """
               ERROR.*Cannot feed the data into sonar, details: .*
               """
