@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.component.ResourcePerspectives;
@@ -63,17 +64,19 @@ public class PylintSensor implements Sensor {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    boolean x1 = fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY)),
-        x2 = !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
-    return fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY))
-        && !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty() && settings.getString(REPORT_PATH_KEY) == null;
+    FilePredicates p = fileSystem.predicates();
+    boolean hasFiles = fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+    boolean hasRules = !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+    return hasFiles && hasRules && settings.getString(REPORT_PATH_KEY) == null;
   }
 
   public void analyse(Project project, SensorContext sensorContext) {
-    File workDir = new File(fileSystem.baseDir(), "/pylint/");
+    File workDir = new File(fileSystem.workDir(), "/pylint/");
     prepareWorkDir(workDir);
     int i = 0;
-    for (File file : fileSystem.files(fileSystem.predicates().hasLanguage(Python.KEY))) {
+    FilePredicates p = fileSystem.predicates();
+    Iterable<File> files = fileSystem.files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+    for (File file : files) {
       try {
         File out = new File(workDir, i + ".out");
         analyzeFile(file, out, project);

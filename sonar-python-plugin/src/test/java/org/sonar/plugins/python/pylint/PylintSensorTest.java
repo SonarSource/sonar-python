@@ -64,8 +64,8 @@ public class PylintSensorTest {
 
     DefaultFileSystem fileSystemPython = new DefaultFileSystem();
     DefaultFileSystem fileSystemForeign = new DefaultFileSystem();
-    DefaultInputFile inputFile1 = new DefaultInputFile("src/test/resources/example_project/example.swift").setLanguage(Python.KEY);
-    inputFile1.setAbsolutePath((new File("src/test/resources/example_project/example.swift")).getAbsolutePath());
+    DefaultInputFile inputFile1 = new DefaultInputFile("src/test/resources/example_project/example.py").setLanguage(Python.KEY);
+    inputFile1.setAbsolutePath((new File("src/test/resources/example_project/example.py")).getAbsolutePath());
     fileSystemPython.add(inputFile1);
 
     Project pythonProject = mock(Project.class);
@@ -81,7 +81,7 @@ public class PylintSensorTest {
   }
 
   private void checkNecessityOfExecution(Project project, RulesProfile profile, DefaultFileSystem fileSystem, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fileSystem, mock(ResourcePerspectives.class));
+    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fileSystem, mock(ResourcePerspectives.class), new Settings());
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
   }
 

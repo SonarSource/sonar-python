@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -77,7 +78,8 @@ public final class PythonSquidSensor implements Sensor {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY));
+    FilePredicates p = fileSystem.predicates();
+    return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
   }
 
   public void analyse(Project project, SensorContext context) {
@@ -86,7 +88,8 @@ public final class PythonSquidSensor implements Sensor {
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(checks.all());
     visitors.add(new FileLinesVisitor(fileLinesContextFactory, fileSystem));
     this.scanner = PythonAstScanner.create(createConfiguration(), visitors.toArray(new SquidAstVisitor[visitors.size()]));
-    scanner.scanFiles(Lists.newArrayList(fileSystem.files(fileSystem.predicates().hasLanguage(Python.KEY))));
+    FilePredicates p = fileSystem.predicates();
+    scanner.scanFiles(Lists.newArrayList(fileSystem.files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     save(squidSourceFiles);
@@ -144,7 +147,7 @@ public final class PythonSquidSensor implements Sensor {
 
         if (issuable != null) {
           Issue issue = issuable.newIssueBuilder()
-            .ruleKey(RuleKey.of(ruleKey.repository(), ruleKey.rule()))
+            .ruleKey(ruleKey)
             .line(message.getLine())
             .message(message.getText(Locale.ENGLISH))
             .build();

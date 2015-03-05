@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.coverage;
 
+import org.apache.commons.io.FilenameUtils;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -30,11 +31,15 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
+import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
+import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +113,79 @@ public class PythonCoverageSensor extends PythonReportSensor {
     List<File> overallReports = getReports(conf, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
     Map<String, CoverageMeasuresBuilder> overallCoverageMeasures = parseReports(overallReports);
     saveMeasures(context, overallCoverageMeasures, CoverageType.OVERALL_COVERAGE);
+
+    if (conf.getBoolean(FORCE_ZERO_COVERAGE_KEY)){
+      LOG.debug("Zeroing coverage information for untouched files");
+
+      zeroMeasuresWithoutReports(context, coverageMeasures,
+                                 itCoverageMeasures, overallCoverageMeasures);
+    }
   }
+
+  private void zeroMeasuresWithoutReports(SensorContext context,
+                                          Map<String, CoverageMeasuresBuilder> coverageMeasures,
+                                          Map<String, CoverageMeasuresBuilder> itCoverageMeasures,
+                                          Map<String, CoverageMeasuresBuilder> overallCoverageMeasures
+    ) {
+    for (File file : fileSystem.files(fileSystem.predicates().and(fileSystem.predicates().hasType(InputFile.Type.MAIN), fileSystem.predicates().hasLanguage(Python.KEY)))) {
+      InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(file));
+      if (inputFile != null) {
+
+        Path baseDir = Paths.get(FilenameUtils.normalize(fileSystem.baseDir().getPath()));
+        String filePath = baseDir.relativize(Paths.get(file.getAbsolutePath())).toString();
+
+        if (coverageMeasures.get(filePath) == null) {
+          saveZeroValueForResource(inputFile, filePath, context, CoverageType.UT_COVERAGE);
+        }
+
+        if (itCoverageMeasures.get(filePath) == null) {
+          saveZeroValueForResource(inputFile, filePath, context, CoverageType.IT_COVERAGE);
+        }
+
+        if (overallCoverageMeasures.get(filePath) == null) {
+          saveZeroValueForResource(inputFile, filePath, context, CoverageType.OVERALL_COVERAGE);
+        }
+      }
+    }
+  }
+
+  private void saveZeroValueForResource(InputFile inputFile,
+                                        String filePath, SensorContext context,
+                                        CoverageType ctype) {
+    Measure ncloc = context.getMeasure(context.getResource(inputFile), CoreMetrics.NCLOC);
+    if (ncloc != null && ncloc.getValue() > 0) {
+      String coverageKind = "unit test ";
+      Metric hitsDataMetric = CoreMetrics.COVERAGE_LINE_HITS_DATA;
+      Metric linesToCoverMetric = CoreMetrics.LINES_TO_COVER;
+      Metric uncoveredLinesMetric = CoreMetrics.UNCOVERED_LINES;
+
+      switch(ctype){
+      case IT_COVERAGE:
+        coverageKind = "integration test ";
+        hitsDataMetric = CoreMetrics.IT_COVERAGE_LINE_HITS_DATA;
+        linesToCoverMetric = CoreMetrics.IT_LINES_TO_COVER;
+        uncoveredLinesMetric = CoreMetrics.IT_UNCOVERED_LINES;
+        break;
+      case OVERALL_COVERAGE:
+        coverageKind = "overall ";
+        hitsDataMetric = CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA;
+        linesToCoverMetric = CoreMetrics.OVERALL_LINES_TO_COVER;
+        uncoveredLinesMetric = CoreMetrics.OVERALL_UNCOVERED_LINES;
+      default:
+      }
+
+      LOG.debug("Zeroing {}coverage measures for file '{}'", coverageKind, filePath);
+
+      PropertiesBuilder<Integer, Integer> lineHitsData = new PropertiesBuilder<>(hitsDataMetric);
+      for (int i = 1; i <= context.getMeasure(context.getResource(inputFile), CoreMetrics.LINES).getIntValue(); ++i) {
+        lineHitsData.add(i, 0);
+      }
+      context.saveMeasure(inputFile, lineHitsData.build());
+      context.saveMeasure(inputFile, linesToCoverMetric, ncloc.getValue());
+      context.saveMeasure(inputFile, uncoveredLinesMetric, ncloc.getValue());
+    }
+  }
+
 
   private Map<String, CoverageMeasuresBuilder> parseReports(List<File> reports) {
     Map<String, CoverageMeasuresBuilder>  coverageMeasures = new HashMap<String, CoverageMeasuresBuilder>();

@@ -20,9 +20,7 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.Grammar;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockitoAnnotations;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -42,11 +40,6 @@ import static org.mockito.Mockito.when;
 public class FileLinesVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources/metrics");
-
-  @Before
-  public void before() {
-    MockitoAnnotations.initMocks(this);
-  }
 
   @Test
   public void test() {

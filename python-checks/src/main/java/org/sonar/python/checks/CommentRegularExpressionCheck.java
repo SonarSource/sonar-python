@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.Grammar;
+import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -27,7 +28,8 @@ import org.sonar.squidbridge.checks.AbstractCommentRegularExpressionCheck;
 
 @Rule(
   key = "CommentRegularExpression",
-  priority = Priority.MAJOR)
+  priority = Priority.MAJOR,
+  cardinality = Cardinality.MULTIPLE)
 public class CommentRegularExpressionCheck extends AbstractCommentRegularExpressionCheck<Grammar> {
 
   private static final String DEFAULT_REGULAR_EXPRESSION = "";

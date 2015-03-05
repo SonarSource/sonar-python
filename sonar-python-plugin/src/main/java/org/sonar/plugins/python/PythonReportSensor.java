@@ -23,7 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.WildcardPattern;
@@ -44,7 +46,8 @@ public abstract class PythonReportSensor implements Sensor {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return fileSystem.hasFiles(fileSystem.predicates().hasLanguage(Python.KEY));
+    FilePredicates p = fileSystem.predicates();
+    return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
   }
 
   @Override

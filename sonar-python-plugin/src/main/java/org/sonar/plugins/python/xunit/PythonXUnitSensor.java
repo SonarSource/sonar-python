@@ -22,6 +22,7 @@ package org.sonar.plugins.python.xunit;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.batch.CoverageExtension;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
@@ -46,11 +47,20 @@ import java.util.Map;
         defaultValue = PythonXUnitSensor.DEFAULT_REPORT_PATH,
         name = "Path to xunit report(s)",
         description = "Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.",
-        global = false, project = true)})
+        global = false, project = true),
+
+    @Property(
+        key = PythonXUnitSensor.SKIP_DETAILS,
+        type = PropertyType.BOOLEAN,
+        defaultValue = "true",
+        name = "Skip the details when importing the Xunit reports",
+        description = "If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature",
+        global = false, project = true) })
 public class PythonXUnitSensor extends PythonReportSensor {
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
+  public static final String SKIP_DETAILS = "sonar.python.xunit.skipDetails";
   private final static double PERCENT_BASE = 100d;
 
   public PythonXUnitSensor(Settings conf, FileSystem fileSystem) {
@@ -71,7 +81,52 @@ public class PythonXUnitSensor extends PythonReportSensor {
   }
 
   @Override
-  protected void processReports(SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
+  protected void processReports(final SensorContext context, List<File> reports)
+      throws javax.xml.stream.XMLStreamException {
+
+    if (conf.getBoolean(SKIP_DETAILS)) {
+      simpleMode(context, reports);
+    } else {
+      detailledMode(context, reports);
+    }
+  }
+
+  private void simpleMode(final SensorContext context, List<File> reports)
+      throws javax.xml.stream.XMLStreamException {
+    TestSuiteParser parserHandler = new TestSuiteParser();
+    StaxParser parser = new StaxParser(parserHandler, false);
+    for (File report : reports) {
+      parser.parse(report);
+    }
+
+    double testsCount = 0.0;
+    double testsSkipped = 0.0;
+    double testsErrors = 0.0;
+    double testsFailures = 0.0;
+    double testsTime = 0.0;
+    for (TestSuite report : parserHandler.getParsedReports()) {
+      testsCount += report.getTests() - report.getSkipped();
+      testsSkipped += report.getSkipped();
+      testsErrors += report.getErrors();
+      testsFailures += report.getFailures();
+      testsTime += report.getTime();
+    }
+
+    if (testsCount > 0) {
+      double testsPassed = testsCount - testsErrors - testsFailures;
+      double successDensity = testsPassed * PERCENT_BASE / testsCount;
+      context.saveMeasure(CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
+
+      context.saveMeasure(CoreMetrics.TESTS, testsCount);
+      context.saveMeasure(CoreMetrics.SKIPPED_TESTS, testsSkipped);
+      context.saveMeasure(CoreMetrics.TEST_ERRORS, testsErrors);
+      context.saveMeasure(CoreMetrics.TEST_FAILURES, testsFailures);
+      context.saveMeasure(CoreMetrics.TEST_EXECUTION_TIME, testsTime);
+    }
+  }
+
+  private void detailledMode(final SensorContext context, List<File> reports)
+      throws javax.xml.stream.XMLStreamException {
     for (File report : reports) {
       TestSuiteParser parserHandler = new TestSuiteParser();
       StaxParser parser = new StaxParser(parserHandler, false);
