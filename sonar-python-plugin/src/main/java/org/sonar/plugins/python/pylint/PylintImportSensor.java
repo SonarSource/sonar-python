@@ -85,7 +85,7 @@ public class PylintImportSensor extends PythonReportSensor  {
     return DEFAULT_REPORT_PATH;
   }
 
-  protected void processReports(final Project project, final SensorContext context, List<File> reports)
+  protected void processReports(final SensorContext context, List<File> reports)
       throws javax.xml.stream.XMLStreamException {
     List<Issue> issues = new LinkedList<Issue>();
     for(File report: reports){
@@ -96,7 +96,7 @@ public class PylintImportSensor extends PythonReportSensor  {
       }
     }
 
-    saveIssues(issues, context, project);
+    saveIssues(issues, context);
   }
 
   private List<Issue> parse(File report) throws java.io.FileNotFoundException {
@@ -114,7 +114,7 @@ public class PylintImportSensor extends PythonReportSensor  {
     return issues;
   }
 
-  private void saveIssues(List<Issue> issues, SensorContext context, Project project){
+  private void saveIssues(List<Issue> issues, SensorContext context) {
     for (Issue pylintIssue : issues) {
       String filepath = pylintIssue.getFilename();
       InputFile pyfile = fileSystem.inputFile(fileSystem.predicates().hasPath(filepath));
