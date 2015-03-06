@@ -21,23 +21,35 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
 /**
  * Note that implementation differs from AbstractNestedIfCheck - see SONARPLUGINS-1855
  */
-@Rule(
-  key = "NestedIfDepth",
-  priority = Priority.MINOR,
-  tags = Tags.BRAIN_OVERLOAD,
-  status = org.sonar.api.rules.Rule.STATUS_DEPRECATED)
-public class NestedIfDepthCheck extends SquidCheck<Grammar> {
 
+@Rule(
+    key = NestedIfDepthCheck.CHECK_KEY,
+    priority = Priority.MINOR,
+    name = "Avoid deeply nested if statements",
+    tags = Tags.BRAIN_OVERLOAD,
+    status = org.sonar.api.rules.Rule.STATUS_DEPRECATED
+)
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNIT_TESTABILITY)
+@SqaleConstantRemediation("30min")
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+@ActivatedByDefault
+public class NestedIfDepthCheck extends SquidCheck<Grammar> {
+  public static final String CHECK_KEY = "NestedIfDepth";
   private int nestingLevel;
 
   private static final int DEFAULT_MAXIMUM_NESTING_LEVEL = 3;

@@ -34,7 +34,7 @@ public class BackticksUsageCheckTest {
 
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/backticksUsage.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Replace backticks by call to repr().")
+        .next().atLine(1).withMessage("Use \"repr\" instead.")
         .noMore();
   }
 

@@ -19,28 +19,20 @@
  */
 package org.sonar.plugins.python;
 
-import org.sonar.api.rules.AnnotationRuleParser;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleRepository;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.python.checks.CheckList;
+import org.sonar.squidbridge.annotations.AnnotationBasedRulesDefinition;
 
-import java.util.List;
-
-public class PythonRuleRepository extends RuleRepository {
+public class PythonRuleRepository implements RulesDefinition {
 
   private static final String REPOSITORY_NAME = "SonarQube";
 
-  private final AnnotationRuleParser annotationRuleParser;
-
-  public PythonRuleRepository(AnnotationRuleParser annotationRuleParser) {
-    super(CheckList.REPOSITORY_KEY, Python.KEY);
-    setName(REPOSITORY_NAME);
-    this.annotationRuleParser = annotationRuleParser;
-  }
-
   @Override
-  public List<Rule> createRules() {
-    return annotationRuleParser.parse(CheckList.REPOSITORY_KEY, CheckList.getChecks());
+  public void define(Context context) {
+    NewRepository repository = context
+        .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
+        .setName(REPOSITORY_NAME);
+    AnnotationBasedRulesDefinition.load(repository, Python.KEY, CheckList.getChecks());
+    repository.done();
   }
-
 }

@@ -21,6 +21,10 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
@@ -28,12 +32,18 @@ import org.sonar.check.Rule;
 import org.sonar.python.api.PythonTokenType;
 
 @Rule(
-  key = "LongIntegerWithLowercaseSuffixUsage",
-  priority = Priority.MAJOR,
-  tags = Tags.CONVENTION
+    key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY,
+    priority = Priority.MINOR,
+    name = "Long suffix \"L\" should be upper case",
+    tags = Tags.CONVENTION
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
+@SqaleConstantRemediation("2min")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+@ActivatedByDefault
 public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<Grammar> {
+
+  public static final String CHECK_KEY = "S1129";
 
   @Override
   public void init() {

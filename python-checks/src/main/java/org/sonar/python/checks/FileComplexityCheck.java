@@ -21,27 +21,37 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.ChecksHelper;
-import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonMetric;
+import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.api.SourceFile;
+import org.sonar.squidbridge.checks.ChecksHelper;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
-  key = "FileComplexity",
-  priority = Priority.MAJOR,
-  tags = Tags.BRAIN_OVERLOAD
+    key = FileComplexityCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Files should not be too complex",
+    tags = Tags.BRAIN_OVERLOAD
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
+@SqaleLinearWithOffsetRemediation(
+    coeff = "1min",
+    offset = "30min",
+    effortToFixDescription = "per complexity point above the threshold")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class FileComplexityCheck extends SquidCheck<Grammar> {
-
+  public static final String CHECK_KEY = "S1908";
+  //todo change on 200
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 80;
 
   @RuleProperty(
-    key = "maximumFileComplexityThreshold",
+    key = "max",
     defaultValue = "" + DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD)
   private int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
 

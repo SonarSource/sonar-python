@@ -20,18 +20,22 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.Grammar;
-import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.squidbridge.annotations.NoSqale;
+import org.sonar.squidbridge.annotations.RuleTemplate;
 import org.sonar.squidbridge.checks.AbstractCommentRegularExpressionCheck;
 
 @Rule(
-  key = "CommentRegularExpression",
-  priority = Priority.MAJOR,
-  cardinality = Cardinality.MULTIPLE)
+    key = CommentRegularExpressionCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Regular expression on comment"
+)
+@NoSqale
+@RuleTemplate
 public class CommentRegularExpressionCheck extends AbstractCommentRegularExpressionCheck<Grammar> {
-
+  public static final String CHECK_KEY = "S124";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
 

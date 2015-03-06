@@ -21,20 +21,29 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
-  key = "S107",
-  priority = Priority.MAJOR,
-  tags = Tags.BRAIN_OVERLOAD
+    key = TooManyParametersCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Functions, methods and lambdas should not have too many parameters",
+    tags = Tags.BRAIN_OVERLOAD
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNIT_TESTABILITY)
+@SqaleConstantRemediation("20min")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+@ActivatedByDefault
 public class TooManyParametersCheck extends SquidCheck<Grammar> {
+  public static final String CHECK_KEY = "S107";
 
   private static final int DEFAULT_MAX = 7;
 

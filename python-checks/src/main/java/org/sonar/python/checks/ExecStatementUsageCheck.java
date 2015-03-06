@@ -21,20 +21,28 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
-  key = "ExecStatementUsage",
-  priority = Priority.MAJOR,
-  tags = Tags.OBSOLETE
+    key = ExecStatementUsageCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "The \"exec\" statement should not be used",
+    tags = Tags.OBSOLETE
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.INSTRUCTION_RELIABILITY)
+@SqaleConstantRemediation("10min")
+@ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ExecStatementUsageCheck extends SquidCheck<Grammar> {
-
+  public static final String CHECK_KEY = "S2317";
   @Override
   public void init() {
     subscribeTo(PythonGrammar.EXEC_STMT);

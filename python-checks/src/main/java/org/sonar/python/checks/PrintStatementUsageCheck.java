@@ -21,19 +21,28 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
-  key = "PrintStatementUsage",
-  priority = Priority.MAJOR,
-  tags = Tags.OBSOLETE
+    key = PrintStatementUsageCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "The \"print\" statement should not be used",
+    tags = Tags.OBSOLETE
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.LANGUAGE_RELATED_PORTABILITY)
+@SqaleConstantRemediation("5min")
+@ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class PrintStatementUsageCheck extends SquidCheck<Grammar> {
+  public static final String CHECK_KEY = "S2320";
 
   @Override
   public void init() {

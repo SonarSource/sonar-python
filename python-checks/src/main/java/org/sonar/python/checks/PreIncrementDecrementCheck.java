@@ -21,22 +21,31 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 import java.util.List;
 
 @Rule(
-  key = "PreIncrementDecrement",
-  priority = Priority.MAJOR,
-  tags = Tags.BUG
+    key = PreIncrementDecrementCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Pre-increment and pre-decrement should not be used",
+    tags = Tags.BUG
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.INSTRUCTION_RELIABILITY)
+@SqaleConstantRemediation("5min")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+@ActivatedByDefault
 public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
+  public static final String CHECK_KEY = "S2319";
 
   @Override
   public void init() {

@@ -22,11 +22,15 @@ package org.sonar.python.checks;
 import com.google.common.collect.ImmutableMap;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 import javax.annotation.Nullable;
@@ -34,11 +38,16 @@ import java.util.List;
 import java.util.Map;
 
 @Rule(
-  key = "S1721",
-  priority = Priority.MAJOR)
+    key = UselessParenthesisAfterKeywordCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Parentheses should not be used after certain keywords"
+)
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
+@SqaleConstantRemediation("1min")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+@ActivatedByDefault
 public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
-
+  public static final String CHECK_KEY = "S1721";
   private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
     PythonGrammar.ASSERT_STMT, "assert",
     PythonGrammar.RAISE_STMT, "raise",

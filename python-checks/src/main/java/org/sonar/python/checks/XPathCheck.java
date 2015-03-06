@@ -21,18 +21,21 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.AbstractXPathCheck;
-import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-
+import org.sonar.squidbridge.annotations.NoSqale;
+import org.sonar.squidbridge.annotations.RuleTemplate;
+import org.sonar.squidbridge.checks.AbstractXPathCheck;
 @Rule(
-  key = "XPath",
-  priority = Priority.MAJOR,
-  cardinality = Cardinality.MULTIPLE)
+    key = XPathCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "XPath rule"
+)
+@NoSqale
+@RuleTemplate
 public class XPathCheck extends AbstractXPathCheck<Grammar> {
-
+  public static final String CHECK_KEY = "S140";
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";
 

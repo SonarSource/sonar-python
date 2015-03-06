@@ -24,22 +24,28 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 import java.util.regex.Pattern;
 
 @Rule(
-  key = "S139",
-  priority = Priority.INFO,
-  tags = Tags.CONVENTION
+    key = TrailingCommentCheck.CHECK_KEY,
+    priority = Priority.INFO,
+    name = "Comments should not be located at the end of lines of code",
+    tags = Tags.CONVENTION
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
+@SqaleConstantRemediation("1min")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.INFO)
 public class TrailingCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
-
+  public static final String CHECK_KEY = "S139";
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";
 
   @RuleProperty(

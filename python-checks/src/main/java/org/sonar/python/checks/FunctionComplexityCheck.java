@@ -21,27 +21,38 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.checks.SquidCheck;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
+import org.sonar.squidbridge.annotations.ActivatedByDefault;
+import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.api.SourceFunction;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
-  key = "FunctionComplexity",
-  priority = Priority.MAJOR,
-  tags = Tags.BRAIN_OVERLOAD
+    key = FunctionComplexityCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Functions should not be too complex",
+    tags = Tags.BRAIN_OVERLOAD
 )
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNIT_TESTABILITY)
+@SqaleLinearWithOffsetRemediation(
+    coeff = "1min",
+    offset = "10min",
+    effortToFixDescription = "per complexity point above the threshold")
+@ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class FunctionComplexityCheck extends SquidCheck<Grammar> {
-
+  public static final String CHECK_KEY = "S1541";
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 10;
 
   @RuleProperty(
-    key = "maximumFunctionComplexityThreshold",
+    key = "Threshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD)
   private int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 
