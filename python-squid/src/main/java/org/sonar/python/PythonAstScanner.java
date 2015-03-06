@@ -105,6 +105,7 @@ public final class PythonAstScanner {
 
     /* Classes */
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
+      @Override
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
         String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild().getTokenValue();
         SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
@@ -120,6 +121,7 @@ public final class PythonAstScanner {
 
     /* Functions */
     builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
+      @Override
       public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
         String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild().getTokenValue();
         SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());

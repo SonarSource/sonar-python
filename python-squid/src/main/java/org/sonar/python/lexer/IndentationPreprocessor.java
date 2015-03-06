@@ -24,6 +24,7 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Preprocessor;
 import com.sonar.sslr.api.PreprocessorAction;
 import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
 import org.sonar.python.api.PythonTokenType;
 
 import java.util.Collections;
@@ -48,7 +49,7 @@ public class IndentationPreprocessor extends Preprocessor {
   @Override
   public PreprocessorAction process(List<Token> tokens) {
     Token token = tokens.get(0);
-    if (token.getType() == GenericTokenType.EOF) {
+    if (token.getType().equals(GenericTokenType.EOF)) {
       if (lexerState.indentationStack.isEmpty()) {
         return PreprocessorAction.NO_OPERATION;
       }
@@ -64,7 +65,7 @@ public class IndentationPreprocessor extends Preprocessor {
             .setValueAndOriginalValue("")
             .build());
       }
-      return new PreprocessorAction(0, Collections.EMPTY_LIST, tokensToInject);
+      return new PreprocessorAction(0, Collections.<Trivia>emptyList(), tokensToInject);
     }
     return PreprocessorAction.NO_OPERATION;
   }

@@ -92,7 +92,7 @@ public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
 
     @Override
     public boolean apply(AstNode node) {
-      return node.getType() != PythonGrammar.PASS_STMT;
+      return !node.getType().equals(PythonGrammar.PASS_STMT);
     }
 
   }

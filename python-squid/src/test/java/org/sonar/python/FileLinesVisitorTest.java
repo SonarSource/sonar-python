@@ -21,9 +21,9 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.Grammar;
 import org.junit.Test;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
@@ -44,12 +44,13 @@ public class FileLinesVisitorTest {
   @Test
   public void test() {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    FileSystem fileSystem = new DefaultFileSystem();
+    DefaultFileSystem fileSystem = new DefaultFileSystem();
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
 
     File file = new File(BASE_DIR, "file_lines.py");
-    InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(file));
+    InputFile inputFile = new DefaultInputFile(file.getPath());
 
+    fileSystem.add(inputFile);
     when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
 
     SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem);

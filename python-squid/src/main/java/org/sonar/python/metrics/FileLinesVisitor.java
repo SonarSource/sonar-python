@@ -54,12 +54,13 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     this.fileSystem = fileSystem;
   }
 
+  @Override
   public void visitToken(Token token) {
     if (token.getType().equals(GenericTokenType.EOF)) {
       return;
     }
 
-    if (token.getType() != PythonTokenType.DEDENT && token.getType() != PythonTokenType.INDENT && token.getType() != PythonTokenType.NEWLINE) {
+    if (!token.getType().equals(PythonTokenType.DEDENT) && !token.getType().equals(PythonTokenType.INDENT) && !token.getType().equals(PythonTokenType.NEWLINE)) {
       /* Handle all the lines of the token */
       String[] tokenLines = token.getValue().split("\n", -1);
       for (int line = token.getLine(); line < token.getLine() + tokenLines.length; line++) {
@@ -78,6 +79,9 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
   @Override
   public void leaveFile(AstNode astNode) {
     InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(getContext().getFile()));
+    if (inputFile == null){
+      throw new IllegalStateException("InputFile is null, but it should not be.");
+    }
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
     int fileLength = getContext().peekSourceCode().getInt(PythonMetric.LINES);

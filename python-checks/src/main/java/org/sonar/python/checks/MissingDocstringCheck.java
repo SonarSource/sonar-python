@@ -108,7 +108,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
   }
 
   private boolean isNonEmptyString(Token token) {
-    return token.getType() == PythonTokenType.STRING
+    return token.getType().equals(PythonTokenType.STRING)
       && !EMPTY_STRING_REGEXP.matcher(token.getValue()).matches();
   }
 }

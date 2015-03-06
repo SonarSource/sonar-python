@@ -29,6 +29,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.checks.SquidCheck;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 
@@ -109,7 +110,7 @@ public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private void checkParenthesis(AstNode child, String keyword, AstNode errorNode) {
+  private void checkParenthesis(@Nullable AstNode child, String keyword, AstNode errorNode) {
     if (child != null && child.getToken().getType() == PythonPunctuator.LPARENTHESIS && isOnASingleLine(child)) {
       getContext().createLineViolation(this,
         "Remove the parentheses after this \"{0}\" keyword", errorNode, keyword);

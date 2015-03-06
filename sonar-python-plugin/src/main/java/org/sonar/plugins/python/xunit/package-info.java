@@ -17,32 +17,9 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.python.api;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.TokenType;
+@ParametersAreNonnullByDefault
+package org.sonar.plugins.python.xunit;
 
-public enum PythonTokenType implements TokenType {
-  NUMBER,
-  STRING,
+import javax.annotation.ParametersAreNonnullByDefault;
 
-  INDENT,
-  DEDENT,
-  NEWLINE;
-
-  @Override
-  public String getName() {
-    return name();
-  }
-
-  @Override
-  public String getValue() {
-    return name();
-  }
-
-  @Override
-  public boolean hasToBeSkippedFromAst(AstNode node) {
-    return false;
-  }
-
-}

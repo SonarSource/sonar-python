@@ -52,13 +52,14 @@ public class PythonLinesOfCodeVisitor<GRAMMAR extends Grammar> extends SquidAstV
   /**
    * {@inheritDoc}
    */
+  @Override
   public void visitToken(Token token) {
-    if (token.getType() != EOF && token.getType() != PythonTokenType.DEDENT && token.getType() != PythonTokenType.INDENT && token.getType() != PythonTokenType.NEWLINE) {
+    if (!token.getType().equals(EOF) && !token.getType().equals(PythonTokenType.DEDENT) && !token.getType().equals(PythonTokenType.INDENT) && !token.getType().equals(PythonTokenType.NEWLINE)) {
       /* Handle all the lines of the token */
       String[] tokenLines = token.getValue().split("\n", -1);
 
       int firstLineAlreadyCounted = lastTokenLine == token.getLine() ? 1 : 0;
-      getContext().peekSourceCode().add(metric, tokenLines.length - firstLineAlreadyCounted);
+      getContext().peekSourceCode().add(metric, (double)tokenLines.length - firstLineAlreadyCounted);
 
       lastTokenLine = token.getLine() + tokenLines.length - 1;
     }
