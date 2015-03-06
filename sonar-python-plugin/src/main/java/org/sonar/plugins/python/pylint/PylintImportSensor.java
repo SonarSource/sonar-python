@@ -38,7 +38,9 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
 
+import javax.annotation.Nullable;
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -70,6 +72,7 @@ public class PylintImportSensor extends PythonReportSensor  {
     this.resourcePerspectives = resourcePerspectives;
   }
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     FilePredicates p = fileSystem.predicates();
     boolean hasFiles = fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
@@ -77,33 +80,38 @@ public class PylintImportSensor extends PythonReportSensor  {
     return hasFiles && hasRules && conf.getString(REPORT_PATH_KEY) != null;
   }
 
+  @Override
   protected String reportPathKey() {
     return REPORT_PATH_KEY;
   }
 
+  @Override
   protected String defaultReportPath() {
     return DEFAULT_REPORT_PATH;
   }
 
+  @Override
   protected void processReports(final SensorContext context, List<File> reports)
       throws javax.xml.stream.XMLStreamException {
-    List<Issue> issues = new LinkedList<Issue>();
+    List<Issue> issues = new LinkedList<>();
     for(File report: reports){
       try {
         issues.addAll(parse(report));
       } catch(java.io.FileNotFoundException e) {
-        LOG.error("Report '{}' cannot be found, details: '{}'", report, e.toString());
+        LOG.error("Report '{}' cannot be found, details: '{}'", report, e);
+      } catch(java.io.IOException e) {
+        LOG.error("Report '{}' cannot be read, details: '{}'", report, e);
       }
     }
 
     saveIssues(issues, context);
   }
 
-  private List<Issue> parse(File report) throws java.io.FileNotFoundException {
+  private List<Issue> parse(File report) throws IOException {
     List<Issue> issues = new LinkedList<Issue>();
 
     PylintReportParser parser = new PylintReportParser();
-    for(Scanner sc = new Scanner(report); sc.hasNext(); ) {
+    for(Scanner sc = new Scanner(report.toPath(), fileSystem.encoding().name()); sc.hasNext(); ) {
       String line = sc.nextLine();
       Issue issue = parser.parseLine(line);
       if (issue != null){
@@ -120,28 +128,34 @@ public class PylintImportSensor extends PythonReportSensor  {
       InputFile pyfile = fileSystem.inputFile(fileSystem.predicates().hasPath(filepath));
       if(pyfile != null){
         Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId());
-
-        if (rule != null) {
-          if (rule.isEnabled()) {
-            Issuable issuable = resourcePerspectives.as(Issuable.class, pyfile);
-
-            if (issuable != null) {
-              org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
-                .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getKey()))
-                .line(pylintIssue.getLine())
-                .message(pylintIssue.getDescr())
-                .build();
-              issuable.addIssue(issue);
-            }
-          } else {
-            LOG.debug("Pylint rule '{}' is disabled in Sonar", pylintIssue.getRuleId());
-          }
-        } else {
-          LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
-        }
+        processRule(pylintIssue, pyfile, rule);
       } else{
         LOG.warn("Cannot find the file '{}' in SonarQube, ignoring violation", filepath);
       }
+    }
+  }
+
+  private void processRule(Issue pylintIssue, InputFile pyfile, @Nullable Rule rule) {
+    if (rule != null) {
+      if (rule.isEnabled()) {
+        Issuable issuable = resourcePerspectives.as(Issuable.class, pyfile);
+        addIssue(pylintIssue, rule, issuable);
+      } else {
+        LOG.debug("Pylint rule '{}' is disabled in Sonar", pylintIssue.getRuleId());
+      }
+    } else {
+      LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
+    }
+  }
+
+  private void addIssue(Issue pylintIssue, Rule rule, @Nullable Issuable issuable) {
+    if (issuable != null) {
+      org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
+        .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getKey()))
+        .line(pylintIssue.getLine())
+        .message(pylintIssue.getDescr())
+        .build();
+      issuable.addIssue(issue);
     }
   }
 }

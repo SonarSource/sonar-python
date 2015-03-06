@@ -63,6 +63,7 @@ public class PylintSensor implements Sensor {
     this.settings = settings;
   }
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     FilePredicates p = fileSystem.predicates();
     boolean hasFiles = fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
@@ -70,6 +71,7 @@ public class PylintSensor implements Sensor {
     return hasFiles && hasRules && settings.getString(REPORT_PATH_KEY) == null;
   }
 
+  @Override
   public void analyse(Project project, SensorContext sensorContext) {
     File workDir = new File(fileSystem.workDir(), "/pylint/");
     prepareWorkDir(workDir);

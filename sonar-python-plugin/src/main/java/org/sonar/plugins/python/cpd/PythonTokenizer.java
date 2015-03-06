@@ -41,12 +41,13 @@ public class PythonTokenizer implements Tokenizer {
     this.charset = charset;
   }
 
+  @Override
   public final void tokenize(SourceCode source, Tokens cpdTokens) {
     Lexer lexer = PythonLexer.create(new PythonConfiguration(charset));
     String fileName = source.getFileName();
     List<Token> tokens = lexer.lex(new File(fileName));
     for (Token token : tokens) {
-      if (token.getType() != PythonTokenType.NEWLINE && token.getType() != PythonTokenType.DEDENT && token.getType() != PythonTokenType.INDENT) {
+      if (!token.getType().equals(PythonTokenType.NEWLINE) && !token.getType().equals(PythonTokenType.DEDENT) && !token.getType().equals(PythonTokenType.INDENT)) {
         TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
         cpdTokens.add(cpdToken);
       }

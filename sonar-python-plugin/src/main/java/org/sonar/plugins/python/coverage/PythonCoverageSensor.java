@@ -203,7 +203,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
       try {
         parser.parseReport(report, coverageMeasures);
       } catch (EmptyReportException e) {
-        LOG.warn("The report '{}' seems to be empty, ignoring.", report);
+        LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
       } catch (XMLStreamException e) {
         throw new IllegalStateException("Error parsing the report '" + report + "'", e);
       }

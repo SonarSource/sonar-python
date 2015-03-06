@@ -19,24 +19,24 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import java.text.ParseException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.xml.stream.XMLStreamException;
-
 import org.codehaus.staxmate.in.ElementFilter;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser.XmlStreamHandler;
 
+import javax.xml.stream.XMLStreamException;
+import java.text.ParseException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 public class TestSuiteParser implements XmlStreamHandler {
 
   private Map<String, TestSuite> testSuites = new HashMap<String, TestSuite>();
 
+  @Override
   public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
     SMInputCursor testSuiteCursor = rootCursor.constructDescendantCursor(new ElementFilter("testsuite"));
     while (testSuiteCursor.getNext() != null) {

@@ -64,7 +64,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   public static final String SKIP_DETAILS = "sonar.python.xunit.skipDetails";
-  private final static double PERCENT_BASE = 100d;
+  private static final double PERCENT_BASE = 100d;
 
   public PythonXUnitSensor(Settings conf, FileSystem fileSystem) {
     super(conf, fileSystem);
@@ -75,10 +75,12 @@ public class PythonXUnitSensor extends PythonReportSensor {
     return CoverageExtension.class;
   }
 
+  @Override
   protected String reportPathKey() {
     return REPORT_PATH_KEY;
   }
 
+  @Override
   protected String defaultReportPath() {
     return DEFAULT_REPORT_PATH;
   }
@@ -154,9 +156,9 @@ public class PythonXUnitSensor extends PythonReportSensor {
       context.saveMeasure(unitTest, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
       context.saveMeasure(unitTest, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
 
-      double testsRun = fileReport.getTests() - fileReport.getSkipped();
+      double testsRun = (double)fileReport.getTests() - fileReport.getSkipped();
       if (testsRun > 0) {
-        double passedTests = fileReport.getTests() - fileReport.getErrors() - fileReport.getFailures() - fileReport.getSkipped();
+        double passedTests = (double)fileReport.getTests() - fileReport.getErrors() - fileReport.getFailures() - fileReport.getSkipped();
         double successDensity = passedTests * PERCENT_BASE / testsRun;
         context.saveMeasure(unitTest, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
       }
