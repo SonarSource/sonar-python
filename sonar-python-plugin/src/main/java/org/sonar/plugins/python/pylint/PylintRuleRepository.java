@@ -23,6 +23,7 @@ import com.google.common.base.Charsets;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.plugins.python.Python;
+import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 public class PylintRuleRepository implements RulesDefinition {
 
@@ -30,6 +31,7 @@ public class PylintRuleRepository implements RulesDefinition {
   public static final String REPOSITORY_KEY = REPOSITORY_NAME;
 
   private static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
+  private static final String SQALE_FILE = "/com/sonar/sqale/python-model.xml";
   private final RulesDefinitionXmlLoader xmlLoader;
 
   public PylintRuleRepository(RulesDefinitionXmlLoader xmlLoader) {
@@ -42,6 +44,7 @@ public class PylintRuleRepository implements RulesDefinition {
         .createRepository(REPOSITORY_KEY, Python.KEY)
         .setName(REPOSITORY_NAME);
     xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), Charsets.UTF_8.name());
+    SqaleXmlLoader.load(repository, SQALE_FILE);
     repository.done();
   }
 }
