@@ -20,6 +20,8 @@
 package org.sonar.plugins.python.xunit;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -57,6 +59,7 @@ import java.util.Map;
         description = "If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature",
         global = false, project = true) })
 public class PythonXUnitSensor extends PythonReportSensor {
+  private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";

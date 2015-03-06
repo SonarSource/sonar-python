@@ -35,7 +35,7 @@ import java.util.List;
 
 public abstract class PythonReportSensor implements Sensor {
 
-  protected static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
 
   protected Settings conf = null;
   protected FileSystem fileSystem;
@@ -45,6 +45,7 @@ public abstract class PythonReportSensor implements Sensor {
     this.fileSystem = fileSystem;
   }
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     FilePredicates p = fileSystem.predicates();
     return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));

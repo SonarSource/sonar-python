@@ -38,9 +38,9 @@ public class PythonPlugin extends SonarPlugin {
 
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
 
+  @Override
   public List getExtensions() {
     return ImmutableList.of(
-
         PropertyDefinition.builder(FILE_SUFFIXES_KEY)
           .name("File Suffixes")
           .description("Comma-separated list of suffixes of Python files to analyze.")
@@ -59,7 +59,6 @@ public class PythonPlugin extends SonarPlugin {
 
         PythonCommonRulesEngine.class,
 
-        // pylint
         PylintConfiguration.class,
         PylintSensor.class,
         PylintImportSensor.class,

@@ -77,11 +77,13 @@ public final class PythonSquidSensor implements Sensor {
     this.resourcePerspectives = perspectives;
   }
 
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     FilePredicates p = fileSystem.predicates();
     return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
   }
 
+  @Override
   public void analyse(Project project, SensorContext context) {
     this.context = context;
 

@@ -17,34 +17,9 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.python.cpd;
 
-import net.sourceforge.pmd.cpd.Tokenizer;
-import org.sonar.api.batch.AbstractCpdMapping;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.resources.Language;
-import org.sonar.plugins.python.Python;
+@ParametersAreNonnullByDefault
+package org.sonar.plugins.python.coverage;
 
-import java.nio.charset.Charset;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public class PythonCpdMapping extends AbstractCpdMapping {
-
-  private final Python language;
-  private final Charset charset;
-
-  public PythonCpdMapping(Python language, FileSystem fs) {
-    this.language = language;
-    this.charset = fs.encoding();
-  }
-
-  @Override
-  public Tokenizer getTokenizer() {
-    return new PythonTokenizer(charset);
-  }
-
-  @Override
-  public Language getLanguage() {
-    return language;
-  }
-
-}

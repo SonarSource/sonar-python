@@ -39,9 +39,9 @@ public class Python extends AbstractLanguage {
     this.settings = settings;
   }
 
+  @Override
   public String[] getFileSuffixes() {
     String[] suffixes = filterEmptyStrings(settings.getStringArray(PythonPlugin.FILE_SUFFIXES_KEY));
-
     return suffixes.length == 0 ? Python.DEFAULT_FILE_SUFFIXES : suffixes;
   }
 
