@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.utils.StaxParser;
+import org.sonar.plugins.python.EmptyReportException;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -41,7 +42,11 @@ public class CoberturaParser {
 
     StaxParser parser = new StaxParser(new StaxParser.XmlStreamHandler() {
       public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
-        rootCursor.advance();
+        try {
+          rootCursor.advance();
+        } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
+          throw new EmptyReportException();
+        }
         collectPackageMeasures(rootCursor.descendantElementCursor("package"), coverageData);
       }
     });

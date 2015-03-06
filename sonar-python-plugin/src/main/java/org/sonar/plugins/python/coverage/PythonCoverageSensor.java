@@ -35,6 +35,7 @@ import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
+import org.sonar.plugins.python.EmptyReportException;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -192,6 +193,8 @@ public class PythonCoverageSensor extends PythonReportSensor {
     for (File report : reports) {
       try{
         parser.parseReport(report, coverageMeasures);
+      } catch(EmptyReportException e){
+        LOG.warn("The report '{}' seems to be empty, ignoring.", report);
       } catch (XMLStreamException e) {
         throw new IllegalStateException("Error parsing the report '" + report + "'", e);
       }

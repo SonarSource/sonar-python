@@ -81,3 +81,28 @@ Feature: Importing coverage data
               | overall_coverage        | 0     |
               | overall_line_coverage   | 0     |
               | overall_branch_coverage | None  |
+
+
+   @wip
+   Scenario: Importing an empty coverage report
+
+      GIVEN the python project "coverage_project"
+
+      WHEN I run sonar-runner with following options:
+          """
+          -X
+          -Dsonar.python.coverage.reportPath=empty.xml
+          -Dsonar.python.coverage.itReportPath=empty.xml
+          -Dsonar.python.coverage.overallReportPath=empty.xml
+          """
+
+      THEN the analysis finishes successfully
+         BUT the analysis log contains a line matching
+              """
+              .*WARN.*The report '.*' seems to be empty, ignoring.
+              """
+          AND the following metrics have following values:
+              | metric                  | value |
+              | coverage                | None  |
+              | it_coverage             | None  |
+              | overall_coverage        | None  |
