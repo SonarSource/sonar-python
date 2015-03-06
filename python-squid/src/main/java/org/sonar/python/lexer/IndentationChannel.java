@@ -53,13 +53,12 @@ public class IndentationChannel extends Channel<Lexer> {
 
     int index = 0;
     char ch = code.charAt(index);
-    while ((ch == ' ') || (ch == '\t')) {
+    while (isWhiteSpace(ch)) {
       index++;
       ch = code.charAt(index);
     }
 
-    if ((ch == '\n') || (ch == '\r') || (ch == '#') || (ch == (char) -1)) {
-      // Blank line
+    if (isBlankLine(ch)) {
       return false;
     }
 
@@ -70,6 +69,19 @@ public class IndentationChannel extends Channel<Lexer> {
       indentationLevel++;
     }
 
+    processIndents(lexer, line, column, indentationLevel);
+    return buffer.length() != 0;
+  }
+
+  private boolean isWhiteSpace(char ch) {
+    return (ch == ' ') || (ch == '\t');
+  }
+
+  private boolean isBlankLine(char ch) {
+    return (ch == '\n') || (ch == '\r') || (ch == '#') || (ch == (char) -1);
+  }
+
+  private void processIndents(Lexer lexer, int line, int column, int indentationLevel) {
     if (indentationLevel > lexerState.indentationStack.peek()) {
       lexerState.indentationStack.push(indentationLevel);
       lexer.addToken(Token.builder()
@@ -91,8 +103,6 @@ public class IndentationChannel extends Channel<Lexer> {
             .build());
       }
     }
-
-    return buffer.length() != 0;
   }
 
 }

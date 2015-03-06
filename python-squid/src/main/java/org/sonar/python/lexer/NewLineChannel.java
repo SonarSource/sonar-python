@@ -41,6 +41,52 @@ public class NewLineChannel extends Channel<Lexer> {
   @Override
   public boolean consume(CodeReader code, Lexer output) {
     char ch = (char) code.peek();
+    checkForBrackets(ch);
+
+    if ((ch == '\\') && isNewLine(code.charAt(1))) {
+      // Explicit line joining
+      code.pop();
+      joinLines(code);
+      return true;
+    }
+
+    if (isNewLine(ch)) {
+      if (processNewLine(code, output)) {
+        return true;
+      }
+      return true;
+    }
+
+    return false;
+  }
+
+  private boolean processNewLine(CodeReader code, Lexer output) {
+    if (isImplicitLineJoining()) {
+      // Implicit line joining
+      joinLines(code);
+      return true;
+    }
+
+    if (output.getTokens().isEmpty() || (output.getTokens().get(output.getTokens().size() - 1).getType().equals(PythonTokenType.NEWLINE))) {
+      // Blank line
+      consumeEOL(code);
+      return true;
+    }
+
+    // NEWLINE token
+    output.addToken(Token.builder()
+        .setLine(code.getLinePosition())
+        .setColumn(code.getColumnPosition())
+        .setURI(output.getURI())
+        .setType(PythonTokenType.NEWLINE)
+        .setValueAndOriginalValue("\n")
+        .setGeneratedCode(true)
+        .build());
+    consumeEOL(code);
+    return false;
+  }
+
+  private void checkForBrackets(char ch) {
     switch (ch) {
       case '[':
       case '(':
@@ -55,41 +101,6 @@ public class NewLineChannel extends Channel<Lexer> {
       default:
         break;
     }
-
-    if ((ch == '\\') && isNewLine(code.charAt(1))) {
-      // Explicit line joining
-      code.pop();
-      joinLines(code);
-      return true;
-    }
-
-    if (isNewLine(ch)) {
-      if (isImplicitLineJoining()) {
-        // Implicit line joining
-        joinLines(code);
-        return true;
-      }
-
-      if (output.getTokens().isEmpty() || (output.getTokens().get(output.getTokens().size() - 1).getType().equals(PythonTokenType.NEWLINE))) {
-        // Blank line
-        consumeEOL(code);
-        return true;
-      }
-
-      // NEWLINE token
-      output.addToken(Token.builder()
-          .setLine(code.getLinePosition())
-          .setColumn(code.getColumnPosition())
-          .setURI(output.getURI())
-          .setType(PythonTokenType.NEWLINE)
-          .setValueAndOriginalValue("\n")
-          .setGeneratedCode(true)
-          .build());
-      consumeEOL(code);
-      return true;
-    }
-
-    return false;
   }
 
   private void joinLines(CodeReader code) {

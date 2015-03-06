@@ -52,11 +52,11 @@ class Issue {
     return ruleId;
   }
 
-  String getObjname() {
+  String getObjName() {
     return objname;
   }
 
-  String getDescr() {
+  String getDescription() {
     return descr;
   }
 }

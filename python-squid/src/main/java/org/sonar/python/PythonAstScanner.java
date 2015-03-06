@@ -75,67 +75,27 @@ public final class PythonAstScanner {
 
     AstScanner.Builder<Grammar> builder = AstScanner.<Grammar>builder(context).setBaseParser(parser);
 
-    /* Metrics */
     builder.withMetrics(PythonMetric.values());
 
-    /* Files */
     builder.setFilesMetric(PythonMetric.FILES);
 
-    /* Comments */
-    builder.setCommentAnalyser(
-      new CommentAnalyser() {
-        @Override
-        public boolean isBlank(String line) {
-          for (int i = 0; i < line.length(); i++) {
-            if (Character.isLetterOrDigit(line.charAt(i))) {
-              return false;
-            }
-          }
-          return true;
-        }
+    setCommentAnalyser(builder);
 
-        @Override
-        public String getContents(String comment) {
-          // Comment always starts with "#"
-          return comment.substring(comment.indexOf('#'));
-        }
-      });
+    setClassesAnalyser(builder);
 
+    setMethodAnalyser(builder);
 
+    setMetrics(conf, builder);
 
-    /* Classes */
-    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
-      @Override
-      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild().getTokenValue();
-        SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
-        function.setStartAtLine(astNode.getTokenLine());
-        return function;
-      }
-    }, PythonGrammar.CLASSDEF));
+    /* External visitors (typically Check ones) */
+    for (SquidAstVisitor<Grammar> visitor : visitors) {
+      builder.withSquidAstVisitor(visitor);
+    }
 
-    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
-      .setMetricDef(PythonMetric.CLASSES)
-      .subscribeTo(PythonGrammar.CLASSDEF)
-      .build());
+    return builder.build();
+  }
 
-    /* Functions */
-    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
-      @Override
-      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild().getTokenValue();
-        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
-        function.setStartAtLine(astNode.getTokenLine());
-        return function;
-      }
-    }, PythonGrammar.FUNCDEF));
-
-    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
-      .setMetricDef(PythonMetric.FUNCTIONS)
-      .subscribeTo(PythonGrammar.FUNCDEF)
-      .build());
-
-    /* Metrics */
+  private static void setMetrics(PythonConfiguration conf, AstScanner.Builder<Grammar> builder) {
     builder.withSquidAstVisitor(new LinesVisitor<Grammar>(PythonMetric.LINES));
     builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<Grammar>(PythonMetric.LINES_OF_CODE));
     AstNodeType[] complexityAstNodeType = new AstNodeType[]{
@@ -168,14 +128,61 @@ public final class PythonAstScanner {
       .setMetricDef(PythonMetric.STATEMENTS)
       .subscribeTo(PythonGrammar.STATEMENT)
       .build());
+  }
 
+  private static void setMethodAnalyser(AstScanner.Builder<Grammar> builder) {
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
+      @Override
+      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
+        String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild().getTokenValue();
+        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
+        function.setStartAtLine(astNode.getTokenLine());
+        return function;
+      }
+    }, PythonGrammar.FUNCDEF));
 
-    /* External visitors (typically Check ones) */
-    for (SquidAstVisitor<Grammar> visitor : visitors) {
-      builder.withSquidAstVisitor(visitor);
-    }
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
+      .setMetricDef(PythonMetric.FUNCTIONS)
+      .subscribeTo(PythonGrammar.FUNCDEF)
+      .build());
+  }
 
-    return builder.build();
+  private static void setClassesAnalyser(AstScanner.Builder<Grammar> builder) {
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
+      @Override
+      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
+        String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild().getTokenValue();
+        SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
+        function.setStartAtLine(astNode.getTokenLine());
+        return function;
+      }
+    }, PythonGrammar.CLASSDEF));
+
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
+      .setMetricDef(PythonMetric.CLASSES)
+      .subscribeTo(PythonGrammar.CLASSDEF)
+      .build());
+  }
+
+  private static void setCommentAnalyser(AstScanner.Builder<Grammar> builder) {
+    builder.setCommentAnalyser(
+      new CommentAnalyser() {
+        @Override
+        public boolean isBlank(String line) {
+          for (int i = 0; i < line.length(); i++) {
+            if (Character.isLetterOrDigit(line.charAt(i))) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+        @Override
+        public String getContents(String comment) {
+          // Comment always starts with "#"
+          return comment.substring(comment.indexOf('#'));
+        }
+      });
   }
 
 }

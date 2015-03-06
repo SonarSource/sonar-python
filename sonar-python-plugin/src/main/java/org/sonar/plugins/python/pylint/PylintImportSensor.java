@@ -153,7 +153,7 @@ public class PylintImportSensor extends PythonReportSensor  {
       org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
         .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getKey()))
         .line(pylintIssue.getLine())
-        .message(pylintIssue.getDescr())
+        .message(pylintIssue.getDescription())
         .build();
       issuable.addIssue(issue);
     }

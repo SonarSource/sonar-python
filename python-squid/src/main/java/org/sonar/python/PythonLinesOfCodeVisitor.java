@@ -56,7 +56,7 @@ public class PythonLinesOfCodeVisitor<GRAMMAR extends Grammar> extends SquidAstV
   public void visitToken(Token token) {
     if (!token.getType().equals(EOF) &&
         !token.getType().equals(PythonTokenType.DEDENT)
-        && !token.getType().equals(PythonTokenType.INDENT) 
+        && !token.getType().equals(PythonTokenType.INDENT)
         && !token.getType().equals(PythonTokenType.NEWLINE)) {
       /* Handle all the lines of the token */
       String[] tokenLines = token.getValue().split("\n", -1);

@@ -74,6 +74,8 @@ public class PylintReportParser {
 
           if (parts.length == 2) {
             objname = parts[1].trim();
+          } else {
+            objname = "";
           }
 
           descr = m.group(4);
