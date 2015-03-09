@@ -46,13 +46,13 @@ import java.util.regex.Pattern;
 public class FixmeCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S1134";
 
-  public String fixmeCommentPattern = "^#[ ]*[Ff][Ii][Xx][Mm][Ee].*";
+  public String fixmeCommentPattern = "^#[ ]*fixme.*";
 
   private Pattern pattern;
 
   @Override
   public void visitFile(AstNode astNode) {
-    pattern = Pattern.compile(fixmeCommentPattern);
+    pattern = Pattern.compile(fixmeCommentPattern, Pattern.CASE_INSENSITIVE);
   }
 
   @Override

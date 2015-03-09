@@ -37,6 +37,7 @@ public class FixmeCommentCheckTest {
     CheckMessagesVerifier.verify(file.getCheckMessages())
       .next().atLine(2).withMessage(message)
       .next().atLine(4).withMessage(message)
+      .next().atLine(8).withMessage(message)
       .noMore();
   }
 
