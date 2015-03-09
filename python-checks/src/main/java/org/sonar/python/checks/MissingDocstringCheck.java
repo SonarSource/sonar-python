@@ -23,7 +23,6 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
@@ -41,7 +40,6 @@ import java.util.regex.Pattern;
 )
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNDERSTANDABILITY)
 @SqaleConstantRemediation("5min")
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class MissingDocstringCheck extends SquidCheck<Grammar> {
 
   public static final String CHECK_KEY = "S1720";

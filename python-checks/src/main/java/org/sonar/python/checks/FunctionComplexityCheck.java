@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -46,7 +45,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     offset = "10min",
     effortToFixDescription = "per complexity point above the threshold")
 @ActivatedByDefault
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class FunctionComplexityCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "FunctionComplexity";
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 10;

@@ -25,7 +25,6 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
@@ -44,7 +43,6 @@ import org.sonar.sslr.ast.AstSelect;
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.LOGIC_RELIABILITY)
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "S108";
   private static final Predicate<AstNode> NOT_PASS_PREDICATE = new NotPassPredicate();

@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
@@ -40,7 +39,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.INSTRUCTION_RELIABILITY)
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ExecStatementUsageCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "ExecStatementUsage";
   @Override

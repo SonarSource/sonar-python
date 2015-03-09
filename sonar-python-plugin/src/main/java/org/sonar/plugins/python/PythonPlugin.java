@@ -53,6 +53,8 @@ public class PythonPlugin extends SonarPlugin {
         PythonColorizer.class,
         PythonCpdMapping.class,
 
+        PythonProfile.class,
+
         PythonSquidSensor.class,
         PythonRuleRepository.class,
         PythonDefaultProfile.class,

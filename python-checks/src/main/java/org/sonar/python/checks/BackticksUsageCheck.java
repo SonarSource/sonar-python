@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonPunctuator;
@@ -38,7 +37,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.LANGUAGE_RELATED_PORTABILITY)
 @SqaleConstantRemediation("5min")
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 @ActivatedByDefault
 public class BackticksUsageCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "BackticksUsage";

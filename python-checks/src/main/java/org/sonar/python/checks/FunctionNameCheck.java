@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
@@ -36,7 +35,6 @@ import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 )
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
 @SqaleConstantRemediation("10min")
-@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 @ActivatedByDefault
 public class FunctionNameCheck extends AbstractFunctionNameCheck {
   public static final String CHECK_KEY = "S1542";
