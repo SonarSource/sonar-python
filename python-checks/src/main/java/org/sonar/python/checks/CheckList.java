@@ -61,9 +61,9 @@ public final class CheckList {
         CollapsibleIfStatementsCheck.class,
         TrailingCommentCheck.class,
         BackslashInStringCheck.class,
-        EmptyNestedBlockCheck.class//,
-//        DuplicatedMethodFieldNamesCheck.class
-    );
+        EmptyNestedBlockCheck.class,
+        FixmeCommentCheck.class
+        );
   }
 
 }
