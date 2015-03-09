@@ -38,7 +38,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Files should not be too complex",
     tags = Tags.BRAIN_OVERLOAD
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNIT_TESTABILITY)
 @SqaleLinearWithOffsetRemediation(
     coeff = "1min",
     offset = "30min",
