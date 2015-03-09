@@ -40,7 +40,6 @@ public final class CheckList {
         FunctionComplexityCheck.class,
         ClassComplexityCheck.class,
         FileComplexityCheck.class,
-        NestedIfDepthCheck.class,
         OneStatementPerLineCheck.class,
         BackticksUsageCheck.class,
         InequalityUsageCheck.class,
