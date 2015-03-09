@@ -61,7 +61,8 @@ public final class CheckList {
         TrailingCommentCheck.class,
         BackslashInStringCheck.class,
         EmptyNestedBlockCheck.class,
-        FixmeCommentCheck.class
+        FixmeCommentCheck.class,
+        SameConditionCheck.class
         );
   }
 
