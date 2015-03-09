@@ -49,7 +49,7 @@ public class ClassComplexityCheck extends SquidCheck<Grammar> {
   //todo change on 200
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 80;
 
-  @RuleProperty(key = "max", defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
+  @RuleProperty(key = "maximumClassComplexityThreshold", defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
   private int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
 
   @Override

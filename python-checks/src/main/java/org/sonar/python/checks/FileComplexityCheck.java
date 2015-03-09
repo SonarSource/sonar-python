@@ -49,7 +49,7 @@ public class FileComplexityCheck extends SquidCheck<Grammar> {
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 80;
 
   @RuleProperty(
-    key = "max",
+    key = "maximumFileComplexityThreshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD)
   private int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
 

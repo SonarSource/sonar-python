@@ -50,7 +50,7 @@ public class FunctionComplexityCheck extends SquidCheck<Grammar> {
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 10;
 
   @RuleProperty(
-    key = "Threshold",
+    key = "maximumFunctionComplexityThreshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD)
   private int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 

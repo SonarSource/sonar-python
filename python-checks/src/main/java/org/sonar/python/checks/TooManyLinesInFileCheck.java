@@ -45,7 +45,7 @@ public class TooManyLinesInFileCheck extends SquidCheck<Grammar> {
   private static final int DEFAULT = 1000;
 
   @RuleProperty(
-    key = "Max",
+    key = "maximum",
     defaultValue = "" + DEFAULT)
   public int maximum = DEFAULT;
 
