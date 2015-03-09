@@ -47,7 +47,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     effortToFixDescription = "per complexity point over the threshold")
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ClassComplexityCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S1311";
+  public static final String CHECK_KEY = "ClassComplexity";
   //todo change on 200
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 80;
 

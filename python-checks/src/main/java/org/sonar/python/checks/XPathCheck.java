@@ -35,7 +35,7 @@ import org.sonar.squidbridge.checks.AbstractXPathCheck;
 @NoSqale
 @RuleTemplate
 public class XPathCheck extends AbstractXPathCheck<Grammar> {
-  public static final String CHECK_KEY = "S140";
+  public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";
 

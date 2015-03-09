@@ -35,7 +35,7 @@ import org.sonar.squidbridge.checks.AbstractCommentRegularExpressionCheck;
 @NoSqale
 @RuleTemplate
 public class CommentRegularExpressionCheck extends AbstractCommentRegularExpressionCheck<Grammar> {
-  public static final String CHECK_KEY = "S124";
+  public static final String CHECK_KEY = "CommentRegularExpression";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
 

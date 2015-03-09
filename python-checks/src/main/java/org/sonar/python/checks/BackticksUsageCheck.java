@@ -41,7 +41,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 @ActivatedByDefault
 public class BackticksUsageCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S2316";
+  public static final String CHECK_KEY = "BackticksUsage";
   private int prevLine = -1;
 
   @Override

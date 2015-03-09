@@ -44,7 +44,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class LineLengthCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
-  public static final String CHECK_KEY = "S103";
+  public static final String CHECK_KEY = "LineLength";
   //todo change on 120
   private static final int DEFAULT_MAXIMUM_LINE_LENGTH = 80;
 

@@ -45,7 +45,7 @@ import java.util.List;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 @ActivatedByDefault
 public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S2319";
+  public static final String CHECK_KEY = "PreIncrementDecrement";
 
   @Override
   public void init() {

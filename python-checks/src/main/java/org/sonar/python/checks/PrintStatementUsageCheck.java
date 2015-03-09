@@ -42,7 +42,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 @ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class PrintStatementUsageCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S2320";
+  public static final String CHECK_KEY = "PrintStatementUsage";
 
   @Override
   public void init() {

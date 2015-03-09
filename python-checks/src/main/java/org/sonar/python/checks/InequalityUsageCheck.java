@@ -43,7 +43,7 @@ import org.sonar.python.api.PythonPunctuator;
 @ActivatedByDefault
 public class InequalityUsageCheck extends SquidCheck<Grammar> {
 
-  public static final String CHECK_KEY = "S2318";
+  public static final String CHECK_KEY = "InequalityUsage";
 
   @Override
   public void init() {

@@ -48,7 +48,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 @ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class FunctionComplexityCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S1541";
+  public static final String CHECK_KEY = "FunctionComplexity";
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 10;
 
   @RuleProperty(

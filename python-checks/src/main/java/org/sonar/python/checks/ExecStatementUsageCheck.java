@@ -42,7 +42,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 @ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ExecStatementUsageCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S2317";
+  public static final String CHECK_KEY = "ExecStatementUsage";
   @Override
   public void init() {
     subscribeTo(PythonGrammar.EXEC_STMT);

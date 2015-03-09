@@ -48,7 +48,7 @@ import java.util.Map;
 @ActivatedByDefault
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class OneStatementPerLineCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "S122";
+  public static final String CHECK_KEY = "OneStatementPerLine";
   private final Map<Integer, Integer> statementsPerLine = Maps.newHashMap();
 
   @Override

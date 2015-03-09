@@ -43,7 +43,7 @@ import org.sonar.python.api.PythonTokenType;
 @ActivatedByDefault
 public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<Grammar> {
 
-  public static final String CHECK_KEY = "S1129";
+  public static final String CHECK_KEY = "LongIntegerWithLowercaseSuffixUsage";
 
   @Override
   public void init() {

@@ -42,7 +42,7 @@ import java.io.StringWriter;
 @SqaleConstantRemediation("30min")
 public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScannerExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(ParsingErrorCheck.class);
-  public static final String CHECK_KEY = "S2260";
+  public static final String CHECK_KEY = "ParsingError";
 
   @Override
   public void processException(Exception e) {
