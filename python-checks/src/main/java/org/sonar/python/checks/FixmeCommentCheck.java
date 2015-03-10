@@ -37,8 +37,7 @@ import java.util.regex.Pattern;
 @Rule(
     key = FixmeCommentCheck.CHECK_KEY,
     priority = Priority.MAJOR,
-    name = "\"FIXME\" tags should be handled",
-    tags = Tags.CONVENTION
+    name = "\"FIXME\" tags should be handled"
 )
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.INSTRUCTION_RELIABILITY)
 @SqaleConstantRemediation("20min")
