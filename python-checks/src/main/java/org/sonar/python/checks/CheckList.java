@@ -62,7 +62,8 @@ public final class CheckList {
         BackslashInStringCheck.class,
         EmptyNestedBlockCheck.class,
         FixmeCommentCheck.class,
-        SameConditionCheck.class
+        SameConditionCheck.class,
+        HardcodedIPCheck.class
         );
   }
 
