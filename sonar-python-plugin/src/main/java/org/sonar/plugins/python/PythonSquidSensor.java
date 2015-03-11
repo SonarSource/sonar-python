@@ -142,19 +142,17 @@ public final class PythonSquidSensor implements Sensor {
 
   private void saveIssues(InputFile sonarFile, SourceFile squidFile) {
     Collection<CheckMessage> messages = squidFile.getCheckMessages();
-    if (messages != null) {
-      for (CheckMessage message : messages) {
-        RuleKey ruleKey = checks.ruleKey((SquidAstVisitor<Grammar>) message.getCheck());
-        Issuable issuable = resourcePerspectives.as(Issuable.class, sonarFile);
+    for (CheckMessage message : messages) {
+      RuleKey ruleKey = checks.ruleKey((SquidAstVisitor<Grammar>) message.getCheck());
+      Issuable issuable = resourcePerspectives.as(Issuable.class, sonarFile);
 
-        if (issuable != null) {
-          Issue issue = issuable.newIssueBuilder()
+      if (issuable != null) {
+        Issue issue = issuable.newIssueBuilder()
             .ruleKey(ruleKey)
             .line(message.getLine())
             .message(message.getText(Locale.ENGLISH))
             .build();
-          issuable.addIssue(issue);
-        }
+        issuable.addIssue(issue);
       }
     }
   }
