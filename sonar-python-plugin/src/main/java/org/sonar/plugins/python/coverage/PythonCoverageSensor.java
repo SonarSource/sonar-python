@@ -19,11 +19,11 @@
  */
 package org.sonar.plugins.python.coverage;
 
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import javax.annotation.Nullable;
 import org.sonar.api.PropertyType;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
@@ -41,8 +41,6 @@ import org.sonar.plugins.python.EmptyReportException;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +92,6 @@ public class PythonCoverageSensor extends PythonReportSensor {
   public static final String DEFAULT_REPORT_PATH = "coverage-reports/coverage-*.xml";
   public static final String IT_DEFAULT_REPORT_PATH = "coverage-reports/it-coverage-*.xml";
   public static final String OVERALL_DEFAULT_REPORT_PATH = "coverage-reports/overall-coverage-*.xml";
-
   public static final String FORCE_ZERO_COVERAGE_KEY = "sonar.python.coverage.forceZeroCoverage";
 
   private CoberturaParser parser = new CoberturaParser();
@@ -135,24 +132,19 @@ public class PythonCoverageSensor extends PythonReportSensor {
                                           Map<String, CoverageMeasuresBuilder> itCoverageMeasures,
                                           Map<String, CoverageMeasuresBuilder> overallCoverageMeasures
   ) {
-    for (File file : fileSystem.files(fileSystem.predicates().and(fileSystem.predicates().hasType(InputFile.Type.MAIN), fileSystem.predicates().hasLanguage(Python.KEY)))) {
-      InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(file));
-      if (inputFile != null) {
+    for (InputFile inputFile : fileSystem.inputFiles(fileSystem.predicates().and(fileSystem.predicates().hasType(InputFile.Type.MAIN), fileSystem.predicates().hasLanguage(Python.KEY)))) {
+      String filePath = inputFile.relativePath();
 
-        Path baseDir = Paths.get(FilenameUtils.normalize(fileSystem.baseDir().getPath()));
-        String filePath = baseDir.relativize(Paths.get(file.getAbsolutePath())).toString();
+      if (coverageMeasures.get(filePath) == null) {
+        saveZeroValueForResource(inputFile, filePath, context, CoverageType.UT_COVERAGE);
+      }
 
-        if (coverageMeasures.get(filePath) == null) {
-          saveZeroValueForResource(inputFile, filePath, context, CoverageType.UT_COVERAGE);
-        }
+      if (itCoverageMeasures.get(filePath) == null) {
+        saveZeroValueForResource(inputFile, filePath, context, CoverageType.IT_COVERAGE);
+      }
 
-        if (itCoverageMeasures.get(filePath) == null) {
-          saveZeroValueForResource(inputFile, filePath, context, CoverageType.IT_COVERAGE);
-        }
-
-        if (overallCoverageMeasures.get(filePath) == null) {
-          saveZeroValueForResource(inputFile, filePath, context, CoverageType.OVERALL_COVERAGE);
-        }
+      if (overallCoverageMeasures.get(filePath) == null) {
+        saveZeroValueForResource(inputFile, filePath, context, CoverageType.OVERALL_COVERAGE);
       }
     }
   }
@@ -162,20 +154,20 @@ public class PythonCoverageSensor extends PythonReportSensor {
                                         CoverageType ctype) {
     Measure ncloc = context.getMeasure(context.getResource(inputFile), CoreMetrics.NCLOC);
     if (ncloc != null && ncloc.getValue() > 0) {
-      String coverageKind = "unit test ";
+      String coverageKind = "unit test";
       Metric hitsDataMetric = CoreMetrics.COVERAGE_LINE_HITS_DATA;
       Metric linesToCoverMetric = CoreMetrics.LINES_TO_COVER;
       Metric uncoveredLinesMetric = CoreMetrics.UNCOVERED_LINES;
 
       switch (ctype) {
         case IT_COVERAGE:
-          coverageKind = "integration test ";
+          coverageKind = "integration test";
           hitsDataMetric = CoreMetrics.IT_COVERAGE_LINE_HITS_DATA;
           linesToCoverMetric = CoreMetrics.IT_LINES_TO_COVER;
           uncoveredLinesMetric = CoreMetrics.IT_UNCOVERED_LINES;
           break;
         case OVERALL_COVERAGE:
-          coverageKind = "overall ";
+          coverageKind = "overall";
           hitsDataMetric = CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA;
           linesToCoverMetric = CoreMetrics.OVERALL_LINES_TO_COVER;
           uncoveredLinesMetric = CoreMetrics.OVERALL_UNCOVERED_LINES;
@@ -184,10 +176,10 @@ public class PythonCoverageSensor extends PythonReportSensor {
           break;
       }
 
-      LOG.debug("Zeroing {}coverage measures for file '{}'", coverageKind, filePath);
+      LOG.debug("Zeroing {} coverage measures for file '{}'", coverageKind, filePath);
 
       PropertiesBuilder<Integer, Integer> lineHitsData = new PropertiesBuilder<>(hitsDataMetric);
-      for (int i = 1; i <= context.getMeasure(context.getResource(inputFile), CoreMetrics.LINES).getIntValue(); ++i) {
+      for (int i = 1; i <= inputFile.lines(); ++i) {
         lineHitsData.add(i, 0);
       }
       context.saveMeasure(inputFile, lineHitsData.build());
@@ -287,9 +279,9 @@ public class PythonCoverageSensor extends PythonReportSensor {
     return overallMeasure;
   }
 
-  private void checkDataIsNotNull(String data) {
+  private void checkDataIsNotNull(@Nullable String data) {
     if (data == null) {
-      throw new IllegalStateException("Measure data is null and it shouldn't");
+      throw new IllegalStateException("Measure data is null but it shouldn't be");
     }
   }
 }
