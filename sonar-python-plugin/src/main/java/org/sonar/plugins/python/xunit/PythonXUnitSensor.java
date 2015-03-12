@@ -37,6 +37,7 @@ import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
 
+import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
@@ -86,18 +87,15 @@ public class PythonXUnitSensor extends PythonReportSensor {
   }
 
   @Override
-  protected void processReports(final SensorContext context, List<File> reports)
-      throws javax.xml.stream.XMLStreamException {
-
+  protected void processReports(final SensorContext context, List<File> reports) throws XMLStreamException {
     if (conf.getBoolean(SKIP_DETAILS)) {
       simpleMode(context, reports);
     } else {
-      detailledMode(context, reports);
+      detailedMode(context, reports);
     }
   }
 
-  private void simpleMode(final SensorContext context, List<File> reports)
-      throws javax.xml.stream.XMLStreamException {
+  private void simpleMode(final SensorContext context, List<File> reports) throws XMLStreamException {
     TestSuiteParser parserHandler = new TestSuiteParser();
     StaxParser parser = new StaxParser(parserHandler, false);
     for (File report : reports) {
@@ -130,8 +128,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
   }
 
-  private void detailledMode(final SensorContext context, List<File> reports)
-      throws javax.xml.stream.XMLStreamException {
+  private void detailedMode(final SensorContext context, List<File> reports) throws XMLStreamException {
     for (File report : reports) {
       TestSuiteParser parserHandler = new TestSuiteParser();
       StaxParser parser = new StaxParser(parserHandler, false);
@@ -143,34 +140,34 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
   }
 
-  private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) throws javax.xml.stream.XMLStreamException {
-    Collection<TestSuite> locatedResources = lookupResources(context, parsedReports);
+  private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) throws XMLStreamException {
+    Collection<TestSuite> locatedResources = lookupResources(parsedReports);
     for (TestSuite fileReport : locatedResources) {
-      InputFile unitTest = fileReport.getInputFile();
+      InputFile inputFile = fileReport.getInputFile();
 
-      LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), unitTest.relativePath());
+      LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), inputFile.relativePath());
 
-      context.saveMeasure(unitTest, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
-      context.saveMeasure(unitTest, CoreMetrics.TESTS, (double) fileReport.getTests() - fileReport.getSkipped());
-      context.saveMeasure(unitTest, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
-      context.saveMeasure(unitTest, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
-      context.saveMeasure(unitTest, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
+      context.saveMeasure(inputFile, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
+      context.saveMeasure(inputFile, CoreMetrics.TESTS, (double) fileReport.getTests() - fileReport.getSkipped());
+      context.saveMeasure(inputFile, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
+      context.saveMeasure(inputFile, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
+      context.saveMeasure(inputFile, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
 
       double testsRun = (double)fileReport.getTests() - fileReport.getSkipped();
       if (testsRun > 0) {
         double passedTests = (double)fileReport.getTests() - fileReport.getErrors() - fileReport.getFailures() - fileReport.getSkipped();
         double successDensity = passedTests * PERCENT_BASE / testsRun;
-        context.saveMeasure(unitTest, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
+        context.saveMeasure(inputFile, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
       }
-      context.saveMeasure(unitTest, new Measure(CoreMetrics.TEST_DATA, fileReport.getDetails()));
+      context.saveMeasure(inputFile, new Measure(CoreMetrics.TEST_DATA, fileReport.getDetails()));
     }
   }
 
-  InputFile findResource(SensorContext context, String fileKey) {
-    return findResourceUsingNoseTestsStrategy(context, fileKey);
+  private InputFile findResource(String fileKey) {
+    return findResourceUsingNoseTestsStrategy(fileKey);
   }
 
-  InputFile findResourceUsingNoseTestsStrategy(SensorContext context, String fileKey) {
+  private InputFile findResourceUsingNoseTestsStrategy(String fileKey) {
     // a) check assuming the key doesnt contain the class name
     String candidateKey = StringUtils.replace(fileKey, ".", "/") + ".py";
 
@@ -187,14 +184,14 @@ public class PythonXUnitSensor extends PythonReportSensor {
     return unitTestFile;
   }
 
-  private Collection<TestSuite> lookupResources(SensorContext context, Collection<TestSuite> testReports) {
+  private Collection<TestSuite> lookupResources(Collection<TestSuite> testReports) {
     Map<String, TestSuite> locatedReports = new HashMap<>();
 
     for (TestSuite report : testReports) {
       String fileKey = report.getKey();
 
       LOG.debug("Trying to find a SonarQube resource for '{}' ...", fileKey);
-      InputFile inputFile = findResource(context, fileKey);
+      InputFile inputFile = findResource(fileKey);
       if (inputFile != null) {
         LOG.debug("... found! The resource is '{}'", inputFile);
 
