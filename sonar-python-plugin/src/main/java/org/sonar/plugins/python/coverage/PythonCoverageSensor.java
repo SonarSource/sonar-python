@@ -23,9 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
-import javax.annotation.Nullable;
 import org.sonar.api.PropertyType;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
@@ -35,10 +35,11 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
+import org.sonar.plugins.python.EmptyReportException;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
-import org.sonar.plugins.python.EmptyReportException;
 
+import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.util.HashMap;
@@ -132,7 +133,9 @@ public class PythonCoverageSensor extends PythonReportSensor {
                                           Map<String, CoverageMeasuresBuilder> itCoverageMeasures,
                                           Map<String, CoverageMeasuresBuilder> overallCoverageMeasures
   ) {
-    for (InputFile inputFile : fileSystem.inputFiles(fileSystem.predicates().and(fileSystem.predicates().hasType(InputFile.Type.MAIN), fileSystem.predicates().hasLanguage(Python.KEY)))) {
+    FilePredicates p = fileSystem.predicates();
+    Iterable<InputFile> inputFiles = fileSystem.inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+    for (InputFile inputFile : inputFiles) {
       String filePath = inputFile.relativePath();
 
       if (coverageMeasures.get(filePath) == null) {

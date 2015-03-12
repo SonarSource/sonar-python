@@ -46,6 +46,7 @@ public class CoberturaParser {
         try {
           rootCursor.advance();
         } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
+          LOG.debug("Unexpected end of file is encountered", eofExc);
           throw new EmptyReportException();
         }
         collectPackageMeasures(rootCursor.descendantElementCursor("package"), coverageData);
