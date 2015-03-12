@@ -14,3 +14,4 @@ str = "123.1111.1.1 String without ip "
 message = '''123.1.1.1
 some long message with ip address inside is compliant'''
 
+FASTCGI_HELP = r""" host=127.0.0.1 long strings with string prefix are also recognized as multiline strings and ignored by this rule"""

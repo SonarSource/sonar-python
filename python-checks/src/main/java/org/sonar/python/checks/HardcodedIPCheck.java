@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 public class HardcodedIPCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "S1313";
 
-  private static final String IP_ADDRESS_REGEX = "^(https?://)?((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))";
+  private static final String IP_ADDRESS_REGEX = "((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))";
   private static final Pattern pattern = Pattern.compile(IP_ADDRESS_REGEX);
   String message = "Make this IP \"%s\" address configurable.";
 
@@ -59,18 +59,16 @@ public class HardcodedIPCheck extends SquidCheck<Grammar> {
     String string = node.getTokenOriginalValue();
     if (isMultilineString(string)){
       return;
-    } else {
-      string = string.substring(1, string.length() - 1);
     }
     Matcher matcher = pattern.matcher(string);
     if (matcher.find()) {
-      String ipAddress = matcher.group(2);
+      String ipAddress = matcher.group();
       getContext().createLineViolation(this, String.format(message, ipAddress), node);
     }
   }
 
   private boolean isMultilineString(String string) {
-    return string.startsWith("'''") || string.startsWith("\"\"\"");
+    return string.endsWith("'''") || string.endsWith("\"\"\"");
   }
 }
 
