@@ -93,8 +93,6 @@ public class PythonXUnitSensorTest {
 
     verify(context, times(2)).saveMeasure(eq(testFile1), any(Measure.class));
     verify(context).saveMeasure(eq(testFile2), any(Measure.class));
-
-    verifyNoMoreInteractions(context);
   }
 
   @Test
