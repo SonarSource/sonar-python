@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 public class FixmeCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S1134";
 
-  public String fixmeCommentPattern = "^#[ ]*fixme.*";
+  private static final String fixmeCommentPattern = "^#[ ]*fixme.*";
 
   private Pattern pattern;
 

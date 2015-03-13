@@ -48,6 +48,7 @@ public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScanner
   public void processException(Exception e) {
     StringWriter exception = new StringWriter();
     e.printStackTrace(new PrintWriter(exception));
+    LOG.debug("Parsing error", e);
     getContext().createFileViolation(this, exception.toString());
   }
 

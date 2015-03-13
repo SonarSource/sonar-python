@@ -95,7 +95,7 @@ public class SameConditionCheck extends SquidCheck<Grammar> {
 
   private void checkCondition(List<AstNode> conditions, int index) {
     for (int j = 0; j < index; j++) {
-      if (CheckUtils.equals(conditions.get(j), conditions.get(index))) {
+      if (CheckUtils.equalNodes(conditions.get(j), conditions.get(index))) {
         String message = String.format("This branch duplicates the one on line %s.", conditions.get(j).getToken().getLine());
         getContext().createLineViolation(this, message, conditions.get(index).getToken().getLine());
         return;

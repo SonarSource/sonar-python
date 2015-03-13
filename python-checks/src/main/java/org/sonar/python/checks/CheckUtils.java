@@ -40,7 +40,7 @@ public class CheckUtils {
     return parent != null && parent.is(PythonGrammar.CLASSDEF);
   }
 
-  public static boolean equals(AstNode node1, AstNode node2){
+  public static boolean equalNodes(AstNode node1, AstNode node2){
     if (!node1.getType().equals(node2.getType()) || node1.getNumberOfChildren() != node2.getNumberOfChildren()){
       return false;
     }
@@ -52,7 +52,7 @@ public class CheckUtils {
     List<AstNode> children1 = node1.getChildren();
     List<AstNode> children2 = node2.getChildren();
     for (int i = 0; i < children1.size(); i++){
-      if (!equals(children1.get(i), children2.get(i))){
+      if (!equalNodes(children1.get(i), children2.get(i))){
         return false;
       }
     }
