@@ -45,8 +45,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     effortToFixDescription = "per complexity point above the threshold")
 public class FileComplexityCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "FileComplexity";
-  //todo change on 200
-  private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 80;
+  private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 200;
 
   @RuleProperty(
     key = "maximumFileComplexityThreshold",

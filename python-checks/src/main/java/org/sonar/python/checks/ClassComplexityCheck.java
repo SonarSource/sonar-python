@@ -46,8 +46,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     effortToFixDescription = "per complexity point over the threshold")
 public class ClassComplexityCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "ClassComplexity";
-  //todo change on 200
-  private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 80;
+  private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
 
   @RuleProperty(key = "maximumClassComplexityThreshold", defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
   private int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
