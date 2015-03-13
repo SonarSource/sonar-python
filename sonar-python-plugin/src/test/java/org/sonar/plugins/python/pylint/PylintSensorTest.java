@@ -21,7 +21,6 @@ package org.sonar.plugins.python.pylint;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRules;
@@ -46,20 +45,20 @@ public class PylintSensorTest {
   public void init() {
     conf = mock(PylintConfiguration.class);
     activeRules = (new ActiveRulesBuilder())
-        .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0304"))
-        .setName("Missing final line")
+        .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
+        .setName("Invalid name")
         .activate()
         .build();
     fileSystem = new DefaultFileSystem();
     fileSystem.setBaseDir(new File("src/test/resources/org/sonar/plugins/python/pylint"));
     fileSystem.setWorkDir(new File("target/"));
-    DefaultInputFile inputFile = new DefaultInputFile("src/test/resources/org/sonar/plugins/python/pylint/file.py").setLanguage(Python.KEY);
-    inputFile.setAbsolutePath((new File("src/test/resources/org/sonar/plugins/python/pylint/file.py")).getAbsolutePath());
+    DefaultInputFile inputFile = new DefaultInputFile("src/test/resources/example_project/example.py").setLanguage(Python.KEY);
+    inputFile.setAbsolutePath((new File("src/test/resources/example_project/example.py")).getAbsolutePath());
     fileSystem.add(inputFile);
   }
 
   @Test
-  public void should_execute_only_when_necessary() {
+  public void shouldExecuteOnlyWhenNecessary() {
     DefaultFileSystem fileSystemForeign = new DefaultFileSystem();
 
     Project project = mock(Project.class);
@@ -75,13 +74,6 @@ public class PylintSensorTest {
   private void checkNecessityOfExecution(Project project, ActiveRules currentActiveRules, DefaultFileSystem currentFileSystem, boolean shouldExecute) {
     PylintSensor sensor = new PylintSensor(conf, currentActiveRules, currentFileSystem, mock(ResourcePerspectives.class), new Settings());
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
-  }
-
-  @Test
-  public void analyze_by_pylint(){
-    PylintSensor sensor = new PylintSensor(conf, activeRules, fileSystem, mock(ResourcePerspectives.class), new Settings());
-    SensorContext context = mock(SensorContext.class);
-    sensor.analyse(mock(Project.class), context);
   }
 
 }
