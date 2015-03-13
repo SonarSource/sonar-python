@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.sonar.api.config.Settings;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +27,13 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.rule.ActiveRule;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.config.Settings;
 import org.sonar.api.issue.Issuable;
-import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleFinder;
 import org.sonar.plugins.python.Python;
 
 import java.io.File;
@@ -46,18 +45,16 @@ public class PylintSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
 
-  private RuleFinder ruleFinder;
-  private RulesProfile profile;
+  private ActiveRules activeRules;
   private PylintConfiguration conf;
   private FileSystem fileSystem;
   private ResourcePerspectives resourcePerspectives;
   private Settings settings;
 
 
-  public PylintSensor(RuleFinder ruleFinder, PylintConfiguration conf, RulesProfile profile, FileSystem fileSystem, ResourcePerspectives resourcePerspectives, Settings settings) {
-    this.ruleFinder = ruleFinder;
+  public PylintSensor(PylintConfiguration conf, ActiveRules activeRules, FileSystem fileSystem, ResourcePerspectives resourcePerspectives, Settings settings) {
     this.conf = conf;
-    this.profile = profile;
+    this.activeRules = activeRules;
     this.fileSystem = fileSystem;
     this.resourcePerspectives = resourcePerspectives;
     this.settings = settings;
@@ -67,7 +64,7 @@ public class PylintSensor implements Sensor {
   public boolean shouldExecuteOnProject(Project project) {
     FilePredicates p = fileSystem.predicates();
     boolean hasFiles = fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
-    boolean hasRules = !profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+    boolean hasRules = !activeRules.findByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
     return hasFiles && hasRules && settings.getString(REPORT_PATH_KEY) == null;
   }
 
@@ -81,7 +78,7 @@ public class PylintSensor implements Sensor {
     for (File file : files) {
       try {
         File out = new File(workDir, i + ".out");
-        analyzeFile(file, out, project);
+        analyzeFile(file, out);
         i++;
       } catch (Exception e) {
         String msg = new StringBuilder()
@@ -96,7 +93,7 @@ public class PylintSensor implements Sensor {
     }
   }
 
-  protected void analyzeFile(File file, File out, Project project) throws IOException {
+  protected void analyzeFile(File file, File out) throws IOException {
     InputFile pyFile = fileSystem.inputFile(fileSystem.predicates().is(file));
 
     String pylintConfigPath = conf.getPylintConfigPath(fileSystem);
@@ -106,22 +103,17 @@ public class PylintSensor implements Sensor {
     List<Issue> issues = analyzer.analyze(file.getAbsolutePath(), fileSystem.encoding(), out);
 
     for (Issue pylintIssue : issues) {
-      Rule rule = ruleFinder.findByKey(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId());
+      ActiveRule rule = activeRules.find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
 
       if (rule != null) {
-        if (rule.isEnabled()) {
-          Issuable issuable = resourcePerspectives.as(Issuable.class, pyFile);
-
-          if (issuable != null) {
-            org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
-              .ruleKey(RuleKey.of(rule.getRepositoryKey(), rule.getKey()))
+        Issuable issuable = resourcePerspectives.as(Issuable.class, pyFile);
+        if (issuable != null) {
+          org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
+              .ruleKey(rule.ruleKey())
               .line(pylintIssue.getLine())
               .message(pylintIssue.getDescription())
               .build();
-            issuable.addIssue(issue);
-          }
-        } else {
-          LOG.debug("Pylint rule '{}' is disabled in Sonar", pylintIssue.getRuleId());
+          issuable.addIssue(issue);
         }
       } else {
         LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
