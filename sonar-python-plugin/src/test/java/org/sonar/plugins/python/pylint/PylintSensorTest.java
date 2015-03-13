@@ -23,77 +23,57 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
-import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
-import org.sonar.api.rules.ActiveRule;
-import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PylintSensorTest {
-  private RuleFinder ruleFinder;
   private PylintConfiguration conf;
-  private RulesProfile profile;
+  private ActiveRules activeRules;
+  private DefaultFileSystem fileSystem;
 
   @Before
   public void init() {
-    ruleFinder = mock(RuleFinder.class);
     conf = mock(PylintConfiguration.class);
-    profile = mock(RulesProfile.class);
-  }
-
-  @Test
-  public void shouldNotThrowWhenInstantiating() {
-    DefaultFileSystem fileSystem = new DefaultFileSystem();
-    new PylintSensor(ruleFinder, conf, profile, fileSystem, mock(ResourcePerspectives.class), new Settings());
+    activeRules = (new ActiveRulesBuilder())
+        .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
+        .setName("Invalid name")
+        .activate()
+        .build();
+    fileSystem = new DefaultFileSystem();
+    fileSystem.setBaseDir(new File("src/test/resources/org/sonar/plugins/python/pylint"));
+    fileSystem.setWorkDir(new File("target/"));
+    DefaultInputFile inputFile = new DefaultInputFile("src/test/resources/example_project/example.py").setLanguage(Python.KEY);
+    inputFile.setAbsolutePath((new File("src/test/resources/example_project/example.py")).getAbsolutePath());
+    fileSystem.add(inputFile);
   }
 
   @Test
   public void shouldExecuteOnlyWhenNecessary() {
-    // which means: only on python projects and only if
-    // there is at least one active pylint rule
-
-    DefaultFileSystem fileSystemPython = new DefaultFileSystem();
     DefaultFileSystem fileSystemForeign = new DefaultFileSystem();
-    DefaultInputFile inputFile1 = new DefaultInputFile("src/test/resources/example_project/example.py").setLanguage(Python.KEY);
-    inputFile1.setAbsolutePath((new File("src/test/resources/example_project/example.py")).getAbsolutePath());
-    fileSystemPython.add(inputFile1);
 
-    Project pythonProject = mock(Project.class);
-    Project foreignProject = mock(Project.class);
-    RulesProfile emptyProfile = mock(RulesProfile.class);
-    RulesProfile pylintProfile = createPylintProfile();
+    Project project = mock(Project.class);
 
-    checkNecessityOfExecution(pythonProject, pylintProfile, fileSystemPython, true);
-    checkNecessityOfExecution(pythonProject, emptyProfile, fileSystemPython, false);
+    checkNecessityOfExecution(project, activeRules, fileSystem, true);
+    ActiveRules emptyActiveRules = (new ActiveRulesBuilder()).build();
+    checkNecessityOfExecution(project, emptyActiveRules, fileSystem, false);
 
-    checkNecessityOfExecution(foreignProject, pylintProfile, fileSystemForeign, false);
-    checkNecessityOfExecution(foreignProject, emptyProfile, fileSystemForeign, false);
+    checkNecessityOfExecution(project, activeRules, fileSystemForeign, false);
+    checkNecessityOfExecution(project, emptyActiveRules, fileSystemForeign, false);
   }
 
-  private void checkNecessityOfExecution(Project project, RulesProfile profile, DefaultFileSystem fileSystem, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(ruleFinder, conf, profile, fileSystem, mock(ResourcePerspectives.class), new Settings());
+  private void checkNecessityOfExecution(Project project, ActiveRules currentActiveRules, DefaultFileSystem currentFileSystem, boolean shouldExecute) {
+    PylintSensor sensor = new PylintSensor(conf, currentActiveRules, currentFileSystem, mock(ResourcePerspectives.class), new Settings());
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
-  }
-
-  private static RulesProfile createPylintProfile() {
-    List<ActiveRule> rules = new LinkedList<ActiveRule>();
-    rules.add(mock(ActiveRule.class));
-
-    RulesProfile profile = mock(RulesProfile.class);
-    when(profile.getActiveRulesByRepository(PylintRuleRepository.REPOSITORY_KEY))
-      .thenReturn(rules);
-
-    return profile;
   }
 
 }
