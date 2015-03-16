@@ -65,7 +65,8 @@ public final class CheckList {
         SameConditionCheck.class,
         HardcodedIPCheck.class,
         NoPersonReferenceInTodoCheck.class,
-        SameBranchCheck.class
+        SameBranchCheck.class,
+        BreakContinueOutsideLoopCheck.class
     );
   }
 
