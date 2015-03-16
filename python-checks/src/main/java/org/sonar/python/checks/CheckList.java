@@ -64,7 +64,8 @@ public final class CheckList {
         FixmeCommentCheck.class,
         SameConditionCheck.class,
         HardcodedIPCheck.class,
-        NoPersonReferenceInTodoCheck.class
+        NoPersonReferenceInTodoCheck.class,
+        SameBranchCheck.class
     );
   }
 

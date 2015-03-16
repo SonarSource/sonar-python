@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonTokenType;
 
 import java.util.List;
 
@@ -45,8 +46,8 @@ public class CheckUtils {
       return false;
     }
 
-    if (node1.getNumberOfChildren() == 0){
-      return node1.getToken().getValue().equals(node2.getToken().getValue());
+    if (node1.getNumberOfChildren() == 0) {
+      return tokenNodesEqual(node1, node2);
     }
 
     List<AstNode> children1 = node1.getChildren();
@@ -57,6 +58,10 @@ public class CheckUtils {
       }
     }
     return true;
+  }
+
+  private static boolean tokenNodesEqual(AstNode node1, AstNode node2) {
+    return node1.is(PythonTokenType.INDENT) || node1.is(PythonTokenType.DEDENT) || node1.getToken().getValue().equals(node2.getToken().getValue());
   }
 
 }

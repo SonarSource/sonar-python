@@ -1,0 +1,39 @@
+<p>
+  Having two branches in the same <code>if</code> structure with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both
+  instances, then they should be combined.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if 0 <= a < 10:
+  do_the_thing()
+elif 10 <= a < 20:
+  do_the_other_thing()
+elif 20 <= a < 50:
+  do_the_thing()  # Noncompliant; duplicates first condition
+else:
+  do_the_rest()
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (0 <= a < 10) or (20 <= a < 50):
+  do_the_thing()
+elif 10 <= a < 20:
+  do_the_other_thing()
+else:
+  do_the_rest()
+</pre>
+
+<p>or</p>
+
+<pre>
+if 0 <= a < 10:
+  do_the_thing()
+elif 10 <= a < 20:
+  do_the_other_thing()
+elif 20 <= a < 50:
+  do_the_third_thing()
+else:
+  do_the_rest()
+</pre>
