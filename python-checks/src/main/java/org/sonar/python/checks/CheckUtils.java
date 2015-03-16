@@ -47,7 +47,7 @@ public class CheckUtils {
     }
 
     if (node1.getNumberOfChildren() == 0) {
-      return tokenNodesEqual(node1, node2);
+      return node1.is(PythonTokenType.INDENT, PythonTokenType.DEDENT) || node1.getToken().getValue().equals(node2.getToken().getValue());
     }
 
     List<AstNode> children1 = node1.getChildren();
@@ -58,10 +58,6 @@ public class CheckUtils {
       }
     }
     return true;
-  }
-
-  private static boolean tokenNodesEqual(AstNode node1, AstNode node2) {
-    return node1.is(PythonTokenType.INDENT) || node1.is(PythonTokenType.DEDENT) || node1.getToken().getValue().equals(node2.getToken().getValue());
   }
 
 }
