@@ -63,8 +63,9 @@ public final class CheckList {
         EmptyNestedBlockCheck.class,
         FixmeCommentCheck.class,
         SameConditionCheck.class,
-        HardcodedIPCheck.class
-        );
+        HardcodedIPCheck.class,
+        NoPersonReferenceInTodoCheck.class
+    );
   }
 
 }

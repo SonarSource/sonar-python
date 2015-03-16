@@ -1,0 +1,24 @@
+<p>
+  TODO and FIXME comments are typically intended to be short-lived; they are placeholders and reminders that programmers leave for themselves. Unfortunately, even with the best
+  of intentions, those comments are not always acted on an removed in a timely manner. Thus, they can become mysterious, lingering cruft in a code base, reducing both readability
+  and understand-ability.
+</p>
+
+<p>
+  This rule flags all FIXME and TODO comments that do not have an attribution matching the specified regular expression immediately after the FIXME or TODO. Ideally, such
+  comments will also contain information about what needs to be fixed or done, but this rule does not enforce that.
+</p>
+
+<p>These code samples use the default regular expression.</p>
+
+<h2>Noncompliant Code Example</h2>
+
+<pre>
+// TODO
+</pre>
+
+<h2>Compliant Solution</h2>
+
+<pre>
+// TODO(ganncamp) per the business partners, more checks needed
+</pre>
