@@ -17,22 +17,26 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 package org.sonar.python.checks;
 
-public class Tags {
-  public static final String BRAIN_OVERLOAD = "brain-overload";
-  public static final String BUG = "bug";
-  public static final String CLUMSY = "clumsy";
-  public static final String CONVENTION = "convention";
-  public static final String OBSOLETE = "obsolete";
-  public static final String SECURITY = "security";
-  public static final String UNUSED = "unused";
-  public static final String CERT = "cert";
-  public static final String PITFALL = "pitfall";
-  public static final String MISRA = "misra";
+import org.junit.Test;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.squidbridge.api.SourceFile;
+import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
-  private Tags() {
-    // This class only defines constants
+import java.io.File;
+
+public class CommentedCodeCheckTest {
+
+  @Test
+  public void test() {
+    CommentedCodeCheck check = new CommentedCodeCheck();
+
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/commentedCode.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(1).withMessage(CommentedCodeCheck.MESSAGE)
+        .next().atLine(5).withMessage(CommentedCodeCheck.MESSAGE)
+        .noMore();
   }
+
 }
