@@ -31,6 +31,7 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
+import javax.annotation.Nullable;
 import java.util.regex.Pattern;
 
 @Rule(
@@ -44,8 +45,9 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
 
   public static final String CHECK_KEY = "S1720";
 
-  private static final Pattern EMPTY_STRING_REGEXP =
-    Pattern.compile("([brBR]+)?('\\s*')|(\"\\s*\")|('''\\s*''')|(\"\"\"\\s*\"\"\")");
+  private static final Pattern EMPTY_STRING_REGEXP = Pattern.compile("([bruBRU]+)?('\\s*')|(\"\\s*\")|('''\\s*''')|(\"\"\"\\s*\"\"\")");
+  private static final String MESSAGE_NO_DOCSTRING = "Add a docstring to this %s.";
+  private static final String MESSAGE_EMPTY_DOCSTRING = "Add a docstring to this %s.";
 
   @Override
   public void init() {
@@ -79,6 +81,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
   }
 
   private void visitFuncDef(AstNode astNode) {
+    // check on methods is removed to avoid false positives on overriding methods
     if (!CheckUtils.isMethodDefinition(astNode)) {
       checkFirstSuite(astNode, "function");
     }
@@ -87,7 +90,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
   private void checkFirstSuite(AstNode astNode, String typeName) {
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     AstNode firstStatement = suite.getFirstChild(PythonGrammar.STATEMENT);
-    AstNode firstSimpleStmt = null;
+    AstNode firstSimpleStmt;
     if (firstStatement == null) {
       firstSimpleStmt = suite
         .getFirstChild(PythonGrammar.STMT_LIST)
@@ -98,14 +101,23 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     checkSimpleStmt(astNode, firstSimpleStmt, typeName);
   }
 
-  private void checkSimpleStmt(AstNode astNode, AstNode firstSimpleStmt, String typeName) {
+  private void checkSimpleStmt(AstNode astNode, @Nullable AstNode firstSimpleStmt, String typeName) {
     if (firstSimpleStmt != null) {
-      Token token = firstSimpleStmt.getToken();
-      if (isNonEmptyString(token)) {
-        return;
-      }
+      visitFirstStatement(astNode, firstSimpleStmt, typeName);
+    } else {
+      getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
     }
-    getContext().createLineViolation(this, "Add a docstring to this " + typeName, astNode);
+  }
+
+  private void visitFirstStatement(AstNode astNode, AstNode firstSimpleStmt, String typeName) {
+    Token token = firstSimpleStmt.getToken();
+    if (token.getType().equals(PythonTokenType.STRING)){
+      if (EMPTY_STRING_REGEXP.matcher(token.getValue()).matches()){
+        getContext().createLineViolation(this, String.format("The docstring for this %s should not be empty.", typeName), astNode);
+      }
+    } else {
+      getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
+    }
   }
 
   private AstNode firstSimpleStmt(AstNode statement) {
@@ -116,8 +128,4 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     return null;
   }
 
-  private boolean isNonEmptyString(Token token) {
-    return token.getType().equals(PythonTokenType.STRING)
-      && !EMPTY_STRING_REGEXP.matcher(token.getValue()).matches();
-  }
 }
