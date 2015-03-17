@@ -44,3 +44,8 @@ x = 1
 ####################
 # CORE             #
 ####################
+
+# a code library for the dynamic creation of images
+
+# if x == 4:
+print("x is 4")
