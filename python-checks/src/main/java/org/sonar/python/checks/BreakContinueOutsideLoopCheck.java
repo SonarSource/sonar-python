@@ -56,6 +56,7 @@ public class BreakContinueOutsideLoopCheck extends SquidCheck<Grammar> {
         return;
       } else if (currentParent.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)){
         raiseIssue(node);
+        return;
       }
       currentParent = currentParent.getParent();
     }
