@@ -331,12 +331,11 @@ public enum PythonGrammar implements GrammarRuleKey {
       FUNCDEF,
       CLASSDEF));
     b.rule(SUITE).is(b.firstOf(
-      b.sequence(STMT_LIST, NEWLINE),
+      b.sequence(STMT_LIST, b.firstOf(NEWLINE, b.next(EOF), /* (Godin): no newline at the end of file */ b.next(DEDENT))),
       b.sequence(NEWLINE, INDENT, b.oneOrMore(STATEMENT), DEDENT)));
     b.rule(STATEMENT).is(b.firstOf(
-      b.sequence(STMT_LIST, NEWLINE),
-      COMPOUND_STMT,
-      STMT_LIST));
+      b.sequence(STMT_LIST, b.firstOf(NEWLINE, b.next(EOF), /* (Godin): no newline at the end of file */ b.next(DEDENT))),
+      COMPOUND_STMT));
     b.rule(STMT_LIST).is(SIMPLE_STMT, b.zeroOrMore(";", SIMPLE_STMT), b.optional(";"));
 
     b.rule(IF_STMT).is("if", TEST, ":", SUITE, b.zeroOrMore("elif", TEST, ":", SUITE), b.optional("else", ":", SUITE));
