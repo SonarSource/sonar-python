@@ -47,7 +47,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
 
   private static final Pattern EMPTY_STRING_REGEXP = Pattern.compile("([bruBRU]+)?('\\s*')|(\"\\s*\")|('''\\s*''')|(\"\"\"\\s*\"\"\")");
   private static final String MESSAGE_NO_DOCSTRING = "Add a docstring to this %s.";
-  private static final String MESSAGE_EMPTY_DOCSTRING = "Add a docstring to this %s.";
+  private static final String MESSAGE_EMPTY_DOCSTRING = "The docstring for this %s should not be empty.";
 
   @Override
   public void init() {
@@ -113,7 +113,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     Token token = firstSimpleStmt.getToken();
     if (token.getType().equals(PythonTokenType.STRING)){
       if (EMPTY_STRING_REGEXP.matcher(token.getValue()).matches()){
-        getContext().createLineViolation(this, String.format("The docstring for this %s should not be empty.", typeName), astNode);
+        getContext().createLineViolation(this, String.format(MESSAGE_EMPTY_DOCSTRING, typeName), astNode);
       }
     } else {
       getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
