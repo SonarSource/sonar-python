@@ -69,7 +69,8 @@ public final class CheckList {
         BreakContinueOutsideLoopCheck.class,
         CommentedCodeCheck.class,
         ReturnYieldOutsideFunctionCheck.class,
-        TrailingWhitespaceCheck.class
+        TrailingWhitespaceCheck.class,
+        MissingNewlineAtEndOfFileCheck.class
     );
   }
 
