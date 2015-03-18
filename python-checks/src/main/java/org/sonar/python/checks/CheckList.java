@@ -68,7 +68,8 @@ public final class CheckList {
         SameBranchCheck.class,
         BreakContinueOutsideLoopCheck.class,
         CommentedCodeCheck.class,
-        ReturnYieldOutsideFunctionCheck.class
+        ReturnYieldOutsideFunctionCheck.class,
+        TrailingWhitespaceCheck.class
     );
   }
 
