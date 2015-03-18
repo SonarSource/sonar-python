@@ -67,7 +67,8 @@ public final class CheckList {
         NoPersonReferenceInTodoCheck.class,
         SameBranchCheck.class,
         BreakContinueOutsideLoopCheck.class,
-        CommentedCodeCheck.class
+        CommentedCodeCheck.class,
+        ReturnYieldOutsideFunctionCheck.class
     );
   }
 
