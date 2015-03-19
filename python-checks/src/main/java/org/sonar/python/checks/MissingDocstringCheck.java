@@ -81,9 +81,11 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
   }
 
   private void visitFuncDef(AstNode astNode) {
-    // check on methods is removed to avoid false positives on overriding methods
+    // on methods we check only empty docstrings to avoid false positives on overriding methods
     if (!CheckUtils.isMethodDefinition(astNode)) {
       checkFirstSuite(astNode, "function");
+    } else {
+      checkFirstSuite(astNode, "method");
     }
   }
 
@@ -105,6 +107,12 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     if (firstSimpleStmt != null) {
       visitFirstStatement(astNode, firstSimpleStmt, typeName);
     } else {
+      raiseIssueNoDocstring(astNode, typeName);
+    }
+  }
+
+  private void raiseIssueNoDocstring(AstNode astNode, String typeName) {
+    if (!typeName.equals("method")) {
       getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
     }
   }
@@ -116,7 +124,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
         getContext().createLineViolation(this, String.format(MESSAGE_EMPTY_DOCSTRING, typeName), astNode);
       }
     } else {
-      getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
+      raiseIssueNoDocstring(astNode, typeName);
     }
   }
 

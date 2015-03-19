@@ -32,12 +32,13 @@ public class MissingDocstringCheckTest {
   public void test() {
     SourceFile file = scanFile("missingDocstring.py");
     CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(9).withMessage("Add a docstring to this function.")
-      .next().atLine(12).withMessage("The docstring for this function should not be empty.")
-      .next().atLine(16).withMessage("Add a docstring to this function.")
-      .next().atLine(21).withMessage("Add a docstring to this function.")
-      .next().atLine(27).withMessage("Add a docstring to this class.")
-      .noMore();
+        .next().atLine(9).withMessage("Add a docstring to this function.")
+        .next().atLine(12).withMessage("The docstring for this function should not be empty.")
+        .next().atLine(16).withMessage("Add a docstring to this function.")
+        .next().atLine(21).withMessage("Add a docstring to this function.")
+        .next().atLine(27).withMessage("Add a docstring to this class.")
+        .next().atLine(32).withMessage("The docstring for this method should not be empty.")
+        .noMore();
   }
 
   @Test
@@ -53,8 +54,8 @@ public class MissingDocstringCheckTest {
   private void testMissingDocStringAtModuleLevel(String fileName) {
     SourceFile file = scanFile(fileName);
     CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().withMessage("Add a docstring to this module.")
-      .noMore();
+        .next().withMessage("Add a docstring to this module.")
+        .noMore();
   }
 
   private SourceFile scanFile(String fileName) {

@@ -30,4 +30,5 @@ class ClassWithoutDocstring:
 		pass
 
 	def method_without_docstring():
+		''''''
 		pass
