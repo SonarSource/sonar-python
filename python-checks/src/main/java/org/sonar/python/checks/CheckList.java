@@ -71,7 +71,8 @@ public final class CheckList {
         ReturnYieldOutsideFunctionCheck.class,
         TrailingWhitespaceCheck.class,
         MissingNewlineAtEndOfFileCheck.class,
-        LocalVariableAndParameterNameIncompatibilityCheck.class
+        LocalVariableAndParameterNameIncompatibilityCheck.class,
+        InitReturnsValueCheck.class
     );
   }
 

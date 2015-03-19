@@ -84,7 +84,7 @@ public class LocalVariableAndParameterNameIncompatibilityCheck extends SquidChec
       List<Token> varNames = new LinkedList<>();
       List<Token> forCounterNames = getForCounterNames(suite);
       for (AstNode expression : expressions) {
-        if (expression.getNumberOfChildren() == 3 && expression.getChildren(PythonPunctuator.ASSIGN) != null && insideFunction(expression, funcDef)) {
+        if (expression.getNumberOfChildren() == 3 && expression.getChildren(PythonPunctuator.ASSIGN) != null && CheckUtils.insideFunction(expression, funcDef)) {
           addNames(varNames, expression, parameters, forCounterNames);
         }
       }
@@ -119,10 +119,6 @@ public class LocalVariableAndParameterNameIncompatibilityCheck extends SquidChec
       }
     }
     return result;
-  }
-
-  private boolean insideFunction(AstNode expression, AstNode funcDef) {
-    return expression.getFirstAncestor(PythonGrammar.FUNCDEF).getToken().equals(funcDef.getToken());
   }
 
   private void addNames(List<Token> names, AstNode expression, List<Token> parameters, List<Token> forCounters) {
