@@ -1,0 +1,15 @@
+<p>
+  Functions that use <code>yield</code> are known as "generators", and generators cannot <code>return</code> values.
+  Similarly, functions that use <code>return</code> cannot use <code>yield</code>. Doing so will cause a <code>SyntaxError</code>.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+
+<pre>
+def adder(n):
+  num = 0
+  while num < n:
+    yield num
+    num += 1
+  return num  #Noncompliant
+</pre>

@@ -73,7 +73,8 @@ public final class CheckList {
         MissingNewlineAtEndOfFileCheck.class,
         LocalVariableAndParameterNameIncompatibilityCheck.class,
         InitReturnsValueCheck.class,
-        ExitHasBadArgumentsCheck.class
+        ExitHasBadArgumentsCheck.class,
+        ReturnAndYieldInOneFunctionCheck.class
     );
   }
 
