@@ -70,7 +70,8 @@ public final class CheckList {
         CommentedCodeCheck.class,
         ReturnYieldOutsideFunctionCheck.class,
         TrailingWhitespaceCheck.class,
-        MissingNewlineAtEndOfFileCheck.class
+        MissingNewlineAtEndOfFileCheck.class,
+        LocalVariableAndParameterNameIncompatibilityCheck.class
     );
   }
 
