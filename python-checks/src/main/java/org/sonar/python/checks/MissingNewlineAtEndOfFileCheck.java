@@ -54,16 +54,14 @@ public class MissingNewlineAtEndOfFileCheck extends SquidCheck<Grammar> implemen
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
-    String[] lines;
+    String fileContent;
     try {
-      String fileContent = Files.toString(getContext().getFile(), charset);
-      lines = fileContent.split("[\r\n]", -1);
+      fileContent = Files.toString(getContext().getFile(), charset);
     } catch (IOException e) {
       throw new IllegalStateException("Could not read " + getContext().getFile(), e);
     }
-    if (!"".equals(lines[lines.length - 1])) {
+    if (!fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
       getContext().createFileViolation(this, String.format(MESSAGE, getContext().getFile().getName()));
-
     }
   }
 
