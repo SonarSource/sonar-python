@@ -75,7 +75,8 @@ public final class CheckList {
         InitReturnsValueCheck.class,
         ExitHasBadArgumentsCheck.class,
         ReturnAndYieldInOneFunctionCheck.class,
-        ModuleNameCheck.class
+        ModuleNameCheck.class,
+        FieldNameCheck.class
     );
   }
 
