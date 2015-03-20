@@ -84,12 +84,12 @@ public class CheckUtils {
     List<AstNode> expressions = suite.getDescendants(PythonGrammar.EXPRESSION_STMT);
     for (AstNode expression : expressions) {
       if (isAssignmentExpression(expression)) {
-        getFieldsFromLongAssignmentExpression(allFields, expression, true);
+        getIdentifiersFromLongAssignmentExpression(allFields, expression, true);
       }
     }
   }
 
-  private static void getFieldsFromLongAssignmentExpression(List<Token> fields, AstNode expression, boolean withSelf) {
+  public static void getIdentifiersFromLongAssignmentExpression(List<Token> fields, AstNode expression, boolean withSelf) {
     List<AstNode> assignedExpressions = expression.getChildren(PythonGrammar.TESTLIST_STAR_EXPR);
     assignedExpressions.remove(assignedExpressions.size() - 1);
     List<AstNode> tests = new LinkedList<>();
@@ -134,7 +134,7 @@ public class CheckUtils {
     return numberOfAssign > 0 && numberOfChildren % 2 == 1 && numberOfAssign * 2 + 1 == numberOfChildren;
   }
 
-  private static boolean contains(List<Token> list, Token token) {
+  public static boolean contains(List<Token> list, Token token) {
     for (Token currentToken : list) {
       if (currentToken.getValue().equals(token.getValue())) {
         return true;
@@ -154,7 +154,7 @@ public class CheckUtils {
     }
     for (AstNode expression : expressions) {
       if (isAssignmentExpression(expression)){
-        getFieldsFromLongAssignmentExpression(fields, expression, false);
+        getIdentifiersFromLongAssignmentExpression(fields, expression, false);
       }
     }
     return fields;

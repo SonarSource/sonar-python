@@ -28,7 +28,6 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
@@ -84,16 +83,17 @@ public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Gra
       List<Token> varNames = new LinkedList<>();
       List<Token> forCounterNames = getForCounterNames(suite);
       for (AstNode expression : expressions) {
-        if (isAssignmentExpression(expression) && CheckUtils.insideFunction(expression, funcDef)) {
-          addNames(varNames, expression, parameters, forCounterNames);
+        if (CheckUtils.isAssignmentExpression(expression) && CheckUtils.insideFunction(expression, funcDef)) {
+          CheckUtils.getIdentifiersFromLongAssignmentExpression(varNames, expression, false);
+        }
+      }
+      for (int i = 0; i < varNames.size(); i++){
+        if (CheckUtils.contains(parameters, varNames.get(i))||CheckUtils.contains(forCounterNames, varNames.get(i))){
+          varNames.remove(i);
         }
       }
       checkNames(varNames, forCounterNames);
     }
-  }
-
-  private boolean isAssignmentExpression(AstNode expression) {
-    return expression.getNumberOfChildren() == 3 && expression.getChildren(PythonPunctuator.ASSIGN) != null;
   }
 
   private void checkNames(List<Token> varNames, List<Token> forCounterNames) {
@@ -123,31 +123,6 @@ public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Gra
       }
     }
     return result;
-  }
-
-  private void addNames(List<Token> names, AstNode expression, List<Token> parameters, List<Token> forCounters) {
-    AstNode leftExpr = expression.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR);
-    List<AstNode> tests = leftExpr.getDescendants(PythonGrammar.TEST);
-    for (AstNode test : tests) {
-      Token token = test.getToken();
-      if (token.getType().equals(GenericTokenType.IDENTIFIER) && isNewVariable(names, parameters, forCounters, token)) {
-        names.add(token);
-      }
-    }
-
-  }
-
-  private boolean isNewVariable(List<Token> names, List<Token> parameters, List<Token> forCounters, Token token) {
-    return !contains(names, token) && !contains(parameters, token) && !contains(forCounters, token);
-  }
-
-  private boolean contains(List<Token> list, Token token) {
-    for (Token currentToken : list) {
-      if (currentToken.getValue().equals(token.getValue())){
-        return true;
-      }
-    }
-    return false;
   }
 
   private List<Token> visitParameters(AstNode astNode) {

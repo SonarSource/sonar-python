@@ -59,6 +59,9 @@ public class LocalVariableAndParameterNameConventionCheckTest {
 
         .next().atLine(37).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "x", check.format))
         .next().atLine(45).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "counterName", check.format))
+
+        .next().atLine(49).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "a", check.format))
+        .next().atLine(49).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "b", check.format))
         .noMore();
   }
 

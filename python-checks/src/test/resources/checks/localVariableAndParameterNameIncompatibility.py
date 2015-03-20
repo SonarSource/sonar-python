@@ -44,3 +44,7 @@ def fun9():
     CONSTANT_NAME = "Hello, world"
     for counterName in names:
         pass
+
+def fun10():
+    a = b = 1
+    name = d.e = 1
