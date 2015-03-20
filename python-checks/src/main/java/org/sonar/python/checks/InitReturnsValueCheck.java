@@ -56,7 +56,7 @@ public class InitReturnsValueCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    if (!node.getFirstChild(PythonGrammar.FUNCNAME).getToken().getValue().equals("__init__")){
+    if (!node.getFirstChild(PythonGrammar.FUNCNAME).getTokenValue().equals("__init__")){
       return;
     }
     List<AstNode> returnYieldStatements = node.getDescendants(PythonGrammar.YIELD_STMT, PythonGrammar.RETURN_STMT);

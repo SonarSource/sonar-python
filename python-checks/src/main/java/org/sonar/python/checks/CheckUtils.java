@@ -61,7 +61,7 @@ public class CheckUtils {
   }
 
   public static boolean insideFunction(AstNode astNode, AstNode funcDef) {
-    return astNode.getFirstAncestor(PythonGrammar.FUNCDEF).getToken().equals(funcDef.getToken());
+    return astNode.getFirstAncestor(PythonGrammar.FUNCDEF).equals(funcDef);
   }
 
 }
