@@ -65,9 +65,12 @@ public class ExitHasBadArgumentsCheck extends SquidCheck<Grammar> {
       List<AstNode> arguments = varArgList.getChildren(PythonGrammar.FPDEF);
       List<AstNode> starArguments = varArgList.getChildren(PythonGrammar.NAME);
       if (starArguments.size() == 1 && arguments.size() == 1){
+        // def __init__(self, *arg):
         return;
       }
       raiseIssue(node, arguments.size() + starArguments.size());
+    } else {
+      raiseIssue(node, 0);
     }
   }
 
