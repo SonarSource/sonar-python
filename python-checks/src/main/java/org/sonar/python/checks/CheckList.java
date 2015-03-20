@@ -74,7 +74,8 @@ public final class CheckList {
         LocalVariableAndParameterNameConventionCheck.class,
         InitReturnsValueCheck.class,
         ExitHasBadArgumentsCheck.class,
-        ReturnAndYieldInOneFunctionCheck.class
+        ReturnAndYieldInOneFunctionCheck.class,
+        ModuleNameCheck.class
     );
   }
 
