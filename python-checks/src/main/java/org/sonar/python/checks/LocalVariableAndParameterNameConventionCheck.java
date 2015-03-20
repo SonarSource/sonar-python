@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @Rule(
-    key = LocalVariableAndParameterNameIncompatibilityCheck.CHECK_KEY,
+    key = LocalVariableAndParameterNameConventionCheck.CHECK_KEY,
     priority = Priority.MINOR,
     name = "Local variable and function parameter names should comply with a naming convention",
     tags = Tags.CONVENTION
@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
 @SqaleConstantRemediation("2min")
 @ActivatedByDefault
-public class LocalVariableAndParameterNameIncompatibilityCheck extends SquidCheck<Grammar> {
+public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Grammar> {
 
   public static final String CHECK_KEY = "S117";
 
@@ -84,12 +84,16 @@ public class LocalVariableAndParameterNameIncompatibilityCheck extends SquidChec
       List<Token> varNames = new LinkedList<>();
       List<Token> forCounterNames = getForCounterNames(suite);
       for (AstNode expression : expressions) {
-        if (expression.getNumberOfChildren() == 3 && expression.getChildren(PythonPunctuator.ASSIGN) != null && CheckUtils.insideFunction(expression, funcDef)) {
+        if (isAssignmentExpression(expression) && CheckUtils.insideFunction(expression, funcDef)) {
           addNames(varNames, expression, parameters, forCounterNames);
         }
       }
       checkNames(varNames, forCounterNames);
     }
+  }
+
+  private boolean isAssignmentExpression(AstNode expression) {
+    return expression.getNumberOfChildren() == 3 && expression.getChildren(PythonPunctuator.ASSIGN) != null;
   }
 
   private void checkNames(List<Token> varNames, List<Token> forCounterNames) {
