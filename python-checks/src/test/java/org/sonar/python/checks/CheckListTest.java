@@ -68,7 +68,7 @@ public class CheckListTest {
           .isNotNull();
     }
 
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("org.sonar.l10n.python", Locale.ENGLISH);
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("org.sonar.l10n.py", Locale.ENGLISH);
 
     Set<String> keys = Sets.newHashSet();
 
