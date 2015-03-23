@@ -39,5 +39,10 @@ public class FuncDefTest extends RuleTest {
     assertThat(p).matches(PythonTestUtils.appendNewLine("def func(): pass"));
   }
 
+  @Test
+  public void trueAsParameter() {
+    assertThat(p).matches(PythonTestUtils.appendNewLine("def func(True): pass"));
+  }
+
 }
 
