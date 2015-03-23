@@ -68,10 +68,11 @@ public class FieldNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    List<Token> allFields = CheckUtils.getClassFields(astNode);
-    checkNames(allFields);
+    if (CheckUtils.classHasNoInheritance(astNode)) {
+      List<Token> allFields = CheckUtils.getClassFields(astNode);
+      checkNames(allFields);
+    }
   }
-
 
   private void checkNames(List<Token> varNames) {
     for (Token name : varNames) {

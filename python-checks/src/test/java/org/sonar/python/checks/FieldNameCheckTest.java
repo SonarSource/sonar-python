@@ -47,6 +47,7 @@ public class FieldNameCheckTest {
         .next().atLine(27).withMessage(String.format(message, "Field3", check.format))
         .next().atLine(28).withMessage(String.format(message, "Field4", check.format))
         .next().atLine(28).withMessage(String.format(message, "Field5", check.format))
+        .next().atLine(31).withMessage(String.format(message, "myField", check.format))
         .noMore();
   }
 

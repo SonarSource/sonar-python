@@ -160,4 +160,13 @@ public class CheckUtils {
     return fields;
   }
 
+  public static boolean classHasNoInheritance(AstNode classDef) {
+    AstNode inheritanceClause = classDef.getFirstChild(PythonGrammar.ARGLIST);
+    if (inheritanceClause == null){
+      return true;
+    } else {
+      AstNode argument = inheritanceClause.getFirstChild(PythonGrammar.ARGUMENT);
+      return argument != null && ("object".equals(argument.getTokenValue()));
+    }
+  }
 }

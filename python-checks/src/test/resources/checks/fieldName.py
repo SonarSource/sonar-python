@@ -26,3 +26,9 @@ class MyClass2:
     def fun(self):
         (self.Field3, x) = (1, 2)
         self.Field4 = self.Field5 = 6
+
+class MyClass3(object):
+  myField = 4
+
+class MyClass4(MyClass3):
+  myField = 4
