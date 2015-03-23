@@ -49,3 +49,10 @@ x = 1
 
 # if x == 4:
 print("x is 4")
+
+# 'string'
+
+# # Check that the parsed result does a round trip to the same format
+
+# IBuildRequestStatus
+# ISlaveStatus

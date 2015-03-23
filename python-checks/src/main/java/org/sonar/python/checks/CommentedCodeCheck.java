@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
@@ -30,6 +31,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonConfiguration;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
@@ -64,7 +66,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
 
   private void checkTriviaGroup(List<Trivia> triviaGroup) {
     String text = getTextForParsing(triviaGroup);
-    if (isEmpty(text) || isOneWord(text)) {
+    if (isEmpty(text)) {
       return;
     }
     if (isTextParsedAsCode(text)) {
@@ -76,13 +78,13 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     StringBuilder commentTextSB = new StringBuilder();
     for (Trivia trivia : triviaGroup) {
       String value = trivia.getToken().getValue();
-      while (value.startsWith("#")) {
+      while (value.startsWith("#") || value.startsWith(" #")) {
         value = value.substring(1);
       }
       if (value.startsWith(" ")) {
         value = value.substring(1);
       }
-      if (!strContainsSpecialKeywords(value)) {
+      if (!isOneWord(value)) {
         commentTextSB.append(value);
         commentTextSB.append("\n");
       }
@@ -91,33 +93,18 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
   }
 
   private boolean isOneWord(String text) {
-    return text.matches("\\s*[\\w/\\-]+\\s*#*\n+");
+    return text.matches("\\s*[\\w/\\-]+\\s*#*\n*");
   }
 
   private boolean isEmpty(String text) {
     return text.matches("\\s*");
   }
 
-  private boolean strContainsSpecialKeywords(String text) {
-    ImmutableList<String> list = ImmutableList.of(
-        " in ",
-        " is ",
-        " and ",
-        " or ",
-        "not "
-    );
-    for (String keyword : list){
-      if (text.contains(keyword)){
-        return true;
-      }
-    }
-    return false;
-  }
-
   private boolean isTextParsedAsCode(String text) {
     try {
-      parser.parse(text);
-      return true;
+      AstNode astNode = parser.parse(text);
+      List<AstNode> expressions = astNode.getDescendants(PythonGrammar.EXPRESSION_STMT);
+      return !(expressions.size() == 1 && expressions.get(0).getNumberOfChildren() == 1 && expressions.get(0).getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR));
     } catch (Exception e) {
       return false;
     }
