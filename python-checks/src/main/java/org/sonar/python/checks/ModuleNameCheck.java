@@ -29,6 +29,7 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
+import javax.annotation.Nullable;
 import java.util.regex.Pattern;
 
 @Rule(
@@ -57,13 +58,13 @@ public class ModuleNameCheck extends SquidCheck<Grammar> {
   }
 
   @Override
-  public void visitFile(AstNode astNode) {
+  public void visitFile(@Nullable AstNode astNode) {
     String fileName = getContext().getFile().getName();
     int dotIndex = fileName.lastIndexOf(".");
     if (dotIndex > 0) {
       String moduleName = fileName.substring(0, dotIndex);
       if (!pattern.matcher(moduleName).matches()) {
-        getContext().createFileViolation(this, String.format(MESSAGE, format), astNode);
+        getContext().createFileViolation(this, String.format(MESSAGE, format));
       }
     }
   }
