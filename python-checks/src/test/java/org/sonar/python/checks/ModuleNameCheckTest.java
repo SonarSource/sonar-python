@@ -19,39 +19,40 @@
  */
 package org.sonar.python.checks;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
 
 import java.io.File;
 
 public class ModuleNameCheckTest {
 
   private ModuleNameCheck check = new ModuleNameCheck();
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
   public void bad_name() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/badModule_name.py"), check);
     String format = "(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$";
     String message = "Rename this module to match this regular expression: \"%s\".";
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().withMessage(String.format(message, format))
-        .noMore();
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().withMessage(String.format(message, format));
   }
 
   @Test
   public void good_name_camel_case() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/ModuleName.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .noMore();
+    checkMessagesVerifier.verify(file.getCheckMessages());
   }
 
   @Test
   public void good_name_snake_case() {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/module_name.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .noMore();
+    checkMessagesVerifier.verify(file.getCheckMessages());
   }
 
 }
