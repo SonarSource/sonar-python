@@ -12,3 +12,6 @@ class MyClass:
   class NestedClass:
     def fun(self):
       self.nestedClass = 5
+
+class MyClass1(MyClass):
+  myClass1 = 1

@@ -57,12 +57,14 @@ public class FieldDuplicatesClassNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    List<Token> allFields = CheckUtils.getClassFields(astNode);
-    String className = astNode.getFirstChild(PythonGrammar.CLASSNAME).getTokenValue();
+    if (CheckUtils.classHasNoInheritance(astNode)) {
+      List<Token> allFields = CheckUtils.getClassFields(astNode);
+      String className = astNode.getFirstChild(PythonGrammar.CLASSNAME).getTokenValue();
 
-    for (Token name : allFields) {
-      if (className.equalsIgnoreCase(name.getValue())) {
-        getContext().createLineViolation(this, String.format(MESSAGE, name.getValue()), name);
+      for (Token name : allFields) {
+        if (className.equalsIgnoreCase(name.getValue())) {
+          getContext().createLineViolation(this, String.format(MESSAGE, name.getValue()), name);
+        }
       }
     }
   }
