@@ -51,11 +51,11 @@ public class IndentationChannel extends Channel<Lexer> {
     int line = code.getLinePosition();
     int column = code.getColumnPosition();
 
-    int index = 0;
-    char ch = code.charAt(index);
+    int whiteSpaceIndex = 0;
+    char ch = code.charAt(whiteSpaceIndex);
     while (isWhiteSpace(ch)) {
-      index++;
-      ch = code.charAt(index);
+      whiteSpaceIndex++;
+      ch = code.charAt(whiteSpaceIndex);
     }
 
     if (isBlankLine(ch)) {
@@ -64,13 +64,22 @@ public class IndentationChannel extends Channel<Lexer> {
 
     buffer.setLength(0);
     int indentationLevel = 0;
-    for (int i = 0; i < index; i++) {
-      buffer.append((char) code.pop());
-      indentationLevel++;
+    for (int i = 0; i < whiteSpaceIndex; i++) {
+      char currentChar = (char) code.pop();
+      buffer.append(currentChar);
+      if (currentChar == '\t') {
+        indentationLevel += countTabReplacer(indentationLevel);
+      } else {
+        indentationLevel++;
+      }
     }
 
     processIndents(lexer, line, column, indentationLevel);
     return buffer.length() != 0;
+  }
+
+  private int countTabReplacer(int indentationLevel) {
+    return 8-indentationLevel%8;
   }
 
   private boolean isWhiteSpace(char ch) {

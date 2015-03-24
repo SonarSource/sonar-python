@@ -21,6 +21,7 @@ package org.sonar.python.lexer;
 
 import com.google.common.base.Charsets;
 import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,6 +29,8 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+
+import java.util.List;
 
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
@@ -230,6 +233,14 @@ public class PythonLexerTest {
     assertThat(lexer.lex("line\\\nline"), not(hasToken(PythonTokenType.NEWLINE)));
 
     assertThat(lexer.lex("line\\\n    line")).hasSize(3);
+  }
+
+  @Test
+  public void mixed_tabs_spaces() {
+    List<Token> tokens = lexer.lex("def fun():\n" +
+        "   if True:\n" +
+        "\t\tpass");
+    assertThat(tokens.get(11).getType()).isEqualTo(PythonTokenType.INDENT);
   }
 
 }
