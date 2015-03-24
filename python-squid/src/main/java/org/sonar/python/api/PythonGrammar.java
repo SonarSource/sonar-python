@@ -189,13 +189,13 @@ public enum PythonGrammar implements GrammarRuleKey {
       b.sequence("[", b.optional(TESTLIST_COMP), "]"),
       b.sequence("{", b.optional(DICTORSETMAKER), "}"),
       b.sequence("`", TEST, b.zeroOrMore(",", TEST), "`"),
+      PythonKeyword.TRUE,
+      PythonKeyword.FALSE,
       NAME,
       PythonTokenType.NUMBER,
       b.oneOrMore(PythonTokenType.STRING),
       "...",
-      PythonKeyword.NONE,
-      PythonKeyword.TRUE,
-      PythonKeyword.FALSE));
+      PythonKeyword.NONE));
     b.rule(TESTLIST_COMP).is(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))));
     b.rule(TRAILER).is(b.firstOf(
       b.sequence("(", b.optional(ARGLIST), ")"),
