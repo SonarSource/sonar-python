@@ -27,7 +27,7 @@ public class PythonKeywordTest {
 
   @Test
   public void test() {
-    assertThat(PythonKeyword.values()).hasSize(33);
+    assertThat(PythonKeyword.values()).hasSize(31);
     assertThat(PythonKeyword.keywordValues()).hasSize(PythonKeyword.values().length);
   }
 

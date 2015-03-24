@@ -178,7 +178,7 @@ public class PythonLexerTest {
    */
   @Test
   public void identifiers_and_keywords() {
-    assertThat(lexer.lex("True"), hasToken("True", PythonKeyword.TRUE));
+    assertThat(lexer.lex("class"), hasToken("class", PythonKeyword.CLASS));
     assertThat(lexer.lex("identifier"), hasToken("identifier", GenericTokenType.IDENTIFIER));
   }
 

@@ -27,9 +27,7 @@ import com.sonar.sslr.api.TokenType;
  */
 public enum PythonKeyword implements TokenType {
 
-  FALSE("False"),
   NONE("None"),
-  TRUE("True"),
 
   /**
    * Logical AND.

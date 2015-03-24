@@ -42,7 +42,7 @@ public class PythonColorizerTest {
 
   @Test
   public void should_colorize_keywords() {
-    assertThat(colorize("False")).contains("<span class=\"k\">False</span>");
+    assertThat(colorize("class")).contains("<span class=\"k\">class</span>");
   }
 
   @Test

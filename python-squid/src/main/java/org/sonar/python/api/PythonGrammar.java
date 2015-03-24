@@ -189,8 +189,6 @@ public enum PythonGrammar implements GrammarRuleKey {
       b.sequence("[", b.optional(TESTLIST_COMP), "]"),
       b.sequence("{", b.optional(DICTORSETMAKER), "}"),
       b.sequence("`", TEST, b.zeroOrMore(",", TEST), "`"),
-      PythonKeyword.TRUE,
-      PythonKeyword.FALSE,
       NAME,
       PythonTokenType.NUMBER,
       b.oneOrMore(PythonTokenType.STRING),
@@ -226,7 +224,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(YIELD_EXPR).is("yield", b.optional(TESTLIST));
 
-    b.rule(NAME).is(b.firstOf(IDENTIFIER, PythonKeyword.TRUE, PythonKeyword.FALSE));
+    b.rule(NAME).is(IDENTIFIER);
     b.rule(VARARGSLIST).is(b.firstOf(
       b.sequence(b.zeroOrMore(FPDEF, b.optional("=", TEST), ","), b.firstOf(b.sequence("*", NAME, b.optional(",", "**", NAME)), b.sequence("**", NAME))),
       b.sequence(FPDEF, b.optional("=", TEST), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(","))));
