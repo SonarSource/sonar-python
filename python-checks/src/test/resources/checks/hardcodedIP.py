@@ -15,3 +15,11 @@ message = '''123.1.1.1
 some long message with ip address inside is compliant'''
 
 FASTCGI_HELP = r""" host=127.0.0.1 long strings with string prefix are also recognized as multiline strings and ignored by this rule"""
+
+str = '2001:0db8:11a3:09d7:1f34:8a2e:07a0:765d'
+str = '::1f34:8a2e:07a0:765d'
+str = '1f34:8a2e:07a0:765d::'
+str = '1f34:2e:7a0:765d::'
+str = 'time is 13:40:40'
+
+str = '1.2.3.4'

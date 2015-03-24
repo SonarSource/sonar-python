@@ -45,8 +45,10 @@ import java.util.regex.Pattern;
 public class HardcodedIPCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "S1313";
 
-  private static final String IP_ADDRESS_REGEX = "((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))";
-  private static final Pattern pattern = Pattern.compile(IP_ADDRESS_REGEX);
+  private static final String IP_ADDRESS_V4_REGEX = "((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))";
+  private static final String IP_ADDRESS_V6_REGEX = "((::)?([\\da-fA-F]{1,4}::?){2,7})([\\da-fA-F]{1,4})?";
+  private static final Pattern patternV4 = Pattern.compile(IP_ADDRESS_V4_REGEX);
+  private static final Pattern patternV6 = Pattern.compile(IP_ADDRESS_V6_REGEX);
   String message = "Make this IP \"%s\" address configurable.";
 
   @Override
@@ -57,13 +59,23 @@ public class HardcodedIPCheck extends SquidCheck<Grammar> {
   @Override
   public void visitNode(AstNode node) {
     String string = node.getTokenOriginalValue();
-    if (isMultilineString(string)){
+    if (isMultilineString(string)) {
       return;
     }
-    Matcher matcher = pattern.matcher(string);
+
+    Matcher matcher = patternV4.matcher(string);
+
     if (matcher.find()) {
       String ipAddress = matcher.group();
       getContext().createLineViolation(this, String.format(message, ipAddress), node);
+    } else {
+      matcher = patternV6.matcher(string);
+      if (matcher.find()) {
+        String ipAddress = matcher.group();
+        if (ipAddress.length() > 8) {
+          getContext().createLineViolation(this, String.format(message, ipAddress), node);
+        }
+      }
     }
   }
 
