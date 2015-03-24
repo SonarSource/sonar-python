@@ -36,6 +36,9 @@ public class CommentedCodeCheckTest {
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(1).withMessage(CommentedCodeCheck.MESSAGE)
         .next().atLine(5).withMessage(CommentedCodeCheck.MESSAGE)
+        .next().atLine(60).withMessage(CommentedCodeCheck.MESSAGE)
+        .next().atLine(62).withMessage(CommentedCodeCheck.MESSAGE)
+        .next().atLine(66).withMessage(CommentedCodeCheck.MESSAGE)
         .noMore();
   }
 

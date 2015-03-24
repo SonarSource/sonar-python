@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
@@ -32,6 +31,7 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
@@ -57,11 +57,46 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
 
   @Override
+  public void init() {
+    subscribeTo(PythonTokenType.STRING);
+  }
+
+  @Override
+  public void visitNode(AstNode astNode) {
+    if (isMultilineComment(astNode)) {
+      visitMultilineComment(astNode.getToken());
+    }
+  }
+
+  @Override
   public void visitToken(Token token) {
     List<List<Trivia>> groupedTrivias = groupTrivias(token);
     for (List<Trivia> triviaGroup : groupedTrivias) {
       checkTriviaGroup(triviaGroup);
     }
+  }
+
+  private void visitMultilineComment(Token token) {
+    String value = token.getValue();
+    int startStringContent;
+    if (value.endsWith("'''")) {
+      startStringContent = value.indexOf("'''") + 3;
+    } else {
+      startStringContent = value.indexOf("\"\"\"") + 3;
+    }
+    int endStringContent = value.length() - 3;
+    String text = value.substring(startStringContent, endStringContent);
+    text = text.trim();
+    if (!isEmpty(text) && isTextParsedAsCode(text)) {
+      getContext().createLineViolation(this, MESSAGE, token);
+    }
+
+  }
+
+  private boolean isMultilineComment(AstNode node) {
+    String str = node.getTokenValue();
+    AstNode expressionStatement = node.getFirstAncestor(PythonGrammar.EXPRESSION_STMT);
+    return (str.endsWith("'''") || str.endsWith("\"\"\"")) && expressionStatement != null && expressionStatement.getNumberOfChildren() == 1;
   }
 
   private void checkTriviaGroup(List<Trivia> triviaGroup) {
@@ -84,6 +119,9 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
       if (value.startsWith(" ")) {
         value = value.substring(1);
       }
+      if (triviaGroup.size() == 1) {
+        value = value.trim();
+      }
       if (!isOneWord(value)) {
         commentTextSB.append(value);
         commentTextSB.append("\n");
@@ -104,10 +142,14 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     try {
       AstNode astNode = parser.parse(text);
       List<AstNode> expressions = astNode.getDescendants(PythonGrammar.EXPRESSION_STMT);
-      return !(expressions.size() == 1 && expressions.get(0).getNumberOfChildren() == 1 && expressions.get(0).getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR));
+      return astNode.getNumberOfChildren() > 1 && !isSimpleExpression(expressions);
     } catch (Exception e) {
       return false;
     }
+  }
+
+  private boolean isSimpleExpression(List<AstNode> expressions) {
+    return expressions.size() == 1 && expressions.get(0).getNumberOfChildren() == 1 && expressions.get(0).getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR);
   }
 
   private List<List<Trivia>> groupTrivias(Token token) {

@@ -56,3 +56,25 @@ print("x is 4")
 
 # IBuildRequestStatus
 # ISlaveStatus
+
+#     return a
+
+u'''
+return a
+'''
+
+'''
+return a
+'''
+
+x = u'''
+return a
+'''
+
+'''
+
+'''
+
+'''
+# comment
+'''
