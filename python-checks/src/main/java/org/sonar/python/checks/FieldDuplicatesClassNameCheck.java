@@ -25,7 +25,6 @@ import com.sonar.sslr.api.Token;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
@@ -33,7 +32,6 @@ import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Rule(
     key = FieldDuplicatesClassNameCheck.CHECK_KEY,
@@ -58,7 +56,7 @@ public class FieldDuplicatesClassNameCheck extends SquidCheck<Grammar> {
   @Override
   public void visitNode(AstNode astNode) {
     if (CheckUtils.classHasNoInheritance(astNode)) {
-      List<Token> allFields = CheckUtils.getClassFields(astNode);
+      List<Token> allFields = NewSymbolsAnalyzer.getClassFields(astNode);
       String className = astNode.getFirstChild(PythonGrammar.CLASSNAME).getTokenValue();
 
       for (Token name : allFields) {

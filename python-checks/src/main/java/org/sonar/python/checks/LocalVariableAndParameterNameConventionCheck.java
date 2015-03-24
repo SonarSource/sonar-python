@@ -84,11 +84,11 @@ public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Gra
       List<Token> forCounterNames = getForCounterNames(suite);
       for (AstNode expression : expressions) {
         if (CheckUtils.isAssignmentExpression(expression) && CheckUtils.insideFunction(expression, funcDef)) {
-          CheckUtils.getIdentifiersFromLongAssignmentExpression(varNames, expression, false);
+          varNames = NewSymbolsAnalyzer.getVariablesFromLongAssignmentExpression(varNames, expression);
         }
       }
       for (int i = 0; i < varNames.size(); i++){
-        if (CheckUtils.contains(parameters, varNames.get(i))||CheckUtils.contains(forCounterNames, varNames.get(i))){
+        if (CheckUtils.containsValue(parameters, varNames.get(i).getValue())||CheckUtils.containsValue(forCounterNames, varNames.get(i).getValue())){
           varNames.remove(i);
         }
       }

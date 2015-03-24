@@ -20,13 +20,11 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class CheckUtils {
@@ -68,59 +66,13 @@ public class CheckUtils {
     return astNode.getFirstAncestor(PythonGrammar.FUNCDEF).equals(funcDef);
   }
 
-  public static List<Token> getClassFields(AstNode classDef){
-    List<Token> allFields = findFieldsInClassBody(classDef);
-
-    List<AstNode> methods = classDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.FUNCDEF);
-
-    for (AstNode method : methods){
-      addFieldsInMethod(allFields, method);
-    }
-    return allFields;
-  }
-
-  private static void addFieldsInMethod(List<Token> allFields, AstNode method) {
-    AstNode suite = method.getFirstChild(PythonGrammar.SUITE);
-    List<AstNode> expressions = suite.getDescendants(PythonGrammar.EXPRESSION_STMT);
-    for (AstNode expression : expressions) {
-      if (isAssignmentExpression(expression)) {
-        getIdentifiersFromLongAssignmentExpression(allFields, expression, true);
-      }
-    }
-  }
-
-  public static void getIdentifiersFromLongAssignmentExpression(List<Token> fields, AstNode expression, boolean withSelf) {
-    List<AstNode> assignedExpressions = expression.getChildren(PythonGrammar.TESTLIST_STAR_EXPR);
-    assignedExpressions.remove(assignedExpressions.size() - 1);
-    List<AstNode> tests = new LinkedList<>();
-    for (AstNode assignedExpression : assignedExpressions){
-      tests.addAll(assignedExpression.getDescendants(PythonGrammar.TEST));
-    }
-    for (AstNode test : tests) {
-      if (withSelf){
-        addSelfField(fields, test);
-      } else {
-        addSimpleField(fields, test);
-      }
-    }
-  }
-
-  private static void addSelfField(List<Token> fields, AstNode test) {
-    if ("self".equals(test.getTokenValue())){
-      AstNode trailer = test.getFirstDescendant(PythonGrammar.TRAILER);
-      if (trailer != null && trailer.getFirstChild(PythonGrammar.NAME) != null){
-        Token token = trailer.getFirstChild(PythonGrammar.NAME).getToken();
-        if (!contains(fields, token)) {
-          fields.add(token);
-        }
-      }
-    }
-  }
-
-  private static void addSimpleField(List<Token> fields, AstNode test) {
-    Token token = test.getToken();
-    if (test.getNumberOfChildren() == 1 && test.getFirstChild().is(PythonGrammar.ATOM) && token.getType().equals(GenericTokenType.IDENTIFIER) && !contains(fields, token)){
-      fields.add(token);
+  public static boolean classHasNoInheritance(AstNode classDef) {
+    AstNode inheritanceClause = classDef.getFirstChild(PythonGrammar.ARGLIST);
+    if (inheritanceClause == null){
+      return true;
+    } else {
+      AstNode argument = inheritanceClause.getFirstChild(PythonGrammar.ARGUMENT);
+      return argument != null && ("object".equals(argument.getTokenValue()));
     }
   }
 
@@ -134,39 +86,12 @@ public class CheckUtils {
     return numberOfAssign > 0 && numberOfChildren % 2 == 1 && numberOfAssign * 2 + 1 == numberOfChildren;
   }
 
-  public static boolean contains(List<Token> list, Token token) {
+  public static boolean containsValue(List<Token> list, String value) {
     for (Token currentToken : list) {
-      if (currentToken.getValue().equals(token.getValue())) {
+      if (currentToken.getValue().equals(value)) {
         return true;
       }
     }
     return false;
-  }
-
-  private static List<Token> findFieldsInClassBody(AstNode classDef) {
-    List<Token> fields = new LinkedList<>();
-    List<AstNode> statements = classDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
-    List<AstNode> expressions = new LinkedList<>();
-    for (AstNode statement : statements){
-      if (!statement.hasDescendant(PythonGrammar.FUNCDEF)){
-        expressions.addAll(statement.getDescendants(PythonGrammar.EXPRESSION_STMT));
-      }
-    }
-    for (AstNode expression : expressions) {
-      if (isAssignmentExpression(expression)){
-        getIdentifiersFromLongAssignmentExpression(fields, expression, false);
-      }
-    }
-    return fields;
-  }
-
-  public static boolean classHasNoInheritance(AstNode classDef) {
-    AstNode inheritanceClause = classDef.getFirstChild(PythonGrammar.ARGLIST);
-    if (inheritanceClause == null){
-      return true;
-    } else {
-      AstNode argument = inheritanceClause.getFirstChild(PythonGrammar.ARGUMENT);
-      return argument != null && ("object".equals(argument.getTokenValue()));
-    }
   }
 }
