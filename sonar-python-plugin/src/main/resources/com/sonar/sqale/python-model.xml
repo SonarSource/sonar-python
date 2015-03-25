@@ -352,19 +352,6 @@
       <key>UNDERSTANDABILITY</key>
       <name>Understandability</name>
       <chc>
-        <rule-repo>common-py</rule-repo>
-        <rule-key>InsufficientCommentDensity</rule-key>
-        <prop>
-          <key>remediationFunction</key>
-          <txt>linear</txt>
-        </prop>
-        <prop>
-          <key>remediationFactor</key>
-          <val>3.0</val>
-          <txt>mn</txt>
-        </prop>
-      </chc>
-      <chc>
         <rule-repo>Pylint</rule-repo>
         <rule-key>C0111</rule-key>
         <prop>
@@ -1857,20 +1844,6 @@
       <key>LOGIC_RELIABILITY</key>
       <name>Logic</name>
       <chc>
-        <rule-repo>common-py</rule-repo>
-        <rule-key>DuplicatedBlocks</rule-key>
-        <prop>
-          <key>remediationFunction</key>
-          <txt>linear</txt>
-        </prop>
-        <prop>
-          <key>remediationFactor</key>
-          <val>1.0</val>
-          <txt>h</txt>
-        </prop>
-      </chc>
-
-      <chc>
         <rule-repo>Pylint</rule-repo>
         <rule-key>E0222</rule-key>
         <prop>
@@ -2162,32 +2135,6 @@
     <chc>
       <key>UNIT_TESTS</key>
       <name>Unit tests</name>
-      <chc>
-        <rule-repo>common-py</rule-repo>
-        <rule-key>InsufficientLineCoverage</rule-key>
-        <prop>
-          <key>remediationFunction</key>
-          <txt>linear</txt>
-        </prop>
-        <prop>
-          <key>remediationFactor</key>
-          <val>10.0</val>
-          <txt>mn</txt>
-        </prop>
-      </chc>
-      <chc>
-        <rule-repo>common-py</rule-repo>
-        <rule-key>InsufficientBranchCoverage</rule-key>
-        <prop>
-          <key>remediationFunction</key>
-          <txt>linear</txt>
-        </prop>
-        <prop>
-          <key>remediationFactor</key>
-          <val>30.0</val>
-          <txt>mn</txt>
-        </prop>
-      </chc>
       <chc>
         <rule-repo>Pylint</rule-repo>
         <rule-key>W0199</rule-key>
