@@ -20,7 +20,7 @@
 package org.sonar.plugins.python;
 
 import org.junit.Test;
-import org.sonar.commonrules.api.CommonRulesRepository;
+import org.sonar.squidbridge.commonrules.api.CommonRulesRepository;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -36,8 +36,8 @@ public class PythonCommonRulesEngineTest {
   public void enable_common_rules() {
     PythonCommonRulesEngine engine = new PythonCommonRulesEngine();
     CommonRulesRepository repo = engine.newRepository();
-    assertThat(repo.rules()).hasSize(4);
-    assertThat(repo.rule(CommonRulesRepository.RULE_INSUFFICIENT_COMMENT_DENSITY)).isNotNull();
+    assertThat(repo.enabledRuleKeys()).hasSize(4);
+    assertThat(repo.enableInsufficientCommentDensityRule(null)).isNotNull();
   }
 
 }
