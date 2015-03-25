@@ -83,7 +83,7 @@ public class CheckUtils {
       return true;
     }
     // a = b = c = 1
-    return numberOfAssign > 0 && numberOfChildren % 2 == 1 && numberOfAssign * 2 + 1 == numberOfChildren;
+    return numberOfAssign > 0 && numberOfChildren % 2 != 0 && numberOfAssign * 2 + 1 == numberOfChildren;
   }
 
   public static boolean containsValue(List<Token> list, String value) {

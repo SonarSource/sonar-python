@@ -57,15 +57,15 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.NOT_TEST)){
+    if (node.is(PythonGrammar.NOT_TEST)) {
       visitNotTest(node);
-    } else if (node.getNumberOfChildren() == 1 && node.getFirstChild().is(PythonGrammar.ATOM)){
+    } else if (node.getNumberOfChildren() == 1 && node.getFirstChild().is(PythonGrammar.ATOM)) {
 
       AstNode atom = node.getFirstChild();
       AstSelect selectedParent = atom.select().parent().parent().parent();
       if (selectedParent.size() == 1) {
         AstNode parent = selectedParent.get(0);
-        if (isKeywordException(parent)){
+        if (isKeywordException(parent)) {
           checkAtom(atom, true);
           return;
         }
@@ -83,18 +83,16 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
   }
 
   private void checkAtom(AstNode atom, boolean ignoreTestNumber) {
-    if (atom.getNumberOfChildren() == 3){
-      if (violationCondition(atom, ignoreTestNumber)){
-        getContext().createLineViolation(this,"Remove those useless parentheses", atom);
-      }
+    if (atom.getNumberOfChildren() == 3 && violationCondition(atom, ignoreTestNumber)) {
+      getContext().createLineViolation(this, "Remove those useless parentheses", atom);
     }
   }
 
   private boolean violationCondition(AstNode atom, boolean ignoreTestNumber) {
     List<AstNode> children = atom.getChildren();
     boolean result = children.get(0).is(PythonPunctuator.LPARENTHESIS) && children.get(2).is(PythonPunctuator.RPARENTHESIS) && isOnASingleLine(atom);
-    if (!ignoreTestNumber){
-      result &= children.get(1).getChildren(PythonGrammar.TEST).size() == 1 && children.get(1).getFirstChild(PythonPunctuator.COMMA) == null ;
+    if (!ignoreTestNumber) {
+      result &= children.get(1).getChildren(PythonGrammar.TEST).size() == 1 && children.get(1).getFirstChild(PythonPunctuator.COMMA) == null;
     }
     return result;
   }

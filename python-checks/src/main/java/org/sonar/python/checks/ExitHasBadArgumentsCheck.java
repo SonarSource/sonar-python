@@ -57,7 +57,7 @@ public class ExitHasBadArgumentsCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    if (!node.getFirstChild(PythonGrammar.FUNCNAME).getToken().getValue().equals("__exit__")){
+    if (!"__exit__".equals(node.getFirstChild(PythonGrammar.FUNCNAME).getToken().getValue())){
       return;
     }
     AstNode varArgList = node.getFirstChild(PythonGrammar.VARARGSLIST);

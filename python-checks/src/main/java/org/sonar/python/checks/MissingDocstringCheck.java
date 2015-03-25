@@ -112,7 +112,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
   }
 
   private void raiseIssueNoDocstring(AstNode astNode, String typeName) {
-    if (!typeName.equals("method")) {
+    if (!"method".equals(typeName)) {
       getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
     }
   }

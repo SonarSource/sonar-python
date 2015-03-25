@@ -28,50 +28,58 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class NewSymbolsAnalyzer {
-  private static List<Token> symbols;
+  private List<Token> symbols;
 
-  public static List<Token> getClassFields(AstNode classDef){
+  public List<Token> getClassFields(AstNode classDef) {
     symbols = new LinkedList<>();
     findFieldsInClassBody(classDef);
 
     List<AstNode> methods = classDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.FUNCDEF);
 
-    for (AstNode method : methods){
+    for (AstNode method : methods) {
       addFieldsInMethod(method);
     }
     return symbols;
   }
 
-  private static void addFieldsInMethod(AstNode method) {
+  private void addFieldsInMethod(AstNode method) {
     AstNode suite = method.getFirstChild(PythonGrammar.SUITE);
     List<AstNode> expressions = suite.getDescendants(PythonGrammar.EXPRESSION_STMT);
     for (AstNode expression : expressions) {
       if (CheckUtils.isAssignmentExpression(expression)) {
-        addIdentifiersFromLongAssignmentExpression(expression, true);
+        addSelfDotIdentifiersFromLongAssignmentExpression(expression);
       }
     }
   }
 
-  public static void addIdentifiersFromLongAssignmentExpression(AstNode expression, boolean withSelf) {
+  private List<AstNode> getTestsFromLongAssignmentExpression(AstNode expression) {
     List<AstNode> assignedExpressions = expression.getChildren(PythonGrammar.TESTLIST_STAR_EXPR);
     assignedExpressions.remove(assignedExpressions.size() - 1);
     List<AstNode> tests = new LinkedList<>();
-    for (AstNode assignedExpression : assignedExpressions){
+    for (AstNode assignedExpression : assignedExpressions) {
       tests.addAll(assignedExpression.getDescendants(PythonGrammar.TEST));
     }
+    return tests;
+  }
+
+  public void addSelfDotIdentifiersFromLongAssignmentExpression(AstNode expression) {
+    List<AstNode> tests = getTestsFromLongAssignmentExpression(expression);
     for (AstNode test : tests) {
-      if (withSelf){
-        addSelfField(test);
-      } else {
-        addSimpleField(test);
-      }
+      addSelfField(test);
     }
   }
 
-  private static void addSelfField(AstNode test) {
-    if ("self".equals(test.getTokenValue())){
+  public void addSimpleIdentifiersFromLongAssignmentExpression(AstNode expression) {
+    List<AstNode> tests = getTestsFromLongAssignmentExpression(expression);
+    for (AstNode test : tests) {
+      addSimpleField(test);
+    }
+  }
+
+  private void addSelfField(AstNode test) {
+    if ("self".equals(test.getTokenValue())) {
       AstNode trailer = test.getFirstDescendant(PythonGrammar.TRAILER);
-      if (trailer != null && trailer.getFirstChild(PythonGrammar.NAME) != null){
+      if (trailer != null && trailer.getFirstChild(PythonGrammar.NAME) != null) {
         Token token = trailer.getFirstChild(PythonGrammar.NAME).getToken();
         if (!CheckUtils.containsValue(symbols, token.getValue())) {
           symbols.add(token);
@@ -80,34 +88,34 @@ public class NewSymbolsAnalyzer {
     }
   }
 
-  private static void addSimpleField(AstNode test) {
+  private void addSimpleField(AstNode test) {
     Token token = test.getToken();
     if (test.getNumberOfChildren() == 1
         && test.getFirstChild().is(PythonGrammar.ATOM)
-        && token.getType().equals(GenericTokenType.IDENTIFIER) && !CheckUtils.containsValue(symbols, token.getValue())){
+        && token.getType().equals(GenericTokenType.IDENTIFIER) && !CheckUtils.containsValue(symbols, token.getValue())) {
       symbols.add(token);
     }
   }
 
-  private static List<Token> findFieldsInClassBody(AstNode classDef) {
+  private List<Token> findFieldsInClassBody(AstNode classDef) {
     List<AstNode> statements = classDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
     List<AstNode> expressions = new LinkedList<>();
-    for (AstNode statement : statements){
-      if (!statement.hasDescendant(PythonGrammar.FUNCDEF)){
+    for (AstNode statement : statements) {
+      if (!statement.hasDescendant(PythonGrammar.FUNCDEF)) {
         expressions.addAll(statement.getDescendants(PythonGrammar.EXPRESSION_STMT));
       }
     }
     for (AstNode expression : expressions) {
-      if (CheckUtils.isAssignmentExpression(expression)){
-        addIdentifiersFromLongAssignmentExpression(expression, false);
+      if (CheckUtils.isAssignmentExpression(expression)) {
+        addSimpleIdentifiersFromLongAssignmentExpression(expression);
       }
     }
     return symbols;
   }
 
-  public static List<Token> getVariablesFromLongAssignmentExpression(List<Token> varNames, AstNode expression) {
+  public List<Token> getVariablesFromLongAssignmentExpression(List<Token> varNames, AstNode expression) {
     symbols = varNames;
-    addIdentifiersFromLongAssignmentExpression(expression, false);
+    addSimpleIdentifiersFromLongAssignmentExpression(expression);
     return symbols;
   }
 }
