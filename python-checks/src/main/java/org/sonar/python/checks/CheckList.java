@@ -77,7 +77,8 @@ public final class CheckList {
         ReturnAndYieldInOneFunctionCheck.class,
         ModuleNameCheck.class,
         FieldNameCheck.class,
-        FieldDuplicatesClassNameCheck.class
+        FieldDuplicatesClassNameCheck.class,
+        UselessParenthesisCheck.class
     );
   }
 

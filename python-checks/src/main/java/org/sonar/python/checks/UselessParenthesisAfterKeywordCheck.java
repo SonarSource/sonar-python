@@ -27,7 +27,6 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
@@ -39,11 +38,11 @@ import java.util.Map;
 @Rule(
     key = UselessParenthesisAfterKeywordCheck.CHECK_KEY,
     priority = Priority.MAJOR,
-    name = "Parentheses should not be used after certain keywords"
+    name = "Parentheses should not be used after certain keywords",
+    status = org.sonar.api.rules.Rule.STATUS_DEPRECATED
 )
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
 @SqaleConstantRemediation("1min")
-@ActivatedByDefault
 public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "S1721";
   private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
