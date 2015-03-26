@@ -37,7 +37,7 @@ public class PythonCommonRulesEngineTest {
     PythonCommonRulesEngine engine = new PythonCommonRulesEngine();
     CommonRulesRepository repo = engine.newRepository();
     assertThat(repo.enabledRuleKeys()).hasSize(4);
-    assertThat(repo.enableInsufficientCommentDensityRule(null)).isNotNull();
+    assertThat(repo.enabledRuleKeys().contains("InsufficientCommentDensity")).isTrue();
   }
 
 }
