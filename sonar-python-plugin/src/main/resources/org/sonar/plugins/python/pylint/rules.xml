@@ -21,27 +21,37 @@
     <name><![CDATA[Invalid name]]></name>
     <configKey>C0103</configKey>
     <description>
-      <![CDATA[Used when the name doesn't match the regular expression associated to its type (constant, variable, class...).]]>
+      <![CDATA[Used when the name doesn't match the regular expression associated to its type (constant, variable, class...).
+      <p>This rule is deprecated, use {rule:python:S116}, {rule:python:S117}, {rule:python:S101},
+      {rule:python:S100}, {rule:python:S1542}, {rule:python:S1578} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0111</key>
     <name><![CDATA[Missing docstring]]></name>
     <configKey>C0111</configKey>
     <description>
-      <![CDATA[Used when a module, function, class or method has no docstring. Some special methods like __init__ doesn't necessary require a docstring.]]>
+      <![CDATA[Used when a module, function, class or method has no docstring. Some special methods like __init__ doesn't necessary require a docstring.
+      <p>This rule is deprecated, use {rule:python:S1720} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0112</key>
     <name><![CDATA[Empty docstring]]></name>
     <configKey>C0112</configKey>
     <description>
-      <![CDATA[Used when a module, function, class or method has an empty docstring (it would be too easy ;).]]>
+      <![CDATA[Used when a module, function, class or method has an empty docstring (it would be too easy ;).
+      <p>This rule is deprecated, use {rule:python:S1720} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0121</key>
@@ -86,9 +96,12 @@
     <name><![CDATA[Too many lines in module]]></name>
     <configKey>C0302</configKey>
     <description>
-      <![CDATA[Used when a module has too much lines, reducing its readability.]]>
+      <![CDATA[Used when a module has too much lines, reducing its readability.
+      <p>This rule is deprecated, use {rule:python:S104} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0321</key>
@@ -173,9 +186,11 @@
                raise a TypeError when __init__() is called and executes a yield
                statement. Pylint reports this error without depending on the actual
                invocation.</p>
+               <p>This rule is deprecated, use {rule:python:S2734} instead.</p>
       ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0101</key>
@@ -189,9 +204,11 @@
                called and executes a return statement with a value other than
                None. Pylint reports this error without depending on the actual
                invocation.</p>
+               <p>This rule is deprecated, use {rule:python:S2734} instead.</p>
       ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0102</key>
@@ -207,36 +224,48 @@
     <name><![CDATA[Usage of 'break' or 'continue' outside of a loop]]></name>
     <configKey>E0103</configKey>
     <description>
-      <![CDATA[Used when break or continue keywords are used outside a loop.]]>
+      <![CDATA[Used when break or continue keywords are used outside a loop.
+      <p>This rule is deprecated, use {rule:python:S1716} instead.</p>
+      ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0104</key>
     <name><![CDATA[Return outside function]]></name>
     <configKey>E0104</configKey>
     <description>
-      <![CDATA[Used when a "return" statement is found outside a function or method.]]>
+      <![CDATA[Used when a "return" statement is found outside a function or method.
+      <p>This rule is deprecated, use {rule:python:S2711} instead.</p>
+      ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0105</key>
     <name><![CDATA[Yield outside function]]></name>
     <configKey>E0105</configKey>
     <description>
-      <![CDATA[Used when a "yield" statement is found outside a function or method.]]>
+      <![CDATA[Used when a "yield" statement is found outside a function or method.
+      <p>This rule is deprecated, use {rule:python:S2711} instead.</p>
+      ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0106</key>
     <name><![CDATA[Return with argument inside generator]]></name>
     <configKey>E0106</configKey>
     <description>
-      <![CDATA[Used when a "return" statement with an argument is found outside in a generator function or method (e.g. with some "yield" statements).]]>
+      <![CDATA[Used when a "return" statement with an argument is found outside in a generator function or method (e.g. with some "yield" statements).
+      <p>This rule is deprecated, use {rule:python:S2712} instead.</p>
+      ]]>
     </description>
     <priority>MAJOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0107</key>
@@ -727,9 +756,12 @@
     <name><![CDATA[Similar lines]]></name>
     <configKey>R0801</configKey>
     <description>
-      <![CDATA[Indicates that a set of similar lines has been detected among multiple file. This usually means that the code should be refactored to avoid this duplication.]]>
+      <![CDATA[Indicates that a set of similar lines has been detected among multiple file. This usually means that the code should be refactored to avoid this duplication.
+      <p>This rule is deprecated, use {rule:common-py:DuplicatedBlocks} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>R0901</key>
@@ -772,9 +804,12 @@
     <name><![CDATA[Too many return statements]]></name>
     <configKey>R0911</configKey>
     <description>
-      <![CDATA[Used when a function or method has too many return statement, making it hard to follow.]]>
+      <![CDATA[Used when a function or method has too many return statement, making it hard to follow.
+      <p>This rule is deprecated, use {rule:python:S1142} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>R0912</key>
@@ -793,9 +828,12 @@
     <name><![CDATA[Too many arguments]]></name>
     <configKey>R0913</configKey>
     <description>
-      <![CDATA[Used when a function or method takes too many arguments.]]>
+      <![CDATA[Used when a function or method takes too many arguments.
+      <p>This rule is deprecated, use {rule:python:S107} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>R0914</key>
@@ -1449,9 +1487,12 @@
     <configKey>C0303</configKey>
     <description>
       <![CDATA[<p>Used when there is whitespace between the end of a line and the newline.</p>
-      <p>Added in Pylint 1.0.0.</p>]]>
+      <p>Added in Pylint 1.0.0.</p>
+      <p>This rule is deprecated, use {rule:python:S1131} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0304</key>
@@ -1463,9 +1504,11 @@
                end character(s) on the last line, other programs processing Python
                source files may do, and it is simply good practice to have it.</p>
                <p>Added in Pylint 1.0.0.</p>
+               <p>This rule is deprecated, use {rule:python:S113} instead.</p>
       ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0325</key>
@@ -1473,9 +1516,12 @@
     <configKey>C0325</configKey>
     <description>
       <![CDATA[<p>Used when a single item in parentheses follows an if, for, or other keyword.</p>
-      <p>This rule was added in Pylint 1.1.0.</p>]]>
+      <p>This rule was added in Pylint 1.1.0.</p>
+      <p>This rule is deprecated, use {rule:python:S1110} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>C0326</key>
@@ -1507,7 +1553,9 @@
     <description>
       <![CDATA[<p>Used when a class is defined that does not inherit from another class and does not inherit explicitly from “object”.
       This message can’t be emitted when using Python >= 3.0.</p>
-      <p>This rule was added in Pylint 1.0.0.</p>]]>
+      <p>This rule was added in Pylint 1.0.0.</p>
+      <p>This rule is deprecated, use {rule:python:S1722} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -1547,9 +1595,12 @@
     <configKey>E0235</configKey>
     <description>
       <![CDATA[Used when the __exit__ special method, belonging to a context manager, does not accept 3 arguments (type, value, traceback).
-        <p>This rule was added in Pylint 1.1.0.</p>]]>
+        <p>This rule was added in Pylint 1.1.0.</p>
+        <p>This rule is deprecated, use {rule:python:S2733} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>E0236</key>
