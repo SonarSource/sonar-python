@@ -12,3 +12,6 @@ class A:
         pass
 
     NAME = foo(NAME)
+
+    def NAME(self):
+        pass

@@ -80,7 +80,7 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
   private static class LineComparator implements Comparator<TokenWithTypeInfo> {
     @Override
     public int compare(TokenWithTypeInfo t1, TokenWithTypeInfo t2) {
-      return ((Integer)t1.getLine()).compareTo(t2.getLine());
+      return Integer.compare(t1.getLine(), t2.getLine());
     }
   }
 
@@ -116,19 +116,16 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
       for (int j = i-1; j >= 0; j--){
         TokenWithTypeInfo token1 = allTokensWithInfo.get(j);
         TokenWithTypeInfo token2 = allTokensWithInfo.get(i);
-        if (methodFieldHaveEqualNames(token1, token2)){
-          continue;
-        }
-        if (token1.getValue().equalsIgnoreCase(token2.getValue())){
-          getContext().createLineViolation(this, getMessage(token1, token2), allTokensWithInfo.get(i).getLine());
+        if (differOnlyByCapitalization(token1.getValue(), token2.getValue())){
+          getContext().createLineViolation(this, getMessage(token1, token2), token2.getLine());
           break;
         }
       }
     }
   }
 
-  private boolean methodFieldHaveEqualNames(TokenWithTypeInfo token1, TokenWithTypeInfo token2) {
-    return token1.getValue().equals(token2.getValue()) && token2.isField() != token1.isField();
+  private boolean differOnlyByCapitalization(String name1, String name2) {
+    return name1.equalsIgnoreCase(name2) && !name1.equals(name2);
   }
 
   private List<TokenWithTypeInfo> mergeLists(List<Token> fieldNames, List<Token> methodNames) {
