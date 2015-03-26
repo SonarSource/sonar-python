@@ -1,0 +1,22 @@
+<p>
+  Having too many return statements in a function increases the function's essential complexity because the flow of execution is broken each time a return statement is encountered.
+  This makes it harder to read and understand the logic of the function.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+
+<p>
+  The following code snippet illustrates this rule with the default threshold of 3:
+</p>
+
+<pre>
+def fun():          # Non-Compliant as there are 4 return statements
+  if condition1:
+    return True
+  elif condition2:
+    return False
+  else:
+    return True
+  return False
+}
+</pre>

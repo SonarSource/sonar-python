@@ -1,0 +1,72 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011 SonarSource and Waleri Enns
+ * dev@sonar.codehaus.org
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ */
+package org.sonar.python.checks;
+
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.check.Priority;
+import org.sonar.check.Rule;
+import org.sonar.check.RuleProperty;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
+import org.sonar.squidbridge.checks.SquidCheck;
+
+import java.util.List;
+
+@Rule(
+    key = TooManyReturnsCheck.CHECK_KEY,
+    priority = Priority.MAJOR,
+    name = "Functions should not contain too many return statements",
+    tags = Tags.BRAIN_OVERLOAD
+)
+@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNDERSTANDABILITY)
+@SqaleConstantRemediation("20min")
+public class TooManyReturnsCheck extends SquidCheck<Grammar> {
+  public static final String CHECK_KEY = "S1142";
+
+  private static final int DEFAULT_MAX = 3;
+  private static final String MESSAGE = "Reduce the number of returns of this function \"%s\", down to the maximum allowed %s.";
+
+  @RuleProperty(key = "max", defaultValue = "" + DEFAULT_MAX)
+  public int max = DEFAULT_MAX;
+
+  @Override
+  public void init() {
+    subscribeTo(PythonGrammar.FUNCDEF);
+  }
+
+  @Override
+  public void visitNode(AstNode node) {
+    List<AstNode> returnStatements = node.getDescendants(PythonGrammar.RETURN_STMT);
+    int returnCount = 0;
+    for (AstNode returnStatement : returnStatements){
+      if (CheckUtils.insideFunction(returnStatement, node)){
+        returnCount++;
+      }
+    }
+    if (returnCount > max) {
+      String name = node.getFirstChild(PythonGrammar.FUNCNAME).getTokenValue();
+      getContext().createLineViolation(this, String.format(MESSAGE, name, max), node.getFirstChild(PythonGrammar.FUNCNAME));
+    }
+  }
+}
+
