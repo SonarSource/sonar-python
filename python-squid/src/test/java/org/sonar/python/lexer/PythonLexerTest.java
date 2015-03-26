@@ -239,8 +239,15 @@ public class PythonLexerTest {
   public void mixed_tabs_spaces() {
     List<Token> tokens = lexer.lex("def fun():\n" +
         "   if True:\n" +
-        "\t\tpass");
+        "\tpass");
     assertThat(tokens.get(11).getType()).isEqualTo(PythonTokenType.INDENT);
+
+    tokens = lexer.lex("def fun():\n" +
+        "   if True:\n" +
+        "  \tpass");
+    assertThat(tokens.get(11).getType()).isEqualTo(PythonTokenType.INDENT);
+
+
   }
 
 }
