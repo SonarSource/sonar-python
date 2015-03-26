@@ -41,9 +41,14 @@ public enum PythonGrammar implements GrammarRuleKey {
   ARGUMENT,
 
   NAME,
+
   VARARGSLIST,
   FPDEF,
   FPLIST,
+
+  TYPEDARGSLIST,
+  TFPDEF,
+  TFPLIST,
 
   TEST,
   TESTLIST,
@@ -138,6 +143,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   DECORATOR,
   DOTTED_NAME,
   FUNCNAME,
+  FUN_RETURN_ANNOTATION,
 
   CLASSDEF,
   CLASSNAME,
@@ -199,9 +205,9 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(ELLIPSIS).is(b.sequence(".", ".", "."));
     b.rule(TESTLIST_COMP).is(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))));
     b.rule(TRAILER).is(b.firstOf(
-      b.sequence("(", b.optional(ARGLIST), ")"),
-      b.sequence("[", SUBSCRIPTLIST, "]"),
-      b.sequence(".", NAME)));
+        b.sequence("(", b.optional(ARGLIST), ")"),
+        b.sequence("[", SUBSCRIPTLIST, "]"),
+        b.sequence(".", NAME)));
     b.rule(SUBSCRIPTLIST).is(SUBSCRIPT, b.zeroOrMore(",", SUBSCRIPT), b.optional(","));
     b.rule(SUBSCRIPT).is(b.firstOf(
         b.sequence(b.optional(TEST), ":", b.optional(TEST), b.optional(SLICEOP)),
@@ -227,13 +233,25 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(YIELD_EXPR).is("yield", b.optional(TESTLIST));
 
     b.rule(NAME).is(IDENTIFIER);
+
     b.rule(VARARGSLIST).is(b.firstOf(
       b.sequence(b.zeroOrMore(FPDEF, b.optional("=", TEST), ","), b.firstOf(b.sequence("*", NAME, b.optional(",", "**", NAME)), b.sequence("**", NAME))),
       b.sequence(FPDEF, b.optional("=", TEST), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(","))));
     b.rule(FPDEF).is(b.firstOf(
-      NAME,
-      b.sequence("(", FPLIST, ")")));
+        NAME,
+        b.sequence("(", FPLIST, ")")));
     b.rule(FPLIST).is(FPDEF, b.zeroOrMore(",", FPDEF), b.optional(","));
+
+    b.rule(TYPEDARGSLIST).is(b.firstOf(
+      b.sequence(b.zeroOrMore(TFPDEF, b.optional("=", TEST), ","), b.firstOf(b.sequence("*", NAME, b.optional(",", "**", NAME)), b.sequence("**", NAME))),
+      b.sequence(TFPDEF, b.optional("=", TEST), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",")))
+    );
+    b.rule(TFPDEF).is(b.firstOf(
+      b.sequence(NAME, b.optional(":", TEST)),
+      b.sequence("(", TFPLIST, ")")));
+    b.rule(TFPLIST).is(TFPDEF, b.zeroOrMore(",", TFPDEF), b.optional(","));
+
+
   }
 
   /**
@@ -353,8 +371,9 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(WITH_STMT).is("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE);
     b.rule(WITH_ITEM).is(TEST, b.optional("as", EXPR));
 
-    b.rule(FUNCDEF).is(b.optional(DECORATORS), "def", FUNCNAME, "(", b.optional(VARARGSLIST), ")", ":", SUITE);
+    b.rule(FUNCDEF).is(b.optional(DECORATORS), "def", FUNCNAME, "(", b.optional(TYPEDARGSLIST), ")", b.optional(FUN_RETURN_ANNOTATION), ":", SUITE);
     b.rule(FUNCNAME).is(NAME);
+    b.rule(FUN_RETURN_ANNOTATION).is("-", ">", TEST);
 
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));
     b.rule(DECORATOR).is("@", DOTTED_NAME, b.optional("(", b.optional(ARGLIST), ")"), NEWLINE);

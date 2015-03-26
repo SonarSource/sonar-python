@@ -127,9 +127,9 @@ public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Gra
 
   private List<Token> visitParameters(AstNode astNode) {
     List<Token> parameterTokens = new LinkedList<>();
-    AstNode varArgList = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
+    AstNode varArgList = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (varArgList != null) {
-      List<AstNode> funcParameters = varArgList.getDescendants(PythonGrammar.FPDEF);
+      List<AstNode> funcParameters = varArgList.getDescendants(PythonGrammar.TFPDEF);
       funcParameters.addAll(varArgList.getChildren(PythonGrammar.NAME));
       for (AstNode parameter : funcParameters) {
         Token token = parameter.getToken();

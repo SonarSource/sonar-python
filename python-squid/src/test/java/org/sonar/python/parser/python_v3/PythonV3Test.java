@@ -34,4 +34,15 @@ public class PythonV3Test extends RuleTest {
     assertThat(p).matches("x[...]");
   }
 
+  @Test
+  public void function_declaration(){
+    setRootRule(PythonGrammar.FUNCDEF);
+    assertThat(p).matches("def fun()->'Returns some value': pass");
+    assertThat(p).matches("def fun(count:'Number of smth'=1, value:'Value of smth', type:Type): pass");
+
+    setRootRule(PythonGrammar.LAMBDEF);
+    assertThat(p).matches("lambda x: x");
+    assertThat(p).notMatches("lambda x:Type: x");
+  }
+
 }

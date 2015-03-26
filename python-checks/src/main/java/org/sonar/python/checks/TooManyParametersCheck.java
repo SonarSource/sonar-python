@@ -58,8 +58,8 @@ public class TooManyParametersCheck extends SquidCheck<Grammar> {
   @Override
   public void visitNode(AstNode node) {
     int nbParameters = node.select()
-      .children(PythonGrammar.VARARGSLIST)
-      .children(PythonGrammar.FPDEF)
+      .children(PythonGrammar.TYPEDARGSLIST, PythonGrammar.VARARGSLIST)
+      .children(PythonGrammar.TFPDEF, PythonGrammar.FPDEF)
       .size();
     if (nbParameters > max) {
       String name = "Lambda";
@@ -69,7 +69,7 @@ public class TooManyParametersCheck extends SquidCheck<Grammar> {
         name = String.format("%s \"%s\"", typeName, name);
       }
       String message = "{0} has {1} parameters, which is greater than the {2} authorized.";
-      getContext().createLineViolation(this, message, node.getFirstChild(PythonGrammar.VARARGSLIST), name, nbParameters, max);
+      getContext().createLineViolation(this, message, node.getFirstChild(PythonGrammar.TYPEDARGSLIST, PythonGrammar.VARARGSLIST), name, nbParameters, max);
     }
   }
 }
