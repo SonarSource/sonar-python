@@ -78,7 +78,8 @@ public final class CheckList {
         ModuleNameCheck.class,
         FieldNameCheck.class,
         FieldDuplicatesClassNameCheck.class,
-        UselessParenthesisCheck.class
+        UselessParenthesisCheck.class,
+        DuplicatedMethodFieldNamesCheck.class
     );
   }
 
