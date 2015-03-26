@@ -83,16 +83,16 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
   }
 
   private void checkAtom(AstNode atom, boolean ignoreTestNumber) {
-    if (atom.getNumberOfChildren() == 3 && violationCondition(atom, ignoreTestNumber)) {
+    if (violationCondition(atom, ignoreTestNumber)) {
       getContext().createLineViolation(this, "Remove those useless parentheses", atom);
     }
   }
 
   private boolean violationCondition(AstNode atom, boolean ignoreTestNumber) {
     List<AstNode> children = atom.getChildren();
-    boolean result = children.get(0).is(PythonPunctuator.LPARENTHESIS) && children.get(2).is(PythonPunctuator.RPARENTHESIS) && isOnASingleLine(atom);
-    if (!ignoreTestNumber) {
-      result &= children.get(1).getChildren(PythonGrammar.TEST).size() == 1 && children.get(1).getFirstChild(PythonPunctuator.COMMA) == null;
+    boolean result = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS) && children.get(2).is(PythonPunctuator.RPARENTHESIS) && isOnASingleLine(atom);
+    if (result && !ignoreTestNumber) {
+      result = children.get(1).getChildren(PythonGrammar.TEST).size() == 1 && children.get(1).getFirstChild(PythonPunctuator.COMMA) == null;
     }
     return result;
   }
