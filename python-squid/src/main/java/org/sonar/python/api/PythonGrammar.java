@@ -85,6 +85,8 @@ public enum PythonGrammar implements GrammarRuleKey {
   LAMBDEF,
   LAMBDEF_NOCOND,
 
+  ELLIPSIS,
+
   // Simple statements
 
   SIMPLE_STMT,
@@ -185,15 +187,16 @@ public enum PythonGrammar implements GrammarRuleKey {
       POWER)).skipIfOneChild();
     b.rule(POWER).is(ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)).skipIfOneChild();
     b.rule(ATOM).is(b.firstOf(
-      b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
-      b.sequence("[", b.optional(TESTLIST_COMP), "]"),
-      b.sequence("{", b.optional(DICTORSETMAKER), "}"),
-      b.sequence("`", TEST, b.zeroOrMore(",", TEST), "`"),
-      NAME,
-      PythonTokenType.NUMBER,
-      b.oneOrMore(PythonTokenType.STRING),
-      "...",
-      PythonKeyword.NONE));
+        b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
+        b.sequence("[", b.optional(TESTLIST_COMP), "]"),
+        b.sequence("{", b.optional(DICTORSETMAKER), "}"),
+        b.sequence("`", TEST, b.zeroOrMore(",", TEST), "`"),
+        NAME,
+        PythonTokenType.NUMBER,
+        b.oneOrMore(PythonTokenType.STRING),
+        ELLIPSIS,
+        PythonKeyword.NONE));
+    b.rule(ELLIPSIS).is(b.sequence(".", ".", "."));
     b.rule(TESTLIST_COMP).is(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))));
     b.rule(TRAILER).is(b.firstOf(
       b.sequence("(", b.optional(ARGLIST), ")"),
@@ -201,9 +204,8 @@ public enum PythonGrammar implements GrammarRuleKey {
       b.sequence(".", NAME)));
     b.rule(SUBSCRIPTLIST).is(SUBSCRIPT, b.zeroOrMore(",", SUBSCRIPT), b.optional(","));
     b.rule(SUBSCRIPT).is(b.firstOf(
-      b.sequence(".", ".", "."),
-      b.sequence(b.optional(TEST), ":", b.optional(TEST), b.optional(SLICEOP)),
-      TEST));
+        b.sequence(b.optional(TEST), ":", b.optional(TEST), b.optional(SLICEOP)),
+        TEST));
     b.rule(SLICEOP).is(":", b.optional(TEST));
     b.rule(EXPRLIST).is(b.firstOf(EXPR, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPR, STAR_EXPR)), b.optional(","));
     b.rule(TESTLIST).is(TEST, b.zeroOrMore(",", TEST), b.optional(","));
