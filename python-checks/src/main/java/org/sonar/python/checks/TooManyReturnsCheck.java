@@ -29,8 +29,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
-
-import java.util.List;
+import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
     key = TooManyReturnsCheck.CHECK_KEY,
@@ -44,7 +43,7 @@ public class TooManyReturnsCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "S1142";
 
   private static final int DEFAULT_MAX = 3;
-  private static final String MESSAGE = "This function has %s returns, which is more than the %s allowed.";
+  private static final String MESSAGE = "This function has %s returns or yields, which is more than the %s allowed.";
 
   @RuleProperty(key = "max", defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
@@ -56,7 +55,7 @@ public class TooManyReturnsCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    List<AstNode> returnStatements = node.getDescendants(PythonGrammar.RETURN_STMT);
+    AstSelect returnStatements = node.select().descendants(PythonGrammar.RETURN_STMT, PythonGrammar.YIELD_STMT);
     int returnCount = 0;
     for (AstNode returnStatement : returnStatements){
       if (CheckUtils.insideFunction(returnStatement, node)){

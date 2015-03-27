@@ -19,3 +19,11 @@ def fun3():
     if True:
         return 2
     return 3
+
+
+def fun4():
+    for i in range(5):
+        yield i
+    yield 4
+    yield 5
+    return

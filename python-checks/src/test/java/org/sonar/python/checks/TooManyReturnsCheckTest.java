@@ -40,6 +40,7 @@ public class TooManyReturnsCheckTest {
     String message = "This function has %s returns, which is more than the %s allowed.";
     checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(5).withMessage(String.format(message, 3, 2))
-        .next().atLine(15).withMessage(String.format(message, 3, 2));
+        .next().atLine(15).withMessage(String.format(message, 3, 2))
+        .next().atLine(24).withMessage(String.format(message, 4, 2));
   }
 }
