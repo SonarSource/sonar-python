@@ -32,6 +32,7 @@ import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -71,13 +72,9 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
     String getType(){
       return type;
     }
-
-    boolean isField(){
-      return "field".equals(type);
-    }
   }
 
-  private static class LineComparator implements Comparator<TokenWithTypeInfo> {
+  private static class LineComparator implements Comparator<TokenWithTypeInfo>, Serializable {
     @Override
     public int compare(TokenWithTypeInfo t1, TokenWithTypeInfo t2) {
       return Integer.compare(t1.getLine(), t2.getLine());
