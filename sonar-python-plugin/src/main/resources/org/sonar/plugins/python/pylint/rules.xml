@@ -885,9 +885,12 @@
     <name><![CDATA[Unreachable code]]></name>
     <configKey>W0101</configKey>
     <description>
-      <![CDATA[Used when there is some code behind a "return" or "raise" statement, which will never be accessed.]]>
+      <![CDATA[Used when there is some code behind a "return" or "raise" statement, which will never be accessed.
+      <p>This rule is deprecated, use {rule:python:S1763} instead.</p>
+      ]]>
     </description>
     <priority>MINOR</priority>
+    <status>DEPRECATED</status>
   </rule>
   <rule>
     <key>W0102</key>

@@ -1,0 +1,21 @@
+<p>
+	Jump statements (<code>return</code>, <code>break</code>, <code>continue</code>, and <code>raise</code>) move control flow out of the current code block.
+	Typically, any statements in a block that come after a jump are simply wasted keystrokes lying in wait to confuse the unwary.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+
+<pre>
+def fun(a):
+  i = 10
+  return i + a       # Noncompliant
+  i += 1             # this is never executed
+</pre>
+
+<h2>Compliant Solution</h2>
+
+<pre>
+def fun(a):
+  i = 10
+  return i + a
+</pre>

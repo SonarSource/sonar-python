@@ -81,7 +81,8 @@ public final class CheckList {
         UselessParenthesisCheck.class,
         DuplicatedMethodFieldNamesCheck.class,
         TooManyReturnsCheck.class,
-        NeedlessPassCheck.class
+        NeedlessPassCheck.class,
+        AfterJumpStatementCheck.class
     );
   }
 
