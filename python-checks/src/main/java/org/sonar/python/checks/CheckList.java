@@ -82,7 +82,8 @@ public final class CheckList {
         DuplicatedMethodFieldNamesCheck.class,
         TooManyReturnsCheck.class,
         NeedlessPassCheck.class,
-        AfterJumpStatementCheck.class
+        AfterJumpStatementCheck.class,
+        MethodShouldBeStaticCheck.class
     );
   }
 
