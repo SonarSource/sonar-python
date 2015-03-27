@@ -37,9 +37,9 @@ public class TooManyReturnsCheckTest {
     TooManyReturnsCheck check = new TooManyReturnsCheck();
     check.max = 2;
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/tooManyReturns.py"), check);
-    String message = "Reduce the number of returns of this function \"%s\", down to the maximum allowed %s.";
+    String message = "This function has %s returns, which is more than the %s allowed.";
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(5).withMessage(String.format(message, "fun2", 2))
-        .next().atLine(15).withMessage(String.format(message, "fun3", 2));
+        .next().atLine(5).withMessage(String.format(message, 3, 2))
+        .next().atLine(15).withMessage(String.format(message, 3, 2));
   }
 }

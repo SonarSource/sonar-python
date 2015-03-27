@@ -44,7 +44,7 @@ public class TooManyReturnsCheck extends SquidCheck<Grammar> {
   public static final String CHECK_KEY = "S1142";
 
   private static final int DEFAULT_MAX = 3;
-  private static final String MESSAGE = "Reduce the number of returns of this function \"%s\", down to the maximum allowed %s.";
+  private static final String MESSAGE = "This function has %s returns, which is more than the %s allowed.";
 
   @RuleProperty(key = "max", defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
@@ -64,8 +64,7 @@ public class TooManyReturnsCheck extends SquidCheck<Grammar> {
       }
     }
     if (returnCount > max) {
-      String name = node.getFirstChild(PythonGrammar.FUNCNAME).getTokenValue();
-      getContext().createLineViolation(this, String.format(MESSAGE, name, max), node.getFirstChild(PythonGrammar.FUNCNAME));
+      getContext().createLineViolation(this, String.format(MESSAGE, returnCount, max), node.getFirstChild(PythonGrammar.FUNCNAME));
     }
   }
 }
