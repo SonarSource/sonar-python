@@ -80,7 +80,8 @@ public final class CheckList {
         FieldDuplicatesClassNameCheck.class,
         UselessParenthesisCheck.class,
         DuplicatedMethodFieldNamesCheck.class,
-        TooManyReturnsCheck.class
+        TooManyReturnsCheck.class,
+        NeedlessPassCheck.class
     );
   }
 
