@@ -111,7 +111,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
       List<AstNode> decoratorList = decorators.getChildren(PythonGrammar.DECORATOR);
       for (AstNode decorator : decoratorList){
         AstNode name = decorator.getFirstDescendant(PythonGrammar.NAME);
-        if (name != null && (name.getTokenValue().equals("staticmethod") || name.getTokenValue().equals("classmethod"))){
+        if (name != null && ("staticmethod".equals(name.getTokenValue()) || "classmethod".equals(name.getTokenValue()))){
           return true;
         }
       }
