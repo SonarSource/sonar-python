@@ -89,7 +89,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
   private boolean isUsed(AstNode funcDef, String self) {
     List<AstNode> names = funcDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.NAME);
     for (AstNode name : names){
-      if (name.getTokenValue().equals(self) && CheckUtils.insideFunction(name, funcDef)){
+      if (name.getTokenValue().equals(self)){
         return true;
       }
     }
