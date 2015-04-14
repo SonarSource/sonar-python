@@ -45,6 +45,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
 
 @Properties({
     @Property(
@@ -108,45 +109,47 @@ public class PythonCoverageSensor extends PythonReportSensor {
     List<File> reports = getReports(conf, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     LOG.debug("Parsing coverage reports");
     Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
-    saveMeasures(context, coverageMeasures, CoverageType.UT_COVERAGE);
+    HashSet filesCoveredByUT = new HashSet();
+    saveMeasures(context, coverageMeasures, filesCoveredByUT, CoverageType.UT_COVERAGE);
 
     LOG.debug("Parsing integration test coverage reports");
     List<File> itReports = getReports(conf, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     Map<String, CoverageMeasuresBuilder> itCoverageMeasures = parseReports(itReports);
-    saveMeasures(context, itCoverageMeasures, CoverageType.IT_COVERAGE);
+    HashSet filesCoveredByIT = new HashSet();
+    saveMeasures(context, itCoverageMeasures, filesCoveredByIT, CoverageType.IT_COVERAGE);
 
     LOG.debug("Parsing overall test coverage reports");
     List<File> overallReports = getReports(conf, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
     Map<String, CoverageMeasuresBuilder> overallCoverageMeasures = parseReports(overallReports);
-    saveMeasures(context, overallCoverageMeasures, CoverageType.OVERALL_COVERAGE);
+    HashSet filesCoveredOverall = new HashSet();
+    saveMeasures(context, overallCoverageMeasures, filesCoveredOverall, CoverageType.OVERALL_COVERAGE);
 
     if (conf.getBoolean(FORCE_ZERO_COVERAGE_KEY)) {
       LOG.debug("Zeroing coverage information for untouched files");
 
-      zeroMeasuresWithoutReports(context, coverageMeasures,
-          itCoverageMeasures, overallCoverageMeasures);
+      zeroMeasuresWithoutReports(context, filesCoveredByUT, filesCoveredByIT, filesCoveredOverall);
     }
   }
 
   private void zeroMeasuresWithoutReports(SensorContext context,
-                                          Map<String, CoverageMeasuresBuilder> coverageMeasures,
-                                          Map<String, CoverageMeasuresBuilder> itCoverageMeasures,
-                                          Map<String, CoverageMeasuresBuilder> overallCoverageMeasures
-  ) {
+                                          HashSet filesCoveredByUT,
+                                          HashSet filesCoveredByIT,
+                                          HashSet filesCoveredOverall
+    ) {
     FilePredicates p = fileSystem.predicates();
     Iterable<InputFile> inputFiles = fileSystem.inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
     for (InputFile inputFile : inputFiles) {
       String filePath = inputFile.relativePath();
 
-      if (coverageMeasures.get(filePath) == null) {
+      if (!filesCoveredByUT.contains(filePath)) {
         saveZeroValueForResource(inputFile, filePath, context, CoverageType.UT_COVERAGE);
       }
 
-      if (itCoverageMeasures.get(filePath) == null) {
+      if (!filesCoveredByIT.contains(filePath)) {
         saveZeroValueForResource(inputFile, filePath, context, CoverageType.IT_COVERAGE);
       }
 
-      if (overallCoverageMeasures.get(filePath) == null) {
+      if (!filesCoveredOverall.contains(filePath)) {
         saveZeroValueForResource(inputFile, filePath, context, CoverageType.OVERALL_COVERAGE);
       }
     }
@@ -206,11 +209,16 @@ public class PythonCoverageSensor extends PythonReportSensor {
     return coverageMeasures;
   }
 
-  private void saveMeasures(SensorContext context, Map<String, CoverageMeasuresBuilder> coverageMeasures, CoverageType coverageType) {
+  private void saveMeasures(SensorContext context,
+                            Map<String, CoverageMeasuresBuilder> coverageMeasures,
+                            HashSet coveredFiles,
+                            CoverageType coverageType) {
     for (Map.Entry<String, CoverageMeasuresBuilder> entry : coverageMeasures.entrySet()) {
       String filePath = entry.getKey();
       InputFile pythonFile = fileSystem.inputFile(fileSystem.predicates().hasPath(filePath));
       if (pythonFile != null) {
+        coveredFiles.add(pythonFile.relativePath());
+
         LOG.debug("Saving coverage measures for file '{}'", filePath);
         for (Measure measure : entry.getValue().createMeasures()) {
           switch (coverageType) {

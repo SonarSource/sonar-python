@@ -29,13 +29,13 @@ Feature: Importing coverage data
               | overall_line_coverage    | 50    |
               | overall_branch_coverage  | 0     |
 
-
-  Scenario: Importing coverage reports zeroing coverage for untouched files
+  @wip
+  Scenario Outline: Importing coverage reports zeroing coverage for untouched files
       GIVEN the python project "coverage_project"
 
       WHEN I run sonar-runner with following options:
           """
-          -Dsonar.python.coverage.reportPath=ut-coverage.xml
+          -Dsonar.python.coverage.reportPath=<reportpath>
           -Dsonar.python.coverage.itReportPath=it-coverage.xml
           -Dsonar.python.coverage.overallReportPath=it-coverage.xml
           -Dsonar.python.coverage.forceZeroCoverage=True
@@ -54,6 +54,11 @@ Feature: Importing coverage data
               | overall_coverage        | 25    |
               | overall_line_coverage   | 28.6  |
               | overall_branch_coverage | 0     |
+
+     Examples:
+      | reportpath                    |
+      | ut-coverage.xml               |
+      | ut-coverage-windowspaths.xml  |
 
 
   Scenario: Zeroing coverage measures without importing reports
@@ -83,7 +88,6 @@ Feature: Importing coverage data
               | overall_branch_coverage | None  |
 
 
-   @wip
    Scenario: Importing an empty coverage report
 
       GIVEN the python project "coverage_project"
