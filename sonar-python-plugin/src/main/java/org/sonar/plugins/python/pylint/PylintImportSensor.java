@@ -108,14 +108,15 @@ public class PylintImportSensor extends PythonReportSensor {
     List<Issue> issues = new LinkedList<>();
 
     PylintReportParser parser = new PylintReportParser();
-    for (Scanner sc = new Scanner(report.toPath(), fileSystem.encoding().name()); sc.hasNext(); ) {
+    Scanner sc;
+    for (sc = new Scanner(report.toPath(), fileSystem.encoding().name()); sc.hasNext(); ) {
       String line = sc.nextLine();
       Issue issue = parser.parseLine(line);
       if (issue != null) {
         issues.add(issue);
       }
     }
-
+    sc.close();
     return issues;
   }
 
