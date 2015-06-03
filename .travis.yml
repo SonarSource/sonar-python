@@ -5,8 +5,8 @@ jdk:
 
 install:
   - cd /tmp
-  - wget http://dist.sonar.codehaus.org/sonarqube-4.5.1.zip
-  - unzip sonarqube-4.5.1.zip
+  - wget http://dist.sonar.codehaus.org/sonarqube-4.5.2.zip
+  - unzip sonarqube-4.5.2.zip
   - wget http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/sonar-runner-dist-2.4.zip
   - unzip sonar-runner-dist-2.4.zip
   - cd -
@@ -19,4 +19,4 @@ before_script:
 script:
   - mvn install -DskipTests=true
   - mvn test
-  - RAILS_ENV=production PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.1 behave
+  - RAILS_ENV=production PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.2 behave
