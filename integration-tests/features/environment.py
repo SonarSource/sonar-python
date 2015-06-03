@@ -154,7 +154,7 @@ def stop_sonar(sonarhome):
     sys.stdout.flush()
     rc = subprocess.call(stop_script(sonarhome), stdout=subprocess.PIPE,
                          shell=(os.name == "nt"))
-    if rc != 0 or not wait_for_sonar(30, is_webui_down):
+    if rc != 0 or not wait_for_sonar(300, is_webui_down):
         sys.stdout.write(RED + "FAILED\n" + RESET)
         return False
 
