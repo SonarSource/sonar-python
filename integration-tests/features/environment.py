@@ -66,7 +66,6 @@ def before_all(context):
     context.cleanup_callbacks = []
 
     global didstartsonar
-    print BRIGHT + "\nSetting up the test environment" + RESET_ALL
 
     if not is_webui_up():
         sonarhome = os.environ.get("SONARHOME", None)
@@ -92,8 +91,6 @@ def before_all(context):
                              + INDENT + "or pass a path to SonarQube using environment variable 'SONARHOME'\n"
                              + RESET)
             sys.exit(-1)
-    else:
-        print INDENT + "using the SonarQube already running on '%s'\n\n" % SONAR_URL
 
 
 def after_all(context):
@@ -226,6 +223,4 @@ def checklogs(sonarhome):
 
     summary_msg = "%i errors and %i warnings\n" % (errors, warnings)
 
-    print 2*INDENT + len(summary_msg) * "-"
-    print 2*INDENT + summary_msg
     return errors == 0
