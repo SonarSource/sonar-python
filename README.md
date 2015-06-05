@@ -1,18 +1,18 @@
 ### Documentation:
-- http://docs.codehaus.org/display/SONAR/Python+Plugin
+- http://docs.sonarqube.org/display/PLUG/Python+Plugin
 
 ### Continuous Integration:
 | Hoster  | Build status |
 | ------------- | ------------- |
 | [CloudBees](https://sonarplugins.ci.cloudbees.com/job/python/)| ?? |
-| [Travis CI](https://travis-ci.org/wenns/sonar-python)  |  [![Build Status](https://travis-ci.org/wenns/sonar-python.svg?branch=master)](https://travis-ci.org/wenns/sonar-python) |
+| [Travis CI](https://travis-ci.org/SonarCommunity/sonar-python)  |  [![Build Status](https://travis-ci.org/SonarCommunity/sonar-python.svg?branch=master)](https://travis-ci.org/SonarCommunity/sonar-python) |
 
 
 ### Issue Management:
-- https://jira.codehaus.org/browse/SONARPY
+- http://jira.sonarsource.com/browse/SONARPY
 
 ### Continuous Inspection:
 - http://nemo.sonarqube.org/dashboard/index/org.codehaus.sonar-plugins.python:python
 
 ### Sample Project:
-- https://github.com/wenns/sample_sonar_python
+- http://github.com/SonarSource/sonar-examples/tree/master/projects/languages/python
