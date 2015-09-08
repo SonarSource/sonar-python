@@ -1,22 +1,29 @@
 language: java
+sudo: false
 
 jdk:
   - oraclejdk7
 
-install:
-  - cd /tmp
-  - wget http://dist.sonar.codehaus.org/sonarqube-4.5.2.zip
-  - unzip sonarqube-4.5.2.zip
-  - wget http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/sonar-runner-dist-2.4.zip
-  - unzip sonar-runner-dist-2.4.zip
-  - cd -
+install: true
+script: ./travis.sh
+env:
+  - TEST=ci
 
-before_script:
-  - sudo pip install requests
-  - sudo pip install behave
-  - sudo pip install colorama
+  - TEST=ruling
+    SQ_VERSION=LATEST_RELEASE
 
-script:
-  - mvn install -DskipTests=true
-  - mvn test
-  - RAILS_ENV=production PATH=$PATH:/tmp/sonar-runner-2.4/bin SONARHOME=/tmp/sonarqube-4.5.2 behave
+  - TEST=plugin
+    SQ_VERSION=DEV
+
+  - TEST=plugin
+    SQ_VERSION=LTS
+
+matrix:
+  fast_finish: true
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
+notifications:
+  email: false
