@@ -24,11 +24,20 @@ import com.sonar.orchestrator.locator.FileLocation;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.sonar.wsclient.services.Resource;
+import org.sonar.wsclient.services.ResourceQuery;
+
+import java.util.Map;
+import java.util.Map.Entry;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   MetricsTest.class,
-  ReportTest.class
+  CoverageTest.class,
+  PylintReportTest.class,
+  TestReportTest.class
 })
 public class Tests {
 
@@ -36,6 +45,19 @@ public class Tests {
   public static Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .addPlugin(FileLocation.of("../../sonar-python-plugin/target/sonar-python-plugin.jar"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .build();
+
+  public static Integer getProjectMeasure(String projectKey, String metricKey) {
+    Resource resource = ORCHESTRATOR.getServer().getWsClient().find(ResourceQuery.createForMetrics(projectKey, metricKey));
+    return resource == null ? null : resource.getMeasure(metricKey).getIntValue();
+  }
+
+  public static void assertProjectMeasures(String projectKey, Map<String, Integer> expected) {
+    for (Entry<String, Integer> entry : expected.entrySet()) {
+      String metric = entry.getKey();
+      assertThat(getProjectMeasure(projectKey, metric)).as(metric).isEqualTo(entry.getValue());
+    }
+  }
 
 }

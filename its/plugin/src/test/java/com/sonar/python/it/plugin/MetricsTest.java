@@ -38,7 +38,7 @@ public class MetricsTest {
   private static final String PROJECT_KEY = "metrics";
 
   @ClassRule
-  public static Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   private static Sonar wsClient;
 
@@ -51,9 +51,9 @@ public class MetricsTest {
       .setProjectVersion("1.0-SNAPSHOT")
       .setProfile("no_rule")
       .setSourceDirs("src");
-    ORCHESTRATOR.executeBuild(build);
+    orchestrator.executeBuild(build);
 
-    wsClient = ORCHESTRATOR.getServer().getWsClient();
+    wsClient = orchestrator.getServer().getWsClient();
   }
 
   @Test
