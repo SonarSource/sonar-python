@@ -94,7 +94,7 @@ public class TestReportTest {
   public void invalid_test_report() throws Exception {
     BuildResult result = orchestrator.executeBuildQuietly(createBuild("invalid_report.xml"));
     assertThat(result.isSuccess()).isFalse();
-    assertThat(result.getLogs()).matches(".*Cannot feed the data into sonar.*");
+    assertThat(result.getLogs()).contains("Cannot feed the data into sonar");
     assertProjectMeasures(PROJECT, nullMeasures());
   }
 

@@ -126,7 +126,13 @@ public class CoverageTest {
       .setProperty("sonar.python.coverage.overallReportPath", "empty.xml");
     BuildResult buildResult = orchestrator.executeBuild(build);
 
-    assertThat(buildResult.getLogs()).matches(".*The report '[^']*' seems to be empty, ignoring.*");
+    int nbLog = 0;
+    for (String s : buildResult.getLogs().split("[\\r\\n]+")) {
+      if (s.matches(".*The report '[^']*' seems to be empty, ignoring.*")) {
+        nbLog++;
+      }
+    }
+    assertThat(nbLog).isEqualTo(3);
     assertThat(getProjectMeasure(PROJECT_KEY, "coverage")).isNull();
     assertThat(getProjectMeasure(PROJECT_KEY, "it_coverage")).isNull();
     assertThat(getProjectMeasure(PROJECT_KEY, "overall_coverage")).isNull();

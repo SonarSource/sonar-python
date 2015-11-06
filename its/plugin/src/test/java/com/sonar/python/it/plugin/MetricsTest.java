@@ -44,14 +44,13 @@ public class MetricsTest {
 
   @BeforeClass
   public static void startServer() {
-    orchestrator.getServer().provisionProject("project", "project");
-    orchestrator.getServer().associateProjectToQualityProfile("project", "py", "no_rule");
+    orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
+    orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
     SonarRunner build = SonarRunner.create()
       .setProjectDir(new File("projects/metrics"))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0-SNAPSHOT")
-      .setProfile("no_rule")
       .setSourceDirs("src");
     orchestrator.executeBuild(build);
 

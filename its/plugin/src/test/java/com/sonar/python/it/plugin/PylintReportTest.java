@@ -57,14 +57,14 @@ public class PylintReportTest {
   @Test
   public void invalid_report() throws Exception {
     BuildResult result = analyseProjectWithReport("invalid.txt");
-    assertThat(result.getLogs()).matches(".*DEBUG - Cannot parse the line: trash.*");
+    assertThat(result.getLogs()).contains("DEBUG - Cannot parse the line: trash");
     assertThat(issues()).hasSize(0);
   }
 
   @Test
   public void unknown_rule() throws Exception {
     BuildResult result = analyseProjectWithReport("rule-unknown.txt");
-    assertThat(result.getLogs()).matches(".*WARN  - Pylint rule 'C9999' is unknown.*");
+    assertThat(result.getLogs()).contains("WARN  - Pylint rule 'C9999' is unknown");
     assertThat(issues()).hasSize(0);
   }
 
@@ -74,12 +74,10 @@ public class PylintReportTest {
 
   private BuildResult analyseProjectWithReport(String reportPath) {
     orchestrator.resetData();
-    orchestrator.getServer().provisionProject("pylint_project", "pylint_project");
-    orchestrator.getServer().associateProjectToQualityProfile("pylint_project", "py", "pylint-rules");
+    orchestrator.getServer().provisionProject(PROJECT, PROJECT);
+    orchestrator.getServer().associateProjectToQualityProfile(PROJECT, "py", "pylint-rules");
     return orchestrator.executeBuild(
       SonarRunner.create()
-        .setProjectKey("pylint_project")
-        .setProjectName("pylint_project")
         .setDebugLogs(true)
         .setProjectDir(new File("projects/pylint_project"))
         .setProperty("sonar.python.pylint.reportPath", reportPath));
