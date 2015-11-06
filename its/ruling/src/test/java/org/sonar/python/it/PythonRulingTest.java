@@ -47,6 +47,8 @@ public class PythonRulingTest {
     assertTrue(
       "SonarQube 5.1 is the minimum version to generate the issues report",
       orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("5.1"));
+    orchestrator.getServer().provisionProject("project", "project");
+    orchestrator.getServer().associateProjectToQualityProfile("project", "py", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
     SonarRunner build = SonarRunner.create(FileLocation.of("../sources").getFile())
       .setProjectKey("project")
@@ -54,7 +56,6 @@ public class PythonRulingTest {
       .setProjectVersion("1")
       .setLanguage("py")
       .setSourceEncoding("UTF-8")
-      .setProfile("rules")
       .setSourceDirs(".")
       .setProperty("dump.old", FileLocation.of("src/test/resources/expected").getFile().getAbsolutePath())
       .setProperty("dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())

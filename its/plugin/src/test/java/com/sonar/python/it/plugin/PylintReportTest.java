@@ -74,11 +74,14 @@ public class PylintReportTest {
 
   private BuildResult analyseProjectWithReport(String reportPath) {
     orchestrator.resetData();
+    orchestrator.getServer().provisionProject("pylint_project", "pylint_project");
+    orchestrator.getServer().associateProjectToQualityProfile("pylint_project", "py", "pylint-rules");
     return orchestrator.executeBuild(
       SonarRunner.create()
+        .setProjectKey("pylint_project")
+        .setProjectName("pylint_project")
         .setDebugLogs(true)
         .setProjectDir(new File("projects/pylint_project"))
-        .setProfile("pylint-rules")
         .setProperty("sonar.python.pylint.reportPath", reportPath));
   }
 

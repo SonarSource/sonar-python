@@ -44,6 +44,8 @@ public class MetricsTest {
 
   @BeforeClass
   public static void startServer() {
+    orchestrator.getServer().provisionProject("project", "project");
+    orchestrator.getServer().associateProjectToQualityProfile("project", "py", "no_rule");
     SonarRunner build = SonarRunner.create()
       .setProjectDir(new File("projects/metrics"))
       .setProjectKey(PROJECT_KEY)
