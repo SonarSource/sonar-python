@@ -4,7 +4,6 @@
 ### Continuous Integration:
 | Hoster  | Build status |
 | ------------- | ------------- |
-| [CloudBees](https://sonarplugins.ci.cloudbees.com/job/python/)| ?? |
 | [Travis CI](https://travis-ci.org/SonarCommunity/sonar-python)  |  [![Build Status](https://travis-ci.org/SonarCommunity/sonar-python.svg?branch=master)](https://travis-ci.org/SonarCommunity/sonar-python) |
 
 
