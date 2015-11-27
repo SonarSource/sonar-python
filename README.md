@@ -4,7 +4,7 @@
 ### Continuous Integration:
 | Hoster  | Build status |
 | ------------- | ------------- |
-| [Travis CI](https://travis-ci.org/SonarCommunity/sonar-python)  |  [![Build Status](https://travis-ci.org/SonarCommunity/sonar-python.svg?branch=master)](https://travis-ci.org/SonarCommunity/sonar-python) |
+| [Travis CI](https://travis-ci.org/SonarSource/sonar-python)  |  [![Build Status](https://travis-ci.org/SonarSource/sonar-python.svg?branch=master)](https://travis-ci.org/SonarCommunity/sonar-python) |
 
 
 ### Issue Management:
