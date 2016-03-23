@@ -1,7 +1,7 @@
 /*
- * Python :: ITs :: Plugin
- * Copyright (C) 2012 SonarSource and Waleri Enns
- * sonarqube@googlegroups.com
+ * SonarQube Python Plugin
+ * Copyright (C) 2012-2016 SonarSource SA
+ * mailto:contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -13,9 +13,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 package com.sonar.python.it.plugin;
 
@@ -30,6 +30,8 @@ import org.sonar.wsclient.services.ResourceQuery;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import java.io.File;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(Suite.class)
@@ -43,7 +45,7 @@ public class Tests {
 
   @ClassRule
   public static Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .addPlugin(FileLocation.of("../../sonar-python-plugin/target/sonar-python-plugin.jar"))
+    .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .build();

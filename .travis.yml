@@ -9,15 +9,6 @@ script: ./travis.sh
 env:
   - TEST=ci
 
-  - TEST=ruling
-    SQ_VERSION=LATEST_RELEASE
-
-  - TEST=plugin
-    SQ_VERSION=DEV
-
-  - TEST=plugin
-    SQ_VERSION=LTS
-
 matrix:
   fast_finish: true
 
@@ -27,3 +18,5 @@ cache:
 
 notifications:
   email: false
+  webhooks:
+    - secure: "kY/6qPf7wxMrEhC+ch4XTChAukoIUw0RG3IK7vRY9ATSI9vTF3XNpXu6c53CwhnDcdDacaTIYVxrw+ewpIr0AWd3Pvtixb2X7Z/nzN2PdetvL7bqzXsTwfss7YlWOIHO+pt54cb8lRbVnp9uNxINBMGPpjLK1h+Szb+YJThp6e0="

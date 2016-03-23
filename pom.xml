@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.codehaus.sonar-plugins</groupId>
+    <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>19</version>
+    <version>31</version>
   </parent>
 
-  <groupId>org.codehaus.sonar-plugins.python</groupId>
+  <groupId>org.sonarsource.python</groupId>
   <artifactId>python</artifactId>
   <version>1.6-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -76,6 +76,8 @@
 
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
+
+    <gitRepositoryName>sonar-python</gitRepositoryName>
   </properties>
 
   <dependencyManagement>
@@ -134,7 +136,7 @@
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>0.9.15</version>
+        <version>0.9.30</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -143,5 +145,14 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  
+  <profiles>
+    <profile>
+      <id>its</id>
+      <modules>
+        <module>its</module>
+      </modules>
+    </profile>
+  </profiles>
 
 </project>
