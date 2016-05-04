@@ -54,4 +54,14 @@ public class PythonV3Test extends RuleTest {
     assertThat(p).notMatches("yield from");
   }
 
+  @Test
+  public void function_star_args(){
+    setRootRule(PythonGrammar.TYPEDARGSLIST);
+    assertThat(p).matches("*, foo=bar");
+    assertThat(p).matches("*args, boo");
+    assertThat(p).notMatches("*, boo");
+    assertThat(p).notMatches("*");
+    assertThat(p).notMatches("**");
+  }
+
 }
