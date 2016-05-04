@@ -230,7 +230,9 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(COMP_FOR).is("for", EXPRLIST, "in", TESTLIST, b.optional(COMP_ITER));
     b.rule(COMP_IF).is("if", TEST_NOCOND, b.optional(COMP_ITER));
 
-    b.rule(YIELD_EXPR).is("yield", b.optional(TESTLIST));
+    b.rule(YIELD_EXPR).is(b.firstOf(
+      b.sequence("yield", "from", TEST),
+      b.sequence("yield", b.optional(TESTLIST))));
 
     b.rule(NAME).is(IDENTIFIER);
 
