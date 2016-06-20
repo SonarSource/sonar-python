@@ -21,6 +21,7 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -28,8 +29,6 @@ import org.sonar.wsclient.Sonar;
 import org.sonar.wsclient.services.Measure;
 import org.sonar.wsclient.services.Resource;
 import org.sonar.wsclient.services.ResourceQuery;
-
-import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -150,11 +149,11 @@ public class MetricsTest {
   public void should_be_compatible_with_DevCockpit() {
     // TODO probably bug in Sonar: order might depend on JVM
     assertThat(getFileMeasure("ncloc_data").getData())
-      .contains("1=0")
+      .doesNotContain("1=1")
       .contains("5=1");
     assertThat(getFileMeasure("comment_lines_data").getData())
       .contains("1=1")
-      .contains("4=0");
+      .doesNotContain("4=1");
   }
 
   /* Helper methods */
