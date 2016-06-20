@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.io.File;
+import java.nio.file.Paths;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -30,8 +32,6 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
-
-import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -49,18 +49,16 @@ public class PylintSensorTest {
         .setName("Invalid name")
         .activate()
         .build();
-    fileSystem = new DefaultFileSystem();
-    fileSystem.setBaseDir(new File("src/test/resources/org/sonar/plugins/python/pylint"));
+    fileSystem = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python/pylint"));
     fileSystem.setWorkDir(new File("target/"));
-    DefaultInputFile inputFile = new DefaultInputFile("src/test/resources/example_project/example.py").setLanguage(Python.KEY);
-    inputFile.setAbsolutePath((new File("src/test/resources/example_project/example.py")).getAbsolutePath());
+    DefaultInputFile inputFile = new DefaultInputFile("", "src/test/resources/example_project/example.py").setLanguage(Python.KEY);
+    inputFile.setModuleBaseDir(Paths.get("").toAbsolutePath());
     fileSystem.add(inputFile);
   }
 
   @Test
   public void shouldExecuteOnlyWhenNecessary() {
-    DefaultFileSystem fileSystemForeign = new DefaultFileSystem();
-
+    DefaultFileSystem fileSystemForeign = new DefaultFileSystem(Paths.get(""));
     Project project = mock(Project.class);
 
     checkNecessityOfExecution(project, activeRules, fileSystem, true);

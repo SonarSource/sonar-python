@@ -19,23 +19,22 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.io.File;
+import java.nio.file.Paths;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
-import org.sonar.api.issue.*;
+import org.sonar.api.issue.Issuable;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
-
-import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.any;
@@ -49,15 +48,15 @@ public class PylintImportSensorTest {
   private DefaultFileSystem fileSystem;
   private ActiveRules activeRules;
   private SensorContext context;
-  private InputFile inputFile;
+  private DefaultInputFile inputFile;
 
   @Before
   public void init() {
     settings = new Settings();
     settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
-    fileSystem = new DefaultFileSystem();
-    fileSystem.setBaseDir(new File("src/test/resources/org/sonar/plugins/python/pylint"));
-    inputFile = new DefaultInputFile("src/prod.py").setLanguage(Python.KEY);
+    fileSystem = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python/pylint"));
+
+    inputFile = new DefaultInputFile("", "src/prod.py").setLanguage(Python.KEY);
     fileSystem.add(inputFile);
     activeRules = (new ActiveRulesBuilder())
         .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
@@ -77,7 +76,7 @@ public class PylintImportSensorTest {
 
   @Test
   public void shouldExecuteOnlyWhenNecessary() {
-    DefaultFileSystem fileSystemForeign = new DefaultFileSystem();
+    DefaultFileSystem fileSystemForeign = new DefaultFileSystem(Paths.get(""));
 
     Project project = mock(Project.class);
 
@@ -107,7 +106,6 @@ public class PylintImportSensorTest {
     verify(issuable, times(3)).addIssue(any(org.sonar.api.issue.Issue.class));
 
   }
-
 
   private void checkNecessityOfExecution(Project project, ActiveRules currentActiveRules, DefaultFileSystem fileSystem, boolean shouldExecute) {
     PylintImportSensor sensor = new PylintImportSensor(settings, currentActiveRules, fileSystem, mock(ResourcePerspectives.class));

@@ -41,8 +41,7 @@ public class PylintConfigurationTest {
 
   @Test
   public void shouldGetCorrectPylintPath() {
-    DefaultFileSystem fs = new DefaultFileSystem();
-    fs.setBaseDir(new File("/projectroot"));
+    DefaultFileSystem fs = new DefaultFileSystem(new File(""));
 
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isNull();
 
@@ -50,7 +49,7 @@ public class PylintConfigurationTest {
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isNull();
 
     settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, ".pylintrc");
-    assertThat(pylintConfiguration.getPylintConfigPath(fs)).isEqualTo(new File("/projectroot/.pylintrc").getAbsolutePath());
+    assertThat(pylintConfiguration.getPylintConfigPath(fs)).isEqualTo(new File(".pylintrc").getAbsolutePath());
 
     String absolutePath = new File("/absolute/.pylintrc").getAbsolutePath();
     settings.setProperty(PylintConfiguration.PYLINT_CONFIG_KEY, absolutePath);

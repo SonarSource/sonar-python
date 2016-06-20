@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -39,18 +41,17 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.python.checks.CheckList;
 
-import java.io.File;
-
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 public class PythonSquidSensorTest {
 
+  static private Path currentDir = Paths.get("");
+
   private PythonSquidSensor sensor;
-  private DefaultFileSystem fs = new DefaultFileSystem();
+  private DefaultFileSystem fs = new DefaultFileSystem(currentDir);
   ResourcePerspectives perspectives;
 
   @Before
@@ -73,15 +74,16 @@ public class PythonSquidSensorTest {
     Project project = mock(Project.class);
     assertThat(sensor.toString()).isEqualTo("PythonSquidSensor");
     assertThat(sensor.shouldExecuteOnProject(project)).isFalse();
-    fs.add(new DefaultInputFile("test.py").setLanguage(Python.KEY));
+    fs.add(new DefaultInputFile("", "test.py").setLanguage(Python.KEY));
     assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
   }
 
   @Test
   public void should_analyse() {
     String relativePath = "src/test/resources/org/sonar/plugins/python/code_chunks_2.py";
-    DefaultInputFile inputFile = new DefaultInputFile(relativePath).setLanguage(Python.KEY);
-    inputFile.setAbsolutePath((new File(relativePath)).getAbsolutePath());
+    DefaultInputFile inputFile = new DefaultInputFile("", relativePath).setLanguage(Python.KEY);
+
+    inputFile.setModuleBaseDir(currentDir.toAbsolutePath());
     fs.add(inputFile);
 
     Issuable issuable = mock(Issuable.class);

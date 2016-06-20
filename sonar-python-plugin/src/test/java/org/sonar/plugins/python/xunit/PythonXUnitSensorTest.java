@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.xunit;
 
+import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.CoverageExtension;
@@ -29,13 +30,12 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
-
-import java.io.File;
+import org.sonar.plugins.python.TestUtils;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -52,8 +52,7 @@ public class PythonXUnitSensorTest {
   public void setUp() {
     settings = new Settings();
     project = mock(Project.class);
-    fs = new DefaultFileSystem();
-    fs.setBaseDir(new File("src/test/resources/org/sonar/plugins/python"));
+    fs = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python"));
     context = mock(SensorContext.class);
     sensor = new PythonXUnitSensor(settings, fs);
   }
@@ -65,8 +64,8 @@ public class PythonXUnitSensorTest {
 
   @Test
   public void shouldSaveCorrectMeasures() {
-    DefaultInputFile testFile1 = new DefaultInputFile("test_sample1.py");
-    DefaultInputFile testFile2 = new DefaultInputFile("tests/dir/test_sample2.py");
+    DefaultInputFile testFile1 = new DefaultInputFile("", "test_sample1.py");
+    DefaultInputFile testFile2 = new DefaultInputFile("", "tests/dir/test_sample2.py");
     fs.add(testFile1);
     fs.add(testFile2);
     sensor.analyse(project, context);
@@ -97,8 +96,8 @@ public class PythonXUnitSensorTest {
   @Test
   public void shouldSaveCorrectMeasuresSimpleMode() {
     settings.setProperty(PythonXUnitSensor.SKIP_DETAILS, true);
-    fs.add(new DefaultInputFile("test_sample.py"));
-    fs.add(new DefaultInputFile("tests/dir/test_sample.py"));
+    fs.add(new DefaultInputFile("", "test_sample.py"));
+    fs.add(new DefaultInputFile("", "tests/dir/test_sample.py"));
     sensor.analyse(project, context);
 
     verify(context).saveMeasure(eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());

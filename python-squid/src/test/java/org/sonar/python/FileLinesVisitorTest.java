@@ -19,9 +19,15 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Grammar;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
+import java.io.File;
+import java.nio.file.Paths;
+
 import org.junit.Test;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
@@ -30,12 +36,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.squidbridge.SquidAstVisitor;
 
-import java.io.File;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
+import com.sonar.sslr.api.Grammar;
 
 public class FileLinesVisitorTest {
 
@@ -44,11 +45,11 @@ public class FileLinesVisitorTest {
   @Test
   public void test() {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    DefaultFileSystem fileSystem = new DefaultFileSystem();
+    DefaultFileSystem fileSystem = new DefaultFileSystem(Paths.get(""));
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
 
     File file = new File(BASE_DIR, "file_lines.py");
-    InputFile inputFile = new DefaultInputFile(file.getPath());
+    DefaultInputFile inputFile = new DefaultInputFile("", file.getPath());
 
     fileSystem.add(inputFile);
     when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);

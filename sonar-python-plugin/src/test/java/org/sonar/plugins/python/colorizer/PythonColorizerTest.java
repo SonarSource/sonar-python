@@ -19,10 +19,9 @@
  */
 package org.sonar.plugins.python.colorizer;
 
+import java.io.StringReader;
 import org.junit.Test;
 import org.sonar.colorizer.CodeColorizer;
-
-import java.io.StringReader;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -32,7 +31,7 @@ public class PythonColorizerTest {
   private CodeColorizer codeColorizer = new CodeColorizer(pythonColorizer.getTokenizers());
 
   private String colorize(String sourceCode) {
-    return codeColorizer.toHtml(new StringReader(sourceCode));
+    return codeColorizer.toHtml(new StringReader(sourceCode), null);
   }
 
   @Test

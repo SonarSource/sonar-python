@@ -19,19 +19,23 @@
  */
 package org.sonar.python.it;
 
-import com.google.common.io.Files;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
-import com.sonar.orchestrator.locator.FileLocation;
-import org.junit.ClassRule;
-import org.junit.Test;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.ClassRule;
+import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
+
+
+import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.locator.FileLocation;
+
+import com.google.common.io.Files;
 public class PythonRulingTest {
 
   @ClassRule
@@ -45,8 +49,8 @@ public class PythonRulingTest {
   @Test
   public void test() throws Exception {
     assertTrue(
-      "SonarQube 5.1 is the minimum version to generate the issues report",
-      orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("5.1"));
+      "SonarQube 5.6 is the minimum version to generate the issues report",
+      orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("5.6"));
     orchestrator.getServer().provisionProject("project", "project");
     orchestrator.getServer().associateProjectToQualityProfile("project", "py", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
