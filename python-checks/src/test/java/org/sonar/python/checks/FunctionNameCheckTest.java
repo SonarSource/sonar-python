@@ -33,10 +33,7 @@ public class FunctionNameCheckTest {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/functionName.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
       .next().atLine(4).withMessage(
-        "Rename function \"Badly_Named_Function\" to match the regular expression ^[a-z_][a-z0-9_]{2,30}$.")
-      .next().atLine(10).withMessage(
-        "Rename function \"too_long_function_name_because_it_has_more_than_30_characters\" "
-          + "to match the regular expression ^[a-z_][a-z0-9_]{2,30}$.")
+        "Rename function \"Badly_Named_Function\" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.")
       .noMore();
   }
 

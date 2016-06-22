@@ -33,10 +33,7 @@ public class MethodNameCheckTest {
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/methodName.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
       .next().atLine(5).withMessage(
-        "Rename method \"Incorrect_Method_Name\" to match the regular expression ^[a-z_][a-z0-9_]{2,30}$.")
-      .next().atLine(8).withMessage(
-        "Rename method \"too_long_method_name_because_it_has_more_than_30_characters\" "
-          + "to match the regular expression ^[a-z_][a-z0-9_]{2,30}$.")
+        "Rename method \"Incorrect_Method_Name\" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.")
       .noMore();
   }
 
