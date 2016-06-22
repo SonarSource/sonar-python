@@ -13,6 +13,7 @@ installTravisTools
 case "$TEST" in
 
 ci)
+  export DEPLOY_PULL_REQUEST=true
   regular_mvn_build_deploy_analyze
   ;;
 
