@@ -32,8 +32,8 @@ public class NestedControlFlowDepthCheckTest {
     NestedControlFlowDepthCheck check = new NestedControlFlowDepthCheck();
     SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/nestedControlFlowDepth.py"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(9).withMessage(
-        "Refactor this code to not nest more than 3 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.")
+      .next().atLine(10).withMessage(
+        "Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.")
       .noMore();
   }
 

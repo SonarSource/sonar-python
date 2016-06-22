@@ -40,7 +40,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 public class NestedControlFlowDepthCheck extends SquidCheck<Grammar> {
 
   public static final String CHECK_KEY = "S134";
-  private static final int DEFAULT_MAX = 3;
+  private static final int DEFAULT_MAX = 4;
 
   @RuleProperty(
     key = "max",
