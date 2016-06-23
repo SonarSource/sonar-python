@@ -24,7 +24,6 @@ import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.checks.SquidCheck;
 
@@ -34,7 +33,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "\"\\\" should only be used as an escape character outside of raw strings"
 )
 @SqaleConstantRemediation("2min")
-@ActivatedByDefault
 public class BackslashInStringCheck extends SquidCheck<Grammar> {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
