@@ -32,7 +32,7 @@ public class PythonRuleRepository implements RulesDefinition {
     NewRepository repository = context
         .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
         .setName(REPOSITORY_NAME);
-    AnnotationBasedRulesDefinition.load(repository, Python.KEY, CheckList.getChecks());
+    new AnnotationBasedRulesDefinition(repository, "py").addRuleClasses(false, CheckList.getChecks());
     repository.done();
   }
 }

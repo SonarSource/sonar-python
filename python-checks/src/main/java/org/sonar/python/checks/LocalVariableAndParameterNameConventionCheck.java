@@ -26,14 +26,12 @@ import com.sonar.sslr.api.Token;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -42,7 +40,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Local variable and function parameter names should comply with a naming convention",
     tags = Tags.CONVENTION
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
 @SqaleConstantRemediation("2min")
 @ActivatedByDefault
 public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Grammar> {

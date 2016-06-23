@@ -25,12 +25,10 @@ import com.sonar.sslr.api.Grammar;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import javax.annotation.Nullable;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.CharsetAwareVisitor;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -39,7 +37,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Files should contain an empty new line at the end",
     tags = Tags.CONVENTION
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
 @SqaleConstantRemediation("1min")
 public class MissingNewlineAtEndOfFileCheck extends SquidCheck<Grammar> implements CharsetAwareVisitor {
   public static final String CHECK_KEY = "S113";

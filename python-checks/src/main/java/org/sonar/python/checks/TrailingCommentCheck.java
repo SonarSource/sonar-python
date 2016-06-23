@@ -25,12 +25,10 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -39,7 +37,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Comments should not be located at the end of lines of code",
     tags = Tags.CONVENTION
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.READABILITY)
 @SqaleConstantRemediation("1min")
 public class TrailingCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S139";

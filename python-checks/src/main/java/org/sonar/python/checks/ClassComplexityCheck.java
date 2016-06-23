@@ -21,14 +21,12 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.api.SourceClass;
 import org.sonar.squidbridge.checks.ChecksHelper;
 import org.sonar.squidbridge.checks.SquidCheck;
@@ -39,7 +37,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Classes should not be too complex",
     tags = Tags.BRAIN_OVERLOAD
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNDERSTANDABILITY)
 @SqaleLinearWithOffsetRemediation(
     coeff = "1min",
     offset = "10min",
