@@ -66,7 +66,7 @@ public class InitReturnsValueCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean returnReturnNone(AstNode stmt) {
+  private static boolean returnReturnNone(AstNode stmt) {
     return stmt.is(PythonGrammar.RETURN_STMT)
         && (stmt.getFirstChild(PythonGrammar.TESTLIST) == null
         || stmt.getFirstChild(PythonGrammar.TESTLIST).getToken().getValue().equals(PythonKeyword.NONE.getValue()));

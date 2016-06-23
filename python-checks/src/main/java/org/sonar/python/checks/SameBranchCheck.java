@@ -103,7 +103,7 @@ public class SameBranchCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private AstNode singleIfChild(AstNode suite) {
+  private static AstNode singleIfChild(AstNode suite) {
     List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
     if (statements.size() == 1) {
       AstSelect nestedIf = statements.get(0).select()

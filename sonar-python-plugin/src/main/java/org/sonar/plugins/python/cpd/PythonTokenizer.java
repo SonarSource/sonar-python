@@ -55,7 +55,7 @@ public class PythonTokenizer implements Tokenizer {
     cpdTokens.add(TokenEntry.getEOF());
   }
 
-  private String getTokenImage(Token token) {
+  private static String getTokenImage(Token token) {
     return token.getValue();
   }
 

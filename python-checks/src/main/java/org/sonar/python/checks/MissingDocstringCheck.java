@@ -127,7 +127,7 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private AstNode firstSimpleStmt(AstNode statement) {
+  private static AstNode firstSimpleStmt(AstNode statement) {
     AstNode stmtList = statement.getFirstChild(PythonGrammar.STMT_LIST);
     if (stmtList != null) {
       return stmtList.getFirstChild(PythonGrammar.SIMPLE_STMT);

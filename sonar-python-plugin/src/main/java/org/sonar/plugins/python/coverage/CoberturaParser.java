@@ -55,13 +55,13 @@ public class CoberturaParser {
     parser.parse(xmlFile);
   }
 
-  private void collectPackageMeasures(SMInputCursor pack, Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
+  private static void collectPackageMeasures(SMInputCursor pack, Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
     while (pack.getNext() != null) {
       collectFileMeasures(pack.descendantElementCursor("class"), coverageData);
     }
   }
 
-  private void collectFileMeasures(SMInputCursor clazz, Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
+  private static void collectFileMeasures(SMInputCursor clazz, Map<String, CoverageMeasuresBuilder> coverageData) throws XMLStreamException {
     while (clazz.getNext() != null) {
       String fileName = clazz.getAttrValue("filename");
       CoverageMeasuresBuilder builder = coverageData.get(fileName);
@@ -73,7 +73,7 @@ public class CoberturaParser {
     }
   }
 
-  private void collectFileData(SMInputCursor clazz, CoverageMeasuresBuilder builder) throws XMLStreamException {
+  private static void collectFileData(SMInputCursor clazz, CoverageMeasuresBuilder builder) throws XMLStreamException {
     SMInputCursor line = clazz.childElementCursor("lines").advance().childElementCursor("line");
     while (line.getNext() != null) {
       int lineId = Integer.parseInt(line.getAttrValue("number"));

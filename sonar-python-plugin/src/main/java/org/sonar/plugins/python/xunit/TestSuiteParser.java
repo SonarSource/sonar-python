@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class TestSuiteParser implements XmlStreamHandler {
 
-  private Map<String, TestSuite> testSuites = new HashMap<String, TestSuite>();
+  private Map<String, TestSuite> testSuites = new HashMap<>();
 
   @Override
   public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
@@ -62,12 +62,12 @@ public class TestSuiteParser implements XmlStreamHandler {
     return testSuites.values();
   }
 
-  private String getClassname(SMInputCursor testCaseCursor, String defaultClassname) throws XMLStreamException {
+  private static String getClassname(SMInputCursor testCaseCursor, String defaultClassname) throws XMLStreamException {
     String testClassName = testCaseCursor.getAttrValue("classname");
     return testClassName == null ? defaultClassname : testClassName;
   }
 
-  private TestCase parseTestCaseTag(SMInputCursor testCaseCursor) throws XMLStreamException {
+  private static TestCase parseTestCaseTag(SMInputCursor testCaseCursor) throws XMLStreamException {
     // TODO: get a decent grammar for the junit format and check the
     // logic inside this method against it.
 
@@ -95,8 +95,8 @@ public class TestSuiteParser implements XmlStreamHandler {
     return new TestCase(name, time.intValue(), status, stack, msg);
   }
 
-  private double parseTime(SMInputCursor testCaseCursor) throws XMLStreamException {
-    double time = 0.0;
+  private static double parseTime(SMInputCursor testCaseCursor) throws XMLStreamException {
+    double time;
     try {
       Double tmp = ParsingUtils.parseNumber(testCaseCursor.getAttrValue("time"), Locale.ENGLISH);
       time = ParsingUtils.scaleValue(tmp * 1000, 3);
@@ -106,7 +106,7 @@ public class TestSuiteParser implements XmlStreamHandler {
     return time;
   }
 
-  private String parseTestCaseName(SMInputCursor testCaseCursor) throws XMLStreamException {
+  private static String parseTestCaseName(SMInputCursor testCaseCursor) throws XMLStreamException {
     String name = testCaseCursor.getAttrValue("name");
     String classname = testCaseCursor.getAttrValue("CLASSNAME");
     if (classname != null) {

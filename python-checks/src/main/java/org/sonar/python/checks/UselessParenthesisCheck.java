@@ -74,7 +74,7 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isKeywordException(AstNode parent) {
+  private static boolean isKeywordException(AstNode parent) {
     if ((parent.is(PythonGrammar.RETURN_STMT) || parent.is(PythonGrammar.YIELD_EXPR)) && parent.getFirstChild(PythonGrammar.TESTLIST).getNumberOfChildren() == 1) {
       return true;
     }
@@ -87,7 +87,7 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean violationCondition(AstNode atom, boolean ignoreTestNumber) {
+  private static boolean violationCondition(AstNode atom, boolean ignoreTestNumber) {
     List<AstNode> children = atom.getChildren();
     boolean result = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS) && children.get(2).is(PythonPunctuator.RPARENTHESIS) && isOnASingleLine(atom);
     if (result && !ignoreTestNumber) {
@@ -108,7 +108,7 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isOnASingleLine(AstNode node) {
+  private static boolean isOnASingleLine(AstNode node) {
     return node.getTokenLine() == node.getLastToken().getLine();
   }
 

@@ -92,7 +92,7 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
     lookForDuplications(fieldNames, methodNames);
   }
 
-  private List<Token> getFieldNameTokens(AstNode astNode) {
+  private static List<Token> getFieldNameTokens(AstNode astNode) {
     List<Token> methodNames = new LinkedList<>();
     AstSelect funcDefSelect = astNode.select()
         .children(PythonGrammar.SUITE)
@@ -120,11 +120,11 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean differOnlyByCapitalization(String name1, String name2) {
+  private static boolean differOnlyByCapitalization(String name1, String name2) {
     return name1.equalsIgnoreCase(name2) && !name1.equals(name2);
   }
 
-  private List<TokenWithTypeInfo> mergeLists(List<Token> fieldNames, List<Token> methodNames) {
+  private static List<TokenWithTypeInfo> mergeLists(List<Token> fieldNames, List<Token> methodNames) {
     List<TokenWithTypeInfo> allTokensWithInfo = new LinkedList<>();
     for (Token token : fieldNames){
       allTokensWithInfo.add(new TokenWithTypeInfo(token, "field"));
@@ -135,7 +135,7 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
     return allTokensWithInfo;
   }
 
-  private String getMessage(TokenWithTypeInfo token1, TokenWithTypeInfo token2) {
+  private static String getMessage(TokenWithTypeInfo token1, TokenWithTypeInfo token2) {
     return String.format(MESSAGE, token2.getType(), token2.getValue(), token1.getType(), token1.getValue(), token1.getLine());
   }
 

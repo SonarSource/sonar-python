@@ -95,7 +95,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
   }
 
-  private void simpleMode(final SensorContext context, List<File> reports) throws XMLStreamException {
+  private static void simpleMode(final SensorContext context, List<File> reports) throws XMLStreamException {
     TestSuiteParser parserHandler = new TestSuiteParser();
     StaxParser parser = new StaxParser(parserHandler, false);
     for (File report : reports) {

@@ -66,7 +66,7 @@ public class NeedlessPassCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean docstringException(List<AstNode> statements) {
+  private static boolean docstringException(List<AstNode> statements) {
     return statements.size() == 2 && statements.get(0).getToken().getType().equals(PythonTokenType.STRING);
   }
 
