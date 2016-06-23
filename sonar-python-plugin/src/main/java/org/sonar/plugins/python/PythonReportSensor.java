@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.File;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -29,9 +31,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.WildcardPattern;
-
-import java.io.File;
-import java.util.List;
 
 public abstract class PythonReportSensor implements Sensor {
 

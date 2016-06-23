@@ -20,11 +20,10 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
+import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.AbstractLanguage;
-
-import java.util.List;
 
 public class Python extends AbstractLanguage {
 

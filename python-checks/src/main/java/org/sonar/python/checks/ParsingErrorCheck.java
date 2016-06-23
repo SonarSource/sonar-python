@@ -21,6 +21,8 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.server.rule.RulesDefinition;
@@ -30,9 +32,6 @@ import org.sonar.squidbridge.AstScannerExceptionHandler;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 @Rule(
     key = ParsingErrorCheck.CHECK_KEY,

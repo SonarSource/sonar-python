@@ -19,14 +19,13 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.util.List;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.utils.WildcardPattern;
-
-import java.io.File;
-import java.io.FileFilter;
-import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.any;

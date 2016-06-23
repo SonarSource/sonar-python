@@ -21,6 +21,9 @@ package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
 import com.sonar.sslr.api.Grammar;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FilePredicates;
@@ -50,10 +53,6 @@ import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceFunction;
 import org.sonar.squidbridge.indexer.QueryByParent;
 import org.sonar.squidbridge.indexer.QueryByType;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
 
 public final class PythonSquidSensor implements Sensor {
 

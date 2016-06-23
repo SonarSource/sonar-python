@@ -19,14 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
-
-import java.io.File;
 
 public class ModuleNameCheckTest {
 

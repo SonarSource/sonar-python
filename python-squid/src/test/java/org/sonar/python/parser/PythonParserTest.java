@@ -22,12 +22,11 @@ package org.sonar.python.parser;
 import com.google.common.base.Charsets;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
+import java.io.File;
+import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
-
-import java.io.File;
-import java.util.Collection;
 
 public class PythonParserTest {
 

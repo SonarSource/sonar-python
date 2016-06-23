@@ -21,9 +21,9 @@ package org.sonar.python.lexer;
 
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
-import org.sonar.python.api.PythonTokenType;
 
 /**
  * http://docs.python.org/reference/lexical_analysis.html#explicit-line-joining

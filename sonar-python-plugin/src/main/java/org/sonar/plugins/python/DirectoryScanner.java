@@ -20,14 +20,13 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
+import java.io.File;
+import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.sonar.api.utils.WildcardPattern;
-
-import java.io.File;
-import java.util.List;
 
 public class DirectoryScanner {
 
