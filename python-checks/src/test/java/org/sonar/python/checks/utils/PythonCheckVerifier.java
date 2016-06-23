@@ -83,13 +83,13 @@ public class PythonCheckVerifier extends SquidCheck<Grammar> implements AstAndTo
       assertThat(actual.cost()).as("Bad effortToFix at line " + expected.line()).isEqualTo(expected.effortToFix());
     }
     if (expected.startColumn() != null) {
-      assertThat(((PreciseIssue) actual).primaryLocation().startLineOffset() + 1).as("Bad start column at line " + expected.line()).isEqualTo(expected.startColumn());
+      assertThat(actual.primaryLocation().startLineOffset() + 1).as("Bad start column at line " + expected.line()).isEqualTo(expected.startColumn());
     }
     if (expected.endColumn() != null) {
-      assertThat(((PreciseIssue) actual).primaryLocation().endLineOffset() + 1).as("Bad end column at line " + expected.line()).isEqualTo(expected.endColumn());
+      assertThat(actual.primaryLocation().endLineOffset() + 1).as("Bad end column at line " + expected.line()).isEqualTo(expected.endColumn());
     }
     if (expected.endLine() != null) {
-      assertThat(((PreciseIssue) actual).primaryLocation().endLine()).as("Bad end line at line " + expected.line()).isEqualTo(expected.endLine());
+      assertThat(actual.primaryLocation().endLine()).as("Bad end line at line " + expected.line()).isEqualTo(expected.endLine());
     }
     if (expected.secondaryLines() != null) {
       assertThat(secondary(actual)).as("Bad secondary locations at line " + expected.line()).isEqualTo(expected.secondaryLines());
