@@ -21,13 +21,11 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -35,7 +33,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     priority = Priority.MAJOR,
     name = "\"\\\" should only be used as an escape character outside of raw strings"
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.LOGIC_RELIABILITY)
 @SqaleConstantRemediation("2min")
 @ActivatedByDefault
 public class BackslashInStringCheck extends SquidCheck<Grammar> {

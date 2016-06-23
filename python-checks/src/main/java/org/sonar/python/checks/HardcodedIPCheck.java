@@ -23,13 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -38,7 +36,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "IP addresses should not be hardcoded",
     tags = {Tags.CERT, Tags.SECURITY}
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.ARCHITECTURE_CHANGEABILITY)
 @SqaleConstantRemediation("30min")
 @ActivatedByDefault
 public class HardcodedIPCheck extends SquidCheck<Grammar> {

@@ -21,13 +21,11 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -36,7 +34,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Jump statements should not be followed by other statements",
     tags = {Tags.UNUSED, Tags.CERT, Tags.CWE, Tags.MISRA}
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.LOGIC_RELIABILITY)
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
 public class AfterJumpStatementCheck extends SquidCheck<Grammar> {

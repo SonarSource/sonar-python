@@ -24,14 +24,12 @@ import com.sonar.sslr.api.Grammar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
@@ -41,7 +39,6 @@ import org.sonar.sslr.ast.AstSelect;
     name = "Two branches in the same conditional structure should not have exactly the same implementation",
     tags = {Tags.BUG}
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.LOGIC_RELIABILITY)
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
 public class SameBranchCheck extends SquidCheck<Grammar> {

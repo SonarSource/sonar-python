@@ -25,19 +25,16 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.squidbridge.AstScannerExceptionHandler;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ParsingErrorCheck.CHECK_KEY,
     priority = Priority.MAJOR,
     name = "Parser failure")
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.INSTRUCTION_RELIABILITY)
 @SqaleConstantRemediation("30min")
 public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScannerExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(ParsingErrorCheck.class);

@@ -24,13 +24,11 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
-import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
@@ -38,7 +36,6 @@ import org.sonar.squidbridge.checks.SquidCheck;
     priority = Priority.MAJOR,
     name = "Docstrings should be defined"
 )
-@SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNDERSTANDABILITY)
 @SqaleConstantRemediation("5min")
 public class MissingDocstringCheck extends SquidCheck<Grammar> {
 
