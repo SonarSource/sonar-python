@@ -1,0 +1,115 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2016 SonarSource SA
+ * mailto:contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python;
+
+import com.google.common.collect.ImmutableList;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Nullable;
+import org.sonar.squidbridge.checks.SquidCheck;
+
+public abstract class PythonCheck extends SquidCheck<Grammar> {
+
+  private List<PreciseIssue> issues = new ArrayList<>();
+
+  public List<PreciseIssue> getIssues() {
+    return ImmutableList.copyOf(issues);
+  }
+
+  protected final PreciseIssue addIssue(AstNode node, String message) {
+    PreciseIssue newIssue = new PreciseIssue(new IssueLocation(node, message), getContext().getFile());
+    issues.add(newIssue);
+    return newIssue;
+  }
+
+  public static class PreciseIssue {
+
+    private File file;
+    private IssueLocation primaryLocation;
+    private Double cost;
+    private List<IssueLocation> secondaryLocations;
+
+    private PreciseIssue(IssueLocation primaryLocation, File file) {
+      this.primaryLocation = primaryLocation;
+      this.secondaryLocations = new ArrayList<>();
+      this.file = file;
+    }
+
+    @Nullable
+    public Double cost() {
+      return cost;
+    }
+
+    public PreciseIssue cost(double cost) {
+      this.cost = cost;
+      return this;
+    }
+
+    public File file() {
+      return file;
+    }
+
+    public IssueLocation primaryLocation() {
+      return primaryLocation;
+    }
+
+    public PreciseIssue secondary(AstNode node, @Nullable String message) {
+      secondaryLocations.add(new IssueLocation(node, message));
+      return this;
+    }
+
+    public List<IssueLocation> secondaryLocations() {
+      return secondaryLocations;
+    }
+  }
+
+  public static class IssueLocation {
+    private AstNode node;
+    private String message;
+
+    public IssueLocation(AstNode node, String message) {
+      this.node = node;
+      this.message = message;
+    }
+
+    public String message() {
+      return message;
+    }
+
+    public int startLine() {
+      return node.getToken().getLine();
+    }
+
+    public int startLineOffset() {
+      return node.getToken().getColumn();
+    }
+
+    public int endLine() {
+      return node.getLastToken().getLine();
+    }
+
+    public int endLineOffset() {
+      return node.getLastToken().getColumn() + node.getLastToken().getValue().length();
+    }
+  }
+}
