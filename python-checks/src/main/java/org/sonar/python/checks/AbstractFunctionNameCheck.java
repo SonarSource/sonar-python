@@ -21,11 +21,10 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import java.util.regex.Pattern;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.checks.SquidCheck;
-
-import java.util.regex.Pattern;
 
 public abstract class AbstractFunctionNameCheck extends SquidCheck<Grammar> {
 

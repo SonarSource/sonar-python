@@ -19,14 +19,9 @@
  */
 package org.sonar.python;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
+import com.sonar.sslr.api.Grammar;
 import java.io.File;
 import java.nio.file.Paths;
-
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -36,7 +31,10 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.squidbridge.SquidAstVisitor;
 
-import com.sonar.sslr.api.Grammar;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 public class FileLinesVisitorTest {
 

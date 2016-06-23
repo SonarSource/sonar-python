@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.sonar.api.SonarPlugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
@@ -27,12 +28,10 @@ import org.sonar.plugins.python.colorizer.PythonColorizer;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
+import org.sonar.plugins.python.pylint.PylintImportSensor;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
-import org.sonar.plugins.python.pylint.PylintImportSensor;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
-
-import java.util.List;
 
 public class PythonPlugin extends SonarPlugin {
 

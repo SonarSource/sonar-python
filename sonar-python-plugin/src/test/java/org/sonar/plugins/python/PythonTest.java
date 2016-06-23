@@ -20,10 +20,9 @@
 package org.sonar.plugins.python;
 
 import com.google.common.collect.Maps;
+import java.util.Map;
 import org.junit.Test;
 import org.sonar.api.config.Settings;
-
-import java.util.Map;
 
 import static org.fest.assertions.Assertions.assertThat;
 

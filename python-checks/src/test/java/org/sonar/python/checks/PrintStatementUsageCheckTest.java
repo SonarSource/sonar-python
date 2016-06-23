@@ -19,12 +19,11 @@
  */
 package org.sonar.python.checks;
 
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
-
-import java.io.File;
+import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
 public class PrintStatementUsageCheckTest {
 

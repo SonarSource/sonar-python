@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.google.common.collect.ImmutableList;
-
 import java.util.List;
 
 public final class CheckList {

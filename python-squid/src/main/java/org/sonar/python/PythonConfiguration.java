@@ -19,9 +19,8 @@
  */
 package org.sonar.python;
 
-import org.sonar.squidbridge.api.SquidConfiguration;
-
 import java.nio.charset.Charset;
+import org.sonar.squidbridge.api.SquidConfiguration;
 
 public class PythonConfiguration extends SquidConfiguration {
 

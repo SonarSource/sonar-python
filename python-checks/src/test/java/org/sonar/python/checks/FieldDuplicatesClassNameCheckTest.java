@@ -19,12 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.checks.CheckMessagesVerifier;
-
-import java.io.File;
 
 public class FieldDuplicatesClassNameCheckTest {
 

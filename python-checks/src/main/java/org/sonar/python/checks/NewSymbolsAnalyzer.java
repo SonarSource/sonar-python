@@ -22,10 +22,9 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
-import org.sonar.python.api.PythonGrammar;
-
 import java.util.LinkedList;
 import java.util.List;
+import org.sonar.python.api.PythonGrammar;
 
 public class NewSymbolsAnalyzer {
   private List<Token> symbols;

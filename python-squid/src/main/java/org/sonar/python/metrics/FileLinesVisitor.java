@@ -26,6 +26,8 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.List;
+import java.util.Set;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
@@ -34,9 +36,6 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.SquidAstVisitor;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES_DATA_KEY} metrics used by the DevCockpit.

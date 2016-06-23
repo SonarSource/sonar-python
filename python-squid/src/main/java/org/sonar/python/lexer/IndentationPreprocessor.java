@@ -25,10 +25,9 @@ import com.sonar.sslr.api.Preprocessor;
 import com.sonar.sslr.api.PreprocessorAction;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import org.sonar.python.api.PythonTokenType;
-
 import java.util.Collections;
 import java.util.List;
+import org.sonar.python.api.PythonTokenType;
 
 /**
  * http://docs.python.org/reference/lexical_analysis.html#indentation
