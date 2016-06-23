@@ -57,10 +57,10 @@ public class PylintReportParser {
     Issue issue = null;
 
     int linenr;
-    String ruleid = null;
-    String objname = null;
-    String descr = null;
-    String filename = null;
+    String ruleid;
+    String objname;
+    String descr;
+    String filename;
 
     if (line.length() > 0) {
       if (!isDetail(line)) {
@@ -91,7 +91,7 @@ public class PylintReportParser {
     return issue;
   }
 
-  private String ruleId(String ruleAndMessageIds) {
+  private static String ruleId(String ruleAndMessageIds) {
     String ruleid = ruleAndMessageIds;
     int parenthesisIndex = ruleid.indexOf('(');
     if (parenthesisIndex > -1) {
@@ -103,7 +103,7 @@ public class PylintReportParser {
     return ruleid;
   }
 
-  private boolean isDetail(String line) {
+  private static boolean isDetail(String line) {
     char first = line.charAt(0);
     return first == ' ' || first == '\t' || first == '\n';
   }

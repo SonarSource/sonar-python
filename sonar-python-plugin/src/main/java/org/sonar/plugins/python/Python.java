@@ -44,7 +44,7 @@ public class Python extends AbstractLanguage {
     return suffixes.length == 0 ? Python.DEFAULT_FILE_SUFFIXES : suffixes;
   }
 
-  private String[] filterEmptyStrings(String[] stringArray) {
+  private static String[] filterEmptyStrings(String[] stringArray) {
     List<String> nonEmptyStrings = Lists.newArrayList();
     for (String string : stringArray) {
       if (StringUtils.isNotBlank(string.trim())) {

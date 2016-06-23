@@ -119,7 +119,7 @@ public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isOnASingleLine(AstNode node) {
+  private static boolean isOnASingleLine(AstNode node) {
     return node.getTokenLine() == node.getLastToken().getLine();
   }
 

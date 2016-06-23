@@ -65,7 +65,7 @@ public class BackslashInStringCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isInPrefix(boolean wasInPrefix, char currentChar) {
+  private static boolean isInPrefix(boolean wasInPrefix, char currentChar) {
     return wasInPrefix && currentChar != '"' && currentChar != '\'';
   }
 

@@ -75,7 +75,7 @@ public class HardcodedIPCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isMultilineString(String string) {
+  private static boolean isMultilineString(String string) {
     return string.endsWith("'''") || string.endsWith("\"\"\"");
   }
 }

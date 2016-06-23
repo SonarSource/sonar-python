@@ -106,7 +106,7 @@ public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Gra
     }
   }
 
-  private List<Token> getForCounterNames(AstNode suite) {
+  private static List<Token> getForCounterNames(AstNode suite) {
     List<AstNode> forStatements = suite.getDescendants(PythonGrammar.FOR_STMT);
     List<Token> result = new LinkedList<>();
     for (AstNode forStatement : forStatements){

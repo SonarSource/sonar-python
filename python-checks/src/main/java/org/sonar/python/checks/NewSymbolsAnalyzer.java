@@ -51,7 +51,7 @@ public class NewSymbolsAnalyzer {
     }
   }
 
-  private List<AstNode> getTestsFromLongAssignmentExpression(AstNode expression) {
+  private static List<AstNode> getTestsFromLongAssignmentExpression(AstNode expression) {
     List<AstNode> assignedExpressions = expression.getChildren(PythonGrammar.TESTLIST_STAR_EXPR);
     assignedExpressions.remove(assignedExpressions.size() - 1);
     List<AstNode> tests = new LinkedList<>();

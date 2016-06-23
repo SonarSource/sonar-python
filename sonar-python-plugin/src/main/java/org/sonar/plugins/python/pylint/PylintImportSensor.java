@@ -142,7 +142,7 @@ public class PylintImportSensor extends PythonReportSensor {
     }
   }
 
-  private void addIssue(Issue pylintIssue, ActiveRule rule, @Nullable Issuable issuable) {
+  private static void addIssue(Issue pylintIssue, ActiveRule rule, @Nullable Issuable issuable) {
     if (issuable != null) {
       org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
           .ruleKey(rule.ruleKey())

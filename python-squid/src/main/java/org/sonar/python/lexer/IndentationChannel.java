@@ -78,15 +78,15 @@ public class IndentationChannel extends Channel<Lexer> {
     return buffer.length() != 0;
   }
 
-  private int countTabReplacer(int indentationLevel) {
+  private static int countTabReplacer(int indentationLevel) {
     return 8-indentationLevel%8;
   }
 
-  private boolean isWhiteSpace(char ch) {
+  private static boolean isWhiteSpace(char ch) {
     return (ch == ' ') || (ch == '\t');
   }
 
-  private boolean isBlankLine(char ch) {
+  private static boolean isBlankLine(char ch) {
     return (ch == '\n') || (ch == '\r') || (ch == '#') || (ch == (char) -1);
   }
 

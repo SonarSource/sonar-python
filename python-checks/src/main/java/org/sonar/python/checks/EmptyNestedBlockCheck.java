@@ -75,12 +75,12 @@ public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isInExcept(AstNode suiteNode) {
+  private static boolean isInExcept(AstNode suiteNode) {
     return suiteNode.getParent().is(PythonGrammar.TRY_STMT)
       && suiteNode.getPreviousSibling().getPreviousSibling().is(PythonGrammar.EXCEPT_CLAUSE);
   }
 
-  private boolean containsComment(AstNode suiteNode) {
+  private static boolean containsComment(AstNode suiteNode) {
     for (Token token : suiteNode.getTokens()) {
       for (Trivia trivia : token.getTrivia()) {
         if (trivia.isComment()) {

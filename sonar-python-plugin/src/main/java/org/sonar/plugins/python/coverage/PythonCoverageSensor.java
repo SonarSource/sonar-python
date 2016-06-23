@@ -196,7 +196,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
 
   private Map<String, CoverageMeasuresBuilder> parseReports(List<File> reports) {
-    Map<String, CoverageMeasuresBuilder> coverageMeasures = new HashMap<String, CoverageMeasuresBuilder>();
+    Map<String, CoverageMeasuresBuilder> coverageMeasures = new HashMap<>();
     for (File report : reports) {
       try {
         parser.parseReport(report, coverageMeasures);
@@ -265,7 +265,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
     return itMeasure;
   }
 
-  private Measure convertForOverall(Measure measure) {
+  private static Measure convertForOverall(Measure measure) {
     Measure overallMeasure = null;
     String data = measure.getData();
     if (CoreMetrics.LINES_TO_COVER.equals(measure.getMetric())) {
@@ -290,7 +290,7 @@ public class PythonCoverageSensor extends PythonReportSensor {
     return overallMeasure;
   }
 
-  private void checkDataIsNotNull(@Nullable String data) {
+  private static void checkDataIsNotNull(@Nullable String data) {
     if (data == null) {
       throw new IllegalStateException("Measure data is null but it shouldn't be");
     }

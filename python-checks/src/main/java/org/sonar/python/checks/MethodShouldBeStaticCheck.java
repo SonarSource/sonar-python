@@ -59,7 +59,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean hasValuableCode(AstNode funcDef) {
+  private static boolean hasValuableCode(AstNode funcDef) {
     AstNode statementList = funcDef.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STMT_LIST);
     if (statementList != null && statementList.getChildren(PythonGrammar.SIMPLE_STMT).size() == 1) {
       return !statementList.getFirstChild(PythonGrammar.SIMPLE_STMT).getFirstChild().is(PythonGrammar.PASS_STMT);
@@ -74,15 +74,15 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
 
   }
 
-  private boolean isDocstringOrPass(AstNode statement) {
+  private static boolean isDocstringOrPass(AstNode statement) {
     return statement.getFirstDescendant(PythonGrammar.PASS_STMT) != null || statement.getToken().getType().equals(PythonTokenType.STRING);
   }
 
-  private boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
+  private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
     return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
   }
 
-  private boolean isUsed(AstNode funcDef, String self) {
+  private static boolean isUsed(AstNode funcDef, String self) {
     List<AstNode> names = funcDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.NAME);
     for (AstNode name : names){
       if (name.getTokenValue().equals(self)){
@@ -92,7 +92,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
     return false;
   }
 
-  private String getFirstArgument(AstNode funcDef) {
+  private static String getFirstArgument(AstNode funcDef) {
     AstNode argList = funcDef.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (argList != null){
       return argList.getFirstDescendant(PythonGrammar.NAME).getTokenValue();
@@ -101,7 +101,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean alreadyStaticMethod(AstNode funcDef) {
+  private static boolean alreadyStaticMethod(AstNode funcDef) {
     AstNode decorators = funcDef.getFirstChild(PythonGrammar.DECORATORS);
     if (decorators != null){
       List<AstNode> decoratorList = decorators.getChildren(PythonGrammar.DECORATOR);

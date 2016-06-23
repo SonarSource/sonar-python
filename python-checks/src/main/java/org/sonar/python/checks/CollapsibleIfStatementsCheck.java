@@ -59,11 +59,11 @@ public class CollapsibleIfStatementsCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean hasElseOrElif(AstNode ifNode) {
+  private static boolean hasElseOrElif(AstNode ifNode) {
     return ifNode.hasDirectChildren(PythonKeyword.ELIF) || ifNode.hasDirectChildren(PythonKeyword.ELSE);
   }
 
-  private AstNode singleIfChild(AstNode suite) {
+  private static AstNode singleIfChild(AstNode suite) {
     List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
     if (statements.size() == 1) {
       AstSelect nestedIf = statements.get(0).select()

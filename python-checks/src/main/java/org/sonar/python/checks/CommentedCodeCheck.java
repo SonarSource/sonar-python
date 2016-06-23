@@ -89,7 +89,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
 
   }
 
-  private boolean isMultilineComment(AstNode node) {
+  private static boolean isMultilineComment(AstNode node) {
     String str = node.getTokenValue();
     AstNode expressionStatement = node.getFirstAncestor(PythonGrammar.EXPRESSION_STMT);
     return (str.endsWith("'''") || str.endsWith("\"\"\"")) && expressionStatement != null && expressionStatement.getNumberOfChildren() == 1;
@@ -105,7 +105,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     }
   }
 
-  private String getTextForParsing(List<Trivia> triviaGroup) {
+  private static String getTextForParsing(List<Trivia> triviaGroup) {
     StringBuilder commentTextSB = new StringBuilder();
     for (Trivia trivia : triviaGroup) {
       String value = trivia.getToken().getValue();
@@ -126,15 +126,15 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     return commentTextSB.toString();
   }
 
-  private boolean isOneWord(String text) {
+  private static boolean isOneWord(String text) {
     return text.matches("\\s*[\\w/\\-]+\\s*#*\n*");
   }
 
-  private boolean isEmpty(String text) {
+  private static boolean isEmpty(String text) {
     return text.matches("\\s*");
   }
 
-  private boolean isTextParsedAsCode(String text) {
+  private static boolean isTextParsedAsCode(String text) {
     try {
       AstNode astNode = parser.parse(text);
       List<AstNode> expressions = astNode.getDescendants(PythonGrammar.EXPRESSION_STMT);
@@ -144,11 +144,11 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     }
   }
 
-  private boolean isSimpleExpression(List<AstNode> expressions) {
+  private static boolean isSimpleExpression(List<AstNode> expressions) {
     return expressions.size() == 1 && expressions.get(0).getNumberOfChildren() == 1 && expressions.get(0).getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR);
   }
 
-  private List<List<Trivia>> groupTrivias(Token token) {
+  private static List<List<Trivia>> groupTrivias(Token token) {
     List<List<Trivia>> result = new LinkedList<>();
     List<Trivia> currentGroup = null;
     for (Trivia trivia : token.getTrivia()) {
@@ -160,7 +160,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     return result;
   }
 
-  private List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {
+  private static List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {
     List<Trivia> newTriviaGroup = currentGroup;
     if (currentGroup == null) {
       newTriviaGroup = new LinkedList<>();

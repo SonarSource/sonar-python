@@ -63,11 +63,11 @@ public class ReturnAndYieldInOneFunctionCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean returnHasArgument(AstNode returnStatement) {
+  private static boolean returnHasArgument(AstNode returnStatement) {
     return returnStatement.getFirstChild(PythonGrammar.TESTLIST) != null;
   }
 
-  private boolean allInNestedFunction(List<AstNode> statements, AstNode func) {
+  private static boolean allInNestedFunction(List<AstNode> statements, AstNode func) {
     for (AstNode statement : statements){
       if (CheckUtils.insideFunction(statement, func)){
         return false;
