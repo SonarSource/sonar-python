@@ -24,13 +24,17 @@ import com.sonar.sslr.api.Grammar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.Checks;
+import org.sonar.api.batch.sensor.issue.NewIssue;
+import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
@@ -41,6 +45,9 @@ import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.python.PythonAstScanner;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheck.IssueLocation;
+import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.checks.CheckList;
@@ -93,8 +100,47 @@ public final class PythonSquidSensor implements Sensor {
     scanner.scanFiles(Lists.newArrayList(fileSystem.files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
+    savePreciseIssues(
+      visitors
+        .stream()
+        .filter(v -> v instanceof PythonCheck)
+        .map(v -> (PythonCheck) v)
+        .collect(Collectors.toList()),
+      context);
     save(squidSourceFiles);
   }
+
+  // fixme (Lena): unit test it with new Sensor API
+  private void savePreciseIssues(List<PythonCheck> pythonChecks, SensorContext context) {
+    for (PythonCheck pythonCheck : pythonChecks) {
+      RuleKey ruleKey = checks.ruleKey(pythonCheck);
+      for (PreciseIssue preciseIssue : pythonCheck.getIssues()) {
+        InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(preciseIssue.file()));
+
+        NewIssue newIssue = context
+          .newIssue()
+          .forRule(ruleKey);
+
+        newIssue.at(newLocation(inputFile, newIssue, preciseIssue.primaryLocation()));
+        newIssue.save();
+      }
+    }
+  }
+
+  private static NewIssueLocation newLocation(InputFile inputFile, NewIssue issue, IssueLocation location) {
+    TextRange range = inputFile.newRange(
+      location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+
+    NewIssueLocation newLocation = issue.newLocation()
+      .on(inputFile)
+      .at(range);
+
+    if (location.message() != null) {
+      newLocation.message(location.message());
+    }
+    return newLocation;
+  }
+
 
   private PythonConfiguration createConfiguration() {
     return new PythonConfiguration(fileSystem.encoding());
