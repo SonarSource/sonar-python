@@ -38,7 +38,8 @@ public class PythonCheckTest {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitNode(AstNode astNode) {
-        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message");
+        AstNode funcName = astNode.getFirstChild(PythonGrammar.FUNCNAME);
+        addIssue(funcName, funcName.getTokenValue());
       }
     };
 
@@ -54,7 +55,7 @@ public class PythonCheckTest {
     assertThat(firstIssue.secondaryLocations()).isEmpty();
 
     IssueLocation primaryLocation = firstIssue.primaryLocation();
-    assertThat(primaryLocation.message()).isEqualTo("message");
+    assertThat(primaryLocation.message()).isEqualTo("hello");
 
     assertThat(primaryLocation.startLine()).isEqualTo(1);
     assertThat(primaryLocation.endLine()).isEqualTo(1);
@@ -82,9 +83,13 @@ public class PythonCheckTest {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitNode(AstNode astNode) {
-        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message")
-          .secondary(astNode.getFirstChild(), "def keyword")
-          .secondary(astNode.getFirstDescendant(PythonGrammar.RETURN_STMT), "return statement");
+        PreciseIssue issue = addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message")
+          .secondary(astNode.getFirstChild(), "def keyword");
+
+        AstNode returnStmt = astNode.getFirstDescendant(PythonGrammar.RETURN_STMT);
+        if (returnStmt != null) {
+          issue.secondary(returnStmt, "return statement");
+        }
       }
     };
 

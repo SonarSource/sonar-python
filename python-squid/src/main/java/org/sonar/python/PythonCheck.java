@@ -22,6 +22,7 @@ package org.sonar.python;
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Token;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,9 +88,13 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     private AstNode node;
     private String message;
 
+    private int endLine;
+    private int endColumn;
+
     public IssueLocation(AstNode node, String message) {
       this.node = node;
       this.message = message;
+      calculateEndOffsets();
     }
 
     public String message() {
@@ -105,11 +110,23 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     }
 
     public int endLine() {
-      return node.getLastToken().getLine();
+      return endLine;
     }
 
     public int endLineOffset() {
-      return node.getLastToken().getColumn() + node.getLastToken().getValue().length();
+      return endColumn;
+    }
+
+    private void calculateEndOffsets() {
+      Token lastToken = node.getLastToken();
+      String value = lastToken.getValue();
+      String[] lines = value.split("\r\n|\n|\r", -1);
+      endColumn = lastToken.getColumn() + value.length();
+      endLine = lastToken.getLine() + lines.length - 1;
+
+      if (endLine != lastToken.getLine()) {
+        endColumn = lines[lines.length - 1].length();
+      }
     }
   }
 }
