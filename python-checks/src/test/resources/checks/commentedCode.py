@@ -1,6 +1,10 @@
+# Noncompliant@+2 {{Remove this commented out code.}} [[sc=0;el=+0;ec=9]]
+
 # x += 1
 
 x = 1
+
+# Noncompliant@+2
 
 # if x != 2:
 #     print('Hello!')
@@ -57,12 +61,16 @@ print("x is 4")
 # IBuildRequestStatus
 # ISlaveStatus
 
+# Noncompliant@+2
+
 #     return a
 
+# Noncompliant@+1
 u'''
 return a
 '''
 
+# Noncompliant@+1 [[sc=1;ec=4;el=+2]]
 '''
 return a
 '''

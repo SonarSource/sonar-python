@@ -31,13 +31,13 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = CommentedCodeCheck.CHECK_KEY,
@@ -47,7 +47,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
+public class CommentedCodeCheck extends PythonCheck implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
@@ -84,7 +84,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     String text = value.substring(startStringContent, endStringContent);
     text = text.trim();
     if (!isEmpty(text) && isTextParsedAsCode(text)) {
-      getContext().createLineViolation(this, MESSAGE, token);
+      addIssue(new AstNode(token), MESSAGE);
     }
 
   }
@@ -101,7 +101,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
       return;
     }
     if (isTextParsedAsCode(text)) {
-      getContext().createLineViolation(this, MESSAGE, triviaGroup.get(0).getToken());
+      addIssue(new AstNode(triviaGroup.get(0).getToken()), MESSAGE);
     }
   }
 
