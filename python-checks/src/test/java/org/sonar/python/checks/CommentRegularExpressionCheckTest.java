@@ -21,9 +21,7 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CommentRegularExpressionCheckTest {
 
@@ -34,10 +32,7 @@ public class CommentRegularExpressionCheckTest {
     check.regularExpression = "(?i).*TODO.*";
     check.message = "Avoid TODO";
 
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/commentRegularExpression.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Avoid TODO")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/commentRegularExpression.py"), check);
   }
 
 }

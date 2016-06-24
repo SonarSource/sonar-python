@@ -19,13 +19,18 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Grammar;
+import com.google.common.base.Strings;
+import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
+import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.NoSqale;
 import org.sonar.squidbridge.annotations.RuleTemplate;
-import org.sonar.squidbridge.checks.AbstractCommentRegularExpressionCheck;
 
 @Rule(
     key = CommentRegularExpressionCheck.CHECK_KEY,
@@ -34,10 +39,12 @@ import org.sonar.squidbridge.checks.AbstractCommentRegularExpressionCheck;
 )
 @NoSqale
 @RuleTemplate
-public class CommentRegularExpressionCheck extends AbstractCommentRegularExpressionCheck<Grammar> {
+public class CommentRegularExpressionCheck extends PythonCheck implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "CommentRegularExpression";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
+
+  private Pattern pattern = null;
 
   @RuleProperty(
     key = "regularExpression",
@@ -50,13 +57,25 @@ public class CommentRegularExpressionCheck extends AbstractCommentRegularExpress
   public String message = DEFAULT_MESSAGE;
 
   @Override
-  public String getRegularExpression() {
-    return regularExpression;
+  public void init() {
+    if (!Strings.isNullOrEmpty(regularExpression)) {
+      try {
+        pattern = Pattern.compile(regularExpression, Pattern.DOTALL);
+      } catch (RuntimeException e) {
+        throw new IllegalStateException("Unable to compile regular expression: " + regularExpression, e);
+      }
+    }
   }
 
   @Override
-  public String getMessage() {
-    return message;
+  public void visitToken(Token token) {
+    if (pattern != null) {
+      for (Trivia trivia : token.getTrivia()) {
+        if (trivia.isComment() && pattern.matcher(trivia.getToken().getOriginalValue()).matches()) {
+          addIssue(new AstNode(trivia.getToken()), message);
+        }
+      }
+    }
   }
 
 }
