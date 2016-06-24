@@ -21,19 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class TrailingCommentCheckTest {
 
   @Test
   public void test() {
     TrailingCommentCheck check = new TrailingCommentCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/trailingComment.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(2).withMessage("Move this trailing comment on the previous empty line.")
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/trailingComment.py"), check);
   }
 
 }
