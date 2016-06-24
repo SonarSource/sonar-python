@@ -21,23 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class FixmeCommentCheckTest {
-
-  private static final String message = "Take the required action to fix the issue indicated by this \"FIXME\" comment.";
 
   @Test
   public void test() {
     FixmeCommentCheck check = new FixmeCommentCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/fixmeComment.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(2).withMessage(message)
-      .next().atLine(4).withMessage(message)
-      .next().atLine(8).withMessage(message)
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/fixmeComment.py"), check);
   }
 
 }
