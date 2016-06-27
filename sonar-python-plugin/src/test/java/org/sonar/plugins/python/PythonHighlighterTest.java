@@ -41,11 +41,13 @@ public class PythonHighlighterTest {
   @Before
   @SuppressWarnings("unchecked")
   public void scanFile() {
-    file = new File("src/test/resources/org/sonar/plugins/python/highlighting.py");
+    String dir = "src/test/resources/org/sonar/plugins/python";
+    
+    file = new File(dir + "/highlighting.py");
     DefaultInputFile inputFile = new DefaultInputFile("moduleKey", file.getName())
       .initMetadata(new FileMetadata().readMetadata(file, Charsets.UTF_8));
     
-    context = SensorContextTester.create(new File("src/test/resources/org/sonar/plugins/python").getAbsoluteFile());
+    context = SensorContextTester.create(new File(dir));
     context.fileSystem().add(inputFile);
     
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context);
@@ -54,66 +56,72 @@ public class PythonHighlighterTest {
 
   @Test
   public void keyword_def() throws Exception {
-    List<TypeOfText> typeOfTexts = getTypesOfText(1, 1, 1);
-
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.KEYWORD);
+    checkOnRange(1, 0, 3, TypeOfText.KEYWORD);
   }
 
   @Test
   public void keyword_four() throws Exception {
-    List<TypeOfText> typeOfTexts;
-    
     // if
-    typeOfTexts = getTypesOfText(12, 1, 1);
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.KEYWORD);
+    checkOnRange(12, 0, 2, TypeOfText.KEYWORD);
     
     // or
-    typeOfTexts = getTypesOfText(12, 13, 1);
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.KEYWORD);
+    checkOnRange(12, 12, 2, TypeOfText.KEYWORD);
     
     // or
-    typeOfTexts = getTypesOfText(12, 25, 1);
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.KEYWORD);
+    checkOnRange(12, 24, 2, TypeOfText.KEYWORD);
     
     // continue
-    typeOfTexts = getTypesOfText(12, 38, 1);
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.KEYWORD);
+    checkOnRange(12, 37, 8, TypeOfText.KEYWORD);
   }
   
   @Test
   public void keyword_pass() throws Exception {
-    List<TypeOfText> typeOfTexts = getTypesOfText(2, 4, 1);
-    
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.KEYWORD);
+    checkOnRange(2, 4, 4, TypeOfText.KEYWORD);
   }
   
   @Test
   public void string_literal() throws Exception {
-    List<TypeOfText> typeOfTexts = getTypesOfText(4, 5, 1);
-    
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.STRING);
+    checkOnRange(4, 4, 8, TypeOfText.STRING);
   }
   
   @Test
   public void comment() throws Exception {
-    List<TypeOfText> typeOfTexts = getTypesOfText(6, 6, 1);
-    
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.COMMENT);
+    checkOnRange(6, 0, 19, TypeOfText.COMMENT);
   }
   
   @Test
   public void comment_misplaced() throws Exception {
-    List<TypeOfText> typeOfTexts = getTypesOfText(9, 18, 1);
-    
-    assertThat(typeOfTexts.get(0)).isEqualTo(TypeOfText.COMMENT);
+    checkOnRange(9, 10, 19, TypeOfText.COMMENT);
   }
   
-  private List<TypeOfText>  getTypesOfText(int line, int column, int expectedSize) {
-    List<TypeOfText> typeOfTexts = context.highlightingTypeAt("moduleKey:" + file.getName(), line, column);
-
-    assertThat(typeOfTexts).as("types of text").hasSize(1);
+  /**
+   * Checks the highlighting on a range of columns.
+   * The range is the columns of the token. 
+   */
+  private void checkOnRange(int line, int firstColumn, int length, TypeOfText expectedTypeOfText) {
+    String componentKey = "moduleKey:" + file.getName();
     
-    return typeOfTexts;
+    // check that every column of the token is highlighted (and with the expected type)
+    for (int column = firstColumn; column < firstColumn + length; column++) {
+      List<TypeOfText> foundTypeOfTexts = context.highlightingTypeAt(componentKey, line, column);
+      String name = "number of TypeOfTexts at line " + line + " and column " + column;
+      assertThat(foundTypeOfTexts).as(name).hasSize(1);
+      assertThat(foundTypeOfTexts.get(0)).isEqualTo(expectedTypeOfText);
+    }
+    
+    // check that the column before the token is not highlighted
+    if (firstColumn != 1) {
+      int column = firstColumn - 1;
+      List<TypeOfText> foundTypeOfTexts = context.highlightingTypeAt(componentKey, line, column);
+      String name = "number of TypeOfTexts at line " + line + " and column " + column + " (= before the token)";
+      assertThat(foundTypeOfTexts).as(name).hasSize(0);
+    }
+    
+    // check that the column after the token is not highlighted
+    int column = firstColumn + length;
+    List<TypeOfText> foundTypeOfTexts = context.highlightingTypeAt(componentKey, line, column);
+    String name = "number of TypeOfTexts at line " + line + " and column " + column + " (= after the token)";
+    assertThat(foundTypeOfTexts).as(name).hasSize(0);
   }
   
 }
