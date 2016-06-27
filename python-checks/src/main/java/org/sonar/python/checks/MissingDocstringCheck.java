@@ -20,16 +20,15 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = MissingDocstringCheck.CHECK_KEY,
@@ -37,13 +36,26 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "Docstrings should be defined"
 )
 @SqaleConstantRemediation("5min")
-public class MissingDocstringCheck extends SquidCheck<Grammar> {
+public class MissingDocstringCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1720";
 
   private static final Pattern EMPTY_STRING_REGEXP = Pattern.compile("([bruBRU]+)?('\\s*')|(\"\\s*\")|('''\\s*''')|(\"\"\"\\s*\"\"\")");
   private static final String MESSAGE_NO_DOCSTRING = "Add a docstring to this %s.";
   private static final String MESSAGE_EMPTY_DOCSTRING = "The docstring for this %s should not be empty.";
+
+  private enum DeclarationType {
+    MODULE("module"),
+    CLASS("class"),
+    METHOD("method"),
+    FUNCTION("function");
+
+    private final String value;
+
+    DeclarationType(String value) {
+      this.value = value;
+    }
+  }
 
   @Override
   public void init() {
@@ -69,23 +81,23 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     if (firstStatement != null) {
       firstSimpleStmt = firstSimpleStmt(firstStatement);
     }
-    checkSimpleStmt(astNode, firstSimpleStmt, "module");
+    checkSimpleStmt(astNode, firstSimpleStmt, DeclarationType.MODULE);
   }
 
   private void visitClassDef(AstNode astNode) {
-    checkFirstSuite(astNode, "class");
+    checkFirstSuite(astNode, DeclarationType.CLASS);
   }
 
   private void visitFuncDef(AstNode astNode) {
     // on methods we check only empty docstrings to avoid false positives on overriding methods
     if (!CheckUtils.isMethodDefinition(astNode)) {
-      checkFirstSuite(astNode, "function");
+      checkFirstSuite(astNode, DeclarationType.FUNCTION);
     } else {
-      checkFirstSuite(astNode, "method");
+      checkFirstSuite(astNode, DeclarationType.METHOD);
     }
   }
 
-  private void checkFirstSuite(AstNode astNode, String typeName) {
+  private void checkFirstSuite(AstNode astNode, DeclarationType type) {
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     AstNode firstStatement = suite.getFirstChild(PythonGrammar.STATEMENT);
     AstNode firstSimpleStmt;
@@ -96,31 +108,44 @@ public class MissingDocstringCheck extends SquidCheck<Grammar> {
     } else {
       firstSimpleStmt = firstSimpleStmt(firstStatement);
     }
-    checkSimpleStmt(astNode, firstSimpleStmt, typeName);
+    checkSimpleStmt(astNode, firstSimpleStmt, type);
   }
 
-  private void checkSimpleStmt(AstNode astNode, @Nullable AstNode firstSimpleStmt, String typeName) {
+  private void checkSimpleStmt(AstNode astNode, @Nullable AstNode firstSimpleStmt, DeclarationType type) {
     if (firstSimpleStmt != null) {
-      visitFirstStatement(astNode, firstSimpleStmt, typeName);
+      visitFirstStatement(astNode, firstSimpleStmt, type);
     } else {
-      raiseIssueNoDocstring(astNode, typeName);
+      raiseIssueNoDocstring(astNode, type);
     }
   }
 
-  private void raiseIssueNoDocstring(AstNode astNode, String typeName) {
-    if (!"method".equals(typeName)) {
-      getContext().createLineViolation(this, String.format(MESSAGE_NO_DOCSTRING, typeName), astNode);
+  private void raiseIssueNoDocstring(AstNode astNode, DeclarationType type) {
+    if (type != DeclarationType.METHOD) {
+      raiseIssue(astNode, MESSAGE_NO_DOCSTRING, type);
     }
   }
 
-  private void visitFirstStatement(AstNode astNode, AstNode firstSimpleStmt, String typeName) {
+  private void raiseIssue(AstNode astNode, String message, DeclarationType type) {
+    String finalMessage = String.format(message, type.value);
+    if (type != DeclarationType.MODULE) {
+      addIssue(getNameNode(astNode), finalMessage);
+    } else {
+      getContext().createFileViolation(this, finalMessage);
+    }
+  }
+
+  private static AstNode getNameNode(AstNode astNode) {
+    return astNode.getFirstChild(PythonGrammar.FUNCNAME, PythonGrammar.CLASSNAME);
+  }
+
+  private void visitFirstStatement(AstNode astNode, AstNode firstSimpleStmt, DeclarationType type) {
     Token token = firstSimpleStmt.getToken();
     if (token.getType().equals(PythonTokenType.STRING)){
       if (EMPTY_STRING_REGEXP.matcher(token.getValue()).matches()){
-        getContext().createLineViolation(this, String.format(MESSAGE_EMPTY_DOCSTRING, typeName), astNode);
+        raiseIssue(astNode, MESSAGE_EMPTY_DOCSTRING, type);
       }
     } else {
-      raiseIssueNoDocstring(astNode, typeName);
+      raiseIssueNoDocstring(astNode, type);
     }
   }
 
