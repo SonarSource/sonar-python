@@ -43,6 +43,10 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     return newIssue;
   }
 
+  protected final PreciseIssue addIssue(Token token, String message) {
+    return addIssue(new AstNode(token), message);
+  }
+
   public static class PreciseIssue {
 
     private File file;

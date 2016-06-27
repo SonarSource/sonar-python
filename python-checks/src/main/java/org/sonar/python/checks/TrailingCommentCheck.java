@@ -62,7 +62,7 @@ public class TrailingCommentCheck extends PythonCheck implements AstAndTokenVisi
       if (trivia.getToken().getLine() == previousTokenLine) {
         String comment = trivia.getToken().getValue();
         if (!pattern.matcher(comment).matches()) {
-          addIssue(new AstNode(trivia.getToken()), MESSAGE);
+          addIssue(trivia.getToken(), MESSAGE);
         }
       }
     }

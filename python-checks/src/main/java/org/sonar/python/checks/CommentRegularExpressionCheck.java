@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.google.common.base.Strings;
 import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
@@ -72,7 +71,7 @@ public class CommentRegularExpressionCheck extends PythonCheck implements AstAnd
     if (pattern != null) {
       for (Trivia trivia : token.getTrivia()) {
         if (trivia.isComment() && pattern.matcher(trivia.getToken().getOriginalValue()).matches()) {
-          addIssue(new AstNode(trivia.getToken()), message);
+          addIssue(trivia.getToken(), message);
         }
       }
     }

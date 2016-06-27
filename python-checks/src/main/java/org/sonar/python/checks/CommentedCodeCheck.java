@@ -84,7 +84,7 @@ public class CommentedCodeCheck extends PythonCheck implements AstAndTokenVisito
     String text = value.substring(startStringContent, endStringContent);
     text = text.trim();
     if (!isEmpty(text) && isTextParsedAsCode(text)) {
-      addIssue(new AstNode(token), MESSAGE);
+      addIssue(token, MESSAGE);
     }
 
   }
@@ -101,7 +101,7 @@ public class CommentedCodeCheck extends PythonCheck implements AstAndTokenVisito
       return;
     }
     if (isTextParsedAsCode(text)) {
-      addIssue(new AstNode(triviaGroup.get(0).getToken()), MESSAGE);
+      addIssue(triviaGroup.get(0).getToken(), MESSAGE);
     }
   }
 

@@ -73,7 +73,7 @@ public class NoPersonReferenceInTodoCheck extends PythonCheck implements AstAndT
     if (matcher.find()) {
       String tail = comment.substring(matcher.end());
       if (!patternPersonReference.matcher(tail).find()) {
-        addIssue(new AstNode(trivia.getToken()), MESSAGE);
+        addIssue(trivia.getToken(), MESSAGE);
       }
     }
   }

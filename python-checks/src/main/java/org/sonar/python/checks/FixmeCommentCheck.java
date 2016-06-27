@@ -55,7 +55,7 @@ public class FixmeCommentCheck extends PythonCheck implements AstAndTokenVisitor
     for (Trivia trivia : token.getTrivia()) {
       String comment = trivia.getToken().getValue();
       if (pattern.matcher(comment).matches()) {
-        addIssue(new AstNode(trivia.getToken()), MESSAGE);
+        addIssue(trivia.getToken(), MESSAGE);
       }
     }
   }
