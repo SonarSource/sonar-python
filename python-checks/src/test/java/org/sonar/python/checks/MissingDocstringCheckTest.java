@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.io.File;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -36,13 +35,11 @@ public class MissingDocstringCheckTest {
     PythonCheckVerifier.verify(new File("src/test/resources/checks/missingDocstring.py"), check);
   }
 
-  @Ignore
   @Test
   public void testMissingDocStringAtModuleLevel() {
     PythonCheckVerifier.verify(new File("src/test/resources/checks/missingDocstringAtModuleLevel.py"), check);
   }
 
-  @Ignore
   @Test
   public void testEmptyModule() throws Exception {
     testMissingDocStringAtModuleLevel("emptyModule.py");
