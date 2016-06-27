@@ -25,7 +25,6 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.colorizer.PythonColorizer;
-import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
@@ -64,8 +63,8 @@ public class PythonPlugin extends SonarPlugin {
         PylintImportSensor.class,
         PylintRuleRepository.class,
 
-        PythonXUnitSensor.class,
-        PythonCoverageSensor.class);
+        PythonXUnitSensor.class
+    );
   }
 
 }

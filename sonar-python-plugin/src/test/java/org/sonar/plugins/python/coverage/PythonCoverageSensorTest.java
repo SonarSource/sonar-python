@@ -19,123 +19,144 @@
  */
 package org.sonar.plugins.python.coverage;
 
+import com.google.common.collect.ImmutableSet;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.sensor.coverage.CoverageType;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Settings;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
-import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Resource;
-import org.sonar.plugins.python.Python;
+import org.sonar.api.internal.google.common.base.Charsets;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class PythonCoverageSensorTest {
-  PythonCoverageSensor sensor;
-  SensorContext context;
-  Project project;
-  Settings settings;
-  DefaultFileSystem fs;
 
-  DefaultInputFile fileWithConditionCoverage, fileWithoutConditionCoverage, fileWithoutCoverageInfo;
+
+  private final String FILE1_KEY = "moduleKey:sources/file1.py";
+  private final String FILE2_KEY = "moduleKey:sources/file2.py";
+  private final String FILE3_KEY = "moduleKey:sources/file3.py";
+  private SensorContextTester context;
+  private Settings settings;
+  private Map<InputFile, Set<Integer>> linesOfCode;
+
+  private PythonCoverageSensor coverageSensor = new PythonCoverageSensor();
+  private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports");
 
   @Before
-  public void setUp() {
-    project = mock(Project.class);
+  public void init() {
     settings = new Settings();
-    fs = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python"));
-    fileWithConditionCoverage = getInputFile("sources/file2.py");
-    fileWithoutConditionCoverage = getInputFile("sources/file1.py");
-    fileWithoutCoverageInfo = getInputFile("sources/file3.py");
-    fs.add(fileWithConditionCoverage);
-    fs.add(fileWithoutConditionCoverage);
-    fs.add(fileWithoutCoverageInfo);
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.xml");
+    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage.xml");
+    settings.setProperty(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY, "coverage.xml");
+    context = SensorContextTester.create(moduleBaseDir);
+    context.setSettings(settings);
 
-    context = mock(SensorContext.class);
-    Measure measure = new org.sonar.api.measures.Measure();
-    measure.setValue(1.0);
-    when(context.getMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.NCLOC))).thenReturn(measure);
+    InputFile inputFile1 = inputFile("sources/file1.py", Type.MAIN);
+    InputFile inputFile2 = inputFile("sources/file2.py", Type.MAIN);
+    InputFile inputFile3 = inputFile("sources/file3.py", Type.MAIN);
+
+    linesOfCode = new HashMap<>();
+    linesOfCode.put(inputFile1, ImmutableSet.of(1, 4, 6));
+    linesOfCode.put(inputFile2, ImmutableSet.of(1, 2, 3, 4, 5, 6));
+    linesOfCode.put(inputFile3, ImmutableSet.of(1, 3));
+  }
+
+  private InputFile inputFile(String relativePath, Type type) {
+    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", relativePath)
+      .setModuleBaseDir(moduleBaseDir.toPath())
+      .setLanguage("py")
+      .setType(type);
+
+    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), Charsets.UTF_8));
+    context.fileSystem().add(inputFile);
+
+    return inputFile;
   }
 
   @Test
-  public void should_parse_ut_coverage_report() {
-    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/ut-coverage.xml");
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
-    verify(context, times(7)).saveMeasure(Mockito.eq(fileWithConditionCoverage), any(Measure.class));
-    verify(context, times(3)).saveMeasure(Mockito.eq(fileWithoutConditionCoverage), any(Measure.class));
-    verify(context, times(0)).saveMeasure(Mockito.eq(fileWithoutCoverageInfo), any(Measure.class));
+  public void report_not_found() throws Exception {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "/fake/path/report.xml");
+
+    coverageSensor.execute(context, linesOfCode);
+
+    // expected logged text: "No coverage information will be saved because all LCOV files cannot be found."
+    assertThat(context.lineHits("moduleKey:file1.js", CoverageType.UNIT, 1)).isNull();
   }
 
   @Test
-  public void should_parse_coverage_report_with_zeroing() {
-    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/ut-coverage.xml");
-    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, true);
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
-    // count lineHitsData
-    verify(context, times(9)).saveMeasure(Mockito.eq(fileWithConditionCoverage), any(Measure.class));
-    verify(context, times(5)).saveMeasure(Mockito.eq(fileWithoutConditionCoverage), any(Measure.class));
-    verify(context, times(3)).saveMeasure(Mockito.eq(fileWithoutCoverageInfo), any(Measure.class));
+  public void test_coverage() {
+    coverageSensor.execute(context, linesOfCode);
+    Integer[] file1Expected = {1, null, null, 0, null, 0};
+    Integer[] file2Expected = {1, 3, 1, 0, 1, 1};
+
+    for (int line = 1; line <= 6; line++) {
+      assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, line)).isEqualTo(file1Expected[line - 1]);
+      assertThat(context.lineHits(FILE1_KEY, CoverageType.IT, line)).isEqualTo(file1Expected[line - 1]);
+      assertThat(context.lineHits(FILE1_KEY, CoverageType.OVERALL, line)).isEqualTo(file1Expected[line - 1]);
+
+      assertThat(context.lineHits("moduleKey:sources/file2.py", CoverageType.UNIT, line)).isEqualTo(file2Expected[line - 1]);
+      assertThat(context.lineHits("moduleKey:sources/file2.py", CoverageType.IT, line)).isEqualTo(file2Expected[line - 1]);
+      assertThat(context.lineHits("moduleKey:sources/file2.py", CoverageType.OVERALL, line)).isEqualTo(file2Expected[line - 1]);
+
+      assertThat(context.lineHits(FILE3_KEY, CoverageType.UNIT, line)).isNull();
+      assertThat(context.lineHits(FILE3_KEY, CoverageType.IT, line)).isNull();
+      assertThat(context.lineHits(FILE3_KEY, CoverageType.OVERALL, line)).isNull();
+    }
+
+    assertThat(context.conditions(FILE2_KEY, CoverageType.UNIT, 2)).isNull();
+    assertThat(context.conditions(FILE2_KEY, CoverageType.UNIT, 3)).isEqualTo(2);
+    assertThat(context.coveredConditions(FILE2_KEY, CoverageType.UNIT, 3)).isEqualTo(1);
+  }
+  @Test
+  public void test_unresolved_path() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
+    coverageSensor.execute(context, linesOfCode);
+
+    assertThat(context.lineHits("moduleKey:sources/file1.py", CoverageType.UNIT, 1)).isEqualTo(1);
   }
 
   @Test
-  public void should_parse_it_coverage_report() {
-    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage-reports/it-coverage.xml");
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
-    verify(context, times(7)).saveMeasure(Mockito.eq(fileWithConditionCoverage), any(Measure.class));
-    verify(context, times(3)).saveMeasure(Mockito.eq(fileWithoutConditionCoverage), any(Measure.class));
-    verify(context, times(0)).saveMeasure(Mockito.eq(fileWithoutCoverageInfo), any(Measure.class));
+  public void test_force_zero_coverage_no_report() {
+    Settings newSettings = new Settings().setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
+    context.setSettings(newSettings);
+    coverageSensor.execute(context, linesOfCode);
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isEqualTo(0);
+    assertThat(context.lineHits(FILE3_KEY, CoverageType.UNIT, 1)).isEqualTo(0);
+
+    context.setSettings(newSettings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.xml"));
+    coverageSensor.execute(context, linesOfCode);
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isEqualTo(1);
+    assertThat(context.lineHits(FILE3_KEY, CoverageType.UNIT, 1)).isEqualTo(0);
   }
 
   @Test
-  public void should_parse_overall_coverage_report() {
-    settings.setProperty(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY, "coverage-reports/overall-coverage.xml");
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
-    verify(context, times(7)).saveMeasure(Mockito.eq(fileWithConditionCoverage), any(Measure.class));
-    verify(context, times(3)).saveMeasure(Mockito.eq(fileWithoutConditionCoverage), any(Measure.class));
-    verify(context, times(0)).saveMeasure(Mockito.eq(fileWithoutCoverageInfo), any(Measure.class));
+  public void test_force_zero_coverage_no_lines_of_code() throws Exception {
+    Settings newSettings = new Settings().setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
+    context.setSettings(newSettings);
+    coverageSensor.execute(context, new HashMap<>());
+    assertThat(context.lineHits("moduleKey:file1.js", CoverageType.UNIT, 1)).isNull();
   }
 
   @Test(expected = IllegalStateException.class)
-  public void shouldFailOnInvalidReport() {
-    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
-  }
-
-  @Test(expected = IllegalStateException.class)
-  public void shouldFailOnInvalidIntegrationReport() {
-    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage-reports/invalid-coverage-result.xml");
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
+  public void should_fail_on_invalid_report() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "invalid-coverage-result.xml");
+    coverageSensor.execute(context, linesOfCode);
   }
 
   @Test
   public void should_do_nothing_on_empty_report() {
-    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage-reports/empty-coverage-result.xml");
-    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage-reports/this-file-does-not-exist.xml");
-    sensor = new PythonCoverageSensor(settings, fs);
-    sensor.analyse(project, context);
-    verify(context, times(0)).saveMeasure(Mockito.eq(fileWithConditionCoverage), any(Measure.class));
-    verify(context, times(0)).saveMeasure(Mockito.eq(fileWithoutConditionCoverage), any(Measure.class));
-    verify(context, times(0)).saveMeasure(Mockito.eq(fileWithoutCoverageInfo), any(Measure.class));
-  }
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "empty-coverage-result.xml");
+    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "this-file-does-not-exist.xml");
+    coverageSensor.execute(context, linesOfCode);
 
-  private DefaultInputFile getInputFile(String path) {
-    DefaultInputFile file = new DefaultInputFile("", path);
-    file.setLanguage(Python.KEY).setLines(1);
-    return file;
+    assertThat(context.lineHits("moduleKey:file1.js", CoverageType.UNIT, 1)).isNull();
   }
 }

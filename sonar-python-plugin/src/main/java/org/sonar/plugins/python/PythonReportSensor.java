@@ -70,7 +70,7 @@ public abstract class PythonReportSensor implements Sensor {
     return getClass().getSimpleName();
   }
 
-  protected List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
+  public static List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
     String reportPath = conf.getString(reportPathPropertyKey);
     if (reportPath == null) {
       reportPath = defaultReportPath;

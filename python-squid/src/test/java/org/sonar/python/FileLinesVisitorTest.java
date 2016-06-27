@@ -22,7 +22,10 @@ package org.sonar.python;
 import com.sonar.sslr.api.Grammar;
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Set;
 import org.junit.Test;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
@@ -31,6 +34,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.squidbridge.SquidAstVisitor;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -52,9 +56,15 @@ public class FileLinesVisitorTest {
     fileSystem.add(inputFile);
     when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
 
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem);
+    HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
+    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode);
+
 
     PythonAstScanner.scanSingleFile(file, visitor);
+
+    assertThat(linesOfCode).hasSize(1);
+    assertThat(linesOfCode.get(inputFile)).containsOnly(2, 4);
+
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 0);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 2, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 0);

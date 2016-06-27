@@ -19,33 +19,30 @@
  */
 package org.sonar.plugins.python.coverage;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javax.annotation.Nullable;
+import javax.xml.stream.XMLStreamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
-import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.coverage.CoverageType;
+import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.config.Settings;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.CoverageMeasuresBuilder;
-import org.sonar.api.measures.Measure;
-import org.sonar.api.measures.Metric;
-import org.sonar.api.measures.PropertiesBuilder;
-import org.sonar.api.resources.Project;
 import org.sonar.plugins.python.EmptyReportException;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.PythonReportSensor;
 
-import javax.annotation.Nullable;
-import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.HashSet;
+import static org.sonar.plugins.python.PythonReportSensor.getReports;
 
 @Properties({
     @Property(
@@ -80,13 +77,9 @@ import java.util.HashSet;
         global = false,
         project = true)
 })
-public class PythonCoverageSensor extends PythonReportSensor {
+public class PythonCoverageSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonCoverageSensor.class);
-
-  private enum CoverageType {
-    UT_COVERAGE, IT_COVERAGE, OVERALL_COVERAGE
-  }
 
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
   public static final String IT_REPORT_PATH_KEY = "sonar.python.coverage.itReportPath";
@@ -98,108 +91,80 @@ public class PythonCoverageSensor extends PythonReportSensor {
 
   private CoberturaParser parser = new CoberturaParser();
 
-  public PythonCoverageSensor(Settings conf, FileSystem fileSystem) {
-    super(conf, fileSystem);
-  }
+  public void execute(SensorContext context, Map<InputFile, Set<Integer>> linesOfCode) {
+    String baseDir = context.fileSystem().baseDir().getPath();
+    Settings settings = context.settings();
 
-  @Override
-  public void analyse(Project project, SensorContext context) {
-    String baseDir = fileSystem.baseDir().getPath();
-
-    List<File> reports = getReports(conf, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
+    List<File> reports = getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     LOG.debug("Parsing coverage reports");
-    Map<String, CoverageMeasuresBuilder> coverageMeasures = parseReports(reports);
+    Map<InputFile, NewCoverage> coverageMeasures = parseReports(reports, context);
     HashSet filesCoveredByUT = new HashSet();
-    saveMeasures(context, coverageMeasures, filesCoveredByUT, CoverageType.UT_COVERAGE);
+    saveMeasures(coverageMeasures, filesCoveredByUT, CoverageType.UNIT);
 
     LOG.debug("Parsing integration test coverage reports");
-    List<File> itReports = getReports(conf, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
-    Map<String, CoverageMeasuresBuilder> itCoverageMeasures = parseReports(itReports);
+    List<File> itReports = getReports(settings, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
+    Map<InputFile, NewCoverage> itCoverageMeasures = parseReports(itReports, context);
     HashSet filesCoveredByIT = new HashSet();
-    saveMeasures(context, itCoverageMeasures, filesCoveredByIT, CoverageType.IT_COVERAGE);
+    saveMeasures(itCoverageMeasures, filesCoveredByIT, CoverageType.IT);
 
     LOG.debug("Parsing overall test coverage reports");
-    List<File> overallReports = getReports(conf, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
-    Map<String, CoverageMeasuresBuilder> overallCoverageMeasures = parseReports(overallReports);
+    List<File> overallReports = getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
+    Map<InputFile, NewCoverage> overallCoverageMeasures = parseReports(overallReports, context);
     HashSet filesCoveredOverall = new HashSet();
-    saveMeasures(context, overallCoverageMeasures, filesCoveredOverall, CoverageType.OVERALL_COVERAGE);
+    saveMeasures(overallCoverageMeasures, filesCoveredOverall, CoverageType.OVERALL);
 
-    if (conf.getBoolean(FORCE_ZERO_COVERAGE_KEY)) {
+    if (settings.getBoolean(FORCE_ZERO_COVERAGE_KEY)) {
       LOG.debug("Zeroing coverage information for untouched files");
 
-      zeroMeasuresWithoutReports(context, filesCoveredByUT, filesCoveredByIT, filesCoveredOverall);
+      zeroMeasuresWithoutReports(context, filesCoveredByUT, filesCoveredByIT, filesCoveredOverall, linesOfCode);
     }
   }
 
-  private void zeroMeasuresWithoutReports(SensorContext context,
-                                          HashSet filesCoveredByUT,
-                                          HashSet filesCoveredByIT,
-                                          HashSet filesCoveredOverall
-    ) {
+  private static void zeroMeasuresWithoutReports(
+    SensorContext context,
+    HashSet filesCoveredByUT,
+    HashSet filesCoveredByIT,
+    HashSet filesCoveredOverall,
+    Map<InputFile, Set<Integer>> linesOfCode
+  ) {
+    FileSystem fileSystem = context.fileSystem();
     FilePredicates p = fileSystem.predicates();
     Iterable<InputFile> inputFiles = fileSystem.inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
     for (InputFile inputFile : inputFiles) {
-      String filePath = inputFile.relativePath();
+      Set<Integer> linesOfCodeForFile = linesOfCode.get(inputFile);
 
-      if (!filesCoveredByUT.contains(filePath)) {
-        saveZeroValueForResource(inputFile, filePath, context, CoverageType.UT_COVERAGE);
+      if (!filesCoveredByUT.contains(inputFile)) {
+        saveZeroValueForResource(inputFile, context, CoverageType.UNIT, linesOfCodeForFile);
       }
 
-      if (!filesCoveredByIT.contains(filePath)) {
-        saveZeroValueForResource(inputFile, filePath, context, CoverageType.IT_COVERAGE);
+      if (!filesCoveredByIT.contains(inputFile)) {
+        saveZeroValueForResource(inputFile, context, CoverageType.IT, linesOfCodeForFile);
       }
 
-      if (!filesCoveredOverall.contains(filePath)) {
-        saveZeroValueForResource(inputFile, filePath, context, CoverageType.OVERALL_COVERAGE);
+      if (!filesCoveredOverall.contains(inputFile)) {
+        saveZeroValueForResource(inputFile, context, CoverageType.OVERALL, linesOfCodeForFile);
       }
     }
   }
 
-  private void saveZeroValueForResource(InputFile inputFile,
-                                        String filePath, SensorContext context,
-                                        CoverageType ctype) {
-    Measure ncloc = context.getMeasure(context.getResource(inputFile), CoreMetrics.NCLOC);
-    if (ncloc != null && ncloc.getValue() > 0) {
-      String coverageKind = "unit test";
-      Metric hitsDataMetric = CoreMetrics.COVERAGE_LINE_HITS_DATA;
-      Metric linesToCoverMetric = CoreMetrics.LINES_TO_COVER;
-      Metric uncoveredLinesMetric = CoreMetrics.UNCOVERED_LINES;
+  private static void saveZeroValueForResource(InputFile inputFile, SensorContext context, CoverageType ctype, @Nullable Set<Integer> linesOfCode) {
+    if (linesOfCode != null) {
+      LOG.debug("Zeroing {} coverage measures for file '{}'", ctype, inputFile.relativePath());
 
-      switch (ctype) {
-        case IT_COVERAGE:
-          coverageKind = "integration test";
-          hitsDataMetric = CoreMetrics.IT_COVERAGE_LINE_HITS_DATA;
-          linesToCoverMetric = CoreMetrics.IT_LINES_TO_COVER;
-          uncoveredLinesMetric = CoreMetrics.IT_UNCOVERED_LINES;
-          break;
-        case OVERALL_COVERAGE:
-          coverageKind = "overall";
-          hitsDataMetric = CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA;
-          linesToCoverMetric = CoreMetrics.OVERALL_LINES_TO_COVER;
-          uncoveredLinesMetric = CoreMetrics.OVERALL_UNCOVERED_LINES;
-          break;
-        default:
-          break;
-      }
-
-      LOG.debug("Zeroing {} coverage measures for file '{}'", coverageKind, filePath);
-
-      PropertiesBuilder<Integer, Integer> lineHitsData = new PropertiesBuilder<>(hitsDataMetric);
-      for (int i = 1; i <= inputFile.lines(); ++i) {
-        lineHitsData.add(i, 0);
-      }
-      context.saveMeasure(inputFile, lineHitsData.build());
-      context.saveMeasure(inputFile, linesToCoverMetric, ncloc.getValue());
-      context.saveMeasure(inputFile, uncoveredLinesMetric, ncloc.getValue());
+      NewCoverage newCoverage = context.newCoverage()
+        .onFile(inputFile)
+        .ofType(ctype);
+      linesOfCode.forEach((Integer line) -> newCoverage.lineHits(line, 0));
+      newCoverage.save();
     }
   }
 
 
-  private Map<String, CoverageMeasuresBuilder> parseReports(List<File> reports) {
-    Map<String, CoverageMeasuresBuilder> coverageMeasures = new HashMap<>();
+  private Map<InputFile, NewCoverage> parseReports(List<File> reports, SensorContext context) {
+    Map<InputFile, NewCoverage> coverageMeasures = new HashMap<>();
     for (File report : reports) {
       try {
-        parser.parseReport(report, coverageMeasures);
+        parser.parseReport(report, context, coverageMeasures);
       } catch (EmptyReportException e) {
         LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
       } catch (XMLStreamException e) {
@@ -209,90 +174,17 @@ public class PythonCoverageSensor extends PythonReportSensor {
     return coverageMeasures;
   }
 
-  private void saveMeasures(SensorContext context,
-                            Map<String, CoverageMeasuresBuilder> coverageMeasures,
-                            HashSet coveredFiles,
-                            CoverageType coverageType) {
-    for (Map.Entry<String, CoverageMeasuresBuilder> entry : coverageMeasures.entrySet()) {
-      String filePath = entry.getKey();
-      InputFile pythonFile = fileSystem.inputFile(fileSystem.predicates().hasPath(filePath));
-      if (pythonFile != null) {
-        coveredFiles.add(pythonFile.relativePath());
+  private static void saveMeasures(Map<InputFile, NewCoverage> coverageMeasures, HashSet<InputFile> coveredFiles, CoverageType coverageType) {
+    for (Map.Entry<InputFile, NewCoverage> entry : coverageMeasures.entrySet()) {
+      InputFile inputFile = entry.getKey();
+      coveredFiles.add(inputFile);
 
-        LOG.debug("Saving coverage measures for file '{}'", filePath);
-        for (Measure measure : entry.getValue().createMeasures()) {
-          switch (coverageType) {
-            case IT_COVERAGE:
-              measure = convertToITMeasure(measure);
-              break;
-            case OVERALL_COVERAGE:
-              measure = convertForOverall(measure);
-              break;
-            default:
-              break;
-          }
-          context.saveMeasure(pythonFile, measure);
-        }
-      } else {
-        LOG.debug("Cannot find the file '{}', ignoring coverage measures", filePath);
-      }
-    }
-  }
+      LOG.debug("Saving coverage measures for file '{}'", inputFile.relativePath());
 
-  Measure convertToITMeasure(Measure measure) {
-    Measure itMeasure = null;
-    Metric metric = measure.getMetric();
-    Double value = measure.getValue();
-    String data = measure.getData();
-    if (CoreMetrics.LINES_TO_COVER.equals(metric)) {
-      itMeasure = new Measure(CoreMetrics.IT_LINES_TO_COVER, value);
-    } else if (CoreMetrics.UNCOVERED_LINES.equals(metric)) {
-      itMeasure = new Measure(CoreMetrics.IT_UNCOVERED_LINES, value);
-    } else if (CoreMetrics.COVERAGE_LINE_HITS_DATA.equals(metric)) {
-      checkDataIsNotNull(data);
-      itMeasure = new Measure(CoreMetrics.IT_COVERAGE_LINE_HITS_DATA, data);
-    } else if (CoreMetrics.CONDITIONS_TO_COVER.equals(metric)) {
-      itMeasure = new Measure(CoreMetrics.IT_CONDITIONS_TO_COVER, value);
-    } else if (CoreMetrics.UNCOVERED_CONDITIONS.equals(metric)) {
-      itMeasure = new Measure(CoreMetrics.IT_UNCOVERED_CONDITIONS, value);
-    } else if (CoreMetrics.COVERED_CONDITIONS_BY_LINE.equals(metric)) {
-      checkDataIsNotNull(data);
-      itMeasure = new Measure(CoreMetrics.IT_COVERED_CONDITIONS_BY_LINE, data);
-    } else if (CoreMetrics.CONDITIONS_BY_LINE.equals(metric)) {
-      checkDataIsNotNull(data);
-      itMeasure = new Measure(CoreMetrics.IT_CONDITIONS_BY_LINE, data);
-    }
-    return itMeasure;
-  }
+      entry.getValue()
+        .ofType(coverageType)
+        .save();
 
-  private static Measure convertForOverall(Measure measure) {
-    Measure overallMeasure = null;
-    String data = measure.getData();
-    if (CoreMetrics.LINES_TO_COVER.equals(measure.getMetric())) {
-      overallMeasure = new Measure(CoreMetrics.OVERALL_LINES_TO_COVER, measure.getValue());
-    } else if (CoreMetrics.UNCOVERED_LINES.equals(measure.getMetric())) {
-      overallMeasure = new Measure(CoreMetrics.OVERALL_UNCOVERED_LINES, measure.getValue());
-    } else if (CoreMetrics.COVERAGE_LINE_HITS_DATA.equals(measure.getMetric())) {
-      checkDataIsNotNull(data);
-      overallMeasure = new Measure(CoreMetrics.OVERALL_COVERAGE_LINE_HITS_DATA, data);
-    } else if (CoreMetrics.CONDITIONS_TO_COVER.equals(measure.getMetric())) {
-      overallMeasure = new Measure(CoreMetrics.OVERALL_CONDITIONS_TO_COVER, measure.getValue());
-    } else if (CoreMetrics.UNCOVERED_CONDITIONS.equals(measure.getMetric())) {
-      overallMeasure = new Measure(CoreMetrics.OVERALL_UNCOVERED_CONDITIONS, measure.getValue());
-    } else if (CoreMetrics.COVERED_CONDITIONS_BY_LINE.equals(measure.getMetric())) {
-      checkDataIsNotNull(data);
-      overallMeasure = new Measure(CoreMetrics.OVERALL_COVERED_CONDITIONS_BY_LINE, data);
-    } else if (CoreMetrics.CONDITIONS_BY_LINE.equals(measure.getMetric())) {
-      checkDataIsNotNull(data);
-      overallMeasure = new Measure(CoreMetrics.OVERALL_CONDITIONS_BY_LINE, data);
-    }
-
-    return overallMeasure;
-  }
-
-  private static void checkDataIsNotNull(@Nullable String data) {
-    if (data == null) {
-      throw new IllegalStateException("Measure data is null but it shouldn't be");
     }
   }
 }

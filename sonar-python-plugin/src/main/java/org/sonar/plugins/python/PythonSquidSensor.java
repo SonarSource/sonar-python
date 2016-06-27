@@ -23,8 +23,11 @@ import com.google.common.collect.Lists;
 import com.sonar.sslr.api.Grammar;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -42,6 +45,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.IssueLocation;
@@ -89,9 +93,10 @@ public final class PythonSquidSensor implements Sensor {
   @Override
   public void execute(SensorContext context) {
     this.context = context;
+    Map<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
 
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(checks.all());
-    visitors.add(new FileLinesVisitor(fileLinesContextFactory, context.fileSystem()));
+    visitors.add(new FileLinesVisitor(fileLinesContextFactory, context.fileSystem(), linesOfCode));
     this.scanner = PythonAstScanner.create(createConfiguration(), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     FilePredicates p = context.fileSystem().predicates();
     scanner.scanFiles(Lists.newArrayList(context.fileSystem().files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
@@ -104,6 +109,8 @@ public final class PythonSquidSensor implements Sensor {
         .map(v -> (PythonCheck) v)
         .collect(Collectors.toList()));
     save(squidSourceFiles);
+
+    (new PythonCoverageSensor()).execute(context, linesOfCode);
   }
 
   // fixme (Lena): unit test it with new Sensor API

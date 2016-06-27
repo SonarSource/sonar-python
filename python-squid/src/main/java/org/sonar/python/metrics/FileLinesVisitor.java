@@ -27,6 +27,7 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -44,13 +45,15 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
   private final FileLinesContextFactory fileLinesContextFactory;
 
-  private final Set<Integer> linesOfCode = Sets.newHashSet();
-  private final Set<Integer> linesOfComments = Sets.newHashSet();
+  private Set<Integer> linesOfCode = Sets.newHashSet();
+  private Set<Integer> linesOfComments = Sets.newHashSet();
   private final FileSystem fileSystem;
+  private final Map<InputFile, Set<Integer>> allLinesOfCode;
 
-  public FileLinesVisitor(FileLinesContextFactory fileLinesContextFactory, FileSystem fileSystem) {
+  public FileLinesVisitor(FileLinesContextFactory fileLinesContextFactory, FileSystem fileSystem, Map<InputFile, Set<Integer>> linesOfCode) {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.fileSystem = fileSystem;
+    this.allLinesOfCode = linesOfCode;
   }
 
   @Override
@@ -90,8 +93,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     }
     fileLinesContext.save();
 
-    linesOfCode.clear();
-    linesOfComments.clear();
+    allLinesOfCode.put(inputFile, linesOfCode);
+
+    linesOfCode = Sets.newHashSet();
+    linesOfComments = Sets.newHashSet();
   }
 
 }
