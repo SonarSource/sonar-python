@@ -26,7 +26,8 @@ class ClassWithDocstring:
 	"""This is a docstring"""
 	pass
 
-class ClassWithoutDocstring: # Noncompliant
+class ClassWithoutDocstring: # Noncompliant {{Add a docstring to this class.}}
+#     ^^^^^^^^^^^^^^^^^^^^^
 	def method_with_docstring():
 		""" doc """
 		pass
