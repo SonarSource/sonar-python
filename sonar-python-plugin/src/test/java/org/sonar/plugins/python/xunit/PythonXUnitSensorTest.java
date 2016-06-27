@@ -30,7 +30,6 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
-import org.sonar.plugins.python.TestUtils;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.any;
