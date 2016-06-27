@@ -37,12 +37,30 @@ import org.sonar.squidbridge.SquidAstVisitor;
 /**
  * Colorizes Python code. Currently colorizes:
  * <ul>
- *   <li>String literals. Example: 34
+ *   <li>
+ *     String literals. Example:
+ *     <pre>
+ *       "hello"
+ *     </pre>
  *   </li>
- *   <li>Keywords. Example: def
- *   <li>Comments. Example: # some comment
+ *   <li>
+ *     Keywords. Example:
+ *     <pre>
+ *       def
+ *     </pre>
  *   </li>
- *   <li>Doc strings. Examples: """ a doc string""", ''' another doc string '''
+ *   <li>
+ *     Comments. Example:
+ *     <pre>
+ *        # some comment
+ *     </pre>
+ *   </li>
+ *   <li>
+ *     Doc strings. Examples:
+ *     <pre>
+ *        """ a doc string"""
+ *        ''' another doc string '''
+ *     </pre>
  *   </li>
  * </ul>
  */
@@ -59,8 +77,6 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   @Override
   public void visitFile(@Nullable AstNode astNode) {
     newHighlighting = context.newHighlighting();
-    System.out.println("high = " + newHighlighting);
-    System.out.println("fs = " + context.fileSystem());
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().getFile().getAbsoluteFile()));
     newHighlighting.onFile(inputFile);
   }
