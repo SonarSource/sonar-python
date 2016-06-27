@@ -21,15 +21,14 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = TrailingCommentCheck.CHECK_KEY,
@@ -38,9 +37,10 @@ import org.sonar.squidbridge.checks.SquidCheck;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
-public class TrailingCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
+public class TrailingCommentCheck extends PythonCheck implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S139";
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";
+  private static final String MESSAGE = "Move this trailing comment on the previous empty line.";
 
   @RuleProperty(
     key = "legalTrailingCommentPattern",
@@ -59,10 +59,10 @@ public class TrailingCommentCheck extends SquidCheck<Grammar> implements AstAndT
   @Override
   public void visitToken(Token token) {
     for (Trivia trivia : token.getTrivia()) {
-      if (trivia.isComment() && trivia.getToken().getLine() == previousTokenLine) {
+      if (trivia.getToken().getLine() == previousTokenLine) {
         String comment = trivia.getToken().getValue();
         if (!pattern.matcher(comment).matches()) {
-          getContext().createLineViolation(this, "Move this trailing comment on the previous empty line.", previousTokenLine);
+          addIssue(trivia.getToken(), MESSAGE);
         }
       }
     }

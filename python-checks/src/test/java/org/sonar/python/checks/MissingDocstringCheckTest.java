@@ -22,27 +22,22 @@ package org.sonar.python.checks;
 import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
 public class MissingDocstringCheckTest {
 
+  private final MissingDocstringCheck check = new MissingDocstringCheck();
+
   @Test
   public void test() {
-    SourceFile file = scanFile("missingDocstring.py");
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(9).withMessage("Add a docstring to this function.")
-        .next().atLine(12).withMessage("The docstring for this function should not be empty.")
-        .next().atLine(16).withMessage("Add a docstring to this function.")
-        .next().atLine(21).withMessage("Add a docstring to this function.")
-        .next().atLine(27).withMessage("Add a docstring to this class.")
-        .next().atLine(32).withMessage("The docstring for this method should not be empty.")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/missingDocstring.py"), check);
   }
 
   @Test
   public void testMissingDocStringAtModuleLevel() {
-    testMissingDocStringAtModuleLevel("missingDocstringAtModuleLevel.py");
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/missingDocstringAtModuleLevel.py"), check);
   }
 
   @Test
@@ -53,7 +48,7 @@ public class MissingDocstringCheckTest {
   private void testMissingDocStringAtModuleLevel(String fileName) {
     SourceFile file = scanFile(fileName);
     CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().withMessage("Add a docstring to this module.")
+        .next().atLine(null).withMessage("Add a docstring to this module.")
         .noMore();
   }
 

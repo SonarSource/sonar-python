@@ -21,21 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class NoPersonReferenceInTodoCheckTest {
 
   @Test
   public void test() {
     NoPersonReferenceInTodoCheck check = new NoPersonReferenceInTodoCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/noPersonReferenceInTodo.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage(NoPersonReferenceInTodoCheck.MESSAGE)
-        .next().atLine(9).withMessage(NoPersonReferenceInTodoCheck.MESSAGE)
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/noPersonReferenceInTodo.py"), check);
   }
 
 }

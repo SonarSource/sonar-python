@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Matcher;
@@ -29,8 +28,8 @@ import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = NoPersonReferenceInTodoCheck.CHECK_KEY,
@@ -39,7 +38,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("5min")
-public class NoPersonReferenceInTodoCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
+public class NoPersonReferenceInTodoCheck extends PythonCheck implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S1707";
   public static final String MESSAGE = "Add a citation of the person who can best explain this comment.";
 
@@ -74,7 +73,7 @@ public class NoPersonReferenceInTodoCheck extends SquidCheck<Grammar> implements
     if (matcher.find()) {
       String tail = comment.substring(matcher.end());
       if (!patternPersonReference.matcher(tail).find()) {
-        getContext().createLineViolation(this, MESSAGE, trivia.getToken().getLine());
+        addIssue(trivia.getToken(), MESSAGE);
       }
     }
   }

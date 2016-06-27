@@ -19,23 +19,18 @@
  */
 package org.sonar.python.it;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import com.google.common.collect.ImmutableList;
-
-
+import com.google.common.io.Files;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
 import com.sonar.orchestrator.locator.FileLocation;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import org.junit.ClassRule;
+import org.junit.Test;
 
-import com.google.common.io.Files;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+
 public class PythonRulingTest {
 
   @ClassRule
@@ -67,7 +62,7 @@ public class PythonRulingTest {
       .setProperty("sonar.analysis.mode", "preview")
       .setProperty("sonar.issuesReport.html.enable", "true")
       .setProperty("lits.differences", litsDifferencesFile.getAbsolutePath())
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx1000m");
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
     orchestrator.executeBuild(build);
 
     assertThat(Files.toString(litsDifferencesFile, StandardCharsets.UTF_8)).isEmpty();

@@ -21,15 +21,14 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = FixmeCommentCheck.CHECK_KEY,
@@ -38,10 +37,11 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("20min")
 @ActivatedByDefault
-public class FixmeCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
+public class FixmeCommentCheck extends PythonCheck implements AstAndTokenVisitor {
   public static final String CHECK_KEY = "S1134";
 
   private static final String FIXME_COMMENT_PATTERN = "^#[ ]*fixme.*";
+  private static final String MESSAGE = "Take the required action to fix the issue indicated by this \"FIXME\" comment.";
 
   private Pattern pattern;
 
@@ -53,11 +53,9 @@ public class FixmeCommentCheck extends SquidCheck<Grammar> implements AstAndToke
   @Override
   public void visitToken(Token token) {
     for (Trivia trivia : token.getTrivia()) {
-      if (trivia.isComment()) {
-        String comment = trivia.getToken().getValue();
-        if (pattern.matcher(comment).matches()) {
-          getContext().createLineViolation(this, "Take the required action to fix the issue indicated by this \"FIXME\" comment.", trivia.getToken().getLine());
-        }
+      String comment = trivia.getToken().getValue();
+      if (pattern.matcher(comment).matches()) {
+        addIssue(trivia.getToken(), MESSAGE);
       }
     }
   }
