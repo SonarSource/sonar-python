@@ -21,28 +21,26 @@ package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
 import com.sonar.sslr.api.Grammar;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-import org.sonar.api.batch.Sensor;
-import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FilePredicates;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.Checks;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.component.ResourcePerspectives;
-import org.sonar.api.issue.Issuable;
-import org.sonar.api.issue.Issue;
+import org.sonar.api.ce.measure.RangeDistributionBuilder;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.measures.PersistenceMode;
-import org.sonar.api.measures.RangeDistributionBuilder;
-import org.sonar.api.resources.Project;
+import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonCheck;
@@ -71,33 +69,32 @@ public final class PythonSquidSensor implements Sensor {
 
   private SensorContext context;
   private AstScanner<Grammar> scanner;
-  private FileSystem fileSystem;
-  private ResourcePerspectives resourcePerspectives;
 
-  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, FileSystem fileSystem, ResourcePerspectives perspectives, CheckFactory checkFactory) {
+  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory) {
     this.checks = checkFactory
         .<SquidAstVisitor<Grammar>>create(CheckList.REPOSITORY_KEY)
         .addAnnotatedChecks(CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
-    this.fileSystem = fileSystem;
-    this.resourcePerspectives = perspectives;
+  }
+
+
+  @Override
+  public void describe(SensorDescriptor descriptor) {
+    descriptor
+      .onlyOnLanguage(Python.KEY)
+      .name("Python Squid Sensor")
+      .onlyOnFileType(Type.MAIN);
   }
 
   @Override
-  public boolean shouldExecuteOnProject(Project project) {
-    FilePredicates p = fileSystem.predicates();
-    return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
-  }
-
-  @Override
-  public void analyse(Project project, SensorContext context) {
+  public void execute(SensorContext context) {
     this.context = context;
 
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(checks.all());
-    visitors.add(new FileLinesVisitor(fileLinesContextFactory, fileSystem));
+    visitors.add(new FileLinesVisitor(fileLinesContextFactory, context.fileSystem()));
     this.scanner = PythonAstScanner.create(createConfiguration(), visitors.toArray(new SquidAstVisitor[visitors.size()]));
-    FilePredicates p = fileSystem.predicates();
-    scanner.scanFiles(Lists.newArrayList(fileSystem.files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
+    FilePredicates p = context.fileSystem().predicates();
+    scanner.scanFiles(Lists.newArrayList(context.fileSystem().files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     savePreciseIssues(
@@ -105,17 +102,16 @@ public final class PythonSquidSensor implements Sensor {
         .stream()
         .filter(v -> v instanceof PythonCheck)
         .map(v -> (PythonCheck) v)
-        .collect(Collectors.toList()),
-      context);
+        .collect(Collectors.toList()));
     save(squidSourceFiles);
   }
 
   // fixme (Lena): unit test it with new Sensor API
-  private void savePreciseIssues(List<PythonCheck> pythonChecks, SensorContext context) {
+  private void savePreciseIssues(List<PythonCheck> pythonChecks) {
     for (PythonCheck pythonCheck : pythonChecks) {
       RuleKey ruleKey = checks.ruleKey(pythonCheck);
       for (PreciseIssue preciseIssue : pythonCheck.getIssues()) {
-        InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(preciseIssue.file()));
+        InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(preciseIssue.file()));
 
         NewIssue newIssue = context
           .newIssue()
@@ -143,14 +139,14 @@ public final class PythonSquidSensor implements Sensor {
 
 
   private PythonConfiguration createConfiguration() {
-    return new PythonConfiguration(fileSystem.encoding());
+    return new PythonConfiguration(context.fileSystem().encoding());
   }
 
   private void save(Collection<SourceCode> squidSourceFiles) {
     for (SourceCode squidSourceFile : squidSourceFiles) {
       SourceFile squidFile = (SourceFile) squidSourceFile;
 
-      InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(new java.io.File(squidFile.getKey())));
+      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(new java.io.File(squidFile.getKey())));
 
       saveFilesComplexityDistribution(inputFile, squidFile);
       saveFunctionsComplexityDistribution(inputFile, squidFile);
@@ -159,52 +155,65 @@ public final class PythonSquidSensor implements Sensor {
     }
   }
 
-  private void saveMeasures(InputFile sonarFile, SourceFile squidFile) {
-    context.saveMeasure(sonarFile, CoreMetrics.FILES, squidFile.getDouble(PythonMetric.FILES));
-    context.saveMeasure(sonarFile, CoreMetrics.LINES, squidFile.getDouble(PythonMetric.LINES));
-    context.saveMeasure(sonarFile, CoreMetrics.NCLOC, squidFile.getDouble(PythonMetric.LINES_OF_CODE));
-    context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, squidFile.getDouble(PythonMetric.STATEMENTS));
-    context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, squidFile.getDouble(PythonMetric.FUNCTIONS));
-    context.saveMeasure(sonarFile, CoreMetrics.CLASSES, squidFile.getDouble(PythonMetric.CLASSES));
-    context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(PythonMetric.COMPLEXITY));
-    context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, squidFile.getDouble(PythonMetric.COMMENT_LINES));
+  private void saveMeasures(InputFile inputFile, SourceFile squidFile) {
+    saveMetricOnFile(inputFile, CoreMetrics.FILES, squidFile.getInt(PythonMetric.FILES));
+    saveMetricOnFile(inputFile, CoreMetrics.LINES, squidFile.getInt(PythonMetric.LINES));
+    saveMetricOnFile(inputFile, CoreMetrics.NCLOC, squidFile.getInt(PythonMetric.LINES_OF_CODE));
+    saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, squidFile.getInt(PythonMetric.STATEMENTS));
+    saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, squidFile.getInt(PythonMetric.FUNCTIONS));
+    saveMetricOnFile(inputFile, CoreMetrics.CLASSES, squidFile.getInt(PythonMetric.CLASSES));
+    saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, squidFile.getInt(PythonMetric.COMPLEXITY));
+    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, squidFile.getInt(PythonMetric.COMMENT_LINES));
   }
 
-  private void saveFunctionsComplexityDistribution(InputFile sonarFile, SourceFile squidFile) {
+  private <T extends Serializable> void saveMetricOnFile(InputFile inputFile, Metric metric, T value) {
+    context.<T>newMeasure()
+      .withValue(value)
+      .forMetric(metric)
+      .on(inputFile)
+      .save();
+  }
+
+  private void saveFunctionsComplexityDistribution(InputFile inputFile, SourceFile squidFile) {
     Collection<SourceCode> squidFunctionsInFile = scanner.getIndex().search(new QueryByParent(squidFile), new QueryByType(SourceFunction.class));
-    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
+    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
     for (SourceCode squidFunction : squidFunctionsInFile) {
       complexityDistribution.add(squidFunction.getDouble(PythonMetric.COMPLEXITY));
     }
-    context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+
+    context.<String>newMeasure()
+      .on(inputFile)
+      .forMetric(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION)
+      .withValue(complexityDistribution.build())
+      .save();
+
   }
 
-  private void saveFilesComplexityDistribution(InputFile sonarFile, SourceFile squidFile) {
-    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, FILES_DISTRIB_BOTTOM_LIMITS);
+  private void saveFilesComplexityDistribution(InputFile inputFile, SourceFile squidFile) {
+    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(FILES_DISTRIB_BOTTOM_LIMITS);
     complexityDistribution.add(squidFile.getDouble(PythonMetric.COMPLEXITY));
-    context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+    context.<String>newMeasure()
+      .on(inputFile)
+      .forMetric(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION)
+      .withValue(complexityDistribution.build())
+      .save();
   }
 
-  private void saveIssues(InputFile sonarFile, SourceFile squidFile) {
+  private void saveIssues(InputFile inputFile, SourceFile squidFile) {
     Collection<CheckMessage> messages = squidFile.getCheckMessages();
     for (CheckMessage message : messages) {
       RuleKey ruleKey = checks.ruleKey((SquidAstVisitor<Grammar>) message.getCheck());
-      Issuable issuable = resourcePerspectives.as(Issuable.class, sonarFile);
+      NewIssue newIssue = context.newIssue();
 
-      if (issuable != null) {
-        Issue issue = issuable.newIssueBuilder()
-            .ruleKey(ruleKey)
-            .line(message.getLine())
-            .message(message.getText(Locale.ENGLISH))
-            .build();
-        issuable.addIssue(issue);
+      NewIssueLocation primaryLocation = newIssue.newLocation()
+        .message(message.getText(Locale.ENGLISH))
+        .on(inputFile);
+
+      if (message.getLine() != null) {
+        primaryLocation.at(inputFile.selectLine(message.getLine()));
       }
+
+      newIssue.forRule(ruleKey).at(primaryLocation).save();
     }
   }
-
-  @Override
-  public String toString() {
-    return getClass().getSimpleName();
-  }
-
 }
