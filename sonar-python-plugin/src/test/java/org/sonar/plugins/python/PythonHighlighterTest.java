@@ -90,8 +90,8 @@ public class PythonHighlighterTest {
   }
   
   @Test
-  public void comment_misplaced() throws Exception {
-    checkOnRange(9, 10, 19, TypeOfText.COMMENT);
+  public void comment_at_end_of_line() throws Exception {
+    checkOnRange(9, 10, 15, TypeOfText.COMMENT);
   }
   
   /**

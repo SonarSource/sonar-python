@@ -63,6 +63,12 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *     </pre>
  *   </li>
  * </ul>
+ * Note that doc strings, such as:
+ * <pre>
+ *   """ a doc string"""
+ *   ''' another doc string '''
+ * </pre>
+ * are not supported (i.e., not colorized) yet.
  */
 public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
@@ -70,6 +76,9 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   
   private final SensorContext context;
   
+  /**
+   * Creates a highlighter for the specified context.
+   */
   public PythonHighlighter(SensorContext context) {
     this.context = context;
   }
@@ -94,13 +103,9 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
       highlight(token, TypeOfText.COMMENT);
     } 
     
-    if (token.hasTrivia()) {
-      for (Trivia trivia : token.getTrivia()) {
-        if (trivia.isComment()) {
-          // case: comment
-          highlight(trivia.getToken(), TypeOfText.COMMENT);
-        }
-      }
+    for (Trivia trivia : token.getTrivia()) {
+      // case: comment
+      highlight(trivia.getToken(), TypeOfText.COMMENT);
     }
   }
 
