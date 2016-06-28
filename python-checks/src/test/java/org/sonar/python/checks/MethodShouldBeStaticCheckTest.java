@@ -40,6 +40,9 @@ public class MethodShouldBeStaticCheckTest {
         .next().atLine(19).withMessage(message)
         .next().atLine(30).withMessage(message)
         .next().atLine(40).withMessage(message)
-        .next().atLine(52).withMessage(message);
+        .next().atLine(52).withMessage(message)
+        .next().atLine(81).withMessage(message)
+        .next().atLine(86).withMessage(message)
+        .next().atLine(91).withMessage(message);
   }
 }

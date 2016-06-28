@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import java.util.ArrayList;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -53,10 +54,31 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
   public void visitNode(AstNode node) {
     if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && hasValuableCode(node)){
       String self = getFirstArgument(node);
-      if (self != null && !isUsed(node, self)){
+      if (self != null && !isUsed(node, self) &&!isDocStringsAndNotImplementedError(node)){
         getContext().createLineViolation(this, MESSAGE, node.getFirstChild(PythonGrammar.FUNCNAME));
       }
     }
+  }
+
+  private static boolean isDocStringsAndNotImplementedError(AstNode funcDef) {
+    List<AstNode> statements = funcDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
+
+    if (!statements.isEmpty()) {
+      List<AstNode> firstStatements = new ArrayList<>(statements);
+      firstStatements.remove(statements.size() - 1);
+      for (AstNode statement : firstStatements) {
+        if (!isDocstring(statement)) {
+          return false;
+        }
+      }
+
+      AstNode testStatement = statements.get(statements.size() - 1).getFirstDescendant(PythonGrammar.TEST);
+      if ("NotImplementedError".equals(testStatement.getToken().getValue())) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   private static boolean hasValuableCode(AstNode funcDef) {
@@ -71,13 +93,16 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
     }
 
     return statements.size() != 2 || !isDocstringAndPass(statements.get(0), statements.get(1));
+  }
 
+  private static boolean isDocstring(AstNode statement) {
+    return statement.getToken().getType().equals(PythonTokenType.STRING);
   }
 
   private static boolean isDocstringOrPass(AstNode statement) {
     return statement.getFirstDescendant(PythonGrammar.PASS_STMT) != null || statement.getToken().getType().equals(PythonTokenType.STRING);
   }
-
+  
   private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
     return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
   }

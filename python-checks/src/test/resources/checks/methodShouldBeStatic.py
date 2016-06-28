@@ -73,5 +73,40 @@ class A:
     def fun20(): #syntax error
         print(1)
 
+    # don't raise issue, as method consists only of a NotImplementedError   
+    def fun21(slf):
+        raise NotImplementedError
+
+    # raise issue, as NotImplementedError is not the only content of the method
+    def fun22(slf):
+        print(1)
+        raise NotImplementedError
+
+    # raise issue, as NotImplementedError is not the only content of the method
+    def fun23(slf):
+        if True:
+            raise NotImplementedError
+
+    # raise issue, as the error is not a NotImplementedError 
+    def fun24(slf):
+        raise ValueError('Some error')
+        
+    # don't raise issue, as the method has no argument
+    def fun25():
+        raise NotImplementedError
+                
+    # don't raise issue, as we don't handle a string literal as a statement
+    def fun26(slf):
+        """ Short explanation """
+        raise NotImplementedError
+                
+    # don't raise issue, as we don't handle a string literal as a statement
+    def fun27(slf):
+        """ Long explanation
+            bla bla
+        """
+        "Another literal"
+        raise NotImplementedError
+                
 def fun():
     print(1)
