@@ -56,6 +56,17 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *     </pre>
  *   </li>
  *   <li>
+ *     Numbers. Example:
+ *     <pre>
+ *        123
+ *        123L
+ *        123.45
+ *        123.45e-10
+ *        123+88.99J
+ *     </pre>
+ *     For a negative number, the "minus" sign is not colored. 
+ *   </li>
+ *   <li>
  *     Comments. Example:
  *     <pre>
  *        # some comment
@@ -84,16 +95,17 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   @Override
   public void visitToken(Token token) {
     if (token.getType().equals(PythonTokenType.STRING)) {
-      // case: string literal, including doc string
+      // string literals, including doc string
       highlight(token, TypeOfText.STRING);
 
+    } else if (token.getType().equals(PythonTokenType.NUMBER)) {
+      highlight(token, TypeOfText.CONSTANT);
+ 
     } else if (token.getType() instanceof PythonKeyword) {
-      // case: keyword
       highlight(token, TypeOfText.KEYWORD);
     }
 
     for (Trivia trivia : token.getTrivia()) {
-      // case: comment
       highlight(trivia.getToken(), TypeOfText.COMMENT);
     }
   }
