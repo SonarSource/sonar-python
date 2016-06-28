@@ -4,11 +4,12 @@ class MyClass1:
 
 class MyClass2:
     def __init__(self):
-        yield None
+        yield None # Noncompliant {{Remove this yield statement.}}
+#       ^^^^^^^^^^
 
 class MyClass3:
     def __init__(self):
-        yield 1
+        yield 1   # Noncompliant
 
 class MyClass4:
     def __init__(self):
@@ -16,7 +17,8 @@ class MyClass4:
 
 class MyClass5:
     def __init__(self):
-        return fun()
+        return fun()   # Noncompliant {{Remove this return value.}}
+#       ^^^^^^^^^^^^
 
 class MyClass6:
     def __init__(self):

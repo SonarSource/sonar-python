@@ -21,22 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class InitReturnsValueCheckTest {
 
   @Test
   public void test() {
     InitReturnsValueCheck check = new InitReturnsValueCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/initReturnsValue.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(7).withMessage(InitReturnsValueCheck.MESSAGE_YIELD)
-        .next().atLine(11).withMessage(InitReturnsValueCheck.MESSAGE_YIELD)
-        .next().atLine(19).withMessage(InitReturnsValueCheck.MESSAGE_RETURN)
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/initReturnsValue.py"), check);
   }
 
 }

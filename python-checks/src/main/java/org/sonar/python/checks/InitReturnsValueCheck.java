@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = InitReturnsValueCheck.CHECK_KEY,
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class InitReturnsValueCheck extends SquidCheck<Grammar> {
+public class InitReturnsValueCheck extends PythonCheck {
 
   public static final String MESSAGE_RETURN = "Remove this return value.";
   public static final String MESSAGE_YIELD = "Remove this yield statement.";
@@ -74,7 +73,7 @@ public class InitReturnsValueCheck extends SquidCheck<Grammar> {
     if (node.is(PythonGrammar.YIELD_STMT)){
       message = MESSAGE_YIELD;
     }
-    getContext().createLineViolation(this, message, node);
+    addIssue(node, message);
   }
 }
 
