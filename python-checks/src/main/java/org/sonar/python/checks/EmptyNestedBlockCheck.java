@@ -21,15 +21,14 @@ package org.sonar.python.checks;
 
 import com.google.common.base.Predicate;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -40,7 +39,7 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
+public class EmptyNestedBlockCheck extends PythonCheck {
   public static final String CHECK_KEY = "S108";
   private static final Predicate<AstNode> NOT_PASS_PREDICATE = new NotPassPredicate();
   private static final String MESSAGE = "Either remove or fill this block of code.";
@@ -71,7 +70,7 @@ public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
       .children()
       .filter(NOT_PASS_PREDICATE);
     if (nonPassSimpleStatements.isEmpty() && !containsComment(suiteNode)) {
-      getContext().createLineViolation(this, MESSAGE, stmtLists.get(0));
+      addIssue(stmtLists.get(0), MESSAGE);
     }
   }
 
