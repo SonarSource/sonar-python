@@ -21,21 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class BreakContinueOutsideLoopCheckTest {
 
   @Test
   public void test() {
     BreakContinueOutsideLoopCheck check = new BreakContinueOutsideLoopCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/breakContinueOutsideLoop.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(4).withMessage(String.format(BreakContinueOutsideLoopCheck.MESSAGE, "break"))
-        .next().atLine(13).withMessage(String.format(BreakContinueOutsideLoopCheck.MESSAGE, "continue"))
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/breakContinueOutsideLoop.py"), check);
   }
 
 }

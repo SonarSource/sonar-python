@@ -20,13 +20,12 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = BreakContinueOutsideLoopCheck.CHECK_KEY,
@@ -35,9 +34,9 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class BreakContinueOutsideLoopCheck extends SquidCheck<Grammar> {
+public class BreakContinueOutsideLoopCheck extends PythonCheck {
 
-  public static final String MESSAGE = "Remove this \"%s\" statement";
+  private static final String MESSAGE = "Remove this \"%s\" statement";
   public static final String CHECK_KEY = "S1716";
 
   @Override
@@ -61,7 +60,7 @@ public class BreakContinueOutsideLoopCheck extends SquidCheck<Grammar> {
   }
 
   private void raiseIssue(AstNode node) {
-    getContext().createLineViolation(this, String.format(MESSAGE, node.getToken().getValue()), node);
+    addIssue(node, String.format(MESSAGE, node.getToken().getValue()));
   }
 }
 
