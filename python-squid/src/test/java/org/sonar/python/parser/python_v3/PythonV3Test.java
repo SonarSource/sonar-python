@@ -45,4 +45,13 @@ public class PythonV3Test extends RuleTest {
     assertThat(p).notMatches("lambda x:Type: x");
   }
 
+  @Test
+  public void yield_from(){
+    setRootRule(PythonGrammar.YIELD_EXPR);
+    assertThat(p).matches("yield");
+    assertThat(p).matches("yield from foo");
+    assertThat(p).matches("yield foo");
+    assertThat(p).notMatches("yield from");
+  }
+
 }
