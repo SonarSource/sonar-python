@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -39,7 +38,7 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("2min")
 @ActivatedByDefault
-public class NeedlessPassCheck extends SquidCheck<Grammar> {
+public class NeedlessPassCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S2772";
 
@@ -56,7 +55,7 @@ public class NeedlessPassCheck extends SquidCheck<Grammar> {
     List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
     if (statements.size() > 1) {
       if (!docstringException(statements)) {
-        raiseIssue(node);
+        addIssue(node, MESSAGE);
       }
     } else {
       visitOneOrZeroStatement(node, suite, statements.size());
@@ -80,13 +79,8 @@ public class NeedlessPassCheck extends SquidCheck<Grammar> {
           .children(PythonGrammar.SIMPLE_STMT);
     }
     if (simpleStatements.size() > 1) {
-      raiseIssue(node);
+      addIssue(node, MESSAGE);
     }
   }
-
-  private void raiseIssue(AstNode node) {
-    getContext().createLineViolation(this, MESSAGE, node);
-  }
-
 }
 

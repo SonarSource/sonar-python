@@ -22,8 +22,7 @@ package org.sonar.python.checks;
 import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
 
 public class NeedlessPassCheckTest {
@@ -34,13 +33,6 @@ public class NeedlessPassCheckTest {
   @Test
   public void test() {
     NeedlessPassCheck check = new NeedlessPassCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/needlessPass.py"), check);
-    String message = "Remove this unneeded \"pass\".";
-    checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(5).withMessage(message)
-        .next().atLine(10).withMessage(message)
-        .next().atLine(16).withMessage(message)
-        .next().atLine(19).withMessage(message)
-        .next().atLine(24).withMessage(message);
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/needlessPass.py"), check);
   }
 }
