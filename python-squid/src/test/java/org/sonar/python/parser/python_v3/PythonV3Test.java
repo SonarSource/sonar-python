@@ -59,7 +59,12 @@ public class PythonV3Test extends RuleTest {
     setRootRule(PythonGrammar.TYPEDARGSLIST);
     assertThat(p).matches("*, foo=bar");
     assertThat(p).matches("*args, boo");
-    assertThat(p).notMatches("*, boo");
+    assertThat(p).matches("p=42, ** kargs");
+    assertThat(p).matches("*, p, ** kargs");
+    assertThat(p).matches("*, boo");
+    assertThat(p).notMatches("p = 1, p2, *, ** kargs");
+    // This one is enfored in the AST, not the Grammar
+    // assertThat(p).notMatches("p = 1, p2");
     assertThat(p).notMatches("*");
     assertThat(p).notMatches("**");
   }

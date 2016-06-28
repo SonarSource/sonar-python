@@ -245,8 +245,9 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(FPLIST).is(FPDEF, b.zeroOrMore(",", FPDEF), b.optional(","));
 
     b.rule(TYPEDARGSLIST).is(b.firstOf(
-      b.sequence(b.zeroOrMore(TFPDEF, ","), "*", b.oneOrMore(",", TFPDEF, "=", TEST), b.optional(",", "**", NAME)), //python3 only
-      b.sequence(b.zeroOrMore(TFPDEF, ","), "*", NAME, b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME)), //python3 only
+      b.sequence("*", TFPDEF, b.oneOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME)), //python3 only
+      b.sequence(b.zeroOrMore(TFPDEF, ","), "*", b.oneOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME)), //python3 only
+      b.sequence(b.zeroOrMore(TFPDEF, ","), "*", TFPDEF, b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME)), //python3 only
       b.sequence(b.zeroOrMore(TFPDEF, b.optional("=", TEST), ","), b.firstOf(b.sequence("*", NAME, b.optional(",", "**", NAME)), b.sequence("**", NAME))),
       b.sequence(TFPDEF, b.optional("=", TEST), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",")))
     );
