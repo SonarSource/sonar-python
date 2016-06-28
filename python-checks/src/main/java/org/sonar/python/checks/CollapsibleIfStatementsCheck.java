@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -39,8 +38,9 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class CollapsibleIfStatementsCheck extends SquidCheck<Grammar> {
+public class CollapsibleIfStatementsCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1066";
+  private static final String MESSAGE = "Merge this if statement with the enclosing one.";
 
   @Override
   public void init() {
@@ -55,7 +55,8 @@ public class CollapsibleIfStatementsCheck extends SquidCheck<Grammar> {
     }
     AstNode singleIfChild = singleIfChild(suite);
     if (singleIfChild != null && !hasElseOrElif(singleIfChild)) {
-      getContext().createLineViolation(this, "Merge this if statement with the enclosing one.", singleIfChild);
+      addIssue(singleIfChild.getToken(), MESSAGE)
+        .secondary(node.getFirstChild(), "enclosing");
     }
   }
 

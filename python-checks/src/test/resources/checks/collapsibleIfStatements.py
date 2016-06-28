@@ -11,13 +11,14 @@ if a:
     pass
 
 if a:
-  if b: # NOK
+  if b: # Noncompliant [[secondary=-1]] {{Merge this if statement with the enclosing one.}}
+# ^^
     pass
 
 if a:
   pass
 elif b:
-  if c: # NOK
+  if c: # Noncompliant
     pass
 
 if a:
@@ -29,12 +30,12 @@ else:
   pass
 
 if a:
-  if b: # NOK
-    if c: # NOK
+  if b: # Noncompliant
+    if c: # Noncompliant
       pass
 
 if a:
-  if b: # NOK
+  if b: # Noncompliant
     if c:
       pass
     else:

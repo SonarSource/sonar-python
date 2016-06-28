@@ -21,23 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CollapsibleIfStatementsCheckTest {
 
   @Test
   public void test() {
     CollapsibleIfStatementsCheck check = new CollapsibleIfStatementsCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/collapsibleIfStatements.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(14).withMessage("Merge this if statement with the enclosing one.")
-      .next().atLine(20).withMessage("Merge this if statement with the enclosing one.")
-      .next().atLine(32).withMessage("Merge this if statement with the enclosing one.")
-      .next().atLine(33).withMessage("Merge this if statement with the enclosing one.")
-      .next().atLine(37).withMessage("Merge this if statement with the enclosing one.")
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/collapsibleIfStatements.py"), check);
   }
 
 }
