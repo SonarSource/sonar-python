@@ -55,12 +55,10 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void keyword_def() throws Exception {
+  public void keyword() throws Exception {
+    // def
     checkOnRange(1, 0, 3, TypeOfText.KEYWORD);
-  }
-
-  @Test
-  public void keyword_four() throws Exception {
+    
     // if
     checkOnRange(12, 0, 2, TypeOfText.KEYWORD);
     
@@ -72,26 +70,34 @@ public class PythonHighlighterTest {
     
     // continue
     checkOnRange(12, 37, 8, TypeOfText.KEYWORD);
-  }
-  
-  @Test
-  public void keyword_pass() throws Exception {
+
+    // pass
     checkOnRange(2, 4, 4, TypeOfText.KEYWORD);
   }
   
   @Test
-  public void string_literal() throws Exception {
-    checkOnRange(4, 4, 8, TypeOfText.STRING);
+  public void stringLiteral() throws Exception {
+    // "some string"
+    checkOnRange(4, 4, 13, TypeOfText.STRING);
+    
+    // 'some string'
+    checkOnRange(18, 4, 13, TypeOfText.STRING);
   }
   
   @Test
   public void comment() throws Exception {
     checkOnRange(6, 0, 19, TypeOfText.COMMENT);
+    
+    checkOnRange(9, 10, 15, TypeOfText.COMMENT);
   }
   
   @Test
-  public void comment_at_end_of_line() throws Exception {
-    checkOnRange(9, 10, 15, TypeOfText.COMMENT);
+  public void docStringTripleSimpleQuotes() throws Exception {
+    // triple simple quotes
+    checkOnRange(14, 0, 15, TypeOfText.STRING);
+    
+    // triple double quotes
+    checkOnRange(16, 0, 15, TypeOfText.STRING);
   }
   
   /**

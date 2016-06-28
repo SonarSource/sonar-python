@@ -21,7 +21,6 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
@@ -41,6 +40,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *     String literals. Example:
  *     <pre>
  *       "hello"
+ *       'hello'
  *     </pre>
  *   </li>
  *   <li>
@@ -68,7 +68,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *   """ a doc string"""
  *   ''' another doc string '''
  * </pre>
- * are not supported (i.e., not colorized) yet.
+ * are handled (i.e., colorized) like normal strings.
  */
 public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
@@ -76,9 +76,6 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   
   private final SensorContext context;
   
-  /**
-   * Creates a highlighter for the specified context.
-   */
   public PythonHighlighter(SensorContext context) {
     this.context = context;
   }
@@ -93,16 +90,14 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   @Override
   public void visitToken(Token token) {
     if (token.getType().equals(PythonTokenType.STRING)) {
-      // case: string literal
+      // case: string literal, including doc string
       highlight(token, TypeOfText.STRING);
+      
     } else if (token.getType() instanceof PythonKeyword) {
       // case: keyword
       highlight(token, TypeOfText.KEYWORD);
-    } else if (token.getType().equals(GenericTokenType.COMMENT)) {
-      // case: doc string
-      highlight(token, TypeOfText.COMMENT);
-    } 
-    
+    }
+      
     for (Trivia trivia : token.getTrivia()) {
       // case: comment
       highlight(trivia.getToken(), TypeOfText.COMMENT);
