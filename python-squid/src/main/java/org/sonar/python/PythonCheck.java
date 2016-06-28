@@ -89,16 +89,14 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
   }
 
   public static class IssueLocation {
-    private AstNode node;
+    private Token firstToken;
+    private TokenLocation lastTokenLocation;
     private String message;
 
-    private int endLine;
-    private int endColumn;
-
     public IssueLocation(AstNode node, String message) {
-      this.node = node;
       this.message = message;
-      calculateEndOffsets();
+      this.firstToken = node.getToken();
+      this.lastTokenLocation = new TokenLocation(node.getLastToken());
     }
 
     public String message() {
@@ -106,31 +104,19 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     }
 
     public int startLine() {
-      return node.getToken().getLine();
+      return firstToken.getLine();
     }
 
     public int startLineOffset() {
-      return node.getToken().getColumn();
+      return firstToken.getColumn();
     }
 
     public int endLine() {
-      return endLine;
+      return lastTokenLocation.endLine();
     }
 
     public int endLineOffset() {
-      return endColumn;
-    }
-
-    private void calculateEndOffsets() {
-      Token lastToken = node.getLastToken();
-      String value = lastToken.getValue();
-      String[] lines = value.split("\r\n|\n|\r", -1);
-      endColumn = lastToken.getColumn() + value.length();
-      endLine = lastToken.getLine() + lines.length - 1;
-
-      if (endLine != lastToken.getLine()) {
-        endColumn = lines[lines.length - 1].length();
-      }
+      return lastTokenLocation.endLineOffset();
     }
   }
 }
