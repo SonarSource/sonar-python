@@ -23,6 +23,7 @@ import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
 
@@ -34,13 +35,6 @@ public class AfterJumpStatementCheckTest {
   @Test
   public void test() {
     AfterJumpStatementCheck check = new AfterJumpStatementCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/afterJumpStatement.py"), check);
-    String message = "Remove the code after this \"%s\".";
-    checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(5).withMessage(String.format(message, "break"))
-        .next().atLine(8).withMessage(String.format(message, "continue"))
-        .next().atLine(13).withMessage(String.format(message, "raise"))
-        .next().atLine(24).withMessage(String.format(message, "return"))
-        .next().atLine(31).withMessage(String.format(message, "return"));
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/afterJumpStatement.py"), check);
   }
 }

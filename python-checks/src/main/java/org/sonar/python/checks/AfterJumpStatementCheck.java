@@ -20,13 +20,12 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = AfterJumpStatementCheck.CHECK_KEY,
@@ -36,7 +35,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class AfterJumpStatementCheck extends SquidCheck<Grammar> {
+public class AfterJumpStatementCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1763";
 
@@ -72,7 +71,7 @@ public class AfterJumpStatementCheck extends SquidCheck<Grammar> {
   }
 
   private void raiseIssue(AstNode node) {
-    getContext().createLineViolation(this, String.format(MESSAGE, node.getTokenValue()), node);
+    addIssue(node.getToken(), String.format(MESSAGE, node.getTokenValue()));
   }
 
 }
