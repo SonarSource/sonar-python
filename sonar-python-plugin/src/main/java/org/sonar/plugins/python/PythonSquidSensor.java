@@ -125,6 +125,11 @@ public final class PythonSquidSensor implements Sensor {
           .forRule(ruleKey);
 
         newIssue.at(newLocation(inputFile, newIssue, preciseIssue.primaryLocation()));
+
+        for (IssueLocation secondaryLocation : preciseIssue.secondaryLocations()) {
+          newIssue.addLocation(newLocation(inputFile, newIssue, secondaryLocation));
+        }
+
         newIssue.save();
       }
     }
