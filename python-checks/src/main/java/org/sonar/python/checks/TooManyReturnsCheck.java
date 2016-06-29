@@ -20,13 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
+import java.util.ArrayList;
+import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -36,7 +37,7 @@ import org.sonar.sslr.ast.AstSelect;
     tags = Tags.BRAIN_OVERLOAD
 )
 @SqaleConstantRemediation("20min")
-public class TooManyReturnsCheck extends SquidCheck<Grammar> {
+public class TooManyReturnsCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1142";
 
   private static final int DEFAULT_MAX = 3;
@@ -53,14 +54,17 @@ public class TooManyReturnsCheck extends SquidCheck<Grammar> {
   @Override
   public void visitNode(AstNode node) {
     AstSelect returnStatements = node.select().descendants(PythonGrammar.RETURN_STMT, PythonGrammar.YIELD_STMT);
-    int returnCount = 0;
+    List<AstNode> returnNodes = new ArrayList<>();
     for (AstNode returnStatement : returnStatements){
       if (CheckUtils.insideFunction(returnStatement, node)){
-        returnCount++;
+        returnNodes.add(returnStatement);
       }
     }
-    if (returnCount > max) {
-      getContext().createLineViolation(this, String.format(MESSAGE, returnCount, max), node.getFirstChild(PythonGrammar.FUNCNAME));
+
+    if (returnNodes.size() > max) {
+      String message = String.format(MESSAGE, returnNodes.size(), max);
+      PreciseIssue issue = addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message);
+      returnNodes.forEach(returnNode -> issue.secondary(returnNode, null));
     }
   }
 }

@@ -20,26 +20,15 @@
 package org.sonar.python.checks;
 
 import java.io.File;
-import org.junit.Rule;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class TooManyReturnsCheckTest {
-
-  @Rule
-  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
   public void test() {
     TooManyReturnsCheck check = new TooManyReturnsCheck();
     check.max = 2;
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/tooManyReturns.py"), check);
-    String message = "This function has %s returns or yields, which is more than the %s allowed.";
-    checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(5).withMessage(String.format(message, 3, 2))
-        .next().atLine(15).withMessage(String.format(message, 3, 2))
-        .next().atLine(24).withMessage(String.format(message, 4, 2));
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/tooManyReturns.py"), check);
   }
 }
