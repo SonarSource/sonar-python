@@ -1,5 +1,6 @@
 
-def fun1(n):
+def fun1(n): # Noncompliant {{Use only "return" or only "yield", not both.}}
+#   ^^^^
     num = 0
     while num < n:
         yield num
@@ -21,7 +22,7 @@ def fun3(n):
         yield num
         num += 1
 
-def fun5(n):
+def fun5(n): # Noncompliant
     num = 0
     if n == 0:
         return

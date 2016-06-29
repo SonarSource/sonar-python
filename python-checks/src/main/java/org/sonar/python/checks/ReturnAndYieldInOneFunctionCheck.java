@@ -20,14 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ReturnAndYieldInOneFunctionCheck.CHECK_KEY,
@@ -37,7 +36,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("15min")
 @ActivatedByDefault
-public class ReturnAndYieldInOneFunctionCheck extends SquidCheck<Grammar> {
+public class ReturnAndYieldInOneFunctionCheck extends PythonCheck {
 
   public static final String MESSAGE = "Use only \"return\" or only \"yield\", not both.";
 
@@ -57,7 +56,7 @@ public class ReturnAndYieldInOneFunctionCheck extends SquidCheck<Grammar> {
     }
     for (AstNode returnStatement : returnStatements){
       if (returnHasArgument(returnStatement) && CheckUtils.insideFunction(returnStatement, node)){
-        getContext().createLineViolation(this, MESSAGE, node);
+        addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
         return;
       }
     }

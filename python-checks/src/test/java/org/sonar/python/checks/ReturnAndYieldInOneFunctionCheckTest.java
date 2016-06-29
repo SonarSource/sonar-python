@@ -21,21 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ReturnAndYieldInOneFunctionCheckTest {
 
   @Test
   public void test() {
     ReturnAndYieldInOneFunctionCheck check = new ReturnAndYieldInOneFunctionCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/returnAndYieldInOneFunction.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(2).withMessage(ReturnAndYieldInOneFunctionCheck.MESSAGE)
-        .next().atLine(24).withMessage(ReturnAndYieldInOneFunctionCheck.MESSAGE)
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/returnAndYieldInOneFunction.py"), check);
   }
 
 }
