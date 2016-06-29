@@ -54,4 +54,41 @@ public class PythonV3Test extends RuleTest {
     assertThat(p).notMatches("yield from");
   }
 
+  @Test
+  public void function_star_args(){
+    setRootRule(PythonGrammar.TYPEDARGSLIST);
+
+    assertThat(p)
+      .matches("*")
+      .matches("*p")
+      .matches("*p, p")
+      .matches("*p, p = 1")
+      .matches("*, p")
+      .matches("*, p=1")
+      .matches("*p, p, p")
+      .matches("*p, p, **p")
+      .matches("*p, **p")
+      .matches("*p, p=1, **p")
+      .matches("*p, p, p=1, **p")
+      .matches("*p, p=1, p, **p")
+      .matches("**p")
+      .matches("p")
+      .matches("p,")
+      .matches("p=1")
+      .matches("p=1, p")
+      .matches("p, p=1")
+      .matches("p=1, p=1")
+      .matches("p, **p")
+      .matches("p, p, **p")
+      .matches("p=1, p=1, **p")
+      .matches("p, *")
+      .matches("p, *, p=1, p")
+      .matches("p, *p")
+      .matches("p, *p, p")
+      .matches("p, *p, p, **p")
+      .matches("p, *, p, p, **p")
+      .matches("p, *p, **p")
+    ;
+  }
+
 }

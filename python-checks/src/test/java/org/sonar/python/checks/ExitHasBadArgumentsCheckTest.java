@@ -35,7 +35,6 @@ public class ExitHasBadArgumentsCheckTest {
       .next().atLine(4).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
       .next().atLine(10).withMessage(ExitHasBadArgumentsCheck.MESSAGE_REMOVE)
       .next().atLine(16).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
-      .next().atLine(34).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
       .next().atLine(40).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
         .noMore();
   }
