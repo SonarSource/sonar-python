@@ -20,18 +20,20 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
+
+import static org.sonar.python.api.PythonGrammar.STMT_LIST;
 
 @Rule(
     key = SameBranchCheck.CHECK_KEY,
@@ -41,7 +43,7 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class SameBranchCheck extends SquidCheck<Grammar> {
+public class SameBranchCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1871";
   public static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
 
@@ -91,13 +93,41 @@ public class SameBranchCheck extends SquidCheck<Grammar> {
   }
 
   private void checkBranch(List<AstNode> branches, int index) {
+    AstNode duplicateBlock = branches.get(index);
     for (int j = 0; j < index; j++) {
-      if (CheckUtils.equalNodes(branches.get(j), branches.get(index))) {
-        String message = String.format(MESSAGE, branches.get(j).getToken().getLine() + 1);
-        getContext().createLineViolation(this, message, branches.get(index).getToken().getLine() + 1);
+      AstNode originalBlock = branches.get(j);
+      if (CheckUtils.equalNodes(originalBlock, duplicateBlock)) {
+        String message = String.format(MESSAGE, originalBlock.getToken().getLine() + 1);
+        addIssue(location(duplicateBlock, message))
+          .secondary(location(originalBlock, "Original"));
         return;
       }
     }
+  }
+
+  private static IssueLocation location(AstNode suiteNode, String message) {
+    AstNode firstStatement = suiteNode.getFirstChild(PythonGrammar.STATEMENT);
+    if (firstStatement != null) {
+      return new IssueLocation(firstStatement, getLastNode(suiteNode), message);
+    } else {
+      return new IssueLocation(suiteNode.getFirstChild(STMT_LIST), message);
+    }
+  }
+
+  /**
+   * We need this method to avoid passing of new line or dedent as pointer to end of issue location
+   */
+  private static AstNode getLastNode(AstNode node) {
+    if (node.getNumberOfChildren() == 0) {
+      return node;
+    }
+
+    AstNode lastChild = node.getLastChild();
+    while (lastChild.is(PythonTokenType.NEWLINE, PythonTokenType.DEDENT, PythonTokenType.INDENT)) {
+      lastChild = lastChild.getPreviousSibling();
+    }
+
+    return getLastNode(lastChild);
   }
 
   private static AstNode singleIfChild(AstNode suite) {

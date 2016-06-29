@@ -21,23 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class SameBranchCheckTest {
 
   @Test
   public void test() {
     SameBranchCheck check = new SameBranchCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/sameBranch.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(9).withMessage(String.format(SameBranchCheck.MESSAGE, 5))
-        .next().atLine(17).withMessage(String.format(SameBranchCheck.MESSAGE, 14))
-        .next().atLine(26).withMessage(String.format(SameBranchCheck.MESSAGE, 21))
-        .next().atLine(32).withMessage(String.format(SameBranchCheck.MESSAGE, 30))
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/sameBranch.py"), check);
   }
 
 }
