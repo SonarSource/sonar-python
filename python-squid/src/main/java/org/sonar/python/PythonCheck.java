@@ -43,6 +43,12 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     return newIssue;
   }
 
+  protected final PreciseIssue addIssue(IssueLocation primaryLocation) {
+    PreciseIssue newIssue = new PreciseIssue(primaryLocation, getContext().getFile());
+    issues.add(newIssue);
+    return newIssue;
+  }
+
   protected final PreciseIssue addIssue(Token token, String message) {
     return addIssue(new AstNode(token), message);
   }
@@ -83,6 +89,11 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
       return this;
     }
 
+    public PreciseIssue secondary(IssueLocation issueLocation) {
+      secondaryLocations.add(issueLocation);
+      return this;
+    }
+
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
     }
@@ -97,6 +108,12 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
       this.message = message;
       this.firstToken = node.getToken();
       this.lastTokenLocation = new TokenLocation(node.getLastToken());
+    }
+
+    public IssueLocation(AstNode startNode, AstNode endNode, String message) {
+      this.message = message;
+      this.firstToken = startNode.getToken();
+      this.lastTokenLocation = new TokenLocation(endNode.getLastToken());
     }
 
     public String message() {
