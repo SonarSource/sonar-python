@@ -20,7 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
-import org.junit.Before;
+import java.util.Iterator;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.fs.InputFile;
@@ -32,6 +32,8 @@ import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.google.common.base.Charsets;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -45,48 +47,34 @@ import static org.mockito.Mockito.when;
 
 public class PythonSquidSensorTest {
 
-  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/");
+  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor");
   private SensorContextTester context = SensorContextTester.create(baseDir);
-  private PythonSquidSensor sensor;
-
-  @Before
-  public void setUp() {
-    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-    when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
-    ActiveRules activeRules = (new ActiveRulesBuilder())
-        .create(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
-        .setName("Print Statement Usage")
-        .activate()
-        .build();
-    CheckFactory checkFactory = new CheckFactory(activeRules);
-    sensor = new PythonSquidSensor(fileLinesContextFactory, checkFactory);
-  }
+  private ActiveRules activeRules;
 
   @Test
   public void sensor_descriptor() {
+    activeRules = (new ActiveRulesBuilder()).build();
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+    sensor().describe(descriptor);
 
-    sensor.describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("Python Squid Sensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(Type.MAIN);
   }
 
-
-
   @Test
   public void test_execute() {
-    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", "code_chunks_2.py")
-      .setModuleBaseDir(baseDir.toPath())
-      .setType(Type.MAIN)
-      .setLanguage(Python.KEY);
-    context.fileSystem().add(inputFile);
-    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), Charsets.UTF_8));
+    activeRules = (new ActiveRulesBuilder())
+      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
+      .setName("Print Statement Usage")
+      .activate()
+      .build();
 
-    sensor.execute(context);
+    inputFile("file1.py");
 
-    String key = "moduleKey:code_chunks_2.py";
+    sensor().execute(context);
+
+    String key = "moduleKey:file1.py";
     assertThat(context.measure(key, CoreMetrics.FILES).value()).isEqualTo(1);
     assertThat(context.measure(key, CoreMetrics.LINES).value()).isEqualTo(29);
     assertThat(context.measure(key, CoreMetrics.NCLOC).value()).isEqualTo(25);
@@ -97,6 +85,66 @@ public class PythonSquidSensorTest {
     assertThat(context.measure(key, CoreMetrics.COMMENT_LINES).value()).isEqualTo(9);
 
     assertThat(context.allIssues()).hasSize(1);
+  }
+
+  @Test
+  public void test_issues() {
+    activeRules = (new ActiveRulesBuilder())
+      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
+      .setName("Print Statement Usage")
+      .activate()
+      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
+      .activate()
+      .build();
+
+    InputFile inputFile = inputFile("file2.py");
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(2);
+    Iterator<Issue> issuesIterator = context.allIssues().iterator();
+
+    int checkedIssues = 0;
+
+    while (issuesIterator.hasNext()) {
+      Issue issue = issuesIterator.next();
+      IssueLocation issueLocation = issue.primaryLocation();
+      assertThat(issueLocation.inputComponent()).isEqualTo(inputFile);
+      assertThat(issue.gap()).isNull();
+
+      if (issue.ruleKey().rule().equals("S134")) {
+        assertThat(issueLocation.message()).isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
+        assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(7, 16, 7, 18));
+        assertThat(issue.flows()).hasSize(4);
+        checkedIssues++;
+      }
+
+      if (issue.ruleKey().rule().equals("PrintStatementUsage")) {
+        assertThat(issueLocation.message()).isEqualTo("Replace print statement by built-in function.");
+        assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
+        assertThat(issue.flows()).isEmpty();
+        checkedIssues++;
+      }
+    }
+
+    assertThat(checkedIssues).isEqualTo(2);
+  }
+
+  private PythonSquidSensor sensor() {
+    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+    when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
+    CheckFactory checkFactory = new CheckFactory(activeRules);
+    return new PythonSquidSensor(fileLinesContextFactory, checkFactory);
+  }
+
+  private InputFile inputFile(String name) {
+    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", name)
+      .setModuleBaseDir(baseDir.toPath())
+      .setType(Type.MAIN)
+      .setLanguage(Python.KEY);
+    context.fileSystem().add(inputFile);
+    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), Charsets.UTF_8));
+    return inputFile;
   }
 
 }

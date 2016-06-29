@@ -113,7 +113,6 @@ public final class PythonSquidSensor implements Sensor {
     (new PythonCoverageSensor()).execute(context, linesOfCode);
   }
 
-  // fixme (Lena): unit test it with new Sensor API
   private void savePreciseIssues(List<PythonCheck> pythonChecks) {
     for (PythonCheck pythonCheck : pythonChecks) {
       RuleKey ruleKey = checks.ruleKey(pythonCheck);
