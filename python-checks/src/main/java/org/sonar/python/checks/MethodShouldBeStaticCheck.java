@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import java.util.ArrayList;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -54,30 +53,47 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
   public void visitNode(AstNode node) {
     if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && hasValuableCode(node)){
       String self = getFirstArgument(node);
-      if (self != null && !isUsed(node, self) &&!isDocStringsAndNotImplementedError(node)){
+      if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)){
         getContext().createLineViolation(this, MESSAGE, node.getFirstChild(PythonGrammar.FUNCNAME));
       }
     }
   }
 
-  private static boolean isDocStringsAndNotImplementedError(AstNode funcDef) {
-    List<AstNode> statements = funcDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
+  private static boolean onlyRaisesNotImplementedError(AstNode funcDef) {
+    AstNode suite = funcDef.getFirstChild(PythonGrammar.SUITE);
+    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
 
-    if (!statements.isEmpty()) {
-      List<AstNode> firstStatements = new ArrayList<>(statements);
-      firstStatements.remove(statements.size() - 1);
-      for (AstNode statement : firstStatements) {
-        if (!isDocstring(statement)) {
+    if (statements.isEmpty()) {
+      // case of a method defined in one single line
+      AstNode statementList = suite.getFirstChild();
+      if (raisesNotImplementedError(statementList)) {
+        return true;
+      }
+      
+    } else {
+      // standard case of a method defined on more than one line
+      if (statements.size() <= 2) {
+        if (statements.size() == 2 && !isDocstring(statements.get(0))) {
           return false;
         }
+  
+        AstNode statementList = statements.get(statements.size() - 1).getFirstChild(PythonGrammar.STMT_LIST);
+        if (statementList != null && raisesNotImplementedError(statementList)) {
+          return true;
+        }
       }
+    }
 
-      AstNode testStatement = statements.get(statements.size() - 1).getFirstDescendant(PythonGrammar.TEST);
+    return false;
+  }
+  
+  private static boolean raisesNotImplementedError(AstNode statementList) {
+    if (isRaise(statementList)) {
+      AstNode testStatement = statementList.getFirstDescendant(PythonGrammar.TEST);
       if ("NotImplementedError".equals(testStatement.getToken().getValue())) {
         return true;
       }
     }
-
     return false;
   }
 
@@ -105,6 +121,10 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
   
   private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
     return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
+  }
+  
+  private static boolean isRaise(AstNode statementList) {
+    return statementList.getFirstChild().getFirstDescendant(PythonGrammar.RAISE_STMT) != null;
   }
 
   private static boolean isUsed(AstNode funcDef, String self) {
