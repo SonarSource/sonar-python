@@ -20,13 +20,12 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ReturnYieldOutsideFunctionCheck.CHECK_KEY,
@@ -36,7 +35,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("15min")
 @ActivatedByDefault
-public class ReturnYieldOutsideFunctionCheck extends SquidCheck<Grammar> {
+public class ReturnYieldOutsideFunctionCheck extends PythonCheck {
 
   public static final String MESSAGE = "Remove this use of \"%s\".";
   public static final String CHECK_KEY = "S2711";
@@ -62,6 +61,6 @@ public class ReturnYieldOutsideFunctionCheck extends SquidCheck<Grammar> {
   }
 
   private void raiseIssue(AstNode node) {
-    getContext().createLineViolation(this, String.format(MESSAGE, node.getToken().getValue()), node);
+    addIssue(node, String.format(MESSAGE, node.getToken().getValue()));
   }
 }

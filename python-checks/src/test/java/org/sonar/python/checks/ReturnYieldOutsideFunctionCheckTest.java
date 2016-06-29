@@ -21,22 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ReturnYieldOutsideFunctionCheckTest {
 
   @Test
   public void test() {
     ReturnYieldOutsideFunctionCheck check = new ReturnYieldOutsideFunctionCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/returnYieldOutsideFunction.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage(String.format(ReturnYieldOutsideFunctionCheck.MESSAGE, "return"))
-        .next().atLine(12).withMessage(String.format(ReturnYieldOutsideFunctionCheck.MESSAGE, "return"))
-        .next().atLine(16).withMessage(String.format(ReturnYieldOutsideFunctionCheck.MESSAGE, "yield"))
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/returnYieldOutsideFunction.py"), check);
   }
 
 }

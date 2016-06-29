@@ -1,6 +1,7 @@
 class MyClass:
     while True:
-        return False
+        return False # Noncompliant {{Remove this use of "return".}}
+#       ^^^^^^^^^^^^
 
     def func(self):
         while True:
@@ -9,9 +10,8 @@ class MyClass:
 
 def func():
     class A:
-        return True
+        return True # Noncompliant
     return 1
 
 
-yield True
-
+yield True # Noncompliant {{Remove this use of "yield".}}
