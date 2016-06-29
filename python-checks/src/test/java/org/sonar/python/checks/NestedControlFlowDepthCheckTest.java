@@ -21,20 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class NestedControlFlowDepthCheckTest {
 
   @Test
   public void test() {
     NestedControlFlowDepthCheck check = new NestedControlFlowDepthCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/nestedControlFlowDepth.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(10).withMessage(
-        "Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.")
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/nestedControlFlowDepth.py"), check);
   }
 
 }

@@ -20,14 +20,16 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = NestedControlFlowDepthCheck.CHECK_KEY,
@@ -37,17 +39,18 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class NestedControlFlowDepthCheck extends SquidCheck<Grammar> {
+public class NestedControlFlowDepthCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S134";
   private static final int DEFAULT_MAX = 4;
+  private static final String MESSAGE = "Refactor this code to not nest more than %s \"if\", \"for\", \"while\", \"try\" and \"with\" statements.";
 
   @RuleProperty(
     key = "max",
     defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 
-  private int depth;
+  private Deque<AstNode> depthNodes;
 
   @Override
   public void init() {
@@ -61,21 +64,30 @@ public class NestedControlFlowDepthCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitFile(AstNode astNode) {
-    depth = 0;
+    depthNodes = new ArrayDeque<>();
   }
 
   @Override
   public void visitNode(AstNode node) {
-    depth++;
-    if (depth == max + 1) {
-      String message = "Refactor this code to not nest more than {0} \"if\", \"for\", \"while\", \"try\" and \"with\" statements.";
-      getContext().createLineViolation(this, message, node, max);
+    AstNode stmtKeywordNode = node.getFirstChild();
+    depthNodes.push(stmtKeywordNode);
+    if (depthNodes.size() == max + 1) {
+      PreciseIssue issue = addIssue(stmtKeywordNode, String.format(MESSAGE, max));
+
+      Iterator<AstNode> depthNodesIterator = depthNodes.iterator();
+
+      // skip current node
+      depthNodesIterator.next();
+
+      while (depthNodesIterator.hasNext()) {
+        issue.secondary(depthNodesIterator.next(), "Nesting +1");
+      }
     }
   }
 
   @Override
   public void leaveNode(AstNode astNode) {
-    depth--;
+    depthNodes.pop();
   }
 }
 
