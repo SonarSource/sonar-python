@@ -4,7 +4,8 @@ if param == 1:
     print(1)
 elif param == 2:
     print(2)
-elif param == 1:            # Noncompliant
+elif param == 1:            # Noncompliant {{This branch duplicates the one on line 3.}}
+#    ^^^^^^^^^^
     print(3)
 
 if param == 1:
@@ -13,7 +14,7 @@ else:
     if param == 2:
         print(2)
     else:
-        if param == 2:            # Noncompliant
+        if param == 2:            # Noncompliant [[secondary=-3]]
             print(3)
 
 

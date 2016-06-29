@@ -20,17 +20,16 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -41,8 +40,9 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class SameConditionCheck extends SquidCheck<Grammar> {
+public class SameConditionCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1862";
+  private static final String MESSAGE = "This branch duplicates the one on line %s.";
 
   private List<AstNode> ignoreList;
 
@@ -92,8 +92,8 @@ public class SameConditionCheck extends SquidCheck<Grammar> {
   private void checkCondition(List<AstNode> conditions, int index) {
     for (int j = 0; j < index; j++) {
       if (CheckUtils.equalNodes(conditions.get(j), conditions.get(index))) {
-        String message = String.format("This branch duplicates the one on line %s.", conditions.get(j).getToken().getLine());
-        getContext().createLineViolation(this, message, conditions.get(index).getToken().getLine());
+        String message = String.format(MESSAGE, conditions.get(j).getToken().getLine());
+        addIssue(conditions.get(index), message).secondary(conditions.get(j), "Original");
         return;
       }
     }

@@ -21,24 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class SameConditionCheckTest {
-
-  private static final String message = "This branch duplicates the one on line %s.";
 
   @Test
   public void test() {
     SameConditionCheck check = new SameConditionCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/sameCondition.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(7).withMessage(String.format(message, 3))
-      .next().atLine(16).withMessage(String.format(message, 13))
-      .next().atLine(25).withMessage(String.format(message, 20))
-      .next().atLine(35).withMessage(String.format(message, 33))
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/sameCondition.py"), check);
   }
 
 }
