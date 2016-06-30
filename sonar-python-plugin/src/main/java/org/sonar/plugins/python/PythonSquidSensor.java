@@ -97,6 +97,7 @@ public final class PythonSquidSensor implements Sensor {
 
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(checks.all());
     visitors.add(new FileLinesVisitor(fileLinesContextFactory, context.fileSystem(), linesOfCode));
+    visitors.add(new PythonHighlighter(context));
     this.scanner = PythonAstScanner.create(createConfiguration(), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     FilePredicates p = context.fileSystem().predicates();
     scanner.scanFiles(Lists.newArrayList(context.fileSystem().files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));

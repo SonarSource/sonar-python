@@ -85,6 +85,9 @@ public class PythonSquidSensorTest {
     assertThat(context.measure(key, CoreMetrics.COMMENT_LINES).value()).isEqualTo(9);
 
     assertThat(context.allIssues()).hasSize(1);
+    
+    String msg = "number of TypeOfTypes for the highlighting of keyword 'def'";
+    assertThat(context.highlightingTypeAt(key, 18, 2)).as(msg).hasSize(1);
   }
 
   @Test

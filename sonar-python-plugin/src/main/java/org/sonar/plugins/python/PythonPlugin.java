@@ -24,7 +24,6 @@ import java.util.List;
 import org.sonar.api.SonarPlugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
-import org.sonar.plugins.python.colorizer.PythonColorizer;
 import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
@@ -48,7 +47,6 @@ public class PythonPlugin extends SonarPlugin {
           .build(),
 
         Python.class,
-        PythonColorizer.class,
         PythonCpdMapping.class,
 
         PythonProfile.class,
