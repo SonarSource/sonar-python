@@ -20,13 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = BackticksUsageCheck.CHECK_KEY,
@@ -35,20 +35,18 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class BackticksUsageCheck extends SquidCheck<Grammar> {
+public class BackticksUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "BackticksUsage";
-  private int prevLine = -1;
 
   @Override
   public void init() {
-    subscribeTo(PythonPunctuator.BACKTICK);
+    subscribeTo(PythonGrammar.ATOM);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (prevLine != astNode.getTokenLine()) {
-      prevLine = astNode.getTokenLine();
-      getContext().createLineViolation(this, "Use \"repr\" instead.", astNode);
+    if (astNode.hasDirectChildren(PythonPunctuator.BACKTICK)) {
+      addIssue(astNode, "Use \"repr\" instead.");
     }
   }
 
