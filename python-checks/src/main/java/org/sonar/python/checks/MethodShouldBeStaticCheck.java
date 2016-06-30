@@ -53,10 +53,48 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
   public void visitNode(AstNode node) {
     if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && hasValuableCode(node)){
       String self = getFirstArgument(node);
-      if (self != null && !isUsed(node, self)){
+      if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)){
         getContext().createLineViolation(this, MESSAGE, node.getFirstChild(PythonGrammar.FUNCNAME));
       }
     }
+  }
+
+  private static boolean onlyRaisesNotImplementedError(AstNode funcDef) {
+    AstNode suite = funcDef.getFirstChild(PythonGrammar.SUITE);
+    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
+
+    if (statements.isEmpty()) {
+      // case of a method defined in one single line
+      AstNode statementList = suite.getFirstChild();
+      if (raisesNotImplementedError(statementList)) {
+        return true;
+      }
+      
+    } else {
+      // standard case of a method defined on more than one line
+      if (statements.size() <= 2) {
+        if (statements.size() == 2 && !isDocstring(statements.get(0))) {
+          return false;
+        }
+  
+        AstNode statementList = statements.get(statements.size() - 1).getFirstChild(PythonGrammar.STMT_LIST);
+        if (statementList != null && raisesNotImplementedError(statementList)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+  
+  private static boolean raisesNotImplementedError(AstNode statementList) {
+    if (isRaise(statementList)) {
+      AstNode testStatement = statementList.getFirstDescendant(PythonGrammar.TEST);
+      if ("NotImplementedError".equals(testStatement.getToken().getValue())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private static boolean hasValuableCode(AstNode funcDef) {
@@ -71,15 +109,22 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
     }
 
     return statements.size() != 2 || !isDocstringAndPass(statements.get(0), statements.get(1));
+  }
 
+  private static boolean isDocstring(AstNode statement) {
+    return statement.getToken().getType().equals(PythonTokenType.STRING);
   }
 
   private static boolean isDocstringOrPass(AstNode statement) {
     return statement.getFirstDescendant(PythonGrammar.PASS_STMT) != null || statement.getToken().getType().equals(PythonTokenType.STRING);
   }
-
+  
   private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
     return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
+  }
+  
+  private static boolean isRaise(AstNode statementList) {
+    return statementList.getFirstChild().hasDescendant(PythonGrammar.RAISE_STMT);
   }
 
   private static boolean isUsed(AstNode funcDef, String self) {

@@ -72,6 +72,66 @@ class A:
 
     def fun20(): #syntax error
         print(1)
+        
+        
+    # From here on, we test the "raise NotImplementedError" case 
 
+    # don't raise issue, as the method consists only of a NotImplementedError   
+    def fun21a(slf):
+        raise NotImplementedError
+
+    # don't raise issue, as the method consists only of a NotImplementedError   
+    def fun21b(slf):
+        raise NotImplementedError('Temporary stuff')
+
+    # raise issue, as NotImplementedError is not the only content of the method
+    def fun22(slf):
+        print(1)
+        raise NotImplementedError
+
+    # raise issue, as NotImplementedError is not the only content of the method
+    def fun23(slf):
+        if True:
+            raise NotImplementedError
+
+    # raise issue, as the error is not a NotImplementedError 
+    def fun24(slf):
+        raise ValueError('Some error')
+        
+    # don't raise issue, as the method has no argument
+    def fun25():
+        raise NotImplementedError
+                
+    # don't raise issue, as we don't handle a doc string as a statement
+    def fun26(slf):
+        """ Short explanation """
+        raise NotImplementedError
+                
+    # raise issue, as the second literal is not a doc string
+    def fun27(slf):
+        """ Long explanation
+            bla bla
+        """
+        """ Another literal """
+        raise NotImplementedError
+        
+    # raise issue, as the error is returned, not thrown
+    def fun28(slf):
+        return NotImplementedError
+        
+    # don't raise issue, as the method consists only of a NotImplementedError   
+    def fun29(slf): raise NotImplementedError
+    
+    # raise issue, as NotImplementedError is not the only content of the method
+    def fun30(slf): print(1) ; raise NotImplementedError
+                
+    # raise issue, as the error is not a NotImplementedError
+    def fun31(slf): raise ValueError('Some error')
+    
+    # don't raise issue, as the method consists only of a NotImplementedError   
+    def fun25(slf, other):
+        # some comment
+        raise NotImplementedError
+                
 def fun():
     print(1)
