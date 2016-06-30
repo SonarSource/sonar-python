@@ -21,22 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ExitHasBadArgumentsCheckTest {
 
   @Test
   public void test() {
     ExitHasBadArgumentsCheck check = new ExitHasBadArgumentsCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/exitHasBadArguments.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(4).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
-      .next().atLine(10).withMessage(ExitHasBadArgumentsCheck.MESSAGE_REMOVE)
-      .next().atLine(16).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
-      .next().atLine(40).withMessage(ExitHasBadArgumentsCheck.MESSAGE_ADD)
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/exitHasBadArguments.py"), check);
   }
 
 }

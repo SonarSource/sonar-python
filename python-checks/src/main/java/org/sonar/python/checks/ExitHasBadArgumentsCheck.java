@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ExitHasBadArgumentsCheck.CHECK_KEY,
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class ExitHasBadArgumentsCheck extends SquidCheck<Grammar> {
+public class ExitHasBadArgumentsCheck extends PythonCheck {
 
   public static final String MESSAGE_ADD = "Add the missing argument.";
   public static final String MESSAGE_REMOVE = "Remove the unnecessary argument.";
@@ -77,7 +76,9 @@ public class ExitHasBadArgumentsCheck extends SquidCheck<Grammar> {
       if (argumentsNumber > EXIT_ARGUMENTS_NUMBER){
         message = MESSAGE_REMOVE;
       }
-      getContext().createLineViolation(this, message, node);
+      AstNode funcName = node.getFirstChild(PythonGrammar.FUNCNAME);
+      AstNode rightParenthesis = node.getFirstChild(PythonPunctuator.RPARENTHESIS);
+      addIssue(new IssueLocation(funcName, rightParenthesis, message));
     }
   }
 }

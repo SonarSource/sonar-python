@@ -1,19 +1,20 @@
 class MyClass1:
     def __enter__(self):
         pass
-    def __exit__(self, (exc_type, exc_val)):
+    def __exit__(self, (exc_type, exc_val)): # Noncompliant {{Add the missing argument.}}
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         pass
 
 class MyClass2:
     def __enter__(self):
         pass
-    def __exit__(self, exc_type, exc_val, exc_trace, exc_one_more):  # Noncompliant
+    def __exit__(self, exc_type, exc_val, exc_trace, exc_one_more):  # Noncompliant {{Remove the unnecessary argument.}}
         pass
 
 class MyClass3:
     def __enter__(self):
         pass
-    def __exit__(self):
+    def __exit__(self):  # Noncompliant
         pass
 
 class MyClass4:
@@ -37,5 +38,5 @@ class MyClass5:
 class MyClass6:
     def __enter__(self):
         pass
-    def __exit__():
+    def __exit__():  # Noncompliant
         pass
