@@ -83,6 +83,12 @@ public class PythonHighlighterTest {
     // 'some string'
     checkOnRange(18, 4, 13, TypeOfText.STRING);
 
+    // triple simple quotes
+    checkOnRange(14, 0, 15, TypeOfText.STRING);
+
+    // triple double quotes
+    checkOnRange(16, 0, 15, TypeOfText.STRING);
+
     // y = """ some string
     // that extends
     // on several
@@ -109,15 +115,6 @@ public class PythonHighlighterTest {
   public void comment() throws Exception {
     checkOnRange(6, 0, 19, TypeOfText.COMMENT);
     checkOnRange(9, 10, 15, TypeOfText.COMMENT);
-  }
-
-  @Test
-  public void docStringTripleSimpleQuotes() throws Exception {
-    // triple simple quotes
-    checkOnRange(14, 0, 15, TypeOfText.STRING);
-
-    // triple double quotes
-    checkOnRange(16, 0, 15, TypeOfText.STRING);
   }
 
   /**
