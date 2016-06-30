@@ -88,6 +88,8 @@ public class PythonV3Test extends RuleTest {
       .matches("p, *p, p, **p")
       .matches("p, *, p, p, **p")
       .matches("p, *p, **p")
+
+      .notMatches("p *p")
     ;
   }
 
