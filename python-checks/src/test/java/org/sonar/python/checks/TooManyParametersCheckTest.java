@@ -35,6 +35,7 @@ public class TooManyParametersCheckTest {
       .next().atLine(3).withMessage("Lambda has 8 parameters, which is greater than the 7 authorized.")
       .next().atLine(8).withMessage("Function \"incorrect_function\" has 8 parameters, which is greater than the 7 authorized.")
       .next().atLine(15).withMessage("Method \"incorrect_method\" has 8 parameters, which is greater than the 7 authorized.")
+      .next().atLine(18)
       .noMore();
   }
 

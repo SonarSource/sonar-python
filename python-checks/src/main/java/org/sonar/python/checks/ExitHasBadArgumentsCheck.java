@@ -25,6 +25,7 @@ import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.checks.SquidCheck;
@@ -59,12 +60,12 @@ public class ExitHasBadArgumentsCheck extends SquidCheck<Grammar> {
     AstNode varArgList = node.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (varArgList != null) {
       List<AstNode> arguments = varArgList.getChildren(PythonGrammar.TFPDEF);
-      List<AstNode> starArguments = varArgList.getChildren(PythonGrammar.NAME);
-      if (starArguments.size() == 1 && arguments.size() == 1){
-        // def __init__(self, *arg):
-        return;
+      for (AstNode argument : arguments) {
+        if (argument.getPreviousSibling() != null && argument.getPreviousSibling().is(PythonPunctuator.MUL_MUL, PythonPunctuator.MUL)) {
+          return;
+        }
       }
-      raiseIssue(node, arguments.size() + starArguments.size());
+      raiseIssue(node, arguments.size());
     } else {
       raiseIssue(node, 0);
     }

@@ -1,16 +1,19 @@
 correct_lamda = lambda p1, p2, p3, p4, p5, p6, p7: p1
 
-incorrect_lamda = lambda p1, p2, p3, p4, p5, p6, p7, p8: p1
+incorrect_lamda = lambda p1, p2, p3, p4, p5, p6, p7, p8: p1 # Noncompliant
 
 def correct_function(p1, p2, p3, p4, p5, p6, p7):
 	pass
 
-def incorrect_function(p1, p2, p3, p4, p5, p6, p7, p8):
+def incorrect_function(p1, p2, p3, p4, p5, p6, p7, p8): # Noncompliant
 	pass
 
 class MyClass:
 	def correct_method(p1, p2, p3, p4, p5, p6, p7):
 		pass
 
-	def incorrect_method(p1, p2, p3, p4, p5, p6, p7, p8):
+	def incorrect_method(p1, p2, p3, p4, p5, p6, p7, p8): # Noncompliant
 		pass
+
+def star_parameter(p1, p2, p3, p4, p5, p6, p7, *p8): # Noncompliant
+	pass

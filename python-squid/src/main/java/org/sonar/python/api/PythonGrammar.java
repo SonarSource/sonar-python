@@ -245,15 +245,17 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(FPLIST).is(FPDEF, b.zeroOrMore(",", FPDEF), b.optional(","));
 
     b.rule(TYPEDARGSLIST).is(b.firstOf(
-      b.sequence(b.zeroOrMore(TFPDEF, b.optional("=", TEST), ","), b.firstOf(b.sequence("*", NAME, b.optional(",", "**", NAME)), b.sequence("**", NAME))),
-      b.sequence(TFPDEF, b.optional("=", TEST), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",")))
-    );
+      b.sequence("**", TFPDEF),
+      b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF)),
+      b.sequence(TFPDEF, b.optional("=", TEST), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", b.optional(b.firstOf(
+        b.sequence("**", TFPDEF),
+        b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF))
+      ))))
+    ));
     b.rule(TFPDEF).is(b.firstOf(
       b.sequence(NAME, b.optional(":", TEST)),
       b.sequence("(", TFPLIST, ")")));
     b.rule(TFPLIST).is(TFPDEF, b.zeroOrMore(",", TFPDEF), b.optional(","));
-
-
   }
 
   /**
