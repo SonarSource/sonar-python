@@ -128,5 +128,10 @@ class A:
     # raise issue, as the error is not a NotImplementedError
     def fun31(slf): raise ValueError('Some error')
     
+    # don't raise issue, as the method consists only of a NotImplementedError   
+    def fun25(slf, other):
+        # some comment
+        raise NotImplementedError
+                
 def fun():
     print(1)

@@ -124,7 +124,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
   }
   
   private static boolean isRaise(AstNode statementList) {
-    return statementList.getFirstChild().getFirstDescendant(PythonGrammar.RAISE_STMT) != null;
+    return statementList.getFirstChild().hasDescendant(PythonGrammar.RAISE_STMT);
   }
 
   private static boolean isUsed(AstNode funcDef, String self) {
