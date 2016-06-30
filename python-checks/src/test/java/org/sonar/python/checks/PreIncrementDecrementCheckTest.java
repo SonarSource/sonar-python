@@ -21,9 +21,7 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class PreIncrementDecrementCheckTest {
 
@@ -31,11 +29,7 @@ public class PreIncrementDecrementCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/preIncrementDecrement.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(2).withMessage("This statement doesn't produce the expected result, replace use of non-existent pre-increment operator")
-        .next().atLine(4).withMessage("This statement doesn't produce the expected result, replace use of non-existent pre-decrement operator")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/preIncrementDecrement.py"), check);
   }
 
 }

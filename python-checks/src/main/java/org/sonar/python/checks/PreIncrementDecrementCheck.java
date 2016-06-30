@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = PreIncrementDecrementCheck.CHECK_KEY,
@@ -38,8 +37,9 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
+public class PreIncrementDecrementCheck extends PythonCheck {
   public static final String CHECK_KEY = "PreIncrementDecrement";
+  private static final String MESSAGE = "This statement doesn't produce the expected result, replace use of non-existent pre-%srement operator";
 
   @Override
   public void init() {
@@ -52,10 +52,10 @@ public class PreIncrementDecrementCheck extends SquidCheck<Grammar> {
     AstNode firstChild = children.get(0);
     AstNode secondChild = children.get(1);
     if (firstChild.is(PythonPunctuator.PLUS) && secondChild.getFirstChild().is(PythonPunctuator.PLUS)) {
-      getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-increment operator", astNode);
+      addIssue(astNode, String.format(MESSAGE, "inc"));
     }
     if (firstChild.is(PythonPunctuator.MINUS) && secondChild.getFirstChild().is(PythonPunctuator.MINUS)) {
-      getContext().createLineViolation(this, "This statement doesn't produce the expected result, replace use of non-existent pre-decrement operator", astNode);
+      addIssue(astNode, String.format(MESSAGE, "dec"));
     }
   }
 
