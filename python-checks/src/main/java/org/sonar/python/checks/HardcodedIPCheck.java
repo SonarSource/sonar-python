@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = HardcodedIPCheck.CHECK_KEY,
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("30min")
 @ActivatedByDefault
-public class HardcodedIPCheck extends SquidCheck<Grammar> {
+public class HardcodedIPCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1313";
 
   private static final String IP_ADDRESS_V4_REGEX = "((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))";
@@ -63,13 +62,14 @@ public class HardcodedIPCheck extends SquidCheck<Grammar> {
 
     if (matcher.find()) {
       String ipAddress = matcher.group();
-      getContext().createLineViolation(this, String.format(message, ipAddress), node);
+      addIssue(node, String.format(message, ipAddress));
+
     } else {
       matcher = patternV6.matcher(string);
       if (matcher.find()) {
         String ipAddress = matcher.group();
         if (ipAddress.length() > 8) {
-          getContext().createLineViolation(this, String.format(message, ipAddress), node);
+          addIssue(node, String.format(message, ipAddress));
         }
       }
     }
