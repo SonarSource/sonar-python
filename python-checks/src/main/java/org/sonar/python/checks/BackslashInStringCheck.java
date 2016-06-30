@@ -20,12 +20,11 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = BackslashInStringCheck.CHECK_KEY,
@@ -33,7 +32,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "\"\\\" should only be used as an escape character outside of raw strings"
 )
 @SqaleConstantRemediation("2min")
-public class BackslashInStringCheck extends SquidCheck<Grammar> {
+public class BackslashInStringCheck extends PythonCheck {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
   private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";
@@ -58,7 +57,7 @@ public class BackslashInStringCheck extends SquidCheck<Grammar> {
       }
       if (!inPrefix) {
         if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1) {
-          getContext().createLineViolation(this, MESSAGE, node);
+          addIssue(node, MESSAGE);
         }
         isEscaped = c == '\\' && !isEscaped;
       }

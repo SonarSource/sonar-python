@@ -21,24 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class BackslashInStringCheckTest {
 
   @Test
   public void test() {
     BackslashInStringCheck check = new BackslashInStringCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/backslashInString.py"), check);
-    String message = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(2).withMessage(message)
-      .next().atLine(4).withMessage(message)
-      .next().atLine(6).withMessage(message)
-      .next().atLine(8).withMessage(message)
-      .next().atLine(10).withMessage(message)
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/backslashInString.py"), check);
   }
 
 }
