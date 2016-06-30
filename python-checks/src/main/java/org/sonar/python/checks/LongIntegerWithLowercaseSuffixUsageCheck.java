@@ -20,12 +20,11 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY,
@@ -35,9 +34,10 @@ import org.sonar.squidbridge.checks.SquidCheck;
     status = org.sonar.api.rules.Rule.STATUS_DEPRECATED
 )
 @SqaleConstantRemediation("2min")
-public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<Grammar> {
+public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "LongIntegerWithLowercaseSuffixUsage";
+  private static final String MESSAGE = "Replace suffix in long integers from lower case \"l\" to upper case \"L\".";
 
   @Override
   public void init() {
@@ -48,7 +48,7 @@ public class LongIntegerWithLowercaseSuffixUsageCheck extends SquidCheck<Grammar
   public void visitNode(AstNode astNode) {
     String value = astNode.getTokenValue();
     if (value.charAt(value.length() - 1) == 'l') {
-      getContext().createLineViolation(this, "Replace suffix in long integers from lower case \"l\" to upper case \"L\".", astNode);
+      addIssue(astNode, MESSAGE);
     }
   }
 

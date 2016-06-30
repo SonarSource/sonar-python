@@ -21,20 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class LongIntegerWithLowercaseSuffixUsageCheckTest {
 
   @Test
   public void test() {
     LongIntegerWithLowercaseSuffixUsageCheck check = new LongIntegerWithLowercaseSuffixUsageCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/longIntegerWithLowercaseSuffix.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Replace suffix in long integers from lower case \"l\" to upper case \"L\".")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/longIntegerWithLowercaseSuffix.py"), check);
   }
 
 }
