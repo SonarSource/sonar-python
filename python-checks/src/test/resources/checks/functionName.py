@@ -7,7 +7,7 @@ def Badly_Named_Function():
 def correct_name_with_digits1():
 	pass
 
-def too_long_function_name_because_it_has_more_than_30_characters():
+def long_function_name_is_still_correct():
 	pass
 
 class MyClass:

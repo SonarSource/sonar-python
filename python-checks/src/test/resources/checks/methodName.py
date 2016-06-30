@@ -5,7 +5,7 @@ class MyClass:
 	def Incorrect_Method_Name():
 		pass
 
-	def too_long_method_name_because_it_has_more_than_30_characters():
+	def long_method_name_is_still_correct():
 		pass
 
 def This_Is_A_Function():
