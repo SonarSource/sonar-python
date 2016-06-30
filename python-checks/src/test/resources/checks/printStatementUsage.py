@@ -1,2 +1,4 @@
-print 1
-print('1')
+def foo():
+    print 1 # Noncompliant {{Replace print statement by built-in function.}}
+#   ^^^^^
+    print('1')

@@ -93,8 +93,7 @@ public class PythonSquidSensorTest {
   @Test
   public void test_issues() {
     activeRules = (new ActiveRulesBuilder())
-      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
-      .setName("Print Statement Usage")
+      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "OneStatementPerLine"))
       .activate()
       .create(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
       .activate()
@@ -121,8 +120,8 @@ public class PythonSquidSensorTest {
         checkedIssues++;
       }
 
-      if (issue.ruleKey().rule().equals("PrintStatementUsage")) {
-        assertThat(issueLocation.message()).isEqualTo("Replace print statement by built-in function.");
+      if (issue.ruleKey().rule().equals("OneStatementPerLine")) {
+        assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
         assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
         assertThat(issue.flows()).isEmpty();
         checkedIssues++;

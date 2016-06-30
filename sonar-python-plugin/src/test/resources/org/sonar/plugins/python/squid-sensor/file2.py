@@ -1,4 +1,4 @@
-print "hello" # Noncompliant "PrintStatementUsage"
+foo(); bar(); # Noncompliant "OneStatementPerLine"
 
 for x in range(10):
     while x:
