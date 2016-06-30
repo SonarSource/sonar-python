@@ -20,13 +20,12 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = InequalityUsageCheck.CHECK_KEY,
@@ -36,7 +35,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class InequalityUsageCheck extends SquidCheck<Grammar> {
+public class InequalityUsageCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "InequalityUsage";
 
@@ -47,7 +46,7 @@ public class InequalityUsageCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    getContext().createLineViolation(this, "Replace \"<>\" by \"!=\".", astNode);
+    addIssue(astNode, "Replace \"<>\" by \"!=\".");
   }
 
 }
