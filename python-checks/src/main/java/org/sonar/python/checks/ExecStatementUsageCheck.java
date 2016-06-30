@@ -20,13 +20,12 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ExecStatementUsageCheck.CHECK_KEY,
@@ -36,7 +35,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class ExecStatementUsageCheck extends SquidCheck<Grammar> {
+public class ExecStatementUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "ExecStatementUsage";
   @Override
   public void init() {
@@ -45,7 +44,7 @@ public class ExecStatementUsageCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    getContext().createLineViolation(this, "Do not use exec statement.", astNode);
+    addIssue(astNode.getFirstChild(), "Do not use exec statement.");
   }
 
 }

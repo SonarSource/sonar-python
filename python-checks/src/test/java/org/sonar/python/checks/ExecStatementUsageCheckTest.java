@@ -21,20 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ExecStatementUsageCheckTest {
 
   @Test
   public void test() {
     ExecStatementUsageCheck check = new ExecStatementUsageCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/execStatementUsage.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Do not use exec statement.")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/execStatementUsage.py"), check);
   }
 
 }
