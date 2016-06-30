@@ -12,7 +12,7 @@ for i in range(1):
 if True:
     print(1)
     raise TypeError("message") # Noncompliant {{Remove the code after this "raise".}}
-#   ^^^^^
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^
     if True: pass
 
 def fun1():

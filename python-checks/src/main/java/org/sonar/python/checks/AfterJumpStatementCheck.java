@@ -71,7 +71,7 @@ public class AfterJumpStatementCheck extends PythonCheck {
   }
 
   private void raiseIssue(AstNode node) {
-    addIssue(node.getToken(), String.format(MESSAGE, node.getTokenValue()));
+    addIssue(node, String.format(MESSAGE, node.getTokenValue()));
   }
 
 }

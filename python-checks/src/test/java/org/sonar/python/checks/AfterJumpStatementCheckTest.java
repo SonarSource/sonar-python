@@ -20,17 +20,10 @@
 package org.sonar.python.checks;
 
 import java.io.File;
-import org.junit.Rule;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
 
 public class AfterJumpStatementCheckTest {
-
-  @Rule
-  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
   public void test() {
