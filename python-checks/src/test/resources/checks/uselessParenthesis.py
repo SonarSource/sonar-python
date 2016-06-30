@@ -1,47 +1,49 @@
-x = (1 + 1)
-
+x = (1 + 1) # Noncompliant {{Remove those useless parentheses}}
+#   ^^^^^^^
 x = (2 + 2) * 1
 
 def fun():
-    return(x)
+    return(x) # Noncompliant
 
 print("Hello")
 
-assert (x < 2)
+assert (x < 2) # Noncompliant
 
-del(x)
+del(x) # Noncompliant
 
 if x < 2:
     pass
 elif x > 3:
     pass
 
-if (x < 2):
+if (x < 2): # Noncompliant
     pass
-elif (x > 3):
+elif (x > 3): # Noncompliant
     pass
 
 for x in range(0, 3):
     pass
 
-for (x) in range(0, 3):
+for (x) in range(0, 3): # Noncompliant
     pass
 
-for x in (range(0, 3)):
+for x in (range(0, 3)): # Noncompliant
+#        ^^^^^^^^^^^^^
     pass
 
 if x:
     raise NameError('HiThere')
 
 if x:
-    raise (NameError('HiThere'))
+    raise (NameError('HiThere')) # Noncompliant
+#         ^^^^^^^^^^^^^^^^^^^^^^
 
-while (x < 2):
+while (x < 2): # Noncompliant
     pass
 
 try:
     x = 1
-except (ValueError):
+except (ValueError): # Noncompliant
     pass
 
 try:
@@ -52,7 +54,7 @@ except (ValueError, TypeError):
 if not x:
     pass
 
-if not(x):
+if not(x): # Noncompliant
     pass
 
 if not(x and y):
@@ -63,14 +65,14 @@ if (x > 0 and
             x < 3):
     pass
 
-for (i, j) in enumerate(d):
+for (i, j) in enumerate(d): # Noncompliant
     pass
 
-return (a, b)
+return (a, b) # Noncompliant
 
 x = (y,)
 
-yield (1,2)
+yield (1,2) # Noncompliant
 
 return "", (1,)
 

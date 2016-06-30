@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -39,7 +38,7 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("1min")
 @ActivatedByDefault
-public class UselessParenthesisCheck extends SquidCheck<Grammar> {
+public class UselessParenthesisCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1110";
 
   @Override
@@ -80,7 +79,7 @@ public class UselessParenthesisCheck extends SquidCheck<Grammar> {
 
   private void checkAtom(AstNode atom, boolean ignoreTestNumber) {
     if (violationCondition(atom, ignoreTestNumber)) {
-      getContext().createLineViolation(this, "Remove those useless parentheses", atom);
+      addIssue(atom, "Remove those useless parentheses");
     }
   }
 

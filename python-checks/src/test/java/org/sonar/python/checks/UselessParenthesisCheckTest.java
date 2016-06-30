@@ -21,34 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class UselessParenthesisCheckTest {
 
   @Test
   public void test() {
     UselessParenthesisCheck check = new UselessParenthesisCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/uselessParenthesis.py"), check);
-    String message = "Remove those useless parentheses";
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(1).withMessage(message)
-      .next().atLine(6).withMessage(message)
-      .next().atLine(10).withMessage(message)
-      .next().atLine(12).withMessage(message)
-      .next().atLine(19).withMessage(message)
-      .next().atLine(21).withMessage(message)
-      .next().atLine(27).withMessage(message)
-      .next().atLine(30).withMessage(message)
-      .next().atLine(37).withMessage(message)
-      .next().atLine(39).withMessage(message)
-      .next().atLine(44).withMessage(message)
-      .next().atLine(55).withMessage(message)
-      .next().atLine(66).withMessage(message)
-      .next().atLine(69).withMessage(message)
-      .next().atLine(73).withMessage(message)
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/uselessParenthesis.py"), check);
   }
 
 }
