@@ -29,18 +29,24 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
+import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.SquidAstVisitor;
 
 /**
- * Colorizes Python code. Currently colorizes:
+ * Colors Python code. Currently colors:
  * <ul>
  *   <li>
- *     String literals. Example:
+ *     String literals. Examples:
  *     <pre>
  *       "hello"
+ *
  *       'hello'
+ *
+ *       """ hello
+ *           hello again
+ *       """
  *     </pre>
  *   </li>
  *   <li>
@@ -55,27 +61,15 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *        # some comment
  *     </pre>
  *   </li>
- *   <li>
- *     Doc strings. Examples:
- *     <pre>
- *        """ a doc string"""
- *        ''' another doc string '''
- *     </pre>
- *   </li>
  * </ul>
- * Note that doc strings, such as:
- * <pre>
- *   """ a doc string"""
- *   ''' another doc string '''
- * </pre>
- * are handled (i.e., colorized) like normal strings.
+ * Note that docstrings are handled (i.e., colored) like normal string literals.
  */
 public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
   private NewHighlighting newHighlighting;
-  
+
   private final SensorContext context;
-  
+
   public PythonHighlighter(SensorContext context) {
     this.context = context;
   }
@@ -92,12 +86,12 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
     if (token.getType().equals(PythonTokenType.STRING)) {
       // case: string literal, including doc string
       highlight(token, TypeOfText.STRING);
-      
+
     } else if (token.getType() instanceof PythonKeyword) {
       // case: keyword
       highlight(token, TypeOfText.KEYWORD);
     }
-      
+
     for (Trivia trivia : token.getTrivia()) {
       // case: comment
       highlight(trivia.getToken(), TypeOfText.COMMENT);
@@ -108,25 +102,10 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   public void leaveFile(@Nullable AstNode astNode) {
     newHighlighting.save();
   }
-  
+
   private void highlight(Token token, TypeOfText typeOfText) {
-    if (typeOfText == TypeOfText.STRING) {
-      String[] tokenLines = token.getValue().split("\n");
-      int line = 0;
-      for (int i = 0; i < tokenLines.length; i++) {
-        int firstColumn;
-        if (i == 0) {
-          line = token.getLine();
-          firstColumn = token.getColumn();
-        } else {
-          line++;
-          firstColumn = 0;
-        }
-        newHighlighting.highlight(line, firstColumn, line, firstColumn + tokenLines[i].length(), typeOfText);
-      }
-    } else {
-      newHighlighting.highlight(token.getLine(), token.getColumn(), token.getLine(), token.getColumn() + token.getValue().length(), typeOfText);
-    }
+    TokenLocation tokenLocation = new TokenLocation(token);
+    newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
   }
 
 }
