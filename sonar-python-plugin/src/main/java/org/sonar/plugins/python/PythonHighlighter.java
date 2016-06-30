@@ -110,7 +110,23 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   }
   
   private void highlight(Token token, TypeOfText typeOfText) {
-    newHighlighting.highlight(token.getLine(), token.getColumn(), token.getLine(), token.getColumn() + token.getValue().length(), typeOfText);
+    if (typeOfText == TypeOfText.STRING) {
+      String[] tokenLines = token.getValue().split("\n");
+      int line = 0;
+      for (int i = 0; i < tokenLines.length; i++) {
+        int firstColumn;
+        if (i == 0) {
+          line = token.getLine();
+          firstColumn = token.getColumn();
+        } else {
+          line++;
+          firstColumn = 0;
+        }
+        newHighlighting.highlight(line, firstColumn, line, firstColumn + tokenLines[i].length(), typeOfText);
+      }
+    } else {
+      newHighlighting.highlight(token.getLine(), token.getColumn(), token.getLine(), token.getColumn() + token.getValue().length(), typeOfText);
+    }
   }
 
 }

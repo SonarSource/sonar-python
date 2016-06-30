@@ -16,3 +16,12 @@ if t0 == t1 or t1 == t2 or t2 == t0: continue
 """ bla bla """
 
 y = 'some string'
+
+y = """ some string
+        that extends
+        on several
+        lines
+    """
+
+values=["""long...
+    ...string 1""", 3.14, "short string 2"]

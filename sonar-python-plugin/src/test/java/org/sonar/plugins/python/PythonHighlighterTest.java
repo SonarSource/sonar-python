@@ -43,7 +43,7 @@ public class PythonHighlighterTest {
   public void scanFile() {
     String dir = "src/test/resources/org/sonar/plugins/python";
     
-    file = new File(dir + "/highlighting.py");
+    file = new File(dir + "/pythonHighlighter.py");
     DefaultInputFile inputFile = new DefaultInputFile("moduleKey", file.getName())
       .initMetadata(new FileMetadata().readMetadata(file, Charsets.UTF_8));
     
@@ -82,6 +82,23 @@ public class PythonHighlighterTest {
     
     // 'some string'
     checkOnRange(18, 4, 13, TypeOfText.STRING);
+    
+    // y = """ some string
+    //         that extends
+    //         on several
+    //         lines
+    //     """
+    checkOnRange(20, 4, 15, TypeOfText.STRING);
+    checkOnRange(21, 0, 20, TypeOfText.STRING);
+    checkOnRange(22, 0, 18, TypeOfText.STRING);
+    checkOnRange(23, 0, 13, TypeOfText.STRING);
+    checkOnRange(24, 0, 7, TypeOfText.STRING);
+    
+    // values=["""long...
+    //     ...string 1""", 3.14, "short string 2"]
+    checkOnRange(26, 8, 10, TypeOfText.STRING);
+    checkOnRange(27, 0, 18, TypeOfText.STRING);
+    checkOnRange(27, 26, 16, TypeOfText.STRING);
   }
   
   @Test
