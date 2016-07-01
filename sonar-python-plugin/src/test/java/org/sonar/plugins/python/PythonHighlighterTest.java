@@ -43,7 +43,7 @@ public class PythonHighlighterTest {
   public void scanFile() {
     String dir = "src/test/resources/org/sonar/plugins/python";
 
-    file = new File(dir + "/pythonHighlighter.py");
+    file = new File(dir, "/pythonHighlighter.py");
     DefaultInputFile inputFile = new DefaultInputFile("moduleKey", file.getName())
       .initMetadata(new FileMetadata().readMetadata(file, Charsets.UTF_8));
 
@@ -115,6 +115,41 @@ public class PythonHighlighterTest {
   public void comment() throws Exception {
     checkOnRange(6, 0, 19, TypeOfText.COMMENT);
     checkOnRange(9, 10, 15, TypeOfText.COMMENT);
+  }
+
+  @Test
+  public void number() throws Exception {
+    // 34
+    checkOnRange(29, 0, 2, TypeOfText.CONSTANT);
+
+    // -35 (negative numbers are parsed as 2 tokens)
+    checkOnRange(31, 1, 2, TypeOfText.CONSTANT);
+
+    // 20000000000000L
+    checkOnRange(33, 0, 15, TypeOfText.CONSTANT);
+
+    // 1000l
+    checkOnRange(35, 0, 5, TypeOfText.CONSTANT);
+
+    // 89e4
+    checkOnRange(37, 0, 4, TypeOfText.CONSTANT);
+
+    // y = -45.4 + 67e8 - 78.562E-09
+    checkOnRange(39, 4, 4, TypeOfText.CONSTANT);
+    checkOnRange(39, 11, 4, TypeOfText.CONSTANT);
+    checkOnRange(39, 18, 10, TypeOfText.CONSTANT);
+
+    // 4.55j
+    checkOnRange(41, 0, 5, TypeOfText.CONSTANT);
+
+    // -4.55j
+    checkOnRange(43, 1, 5, TypeOfText.CONSTANT);
+
+    // 3J
+    checkOnRange(45, 0, 2, TypeOfText.CONSTANT);
+
+    // 23.3e-7J
+    checkOnRange(47, 0, 8, TypeOfText.CONSTANT);
   }
 
   /**
