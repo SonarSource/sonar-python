@@ -98,33 +98,32 @@ public class PythonCoverageSensor {
     List<File> reports = getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
     LOG.debug("Parsing coverage reports");
     Map<InputFile, NewCoverage> coverageMeasures = parseReports(reports, context);
-    HashSet filesCoveredByUT = new HashSet();
+    HashSet<InputFile> filesCoveredByUT = new HashSet<>();
     saveMeasures(coverageMeasures, filesCoveredByUT, CoverageType.UNIT);
 
     LOG.debug("Parsing integration test coverage reports");
     List<File> itReports = getReports(settings, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     Map<InputFile, NewCoverage> itCoverageMeasures = parseReports(itReports, context);
-    HashSet filesCoveredByIT = new HashSet();
+    HashSet<InputFile> filesCoveredByIT = new HashSet<>();
     saveMeasures(itCoverageMeasures, filesCoveredByIT, CoverageType.IT);
 
     LOG.debug("Parsing overall test coverage reports");
     List<File> overallReports = getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
     Map<InputFile, NewCoverage> overallCoverageMeasures = parseReports(overallReports, context);
-    HashSet filesCoveredOverall = new HashSet();
+    HashSet<InputFile> filesCoveredOverall = new HashSet<>();
     saveMeasures(overallCoverageMeasures, filesCoveredOverall, CoverageType.OVERALL);
 
     if (settings.getBoolean(FORCE_ZERO_COVERAGE_KEY)) {
       LOG.debug("Zeroing coverage information for untouched files");
-
       zeroMeasuresWithoutReports(context, filesCoveredByUT, filesCoveredByIT, filesCoveredOverall, linesOfCode);
     }
   }
 
   private static void zeroMeasuresWithoutReports(
     SensorContext context,
-    HashSet filesCoveredByUT,
-    HashSet filesCoveredByIT,
-    HashSet filesCoveredOverall,
+    HashSet<InputFile> filesCoveredByUT,
+    HashSet<InputFile> filesCoveredByIT,
+    HashSet<InputFile> filesCoveredOverall,
     Map<InputFile, Set<Integer>> linesOfCode
   ) {
     FileSystem fileSystem = context.fileSystem();
