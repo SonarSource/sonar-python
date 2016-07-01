@@ -21,23 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class FieldDuplicatesClassNameCheckTest {
 
   @Test
   public void test() throws Exception {
     FieldDuplicatesClassNameCheck check = new FieldDuplicatesClassNameCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/fieldDuplicatesClassName.py"), check);
-    String message = "Rename field \"%s\"";
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(2).withMessage(String.format(message, "myClass"))
-        .next().atLine(4).withMessage(String.format(message, "myclass"))
-        .next().atLine(9).withMessage(String.format(message, "MYCLASS"))
-        .next().atLine(14).withMessage(String.format(message, "nestedClass"))
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/fieldDuplicatesClassName.py"), check);
   }
 
 }
