@@ -21,22 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class TooManyParametersCheckTest {
 
   @Test
   public void test() {
     TooManyParametersCheck check = new TooManyParametersCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/tooManyParameters.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(3).withMessage("Lambda has 8 parameters, which is greater than the 7 authorized.")
-      .next().atLine(8).withMessage("Function \"incorrect_function\" has 8 parameters, which is greater than the 7 authorized.")
-      .next().atLine(15).withMessage("Method \"incorrect_method\" has 8 parameters, which is greater than the 7 authorized.")
-      .next().atLine(18)
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/tooManyParameters.py"), check);
   }
 
 }

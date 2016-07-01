@@ -20,14 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = TooManyParametersCheck.CHECK_KEY,
@@ -37,8 +36,9 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("20min")
 @ActivatedByDefault
-public class TooManyParametersCheck extends SquidCheck<Grammar> {
+public class TooManyParametersCheck extends PythonCheck {
   public static final String CHECK_KEY = "S107";
+  private static final String MESSAGE = "%s has %s parameters, which is greater than the %s authorized.";
 
   private static final int DEFAULT_MAX = 7;
 
@@ -65,8 +65,8 @@ public class TooManyParametersCheck extends SquidCheck<Grammar> {
         name = node.getFirstChild(PythonGrammar.FUNCNAME).getTokenOriginalValue();
         name = String.format("%s \"%s\"", typeName, name);
       }
-      String message = "{0} has {1} parameters, which is greater than the {2} authorized.";
-      getContext().createLineViolation(this, message, node.getFirstChild(PythonGrammar.TYPEDARGSLIST, PythonGrammar.VARARGSLIST), name, nbParameters, max);
+      String message = String.format(MESSAGE, name, nbParameters, max);
+      addIssue(node.getFirstChild(PythonGrammar.TYPEDARGSLIST, PythonGrammar.VARARGSLIST), message);
     }
   }
 }
