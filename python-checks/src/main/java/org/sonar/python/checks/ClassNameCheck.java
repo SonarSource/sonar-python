@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ClassNameCheck.CHECK_KEY,
@@ -38,10 +37,11 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class ClassNameCheck extends SquidCheck<Grammar> {
+public class ClassNameCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S101";
   private static final String DEFAULT = "^[A-Z_][a-zA-Z0-9]+$";
+  private static final String MESSAGE = "Rename class \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
     key = "format",
@@ -57,10 +57,11 @@ public class ClassNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    String className = astNode.getFirstChild(PythonGrammar.CLASSNAME).getTokenValue();
+    AstNode classNameNode = astNode.getFirstChild(PythonGrammar.CLASSNAME);
+    String className = classNameNode.getTokenValue();
     if (!pattern.matcher(className).matches()) {
-      getContext().createLineViolation(this,
-        "Rename class \"{0}\" to match the regular expression {1}.", astNode, className, format);
+      String message = String.format(MESSAGE, className, format);
+      addIssue(classNameNode, message);
     }
   }
 
