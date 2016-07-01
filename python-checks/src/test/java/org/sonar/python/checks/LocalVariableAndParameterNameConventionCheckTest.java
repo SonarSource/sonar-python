@@ -21,9 +21,7 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class LocalVariableAndParameterNameConventionCheckTest {
 
@@ -31,37 +29,8 @@ public class LocalVariableAndParameterNameConventionCheckTest {
   public void test() throws Exception {
     LocalVariableAndParameterNameConventionCheck check = new LocalVariableAndParameterNameConventionCheck();
     check.format = "^[_a-z][a-z0-9_]+$";
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/localVariableAndParameterNameIncompatibility.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/localVariableAndParameterNameIncompatibility.py"), check);
 
-        .next().atLine(2).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "parameter", "inputPar2", check.format))
-        .next().atLine(2).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "parameter", "inputPar3", check.format))
-        .next().atLine(3).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "someName", check.format))
-
-        .next().atLine(11).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "x", check.format))
-
-        .next().atLine(16).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "parameter", "inputPar1", check.format))
-        .next().atLine(16).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "parameter", "inputPar2", check.format))
-
-        .next().atLine(20).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "x", check.format))
-        .next().atLine(22).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "x", check.format))
-        .next().atLine(22).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "y", check.format))
-
-        .next().atLine(26).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "a", check.format))
-        .next().atLine(26).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "b", check.format))
-        .next().atLine(26).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "c", check.format))
-        .next().atLine(27).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "d", check.format))
-        .next().atLine(27).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "e", check.format))
-
-        .next().atLine(30).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "parameter", "ID", check.format))
-        .next().atLine(30).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "parameter", "ID2", check.format))
-
-        .next().atLine(37).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "x", check.format))
-        .next().atLine(45).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "counterName", check.format))
-
-        .next().atLine(49).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "a", check.format))
-        .next().atLine(49).withMessage(String.format(LocalVariableAndParameterNameConventionCheck.MESSAGE, "local variable", "b", check.format))
-        .noMore();
   }
 
 }
