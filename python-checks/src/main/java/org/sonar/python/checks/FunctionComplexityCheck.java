@@ -20,16 +20,15 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 import org.sonar.squidbridge.api.SourceFunction;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = FunctionComplexityCheck.CHECK_KEY,
@@ -42,9 +41,10 @@ import org.sonar.squidbridge.checks.SquidCheck;
     offset = "10min",
     effortToFixDescription = "per complexity point above the threshold")
 @ActivatedByDefault
-public class FunctionComplexityCheck extends SquidCheck<Grammar> {
+public class FunctionComplexityCheck extends PythonCheck {
   public static final String CHECK_KEY = "FunctionComplexity";
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 20;
+  private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";
 
   @RuleProperty(
     key = "maximumFunctionComplexityThreshold",
@@ -59,10 +59,10 @@ public class FunctionComplexityCheck extends SquidCheck<Grammar> {
   @Override
   public void leaveNode(AstNode node) {
     SourceFunction function = (SourceFunction) getContext().peekSourceCode();
-    if (function.getInt(PythonMetric.COMPLEXITY) > maximumFunctionComplexityThreshold) {
-      getContext().createLineViolation(this,
-          "Function has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.", node,
-          function.getInt(PythonMetric.COMPLEXITY), maximumFunctionComplexityThreshold);
+    int complexity = function.getInt(PythonMetric.COMPLEXITY);
+    if (complexity > maximumFunctionComplexityThreshold) {
+      String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
+      addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message);
     }
   }
 

@@ -21,9 +21,7 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class FunctionComplexityCheckTest {
 
@@ -31,11 +29,7 @@ public class FunctionComplexityCheckTest {
   public void test() {
     FunctionComplexityCheck check = new FunctionComplexityCheck();
     check.setMaximumFunctionComplexityThreshold(2);
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/functionComplexity.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Function has a complexity of 5 which is greater than 2 authorized.")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/functionComplexity.py"), check);
   }
 
 }
