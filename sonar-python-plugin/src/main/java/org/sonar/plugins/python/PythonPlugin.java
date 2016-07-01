@@ -38,31 +38,30 @@ public class PythonPlugin extends SonarPlugin {
   @Override
   public List getExtensions() {
     return ImmutableList.of(
-        PropertyDefinition.builder(FILE_SUFFIXES_KEY)
-          .name("File Suffixes")
-          .description("Comma-separated list of suffixes of Python files to analyze.")
-          .category("Python")
-          .onQualifiers(Qualifiers.PROJECT)
-          .defaultValue("py")
-          .build(),
+      PropertyDefinition.builder(FILE_SUFFIXES_KEY)
+        .name("File Suffixes")
+        .description("Comma-separated list of suffixes of Python files to analyze.")
+        .category("Python")
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("py")
+        .build(),
 
-        Python.class,
-        PythonCpdMapping.class,
+      Python.class,
+      PythonCpdMapping.class,
 
-        PythonProfile.class,
+      PythonProfile.class,
 
-        PythonSquidSensor.class,
-        PythonRuleRepository.class,
+      PythonSquidSensor.class,
+      PythonRuleRepository.class,
 
-        PythonCommonRulesEngine.class,
+      PythonCommonRulesEngine.class,
 
-        PylintConfiguration.class,
-        PylintSensor.class,
-        PylintImportSensor.class,
-        PylintRuleRepository.class,
+      PylintConfiguration.class,
+      PylintSensor.class,
+      PylintImportSensor.class,
+      PylintRuleRepository.class,
 
-        PythonXUnitSensor.class
-    );
+      PythonXUnitSensor.class);
   }
 
 }
