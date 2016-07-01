@@ -59,7 +59,7 @@ public class PythonRulingTest {
       .setProperty("dump.old", FileLocation.of("src/test/resources/expected").getFile().getAbsolutePath())
       .setProperty("dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
       .setProperty("sonar.cpd.skip", "true")
-      .setProperty("sonar.analysis.mode", "preview")
+      // .setProperty("sonar.analysis.mode", "preview")
       .setProperty("sonar.issuesReport.html.enable", "true")
       .setProperty("lits.differences", litsDifferencesFile.getAbsolutePath())
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
