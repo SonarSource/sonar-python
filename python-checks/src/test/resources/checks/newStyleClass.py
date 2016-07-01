@@ -4,8 +4,9 @@ class MyNewStyleClass(object):
 class MyClassSubclassingAnotherClass(PossiblyNewStyleClass):
 	pass
 
-class MyClassWithNoSuperClass:
+class MyClassWithNoSuperClass: # Noncompliant {{Add inheritance from "object" or some other new-style class.}}
+#     ^^^^^^^^^^^^^^^^^^^^^^^
 	pass
 
-class MyOtherClassWithNoSuperClass():
+class MyOtherClassWithNoSuperClass(): # Noncompliant
 	pass

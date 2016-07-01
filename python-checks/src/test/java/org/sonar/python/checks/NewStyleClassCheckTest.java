@@ -21,20 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class NewStyleClassCheckTest {
 
   @Test
   public void test() throws Exception {
     NewStyleClassCheck check = new NewStyleClassCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/newStyleClass.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(7).withMessage("Add inheritance from \"object\" or some other new-style class.")
-      .next().atLine(10).withMessage("Add inheritance from \"object\" or some other new-style class.")
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/newStyleClass.py"), check);
   }
 
 }
