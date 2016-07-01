@@ -45,6 +45,12 @@ public class TokenLocationTest {
   }
 
   @Test
+  public void test_newline_token() throws Exception {
+    TokenLocation tokenLocation = new TokenLocation(lex("foo\n").get(1));
+    assertOffsets(tokenLocation, 1, 3, 2, 0);
+  }
+
+  @Test
   public void test_one_line() throws Exception {
     TokenLocation tokenLocation = new TokenLocation(lex("  '''first line'''").get(1));
     assertOffsets(tokenLocation, 1, 2, 1, 18);

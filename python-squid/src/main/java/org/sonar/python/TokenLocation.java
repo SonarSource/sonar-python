@@ -20,7 +20,6 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.Token;
-import org.sonar.python.api.PythonTokenType;
 
 public class TokenLocation {
 
@@ -33,20 +32,17 @@ public class TokenLocation {
     this.startLine = token.getLine();
     this.startLineOffset = token.getColumn();
 
-    // only STRING token can spread over several lines
-    if (token.getType().equals(PythonTokenType.STRING)) {
-      String value = token.getValue();
-      String[] lines = value.split("\r\n|\n|\r", -1);
+    String value = token.getValue();
+    String[] lines = value.split("\r\n|\n|\r", -1);
 
-      if (lines.length > 1) {
-        endLine = token.getLine() + lines.length - 1;
-        endLineOffset = lines[lines.length - 1].length();
-        return;
-      }
+    if (lines.length > 1) {
+      endLine = token.getLine() + lines.length - 1;
+      endLineOffset = lines[lines.length - 1].length();
+
+    } else {
+      this.endLine = this.startLine;
+      this.endLineOffset = this.startLineOffset + token.getValue().length();
     }
-
-    this.endLine = this.startLine;
-    this.endLineOffset = this.startLineOffset + token.getValue().length();
   }
 
   public int startLine() {
