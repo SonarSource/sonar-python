@@ -19,6 +19,12 @@
  */
 package org.sonar.plugins.python.xunit;
 
+import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,13 +42,6 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
-
-import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Properties({
     @Property(
@@ -72,7 +71,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
   }
 
   @DependsUpon
-  public Class dependsUponCoverageSensors() {
+  public Class<?> dependsUponCoverageSensors() {
     return CoverageExtension.class;
   }
 

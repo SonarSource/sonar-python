@@ -71,6 +71,9 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
   }
 
   private static class LineComparator implements Comparator<TokenWithTypeInfo>, Serializable {
+
+    private static final long serialVersionUID = 4759444000993633906L;
+
     @Override
     public int compare(TokenWithTypeInfo t1, TokenWithTypeInfo t2) {
       return Integer.compare(t1.getLine(), t2.getLine());
