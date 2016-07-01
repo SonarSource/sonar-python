@@ -52,13 +52,15 @@ public class NeedlessPassCheck extends PythonCheck {
   @Override
   public void visitNode(AstNode node) {
     AstNode suite = node.getFirstAncestor(PythonGrammar.SUITE);
-    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-    if (statements.size() > 1) {
-      if (!docstringException(statements)) {
-        addIssue(node, MESSAGE);
+    if (suite != null) {
+      List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
+      if (statements.size() > 1) {
+        if (!docstringException(statements)) {
+          addIssue(node, MESSAGE);
+        }
+      } else {
+        visitOneOrZeroStatement(node, suite, statements.size());
       }
-    } else {
-      visitOneOrZeroStatement(node, suite, statements.size());
     }
   }
 
@@ -82,5 +84,6 @@ public class NeedlessPassCheck extends PythonCheck {
       addIssue(node, MESSAGE);
     }
   }
+
 }
 
