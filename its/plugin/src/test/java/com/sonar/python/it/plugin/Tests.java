@@ -39,7 +39,8 @@ import static org.fest.assertions.Assertions.assertThat;
   MetricsTest.class,
   CoverageTest.class,
   PylintReportTest.class,
-  TestReportTest.class
+  TestReportTest.class,
+  NoSonarTest.class
 })
 public class Tests {
 
@@ -48,6 +49,7 @@ public class Tests {
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))
     .build();
 
   public static Integer getProjectMeasure(String projectKey, String metricKey) {

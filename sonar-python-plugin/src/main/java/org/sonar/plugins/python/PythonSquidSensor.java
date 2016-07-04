@@ -41,6 +41,7 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.ce.measure.RangeDistributionBuilder;
+import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
@@ -70,15 +71,17 @@ public final class PythonSquidSensor implements Sensor {
 
   private final Checks<SquidAstVisitor<Grammar>> checks;
   private final FileLinesContextFactory fileLinesContextFactory;
+  private final NoSonarFilter noSonarFilter;
 
   private SensorContext context;
   private AstScanner<Grammar> scanner;
 
-  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory) {
+  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
     this.checks = checkFactory
         .<SquidAstVisitor<Grammar>>create(CheckList.REPOSITORY_KEY)
         .addAnnotatedChecks(CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
+    this.noSonarFilter = noSonarFilter;
   }
 
 
@@ -103,13 +106,13 @@ public final class PythonSquidSensor implements Sensor {
     scanner.scanFiles(Lists.newArrayList(context.fileSystem().files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
+    save(squidSourceFiles);
     savePreciseIssues(
       visitors
         .stream()
         .filter(v -> v instanceof PythonCheck)
         .map(v -> (PythonCheck) v)
         .collect(Collectors.toList()));
-    save(squidSourceFiles);
 
     (new PythonCoverageSensor()).execute(context, linesOfCode);
   }
@@ -159,6 +162,8 @@ public final class PythonSquidSensor implements Sensor {
       SourceFile squidFile = (SourceFile) squidSourceFile;
 
       InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(new java.io.File(squidFile.getKey())));
+
+      noSonarFilter.noSonarInFile(inputFile, squidFile.getNoSonarTagLines());
 
       saveFilesComplexityDistribution(inputFile, squidFile);
       saveFunctionsComplexityDistribution(inputFile, squidFile);
