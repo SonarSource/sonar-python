@@ -50,7 +50,7 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode node) {
-    if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && hasValuableCode(node)){
+    if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && !isBuiltInMethod(node) && hasValuableCode(node)) {
       String self = getFirstArgument(node);
       if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)){
         addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
@@ -68,14 +68,14 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
       if (raisesNotImplementedError(statementList)) {
         return true;
       }
-      
+
     } else {
       // standard case of a method defined on more than one line
       if (statements.size() <= 2) {
         if (statements.size() == 2 && !isDocstring(statements.get(0))) {
           return false;
         }
-  
+
         AstNode statementList = statements.get(statements.size() - 1).getFirstChild(PythonGrammar.STMT_LIST);
         if (statementList != null && raisesNotImplementedError(statementList)) {
           return true;
@@ -85,7 +85,7 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
     return false;
   }
-  
+
   private static boolean raisesNotImplementedError(AstNode statementList) {
     if (isRaise(statementList)) {
       AstNode testStatement = statementList.getFirstDescendant(PythonGrammar.TEST);
@@ -117,11 +117,11 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
   private static boolean isDocstringOrPass(AstNode statement) {
     return statement.getFirstDescendant(PythonGrammar.PASS_STMT) != null || statement.getToken().getType().equals(PythonTokenType.STRING);
   }
-  
+
   private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
     return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
   }
-  
+
   private static boolean isRaise(AstNode statementList) {
     return statementList.getFirstChild().hasDescendant(PythonGrammar.RAISE_STMT);
   }
@@ -157,6 +157,12 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
       }
     }
     return false;
+  }
+
+  private static boolean isBuiltInMethod(AstNode funcDef) {
+    String name = funcDef.getFirstChild(PythonGrammar.FUNCNAME).getToken().getValue();
+    String doubleUnderscore = "__";
+    return name.startsWith(doubleUnderscore) && name.endsWith(doubleUnderscore);
   }
 
 }

@@ -133,6 +133,37 @@ class A:
     def fun25(slf, other):
         # some comment
         raise NotImplementedError
-                
+
+    # from here on, we test built-in functions
+
+    def __init__(slf):
+        print(1)
+
+    def __init__(slf):
+        print(slf)
+
+    def __this_is_not_a_built_in_method__(slf):
+        print(1)
+
+    def _init__(slf, x): # Noncompliant
+        print(x)
+
+    def in__it__(slf, x): # Noncompliant
+        print(x)
+
+    def foo_bar(self):
+        print(self)
+
+
+class B(A):
+
+    # raises an issue. This is questionable, see SONARPY-166
+    def foo_bar(self): # Noncompliant
+        print(1)
+
+
 def fun():
+    print(1)
+
+def __abs__(x):
     print(1)
