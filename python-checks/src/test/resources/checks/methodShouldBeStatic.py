@@ -142,7 +142,7 @@ class A:
     def __init__(slf):
         print(slf)
 
-    def __this_is_not_a_built_in_method__(slf):
+    def __this_is_not_a_built_in_method__(slf): # this method is not a built-in, although for simplicity our implementation considers it as such
         print(1)
 
     def _init__(slf, x): # Noncompliant
