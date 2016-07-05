@@ -30,3 +30,5 @@ def fun7():
     docstring is the only statement that could appear with pass
     '''
     pass
+
+pass
