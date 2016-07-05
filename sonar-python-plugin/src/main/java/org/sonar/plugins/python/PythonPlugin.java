@@ -54,8 +54,6 @@ public class PythonPlugin extends SonarPlugin {
       PythonSquidSensor.class,
       PythonRuleRepository.class,
 
-      PythonCommonRulesEngine.class,
-
       PylintConfiguration.class,
       PylintSensor.class,
       PylintImportSensor.class,
