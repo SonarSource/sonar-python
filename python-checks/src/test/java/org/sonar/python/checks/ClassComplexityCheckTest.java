@@ -21,9 +21,7 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ClassComplexityCheckTest {
 
@@ -31,11 +29,7 @@ public class ClassComplexityCheckTest {
   public void test() {
     ClassComplexityCheck check = new ClassComplexityCheck();
     check.setMaximumClassComplexityThreshold(2);
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/classComplexity.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Class has a complexity of 5 which is greater than 2 authorized.")
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/classComplexity.py"), check);
   }
 
 }

@@ -16,7 +16,8 @@ class A:
     def fun4():
         print()
 
-    def fun5(self, x):
+    def fun5(self, x): # Noncompliant {{Make this method static.}}
+#       ^^^^
         print(x)
 
     def fun6(self, x):
@@ -27,7 +28,7 @@ class A:
     def fun7(self):
         self.x = 5
 
-    def fun8(self):
+    def fun8(self): # Noncompliant
         if True:
             print(1)
             return 1
@@ -37,7 +38,7 @@ class A:
     def fun9(self):
         print()
 
-    def fun10(slf, x):
+    def fun10(slf, x): # Noncompliant
         print(x)
 
     def fun11(slf, x):
@@ -49,7 +50,7 @@ class A:
             print(slf.field)
 
     @another_decorator
-    def fun14(self):
+    def fun14(self): # Noncompliant
         print(1)
 
     def fun15(self):
@@ -85,17 +86,17 @@ class A:
         raise NotImplementedError('Temporary stuff')
 
     # raise issue, as NotImplementedError is not the only content of the method
-    def fun22(slf):
+    def fun22(slf): # Noncompliant
         print(1)
         raise NotImplementedError
 
     # raise issue, as NotImplementedError is not the only content of the method
-    def fun23(slf):
+    def fun23(slf): # Noncompliant
         if True:
             raise NotImplementedError
 
     # raise issue, as the error is not a NotImplementedError 
-    def fun24(slf):
+    def fun24(slf): # Noncompliant
         raise ValueError('Some error')
         
     # don't raise issue, as the method has no argument
@@ -108,7 +109,7 @@ class A:
         raise NotImplementedError
                 
     # raise issue, as the second literal is not a doc string
-    def fun27(slf):
+    def fun27(slf): # Noncompliant
         """ Long explanation
             bla bla
         """
@@ -116,17 +117,17 @@ class A:
         raise NotImplementedError
         
     # raise issue, as the error is returned, not thrown
-    def fun28(slf):
+    def fun28(slf): # Noncompliant
         return NotImplementedError
         
     # don't raise issue, as the method consists only of a NotImplementedError   
     def fun29(slf): raise NotImplementedError
     
     # raise issue, as NotImplementedError is not the only content of the method
-    def fun30(slf): print(1) ; raise NotImplementedError
+    def fun30(slf): print(1) ; raise NotImplementedError # Noncompliant
                 
     # raise issue, as the error is not a NotImplementedError
-    def fun31(slf): raise ValueError('Some error')
+    def fun31(slf): raise ValueError('Some error') # Noncompliant
     
     # don't raise issue, as the method consists only of a NotImplementedError   
     def fun25(slf, other):

@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.io.Serializable;
 import java.util.Collections;
@@ -29,10 +28,10 @@ import java.util.LinkedList;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
@@ -43,7 +42,7 @@ import org.sonar.sslr.ast.AstSelect;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
+public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1845";
   private static final String MESSAGE = "Rename %s \"%s\" to prevent any misunderstanding/clash with %s \"%s\" defined on line %s";
@@ -113,7 +112,8 @@ public class DuplicatedMethodFieldNamesCheck extends SquidCheck<Grammar> {
         TokenWithTypeInfo token1 = allTokensWithInfo.get(j);
         TokenWithTypeInfo token2 = allTokensWithInfo.get(i);
         if (differOnlyByCapitalization(token1.getValue(), token2.getValue())){
-          getContext().createLineViolation(this, getMessage(token1, token2), token2.getLine());
+          addIssue(token2.token, getMessage(token1, token2))
+            .secondary(new AstNode(token1.token), "Original");
           break;
         }
       }

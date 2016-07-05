@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,10 +28,10 @@ import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = LocalVariableAndParameterNameConventionCheck.CHECK_KEY,
@@ -42,7 +41,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("2min")
 @ActivatedByDefault
-public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Grammar> {
+public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S117";
 
@@ -141,7 +140,7 @@ public class LocalVariableAndParameterNameConventionCheck extends SquidCheck<Gra
   private void checkName(Token token, String type) {
     String name = token.getValue();
     if (!pattern.matcher(name).matches()) {
-      getContext().createLineViolation(this, String.format(MESSAGE, type, name, format), token.getLine());
+      addIssue(token, String.format(MESSAGE, type, name, format));
     }
   }
 

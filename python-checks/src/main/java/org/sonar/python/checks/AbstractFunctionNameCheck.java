@@ -20,15 +20,15 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.regex.Pattern;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 
-public abstract class AbstractFunctionNameCheck extends SquidCheck<Grammar> {
+public abstract class AbstractFunctionNameCheck extends PythonCheck {
 
   private static final String DEFAULT = "^[a-z_][a-z0-9_]{2,}$";
+  private static final String MESSAGE = "Rename %s \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
     key = "format",
@@ -50,8 +50,8 @@ public abstract class AbstractFunctionNameCheck extends SquidCheck<Grammar> {
     AstNode nameNode = astNode.getFirstChild(PythonGrammar.FUNCNAME);
     String name = nameNode.getTokenValue();
     if (!pattern.matcher(name).matches()) {
-      getContext().createLineViolation(this,
-        "Rename {0} \"{1}\" to match the regular expression {2}.", nameNode, typeName(), name, format);
+      String message = String.format(MESSAGE, typeName(), name, this.format);
+      addIssue(nameNode, message);
     }
   }
 

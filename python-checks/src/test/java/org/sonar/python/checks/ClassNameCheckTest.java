@@ -21,22 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class ClassNameCheckTest {
 
   @Test
   public void test() throws Exception {
     ClassNameCheck check = new ClassNameCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/className.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(4).withMessage(
-        "Rename class \"MyClass_WithNotCompliantName1\" to match the regular expression ^[A-Z_][a-zA-Z0-9]+$.")
-      .next().atLine(7).withMessage(
-        "Rename class \"myClassWithNotCompliantName2\" to match the regular expression ^[A-Z_][a-zA-Z0-9]+$.")
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/className.py"), check);
   }
 
 }

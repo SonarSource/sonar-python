@@ -20,12 +20,11 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = NewStyleClassCheck.CHECK_KEY,
@@ -33,9 +32,10 @@ import org.sonar.squidbridge.checks.SquidCheck;
     name = "New-style classes should be used"
 )
 @SqaleConstantRemediation("2min")
-public class NewStyleClassCheck extends SquidCheck<Grammar> {
+public class NewStyleClassCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1722";
+  private static final String MESSAGE = "Add inheritance from \"object\" or some other new-style class.";
 
   @Override
   public void init() {
@@ -46,8 +46,7 @@ public class NewStyleClassCheck extends SquidCheck<Grammar> {
   public void visitNode(AstNode node) {
     AstNode argListNode = node.getFirstChild(PythonGrammar.ARGLIST);
     if (argListNode == null || !argListNode.hasDirectChildren(PythonGrammar.ARGUMENT)) {
-      getContext().createLineViolation(this,
-        "Add inheritance from \"object\" or some other new-style class.", node.getFirstChild(PythonGrammar.CLASSNAME));
+      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), MESSAGE);
     }
   }
 

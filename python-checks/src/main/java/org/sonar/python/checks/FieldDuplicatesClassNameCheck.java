@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = FieldDuplicatesClassNameCheck.CHECK_KEY,
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("10min")
 @ActivatedByDefault
-public class FieldDuplicatesClassNameCheck extends SquidCheck<Grammar> {
+public class FieldDuplicatesClassNameCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1700";
 
@@ -57,7 +56,8 @@ public class FieldDuplicatesClassNameCheck extends SquidCheck<Grammar> {
 
       for (Token name : allFields) {
         if (className.equalsIgnoreCase(name.getValue())) {
-          getContext().createLineViolation(this, String.format(MESSAGE, name.getValue()), name);
+          addIssue(name, String.format(MESSAGE, name.getValue()))
+            .secondary(astNode.getFirstChild(PythonGrammar.CLASSNAME), "Class declaration");
         }
       }
     }

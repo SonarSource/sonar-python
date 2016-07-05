@@ -20,15 +20,14 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = MethodShouldBeStaticCheck.CHECK_KEY,
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
+public class MethodShouldBeStaticCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S2325";
 
@@ -54,7 +53,7 @@ public class MethodShouldBeStaticCheck extends SquidCheck<Grammar> {
     if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && hasValuableCode(node)){
       String self = getFirstArgument(node);
       if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)){
-        getContext().createLineViolation(this, MESSAGE, node.getFirstChild(PythonGrammar.FUNCNAME));
+        addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
       }
     }
   }

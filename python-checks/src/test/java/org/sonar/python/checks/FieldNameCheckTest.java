@@ -21,9 +21,7 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class FieldNameCheckTest {
 
@@ -31,23 +29,7 @@ public class FieldNameCheckTest {
   public void test() throws Exception {
     FieldNameCheck check = new FieldNameCheck();
     check.format = "^[_a-z][a-z0-9_]+$";
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/fieldName.py"), check);
-    String message = "Rename this field \"%s\" to match the regular expression %s.";
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage(String.format(message, "myField", check.format))
-        .next().atLine(10).withMessage(String.format(message, "myField1", check.format))
-        .next().atLine(14).withMessage(String.format(message, "newField", check.format))
-        .next().atLine(20).withMessage(String.format(message, "myField1", check.format))
-        .next().atLine(20).withMessage(String.format(message, "myField2", check.format))
-        .next().atLine(20).withMessage(String.format(message, "myField3", check.format))
-        .next().atLine(21).withMessage(String.format(message, "newField", check.format))
-        .next().atLine(24).withMessage(String.format(message, "Field1", check.format))
-        .next().atLine(24).withMessage(String.format(message, "Field2", check.format))
-        .next().atLine(27).withMessage(String.format(message, "Field3", check.format))
-        .next().atLine(28).withMessage(String.format(message, "Field4", check.format))
-        .next().atLine(28).withMessage(String.format(message, "Field5", check.format))
-        .next().atLine(31).withMessage(String.format(message, "myField", check.format))
-        .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/fieldName.py"), check);
   }
 
 }

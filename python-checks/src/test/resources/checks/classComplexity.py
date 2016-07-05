@@ -1,4 +1,5 @@
-class MyClass:
+class MyClass: # Noncompliant {{Class has a complexity of 5 which is greater than 2 authorized.}}
+#     ^^^^^^^
     def hello():
         if expression:
             pass

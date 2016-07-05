@@ -21,20 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class MethodNameCheckTest {
 
   @Test
   public void test() throws Exception {
     MethodNameCheck check = new MethodNameCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/methodName.py"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(5).withMessage(
-        "Rename method \"Incorrect_Method_Name\" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.")
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/methodName.py"), check);
   }
 
 }

@@ -20,16 +20,15 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 import org.sonar.squidbridge.api.SourceClass;
 import org.sonar.squidbridge.checks.ChecksHelper;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ClassComplexityCheck.CHECK_KEY,
@@ -41,9 +40,10 @@ import org.sonar.squidbridge.checks.SquidCheck;
     coeff = "1min",
     offset = "10min",
     effortToFixDescription = "per complexity point over the threshold")
-public class ClassComplexityCheck extends SquidCheck<Grammar> {
+public class ClassComplexityCheck extends PythonCheck {
   public static final String CHECK_KEY = "ClassComplexity";
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
+  private static final String MESSAGE = "Class has a complexity of %s which is greater than %s authorized.";
 
   @RuleProperty(key = "maximumClassComplexityThreshold", defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
   private int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
@@ -58,11 +58,8 @@ public class ClassComplexityCheck extends SquidCheck<Grammar> {
     SourceClass sourceClass = (SourceClass) getContext().peekSourceCode();
     int complexity = ChecksHelper.getRecursiveMeasureInt(sourceClass, PythonMetric.COMPLEXITY);
     if (complexity > maximumClassComplexityThreshold) {
-      getContext().createLineViolation(this,
-          "Class has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
-          node,
-          complexity,
-          maximumClassComplexityThreshold);
+      String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
+      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), message);
     }
   }
 

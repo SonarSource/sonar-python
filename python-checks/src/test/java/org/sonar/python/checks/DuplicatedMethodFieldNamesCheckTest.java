@@ -21,21 +21,14 @@ package org.sonar.python.checks;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class DuplicatedMethodFieldNamesCheckTest {
 
   @Test
   public void test() throws Exception {
     DuplicatedMethodFieldNamesCheck check = new DuplicatedMethodFieldNamesCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/duplicatedMethodFieldNames.py"), check);
-    String message = "Rename %s \"%s\" to prevent any misunderstanding/clash with %s \"%s\" defined on line %s";
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(5).withMessage(String.format(message, "method", "GO_UP", "method","go_up", "2"))
-      .next().atLine(8).withMessage(String.format(message, "method", "GO_DOWN", "field","go_down", "6"))
-      .noMore();
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/duplicatedMethodFieldNames.py"), check);
   }
 
 }

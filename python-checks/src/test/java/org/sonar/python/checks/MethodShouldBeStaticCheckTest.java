@@ -20,33 +20,14 @@
 package org.sonar.python.checks;
 
 import java.io.File;
-import org.junit.Rule;
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class MethodShouldBeStaticCheckTest {
-
-  @Rule
-  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
   public void test() {
     MethodShouldBeStaticCheck check = new MethodShouldBeStaticCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/methodShouldBeStatic.py"), check);
-    String message = "Make this method static.";
-    checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(19).withMessage(message)
-        .next().atLine(30).withMessage(message)
-        .next().atLine(40).withMessage(message)
-        .next().atLine(52).withMessage(message)
-        .next().atLine(88).withMessage(message)
-        .next().atLine(93).withMessage(message)
-        .next().atLine(98).withMessage(message)
-        .next().atLine(111).withMessage(message)
-        .next().atLine(119).withMessage(message)
-        .next().atLine(126).withMessage(message)
-        .next().atLine(129).withMessage(message);
+    PythonCheckVerifier.verify(new File("src/test/resources/checks/methodShouldBeStatic.py"), check);
   }
 }
