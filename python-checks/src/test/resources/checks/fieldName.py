@@ -37,7 +37,16 @@ class MyClass2:
         self.Field4 = self.Field5 = 6
 
 class MyClass3(object):
-  myField = 4 # Noncompliant
+    myField = 4 # Noncompliant
 
 class MyClass4(MyClass3):
-  myField = 4
+    myField = 4
+
+class MyClass5:
+    class MyClass6:
+        myField1 = 1            # Noncompliant
+
+class MyClass7:
+    class MyClass8:
+        def foo(self):
+            self.myField2 = 2   # Noncompliant

@@ -14,6 +14,12 @@ class MyClass:
     def fun(self):
       self.nestedClass = 5 # Noncompliant [[secondary=-2]] {{Rename field "nestedClass"}}
 #          ^^^^^^^^^^^
+      myClass = 1
 
 class MyClass1(MyClass):
   myClass1 = 1
+
+class MyClass:
+  class B:
+     def foo(self):
+         self.myClass = 1

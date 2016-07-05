@@ -27,6 +27,7 @@ import java.util.List;
 import org.sonar.python.api.PythonGrammar;
 
 public class NewSymbolsAnalyzer {
+
   private List<Token> symbols;
 
   public List<Token> getClassFields(AstNode classDef) {
@@ -36,7 +37,10 @@ public class NewSymbolsAnalyzer {
     List<AstNode> methods = classDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.FUNCDEF);
 
     for (AstNode method : methods) {
-      addFieldsInMethod(method);
+      // ignore any nested class
+      if (classDef.equals(method.getFirstAncestor(PythonGrammar.CLASSDEF))) {
+        addFieldsInMethod(method);
+      }
     }
     return symbols;
   }
@@ -100,7 +104,7 @@ public class NewSymbolsAnalyzer {
     List<AstNode> statements = classDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
     List<AstNode> expressions = new LinkedList<>();
     for (AstNode statement : statements) {
-      if (!statement.hasDescendant(PythonGrammar.FUNCDEF)) {
+      if (!isClass(statement) && !statement.hasDescendant(PythonGrammar.FUNCDEF)) {
         expressions.addAll(statement.getDescendants(PythonGrammar.EXPRESSION_STMT));
       }
     }
@@ -116,5 +120,10 @@ public class NewSymbolsAnalyzer {
     symbols = varNames;
     addSimpleIdentifiersFromLongAssignmentExpression(expression);
     return symbols;
+  }
+
+  private static boolean isClass(AstNode statement) {
+    AstNode compound = statement.getFirstChild(PythonGrammar.COMPOUND_STMT);
+    return compound != null && compound.getFirstChild(PythonGrammar.CLASSDEF) != null;
   }
 }
