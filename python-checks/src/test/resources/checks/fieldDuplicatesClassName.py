@@ -17,3 +17,16 @@ class MyClass:
 
 class MyClass1(MyClass):
   myClass1 = 1
+
+class MyClass:
+  class B:
+     myClass = 1
+     def foo(self):
+         self.myClass = 1
+
+class MyClass:
+  if True:
+    MYCLASS = 1 # Noncompliant
+    def foo(self):
+      self.myCLASS = 1 # Noncompliant
+      myClass = 1      # compliant, local var

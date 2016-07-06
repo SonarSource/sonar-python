@@ -27,6 +27,7 @@ import java.util.List;
 import org.sonar.python.api.PythonGrammar;
 
 public class NewSymbolsAnalyzer {
+
   private List<Token> symbols;
 
   public List<Token> getClassFields(AstNode classDef) {
@@ -36,9 +37,16 @@ public class NewSymbolsAnalyzer {
     List<AstNode> methods = classDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.FUNCDEF);
 
     for (AstNode method : methods) {
-      addFieldsInMethod(method);
+      // ignore any nested class
+      if (belongToClass(classDef, method)) {
+        addFieldsInMethod(method);
+      }
     }
     return symbols;
+  }
+
+  private static boolean belongToClass(AstNode classDef, AstNode methodOrStmt) {
+    return classDef.equals(methodOrStmt.getFirstAncestor(PythonGrammar.CLASSDEF, PythonGrammar.FUNCDEF));
   }
 
   private void addFieldsInMethod(AstNode method) {
@@ -100,12 +108,10 @@ public class NewSymbolsAnalyzer {
     List<AstNode> statements = classDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
     List<AstNode> expressions = new LinkedList<>();
     for (AstNode statement : statements) {
-      if (!statement.hasDescendant(PythonGrammar.FUNCDEF)) {
-        expressions.addAll(statement.getDescendants(PythonGrammar.EXPRESSION_STMT));
-      }
+      expressions.addAll(statement.getDescendants(PythonGrammar.EXPRESSION_STMT));
     }
     for (AstNode expression : expressions) {
-      if (CheckUtils.isAssignmentExpression(expression)) {
+      if (CheckUtils.isAssignmentExpression(expression) && belongToClass(classDef, expression)) {
         addSimpleIdentifiersFromLongAssignmentExpression(expression);
       }
     }
@@ -117,4 +123,5 @@ public class NewSymbolsAnalyzer {
     addSimpleIdentifiersFromLongAssignmentExpression(expression);
     return symbols;
   }
+
 }
