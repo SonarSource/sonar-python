@@ -72,6 +72,7 @@ public abstract class PythonReportSensor implements Sensor {
 
   public static List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
     String reportPath = conf.getString(reportPathPropertyKey);
+    boolean propertyIsProvided = reportPath != null;
     if (reportPath == null) {
       reportPath = defaultReportPath;
     }
@@ -79,7 +80,12 @@ public abstract class PythonReportSensor implements Sensor {
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 
     DirectoryScanner scanner = new DirectoryScanner(new File(baseDirPath), WildcardPattern.create(reportPath));
-    return scanner.getIncludedFiles();
+    List<File> includedFiles = scanner.getIncludedFiles();
+
+    if (includedFiles.isEmpty() && propertyIsProvided) {
+      LOG.warn("No report was found for {} using pattern {}", reportPathPropertyKey, reportPath);
+    }
+    return includedFiles;
   }
 
   protected void processReports(SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
