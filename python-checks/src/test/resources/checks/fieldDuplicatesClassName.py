@@ -23,3 +23,10 @@ class MyClass:
   class B:
      def foo(self):
          self.myClass = 1
+
+class MyClass:
+  if True:
+    MYCLASS = 1 # Noncompliant
+    def foo(self):
+      self.myCLASS = 1 # Noncompliant
+      myClass = 1      # compliant, local var
