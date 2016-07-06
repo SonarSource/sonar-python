@@ -87,8 +87,17 @@ public class PythonCoverageSensorTest {
 
     coverageSensor.execute(context, linesOfCode);
 
-    // expected logged text: "No coverage information will be saved because all LCOV files cannot be found."
-    assertThat(context.lineHits("moduleKey:file1.js", CoverageType.UNIT, 1)).isNull();
+    // expected logged text: "No report was found for sonar.python.coverage.reportPath using pattern /fake/path/report.xml"
+    assertThat(context.lineHits("moduleKey:sources/file1.py", CoverageType.UNIT, 1)).isNull();
+  }
+
+  @Test
+  public void absolute_path() throws Exception {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, new File(moduleBaseDir, "coverage.xml").getAbsolutePath());
+
+    coverageSensor.execute(context, linesOfCode);
+
+    assertThat(context.lineHits("moduleKey:sources/file1.py", CoverageType.UNIT, 1)).isEqualTo(1);
   }
 
   @Test
