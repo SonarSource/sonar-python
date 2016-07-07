@@ -193,7 +193,10 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),
       POWER)).skipIfOneChild();
-    b.rule(POWER).is(b.optional("await"), ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)).skipIfOneChild();
+    b.rule(POWER).is(b.firstOf(
+      b.sequence(b.optional("await"), ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)),
+      // matches "await" identifier
+      ATOM)).skipIfOneChild();
     b.rule(ATOM).is(b.firstOf(
         b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
         b.sequence("[", b.optional(TESTLIST_COMP), "]"),

@@ -56,6 +56,7 @@ public class PythonV3Test extends RuleTest {
 
     setRootRule(PythonGrammar.STATEMENT);
     assertThat(p).matches("async = 2");
+    assertThat(p).matches("await = 2");
     assertThat(p).matches("await async_func");
   }
 
