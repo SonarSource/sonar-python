@@ -88,8 +88,12 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
     int fileLength = getContext().peekSourceCode().getInt(PythonMetric.LINES);
     for (int line = 1; line <= fileLength; line++) {
-      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, linesOfCode.contains(line) ? 1 : 0);
-      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, linesOfComments.contains(line) ? 1 : 0);
+      if (linesOfCode.contains(line)) {
+        fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+      }
+      if (linesOfComments.contains(line)) {
+        fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
+      }
     }
     fileLinesContext.save();
 
