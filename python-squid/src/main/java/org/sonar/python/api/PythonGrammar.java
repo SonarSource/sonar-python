@@ -216,14 +216,15 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(EXPRLIST).is(b.firstOf(EXPR, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPR, STAR_EXPR)), b.optional(","));
     b.rule(TESTLIST).is(TEST, b.zeroOrMore(",", TEST), b.optional(","));
     b.rule(DICTORSETMAKER).is(b.firstOf(
-      b.sequence(TEST, ":", TEST, b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", TEST, ":", TEST), b.optional(",")))),
-      b.sequence(TEST, b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", TEST), b.optional(","))))));
+      b.sequence(
+        b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR)),
+        b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR))), b.optional(",")))),
+      b.sequence(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))))));
 
-    b.rule(ARGLIST).is(b.firstOf(
-      b.sequence(b.zeroOrMore(ARGUMENT, ","), "*", TEST, b.zeroOrMore(",", ARGUMENT), b.optional(",", "**", TEST)),
-      b.sequence(b.zeroOrMore(ARGUMENT, ","), "**", TEST),
-      b.optional(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","))));
+    b.rule(ARGLIST).is(b.optional(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(",")));
     b.rule(ARGUMENT).is(b.firstOf(
+      b.sequence("*", TEST),
+      b.sequence("**", TEST),
       b.sequence(TEST, "=", TEST),
       b.sequence(TEST, b.optional(COMP_FOR))));
     b.rule(COMP_ITER).is(b.firstOf(COMP_FOR, COMP_IF));
