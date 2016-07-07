@@ -43,6 +43,7 @@ public final class PythonLexer {
   private static final String BYTES_PREFIX = "(br|bR|b|Br|BR|B)";
   private static final String IMAGINARY_SUFFIX = "(j|J)";
   private static final String LONG_INTEGER_SUFFIX = "(l|L)";
+  private static final String FORMATTED_STRING_PREFIX = "(f|F)";
 
   public static Lexer create(PythonConfiguration conf) {
     LexerState lexerState = new LexerState();
@@ -67,6 +68,10 @@ public final class PythonLexer {
         // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
         .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
         .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
+
+        //https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
+      .withChannel(regexp(PythonTokenType.STRING, FORMATTED_STRING_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
+      .withChannel(regexp(PythonTokenType.STRING, FORMATTED_STRING_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
         // http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
         // http://docs.python.org/reference/lexical_analysis.html#imaginary-literals

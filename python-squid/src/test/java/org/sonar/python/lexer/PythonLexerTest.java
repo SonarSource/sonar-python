@@ -128,6 +128,16 @@ public class PythonLexerTest {
   }
 
   /**
+   * https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
+   */
+  @Test
+  public void formatted_string_literal() {
+    assertThat(lexer.lex("F'foo'"), hasToken("F'foo'", PythonTokenType.STRING));
+    assertThat(lexer.lex("f\"foo\""), hasToken("f\"foo\"", PythonTokenType.STRING));
+    assertThat(lexer.lex("f'foo{name}'"), hasToken("f'foo{name}'", PythonTokenType.STRING));
+  }
+
+  /**
    * http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
    */
   @Test
