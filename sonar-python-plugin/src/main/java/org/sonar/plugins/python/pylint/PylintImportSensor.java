@@ -19,10 +19,14 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
@@ -37,22 +41,6 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
 
-import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-
-@Properties({
-    @Property(
-        key = PylintImportSensor.REPORT_PATH_KEY,
-        defaultValue = "",
-        name = "Pylint's reports",
-        description = "Path to Pylint's report file, relative to projects root",
-        global = false,
-        project = true)
-})
 public class PylintImportSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.pylint.reportPath";
   private static final String DEFAULT_REPORT_PATH = "pylint-reports/pylint-result-*.txt";

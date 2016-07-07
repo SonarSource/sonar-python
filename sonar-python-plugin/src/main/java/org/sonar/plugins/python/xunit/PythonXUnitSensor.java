@@ -28,9 +28,6 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
-import org.sonar.api.PropertyType;
 import org.sonar.api.batch.CoverageExtension;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
@@ -43,21 +40,6 @@ import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
 
-@Properties({
-    @Property(
-        key = PythonXUnitSensor.REPORT_PATH_KEY,
-        defaultValue = PythonXUnitSensor.DEFAULT_REPORT_PATH,
-        name = "Path to xunit report(s)",
-        description = "Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.",
-        global = false, project = true),
-
-    @Property(
-        key = PythonXUnitSensor.SKIP_DETAILS,
-        type = PropertyType.BOOLEAN,
-        defaultValue = "true",
-        name = "Skip the details when importing the Xunit reports",
-        description = "If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature",
-        global = false, project = true) })
 public class PythonXUnitSensor extends PythonReportSensor {
   private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
 
