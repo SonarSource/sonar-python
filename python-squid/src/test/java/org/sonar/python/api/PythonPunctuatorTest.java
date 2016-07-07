@@ -29,7 +29,7 @@ public class PythonPunctuatorTest {
 
   @Test
   public void test() {
-    assertThat(PythonPunctuator.values()).hasSize(45);
+    assertThat(PythonPunctuator.values()).hasSize(46);
 
     AstNode astNode = mock(AstNode.class);
     for (PythonPunctuator punctuator : PythonPunctuator.values()) {

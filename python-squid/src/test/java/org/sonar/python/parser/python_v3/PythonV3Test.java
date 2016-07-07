@@ -35,6 +35,16 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
+  public void matrix_multiplication(){
+    setRootRule(PythonGrammar.STATEMENT);
+    assertThat(p)
+      .matches("a = b @ c")
+      .matches("a = b @ c @ d")
+      .matches("a @= b")
+    ;
+  }
+
+  @Test
   public void function_declaration(){
     setRootRule(PythonGrammar.FUNCDEF);
     assertThat(p).matches("def fun()->'Returns some value': pass");

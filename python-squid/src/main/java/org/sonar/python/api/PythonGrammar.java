@@ -176,7 +176,7 @@ public enum PythonGrammar implements GrammarRuleKey {
         b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
         b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR))));
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
-    b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|="));
+    b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 
     b.rule(TEST).is(b.firstOf(
       b.sequence(OR_TEST, b.optional("if", OR_TEST, "else", TEST)),
@@ -263,7 +263,7 @@ public enum PythonGrammar implements GrammarRuleKey {
    * http://docs.python.org/reference/expressions.html
    */
   public static void expressions(LexerfulGrammarBuilder b) {
-    b.rule(M_EXPR).is(FACTOR, b.zeroOrMore(b.firstOf("*", "//", "/", "%"), FACTOR)).skipIfOneChild();
+    b.rule(M_EXPR).is(FACTOR, b.zeroOrMore(b.firstOf("*", "//", "/", "%", "@"), FACTOR)).skipIfOneChild();
     b.rule(A_EXPR).is(M_EXPR, b.zeroOrMore(b.firstOf("+", "-"), M_EXPR)).skipIfOneChild();
 
     b.rule(SHIFT_EXPR).is(A_EXPR, b.zeroOrMore(b.firstOf("<<", ">>"), A_EXPR)).skipIfOneChild();
