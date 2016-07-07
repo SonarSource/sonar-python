@@ -88,7 +88,7 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context, linesOfCode);
 
     // expected logged text: "No report was found for sonar.python.coverage.reportPath using pattern /fake/path/report.xml"
-    assertThat(context.lineHits("moduleKey:sources/file1.py", CoverageType.UNIT, 1)).isNull();
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isNull();
   }
 
   @Test
@@ -97,7 +97,7 @@ public class PythonCoverageSensorTest {
 
     coverageSensor.execute(context, linesOfCode);
 
-    assertThat(context.lineHits("moduleKey:sources/file1.py", CoverageType.UNIT, 1)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isEqualTo(1);
   }
 
   @Test
@@ -111,9 +111,9 @@ public class PythonCoverageSensorTest {
       assertThat(context.lineHits(FILE1_KEY, CoverageType.IT, line)).isEqualTo(file1Expected[line - 1]);
       assertThat(context.lineHits(FILE1_KEY, CoverageType.OVERALL, line)).isEqualTo(file1Expected[line - 1]);
 
-      assertThat(context.lineHits("moduleKey:sources/file2.py", CoverageType.UNIT, line)).isEqualTo(file2Expected[line - 1]);
-      assertThat(context.lineHits("moduleKey:sources/file2.py", CoverageType.IT, line)).isEqualTo(file2Expected[line - 1]);
-      assertThat(context.lineHits("moduleKey:sources/file2.py", CoverageType.OVERALL, line)).isEqualTo(file2Expected[line - 1]);
+      assertThat(context.lineHits(FILE2_KEY, CoverageType.UNIT, line)).isEqualTo(file2Expected[line - 1]);
+      assertThat(context.lineHits(FILE2_KEY, CoverageType.IT, line)).isEqualTo(file2Expected[line - 1]);
+      assertThat(context.lineHits(FILE2_KEY, CoverageType.OVERALL, line)).isEqualTo(file2Expected[line - 1]);
 
       assertThat(context.lineHits(FILE3_KEY, CoverageType.UNIT, line)).isNull();
       assertThat(context.lineHits(FILE3_KEY, CoverageType.IT, line)).isNull();
@@ -129,7 +129,7 @@ public class PythonCoverageSensorTest {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
     coverageSensor.execute(context, linesOfCode);
 
-    assertThat(context.lineHits("moduleKey:sources/file1.py", CoverageType.UNIT, 1)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isEqualTo(1);
   }
 
   @Test
@@ -151,7 +151,7 @@ public class PythonCoverageSensorTest {
     Settings newSettings = new Settings().setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
     context.setSettings(newSettings);
     coverageSensor.execute(context, new HashMap<>());
-    assertThat(context.lineHits("moduleKey:file1.js", CoverageType.UNIT, 1)).isNull();
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isNull();
   }
 
   @Test(expected = IllegalStateException.class)
@@ -166,6 +166,6 @@ public class PythonCoverageSensorTest {
     settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "this-file-does-not-exist.xml");
     coverageSensor.execute(context, linesOfCode);
 
-    assertThat(context.lineHits("moduleKey:file1.js", CoverageType.UNIT, 1)).isNull();
+    assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isNull();
   }
 }
