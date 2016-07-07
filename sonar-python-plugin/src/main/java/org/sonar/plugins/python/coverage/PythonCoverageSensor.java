@@ -29,9 +29,6 @@ import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
-import org.sonar.api.PropertyType;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -44,39 +41,6 @@ import org.sonar.plugins.python.Python;
 
 import static org.sonar.plugins.python.PythonReportSensor.getReports;
 
-@Properties({
-    @Property(
-        key = PythonCoverageSensor.REPORT_PATH_KEY,
-        defaultValue = PythonCoverageSensor.DEFAULT_REPORT_PATH,
-        name = "Path to coverage report(s)",
-        description = "Path to coverage reports, relative to project's root. Ant patterns are accepted. The reports have to conform to the Cobertura XML format.",
-        global = false,
-        project = true),
-    @Property(
-        key = PythonCoverageSensor.IT_REPORT_PATH_KEY,
-        defaultValue = PythonCoverageSensor.IT_DEFAULT_REPORT_PATH,
-        name = "Path to coverage report(s) for integration tests",
-        description = "Path to coverage reports for integration tests, relative to project's root. Ant patterns are accepted. " +
-            "The reports have to conform to the Cobertura XML format.",
-        global = false,
-        project = true),
-    @Property(
-        key = PythonCoverageSensor.OVERALL_REPORT_PATH_KEY,
-        defaultValue = PythonCoverageSensor.OVERALL_DEFAULT_REPORT_PATH,
-        name = "Path to overall (combined UT+IT) coverage report(s)",
-        description = "Path to a report containing overall test coverage data (i.e. test coverage gained by all tests of all kinds), relative to projects root. " +
-            "Ant patterns are accepted. The reports have to conform to the Cobertura XML format.",
-        global = false,
-        project = true),
-    @Property(
-        key = PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY,
-        type = PropertyType.BOOLEAN,
-        defaultValue = "false",
-        name = "Assign zero line coverage to source files without coverage report(s)",
-        description = "If 'True', assign zero line coverage to source files without coverage report(s), which results in a more realistic overall Technical Debt value.",
-        global = false,
-        project = true)
-})
 public class PythonCoverageSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonCoverageSensor.class);
@@ -95,19 +59,19 @@ public class PythonCoverageSensor {
     String baseDir = context.fileSystem().baseDir().getPath();
     Settings settings = context.settings();
 
+    LOG.info("Python unit test coverage");
     List<File> reports = getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
-    LOG.debug("Parsing coverage reports");
     Map<InputFile, NewCoverage> coverageMeasures = parseReports(reports, context);
     HashSet<InputFile> filesCoveredByUT = new HashSet<>();
     saveMeasures(coverageMeasures, filesCoveredByUT, CoverageType.UNIT);
 
-    LOG.debug("Parsing integration test coverage reports");
+    LOG.info("Python integration test coverage");
     List<File> itReports = getReports(settings, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
     Map<InputFile, NewCoverage> itCoverageMeasures = parseReports(itReports, context);
     HashSet<InputFile> filesCoveredByIT = new HashSet<>();
     saveMeasures(itCoverageMeasures, filesCoveredByIT, CoverageType.IT);
 
-    LOG.debug("Parsing overall test coverage reports");
+    LOG.info("Python overall test coverage");
     List<File> overallReports = getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
     Map<InputFile, NewCoverage> overallCoverageMeasures = parseReports(overallReports, context);
     HashSet<InputFile> filesCoveredOverall = new HashSet<>();
