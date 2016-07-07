@@ -46,6 +46,20 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
+  public void asyncAndAwait() {
+    setRootRule(PythonGrammar.FUNCDEF);
+    assertThat(p).matches("async def fun(): pass");
+
+    setRootRule(PythonGrammar.ASYNC_STMT);
+    assertThat(p).matches("async with x.bar() as foo: pass");
+    assertThat(p).matches("async for var in x: pass");
+
+    setRootRule(PythonGrammar.STATEMENT);
+    assertThat(p).matches("async = 2");
+    assertThat(p).matches("await async_func");
+  }
+
+  @Test
   public void yield_from(){
     setRootRule(PythonGrammar.YIELD_EXPR);
     assertThat(p).matches("yield");
