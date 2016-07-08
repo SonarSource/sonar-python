@@ -87,7 +87,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void function_star_args(){
+  public void function_star_parameters(){
     setRootRule(PythonGrammar.TYPEDARGSLIST);
 
     assertThat(p)
@@ -125,4 +125,32 @@ public class PythonV3Test extends RuleTest {
     ;
   }
 
+  @Test
+  public void unpacking_operations() throws Exception {
+    setRootRule(PythonGrammar.ARGLIST);
+
+    assertThat(p)
+      .matches("*[1]")
+      .matches("*[1], *[2], 3")
+      .matches("**{'x': 1}, y=2, **{'z': 3}")
+    ;
+
+
+    setRootRule(PythonGrammar.TESTLIST_STAR_EXPR);
+
+    assertThat(p)
+      // tuple
+      .matches("*a, b")
+      .matches("(a, *b)")
+
+      // list
+      .matches("[*a, b]")
+
+      // set
+      .matches("{*a, b}")
+
+      // dictionary
+      .matches("{'x':b, **a}")
+    ;
+  }
 }
