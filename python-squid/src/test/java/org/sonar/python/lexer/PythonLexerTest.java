@@ -20,10 +20,12 @@
 package org.sonar.python.lexer;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import java.util.List;
+import java.util.Set;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
@@ -132,9 +134,23 @@ public class PythonLexerTest {
    */
   @Test
   public void formatted_string_literal() {
-    assertThat(lexer.lex("F'foo'"), hasToken("F'foo'", PythonTokenType.STRING));
-    assertThat(lexer.lex("f\"foo\""), hasToken("f\"foo\"", PythonTokenType.STRING));
-    assertThat(lexer.lex("f'foo{name}'"), hasToken("f'foo{name}'", PythonTokenType.STRING));
+    Set<String> formattedStringLiterals = ImmutableSet.of(
+      "F'foo'",
+      "f\"foo\"",
+      "f'foo{name}'",
+      "fr'foo'",
+      "Fr'foo'",
+      "fR'foo'",
+      "FR'foo'",
+      "rf'foo'",
+      "rF'foo'",
+      "Rf'foo'",
+      "RF'foo'",
+      "RF'foo\\n'"
+    );
+    for (String formattedStringLiteral : formattedStringLiterals) {
+      assertThat(lexer.lex(formattedStringLiteral), hasToken(formattedStringLiteral, PythonTokenType.STRING));
+    }
   }
 
   /**

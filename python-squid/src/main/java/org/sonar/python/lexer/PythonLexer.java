@@ -43,7 +43,7 @@ public final class PythonLexer {
   private static final String BYTES_PREFIX = "(br|bR|b|Br|BR|B)";
   private static final String IMAGINARY_SUFFIX = "(j|J)";
   private static final String LONG_INTEGER_SUFFIX = "(l|L)";
-  private static final String FORMATTED_STRING_PREFIX = "(f|F)";
+  private static final String FORMATTED_STRING_PREFIX = "(f|F|[fF][rR]|[rR][fF])";
 
   public static Lexer create(PythonConfiguration conf) {
     LexerState lexerState = new LexerState();
