@@ -9,7 +9,7 @@ async def async_func_caller():
 
 class MyClass:
 
-    def synch_meth(self):
+    def sync_meth(self):
         pass
 
     async def async_meth(self):
@@ -17,7 +17,7 @@ class MyClass:
 
     async = 2
 
-def synch_function_2(fn):
+def sync_function_2(fn):
     @wraps(fn)
     async def wrapper(*args):
         pass
