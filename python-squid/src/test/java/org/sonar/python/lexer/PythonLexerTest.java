@@ -189,6 +189,7 @@ public class PythonLexerTest {
   public void operators_and_delimiters() {
     assertThat(lexer.lex("<<"), hasToken("<<", PythonPunctuator.LEFT_OP));
     assertThat(lexer.lex("+="), hasToken("+=", PythonPunctuator.PLUS_ASSIGN));
+    assertThat(lexer.lex("@="), hasToken("@=", PythonPunctuator.MATRIX_MULT_ASSIGN));
   }
 
   /**
