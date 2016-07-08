@@ -35,8 +35,13 @@ import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
 public class PythonPlugin extends SonarPlugin {
 
+  // Subcategories
+
+  private static final String GENERAL = "General";
+  private static final String TEST_AND_COVERAGE = "Tests and Coverage";
+  private static final String PYLINT = "Pylint";
+
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
-  private static final String CATEGORY = "Python";
 
   @Override
   public List getExtensions() {
@@ -46,22 +51,23 @@ public class PythonPlugin extends SonarPlugin {
       PropertyDefinition.builder(FILE_SUFFIXES_KEY)
         .name("File Suffixes")
         .description("Comma-separated list of suffixes of Python files to analyze.")
-        .category(CATEGORY)
+        .subCategory(GENERAL)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("py")
         .build(),
 
+      // COVERAGE
       PropertyDefinition.builder(PythonCoverageSensor.REPORT_PATH_KEY)
         .name("Path to coverage report(s)")
         .description("Path to coverage reports. Ant patterns are accepted for relative path. The reports have to conform to the Cobertura XML format.")
-        .category(CATEGORY)
+        .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonCoverageSensor.DEFAULT_REPORT_PATH)
         .build(),
       PropertyDefinition.builder(PythonCoverageSensor.IT_REPORT_PATH_KEY)
         .name("Path to coverage report(s) for integration tests")
         .description("Path to coverage reports for integration tests. Ant patterns are accepted for relative path. The reports have to conform to the Cobertura XML format.")
-        .category(CATEGORY)
+        .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonCoverageSensor.IT_DEFAULT_REPORT_PATH)
         .build(),
@@ -69,18 +75,57 @@ public class PythonPlugin extends SonarPlugin {
         .name("Path to overall (combined UT+IT) coverage report(s)")
         .description("Path to a report containing overall test coverage data (i.e. test coverage gained by all tests of all kinds). " +
           "Ant patterns are accepted for relative path. The reports have to conform to the Cobertura XML format.")
-        .category(CATEGORY)
+        .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonCoverageSensor.OVERALL_DEFAULT_REPORT_PATH)
         .build(),
-
       PropertyDefinition.builder(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY)
         .name("Assign zero line coverage to source files without coverage report(s)")
         .description("If 'True', assign zero line coverage to source files without coverage report(s), which results in a more realistic overall Technical Debt value.")
-        .category(CATEGORY)
+        .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("false")
         .type(PropertyType.BOOLEAN)
+        .build(),
+
+      // XUNIT
+      PropertyDefinition.builder(PythonXUnitSensor.SKIP_DETAILS)
+        .name("Skip the details when importing the Xunit reports")
+        .description("If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature")
+        .subCategory(TEST_AND_COVERAGE)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("true")
+        .type(PropertyType.BOOLEAN)
+        .build(),
+      PropertyDefinition.builder(PythonXUnitSensor.REPORT_PATH_KEY)
+        .name("Path to xunit report(s)")
+        .description("Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.")
+        .subCategory(TEST_AND_COVERAGE)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue(PythonXUnitSensor.DEFAULT_REPORT_PATH)
+        .build(),
+
+      // PYLINT
+      PropertyDefinition.builder(PylintConfiguration.PYLINT_CONFIG_KEY)
+        .name("Pylint configuration")
+        .description("Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.")
+        .subCategory(PYLINT)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("")
+        .build(),
+      PropertyDefinition.builder(PylintConfiguration.PYLINT_KEY)
+        .name("Pylint executable")
+        .description("Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.")
+        .subCategory(PYLINT)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("")
+        .build(),
+      PropertyDefinition.builder(PylintImportSensor.REPORT_PATH_KEY)
+        .name("Pylint's reports")
+        .description("Path to Pylint's report file, relative to projects root")
+        .subCategory(PYLINT)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("")
         .build(),
 
       Python.class,

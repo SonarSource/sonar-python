@@ -19,31 +19,12 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.io.File;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 
-import java.io.File;
-
-@Properties({
-  @Property(
-    key = PylintConfiguration.PYLINT_CONFIG_KEY,
-    defaultValue = "",
-    name = "pylint configuration",
-    description = "Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.",
-    global = false,
-    project = true),
-  @Property(
-    key = PylintConfiguration.PYLINT_KEY,
-    defaultValue = "",
-    name = "pylint executable",
-    description = "Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.",
-    global = true,
-    project = false)
-})
 public class PylintConfiguration implements BatchExtension {
 
   public static final String PYLINT_CONFIG_KEY = "sonar.python.pylint_config";
