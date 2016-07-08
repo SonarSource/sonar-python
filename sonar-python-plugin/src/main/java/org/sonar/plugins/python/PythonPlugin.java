@@ -94,7 +94,7 @@ public class PythonPlugin extends SonarPlugin {
         .description("If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature")
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue("true")
+        .defaultValue("false")
         .type(PropertyType.BOOLEAN)
         .build(),
       PropertyDefinition.builder(PythonXUnitSensor.REPORT_PATH_KEY)

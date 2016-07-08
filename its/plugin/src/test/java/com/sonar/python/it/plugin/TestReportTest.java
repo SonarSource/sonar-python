@@ -26,14 +26,13 @@ import com.google.common.collect.Maps;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarRunner;
-
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-
-import java.io.File;
-import java.util.Map;
-import java.util.Set;
 
 import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
 import static org.fest.assertions.Assertions.assertThat;
@@ -58,7 +57,8 @@ public class TestReportTest {
 
   @Test
   public void import_report() throws Exception {
-    orchestrator.executeBuild(createBuild("nosetests.xml").setProperty("sonar.python.xunit.skipDetails", "false"));
+    // sonar.python.xunit.skipDetails=false by default
+    orchestrator.executeBuild(createBuild("nosetests.xml"));
     assertProjectMeasures(PROJECT, new ImmutableMap.Builder<String, Integer>()
       .put("tests", 3)
       .put("test_failures", 1)
@@ -72,13 +72,15 @@ public class TestReportTest {
   @Test
   public void simple_mode() throws Exception {
     orchestrator.executeBuild(createBuild("nosetests.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
-    assertProjectMeasures(PROJECT, new ImmutableMap.Builder<String, Integer>()
-      .put("tests", 3)
-      .put("test_failures", 1)
-      .put("test_errors", 1)
-      .put("skipped_tests", 1)
-      .put("test_execution_time", 1)
-      .build());
+    Map<String, Integer> values = new HashMap<>();
+    values.put("tests", 3);
+    values.put("test_failures", 1);
+    values.put("test_errors", 1);
+    values.put("skipped_tests", 1);
+    values.put("test_execution_time", 1);
+    values.put("test_success_density", null);
+
+    assertProjectMeasures(PROJECT, values);
   }
 
   @Test

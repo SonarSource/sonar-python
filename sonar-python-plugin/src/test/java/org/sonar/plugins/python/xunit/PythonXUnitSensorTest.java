@@ -85,9 +85,6 @@ public class PythonXUnitSensorTest {
     verify(context).saveMeasure(testFile2, CoreMetrics.TEST_FAILURES, 1.);
     verify(context).saveMeasure(testFile1, CoreMetrics.TEST_FAILURES, 0.);
 
-    verify(context).saveMeasure(eq(testFile1), eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
-    verify(context).saveMeasure(eq(testFile2), eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
-
     verify(context, times(2)).saveMeasure(eq(testFile1), any(Measure.class));
     verify(context).saveMeasure(eq(testFile2), any(Measure.class));
   }
@@ -99,7 +96,6 @@ public class PythonXUnitSensorTest {
     fs.add(new DefaultInputFile("", "tests/dir/test_sample.py"));
     sensor.analyse(project, context);
 
-    verify(context).saveMeasure(eq(CoreMetrics.TEST_SUCCESS_DENSITY), anyDouble());
     // includes test with not found file
     verify(context).saveMeasure(CoreMetrics.TESTS, 7.);
     verify(context).saveMeasure(CoreMetrics.SKIPPED_TESTS, 2.);

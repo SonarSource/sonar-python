@@ -36,7 +36,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
-import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
 
@@ -46,7 +45,6 @@ public class PythonXUnitSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   public static final String SKIP_DETAILS = "sonar.python.xunit.skipDetails";
-  private static final double PERCENT_BASE = 100d;
 
   public PythonXUnitSensor(Settings conf, FileSystem fileSystem) {
     super(conf, fileSystem);
@@ -97,10 +95,6 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
 
     if (testsCount > 0) {
-      double testsPassed = testsCount - testsErrors - testsFailures;
-      double successDensity = testsPassed * PERCENT_BASE / testsCount;
-      context.saveMeasure(CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
-
       context.saveMeasure(CoreMetrics.TESTS, testsCount);
       context.saveMeasure(CoreMetrics.SKIPPED_TESTS, testsSkipped);
       context.saveMeasure(CoreMetrics.TEST_ERRORS, testsErrors);
@@ -133,13 +127,6 @@ public class PythonXUnitSensor extends PythonReportSensor {
       context.saveMeasure(inputFile, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
       context.saveMeasure(inputFile, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
       context.saveMeasure(inputFile, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
-
-      double testsRun = (double)fileReport.getTests() - fileReport.getSkipped();
-      if (testsRun > 0) {
-        double passedTests = (double)fileReport.getTests() - fileReport.getErrors() - fileReport.getFailures() - fileReport.getSkipped();
-        double successDensity = passedTests * PERCENT_BASE / testsRun;
-        context.saveMeasure(inputFile, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(successDensity));
-      }
       context.saveMeasure(inputFile, new Measure(CoreMetrics.TEST_DATA, fileReport.getDetails()));
     }
   }
@@ -171,10 +158,10 @@ public class PythonXUnitSensor extends PythonReportSensor {
     for (TestSuite report : testReports) {
       String fileKey = report.getKey();
 
-      LOG.debug("Trying to find a SonarQube resource for '{}' ...", fileKey);
+      LOG.debug("Trying to find a SonarQube resource for '{}'", fileKey);
       InputFile inputFile = findResource(fileKey);
       if (inputFile != null) {
-        LOG.debug("... found! The resource is '{}'", inputFile);
+        LOG.debug("The resource was found '{}'", inputFile);
 
         TestSuite summaryReport = locatedReports.get(inputFile.absolutePath());
         if (summaryReport != null) {
@@ -184,7 +171,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
           locatedReports.put(inputFile.absolutePath(), report);
         }
       } else {
-        LOG.debug("... cannot find the resource for '{}', drilling down to the details of this test wont be possible", fileKey);
+        LOG.warn("The resource for '{}' is not found, drilling down to the details of this test won't be possible", fileKey);
       }
     }
 
