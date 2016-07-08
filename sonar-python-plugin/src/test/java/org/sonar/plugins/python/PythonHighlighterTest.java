@@ -57,7 +57,7 @@ public class PythonHighlighterTest {
   @Test
   public void keyword() throws Exception {
     // def
-    checkOnRange(1, 0, 3, TypeOfText.KEYWORD);
+    checkOnRange(8, 0, 3, TypeOfText.KEYWORD);
 
     // if
     checkOnRange(12, 0, 2, TypeOfText.KEYWORD);
@@ -72,7 +72,7 @@ public class PythonHighlighterTest {
     checkOnRange(12, 37, 8, TypeOfText.KEYWORD);
 
     // pass
-    checkOnRange(2, 4, 4, TypeOfText.KEYWORD);
+    checkOnRange(9, 4, 4, TypeOfText.KEYWORD);
   }
 
   @Test
@@ -109,6 +109,29 @@ public class PythonHighlighterTest {
     check(27, 17, TypeOfText.STRING);
     check(27, 18, null);
     checkOnRange(27, 26, 16, TypeOfText.STRING);
+
+    // docstrings and non-docstrings
+    check(1, 0, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(2, 0, 22, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(50, 4, 28, TypeOfText.STRUCTURED_COMMENT);
+    check(54, 4, TypeOfText.STRUCTURED_COMMENT);
+    check(55, 4, TypeOfText.STRUCTURED_COMMENT);
+    check(56, 4, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(57, 0, 7, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(58, 4, 64, TypeOfText.STRING);
+    checkOnRange(60, 4, 23, TypeOfText.STRING);
+    checkOnRange(64, 4, 31, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(67, 4, 69, TypeOfText.STRING);
+    check(70, 14, TypeOfText.STRUCTURED_COMMENT);
+    check(71, 14, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(72, 0, 25, TypeOfText.STRUCTURED_COMMENT);
+    checkOnRange(77, 8, 23, TypeOfText.STRING);
+    checkOnRange(79, 12, 23, TypeOfText.STRING);
+    checkOnRange(84, 0, 23, TypeOfText.STRING);
+    checkOnRange(87, 4, 23, TypeOfText.STRING);
+
+    checkOnRange(93, 11, 17, TypeOfText.STRING);
+    checkOnRange(91, 8, 17, TypeOfText.STRING);
   }
 
   @Test
@@ -153,7 +176,7 @@ public class PythonHighlighterTest {
   }
 
   /**
-   * Checks the highlighting of a range of columns.
+   * Checks the highlighting of a range of columns. The first column of a line has index 0.
    * The range is the columns of the token.
    */
   private void checkOnRange(int line, int firstColumn, int length, TypeOfText expectedTypeOfText) {
@@ -163,7 +186,7 @@ public class PythonHighlighterTest {
     }
 
     // check that the column before the token is not highlighted
-    if (firstColumn != 1) {
+    if (firstColumn != 0) {
       checkInternal(line, firstColumn - 1, " (= before the token)", null);
     }
 
@@ -172,7 +195,7 @@ public class PythonHighlighterTest {
   }
 
   /**
-   * Checks the highlighting of one column.
+   * Checks the highlighting of one column. The first column of a line has index 0.
    */
   private void check(int line, int column, TypeOfText expectedTypeOfText) {
     checkInternal(line, column, "", expectedTypeOfText);
@@ -186,7 +209,8 @@ public class PythonHighlighterTest {
     String message = "number of TypeOfTexts at line " + line + " and column " + column + messageComplement;
     assertThat(foundTypeOfTexts).as(message).hasSize(expectedNumberOfTypeOfText);
     if (expectedNumberOfTypeOfText > 0) {
-      assertThat(foundTypeOfTexts.get(0)).isEqualTo(expectedTypeOfText);
+      message = "found TypeOfTexts at line " + line + " and column " + column + messageComplement;
+      assertThat(foundTypeOfTexts.get(0)).as(message).isEqualTo(expectedTypeOfText);
     }
   }
 

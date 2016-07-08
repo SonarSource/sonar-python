@@ -1,5 +1,5 @@
-def foo():
-    pass
+""" Docstring
+    for the module """
 
 x = "some string"
 
@@ -45,3 +45,49 @@ y = 45.4 + 67e8 - 78.562E-09
 3J
 
 23.3e-7J
+
+def foo():
+    "Docstring for the function"
+    pass
+
+def func():
+    '''
+    Multi-line docstring
+    for the function
+    '''
+    "Additional docstring, currently not highlighted as a docstring"
+    print(1)
+    """ Not a docstring """
+    pass
+
+class ClassA:
+    """ Docstring for the class """
+
+    attr1 = 1
+    """ Attribute docstring, currently not highlighted as a docstring """
+
+    def meth1(self):
+        ''' Multi-line docstring
+            for 
+            the method'''
+        pass
+
+    def meth2(self):
+        print(1)
+        """ Not a docstring """
+        while (condition):
+            """ Not a docstring """
+            print(1)
+        pass
+
+x = 1
+""" Not a docstring """
+
+if (condition):
+    """ Not a docstring """
+    pass
+    
+def foo():
+    foo("Not a docstring")
+
+def foo(): "Not a docstring"

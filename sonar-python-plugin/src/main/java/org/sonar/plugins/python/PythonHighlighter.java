@@ -24,12 +24,16 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.SquidAstVisitor;
@@ -64,7 +68,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *        123.45e-10
  *        123+88.99J
  *     </pre>
- *     For a negative number, the "minus" sign is not colored. 
+ *     For a negative number, the "minus" sign is not colored.
  *   </li>
  *   <li>
  *     Comments. Example:
@@ -73,36 +77,70 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *     </pre>
  *   </li>
  * </ul>
- * Note that docstrings are handled (i.e., colored) like normal string literals.
+ * Docstrings are handled (i.e., colored) as structured comments, not as normal string literals.
+ * "Attribute docstrings" and "additional docstrings" (see PEP 258) are handled as normal string literals.
+ * Reminder: a docstring is a string literal that occurs as the first statement in a module,
+ * function, class, or method definition.
  */
 public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
   private NewHighlighting newHighlighting;
 
   private final SensorContext context;
+  private Set<Token> docStringTokens;
 
   public PythonHighlighter(SensorContext context) {
     this.context = context;
   }
 
   @Override
+  public void init() {
+    subscribeTo(
+      PythonGrammar.FUNCDEF,
+      PythonGrammar.CLASSDEF,
+      PythonGrammar.FILE_INPUT
+    );
+  }
+
+  @Override
   public void visitFile(@Nullable AstNode astNode) {
+    docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().getFile().getAbsoluteFile()));
     newHighlighting.onFile(inputFile);
   }
 
   @Override
-  public void visitToken(Token token) {
-    if (token.getType().equals(PythonTokenType.STRING)) {
-      // string literals, including doc string
-      highlight(token, TypeOfText.STRING);
+  public void visitNode(AstNode astNode) {
+    if (astNode.is(PythonGrammar.FILE_INPUT)) {
+      checkFirstStatement(astNode.getFirstChild(PythonGrammar.STATEMENT));
+    } else {
+      checkFirstStatement(astNode.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STATEMENT));
+    }
+  }
 
-    } else if (token.getType().equals(PythonTokenType.NUMBER)) {
+  private void checkFirstStatement(@Nullable AstNode firstStatement) {
+    if (firstStatement != null) {
+      List<Token> tokens = firstStatement.getTokens();
+
+      if (tokens.size() == 2 && tokens.get(0).getType().equals(PythonTokenType.STRING)) {
+        // second token is NEWLINE
+        highlight(tokens.get(0), TypeOfText.STRUCTURED_COMMENT);
+        docStringTokens.add(tokens.get(0));
+      }
+    }
+  }
+
+  @Override
+  public void visitToken(Token token) {
+    if (token.getType().equals(PythonTokenType.NUMBER)) {
       highlight(token, TypeOfText.CONSTANT);
- 
+
     } else if (token.getType() instanceof PythonKeyword) {
       highlight(token, TypeOfText.KEYWORD);
+
+    } else if (token.getType().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
+      highlight(token, TypeOfText.STRING);
     }
 
     for (Trivia trivia : token.getTrivia()) {
