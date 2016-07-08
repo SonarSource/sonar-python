@@ -27,14 +27,11 @@ import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -77,9 +74,6 @@ public class PythonXUnitSensorTest {
     verify(context).saveMeasure(testFile1, CoreMetrics.TEST_FAILURES, 1.);
     verify(context).saveMeasure(testFile2, CoreMetrics.TEST_FAILURES, 1.);
     verify(context).saveMeasure(testFile1, CoreMetrics.TEST_FAILURES, 0.);
-
-    verify(context, times(2)).saveMeasure(eq(testFile1), any(Measure.class));
-    verify(context).saveMeasure(eq(testFile2), any(Measure.class));
   }
 
   @Test

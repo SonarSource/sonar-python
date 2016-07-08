@@ -33,7 +33,6 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
 
@@ -120,7 +119,6 @@ public class PythonXUnitSensor extends PythonReportSensor {
       context.saveMeasure(inputFile, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
       context.saveMeasure(inputFile, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
       context.saveMeasure(inputFile, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
-      context.saveMeasure(inputFile, new Measure(CoreMetrics.TEST_DATA, fileReport.getDetails()));
     }
   }
 
