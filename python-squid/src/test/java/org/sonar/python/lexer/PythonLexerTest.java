@@ -114,7 +114,9 @@ public class PythonLexerTest {
   @Test
   public void bytes_literal() {
     assertThat(lexer.lex("br'hello world'"), hasToken("br'hello world'", PythonTokenType.STRING));
+    assertThat(lexer.lex("rb'hello world'"), hasToken("rb'hello world'", PythonTokenType.STRING));
     assertThat(lexer.lex("br\"hello world\""), hasToken("br\"hello world\"", PythonTokenType.STRING));
+    assertThat(lexer.lex("rb\"hello world\""), hasToken("rb\"hello world\"", PythonTokenType.STRING));
   }
 
   /**
@@ -126,7 +128,9 @@ public class PythonLexerTest {
     assertThat(lexer.lex("b\"\"\"\n\"\"\""), hasToken("b\"\"\"\n\"\"\"", PythonTokenType.STRING));
 
     assertThat(lexer.lex("br'''\n'''"), hasToken("br'''\n'''", PythonTokenType.STRING));
+    assertThat(lexer.lex("rb'''\n'''"), hasToken("rb'''\n'''", PythonTokenType.STRING));
     assertThat(lexer.lex("br\"\"\"\n\"\"\""), hasToken("br\"\"\"\n\"\"\"", PythonTokenType.STRING));
+    assertThat(lexer.lex("rb\"\"\"\n\"\"\""), hasToken("rb\"\"\"\n\"\"\"", PythonTokenType.STRING));
   }
 
   /**

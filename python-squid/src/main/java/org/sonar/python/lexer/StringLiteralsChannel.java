@@ -105,11 +105,11 @@ public class StringLiteralsChannel extends Channel<Lexer> {
 
   private void readStringPrefix(CodeReader code) {
     ch = Character.toUpperCase(code.charAt(index));
-    if ((ch == 'U') || (ch == 'B')) {
+    if (ch == 'U' || ch == 'B' || ch == 'R') {
       index++;
       ch = Character.toUpperCase(code.charAt(index));
     }
-    if (ch == 'R') {
+    if (ch == 'R' || ch == 'B') {
       index++;
       ch = code.charAt(index);
     }
