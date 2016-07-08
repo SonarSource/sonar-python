@@ -19,8 +19,10 @@
  */
 package org.sonar.python.lexer;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
+import java.util.Set;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
@@ -31,6 +33,7 @@ import org.sonar.sslr.channel.CodeReader;
 public class StringLiteralsChannel extends Channel<Lexer> {
 
   private static final char EOF = (char) -1;
+  private static final Set<Character> PREFIX_CHARS = ImmutableSet.of('R', 'F', 'U', 'B');
 
   private final StringBuilder sb = new StringBuilder();
 
@@ -105,11 +108,11 @@ public class StringLiteralsChannel extends Channel<Lexer> {
 
   private void readStringPrefix(CodeReader code) {
     ch = Character.toUpperCase(code.charAt(index));
-    if (ch == 'U' || ch == 'B' || ch == 'R') {
+    if (PREFIX_CHARS.contains(ch)) {
       index++;
       ch = Character.toUpperCase(code.charAt(index));
     }
-    if (ch == 'R' || ch == 'B') {
+    if (PREFIX_CHARS.contains(ch)) {
       index++;
       ch = code.charAt(index);
     }

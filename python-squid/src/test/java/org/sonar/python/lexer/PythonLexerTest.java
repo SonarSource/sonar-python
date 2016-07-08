@@ -150,8 +150,12 @@ public class PythonLexerTest {
       "rF'foo'",
       "Rf'foo'",
       "RF'foo'",
-      "RF'foo\\n'"
-    );
+      "RF'foo\\n'",
+
+      "F'''foo'''",
+      "rF'''foo'''",
+      "fR\"\"\"foo\"\"\""
+      );
     for (String formattedStringLiteral : formattedStringLiterals) {
       assertThat(lexer.lex(formattedStringLiteral), hasToken(formattedStringLiteral, PythonTokenType.STRING));
     }
