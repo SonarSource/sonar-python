@@ -30,6 +30,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.SquidAstVisitor;
@@ -64,7 +65,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *        123.45e-10
  *        123+88.99J
  *     </pre>
- *     For a negative number, the "minus" sign is not colored. 
+ *     For a negative number, the "minus" sign is not colored.
  *   </li>
  *   <li>
  *     Comments. Example:
@@ -73,7 +74,10 @@ import org.sonar.squidbridge.SquidAstVisitor;
  *     </pre>
  *   </li>
  * </ul>
- * Note that docstrings are handled (i.e., colored) like normal string literals.
+ * Docstrings are handled (i.e., colored) as structured comments, not as normal string literals.
+ * "Attribute docstrings" and "additional docstrings" (see PEP 258) are handled as normal string literals.
+ * Reminder: a docstring is a string literal that occurs as the first statement in a module,
+ * function, class, or method definition.
  */
 public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
@@ -86,6 +90,13 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   }
 
   @Override
+  public void init() {
+    subscribeTo(
+      PythonTokenType.STRING
+    );
+  }
+
+  @Override
   public void visitFile(@Nullable AstNode astNode) {
     newHighlighting = context.newHighlighting();
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().getFile().getAbsoluteFile()));
@@ -93,14 +104,19 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   }
 
   @Override
-  public void visitToken(Token token) {
-    if (token.getType().equals(PythonTokenType.STRING)) {
-      // string literals, including doc string
+  public void visitNode(AstNode astNode) {
+    Token token = astNode.getToken();
+    if (isDocString(astNode)) {
+      highlight(token, TypeOfText.STRUCTURED_COMMENT);
+    } else {
       highlight(token, TypeOfText.STRING);
+    }
+  }
 
-    } else if (token.getType().equals(PythonTokenType.NUMBER)) {
+  @Override
+  public void visitToken(Token token) {
+    if (token.getType().equals(PythonTokenType.NUMBER)) {
       highlight(token, TypeOfText.CONSTANT);
- 
     } else if (token.getType() instanceof PythonKeyword) {
       highlight(token, TypeOfText.KEYWORD);
     }
@@ -118,6 +134,25 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   private void highlight(Token token, TypeOfText typeOfText) {
     TokenLocation tokenLocation = new TokenLocation(token);
     newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
+  }
+
+  private static boolean isDocString(AstNode stringNode) {
+    AstNode statement = stringNode.getFirstAncestor(PythonGrammar.STATEMENT);
+    if (statement != null &&
+      isInModuleOrFunctionOrClassOrMethod(statement) &&
+      statement.equals(statement.getParent().getFirstChild(PythonGrammar.STATEMENT))) {
+      return true;
+    }
+    return false;
+  }
+
+  private static boolean isInModuleOrFunctionOrClassOrMethod(AstNode statement) {
+    AstNode parent = statement.getParent();
+    if (parent.is(PythonGrammar.FILE_INPUT)) {
+      return true;
+    } else {
+      return parent.getParent().is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF);
+    }
   }
 
 }
