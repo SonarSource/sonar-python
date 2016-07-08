@@ -28,8 +28,6 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.CoverageExtension;
-import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -48,11 +46,6 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   public PythonXUnitSensor(Settings conf, FileSystem fileSystem) {
     super(conf, fileSystem);
-  }
-
-  @DependsUpon
-  public Class<?> dependsUponCoverageSensors() {
-    return CoverageExtension.class;
   }
 
   @Override
