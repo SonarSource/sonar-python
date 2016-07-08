@@ -102,12 +102,8 @@ public abstract class PythonReportSensor implements Sensor {
   protected void processReports(SensorContext context, List<File> reports) throws javax.xml.stream.XMLStreamException {
   }
 
-  protected String reportPathKey() {
-    return "";
-  }
+  protected abstract String reportPathKey();
 
-  protected String defaultReportPath() {
-    return "";
-  }
+  protected abstract String defaultReportPath();
 
 }

@@ -41,7 +41,7 @@ public class PylintArguments {
   }
 
   private static String pylintVersion(Command command) {
-    long timeout = 10000;
+    long timeout = 10_000;
     CommandStreamConsumer out = new CommandStreamConsumer();
     CommandStreamConsumer err = new CommandStreamConsumer();
     CommandExecutor.create().execute(command, out, err, timeout);

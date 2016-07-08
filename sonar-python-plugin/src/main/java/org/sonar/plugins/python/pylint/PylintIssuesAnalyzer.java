@@ -78,7 +78,7 @@ public class PylintIssuesAnalyzer {
 
     LOG.debug("Calling command: '{}'", command.toString());
 
-    long timeoutMS = 300000; // =5min
+    long timeoutMS = 300_000; // =5min
     CommandStreamConsumer stdOut = new CommandStreamConsumer();
     CommandStreamConsumer stdErr = new CommandStreamConsumer();
     CommandExecutor.create().execute(command, stdOut, stdErr, timeoutMS);
@@ -96,7 +96,7 @@ public class PylintIssuesAnalyzer {
   }
 
   protected List<Issue> parseOutput(List<String> lines) {
-    List<Issue> issues = new LinkedList<Issue>();
+    List<Issue> issues = new LinkedList<>();
 
     PylintReportParser parser = new PylintReportParser();
     if (!lines.isEmpty()) {

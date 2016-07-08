@@ -71,7 +71,7 @@ public enum PythonKeyword implements TokenType {
 
   private final String value;
 
-  private PythonKeyword(String value) {
+  PythonKeyword(String value) {
     this.value = value;
   }
 

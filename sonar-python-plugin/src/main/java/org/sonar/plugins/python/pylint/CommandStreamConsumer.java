@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 class CommandStreamConsumer implements StreamConsumer {
-  private List<String> data = new LinkedList<String>();
+  private List<String> data = new LinkedList<>();
 
   @Override
   public void consumeLine(String line) {

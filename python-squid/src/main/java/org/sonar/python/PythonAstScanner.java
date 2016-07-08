@@ -69,7 +69,7 @@ public final class PythonAstScanner {
   }
 
   public static AstScanner<Grammar> create(PythonConfiguration conf, SquidAstVisitor<Grammar>... visitors) {
-    final SquidAstVisitorContextImpl<Grammar> context = new SquidAstVisitorContextImpl<Grammar>(new SourceProject("Python Project"));
+    final SquidAstVisitorContextImpl<Grammar> context = new SquidAstVisitorContextImpl<>(new SourceProject("Python Project"));
     final Parser<Grammar> parser = PythonParser.create(conf);
 
     AstScanner.Builder<Grammar> builder = AstScanner.<Grammar>builder(context).setBaseParser(parser);
@@ -133,15 +133,14 @@ public final class PythonAstScanner {
   }
 
   private static void setMethodAnalyser(AstScanner.Builder<Grammar> builder) {
-    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
-      @Override
-      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild().getTokenValue();
-        SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
-        function.setStartAtLine(astNode.getTokenLine());
-        return function;
-      }
-    }, PythonGrammar.FUNCDEF));
+    SourceCodeBuilderCallback sourceCodeBuilderCallback = (SourceCode parentSourceCode, AstNode astNode) -> {
+      String functionName = astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild().getTokenValue();
+      SourceFunction function = new SourceFunction(functionName + ":" + astNode.getToken().getLine());
+      function.setStartAtLine(astNode.getTokenLine());
+      return function;
+    };
+
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<>(sourceCodeBuilderCallback, PythonGrammar.FUNCDEF));
 
     builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.FUNCTIONS)
@@ -150,15 +149,14 @@ public final class PythonAstScanner {
   }
 
   private static void setClassesAnalyser(AstScanner.Builder<Grammar> builder) {
-    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<Grammar>(new SourceCodeBuilderCallback() {
-      @Override
-      public SourceCode createSourceCode(SourceCode parentSourceCode, AstNode astNode) {
-        String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild().getTokenValue();
-        SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
-        function.setStartAtLine(astNode.getTokenLine());
-        return function;
-      }
-    }, PythonGrammar.CLASSDEF));
+    SourceCodeBuilderCallback sourceCodeBuilderCallback = (SourceCode parentSourceCode, AstNode astNode) -> {
+      String functionName = astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild().getTokenValue();
+      SourceClass function = new SourceClass(functionName + ":" + astNode.getToken().getLine());
+      function.setStartAtLine(astNode.getTokenLine());
+      return function;
+    };
+
+    builder.withSquidAstVisitor(new SourceCodeBuilderVisitor<>(sourceCodeBuilderCallback, PythonGrammar.CLASSDEF));
 
     builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.CLASSES)
