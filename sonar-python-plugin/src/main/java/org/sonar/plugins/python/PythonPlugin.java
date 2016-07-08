@@ -91,7 +91,7 @@ public class PythonPlugin extends SonarPlugin {
       // XUNIT
       PropertyDefinition.builder(PythonXUnitSensor.SKIP_DETAILS)
         .name("Skip the details when importing the Xunit reports")
-        .description("If 'true', provides the test execution statistics only on project level, but makes the import procedure more mature")
+        .description("When enabled the test execution statistics is provided only on project level. Use this mode when paths in report are not found. Disabled by default.")
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("false")
