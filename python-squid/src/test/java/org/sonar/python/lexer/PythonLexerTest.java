@@ -20,10 +20,12 @@
 package org.sonar.python.lexer;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import java.util.List;
+import java.util.Set;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
@@ -125,6 +127,30 @@ public class PythonLexerTest {
 
     assertThat(lexer.lex("br'''\n'''"), hasToken("br'''\n'''", PythonTokenType.STRING));
     assertThat(lexer.lex("br\"\"\"\n\"\"\""), hasToken("br\"\"\"\n\"\"\"", PythonTokenType.STRING));
+  }
+
+  /**
+   * https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
+   */
+  @Test
+  public void formatted_string_literal() {
+    Set<String> formattedStringLiterals = ImmutableSet.of(
+      "F'foo'",
+      "f\"foo\"",
+      "f'foo{name}'",
+      "fr'foo'",
+      "Fr'foo'",
+      "fR'foo'",
+      "FR'foo'",
+      "rf'foo'",
+      "rF'foo'",
+      "Rf'foo'",
+      "RF'foo'",
+      "RF'foo\\n'"
+    );
+    for (String formattedStringLiteral : formattedStringLiterals) {
+      assertThat(lexer.lex(formattedStringLiteral), hasToken(formattedStringLiteral, PythonTokenType.STRING));
+    }
   }
 
   /**
