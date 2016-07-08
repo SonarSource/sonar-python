@@ -85,7 +85,7 @@ public enum PythonPunctuator implements TokenType {
 
   private final String value;
 
-  private PythonPunctuator(String word) {
+  PythonPunctuator(String word) {
     this.value = word;
   }
 

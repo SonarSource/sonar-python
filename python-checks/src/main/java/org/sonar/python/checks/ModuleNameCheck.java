@@ -56,7 +56,7 @@ public class ModuleNameCheck extends SquidCheck<Grammar> {
   @Override
   public void visitFile(@Nullable AstNode astNode) {
     String fileName = getContext().getFile().getName();
-    int dotIndex = fileName.lastIndexOf(".");
+    int dotIndex = fileName.lastIndexOf('.');
     if (dotIndex > 0) {
       String moduleName = fileName.substring(0, dotIndex);
       if (!pattern.matcher(moduleName).matches()) {

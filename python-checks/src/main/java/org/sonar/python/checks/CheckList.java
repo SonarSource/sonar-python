@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.google.common.collect.ImmutableList;
-import java.util.List;
 
 public final class CheckList {
 
@@ -31,7 +30,7 @@ public final class CheckList {
   private CheckList() {
   }
 
-  public static List<Class> getChecks() {
+  public static Iterable<Class> getChecks() {
     return ImmutableList.<Class>of(
         ParsingErrorCheck.class,
         CommentRegularExpressionCheck.class,

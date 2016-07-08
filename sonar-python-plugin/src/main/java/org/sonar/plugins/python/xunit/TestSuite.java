@@ -46,7 +46,7 @@ public class TestSuite {
    */
   public TestSuite(String key) {
     this.key = key;
-    this.testCases = new ArrayList<TestCase>();
+    this.testCases = new ArrayList<>();
   }
 
   public String getKey() {

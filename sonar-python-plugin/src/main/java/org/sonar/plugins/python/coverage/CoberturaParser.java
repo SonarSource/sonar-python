@@ -23,7 +23,6 @@ import java.io.File;
 import java.util.Map;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,17 +39,14 @@ public class CoberturaParser {
   public void parseReport(File xmlFile, SensorContext context, final Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
     LOG.info("Parsing report '{}'", xmlFile);
 
-    StaxParser parser = new StaxParser(new StaxParser.XmlStreamHandler() {
-      @Override
-      public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
-        try {
-          rootCursor.advance();
-        } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
-          LOG.debug("Unexpected end of file is encountered", eofExc);
-          throw new EmptyReportException();
-        }
-        collectPackageMeasures(rootCursor.descendantElementCursor("package"), context, coverageData);
+    StaxParser parser = new StaxParser(rootCursor -> {
+      try {
+        rootCursor.advance();
+      } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
+        LOG.debug("Unexpected end of file is encountered", eofExc);
+        throw new EmptyReportException();
       }
+      collectPackageMeasures(rootCursor.descendantElementCursor("package"), context, coverageData);
     });
     parser.parse(xmlFile);
   }
@@ -92,7 +88,7 @@ public class CoberturaParser {
       String text = line.getAttrValue("condition-coverage");
       if (StringUtils.equals(isBranch, "true") && StringUtils.isNotBlank(text)) {
         String[] conditions = StringUtils.split(StringUtils.substringBetween(text, "(", ")"), "/");
-        coverage.conditions(lineId,  Integer.parseInt(conditions[1]), Integer.parseInt(conditions[0]));
+        coverage.conditions(lineId, Integer.parseInt(conditions[1]), Integer.parseInt(conditions[0]));
       }
     }
   }

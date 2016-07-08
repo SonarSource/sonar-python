@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.io.File;
 import java.util.Collection;
@@ -50,7 +51,7 @@ public class CheckListTest {
         count++;
       }
     }
-    assertThat(CheckList.getChecks().size()).isEqualTo(count);
+    assertThat(Iterables.size(CheckList.getChecks())).isEqualTo(count);
   }
 
   /**
@@ -58,7 +59,7 @@ public class CheckListTest {
    */
   @Test
   public void test() {
-    List<Class> checks = CheckList.getChecks();
+    Iterable<Class> checks = CheckList.getChecks();
 
     for (Class cls : checks) {
       String testName = '/' + cls.getName().replace('.', '/') + "Test.class";

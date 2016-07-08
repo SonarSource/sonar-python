@@ -25,7 +25,7 @@ import com.sonar.sslr.impl.Parser;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
-public class RuleTest {
+abstract public class RuleTest {
 
   protected Parser<Grammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
 
