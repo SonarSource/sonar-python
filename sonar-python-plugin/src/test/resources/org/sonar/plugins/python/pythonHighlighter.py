@@ -87,3 +87,7 @@ if (condition):
     """ Not a docstring """
     pass
     
+def foo():
+    foo("Not a docstring")
+
+def foo(): "Not a docstring"

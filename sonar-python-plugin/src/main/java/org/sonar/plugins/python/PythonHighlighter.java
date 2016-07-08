@@ -24,6 +24,9 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -84,6 +87,7 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   private NewHighlighting newHighlighting;
 
   private final SensorContext context;
+  private Set<Token> docStringTokens;
 
   public PythonHighlighter(SensorContext context) {
     this.context = context;
@@ -92,12 +96,15 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   @Override
   public void init() {
     subscribeTo(
-      PythonTokenType.STRING
+      PythonGrammar.FUNCDEF,
+      PythonGrammar.CLASSDEF,
+      PythonGrammar.FILE_INPUT
     );
   }
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
+    docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().getFile().getAbsoluteFile()));
     newHighlighting.onFile(inputFile);
@@ -105,11 +112,22 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
 
   @Override
   public void visitNode(AstNode astNode) {
-    Token token = astNode.getToken();
-    if (isDocString(astNode)) {
-      highlight(token, TypeOfText.STRUCTURED_COMMENT);
+    if (astNode.is(PythonGrammar.FILE_INPUT)) {
+      checkFirstStatement(astNode.getFirstChild(PythonGrammar.STATEMENT));
     } else {
-      highlight(token, TypeOfText.STRING);
+      checkFirstStatement(astNode.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STATEMENT));
+    }
+  }
+
+  private void checkFirstStatement(@Nullable AstNode firstStatement) {
+    if (firstStatement != null) {
+      List<Token> tokens = firstStatement.getTokens();
+
+      if (tokens.size() == 2 && tokens.get(0).getType().equals(PythonTokenType.STRING)) {
+        // second token is NEWLINE
+        highlight(tokens.get(0), TypeOfText.STRUCTURED_COMMENT);
+        docStringTokens.add(tokens.get(0));
+      }
     }
   }
 
@@ -117,8 +135,12 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   public void visitToken(Token token) {
     if (token.getType().equals(PythonTokenType.NUMBER)) {
       highlight(token, TypeOfText.CONSTANT);
+
     } else if (token.getType() instanceof PythonKeyword) {
       highlight(token, TypeOfText.KEYWORD);
+
+    } else if (token.getType().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
+      highlight(token, TypeOfText.STRING);
     }
 
     for (Trivia trivia : token.getTrivia()) {
@@ -134,25 +156,6 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   private void highlight(Token token, TypeOfText typeOfText) {
     TokenLocation tokenLocation = new TokenLocation(token);
     newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
-  }
-
-  private static boolean isDocString(AstNode stringNode) {
-    AstNode statement = stringNode.getFirstAncestor(PythonGrammar.STATEMENT);
-    if (statement != null &&
-      isInModuleOrFunctionOrClassOrMethod(statement) &&
-      statement.equals(statement.getParent().getFirstChild(PythonGrammar.STATEMENT))) {
-      return true;
-    }
-    return false;
-  }
-
-  private static boolean isInModuleOrFunctionOrClassOrMethod(AstNode statement) {
-    AstNode parent = statement.getParent();
-    if (parent.is(PythonGrammar.FILE_INPUT)) {
-      return true;
-    } else {
-      return parent.getParent().is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF);
-    }
   }
 
 }
