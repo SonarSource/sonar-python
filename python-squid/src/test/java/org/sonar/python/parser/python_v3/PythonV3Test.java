@@ -56,6 +56,28 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
+  public void asyncAndAwait() {
+    setRootRule(PythonGrammar.FUNCDEF);
+    assertThat(p).matches("async def fun(): pass");
+    assertThat(p).matches("@someAnnotation\nasync def fun(): pass");
+
+    setRootRule(PythonGrammar.ASYNC_STMT);
+    assertThat(p).matches("async with x.bar() as foo: pass");
+    assertThat(p).matches("async for var in x: pass");
+
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    assertThat(p).matches("await async_func()");
+
+    // before Python 3.5, 'async' and 'await' can be used as variable names or function names
+    setRootRule(PythonGrammar.STATEMENT);
+    assertThat(p).matches("async = 1");
+    assertThat(p).matches("await = 1");
+    setRootRule(PythonGrammar.FUNCDEF);
+    assertThat(p).matches("def async(args): pass");
+    assertThat(p).matches("def await(args): pass");
+  }
+
+  @Test
   public void yield_from(){
     setRootRule(PythonGrammar.YIELD_EXPR);
     assertThat(p).matches("yield");

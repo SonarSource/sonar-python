@@ -148,6 +148,8 @@ public enum PythonGrammar implements GrammarRuleKey {
   CLASSDEF,
   CLASSNAME,
 
+  ASYNC_STMT,
+
   // Top-level components
 
   FILE_INPUT;
@@ -191,7 +193,10 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),
       POWER)).skipIfOneChild();
-    b.rule(POWER).is(ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)).skipIfOneChild();
+    b.rule(POWER).is(b.firstOf(
+      b.sequence(b.optional("await"), ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)),
+      // matches "await" identifier
+      ATOM)).skipIfOneChild();
     b.rule(ATOM).is(b.firstOf(
         b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
         b.sequence("[", b.optional(TESTLIST_COMP), "]"),
@@ -351,7 +356,8 @@ public enum PythonGrammar implements GrammarRuleKey {
       TRY_STMT,
       WITH_STMT,
       FUNCDEF,
-      CLASSDEF));
+      CLASSDEF,
+      ASYNC_STMT));
     b.rule(SUITE).is(b.firstOf(
       b.sequence(STMT_LIST, b.firstOf(NEWLINE, b.next(EOF), /* (Godin): no newline at the end of file */ b.next(DEDENT))),
       b.sequence(NEWLINE, INDENT, b.oneOrMore(STATEMENT), DEDENT)));
@@ -375,7 +381,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(WITH_STMT).is("with", WITH_ITEM, b.zeroOrMore(",", WITH_ITEM), ":", SUITE);
     b.rule(WITH_ITEM).is(TEST, b.optional("as", EXPR));
 
-    b.rule(FUNCDEF).is(b.optional(DECORATORS), "def", FUNCNAME, "(", b.optional(TYPEDARGSLIST), ")", b.optional(FUN_RETURN_ANNOTATION), ":", SUITE);
+    b.rule(FUNCDEF).is(b.optional(DECORATORS), b.optional("async"), "def", FUNCNAME, "(", b.optional(TYPEDARGSLIST), ")", b.optional(FUN_RETURN_ANNOTATION), ":", SUITE);
     b.rule(FUNCNAME).is(NAME);
     b.rule(FUN_RETURN_ANNOTATION).is("-", ">", TEST);
 
@@ -385,6 +391,8 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME, b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
     b.rule(CLASSNAME).is(NAME);
+
+    b.rule(ASYNC_STMT).is("async", b.firstOf(WITH_STMT, FOR_STMT));
   }
 
 }
