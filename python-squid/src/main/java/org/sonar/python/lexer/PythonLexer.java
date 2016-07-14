@@ -36,14 +36,14 @@ import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.regexp;
 
 public final class PythonLexer {
 
-  private PythonLexer() {
-  }
-
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
   private static final String BYTES_PREFIX = "([bB][Rr]?|[rR][bB]?)";
   private static final String IMAGINARY_SUFFIX = "(j|J)";
   private static final String LONG_INTEGER_SUFFIX = "(l|L)";
   private static final String FORMATTED_STRING_PREFIX = "([fF][rR]?|[rR][fF]?)";
+
+  private PythonLexer() {
+  }
 
   public static Lexer create(PythonConfiguration conf) {
     LexerState lexerState = new LexerState();

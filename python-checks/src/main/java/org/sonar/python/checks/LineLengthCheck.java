@@ -32,8 +32,8 @@ import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = LineLengthCheck.CHECK_KEY,
-    priority = Priority.MINOR,
     name = "Lines should not be too long",
+    priority = Priority.MINOR,
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
@@ -41,6 +41,8 @@ public class LineLengthCheck extends SquidCheck<Grammar> implements AstAndTokenV
 
   public static final String CHECK_KEY = "LineLength";
   private static final int DEFAULT_MAXIMUM_LINE_LENGTH = 120;
+
+  private Token previousToken;
 
   @RuleProperty(
     key = "maximumLineLength",
@@ -50,8 +52,6 @@ public class LineLengthCheck extends SquidCheck<Grammar> implements AstAndTokenV
   public int getMaximumLineLength() {
     return maximumLineLength;
   }
-
-  private Token previousToken;
 
   @Override
   public void visitFile(AstNode astNode) {
@@ -65,26 +65,28 @@ public class LineLengthCheck extends SquidCheck<Grammar> implements AstAndTokenV
 
   @Override
   public void visitToken(Token token) {
-    if (!token.isGeneratedCode()) {
-      if (previousToken != null && previousToken.getLine() != token.getLine()) {
-        // Note that AbstractLineLengthCheck doesn't support tokens which span multiple lines - see SONARPLUGINS-2025
-        String[] lines = previousToken.getValue().split("\r?\n|\r", -1);
-        int length = previousToken.getColumn();
-        for (int line = 0; line < lines.length; line++) {
-          length += lines[line].length();
-          if (length > getMaximumLineLength()) {
-            // Note that method from AbstractLineLengthCheck generates other message - see SONARPLUGINS-1809
-            getContext().createLineViolation(this,
-              "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
-              previousToken.getLine(),
-              length,
-              getMaximumLineLength());
-          }
-          length = 0;
-        }
-      }
-      previousToken = token;
+    if (token.isGeneratedCode()) {
+      return;
     }
+
+    if (previousToken != null && previousToken.getLine() != token.getLine()) {
+      // Note that AbstractLineLengthCheck doesn't support tokens which span multiple lines - see SONARPLUGINS-2025
+      String[] lines = previousToken.getValue().split("\r?\n|\r", -1);
+      int length = previousToken.getColumn();
+      for (String line : lines) {
+        length += line.length();
+        if (length > getMaximumLineLength()) {
+          // Note that method from AbstractLineLengthCheck generates other message - see SONARPLUGINS-1809
+          getContext().createLineViolation(this,
+            "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
+            previousToken.getLine(),
+            length,
+            getMaximumLineLength());
+        }
+        length = 0;
+      }
+    }
+    previousToken = token;
   }
 
 }

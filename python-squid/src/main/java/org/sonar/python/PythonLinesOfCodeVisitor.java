@@ -32,7 +32,7 @@ import static com.sonar.sslr.api.GenericTokenType.EOF;
 /**
  * Visitor that computes the number of lines of code of a file.
  */
-public class PythonLinesOfCodeVisitor<GRAMMAR extends Grammar> extends SquidAstVisitor<GRAMMAR> implements AstAndTokenVisitor {
+public class PythonLinesOfCodeVisitor<G extends Grammar> extends SquidAstVisitor<G> implements AstAndTokenVisitor {
 
   private final MetricDef metric;
   private int lastTokenLine;
