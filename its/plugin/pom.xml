@@ -34,6 +34,18 @@
       <groupId>org.easytesting</groupId>
       <artifactId>fest-assert</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarlint.core</groupId>
+      <artifactId>sonarlint-core</artifactId>
+      <version>2.4.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.5.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -44,6 +56,7 @@
           <configuration>
             <includes>
               <include>com/sonar/python/it/plugin/Tests.java</include>
+              <include>com/sonar/python/it/plugin/SonarLintTest.java</include>
             </includes>
           </configuration>
         </plugin>
