@@ -44,9 +44,11 @@ import static org.fest.assertions.Assertions.assertThat;
 })
 public class Tests {
 
+  public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
+
   @ClassRule
   public static Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
+    .addPlugin(PLUGIN_LOCATION)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))
