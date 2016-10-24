@@ -72,6 +72,8 @@
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
     <sonar.pluginName>Python</sonar.pluginName>
     <gitRepositoryName>sonar-python</gitRepositoryName>
+    <!-- Release: enable publication to Bintray -->
+    <artifactsToPublish>${project.groupId}:sonar-python-plugin:jar</artifactsToPublish>
 
     <!-- versions -->
     <commons.io.version>2.5</commons.io.version>
