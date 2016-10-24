@@ -20,6 +20,7 @@
 package com.sonar.python.it.plugin;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMap.Builder;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarRunner;
@@ -58,9 +59,12 @@ public class CoverageTest {
       .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml");
     orchestrator.executeBuild(build);
 
-    Tests.assertProjectMeasures(PROJECT_KEY,
-      new ImmutableMap.Builder<String, Integer>()
-        .put("lines_to_cover", 8)
+    ImmutableMap<String, Integer> values;
+    int linesToCover = 8;
+
+    if (is_before_sonar_6_2()) {
+      values = new Builder<String, Integer>()
+        .put("lines_to_cover", linesToCover)
         .put("coverage", 80)
         .put("line_coverage", 75)
         .put("branch_coverage", 100)
@@ -70,7 +74,18 @@ public class CoverageTest {
         .put("overall_coverage", 40)
         .put("overall_line_coverage", 50)
         .put("overall_branch_coverage", 0)
-        .build());
+        .build();
+
+    } else {
+      values = new Builder<String, Integer>()
+        .put("lines_to_cover", linesToCover)
+        .put("coverage", 90)
+        .put("line_coverage", 87)
+        .put("branch_coverage", 100)
+        .build();
+    }
+
+    Tests.assertProjectMeasures(PROJECT_KEY, values);
   }
 
   @Test
@@ -83,8 +98,10 @@ public class CoverageTest {
       .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
     orchestrator.executeBuild(build);
 
-    Tests.assertProjectMeasures(PROJECT_KEY,
-      new ImmutableMap.Builder<String, Integer>()
+    ImmutableMap<String, Integer> values;
+
+    if (is_before_sonar_6_2()) {
+      values = new ImmutableMap.Builder<String, Integer>()
         .put("coverage", 50)
         .put("line_coverage", 42)
         .put("branch_coverage", 100)
@@ -94,7 +111,17 @@ public class CoverageTest {
         .put("overall_coverage", 25)
         .put("overall_line_coverage", 28)
         .put("overall_branch_coverage", 0)
-        .build());
+        .build();
+
+    } else {
+      values = new ImmutableMap.Builder<String, Integer>()
+        .put("coverage", 56)
+        .put("line_coverage", 50)
+        .put("branch_coverage", 100)
+        .build();
+    }
+
+    Tests.assertProjectMeasures(PROJECT_KEY, values);
   }
 
   @Test
@@ -105,15 +132,27 @@ public class CoverageTest {
     orchestrator.executeBuild(build);
 
     Map<String, Integer> expected = new HashMap<>();
-    expected.put("coverage", 0);
-    expected.put("line_coverage", 0);
-    expected.put("branch_coverage", null);
-    expected.put("it_coverage", 0);
-    expected.put("it_line_coverage", 0);
-    expected.put("it_branch_coverage", null);
-    expected.put("overall_coverage", 0);
-    expected.put("overall_line_coverage", 0);
-    expected.put("overall_branch_coverage", null);
+    if (is_before_sonar_6_2()) {
+      expected.put("coverage", 0);
+      expected.put("line_coverage", 0);
+      expected.put("branch_coverage", null);
+      expected.put("it_coverage", 0);
+      expected.put("it_line_coverage", 0);
+      expected.put("it_branch_coverage", null);
+      expected.put("overall_coverage", 0);
+      expected.put("overall_line_coverage", 0);
+      expected.put("overall_branch_coverage", null);
+    } else {
+      expected.put("coverage", 0);
+      expected.put("line_coverage", 0);
+      expected.put("branch_coverage", null);
+      expected.put("it_coverage", null);
+      expected.put("it_line_coverage", null);
+      expected.put("it_branch_coverage", null);
+      expected.put("overall_coverage", null);
+      expected.put("overall_line_coverage", null);
+      expected.put("overall_branch_coverage", null);
+    }
     Tests.assertProjectMeasures(PROJECT_KEY, expected);
   }
 
@@ -138,4 +177,7 @@ public class CoverageTest {
     assertThat(getProjectMeasure(PROJECT_KEY, "overall_coverage")).isNull();
   }
 
+  private static boolean is_before_sonar_6_2() {
+    return !orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("6.2");
+  }
 }
