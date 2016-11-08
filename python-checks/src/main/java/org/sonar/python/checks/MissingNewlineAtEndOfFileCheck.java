@@ -56,7 +56,7 @@ public class MissingNewlineAtEndOfFileCheck extends SquidCheck<Grammar> implemen
     } catch (IOException e) {
       throw new IllegalStateException("Could not read " + getContext().getFile(), e);
     }
-    if (!fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
+    if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
       getContext().createFileViolation(this, String.format(MESSAGE, getContext().getFile().getName()));
     }
   }
