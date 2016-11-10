@@ -52,4 +52,11 @@ public class MissingNewlineAtEndOfFileCheckTest {
         .noMore();
   }
 
+  @Test
+  public void empty_file() {
+    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/missingNewlineAtEndOfFile4.py"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .noMore();
+  }
+
 }
