@@ -1,17 +1,10 @@
-### Documentation:
-- http://docs.sonarqube.org/display/PLUG/Python+Plugin
+# SonarPython [![Build Status](https://travis-ci.org/SonarSource/sonar-python.svg?branch=master)](https://travis-ci.org/SonarSource/sonar-python) |
 
-### Continuous Integration:
-| Hoster  | Build status |
-| ------------- | ------------- |
-| [Travis CI](https://travis-ci.org/SonarSource/sonar-python)  |  [![Build Status](https://travis-ci.org/SonarSource/sonar-python.svg?branch=master)](https://travis-ci.org/SonarSource/sonar-python) |
+SonarPython is a code analyzer for Python projects. 
 
+# Useful links
 
-### Issue Management:
-- http://jira.sonarsource.com/browse/SONARPY
-
-### Continuous Inspection:
-- http://nemo.sonarqube.org/dashboard/index/org.codehaus.sonar-plugins.python:python
-
-### Sample Project:
-- http://github.com/SonarSource/sonar-examples/tree/master/projects/languages/python
+* [Project homepage](https://www.sonarsource.com/why-us/products/languages/python.html)
+* [Issue tracking](http://jira.sonarsource.com/browse/SONARPY)
+* [Available rules](https://sonarqube.com/coding_rules#languages=py)
+* [Google Group for feedback](https://groups.google.com/forum/#!forum/sonarqube)
