@@ -84,7 +84,7 @@ public class PylintImportSensor extends PythonReportSensor {
         issues.addAll(parse(report));
       } catch (java.io.FileNotFoundException e) {
         LOG.error("Report '{}' cannot be found, details: '{}'", report, e);
-      } catch (java.io.IOException e) {
+      } catch (IOException e) {
         LOG.error("Report '{}' cannot be read, details: '{}'", report, e);
       }
     }
