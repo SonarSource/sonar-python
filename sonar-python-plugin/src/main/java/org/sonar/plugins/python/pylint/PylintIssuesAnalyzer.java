@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.pylint;
 
 import com.google.common.io.Files;
+import javax.annotation.Nullable;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class PylintIssuesAnalyzer {
     this(pylintPath, pylintConfigPath, new PylintArguments(Command.create(pylintPathWithDefault(pylintPath)).addArgument("--version")));
   }
 
-  PylintIssuesAnalyzer(String pylintPath, String pylintConfigPath, PylintArguments arguments) {
+  PylintIssuesAnalyzer(String pylintPath, @Nullable String pylintConfigPath, PylintArguments arguments) {
     pylint = pylintPathWithDefault(pylintPath);
 
     if (pylintConfigPath != null) {
@@ -59,7 +60,7 @@ public class PylintIssuesAnalyzer {
     pylintArguments = arguments;
   }
 
-  private static String pylintPathWithDefault(String pylintPath) {
+  private static String pylintPathWithDefault(@Nullable String pylintPath) {
     if (pylintPath != null) {
       if (!new File(pylintPath).exists()) {
         throw new IllegalStateException("Cannot find the pylint executable: " + pylintPath);

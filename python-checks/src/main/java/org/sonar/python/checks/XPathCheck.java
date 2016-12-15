@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -60,7 +61,7 @@ public class XPathCheck extends AbstractXPathCheck<Grammar> {
   }
 
   @Override
-  public void visitFile(AstNode fileNode) {
+  public void visitFile(@Nullable AstNode fileNode) {
     if (fileNode != null) {
       super.visitFile(fileNode);
     }
