@@ -31,7 +31,7 @@ import org.sonar.wsclient.issue.IssueQuery;
 import java.io.File;
 import java.util.List;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintReportTest {
 

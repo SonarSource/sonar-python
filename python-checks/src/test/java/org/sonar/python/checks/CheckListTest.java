@@ -21,12 +21,6 @@ package org.sonar.python.checks;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.api.batch.rule.ActiveRules;
@@ -35,7 +29,14 @@ import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 
-import static org.fest.assertions.Assertions.assertThat;
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckListTest {
 
@@ -80,7 +81,7 @@ public class CheckListTest {
         .addAnnotatedChecks(CheckList.getChecks())
         .all();
     for (Rule rule : rules) {
-      assertThat(keys).as("Duplicate key " + rule.getKey()).excludes(rule.getKey());
+      assertThat(keys).as("Duplicate key " + rule.getKey()).doesNotContain(rule.getKey());
       keys.add(rule.getKey());
 
       resourceBundle.getString("rule." + CheckList.REPOSITORY_KEY + "." + rule.getKey() + ".name");

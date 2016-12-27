@@ -23,7 +23,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintArgumentsTest {
 

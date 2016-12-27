@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.plugins.python.Python;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class PythonCpdMappingTest {
