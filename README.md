@@ -1,4 +1,4 @@
-# SonarPython [![Build Status](https://travis-ci.org/SonarSource/sonar-python.svg?branch=master)](https://travis-ci.org/SonarSource/sonar-python) |
+# SonarPython [![Build Status](https://travis-ci.org/SonarSource/sonar-python.svg?branch=master)](https://travis-ci.org/SonarSource/sonar-python)
 
 SonarPython is a code analyzer for Python projects. 
 
