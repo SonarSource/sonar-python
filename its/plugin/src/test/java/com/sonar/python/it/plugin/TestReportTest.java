@@ -35,7 +35,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 
 import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestReportTest {
 

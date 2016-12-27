@@ -32,7 +32,7 @@ import java.util.Map.Entry;
 
 import java.io.File;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

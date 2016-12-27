@@ -27,7 +27,7 @@ import org.sonar.python.PythonCheck.IssueLocation;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonCheckTest {
 

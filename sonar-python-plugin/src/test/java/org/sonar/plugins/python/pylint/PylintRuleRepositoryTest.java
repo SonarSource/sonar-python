@@ -25,7 +25,7 @@ import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
 import java.util.List;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintRuleRepositoryTest {
 

@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sonar.python.it.plugin.Tests.getProjectMeasure;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
