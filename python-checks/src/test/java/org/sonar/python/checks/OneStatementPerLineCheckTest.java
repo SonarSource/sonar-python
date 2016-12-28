@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -29,9 +28,7 @@ public class OneStatementPerLineCheckTest {
 
   @Test
   public void test() {
-    OneStatementPerLineCheck check = new OneStatementPerLineCheck();
-
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/oneStatementPerLine.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/oneStatementPerLine.py", new OneStatementPerLineCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(1).withMessage("At most one statement is allowed per line, but 2 statements were found on this line.")
         .next().atLine(2).withMessage("At most one statement is allowed per line, but 3 statements were found on this line.")

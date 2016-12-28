@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -29,6 +28,6 @@ public class TooManyReturnsCheckTest {
   public void test() {
     TooManyReturnsCheck check = new TooManyReturnsCheck();
     check.max = 2;
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/tooManyReturns.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/tooManyReturns.py", check);
   }
 }

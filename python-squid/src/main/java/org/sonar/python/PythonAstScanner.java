@@ -24,8 +24,6 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
-import java.io.File;
-import java.util.Collection;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonMetric;
@@ -47,6 +45,9 @@ import org.sonar.squidbridge.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.metrics.CounterVisitor;
 import org.sonar.squidbridge.metrics.LinesVisitor;
 
+import java.io.File;
+import java.util.Collection;
+
 public final class PythonAstScanner {
 
   private PythonAstScanner() {
@@ -55,7 +56,8 @@ public final class PythonAstScanner {
   /**
    * Helper method for testing checks without having to deploy them on a Sonar instance.
    */
-  public static SourceFile scanSingleFile(File file, SquidAstVisitor<Grammar>... visitors) {
+  public static SourceFile scanSingleFile(String path, SquidAstVisitor<Grammar>... visitors) {
+    File file = new File(path);
     if (!file.isFile()) {
       throw new IllegalArgumentException("File '" + file + "' not found.");
     }

@@ -20,18 +20,19 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import java.io.File;
-import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.IssueLocation;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
 
+import java.io.File;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonCheckTest {
 
-  private static final File FILE = new File("src/test/resources/file.py");
+  private static final String FILE = "src/test/resources/file.py";
 
   @Test
   public void test() throws Exception {
@@ -51,7 +52,7 @@ public class PythonCheckTest {
     PreciseIssue firstIssue = issues.get(0);
 
     assertThat(firstIssue.cost()).isNull();
-    assertThat(firstIssue.file()).isEqualTo(FILE);
+    assertThat(firstIssue.file()).isEqualTo(new File(FILE));
     assertThat(firstIssue.secondaryLocations()).isEmpty();
 
     IssueLocation primaryLocation = firstIssue.primaryLocation();

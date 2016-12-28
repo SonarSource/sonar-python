@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
@@ -34,7 +33,7 @@ public class ModuleNameCheckTest {
 
   @Test
   public void bad_name() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/badModule_name.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/badModule_name.py", check);
     String format = "(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$";
     String message = "Rename this module to match this regular expression: \"%s\".";
     checkMessagesVerifier.verify(file.getCheckMessages())
@@ -43,13 +42,13 @@ public class ModuleNameCheckTest {
 
   @Test
   public void good_name_camel_case() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/ModuleName.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/ModuleName.py", check);
     checkMessagesVerifier.verify(file.getCheckMessages());
   }
 
   @Test
   public void good_name_snake_case() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/module_name.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/module_name.py", check);
     checkMessagesVerifier.verify(file.getCheckMessages());
   }
 

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -27,11 +26,9 @@ import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
 public class MissingNewlineAtEndOfFileCheckTest {
 
-  private MissingNewlineAtEndOfFileCheck check = new MissingNewlineAtEndOfFileCheck();
-
   @Test
   public void missing_new_line() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/missingNewlineAtEndOfFile1.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/missingNewlineAtEndOfFile1.py", new MissingNewlineAtEndOfFileCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().withMessage(String.format(MissingNewlineAtEndOfFileCheck.MESSAGE, "missingNewlineAtEndOfFile1.py"))
         .noMore();
@@ -39,7 +36,7 @@ public class MissingNewlineAtEndOfFileCheckTest {
 
   @Test
   public void missing_new_line_comment() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/missingNewlineAtEndOfFile2.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/missingNewlineAtEndOfFile2.py", new MissingNewlineAtEndOfFileCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().withMessage(String.format(MissingNewlineAtEndOfFileCheck.MESSAGE, "missingNewlineAtEndOfFile2.py"))
         .noMore();
@@ -47,14 +44,14 @@ public class MissingNewlineAtEndOfFileCheckTest {
 
   @Test
   public void file_with_new_line() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/missingNewlineAtEndOfFile3.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/missingNewlineAtEndOfFile3.py", new MissingNewlineAtEndOfFileCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .noMore();
   }
 
   @Test
   public void empty_file() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/missingNewlineAtEndOfFile4.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/missingNewlineAtEndOfFile4.py", new MissingNewlineAtEndOfFileCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .noMore();
   }

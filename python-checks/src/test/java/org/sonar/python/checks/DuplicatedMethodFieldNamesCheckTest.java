@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,8 +26,7 @@ public class DuplicatedMethodFieldNamesCheckTest {
 
   @Test
   public void test() throws Exception {
-    DuplicatedMethodFieldNamesCheck check = new DuplicatedMethodFieldNamesCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/duplicatedMethodFieldNames.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodFieldNames.py", new DuplicatedMethodFieldNamesCheck());
   }
 
 }

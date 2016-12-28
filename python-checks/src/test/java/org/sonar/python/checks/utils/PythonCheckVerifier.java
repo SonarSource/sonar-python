@@ -26,15 +26,15 @@ import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.IssueLocation;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.squidbridge.checks.SquidCheck;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -43,9 +43,9 @@ public class PythonCheckVerifier extends SquidCheck<Grammar> implements AstAndTo
 
   private List<TestIssue> expectedIssues = new ArrayList<>();
 
-  public static void verify(File file, PythonCheck check) {
+  public static void verify(String path, PythonCheck check) {
     PythonCheckVerifier verifier = new PythonCheckVerifier();
-    PythonAstScanner.scanSingleFile(file, check, verifier);
+    PythonAstScanner.scanSingleFile(path, check, verifier);
 
     Iterator<PreciseIssue> actualIssues = getActualIssues(check);
     List<TestIssue> expectedIssues = verifier.expectedIssues;

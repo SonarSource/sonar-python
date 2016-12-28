@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -34,7 +33,7 @@ public class XPathCheckTest {
     check.xpathQuery = "//STATEMENT";
     check.message = "Avoid statements :)";
 
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/xpath.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/xpath.py", check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(1).withMessage("Avoid statements :)")
         .noMore();
@@ -44,7 +43,7 @@ public class XPathCheckTest {
   public void parseError() {
     check.xpathQuery = "//STATEMENT";
 
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/parsingError.py", check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .noMore();
   }

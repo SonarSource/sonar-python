@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -28,16 +27,14 @@ import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
 public class MissingDocstringCheckTest {
 
-  private final MissingDocstringCheck check = new MissingDocstringCheck();
-
   @Test
   public void test() {
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/missingDocstring.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/missingDocstring.py", new MissingDocstringCheck());
   }
 
   @Test
   public void testMissingDocStringAtModuleLevel() {
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/missingDocstringAtModuleLevel.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/missingDocstringAtModuleLevel.py", new MissingDocstringCheck());
   }
 
   @Test
@@ -46,15 +43,10 @@ public class MissingDocstringCheckTest {
   }
 
   private void testMissingDocStringAtModuleLevel(String fileName) {
-    SourceFile file = scanFile(fileName);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/" + fileName, new MissingDocstringCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(null).withMessage("Add a docstring to this module.")
         .noMore();
-  }
-
-  private SourceFile scanFile(String fileName) {
-    MissingDocstringCheck check = new MissingDocstringCheck();
-    return PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/" + fileName), check);
   }
 
 }

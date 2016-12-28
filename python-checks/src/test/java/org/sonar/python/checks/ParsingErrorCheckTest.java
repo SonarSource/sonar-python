@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -29,7 +28,7 @@ public class ParsingErrorCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.py"), new ParsingErrorCheck());
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/parsingError.py", new ParsingErrorCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(1)
         // .withMessageThat(containsString("NEWLINE expected but \"    \" [INDENT] found"))

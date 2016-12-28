@@ -20,8 +20,6 @@
 package org.sonar.plugins.python;
 
 import com.google.common.base.Charsets;
-import java.io.File;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -29,6 +27,9 @@ import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.python.PythonAstScanner;
+
+import java.io.File;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,7 +52,7 @@ public class PythonHighlighterTest {
     context.fileSystem().add(inputFile);
 
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context);
-    PythonAstScanner.scanSingleFile(file, pythonHighlighter);
+    PythonAstScanner.scanSingleFile(file.getPath(), pythonHighlighter);
   }
 
   @Test

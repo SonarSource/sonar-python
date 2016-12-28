@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,7 +26,6 @@ public class AfterJumpStatementCheckTest {
 
   @Test
   public void test() {
-    AfterJumpStatementCheck check = new AfterJumpStatementCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/afterJumpStatement.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/afterJumpStatement.py", new AfterJumpStatementCheck());
   }
 }
