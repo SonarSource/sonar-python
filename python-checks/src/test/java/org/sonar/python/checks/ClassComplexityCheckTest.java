@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -29,7 +28,7 @@ public class ClassComplexityCheckTest {
   public void test() {
     ClassComplexityCheck check = new ClassComplexityCheck();
     check.setMaximumClassComplexityThreshold(2);
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/classComplexity.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/classComplexity.py", check);
   }
 
 }

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,8 +26,7 @@ public class ExitHasBadArgumentsCheckTest {
 
   @Test
   public void test() {
-    ExitHasBadArgumentsCheck check = new ExitHasBadArgumentsCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/exitHasBadArguments.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/exitHasBadArguments.py", new ExitHasBadArgumentsCheck());
   }
 
 }

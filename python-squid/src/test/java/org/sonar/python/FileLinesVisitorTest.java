@@ -20,10 +20,6 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.Grammar;
-import java.io.File;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -33,6 +29,11 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.squidbridge.SquidAstVisitor;
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -60,7 +61,7 @@ public class FileLinesVisitorTest {
     SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode);
 
 
-    PythonAstScanner.scanSingleFile(file, visitor);
+    PythonAstScanner.scanSingleFile(file.getPath(), visitor);
 
     assertThat(linesOfCode).hasSize(1);
     assertThat(linesOfCode.get(inputFile)).containsOnly(2, 4);

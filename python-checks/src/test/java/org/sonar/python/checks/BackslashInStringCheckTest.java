@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,8 +26,7 @@ public class BackslashInStringCheckTest {
 
   @Test
   public void test() {
-    BackslashInStringCheck check = new BackslashInStringCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/backslashInString.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/backslashInString.py", new BackslashInStringCheck());
   }
 
 }

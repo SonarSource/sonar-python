@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -33,7 +32,7 @@ public class FileComplexityCheckTest {
   public void test() {
     check.setMaximumFileComplexityThreshold(2);
 
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/fileComplexity.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/fileComplexity.py", check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().withMessage("File has a complexity of 4 which is greater than 2 authorized.")
         .noMore();
@@ -41,7 +40,7 @@ public class FileComplexityCheckTest {
 
   @Test
   public void defaults() {
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/fileComplexity.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/fileComplexity.py", check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .noMore();
   }
