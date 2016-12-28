@@ -21,8 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
-import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -31,11 +29,14 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 @Rule(
-    key = FieldNameCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Field names should comply with a naming convention",
-    tags = Tags.CONVENTION
+  key = FieldNameCheck.CHECK_KEY,
+  name = "Field names should comply with a naming convention",
+  priority = Priority.MINOR,
+  tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("2min")
 @ActivatedByDefault

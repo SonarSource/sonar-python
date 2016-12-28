@@ -21,10 +21,11 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+
+import java.util.List;
 
 public class CheckUtils {
 
@@ -69,10 +70,10 @@ public class CheckUtils {
     AstNode inheritanceClause = classDef.getFirstChild(PythonGrammar.ARGLIST);
     if (inheritanceClause == null){
       return true;
-    } else {
-      AstNode argument = inheritanceClause.getFirstChild(PythonGrammar.ARGUMENT);
-      return argument != null && ("object".equals(argument.getTokenValue()));
+    } else if (inheritanceClause.getChildren().size() == 1) {
+      return "object".equals(inheritanceClause.getFirstChild().getTokenValue());
     }
+    return false;
   }
 
   public static boolean isAssignmentExpression(AstNode expression) {
