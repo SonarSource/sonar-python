@@ -21,7 +21,7 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.build.SonarScanner;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.sonar.wsclient.SonarClient;
@@ -77,7 +77,7 @@ public class PylintReportTest {
     orchestrator.getServer().provisionProject(PROJECT, PROJECT);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT, "py", "pylint-rules");
     return orchestrator.executeBuild(
-      SonarRunner.create()
+      SonarScanner.create()
         .setDebugLogs(true)
         .setProjectDir(new File("projects/pylint_project"))
         .setProperty("sonar.python.pylint.reportPath", reportPath));

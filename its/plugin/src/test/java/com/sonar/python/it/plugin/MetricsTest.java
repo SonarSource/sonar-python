@@ -20,8 +20,7 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
-import java.io.File;
+import com.sonar.orchestrator.build.SonarScanner;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -29,6 +28,8 @@ import org.sonar.wsclient.Sonar;
 import org.sonar.wsclient.services.Measure;
 import org.sonar.wsclient.services.Resource;
 import org.sonar.wsclient.services.ResourceQuery;
+
+import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,7 +46,7 @@ public class MetricsTest {
   public static void startServer() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
-    SonarRunner build = SonarRunner.create()
+    SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/metrics"))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)

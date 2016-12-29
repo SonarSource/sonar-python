@@ -21,12 +21,13 @@ package org.sonar.python.it;
 
 import com.google.common.io.Files;
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.locator.FileLocation;
-import java.io.File;
-import java.nio.charset.StandardCharsets;
 import org.junit.ClassRule;
 import org.junit.Test;
+
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -36,7 +37,7 @@ public class PythonRulingTest {
   @ClassRule
   public static Orchestrator orchestrator = Orchestrator.builderEnv()
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-    .setOrchestratorProperty("litsVersion", "0.5")
+    .setOrchestratorProperty("litsVersion", "0.6")
     .addPlugin("lits")
     .restoreProfileAtStartup(FileLocation.of("src/test/resources/profile.xml"))
     .build();
@@ -49,7 +50,7 @@ public class PythonRulingTest {
     orchestrator.getServer().provisionProject("project", "project");
     orchestrator.getServer().associateProjectToQualityProfile("project", "py", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
-    SonarRunner build = SonarRunner.create(FileLocation.of("../sources").getFile())
+    SonarScanner build = SonarScanner.create(FileLocation.of("../sources").getFile())
       .setProjectKey("project")
       .setProjectName("project")
       .setProjectVersion("1")
