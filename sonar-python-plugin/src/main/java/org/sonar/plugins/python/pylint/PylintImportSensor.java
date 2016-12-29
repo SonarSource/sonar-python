@@ -76,8 +76,7 @@ public class PylintImportSensor extends PythonReportSensor {
   }
 
   @Override
-  protected void processReports(final SensorContext context, List<File> reports)
-      throws javax.xml.stream.XMLStreamException {
+  protected void processReports(final SensorContext context, List<File> reports) {
     List<Issue> issues = new LinkedList<>();
     for (File report : reports) {
       try {
@@ -140,4 +139,5 @@ public class PylintImportSensor extends PythonReportSensor {
       issuable.addIssue(issue);
     }
   }
+
 }

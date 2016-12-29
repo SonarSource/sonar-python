@@ -24,7 +24,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +32,11 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.StaxParser;
+import org.sonar.plugins.python.PythonReportException;
 import org.sonar.plugins.python.PythonReportSensor;
 
 public class PythonXUnitSensor extends PythonReportSensor {
+
   private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
@@ -57,8 +57,11 @@ public class PythonXUnitSensor extends PythonReportSensor {
     return DEFAULT_REPORT_PATH;
   }
 
+  /**
+   * @throws PythonReportException
+   */
   @Override
-  protected void processReports(final SensorContext context, List<File> reports) throws XMLStreamException {
+  protected void processReports(final SensorContext context, List<File> reports) {
     if (conf.getBoolean(SKIP_DETAILS)) {
       simpleMode(context, reports);
     } else {
@@ -66,9 +69,11 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
   }
 
-  private static void simpleMode(final SensorContext context, List<File> reports) throws XMLStreamException {
-    TestSuiteParser parserHandler = new TestSuiteParser();
-    StaxParser parser = new StaxParser(parserHandler, false);
+  /**
+   * @throws PythonReportException
+   */
+  private static void simpleMode(final SensorContext context, List<File> reports) {
+    TestSuiteParser parser = new TestSuiteParser();
     for (File report : reports) {
       parser.parse(report);
     }
@@ -78,7 +83,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
     double testsErrors = 0.0;
     double testsFailures = 0.0;
     double testsTime = 0.0;
-    for (TestSuite report : parserHandler.getParsedReports()) {
+    for (TestSuite report : parser.getParsedReports()) {
       testsCount += report.getTests() - report.getSkipped();
       testsSkipped += report.getSkipped();
       testsErrors += report.getErrors();
@@ -95,19 +100,17 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
   }
 
-  private void detailedMode(final SensorContext context, List<File> reports) throws XMLStreamException {
+  private void detailedMode(final SensorContext context, List<File> reports) {
     for (File report : reports) {
-      TestSuiteParser parserHandler = new TestSuiteParser();
-      StaxParser parser = new StaxParser(parserHandler, false);
+      TestSuiteParser parser = new TestSuiteParser();
       parser.parse(report);
 
       LOG.info("Processing report '{}'", report);
-
-      processReportDetailed(context, parserHandler.getParsedReports());
+      processReportDetailed(context, parser.getParsedReports());
     }
   }
 
-  private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) throws XMLStreamException {
+  private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) {
     Collection<TestSuite> locatedResources = lookupResources(parsedReports);
     for (TestSuite fileReport : locatedResources) {
       InputFile inputFile = fileReport.getInputFile();
@@ -175,4 +178,5 @@ public class PythonXUnitSensor extends PythonReportSensor {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
     return fileSystem.inputFile(fileSystem.predicates().is(file));
   }
+
 }

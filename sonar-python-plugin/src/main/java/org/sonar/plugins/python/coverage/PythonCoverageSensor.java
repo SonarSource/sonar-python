@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
-import javax.xml.stream.XMLStreamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicates;
@@ -38,6 +37,7 @@ import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.config.Settings;
 import org.sonar.plugins.python.EmptyReportException;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.PythonReportException;
 
 import static org.sonar.plugins.python.PythonReportSensor.getReports;
 
@@ -124,7 +124,6 @@ public class PythonCoverageSensor {
     }
   }
 
-
   private Map<InputFile, NewCoverage> parseReports(List<File> reports, SensorContext context) {
     Map<InputFile, NewCoverage> coverageMeasures = new HashMap<>();
     for (File report : reports) {
@@ -132,7 +131,7 @@ public class PythonCoverageSensor {
         parser.parseReport(report, context, coverageMeasures);
       } catch (EmptyReportException e) {
         LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
-      } catch (XMLStreamException e) {
+      } catch (PythonReportException e) {
         throw new IllegalStateException("Error parsing the report '" + report + "'", e);
       }
     }
@@ -151,7 +150,6 @@ public class PythonCoverageSensor {
       entry.getValue()
         .ofType(coverageType)
         .save();
-
     }
   }
 }

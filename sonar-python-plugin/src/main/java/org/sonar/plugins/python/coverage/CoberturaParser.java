@@ -21,75 +21,95 @@ package org.sonar.plugins.python.coverage;
 
 import java.io.File;
 import java.util.Map;
-import javax.xml.stream.XMLStreamException;
+import java.util.Optional;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.EmptyReportException;
+import org.sonar.plugins.python.PythonReportException;
+import org.sonar.plugins.python.XmlReportParser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXParseException;
 
-public class CoberturaParser {
+public class CoberturaParser extends XmlReportParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoberturaParser.class);
 
-  public void parseReport(File xmlFile, SensorContext context, final Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
+  /**
+   * @throws PythonReportException
+   */
+  public void parseReport(File xmlFile, SensorContext context, final Map<InputFile, NewCoverage> coverageData) {
     LOG.info("Parsing report '{}'", xmlFile);
 
-    StaxParser parser = new StaxParser(rootCursor -> {
-      try {
-        rootCursor.advance();
-      } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
-        LOG.debug("Unexpected end of file is encountered", eofExc);
-        throw new EmptyReportException();
-      }
-      collectPackageMeasures(rootCursor.descendantElementCursor("package"), context, coverageData);
-    });
-    parser.parse(xmlFile);
-  }
+    try {
+      Document xmlDocument = getDocumentBuilder().parse(xmlFile);
 
-  private static void collectPackageMeasures(SMInputCursor pack, SensorContext context, Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
-    while (pack.getNext() != null) {
-      collectFileMeasures(pack.descendantElementCursor("class"), context, coverageData);
+      collectPackageMeasures(xmlDocument, context, coverageData);
+
+    } catch (SAXParseException e) {
+      if (e.getLineNumber() == 1 && "Premature end of file.".equals(e.getMessage())) {
+        LOG.debug("Unexpected end of file is encountered");
+        throw new EmptyReportException();
+      } else {
+        throw new PythonReportException(e);
+      }
+    } catch (Exception e) {
+      throw new PythonReportException(e);
     }
   }
 
-  private static void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
-    while (classCursor.getNext() != null) {
-      String fileName = classCursor.getAttrValue("filename");
-      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasPath(fileName));
+  private void collectPackageMeasures(Document xmlDocument, SensorContext context, Map<InputFile, NewCoverage> coverageData) throws XPathExpressionException {
+    NodeList classNodes = (NodeList) getXpath().compile("//package/classes/class").evaluate(xmlDocument, XPathConstants.NODESET);
+    for (int i = 0; i < classNodes.getLength(); i++) {
+      Element classNode = (Element) classNodes.item(i);
+      collectFileMeasures(classNode, context, coverageData);
+    }
+  }
 
+  private void collectFileMeasures(Element classNode, SensorContext context, Map<InputFile, NewCoverage> coverageData) throws XPathExpressionException {
+    Optional<String> fileName = getStringAttribute(classNode, "filename");
+    if (fileName.isPresent()) {
+      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasPath(fileName.get()));
       if (inputFile != null) {
         NewCoverage coverage = coverageData.get(inputFile);
         if (coverage == null) {
           coverage = context.newCoverage().onFile(inputFile);
           coverageData.put(inputFile, coverage);
         }
-        collectFileData(classCursor, coverage);
-
+        collectFileData(classNode, coverage);
       } else {
-        LOG.debug("Cannot find the file '{}', ignoring coverage measures", fileName);
-        classCursor.getNext();
+        LOG.debug("Cannot find file '{}', ignoring coverage measure", fileName);
       }
-
+    } else {
+      LOG.debug("No value for 'filename' in the measure, ignoring coverage measure");
     }
   }
 
-  private static void collectFileData(SMInputCursor classCursor, NewCoverage coverage) throws XMLStreamException {
-    SMInputCursor line = classCursor.childElementCursor("lines").advance().childElementCursor("line");
-    while (line.getNext() != null) {
-      int lineId = Integer.parseInt(line.getAttrValue("number"));
-      coverage.lineHits(lineId, Integer.parseInt(line.getAttrValue("hits")));
-
-      String isBranch = line.getAttrValue("branch");
-      String text = line.getAttrValue("condition-coverage");
-      if (StringUtils.equals(isBranch, "true") && StringUtils.isNotBlank(text)) {
-        String[] conditions = StringUtils.split(StringUtils.substringBetween(text, "(", ")"), "/");
-        coverage.conditions(lineId, Integer.parseInt(conditions[1]), Integer.parseInt(conditions[0]));
+  private void collectFileData(Element classNode, NewCoverage coverage) throws XPathExpressionException {
+    NodeList lineNodes = classNode.getElementsByTagName("line");
+    for (int i = 0; i < lineNodes.getLength(); i++) {
+      Element lineNode = (Element) lineNodes.item(i);
+      Optional<Integer> lineNumber = getIntegerAttribute(lineNode, "number");
+      Optional<Integer> lineHits = getIntegerAttribute(lineNode, "hits");
+      if (lineNumber.isPresent() && lineHits.isPresent()) {
+        coverage.lineHits(lineNumber.get(), lineHits.get());
+        boolean isBranch = getBooleanAttribute(lineNode, "branch");
+        Optional<String> conditionCoverage = getStringAttribute(lineNode, "condition-coverage");
+        if (isBranch && conditionCoverage.isPresent() && StringUtils.isNotBlank(conditionCoverage.get())) {
+          String[] conditions = StringUtils.split(StringUtils.substringBetween(conditionCoverage.get(), "(", ")"), "/");
+          coverage.conditions(lineNumber.get(), Integer.parseInt(conditions[1]), Integer.parseInt(conditions[0]));
+        }
+      } else {
+        LOG.debug("lineId (={}) and/or lineHits (={}) not provided, ignoring line mesaure", lineNumber, lineHits);
       }
     }
   }
+
 }

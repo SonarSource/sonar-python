@@ -15,6 +15,16 @@
             <line branch="false" hits="1" number="1"/>
             <line branch="false" hits="0" number="4"/>
             <line branch="false" hits="0" number="6"/>
+            <!-- the following line will be ignored by the Cobertura parser -->
+            <line branch="false" hits="0" numberWronglySpelled="1000"/>
+            <!-- the following line will be ignored by the Cobertura parser -->
+            <line branch="false" hitsWronglySpelled="1000" number="1000"/>
+          </lines>
+        </class>
+        <!-- the following class will be ignored by the Cobertura parser -->
+        <class branch-rate="0.0" complexity="0.0" filenameWronglySpelled="non-existing.py">
+          <lines>
+            <line branch="false" hits="1" number="1"/>
           </lines>
         </class>
       </classes>
@@ -37,6 +47,12 @@
               </conditions>
             </line>
             <line branch="true" condition-coverage="50% (1/2)" hits="1" number="6">
+              <conditions>
+                <condition coverage="50%" number="0" type="jump"/>
+              </conditions>
+            </line>
+            <!-- the following line will be ignored by the Cobertura parser -->
+            <line branch="false" condition-coverage-WronglySpelled="25% (1/2)" hits="1" number="7">
               <conditions>
                 <condition coverage="50%" number="0" type="jump"/>
               </conditions>
