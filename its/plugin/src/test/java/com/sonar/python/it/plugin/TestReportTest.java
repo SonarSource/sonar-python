@@ -25,14 +25,15 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.build.SonarScanner;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
 
 import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,8 +50,8 @@ public class TestReportTest {
     orchestrator.resetData();
   }
 
-  private SonarRunner createBuild(String testReportPath) {
-    return SonarRunner.create()
+  private SonarScanner createBuild(String testReportPath) {
+    return SonarScanner.create()
       .setProjectDir(new File("projects/nosetests_project"))
       .setProperty("sonar.python.xunit.reportPath", testReportPath);
   }

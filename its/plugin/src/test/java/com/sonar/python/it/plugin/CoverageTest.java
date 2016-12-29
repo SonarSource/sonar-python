@@ -23,7 +23,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.build.SonarScanner;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -52,7 +52,7 @@ public class CoverageTest {
   }
 
   private void basic_coverage_reports(String utReportPath) {
-    SonarRunner build = SonarRunner.create()
+    SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/coverage_project"))
       .setProperty("sonar.python.coverage.reportPath", utReportPath)
       .setProperty("sonar.python.coverage.itReportPath", "it-coverage.xml")
@@ -90,7 +90,7 @@ public class CoverageTest {
 
   @Test
   public void force_zero_coverage_for_untouched_files() throws Exception {
-    SonarRunner build = SonarRunner.create()
+    SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/coverage_project"))
       .setProperty("sonar.python.coverage.reportPath", "ut-coverage.xml")
       .setProperty("sonar.python.coverage.itReportPath", "it-coverage.xml")
@@ -126,7 +126,7 @@ public class CoverageTest {
 
   @Test
   public void force_zero_coverage_with_no_report() throws Exception {
-    SonarRunner build = SonarRunner.create()
+    SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/coverage_project"))
       .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
     orchestrator.executeBuild(build);
@@ -158,7 +158,7 @@ public class CoverageTest {
 
   @Test
   public void empty_coverage_report() throws Exception {
-    SonarRunner build = SonarRunner.create()
+    SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/coverage_project"))
       .setProperty("sonar.python.coverage.reportPath", "empty.xml")
       .setProperty("sonar.python.coverage.itReportPath", "empty.xml")
