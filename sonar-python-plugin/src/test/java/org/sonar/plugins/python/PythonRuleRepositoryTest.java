@@ -17,32 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.pylint;
+package org.sonar.plugins.python;
 
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonar.python.checks.CheckList;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PylintRuleRepositoryTest {
+public class PythonRuleRepositoryTest {
 
   @Test
   public void createRulesTest() {
-    PylintRuleRepository ruleRepository = new PylintRuleRepository(new RulesDefinitionXmlLoader());
+    PythonRuleRepository ruleRepository = new PythonRuleRepository();
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
 
-    RulesDefinition.Repository repository = context.repository(PylintRuleRepository.REPOSITORY_KEY);
+    RulesDefinition.Repository repository = context.repository(CheckList.REPOSITORY_KEY);
 
     assertThat(repository.language()).isEqualTo("py");
-    assertThat(repository.name()).isEqualTo("Pylint");
+    assertThat(repository.name()).isEqualTo("SonarAnalyzer");
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(180);
+    assertThat(rules).hasSize(50);
   }
 
 }
