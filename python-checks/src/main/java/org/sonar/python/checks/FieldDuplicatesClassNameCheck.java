@@ -21,13 +21,14 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+
+import java.util.List;
 
 @Rule(
     key = FieldDuplicatesClassNameCheck.CHECK_KEY,
@@ -50,7 +51,7 @@ public class FieldDuplicatesClassNameCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (CheckUtils.classHasNoInheritance(astNode)) {
+    if (!CheckUtils.classHasInheritance(astNode)) {
       List<Token> allFields = new NewSymbolsAnalyzer().getClassFields(astNode);
       String className = astNode.getFirstChild(PythonGrammar.CLASSNAME).getTokenValue();
 

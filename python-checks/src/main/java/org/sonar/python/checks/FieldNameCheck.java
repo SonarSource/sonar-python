@@ -64,7 +64,7 @@ public class FieldNameCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (CheckUtils.classHasNoInheritance(astNode)) {
+    if (!CheckUtils.classHasInheritance(astNode)) {
       List<Token> allFields = new NewSymbolsAnalyzer().getClassFields(astNode);
       checkNames(allFields);
     }
