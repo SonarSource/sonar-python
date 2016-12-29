@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,8 +26,7 @@ public class TrailingCommentCheckTest {
 
   @Test
   public void test() {
-    TrailingCommentCheck check = new TrailingCommentCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/trailingComment.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/trailingComment.py", new TrailingCommentCheck());
   }
 
 }

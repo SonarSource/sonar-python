@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -29,8 +28,7 @@ public class UselessParenthesisAfterKeywordCheckTest {
 
   @Test
   public void test() throws Exception {
-    UselessParenthesisAfterKeywordCheck check = new UselessParenthesisAfterKeywordCheck();
-    SourceFile file = PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/uselessParenthesisAfterKeyword.py"), check);
+    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/uselessParenthesisAfterKeyword.py", new UselessParenthesisAfterKeywordCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
       .next().atLine(2).withMessage("Remove the parentheses after this \"assert\" keyword")
       .next().atLine(5).withMessage("Remove the parentheses after this \"del\" keyword")

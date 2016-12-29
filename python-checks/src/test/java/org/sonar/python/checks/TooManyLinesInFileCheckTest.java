@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.squidbridge.api.SourceFile;
@@ -46,7 +45,7 @@ public class TooManyLinesInFileCheckTest {
   private SourceFile scanFile(int maximum) {
     TooManyLinesInFileCheck check = new TooManyLinesInFileCheck();
     check.maximum = maximum;
-    return PythonAstScanner.scanSingleFile(new File("src/test/resources/checks/tooManyLinesInFile.py"), check);
+    return PythonAstScanner.scanSingleFile("src/test/resources/checks/tooManyLinesInFile.py", check);
   }
 
 }

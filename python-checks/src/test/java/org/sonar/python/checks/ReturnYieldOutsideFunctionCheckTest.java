@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,8 +26,7 @@ public class ReturnYieldOutsideFunctionCheckTest {
 
   @Test
   public void test() {
-    ReturnYieldOutsideFunctionCheck check = new ReturnYieldOutsideFunctionCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/returnYieldOutsideFunction.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/returnYieldOutsideFunction.py", new ReturnYieldOutsideFunctionCheck());
   }
 
 }

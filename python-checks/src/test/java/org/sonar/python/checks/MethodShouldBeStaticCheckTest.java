@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,7 +26,6 @@ public class MethodShouldBeStaticCheckTest {
 
   @Test
   public void test() {
-    MethodShouldBeStaticCheck check = new MethodShouldBeStaticCheck();
-    PythonCheckVerifier.verify(new File("src/test/resources/checks/methodShouldBeStatic.py"), check);
+    PythonCheckVerifier.verify("src/test/resources/checks/methodShouldBeStatic.py", new MethodShouldBeStaticCheck());
   }
 }
