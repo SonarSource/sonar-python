@@ -81,6 +81,7 @@ public final class CheckList {
         TooManyReturnsCheck.class,
         NeedlessPassCheck.class,
         AfterJumpStatementCheck.class,
+        IdenticalExpressionOnBinaryOperatorCheck.class,
         MethodShouldBeStaticCheck.class
     );
   }
