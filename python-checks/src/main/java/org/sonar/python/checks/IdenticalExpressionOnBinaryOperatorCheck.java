@@ -66,8 +66,8 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
     String operator = children.get(1).getTokenValue();
     AstNode rightOperand = children.get(2);
     if (!EXCLUDED_OPERATOR_TYPES.contains(operator) && CheckUtils.equalNodes(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator)) {
-      addIssue(rightOperand, "Identical sub-expressions on both sides of operator \"" + operator + "\".")
-        .secondary(leftOperand, "Identical left operand.");
+      addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator + "\".")
+        .secondary(leftOperand, "");
     }
   }
 
