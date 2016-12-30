@@ -21,10 +21,11 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+
+import java.util.List;
 
 public class CheckUtils {
 
@@ -33,6 +34,9 @@ public class CheckUtils {
   }
 
   public static boolean isMethodDefinition(AstNode node) {
+    if (!node.is(PythonGrammar.FUNCDEF)) {
+      return false;
+    }
     AstNode parent = node.getParent();
     for (int i = 0; i < 3; i++) {
       if (parent != null) {
@@ -42,8 +46,8 @@ public class CheckUtils {
     return parent != null && parent.is(PythonGrammar.CLASSDEF);
   }
 
-  public static boolean equalNodes(AstNode node1, AstNode node2){
-    if (!node1.getType().equals(node2.getType()) || node1.getNumberOfChildren() != node2.getNumberOfChildren()){
+  public static boolean equalNodes(AstNode node1, AstNode node2) {
+    if (!node1.getType().equals(node2.getType()) || node1.getNumberOfChildren() != node2.getNumberOfChildren()) {
       return false;
     }
 
@@ -53,8 +57,8 @@ public class CheckUtils {
 
     List<AstNode> children1 = node1.getChildren();
     List<AstNode> children2 = node2.getChildren();
-    for (int i = 0; i < children1.size(); i++){
-      if (!equalNodes(children1.get(i), children2.get(i))){
+    for (int i = 0; i < children1.size(); i++) {
+      if (!equalNodes(children1.get(i), children2.get(i))) {
         return false;
       }
     }
@@ -65,20 +69,22 @@ public class CheckUtils {
     return astNode.getFirstAncestor(PythonGrammar.FUNCDEF).equals(funcDef);
   }
 
-  public static boolean classHasNoInheritance(AstNode classDef) {
+  public static boolean classHasInheritance(AstNode classDef) {
     AstNode inheritanceClause = classDef.getFirstChild(PythonGrammar.ARGLIST);
-    if (inheritanceClause == null){
-      return true;
-    } else {
-      AstNode argument = inheritanceClause.getFirstChild(PythonGrammar.ARGUMENT);
-      return argument != null && ("object".equals(argument.getTokenValue()));
+    if (inheritanceClause == null) {
+      return false;
     }
+    List<AstNode> children = inheritanceClause.getChildren();
+    if (children.isEmpty()) {
+      return false;
+    }
+    return children.size() != 1 || !"object".equals(inheritanceClause.getFirstChild().getTokenValue());
   }
 
   public static boolean isAssignmentExpression(AstNode expression) {
     int numberOfChildren = expression.getNumberOfChildren();
     int numberOfAssign = expression.getChildren(PythonPunctuator.ASSIGN).size();
-    if (numberOfChildren == 3 && numberOfAssign == 1){
+    if (numberOfChildren == 3 && numberOfAssign == 1) {
       return true;
     }
     // a = b = c = 1

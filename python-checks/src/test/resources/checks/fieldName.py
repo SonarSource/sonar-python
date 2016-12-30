@@ -50,3 +50,6 @@ class MyClass7:
     class MyClass8:
         def foo(self):
             self.myField2 = 2   # Noncompliant
+
+class MyClass7(object, MyClass3):
+    myField = 5
