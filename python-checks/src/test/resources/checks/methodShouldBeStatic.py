@@ -156,11 +156,21 @@ class A:
 
 
 class B(A):
+    def foo_bar(self):
+        print(1)
 
-    # raises an issue. This is questionable, see SONARPY-166
+
+class IssueExpected1(object):
     def foo_bar(self): # Noncompliant
         print(1)
 
+class IssueExpected2(object, IssueExpected1):
+    def foo_bar(self):
+        print(1)
+
+class IssueExpected3(IssueExpected1, A):
+    def foo_bar(self):
+        print(1)
 
 def fun():
     print(1)

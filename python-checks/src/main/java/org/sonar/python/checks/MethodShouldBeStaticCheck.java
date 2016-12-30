@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -29,11 +28,13 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
+import java.util.List;
+
 @Rule(
-    key = MethodShouldBeStaticCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Methods that don't access instance data should be \"static\"",
-    tags = {Tags.PERFORMANCE}
+  key = MethodShouldBeStaticCheck.CHECK_KEY,
+  name = "Methods that don't access instance data should be \"static\"",
+  priority = Priority.MAJOR,
+  tags = {Tags.PERFORMANCE}
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
@@ -50,12 +51,16 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode node) {
-    if (CheckUtils.isMethodDefinition(node) && !alreadyStaticMethod(node) && !isBuiltInMethod(node) && hasValuableCode(node)) {
+    if (isMethodOfNonDerivedClass(node) && !alreadyStaticMethod(node) && !isBuiltInMethod(node) && hasValuableCode(node)) {
       String self = getFirstArgument(node);
-      if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)){
+      if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)) {
         addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
       }
     }
+  }
+
+  private static boolean isMethodOfNonDerivedClass(AstNode node) {
+    return CheckUtils.isMethodDefinition(node) && !CheckUtils.classHasInheritance(node.getFirstAncestor(PythonGrammar.CLASSDEF));
   }
 
   private static boolean onlyRaisesNotImplementedError(AstNode funcDef) {
@@ -128,8 +133,8 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   private static boolean isUsed(AstNode funcDef, String self) {
     List<AstNode> names = funcDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.NAME);
-    for (AstNode name : names){
-      if (name.getTokenValue().equals(self)){
+    for (AstNode name : names) {
+      if (name.getTokenValue().equals(self)) {
         return true;
       }
     }
@@ -138,7 +143,7 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   private static String getFirstArgument(AstNode funcDef) {
     AstNode argList = funcDef.getFirstChild(PythonGrammar.TYPEDARGSLIST);
-    if (argList != null){
+    if (argList != null) {
       return argList.getFirstDescendant(PythonGrammar.NAME).getTokenValue();
     } else {
       return null;
@@ -147,11 +152,11 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   private static boolean alreadyStaticMethod(AstNode funcDef) {
     AstNode decorators = funcDef.getFirstChild(PythonGrammar.DECORATORS);
-    if (decorators != null){
+    if (decorators != null) {
       List<AstNode> decoratorList = decorators.getChildren(PythonGrammar.DECORATOR);
-      for (AstNode decorator : decoratorList){
+      for (AstNode decorator : decoratorList) {
         AstNode name = decorator.getFirstDescendant(PythonGrammar.NAME);
-        if (name != null && ("staticmethod".equals(name.getTokenValue()) || "classmethod".equals(name.getTokenValue()))){
+        if (name != null && ("staticmethod".equals(name.getTokenValue()) || "classmethod".equals(name.getTokenValue()))) {
           return true;
         }
       }
