@@ -23,11 +23,12 @@ import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
+import org.sonar.squidbridge.checks.SquidCheck;
+
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 public abstract class PythonCheck extends SquidCheck<Grammar> {
 
@@ -49,16 +50,22 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     return newIssue;
   }
 
+  protected final PreciseIssue addFileIssue(String message) {
+    PreciseIssue newIssue = new PreciseIssue(new IssueLocation(message), getContext().getFile());
+    issues.add(newIssue);
+    return newIssue;
+  }
+
   protected final PreciseIssue addIssue(Token token, String message) {
     return addIssue(new AstNode(token), message);
   }
 
   public static class PreciseIssue {
 
-    private File file;
-    private IssueLocation primaryLocation;
-    private Double cost;
-    private List<IssueLocation> secondaryLocations;
+    private final File file;
+    private final IssueLocation primaryLocation;
+    private Integer cost;
+    private final List<IssueLocation> secondaryLocations;
 
     private PreciseIssue(IssueLocation primaryLocation, File file) {
       this.primaryLocation = primaryLocation;
@@ -67,11 +74,11 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     }
 
     @Nullable
-    public Double cost() {
+    public Integer cost() {
       return cost;
     }
 
-    public PreciseIssue cost(double cost) {
+    public PreciseIssue withCost(int cost) {
       this.cost = cost;
       return this;
     }
@@ -104,6 +111,12 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     private TokenLocation lastTokenLocation;
     private String message;
 
+    public IssueLocation(String message) {
+      this.message = message;
+      this.firstToken = null;
+      this.lastTokenLocation = null;
+    }
+
     public IssueLocation(AstNode node, String message) {
       this.message = message;
       this.firstToken = node.getToken();
@@ -121,19 +134,19 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     }
 
     public int startLine() {
-      return firstToken.getLine();
+      return firstToken != null ? firstToken.getLine() : 0;
     }
 
     public int startLineOffset() {
-      return firstToken.getColumn();
+      return firstToken != null ? firstToken.getColumn() : -1;
     }
 
     public int endLine() {
-      return lastTokenLocation.endLine();
+      return lastTokenLocation != null ? lastTokenLocation.endLine() : 0;
     }
 
     public int endLineOffset() {
-      return lastTokenLocation.endLineOffset();
+      return lastTokenLocation != null ? lastTokenLocation.endLineOffset() : -1;
     }
   }
 }

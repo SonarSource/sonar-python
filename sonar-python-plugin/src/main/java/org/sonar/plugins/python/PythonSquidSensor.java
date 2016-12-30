@@ -21,14 +21,6 @@ package org.sonar.plugins.python;
 
 import com.google.common.collect.Lists;
 import com.sonar.sslr.api.Grammar;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -63,6 +55,15 @@ import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceFunction;
 import org.sonar.squidbridge.indexer.QueryByParent;
 import org.sonar.squidbridge.indexer.QueryByType;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class PythonSquidSensor implements Sensor {
 
@@ -127,6 +128,11 @@ public final class PythonSquidSensor implements Sensor {
           .newIssue()
           .forRule(ruleKey);
 
+        Integer cost = preciseIssue.cost();
+        if (cost != null) {
+          newIssue.gap(cost.doubleValue());
+        }
+
         newIssue.at(newLocation(inputFile, newIssue, preciseIssue.primaryLocation()));
 
         for (IssueLocation secondaryLocation : preciseIssue.secondaryLocations()) {
@@ -139,12 +145,13 @@ public final class PythonSquidSensor implements Sensor {
   }
 
   private static NewIssueLocation newLocation(InputFile inputFile, NewIssue issue, IssueLocation location) {
-    TextRange range = inputFile.newRange(
-      location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
-
     NewIssueLocation newLocation = issue.newLocation()
-      .on(inputFile)
-      .at(range);
+      .on(inputFile);
+    if (location.startLine() != 0) {
+      TextRange range = inputFile.newRange(
+        location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+      newLocation.at(range);
+    }
 
     if (location.message() != null) {
       newLocation.message(location.message());

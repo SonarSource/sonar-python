@@ -27,7 +27,7 @@ public class FunctionComplexityCheckTest {
   @Test
   public void test() {
     FunctionComplexityCheck check = new FunctionComplexityCheck();
-    check.setMaximumFunctionComplexityThreshold(2);
+    check.maximumFunctionComplexityThreshold = 2;
     PythonCheckVerifier.verify("src/test/resources/checks/functionComplexity.py", check);
   }
 

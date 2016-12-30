@@ -69,7 +69,7 @@ public class PythonCheckTest {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitNode(AstNode astNode) {
-        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message").cost(42);
+        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message").withCost(42);
       }
     };
 
