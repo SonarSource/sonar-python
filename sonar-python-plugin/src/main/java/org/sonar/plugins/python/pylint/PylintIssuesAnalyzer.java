@@ -77,7 +77,7 @@ public class PylintIssuesAnalyzer {
       command.addArgument(pylintConfigParam);
     }
 
-    LOG.debug("Calling command: '{}'", command.toString());
+    LOG.debug("Calling command: '{}'", command);
 
     long timeoutMS = 300_000; // =5min
     CommandStreamConsumer stdOut = new CommandStreamConsumer();
@@ -88,7 +88,8 @@ public class PylintIssuesAnalyzer {
     // any bigger output on the error stream is likely a pylint malfunction
     if (stdErr.getData().size() > 1) {
       LOG.warn("Output on the error channel detected: this is probably due to a problem on pylint's side.");
-      LOG.warn("Content of the error stream: \n\"{}\"", StringUtils.join(stdErr.getData(), "\n"));
+      String data = StringUtils.join(stdErr.getData(), "\n");
+      LOG.warn("Content of the error stream: \n\"{}\"", data);
     }
 
     Files.write(StringUtils.join(stdOut.getData(), "\n"), out, charset);

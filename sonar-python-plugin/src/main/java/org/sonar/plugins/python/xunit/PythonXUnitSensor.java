@@ -112,7 +112,9 @@ public class PythonXUnitSensor extends PythonReportSensor {
     for (TestSuite fileReport : locatedResources) {
       InputFile inputFile = fileReport.getInputFile();
 
-      LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), inputFile.relativePath());
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), inputFile.relativePath());
+      }
 
       context.saveMeasure(inputFile, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
       context.saveMeasure(inputFile, CoreMetrics.TESTS, (double) fileReport.getTests() - fileReport.getSkipped());
