@@ -112,7 +112,9 @@ public class PythonCoverageSensor {
 
   private static void saveZeroValueForResource(InputFile inputFile, SensorContext context, CoverageType ctype, @Nullable Set<Integer> linesOfCode) {
     if (linesOfCode != null) {
-      LOG.debug("Zeroing {} coverage measures for file '{}'", ctype, inputFile.relativePath());
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Zeroing {} coverage measures for file '{}'", ctype, inputFile.relativePath());
+      }
 
       NewCoverage newCoverage = context.newCoverage()
         .onFile(inputFile)
@@ -142,7 +144,9 @@ public class PythonCoverageSensor {
       InputFile inputFile = entry.getKey();
       coveredFiles.add(inputFile);
 
-      LOG.debug("Saving coverage measures for file '{}'", inputFile.relativePath());
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Saving coverage measures for file '{}'", inputFile.relativePath());
+      }
 
       entry.getValue()
         .ofType(coverageType)
