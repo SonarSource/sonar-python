@@ -40,7 +40,8 @@ import static org.assertj.core.api.Assertions.assertThat;
   CoverageTest.class,
   PylintReportTest.class,
   TestReportTest.class,
-  NoSonarTest.class
+  NoSonarTest.class,
+  XPathRuleTest.class
 })
 public class Tests {
 
@@ -52,6 +53,7 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/xpath_rule.xml"))
     .build();
 
   public static Integer getProjectMeasure(String projectKey, String metricKey) {
