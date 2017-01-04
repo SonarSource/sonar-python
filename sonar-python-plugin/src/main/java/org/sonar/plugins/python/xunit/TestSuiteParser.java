@@ -19,39 +19,53 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import org.codehaus.staxmate.in.ElementFilter;
-import org.codehaus.staxmate.in.SMHierarchicCursor;
-import org.codehaus.staxmate.in.SMInputCursor;
-import org.sonar.api.utils.ParsingUtils;
-import org.sonar.api.utils.StaxParser.XmlStreamHandler;
-
-import javax.xml.stream.XMLStreamException;
+import java.io.File;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathConstants;
+import org.sonar.api.utils.ParsingUtils;
+import org.sonar.plugins.python.PythonReportException;
+import org.sonar.plugins.python.XmlReportParser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-public class TestSuiteParser implements XmlStreamHandler {
+public class TestSuiteParser extends XmlReportParser {
 
   private Map<String, TestSuite> testSuites = new HashMap<>();
 
-  @Override
-  public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
-    SMInputCursor testSuiteCursor = rootCursor.constructDescendantCursor(new ElementFilter("testsuite"));
-    while (testSuiteCursor.getNext() != null) {
-      String testSuiteClassName = testSuiteCursor.getAttrValue("name");
+  public void parse(File xmlFile) {
+    try {
+      Document xmlDocument = getDocumentBuilder().parse(xmlFile);
 
-      SMInputCursor testCaseCursor = testSuiteCursor.childElementCursor("testcase");
-      while (testCaseCursor.getNext() != null) {
-        String testClassName = getClassname(testCaseCursor, testSuiteClassName);
-        TestSuite report = testSuites.get(testClassName);
-        if (report == null) {
-          report = new TestSuite(testClassName);
-          testSuites.put(testClassName, report);
+      NodeList testsuiteNodes = (NodeList) getXpath().compile("testsuite").evaluate(xmlDocument, XPathConstants.NODESET);
+
+      for (int i = 0; i < testsuiteNodes.getLength(); i++) {
+        Element testsuiteNode = (Element) testsuiteNodes.item(i);
+
+        Optional<String> testSuiteClassName = getStringAttribute(testsuiteNode, "name");
+
+        NodeList testcaseNodes = testsuiteNode.getElementsByTagName("testcase");
+        for (int j = 0; j < testcaseNodes.getLength(); j++) {
+          Element testcaseNode = (Element) testcaseNodes.item(j);
+          String testClassName = getClassname(testcaseNode, testSuiteClassName.orElse(null));
+
+          TestSuite report = testSuites.get(testClassName);
+          if (report == null) {
+            report = new TestSuite(testClassName);
+            testSuites.put(testClassName, report);
+          }
+          report.addTestCase(parseTestCaseElement(testcaseNode));
         }
-        report.addTestCase(parseTestCaseTag(testCaseCursor));
       }
+    } catch (Exception e) {
+      throw new PythonReportException(e);
     }
   }
 
@@ -62,53 +76,56 @@ public class TestSuiteParser implements XmlStreamHandler {
     return testSuites.values();
   }
 
-  private static String getClassname(SMInputCursor testCaseCursor, String defaultClassname) throws XMLStreamException {
-    String testClassName = testCaseCursor.getAttrValue("classname");
-    return testClassName == null ? defaultClassname : testClassName;
+  private String getClassname(Node testcaseNode, String defaultClassname) {
+    Optional<String> testClassName = getStringAttribute(testcaseNode, "classname");
+    return testClassName.isPresent() ? testClassName.get() : defaultClassname;
   }
 
-  private static TestCase parseTestCaseTag(SMInputCursor testCaseCursor) throws XMLStreamException {
+  private TestCase parseTestCaseElement(Element testcaseNode) throws XMLStreamException {
     // TODO: get a decent grammar for the junit format and check the
     // logic inside this method against it.
 
-    String name = parseTestCaseName(testCaseCursor);
-    Double time = parseTime(testCaseCursor);
+    String name = parseTestCaseName(testcaseNode);
+    Double time = parseTime(testcaseNode);
     String status = "ok";
     String stack = "";
     String msg = "";
 
-    SMInputCursor childCursor = testCaseCursor.childElementCursor();
-    if (childCursor.getNext() != null) {
-      String elementName = childCursor.getLocalName();
+    NodeList children = testcaseNode.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node child = children.item(i);
+      String elementName = child.getNodeName();
+
       if ("skipped".equals(elementName)) {
         status = "skipped";
       } else if ("failure".equals(elementName)) {
         status = "failure";
-        msg = childCursor.getAttrValue("message");
-        stack = childCursor.collectDescendantText();
+        msg = getStringAttribute(child, "message").orElse(null);
+        stack = ((Element) child).getTextContent();
       } else if ("error".equals(elementName)) {
         status = "error";
-        msg = childCursor.getAttrValue("message");
-        stack = childCursor.collectDescendantText();
+        msg = getStringAttribute(child, "message").orElse(null);
+        stack = ((Element) child).getTextContent();
       }
     }
     return new TestCase(name, time.intValue(), status, stack, msg);
   }
 
-  private static double parseTime(SMInputCursor testCaseCursor) throws XMLStreamException {
+  private double parseTime(Element testcaseNode) {
     double time;
     try {
-      Double tmp = ParsingUtils.parseNumber(testCaseCursor.getAttrValue("time"), Locale.ENGLISH);
+      String timeValue = getStringAttribute(testcaseNode, "time").orElse(null);
+      Double tmp = ParsingUtils.parseNumber(timeValue, Locale.ENGLISH);
       time = ParsingUtils.scaleValue(tmp * 1000, 3);
     } catch (ParseException e) {
-      throw new XMLStreamException(e);
+      throw new PythonReportException(e);
     }
     return time;
   }
 
-  private static String parseTestCaseName(SMInputCursor testCaseCursor) throws XMLStreamException {
-    String name = testCaseCursor.getAttrValue("name");
-    String classname = testCaseCursor.getAttrValue("CLASSNAME");
+  private String parseTestCaseName(Element testcaseNode) {
+    String name = getStringAttribute(testcaseNode, "name").orElse(null);
+    String classname = getStringAttribute(testcaseNode, "classname").orElse(null);
     if (classname != null) {
       name = classname + "/" + name;
     }

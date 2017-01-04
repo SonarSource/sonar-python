@@ -20,11 +20,23 @@
 package org.sonar.plugins.python;
 
 @SuppressWarnings("serial")
-/** This exception is thrown when an empty report is detected */
-public class EmptyReportException extends PythonReportException {
+public class PythonReportException extends RuntimeException {
 
-  public EmptyReportException() {
-    super("Empty XML report");
+  private final String message;
+
+  public PythonReportException(String msg) {
+    super();
+    message = msg;
+  }
+
+  public PythonReportException(Throwable cause) {
+    super(cause);
+    message = cause.getMessage();
+  }
+
+  @Override
+  public String getMessage() {
+    return message;
   }
 
 }
