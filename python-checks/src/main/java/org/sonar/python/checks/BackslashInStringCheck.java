@@ -27,16 +27,15 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 @Rule(
-    key = BackslashInStringCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "\"\\\" should only be used as an escape character outside of raw strings"
+  key = "S1717",
+  name = "\"\\\" should only be used as an escape character outside of raw strings",
+  priority = Priority.MAJOR
 )
 @SqaleConstantRemediation("2min")
 public class BackslashInStringCheck extends PythonCheck {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
   private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";
-  public static final String CHECK_KEY = "S1717";
 
   @Override
   public void init() {
@@ -49,19 +48,37 @@ public class BackslashInStringCheck extends PythonCheck {
     int length = string.length();
     boolean isEscaped = false;
     boolean inPrefix = true;
+    boolean isThreeQuotes = length > 5 && "\"\"".equals(string.substring(1, 3));
     for (int i = 0; i < length; i++) {
       char c = string.charAt(i);
       inPrefix = isInPrefix(inPrefix, c);
-      if (inPrefix && (c == 'r' || c == 'R')) {
-        return;
-      }
-      if (!inPrefix) {
-        if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1) {
+      if (inPrefix) {
+        if (c == 'r' || c == 'R') {
+          return;
+        }
+      } else {
+        if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1 && !isBackslashedSpaceAfterInlineMarkup(isThreeQuotes, string, i, c)) {
           addIssue(node, MESSAGE);
         }
         isEscaped = c == '\\' && !isEscaped;
       }
     }
+  }
+
+  private static boolean isBackslashedSpaceAfterInlineMarkup(boolean isThreeQuotes, String string, int position, char current) {
+    if (isThreeQuotes && current == ' ' && position > 6) {
+      char twoCharactersBefore = string.charAt(position - 2);
+      switch (twoCharactersBefore) {
+        case '`':
+        case '*':
+        case '_':
+        case '|':
+          return true;
+        default:
+          return false;
+      }
+    }
+    return false;
   }
 
   private static boolean isInPrefix(boolean wasInPrefix, char currentChar) {
