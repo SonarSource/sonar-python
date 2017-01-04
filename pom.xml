@@ -89,6 +89,7 @@
     <sonarlint-core.version>2.4.1</sonarlint-core.version>
     <sslr.version>1.21</sslr.version>
     <sslr.squid.bridge.version>2.6.1</sslr.squid.bridge.version>
+    <woodstox.version>4.4.1</woodstox.version>
   </properties>
 
   <dependencyManagement>
@@ -148,6 +149,11 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.woodstox</groupId>
+        <artifactId>woodstox-core-lgpl</artifactId>
+        <version>${woodstox.version}</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>

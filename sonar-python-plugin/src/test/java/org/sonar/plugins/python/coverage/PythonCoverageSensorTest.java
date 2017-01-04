@@ -160,6 +160,12 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context, linesOfCode);
   }
 
+  @Test(expected = IllegalStateException.class)
+  public void should_fail_on_unexpected_eof() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_eof_error.xml");
+    coverageSensor.execute(context, linesOfCode);
+  }
+
   @Test
   public void should_do_nothing_on_empty_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "empty-coverage-result.xml");
