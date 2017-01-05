@@ -99,6 +99,8 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
     allLinesOfCode.put(inputFile, linesOfCode);
 
+    getContext().peekSourceCode().add(PythonMetric.COMMENT_LINES, linesOfComments.size());
+
     linesOfCode = Sets.newHashSet();
     linesOfComments = Sets.newHashSet();
   }

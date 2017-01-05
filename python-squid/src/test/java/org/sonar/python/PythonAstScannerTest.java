@@ -38,16 +38,9 @@ public class PythonAstScannerTest {
   @Test
   public void files() {
     AstScanner<Grammar> scanner = PythonAstScanner.create(new PythonConfiguration(Charsets.UTF_8));
-    scanner.scanFiles(ImmutableList.of(new File("src/test/resources/metrics/lines.py"), new File("src/test/resources/metrics/comments.py")));
+    scanner.scanFiles(ImmutableList.of(new File("src/test/resources/metrics/lines.py"), new File("src/test/resources/metrics/lines_of_code.py")));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
     assertThat(project.getInt(PythonMetric.FILES)).isEqualTo(2);
-  }
-
-  @Test
-  public void comments() {
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/metrics/comments.py");
-    assertThat(file.getInt(PythonMetric.COMMENT_LINES)).isEqualTo(1);
-    assertThat(file.getNoSonarTagLines()).contains(3).hasSize(1);
   }
 
   @Test
