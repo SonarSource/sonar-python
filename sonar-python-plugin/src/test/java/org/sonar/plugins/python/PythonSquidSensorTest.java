@@ -78,18 +78,18 @@ public class PythonSquidSensorTest {
 
     String key = "moduleKey:file1.py";
     assertThat(context.measure(key, CoreMetrics.FILES).value()).isEqualTo(1);
-    assertThat(context.measure(key, CoreMetrics.LINES).value()).isEqualTo(29);
-    assertThat(context.measure(key, CoreMetrics.NCLOC).value()).isEqualTo(25);
-    assertThat(context.measure(key, CoreMetrics.STATEMENTS).value()).isEqualTo(23);
+    assertThat(context.measure(key, CoreMetrics.LINES).value()).isEqualTo(20);
+    assertThat(context.measure(key, CoreMetrics.NCLOC).value()).isEqualTo(17);
+    assertThat(context.measure(key, CoreMetrics.STATEMENTS).value()).isEqualTo(15);
     assertThat(context.measure(key, CoreMetrics.FUNCTIONS).value()).isEqualTo(4);
     assertThat(context.measure(key, CoreMetrics.CLASSES).value()).isEqualTo(1);
     assertThat(context.measure(key, CoreMetrics.COMPLEXITY).value()).isEqualTo(4);
-    assertThat(context.measure(key, CoreMetrics.COMMENT_LINES).value()).isEqualTo(9);
+    assertThat(context.measure(key, CoreMetrics.COMMENT_LINES).value()).isEqualTo(8);
 
     assertThat(context.allIssues()).hasSize(1);
     
     String msg = "number of TypeOfTypes for the highlighting of keyword 'def'";
-    assertThat(context.highlightingTypeAt(key, 18, 2)).as(msg).hasSize(1);
+    assertThat(context.highlightingTypeAt(key, 10, 2)).as(msg).hasSize(1);
   }
 
   @Test

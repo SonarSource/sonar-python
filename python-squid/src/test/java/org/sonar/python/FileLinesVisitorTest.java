@@ -60,18 +60,25 @@ public class FileLinesVisitorTest {
     HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
     SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode);
 
-
     PythonAstScanner.scanSingleFile(file.getPath(), visitor);
 
     assertThat(linesOfCode).hasSize(1);
-    assertThat(linesOfCode.get(inputFile)).containsOnly(2, 4);
+    assertThat(linesOfCode.get(inputFile)).containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18);
 
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 2, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 4, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 4, 1);
+    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18);
+    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 11, 13, 14, 17);
     verify(fileLinesContext).save();
     verifyNoMoreInteractions(fileLinesContext);
+  }
+
+  /**
+   * Checks that method fileLinesContext.setIntValue has been invoked for the specified
+   * metrics and for every specified line.
+   */
+  private void verifyInvocation(FileLinesContext fileLinesContext, String metric, int... lines) {
+    for (int i = 0; i < lines.length; i++) {
+      verify(fileLinesContext).setIntValue(metric, lines[i], 1);
+    }
   }
 
 }
