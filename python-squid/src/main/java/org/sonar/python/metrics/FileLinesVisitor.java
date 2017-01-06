@@ -26,6 +26,8 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,6 +36,9 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.python.DocstringVisitor;
+import org.sonar.python.PythonAstScanner;
+import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.SquidAstVisitor;
@@ -56,6 +61,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     this.allLinesOfCode = linesOfCode;
   }
 
+  /**
+   * Gets the lines of codes and lines of comments (with character #).
+   * Does not get the lines of docstrings. 
+   */
   @Override
   public void visitToken(Token token) {
     if (token.getType().equals(GenericTokenType.EOF)) {
@@ -86,6 +95,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     }
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
+    // account for the docstring lines
+    Set<Integer> linesOfDocstring = getLinesOfDocstring();
+    correctLinesOfCodeAndLineOfComments(linesOfCode, linesOfComments, linesOfDocstring);
+
     int fileLength = getContext().peekSourceCode().getInt(PythonMetric.LINES);
     for (int line = 1; line <= fileLength; line++) {
       if (linesOfCode.contains(line)) {
@@ -103,6 +116,32 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
     linesOfCode = Sets.newHashSet();
     linesOfComments = Sets.newHashSet();
+  }
+
+  private Set<Integer> getLinesOfDocstring() {
+    DocstringVisitor<Grammar> docstringVisitor = new DocstringVisitor<>();
+    PythonAstScanner.scanSingleFile(getContext().getFile().getPath(), docstringVisitor);
+    Collection<AstNode> docstrings = docstringVisitor.getDocstrings().values();
+
+    Set<Integer> linesOfDocstring = new HashSet<>();
+    for (AstNode docstring : docstrings) {
+      if (docstring != null) {
+        TokenLocation location = new TokenLocation(docstring.getToken());
+        for (int line = location.startLine(); line <= location.endLine(); line++) {
+          linesOfDocstring.add(line);
+        }
+      }
+    }
+
+    return linesOfDocstring;
+  }
+
+  private void correctLinesOfCodeAndLineOfComments(Set<Integer> linesOfCode, Set<Integer> linesOfComments, Set<Integer> linesOfDosctring) {
+    for (Integer line : linesOfDosctring) {
+      linesOfCode.remove(line);
+      linesOfComments.add(line);
+      System.out.println("linesOfComments = " + linesOfComments);
+    }
   }
 
 }

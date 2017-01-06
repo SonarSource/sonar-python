@@ -63,10 +63,10 @@ public class FileLinesVisitorTest {
     PythonAstScanner.scanSingleFile(file.getPath(), visitor);
 
     assertThat(linesOfCode).hasSize(1);
-    assertThat(linesOfCode.get(inputFile)).containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18);
+    assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
 
-    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18);
-    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 11, 13, 14, 17);
+    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
+    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 11, 13, 14, 17, 18, 18, 19, 20);
     verify(fileLinesContext).save();
     verifyNoMoreInteractions(fileLinesContext);
   }

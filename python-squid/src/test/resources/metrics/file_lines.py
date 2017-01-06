@@ -14,5 +14,8 @@ a = [1,
      2,           # end of line comment
      ]
 
-def foo2(x,y,z,): # end of line comment
+def foo1(x,y,z,): # end of line comment
+    """
+    3 lines of docstring
+    """
     pass

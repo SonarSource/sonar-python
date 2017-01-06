@@ -38,12 +38,15 @@ import org.sonar.squidbridge.SquidAstVisitor;
  */
 public class DocstringVisitor<G extends Grammar> extends SquidAstVisitor<G> implements AstVisitor {
 
-  /**
-   * Key = an AstNode (module, function, class or method).
-   * Value = the docstring of the node. Can be null
-   */
   private Map<AstNode, AstNode> docstrings = new HashMap<>();
 
+  /**
+   * Returns a map where:
+   * <ul>
+   *   <li>a key is an AstNode (module, function, class or method)</li>
+   *   <li>a value is the docstring of the AstNode. Can be null
+   * </ul>
+   */
   public Map<AstNode, AstNode> getDocstrings() {
     return docstrings;
   }
