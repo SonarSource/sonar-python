@@ -34,6 +34,7 @@ import org.sonar.squidbridge.checks.ChecksHelper;
     key = ClassComplexityCheck.CHECK_KEY,
     priority = Priority.MAJOR,
     name = "Classes should not be too complex",
+    status = "DEPRECATED",
     tags = Tags.BRAIN_OVERLOAD
 )
 @SqaleLinearWithOffsetRemediation(
