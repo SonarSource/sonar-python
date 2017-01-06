@@ -8,7 +8,7 @@ u"lala"
 U"lala"
 r"lala"
 R"lala"
-print             # end of line comment
+print             # NOSONAR
 a = [1,
      # inline comment
      2,           # end of line comment

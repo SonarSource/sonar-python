@@ -99,10 +99,12 @@ public final class PythonSquidSensor implements Sensor {
     this.context = context;
     Map<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
 
+    PythonConfiguration conf = createConfiguration();
+
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(checks.all());
-    visitors.add(new FileLinesVisitor(fileLinesContextFactory, context.fileSystem(), linesOfCode));
+    visitors.add(new FileLinesVisitor(fileLinesContextFactory, context.fileSystem(), linesOfCode, true, conf.getIgnoreHeaderComments()));
     visitors.add(new PythonHighlighter(context));
-    this.scanner = PythonAstScanner.create(createConfiguration(), visitors.toArray(new SquidAstVisitor[visitors.size()]));
+    this.scanner = PythonAstScanner.create(conf, visitors.toArray(new SquidAstVisitor[visitors.size()]));
     FilePredicates p = context.fileSystem().predicates();
     scanner.scanFiles(Lists.newArrayList(context.fileSystem().files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)))));
 

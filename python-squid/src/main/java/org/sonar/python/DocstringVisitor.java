@@ -20,7 +20,6 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstVisitor;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.util.HashMap;
@@ -36,7 +35,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
  * Reminder: a docstring is a string literal that occurs as the first statement
  * in a module, function, class, or method definition.
  */
-public class DocstringVisitor<G extends Grammar> extends SquidAstVisitor<G> implements AstVisitor {
+public class DocstringVisitor<G extends Grammar> extends SquidAstVisitor<G> {
 
   private Map<AstNode, AstNode> docstrings = new HashMap<>();
 

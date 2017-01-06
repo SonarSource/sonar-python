@@ -28,7 +28,6 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.api.batch.fs.FileSystem;
@@ -42,6 +41,7 @@ import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.SquidAstVisitor;
+import org.sonar.squidbridge.api.SourceFile;
 
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES_DATA_KEY} metrics used by the DevCockpit.
@@ -50,15 +50,36 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
   private final FileLinesContextFactory fileLinesContextFactory;
 
+  private boolean seenFirstToken;
+
+  private final boolean enableNoSonar;
+
+  private final boolean ignoreHeaderComments;
+
+  private Set<Integer> noSonar = Sets.newHashSet();
   private Set<Integer> linesOfCode = Sets.newHashSet();
   private Set<Integer> linesOfComments = Sets.newHashSet();
   private final FileSystem fileSystem;
   private final Map<InputFile, Set<Integer>> allLinesOfCode;
 
-  public FileLinesVisitor(FileLinesContextFactory fileLinesContextFactory, FileSystem fileSystem, Map<InputFile, Set<Integer>> linesOfCode) {
+  public FileLinesVisitor(
+      FileLinesContextFactory fileLinesContextFactory,
+      FileSystem fileSystem,
+      Map<InputFile, Set<Integer>> linesOfCode,
+      boolean enableNoSonar,
+      boolean ignoreHeaderComments) {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.fileSystem = fileSystem;
     this.allLinesOfCode = linesOfCode;
+    this.enableNoSonar = enableNoSonar;
+    this.ignoreHeaderComments = ignoreHeaderComments;
+  }
+
+  @Override
+  public void visitFile(AstNode astNode) {
+    noSonar = new HashSet<>();
+    linesOfComments = new HashSet<>();
+    seenFirstToken = false;
   }
 
   /**
@@ -72,19 +93,34 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     }
 
     if (!token.getType().equals(PythonTokenType.DEDENT) && !token.getType().equals(PythonTokenType.INDENT) && !token.getType().equals(PythonTokenType.NEWLINE)) {
-      /* Handle all the lines of the token */
+      //  Handle all the lines of the token
       String[] tokenLines = token.getValue().split("\n", -1);
       for (int line = token.getLine(); line < token.getLine() + tokenLines.length; line++) {
         linesOfCode.add(line);
       }
     }
 
-    List<Trivia> trivias = token.getTrivia();
-    for (Trivia trivia : trivias) {
-      if (trivia.isComment()) {
-        linesOfComments.add(trivia.getToken().getLine());
+    if (!ignoreHeaderComments || seenFirstToken) {
+      for (Trivia trivia : token.getTrivia()) {
+        if (trivia.isComment()) {
+          String[] commentLines = getContext().getCommentAnalyser().getContents(trivia.getToken().getOriginalValue())
+            .split("(\r)?\n|\r", -1);
+          int line = trivia.getToken().getLine();
+
+          for (String commentLine : commentLines) {
+            if (enableNoSonar && commentLine.contains("NOSONAR")) {
+              linesOfComments.remove(line);
+              noSonar.add(line);
+            } else if (!getContext().getCommentAnalyser().isBlank(commentLine) && !noSonar.contains(line)) {
+              linesOfComments.add(line);
+            }
+            line++;
+          }
+        }
       }
     }
+
+    seenFirstToken = true;
   }
 
   @Override
@@ -114,6 +150,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
     getContext().peekSourceCode().add(PythonMetric.COMMENT_LINES, linesOfComments.size());
 
+    if (enableNoSonar) {
+      ((SourceFile) getContext().peekSourceCode()).addNoSonarTagLines(noSonar);
+    }
+
     linesOfCode = Sets.newHashSet();
     linesOfComments = Sets.newHashSet();
   }
@@ -136,11 +176,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     return linesOfDocstring;
   }
 
-  private void correctLinesOfCodeAndLineOfComments(Set<Integer> linesOfCode, Set<Integer> linesOfComments, Set<Integer> linesOfDosctring) {
+  private static void correctLinesOfCodeAndLineOfComments(Set<Integer> linesOfCode, Set<Integer> linesOfComments, Set<Integer> linesOfDosctring) {
     for (Integer line : linesOfDosctring) {
       linesOfCode.remove(line);
       linesOfComments.add(line);
-      System.out.println("linesOfComments = " + linesOfComments);
     }
   }
 

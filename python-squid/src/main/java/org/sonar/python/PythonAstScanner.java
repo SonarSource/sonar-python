@@ -54,6 +54,7 @@ public final class PythonAstScanner {
   /**
    * Helper method for testing checks without having to deploy them on a Sonar instance.
    */
+  @SuppressWarnings("unchecked")
   public static SourceFile scanSingleFile(String path, SquidAstVisitor<Grammar>... visitors) {
     File file = new File(path);
     if (!file.isFile()) {
@@ -84,7 +85,7 @@ public final class PythonAstScanner {
 
     setMethodAnalyser(builder);
 
-    setMetrics(conf, builder);
+    setMetrics(builder);
 
     /* External visitors (typically Check ones) */
     for (SquidAstVisitor<Grammar> visitor : visitors) {
@@ -97,7 +98,7 @@ public final class PythonAstScanner {
     return builder.build();
   }
 
-  private static void setMetrics(PythonConfiguration conf, AstScanner.Builder<Grammar> builder) {
+  private static void setMetrics(AstScanner.Builder<Grammar> builder) {
     builder.withSquidAstVisitor(new LinesVisitor<Grammar>(PythonMetric.LINES));
     builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<Grammar>(PythonMetric.LINES_OF_CODE));
     AstNodeType[] complexityAstNodeType = new AstNodeType[]{

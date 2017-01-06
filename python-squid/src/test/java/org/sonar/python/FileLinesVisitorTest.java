@@ -20,6 +20,8 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.Grammar;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -45,22 +47,20 @@ public class FileLinesVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources/metrics");
 
+  private DefaultFileSystem fileSystem = new DefaultFileSystem(Paths.get(""));
+
+  private FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+
+  private FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+
   @Test
   public void test() {
-    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    DefaultFileSystem fileSystem = new DefaultFileSystem(Paths.get(""));
-    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-
-    File file = new File(BASE_DIR, "file_lines.py");
-    DefaultInputFile inputFile = new DefaultInputFile("", file.getPath());
-
-    fileSystem.add(inputFile);
-    when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
+    DefaultInputFile inputFile = initFile("file_lines.py");
 
     HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode);
+    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false, false);
 
-    PythonAstScanner.scanSingleFile(file.getPath(), visitor);
+    PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
 
     assertThat(linesOfCode).hasSize(1);
     assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
@@ -69,6 +69,50 @@ public class FileLinesVisitorTest {
     verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 11, 13, 14, 17, 18, 18, 19, 20);
     verify(fileLinesContext).save();
     verifyNoMoreInteractions(fileLinesContext);
+  }
+
+  @Test
+  public void test_nosonar() {
+    DefaultInputFile inputFile = initFile("file_lines_nosonar.py");
+
+    HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
+    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, true, false);
+
+    PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
+
+    assertThat(linesOfCode).hasSize(1);
+    assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(1, 3, 4);
+
+    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 1, 3, 4);
+    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 4);
+    verify(fileLinesContext).save();
+    verifyNoMoreInteractions(fileLinesContext);
+  }
+
+  @Test
+  public void test_ignoreHeaderComments() {
+    DefaultInputFile inputFile = initFile("file_lines_header_comments.py");
+
+    HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
+    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false, true);
+
+    PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
+
+    assertThat(linesOfCode).hasSize(1);
+    assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4);
+
+    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4);
+    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 4);
+    verify(fileLinesContext).save();
+    verifyNoMoreInteractions(fileLinesContext);
+  }
+
+  private DefaultInputFile initFile(String fileName) {
+    File file = new File(BASE_DIR, fileName);
+    DefaultInputFile inputFile = new DefaultInputFile("", file.getPath());
+    fileSystem.add(inputFile);
+    when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
+    return inputFile;
   }
 
   /**
