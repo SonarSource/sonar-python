@@ -33,8 +33,8 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
+import org.sonar.plugins.python.parser.StaxParser;
 
 public class PythonXUnitSensor extends PythonReportSensor {
   private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);

@@ -23,8 +23,7 @@ import org.codehaus.staxmate.in.ElementFilter;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.utils.ParsingUtils;
-import org.sonar.api.utils.StaxParser.XmlStreamHandler;
-
+import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 import javax.xml.stream.XMLStreamException;
 import java.text.ParseException;
 import java.util.Collection;
