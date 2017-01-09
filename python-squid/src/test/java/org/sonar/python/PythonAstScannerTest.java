@@ -22,14 +22,13 @@ package org.sonar.python;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.Grammar;
+import java.io.File;
 import org.junit.Test;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.AstScanner;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceProject;
 import org.sonar.squidbridge.indexer.QueryByType;
-
-import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -83,7 +82,7 @@ public class PythonAstScannerTest {
   @Test
   public void complexity() {
     SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/metrics/complexity.py");
-    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(10);
+    assertThat(file.getInt(PythonMetric.COMPLEXITY)).isEqualTo(7);
   }
 
 }
