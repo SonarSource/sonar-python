@@ -19,25 +19,29 @@
  */
 package org.sonar.plugins.python.parser;
 
+import javax.xml.stream.XMLStreamException;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.junit.Test;
-import org.sonar.plugins.python.parser.StaxParser;
 import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
-
-import javax.xml.stream.XMLStreamException;
 
 public class StaxParserTest {
 
   @Test
-  public void testXMLWithDTD() throws XMLStreamException {
+  public void test_XML_with_DTD() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
     parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/dtd-test.xml"));
   }
 
   @Test
-  public void testXMLWithXSD() throws XMLStreamException {
+  public void test_XML_with_XSD() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
     parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test.xml"));
+  }
+
+  @Test
+  public void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
+    StaxParser parser = new StaxParser(getTestHandler());
+    parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test-with-entity.xml"));
   }
 
   private XmlStreamHandler getTestHandler() {

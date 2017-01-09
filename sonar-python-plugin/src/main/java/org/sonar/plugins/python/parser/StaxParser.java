@@ -25,7 +25,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 
@@ -42,6 +44,7 @@ public class StaxParser {
     this.streamHandler = streamHandler;
     WstxInputFactory xmlFactory = (WstxInputFactory) XMLInputFactory.newInstance();
     xmlFactory.configureForLowMemUsage();
+    xmlFactory.getConfig().setUndeclaredEntityResolver(new UndeclaredEntitiesXMLResolver());
     xmlFactory.setProperty(XMLInputFactory.IS_VALIDATING, false);
     xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
     xmlFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
@@ -62,6 +65,22 @@ public class StaxParser {
       streamHandler.stream(rootCursor);
     } finally {
       rootCursor.getStreamReader().closeCompletely();
+    }
+  }
+
+  private static class UndeclaredEntitiesXMLResolver implements XMLResolver {
+
+    @Override
+    public Object resolveEntity(String arg0, String arg1, String fileName, String undeclaredEntity) throws XMLStreamException {
+      String undeclared = undeclaredEntity;
+      // avoid problems with XML docs containing undeclared entities.. return the entity under its raw form if not a Unicode expression
+      if (StringUtils.startsWithIgnoreCase(undeclaredEntity, "u") && undeclaredEntity.length() == 5) {
+        int unicodeCharHexValue = Integer.parseInt(undeclaredEntity.substring(1), 16);
+        if (Character.isDefined(unicodeCharHexValue)) {
+          undeclared = new String(new char[] {(char) unicodeCharHexValue});
+        }
+      }
+      return undeclared;
     }
   }
 

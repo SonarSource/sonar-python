@@ -124,6 +124,7 @@ public class PythonCoverageSensorTest {
     assertThat(context.conditions(FILE2_KEY, CoverageType.UNIT, 3)).isEqualTo(2);
     assertThat(context.coveredConditions(FILE2_KEY, CoverageType.UNIT, 3)).isEqualTo(1);
   }
+
   @Test
   public void test_unresolved_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
@@ -174,4 +175,5 @@ public class PythonCoverageSensorTest {
 
     assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isNull();
   }
+
 }
