@@ -115,27 +115,32 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
       }
     }
 
-    if (!ignoreHeaderComments || seenFirstToken) {
-      for (Trivia trivia : token.getTrivia()) {
-        if (trivia.isComment()) {
-          String[] commentLines = getContext().getCommentAnalyser().getContents(trivia.getToken().getOriginalValue())
-            .split("(\r)?\n|\r", -1);
-          int line = trivia.getToken().getLine();
-
-          for (String commentLine : commentLines) {
-            if (enableNoSonar && commentLine.contains("NOSONAR")) {
-              linesOfComments.remove(line);
-              noSonar.add(line);
-            } else if (!getContext().getCommentAnalyser().isBlank(commentLine) && !noSonar.contains(line)) {
-              linesOfComments.add(line);
-            }
-            line++;
-          }
-        }
-      }
+    if (ignoreHeaderComments && !seenFirstToken) {
+      seenFirstToken = true;
+      return;
     }
 
-    seenFirstToken = true;
+    for (Trivia trivia : token.getTrivia()) {
+      if (trivia.isComment()) {
+        visitComment(trivia);
+      }
+    }
+  }
+
+  public void visitComment(Trivia trivia) {
+    String[] commentLines = getContext().getCommentAnalyser().getContents(trivia.getToken().getOriginalValue())
+      .split("(\r)?\n|\r", -1);
+    int line = trivia.getToken().getLine();
+
+    for (String commentLine : commentLines) {
+      if (enableNoSonar && commentLine.contains("NOSONAR")) {
+        linesOfComments.remove(line);
+        noSonar.add(line);
+      } else if (!getContext().getCommentAnalyser().isBlank(commentLine) && !noSonar.contains(line)) {
+        linesOfComments.add(line);
+      }
+      line++;
+    }
   }
 
   @Override
