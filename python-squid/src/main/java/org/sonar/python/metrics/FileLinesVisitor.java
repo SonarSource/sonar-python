@@ -26,7 +26,6 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -35,8 +34,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.python.DocstringVisitor;
-import org.sonar.python.PythonAstScanner;
+import org.sonar.python.DocstringExtractor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
@@ -59,6 +57,7 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
   private Set<Integer> noSonar = Sets.newHashSet();
   private Set<Integer> linesOfCode = Sets.newHashSet();
   private Set<Integer> linesOfComments = Sets.newHashSet();
+  private Set<Integer> linesOfDocstring = Sets.newHashSet();
   private final FileSystem fileSystem;
   private final Map<InputFile, Set<Integer>> allLinesOfCode;
 
@@ -76,15 +75,31 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
   }
 
   @Override
+  public void init() {
+    DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
+  }
+
+  @Override
   public void visitFile(AstNode astNode) {
     noSonar = new HashSet<>();
     linesOfComments = new HashSet<>();
     seenFirstToken = false;
   }
 
+  @Override
+  public void visitNode(AstNode astNode) {
+    Token docstringToken = DocstringExtractor.extractDocstring(astNode);
+    if (docstringToken != null) {
+      TokenLocation location = new TokenLocation(docstringToken);
+      for (int line = location.startLine(); line <= location.endLine(); line++) {
+        linesOfDocstring.add(line);
+      }
+    }
+  }
+
   /**
    * Gets the lines of codes and lines of comments (with character #).
-   * Does not get the lines of docstrings. 
+   * Does not get the lines of docstrings.
    */
   @Override
   public void visitToken(Token token) {
@@ -132,7 +147,6 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
     // account for the docstring lines
-    Set<Integer> linesOfDocstring = getLinesOfDocstring();
     correctLinesOfCodeAndLineOfComments(linesOfCode, linesOfComments, linesOfDocstring);
 
     int fileLength = getContext().peekSourceCode().getInt(PythonMetric.LINES);
@@ -156,24 +170,6 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
     linesOfCode = Sets.newHashSet();
     linesOfComments = Sets.newHashSet();
-  }
-
-  private Set<Integer> getLinesOfDocstring() {
-    DocstringVisitor<Grammar> docstringVisitor = new DocstringVisitor<>();
-    PythonAstScanner.scanSingleFile(getContext().getFile().getPath(), docstringVisitor);
-    Collection<AstNode> docstrings = docstringVisitor.getDocstrings().values();
-
-    Set<Integer> linesOfDocstring = new HashSet<>();
-    for (AstNode docstring : docstrings) {
-      if (docstring != null) {
-        TokenLocation location = new TokenLocation(docstring.getToken());
-        for (int line = location.startLine(); line <= location.endLine(); line++) {
-          linesOfDocstring.add(line);
-        }
-      }
-    }
-
-    return linesOfDocstring;
   }
 
   private static void correctLinesOfCodeAndLineOfComments(Set<Integer> linesOfCode, Set<Integer> linesOfComments, Set<Integer> linesOfDosctring) {

@@ -21,10 +21,13 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Token;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.squidbridge.SquidAstVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,41 +35,54 @@ public class DocstringVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources");
 
+  private Map<AstNode, Token> docstrings = new HashMap<>();
+
   @SuppressWarnings("unchecked")
   @Test
   public void test() {
     File file = new File(BASE_DIR, "docstring.py");
-
-    DocstringVisitor<Grammar> visitor = new DocstringVisitor<>();
-    PythonAstScanner.scanSingleFile(file.getPath(), visitor);
-    Map<AstNode, AstNode> docstrings = visitor.getDocstrings();
+    PythonAstScanner.scanSingleFile(file.getPath(), new DocstringVisitor());
 
     String TRIPLE_QUOTES = "\"\"\"";
 
-    assertDocstring(PythonGrammar.FILE_INPUT, 1, TRIPLE_QUOTES + "\nThis is a module docstring\n" + TRIPLE_QUOTES, docstrings);
-    assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES, docstrings);
-    assertDocstring(PythonGrammar.FUNCDEF, 13, TRIPLE_QUOTES + " " + TRIPLE_QUOTES, docstrings);
-    assertDocstring(PythonGrammar.FUNCDEF, 18, "\"This is a function docstring\"", docstrings);
-    assertDocstring(PythonGrammar.CLASSDEF, 22, TRIPLE_QUOTES + "This is a class docstring" + TRIPLE_QUOTES, docstrings);
-    assertDocstring(PythonGrammar.FUNCDEF, 28, "''' This is a method docstring '''", docstrings);
+    assertDocstring(PythonGrammar.FILE_INPUT, 1, TRIPLE_QUOTES + "\nThis is a module docstring\n" + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FUNCDEF, 13, TRIPLE_QUOTES + " " + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FUNCDEF, 18, "\"This is a function docstring\"");
+    assertDocstring(PythonGrammar.CLASSDEF, 22, TRIPLE_QUOTES + "This is a class docstring" + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FUNCDEF, 28, "''' This is a method docstring '''");
 
     assertThat(docstrings).hasSize(10);
     assertThat(docstrings.values().stream().filter(ds -> ds != null)).hasSize(6);
   }
 
-  private void assertDocstring(PythonGrammar nodeType, int line, String expectedDocString, Map<AstNode, AstNode> docstrings) {
-    AstNode docString = getDocstring(nodeType, line, docstrings);
+  private void assertDocstring(PythonGrammar nodeType, int line, String expectedDocString) {
+    Token docString = getDocstring(nodeType, line);
     assertThat(docString).as("docstring for AstNode of type " + nodeType + " at line " + line).isNotNull();
-    assertThat(docString.getTokenValue()).isEqualTo(expectedDocString);
+    assertThat(docString.getValue()).isEqualTo(expectedDocString);
   }
 
-  private AstNode getDocstring(PythonGrammar nodeType, int line, Map<AstNode, AstNode> docstrings) {
+  private Token getDocstring(PythonGrammar nodeType, int line) {
     for (AstNode e : docstrings.keySet()) {
       if (e.getType().equals(nodeType) && e.getTokenLine() == line) {
         return docstrings.get(e);
       }
     }
     return null;
+  }
+
+  private class DocstringVisitor extends SquidAstVisitor<Grammar> {
+
+    @Override
+    public void init() {
+      DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
+    }
+
+    @Override
+    public void visitNode(AstNode astNode) {
+      docstrings.put(astNode, DocstringExtractor.extractDocstring(astNode));
+    }
+
   }
 
 }

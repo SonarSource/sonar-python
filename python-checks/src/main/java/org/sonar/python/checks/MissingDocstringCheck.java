@@ -20,18 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
-import java.util.Map;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.DocstringVisitor;
-import org.sonar.python.PythonAstScanner;
+import org.sonar.python.DocstringExtractor;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 @Rule(
@@ -62,15 +57,18 @@ public class MissingDocstringCheck extends PythonCheck {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
-  public void visitFile(AstNode file) {
-    DocstringVisitor<Grammar> docstringVisitor = new DocstringVisitor<>();
-    PythonAstScanner.scanSingleFile(getContext().getFile().getPath(), docstringVisitor);
-    
-    Map<AstNode, AstNode> docstrings = docstringVisitor.getDocstrings();
-    for (Map.Entry<AstNode, AstNode> entry : docstrings.entrySet()) {
-      AstNode node = entry.getKey();
-      checkSimpleStmt(node, entry.getValue(), getType(node));
+  public void init() {
+    DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
+  }
+
+  @Override
+  public void visitNode(AstNode astNode) {
+    DeclarationType type = getType(astNode);
+    Token docstring = DocstringExtractor.extractDocstring(astNode);
+    if (docstring == null) {
+      raiseIssueNoDocstring(astNode, type);
+    } else if (EMPTY_STRING_REGEXP.matcher(docstring.getValue()).matches()) {
+      raiseIssue(astNode, MESSAGE_EMPTY_DOCSTRING, type);
     }
   }
 
@@ -87,14 +85,6 @@ public class MissingDocstringCheck extends PythonCheck {
       return DeclarationType.CLASS;
     }
     return null;
-  }
-
-  private void checkSimpleStmt(AstNode astNode, @Nullable AstNode firstSimpleStmt, DeclarationType type) {
-    if (firstSimpleStmt != null) {
-      visitFirstStatement(astNode, firstSimpleStmt, type);
-    } else {
-      raiseIssueNoDocstring(astNode, type);
-    }
   }
 
   private void raiseIssueNoDocstring(AstNode astNode, DeclarationType type) {
@@ -114,17 +104,6 @@ public class MissingDocstringCheck extends PythonCheck {
 
   private static AstNode getNameNode(AstNode astNode) {
     return astNode.getFirstChild(PythonGrammar.FUNCNAME, PythonGrammar.CLASSNAME);
-  }
-
-  private void visitFirstStatement(AstNode astNode, AstNode firstSimpleStmt, DeclarationType type) {
-    Token token = firstSimpleStmt.getToken();
-    if (token.getType().equals(PythonTokenType.STRING)){
-      if (EMPTY_STRING_REGEXP.matcher(token.getValue()).matches()){
-        raiseIssue(astNode, MESSAGE_EMPTY_DOCSTRING, type);
-      }
-    } else {
-      raiseIssueNoDocstring(astNode, type);
-    }
   }
 
 }
