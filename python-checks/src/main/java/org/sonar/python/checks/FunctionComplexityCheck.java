@@ -42,7 +42,7 @@ import org.sonar.squidbridge.api.SourceFunction;
   effortToFixDescription = "per complexity point above the threshold")
 @ActivatedByDefault
 public class FunctionComplexityCheck extends PythonCheck {
-  private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 20;
+  private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 15;
   private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";
 
   @RuleProperty(
