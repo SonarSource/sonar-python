@@ -26,7 +26,6 @@ import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonMetric;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 import org.sonar.squidbridge.api.SourceFunction;
 
@@ -40,7 +39,6 @@ import org.sonar.squidbridge.api.SourceFunction;
   coeff = "1min",
   offset = "10min",
   effortToFixDescription = "per complexity point above the threshold")
-@ActivatedByDefault
 public class FunctionComplexityCheck extends PythonCheck {
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 15;
   private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";
