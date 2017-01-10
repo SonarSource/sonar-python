@@ -19,34 +19,13 @@
  */
 package org.sonar.python;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableList;
-import com.sonar.sslr.api.Grammar;
-import java.io.File;
 import org.junit.Test;
 import org.sonar.python.api.PythonMetric;
-import org.sonar.squidbridge.AstScanner;
 import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.api.SourceProject;
-import org.sonar.squidbridge.indexer.QueryByType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonAstScannerTest {
-
-  @Test
-  public void files() {
-    AstScanner<Grammar> scanner = PythonAstScanner.create(new PythonConfiguration(Charsets.UTF_8));
-    scanner.scanFiles(ImmutableList.of(new File("src/test/resources/metrics/lines.py"), new File("src/test/resources/metrics/lines_of_code.py")));
-    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
-    assertThat(project.getInt(PythonMetric.FILES)).isEqualTo(2);
-  }
-
-  @Test
-  public void lines() {
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/metrics/lines.py");
-    assertThat(file.getInt(PythonMetric.LINES)).isEqualTo(6);
-  }
 
   @Test
   public void statements() {
