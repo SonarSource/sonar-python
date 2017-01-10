@@ -181,8 +181,6 @@ public final class PythonSquidSensor implements Sensor {
   }
 
   private void saveMeasures(InputFile inputFile, SourceFile squidFile) {
-    saveMetricOnFile(inputFile, CoreMetrics.FILES, squidFile.getInt(PythonMetric.FILES));
-    saveMetricOnFile(inputFile, CoreMetrics.LINES, squidFile.getInt(PythonMetric.LINES));
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, squidFile.getInt(PythonMetric.LINES_OF_CODE));
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, squidFile.getInt(PythonMetric.STATEMENTS));
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, squidFile.getInt(PythonMetric.FUNCTIONS));
