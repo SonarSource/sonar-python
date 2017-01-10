@@ -24,6 +24,8 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
+import java.io.File;
+import java.util.Collection;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonMetric;
@@ -40,13 +42,9 @@ import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceFunction;
 import org.sonar.squidbridge.api.SourceProject;
 import org.sonar.squidbridge.indexer.QueryByType;
-import org.sonar.squidbridge.metrics.CommentsVisitor;
 import org.sonar.squidbridge.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.metrics.CounterVisitor;
 import org.sonar.squidbridge.metrics.LinesVisitor;
-
-import java.io.File;
-import java.util.Collection;
 
 public final class PythonAstScanner {
 
@@ -56,6 +54,7 @@ public final class PythonAstScanner {
   /**
    * Helper method for testing checks without having to deploy them on a Sonar instance.
    */
+  @SuppressWarnings("unchecked")
   public static SourceFile scanSingleFile(String path, SquidAstVisitor<Grammar>... visitors) {
     File file = new File(path);
     if (!file.isFile()) {
@@ -86,7 +85,7 @@ public final class PythonAstScanner {
 
     setMethodAnalyser(builder);
 
-    setMetrics(conf, builder);
+    setMetrics(builder);
 
     /* External visitors (typically Check ones) */
     for (SquidAstVisitor<Grammar> visitor : visitors) {
@@ -99,9 +98,8 @@ public final class PythonAstScanner {
     return builder.build();
   }
 
-  private static void setMetrics(PythonConfiguration conf, AstScanner.Builder<Grammar> builder) {
+  private static void setMetrics(AstScanner.Builder<Grammar> builder) {
     builder.withSquidAstVisitor(new LinesVisitor<Grammar>(PythonMetric.LINES));
-    builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<Grammar>(PythonMetric.LINES_OF_CODE));
     AstNodeType[] complexityAstNodeType = new AstNodeType[]{
       // Entry points
       PythonGrammar.FUNCDEF,
@@ -119,15 +117,12 @@ public final class PythonAstScanner {
       PythonKeyword.AND,
       PythonKeyword.OR
     };
+
     builder.withSquidAstVisitor(ComplexityVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.COMPLEXITY)
       .subscribeTo(complexityAstNodeType)
       .build());
 
-    builder.withSquidAstVisitor(CommentsVisitor.<Grammar>builder().withCommentMetric(PythonMetric.COMMENT_LINES)
-      .withNoSonar(true)
-      .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
-      .build());
     builder.withSquidAstVisitor(CounterVisitor.<Grammar>builder()
       .setMetricDef(PythonMetric.STATEMENTS)
       .subscribeTo(PythonGrammar.STATEMENT)

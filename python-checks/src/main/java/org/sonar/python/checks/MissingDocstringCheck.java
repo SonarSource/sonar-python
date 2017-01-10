@@ -22,12 +22,11 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.DocstringExtractor;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 @Rule(
@@ -59,64 +58,33 @@ public class MissingDocstringCheck extends PythonCheck {
 
   @Override
   public void init() {
-    subscribeTo(PythonGrammar.FILE_INPUT, PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF);
+    DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (astNode.is(PythonGrammar.FILE_INPUT)) {
-      visitModule(astNode);
-    }
-    if (astNode.is(PythonGrammar.FUNCDEF)) {
-      visitFuncDef(astNode);
-    }
-    if (astNode.is(PythonGrammar.CLASSDEF)) {
-      visitClassDef(astNode);
-    }
-  }
-
-  private void visitModule(AstNode astNode) {
-    AstNode firstStatement = astNode.getFirstChild(PythonGrammar.STATEMENT);
-    AstNode firstSimpleStmt = null;
-    if (firstStatement != null) {
-      firstSimpleStmt = firstSimpleStmt(firstStatement);
-    }
-    checkSimpleStmt(astNode, firstSimpleStmt, DeclarationType.MODULE);
-  }
-
-  private void visitClassDef(AstNode astNode) {
-    checkFirstSuite(astNode, DeclarationType.CLASS);
-  }
-
-  private void visitFuncDef(AstNode astNode) {
-    // on methods we check only empty docstrings to avoid false positives on overriding methods
-    if (!CheckUtils.isMethodDefinition(astNode)) {
-      checkFirstSuite(astNode, DeclarationType.FUNCTION);
-    } else {
-      checkFirstSuite(astNode, DeclarationType.METHOD);
-    }
-  }
-
-  private void checkFirstSuite(AstNode astNode, DeclarationType type) {
-    AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
-    AstNode firstStatement = suite.getFirstChild(PythonGrammar.STATEMENT);
-    AstNode firstSimpleStmt;
-    if (firstStatement == null) {
-      firstSimpleStmt = suite
-        .getFirstChild(PythonGrammar.STMT_LIST)
-        .getFirstChild(PythonGrammar.SIMPLE_STMT);
-    } else {
-      firstSimpleStmt = firstSimpleStmt(firstStatement);
-    }
-    checkSimpleStmt(astNode, firstSimpleStmt, type);
-  }
-
-  private void checkSimpleStmt(AstNode astNode, @Nullable AstNode firstSimpleStmt, DeclarationType type) {
-    if (firstSimpleStmt != null) {
-      visitFirstStatement(astNode, firstSimpleStmt, type);
-    } else {
+    DeclarationType type = getType(astNode);
+    Token docstring = DocstringExtractor.extractDocstring(astNode);
+    if (docstring == null) {
       raiseIssueNoDocstring(astNode, type);
+    } else if (EMPTY_STRING_REGEXP.matcher(docstring.getValue()).matches()) {
+      raiseIssue(astNode, MESSAGE_EMPTY_DOCSTRING, type);
     }
+  }
+
+  private static DeclarationType getType(AstNode node) {
+    if (node.is(PythonGrammar.FILE_INPUT)) {
+      return DeclarationType.MODULE;
+    } else if (node.is(PythonGrammar.FUNCDEF)) {
+      if (CheckUtils.isMethodDefinition(node)) {
+        return DeclarationType.METHOD;
+      } else {
+        return DeclarationType.FUNCTION;
+      }
+    } else if (node.is(PythonGrammar.CLASSDEF)) {
+      return DeclarationType.CLASS;
+    }
+    return null;
   }
 
   private void raiseIssueNoDocstring(AstNode astNode, DeclarationType type) {
@@ -136,25 +104,6 @@ public class MissingDocstringCheck extends PythonCheck {
 
   private static AstNode getNameNode(AstNode astNode) {
     return astNode.getFirstChild(PythonGrammar.FUNCNAME, PythonGrammar.CLASSNAME);
-  }
-
-  private void visitFirstStatement(AstNode astNode, AstNode firstSimpleStmt, DeclarationType type) {
-    Token token = firstSimpleStmt.getToken();
-    if (token.getType().equals(PythonTokenType.STRING)){
-      if (EMPTY_STRING_REGEXP.matcher(token.getValue()).matches()){
-        raiseIssue(astNode, MESSAGE_EMPTY_DOCSTRING, type);
-      }
-    } else {
-      raiseIssueNoDocstring(astNode, type);
-    }
-  }
-
-  private static AstNode firstSimpleStmt(AstNode statement) {
-    AstNode stmtList = statement.getFirstChild(PythonGrammar.STMT_LIST);
-    if (stmtList != null) {
-      return stmtList.getFirstChild(PythonGrammar.SIMPLE_STMT);
-    }
-    return null;
   }
 
 }

@@ -43,6 +43,7 @@ public class MissingDocstringCheckTest {
   }
 
   private void testMissingDocStringAtModuleLevel(String fileName) {
+    @SuppressWarnings("unchecked")
     SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/" + fileName, new MissingDocstringCheck());
     CheckMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(null).withMessage("Add a docstring to this module.")

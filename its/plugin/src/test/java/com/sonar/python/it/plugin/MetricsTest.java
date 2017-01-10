@@ -153,7 +153,7 @@ public class MetricsTest {
       .doesNotContain("1=1")
       .contains("5=1");
     assertThat(getFileMeasure("comment_lines_data").getData())
-      .contains("1=1")
+      .contains("2=1")
       .doesNotContain("4=1");
   }
 
