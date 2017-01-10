@@ -19,29 +19,35 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.io.Files;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.List;
+import java.nio.file.Files;
+import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.CharsetAwareVisitor;
+import org.sonar.squidbridge.SquidAstVisitorContext;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = TrailingWhitespaceCheck.CHECK_KEY,
-    priority = Priority.MINOR,
     name = "Lines should not end with trailing whitespaces",
+    priority = Priority.MINOR,
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
 public class TrailingWhitespaceCheck extends SquidCheck<Grammar> implements CharsetAwareVisitor {
   public static final String CHECK_KEY = "S1131";
   public static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
+
+  private static final Pattern TRAILING_WS = Pattern.compile("\\s$");
+
   private Charset charset;
 
   @Override
@@ -51,16 +57,19 @@ public class TrailingWhitespaceCheck extends SquidCheck<Grammar> implements Char
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
-    List<String> lines;
-    try {
-      lines = Files.readLines(getContext().getFile(), charset);
-    } catch (IOException e) {
-      throw new IllegalStateException("Could not read " + getContext().getFile(), e);
-    }
-    for (int i = 0; i < lines.size(); i++) {
-      if (lines.get(i).matches(".*\\s$")) {
-        getContext().createLineViolation(this, MESSAGE, i + 1);
+    final SquidAstVisitorContext<Grammar> context = getContext();
+    final File file = context.getFile();
+    try (BufferedReader reader = Files.newBufferedReader(file.toPath(), charset)) {
+      int lineNr = 0;
+      String line;
+      while ((line = reader.readLine()) != null) {
+        ++lineNr;
+        if (TRAILING_WS.matcher(line).find()) {
+          context.createLineViolation(this, MESSAGE, lineNr);
+        }
       }
+    } catch (IOException e) {
+      throw new IllegalStateException("Could not read " + file, e);
     }
   }
 
