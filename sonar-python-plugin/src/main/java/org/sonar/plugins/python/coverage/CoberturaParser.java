@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.EmptyReportException;
+import org.sonar.plugins.python.parser.StaxParser;
 
 public class CoberturaParser {
 

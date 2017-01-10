@@ -124,6 +124,7 @@ public class PythonCoverageSensorTest {
     assertThat(context.conditions(FILE2_KEY, CoverageType.UNIT, 3)).isEqualTo(2);
     assertThat(context.coveredConditions(FILE2_KEY, CoverageType.UNIT, 3)).isEqualTo(1);
   }
+
   @Test
   public void test_unresolved_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
@@ -160,6 +161,12 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context, linesOfCode);
   }
 
+  @Test(expected = IllegalStateException.class)
+  public void should_fail_on_unexpected_eof() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_eof_error.xml");
+    coverageSensor.execute(context, linesOfCode);
+  }
+
   @Test
   public void should_do_nothing_on_empty_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "empty-coverage-result.xml");
@@ -168,4 +175,5 @@ public class PythonCoverageSensorTest {
 
     assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isNull();
   }
+
 }

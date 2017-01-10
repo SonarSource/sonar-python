@@ -52,6 +52,10 @@
       <artifactId>commons-lang</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>woodstox-core-lgpl</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-project</artifactId>
     </dependency>
@@ -97,8 +101,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <minsize>2900000</minsize>
-                  <maxsize>3100000</maxsize>
+                  <minsize>3600000</minsize>
+                  <maxsize>3800000</maxsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

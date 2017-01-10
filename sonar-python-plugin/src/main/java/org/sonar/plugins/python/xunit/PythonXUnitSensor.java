@@ -33,8 +33,8 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.python.PythonReportSensor;
+import org.sonar.plugins.python.parser.StaxParser;
 
 public class PythonXUnitSensor extends PythonReportSensor {
   private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
@@ -68,7 +68,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   private static void simpleMode(final SensorContext context, List<File> reports) throws XMLStreamException {
     TestSuiteParser parserHandler = new TestSuiteParser();
-    StaxParser parser = new StaxParser(parserHandler, false);
+    StaxParser parser = new StaxParser(parserHandler);
     for (File report : reports) {
       parser.parse(report);
     }
@@ -98,7 +98,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
   private void detailedMode(final SensorContext context, List<File> reports) throws XMLStreamException {
     for (File report : reports) {
       TestSuiteParser parserHandler = new TestSuiteParser();
-      StaxParser parser = new StaxParser(parserHandler, false);
+      StaxParser parser = new StaxParser(parserHandler);
       parser.parse(report);
 
       LOG.info("Processing report '{}'", report);
