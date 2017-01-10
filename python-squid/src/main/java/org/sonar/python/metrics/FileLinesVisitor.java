@@ -19,6 +19,7 @@
  */
 package org.sonar.python.metrics;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
@@ -26,7 +27,6 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.api.batch.fs.FileSystem;
@@ -77,8 +77,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
   @Override
   public void visitFile(AstNode astNode) {
-    noSonar = new HashSet<>();
-    linesOfComments = new HashSet<>();
+    noSonar.clear();
+    linesOfCode.clear();
+    linesOfComments.clear();
+    linesOfDocstring.clear();
     seenFirstToken = false;
   }
 
@@ -148,7 +150,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
     // account for the docstring lines
-    correctLinesOfCodeAndLineOfComments(linesOfCode, linesOfComments, linesOfDocstring);
+    for (Integer line : linesOfDocstring) {
+      linesOfCode.remove(line);
+      linesOfComments.add(line);
+    }
 
     int fileLength = getContext().peekSourceCode().getInt(PythonMetric.LINES);
     for (int line = 1; line <= fileLength; line++) {
@@ -161,21 +166,11 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     }
     fileLinesContext.save();
 
-    allLinesOfCode.put(inputFile, linesOfCode);
+    allLinesOfCode.put(inputFile, ImmutableSet.copyOf(linesOfCode));
 
     getContext().peekSourceCode().add(PythonMetric.COMMENT_LINES, linesOfComments.size());
 
     ((SourceFile) getContext().peekSourceCode()).addNoSonarTagLines(noSonar);
-
-    linesOfCode = Sets.newHashSet();
-    linesOfComments = Sets.newHashSet();
-  }
-
-  private static void correctLinesOfCodeAndLineOfComments(Set<Integer> linesOfCode, Set<Integer> linesOfComments, Set<Integer> linesOfDosctring) {
-    for (Integer line : linesOfDosctring) {
-      linesOfCode.remove(line);
-      linesOfComments.add(line);
-    }
   }
 
 }
