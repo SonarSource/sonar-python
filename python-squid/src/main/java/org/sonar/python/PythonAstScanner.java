@@ -108,9 +108,6 @@ public final class PythonAstScanner {
       // Note that IF_STMT covered by PythonKeyword.IF below
       PythonGrammar.WHILE_STMT,
       PythonGrammar.FOR_STMT,
-      PythonGrammar.RETURN_STMT,
-      PythonGrammar.RAISE_STMT,
-      PythonGrammar.EXCEPT_CLAUSE,
 
       // Expressions
       PythonKeyword.IF,

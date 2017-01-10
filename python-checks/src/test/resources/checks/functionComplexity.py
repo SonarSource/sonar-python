@@ -1,6 +1,6 @@
 expression = 3
 
-def hello(): # Noncompliant [[effortToFix=3]] {{Function has a complexity of 5 which is greater than 2 authorized.}}
+def hello(): # Noncompliant [[effortToFix=2]] {{Function has a complexity of 4 which is greater than 2 authorized.}}
 #   ^^^^^
     if expression:
         pass
@@ -11,4 +11,6 @@ def hello(): # Noncompliant [[effortToFix=3]] {{Function has a complexity of 5 w
     return
 
 def hello2():
+    if expression:
+        pass
     return
