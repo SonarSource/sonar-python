@@ -32,6 +32,7 @@ public final class CheckList {
 
   public static Iterable<Class> getChecks() {
     return ImmutableList.<Class>of(
+        CognitiveComplexityFunctionCheck.class,
         ParsingErrorCheck.class,
         CommentRegularExpressionCheck.class,
         LineLengthCheck.class,
