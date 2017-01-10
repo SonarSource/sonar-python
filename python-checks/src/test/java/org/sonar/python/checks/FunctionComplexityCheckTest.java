@@ -31,4 +31,10 @@ public class FunctionComplexityCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/functionComplexity.py", check);
   }
 
+  @Test
+  public void test_with_default_threshold() {
+    FunctionComplexityCheck check = new FunctionComplexityCheck();
+    PythonCheckVerifier.verify("src/test/resources/checks/functionComplexityWithDefaultThreshold.py", check);
+  }
+
 }
