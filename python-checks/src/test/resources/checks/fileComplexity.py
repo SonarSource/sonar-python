@@ -1,7 +1,10 @@
-if expression:
+expression = 3 # Noncompliant@-1 [[effortToFix=3]] {{File has a complexity of 5 which is greater than 2 authorized.}}
+
+def fun():
+  if expression:
     pass
-if expression:
+  if expression:
     pass
-if expression:
+  if expression:
     pass
-return
+  return

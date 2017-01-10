@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import java.io.File;
-import java.util.Iterator;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.fs.InputFile;
@@ -41,6 +39,9 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.python.checks.CheckList;
+
+import java.io.File;
+import java.util.Iterator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -98,12 +99,15 @@ public class PythonSquidSensorTest {
       .activate()
       .create(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
       .activate()
+      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "FileComplexity"))
+      .setParam("maximumFileComplexityThreshold", "2")
+      .activate()
       .build();
 
     InputFile inputFile = inputFile("file2.py");
     sensor().execute(context);
 
-    assertThat(context.allIssues()).hasSize(2);
+    assertThat(context.allIssues()).hasSize(3);
     Iterator<Issue> issuesIterator = context.allIssues().iterator();
 
     int checkedIssues = 0;
@@ -112,24 +116,31 @@ public class PythonSquidSensorTest {
       Issue issue = issuesIterator.next();
       IssueLocation issueLocation = issue.primaryLocation();
       assertThat(issueLocation.inputComponent()).isEqualTo(inputFile);
-      assertThat(issue.gap()).isNull();
 
       if (issue.ruleKey().rule().equals("S134")) {
         assertThat(issueLocation.message()).isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
         assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(7, 16, 7, 18));
         assertThat(issue.flows()).hasSize(4);
+        assertThat(issue.gap()).isNull();
         checkedIssues++;
-      }
-
-      if (issue.ruleKey().rule().equals("OneStatementPerLine")) {
+      } else if (issue.ruleKey().rule().equals("OneStatementPerLine")) {
         assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
         assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
         assertThat(issue.flows()).isEmpty();
+        assertThat(issue.gap()).isNull();
         checkedIssues++;
+      } else if (issue.ruleKey().rule().equals("FileComplexity")) {
+        assertThat(issueLocation.message()).isEqualTo("File has a complexity of 5 which is greater than 2 authorized.");
+        assertThat(issueLocation.textRange()).isNull();
+        assertThat(issue.flows()).isEmpty();
+        assertThat(issue.gap()).isEqualTo(3.0);
+        checkedIssues++;
+      } else {
+        throw new IllegalStateException();
       }
     }
 
-    assertThat(checkedIssues).isEqualTo(2);
+    assertThat(checkedIssues).isEqualTo(3);
   }
 
   private PythonSquidSensor sensor() {

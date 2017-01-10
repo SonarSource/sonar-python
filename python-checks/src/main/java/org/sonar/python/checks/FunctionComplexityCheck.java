@@ -31,25 +31,24 @@ import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 import org.sonar.squidbridge.api.SourceFunction;
 
 @Rule(
-    key = FunctionComplexityCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Functions should not be too complex",
-    tags = Tags.BRAIN_OVERLOAD
+  key = "FunctionComplexity",
+  name = "Functions should not be too complex",
+  priority = Priority.MAJOR,
+  tags = Tags.BRAIN_OVERLOAD
 )
 @SqaleLinearWithOffsetRemediation(
-    coeff = "1min",
-    offset = "10min",
-    effortToFixDescription = "per complexity point above the threshold")
+  coeff = "1min",
+  offset = "10min",
+  effortToFixDescription = "per complexity point above the threshold")
 @ActivatedByDefault
 public class FunctionComplexityCheck extends PythonCheck {
-  public static final String CHECK_KEY = "FunctionComplexity";
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 20;
   private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";
 
   @RuleProperty(
     key = "maximumFunctionComplexityThreshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD)
-  private int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
+  int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 
   @Override
   public void init() {
@@ -62,12 +61,9 @@ public class FunctionComplexityCheck extends PythonCheck {
     int complexity = function.getInt(PythonMetric.COMPLEXITY);
     if (complexity > maximumFunctionComplexityThreshold) {
       String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
-      addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message);
+      addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message)
+        .withCost(complexity - maximumFunctionComplexityThreshold);
     }
-  }
-
-  public void setMaximumFunctionComplexityThreshold(int threshold) {
-    this.maximumFunctionComplexityThreshold = threshold;
   }
 
 }

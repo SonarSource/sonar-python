@@ -31,23 +31,22 @@ import org.sonar.squidbridge.api.SourceClass;
 import org.sonar.squidbridge.checks.ChecksHelper;
 
 @Rule(
-    key = ClassComplexityCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Classes should not be too complex",
-    status = "DEPRECATED",
-    tags = Tags.BRAIN_OVERLOAD
+  key = "ClassComplexity",
+  name = "Classes should not be too complex",
+  priority = Priority.MAJOR,
+  status = "DEPRECATED",
+  tags = Tags.BRAIN_OVERLOAD
 )
 @SqaleLinearWithOffsetRemediation(
-    coeff = "1min",
-    offset = "10min",
-    effortToFixDescription = "per complexity point over the threshold")
+  coeff = "1min",
+  offset = "10min",
+  effortToFixDescription = "per complexity point over the threshold")
 public class ClassComplexityCheck extends PythonCheck {
-  public static final String CHECK_KEY = "ClassComplexity";
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
   private static final String MESSAGE = "Class has a complexity of %s which is greater than %s authorized.";
 
   @RuleProperty(key = "maximumClassComplexityThreshold", defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
-  private int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
+  int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
 
   @Override
   public void init() {
@@ -60,12 +59,9 @@ public class ClassComplexityCheck extends PythonCheck {
     int complexity = ChecksHelper.getRecursiveMeasureInt(sourceClass, PythonMetric.COMPLEXITY);
     if (complexity > maximumClassComplexityThreshold) {
       String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
-      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), message);
+      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), message)
+        .withCost(complexity - maximumClassComplexityThreshold);
     }
-  }
-
-  public void setMaximumClassComplexityThreshold(int threshold) {
-    this.maximumClassComplexityThreshold = threshold;
   }
 
 }

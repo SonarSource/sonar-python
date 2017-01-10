@@ -20,49 +20,47 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.checks.ChecksHelper;
-import org.sonar.squidbridge.checks.SquidCheck;
+
+import java.text.MessageFormat;
 
 @Rule(
-    key = FileComplexityCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Files should not be too complex",
-    tags = Tags.BRAIN_OVERLOAD
+  key = "FileComplexity",
+  name = "Files should not be too complex",
+  priority = Priority.MAJOR,
+  tags = Tags.BRAIN_OVERLOAD
 )
 @SqaleLinearWithOffsetRemediation(
-    coeff = "1min",
-    offset = "30min",
-    effortToFixDescription = "per complexity point above the threshold")
-public class FileComplexityCheck extends SquidCheck<Grammar> {
-  public static final String CHECK_KEY = "FileComplexity";
+  coeff = "1min",
+  offset = "30min",
+  effortToFixDescription = "per complexity point above the threshold")
+public class FileComplexityCheck extends PythonCheck {
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 200;
 
   @RuleProperty(
     key = "maximumFileComplexityThreshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD)
-  private int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
+  int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
 
   @Override
   public void leaveFile(AstNode astNode) {
     SourceFile sourceFile = (SourceFile) getContext().peekSourceCode();
     int complexity = ChecksHelper.getRecursiveMeasureInt(sourceFile, PythonMetric.COMPLEXITY);
     if (complexity > maximumFileComplexityThreshold) {
-      getContext().createFileViolation(this,
-          "File has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
-          complexity,
-          maximumFileComplexityThreshold);
+      String message = MessageFormat.format(
+        "File has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
+        complexity,
+        maximumFileComplexityThreshold);
+      addFileIssue(message)
+        .withCost(complexity - maximumFileComplexityThreshold);
     }
-  }
-
-  public void setMaximumFileComplexityThreshold(int threshold) {
-    this.maximumFileComplexityThreshold = threshold;
   }
 
 }

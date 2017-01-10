@@ -27,7 +27,7 @@ public class ClassComplexityCheckTest {
   @Test
   public void test() {
     ClassComplexityCheck check = new ClassComplexityCheck();
-    check.setMaximumClassComplexityThreshold(2);
+    check.maximumClassComplexityThreshold = 2;
     PythonCheckVerifier.verify("src/test/resources/checks/classComplexity.py", check);
   }
 

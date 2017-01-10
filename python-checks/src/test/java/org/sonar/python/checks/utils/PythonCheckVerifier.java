@@ -129,9 +129,9 @@ public class PythonCheckVerifier extends SquidCheck<Grammar> implements AstAndTo
         int issueLine = trivia.getToken().getLine();
         String paramsAndMessage = text.substring(marker.length()).trim();
 
-        if (paramsAndMessage.startsWith("@+")) {
+        if (paramsAndMessage.startsWith("@")) {
           String[] spaceSplit = paramsAndMessage.split("[\\s\\[{]", 2);
-          issueLine += Integer.valueOf(spaceSplit[0].substring(2));
+          issueLine += Integer.valueOf(spaceSplit[0].substring(1));
           paramsAndMessage = spaceSplit.length > 1 ? spaceSplit[1] : "";
         }
 
