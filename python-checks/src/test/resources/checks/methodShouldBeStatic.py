@@ -95,6 +95,10 @@ class A:
         if True:
             raise NotImplementedError
 
+    # raise issue, as the error is unlikely to be a NotImplementedError
+    def fun24(slf): # Noncompliant
+        raise
+
     # raise issue, as the error is not a NotImplementedError 
     def fun24(slf): # Noncompliant
         raise ValueError('Some error')

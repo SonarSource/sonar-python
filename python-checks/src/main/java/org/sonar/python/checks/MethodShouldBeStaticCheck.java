@@ -94,7 +94,7 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
   private static boolean raisesNotImplementedError(AstNode statementList) {
     if (isRaise(statementList)) {
       AstNode testStatement = statementList.getFirstDescendant(PythonGrammar.TEST);
-      if ("NotImplementedError".equals(testStatement.getToken().getValue())) {
+      if (testStatement != null && "NotImplementedError".equals(testStatement.getToken().getValue())) {
         return true;
       }
     }
