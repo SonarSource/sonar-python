@@ -7,11 +7,9 @@ def function_with_docstring():
 	pass
 
 def function_without_docstring():
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^
 	pass
 
 def function_with_empty_docstring():
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	""" """
 	pass
 
@@ -24,7 +22,6 @@ class ClassWithDocstring:
 	pass
 
 class ClassWithoutDocstring:
-#     ^^^^^^^^^^^^^^^^^^^^^
 	def method_with_docstring():
 		''' This is a method docstring '''
 		pass

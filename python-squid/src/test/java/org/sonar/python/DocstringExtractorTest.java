@@ -31,7 +31,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DocstringVisitorTest {
+public class DocstringExtractorTest {
 
   private static final File BASE_DIR = new File("src/test/resources");
 
@@ -47,10 +47,10 @@ public class DocstringVisitorTest {
 
     assertDocstring(PythonGrammar.FILE_INPUT, 1, TRIPLE_QUOTES + "\nThis is a module docstring\n" + TRIPLE_QUOTES);
     assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES);
-    assertDocstring(PythonGrammar.FUNCDEF, 13, TRIPLE_QUOTES + " " + TRIPLE_QUOTES);
-    assertDocstring(PythonGrammar.FUNCDEF, 18, "\"This is a function docstring\"");
-    assertDocstring(PythonGrammar.CLASSDEF, 22, TRIPLE_QUOTES + "This is a class docstring" + TRIPLE_QUOTES);
-    assertDocstring(PythonGrammar.FUNCDEF, 28, "''' This is a method docstring '''");
+    assertDocstring(PythonGrammar.FUNCDEF, 12, TRIPLE_QUOTES + " " + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FUNCDEF, 16, "\"This is a function docstring\"");
+    assertDocstring(PythonGrammar.CLASSDEF, 20, TRIPLE_QUOTES + "This is a class docstring" + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FUNCDEF, 25, "''' This is a method docstring '''");
 
     assertThat(docstrings).hasSize(10);
     assertThat(docstrings.values().stream().filter(ds -> ds != null)).hasSize(6);

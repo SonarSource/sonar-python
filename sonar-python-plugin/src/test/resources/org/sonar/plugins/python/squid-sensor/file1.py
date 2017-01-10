@@ -1,5 +1,10 @@
 # Integers
 00000
+1111L
+0x10000L
+0X1111
+0b1111L
+0o12345
 # strings
 u"lala"
 print # the grammar used should recognize this as builtin

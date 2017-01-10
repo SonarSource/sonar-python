@@ -58,7 +58,7 @@ public class FileLinesVisitorTest {
     DefaultInputFile inputFile = initFile("file_lines.py");
 
     HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false, false);
+    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false);
 
     PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
 
@@ -66,25 +66,7 @@ public class FileLinesVisitorTest {
     assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
 
     verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
-    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 11, 13, 14, 17, 18, 18, 19, 20);
-    verify(fileLinesContext).save();
-    verifyNoMoreInteractions(fileLinesContext);
-  }
-
-  @Test
-  public void test_nosonar() {
-    DefaultInputFile inputFile = initFile("file_lines_nosonar.py");
-
-    HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, true, false);
-
-    PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
-
-    assertThat(linesOfCode).hasSize(1);
-    assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(1, 3, 4);
-
-    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 1, 3, 4);
-    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 4);
+    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 13, 14, 17, 18, 18, 19, 20);
     verify(fileLinesContext).save();
     verifyNoMoreInteractions(fileLinesContext);
   }
@@ -94,7 +76,7 @@ public class FileLinesVisitorTest {
     DefaultInputFile inputFile = initFile("file_lines_header_comments.py");
 
     HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false, true);
+    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, true);
 
     PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
 

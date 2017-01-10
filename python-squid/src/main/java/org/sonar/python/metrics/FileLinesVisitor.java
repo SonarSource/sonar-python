@@ -50,8 +50,6 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
   private boolean seenFirstToken;
 
-  private final boolean enableNoSonar;
-
   private final boolean ignoreHeaderComments;
 
   private Set<Integer> noSonar = Sets.newHashSet();
@@ -65,12 +63,10 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
       FileLinesContextFactory fileLinesContextFactory,
       FileSystem fileSystem,
       Map<InputFile, Set<Integer>> linesOfCode,
-      boolean enableNoSonar,
       boolean ignoreHeaderComments) {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.fileSystem = fileSystem;
     this.allLinesOfCode = linesOfCode;
-    this.enableNoSonar = enableNoSonar;
     this.ignoreHeaderComments = ignoreHeaderComments;
   }
 
@@ -133,7 +129,7 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     int line = trivia.getToken().getLine();
 
     for (String commentLine : commentLines) {
-      if (enableNoSonar && commentLine.contains("NOSONAR")) {
+      if (commentLine.contains("NOSONAR")) {
         linesOfComments.remove(line);
         noSonar.add(line);
       } else if (!getContext().getCommentAnalyser().isBlank(commentLine) && !noSonar.contains(line)) {
@@ -169,9 +165,7 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
 
     getContext().peekSourceCode().add(PythonMetric.COMMENT_LINES, linesOfComments.size());
 
-    if (enableNoSonar) {
-      ((SourceFile) getContext().peekSourceCode()).addNoSonarTagLines(noSonar);
-    }
+    ((SourceFile) getContext().peekSourceCode()).addNoSonarTagLines(noSonar);
 
     linesOfCode = Sets.newHashSet();
     linesOfComments = Sets.newHashSet();
