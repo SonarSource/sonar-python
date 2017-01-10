@@ -22,14 +22,13 @@ package org.sonar.python;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.Grammar;
+import java.io.File;
 import org.junit.Test;
 import org.sonar.python.api.PythonMetric;
 import org.sonar.squidbridge.AstScanner;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceProject;
 import org.sonar.squidbridge.indexer.QueryByType;
-
-import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,12 +46,6 @@ public class PythonAstScannerTest {
   public void lines() {
     SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/metrics/lines.py");
     assertThat(file.getInt(PythonMetric.LINES)).isEqualTo(6);
-  }
-
-  @Test
-  public void lines_of_code() {
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/metrics/lines_of_code.py");
-    assertThat(file.getInt(PythonMetric.LINES_OF_CODE)).isEqualTo(1);
   }
 
   @Test

@@ -100,7 +100,6 @@ public final class PythonAstScanner {
 
   private static void setMetrics(AstScanner.Builder<Grammar> builder) {
     builder.withSquidAstVisitor(new LinesVisitor<Grammar>(PythonMetric.LINES));
-    builder.withSquidAstVisitor(new PythonLinesOfCodeVisitor<Grammar>(PythonMetric.LINES_OF_CODE));
     AstNodeType[] complexityAstNodeType = new AstNodeType[]{
       // Entry points
       PythonGrammar.FUNCDEF,
