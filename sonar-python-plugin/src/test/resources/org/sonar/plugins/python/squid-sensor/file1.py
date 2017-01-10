@@ -7,12 +7,8 @@
 0o12345
 # strings
 u"lala"
-U"lala"
-r"lala"
-R"lala"
 print # the grammar used should recognize this as builtin
 a = [1,
-     # inline comment
      2, # after comment
      ]
 def foo(): pass
