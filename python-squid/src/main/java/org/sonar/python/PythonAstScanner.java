@@ -44,7 +44,6 @@ import org.sonar.squidbridge.api.SourceProject;
 import org.sonar.squidbridge.indexer.QueryByType;
 import org.sonar.squidbridge.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.metrics.CounterVisitor;
-import org.sonar.squidbridge.metrics.LinesVisitor;
 
 public final class PythonAstScanner {
 
@@ -99,7 +98,6 @@ public final class PythonAstScanner {
   }
 
   private static void setMetrics(AstScanner.Builder<Grammar> builder) {
-    builder.withSquidAstVisitor(new LinesVisitor<Grammar>(PythonMetric.LINES));
     AstNodeType[] complexityAstNodeType = new AstNodeType[]{
       // Entry points
       PythonGrammar.FUNCDEF,

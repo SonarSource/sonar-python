@@ -1,5 +1,0 @@
-#
-# Comment
-#
-
-print("Hello world")
