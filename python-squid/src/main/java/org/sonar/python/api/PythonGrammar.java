@@ -372,7 +372,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(FOR_STMT).is("for", EXPRLIST, "in", TESTLIST, ":", SUITE, b.optional("else", ":", SUITE));
 
     b.rule(TRY_STMT).is("try", ":", SUITE, b.firstOf(
-      b.sequence(b.zeroOrMore(EXCEPT_CLAUSE, ":", SUITE),
+      b.sequence(b.oneOrMore(EXCEPT_CLAUSE, ":", SUITE),
         b.optional("else", ":", SUITE),
         b.optional("finally", ":", SUITE)),
       b.sequence("finally", ":", SUITE)));
