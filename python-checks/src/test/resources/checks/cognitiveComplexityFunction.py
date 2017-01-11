@@ -71,7 +71,7 @@ def for_with_else_complexity():    # Noncompliant [[effortToFix=4]]
             pass
 
 
-def try_except():    # Noncompliant [[effortToFix=8]]
+def try_except():    # Noncompliant [[effortToFix=11]]
     try:
         if condition: # +1
             pass
@@ -79,6 +79,9 @@ def try_except():    # Noncompliant [[effortToFix=8]]
         if condition: # +2
             pass
     except SomeError2: # +1 (nesting level +1)
+        if condition: # +2
+            pass
+    except (SomeError3, SomeError4): # +1 (nesting level +1)
         if condition: # +2
             pass
     finally:
