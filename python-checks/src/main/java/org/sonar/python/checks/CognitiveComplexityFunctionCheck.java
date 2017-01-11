@@ -127,8 +127,10 @@ public class CognitiveComplexityFunctionCheck extends PythonCheck {
       return;
     }
 
-    if (currentFunction.equals(astNode) && complexity > threshold) {
-      raiseIssue();
+    if (currentFunction.equals(astNode)) {
+      if (complexity > threshold){
+        raiseIssue();
+      }
       currentFunction = null;
     }
 
