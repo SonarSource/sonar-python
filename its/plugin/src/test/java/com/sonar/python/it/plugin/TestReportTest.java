@@ -26,14 +26,13 @@ import com.google.common.collect.Maps;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Test;
 
 import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -101,7 +100,6 @@ public class TestReportTest {
     BuildResult result = orchestrator.executeBuildQuietly(createBuild("invalid_report.xml"));
     assertThat(result.isSuccess()).isFalse();
     assertThat(result.getLogs()).contains("Cannot feed the data into sonar");
-    assertProjectMeasures(PROJECT, nullMeasures());
   }
 
   private Map<String, Integer> nullMeasures() {

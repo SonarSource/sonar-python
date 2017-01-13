@@ -24,12 +24,11 @@ import com.google.common.collect.ImmutableMap.Builder;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import org.junit.ClassRule;
-import org.junit.Test;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.ClassRule;
+import org.junit.Test;
 
 import static com.sonar.python.it.plugin.Tests.getProjectMeasure;
 import static org.assertj.core.api.Assertions.assertThat;
