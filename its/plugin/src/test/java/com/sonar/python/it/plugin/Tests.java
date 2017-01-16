@@ -21,17 +21,26 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.locator.FileLocation;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.sonar.wsclient.services.Resource;
-import org.sonar.wsclient.services.ResourceQuery;
+import org.sonarqube.ws.WsMeasures;
+import org.sonarqube.ws.WsMeasures.Measure;
+import org.sonarqube.ws.client.HttpConnector;
+import org.sonarqube.ws.client.WsClient;
+import org.sonarqube.ws.client.WsClientFactories;
+import org.sonarqube.ws.client.measure.ComponentWsRequest;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
-import java.io.File;
-
+import static java.lang.Double.parseDouble;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Suite.class)
@@ -57,15 +66,52 @@ public class Tests {
     .build();
 
   public static Integer getProjectMeasure(String projectKey, String metricKey) {
-    Resource resource = ORCHESTRATOR.getServer().getWsClient().find(ResourceQuery.createForMetrics(projectKey, metricKey));
-    return resource == null ? null : resource.getMeasure(metricKey).getIntValue();
+    return getMeasureAsInt(projectKey, metricKey);
   }
 
   public static void assertProjectMeasures(String projectKey, Map<String, Integer> expected) {
+    Map<String, Measure> measuresByMetricKey = getMeasures(projectKey, new ArrayList<>(expected.keySet()))
+      .stream()
+      .collect(Collectors.toMap(Measure::getMetric, Function.identity()));
     for (Entry<String, Integer> entry : expected.entrySet()) {
       String metric = entry.getKey();
-      assertThat(getProjectMeasure(projectKey, metric)).as(metric).isEqualTo(entry.getValue());
+      Integer expectedValue = entry.getValue();
+      Measure measure = measuresByMetricKey.get(metric);
+      Integer value = measure == null ? null : ((Double) parseDouble(measure.getValue())).intValue();
+      assertThat(value).as(metric).isEqualTo(expectedValue);
     }
+  }
+
+  @CheckForNull
+  static Measure getMeasure(String componentKey, String metricKey) {
+    List<Measure> measures = getMeasures(componentKey, singletonList(metricKey));
+    return measures.size() == 1 ? measures.get(0) : null;
+  }
+
+  @CheckForNull
+  private static List<Measure> getMeasures(String componentKey, List<String> metricKeys) {
+    WsMeasures.ComponentWsResponse response = newWsClient().measures().component(new ComponentWsRequest()
+      .setComponentKey(componentKey)
+      .setMetricKeys(metricKeys));
+    return response.getComponent().getMeasuresList();
+  }
+
+  @CheckForNull
+  static Integer getMeasureAsInt(String componentKey, String metricKey) {
+    Measure measure = getMeasure(componentKey, metricKey);
+    return (measure == null) ? null : Integer.parseInt(measure.getValue());
+  }
+
+  @CheckForNull
+  static Double getMeasureAsDouble(String componentKey, String metricKey) {
+    Measure measure = getMeasure(componentKey, metricKey);
+    return (measure == null) ? null : parseDouble(measure.getValue());
+  }
+
+  private static WsClient newWsClient() {
+    return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
+      .url(ORCHESTRATOR.getServer().getUrl())
+      .build());
   }
 
 }

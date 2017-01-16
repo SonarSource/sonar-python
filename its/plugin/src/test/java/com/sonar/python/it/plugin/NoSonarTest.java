@@ -21,16 +21,12 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.Measure;
-import org.sonar.wsclient.services.Resource;
-import org.sonar.wsclient.services.ResourceQuery;
 
-import java.io.File;
-
+import static com.sonar.python.it.plugin.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSonarTest {
@@ -39,8 +35,6 @@ public class NoSonarTest {
 
   @ClassRule
   public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
-  private static Sonar wsClient;
 
   @BeforeClass
   public static void startServer() {
@@ -53,20 +47,16 @@ public class NoSonarTest {
       .setProjectVersion("1.0-SNAPSHOT")
       .setSourceDirs(".");
     orchestrator.executeBuild(build);
-
-    wsClient = orchestrator.getServer().getWsClient();
   }
 
   @Test
   public void test_nosonar() {
-    assertThat(getProjectMeasure("violations").getValue()).isEqualTo(1.0);
+    assertThat(getProjectMeasureAsInt("violations")).isEqualTo(1);
   }
-
 
   /* Helper methods */
 
-  private Measure getProjectMeasure(String metricKey) {
-    Resource resource = wsClient.find(ResourceQuery.createForMetrics(PROJECT_KEY, metricKey));
-    return resource == null ? null : resource.getMeasure(metricKey);
+  private Integer getProjectMeasureAsInt(String metricKey) {
+    return getMeasureAsInt(PROJECT_KEY, metricKey);
   }
 }
