@@ -1,7 +1,7 @@
 def zero_complexity():
     pass
 
-def if_else_complexity(): # Noncompliant [[effortToFix=3;secondary=+2,+4,+6]] {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+def if_else_complexity(): # Noncompliant [[effortToFix=3;secondary=+2,+4,+6]] {{Refactor this function to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
 #   ^^^^^^^^^^^^^^^^^^
     if condition:   # +1
         pass
