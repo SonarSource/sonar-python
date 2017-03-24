@@ -19,20 +19,22 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.google.common.collect.ImmutableMap;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.SonarClient;
 import org.sonar.wsclient.issue.Issue;
 import org.sonar.wsclient.issue.IssueQuery;
+import org.sonarqube.ws.QualityProfiles;
+import org.sonarqube.ws.client.PostRequest;
+import org.sonarqube.ws.client.qualityprofile.SearchWsRequest;
 
+import static com.sonar.python.it.plugin.Tests.newAdminWsClient;
+import static com.sonar.python.it.plugin.Tests.newWsClient;
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class XPathRuleTest {
@@ -55,27 +57,7 @@ public class XPathRuleTest {
 
   @Test
   public void testXPathRule() {
-    SonarClient sonarClient = orchestrator.getServer().adminWsClient();
-    sonarClient.post("/api/rules/create", ImmutableMap.<String, Object>builder()
-      .put("name", "XPathTestRule")
-      .put("markdown_description", "XPath test rule")
-      .put("severity", "INFO")
-      .put("status", "READY")
-      .put("template_key", "python:XPath")
-      .put("custom_key", RULE_KEY)
-      .put("prevent_reactivation", "true")
-      .put("params", "message=\"Do something fantastic!\";xpathQuery=\"//FILE_INPUT\"")
-      .build());
-    String profiles = sonarClient.get("api/rules/app");
-    Pattern pattern = Pattern.compile("py-" + PROFILE_NAME + "-\\d+");
-    Matcher matcher = pattern.matcher(profiles);
-    assertThat(matcher.find()).isTrue();
-    String profilekey = matcher.group();
-    sonarClient.post("api/qualityprofiles/activate_rule", ImmutableMap.<String, Object>of(
-      "profile_key", profilekey,
-      "rule_key", RULE_KEY_WITH_PREFIX,
-      "severity", "INFO",
-      "params", ""));
+    createAndActivateRuleFromTemplate();
 
     orchestrator.getServer().provisionProject(PROJECT, PROJECT);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT, "py", PROFILE_NAME);
@@ -98,6 +80,30 @@ public class XPathRuleTest {
   private List<Issue> getIssues(String ruleKey) {
     IssueQuery query = IssueQuery.create().componentRoots(PROJECT).rules(ruleKey);
     return orchestrator.getServer().wsClient().issueClient().find(query).list();
+  }
+
+  private void createAndActivateRuleFromTemplate() {
+    String language = "py";
+    newAdminWsClient().wsConnector().call(new PostRequest("api/rules/create")
+      .setParam("name", "XPathTestRule")
+      .setParam("markdown_description", "XPath test rule")
+      .setParam("severity", "INFO")
+      .setParam("status", "READY")
+      .setParam("template_key", "python:XPath")
+      .setParam("custom_key", RULE_KEY)
+      .setParam("prevent_reactivation", "true")
+      .setParam("params", "message=\"Do something fantastic!\";xpathQuery=\"//FILE_INPUT\"")).failIfNotSuccessful();
+
+    QualityProfiles.SearchWsResponse.QualityProfile qualityProfile = newWsClient().qualityProfiles().search(new SearchWsRequest()).getProfilesList().stream()
+      .filter(qp -> qp.getLanguage().equals(language))
+      .filter(qp -> qp.getName().equals(PROFILE_NAME))
+      .findFirst().orElseThrow(() -> new IllegalStateException(format("Could not find quality profile '%s' for language '%s' ", PROFILE_NAME, language)));
+    String profileKey = qualityProfile.getKey();
+
+    newAdminWsClient().wsConnector().call(new PostRequest("api/qualityprofiles/activate_rule")
+      .setParam("profile_key", profileKey)
+      .setParam("rule_key", RULE_KEY_WITH_PREFIX)
+      .setParam("severity", "INFO")).failIfNotSuccessful();
   }
 
 }

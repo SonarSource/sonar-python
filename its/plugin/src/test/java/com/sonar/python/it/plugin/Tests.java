@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -39,6 +40,8 @@ import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.measure.ComponentWsRequest;
 
+import static com.sonar.orchestrator.container.Server.ADMIN_LOGIN;
+import static com.sonar.orchestrator.container.Server.ADMIN_PASSWORD;
 import static java.lang.Double.parseDouble;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -108,9 +111,18 @@ public class Tests {
     return (measure == null) ? null : parseDouble(measure.getValue());
   }
 
-  private static WsClient newWsClient() {
+  protected static WsClient newWsClient() {
+    return newWsClient(null, null);
+  }
+
+  protected static WsClient newAdminWsClient() {
+    return newWsClient(ADMIN_LOGIN, ADMIN_PASSWORD);
+  }
+
+  protected static WsClient newWsClient(@Nullable String login, @Nullable String password) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(ORCHESTRATOR.getServer().getUrl())
+      .credentials(login, password)
       .build());
   }
 

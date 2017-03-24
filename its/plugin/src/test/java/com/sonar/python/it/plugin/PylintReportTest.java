@@ -22,15 +22,15 @@ package com.sonar.python.it.plugin;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.sonar.wsclient.SonarClient;
-import org.sonar.wsclient.issue.Issue;
-import org.sonar.wsclient.issue.IssueQuery;
-
 import java.io.File;
 import java.util.List;
+import org.junit.ClassRule;
+import org.junit.Test;
+import org.sonarqube.ws.Issues.Issue;
+import org.sonarqube.ws.client.issue.SearchWsRequest;
 
+import static com.sonar.python.it.plugin.Tests.newWsClient;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintReportTest {
@@ -39,8 +39,6 @@ public class PylintReportTest {
 
   @ClassRule
   public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
-  private SonarClient wsClient = orchestrator.getServer().wsClient();
 
   @Test
   public void import_report() throws Exception {
@@ -69,7 +67,7 @@ public class PylintReportTest {
   }
 
   private List<Issue> issues() {
-    return wsClient.issueClient().find(IssueQuery.create().componentRoots(PROJECT)).list();
+    return newWsClient().issues().search(new SearchWsRequest().setProjects(singletonList(PROJECT))).getIssuesList();
   }
 
   private BuildResult analyseProjectWithReport(String reportPath) {
