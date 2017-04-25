@@ -21,15 +21,14 @@ package org.sonar.python.checks;
 
 import com.google.common.io.Files;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.CharsetAwareVisitor;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = MissingNewlineAtEndOfFileCheck.CHECK_KEY,
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
-public class MissingNewlineAtEndOfFileCheck extends SquidCheck<Grammar> implements CharsetAwareVisitor {
+public class MissingNewlineAtEndOfFileCheck extends PythonCheck implements CharsetAwareVisitor {
   public static final String CHECK_KEY = "S113";
   public static final String MESSAGE = "Add a new line at the end of this file \"%s\".";
   private Charset charset;
@@ -57,7 +56,7 @@ public class MissingNewlineAtEndOfFileCheck extends SquidCheck<Grammar> implemen
       throw new IllegalStateException("Could not read " + getContext().getFile(), e);
     }
     if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
-      getContext().createFileViolation(this, String.format(MESSAGE, getContext().getFile().getName()));
+      addFileIssue(String.format(MESSAGE, getContext().getFile().getName()));
     }
   }
 

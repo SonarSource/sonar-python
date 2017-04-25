@@ -25,11 +25,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -50,9 +48,9 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
+import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonCheck.IssueLocation;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonMetric;
@@ -60,7 +58,6 @@ import org.sonar.python.checks.CheckList;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.squidbridge.AstScanner;
 import org.sonar.squidbridge.SquidAstVisitor;
-import org.sonar.squidbridge.api.CheckMessage;
 import org.sonar.squidbridge.api.SourceCode;
 import org.sonar.squidbridge.api.SourceFile;
 import org.sonar.squidbridge.api.SourceFunction;
@@ -155,8 +152,12 @@ public final class PythonSquidSensor implements Sensor {
     NewIssueLocation newLocation = issue.newLocation()
       .on(inputFile);
     if (location.startLine() != 0) {
-      TextRange range = inputFile.newRange(
-        location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+      TextRange range;
+      if (location.startLineOffset() == -1) {
+        range = inputFile.selectLine(location.startLine());
+      } else {
+        range = inputFile.newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+      }
       newLocation.at(range);
     }
 
@@ -182,7 +183,6 @@ public final class PythonSquidSensor implements Sensor {
       saveFilesComplexityDistribution(inputFile, squidFile);
       saveFunctionsComplexityDistribution(inputFile, squidFile);
       saveMeasures(inputFile, squidFile);
-      saveIssues(inputFile, squidFile);
     }
   }
 
@@ -225,24 +225,6 @@ public final class PythonSquidSensor implements Sensor {
       .forMetric(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION)
       .withValue(complexityDistribution.build())
       .save();
-  }
-
-  private void saveIssues(InputFile inputFile, SourceFile squidFile) {
-    Collection<CheckMessage> messages = squidFile.getCheckMessages();
-    for (CheckMessage message : messages) {
-      RuleKey ruleKey = checks.ruleKey((SquidAstVisitor<Grammar>) message.getCheck());
-      NewIssue newIssue = context.newIssue();
-
-      NewIssueLocation primaryLocation = newIssue.newLocation()
-        .message(message.getText(Locale.ENGLISH))
-        .on(inputFile);
-
-      if (message.getLine() != null) {
-        primaryLocation.at(inputFile.selectLine(message.getLine()));
-      }
-
-      newIssue.forRule(ruleKey).at(primaryLocation).save();
-    }
   }
 
   private static boolean isSonarLint(SensorContext context) {

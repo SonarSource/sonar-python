@@ -20,32 +20,52 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class XPathCheckTest {
 
-  private XPathCheck check = new XPathCheck();
+  private static final String MESSAGE = "Avoid statements";
 
   @Test
-  public void check() {
-    check.xpathQuery = "//STATEMENT";
-    check.message = "Avoid statements :)";
+  public void line_level_issue() {
+    analyze("xpath-statement.py", "//STATEMENT");
+  }
 
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/xpath.py", check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("Avoid statements :)")
-        .noMore();
+  @Test
+  public void boolean_true_result() {
+    analyze("xpath-count-statement.py", "count(//STATEMENT) > 0");
+  }
+
+  @Test
+  public void boolean_false_result() {
+    analyze("xpath.py", "count(//STATEMENT) < 0");
+  }
+
+  @Test
+  public void integer_xpath_result() throws Exception {
+    analyze("xpath.py", "count(//STATEMENT)");
   }
 
   @Test
   public void parseError() {
-    check.xpathQuery = "//STATEMENT";
+    analyze("parsingError.py", "//STATEMENT");
+  }
 
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/parsingError.py", check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .noMore();
+  @Test
+  public void empty_query() throws Exception {
+    analyze("xpath.py", "");
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void invalid_query() throws Exception {
+    analyze("xpath.py", "+++");
+  }
+
+  private void analyze(String fileName, String xpathQuery) {
+    XPathCheck check = new XPathCheck();
+    check.xpathQuery = xpathQuery;
+    check.message = MESSAGE;
+    PythonCheckVerifier.verify("src/test/resources/checks/" + fileName, check);
   }
 
 }

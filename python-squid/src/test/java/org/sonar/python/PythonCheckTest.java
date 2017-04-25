@@ -21,7 +21,6 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import org.junit.Test;
-import org.sonar.python.PythonCheck.IssueLocation;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
 

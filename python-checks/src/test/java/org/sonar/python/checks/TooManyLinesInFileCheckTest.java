@@ -20,32 +20,22 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class TooManyLinesInFileCheckTest {
 
+  private TooManyLinesInFileCheck check = new TooManyLinesInFileCheck();
+
   @Test
   public void test_negative() {
-    SourceFile file = scanFile(3);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .noMore();
+    check.maximum = 3;
+    PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFile-3.py", check);
   }
 
   @Test
   public void test_positive() {
-    SourceFile file = scanFile(2);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().withMessage(
-        "File \"tooManyLinesInFile.py\" has 3 lines, which is greater than 2 authorized. Split it into smaller files.")
-      .noMore();
-  }
-
-  private SourceFile scanFile(int maximum) {
-    TooManyLinesInFileCheck check = new TooManyLinesInFileCheck();
-    check.maximum = maximum;
-    return PythonAstScanner.scanSingleFile("src/test/resources/checks/tooManyLinesInFile.py", check);
+    check.maximum = 2;
+    PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFile-2.py", check);
   }
 
 }

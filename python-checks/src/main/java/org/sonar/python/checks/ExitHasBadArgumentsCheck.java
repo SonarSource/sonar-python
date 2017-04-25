@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
@@ -78,7 +79,7 @@ public class ExitHasBadArgumentsCheck extends PythonCheck {
       }
       AstNode funcName = node.getFirstChild(PythonGrammar.FUNCNAME);
       AstNode rightParenthesis = node.getFirstChild(PythonPunctuator.RPARENTHESIS);
-      addIssue(new IssueLocation(funcName, rightParenthesis, message));
+      addIssue(IssueLocation.preciseLocation(funcName, rightParenthesis, message));
     }
   }
 }

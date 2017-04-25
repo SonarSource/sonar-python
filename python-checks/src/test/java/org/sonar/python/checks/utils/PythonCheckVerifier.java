@@ -26,9 +26,9 @@ import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonCheck.IssueLocation;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.squidbridge.checks.SquidCheck;
 

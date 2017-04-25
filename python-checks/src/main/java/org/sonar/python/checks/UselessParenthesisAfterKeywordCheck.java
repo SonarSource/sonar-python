@@ -21,16 +21,15 @@ package org.sonar.python.checks;
 
 import com.google.common.collect.ImmutableMap;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = UselessParenthesisAfterKeywordCheck.CHECK_KEY,
@@ -39,7 +38,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     status = org.sonar.api.rules.Rule.STATUS_DEPRECATED
 )
 @SqaleConstantRemediation("1min")
-public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
+public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1721";
   private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
     PythonGrammar.ASSERT_STMT, "assert",
@@ -114,8 +113,8 @@ public class UselessParenthesisAfterKeywordCheck extends SquidCheck<Grammar> {
 
   private void checkParenthesis(@Nullable AstNode child, String keyword, AstNode errorNode) {
     if (child != null && child.getToken().getType().equals(PythonPunctuator.LPARENTHESIS) && isOnASingleLine(child)) {
-      getContext().createLineViolation(this,
-        "Remove the parentheses after this \"{0}\" keyword", errorNode, keyword);
+      String message = String.format("Remove the parentheses after this \"%s\" keyword.", keyword);
+      addLineIssue(message, errorNode.getTokenLine());
     }
   }
 

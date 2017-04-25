@@ -20,9 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class LineLengthCheckTest {
 
@@ -30,11 +28,7 @@ public class LineLengthCheckTest {
   public void test() {
     LineLengthCheck check = new LineLengthCheck();
     check.maximumLineLength = 30;
-
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/lineLength.py", check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage("The line contains 40 characters which is greater than 30 authorized.")
-        .noMore();
+    PythonCheckVerifier.verify("src/test/resources/checks/lineLength.py", check);
   }
 
 }

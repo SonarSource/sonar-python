@@ -19,15 +19,17 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.base.Strings;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
+import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.NoSqale;
 import org.sonar.squidbridge.annotations.RuleTemplate;
-import org.sonar.squidbridge.checks.AbstractXPathCheck;
 @Rule(
     key = XPathCheck.CHECK_KEY,
     priority = Priority.MAJOR,
@@ -35,7 +37,7 @@ import org.sonar.squidbridge.checks.AbstractXPathCheck;
 )
 @NoSqale
 @RuleTemplate
-public class XPathCheck extends AbstractXPathCheck<Grammar> {
+public class XPathCheck extends PythonCheck {
   public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";
@@ -50,20 +52,32 @@ public class XPathCheck extends AbstractXPathCheck<Grammar> {
     defaultValue = "" + DEFAULT_MESSAGE)
   public String message = DEFAULT_MESSAGE;
 
-  @Override
-  public String getXPathQuery() {
-    return xpathQuery;
-  }
+  private AstNodeXPathQuery<Object> query = null;
 
   @Override
-  public String getMessage() {
-    return message;
+  public void init() {
+    if (!Strings.isNullOrEmpty(xpathQuery)) {
+      try {
+        query = AstNodeXPathQuery.create(xpathQuery);
+      } catch (RuntimeException e) {
+        throw new IllegalStateException("Unable to initialize the XPath engine, perhaps because of an invalid query: " + xpathQuery, e);
+      }
+    }
   }
 
   @Override
   public void visitFile(@Nullable AstNode fileNode) {
-    if (fileNode != null) {
-      super.visitFile(fileNode);
+    if (query != null && fileNode != null) {
+      List<Object> objects = query.selectNodes(fileNode);
+
+      for (Object object : objects) {
+        if (object instanceof AstNode) {
+          AstNode astNode = (AstNode) object;
+          addLineIssue(message, astNode.getTokenLine());
+        } else if (object instanceof Boolean && (Boolean) object) {
+          addFileIssue(message);
+        }
+      }
     }
   }
 
