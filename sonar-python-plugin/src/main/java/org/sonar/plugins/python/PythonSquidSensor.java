@@ -29,6 +29,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -46,6 +48,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.PythonAstScanner;
 import org.sonar.python.PythonCheck;
@@ -69,6 +72,8 @@ public final class PythonSquidSensor implements Sensor {
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
 
+  private static final Version V6_0 = Version.create(6, 0);
+
   private final Checks<SquidAstVisitor<Grammar>> checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
@@ -83,7 +88,6 @@ public final class PythonSquidSensor implements Sensor {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
   }
-
 
   @Override
   public void describe(SensorDescriptor descriptor) {
@@ -116,7 +120,9 @@ public final class PythonSquidSensor implements Sensor {
         .map(v -> (PythonCheck) v)
         .collect(Collectors.toList()));
 
-    (new PythonCoverageSensor()).execute(context, linesOfCode);
+    if (!isSonarLint(context)) {
+      new PythonCoverageSensor().execute(context, linesOfCode);
+    }
   }
 
   private void savePreciseIssues(List<PythonCheck> pythonChecks) {
@@ -209,7 +215,6 @@ public final class PythonSquidSensor implements Sensor {
       .forMetric(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION)
       .withValue(complexityDistribution.build())
       .save();
-
   }
 
   private void saveFilesComplexityDistribution(InputFile inputFile, SourceFile squidFile) {
@@ -239,4 +244,9 @@ public final class PythonSquidSensor implements Sensor {
       newIssue.forRule(ruleKey).at(primaryLocation).save();
     }
   }
+
+  private static boolean isSonarLint(SensorContext context) {
+    return context.getSonarQubeVersion().isGreaterThanOrEqual(V6_0) && context.runtime().getProduct() == SonarProduct.SONARLINT;
+  }
+
 }
