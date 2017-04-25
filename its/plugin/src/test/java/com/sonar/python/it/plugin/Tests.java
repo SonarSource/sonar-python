@@ -53,7 +53,8 @@ import static org.assertj.core.api.Assertions.assertThat;
   PylintReportTest.class,
   TestReportTest.class,
   NoSonarTest.class,
-  XPathRuleTest.class
+  XPathRuleTest.class,
+  SonarLintTest.class
 })
 public class Tests {
 
