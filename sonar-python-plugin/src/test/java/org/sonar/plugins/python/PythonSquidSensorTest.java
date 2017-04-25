@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.fs.InputFile;
@@ -28,6 +29,7 @@ import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
@@ -38,6 +40,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.checks.CheckList;
 
 import java.io.File;
@@ -50,8 +53,16 @@ import static org.mockito.Mockito.when;
 public class PythonSquidSensorTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor");
-  private SensorContextTester context = SensorContextTester.create(baseDir);
+
+  private SensorContextTester context;
+
   private ActiveRules activeRules;
+
+  @Before
+  public void init() {
+    context = SensorContextTester.create(baseDir);
+    context.settings().setProperty(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY, "coverage.xml");
+  }
 
   @Test
   public void sensor_descriptor() {
@@ -88,6 +99,8 @@ public class PythonSquidSensorTest {
     
     String msg = "number of TypeOfText for the highlighting of keyword 'def'";
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
+
+    assertThat(context.lineHits("moduleKey:file1.py", CoverageType.OVERALL, 1)).isEqualTo(10);
   }
 
   @Test
