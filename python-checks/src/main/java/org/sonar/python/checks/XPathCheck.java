@@ -23,7 +23,6 @@ import com.google.common.base.Strings;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
 import java.util.List;
-import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -54,21 +53,21 @@ public class XPathCheck extends PythonCheck {
 
   private AstNodeXPathQuery<Object> query = null;
 
-  @Override
-  public void init() {
-    if (!Strings.isNullOrEmpty(xpathQuery)) {
+  public AstNodeXPathQuery<Object> query() {
+    if (query == null && !Strings.isNullOrEmpty(xpathQuery)) {
       try {
         query = AstNodeXPathQuery.create(xpathQuery);
       } catch (RuntimeException e) {
         throw new IllegalStateException("Unable to initialize the XPath engine, perhaps because of an invalid query: " + xpathQuery, e);
       }
     }
+    return query;
   }
 
   @Override
-  public void visitFile(@Nullable AstNode fileNode) {
-    if (query != null && fileNode != null) {
-      List<Object> objects = query.selectNodes(fileNode);
+  public void visitFile(AstNode fileNode) {
+    if (query() != null) {
+      List<Object> objects = query().selectNodes(fileNode);
 
       for (Object object : objects) {
         if (object instanceof AstNode) {

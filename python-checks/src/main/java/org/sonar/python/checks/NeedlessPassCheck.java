@@ -19,8 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -45,8 +48,8 @@ public class NeedlessPassCheck extends PythonCheck {
   private static final String MESSAGE = "Remove this unneeded \"pass\".";
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.PASS_STMT);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.PASS_STMT);
   }
 
   @Override

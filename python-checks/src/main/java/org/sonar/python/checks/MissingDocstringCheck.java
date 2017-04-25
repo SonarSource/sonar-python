@@ -20,7 +20,9 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
+import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -57,8 +59,8 @@ public class MissingDocstringCheck extends PythonCheck {
   }
 
   @Override
-  public void init() {
-    DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
+  public Set<AstNodeType> subscribedKinds() {
+    return DocstringExtractor.DOCUMENTABLE_NODE_TYPES;
   }
 
   @Override

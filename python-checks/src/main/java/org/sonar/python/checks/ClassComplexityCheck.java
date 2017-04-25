@@ -19,16 +19,17 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonMetric;
+import org.sonar.python.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
-import org.sonar.squidbridge.api.SourceClass;
-import org.sonar.squidbridge.checks.ChecksHelper;
 
 @Rule(
   key = "ClassComplexity",
@@ -49,14 +50,13 @@ public class ClassComplexityCheck extends PythonCheck {
   int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.CLASSDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.CLASSDEF);
   }
 
   @Override
-  public void leaveNode(AstNode node) {
-    SourceClass sourceClass = (SourceClass) getContext().peekSourceCode();
-    int complexity = ChecksHelper.getRecursiveMeasureInt(sourceClass, PythonMetric.COMPLEXITY);
+  public void visitNode(AstNode node) {
+    int complexity = ComplexityVisitor.complexity(node);
     if (complexity > maximumClassComplexityThreshold) {
       String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
       addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), message)

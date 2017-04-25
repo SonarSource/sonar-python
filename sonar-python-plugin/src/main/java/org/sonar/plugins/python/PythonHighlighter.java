@@ -19,9 +19,9 @@
  */
 package org.sonar.plugins.python;
 
-import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.HashSet;
@@ -32,11 +32,11 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
+import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.SquidAstVisitor;
 
 /**
  * Colors Python code. Currently colors:
@@ -82,7 +82,7 @@ import org.sonar.squidbridge.SquidAstVisitor;
  * Reminder: a docstring is a string literal that occurs as the first statement in a module,
  * function, class, or method definition.
  */
-public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
+public class PythonHighlighter extends PythonVisitor {
 
   private NewHighlighting newHighlighting;
 
@@ -94,8 +94,8 @@ public class PythonHighlighter extends SquidAstVisitor<Grammar> implements AstAn
   }
 
   @Override
-  public void init() {
-    subscribeTo(
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(
       PythonGrammar.FUNCDEF,
       PythonGrammar.CLASSDEF,
       PythonGrammar.FILE_INPUT

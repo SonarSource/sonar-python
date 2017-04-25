@@ -19,22 +19,15 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Grammar;
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Set;
 import org.junit.Test;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.python.api.PythonMetric;
 import org.sonar.python.metrics.FileLinesVisitor;
-import org.sonar.squidbridge.SquidAstVisitor;
-import org.sonar.squidbridge.api.SourceFile;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -56,17 +49,16 @@ public class FileLinesVisitorTest {
   public void test() {
     DefaultInputFile inputFile = initFile("file_lines.py");
 
-    HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false);
+    FileLinesVisitor visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, false);
 
-    SourceFile sourceFile = PythonAstScanner.scanSingleFile(inputFile.file().getPath(), visitor);
+    TestPythonVisitorRunner.scanFile(inputFile.file(), visitor);
 
-    assertThat(sourceFile.getInt(PythonMetric.LINES_OF_CODE)).isEqualTo(12);
-    assertThat(linesOfCode).hasSize(1);
-    assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
+    assertThat(visitor.getLinesOfCode()).hasSize(12);
+    assertThat(visitor.linesOfCodeByFile()).hasSize(1);
+    assertThat(visitor.linesOfCodeByFile().get(inputFile)).as("Lines of codes").containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
     verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
 
-    assertThat(sourceFile.getInt(PythonMetric.COMMENT_LINES)).isEqualTo(9);
+    assertThat(visitor.getLinesOfComments()).hasSize(9);
     verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 13, 14, 17, 18, 19, 20);
 
     verify(fileLinesContext).save();
@@ -77,13 +69,12 @@ public class FileLinesVisitorTest {
   public void test_ignoreHeaderComments() {
     DefaultInputFile inputFile = initFile("file_lines_header_comments.py");
 
-    HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
-    SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, true);
+    FileLinesVisitor visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, true);
 
-    PythonAstScanner.scanSingleFile(inputFile.file().getPath(), visitor);
+    TestPythonVisitorRunner.scanFile(inputFile.file(), visitor);
 
-    assertThat(linesOfCode).hasSize(1);
-    assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4);
+    assertThat(visitor.linesOfCodeByFile()).hasSize(1);
+    assertThat(visitor.linesOfCodeByFile().get(inputFile)).as("Lines of codes").containsOnly(2, 4);
 
     verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4);
     verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 4);

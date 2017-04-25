@@ -19,9 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -51,8 +54,8 @@ public class SameBranchCheck extends PythonCheck {
   private List<AstNode> ignoreList;
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.IF_STMT);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.IF_STMT);
   }
 
   @Override

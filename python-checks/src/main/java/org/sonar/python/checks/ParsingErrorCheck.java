@@ -20,14 +20,10 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.RecognitionException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.AstScannerExceptionHandler;
+import org.sonar.python.PythonVisitorContext;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 @Rule(
@@ -35,21 +31,17 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
     priority = Priority.MAJOR,
     name = "Parser failure")
 @SqaleConstantRemediation("30min")
-public class ParsingErrorCheck extends PythonCheck implements AstScannerExceptionHandler {
-  private static final Logger LOG = LoggerFactory.getLogger(ParsingErrorCheck.class);
+public class ParsingErrorCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "ParsingError";
 
   @Override
-  public void processException(Exception e) {
-    StringWriter exception = new StringWriter();
-    e.printStackTrace(new PrintWriter(exception));
-    LOG.debug("Parsing error", e);
-    getContext().createFileViolation(this, exception.toString());
-  }
-
-  @Override
-  public void processRecognitionException(RecognitionException e) {
-    addLineIssue(e.getMessage(), e.getLine());
+  public void scanFile(PythonVisitorContext context) {
+    super.scanFile(context);
+    RecognitionException parsingException = context.parsingException();
+    if (parsingException != null) {
+      addLineIssue(parsingException.getMessage(), parsingException.getLine());
+    }
   }
 
 }

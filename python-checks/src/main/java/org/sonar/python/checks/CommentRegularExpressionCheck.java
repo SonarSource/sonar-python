@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.google.common.base.Strings;
-import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.annotations.RuleTemplate;
 )
 @NoSqale
 @RuleTemplate
-public class CommentRegularExpressionCheck extends PythonCheck implements AstAndTokenVisitor {
+public class CommentRegularExpressionCheck extends PythonCheck {
   public static final String CHECK_KEY = "CommentRegularExpression";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
@@ -55,22 +54,27 @@ public class CommentRegularExpressionCheck extends PythonCheck implements AstAnd
     defaultValue = "" + DEFAULT_MESSAGE)
   public String message = DEFAULT_MESSAGE;
 
-  @Override
-  public void init() {
-    if (!Strings.isNullOrEmpty(regularExpression)) {
-      try {
-        pattern = Pattern.compile(regularExpression, Pattern.DOTALL);
-      } catch (RuntimeException e) {
-        throw new IllegalStateException("Unable to compile regular expression: " + regularExpression, e);
+  private boolean isPatternInitialized = false;
+
+  private Pattern pattern() {
+    if (!isPatternInitialized) {
+      if (!Strings.isNullOrEmpty(regularExpression)) {
+        try {
+          pattern = Pattern.compile(regularExpression, Pattern.DOTALL);
+        } catch (RuntimeException e) {
+          throw new IllegalStateException("Unable to compile regular expression: " + regularExpression, e);
+        }
       }
+      isPatternInitialized = true;
     }
+    return pattern;
   }
 
   @Override
   public void visitToken(Token token) {
-    if (pattern != null) {
+    if (pattern() != null) {
       for (Trivia trivia : token.getTrivia()) {
-        if (trivia.isComment() && pattern.matcher(trivia.getToken().getOriginalValue()).matches()) {
+        if (trivia.isComment() && pattern().matcher(trivia.getToken().getOriginalValue()).matches()) {
           addIssue(trivia.getToken(), message);
         }
       }

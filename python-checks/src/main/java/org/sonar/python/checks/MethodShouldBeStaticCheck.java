@@ -19,7 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -27,9 +32,6 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-
-import java.util.List;
-import java.util.Objects;
 
 @Rule(
   key = MethodShouldBeStaticCheck.CHECK_KEY,
@@ -46,8 +48,8 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
   private static final String MESSAGE = "Make this method static.";
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.FUNCDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.FUNCDEF);
   }
 
   @Override

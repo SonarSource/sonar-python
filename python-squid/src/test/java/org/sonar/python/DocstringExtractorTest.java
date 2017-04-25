@@ -20,14 +20,14 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.SquidAstVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,11 +37,10 @@ public class DocstringExtractorTest {
 
   private Map<AstNode, Token> docstrings = new HashMap<>();
 
-  @SuppressWarnings("unchecked")
   @Test
   public void test() {
     File file = new File(BASE_DIR, "docstring.py");
-    PythonAstScanner.scanSingleFile(file.getPath(), new DocstringVisitor());
+    TestPythonVisitorRunner.scanFile(file, new DocstringVisitor());
 
     String TRIPLE_QUOTES = "\"\"\"";
 
@@ -71,11 +70,11 @@ public class DocstringExtractorTest {
     return null;
   }
 
-  private class DocstringVisitor extends SquidAstVisitor<Grammar> {
+  private class DocstringVisitor extends PythonVisitor {
 
     @Override
-    public void init() {
-      DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
+    public Set<AstNodeType> subscribedKinds() {
+      return DocstringExtractor.DOCUMENTABLE_NODE_TYPES;
     }
 
     @Override

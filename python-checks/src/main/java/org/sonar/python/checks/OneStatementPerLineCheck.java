@@ -19,9 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.Map;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -45,8 +48,8 @@ public class OneStatementPerLineCheck extends PythonCheck {
   private final Map<Integer, Integer> statementsPerLine = Maps.newHashMap();
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.SIMPLE_STMT, PythonGrammar.SUITE);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.SIMPLE_STMT, PythonGrammar.SUITE);
   }
 
   @Override

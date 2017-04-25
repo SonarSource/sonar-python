@@ -19,19 +19,21 @@
  */
 package org.sonar.python;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.io.File;
+import java.util.List;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
-
-import java.io.File;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonCheckTest {
 
-  private static final String FILE = "src/test/resources/file.py";
+  private static final File FILE = new File("src/test/resources/file.py");
 
   @Test
   public void test() throws Exception {
@@ -43,15 +45,13 @@ public class PythonCheckTest {
       }
     };
 
-    PythonAstScanner.scanSingleFile(FILE, check);
-
-    List<PreciseIssue> issues = check.getIssues();
+    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(FILE, check);
 
     assertThat(issues).hasSize(2);
     PreciseIssue firstIssue = issues.get(0);
 
     assertThat(firstIssue.cost()).isNull();
-    assertThat(firstIssue.file()).isEqualTo(new File(FILE));
+    assertThat(firstIssue.file()).isEqualTo(FILE);
     assertThat(firstIssue.secondaryLocations()).isEmpty();
 
     IssueLocation primaryLocation = firstIssue.primaryLocation();
@@ -72,9 +72,8 @@ public class PythonCheckTest {
       }
     };
 
-    PythonAstScanner.scanSingleFile(FILE, check);
-
-    PreciseIssue firstIssue = check.getIssues().get(0);
+    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(FILE, check);
+    PreciseIssue firstIssue = issues.get(0);
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
 
@@ -93,9 +92,9 @@ public class PythonCheckTest {
       }
     };
 
-    PythonAstScanner.scanSingleFile(FILE, check);
+    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(FILE, check);
 
-    List<IssueLocation> secondaryLocations = check.getIssues().get(0).secondaryLocations();
+    List<IssueLocation> secondaryLocations = issues.get(0).secondaryLocations();
     assertThat(secondaryLocations).hasSize(2);
 
     IssueLocation firstSecondaryLocation = secondaryLocations.get(0);
@@ -119,8 +118,8 @@ public class PythonCheckTest {
   private static class TestPythonCheck extends PythonCheck {
 
     @Override
-    public void init() {
-      subscribeTo(PythonGrammar.FUNCDEF);
+    public Set<AstNodeType> subscribedKinds() {
+      return ImmutableSet.of(PythonGrammar.FUNCDEF);
     }
 
   }

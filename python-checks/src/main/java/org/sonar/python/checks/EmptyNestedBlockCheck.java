@@ -20,9 +20,12 @@
 package org.sonar.python.checks;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -45,8 +48,8 @@ public class EmptyNestedBlockCheck extends PythonCheck {
   private static final String MESSAGE = "Either remove or fill this block of code.";
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.SUITE);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.SUITE);
   }
 
   @Override

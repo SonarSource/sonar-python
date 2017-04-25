@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.File;
+import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -44,11 +46,10 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
+import org.sonar.api.utils.log.LogTester;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.checks.CheckList;
-
-import java.io.File;
-import java.util.Iterator;
+import org.sonar.python.checks.ParsingErrorCheck;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -67,6 +68,9 @@ public class PythonSquidSensorTest {
   private SensorContextTester context;
 
   private ActiveRules activeRules;
+
+  @org.junit.Rule
+  public LogTester logTester = new LogTester();
 
   @Before
   public void init() {
@@ -119,7 +123,7 @@ public class PythonSquidSensorTest {
     assertThat(context.measure(key, CoreMetrics.COMMENT_LINES).value()).isEqualTo(8);
 
     assertThat(context.allIssues()).hasSize(1);
-    
+
     String msg = "number of TypeOfText for the highlighting of keyword 'def'";
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
 
@@ -175,6 +179,18 @@ public class PythonSquidSensorTest {
     }
 
     assertThat(checkedIssues).isEqualTo(3);
+  }
+
+  @Test
+  public void parse_error() throws Exception {
+    inputFile("parse_error.py");
+    activeRules = (new ActiveRulesBuilder())
+      .create(RuleKey.of(CheckList.REPOSITORY_KEY, ParsingErrorCheck.CHECK_KEY))
+      .activate()
+      .build();
+    sensor().execute(context);
+    assertThat(context.allIssues()).hasSize(1);
+    assertThat(String.join("\n", logTester.logs())).contains("Parse error at line 2");
   }
 
   private PythonSquidSensor sensor() {

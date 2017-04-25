@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -38,8 +41,8 @@ public class BackslashInStringCheck extends PythonCheck {
   private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";
 
   @Override
-  public void init() {
-    subscribeTo(PythonTokenType.STRING);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonTokenType.STRING);
   }
 
   @Override

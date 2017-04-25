@@ -20,14 +20,16 @@
 package org.sonar.python.checks;
 
 import com.google.common.base.Charsets;
-import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.impl.Parser;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -47,14 +49,14 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 )
 @SqaleConstantRemediation("5min")
 @ActivatedByDefault
-public class CommentedCodeCheck extends PythonCheck implements AstAndTokenVisitor {
+public class CommentedCodeCheck extends PythonCheck {
   public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
 
   @Override
-  public void init() {
-    subscribeTo(PythonTokenType.STRING);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonTokenType.STRING);
   }
 
   @Override

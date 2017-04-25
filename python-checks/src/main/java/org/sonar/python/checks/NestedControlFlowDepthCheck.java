@@ -19,10 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -53,8 +56,8 @@ public class NestedControlFlowDepthCheck extends PythonCheck {
   private Deque<AstNode> depthNodes;
 
   @Override
-  public void init() {
-    subscribeTo(
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(
       PythonGrammar.IF_STMT,
       PythonGrammar.FOR_STMT,
       PythonGrammar.WHILE_STMT,

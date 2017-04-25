@@ -19,9 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import java.text.MessageFormat;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -47,8 +50,8 @@ public class TooManyLinesInFileCheck extends PythonCheck {
   public int maximum = DEFAULT;
 
   @Override
-  public void init() {
-    subscribeTo(GenericTokenType.EOF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(GenericTokenType.EOF);
   }
 
   @Override

@@ -48,20 +48,22 @@ public class ModuleNameCheck extends PythonCheck {
   private Pattern pattern = null;
 
   @Override
-  public void init() {
-    pattern = Pattern.compile(format);
-  }
-
-  @Override
   public void visitFile(@Nullable AstNode astNode) {
     String fileName = getContext().getFile().getName();
     int dotIndex = fileName.lastIndexOf('.');
     if (dotIndex > 0) {
       String moduleName = fileName.substring(0, dotIndex);
-      if (!pattern.matcher(moduleName).matches()) {
+      if (!pattern().matcher(moduleName).matches()) {
         addFileIssue(String.format(MESSAGE, format));
       }
     }
+  }
+
+  private Pattern pattern() {
+    if (pattern == null) {
+      pattern = Pattern.compile(format);
+    }
+    return pattern;
   }
 
 }

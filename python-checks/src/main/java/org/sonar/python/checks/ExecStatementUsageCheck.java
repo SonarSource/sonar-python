@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -38,8 +41,8 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 public class ExecStatementUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "ExecStatementUsage";
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.EXEC_STMT);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.EXEC_STMT);
   }
 
   @Override

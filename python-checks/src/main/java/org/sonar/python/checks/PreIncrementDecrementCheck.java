@@ -19,8 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -42,8 +45,8 @@ public class PreIncrementDecrementCheck extends PythonCheck {
   private static final String MESSAGE = "This statement doesn't produce the expected result, replace use of non-existent pre-%srement operator";
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.FACTOR);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.FACTOR);
   }
 
   @Override

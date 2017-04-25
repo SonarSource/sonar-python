@@ -22,11 +22,9 @@ package org.sonar.python.checks;
 import com.google.common.io.Files;
 import com.sonar.sslr.api.AstNode;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.CharsetAwareVisitor;
 import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
@@ -37,21 +35,15 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
-public class MissingNewlineAtEndOfFileCheck extends PythonCheck implements CharsetAwareVisitor {
+public class MissingNewlineAtEndOfFileCheck extends PythonCheck {
   public static final String CHECK_KEY = "S113";
   public static final String MESSAGE = "Add a new line at the end of this file \"%s\".";
-  private Charset charset;
-
-  @Override
-  public void setCharset(Charset charset) {
-    this.charset = charset;
-  }
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
     String fileContent;
     try {
-      fileContent = Files.toString(getContext().getFile(), charset);
+      fileContent = Files.toString(getContext().getFile(), getContext().charset());
     } catch (IOException e) {
       throw new IllegalStateException("Could not read " + getContext().getFile(), e);
     }

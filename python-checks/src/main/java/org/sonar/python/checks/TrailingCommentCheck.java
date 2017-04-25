@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
@@ -37,7 +36,7 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
-public class TrailingCommentCheck extends PythonCheck implements AstAndTokenVisitor {
+public class TrailingCommentCheck extends PythonCheck {
   public static final String CHECK_KEY = "S139";
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";
   private static final String MESSAGE = "Move this trailing comment on the previous empty line.";
