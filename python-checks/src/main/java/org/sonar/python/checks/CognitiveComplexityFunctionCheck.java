@@ -25,6 +25,7 @@ import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
@@ -168,7 +169,7 @@ public class CognitiveComplexityFunctionCheck extends PythonCheck {
   }
 
   private void incrementComplexity(AstNode secondaryLocationNode, int currentNodeComplexity) {
-    secondaryLocations.add(new IssueLocation(secondaryLocationNode, secondaryMessage(currentNodeComplexity)));
+    secondaryLocations.add(IssueLocation.preciseLocation(secondaryLocationNode, secondaryMessage(currentNodeComplexity)));
     complexity += currentNodeComplexity;
   }
 

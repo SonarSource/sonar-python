@@ -23,12 +23,11 @@ import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
-import org.sonar.squidbridge.checks.SquidCheck;
-
-import javax.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 public abstract class PythonCheck extends SquidCheck<Grammar> {
 
@@ -39,7 +38,7 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
   }
 
   protected final PreciseIssue addIssue(AstNode node, String message) {
-    PreciseIssue newIssue = new PreciseIssue(new IssueLocation(node, message), getContext().getFile());
+    PreciseIssue newIssue = new PreciseIssue(IssueLocation.preciseLocation(node, message), getContext().getFile());
     issues.add(newIssue);
     return newIssue;
   }
@@ -50,8 +49,14 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     return newIssue;
   }
 
+  protected final PreciseIssue addLineIssue(String message, int lineNumber) {
+    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atLineLevel(message, lineNumber), getContext().getFile());
+    issues.add(newIssue);
+    return newIssue;
+  }
+
   protected final PreciseIssue addFileIssue(String message) {
-    PreciseIssue newIssue = new PreciseIssue(new IssueLocation(message), getContext().getFile());
+    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atFileLevel(message), getContext().getFile());
     issues.add(newIssue);
     return newIssue;
   }
@@ -92,7 +97,7 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
     }
 
     public PreciseIssue secondary(AstNode node, @Nullable String message) {
-      secondaryLocations.add(new IssueLocation(node, message));
+      secondaryLocations.add(IssueLocation.preciseLocation(node, message));
       return this;
     }
 
@@ -103,50 +108,6 @@ public abstract class PythonCheck extends SquidCheck<Grammar> {
 
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
-    }
-  }
-
-  public static class IssueLocation {
-    private Token firstToken;
-    private TokenLocation lastTokenLocation;
-    private String message;
-
-    public IssueLocation(String message) {
-      this.message = message;
-      this.firstToken = null;
-      this.lastTokenLocation = null;
-    }
-
-    public IssueLocation(AstNode node, String message) {
-      this.message = message;
-      this.firstToken = node.getToken();
-      this.lastTokenLocation = new TokenLocation(node.getLastToken());
-    }
-
-    public IssueLocation(AstNode startNode, AstNode endNode, String message) {
-      this.message = message;
-      this.firstToken = startNode.getToken();
-      this.lastTokenLocation = new TokenLocation(endNode.getLastToken());
-    }
-
-    public String message() {
-      return message;
-    }
-
-    public int startLine() {
-      return firstToken != null ? firstToken.getLine() : 0;
-    }
-
-    public int startLineOffset() {
-      return firstToken != null ? firstToken.getColumn() : -1;
-    }
-
-    public int endLine() {
-      return lastTokenLocation != null ? lastTokenLocation.endLine() : 0;
-    }
-
-    public int endLineOffset() {
-      return lastTokenLocation != null ? lastTokenLocation.endLineOffset() : -1;
     }
   }
 }

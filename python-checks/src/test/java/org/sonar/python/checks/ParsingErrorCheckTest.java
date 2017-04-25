@@ -19,20 +19,22 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.PythonCheck.PreciseIssue;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParsingErrorCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/parsingError.py", new ParsingErrorCheck());
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1)
-        // .withMessageThat(containsString("NEWLINE expected but \"    \" [INDENT] found"))
-        .noMore();
+    ParsingErrorCheck check = new ParsingErrorCheck();
+    PythonAstScanner.scanSingleFile("src/test/resources/checks/parsingError.py", check);
+    List<PreciseIssue> issues = check.getIssues();
+    assertThat(issues).hasSize(1);
+    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
   }
 
 }

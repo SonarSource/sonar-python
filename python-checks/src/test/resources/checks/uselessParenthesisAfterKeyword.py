@@ -1,33 +1,33 @@
 assert x < 2
-assert (x < 2)
+assert (x < 2) #Noncompliant {{Remove the parentheses after this "assert" keyword.}}
 
 del x
-del(x)
+del(x) #Noncompliant {{Remove the parentheses after this "del" keyword.}}
 
 if x < 2:
 	pass
 elif x > 3:
 	pass
 
-if (x < 2):
+if (x < 2): #Noncompliant {{Remove the parentheses after this "if" keyword.}}
 	pass
-elif (x > 3):
+elif (x > 3): #Noncompliant {{Remove the parentheses after this "elif" keyword.}}
 	pass
 
 for x in range(0, 3):
 	pass
 
-for (x) in range(0, 3):
+for (x) in range(0, 3): #Noncompliant {{Remove the parentheses after this "for" keyword.}}
 	pass
 
-for x in (range(0, 3)):
+for x in (range(0, 3)): #Noncompliant {{Remove the parentheses after this "in" keyword.}}
 	pass
 
 if x:
 	raise NameError('HiThere')
 
 if x:	
-	raise (NameError('HiThere'))
+	raise (NameError('HiThere')) #Noncompliant {{Remove the parentheses after this "raise" keyword.}}
 
 if x:
 	raise
@@ -36,16 +36,16 @@ def func():
 	return x
 
 def func():
-	return (x)
+	return (x) #Noncompliant {{Remove the parentheses after this "return" keyword.}}
 	
 while x < 2:
 	pass
 
-while (x < 2):
+while (x < 2): #Noncompliant {{Remove the parentheses after this "while" keyword.}}
 	pass
 
 yield x
-yield (x)
+yield (x) #Noncompliant {{Remove the parentheses after this "yield" keyword.}}
 	
 try:
 	x = 1
@@ -54,7 +54,7 @@ except ValueError:
 
 try:
 	x = 1
-except (ValueError):
+except (ValueError): #Noncompliant {{Remove the parentheses after this "except" keyword.}}
 	pass
 
 try:
@@ -65,7 +65,7 @@ except (ValueError, TypeError):
 if not x:
 	pass
 
-if not(x):
+if not(x): #Noncompliant {{Remove the parentheses after this "not" keyword.}}
 	pass
 
 if not(x and y):

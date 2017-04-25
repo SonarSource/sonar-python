@@ -21,14 +21,13 @@ package org.sonar.python.checks;
 
 import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.util.Map;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 /**
  * Note that implementation differs from AbstractOneStatementPerLineCheck due to Python specifics
@@ -41,7 +40,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("1min")
 @ActivatedByDefault
-public class OneStatementPerLineCheck extends SquidCheck<Grammar> {
+public class OneStatementPerLineCheck extends PythonCheck {
   public static final String CHECK_KEY = "OneStatementPerLine";
   private final Map<Integer, Integer> statementsPerLine = Maps.newHashMap();
 
@@ -68,8 +67,9 @@ public class OneStatementPerLineCheck extends SquidCheck<Grammar> {
   public void leaveFile(AstNode astNode) {
     for (Map.Entry<Integer, Integer> statementsAtLine : statementsPerLine.entrySet()) {
       if (statementsAtLine.getValue() > 1) {
-        getContext().createLineViolation(this, "At most one statement is allowed per line, but {0} statements were found on this line.", statementsAtLine.getKey(),
-            statementsAtLine.getValue());
+        String message = String.format("At most one statement is allowed per line, but %s statements were found on this line.", statementsAtLine.getValue());
+        int lineNumber = statementsAtLine.getKey();
+        addLineIssue(message, lineNumber);
       }
     }
   }

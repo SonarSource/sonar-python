@@ -20,20 +20,13 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class TrailingWhitespaceCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/trailingWhitespace.py", new TrailingWhitespaceCheck());
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(1).withMessage(TrailingWhitespaceCheck.MESSAGE)
-        .next().atLine(3).withMessage(TrailingWhitespaceCheck.MESSAGE)
-        .next().atLine(5).withMessage(TrailingWhitespaceCheck.MESSAGE)
-        .noMore();
+    PythonCheckVerifier.verify("src/test/resources/checks/trailingWhitespace.py", new TrailingWhitespaceCheck());
   }
 
 }

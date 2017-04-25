@@ -98,7 +98,7 @@ public class MissingDocstringCheck extends PythonCheck {
     if (type != DeclarationType.MODULE) {
       addIssue(getNameNode(astNode), finalMessage);
     } else {
-      getContext().createFileViolation(this, finalMessage);
+      addFileIssue(finalMessage);
     }
   }
 

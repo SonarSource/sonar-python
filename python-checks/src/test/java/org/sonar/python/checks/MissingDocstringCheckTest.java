@@ -20,10 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
 
 public class MissingDocstringCheckTest {
 
@@ -39,15 +36,7 @@ public class MissingDocstringCheckTest {
 
   @Test
   public void testEmptyModule() throws Exception {
-    testMissingDocStringAtModuleLevel("emptyModule.py");
-  }
-
-  private void testMissingDocStringAtModuleLevel(String fileName) {
-    @SuppressWarnings("unchecked")
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/" + fileName, new MissingDocstringCheck());
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(null).withMessage("Add a docstring to this module.")
-        .noMore();
+    PythonCheckVerifier.verify("src/test/resources/checks/emptyModule.py", new MissingDocstringCheck());
   }
 
 }

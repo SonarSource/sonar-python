@@ -31,9 +31,9 @@ import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.CharsetAwareVisitor;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.SquidAstVisitorContext;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = TrailingWhitespaceCheck.CHECK_KEY,
@@ -42,7 +42,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
-public class TrailingWhitespaceCheck extends SquidCheck<Grammar> implements CharsetAwareVisitor {
+public class TrailingWhitespaceCheck extends PythonCheck implements CharsetAwareVisitor {
   public static final String CHECK_KEY = "S1131";
   public static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
 
@@ -65,7 +65,7 @@ public class TrailingWhitespaceCheck extends SquidCheck<Grammar> implements Char
       while ((line = reader.readLine()) != null) {
         ++lineNr;
         if (TRAILING_WS.matcher(line).find()) {
-          context.createLineViolation(this, MESSAGE, lineNr);
+          addLineIssue(MESSAGE, lineNr);
         }
       }
     } catch (IOException e) {

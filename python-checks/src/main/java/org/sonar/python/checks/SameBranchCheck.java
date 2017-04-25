@@ -25,6 +25,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
@@ -108,9 +109,9 @@ public class SameBranchCheck extends PythonCheck {
   private static IssueLocation location(AstNode suiteNode, String message) {
     AstNode firstStatement = suiteNode.getFirstChild(PythonGrammar.STATEMENT);
     if (firstStatement != null) {
-      return new IssueLocation(firstStatement, getLastNode(suiteNode), message);
+      return IssueLocation.preciseLocation(firstStatement, getLastNode(suiteNode), message);
     } else {
-      return new IssueLocation(suiteNode.getFirstChild(STMT_LIST), message);
+      return IssueLocation.preciseLocation(suiteNode.getFirstChild(STMT_LIST), message);
     }
   }
 

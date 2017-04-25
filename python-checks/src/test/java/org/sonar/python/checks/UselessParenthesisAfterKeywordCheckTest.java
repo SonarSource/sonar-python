@@ -20,29 +20,13 @@
 package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class UselessParenthesisAfterKeywordCheckTest {
 
   @Test
   public void test() throws Exception {
-    SourceFile file = PythonAstScanner.scanSingleFile("src/test/resources/checks/uselessParenthesisAfterKeyword.py", new UselessParenthesisAfterKeywordCheck());
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(2).withMessage("Remove the parentheses after this \"assert\" keyword")
-      .next().atLine(5).withMessage("Remove the parentheses after this \"del\" keyword")
-      .next().atLine(12).withMessage("Remove the parentheses after this \"if\" keyword")
-      .next().atLine(14).withMessage("Remove the parentheses after this \"elif\" keyword")
-      .next().atLine(20).withMessage("Remove the parentheses after this \"for\" keyword")
-      .next().atLine(23).withMessage("Remove the parentheses after this \"in\" keyword")
-      .next().atLine(30).withMessage("Remove the parentheses after this \"raise\" keyword")
-      .next().atLine(39).withMessage("Remove the parentheses after this \"return\" keyword")
-      .next().atLine(44).withMessage("Remove the parentheses after this \"while\" keyword")
-      .next().atLine(48).withMessage("Remove the parentheses after this \"yield\" keyword")
-      .next().atLine(57).withMessage("Remove the parentheses after this \"except\" keyword")
-      .next().atLine(68).withMessage("Remove the parentheses after this \"not\" keyword")
-      .noMore();
+    PythonCheckVerifier.verify("src/test/resources/checks/uselessParenthesisAfterKeyword.py", new UselessParenthesisAfterKeywordCheck());
   }
 
 }

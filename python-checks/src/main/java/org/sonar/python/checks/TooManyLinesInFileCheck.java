@@ -21,13 +21,13 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
+import java.text.MessageFormat;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = TooManyLinesInFileCheck.CHECK_KEY,
@@ -37,7 +37,7 @@ import org.sonar.squidbridge.checks.SquidCheck;
 )
 @SqaleConstantRemediation("1h")
 @ActivatedByDefault
-public class TooManyLinesInFileCheck extends SquidCheck<Grammar> {
+public class TooManyLinesInFileCheck extends PythonCheck {
   public static final String CHECK_KEY = "S104";
   private static final int DEFAULT = 1000;
 
@@ -57,7 +57,7 @@ public class TooManyLinesInFileCheck extends SquidCheck<Grammar> {
 
     if (lines > maximum) {
       String message = "File \"{0}\" has {1} lines, which is greater than {2} authorized. Split it into smaller files.";
-      getContext().createFileViolation(this, message, getContext().getFile().getName(), lines, maximum);
+      addFileIssue(MessageFormat.format(message, getContext().getFile().getName(), lines, maximum));
     }
   }
 }

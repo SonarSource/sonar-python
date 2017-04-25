@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -27,16 +26,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.AstScannerExceptionHandler;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
     key = ParsingErrorCheck.CHECK_KEY,
     priority = Priority.MAJOR,
     name = "Parser failure")
 @SqaleConstantRemediation("30min")
-public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScannerExceptionHandler {
+public class ParsingErrorCheck extends PythonCheck implements AstScannerExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(ParsingErrorCheck.class);
   public static final String CHECK_KEY = "ParsingError";
 
@@ -50,7 +49,7 @@ public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScanner
 
   @Override
   public void processRecognitionException(RecognitionException e) {
-    getContext().createLineViolation(this, e.getMessage(), e.getLine());
+    addLineIssue(e.getMessage(), e.getLine());
   }
 
 }
