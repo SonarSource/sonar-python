@@ -23,12 +23,6 @@
     <tag>HEAD</tag>
   </scm>
 
-  <properties>
-    <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
-    <sonar.pluginName>SonarPython</sonar.pluginName>
-    <sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -72,6 +66,18 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <configuration>
+          <pluginName>SonarPython</pluginName>
+          <pluginClass>org.sonar.plugins.python.PythonPlugin</pluginClass>
+          <skipDependenciesPackaging>true</skipDependenciesPackaging>
+          <sonarLintSupported>true</sonarLintSupported>
+          <sonarQubeMinVersion>${sonarQubeMinVersion}</sonarQubeMinVersion>
+        </configuration>
+      </plugin>
+
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>

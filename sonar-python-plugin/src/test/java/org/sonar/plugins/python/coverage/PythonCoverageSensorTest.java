@@ -134,17 +134,22 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_force_zero_coverage_no_report() {
-    Settings newSettings = new Settings().setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
+  public void test_force_zero_coverage_without_report() {
+    Settings newSettings = new Settings();
+    newSettings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
     context.setSettings(newSettings);
     coverageSensor.execute(context, linesOfCode);
     assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isEqualTo(0);
-    assertThat(context.lineHits(FILE3_KEY, CoverageType.UNIT, 1)).isEqualTo(0);
+  }
 
-    context.setSettings(newSettings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.xml"));
+  @Test
+  public void test_force_zero_coverage_with_report() {
+    Settings newSettings = new Settings();
+    newSettings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
+    newSettings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.xml");
+    context.setSettings(newSettings);
     coverageSensor.execute(context, linesOfCode);
     assertThat(context.lineHits(FILE1_KEY, CoverageType.UNIT, 1)).isEqualTo(1);
-    assertThat(context.lineHits(FILE3_KEY, CoverageType.UNIT, 1)).isEqualTo(0);
   }
 
   @Test
