@@ -12,8 +12,9 @@
   <packaging>sonar-plugin</packaging>
 
   <name>Python :: Sonar Plugin</name>
-  <description>Enables scanning of Python source files</description>
-  <url>http://docs.codehaus.org/display/SONAR/Python+Plugin</url>
+  <!-- Be careful when altering <description> as its value shows up in the SonarQube GUI -->
+  <description>Code Analyzer for Python</description>
+  <url>http://redirect.sonarsource.com/plugins/python.html</url>
 
   <scm>
     <connection>scm:git:git@github.com:SonarCommunity/sonar-python.git</connection>
@@ -24,7 +25,7 @@
 
   <properties>
     <sonar.pluginClass>org.sonar.plugins.python.PythonPlugin</sonar.pluginClass>
-    <sonar.pluginName>Python</sonar.pluginName>
+    <sonar.pluginName>SonarPython</sonar.pluginName>
     <sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>
   </properties>
 
