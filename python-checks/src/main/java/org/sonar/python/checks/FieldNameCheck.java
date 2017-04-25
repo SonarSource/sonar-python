@@ -19,8 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -28,9 +33,6 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-
-import java.util.List;
-import java.util.regex.Pattern;
 
 @Rule(
   key = FieldNameCheck.CHECK_KEY,
@@ -56,10 +58,8 @@ public class FieldNameCheck extends PythonCheck {
   private Pattern constantPattern = null;
 
   @Override
-  public void init() {
-    pattern = Pattern.compile(format);
-    constantPattern = Pattern.compile(CONSTANT_PATTERN);
-    subscribeTo(PythonGrammar.CLASSDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.CLASSDEF);
   }
 
   @Override
@@ -71,6 +71,9 @@ public class FieldNameCheck extends PythonCheck {
   }
 
   private void checkNames(List<Token> varNames) {
+    if (constantPattern == null) {
+      constantPattern = Pattern.compile(CONSTANT_PATTERN);
+    }
     for (Token name : varNames) {
       if (!constantPattern.matcher(name.getValue()).matches()) {
         checkName(name);
@@ -80,6 +83,9 @@ public class FieldNameCheck extends PythonCheck {
 
   private void checkName(Token token) {
     String name = token.getValue();
+    if (pattern == null) {
+      pattern = Pattern.compile(format);
+    }
     if (!pattern.matcher(name).matches()) {
       addIssue(token, String.format(MESSAGE, name, format));
     }

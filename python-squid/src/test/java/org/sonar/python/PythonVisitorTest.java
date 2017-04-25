@@ -17,38 +17,46 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python;
 
 import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = PrintStatementUsageCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "The \"print\" statement should not be used",
-    tags = Tags.OBSOLETE
-)
-@SqaleConstantRemediation("5min")
-@ActivatedByDefault
-public class PrintStatementUsageCheck extends PythonCheck {
-  public static final String CHECK_KEY = "PrintStatementUsage";
+import static org.assertj.core.api.Assertions.assertThat;
 
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.PRINT_STMT);
+public class PythonVisitorTest {
+
+  @Test
+  public void test() throws Exception {
+    TestVisitor visitor = new TestVisitor();
+    TestPythonVisitorRunner.scanFile(new File("src/test/resources/visitor.py"), visitor);
+    assertThat(visitor.atomValues).containsExactly("foo", "\"x\"", "42");
+    assertThat(visitor.fileName).isEqualTo("visitor.py");
   }
 
-  @Override
-  public void visitNode(AstNode astNode) {
-    addIssue(astNode.getFirstChild(), "Replace print statement by built-in function.");
+  public class TestVisitor extends PythonVisitor {
+
+    private List<String> atomValues = new ArrayList<>();
+    private String fileName;
+
+    @Override
+    public Set<AstNodeType> subscribedKinds() {
+      return ImmutableSet.of(PythonGrammar.ATOM);
+    }
+
+    @Override
+    public void visitNode(AstNode node) {
+      atomValues.add(node.getTokenValue());
+      fileName = getContext().pythonFile().fileName();
+    }
+
   }
 
 }

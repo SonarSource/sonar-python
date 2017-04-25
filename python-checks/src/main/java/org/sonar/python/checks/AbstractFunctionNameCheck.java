@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
@@ -36,10 +39,16 @@ public abstract class AbstractFunctionNameCheck extends PythonCheck {
   public String format = DEFAULT;
   private Pattern pattern = null;
 
+  private Pattern pattern() {
+    if (pattern == null) {
+      pattern = Pattern.compile(format);
+    }
+    return pattern;
+  }
+
   @Override
-  public void init() {
-    pattern = Pattern.compile(format);
-    subscribeTo(PythonGrammar.FUNCDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.FUNCDEF);
   }
 
   @Override
@@ -49,7 +58,7 @@ public abstract class AbstractFunctionNameCheck extends PythonCheck {
     }
     AstNode nameNode = astNode.getFirstChild(PythonGrammar.FUNCNAME);
     String name = nameNode.getTokenValue();
-    if (!pattern.matcher(name).matches()) {
+    if (!pattern().matcher(name).matches()) {
       String message = String.format(MESSAGE, typeName(), name, this.format);
       addIssue(nameNode, message);
     }

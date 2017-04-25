@@ -17,41 +17,37 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.PythonConfiguration;
-import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.parser.PythonParser;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class TestPythonVisitorRunner {
 
-public class ParsingErrorCheckTest {
+  private TestPythonVisitorRunner() {
+  }
 
-  @Test
-  public void test() {
-    File file = new File("src/test/resources/checks/parsingError.py");
-
-    Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
-    PythonVisitorContext context;
-    try {
-      parser.parse(file);
-      throw new IllegalStateException("Expected RecognitionException");
-    } catch (RecognitionException e) {
-      context = new PythonVisitorContext(file, StandardCharsets.UTF_8, e);
+  public static void scanFile(File file, PythonVisitor... visitors) {
+    PythonVisitorContext context = createContext(file);
+    for (PythonVisitor visitor : visitors) {
+      visitor.scanFile(context);
     }
+  }
 
-    ParsingErrorCheck check = new ParsingErrorCheck();
-    List<PreciseIssue> issues = check.scanFileForIssues(context);
-    assertThat(issues).hasSize(1);
-    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
+  public static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
+    return check.scanFileForIssues(createContext(file));
+  }
+
+  private static PythonVisitorContext createContext(File file) {
+    Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    AstNode rootTree = parser.parse(file);
+    return new PythonVisitorContext(rootTree, file, StandardCharsets.UTF_8);
   }
 
 }

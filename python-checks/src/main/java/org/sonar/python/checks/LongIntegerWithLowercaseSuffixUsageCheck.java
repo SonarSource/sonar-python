@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -40,8 +43,8 @@ public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonCheck {
   private static final String MESSAGE = "Replace suffix in long integers from lower case \"l\" to upper case \"L\".";
 
   @Override
-  public void init() {
-    subscribeTo(PythonTokenType.NUMBER);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonTokenType.NUMBER);
   }
 
   @Override

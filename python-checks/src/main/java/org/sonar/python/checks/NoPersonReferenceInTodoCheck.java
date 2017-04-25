@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
@@ -38,7 +37,7 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("5min")
-public class NoPersonReferenceInTodoCheck extends PythonCheck implements AstAndTokenVisitor {
+public class NoPersonReferenceInTodoCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1707";
   public static final String MESSAGE = "Add a citation of the person who can best explain this comment.";
 

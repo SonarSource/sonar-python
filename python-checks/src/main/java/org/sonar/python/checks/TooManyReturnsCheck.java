@@ -19,9 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -47,8 +50,8 @@ public class TooManyReturnsCheck extends PythonCheck {
   public int max = DEFAULT_MAX;
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.FUNCDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.FUNCDEF);
   }
 
   @Override

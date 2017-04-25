@@ -19,15 +19,17 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonMetric;
+import org.sonar.python.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
-import org.sonar.squidbridge.api.SourceFunction;
 
 @Rule(
   key = "FunctionComplexity",
@@ -49,14 +51,13 @@ public class FunctionComplexityCheck extends PythonCheck {
   int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.FUNCDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.FUNCDEF);
   }
 
   @Override
-  public void leaveNode(AstNode node) {
-    SourceFunction function = (SourceFunction) getContext().peekSourceCode();
-    int complexity = function.getInt(PythonMetric.COMPLEXITY);
+  public void visitNode(AstNode node) {
+    int complexity = ComplexityVisitor.complexity(node);
     if (complexity > maximumFunctionComplexityThreshold) {
       String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
       addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message)

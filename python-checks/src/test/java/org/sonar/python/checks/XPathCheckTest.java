@@ -47,11 +47,6 @@ public class XPathCheckTest {
   }
 
   @Test
-  public void parseError() {
-    analyze("parsingError.py", "//STATEMENT");
-  }
-
-  @Test
   public void empty_query() throws Exception {
     analyze("xpath.py", "");
   }

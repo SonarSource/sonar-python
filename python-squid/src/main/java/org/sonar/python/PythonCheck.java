@@ -21,19 +21,19 @@ package org.sonar.python;
 
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.squidbridge.checks.SquidCheck;
 
-public abstract class PythonCheck extends SquidCheck<Grammar> {
+public abstract class PythonCheck extends PythonVisitor {
 
   private List<PreciseIssue> issues = new ArrayList<>();
 
-  public List<PreciseIssue> getIssues() {
+  public List<PreciseIssue> scanFileForIssues(PythonVisitorContext context) {
+    issues.clear();
+    scanFile(context);
     return ImmutableList.copyOf(issues);
   }
 

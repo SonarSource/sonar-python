@@ -20,9 +20,12 @@
 package org.sonar.python.checks;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -46,8 +49,8 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
     PythonGrammar.WHILE_STMT, "while");
 
   @Override
-  public void init() {
-    subscribeTo(
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(
       PythonGrammar.ASSERT_STMT,
       PythonGrammar.DEL_STMT,
       PythonGrammar.IF_STMT,

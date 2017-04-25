@@ -20,15 +20,17 @@
 package org.sonar.python.checks;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.List;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-
-import java.util.List;
 
 @Rule(
   key = "S1764",
@@ -45,8 +47,8 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
   );
 
   @Override
-  public void init() {
-    subscribeTo(
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(
       PythonGrammar.M_EXPR,
       PythonGrammar.A_EXPR,
       PythonGrammar.SHIFT_EXPR,

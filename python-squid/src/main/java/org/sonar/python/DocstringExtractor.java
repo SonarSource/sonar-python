@@ -19,11 +19,11 @@
  */
 package org.sonar.python;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
-import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
@@ -36,7 +36,10 @@ import org.sonar.python.api.PythonTokenType;
  */
 public class DocstringExtractor {
 
-  public static final List<AstNodeType> DOCUMENTABLE_NODE_TYPES = ImmutableList.of(PythonGrammar.FILE_INPUT, PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF);
+  public static final Set<AstNodeType> DOCUMENTABLE_NODE_TYPES = ImmutableSet.<AstNodeType>of(
+    PythonGrammar.FILE_INPUT,
+    PythonGrammar.FUNCDEF,
+    PythonGrammar.CLASSDEF);
 
   private DocstringExtractor() {
   }

@@ -20,16 +20,15 @@
 package org.sonar.plugins.python;
 
 import com.google.common.base.Charsets;
+import java.io.File;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.python.PythonAstScanner;
-
-import java.io.File;
-import java.util.List;
+import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,7 +39,6 @@ public class PythonHighlighterTest {
   private File file;
 
   @Before
-  @SuppressWarnings("unchecked")
   public void scanFile() {
     String dir = "src/test/resources/org/sonar/plugins/python";
 
@@ -52,7 +50,7 @@ public class PythonHighlighterTest {
     context.fileSystem().add(inputFile);
 
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context);
-    PythonAstScanner.scanSingleFile(file.getPath(), pythonHighlighter);
+    TestPythonVisitorRunner.scanFile(file, pythonHighlighter);
   }
 
   @Test

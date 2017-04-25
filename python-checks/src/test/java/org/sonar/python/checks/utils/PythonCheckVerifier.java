@@ -22,32 +22,31 @@ package org.sonar.python.checks.utils;
 import com.google.common.base.Function;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Ordering;
-import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonAstScanner;
-import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.squidbridge.checks.SquidCheck;
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.sonar.python.IssueLocation;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheck.PreciseIssue;
+import org.sonar.python.PythonVisitor;
+import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-public class PythonCheckVerifier extends SquidCheck<Grammar> implements AstAndTokenVisitor {
+public class PythonCheckVerifier extends PythonVisitor {
 
   private List<TestIssue> expectedIssues = new ArrayList<>();
 
   public static void verify(String path, PythonCheck check) {
     PythonCheckVerifier verifier = new PythonCheckVerifier();
-    PythonAstScanner.scanSingleFile(path, check, verifier);
+    File file = new File(path);
+    TestPythonVisitorRunner.scanFile(file, verifier);
 
-    Iterator<PreciseIssue> actualIssues = getActualIssues(check);
+    Iterator<PreciseIssue> actualIssues = getActualIssues(file, check);
     List<TestIssue> expectedIssues = verifier.expectedIssues;
 
     for (TestIssue expected : expectedIssues) {
@@ -106,8 +105,8 @@ public class PythonCheckVerifier extends SquidCheck<Grammar> implements AstAndTo
     return Ordering.natural().sortedCopy(result);
   }
 
-  private static Iterator<PreciseIssue> getActualIssues(PythonCheck check) {
-    List<PreciseIssue> issues = check.getIssues();
+  private static Iterator<PreciseIssue> getActualIssues(File file, PythonCheck check) {
+    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(file, check);
     List<PreciseIssue> sortedIssues = Ordering.natural().onResultOf(new IssueToLine()).sortedCopy(issues);
     return sortedIssues.iterator();
   }

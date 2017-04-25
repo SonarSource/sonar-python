@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -38,8 +41,8 @@ public class NewStyleClassCheck extends PythonCheck {
   private static final String MESSAGE = "Add inheritance from \"object\" or some other new-style class.";
 
   @Override
-  public void init() {
-    subscribeTo(PythonGrammar.CLASSDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.CLASSDEF);
   }
 
   @Override

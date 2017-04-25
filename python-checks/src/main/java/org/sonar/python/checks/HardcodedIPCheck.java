@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
@@ -47,8 +50,8 @@ public class HardcodedIPCheck extends PythonCheck {
   String message = "Make this IP \"%s\" address configurable.";
 
   @Override
-  public void init() {
-    subscribeTo(PythonTokenType.STRING);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonTokenType.STRING);
   }
 
   @Override

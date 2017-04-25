@@ -19,13 +19,15 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.lang.reflect.Constructor;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-
-import java.lang.reflect.Constructor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -48,8 +50,8 @@ public class CheckUtilsTest {
 
   private static class EqualsNodeCheck extends PythonCheck {
     @Override
-    public void init() {
-      subscribeTo(PythonGrammar.values());
+    public Set<AstNodeType> subscribedKinds() {
+      return ImmutableSet.copyOf(PythonGrammar.values());
     }
 
     @Override
@@ -72,8 +74,8 @@ public class CheckUtilsTest {
 
   private static class IsMethodDefinitionCheck extends PythonCheck {
     @Override
-    public void init() {
-      subscribeTo(
+    public Set<AstNodeType> subscribedKinds() {
+      return ImmutableSet.of(
         PythonGrammar.FILE_INPUT,
         PythonGrammar.CLASSDEF,
         PythonGrammar.FUNCDEF
@@ -97,8 +99,8 @@ public class CheckUtilsTest {
 
   private static class classHasInheritanceCheck extends PythonCheck {
     @Override
-    public void init() {
-      subscribeTo(PythonGrammar.CLASSDEF);
+    public Set<AstNodeType> subscribedKinds() {
+      return ImmutableSet.of(PythonGrammar.CLASSDEF);
     }
 
     @Override

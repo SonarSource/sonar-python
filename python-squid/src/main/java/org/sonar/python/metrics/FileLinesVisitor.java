@@ -21,12 +21,12 @@ package org.sonar.python.metrics;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.api.batch.fs.FileSystem;
@@ -35,16 +35,16 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.DocstringExtractor;
+import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
-import org.sonar.python.api.PythonMetric;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.SquidAstVisitor;
-import org.sonar.squidbridge.api.SourceFile;
 
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES_DATA_KEY} metrics used by the DevCockpit.
  */
-public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
+public class FileLinesVisitor extends PythonVisitor {
+
+  private static final PythonCommentAnalyser COMMENT_ANALYSER = new PythonCommentAnalyser();
 
   private final FileLinesContextFactory fileLinesContextFactory;
 
@@ -57,22 +57,20 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
   private Set<Integer> linesOfComments = Sets.newHashSet();
   private Set<Integer> linesOfDocstring = Sets.newHashSet();
   private final FileSystem fileSystem;
-  private final Map<InputFile, Set<Integer>> allLinesOfCode;
+  private final Map<InputFile, Set<Integer>> allLinesOfCode = new HashMap<>();
 
   public FileLinesVisitor(
       FileLinesContextFactory fileLinesContextFactory,
       FileSystem fileSystem,
-      Map<InputFile, Set<Integer>> linesOfCode,
       boolean ignoreHeaderComments) {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.fileSystem = fileSystem;
-    this.allLinesOfCode = linesOfCode;
     this.ignoreHeaderComments = ignoreHeaderComments;
   }
 
   @Override
-  public void init() {
-    DocstringExtractor.DOCUMENTABLE_NODE_TYPES.stream().forEach(this::subscribeTo);
+  public Set<AstNodeType> subscribedKinds() {
+    return DocstringExtractor.DOCUMENTABLE_NODE_TYPES;
   }
 
   @Override
@@ -126,7 +124,7 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
   }
 
   public void visitComment(Trivia trivia) {
-    String[] commentLines = getContext().getCommentAnalyser().getContents(trivia.getToken().getOriginalValue())
+    String[] commentLines = COMMENT_ANALYSER.getContents(trivia.getToken().getOriginalValue())
       .split("(\r)?\n|\r", -1);
     int line = trivia.getToken().getLine();
 
@@ -134,7 +132,7 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
       if (commentLine.contains("NOSONAR")) {
         linesOfComments.remove(line);
         noSonar.add(line);
-      } else if (!getContext().getCommentAnalyser().isBlank(commentLine) && !noSonar.contains(line)) {
+      } else if (!COMMENT_ANALYSER.isBlank(commentLine) && !noSonar.contains(line)) {
         linesOfComments.add(line);
       }
       line++;
@@ -164,11 +162,38 @@ public class FileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAnd
     fileLinesContext.save();
 
     allLinesOfCode.put(inputFile, ImmutableSet.copyOf(linesOfCode));
-
-    getContext().peekSourceCode().add(PythonMetric.LINES_OF_CODE, linesOfCode.size());
-    getContext().peekSourceCode().add(PythonMetric.COMMENT_LINES, linesOfComments.size());
-
-    ((SourceFile) getContext().peekSourceCode()).addNoSonarTagLines(noSonar);
   }
 
+  public Set<Integer> getLinesWithNoSonar() {
+    return noSonar;
+  }
+
+  public Set<Integer> getLinesOfCode() {
+    return linesOfCode;
+  }
+
+  public Set<Integer> getLinesOfComments() {
+    return linesOfComments;
+  }
+
+  public Map<InputFile, Set<Integer>> linesOfCodeByFile() {
+    return allLinesOfCode;
+  }
+
+  private static class PythonCommentAnalyser {
+
+    public boolean isBlank(String line) {
+      for (int i = 0; i < line.length(); i++) {
+        if (Character.isLetterOrDigit(line.charAt(i))) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    public String getContents(String comment) {
+      // Comment always starts with "#"
+      return comment.substring(comment.indexOf('#'));
+    }
+  }
 }

@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -49,17 +52,23 @@ public class ClassNameCheck extends PythonCheck {
   public String format = DEFAULT;
   private Pattern pattern = null;
 
+  private Pattern pattern() {
+    if (pattern == null) {
+      pattern = Pattern.compile(format);
+    }
+    return pattern;
+  }
+
   @Override
-  public void init() {
-    pattern = Pattern.compile(format);
-    subscribeTo(PythonGrammar.CLASSDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.CLASSDEF);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
     AstNode classNameNode = astNode.getFirstChild(PythonGrammar.CLASSNAME);
     String className = classNameNode.getTokenValue();
-    if (!pattern.matcher(className).matches()) {
+    if (!pattern().matcher(className).matches()) {
       String message = String.format(MESSAGE, className, format);
       addIssue(classNameNode, message);
     }

@@ -19,7 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -40,8 +43,8 @@ public class InequalityUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "InequalityUsage";
 
   @Override
-  public void init() {
-    subscribeTo(PythonPunctuator.NOT_EQU2);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonPunctuator.NOT_EQU2);
   }
 
   @Override

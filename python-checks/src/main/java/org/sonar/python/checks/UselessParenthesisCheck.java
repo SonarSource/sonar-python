@@ -19,8 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
@@ -42,8 +45,8 @@ public class UselessParenthesisCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1110";
 
   @Override
-  public void init() {
-    subscribeTo(
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(
         PythonGrammar.TEST,
         PythonGrammar.EXPR,
         PythonGrammar.NOT_TEST

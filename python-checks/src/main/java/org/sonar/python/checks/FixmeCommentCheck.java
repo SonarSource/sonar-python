@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
@@ -37,7 +36,7 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 )
 @SqaleConstantRemediation("20min")
 @ActivatedByDefault
-public class FixmeCommentCheck extends PythonCheck implements AstAndTokenVisitor {
+public class FixmeCommentCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1134";
 
   private static final String FIXME_COMMENT_PATTERN = "^#[ ]*fixme.*";

@@ -19,11 +19,14 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -59,10 +62,8 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
   private Pattern constantPattern = null;
 
   @Override
-  public void init() {
-    pattern = Pattern.compile(format);
-    constantPattern = Pattern.compile(CONSTANT_PATTERN);
-    subscribeTo(PythonGrammar.FUNCDEF);
+  public Set<AstNodeType> subscribedKinds() {
+    return ImmutableSet.of(PythonGrammar.FUNCDEF);
   }
 
   @Override
@@ -92,6 +93,10 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
   }
 
   private void checkNames(List<Token> varNames, List<Token> forCounterNames) {
+    if (constantPattern == null) {
+      constantPattern = Pattern.compile(CONSTANT_PATTERN);
+    }
+
     for (Token name : varNames) {
       if (!constantPattern.matcher(name.getValue()).matches()) {
         checkName(name, LOCAL_VAR);
@@ -139,6 +144,9 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
 
   private void checkName(Token token, String type) {
     String name = token.getValue();
+    if (pattern == null) {
+      pattern = Pattern.compile(format);
+    }
     if (!pattern.matcher(name).matches()) {
       addIssue(token, String.format(MESSAGE, type, name, format));
     }

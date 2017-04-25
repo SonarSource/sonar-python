@@ -20,19 +20,15 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.python.CharsetAwareVisitor;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.SquidAstVisitorContext;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 @Rule(
@@ -42,24 +38,16 @@ import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
     tags = Tags.CONVENTION
 )
 @SqaleConstantRemediation("1min")
-public class TrailingWhitespaceCheck extends PythonCheck implements CharsetAwareVisitor {
+public class TrailingWhitespaceCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1131";
   public static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
 
   private static final Pattern TRAILING_WS = Pattern.compile("\\s$");
 
-  private Charset charset;
-
-  @Override
-  public void setCharset(Charset charset) {
-    this.charset = charset;
-  }
-
   @Override
   public void visitFile(@Nullable AstNode astNode) {
-    final SquidAstVisitorContext<Grammar> context = getContext();
-    final File file = context.getFile();
-    try (BufferedReader reader = Files.newBufferedReader(file.toPath(), charset)) {
+    final File file = getContext().getFile();
+    try (BufferedReader reader = Files.newBufferedReader(file.toPath(), getContext().charset())) {
       int lineNr = 0;
       String line;
       while ((line = reader.readLine()) != null) {

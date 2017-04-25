@@ -20,16 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import java.text.MessageFormat;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonMetric;
+import org.sonar.python.metrics.ComplexityVisitor;
 import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
-import org.sonar.squidbridge.api.SourceFile;
-import org.sonar.squidbridge.checks.ChecksHelper;
-
-import java.text.MessageFormat;
 
 @Rule(
   key = "FileComplexity",
@@ -51,8 +48,7 @@ public class FileComplexityCheck extends PythonCheck {
 
   @Override
   public void leaveFile(AstNode astNode) {
-    SourceFile sourceFile = (SourceFile) getContext().peekSourceCode();
-    int complexity = ChecksHelper.getRecursiveMeasureInt(sourceFile, PythonMetric.COMPLEXITY);
+    int complexity = ComplexityVisitor.complexity(astNode);
     if (complexity > maximumFileComplexityThreshold) {
       String message = MessageFormat.format(
         "File has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
