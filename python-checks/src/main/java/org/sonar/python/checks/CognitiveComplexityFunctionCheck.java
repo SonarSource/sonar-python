@@ -45,7 +45,7 @@ import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
   effortToFixDescription = "per complexity point above the threshold")
 public class CognitiveComplexityFunctionCheck extends PythonCheck {
 
-  private static final String MESSAGE = "Refactor this method to reduce its Cognitive Complexity from %s to the %s allowed.";
+  private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";
   public static final String CHECK_KEY = "S3776";
   private static final int DEFAULT_THRESHOLD = 15;
 

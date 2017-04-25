@@ -1,4 +1,4 @@
-def nok(): # Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.}}
+def nok(): # Noncompliant {{Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.}}
     if condition:
         pass
     if condition:
