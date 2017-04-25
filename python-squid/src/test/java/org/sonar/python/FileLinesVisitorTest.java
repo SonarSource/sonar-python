@@ -59,7 +59,7 @@ public class FileLinesVisitorTest {
     HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
     SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, false);
 
-    SourceFile sourceFile = PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
+    SourceFile sourceFile = PythonAstScanner.scanSingleFile(inputFile.file().getPath(), visitor);
 
     assertThat(sourceFile.getInt(PythonMetric.LINES_OF_CODE)).isEqualTo(12);
     assertThat(linesOfCode).hasSize(1);
@@ -80,7 +80,7 @@ public class FileLinesVisitorTest {
     HashMap<InputFile, Set<Integer>> linesOfCode = new HashMap<>();
     SquidAstVisitor<Grammar> visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, linesOfCode, true);
 
-    PythonAstScanner.scanSingleFile(inputFile.getFile().getPath(), visitor);
+    PythonAstScanner.scanSingleFile(inputFile.file().getPath(), visitor);
 
     assertThat(linesOfCode).hasSize(1);
     assertThat(linesOfCode.get(inputFile)).as("Lines of codes").containsOnly(2, 4);
