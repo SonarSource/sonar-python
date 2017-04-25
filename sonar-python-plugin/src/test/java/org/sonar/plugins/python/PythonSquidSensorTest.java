@@ -22,6 +22,8 @@ package org.sonar.plugins.python;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -34,12 +36,14 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.internal.google.common.base.Charsets;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.checks.CheckList;
 
@@ -51,6 +55,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PythonSquidSensorTest {
+
+  private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(6, 0);
+
+  private static final SonarRuntime SONARLINT_RUNTIME = SonarRuntimeImpl.forSonarLint(SONARLINT_DETECTABLE_VERSION);
+
+  private static final SonarRuntime NOSONARLINT_RUNTIME = SonarRuntimeImpl.forSonarQube(SONARLINT_DETECTABLE_VERSION, SonarQubeSide.SERVER);
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor");
 
@@ -76,7 +86,20 @@ public class PythonSquidSensorTest {
   }
 
   @Test
-  public void test_execute() {
+  public void test_execute_on_sonarqube() {
+    // with SonarQube configuration, coverage is activated
+    test_execute(NOSONARLINT_RUNTIME, 10);
+  }
+
+  @Test
+  public void test_execute_on_sonarlint() {
+    // with SonarLint configuration, coverage is not activated
+    test_execute(SONARLINT_RUNTIME, null);
+  }
+
+  private void test_execute(SonarRuntime runtime, Integer expectedNumberOfLineHits) {
+    context.setRuntime(runtime);
+
     activeRules = (new ActiveRulesBuilder())
       .create(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
       .setName("Print Statement Usage")
@@ -100,7 +123,7 @@ public class PythonSquidSensorTest {
     String msg = "number of TypeOfText for the highlighting of keyword 'def'";
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
 
-    assertThat(context.lineHits("moduleKey:file1.py", CoverageType.OVERALL, 1)).isEqualTo(10);
+    assertThat(context.lineHits("moduleKey:file1.py", CoverageType.OVERALL, 1)).isEqualTo(expectedNumberOfLineHits);
   }
 
   @Test
