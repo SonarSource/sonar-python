@@ -24,31 +24,40 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
+import java.util.List;
+
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
-import org.sonar.sslr.ast.AstSelect;
+
+import com.sonar.sslr.api.AstNode;
 
 @Rule(
     key = UselessParenthesisCheck.CHECK_KEY,
     priority = Priority.MAJOR,
-    name = "Useless parentheses around expressions should be removed to prevent any misunderstanding",
+    name = "Redundant parentheses around expressions should be removed",
     tags = Tags.CONFUSING
 )
 @SqaleConstantRemediation("1min")
 @ActivatedByDefault
 public class UselessParenthesisCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S1110";
+
+  private static final String MESSAGE = "Remove those useless parentheses.";
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
     return ImmutableSet.of(
         PythonGrammar.TEST,
         PythonGrammar.EXPR,
+        PythonGrammar.A_EXPR,
+        PythonGrammar.M_EXPR,
         PythonGrammar.NOT_TEST
     );
   }
@@ -56,59 +65,27 @@ public class UselessParenthesisCheck extends PythonCheck {
   @Override
   public void visitNode(AstNode node) {
     if (node.is(PythonGrammar.NOT_TEST)) {
-      visitNotTest(node);
-    } else if (node.getNumberOfChildren() == 1 && node.getFirstChild().is(PythonGrammar.ATOM)) {
+      checkAtom(node.getFirstChild().getNextSibling());
+    } else {
+      node.getChildren(PythonGrammar.ATOM).forEach(this::checkAtom);
+    }
+  }
 
-      AstNode atom = node.getFirstChild();
-      AstSelect selectedParent = atom.select().parent().parent().parent();
-      if (selectedParent.size() == 1) {
-        AstNode parent = selectedParent.get(0);
-        if (isKeywordException(parent)) {
-          checkAtom(atom, true);
-          return;
+  private void checkAtom(AstNode atom) {
+    List<AstNode> children = atom.getChildren();
+    boolean hasParentheses = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS);
+    if (hasParentheses) {
+      AstNode child1 = children.get(1);
+      if(child1.getChildren(PythonGrammar.TEST).size() == 1 && child1.getFirstChild(PythonPunctuator.COMMA) == null) {
+        AstNode test = child1.getChildren(PythonGrammar.TEST).get(0);
+        if (test.getChildren(PythonKeyword.IF).isEmpty()) {
+          AstNode testChild0 = test.getChildren().get(0);
+          if (testChild0.is(PythonGrammar.ATOM) && testChild0.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
+            addIssue(children.get(0), MESSAGE).secondary(children.get(2), null);
+          }
         }
       }
-
-      checkAtom(atom, false);
     }
-  }
-
-  private static boolean isKeywordException(AstNode parent) {
-    if ((parent.is(PythonGrammar.RETURN_STMT) || parent.is(PythonGrammar.YIELD_EXPR)) && parent.getFirstChild(PythonGrammar.TESTLIST).getNumberOfChildren() == 1) {
-      return true;
-    }
-    return parent.is(PythonGrammar.FOR_STMT) && parent.getFirstChild(PythonGrammar.EXPRLIST).getChildren(PythonGrammar.EXPR).size() == 1;
-  }
-
-  private void checkAtom(AstNode atom, boolean ignoreTestNumber) {
-    if (violationCondition(atom, ignoreTestNumber)) {
-      addIssue(atom, "Remove those useless parentheses");
-    }
-  }
-
-  private static boolean violationCondition(AstNode atom, boolean ignoreTestNumber) {
-    List<AstNode> children = atom.getChildren();
-    boolean result = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS) && children.get(2).is(PythonPunctuator.RPARENTHESIS) && isOnASingleLine(atom);
-    if (result && !ignoreTestNumber) {
-      result = children.get(1).getChildren(PythonGrammar.TEST).size() == 1 && children.get(1).getFirstChild(PythonPunctuator.COMMA) == null;
-    }
-    return result;
-  }
-
-  private void visitNotTest(AstNode node) {
-    boolean hasUselessParenthesis = node.select()
-        .children(PythonGrammar.ATOM)
-        .children(PythonGrammar.TESTLIST_COMP)
-        .children(PythonGrammar.TEST)
-        .children(PythonGrammar.ATOM, PythonGrammar.COMPARISON)
-        .isNotEmpty();
-    if (hasUselessParenthesis) {
-      checkAtom(node.getFirstChild().getNextSibling(), false);
-    }
-  }
-
-  private static boolean isOnASingleLine(AstNode node) {
-    return node.getTokenLine() == node.getLastToken().getLine();
   }
 
 }
