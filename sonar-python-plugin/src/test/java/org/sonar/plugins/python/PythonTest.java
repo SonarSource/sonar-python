@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import org.junit.Test;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,7 +31,7 @@ public class PythonTest {
 
   @Test
   public void test() {
-    Python language = new Python(new Settings());
+    Python language = new Python(new MapSettings());
     assertThat(language.getKey()).isEqualTo("py");
     assertThat(language.getName()).isEqualTo("Python");
     assertThat(language.getFileSuffixes()).hasSize(1).contains("py");
@@ -41,7 +42,7 @@ public class PythonTest {
     Map<String, String> props = Maps.newHashMap();
     props.put(PythonPlugin.FILE_SUFFIXES_KEY, "py,python");
 
-    Settings settings = new Settings();
+    Settings settings = new MapSettings();
     settings.addProperties(props);
 
     Python language = new Python(settings);

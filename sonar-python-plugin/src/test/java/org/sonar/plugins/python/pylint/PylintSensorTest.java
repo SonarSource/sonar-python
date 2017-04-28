@@ -28,7 +28,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.component.ResourcePerspectives;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
@@ -70,7 +70,7 @@ public class PylintSensorTest {
   }
 
   private void checkNecessityOfExecution(Project project, ActiveRules currentActiveRules, DefaultFileSystem currentFileSystem, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(conf, currentActiveRules, currentFileSystem, mock(ResourcePerspectives.class), new Settings());
+    PylintSensor sensor = new PylintSensor(conf, currentActiveRules, currentFileSystem, mock(ResourcePerspectives.class), new MapSettings());
     assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
   }
 

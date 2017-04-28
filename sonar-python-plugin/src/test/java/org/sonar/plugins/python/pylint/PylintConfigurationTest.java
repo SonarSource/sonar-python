@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
-
-import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +35,7 @@ public class PylintConfigurationTest {
 
   @Before
   public void setUp() throws Exception {
-    settings = new Settings();
+    settings = new MapSettings();
     pylintConfiguration = new PylintConfiguration(settings);
   }
 

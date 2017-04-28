@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.Project;
@@ -44,7 +45,7 @@ public class PythonXUnitSensorTest {
 
   @Before
   public void setUp() {
-    settings = new Settings();
+    settings = new MapSettings();
     project = mock(Project.class);
     fs = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python"));
     context = mock(SensorContext.class);

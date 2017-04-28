@@ -30,6 +30,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.resources.Project;
@@ -52,7 +53,7 @@ public class PylintImportSensorTest {
 
   @Before
   public void init() {
-    settings = new Settings();
+    settings = new MapSettings();
     settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
     fileSystem = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python/pylint"));
 
