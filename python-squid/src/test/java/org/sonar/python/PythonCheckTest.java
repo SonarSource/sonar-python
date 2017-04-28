@@ -51,7 +51,6 @@ public class PythonCheckTest {
     PreciseIssue firstIssue = issues.get(0);
 
     assertThat(firstIssue.cost()).isNull();
-    assertThat(firstIssue.file()).isEqualTo(FILE);
     assertThat(firstIssue.secondaryLocations()).isEmpty();
 
     IssueLocation primaryLocation = firstIssue.primaryLocation();

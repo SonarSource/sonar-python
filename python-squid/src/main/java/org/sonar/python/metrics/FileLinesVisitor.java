@@ -141,7 +141,7 @@ public class FileLinesVisitor extends PythonVisitor {
 
   @Override
   public void leaveFile(AstNode astNode) {
-    InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(getContext().getFile()));
+    InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(getContext().pythonFile().file()));
     if (inputFile == null){
       throw new IllegalStateException("InputFile is null, but it should not be.");
     }

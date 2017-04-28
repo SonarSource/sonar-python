@@ -22,7 +22,6 @@ package org.sonar.python;
 import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -38,25 +37,25 @@ public abstract class PythonCheck extends PythonVisitor {
   }
 
   protected final PreciseIssue addIssue(AstNode node, String message) {
-    PreciseIssue newIssue = new PreciseIssue(IssueLocation.preciseLocation(node, message), getContext().getFile());
+    PreciseIssue newIssue = new PreciseIssue(IssueLocation.preciseLocation(node, message));
     issues.add(newIssue);
     return newIssue;
   }
 
   protected final PreciseIssue addIssue(IssueLocation primaryLocation) {
-    PreciseIssue newIssue = new PreciseIssue(primaryLocation, getContext().getFile());
+    PreciseIssue newIssue = new PreciseIssue(primaryLocation);
     issues.add(newIssue);
     return newIssue;
   }
 
   protected final PreciseIssue addLineIssue(String message, int lineNumber) {
-    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atLineLevel(message, lineNumber), getContext().getFile());
+    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atLineLevel(message, lineNumber));
     issues.add(newIssue);
     return newIssue;
   }
 
   protected final PreciseIssue addFileIssue(String message) {
-    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atFileLevel(message), getContext().getFile());
+    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atFileLevel(message));
     issues.add(newIssue);
     return newIssue;
   }
@@ -67,15 +66,13 @@ public abstract class PythonCheck extends PythonVisitor {
 
   public static class PreciseIssue {
 
-    private final File file;
     private final IssueLocation primaryLocation;
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
 
-    private PreciseIssue(IssueLocation primaryLocation, File file) {
+    private PreciseIssue(IssueLocation primaryLocation) {
       this.primaryLocation = primaryLocation;
       this.secondaryLocations = new ArrayList<>();
-      this.file = file;
     }
 
     @Nullable
@@ -86,10 +83,6 @@ public abstract class PythonCheck extends PythonVisitor {
     public PreciseIssue withCost(int cost) {
       this.cost = cost;
       return this;
-    }
-
-    public File file() {
-      return file;
     }
 
     public IssueLocation primaryLocation() {

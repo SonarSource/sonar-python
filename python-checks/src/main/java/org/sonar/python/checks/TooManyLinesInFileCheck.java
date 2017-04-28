@@ -60,7 +60,7 @@ public class TooManyLinesInFileCheck extends PythonCheck {
 
     if (lines > maximum) {
       String message = "File \"{0}\" has {1} lines, which is greater than {2} authorized. Split it into smaller files.";
-      addFileIssue(MessageFormat.format(message, getContext().getFile().getName(), lines, maximum));
+      addFileIssue(MessageFormat.format(message, getContext().pythonFile().file().getName(), lines, maximum));
     }
   }
 }

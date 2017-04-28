@@ -106,7 +106,7 @@ public class PythonHighlighter extends PythonVisitor {
   public void visitFile(@Nullable AstNode astNode) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
-    InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().getFile().getAbsoluteFile()));
+    InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().pythonFile().file().getAbsoluteFile()));
     newHighlighting.onFile(inputFile);
   }
 

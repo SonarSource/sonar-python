@@ -20,10 +20,6 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
@@ -46,18 +42,11 @@ public class TrailingWhitespaceCheck extends PythonCheck {
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
-    final File file = getContext().getFile();
-    try (BufferedReader reader = Files.newBufferedReader(file.toPath(), getContext().charset())) {
-      int lineNr = 0;
-      String line;
-      while ((line = reader.readLine()) != null) {
-        ++lineNr;
-        if (TRAILING_WS.matcher(line).find()) {
-          addLineIssue(MESSAGE, lineNr);
-        }
+    String[] lines = getContext().pythonFile().content().split("\r\n|\n|\r", -1);
+    for (int i = 0; i < lines.length; i++) {
+      if (TRAILING_WS.matcher(lines[i]).find()) {
+        addLineIssue(MESSAGE, i + 1);
       }
-    } catch (IOException e) {
-      throw new IllegalStateException("Could not read " + file, e);
     }
   }
 

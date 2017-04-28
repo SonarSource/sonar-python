@@ -22,7 +22,6 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
-import java.nio.charset.Charset;
 import java.util.List;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -77,13 +76,13 @@ public class PythonScanner {
   }
 
   private void scanFile(InputFile inputFile) {
+    SonarQubePythonFile pythonFile = new SonarQubePythonFile(inputFile, context.fileSystem().encoding());
     PythonVisitorContext visitorContext;
-    Charset encoding = context.fileSystem().encoding();
     try {
-      visitorContext = new PythonVisitorContext(parser.parse(inputFile.file()), inputFile.file(), encoding);
+      visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
-      visitorContext = new PythonVisitorContext(inputFile.file(), encoding, e);
+      visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile.absolutePath());
       LOG.error(e.getMessage());
     }
