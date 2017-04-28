@@ -19,13 +19,10 @@
  */
 package org.sonar.python;
 
-import java.io.File;
-
 public interface PythonFile {
 
   String content();
 
-  @Deprecated
-  File file();
+  String fileName();
 
 }

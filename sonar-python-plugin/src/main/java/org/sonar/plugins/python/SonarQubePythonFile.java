@@ -46,8 +46,8 @@ public class SonarQubePythonFile implements PythonFile {
   }
 
   @Override
-  public File file() {
-    return file;
+  public String fileName() {
+    return file.getName();
   }
 
 }

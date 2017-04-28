@@ -49,7 +49,7 @@ public class PythonHighlighterTest {
     context = SensorContextTester.create(new File(dir));
     context.fileSystem().add(inputFile);
 
-    PythonHighlighter pythonHighlighter = new PythonHighlighter(context);
+    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, inputFile);
     TestPythonVisitorRunner.scanFile(file, pythonHighlighter);
   }
 

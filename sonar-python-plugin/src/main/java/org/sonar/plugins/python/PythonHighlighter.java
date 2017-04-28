@@ -86,11 +86,12 @@ public class PythonHighlighter extends PythonVisitor {
 
   private NewHighlighting newHighlighting;
 
-  private final SensorContext context;
   private Set<Token> docStringTokens;
 
-  public PythonHighlighter(SensorContext context) {
-    this.context = context;
+  public PythonHighlighter(SensorContext context, InputFile inputFile) {
+    docStringTokens = new HashSet<>();
+    newHighlighting = context.newHighlighting();
+    newHighlighting.onFile(inputFile);
   }
 
   @Override
@@ -100,14 +101,6 @@ public class PythonHighlighter extends PythonVisitor {
       PythonGrammar.CLASSDEF,
       PythonGrammar.FILE_INPUT
     );
-  }
-
-  @Override
-  public void visitFile(@Nullable AstNode astNode) {
-    docStringTokens = new HashSet<>();
-    newHighlighting = context.newHighlighting();
-    InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().is(getContext().pythonFile().file().getAbsoluteFile()));
-    newHighlighting.onFile(inputFile);
   }
 
   @Override

@@ -99,7 +99,7 @@ public class PythonScanner {
       saveIssues(inputFile, check, check.scanFileForIssues(visitorContext));
     }
 
-    new PythonHighlighter(context).scanFile(visitorContext);
+    new PythonHighlighter(context, inputFile).scanFile(visitorContext);
   }
 
   private void saveIssues(InputFile inputFile, PythonCheck check, List<PreciseIssue> issues) {
