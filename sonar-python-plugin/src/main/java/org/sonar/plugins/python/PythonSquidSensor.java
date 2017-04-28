@@ -35,9 +35,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.checks.CheckList;
-import org.sonar.python.metrics.MetricVisitor;
 
 public final class PythonSquidSensor implements Sensor {
 
@@ -65,17 +63,15 @@ public final class PythonSquidSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    PythonConfiguration conf = new PythonConfiguration(context.fileSystem().encoding());
-
-    MetricVisitor metricVisitor = new MetricVisitor(fileLinesContextFactory, context.fileSystem(), conf.getIgnoreHeaderComments());
     FilePredicates p = context.fileSystem().predicates();
     List<InputFile> inputFiles = ImmutableList.copyOf(
       context.fileSystem().inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY))));
 
-    new PythonScanner(context, checks, metricVisitor, noSonarFilter, inputFiles).scanFiles();
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, inputFiles);
+    scanner.scanFiles();
 
     if (!isSonarLint(context)) {
-      (new PythonCoverageSensor()).execute(context, metricVisitor.fileLinesVisitor().linesOfCodeByFile());
+      (new PythonCoverageSensor()).execute(context, scanner.linesOfCodeByFile());
     }
   }
 

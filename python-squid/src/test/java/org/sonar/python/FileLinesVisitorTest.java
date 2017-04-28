@@ -20,84 +20,38 @@
 package org.sonar.python;
 
 import java.io.File;
-import java.nio.file.Paths;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.FileLinesContext;
-import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.metrics.FileLinesVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 public class FileLinesVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources/metrics");
 
-  private DefaultFileSystem fileSystem = new DefaultFileSystem(Paths.get(""));
-
-  private FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
-
-  private FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-
   @Test
   public void test() {
-    DefaultInputFile inputFile = initFile("file_lines.py");
+    FileLinesVisitor visitor = new FileLinesVisitor(false);
 
-    FileLinesVisitor visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, false);
-
-    TestPythonVisitorRunner.scanFile(inputFile.file(), visitor);
+    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines.py"), visitor);
 
     assertThat(visitor.getLinesOfCode()).hasSize(12);
-    assertThat(visitor.linesOfCodeByFile()).hasSize(1);
-    assertThat(visitor.linesOfCodeByFile().get(inputFile)).as("Lines of codes").containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
-    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
+    assertThat(visitor.getLinesOfCode()).containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
 
     assertThat(visitor.getLinesOfComments()).hasSize(9);
-    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 4, 6, 13, 14, 17, 18, 19, 20);
+    assertThat(visitor.getLinesOfComments()).containsOnly(1, 4, 6, 13, 14, 17, 18, 19, 20);
 
-    verify(fileLinesContext).save();
-    verifyNoMoreInteractions(fileLinesContext);
+    assertThat(visitor.getLinesWithNoSonar()).containsOnly(11);
   }
 
   @Test
   public void test_ignoreHeaderComments() {
-    DefaultInputFile inputFile = initFile("file_lines_header_comments.py");
+    FileLinesVisitor visitor = new FileLinesVisitor(true);
 
-    FileLinesVisitor visitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, true);
+    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines_header_comments.py"), visitor);
 
-    TestPythonVisitorRunner.scanFile(inputFile.file(), visitor);
-
-    assertThat(visitor.linesOfCodeByFile()).hasSize(1);
-    assertThat(visitor.linesOfCodeByFile().get(inputFile)).as("Lines of codes").containsOnly(2, 4);
-
-    verifyInvocation(fileLinesContext, CoreMetrics.NCLOC_DATA_KEY, 2, 4);
-    verifyInvocation(fileLinesContext, CoreMetrics.COMMENT_LINES_DATA_KEY, 4);
-    verify(fileLinesContext).save();
-    verifyNoMoreInteractions(fileLinesContext);
-  }
-
-  private DefaultInputFile initFile(String fileName) {
-    File file = new File(BASE_DIR, fileName);
-    DefaultInputFile inputFile = new DefaultInputFile("", file.getPath());
-    fileSystem.add(inputFile);
-    when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
-    return inputFile;
-  }
-
-  /**
-   * Checks that method fileLinesContext.setIntValue has been invoked for the specified
-   * metrics and for every specified line.
-   */
-  private void verifyInvocation(FileLinesContext fileLinesContext, String metric, int... lines) {
-    for (int i = 0; i < lines.length; i++) {
-      verify(fileLinesContext).setIntValue(metric, lines[i], 1);
-    }
+    assertThat(visitor.getLinesOfCode()).containsOnly(2, 4);
+    assertThat(visitor.getLinesOfComments()).containsOnly(4);
   }
 
 }

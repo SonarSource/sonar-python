@@ -22,7 +22,10 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.Checks;
@@ -32,6 +35,8 @@ import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.ce.measure.RangeDistributionBuilder;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.FileLinesContext;
+import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
@@ -54,19 +59,22 @@ public class PythonScanner {
 
   private final SensorContext context;
   private final Parser<Grammar> parser;
-  private final MetricVisitor metricVisitor;
   private final List<InputFile> inputFiles;
   private final Checks<PythonCheck> checks;
+  private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private Map<InputFile, Set<Integer>> linesOfCodeByFile;
 
-  public PythonScanner(SensorContext context, Checks<PythonCheck> checks, MetricVisitor metricVisitor,
-    NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
+
+  public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
     this.context = context;
     this.checks = checks;
-    this.metricVisitor = metricVisitor;
+    this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.inputFiles = inputFiles;
     this.parser = PythonParser.create(new PythonConfiguration(context.fileSystem().encoding()));
+    this.linesOfCodeByFile = new HashMap<>();
   }
 
   public void scanFiles() {
@@ -137,20 +145,35 @@ public class PythonScanner {
   }
 
   private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext) {
+    boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
+    MetricVisitor metricVisitor = new MetricVisitor(ignoreHeaderComments);
     metricVisitor.scanFile(visitorContext);
     FileLinesVisitor fileLinesVisitor = metricVisitor.fileLinesVisitor();
 
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
-    saveFilesComplexityDistribution(inputFile);
-    saveFunctionsComplexityDistribution(inputFile);
+    saveFilesComplexityDistribution(inputFile, metricVisitor);
+    saveFunctionsComplexityDistribution(inputFile, metricVisitor);
 
-    saveMetricOnFile(inputFile, CoreMetrics.NCLOC, fileLinesVisitor.getLinesOfCode().size());
+    Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
+    Set<Integer> linesOfComments = fileLinesVisitor.getLinesOfComments();
+    saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, metricVisitor.numberOfStatements());
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, metricVisitor.numberOfFunctions());
     saveMetricOnFile(inputFile, CoreMetrics.CLASSES, metricVisitor.numberOfClasses());
     saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, metricVisitor.complexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getLinesOfComments().size());
+    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, linesOfComments.size());
+
+    FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
+    for (int line : linesOfCode) {
+      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+    }
+    for (int line : linesOfComments) {
+      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
+    }
+    fileLinesContext.save();
+
+    linesOfCodeByFile.put(inputFile, linesOfCode);
   }
 
   private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {
@@ -161,7 +184,7 @@ public class PythonScanner {
       .save();
   }
 
-  private void saveFunctionsComplexityDistribution(InputFile inputFile) {
+  private void saveFunctionsComplexityDistribution(InputFile inputFile, MetricVisitor metricVisitor) {
     RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
     for (Integer functionComplexity : metricVisitor.functionComplexities()) {
       complexityDistribution.add(functionComplexity);
@@ -174,7 +197,7 @@ public class PythonScanner {
       .save();
   }
 
-  private void saveFilesComplexityDistribution(InputFile inputFile) {
+  private void saveFilesComplexityDistribution(InputFile inputFile, MetricVisitor metricVisitor) {
     RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(FILES_DISTRIB_BOTTOM_LIMITS);
     complexityDistribution.add(metricVisitor.complexity());
     context.<String>newMeasure()
@@ -182,5 +205,9 @@ public class PythonScanner {
       .forMetric(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION)
       .withValue(complexityDistribution.build())
       .save();
+  }
+
+  public Map<InputFile, Set<Integer>> linesOfCodeByFile() {
+    return linesOfCodeByFile;
   }
 }

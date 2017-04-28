@@ -21,15 +21,9 @@ package org.sonar.python.metrics;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.measures.FileLinesContext;
-import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class MetricVisitorTest {
 
@@ -60,14 +54,8 @@ public class MetricVisitorTest {
 
   private MetricVisitor metrics(String fileName) {
     File baseDir = new File("src/test/resources/metrics/");
-    DefaultFileSystem fileSystem = new DefaultFileSystem(baseDir);
-    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     File file = new File(baseDir, fileName);
-    DefaultInputFile inputFile = new DefaultInputFile("", file.getPath());
-    fileSystem.add(inputFile);
-    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-    when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
-    MetricVisitor visitor = new MetricVisitor(fileLinesContextFactory, fileSystem, true);
+    MetricVisitor visitor = new MetricVisitor(true);
     TestPythonVisitorRunner.scanFile(file, visitor);
     return visitor;
   }

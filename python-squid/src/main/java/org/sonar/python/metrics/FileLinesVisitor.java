@@ -26,14 +26,8 @@ import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.FileLinesContext;
-import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
@@ -46,8 +40,6 @@ public class FileLinesVisitor extends PythonVisitor {
 
   private static final PythonCommentAnalyser COMMENT_ANALYSER = new PythonCommentAnalyser();
 
-  private final FileLinesContextFactory fileLinesContextFactory;
-
   private boolean seenFirstToken;
 
   private final boolean ignoreHeaderComments;
@@ -56,15 +48,8 @@ public class FileLinesVisitor extends PythonVisitor {
   private Set<Integer> linesOfCode = Sets.newHashSet();
   private Set<Integer> linesOfComments = Sets.newHashSet();
   private Set<Integer> linesOfDocstring = Sets.newHashSet();
-  private final FileSystem fileSystem;
-  private final Map<InputFile, Set<Integer>> allLinesOfCode = new HashMap<>();
 
-  public FileLinesVisitor(
-      FileLinesContextFactory fileLinesContextFactory,
-      FileSystem fileSystem,
-      boolean ignoreHeaderComments) {
-    this.fileLinesContextFactory = fileLinesContextFactory;
-    this.fileSystem = fileSystem;
+  public FileLinesVisitor(boolean ignoreHeaderComments) {
     this.ignoreHeaderComments = ignoreHeaderComments;
   }
 
@@ -141,43 +126,23 @@ public class FileLinesVisitor extends PythonVisitor {
 
   @Override
   public void leaveFile(AstNode astNode) {
-    InputFile inputFile = fileSystem.inputFile(fileSystem.predicates().is(getContext().pythonFile().file()));
-    if (inputFile == null){
-      throw new IllegalStateException("InputFile is null, but it should not be.");
-    }
-    FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
-
     // account for the docstring lines
     for (Integer line : linesOfDocstring) {
       linesOfCode.remove(line);
       linesOfComments.add(line);
     }
-
-    for (int line : linesOfCode) {
-      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
-    }
-    for (int line : linesOfComments) {
-      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
-    }
-    fileLinesContext.save();
-
-    allLinesOfCode.put(inputFile, ImmutableSet.copyOf(linesOfCode));
   }
 
   public Set<Integer> getLinesWithNoSonar() {
-    return noSonar;
+    return ImmutableSet.copyOf(noSonar);
   }
 
   public Set<Integer> getLinesOfCode() {
-    return linesOfCode;
+    return ImmutableSet.copyOf(linesOfCode);
   }
 
   public Set<Integer> getLinesOfComments() {
-    return linesOfComments;
-  }
-
-  public Map<InputFile, Set<Integer>> linesOfCodeByFile() {
-    return allLinesOfCode;
+    return ImmutableSet.copyOf(linesOfComments);
   }
 
   private static class PythonCommentAnalyser {
