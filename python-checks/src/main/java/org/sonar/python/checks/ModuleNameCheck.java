@@ -49,7 +49,7 @@ public class ModuleNameCheck extends PythonCheck {
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
-    String fileName = getContext().pythonFile().file().getName();
+    String fileName = getContext().pythonFile().fileName();
     int dotIndex = fileName.lastIndexOf('.');
     if (dotIndex > 0) {
       String moduleName = fileName.substring(0, dotIndex);

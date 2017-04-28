@@ -41,7 +41,7 @@ public class MissingNewlineAtEndOfFileCheck extends PythonCheck {
   public void visitFile(@Nullable AstNode astNode) {
     String fileContent = getContext().pythonFile().content();
     if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
-      addFileIssue(String.format(MESSAGE, getContext().pythonFile().file().getName()));
+      addFileIssue(String.format(MESSAGE, getContext().pythonFile().fileName()));
     }
   }
 
