@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,6 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.internal.google.common.base.Charsets;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -203,10 +203,11 @@ public class PythonSquidSensorTest {
   private InputFile inputFile(String name) {
     DefaultInputFile inputFile = new DefaultInputFile("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
       .setType(Type.MAIN)
       .setLanguage(Python.KEY);
     context.fileSystem().add(inputFile);
-    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), Charsets.UTF_8));
+    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), StandardCharsets.UTF_8));
     return inputFile;
   }
 

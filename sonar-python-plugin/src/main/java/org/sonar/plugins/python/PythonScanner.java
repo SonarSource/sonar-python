@@ -45,6 +45,7 @@ import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
+import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.MetricVisitor;
@@ -84,7 +85,7 @@ public class PythonScanner {
   }
 
   private void scanFile(InputFile inputFile) {
-    SonarQubePythonFile pythonFile = new SonarQubePythonFile(inputFile, context.fileSystem().encoding());
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile, context);
     PythonVisitorContext visitorContext;
     try {
       visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);

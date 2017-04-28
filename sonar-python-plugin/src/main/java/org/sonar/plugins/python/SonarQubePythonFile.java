@@ -20,34 +20,96 @@
 package org.sonar.plugins.python;
 
 import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.utils.Version;
 import org.sonar.python.PythonFile;
 
-public class SonarQubePythonFile implements PythonFile {
+public abstract class SonarQubePythonFile implements PythonFile {
 
-  private final File file;
-  private final Charset charset;
+  private static final Version V6_0 = Version.create(6, 0);
+  private static final Version V6_2 = Version.create(6, 2);
 
-  public SonarQubePythonFile(InputFile inputFile, Charset charset) {
-    this.file = inputFile.file();
-    this.charset = charset;
+  private final InputFile inputFile;
+
+  private SonarQubePythonFile(InputFile inputFile) {
+    this.inputFile = inputFile;
   }
 
-  @Override
-  public String content() {
-    try {
-      return Files.toString(file, charset);
-    } catch (IOException e) {
-      throw new IllegalStateException("Cannot read " + file, e);
+  public static PythonFile create(InputFile inputFile, SensorContext context) {
+    Version version = context.getSonarQubeVersion();
+    if (version.isGreaterThanOrEqual(V6_2)) {
+      return new Sq62File(inputFile);
     }
+    if (version.isGreaterThanOrEqual(V6_0)) {
+      return new Sq60File(inputFile);
+    }
+    return new Sq56File(inputFile, context.fileSystem().encoding());
   }
 
   @Override
   public String fileName() {
-    return file.getName();
+    return inputFile.file().getName();
+  }
+
+  public InputFile inputFile() {
+    return inputFile;
+  }
+
+  private static String contentForCharset(InputFile inputFile, Charset charset) {
+    try {
+      return Files.toString(inputFile.file(), charset);
+    } catch (IOException e) {
+      throw new IllegalStateException("Could not read content of input file " + inputFile, e);
+    }
+  }
+
+  private static class Sq56File extends SonarQubePythonFile {
+
+    private final Charset fileSystemEncoding;
+
+    public Sq56File(InputFile inputFile, Charset fileSystemEncoding) {
+      super(inputFile);
+      this.fileSystemEncoding = fileSystemEncoding;
+    }
+
+    @Override
+    public String content() {
+      return contentForCharset(inputFile(), fileSystemEncoding);
+    }
+
+  }
+
+  private static class Sq60File extends SonarQubePythonFile {
+
+    public Sq60File(InputFile inputFile) {
+      super(inputFile);
+    }
+
+    @Override
+    public String content() {
+      return contentForCharset(inputFile(), inputFile().charset());
+    }
+
+  }
+
+  private static class Sq62File extends SonarQubePythonFile {
+
+    public Sq62File(InputFile inputFile) {
+      super(inputFile);
+    }
+
+    @Override
+    public String content() {
+      try {
+        return inputFile().contents();
+      } catch (IOException e) {
+        throw new IllegalStateException("Could not read content of input file " + inputFile(), e);
+      }
+    }
+
   }
 
 }
