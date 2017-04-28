@@ -33,7 +33,6 @@ import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
-import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
@@ -127,7 +126,7 @@ public class PythonSquidSensorTest {
     String msg = "number of TypeOfText for the highlighting of keyword 'def'";
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
 
-    assertThat(context.lineHits("moduleKey:file1.py", CoverageType.OVERALL, 1)).isEqualTo(expectedNumberOfLineHits);
+    assertThat(context.lineHits("moduleKey:file1.py", 1)).isEqualTo(expectedNumberOfLineHits);
   }
 
   @Test
