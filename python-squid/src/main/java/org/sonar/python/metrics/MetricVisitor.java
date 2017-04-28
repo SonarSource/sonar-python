@@ -22,8 +22,6 @@ package org.sonar.python.metrics;
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.PythonGrammar;
@@ -36,8 +34,8 @@ public class MetricVisitor extends PythonVisitor {
   private final FileLinesVisitor fileLinesVisitor;
   private List<Integer> functionComplexities;
 
-  public MetricVisitor(FileLinesContextFactory fileLinesContextFactory, FileSystem fileSystem, boolean ignoreHeaderComments) {
-    fileLinesVisitor = new FileLinesVisitor(fileLinesContextFactory, fileSystem, ignoreHeaderComments);
+  public MetricVisitor(boolean ignoreHeaderComments) {
+    fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
   }
 
   @Override
