@@ -23,8 +23,10 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import org.sonar.api.internal.google.common.io.Files;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.parser.PythonParser;
 
@@ -46,8 +48,34 @@ public class TestPythonVisitorRunner {
 
   private static PythonVisitorContext createContext(File file) {
     Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
-    AstNode rootTree = parser.parse(file);
-    return new PythonVisitorContext(rootTree, file, StandardCharsets.UTF_8);
+    TestPythonFile pythonFile = new TestPythonFile(file);
+    AstNode rootTree = parser.parse(pythonFile.content());
+    return new PythonVisitorContext(rootTree, pythonFile);
   }
+
+  private static class TestPythonFile implements PythonFile {
+
+    private final File file;
+
+    public TestPythonFile(File file) {
+      this.file = file;
+    }
+
+    @Override
+    public String content() {
+      try {
+        return Files.toString(file, StandardCharsets.UTF_8);
+      } catch (IOException e) {
+        throw new IllegalStateException("Cannot read " + file, e);
+      }
+    }
+
+    @Override
+    public File file() {
+      return file;
+    }
+
+  }
+
 
 }

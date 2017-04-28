@@ -21,28 +21,24 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
-import java.io.File;
-import java.nio.charset.Charset;
 
 public class PythonVisitorContext {
 
   private final AstNode rootTree;
-  private final File file;
-  private final Charset charset;
+  private final PythonFile pythonFile;
   private final RecognitionException parsingException;
 
-  public PythonVisitorContext(AstNode rootTree, File file, Charset charset) {
-    this(rootTree, file, charset, null);
+  public PythonVisitorContext(AstNode rootTree, PythonFile pythonFile) {
+    this(rootTree, pythonFile, null);
   }
 
-  public PythonVisitorContext(File file, Charset charset, RecognitionException parsingException) {
-    this(null, file, charset, parsingException);
+  public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
+    this(null, pythonFile, parsingException);
   }
 
-  private PythonVisitorContext(AstNode rootTree, File file, Charset charset, RecognitionException parsingException) {
+  private PythonVisitorContext(AstNode rootTree, PythonFile pythonFile, RecognitionException parsingException) {
     this.rootTree = rootTree;
-    this.file = file;
-    this.charset = charset;
+    this.pythonFile = pythonFile;
     this.parsingException = parsingException;
   }
 
@@ -50,15 +46,12 @@ public class PythonVisitorContext {
     return rootTree;
   }
 
-  public File getFile() {
-    return file;
+  public PythonFile pythonFile() {
+    return pythonFile;
   }
 
   public RecognitionException parsingException() {
     return parsingException;
   }
 
-  public Charset charset() {
-    return charset;
-  }
 }

@@ -45,7 +45,7 @@ public class ParsingErrorCheckTest {
       parser.parse(file);
       throw new IllegalStateException("Expected RecognitionException");
     } catch (RecognitionException e) {
-      context = new PythonVisitorContext(file, StandardCharsets.UTF_8, e);
+      context = new PythonVisitorContext(null, e);
     }
 
     ParsingErrorCheck check = new ParsingErrorCheck();

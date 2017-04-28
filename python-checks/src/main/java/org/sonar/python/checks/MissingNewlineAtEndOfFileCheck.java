@@ -19,9 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.io.Files;
 import com.sonar.sslr.api.AstNode;
-import java.io.IOException;
 import javax.annotation.Nullable;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -41,14 +39,9 @@ public class MissingNewlineAtEndOfFileCheck extends PythonCheck {
 
   @Override
   public void visitFile(@Nullable AstNode astNode) {
-    String fileContent;
-    try {
-      fileContent = Files.toString(getContext().getFile(), getContext().charset());
-    } catch (IOException e) {
-      throw new IllegalStateException("Could not read " + getContext().getFile(), e);
-    }
+    String fileContent = getContext().pythonFile().content();
     if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
-      addFileIssue(String.format(MESSAGE, getContext().getFile().getName()));
+      addFileIssue(String.format(MESSAGE, getContext().pythonFile().file().getName()));
     }
   }
 
