@@ -17,32 +17,16 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python;
+package org.sonar.python.checks;
 
 import org.junit.Test;
-import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.python.checks.CheckList;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class PythonRuleRepositoryTest {
+public class SelfAssignmentCheckTest {
 
   @Test
-  public void createRulesTest() {
-    PythonRuleRepository ruleRepository = new PythonRuleRepository();
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    ruleRepository.define(context);
-
-    RulesDefinition.Repository repository = context.repository(CheckList.REPOSITORY_KEY);
-
-    assertThat(repository.language()).isEqualTo("py");
-    assertThat(repository.name()).isEqualTo("SonarAnalyzer");
-
-    List<RulesDefinition.Rule> rules = repository.rules();
-    assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(53);
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/selfAssignment.py", new SelfAssignmentCheck());
   }
 
 }
