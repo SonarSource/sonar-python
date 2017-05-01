@@ -21,15 +21,21 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import org.sonar.python.semantic.SymbolTable;
+import org.sonar.python.semantic.SymbolTableBuilderVisitor;
 
 public class PythonVisitorContext {
 
   private final AstNode rootTree;
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
+  private SymbolTable symbolTable = null;
 
   public PythonVisitorContext(AstNode rootTree, PythonFile pythonFile) {
     this(rootTree, pythonFile, null);
+    SymbolTableBuilderVisitor symbolTableBuilderVisitor = new SymbolTableBuilderVisitor();
+    symbolTableBuilderVisitor.scanFile(this);
+    symbolTable = symbolTableBuilderVisitor.symbolTable();
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
@@ -54,4 +60,7 @@ public class PythonVisitorContext {
     return parsingException;
   }
 
+  public SymbolTable symbolTable() {
+    return symbolTable;
+  }
 }
