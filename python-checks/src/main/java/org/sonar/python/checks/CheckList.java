@@ -81,6 +81,7 @@ public final class CheckList {
         DuplicatedMethodFieldNamesCheck.class,
         TooManyReturnsCheck.class,
         NeedlessPassCheck.class,
+        UnusedLocalVariableCheck.class,
         AfterJumpStatementCheck.class,
         IdenticalExpressionOnBinaryOperatorCheck.class,
         SelfAssignmentCheck.class,
