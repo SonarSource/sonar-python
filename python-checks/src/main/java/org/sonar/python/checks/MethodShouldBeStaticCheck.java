@@ -29,6 +29,7 @@ import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 import java.util.List;
+import java.util.Objects;
 
 @Rule(
   key = MethodShouldBeStaticCheck.CHECK_KEY,
@@ -51,9 +52,13 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode node) {
-    if (isMethodOfNonDerivedClass(node) && !alreadyStaticMethod(node) && !isBuiltInMethod(node) && hasValuableCode(node)) {
+    if (isMethodOfNonDerivedClass(node)
+      && !alreadyStaticMethod(node)
+      && !isBuiltInMethod(node)
+      && hasValuableCode(node)
+      && !mayRaiseNotImplementedError(node)) {
       String self = getFirstArgument(node);
-      if (self != null && !isUsed(node, self) && !onlyRaisesNotImplementedError(node)) {
+      if (self != null && !isUsed(node, self)) {
         addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
       }
     }
@@ -63,44 +68,13 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
     return CheckUtils.isMethodDefinition(node) && !CheckUtils.classHasInheritance(node.getFirstAncestor(PythonGrammar.CLASSDEF));
   }
 
-  private static boolean onlyRaisesNotImplementedError(AstNode funcDef) {
-    AstNode suite = funcDef.getFirstChild(PythonGrammar.SUITE);
-    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-
-    if (statements.isEmpty()) {
-      // case of a method defined in one single line
-      AstNode statementList = suite.getFirstChild();
-      if (raisesNotImplementedError(statementList)) {
-        return true;
-      }
-
-    } else {
-      // standard case of a method defined on more than one line
-      if (statements.size() <= 2) {
-        if (statements.size() == 2 && !isDocstring(statements.get(0))) {
-          return false;
-        }
-
-        AstNode statementList = statements.get(statements.size() - 1).getFirstChild(PythonGrammar.STMT_LIST);
-        if (statementList != null && raisesNotImplementedError(statementList)) {
-          return true;
-        }
-      }
-    }
-
-    return false;
+  private static boolean mayRaiseNotImplementedError(AstNode function) {
+    return function.getDescendants(PythonGrammar.RAISE_STMT).stream()
+      .map(raise -> raise.getFirstDescendant(PythonGrammar.TEST))
+      .filter(Objects::nonNull)
+      .anyMatch(test -> "NotImplementedError".equals(test.getToken().getValue()));
   }
-
-  private static boolean raisesNotImplementedError(AstNode statementList) {
-    if (isRaise(statementList)) {
-      AstNode testStatement = statementList.getFirstDescendant(PythonGrammar.TEST);
-      if (testStatement != null && "NotImplementedError".equals(testStatement.getToken().getValue())) {
-        return true;
-      }
-    }
-    return false;
-  }
-
+  
   private static boolean hasValuableCode(AstNode funcDef) {
     AstNode statementList = funcDef.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STMT_LIST);
     if (statementList != null && statementList.getChildren(PythonGrammar.SIMPLE_STMT).size() == 1) {
@@ -115,20 +89,12 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
     return statements.size() != 2 || !isDocstringAndPass(statements.get(0), statements.get(1));
   }
 
-  private static boolean isDocstring(AstNode statement) {
-    return statement.getToken().getType().equals(PythonTokenType.STRING);
-  }
-
   private static boolean isDocstringOrPass(AstNode statement) {
     return statement.getFirstDescendant(PythonGrammar.PASS_STMT) != null || statement.getToken().getType().equals(PythonTokenType.STRING);
   }
 
   private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
     return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
-  }
-
-  private static boolean isRaise(AstNode statementList) {
-    return statementList.getFirstChild().hasDescendant(PythonGrammar.RAISE_STMT);
   }
 
   private static boolean isUsed(AstNode funcDef, String self) {
@@ -171,4 +137,3 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
   }
 
 }
-

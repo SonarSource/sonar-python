@@ -74,71 +74,28 @@ class A:
     def fun20(): #syntax error
         print(1)
         
-        
-    # From here on, we test the "raise NotImplementedError" case 
-
-    # don't raise issue, as the method consists only of a NotImplementedError   
-    def fun21a(slf):
-        raise NotImplementedError
-
-    # don't raise issue, as the method consists only of a NotImplementedError   
-    def fun21b(slf):
+    # don't raise issue, as the method may raise a NotImplementedError   
+    def fun21(slf):
         raise NotImplementedError('Temporary stuff')
-
-    # raise issue, as NotImplementedError is not the only content of the method
-    def fun22(slf): # Noncompliant
+    def fun22(slf):
         print(1)
         raise NotImplementedError
-
-    # raise issue, as NotImplementedError is not the only content of the method
-    def fun23(slf): # Noncompliant
+    def fun23(slf):
+        """ Short explanation """
         if True:
             raise NotImplementedError
+    def fun29(slf): raise NotImplementedError
 
-    # raise issue, as the error is unlikely to be a NotImplementedError
-    def fun24(slf): # Noncompliant
-        raise
-
-    # raise issue, as the error is not a NotImplementedError 
-    def fun24(slf): # Noncompliant
-        raise ValueError('Some error')
-        
-    # don't raise issue, as the method has no argument
-    def fun25():
-        raise NotImplementedError
-                
-    # don't raise issue, as we don't handle a doc string as a statement
-    def fun26(slf):
-        """ Short explanation """
-        raise NotImplementedError
-                
-    # raise issue, as the second literal is not a doc string
-    def fun27(slf): # Noncompliant
-        """ Long explanation
-            bla bla
-        """
-        """ Another literal """
-        raise NotImplementedError
-        
-    # raise issue, as the error is returned, not thrown
+    # raise issue, as the NotImplementedError is returned, not thrown
     def fun28(slf): # Noncompliant
         return NotImplementedError
         
-    # don't raise issue, as the method consists only of a NotImplementedError   
-    def fun29(slf): raise NotImplementedError
-    
-    # raise issue, as NotImplementedError is not the only content of the method
-    def fun30(slf): print(1) ; raise NotImplementedError # Noncompliant
-                
     # raise issue, as the error is not a NotImplementedError
     def fun31(slf): raise ValueError('Some error') # Noncompliant
+    def fun32(slf): raise                          # Noncompliant
     
-    # don't raise issue, as the method consists only of a NotImplementedError   
-    def fun25(slf, other):
-        # some comment
-        raise NotImplementedError
 
-    # from here on, we test built-in functions
+    # built-in functions
 
     def __init__(slf):
         print(1)
@@ -163,16 +120,15 @@ class B(A):
     def foo_bar(self):
         print(1)
 
-
-class IssueExpected1(object):
+class IssueExpected(object):
     def foo_bar(self): # Noncompliant
         print(1)
 
-class IssueExpected2(object, IssueExpected1):
+class NoIssueExpected1(object, IssueExpected):
     def foo_bar(self):
         print(1)
 
-class IssueExpected3(IssueExpected1, A):
+class NoIssueExpected2(IssueExpected, A):
     def foo_bar(self):
         print(1)
 
