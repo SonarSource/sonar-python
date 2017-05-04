@@ -1,35 +1,28 @@
-<p>
-    Class methods that don't access instance data can and should be static because it results in more performant code.
-</p>
-
-<p>
-    To implement static method in Python you should use decorators <code>@classmethod</code> or <code>@staticmethod</code>.
-    A class method receives the class as implicit first argument, just like an instance method receives the instance. A static method does not receive an implicit first
-    argument.
-</p>
-
+<p>Class methods that don't access instance data can and should be static because they yield more performant code.</p>
+<p>To implement a static method in Python one should use either <code>@classmethod</code> or <code>@staticmethod</code>. A class method receives the
+class as implicit first argument, just like an instance method receives the instance. A static method does not receive an implicit first argument.</p>
 <h2>Noncompliant Code Example</h2>
-
 <pre>
 class Utilities:
     def do_the_thing(self, arg1, arg2, ...):  # Noncompliant
         #...
 </pre>
-
 <h2>Compliant Solution</h2>
-
 <pre>
 class Utilities:
     @classmethod
     def do_the_thing(cls, arg1, arg2, ...):
         #...
 </pre>
-
 <p>or</p>
-
 <pre>
 class Utilities:
     @staticmethod
     def do_the_thing(arg1, arg2, ...):
         #...
 </pre>
+<h2>Exceptions</h2>
+<ul>
+  <li> Methods which raise or may raise a <code>NotImplementedError</code> are ignored. </li>
+</ul>
+

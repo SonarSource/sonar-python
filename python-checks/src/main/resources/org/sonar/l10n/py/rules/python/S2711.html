@@ -1,12 +1,9 @@
-<p>
-  <code>yield</code> and <code>return</code> only make sense in the context of functions. Using them outside a function raises a <code>SyntaxError</code>.
-  To break out of a loop, use <code>break</code> instead.
-</p>
-
+<p><code>yield</code> and <code>return</code> only make sense in the context of functions. Using them outside a function raises a
+<code>SyntaxError</code>. To break out of a loop, use <code>break</code> instead.</p>
 <h2>Noncompliant Code Example</h2>
-
 <pre>
 class MyClass:
-  while True:
-    return False #Noncompliant
+    while True:
+        return False #Noncompliant
 </pre>
+

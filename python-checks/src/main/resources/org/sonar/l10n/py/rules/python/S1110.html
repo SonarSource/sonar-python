@@ -1,11 +1,18 @@
-<p>Useless parentheses can sometimes be misleading and so should be removed.</p>
-
-<p>The following code snippet illustrates this rule:</p>
-
+<p>The use of parentheses, even those not required to enforce a desired order of operations, can clarify the intent behind a piece of code. But
+redundant pairs of parentheses could be misleading, and should be removed. </p>
+<h2>Noncompliant Code Example</h2>
 <pre>
-return 3             # Compliant
-return (x)           # Non-Compliant
-return (x + 1)       # Non-Compliant
-x = (y / 2 + 1)      # Non-Compliant
-y = (4+X) * y;       # Compliant
+return ((3))        # Noncompliant
+return ((x + 1))    # Noncompliant
+x = ((y / 2)) + 1   # Noncompliant
 </pre>
+<h2>Compliant Solution</h2>
+<pre>
+return 3
+return (3)
+return x + 1
+return (x + 1)
+x = y / 2 + 1
+x = (y / 2) + 1
+</pre>
+

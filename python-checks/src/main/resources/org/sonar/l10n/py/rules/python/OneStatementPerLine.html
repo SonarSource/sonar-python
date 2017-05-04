@@ -1,18 +1,11 @@
-<p>
-For better readability, do not put more than one statement on a single line.
-</p>
-
-<p>
-The following code snippet illustrates this rule :
-</p>
-
+<p>For better readability, do not put more than one statement on a single line.</p>
+<h2>Noncompliant Code Example</h2>
 <pre>
-if foo == 'blah': do_blah_thing() # Non-Compliant
-do_one(); do_two(); do_three()    # Non-Compliant
-
-if foo == 'blah':
-    do_blah_thing()
-do_one()
-do_two()
-do_three()
+if (True): print("hello")
 </pre>
+<h2>Compliant Solution</h2>
+<pre>
+if (True):
+    print("hello")
+</pre>
+
