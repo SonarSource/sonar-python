@@ -30,18 +30,18 @@ import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 @Rule(
-    key = HardcodedIPCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "IP addresses should not be hardcoded",
-    tags = {Tags.CERT, Tags.SECURITY}
-)
+  key = HardcodedIPCheck.CHECK_KEY,
+  priority = Priority.MAJOR,
+  name = "IP addresses should not be hardcoded",
+  tags = {Tags.CERT, Tags.SECURITY})
 @SqaleConstantRemediation("30min")
 @ActivatedByDefault
 public class HardcodedIPCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1313";
 
-  private static final String IP_ADDRESS_V4_REGEX = "((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))";
+  private static final String IP_ADDRESS_V4_REGEX = "(?<![0-9])((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))(?![0-9])";
   private static final String IP_ADDRESS_V6_REGEX = "((::)?([\\da-fA-F]{1,4}::?){2,7})([\\da-fA-F]{1,4})?";
+
   private static final Pattern patternV4 = Pattern.compile(IP_ADDRESS_V4_REGEX);
   private static final Pattern patternV6 = Pattern.compile(IP_ADDRESS_V6_REGEX);
   String message = "Make this IP \"%s\" address configurable.";
@@ -68,15 +68,34 @@ public class HardcodedIPCheck extends PythonCheck {
       matcher = patternV6.matcher(string);
       if (matcher.find()) {
         String ipAddress = matcher.group();
-        if (ipAddress.length() > 8) {
+        if (ipAddress.length() > 8 && !mustBeExcluded(string, ipAddress)) {
           addIssue(node, String.format(message, ipAddress));
         }
       }
     }
   }
 
+  /**
+   * Returns true if the match is preceded by or followed by a letter or a number.
+   */
+  private static boolean mustBeExcluded(String string, String ipAddress) {
+    // check the character before the match
+    int index = string.indexOf(ipAddress);
+    if (string.substring(index - 1, index).matches("[\\da-fA-F]")) {
+      return true;
+    }
+
+    // check the character after the match
+    index += ipAddress.length();
+    if (string.substring(index, index + 1).matches("[\\da-fA-F]")) {
+      return true;
+    }
+
+    return false;
+  }
+
   private static boolean isMultilineString(String string) {
     return string.endsWith("'''") || string.endsWith("\"\"\"");
   }
-}
 
+}
