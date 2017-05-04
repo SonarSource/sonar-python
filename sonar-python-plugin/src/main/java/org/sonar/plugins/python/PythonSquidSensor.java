@@ -21,7 +21,6 @@ package org.sonar.plugins.python;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -32,14 +31,10 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.utils.Version;
-import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.checks.CheckList;
 
 public final class PythonSquidSensor implements Sensor {
-
-  private static final Version V6_0 = Version.create(6, 0);
 
   private final Checks<PythonCheck> checks;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -69,14 +64,6 @@ public final class PythonSquidSensor implements Sensor {
 
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, inputFiles);
     scanner.scanFiles();
-
-    if (!isSonarLint(context)) {
-      (new PythonCoverageSensor()).execute(context, scanner.linesOfCodeByFile());
-    }
-  }
-
-  private static boolean isSonarLint(SensorContext context) {
-    return context.getSonarQubeVersion().isGreaterThanOrEqual(V6_0) && context.runtime().getProduct() == SonarProduct.SONARLINT;
   }
 
 }

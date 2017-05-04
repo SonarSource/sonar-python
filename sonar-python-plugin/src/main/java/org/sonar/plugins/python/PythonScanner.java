@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.Checks;
@@ -39,8 +40,10 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
@@ -57,6 +60,8 @@ public class PythonScanner {
 
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
+
+  private static final Version V6_0 = Version.create(6, 0);
 
   private final SensorContext context;
   private final Parser<Grammar> parser;
@@ -81,6 +86,9 @@ public class PythonScanner {
   public void scanFiles() {
     for (InputFile pythonFile : inputFiles) {
       scanFile(pythonFile);
+    }
+    if (!isSonarLint(context)) {
+      (new PythonCoverageSensor()).execute(context, linesOfCodeByFile);
     }
   }
 
@@ -208,7 +216,7 @@ public class PythonScanner {
       .save();
   }
 
-  public Map<InputFile, Set<Integer>> linesOfCodeByFile() {
-    return linesOfCodeByFile;
+  private static boolean isSonarLint(SensorContext context) {
+    return context.getSonarQubeVersion().isGreaterThanOrEqual(V6_0) && context.runtime().getProduct() == SonarProduct.SONARLINT;
   }
 }
