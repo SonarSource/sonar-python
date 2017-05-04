@@ -25,9 +25,7 @@ import com.sonar.sslr.impl.Parser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import org.sonar.api.internal.google.common.io.Files;
-import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.parser.PythonParser;
 
 public class TestPythonVisitorRunner {
@@ -42,11 +40,7 @@ public class TestPythonVisitorRunner {
     }
   }
 
-  public static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
-    return check.scanFileForIssues(createContext(file));
-  }
-
-  private static PythonVisitorContext createContext(File file) {
+  public static PythonVisitorContext createContext(File file) {
     Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode rootTree = parser.parse(pythonFile.content());

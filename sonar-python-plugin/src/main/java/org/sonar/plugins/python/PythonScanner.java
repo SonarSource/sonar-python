@@ -129,9 +129,9 @@ public class PythonScanner {
   private static NewIssueLocation newLocation(InputFile inputFile, NewIssue issue, IssueLocation location) {
     NewIssueLocation newLocation = issue.newLocation()
       .on(inputFile);
-    if (location.startLine() != 0) {
+    if (location.startLine() != IssueLocation.UNDEFINED_LINE) {
       TextRange range;
-      if (location.startLineOffset() == -1) {
+      if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
         range = inputFile.selectLine(location.startLine());
       } else {
         range = inputFile.newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
