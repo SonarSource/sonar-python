@@ -26,7 +26,9 @@ import javax.annotation.Nullable;
 
 public abstract class IssueLocation {
 
-  private static final int UNDEFINED_OFFSET = -1;
+  public static final int UNDEFINED_OFFSET = -1;
+
+  public static final int UNDEFINED_LINE = 0;
 
   private String message;
 
@@ -141,7 +143,7 @@ public abstract class IssueLocation {
 
     @Override
     public int startLine() {
-      return 0;
+      return UNDEFINED_LINE;
     }
 
     @Override
@@ -151,7 +153,7 @@ public abstract class IssueLocation {
 
     @Override
     public int endLine() {
-      return 0;
+      return UNDEFINED_LINE;
     }
 
     @Override

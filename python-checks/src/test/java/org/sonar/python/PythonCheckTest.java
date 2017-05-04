@@ -28,6 +28,7 @@ import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,7 +46,7 @@ public class PythonCheckTest {
       }
     };
 
-    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
 
     assertThat(issues).hasSize(2);
     PreciseIssue firstIssue = issues.get(0);
@@ -71,7 +72,7 @@ public class PythonCheckTest {
       }
     };
 
-    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
     PreciseIssue firstIssue = issues.get(0);
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
@@ -91,7 +92,7 @@ public class PythonCheckTest {
       }
     };
 
-    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
 
     List<IssueLocation> secondaryLocations = issues.get(0).secondaryLocations();
     assertThat(secondaryLocations).hasSize(2);
@@ -112,7 +113,37 @@ public class PythonCheckTest {
     assertThat(secondSecondaryLocation.endLineOffset()).isEqualTo(5);
   }
 
+  @Test
+  public void file_level_issue() throws Exception {
+    TestPythonCheck check = new TestPythonCheck() {
+      @Override
+      public void visitFile(AstNode astNode) {
+        addFileIssue("message");
+      }
+    };
+    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    assertThat(issues).hasSize(1);
+    PreciseIssue issue = issues.get(0);
+    assertThat(issue.primaryLocation().message()).isEqualTo("message");
+    assertThat(issue.primaryLocation().startLine()).isEqualTo(0);
+    assertThat(issue.primaryLocation().endLine()).isEqualTo(0);
+  }
 
+  @Test
+  public void line_issue() throws Exception {
+    TestPythonCheck check = new TestPythonCheck() {
+      @Override
+      public void visitFile(AstNode astNode) {
+        addLineIssue("message", 3);
+      }
+    };
+    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    assertThat(issues).hasSize(1);
+    PreciseIssue issue = issues.get(0);
+    assertThat(issue.primaryLocation().message()).isEqualTo("message");
+    assertThat(issue.primaryLocation().startLine()).isEqualTo(3);
+    assertThat(issue.primaryLocation().endLine()).isEqualTo(3);
+  }
 
   private static class TestPythonCheck extends PythonCheck {
 

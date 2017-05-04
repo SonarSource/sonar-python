@@ -41,6 +41,11 @@ public class PythonCheckVerifier extends PythonVisitor {
 
   private List<TestIssue> expectedIssues = new ArrayList<>();
 
+  public static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
+    return check.scanFileForIssues(TestPythonVisitorRunner.createContext(file));
+  }
+
+
   public static void verify(String path, PythonCheck check) {
     PythonCheckVerifier verifier = new PythonCheckVerifier();
     File file = new File(path);
@@ -106,7 +111,7 @@ public class PythonCheckVerifier extends PythonVisitor {
   }
 
   private static Iterator<PreciseIssue> getActualIssues(File file, PythonCheck check) {
-    List<PreciseIssue> issues = TestPythonVisitorRunner.scanFileForIssues(file, check);
+    List<PreciseIssue> issues = scanFileForIssues(file, check);
     List<PreciseIssue> sortedIssues = Ordering.natural().onResultOf(new IssueToLine()).sortedCopy(issues);
     return sortedIssues.iterator();
   }
