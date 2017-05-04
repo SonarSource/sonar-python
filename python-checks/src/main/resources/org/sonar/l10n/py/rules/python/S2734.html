@@ -1,27 +1,19 @@
-<p>
-  By contract, every Python function returns something, even if it's the <code>None</code> value,
-  which can be returned implicitly by omitting the <code>return</code> statement, or explicitly.
-</p>
-
-<p>
-  The <code>__init__</code> method is required to return <code>None</code>.
-  A <code>TypeError</code> will be raised if the <code>__init__</code> method either <code>yield</code>s or <code>return</code>s any expression other than <code>None</code>.
-  Returning some expression that evaluates to <code>None</code> will not raise an error, but is considered bad practice.
-</p>
-
+<p>By contract, every Python function returns something, even if it's the <code>None</code> value, which can be returned implicitly by omitting the
+<code>return</code> statement, or explicitly. </p>
+<p>The <code>__init__</code> method is required to return <code>None</code>. A <code>TypeError</code> will be raised if the <code>__init__</code>
+method either <code>yield</code>s or <code>return</code>s any expression other than <code>None</code>. Returning some expression that evaluates to
+<code>None</code> will not raise an error, but is considered bad practice.</p>
 <h2>Noncompliant Code Example</h2>
-
 <pre>
 class MyClass(object):
-  def __init__(self):
-    self.message = 'Hello'
-    return self  # Noncompliant
+    def __init__(self):
+        self.message = 'Hello'
+        return self  # Noncompliant
 </pre>
-
 <h2>Compliant Solution</h2>
-
 <pre>
 class MyClass(object):
-  def __init__(self):
-    self.message = 'Hello'
+    def __init__(self):
+        self.message = 'Hello'
 </pre>
+
