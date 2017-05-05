@@ -30,6 +30,7 @@ y = (x1 * (x2 + 2) * ((x3 + 3)) + 4)
 # tuple:
 y = ((x1, x2))                         # Noncompliant
 y = ((x,))                             # Noncompliant
+y = ((x), )
 
 # function with a tuple argument: double parentheses are required
 n = len((x, y))
