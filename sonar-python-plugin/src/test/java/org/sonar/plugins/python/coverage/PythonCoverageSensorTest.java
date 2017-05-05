@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.coverage;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableSet;
 import java.io.File;
 import java.util.HashMap;
@@ -33,7 +34,6 @@ import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
-import org.sonar.api.internal.google.common.base.Charsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
