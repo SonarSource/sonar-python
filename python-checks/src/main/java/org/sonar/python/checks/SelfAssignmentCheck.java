@@ -30,6 +30,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
+import org.sonar.sslr.ast.AstSelect;
 
 @Rule(
   key = "S1656",
@@ -57,6 +58,12 @@ public class SelfAssignmentCheck extends PythonCheck {
   }
 
   private static boolean isException(AstNode expressionStatement) {
+    AstSelect potentialFunctionCalls = expressionStatement.select()
+      .descendants(PythonGrammar.TRAILER)
+      .children(PythonPunctuator.LPARENTHESIS);
+    if (!potentialFunctionCalls.isEmpty()) {
+      return true;
+    }
     AstNode suite = expressionStatement.getFirstAncestor(PythonGrammar.SUITE);
     return suite != null && suite.getParent().is(PythonGrammar.CLASSDEF, PythonGrammar.TRY_STMT);
   }

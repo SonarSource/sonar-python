@@ -17,3 +17,7 @@ try:
     sha1 = sha1
 except ImportError:
     from sha import new as sha1
+
+a.x = a.x # Noncompliant
+a[x] = a[x] # Noncompliant
+a[sideEffect()] = a[sideEffect()]
