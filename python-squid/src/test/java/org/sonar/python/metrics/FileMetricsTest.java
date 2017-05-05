@@ -25,7 +25,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class MetricVisitorTest {
+public class FileMetricsTest {
 
   @Test
   public void statements() throws Exception {
@@ -52,12 +52,10 @@ public class MetricVisitorTest {
     assertThat(metrics("function-complexities.py").functionComplexities()).containsExactly(3, 1);
   }
 
-  private MetricVisitor metrics(String fileName) {
+  private FileMetrics metrics(String fileName) {
     File baseDir = new File("src/test/resources/metrics/");
     File file = new File(baseDir, fileName);
-    MetricVisitor visitor = new MetricVisitor(true);
-    TestPythonVisitorRunner.scanFile(file, visitor);
-    return visitor;
+    return new FileMetrics(TestPythonVisitorRunner.createContext(file), true);
   }
 
 }
