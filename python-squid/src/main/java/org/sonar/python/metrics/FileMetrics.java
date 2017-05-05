@@ -22,30 +22,24 @@ package org.sonar.python.metrics;
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.PythonGrammar;
 
-public class MetricVisitor extends PythonVisitor {
+public class FileMetrics {
 
   private int numberOfStatements;
   private int numberOfClasses;
   private final ComplexityVisitor complexityVisitor = new ComplexityVisitor();
   private final FileLinesVisitor fileLinesVisitor;
-  private List<Integer> functionComplexities;
+  private List<Integer> functionComplexities = new ArrayList<>();
 
-  public MetricVisitor(boolean ignoreHeaderComments) {
-    fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
-  }
-
-  @Override
-  public void scanFile(PythonVisitorContext context) {
+  public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
     AstNode rootTree = context.rootTree();
     numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
     numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
     complexityVisitor.scanFile(context);
+    fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
     fileLinesVisitor.scanFile(context);
-    functionComplexities = new ArrayList<>();
     for (AstNode functionDef : rootTree.getDescendants(PythonGrammar.FUNCDEF)) {
       functionComplexities.add(ComplexityVisitor.complexity(functionDef));
     }
