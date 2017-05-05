@@ -26,22 +26,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
-@Rule(
-    key = SameConditionCheck.CHECK_KEY,
-    priority = Priority.CRITICAL,
-    name = "Conditions in related \"if/elif/else if\" statements should not have the same condition",
-    tags = {Tags.BUG, Tags.UNUSED, Tags.CERT, Tags.PITFALL}
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = SameConditionCheck.CHECK_KEY)
 @ActivatedByDefault
 public class SameConditionCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1862";

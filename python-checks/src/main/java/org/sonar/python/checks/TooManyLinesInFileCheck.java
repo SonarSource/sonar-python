@@ -25,20 +25,12 @@ import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import java.text.MessageFormat;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = TooManyLinesInFileCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Files should not have too many lines",
-    tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleConstantRemediation("1h")
+@Rule(key = TooManyLinesInFileCheck.CHECK_KEY)
 @ActivatedByDefault
 public class TooManyLinesInFileCheck extends PythonCheck {
   public static final String CHECK_KEY = "S104";

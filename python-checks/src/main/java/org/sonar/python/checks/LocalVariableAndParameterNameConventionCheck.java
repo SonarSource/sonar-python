@@ -28,21 +28,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = LocalVariableAndParameterNameConventionCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Local variable and function parameter names should comply with a naming convention",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("2min")
+@Rule(key = LocalVariableAndParameterNameConventionCheck.CHECK_KEY)
 @ActivatedByDefault
 public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
 

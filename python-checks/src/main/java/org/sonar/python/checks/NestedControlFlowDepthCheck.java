@@ -26,21 +26,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = NestedControlFlowDepthCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Control flow statements \"if\", \"for\", \"while\", \"try\" and \"with\" should not be nested too deeply",
-    tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = NestedControlFlowDepthCheck.CHECK_KEY)
 @ActivatedByDefault
 public class NestedControlFlowDepthCheck extends PythonCheck {
 

@@ -23,24 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.ComplexityVisitor;
-import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 
-@Rule(
-  key = "FunctionComplexity",
-  name = "Functions should not be too complex",
-  priority = Priority.MAJOR,
-  tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleLinearWithOffsetRemediation(
-  coeff = "1min",
-  offset = "10min",
-  effortToFixDescription = "per complexity point above the threshold")
+@Rule(key = "FunctionComplexity")
 public class FunctionComplexityCheck extends PythonCheck {
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 15;
   private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";

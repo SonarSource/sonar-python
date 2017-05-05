@@ -25,20 +25,12 @@ import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = FieldDuplicatesClassNameCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "A field should not duplicate the name of its containing class",
-    tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = FieldDuplicatesClassNameCheck.CHECK_KEY)
 @ActivatedByDefault
 public class FieldDuplicatesClassNameCheck extends PythonCheck {
 

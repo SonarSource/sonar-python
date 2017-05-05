@@ -26,7 +26,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
@@ -34,18 +33,11 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
 import static org.sonar.python.api.PythonGrammar.STMT_LIST;
 
-@Rule(
-    key = SameBranchCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Two branches in the same conditional structure should not have exactly the same implementation",
-    tags = {Tags.BUG}
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = SameBranchCheck.CHECK_KEY)
 @ActivatedByDefault
 public class SameBranchCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1871";

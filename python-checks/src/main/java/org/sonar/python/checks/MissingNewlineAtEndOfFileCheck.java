@@ -21,18 +21,10 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = MissingNewlineAtEndOfFileCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Files should contain an empty new line at the end",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = MissingNewlineAtEndOfFileCheck.CHECK_KEY)
 public class MissingNewlineAtEndOfFileCheck extends PythonCheck {
   public static final String CHECK_KEY = "S113";
   public static final String MESSAGE = "Add a new line at the end of this file \"%s\".";

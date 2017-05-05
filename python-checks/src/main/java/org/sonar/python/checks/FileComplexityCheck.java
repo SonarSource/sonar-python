@@ -21,23 +21,12 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import java.text.MessageFormat;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.metrics.ComplexityVisitor;
-import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 
-@Rule(
-  key = "FileComplexity",
-  name = "Files should not be too complex",
-  priority = Priority.MAJOR,
-  tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleLinearWithOffsetRemediation(
-  coeff = "1min",
-  offset = "30min",
-  effortToFixDescription = "per complexity point above the threshold")
+@Rule(key = "FileComplexity")
 public class FileComplexityCheck extends PythonCheck {
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 200;
 

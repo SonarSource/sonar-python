@@ -23,20 +23,11 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Long suffix \"L\" should be upper case",
-    tags = Tags.CONVENTION,
-    status = org.sonar.api.rules.Rule.STATUS_DEPRECATED
-)
-@SqaleConstantRemediation("2min")
+@Rule(key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY)
 public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "LongIntegerWithLowercaseSuffixUsage";

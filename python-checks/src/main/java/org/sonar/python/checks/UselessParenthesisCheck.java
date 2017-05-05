@@ -19,29 +19,19 @@
  */
 package org.sonar.python.checks;
 
+import com.google.common.collect.ImmutableSet;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-import com.google.common.collect.ImmutableSet;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-
-@Rule(
-    key = UselessParenthesisCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Redundant parentheses around expressions should be removed",
-    tags = Tags.CONFUSING
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = UselessParenthesisCheck.CHECK_KEY)
 @ActivatedByDefault
 public class UselessParenthesisCheck extends PythonCheck {
 

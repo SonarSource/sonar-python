@@ -24,21 +24,13 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ClassNameCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Class names should comply with a naming convention",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = ClassNameCheck.CHECK_KEY)
 @ActivatedByDefault
 public class ClassNameCheck extends PythonCheck {
 

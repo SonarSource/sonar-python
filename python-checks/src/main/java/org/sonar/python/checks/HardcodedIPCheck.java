@@ -25,19 +25,12 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-  key = HardcodedIPCheck.CHECK_KEY,
-  priority = Priority.MAJOR,
-  name = "IP addresses should not be hardcoded",
-  tags = {Tags.CERT, Tags.SECURITY})
-@SqaleConstantRemediation("30min")
+@Rule(key = HardcodedIPCheck.CHECK_KEY)
 @ActivatedByDefault
 public class HardcodedIPCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1313";

@@ -24,7 +24,6 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
@@ -33,19 +32,9 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 
-@Rule(
-  key = CognitiveComplexityFunctionCheck.CHECK_KEY,
-  name = "Cognitive Complexity of functions should not be too high",
-  priority = Priority.CRITICAL,
-  tags = Tags.BRAIN_OVERLOAD
-)
+@Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)
 @ActivatedByDefault
-@SqaleLinearWithOffsetRemediation(
-  coeff = "1min",
-  offset = "5min",
-  effortToFixDescription = "per complexity point above the threshold")
 public class CognitiveComplexityFunctionCheck extends PythonCheck {
 
   private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";

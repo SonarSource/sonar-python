@@ -20,17 +20,11 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.RecognitionException;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonVisitorContext;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ParsingErrorCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Parser failure")
-@SqaleConstantRemediation("30min")
+@Rule(key = ParsingErrorCheck.CHECK_KEY)
 public class ParsingErrorCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "ParsingError";

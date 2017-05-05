@@ -23,18 +23,11 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = NewStyleClassCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "New-style classes should be used"
-)
-@SqaleConstantRemediation("2min")
+@Rule(key = NewStyleClassCheck.CHECK_KEY)
 public class NewStyleClassCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1722";

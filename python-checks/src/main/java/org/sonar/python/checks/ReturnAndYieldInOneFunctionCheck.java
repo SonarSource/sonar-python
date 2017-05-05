@@ -24,20 +24,12 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ReturnAndYieldInOneFunctionCheck.CHECK_KEY,
-    priority = Priority.CRITICAL,
-    name = "\"return\" and \"yield\" cannot be used in the same function",
-    tags = Tags.BUG
-)
-@SqaleConstantRemediation("15min")
+@Rule(key = ReturnAndYieldInOneFunctionCheck.CHECK_KEY)
 @ActivatedByDefault
 public class ReturnAndYieldInOneFunctionCheck extends PythonCheck {
 

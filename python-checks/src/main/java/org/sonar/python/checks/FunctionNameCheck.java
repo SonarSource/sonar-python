@@ -20,18 +20,10 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = FunctionNameCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Function names should comply with a naming convention",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = FunctionNameCheck.CHECK_KEY)
 @ActivatedByDefault
 public class FunctionNameCheck extends AbstractFunctionNameCheck {
   public static final String CHECK_KEY = "S1542";

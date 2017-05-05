@@ -23,20 +23,12 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = InequalityUsageCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "\"<>\" should not be used to test inequality",
-    tags = Tags.OBSOLETE
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = InequalityUsageCheck.CHECK_KEY)
 @ActivatedByDefault
 public class InequalityUsageCheck extends PythonCheck {
 

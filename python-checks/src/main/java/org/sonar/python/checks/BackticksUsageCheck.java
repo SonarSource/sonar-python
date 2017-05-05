@@ -23,20 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = BackticksUsageCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Backticks should not be used"
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = BackticksUsageCheck.CHECK_KEY)
 @ActivatedByDefault
 public class BackticksUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "BackticksUsage";

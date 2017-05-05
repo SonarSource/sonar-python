@@ -25,19 +25,12 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-  key = "S1764",
-  name = "Identical expressions should not be used on both sides of a binary operator",
-  priority = Priority.MAJOR,
-  tags = {Tags.BUG, Tags.CERT})
-@SqaleConstantRemediation("2min")
+@Rule(key = "S1764")
 @ActivatedByDefault
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
 
