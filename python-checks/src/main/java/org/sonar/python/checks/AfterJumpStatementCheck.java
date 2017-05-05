@@ -23,20 +23,12 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = AfterJumpStatementCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Jump statements should not be followed by other statements",
-    tags = {Tags.UNUSED, Tags.CERT, Tags.CWE, Tags.MISRA}
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = AfterJumpStatementCheck.CHECK_KEY)
 @ActivatedByDefault
 public class AfterJumpStatementCheck extends PythonCheck {
 

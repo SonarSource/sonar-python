@@ -22,19 +22,12 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = TrailingWhitespaceCheck.CHECK_KEY,
-    name = "Lines should not end with trailing whitespaces",
-    priority = Priority.MINOR,
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = TrailingWhitespaceCheck.CHECK_KEY)
 public class TrailingWhitespaceCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S1131";
   public static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
 

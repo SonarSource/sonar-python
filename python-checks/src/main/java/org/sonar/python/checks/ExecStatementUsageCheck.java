@@ -23,20 +23,12 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ExecStatementUsageCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "The \"exec\" statement should not be used",
-    tags = Tags.OBSOLETE
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = ExecStatementUsageCheck.CHECK_KEY)
 @ActivatedByDefault
 public class ExecStatementUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "ExecStatementUsage";

@@ -23,21 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = TooManyParametersCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Functions, methods and lambdas should not have too many parameters",
-    tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleConstantRemediation("20min")
+@Rule(key = TooManyParametersCheck.CHECK_KEY)
 @ActivatedByDefault
 public class TooManyParametersCheck extends PythonCheck {
   public static final String CHECK_KEY = "S107";

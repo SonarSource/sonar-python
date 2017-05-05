@@ -23,19 +23,12 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = BreakContinueOutsideLoopCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "\"break\" and \"continue\" should not be used outside a loop"
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = BreakContinueOutsideLoopCheck.CHECK_KEY)
 @ActivatedByDefault
 public class BreakContinueOutsideLoopCheck extends PythonCheck {
 

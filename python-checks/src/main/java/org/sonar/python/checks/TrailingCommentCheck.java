@@ -23,20 +23,13 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = TrailingCommentCheck.CHECK_KEY,
-    priority = Priority.INFO,
-    name = "Comments should not be located at the end of lines of code",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = TrailingCommentCheck.CHECK_KEY)
 public class TrailingCommentCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S139";
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";
   private static final String MESSAGE = "Move this trailing comment on the previous empty line.";

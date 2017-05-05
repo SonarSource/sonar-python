@@ -26,21 +26,13 @@ import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
-@Rule(
-    key = EmptyNestedBlockCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Nested blocks of code should not be left empty",
-    tags = Tags.BUG
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
 @ActivatedByDefault
 public class EmptyNestedBlockCheck extends PythonCheck {
   public static final String CHECK_KEY = "S108";

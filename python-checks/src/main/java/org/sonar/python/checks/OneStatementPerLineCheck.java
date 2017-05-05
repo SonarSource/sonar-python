@@ -25,23 +25,15 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Map;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
 /**
  * Note that implementation differs from AbstractOneStatementPerLineCheck due to Python specifics
  */
-@Rule(
-    key = OneStatementPerLineCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Statements should be on separate lines",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = OneStatementPerLineCheck.CHECK_KEY)
 @ActivatedByDefault
 public class OneStatementPerLineCheck extends PythonCheck {
   public static final String CHECK_KEY = "OneStatementPerLine";

@@ -24,20 +24,13 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = NoPersonReferenceInTodoCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "TODO and FIXME comments should contain a reference to a person",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = NoPersonReferenceInTodoCheck.CHECK_KEY)
 public class NoPersonReferenceInTodoCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S1707";
   public static final String MESSAGE = "Add a citation of the person who can best explain this comment.";
 

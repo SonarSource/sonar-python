@@ -24,19 +24,12 @@ import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = MissingDocstringCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Docstrings should be defined"
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = MissingDocstringCheck.CHECK_KEY)
 public class MissingDocstringCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1720";

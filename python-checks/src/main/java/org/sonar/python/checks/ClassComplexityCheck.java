@@ -23,25 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.ComplexityVisitor;
-import org.sonar.squidbridge.annotations.SqaleLinearWithOffsetRemediation;
 
-@Rule(
-  key = "ClassComplexity",
-  name = "Classes should not be too complex",
-  priority = Priority.MAJOR,
-  status = "DEPRECATED",
-  tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleLinearWithOffsetRemediation(
-  coeff = "1min",
-  offset = "10min",
-  effortToFixDescription = "per complexity point over the threshold")
+@Rule(key = "ClassComplexity")
 public class ClassComplexityCheck extends PythonCheck {
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
   private static final String MESSAGE = "Class has a complexity of %s which is greater than %s authorized.";

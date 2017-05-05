@@ -25,21 +25,13 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
-@Rule(
-    key = TooManyReturnsCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Functions should not contain too many return statements",
-    tags = Tags.BRAIN_OVERLOAD
-)
-@SqaleConstantRemediation("20min")
+@Rule(key = TooManyReturnsCheck.CHECK_KEY)
 public class TooManyReturnsCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1142";
 

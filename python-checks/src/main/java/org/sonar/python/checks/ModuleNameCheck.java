@@ -22,19 +22,11 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ModuleNameCheck.CHECK_KEY,
-    priority = Priority.MINOR,
-    name = "Module names should comply with a naming convention",
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = ModuleNameCheck.CHECK_KEY)
 public class ModuleNameCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1578";

@@ -23,18 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = FixmeCommentCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "\"FIXME\" tags should be handled"
-)
-@SqaleConstantRemediation("20min")
+@Rule(key = FixmeCommentCheck.CHECK_KEY)
 @ActivatedByDefault
 public class FixmeCommentCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1134";

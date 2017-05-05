@@ -25,21 +25,13 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-  key = MethodShouldBeStaticCheck.CHECK_KEY,
-  name = "Methods that don't access instance data should be \"static\"",
-  priority = Priority.MAJOR,
-  tags = {Tags.PERFORMANCE}
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = MethodShouldBeStaticCheck.CHECK_KEY)
 @ActivatedByDefault
 public class MethodShouldBeStaticCheck extends PythonCheck {
 

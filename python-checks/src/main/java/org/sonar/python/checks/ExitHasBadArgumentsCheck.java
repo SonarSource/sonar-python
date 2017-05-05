@@ -24,22 +24,14 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ExitHasBadArgumentsCheck.CHECK_KEY,
-    priority = Priority.CRITICAL,
-    name = "\"__exit__\" should accept type, value, and traceback arguments",
-    tags = Tags.BUG
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = ExitHasBadArgumentsCheck.CHECK_KEY)
 @ActivatedByDefault
 public class ExitHasBadArgumentsCheck extends PythonCheck {
 

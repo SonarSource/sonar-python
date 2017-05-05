@@ -23,18 +23,12 @@ import com.google.common.base.Strings;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
 import java.util.List;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.NoSqale;
 import org.sonar.squidbridge.annotations.RuleTemplate;
-@Rule(
-    key = XPathCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "XPath rule"
-)
-@NoSqale
+
+@Rule(key = XPathCheck.CHECK_KEY)
 @RuleTemplate
 public class XPathCheck extends PythonCheck {
   public static final String CHECK_KEY = "XPath";

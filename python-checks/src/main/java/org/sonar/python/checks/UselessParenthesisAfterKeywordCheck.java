@@ -27,21 +27,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = UselessParenthesisAfterKeywordCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Parentheses should not be used after certain keywords",
-    status = org.sonar.api.rules.Rule.STATUS_DEPRECATED
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = UselessParenthesisAfterKeywordCheck.CHECK_KEY)
 public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S1721";
   private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
     PythonGrammar.ASSERT_STMT, "assert",

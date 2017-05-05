@@ -23,20 +23,12 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = ReturnYieldOutsideFunctionCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "\"yield\" and \"return\" should not be used outside functions",
-    tags = Tags.BUG
-)
-@SqaleConstantRemediation("15min")
+@Rule(key = ReturnYieldOutsideFunctionCheck.CHECK_KEY)
 @ActivatedByDefault
 public class ReturnYieldOutsideFunctionCheck extends PythonCheck {
 

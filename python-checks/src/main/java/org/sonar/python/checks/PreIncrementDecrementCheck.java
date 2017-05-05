@@ -24,21 +24,13 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = PreIncrementDecrementCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Pre-increment and pre-decrement should not be used",
-    tags = Tags.BUG
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = PreIncrementDecrementCheck.CHECK_KEY)
 @ActivatedByDefault
 public class PreIncrementDecrementCheck extends PythonCheck {
   public static final String CHECK_KEY = "PreIncrementDecrement";

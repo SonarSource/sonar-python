@@ -23,19 +23,12 @@ import com.google.common.base.Strings;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.NoSqale;
 import org.sonar.squidbridge.annotations.RuleTemplate;
 
-@Rule(
-    key = CommentRegularExpressionCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Regular expression on comment"
-)
-@NoSqale
+@Rule(key = CommentRegularExpressionCheck.CHECK_KEY)
 @RuleTemplate
 public class CommentRegularExpressionCheck extends PythonCheck {
   public static final String CHECK_KEY = "CommentRegularExpression";

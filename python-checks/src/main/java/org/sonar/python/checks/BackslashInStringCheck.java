@@ -23,18 +23,11 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-  key = "S1717",
-  name = "\"\\\" should only be used as an escape character outside of raw strings",
-  priority = Priority.MAJOR
-)
-@SqaleConstantRemediation("2min")
+@Rule(key = "S1717")
 public class BackslashInStringCheck extends PythonCheck {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";

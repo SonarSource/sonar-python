@@ -29,21 +29,13 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
-@Rule(
-    key = DuplicatedMethodFieldNamesCheck.CHECK_KEY,
-    priority = Priority.CRITICAL,
-    name = "Methods and field names should not differ only by capitalization",
-    tags = Tags.CONFUSING
-)
-@SqaleConstantRemediation("10min")
+@Rule(key = DuplicatedMethodFieldNamesCheck.CHECK_KEY)
 @ActivatedByDefault
 public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
 

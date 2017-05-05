@@ -24,22 +24,14 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
-@Rule(
-    key = NeedlessPassCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "\"pass\" should not be used needlessly",
-    tags = Tags.UNUSED
-)
-@SqaleConstantRemediation("2min")
+@Rule(key = NeedlessPassCheck.CHECK_KEY)
 @ActivatedByDefault
 public class NeedlessPassCheck extends PythonCheck {
 

@@ -22,20 +22,11 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.text.MessageFormat;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-
-@Rule(
-    key = LineLengthCheck.CHECK_KEY,
-    name = "Lines should not be too long",
-    priority = Priority.MINOR,
-    tags = Tags.CONVENTION
-)
-@SqaleConstantRemediation("1min")
+@Rule(key = LineLengthCheck.CHECK_KEY)
 public class LineLengthCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "LineLength";

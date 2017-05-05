@@ -31,7 +31,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonConfiguration;
@@ -39,15 +38,8 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
-@Rule(
-    key = CommentedCodeCheck.CHECK_KEY,
-    priority = Priority.MAJOR,
-    name = "Sections of code should not be \"commented out\"",
-    tags = {Tags.UNUSED, Tags.MISRA}
-)
-@SqaleConstantRemediation("5min")
+@Rule(key = CommentedCodeCheck.CHECK_KEY)
 @ActivatedByDefault
 public class CommentedCodeCheck extends PythonCheck {
   public static final String CHECK_KEY = "S125";
