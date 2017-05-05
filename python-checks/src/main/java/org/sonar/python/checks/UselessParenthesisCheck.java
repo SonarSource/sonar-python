@@ -53,33 +53,21 @@ public class UselessParenthesisCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
-        PythonGrammar.TEST,
-        PythonGrammar.EXPR,
-        PythonGrammar.A_EXPR,
-        PythonGrammar.M_EXPR,
-        PythonGrammar.NOT_TEST
-    );
+    return ImmutableSet.of(PythonGrammar.ATOM);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.NOT_TEST)) {
-      checkAtom(node.getFirstChild().getNextSibling());
-    } else {
-      node.getChildren(PythonGrammar.ATOM).forEach(this::checkAtom);
-    }
-  }
-
-  private void checkAtom(AstNode atom) {
-    List<AstNode> children = atom.getChildren();
+    List<AstNode> children = node.getChildren();
     boolean hasParentheses = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS);
     if (hasParentheses) {
       AstNode child1 = children.get(1);
-      if(child1.getChildren(PythonGrammar.TEST).size() == 1 && child1.getFirstChild(PythonPunctuator.COMMA) == null) {
-        AstNode test = child1.getChildren(PythonGrammar.TEST).get(0);
-        if (test.getChildren(PythonKeyword.IF).isEmpty()) {
-          AstNode testChild0 = test.getChildren().get(0);
+      if(child1.getChildren(PythonGrammar.TEST).size() == 1
+        && child1.getFirstChild(PythonPunctuator.COMMA) == null
+        && !child1.hasDirectChildren(PythonGrammar.COMP_FOR)) {
+        AstNode test = child1.getFirstChild(PythonGrammar.TEST);
+        if (!test.hasDirectChildren(PythonKeyword.IF)) {
+          AstNode testChild0 = test.getFirstChild();
           if (testChild0.is(PythonGrammar.ATOM) && testChild0.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
             addIssue(children.get(0), MESSAGE).secondary(children.get(2), null);
           }
