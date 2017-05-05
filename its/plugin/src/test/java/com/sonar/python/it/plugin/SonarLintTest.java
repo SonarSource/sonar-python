@@ -83,7 +83,7 @@ public class SonarLintTest {
       issues::add);
 
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
-      tuple("python:BackticksUsage", 2, inputFile.getPath(), "MAJOR"),
+      tuple("python:BackticksUsage", 2, inputFile.getPath(), "BLOCKER"),
       tuple("python:S1542", 1, inputFile.getPath(), "MAJOR"));
   }
 
