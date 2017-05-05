@@ -19,12 +19,18 @@
  */
 package org.sonar.plugins.python;
 
+import com.google.common.io.Resources;
+import com.google.gson.Gson;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Set;
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.utils.ValidationMessages;
 import org.sonar.python.checks.CheckList;
-import org.sonar.squidbridge.annotations.AnnotationBasedProfileBuilder;
 
 public class PythonProfile extends ProfileDefinition {
 
@@ -35,13 +41,31 @@ public class PythonProfile extends ProfileDefinition {
   }
 
   @Override
-  public RulesProfile createProfile(ValidationMessages validation) {
-    AnnotationBasedProfileBuilder annotationBasedProfileBuilder = new AnnotationBasedProfileBuilder(ruleFinder);
-    return annotationBasedProfileBuilder.build(
-        CheckList.REPOSITORY_KEY,
-        CheckList.SONAR_WAY_PROFILE,
-        Python.KEY,
-        CheckList.getChecks(),
-        validation);
+  public RulesProfile createProfile(ValidationMessages messages) {
+    RulesProfile profile = RulesProfile.create(CheckList.SONAR_WAY_PROFILE, Python.KEY);
+
+    loadActiveKeysFromJsonProfile(profile);
+    return profile;
+  }
+
+  private void loadActiveKeysFromJsonProfile(RulesProfile rulesProfile) {
+    for (String ruleKey : activatedRuleKeys()) {
+      Rule rule = ruleFinder.findByKey(CheckList.REPOSITORY_KEY, ruleKey);
+      rulesProfile.activateRule(rule, null);
+    }
+  }
+
+  private static Set<String> activatedRuleKeys() {
+    URL profileUrl = PythonProfile.class.getResource("/org/sonar/l10n/py/rules/python/Sonar_way_profile.json");
+    try {
+      Gson gson = new Gson();
+      return gson.fromJson(Resources.toString(profileUrl, StandardCharsets.UTF_8), Profile.class).ruleKeys;
+    } catch (IOException e) {
+      throw new IllegalStateException("Failed to read: " + profileUrl, e);
+    }
+  }
+
+  private static class Profile {
+    Set<String> ruleKeys;
   }
 }
