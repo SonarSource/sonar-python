@@ -43,6 +43,10 @@
       <artifactId>sslr-testing-harness</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+    <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
     </dependency>
@@ -108,8 +112,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <minsize>3600000</minsize>
-                  <maxsize>3800000</maxsize>
+                  <minsize>3800000</minsize>
+                  <maxsize>4000000</maxsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
