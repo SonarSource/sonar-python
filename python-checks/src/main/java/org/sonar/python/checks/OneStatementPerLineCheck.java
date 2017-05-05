@@ -28,14 +28,13 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 /**
  * Note that implementation differs from AbstractOneStatementPerLineCheck due to Python specifics
  */
 @Rule(key = OneStatementPerLineCheck.CHECK_KEY)
-@ActivatedByDefault
 public class OneStatementPerLineCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "OneStatementPerLine";
   private final Map<Integer, Integer> statementsPerLine = Maps.newHashMap();
 

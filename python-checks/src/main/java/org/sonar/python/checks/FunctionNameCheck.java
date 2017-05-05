@@ -21,10 +21,8 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import org.sonar.check.Rule;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = FunctionNameCheck.CHECK_KEY)
-@ActivatedByDefault
 public class FunctionNameCheck extends AbstractFunctionNameCheck {
   public static final String CHECK_KEY = "S1542";
 

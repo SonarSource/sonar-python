@@ -30,10 +30,8 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = FieldNameCheck.CHECK_KEY)
-@ActivatedByDefault
 public class FieldNameCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S116";

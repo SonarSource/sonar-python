@@ -32,13 +32,11 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.sslr.ast.AstSelect;
 
 import static org.sonar.python.api.PythonGrammar.STMT_LIST;
 
 @Rule(key = SameBranchCheck.CHECK_KEY)
-@ActivatedByDefault
 public class SameBranchCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1871";
   public static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";

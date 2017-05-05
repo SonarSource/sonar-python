@@ -37,11 +37,10 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = CommentedCodeCheck.CHECK_KEY)
-@ActivatedByDefault
 public class CommentedCodeCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));

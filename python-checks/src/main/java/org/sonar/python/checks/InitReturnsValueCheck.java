@@ -28,10 +28,8 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = InitReturnsValueCheck.CHECK_KEY)
-@ActivatedByDefault
 public class InitReturnsValueCheck extends PythonCheck {
 
   public static final String MESSAGE_RETURN = "Remove this return value.";

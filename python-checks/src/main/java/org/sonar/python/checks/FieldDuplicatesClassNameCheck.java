@@ -28,10 +28,8 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = FieldDuplicatesClassNameCheck.CHECK_KEY)
-@ActivatedByDefault
 public class FieldDuplicatesClassNameCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1700";

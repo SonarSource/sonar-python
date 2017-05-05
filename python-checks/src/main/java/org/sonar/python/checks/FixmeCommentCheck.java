@@ -25,11 +25,10 @@ import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = FixmeCommentCheck.CHECK_KEY)
-@ActivatedByDefault
 public class FixmeCommentCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S1134";
 
   private static final String FIXME_COMMENT_PATTERN = "^#[ ]*fixme.*";

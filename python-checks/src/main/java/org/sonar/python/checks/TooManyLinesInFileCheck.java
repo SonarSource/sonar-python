@@ -28,11 +28,10 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = TooManyLinesInFileCheck.CHECK_KEY)
-@ActivatedByDefault
 public class TooManyLinesInFileCheck extends PythonCheck {
+
   public static final String CHECK_KEY = "S104";
   private static final int DEFAULT = 1000;
 

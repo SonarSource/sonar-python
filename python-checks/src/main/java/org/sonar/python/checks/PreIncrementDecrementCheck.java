@@ -28,10 +28,8 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = PreIncrementDecrementCheck.CHECK_KEY)
-@ActivatedByDefault
 public class PreIncrementDecrementCheck extends PythonCheck {
   public static final String CHECK_KEY = "PreIncrementDecrement";
   private static final String MESSAGE = "This statement doesn't produce the expected result, replace use of non-existent pre-%srement operator";

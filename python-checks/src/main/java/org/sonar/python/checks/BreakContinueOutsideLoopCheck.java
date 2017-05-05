@@ -26,10 +26,8 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = BreakContinueOutsideLoopCheck.CHECK_KEY)
-@ActivatedByDefault
 public class BreakContinueOutsideLoopCheck extends PythonCheck {
 
   private static final String MESSAGE = "Remove this \"%s\" statement";
