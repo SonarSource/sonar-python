@@ -19,12 +19,8 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
 import java.util.Set;
-import java.util.List;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -35,7 +31,9 @@ import org.sonar.python.api.PythonPunctuator;
 import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 
+import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 
 @Rule(
     key = UselessParenthesisCheck.CHECK_KEY,
