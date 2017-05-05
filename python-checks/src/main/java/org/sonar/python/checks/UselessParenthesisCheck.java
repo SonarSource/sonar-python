@@ -29,10 +29,8 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
-@ActivatedByDefault
 public class UselessParenthesisCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1110";

@@ -27,10 +27,8 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
-@ActivatedByDefault
 public class TooManyParametersCheck extends PythonCheck {
   public static final String CHECK_KEY = "S107";
   private static final String MESSAGE = "%s has %s parameters, which is greater than the %s authorized.";

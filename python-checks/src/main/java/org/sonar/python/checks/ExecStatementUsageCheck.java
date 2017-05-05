@@ -26,10 +26,8 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = ExecStatementUsageCheck.CHECK_KEY)
-@ActivatedByDefault
 public class ExecStatementUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "ExecStatementUsage";
   @Override

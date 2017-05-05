@@ -28,11 +28,9 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
-@ActivatedByDefault
 public class CollapsibleIfStatementsCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1066";
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";

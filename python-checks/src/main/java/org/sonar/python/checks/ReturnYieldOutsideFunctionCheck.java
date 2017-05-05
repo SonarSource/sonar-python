@@ -26,10 +26,8 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = ReturnYieldOutsideFunctionCheck.CHECK_KEY)
-@ActivatedByDefault
 public class ReturnYieldOutsideFunctionCheck extends PythonCheck {
 
   public static final String MESSAGE = "Remove this use of \"%s\".";

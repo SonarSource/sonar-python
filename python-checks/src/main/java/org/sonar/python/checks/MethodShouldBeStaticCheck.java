@@ -29,10 +29,8 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = MethodShouldBeStaticCheck.CHECK_KEY)
-@ActivatedByDefault
 public class MethodShouldBeStaticCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S2325";

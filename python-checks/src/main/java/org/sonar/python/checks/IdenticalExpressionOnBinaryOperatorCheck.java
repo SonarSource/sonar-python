@@ -28,10 +28,8 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = "S1764")
-@ActivatedByDefault
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
 
   private static final List<String> EXCLUDED_OPERATOR_TYPES = ImmutableList.of(

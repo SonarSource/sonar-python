@@ -31,10 +31,8 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)
-@ActivatedByDefault
 public class CognitiveComplexityFunctionCheck extends PythonCheck {
 
   private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";

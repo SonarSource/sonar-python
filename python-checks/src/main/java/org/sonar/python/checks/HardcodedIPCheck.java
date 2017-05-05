@@ -28,10 +28,8 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = HardcodedIPCheck.CHECK_KEY)
-@ActivatedByDefault
 public class HardcodedIPCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1313";
 

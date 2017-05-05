@@ -29,11 +29,9 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
-@ActivatedByDefault
 public class EmptyNestedBlockCheck extends PythonCheck {
   public static final String CHECK_KEY = "S108";
   private static final Predicate<AstNode> NOT_PASS_PREDICATE = new NotPassPredicate();

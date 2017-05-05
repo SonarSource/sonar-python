@@ -27,10 +27,8 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = BackticksUsageCheck.CHECK_KEY)
-@ActivatedByDefault
 public class BackticksUsageCheck extends PythonCheck {
   public static final String CHECK_KEY = "BackticksUsage";
 

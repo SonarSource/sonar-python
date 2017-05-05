@@ -32,11 +32,9 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = DuplicatedMethodFieldNamesCheck.CHECK_KEY)
-@ActivatedByDefault
 public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1845";

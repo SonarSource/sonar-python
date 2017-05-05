@@ -29,10 +29,8 @@ import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
 
 @Rule(key = ExitHasBadArgumentsCheck.CHECK_KEY)
-@ActivatedByDefault
 public class ExitHasBadArgumentsCheck extends PythonCheck {
 
   public static final String MESSAGE_ADD = "Add the missing argument.";
