@@ -24,7 +24,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.xml.stream.XMLStreamException;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,7 +109,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
   }
 
-  private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) throws XMLStreamException {
+  private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) {
     Collection<TestSuite> locatedResources = lookupResources(parsedReports);
     for (TestSuite fileReport : locatedResources) {
       InputFile inputFile = fileReport.getInputFile();

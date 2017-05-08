@@ -51,9 +51,7 @@ public class NewLineChannel extends Channel<Lexer> {
     }
 
     if (isNewLine(ch)) {
-      if (processNewLine(code, output)) {
-        return true;
-      }
+      processNewLine(code, output);
       return true;
     }
 
