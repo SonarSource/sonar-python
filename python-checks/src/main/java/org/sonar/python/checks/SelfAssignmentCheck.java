@@ -19,27 +19,22 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import org.sonar.check.Priority;
+
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.squidbridge.annotations.ActivatedByDefault;
-import org.sonar.squidbridge.annotations.SqaleConstantRemediation;
 import org.sonar.sslr.ast.AstSelect;
 
-@Rule(
-  key = "S1656",
-  name = "Variables should not be self-assigned",
-  priority = Priority.MAJOR,
-  tags = {Tags.BUG, Tags.CERT})
-@SqaleConstantRemediation("3min")
-@ActivatedByDefault
+import com.google.common.collect.ImmutableSet;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+
+@Rule(key = SelfAssignmentCheck.CHECK_KEY)
 public class SelfAssignmentCheck extends PythonCheck {
+
+  public static final String CHECK_KEY = "S1656";
 
   public static final String MESSAGE = "Remove or correct this useless self-assignment.";
 
