@@ -23,14 +23,12 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = ClassNameCheck.CHECK_KEY)
-public class ClassNameCheck extends PythonCheck {
+public class ClassNameCheck extends AbstractNameCheck {
 
   public static final String CHECK_KEY = "S101";
   private static final String DEFAULT = "^[A-Z_][a-zA-Z0-9]+$";
@@ -40,13 +38,10 @@ public class ClassNameCheck extends PythonCheck {
     key = "format",
     defaultValue = "" + DEFAULT)
   public String format = DEFAULT;
-  private Pattern pattern = null;
 
-  private Pattern pattern() {
-    if (pattern == null) {
-      pattern = Pattern.compile(format);
-    }
-    return pattern;
+  @Override
+  protected String format() {
+    return format;
   }
 
   @Override

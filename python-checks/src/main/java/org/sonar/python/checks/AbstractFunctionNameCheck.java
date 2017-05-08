@@ -23,12 +23,10 @@ import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import java.util.regex.Pattern;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 
-public abstract class AbstractFunctionNameCheck extends PythonCheck {
+public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
 
   private static final String DEFAULT = "^[a-z_][a-z0-9_]{2,}$";
   private static final String MESSAGE = "Rename %s \"%s\" to match the regular expression %s.";
@@ -37,13 +35,10 @@ public abstract class AbstractFunctionNameCheck extends PythonCheck {
     key = "format",
     defaultValue = "" + DEFAULT)
   public String format = DEFAULT;
-  private Pattern pattern = null;
 
-  private Pattern pattern() {
-    if (pattern == null) {
-      pattern = Pattern.compile(format);
-    }
-    return pattern;
+  @Override
+  protected String format() {
+    return format;
   }
 
   @Override
