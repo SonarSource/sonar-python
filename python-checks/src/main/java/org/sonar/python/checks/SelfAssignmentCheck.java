@@ -19,17 +19,17 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Set;
-
-import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.sslr.ast.AstSelect;
-
 import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.HashSet;
+import java.util.Set;
+import org.sonar.check.Rule;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)
 public class SelfAssignmentCheck extends PythonCheck {
@@ -38,25 +38,60 @@ public class SelfAssignmentCheck extends PythonCheck {
 
   public static final String MESSAGE = "Remove or correct this useless self-assignment.";
 
+  private Set<String> importedNames = new HashSet<>();
+
+  @Override
+  public void visitFile(AstNode node) {
+    importedNames.clear();
+  }
+
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.EXPRESSION_STMT);
+    return ImmutableSet.of(
+      PythonGrammar.EXPRESSION_STMT,
+      PythonGrammar.IMPORT_NAME,
+      PythonGrammar.IMPORT_AS_NAME);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN)) {
-      if (CheckUtils.equalNodes(assignOperator.getPreviousSibling(), assignOperator.getNextSibling()) && !isException(node)) {
-        addIssue(assignOperator, MESSAGE);
+    if (node.is(PythonGrammar.IMPORT_NAME)) {
+      for (AstNode dottedAsName : node.select().children(PythonGrammar.DOTTED_AS_NAMES).children(PythonGrammar.DOTTED_AS_NAME)) {
+        AstNode importedName = dottedAsName.getFirstChild().getLastChild(PythonGrammar.NAME);
+        addImportedName(dottedAsName, importedName);
+      }
+
+    } else if (node.is(PythonGrammar.IMPORT_AS_NAME)) {
+      AstNode importedName = node.getFirstChild(PythonGrammar.NAME);
+      addImportedName(node, importedName);
+
+    } else {
+      for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN)) {
+        AstNode assigned = assignOperator.getPreviousSibling();
+        if (CheckUtils.equalNodes(assigned, assignOperator.getNextSibling()) && !isException(node, assigned)) {
+          addIssue(assignOperator, MESSAGE);
+        }
       }
     }
   }
 
-  private static boolean isException(AstNode expressionStatement) {
-    AstSelect potentialFunctionCalls = expressionStatement.select()
+  private void addImportedName(AstNode node, AstNode importedName) {
+    AstNode name = importedName;
+    AstNode as = node.getFirstChild(PythonKeyword.AS);
+    if (as != null) {
+      name = as.getNextSibling();
+    }
+    importedNames.add(name.getTokenValue());
+  }
+
+  private boolean isException(AstNode expressionStatement, AstNode assigned) {
+    AstSelect potentialFunctionCalls = assigned.select()
       .descendants(PythonGrammar.TRAILER)
       .children(PythonPunctuator.LPARENTHESIS);
     if (!potentialFunctionCalls.isEmpty()) {
+      return true;
+    }
+    if (assigned.getTokens().size() == 1 && importedNames.contains(assigned.getTokenValue())) {
       return true;
     }
     AstNode suite = expressionStatement.getFirstAncestor(PythonGrammar.SUITE);
