@@ -29,3 +29,7 @@ import1 = import1
 import2 = import2
 import3 = import3
 import4 = import4
+
+
+if (python2):
+	unichr = unichr # ok, builtin
