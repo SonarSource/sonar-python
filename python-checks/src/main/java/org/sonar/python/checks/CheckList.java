@@ -83,6 +83,7 @@ public final class CheckList {
         NeedlessPassCheck.class,
         AfterJumpStatementCheck.class,
         IdenticalExpressionOnBinaryOperatorCheck.class,
+        SelfAssignmentCheck.class,
         MethodShouldBeStaticCheck.class
     );
   }
