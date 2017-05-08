@@ -25,6 +25,7 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.python.PythonBuiltinFunctions;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
@@ -91,9 +92,14 @@ public class SelfAssignmentCheck extends PythonCheck {
     if (!potentialFunctionCalls.isEmpty()) {
       return true;
     }
-    if (assigned.getTokens().size() == 1 && importedNames.contains(assigned.getTokenValue())) {
-      return true;
+
+    if (assigned.getTokens().size() == 1) {
+      String tokenValue = assigned.getTokenValue();
+      if (importedNames.contains(tokenValue) || PythonBuiltinFunctions.contains(tokenValue)) {
+        return true;
+      }
     }
+
     AstNode suite = expressionStatement.getFirstAncestor(PythonGrammar.SUITE);
     return suite != null && suite.getParent().is(PythonGrammar.CLASSDEF, PythonGrammar.TRY_STMT);
   }
