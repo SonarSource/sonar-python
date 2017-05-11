@@ -19,10 +19,8 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.collect.ImmutableList;
-import java.util.List;
+import org.sonar.api.Plugin;
 import org.sonar.api.PropertyType;
-import org.sonar.api.SonarPlugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -33,7 +31,7 @@ import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
-public class PythonPlugin extends SonarPlugin {
+public class PythonPlugin implements Plugin {
 
   private static final String PYTHON_CATEGORY = "Python";
 
@@ -44,10 +42,11 @@ public class PythonPlugin extends SonarPlugin {
 
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
 
-  @Override
-  public List getExtensions() {
 
-    return ImmutableList.of(
+  @Override
+  public void define(Context context) {
+
+    context.addExtensions(
 
       PropertyDefinition.builder(FILE_SUFFIXES_KEY)
         .name("File Suffixes")
@@ -145,7 +144,7 @@ public class PythonPlugin extends SonarPlugin {
       PythonProfile.class,
 
       PythonSquidSensor.class,
-      PythonRuleRepository.class,
+      new PythonRuleRepository(context.getSonarQubeVersion()),
 
       PylintConfiguration.class,
       PylintSensor.class,
