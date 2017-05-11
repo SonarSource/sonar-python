@@ -55,7 +55,7 @@ public class PythonProfile extends ProfileDefinition {
     }
   }
 
-  private static Set<String> activatedRuleKeys() {
+  public static Set<String> activatedRuleKeys() {
     URL profileUrl = PythonProfile.class.getResource("/org/sonar/l10n/py/rules/python/Sonar_way_profile.json");
     try {
       Gson gson = new Gson();
