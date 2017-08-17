@@ -71,7 +71,8 @@ public class PylintIssuesAnalyzer {
   }
 
   public List<Issue> analyze(String path, Charset charset, File out) throws IOException {
-    Command command = Command.create(pylint).addArguments(pylintArguments.arguments()).addArgument(path);
+    String[] one_job = {"-j", "1"};
+    Command command = Command.create(pylint).addArguments(one_job).addArguments(pylintArguments.arguments()).addArgument(path);
 
     if (pylintConfigParam != null) {
       command.addArgument(pylintConfigParam);
