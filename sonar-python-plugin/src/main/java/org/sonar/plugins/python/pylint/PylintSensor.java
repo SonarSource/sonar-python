@@ -38,7 +38,9 @@ import org.sonar.plugins.python.Python;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class PylintSensor implements Sensor {
   public static final String REPORT_PATH_KEY = "sonar.python.pylint.reportPath";
@@ -75,20 +77,41 @@ public class PylintSensor implements Sensor {
     int i = 0;
     FilePredicates p = fileSystem.predicates();
     Iterable<File> files = fileSystem.files(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+    int threads = Runtime.getRuntime().availableProcessors() / 2 + 1;
+    LOG.info("Starting threads for pylint: " + String.valueOf(threads));
+    ExecutorService service = Executors.newFixedThreadPool(threads);
+
+    List<Future<Void>> futures = new ArrayList<>();
     for (File file : files) {
+      File out = new File(workDir, i + ".out");
+
+      Callable<Void> callable = () -> {
+        try {
+          analyzeFile(file, out);
+        } catch (Exception e) {
+          String msg = new StringBuilder()
+                  .append("Cannot analyse the file '")
+                  .append(file.getAbsolutePath())
+                  .append("', details: '")
+                  .append(e)
+                  .append("'")
+                  .toString();
+          throw new IllegalStateException(msg, e);
+        }
+        return null;
+      };
+
+      futures.add(service.submit(callable));
+      i++;
+    }
+
+    service.shutdown();
+
+    for (Future<Void> future : futures) {
       try {
-        File out = new File(workDir, i + ".out");
-        analyzeFile(file, out);
-        i++;
-      } catch (Exception e) {
-        String msg = new StringBuilder()
-            .append("Cannot analyse the file '")
-            .append(file.getAbsolutePath())
-            .append("', details: '")
-            .append(e)
-            .append("'")
-            .toString();
-        throw new IllegalStateException(msg, e);
+        future.get();
+      } catch (InterruptedException | ExecutionException e) {
+        e.printStackTrace();
       }
     }
   }
