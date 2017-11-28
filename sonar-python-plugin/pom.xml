@@ -60,10 +60,6 @@
       <artifactId>staxmate</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-testing-harness</artifactId>
     </dependency>
@@ -130,8 +126,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <minsize>2300000</minsize>
-                  <maxsize>2500000</maxsize>
+                  <minsize>1500000</minsize>
+                  <maxsize>1700000</maxsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

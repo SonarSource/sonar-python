@@ -19,10 +19,11 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.io.Resources;
 import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import org.sonar.api.profiles.ProfileDefinition;
@@ -56,12 +57,13 @@ public class PythonProfile extends ProfileDefinition {
   }
 
   public static Set<String> activatedRuleKeys() {
-    URL profileUrl = PythonProfile.class.getResource("/org/sonar/l10n/py/rules/python/Sonar_way_profile.json");
-    try {
+    String path = "/org/sonar/l10n/py/rules/python/Sonar_way_profile.json";
+    try (Reader profile = new BufferedReader(new InputStreamReader(
+      PythonProfile.class.getResourceAsStream(path), StandardCharsets.UTF_8))) {
       Gson gson = new Gson();
-      return gson.fromJson(Resources.toString(profileUrl, StandardCharsets.UTF_8), Profile.class).ruleKeys;
+      return gson.fromJson(profile, Profile.class).ruleKeys;
     } catch (IOException e) {
-      throw new IllegalStateException("Failed to read: " + profileUrl, e);
+      throw new IllegalStateException("Failed to read: " + path, e);
     }
   }
 

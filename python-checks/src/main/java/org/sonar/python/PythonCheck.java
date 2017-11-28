@@ -19,11 +19,13 @@
  */
 package org.sonar.python;
 
-import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 
 public abstract class PythonCheck extends PythonVisitor {
@@ -33,7 +35,7 @@ public abstract class PythonCheck extends PythonVisitor {
   public List<PreciseIssue> scanFileForIssues(PythonVisitorContext context) {
     issues.clear();
     scanFile(context);
-    return ImmutableList.copyOf(issues);
+    return Collections.unmodifiableList(new ArrayList<>(issues));
   }
 
   protected final PreciseIssue addIssue(AstNode node, String message) {
@@ -102,5 +104,13 @@ public abstract class PythonCheck extends PythonVisitor {
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
     }
+  }
+
+  public static <T> Set<T> immutableSet(T... el) {
+    Set<T> set = new HashSet<>(el.length);
+    for (T t : el) {
+      set.add(t);
+    }
+    return Collections.unmodifiableSet(set);
   }
 }

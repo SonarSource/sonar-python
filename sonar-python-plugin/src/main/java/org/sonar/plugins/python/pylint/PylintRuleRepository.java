@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.plugins.python.Python;
@@ -43,7 +43,7 @@ public class PylintRuleRepository implements RulesDefinition {
     NewRepository repository = context
         .createRepository(REPOSITORY_KEY, Python.KEY)
         .setName(REPOSITORY_NAME);
-    xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), Charsets.UTF_8.name());
+    xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), StandardCharsets.UTF_8.name());
     SqaleXmlLoader.load(repository, SQALE_FILE);
     repository.done();
   }

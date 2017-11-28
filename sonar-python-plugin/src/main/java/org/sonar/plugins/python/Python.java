@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Settings;
@@ -45,7 +45,7 @@ public class Python extends AbstractLanguage {
   }
 
   private static String[] filterEmptyStrings(String[] stringArray) {
-    List<String> nonEmptyStrings = Lists.newArrayList();
+    List<String> nonEmptyStrings = new ArrayList<>();
     for (String string : stringArray) {
       if (StringUtils.isNotBlank(string.trim())) {
         nonEmptyStrings.add(string.trim());

@@ -19,10 +19,10 @@
  */
 package org.sonar.python;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class PythonVisitor {
   private PythonVisitorContext context;
 
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of();
+    return Collections.emptySet();
   }
 
   public void visitFile(AstNode node) {

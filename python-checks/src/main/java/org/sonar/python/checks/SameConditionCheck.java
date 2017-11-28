@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +41,7 @@ public class SameConditionCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.IF_STMT);
+    return Collections.singleton(PythonGrammar.IF_STMT);
   }
 
   @Override

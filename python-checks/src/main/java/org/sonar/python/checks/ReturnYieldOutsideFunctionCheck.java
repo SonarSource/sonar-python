@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
@@ -35,16 +34,16 @@ public class ReturnYieldOutsideFunctionCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.RETURN_STMT, PythonGrammar.YIELD_STMT);
+    return immutableSet(PythonGrammar.RETURN_STMT, PythonGrammar.YIELD_STMT);
   }
 
   @Override
   public void visitNode(AstNode node) {
     AstNode currentParent = node.getParent();
-    while (currentParent != null){
-      if (currentParent.is(PythonGrammar.FUNCDEF)){
+    while (currentParent != null) {
+      if (currentParent.is(PythonGrammar.FUNCDEF)) {
         return;
-      } else if (currentParent.is(PythonGrammar.CLASSDEF)){
+      } else if (currentParent.is(PythonGrammar.CLASSDEF)) {
         raiseIssue(node);
         return;
       }

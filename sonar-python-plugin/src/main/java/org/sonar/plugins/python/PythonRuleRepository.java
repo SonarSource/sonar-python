@@ -19,13 +19,15 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.io.Resources;
 import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
@@ -49,8 +51,8 @@ public class PythonRuleRepository implements RulesDefinition {
   @Override
   public void define(Context context) {
     NewRepository repository = context
-        .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
-        .setName(REPOSITORY_NAME);
+      .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
+      .setName(REPOSITORY_NAME);
 
     new AnnotationBasedRulesDefinition(repository, "py").addRuleClasses(false, CheckList.getChecks());
 
@@ -75,12 +77,15 @@ public class PythonRuleRepository implements RulesDefinition {
 
   @Nullable
   private static String readRuleDefinitionResource(String fileName) {
-    URL resource = PythonRuleRepository.class.getResource("/org/sonar/l10n/py/rules/python/" + fileName);
+    String path = "/org/sonar/l10n/py/rules/python/" + fileName;
+    URL resource = PythonRuleRepository.class.getResource(path);
     if (resource == null) {
       return null;
     }
-    try {
-      return Resources.toString(resource, StandardCharsets.UTF_8);
+
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+      PythonRuleRepository.class.getResourceAsStream(path), StandardCharsets.UTF_8))) {
+      return reader.lines().collect(Collectors.joining("\n"));
     } catch (IOException e) {
       throw new IllegalStateException("Failed to read: " + resource, e);
     }

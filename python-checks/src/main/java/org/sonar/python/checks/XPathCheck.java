@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.base.Strings;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
 import java.util.List;
@@ -48,7 +47,7 @@ public class XPathCheck extends PythonCheck {
   private AstNodeXPathQuery<Object> query = null;
 
   public AstNodeXPathQuery<Object> query() {
-    if (query == null && !Strings.isNullOrEmpty(xpathQuery)) {
+    if (query == null && xpathQuery != null && !xpathQuery.isEmpty()) {
       try {
         query = AstNodeXPathQuery.create(xpathQuery);
       } catch (RuntimeException e) {

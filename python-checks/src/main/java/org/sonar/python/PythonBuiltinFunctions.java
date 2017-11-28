@@ -19,11 +19,12 @@
  */
 package org.sonar.python;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.io.Resources;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,16 +39,15 @@ public enum PythonBuiltinFunctions {
     return BUILTINS.contains(name);
   }
 
-  @VisibleForTesting
   static Set<String> loadBuiltinNames(URL resourceUrl) {
     try {
-      List<String> lines = Resources.readLines(resourceUrl, StandardCharsets.UTF_8);
+      List<String> lines = Files.readAllLines(Paths.get(resourceUrl.toURI()), StandardCharsets.UTF_8);
       return lines.stream()
         .map(String::trim)
         .filter(s -> !s.startsWith("#"))
         .filter(s -> !s.isEmpty())
         .collect(Collectors.toSet());
-    } catch (IOException e) {
+    } catch (IOException | URISyntaxException e) {
       throw new IllegalStateException("Cannot load " + resourceUrl, e);
     }
   }

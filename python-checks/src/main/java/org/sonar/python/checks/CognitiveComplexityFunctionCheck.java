@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
@@ -56,7 +55,7 @@ public class CognitiveComplexityFunctionCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.IF_STMT,
       PythonKeyword.ELIF,
       PythonKeyword.ELSE,

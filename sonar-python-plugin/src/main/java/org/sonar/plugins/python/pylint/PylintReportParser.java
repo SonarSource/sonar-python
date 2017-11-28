@@ -19,13 +19,13 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.collect.ImmutableMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PylintReportParser {
   private static final Pattern PATTERN = Pattern.compile("(.+):([0-9]+): \\[(.*)\\] (.*)");
@@ -34,18 +34,22 @@ public class PylintReportParser {
   // Pylint 0.24 brings a nasty reidentifying of some rules...
   // To avoid burdening of users with rule clones we map the ids.
   // This workaround can die as soon as pylints <= 0.23.X become obsolete.
-  private static final Map<String, String> ID_MAP = ImmutableMap.<String, String> builder()
-      .put("E9900", "E1300")
-      .put("E9901", "E1301")
-      .put("E9902", "E1302")
-      .put("E9903", "E1303")
-      .put("E9904", "E1304")
-      .put("E9905", "E1305")
-      .put("E9906", "E1306")
-      .put("W6501", "W1201")
-      .put("W9900", "W1300")
-      .put("W9901", "W1301")
-      .build();
+  private static final Map<String, String> ID_MAP;
+
+  static {
+    Map<String, String> map = new HashMap<>();
+    map.put("E9900", "E1300");
+    map.put("E9901", "E1301");
+    map.put("E9902", "E1302");
+    map.put("E9903", "E1303");
+    map.put("E9904", "E1304");
+    map.put("E9905", "E1305");
+    map.put("E9906", "E1306");
+    map.put("W6501", "W1201");
+    map.put("W9900", "W1300");
+    map.put("W9901", "W1301");
+    ID_MAP = Collections.unmodifiableMap(map);
+  }
 
   public Issue parseLine(String line) {
     // Parse the output of pylint. Example of the format:

@@ -19,13 +19,13 @@
  */
 package org.sonar.python;
 
-import com.google.common.io.Files;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.sonar.python.parser.PythonParser;
 
 public class TestPythonVisitorRunner {
@@ -58,7 +58,7 @@ public class TestPythonVisitorRunner {
     @Override
     public String content() {
       try {
-        return Files.toString(file, StandardCharsets.UTF_8);
+        return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
       } catch (IOException e) {
         throw new IllegalStateException("Cannot read " + file, e);
       }
@@ -70,6 +70,5 @@ public class TestPythonVisitorRunner {
     }
 
   }
-
 
 }

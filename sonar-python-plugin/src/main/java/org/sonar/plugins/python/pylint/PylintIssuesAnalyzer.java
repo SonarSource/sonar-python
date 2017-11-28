@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.io.Files;
 import javax.annotation.Nullable;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -30,6 +29,7 @@ import org.sonar.api.utils.command.CommandExecutor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -92,7 +92,8 @@ public class PylintIssuesAnalyzer {
       LOG.warn("Content of the error stream: \n\"{}\"", data);
     }
 
-    Files.write(StringUtils.join(stdOut.getData(), "\n"), out, charset);
+    String str = StringUtils.join(stdOut.getData(), "\n");
+    Files.write(out.toPath(), str.getBytes(charset));
 
     return parseOutput(stdOut.getData());
   }
@@ -104,7 +105,7 @@ public class PylintIssuesAnalyzer {
     if (!lines.isEmpty()) {
       for (String line : lines) {
         Issue issue = parser.parseLine(line);
-        if (issue != null){
+        if (issue != null) {
           issues.add(issue);
         }
       }

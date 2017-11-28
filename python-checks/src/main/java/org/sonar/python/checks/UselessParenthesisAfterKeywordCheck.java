@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,14 +36,19 @@ import org.sonar.python.api.PythonPunctuator;
 public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1721";
-  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
-    PythonGrammar.ASSERT_STMT, "assert",
-    PythonGrammar.RAISE_STMT, "raise",
-    PythonGrammar.WHILE_STMT, "while");
+  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST;
+
+  static {
+    Map<PythonGrammar, String> map = new EnumMap<>(PythonGrammar.class);
+    map.put(PythonGrammar.ASSERT_STMT, "assert");
+    map.put(PythonGrammar.RAISE_STMT, "raise");
+    map.put(PythonGrammar.WHILE_STMT, "while");
+    KEYWORDS_FOLLOWED_BY_TEST = Collections.unmodifiableMap(map);
+  }
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.ASSERT_STMT,
       PythonGrammar.DEL_STMT,
       PythonGrammar.IF_STMT,
