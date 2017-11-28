@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
@@ -35,7 +34,7 @@ public class BreakContinueOutsideLoopCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.BREAK_STMT, PythonGrammar.CONTINUE_STMT);
+    return immutableSet(PythonGrammar.BREAK_STMT, PythonGrammar.CONTINUE_STMT);
   }
 
   @Override

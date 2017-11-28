@@ -19,13 +19,13 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.Collections;
 import java.util.Set;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
@@ -39,7 +39,7 @@ public class EmptyNestedBlockCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.SUITE);
+    return Collections.singleton(PythonGrammar.SUITE);
   }
 
   @Override
@@ -86,7 +86,7 @@ public class EmptyNestedBlockCheck extends PythonCheck {
   private static class NotPassPredicate implements Predicate<AstNode> {
 
     @Override
-    public boolean apply(AstNode node) {
+    public boolean test(AstNode node) {
       return !node.getType().equals(PythonGrammar.PASS_STMT);
     }
 

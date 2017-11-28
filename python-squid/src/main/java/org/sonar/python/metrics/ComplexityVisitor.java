@@ -19,9 +19,10 @@
  */
 package org.sonar.python.metrics;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.api.PythonGrammar;
@@ -39,13 +40,14 @@ public class ComplexityVisitor extends PythonVisitor {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
-      PythonGrammar.FUNCDEF,
-      PythonGrammar.FOR_STMT,
-      PythonGrammar.WHILE_STMT,
-      PythonKeyword.IF,
-      PythonKeyword.AND,
-      PythonKeyword.OR);
+    Set<AstNodeType> set = new HashSet<>();
+    set.add(PythonGrammar.FUNCDEF);
+    set.add(PythonGrammar.FOR_STMT);
+    set.add(PythonGrammar.WHILE_STMT);
+    set.add(PythonKeyword.IF);
+    set.add(PythonKeyword.AND);
+    set.add(PythonKeyword.OR);
+    return Collections.unmodifiableSet(set);
   }
 
   @Override

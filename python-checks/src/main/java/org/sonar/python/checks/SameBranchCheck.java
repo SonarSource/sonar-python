@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +45,7 @@ public class SameBranchCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.IF_STMT);
+    return Collections.singleton(PythonGrammar.IF_STMT);
   }
 
   @Override
@@ -128,8 +128,8 @@ public class SameBranchCheck extends PythonCheck {
     List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
     if (statements.size() == 1) {
       AstSelect nestedIf = statements.get(0).select()
-          .children(PythonGrammar.COMPOUND_STMT)
-          .children(PythonGrammar.IF_STMT);
+        .children(PythonGrammar.COMPOUND_STMT)
+        .children(PythonGrammar.IF_STMT);
       if (nestedIf.size() == 1) {
         return nestedIf.get(0);
       }

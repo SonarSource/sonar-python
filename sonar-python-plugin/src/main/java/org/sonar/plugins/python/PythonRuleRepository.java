@@ -47,8 +47,8 @@ public class PythonRuleRepository implements RulesDefinition {
   @Override
   public void define(Context context) {
     NewRepository repository = context
-        .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
-        .setName(REPOSITORY_NAME);
+      .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
+      .setName(REPOSITORY_NAME);
 
     getRuleMetadataLoader().addRulesByAnnotatedClass(repository, getCheckClasses());
 

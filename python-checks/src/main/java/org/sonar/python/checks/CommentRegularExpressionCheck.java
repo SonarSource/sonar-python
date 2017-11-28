@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.base.Strings;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
@@ -49,7 +48,7 @@ public class CommentRegularExpressionCheck extends PythonCheck {
 
   private Pattern pattern() {
     if (!isPatternInitialized) {
-      if (!Strings.isNullOrEmpty(regularExpression)) {
+      if (regularExpression != null && !regularExpression.isEmpty()) {
         try {
           pattern = Pattern.compile(regularExpression, Pattern.DOTALL);
         } catch (RuntimeException e) {
