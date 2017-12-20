@@ -34,9 +34,9 @@ public class PylintReportParser {
   // Pylint 0.24 brings a nasty reidentifying of some rules...
   // To avoid burdening of users with rule clones we map the ids.
   // This workaround can die as soon as pylints <= 0.23.X become obsolete.
-  private static final Map<String, String> ID_MAP;
+  private static final Map<String, String> ID_MAP = initializeIdMap();
 
-  static {
+  private static Map<String, String> initializeIdMap() {
     Map<String, String> map = new HashMap<>();
     map.put("E9900", "E1300");
     map.put("E9901", "E1301");
@@ -48,7 +48,7 @@ public class PylintReportParser {
     map.put("W6501", "W1201");
     map.put("W9900", "W1300");
     map.put("W9901", "W1301");
-    ID_MAP = Collections.unmodifiableMap(map);
+    return Collections.unmodifiableMap(map);
   }
 
   public Issue parseLine(String line) {

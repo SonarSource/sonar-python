@@ -36,14 +36,14 @@ import org.sonar.python.api.PythonPunctuator;
 public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1721";
-  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST;
+  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = initializeKeywordsFollowedByTest();
 
-  static {
+  private static Map<PythonGrammar, String> initializeKeywordsFollowedByTest() {
     Map<PythonGrammar, String> map = new EnumMap<>(PythonGrammar.class);
     map.put(PythonGrammar.ASSERT_STMT, "assert");
     map.put(PythonGrammar.RAISE_STMT, "raise");
     map.put(PythonGrammar.WHILE_STMT, "while");
-    KEYWORDS_FOLLOWED_BY_TEST = Collections.unmodifiableMap(map);
+    return Collections.unmodifiableMap(map);
   }
 
   @Override

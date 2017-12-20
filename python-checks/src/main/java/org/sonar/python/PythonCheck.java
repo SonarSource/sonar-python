@@ -22,6 +22,7 @@ package org.sonar.python;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -107,10 +108,6 @@ public abstract class PythonCheck extends PythonVisitor {
   }
 
   public static <T> Set<T> immutableSet(T... el) {
-    Set<T> set = new HashSet<>(el.length);
-    for (T t : el) {
-      set.add(t);
-    }
-    return Collections.unmodifiableSet(set);
+    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(el)));
   }
 }

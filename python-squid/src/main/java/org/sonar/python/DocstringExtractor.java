@@ -37,17 +37,17 @@ import org.sonar.python.api.PythonTokenType;
  */
 public class DocstringExtractor {
 
-  public static final Set<AstNodeType> DOCUMENTABLE_NODE_TYPES;
+  public static final Set<AstNodeType> DOCUMENTABLE_NODE_TYPES = initializeDocumentableNodeTypes();
 
-  static {
+  private DocstringExtractor() {
+  }
+
+  private static Set<AstNodeType> initializeDocumentableNodeTypes() {
     Set<AstNodeType> set = new HashSet<>();
     set.add(PythonGrammar.FILE_INPUT);
     set.add(PythonGrammar.FUNCDEF);
     set.add(PythonGrammar.CLASSDEF);
-    DOCUMENTABLE_NODE_TYPES = Collections.unmodifiableSet(set);
-  }
-
-  private DocstringExtractor() {
+    return Collections.unmodifiableSet(set);
   }
 
   public static Token extractDocstring(AstNode documentableNode) {

@@ -32,7 +32,9 @@ import org.sonar.python.api.PythonGrammar;
 @Rule(key = "S1764")
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
 
-  private static final List<String> EXCLUDED_OPERATOR_TYPES = Collections.unmodifiableList(Arrays.asList("*", "+"));
+  private static final List<String> EXCLUDED_OPERATOR_TYPES = Collections.unmodifiableList(Arrays.asList(
+    "*",
+    "+"));
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
