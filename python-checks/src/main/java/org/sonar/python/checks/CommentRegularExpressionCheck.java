@@ -26,10 +26,8 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.RuleTemplate;
 
 @Rule(key = CommentRegularExpressionCheck.CHECK_KEY)
-@RuleTemplate
 public class CommentRegularExpressionCheck extends PythonCheck {
   public static final String CHECK_KEY = "CommentRegularExpression";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";

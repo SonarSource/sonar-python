@@ -55,6 +55,21 @@ public class PythonRuleRepositoryTest {
     assertThat(repository.rule("BackticksUsage").activatedByDefault()).isTrue();
   }
 
+  @Test
+  public void ruleTemplates() {
+    RulesDefinition.Repository repository = buildRepository(Version.parse("6.7"));
+    assertThat(repository.rule("S100").template()).isFalse();
+    assertThat(repository.rule("CommentRegularExpression").template()).isTrue();
+    assertThat(repository.rule("XPath").template()).isTrue();
+
+    long templateCount = repository.rules().stream()
+      .map(RulesDefinition.Rule::template)
+      .filter(Boolean::booleanValue)
+      .count();
+    assertThat(repository.rules().size()).isGreaterThan(50);
+    assertThat(templateCount).isEqualTo(2);
+  }
+
   private RulesDefinition.Repository buildRepository(Version sonarRuntimeVersion) {
     PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntimeVersion);
     RulesDefinition.Context context = new RulesDefinition.Context();

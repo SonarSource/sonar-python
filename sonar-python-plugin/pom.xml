@@ -39,12 +39,12 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.sonarsource.sslr</groupId>
-      <artifactId>sslr-testing-harness</artifactId>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
+      <groupId>org.sonarsource.sslr</groupId>
+      <artifactId>sslr-testing-harness</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
@@ -117,8 +117,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <minsize>4000000</minsize>
-                  <maxsize>4100000</maxsize>
+                  <minsize>3700000</minsize>
+                  <maxsize>4000000</maxsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
