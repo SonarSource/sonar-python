@@ -26,10 +26,8 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.RuleTemplate;
 
 @Rule(key = XPathCheck.CHECK_KEY)
-@RuleTemplate
 public class XPathCheck extends PythonCheck {
   public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
