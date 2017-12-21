@@ -21,6 +21,19 @@ package org.sonar.python.checks;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.api.batch.rule.ActiveRules;
@@ -29,16 +42,14 @@ import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Set;
-
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckListTest {
+
+  private static final Path METADATA_DIR = Paths.get("src/main/resources/org/sonar/l10n/py/rules/python");
+
+  private static final Pattern SQ_KEY = Pattern.compile("\"sqKey\": \"([^\"]*)\"");
 
   /**
    * Enforces that each check declared in list.
@@ -103,4 +114,36 @@ public class CheckListTest {
     }
   }
 
+  @Test
+  public void validate_sqKey_field_in_json() throws IOException {
+    List<Path> jsonList = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))
+      .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
+      .sorted()
+      .collect(Collectors.toList());
+
+    List<String> fileNames = jsonList.stream()
+      .map(Path::getFileName)
+      .map(Path::toString)
+      .map(name -> name.replaceAll("\\.json$", ""))
+      .collect(Collectors.toList());
+
+    List<String> sqKeys = jsonList.stream()
+      .map(CheckListTest::extractSqKey)
+      .collect(Collectors.toList());
+
+    assertThat(fileNames).isEqualTo(sqKeys);
+  }
+
+  private static String extractSqKey(Path jsonFile) {
+    try {
+      String content = new String(Files.readAllBytes(jsonFile), UTF_8);
+      Matcher matcher = SQ_KEY.matcher(content);
+      if (!matcher.find()) {
+        return "Can not find sqKey in " + jsonFile;
+      }
+      return matcher.group(1);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
 }
