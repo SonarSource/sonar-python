@@ -19,9 +19,9 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.io.Files;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.Version;
@@ -51,7 +51,7 @@ public abstract class SonarQubePythonFile implements PythonFile {
 
   @Override
   public String fileName() {
-    return inputFile.file().getName();
+    return inputFile.path().getFileName().toString();
   }
 
   public InputFile inputFile() {
@@ -60,7 +60,7 @@ public abstract class SonarQubePythonFile implements PythonFile {
 
   private static String contentForCharset(InputFile inputFile, Charset charset) {
     try {
-      return Files.toString(inputFile.file(), charset);
+      return new String(Files.readAllBytes(inputFile.path()), charset);
     } catch (IOException e) {
       throw new IllegalStateException("Could not read content of input file " + inputFile, e);
     }

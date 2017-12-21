@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
@@ -48,7 +47,7 @@ public class SelfAssignmentCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.EXPRESSION_STMT,
       PythonGrammar.IMPORT_NAME,
       PythonGrammar.IMPORT_AS_NAME);

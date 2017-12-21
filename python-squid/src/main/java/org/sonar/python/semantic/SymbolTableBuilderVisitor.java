@@ -19,7 +19,6 @@
  */
 package org.sonar.python.semantic;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
@@ -96,12 +95,13 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
     @Override
     public Set<AstNodeType> subscribedKinds() {
-      return ImmutableSet.of(
-        PythonGrammar.FUNCDEF,
-        PythonGrammar.CLASSDEF,
-        PythonGrammar.EXPRESSION_STMT,
-        PythonGrammar.GLOBAL_STMT,
-        PythonGrammar.NONLOCAL_STMT);
+      Set<AstNodeType> set = new HashSet<>();
+      set.add(PythonGrammar.FUNCDEF);
+      set.add(PythonGrammar.CLASSDEF);
+      set.add(PythonGrammar.EXPRESSION_STMT);
+      set.add(PythonGrammar.GLOBAL_STMT);
+      set.add(PythonGrammar.NONLOCAL_STMT);
+      return Collections.unmodifiableSet(set);
     }
 
     @Override
@@ -180,7 +180,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     @Override
     public Set<Symbol> symbols(AstNode scopeTree) {
       Scope scope = scopesByRootTree.get(scopeTree);
-      return scope == null ? ImmutableSet.of() : scope.symbols();
+      return scope == null ? Collections.emptySet() : scope.symbols();
     }
 
   }
@@ -310,11 +310,12 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
     @Override
     public Set<AstNodeType> subscribedKinds() {
-      return ImmutableSet.of(
-        PythonGrammar.FUNCDEF,
-        PythonGrammar.CLASSDEF,
-        PythonGrammar.ATOM,
-        PythonGrammar.DOTTED_NAME);
+      Set<AstNodeType> set = new HashSet<>();
+      set.add(PythonGrammar.FUNCDEF);
+      set.add(PythonGrammar.CLASSDEF);
+      set.add(PythonGrammar.ATOM);
+      set.add(PythonGrammar.DOTTED_NAME);
+      return Collections.unmodifiableSet(set);
     }
 
     @Override
