@@ -40,9 +40,20 @@ public class UnusedLocalVariableCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode functionTree) {
+    // https://docs.python.org/3/library/functions.html#locals
+    if (isCallingLocalsFunction(functionTree)) {
+      return;
+    }
     for (Symbol symbol : getContext().symbolTable().symbols(functionTree)) {
       checkSymbol(symbol);
     }
+  }
+
+  private static boolean isCallingLocalsFunction(AstNode functionTree) {
+    return functionTree
+      .getDescendants(PythonGrammar.NAME)
+      .stream()
+      .anyMatch(node -> "locals".equals(node.getTokenValue()));
   }
 
   private void checkSymbol(Symbol symbol) {
