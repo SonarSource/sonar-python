@@ -54,7 +54,6 @@
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>woodstox-core-lgpl</artifactId>
     </dependency>
-    <!-- Used by PylintRuleRepository->org.sonar.squidbridge.rules.SqaleXmlLoader -->
     <dependency>
       <groupId>org.codehaus.staxmate</groupId>
       <artifactId>staxmate</artifactId>
@@ -117,8 +116,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <minsize>3700000</minsize>
-                  <maxsize>4000000</maxsize>
+                  <minsize>3500000</minsize>
+                  <maxsize>3700000</maxsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

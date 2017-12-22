@@ -20,22 +20,36 @@
 package org.sonar.python;
 
 import java.nio.charset.Charset;
-import org.sonar.squidbridge.api.SquidConfiguration;
 
-public class PythonConfiguration extends SquidConfiguration {
+public class PythonConfiguration {
 
+  private Charset charset;
+  private boolean stopSquidOnException = false;
   private boolean ignoreHeaderComments;
 
   public PythonConfiguration(Charset charset) {
-    super(charset);
+    this.charset = charset;
   }
 
+  // TODO this method seems to be unused, should we create plugin property to ignore header comments?
   public void setIgnoreHeaderComments(boolean ignoreHeaderComments) {
     this.ignoreHeaderComments = ignoreHeaderComments;
   }
 
   public boolean getIgnoreHeaderComments() {
     return ignoreHeaderComments;
+  }
+
+  public Charset getCharset() {
+    return charset;
+  }
+
+  public void setStopSquidOnException(boolean stopSquidOnException) {
+    this.stopSquidOnException = stopSquidOnException;
+  }
+
+  public boolean stopSquidOnException() {
+    return stopSquidOnException;
   }
 
 }

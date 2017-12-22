@@ -91,7 +91,7 @@
     <sonar.orchestrator.version>3.14.0.887</sonar.orchestrator.version>
     <sonarlint-core.version>2.4.1</sonarlint-core.version>
     <sslr.version>1.21</sslr.version>
-    <sslr.squid.bridge.version>2.6.1</sslr.squid.bridge.version>
+    <sslr.xpath.version>1.20</sslr.xpath.version>
     <woodstox.version>4.4.1</woodstox.version>
   </properties>
 
@@ -115,23 +115,9 @@
         <version>${sslr.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.sonarsource.sslr-squid-bridge</groupId>
-        <artifactId>sslr-squid-bridge</artifactId>
-        <version>${sslr.squid.bridge.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.sonar</groupId>
-            <artifactId>sonar-plugin-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.codehaus.sonar.sslr</groupId>
-            <artifactId>sslr-core</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.picocontainer</groupId>
-            <artifactId>picocontainer</artifactId>
-          </exclusion>
-        </exclusions>
+        <groupId>org.codehaus.sonar.sslr</groupId>
+        <artifactId>sslr-xpath</artifactId>
+        <version>${sslr.xpath.version}</version>
       </dependency>
       <dependency>
         <groupId>org.sonarsource.analyzer-commons</groupId>
