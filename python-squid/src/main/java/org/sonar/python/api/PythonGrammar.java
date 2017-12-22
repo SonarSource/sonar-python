@@ -226,7 +226,7 @@ public enum PythonGrammar implements GrammarRuleKey {
         b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR))), b.optional(",")))),
       b.sequence(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))))));
 
-    b.rule(ARGLIST).is(b.optional(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(",")));
+    b.rule(ARGLIST).is(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","));
     b.rule(ARGUMENT).is(b.firstOf(
       b.sequence("*", TEST),
       b.sequence("**", TEST),
