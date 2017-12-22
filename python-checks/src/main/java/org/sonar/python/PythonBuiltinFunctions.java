@@ -19,13 +19,12 @@
  */
 package org.sonar.python;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,23 +32,23 @@ public enum PythonBuiltinFunctions {
 
   INSTANCE;
 
-  private static final Set<String> BUILTINS = loadBuiltinNames(PythonBuiltinFunctions.class.getResource("builtins.txt"));
+  private static final Set<String> BUILTINS = loadBuiltinNames(PythonBuiltinFunctions.class.getResourceAsStream("builtins.txt"));
 
   public static boolean contains(String name) {
     return BUILTINS.contains(name);
   }
 
-  static Set<String> loadBuiltinNames(URL resourceUrl) {
-    try {
-      List<String> lines = Files.readAllLines(Paths.get(resourceUrl.toURI()), StandardCharsets.UTF_8);
-      return lines.stream()
+  static Set<String> loadBuiltinNames(InputStream resourceStream) {
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
+      return reader.lines()
         .map(String::trim)
         .filter(s -> !s.startsWith("#"))
         .filter(s -> !s.isEmpty())
         .collect(Collectors.toSet());
-    } catch (IOException | URISyntaxException e) {
-      throw new IllegalStateException("Cannot load " + resourceUrl, e);
+    } catch (IOException | UncheckedIOException e) {
+      throw new IllegalStateException("Cannot read input stream", e);
     }
+
   }
 
 }
