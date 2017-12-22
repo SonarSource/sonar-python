@@ -44,6 +44,7 @@ import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
+import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
@@ -69,8 +70,8 @@ public class PythonScanner {
   private final Checks<PythonCheck> checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private final PythonCpdAnalyzer cpdAnalyzer;
   private Map<InputFile, Set<Integer>> linesOfCodeByFile;
-
 
   public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
     FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
@@ -78,6 +79,7 @@ public class PythonScanner {
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
+    this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.inputFiles = inputFiles;
     this.parser = PythonParser.create(new PythonConfiguration(context.fileSystem().encoding()));
     this.linesOfCodeByFile = new HashMap<>();
@@ -158,6 +160,7 @@ public class PythonScanner {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
+    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
     saveFilesComplexityDistribution(inputFile, fileMetrics);

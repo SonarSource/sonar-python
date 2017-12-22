@@ -24,7 +24,6 @@ import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
-import org.sonar.plugins.python.cpd.PythonCpdMapping;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
@@ -139,7 +138,6 @@ public class PythonPlugin implements Plugin {
         .build(),
 
       Python.class,
-      PythonCpdMapping.class,
 
       PythonProfile.class,
 
