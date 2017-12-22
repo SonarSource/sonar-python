@@ -35,7 +35,7 @@ public class PythonPluginTest {
     SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(Version.create(5, 6), SonarQubeSide.SERVER);
     Plugin.Context context = new Plugin.Context(runtime);
     new PythonPlugin().define(context);
-    assertThat(context.getExtensions()).hasSize(20);
+    assertThat(context.getExtensions()).hasSize(19);
   }
 
 }
