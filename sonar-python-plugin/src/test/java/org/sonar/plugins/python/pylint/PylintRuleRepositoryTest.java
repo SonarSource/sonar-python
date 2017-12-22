@@ -19,11 +19,10 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,6 +42,11 @@ public class PylintRuleRepositoryTest {
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
     assertThat(rules).hasSize(180);
+
+    long rulesWithoutRemediationCost = rules.stream()
+      .filter(rule -> rule.debtRemediationFunction() == null)
+      .count();
+    assertThat(rulesWithoutRemediationCost).isEqualTo(24);
   }
 
 }
