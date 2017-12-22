@@ -19,14 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.impl.Parser;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -43,11 +43,11 @@ public class CommentedCodeCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";
-  private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
+  private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonTokenType.STRING);
+    return Collections.singleton(PythonTokenType.STRING);
   }
 
   @Override

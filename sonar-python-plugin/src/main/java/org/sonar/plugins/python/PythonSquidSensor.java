@@ -19,7 +19,8 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.collect.ImmutableList;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -59,8 +60,10 @@ public final class PythonSquidSensor implements Sensor {
   @Override
   public void execute(SensorContext context) {
     FilePredicates p = context.fileSystem().predicates();
-    List<InputFile> inputFiles = ImmutableList.copyOf(
-      context.fileSystem().inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY))));
+    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+    List<InputFile> list = new ArrayList<>();
+    it.forEach(list::add);
+    List<InputFile> inputFiles = Collections.unmodifiableList(list);
 
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, inputFiles);
     scanner.scanFiles();

@@ -19,13 +19,13 @@
  */
 package org.sonar.python.metrics;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.python.DocstringExtractor;
@@ -44,10 +44,10 @@ public class FileLinesVisitor extends PythonVisitor {
 
   private final boolean ignoreHeaderComments;
 
-  private Set<Integer> noSonar = Sets.newHashSet();
-  private Set<Integer> linesOfCode = Sets.newHashSet();
-  private Set<Integer> linesOfComments = Sets.newHashSet();
-  private Set<Integer> linesOfDocstring = Sets.newHashSet();
+  private Set<Integer> noSonar = new HashSet<>();
+  private Set<Integer> linesOfCode = new HashSet<>();
+  private Set<Integer> linesOfComments = new HashSet<>();
+  private Set<Integer> linesOfDocstring = new HashSet<>();
 
   public FileLinesVisitor(boolean ignoreHeaderComments) {
     this.ignoreHeaderComments = ignoreHeaderComments;
@@ -89,7 +89,7 @@ public class FileLinesVisitor extends PythonVisitor {
     }
 
     if (!token.getType().equals(PythonTokenType.DEDENT) && !token.getType().equals(PythonTokenType.INDENT) && !token.getType().equals(PythonTokenType.NEWLINE)) {
-      //  Handle all the lines of the token
+      // Handle all the lines of the token
       String[] tokenLines = token.getValue().split("\n", -1);
       for (int line = token.getLine(); line < token.getLine() + tokenLines.length; line++) {
         linesOfCode.add(line);
@@ -134,15 +134,15 @@ public class FileLinesVisitor extends PythonVisitor {
   }
 
   public Set<Integer> getLinesWithNoSonar() {
-    return ImmutableSet.copyOf(noSonar);
+    return Collections.unmodifiableSet(new HashSet<>(noSonar));
   }
 
   public Set<Integer> getLinesOfCode() {
-    return ImmutableSet.copyOf(linesOfCode);
+    return Collections.unmodifiableSet(new HashSet<>(linesOfCode));
   }
 
   public Set<Integer> getLinesOfComments() {
-    return ImmutableSet.copyOf(linesOfComments);
+    return Collections.unmodifiableSet(new HashSet<>(linesOfComments));
   }
 
   private static class PythonCommentAnalyser {

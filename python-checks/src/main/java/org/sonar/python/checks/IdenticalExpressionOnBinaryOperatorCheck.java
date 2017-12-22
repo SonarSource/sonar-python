@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -32,14 +32,13 @@ import org.sonar.python.api.PythonGrammar;
 @Rule(key = "S1764")
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
 
-  private static final List<String> EXCLUDED_OPERATOR_TYPES = ImmutableList.of(
+  private static final List<String> EXCLUDED_OPERATOR_TYPES = Collections.unmodifiableList(Arrays.asList(
     "*",
-    "+"
-  );
+    "+"));
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.M_EXPR,
       PythonGrammar.A_EXPR,
       PythonGrammar.SHIFT_EXPR,
@@ -48,8 +47,7 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
       PythonGrammar.OR_EXPR,
       PythonGrammar.COMPARISON,
       PythonGrammar.OR_TEST,
-      PythonGrammar.AND_TEST
-    );
+      PythonGrammar.AND_TEST);
   }
 
   @Override

@@ -159,11 +159,6 @@
         <artifactId>logback-classic</artifactId>
         <version>${logback.version}</version>
       </dependency>
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>22.0</version>
-      </dependency>
 
       <!-- test dependencies -->
       <dependency>
@@ -191,12 +186,6 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-project</artifactId>
-        <version>${maven.project.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
         <version>${assertj-core.version}</version>
@@ -208,6 +197,13 @@
         <version>${sonarlint-core.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>22.0</version>
+        <scope>test</scope>
+      </dependency>
+
 
       <!-- provided dependencies -->
       <dependency>
