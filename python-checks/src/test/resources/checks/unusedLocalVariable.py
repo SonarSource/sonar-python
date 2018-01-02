@@ -10,3 +10,8 @@ def f(unread_param):
     read_in_nested_function = 1
     def nested_function():
         print(read_in_nested_function)
+
+def using_locals(a, b):
+  c = a + b
+  # "locals" will include the "c" value
+  return locals()
