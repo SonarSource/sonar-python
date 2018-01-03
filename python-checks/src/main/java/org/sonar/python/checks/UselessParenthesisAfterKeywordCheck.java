@@ -75,7 +75,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
         checkParenthesis(testNodes.get(1), "elif", testNodes.get(1));
       }
     } else if (node.is(PythonGrammar.FOR_STMT)) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
+      visitForExpression(node);
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "in", node);
     } else if (node.is(PythonGrammar.RETURN_STMT)) {
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "return", node);
@@ -85,6 +85,12 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
       visitExceptClause(node);
     } else if (node.is(PythonGrammar.NOT_TEST)) {
       visitNotTest(node);
+    }
+  }
+
+  private void visitForExpression(AstNode node) {
+    if (node.getFirstChild(PythonGrammar.EXPRLIST).getNumberOfChildren() == 1) {
+      checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
     }
   }
 

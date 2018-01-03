@@ -75,3 +75,11 @@ if not(x and y):
 if (x > 0 and 
 	x < 3):
 	pass
+
+my_pairs = [(1, 2), (5, 6)]
+names = ['small', 'large']
+for (first, second), name in zip(my_pairs, names): # the parenthesis after the "for" keyword is not useless
+    print(name, first + second)
+
+for (x, y) in foo: # Noncompliant
+    print(x, y)
