@@ -18,6 +18,7 @@ def using_locals(a, b):
 
 def string_interpolation():
     value1 = 1
-    value2 = 2 # Noncompliant
-    value3 = 3 # false-negative, value3 is not used as a variable in the string interpolation, see SONARPY-245
-    return f'The value1 is {value1}, value2bis, value3'
+    value2 = 2
+    value3 = 3 # Noncompliant
+    value4 = 4 # false-negative, value4 is not used as a variable in the string interpolation, see SONARPY-245
+    return f'{value1}, {2*value2}, value3bis, value4'
