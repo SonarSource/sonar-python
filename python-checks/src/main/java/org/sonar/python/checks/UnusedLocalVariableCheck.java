@@ -21,8 +21,12 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
@@ -30,6 +34,8 @@ import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S1481")
 public class UnusedLocalVariableCheck extends PythonCheck {
+
+  private static final Pattern IDENTIFIER_SEPARATOR = Pattern.compile("[^a-zA-Z0-9_]+");
 
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
 
@@ -44,8 +50,11 @@ public class UnusedLocalVariableCheck extends PythonCheck {
     if (isCallingLocalsFunction(functionTree)) {
       return;
     }
+    Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
     for (Symbol symbol : getContext().symbolTable().symbols(functionTree)) {
-      checkSymbol(symbol);
+      if (!interpolationIdentifiers.contains(symbol.name())) {
+        checkSymbol(symbol);
+      }
     }
   }
 
@@ -54,6 +63,16 @@ public class UnusedLocalVariableCheck extends PythonCheck {
       .getDescendants(PythonGrammar.NAME)
       .stream()
       .anyMatch(node -> "locals".equals(node.getTokenValue()));
+  }
+
+  private static Set<String> extractStringInterpolationIdentifiers(AstNode functionTree) {
+    return functionTree.getTokens().stream()
+      .filter(CheckUtils::isStringInterpolation)
+      .map(Token::getOriginalValue)
+      .map(CheckUtils::stringLiteralContent)
+      .map(IDENTIFIER_SEPARATOR::split)
+      .flatMap(Arrays::stream)
+      .collect(Collectors.toSet());
   }
 
   private void checkSymbol(Symbol symbol) {
