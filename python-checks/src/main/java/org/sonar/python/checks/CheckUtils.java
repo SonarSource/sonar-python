@@ -22,11 +22,16 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
 public class CheckUtils {
+
+  private static final Pattern STRING_INTERPOLATION_PREFIX = Pattern.compile("^[^'\"fF]*+[fF]");
+  private static final Pattern STRING_LITERAL_QUOTE = Pattern.compile("[\"']");
 
   private CheckUtils() {
 
@@ -98,4 +103,18 @@ public class CheckUtils {
     }
     return false;
   }
+
+  public static boolean isStringInterpolation(Token token) {
+    return token.getType().equals(PythonTokenType.STRING) &&
+      STRING_INTERPOLATION_PREFIX.matcher(token.getOriginalValue()).find();
+  }
+
+  public static String stringLiteralContent(String stringLiteral) {
+    Matcher quote = STRING_LITERAL_QUOTE.matcher(stringLiteral);
+    if (!quote.find()) {
+      throw new IllegalStateException("Invalid string literal: " + stringLiteral);
+    }
+    return stringLiteral.substring(quote.end(), stringLiteral.length() - 1);
+  }
+
 }
