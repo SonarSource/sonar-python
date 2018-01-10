@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.coverage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +34,6 @@ import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.config.Settings;
 import org.sonar.plugins.python.EmptyReportException;
@@ -59,99 +59,68 @@ public class PythonCoverageSensor {
     String baseDir = context.fileSystem().baseDir().getPath();
     Settings settings = context.settings();
 
-    LOG.info("Python unit test coverage");
-    List<File> reports = getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH);
-    Map<InputFile, NewCoverage> coverageMeasures = parseReports(reports, context);
-    HashSet<InputFile> filesCoveredByUT = new HashSet<>();
-    saveMeasures(coverageMeasures, filesCoveredByUT, CoverageType.UNIT);
-
-    LOG.info("Python integration test coverage");
-    List<File> itReports = getReports(settings, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH);
-    Map<InputFile, NewCoverage> itCoverageMeasures = parseReports(itReports, context);
-    HashSet<InputFile> filesCoveredByIT = new HashSet<>();
-    saveMeasures(itCoverageMeasures, filesCoveredByIT, CoverageType.IT);
-
-    LOG.info("Python overall test coverage");
-    List<File> overallReports = getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH);
-    Map<InputFile, NewCoverage> overallCoverageMeasures = parseReports(overallReports, context);
-    HashSet<InputFile> filesCoveredOverall = new HashSet<>();
-    saveMeasures(overallCoverageMeasures, filesCoveredOverall, CoverageType.OVERALL);
-
-    if (settings.getBoolean(FORCE_ZERO_COVERAGE_KEY)) {
+    HashSet<InputFile> filesCovered = new HashSet<>();
+    List<File> reports = new ArrayList<>();
+    reports.addAll(getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(settings, baseDir, IT_REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
+    if (!reports.isEmpty()) {
+      LOG.info("Python test coverage");
+      for (File report : reports) {
+        Map<InputFile, NewCoverage> coverageMeasures = parseReport(report, context);
+        saveMeasures(coverageMeasures, filesCovered);
+      }
+    }
+    if (settings.getBoolean(FORCE_ZERO_COVERAGE_KEY) || (!settings.hasKey(FORCE_ZERO_COVERAGE_KEY) && !reports.isEmpty())) {
       LOG.debug("Zeroing coverage information for untouched files");
-      zeroMeasuresWithoutReports(context, filesCoveredByUT, filesCoveredByIT, filesCoveredOverall, linesOfCode);
+      zeroMeasuresWithoutReports(context, filesCovered, linesOfCode);
     }
   }
 
-  private static void zeroMeasuresWithoutReports(
-    SensorContext context,
-    HashSet<InputFile> filesCoveredByUT,
-    HashSet<InputFile> filesCoveredByIT,
-    HashSet<InputFile> filesCoveredOverall,
-    Map<InputFile, Set<Integer>> linesOfCode
-  ) {
+  private static void zeroMeasuresWithoutReports(SensorContext context, HashSet<InputFile> filesCovered, Map<InputFile, Set<Integer>> linesOfCode) {
     FileSystem fileSystem = context.fileSystem();
     FilePredicates p = fileSystem.predicates();
     Iterable<InputFile> inputFiles = fileSystem.inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
     for (InputFile inputFile : inputFiles) {
-      Set<Integer> linesOfCodeForFile = linesOfCode.get(inputFile);
-
-      if (!filesCoveredByUT.contains(inputFile)) {
-        saveZeroValueForResource(inputFile, context, CoverageType.UNIT, linesOfCodeForFile);
-      }
-
-      if (!filesCoveredByIT.contains(inputFile)) {
-        saveZeroValueForResource(inputFile, context, CoverageType.IT, linesOfCodeForFile);
-      }
-
-      if (!filesCoveredOverall.contains(inputFile)) {
-        saveZeroValueForResource(inputFile, context, CoverageType.OVERALL, linesOfCodeForFile);
+      if (!filesCovered.contains(inputFile)) {
+        saveZeroValueForResource(inputFile, context, linesOfCode.get(inputFile));
       }
     }
   }
 
-  private static void saveZeroValueForResource(InputFile inputFile, SensorContext context, CoverageType ctype, @Nullable Set<Integer> linesOfCode) {
+  private static void saveZeroValueForResource(InputFile inputFile, SensorContext context, @Nullable Set<Integer> linesOfCode) {
     if (linesOfCode != null) {
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Zeroing {} coverage measures for file '{}'", ctype, inputFile.relativePath());
+        LOG.debug("Zeroing coverage measures for file '{}'", inputFile.relativePath());
       }
-
       NewCoverage newCoverage = context.newCoverage()
-        .onFile(inputFile)
-        .ofType(ctype);
+        .onFile(inputFile);
       linesOfCode.forEach((Integer line) -> newCoverage.lineHits(line, 0));
       newCoverage.save();
     }
   }
 
-
-  private Map<InputFile, NewCoverage> parseReports(List<File> reports, SensorContext context) {
+  private Map<InputFile, NewCoverage> parseReport(File report, SensorContext context) {
     Map<InputFile, NewCoverage> coverageMeasures = new HashMap<>();
-    for (File report : reports) {
-      try {
-        parser.parseReport(report, context, coverageMeasures);
-      } catch (EmptyReportException e) {
-        LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
-      } catch (XMLStreamException e) {
-        throw new IllegalStateException("Error parsing the report '" + report + "'", e);
-      }
+    try {
+      parser.parseReport(report, context, coverageMeasures);
+    } catch (EmptyReportException e) {
+      LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
+    } catch (XMLStreamException e) {
+      throw new IllegalStateException("Error parsing the report '" + report + "'", e);
     }
     return coverageMeasures;
   }
 
-  private static void saveMeasures(Map<InputFile, NewCoverage> coverageMeasures, HashSet<InputFile> coveredFiles, CoverageType coverageType) {
+  private static void saveMeasures(Map<InputFile, NewCoverage> coverageMeasures, HashSet<InputFile> coveredFiles) {
     for (Map.Entry<InputFile, NewCoverage> entry : coverageMeasures.entrySet()) {
       InputFile inputFile = entry.getKey();
       coveredFiles.add(inputFile);
-
       if (LOG.isDebugEnabled()) {
         LOG.debug("Saving coverage measures for file '{}'", inputFile.relativePath());
       }
-
       entry.getValue()
-        .ofType(coverageType)
         .save();
-
     }
   }
 }

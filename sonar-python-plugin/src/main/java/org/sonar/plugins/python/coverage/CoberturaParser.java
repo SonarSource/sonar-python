@@ -40,38 +40,50 @@ public class CoberturaParser {
     LOG.info("Parsing report '{}'", xmlFile);
 
     StaxParser parser = new StaxParser(rootCursor -> {
+      File baseDirectory = context.fileSystem().baseDir();
       try {
         rootCursor.advance();
       } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
         LOG.debug("Unexpected end of file is encountered", eofExc);
         throw new EmptyReportException();
       }
-      collectPackageMeasures(rootCursor.descendantElementCursor("package"), context, coverageData);
+      SMInputCursor cursor = rootCursor.childElementCursor();
+      while (cursor.getNext() != null) {
+        if ("sources".equals(cursor.getLocalName())) {
+          baseDirectory = extractBaseDirectory(cursor, baseDirectory);
+        } else if ("packages".equals(cursor.getLocalName())) {
+          collectFileMeasures(cursor.descendantElementCursor("class"), context, coverageData, baseDirectory);
+        }
+      }
     });
     parser.parse(xmlFile);
   }
 
-  private static void collectPackageMeasures(SMInputCursor pack, SensorContext context, Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
-    while (pack.getNext() != null) {
-      collectFileMeasures(pack.descendantElementCursor("class"), context, coverageData);
+  private static File extractBaseDirectory(SMInputCursor sources, File defaultBaseDirectory) throws XMLStreamException {
+    SMInputCursor source = sources.childElementCursor("source");
+    while (source.getNext() != null) {
+      String path = source.collectDescendantText();
+      if (!StringUtils.isBlank(path)) {
+        File baseDirectory = new File(path);
+        if (!baseDirectory.isDirectory()) {
+          throw new XMLStreamException("Invalid directory path in 'source' element: " + path);
+        }
+        return baseDirectory;
+      }
     }
+    return defaultBaseDirectory;
   }
 
-  private static void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
+  private static void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData, File baseDirectory)
+    throws XMLStreamException {
     while (classCursor.getNext() != null) {
-      String fileName = classCursor.getAttrValue("filename");
-      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasPath(fileName));
-
+      File file = new File(baseDirectory, classCursor.getAttrValue("filename"));
+      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath()));
       if (inputFile != null) {
-        NewCoverage coverage = coverageData.get(inputFile);
-        if (coverage == null) {
-          coverage = context.newCoverage().onFile(inputFile);
-          coverageData.put(inputFile, coverage);
-        }
+        NewCoverage coverage = coverageData.computeIfAbsent(inputFile, f -> context.newCoverage().onFile(f));
         collectFileData(classCursor, coverage);
-
       } else {
-        LOG.debug("Cannot find the file '{}', ignoring coverage measures", fileName);
+        LOG.debug("Cannot find the file '{}', ignoring coverage measures", file.getPath());
         classCursor.getNext();
       }
 
