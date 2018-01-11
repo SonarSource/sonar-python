@@ -86,6 +86,8 @@ public class CheckUtils {
   }
 
   public static boolean isAssignmentExpression(AstNode expression) {
+    // TODO PythonGrammar.ANNASSIGN
+    // Check caller code
     int numberOfChildren = expression.getNumberOfChildren();
     int numberOfAssign = expression.getChildren(PythonPunctuator.ASSIGN).size();
     if (numberOfChildren == 3 && numberOfAssign == 1) {

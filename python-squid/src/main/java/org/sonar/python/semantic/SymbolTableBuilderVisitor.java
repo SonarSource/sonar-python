@@ -124,6 +124,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         createScope(node, currentScope);
 
       } else if (node.is(PythonGrammar.EXPRESSION_STMT)) {
+        // TODO PythonGrammar.ANNASSIGN
         for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.AUGASSIGN)) {
           if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
             new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());

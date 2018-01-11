@@ -66,11 +66,21 @@ public class SelfAssignmentCheck extends PythonCheck {
       addImportedName(node, importedName);
 
     } else {
-      for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN)) {
-        AstNode assigned = assignOperator.getPreviousSibling();
-        if (CheckUtils.equalNodes(assigned, assignOperator.getNextSibling()) && !isException(node, assigned)) {
-          addIssue(assignOperator, MESSAGE);
+      checkExpressionStatement(node);
+    }
+  }
+
+  private void checkExpressionStatement(AstNode node) {
+    for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.ANNASSIGN)) {
+      AstNode assigned = assignOperator.getPreviousSibling();
+      if (assignOperator.is(PythonGrammar.ANNASSIGN)) {
+        assignOperator = assignOperator.getFirstChild(PythonPunctuator.ASSIGN);
+        if (assigned.is(PythonGrammar.TESTLIST_STAR_EXPR) && assigned.getNumberOfChildren() == 1) {
+          assigned =  assigned.getFirstChild();
         }
+      }
+      if (assignOperator != null && CheckUtils.equalNodes(assigned, assignOperator.getNextSibling()) && !isException(node, assigned)) {
+        addIssue(assignOperator, MESSAGE);
       }
     }
   }
