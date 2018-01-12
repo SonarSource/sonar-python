@@ -22,33 +22,33 @@ package org.sonar.plugins.python.xunit;
 import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.resources.Project;
+import org.sonar.api.measures.Metric;
 
-import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonXUnitSensorTest {
+
+  private File baseDir = new File("src/test/resources/org/sonar/plugins/python");
   Settings settings;
   PythonXUnitSensor sensor;
-  SensorContext context;
-  Project project;
+  SensorContextTester context = SensorContextTester.create(baseDir);
   DefaultFileSystem fs;
 
   @Before
   public void setUp() {
     settings = new MapSettings();
-    project = mock(Project.class);
-    fs = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python"));
-    context = mock(SensorContext.class);
+    fs = new DefaultFileSystem(baseDir);
     sensor = new PythonXUnitSensor(settings, fs);
   }
 
@@ -58,23 +58,19 @@ public class PythonXUnitSensorTest {
     DefaultInputFile testFile2 = new DefaultInputFile("", "tests/dir/test_sample2.py");
     fs.add(testFile1);
     fs.add(testFile2);
-    sensor.analyse(project, context);
+    sensor.execute(context);
 
-    verify(context).saveMeasure(testFile1, CoreMetrics.TESTS, 3.);
-    verify(context).saveMeasure(testFile2, CoreMetrics.TESTS, 3.);
-    verify(context).saveMeasure(testFile1, CoreMetrics.TESTS, 0.);
+    assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(3);
+    assertThat(measure(testFile2, CoreMetrics.TESTS)).isEqualTo(3);
 
-    verify(context).saveMeasure(testFile1, CoreMetrics.SKIPPED_TESTS, 0.);
-    verify(context).saveMeasure(testFile2, CoreMetrics.SKIPPED_TESTS, 1.);
-    verify(context).saveMeasure(testFile1, CoreMetrics.SKIPPED_TESTS, 1.);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
+    assertThat(measure(testFile2, CoreMetrics.SKIPPED_TESTS)).isEqualTo(1);
 
-    verify(context).saveMeasure(testFile1, CoreMetrics.TEST_ERRORS, 1.);
-    verify(context).saveMeasure(testFile2, CoreMetrics.TEST_ERRORS, 1.);
-    verify(context).saveMeasure(testFile1, CoreMetrics.TEST_ERRORS, 0.);
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(1);
+    assertThat(measure(testFile2, CoreMetrics.TEST_ERRORS)).isEqualTo(1);
 
-    verify(context).saveMeasure(testFile1, CoreMetrics.TEST_FAILURES, 1.);
-    verify(context).saveMeasure(testFile2, CoreMetrics.TEST_FAILURES, 1.);
-    verify(context).saveMeasure(testFile1, CoreMetrics.TEST_FAILURES, 0.);
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+    assertThat(measure(testFile2, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
   }
 
   @Test
@@ -82,31 +78,41 @@ public class PythonXUnitSensorTest {
     settings.setProperty(PythonXUnitSensor.SKIP_DETAILS, true);
     fs.add(new DefaultInputFile("", "test_sample.py"));
     fs.add(new DefaultInputFile("", "tests/dir/test_sample.py"));
-    sensor.analyse(project, context);
+    sensor.execute(context);
 
     // includes test with not found file
-    verify(context).saveMeasure(CoreMetrics.TESTS, 7.);
-    verify(context).saveMeasure(CoreMetrics.SKIPPED_TESTS, 2.);
-    // includes test with not found file
-    verify(context).saveMeasure(CoreMetrics.TEST_ERRORS, 3.);
-    verify(context).saveMeasure(CoreMetrics.TEST_FAILURES, 2.);
-    verify(context).saveMeasure(eq(CoreMetrics.TEST_EXECUTION_TIME), anyDouble());
-    verifyNoMoreInteractions(context);
+    assertThat(moduleMeasure(CoreMetrics.TESTS)).isEqualTo(7);
+    assertThat(moduleMeasure(CoreMetrics.SKIPPED_TESTS)).isEqualTo(1);
+    assertThat(moduleMeasure(CoreMetrics.TEST_ERRORS)).isEqualTo(3);
+    assertThat(moduleMeasure(CoreMetrics.TEST_FAILURES)).isEqualTo(2);
   }
 
   @Test
   public void shouldReportNothingWhenNoReportFound() {
+    DefaultInputFile testFile1 = new DefaultInputFile("", "test_sample1.py");
+    fs.add(testFile1);
+
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");
     sensor = new PythonXUnitSensor(settings, fs);
-    sensor.analyse(project, context);
+    sensor.execute(context);
 
-    verifyNoMoreInteractions(context);
+    assertThat(context.measures(context.module().key())).isEmpty();
+    assertThat(context.measures(testFile1.key())).isEmpty();
   }
 
   @Test(expected = IllegalStateException.class)
   public void shouldThrowWhenGivenInvalidTime() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
     sensor = new PythonXUnitSensor(settings, fs);
-    sensor.analyse(project, context);
+    sensor.execute(context);
   }
+
+  private Integer moduleMeasure(Metric<Integer> metric) {
+    return measure(context.module(), metric);
+  }
+
+  private Integer measure(InputComponent component, Metric<Integer> metric) {
+    return context.measure(component.key(), metric).value();
+  }
+
 }
