@@ -27,18 +27,13 @@ import java.util.Scanner;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.ActiveRule;
-import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.config.Settings;
-import org.sonar.api.issue.Issuable;
-import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.PythonReportSensor;
 
 public class PylintImportSensor extends PythonReportSensor {
@@ -47,22 +42,20 @@ public class PylintImportSensor extends PythonReportSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PylintImportSensor.class);
 
-  private ActiveRules activeRules;
-  private ResourcePerspectives resourcePerspectives;
-
-  public PylintImportSensor(Settings conf, ActiveRules activeRules, FileSystem fileSystem, ResourcePerspectives resourcePerspectives) {
-    super(conf, fileSystem);
-
-    this.activeRules = activeRules;
-    this.resourcePerspectives = resourcePerspectives;
+  public PylintImportSensor(Settings conf) {
+    super(conf);
   }
 
   @Override
-  public boolean shouldExecuteOnProject(Project project) {
-    FilePredicates p = fileSystem.predicates();
-    boolean hasFiles = fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
-    boolean hasRules = !activeRules.findByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
-    return hasFiles && hasRules && conf.getString(REPORT_PATH_KEY) != null;
+  public void execute(SensorContext context) {
+    if (shouldExecute(context)) {
+      super.execute(context);
+    }
+  }
+
+  private boolean shouldExecute(SensorContext context) {
+    boolean hasRules = !context.activeRules().findByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
+    return hasRules && conf.getString(REPORT_PATH_KEY) != null;
   }
 
   @Override
@@ -76,12 +69,11 @@ public class PylintImportSensor extends PythonReportSensor {
   }
 
   @Override
-  protected void processReports(final SensorContext context, List<File> reports)
-      throws javax.xml.stream.XMLStreamException {
+  protected void processReports(final SensorContext context, List<File> reports) {
     List<Issue> issues = new LinkedList<>();
     for (File report : reports) {
       try {
-        issues.addAll(parse(report));
+        issues.addAll(parse(report, context.fileSystem()));
       } catch (java.io.FileNotFoundException e) {
         LOG.error("Report '{}' cannot be found, details: '{}'", report, e);
       } catch (IOException e) {
@@ -89,10 +81,10 @@ public class PylintImportSensor extends PythonReportSensor {
       }
     }
 
-    saveIssues(issues);
+    saveIssues(issues, context);
   }
 
-  private List<Issue> parse(File report) throws IOException {
+  private static List<Issue> parse(File report, FileSystem fileSystem) throws IOException {
     List<Issue> issues = new LinkedList<>();
 
     PylintReportParser parser = new PylintReportParser();
@@ -108,36 +100,34 @@ public class PylintImportSensor extends PythonReportSensor {
     return issues;
   }
 
-  private void saveIssues(List<Issue> issues) {
+  private static void saveIssues(List<Issue> issues, SensorContext context) {
+    FileSystem fileSystem = context.fileSystem();
     for (Issue pylintIssue : issues) {
       String filepath = pylintIssue.getFilename();
       InputFile pyfile = fileSystem.inputFile(fileSystem.predicates().hasPath(filepath));
       if (pyfile != null) {
-        ActiveRule rule = activeRules.find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
-        processRule(pylintIssue, pyfile, rule);
+        ActiveRule rule = context.activeRules().find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
+        processRule(pylintIssue, pyfile, rule, context);
       } else {
         LOG.warn("Cannot find the file '{}' in SonarQube, ignoring violation", filepath);
       }
     }
   }
 
-  private void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule) {
+  private static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context) {
     if (rule != null) {
-      Issuable issuable = resourcePerspectives.as(Issuable.class, pyfile);
-      addIssue(pylintIssue, rule, issuable);
+      NewIssue newIssue = context
+        .newIssue()
+        .forRule(rule.ruleKey());
+      newIssue.at(
+        newIssue.newLocation()
+          .on(pyfile)
+          .at(pyfile.selectLine(pylintIssue.getLine()))
+          .message(pylintIssue.getDescription()));
+      newIssue.save();
     } else {
       LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
     }
   }
 
-  private static void addIssue(Issue pylintIssue, ActiveRule rule, @Nullable Issuable issuable) {
-    if (issuable != null) {
-      org.sonar.api.issue.Issue issue = issuable.newIssueBuilder()
-          .ruleKey(rule.ruleKey())
-          .line(pylintIssue.getLine())
-          .message(pylintIssue.getDescription())
-          .build();
-      issuable.addIssue(issue);
-    }
-  }
 }
