@@ -19,59 +19,42 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import java.io.File;
-import java.nio.file.Paths;
-import org.junit.Before;
+import javax.annotation.Nullable;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
-import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.config.MapSettings;
-import org.sonar.api.resources.Project;
-import org.sonar.api.rule.RuleKey;
-import org.sonar.plugins.python.Python;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class PylintSensorTest {
-  private PylintConfiguration conf;
-  private ActiveRules activeRules;
-  private DefaultFileSystem fileSystem;
 
-  @Before
-  public void init() {
-    conf = mock(PylintConfiguration.class);
-    activeRules = (new ActiveRulesBuilder())
-        .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
-        .setName("Invalid name")
-        .activate()
-        .build();
-    fileSystem = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python/pylint"));
-    fileSystem.setWorkDir(new File("target/"));
-    DefaultInputFile inputFile = new DefaultInputFile("", "src/test/resources/example_project/example.py").setLanguage(Python.KEY);
-    inputFile.setModuleBaseDir(Paths.get("").toAbsolutePath());
-    fileSystem.add(inputFile);
+  private PylintConfiguration conf = mock(PylintConfiguration.class);
+
+  @Test
+  public void sensor_descriptor() {
+    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+    new PylintSensor(conf, new MapSettings()).describe(descriptor);
+    assertThat(descriptor.name()).isEqualTo("PylintSensor");
+    assertThat(descriptor.languages()).containsOnly("py");
+    assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
+    assertThat(descriptor.ruleRepositories()).containsExactly(PylintRuleRepository.REPOSITORY_KEY);
   }
 
   @Test
   public void shouldExecuteOnlyWhenNecessary() {
-    DefaultFileSystem fileSystemForeign = new DefaultFileSystem(Paths.get(""));
-    Project project = mock(Project.class);
-
-    checkNecessityOfExecution(project, activeRules, fileSystem, true);
-    ActiveRules emptyActiveRules = (new ActiveRulesBuilder()).build();
-    checkNecessityOfExecution(project, emptyActiveRules, fileSystem, false);
-
-    checkNecessityOfExecution(project, activeRules, fileSystemForeign, false);
-    checkNecessityOfExecution(project, emptyActiveRules, fileSystemForeign, false);
+    assertThat(shouldExecute(null)).isTrue();
+    assertThat(shouldExecute("result.txt")).isFalse();
   }
 
-  private void checkNecessityOfExecution(Project project, ActiveRules currentActiveRules, DefaultFileSystem currentFileSystem, boolean shouldExecute) {
-    PylintSensor sensor = new PylintSensor(conf, currentActiveRules, currentFileSystem, mock(ResourcePerspectives.class), new MapSettings());
-    assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
+  private boolean shouldExecute(@Nullable String pylintReportPath) {
+    MapSettings settings = new MapSettings();
+    if (pylintReportPath != null) {
+      settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, pylintReportPath);
+    }
+    PylintSensor sensor = new PylintSensor(conf, settings);
+    return sensor.shouldExecute();
   }
 
 }
