@@ -24,37 +24,35 @@ import java.util.List;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.Sensor;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.batch.fs.FilePredicates;
-import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Settings;
-import org.sonar.api.resources.Project;
 import org.sonar.api.utils.WildcardPattern;
 
 public abstract class PythonReportSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
 
-  protected Settings conf = null;
-  protected FileSystem fileSystem;
+  protected Settings conf;
 
-  public PythonReportSensor(Settings conf, FileSystem fileSystem) {
+  public PythonReportSensor(Settings conf) {
     this.conf = conf;
-    this.fileSystem = fileSystem;
   }
 
   @Override
-  public boolean shouldExecuteOnProject(Project project) {
-    FilePredicates p = fileSystem.predicates();
-    return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+  public void describe(SensorDescriptor descriptor) {
+    descriptor
+      .name(getClass().getSimpleName())
+      .onlyOnLanguage(Python.KEY)
+      .onlyOnFileType(InputFile.Type.MAIN);
   }
 
   @Override
-  public void analyse(Project project, SensorContext context) {
+  public void execute(SensorContext context) {
     try {
-      List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), reportPathKey(), defaultReportPath());
+      List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathKey(), defaultReportPath());
       processReports(context, reports);
     } catch (javax.xml.stream.XMLStreamException e) {
       String msg = new StringBuilder()
@@ -64,11 +62,6 @@ public abstract class PythonReportSensor implements Sensor {
           .toString();
       throw new IllegalStateException(msg, e);
     }
-  }
-
-  @Override
-  public String toString() {
-    return getClass().getSimpleName();
   }
 
   public static List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
