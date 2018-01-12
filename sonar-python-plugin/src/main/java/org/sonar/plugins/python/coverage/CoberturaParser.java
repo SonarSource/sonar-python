@@ -36,8 +36,11 @@ public class CoberturaParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoberturaParser.class);
 
+  private int unresolvedFilenameCount;
+
   public void parseReport(File xmlFile, SensorContext context, final Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
     LOG.info("Parsing report '{}'", xmlFile);
+    unresolvedFilenameCount = 0;
 
     StaxParser parser = new StaxParser(rootCursor -> {
       File baseDirectory = context.fileSystem().baseDir();
@@ -57,6 +60,9 @@ public class CoberturaParser {
       }
     });
     parser.parse(xmlFile);
+    if (unresolvedFilenameCount > 1) {
+      LOG.error("Cannot resolve {} file paths, ignoring coverage measures for those files", unresolvedFilenameCount);
+    }
   }
 
   private static File extractBaseDirectory(SMInputCursor sources, File defaultBaseDirectory) throws XMLStreamException {
@@ -65,28 +71,34 @@ public class CoberturaParser {
       String path = source.collectDescendantText();
       if (!StringUtils.isBlank(path)) {
         File baseDirectory = new File(path);
-        if (!baseDirectory.isDirectory()) {
-          throw new XMLStreamException("Invalid directory path in 'source' element: " + path);
+        if (baseDirectory.isDirectory()) {
+          return baseDirectory;
+        } else {
+          LOG.warn("Invalid directory path in 'source' element: {}", path);
         }
-        return baseDirectory;
       }
     }
     return defaultBaseDirectory;
   }
 
-  private static void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData, File baseDirectory)
+  private void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData, File baseDirectory)
     throws XMLStreamException {
     while (classCursor.getNext() != null) {
-      File file = new File(baseDirectory, classCursor.getAttrValue("filename"));
+      File file = new File(classCursor.getAttrValue("filename"));
+      if (!file.isAbsolute()) {
+        file = new File(baseDirectory, file.getPath());
+      }
       InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath()));
       if (inputFile != null) {
         NewCoverage coverage = coverageData.computeIfAbsent(inputFile, f -> context.newCoverage().onFile(f));
         collectFileData(classCursor, coverage);
       } else {
-        LOG.debug("Cannot find the file '{}', ignoring coverage measures", file.getPath());
-        classCursor.getNext();
+        classCursor.advance();
+        unresolvedFilenameCount++;
+        if (unresolvedFilenameCount == 1) {
+          LOG.error("Cannot find the file '{}' in the base directory '{}', ignoring coverage measures for this file", file.getPath(), baseDirectory.getPath());
+        }
       }
-
     }
   }
 

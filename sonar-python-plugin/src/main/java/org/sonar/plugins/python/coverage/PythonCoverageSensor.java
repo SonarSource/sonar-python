@@ -53,8 +53,6 @@ public class PythonCoverageSensor {
   public static final String OVERALL_DEFAULT_REPORT_PATH = "coverage-reports/overall-coverage-*.xml";
   public static final String FORCE_ZERO_COVERAGE_KEY = "sonar.python.coverage.forceZeroCoverage";
 
-  private CoberturaParser parser = new CoberturaParser();
-
   public void execute(SensorContext context, Map<InputFile, Set<Integer>> linesOfCode) {
     String baseDir = context.fileSystem().baseDir().getPath();
     Settings settings = context.settings();
@@ -62,8 +60,8 @@ public class PythonCoverageSensor {
     HashSet<InputFile> filesCovered = new HashSet<>();
     List<File> reports = new ArrayList<>();
     reports.addAll(getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
-    reports.addAll(getReports(settings, baseDir, IT_REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
-    reports.addAll(getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(settings, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH));
     if (!reports.isEmpty()) {
       LOG.info("Python test coverage");
       for (File report : reports) {
@@ -71,7 +69,7 @@ public class PythonCoverageSensor {
         saveMeasures(coverageMeasures, filesCovered);
       }
     }
-    if (settings.getBoolean(FORCE_ZERO_COVERAGE_KEY) || (!settings.hasKey(FORCE_ZERO_COVERAGE_KEY) && !reports.isEmpty())) {
+    if (settings.getBoolean(FORCE_ZERO_COVERAGE_KEY)) {
       LOG.debug("Zeroing coverage information for untouched files");
       zeroMeasuresWithoutReports(context, filesCovered, linesOfCode);
     }
@@ -100,9 +98,10 @@ public class PythonCoverageSensor {
     }
   }
 
-  private Map<InputFile, NewCoverage> parseReport(File report, SensorContext context) {
+  private static Map<InputFile, NewCoverage> parseReport(File report, SensorContext context) {
     Map<InputFile, NewCoverage> coverageMeasures = new HashMap<>();
     try {
+      CoberturaParser parser = new CoberturaParser();
       parser.parseReport(report, context, coverageMeasures);
     } catch (EmptyReportException e) {
       LOG.warn("The report '{}' seems to be empty, ignoring. '{}'", report, e);
