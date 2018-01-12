@@ -31,6 +31,7 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.config.Settings;
 import org.sonar.api.rule.RuleKey;
@@ -47,15 +48,11 @@ public class PylintImportSensor extends PythonReportSensor {
   }
 
   @Override
-  public void execute(SensorContext context) {
-    if (shouldExecute(context)) {
-      super.execute(context);
-    }
-  }
-
-  private boolean shouldExecute(SensorContext context) {
-    boolean hasRules = !context.activeRules().findByRepository(PylintRuleRepository.REPOSITORY_KEY).isEmpty();
-    return hasRules && conf.getString(REPORT_PATH_KEY) != null;
+  public void describe(SensorDescriptor descriptor) {
+    super.describe(descriptor);
+    descriptor
+      .createIssuesForRuleRepository(PylintRuleRepository.REPOSITORY_KEY)
+      .requireProperty(REPORT_PATH_KEY);
   }
 
   @Override
