@@ -21,8 +21,10 @@ package org.sonar.plugins.python;
 
 import org.sonar.api.Plugin;
 import org.sonar.api.PropertyType;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
@@ -142,14 +144,16 @@ public class PythonPlugin implements Plugin {
       PythonProfile.class,
 
       PythonSquidSensor.class,
-      new PythonRuleRepository(context.getSonarQubeVersion()),
+      new PythonRuleRepository(context.getSonarQubeVersion()));
 
-      PylintConfiguration.class,
-      PylintSensor.class,
-      PylintImportSensor.class,
-      PylintRuleRepository.class,
-
-      PythonXUnitSensor.class);
+    if (!context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(6, 0)) || context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
+      context.addExtensions(
+        PylintConfiguration.class,
+        PylintSensor.class,
+        PylintImportSensor.class,
+        PylintRuleRepository.class,
+        PythonXUnitSensor.class);
+    }
   }
 
 }

@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarQubeSide;
@@ -32,10 +33,17 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() {
-    SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(Version.create(5, 6), SonarQubeSide.SERVER);
+    Version v56 = Version.create(5, 6);
+    Version v60 = Version.create(6, 0);
+    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v56, SonarQubeSide.SERVER))).hasSize(19);
+    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v60, SonarQubeSide.SERVER))).hasSize(19);
+    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v60))).hasSize(14);
+  }
+
+  private List extensions(SonarRuntime runtime) {
     Plugin.Context context = new Plugin.Context(runtime);
     new PythonPlugin().define(context);
-    assertThat(context.getExtensions()).hasSize(19);
+    return context.getExtensions();
   }
 
 }
