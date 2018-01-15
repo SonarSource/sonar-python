@@ -22,9 +22,13 @@ package org.sonar.plugins.python.coverage;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableSet;
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -39,10 +43,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonCoverageSensorTest {
 
-
   private final String FILE1_KEY = "moduleKey:sources/file1.py";
   private final String FILE2_KEY = "moduleKey:sources/file2.py";
   private final String FILE3_KEY = "moduleKey:sources/file3.py";
+  private final String FILE4_KEY = "moduleKey:sources/file4.py";
   private SensorContextTester context;
   private Settings settings;
   private Map<InputFile, Set<Integer>> linesOfCode;
@@ -60,11 +64,13 @@ public class PythonCoverageSensorTest {
     InputFile inputFile1 = inputFile("sources/file1.py", Type.MAIN);
     InputFile inputFile2 = inputFile("sources/file2.py", Type.MAIN);
     InputFile inputFile3 = inputFile("sources/file3.py", Type.MAIN);
+    InputFile inputFile4 = inputFile("sources/file4.py", Type.MAIN);
 
     linesOfCode = new HashMap<>();
     linesOfCode.put(inputFile1, ImmutableSet.of(1, 4, 6));
     linesOfCode.put(inputFile2, ImmutableSet.of(1, 2, 3, 4, 5, 6));
     linesOfCode.put(inputFile3, ImmutableSet.of(1, 3));
+    linesOfCode.put(inputFile4, ImmutableSet.of(6, 7, 8, 9, 10, 11, 13, 15, 16, 17));
   }
 
   private InputFile inputFile(String relativePath, Type type) {
@@ -100,6 +106,7 @@ public class PythonCoverageSensorTest {
 
   @Test
   public void test_coverage() {
+    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "false");
     coverageSensor.execute(context, linesOfCode);
     Integer[] file1Expected = {1, null, null, 0, null, 0};
     Integer[] file2Expected = {1, 3, 1, 0, 1, 1};
@@ -108,11 +115,44 @@ public class PythonCoverageSensorTest {
       assertThat(context.lineHits(FILE1_KEY, line)).isEqualTo(file1Expected[line - 1]);
       assertThat(context.lineHits(FILE2_KEY, line)).isEqualTo(file2Expected[line - 1]);
       assertThat(context.lineHits(FILE3_KEY, line)).isNull();
+      assertThat(context.lineHits(FILE4_KEY, line)).isNull();
     }
 
     assertThat(context.conditions(FILE2_KEY, 2)).isNull();
     assertThat(context.conditions(FILE2_KEY, 3)).isEqualTo(2);
     assertThat(context.coveredConditions(FILE2_KEY, 3)).isEqualTo(1);
+  }
+
+  @Test
+  public void test_coverage_4_4_2() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.4.4.2.xml");
+    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
+    coverageSensor.execute(context, linesOfCode);
+    List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
+    assertThat(actual).isEqualTo(Arrays.asList(
+      null, // line 1
+      null,
+      null,
+      null,
+      null,
+      1, // line 6
+      1, // line 7
+      1, // line 8
+      0, // line 9
+      1, // line 10
+      1, // line 11
+      null,
+      0, // line 13
+      null,
+      1, // line 15
+      null, // Coverage.py does not consider line 16 and 17 as LOC, here it's null even when "linesOfCode" considers them as code
+      null));
+
+    assertThat(context.conditions(FILE4_KEY, 7)).isNull();
+    assertThat(context.conditions(FILE4_KEY, 8)).isEqualTo(2);
+    assertThat(context.coveredConditions(FILE4_KEY, 8)).isEqualTo(1);
+    assertThat(context.conditions(FILE4_KEY, 10)).isEqualTo(2);
+    assertThat(context.coveredConditions(FILE4_KEY, 10)).isEqualTo(1);
   }
 
   @Test
@@ -166,6 +206,7 @@ public class PythonCoverageSensorTest {
   public void should_do_nothing_on_empty_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "empty-coverage-result.xml");
     settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "this-file-does-not-exist.xml");
+    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "false");
     coverageSensor.execute(context, linesOfCode);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
