@@ -111,7 +111,7 @@ public class PylintImportSensor extends PythonReportSensor {
     }
   }
 
-  private static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context) {
+  public static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context) {
     if (rule != null) {
       NewIssue newIssue = context
         .newIssue()

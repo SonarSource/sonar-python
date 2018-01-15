@@ -23,8 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -32,14 +30,11 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.config.Settings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
 
 public class PylintSensor implements Sensor {
-
-  private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
 
   private PylintConfiguration conf;
   private Settings settings;
@@ -92,7 +87,7 @@ public class PylintSensor implements Sensor {
     }
   }
 
-  protected void analyzeFile(SensorContext context, InputFile file, File out) throws IOException {
+  private void analyzeFile(SensorContext context, InputFile file, File out) throws IOException {
     FileSystem fileSystem = context.fileSystem();
 
     String pylintConfigPath = conf.getPylintConfigPath(fileSystem);
@@ -103,19 +98,7 @@ public class PylintSensor implements Sensor {
 
     for (Issue pylintIssue : issues) {
       ActiveRule rule = context.activeRules().find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
-
-      if (rule != null) {
-        NewIssue newIssue = context
-          .newIssue()
-          .forRule(rule.ruleKey());
-        newIssue.at(newIssue.newLocation()
-          .on(file)
-          .at(file.selectLine(pylintIssue.getLine()))
-          .message(pylintIssue.getDescription()));
-        newIssue.save();
-      } else {
-        LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
-      }
+      PylintImportSensor.processRule(pylintIssue, file, rule, context);
     }
   }
 
