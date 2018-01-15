@@ -31,6 +31,8 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 
 /**
@@ -39,6 +41,7 @@ import org.sonar.python.api.PythonTokenType;
 public class FileLinesVisitor extends PythonVisitor {
 
   private static final PythonCommentAnalyser COMMENT_ANALYSER = new PythonCommentAnalyser();
+  private static final Set<AstNodeType> EXECUTABLE_LINE_KINDS = executableLineKinds();
 
   private boolean seenFirstToken;
 
@@ -48,14 +51,26 @@ public class FileLinesVisitor extends PythonVisitor {
   private Set<Integer> linesOfCode = new HashSet<>();
   private Set<Integer> linesOfComments = new HashSet<>();
   private Set<Integer> linesOfDocstring = new HashSet<>();
+  private Set<Integer> executableLines = new HashSet<>();
 
   public FileLinesVisitor(boolean ignoreHeaderComments) {
     this.ignoreHeaderComments = ignoreHeaderComments;
   }
 
+  private static Set<AstNodeType> executableLineKinds() {
+    Set<AstNodeType> kinds = new HashSet<>();
+    kinds.add(PythonGrammar.STATEMENT);
+    kinds.add(PythonKeyword.ELIF);
+    kinds.add(PythonKeyword.EXCEPT);
+    return Collections.unmodifiableSet(kinds);
+  }
+
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return DocstringExtractor.DOCUMENTABLE_NODE_TYPES;
+    Set<AstNodeType> kinds = new HashSet<>();
+    kinds.addAll(DocstringExtractor.DOCUMENTABLE_NODE_TYPES);
+    kinds.addAll(EXECUTABLE_LINE_KINDS);
+    return kinds;
   }
 
   @Override
@@ -64,17 +79,23 @@ public class FileLinesVisitor extends PythonVisitor {
     linesOfCode.clear();
     linesOfComments.clear();
     linesOfDocstring.clear();
+    executableLines.clear();
     seenFirstToken = false;
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    Token docstringToken = DocstringExtractor.extractDocstring(astNode);
-    if (docstringToken != null) {
-      TokenLocation location = new TokenLocation(docstringToken);
-      for (int line = location.startLine(); line <= location.endLine(); line++) {
-        linesOfDocstring.add(line);
+    if (DocstringExtractor.DOCUMENTABLE_NODE_TYPES.contains(astNode.getType())) {
+      Token docstringToken = DocstringExtractor.extractDocstring(astNode);
+      if (docstringToken != null) {
+        TokenLocation location = new TokenLocation(docstringToken);
+        for (int line = location.startLine(); line <= location.endLine(); line++) {
+          linesOfDocstring.add(line);
+        }
       }
+    }
+    if (EXECUTABLE_LINE_KINDS.contains(astNode.getType())) {
+      executableLines.add(astNode.getTokenLine());
     }
   }
 
@@ -128,6 +149,7 @@ public class FileLinesVisitor extends PythonVisitor {
   public void leaveFile(AstNode astNode) {
     // account for the docstring lines
     for (Integer line : linesOfDocstring) {
+      executableLines.remove(line);
       linesOfCode.remove(line);
       linesOfComments.add(line);
     }
@@ -143,6 +165,10 @@ public class FileLinesVisitor extends PythonVisitor {
 
   public Set<Integer> getLinesOfComments() {
     return Collections.unmodifiableSet(new HashSet<>(linesOfComments));
+  }
+
+  public Set<Integer> getExecutableLines() {
+    return Collections.unmodifiableSet(new HashSet<>(executableLines));
   }
 
   private static class PythonCommentAnalyser {

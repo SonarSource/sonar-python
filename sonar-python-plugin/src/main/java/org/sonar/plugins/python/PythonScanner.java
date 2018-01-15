@@ -179,6 +179,9 @@ public class PythonScanner {
     for (int line : linesOfComments) {
       fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
     }
+    for (int line : fileLinesVisitor.getExecutableLines()) {
+      fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
+    }
     fileLinesContext.save();
 
     linesOfCodeByFile.put(inputFile, linesOfCode);
