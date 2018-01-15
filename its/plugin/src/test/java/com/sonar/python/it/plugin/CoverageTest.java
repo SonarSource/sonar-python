@@ -30,7 +30,6 @@ import java.util.Map;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import static com.sonar.python.it.plugin.Tests.getProjectMeasure;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
@@ -59,9 +58,9 @@ public class CoverageTest {
     orchestrator.executeBuild(build);
 
     ImmutableMap<String, Integer> values = new Builder<String, Integer>()
-        .put("lines_to_cover", 8)
-        .put("coverage", 90)
-        .put("line_coverage", 87)
+        .put("lines_to_cover", 14)
+        .put("coverage", 56)
+        .put("line_coverage", 50)
         .put("branch_coverage", 100)
         .build();
 
@@ -123,9 +122,7 @@ public class CoverageTest {
       }
     }
     assertThat(nbLog).isEqualTo(3);
-    assertThat(getProjectMeasure(PROJECT_KEY, "coverage")).isNull();
-    assertThat(getProjectMeasure(PROJECT_KEY, "it_coverage")).isNull();
-    assertThat(getProjectMeasure(PROJECT_KEY, "overall_coverage")).isNull();
+    assertThat(Tests.getMeasureAsDouble(PROJECT_KEY, "coverage")).isZero();
   }
 
 }
