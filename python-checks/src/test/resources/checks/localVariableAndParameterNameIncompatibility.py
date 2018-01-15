@@ -2,6 +2,8 @@
 def fun(input_par1, inputPar2, inputPar3 = 3): # Noncompliant {{Rename this parameter "inputPar3" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
     someName = 1 # Noncompliant {{Rename this local variable "someName" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
 #   ^^^^^^^^
+    CamelName: int = 1 # Noncompliant {{Rename this local variable "CamelName" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
+#   ^^^^^^^^^
     another_name = someName
     someName = 3
     inputPar2 = 2

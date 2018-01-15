@@ -124,22 +124,30 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         createScope(node, currentScope);
 
       } else if (node.is(PythonGrammar.EXPRESSION_STMT)) {
-        // TODO PythonGrammar.ANNASSIGN
-        for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.AUGASSIGN)) {
-          if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
-            new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());
-          }
-          AstNode target = assignOperator.getPreviousSibling();
-          if (target.getTokens().size() == 1) {
-            addWriteUsage(target.getFirstDescendant(PythonGrammar.NAME));
-          }
-        }
+        visitAssignment(node);
 
       } else if (node.is(PythonGrammar.GLOBAL_STMT)) {
         node.getChildren(PythonGrammar.NAME).forEach(name -> currentScope().addGlobalName(name.getTokenValue()));
 
       } else if (node.is(PythonGrammar.NONLOCAL_STMT)) {
         node.getChildren(PythonGrammar.NAME).forEach(name -> currentScope().addNonlocalName(name.getTokenValue()));
+      }
+    }
+
+    private void visitAssignment(AstNode node) {
+      for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.AUGASSIGN, PythonGrammar.ANNASSIGN)) {
+        AstNode target = assignOperator.getPreviousSibling();
+        if (assignOperator.is(PythonGrammar.ANNASSIGN)) {
+          assignOperator = assignOperator.getFirstChild(PythonPunctuator.ASSIGN);
+        }
+        if (assignOperator != null) {
+          if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
+            new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());
+          }
+          if (target.getTokens().size() == 1) {
+            addWriteUsage(target.getFirstDescendant(PythonGrammar.NAME));
+          }
+        }
       }
     }
 

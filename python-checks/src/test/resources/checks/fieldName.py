@@ -2,6 +2,8 @@
 class MyClass:
     myField = 4 # Noncompliant {{Rename this field "myField" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
 #   ^^^^^^^
+    myField2: int = 4 # Noncompliant {{Rename this field "myField2" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
+#   ^^^^^^^^
     my_field = 4
 
     def __init__(self):

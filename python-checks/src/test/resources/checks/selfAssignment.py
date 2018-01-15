@@ -4,7 +4,9 @@ from module1 import (import3, x as import4)
 x = 1
 x = y
 x = x # Noncompliant
+# ^
 x: int = x # Noncompliant
+#      ^
 x += x
 
 def f():

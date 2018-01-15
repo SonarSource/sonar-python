@@ -146,4 +146,16 @@ public class CheckUtilsTest {
     CheckUtils.stringLiteralContent(PARSER.parse("2").getTokens().get(0).getOriginalValue());
   }
 
+  @Test
+  public void is_assignment_expression() throws Exception {
+    Function<String, Boolean> firstStatement = (source) ->
+      CheckUtils.isAssignmentExpression(PARSER.parse(source).getFirstDescendant(PythonGrammar.SIMPLE_STMT).getFirstChild());
+
+    assertThat(firstStatement.apply("a()")).isFalse();
+    assertThat(firstStatement.apply("a = 2")).isTrue();
+    assertThat(firstStatement.apply("a: int")).isFalse();
+    assertThat(firstStatement.apply("a: int = 2")).isTrue();
+    assertThat(firstStatement.apply("a.b = (1, 2)")).isTrue();
+    assertThat(firstStatement.apply("a.b: int = (1, 2)")).isTrue();
+  }
 }
