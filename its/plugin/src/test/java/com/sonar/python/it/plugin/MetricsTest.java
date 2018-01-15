@@ -150,6 +150,9 @@ public class MetricsTest {
     assertThat(getFileMeasure("comment_lines_data").getValue())
       .contains("2=1")
       .doesNotContain("4=1");
+    assertThat(getFileMeasure("executable_lines_data").getValue())
+      .doesNotContain("1=1")
+      .contains("5=1");
   }
 
   /* Helper methods */
