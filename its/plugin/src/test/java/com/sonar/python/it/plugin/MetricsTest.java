@@ -80,7 +80,7 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsDouble("violations")).isZero();
 
     assertThat(getProjectMeasureAsInt("tests")).isNull();
-    assertThat(getProjectMeasureAsDouble("coverage")).isNull();
+    assertThat(getProjectMeasureAsDouble("coverage")).isZero();
   }
 
   @Test
