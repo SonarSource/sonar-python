@@ -137,8 +137,13 @@ public class CommentedCodeCheck extends PythonCheck {
     }
   }
 
-  private static boolean isSimpleExpression(List<AstNode> expressions) {
-    return expressions.size() == 1 && expressions.get(0).getNumberOfChildren() == 1 && expressions.get(0).getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR);
+  private static boolean isSimpleExpression(List<AstNode> expressionStatements) {
+    if (expressionStatements.size() != 1) {
+      return false;
+    }
+    AstNode expressionStatement = expressionStatements.get(0);
+    return (expressionStatement.getNumberOfChildren() == 1 && expressionStatement.getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR))
+      || expressionStatement.hasDirectChildren(PythonGrammar.ANNASSIGN);
   }
 
   private static List<List<Trivia>> groupTrivias(Token token) {
