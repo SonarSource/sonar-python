@@ -34,6 +34,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.sensor.error.AnalysisError;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
@@ -127,6 +128,8 @@ public class PythonSquidSensorTest {
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
 
     assertThat(context.lineHits("moduleKey:file1.py", 1)).isEqualTo(expectedNumberOfLineHits);
+
+    assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
   @Test
@@ -190,6 +193,10 @@ public class PythonSquidSensorTest {
     sensor().execute(context);
     assertThat(context.allIssues()).hasSize(1);
     assertThat(String.join("\n", logTester.logs())).contains("Parse error at line 2");
+    assertThat(context.allAnalysisErrors()).hasSize(1);
+    AnalysisError analysisError = context.allAnalysisErrors().iterator().next();
+    assertThat(analysisError.inputFile().filename()).isEqualTo("parse_error.py");
+    assertThat(analysisError.location().line()).isEqualTo(2);
   }
 
   @Test
