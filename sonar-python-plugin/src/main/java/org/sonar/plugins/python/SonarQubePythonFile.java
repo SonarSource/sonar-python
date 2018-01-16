@@ -20,17 +20,10 @@
 package org.sonar.plugins.python;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.Version;
 import org.sonar.python.PythonFile;
 
 public abstract class SonarQubePythonFile implements PythonFile {
-
-  private static final Version V6_0 = Version.create(6, 0);
-  private static final Version V6_2 = Version.create(6, 2);
 
   private final InputFile inputFile;
 
@@ -38,15 +31,8 @@ public abstract class SonarQubePythonFile implements PythonFile {
     this.inputFile = inputFile;
   }
 
-  public static PythonFile create(InputFile inputFile, SensorContext context) {
-    Version version = context.getSonarQubeVersion();
-    if (version.isGreaterThanOrEqual(V6_2)) {
-      return new Sq62File(inputFile);
-    }
-    if (version.isGreaterThanOrEqual(V6_0)) {
-      return new Sq60File(inputFile);
-    }
-    return new Sq56File(inputFile, context.fileSystem().encoding());
+  public static PythonFile create(InputFile inputFile) {
+    return new Sq62File(inputFile);
   }
 
   @Override
@@ -56,43 +42,6 @@ public abstract class SonarQubePythonFile implements PythonFile {
 
   public InputFile inputFile() {
     return inputFile;
-  }
-
-  private static String contentForCharset(InputFile inputFile, Charset charset) {
-    try {
-      return new String(Files.readAllBytes(inputFile.path()), charset);
-    } catch (IOException e) {
-      throw new IllegalStateException("Could not read content of input file " + inputFile, e);
-    }
-  }
-
-  private static class Sq56File extends SonarQubePythonFile {
-
-    private final Charset fileSystemEncoding;
-
-    public Sq56File(InputFile inputFile, Charset fileSystemEncoding) {
-      super(inputFile);
-      this.fileSystemEncoding = fileSystemEncoding;
-    }
-
-    @Override
-    public String content() {
-      return contentForCharset(inputFile(), fileSystemEncoding);
-    }
-
-  }
-
-  private static class Sq60File extends SonarQubePythonFile {
-
-    public Sq60File(InputFile inputFile) {
-      super(inputFile);
-    }
-
-    @Override
-    public String content() {
-      return contentForCharset(inputFile(), inputFile().charset());
-    }
-
   }
 
   private static class Sq62File extends SonarQubePythonFile {
