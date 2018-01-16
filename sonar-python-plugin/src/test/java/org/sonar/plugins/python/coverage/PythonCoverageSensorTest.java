@@ -19,14 +19,10 @@
  */
 package org.sonar.plugins.python.coverage;
 
-import com.google.common.collect.ImmutableSet;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.Before;
@@ -52,7 +48,6 @@ public class PythonCoverageSensorTest {
   private final String FILE4_KEY = "moduleKey:sources/file4.py";
   private SensorContextTester context;
   private Settings settings;
-  private Map<InputFile, Set<Integer>> linesOfCode;
 
   private PythonCoverageSensor coverageSensor = new PythonCoverageSensor();
   private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();
@@ -64,16 +59,10 @@ public class PythonCoverageSensorTest {
     context = SensorContextTester.create(moduleBaseDir);
     context.setSettings(settings);
 
-    InputFile inputFile1 = inputFile("sources/file1.py", Type.MAIN);
-    InputFile inputFile2 = inputFile("sources/file2.py", Type.MAIN);
-    InputFile inputFile3 = inputFile("sources/file3.py", Type.MAIN);
-    InputFile inputFile4 = inputFile("sources/file4.py", Type.MAIN);
-
-    linesOfCode = new HashMap<>();
-    linesOfCode.put(inputFile1, ImmutableSet.of(1, 4, 6));
-    linesOfCode.put(inputFile2, ImmutableSet.of(1, 2, 3, 4, 5, 6));
-    linesOfCode.put(inputFile3, ImmutableSet.of(1, 3));
-    linesOfCode.put(inputFile4, ImmutableSet.of(6, 7, 8, 9, 10, 11, 13, 15, 16, 17));
+    inputFile("sources/file1.py", Type.MAIN);
+    inputFile("sources/file2.py", Type.MAIN);
+    inputFile("sources/file3.py", Type.MAIN);
+    inputFile("sources/file4.py", Type.MAIN);
   }
 
   private InputFile inputFile(String relativePath, Type type) {
@@ -93,7 +82,7 @@ public class PythonCoverageSensorTest {
   public void report_not_found() throws Exception {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "/fake/path/report.xml");
 
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
 
     // expected logged text: "No report was found for sonar.python.coverage.reportPath using pattern /fake/path/report.xml"
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
@@ -103,15 +92,14 @@ public class PythonCoverageSensorTest {
   public void absolute_path() throws Exception {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, new File(moduleBaseDir, "coverage.xml").getAbsolutePath());
 
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
   }
 
   @Test
   public void test_coverage() {
-    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "false");
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
     Integer[] file1Expected = {1, null, null, 0, null, 0};
     Integer[] file2Expected = {1, 3, 1, 0, 1, 1};
 
@@ -130,8 +118,7 @@ public class PythonCoverageSensorTest {
   @Test
   public void test_coverage_4_4_2() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.4.4.2.xml");
-    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
     List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
     assertThat(actual).isEqualTo(Arrays.asList(
       null, // line 1
@@ -162,56 +149,28 @@ public class PythonCoverageSensorTest {
   @Test
   public void test_unresolved_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
-  }
-
-  @Test
-  public void test_force_zero_coverage_without_report() {
-    Settings newSettings = new MapSettings();
-    newSettings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
-    context.setSettings(newSettings);
-    coverageSensor.execute(context, linesOfCode);
-    assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(0);
-  }
-
-  @Test
-  public void test_force_zero_coverage_with_report() {
-    Settings newSettings = new MapSettings();
-    newSettings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
-    newSettings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.xml");
-    context.setSettings(newSettings);
-    coverageSensor.execute(context, linesOfCode);
-    assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
-  }
-
-  @Test
-  public void test_force_zero_coverage_no_lines_of_code() throws Exception {
-    Settings newSettings = new MapSettings().setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "true");
-    context.setSettings(newSettings);
-    coverageSensor.execute(context, new HashMap<>());
-    assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
   }
 
   @Test(expected = IllegalStateException.class)
   public void should_fail_on_invalid_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "invalid-coverage-result.xml");
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
   }
 
   @Test(expected = IllegalStateException.class)
   public void should_fail_on_unexpected_eof() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_eof_error.xml");
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
   }
 
   @Test
   public void should_do_nothing_on_empty_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "empty-coverage-result.xml");
     settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "this-file-does-not-exist.xml");
-    settings.setProperty(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY, "false");
-    coverageSensor.execute(context, linesOfCode);
+    coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
   }

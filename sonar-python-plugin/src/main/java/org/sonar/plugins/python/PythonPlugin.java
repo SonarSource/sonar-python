@@ -83,15 +83,6 @@ public class PythonPlugin implements Plugin {
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonCoverageSensor.OVERALL_DEFAULT_REPORT_PATH)
         .build(),
-      PropertyDefinition.builder(PythonCoverageSensor.FORCE_ZERO_COVERAGE_KEY)
-        .name("Assign zero line coverage to source files without coverage report(s)")
-        .description("If 'True', assign zero line coverage to source files without coverage report(s), which results in a more realistic overall Technical Debt value.")
-        .category(PYTHON_CATEGORY)
-        .subCategory(TEST_AND_COVERAGE)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue("false")
-        .type(PropertyType.BOOLEAN)
-        .build(),
 
       // XUNIT
       PropertyDefinition.builder(PythonXUnitSensor.SKIP_DETAILS)

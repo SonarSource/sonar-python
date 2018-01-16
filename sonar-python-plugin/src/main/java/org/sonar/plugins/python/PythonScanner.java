@@ -22,9 +22,7 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
@@ -68,7 +66,6 @@ public class PythonScanner {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
-  private Map<InputFile, Set<Integer>> linesOfCodeByFile;
 
   public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
     FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
@@ -79,7 +76,6 @@ public class PythonScanner {
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.inputFiles = inputFiles;
     this.parser = PythonParser.create(new PythonConfiguration(context.fileSystem().encoding()));
-    this.linesOfCodeByFile = new HashMap<>();
   }
 
   public void scanFiles() {
@@ -87,7 +83,7 @@ public class PythonScanner {
       scanFile(pythonFile);
     }
     if (!isSonarLint(context)) {
-      (new PythonCoverageSensor()).execute(context, linesOfCodeByFile);
+      (new PythonCoverageSensor()).execute(context);
     }
   }
 
@@ -183,8 +179,6 @@ public class PythonScanner {
       fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
     }
     fileLinesContext.save();
-
-    linesOfCodeByFile.put(inputFile, linesOfCode);
   }
 
   private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {
