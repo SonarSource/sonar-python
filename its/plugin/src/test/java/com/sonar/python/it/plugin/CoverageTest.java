@@ -68,41 +68,16 @@ public class CoverageTest {
   }
 
   @Test
-  public void force_zero_coverage_for_untouched_files() throws Exception {
+  public void no_report() throws Exception {
     SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"))
-      .setProperty("sonar.python.coverage.reportPath", "ut-coverage.xml")
-      .setProperty("sonar.python.coverage.itReportPath", "it-coverage.xml")
-      .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml")
-      .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
-    orchestrator.executeBuild(build);
-
-    ImmutableMap<String, Integer> values = new ImmutableMap.Builder<String, Integer>()
-        .put("coverage", 56)
-        .put("line_coverage", 50)
-        .put("branch_coverage", 100)
-        .build();
-
-    Tests.assertProjectMeasures(PROJECT_KEY, values);
-  }
-
-  @Test
-  public void force_zero_coverage_with_no_report() throws Exception {
-    SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"))
-      .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
+      .setProjectDir(new File("projects/coverage_project"));
     orchestrator.executeBuild(build);
 
     Map<String, Integer> expected = new HashMap<>();
+    expected.put("lines_to_cover", 14);
     expected.put("coverage", 0);
     expected.put("line_coverage", 0);
     expected.put("branch_coverage", null);
-    expected.put("it_coverage", null);
-    expected.put("it_line_coverage", null);
-    expected.put("it_branch_coverage", null);
-    expected.put("overall_coverage", null);
-    expected.put("overall_line_coverage", null);
-    expected.put("overall_branch_coverage", null);
     Tests.assertProjectMeasures(PROJECT_KEY, expected);
   }
 
