@@ -50,6 +50,11 @@ public class CheckUtils {
     return parent != null && parent.is(PythonGrammar.CLASSDEF);
   }
 
+  public static boolean isMethodOfNonDerivedClass(AstNode node) {
+    return isMethodDefinition(node) && !classHasInheritance(node.getFirstAncestor(PythonGrammar.CLASSDEF));
+  }
+
+
   public static boolean equalNodes(AstNode node1, AstNode node2) {
     if (!node1.getType().equals(node2.getType()) || node1.getNumberOfChildren() != node2.getNumberOfChildren()) {
       return false;
