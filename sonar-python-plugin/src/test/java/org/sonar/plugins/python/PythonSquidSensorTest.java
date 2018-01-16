@@ -192,6 +192,16 @@ public class PythonSquidSensorTest {
     assertThat(String.join("\n", logTester.logs())).contains("Parse error at line 2");
   }
 
+  @Test
+  public void cancelled_analysis() {
+    InputFile inputFile = inputFile("file1.py");
+    activeRules = (new ActiveRulesBuilder()).build();
+    context.setCancelled(true);
+    sensor().execute(context);
+    assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
+    assertThat(context.allAnalysisErrors()).isEmpty();
+  }
+
   private PythonSquidSensor sensor() {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
