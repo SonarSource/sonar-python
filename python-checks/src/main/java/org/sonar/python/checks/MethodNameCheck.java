@@ -32,7 +32,7 @@ public class MethodNameCheck extends AbstractFunctionNameCheck {
 
   @Override
   public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return CheckUtils.isMethodDefinition(astNode);
+    return CheckUtils.isMethodOfNonDerivedClass(astNode);
   }
 
 }

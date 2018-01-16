@@ -44,7 +44,7 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode node) {
-    if (isMethodOfNonDerivedClass(node)
+    if (CheckUtils.isMethodOfNonDerivedClass(node)
       && !alreadyStaticMethod(node)
       && !isBuiltInMethod(node)
       && hasValuableCode(node)
@@ -54,10 +54,6 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
         addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
       }
     }
-  }
-
-  private static boolean isMethodOfNonDerivedClass(AstNode node) {
-    return CheckUtils.isMethodDefinition(node) && !CheckUtils.classHasInheritance(node.getFirstAncestor(PythonGrammar.CLASSDEF));
   }
 
   private static boolean mayRaiseNotImplementedError(AstNode function) {
