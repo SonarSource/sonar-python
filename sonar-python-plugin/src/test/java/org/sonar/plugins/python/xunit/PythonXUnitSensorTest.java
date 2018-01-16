@@ -25,16 +25,13 @@ import org.junit.Test;
 import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonXUnitSensorTest {
@@ -54,8 +51,8 @@ public class PythonXUnitSensorTest {
 
   @Test
   public void shouldSaveCorrectMeasures() {
-    DefaultInputFile testFile1 = new DefaultInputFile("", "test_sample1.py");
-    DefaultInputFile testFile2 = new DefaultInputFile("", "tests/dir/test_sample2.py");
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", "test_sample1.py").build();
+    DefaultInputFile testFile2 =  TestInputFileBuilder.create("", "tests/dir/test_sample2.py").build();
     fs.add(testFile1);
     fs.add(testFile2);
     sensor.execute(context);
@@ -76,8 +73,8 @@ public class PythonXUnitSensorTest {
   @Test
   public void shouldSaveCorrectMeasuresSimpleMode() {
     settings.setProperty(PythonXUnitSensor.SKIP_DETAILS, true);
-    fs.add(new DefaultInputFile("", "test_sample.py"));
-    fs.add(new DefaultInputFile("", "tests/dir/test_sample.py"));
+    fs.add( TestInputFileBuilder.create("", "test_sample.py").build());
+    fs.add( TestInputFileBuilder.create("", "tests/dir/test_sample.py").build());
     sensor.execute(context);
 
     // includes test with not found file
@@ -89,7 +86,7 @@ public class PythonXUnitSensorTest {
 
   @Test
   public void shouldReportNothingWhenNoReportFound() {
-    DefaultInputFile testFile1 = new DefaultInputFile("", "test_sample1.py");
+    DefaultInputFile testFile1 =  TestInputFileBuilder.create("", "test_sample1.py").build();
     fs.add(testFile1);
 
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");

@@ -22,8 +22,8 @@ package org.sonar.plugins.python;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import org.junit.Test;
-import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

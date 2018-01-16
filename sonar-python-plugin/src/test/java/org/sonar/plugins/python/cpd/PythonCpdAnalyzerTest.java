@@ -27,10 +27,11 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.duplications.internal.pmd.TokensLine;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.TestUtils;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 
@@ -88,12 +89,13 @@ public class PythonCpdAnalyzerTest {
   private DefaultInputFile inputFile(String fileName) {
     File file = new File(BASE_DIR, fileName);
 
-    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", file.getName())
+    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())
       .setModuleBaseDir(Paths.get(BASE_DIR))
       .setCharset(UTF_8)
       .setType(InputFile.Type.MAIN)
       .setLanguage(Python.KEY)
-      .initMetadata(new FileMetadata().readMetadata(file, Charsets.UTF_8));
+      .initMetadata(TestUtils.fileContent(file, Charsets.UTF_8))
+      .build();
 
     context.fileSystem().add(inputFile);
 

@@ -19,18 +19,24 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.google.common.collect.ImmutableMap;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.function.Predicate;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.MapSettings;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.config.internal.ConfigurationBridge;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.TestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,9 +50,10 @@ public class PylintImportSensorTest {
     context.settings().setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
 
     File file = new File(baseDir, "src/file1.py");
-    DefaultInputFile inputFile = new DefaultInputFile("", "src/file1.py")
+    DefaultInputFile inputFile = TestInputFileBuilder.create("", "src/file1.py")
       .setLanguage(Python.KEY)
-      .initMetadata(new FileMetadata().readMetadata(file, StandardCharsets.UTF_8));
+      .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
+      .build();
     context.fileSystem().add(inputFile);
 
     context.setActiveRules((new ActiveRulesBuilder())
@@ -73,7 +80,13 @@ public class PylintImportSensorTest {
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
     assertThat(descriptor.ruleRepositories()).containsExactly(PylintRuleRepository.REPOSITORY_KEY);
-    assertThat(descriptor.properties()).containsOnly(PylintImportSensor.REPORT_PATH_KEY);
+    Predicate<Configuration> configurationPredicate = descriptor.configurationPredicate();
+    assertThat(configurationPredicate.test(configuration(ImmutableMap.of(PylintImportSensor.REPORT_PATH_KEY, "something")))).isTrue();
+    assertThat(configurationPredicate.test(configuration(ImmutableMap.of("xxx", "yyy")))).isFalse();
+  }
+
+  private Configuration configuration(Map<String, String> mapproperties) {
+    return new ConfigurationBridge(new MapSettings().addProperties(mapproperties));
   }
 
 }
