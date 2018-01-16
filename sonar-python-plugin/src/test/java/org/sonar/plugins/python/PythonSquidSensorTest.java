@@ -30,7 +30,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
@@ -62,7 +62,7 @@ public class PythonSquidSensorTest {
 
   private static final SonarRuntime NOSONARLINT_RUNTIME = SonarRuntimeImpl.forSonarQube(SONARLINT_DETECTABLE_VERSION, SonarQubeSide.SERVER);
 
-  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor");
+  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor").getAbsoluteFile();
 
   private SensorContextTester context;
 
@@ -201,13 +201,14 @@ public class PythonSquidSensorTest {
   }
 
   private InputFile inputFile(String name) {
-    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", name)
+    DefaultInputFile inputFile =  TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
       .setType(Type.MAIN)
-      .setLanguage(Python.KEY);
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
+      .build();
     context.fileSystem().add(inputFile);
-    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), StandardCharsets.UTF_8));
     return inputFile;
   }
 

@@ -23,7 +23,7 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
-import org.sonar.api.config.MapSettings;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.config.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +41,7 @@ public class PylintConfigurationTest {
 
   @Test
   public void shouldGetCorrectPylintPath() {
-    DefaultFileSystem fs = new DefaultFileSystem(new File(""));
+    DefaultFileSystem fs = new DefaultFileSystem(new File("").getAbsoluteFile());
 
     assertThat(pylintConfiguration.getPylintConfigPath(fs)).isNull();
 

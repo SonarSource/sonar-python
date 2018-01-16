@@ -19,9 +19,9 @@
  */
 package org.sonar.plugins.python.coverage;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableSet;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,12 +34,15 @@ import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
+import org.sonar.plugins.python.TestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+;
 
 public class PythonCoverageSensorTest {
 
@@ -52,7 +55,7 @@ public class PythonCoverageSensorTest {
   private Map<InputFile, Set<Integer>> linesOfCode;
 
   private PythonCoverageSensor coverageSensor = new PythonCoverageSensor();
-  private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports");
+  private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();
 
   @Before
   public void init() {
@@ -74,12 +77,13 @@ public class PythonCoverageSensorTest {
   }
 
   private InputFile inputFile(String relativePath, Type type) {
-    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", relativePath)
+    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", relativePath)
       .setModuleBaseDir(moduleBaseDir.toPath())
       .setLanguage("py")
-      .setType(type);
+      .setType(type)
+      .initMetadata(TestUtils.fileContent(new File(moduleBaseDir, relativePath), StandardCharsets.UTF_8))
+      .build();
 
-    inputFile.initMetadata(new FileMetadata().readMetadata(inputFile.file(), Charsets.UTF_8));
     context.fileSystem().add(inputFile);
 
     return inputFile;
