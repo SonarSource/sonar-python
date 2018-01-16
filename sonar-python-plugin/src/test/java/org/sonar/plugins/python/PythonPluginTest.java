@@ -33,9 +33,7 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() {
-    Version v56 = Version.create(5, 6);
     Version v60 = Version.create(6, 0);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v56, SonarQubeSide.SERVER))).hasSize(19);
     assertThat(extensions(SonarRuntimeImpl.forSonarQube(v60, SonarQubeSide.SERVER))).hasSize(19);
     assertThat(extensions(SonarRuntimeImpl.forSonarLint(v60))).hasSize(14);
   }

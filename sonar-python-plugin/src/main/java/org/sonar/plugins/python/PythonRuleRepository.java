@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.utils.Version;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
@@ -37,12 +36,6 @@ public class PythonRuleRepository implements RulesDefinition {
   private static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
 
   private static final Set<String> TEMPLATE_RULE_KEYS = new HashSet<>(Arrays.asList("XPath", "CommentRegularExpression"));
-
-  private final Version sonarRuntimeVersion;
-
-  public PythonRuleRepository(Version sonarRuntimeVersion) {
-    this.sonarRuntimeVersion = sonarRuntimeVersion;
-  }
 
   @Override
   public void define(Context context) {
@@ -59,12 +52,8 @@ public class PythonRuleRepository implements RulesDefinition {
     repository.done();
   }
 
-  private RuleMetadataLoader getRuleMetadataLoader() {
-    if (sonarRuntimeVersion.isGreaterThanOrEqual(Version.create(6, 0))) {
-      return new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION);
-    } else {
-      return new RuleMetadataLoader(RESOURCE_FOLDER);
-    }
+  private static RuleMetadataLoader getRuleMetadataLoader() {
+    return new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION);
   }
 
   private static List<Class> getCheckClasses() {

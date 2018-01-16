@@ -58,31 +58,12 @@ public class CoverageTest {
       .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml");
     orchestrator.executeBuild(build);
 
-    ImmutableMap<String, Integer> values;
-    int linesToCover = 8;
-
-    if (is_before_sonar_6_2()) {
-      values = new Builder<String, Integer>()
-        .put("lines_to_cover", linesToCover)
-        .put("coverage", 80)
-        .put("line_coverage", 75)
-        .put("branch_coverage", 100)
-        .put("it_coverage", 40)
-        .put("it_line_coverage", 50)
-        .put("it_branch_coverage", 0)
-        .put("overall_coverage", 40)
-        .put("overall_line_coverage", 50)
-        .put("overall_branch_coverage", 0)
-        .build();
-
-    } else {
-      values = new Builder<String, Integer>()
-        .put("lines_to_cover", linesToCover)
+    ImmutableMap<String, Integer> values = new Builder<String, Integer>()
+        .put("lines_to_cover", 8)
         .put("coverage", 90)
         .put("line_coverage", 87)
         .put("branch_coverage", 100)
         .build();
-    }
 
     Tests.assertProjectMeasures(PROJECT_KEY, values);
   }
@@ -97,28 +78,11 @@ public class CoverageTest {
       .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
     orchestrator.executeBuild(build);
 
-    ImmutableMap<String, Integer> values;
-
-    if (is_before_sonar_6_2()) {
-      values = new ImmutableMap.Builder<String, Integer>()
-        .put("coverage", 50)
-        .put("line_coverage", 42)
-        .put("branch_coverage", 100)
-        .put("it_coverage", 25)
-        .put("it_line_coverage", 28)
-        .put("it_branch_coverage", 0)
-        .put("overall_coverage", 25)
-        .put("overall_line_coverage", 28)
-        .put("overall_branch_coverage", 0)
-        .build();
-
-    } else {
-      values = new ImmutableMap.Builder<String, Integer>()
+    ImmutableMap<String, Integer> values = new ImmutableMap.Builder<String, Integer>()
         .put("coverage", 56)
         .put("line_coverage", 50)
         .put("branch_coverage", 100)
         .build();
-    }
 
     Tests.assertProjectMeasures(PROJECT_KEY, values);
   }
@@ -131,27 +95,15 @@ public class CoverageTest {
     orchestrator.executeBuild(build);
 
     Map<String, Integer> expected = new HashMap<>();
-    if (is_before_sonar_6_2()) {
-      expected.put("coverage", 0);
-      expected.put("line_coverage", 0);
-      expected.put("branch_coverage", null);
-      expected.put("it_coverage", 0);
-      expected.put("it_line_coverage", 0);
-      expected.put("it_branch_coverage", null);
-      expected.put("overall_coverage", 0);
-      expected.put("overall_line_coverage", 0);
-      expected.put("overall_branch_coverage", null);
-    } else {
-      expected.put("coverage", 0);
-      expected.put("line_coverage", 0);
-      expected.put("branch_coverage", null);
-      expected.put("it_coverage", null);
-      expected.put("it_line_coverage", null);
-      expected.put("it_branch_coverage", null);
-      expected.put("overall_coverage", null);
-      expected.put("overall_line_coverage", null);
-      expected.put("overall_branch_coverage", null);
-    }
+    expected.put("coverage", 0);
+    expected.put("line_coverage", 0);
+    expected.put("branch_coverage", null);
+    expected.put("it_coverage", null);
+    expected.put("it_line_coverage", null);
+    expected.put("it_branch_coverage", null);
+    expected.put("overall_coverage", null);
+    expected.put("overall_line_coverage", null);
+    expected.put("overall_branch_coverage", null);
     Tests.assertProjectMeasures(PROJECT_KEY, expected);
   }
 
@@ -176,7 +128,4 @@ public class CoverageTest {
     assertThat(getProjectMeasure(PROJECT_KEY, "overall_coverage")).isNull();
   }
 
-  private static boolean is_before_sonar_6_2() {
-    return !orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("6.2");
-  }
 }

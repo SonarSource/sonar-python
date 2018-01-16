@@ -40,7 +40,6 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -61,8 +60,6 @@ public class PythonScanner {
 
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
-
-  private static final Version V6_0 = Version.create(6, 0);
 
   private final SensorContext context;
   private final Parser<Grammar> parser;
@@ -95,7 +92,7 @@ public class PythonScanner {
   }
 
   private void scanFile(InputFile inputFile) {
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile, context);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
       visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);
@@ -219,6 +216,6 @@ public class PythonScanner {
   }
 
   private static boolean isSonarLint(SensorContext context) {
-    return context.getSonarQubeVersion().isGreaterThanOrEqual(V6_0) && context.runtime().getProduct() == SonarProduct.SONARLINT;
+    return context.runtime().getProduct() == SonarProduct.SONARLINT;
   }
 }
