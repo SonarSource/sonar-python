@@ -80,6 +80,9 @@ public class PythonScanner {
 
   public void scanFiles() {
     for (InputFile pythonFile : inputFiles) {
+      if (context.isCancelled()) {
+        return;
+      }
       scanFile(pythonFile);
     }
     if (!isSonarLint(context)) {
