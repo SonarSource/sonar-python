@@ -130,11 +130,28 @@ def recursion():  # Noncompliant [[effortToFix=2]]
         return recursion()
 
 
-def nesting_func():  # Noncompliant [[effortToFix=2]]
+def nesting_func():  # Noncompliant [[effortToFix=3]]
+    if condition:  # +1
+        pass
     def nested_func(): # +0 (nesting level +1)
         if condition:  # +2
             pass
 
+def decorator_func(some_function):  # Noncompliant [[effortToFix=1]]
+    def wrapper():
+        if condition:  # +1
+            print("before some_function()")
+        some_function()
+
+    return wrapper
+
+def complex_decorator_func(some_function):  # Noncompliant [[effortToFix=3]]
+    def wrapper(): # +0 (nesting level +1)
+        if condition:  # +2
+            print("before some_function()")
+        some_function()
+
+    return wrapper if condition else None # +1
 
 def and_or():  # Noncompliant [[effortToFix=7]]
     foo(1 and 2 and 3 and 4) # +1

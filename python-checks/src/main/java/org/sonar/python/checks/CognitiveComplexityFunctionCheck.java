@@ -22,7 +22,9 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
@@ -137,14 +139,37 @@ public class CognitiveComplexityFunctionCheck extends PythonCheck {
 
   private boolean incrementsNestingLevel(AstNode astNode) {
     AstNode previousSibling = astNode.getPreviousSibling().getPreviousSibling();
-    if (previousSibling.is(PythonKeyword.TRY, PythonKeyword.FINALLY)) {
+    if (previousSibling != null && previousSibling.is(PythonKeyword.TRY, PythonKeyword.FINALLY)) {
       return false;
     }
-
     AstNode parent = astNode.getParent();
-
+    if (isWrapperFunction(parent)) {
+      return false;
+    }
     return !parent.is(PythonGrammar.WITH_STMT, PythonGrammar.CLASSDEF)
       && (!parent.is(PythonGrammar.FUNCDEF) || !parent.equals(currentFunction));
+  }
+
+  private boolean isWrapperFunction(AstNode node) {
+    if (!node.is(PythonGrammar.FUNCDEF) || node.equals(currentFunction)) {
+      return false;
+    }
+    AstNode parentStatement = node.getParent().getParent();
+    List<AstNode> ancestorStatements = node.getFirstAncestor(PythonGrammar.FUNCDEF)
+      .getFirstChild(PythonGrammar.SUITE)
+      .getChildren(PythonGrammar.STATEMENT);
+
+    return ancestorStatements.stream()
+      .filter(statement -> statement != parentStatement)
+      .allMatch(CognitiveComplexityFunctionCheck::isSimpleReturn);
+  }
+
+  private static boolean isSimpleReturn(AstNode statement) {
+    AstNode returnStatement = lookupOnlyChild(statement.getFirstChild(PythonGrammar.STMT_LIST),
+      PythonGrammar.SIMPLE_STMT, PythonGrammar.RETURN_STMT);
+    return returnStatement != null &&
+      lookupOnlyChild(returnStatement.getFirstChild(PythonGrammar.TESTLIST),
+        PythonGrammar.TEST, PythonGrammar.ATOM, PythonGrammar.NAME) != null;
   }
 
   private void incrementWithNesting(AstNode secondaryLocationNode) {
@@ -168,6 +193,22 @@ public class CognitiveComplexityFunctionCheck extends PythonCheck {
     } else{
       return String.format("+%s (incl %s for nesting)", complexity, complexity - 1);
     }
+  }
+
+  @Nullable
+  private static AstNode lookupOnlyChild(@Nullable AstNode parent, AstNodeType... types) {
+    if (parent == null) {
+      return null;
+    }
+    AstNode result = parent;
+    for (AstNodeType type : types) {
+      List<AstNode> children = result.getChildren();
+      if (children.size() != 1 || !children.get(0).is(type)) {
+        return null;
+      }
+      result = children.get(0);
+    }
+    return result;
   }
 
 }
