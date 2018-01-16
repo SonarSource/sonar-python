@@ -19,11 +19,13 @@
  */
 package org.sonar.python.semantic;
 
+import com.google.common.base.Functions;
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.PythonVisitor;
@@ -55,7 +57,7 @@ public class SymbolTableBuilderVisitorTest {
 
   @Test
   public void module_variable() {
-    assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name).containsOnly("a", "b");
+    assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name).containsOnly("a", "b", "t1");
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::scopeTree).containsOnly(rootTree);
   }
 
@@ -63,18 +65,23 @@ public class SymbolTableBuilderVisitorTest {
   public void local_variable() {
     AstNode functionTree = functionTreesByName.get("function_with_local");
     Set<Symbol> symbols = symbolsInFunction("function_with_local");
-    assertThat(symbols).extracting(Symbol::name).containsOnly("a");
-    Symbol a = symbols.iterator().next();
+    Map<String, Symbol> symbolByName = symbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    assertThat(symbolByName.keySet()).containsOnly("a", "t2");
+    Symbol a = symbolByName.get("a");
     assertThat(a.scopeTree()).isEqualTo(functionTree);
     assertThat(a.writeUsages()).extracting(AstNode::getTokenLine).containsOnly(functionTree.getTokenLine() + 1);
     assertThat(a.readUsages()).extracting(AstNode::getTokenLine).containsOnly(
       functionTree.getTokenLine() + 2,
       functionTree.getTokenLine() + 3);
+    Symbol t2 = symbolByName.get("t2");
+    assertThat(t2.scopeTree()).isEqualTo(functionTree);
+    assertThat(t2.writeUsages()).extracting(AstNode::getTokenLine).containsOnly(functionTree.getTokenLine() + 4);
+    assertThat(t2.readUsages()).isEmpty();
   }
 
   @Test
   public void global_variable() {
-    assertThat(symbolsInFunction("function_with_global")).extracting(Symbol::name).containsOnly("c");
+    assertThat(symbolsInFunction("function_with_global")).extracting(Symbol::name).containsOnly("c", "t3");
   }
 
   @Test
@@ -125,9 +132,11 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void class_variable() {
     AstNode classC = rootTree.getFirstDescendant(PythonGrammar.CLASSDEF);
-    assertThat(symbolTable.symbols(classC)).hasSize(2);
+    assertThat(symbolTable.symbols(classC)).hasSize(3);
     Symbol classVariableA = lookup(classC, "a");
     assertThat(classVariableA.readUsages()).extracting(AstNode::getTokenLine).containsOnly(classC.getTokenLine() + 2);
+    Symbol classVariableB = lookup(classC, "b");
+    assertThat(classVariableB.readUsages()).extracting(AstNode::getTokenLine).containsOnly(classC.getTokenLine() + 3);
   }
 
   @Test

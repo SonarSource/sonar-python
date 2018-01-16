@@ -2,7 +2,7 @@ class MyClass:
   myClass = 3      # Noncompliant {{Rename field "myClass"}}
 # ^^^^^^^
   def __int__(self, myclass):
-    self.myclass = myclass # Noncompliant [[secondary=-4]]
+    self.myclass: type = myclass # Noncompliant [[secondary=-4]]
 
   def fun(self):
     self.myClass += 1
@@ -30,3 +30,6 @@ class MyClass:
     def foo(self):
       self.myCLASS = 1 # Noncompliant
       myClass = 1      # compliant, local var
+
+class MyClass2:
+  myClass2: int = 3      # Noncompliant {{Rename field "myClass2"}}

@@ -100,6 +100,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   EXEC_STMT,
   ASSERT_STMT,
 
+  ANNASSIGN,
   AUGASSIGN,
 
   PASS_STMT,
@@ -172,11 +173,17 @@ public enum PythonGrammar implements GrammarRuleKey {
 
   public static void grammar(LexerfulGrammarBuilder b) {
 
+    // https://github.com/python/cpython/blob/v3.6.4/Grammar/Grammar#L41
     b.rule(EXPRESSION_STMT).is(
       TESTLIST_STAR_EXPR,
       b.firstOf(
+        ANNASSIGN,
         b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
         b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR))));
+
+    // https://github.com/python/cpython/blob/v3.6.4/Grammar/Grammar#L43
+    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", TEST));
+
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 

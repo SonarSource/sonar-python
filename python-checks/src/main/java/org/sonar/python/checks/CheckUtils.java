@@ -86,6 +86,12 @@ public class CheckUtils {
   }
 
   public static boolean isAssignmentExpression(AstNode expression) {
+    if (expression.is(PythonGrammar.EXPRESSION_STMT)) {
+      AstNode assignNode = expression.getFirstChild(PythonGrammar.ANNASSIGN);
+      if (assignNode != null && assignNode.getFirstChild(PythonPunctuator.ASSIGN) != null) {
+        return true;
+      }
+    }
     int numberOfChildren = expression.getNumberOfChildren();
     int numberOfAssign = expression.getChildren(PythonPunctuator.ASSIGN).size();
     if (numberOfChildren == 3 && numberOfAssign == 1) {

@@ -4,6 +4,9 @@ from module1 import (import3, x as import4)
 x = 1
 x = y
 x = x # Noncompliant
+# ^
+x: int = x # Noncompliant
+#      ^
 x += x
 
 def f():
@@ -23,6 +26,7 @@ except ImportError:
 
 a.x = a.x # Noncompliant
 a[x] = a[x] # Noncompliant
+a[x]: str = a[x] # Noncompliant
 a[sideEffect()] = a[sideEffect()]
 
 import1 = import1

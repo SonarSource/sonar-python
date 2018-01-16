@@ -38,6 +38,13 @@ public class ExpressionStatementTest extends RuleTest {
     assertThat(p).matches("i = 10");
     assertThat(p).matches("list[1] = 10");
     assertThat(p).matches("self.balance = initial_balance");
+    assertThat(p).matches("var1: int = 5");
+    assertThat(p).matches("var2: [int, str]");
+    assertThat(p).matches("st: str = 'Hello'");
+    assertThat(p).matches("a.b: int = (1, 2)");
+    assertThat(p).matches("x: int");
+    assertThat(p).matches("self.x: int = x");
+    assertThat(p).matches("lst: List[int] = []");
   }
 
 }
