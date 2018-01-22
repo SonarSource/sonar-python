@@ -28,7 +28,6 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Settings;
-import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 
@@ -44,15 +43,15 @@ public class PythonXUnitSensorTest {
 
   @Before
   public void setUp() {
-    settings = new MapSettings();
+    settings = context.settings();
     fs = new DefaultFileSystem(baseDir);
-    sensor = new PythonXUnitSensor(settings, fs);
+    sensor = new PythonXUnitSensor(context.config(), fs);
   }
 
   @Test
   public void shouldSaveCorrectMeasures() {
     DefaultInputFile testFile1 = TestInputFileBuilder.create("", "test_sample1.py").build();
-    DefaultInputFile testFile2 =  TestInputFileBuilder.create("", "tests/dir/test_sample2.py").build();
+    DefaultInputFile testFile2 = TestInputFileBuilder.create("", "tests/dir/test_sample2.py").build();
     fs.add(testFile1);
     fs.add(testFile2);
     sensor.execute(context);
@@ -73,8 +72,8 @@ public class PythonXUnitSensorTest {
   @Test
   public void shouldSaveCorrectMeasuresSimpleMode() {
     settings.setProperty(PythonXUnitSensor.SKIP_DETAILS, true);
-    fs.add( TestInputFileBuilder.create("", "test_sample.py").build());
-    fs.add( TestInputFileBuilder.create("", "tests/dir/test_sample.py").build());
+    fs.add(TestInputFileBuilder.create("", "test_sample.py").build());
+    fs.add(TestInputFileBuilder.create("", "tests/dir/test_sample.py").build());
     sensor.execute(context);
 
     // includes test with not found file
@@ -86,11 +85,11 @@ public class PythonXUnitSensorTest {
 
   @Test
   public void shouldReportNothingWhenNoReportFound() {
-    DefaultInputFile testFile1 =  TestInputFileBuilder.create("", "test_sample1.py").build();
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", "test_sample1.py").build();
     fs.add(testFile1);
 
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");
-    sensor = new PythonXUnitSensor(settings, fs);
+    sensor = new PythonXUnitSensor(context.config(), fs);
     sensor.execute(context);
 
     assertThat(context.measures(context.module().key())).isEmpty();
@@ -100,7 +99,7 @@ public class PythonXUnitSensorTest {
   @Test(expected = IllegalStateException.class)
   public void shouldThrowWhenGivenInvalidTime() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXUnitSensor(settings, fs);
+    sensor = new PythonXUnitSensor(context.config(), fs);
     sensor.execute(context);
   }
 

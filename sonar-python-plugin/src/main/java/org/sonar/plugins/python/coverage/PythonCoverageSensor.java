@@ -23,15 +23,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.xml.stream.XMLStreamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.plugins.python.EmptyReportException;
 
 import static org.sonar.plugins.python.PythonReportSensor.getReports;
@@ -41,28 +44,44 @@ public class PythonCoverageSensor {
   private static final Logger LOG = LoggerFactory.getLogger(PythonCoverageSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
+  public static final String DEFAULT_REPORT_PATH = "coverage-reports/*coverage-*.xml";
+  // Deprecated report path keys
   public static final String IT_REPORT_PATH_KEY = "sonar.python.coverage.itReportPath";
+  public static final String IT_DEFAULT_REPORT_PATH = "";
   public static final String OVERALL_REPORT_PATH_KEY = "sonar.python.coverage.overallReportPath";
-  public static final String DEFAULT_REPORT_PATH = "coverage-reports/coverage-*.xml";
-  public static final String IT_DEFAULT_REPORT_PATH = "coverage-reports/it-coverage-*.xml";
-  public static final String OVERALL_DEFAULT_REPORT_PATH = "coverage-reports/overall-coverage-*.xml";
+  public static final String OVERALL_DEFAULT_REPORT_PATH = "";
 
   public void execute(SensorContext context) {
     String baseDir = context.fileSystem().baseDir().getPath();
-    Settings settings = context.settings();
+    Configuration config = context.config();
+
+    logDeprecatedPropertyUsage(config, IT_REPORT_PATH_KEY, REPORT_PATH_KEY);
+    logDeprecatedPropertyUsage(config, OVERALL_REPORT_PATH_KEY, REPORT_PATH_KEY);
 
     HashSet<InputFile> filesCovered = new HashSet<>();
     List<File> reports = new ArrayList<>();
-    reports.addAll(getReports(settings, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
-    reports.addAll(getReports(settings, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH));
-    reports.addAll(getReports(settings, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(config, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(config, baseDir, IT_REPORT_PATH_KEY, IT_DEFAULT_REPORT_PATH));
+    reports.addAll(getReports(config, baseDir, OVERALL_REPORT_PATH_KEY, OVERALL_DEFAULT_REPORT_PATH));
     if (!reports.isEmpty()) {
       LOG.info("Python test coverage");
-      for (File report : reports) {
+      for (File report : uniqueAbsolutePaths(reports)) {
         Map<InputFile, NewCoverage> coverageMeasures = parseReport(report, context);
         saveMeasures(coverageMeasures, filesCovered);
       }
     }
+  }
+
+  private static void logDeprecatedPropertyUsage(Configuration config, String deprecatedKey, String replacementKey) {
+    if (!config.get(deprecatedKey).orElse("").isEmpty()) {
+      LOG.warn("Property '{}' is deprecated. Please use '{}' instead.", deprecatedKey, replacementKey);
+    }
+  }
+
+  private static Set<File> uniqueAbsolutePaths(List<File> reports) {
+    return reports.stream()
+      .map(File::getAbsoluteFile)
+      .collect(Collectors.toCollection(LinkedHashSet::new));
   }
 
   private static Map<InputFile, NewCoverage> parseReport(File report, SensorContext context) {
