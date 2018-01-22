@@ -96,7 +96,7 @@ public class CoverageTest {
         nbLog++;
       }
     }
-    assertThat(nbLog).isEqualTo(3);
+    assertThat(nbLog).isEqualTo(1);
     assertThat(Tests.getMeasureAsDouble(PROJECT_KEY, "coverage")).isZero();
   }
 

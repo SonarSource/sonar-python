@@ -42,11 +42,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintImportSensorTest {
 
+  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/pylint");
+  private final SensorContextTester context = SensorContextTester.create(baseDir);
+
   @Test
   public void parse_report() {
-    File baseDir = new File("src/test/resources/org/sonar/plugins/python/pylint");
-    SensorContextTester context = SensorContextTester.create(baseDir);
-
     context.settings().setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
 
     File file = new File(baseDir, "src/file1.py");
@@ -65,7 +65,7 @@ public class PylintImportSensorTest {
       .activate()
       .build());
 
-    PylintImportSensor sensor = new PylintImportSensor(context.settings());
+    PylintImportSensor sensor = new PylintImportSensor(context.config());
     sensor.execute(context);
     assertThat(context.allIssues()).hasSize(3);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key())
@@ -75,7 +75,7 @@ public class PylintImportSensorTest {
   @Test
   public void sensor_descriptor() {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new PylintImportSensor(new MapSettings()).describe(descriptor);
+    new PylintImportSensor(context.config()).describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("PylintImportSensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);

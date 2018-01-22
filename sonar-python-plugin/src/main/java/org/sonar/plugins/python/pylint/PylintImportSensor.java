@@ -33,7 +33,7 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.PythonReportSensor;
 
@@ -43,7 +43,7 @@ public class PylintImportSensor extends PythonReportSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PylintImportSensor.class);
 
-  public PylintImportSensor(Settings conf) {
+  public PylintImportSensor(Configuration conf) {
     super(conf);
   }
 

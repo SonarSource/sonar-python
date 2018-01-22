@@ -147,6 +147,17 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
+  public void test_unique_report() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "*coverage.4.4.2*.xml");
+    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage*.4.4.2.xml");
+    settings.setProperty(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY, "*coverage.4.4.2.xml");
+    coverageSensor.execute(context);
+    List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
+    Integer coverageAtLine6 = actual.get(5);
+    assertThat(coverageAtLine6).isEqualTo(1);
+  }
+
+  @Test
   public void test_unresolved_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
     coverageSensor.execute(context);

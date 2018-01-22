@@ -24,20 +24,20 @@ import java.util.List;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.WildcardPattern;
 
 public abstract class PythonReportSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
 
-  protected Settings conf;
+  protected Configuration conf;
 
-  public PythonReportSensor(Settings conf) {
+  public PythonReportSensor(Configuration conf) {
     this.conf = conf;
   }
 
@@ -64,12 +64,9 @@ public abstract class PythonReportSensor implements Sensor {
     }
   }
 
-  public static List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
-    String reportPath = conf.getString(reportPathPropertyKey);
+  public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
+    String reportPath = conf.get(reportPathPropertyKey).orElse(defaultReportPath);
     boolean propertyIsProvided = !Objects.equals(reportPath, defaultReportPath);
-    if (reportPath == null) {
-      reportPath = defaultReportPath;
-    }
 
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 

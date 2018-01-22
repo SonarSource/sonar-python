@@ -24,18 +24,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.xml.stream.XMLStreamException;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputComponent;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.parser.StaxParser;
@@ -49,7 +47,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   private final FileSystem fileSystem;
 
-  public PythonXUnitSensor(Settings conf, FileSystem fileSystem) {
+  public PythonXUnitSensor(Configuration conf, FileSystem fileSystem) {
     super(conf);
     this.fileSystem = fileSystem;
   }
@@ -66,7 +64,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   @Override
   protected void processReports(final SensorContext context, List<File> reports) throws XMLStreamException {
-    if (conf.getBoolean(SKIP_DETAILS)) {
+    if (conf.getBoolean(SKIP_DETAILS).orElse(Boolean.FALSE)) {
       simpleMode(context, reports);
     } else {
       detailedMode(context, reports);
