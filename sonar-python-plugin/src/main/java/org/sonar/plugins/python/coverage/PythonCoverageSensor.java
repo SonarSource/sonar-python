@@ -55,6 +55,9 @@ public class PythonCoverageSensor {
     String baseDir = context.fileSystem().baseDir().getPath();
     Configuration config = context.config();
 
+    logDeprecatedPropertyUsage(config, IT_REPORT_PATH_KEY, REPORT_PATH_KEY);
+    logDeprecatedPropertyUsage(config, OVERALL_REPORT_PATH_KEY, REPORT_PATH_KEY);
+
     HashSet<InputFile> filesCovered = new HashSet<>();
     List<File> reports = new ArrayList<>();
     reports.addAll(getReports(config, baseDir, REPORT_PATH_KEY, DEFAULT_REPORT_PATH));
@@ -66,6 +69,12 @@ public class PythonCoverageSensor {
         Map<InputFile, NewCoverage> coverageMeasures = parseReport(report, context);
         saveMeasures(coverageMeasures, filesCovered);
       }
+    }
+  }
+
+  private static void logDeprecatedPropertyUsage(Configuration config, String deprecatedKey, String replacementKey) {
+    if (!config.get(deprecatedKey).orElse("").isEmpty()) {
+      LOG.warn("Property '{}' is deprecated. Please use '{}' instead.", deprecatedKey, replacementKey);
     }
   }
 
