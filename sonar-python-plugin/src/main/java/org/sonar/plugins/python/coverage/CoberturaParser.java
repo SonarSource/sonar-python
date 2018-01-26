@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
@@ -75,7 +76,7 @@ public class CoberturaParser {
     List<File> baseDirectories = new ArrayList<>();
     SMInputCursor source = sources.childElementCursor("source");
     while (source.getNext() != null) {
-      String path = source.collectDescendantText();
+      String path = FilenameUtils.normalize(source.collectDescendantText());
       if (!StringUtils.isBlank(path)) {
         File baseDirectory = new File(path);
         if (baseDirectory.isDirectory()) {
@@ -94,7 +95,7 @@ public class CoberturaParser {
   private void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData, List<File> baseDirectories)
     throws XMLStreamException {
     while (classCursor.getNext() != null) {
-      String filename = classCursor.getAttrValue("filename");
+      String filename = FilenameUtils.normalize(classCursor.getAttrValue("filename"));
       InputFile inputFile = resolve(context, baseDirectories, filename);
       if (inputFile != null) {
         NewCoverage coverage = coverageData.computeIfAbsent(inputFile, f -> context.newCoverage().onFile(f));
@@ -107,19 +108,25 @@ public class CoberturaParser {
 
   @Nullable
   private InputFile resolve(SensorContext context, List<File> baseDirectories, String filename) {
-    List<File> fileList = baseDirectories.stream()
-      .map(base -> new File(base, filename))
-      .filter(File::exists)
-      .collect(Collectors.toList());
-    if (fileList.isEmpty()) {
-      logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, the file does not exist in all <source>.", filename);
-      return null;
+    String absolutePath;
+    File file = new File(filename);
+    if (file.isAbsolute()) {
+      absolutePath = file.getAbsolutePath();
+    } else {
+      List<File> fileList = baseDirectories.stream()
+        .map(base -> new File(base, filename))
+        .filter(File::exists)
+        .collect(Collectors.toList());
+      if (fileList.isEmpty()) {
+        logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, the file does not exist in all <source>.", filename);
+        return null;
+      }
+      if (fileList.size() > 1) {
+        logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, ambiguity, the file exists in several <source>.", filename);
+        return null;
+      }
+      absolutePath = fileList.get(0).getAbsolutePath();
     }
-    if (fileList.size()>1) {
-      logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, ambiguity, the file exists in several <source>.", filename);
-      return null;
-    }
-    String absolutePath = fileList.get(0).getAbsolutePath();
     return context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(absolutePath));
   }
 
