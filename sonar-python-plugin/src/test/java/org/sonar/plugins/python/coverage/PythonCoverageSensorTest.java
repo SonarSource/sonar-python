@@ -63,6 +63,9 @@ public class PythonCoverageSensorTest {
     inputFile("sources/file2.py", Type.MAIN);
     inputFile("sources/file3.py", Type.MAIN);
     inputFile("sources/file4.py", Type.MAIN);
+    inputFile("sources/folder1/file1.py", Type.MAIN);
+    inputFile("sources/folder1/file2.py", Type.MAIN);
+    inputFile("sources/folder2/file2.py", Type.MAIN);
   }
 
   private InputFile inputFile(String relativePath, Type type) {
@@ -144,6 +147,17 @@ public class PythonCoverageSensorTest {
     assertThat(context.coveredConditions(FILE4_KEY, 8)).isEqualTo(1);
     assertThat(context.conditions(FILE4_KEY, 10)).isEqualTo(2);
     assertThat(context.coveredConditions(FILE4_KEY, 10)).isEqualTo(1);
+  }
+
+  @Test
+  public void test_coverage_4_4_2_multi_source() {
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.4.4.2-multi-sources.xml");
+    coverageSensor.execute(context);
+
+    assertThat(context.lineHits("moduleKey:sources/folder1/file1.py", 1)).isEqualTo(1);
+    // file2.py ambiguity
+    assertThat(context.lineHits("moduleKey:sources/folder1/file2.py", 1)).isNull();
+    assertThat(context.lineHits("moduleKey:sources/folder2/file2.py", 1)).isNull();
   }
 
   @Test

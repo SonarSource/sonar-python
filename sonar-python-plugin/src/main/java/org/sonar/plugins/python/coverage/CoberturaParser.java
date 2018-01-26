@@ -20,7 +20,12 @@
 package org.sonar.plugins.python.coverage;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.in.SMInputCursor;
@@ -43,7 +48,8 @@ public class CoberturaParser {
     unresolvedFilenameCount = 0;
 
     StaxParser parser = new StaxParser(rootCursor -> {
-      File baseDirectory = context.fileSystem().baseDir();
+      File defaultBaseDirectory = context.fileSystem().baseDir();
+      List<File> baseDirectories = Collections.singletonList(defaultBaseDirectory);
       try {
         rootCursor.advance();
       } catch (com.ctc.wstx.exc.WstxEOFException eofExc) {
@@ -53,9 +59,9 @@ public class CoberturaParser {
       SMInputCursor cursor = rootCursor.childElementCursor();
       while (cursor.getNext() != null) {
         if ("sources".equals(cursor.getLocalName())) {
-          baseDirectory = extractBaseDirectory(cursor, baseDirectory);
+          baseDirectories = extractBaseDirectories(cursor, defaultBaseDirectory);
         } else if ("packages".equals(cursor.getLocalName())) {
-          collectFileMeasures(cursor.descendantElementCursor("class"), context, coverageData, baseDirectory);
+          collectFileMeasures(cursor.descendantElementCursor("class"), context, coverageData, baseDirectories);
         }
       }
     });
@@ -65,40 +71,62 @@ public class CoberturaParser {
     }
   }
 
-  private static File extractBaseDirectory(SMInputCursor sources, File defaultBaseDirectory) throws XMLStreamException {
+  private static List<File> extractBaseDirectories(SMInputCursor sources, File defaultBaseDirectory) throws XMLStreamException {
+    List<File> baseDirectories = new ArrayList<>();
     SMInputCursor source = sources.childElementCursor("source");
     while (source.getNext() != null) {
       String path = source.collectDescendantText();
       if (!StringUtils.isBlank(path)) {
         File baseDirectory = new File(path);
         if (baseDirectory.isDirectory()) {
-          return baseDirectory;
+          baseDirectories.add(baseDirectory);
         } else {
           LOG.warn("Invalid directory path in 'source' element: {}", path);
         }
       }
     }
-    return defaultBaseDirectory;
+    if (baseDirectories.isEmpty()) {
+      return Collections.singletonList(defaultBaseDirectory);
+    }
+    return baseDirectories;
   }
 
-  private void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData, File baseDirectory)
+  private void collectFileMeasures(SMInputCursor classCursor, SensorContext context, Map<InputFile, NewCoverage> coverageData, List<File> baseDirectories)
     throws XMLStreamException {
     while (classCursor.getNext() != null) {
-      File file = new File(classCursor.getAttrValue("filename"));
-      if (!file.isAbsolute()) {
-        file = new File(baseDirectory, file.getPath());
-      }
-      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath()));
+      String filename = classCursor.getAttrValue("filename");
+      InputFile inputFile = resolve(context, baseDirectories, filename);
       if (inputFile != null) {
         NewCoverage coverage = coverageData.computeIfAbsent(inputFile, f -> context.newCoverage().onFile(f));
         collectFileData(classCursor, coverage);
       } else {
         classCursor.advance();
-        unresolvedFilenameCount++;
-        if (unresolvedFilenameCount == 1) {
-          LOG.error("Cannot find the file '{}' in the base directory '{}', ignoring coverage measures for this file", file.getPath(), baseDirectory.getPath());
-        }
       }
+    }
+  }
+
+  @Nullable
+  private InputFile resolve(SensorContext context, List<File> baseDirectories, String filename) {
+    List<File> fileList = baseDirectories.stream()
+      .map(base -> new File(base, filename))
+      .filter(File::exists)
+      .collect(Collectors.toList());
+    if (fileList.isEmpty()) {
+      logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, the file does not exist in all <source>.", filename);
+      return null;
+    }
+    if (fileList.size()>1) {
+      logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, ambiguity, the file exists in several <source>.", filename);
+      return null;
+    }
+    String absolutePath = fileList.get(0).getAbsolutePath();
+    return context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(absolutePath));
+  }
+
+  private void logUnresolvedFile(String message, String filename) {
+    unresolvedFilenameCount++;
+    if (unresolvedFilenameCount == 1) {
+      LOG.error(message, filename);
     }
   }
 
