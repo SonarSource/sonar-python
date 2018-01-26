@@ -10,6 +10,7 @@ function installTravisTools {
 
 installTravisTools
 source ~/.local/bin/installMaven35
+source ~/.local/bin/installJDK8
 
 export DEPLOY_PULL_REQUEST=true
 
