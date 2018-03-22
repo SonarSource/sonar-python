@@ -1,1411 +1,2661 @@
 <?xml version="1.0" encoding="ASCII"?>
 <rules>
-<rule>
-<key>C0102</key>
-<name><![CDATA[Black listed name "%s"]]></name>
-<configKey>C0102</configKey>
-<description>
-<![CDATA[Used when the name is listed in the black list (unauthorized names).]]>
-</description>
-</rule>
-<rule>
-<key>C0103</key>
-<name><![CDATA[Invalid %s name "%s"%s]]></name>
-<configKey>C0103</configKey>
-<description>
-<![CDATA[Used when the name doesn't match the regular expression associated to its type(constant, variable, class...).]]>
-</description>
-</rule>
-<rule>
-<key>C0111</key>
-<name><![CDATA[Missing %s docstring]]></name>
-<configKey>C0111</configKey>
-<description>
-<![CDATA[Used when a module, function, class or method has no docstring. Some specialmethods like __init__ doesn't necessary require a docstring.]]>
-</description>
-</rule>
-<rule>
-<key>C0112</key>
-<name><![CDATA[Empty %s docstring]]></name>
-<configKey>C0112</configKey>
-<description>
-<![CDATA[Used when a module, function, class or method has an empty docstring (it wouldbe too easy ;).]]>
-</description>
-</rule>
-<rule>
-<key>C0121</key>
-<name><![CDATA[Missing required attribute "%s"]]></name>
-<configKey>C0121</configKey>
-<description>
-<![CDATA[Used when an attribute required for modules is missing.]]>
-</description>
-</rule>
-<rule>
-<key>C0202</key>
-<name><![CDATA[Class method %s should have %s as first argument]]></name>
-<configKey>C0202</configKey>
-<description>
-<![CDATA[Used when a class method has a first argument named differently than the valuespecified in valid-classmethod-first-arg option (default to "cls"),recommended to easily differentiate them from regular instance methods.]]>
-</description>
-</rule>
-<rule>
-<key>C0203</key>
-<name><![CDATA[Metaclass method %s should have %s as first argument]]></name>
-<configKey>C0203</configKey>
-<description>
-<![CDATA[Used when a metaclass method has a first agument named differently than thevalue specified in valid-classmethod-first-arg option (default to "cls"),recommended to easily differentiate them from regular instance methods.]]>
-</description>
-</rule>
-<rule>
-<key>C0204</key>
-<name><![CDATA[Metaclass class method %s should have %s as first argument]]></name>
-<configKey>C0204</configKey>
-<description>
-<![CDATA[Used when a metaclass class method has a first argument named differently thanthe value specified in valid-metaclass-classmethod-first-arg option (defaultto "mcs"), recommended to easily differentiate them from regular instancemethods.]]>
-</description>
-</rule>
-<rule>
-<key>C0301</key>
-<name><![CDATA[Line too long (%s/%s)]]></name>
-<configKey>C0301</configKey>
-<description>
-<![CDATA[Used when a line is longer than a given number of characters.]]>
-</description>
-</rule>
-<rule>
-<key>C0302</key>
-<name><![CDATA[Too many lines in module (%s)]]></name>
-<configKey>C0302</configKey>
-<description>
-<![CDATA[Used when a module has too much lines, reducing its readability.]]>
-</description>
-</rule>
-<rule>
-<key>C0303</key>
-<name><![CDATA[Trailing whitespace]]></name>
-<configKey>C0303</configKey>
-<description>
-<![CDATA[Used when there is whitespace between the end of a line and the newline.]]>
-</description>
-</rule>
-<rule>
-<key>C0304</key>
-<name><![CDATA[Final newline missing]]></name>
-<configKey>C0304</configKey>
-<description>
-<![CDATA[Used when the last line in a file is missing a newline.]]>
-</description>
-</rule>
-<rule>
-<key>C0321</key>
-<name><![CDATA[More than one statement on a single line]]></name>
-<configKey>C0321</configKey>
-<description>
-<![CDATA[Used when more than on statement are found on the same line.]]>
-</description>
-</rule>
-<rule>
-<key>C0325</key>
-<name><![CDATA[Unnecessary parens after %r keyword]]></name>
-<configKey>C0325</configKey>
-<description>
-<![CDATA[Used when a single item in parentheses follows an if, for, or other keyword.]]>
-</description>
-</rule>
-<rule>
-<key>C0326</key>
-<name><![CDATA[%s space %s %s %s]]></name>
-<configKey>C0326</configKey>
-<description>
-<![CDATA[Used when a wrong number of spaces is used around an operator, bracket orblock opener.]]>
-</description>
-</rule>
-<rule>
-<key>C0330</key>
-<name><![CDATA[Wrong %s indentation%s.]]></name>
-<configKey>C0330</configKey>
-<description>
-<![CDATA[TODO]]>
-</description>
-</rule>
-<rule>
-<key>C1001</key>
-<name><![CDATA[Old-style class defined.]]></name>
-<configKey>C1001</configKey>
-<description>
-<![CDATA[Used when a class is defined that does not inherit from anotherclass and doesnot inherit explicitly from "object". This message can't be emitted when usingPython >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>E0001</key>
-<name><![CDATA[]]></name>
-<configKey>E0001</configKey>
-<description>
-<![CDATA[Used when a syntax error is raised for a module.]]>
-</description>
-</rule>
-<rule>
-<key>E0011</key>
-<name><![CDATA[Unrecognized file option %r]]></name>
-<configKey>E0011</configKey>
-<description>
-<![CDATA[Used when an unknown inline option is encountered.]]>
-</description>
-</rule>
-<rule>
-<key>E0012</key>
-<name><![CDATA[Bad option value %r]]></name>
-<configKey>E0012</configKey>
-<description>
-<![CDATA[Used when a bad value for an inline option is encountered.]]>
-</description>
-</rule>
-<rule>
-<key>E0100</key>
-<name><![CDATA[__init__ method is a generator]]></name>
-<configKey>E0100</configKey>
-<description>
-<![CDATA[Used when the special class method __init__ is turned into a generator by ayield in its body.]]>
-</description>
-</rule>
-<rule>
-<key>E0101</key>
-<name><![CDATA[Explicit return in __init__]]></name>
-<configKey>E0101</configKey>
-<description>
-<![CDATA[Used when the special class method __init__ has an explicit return value.]]>
-</description>
-</rule>
-<rule>
-<key>E0102</key>
-<name><![CDATA[%s already defined line %s]]></name>
-<configKey>E0102</configKey>
-<description>
-<![CDATA[Used when a function / class / method is redefined.]]>
-</description>
-</rule>
-<rule>
-<key>E0103</key>
-<name><![CDATA[%r not properly in loop]]></name>
-<configKey>E0103</configKey>
-<description>
-<![CDATA[Used when break or continue keywords are used outside a loop.]]>
-</description>
-</rule>
-<rule>
-<key>E0104</key>
-<name><![CDATA[Return outside function]]></name>
-<configKey>E0104</configKey>
-<description>
-<![CDATA[Used when a "return" statement is found outside a function or method.]]>
-</description>
-</rule>
-<rule>
-<key>E0105</key>
-<name><![CDATA[Yield outside function]]></name>
-<configKey>E0105</configKey>
-<description>
-<![CDATA[Used when a "yield" statement is found outside a function or method.]]>
-</description>
-</rule>
-<rule>
-<key>E0106</key>
-<name><![CDATA[Return with argument inside generator]]></name>
-<configKey>E0106</configKey>
-<description>
-<![CDATA[Used when a "return" statement with an argument is found outside in agenerator function or method (e.g. with some "yield" statements). This messagecan't be emitted when using Python >= 3.3.]]>
-</description>
-</rule>
-<rule>
-<key>E0107</key>
-<name><![CDATA[Use of the non-existent %s operator]]></name>
-<configKey>E0107</configKey>
-<description>
-<![CDATA[Used when you attempt to use the C-style pre-increment orpre-decrementoperator -- and ++, which doesn't exist in Python.]]>
-</description>
-</rule>
-<rule>
-<key>E0108</key>
-<name><![CDATA[Duplicate argument name %s in function definition]]></name>
-<configKey>E0108</configKey>
-<description>
-<![CDATA[Duplicate argument names in function definitions are syntax errors.]]>
-</description>
-</rule>
-<rule>
-<key>E0109</key>
-<name><![CDATA[Missing argument to reversed()]]></name>
-<configKey>E0109</configKey>
-<description>
-<![CDATA[Used when reversed() builtin didn't receive an argument.]]>
-</description>
-</rule>
-<rule>
-<key>E0111</key>
-<name><![CDATA[The first reversed() argument is not a sequence]]></name>
-<configKey>E0111</configKey>
-<description>
-<![CDATA[Used when the first argument to reversed() builtin isn't a sequence (does notimplement __reversed__, nor __getitem__ and __len__]]>
-</description>
-</rule>
-<rule>
-<key>E0202</key>
-<name><![CDATA[An attribute defined in %s line %s hides this method]]></name>
-<configKey>E0202</configKey>
-<description>
-<![CDATA[Used when a class defines a method which is hidden by an instance attributefrom an ancestor class or set by some client code.]]>
-</description>
-</rule>
-<rule>
-<key>E0203</key>
-<name><![CDATA[Access to member %r before its definition line %s]]></name>
-<configKey>E0203</configKey>
-<description>
-<![CDATA[Used when an instance member is accessed before it's actually assigned.]]>
-</description>
-</rule>
-<rule>
-<key>E0211</key>
-<name><![CDATA[Method has no argument]]></name>
-<configKey>E0211</configKey>
-<description>
-<![CDATA[Used when a method which should have the bound instance as first argument hasno argument defined.]]>
-</description>
-</rule>
-<rule>
-<key>E0213</key>
-<name><![CDATA[Method should have "self" as first argument]]></name>
-<configKey>E0213</configKey>
-<description>
-<![CDATA[Used when a method has an attribute different the "self" as first argument.This is considered as an error since this is a so common convention that youshouldn't break it!]]>
-</description>
-</rule>
-<rule>
-<key>E0221</key>
-<name><![CDATA[Interface resolved to %s is not a class]]></name>
-<configKey>E0221</configKey>
-<description>
-<![CDATA[Used when a class claims to implement an interface which is not a class.]]>
-</description>
-</rule>
-<rule>
-<key>E0222</key>
-<name><![CDATA[Missing method %r from %s interface]]></name>
-<configKey>E0222</configKey>
-<description>
-<![CDATA[Used when a method declared in an interface is missing from a classimplementing this interface]]>
-</description>
-</rule>
-<rule>
-<key>E0235</key>
-<name><![CDATA[__exit__ must accept 3 arguments: type, value, traceback]]></name>
-<configKey>E0235</configKey>
-<description>
-<![CDATA[Used when the __exit__ special method, belonging to a context manager, doesnot accept 3 arguments (type, value, traceback).]]>
-</description>
-</rule>
-<rule>
-<key>E0236</key>
-<name><![CDATA[Invalid object %r in __slots__, must contain only non empty strings]]></name>
-<configKey>E0236</configKey>
-<description>
-<![CDATA[Used when an invalid (non-string) object occurs in __slots__.]]>
-</description>
-</rule>
-<rule>
-<key>E0238</key>
-<name><![CDATA[Invalid __slots__ object]]></name>
-<configKey>E0238</configKey>
-<description>
-<![CDATA[Used when an invalid __slots__ is found in class. Only a string, an iterableor a sequence is permitted.]]>
-</description>
-</rule>
-<rule>
-<key>E0601</key>
-<name><![CDATA[Using variable %r before assignment]]></name>
-<configKey>E0601</configKey>
-<description>
-<![CDATA[Used when a local variable is accessed before it's assignment.]]>
-</description>
-</rule>
-<rule>
-<key>E0602</key>
-<name><![CDATA[Undefined variable %r]]></name>
-<configKey>E0602</configKey>
-<description>
-<![CDATA[Used when an undefined variable is accessed.]]>
-</description>
-</rule>
-<rule>
-<key>E0603</key>
-<name><![CDATA[Undefined variable name %r in __all__]]></name>
-<configKey>E0603</configKey>
-<description>
-<![CDATA[Used when an undefined variable name is referenced in __all__.]]>
-</description>
-</rule>
-<rule>
-<key>E0604</key>
-<name><![CDATA[Invalid object %r in __all__, must contain only strings]]></name>
-<configKey>E0604</configKey>
-<description>
-<![CDATA[Used when an invalid (non-string) object occurs in __all__.]]>
-</description>
-</rule>
-<rule>
-<key>E0611</key>
-<name><![CDATA[No name %r in module %r]]></name>
-<configKey>E0611</configKey>
-<description>
-<![CDATA[Used when a name cannot be found in a module.]]>
-</description>
-</rule>
-<rule>
-<key>E0701</key>
-<name><![CDATA[Bad except clauses order (%s)]]></name>
-<configKey>E0701</configKey>
-<description>
-<![CDATA[Used when except clauses are not in the correct order (from the more specificto the more generic). If you don't fix the order, some exceptions may not becatched by the most specific handler.]]>
-</description>
-</rule>
-<rule>
-<key>E0702</key>
-<name><![CDATA[Raising %s while only classes, instances or string are allowed]]></name>
-<configKey>E0702</configKey>
-<description>
-<![CDATA[Used when something which is neither a class, an instance or a string israised (i.e. a `TypeError` will be raised).]]>
-</description>
-</rule>
-<rule>
-<key>E0710</key>
-<name><![CDATA[Raising a new style class which doesn't inherit from BaseException]]></name>
-<configKey>E0710</configKey>
-<description>
-<![CDATA[Used when a new style class which doesn't inherit from BaseException israised.]]>
-</description>
-</rule>
-<rule>
-<key>E0711</key>
-<name><![CDATA[NotImplemented raised - should raise NotImplementedError]]></name>
-<configKey>E0711</configKey>
-<description>
-<![CDATA[Used when NotImplemented is raised instead of NotImplementedError]]>
-</description>
-</rule>
-<rule>
-<key>E0712</key>
-<name><![CDATA[Catching an exception which doesn't inherit from BaseException: %s]]></name>
-<configKey>E0712</configKey>
-<description>
-<![CDATA[Used when a class which doesn't inherit from BaseException is used as anexception in an except clause.]]>
-</description>
-</rule>
-<rule>
-<key>E1001</key>
-<name><![CDATA[Use of __slots__ on an old style class]]></name>
-<configKey>E1001</configKey>
-<description>
-<![CDATA[Used when an old style class uses the __slots__ attribute. This message can'tbe emitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>E1002</key>
-<name><![CDATA[Use of super on an old style class]]></name>
-<configKey>E1002</configKey>
-<description>
-<![CDATA[Used when an old style class uses the super builtin. This message can't beemitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>E1003</key>
-<name><![CDATA[Bad first argument %r given to super()]]></name>
-<configKey>E1003</configKey>
-<description>
-<![CDATA[Used when another argument than the current class is given as first argumentof the super builtin.]]>
-</description>
-</rule>
-<rule>
-<key>E1004</key>
-<name><![CDATA[Missing argument to super()]]></name>
-<configKey>E1004</configKey>
-<description>
-<![CDATA[Used when the super builtin didn't receive an argument. This message can't beemitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>E1101</key>
-<name><![CDATA[%s %r has no %r member]]></name>
-<configKey>E1101</configKey>
-<description>
-<![CDATA[Used when a variable is accessed for an unexistent member.]]>
-</description>
-</rule>
-<rule>
-<key>E1102</key>
-<name><![CDATA[%s is not callable]]></name>
-<configKey>E1102</configKey>
-<description>
-<![CDATA[Used when an object being called has been inferred to a non callable object]]>
-</description>
-</rule>
-<rule>
-<key>E1103</key>
-<name><![CDATA[%s %r has no %r member (but some types could not be inferred)]]></name>
-<configKey>E1103</configKey>
-<description>
-<![CDATA[Used when a variable is accessed for an unexistent member, but astroid was notable to interpret all possible types of this variable.]]>
-</description>
-</rule>
-<rule>
-<key>E1111</key>
-<name><![CDATA[Assigning to function call which doesn't return]]></name>
-<configKey>E1111</configKey>
-<description>
-<![CDATA[Used when an assignment is done on a function call but the inferred functiondoesn't return anything.]]>
-</description>
-</rule>
-<rule>
-<key>E1120</key>
-<name><![CDATA[No value for argument %s in %s call]]></name>
-<configKey>E1120</configKey>
-<description>
-<![CDATA[Used when a function call passes too few arguments.]]>
-</description>
-</rule>
-<rule>
-<key>E1121</key>
-<name><![CDATA[Too many positional arguments for %s call]]></name>
-<configKey>E1121</configKey>
-<description>
-<![CDATA[Used when a function call passes too many positional arguments.]]>
-</description>
-</rule>
-<rule>
-<key>E1123</key>
-<name><![CDATA[Unexpected keyword argument %r in %s call]]></name>
-<configKey>E1123</configKey>
-<description>
-<![CDATA[Used when a function call passes a keyword argument that doesn't correspond toone of the function's parameter names.]]>
-</description>
-</rule>
-<rule>
-<key>E1124</key>
-<name><![CDATA[Argument %r passed by position and keyword in %s call]]></name>
-<configKey>E1124</configKey>
-<description>
-<![CDATA[Used when a function call would result in assigning multiple values to afunction parameter, one value from a positional argument and one from akeyword argument.]]>
-</description>
-</rule>
-<rule>
-<key>E1200</key>
-<name><![CDATA[Unsupported logging format character %r (%#02x) at index %d]]></name>
-<configKey>E1200</configKey>
-<description>
-<![CDATA[Used when an unsupported format character is used in a logging statementformat string.]]>
-</description>
-</rule>
-<rule>
-<key>E1201</key>
-<name><![CDATA[Logging format string ends in middle of conversion specifier]]></name>
-<configKey>E1201</configKey>
-<description>
-<![CDATA[Used when a logging statement format string terminates before the end of aconversion specifier.]]>
-</description>
-</rule>
-<rule>
-<key>E1205</key>
-<name><![CDATA[Too many arguments for logging format string]]></name>
-<configKey>E1205</configKey>
-<description>
-<![CDATA[Used when a logging format string is given too few arguments.]]>
-</description>
-</rule>
-<rule>
-<key>E1206</key>
-<name><![CDATA[Not enough arguments for logging format string]]></name>
-<configKey>E1206</configKey>
-<description>
-<![CDATA[Used when a logging format string is given too many arguments]]>
-</description>
-</rule>
-<rule>
-<key>E1300</key>
-<name><![CDATA[Unsupported format character %r (%#02x) at index %d]]></name>
-<configKey>E1300</configKey>
-<description>
-<![CDATA[Used when a unsupported format character is used in a format string.]]>
-</description>
-</rule>
-<rule>
-<key>E1301</key>
-<name><![CDATA[Format string ends in middle of conversion specifier]]></name>
-<configKey>E1301</configKey>
-<description>
-<![CDATA[Used when a format string terminates before the end of a conversion specifier.]]>
-</description>
-</rule>
-<rule>
-<key>E1302</key>
-<name><![CDATA[Mixing named and unnamed conversion specifiers in format string]]></name>
-<configKey>E1302</configKey>
-<description>
-<![CDATA[Used when a format string contains both named (e.g. '%(foo)d') and unnamed(e.g. '%d') conversion specifiers. This is also used when a named conversionspecifier contains * for the minimum field width and/or precision.]]>
-</description>
-</rule>
-<rule>
-<key>E1303</key>
-<name><![CDATA[Expected mapping for format string, not %s]]></name>
-<configKey>E1303</configKey>
-<description>
-<![CDATA[Used when a format string that uses named conversion specifiers is used withan argument that is not a mapping.]]>
-</description>
-</rule>
-<rule>
-<key>E1304</key>
-<name><![CDATA[Missing key %r in format string dictionary]]></name>
-<configKey>E1304</configKey>
-<description>
-<![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that doesn't contain all the keys required by the format string.]]>
-</description>
-</rule>
-<rule>
-<key>E1305</key>
-<name><![CDATA[Too many arguments for format string]]></name>
-<configKey>E1305</configKey>
-<description>
-<![CDATA[Used when a format string that uses unnamed conversion specifiers is given toomany arguments.]]>
-</description>
-</rule>
-<rule>
-<key>E1306</key>
-<name><![CDATA[Not enough arguments for format string]]></name>
-<configKey>E1306</configKey>
-<description>
-<![CDATA[Used when a format string that uses unnamed conversion specifiers is given toofew arguments]]>
-</description>
-</rule>
-<rule>
-<key>E1310</key>
-<name><![CDATA[Suspicious argument in %s.%s call]]></name>
-<configKey>E1310</configKey>
-<description>
-<![CDATA[The argument to a str.{l,r,}strip call contains a duplicate character,]]>
-</description>
-</rule>
-<rule>
-<key>F0001</key>
-<name><![CDATA[]]></name>
-<configKey>F0001</configKey>
-<description>
-<![CDATA[Used when an error occurred preventing the analysis of a module (unable tofind it for instance).]]>
-</description>
-</rule>
-<rule>
-<key>F0002</key>
-<name><![CDATA[%s: %s]]></name>
-<configKey>F0002</configKey>
-<description>
-<![CDATA[Used when an unexpected error occurred while building the Astroidrepresentation. This is usually accompanied by a traceback. Please report sucherrors !]]>
-</description>
-</rule>
-<rule>
-<key>F0003</key>
-<name><![CDATA[ignored builtin module %s]]></name>
-<configKey>F0003</configKey>
-<description>
-<![CDATA[Used to indicate that the user asked to analyze a builtin module which hasbeen skipped.]]>
-</description>
-</rule>
-<rule>
-<key>F0010</key>
-<name><![CDATA[error while code parsing: %s]]></name>
-<configKey>F0010</configKey>
-<description>
-<![CDATA[Used when an exception occured while building the Astroid representation whichcould be handled by astroid.]]>
-</description>
-</rule>
-<rule>
-<key>F0202</key>
-<name><![CDATA[Unable to check methods signature (%s / %s)]]></name>
-<configKey>F0202</configKey>
-<description>
-<![CDATA[Used when PyLint has been unable to check methods signature compatibility foran unexpected reason. Please report this kind if you don't make sense of it.]]>
-</description>
-</rule>
-<rule>
-<key>F0220</key>
-<name><![CDATA[failed to resolve interfaces implemented by %s (%s)]]></name>
-<configKey>F0220</configKey>
-<description>
-<![CDATA[Used when a PyLint as failed to find interfaces implemented by a class]]>
-</description>
-</rule>
-<rule>
-<key>F0401</key>
-<name><![CDATA[Unable to import %s]]></name>
-<configKey>F0401</configKey>
-<description>
-<![CDATA[Used when pylint has been unable to import a module.]]>
-</description>
-</rule>
-<rule>
-<key>I0001</key>
-<name><![CDATA[Unable to run raw checkers on built-in module %s]]></name>
-<configKey>I0001</configKey>
-<description>
-<![CDATA[Used to inform that a built-in module has not been checked using the rawcheckers.]]>
-</description>
-</rule>
-<rule>
-<key>I0010</key>
-<name><![CDATA[Unable to consider inline option %r]]></name>
-<configKey>I0010</configKey>
-<description>
-<![CDATA[Used when an inline option is either badly formatted or can't be used insidemodules.]]>
-</description>
-</rule>
-<rule>
-<key>I0011</key>
-<name><![CDATA[Locally disabling %s (%s)]]></name>
-<configKey>I0011</configKey>
-<description>
-<![CDATA[Used when an inline option disables a message or a messages category.]]>
-</description>
-</rule>
-<rule>
-<key>I0012</key>
-<name><![CDATA[Locally enabling %s (%s)]]></name>
-<configKey>I0012</configKey>
-<description>
-<![CDATA[Used when an inline option enables a message or a messages category.]]>
-</description>
-</rule>
-<rule>
-<key>I0013</key>
-<name><![CDATA[Ignoring entire file]]></name>
-<configKey>I0013</configKey>
-<description>
-<![CDATA[Used to inform that the file will not be checked]]>
-</description>
-</rule>
-<rule>
-<key>I0020</key>
-<name><![CDATA[Suppressed %s (from line %d)]]></name>
-<configKey>I0020</configKey>
-<description>
-<![CDATA[A message was triggered on a line, but suppressed explicitly by a disable=comment in the file. This message is not generated for messages that areignored due to configuration settings.]]>
-</description>
-</rule>
-<rule>
-<key>I0021</key>
-<name><![CDATA[Useless suppression of %s]]></name>
-<configKey>I0021</configKey>
-<description>
-<![CDATA[Reported when a message is explicitly disabled for a line or a block of code,but never triggered.]]>
-</description>
-</rule>
-<rule>
-<key>I0022</key>
-<name><![CDATA[Pragma "%s" is deprecated, use "%s" instead]]></name>
-<configKey>I0022</configKey>
-<description>
-<![CDATA[Some inline pylint options have been renamed or reworked, only the most recentform should be used. NOTE:skip-all is only available with pylint >= 0.26]]>
-</description>
-</rule>
-<rule>
-<key>R0201</key>
-<name><![CDATA[Method could be a function]]></name>
-<configKey>R0201</configKey>
-<description>
-<![CDATA[Used when a method doesn't use its bound instance, and so could be written asa function.]]>
-</description>
-</rule>
-<rule>
-<key>R0401</key>
-<name><![CDATA[Cyclic import (%s)]]></name>
-<configKey>R0401</configKey>
-<description>
-<![CDATA[Used when a cyclic import between two or more modules is detected.]]>
-</description>
-</rule>
-<rule>
-<key>R0801</key>
-<name><![CDATA[Similar lines in %s files]]></name>
-<configKey>R0801</configKey>
-<description>
-<![CDATA[Indicates that a set of similar lines has been detected among multiple file.This usually means that the code should be refactored to avoid thisduplication.]]>
-</description>
-</rule>
-<rule>
-<key>R0901</key>
-<name><![CDATA[Too many ancestors (%s/%s)]]></name>
-<configKey>R0901</configKey>
-<description>
-<![CDATA[Used when class has too many parent classes, try to reduce this to get asimpler (and so easier to use) class.]]>
-</description>
-</rule>
-<rule>
-<key>R0902</key>
-<name><![CDATA[Too many instance attributes (%s/%s)]]></name>
-<configKey>R0902</configKey>
-<description>
-<![CDATA[Used when class has too many instance attributes, try to reduce this to get asimpler (and so easier to use) class.]]>
-</description>
-</rule>
-<rule>
-<key>R0903</key>
-<name><![CDATA[Too few public methods (%s/%s)]]></name>
-<configKey>R0903</configKey>
-<description>
-<![CDATA[Used when class has too few public methods, so be sure it's really worth it.]]>
-</description>
-</rule>
-<rule>
-<key>R0904</key>
-<name><![CDATA[Too many public methods (%s/%s)]]></name>
-<configKey>R0904</configKey>
-<description>
-<![CDATA[Used when class has too many public methods, try to reduce this to get asimpler (and so easier to use) class.]]>
-</description>
-</rule>
-<rule>
-<key>R0911</key>
-<name><![CDATA[Too many return statements (%s/%s)]]></name>
-<configKey>R0911</configKey>
-<description>
-<![CDATA[Used when a function or method has too many return statement, making it hardto follow.]]>
-</description>
-</rule>
-<rule>
-<key>R0912</key>
-<name><![CDATA[Too many branches (%s/%s)]]></name>
-<configKey>R0912</configKey>
-<description>
-<![CDATA[Used when a function or method has too many branches, making it hard tofollow.]]>
-</description>
-</rule>
-<rule>
-<key>R0913</key>
-<name><![CDATA[Too many arguments (%s/%s)]]></name>
-<configKey>R0913</configKey>
-<description>
-<![CDATA[Used when a function or method takes too many arguments.]]>
-</description>
-</rule>
-<rule>
-<key>R0914</key>
-<name><![CDATA[Too many local variables (%s/%s)]]></name>
-<configKey>R0914</configKey>
-<description>
-<![CDATA[Used when a function or method has too many local variables.]]>
-</description>
-</rule>
-<rule>
-<key>R0915</key>
-<name><![CDATA[Too many statements (%s/%s)]]></name>
-<configKey>R0915</configKey>
-<description>
-<![CDATA[Used when a function or method has too many statements. You should then splitit in smaller functions / methods.]]>
-</description>
-</rule>
-<rule>
-<key>R0921</key>
-<name><![CDATA[Abstract class not referenced]]></name>
-<configKey>R0921</configKey>
-<description>
-<![CDATA[Used when an abstract class is not used as ancestor anywhere.]]>
-</description>
-</rule>
-<rule>
-<key>R0922</key>
-<name><![CDATA[Abstract class is only referenced %s times]]></name>
-<configKey>R0922</configKey>
-<description>
-<![CDATA[Used when an abstract class is used less than X times as ancestor.]]>
-</description>
-</rule>
-<rule>
-<key>R0923</key>
-<name><![CDATA[Interface not implemented]]></name>
-<configKey>R0923</configKey>
-<description>
-<![CDATA[Used when an interface class is not implemented anywhere.]]>
-</description>
-</rule>
-<rule>
-<key>W0101</key>
-<name><![CDATA[Unreachable code]]></name>
-<configKey>W0101</configKey>
-<description>
-<![CDATA[Used when there is some code behind a "return" or "raise" statement, whichwill never be accessed.]]>
-</description>
-</rule>
-<rule>
-<key>W0102</key>
-<name><![CDATA[Dangerous default value %s as argument]]></name>
-<configKey>W0102</configKey>
-<description>
-<![CDATA[Used when a mutable value as list or dictionary is detected in a default valuefor an argument.]]>
-</description>
-</rule>
-<rule>
-<key>W0104</key>
-<name><![CDATA[Statement seems to have no effect]]></name>
-<configKey>W0104</configKey>
-<description>
-<![CDATA[Used when a statement doesn't have (or at least seems to) any effect.]]>
-</description>
-</rule>
-<rule>
-<key>W0105</key>
-<name><![CDATA[String statement has no effect]]></name>
-<configKey>W0105</configKey>
-<description>
-<![CDATA[Used when a string is used as a statement (which of course has no effect).This is a particular case of W0104 with its own message so you can easilydisable it if you're using those strings as documentation, instead ofcomments.]]>
-</description>
-</rule>
-<rule>
-<key>W0106</key>
-<name><![CDATA[Expression "%s" is assigned to nothing]]></name>
-<configKey>W0106</configKey>
-<description>
-<![CDATA[Used when an expression that is not a function call is assigned to nothing.Probably something else was intended.]]>
-</description>
-</rule>
-<rule>
-<key>W0107</key>
-<name><![CDATA[Unnecessary pass statement]]></name>
-<configKey>W0107</configKey>
-<description>
-<![CDATA[Used when a "pass" statement that can be avoided is encountered.]]>
-</description>
-</rule>
-<rule>
-<key>W0108</key>
-<name><![CDATA[Lambda may not be necessary]]></name>
-<configKey>W0108</configKey>
-<description>
-<![CDATA[Used when the body of a lambda expression is a function call on the sameargument list as the lambda itself; such lambda expressions are in all but afew cases replaceable with the function being called in the body of thelambda.]]>
-</description>
-</rule>
-<rule>
-<key>W0109</key>
-<name><![CDATA[Duplicate key %r in dictionary]]></name>
-<configKey>W0109</configKey>
-<description>
-<![CDATA[Used when a dictionary expression binds the same key multiple times.]]>
-</description>
-</rule>
-<rule>
-<key>W0110</key>
-<name><![CDATA[map/filter on lambda could be replaced by comprehension]]></name>
-<configKey>W0110</configKey>
-<description>
-<![CDATA[Used when a lambda is the first argument to "map" or "filter". It could beclearer as a list comprehension or generator expression. This message can't beemitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W0120</key>
-<name><![CDATA[Else clause on loop without a break statement]]></name>
-<configKey>W0120</configKey>
-<description>
-<![CDATA[Loops should only have an else clause if they can exit early with a breakstatement, otherwise the statements under else should be on the same scope asthe loop itself.]]>
-</description>
-</rule>
-<rule>
-<key>W0121</key>
-<name><![CDATA[Use raise ErrorClass(args) instead of raise ErrorClass, args.]]></name>
-<configKey>W0121</configKey>
-<description>
-<![CDATA[Used when the alternate raise syntax 'raise foo, bar' is used instead of'raise foo(bar)'. This message can't be emitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W0122</key>
-<name><![CDATA[Use of exec]]></name>
-<configKey>W0122</configKey>
-<description>
-<![CDATA[Used when you use the "exec" statement (function for Python 3), to discourageits usage. That doesn't mean you can not use it !]]>
-</description>
-</rule>
-<rule>
-<key>W0123</key>
-<name><![CDATA[Use of eval]]></name>
-<configKey>W0123</configKey>
-<description>
-<![CDATA[Used when you use the "eval" function, to discourage its usage. Consider using`ast.literal_eval` for safely evaluating strings containing Python expressionsfrom untrusted sources.]]>
-</description>
-</rule>
-<rule>
-<key>W0141</key>
-<name><![CDATA[Used builtin function %r]]></name>
-<configKey>W0141</configKey>
-<description>
-<![CDATA[Used when a black listed builtin function is used (see the bad-functionoption). Usual black listed functions are the ones like map, or filter , wherePython offers now some cleaner alternative like list comprehension.]]>
-</description>
-</rule>
-<rule>
-<key>W0142</key>
-<name><![CDATA[Used * or ** magic]]></name>
-<configKey>W0142</configKey>
-<description>
-<![CDATA[Used when a function or method is called using `*args` or `**kwargs` todispatch arguments. This doesn't improve readability and should be used withcare.]]>
-</description>
-</rule>
-<rule>
-<key>W0150</key>
-<name><![CDATA[%s statement in finally block may swallow exception]]></name>
-<configKey>W0150</configKey>
-<description>
-<![CDATA[Used when a break or a return statement is found inside the finally clause ofa try...finally block: the exceptions raised in the try clause will besilently swallowed instead of being re-raised.]]>
-</description>
-</rule>
-<rule>
-<key>W0199</key>
-<name><![CDATA[Assert called on a 2-uple. Did you mean 'assert x,y'?]]></name>
-<configKey>W0199</configKey>
-<description>
-<![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is notempty, and will always evaluate to false if it is.]]>
-</description>
-</rule>
-<rule>
-<key>W0201</key>
-<name><![CDATA[Attribute %r defined outside __init__]]></name>
-<configKey>W0201</configKey>
-<description>
-<![CDATA[Used when an instance attribute is defined outside the __init__ method.]]>
-</description>
-</rule>
-<rule>
-<key>W0211</key>
-<name><![CDATA[Static method with %r as first argument]]></name>
-<configKey>W0211</configKey>
-<description>
-<![CDATA[Used when a static method has "self" or a value specified invalid-classmethod-first-arg option or valid-metaclass-classmethod-first-argoption as first argument.]]>
-</description>
-</rule>
-<rule>
-<key>W0212</key>
-<name><![CDATA[Access to a protected member %s of a client class]]></name>
-<configKey>W0212</configKey>
-<description>
-<![CDATA[Used when a protected member (i.e. class member with a name beginning with anunderscore) is access outside the class or a descendant of the class whereit's defined.]]>
-</description>
-</rule>
-<rule>
-<key>W0221</key>
-<name><![CDATA[Arguments number differs from %s method]]></name>
-<configKey>W0221</configKey>
-<description>
-<![CDATA[Used when a method has a different number of arguments than in the implementedinterface or in an overridden method.]]>
-</description>
-</rule>
-<rule>
-<key>W0222</key>
-<name><![CDATA[Signature differs from %s method]]></name>
-<configKey>W0222</configKey>
-<description>
-<![CDATA[Used when a method signature is different than in the implemented interface orin an overridden method.]]>
-</description>
-</rule>
-<rule>
-<key>W0223</key>
-<name><![CDATA[Method %r is abstract in class %r but is not overridden]]></name>
-<configKey>W0223</configKey>
-<description>
-<![CDATA[Used when an abstract method (i.e. raise NotImplementedError) is notoverridden in concrete class.]]>
-</description>
-</rule>
-<rule>
-<key>W0231</key>
-<name><![CDATA[__init__ method from base class %r is not called]]></name>
-<configKey>W0231</configKey>
-<description>
-<![CDATA[Used when an ancestor class method has an __init__ method which is not calledby a derived class.]]>
-</description>
-</rule>
-<rule>
-<key>W0232</key>
-<name><![CDATA[Class has no __init__ method]]></name>
-<configKey>W0232</configKey>
-<description>
-<![CDATA[Used when a class has no __init__ method, neither its parent classes.]]>
-</description>
-</rule>
-<rule>
-<key>W0233</key>
-<name><![CDATA[__init__ method from a non direct base class %r is called]]></name>
-<configKey>W0233</configKey>
-<description>
-<![CDATA[Used when an __init__ method is called on a class which is not in the directancestors for the analysed class.]]>
-</description>
-</rule>
-<rule>
-<key>W0234</key>
-<name><![CDATA[__iter__ returns non-iterator]]></name>
-<configKey>W0234</configKey>
-<description>
-<![CDATA[Used when an __iter__ method returns something which is not an iterable (i.e.has no `next` method)]]>
-</description>
-</rule>
-<rule>
-<key>W0301</key>
-<name><![CDATA[Unnecessary semicolon]]></name>
-<configKey>W0301</configKey>
-<description>
-<![CDATA[Used when a statement is ended by a semi-colon (";"), which isn't necessary(that's python, not C ;).]]>
-</description>
-</rule>
-<rule>
-<key>W0311</key>
-<name><![CDATA[Bad indentation. Found %s %s, expected %s]]></name>
-<configKey>W0311</configKey>
-<description>
-<![CDATA[Used when an unexpected number of indentation's tabulations or spaces has beenfound.]]>
-</description>
-</rule>
-<rule>
-<key>W0312</key>
-<name><![CDATA[Found indentation with %ss instead of %ss]]></name>
-<configKey>W0312</configKey>
-<description>
-<![CDATA[Used when there are some mixed tabs and spaces in a module.]]>
-</description>
-</rule>
-<rule>
-<key>W0331</key>
-<name><![CDATA[Use of the <> operator]]></name>
-<configKey>W0331</configKey>
-<description>
-<![CDATA[Used when the deprecated "<>" operator is used instead of "!=".]]>
-</description>
-</rule>
-<rule>
-<key>W0332</key>
-<name><![CDATA[Use of "l" as long integer identifier]]></name>
-<configKey>W0332</configKey>
-<description>
-<![CDATA[Used when a lower case "l" is used to mark a long integer. You should use aupper case "L" since the letter "l" looks too much like the digit "1"]]>
-</description>
-</rule>
-<rule>
-<key>W0333</key>
-<name><![CDATA[Use of the `` operator]]></name>
-<configKey>W0333</configKey>
-<description>
-<![CDATA[Used when the deprecated "``" (backtick) operator is used instead of the str()function.]]>
-</description>
-</rule>
-<rule>
-<key>W0401</key>
-<name><![CDATA[Wildcard import %s]]></name>
-<configKey>W0401</configKey>
-<description>
-<![CDATA[Used when `from module import *` is detected.]]>
-</description>
-</rule>
-<rule>
-<key>W0402</key>
-<name><![CDATA[Uses of a deprecated module %r]]></name>
-<configKey>W0402</configKey>
-<description>
-<![CDATA[Used a module marked as deprecated is imported.]]>
-</description>
-</rule>
-<rule>
-<key>W0403</key>
-<name><![CDATA[Relative import %r, should be %r]]></name>
-<configKey>W0403</configKey>
-<description>
-<![CDATA[Used when an import relative to the package directory is detected.]]>
-</description>
-</rule>
-<rule>
-<key>W0404</key>
-<name><![CDATA[Reimport %r (imported line %s)]]></name>
-<configKey>W0404</configKey>
-<description>
-<![CDATA[Used when a module is reimported multiple times.]]>
-</description>
-</rule>
-<rule>
-<key>W0406</key>
-<name><![CDATA[Module import itself]]></name>
-<configKey>W0406</configKey>
-<description>
-<![CDATA[Used when a module is importing itself.]]>
-</description>
-</rule>
-<rule>
-<key>W0410</key>
-<name><![CDATA[__future__ import is not the first non docstring statement]]></name>
-<configKey>W0410</configKey>
-<description>
-<![CDATA[Python 2.5 and greater require __future__ import to be the first non docstringstatement in the module. This message can't be emitted when using Python >=3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W0511</key>
-<name><![CDATA[]]></name>
-<configKey>W0511</configKey>
-<description>
-<![CDATA[Used when a warning note as FIXME or XXX is detected.]]>
-</description>
-</rule>
-<rule>
-<key>W0512</key>
-<name><![CDATA[Cannot decode using encoding "%s", unexpected byte at position %d]]></name>
-<configKey>W0512</configKey>
-<description>
-<![CDATA[Used when a source line cannot be decoded using the specified source fileencoding. This message can't be emitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W0601</key>
-<name><![CDATA[Global variable %r undefined at the module level]]></name>
-<configKey>W0601</configKey>
-<description>
-<![CDATA[Used when a variable is defined through the "global" statement but thevariable is not defined in the module scope.]]>
-</description>
-</rule>
-<rule>
-<key>W0602</key>
-<name><![CDATA[Using global for %r but no assignment is done]]></name>
-<configKey>W0602</configKey>
-<description>
-<![CDATA[Used when a variable is defined through the "global" statement but noassignment to this variable is done.]]>
-</description>
-</rule>
-<rule>
-<key>W0603</key>
-<name><![CDATA[Using the global statement]]></name>
-<configKey>W0603</configKey>
-<description>
-<![CDATA[Used when you use the "global" statement to update a global variable. PyLintjust try to discourage this usage. That doesn't mean you can not use it !]]>
-</description>
-</rule>
-<rule>
-<key>W0604</key>
-<name><![CDATA[Using the global statement at the module level]]></name>
-<configKey>W0604</configKey>
-<description>
-<![CDATA[Used when you use the "global" statement at the module level since it has noeffect]]>
-</description>
-</rule>
-<rule>
-<key>W0611</key>
-<name><![CDATA[Unused import %s]]></name>
-<configKey>W0611</configKey>
-<description>
-<![CDATA[Used when an imported module or variable is not used.]]>
-</description>
-</rule>
-<rule>
-<key>W0612</key>
-<name><![CDATA[Unused variable %r]]></name>
-<configKey>W0612</configKey>
-<description>
-<![CDATA[Used when a variable is defined but not used.]]>
-</description>
-</rule>
-<rule>
-<key>W0613</key>
-<name><![CDATA[Unused argument %r]]></name>
-<configKey>W0613</configKey>
-<description>
-<![CDATA[Used when a function or method argument is not used.]]>
-</description>
-</rule>
-<rule>
-<key>W0614</key>
-<name><![CDATA[Unused import %s from wildcard import]]></name>
-<configKey>W0614</configKey>
-<description>
-<![CDATA[Used when an imported module or variable is not used from a 'from X import *'style import.]]>
-</description>
-</rule>
-<rule>
-<key>W0621</key>
-<name><![CDATA[Redefining name %r from outer scope (line %s)]]></name>
-<configKey>W0621</configKey>
-<description>
-<![CDATA[Used when a variable's name hide a name defined in the outer scope.]]>
-</description>
-</rule>
-<rule>
-<key>W0622</key>
-<name><![CDATA[Redefining built-in %r]]></name>
-<configKey>W0622</configKey>
-<description>
-<![CDATA[Used when a variable or function override a built-in.]]>
-</description>
-</rule>
-<rule>
-<key>W0623</key>
-<name><![CDATA[Redefining name %r from %s in exception handler]]></name>
-<configKey>W0623</configKey>
-<description>
-<![CDATA[Used when an exception handler assigns the exception to an existing name]]>
-</description>
-</rule>
-<rule>
-<key>W0631</key>
-<name><![CDATA[Using possibly undefined loop variable %r]]></name>
-<configKey>W0631</configKey>
-<description>
-<![CDATA[Used when an loop variable (i.e. defined by a for loop or a list comprehensionor a generator expression) is used outside the loop.]]>
-</description>
-</rule>
-<rule>
-<key>W0632</key>
-<name><![CDATA[Possible unbalanced tuple unpacking with sequence%s: left side has %d label(s), right side has %d value(s)]]></name>
-<configKey>W0632</configKey>
-<description>
-<![CDATA[Used when there is an unbalanced tuple unpacking in assignment]]>
-</description>
-</rule>
-<rule>
-<key>W0633</key>
-<name><![CDATA[Attempting to unpack a non-sequence%s]]></name>
-<configKey>W0633</configKey>
-<description>
-<![CDATA[Used when something which is not a sequence is used in an unpack assignment]]>
-</description>
-</rule>
-<rule>
-<key>W0640</key>
-<name><![CDATA[Cell variable %s defined in loop]]></name>
-<configKey>W0640</configKey>
-<description>
-<![CDATA[A variable used in a closure is defined in a loop. This will result in allclosures using the same value for the closed-over variable.]]>
-</description>
-</rule>
-<rule>
-<key>W0701</key>
-<name><![CDATA[Raising a string exception]]></name>
-<configKey>W0701</configKey>
-<description>
-<![CDATA[Used when a string exception is raised.]]>
-</description>
-</rule>
-<rule>
-<key>W0702</key>
-<name><![CDATA[No exception type(s) specified]]></name>
-<configKey>W0702</configKey>
-<description>
-<![CDATA[Used when an except clause doesn't specify exceptions type to catch.]]>
-</description>
-</rule>
-<rule>
-<key>W0703</key>
-<name><![CDATA[Catching too general exception %s]]></name>
-<configKey>W0703</configKey>
-<description>
-<![CDATA[Used when an except catches a too general exception, possibly buryingunrelated errors.]]>
-</description>
-</rule>
-<rule>
-<key>W0704</key>
-<name><![CDATA[Except doesn't do anything]]></name>
-<configKey>W0704</configKey>
-<description>
-<![CDATA[Used when an except clause does nothing but "pass" and there is no "else"clause.]]>
-</description>
-</rule>
-<rule>
-<key>W0710</key>
-<name><![CDATA[Exception doesn't inherit from standard "Exception" class]]></name>
-<configKey>W0710</configKey>
-<description>
-<![CDATA[Used when a custom exception class is raised but doesn't inherit from thebuiltin "Exception" class. This message can't be emitted when using Python >=3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W0711</key>
-<name><![CDATA[Exception to catch is the result of a binary "%s" operation]]></name>
-<configKey>W0711</configKey>
-<description>
-<![CDATA[Used when the exception to catch is of the form "except A or B:". If intendingto catch multiple, rewrite as "except (A, B):"]]>
-</description>
-</rule>
-<rule>
-<key>W0712</key>
-<name><![CDATA[Implicit unpacking of exceptions is not supported in Python 3]]></name>
-<configKey>W0712</configKey>
-<description>
-<![CDATA[Python3 will not allow implicit unpacking of exceptions in except clauses. Seehttp://www.python.org/dev/peps/pep-3110/ This message can't be emitted whenusing Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W0713</key>
-<name><![CDATA[Indexing exceptions will not work on Python 3]]></name>
-<configKey>W0713</configKey>
-<description>
-<![CDATA[Indexing exceptions will not work on Python 3. Use `exception.args[index]`instead. This message can't be emitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W1001</key>
-<name><![CDATA[Use of "property" on an old style class]]></name>
-<configKey>W1001</configKey>
-<description>
-<![CDATA[Used when PyLint detect the use of the builtin "property" on an old styleclass while this is relying on new style classes features. This message can'tbe emitted when using Python >= 3.0.]]>
-</description>
-</rule>
-<rule>
-<key>W1111</key>
-<name><![CDATA[Assigning to function call which only returns None]]></name>
-<configKey>W1111</configKey>
-<description>
-<![CDATA[Used when an assignment is done on a function call but the inferred functionreturns nothing but None.]]>
-</description>
-</rule>
-<rule>
-<key>W1201</key>
-<name><![CDATA[Specify string format arguments as logging function parameters]]></name>
-<configKey>W1201</configKey>
-<description>
-<![CDATA[Used when a logging statement has a call form of "logging.<loggingmethod>(format_string % (format_args...))". Such calls should leave stringinterpolation to the logging method itself and be written "logging.<loggingmethod>(format_string, format_args...)" so that the program may avoidincurring the cost of the interpolation in those cases in which no messagewill be logged. For more, see http://www.python.org/dev/peps/pep-0282/.]]>
-</description>
-</rule>
-<rule>
-<key>W1300</key>
-<name><![CDATA[Format string dictionary key should be a string, not %s]]></name>
-<configKey>W1300</configKey>
-<description>
-<![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary whose keys are not all strings.]]>
-</description>
-</rule>
-<rule>
-<key>W1301</key>
-<name><![CDATA[Unused key %r in format string dictionary]]></name>
-<configKey>W1301</configKey>
-<description>
-<![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that conWtains keys not required by the format string.]]>
-</description>
-</rule>
-<rule>
-<key>W1401</key>
-<name><![CDATA[Anomalous backslash in string: '%s'. String constant might be missing an r prefix.]]></name>
-<configKey>W1401</configKey>
-<description>
-<![CDATA[Used when a backslash is in a literal string but not as an escape.]]>
-</description>
-</rule>
-<rule>
-<key>W1402</key>
-<name><![CDATA[Anomalous Unicode escape in byte string: '%s'. String constant might be missing an r or u prefix.]]></name>
-<configKey>W1402</configKey>
-<description>
-<![CDATA[Used when an escape like \u is encountered in a byte string where it has noeffect.]]>
-</description>
-</rule>
-<rule>
-<key>W1501</key>
-<name><![CDATA["%s" is not a valid mode for open.]]></name>
-<configKey>W1501</configKey>
-<description>
-<![CDATA[Python supports: r, w, a modes with b, +, and U options. Seehttp://docs.python.org/2/library/functions.html#open]]>
-</description>
-</rule>
+    <rule>
+        <key>C0102</key>
+        <name><![CDATA[Black listed name "%s"]]></name>
+        <configKey>C0102</configKey>
+        <description>
+            <![CDATA[Used when the name is listed in the black list (unauthorized names).]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0103</key>
+        <name><![CDATA[%s name "%s" doesn't conform to %s]]></name>
+        <configKey>C0103</configKey>
+        <description>
+            <![CDATA[Used when the name doesn't conform to naming rules associated to its type(constant, variable, class...).]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0111</key>
+        <name><![CDATA[Missing %s docstring]]></name>
+        <configKey>C0111</configKey>
+        <description>
+            <![CDATA[Used when a module, function, class or method has no docstring.Some specialmethods like __init__ doesn't necessary require a docstring.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0112</key>
+        <name><![CDATA[Empty %s docstring]]></name>
+        <configKey>C0112</configKey>
+        <description>
+            <![CDATA[Used when a module, function, class or method has an empty docstring (it wouldbe too easy ;).]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0113</key>
+        <name><![CDATA[Consider changing "%s" to "%s"]]></name>
+        <configKey>C0113</configKey>
+        <description>
+            <![CDATA[Used when a boolean expression contains an unneeded negation.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0121</key>
+        <name><![CDATA[Comparison to %s should be %s]]></name>
+        <configKey>C0121</configKey>
+        <description>
+            <![CDATA[Used when an expression is compared to singleton values like True, False orNone.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0122</key>
+        <name><![CDATA[Comparison should be %s]]></name>
+        <configKey>C0122</configKey>
+        <description>
+            <![CDATA[Used when the constant is placed on the left side of a comparison. It isusually clearer in intent to place it in the right hand side of thecomparison.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0123</key>
+        <name><![CDATA[Using type() instead of isinstance() for a typecheck.]]></name>
+        <configKey>C0123</configKey>
+        <description>
+            <![CDATA[The idiomatic way to perform an explicit typecheck in Python is to useisinstance(x, Y) rather than type(x) == Y, type(x) is Y. Though there areunusual situations where these give different results.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0200</key>
+        <name><![CDATA[Consider using enumerate instead of iterating with range and len]]></name>
+        <configKey>C0200</configKey>
+        <description>
+            <![CDATA[Emitted when code that iterates with range and len is encountered. Such codecan be simplified by using the enumerate builtin.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0201</key>
+        <name><![CDATA[Consider iterating the dictionary directly instead of calling .keys()]]></name>
+        <configKey>C0201</configKey>
+        <description>
+            <![CDATA[Emitted when the keys of a dictionary are iterated through the .keys() method.It is enough to just iterate through the dictionary itself, as in "for key indictionary".]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0202</key>
+        <name><![CDATA[Class method %s should have %s as first argument]]></name>
+        <configKey>C0202</configKey>
+        <description>
+            <![CDATA[Used when a class method has a first argument named differently than the valuespecified in valid-classmethod-first-arg option (default to "cls"),recommended to easily differentiate them from regular instance methods.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0203</key>
+        <name><![CDATA[Metaclass method %s should have %s as first argument]]></name>
+        <configKey>C0203</configKey>
+        <description>
+            <![CDATA[Used when a metaclass method has a first argument named differently than thevalue specified in valid-classmethod-first-arg option (default to "cls"),recommended to easily differentiate them from regular instance methods.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0204</key>
+        <name><![CDATA[Metaclass class method %s should have %s as first argument]]></name>
+        <configKey>C0204</configKey>
+        <description>
+            <![CDATA[Used when a metaclass class method has a first argument named differently thanthe value specified in valid-metaclass-classmethod-first-arg option (defaultto "mcs"), recommended to easily differentiate them from regular instancemethods.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0205</key>
+        <name><![CDATA[Class __slots__ should be a non-string iterable]]></name>
+        <configKey>C0205</configKey>
+        <description>
+            <![CDATA[Used when a class __slots__ is a simple string, rather than an iterable.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0301</key>
+        <name><![CDATA[Line too long (%s/%s)]]></name>
+        <configKey>C0301</configKey>
+        <description>
+            <![CDATA[Used when a line is longer than a given number of characters.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0302</key>
+        <name><![CDATA[Too many lines in module (%s/%s)]]></name>
+        <configKey>C0302</configKey>
+        <description>
+            <![CDATA[Used when a module has too much lines, reducing its readability.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0303</key>
+        <name><![CDATA[Trailing whitespace]]></name>
+        <configKey>C0303</configKey>
+        <description>
+            <![CDATA[Used when there is whitespace between the end of a line and the newline.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0304</key>
+        <name><![CDATA[Final newline missing]]></name>
+        <configKey>C0304</configKey>
+        <description>
+            <![CDATA[Used when the last line in a file is missing a newline.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0305</key>
+        <name><![CDATA[Trailing newlines]]></name>
+        <configKey>C0305</configKey>
+        <description>
+            <![CDATA[Used when there are trailing blank lines in a file.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0321</key>
+        <name><![CDATA[More than one statement on a single line]]></name>
+        <configKey>C0321</configKey>
+        <description>
+            <![CDATA[Used when more than on statement are found on the same line.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0325</key>
+        <name><![CDATA[Unnecessary parens after %r keyword]]></name>
+        <configKey>C0325</configKey>
+        <description>
+            <![CDATA[Used when a single item in parentheses follows an if, for, or other keyword.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>C0326</key>
+        <name><![CDATA[%s space %s %s %s]]></name>
+        <configKey>C0326</configKey>
+        <description>
+            <![CDATA[Used when a wrong number of spaces is used around an operator, bracket orblock opener.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0327</key>
+        <name><![CDATA[Mixed line endings LF and CRLF]]></name>
+        <configKey>C0327</configKey>
+        <description>
+            <![CDATA[Used when there are mixed (LF and CRLF) newline signs in a file.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0328</key>
+        <name><![CDATA[Unexpected line ending format. There is '%s' while it should be '%s'.]]></name>
+        <configKey>C0328</configKey>
+        <description>
+            <![CDATA[Used when there is different newline than expected.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0330</key>
+        <name><![CDATA[Wrong %s indentation%s%s.]]></name>
+        <configKey>C0330</configKey>
+        <description>
+            <![CDATA[TODO]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0401</key>
+        <name><![CDATA[Wrong spelling of a word '%s' in a comment:]]></name>
+        <configKey>C0401</configKey>
+        <description>
+            <![CDATA[Used when a word in comment is not spelled correctly.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0402</key>
+        <name><![CDATA[Wrong spelling of a word '%s' in a docstring:]]></name>
+        <configKey>C0402</configKey>
+        <description>
+            <![CDATA[Used when a word in docstring is not spelled correctly.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0403</key>
+        <name><![CDATA[Invalid characters %r in a docstring]]></name>
+        <configKey>C0403</configKey>
+        <description>
+            <![CDATA[Used when a word in docstring cannot be checked by enchant.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0410</key>
+        <name><![CDATA[Multiple imports on one line (%s)]]></name>
+        <configKey>C0410</configKey>
+        <description>
+            <![CDATA[Used when import statement importing multiple modules is detected.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0411</key>
+        <name><![CDATA[%s should be placed before %s]]></name>
+        <configKey>C0411</configKey>
+        <description>
+            <![CDATA[Used when PEP8 import order is not respected (standard imports first, thenthird-party libraries, then local imports)]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0412</key>
+        <name><![CDATA[Imports from package %s are not grouped]]></name>
+        <configKey>C0412</configKey>
+        <description>
+            <![CDATA[Used when imports are not grouped by packages]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C0413</key>
+        <name><![CDATA[Import "%s" should be placed at the top of the module]]></name>
+        <configKey>C0413</configKey>
+        <description>
+            <![CDATA[Used when code and imports are mixed]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C1001</key>
+        <name><![CDATA[Old-style class defined.]]></name>
+        <configKey>C1001</configKey>
+        <description>
+            <![CDATA[Used when a class is defined that does not inherit from another class and doesnot inherit explicitly from "object". This message can't be emitted when usingPython >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>C1801</key>
+        <name><![CDATA[Do not use `len(SEQUENCE)` to determine if a sequence is empty]]></name>
+        <configKey>C1801</configKey>
+        <description>
+            <![CDATA[Used when Pylint detects that len(sequence) is being used inside a conditionto determine if a sequence is empty. Instead of comparing the length to 0,rely on the fact that empty sequences are false.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>E0001</key>
+        <name><![CDATA[]]></name>
+        <configKey>E0001</configKey>
+        <description>
+            <![CDATA[Used when a syntax error is raised for a module.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>E0011</key>
+        <name><![CDATA[Unrecognized file option %r]]></name>
+        <configKey>E0011</configKey>
+        <description>
+            <![CDATA[Used when an unknown inline option is encountered.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0012</key>
+        <name><![CDATA[Bad option value %r]]></name>
+        <configKey>E0012</configKey>
+        <description>
+            <![CDATA[Used when a bad value for an inline option is encountered.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0100</key>
+        <name><![CDATA[__init__ method is a generator]]></name>
+        <configKey>E0100</configKey>
+        <description>
+            <![CDATA[Used when the special class method __init__ is turned into a generator by ayield in its body.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0101</key>
+        <name><![CDATA[Explicit return in __init__]]></name>
+        <configKey>E0101</configKey>
+        <description>
+            <![CDATA[Used when the special class method __init__ has an explicit return value.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0102</key>
+        <name><![CDATA[%s already defined line %s]]></name>
+        <configKey>E0102</configKey>
+        <description>
+            <![CDATA[Used when a function / class / method is redefined.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0103</key>
+        <name><![CDATA[%r not properly in loop]]></name>
+        <configKey>E0103</configKey>
+        <description>
+            <![CDATA[Used when break or continue keywords are used outside a loop.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0104</key>
+        <name><![CDATA[Return outside function]]></name>
+        <configKey>E0104</configKey>
+        <description>
+            <![CDATA[Used when a "return" statement is found outside a function or method.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0105</key>
+        <name><![CDATA[Yield outside function]]></name>
+        <configKey>E0105</configKey>
+        <description>
+            <![CDATA[Used when a "yield" statement is found outside a function or method.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0106</key>
+        <name><![CDATA[Return with argument inside generator]]></name>
+        <configKey>E0106</configKey>
+        <description>
+            <![CDATA[Used when a "return" statement with an argument is found outside in agenerator function or method (e.g. with some "yield" statements). This messagecan't be emitted when using Python >= 3.3.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0107</key>
+        <name><![CDATA[Use of the non-existent %s operator]]></name>
+        <configKey>E0107</configKey>
+        <description>
+            <![CDATA[Used when you attempt to use the C-style pre-increment orpre-decrementoperator -- and ++, which doesn't exist in Python.]]>
+        </description>
+        <priority>MAJOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>E0108</key>
+        <name><![CDATA[Duplicate argument name %s in function definition]]></name>
+        <configKey>E0108</configKey>
+        <description>
+            <![CDATA[Duplicate argument names in function definitions are syntax errors.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0110</key>
+        <name><![CDATA[Abstract class %r with abstract methods instantiated]]></name>
+        <configKey>E0110</configKey>
+        <description>
+            <![CDATA[Used when an abstract class with `abc.ABCMeta` as metaclass has abstractmethods and is instantiated.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0111</key>
+        <name><![CDATA[The first reversed() argument is not a sequence]]></name>
+        <configKey>E0111</configKey>
+        <description>
+            <![CDATA[Used when the first argument to reversed() builtin isn't a sequence (does notimplement __reversed__, nor __getitem__ and __len__]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0116</key>
+        <name><![CDATA['continue' not supported inside 'finally' clause]]></name>
+        <configKey>E0116</configKey>
+        <description>
+            <![CDATA[Emitted when the `continue` keyword is found inside a finally clause, which isa SyntaxError.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0202</key>
+        <name><![CDATA[An attribute defined in %s line %s hides this method]]></name>
+        <configKey>E0202</configKey>
+        <description>
+            <![CDATA[Used when a class defines a method which is hidden by an instance attributefrom an ancestor class or set by some client code.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0203</key>
+        <name><![CDATA[Access to member %r before its definition line %s]]></name>
+        <configKey>E0203</configKey>
+        <description>
+            <![CDATA[Used when an instance member is accessed before it's actually assigned.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0211</key>
+        <name><![CDATA[Method has no argument]]></name>
+        <configKey>E0211</configKey>
+        <description>
+            <![CDATA[Used when a method which should have the bound instance as first argument hasno argument defined.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0213</key>
+        <name><![CDATA[Method should have "self" as first argument]]></name>
+        <configKey>E0213</configKey>
+        <description>
+            <![CDATA[Used when a method has an attribute different the "self" as first argument.This is considered as an error since this is a so common convention that youshouldn't break it!]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0236</key>
+        <name><![CDATA[Invalid object %r in __slots__, must contain only non empty strings]]></name>
+        <configKey>E0236</configKey>
+        <description>
+            <![CDATA[Used when an invalid (non-string) object occurs in __slots__.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0237</key>
+        <name><![CDATA[Assigning to attribute %r not defined in class slots]]></name>
+        <configKey>E0237</configKey>
+        <description>
+            <![CDATA[Used when assigning to an attribute not defined in the class slots.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0238</key>
+        <name><![CDATA[Invalid __slots__ object]]></name>
+        <configKey>E0238</configKey>
+        <description>
+            <![CDATA[Used when an invalid __slots__ is found in class. Only a string, an iterableor a sequence is permitted.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0239</key>
+        <name><![CDATA[Inheriting %r, which is not a class.]]></name>
+        <configKey>E0239</configKey>
+        <description>
+            <![CDATA[Used when a class inherits from something which is not a class.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0240</key>
+        <name><![CDATA[Inconsistent method resolution order for class %r]]></name>
+        <configKey>E0240</configKey>
+        <description>
+            <![CDATA[Used when a class has an inconsistent method resolution order.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0241</key>
+        <name><![CDATA[Duplicate bases for class %r]]></name>
+        <configKey>E0241</configKey>
+        <description>
+            <![CDATA[Used when a class has duplicate bases.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0301</key>
+        <name><![CDATA[__iter__ returns non-iterator]]></name>
+        <configKey>E0301</configKey>
+        <description>
+            <![CDATA[Used when an __iter__ method returns something which is not an iterable (i.e.has no `next` method)]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0302</key>
+        <name><![CDATA[The special method %r expects %s param(s), %d %s given]]></name>
+        <configKey>E0302</configKey>
+        <description>
+            <![CDATA[Emitted when a special method was defined with an invalid number ofparameters. If it has too few or too many, it might not work at all.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0303</key>
+        <name><![CDATA[__len__ does not return non-negative integer]]></name>
+        <configKey>E0303</configKey>
+        <description>
+            <![CDATA[Used when an __len__ method returns something which is not a non-negativeinteger]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0401</key>
+        <name><![CDATA[Unable to import %s]]></name>
+        <configKey>E0401</configKey>
+        <description>
+            <![CDATA[Used when pylint has been unable to import a module.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0402</key>
+        <name><![CDATA[Attempted relative import beyond top-level package]]></name>
+        <configKey>E0402</configKey>
+        <description>
+            <![CDATA[Used when a relative import tries to access too many levels in the currentpackage.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0601</key>
+        <name><![CDATA[Using variable %r before assignment]]></name>
+        <configKey>E0601</configKey>
+        <description>
+            <![CDATA[Used when a local variable is accessed before it's assignment.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0602</key>
+        <name><![CDATA[Undefined variable %r]]></name>
+        <configKey>E0602</configKey>
+        <description>
+            <![CDATA[Used when an undefined variable is accessed.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0603</key>
+        <name><![CDATA[Undefined variable name %r in __all__]]></name>
+        <configKey>E0603</configKey>
+        <description>
+            <![CDATA[Used when an undefined variable name is referenced in __all__.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0604</key>
+        <name><![CDATA[Invalid object %r in __all__, must contain only strings]]></name>
+        <configKey>E0604</configKey>
+        <description>
+            <![CDATA[Used when an invalid (non-string) object occurs in __all__.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0611</key>
+        <name><![CDATA[No name %r in module %r]]></name>
+        <configKey>E0611</configKey>
+        <description>
+            <![CDATA[Used when a name cannot be found in a module.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0632</key>
+        <name>
+            <![CDATA[Possible unbalanced tuple unpacking with sequence%s: left side has %d label(s), right side has %d value(s)]]></name>
+        <configKey>E0632</configKey>
+        <description>
+            <![CDATA[Used when there is an unbalanced tuple unpacking in assignment]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0633</key>
+        <name><![CDATA[Attempting to unpack a non-sequence%s]]></name>
+        <configKey>E0633</configKey>
+        <description>
+            <![CDATA[Used when something which is not a sequence is used in an unpack assignment]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0701</key>
+        <name><![CDATA[Bad except clauses order (%s)]]></name>
+        <configKey>E0701</configKey>
+        <description>
+            <![CDATA[Used when except clauses are not in the correct order (from the more specificto the more generic). If you don't fix the order, some exceptions may not becaught by the most specific handler.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0702</key>
+        <name><![CDATA[Raising %s while only classes or instances are allowed]]></name>
+        <configKey>E0702</configKey>
+        <description>
+            <![CDATA[Used when something which is neither a class, an instance or a string israised (i.e. a `TypeError` will be raised).]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0704</key>
+        <name><![CDATA[The raise statement is not inside an except clause]]></name>
+        <configKey>E0704</configKey>
+        <description>
+            <![CDATA[Used when a bare raise is not used inside an except clause. This generates anerror, since there are no active exceptions to be reraised. An exception tothis rule is represented by a bare raise inside a finally clause, which mightwork, as long as an exception is raised inside the try block, but it isnevertheless a code smell that must not be relied upon.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0710</key>
+        <name><![CDATA[Raising a new style class which doesn't inherit from BaseException]]></name>
+        <configKey>E0710</configKey>
+        <description>
+            <![CDATA[Used when a new style class which doesn't inherit from BaseException israised.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0711</key>
+        <name><![CDATA[NotImplemented raised - should raise NotImplementedError]]></name>
+        <configKey>E0711</configKey>
+        <description>
+            <![CDATA[Used when NotImplemented is raised instead of NotImplementedError]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E0712</key>
+        <name><![CDATA[Catching an exception which doesn't inherit from Exception: %s]]></name>
+        <configKey>E0712</configKey>
+        <description>
+            <![CDATA[Used when a class which doesn't inherit from Exception is used as an exceptionin an except clause.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1001</key>
+        <name><![CDATA[Use of __slots__ on an old style class]]></name>
+        <configKey>E1001</configKey>
+        <description>
+            <![CDATA[Used when an old style class uses the __slots__ attribute. This message can'tbe emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1002</key>
+        <name><![CDATA[Use of super on an old style class]]></name>
+        <configKey>E1002</configKey>
+        <description>
+            <![CDATA[Used when an old style class uses the super builtin. This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1003</key>
+        <name><![CDATA[Bad first argument %r given to super()]]></name>
+        <configKey>E1003</configKey>
+        <description>
+            <![CDATA[Used when another argument than the current class is given as first argumentof the super builtin.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1004</key>
+        <name><![CDATA[Missing argument to super()]]></name>
+        <configKey>E1004</configKey>
+        <description>
+            <![CDATA[Used when the super builtin didn't receive an argument. This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1101</key>
+        <name><![CDATA[%s %r has no %r member%s]]></name>
+        <configKey>E1101</configKey>
+        <description>
+            <![CDATA[Used when a variable is accessed for an unexistent member.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1102</key>
+        <name><![CDATA[%s is not callable]]></name>
+        <configKey>E1102</configKey>
+        <description>
+            <![CDATA[Used when an object being called has been inferred to a non callable object]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1111</key>
+        <name><![CDATA[Assigning to function call which doesn't return]]></name>
+        <configKey>E1111</configKey>
+        <description>
+            <![CDATA[Used when an assignment is done on a function call but the inferred functiondoesn't return anything.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1120</key>
+        <name><![CDATA[No value for argument %s in %s call]]></name>
+        <configKey>E1120</configKey>
+        <description>
+            <![CDATA[Used when a function call passes too few arguments.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1121</key>
+        <name><![CDATA[Too many positional arguments for %s call]]></name>
+        <configKey>E1121</configKey>
+        <description>
+            <![CDATA[Used when a function call passes too many positional arguments.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1123</key>
+        <name><![CDATA[Unexpected keyword argument %r in %s call]]></name>
+        <configKey>E1123</configKey>
+        <description>
+            <![CDATA[Used when a function call passes a keyword argument that doesn't correspond toone of the function's parameter names.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1124</key>
+        <name><![CDATA[Argument %r passed by position and keyword in %s call]]></name>
+        <configKey>E1124</configKey>
+        <description>
+            <![CDATA[Used when a function call would result in assigning multiple values to afunction parameter, one value from a positional argument and one from akeyword argument.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1126</key>
+        <name><![CDATA[Sequence index is not an int, slice, or instance with __index__]]></name>
+        <configKey>E1126</configKey>
+        <description>
+            <![CDATA[Used when a sequence type is indexed with an invalid type. Valid types areints, slices, and objects with an __index__ method.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1127</key>
+        <name><![CDATA[Slice index is not an int, None, or instance with __index__]]></name>
+        <configKey>E1127</configKey>
+        <description>
+            <![CDATA[Used when a slice index is not an integer, None, or an object with an__index__ method.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1128</key>
+        <name><![CDATA[Assigning to function call which only returns None]]></name>
+        <configKey>E1128</configKey>
+        <description>
+            <![CDATA[Used when an assignment is done on a function call but the inferred functionreturns nothing but None.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1129</key>
+        <name><![CDATA[Context manager '%s' doesn't implement __enter__ and __exit__.]]></name>
+        <configKey>E1129</configKey>
+        <description>
+            <![CDATA[Used when an instance in a with statement doesn't implement the contextmanager protocol(__enter__/__exit__).]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1130</key>
+        <name><![CDATA[]]></name>
+        <configKey>E1130</configKey>
+        <description>
+            <![CDATA[Emitted when a unary operand is used on an object which does not support thistype of operation]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1131</key>
+        <name><![CDATA[]]></name>
+        <configKey>E1131</configKey>
+        <description>
+            <![CDATA[Emitted when a binary arithmetic operation between two operands is notsupported.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1132</key>
+        <name><![CDATA[Got multiple values for keyword argument %r in function call]]></name>
+        <configKey>E1132</configKey>
+        <description>
+            <![CDATA[Emitted when a function call got multiple values for a keyword.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1133</key>
+        <name><![CDATA[Non-iterable value %s is used in an iterating context]]></name>
+        <configKey>E1133</configKey>
+        <description>
+            <![CDATA[Used when a non-iterable value is used in place where iterable is expected]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1134</key>
+        <name><![CDATA[Non-mapping value %s is used in a mapping context]]></name>
+        <configKey>E1134</configKey>
+        <description>
+            <![CDATA[Used when a non-mapping value is used in place where mapping is expected]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1135</key>
+        <name><![CDATA[Value '%s' doesn't support membership test]]></name>
+        <configKey>E1135</configKey>
+        <description>
+            <![CDATA[Emitted when an instance in membership test expression doesn't implementmembership protocol (__contains__/__iter__/__getitem__)]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1136</key>
+        <name><![CDATA[Value '%s' is unsubscriptable]]></name>
+        <configKey>E1136</configKey>
+        <description>
+            <![CDATA[Emitted when a subscripted value doesn't support subscription(i.e. doesn'tdefine __getitem__ method)]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1137</key>
+        <name><![CDATA[%r does not support item assignment]]></name>
+        <configKey>E1137</configKey>
+        <description>
+            <![CDATA[Emitted when an object does not support item assignment (i.e. doesn't define__setitem__ method)]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1138</key>
+        <name><![CDATA[%r does not support item deletion]]></name>
+        <configKey>E1138</configKey>
+        <description>
+            <![CDATA[Emitted when an object does not support item deletion (i.e. doesn't define__delitem__ method)]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1139</key>
+        <name><![CDATA[Invalid metaclass %r used]]></name>
+        <configKey>E1139</configKey>
+        <description>
+            <![CDATA[Emitted whenever we can detect that a class is using, as a metaclass,something which might be invalid for using as a metaclass.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1200</key>
+        <name><![CDATA[Unsupported logging format character %r (%#02x) at index %d]]></name>
+        <configKey>E1200</configKey>
+        <description>
+            <![CDATA[Used when an unsupported format character is used in a logging statementformat string.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1201</key>
+        <name><![CDATA[Logging format string ends in middle of conversion specifier]]></name>
+        <configKey>E1201</configKey>
+        <description>
+            <![CDATA[Used when a logging statement format string terminates before the end of aconversion specifier.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1205</key>
+        <name><![CDATA[Too many arguments for logging format string]]></name>
+        <configKey>E1205</configKey>
+        <description>
+            <![CDATA[Used when a logging format string is given too many arguments.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1206</key>
+        <name><![CDATA[Not enough arguments for logging format string]]></name>
+        <configKey>E1206</configKey>
+        <description>
+            <![CDATA[Used when a logging format string is given too few arguments.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1300</key>
+        <name><![CDATA[Unsupported format character %r (%#02x) at index %d]]></name>
+        <configKey>E1300</configKey>
+        <description>
+            <![CDATA[Used when a unsupported format character is used in a format string.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1301</key>
+        <name><![CDATA[Format string ends in middle of conversion specifier]]></name>
+        <configKey>E1301</configKey>
+        <description>
+            <![CDATA[Used when a format string terminates before the end of a conversion specifier.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1302</key>
+        <name><![CDATA[Mixing named and unnamed conversion specifiers in format string]]></name>
+        <configKey>E1302</configKey>
+        <description>
+            <![CDATA[Used when a format string contains both named (e.g. '%(foo)d') and unnamed(e.g. '%d') conversion specifiers. This is also used when a named conversionspecifier contains * for the minimum field width and/or precision.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1303</key>
+        <name><![CDATA[Expected mapping for format string, not %s]]></name>
+        <configKey>E1303</configKey>
+        <description>
+            <![CDATA[Used when a format string that uses named conversion specifiers is used withan argument that is not a mapping.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1304</key>
+        <name><![CDATA[Missing key %r in format string dictionary]]></name>
+        <configKey>E1304</configKey>
+        <description>
+            <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that doesn't contain all the keys required by the format string.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1305</key>
+        <name><![CDATA[Too many arguments for format string]]></name>
+        <configKey>E1305</configKey>
+        <description>
+            <![CDATA[Used when a format string that uses unnamed conversion specifiers is given toomany arguments.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1306</key>
+        <name><![CDATA[Not enough arguments for format string]]></name>
+        <configKey>E1306</configKey>
+        <description>
+            <![CDATA[Used when a format string that uses unnamed conversion specifiers is given toofew arguments]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1310</key>
+        <name><![CDATA[Suspicious argument in %s.%s call]]></name>
+        <configKey>E1310</configKey>
+        <description>
+            <![CDATA[The argument to a str.{l,r,}strip call contains a duplicate character,]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1601</key>
+        <name><![CDATA[print statement used]]></name>
+        <configKey>E1601</configKey>
+        <description>
+            <![CDATA[Used when a print statement is used (`print` is a function in Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1602</key>
+        <name><![CDATA[Parameter unpacking specified]]></name>
+        <configKey>E1602</configKey>
+        <description>
+            <![CDATA[Used when parameter unpacking is specified for a function(Python 3 doesn'tallow it) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1603</key>
+        <name><![CDATA[Implicit unpacking of exceptions is not supported in Python 3]]></name>
+        <configKey>E1603</configKey>
+        <description>
+            <![CDATA[Python3 will not allow implicit unpacking of exceptions in except clauses. Seehttp://www.python.org/dev/peps/pep-3110/ This message can't be emitted whenusing Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1604</key>
+        <name><![CDATA[Use raise ErrorClass(args) instead of raise ErrorClass, args.]]></name>
+        <configKey>E1604</configKey>
+        <description>
+            <![CDATA[Used when the alternate raise syntax 'raise foo, bar' is used instead of'raise foo(bar)'. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1605</key>
+        <name><![CDATA[Use of the `` operator]]></name>
+        <configKey>E1605</configKey>
+        <description>
+            <![CDATA[Used when the deprecated "``" (backtick) operator is used instead of the str()function. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1606</key>
+        <name><![CDATA[Use of long suffix]]></name>
+        <configKey>E1606</configKey>
+        <description>
+            <![CDATA[Used when "l" or "L" is used to mark a long integer. This will not work inPython 3, since `int` and `long` types have merged. This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1607</key>
+        <name><![CDATA[Use of the <> operator]]></name>
+        <configKey>E1607</configKey>
+        <description>
+            <![CDATA[Used when the deprecated "<>" operator is used instead of "!=". This isremoved in Python 3. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1608</key>
+        <name><![CDATA[Use of old octal literal]]></name>
+        <configKey>E1608</configKey>
+        <description>
+            <![CDATA[Used when encountering the old octal syntax, removed in Python 3. To use thenew syntax, prepend 0o on the number. This message can't be emitted when usingPython >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1609</key>
+        <name><![CDATA[Import * only allowed at module level]]></name>
+        <configKey>E1609</configKey>
+        <description>
+            <![CDATA[Used when the import star syntax is used somewhere else than the module level.This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>E1610</key>
+        <name><![CDATA[Non-ascii bytes literals not supported in 3.x]]></name>
+        <configKey>E1610</configKey>
+        <description>
+            <![CDATA[Used when non-ascii bytes literals are found in a program. They are no longersupported in Python 3. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>F0001</key>
+        <name><![CDATA[]]></name>
+        <configKey>F0001</configKey>
+        <description>
+            <![CDATA[Used when an error occurred preventing the analysis of a module (unable tofind it for instance).]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>F0002</key>
+        <name><![CDATA[%s: %s]]></name>
+        <configKey>F0002</configKey>
+        <description>
+            <![CDATA[Used when an unexpected error occurred while building the Astroidrepresentation. This is usually accompanied by a traceback. Please report sucherrors !]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>F0010</key>
+        <name><![CDATA[error while code parsing: %s]]></name>
+        <configKey>F0010</configKey>
+        <description>
+            <![CDATA[Used when an exception occurred while building the Astroid representationwhich could be handled by astroid.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>F0202</key>
+        <name><![CDATA[Unable to check methods signature (%s / %s)]]></name>
+        <configKey>F0202</configKey>
+        <description>
+            <![CDATA[Used when Pylint has been unable to check methods signature compatibility foran unexpected reason. Please report this kind if you don't make sense of it.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>I0001</key>
+        <name><![CDATA[Unable to run raw checkers on built-in module %s]]></name>
+        <configKey>I0001</configKey>
+        <description>
+            <![CDATA[Used to inform that a built-in module has not been checked using the rawcheckers.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0010</key>
+        <name><![CDATA[Unable to consider inline option %r]]></name>
+        <configKey>I0010</configKey>
+        <description>
+            <![CDATA[Used when an inline option is either badly formatted or can't be used insidemodules.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0011</key>
+        <name><![CDATA[Locally disabling %s (%s)]]></name>
+        <configKey>I0011</configKey>
+        <description>
+            <![CDATA[Used when an inline option disables a message or a messages category.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0012</key>
+        <name><![CDATA[Locally enabling %s (%s)]]></name>
+        <configKey>I0012</configKey>
+        <description>
+            <![CDATA[Used when an inline option enables a message or a messages category.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0013</key>
+        <name><![CDATA[Ignoring entire file]]></name>
+        <configKey>I0013</configKey>
+        <description>
+            <![CDATA[Used to inform that the file will not be checked]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0020</key>
+        <name><![CDATA[Suppressed %s (from line %d)]]></name>
+        <configKey>I0020</configKey>
+        <description>
+            <![CDATA[A message was triggered on a line, but suppressed explicitly by a disable=comment in the file. This message is not generated for messages that areignored due to configuration settings.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0021</key>
+        <name><![CDATA[Useless suppression of %s]]></name>
+        <configKey>I0021</configKey>
+        <description>
+            <![CDATA[Reported when a message is explicitly disabled for a line or a block of code,but never triggered.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I0022</key>
+        <name><![CDATA[Pragma "%s" is deprecated, use "%s" instead]]></name>
+        <configKey>I0022</configKey>
+        <description>
+            <![CDATA[Some inline pylint options have been renamed or reworked, only the most recentform should be used. NOTE:skip-all is only available with pylint >= 0.26]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>I1101</key>
+        <name>
+            <![CDATA[%s %r has not %r member%s, but source is unavailable. Consider adding this module to extension-pkg-whitelist if you want to perform analysis based on run-time introspection of living objects.]]></name>
+        <configKey>I1101</configKey>
+        <description>
+            <![CDATA[Used when a variable is accessed for non-existent member of C extension. Dueto unavailability of source static analysis is impossible, but it may beperformed by introspecting living objects in run-time.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0123</key>
+        <name><![CDATA[Comparison to literal]]></name>
+        <configKey>R0123</configKey>
+        <description>
+            <![CDATA[Used when comparing an object to a literal, which is usually what you do notwant to do, since you can compare to a different literal than what wasexpected altogether.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0201</key>
+        <name><![CDATA[Method could be a function]]></name>
+        <configKey>R0201</configKey>
+        <description>
+            <![CDATA[Used when a method doesn't use its bound instance, and so could be written asa function.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>R0202</key>
+        <name><![CDATA[Consider using a decorator instead of calling classmethod]]></name>
+        <configKey>R0202</configKey>
+        <description>
+            <![CDATA[Used when a class method is defined without using the decorator syntax.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0203</key>
+        <name><![CDATA[Consider using a decorator instead of calling staticmethod]]></name>
+        <configKey>R0203</configKey>
+        <description>
+            <![CDATA[Used when a static method is defined without using the decorator syntax.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0401</key>
+        <name><![CDATA[Cyclic import (%s)]]></name>
+        <configKey>R0401</configKey>
+        <description>
+            <![CDATA[Used when a cyclic import between two or more modules is detected.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0801</key>
+        <name><![CDATA[Similar lines in %s files]]></name>
+        <configKey>R0801</configKey>
+        <description>
+            <![CDATA[Indicates that a set of similar lines has been detected among multiple file.This usually means that the code should be refactored to avoid thisduplication.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>R0901</key>
+        <name><![CDATA[Too many ancestors (%s/%s)]]></name>
+        <configKey>R0901</configKey>
+        <description>
+            <![CDATA[Used when class has too many parent classes, try to reduce this to get asimpler (and so easier to use) class.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0902</key>
+        <name><![CDATA[Too many instance attributes (%s/%s)]]></name>
+        <configKey>R0902</configKey>
+        <description>
+            <![CDATA[Used when class has too many instance attributes, try to reduce this to get asimpler (and so easier to use) class.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0903</key>
+        <name><![CDATA[Too few public methods (%s/%s)]]></name>
+        <configKey>R0903</configKey>
+        <description>
+            <![CDATA[Used when class has too few public methods, so be sure it's really worth it.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0904</key>
+        <name><![CDATA[Too many public methods (%s/%s)]]></name>
+        <configKey>R0904</configKey>
+        <description>
+            <![CDATA[Used when class has too many public methods, try to reduce this to get asimpler (and so easier to use) class.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0911</key>
+        <name><![CDATA[Too many return statements (%s/%s)]]></name>
+        <configKey>R0911</configKey>
+        <description>
+            <![CDATA[Used when a function or method has too many return statement, making it hardto follow.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>R0912</key>
+        <name><![CDATA[Too many branches (%s/%s)]]></name>
+        <configKey>R0912</configKey>
+        <description>
+            <![CDATA[Used when a function or method has too many branches, making it hard tofollow.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>R0913</key>
+        <name><![CDATA[Too many arguments (%s/%s)]]></name>
+        <configKey>R0913</configKey>
+        <description>
+            <![CDATA[Used when a function or method takes too many arguments.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>R0914</key>
+        <name><![CDATA[Too many local variables (%s/%s)]]></name>
+        <configKey>R0914</configKey>
+        <description>
+            <![CDATA[Used when a function or method has too many local variables.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0915</key>
+        <name><![CDATA[Too many statements (%s/%s)]]></name>
+        <configKey>R0915</configKey>
+        <description>
+            <![CDATA[Used when a function or method has too many statements. You should then splitit in smaller functions / methods.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R0916</key>
+        <name><![CDATA[Too many boolean expressions in if statement (%s/%s)]]></name>
+        <configKey>R0916</configKey>
+        <description>
+            <![CDATA[Used when a if statement contains too many boolean expressions]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1701</key>
+        <name><![CDATA[Consider merging these isinstance calls to isinstance(%s, (%s))]]></name>
+        <configKey>R1701</configKey>
+        <description>
+            <![CDATA[Used when multiple consecutive isinstance calls can be merged into one.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1702</key>
+        <name><![CDATA[Too many nested blocks (%s/%s)]]></name>
+        <configKey>R1702</configKey>
+        <description>
+            <![CDATA[Used when a function or a method has too many nested blocks. This makes thecode less understandable and maintainable.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1703</key>
+        <name><![CDATA[The if statement can be replaced with %s]]></name>
+        <configKey>R1703</configKey>
+        <description>
+            <![CDATA[Used when an if statement can be replaced with 'bool(test)'.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1704</key>
+        <name><![CDATA[Redefining argument with the local name %r]]></name>
+        <configKey>R1704</configKey>
+        <description>
+            <![CDATA[Used when a local name is redefining an argument, which might suggest apotential error. This is taken in account only for a handful of name bindingoperations, such as for iteration, with statement assignment and exceptionhandler assignment.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1705</key>
+        <name><![CDATA[Unnecessary "else" after "return"]]></name>
+        <configKey>R1705</configKey>
+        <description>
+            <![CDATA[Used in order to highlight an unnecessary block of code following an ifcontaining a return statement. As such, it will warn when it encounters anelse following a chain of ifs, all of them containing a return statement.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1706</key>
+        <name><![CDATA[Consider using ternary (%s)]]></name>
+        <configKey>R1706</configKey>
+        <description>
+            <![CDATA[Used when one of known pre-python 2.5 ternary syntax is used.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1709</key>
+        <name><![CDATA[Boolean expression may be simplified to %s]]></name>
+        <configKey>R1709</configKey>
+        <description>
+            <![CDATA[Emitted when redundant pre-python 2.5 ternary syntax is used.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>R1710</key>
+        <name>
+            <![CDATA[Either all return statements in a function should return an expression, or none of them should.]]></name>
+        <configKey>R1710</configKey>
+        <description>
+            <![CDATA[According to PEP8, if any return statement returns an expression, any returnstatements where no value is returned should explicitly state this as returnNone, and an explicit return statement should be present at the end of thefunction (if reachable)]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0101</key>
+        <name><![CDATA[Unreachable code]]></name>
+        <configKey>W0101</configKey>
+        <description>
+            <![CDATA[Used when there is some code behind a "return" or "raise" statement, whichwill never be accessed.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>W0102</key>
+        <name><![CDATA[Dangerous default value %s as argument]]></name>
+        <configKey>W0102</configKey>
+        <description>
+            <![CDATA[Used when a mutable value as list or dictionary is detected in a default valuefor an argument.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0104</key>
+        <name><![CDATA[Statement seems to have no effect]]></name>
+        <configKey>W0104</configKey>
+        <description>
+            <![CDATA[Used when a statement doesn't have (or at least seems to) any effect.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0105</key>
+        <name><![CDATA[String statement has no effect]]></name>
+        <configKey>W0105</configKey>
+        <description>
+            <![CDATA[Used when a string is used as a statement (which of course has no effect).This is a particular case of W0104 with its own message so you can easilydisable it if you're using those strings as documentation, instead ofcomments.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0106</key>
+        <name><![CDATA[Expression "%s" is assigned to nothing]]></name>
+        <configKey>W0106</configKey>
+        <description>
+            <![CDATA[Used when an expression that is not a function call is assigned to nothing.Probably something else was intended.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0107</key>
+        <name><![CDATA[Unnecessary pass statement]]></name>
+        <configKey>W0107</configKey>
+        <description>
+            <![CDATA[Used when a "pass" statement that can be avoided is encountered.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>W0108</key>
+        <name><![CDATA[Lambda may not be necessary]]></name>
+        <configKey>W0108</configKey>
+        <description>
+            <![CDATA[Used when the body of a lambda expression is a function call on the sameargument list as the lambda itself; such lambda expressions are in all but afew cases replaceable with the function being called in the body of thelambda.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0109</key>
+        <name><![CDATA[Duplicate key %r in dictionary]]></name>
+        <configKey>W0109</configKey>
+        <description>
+            <![CDATA[Used when a dictionary expression binds the same key multiple times.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0110</key>
+        <name><![CDATA[map/filter on lambda could be replaced by comprehension]]></name>
+        <configKey>W0110</configKey>
+        <description>
+            <![CDATA[Used when a lambda is the first argument to "map" or "filter". It could beclearer as a list comprehension or generator expression. This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0111</key>
+        <name><![CDATA[Name %s will become a keyword in Python %s]]></name>
+        <configKey>W0111</configKey>
+        <description>
+            <![CDATA[Used when assignment will become invalid in future Python release due tointroducing new keyword]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0120</key>
+        <name><![CDATA[Else clause on loop without a break statement]]></name>
+        <configKey>W0120</configKey>
+        <description>
+            <![CDATA[Loops should only have an else clause if they can exit early with a breakstatement, otherwise the statements under else should be on the same scope asthe loop itself.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0122</key>
+        <name><![CDATA[Use of exec]]></name>
+        <configKey>W0122</configKey>
+        <description>
+            <![CDATA[Used when you use the "exec" statement (function for Python 3), to discourageits usage. That doesn't mean you cannot use it !]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>W0123</key>
+        <name><![CDATA[Use of eval]]></name>
+        <configKey>W0123</configKey>
+        <description>
+            <![CDATA[Used when you use the "eval" function, to discourage its usage. Consider using`ast.literal_eval` for safely evaluating strings containing Python expressionsfrom untrusted sources.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0124</key>
+        <name><![CDATA[Following "as" with another context manager looks like a tuple.]]></name>
+        <configKey>W0124</configKey>
+        <description>
+            <![CDATA[Emitted when a `with` statement component returns multiple values and usesname binding with `as` only for a part of those values, as in with ctx() as a,b. This can be misleading, since it's not clear if the context manager returnsa tuple or if the node without a name binding is another context manager.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0125</key>
+        <name><![CDATA[Using a conditional statement with a constant value]]></name>
+        <configKey>W0125</configKey>
+        <description>
+            <![CDATA[Emitted when a conditional statement (If or ternary if) uses a constant valuefor its test. This might not be what the user intended to do.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0150</key>
+        <name><![CDATA[%s statement in finally block may swallow exception]]></name>
+        <configKey>W0150</configKey>
+        <description>
+            <![CDATA[Used when a break or a return statement is found inside the finally clause ofa try...finally block: the exceptions raised in the try clause will besilently swallowed instead of being re-raised.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0199</key>
+        <name><![CDATA[Assert called on a 2-uple. Did you mean 'assert x,y'?]]></name>
+        <configKey>W0199</configKey>
+        <description>
+            <![CDATA[A call of assert on a tuple will always evaluate to true if the tuple is notempty, and will always evaluate to false if it is.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0201</key>
+        <name><![CDATA[Attribute %r defined outside __init__]]></name>
+        <configKey>W0201</configKey>
+        <description>
+            <![CDATA[Used when an instance attribute is defined outside the __init__ method.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0211</key>
+        <name><![CDATA[Static method with %r as first argument]]></name>
+        <configKey>W0211</configKey>
+        <description>
+            <![CDATA[Used when a static method has "self" or a value specified in valid-classmethod-first-arg option or valid-metaclass-classmethod-first-arg optionas first argument.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0212</key>
+        <name><![CDATA[Access to a protected member %s of a client class]]></name>
+        <configKey>W0212</configKey>
+        <description>
+            <![CDATA[Used when a protected member (i.e. class member with a name beginning with anunderscore) is access outside the class or a descendant of the class whereit's defined.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0221</key>
+        <name><![CDATA[Parameters differ from %s %r method]]></name>
+        <configKey>W0221</configKey>
+        <description>
+            <![CDATA[Used when a method has a different number of arguments than in the implementedinterface or in an overridden method.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0222</key>
+        <name><![CDATA[Signature differs from %s %r method]]></name>
+        <configKey>W0222</configKey>
+        <description>
+            <![CDATA[Used when a method signature is different than in the implemented interface orin an overridden method.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0223</key>
+        <name><![CDATA[Method %r is abstract in class %r but is not overridden]]></name>
+        <configKey>W0223</configKey>
+        <description>
+            <![CDATA[Used when an abstract method (i.e. raise NotImplementedError) is notoverridden in concrete class.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0231</key>
+        <name><![CDATA[__init__ method from base class %r is not called]]></name>
+        <configKey>W0231</configKey>
+        <description>
+            <![CDATA[Used when an ancestor class method has an __init__ method which is not calledby a derived class.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0232</key>
+        <name><![CDATA[Class has no __init__ method]]></name>
+        <configKey>W0232</configKey>
+        <description>
+            <![CDATA[Used when a class has no __init__ method, neither its parent classes.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0233</key>
+        <name><![CDATA[__init__ method from a non direct base class %r is called]]></name>
+        <configKey>W0233</configKey>
+        <description>
+            <![CDATA[Used when an __init__ method is called on a class which is not in the directancestors for the analysed class.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0235</key>
+        <name><![CDATA[Useless super delegation in method %r]]></name>
+        <configKey>W0235</configKey>
+        <description>
+            <![CDATA[Used whenever we can detect that an overridden method is useless, relying onsuper() delegation to do the same thing as another method from the MRO.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0301</key>
+        <name><![CDATA[Unnecessary semicolon]]></name>
+        <configKey>W0301</configKey>
+        <description>
+            <![CDATA[Used when a statement is ended by a semi-colon (";"), which isn't necessary(that's python, not C ;).]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0311</key>
+        <name><![CDATA[Bad indentation. Found %s %s, expected %s]]></name>
+        <configKey>W0311</configKey>
+        <description>
+            <![CDATA[Used when an unexpected number of indentation's tabulations or spaces has beenfound.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0312</key>
+        <name><![CDATA[Found indentation with %ss instead of %ss]]></name>
+        <configKey>W0312</configKey>
+        <description>
+            <![CDATA[Used when there are some mixed tabs and spaces in a module.]]>
+        </description>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>W0332</key>
+        <name><![CDATA[Use of "l" as long integer identifier]]></name>
+        <configKey>W0332</configKey>
+        <description>
+            <![CDATA[Used when a lower case "l" is used to mark a long integer. You should use aupper case "L" since the letter "l" looks too much like the digit "1" Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0401</key>
+        <name><![CDATA[Wildcard import %s]]></name>
+        <configKey>W0401</configKey>
+        <description>
+            <![CDATA[Used when `from module import *` is detected.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0402</key>
+        <name><![CDATA[Uses of a deprecated module %r]]></name>
+        <configKey>W0402</configKey>
+        <description>
+            <![CDATA[Used a module marked as deprecated is imported.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0403</key>
+        <name><![CDATA[Relative import %r, should be %r]]></name>
+        <configKey>W0403</configKey>
+        <description>
+            <![CDATA[Used when an import relative to the package directory is detected. Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0404</key>
+        <name><![CDATA[Reimport %r (imported line %s)]]></name>
+        <configKey>W0404</configKey>
+        <description>
+            <![CDATA[Used when a module is reimported multiple times.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0406</key>
+        <name><![CDATA[Module import itself]]></name>
+        <configKey>W0406</configKey>
+        <description>
+            <![CDATA[Used when a module is importing itself.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0410</key>
+        <name><![CDATA[__future__ import is not the first non docstring statement]]></name>
+        <configKey>W0410</configKey>
+        <description>
+            <![CDATA[Python 2.5 and greater require __future__ import to be the first non docstringstatement in the module.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0511</key>
+        <name><![CDATA[]]></name>
+        <configKey>W0511</configKey>
+        <description>
+            <![CDATA[Used when a warning note as FIXME or XXX is detected.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0512</key>
+        <name><![CDATA[Cannot decode using encoding "%s", unexpected byte at position %d]]></name>
+        <configKey>W0512</configKey>
+        <description>
+            <![CDATA[Used when a source line cannot be decoded using the specified source fileencoding. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0601</key>
+        <name><![CDATA[Global variable %r undefined at the module level]]></name>
+        <configKey>W0601</configKey>
+        <description>
+            <![CDATA[Used when a variable is defined through the "global" statement but thevariable is not defined in the module scope.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0602</key>
+        <name><![CDATA[Using global for %r but no assignment is done]]></name>
+        <configKey>W0602</configKey>
+        <description>
+            <![CDATA[Used when a variable is defined through the "global" statement but noassignment to this variable is done.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0603</key>
+        <name><![CDATA[Using the global statement]]></name>
+        <configKey>W0603</configKey>
+        <description>
+            <![CDATA[Used when you use the "global" statement to update a global variable. Pylintjust try to discourage this usage. That doesn't mean you cannot use it !]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0604</key>
+        <name><![CDATA[Using the global statement at the module level]]></name>
+        <configKey>W0604</configKey>
+        <description>
+            <![CDATA[Used when you use the "global" statement at the module level since it has noeffect]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0611</key>
+        <name><![CDATA[Unused %s]]></name>
+        <configKey>W0611</configKey>
+        <description>
+            <![CDATA[Used when an imported module or variable is not used.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0612</key>
+        <name><![CDATA[Unused variable %r]]></name>
+        <configKey>W0612</configKey>
+        <description>
+            <![CDATA[Used when a variable is defined but not used.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0613</key>
+        <name><![CDATA[Unused argument %r]]></name>
+        <configKey>W0613</configKey>
+        <description>
+            <![CDATA[Used when a function or method argument is not used.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0614</key>
+        <name><![CDATA[Unused import %s from wildcard import]]></name>
+        <configKey>W0614</configKey>
+        <description>
+            <![CDATA[Used when an imported module or variable is not used from a `'from X import*'` style import.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0621</key>
+        <name><![CDATA[Redefining name %r from outer scope (line %s)]]></name>
+        <configKey>W0621</configKey>
+        <description>
+            <![CDATA[Used when a variable's name hides a name defined in the outer scope.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0622</key>
+        <name><![CDATA[Redefining built-in %r]]></name>
+        <configKey>W0622</configKey>
+        <description>
+            <![CDATA[Used when a variable or function override a built-in.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0623</key>
+        <name><![CDATA[Redefining name %r from %s in exception handler]]></name>
+        <configKey>W0623</configKey>
+        <description>
+            <![CDATA[Used when an exception handler assigns the exception to an existing name]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0631</key>
+        <name><![CDATA[Using possibly undefined loop variable %r]]></name>
+        <configKey>W0631</configKey>
+        <description>
+            <![CDATA[Used when an loop variable (i.e. defined by a for loop or a list comprehensionor a generator expression) is used outside the loop.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0640</key>
+        <name><![CDATA[Cell variable %s defined in loop]]></name>
+        <configKey>W0640</configKey>
+        <description>
+            <![CDATA[A variable used in a closure is defined in a loop. This will result in allclosures using the same value for the closed-over variable.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0702</key>
+        <name><![CDATA[No exception type(s) specified]]></name>
+        <configKey>W0702</configKey>
+        <description>
+            <![CDATA[Used when an except clause doesn't specify exceptions type to catch.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0703</key>
+        <name><![CDATA[Catching too general exception %s]]></name>
+        <configKey>W0703</configKey>
+        <description>
+            <![CDATA[Used when an except catches a too general exception, possibly buryingunrelated errors.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0705</key>
+        <name><![CDATA[Catching previously caught exception type %s]]></name>
+        <configKey>W0705</configKey>
+        <description>
+            <![CDATA[Used when an except catches a type that was already caught by a previoushandler.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0710</key>
+        <name><![CDATA[Exception doesn't inherit from standard "Exception" class]]></name>
+        <configKey>W0710</configKey>
+        <description>
+            <![CDATA[Used when a custom exception class is raised but doesn't inherit from thebuiltin "Exception" class. This message can't be emitted when using Python >=3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0711</key>
+        <name><![CDATA[Exception to catch is the result of a binary "%s" operation]]></name>
+        <configKey>W0711</configKey>
+        <description>
+            <![CDATA[Used when the exception to catch is of the form "except A or B:". If intendingto catch multiple, rewrite as "except (A, B):"]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W0715</key>
+        <name><![CDATA[Exception arguments suggest string formatting might be intended]]></name>
+        <configKey>W0715</configKey>
+        <description>
+            <![CDATA[Used when passing multiple arguments to an exception constructor, the first ofthem a string literal containing what appears to be placeholders intended forformatting]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1001</key>
+        <name><![CDATA[Use of "property" on an old style class]]></name>
+        <configKey>W1001</configKey>
+        <description>
+            <![CDATA[Used when Pylint detect the use of the builtin "property" on an old styleclass while this is relying on new style classes features. This message can'tbe emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1113</key>
+        <name>
+            <![CDATA[Keyword argument before variable positional arguments list in the definition of %s function]]></name>
+        <configKey>W1113</configKey>
+        <description>
+            <![CDATA[When defining a keyword argument before variable positional arguments, one canend up in having multiple values passed for the aforementioned parameter incase the method is called with keyword arguments.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1201</key>
+        <name><![CDATA[Specify string format arguments as logging function parameters]]></name>
+        <configKey>W1201</configKey>
+        <description>
+            <![CDATA[Used when a logging statement has a call form of "logging.<loggingmethod>(format_string % (format_args...))". Such calls should leave stringinterpolation to the logging method itself and be written "logging.<loggingmethod>(format_string, format_args...)" so that the program may avoidincurring the cost of the interpolation in those cases in which no messagewill be logged. For more, see http://www.python.org/dev/peps/pep-0282/.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1202</key>
+        <name><![CDATA[Use % formatting in logging functions and pass the % parameters as arguments]]></name>
+        <configKey>W1202</configKey>
+        <description>
+            <![CDATA[Used when a logging statement has a call form of "logging.<loggingmethod>(format_string.format(format_args...))". Such calls should use %formatting instead, but leave interpolation to the logging function by passingthe parameters as arguments.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1300</key>
+        <name><![CDATA[Format string dictionary key should be a string, not %s]]></name>
+        <configKey>W1300</configKey>
+        <description>
+            <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary whose keys are not all strings.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1301</key>
+        <name><![CDATA[Unused key %r in format string dictionary]]></name>
+        <configKey>W1301</configKey>
+        <description>
+            <![CDATA[Used when a format string that uses named conversion specifiers is used with adictionary that contains keys not required by the format string.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1302</key>
+        <name><![CDATA[Invalid format string]]></name>
+        <configKey>W1302</configKey>
+        <description>
+            <![CDATA[Used when a PEP 3101 format string is invalid. This message can't be emittedwhen using Python < 2.7.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1303</key>
+        <name><![CDATA[Missing keyword argument %r for format string]]></name>
+        <configKey>W1303</configKey>
+        <description>
+            <![CDATA[Used when a PEP 3101 format string that uses named fields doesn't receive oneor more required keywords. This message can't be emitted when using Python <2.7.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1304</key>
+        <name><![CDATA[Unused format argument %r]]></name>
+        <configKey>W1304</configKey>
+        <description>
+            <![CDATA[Used when a PEP 3101 format string that uses named fields is used with anargument that is not required by the format string. This message can't beemitted when using Python < 2.7.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1305</key>
+        <name><![CDATA[Format string contains both automatic field numbering and manual field specification]]></name>
+        <configKey>W1305</configKey>
+        <description>
+            <![CDATA[Used when a PEP 3101 format string contains both automatic field numbering(e.g. '{}') and manual field specification (e.g. '{0}'). This message can't beemitted when using Python < 2.7.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1306</key>
+        <name><![CDATA[Missing format attribute %r in format specifier %r]]></name>
+        <configKey>W1306</configKey>
+        <description>
+            <![CDATA[Used when a PEP 3101 format string uses an attribute specifier ({0.length}),but the argument passed for formatting doesn't have that attribute. Thismessage can't be emitted when using Python < 2.7.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1307</key>
+        <name><![CDATA[Using invalid lookup key %r in format specifier %r]]></name>
+        <configKey>W1307</configKey>
+        <description>
+            <![CDATA[Used when a PEP 3101 format string uses a lookup specifier ({a[1]}), but theargument passed for formatting doesn't contain or doesn't have that key as anattribute. This message can't be emitted when using Python < 2.7.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1401</key>
+        <name><![CDATA[Anomalous backslash in string: '%s'. String constant might be missing an r prefix.]]></name>
+        <configKey>W1401</configKey>
+        <description>
+            <![CDATA[Used when a backslash is in a literal string but not as an escape.]]>
+        </description>
+        <priority>MINOR</priority>
+        <status>DEPRECATED</status>
+    </rule>
+    <rule>
+        <key>W1402</key>
+        <name>
+            <![CDATA[Anomalous Unicode escape in byte string: '%s'. String constant might be missing an r or u prefix.]]></name>
+        <configKey>W1402</configKey>
+        <description>
+            <![CDATA[Used when an escape like \u is encountered in a byte string where it has noeffect.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1501</key>
+        <name><![CDATA["%s" is not a valid mode for open.]]></name>
+        <configKey>W1501</configKey>
+        <description>
+            <![CDATA[Python supports: r, w, a[, x] modes with b, +, and U (only with r) options.See http://docs.python.org/2/library/functions.html#open]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1502</key>
+        <name><![CDATA[Using datetime.time in a boolean context.]]></name>
+        <configKey>W1502</configKey>
+        <description>
+            <![CDATA[Using datetime.time in a boolean context can hide subtle bugs when the timethey represent matches midnight UTC. This behaviour was fixed in Python 3.5.See http://bugs.python.org/issue13936 for reference. This message can't beemitted when using Python >= 3.5.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1503</key>
+        <name><![CDATA[Redundant use of %s with constant value %r]]></name>
+        <configKey>W1503</configKey>
+        <description>
+            <![CDATA[The first argument of assertTrue and assertFalse is a condition. If a constantis passed as parameter, that condition will be always true. In this case awarning should be emitted.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1505</key>
+        <name><![CDATA[Using deprecated method %s()]]></name>
+        <configKey>W1505</configKey>
+        <description>
+            <![CDATA[The method is marked as deprecated and will be removed in a future version ofPython. Consider looking for an alternative in the documentation.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1506</key>
+        <name><![CDATA[threading.Thread needs the target function]]></name>
+        <configKey>W1506</configKey>
+        <description>
+            <![CDATA[The warning is emitted when a threading.Thread class is instantiated withoutthe target function being passed. By default, the first parameter is the groupparam, not the target param.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1507</key>
+        <name><![CDATA[Using copy.copy(os.environ). Use os.environ.copy() instead. ]]></name>
+        <configKey>W1507</configKey>
+        <description>
+            <![CDATA[os.environ is not a dict object but proxy object, so shallow copy has stilleffects on original object. See https://bugs.python.org/issue15373 forreference.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1601</key>
+        <name><![CDATA[apply built-in referenced]]></name>
+        <configKey>W1601</configKey>
+        <description>
+            <![CDATA[Used when the apply built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1602</key>
+        <name><![CDATA[basestring built-in referenced]]></name>
+        <configKey>W1602</configKey>
+        <description>
+            <![CDATA[Used when the basestring built-in function is referenced (missing from Python3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1603</key>
+        <name><![CDATA[buffer built-in referenced]]></name>
+        <configKey>W1603</configKey>
+        <description>
+            <![CDATA[Used when the buffer built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1604</key>
+        <name><![CDATA[cmp built-in referenced]]></name>
+        <configKey>W1604</configKey>
+        <description>
+            <![CDATA[Used when the cmp built-in function is referenced (missing from Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1605</key>
+        <name><![CDATA[coerce built-in referenced]]></name>
+        <configKey>W1605</configKey>
+        <description>
+            <![CDATA[Used when the coerce built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1606</key>
+        <name><![CDATA[execfile built-in referenced]]></name>
+        <configKey>W1606</configKey>
+        <description>
+            <![CDATA[Used when the execfile built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1607</key>
+        <name><![CDATA[file built-in referenced]]></name>
+        <configKey>W1607</configKey>
+        <description>
+            <![CDATA[Used when the file built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1608</key>
+        <name><![CDATA[long built-in referenced]]></name>
+        <configKey>W1608</configKey>
+        <description>
+            <![CDATA[Used when the long built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1610</key>
+        <name><![CDATA[reduce built-in referenced]]></name>
+        <configKey>W1610</configKey>
+        <description>
+            <![CDATA[Used when the reduce built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1611</key>
+        <name><![CDATA[StandardError built-in referenced]]></name>
+        <configKey>W1611</configKey>
+        <description>
+            <![CDATA[Used when the StandardError built-in function is referenced (missing fromPython 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1612</key>
+        <name><![CDATA[unicode built-in referenced]]></name>
+        <configKey>W1612</configKey>
+        <description>
+            <![CDATA[Used when the unicode built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1613</key>
+        <name><![CDATA[xrange built-in referenced]]></name>
+        <configKey>W1613</configKey>
+        <description>
+            <![CDATA[Used when the xrange built-in function is referenced (missing from Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1614</key>
+        <name><![CDATA[__coerce__ method defined]]></name>
+        <configKey>W1614</configKey>
+        <description>
+            <![CDATA[Used when a __coerce__ method is defined (method is not used by Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1615</key>
+        <name><![CDATA[__delslice__ method defined]]></name>
+        <configKey>W1615</configKey>
+        <description>
+            <![CDATA[Used when a __delslice__ method is defined (method is not used by Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1616</key>
+        <name><![CDATA[__getslice__ method defined]]></name>
+        <configKey>W1616</configKey>
+        <description>
+            <![CDATA[Used when a __getslice__ method is defined (method is not used by Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1617</key>
+        <name><![CDATA[__setslice__ method defined]]></name>
+        <configKey>W1617</configKey>
+        <description>
+            <![CDATA[Used when a __setslice__ method is defined (method is not used by Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1618</key>
+        <name><![CDATA[import missing `from __future__ import absolute_import`]]></name>
+        <configKey>W1618</configKey>
+        <description>
+            <![CDATA[Used when an import is not accompanied by ``from __future__ importabsolute_import`` (default behaviour in Python 3) This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1619</key>
+        <name><![CDATA[division w/o __future__ statement]]></name>
+        <configKey>W1619</configKey>
+        <description>
+            <![CDATA[Used for non-floor division w/o a float literal or ``from __future__ importdivision`` (Python 3 returns a float for int division unconditionally) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1620</key>
+        <name><![CDATA[Calling a dict.iter*() method]]></name>
+        <configKey>W1620</configKey>
+        <description>
+            <![CDATA[Used for calls to dict.iterkeys(), itervalues() or iteritems() (Python 3 lacksthese methods) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1621</key>
+        <name><![CDATA[Calling a dict.view*() method]]></name>
+        <configKey>W1621</configKey>
+        <description>
+            <![CDATA[Used for calls to dict.viewkeys(), viewvalues() or viewitems() (Python 3 lacksthese methods) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1622</key>
+        <name><![CDATA[Called a next() method on an object]]></name>
+        <configKey>W1622</configKey>
+        <description>
+            <![CDATA[Used when an object's next() method is called (Python 3 uses the next() built-in function) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1623</key>
+        <name><![CDATA[Assigning to a class's __metaclass__ attribute]]></name>
+        <configKey>W1623</configKey>
+        <description>
+            <![CDATA[Used when a metaclass is specified by assigning to __metaclass__ (Python 3specifies the metaclass as a class statement argument) This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1624</key>
+        <name><![CDATA[Indexing exceptions will not work on Python 3]]></name>
+        <configKey>W1624</configKey>
+        <description>
+            <![CDATA[Indexing exceptions will not work on Python 3. Use `exception.args[index]`instead. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1625</key>
+        <name><![CDATA[Raising a string exception]]></name>
+        <configKey>W1625</configKey>
+        <description>
+            <![CDATA[Used when a string exception is raised. This will not work on Python 3. Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1626</key>
+        <name><![CDATA[reload built-in referenced]]></name>
+        <configKey>W1626</configKey>
+        <description>
+            <![CDATA[Used when the reload built-in function is referenced (missing from Python 3).You can use instead imp.reload or importlib.reload. This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1627</key>
+        <name><![CDATA[__oct__ method defined]]></name>
+        <configKey>W1627</configKey>
+        <description>
+            <![CDATA[Used when a __oct__ method is defined (method is not used by Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1628</key>
+        <name><![CDATA[__hex__ method defined]]></name>
+        <configKey>W1628</configKey>
+        <description>
+            <![CDATA[Used when a __hex__ method is defined (method is not used by Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1629</key>
+        <name><![CDATA[__nonzero__ method defined]]></name>
+        <configKey>W1629</configKey>
+        <description>
+            <![CDATA[Used when a __nonzero__ method is defined (method is not used by Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1630</key>
+        <name><![CDATA[__cmp__ method defined]]></name>
+        <configKey>W1630</configKey>
+        <description>
+            <![CDATA[Used when a __cmp__ method is defined (method is not used by Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1632</key>
+        <name><![CDATA[input built-in referenced]]></name>
+        <configKey>W1632</configKey>
+        <description>
+            <![CDATA[Used when the input built-in is referenced (backwards-incompatible semanticsin Python 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1633</key>
+        <name><![CDATA[round built-in referenced]]></name>
+        <configKey>W1633</configKey>
+        <description>
+            <![CDATA[Used when the round built-in is referenced (backwards-incompatible semanticsin Python 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1634</key>
+        <name><![CDATA[intern built-in referenced]]></name>
+        <configKey>W1634</configKey>
+        <description>
+            <![CDATA[Used when the intern built-in is referenced (Moved to sys.intern in Python 3)This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1635</key>
+        <name><![CDATA[unichr built-in referenced]]></name>
+        <configKey>W1635</configKey>
+        <description>
+            <![CDATA[Used when the unichr built-in is referenced (Use chr in Python 3) This messagecan't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1636</key>
+        <name><![CDATA[map built-in referenced when not iterating]]></name>
+        <configKey>W1636</configKey>
+        <description>
+            <![CDATA[Used when the map built-in is referenced in a non-iterating context (returnsan iterator in Python 3) This message can't be emitted when using Python >=3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1637</key>
+        <name><![CDATA[zip built-in referenced when not iterating]]></name>
+        <configKey>W1637</configKey>
+        <description>
+            <![CDATA[Used when the zip built-in is referenced in a non-iterating context (returnsan iterator in Python 3) This message can't be emitted when using Python >=3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1638</key>
+        <name><![CDATA[range built-in referenced when not iterating]]></name>
+        <configKey>W1638</configKey>
+        <description>
+            <![CDATA[Used when the range built-in is referenced in a non-iterating context (returnsan iterator in Python 3) This message can't be emitted when using Python >=3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1639</key>
+        <name><![CDATA[filter built-in referenced when not iterating]]></name>
+        <configKey>W1639</configKey>
+        <description>
+            <![CDATA[Used when the filter built-in is referenced in a non-iterating context(returns an iterator in Python 3) This message can't be emitted when usingPython >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1640</key>
+        <name><![CDATA[Using the cmp argument for list.sort / sorted]]></name>
+        <configKey>W1640</configKey>
+        <description>
+            <![CDATA[Using the cmp argument for list.sort or the sorted builtin should be avoided,since it was removed in Python 3. Using either `key` or `functools.cmp_to_key`should be preferred. This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1641</key>
+        <name><![CDATA[Implementing __eq__ without also implementing __hash__]]></name>
+        <configKey>W1641</configKey>
+        <description>
+            <![CDATA[Used when a class implements __eq__ but not __hash__. In Python 2, objects getobject.__hash__ as the default implementation, in Python 3 objects get None astheir default __hash__ implementation if they also implement __eq__. Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1642</key>
+        <name><![CDATA[__div__ method defined]]></name>
+        <configKey>W1642</configKey>
+        <description>
+            <![CDATA[Used when a __div__ method is defined. Using `__truediv__` and setting__div__= __truediv__ should be preferred.(method is not used by Python 3) Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1643</key>
+        <name><![CDATA[__idiv__ method defined]]></name>
+        <configKey>W1643</configKey>
+        <description>
+            <![CDATA[Used when a __idiv__ method is defined. Using `__itruediv__` andsetting__idiv__ = __itruediv__ should be preferred.(method is not used byPython 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1644</key>
+        <name><![CDATA[__rdiv__ method defined]]></name>
+        <configKey>W1644</configKey>
+        <description>
+            <![CDATA[Used when a __rdiv__ method is defined. Using `__rtruediv__` andsetting__rdiv__ = __rtruediv__ should be preferred.(method is not used byPython 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1645</key>
+        <name><![CDATA[Exception.message removed in Python 3]]></name>
+        <configKey>W1645</configKey>
+        <description>
+            <![CDATA[Used when the message attribute is accessed on an Exception. Usestr(exception) instead. This message can't be emitted when using Python >=3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1646</key>
+        <name><![CDATA[non-text encoding used in str.decode]]></name>
+        <configKey>W1646</configKey>
+        <description>
+            <![CDATA[Used when using str.encode or str.decode with a non-text encoding. Use codecsmodule to handle arbitrary codecs. This message can't be emitted when usingPython >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1647</key>
+        <name><![CDATA[sys.maxint removed in Python 3]]></name>
+        <configKey>W1647</configKey>
+        <description>
+            <![CDATA[Used when accessing sys.maxint. Use sys.maxsize instead. This message can't beemitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1649</key>
+        <name><![CDATA[Accessing a function method on the string module]]></name>
+        <configKey>W1649</configKey>
+        <description>
+            <![CDATA[Used when accessing a string function that has been deprecated in Python 3.This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1650</key>
+        <name><![CDATA[Using str.translate with deprecated deletechars parameters]]></name>
+        <configKey>W1650</configKey>
+        <description>
+            <![CDATA[Used when using the deprecated deletechars parameters from str.translate.Usere.sub to remove the desired characters This message can't be emitted whenusing Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1651</key>
+        <name><![CDATA[Accessing a deprecated function on the itertools module]]></name>
+        <configKey>W1651</configKey>
+        <description>
+            <![CDATA[Used when accessing a function on itertools that has been removed in Python 3.This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1652</key>
+        <name><![CDATA[Accessing a deprecated fields on the types module]]></name>
+        <configKey>W1652</configKey>
+        <description>
+            <![CDATA[Used when accessing a field on types that has been removed in Python 3. Thismessage can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1653</key>
+        <name><![CDATA[next method defined]]></name>
+        <configKey>W1653</configKey>
+        <description>
+            <![CDATA[Used when a next method is defined that would be an iterator in Python 2 butis treated as a normal function in Python 3. This message can't be emittedwhen using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1654</key>
+        <name><![CDATA[dict.items referenced when not iterating]]></name>
+        <configKey>W1654</configKey>
+        <description>
+            <![CDATA[Used when dict.items is referenced in a non-iterating context (returns aniterator in Python 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1655</key>
+        <name><![CDATA[dict.keys referenced when not iterating]]></name>
+        <configKey>W1655</configKey>
+        <description>
+            <![CDATA[Used when dict.keys is referenced in a non-iterating context (returns aniterator in Python 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
+    <rule>
+        <key>W1656</key>
+        <name><![CDATA[dict.values referenced when not iterating]]></name>
+        <configKey>W1656</configKey>
+        <description>
+            <![CDATA[Used when dict.values is referenced in a non-iterating context (returns aniterator in Python 3) This message can't be emitted when using Python >= 3.0.]]>
+        </description>
+        <priority>MINOR</priority>
+    </rule>
 </rules>
