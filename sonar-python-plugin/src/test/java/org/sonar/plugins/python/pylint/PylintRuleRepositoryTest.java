@@ -41,12 +41,12 @@ public class PylintRuleRepositoryTest {
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(292);
+    assertThat(rules).hasSize(322);
 
     long rulesWithoutRemediationCost = rules.stream()
       .filter(rule -> rule.debtRemediationFunction() == null)
       .count();
-    assertThat(rulesWithoutRemediationCost).isEqualTo(23);
+    assertThat(rulesWithoutRemediationCost).isEqualTo(28);
   }
 
 }

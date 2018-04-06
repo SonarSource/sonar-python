@@ -55,11 +55,11 @@ def grabDescr(lines):
     while lines:
         currline = lines.pop()
         if partOfDescr(currline):
-            descr += currline.strip()
+            descr += " " + currline.strip()
         else:
             lines.append(currline)
             break
-    return descr
+    return descr.strip()
 
 
 def header():
