@@ -26,7 +26,7 @@
 import sys
 import re
 
-RULEID_PATTERN = ":[a-z -]+ \(([A-Z][0-9]{4})\): ?\*?(.*?)\*?$"
+RULEID_PATTERN = ":[a-z _-]+ \(([A-Z][0-9]{4})\): ?\*?(.*?)\*?$"
 
 def parseNextRule(lines):
     ruleid, rulename = grabIdAndName(lines)

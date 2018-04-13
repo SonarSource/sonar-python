@@ -733,7 +733,7 @@
     <priority>MAJOR</priority>
   </rule>
   <rule>
-    <key>E9900</key>
+    <key>E1300</key>
     <name><![CDATA[Unsupported format character]]></name>
     <configKey>E1300</configKey>
     <description>
@@ -1785,6 +1785,15 @@
     <priority>MINOR</priority>
   </rule>
   <rule>
+    <key>W0640</key>
+    <name><![CDATA[Cell variable defined in loop]]></name>
+    <configKey>W0640</configKey>
+    <description>
+      <![CDATA[A variable used in a closure is defined in a loop. This will result in all closures using the same value for the closed-over variable.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
     <key>W0701</key>
     <name><![CDATA[Raising a string exception]]></name>
     <configKey>W0701</configKey>
@@ -1899,6 +1908,15 @@
                format_args...)" so that the program may avoid incurring the cost of
                the interpolation in those cases in which no message will be
                logged. For more, see http://www.python.org/dev/peps/pep-0282/.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W1202</key>
+    <name><![CDATA[Use % formatting in logging functions and pass the % parameters as arguments]]></name>
+    <configKey>W1202</configKey>
+    <description>
+      <![CDATA[Used when a logging statement has a call form of "logging.<logging method>(format_string.format(format_args...))". Such calls should use % formatting instead, but leave interpolation to the logging function by passing the parameters as arguments.]]>
     </description>
     <priority>MINOR</priority>
   </rule>
@@ -2089,6 +2107,15 @@
     <configKey>W1608</configKey>
     <description>
       <![CDATA[Used when the long built-in function is referenced (missing from Python 3) This message can't be emitted when using Python >= 3.0.]]>
+    </description>
+    <priority>MINOR</priority>
+  </rule>
+  <rule>
+    <key>W1609</key>
+    <name><![CDATA[raw_input built-in referenced]]></name>
+    <configKey>W1609</configKey>
+    <description>
+      <![CDATA[Used when the raw_input built-in function is referenced (missing from Python 3) This message can't be emitted when using Python >= 3.0.]]>
     </description>
     <priority>MINOR</priority>
   </rule>
