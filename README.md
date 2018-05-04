@@ -6,11 +6,11 @@ SonarPython is a code analyzer for Python projects.
 
 * [Project homepage](https://www.sonarsource.com/products/codeanalyzers/sonarpython.html)
 * [Issue tracking](http://jira.sonarsource.com/browse/SONARPY)
-* [Available rules](https://sonarqube.com/coding_rules#languages=py)
+* [Available rules](https://rules.sonarsource.com/python)
 * [Google Group for feedback](https://groups.google.com/forum/#!forum/sonarqube)
 
 ## License
 
-Copyright 2011-2017 SonarSource.
+Copyright 2011-2018 SonarSource.
 
 Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
