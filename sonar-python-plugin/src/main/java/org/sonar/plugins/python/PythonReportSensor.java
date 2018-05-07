@@ -22,18 +22,18 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.WildcardPattern;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public abstract class PythonReportSensor implements Sensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
+  private static final Logger LOG = Loggers.get(PythonReportSensor.class);
 
   protected Configuration conf;
 
