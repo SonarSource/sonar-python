@@ -19,23 +19,22 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import javax.annotation.Nullable;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.utils.command.Command;
-import org.sonar.api.utils.command.CommandExecutor;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
+import javax.annotation.Nullable;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.utils.command.Command;
+import org.sonar.api.utils.command.CommandExecutor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class PylintIssuesAnalyzer {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
+  private static final Logger LOG = Loggers.get(PylintIssuesAnalyzer.class);
 
   private static final String FALLBACK_PYLINT = "pylint";
 

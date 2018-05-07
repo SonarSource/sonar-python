@@ -29,19 +29,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.xml.stream.XMLStreamException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.EmptyReportException;
 
 import static org.sonar.plugins.python.PythonReportSensor.getReports;
 
 public class PythonCoverageSensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PythonCoverageSensor.class);
+  private static final Logger LOG = Loggers.get(PythonCoverageSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
   public static final String DEFAULT_REPORT_PATH = "coverage-reports/*coverage-*.xml";

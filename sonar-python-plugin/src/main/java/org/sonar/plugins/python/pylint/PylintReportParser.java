@@ -24,12 +24,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class PylintReportParser {
   private static final Pattern PATTERN = Pattern.compile("(.+):([0-9]+): \\[(.*)\\] (.*)");
-  private static final Logger LOG = LoggerFactory.getLogger(PylintReportParser.class);
+  private static final Logger LOG = Loggers.get(PylintReportParser.class);
 
   // Pylint 0.24 brings a nasty reidentifying of some rules...
   // To avoid burdening of users with rule clones we map the ids.
