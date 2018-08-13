@@ -7,7 +7,7 @@ SonarPython is a code analyzer for Python projects.
 * [Project homepage](https://www.sonarsource.com/products/codeanalyzers/sonarpython.html)
 * [Issue tracking](http://jira.sonarsource.com/browse/SONARPY)
 * [Available rules](https://rules.sonarsource.com/python)
-* [Google Group for feedback](https://groups.google.com/forum/#!forum/sonarqube)
+* [SonarSource Community Forum](https://community.sonarsource.com) for feedback
 
 ## License
 
