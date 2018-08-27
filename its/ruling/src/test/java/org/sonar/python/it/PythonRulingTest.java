@@ -23,30 +23,29 @@ import com.google.common.io.Files;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.locator.FileLocation;
+import com.sonar.orchestrator.locator.MavenLocation;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class PythonRulingTest {
 
+  private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
+  private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
+
   @ClassRule
   public static Orchestrator orchestrator = Orchestrator.builderEnv()
+    .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
-    .setOrchestratorProperty("litsVersion", "0.6")
-    .addPlugin("lits")
+    .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.6"))
     .restoreProfileAtStartup(FileLocation.of("src/test/resources/profile.xml"))
     .build();
 
   @Test
   public void test() throws Exception {
-    assertTrue(
-      "SonarQube 5.6 is the minimum version to generate the issues report",
-      orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("5.6"));
     orchestrator.getServer().provisionProject("project", "project");
     orchestrator.getServer().associateProjectToQualityProfile("project", "py", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
