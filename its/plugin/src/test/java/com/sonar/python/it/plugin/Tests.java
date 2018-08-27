@@ -58,10 +58,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 public class Tests {
 
+  private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
+  private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
+
   public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
 
   @ClassRule
   public static Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
+    .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
