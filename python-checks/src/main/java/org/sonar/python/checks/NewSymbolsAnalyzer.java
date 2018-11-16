@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -25,6 +25,7 @@ import com.sonar.sslr.api.Token;
 import java.util.LinkedList;
 import java.util.List;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
 
 public class NewSymbolsAnalyzer {
 
@@ -60,11 +61,14 @@ public class NewSymbolsAnalyzer {
   }
 
   private static List<AstNode> getTestsFromLongAssignmentExpression(AstNode expression) {
-    List<AstNode> assignedExpressions = expression.getChildren(PythonGrammar.TESTLIST_STAR_EXPR);
-    assignedExpressions.remove(assignedExpressions.size() - 1);
     List<AstNode> tests = new LinkedList<>();
-    for (AstNode assignedExpression : assignedExpressions) {
-      tests.addAll(assignedExpression.getDescendants(PythonGrammar.TEST));
+    AstNode lastAssign = expression.getLastChild(PythonPunctuator.ASSIGN);
+    for (AstNode node : expression.getChildren()) {
+      if (node.is(PythonGrammar.TESTLIST_STAR_EXPR)) {
+        tests.addAll(node.getDescendants(PythonGrammar.TEST));
+      } else if (node == lastAssign) {
+        break;
+      }
     }
     return tests;
   }

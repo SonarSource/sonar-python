@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2012-2017 SonarSource SA
+ * Copyright (C) 2012-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -80,7 +80,7 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsDouble("violations")).isZero();
 
     assertThat(getProjectMeasureAsInt("tests")).isNull();
-    assertThat(getProjectMeasureAsDouble("coverage")).isNull();
+    assertThat(getProjectMeasureAsDouble("coverage")).isZero();
   }
 
   @Test
@@ -147,9 +147,9 @@ public class MetricsTest {
     assertThat(getFileMeasure("ncloc_data").getValue())
       .doesNotContain("1=1")
       .contains("5=1");
-    assertThat(getFileMeasure("comment_lines_data").getValue())
-      .contains("2=1")
-      .doesNotContain("4=1");
+    assertThat(getFileMeasure("executable_lines_data").getValue())
+      .doesNotContain("1=1")
+      .contains("5=1");
   }
 
   /* Helper methods */

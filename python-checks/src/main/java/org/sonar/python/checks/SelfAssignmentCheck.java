@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
@@ -48,7 +47,7 @@ public class SelfAssignmentCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.EXPRESSION_STMT,
       PythonGrammar.IMPORT_NAME,
       PythonGrammar.IMPORT_AS_NAME);
@@ -67,11 +66,21 @@ public class SelfAssignmentCheck extends PythonCheck {
       addImportedName(node, importedName);
 
     } else {
-      for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN)) {
-        AstNode assigned = assignOperator.getPreviousSibling();
-        if (CheckUtils.equalNodes(assigned, assignOperator.getNextSibling()) && !isException(node, assigned)) {
-          addIssue(assignOperator, MESSAGE);
+      checkExpressionStatement(node);
+    }
+  }
+
+  private void checkExpressionStatement(AstNode node) {
+    for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.ANNASSIGN)) {
+      AstNode assigned = assignOperator.getPreviousSibling();
+      if (assignOperator.is(PythonGrammar.ANNASSIGN)) {
+        assignOperator = assignOperator.getFirstChild(PythonPunctuator.ASSIGN);
+        if (assigned.is(PythonGrammar.TESTLIST_STAR_EXPR) && assigned.getNumberOfChildren() == 1) {
+          assigned =  assigned.getFirstChild();
         }
+      }
+      if (assignOperator != null && CheckUtils.equalNodes(assigned, assignOperator.getNextSibling()) && !isException(node, assigned)) {
+        addIssue(assignOperator, MESSAGE);
       }
     }
   }

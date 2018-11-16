@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,17 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.base.Strings;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.squidbridge.annotations.RuleTemplate;
 
 @Rule(key = XPathCheck.CHECK_KEY)
-@RuleTemplate
 public class XPathCheck extends PythonCheck {
   public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
@@ -48,7 +45,7 @@ public class XPathCheck extends PythonCheck {
   private AstNodeXPathQuery<Object> query = null;
 
   public AstNodeXPathQuery<Object> query() {
-    if (query == null && !Strings.isNullOrEmpty(xpathQuery)) {
+    if (query == null && xpathQuery != null && !xpathQuery.isEmpty()) {
       try {
         query = AstNodeXPathQuery.create(xpathQuery);
       } catch (RuntimeException e) {

@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,41 +19,12 @@
  */
 package org.sonar.python.api;
 
-import org.sonar.squidbridge.measures.CalculatedMetricFormula;
-import org.sonar.squidbridge.measures.MetricDef;
-
-public enum PythonMetric implements MetricDef {
+public enum PythonMetric {
   FILES,
   LINES_OF_CODE,
   STATEMENTS,
   FUNCTIONS,
   CLASSES,
   COMPLEXITY,
-  COMMENT_LINES;
-
-  @Override
-  public String getName() {
-    return name();
-  }
-
-  @Override
-  public boolean isCalculatedMetric() {
-    return false;
-  }
-
-  @Override
-  public boolean aggregateIfThereIsAlreadyAValue() {
-    return true;
-  }
-
-  @Override
-  public boolean isThereAggregationFormula() {
-    return true;
-  }
-
-  @Override
-  public CalculatedMetricFormula getCalculatedMetricFormula() {
-    return null;
-  }
-
+  COMMENT_LINES
 }

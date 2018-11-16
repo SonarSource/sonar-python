@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -39,7 +39,7 @@ public class InitReturnsValueCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.FUNCDEF);
+    return Collections.singleton(PythonGrammar.FUNCDEF);
   }
 
   @Override

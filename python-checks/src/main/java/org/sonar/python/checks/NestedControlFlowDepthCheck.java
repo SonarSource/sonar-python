@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayDeque;
@@ -47,7 +46,7 @@ public class NestedControlFlowDepthCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.IF_STMT,
       PythonGrammar.FOR_STMT,
       PythonGrammar.WHILE_STMT,
@@ -83,4 +82,3 @@ public class NestedControlFlowDepthCheck extends PythonCheck {
     depthNodes.pop();
   }
 }
-

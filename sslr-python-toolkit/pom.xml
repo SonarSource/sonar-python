@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.sonarsource.python</groupId>
     <artifactId>python</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.11-SNAPSHOT</version>
   </parent>
 
   <artifactId>sslr-python-toolkit</artifactId>
@@ -31,7 +31,7 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
+      <artifactId>mockito-core</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -66,7 +66,6 @@
                 <include>${project.groupId}:python-squid</include>
                 <include>org.codehaus.sonar.sslr:sslr-core</include>
                 <include>org.codehaus.sonar.sslr:sslr-xpath</include>
-                <include>org.codehaus.sonar.sslr-squid-bridge:sslr-squid-bridge</include>
                 <include>jaxen:jaxen</include>
                 <include>org.codehaus.sonar.sslr:sslr-toolkit</include>
                 <include>org.codehaus.sonar:sonar-colorizer</include>
@@ -101,8 +100,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>3300000</maxsize>
-                  <minsize>1400000</minsize>
+                  <maxsize>3900000</maxsize>
+                  <minsize>3800000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

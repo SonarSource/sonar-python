@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -21,11 +21,14 @@ package org.sonar.plugins.python.pylint;
 
 import java.io.File;
 import org.apache.commons.lang.StringUtils;
-import org.sonar.api.BatchExtension;
+import org.sonar.api.ExtensionPoint;
+import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 
-public class PylintConfiguration implements BatchExtension {
+@ScannerSide
+@ExtensionPoint
+public class PylintConfiguration {
 
   public static final String PYLINT_CONFIG_KEY = "sonar.python.pylint_config";
   public static final String PYLINT_KEY = "sonar.python.pylint";

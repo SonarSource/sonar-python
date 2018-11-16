@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -22,39 +22,37 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.Sensor;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.batch.fs.FilePredicates;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.config.Settings;
-import org.sonar.api.resources.Project;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.WildcardPattern;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public abstract class PythonReportSensor implements Sensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
+  private static final Logger LOG = Loggers.get(PythonReportSensor.class);
 
-  protected Settings conf = null;
-  protected FileSystem fileSystem;
+  protected Configuration conf;
 
-  public PythonReportSensor(Settings conf, FileSystem fileSystem) {
+  public PythonReportSensor(Configuration conf) {
     this.conf = conf;
-    this.fileSystem = fileSystem;
   }
 
   @Override
-  public boolean shouldExecuteOnProject(Project project) {
-    FilePredicates p = fileSystem.predicates();
-    return fileSystem.hasFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
+  public void describe(SensorDescriptor descriptor) {
+    descriptor
+      .name(getClass().getSimpleName())
+      .onlyOnLanguage(Python.KEY)
+      .onlyOnFileType(InputFile.Type.MAIN);
   }
 
   @Override
-  public void analyse(Project project, SensorContext context) {
+  public void execute(SensorContext context) {
     try {
-      List<File> reports = getReports(conf, fileSystem.baseDir().getPath(), reportPathKey(), defaultReportPath());
+      List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathKey(), defaultReportPath());
       processReports(context, reports);
     } catch (javax.xml.stream.XMLStreamException e) {
       String msg = new StringBuilder()
@@ -66,17 +64,9 @@ public abstract class PythonReportSensor implements Sensor {
     }
   }
 
-  @Override
-  public String toString() {
-    return getClass().getSimpleName();
-  }
-
-  public static List<File> getReports(Settings conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
-    String reportPath = conf.getString(reportPathPropertyKey);
+  public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
+    String reportPath = conf.get(reportPathPropertyKey).orElse(defaultReportPath);
     boolean propertyIsProvided = !Objects.equals(reportPath, defaultReportPath);
-    if (reportPath == null) {
-      reportPath = defaultReportPath;
-    }
 
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 

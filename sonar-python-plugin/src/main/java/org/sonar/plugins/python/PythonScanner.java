@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,7 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
@@ -40,10 +38,10 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
+import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
@@ -61,16 +59,13 @@ public class PythonScanner {
   private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
 
-  private static final Version V6_0 = Version.create(6, 0);
-
   private final SensorContext context;
   private final Parser<Grammar> parser;
   private final List<InputFile> inputFiles;
   private final Checks<PythonCheck> checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
-  private Map<InputFile, Set<Integer>> linesOfCodeByFile;
-
+  private final PythonCpdAnalyzer cpdAnalyzer;
 
   public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
     FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
@@ -78,22 +73,25 @@ public class PythonScanner {
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
+    this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.inputFiles = inputFiles;
     this.parser = PythonParser.create(new PythonConfiguration(context.fileSystem().encoding()));
-    this.linesOfCodeByFile = new HashMap<>();
   }
 
   public void scanFiles() {
     for (InputFile pythonFile : inputFiles) {
+      if (context.isCancelled()) {
+        return;
+      }
       scanFile(pythonFile);
     }
     if (!isSonarLint(context)) {
-      (new PythonCoverageSensor()).execute(context, linesOfCodeByFile);
+      (new PythonCoverageSensor()).execute(context);
     }
   }
 
   private void scanFile(InputFile inputFile) {
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile, context);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
       visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);
@@ -102,6 +100,11 @@ public class PythonScanner {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile.absolutePath());
       LOG.error(e.getMessage());
+      context.newAnalysisError()
+        .onFile(inputFile)
+        .at(inputFile.newPointer(e.getLine(), 0))
+        .message(e.getMessage())
+        .save();
     }
 
     for (PythonCheck check : checks.all()) {
@@ -158,6 +161,7 @@ public class PythonScanner {
     FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
+    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
     saveFilesComplexityDistribution(inputFile, fileMetrics);
@@ -179,9 +183,10 @@ public class PythonScanner {
     for (int line : linesOfComments) {
       fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
     }
+    for (int line : fileLinesVisitor.getExecutableLines()) {
+      fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
+    }
     fileLinesContext.save();
-
-    linesOfCodeByFile.put(inputFile, linesOfCode);
   }
 
   private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {
@@ -216,6 +221,6 @@ public class PythonScanner {
   }
 
   private static boolean isSonarLint(SensorContext context) {
-    return context.getSonarQubeVersion().isGreaterThanOrEqual(V6_0) && context.runtime().getProduct() == SonarProduct.SONARLINT;
+    return context.runtime().getProduct() == SonarProduct.SONARLINT;
   }
 }

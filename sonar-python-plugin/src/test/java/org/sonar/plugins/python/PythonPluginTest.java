@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarQubeSide;
@@ -32,10 +33,15 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() {
-    SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(Version.create(5, 6), SonarQubeSide.SERVER);
+    Version v60 = Version.create(6, 0);
+    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v60, SonarQubeSide.SERVER))).hasSize(18);
+    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v60))).hasSize(13);
+  }
+
+  private List extensions(SonarRuntime runtime) {
     Plugin.Context context = new Plugin.Context(runtime);
     new PythonPlugin().define(context);
-    assertThat(context.getExtensions()).hasSize(20);
+    return context.getExtensions();
   }
 
 }

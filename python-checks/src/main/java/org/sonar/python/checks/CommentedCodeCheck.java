@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,14 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.impl.Parser;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -43,11 +43,11 @@ public class CommentedCodeCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";
-  private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
+  private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonTokenType.STRING);
+    return Collections.singleton(PythonTokenType.STRING);
   }
 
   @Override
@@ -137,8 +137,13 @@ public class CommentedCodeCheck extends PythonCheck {
     }
   }
 
-  private static boolean isSimpleExpression(List<AstNode> expressions) {
-    return expressions.size() == 1 && expressions.get(0).getNumberOfChildren() == 1 && expressions.get(0).getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR);
+  private static boolean isSimpleExpression(List<AstNode> expressionStatements) {
+    if (expressionStatements.size() != 1) {
+      return false;
+    }
+    AstNode expressionStatement = expressionStatements.get(0);
+    return (expressionStatement.getNumberOfChildren() == 1 && expressionStatement.getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR))
+      || expressionStatement.hasDirectChildren(PythonGrammar.ANNASSIGN);
   }
 
   private static List<List<Trivia>> groupTrivias(Token token) {

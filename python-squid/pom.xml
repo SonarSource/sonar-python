@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.sonarsource.python</groupId>
     <artifactId>python</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.11-SNAPSHOT</version>
   </parent>
 
   <artifactId>python-squid</artifactId>
@@ -18,8 +18,8 @@
       <artifactId>sslr-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.sonarsource.sslr-squid-bridge</groupId>
-      <artifactId>sslr-squid-bridge</artifactId>
+      <groupId>org.sonarsource.sslr</groupId>
+      <artifactId>sslr-xpath</artifactId>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -35,11 +35,7 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
+      <artifactId>mockito-core</artifactId>
     </dependency>
   </dependencies>
 

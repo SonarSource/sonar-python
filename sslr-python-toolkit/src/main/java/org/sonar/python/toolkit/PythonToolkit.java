@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
  */
 package org.sonar.python.toolkit;
 
-import com.google.common.collect.ImmutableList;
+import java.util.Arrays;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.Tokenizer;
 import org.sonar.python.api.PythonKeyword;
@@ -38,7 +38,7 @@ public final class PythonToolkit {
   }
 
   public static List<Tokenizer> getPythonTokenizers() {
-    return ImmutableList.of(
+    return Arrays.asList(
       (Tokenizer) new KeywordsTokenizer("<span class=\"k\">", "</span>", PythonKeyword.keywordValues()));
   }
 

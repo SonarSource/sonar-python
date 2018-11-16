@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.python.TestPythonVisitorRunner;
@@ -43,8 +43,9 @@ public class PythonHighlighterTest {
     String dir = "src/test/resources/org/sonar/plugins/python";
 
     file = new File(dir, "/pythonHighlighter.py");
-    DefaultInputFile inputFile = new DefaultInputFile("moduleKey", file.getName())
-      .initMetadata(new FileMetadata().readMetadata(file, Charsets.UTF_8));
+    DefaultInputFile inputFile =  TestInputFileBuilder.create("moduleKey", file.getName())
+      .initMetadata(TestUtils.fileContent(file, Charsets.UTF_8))
+      .build();
 
     context = SensorContextTester.create(new File(dir));
     context.fileSystem().add(inputFile);

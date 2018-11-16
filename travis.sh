@@ -3,23 +3,17 @@
 set -euo pipefail
 
 function installTravisTools {
-  mkdir ~/.local
-  curl -sSL https://github.com/SonarSource/travis-utils/tarball/v33 | tar zx --strip-components 1 -C ~/.local
+  mkdir -p ~/.local
+  curl -sSL https://github.com/SonarSource/travis-utils/tarball/v51 | tar zx --strip-components 1 -C ~/.local
   source ~/.local/bin/install
 }
 
 installTravisTools
+source ~/.local/bin/installMaven35
+source ~/.local/bin/installJDK8
 
-case "$TEST" in
+export DEPLOY_PULL_REQUEST=true
 
-ci)
-  export DEPLOY_PULL_REQUEST=true
-  regular_mvn_build_deploy_analyze
-  ;;
+regular_mvn_build_deploy_analyze
 
-*)
-  echo "Unexpected TEST mode: $TEST"
-  exit 1
-  ;;
-
-esac
+./check-license-compliance.sh

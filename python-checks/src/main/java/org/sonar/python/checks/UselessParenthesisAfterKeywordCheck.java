@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,14 +36,19 @@ import org.sonar.python.api.PythonPunctuator;
 public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "S1721";
-  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = ImmutableMap.of(
-    PythonGrammar.ASSERT_STMT, "assert",
-    PythonGrammar.RAISE_STMT, "raise",
-    PythonGrammar.WHILE_STMT, "while");
+  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = initializeKeywordsFollowedByTest();
+
+  private static Map<PythonGrammar, String> initializeKeywordsFollowedByTest() {
+    Map<PythonGrammar, String> map = new EnumMap<>(PythonGrammar.class);
+    map.put(PythonGrammar.ASSERT_STMT, "assert");
+    map.put(PythonGrammar.RAISE_STMT, "raise");
+    map.put(PythonGrammar.WHILE_STMT, "while");
+    return Collections.unmodifiableMap(map);
+  }
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return immutableSet(
       PythonGrammar.ASSERT_STMT,
       PythonGrammar.DEL_STMT,
       PythonGrammar.IF_STMT,
@@ -70,7 +75,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
         checkParenthesis(testNodes.get(1), "elif", testNodes.get(1));
       }
     } else if (node.is(PythonGrammar.FOR_STMT)) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
+      visitForExpression(node);
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "in", node);
     } else if (node.is(PythonGrammar.RETURN_STMT)) {
       checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "return", node);
@@ -80,6 +85,12 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
       visitExceptClause(node);
     } else if (node.is(PythonGrammar.NOT_TEST)) {
       visitNotTest(node);
+    }
+  }
+
+  private void visitForExpression(AstNode node) {
+    if (node.getFirstChild(PythonGrammar.EXPRLIST).getNumberOfChildren() == 1) {
+      checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
     }
   }
 

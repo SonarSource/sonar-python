@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,12 +19,12 @@
  */
 package org.sonar.python.lexer;
 
-import com.google.common.collect.Lists;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Preprocessor;
 import com.sonar.sslr.api.PreprocessorAction;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.PythonTokenType;
@@ -53,7 +53,7 @@ public class IndentationPreprocessor extends Preprocessor {
         return PreprocessorAction.NO_OPERATION;
       }
 
-      List<Token> tokensToInject = Lists.newArrayList();
+      List<Token> tokensToInject = new ArrayList<>();
       while (lexerState.indentationStack.peek() > 0) {
         lexerState.indentationStack.pop();
         tokensToInject.add(Token.builder(token)

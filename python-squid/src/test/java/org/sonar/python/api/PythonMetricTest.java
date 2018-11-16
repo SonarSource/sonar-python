@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -28,14 +28,6 @@ public class PythonMetricTest {
   @Test
   public void test() {
     assertThat(PythonMetric.values()).hasSize(7);
-
-    for (PythonMetric metric : PythonMetric.values()) {
-      assertThat(metric.getName()).isEqualTo(metric.name());
-      assertThat(metric.isCalculatedMetric()).isFalse();
-      assertThat(metric.aggregateIfThereIsAlreadyAValue()).isTrue();
-      assertThat(metric.isThereAggregationFormula()).isTrue();
-      assertThat(metric.getCalculatedMetricFormula()).isNull();
-    }
   }
 
 }

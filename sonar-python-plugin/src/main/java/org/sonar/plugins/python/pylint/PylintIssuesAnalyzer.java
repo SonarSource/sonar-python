@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,23 +19,22 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.io.Files;
-import javax.annotation.Nullable;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.utils.command.Command;
-import org.sonar.api.utils.command.CommandExecutor;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
+import javax.annotation.Nullable;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.utils.command.Command;
+import org.sonar.api.utils.command.CommandExecutor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class PylintIssuesAnalyzer {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PylintSensor.class);
+  private static final Logger LOG = Loggers.get(PylintIssuesAnalyzer.class);
 
   private static final String FALLBACK_PYLINT = "pylint";
 
@@ -92,7 +91,8 @@ public class PylintIssuesAnalyzer {
       LOG.warn("Content of the error stream: \n\"{}\"", data);
     }
 
-    Files.write(StringUtils.join(stdOut.getData(), "\n"), out, charset);
+    String str = StringUtils.join(stdOut.getData(), "\n");
+    Files.write(out.toPath(), str.getBytes(charset));
 
     return parseOutput(stdOut.getData());
   }
@@ -104,7 +104,7 @@ public class PylintIssuesAnalyzer {
     if (!lines.isEmpty()) {
       for (String line : lines) {
         Issue issue = parser.parseLine(line);
-        if (issue != null){
+        if (issue != null) {
           issues.add(issue);
         }
       }

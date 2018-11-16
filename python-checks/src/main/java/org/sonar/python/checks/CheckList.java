@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableList;
+import org.sonar.python.PythonCheck;
 
 public final class CheckList {
 
@@ -31,7 +31,7 @@ public final class CheckList {
   }
 
   public static Iterable<Class> getChecks() {
-    return ImmutableList.<Class>of(
+    return PythonCheck.immutableSet(
         CognitiveComplexityFunctionCheck.class,
         ParsingErrorCheck.class,
         CommentRegularExpressionCheck.class,

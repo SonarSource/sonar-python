@@ -1,5 +1,5 @@
 <p>Jump statements (<code>return</code>, <code>break</code>, <code>continue</code>, and <code>raise</code>) move control flow out of the current code
-block. Typically, any statements in a block that come after a jump are simply wasted keystrokes lying in wait to confuse the unwary. </p>
+block. So any statements that come after a jump are dead code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 def fun(a):
@@ -24,6 +24,5 @@ def fun(a):
   <li> <a href="https://www.securecoding.cert.org/confluence/x/uQCSBg">CERT, MSC56-J.</a> - Detect and remove superfluous code and values </li>
   <li> <a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C.</a> - Detect and remove code that has no effect or is never
   executed </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/OYIyAQ">CERT, MSC07-CPP.</a> - Detect and remove dead code </li>
 </ul>
 

@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,10 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +41,12 @@ public class PylintRuleRepositoryTest {
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(180);
+    assertThat(rules).hasSize(325);
+
+    long rulesWithoutRemediationCost = rules.stream()
+      .filter(rule -> rule.debtRemediationFunction() == null)
+      .count();
+    assertThat(rulesWithoutRemediationCost).isEqualTo(28);
   }
 
 }

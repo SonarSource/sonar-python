@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,10 +19,10 @@
  */
 package org.sonar.python.toolkit;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ImmutableList;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
+import java.util.Arrays;
+import java.util.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.colorizer.KeywordsTokenizer;
@@ -43,7 +43,7 @@ public class PythonConfigurationModel extends AbstractConfigurationModel {
 
   private static final String CHARSET_PROPERTY_KEY = "sonar.sourceEncoding";
 
-  @VisibleForTesting
+  // VisibleForTesting
   ConfigurationProperty charsetProperty = new ConfigurationProperty("Charset", CHARSET_PROPERTY_KEY,
     getPropertyOrDefaultValue(CHARSET_PROPERTY_KEY, "UTF-8"),
     Validators.charsetValidator());
@@ -55,7 +55,7 @@ public class PythonConfigurationModel extends AbstractConfigurationModel {
 
   @Override
   public List<ConfigurationProperty> getProperties() {
-    return ImmutableList.of(charsetProperty);
+    return Collections.singletonList(charsetProperty);
   }
 
   @Override
@@ -65,16 +65,16 @@ public class PythonConfigurationModel extends AbstractConfigurationModel {
 
   @Override
   public List<Tokenizer> doGetTokenizers() {
-    return ImmutableList.of(
+    return Arrays.asList(
       (Tokenizer) new KeywordsTokenizer("<span class=\"k\">", "</span>", PythonKeyword.keywordValues()));
   }
 
-  @VisibleForTesting
+  // VisibleForTesting
   PythonConfiguration getConfiguration() {
     return new PythonConfiguration(Charset.forName(charsetProperty.getValue()));
   }
 
-  @VisibleForTesting
+  // VisibleForTesting
   static String getPropertyOrDefaultValue(String propertyKey, String defaultValue) {
     String propertyValue = System.getProperty(propertyKey);
 

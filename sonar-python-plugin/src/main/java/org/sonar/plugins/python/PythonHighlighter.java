@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
@@ -32,6 +31,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
+import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonGrammar;
@@ -96,11 +96,10 @@ public class PythonHighlighter extends PythonVisitor {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(
+    return PythonCheck.immutableSet(
       PythonGrammar.FUNCDEF,
       PythonGrammar.CLASSDEF,
-      PythonGrammar.FILE_INPUT
-    );
+      PythonGrammar.FILE_INPUT);
   }
 
   @Override

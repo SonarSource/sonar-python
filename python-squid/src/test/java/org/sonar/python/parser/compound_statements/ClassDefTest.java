@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -39,6 +39,8 @@ public class ClassDefTest extends RuleTest {
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: pass"));
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument): pass"));
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument=value): pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: x: int"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: x: int = 3"));
   }
 
 }

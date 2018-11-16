@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,34 +17,21 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.cpd;
+package org.sonar.plugins.python;
 
-import net.sourceforge.pmd.cpd.Tokenizer;
-import org.sonar.api.batch.AbstractCpdMapping;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.resources.Language;
-import org.sonar.plugins.python.Python;
-
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 
-public class PythonCpdMapping extends AbstractCpdMapping {
+public class TestUtils {
 
-  private final Python language;
-  private final Charset charset;
-
-  public PythonCpdMapping(Python language, FileSystem fs) {
-    this.language = language;
-    this.charset = fs.encoding();
-  }
-
-  @Override
-  public Tokenizer getTokenizer() {
-    return new PythonTokenizer(charset);
-  }
-
-  @Override
-  public Language getLanguage() {
-    return language;
+  public static String fileContent(File file, Charset charset) {
+    try {
+      return new String(Files.readAllBytes(file.toPath()), charset);
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot read " + file, e);
+    }
   }
 
 }

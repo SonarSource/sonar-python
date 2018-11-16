@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@ public class MethodNameCheck extends AbstractFunctionNameCheck {
 
   @Override
   public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return CheckUtils.isMethodDefinition(astNode);
+    return CheckUtils.isMethodOfNonDerivedClass(astNode);
   }
 
 }

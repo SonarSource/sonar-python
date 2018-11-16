@@ -1,16 +1,20 @@
 a = 1
 a = 2
 b = 1
+t1: int = 2
 
 def function_with_local():
     a = 11
     a.x = 1
     foo(a)
+    t2: str = "abc"
 
 def function_with_global():
-    global a
+    global a, t1
     a = 11
     c = 11
+    t1: int = 3
+    t3: int = 3
 
 def nesting1():
     a = 11
@@ -47,3 +51,4 @@ def dotted_name():
 class C:
     a = a
     b = a
+    c: int = b

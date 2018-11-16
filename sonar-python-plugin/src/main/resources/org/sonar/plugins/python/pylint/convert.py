@@ -26,7 +26,7 @@
 import sys
 import re
 
-RULEID_PATTERN = ":[a-z -]+ \(([A-Z][0-9]{4})\): ?\*?(.*?)\*?$"
+RULEID_PATTERN = ":[a-z _-]+ \(([A-Z][0-9]{4})\): ?\*?(.*?)\*?$"
 
 def parseNextRule(lines):
     ruleid, rulename = grabIdAndName(lines)
@@ -55,11 +55,11 @@ def grabDescr(lines):
     while lines:
         currline = lines.pop()
         if partOfDescr(currline):
-            descr += currline.strip()
+            descr += " " + currline.strip()
         else:
             lines.append(currline)
             break
-    return descr
+    return descr.strip()
 
 
 def header():

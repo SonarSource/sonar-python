@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2012-2017 SonarSource SA
+ * Copyright (C) 2012-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -30,7 +30,6 @@ import java.util.Map;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import static com.sonar.python.it.plugin.Tests.getProjectMeasure;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
@@ -58,100 +57,27 @@ public class CoverageTest {
       .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml");
     orchestrator.executeBuild(build);
 
-    ImmutableMap<String, Integer> values;
-    int linesToCover = 8;
-
-    if (is_before_sonar_6_2()) {
-      values = new Builder<String, Integer>()
-        .put("lines_to_cover", linesToCover)
-        .put("coverage", 80)
-        .put("line_coverage", 75)
-        .put("branch_coverage", 100)
-        .put("it_coverage", 40)
-        .put("it_line_coverage", 50)
-        .put("it_branch_coverage", 0)
-        .put("overall_coverage", 40)
-        .put("overall_line_coverage", 50)
-        .put("overall_branch_coverage", 0)
-        .build();
-
-    } else {
-      values = new Builder<String, Integer>()
-        .put("lines_to_cover", linesToCover)
-        .put("coverage", 90)
-        .put("line_coverage", 87)
-        .put("branch_coverage", 100)
-        .build();
-    }
-
-    Tests.assertProjectMeasures(PROJECT_KEY, values);
-  }
-
-  @Test
-  public void force_zero_coverage_for_untouched_files() throws Exception {
-    SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"))
-      .setProperty("sonar.python.coverage.reportPath", "ut-coverage.xml")
-      .setProperty("sonar.python.coverage.itReportPath", "it-coverage.xml")
-      .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml")
-      .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
-    orchestrator.executeBuild(build);
-
-    ImmutableMap<String, Integer> values;
-
-    if (is_before_sonar_6_2()) {
-      values = new ImmutableMap.Builder<String, Integer>()
-        .put("coverage", 50)
-        .put("line_coverage", 42)
-        .put("branch_coverage", 100)
-        .put("it_coverage", 25)
-        .put("it_line_coverage", 28)
-        .put("it_branch_coverage", 0)
-        .put("overall_coverage", 25)
-        .put("overall_line_coverage", 28)
-        .put("overall_branch_coverage", 0)
-        .build();
-
-    } else {
-      values = new ImmutableMap.Builder<String, Integer>()
+    ImmutableMap<String, Integer> values = new Builder<String, Integer>()
+        .put("lines_to_cover", 14)
         .put("coverage", 56)
         .put("line_coverage", 50)
         .put("branch_coverage", 100)
         .build();
-    }
 
     Tests.assertProjectMeasures(PROJECT_KEY, values);
   }
 
   @Test
-  public void force_zero_coverage_with_no_report() throws Exception {
+  public void no_report() throws Exception {
     SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"))
-      .setProperty("sonar.python.coverage.forceZeroCoverage", "true");
+      .setProjectDir(new File("projects/coverage_project"));
     orchestrator.executeBuild(build);
 
     Map<String, Integer> expected = new HashMap<>();
-    if (is_before_sonar_6_2()) {
-      expected.put("coverage", 0);
-      expected.put("line_coverage", 0);
-      expected.put("branch_coverage", null);
-      expected.put("it_coverage", 0);
-      expected.put("it_line_coverage", 0);
-      expected.put("it_branch_coverage", null);
-      expected.put("overall_coverage", 0);
-      expected.put("overall_line_coverage", 0);
-      expected.put("overall_branch_coverage", null);
-    } else {
-      expected.put("coverage", 0);
-      expected.put("line_coverage", 0);
-      expected.put("branch_coverage", null);
-      expected.put("it_coverage", null);
-      expected.put("it_line_coverage", null);
-      expected.put("it_branch_coverage", null);
-      expected.put("overall_coverage", null);
-      expected.put("overall_line_coverage", null);
-      expected.put("overall_branch_coverage", null);
-    }
+    expected.put("lines_to_cover", 14);
+    expected.put("coverage", 0);
+    expected.put("line_coverage", 0);
+    expected.put("branch_coverage", null);
     Tests.assertProjectMeasures(PROJECT_KEY, expected);
   }
 
@@ -170,13 +96,8 @@ public class CoverageTest {
         nbLog++;
       }
     }
-    assertThat(nbLog).isEqualTo(3);
-    assertThat(getProjectMeasure(PROJECT_KEY, "coverage")).isNull();
-    assertThat(getProjectMeasure(PROJECT_KEY, "it_coverage")).isNull();
-    assertThat(getProjectMeasure(PROJECT_KEY, "overall_coverage")).isNull();
+    assertThat(nbLog).isEqualTo(1);
+    assertThat(Tests.getMeasureAsDouble(PROJECT_KEY, "coverage")).isZero();
   }
 
-  private static boolean is_before_sonar_6_2() {
-    return !orchestrator.getConfiguration().getSonarVersion().isGreaterThanOrEquals("6.2");
-  }
 }

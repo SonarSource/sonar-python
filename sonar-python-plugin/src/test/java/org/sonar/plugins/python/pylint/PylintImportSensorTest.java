@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,98 +19,74 @@
  */
 package org.sonar.plugins.python.pylint;
 
+import com.google.common.collect.ImmutableMap;
 import java.io.File;
-import java.nio.file.Paths;
-import org.junit.Before;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.function.Predicate;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
-import org.sonar.api.component.ResourcePerspectives;
-import org.sonar.api.config.MapSettings;
-import org.sonar.api.config.Settings;
-import org.sonar.api.issue.Issuable;
-import org.sonar.api.resources.Project;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.config.internal.ConfigurationBridge;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.TestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class PylintImportSensorTest {
-  private Settings settings;
-  private DefaultFileSystem fileSystem;
-  private ActiveRules activeRules;
-  private SensorContext context;
-  private DefaultInputFile inputFile;
 
-  @Before
-  public void init() {
-    settings = new MapSettings();
-    settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
-    fileSystem = new DefaultFileSystem(new File("src/test/resources/org/sonar/plugins/python/pylint"));
-
-    inputFile = new DefaultInputFile("", "src/prod.py").setLanguage(Python.KEY);
-    fileSystem.add(inputFile);
-    activeRules = (new ActiveRulesBuilder())
-        .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
-        .setName("Invalid name")
-        .activate()
-        .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0111"))
-        .setName("Missing docstring")
-        .activate()
-        .build();
-    context = mock(SensorContext.class);
-  }
-
-  @Test
-  public void shouldNotThrowWhenInstantiating() {
-    new PylintImportSensor(settings, activeRules, fileSystem, mock(ResourcePerspectives.class));
-  }
-
-  @Test
-  public void shouldExecuteOnlyWhenNecessary() {
-    DefaultFileSystem fileSystemForeign = new DefaultFileSystem(Paths.get(""));
-
-    Project project = mock(Project.class);
-
-    ActiveRules emptyProfile = mock(ActiveRules.class);
-
-    checkNecessityOfExecution(project, activeRules, fileSystem, true);
-    checkNecessityOfExecution(project, emptyProfile, fileSystem, false);
-
-    checkNecessityOfExecution(project, activeRules, fileSystemForeign, false);
-    checkNecessityOfExecution(project, emptyProfile, fileSystemForeign, false);
-  }
+  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/pylint");
+  private final SensorContextTester context = SensorContextTester.create(baseDir);
 
   @Test
   public void parse_report() {
-    ResourcePerspectives perspectives = mock(ResourcePerspectives.class);
-    Issuable issuable = mock(Issuable.class);
-    when(perspectives.as(Issuable.class, inputFile)).thenReturn(issuable);
-    Issuable.IssueBuilder issueBuilder = mock(Issuable.IssueBuilder.class);
-    when(issuable.newIssueBuilder()).thenReturn(issueBuilder);
-    when(issueBuilder.ruleKey(Mockito.any(RuleKey.class))).thenReturn(issueBuilder);
-    when(issueBuilder.line(Mockito.any(Integer.class))).thenReturn(issueBuilder);
-    when(issueBuilder.message(Mockito.any(String.class))).thenReturn(issueBuilder);
+    context.settings().setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
 
-    PylintImportSensor sensor = new PylintImportSensor(settings, activeRules, fileSystem, perspectives);
-    sensor.analyse(mock(Project.class), context);
+    File file = new File(baseDir, "src/file1.py");
+    DefaultInputFile inputFile = TestInputFileBuilder.create("", "src/file1.py")
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
+      .build();
+    context.fileSystem().add(inputFile);
 
-    verify(issuable, times(3)).addIssue(any(org.sonar.api.issue.Issue.class));
+    context.setActiveRules((new ActiveRulesBuilder())
+      .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
+      .setName("Invalid name")
+      .activate()
+      .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0111"))
+      .setName("Missing docstring")
+      .activate()
+      .build());
 
+    PylintImportSensor sensor = new PylintImportSensor(context.config());
+    sensor.execute(context);
+    assertThat(context.allIssues()).hasSize(3);
+    assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key())
+      .containsOnly(inputFile.key());
   }
 
-  private void checkNecessityOfExecution(Project project, ActiveRules currentActiveRules, DefaultFileSystem fileSystem, boolean shouldExecute) {
-    PylintImportSensor sensor = new PylintImportSensor(settings, currentActiveRules, fileSystem, mock(ResourcePerspectives.class));
-    assertThat(sensor.shouldExecuteOnProject(project)).isEqualTo(shouldExecute);
+  @Test
+  public void sensor_descriptor() {
+    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+    new PylintImportSensor(context.config()).describe(descriptor);
+    assertThat(descriptor.name()).isEqualTo("PylintImportSensor");
+    assertThat(descriptor.languages()).containsOnly("py");
+    assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
+    assertThat(descriptor.ruleRepositories()).containsExactly(PylintRuleRepository.REPOSITORY_KEY);
+    Predicate<Configuration> configurationPredicate = descriptor.configurationPredicate();
+    assertThat(configurationPredicate.test(configuration(ImmutableMap.of(PylintImportSensor.REPORT_PATH_KEY, "something")))).isTrue();
+    assertThat(configurationPredicate.test(configuration(ImmutableMap.of("xxx", "yyy")))).isFalse();
+  }
+
+  private Configuration configuration(Map<String, String> mapproperties) {
+    return new ConfigurationBridge(new MapSettings().addProperties(mapproperties));
   }
 
 }

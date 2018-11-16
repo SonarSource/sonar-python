@@ -1,6 +1,5 @@
 # Definition of QA pipeline at SonarSource
 
-
 TEST:
   - plugin
   - ruling
@@ -8,7 +7,7 @@ TEST:
 SQ_VERSION: 
   - DEV
   - LATEST_RELEASE
-  - LTS
+  - LATEST_RELEASE[6.7]
 
 exclude:
   - TEST: plugin
@@ -18,4 +17,4 @@ exclude:
     SQ_VERSION: DEV
 
   - TEST: ruling
-    SQ_VERSION: LTS
+    SQ_VERSION: LATEST_RELEASE[6.7]

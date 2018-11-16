@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.sonarsource.python</groupId>
     <artifactId>python</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.11-SNAPSHOT</version>
   </parent>
 
   <artifactId>sonar-python-plugin</artifactId>
@@ -39,12 +39,12 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.sonarsource.sslr</groupId>
-      <artifactId>sslr-testing-harness</artifactId>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
+      <groupId>org.sonarsource.sslr</groupId>
+      <artifactId>sslr-testing-harness</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
@@ -54,14 +54,9 @@
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>woodstox-core-lgpl</artifactId>
     </dependency>
-    <!-- Used by PylintRuleRepository->org.sonar.squidbridge.rules.SqaleXmlLoader -->
     <dependency>
       <groupId>org.codehaus.staxmate</groupId>
       <artifactId>staxmate</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -70,6 +65,10 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
     </dependency>
   </dependencies>
 
@@ -96,9 +95,28 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <createDependencyReducedPom>false</createDependencyReducedPom>
-              <minimizeJar>false</minimizeJar>
               <shadedArtifactAttached>false</shadedArtifactAttached>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <minimizeJar>true</minimizeJar>
+              <filters>
+                <filter>
+                  <artifact>jaxen:jaxen</artifact>
+                  <includes>
+                    <include>**</include>
+                  </includes>
+                </filter>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/LICENSE*</exclude>
+                    <exclude>META-INF/NOTICE*</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>LICENSE*</exclude>
+                    <exclude>NOTICE*</exclude>
+                  </excludes>
+                </filter>
+              </filters>
             </configuration>
           </execution>
         </executions>
@@ -117,8 +135,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <minsize>4000000</minsize>
-                  <maxsize>4100000</maxsize>
+                  <minsize>1500000</minsize>
+                  <maxsize>1600000</maxsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

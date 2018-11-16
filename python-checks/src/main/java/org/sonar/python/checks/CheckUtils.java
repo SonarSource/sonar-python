@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -22,11 +22,16 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
 public class CheckUtils {
+
+  private static final Pattern STRING_INTERPOLATION_PREFIX = Pattern.compile("^[^'\"fF]*+[fF]");
+  private static final Pattern STRING_LITERAL_QUOTE = Pattern.compile("[\"']");
 
   private CheckUtils() {
 
@@ -44,6 +49,11 @@ public class CheckUtils {
     }
     return parent != null && parent.is(PythonGrammar.CLASSDEF);
   }
+
+  public static boolean isMethodOfNonDerivedClass(AstNode node) {
+    return isMethodDefinition(node) && !classHasInheritance(node.getFirstAncestor(PythonGrammar.CLASSDEF));
+  }
+
 
   public static boolean equalNodes(AstNode node1, AstNode node2) {
     if (!node1.getType().equals(node2.getType()) || node1.getNumberOfChildren() != node2.getNumberOfChildren()) {
@@ -81,6 +91,12 @@ public class CheckUtils {
   }
 
   public static boolean isAssignmentExpression(AstNode expression) {
+    if (expression.is(PythonGrammar.EXPRESSION_STMT)) {
+      AstNode assignNode = expression.getFirstChild(PythonGrammar.ANNASSIGN);
+      if (assignNode != null && assignNode.getFirstChild(PythonPunctuator.ASSIGN) != null) {
+        return true;
+      }
+    }
     int numberOfChildren = expression.getNumberOfChildren();
     int numberOfAssign = expression.getChildren(PythonPunctuator.ASSIGN).size();
     if (numberOfChildren == 3 && numberOfAssign == 1) {
@@ -98,4 +114,18 @@ public class CheckUtils {
     }
     return false;
   }
+
+  public static boolean isStringInterpolation(Token token) {
+    return token.getType().equals(PythonTokenType.STRING) &&
+      STRING_INTERPOLATION_PREFIX.matcher(token.getOriginalValue()).find();
+  }
+
+  public static String stringLiteralContent(String stringLiteral) {
+    Matcher quote = STRING_LITERAL_QUOTE.matcher(stringLiteral);
+    if (!quote.find()) {
+      throw new IllegalStateException("Invalid string literal: " + stringLiteral);
+    }
+    return stringLiteral.substring(quote.end(), stringLiteral.length() - 1);
+  }
+
 }

@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.collect.Lists;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -54,7 +54,7 @@ public class DirectoryScanner {
         return pattern.match(FilenameUtils.separatorsToUnix(path));
       }
     };
-    return Lists.newArrayList(FileUtils.listFiles(baseDir, fileFilter, TrueFileFilter.INSTANCE));
+    return new ArrayList<>(FileUtils.listFiles(baseDir, fileFilter, TrueFileFilter.INSTANCE));
   }
 
 }

@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,8 @@
  */
 package org.sonar.python;
 
-import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,8 +36,13 @@ public class PythonBuiltinFunctionsTest {
   }
 
   @Test(expected = IllegalStateException.class)
-  public void unknown_resource() throws Exception {
-    PythonBuiltinFunctions.loadBuiltinNames(new URL("file:/xxxx"));
+  public void unreadable_inputstream() throws Exception {
+    PythonBuiltinFunctions.loadBuiltinNames(new InputStream() {
+      @Override
+      public int read() throws IOException {
+        throw new IOException("Can't read!");
+      }
+    });
   }
 
 }

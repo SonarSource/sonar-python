@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,11 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +53,7 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.FUNCDEF);
+    return Collections.singleton(PythonGrammar.FUNCDEF);
   }
 
   @Override
@@ -73,8 +73,8 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
           varNames = new NewSymbolsAnalyzer().getVariablesFromLongAssignmentExpression(varNames, expression);
         }
       }
-      for (int i = 0; i < varNames.size(); i++){
-        if (CheckUtils.containsValue(parameters, varNames.get(i).getValue())||CheckUtils.containsValue(forCounterNames, varNames.get(i).getValue())){
+      for (int i = 0; i < varNames.size(); i++) {
+        if (CheckUtils.containsValue(parameters, varNames.get(i).getValue()) || CheckUtils.containsValue(forCounterNames, varNames.get(i).getValue())) {
           varNames.remove(i);
         }
       }
@@ -103,11 +103,11 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
   private static List<Token> getForCounterNames(AstNode suite) {
     List<AstNode> forStatements = suite.getDescendants(PythonGrammar.FOR_STMT);
     List<Token> result = new LinkedList<>();
-    for (AstNode forStatement : forStatements){
+    for (AstNode forStatement : forStatements) {
       AstNode counters = forStatement.getFirstChild(PythonGrammar.EXPRLIST);
-      for (AstNode name : counters.getDescendants(PythonGrammar.NAME)){
+      for (AstNode name : counters.getDescendants(PythonGrammar.NAME)) {
         Token token = name.getToken();
-        if (token.getType().equals(GenericTokenType.IDENTIFIER)){
+        if (token.getType().equals(GenericTokenType.IDENTIFIER)) {
           result.add(token);
         }
       }

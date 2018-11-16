@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -100,6 +100,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   EXEC_STMT,
   ASSERT_STMT,
 
+  ANNASSIGN,
   AUGASSIGN,
 
   PASS_STMT,
@@ -172,11 +173,17 @@ public enum PythonGrammar implements GrammarRuleKey {
 
   public static void grammar(LexerfulGrammarBuilder b) {
 
+    // https://github.com/python/cpython/blob/v3.6.4/Grammar/Grammar#L41
     b.rule(EXPRESSION_STMT).is(
       TESTLIST_STAR_EXPR,
       b.firstOf(
+        ANNASSIGN,
         b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
         b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR))));
+
+    // https://github.com/python/cpython/blob/v3.6.4/Grammar/Grammar#L43
+    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", TEST));
+
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 
@@ -226,7 +233,7 @@ public enum PythonGrammar implements GrammarRuleKey {
         b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR))), b.optional(",")))),
       b.sequence(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))))));
 
-    b.rule(ARGLIST).is(b.optional(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(",")));
+    b.rule(ARGLIST).is(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","));
     b.rule(ARGUMENT).is(b.firstOf(
       b.sequence("*", TEST),
       b.sequence("**", TEST),

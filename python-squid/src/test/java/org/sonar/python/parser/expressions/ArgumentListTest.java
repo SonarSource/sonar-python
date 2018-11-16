@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,24 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.cpd;
+package org.sonar.python.parser.expressions;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.plugins.python.Python;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.parser.RuleTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class PythonCpdMappingTest {
+public class ArgumentListTest extends RuleTest {
+
+  @Before
+  public void init() {
+    setRootRule(PythonGrammar.ARGLIST);
+  }
 
   @Test
-  public void test() {
-    Python language = mock(Python.class);
-    FileSystem fs = mock(FileSystem.class);
-    PythonCpdMapping mapping = new PythonCpdMapping(language, fs);
-    assertThat(mapping.getLanguage()).isSameAs(language);
-    assertThat(mapping.getTokenizer()).isInstanceOf(PythonTokenizer.class);
+  public void arg_list() {
+    assertThat(p).matches("1");
+    assertThat(p).matches("a, b");
+    assertThat(p).notMatches("");
   }
 
 }

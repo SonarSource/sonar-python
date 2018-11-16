@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,13 +19,11 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
-import org.sonar.api.utils.command.Command;
-import org.sonar.api.utils.command.CommandExecutor;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
+import org.sonar.api.utils.command.Command;
+import org.sonar.api.utils.command.CommandExecutor;
 
 public class PylintArguments {
 
@@ -45,16 +43,16 @@ public class PylintArguments {
     CommandStreamConsumer out = new CommandStreamConsumer();
     CommandStreamConsumer err = new CommandStreamConsumer();
     CommandExecutor.create().execute(command, out, err, timeout);
-    Iterable<String> outputLines = Iterables.concat(out.getData(), err.getData());
-    for (String outLine : outputLines) {
+    Stream<String> outputLines = Stream.concat(out.getData().stream(), err.getData().stream());
+
+    for (String outLine : (Iterable<String>) outputLines::iterator) {
       Matcher matcher = PYLINT_VERSION_PATTERN.matcher(outLine);
       if (matcher.matches()) {
         return matcher.group(1);
       }
     }
-    String message =
-      "Failed to determine pylint version with command: \"" + command.toCommandLine()
-        + "\", received " + Iterables.size(outputLines) + " line(s) of output:\n" + Joiner.on('\n').join(outputLines);
+    String message = String.format("Failed to determine pylint version with command: \"%s\", received %d line(s) of output:%n%s",
+      command.toCommandLine(), out.getData().size() + err.getData().size(), out.getData() + "\n" + err.getData());
     throw new IllegalArgumentException(message);
   }
 

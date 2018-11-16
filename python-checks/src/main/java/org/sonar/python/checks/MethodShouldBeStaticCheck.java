@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -39,12 +39,12 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.FUNCDEF);
+    return Collections.singleton(PythonGrammar.FUNCDEF);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (isMethodOfNonDerivedClass(node)
+    if (CheckUtils.isMethodOfNonDerivedClass(node)
       && !alreadyStaticMethod(node)
       && !isBuiltInMethod(node)
       && hasValuableCode(node)
@@ -54,10 +54,6 @@ public class MethodShouldBeStaticCheck extends PythonCheck {
         addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
       }
     }
-  }
-
-  private static boolean isMethodOfNonDerivedClass(AstNode node) {
-    return CheckUtils.isMethodDefinition(node) && !CheckUtils.classHasInheritance(node.getFirstAncestor(PythonGrammar.CLASSDEF));
   }
 
   private static boolean mayRaiseNotImplementedError(AstNode function) {

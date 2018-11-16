@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -39,7 +39,7 @@ public class UselessParenthesisCheck extends PythonCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.ATOM);
+    return Collections.singleton(PythonGrammar.ATOM);
   }
 
   @Override
@@ -48,7 +48,7 @@ public class UselessParenthesisCheck extends PythonCheck {
     boolean hasParentheses = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS);
     if (hasParentheses) {
       AstNode child1 = children.get(1);
-      if(child1.getChildren(PythonGrammar.TEST).size() == 1
+      if (child1.getChildren(PythonGrammar.TEST).size() == 1
         && child1.getFirstChild(PythonPunctuator.COMMA) == null
         && !child1.hasDirectChildren(PythonGrammar.COMP_FOR)) {
         AstNode test = child1.getFirstChild(PythonGrammar.TEST);

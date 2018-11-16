@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -52,6 +52,13 @@ public class FileLinesVisitorTest {
 
     assertThat(visitor.getLinesOfCode()).containsOnly(2, 4);
     assertThat(visitor.getLinesOfComments()).containsOnly(4);
+  }
+
+  @Test
+  public void executable_lines() throws Exception {
+    FileLinesVisitor visitor = new FileLinesVisitor(false);
+    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "executable_lines.py"), visitor);
+    assertThat(visitor.getExecutableLines()).containsOnly(1, 2, 4, 7, 11, 13, 14, 15, 16, 18, 20, 21, 22, 23, 25, 27, 28, 29);
   }
 
 }

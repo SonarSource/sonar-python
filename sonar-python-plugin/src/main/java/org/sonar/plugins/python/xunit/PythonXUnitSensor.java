@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -24,29 +24,32 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.xml.stream.XMLStreamException;
-
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.config.Settings;
+import org.sonar.api.batch.measure.Metric;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.parser.StaxParser;
 
 public class PythonXUnitSensor extends PythonReportSensor {
-  private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
+  private static final Logger LOG = Loggers.get(PythonXUnitSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
   public static final String SKIP_DETAILS = "sonar.python.xunit.skipDetails";
 
-  public PythonXUnitSensor(Settings conf, FileSystem fileSystem) {
-    super(conf, fileSystem);
+  private final FileSystem fileSystem;
+
+  public PythonXUnitSensor(Configuration conf, FileSystem fileSystem) {
+    super(conf);
+    this.fileSystem = fileSystem;
   }
 
   @Override
@@ -61,7 +64,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   @Override
   protected void processReports(final SensorContext context, List<File> reports) throws XMLStreamException {
-    if (conf.getBoolean(SKIP_DETAILS)) {
+    if (conf.getBoolean(SKIP_DETAILS).orElse(Boolean.FALSE)) {
       simpleMode(context, reports);
     } else {
       detailedMode(context, reports);
@@ -75,11 +78,11 @@ public class PythonXUnitSensor extends PythonReportSensor {
       parser.parse(report);
     }
 
-    double testsCount = 0.0;
-    double testsSkipped = 0.0;
-    double testsErrors = 0.0;
-    double testsFailures = 0.0;
-    double testsTime = 0.0;
+    int testsCount = 0;
+    int testsSkipped = 0;
+    int testsErrors = 0;
+    int testsFailures = 0;
+    long testsTime = 0;
     for (TestSuite report : parserHandler.getParsedReports()) {
       testsCount += report.getTests() - report.getSkipped();
       testsSkipped += report.getSkipped();
@@ -89,11 +92,12 @@ public class PythonXUnitSensor extends PythonReportSensor {
     }
 
     if (testsCount > 0) {
-      context.saveMeasure(CoreMetrics.TESTS, testsCount);
-      context.saveMeasure(CoreMetrics.SKIPPED_TESTS, testsSkipped);
-      context.saveMeasure(CoreMetrics.TEST_ERRORS, testsErrors);
-      context.saveMeasure(CoreMetrics.TEST_FAILURES, testsFailures);
-      context.saveMeasure(CoreMetrics.TEST_EXECUTION_TIME, testsTime);
+      InputComponent module = context.module();
+      saveMeasure(context, module, CoreMetrics.TESTS, testsCount);
+      saveMeasure(context, module, CoreMetrics.SKIPPED_TESTS, testsSkipped);
+      saveMeasure(context, module, CoreMetrics.TEST_ERRORS, testsErrors);
+      saveMeasure(context, module, CoreMetrics.TEST_FAILURES, testsFailures);
+      saveMeasure(context, module, CoreMetrics.TEST_EXECUTION_TIME, testsTime);
     }
   }
 
@@ -118,11 +122,11 @@ public class PythonXUnitSensor extends PythonReportSensor {
         LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), inputFile.relativePath());
       }
 
-      context.saveMeasure(inputFile, CoreMetrics.SKIPPED_TESTS, (double) fileReport.getSkipped());
-      context.saveMeasure(inputFile, CoreMetrics.TESTS, (double) fileReport.getTests() - fileReport.getSkipped());
-      context.saveMeasure(inputFile, CoreMetrics.TEST_ERRORS, (double) fileReport.getErrors());
-      context.saveMeasure(inputFile, CoreMetrics.TEST_FAILURES, (double) fileReport.getFailures());
-      context.saveMeasure(inputFile, CoreMetrics.TEST_EXECUTION_TIME, (double) fileReport.getTime());
+      saveMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, fileReport.getSkipped());
+      saveMeasure(context, inputFile, CoreMetrics.TESTS, fileReport.getTests() - fileReport.getSkipped());
+      saveMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, fileReport.getErrors());
+      saveMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, fileReport.getFailures());
+      saveMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, fileReport.getTime());
     }
   }
 
@@ -177,4 +181,21 @@ public class PythonXUnitSensor extends PythonReportSensor {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
     return fileSystem.inputFile(fileSystem.predicates().is(file));
   }
+
+  private static void saveMeasure(SensorContext context, InputComponent component, Metric<Integer> metric, int value) {
+    context.<Integer>newMeasure()
+      .on(component)
+      .forMetric(metric)
+      .withValue(value)
+      .save();
+  }
+
+  private static void saveMeasure(SensorContext context, InputComponent component, Metric<Long> metric, long value) {
+    context.<Long>newMeasure()
+      .on(component)
+      .forMetric(metric)
+      .withValue(value)
+      .save();
+  }
+
 }

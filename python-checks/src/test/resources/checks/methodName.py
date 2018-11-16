@@ -9,6 +9,9 @@ class MyClass:
     def long_method_name_is_still_correct():
         pass
 
+class MyTestCase(unittest.TestCase):
+    def setUp(self): # ok, potentially overridden method, the name can't be changed
+        self.message = 'hello'
 
 def This_Is_A_Function():
     pass

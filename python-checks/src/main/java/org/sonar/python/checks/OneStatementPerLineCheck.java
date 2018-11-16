@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,10 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Maps;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -36,11 +35,11 @@ import org.sonar.python.api.PythonGrammar;
 public class OneStatementPerLineCheck extends PythonCheck {
 
   public static final String CHECK_KEY = "OneStatementPerLine";
-  private final Map<Integer, Integer> statementsPerLine = Maps.newHashMap();
+  private final Map<Integer, Integer> statementsPerLine = new HashMap<>();
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return ImmutableSet.of(PythonGrammar.SIMPLE_STMT, PythonGrammar.SUITE);
+    return immutableSet(PythonGrammar.SIMPLE_STMT, PythonGrammar.SUITE);
   }
 
   @Override

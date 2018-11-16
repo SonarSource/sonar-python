@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,7 +19,6 @@
  */
 package org.sonar.python.semantic;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
@@ -96,12 +95,13 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
     @Override
     public Set<AstNodeType> subscribedKinds() {
-      return ImmutableSet.of(
-        PythonGrammar.FUNCDEF,
-        PythonGrammar.CLASSDEF,
-        PythonGrammar.EXPRESSION_STMT,
-        PythonGrammar.GLOBAL_STMT,
-        PythonGrammar.NONLOCAL_STMT);
+      Set<AstNodeType> set = new HashSet<>();
+      set.add(PythonGrammar.FUNCDEF);
+      set.add(PythonGrammar.CLASSDEF);
+      set.add(PythonGrammar.EXPRESSION_STMT);
+      set.add(PythonGrammar.GLOBAL_STMT);
+      set.add(PythonGrammar.NONLOCAL_STMT);
+      return Collections.unmodifiableSet(set);
     }
 
     @Override
@@ -124,21 +124,30 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         createScope(node, currentScope);
 
       } else if (node.is(PythonGrammar.EXPRESSION_STMT)) {
-        for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.AUGASSIGN)) {
-          if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
-            new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());
-          }
-          AstNode target = assignOperator.getPreviousSibling();
-          if (target.getTokens().size() == 1) {
-            addWriteUsage(target.getFirstDescendant(PythonGrammar.NAME));
-          }
-        }
+        visitAssignment(node);
 
       } else if (node.is(PythonGrammar.GLOBAL_STMT)) {
         node.getChildren(PythonGrammar.NAME).forEach(name -> currentScope().addGlobalName(name.getTokenValue()));
 
       } else if (node.is(PythonGrammar.NONLOCAL_STMT)) {
         node.getChildren(PythonGrammar.NAME).forEach(name -> currentScope().addNonlocalName(name.getTokenValue()));
+      }
+    }
+
+    private void visitAssignment(AstNode node) {
+      for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.AUGASSIGN, PythonGrammar.ANNASSIGN)) {
+        AstNode target = assignOperator.getPreviousSibling();
+        if (assignOperator.is(PythonGrammar.ANNASSIGN)) {
+          assignOperator = assignOperator.getFirstChild(PythonPunctuator.ASSIGN);
+        }
+        if (assignOperator != null) {
+          if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
+            new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());
+          }
+          if (target.getTokens().size() == 1) {
+            addWriteUsage(target.getFirstDescendant(PythonGrammar.NAME));
+          }
+        }
       }
     }
 
@@ -180,7 +189,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     @Override
     public Set<Symbol> symbols(AstNode scopeTree) {
       Scope scope = scopesByRootTree.get(scopeTree);
-      return scope == null ? ImmutableSet.of() : scope.symbols();
+      return scope == null ? Collections.emptySet() : scope.symbols();
     }
 
   }
@@ -310,11 +319,12 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
     @Override
     public Set<AstNodeType> subscribedKinds() {
-      return ImmutableSet.of(
-        PythonGrammar.FUNCDEF,
-        PythonGrammar.CLASSDEF,
-        PythonGrammar.ATOM,
-        PythonGrammar.DOTTED_NAME);
+      Set<AstNodeType> set = new HashSet<>();
+      set.add(PythonGrammar.FUNCDEF);
+      set.add(PythonGrammar.CLASSDEF);
+      set.add(PythonGrammar.ATOM);
+      set.add(PythonGrammar.DOTTED_NAME);
+      return Collections.unmodifiableSet(set);
     }
 
     @Override

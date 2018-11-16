@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,9 +19,11 @@
  */
 package org.sonar.python.lexer;
 
-import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.channel.Channel;
@@ -33,7 +35,7 @@ import org.sonar.sslr.channel.CodeReader;
 public class StringLiteralsChannel extends Channel<Lexer> {
 
   private static final char EOF = (char) -1;
-  private static final Set<Character> PREFIX_CHARS = ImmutableSet.of('R', 'F', 'U', 'B');
+  private static final Set<Character> PREFIX_CHARS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList('R', 'F', 'U', 'B')));
 
   private final StringBuilder sb = new StringBuilder();
 
@@ -56,12 +58,12 @@ public class StringLiteralsChannel extends Channel<Lexer> {
       sb.append((char) code.pop());
     }
     output.addToken(Token.builder()
-        .setLine(line)
-        .setColumn(column)
-        .setURI(output.getURI())
-        .setValueAndOriginalValue(sb.toString())
-        .setType(PythonTokenType.STRING)
-        .build());
+      .setLine(line)
+      .setColumn(column)
+      .setURI(output.getURI())
+      .setValueAndOriginalValue(sb.toString())
+      .setType(PythonTokenType.STRING)
+      .build());
     sb.setLength(0);
     return true;
   }

@@ -5,19 +5,18 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>40</version>
+    <version>47</version>
   </parent>
 
   <groupId>org.sonarsource.python</groupId>
   <artifactId>python</artifactId>
-  <version>1.9-SNAPSHOT</version>
+  <version>1.11-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Python</name>
   <inceptionYear>2011</inceptionYear>
   <organization>
     <name>SonarSource and Waleri Enns</name>
-    <url>http://www.sonarsource.com</url>
   </organization>
 
   <licenses>
@@ -75,9 +74,9 @@
     <sonar.pluginName>Python</sonar.pluginName>
     <gitRepositoryName>sonar-python</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
-    <artifactsToPublish>${project.groupId}:sonar-python-plugin:jar</artifactsToPublish>
+    <artifactsToPublish>${project.groupId}:sonar-python-plugin:jar,${project.groupId}:sslr-python-toolkit:jar</artifactsToPublish>
     <!-- we depend on API ${sonar.version} but we keep backward compatibility with LTS -->
-    <sonarQubeMinVersion>5.6</sonarQubeMinVersion>
+    <sonarQubeMinVersion>6.7</sonarQubeMinVersion>
 
     <!-- versions -->
     <commons.io.version>2.5</commons.io.version>
@@ -86,13 +85,12 @@
     <junit.version>4.12</junit.version>
     <logback.version>1.1.7</logback.version>
     <maven.project.version>2.2.1</maven.project.version>
-    <mockito.version>1.10.19</mockito.version>
-    <slf4j.version>1.7.21</slf4j.version>
-    <sonar.version>6.2</sonar.version>
-    <sonar.orchestrator.version>3.13</sonar.orchestrator.version>
-    <sonarlint-core.version>2.4.1</sonarlint-core.version>
-    <sslr.version>1.21</sslr.version>
-    <sslr.squid.bridge.version>2.6.1</sslr.squid.bridge.version>
+    <mockito.version>2.21.0</mockito.version>
+    <sonar.version>6.7</sonar.version>
+    <sonar.orchestrator.version>3.21.0.1721</sonar.orchestrator.version>
+    <sonarlint-core.version>3.0.0.1140</sonarlint-core.version>
+    <sslr.version>1.23</sslr.version>
+    <sslr.xpath.version>1.22</sslr.xpath.version>
     <woodstox.version>4.4.1</woodstox.version>
   </properties>
 
@@ -116,23 +114,14 @@
         <version>${sslr.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.sonarsource.sslr-squid-bridge</groupId>
-        <artifactId>sslr-squid-bridge</artifactId>
-        <version>${sslr.squid.bridge.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.sonar</groupId>
-            <artifactId>sonar-plugin-api</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.codehaus.sonar.sslr</groupId>
-            <artifactId>sslr-core</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.picocontainer</groupId>
-            <artifactId>picocontainer</artifactId>
-          </exclusion>
-        </exclusions>
+        <groupId>org.sonarsource.sslr</groupId>
+        <artifactId>sslr-xpath</artifactId>
+        <version>${sslr.xpath.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonarsource.analyzer-commons</groupId>
+        <artifactId>sonar-analyzer-commons</artifactId>
+        <version>1.6.0.219</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.staxmate</groupId>
@@ -155,11 +144,6 @@
         <version>${commons.io.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>woodstox-core-lgpl</artifactId>
         <version>${woodstox.version}</version>
@@ -168,11 +152,6 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>${logback.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.6.2</version>
       </dependency>
 
       <!-- test dependencies -->
@@ -196,14 +175,8 @@
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
-        <artifactId>mockito-all</artifactId>
+        <artifactId>mockito-core</artifactId>
         <version>${mockito.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-project</artifactId>
-        <version>${maven.project.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -218,6 +191,13 @@
         <version>${sonarlint-core.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>22.0</version>
+        <scope>test</scope>
+      </dependency>
+
 
       <!-- provided dependencies -->
       <dependency>

@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2017 SonarSource SA
+ * Copyright (C) 2011-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,14 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.base.Charsets;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.plugins.python.Python;
-import org.sonar.squidbridge.rules.SqaleXmlLoader;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class PylintRuleRepository implements RulesDefinition {
 
@@ -31,7 +34,8 @@ public class PylintRuleRepository implements RulesDefinition {
   public static final String REPOSITORY_KEY = REPOSITORY_NAME;
 
   private static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
-  private static final String SQALE_FILE = "/com/sonar/sqale/python-model.xml";
+  private static final String REMEDIATION_FILE = "/org/sonar/plugins/python/pylint/remediation-cost.csv";
+
   private final RulesDefinitionXmlLoader xmlLoader;
 
   public PylintRuleRepository(RulesDefinitionXmlLoader xmlLoader) {
@@ -41,10 +45,34 @@ public class PylintRuleRepository implements RulesDefinition {
   @Override
   public void define(Context context) {
     NewRepository repository = context
-        .createRepository(REPOSITORY_KEY, Python.KEY)
-        .setName(REPOSITORY_NAME);
-    xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), Charsets.UTF_8.name());
-    SqaleXmlLoader.load(repository, SQALE_FILE);
+      .createRepository(REPOSITORY_KEY, Python.KEY)
+      .setName(REPOSITORY_NAME);
+    xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), UTF_8.name());
+    defineRemediationFunction(repository);
     repository.done();
   }
+
+  private static void defineRemediationFunction(NewRepository repository) {
+    Map<String, String> remediationCostMap = loadRemediationCostMap();
+    for (NewRule rule : repository.rules()) {
+      String gap = remediationCostMap.get(rule.key());
+      if (gap == null) {
+        throw new IllegalStateException("Missing remediation cost for rule " + rule.key());
+      } else if (!gap.equals("null")) {
+        rule.setDebtRemediationFunction(rule.debtRemediationFunctions().linear(gap));
+      }
+    }
+  }
+
+  private static Map<String, String> loadRemediationCostMap() {
+    Map<String, String> map = new HashMap<>();
+    try (Scanner scanner = new Scanner(PylintRuleRepository.class.getResourceAsStream(REMEDIATION_FILE), UTF_8.name())) {
+      while (scanner.hasNext()) {
+        String[] cols = scanner.next().split(",");
+        map.put(cols[0], cols[1]);
+      }
+    }
+    return map;
+  }
+
 }
