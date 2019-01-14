@@ -59,7 +59,6 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsInt("lines")).isEqualTo(6);
     assertThat(getProjectMeasureAsInt("files")).isEqualTo(1);
     assertThat(getProjectMeasureAsInt("statements")).isEqualTo(1);
-    assertThat(getProjectMeasureAsInt("directories")).isEqualTo(1);
     assertThat(getProjectMeasureAsInt("functions")).isEqualTo(0);
     assertThat(getProjectMeasureAsInt("classes")).isEqualTo(0);
     // Documentation
@@ -89,7 +88,6 @@ public class MetricsTest {
     assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(1);
     assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(6);
     assertThat(getDirectoryMeasureAsInt("files")).isEqualTo(1);
-    assertThat(getDirectoryMeasureAsInt("directories")).isEqualTo(1);
     assertThat(getDirectoryMeasureAsInt("statements")).isEqualTo(1);
     assertThat(getDirectoryMeasureAsInt("functions")).isEqualTo(0);
     assertThat(getDirectoryMeasureAsInt("classes")).isEqualTo(0);
