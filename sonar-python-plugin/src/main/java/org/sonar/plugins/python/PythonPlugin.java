@@ -24,6 +24,9 @@ import org.sonar.api.PropertyType;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.utils.Version;
+import org.sonar.plugins.python.bandit.BanditRulesDefinition;
+import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
@@ -38,6 +41,7 @@ public class PythonPlugin implements Plugin {
   // Subcategories
   private static final String GENERAL = "General";
   private static final String TEST_AND_COVERAGE = "Tests and Coverage";
+  private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
   private static final String PYLINT = "Pylint";
   private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATH_KEY + " instead. ";
 
@@ -93,7 +97,22 @@ public class PythonPlugin implements Plugin {
         .defaultValue(PythonCoverageSensor.OVERALL_DEFAULT_REPORT_PATH)
         .build(),
 
-      // XUNIT
+      Python.class,
+
+      PythonProfile.class,
+
+      PythonSquidSensor.class,
+      PythonRuleRepository.class);
+
+    if (context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
+      addXUnitExtensions(context);
+      addPylintExtensions(context);
+      addBanditExtensions(context);
+    }
+  }
+
+  private static void addXUnitExtensions(Context context) {
+    context.addExtensions(
       PropertyDefinition.builder(PythonXUnitSensor.SKIP_DETAILS)
         .index(23)
         .name("Skip the details when importing the Xunit reports")
@@ -113,8 +132,11 @@ public class PythonPlugin implements Plugin {
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue(PythonXUnitSensor.DEFAULT_REPORT_PATH)
         .build(),
+      PythonXUnitSensor.class);
+  }
 
-      // PYLINT
+  private static void addPylintExtensions(Context context) {
+    context.addExtensions(
       PropertyDefinition.builder(PylintConfiguration.PYLINT_CONFIG_KEY)
         .index(30)
         .name("Pylint configuration")
@@ -142,21 +164,26 @@ public class PythonPlugin implements Plugin {
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("")
         .build(),
+      PylintConfiguration.class,
+      PylintSensor.class,
+      PylintImportSensor.class,
+      PylintRuleRepository.class);
+  }
 
-      Python.class,
-
-      PythonProfile.class,
-
-      PythonSquidSensor.class,
-      PythonRuleRepository.class);
-
-    if (context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
+  private static void addBanditExtensions(Context context) {
+    context.addExtension(BanditSensor.class);
+    boolean externalIssuesSupported = context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(7, 2));
+    if (externalIssuesSupported) {
       context.addExtensions(
-        PylintConfiguration.class,
-        PylintSensor.class,
-        PylintImportSensor.class,
-        PylintRuleRepository.class,
-        PythonXUnitSensor.class);
+        PropertyDefinition.builder(BanditSensor.REPORT_PATH_KEY)
+          .name("Bandit Report Files")
+          .description("Paths (absolute or relative) to json files with Bandit issues.")
+          .category(EXTERNAL_ANALYZERS_CATEGORY)
+          .subCategory(PYTHON_CATEGORY)
+          .onQualifiers(Qualifiers.PROJECT)
+          .multiValues(true)
+          .build(),
+        BanditRulesDefinition.class);
     }
   }
 
