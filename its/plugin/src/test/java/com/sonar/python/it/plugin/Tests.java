@@ -48,6 +48,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+  BanditReportTest.class,
   MetricsTest.class,
   CoverageTest.class,
   PylintReportTest.class,
