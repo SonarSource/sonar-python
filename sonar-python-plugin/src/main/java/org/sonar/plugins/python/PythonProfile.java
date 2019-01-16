@@ -19,29 +19,20 @@
  */
 package org.sonar.plugins.python;
 
-import org.sonar.api.profiles.ProfileDefinition;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.utils.ValidationMessages;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.python.checks.CheckList;
-import org.sonarsource.analyzer.commons.ProfileDefinitionReader;
+import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
-public class PythonProfile extends ProfileDefinition {
+public class PythonProfile implements BuiltInQualityProfilesDefinition {
 
+  static final String PROFILE_NAME = "Sonar way";
   static final String PROFILE_LOCATION = "org/sonar/l10n/py/rules/python/Sonar_way_profile.json";
 
-  private final RuleFinder ruleFinder;
-
-  public PythonProfile(RuleFinder ruleFinder) {
-    this.ruleFinder = ruleFinder;
-  }
-
   @Override
-  public RulesProfile createProfile(ValidationMessages messages) {
-    RulesProfile profile = RulesProfile.create(CheckList.SONAR_WAY_PROFILE, Python.KEY);
-    ProfileDefinitionReader definitionReader = new ProfileDefinitionReader(ruleFinder);
-    definitionReader.activateRules(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION);
-    return profile;
+  public void define(Context context) {
+    NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, Python.KEY);
+    BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION);
+    profile.done();
   }
 
 }

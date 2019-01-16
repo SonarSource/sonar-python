@@ -20,44 +20,22 @@
 package org.sonar.plugins.python;
 
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.utils.ValidationMessages;
-import org.sonar.python.checks.CheckList;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActiveRule;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PythonProfileTest {
 
   @Test
-  public void should_create_sonar_way_profile() {
-    ValidationMessages validation = ValidationMessages.create();
+  public void profile() {
+    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    new PythonProfile().define(context);
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("py", "Sonar way");
 
-    RuleFinder ruleFinder = ruleFinder();
-    PythonProfile definition = new PythonProfile(ruleFinder);
-    RulesProfile profile = definition.createProfile(validation);
-
-    assertThat(profile.getLanguage()).isEqualTo(Python.KEY);
-    assertThat(profile.getName()).isEqualTo(CheckList.SONAR_WAY_PROFILE);
-    assertThat(profile.getActiveRules()).extracting("repositoryKey").containsOnly(CheckList.REPOSITORY_KEY);
-    assertThat(validation.hasErrors()).isFalse();
-    assertThat(profile.getActiveRules().size()).isGreaterThan(25);
-  }
-
-  static RuleFinder ruleFinder() {
-    return when(mock(RuleFinder.class).findByKey(anyString(), anyString())).thenAnswer(new Answer<Rule>() {
-      @Override
-      public Rule answer(InvocationOnMock invocation) {
-        Object[] arguments = invocation.getArguments();
-        return Rule.create((String) arguments[0], (String) arguments[1], (String) arguments[1]);
-      }
-    }).getMock();
+    assertThat(profile.rules()).extracting("repoKey").containsOnly("python");
+    assertThat(profile.rules().size()).isGreaterThan(25);
+    assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("S100");
   }
 
 }

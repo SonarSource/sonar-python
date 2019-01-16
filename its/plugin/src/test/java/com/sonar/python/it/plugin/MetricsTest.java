@@ -25,7 +25,7 @@ import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonarqube.ws.WsMeasures.Measure;
+import org.sonarqube.ws.Measures.Measure;
 
 import static com.sonar.python.it.plugin.Tests.getMeasure;
 import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;

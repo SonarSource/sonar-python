@@ -28,9 +28,9 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.sonar.wsclient.issue.Issue;
 import org.sonar.wsclient.issue.IssueQuery;
-import org.sonarqube.ws.QualityProfiles;
+import org.sonarqube.ws.Qualityprofiles;
 import org.sonarqube.ws.client.PostRequest;
-import org.sonarqube.ws.client.qualityprofile.SearchWsRequest;
+import org.sonarqube.ws.client.qualityprofiles.SearchRequest;
 
 import static com.sonar.python.it.plugin.Tests.newAdminWsClient;
 import static com.sonar.python.it.plugin.Tests.newWsClient;
@@ -94,7 +94,7 @@ public class XPathRuleTest {
       .setParam("prevent_reactivation", "true")
       .setParam("params", "message=\"Do something fantastic!\";xpathQuery=\"//FILE_INPUT\"")).failIfNotSuccessful();
 
-    QualityProfiles.SearchWsResponse.QualityProfile qualityProfile = newWsClient().qualityProfiles().search(new SearchWsRequest()).getProfilesList().stream()
+    Qualityprofiles.SearchWsResponse.QualityProfile qualityProfile = newWsClient().qualityprofiles().search(new SearchRequest()).getProfilesList().stream()
       .filter(qp -> qp.getLanguage().equals(language))
       .filter(qp -> qp.getName().equals(PROFILE_NAME))
       .findFirst().orElseThrow(() -> new IllegalStateException(format("Could not find quality profile '%s' for language '%s' ", PROFILE_NAME, language)));

@@ -33,12 +33,12 @@ import javax.annotation.Nullable;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.sonarqube.ws.WsMeasures;
-import org.sonarqube.ws.WsMeasures.Measure;
+import org.sonarqube.ws.Measures.ComponentWsResponse;
+import org.sonarqube.ws.Measures.Measure;
 import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
-import org.sonarqube.ws.client.measure.ComponentWsRequest;
+import org.sonarqube.ws.client.measures.ComponentRequest;
 
 import static com.sonar.orchestrator.container.Server.ADMIN_LOGIN;
 import static com.sonar.orchestrator.container.Server.ADMIN_PASSWORD;
@@ -98,8 +98,8 @@ public class Tests {
 
   @CheckForNull
   private static List<Measure> getMeasures(String componentKey, List<String> metricKeys) {
-    WsMeasures.ComponentWsResponse response = newWsClient().measures().component(new ComponentWsRequest()
-      .setComponentKey(componentKey)
+    ComponentWsResponse response = newWsClient().measures().component(new ComponentRequest()
+      .setComponent(componentKey)
       .setMetricKeys(metricKeys));
     return response.getComponent().getMeasuresList();
   }
