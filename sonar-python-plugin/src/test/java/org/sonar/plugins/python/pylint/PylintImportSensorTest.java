@@ -29,6 +29,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
@@ -56,13 +57,16 @@ public class PylintImportSensorTest {
       .build();
     context.fileSystem().add(inputFile);
 
-    context.setActiveRules((new ActiveRulesBuilder())
-      .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
-      .setName("Invalid name")
-      .activate()
-      .create(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0111"))
-      .setName("Missing docstring")
-      .activate()
+    context.setActiveRules(
+      new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
+        .setName("Invalid name")
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0111"))
+        .setName("Missing docstring")
+        .build())
       .build());
 
     PylintImportSensor sensor = new PylintImportSensor(context.config());

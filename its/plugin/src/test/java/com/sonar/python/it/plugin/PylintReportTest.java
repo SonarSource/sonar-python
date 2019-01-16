@@ -27,7 +27,7 @@ import java.util.List;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.sonarqube.ws.Issues.Issue;
-import org.sonarqube.ws.client.issue.SearchWsRequest;
+import org.sonarqube.ws.client.issues.SearchRequest;
 
 import static com.sonar.python.it.plugin.Tests.newWsClient;
 import static java.util.Collections.singletonList;
@@ -67,7 +67,7 @@ public class PylintReportTest {
   }
 
   private List<Issue> issues() {
-    return newWsClient().issues().search(new SearchWsRequest().setProjects(singletonList(PROJECT))).getIssuesList();
+    return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(PROJECT))).getIssuesList();
   }
 
   private BuildResult analyseProjectWithReport(String reportPath) {

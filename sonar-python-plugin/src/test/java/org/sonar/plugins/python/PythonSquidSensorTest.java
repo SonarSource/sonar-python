@@ -34,6 +34,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.error.AnalysisError;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
@@ -104,10 +105,11 @@ public class PythonSquidSensorTest {
   private void test_execute(SonarRuntime runtime, Integer expectedNumberOfLineHits) {
     context.setRuntime(runtime);
 
-    activeRules = (new ActiveRulesBuilder())
-      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
-      .setName("Print Statement Usage")
-      .activate()
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "PrintStatementUsage"))
+        .setName("Print Statement Usage")
+        .build())
       .build();
 
     inputFile("file1.py");
@@ -134,14 +136,17 @@ public class PythonSquidSensorTest {
 
   @Test
   public void test_issues() {
-    activeRules = (new ActiveRulesBuilder())
-      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "OneStatementPerLine"))
-      .activate()
-      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
-      .activate()
-      .create(RuleKey.of(CheckList.REPOSITORY_KEY, "FileComplexity"))
-      .setParam("maximumFileComplexityThreshold", "2")
-      .activate()
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "OneStatementPerLine"))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "FileComplexity"))
+        .setParam("maximumFileComplexityThreshold", "2")
+        .build())
       .build();
 
     InputFile inputFile = inputFile("file2.py");
@@ -186,10 +191,12 @@ public class PythonSquidSensorTest {
   @Test
   public void parse_error() throws Exception {
     inputFile("parse_error.py");
-    activeRules = (new ActiveRulesBuilder())
-      .create(RuleKey.of(CheckList.REPOSITORY_KEY, ParsingErrorCheck.CHECK_KEY))
-      .activate()
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ParsingErrorCheck.CHECK_KEY))
+        .build())
       .build();
+
     sensor().execute(context);
     assertThat(context.allIssues()).hasSize(1);
     assertThat(String.join("\n", logTester.logs())).contains("Parse error at line 2");
@@ -218,7 +225,7 @@ public class PythonSquidSensorTest {
   }
 
   private InputFile inputFile(String name) {
-    DefaultInputFile inputFile =  TestInputFileBuilder.create("moduleKey", name)
+    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
       .setType(Type.MAIN)
