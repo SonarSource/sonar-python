@@ -22,3 +22,11 @@ def string_interpolation():
     value3 = 3 # Noncompliant
     value4 = 4 # false-negative, value4 is not used as a variable in the string interpolation, see SONARPY-245
     return f'{value1}, {2*value2}, value3bis, value4'
+
+def function_with_lambdas():
+    print([(lambda unread_lambda_param: 2)(i) for i in range(10)])
+    x = 42 # Noncompliant
+    print([(lambda x: x*x)(i) for i in range(10)])
+    y = 42
+    print([(lambda x: x*x + y)(i) for i in range(10)])
+    {y**2 for a in range(3) if lambda x: x > 1 and y > 1}

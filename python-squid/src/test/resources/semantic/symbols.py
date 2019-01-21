@@ -52,3 +52,13 @@ class C:
     a = a
     b = a
     c: int = b
+    loaded = property(lambda self: self._loaded)
+
+def function_with_lambdas():
+    print([(lambda unread_lambda_param: 2)(i) for i in range(10)])
+    x = 42
+    print([(lambda x: x*x)(i) for i in range(10)])
+    y = 42
+    print([(lambda x: x*x + y)(i) for i in range(10)])
+    print([(lambda: y)(i) for i in range(10)])
+    {y**2 for a in range(3) if lambda x: x > 1 and y > 1}
