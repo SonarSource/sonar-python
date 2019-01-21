@@ -132,7 +132,7 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void class_variable() {
     AstNode classC = rootTree.getFirstDescendant(PythonGrammar.CLASSDEF);
-    assertThat(symbolTable.symbols(classC)).hasSize(3);
+    assertThat(symbolTable.symbols(classC)).hasSize(4);
     Symbol classVariableA = lookup(classC, "a");
     assertThat(classVariableA.readUsages()).extracting(AstNode::getTokenLine).containsOnly(classC.getTokenLine() + 2);
     Symbol classVariableB = lookup(classC, "b");
@@ -144,6 +144,39 @@ public class SymbolTableBuilderVisitorTest {
     AstNode classC = rootTree.getFirstDescendant(PythonGrammar.CLASSDEF);
     Symbol a = lookup(rootTree, "a");
     assertThat(a.readUsages()).extracting(AstNode::getTokenLine).contains(classC.getTokenLine() + 1);
+  }
+
+  @Test
+  public void lambdas() {
+    AstNode functionTree = functionTreesByName.get("function_with_lambdas");
+    Map<String, Symbol> symbolByName = symbolsInFunction("function_with_lambdas").stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+
+    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    Symbol x = symbolByName.get("x");
+    assertThat(x.scopeTree()).isEqualTo(functionTree);
+    assertThat(x.writeUsages()).hasSize(1);
+    assertThat(x.readUsages()).isEmpty();
+
+    Symbol y = symbolByName.get("y");
+    assertThat(y.scopeTree()).isEqualTo(functionTree);
+    assertThat(y.writeUsages()).hasSize(1);
+    assertThat(y.readUsages()).hasSize(4);
+
+    AstNode firstLambdaFunction = functionTree.getFirstDescendant(PythonGrammar.LAMBDEF);
+    symbolByName = symbolTable.symbols(firstLambdaFunction).stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    assertThat(symbolByName.keySet()).containsOnly("unread_lambda_param");
+    Symbol unreadLambdaParam = symbolByName.get("unread_lambda_param");
+    assertThat(unreadLambdaParam.scopeTree()).isEqualTo(firstLambdaFunction);
+    assertThat(unreadLambdaParam.writeUsages()).hasSize(1);
+    assertThat(unreadLambdaParam.readUsages()).isEmpty();
+
+    AstNode lastLambdaFunction = functionTree.getFirstDescendant(PythonGrammar.LAMBDEF_NOCOND);
+    symbolByName = symbolTable.symbols(lastLambdaFunction).stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    assertThat(symbolByName.keySet()).containsOnly("x");
+    x = symbolByName.get("x");
+    assertThat(x.scopeTree()).isEqualTo(lastLambdaFunction);
+    assertThat(x.writeUsages()).hasSize(1);
+    assertThat(x.readUsages()).hasSize(1);
   }
 
   private Set<Symbol> symbolsInFunction(String functionName) {

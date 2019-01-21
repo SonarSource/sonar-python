@@ -73,14 +73,14 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
     @Override
     public void visitNode(AstNode node) {
-      if (node.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
+      if (node.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF, PythonGrammar.LAMBDEF, PythonGrammar.LAMBDEF_NOCOND)) {
         enterScope(node);
       }
     }
 
     @Override
     public void leaveNode(AstNode node) {
-      if (node.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
+      if (node.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF, PythonGrammar.LAMBDEF, PythonGrammar.LAMBDEF_NOCOND)) {
         scopeRootTrees.pop();
       }
     }
@@ -97,6 +97,8 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     public Set<AstNodeType> subscribedKinds() {
       Set<AstNodeType> set = new HashSet<>();
       set.add(PythonGrammar.FUNCDEF);
+      set.add(PythonGrammar.LAMBDEF);
+      set.add(PythonGrammar.LAMBDEF_NOCOND);
       set.add(PythonGrammar.CLASSDEF);
       set.add(PythonGrammar.EXPRESSION_STMT);
       set.add(PythonGrammar.GLOBAL_STMT);
@@ -120,6 +122,10 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         createScope(node, currentScope);
         createFunctionParameters(node);
 
+      } else if (node.is(PythonGrammar.LAMBDEF, PythonGrammar.LAMBDEF_NOCOND)) {
+        createScope(node, currentScope);
+        createLambdaParameters(node);
+
       } else if (node.is(PythonGrammar.CLASSDEF)) {
         createScope(node, currentScope);
 
@@ -142,6 +148,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         }
         if (assignOperator != null) {
           if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
+            new FirstPhaseVisitor().scanNode(assignOperator.getNextSibling());
             new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());
           }
           if (target.getTokens().size() == 1) {
@@ -162,6 +169,18 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       for (AstNode parameterName : parameterNames) {
         addWriteUsage(parameterName);
       }
+    }
+
+    private void createLambdaParameters(AstNode functionTree) {
+      AstNode parameters = functionTree.getFirstChild(PythonGrammar.VARARGSLIST);
+      if (parameters == null) {
+        return;
+      }
+
+      parameters.getChildren(PythonGrammar.NAME).forEach(this::addWriteUsage);
+      parameters.getDescendants(PythonGrammar.FPDEF).stream()
+        .flatMap(paramDef -> paramDef.getChildren(PythonGrammar.NAME).stream())
+        .forEach(this::addWriteUsage);
     }
 
     private void createScope(AstNode node, @Nullable Scope parent) {
@@ -321,6 +340,8 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     public Set<AstNodeType> subscribedKinds() {
       Set<AstNodeType> set = new HashSet<>();
       set.add(PythonGrammar.FUNCDEF);
+      set.add(PythonGrammar.LAMBDEF);
+      set.add(PythonGrammar.LAMBDEF_NOCOND);
       set.add(PythonGrammar.CLASSDEF);
       set.add(PythonGrammar.ATOM);
       set.add(PythonGrammar.DOTTED_NAME);
