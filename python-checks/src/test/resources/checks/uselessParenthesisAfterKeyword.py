@@ -14,6 +14,11 @@ if (x < 2): #Noncompliant {{Remove the parentheses after this "if" keyword.}}
 elif (x > 3): #Noncompliant {{Remove the parentheses after this "elif" keyword.}}
 	pass
 
+if (x > 2) and (x < 10): # Compliant with binary operators
+	pass
+elif (x >= 10) and (x < 20): # Compliant with binary operators
+	pass
+
 for x in range(0, 3):
 	pass
 
@@ -37,7 +42,25 @@ def func():
 
 def func():
 	return (x) #Noncompliant {{Remove the parentheses after this "return" keyword.}}
-	
+
+def func(x):
+    return (x.a, x.b) #Noncompliant
+
+def func(x):
+    return x.a, x.b
+
+def func():
+	return [1, 2]
+
+def func():
+	return
+
+def func():
+	return 1, 2
+
+def func(x):
+	return '' if x is None else x.isoformat()
+
 while x < 2:
 	pass
 
@@ -46,7 +69,8 @@ while (x < 2): #Noncompliant {{Remove the parentheses after this "while" keyword
 
 yield x
 yield (x) #Noncompliant {{Remove the parentheses after this "yield" keyword.}}
-	
+yield (a, b) #Noncompliant
+
 try:
 	x = 1
 except ValueError:
@@ -81,5 +105,18 @@ names = ['small', 'large']
 for (first, second), name in zip(my_pairs, names): # the parenthesis after the "for" keyword is not useless
     print(name, first + second)
 
-for (x, y) in foo: # Noncompliant
+for (x, y) in foo: # Noncompliant {{Remove the parentheses after this "for" keyword.}}
     print(x, y)
+
+for x, y in (foo): # Noncompliant {{Remove the parentheses after this "in" keyword.}}
+    pass
+
+for x in ("who", "comments", "revlink", "category", "branch", "revision"): # Noncompliant
+	pass
+
+a = (10, 5)
+
+# SONARPY-292 should not raise issues on tuples
+my_tuple_list = [('foo', 'bar')]
+if ('foo', 'bar') in my_tuple_list:
+	print("True")
