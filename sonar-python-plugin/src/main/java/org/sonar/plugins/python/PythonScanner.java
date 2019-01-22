@@ -168,20 +168,16 @@ public class PythonScanner {
     saveFunctionsComplexityDistribution(inputFile, fileMetrics);
 
     Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
-    Set<Integer> linesOfComments = fileLinesVisitor.getLinesOfComments();
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
     saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
     saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, linesOfComments.size());
+    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
 
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
     for (int line : linesOfCode) {
       fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
-    }
-    for (int line : linesOfComments) {
-      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
     }
     for (int line : fileLinesVisitor.getExecutableLines()) {
       fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);

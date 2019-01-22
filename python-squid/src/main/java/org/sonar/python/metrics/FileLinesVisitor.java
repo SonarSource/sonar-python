@@ -36,7 +36,7 @@ import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 
 /**
- * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES_DATA_KEY} metrics used by the DevCockpit.
+ * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES} metrics used by the DevCockpit.
  */
 public class FileLinesVisitor extends PythonVisitor {
 
@@ -163,8 +163,8 @@ public class FileLinesVisitor extends PythonVisitor {
     return Collections.unmodifiableSet(new HashSet<>(linesOfCode));
   }
 
-  public Set<Integer> getLinesOfComments() {
-    return Collections.unmodifiableSet(new HashSet<>(linesOfComments));
+  public int getCommentLineCount() {
+    return linesOfComments.size();
   }
 
   public Set<Integer> getExecutableLines() {
