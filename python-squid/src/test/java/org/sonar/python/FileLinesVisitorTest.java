@@ -38,8 +38,7 @@ public class FileLinesVisitorTest {
     assertThat(visitor.getLinesOfCode()).hasSize(12);
     assertThat(visitor.getLinesOfCode()).containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
 
-    assertThat(visitor.getLinesOfComments()).hasSize(9);
-    assertThat(visitor.getLinesOfComments()).containsOnly(1, 4, 6, 13, 14, 17, 18, 19, 20);
+    assertThat(visitor.getCommentLineCount()).isEqualTo(9);
 
     assertThat(visitor.getLinesWithNoSonar()).containsOnly(11);
   }
@@ -51,7 +50,7 @@ public class FileLinesVisitorTest {
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines_header_comments.py"), visitor);
 
     assertThat(visitor.getLinesOfCode()).containsOnly(2, 4);
-    assertThat(visitor.getLinesOfComments()).containsOnly(4);
+    assertThat(visitor.getCommentLineCount()).isEqualTo(1);
   }
 
   @Test
