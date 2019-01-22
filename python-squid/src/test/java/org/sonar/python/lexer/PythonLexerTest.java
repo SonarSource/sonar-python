@@ -166,10 +166,16 @@ public class PythonLexerTest {
    */
   @Test
   public void integer_literals() {
+    assertThat(lexer.lex("0"), hasToken("0", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("00_000000_0"), hasToken("00_000000_0", PythonTokenType.NUMBER));
     assertThat(lexer.lex("7"), hasToken("7", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("7_2"), hasToken("7_2", PythonTokenType.NUMBER));
     assertThat(lexer.lex("0o177"), hasToken("0o177", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("0o177_22"), hasToken("0o177_22", PythonTokenType.NUMBER));
     assertThat(lexer.lex("0b100110111"), hasToken("0b100110111", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("0b_1001101_11"), hasToken("0b_1001101_11", PythonTokenType.NUMBER));
     assertThat(lexer.lex("0xdeadbeef"), hasToken("0xdeadbeef", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("0xdead_beef"), hasToken("0xdead_beef", PythonTokenType.NUMBER));
 
     assertThat("2.7.3 long decimal integer", lexer.lex("9L"), hasToken("9L", PythonTokenType.NUMBER));
     assertThat("2.7.3 long octal integer", lexer.lex("0x77L"), hasToken("0x77L", PythonTokenType.NUMBER));
@@ -185,11 +191,15 @@ public class PythonLexerTest {
   @Test
   public void floating_point_literals() {
     assertThat(lexer.lex("3.14"), hasToken("3.14", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("3_0.1_4"), hasToken("3_0.1_4", PythonTokenType.NUMBER));
     assertThat(lexer.lex("10."), hasToken("10.", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("10._"), hasToken("10.", PythonTokenType.NUMBER));
     assertThat(lexer.lex(".001"), hasToken(".001", PythonTokenType.NUMBER));
     assertThat(lexer.lex("1e100"), hasToken("1e100", PythonTokenType.NUMBER));
     assertThat(lexer.lex("3.14e-10"), hasToken("3.14e-10", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("3_0.1_4e-1_0"), hasToken("3_0.1_4e-1_0", PythonTokenType.NUMBER));
     assertThat(lexer.lex("0e0"), hasToken("0e0", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("0_0e0_0"), hasToken("0_0e0_0", PythonTokenType.NUMBER));
   }
 
   /**
@@ -202,7 +212,9 @@ public class PythonLexerTest {
     assertThat(lexer.lex("10j"), hasToken("10j", PythonTokenType.NUMBER));
     assertThat(lexer.lex(".001j"), hasToken(".001j", PythonTokenType.NUMBER));
     assertThat(lexer.lex("1e100j"), hasToken("1e100j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("10_2e1_00j"), hasToken("10_2e1_00j", PythonTokenType.NUMBER));
     assertThat(lexer.lex("3.14e-10j"), hasToken("3.14e-10j", PythonTokenType.NUMBER));
+    assertThat(lexer.lex("3_0.1_400e-1_00j"), hasToken("3_0.1_400e-1_00j", PythonTokenType.NUMBER));
     assertThat("uppercase suffix", lexer.lex("10J"), hasToken("10J", PythonTokenType.NUMBER));
   }
 
