@@ -46,7 +46,7 @@ public class PylintRuleRepositoryTest {
     long rulesWithoutRemediationCost = rules.stream()
       .filter(rule -> rule.debtRemediationFunction() == null)
       .count();
-    assertThat(rulesWithoutRemediationCost).isEqualTo(28);
+    assertThat(rulesWithoutRemediationCost).isEqualTo(0);
   }
 
 }
