@@ -21,10 +21,13 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonTokenType;
@@ -33,12 +36,22 @@ import org.sonar.python.api.PythonTokenType;
 public class HardcodedIPCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1313";
 
-  private static final String IP_ADDRESS_V4_REGEX = "(?<![0-9])((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))(?![0-9])";
-  private static final String IP_ADDRESS_V6_REGEX = "((::)?([\\da-fA-F]{1,4}::?){2,7})([\\da-fA-F]{1,4})?";
+  private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
 
-  private static final Pattern patternV4 = Pattern.compile(IP_ADDRESS_V4_REGEX);
-  private static final Pattern patternV6 = Pattern.compile(IP_ADDRESS_V6_REGEX);
-  String message = "Make this IP \"%s\" address configurable.";
+  private static final String IPV6_NO_PREFIX_COMPRESSION = "(\\p{XDigit}{1,4}::?){1,7}\\p{XDigit}{1,4}(::)?";
+  private static final String IPV6_PREFIX_COMPRESSION = "::((\\p{XDigit}{1,4}:){0,6}\\p{XDigit}{1,4})?";
+  private static final String IPV6_ALONE = ("(?<ipv6>(" + IPV6_NO_PREFIX_COMPRESSION + "|" + IPV6_PREFIX_COMPRESSION + ")??(:?" + IPV4_ALONE + ")?" + ")");
+  private static final String IPV6_URL = "([^\\d.]*/)?\\[" + IPV6_ALONE + "]((:\\d{1,5})?(?!\\d|\\.))(/.*)?";
+
+  private static final Pattern IPV4_URL_REGEX = Pattern.compile("([^\\d.]*/)?" + IPV4_ALONE + "((:\\d{1,5})?(?!\\d|\\.))(/.*)?");
+  private static final List<Pattern> IPV6_REGEX_LIST = Arrays.asList(
+    Pattern.compile(IPV6_ALONE),
+    Pattern.compile(IPV6_URL));
+
+  private static final Pattern IPV6_LOOPBACK = Pattern.compile("[0:]++0*+1");
+  private static final Pattern IPV6_NON_ROUTABLE = Pattern.compile("[0:]++");
+
+  String message = "Make sure using this hardcoded IP address \"%s\" is safe here.";
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
@@ -47,49 +60,75 @@ public class HardcodedIPCheck extends PythonCheck {
 
   @Override
   public void visitNode(AstNode node) {
-    String string = node.getTokenOriginalValue();
-    if (isMultilineString(string)) {
+    String value = node.getTokenOriginalValue();
+    if (value.length() <= 2 || isMultilineString(value)) {
       return;
     }
-
-    Matcher matcher = patternV4.matcher(string);
-
-    if (matcher.find()) {
-      String ipAddress = matcher.group();
-      addIssue(node, String.format(message, ipAddress));
-
-    } else {
-      matcher = patternV6.matcher(string);
-      if (matcher.find()) {
-        String ipAddress = matcher.group();
-        if (ipAddress.length() > 8 && !mustBeExcluded(string, ipAddress)) {
-          addIssue(node, String.format(message, ipAddress));
-        }
+    String content = value.substring(1, value.length() - 1);
+    Matcher matcher = IPV4_URL_REGEX.matcher(content);
+    if (matcher.matches()) {
+      String ip = matcher.group("ipv4");
+      if (isValidIPV4(ip) && !isIPV4Exception(ip)) {
+        addIssue(node, String.format(message, ip));
       }
+    } else {
+      IPV6_REGEX_LIST.stream()
+        .map(pattern -> pattern.matcher(content))
+        .filter(Matcher::matches)
+        .findFirst()
+        .map(match -> {
+          String ipv6 = match.group("ipv6");
+          String ipv4 = match.group("ipv4");
+          return isValidIPV6(ipv6, ipv4) && !isIPV6Exception(ipv6) ? ipv6 : null;
+        })
+        .ifPresent(ipv6 -> addIssue(node, String.format(message, ipv6)));
     }
-  }
-
-  /**
-   * Returns true if the match is preceded by or followed by a letter or a number.
-   */
-  private static boolean mustBeExcluded(String string, String ipAddress) {
-    // check the character before the match
-    int index = string.indexOf(ipAddress);
-    if (string.substring(index - 1, index).matches("[\\da-fA-F]")) {
-      return true;
-    }
-
-    // check the character after the match
-    index += ipAddress.length();
-    if (string.substring(index, index + 1).matches("[\\da-fA-F]")) {
-      return true;
-    }
-
-    return false;
   }
 
   private static boolean isMultilineString(String string) {
     return string.endsWith("'''") || string.endsWith("\"\"\"");
+  }
+
+  private static boolean isValidIPV4(String ip) {
+    String[] numbersAsStrings = ip.split("\\.");
+    return Arrays.stream(numbersAsStrings).noneMatch(value -> Integer.valueOf(value) > 255);
+  }
+
+  private static boolean isValidIPV6(String ipv6, @Nullable String ipv4) {
+    String[] split = ipv6.split("::?");
+    int partCount = split.length;
+    int compressionSeparatorCount = getCompressionSeparatorCount(ipv6);
+    boolean validUncompressed;
+    boolean validCompressed;
+    if (ipv4 != null) {
+      boolean hasValidIPV4 = isValidIPV4(ipv4);
+      validUncompressed = hasValidIPV4 && compressionSeparatorCount == 0 && partCount == 7;
+      validCompressed = hasValidIPV4 && compressionSeparatorCount == 1 && partCount <= 6;
+    } else {
+      validUncompressed = compressionSeparatorCount == 0 && partCount == 8;
+      validCompressed = compressionSeparatorCount == 1 && partCount <= 7;
+    }
+
+    return validUncompressed || validCompressed;
+  }
+
+  private static boolean isIPV4Exception(String ip) {
+    return ip.startsWith("127.")
+      || "255.255.255.255".equals(ip)
+      || "0.0.0.0".equals(ip)
+      || ip.startsWith("2.5.");
+  }
+
+  private static boolean isIPV6Exception(String ip) {
+    return IPV6_LOOPBACK.matcher(ip).matches() || IPV6_NON_ROUTABLE.matcher(ip).matches();
+  }
+
+  private static int getCompressionSeparatorCount(String str) {
+    int count = 0;
+    for (int i = 0; (i = str.indexOf("::", i)) != -1; i += 2) {
+      ++count;
+    }
+    return count;
   }
 
 }
