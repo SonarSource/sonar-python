@@ -65,22 +65,21 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
   public void visitNode(AstNode node) {
     String keyword = KEYWORDS_FOLLOWED_BY_TEST.get(node.getType());
     if (keyword != null) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.TEST), keyword, node);
+      checkParenthesisOnOnlyChild(node.getFirstChild(PythonGrammar.TEST), keyword, node);
     } else if (node.is(PythonGrammar.DEL_STMT)) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "del", node);
+      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.EXPRLIST), "del", node);
     } else if (node.is(PythonGrammar.IF_STMT)) {
       List<AstNode> testNodes = node.getChildren(PythonGrammar.TEST);
-      checkParenthesis(testNodes.get(0), "if", node);
+      checkParenthesisOnOnlyChild(testNodes.get(0), "if", node);
       if (testNodes.size() > 1) {
-        checkParenthesis(testNodes.get(1), "elif", testNodes.get(1));
+        checkParenthesisOnOnlyChild(testNodes.get(1), "elif", testNodes.get(1));
       }
     } else if (node.is(PythonGrammar.FOR_STMT)) {
       visitForExpression(node);
-      checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "in", node);
     } else if (node.is(PythonGrammar.RETURN_STMT)) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "return", node);
+      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.TESTLIST), "return", node);
     } else if (node.is(PythonGrammar.YIELD_EXPR)) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.TESTLIST), "yield", node);
+      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.TESTLIST), "yield", node);
     } else if (node.is(PythonGrammar.EXCEPT_CLAUSE)) {
       visitExceptClause(node);
     } else if (node.is(PythonGrammar.NOT_TEST)) {
@@ -90,8 +89,9 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
 
   private void visitForExpression(AstNode node) {
     if (node.getFirstChild(PythonGrammar.EXPRLIST).getNumberOfChildren() == 1) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
+      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
     }
+    checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.TESTLIST), "in", node);
   }
 
   private void visitNotTest(AstNode node) {
@@ -114,14 +114,30 @@ public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
       .children(PythonGrammar.TEST)
       .size();
     if (nbTests == 1) {
-      checkParenthesis(node.getFirstChild(PythonGrammar.TEST), "except", node);
+      checkParenthesisOnOnlyChild(node.getFirstChild(PythonGrammar.TEST), "except", node);
     }
   }
 
-  private void checkParenthesis(@Nullable AstNode child, String keyword, AstNode errorNode) {
-    if (child != null && child.getToken().getType().equals(PythonPunctuator.LPARENTHESIS) && isOnASingleLine(child)) {
+  private void checkParenthesis(AstNode child, String keyword, AstNode errorNode) {
+    if (isParenthesisExpression(child) && isOnASingleLine(child)) {
       String message = String.format("Remove the parentheses after this \"%s\" keyword.", keyword);
       addLineIssue(message, errorNode.getTokenLine());
+    }
+  }
+
+  private static boolean isParenthesisExpression(AstNode node) {
+    return node.is(PythonGrammar.ATOM) && node.getNumberOfChildren() == 3 && node.getFirstChild().is(PythonPunctuator.LPARENTHESIS);
+  }
+
+  private void checkParenthesisOnExprList(@Nullable AstNode testList, String keyword, AstNode errorNode) {
+    if (testList != null && testList.getNumberOfChildren() == 1) {
+      checkParenthesisOnOnlyChild(testList.getFirstChild(), keyword, errorNode);
+    }
+  }
+
+  private void checkParenthesisOnOnlyChild(@Nullable AstNode parent, String keyword, AstNode errorNode) {
+    if (parent != null && parent.getNumberOfChildren() == 1) {
+      checkParenthesis(parent.getFirstChild(), keyword, errorNode);
     }
   }
 
