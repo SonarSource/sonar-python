@@ -14,10 +14,11 @@ else:
 
 if param == 1:
     print(1)
+    foo()
 else:
     if param == 2:
-        print(1) # Noncompliant [[secondary=-3]]
-
+        print(1) # Noncompliant [[secondary=-4]]
+        foo()
 
 if param == 1:
     if True:
@@ -33,9 +34,31 @@ if True:
     if True:
         print(1)
     else:
-        print(1)  # Noncompliant {{Either merge this branch with the identical one on line "34" or change one of the implementations.}}
+        print(1)  # Noncompliant {{Either merge this branch with the identical one on line "35" or change one of the implementations.}}
 
 if 1: print("1"); foo()
-# Noncompliant@+1 [[secondary=-2;sc=9;ec=26;el=+0]]
 elif 2: print("1"); foo()
 else: print("2")
+
+if 1:
+    print("1")
+elif 2:
+    print("2")
+else:
+    print("1")
+
+if 1:
+    print("1")
+elif 2:
+    print("1")
+else:
+    print("1") # Noncompliant
+
+if 1:
+    print("1")
+    foo()
+elif 2:
+    print("1") # Noncompliant [[secondary=-3;sc=5;ec=10;el=+1]]
+    foo()
+else:
+    print("2")

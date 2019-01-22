@@ -3,38 +3,29 @@ the same logic is truly needed for both instances, then they should be combined.
 <h2>Noncompliant Code Example</h2>
 <pre>
 if 0 &lt;= a &lt; 10:
-    do_the_thing()
+    do_first()
+    do_second()
 elif 10 &lt;= a &lt; 20:
     do_the_other_thing()
 elif 20 &lt;= a &lt; 50:
-    do_the_thing()  # Noncompliant; duplicates first condition
-else:
-    do_the_rest()
-
-b = 4 if a &gt; 12 else 4
+    do_first()         # Noncompliant; duplicates first condition
+    do_second()
 </pre>
-<h2>Compliant Solution</h2>
-<pre>
-if (0 &lt;= a &lt; 10) or (20 &lt;= a &lt; 50):
-    do_the_thing()
-elif 10 &lt;= a &lt; 20:
-    do_the_other_thing()
-else:
-    do_the_rest()
-
-b = 4
-</pre>
-<p>or </p>
+<h2>Exceptions</h2>
+<p>Blocks in an <code>if</code> chain that contain a single line of code are ignored.</p>
 <pre>
 if 0 &lt;= a &lt; 10:
-    do_the_thing()
+    do_first()
 elif 10 &lt;= a &lt; 20:
     do_the_other_thing()
 elif 20 &lt;= a &lt; 50:
-    do_the_third_thing()
-else:
-    do_the_rest()
-
-b = 8 if a &gt; 12 else 4
+    do_first()         # no issue, usually this is done on purpose to increase the readability
+</pre>
+<p>But this exception does not apply when all branches have the same single line of code.</p>
+<pre>
+if 0 &lt;= a &lt; 10:
+    do_first()
+elif 20 &lt;= a &lt; 50:
+    do_first()         # Noncompliant, this might have been done on purpose but probably not
 </pre>
 

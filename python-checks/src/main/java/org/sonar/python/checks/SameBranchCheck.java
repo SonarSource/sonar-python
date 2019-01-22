@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -88,12 +89,20 @@ public class SameBranchCheck extends PythonCheck {
 
   private void checkBranch(List<AstNode> branches, int index) {
     AstNode duplicateBlock = branches.get(index);
+    boolean isOnASingleLine = isOnASingleLine(duplicateBlock);
+    List<AstNode> equivalentBlocks = new ArrayList<>();
     for (int j = 0; j < index; j++) {
       AstNode originalBlock = branches.get(j);
       if (CheckUtils.equalNodes(originalBlock, duplicateBlock)) {
-        String message = String.format(MESSAGE, originalBlock.getToken().getLine() + 1);
-        addIssue(location(duplicateBlock, message))
-          .secondary(location(originalBlock, "Original"));
+        equivalentBlocks.add(originalBlock);
+        boolean isLastComparisonInBranches = j == branches.size() - 2;
+        if (!isOnASingleLine || isLastComparisonInBranches) {
+          String message = String.format(MESSAGE, originalBlock.getToken().getLine() + 1);
+          PreciseIssue issue = addIssue(location(duplicateBlock, message));
+          equivalentBlocks.forEach(original -> issue.secondary(location(original, "Original")));
+          return;
+        }
+      } else if (isOnASingleLine) {
         return;
       }
     }
@@ -135,5 +144,13 @@ public class SameBranchCheck extends PythonCheck {
       }
     }
     return null;
+  }
+
+  public static boolean isOnASingleLine(AstNode parent) {
+    List<AstNode> statements = parent.getChildren(PythonGrammar.STATEMENT);
+    if (statements.isEmpty()) {
+      return true;
+    }
+    return statements.get(0).getTokenLine() == statements.get(statements.size() - 1).getLastToken().getLine();
   }
 }
