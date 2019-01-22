@@ -21,10 +21,11 @@ package org.sonar.python.toolkit;
 
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.logging.Logger;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.Tokenizer;
 import org.sonar.python.PythonConfiguration;
@@ -34,12 +35,9 @@ import org.sonar.sslr.toolkit.AbstractConfigurationModel;
 import org.sonar.sslr.toolkit.ConfigurationProperty;
 import org.sonar.sslr.toolkit.Validators;
 
-import java.nio.charset.Charset;
-import java.util.List;
-
 public class PythonConfigurationModel extends AbstractConfigurationModel {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PythonConfigurationModel.class);
+  private static final Logger LOG = Logger.getLogger(PythonConfigurationModel.class.getName());
 
   private static final String CHARSET_PROPERTY_KEY = "sonar.sourceEncoding";
 
@@ -79,10 +77,10 @@ public class PythonConfigurationModel extends AbstractConfigurationModel {
     String propertyValue = System.getProperty(propertyKey);
 
     if (propertyValue == null) {
-      LOG.info("Property \"{}\" is not set, using the default value \"{}\".", propertyKey, defaultValue);
+      LOG.info(() -> "Property \"" + propertyKey + "\" is not set, using the default value \"" + defaultValue + "\".");
       return defaultValue;
     } else {
-      LOG.info("Property \"{}\" is set, using its value \"{}\".", propertyKey, propertyValue);
+      LOG.info(() -> "Property \"" + propertyKey + "\" is set, using its value \"" + propertyValue + "\".");
       return propertyValue;
     }
   }
