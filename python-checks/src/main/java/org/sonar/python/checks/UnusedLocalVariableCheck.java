@@ -52,7 +52,7 @@ public class UnusedLocalVariableCheck extends PythonCheck {
     }
     Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
     for (Symbol symbol : getContext().symbolTable().symbols(functionTree)) {
-      if (!interpolationIdentifiers.contains(symbol.name())) {
+      if (!interpolationIdentifiers.contains(symbol.name()) && !"_".equals(symbol.name())) {
         checkSymbol(symbol);
       }
     }

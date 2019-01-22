@@ -99,6 +99,8 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       set.add(PythonGrammar.FUNCDEF);
       set.add(PythonGrammar.LAMBDEF);
       set.add(PythonGrammar.LAMBDEF_NOCOND);
+      set.add(PythonGrammar.FOR_STMT);
+      set.add(PythonGrammar.COMP_FOR);
       set.add(PythonGrammar.CLASSDEF);
       set.add(PythonGrammar.EXPRESSION_STMT);
       set.add(PythonGrammar.GLOBAL_STMT);
@@ -126,6 +128,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         createScope(node, currentScope);
         createLambdaParameters(node);
 
+      } else if (node.is(PythonGrammar.FOR_STMT, PythonGrammar.COMP_FOR)) {
+        createLoopVariables(node);
+
       } else if (node.is(PythonGrammar.CLASSDEF)) {
         createScope(node, currentScope);
 
@@ -148,7 +153,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
         }
         if (assignOperator != null) {
           if (currentScopeRootTree().is(PythonGrammar.CLASSDEF)) {
-            new FirstPhaseVisitor().scanNode(assignOperator.getNextSibling());
+            FirstPhaseVisitor firstPhaseVisitor = new FirstPhaseVisitor();
+            firstPhaseVisitor.enterScope(currentScopeRootTree());
+            firstPhaseVisitor.scanNode(assignOperator.getNextSibling());
             new ClassVariableAssignmentVisitor(currentScopeRootTree()).scanNode(assignOperator.getNextSibling());
           }
           if (target.getTokens().size() == 1) {
@@ -181,6 +188,13 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       parameters.getDescendants(PythonGrammar.FPDEF).stream()
         .flatMap(paramDef -> paramDef.getChildren(PythonGrammar.NAME).stream())
         .forEach(this::addWriteUsage);
+    }
+
+    private void createLoopVariables(AstNode loopTree) {
+      AstNode target = loopTree.getFirstChild(PythonGrammar.EXPRLIST);
+      if (target.getTokens().size() == 1) {
+        addWriteUsage(target.getFirstDescendant(PythonGrammar.NAME));
+      }
     }
 
     private void createScope(AstNode node, @Nullable Scope parent) {

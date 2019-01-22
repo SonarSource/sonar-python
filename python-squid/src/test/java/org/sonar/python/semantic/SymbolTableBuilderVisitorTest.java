@@ -151,7 +151,7 @@ public class SymbolTableBuilderVisitorTest {
     AstNode functionTree = functionTreesByName.get("function_with_lambdas");
     Map<String, Symbol> symbolByName = symbolsInFunction("function_with_lambdas").stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
 
-    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    assertThat(symbolByName.keySet()).containsOnly("x", "y", "a", "i");
     Symbol x = symbolByName.get("x");
     assertThat(x.scopeTree()).isEqualTo(functionTree);
     assertThat(x.writeUsages()).hasSize(1);
@@ -177,6 +177,21 @@ public class SymbolTableBuilderVisitorTest {
     assertThat(x.scopeTree()).isEqualTo(lastLambdaFunction);
     assertThat(x.writeUsages()).hasSize(1);
     assertThat(x.readUsages()).hasSize(1);
+  }
+
+  @Test
+  public void for_loops() {
+    AstNode compFor = functionTreesByName.get("function_with_loops");
+    Map<String, Symbol> symbolByName = symbolTable.symbols(compFor).stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    assertThat(symbolByName).hasSize(3);
+    assertThat(symbolByName.get("k").writeUsages()).hasSize(1);
+    assertThat(symbolByName.get("k").readUsages()).hasSize(1);
+
+    assertThat(symbolByName.get("i").writeUsages()).hasSize(2);
+    assertThat(symbolByName.get("i").readUsages()).hasSize(5);
+
+    assertThat(symbolByName.get("j").writeUsages()).hasSize(1);
+    assertThat(symbolByName.get("j").readUsages()).hasSize(1);
   }
 
   private Set<Symbol> symbolsInFunction(String functionName) {
