@@ -62,3 +62,12 @@ def function_with_lambdas():
     print([(lambda x: x*x + y)(i) for i in range(10)])
     print([(lambda: y)(i) for i in range(10)])
     {y**2 for a in range(3) if lambda x: x > 1 and y > 1}
+
+@abc(k for k in range(4))
+def function_with_loops():
+    {i for i in range(3) if i < 2}
+    [i for i in range(3) if i < 2 and i > 1]
+    for j in [0, 1, 2]:
+        do_something(j)
+    for a, b in mylist:
+        do_something(a)
