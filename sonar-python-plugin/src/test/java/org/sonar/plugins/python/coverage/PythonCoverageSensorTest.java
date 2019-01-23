@@ -21,12 +21,16 @@ package org.sonar.plugins.python.coverage;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -34,14 +38,16 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Settings;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.TestUtils;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-
-;
 
 public class PythonCoverageSensorTest {
 
+  private static final String ABSOLUTE_PATH_PLACEHOLDER = "{ABSOLUTE_PATH_PLACEHOLDER}";
   private final String FILE1_KEY = "moduleKey:sources/file1.py";
   private final String FILE2_KEY = "moduleKey:sources/file2.py";
   private final String FILE3_KEY = "moduleKey:sources/file3.py";
@@ -51,6 +57,12 @@ public class PythonCoverageSensorTest {
 
   private PythonCoverageSensor coverageSensor = new PythonCoverageSensor();
   private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();
+
+  @Rule
+  public LogTester logTester = new LogTester();
+
+  @Rule
+  public TemporaryFolder tmpDir = new TemporaryFolder();
 
   @Before
   public void init() {
@@ -172,11 +184,37 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
+  public void test_report_with_absolute_path() throws Exception {
+    String reportPath = createReportWithAbsolutePaths();
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, reportPath);
+
+    coverageSensor.execute(context);
+
+    assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, 2)).isEqualTo(3);
+    assertThat(context.lineHits(FILE1_KEY, 3)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, 4)).isEqualTo(0);
+    assertThat(context.lineHits(FILE1_KEY, 5)).isEqualTo(1);
+    assertThat(context.lineHits(FILE1_KEY, 6)).isEqualTo(1);
+  }
+
+  @Test
   public void test_unresolved_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
     coverageSensor.execute(context);
 
+    assertThat(logTester.logs(LoggerLevel.ERROR))
+      .containsExactly("Cannot resolve the file path 'sources/not_exist.py' of the coverage report, the file does not exist in all <source>.");
     assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
+
+    logTester.clear();
+
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_absolute_path.xml");
+    coverageSensor.execute(context);
+
+    assertThat(logTester.logs(LoggerLevel.ERROR)).containsExactly(
+      "Cannot resolve the file path '/absolute/sources/not_exist.py' of the coverage report, the file does not exist in all <source>.",
+      "Cannot resolve 2 file paths, ignoring coverage measures for those files");
   }
 
   @Test(expected = IllegalStateException.class)
@@ -198,6 +236,20 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
+  }
+
+  private String createReportWithAbsolutePaths() throws Exception {
+    Path workDir = tmpDir.newFolder("python").toPath().toAbsolutePath();
+
+    String absoluteSourcePath = new File(moduleBaseDir, "sources/file1.py").getAbsolutePath();
+    Path report = new File(moduleBaseDir, "coverage_absolute_path.xml").toPath();
+    String reportContent = new String(Files.readAllBytes(report), UTF_8);
+    reportContent = reportContent.replace(ABSOLUTE_PATH_PLACEHOLDER, absoluteSourcePath);
+
+    Path reportCopy = workDir.resolve("coverage_absolute_path.xml");
+    Files.write(reportCopy, reportContent.getBytes(UTF_8));
+
+    return reportCopy.toAbsolutePath().toString();
   }
 
 }
