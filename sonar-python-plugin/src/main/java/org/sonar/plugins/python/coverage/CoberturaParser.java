@@ -111,6 +111,9 @@ public class CoberturaParser {
     String absolutePath;
     File file = new File(filename);
     if (file.isAbsolute()) {
+      if (!file.exists()) {
+        logUnresolvedFile("Cannot resolve the file path '{}' of the coverage report, the file does not exist in all <source>.", filename);
+      }
       absolutePath = file.getAbsolutePath();
     } else {
       List<File> fileList = baseDirectories.stream()

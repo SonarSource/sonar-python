@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -34,11 +35,11 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Settings;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.TestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-;
 
 public class PythonCoverageSensorTest {
 
@@ -51,6 +52,9 @@ public class PythonCoverageSensorTest {
 
   private PythonCoverageSensor coverageSensor = new PythonCoverageSensor();
   private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Before
   public void init() {
@@ -176,7 +180,17 @@ public class PythonCoverageSensorTest {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
     coverageSensor.execute(context);
 
+    assertThat(logTester.logs(LoggerLevel.ERROR)).containsExactly("Cannot resolve the file path 'sources/not_exist.py' of the coverage report, the file does not exist in all <source>.");
     assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
+
+    logTester.clear();
+
+    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_absolute_path.xml");
+    coverageSensor.execute(context);
+
+    assertThat(logTester.logs(LoggerLevel.ERROR)).containsExactly(
+        "Cannot resolve the file path '/absolute/sources/not_exist.py' of the coverage report, the file does not exist in all <source>.",
+        "Cannot resolve 2 file paths, ignoring coverage measures for those files");
   }
 
   @Test(expected = IllegalStateException.class)
