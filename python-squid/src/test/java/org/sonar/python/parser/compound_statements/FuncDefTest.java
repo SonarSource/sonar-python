@@ -44,5 +44,9 @@ public class FuncDefTest extends RuleTest {
     assertThat(p).matches(PythonTestUtils.appendNewLine("def func(True): pass"));
   }
 
-}
+  @Test
+  public void trailingComa() {
+    assertThat(p).matches(PythonTestUtils.appendNewLine("def func(self, arg1, arg2, arg3, arg4, arg5, arg6, *args, **kwargs,): pass"));
+  }
 
+}
