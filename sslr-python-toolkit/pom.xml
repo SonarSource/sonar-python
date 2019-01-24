@@ -64,10 +64,10 @@
             <configuration>
               <includes>
                 <include>${project.groupId}:python-squid</include>
-                <include>org.codehaus.sonar.sslr:sslr-core</include>
-                <include>org.codehaus.sonar.sslr:sslr-xpath</include>
+                <include>org.sonarsource.sslr:sslr-core</include>
+                <include>org.sonarsource.sslr:sslr-xpath</include>
                 <include>jaxen:jaxen</include>
-                <include>org.codehaus.sonar.sslr:sslr-toolkit</include>
+                <include>org.sonarsource.sslr:sslr-toolkit</include>
                 <include>org.codehaus.sonar:sonar-colorizer</include>
                 <include>org.codehaus.sonar:sonar-channel</include>
                 <include>ch.qos.logback:logback-classic</include>
@@ -98,8 +98,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>3900000</maxsize>
-                  <minsize>3800000</minsize>
+                  <maxsize>4200000</maxsize>
+                  <minsize>4000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
