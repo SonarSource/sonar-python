@@ -24,12 +24,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
+import org.sonarsource.analyzer.commons.xml.SafetyFactory;
 
 /**
  * Class copied from deprecated class StaxParser of sonar-plugin-api.
@@ -42,12 +42,9 @@ public class StaxParser {
 
   public StaxParser(XmlStreamHandler streamHandler) {
     this.streamHandler = streamHandler;
-    WstxInputFactory xmlFactory = (WstxInputFactory) XMLInputFactory.newInstance();
+    WstxInputFactory xmlFactory = (WstxInputFactory) SafetyFactory.createXMLInputFactory();
     xmlFactory.configureForLowMemUsage();
     xmlFactory.getConfig().setUndeclaredEntityResolver(new UndeclaredEntitiesXMLResolver());
-    xmlFactory.setProperty(XMLInputFactory.IS_VALIDATING, false);
-    xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-    xmlFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
     inf = new SMInputFactory(xmlFactory);
   }
 
