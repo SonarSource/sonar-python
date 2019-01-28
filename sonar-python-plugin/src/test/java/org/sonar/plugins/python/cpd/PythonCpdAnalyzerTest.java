@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.python.cpd;
 
-import com.google.common.base.Charsets;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,7 +51,7 @@ public class PythonCpdAnalyzerTest {
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
 
     List<TokensLine> lines = context.cpdTokens("moduleKey:code_chunks_2.py");
-    assertThat(lines).hasSize(25);
+    assertThat(lines).isNotNull().hasSize(25);
     TokensLine line1 = lines.get(0);
     assertThat(line1.getStartLine()).isEqualTo(2);
     assertThat(line1.getEndLine()).isEqualTo(2);
@@ -94,7 +94,7 @@ public class PythonCpdAnalyzerTest {
       .setCharset(UTF_8)
       .setType(InputFile.Type.MAIN)
       .setLanguage(Python.KEY)
-      .initMetadata(TestUtils.fileContent(file, Charsets.UTF_8))
+      .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
       .build();
 
     context.fileSystem().add(inputFile);

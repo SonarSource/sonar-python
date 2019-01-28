@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestSuiteTest {
   TestSuite suite;
@@ -40,41 +40,41 @@ public class TestSuiteTest {
 
   @Test
   public void suiteDoesntEqualsNull() {
-    assert(!suite.equals(null));
+    assertThat(suite).isNotEqualTo(null);
   }
 
   @Test
   public void suiteDoesntEqualsMiscObject() {
-    assert(!suite.equals("string"));
+    assertThat(suite).isNotEqualTo("string");
   }
 
   @Test
   public void suiteEqualityIsReflexive() {
-    assert(suite.equals(suite));
-    assert(otherSuite.equals(otherSuite));
-    assert(equalSuite.equals(equalSuite));
+    assertThat(suite).isEqualTo(suite);
+    assertThat(otherSuite).isEqualTo(otherSuite);
+    assertThat(equalSuite).isEqualTo(equalSuite);
   }
 
   @Test
   public void suiteEqualityWorksAsExpected() {
-    assert(suite.equals(equalSuite));
-    assert(!suite.equals(otherSuite));
+    assertThat(suite).isEqualTo(equalSuite);
+    assertThat(suite).isNotEqualTo(otherSuite);
   }
 
   @Test
   public void suiteHashWorksAsExpected() {
-    assert(suite.hashCode() == equalSuite.hashCode());
-    assert(suite.hashCode() != otherSuite.hashCode());
+    assertThat(suite.hashCode()).isEqualTo(equalSuite.hashCode());
+    assertThat(suite.hashCode()).isNotEqualTo(otherSuite.hashCode());
   }
 
   @Test
   public void newBornSuiteShouldHaveVirginStatistics() {
-    assertEquals(suite.getTests(), 0);
-    assertEquals(suite.getErrors(), 0);
-    assertEquals(suite.getFailures(), 0);
-    assertEquals(suite.getSkipped(), 0);
-    assertEquals(suite.getTime(), 0);
-    assertEquals(suite.getDetails(), "<tests-details></tests-details>");
+    assertThat(suite.getTests()).isEqualTo(0);
+    assertThat(suite.getErrors()).isEqualTo(0);
+    assertThat(suite.getFailures()).isEqualTo(0);
+    assertThat(suite.getSkipped()).isEqualTo(0);
+    assertThat(suite.getTime()).isEqualTo(0);
+    assertThat(suite.getDetails()).isEqualTo("<tests-details></tests-details>");
   }
 
   @Test
@@ -85,8 +85,8 @@ public class TestSuiteTest {
     final int EXEC_TIME = 10;
     suite.addTestCase(new TestCase("name", EXEC_TIME, "status", "stack", "msg"));
 
-    assertEquals(suite.getTests(), testBefore + 1);
-    assertEquals(suite.getTime(), timeBefore + EXEC_TIME);
+    assertThat(suite.getTests()).isEqualTo(testBefore + 1);
+    assertThat(suite.getTime()).isEqualTo(timeBefore + EXEC_TIME);
   }
 
   @Test
@@ -97,7 +97,7 @@ public class TestSuiteTest {
 
     suite.addTestCase(error);
 
-    assertEquals(suite.getErrors(), errorsBefore + 1);
+    assertThat(suite.getErrors()).isEqualTo(errorsBefore + 1);
   }
 
   @Test
@@ -108,7 +108,7 @@ public class TestSuiteTest {
 
     suite.addTestCase(failedTC);
 
-    assertEquals(suite.getFailures(), failedBefore + 1);
+    assertThat(suite.getFailures()).isEqualTo(failedBefore + 1);
   }
 
   @Test
@@ -119,7 +119,7 @@ public class TestSuiteTest {
 
     suite.addTestCase(skippedTC);
 
-    assertEquals(suite.getSkipped(), skippedBefore + 1);
+    assertThat(suite.getSkipped()).isEqualTo(skippedBefore + 1);
   }
 
   @Test
@@ -133,6 +133,6 @@ public class TestSuiteTest {
 
     TestSuite summedUp = ts1.addMeasures(ts2);
 
-    assertEquals(summedUp.getSkipped(), 2);
+    assertThat(summedUp.getSkipped()).isEqualTo(2);
   }
 }
