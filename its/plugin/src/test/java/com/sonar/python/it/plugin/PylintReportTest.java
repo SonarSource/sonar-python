@@ -62,7 +62,9 @@ public class PylintReportTest {
   @Test
   public void unknown_rule() throws Exception {
     BuildResult result = analyseProjectWithReport("rule-unknown.txt");
-    assertThat(result.getLogs()).contains("Pylint rule 'C9999' is unknown");
+    assertThat(result.getLogs()).doesNotContain("Pylint rule 'W0712' is unknown");
+    assertThat(result.getLogs()).containsOnlyOnce("Pylint rule 'C8888' is unknown");
+    assertThat(result.getLogs()).containsOnlyOnce("Pylint rule 'C9999' is unknown");
     assertThat(issues()).hasSize(0);
   }
 

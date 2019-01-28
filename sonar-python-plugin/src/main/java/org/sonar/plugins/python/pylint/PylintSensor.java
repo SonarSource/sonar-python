@@ -30,6 +30,7 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.config.Settings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.Python;
@@ -37,11 +38,13 @@ import org.sonar.plugins.python.Python;
 public class PylintSensor implements Sensor {
 
   private PylintConfiguration conf;
-  private Settings settings;
+  private Configuration configuration;
+  private PylintRuleRepository pylintRuleRepository;
 
-  public PylintSensor(PylintConfiguration conf, Settings settings) {
+  public PylintSensor(PylintConfiguration conf, Configuration configuration, PylintRuleRepository pylintRuleRepository) {
     this.conf = conf;
-    this.settings = settings;
+    this.configuration = configuration;
+    this.pylintRuleRepository = pylintRuleRepository;
   }
 
   @Override
@@ -54,7 +57,7 @@ public class PylintSensor implements Sensor {
   }
 
   boolean shouldExecute() {
-    return settings.getString(PylintImportSensor.REPORT_PATH_KEY) == null;
+    return !configuration.get(PylintImportSensor.REPORT_PATH_KEY).isPresent();
   }
 
   @Override
@@ -98,7 +101,7 @@ public class PylintSensor implements Sensor {
 
     for (Issue pylintIssue : issues) {
       ActiveRule rule = context.activeRules().find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
-      PylintImportSensor.processRule(pylintIssue, file, rule, context);
+      PylintImportSensor.processRule(pylintIssue, file, rule, context, pylintRuleRepository);
     }
   }
 

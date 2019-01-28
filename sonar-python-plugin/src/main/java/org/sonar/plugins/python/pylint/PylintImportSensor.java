@@ -21,9 +21,11 @@ package org.sonar.plugins.python.pylint;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -42,9 +44,12 @@ public class PylintImportSensor extends PythonReportSensor {
   private static final String DEFAULT_REPORT_PATH = "pylint-reports/pylint-result-*.txt";
 
   private static final Logger LOG = Loggers.get(PylintImportSensor.class);
+  private static final Set<String> warningAlreadyLogged = new HashSet<>();
+  private PylintRuleRepository pylintRuleRepository;
 
-  public PylintImportSensor(Configuration conf) {
+  public PylintImportSensor(Configuration conf, PylintRuleRepository pylintRuleRepository) {
     super(conf);
+    this.pylintRuleRepository = pylintRuleRepository;
   }
 
   @Override
@@ -97,21 +102,21 @@ public class PylintImportSensor extends PythonReportSensor {
     return issues;
   }
 
-  private static void saveIssues(List<Issue> issues, SensorContext context) {
+  private void saveIssues(List<Issue> issues, SensorContext context) {
     FileSystem fileSystem = context.fileSystem();
     for (Issue pylintIssue : issues) {
       String filepath = pylintIssue.getFilename();
       InputFile pyfile = fileSystem.inputFile(fileSystem.predicates().hasPath(filepath));
       if (pyfile != null) {
         ActiveRule rule = context.activeRules().find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
-        processRule(pylintIssue, pyfile, rule, context);
+        processRule(pylintIssue, pyfile, rule, context, pylintRuleRepository);
       } else {
         LOG.warn("Cannot find the file '{}' in SonarQube, ignoring violation", filepath);
       }
     }
   }
 
-  public static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context) {
+  public static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context, PylintRuleRepository pylintRuleRepository) {
     if (rule != null) {
       NewIssue newIssue = context
         .newIssue()
@@ -122,8 +127,15 @@ public class PylintImportSensor extends PythonReportSensor {
           .at(pyfile.selectLine(pylintIssue.getLine()))
           .message(pylintIssue.getDescription()));
       newIssue.save();
-    } else {
-      LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
+    } else if (!pylintRuleRepository.hasRuleDefinition(pylintIssue.getRuleId())) {
+      logUnknownRuleWarning(pylintIssue.getRuleId());
+    }
+  }
+
+  private static void logUnknownRuleWarning(String ruleId) {
+    if (!warningAlreadyLogged.contains(ruleId)) {
+      warningAlreadyLogged.add(ruleId);
+      LOG.warn("Pylint rule '{}' is unknown in Sonar", ruleId);
     }
   }
 

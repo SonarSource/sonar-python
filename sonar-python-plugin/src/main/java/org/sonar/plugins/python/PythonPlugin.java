@@ -165,9 +165,9 @@ public class PythonPlugin implements Plugin {
         .defaultValue("")
         .build(),
       PylintConfiguration.class,
+      PylintRuleRepository.class,
       PylintSensor.class,
-      PylintImportSensor.class,
-      PylintRuleRepository.class);
+      PylintImportSensor.class);
   }
 
   private static void addBanditExtensions(Context context) {

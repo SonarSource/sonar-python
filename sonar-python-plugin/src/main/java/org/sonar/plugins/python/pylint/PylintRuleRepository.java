@@ -20,14 +20,19 @@
 package org.sonar.plugins.python.pylint;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.plugins.python.Python;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@ScannerSide
 public class PylintRuleRepository implements RulesDefinition {
 
   public static final String REPOSITORY_NAME = "Pylint";
@@ -37,9 +42,10 @@ public class PylintRuleRepository implements RulesDefinition {
   private static final String REMEDIATION_FILE = "/org/sonar/plugins/python/pylint/remediation-cost.csv";
 
   private final RulesDefinitionXmlLoader xmlLoader;
+  private Set<String> definedRulesId = new HashSet<>();
 
-  public PylintRuleRepository(RulesDefinitionXmlLoader xmlLoader) {
-    this.xmlLoader = xmlLoader;
+  public PylintRuleRepository() {
+    this.xmlLoader = new RulesDefinitionXmlLoader();
   }
 
   @Override
@@ -50,6 +56,11 @@ public class PylintRuleRepository implements RulesDefinition {
     xmlLoader.load(repository, getClass().getResourceAsStream(RULES_FILE), UTF_8.name());
     defineRemediationFunction(repository);
     repository.done();
+    setDefinedRulesId(repository.rules().stream().map(NewRule::key).collect(Collectors.toSet()));
+  }
+
+  void setDefinedRulesId(Set<String> rules) {
+    definedRulesId = rules;
   }
 
   private static void defineRemediationFunction(NewRepository repository) {
@@ -73,6 +84,10 @@ public class PylintRuleRepository implements RulesDefinition {
       }
     }
     return map;
+  }
+
+  public boolean hasRuleDefinition(String ruleId) {
+    return definedRulesId.contains(ruleId);
   }
 
 }
