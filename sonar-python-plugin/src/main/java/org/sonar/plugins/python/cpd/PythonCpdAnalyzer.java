@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.TokenType;
+import java.util.List;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
@@ -42,25 +43,24 @@ public class PythonCpdAnalyzer {
     AstNode root = visitorContext.rootTree();
     if (root != null) {
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
-      for (Token token : root.getTokens()) {
-        if (!isIgnoredType(token.getType())) {
+      List<Token> tokens = root.getTokens();
+      for (int i = 0; i < tokens.size(); i++) {
+        Token token = tokens.get(i);
+        TokenType nextTokenType = i + 1 < tokens.size() ? tokens.get(i + 1).getType() : GenericTokenType.EOF;
+        if (!isIgnoredType(token.getType(), nextTokenType)) {
           TokenLocation location = new TokenLocation(token);
-          cpdTokens.addToken(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset(), getImage(token));
+          cpdTokens.addToken(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset(), token.getValue());
         }
       }
       cpdTokens.save();
     }
   }
 
-  private boolean isIgnoredType(TokenType type) {
-    return type.equals(PythonTokenType.NEWLINE) ||
-      type.equals(PythonTokenType.DEDENT) || // TODO equals { } ???
+  private static boolean isIgnoredType(TokenType type, TokenType nextTokenType) {
+    return (type.equals(PythonTokenType.NEWLINE) && !nextTokenType.equals(PythonTokenType.DEDENT)) ||
+      type.equals(PythonTokenType.DEDENT) ||
       type.equals(PythonTokenType.INDENT) ||
       type.equals(GenericTokenType.EOF);
-  }
-
-  private String getImage(Token token) {
-    return token.getValue();
   }
 
 }
