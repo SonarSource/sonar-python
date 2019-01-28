@@ -75,17 +75,19 @@ public final class PythonLexer {
 
         // http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
         // http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++\\.[0-9]*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + EXP + IMAGINARY_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++" + IMAGINARY_SUFFIX))
+        // https://www.python.org/dev/peps/pep-0515/
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+\\.[0-9]*+(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + EXP + IMAGINARY_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + IMAGINARY_SUFFIX))
 
         // http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[oO]?+[0-7]++" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[xX][0-9a-fA-F]++" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[bB][01]++" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[1-9][0-9]*+" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0++" + LONG_INTEGER_SUFFIX + "?+"))
+        // https://www.python.org/dev/peps/pep-0515/
+        .withChannel(regexp(PythonTokenType.NUMBER, "0[oO]?+(_?[0-7])++" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "0[xX](_?[0-9a-fA-F])++" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "0[bB](_?[01])++" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "[1-9](_?[0-9])*+" + LONG_INTEGER_SUFFIX + "?+"))
+        .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
 
         // http://docs.python.org/reference/lexical_analysis.html#identifiers
         .withChannel(new IdentifierAndKeywordChannel(and("[a-zA-Z_]", o2n("\\w")), true, PythonKeyword.values()))
