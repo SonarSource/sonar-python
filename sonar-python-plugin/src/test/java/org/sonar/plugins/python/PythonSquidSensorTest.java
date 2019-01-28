@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -29,6 +30,7 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
+import org.sonar.api.batch.fs.TextPointer;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
@@ -93,16 +95,16 @@ public class PythonSquidSensorTest {
   @Test
   public void test_execute_on_sonarqube() {
     // with SonarQube configuration, coverage is activated
-    test_execute(NOSONARLINT_RUNTIME, 10);
+    testExecute(NOSONARLINT_RUNTIME, 10);
   }
 
   @Test
   public void test_execute_on_sonarlint() {
     // with SonarLint configuration, coverage is not activated
-    test_execute(SONARLINT_RUNTIME, null);
+    testExecute(SONARLINT_RUNTIME, null);
   }
 
-  private void test_execute(SonarRuntime runtime, Integer expectedNumberOfLineHits) {
+  private void testExecute(SonarRuntime runtime, @Nullable Integer expectedNumberOfLineHits) {
     context.setRuntime(runtime);
 
     activeRules = new ActiveRulesBuilder()
@@ -203,7 +205,9 @@ public class PythonSquidSensorTest {
     assertThat(context.allAnalysisErrors()).hasSize(1);
     AnalysisError analysisError = context.allAnalysisErrors().iterator().next();
     assertThat(analysisError.inputFile().filename()).isEqualTo("parse_error.py");
-    assertThat(analysisError.location().line()).isEqualTo(2);
+    TextPointer location = analysisError.location();
+    assertThat(location).isNotNull();
+    assertThat(location.line()).isEqualTo(2);
   }
 
   @Test

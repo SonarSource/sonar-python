@@ -19,9 +19,10 @@
  */
 package org.sonar.plugins.python;
 
-import com.google.common.base.Charsets;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -43,8 +44,8 @@ public class PythonHighlighterTest {
     String dir = "src/test/resources/org/sonar/plugins/python";
 
     file = new File(dir, "/pythonHighlighter.py");
-    DefaultInputFile inputFile =  TestInputFileBuilder.create("moduleKey", file.getName())
-      .initMetadata(TestUtils.fileContent(file, Charsets.UTF_8))
+    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())
+      .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
       .build();
 
     context = SensorContextTester.create(new File(dir));
@@ -55,7 +56,7 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void keyword() throws Exception {
+  public void keyword() {
     // def
     checkOnRange(8, 0, 3, TypeOfText.KEYWORD);
 
@@ -76,7 +77,7 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void stringLiteral() throws Exception {
+  public void stringLiteral() {
     // "some string"
     checkOnRange(4, 4, 13, TypeOfText.STRING);
 
@@ -135,13 +136,13 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void comment() throws Exception {
+  public void comment() {
     checkOnRange(6, 0, 19, TypeOfText.COMMENT);
     checkOnRange(9, 10, 15, TypeOfText.COMMENT);
   }
 
   @Test
-  public void number() throws Exception {
+  public void number() {
     // 34
     checkOnRange(29, 0, 2, TypeOfText.CONSTANT);
 
@@ -197,11 +198,11 @@ public class PythonHighlighterTest {
   /**
    * Checks the highlighting of one column. The first column of a line has index 0.
    */
-  private void check(int line, int column, TypeOfText expectedTypeOfText) {
+  private void check(int line, int column, @Nullable TypeOfText expectedTypeOfText) {
     checkInternal(line, column, "", expectedTypeOfText);
   }
 
-  private void checkInternal(int line, int column, String messageComplement, TypeOfText expectedTypeOfText) {
+  private void checkInternal(int line, int column, String messageComplement, @Nullable TypeOfText expectedTypeOfText) {
     String componentKey = "moduleKey:" + file.getName();
     List<TypeOfText> foundTypeOfTexts = context.highlightingTypeAt(componentKey, line, column);
 

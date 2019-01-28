@@ -22,7 +22,7 @@ package org.sonar.plugins.python.bandit;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BanditRulesDefinitionTest {
 
@@ -34,6 +34,7 @@ public class BanditRulesDefinitionTest {
 
     assertThat(context.repositories()).hasSize(1);
     RulesDefinition.Repository repository = context.repository("external_bandit");
+    assertThat(repository).isNotNull();
     assertThat(repository.name()).isEqualTo("Bandit");
     assertThat(repository.language()).isEqualTo("py");
     assertThat(repository.isExternal()).isEqualTo(true);

@@ -25,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,6 +37,7 @@ import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.ExternalIssue;
+import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
@@ -43,9 +45,13 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BanditSensorTest {
+
+  private static final String BANDIT_FILE = "python-project:bandit/file1.py";
+  private static final String BANDIT_B413 = "external_bandit:B413";
+  private static final String BANDIT_REPORT_JSON = "bandit-report.json";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "bandit");
 
@@ -66,75 +72,96 @@ public class BanditSensorTest {
 
   @Test
   public void no_issues_with_sonarqube_71() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 1, "bandit-report.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 1, BANDIT_REPORT_JSON);
     assertThat(externalIssues).isEmpty();
     assertThat(logTester.logs(LoggerLevel.ERROR)).containsExactly("Import of external issues requires SonarQube 7.2 or greater.");
   }
 
   @Test
   public void issues_with_sonarqube_72() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, "bandit-report.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, BANDIT_REPORT_JSON);
     assertThat(externalIssues).hasSize(4);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
-    assertThat(first.ruleKey().toString()).isEqualTo("external_bandit:B413");
+    assertThat(first.ruleKey().toString()).isEqualTo(BANDIT_B413);
     assertThat(first.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(first.severity()).isEqualTo(Severity.CRITICAL);
-    assertThat(first.primaryLocation().message()).isEqualTo("The pyCrypto library and its module Util are no longer actively maintained and have been deprecated. Consider using pyca/cryptography library.");
-    assertThat(first.primaryLocation().textRange().start().line()).isEqualTo(2);
+    IssueLocation firstPrimaryLoc = first.primaryLocation();
+    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(BANDIT_FILE);
+    assertThat(firstPrimaryLoc.message())
+      .isEqualTo("The pyCrypto library and its module Util are no longer actively maintained and have been deprecated. Consider using pyca/cryptography library.");
+    TextRange firstTextRange = firstPrimaryLoc.textRange();
+    assertThat(firstTextRange).isNotNull();
+    assertThat(firstTextRange.start().line()).isEqualTo(2);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
     assertThat(second.ruleKey().toString()).isEqualTo("external_bandit:B107");
     assertThat(second.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(second.severity()).isEqualTo(Severity.MINOR);
-    assertThat(second.primaryLocation().message()).isEqualTo("Possible hardcoded password: 'secret'");
-    assertThat(second.primaryLocation().textRange().start().line()).isEqualTo(5);
+    IssueLocation secondPrimaryLoc = second.primaryLocation();
+    assertThat(secondPrimaryLoc.inputComponent().key()).isEqualTo(BANDIT_FILE);
+    assertThat(secondPrimaryLoc.message()).isEqualTo("Possible hardcoded password: 'secret'");
+    TextRange secondTextRange = secondPrimaryLoc.textRange();
+    assertThat(secondTextRange).isNotNull();
+    assertThat(secondTextRange.start().line()).isEqualTo(5);
 
     ExternalIssue third = externalIssues.get(2);
-    assertThat(third.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
     assertThat(third.ruleKey().toString()).isEqualTo("external_bandit:B605");
     assertThat(third.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(third.severity()).isEqualTo(Severity.BLOCKER);
-    assertThat(third.primaryLocation().message()).isEqualTo("Starting a process with a shell, possible injection detected, security issue.");
-    assertThat(third.primaryLocation().textRange().start().line()).isEqualTo(6);
+    IssueLocation thirdPrimaryLoc = third.primaryLocation();
+    assertThat(thirdPrimaryLoc.inputComponent().key()).isEqualTo(BANDIT_FILE);
+    assertThat(thirdPrimaryLoc.message()).isEqualTo("Starting a process with a shell, possible injection detected, security issue.");
+    TextRange thirdTextRange = thirdPrimaryLoc.textRange();
+    assertThat(thirdTextRange).isNotNull();
+    assertThat(thirdTextRange.start().line()).isEqualTo(6);
 
     ExternalIssue fourth = externalIssues.get(3);
-    assertThat(fourth.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
     assertThat(fourth.ruleKey().toString()).isEqualTo("external_bandit:B311");
     assertThat(fourth.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(fourth.severity()).isEqualTo(Severity.MAJOR);
-    assertThat(fourth.primaryLocation().message()).isEqualTo("Standard pseudo-random generators are not suitable for security/cryptographic purposes.");
-    assertThat(fourth.primaryLocation().textRange().start().line()).isEqualTo(7);
+    IssueLocation fourthPrimaryLoc = fourth.primaryLocation();
+    assertThat(fourthPrimaryLoc.inputComponent().key()).isEqualTo(BANDIT_FILE);
+    assertThat(fourthPrimaryLoc.message()).isEqualTo("Standard pseudo-random generators are not suitable for security/cryptographic purposes.");
+    TextRange fourthTextRange = fourthPrimaryLoc.textRange();
+    assertThat(fourthTextRange).isNotNull();
+    assertThat(fourthTextRange.start().line()).isEqualTo(7);
 
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
   public void issues_with_sonarqube_75() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 5, "bandit-report.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 5, BANDIT_REPORT_JSON);
     assertThat(externalIssues).hasSize(4);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
-    assertThat(first.ruleKey().toString()).isEqualTo("external_bandit:B413");
-    assertThat(first.primaryLocation().textRange().start().line()).isEqualTo(2);
+    assertThat(first.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
+    assertThat(first.ruleKey().toString()).isEqualTo(BANDIT_B413);
+    TextRange firstTextRange = first.primaryLocation().textRange();
+    assertThat(firstTextRange).isNotNull();
+    assertThat(firstTextRange.start().line()).isEqualTo(2);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
+    assertThat(second.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
     assertThat(second.ruleKey().toString()).isEqualTo("external_bandit:B107");
-    assertThat(second.primaryLocation().textRange().start().line()).isEqualTo(5);
+    TextRange secondTextRange = second.primaryLocation().textRange();
+    assertThat(secondTextRange).isNotNull();
+    assertThat(secondTextRange.start().line()).isEqualTo(5);
 
     ExternalIssue third = externalIssues.get(2);
-    assertThat(third.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
+    assertThat(third.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
     assertThat(third.ruleKey().toString()).isEqualTo("external_bandit:B605");
-    assertThat(third.primaryLocation().textRange().start().line()).isEqualTo(6);
+    TextRange thirdTextRange = third.primaryLocation().textRange();
+    assertThat(thirdTextRange).isNotNull();
+    assertThat(thirdTextRange.start().line()).isEqualTo(6);
 
     ExternalIssue fourth = externalIssues.get(3);
-    assertThat(fourth.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
+    assertThat(fourth.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
     assertThat(fourth.ruleKey().toString()).isEqualTo("external_bandit:B311");
-    assertThat(fourth.primaryLocation().textRange().start().line()).isEqualTo(7);
+    TextRange fourthTextRange = fourth.primaryLocation().textRange();
+    assertThat(fourthTextRange).isNotNull();
+    assertThat(fourthTextRange.start().line()).isEqualTo(7);
 
     assertNoErrorWarnDebugLogs(logTester);
   }
@@ -177,8 +204,8 @@ public class BanditSensorTest {
     assertThat(externalIssues).hasSize(1);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.primaryLocation().inputComponent().key()).isEqualTo("python-project:bandit/file1.py");
-    assertThat(first.ruleKey().toString()).isEqualTo("external_bandit:B413");
+    assertThat(first.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
+    assertThat(first.ruleKey().toString()).isEqualTo(BANDIT_B413);
     assertThat(first.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(first.severity()).isEqualTo(Severity.MINOR);
     assertThat(first.primaryLocation().message()).isEqualTo("A message");
@@ -211,18 +238,19 @@ public class BanditSensorTest {
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
-  private List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName) throws IOException {
+  private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName) throws IOException {
     Path baseDir = PROJECT_DIR.getParent();
     SensorContextTester context = SensorContextTester.create(baseDir);
-    Files.list(PROJECT_DIR)
-      .forEach(file -> addFileToContext(context, baseDir, file));
-    context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER));
-    if (fileName != null) {
-      String path = PROJECT_DIR.resolve(fileName).toAbsolutePath().toString();
-      context.settings().setProperty("sonar.python.bandit.reportPaths", path);
+    try (Stream<Path> fileStream = Files.list(PROJECT_DIR)) {
+      fileStream.forEach(file -> addFileToContext(context, baseDir, file));
+      context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER));
+      if (fileName != null) {
+        String path = PROJECT_DIR.resolve(fileName).toAbsolutePath().toString();
+        context.settings().setProperty("sonar.python.bandit.reportPaths", path);
+      }
+      banditSensor.execute(context);
+      return new ArrayList<>(context.allExternalIssues());
     }
-    banditSensor.execute(context);
-    return new ArrayList<>(context.allExternalIssues());
   }
 
   private static void addFileToContext(SensorContextTester context, Path projectDir, Path file) {
@@ -254,14 +282,4 @@ public class BanditSensorTest {
     org.assertj.core.api.Assertions.assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     org.assertj.core.api.Assertions.assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
-
-  private static String location(ExternalIssue issue) {
-    TextRange range = issue.primaryLocation().textRange();
-    if (range == null) {
-      return "null";
-    }
-    return "from line " + range.start().line() + " offset " + range.start().lineOffset()
-      + " to line " + range.end().line() + " offset " + range.end().lineOffset();
-  }
-
 }

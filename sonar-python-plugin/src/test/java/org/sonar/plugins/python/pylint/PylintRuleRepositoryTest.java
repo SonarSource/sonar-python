@@ -36,6 +36,7 @@ public class PylintRuleRepositoryTest {
 
     RulesDefinition.Repository repository = context.repository(PylintRuleRepository.REPOSITORY_KEY);
 
+    assertThat(repository).isNotNull();
     assertThat(repository.language()).isEqualTo("py");
     assertThat(repository.name()).isEqualTo("Pylint");
 

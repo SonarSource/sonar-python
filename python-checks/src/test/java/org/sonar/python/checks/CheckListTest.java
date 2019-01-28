@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.api.batch.rule.ActiveRules;
@@ -116,22 +117,24 @@ public class CheckListTest {
 
   @Test
   public void validate_sqKey_field_in_json() throws IOException {
-    List<Path> jsonList = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))
-      .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
-      .sorted()
-      .collect(Collectors.toList());
+    try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
+      List<Path> jsonList = fileStream
+        .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
+        .sorted()
+        .collect(Collectors.toList());
 
-    List<String> fileNames = jsonList.stream()
-      .map(Path::getFileName)
-      .map(Path::toString)
-      .map(name -> name.replaceAll("\\.json$", ""))
-      .collect(Collectors.toList());
+      List<String> fileNames = jsonList.stream()
+        .map(Path::getFileName)
+        .map(Path::toString)
+        .map(name -> name.replaceAll("\\.json$", ""))
+        .collect(Collectors.toList());
 
-    List<String> sqKeys = jsonList.stream()
-      .map(CheckListTest::extractSqKey)
-      .collect(Collectors.toList());
+      List<String> sqKeys = jsonList.stream()
+        .map(CheckListTest::extractSqKey)
+        .collect(Collectors.toList());
 
-    assertThat(fileNames).isEqualTo(sqKeys);
+      assertThat(fileNames).isEqualTo(sqKeys);
+    }
   }
 
   private static String extractSqKey(Path jsonFile) {
