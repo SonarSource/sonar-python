@@ -88,10 +88,10 @@
     <mockito.version>2.21.0</mockito.version>
     <sonar.version>7.5</sonar.version>
     <sonar.orchestrator.version>3.21.0.1721</sonar.orchestrator.version>
+    <sonar-analyzer-commons.version>1.10.2.456</sonar-analyzer-commons.version>
     <sonarlint-core.version>3.0.0.1140</sonarlint-core.version>
     <sslr.version>1.23</sslr.version>
     <sslr.xpath.version>1.22</sslr.xpath.version>
-    <woodstox.version>4.4.1</woodstox.version>
   </properties>
 
   <dependencyManagement>
@@ -121,7 +121,12 @@
       <dependency>
         <groupId>org.sonarsource.analyzer-commons</groupId>
         <artifactId>sonar-analyzer-commons</artifactId>
-        <version>1.10.2.456</version>
+        <version>${sonar-analyzer-commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonarsource.analyzer-commons</groupId>
+        <artifactId>sonar-xml-parsing</artifactId>
+        <version>${sonar-analyzer-commons.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.staxmate</groupId>
