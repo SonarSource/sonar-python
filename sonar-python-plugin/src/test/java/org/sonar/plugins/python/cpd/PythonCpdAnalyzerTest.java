@@ -76,10 +76,13 @@ public class PythonCpdAnalyzerTest {
       "deffoo():pass",
       "classbar(object):pass",
       "deffoo2(x,y,z,):",
+      // \n materializes DEDENT
       "pass\n",
       "defbar(*baz):",
+      // \n materializes DEDENT
       "foo(3,4,5)\n",
       "defbar2(**baz):",
+      // \n materializes DEDENT
       "yield;\n",
       "items=[]",
       "(itemforiteminitems)",

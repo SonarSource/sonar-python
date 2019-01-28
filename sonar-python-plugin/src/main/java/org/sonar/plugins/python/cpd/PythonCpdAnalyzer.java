@@ -46,8 +46,12 @@ public class PythonCpdAnalyzer {
       List<Token> tokens = root.getTokens();
       for (int i = 0; i < tokens.size(); i++) {
         Token token = tokens.get(i);
+        TokenType currentTokenType = token.getType();
         TokenType nextTokenType = i + 1 < tokens.size() ? tokens.get(i + 1).getType() : GenericTokenType.EOF;
-        if (!isIgnoredType(token.getType(), nextTokenType)) {
+        // INDENT/DEDENT could not be completely ignored during CPD see https://docs.python.org/3/reference/lexical_analysis.html#indentation
+        // Just taking into account DEDENT is enough, but because the DEDENT token has an empty value, it's the
+        // preceding new line which is added in its place to create a difference
+        if (isNewLineWithIndentationChange(currentTokenType, nextTokenType) || !isIgnoredType(currentTokenType)) {
           TokenLocation location = new TokenLocation(token);
           cpdTokens.addToken(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset(), token.getValue());
         }
@@ -56,8 +60,12 @@ public class PythonCpdAnalyzer {
     }
   }
 
-  private static boolean isIgnoredType(TokenType type, TokenType nextTokenType) {
-    return (type.equals(PythonTokenType.NEWLINE) && !nextTokenType.equals(PythonTokenType.DEDENT)) ||
+  private static boolean isNewLineWithIndentationChange(TokenType currentTokenType, TokenType nextTokenType) {
+    return currentTokenType.equals(PythonTokenType.NEWLINE) && nextTokenType.equals(PythonTokenType.DEDENT);
+  }
+
+  private static boolean isIgnoredType(TokenType type) {
+    return type.equals(PythonTokenType.NEWLINE) ||
       type.equals(PythonTokenType.DEDENT) ||
       type.equals(PythonTokenType.INDENT) ||
       type.equals(GenericTokenType.EOF);

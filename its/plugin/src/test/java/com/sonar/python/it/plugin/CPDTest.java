@@ -34,13 +34,22 @@ public class CPDTest {
 
   private static final String PROJECT_KEY = "cpd";
 
+  private static final String FILE_1_KEY = PROJECT_KEY + ":file1.py";
+  private static final String FILE_2_KEY = PROJECT_KEY + ":file2.py";
+  private static final String FILE_3_KEY = PROJECT_KEY + ":file3.py";
+
+  private static final String DUPLICATED_LINES = "duplicated_lines";
+  private static final String DUPLICATED_BLOCKS = "duplicated_blocks";
+  private static final String DUPLICATED_FILES = "duplicated_files";
+  private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
+
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void startServer() {
-    orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
-    orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
+    ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/cpd"))
       .setProjectKey(PROJECT_KEY)
@@ -48,36 +57,32 @@ public class CPDTest {
       .setProjectVersion("1.0-SNAPSHOT")
       .setSourceDirs(".")
       .setSourceEncoding("UTF-8");
-    orchestrator.executeBuild(build);
+    ORCHESTRATOR.executeBuild(build);
   }
 
   @Test
   public void test_cpd() {
     Offset<Double> offset = Offset.offset(0.01d);
 
-    assertThat(getFileMeasureAsDouble("file1.py","duplicated_lines")).isEqualTo(27.0d, offset);
-    assertThat(getFileMeasureAsDouble("file1.py","duplicated_blocks")).isEqualTo(1.0d, offset);
-    assertThat(getFileMeasureAsDouble("file1.py","duplicated_files")).isEqualTo(1.0d, offset);
-    assertThat(getFileMeasureAsDouble("file1.py","duplicated_lines_density")).isEqualTo(96.4d, offset);
+    assertThat(getMeasureAsDouble(FILE_1_KEY, DUPLICATED_LINES)).isEqualTo(27.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_1_KEY, DUPLICATED_BLOCKS)).isEqualTo(1.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_1_KEY, DUPLICATED_FILES)).isEqualTo(1.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_1_KEY, DUPLICATED_LINES_DENSITY)).isEqualTo(93.1d, offset);
 
-    assertThat(getFileMeasureAsDouble("file2.py","duplicated_lines")).isEqualTo(27.0d, offset);
-    assertThat(getFileMeasureAsDouble("file2.py","duplicated_blocks")).isEqualTo(1.0d, offset);
-    assertThat(getFileMeasureAsDouble("file2.py","duplicated_files")).isEqualTo(1.0d, offset);
-    assertThat(getFileMeasureAsDouble("file2.py","duplicated_lines_density")).isEqualTo(96.4d, offset);
+    assertThat(getMeasureAsDouble(FILE_2_KEY, DUPLICATED_LINES)).isEqualTo(27.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_2_KEY, DUPLICATED_BLOCKS)).isEqualTo(1.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_2_KEY, DUPLICATED_FILES)).isEqualTo(1.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_2_KEY, DUPLICATED_LINES_DENSITY)).isEqualTo(90.0d, offset);
 
-    assertThat(getFileMeasureAsDouble("file3.py","duplicated_lines")).isEqualTo(0.0d, offset);
-    assertThat(getFileMeasureAsDouble("file3.py","duplicated_blocks")).isEqualTo(0.0d, offset);
-    assertThat(getFileMeasureAsDouble("file3.py","duplicated_files")).isEqualTo(0.0d, offset);
-    assertThat(getFileMeasureAsDouble("file3.py","duplicated_lines_density")).isEqualTo(0.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_3_KEY, DUPLICATED_LINES)).isEqualTo(0.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_3_KEY, DUPLICATED_BLOCKS)).isEqualTo(0.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_3_KEY, DUPLICATED_FILES)).isEqualTo(0.0d, offset);
+    assertThat(getMeasureAsDouble(FILE_3_KEY, DUPLICATED_LINES_DENSITY)).isEqualTo(0.0d, offset);
 
-    assertThat(getMeasureAsDouble(PROJECT_KEY, "duplicated_lines")).isEqualTo(54.0d, offset);
-    assertThat(getMeasureAsDouble(PROJECT_KEY, "duplicated_blocks")).isEqualTo(2.0d, offset);
-    assertThat(getMeasureAsDouble(PROJECT_KEY, "duplicated_files")).isEqualTo(2.0d, offset);
-    assertThat(getMeasureAsDouble(PROJECT_KEY, "duplicated_lines_density")).isEqualTo(63.5d, offset);
+    assertThat(getMeasureAsDouble(PROJECT_KEY, DUPLICATED_LINES)).isEqualTo(54.0d, offset);
+    assertThat(getMeasureAsDouble(PROJECT_KEY, DUPLICATED_BLOCKS)).isEqualTo(2.0d, offset);
+    assertThat(getMeasureAsDouble(PROJECT_KEY, DUPLICATED_FILES)).isEqualTo(2.0d, offset);
+    assertThat(getMeasureAsDouble(PROJECT_KEY, DUPLICATED_LINES_DENSITY)).isEqualTo(61.4d, offset);
  }
-
-  private Double getFileMeasureAsDouble(String path, String metricKey) {
-    return getMeasureAsDouble(PROJECT_KEY + ":" + path, metricKey);
-  }
 
 }
