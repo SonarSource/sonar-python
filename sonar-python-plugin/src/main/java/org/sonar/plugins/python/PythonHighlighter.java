@@ -38,6 +38,8 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
 
+import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
+
 /**
  * Colors Python code. Currently colors:
  * <ul>
@@ -133,11 +135,20 @@ public class PythonHighlighter extends PythonVisitor {
 
     } else if (token.getType().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
       highlight(token, TypeOfText.STRING);
+
+    } else if (token.getType().equals(IDENTIFIER) && isPython3Keyword(token.getValue())) {
+      // async and await are keywords starting python 3.5, however, for compatibility with previous versions, we cannot consider them as real keywords
+      highlight(token, TypeOfText.KEYWORD);
+
     }
 
     for (Trivia trivia : token.getTrivia()) {
       highlight(trivia.getToken(), TypeOfText.COMMENT);
     }
+  }
+
+  private static boolean isPython3Keyword(String value) {
+    return "await".equals(value) || "async".equals(value);
   }
 
   @Override

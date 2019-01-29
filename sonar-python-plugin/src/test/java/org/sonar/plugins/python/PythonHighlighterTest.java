@@ -74,6 +74,12 @@ public class PythonHighlighterTest {
 
     // pass
     checkOnRange(9, 4, 4, TypeOfText.KEYWORD);
+
+    // async
+    checkOnRange(95, 0, 5, TypeOfText.KEYWORD);
+
+    // await
+    checkOnRange(98, 0, 5, TypeOfText.KEYWORD);
   }
 
   @Test
