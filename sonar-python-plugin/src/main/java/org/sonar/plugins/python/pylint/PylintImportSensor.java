@@ -44,12 +44,11 @@ public class PylintImportSensor extends PythonReportSensor {
   private static final String DEFAULT_REPORT_PATH = "pylint-reports/pylint-result-*.txt";
 
   private static final Logger LOG = Loggers.get(PylintImportSensor.class);
+  private static final PylintRuleParser pylintRules = new PylintRuleParser(PylintRuleRepository.RULES_FILE);
   private static final Set<String> warningAlreadyLogged = new HashSet<>();
-  private PylintRuleRepository pylintRuleRepository;
 
-  public PylintImportSensor(Configuration conf, PylintRuleRepository pylintRuleRepository) {
+  public PylintImportSensor(Configuration conf) {
     super(conf);
-    this.pylintRuleRepository = pylintRuleRepository;
   }
 
   @Override
@@ -102,21 +101,21 @@ public class PylintImportSensor extends PythonReportSensor {
     return issues;
   }
 
-  private void saveIssues(List<Issue> issues, SensorContext context) {
+  private static void saveIssues(List<Issue> issues, SensorContext context) {
     FileSystem fileSystem = context.fileSystem();
     for (Issue pylintIssue : issues) {
       String filepath = pylintIssue.getFilename();
       InputFile pyfile = fileSystem.inputFile(fileSystem.predicates().hasPath(filepath));
       if (pyfile != null) {
         ActiveRule rule = context.activeRules().find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));
-        processRule(pylintIssue, pyfile, rule, context, pylintRuleRepository);
+        processRule(pylintIssue, pyfile, rule, context);
       } else {
         LOG.warn("Cannot find the file '{}' in SonarQube, ignoring violation", filepath);
       }
     }
   }
 
-  public static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context, PylintRuleRepository pylintRuleRepository) {
+  public static void processRule(Issue pylintIssue, InputFile pyfile, @Nullable ActiveRule rule, SensorContext context) {
     if (rule != null) {
       NewIssue newIssue = context
         .newIssue()
@@ -127,7 +126,7 @@ public class PylintImportSensor extends PythonReportSensor {
           .at(pyfile.selectLine(pylintIssue.getLine()))
           .message(pylintIssue.getDescription()));
       newIssue.save();
-    } else if (!pylintRuleRepository.hasRuleDefinition(pylintIssue.getRuleId())) {
+    } else if (!pylintRules.hasRuleDefinition(pylintIssue.getRuleId())) {
       logUnknownRuleWarning(pylintIssue.getRuleId());
     }
   }

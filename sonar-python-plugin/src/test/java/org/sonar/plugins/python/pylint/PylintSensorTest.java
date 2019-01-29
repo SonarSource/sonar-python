@@ -19,12 +19,11 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
-import org.sonar.api.config.Configuration;
+import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -36,7 +35,7 @@ public class PylintSensorTest {
   @Test
   public void sensor_descriptor() {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new PylintSensor(conf, new SimpleConfig(), new PylintRuleRepository()).describe(descriptor);
+    new PylintSensor(conf, new MapSettings()).describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("PylintSensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
@@ -50,39 +49,12 @@ public class PylintSensorTest {
   }
 
   private boolean shouldExecute(@Nullable String pylintReportPath) {
-    Configuration settings = new SimpleConfig(PylintImportSensor.REPORT_PATH_KEY, pylintReportPath);
-    PylintSensor sensor = new PylintSensor(conf, settings, new PylintRuleRepository());
+    MapSettings settings = new MapSettings();
+    if (pylintReportPath != null) {
+      settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, pylintReportPath);
+    }
+    PylintSensor sensor = new PylintSensor(conf, settings);
     return sensor.shouldExecute();
-  }
-
-  private class SimpleConfig implements Configuration {
-
-    private final String key;
-    private final String value;
-
-    private SimpleConfig() {
-      this(null, null);
-    }
-
-    private SimpleConfig(@Nullable String key, @Nullable String value) {
-      this.key = key;
-      this.value = value;
-    }
-
-    @Override
-    public Optional<String> get(String key) {
-      return Optional.ofNullable(key.equals(this.key) ? value : null);
-    }
-
-    @Override
-    public boolean hasKey(String key) {
-      return key.equals(this.key);
-    }
-
-    @Override
-    public String[] getStringArray(String key) {
-      throw new UnsupportedOperationException();
-    }
   }
 
 }

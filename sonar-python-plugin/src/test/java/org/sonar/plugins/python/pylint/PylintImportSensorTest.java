@@ -22,8 +22,6 @@ package org.sonar.plugins.python.pylint;
 import com.google.common.collect.ImmutableMap;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.function.Predicate;
 import org.junit.Rule;
@@ -80,9 +78,7 @@ public class PylintImportSensorTest {
         .build())
       .build());
 
-    PylintRuleRepository pylintRuleRepository = new PylintRuleRepository();
-    pylintRuleRepository.setDefinedRulesId(new HashSet<>(Arrays.asList(RULE_C0103, RULE_C0111)));
-    PylintImportSensor sensor = new PylintImportSensor(context.config(), pylintRuleRepository);
+    PylintImportSensor sensor = new PylintImportSensor(context.config());
     sensor.execute(context);
     assertThat(context.allIssues()).hasSize(3);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key())
@@ -108,9 +104,7 @@ public class PylintImportSensorTest {
           .build())
         .build());
 
-    PylintRuleRepository pylintRuleRepository = new PylintRuleRepository();
-    pylintRuleRepository.setDefinedRulesId(new HashSet<>(Arrays.asList(RULE_C0103, RULE_C0111)));
-    PylintImportSensor sensor = new PylintImportSensor(context.config(), pylintRuleRepository);
+    PylintImportSensor sensor = new PylintImportSensor(context.config());
     sensor.execute(context);
     assertThat(context.allIssues()).hasSize(1);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key()).containsOnly(inputFile.key());
@@ -121,7 +115,7 @@ public class PylintImportSensorTest {
   @Test
   public void sensor_descriptor() {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new PylintImportSensor(context.config(), new PylintRuleRepository()).describe(descriptor);
+    new PylintImportSensor(context.config()).describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("PylintImportSensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);

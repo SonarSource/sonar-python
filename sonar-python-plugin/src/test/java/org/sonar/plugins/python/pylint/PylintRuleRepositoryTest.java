@@ -22,6 +22,7 @@ package org.sonar.plugins.python.pylint;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,11 +30,9 @@ public class PylintRuleRepositoryTest {
 
   @Test
   public void createRulesTest() {
-    PylintRuleRepository ruleRepository = new PylintRuleRepository();
+    PylintRuleRepository ruleRepository = new PylintRuleRepository(new RulesDefinitionXmlLoader());
     RulesDefinition.Context context = new RulesDefinition.Context();
-    assertThat(ruleRepository.hasRuleDefinition("C0103")).isFalse();
     ruleRepository.define(context);
-    assertThat(ruleRepository.hasRuleDefinition("C0103")).isTrue();
 
     RulesDefinition.Repository repository = context.repository(PylintRuleRepository.REPOSITORY_KEY);
 
