@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="3" name="pytest" skips="0" tests="4" time="0.035">
+  <testcase classname="tests.test_prod" file="tests/test_prod.py" line="0" name="test_succeeding" time="0.0007090568542480469"></testcase>
+  <testcase classname="tests.test_prod" file="tests/test_prod.py" line="3" name="test_failing" time="0.0010173320770263672">
+    <failure message="assert False">def test_failing():
+      &gt; assert False
+      E assert False
+
+      tests/test_prod.py:5: AssertionError
+    </failure>
+  </testcase>
+  <testcase classname="tests.test_prod" file="tests/test_prod.py" line="6" name="test_crashing" time="0.0005733966827392578">
+    <failure message="RuntimeError">def test_crashing():
+      &gt; raise RuntimeError()
+      E RuntimeError
+
+      tests/test_prod.py:8: RuntimeError
+    </failure>
+  </testcase>
+  <testcase classname="tests.test_prod" file="tests/test_prod.py" line="9" name="test_skipped" time="0.0007612705230712891">
+    <skipped message="skipped message" type="pytest.skip">skipped</skipped>
+  </testcase>
+</testsuite>

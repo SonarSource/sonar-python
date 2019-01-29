@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python.xunit;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
@@ -27,20 +29,22 @@ import org.apache.commons.lang.StringEscapeUtils;
  */
 public class TestCase {
 
-  private static final String STATUS_OK = "ok";
-  private static final String STATUS_ERROR = "error";
-  private static final String STATUS_FAILURE = "failure";
-  private static final String STATUS_SKIPPED = "skipped";
+  public static final String STATUS_OK = "ok";
+  public static final String STATUS_ERROR = "error";
+  public static final String STATUS_FAILURE = "failure";
+  public static final String STATUS_SKIPPED = "skipped";
 
-  private String name;
-  private String status = STATUS_OK;
-  private String stackTrace;
-  private String errorMessage;
-  private int time = 0;
+  private final String name;
+  private final String status;
+  private final String stackTrace;
+  private final String errorMessage;
+  private final int time;
+  private final String file;
+  private final String testClassname;
 
   /**
    * Constructs a testcase instance out of following parameters
-   * 
+   *
    * @param name
    *          The name of this testcase
    * @param time
@@ -51,13 +55,19 @@ public class TestCase {
    *          The stack trace occurred while executing of this testcase; pass "" if the testcase passed/skipped.
    * @param msg
    *          The error message associated with this testcase of the execution was erroneous; pass "" if not.
+   * @param file
+   *          The optional file to which this test case applies.
+   * @param testClassname
+   *          The classname of the test.
    */
-  public TestCase(String name, int time, String status, String stack, String msg) {
+  public TestCase(String name, int time, String status, String stack, String msg, @Nullable String file, @Nullable String testClassname) {
     this.name = name;
     this.time = time;
     this.stackTrace = stack;
     this.errorMessage = msg;
     this.status = status;
+    this.file = file;
+    this.testClassname = testClassname;
   }
 
   /**
@@ -83,6 +93,16 @@ public class TestCase {
 
   public int getTime() {
     return time;
+  }
+
+  @CheckForNull
+  public String getFile() {
+    return file;
+  }
+
+  @CheckForNull
+  public String getTestClassname() {
+    return testClassname;
   }
 
   /**
