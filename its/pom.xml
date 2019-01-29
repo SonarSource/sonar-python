@@ -9,17 +9,33 @@
   </parent>
 
   <artifactId>python-its</artifactId>
-  <name>Python :: IT</name>
   <packaging>pom</packaging>
+
+  <name>Python :: ITs</name>
 
   <modules>
     <module>plugin</module>
     <module>ruling</module>
   </modules>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skipTests>${skip.its}</skipTests>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <profiles>
     <profile>
       <id>qa</id>
+      <properties>
+        <skip.its>false</skip.its>
+      </properties>
       <activation>
         <property>
           <name>env.SONARSOURCE_QA</name>

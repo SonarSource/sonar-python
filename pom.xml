@@ -50,6 +50,7 @@
     <module>python-checks</module>
     <module>sonar-python-plugin</module>
     <module>sslr-python-toolkit</module>
+    <module>its</module>
   </modules>
 
   <scm>
@@ -77,6 +78,8 @@
     <artifactsToPublish>${project.groupId}:sonar-python-plugin:jar,${project.groupId}:sslr-python-toolkit:jar</artifactsToPublish>
     <!-- we depend on API ${sonar.version} but we keep backward compatibility with LTS -->
     <sonarQubeMinVersion>6.7</sonarQubeMinVersion>
+
+    <skip.its>true</skip.its>
 
     <!-- versions -->
     <commons.io.version>2.5</commons.io.version>
@@ -214,13 +217,13 @@
 
     </dependencies>
   </dependencyManagement>
-  
+
   <profiles>
     <profile>
       <id>its</id>
-      <modules>
-        <module>its</module>
-      </modules>
+      <properties>
+        <skip.its>false</skip.its>
+      </properties>
     </profile>
   </profiles>
 </project>
