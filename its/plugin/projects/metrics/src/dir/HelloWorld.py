@@ -2,4 +2,4 @@
 # Header
 #
 
-print "Hello, World!"
+def fun(a): return "Hello, World!" if a else "Hi, World!"

@@ -30,6 +30,7 @@ public class FileMetrics {
   private int numberOfStatements;
   private int numberOfClasses;
   private final ComplexityVisitor complexityVisitor = new ComplexityVisitor();
+  private final CognitiveComplexityVisitor cognitiveComplexityVisitor = new CognitiveComplexityVisitor(null);
   private final FileLinesVisitor fileLinesVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
@@ -38,6 +39,7 @@ public class FileMetrics {
     numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
     numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
     complexityVisitor.scanFile(context);
+    cognitiveComplexityVisitor.scanFile(context);
     fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
     fileLinesVisitor.scanFile(context);
     for (AstNode functionDef : rootTree.getDescendants(PythonGrammar.FUNCDEF)) {
@@ -59,6 +61,10 @@ public class FileMetrics {
 
   public int complexity() {
     return complexityVisitor.getComplexity();
+  }
+
+  public int cognitiveComplexity() {
+    return cognitiveComplexityVisitor.getComplexity();
   }
 
   public List<Integer> functionComplexities() {

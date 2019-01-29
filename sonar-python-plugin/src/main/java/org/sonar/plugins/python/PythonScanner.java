@@ -173,6 +173,7 @@ public class PythonScanner {
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
     saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
     saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
+    saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
     saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
 
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);

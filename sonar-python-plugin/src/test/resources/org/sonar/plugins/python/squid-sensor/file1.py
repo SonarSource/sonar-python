@@ -11,7 +11,7 @@ print # the grammar used should recognize this as builtin
 a = [1,
      2, # after comment
      ]
-def foo(): pass
+def foo(a): return 1 if a == 0 else 2
 class bar(object): pass
 def foo2(x,y,z,): #trailing comma allowed
     pass

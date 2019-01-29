@@ -28,31 +28,37 @@ import static org.fest.assertions.Assertions.assertThat;
 public class FileMetricsTest {
 
   @Test
-  public void statements() throws Exception {
+  public void statements() {
     assertThat(metrics("statements.py").numberOfStatements()).isEqualTo(1);
   }
 
   @Test
-  public void functions() throws Exception {
+  public void functions() {
     assertThat(metrics("functions.py").numberOfFunctions()).isEqualTo(1);
   }
 
   @Test
-  public void classes() throws Exception {
+  public void classes() {
     assertThat(metrics("classes.py").numberOfClasses()).isEqualTo(1);
   }
 
   @Test
-  public void complexity() throws Exception {
+  public void complexity() {
     assertThat(metrics("complexity.py").complexity()).isEqualTo(7);
   }
 
   @Test
-  public void function_complexities() throws Exception {
+  public void cognitive_complexity() {
+    assertThat(metrics("classes.py").cognitiveComplexity()).isEqualTo(0);
+    assertThat(metrics("cognitive-complexities.py").cognitiveComplexity()).isEqualTo(89);
+  }
+
+  @Test
+  public void function_complexities() {
     assertThat(metrics("function-complexities.py").functionComplexities()).containsExactly(3, 1);
   }
 
-  private FileMetrics metrics(String fileName) {
+  private static FileMetrics metrics(String fileName) {
     File baseDir = new File("src/test/resources/metrics/");
     File file = new File(baseDir, fileName);
     return new FileMetrics(TestPythonVisitorRunner.createContext(file), true);
