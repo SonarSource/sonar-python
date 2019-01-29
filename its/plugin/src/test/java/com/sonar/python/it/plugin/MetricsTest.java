@@ -22,6 +22,7 @@ package com.sonar.python.it.plugin;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
+import org.assertj.core.data.Offset;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -36,8 +37,36 @@ public class MetricsTest {
 
   private static final String PROJECT_KEY = "metrics";
 
+  private static final String CLASSES = "classes";
+  private static final String COGNITIVE_COMPLEXITY = "cognitive_complexity";
+  private static final String COMMENT_LINES = "comment_lines";
+  private static final String COMMENT_LINES_DENSITY = "comment_lines_density";
+  private static final String COMPLEXITY = "complexity";
+  private static final String COVERAGE = "coverage";
+  private static final String DUPLICATED_BLOCKS = "duplicated_blocks";
+  private static final String DUPLICATED_FILES = "duplicated_files";
+  private static final String DUPLICATED_LINES = "duplicated_lines";
+  private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
+  private static final String EXECUTABLE_LINES_DATA = "executable_lines_data";
+  private static final String FILE_COMPLEXITY = "file_complexity";
+  private static final String FILE_COMPLEXITY_DISTRIBUTION = "file_complexity_distribution";
+  private static final String FILES = "files";
+  private static final String FUNCTION_COMPLEXITY = "function_complexity";
+  private static final String FUNCTION_COMPLEXITY_DISTRIBUTION = "function_complexity_distribution";
+  private static final String FUNCTIONS = "functions";
+  private static final String LINES = "lines";
+  private static final String NCLOC = "ncloc";
+  private static final String NCLOC_DATA = "ncloc_data";
+  private static final String STATEMENTS = "statements";
+  private static final String TESTS = "tests";
+  private static final String VIOLATIONS = "violations";
+
+  private static final String HELLO_WORLD_PY = "dir/HelloWorld.py";
+
+  private static final Offset<Double> OFFSET = Offset.offset(0.01d);
+
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void startServer() {
@@ -55,85 +84,88 @@ public class MetricsTest {
   @Test
   public void project_level() {
     // Size
-    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(1);
-    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(6);
-    assertThat(getProjectMeasureAsInt("files")).isEqualTo(1);
-    assertThat(getProjectMeasureAsInt("statements")).isEqualTo(1);
-    assertThat(getProjectMeasureAsInt("functions")).isEqualTo(0);
-    assertThat(getProjectMeasureAsInt("classes")).isEqualTo(0);
+    assertThat(getProjectMeasureAsInt(NCLOC)).isEqualTo(6);
+    assertThat(getProjectMeasureAsInt(LINES)).isEqualTo(13);
+    assertThat(getProjectMeasureAsInt(FILES)).isEqualTo(2);
+    assertThat(getProjectMeasureAsInt(STATEMENTS)).isEqualTo(5);
+    assertThat(getProjectMeasureAsInt(FUNCTIONS)).isEqualTo(1);
+    assertThat(getProjectMeasureAsInt(CLASSES)).isEqualTo(0);
     // Documentation
-    assertThat(getProjectMeasureAsInt("comment_lines")).isEqualTo(1);
-    assertThat(getProjectMeasureAsDouble("comment_lines_density")).isEqualTo(50.0);
+    assertThat(getProjectMeasureAsInt(COMMENT_LINES)).isEqualTo(1);
+    assertThat(getProjectMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(14.3, OFFSET);
     // Complexity
-    assertThat(getProjectMeasureAsDouble("complexity")).isZero();
-    assertThat(getProjectMeasureAsDouble("function_complexity")).isNull();
-    assertThat(getProjectMeasure("function_complexity_distribution").getValue()).isEqualTo("1=0;2=0;4=0;6=0;8=0;10=0;12=0;20=0;30=0");
-    assertThat(getProjectMeasureAsDouble("file_complexity")).isZero();
-    assertThat(getProjectMeasure("file_complexity_distribution").getValue()).isEqualTo("0=1;5=0;10=0;20=0;30=0;60=0;90=0");
+    assertThat(getProjectMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
+    assertThat(getProjectMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);
+    assertThat(getProjectMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
+    assertThat(getProjectMeasure(FUNCTION_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("1=0;2=1;4=0;6=0;8=0;10=0;12=0;20=0;30=0");
+    assertThat(getProjectMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(1.5, OFFSET);
+    assertThat(getProjectMeasure(FILE_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
     // Duplication
-    assertThat(getProjectMeasureAsDouble("duplicated_lines")).isZero();
-    assertThat(getProjectMeasureAsDouble("duplicated_blocks")).isZero();
-    assertThat(getProjectMeasureAsDouble("duplicated_files")).isZero();
-    assertThat(getProjectMeasureAsDouble("duplicated_lines_density")).isZero();
+    assertThat(getProjectMeasureAsDouble(DUPLICATED_LINES)).isEqualTo(0.0, OFFSET);
+    assertThat(getProjectMeasureAsDouble(DUPLICATED_BLOCKS)).isEqualTo(0.0, OFFSET);
+    assertThat(getProjectMeasureAsDouble(DUPLICATED_FILES)).isEqualTo(0.0, OFFSET);
+    assertThat(getProjectMeasureAsDouble(DUPLICATED_LINES_DENSITY)).isEqualTo(0.0, OFFSET);
     // Rules
-    assertThat(getProjectMeasureAsDouble("violations")).isZero();
+    assertThat(getProjectMeasureAsDouble(VIOLATIONS)).isEqualTo(0.0, OFFSET);
 
-    assertThat(getProjectMeasureAsInt("tests")).isNull();
-    assertThat(getProjectMeasureAsDouble("coverage")).isZero();
+    assertThat(getProjectMeasureAsInt(TESTS)).isNull();
+    assertThat(getProjectMeasureAsDouble(COVERAGE)).isEqualTo(0.0, OFFSET);
   }
 
   @Test
   public void directory_level() {
     // Size
-    assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(1);
-    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(6);
-    assertThat(getDirectoryMeasureAsInt("files")).isEqualTo(1);
-    assertThat(getDirectoryMeasureAsInt("statements")).isEqualTo(1);
-    assertThat(getDirectoryMeasureAsInt("functions")).isEqualTo(0);
-    assertThat(getDirectoryMeasureAsInt("classes")).isEqualTo(0);
+    assertThat(getDirectoryMeasureAsInt(NCLOC)).isEqualTo(6);
+    assertThat(getDirectoryMeasureAsInt(LINES)).isEqualTo(13);
+    assertThat(getDirectoryMeasureAsInt(FILES)).isEqualTo(2);
+    assertThat(getDirectoryMeasureAsInt(STATEMENTS)).isEqualTo(5);
+    assertThat(getDirectoryMeasureAsInt(FUNCTIONS)).isEqualTo(1);
+    assertThat(getDirectoryMeasureAsInt(CLASSES)).isEqualTo(0);
     // Documentation
-    assertThat(getDirectoryMeasureAsInt("comment_lines")).isEqualTo(1);
-    assertThat(getDirectoryMeasureAsDouble("comment_lines_density")).isEqualTo(50.0);
+    assertThat(getDirectoryMeasureAsInt(COMMENT_LINES)).isEqualTo(1);
+    assertThat(getDirectoryMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(14.3, OFFSET);
     // Complexity
-    assertThat(getDirectoryMeasureAsDouble("complexity")).isZero();
-    assertThat(getDirectoryMeasureAsDouble("function_complexity")).isNull();
-    assertThat(getDirectoryMeasure("function_complexity_distribution").getValue()).isEqualTo("1=0;2=0;4=0;6=0;8=0;10=0;12=0;20=0;30=0");
-    assertThat(getDirectoryMeasureAsDouble("file_complexity")).isZero();
-    assertThat(getDirectoryMeasure("file_complexity_distribution").getValue()).isEqualTo("0=1;5=0;10=0;20=0;30=0;60=0;90=0");
+    assertThat(getDirectoryMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
+    assertThat(getDirectoryMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);
+    assertThat(getDirectoryMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
+    assertThat(getDirectoryMeasure(FUNCTION_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("1=0;2=1;4=0;6=0;8=0;10=0;12=0;20=0;30=0");
+    assertThat(getDirectoryMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(1.5, OFFSET);
+    assertThat(getDirectoryMeasure(FILE_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
     // Duplication
-    assertThat(getDirectoryMeasureAsDouble("duplicated_lines")).isZero();
-    assertThat(getDirectoryMeasureAsDouble("duplicated_blocks")).isZero();
-    assertThat(getDirectoryMeasureAsDouble("duplicated_files")).isZero();
-    assertThat(getDirectoryMeasureAsDouble("duplicated_lines_density")).isZero();
+    assertThat(getDirectoryMeasureAsDouble(DUPLICATED_LINES)).isEqualTo(0.0, OFFSET);
+    assertThat(getDirectoryMeasureAsDouble(DUPLICATED_BLOCKS)).isEqualTo(0.0, OFFSET);
+    assertThat(getDirectoryMeasureAsDouble(DUPLICATED_FILES)).isEqualTo(0.0, OFFSET);
+    assertThat(getDirectoryMeasureAsDouble(DUPLICATED_LINES_DENSITY)).isEqualTo(0.0, OFFSET);
     // Rules
-    assertThat(getDirectoryMeasureAsDouble("violations")).isZero();
+    assertThat(getDirectoryMeasureAsDouble(VIOLATIONS)).isEqualTo(0.0, OFFSET);
   }
 
   @Test
   public void file_level() {
     // Size
-    assertThat(getFileMeasureAsInt("ncloc")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt("lines")).isEqualTo(6);
-    assertThat(getFileMeasureAsInt("files")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt("statements")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt("functions")).isEqualTo(0);
-    assertThat(getFileMeasureAsInt("classes")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(NCLOC)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(LINES)).isEqualTo(6);
+    assertThat(getFileMeasureAsInt(FILES)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(STATEMENTS)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(FUNCTIONS)).isEqualTo(1);
+    assertThat(getFileMeasureAsInt(CLASSES)).isEqualTo(0);
     // Documentation
-    assertThat(getFileMeasureAsInt("comment_lines")).isEqualTo(1);
-    assertThat(getFileMeasureAsDouble("comment_lines_density")).isEqualTo(50.0);
+    assertThat(getFileMeasureAsInt(COMMENT_LINES)).isEqualTo(1);
+    assertThat(getFileMeasureAsDouble(COMMENT_LINES_DENSITY)).isEqualTo(50.0, OFFSET);
     // Complexity
-    assertThat(getFileMeasureAsDouble("complexity")).isZero();
-    assertThat(getFileMeasureAsDouble("function_complexity")).isNull();
-    assertThat(getFileMeasureAsDouble("function_complexity_distribution")).isNull();
-    assertThat(getFileMeasureAsDouble("file_complexity")).isZero();
-    assertThat(getFileMeasureAsDouble("file_complexity_distribution")).isNull();
+    assertThat(getFileMeasureAsDouble(COMPLEXITY)).isEqualTo(2.0, OFFSET);
+    assertThat(getFileMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(1.0, OFFSET);
+    assertThat(getFileMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
+    assertThat(getFileMeasureAsDouble(FUNCTION_COMPLEXITY_DISTRIBUTION)).isNull();
+    assertThat(getFileMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(2.0, OFFSET);
+    assertThat(getFileMeasureAsDouble(FILE_COMPLEXITY_DISTRIBUTION)).isNull();
     // Duplication
-    assertThat(getFileMeasureAsInt("duplicated_lines")).isZero();
-    assertThat(getFileMeasureAsInt("duplicated_blocks")).isZero();
-    assertThat(getFileMeasureAsInt("duplicated_files")).isZero();
-    assertThat(getFileMeasureAsDouble("duplicated_lines_density")).isZero();
+    assertThat(getFileMeasureAsInt(DUPLICATED_LINES)).isZero();
+    assertThat(getFileMeasureAsInt(DUPLICATED_BLOCKS)).isZero();
+    assertThat(getFileMeasureAsInt(DUPLICATED_FILES)).isZero();
+    assertThat(getFileMeasureAsDouble(DUPLICATED_LINES_DENSITY)).isZero();
     // Rules
-    assertThat(getFileMeasureAsInt("violations")).isZero();
+    assertThat(getFileMeasureAsInt(VIOLATIONS)).isZero();
   }
 
   /**
@@ -142,10 +174,10 @@ public class MetricsTest {
   @Test
   public void should_be_compatible_with_DevCockpit() {
     // TODO probably bug in Sonar: order might depend on JVM
-    assertThat(getFileMeasure("ncloc_data").getValue())
+    assertThat(getFileMeasure(NCLOC_DATA).getValue())
       .doesNotContain("1=1")
       .contains("5=1");
-    assertThat(getFileMeasure("executable_lines_data").getValue())
+    assertThat(getFileMeasure(EXECUTABLE_LINES_DATA).getValue())
       .doesNotContain("1=1")
       .contains("5=1");
   }
@@ -177,15 +209,15 @@ public class MetricsTest {
   }
 
   private Measure getFileMeasure(String metricKey) {
-    return getMeasure(keyFor("dir/HelloWorld.py"), metricKey);
+    return getMeasure(keyFor(HELLO_WORLD_PY), metricKey);
   }
 
   private Integer getFileMeasureAsInt(String metricKey) {
-    return getMeasureAsInt(keyFor("dir/HelloWorld.py"), metricKey);
+    return getMeasureAsInt(keyFor(HELLO_WORLD_PY), metricKey);
   }
 
   private Double getFileMeasureAsDouble(String metricKey) {
-    return getMeasureAsDouble(keyFor("dir/HelloWorld.py"), metricKey);
+    return getMeasureAsDouble(keyFor(HELLO_WORLD_PY), metricKey);
   }
 
   private static String keyFor(String s) {

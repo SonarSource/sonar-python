@@ -123,7 +123,8 @@ public class PythonSquidSensorTest {
     assertThat(context.measure(key, CoreMetrics.STATEMENTS).value()).isEqualTo(20);
     assertThat(context.measure(key, CoreMetrics.FUNCTIONS).value()).isEqualTo(4);
     assertThat(context.measure(key, CoreMetrics.CLASSES).value()).isEqualTo(1);
-    assertThat(context.measure(key, CoreMetrics.COMPLEXITY).value()).isEqualTo(4);
+    assertThat(context.measure(key, CoreMetrics.COMPLEXITY).value()).isEqualTo(5);
+    assertThat(context.measure(key, CoreMetrics.COGNITIVE_COMPLEXITY).value()).isEqualTo(1);
     assertThat(context.measure(key, CoreMetrics.COMMENT_LINES).value()).isEqualTo(8);
 
     assertThat(context.allIssues()).hasSize(1);
