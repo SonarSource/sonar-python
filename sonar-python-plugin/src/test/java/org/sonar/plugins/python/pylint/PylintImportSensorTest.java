@@ -24,6 +24,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.function.Predicate;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -36,6 +37,8 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
 
@@ -43,15 +46,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PylintImportSensorTest {
 
+  public static final String FILE1_PATH = "src/file1.py";
+  public static final String RULE_C0103 = "C0103";
+  public static final String RULE_C0111 = "C0111";
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/pylint");
   private final SensorContextTester context = SensorContextTester.create(baseDir);
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void parse_report() {
     context.settings().setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report.txt");
 
-    File file = new File(baseDir, "src/file1.py");
-    DefaultInputFile inputFile = TestInputFileBuilder.create("", "src/file1.py")
+    File file = new File(baseDir, FILE1_PATH);
+    DefaultInputFile inputFile = TestInputFileBuilder.create("", FILE1_PATH)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
       .build();
@@ -60,11 +69,11 @@ public class PylintImportSensorTest {
     context.setActiveRules(
       new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0103"))
+        .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, RULE_C0103))
         .setName("Invalid name")
         .build())
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, "C0111"))
+        .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, RULE_C0111))
         .setName("Missing docstring")
         .build())
       .build());
@@ -74,6 +83,33 @@ public class PylintImportSensorTest {
     assertThat(context.allIssues()).hasSize(3);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key())
       .containsOnly(inputFile.key());
+  }
+
+  @Test
+  public void logsOnlyUnknownRules () {
+    context.settings().setProperty(PylintImportSensor.REPORT_PATH_KEY, "pylint-report-unknown-rules.txt");
+
+    File file = new File(baseDir, FILE1_PATH);
+    DefaultInputFile inputFile = TestInputFileBuilder.create("", FILE1_PATH)
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
+      .build();
+    context.fileSystem().add(inputFile);
+
+    context.setActiveRules(
+      new ActiveRulesBuilder()
+        .addRule(new NewActiveRule.Builder()
+          .setRuleKey(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, RULE_C0103))
+          .setName("Invalid name")
+          .build())
+        .build());
+
+    PylintImportSensor sensor = new PylintImportSensor(context.config());
+    sensor.execute(context);
+    assertThat(context.allIssues()).hasSize(1);
+    assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key()).containsOnly(inputFile.key());
+    assertThat(context.allIssues()).extracting(issue -> issue.ruleKey().rule()).containsExactly(RULE_C0103);
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Pylint rule 'C8888' is unknown in Sonar", "Pylint rule 'C9999' is unknown in Sonar");
   }
 
   @Test

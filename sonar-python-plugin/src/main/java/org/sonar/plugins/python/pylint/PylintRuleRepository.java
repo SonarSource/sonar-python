@@ -33,7 +33,7 @@ public class PylintRuleRepository implements RulesDefinition {
   public static final String REPOSITORY_NAME = "Pylint";
   public static final String REPOSITORY_KEY = REPOSITORY_NAME;
 
-  private static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
+  public static final String RULES_FILE = "/org/sonar/plugins/python/pylint/rules.xml";
   private static final String REMEDIATION_FILE = "/org/sonar/plugins/python/pylint/remediation-cost.csv";
 
   private final RulesDefinitionXmlLoader xmlLoader;

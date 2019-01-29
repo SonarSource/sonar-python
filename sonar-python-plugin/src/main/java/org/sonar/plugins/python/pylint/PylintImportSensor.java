@@ -21,9 +21,11 @@ package org.sonar.plugins.python.pylint;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -42,6 +44,8 @@ public class PylintImportSensor extends PythonReportSensor {
   private static final String DEFAULT_REPORT_PATH = "pylint-reports/pylint-result-*.txt";
 
   private static final Logger LOG = Loggers.get(PylintImportSensor.class);
+  private static final PylintRuleParser pylintRules = new PylintRuleParser(PylintRuleRepository.RULES_FILE);
+  private static final Set<String> warningAlreadyLogged = new HashSet<>();
 
   public PylintImportSensor(Configuration conf) {
     super(conf);
@@ -122,8 +126,15 @@ public class PylintImportSensor extends PythonReportSensor {
           .at(pyfile.selectLine(pylintIssue.getLine()))
           .message(pylintIssue.getDescription()));
       newIssue.save();
-    } else {
-      LOG.warn("Pylint rule '{}' is unknown in Sonar", pylintIssue.getRuleId());
+    } else if (!pylintRules.hasRuleDefinition(pylintIssue.getRuleId())) {
+      logUnknownRuleWarning(pylintIssue.getRuleId());
+    }
+  }
+
+  private static void logUnknownRuleWarning(String ruleId) {
+    if (!warningAlreadyLogged.contains(ruleId)) {
+      warningAlreadyLogged.add(ruleId);
+      LOG.warn("Pylint rule '{}' is unknown in Sonar", ruleId);
     }
   }
 
