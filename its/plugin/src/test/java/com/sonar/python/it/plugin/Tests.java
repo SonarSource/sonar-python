@@ -50,6 +50,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Suite.SuiteClasses({
   BanditReportTest.class,
   MetricsTest.class,
+  CPDTest.class,
   CoverageTest.class,
   PylintReportTest.class,
   TestReportTest.class,
