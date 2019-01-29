@@ -6,7 +6,7 @@ case "$TEST" in
   plugin|ruling)  
     
   cd its/$TEST
-  mvn test -Dsonar.runtimeVersion="$SQ_VERSION" -Dmaven.test.redirectTestOutputToFile=false
+  mvn test -Dsonar.runtimeVersion="$SQ_VERSION" -Dmaven.test.redirectTestOutputToFile=false -Dskip.its=false
   ;;
 
   *)
