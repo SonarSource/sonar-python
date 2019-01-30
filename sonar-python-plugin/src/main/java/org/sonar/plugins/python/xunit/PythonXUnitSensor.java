@@ -84,7 +84,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
     if (total.getTests() > 0) {
       InputComponent module = context.module();
-      saveMeasure(context, module, CoreMetrics.TESTS, total.getTests() - total.getSkipped());
+      saveMeasure(context, module, CoreMetrics.TESTS, total.getExecutedTests());
       saveMeasure(context, module, CoreMetrics.SKIPPED_TESTS, total.getSkipped());
       saveMeasure(context, module, CoreMetrics.TEST_ERRORS, total.getErrors());
       saveMeasure(context, module, CoreMetrics.TEST_FAILURES, total.getFailures());
@@ -112,7 +112,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
       LOG.debug("Saving test execution measures for '{}'", inputFile.toString());
 
       saveMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, fileTestResult.getSkipped());
-      saveMeasure(context, inputFile, CoreMetrics.TESTS, fileTestResult.getTests() - fileTestResult.getSkipped());
+      saveMeasure(context, inputFile, CoreMetrics.TESTS, fileTestResult.getExecutedTests());
       saveMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, fileTestResult.getErrors());
       saveMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, fileTestResult.getFailures());
       saveMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, fileTestResult.getTime());

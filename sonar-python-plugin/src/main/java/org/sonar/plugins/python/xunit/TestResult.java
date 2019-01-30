@@ -39,6 +39,10 @@ public class TestResult {
     return tests;
   }
 
+  public int getExecutedTests() {
+    return tests - skipped;
+  }
+
   public int getTime() {
     return time;
   }

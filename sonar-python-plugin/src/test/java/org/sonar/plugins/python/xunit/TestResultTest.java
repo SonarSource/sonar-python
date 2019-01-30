@@ -38,6 +38,7 @@ public class TestResultTest {
   @Test
   public void newBornSuiteShouldHaveVirginStatistics() {
     assertThat(testResult.getTests()).isEqualTo(0);
+    assertThat(testResult.getExecutedTests()).isEqualTo(0);
     assertThat(testResult.getErrors()).isEqualTo(0);
     assertThat(testResult.getFailures()).isEqualTo(0);
     assertThat(testResult.getSkipped()).isEqualTo(0);
@@ -54,6 +55,22 @@ public class TestResultTest {
 
     assertThat(testResult.getTests()).isEqualTo(testBefore + 1);
     assertThat(testResult.getTime()).isEqualTo(timeBefore + EXEC_TIME);
+  }
+
+  @Test
+  public void executedTestsValue() {
+    testResult.addTestCase(new TestCase("name", 1, "ok", "stack", "msg", "file", "testClassname"));
+    testResult.addTestCase(new TestCase("name", 2, "skipped", "stack", "msg", "file", "testClassname"));
+    testResult.addTestCase(new TestCase("name", 3, "ok", "stack", "msg", "file", "testClassname"));
+    testResult.addTestCase(new TestCase("name", 4, "error", "stack", "msg", "file", "testClassname"));
+    testResult.addTestCase(new TestCase("name", 5, "skipped", "stack", "msg", "file", "testClassname"));
+
+    assertThat(testResult.getTests()).isEqualTo(5);
+    assertThat(testResult.getExecutedTests()).isEqualTo(3);
+    assertThat(testResult.getErrors()).isEqualTo(1);
+    assertThat(testResult.getFailures()).isEqualTo(0);
+    assertThat(testResult.getSkipped()).isEqualTo(2);
+    assertThat(testResult.getTime()).isEqualTo(15);
   }
 
   @Test
