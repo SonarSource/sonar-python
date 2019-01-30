@@ -27,8 +27,13 @@ public class XPathCheckTest {
   private static final String MESSAGE = "Avoid statements";
 
   @Test
-  public void line_level_issue() {
+  public void node_level_issue() {
     analyze("xpath-statement.py", "//STATEMENT");
+  }
+
+  @Test
+  public void node_level_issue_print_statement() {
+    analyze("xpath-print-statement.py", "//PRINT_STMT");
   }
 
   @Test
