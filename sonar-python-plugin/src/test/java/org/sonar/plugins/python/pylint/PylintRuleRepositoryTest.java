@@ -42,7 +42,7 @@ public class PylintRuleRepositoryTest {
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(325);
+    assertThat(rules).hasSize(370);
 
     long rulesWithoutRemediationCost = rules.stream()
       .filter(rule -> rule.debtRemediationFunction() == null)
