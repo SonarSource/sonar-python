@@ -44,7 +44,7 @@ public class DocstringExtractorTest {
 
     String TRIPLE_QUOTES = "\"\"\"";
 
-    assertDocstring(PythonGrammar.FILE_INPUT, 1, TRIPLE_QUOTES + "\nThis is a module docstring\n" + TRIPLE_QUOTES);
+    assertDocstring(PythonGrammar.FILE_INPUT, 1, String.format("%s%nThis is a module docstring%n%s", TRIPLE_QUOTES, TRIPLE_QUOTES));
     assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES);
     assertDocstring(PythonGrammar.FUNCDEF, 12, TRIPLE_QUOTES + " " + TRIPLE_QUOTES);
     assertDocstring(PythonGrammar.FUNCDEF, 16, "\"This is a function docstring\"");
