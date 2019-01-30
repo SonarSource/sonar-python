@@ -30,15 +30,20 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.WildcardPattern;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 public abstract class PythonReportSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(PythonReportSensor.class);
 
-  protected Configuration conf;
+  protected final Configuration conf;
+  private final AnalysisWarningsWrapper analysisWarnings;
+  private final String reportType;
 
-  public PythonReportSensor(Configuration conf) {
+  public PythonReportSensor(Configuration conf, AnalysisWarningsWrapper analysisWarnings, String reportType) {
     this.conf = conf;
+    this.analysisWarnings = analysisWarnings;
+    this.reportType = reportType;
   }
 
   @Override
@@ -54,13 +59,10 @@ public abstract class PythonReportSensor implements Sensor {
     try {
       List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathKey(), defaultReportPath());
       processReports(context, reports);
-    } catch (javax.xml.stream.XMLStreamException e) {
-      String msg = new StringBuilder()
-          .append("Cannot feed the data into sonar, details: '")
-          .append(e)
-          .append("'")
-          .toString();
-      throw new IllegalStateException(msg, e);
+    } catch (Exception e) {
+      String reportPath = conf.get(reportPathKey()).orElse(defaultReportPath());
+      LOG.warn("Cannot read report '{}', the following exception occurred: {}", reportPath, e.getMessage());
+      analysisWarnings.addUnique(String.format("An error occurred while trying to import %s report(s): '%s'", reportType, reportPath));
     }
   }
 

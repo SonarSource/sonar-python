@@ -32,6 +32,8 @@ import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
+import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
+import org.sonar.plugins.python.warnings.NoOpAnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
 public class PythonPlugin implements Plugin {
@@ -46,7 +48,7 @@ public class PythonPlugin implements Plugin {
   private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATH_KEY + " instead. ";
 
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
-
+  private static final Version SQ_MIN_VERSION_ANALYSIS_WARNINGS = Version.create(7, 4);
 
   @Override
   public void define(Context context) {
@@ -106,6 +108,12 @@ public class PythonPlugin implements Plugin {
       PythonRuleRepository.class);
 
     if (context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
+      if (context.getRuntime().getApiVersion().isGreaterThanOrEqual(SQ_MIN_VERSION_ANALYSIS_WARNINGS)) {
+        context.addExtension(DefaultAnalysisWarningsWrapper.class);
+      } else {
+        context.addExtension(NoOpAnalysisWarningsWrapper.class);
+      }
+
       addXUnitExtensions(context);
       addPylintExtensions(context);
       addBanditExtensions(context);

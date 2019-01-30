@@ -38,6 +38,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.PythonReportSensor;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 public class PylintImportSensor extends PythonReportSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.pylint.reportPath";
@@ -47,8 +48,8 @@ public class PylintImportSensor extends PythonReportSensor {
   private static final PylintRuleParser pylintRules = new PylintRuleParser(PylintRuleRepository.RULES_FILE);
   private static final Set<String> warningAlreadyLogged = new HashSet<>();
 
-  public PylintImportSensor(Configuration conf) {
-    super(conf);
+  public PylintImportSensor(Configuration conf, AnalysisWarningsWrapper analysisWarnings) {
+    super(conf, analysisWarnings, "Pylint");
   }
 
   @Override
