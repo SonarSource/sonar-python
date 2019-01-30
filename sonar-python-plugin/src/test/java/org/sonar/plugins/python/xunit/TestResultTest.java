@@ -73,7 +73,7 @@ public class TestResultTest {
     assertThat(testResult.getTime()).isEqualTo(15);
   }
 
-  private TestCase createTestCase(int time, String status) {
+  private static TestCase createTestCase(int time, String status) {
     return new TestCase("name", time, status, "stack", "msg", "file", "testClassname");
   }
 
