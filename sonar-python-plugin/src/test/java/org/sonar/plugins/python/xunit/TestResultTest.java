@@ -51,7 +51,7 @@ public class TestResultTest {
     int timeBefore = testResult.getTime();
 
     final int EXEC_TIME = 10;
-    testResult.addTestCase(new TestCase("name", EXEC_TIME, "status", "stack", "msg", "file", "testClassname"));
+    testResult.addTestCase(createTestCase(EXEC_TIME, "status"));
 
     assertThat(testResult.getTests()).isEqualTo(testBefore + 1);
     assertThat(testResult.getTime()).isEqualTo(timeBefore + EXEC_TIME);
@@ -59,11 +59,11 @@ public class TestResultTest {
 
   @Test
   public void executedTestsValue() {
-    testResult.addTestCase(new TestCase("name", 1, "ok", "stack", "msg", "file", "testClassname"));
-    testResult.addTestCase(new TestCase("name", 2, "skipped", "stack", "msg", "file", "testClassname"));
-    testResult.addTestCase(new TestCase("name", 3, "ok", "stack", "msg", "file", "testClassname"));
-    testResult.addTestCase(new TestCase("name", 4, "error", "stack", "msg", "file", "testClassname"));
-    testResult.addTestCase(new TestCase("name", 5, "skipped", "stack", "msg", "file", "testClassname"));
+    testResult.addTestCase(createTestCase(1, "ok"));
+    testResult.addTestCase(createTestCase(2, "skipped"));
+    testResult.addTestCase(createTestCase(3, "ok"));
+    testResult.addTestCase(createTestCase(4, "error"));
+    testResult.addTestCase(createTestCase(5, "skipped"));
 
     assertThat(testResult.getTests()).isEqualTo(5);
     assertThat(testResult.getExecutedTests()).isEqualTo(3);
@@ -71,6 +71,10 @@ public class TestResultTest {
     assertThat(testResult.getFailures()).isEqualTo(0);
     assertThat(testResult.getSkipped()).isEqualTo(2);
     assertThat(testResult.getTime()).isEqualTo(15);
+  }
+
+  private TestCase createTestCase(int time, String status) {
+    return new TestCase("name", time, status, "stack", "msg", "file", "testClassname");
   }
 
   @Test
