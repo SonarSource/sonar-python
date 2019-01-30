@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.CheckForNull;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.fs.FileSystem;
@@ -78,26 +79,16 @@ public class PythonXUnitSensor extends PythonReportSensor {
       parser.parse(report);
     }
 
-    int testsCount = 0;
-    int testsSkipped = 0;
-    int testsErrors = 0;
-    int testsFailures = 0;
-    long testsTime = 0;
-    for (TestSuite report : parserHandler.getParsedReports()) {
-      testsCount += report.getTests() - report.getSkipped();
-      testsSkipped += report.getSkipped();
-      testsErrors += report.getErrors();
-      testsFailures += report.getFailures();
-      testsTime += report.getTime();
-    }
+    TestResult total = new TestResult();
+    parserHandler.getParsedReports().forEach(testSuite -> testSuite.getTestCases().forEach(total::addTestCase));
 
-    if (testsCount > 0) {
+    if (total.getTests() > 0) {
       InputComponent module = context.module();
-      saveMeasure(context, module, CoreMetrics.TESTS, testsCount);
-      saveMeasure(context, module, CoreMetrics.SKIPPED_TESTS, testsSkipped);
-      saveMeasure(context, module, CoreMetrics.TEST_ERRORS, testsErrors);
-      saveMeasure(context, module, CoreMetrics.TEST_FAILURES, testsFailures);
-      saveMeasure(context, module, CoreMetrics.TEST_EXECUTION_TIME, testsTime);
+      saveMeasure(context, module, CoreMetrics.TESTS, total.getExecutedTests());
+      saveMeasure(context, module, CoreMetrics.SKIPPED_TESTS, total.getSkipped());
+      saveMeasure(context, module, CoreMetrics.TEST_ERRORS, total.getErrors());
+      saveMeasure(context, module, CoreMetrics.TEST_FAILURES, total.getFailures());
+      saveMeasure(context, module, CoreMetrics.TEST_EXECUTION_TIME, total.getTime());
     }
   }
 
@@ -114,24 +105,35 @@ public class PythonXUnitSensor extends PythonReportSensor {
   }
 
   private void processReportDetailed(SensorContext context, Collection<TestSuite> parsedReports) {
-    Collection<TestSuite> locatedResources = lookupResources(parsedReports);
-    for (TestSuite fileReport : locatedResources) {
-      InputFile inputFile = fileReport.getInputFile();
+    Map<InputFile, TestResult> locatedResources = lookupResources(parsedReports);
+    for (Map.Entry<InputFile, TestResult> entry : locatedResources.entrySet()) {
+      InputFile inputFile = entry.getKey();
+      TestResult fileTestResult = entry.getValue();
+      LOG.debug("Saving test execution measures for '{}'", inputFile.toString());
 
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Saving test execution measures for '{}' under resource '{}'", fileReport.getKey(), inputFile.relativePath());
-      }
-
-      saveMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, fileReport.getSkipped());
-      saveMeasure(context, inputFile, CoreMetrics.TESTS, fileReport.getTests() - fileReport.getSkipped());
-      saveMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, fileReport.getErrors());
-      saveMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, fileReport.getFailures());
-      saveMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, fileReport.getTime());
+      saveMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, fileTestResult.getSkipped());
+      saveMeasure(context, inputFile, CoreMetrics.TESTS, fileTestResult.getExecutedTests());
+      saveMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, fileTestResult.getErrors());
+      saveMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, fileTestResult.getFailures());
+      saveMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, fileTestResult.getTime());
     }
   }
 
-  private InputFile findResource(String fileKey) {
-    return findResourceUsingNoseTestsStrategy(fileKey);
+  @CheckForNull
+  private InputFile findResource(TestCase testCase, String fileKey) {
+    InputFile unitTestFile = null;
+
+    if (testCase.getFile() != null) {
+      unitTestFile = getSonarTestFile(new File(testCase.getFile()));
+    }
+
+    if (unitTestFile == null) {
+      String testClassname = testCase.getTestClassname();
+      String key = testClassname != null ? testClassname : fileKey;
+      return findResourceUsingNoseTestsStrategy(key);
+    }
+
+    return unitTestFile;
   }
 
   private InputFile findResourceUsingNoseTestsStrategy(String fileKey) {
@@ -151,32 +153,27 @@ public class PythonXUnitSensor extends PythonReportSensor {
     return unitTestFile;
   }
 
-  private Collection<TestSuite> lookupResources(Collection<TestSuite> testReports) {
-    Map<String, TestSuite> locatedReports = new HashMap<>();
+  private Map<InputFile, TestResult> lookupResources(Collection<TestSuite> testReports) {
+    Map<InputFile, TestResult> testResultsByFile = new HashMap<>();
 
-    for (TestSuite report : testReports) {
-      String fileKey = report.getKey();
-
-      LOG.debug("Trying to find a SonarQube resource for '{}'", fileKey);
-      InputFile inputFile = findResource(fileKey);
-      if (inputFile != null) {
-        LOG.debug("The resource was found '{}'", inputFile);
-
-        TestSuite summaryReport = locatedReports.get(inputFile.absolutePath());
-        if (summaryReport != null) {
-          summaryReport.addMeasures(report);
+    for (TestSuite testSuite : testReports) {
+      testSuite.getTestCases().forEach(testCase -> {
+        String testClassname = testCase.getTestClassname();
+        LOG.debug("Trying to find a SonarQube resource for test case '{}'", testClassname);
+        InputFile inputFile = findResource(testCase, testSuite.getKey());
+        if (inputFile != null) {
+          LOG.debug("The resource was found '{}'", inputFile);
+          testResultsByFile.computeIfAbsent(inputFile, k -> new TestResult()).addTestCase(testCase);
         } else {
-          report.setInputFile(inputFile);
-          locatedReports.put(inputFile.absolutePath(), report);
+          LOG.warn("The resource for '{}' is not found, drilling down to the details of this test won't be possible", testClassname);
         }
-      } else {
-        LOG.warn("The resource for '{}' is not found, drilling down to the details of this test won't be possible", fileKey);
-      }
+      });
     }
 
-    return locatedReports.values();
+    return testResultsByFile;
   }
 
+  @CheckForNull
   private InputFile getSonarTestFile(File file) {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
     return fileSystem.inputFile(fileSystem.predicates().is(file));

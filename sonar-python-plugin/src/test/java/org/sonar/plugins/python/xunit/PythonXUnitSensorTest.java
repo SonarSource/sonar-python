@@ -35,6 +35,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonXUnitSensorTest {
 
+  private static final String FILE_SAMPLE1 = "test_sample1.py";
+  private static final String FILE_SAMPLE2 = "tests/dir/test_sample2.py";
+
   private File baseDir = new File("src/test/resources/org/sonar/plugins/python");
   Settings settings;
   PythonXUnitSensor sensor;
@@ -50,8 +53,8 @@ public class PythonXUnitSensorTest {
 
   @Test
   public void shouldSaveCorrectMeasures() {
-    DefaultInputFile testFile1 = TestInputFileBuilder.create("", "test_sample1.py").build();
-    DefaultInputFile testFile2 = TestInputFileBuilder.create("", "tests/dir/test_sample2.py").build();
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
+    DefaultInputFile testFile2 = TestInputFileBuilder.create("", FILE_SAMPLE2).build();
     fs.add(testFile1);
     fs.add(testFile2);
     sensor.execute(context);
@@ -85,7 +88,7 @@ public class PythonXUnitSensorTest {
 
   @Test
   public void shouldReportNothingWhenNoReportFound() {
-    DefaultInputFile testFile1 = TestInputFileBuilder.create("", "test_sample1.py").build();
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
     fs.add(testFile1);
 
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");
@@ -101,6 +104,65 @@ public class PythonXUnitSensorTest {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
     sensor = new PythonXUnitSensor(context.config(), fs);
     sensor.execute(context);
+  }
+
+  @Test
+  public void shouldSaveCorrectMeasuresWithPyTestFormat() {
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
+    DefaultInputFile testFile2 = TestInputFileBuilder.create("", FILE_SAMPLE2).build();
+    fs.add(testFile1);
+    fs.add(testFile2);
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/pytest-xunit-result.xml");
+    sensor.execute(context);
+
+    assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(2);
+    assertThat(measure(testFile2, CoreMetrics.TESTS)).isEqualTo(8);
+
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
+    assertThat(measure(testFile2, CoreMetrics.SKIPPED_TESTS)).isEqualTo(2);
+
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
+    assertThat(measure(testFile2, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
+
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+    assertThat(measure(testFile2, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+  }
+
+  @Test
+  public void testNoTestReport() {
+    DefaultInputFile testFile2 = TestInputFileBuilder.create("", FILE_SAMPLE2).build();
+    fs.add(testFile2);
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/empty-xunit-result.xml");
+    settings.setProperty(PythonXUnitSensor.SKIP_DETAILS, true);
+    sensor.execute(context);
+
+    assertThat(context.measure(context.module().key(), CoreMetrics.TESTS)).isNull();
+  }
+
+  @Test
+  public void fallbackToTestsuiteName() {
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
+    fs.add(testFile1);
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/no-classname-xunit-result.xml");
+    sensor.execute(context);
+
+    assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(2);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(1);
+  }
+
+  @Test
+  public void malformedReport() {
+    DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
+    fs.add(testFile1);
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/malformed-xunit-result.xml");
+    sensor.execute(context);
+
+    assertThat(measure(testFile1, CoreMetrics.TESTS)).isEqualTo(2);
+    assertThat(measure(testFile1, CoreMetrics.SKIPPED_TESTS)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.TEST_ERRORS)).isEqualTo(0);
+    assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(0);
   }
 
   private Integer moduleMeasure(Metric<Integer> metric) {

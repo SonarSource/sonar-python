@@ -70,6 +70,19 @@ public class TestReportTest {
   }
 
   @Test
+  public void import_pytest_report() {
+    orchestrator.executeBuild(createBuild("pytest.xml"));
+    assertProjectMeasures(PROJECT, new ImmutableMap.Builder<String, Integer>()
+      .put("tests", 3)
+      .put("test_failures", 2)
+      .put("test_errors", 0)
+      .put("skipped_tests", 1)
+      .put("test_success_density", 33)
+      .put("test_execution_time", 1)
+      .build());
+  }
+
+  @Test
   public void simple_mode() throws Exception {
     orchestrator.executeBuild(createBuild("nosetests.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
     Map<String, Integer> values = new HashMap<>();

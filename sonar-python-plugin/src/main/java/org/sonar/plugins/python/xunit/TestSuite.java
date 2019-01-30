@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import org.sonar.api.batch.fs.InputFile;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +28,6 @@ import java.util.List;
 public class TestSuite {
 
   private String key;
-  private InputFile inputFile = null;
-  private int errors = 0;
-  private int skipped = 0;
-  private int tests = 0;
-  private int time = 0;
-  private int failures = 0;
   private List<TestCase> testCases;
 
   /**
@@ -53,79 +45,10 @@ public class TestSuite {
     return key;
   }
 
-  public int getErrors() {
-    return errors;
-  }
-
-  public int getSkipped() {
-    return skipped;
-  }
-
-  public int getTests() {
-    return tests;
-  }
-
-  public int getTime() {
-    return time;
-  }
-
-  public int getFailures() {
-    return failures;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    TestSuite that = (TestSuite) o;
-    return key.equals(that.key);
-  }
-
-  @Override
-  public int hashCode() {
-    return key.hashCode();
-  }
-
-  /**
-   * Adds the given test case to this testsuite maintaining the internal statistics
-   * 
-   * @param tc
-   *          the test case to add
-   */
   public void addTestCase(TestCase tc) {
-    if (tc.isSkipped()) {
-      skipped++;
-    } else if (tc.isFailure()) {
-      failures++;
-    } else if (tc.isError()) {
-      errors++;
-    }
-    tests++;
-    time += tc.getTime();
     testCases.add(tc);
   }
 
-  /**
-   * Adds the measures contained by the given test suite to this test suite
-   * 
-   * @param ts
-   *          the test suite to add the measures from
-   */
-  public TestSuite addMeasures(TestSuite ts) {
-    for (TestCase tc : ts.getTestCases()) {
-      addTestCase(tc);
-    }
-    return this;
-  }
-
-  /**
-   * Returns the testcases contained by this test suite
-   */
   public List<TestCase> getTestCases() {
     return testCases;
   }
@@ -143,11 +66,4 @@ public class TestSuite {
     return details.toString();
   }
 
-  public void setInputFile(InputFile inputFile) {
-    this.inputFile = inputFile;
-  }
-
-  public InputFile getInputFile() {
-    return inputFile;
-  }
 }

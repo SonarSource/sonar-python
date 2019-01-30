@@ -19,23 +19,48 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import org.junit.Test;
+public class TestResult {
 
-import static org.assertj.core.api.Assertions.assertThat;
+  private int errors = 0;
+  private int skipped = 0;
+  private int tests = 0;
+  private int time = 0;
+  private int failures = 0;
 
-public class TestSuiteTest {
+  public int getErrors() {
+    return errors;
+  }
 
-  @Test
-  public void test() {
-    TestSuite suite = new TestSuite("key");
-    assertThat(suite.getKey()).isEqualTo("key");
-    assertThat(suite.getTestCases()).isEmpty();
-    assertThat(suite.getDetails()).isEqualTo("<tests-details></tests-details>");
+  public int getSkipped() {
+    return skipped;
+  }
 
-    TestCase testCase = new TestCase("name", 1, "status", "stack", "msg", "file", "testClassname");
-    suite.addTestCase(testCase);
-    assertThat(suite.getTestCases()).containsExactly(testCase);
-    assertThat(suite.getDetails()).isEqualTo("<tests-details><testcase status=\"status\" time=\"1\" name=\"name\"/></tests-details>");
+  public int getTests() {
+    return tests;
+  }
+
+  public int getExecutedTests() {
+    return tests - skipped;
+  }
+
+  public int getTime() {
+    return time;
+  }
+
+  public int getFailures() {
+    return failures;
+  }
+
+  public void addTestCase(TestCase tc) {
+    if (tc.isSkipped()) {
+      skipped++;
+    } else if (tc.isFailure()) {
+      failures++;
+    } else if (tc.isError()) {
+      errors++;
+    }
+    tests++;
+    time += tc.getTime();
   }
 
 }
