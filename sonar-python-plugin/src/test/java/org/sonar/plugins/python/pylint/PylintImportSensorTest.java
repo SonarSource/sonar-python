@@ -108,6 +108,7 @@ public class PylintImportSensorTest {
         .build());
 
     PylintImportSensor sensor = new PylintImportSensor(context.config(), analysisWarnings);
+    PylintImportSensor.clearLoggedWarnings();
     sensor.execute(context);
     assertThat(context.allIssues()).hasSize(1);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key()).containsOnly(inputFile.key());

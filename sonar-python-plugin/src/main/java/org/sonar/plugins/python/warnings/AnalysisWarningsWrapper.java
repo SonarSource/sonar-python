@@ -22,8 +22,14 @@ package org.sonar.plugins.python.warnings;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 
+/**
+ * As {@link org.sonar.api.notifications.AnalysisWarnings} has been added in SQ 7.4, previous version of the API
+ * do not have the class. Thus, in order to avoid a {@link ClassNotFoundException} at startup, we use a wrapper class
+ * we know for sure will always be present. Depending on the sonar runtime, this wrapper will either forward the
+ * warnings to the underlying {@link org.sonar.api.notifications.AnalysisWarnings} or do nothing when not available.
+ */
 @ScannerSide
 @InstantiationStrategy("PER_BATCH")
 public interface AnalysisWarningsWrapper {
-  void addUnique(String text);
+  void addWarning(String text);
 }

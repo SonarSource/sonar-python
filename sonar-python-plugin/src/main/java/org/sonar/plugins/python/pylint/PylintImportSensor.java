@@ -139,4 +139,9 @@ public class PylintImportSensor extends PythonReportSensor {
     }
   }
 
+  // Visible for testing
+  static void clearLoggedWarnings() {
+    warningAlreadyLogged.clear();
+  }
+
 }

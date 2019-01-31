@@ -83,7 +83,11 @@ public class PythonScanner {
       if (context.isCancelled()) {
         return;
       }
-      scanFile(pythonFile);
+      try {
+        scanFile(pythonFile);
+      } catch (Exception e) {
+        LOG.warn("Unable to analyze file '{}'. Error: {}", pythonFile.toString(), e);
+      }
     }
     if (!isSonarLint(context)) {
       (new PythonCoverageSensor()).execute(context);

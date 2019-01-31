@@ -21,7 +21,7 @@ package org.sonar.plugins.python.warnings;
 
 public class NoOpAnalysisWarningsWrapper implements AnalysisWarningsWrapper {
   @Override
-  public void addUnique(String text) {
-    // do nothing
+  public void addWarning(String text) {
+    // do nothing as the underlying AnalysisWarnings is not available
   }
 }

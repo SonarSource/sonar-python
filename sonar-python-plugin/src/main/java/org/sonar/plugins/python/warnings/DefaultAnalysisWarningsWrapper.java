@@ -30,7 +30,7 @@ public class DefaultAnalysisWarningsWrapper implements AnalysisWarningsWrapper {
   }
 
   @Override
-  public void addUnique(String text) {
+  public void addWarning(String text) {
     this.analysisWarnings.addUnique(text);
   }
 }

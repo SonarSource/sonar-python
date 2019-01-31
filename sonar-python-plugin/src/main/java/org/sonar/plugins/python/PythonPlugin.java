@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import org.sonar.api.Plugin;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarProduct;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.Version;
@@ -107,8 +108,9 @@ public class PythonPlugin implements Plugin {
       PythonSquidSensor.class,
       PythonRuleRepository.class);
 
-    if (context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
-      if (context.getRuntime().getApiVersion().isGreaterThanOrEqual(SQ_MIN_VERSION_ANALYSIS_WARNINGS)) {
+    SonarRuntime sonarRuntime = context.getRuntime();
+    if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {
+      if (sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_MIN_VERSION_ANALYSIS_WARNINGS)) {
         context.addExtension(DefaultAnalysisWarningsWrapper.class);
       } else {
         context.addExtension(NoOpAnalysisWarningsWrapper.class);

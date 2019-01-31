@@ -33,12 +33,12 @@ public class AnalysisWarningsWrapperTest {
   public void test() {
     NoOpAnalysisWarningsWrapper noOpAnalysisWarningsWrapper = new NoOpAnalysisWarningsWrapper();
     // for coverage
-    noOpAnalysisWarningsWrapper.addUnique("");
+    noOpAnalysisWarningsWrapper.addWarning("");
 
     AnalysisWarnings analysisWarnings = spy(AnalysisWarnings.class);
     DefaultAnalysisWarningsWrapper defaultAnalysisWarningsWrapper = new DefaultAnalysisWarningsWrapper(analysisWarnings);
-    defaultAnalysisWarningsWrapper.addUnique("abcd");
-    defaultAnalysisWarningsWrapper.addUnique("def");
+    defaultAnalysisWarningsWrapper.addWarning("abcd");
+    defaultAnalysisWarningsWrapper.addWarning("def");
     verify(analysisWarnings, times(2)).addUnique(anyString());
   }
 
