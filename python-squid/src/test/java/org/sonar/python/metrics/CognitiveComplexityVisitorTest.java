@@ -72,7 +72,7 @@ public class CognitiveComplexityVisitorTest {
       }
     };
     TestPythonVisitorRunner.scanFile(new File("src/test/resources/metrics/cognitive-complexities.py"), fileComplexityVisitor, functionAndCommentVisitor);
-    assertThat(fileComplexityVisitor.getComplexity()).isEqualTo(89);
+    assertThat(fileComplexityVisitor.getComplexity()).isEqualTo(91);
 
     StringBuilder complexityReport = new StringBuilder();
     complexityByLine.forEach((line, message) -> complexityReport.append("line " + line + " " + message + "\n"));
