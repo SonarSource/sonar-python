@@ -125,7 +125,7 @@ public class PylintImportSensorTest {
     assertThat(configurationPredicate.test(configuration(ImmutableMap.of("xxx", "yyy")))).isFalse();
   }
 
-  private Configuration configuration(Map<String, String> mapproperties) {
+  private static Configuration configuration(Map<String, String> mapproperties) {
     return new ConfigurationBridge(new MapSettings().addProperties(mapproperties));
   }
 

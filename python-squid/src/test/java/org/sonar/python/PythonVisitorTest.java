@@ -34,14 +34,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonVisitorTest {
 
   @Test
-  public void test() throws Exception {
+  public void test() {
     TestVisitor visitor = new TestVisitor();
     TestPythonVisitorRunner.scanFile(new File("src/test/resources/visitor.py"), visitor);
     assertThat(visitor.atomValues).containsExactly("foo", "\"x\"", "42");
     assertThat(visitor.fileName).isEqualTo("visitor.py");
   }
 
-  public class TestVisitor extends PythonVisitor {
+  public static class TestVisitor extends PythonVisitor {
 
     private List<String> atomValues = new ArrayList<>();
     private String fileName;

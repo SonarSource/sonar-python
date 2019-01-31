@@ -34,61 +34,67 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
+  private static final String COVERAGE_PROJECT = "projects/coverage_project";
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   private static final String PROJECT_KEY = "coverage_project";
+  private static final String LINES_TO_COVER = "lines_to_cover";
+  private static final String COVERAGE = "coverage";
+  private static final String LINE_COVERAGE = "line_coverage";
+  private static final String BRANCH_COVERAGE = "branch_coverage";
+  public static final String EMPTY_XML = "empty.xml";
 
   @Test
   public void basic_coverage_reports_with_unix_paths() {
-    basic_coverage_reports("ut-coverage.xml");
+    basicCoverageReports("ut-coverage.xml");
   }
 
   @Test
   public void basic_coverage_reports_with_windows_paths() {
-    basic_coverage_reports("ut-coverage-windowspaths.xml");
+    basicCoverageReports("ut-coverage-windowspaths.xml");
   }
 
-  private void basic_coverage_reports(String utReportPath) {
+  private static void basicCoverageReports(String utReportPath) {
     SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"))
+      .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty("sonar.python.coverage.reportPath", utReportPath)
       .setProperty("sonar.python.coverage.itReportPath", "it-coverage.xml")
       .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml");
-    orchestrator.executeBuild(build);
+    ORCHESTRATOR.executeBuild(build);
 
     ImmutableMap<String, Integer> values = new Builder<String, Integer>()
-        .put("lines_to_cover", 14)
-        .put("coverage", 56)
-        .put("line_coverage", 50)
-        .put("branch_coverage", 100)
+        .put(LINES_TO_COVER, 14)
+        .put(COVERAGE, 56)
+        .put(LINE_COVERAGE, 50)
+        .put(BRANCH_COVERAGE, 100)
         .build();
 
     Tests.assertProjectMeasures(PROJECT_KEY, values);
   }
 
   @Test
-  public void no_report() throws Exception {
+  public void no_report() {
     SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"));
-    orchestrator.executeBuild(build);
+      .setProjectDir(new File(COVERAGE_PROJECT));
+    ORCHESTRATOR.executeBuild(build);
 
     Map<String, Integer> expected = new HashMap<>();
-    expected.put("lines_to_cover", 14);
-    expected.put("coverage", 0);
-    expected.put("line_coverage", 0);
-    expected.put("branch_coverage", null);
+    expected.put(LINES_TO_COVER, 14);
+    expected.put(COVERAGE, 0);
+    expected.put(LINE_COVERAGE, 0);
+    expected.put(BRANCH_COVERAGE, null);
     Tests.assertProjectMeasures(PROJECT_KEY, expected);
   }
 
   @Test
-  public void empty_coverage_report() throws Exception {
+  public void empty_coverage_report() {
     SonarScanner build = SonarScanner.create()
-      .setProjectDir(new File("projects/coverage_project"))
-      .setProperty("sonar.python.coverage.reportPath", "empty.xml")
-      .setProperty("sonar.python.coverage.itReportPath", "empty.xml")
-      .setProperty("sonar.python.coverage.overallReportPath", "empty.xml");
-    BuildResult buildResult = orchestrator.executeBuild(build);
+      .setProjectDir(new File(COVERAGE_PROJECT))
+      .setProperty("sonar.python.coverage.reportPath", EMPTY_XML)
+      .setProperty("sonar.python.coverage.itReportPath", EMPTY_XML)
+      .setProperty("sonar.python.coverage.overallReportPath", EMPTY_XML);
+    BuildResult buildResult = ORCHESTRATOR.executeBuild(build);
 
     int nbLog = 0;
     for (String s : buildResult.getLogs().split("[\\r\\n]+")) {
@@ -97,7 +103,7 @@ public class CoverageTest {
       }
     }
     assertThat(nbLog).isEqualTo(1);
-    assertThat(Tests.getMeasureAsDouble(PROJECT_KEY, "coverage")).isZero();
+    assertThat(Tests.getMeasureAsDouble(PROJECT_KEY, COVERAGE)).isZero();
   }
 
 }

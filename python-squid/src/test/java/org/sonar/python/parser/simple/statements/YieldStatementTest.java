@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,25 +26,18 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class TryStatementTest extends RuleTest {
+public class YieldStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.TRY_STMT);
+    setRootRule(PythonGrammar.YIELD_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-    p.getGrammar().rule(PythonGrammar.EXCEPT_CLAUSE).mock();
+    p.getGrammar().rule(PythonGrammar.YIELD_EXPR).mock();
 
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE EXCEPT_CLAUSE : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE finally : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE finally : SUITE");
-    assertThat(p).matches("try : SUITE finally : SUITE");
+    assertThat(p).matches("YIELD_EXPR");
   }
 
 }

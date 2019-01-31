@@ -54,7 +54,7 @@ public class FileLinesVisitorTest {
   }
 
   @Test
-  public void executable_lines() throws Exception {
+  public void executable_lines() {
     FileLinesVisitor visitor = new FileLinesVisitor(false);
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "executable_lines.py"), visitor);
     assertThat(visitor.getExecutableLines()).containsOnly(1, 2, 4, 7, 11, 13, 14, 15, 16, 18, 20, 21, 22, 23, 25, 27, 28, 29);

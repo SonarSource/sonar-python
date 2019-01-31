@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,20 +26,24 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class WhileStatementTest extends RuleTest {
+public class ExecStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.WHILE_STMT);
+    setRootRule(PythonGrammar.EXEC_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
+    assertThat(p).matches("exec expr");
+    assertThat(p).matches("exec expr in test");
+    assertThat(p).matches("exec expr in test, test");
+  }
 
-    assertThat(p).matches("while TEST : SUITE");
-    assertThat(p).matches("while TEST : SUITE else : SUITE");
+  @Test
+  public void realLife() {
+    assertThat(p).matches("exec '1'");
+    assertThat(p).notMatches("exec('')");
   }
 
 }

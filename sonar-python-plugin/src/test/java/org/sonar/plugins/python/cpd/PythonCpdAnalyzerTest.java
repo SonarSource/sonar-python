@@ -45,7 +45,7 @@ public class PythonCpdAnalyzerTest {
   private PythonCpdAnalyzer cpdAnalyzer = new PythonCpdAnalyzer(context);
 
   @Test
-  public void code_chunks_2() throws Exception {
+  public void code_chunks_2() {
     DefaultInputFile inputFile = inputFile("code_chunks_2.py");
     PythonVisitorContext visitorContext = TestPythonVisitorRunner.createContext(inputFile.path().toFile());
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);

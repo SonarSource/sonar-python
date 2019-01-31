@@ -19,25 +19,26 @@
  */
 package org.sonar.python.it;
 
-import com.google.common.io.Files;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonRulingTest {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
+  public static final String PROJECT_KEY = "project";
 
   @ClassRule
-  public static Orchestrator orchestrator = Orchestrator.builderEnv()
+  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
     .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.8.0.1209"))
@@ -46,12 +47,12 @@ public class PythonRulingTest {
 
   @Test
   public void test() throws Exception {
-    orchestrator.getServer().provisionProject("project", "project");
-    orchestrator.getServer().associateProjectToQualityProfile("project", "py", "rules");
+    ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
     SonarScanner build = SonarScanner.create(FileLocation.of("../sources").getFile())
-      .setProjectKey("project")
-      .setProjectName("project")
+      .setProjectKey(PROJECT_KEY)
+      .setProjectName(PROJECT_KEY)
       .setProjectVersion("1")
       .setLanguage("py")
       .setSourceEncoding("UTF-8")
@@ -63,9 +64,10 @@ public class PythonRulingTest {
       .setProperty("sonar.issuesReport.html.enable", "true")
       .setProperty("lits.differences", litsDifferencesFile.getAbsolutePath())
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
-    orchestrator.executeBuild(build);
+    ORCHESTRATOR.executeBuild(build);
 
-    assertThat(Files.toString(litsDifferencesFile, StandardCharsets.UTF_8)).isEmpty();
+    String litsDifferences = new String(Files.readAllBytes(litsDifferencesFile.toPath()), UTF_8);
+    assertThat(litsDifferences).isEmpty();
   }
 
 }

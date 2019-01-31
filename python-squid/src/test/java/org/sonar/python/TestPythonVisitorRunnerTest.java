@@ -25,7 +25,7 @@ import org.junit.Test;
 public class TestPythonVisitorRunnerTest {
 
   @Test(expected = IllegalStateException.class)
-  public void unknown_file() throws Exception {
+  public void unknown_file() {
     TestPythonVisitorRunner.scanFile(new File("xxx"), new PythonVisitor());
   }
 

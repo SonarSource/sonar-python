@@ -48,26 +48,26 @@ public class XPathRuleTest {
   private static final String RULE_KEY_WITH_PREFIX = "python:" + RULE_KEY;
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Before
-  public void resetData() throws Exception {
-    orchestrator.resetData();
+  public void resetData() {
+    ORCHESTRATOR.resetData();
   }
 
   @Test
   public void testXPathRule() {
     createAndActivateRuleFromTemplate();
 
-    orchestrator.getServer().provisionProject(PROJECT, PROJECT);
-    orchestrator.getServer().associateProjectToQualityProfile(PROJECT, "py", PROFILE_NAME);
+    ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", PROFILE_NAME);
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/xpath_rule_project"))
       .setProjectKey(PROJECT)
       .setProjectName(PROJECT)
       .setProjectVersion("1.0-SNAPSHOT")
       .setSourceDirs(".");
-    orchestrator.executeBuild(build);
+    ORCHESTRATOR.executeBuild(build);
 
     List<Issue> issues = getIssues(RULE_KEY_WITH_PREFIX);
     assertThat(issues.size()).isEqualTo(1);
@@ -77,12 +77,12 @@ public class XPathRuleTest {
     assertThat(issue.message()).isEqualTo("Do something fantastic!");
   }
 
-  private List<Issue> getIssues(String ruleKey) {
+  private static List<Issue> getIssues(String ruleKey) {
     IssueQuery query = IssueQuery.create().componentRoots(PROJECT).rules(ruleKey);
-    return orchestrator.getServer().wsClient().issueClient().find(query).list();
+    return ORCHESTRATOR.getServer().wsClient().issueClient().find(query).list();
   }
 
-  private void createAndActivateRuleFromTemplate() {
+  private static void createAndActivateRuleFromTemplate() {
     String language = "py";
     newAdminWsClient().wsConnector().call(new PostRequest("api/rules/create")
       .setParam("name", "XPathTestRule")

@@ -17,35 +17,29 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class SuiteTest extends RuleTest {
+public class WhileStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.SUITE);
+    setRootRule(PythonGrammar.WHILE_STMT);
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.STMT_LIST).mock();
+    p.getGrammar().rule(PythonGrammar.TEST).mock();
+    p.getGrammar().rule(PythonGrammar.SUITE).mock();
 
-    assertThat(p).matches("STMT_LIST\n");
-  }
-
-  @Test
-  public void realLife() {
-    assertThat(p).matches(PythonTestUtils.appendNewLine("pass"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("x = 1"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("print(x)"));
+    assertThat(p).matches("while TEST : SUITE");
+    assertThat(p).matches("while TEST : SUITE else : SUITE");
   }
 
 }

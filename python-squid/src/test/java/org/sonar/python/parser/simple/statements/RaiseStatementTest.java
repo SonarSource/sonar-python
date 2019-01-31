@@ -17,27 +17,37 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-
-public class DecoratorTest extends RuleTest {
+public class RaiseStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.DECORATOR);
+    setRootRule(PythonGrammar.RAISE_STMT);
+  }
+
+  @Test
+  public void ok() {
+    assertThat(p).matches("raise");
+    assertThat(p).matches("raise test");
+
+    assertThat(p).matches("raise test, test");
+    assertThat(p).matches("raise test, test, test");
+
+    assertThat(p).matches("raise test from test");
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches(PythonTestUtils.appendNewLine("@register.filter(is_safe=False)"));
+    assertThat(p).matches("raise");
+    assertThat(p).matches("raise exc_info[1], None, exc_info[2]");
   }
 
 }

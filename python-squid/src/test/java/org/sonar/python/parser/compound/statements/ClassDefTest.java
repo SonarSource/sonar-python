@@ -17,26 +17,30 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class GlobalStatementTest extends RuleTest {
+public class ClassDefTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.GLOBAL_STMT);
+    setRootRule(PythonGrammar.CLASSDEF);
   }
 
   @Test
-  public void ok() {
-    assertThat(p).matches("global IDENTIFIER");
-    assertThat(p).matches("global IDENTIFIER , IDENTIFIER");
+  public void realLife() {
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument): pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument=value): pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: x: int"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: x: int = 3"));
   }
 
 }

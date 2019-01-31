@@ -19,7 +19,7 @@
  */
 package org.sonar.python.toolkit;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -35,11 +35,11 @@ public class PythonConfigurationModelTest {
   public void getConfiguration_charset() {
     PythonConfigurationModel model = new PythonConfigurationModel();
     model.charsetProperty.setValue("UTF-8");
-    assertThat(model.getCharset()).isEqualTo(Charsets.UTF_8);
-    assertThat(model.getConfiguration().getCharset()).isEqualTo(Charsets.UTF_8);
+    assertThat(model.getCharset()).isEqualTo(StandardCharsets.UTF_8);
+    assertThat(model.getConfiguration().getCharset()).isEqualTo(StandardCharsets.UTF_8);
     model.charsetProperty.setValue("ISO-8859-1");
-    assertThat(model.getCharset()).isEqualTo(Charsets.ISO_8859_1);
-    assertThat(model.getConfiguration().getCharset()).isEqualTo(Charsets.ISO_8859_1);
+    assertThat(model.getCharset()).isEqualTo(StandardCharsets.ISO_8859_1);
+    assertThat(model.getConfiguration().getCharset()).isEqualTo(StandardCharsets.ISO_8859_1);
   }
 
   @Test

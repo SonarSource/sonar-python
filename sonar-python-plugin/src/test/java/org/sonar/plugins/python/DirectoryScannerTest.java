@@ -34,26 +34,28 @@ import static org.mockito.Mockito.when;
 
 public class DirectoryScannerTest {
 
+  private static final String F_1_TXT = "dir/f1.txt";
+
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/scanner").getAbsoluteFile();
 
   @Test
-  public void noMatchedFile() throws Exception {
+  public void noMatchedFile() {
     assertThat(scan("dir/xxx")).isEmpty();
   }
 
   @Test
-  public void simpleFile() throws Exception {
-    assertThat(scan("dir/f1.txt")).containsOnly(new File(baseDir, "dir/f1.txt"));
+  public void simpleFile() {
+    assertThat(scan(F_1_TXT)).containsOnly(new File(baseDir, F_1_TXT));
   }
 
   @Test
-  public void wildCard() throws Exception {
-    assertThat(scan("*/f1.txt")).containsOnly(new File(baseDir, "dir/f1.txt"));
-    assertThat(scan("**/f1.txt")).containsOnly(new File(baseDir, "dir/f1.txt"), new File(baseDir, "dir/subdir/f1.txt"));
+  public void wildCard() {
+    assertThat(scan("*/f1.txt")).containsOnly(new File(baseDir, F_1_TXT));
+    assertThat(scan("**/f1.txt")).containsOnly(new File(baseDir, F_1_TXT), new File(baseDir, "dir/subdir/f1.txt"));
   }
 
   @Test
-  public void shouldNotFailWhenChildPathIsUnexpectedlyShorterThanBaseDirPath() throws Exception {
+  public void shouldNotFailWhenChildPathIsUnexpectedlyShorterThanBaseDirPath() {
     File dir = mock(File.class);
     final File matchingFile = new File("/matching/file");
     when(dir.getAbsolutePath()).thenReturn("/a/somewhat/long/path");
@@ -73,7 +75,7 @@ public class DirectoryScannerTest {
     return scan(pattern, baseDir);
   }
 
-  private List<File> scan(String pattern, File dir) {
+  private static List<File> scan(String pattern, File dir) {
     DirectoryScanner scanner = new DirectoryScanner(dir, WildcardPattern.create(pattern));
     return scanner.getIncludedFiles();
   }

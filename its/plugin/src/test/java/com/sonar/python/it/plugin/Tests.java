@@ -66,7 +66,7 @@ public class Tests {
   public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
 
   @ClassRule
-  public static Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
+  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))

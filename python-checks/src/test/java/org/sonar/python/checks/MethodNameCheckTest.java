@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class MethodNameCheckTest {
 
   @Test
-  public void test() throws Exception {
+  public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/methodName.py", new MethodNameCheck());
   }
 

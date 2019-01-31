@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,21 +26,21 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class IfStatementTest extends RuleTest {
+public class ExceptClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.IF_STMT);
+    setRootRule(PythonGrammar.EXCEPT_CLAUSE);
   }
 
   @Test
   public void ok() {
     p.getGrammar().rule(PythonGrammar.TEST).mock();
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
 
-    assertThat(p).matches("if TEST : SUITE");
-    assertThat(p).matches("if TEST : SUITE elif TEST : SUITE");
-    assertThat(p).matches("if TEST : SUITE elif TEST : SUITE else : SUITE");
+    assertThat(p).matches("except");
+    assertThat(p).matches("except TEST");
+    assertThat(p).matches("except TEST as TEST");
+    assertThat(p).matches("except TEST , TEST");
   }
 
 }

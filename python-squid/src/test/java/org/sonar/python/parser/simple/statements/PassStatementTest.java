@@ -17,36 +17,25 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class WithStatementTest extends RuleTest {
+public class PassStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.WITH_STMT);
-  }
-
-  @Test
-  public void ok() {
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
-    p.getGrammar().rule(PythonGrammar.WITH_ITEM).mock();
-
-    assertThat(p).matches("with WITH_ITEM , WITH_ITEM : SUITE");
-    assertThat(p).matches("with WITH_ITEM : SUITE");
+    setRootRule(PythonGrammar.PASS_STMT);
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a : pass"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a, B() as b : pass"));
+    assertThat(p).matches("pass");
   }
 
 }

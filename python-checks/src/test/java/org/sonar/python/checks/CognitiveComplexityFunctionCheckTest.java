@@ -33,7 +33,7 @@ public class CognitiveComplexityFunctionCheckTest {
   }
 
   @Test
-  public void default_threshold() throws Exception {
+  public void default_threshold() {
     PythonCheckVerifier.verify("src/test/resources/checks/cognitiveComplexityFunctionDefault.py", check);
   }
 }

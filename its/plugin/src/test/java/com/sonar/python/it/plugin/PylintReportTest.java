@@ -38,29 +38,29 @@ public class PylintReportTest {
   private static final String PROJECT = "pylint_project";
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
-  public void import_report() throws Exception {
+  public void import_report() {
     analyseProjectWithReport("pylint-report.txt");
     assertThat(issues()).hasSize(4);
   }
 
   @Test
-  public void missing_report() throws Exception {
+  public void missing_report() {
     analyseProjectWithReport("missing");
     assertThat(issues()).hasSize(0);
   }
 
   @Test
-  public void invalid_report() throws Exception {
+  public void invalid_report() {
     BuildResult result = analyseProjectWithReport("invalid.txt");
     assertThat(result.getLogs()).contains("Cannot parse the line: trash");
     assertThat(issues()).hasSize(0);
   }
 
   @Test
-  public void unknown_rule() throws Exception {
+  public void unknown_rule() {
     BuildResult result = analyseProjectWithReport("rule-unknown.txt");
     assertThat(result.getLogs()).doesNotContain("Pylint rule 'C0102' is unknown");
     assertThat(result.getLogs()).containsOnlyOnce("Pylint rule 'C8888' is unknown");
@@ -68,15 +68,15 @@ public class PylintReportTest {
     assertThat(issues()).hasSize(0);
   }
 
-  private List<Issue> issues() {
+  private static List<Issue> issues() {
     return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(PROJECT))).getIssuesList();
   }
 
-  private BuildResult analyseProjectWithReport(String reportPath) {
-    orchestrator.resetData();
-    orchestrator.getServer().provisionProject(PROJECT, PROJECT);
-    orchestrator.getServer().associateProjectToQualityProfile(PROJECT, "py", "pylint-rules");
-    return orchestrator.executeBuild(
+  private static BuildResult analyseProjectWithReport(String reportPath) {
+    ORCHESTRATOR.resetData();
+    ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "pylint-rules");
+    return ORCHESTRATOR.executeBuild(
       SonarScanner.create()
         .setDebugLogs(true)
         .setProjectDir(new File("projects/pylint_project"))

@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -43,7 +43,7 @@ public class PylintIssuesAnalyzerIT {
     String pylintPath = null;
     File out = tempFolder.newFile();
 
-    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, Charsets.UTF_8, out);
+    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, StandardCharsets.UTF_8, out);
     assertThat(issues).isNotEmpty();
   }
 

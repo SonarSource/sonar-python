@@ -38,19 +38,19 @@ public class BanditReportTest {
   private static final String PROJECT = "bandit_project";
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
   public void import_report() {
-    orchestrator.resetData();
-    orchestrator.getServer().provisionProject(PROJECT, PROJECT);
-    orchestrator.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
-    orchestrator.executeBuild(
+    ORCHESTRATOR.resetData();
+    ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
+    ORCHESTRATOR.executeBuild(
       SonarScanner.create()
         .setProjectDir(new File("projects/bandit_project")));
 
     List<Issues.Issue> issues = issues();
-    boolean externalIssuesSupported = orchestrator.getServer().version().isGreaterThanOrEquals(7, 2);
+    boolean externalIssuesSupported = ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(7, 2);
     if (externalIssuesSupported) {
       assertThat(issues).hasSize(1);
       Issues.Issue issue = issues.get(0);
@@ -65,7 +65,7 @@ public class BanditReportTest {
     }
   }
 
-  private List<Issues.Issue> issues() {
+  private static List<Issues.Issue> issues() {
     return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(PROJECT))).getIssuesList();
   }
 

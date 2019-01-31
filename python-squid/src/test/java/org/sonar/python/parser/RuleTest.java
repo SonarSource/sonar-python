@@ -19,15 +19,15 @@
  */
 package org.sonar.python.parser;
 
-import com.google.common.base.Charsets;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
+import java.nio.charset.StandardCharsets;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
-abstract public class RuleTest {
+public abstract class RuleTest {
 
-  protected Parser<Grammar> p = PythonParser.create(new PythonConfiguration(Charsets.UTF_8));
+  protected Parser<Grammar> p = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   protected void setRootRule(GrammarRuleKey ruleKey) {
     p.setRootRule(p.getGrammar().rule(ruleKey));

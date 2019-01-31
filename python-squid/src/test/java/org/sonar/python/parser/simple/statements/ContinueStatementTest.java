@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,28 +26,16 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class RaiseStatementTest extends RuleTest {
+public class ContinueStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.RAISE_STMT);
-  }
-
-  @Test
-  public void ok() {
-    assertThat(p).matches("raise");
-    assertThat(p).matches("raise test");
-
-    assertThat(p).matches("raise test, test");
-    assertThat(p).matches("raise test, test, test");
-
-    assertThat(p).matches("raise test from test");
+    setRootRule(PythonGrammar.CONTINUE_STMT);
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches("raise");
-    assertThat(p).matches("raise exc_info[1], None, exc_info[2]");
+    assertThat(p).matches("continue");
   }
 
 }

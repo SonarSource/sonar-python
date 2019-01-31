@@ -17,33 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ExecStatementTest extends RuleTest {
+
+public class DecoratorTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.EXEC_STMT);
-  }
-
-  @Test
-  public void ok() {
-    assertThat(p).matches("exec expr");
-    assertThat(p).matches("exec expr in test");
-    assertThat(p).matches("exec expr in test, test");
+    setRootRule(PythonGrammar.DECORATOR);
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches("exec '1'");
-    assertThat(p).notMatches("exec('')");
+    assertThat(p).matches(PythonTestUtils.appendNewLine("@register.filter(is_safe=False)"));
   }
 
 }
