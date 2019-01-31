@@ -92,7 +92,7 @@ public class XPathRuleTest {
       .setParam("template_key", "python:XPath")
       .setParam("custom_key", RULE_KEY)
       .setParam("prevent_reactivation", "true")
-      .setParam("params", "message=\"Do something fantastic!\";xpathQuery=\"//FILE_INPUT\"")).failIfNotSuccessful();
+      .setParam("params", "message=\"Do something fantastic!\";xpathQuery=\"//CLASSDEF\"")).failIfNotSuccessful();
 
     Qualityprofiles.SearchWsResponse.QualityProfile qualityProfile = newWsClient().qualityprofiles().search(new SearchRequest()).getProfilesList().stream()
       .filter(qp -> qp.getLanguage().equals(language))
