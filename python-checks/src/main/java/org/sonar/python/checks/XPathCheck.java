@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
-import java.util.List;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
@@ -44,7 +44,8 @@ public class XPathCheck extends PythonCheck {
 
   private AstNodeXPathQuery<Object> query = null;
 
-  public AstNodeXPathQuery<Object> query() {
+  @CheckForNull
+  private AstNodeXPathQuery<Object> query() {
     if (query == null && xpathQuery != null && !xpathQuery.isEmpty()) {
       try {
         query = AstNodeXPathQuery.create(xpathQuery);
@@ -57,17 +58,17 @@ public class XPathCheck extends PythonCheck {
 
   @Override
   public void visitFile(AstNode fileNode) {
-    if (query() != null) {
-      List<Object> objects = query().selectNodes(fileNode);
+    AstNodeXPathQuery<Object> compiledQuery = query();
+    if (compiledQuery != null) {
+      compiledQuery.selectNodes(fileNode).forEach(this::reportIssue);
+    }
+  }
 
-      for (Object object : objects) {
-        if (object instanceof AstNode) {
-          AstNode astNode = (AstNode) object;
-          addLineIssue(message, astNode.getTokenLine());
-        } else if (object instanceof Boolean && (Boolean) object) {
-          addFileIssue(message);
-        }
-      }
+  private void reportIssue(Object object) {
+    if (object instanceof AstNode) {
+      addIssue((AstNode) object, message);
+    } else if (object instanceof Boolean && (Boolean) object) {
+      addFileIssue(message);
     }
   }
 
