@@ -50,7 +50,7 @@ public class FileMetricsTest {
   @Test
   public void cognitive_complexity() {
     assertThat(metrics("classes.py").cognitiveComplexity()).isEqualTo(0);
-    assertThat(metrics("cognitive-complexities.py").cognitiveComplexity()).isEqualTo(89);
+    assertThat(metrics("cognitive-complexities.py").cognitiveComplexity()).isEqualTo(91);
   }
 
   @Test

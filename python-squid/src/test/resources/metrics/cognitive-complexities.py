@@ -166,13 +166,11 @@ class A:
 def conditional_expression():                       # =1
     return true_value if condition else false_value # +1
 
-# TODO nested conditional expressions, should be +3
-def nested_conditional_expression_false():                                          # =2
-    x = true_value1 if condition1 else (true_value2 if condition2 else false_value) # +1 +1
+def nested_conditional_expression_false():                                          # =3
+    x = true_value1 if condition1 else (true_value2 if condition2 else false_value) # +1 +2 (incl 1 for nesting)
 
-# TODO nested conditional expressions, should be +3
-def nested_conditional_expression_true():                                             # =2
-    y = (true_value1 if condition1 else false_value1) if condition2 else false_value2 # +1 +1
+def nested_conditional_expression_true():                                             # =3
+    y = (true_value1 if condition1 else false_value1) if condition2 else false_value2 # +1 +2 (incl 1 for nesting)
 
 def not_complex(some_function):  # =0
     def nested_not_complex():    # nesting level +1

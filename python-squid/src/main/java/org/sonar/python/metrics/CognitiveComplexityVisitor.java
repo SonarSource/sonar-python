@@ -99,6 +99,7 @@ public class CognitiveComplexityVisitor extends PythonVisitor {
     } else if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
       // conditional expression
       incrementWithNesting(astNode.getFirstChild(PythonKeyword.IF));
+      nestingLevelStack.peek().increment();
     }
   }
 
@@ -106,7 +107,12 @@ public class CognitiveComplexityVisitor extends PythonVisitor {
   public void leaveNode(AstNode astNode) {
     if (astNode.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
       nestingLevelStack.pop();
-    } else if (astNode.is(PythonGrammar.SUITE) && isSuiteIncrementsNestingLevel(astNode)) {
+    } else if (astNode.is(PythonGrammar.SUITE)) {
+      if (isSuiteIncrementsNestingLevel(astNode)) {
+        nestingLevelStack.peek().decrement();
+      }
+    } else if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
+      // conditional expression
       nestingLevelStack.peek().decrement();
     }
   }
