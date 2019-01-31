@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonBuiltinFunctionsTest {
 
   @Test
-  public void test() throws Exception {
+  public void test() {
     assertThat(PythonBuiltinFunctions.contains("abs")).isTrue();
     assertThat(PythonBuiltinFunctions.contains("ascii")).isTrue(); // python3
     assertThat(PythonBuiltinFunctions.contains("basestring")).isTrue(); // python2
@@ -36,7 +36,7 @@ public class PythonBuiltinFunctionsTest {
   }
 
   @Test(expected = IllegalStateException.class)
-  public void unreadable_inputstream() throws Exception {
+  public void unreadable_inputstream() {
     PythonBuiltinFunctions.loadBuiltinNames(new InputStream() {
       @Override
       public int read() throws IOException {

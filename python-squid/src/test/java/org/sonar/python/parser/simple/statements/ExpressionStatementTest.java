@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,16 +26,25 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class BreakStatementTest extends RuleTest {
+public class ExpressionStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.BREAK_STMT);
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches("break");
+    assertThat(p).matches("i = 10");
+    assertThat(p).matches("list[1] = 10");
+    assertThat(p).matches("self.balance = initial_balance");
+    assertThat(p).matches("var1: int = 5");
+    assertThat(p).matches("var2: [int, str]");
+    assertThat(p).matches("st: str = 'Hello'");
+    assertThat(p).matches("a.b: int = (1, 2)");
+    assertThat(p).matches("x: int");
+    assertThat(p).matches("self.x: int = x");
+    assertThat(p).matches("lst: List[int] = []");
   }
 
 }

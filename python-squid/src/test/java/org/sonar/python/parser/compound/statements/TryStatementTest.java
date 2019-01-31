@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,17 +26,25 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class NonlocalStatementTest extends RuleTest {
+public class TryStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.NONLOCAL_STMT);
+    setRootRule(PythonGrammar.TRY_STMT);
   }
 
   @Test
   public void ok() {
-    assertThat(p).matches("nonlocal IDENTIFIER");
-    assertThat(p).matches("nonlocal IDENTIFIER , IDENTIFIER");
+    p.getGrammar().rule(PythonGrammar.SUITE).mock();
+    p.getGrammar().rule(PythonGrammar.TEST).mock();
+    p.getGrammar().rule(PythonGrammar.EXCEPT_CLAUSE).mock();
+
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE EXCEPT_CLAUSE : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE finally : SUITE");
+    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE finally : SUITE");
+    assertThat(p).matches("try : SUITE finally : SUITE");
   }
 
 }

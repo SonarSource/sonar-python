@@ -40,16 +40,16 @@ public class SonarQubePythonFileTest {
   @Test
   public void known_file() throws Exception {
     when(inputFile.contents()).thenReturn("Hello 6.2!");
-    PythonFile PythonFile = SonarQubePythonFile.create(inputFile);
-    assertThat(PythonFile.content()).isEqualTo("Hello 6.2!");
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+    assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
   }
 
   @Test
   public void unknown_file() throws Exception {
     when(inputFile.contents()).thenThrow(new FileNotFoundException());
-    PythonFile PythonFile = SonarQubePythonFile.create(inputFile);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     thrown.expect(IllegalStateException.class);
-    PythonFile.content();
+    pythonFile.content();
   }
 
 }

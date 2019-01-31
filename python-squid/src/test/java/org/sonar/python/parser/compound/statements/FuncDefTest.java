@@ -17,32 +17,36 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class AssertStatementTest extends RuleTest {
+public class FuncDefTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.ASSERT_STMT);
-  }
-
-  @Test
-  public void ok() {
-    assertThat(p).matches("assert test");
-    assertThat(p).matches("assert test , test");
+    setRootRule(PythonGrammar.FUNCDEF);
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches("assert id > 0");
-    assertThat(p).matches("assert id > 0, 'id should be positive'");
+    assertThat(p).matches(PythonTestUtils.appendNewLine("def func(): pass"));
+  }
+
+  @Test
+  public void trueAsParameter() {
+    assertThat(p).matches(PythonTestUtils.appendNewLine("def func(True): pass"));
+  }
+
+  @Test
+  public void trailingComa() {
+    assertThat(p).matches(PythonTestUtils.appendNewLine("def func(self, arg1, arg2, arg3, arg4, arg5, arg6, *args, **kwargs,): pass"));
   }
 
 }

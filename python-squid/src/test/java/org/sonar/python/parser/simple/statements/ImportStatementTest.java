@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.compound_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,21 +26,17 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ExceptClauseTest extends RuleTest {
+public class ImportStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.EXCEPT_CLAUSE);
+    setRootRule(PythonGrammar.IMPORT_STMT);
   }
 
   @Test
-  public void ok() {
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-
-    assertThat(p).matches("except");
-    assertThat(p).matches("except TEST");
-    assertThat(p).matches("except TEST as TEST");
-    assertThat(p).matches("except TEST , TEST");
+  public void realLife() {
+    assertThat(p).matches("from boto.s3.connection import S3Connection");
+    assertThat(p).matches("import sys");
   }
 
 }

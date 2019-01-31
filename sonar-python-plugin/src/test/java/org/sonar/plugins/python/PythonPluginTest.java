@@ -42,7 +42,7 @@ public class PythonPluginTest {
     assertThat(extensions(SonarRuntimeImpl.forSonarLint(v72))).hasSize(8);
   }
 
-  private List extensions(SonarRuntime runtime) {
+  private static List extensions(SonarRuntime runtime) {
     Plugin.Context context = new Plugin.Context(runtime);
     new PythonPlugin().define(context);
     return context.getExtensions();

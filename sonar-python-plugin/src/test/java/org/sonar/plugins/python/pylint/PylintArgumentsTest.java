@@ -46,11 +46,11 @@ public class PylintArgumentsTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void unknown() throws Exception {
+  public void unknown() {
     new PylintArguments(command(""));
   }
 
-  private Command command(String toOutput) {
+  private static Command command(String toOutput) {
     if (SystemUtils.IS_OS_WINDOWS) {
       return Command.create("cmd.exe").addArguments(new String[] {"/c", "echo", toOutput});
     }

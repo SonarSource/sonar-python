@@ -48,10 +48,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonCoverageSensorTest {
 
   private static final String ABSOLUTE_PATH_PLACEHOLDER = "{ABSOLUTE_PATH_PLACEHOLDER}";
-  private final String FILE1_KEY = "moduleKey:sources/file1.py";
-  private final String FILE2_KEY = "moduleKey:sources/file2.py";
-  private final String FILE3_KEY = "moduleKey:sources/file3.py";
-  private final String FILE4_KEY = "moduleKey:sources/file4.py";
+  private static final String FILE1_KEY = "moduleKey:sources/file1.py";
+  private static final String FILE2_KEY = "moduleKey:sources/file2.py";
+  private static final String FILE3_KEY = "moduleKey:sources/file3.py";
+  private static final String FILE4_KEY = "moduleKey:sources/file4.py";
   private SensorContextTester context;
   private Settings settings;
 
@@ -94,7 +94,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void report_not_found() throws Exception {
+  public void report_not_found() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "/fake/path/report.xml");
 
     coverageSensor.execute(context);
@@ -104,7 +104,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void absolute_path() throws Exception {
+  public void absolute_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, new File(moduleBaseDir, "coverage.xml").getAbsolutePath());
 
     coverageSensor.execute(context);
@@ -136,22 +136,32 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context);
     List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
     assertThat(actual).isEqualTo(Arrays.asList(
-      null, // line 1
+      // line 1
       null,
       null,
       null,
       null,
-      1, // line 6
-      1, // line 7
-      1, // line 8
-      0, // line 9
-      1, // line 10
-      1, // line 11
       null,
-      0, // line 13
+      // line 6
+      1,
+      // line 7
+      1,
+      // line 8
+      1,
+      // line 9
+      0,
+      // line 10
+      1,
+      // line 11
+      1,
       null,
-      1, // line 15
-      null, // Coverage.py does not consider line 16 and 17 as LOC, here it's null even when "linesOfCode" considers them as code
+      // line 13
+      0,
+      null,
+      // line 15
+      1,
+      // Coverage.py does not consider line 16 and 17 as LOC, here it's null even when "linesOfCode" considers them as code
+      null,
       null));
 
     assertThat(context.conditions(FILE4_KEY, 7)).isNull();

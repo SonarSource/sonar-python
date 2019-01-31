@@ -19,17 +19,16 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Map;
 import java.util.HashMap;
-
+import java.util.Map;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestCaseTest {
   @Test
   public void rendersRightDetails() {
-    Map<String, TestCase> ioMap = new HashMap<String, TestCase>();
+    Map<String, TestCase> ioMap = new HashMap<>();
 
     ioMap.put("<testcase status=\"ok\" time=\"1\" name=\"name\"/>",
               new TestCase("name", 1, "ok", "", "", null, null));

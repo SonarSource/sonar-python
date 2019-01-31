@@ -17,47 +17,35 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.parser.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class PrintStatementTest extends RuleTest {
+public class SuiteTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.PRINT_STMT);
+    setRootRule(PythonGrammar.SUITE);
   }
 
   @Test
   public void ok() {
-    assertThat(p).matches("print");
+    p.getGrammar().rule(PythonGrammar.STMT_LIST).mock();
 
-    assertThat(p).matches("print >> test");
-    assertThat(p).matches("print >> test, test");
-    assertThat(p).matches("print >> test, test,");
-
-    assertThat(p).matches("print test");
-    assertThat(p).matches("print test,");
-    assertThat(p).matches("print test,test");
-    assertThat(p).matches("print test,test,");
-  }
-
-  @Test
-  public void ko() {
-    assertThat(p).notMatches("print >>");
+    assertThat(p).matches("STMT_LIST\n");
   }
 
   @Test
   public void realLife() {
-    assertThat(p).matches("print 1");
-    assertThat(p).matches("print 1,");
-    assertThat(p).matches("print >> 1");
-    assertThat(p).notMatches("print('')");
+    assertThat(p).matches(PythonTestUtils.appendNewLine("pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("x = 1"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("print(x)"));
   }
 
 }

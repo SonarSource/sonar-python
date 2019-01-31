@@ -19,9 +19,9 @@
  */
 package org.sonar.python;
 
-import com.google.common.base.Charsets;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.python.lexer.PythonLexer;
@@ -30,10 +30,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokenLocationTest {
 
-  private Lexer lexer = PythonLexer.create(new PythonConfiguration(Charsets.UTF_8));
+  private Lexer lexer = PythonLexer.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
-  public void test_multiline() throws Exception {
+  public void test_multiline() {
     TokenLocation tokenLocation = new TokenLocation(lex("'''first line\nsecond'''").get(0));
     assertOffsets(tokenLocation, 1, 0, 2, 9);
 
@@ -45,13 +45,13 @@ public class TokenLocationTest {
   }
 
   @Test
-  public void test_newline_token() throws Exception {
+  public void test_newline_token() {
     TokenLocation tokenLocation = new TokenLocation(lex("foo\n").get(1));
     assertOffsets(tokenLocation, 1, 3, 2, 0);
   }
 
   @Test
-  public void test_one_line() throws Exception {
+  public void test_one_line() {
     TokenLocation tokenLocation = new TokenLocation(lex("  '''first line'''").get(1));
     assertOffsets(tokenLocation, 1, 2, 1, 18);
 
@@ -60,12 +60,12 @@ public class TokenLocationTest {
   }
 
   @Test
-  public void test_comment() throws Exception {
+  public void test_comment() {
     TokenLocation commentLocation = new TokenLocation(lex("#comment\n").get(0).getTrivia().get(0).getToken());
     assertOffsets(commentLocation, 1, 0, 1, 8);
   }
 
-  private void assertOffsets(TokenLocation tokenLocation, int startLine, int startLineOffset, int endLine, int endLineOffset) {
+  private static void assertOffsets(TokenLocation tokenLocation, int startLine, int startLineOffset, int endLine, int endLineOffset) {
     assertThat(tokenLocation.startLine()).as("start line").isEqualTo(startLine);
     assertThat(tokenLocation.startLineOffset()).as("start line offset").isEqualTo(startLineOffset);
     assertThat(tokenLocation.endLine()).as("end line").isEqualTo(endLine);

@@ -49,7 +49,7 @@ import static org.assertj.core.api.Assertions.tuple;
 public class SonarLintTest {
 
   @ClassRule
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static final TemporaryFolder TEMP = new TemporaryFolder();
 
   private static StandaloneSonarLintEngine sonarlintEngine;
 
@@ -59,12 +59,12 @@ public class SonarLintTest {
   public static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
       .addPlugin(Tests.PLUGIN_LOCATION.getFile().toURI().toURL())
-      .setSonarLintUserHome(temp.newFolder().toPath())
+      .setSonarLintUserHome(TEMP.newFolder().toPath())
       .setLogOutput((formattedMessage, level) -> {
         /* Don't pollute logs */ })
       .build();
     sonarlintEngine = new StandaloneSonarLintEngineImpl(sonarLintConfig);
-    baseDir = temp.newFolder();
+    baseDir = TEMP.newFolder();
   }
 
   @AfterClass
@@ -81,7 +81,7 @@ public class SonarLintTest {
 
     List<Issue> issues = new ArrayList<>();
     StandaloneAnalysisConfiguration configuration =
-      new StandaloneAnalysisConfiguration(baseDir.toPath(), temp.newFolder().toPath(), Arrays.asList(inputFile), new HashMap<>());
+      new StandaloneAnalysisConfiguration(baseDir.toPath(), TEMP.newFolder().toPath(), Arrays.asList(inputFile), new HashMap<>());
     sonarlintEngine.analyze(configuration, issues::add, null, null);
 
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
@@ -89,13 +89,13 @@ public class SonarLintTest {
       tuple("python:S1542", 1, inputFile.getPath(), "MAJOR"));
   }
 
-  private ClientInputFile prepareInputFile(String relativePath, String content, final boolean isTest) throws IOException {
+  private static ClientInputFile prepareInputFile(String relativePath, String content, final boolean isTest) throws IOException {
     File file = new File(baseDir, relativePath);
     FileUtils.write(file, content, StandardCharsets.UTF_8);
     return createInputFile(file.toPath(), isTest);
   }
 
-  private ClientInputFile createInputFile(final Path path, final boolean isTest) {
+  private static ClientInputFile createInputFile(final Path path, final boolean isTest) {
     return new ClientInputFile() {
 
       @Override

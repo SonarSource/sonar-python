@@ -37,43 +37,43 @@ public class ComplexityVisitorTest {
   private Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
-  public void file() throws Exception {
+  public void file() {
     TestPythonVisitorRunner.scanFile(new File("src/test/resources/metrics/complexity.py"), visitor);
     assertThat(visitor.getComplexity()).isEqualTo(7);
   }
 
   @Test
-  public void pass_keyword() throws Exception {
+  public void pass_keyword() {
     assertThat(complexity("pass")).isEqualTo(0);
   }
 
   @Test
-  public void if_keyword() throws Exception {
+  public void if_keyword() {
     assertThat(complexity("if x: pass")).isEqualTo(1);
   }
 
   @Test
-  public void and_keyword() throws Exception {
+  public void and_keyword() {
     assertThat(complexity("x = a and b and c")).isEqualTo(2);
   }
 
   @Test
-  public void or_keyword() throws Exception {
+  public void or_keyword() {
     assertThat(complexity("x = a or b or c")).isEqualTo(2);
   }
 
   @Test
-  public void funcdef() throws Exception {
+  public void funcdef() {
     assertThat(complexity("def f(): pass")).isEqualTo(1);
   }
 
   @Test
-  public void while_statement() throws Exception {
+  public void while_statement() {
     assertThat(complexity("while(x): pass")).isEqualTo(1);
   }
 
   @Test
-  public void for_statement() throws Exception {
+  public void for_statement() {
     assertThat(complexity("for i in list: pass")).isEqualTo(1);
   }
 

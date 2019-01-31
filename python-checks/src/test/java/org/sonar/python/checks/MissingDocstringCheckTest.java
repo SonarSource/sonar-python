@@ -35,7 +35,7 @@ public class MissingDocstringCheckTest {
   }
 
   @Test
-  public void testEmptyModule() throws Exception {
+  public void testEmptyModule() {
     PythonCheckVerifier.verify("src/test/resources/checks/emptyModule.py", new MissingDocstringCheck());
   }
 

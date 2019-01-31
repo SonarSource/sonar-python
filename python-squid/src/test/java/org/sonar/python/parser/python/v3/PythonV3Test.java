@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.python_v3;
+package org.sonar.python.parser.python.v3;
 
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
@@ -155,7 +155,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void unpacking_operations() throws Exception {
+  public void unpacking_operations() {
     setRootRule(PythonGrammar.ARGLIST);
 
     assertThat(p)

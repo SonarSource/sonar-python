@@ -34,7 +34,7 @@ public class PylintConfigurationTest {
   private PylintConfiguration pylintConfiguration;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     settings = new MapSettings();
     pylintConfiguration = new PylintConfiguration(settings);
   }

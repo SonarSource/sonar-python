@@ -24,7 +24,11 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
-public class TestUtils {
+public final class TestUtils {
+
+  private TestUtils() {
+    // Utility class
+  }
 
   public static String fileContent(File file, Charset charset) {
     try {

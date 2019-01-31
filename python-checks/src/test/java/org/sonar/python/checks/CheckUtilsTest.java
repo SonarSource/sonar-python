@@ -27,7 +27,8 @@ import com.sonar.sslr.impl.Parser;
 import java.lang.reflect.Constructor;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import org.junit.Test;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonConfiguration;
@@ -102,10 +103,10 @@ public class CheckUtilsTest {
 
   @Test
   public void class_has_inheritance() {
-    PythonCheckVerifier.verify("src/test/resources/checks/utils/classHasInheritance.py", new classHasInheritanceCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/utils/classHasInheritance.py", new ClassHasInheritanceCheck());
   }
 
-  private static class classHasInheritanceCheck extends PythonCheck {
+  private static class ClassHasInheritanceCheck extends PythonCheck {
     @Override
     public Set<AstNodeType> subscribedKinds() {
       return ImmutableSet.of(PythonGrammar.CLASSDEF);
@@ -122,19 +123,19 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void string_interpolation() throws Exception {
-    Function<String, Boolean> isStringInterpolation = (source) -> CheckUtils.isStringInterpolation(PARSER.parse(source).getTokens().get(0));
-    assertThat(isStringInterpolation.apply("\"abc\"")).isFalse();
-    assertThat(isStringInterpolation.apply("r'abc'")).isFalse();
-    assertThat(isStringInterpolation.apply("f'abc'")).isTrue();
-    assertThat(isStringInterpolation.apply("Rf'abc'")).isTrue();
-    assertThat(isStringInterpolation.apply("rF'abc'")).isTrue();
-    assertThat(isStringInterpolation.apply("fr\"\"")).isTrue();
+  public void string_interpolation() {
+    Predicate<String> isStringInterpolation = source -> CheckUtils.isStringInterpolation(PARSER.parse(source).getTokens().get(0));
+    assertThat(isStringInterpolation.test("\"abc\"")).isFalse();
+    assertThat(isStringInterpolation.test("r'abc'")).isFalse();
+    assertThat(isStringInterpolation.test("f'abc'")).isTrue();
+    assertThat(isStringInterpolation.test("Rf'abc'")).isTrue();
+    assertThat(isStringInterpolation.test("rF'abc'")).isTrue();
+    assertThat(isStringInterpolation.test("fr\"\"")).isTrue();
   }
 
   @Test
-  public void string_literal_content() throws Exception {
-    Function<String, String> stringLiteralContent = (source) ->
+  public void string_literal_content() {
+    UnaryOperator<String> stringLiteralContent = source ->
       CheckUtils.stringLiteralContent(PARSER.parse(source).getTokens().get(0).getOriginalValue());
     assertThat(stringLiteralContent.apply("\"abc\"")).isEqualTo("abc");
     assertThat(stringLiteralContent.apply("r''")).isEqualTo("");
@@ -142,20 +143,20 @@ public class CheckUtilsTest {
   }
 
   @Test(expected = IllegalStateException.class)
-  public void invalid_string_literal_content() throws Exception {
+  public void invalid_string_literal_content() {
     CheckUtils.stringLiteralContent(PARSER.parse("2").getTokens().get(0).getOriginalValue());
   }
 
   @Test
-  public void is_assignment_expression() throws Exception {
-    Function<String, Boolean> firstStatement = (source) ->
+  public void is_assignment_expression() {
+    Predicate<String> firstStatement = source ->
       CheckUtils.isAssignmentExpression(PARSER.parse(source).getFirstDescendant(PythonGrammar.SIMPLE_STMT).getFirstChild());
 
-    assertThat(firstStatement.apply("a()")).isFalse();
-    assertThat(firstStatement.apply("a = 2")).isTrue();
-    assertThat(firstStatement.apply("a: int")).isFalse();
-    assertThat(firstStatement.apply("a: int = 2")).isTrue();
-    assertThat(firstStatement.apply("a.b = (1, 2)")).isTrue();
-    assertThat(firstStatement.apply("a.b: int = (1, 2)")).isTrue();
+    assertThat(firstStatement.test("a()")).isFalse();
+    assertThat(firstStatement.test("a = 2")).isTrue();
+    assertThat(firstStatement.test("a: int")).isFalse();
+    assertThat(firstStatement.test("a: int = 2")).isTrue();
+    assertThat(firstStatement.test("a.b = (1, 2)")).isTrue();
+    assertThat(firstStatement.test("a.b: int = (1, 2)")).isTrue();
   }
 }

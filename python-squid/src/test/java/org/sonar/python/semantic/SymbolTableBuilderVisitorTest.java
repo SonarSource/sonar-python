@@ -51,7 +51,7 @@ public class SymbolTableBuilderVisitorTest {
   }
 
   @Test
-  public void non_scope_tree() throws Exception {
+  public void non_scope_tree() {
     assertThat(symbolTable.symbols(rootTree.getFirstDescendant(PythonGrammar.EXPRESSION_STMT))).isEmpty();
   }
 
@@ -99,8 +99,8 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void nonlobal_variable_reference() {
     Symbol a = symbolsInFunction("nesting2").iterator().next();
-    AstNode function_with_nonlocal = functionTreesByName.get("function_with_nonlocal");
-    assertThat(a.writeUsages()).extracting(AstNode::getTokenLine).contains(function_with_nonlocal.getTokenLine() + 2);
+    AstNode functionWithNonlocal = functionTreesByName.get("function_with_nonlocal");
+    assertThat(a.writeUsages()).extracting(AstNode::getTokenLine).contains(functionWithNonlocal.getTokenLine() + 2);
   }
 
   @Test

@@ -35,9 +35,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
+  public static final String MESSAGE = "message";
 
   @Test
-  public void test() throws Exception {
+  public void test() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitNode(AstNode astNode) {
@@ -64,11 +65,11 @@ public class PythonCheckTest {
   }
 
   @Test
-  public void test_cost() throws Exception {
+  public void test_cost() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitNode(AstNode astNode) {
-        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message").withCost(42);
+        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE).withCost(42);
       }
     };
 
@@ -78,11 +79,11 @@ public class PythonCheckTest {
   }
 
   @Test
-  public void test_secondary_location() throws Exception {
+  public void test_secondary_location() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitNode(AstNode astNode) {
-        PreciseIssue issue = addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), "message")
+        PreciseIssue issue = addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE)
           .secondary(astNode.getFirstChild(), "def keyword");
 
         AstNode returnStmt = astNode.getFirstDescendant(PythonGrammar.RETURN_STMT);
@@ -114,33 +115,33 @@ public class PythonCheckTest {
   }
 
   @Test
-  public void file_level_issue() throws Exception {
+  public void file_level_issue() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void visitFile(AstNode astNode) {
-        addFileIssue("message");
+        addFileIssue(MESSAGE);
       }
     };
     List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
     assertThat(issues).hasSize(1);
     PreciseIssue issue = issues.get(0);
-    assertThat(issue.primaryLocation().message()).isEqualTo("message");
+    assertThat(issue.primaryLocation().message()).isEqualTo(MESSAGE);
     assertThat(issue.primaryLocation().startLine()).isEqualTo(0);
     assertThat(issue.primaryLocation().endLine()).isEqualTo(0);
   }
 
   @Test
-  public void line_issue() throws Exception {
+  public void line_issue() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void visitFile(AstNode astNode) {
-        addLineIssue("message", 3);
+        addLineIssue(MESSAGE, 3);
       }
     };
     List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
     assertThat(issues).hasSize(1);
     PreciseIssue issue = issues.get(0);
-    assertThat(issue.primaryLocation().message()).isEqualTo("message");
+    assertThat(issue.primaryLocation().message()).isEqualTo(MESSAGE);
     assertThat(issue.primaryLocation().startLine()).isEqualTo(3);
     assertThat(issue.primaryLocation().endLine()).isEqualTo(3);
   }

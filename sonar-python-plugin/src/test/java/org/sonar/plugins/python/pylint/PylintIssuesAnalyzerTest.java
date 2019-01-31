@@ -19,19 +19,23 @@
  */
 package org.sonar.plugins.python.pylint;
 
-import org.apache.commons.io.IOUtils;
-import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.junit.Test;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class PylintIssuesAnalyzerTest {
+
+  private static final Logger LOG = Loggers.get(PylintIssuesAnalyzerTest.class);
 
   @Test
   public void shouldParseCorrectly() {
@@ -103,7 +107,7 @@ public class PylintIssuesAnalyzerTest {
     String pylintrcPath = getClass().getResource(pylintrcResource).getPath();
     String executableResource = "/org/sonar/plugins/python/pylint/executable";
     String executablePath = getClass().getResource(executableResource).getPath();
-    final String[] VALID_PARAMETERS =
+    final String[] validParameters =
       {
         null, null,
         executablePath, null,
@@ -111,10 +115,10 @@ public class PylintIssuesAnalyzerTest {
         executablePath, pylintrcPath
       };
 
-    int numberOfParams = VALID_PARAMETERS.length;
+    int numberOfParams = validParameters.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-        analyzer(VALID_PARAMETERS[i], VALID_PARAMETERS[i + 1]);
+        analyzer(validParameters[i], validParameters[i + 1]);
       } catch (IllegalStateException se) {
         assert(false);
       }
@@ -125,49 +129,44 @@ public class PylintIssuesAnalyzerTest {
   @Test
   public void shouldFailIfGivenInvalidParams() {
     final String NOT_EXISTING_PATH = "notexistingpath";
-    final String[] INVALID_PARAMETERS =
+    final String[] invalidParameters =
       {
         null, NOT_EXISTING_PATH,
         NOT_EXISTING_PATH, null,
         NOT_EXISTING_PATH, NOT_EXISTING_PATH
       };
 
-    int numberOfParams = INVALID_PARAMETERS.length;
+    int exceptionCount = 0;
+    int numberOfParams = invalidParameters.length;
     for(int i = 0; i<numberOfParams-1; i+=2){
       try{
-        analyzer(INVALID_PARAMETERS[i], INVALID_PARAMETERS[i + 1]);
+        analyzer(invalidParameters[i], invalidParameters[i + 1]);
         assert(false);
-      } catch (IllegalStateException se) {}
-    }
-  }
-
-  private List<String> readFile(String path) {
-    List<String> lines = new LinkedList<String>();
-
-    BufferedReader reader = null;
-    try {
-      reader = new BufferedReader(new FileReader(path));
-      String s = null;
-
-      while ((s = reader.readLine()) != null) {
-        lines.add(s);
+      } catch (IllegalStateException se) {
+        exceptionCount++;
       }
-    } catch (IOException e) {
-      System.err.println("Cannot read the file '" + path + "'");
-    } finally {
-    	IOUtils.closeQuietly(reader);
     }
-
-    return lines;
+    assertThat(exceptionCount).isEqualTo(3);
   }
 
-  private List<String> getIds(List<Issue> issues){
-    List<String> ids = new LinkedList<String>();
-    for(Issue issue: issues) ids.add(issue.getRuleId());
+  private static List<String> readFile(String path) {
+    try {
+      return Files.readAllLines(Paths.get(path), UTF_8);
+    } catch (IOException e) {
+      LOG.error("Cannot read the file '{}'", path);
+      return Collections.emptyList();
+    }
+  }
+
+  private static List<String> getIds(List<Issue> issues){
+    List<String> ids = new LinkedList<>();
+    for(Issue issue: issues) {
+      ids.add(issue.getRuleId());
+    }
     return ids;
   }
 
-  private PylintIssuesAnalyzer analyzer(String pylintPath, String pylintConfigPath) {
+  private static PylintIssuesAnalyzer analyzer(String pylintPath, String pylintConfigPath) {
     PylintArguments arguments = mock(PylintArguments.class);
     return new PylintIssuesAnalyzer(pylintPath, pylintConfigPath, arguments);
   }

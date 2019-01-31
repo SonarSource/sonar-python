@@ -25,6 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class XPathCheckTest {
 
   private static final String MESSAGE = "Avoid statements";
+  public static final String XPATH_PY = "xpath.py";
 
   @Test
   public void line_level_issue() {
@@ -38,25 +39,25 @@ public class XPathCheckTest {
 
   @Test
   public void boolean_false_result() {
-    analyze("xpath.py", "count(//STATEMENT) < 0");
+    analyze(XPATH_PY, "count(//STATEMENT) < 0");
   }
 
   @Test
-  public void integer_xpath_result() throws Exception {
-    analyze("xpath.py", "count(//STATEMENT)");
+  public void integer_xpath_result() {
+    analyze(XPATH_PY, "count(//STATEMENT)");
   }
 
   @Test
-  public void empty_query() throws Exception {
-    analyze("xpath.py", "");
+  public void empty_query() {
+    analyze(XPATH_PY, "");
   }
 
   @Test(expected = IllegalStateException.class)
-  public void invalid_query() throws Exception {
-    analyze("xpath.py", "+++");
+  public void invalid_query() {
+    analyze(XPATH_PY, "+++");
   }
 
-  private void analyze(String fileName, String xpathQuery) {
+  private static void analyze(String fileName, String xpathQuery) {
     XPathCheck check = new XPathCheck();
     check.xpathQuery = xpathQuery;
     check.message = MESSAGE;

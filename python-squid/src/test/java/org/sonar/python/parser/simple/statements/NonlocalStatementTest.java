@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser.simple_statements;
+package org.sonar.python.parser.simple.statements;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,16 +26,17 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class PassStatementTest extends RuleTest {
+public class NonlocalStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    setRootRule(PythonGrammar.PASS_STMT);
+    setRootRule(PythonGrammar.NONLOCAL_STMT);
   }
 
   @Test
-  public void realLife() {
-    assertThat(p).matches("pass");
+  public void ok() {
+    assertThat(p).matches("nonlocal IDENTIFIER");
+    assertThat(p).matches("nonlocal IDENTIFIER , IDENTIFIER");
   }
 
 }

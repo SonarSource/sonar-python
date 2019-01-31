@@ -44,11 +44,12 @@ public class StaxParserTest {
     parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test-with-entity.xml"));
   }
 
-  private XmlStreamHandler getTestHandler() {
+  private static XmlStreamHandler getTestHandler() {
     return new XmlStreamHandler() {
       public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
         rootCursor.advance();
         while (rootCursor.getNext() != null) {
+          // do nothing intentionally
         }
       }
     };

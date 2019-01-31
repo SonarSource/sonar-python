@@ -25,6 +25,7 @@ import com.sonar.sslr.api.Token;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
@@ -35,14 +36,14 @@ public class DocstringExtractorTest {
 
   private static final File BASE_DIR = new File("src/test/resources");
 
+  private static final String TRIPLE_QUOTES = "\"\"\"";
+
   private Map<AstNode, Token> docstrings = new HashMap<>();
 
   @Test
   public void test() {
     File file = new File(BASE_DIR, "docstring.py");
     TestPythonVisitorRunner.scanFile(file, new DocstringVisitor());
-
-    String TRIPLE_QUOTES = "\"\"\"";
 
     assertDocstring(PythonGrammar.FILE_INPUT, 1, String.format("%s%nThis is a module docstring%n%s", TRIPLE_QUOTES, TRIPLE_QUOTES));
     assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES);
@@ -52,7 +53,7 @@ public class DocstringExtractorTest {
     assertDocstring(PythonGrammar.FUNCDEF, 25, "''' This is a method docstring '''");
 
     assertThat(docstrings).hasSize(10);
-    assertThat(docstrings.values().stream().filter(ds -> ds != null)).hasSize(6);
+    assertThat(docstrings.values().stream().filter(Objects::nonNull)).hasSize(6);
   }
 
   private void assertDocstring(PythonGrammar nodeType, int line, String expectedDocString) {
@@ -62,9 +63,9 @@ public class DocstringExtractorTest {
   }
 
   private Token getDocstring(PythonGrammar nodeType, int line) {
-    for (AstNode e : docstrings.keySet()) {
-      if (e.getType().equals(nodeType) && e.getTokenLine() == line) {
-        return docstrings.get(e);
+    for (Map.Entry<AstNode, Token> e : docstrings.entrySet()) {
+      if (e.getKey().getType().equals(nodeType) && e.getKey().getTokenLine() == line) {
+        return e.getValue();
       }
     }
     return null;

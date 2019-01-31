@@ -19,7 +19,6 @@
  */
 package org.sonar.python.lexer;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableSet;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
@@ -35,6 +34,7 @@ import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
@@ -46,7 +46,7 @@ public class PythonLexerTest {
 
   @BeforeClass
   public static void init() {
-    lexer = PythonLexer.create(new PythonConfiguration(Charsets.UTF_8));
+    lexer = PythonLexer.create(new PythonConfiguration(UTF_8));
   }
 
   /**
@@ -154,8 +154,7 @@ public class PythonLexerTest {
 
       "F'''foo'''",
       "rF'''foo'''",
-      "fR\"\"\"foo\"\"\""
-      );
+      "fR\"\"\"foo\"\"\"");
     for (String formattedStringLiteral : formattedStringLiterals) {
       assertThat(lexer.lex(formattedStringLiteral), hasToken(formattedStringLiteral, PythonTokenType.STRING));
     }
@@ -284,15 +283,14 @@ public class PythonLexerTest {
   @Test
   public void mixed_tabs_spaces() {
     List<Token> tokens = lexer.lex("def fun():\n" +
-        "   if True:\n" +
-        "\tpass");
+      "   if True:\n" +
+      "\tpass");
     assertThat(tokens.get(11).getType()).isEqualTo(PythonTokenType.INDENT);
 
     tokens = lexer.lex("def fun():\n" +
-        "   if True:\n" +
-        "  \tpass");
+      "   if True:\n" +
+      "  \tpass");
     assertThat(tokens.get(11).getType()).isEqualTo(PythonTokenType.INDENT);
-
 
   }
 

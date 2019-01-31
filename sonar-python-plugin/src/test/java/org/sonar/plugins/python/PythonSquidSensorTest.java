@@ -192,7 +192,7 @@ public class PythonSquidSensorTest {
   }
 
   @Test
-  public void parse_error() throws Exception {
+  public void parse_error() {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()

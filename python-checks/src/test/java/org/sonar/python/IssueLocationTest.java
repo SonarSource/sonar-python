@@ -38,7 +38,7 @@ public class IssueLocationTest {
   private Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
-  public void file_level() throws Exception {
+  public void file_level() {
     IssueLocation issueLocation = IssueLocation.atFileLevel(MESSAGE);
     assertThat(issueLocation.message()).isEqualTo(MESSAGE);
     assertThat(issueLocation.startLine()).isEqualTo(IssueLocation.UNDEFINED_LINE);
@@ -48,7 +48,7 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void line_level() throws Exception {
+  public void line_level() {
     IssueLocation issueLocation = IssueLocation.atLineLevel(MESSAGE, 42);
     assertThat(issueLocation.message()).isEqualTo(MESSAGE);
     assertThat(issueLocation.startLine()).isEqualTo(42);
@@ -58,7 +58,7 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void single_node() throws Exception {
+  public void single_node() {
     AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
     AstNode node = root.getFirstDescendant(PythonGrammar.ARGLIST);
     IssueLocation issueLocation = IssueLocation.preciseLocation(node, MESSAGE);
@@ -70,7 +70,7 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void multiple_nodes() throws Exception {
+  public void multiple_nodes() {
     AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
     AstNode firstNode = root.getFirstDescendant(PythonTokenType.NUMBER);
     AstNode lastNode = root.getFirstDescendant(PythonPunctuator.RPARENTHESIS);
