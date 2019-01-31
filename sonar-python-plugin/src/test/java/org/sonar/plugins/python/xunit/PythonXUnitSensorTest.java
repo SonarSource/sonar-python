@@ -27,7 +27,8 @@ import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.ConfigurationBridge;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 
@@ -39,16 +40,16 @@ public class PythonXUnitSensorTest {
   private static final String FILE_SAMPLE2 = "tests/dir/test_sample2.py";
 
   private File baseDir = new File("src/test/resources/org/sonar/plugins/python");
-  Settings settings;
+  MapSettings settings = new MapSettings();
   PythonXUnitSensor sensor;
   SensorContextTester context = SensorContextTester.create(baseDir);
   DefaultFileSystem fs;
 
   @Before
   public void setUp() {
-    settings = context.settings();
+    context.setSettings(settings);
     fs = new DefaultFileSystem(baseDir);
-    sensor = new PythonXUnitSensor(context.config(), fs);
+    sensor = new PythonXUnitSensor(new ConfigurationBridge(settings), fs);
   }
 
   @Test

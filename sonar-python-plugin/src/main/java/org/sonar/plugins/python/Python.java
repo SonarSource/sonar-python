@@ -22,7 +22,7 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
 public class Python extends AbstractLanguage {
@@ -31,16 +31,16 @@ public class Python extends AbstractLanguage {
 
   private static final String[] DEFAULT_FILE_SUFFIXES = { "py" };
 
-  private Settings settings;
+  private Configuration configuration;
 
-  public Python(Settings settings) {
+  public Python(Configuration configuration) {
     super(KEY, "Python");
-    this.settings = settings;
+    this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = filterEmptyStrings(settings.getStringArray(PythonPlugin.FILE_SUFFIXES_KEY));
+    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.FILE_SUFFIXES_KEY));
     return suffixes.length == 0 ? Python.DEFAULT_FILE_SUFFIXES : suffixes;
   }
 

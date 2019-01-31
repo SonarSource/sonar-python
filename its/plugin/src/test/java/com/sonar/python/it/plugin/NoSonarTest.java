@@ -32,21 +32,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NoSonarTest {
 
   private static final String PROJECT_KEY = "nosonar";
+  private static final String PROFILE_NAME = "nosonar";
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void startServer() {
-    orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
-    orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "nosonar");
+    ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", PROFILE_NAME);
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects", PROJECT_KEY))
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0-SNAPSHOT")
       .setSourceDirs(".");
-    orchestrator.executeBuild(build);
+    ORCHESTRATOR.executeBuild(build);
   }
 
   @Test
