@@ -21,7 +21,6 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -56,27 +55,25 @@ public abstract class PythonReportSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
+    String reportPathPropertyKey = reportPathKey();
+    String reportPath = conf.get(reportPathPropertyKey).orElse(defaultReportPath());
     try {
-      List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathKey(), defaultReportPath());
+      List<File> reports = getReports(conf, context.fileSystem().baseDir().getPath(), reportPathPropertyKey, reportPath);
       processReports(context, reports);
     } catch (Exception e) {
-      String reportPath = conf.get(reportPathKey()).orElse(defaultReportPath());
       LOG.warn("Cannot read report '{}', the following exception occurred: {}", reportPath, e.getMessage());
       analysisWarnings.addWarning(String.format("An error occurred while trying to import %s report(s): '%s'", reportType, reportPath));
     }
   }
 
-  public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String defaultReportPath) {
-    String reportPath = conf.get(reportPathPropertyKey).orElse(defaultReportPath);
-    boolean propertyIsProvided = !Objects.equals(reportPath, defaultReportPath);
-
+  public static List<File> getReports(Configuration conf, String baseDirPath, String reportPathPropertyKey, String reportPath) {
     LOG.debug("Using pattern '{}' to find reports", reportPath);
 
     DirectoryScanner scanner = new DirectoryScanner(new File(baseDirPath), WildcardPattern.create(reportPath));
     List<File> includedFiles = scanner.getIncludedFiles();
 
     if (includedFiles.isEmpty()) {
-      if (propertyIsProvided) {
+      if (conf.hasKey(reportPathPropertyKey)) {
         // try absolute path
         File file = new File(reportPath);
         if (!file.exists()) {

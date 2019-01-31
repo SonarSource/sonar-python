@@ -129,6 +129,14 @@ public class PylintImportSensorTest {
     assertThat(configurationPredicate.test(configuration(ImmutableMap.of("xxx", "yyy")))).isFalse();
   }
 
+  @Test
+  public void no_default_report_log() {
+    SensorContextTester defaultContext = SensorContextTester.create(baseDir);
+    PylintImportSensor sensor = new PylintImportSensor(defaultContext.config(), analysisWarnings);
+    sensor.execute(defaultContext);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("No report was found for sonar.python.pylint.reportPath using default pattern pylint-reports/pylint-result-*.txt");
+  }
+
   private static Configuration configuration(Map<String, String> mapproperties) {
     return new ConfigurationBridge(new MapSettings().addProperties(mapproperties));
   }
