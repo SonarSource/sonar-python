@@ -36,7 +36,6 @@ import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.Settings;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
@@ -53,7 +52,7 @@ public class PythonCoverageSensorTest {
   private static final String FILE3_KEY = "moduleKey:sources/file3.py";
   private static final String FILE4_KEY = "moduleKey:sources/file4.py";
   private SensorContextTester context;
-  private Settings settings;
+  private MapSettings settings;
 
   private PythonCoverageSensor coverageSensor = new PythonCoverageSensor();
   private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();

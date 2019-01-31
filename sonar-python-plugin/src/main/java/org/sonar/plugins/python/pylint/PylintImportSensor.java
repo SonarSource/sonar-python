@@ -56,7 +56,7 @@ public class PylintImportSensor extends PythonReportSensor {
     super.describe(descriptor);
     descriptor
       .createIssuesForRuleRepository(PylintRuleRepository.REPOSITORY_KEY)
-      .requireProperty(REPORT_PATH_KEY);
+      .onlyWhenConfiguration(conf -> conf.hasKey(REPORT_PATH_KEY));
   }
 
   @Override

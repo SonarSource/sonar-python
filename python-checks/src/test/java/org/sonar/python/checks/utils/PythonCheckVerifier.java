@@ -132,33 +132,34 @@ public class PythonCheckVerifier extends PythonVisitor {
       if (text.startsWith(marker)) {
         int issueLine = trivia.getToken().getLine();
         String paramsAndMessage = text.substring(marker.length()).trim();
-
-        if (paramsAndMessage.startsWith("@")) {
-          String[] spaceSplit = paramsAndMessage.split("[\\s\\[{]", 2);
-          issueLine += Integer.valueOf(spaceSplit[0].substring(1));
-          paramsAndMessage = spaceSplit.length > 1 ? spaceSplit[1] : "";
-        }
-
-        TestIssue issue = TestIssue.create(null, issueLine);
-
-        if (paramsAndMessage.startsWith("[[")) {
-          int endIndex = paramsAndMessage.indexOf("]]");
-          addParams(issue, paramsAndMessage.substring(2, endIndex));
-          paramsAndMessage = paramsAndMessage.substring(endIndex + 2).trim();
-        }
-
-        if (paramsAndMessage.startsWith("{{")) {
-          int endIndex = paramsAndMessage.indexOf("}}");
-          String message = paramsAndMessage.substring(2, endIndex);
-          issue.message(message);
-        }
-
-        expectedIssues.add(issue);
-
+        expectedIssues.add(createIssue(issueLine, paramsAndMessage));
       } else if (text.startsWith("^")) {
         addPreciseLocation(trivia);
       }
     }
+  }
+
+  private static TestIssue createIssue(int issueLine, String paramsAndMessage) {
+    if (paramsAndMessage.startsWith("@")) {
+      String[] spaceSplit = paramsAndMessage.split("[\\s\\[{]", 2);
+      issueLine += Integer.valueOf(spaceSplit[0].substring(1));
+      paramsAndMessage = spaceSplit.length > 1 ? spaceSplit[1] : "";
+    }
+
+    TestIssue issue = TestIssue.create(null, issueLine);
+
+    if (paramsAndMessage.startsWith("[[")) {
+      int endIndex = paramsAndMessage.indexOf("]]");
+      addParams(issue, paramsAndMessage.substring(2, endIndex));
+      paramsAndMessage = paramsAndMessage.substring(endIndex + 2).trim();
+    }
+
+    if (paramsAndMessage.startsWith("{{")) {
+      int endIndex = paramsAndMessage.indexOf("}}");
+      String message = paramsAndMessage.substring(2, endIndex);
+      issue.message(message);
+    }
+    return issue;
   }
 
   private static void addParams(TestIssue issue, String params) {
