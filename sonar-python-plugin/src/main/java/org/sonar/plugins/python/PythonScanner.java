@@ -24,7 +24,6 @@ import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
 import java.util.List;
 import java.util.Set;
-import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.Checks;
@@ -40,7 +39,6 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
@@ -88,9 +86,6 @@ public class PythonScanner {
       } catch (Exception e) {
         LOG.warn("Unable to analyze file '{}'. Error: {}", pythonFile.toString(), e);
       }
-    }
-    if (!isSonarLint(context)) {
-      (new PythonCoverageSensor()).execute(context);
     }
   }
 
@@ -221,7 +216,4 @@ public class PythonScanner {
       .save();
   }
 
-  private static boolean isSonarLint(SensorContext context) {
-    return context.runtime().getProduct() == SonarProduct.SONARLINT;
-  }
 }

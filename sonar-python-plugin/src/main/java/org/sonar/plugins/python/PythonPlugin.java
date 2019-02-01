@@ -46,7 +46,7 @@ public class PythonPlugin implements Plugin {
   private static final String TEST_AND_COVERAGE = "Tests and Coverage";
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
   private static final String PYLINT = "Pylint";
-  private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATH_KEY + " instead. ";
+  private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATHS_KEY + " instead. ";
 
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
   private static final Version SQ_MIN_VERSION_ANALYSIS_WARNINGS = Version.create(7, 4);
@@ -55,7 +55,6 @@ public class PythonPlugin implements Plugin {
   public void define(Context context) {
 
     context.addExtensions(
-
       PropertyDefinition.builder(FILE_SUFFIXES_KEY)
         .index(10)
         .name("File Suffixes")
@@ -67,39 +66,6 @@ public class PythonPlugin implements Plugin {
         .defaultValue("py")
         .build(),
 
-      // COVERAGE
-      PropertyDefinition.builder(PythonCoverageSensor.REPORT_PATH_KEY)
-        .index(20)
-        .name("Path to coverage report(s)")
-        .description("Path to coverage reports. Ant patterns are accepted for relative path. The reports have to conform to the Cobertura XML format.")
-        .category(PYTHON_CATEGORY)
-        .subCategory(TEST_AND_COVERAGE)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue(PythonCoverageSensor.DEFAULT_REPORT_PATH)
-        .build(),
-      // deprecated
-      PropertyDefinition.builder(PythonCoverageSensor.IT_REPORT_PATH_KEY)
-        .index(21)
-        .name("Path to coverage report(s) for integration tests")
-        .description(DEPRECATED_PREFIX +
-          "Path to coverage reports for integration tests. Ant patterns are accepted for relative path. The reports have to conform to the Cobertura XML format.")
-        .category(PYTHON_CATEGORY)
-        .subCategory(TEST_AND_COVERAGE)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue(PythonCoverageSensor.IT_DEFAULT_REPORT_PATH)
-        .build(),
-      // deprecated
-      PropertyDefinition.builder(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY)
-        .index(22)
-        .name("Path to overall (combined UT+IT) coverage report(s)")
-        .description(DEPRECATED_PREFIX +
-          "Path to a report containing overall test coverage data (i.e. test coverage gained by all tests of all kinds). " +
-          "Ant patterns are accepted for relative path. The reports have to conform to the Cobertura XML format.")
-        .category(PYTHON_CATEGORY)
-        .subCategory(TEST_AND_COVERAGE)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue(PythonCoverageSensor.OVERALL_DEFAULT_REPORT_PATH)
-        .build(),
 
       Python.class,
 
@@ -116,10 +82,38 @@ public class PythonPlugin implements Plugin {
         context.addExtension(NoOpAnalysisWarningsWrapper.class);
       }
 
+      addCoberturaExtensions(context);
       addXUnitExtensions(context);
       addPylintExtensions(context);
       addBanditExtensions(context);
     }
+  }
+
+  private static void addCoberturaExtensions(Context context) {
+    context.addExtensions(
+      PropertyDefinition.builder(PythonCoverageSensor.REPORT_PATHS_KEY)
+        .index(20)
+        .name("Path to coverage report(s)")
+        .description("List of paths pointing to coverage reports. Ant patterns are accepted for relative path. " +
+          "The reports have to conform to the Cobertura XML format.")
+        .category(PYTHON_CATEGORY)
+        .subCategory(TEST_AND_COVERAGE)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue(PythonCoverageSensor.DEFAULT_REPORT_PATH)
+        .multiValues(true)
+        .build(),
+      // deprecated
+      PropertyDefinition.builder(PythonCoverageSensor.REPORT_PATH_KEY)
+        .index(21)
+        .name("Path to coverage report")
+        .description(DEPRECATED_PREFIX +
+          "Path to a coverage report. Ant patterns are accepted for relative path. The report has to conform to the Cobertura XML format.")
+        .category(PYTHON_CATEGORY)
+        .subCategory(TEST_AND_COVERAGE)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("")
+        .build(),
+      PythonCoverageSensor.class);
   }
 
   private static void addXUnitExtensions(Context context) {

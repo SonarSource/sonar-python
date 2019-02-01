@@ -43,7 +43,9 @@ public class CoverageTest {
   private static final String COVERAGE = "coverage";
   private static final String LINE_COVERAGE = "line_coverage";
   private static final String BRANCH_COVERAGE = "branch_coverage";
-  public static final String EMPTY_XML = "empty.xml";
+  private static final String EMPTY_XML = "empty.xml";
+  private static final String DEPRECATED_COVERAGE_REPORT_PATH = "sonar.python.coverage.reportPath";
+  private static final String COVERAGE_REPORT_PATHS = "sonar.python.coverage.reportPaths";
 
   @Test
   public void basic_coverage_reports_with_unix_paths() {
@@ -58,10 +60,12 @@ public class CoverageTest {
   private static void basicCoverageReports(String utReportPath) {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT))
-      .setProperty("sonar.python.coverage.reportPath", utReportPath)
-      .setProperty("sonar.python.coverage.itReportPath", "it-coverage.xml")
-      .setProperty("sonar.python.coverage.overallReportPath", "it-coverage.xml");
-    ORCHESTRATOR.executeBuild(build);
+      .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, utReportPath)
+      .setProperty(COVERAGE_REPORT_PATHS, "it-coverage1.xml,it-coverage2.xml")
+      // The 2 following properties are now ignored, so they should have no impact on result
+      .setProperty("sonar.python.coverage.itReportPath", "ignored-it-coverage.xml")
+      .setProperty("sonar.python.coverage.overallReportPath", "ignored-it-coverage.xml");
+    BuildResult result = ORCHESTRATOR.executeBuild(build);
 
     ImmutableMap<String, Integer> values = new Builder<String, Integer>()
         .put(LINES_TO_COVER, 14)
@@ -71,12 +75,32 @@ public class CoverageTest {
         .build();
 
     Tests.assertProjectMeasures(PROJECT_KEY, values);
+    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.itReportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
+    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.overallReportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
+    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.reportPath' is deprecated. Please use 'sonar.python.coverage.reportPaths' instead.");
   }
 
   @Test
-  public void no_report() {
+  public void default_values() {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT));
+    ORCHESTRATOR.executeBuild(build);
+
+    ImmutableMap<String, Integer> values = new Builder<String, Integer>()
+      .put(LINES_TO_COVER, 14)
+      .put(COVERAGE, 25)
+      .put(LINE_COVERAGE, 28)
+      .put(BRANCH_COVERAGE, 0)
+      .build();
+    Tests.assertProjectMeasures(PROJECT_KEY, values);
+  }
+
+  @Test
+  public void empty_property() {
+    SonarScanner build = SonarScanner.create()
+      .setProjectDir(new File(COVERAGE_PROJECT))
+      .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "")
+      .setProperty(COVERAGE_REPORT_PATHS, "");
     ORCHESTRATOR.executeBuild(build);
 
     Map<String, Integer> expected = new HashMap<>();
@@ -91,9 +115,8 @@ public class CoverageTest {
   public void empty_coverage_report() {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT))
-      .setProperty("sonar.python.coverage.reportPath", EMPTY_XML)
-      .setProperty("sonar.python.coverage.itReportPath", EMPTY_XML)
-      .setProperty("sonar.python.coverage.overallReportPath", EMPTY_XML);
+      .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, EMPTY_XML)
+      .setProperty(COVERAGE_REPORT_PATHS, EMPTY_XML);
     BuildResult buildResult = ORCHESTRATOR.executeBuild(build);
 
     int nbLog = 0;

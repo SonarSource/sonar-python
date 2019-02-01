@@ -23,11 +23,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
-import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -70,8 +68,6 @@ public class PythonSquidSensorTest {
 
   private static final SonarRuntime SONARLINT_RUNTIME = SonarRuntimeImpl.forSonarLint(SONARLINT_DETECTABLE_VERSION);
 
-  private static final SonarRuntime NOSONARLINT_RUNTIME = SonarRuntimeImpl.forSonarQube(SONARLINT_DETECTABLE_VERSION, SonarQubeSide.SERVER);
-
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor").getAbsoluteFile();
 
   private SensorContextTester context;
@@ -99,19 +95,8 @@ public class PythonSquidSensorTest {
   }
 
   @Test
-  public void test_execute_on_sonarqube() {
-    // with SonarQube configuration, coverage is activated
-    testExecute(NOSONARLINT_RUNTIME, 10);
-  }
-
-  @Test
   public void test_execute_on_sonarlint() {
-    // with SonarLint configuration, coverage is not activated
-    testExecute(SONARLINT_RUNTIME, null);
-  }
-
-  private void testExecute(SonarRuntime runtime, @Nullable Integer expectedNumberOfLineHits) {
-    context.setRuntime(runtime);
+    context.setRuntime(SONARLINT_RUNTIME);
 
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -137,8 +122,6 @@ public class PythonSquidSensorTest {
 
     String msg = "number of TypeOfText for the highlighting of keyword 'def'";
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
-
-    assertThat(context.lineHits("moduleKey:file1.py", 1)).isEqualTo(expectedNumberOfLineHits);
 
     assertThat(context.allAnalysisErrors()).isEmpty();
   }

@@ -59,7 +59,7 @@ public class PythonXUnitSensorTest {
 
   @Before
   public void setUp() {
-    context.setSettings(settings);
+    settings.clear();
     fs = new DefaultFileSystem(baseDir);
     sensor = new PythonXUnitSensor(new ConfigurationBridge(settings), fs, analysisWarnings);
   }
@@ -105,7 +105,6 @@ public class PythonXUnitSensorTest {
     fs.add(testFile1);
 
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");
-    sensor = new PythonXUnitSensor(context.config(), fs, analysisWarnings);
     sensor.execute(context);
 
     assertThat(context.measures(context.module().key())).isEmpty();
@@ -115,7 +114,6 @@ public class PythonXUnitSensorTest {
   @Test
   public void shouldLogWarningWhenGivenInvalidTime() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXUnitSensor(context.config(), fs, analysisWarnings);
     sensor.execute(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot read report 'xunit-reports/invalid-time-xunit-report.xml', " +
