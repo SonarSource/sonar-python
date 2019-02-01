@@ -64,12 +64,12 @@ public class PylintSensor implements Sensor {
 
   @Override
   public void execute(SensorContext sensorContext) {
-    File workDir = new File(sensorContext.fileSystem().workDir(), "/pylint/");
+    File workDir = new File(sensorContext.fileSystem().workDir(), "pylint");
 
     if (!shouldExecute() || !prepareWorkDir(workDir) || !initializeAnalyzer(sensorContext)) {
       return;
     }
-    
+
     int i = 0;
     FileSystem fileSystem = sensorContext.fileSystem();
     FilePredicates p = fileSystem.predicates();
