@@ -99,7 +99,9 @@ public class PythonCoverageSensor implements Sensor {
     }
 
     List<File> reports = new ArrayList<>();
-    config.get(REPORT_PATH_KEY).ifPresent(path -> reports.addAll(getReports(config, baseDir, REPORT_PATH_KEY, path)));
+    config.get(REPORT_PATH_KEY)
+      .map(path -> getReports(config, baseDir, REPORT_PATH_KEY, path))
+      .ifPresent(reports::addAll);
 
     Arrays.stream(config.getStringArray(REPORT_PATHS_KEY))
       .map(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path))
