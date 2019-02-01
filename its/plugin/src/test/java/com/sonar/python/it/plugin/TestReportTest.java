@@ -117,8 +117,10 @@ public class TestReportTest {
   @Test
   public void invalid_test_report() {
     BuildResult result = ORCHESTRATOR.executeBuildQuietly(createBuild("invalid_report.xml"));
-    assertThat(result.isSuccess()).isFalse();
-    assertThat(result.getLogs()).contains("Cannot feed the data into sonar");
+    assertThat(result.isSuccess()).isTrue();
+    assertThat(result.getLogs()).contains("Cannot read report 'invalid_report.xml', the following exception occurred:" +
+      " Unexpected character 't' (code 116) in prolog; expected '<'\n" +
+      " at [row,col {unknown-source}]: [1,1]");
   }
 
   private static Map<String, Integer> nullMeasures() {

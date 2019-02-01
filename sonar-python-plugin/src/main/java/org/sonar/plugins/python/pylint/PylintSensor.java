@@ -30,16 +30,21 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.Python;
 
 public class PylintSensor implements Sensor {
 
-  private PylintConfiguration conf;
-  private Settings settings;
+  private static final Logger LOG = Loggers.get(PylintSensor.class);
 
-  public PylintSensor(PylintConfiguration conf, Settings settings) {
+  private final PylintConfiguration conf;
+  private final Configuration settings;
+  private PylintIssuesAnalyzer analyzer;
+
+  public PylintSensor(PylintConfiguration conf, Configuration settings) {
     this.conf = conf;
     this.settings = settings;
   }
@@ -54,19 +59,19 @@ public class PylintSensor implements Sensor {
   }
 
   boolean shouldExecute() {
-    return settings.getString(PylintImportSensor.REPORT_PATH_KEY) == null;
+    return !settings.get(PylintImportSensor.REPORT_PATH_KEY).isPresent();
   }
 
   @Override
   public void execute(SensorContext sensorContext) {
-    if (!shouldExecute()) {
+    File workDir = new File(sensorContext.fileSystem().workDir(), "pylint");
+
+    if (!shouldExecute() || !prepareWorkDir(workDir) || !initializeAnalyzer(sensorContext)) {
       return;
     }
 
-    FileSystem fileSystem = sensorContext.fileSystem();
-    File workDir = new File(fileSystem.workDir(), "pylint");
-    prepareWorkDir(workDir);
     int i = 0;
+    FileSystem fileSystem = sensorContext.fileSystem();
     FilePredicates p = fileSystem.predicates();
     Iterable<InputFile> files = fileSystem.inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
     for (InputFile file : files) {
@@ -75,25 +80,31 @@ public class PylintSensor implements Sensor {
         analyzeFile(sensorContext, file, out);
         i++;
       } catch (Exception e) {
-        String msg = new StringBuilder()
-            .append("Cannot analyse the file '")
-            .append(file.absolutePath())
-            .append("', details: '")
-            .append(e)
-            .append("'")
-            .toString();
-        throw new IllegalStateException(msg, e);
+        LOG.warn("Cannot analyse file '{}', the following exception occurred:", file.toString(), e);
       }
     }
+  }
+
+  private boolean initializeAnalyzer(SensorContext context) {
+    try {
+      String pylintConfigPath = conf.getPylintConfigPath(context.fileSystem());
+      String pylintPath = conf.getPylintPath();
+      analyzer = createAnalyzer(pylintConfigPath, pylintPath);
+      return true;
+    } catch (Exception e) {
+      LOG.warn("Unable to use pylint for analysis. Error:", e);
+      return false;
+    }
+  }
+
+  // Visible for testing
+  PylintIssuesAnalyzer createAnalyzer(String pylintConfigPath, String pylintPath) {
+    return new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
   }
 
   private void analyzeFile(SensorContext context, InputFile file, File out) throws IOException {
     FileSystem fileSystem = context.fileSystem();
 
-    String pylintConfigPath = conf.getPylintConfigPath(fileSystem);
-    String pylintPath = conf.getPylintPath();
-
-    PylintIssuesAnalyzer analyzer = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath);
     List<Issue> issues = analyzer.analyze(file.absolutePath(), fileSystem.encoding(), out);
 
     for (Issue pylintIssue : issues) {
@@ -102,13 +113,15 @@ public class PylintSensor implements Sensor {
     }
   }
 
-  private static void prepareWorkDir(File dir) {
+  private static boolean prepareWorkDir(File dir) {
     try {
       FileUtils.forceMkdir(dir);
       // directory is cleaned, because Sonar 3.0 will not do this for us
       FileUtils.cleanDirectory(dir);
+      return true;
     } catch (IOException e) {
-      throw new IllegalStateException("Cannot create directory: " + dir, e);
+      LOG.warn("Cannot create directory '{}'. Error:", dir, e);
+      return false;
     }
   }
 

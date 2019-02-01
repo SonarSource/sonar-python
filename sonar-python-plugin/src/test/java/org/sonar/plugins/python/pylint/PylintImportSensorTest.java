@@ -41,8 +41,10 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
 
 public class PylintImportSensorTest {
 
@@ -51,6 +53,7 @@ public class PylintImportSensorTest {
   public static final String RULE_C0111 = "C0111";
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/pylint");
   private final SensorContextTester context = SensorContextTester.create(baseDir);
+  private final AnalysisWarningsWrapper analysisWarnings = spy(AnalysisWarningsWrapper.class);
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -78,7 +81,7 @@ public class PylintImportSensorTest {
         .build())
       .build());
 
-    PylintImportSensor sensor = new PylintImportSensor(context.config());
+    PylintImportSensor sensor = new PylintImportSensor(context.config(), analysisWarnings);
     sensor.execute(context);
     assertThat(context.allIssues()).hasSize(3);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key())
@@ -104,7 +107,8 @@ public class PylintImportSensorTest {
           .build())
         .build());
 
-    PylintImportSensor sensor = new PylintImportSensor(context.config());
+    PylintImportSensor sensor = new PylintImportSensor(context.config(), analysisWarnings);
+    PylintImportSensor.clearLoggedWarnings();
     sensor.execute(context);
     assertThat(context.allIssues()).hasSize(1);
     assertThat(context.allIssues()).extracting(issue -> issue.primaryLocation().inputComponent().key()).containsOnly(inputFile.key());
@@ -115,7 +119,7 @@ public class PylintImportSensorTest {
   @Test
   public void sensor_descriptor() {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new PylintImportSensor(context.config()).describe(descriptor);
+    new PylintImportSensor(context.config(), analysisWarnings).describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("PylintImportSensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);

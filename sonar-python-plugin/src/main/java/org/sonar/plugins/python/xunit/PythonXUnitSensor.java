@@ -38,6 +38,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.parser.StaxParser;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 public class PythonXUnitSensor extends PythonReportSensor {
   private static final Logger LOG = Loggers.get(PythonXUnitSensor.class);
@@ -48,8 +49,8 @@ public class PythonXUnitSensor extends PythonReportSensor {
 
   private final FileSystem fileSystem;
 
-  public PythonXUnitSensor(Configuration conf, FileSystem fileSystem) {
-    super(conf);
+  public PythonXUnitSensor(Configuration conf, FileSystem fileSystem, AnalysisWarningsWrapper analysisWarnings) {
+    super(conf, analysisWarnings, "XUnit");
     this.fileSystem = fileSystem;
   }
 

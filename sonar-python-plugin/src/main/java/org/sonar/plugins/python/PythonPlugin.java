@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import org.sonar.api.Plugin;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarProduct;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.Version;
@@ -32,6 +33,8 @@ import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
 import org.sonar.plugins.python.pylint.PylintSensor;
+import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
+import org.sonar.plugins.python.warnings.NoOpAnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
 public class PythonPlugin implements Plugin {
@@ -46,7 +49,7 @@ public class PythonPlugin implements Plugin {
   private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATH_KEY + " instead. ";
 
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
-
+  private static final Version SQ_MIN_VERSION_ANALYSIS_WARNINGS = Version.create(7, 4);
 
   @Override
   public void define(Context context) {
@@ -105,7 +108,14 @@ public class PythonPlugin implements Plugin {
       PythonSquidSensor.class,
       PythonRuleRepository.class);
 
-    if (context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
+    SonarRuntime sonarRuntime = context.getRuntime();
+    if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {
+      if (sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_MIN_VERSION_ANALYSIS_WARNINGS)) {
+        context.addExtension(DefaultAnalysisWarningsWrapper.class);
+      } else {
+        context.addExtension(NoOpAnalysisWarningsWrapper.class);
+      }
+
       addXUnitExtensions(context);
       addPylintExtensions(context);
       addBanditExtensions(context);

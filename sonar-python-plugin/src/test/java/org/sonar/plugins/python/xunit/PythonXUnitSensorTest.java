@@ -21,6 +21,7 @@ package org.sonar.plugins.python.xunit;
 
 import java.io.File;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -31,8 +32,15 @@ import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class PythonXUnitSensorTest {
 
@@ -44,12 +52,16 @@ public class PythonXUnitSensorTest {
   PythonXUnitSensor sensor;
   SensorContextTester context = SensorContextTester.create(baseDir);
   DefaultFileSystem fs;
+  private final AnalysisWarningsWrapper analysisWarnings = spy(AnalysisWarningsWrapper.class);
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Before
   public void setUp() {
     context.setSettings(settings);
     fs = new DefaultFileSystem(baseDir);
-    sensor = new PythonXUnitSensor(new ConfigurationBridge(settings), fs);
+    sensor = new PythonXUnitSensor(new ConfigurationBridge(settings), fs, analysisWarnings);
   }
 
   @Test
@@ -93,18 +105,23 @@ public class PythonXUnitSensorTest {
     fs.add(testFile1);
 
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "notexistingpath");
-    sensor = new PythonXUnitSensor(context.config(), fs);
+    sensor = new PythonXUnitSensor(context.config(), fs, analysisWarnings);
     sensor.execute(context);
 
     assertThat(context.measures(context.module().key())).isEmpty();
     assertThat(context.measures(testFile1.key())).isEmpty();
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void shouldThrowWhenGivenInvalidTime() {
+  @Test
+  public void shouldLogWarningWhenGivenInvalidTime() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
-    sensor = new PythonXUnitSensor(context.config(), fs);
+    sensor = new PythonXUnitSensor(context.config(), fs, analysisWarnings);
     sensor.execute(context);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot read report 'xunit-reports/invalid-time-xunit-report.xml', " +
+      "the following exception occurred: java.text.ParseException: Unparseable number: \"brrrr\"");
+    verify(analysisWarnings, times(1))
+      .addWarning(eq("An error occurred while trying to import XUnit report(s): 'xunit-reports/invalid-time-xunit-report.xml'"));
   }
 
   @Test

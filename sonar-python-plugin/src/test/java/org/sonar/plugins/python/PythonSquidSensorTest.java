@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import javax.annotation.Nullable;
@@ -56,9 +57,14 @@ import org.sonar.python.checks.ParsingErrorCheck;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 public class PythonSquidSensorTest {
+
+  private static final String FILE_1 = "file1.py";
+  private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
+  private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
 
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(6, 0);
 
@@ -114,7 +120,7 @@ public class PythonSquidSensorTest {
         .build())
       .build();
 
-    inputFile("file1.py");
+    inputFile(FILE_1);
 
     sensor().execute(context);
 
@@ -141,13 +147,13 @@ public class PythonSquidSensorTest {
   public void test_issues() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "OneStatementPerLine"))
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
         .build())
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S134"))
         .build())
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "FileComplexity"))
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, FILE_COMPLEXITY_RULE_KEY))
         .setParam("maximumFileComplexityThreshold", "2")
         .build())
       .build();
@@ -171,13 +177,13 @@ public class PythonSquidSensorTest {
         assertThat(issue.flows()).hasSize(4);
         assertThat(issue.gap()).isNull();
         checkedIssues++;
-      } else if (issue.ruleKey().rule().equals("OneStatementPerLine")) {
+      } else if (issue.ruleKey().rule().equals(ONE_STATEMENT_PER_LINE_RULE_KEY)) {
         assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
         assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
         assertThat(issue.flows()).isEmpty();
         assertThat(issue.gap()).isNull();
         checkedIssues++;
-      } else if (issue.ruleKey().rule().equals("FileComplexity")) {
+      } else if (issue.ruleKey().rule().equals(FILE_COMPLEXITY_RULE_KEY)) {
         assertThat(issueLocation.message()).isEqualTo("File has a complexity of 5 which is greater than 2 authorized.");
         assertThat(issueLocation.textRange()).isNull();
         assertThat(issue.flows()).isEmpty();
@@ -189,6 +195,35 @@ public class PythonSquidSensorTest {
     }
 
     assertThat(checkedIssues).isEqualTo(3);
+  }
+
+  @Test
+  public void test_exception_does_not_fail_analysis() throws IOException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, FILE_COMPLEXITY_RULE_KEY))
+        .setParam("maximumFileComplexityThreshold", "2")
+        .build())
+      .build();
+
+    DefaultInputFile inputFile = spy(TestInputFileBuilder.create("moduleKey", FILE_1)
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(Type.MAIN)
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, FILE_1), StandardCharsets.UTF_8))
+      .build());
+    when(inputFile.contents()).thenThrow(RuntimeException.class);
+
+    context.fileSystem().add(inputFile);
+    inputFile("file2.py");
+
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(2);
   }
 
   @Test
@@ -213,7 +248,7 @@ public class PythonSquidSensorTest {
 
   @Test
   public void cancelled_analysis() {
-    InputFile inputFile = inputFile("file1.py");
+    InputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
     sensor().execute(context);
