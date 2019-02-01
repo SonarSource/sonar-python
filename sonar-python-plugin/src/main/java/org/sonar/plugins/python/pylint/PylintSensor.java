@@ -64,7 +64,7 @@ public class PylintSensor implements Sensor {
     }
 
     FileSystem fileSystem = sensorContext.fileSystem();
-    File workDir = new File(fileSystem.workDir(), "/pylint/");
+    File workDir = new File(fileSystem.workDir(), "pylint");
     prepareWorkDir(workDir);
     int i = 0;
     FilePredicates p = fileSystem.predicates();

@@ -58,7 +58,7 @@ import static org.assertj.core.api.Assertions.assertThat;
   XPathRuleTest.class,
   SonarLintTest.class
 })
-public class Tests {
+public final class Tests {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
@@ -75,13 +75,18 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/xpath_rule.xml"))
     .build();
 
+  private Tests() {
+    // utility class
+  }
+
   public static Integer getProjectMeasure(String projectKey, String metricKey) {
     return getMeasureAsInt(projectKey, metricKey);
   }
 
   public static void assertProjectMeasures(String projectKey, Map<String, Integer> expected) {
-    Map<String, Measure> measuresByMetricKey = getMeasures(projectKey, new ArrayList<>(expected.keySet()))
-      .stream()
+    List<Measure> measures = getMeasures(projectKey, new ArrayList<>(expected.keySet()));
+    assertThat(measures).isNotNull();
+    Map<String, Measure> measuresByMetricKey = measures.stream()
       .collect(Collectors.toMap(Measure::getMetric, Function.identity()));
     for (Entry<String, Integer> entry : expected.entrySet()) {
       String metric = entry.getKey();
@@ -95,7 +100,7 @@ public class Tests {
   @CheckForNull
   static Measure getMeasure(String componentKey, String metricKey) {
     List<Measure> measures = getMeasures(componentKey, singletonList(metricKey));
-    return measures.size() == 1 ? measures.get(0) : null;
+    return measures != null && measures.size() == 1 ? measures.get(0) : null;
   }
 
   @CheckForNull
@@ -118,15 +123,15 @@ public class Tests {
     return (measure == null) ? null : parseDouble(measure.getValue());
   }
 
-  protected static WsClient newWsClient() {
+  static WsClient newWsClient() {
     return newWsClient(null, null);
   }
 
-  protected static WsClient newAdminWsClient() {
+  static WsClient newAdminWsClient() {
     return newWsClient(ADMIN_LOGIN, ADMIN_PASSWORD);
   }
 
-  protected static WsClient newWsClient(@Nullable String login, @Nullable String password) {
+  static WsClient newWsClient(@Nullable String login, @Nullable String password) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(ORCHESTRATOR.getServer().getUrl())
       .credentials(login, password)

@@ -39,7 +39,7 @@ public abstract class PythonCheck extends PythonVisitor {
     return Collections.unmodifiableList(new ArrayList<>(issues));
   }
 
-  protected final PreciseIssue addIssue(AstNode node, String message) {
+  protected final PreciseIssue addIssue(AstNode node, @Nullable String message) {
     PreciseIssue newIssue = new PreciseIssue(IssueLocation.preciseLocation(node, message));
     issues.add(newIssue);
     return newIssue;
