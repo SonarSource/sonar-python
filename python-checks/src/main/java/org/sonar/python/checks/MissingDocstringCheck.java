@@ -68,9 +68,7 @@ public class MissingDocstringCheck extends PythonCheck {
   }
 
   private static DeclarationType getType(AstNode node) {
-    if (node.is(PythonGrammar.FILE_INPUT)) {
-      return DeclarationType.MODULE;
-    } else if (node.is(PythonGrammar.FUNCDEF)) {
+    if (node.is(PythonGrammar.FUNCDEF)) {
       if (CheckUtils.isMethodDefinition(node)) {
         return DeclarationType.METHOD;
       } else {
@@ -78,8 +76,10 @@ public class MissingDocstringCheck extends PythonCheck {
       }
     } else if (node.is(PythonGrammar.CLASSDEF)) {
       return DeclarationType.CLASS;
+    } else {
+      // node is PythonGrammar.FILE_INPUT
+      return DeclarationType.MODULE;
     }
-    return null;
   }
 
   private void raiseIssueNoDocstring(AstNode astNode, DeclarationType type) {

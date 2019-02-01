@@ -48,7 +48,7 @@ public abstract class IssueLocation {
     return new PreciseIssueLocation(startNode, endNode, message);
   }
 
-  public static IssueLocation preciseLocation(AstNode startNode, String message) {
+  public static IssueLocation preciseLocation(AstNode startNode, @Nullable String message) {
     return new PreciseIssueLocation(startNode, message);
   }
 
@@ -70,7 +70,7 @@ public abstract class IssueLocation {
     private final Token firstToken;
     private final TokenLocation lastTokenLocation;
 
-    public PreciseIssueLocation(AstNode node, String message) {
+    public PreciseIssueLocation(AstNode node, @Nullable String message) {
       super(message);
       this.firstToken = node.getToken();
       this.lastTokenLocation = new TokenLocation(node.getLastToken());
