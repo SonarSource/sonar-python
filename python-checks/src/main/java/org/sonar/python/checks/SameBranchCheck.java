@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -32,21 +31,25 @@ import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.ast.AstSelect;
-
-import static org.sonar.python.api.PythonGrammar.STMT_LIST;
 
 @Rule(key = SameBranchCheck.CHECK_KEY)
 public class SameBranchCheck extends PythonCheck {
   public static final String CHECK_KEY = "S1871";
   public static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
 
+  private static final int CONDITIONAL_EXPRESSION_SIZE = 5;
+  private static final int CONDITIONAL_EXPRESSION_TRUE_BRANCH = 0;
+  private static final int CONDITIONAL_EXPRESSION_IF = 1;
+  private static final int CONDITIONAL_EXPRESSION_FALSE_BRANCH = 4;
+
   private List<AstNode> ignoreList;
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.IF_STMT);
+    return immutableSet(PythonGrammar.IF_STMT, PythonGrammar.TEST);
   }
 
   @Override
@@ -59,11 +62,36 @@ public class SameBranchCheck extends PythonCheck {
     if (ignoreList.contains(node)) {
       return;
     }
-    List<AstNode> branches = getBranchesToCompare(node);
+    List<AstNode> branches = node.is(PythonGrammar.IF_STMT) ? getIfBranches(node) : getConditionalExpressionBranches(node);
     findSameBranches(branches);
   }
 
-  private List<AstNode> getBranchesToCompare(AstNode ifStmt) {
+  private List<AstNode> getConditionalExpressionBranches(AstNode node) {
+    List<AstNode> branches = new ArrayList<>();
+    appendConditionalExpressionBranches(branches, node);
+    return branches;
+  }
+
+  private void appendConditionalExpressionBranches(List<AstNode> branches, AstNode node) {
+    if (node.is(PythonGrammar.TEST)) {
+      ignoreList.add(node);
+      List<AstNode> children = node.getChildren();
+      if (children.size() == 1) {
+        appendConditionalExpressionBranches(branches, children.get(0));
+      } else if (children.size() == CONDITIONAL_EXPRESSION_SIZE && children.get(CONDITIONAL_EXPRESSION_IF).is(PythonKeyword.IF)) {
+        appendConditionalExpressionBranches(branches, children.get(CONDITIONAL_EXPRESSION_TRUE_BRANCH));
+        appendConditionalExpressionBranches(branches, children.get(CONDITIONAL_EXPRESSION_FALSE_BRANCH));
+      }
+    } else if (node.is(PythonGrammar.ATOM) && node.getNumberOfChildren() == 3 && node.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
+      appendConditionalExpressionBranches(branches, node.getChildren().get(1));
+    } else if (node.is(PythonGrammar.TESTLIST_COMP) && node.getNumberOfChildren() == 1) {
+      appendConditionalExpressionBranches(branches, node.getFirstChild());
+    } else {
+      branches.add(node);
+    }
+  }
+
+  private List<AstNode> getIfBranches(AstNode ifStmt) {
     List<AstNode> branches = ifStmt.getChildren(PythonGrammar.SUITE);
     AstNode elseNode = ifStmt.getFirstChild(PythonKeyword.ELSE);
     if (branches.size() == 2 && elseNode != null) {
@@ -77,7 +105,7 @@ public class SameBranchCheck extends PythonCheck {
     AstNode singleIfChild = singleIfChild(suite);
     if (singleIfChild != null) {
       ignoreList.add(singleIfChild);
-      branches.addAll(getBranchesToCompare(singleIfChild));
+      branches.addAll(getIfBranches(singleIfChild));
     }
   }
 
@@ -97,7 +125,8 @@ public class SameBranchCheck extends PythonCheck {
         equivalentBlocks.add(originalBlock);
         boolean isLastComparisonInBranches = j == branches.size() - 2;
         if (!isOnASingleLine || isLastComparisonInBranches) {
-          String message = String.format(MESSAGE, originalBlock.getToken().getLine() + 1);
+          int line = originalBlock.getTokenLine() + (originalBlock.is(PythonGrammar.SUITE) ? 1 : 0);
+          String message = String.format(MESSAGE, line);
           PreciseIssue issue = addIssue(location(duplicateBlock, message));
           equivalentBlocks.forEach(original -> issue.secondary(location(original, "Original")));
           return;
@@ -108,12 +137,12 @@ public class SameBranchCheck extends PythonCheck {
     }
   }
 
-  private static IssueLocation location(AstNode suiteNode, String message) {
-    AstNode firstStatement = suiteNode.getFirstChild(PythonGrammar.STATEMENT);
+  private static IssueLocation location(AstNode node, String message) {
+    AstNode firstStatement = node.getFirstChild(PythonGrammar.STATEMENT);
     if (firstStatement != null) {
-      return IssueLocation.preciseLocation(firstStatement, getLastNode(suiteNode), message);
+      return IssueLocation.preciseLocation(firstStatement, getLastNode(node), message);
     } else {
-      return IssueLocation.preciseLocation(suiteNode.getFirstChild(STMT_LIST), message);
+      return IssueLocation.preciseLocation(node, message);
     }
   }
 
