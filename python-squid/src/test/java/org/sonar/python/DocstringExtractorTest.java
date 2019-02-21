@@ -45,7 +45,7 @@ public class DocstringExtractorTest {
     File file = new File(BASE_DIR, "docstring.py");
     TestPythonVisitorRunner.scanFile(file, new DocstringVisitor());
 
-    assertDocstring(PythonGrammar.FILE_INPUT, 1, String.format("%s%nThis is a module docstring%n%s", TRIPLE_QUOTES, TRIPLE_QUOTES));
+    assertDocstring(PythonGrammar.FILE_INPUT, 1, String.format("%s\nThis is a module docstring\n%s", TRIPLE_QUOTES, TRIPLE_QUOTES));
     assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES);
     assertDocstring(PythonGrammar.FUNCDEF, 12, TRIPLE_QUOTES + " " + TRIPLE_QUOTES);
     assertDocstring(PythonGrammar.FUNCDEF, 16, "\"This is a function docstring\"");
