@@ -1,3 +1,8 @@
+from myModuleName import f
+import myModuleName
+import original as alias
+
+
 a = 1
 a = 2
 b = 1
@@ -71,3 +76,9 @@ def function_with_loops():
         do_something(j)
     for a, b in mylist:
         do_something(a)
+
+def module_name(params):
+    myModuleName.run(params)
+    myModuleName.eval(params)
+    f(params)
+    alias.foo()

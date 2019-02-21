@@ -40,6 +40,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
   private Map<AstNode, Scope> scopesByRootTree;
   private Set<AstNode> allReadUsages;
+  private Map<String, Module> importedModules = new HashMap<>();
 
   public SymbolTable symbolTable() {
     return new SymbolTablImpl(scopesByRootTree);
@@ -105,6 +106,8 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       set.add(PythonGrammar.EXPRESSION_STMT);
       set.add(PythonGrammar.GLOBAL_STMT);
       set.add(PythonGrammar.NONLOCAL_STMT);
+      set.add(PythonGrammar.IMPORT_STMT);
+      set.add(PythonGrammar.CALL_EXPR);
       return Collections.unmodifiableSet(set);
     }
 
@@ -142,6 +145,60 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
       } else if (node.is(PythonGrammar.NONLOCAL_STMT)) {
         node.getChildren(PythonGrammar.NAME).forEach(name -> currentScope().addNonlocalName(name.getTokenValue()));
+
+      } else if (node.is(PythonGrammar.IMPORT_STMT)) {
+        visitImportStatement(node);
+
+      } else if(node.is(PythonGrammar.CALL_EXPR)) {
+        /* Given `myModuleName.f()` node, it adds `myModuleName.f` to the symbol table
+           and resolves its name */
+        AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
+        if (attributeRef != null) {
+          String namespace = attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue();
+          Module module = importedModules.get(namespace);
+          if (module != null) {
+            String functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
+            currentScope().rootScope().addWriteUsage(attributeRef, namespace + "." + functionName, module.name);
+          }
+        }
+      }
+    }
+
+    /**
+     * Adds imported symbols to the symbol table.
+     * Keeps track of imported modules and eventually of their aliases.
+     *
+     * ex: `import myModule` => add myModule to the symbol table
+     * ex: `import myModule as foo` => add foo to the symbol table
+     * ex: `from myModule import f => add f to the symbol table` with "myModule" as moduleName
+     */
+    private void visitImportStatement(AstNode importNode) {
+      /* example: import myModule as foo */
+      AstNode node = importNode.getFirstChild();
+      if (node.is(PythonGrammar.IMPORT_NAME)) {
+          node.getDescendants(PythonGrammar.DOTTED_AS_NAME).forEach(dottedAsName ->
+            addImportedSymbols(
+              dottedAsName.getFirstChild(PythonGrammar.DOTTED_NAME),
+              dottedAsName.getFirstChild(PythonGrammar.NAME)));
+
+        /* example: from myModule import f */
+      } else if(node.is(PythonGrammar.IMPORT_FROM)) {
+        String moduleName = node.getFirstChild(PythonGrammar.DOTTED_NAME).getTokenValue();
+        node.getDescendants(PythonGrammar.IMPORT_AS_NAME).forEach(
+          importAsName -> currentScope().addWriteUsage(importAsName.getFirstChild(PythonGrammar.NAME), moduleName));
+      }
+    }
+
+    private void addImportedSymbols(AstNode moduleNameNode, @Nullable AstNode aliasNode) {
+      Module module = new Module();
+      module.name = moduleNameNode.getTokenValue();
+      if (aliasNode != null) {
+        currentScope().addWriteUsage(aliasNode);
+        module.alias = aliasNode.getTokenValue();
+        importedModules.put(module.alias, module);
+      } else {
+        currentScope().addWriteUsage(moduleNameNode);
+        importedModules.put(module.name, module);
       }
     }
 
@@ -246,7 +303,14 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     public void addWriteUsage(AstNode nameNode) {
-      String symbolName = nameNode.getTokenValue();
+      addWriteUsage(nameNode, nameNode.getTokenValue(), null);
+    }
+
+    public void addWriteUsage(AstNode nameNode, @Nullable String moduleName) {
+     addWriteUsage(nameNode, nameNode.getTokenValue(), moduleName);
+    }
+
+    public void addWriteUsage(AstNode nameNode, String symbolName, @Nullable String moduleName) {
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
         SymbolImpl symbol = new SymbolImpl(symbolName, rootTree);
         symbols.add(symbol);
@@ -254,6 +318,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       }
       SymbolImpl symbol = resolve(symbolName);
       if (symbol != null) {
+        if (moduleName != null) {
+          symbol.moduleName = moduleName;
+        }
         symbol.addWriteUsage(nameNode);
       }
     }
@@ -305,6 +372,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
   private static class SymbolImpl implements Symbol {
 
     private final String name;
+    private String moduleName;
     private final AstNode scopeRootTree;
     private final Set<AstNode> writeUsages = new HashSet<>();
     private final Set<AstNode> readUsages = new HashSet<>();
@@ -312,6 +380,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     private SymbolImpl(String name, AstNode scopeRootTree) {
       this.name = name;
       this.scopeRootTree = scopeRootTree;
+      this.moduleName = null;
     }
 
     @Override
@@ -332,6 +401,11 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     @Override
     public Set<AstNode> readUsages() {
       return Collections.unmodifiableSet(readUsages);
+    }
+
+    @Override
+    public String moduleName() {
+      return moduleName;
     }
 
     public void addWriteUsage(AstNode nameNode) {
@@ -386,5 +460,10 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       enterScope(classTree);
     }
 
+  }
+
+  private class Module {
+    String name;
+    String alias;
   }
 }
