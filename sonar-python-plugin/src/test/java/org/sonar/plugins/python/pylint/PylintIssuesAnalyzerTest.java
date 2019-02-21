@@ -36,14 +36,14 @@ import static org.mockito.Mockito.mock;
 public class PylintIssuesAnalyzerTest {
 
   private static final Logger LOG = Loggers.get(PylintIssuesAnalyzerTest.class);
+  static final String RESOURCE_DIR = "src/test/resources";
 
   @Test
   public void shouldParseCorrectly() {
     String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output.txt";
-    String pathName = getClass().getResource(resourceName).getPath();
     String pylintConfigPath = null;
     String pylintPath = null;
-    List<String> lines = readFile(pathName);
+    List<String> lines = readFile(resourceName);
     List<Issue> issues = analyzer(pylintPath, pylintConfigPath).parseOutput(lines);
     assertThat(issues.size()).isEqualTo(21);
   }
@@ -51,10 +51,9 @@ public class PylintIssuesAnalyzerTest {
   @Test
   public void shouldParseCorrectlyNewFormat() {
     String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output_new_format.txt";
-    String pathName = getClass().getResource(resourceName).getPath();
     String pylintConfigPath = null;
     String pylintPath = null;
-    List<String> lines = readFile(pathName);
+    List<String> lines = readFile(resourceName);
     List<Issue> issues = analyzer(pylintPath, pylintConfigPath).parseOutput(lines);
     assertThat(issues.size()).isEqualTo(1);
     assertThat(issues.get(0).getRuleId()).isEqualTo("C0111");
@@ -63,10 +62,9 @@ public class PylintIssuesAnalyzerTest {
   @Test
   public void shouldParseCorrectlyOutputWithWindowsPaths() {
     String resourceName = "/org/sonar/plugins/python/pylint/sample_pylint_output_with_win_paths.txt";
-    String pathName = getClass().getResource(resourceName).getPath();
     String pylintConfigPath = null;
     String pylintPath = null;
-    List<String> lines = readFile(pathName);
+    List<String> lines = readFile(resourceName);
     List<Issue> issues = analyzer(pylintPath, pylintConfigPath).parseOutput(lines);
     assertThat(issues.size()).isEqualTo(1);
   }
@@ -75,12 +73,10 @@ public class PylintIssuesAnalyzerTest {
   public void shouldMapIssuesIdsCorrectly() {
     String resourceOld = "/org/sonar/plugins/python/pylint/sample_pylint_output_oldids.txt";
     String resourceNew = "/org/sonar/plugins/python/pylint/sample_pylint_output_newids.txt";
-    String pathNameOld = getClass().getResource(resourceOld).getPath();
-    String pathNameNew = getClass().getResource(resourceNew).getPath();
     String pylintConfigPath = null;
     String pylintPath = null;
-    List<String> linesOld = readFile(pathNameOld);
-    List<String> linesNew = readFile(pathNameNew);
+    List<String> linesOld = readFile(resourceOld);
+    List<String> linesNew = readFile(resourceNew);
     List<Issue> issuesOld = analyzer(pylintPath, pylintConfigPath).parseOutput(linesOld);
     List<Issue> issuesNew = analyzer(pylintPath, pylintConfigPath).parseOutput(linesNew);
     assertThat(getIds(issuesOld)).isEqualTo(getIds(issuesNew));
@@ -151,7 +147,7 @@ public class PylintIssuesAnalyzerTest {
 
   private static List<String> readFile(String path) {
     try {
-      return Files.readAllLines(Paths.get(path), UTF_8);
+      return Files.readAllLines(Paths.get(RESOURCE_DIR, path), UTF_8);
     } catch (IOException e) {
       LOG.error("Cannot read the file '{}'", path);
       return Collections.emptyList();

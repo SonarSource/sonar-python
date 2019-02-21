@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.plugins.python.pylint.PylintIssuesAnalyzerTest.RESOURCE_DIR;
 
 public class PylintIssuesAnalyzerIT {
 
@@ -36,14 +37,13 @@ public class PylintIssuesAnalyzerIT {
 
   @Test
   public void issuesTest() throws Exception {
-    String pylintrcResource = "/org/sonar/plugins/python/pylint/pylintrc_sample";
+    String pylintrcResource = RESOURCE_DIR + "/org/sonar/plugins/python/pylint/pylintrc_sample";
     String codeChunksResource = "/org/sonar/plugins/python/code_chunks_2.py";
-    String pylintConfigPath = getClass().getResource(pylintrcResource).getPath();
     String codeChunksPathName = getClass().getResource(codeChunksResource).getPath();
     String pylintPath = null;
     File out = tempFolder.newFile();
 
-    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintConfigPath).analyze(codeChunksPathName, StandardCharsets.UTF_8, out);
+    List<Issue> issues = new PylintIssuesAnalyzer(pylintPath, pylintrcResource).analyze(codeChunksPathName, StandardCharsets.UTF_8, out);
     assertThat(issues).isNotEmpty();
   }
 
