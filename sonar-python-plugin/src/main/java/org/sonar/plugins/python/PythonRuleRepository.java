@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.RuleMetadataLoader;
@@ -33,9 +34,14 @@ public class PythonRuleRepository implements RulesDefinition {
 
   private static final String REPOSITORY_NAME = "SonarAnalyzer";
 
-  private static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
+  static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
 
   private static final Set<String> TEMPLATE_RULE_KEYS = new HashSet<>(Arrays.asList("XPath", "CommentRegularExpression"));
+  private final SonarRuntime sonarRuntime;
+
+  public PythonRuleRepository(SonarRuntime sonarRuntime) {
+    this.sonarRuntime = sonarRuntime;
+  }
 
   @Override
   public void define(Context context) {
@@ -43,17 +49,14 @@ public class PythonRuleRepository implements RulesDefinition {
       .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
       .setName(REPOSITORY_NAME);
 
-    getRuleMetadataLoader().addRulesByAnnotatedClass(repository, getCheckClasses());
+    RuleMetadataLoader loader = new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION, sonarRuntime);
+    loader.addRulesByAnnotatedClass(repository, getCheckClasses());
 
     repository.rules().stream()
       .filter(rule -> TEMPLATE_RULE_KEYS.contains(rule.key()))
       .forEach(rule -> rule.setTemplate(true));
 
     repository.done();
-  }
-
-  private static RuleMetadataLoader getRuleMetadataLoader() {
-    return new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION);
   }
 
   private static List<Class> getCheckClasses() {

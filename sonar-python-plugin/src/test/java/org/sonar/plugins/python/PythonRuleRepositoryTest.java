@@ -20,8 +20,9 @@
 package org.sonar.plugins.python;
 
 import java.util.List;
-import javax.annotation.CheckForNull;
 import org.junit.Test;
+import org.sonar.api.SonarRuntime;
+import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.python.checks.CheckList;
 
@@ -76,9 +77,26 @@ public class PythonRuleRepositoryTest {
     assertThat(templateCount).isEqualTo(2);
   }
 
-  @CheckForNull
+  @Test
+  public void hotspotRules() {
+    RulesDefinition.Repository repository = buildRepository();
+    RulesDefinition.Rule hardcodedIp = repository.rule("S1313");
+    assertThat(hardcodedIp.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
+  }
+
+  @Test
+  public void hotspotRulesNotSupported() {
+    RulesDefinition.Repository repository = buildRepository(TestUtils.SONAR_RUNTIME_67);
+    RulesDefinition.Rule hardcodedIp = repository.rule("S1313");
+    assertThat(hardcodedIp.type()).isEqualTo(RuleType.VULNERABILITY);
+  }
+
   private static RulesDefinition.Repository buildRepository() {
-    PythonRuleRepository ruleRepository = new PythonRuleRepository();
+    return buildRepository(TestUtils.SONAR_RUNTIME_72);
+  }
+
+  private static RulesDefinition.Repository buildRepository(SonarRuntime sonarRuntime) {
+    PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
     return context.repository(CheckList.REPOSITORY_KEY);
