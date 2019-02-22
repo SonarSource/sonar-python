@@ -69,6 +69,10 @@ public enum PythonGrammar implements GrammarRuleKey {
 
   ATOM,
 
+  CALL_EXPR,
+  ATTRIBUTE_REF,
+  SUBSCRIPTION_OR_SLICING,
+
   POWER,
 
   A_EXPR,
@@ -201,9 +205,14 @@ public enum PythonGrammar implements GrammarRuleKey {
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),
       POWER)).skipIfOneChild();
     b.rule(POWER).is(b.firstOf(
-      b.sequence(b.optional("await"), ATOM, b.zeroOrMore(TRAILER), b.optional("**", FACTOR)),
+      b.sequence(b.optional("await"), b.firstOf(CALL_EXPR, ATOM), b.zeroOrMore(TRAILER), b.optional("**", FACTOR)),
       // matches "await" identifier
       ATOM)).skipIfOneChild();
+
+    b.rule(CALL_EXPR).is(b.firstOf(SUBSCRIPTION_OR_SLICING, ATTRIBUTE_REF, ATOM), "(", b.optional(ARGLIST), ")");
+    b.rule(SUBSCRIPTION_OR_SLICING).is(ATOM, "[", SUBSCRIPT, "]");
+    b.rule(ATTRIBUTE_REF).is(ATOM, ".", NAME);
+
     b.rule(ATOM).is(b.firstOf(
         b.sequence("(", b.optional(b.firstOf(YIELD_EXPR, TESTLIST_COMP)), ")"),
         b.sequence("[", b.optional(TESTLIST_COMP), "]"),

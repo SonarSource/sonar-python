@@ -19,12 +19,14 @@
  */
 package org.sonar.python.parser.expressions;
 
+import com.sonar.sslr.api.AstNode;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExpressionTest extends RuleTest {
 
@@ -62,4 +64,20 @@ public class ExpressionTest extends RuleTest {
     assertThat(p).matches("[x**2 for x in 1, 2, 3]");
   }
 
+  @Test
+  public void call_expression() {
+    assertCallExpression("func()");
+    assertCallExpression("func(1,2)");
+    assertCallExpression("func(*1,2)");
+    assertCallExpression("func(1,**2)");
+    assertCallExpression("func(value, parameter = value)");
+    assertCallExpression("a.func(value)");
+    assertCallExpression("a.b(value)");
+    assertCallExpression("a[2](value)");
+  }
+
+  private void assertCallExpression(String sourceCode) {
+    AstNode node = p.parse(sourceCode);
+    assertThat(node.getFirstChild(PythonGrammar.CALL_EXPR)).isNotNull();
+  }
 }
