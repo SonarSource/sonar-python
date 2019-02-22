@@ -74,6 +74,9 @@ public class ExpressionTest extends RuleTest {
     assertCallExpression("a.func(value)");
     assertCallExpression("a.b(value)");
     assertCallExpression("a[2](value)");
+
+    AstNode powerNode = p.parse("f()**g()").getFirstChild(PythonGrammar.POWER);
+    assertThat(powerNode).isNotNull();
   }
 
   private void assertCallExpression(String sourceCode) {
