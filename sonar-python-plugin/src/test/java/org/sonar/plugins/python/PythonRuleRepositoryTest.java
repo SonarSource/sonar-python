@@ -40,7 +40,7 @@ public class PythonRuleRepositoryTest {
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(54);
+    assertThat(rules).hasSize(55);
 
     RulesDefinition.Rule s1578 = repository.rule("S1578");
     assertThat(s1578).isNotNull();

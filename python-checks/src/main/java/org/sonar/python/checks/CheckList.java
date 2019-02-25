@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.sonar.python.PythonCheck;
+import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 
 public final class CheckList {
 
@@ -70,6 +71,7 @@ public final class CheckList {
       ParsingErrorCheck.class,
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
+      ProcessSignallingCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
       SameBranchCheck.class,

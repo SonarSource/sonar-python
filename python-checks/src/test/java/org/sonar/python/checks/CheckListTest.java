@@ -58,7 +58,7 @@ public class CheckListTest {
   @Test
   public void count() {
     int count = 0;
-    List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[] {"java"}, false);
+    List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[] {"java"}, true);
     for (File file : files) {
       if (file.getName().endsWith("Check.java") && !file.getName().startsWith("Abstract")) {
         count++;
