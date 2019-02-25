@@ -29,7 +29,6 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)
 public class SelfAssignmentCheck extends PythonCheck {
@@ -95,10 +94,7 @@ public class SelfAssignmentCheck extends PythonCheck {
   }
 
   private boolean isException(AstNode expressionStatement, AstNode assigned) {
-    AstSelect potentialFunctionCalls = assigned.select()
-      .descendants(PythonGrammar.TRAILER)
-      .children(PythonPunctuator.LPARENTHESIS);
-    if (!potentialFunctionCalls.isEmpty()) {
+    if (!expressionStatement.getDescendants(PythonGrammar.CALL_EXPR).isEmpty()) {
       return true;
     }
 
