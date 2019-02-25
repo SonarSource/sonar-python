@@ -149,25 +149,38 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       } else if (node.is(PythonGrammar.IMPORT_STMT)) {
         visitImportStatement(node);
 
-      } else if(node.is(PythonGrammar.CALL_EXPR)) {
-        /* Given `myModuleName.f()` node, it adds `myModuleName.f` to the symbol table
-           and resolves its name */
+      } else if (node.is(PythonGrammar.CALL_EXPR)) {
         AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
         if (attributeRef != null) {
-          String namespace = attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue();
-          Module module = importedModules.get(namespace);
-          if (module != null) {
-            String functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
-            currentScope().rootScope().addWriteUsage(attributeRef, namespace + "." + functionName, module.name);
-          }
+          addSymbolFromImportedModule(attributeRef);
         }
+      }
+    }
+
+    /**
+     * Given `myModuleName.f()` node, it adds `myModuleName.f` to the symbol table
+     * and resolves its name.
+     * This is used by rules to easily retrieve the module name of a function
+     */
+    private void addSymbolFromImportedModule(AstNode attributeRef) {
+      String namespace = attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue();
+      Module module = importedModules.get(namespace);
+      if (module != null) {
+        String functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
+        String symbolName = namespace + "." + functionName;
+        SymbolImpl symbol = new SymbolImpl(symbolName, module.scope.rootTree);
+        symbol.moduleName = module.name;
+        symbol.addWriteUsage(attributeRef);
+        symbol.addReadUsage(attributeRef);
+        module.scope.symbols.add(symbol);
+        module.scope.symbolsByName.put(symbolName, symbol);
       }
     }
 
     /**
      * Adds imported symbols to the symbol table.
      * Keeps track of imported modules and eventually of their aliases.
-     *
+     * <p>
      * ex: `import myModule` => add myModule to the symbol table
      * ex: `import myModule as foo` => add foo to the symbol table
      * ex: `from myModule import f => add f to the symbol table` with "myModule" as moduleName
@@ -176,22 +189,31 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       /* example: import myModule as foo */
       AstNode node = importNode.getFirstChild();
       if (node.is(PythonGrammar.IMPORT_NAME)) {
-          node.getDescendants(PythonGrammar.DOTTED_AS_NAME).forEach(dottedAsName ->
-            addImportedSymbols(
-              dottedAsName.getFirstChild(PythonGrammar.DOTTED_NAME),
-              dottedAsName.getFirstChild(PythonGrammar.NAME)));
+        node.getDescendants(PythonGrammar.DOTTED_AS_NAME).forEach(dottedAsName ->
+          addImportedSymbols(
+            dottedAsName.getFirstChild(PythonGrammar.DOTTED_NAME),
+            dottedAsName.getFirstChild(PythonGrammar.NAME)));
 
         /* example: from myModule import f */
-      } else if(node.is(PythonGrammar.IMPORT_FROM)) {
-        String moduleName = node.getFirstChild(PythonGrammar.DOTTED_NAME).getTokenValue();
-        node.getDescendants(PythonGrammar.IMPORT_AS_NAME).forEach(
-          importAsName -> currentScope().addWriteUsage(importAsName.getFirstChild(PythonGrammar.NAME), moduleName));
+      } else if (node.is(PythonGrammar.IMPORT_FROM)) {
+        AstNode dottedName = node.getFirstChild(PythonGrammar.DOTTED_NAME);
+        if (dottedName != null) {
+          String moduleName = dottedName.getTokenValue();
+          node.getDescendants(PythonGrammar.IMPORT_AS_NAME).forEach(
+            importAsName -> {
+              // ignore import that contains aliases
+              if (importAsName.getChildren(PythonGrammar.NAME).size() == 1) {
+                currentScope().addWriteUsage(importAsName.getFirstChild(PythonGrammar.NAME), moduleName);
+              }
+            });
+        }
       }
     }
 
     private void addImportedSymbols(AstNode moduleNameNode, @Nullable AstNode aliasNode) {
       Module module = new Module();
       module.name = moduleNameNode.getTokenValue();
+      module.scope = currentScope();
       if (aliasNode != null) {
         currentScope().addWriteUsage(aliasNode);
         module.alias = aliasNode.getTokenValue();
@@ -303,14 +325,11 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     public void addWriteUsage(AstNode nameNode) {
-      addWriteUsage(nameNode, nameNode.getTokenValue(), null);
+      addWriteUsage(nameNode, null);
     }
 
     public void addWriteUsage(AstNode nameNode, @Nullable String moduleName) {
-     addWriteUsage(nameNode, nameNode.getTokenValue(), moduleName);
-    }
-
-    public void addWriteUsage(AstNode nameNode, String symbolName, @Nullable String moduleName) {
+      String symbolName = nameNode.getTokenValue();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
         SymbolImpl symbol = new SymbolImpl(symbolName, rootTree);
         symbols.add(symbol);
@@ -465,5 +484,6 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
   private class Module {
     String name;
     String alias;
+    Scope scope;
   }
 }
