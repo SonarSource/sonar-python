@@ -19,19 +19,27 @@
  */
 package org.sonar.plugins.python;
 
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
+import static org.sonar.plugins.python.PythonRuleRepository.RESOURCE_FOLDER;
+
 public class PythonProfile implements BuiltInQualityProfilesDefinition {
 
   static final String PROFILE_NAME = "Sonar way";
-  static final String PROFILE_LOCATION = "org/sonar/l10n/py/rules/python/Sonar_way_profile.json";
+  static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
+  private final SonarRuntime sonarRuntime;
+
+  public PythonProfile(SonarRuntime sonarRuntime) {
+    this.sonarRuntime = sonarRuntime;
+  }
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, Python.KEY);
-    BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION);
+    BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION, RESOURCE_FOLDER, sonarRuntime);
     profile.done();
   }
 
