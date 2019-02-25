@@ -481,7 +481,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
   }
 
-  private class Module {
+  private static class Module {
     String name;
     String alias;
     Scope scope;

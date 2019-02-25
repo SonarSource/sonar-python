@@ -198,12 +198,13 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void module_name() {
     Map<String, Symbol> symbolByName = symbolTable.symbols(rootTree).stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
-    assertThat(symbolByName.get("myModuleName").writeUsages()).hasSize(1);
+    String myModuleName = "myModuleName";
+    assertThat(symbolByName.get(myModuleName).writeUsages()).hasSize(1);
     assertThat(symbolByName.get("original")).isNull();
     assertThat(symbolByName.get("alias").writeUsages()).hasSize(1);
-    assertThat(symbolByName.get("f").moduleName()).isEqualTo("myModuleName");
-    assertThat(symbolByName.get("myModuleName.run").moduleName()).isEqualTo("myModuleName");
-    assertThat(symbolByName.get("myModuleName.eval").moduleName()).isEqualTo("myModuleName");
+    assertThat(symbolByName.get("f").moduleName()).isEqualTo(myModuleName);
+    assertThat(symbolByName.get("myModuleName.run").moduleName()).isEqualTo(myModuleName);
+    assertThat(symbolByName.get("myModuleName.eval").moduleName()).isEqualTo(myModuleName);
     assertThat(symbolByName.get("alias.foo").moduleName()).isEqualTo("original");
   }
 
