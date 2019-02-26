@@ -168,8 +168,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       if (module != null) {
         String functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
         String symbolName = namespace + "." + functionName;
-        SymbolImpl symbol = new SymbolImpl(symbolName, module.scope.rootTree);
-        symbol.moduleName = module.name;
+        SymbolImpl symbol = new SymbolImpl(symbolName, module.scope.rootTree, module.name);
         symbol.addWriteUsage(attributeRef);
         symbol.addReadUsage(attributeRef);
         module.scope.symbols.add(symbol);
@@ -211,16 +210,14 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     private void addImportedSymbols(AstNode moduleNameNode, @Nullable AstNode aliasNode) {
-      Module module = new Module();
-      module.name = moduleNameNode.getTokenValue();
-      module.scope = currentScope();
+      String moduleName = moduleNameNode.getTokenValue();
       if (aliasNode != null) {
         currentScope().addWriteUsage(aliasNode);
-        module.alias = aliasNode.getTokenValue();
-        importedModules.put(module.alias, module);
+        String alias = aliasNode.getTokenValue();
+        importedModules.put(alias, new Module(moduleName, currentScope(), alias));
       } else {
         currentScope().addWriteUsage(moduleNameNode);
-        importedModules.put(module.name, module);
+        importedModules.put(moduleName, new Module(moduleName, currentScope(), null));
       }
     }
 
@@ -331,15 +328,12 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     public void addWriteUsage(AstNode nameNode, @Nullable String moduleName) {
       String symbolName = nameNode.getTokenValue();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
-        SymbolImpl symbol = new SymbolImpl(symbolName, rootTree);
+        SymbolImpl symbol = new SymbolImpl(symbolName, rootTree, moduleName);
         symbols.add(symbol);
         symbolsByName.put(symbolName, symbol);
       }
       SymbolImpl symbol = resolve(symbolName);
       if (symbol != null) {
-        if (moduleName != null) {
-          symbol.moduleName = moduleName;
-        }
         symbol.addWriteUsage(nameNode);
       }
     }
@@ -391,15 +385,15 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
   private static class SymbolImpl implements Symbol {
 
     private final String name;
-    private String moduleName;
+    private final String moduleName;
     private final AstNode scopeRootTree;
     private final Set<AstNode> writeUsages = new HashSet<>();
     private final Set<AstNode> readUsages = new HashSet<>();
 
-    private SymbolImpl(String name, AstNode scopeRootTree) {
+    private SymbolImpl(String name, AstNode scopeRootTree, @Nullable String moduleName) {
       this.name = name;
       this.scopeRootTree = scopeRootTree;
-      this.moduleName = null;
+      this.moduleName = moduleName;
     }
 
     @Override
@@ -482,8 +476,14 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
   }
 
   private static class Module {
-    String name;
-    String alias;
-    Scope scope;
+    final String name;
+    final String alias;
+    final Scope scope;
+
+    Module(String name, Scope scope, @Nullable String alias) {
+      this.name = name;
+      this.alias = alias;
+      this.scope = scope;
+    }
   }
 }
