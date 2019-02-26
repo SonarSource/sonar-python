@@ -57,7 +57,8 @@ public class SymbolTableBuilderVisitorTest {
 
   @Test
   public void module_variable() {
-    assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name).containsOnly("a", "b", "t1");
+    assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name)
+      .containsOnly("a", "b", "t1", "f", "myModuleName", "myModuleName.run", "myModuleName.eval", "alias", "alias.foo");
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::scopeTree).containsOnly(rootTree);
   }
 
@@ -88,7 +89,7 @@ public class SymbolTableBuilderVisitorTest {
   public void global_variable_reference() {
     Symbol a = lookup(rootTree, "a");
     AstNode nesting4 = functionTreesByName.get("nesting4");
-    assertThat(a.writeUsages()).extracting(AstNode::getTokenLine).contains(1, nesting4.getTokenLine() + 2);
+    assertThat(a.writeUsages()).extracting(AstNode::getTokenLine).contains(6, nesting4.getTokenLine() + 2);
   }
 
   @Test
@@ -192,6 +193,19 @@ public class SymbolTableBuilderVisitorTest {
 
     assertThat(symbolByName.get("j").writeUsages()).hasSize(1);
     assertThat(symbolByName.get("j").readUsages()).hasSize(1);
+  }
+
+  @Test
+  public void module_name() {
+    Map<String, Symbol> symbolByName = symbolTable.symbols(rootTree).stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    String myModuleName = "myModuleName";
+    assertThat(symbolByName.get(myModuleName).writeUsages()).hasSize(1);
+    assertThat(symbolByName.get("original")).isNull();
+    assertThat(symbolByName.get("alias").writeUsages()).hasSize(1);
+    assertThat(symbolByName.get("f").moduleName()).isEqualTo(myModuleName);
+    assertThat(symbolByName.get("myModuleName.run").moduleName()).isEqualTo(myModuleName);
+    assertThat(symbolByName.get("myModuleName.eval").moduleName()).isEqualTo(myModuleName);
+    assertThat(symbolByName.get("alias.foo").moduleName()).isEqualTo("original");
   }
 
   private Set<Symbol> symbolsInFunction(String functionName) {

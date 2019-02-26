@@ -40,6 +40,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
   private Map<AstNode, Scope> scopesByRootTree;
   private Set<AstNode> allReadUsages;
+  private Map<String, Module> importedModules = new HashMap<>();
 
   public SymbolTable symbolTable() {
     return new SymbolTablImpl(scopesByRootTree);
@@ -105,6 +106,8 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       set.add(PythonGrammar.EXPRESSION_STMT);
       set.add(PythonGrammar.GLOBAL_STMT);
       set.add(PythonGrammar.NONLOCAL_STMT);
+      set.add(PythonGrammar.IMPORT_STMT);
+      set.add(PythonGrammar.CALL_EXPR);
       return Collections.unmodifiableSet(set);
     }
 
@@ -142,6 +145,79 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
       } else if (node.is(PythonGrammar.NONLOCAL_STMT)) {
         node.getChildren(PythonGrammar.NAME).forEach(name -> currentScope().addNonlocalName(name.getTokenValue()));
+
+      } else if (node.is(PythonGrammar.IMPORT_STMT)) {
+        visitImportStatement(node);
+
+      } else if (node.is(PythonGrammar.CALL_EXPR)) {
+        AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
+        if (attributeRef != null) {
+          addSymbolFromImportedModule(attributeRef);
+        }
+      }
+    }
+
+    /**
+     * Given `myModuleName.f()` node, it adds `myModuleName.f` to the symbol table
+     * and resolves its name.
+     * This is used by rules to easily retrieve the module name of a function
+     */
+    private void addSymbolFromImportedModule(AstNode attributeRef) {
+      String namespace = attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue();
+      Module module = importedModules.get(namespace);
+      if (module != null) {
+        String functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
+        String symbolName = namespace + "." + functionName;
+        SymbolImpl symbol = new SymbolImpl(symbolName, module.scope.rootTree, module.name);
+        symbol.addWriteUsage(attributeRef);
+        symbol.addReadUsage(attributeRef);
+        module.scope.symbols.add(symbol);
+        module.scope.symbolsByName.put(symbolName, symbol);
+      }
+    }
+
+    /**
+     * Adds imported symbols to the symbol table.
+     * Keeps track of imported modules and eventually of their aliases.
+     * <p>
+     * ex: `import myModule` => add myModule to the symbol table
+     * ex: `import myModule as foo` => add foo to the symbol table
+     * ex: `from myModule import f => add f to the symbol table` with "myModule" as moduleName
+     */
+    private void visitImportStatement(AstNode importNode) {
+      /* example: import myModule as foo */
+      AstNode node = importNode.getFirstChild();
+      if (node.is(PythonGrammar.IMPORT_NAME)) {
+        node.getDescendants(PythonGrammar.DOTTED_AS_NAME).forEach(dottedAsName ->
+          addImportedSymbols(
+            dottedAsName.getFirstChild(PythonGrammar.DOTTED_NAME),
+            dottedAsName.getFirstChild(PythonGrammar.NAME)));
+
+        /* example: from myModule import f */
+      } else if (node.is(PythonGrammar.IMPORT_FROM)) {
+        AstNode dottedName = node.getFirstChild(PythonGrammar.DOTTED_NAME);
+        if (dottedName != null) {
+          String moduleName = dottedName.getTokenValue();
+          node.getDescendants(PythonGrammar.IMPORT_AS_NAME).forEach(
+            importAsName -> {
+              // ignore import that contains aliases
+              if (importAsName.getChildren(PythonGrammar.NAME).size() == 1) {
+                currentScope().addWriteUsage(importAsName.getFirstChild(PythonGrammar.NAME), moduleName);
+              }
+            });
+        }
+      }
+    }
+
+    private void addImportedSymbols(AstNode moduleNameNode, @Nullable AstNode aliasNode) {
+      String moduleName = moduleNameNode.getTokenValue();
+      if (aliasNode != null) {
+        currentScope().addWriteUsage(aliasNode);
+        String alias = aliasNode.getTokenValue();
+        importedModules.put(alias, new Module(moduleName, currentScope(), alias));
+      } else {
+        currentScope().addWriteUsage(moduleNameNode);
+        importedModules.put(moduleName, new Module(moduleName, currentScope(), null));
       }
     }
 
@@ -246,9 +322,13 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     public void addWriteUsage(AstNode nameNode) {
+      addWriteUsage(nameNode, null);
+    }
+
+    public void addWriteUsage(AstNode nameNode, @Nullable String moduleName) {
       String symbolName = nameNode.getTokenValue();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
-        SymbolImpl symbol = new SymbolImpl(symbolName, rootTree);
+        SymbolImpl symbol = new SymbolImpl(symbolName, rootTree, moduleName);
         symbols.add(symbol);
         symbolsByName.put(symbolName, symbol);
       }
@@ -305,13 +385,15 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
   private static class SymbolImpl implements Symbol {
 
     private final String name;
+    private final String moduleName;
     private final AstNode scopeRootTree;
     private final Set<AstNode> writeUsages = new HashSet<>();
     private final Set<AstNode> readUsages = new HashSet<>();
 
-    private SymbolImpl(String name, AstNode scopeRootTree) {
+    private SymbolImpl(String name, AstNode scopeRootTree, @Nullable String moduleName) {
       this.name = name;
       this.scopeRootTree = scopeRootTree;
+      this.moduleName = moduleName;
     }
 
     @Override
@@ -332,6 +414,11 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     @Override
     public Set<AstNode> readUsages() {
       return Collections.unmodifiableSet(readUsages);
+    }
+
+    @Override
+    public String moduleName() {
+      return moduleName;
     }
 
     public void addWriteUsage(AstNode nameNode) {
@@ -386,5 +473,17 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       enterScope(classTree);
     }
 
+  }
+
+  private static class Module {
+    final String name;
+    final String alias;
+    final Scope scope;
+
+    Module(String name, Scope scope, @Nullable String alias) {
+      this.name = name;
+      this.alias = alias;
+      this.scope = scope;
+    }
   }
 }

@@ -32,5 +32,6 @@ public interface Symbol {
   Set<AstNode> writeUsages();
 
   Set<AstNode> readUsages();
-}
 
+  String moduleName();
+}
