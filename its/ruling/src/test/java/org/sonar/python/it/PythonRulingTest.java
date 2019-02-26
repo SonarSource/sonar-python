@@ -25,8 +25,11 @@ import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Collections;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.sonarsource.analyzer.commons.ProfileGenerator;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,8 +45,17 @@ public class PythonRulingTest {
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar"))
     .addPlugin(MavenLocation.of("org.sonarsource.sonar-lits-plugin", "sonar-lits-plugin", "0.8.0.1209"))
-    .restoreProfileAtStartup(FileLocation.of("src/test/resources/profile.xml"))
     .build();
+
+  @BeforeClass
+  public static void prepare_quality_profile() {
+    ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
+      .add("XPath", "message", "The XPath expression matches this piece of code")
+      .add("CommentRegularExpression", "message", "The regular expression matches this comment");
+    String serverUrl = ORCHESTRATOR.getServer().getUrl();
+    File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
+    ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));
+  }
 
   @Test
   public void test() throws Exception {
