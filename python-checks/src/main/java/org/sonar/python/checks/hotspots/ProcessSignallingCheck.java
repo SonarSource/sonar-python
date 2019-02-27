@@ -26,13 +26,13 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = ProcessSignallingCheck.CHECK_KEY)
 public class ProcessSignallingCheck extends PythonCheck {
   public static final String CHECK_KEY = "S4828";
   private static final String MESSAGE = "Make sure that sending signals is safe here.";
-  private AstNode scopeTree;
-  private Set<String> questionableFunctions = immutableSet("kill", "killpg");
+  private Set<String> questionableFunctions = immutableSet("os.kill", "os.killpg");
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
@@ -40,43 +40,10 @@ public class ProcessSignallingCheck extends PythonCheck {
   }
 
   @Override
-  public void visitFile(AstNode node) {
-    scopeTree = node;
-    super.visitFile(node);
-  }
-
-  @Override
   public void visitNode(AstNode node) {
-    AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
-    String functionName = null;
-    String symbolName = null;
-    if (attributeRef != null) {
-      String namespace = attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue();
-      functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
-      symbolName = namespace + "." + functionName;
-    } else {
-      AstNode functionNameNode = node.getFirstChild(PythonGrammar.ATOM);
-      if (functionNameNode != null) {
-        functionName = functionNameNode.getTokenValue();
-        symbolName = functionName;
-      }
-    }
-    if (functionName != null) {
-      checkModuleName(node, functionName, symbolName);
-    }
-  }
-
-
-  private void checkModuleName(AstNode node, String functionName, String symbolName) {
-    if (questionableFunctions.contains(functionName)) {
-      getContext().symbolTable().symbols(scopeTree).stream()
-        .filter(symbol -> symbol.name().equals(symbolName))
-        .findFirst()
-        .ifPresent(symbol -> {
-          if (symbol.moduleName().equals("os")) {
-            addIssue(node, MESSAGE);
-          }
-        });
+    Symbol symbol = getContext().symbolTable().getSymbol(node);
+    if (symbol != null && questionableFunctions.contains(symbol.qualifiedName())) {
+      addIssue(node, MESSAGE);
     }
   }
 
