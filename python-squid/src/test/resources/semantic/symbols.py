@@ -1,7 +1,6 @@
-from myModuleName import f
 import myModuleName
 import original as alias
-
+from myModuleName import f
 
 a = 1
 a = 2
@@ -82,3 +81,9 @@ def module_name(params):
     myModuleName.eval(params)
     f(params)
     alias.foo()
+
+def calling_same_function_multiple_times(params):
+    myModuleName.bar(params)
+    myModuleName.bar(params)
+    myModuleName.f(params)
+    f(params)

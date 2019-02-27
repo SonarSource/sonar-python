@@ -23,6 +23,7 @@ import com.google.common.base.Functions;
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,7 +59,7 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void module_variable() {
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name)
-      .containsOnly("a", "b", "t1", "f", "myModuleName", "myModuleName.run", "myModuleName.eval", "alias", "alias.foo");
+      .containsOnly("a", "b", "t1", "f", "myModuleName", "myModuleName.run", "myModuleName.eval", "alias", "alias.foo", "myModuleName.f", "myModuleName.bar");
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::scopeTree).containsOnly(rootTree);
   }
 
@@ -202,10 +203,50 @@ public class SymbolTableBuilderVisitorTest {
     assertThat(symbolByName.get(myModuleName).writeUsages()).hasSize(1);
     assertThat(symbolByName.get("original")).isNull();
     assertThat(symbolByName.get("alias").writeUsages()).hasSize(1);
-    assertThat(symbolByName.get("f").moduleName()).isEqualTo(myModuleName);
-    assertThat(symbolByName.get("myModuleName.run").moduleName()).isEqualTo(myModuleName);
-    assertThat(symbolByName.get("myModuleName.eval").moduleName()).isEqualTo(myModuleName);
-    assertThat(symbolByName.get("alias.foo").moduleName()).isEqualTo("original");
+    assertThat(symbolByName.get("f").qualifiedName()).isEqualTo("myModuleName.f");
+    assertThat(symbolByName.get("myModuleName.run").qualifiedName()).isEqualTo("myModuleName.run");
+    assertThat(symbolByName.get("myModuleName.eval").qualifiedName()).isEqualTo("myModuleName.eval");
+    assertThat(symbolByName.get("alias.foo").qualifiedName()).isEqualTo("original.foo");
+  }
+
+  @Test
+  public void symbols_for_callexpr() {
+    List<AstNode> callExpressions = functionTreesByName.get("module_name").getDescendants(PythonGrammar.CALL_EXPR);
+    Symbol run = symbolTable.getSymbol(callExpressions.get(0));
+    assertThat(run.qualifiedName()).isEqualTo("myModuleName.run");
+
+    Symbol eval = symbolTable.getSymbol(callExpressions.get(1));
+    assertThat(eval.qualifiedName()).isEqualTo("myModuleName.eval");
+
+    Symbol f = symbolTable.getSymbol(callExpressions.get(2));
+    assertThat(f.qualifiedName()).isEqualTo("myModuleName.f");
+
+    Symbol alias = symbolTable.getSymbol(callExpressions.get(3));
+    assertThat(alias.qualifiedName()).isEqualTo("original.foo");
+  }
+
+  @Test
+  public void same_function_call() {
+    List<AstNode> callExpressions = functionTreesByName.get("calling_same_function_multiple_times").getDescendants(PythonGrammar.CALL_EXPR);
+    Symbol bar1 = symbolTable.getSymbol(callExpressions.get(0));
+    assertThat(bar1.qualifiedName()).isEqualTo("myModuleName.bar");
+
+    Symbol bar2 = symbolTable.getSymbol(callExpressions.get(1));
+    assertThat(bar2.qualifiedName()).isEqualTo("myModuleName.bar");
+    assertThat(bar1).isEqualTo(bar2);
+
+    assertThat(bar1.readUsages()).hasSize(2);
+    assertThat(bar1.writeUsages()).hasSize(0);
+
+    Symbol f1 = symbolTable.getSymbol(callExpressions.get(2));
+    assertThat(f1.qualifiedName()).isEqualTo("myModuleName.f");
+
+    Symbol f2 = symbolTable.getSymbol(callExpressions.get(3));
+    assertThat(f2.qualifiedName()).isEqualTo("myModuleName.f");
+    assertThat(f2.name()).isEqualTo("f");
+
+    // when we can refer to the same function with and without module prefix, we create two distinct symbols
+    assertThat(f2).isNotEqualTo(f1);
   }
 
   private Set<Symbol> symbolsInFunction(String functionName) {

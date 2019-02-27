@@ -20,11 +20,20 @@
 package org.sonar.python.semantic;
 
 import com.sonar.sslr.api.AstNode;
-
 import java.util.Set;
+import javax.annotation.CheckForNull;
 
 public interface SymbolTable {
 
   Set<Symbol> symbols(AstNode scopeTree);
+
+  /**
+   * Find symbol associated with the node. Works only for ast nodes with type {@link org.sonar.python.api.PythonGrammar#CALL_EXPR}
+   *
+   * @param node of type {@link org.sonar.python.api.PythonGrammar#CALL_EXPR}
+   * @return symbol for the node
+   */
+  @CheckForNull
+  Symbol getSymbol(AstNode node);
 
 }
