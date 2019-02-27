@@ -20,7 +20,6 @@
 package org.sonar.python.semantic;
 
 import com.sonar.sslr.api.AstNode;
-
 import java.util.Set;
 
 public interface Symbol {
@@ -33,5 +32,5 @@ public interface Symbol {
 
   Set<AstNode> readUsages();
 
-  String moduleName();
+  String qualifiedName();
 }
