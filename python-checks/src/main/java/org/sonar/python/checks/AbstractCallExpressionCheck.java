@@ -17,25 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks.hotspots;
+package org.sonar.python.checks;
 
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.Set;
-import org.sonar.check.Rule;
-import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.semantic.Symbol;
 
-@Rule(key = ProcessSignallingCheck.CHECK_KEY)
-public class ProcessSignallingCheck extends AbstractCallExpressionCheck {
-  public static final String CHECK_KEY = "S4828";
-  private static final String MESSAGE = "Make sure that sending signals is safe here.";
-  private static final Set<String> questionableFunctions = immutableSet("os.kill", "os.killpg");
+public abstract class AbstractCallExpressionCheck extends PythonCheck {
+
+  protected abstract Set<String> functionsToCheck();
+
+  protected abstract String message();
 
   @Override
-  protected Set<String> functionsToCheck() {
-    return questionableFunctions;
+  public Set<AstNodeType> subscribedKinds() {
+    return Collections.singleton(PythonGrammar.CALL_EXPR);
   }
 
   @Override
-  protected String message() {
-    return MESSAGE;
+  public void visitNode(AstNode node) {
+    Symbol symbol = getContext().symbolTable().getSymbol(node);
+    if (symbol != null && functionsToCheck().contains(symbol.qualifiedName())) {
+      addIssue(node, message());
+    }
   }
 }

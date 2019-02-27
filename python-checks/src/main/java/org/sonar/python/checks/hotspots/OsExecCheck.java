@@ -19,17 +19,12 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.checks.AbstractCallExpressionCheck;
 
 @Rule(key = OsExecCheck.CHECK_KEY)
-public class OsExecCheck extends PythonCheck {
+public class OsExecCheck extends AbstractCallExpressionCheck {
 
   public static final String CHECK_KEY = "S4721";
   private static final String MESSAGE = "Make sure that executing this OS command is safe here.";
@@ -69,16 +64,12 @@ public class OsExecCheck extends PythonCheck {
   );
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CALL_EXPR);
+  protected Set<String> functionsToCheck() {
+    return questionableFunctions;
   }
 
-
   @Override
-  public void visitNode(AstNode node) {
-    Symbol symbol = getContext().symbolTable().getSymbol(node);
-    if (symbol != null && questionableFunctions.contains(symbol.qualifiedName())) {
-      addIssue(node, MESSAGE);
-    }
+  protected String message() {
+    return MESSAGE;
   }
 }
