@@ -79,8 +79,19 @@ public class ExpressionTest extends RuleTest {
     assertThat(powerNode).isNotNull();
   }
 
+  @Test
+  public void attribute_ref() {
+    assertAttributeRef("a.prop");
+    assertAttributeRef("a.b.prop");
+  }
+
   private void assertCallExpression(String sourceCode) {
     AstNode node = p.parse(sourceCode);
     assertThat(node.getFirstChild(PythonGrammar.CALL_EXPR)).isNotNull();
+  }
+
+  private void assertAttributeRef(String sourceCode) {
+    AstNode node = p.parse(sourceCode);
+    assertThat(node.getFirstChild(PythonGrammar.ATTRIBUTE_REF)).isNotNull();
   }
 }

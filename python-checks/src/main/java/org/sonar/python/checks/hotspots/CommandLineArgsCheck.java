@@ -34,28 +34,23 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.NAME);
+    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.NAME)) {
+    if (node.is(PythonGrammar.ATTRIBUTE_REF)) {
       if (isSysArgvNode(node)) {
-        // highlight `sys.argv`
-        addIssue(node.getParent().getParent(), MESSAGE);
+        addIssue(node, MESSAGE);
       }
     } else {
       super.visitNode(node);
     }
   }
 
-  private static boolean isSysArgvNode(AstNode node) {
-    if (!node.getTokenValue().equals("argv")) {
-      return false;
-    }
-    // `NAME` has always a parent
-    AstNode parent = node.getParent();
-    return parent.is(PythonGrammar.TRAILER) && parent.getParent().getTokenValue().equals("sys");
+  private static boolean isSysArgvNode(AstNode attributeRef) {
+    return attributeRef.getTokenValue().equals("sys") &&
+      attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue().equals("argv");
   }
 
   @Override

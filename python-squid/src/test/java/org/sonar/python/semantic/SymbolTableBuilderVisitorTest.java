@@ -59,7 +59,8 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void module_variable() {
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name)
-      .containsOnly("a", "b", "t1", "f", "myModuleName", "myModuleName.run", "myModuleName.eval", "alias", "alias.foo", "myModuleName.f", "myModuleName.bar");
+      .containsOnly(
+        "a", "b", "t1", "f", "myModuleName", "myModuleName.run", "myModuleName.eval", "alias", "alias.foo", "myModuleName.f", "myModuleName.bar", "p", "myModuleName.prop");
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::scopeTree).containsOnly(rootTree);
   }
 
@@ -247,6 +248,17 @@ public class SymbolTableBuilderVisitorTest {
 
     // when we can refer to the same function with and without module prefix, we create two distinct symbols
     assertThat(f2).isNotEqualTo(f1);
+  }
+
+  @Test
+  public void symbols_for_attribute_ref() {
+    List<AstNode> attributeRefs = functionTreesByName.get("attribute_ref").getDescendants(PythonGrammar.ATTRIBUTE_REF);
+    Symbol prop = symbolTable.getSymbol(attributeRefs.get(0));
+    assertThat(prop.qualifiedName()).isEqualTo("myModuleName.prop");
+
+    List<AstNode> importedProps = functionTreesByName.get("attribute_ref").getDescendants(PythonGrammar.ATOM);
+    Symbol p = symbolTable.getSymbol(importedProps.get(1));
+    assertThat(p.qualifiedName()).isEqualTo("myModuleName.p");
   }
 
   private Set<Symbol> symbolsInFunction(String functionName) {

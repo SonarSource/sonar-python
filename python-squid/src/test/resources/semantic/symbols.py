@@ -1,6 +1,6 @@
 import myModuleName
 import original as alias
-from myModuleName import f
+from myModuleName import f, p
 
 a = 1
 a = 2
@@ -87,3 +87,7 @@ def calling_same_function_multiple_times(params):
     myModuleName.bar(params)
     myModuleName.f(params)
     f(params)
+
+def attribute_ref():
+    myModuleName.prop
+    p
