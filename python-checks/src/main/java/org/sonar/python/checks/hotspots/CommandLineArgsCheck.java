@@ -49,7 +49,7 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
     }
   }
 
-  private boolean isSysArgvNode(AstNode node) {
+  private static boolean isSysArgvNode(AstNode node) {
     if (!node.getTokenValue().equals("argv")) {
       return false;
     }
