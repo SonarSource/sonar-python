@@ -59,7 +59,7 @@ public class SymbolTableBuilderVisitorTest {
   @Test
   public void module_variable() {
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::name)
-      .containsOnly(
+      .contains(
         "a", "b", "t1", "f", "myModuleName", "myModuleName.run", "myModuleName.eval", "alias", "alias.foo", "myModuleName.f", "myModuleName.bar", "p", "myModuleName.prop");
     assertThat(symbolTable.symbols(rootTree)).extracting(Symbol::scopeTree).containsOnly(rootTree);
   }
@@ -224,6 +224,10 @@ public class SymbolTableBuilderVisitorTest {
 
     Symbol alias = symbolTable.getSymbol(callExpressions.get(3));
     assertThat(alias.qualifiedName()).isEqualTo("original.foo");
+
+    List<AstNode> dottedCallExpressions = functionTreesByName.get("dotted_module_name").getDescendants(PythonGrammar.CALL_EXPR);
+    Symbol g = symbolTable.getSymbol(dottedCallExpressions.get(0));
+    assertThat(g.qualifiedName()).isEqualTo("toplevel.myModule.g");
   }
 
   @Test

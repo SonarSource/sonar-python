@@ -1,6 +1,7 @@
 import myModuleName
 import original as alias
 from myModuleName import f, p
+import toplevel.myModule
 
 a = 1
 a = 2
@@ -81,6 +82,9 @@ def module_name(params):
     myModuleName.eval(params)
     f(params)
     alias.foo()
+
+def dotted_module_name(params):
+    toplevel.myModule.g()
 
 def calling_same_function_multiple_times(params):
     myModuleName.bar(params)

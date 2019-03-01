@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.PythonVisitor;
@@ -163,11 +164,13 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
      * see {@link SymbolTable#getSymbol(AstNode)}
      */
     private void addSymbolForAttributeRef(AstNode attributeRef) {
-      String namespace = attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue();
+      String symbolName = attributeRef.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
+        .map(AstNode::getTokenValue)
+        .collect(Collectors.joining( "." ));
+      String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
+      String namespace = symbolName.replaceAll("\\." + functionName, "");
       Module module = importedModules.get(namespace);
       if (module != null) {
-        String functionName = attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue();
-        String symbolName = namespace + "." + functionName;
         SymbolImpl symbol = module.scope.resolve(symbolName);
         if (symbol == null) {
           String qualifiedName = qualifiedName(module.name, functionName);
@@ -214,7 +217,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     private void addImportedSymbols(AstNode moduleNameNode, @Nullable AstNode aliasNode) {
-      String moduleName = moduleNameNode.getTokenValue();
+      String moduleName = moduleNameNode.getChildren(PythonGrammar.NAME).stream()
+        .map(AstNode::getTokenValue)
+        .collect(Collectors.joining("."));
       if (aliasNode != null) {
         currentScope().addWriteUsage(aliasNode);
         String alias = aliasNode.getTokenValue();
@@ -499,9 +504,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       String symbolName = "";
       AstNode firstChild = node.getFirstChild();
       if (firstChild.is(PythonGrammar.ATTRIBUTE_REF)) {
-        String namespace = firstChild.getFirstChild(PythonGrammar.ATOM).getTokenValue();
-        String functionName = firstChild.getFirstChild(PythonGrammar.NAME).getTokenValue();
-        symbolName = namespace + "." + functionName;
+        symbolName = firstChild.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
+          .map(AstNode::getTokenValue)
+          .collect(Collectors.joining( "." ));
       } else if(firstChild.is(PythonGrammar.ATOM)) {
         symbolName = firstChild.getTokenValue();
       }
