@@ -1,0 +1,66 @@
+<p>Reading Standard Input is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2337">CVE-2005-2337</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11449">CVE-2017-11449</a> </li>
+</ul>
+<p>It is common for attackers to craft inputs enabling them to exploit software vulnerabilities. Thus any data read from the standard input (stdin)
+can be dangerous and should be validated.</p>
+<p>This rule flags code that reads from the standard input.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> data read from the standard input is not sanitized before being used. </li>
+</ul>
+<p>You are at risk if you answered yes to this question.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p><a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> all data read from the standard input before using it.</p>
+<h2>See:</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
+</ul>
+<h2>Questionable Code Example</h2>
+<p>Python 2 and Python 3</p>
+<pre>
+import sys
+from sys import stdin, __stdin__
+
+# Any reference to sys.stdin or sys.__stdin__ without a method call is Questionable
+sys.stdin  # Questionable
+
+for line in sys.stdin:  # Questionable
+    print(line)
+
+it = iter(sys.stdin)  # Questionable
+line = next(it)
+
+# Calling the following methods on stdin or __stdin__ is questionable
+sys.stdin.read()  # Questionable
+sys.stdin.readline()  # Questionable
+sys.stdin.readlines()  # Questionable
+
+# Calling other methods on stdin or __stdin__ does not require a review, thus it is not Questionable
+sys.stdin.seekable()  # Ok
+# ...
+</pre>
+<p>Python 2 only</p>
+<pre>
+raw_input('What is your password?')  # Questionable
+</pre>
+<p>Python 3 only</p>
+<pre>
+input('What is your password?')  # Questionable
+</pre>
+<p>Function <code>fileinput.input</code> and class <code>fileinput.FileInput</code> read the standard input when the list of files is empty.</p>
+<pre>
+for line in fileinput.input():  # Questionable
+    print(line)
+
+for line in fileinput.FileInput():  # Questionable
+    print(line)
+
+for line in fileinput.input(['setup.py']):  # Ok
+    print(line)
+
+for line in fileinput.FileInput(['setup.py']):  # Ok
+    print(line)
+</pre>
+
