@@ -28,9 +28,11 @@ public interface SymbolTable {
   Set<Symbol> symbols(AstNode scopeTree);
 
   /**
-   * Find symbol associated with the node. Works only for ast nodes with type {@link org.sonar.python.api.PythonGrammar#CALL_EXPR}
+   * Find symbol associated with the node. Works only for ast nodes with type {@link org.sonar.python.api.PythonGrammar#CALL_EXPR},
+   * {@link org.sonar.python.api.PythonGrammar#ATTRIBUTE_REF} and {@link org.sonar.python.api.PythonGrammar#ATOM}
    *
-   * @param node of type {@link org.sonar.python.api.PythonGrammar#CALL_EXPR}
+   * @param node of type {@link org.sonar.python.api.PythonGrammar#CALL_EXPR}, {@link org.sonar.python.api.PythonGrammar#ATTRIBUTE_REF} or
+   *             {@link org.sonar.python.api.PythonGrammar#ATOM}
    * @return symbol for the node
    */
   @CheckForNull

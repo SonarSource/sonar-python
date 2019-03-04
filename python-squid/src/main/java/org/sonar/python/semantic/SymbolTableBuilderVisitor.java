@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.PythonVisitor;
@@ -108,7 +109,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       set.add(PythonGrammar.GLOBAL_STMT);
       set.add(PythonGrammar.NONLOCAL_STMT);
       set.add(PythonGrammar.IMPORT_STMT);
-      set.add(PythonGrammar.CALL_EXPR);
+      set.add(PythonGrammar.ATTRIBUTE_REF);
       return Collections.unmodifiableSet(set);
     }
 
@@ -150,40 +151,35 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       } else if (node.is(PythonGrammar.IMPORT_STMT)) {
         visitImportStatement(node);
 
-      } else if (node.is(PythonGrammar.CALL_EXPR)) {
-        addSymbolForCallExpression(node);
+      } else if (node.is(PythonGrammar.ATTRIBUTE_REF)) {
+        addSymbolForAttributeRef(node);
       }
+
     }
 
     /**
-     * Given `myModuleName.f()` CALL_EXPR node, it adds `myModuleName.f` to the symbol table
+     * Given `myModuleName.f` ATTRIBUTE_REF node, it adds `myModuleName.f` to the symbol table
      * and resolves its qualified name.
-     * This is used by rules to easily retrieve the symbol of a function from AstNode of type CALL_EXPR
+     * This is used by rules to easily retrieve the symbol of a "property access" from AstNode of type ATTRIBUTE_REF
      * see {@link SymbolTable#getSymbol(AstNode)}
      */
-    private void addSymbolForCallExpression(AstNode node) {
-      SymbolImpl symbol = null;
-      AstNode firstChild = node.getFirstChild();
-      if (firstChild.is(PythonGrammar.ATTRIBUTE_REF)) {
-        String namespace = firstChild.getFirstChild(PythonGrammar.ATOM).getTokenValue();
-        Module module = importedModules.get(namespace);
-        if (module != null) {
-          String functionName = firstChild.getFirstChild(PythonGrammar.NAME).getTokenValue();
-          String symbolName = namespace + "." + functionName;
-          symbol = module.scope.resolve(symbolName);
-          if (symbol == null) {
-            String qualifiedName = qualifiedName(module.name, functionName);
-            symbol = new SymbolImpl(symbolName, module.scope.rootTree, qualifiedName);
-            module.scope.symbols.add(symbol);
-            module.scope.symbolsByName.put(symbolName, symbol);
-          }
+    private void addSymbolForAttributeRef(AstNode attributeRef) {
+      String symbolName = attributeRef.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
+        .map(AstNode::getTokenValue)
+        .collect(Collectors.joining( "." ));
+      String propertyName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
+      String namespace = symbolName.replaceAll("\\." + propertyName, "");
+      Module module = importedModules.get(namespace);
+      if (module != null) {
+        SymbolImpl symbol = module.scope.resolve(symbolName);
+        if (symbol == null) {
+          String qualifiedName = qualifiedName(module.name, propertyName);
+          symbol = new SymbolImpl(symbolName, module.scope.rootTree, qualifiedName);
+          module.scope.symbols.add(symbol);
+          module.scope.symbolsByName.put(symbolName, symbol);
         }
-      } else if (firstChild.is(PythonGrammar.ATOM)) {
-        symbol = currentScope().resolve(firstChild.getTokenValue());
-      }
-      if (symbol != null) {
-        symbol.addReadUsage(node);
-        symbolByNode.put(node, symbol);
+        symbol.addReadUsage(attributeRef);
+        symbolByNode.put(attributeRef, symbol);
       }
     }
 
@@ -221,7 +217,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     private void addImportedSymbols(AstNode moduleNameNode, @Nullable AstNode aliasNode) {
-      String moduleName = moduleNameNode.getTokenValue();
+      String moduleName = moduleNameNode.getChildren(PythonGrammar.NAME).stream()
+        .map(AstNode::getTokenValue)
+        .collect(Collectors.joining("."));
       if (aliasNode != null) {
         currentScope().addWriteUsage(aliasNode);
         String alias = aliasNode.getTokenValue();
@@ -474,6 +472,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       set.add(PythonGrammar.CLASSDEF);
       set.add(PythonGrammar.ATOM);
       set.add(PythonGrammar.DOTTED_NAME);
+      set.add(PythonGrammar.CALL_EXPR);
       return Collections.unmodifiableSet(set);
     }
 
@@ -488,8 +487,35 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
           if (symbol != null && !symbol.writeUsages.contains(nameNode) && !allReadUsages.contains(nameNode)) {
             symbol.addReadUsage(nameNode);
             allReadUsages.add(nameNode);
+            symbolByNode.put(node, symbol);
           }
         }
+      } else if (node.is(PythonGrammar.CALL_EXPR)) {
+        addSymbolForCallExpression(node);
+      }
+    }
+
+    /**
+     * This is used by rules to easily retrieve the symbol of a function from AstNode of type CALL_EXPR
+     * see {@link SymbolTable#getSymbol(AstNode)}
+     */
+    private void addSymbolForCallExpression(AstNode node) {
+      Scope currentScope = scopesByRootTree.get(currentScopeRootTree());
+      String symbolName = "";
+      AstNode firstChild = node.getFirstChild();
+      if (firstChild.is(PythonGrammar.ATTRIBUTE_REF)) {
+        symbolName = firstChild.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
+          .map(AstNode::getTokenValue)
+          .collect(Collectors.joining( "." ));
+      } else if(firstChild.is(PythonGrammar.ATOM)) {
+        symbolName = firstChild.getTokenValue();
+      }
+      SymbolImpl symbol = currentScope.resolve(symbolName);
+      if (symbol != null) {
+        if (firstChild.is(PythonGrammar.ATOM)) {
+          symbol.addReadUsage(node);
+        }
+        symbolByNode.put(node, symbol);
       }
     }
 

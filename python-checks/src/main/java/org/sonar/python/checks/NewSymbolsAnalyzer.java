@@ -88,13 +88,11 @@ public class NewSymbolsAnalyzer {
   }
 
   private void addSelfField(AstNode test) {
-    if ("self".equals(test.getTokenValue())) {
-      AstNode trailer = test.getFirstDescendant(PythonGrammar.TRAILER);
-      if (trailer != null && trailer.getFirstChild(PythonGrammar.NAME) != null) {
-        Token token = trailer.getFirstChild(PythonGrammar.NAME).getToken();
-        if (!CheckUtils.containsValue(symbols, token.getValue())) {
-          symbols.add(token);
-        }
+    AstNode attributeRef = test.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
+    if (attributeRef != null && attributeRef.getFirstChild(PythonGrammar.ATOM).getTokenValue().equals("self")) {
+      Token fieldNameToken = attributeRef.getFirstChild(PythonGrammar.NAME).getToken();
+      if (!CheckUtils.containsValue(symbols, fieldNameToken.getValue())) {
+        symbols.add(fieldNameToken);
       }
     }
   }

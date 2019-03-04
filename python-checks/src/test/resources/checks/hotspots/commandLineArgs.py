@@ -17,7 +17,7 @@ def argparse_test():
 def builtins():
     sys.argv # Noncompliant
 #   ^^^^^^^^
-    argv # FN, we only resolve qualified name for `call_expr` nodes
+    argv # Noncompliant
     mySys.argv # OK
 
 def optparse_test():
