@@ -33,6 +33,10 @@ public abstract class AbstractCallExpressionCheck extends PythonCheck {
 
   protected abstract String message();
 
+  protected boolean isException(AstNode callExpression) {
+    return false;
+  }
+
   @Override
   public Set<AstNodeType> subscribedKinds() {
     return Collections.singleton(PythonGrammar.CALL_EXPR);
@@ -41,7 +45,7 @@ public abstract class AbstractCallExpressionCheck extends PythonCheck {
   @Override
   public void visitNode(AstNode node) {
     Symbol symbol = getContext().symbolTable().getSymbol(node);
-    if (symbol != null && functionsToCheck().contains(symbol.qualifiedName())) {
+    if (!isException(node) && symbol != null && functionsToCheck().contains(symbol.qualifiedName())) {
       addIssue(node, message());
     }
   }

@@ -23,6 +23,7 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
+import org.sonar.python.checks.hotspots.StandardInputCheck;
 
 public final class CheckList {
 
@@ -81,6 +82,7 @@ public final class CheckList {
       SameBranchCheck.class,
       SameConditionCheck.class,
       SelfAssignmentCheck.class,
+      StandardInputCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyParametersCheck.class,
       TooManyReturnsCheck.class,
