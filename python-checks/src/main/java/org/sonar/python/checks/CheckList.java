@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.python.PythonCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
+import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpEndpointCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
@@ -57,6 +58,7 @@ public final class CheckList {
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,
       HardcodedIPCheck.class,
+      HashingDataCheck.class,
       HttpEndpointCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
       InequalityUsageCheck.class,
