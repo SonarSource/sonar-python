@@ -167,13 +167,13 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       String symbolName = attributeRef.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
         .map(AstNode::getTokenValue)
         .collect(Collectors.joining( "." ));
-      String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
-      String namespace = symbolName.replaceAll("\\." + functionName, "");
+      String propertyName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
+      String namespace = symbolName.replaceAll("\\." + propertyName, "");
       Module module = importedModules.get(namespace);
       if (module != null) {
         SymbolImpl symbol = module.scope.resolve(symbolName);
         if (symbol == null) {
-          String qualifiedName = qualifiedName(module.name, functionName);
+          String qualifiedName = qualifiedName(module.name, propertyName);
           symbol = new SymbolImpl(symbolName, module.scope.rootTree, qualifiedName);
           module.scope.symbols.add(symbol);
           module.scope.symbolsByName.put(symbolName, symbol);

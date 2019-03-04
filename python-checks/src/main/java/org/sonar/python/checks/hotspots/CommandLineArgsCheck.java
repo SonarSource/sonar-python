@@ -25,6 +25,7 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = CommandLineArgsCheck.CHECK_KEY)
 public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
@@ -34,12 +35,12 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF);
+    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.ATTRIBUTE_REF)) {
+    if (node.is(PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM)) {
       if (isSysArgvNode(node)) {
         addIssue(node, MESSAGE);
       }
@@ -48,9 +49,9 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
     }
   }
 
-  private static boolean isSysArgvNode(AstNode attributeRef) {
-    return attributeRef.getTokenValue().equals("sys") &&
-      attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue().equals("argv");
+  private boolean isSysArgvNode(AstNode attributeRef) {
+    Symbol symbol = getContext().symbolTable().getSymbol(attributeRef);
+    return symbol != null && symbol.qualifiedName().equals("sys.argv");
   }
 
   @Override
