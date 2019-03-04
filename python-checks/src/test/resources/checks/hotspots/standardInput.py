@@ -12,9 +12,9 @@ def python_3_builtin():
     __stdin__ #Noncompliant
 
 
-    sys.stdin.read()  # Questionable
-    sys.stdin.readline()  # Questionable
-    sys.stdin.readlines()  # Questionable
+    sys.stdin.read()  # Noncompliant
+    sys.stdin.readline()  # Noncompliant
+    sys.stdin.readlines()  # Noncompliant
 
     sys.stdin.seekable()  # Ok
 

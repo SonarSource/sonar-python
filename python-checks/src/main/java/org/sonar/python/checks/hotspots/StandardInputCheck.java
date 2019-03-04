@@ -22,6 +22,7 @@ package org.sonar.python.checks.hotspots;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
@@ -32,6 +33,8 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4829";
   private static final String MESSAGE = "Make sure that reading the standard input is safe here.";
   private static final Set<String> questionableFunctions = immutableSet("fileinput.input", "fileinput.FileInput");
+  private static final Set<String> questionableFunctionsBuiltIn = immutableSet(
+    "raw_input", "input", "sys.stdin.read", "sys.stdin.readline", "sys.stdin.readlines");
   private static final Set<String> questionablePropertyAccess = immutableSet("sys.stdin", "sys.__stdin__");
 
   @Override
@@ -46,12 +49,25 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
         addIssue(node, message());
       }
     } else {
-      if (node.getTokenValue().equals("raw_input") || node.getTokenValue().equals("input")) {
+      if (questionableFunctionsBuiltIn.contains(getFunctionName(node))) {
         addIssue(node, message());
       } else {
         super.visitNode(node);
       }
     }
+  }
+
+  private static String getFunctionName(AstNode callExpr) {
+    String functionName = "";
+    AstNode firstChild = callExpr.getFirstChild();
+    if (firstChild.is(PythonGrammar.ATTRIBUTE_REF)) {
+      functionName = firstChild.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
+        .map(AstNode::getTokenValue)
+        .collect(Collectors.joining( "." ));
+    } else if(firstChild.is(PythonGrammar.ATOM)) {
+      functionName = firstChild.getTokenValue();
+    }
+    return functionName;
   }
 
   @Override
