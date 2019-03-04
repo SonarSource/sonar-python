@@ -204,7 +204,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       } else if (node.is(PythonGrammar.IMPORT_FROM)) {
         AstNode dottedName = node.getFirstChild(PythonGrammar.DOTTED_NAME);
         if (dottedName != null) {
-          String moduleName = dottedName.getTokenValue();
+          String moduleName = dottedName.getChildren(PythonGrammar.NAME).stream()
+            .map(AstNode::getTokenValue)
+            .collect(Collectors.joining("."));
           node.getDescendants(PythonGrammar.IMPORT_AS_NAME).forEach(
             importAsName -> {
               // ignore import that contains aliases
