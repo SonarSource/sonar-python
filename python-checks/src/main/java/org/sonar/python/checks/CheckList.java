@@ -25,6 +25,7 @@ import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpEndpointCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
+import org.sonar.python.checks.hotspots.RegexCheck;
 import org.sonar.python.checks.hotspots.StandardInputCheck;
 
 public final class CheckList {
@@ -81,6 +82,7 @@ public final class CheckList {
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
       ProcessSignallingCheck.class,
+      RegexCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
       SameBranchCheck.class,
