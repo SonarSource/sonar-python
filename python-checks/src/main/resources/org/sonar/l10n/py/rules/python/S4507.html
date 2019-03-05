@@ -1,0 +1,67 @@
+<p>Delivering code in production with debug features activated is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999007">CVE-2018-1999007</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5306">CVE-2015-5306</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2006">CVE-2013-2006</a> </li>
+</ul>
+<p>An application's debug features enable developers to find bugs more easily. It often gives access to detailed information on both the system
+running the application and users. Sometime it even enables the execution of custom commands. Thus deploying on production servers an application
+which has debug features activated is extremely dangerous.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the code or configuration enabling the application debug features is deployed on production servers. </li>
+  <li> the application runs by default with debug features activated. </li>
+</ul>
+<p>You are at risk if you answered yes to any of these questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>The application should run by default in the most secure mode, i.e. as on production servers. This is to prevent any mistake. Enabling debug
+features should be explicitly asked via a command line argument, an environment variable or a configuration file.</p>
+<p>Check that every debug feature is controlled by only very few configuration variables: logging, exception/error handling, access control, etc... It
+is otherwise very easy to forget one of them.</p>
+<p>Do not enable debug features on production servers.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Leftover Debug Code </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/215.html">MITRE, CWE-215</a> - Information Exposure Through Debug Information </li>
+  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
+</ul>
+<h2>Questionable Code Example</h2>
+<p>Django</p>
+<pre>
+from django.conf import settings
+
+settings.configure(DEBUG=True)  # Questionable when set to True
+settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Questionable when set to True
+
+def custom_config(config):
+    settings.configure(default_settings=config, DEBUG=True)  # Questionable
+</pre>
+<p>Django's "global_settings.py" configuration file</p>
+<pre>
+# NOTE: The following code raises issues only if the file is named "global_settings.py". This is the default
+# name of Django configuration file
+
+DEBUG = True  # Questionable
+DEBUG_PROPAGATE_EXCEPTIONS = True  # Questionable
+</pre>
+<p>Flask</p>
+<pre>
+from flask import Flask
+
+app = Flask(__name__)
+app.config['TESTING'] = True  # Questionable
+app.config['DEBUG'] = True  # Questionable
+app.config['PROPAGATE_EXCEPTIONS'] = True  # Questionable
+app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = True  # Questionable
+
+app.testing = True  # Questionable
+app.debug = True  # Questionable
+
+app.config.update(
+    TESTING=True,  # Questionable
+    DEBUG=True,  # Questionable
+    PROPAGATE_EXCEPTIONS=True,  # Questionable
+    PRESERVE_CONTEXT_ON_EXCEPTION=True  # Questionable
+)
+</pre>
+

@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.python.PythonCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
+import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpEndpointCheck;
@@ -50,6 +51,7 @@ public final class CheckList {
       CommandLineArgsCheck.class,
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
+      DebugModeCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
       DynamicCodeExecutionCheck.class,
       EmptyNestedBlockCheck.class,
