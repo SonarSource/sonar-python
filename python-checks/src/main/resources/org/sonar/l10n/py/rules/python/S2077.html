@@ -1,0 +1,76 @@
+<p>Executing SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-9019">CVE-2018-9019</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7318">CVE-2018-7318</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5611">CVE-2017-5611</a> </li>
+</ul>
+<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> is still one of the top 10 security vulnerabilities. Applications that
+execute SQL commands should sanitize any externally-provided values used in those commands. Failure to do so could allow an attacker to include input
+that changes the query so that unintended commands are executed, or sensitive data is exposed. Instead of trying to sanitize data by hand, SQL binding
+mechanisms should be used; they can be relied on to automatically perform a full sanitization.</p>
+<p>This rule flags the execution of SQL queries via Django methods which might be susceptible to SQL injection. Any SQL query built by concatenating
+or formatting Strings is considered susceptible. The goal is to guide security code reviews.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
+  </li>
+  <li> Use <a href="https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet">parameterized queries, prepared statements, or stored
+  procedures</a> whenever possible. </li>
+  <li> Avoid executing SQL queries containing unsafe input in stored procedures or functions. </li>
+  <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every unsafe input. </li>
+  <li> Follow <a href="https://docs.djangoproject.com/en/2.1/topics/security/#sql-injection-protection">Django best practices</a>. </li>
+</ul>
+<p>You can also reduce the impact of an attack by using a database account with low privileges.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+from django.db import models
+from django.db import connection
+from django.db import connections
+from django.db.models.expressions import RawSQL
+
+value = input()
+
+
+class MyUser(models.Model):
+    name = models.CharField(max_length=200)
+
+hardcoded_request = 'SELECT * FROM mytable WHERE name = "test"'
+formatted_request = 'SELECT * FROM mytable WHERE name = "%s"' % value
+
+def query_my_user(request, params):
+    MyUser.objects.raw(request)  # Questionable
+    MyUser.objects.raw(formatted_request)  # Questionable
+    MyUser.objects.raw(hardcoded_request)  # Ok
+
+    # Parametrized queries
+    MyUser.objects.raw(request, params)  # Questionable.
+    MyUser.objects.raw(formatted_request, params)  # Questionable.
+
+    # Note: Adding quotes around %s can result in SQL injections
+    MyUser.objects.raw(hardcoded_request, params)  # Questionable. Review in case the request has quoted parameters.
+
+    with connection.cursor() as cursor:
+        cursor.execute(request)  # Questionable
+        cursor.execute(formatted_request)  # Questionable
+        cursor.execute(hardcoded_request, params)  # Questionable, See "Note"
+        cursor.execute(hardcoded_request)  # Ok
+
+    with connections['my_db'].cursor() as cursor:
+        cursor.execute(request)  # Questionable
+        cursor.execute(formatted_request)  # Questionable
+        cursor.execute(hardcoded_request, params)  # Questionable, See "Note"
+        cursor.execute(hardcoded_request)  # Ok
+
+    # https://docs.djangoproject.com/en/2.1/ref/models/expressions/#raw-sql-expressions
+
+    RawSQL("select col from mytable where mycol = %s", ("test",))  # Questionable, See "Note"
+
+    # https://docs.djangoproject.com/en/2.1/ref/models/querysets/#extra
+
+    MyUser.objects.extra(  # Questionable. calling the "extra" method, See "Note"
+        select={
+            'mycol': 'myothercol &gt; 10'
+        },
+    )
+</pre>
+

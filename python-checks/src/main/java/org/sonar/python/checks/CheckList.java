@@ -27,6 +27,7 @@ import org.sonar.python.checks.hotspots.HttpEndpointCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.RegexCheck;
+import org.sonar.python.checks.hotspots.SQLQueriesCheck;
 import org.sonar.python.checks.hotspots.StandardInputCheck;
 
 public final class CheckList {
@@ -90,6 +91,7 @@ public final class CheckList {
       SameBranchCheck.class,
       SameConditionCheck.class,
       SelfAssignmentCheck.class,
+      SQLQueriesCheck.class,
       StandardInputCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyParametersCheck.class,
