@@ -34,7 +34,8 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
   private static final String MESSAGE = "Make sure that reading the standard input is safe here.";
   private static final Set<String> questionableFunctions = immutableSet("fileinput.input", "fileinput.FileInput");
   private static final Set<String> questionableFunctionsBuiltIn = immutableSet(
-    "raw_input", "input", "sys.stdin.read", "sys.stdin.readline", "sys.stdin.readlines");
+    "raw_input", "input", "sys.stdin.read", "sys.stdin.readline", "sys.stdin.readlines",
+    "sys.__stdin__.read", "sys.__stdin__.readline", "sys.__stdin__.readlines");
   private static final Set<String> questionablePropertyAccess = immutableSet("sys.stdin", "sys.__stdin__");
 
   @Override
