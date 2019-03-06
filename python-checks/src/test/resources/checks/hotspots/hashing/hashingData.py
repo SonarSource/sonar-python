@@ -35,7 +35,9 @@ from django.conf import settings
 def update_settings(value):
     settings.PASSWORD_HASHERS = value  # Noncompliant, and also a bad practice
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    (settings.PASSWORD_HASHERS) = value  # Noncompliant
     mySettings.PASSWORD_HASHERS = value # OK
+    foo.bar, settings.PASSWORD_HASHERS = value # Noncompliant
     settings.OTHER = value  # OK
 
 from django.contrib.auth.hashers import make_password
