@@ -45,7 +45,6 @@ code to run. If you have to do it anyway, create a list of allowed code and choo
 import os
 
 value = input()
-hardcoded_command = 'os.system("ls")'
 formatted_command = 'os.system("%s")' % value
 compiled_command = compile(hardcoded_command, '&lt;string&gt;', 'eval')
 compiled_code = compile(hardcoded_command, '&lt;string&gt;', 'exec')
@@ -54,7 +53,6 @@ def evaluate(command, file, mode):
     eval(command)  # Questionable. Dynamic command
     eval(compile(command, file, mode))  # Questionable. Dynamic command
 
-eval(hardcoded_command)  # Ok
 eval(formatted_command)  # Questionable. Dynamic code
 eval(compiled_command)  # Questionable even though it is hardcoded, but only because it is not worth detecting this corner case.
 
@@ -62,7 +60,6 @@ def execute(code, file, mode):
     exec(code)  # Questionable. Dynamic code
     exec(compile(code, file, mode))  # Questionable. Dynamic command
 
-exec(hardcoded_command)  # Ok
 exec(formatted_command)  # Questionable. Dynamic code
 exec(compiled_code)  # Questionable even though it is hardcoded, but only because it is not worth detecting this corner case.
 </pre>
