@@ -20,9 +20,9 @@
 package org.sonar.python.checks.hotspots;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
@@ -47,33 +47,29 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR);
+  public void visitFile(AstNode node) {
+    Set<String> symbols = getContext().symbolTable().symbols(node).stream()
+      .map(Symbol::qualifiedName)
+      .collect(Collectors.toSet());
+    isUsingDjangoModel = symbols.contains("django.db.models");
+    isUsingDjangoDBConnection = symbols.contains("django.db.connection");
+    isUsingDjangoDBConnections = symbols.contains("django.db.connections");
   }
 
-  @Override
-  public void visitFile(AstNode node) {
-    Set<Symbol> symbols = getContext().symbolTable().symbols(node);
-    isUsingDjangoModel = symbols.stream().anyMatch(s -> s.qualifiedName().contains("django.db.models"));
-    isUsingDjangoDBConnection = symbols.stream().anyMatch(s -> s.qualifiedName().contains("django.db.connection"));
-    isUsingDjangoDBConnections = symbols.stream().anyMatch(s -> s.qualifiedName().contains("django.db.connections"));
+  private boolean isSQLQueryFromDjangoModel(String functionName) {
+    return isUsingDjangoModel && functionName.equals("raw") || functionName.equals("extra");
+  }
+
+  private boolean isSQLQueryFromDjangoDBConnection(String functionName) {
+    return (isUsingDjangoDBConnection || isUsingDjangoDBConnections) && functionName.equals("execute");
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (isUsingDjangoModel) {
-      AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
-      if (attributeRef != null) {
-        String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
-        if (functionName.equals("raw") || functionName.equals("extra")) {
-          addIssue(node, MESSAGE);
-        }
-      }
-    }
-
-    if (isUsingDjangoDBConnection || isUsingDjangoDBConnections) {
-      AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
-      if (attributeRef != null && attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue().equals("execute")) {
+    AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
+    if (attributeRef != null) {
+      String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
+      if (isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) {
         addIssue(node, MESSAGE);
       }
     }
