@@ -22,7 +22,6 @@ package org.sonar.python.checks.hotspots;
 import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
@@ -34,7 +33,6 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   private static final String MESSAGE = "Make sure that executing SQL queries is safe here.";
   private boolean isUsingDjangoModel = false;
   private boolean isUsingDjangoDBConnection = false;
-  private boolean isUsingDjangoDBConnections = false;
 
   @Override
   protected Set<String> functionsToCheck() {
@@ -48,26 +46,33 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
 
   @Override
   public void visitFile(AstNode node) {
-    Set<String> symbols = getContext().symbolTable().symbols(node).stream()
-      .map(Symbol::qualifiedName)
-      .collect(Collectors.toSet());
-    isUsingDjangoModel = symbols.contains("django.db.models");
-    isUsingDjangoDBConnection = symbols.contains("django.db.connection");
-    isUsingDjangoDBConnections = symbols.contains("django.db.connections");
+    isUsingDjangoModel = false;
+    isUsingDjangoDBConnection = false;
+    for (Symbol symbol : getContext().symbolTable().symbols(node)) {
+      String qualifiedName = symbol.qualifiedName();
+      if (qualifiedName.contains("django.db.models")) {
+        isUsingDjangoModel = true;
+      }
+      if (qualifiedName.contains("django.db.connection")) {
+        isUsingDjangoDBConnection = true;
+      }
+    }
   }
 
   private boolean isSQLQueryFromDjangoModel(String functionName) {
-    return isUsingDjangoModel && functionName.equals("raw") || functionName.equals("extra");
+    return isUsingDjangoModel && (functionName.equals("raw") || functionName.equals("extra"));
   }
 
   private boolean isSQLQueryFromDjangoDBConnection(String functionName) {
-    return (isUsingDjangoDBConnection || isUsingDjangoDBConnections) && functionName.equals("execute");
+    return isUsingDjangoDBConnection && functionName.equals("execute");
   }
 
   @Override
   public void visitNode(AstNode node) {
     AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
     if (attributeRef != null) {
+      // According to grammar definition `ATTRIBUTE_REF` has always at least one child of
+      // kind NAME, hence we don't need to check for null on `getLastChild` call
       String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
       if (isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) {
         addIssue(node, MESSAGE);
