@@ -37,18 +37,6 @@ vulnerability reports mentioning the one engine you're are using.</p>
 make complex regular expressions as they are difficult to understand and test. Note that some regular expression engines will match only part of the
 input if no anchors are used. In PHP for example <code>preg_match("/[A-Za-z0-9]+/", $text)</code> will accept any string containing at least one
 alphanumeric character because it has no anchors.</p>
-<h2>Exceptions</h2>
-<p>Regardless of the string being matched, a hardcoded regular expression pattern is not vulnerable to ReDoS attacks if it consists only of one
-character or only alphanumeric characters. No issue will be raised for these cases.</p>
-<h2>See</h2>
-<ul>
-  <li> <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">MITRA, CWE-624</a> - Executable Regular Expression Error
-  </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/185.html">MITRA, CWE-185</a> - Incorrect Regular Expression </li>
-  <li> OWASP Regular expression Denial of Service - ReDoS </li>
-  <li> OWASP Top 10 2017 Category A1 - Injection </li>
-  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
-</ul>
 <h2>Questionable Code Example</h2>
 <p>Django</p>
 <pre>
@@ -110,7 +98,6 @@ from regex import compile, match, search, fullmatch, split, findall, finditer, s
 
 input = 'input string'
 replacement = 'replacement'
-simple_hardcoded_pattern = r'pattern'
 
 regex.subf  # Questionable
 regex.subfn  # Questionable
@@ -124,10 +111,6 @@ def dynamic_pattern(pattern):
     regex.subf(pattern, replacement, input)  # Questionable
     regex.subfn(pattern, replacement, input)  # Questionable
     regex.splititer(pattern, input)  # Questionable
-
-regex.subf(hardcoded_pattern, replacement, input)  # Ok
-regex.subfn(hardcoded_pattern, replacement, input)  # Ok
-regex.splititer(hardcoded_pattern, input)  # Ok
 
 regex.compile  # Questionable
 regex.match  # Questionable
@@ -160,14 +143,16 @@ def dynamic_pattern(pattern):
     regex.sub(pattern, replacement, input)  # Questionable
     regex.subn(pattern, replacement, input)  # Questionable
 
-regex.compile(simple_hardcoded_pattern)  # Ok
-regex.match(simple_hardcoded_pattern, input)  # Ok
-regex.search(simple_hardcoded_pattern, input)  # Ok
-regex.fullmatch(simple_hardcoded_pattern, input)  # Ok
-regex.split(simple_hardcoded_pattern, input)  # Ok
-regex.findall(simple_hardcoded_pattern, input)  # Ok
-regex.finditer(simple_hardcoded_pattern, input)  # Ok
-regex.sub(simple_hardcoded_pattern, replacement, input)  # Ok
-regex.subn(simple_hardcoded_pattern, replacement, input)  # Ok
 </pre>
+<h2>Exceptions</h2>
+<p>None</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">MITRA, CWE-624</a> - Executable Regular Expression Error
+  </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/185.html">MITRA, CWE-185</a> - Incorrect Regular Expression </li>
+  <li> OWASP Regular expression Denial of Service - ReDoS </li>
+  <li> OWASP Top 10 2017 Category A1 - Injection </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
 

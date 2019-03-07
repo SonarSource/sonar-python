@@ -42,17 +42,6 @@ following attacks:</p>
 <p>Restrict security-sensitive actions, such as file upload, to authenticated users.</p>
 <p>Be careful when errors are returned to the client, as they can provide sensitive information. Use 404 (Not Found) instead of 403 (Forbidden) when
 the existence of a resource is sensitive.</p>
-<h2>Questionable Code Example</h2>
-<p>Django endpoint declaration</p>
-<pre>
-from django.urls import path, re_path
-
-def declare_views(views):
-    return [
-        path('', views['index']),  # Questionable
-        re_path(r'^about/[0-9]*/$', views['about']),  # Questionable
-    ]
-</pre>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
@@ -68,4 +57,15 @@ def declare_views(views):
   <li> <a href="https://www.sans.org/top25-software-errors/#cat2">SANS Top 25</a> - Risky Resource Management </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
+<h2>Questionable Code Example</h2>
+<p>Django endpoint declaration</p>
+<pre>
+from django.urls import path, re_path
+
+def declare_views(views):
+    return [
+        path('', views['index']),  # Questionable
+        re_path(r'^about/[0-9]*/$', views['about']),  # Questionable
+    ]
+</pre>
 
