@@ -48,13 +48,12 @@ public class DebugModeCheck extends PythonCheck {
     } else {
       AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
       AstNode argList = node.getFirstChild(PythonGrammar.ARGLIST);
-      if (argList!= null && attributeRef != null) {
-        if (getQualifiedName(attributeRef.getFirstChild()).equals("django.conf.settings")) {
-          String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
-          if (functionName.equals("configure")) {
-            argList.getChildren(PythonGrammar.ARGUMENT)
-              .forEach(this::checkDebugAssignment);
-          }
+      if (argList != null && attributeRef != null &&
+        getQualifiedName(attributeRef.getFirstChild()).equals("django.conf.settings")) {
+        String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
+        if (functionName.equals("configure")) {
+          argList.getChildren(PythonGrammar.ARGUMENT)
+            .forEach(this::checkDebugAssignment);
         }
       }
     }
