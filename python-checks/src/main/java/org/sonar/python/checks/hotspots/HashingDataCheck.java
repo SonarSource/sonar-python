@@ -39,7 +39,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4790";
   private static final String MESSAGE = "Make sure that hashing data is safe here.";
   private static final Set<String> questionableFunctions = immutableSet(
-    "hashlib.new", "optparse.OptionParser", "cryptography.hazmat.primitives.hashes.Hash", "django.contrib.auth.hashers.make_password", "werkzeug.security.generate_password_hash");
+    "hashlib.new", "cryptography.hazmat.primitives.hashes.Hash", "django.contrib.auth.hashers.make_password", "werkzeug.security.generate_password_hash");
   private static final Set<String> questionableHashlibAlgorithm = Stream.of(
     "blake2b", "blake2s", "md5", "pbkdf2_hmac", "sha1", "sha224",
     "sha256", "sha384", "sha3_224", "sha3_256", "sha3_384", "sha3_512",
