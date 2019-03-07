@@ -44,24 +44,4 @@ def custom_config(config):
 DEBUG = True  # Questionable
 DEBUG_PROPAGATE_EXCEPTIONS = True  # Questionable
 </pre>
-<p>Flask</p>
-<pre>
-from flask import Flask
-
-app = Flask(__name__)
-app.config['TESTING'] = True  # Questionable
-app.config['DEBUG'] = True  # Questionable
-app.config['PROPAGATE_EXCEPTIONS'] = True  # Questionable
-app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = True  # Questionable
-
-app.testing = True  # Questionable
-app.debug = True  # Questionable
-
-app.config.update(
-    TESTING=True,  # Questionable
-    DEBUG=True,  # Questionable
-    PROPAGATE_EXCEPTIONS=True,  # Questionable
-    PRESERVE_CONTEXT_ON_EXCEPTION=True  # Questionable
-)
-</pre>
 

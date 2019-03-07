@@ -45,4 +45,220 @@ original data with another one having the same hash.</p>
 </ul>
 <h2>Questionable Code Example</h2>
 <p><code>hashlib</code> module</p>
+<pre>
+import hashlib
+
+def hash_data(algorithm):
+    hashlib.new(algorithm)  # Questionable
+
+    hashlib.blake2b  # Questionable
+    hashlib.blake2s  # Questionable
+    hashlib.md5  # Questionable
+    hashlib.pbkdf2_hmac # Questionable
+    hashlib.sha1  # Questionable
+    hashlib.sha224  # Questionable
+    hashlib.sha256  # Questionable
+    hashlib.sha384  # Questionable
+    hashlib.sha3_224  # Questionable
+    hashlib.sha3_256  # Questionable
+    hashlib.sha3_384  # Questionable
+    hashlib.sha3_512  # Questionable
+    hashlib.sha512  # Questionable
+    hashlib.shake_128  # Questionable
+    hashlib.shake_256  # Questionable
+    hashlib.scrypt  # Questionable
+</pre>
+<p><code>cryptography</code> library</p>
+<pre>
+from cryptography.hazmat.primitives import hashes
+
+
+def my_hash(algorithm):
+    hashes.Hash(algorithm)  # Questionable
+</pre>
+<p>Django</p>
+<pre>
+from django.contrib.auth.hashers import PBKDF2PasswordHasher, PBKDF2SHA1PasswordHasher, Argon2PasswordHasher, \
+    BCryptSHA256PasswordHasher, BasePasswordHasher, BCryptPasswordHasher, SHA1PasswordHasher, MD5PasswordHasher, \
+    UnsaltedSHA1PasswordHasher, UnsaltedMD5PasswordHasher, CryptPasswordHasher
+
+from django.contrib.auth.hashers import make_password
+
+# Changing default hashers
+
+from django.conf import settings
+
+def update_settings(value):
+    settings.PASSWORD_HASHERS = value  # Questionable, and also a bad practice
+
+
+# Creating custom Hasher
+
+class MyBasePasswordHasher(BasePasswordHasher):  # Questionable
+    pass
+
+class MyPBKDF2PasswordHasher(PBKDF2PasswordHasher):  # Questionable
+    pass
+
+class MyPBKDF2SHA1PasswordHasher(PBKDF2SHA1PasswordHasher):  # Questionable
+    pass
+
+class MyArgon2PasswordHasher(Argon2PasswordHasher):  # Questionable
+    pass
+
+class MyBCryptSHA256PasswordHasher(BCryptSHA256PasswordHasher):  # Questionable
+    pass
+
+class MyBCryptPasswordHasher(BCryptPasswordHasher):  # Questionable
+    pass
+
+class MySHA1PasswordHasher(SHA1PasswordHasher):  # Questionable
+    pass
+
+class MyMD5PasswordHasher(MD5PasswordHasher):  # Questionable
+    pass
+
+class MyUnsaltedSHA1PasswordHasher(UnsaltedSHA1PasswordHasher):  # Questionable
+    pass
+
+class MyUnsaltedMD5PasswordHasher(UnsaltedMD5PasswordHasher):  # Questionable
+    pass
+
+class MyCryptPasswordHasher(CryptPasswordHasher):  # Questionable
+    pass
+
+
+# Calling make_password with a specific hasher name or salt should be reviewed
+def my_make_password(password, salt, hasher):
+    make_password(password, salt=salt)  # Questionable
+    make_password(password, hasher=hasher)  # Questionable
+    make_password(password, salt=salt, hasher=hasher)  # Questionable
+
+    # No issue is raised when only the password is provided, then only the configuration should be reviewed
+    make_password(password)  # OK
+</pre>
+<p>Django's "global_settings.py" configuration file</p>
+<pre>
+# NOTE: The following code raises issues only if the file is named "global_settings.py". This is the default
+# name of Django configuration file
+
+PASSWORD_HASHERS=[]  # Questionable
+</pre>
+<p>Werkzeug</p>
+<pre>
+from werkzeug.security import generate_password_hash
+
+def hash_password(password):
+    generate_password_hash(password)  # Questionable
+</pre>
+<p><code>passlib</code> module</p>
+<pre>
+import passlib.hash
+
+passlib.hash.apr_md5_crypt  # Questionable
+passlib.hash.argon2  # Questionable
+passlib.hash.atlassian_pbkdf2_sha1  # Questionable
+passlib.hash.bcrypt  # Questionable
+passlib.hash.bcrypt_sha256  # Questionable
+passlib.hash.bigcrypt  # Questionable
+passlib.hash.bsd_nthash  # Questionable
+passlib.hash.bsdi_crypt  # Questionable
+passlib.hash.cisco_asa  # Questionable
+passlib.hash.cisco_pix  # Questionable
+passlib.hash.cisco_type7  # Questionable
+passlib.hash.crypt16  # Questionable
+passlib.hash.cta_pbkdf2_sha1  # Questionable
+passlib.hash.des_crypt  # Questionable
+passlib.hash.django_argon2  # Questionable
+passlib.hash.django_bcrypt  # Questionable
+passlib.hash.django_bcrypt_sha256  # Questionable
+passlib.hash.django_des_crypt  # Questionable
+passlib.hash.django_disabled  # Questionable
+passlib.hash.django_pbkdf2_sha1  # Questionable
+passlib.hash.django_pbkdf2_sha256  # Questionable
+passlib.hash.django_salted_md5  # Questionable
+passlib.hash.django_salted_sha1  # Questionable
+passlib.hash.dlitz_pbkdf2_sha1  # Questionable
+passlib.hash.fshp  # Questionable
+passlib.hash.grub_pbkdf2_sha512  # Questionable
+passlib.hash.hex_md4  # Questionable
+passlib.hash.hex_md5  # Questionable
+passlib.hash.hex_sha1  # Questionable
+passlib.hash.hex_sha256  # Questionable
+passlib.hash.hex_sha512  # Questionable
+passlib.hash.htdigest  # Questionable
+passlib.hash.ldap_bcrypt  # Questionable
+passlib.hash.ldap_bsdi_crypt  # Questionable
+passlib.hash.ldap_des_crypt  # Questionable
+passlib.hash.ldap_hex_md5  # Questionable
+passlib.hash.ldap_hex_sha1  # Questionable
+passlib.hash.ldap_md5  # Questionable
+passlib.hash.ldap_md5_crypt  # Questionable
+passlib.hash.ldap_pbkdf2_sha1  # Questionable
+passlib.hash.ldap_pbkdf2_sha256  # Questionable
+passlib.hash.ldap_pbkdf2_sha512  # Questionable
+passlib.hash.ldap_plaintext  # Questionable
+passlib.hash.ldap_salted_md5  # Questionable
+passlib.hash.ldap_salted_sha1  # Questionable
+passlib.hash.ldap_sha1  # Questionable
+passlib.hash.ldap_sha1_crypt  # Questionable
+passlib.hash.ldap_sha256_crypt  # Questionable
+passlib.hash.ldap_sha512_crypt  # Questionable
+passlib.hash.lmhash  # Questionable
+passlib.hash.md5_crypt  # Questionable
+passlib.hash.msdcc  # Questionable
+passlib.hash.msdcc2  # Questionable
+passlib.hash.mssql2000  # Questionable
+passlib.hash.mssql2005  # Questionable
+passlib.hash.mysql323  # Questionable
+passlib.hash.mysql41  # Questionable
+passlib.hash.nthash  # Questionable
+passlib.hash.oracle10  # Questionable
+passlib.hash.oracle11  # Questionable
+passlib.hash.pbkdf2_sha1  # Questionable
+passlib.hash.pbkdf2_sha256  # Questionable
+passlib.hash.pbkdf2_sha512  # Questionable
+passlib.hash.phpass  # Questionable
+passlib.hash.plaintext  # Questionable
+passlib.hash.postgres_md5  # Questionable
+passlib.hash.roundup_plaintext  # Questionable
+passlib.hash.scram  # Questionable
+passlib.hash.scrypt  # Questionable
+passlib.hash.sha1_crypt  # Questionable
+passlib.hash.sha256_crypt  # Questionable
+passlib.hash.sha512_crypt  # Questionable
+passlib.hash.sun_md5_crypt  # Questionable
+passlib.hash.unix_disabled  # Questionable
+passlib.hash.unix_fallback  # Questionable
+</pre>
+<p><code>pynacl</code> library</p>
+<pre>
+import nacl.pwhash
+from nacl.pwhash.argon2i import str as argon2i_str, kdf as argon2i_kdf
+from nacl.pwhash.argon2id import str as argon2id_str, kdf as argon2id_kdf
+from nacl.pwhash.scrypt import str as scrypt_str, kdf as scrypt_kdf
+
+from nacl.hash import blake2b, sha256, sha512
+
+blake2b  # Questionable
+sha256  # Questionable
+sha512  # Questionable
+
+nacl.pwhash.str  # Questionable
+nacl.pwhash.scryptsalsa208sha256_str  # Questionable
+nacl.pwhash.kdf_scryptsalsa208sha256  # Questionable
+nacl.pwhash.argon2id.str  # Questionable
+nacl.pwhash.argon2i.str  # Questionable
+nacl.pwhash.scrypt.str  # Questionable
+nacl.pwhash.argon2id.kdf  # Questionable
+nacl.pwhash.argon2i.kdf  # Questionable
+nacl.pwhash.scrypt.kdf  # Questionable
+
+argon2i_str  # Questionable
+argon2id_str  # Questionable
+scrypt_str  # Questionable
+argon2i_kdf  # Questionable
+argon2id_kdf  # Questionable
+scrypt_kdf  # Questionable
+</pre>
 

@@ -8,8 +8,8 @@
 execute SQL commands should sanitize any externally-provided values used in those commands. Failure to do so could allow an attacker to include input
 that changes the query so that unintended commands are executed, or sensitive data is exposed. Instead of trying to sanitize data by hand, SQL binding
 mechanisms should be used; they can be relied on to automatically perform a full sanitization.</p>
-<p>This rule flags the execution of SQL queries via Django methods which might be susceptible to SQL injection. Any SQL query built by concatenating
-or formatting Strings is considered susceptible. The goal is to guide security code reviews.</p>
+<p>This rule flags the execution of SQL queries via Django methods which are not recommended by Django documentation as their use can result in an SQL
+injection. The goal is to guide security code reviews.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
   <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
@@ -34,32 +34,18 @@ value = input()
 class MyUser(models.Model):
     name = models.CharField(max_length=200)
 
-hardcoded_request = 'SELECT * FROM mytable WHERE name = "test"'
-formatted_request = 'SELECT * FROM mytable WHERE name = "%s"' % value
 
 def query_my_user(request, params):
     MyUser.objects.raw(request)  # Questionable
-    MyUser.objects.raw(formatted_request)  # Questionable
-    MyUser.objects.raw(hardcoded_request)  # Ok
 
     # Parametrized queries
     MyUser.objects.raw(request, params)  # Questionable.
-    MyUser.objects.raw(formatted_request, params)  # Questionable.
-
-    # Note: Adding quotes around %s can result in SQL injections
-    MyUser.objects.raw(hardcoded_request, params)  # Questionable. Review in case the request has quoted parameters.
 
     with connection.cursor() as cursor:
         cursor.execute(request)  # Questionable
-        cursor.execute(formatted_request)  # Questionable
-        cursor.execute(hardcoded_request, params)  # Questionable, See "Note"
-        cursor.execute(hardcoded_request)  # Ok
 
     with connections['my_db'].cursor() as cursor:
         cursor.execute(request)  # Questionable
-        cursor.execute(formatted_request)  # Questionable
-        cursor.execute(hardcoded_request, params)  # Questionable, See "Note"
-        cursor.execute(hardcoded_request)  # Ok
 
     # https://docs.djangoproject.com/en/2.1/ref/models/expressions/#raw-sql-expressions
 

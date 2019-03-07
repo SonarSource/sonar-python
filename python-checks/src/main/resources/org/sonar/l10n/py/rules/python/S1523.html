@@ -5,18 +5,12 @@
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9182">CVE-2016-9182</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000210">CVE-2018-1000210</a> </li>
 </ul>
-<p>It is dangerous to let external sources either:</p>
-<ul>
-  <li> execute unknown code in your process. Such <a href="https://www.owasp.org/index.php/Code_Injection">Injected Code</a> can either run on the
-  server or in the client (exemple: XSS attack). </li>
-  <li> select the code which will be executed via reflection. </li>
-</ul>
+<p>It is dangerous to execute unknown code in your process. Such <a href="https://www.owasp.org/index.php/Code_Injection">Injected Code</a> can either
+run on the server or in the client (exemple: XSS attack).</p>
 <p>This rule marks for review each occurence of such dynamic code execution. The goal is to guide security code reviews.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> the executed code may come from a untrusted source and hasn't been sanitized. </li>
-  <li> the code to run is dynamically chosen via reflection, and an untrusted source can use it to choose which code to run. For example a class could
-  be retrieved by its name and this name comes from a user input. </li>
 </ul>
 <p>You are at risk if you answered yes to any of these questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
@@ -27,10 +21,26 @@ href="https://wiki.sei.cmu.edu/confluence/display/java/SEC54-J.+Create+a+secure+
 href="https://www.w3schools.com/tags/att_iframe_sandbox.asp">iframes</a> and <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same-origin
 policy</a> for javascript in a web browser).</p>
 <p>Do not try to create a blacklist of dangerous code. It is impossible to cover all attacks that way.</p>
-<p>As for the use of reflection, it should be strictly controlled as it can lead to many vulnerabilities. Never let an untrusted source decide what
-code to run. If you have to do it anyway, create a list of allowed code and choose among this list.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+import os
+
+value = input()
+command = 'os.system("%s")' % value
+
+def evaluate(command, file, mode):
+    eval(command)  # Questionable.
+
+eval(command)  # Questionable. Dynamic code
+
+def execute(code, file, mode):
+    exec(code)  # Questionable.
+    exec(compile(code, file, mode))  # Questionable.
+
+exec(command)  # Questionable.
+</pre>
 <h2>Exceptions</h2>
-<p>Calling reflection methods with a hard-coded type name, method name or field name will not raise an issue.</p>
+<p>None</p>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/95.html">MITRE CWE-95</a> - Improper Neutralization of Directives in Dynamically Evaluated Code
@@ -40,27 +50,4 @@ code to run. If you have to do it anyway, create a list of allowed code and choo
   <li> OWASP Top 10 2017 Category A1 - Injection </li>
   <li> OWASP Top 10 2017 Category A7 - Cross-Site Scripting (XSS) </li>
 </ul>
-<h2>Questionable Code Example</h2>
-<pre>
-import os
-
-value = input()
-formatted_command = 'os.system("%s")' % value
-compiled_command = compile(hardcoded_command, '&lt;string&gt;', 'eval')
-compiled_code = compile(hardcoded_command, '&lt;string&gt;', 'exec')
-
-def evaluate(command, file, mode):
-    eval(command)  # Questionable. Dynamic command
-    eval(compile(command, file, mode))  # Questionable. Dynamic command
-
-eval(formatted_command)  # Questionable. Dynamic code
-eval(compiled_command)  # Questionable even though it is hardcoded, but only because it is not worth detecting this corner case.
-
-def execute(code, file, mode):
-    exec(code)  # Questionable. Dynamic code
-    exec(compile(code, file, mode))  # Questionable. Dynamic command
-
-exec(formatted_command)  # Questionable. Dynamic code
-exec(compiled_code)  # Questionable even though it is hardcoded, but only because it is not worth detecting this corner case.
-</pre>
 
