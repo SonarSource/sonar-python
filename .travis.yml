@@ -2,15 +2,11 @@ language: java
 sudo: false
 
 jdk:
-  - oraclejdk8
+  - openjdk11
 git:
   submodules: false
-install: true
 script: ./travis.sh
 
-cache:
-  directories:
-    - '$HOME/.m2/repository'
 
 before_cache:
   # remove all the artifacts that are installed in local repo because of mvn deploy
