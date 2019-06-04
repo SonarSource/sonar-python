@@ -24,7 +24,6 @@ import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
-import org.sonar.python.checks.hotspots.HttpEndpointCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.RegexCheck;
@@ -65,7 +64,6 @@ public final class CheckList {
       FunctionNameCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
-      HttpEndpointCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
       InequalityUsageCheck.class,
       InitReturnsValueCheck.class,
