@@ -22,8 +22,11 @@ package org.sonar.python.checks.hotspots;
 import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 
@@ -74,11 +77,81 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
       // According to grammar definition `ATTRIBUTE_REF` has always at least one child of
       // kind NAME, hence we don't need to check for null on `getLastChild` call
       String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
-      if (isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) {
+      if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) && !isException(node, functionName)) {
         addIssue(node, MESSAGE);
       }
     }
 
     super.visitNode(node);
+  }
+
+  private boolean isException(AstNode callExpression, String functionName) {
+    AstNode argListNode = callExpression.getFirstChild(PythonGrammar.ARGLIST);
+    if (extraContainsFormattedSqlQueries(argListNode, functionName)) {
+      return false;
+    }
+    if (argListNode != null) {
+      AstNode sqlQueryNode = argListNode.getChildren().get(0);
+      if (sqlQueryNode.getChildren().size() == 1 && sqlQueryNode.getFirstChild(PythonGrammar.TEST) != null) {
+        AstNode testNode = sqlQueryNode.getFirstChild(PythonGrammar.TEST);
+        return !isFormatted(testNode);
+      }
+    }
+    return true;
+  }
+
+  @Override
+  protected boolean isException(AstNode callExpression) {
+    return isException(callExpression, "");
+  }
+
+  private boolean isFormatted(AstNode testNode) {
+    if (testNode.getChildren().size() != 1) {
+      return false;
+    }
+    return isStrFormatCall(testNode) ||
+      isFormattedStringLiteral(testNode) ||
+      testNode.getFirstChild(PythonGrammar.M_EXPR) != null ||
+      testNode.getFirstChild(PythonGrammar.A_EXPR) != null;
+  }
+
+  private static boolean isStrFormatCall(AstNode testNode) {
+    AstNode callExpr = testNode.getFirstChild(PythonGrammar.CALL_EXPR);
+    if (callExpr != null) {
+      AstNode attributeRef = callExpr.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
+      if (attributeRef != null) {
+        return attributeRef.getFirstChild(PythonGrammar.ATOM).getFirstChild(PythonTokenType.STRING) != null &&
+          attributeRef.getFirstChild(PythonGrammar.NAME).getTokenValue().equals("format");
+      }
+    }
+    return false;
+  }
+
+  private static boolean isFormattedStringLiteral(AstNode testNode) {
+    AstNode child = testNode.getFirstChild(PythonGrammar.ATOM);
+    if (child != null) {
+      AstNode string = child.getFirstChild(PythonTokenType.STRING);
+      return string != null && (string.getTokenValue().startsWith("f")  || string.getTokenValue().startsWith("F"));
+    }
+    return false;
+  }
+
+  private boolean extraContainsFormattedSqlQueries(@CheckForNull AstNode argListNode, String functionName) {
+    if (functionName.equals("extra")) {
+      return argListNode != null && argListNode.getChildren(PythonGrammar.ARGUMENT).stream()
+        .filter(SQLQueriesCheck::isAssignment)
+        .map(argument -> argument.getChildren().get(2))
+        .anyMatch(test -> test.getDescendants(PythonGrammar.TEST).stream().anyMatch(this::isFormatted));
+    }
+    return false;
+  }
+
+  private static boolean isAssignment(@CheckForNull AstNode node) {
+    if (node == null || node.getChildren().size() != 3) {
+      return false;
+    }
+    return node.getChildren().get(0).is(PythonGrammar.TEST) &&
+      node.getChildren().get(1).is(PythonPunctuator.ASSIGN) &&
+      node.getChildren().get(2).is(PythonGrammar.TEST);
   }
 }
