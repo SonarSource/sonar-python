@@ -1,19 +1,32 @@
-<p>Executing SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<p>Formatting strings used as SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
 <ul>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-9019">CVE-2018-9019</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7318">CVE-2018-7318</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5611">CVE-2017-5611</a> </li>
 </ul>
-<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> is still one of the top 10 security vulnerabilities. Applications that
-execute SQL commands should sanitize any externally-provided values used in those commands. Failure to do so could allow an attacker to include input
-that changes the query so that unintended commands are executed, or sensitive data is exposed. Instead of trying to sanitize data by hand, SQL binding
-mechanisms should be used; they can be relied on to automatically perform a full sanitization.</p>
-<p>This rule flags the execution of SQL queries via Django methods which are not recommended by Django documentation as their use can result in an SQL
-injection. The goal is to guide security code reviews.</p>
+<p>SQL queries often need to use a hardcoded SQL string with a dynamic parameter coming from a user request. Formatting a string to add those
+parameters to the request is a bad practice as it can result in an <a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a>. The safe
+way to add parameters to a SQL query is to use SQL binding mechanisms.</p>
+<p>Note that this rule does not detect SQL injections.</p>
+<p>This rule flags the execution of formatted SQL via Django APIs. The goal is to guide security code reviews and to prevent a common bad
+practice.</p>
+<p>A string is considered formatted if it uses one of the following operations:</p>
+<ul>
+  <li> <code>str.format(...)</code> </li>
+  <li> <code>str % str</code> </li>
+  <li> <code>str + str</code> </li>
+  <li> <code>f"SELECT * FROM mytable WHERE name = '{value}'"</code> </li>
+  <li> <code>F"SELECT * FROM mytable WHERE name = '{value}'"</code> </li>
+</ul>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the SQL query is built using string formatting technics, such as concatenating variables. </li>
+  <li> some of the values are coming from an untrusted source and are not sanitized. </li>
+</ul>
+<p>You may be at risk if you answered yes to this question.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
-  </li>
+  <li> Avoid building queries manually using formatting. If you do it anyway, do not include user input in this building process. </li>
   <li> Use <a href="https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet">parameterized queries, prepared statements, or stored
   procedures</a> whenever possible. </li>
   <li> Avoid executing SQL queries containing unsafe input in stored procedures or functions. </li>
@@ -21,7 +34,7 @@ injection. The goal is to guide security code reviews.</p>
   <li> Follow <a href="https://docs.djangoproject.com/en/2.1/topics/security/#sql-injection-protection">Django best practices</a>. </li>
 </ul>
 <p>You can also reduce the impact of an attack by using a database account with low privileges.</p>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 from django.db import models
 from django.db import connection
@@ -35,28 +48,45 @@ class MyUser(models.Model):
     name = models.CharField(max_length=200)
 
 
-def query_my_user(request, params):
-    MyUser.objects.raw(request)  # Questionable
+def query_my_user(request, params, value):
+    MyUser.objects.raw(request + value)  # Sensitive
 
     # Parametrized queries
-    MyUser.objects.raw(request, params)  # Questionable.
+    MyUser.objects.raw(request + value, params)  # Sensitive.
 
     with connection.cursor() as cursor:
-        cursor.execute(request)  # Questionable
+        cursor.execute(request + value)  # Sensitive
 
     with connections['my_db'].cursor() as cursor:
-        cursor.execute(request)  # Questionable
+        cursor.execute(request + value)  # Sensitive
 
     # https://docs.djangoproject.com/en/2.1/ref/models/expressions/#raw-sql-expressions
 
-    RawSQL("select col from mytable where mycol = %s", ("test",))  # Questionable, See "Note"
+    RawSQL("select col from %s where mycol = %s and othercol = " + value, ("test",))  # Sensitive
 
     # https://docs.djangoproject.com/en/2.1/ref/models/querysets/#extra
 
-    MyUser.objects.extra(  # Questionable. calling the "extra" method, See "Note"
+    MyUser.objects.extra(
         select={
-            'mycol': 'myothercol &gt; 10'
+            'mycol':  "select col from sometable here mycol = %s and othercol = " + value}, # Sensitive
+...     select_params=(someparam,),
         },
     )
 </pre>
+<h2>Exceptions</h2>
+<p>The current implementation does not follow variables. It will only detect SQL queries which are formatted directly in the function call.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/89">MITRE, CWE-89</a> - Improper Neutralization of Special Elements used in an SQL Command </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/564.html">MITRE, CWE-564</a> - SQL Injection: Hibernate </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/943.html">MITRE, CWE-943</a> - Improper Neutralization of Special Elements in Data Query Logic
+  </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/PgIRAg">CERT, IDS00-J.</a> - Prevent SQL injection </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
+  <li> Derived from FindSecBugs rules <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA">Potential SQL/JPQL Injection
+  (JPA)</a>, <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO">Potential SQL/JDOQL Injection (JDO)</a>, <a
+  href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE">Potential SQL/HQL Injection (Hibernate)</a> </li>
+</ul>
 
