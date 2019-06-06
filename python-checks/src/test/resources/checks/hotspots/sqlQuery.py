@@ -7,7 +7,7 @@ class MyUser(models.Model):
 
     def query_my_user(request, params):
         hardcoded_request = 'SELECT * FROM mytable WHERE name = "test"'
-        MyUser.objects.raw('SELECT * FROM mytable WHERE name = "%s"' % value)  # Noncompliant {{Make sure that executing SQL queries is safe here.}}
+        MyUser.objects.raw('SELECT * FROM mytable WHERE name = "%s"' % value)  # Noncompliant {{Make sure that formatting this SQL query is safe here.}}
 #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         MyUser.objects.raw('SELECT * FROM mytable WHERE name = "%s"'.format(value))  # Noncompliant
         MyUser.objects.raw(f"SELECT * FROM mytable WHERE name = '{value}'")  # Noncompliant

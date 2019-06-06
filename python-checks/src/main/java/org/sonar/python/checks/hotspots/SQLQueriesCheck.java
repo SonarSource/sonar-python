@@ -33,7 +33,7 @@ import org.sonar.python.semantic.Symbol;
 @Rule(key = SQLQueriesCheck.CHECK_KEY)
 public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S2077";
-  private static final String MESSAGE = "Make sure that executing SQL queries is safe here.";
+  private static final String MESSAGE = "Make sure that formatting this SQL query is safe here.";
   private boolean isUsingDjangoModel = false;
   private boolean isUsingDjangoDBConnection = false;
 
