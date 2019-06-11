@@ -19,29 +19,30 @@ features should be explicitly asked via a command line argument, an environment 
 <p>Check that every debug feature is controlled by only very few configuration variables: logging, exception/error handling, access control, etc... It
 is otherwise very easy to forget one of them.</p>
 <p>Do not enable debug features on production servers.</p>
-<h2>See</h2>
-<ul>
-  <li> <a href="http://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Leftover Debug Code </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/215.html">MITRE, CWE-215</a> - Information Exposure Through Debug Information </li>
-  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
-</ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <p>Django</p>
 <pre>
 from django.conf import settings
 
-settings.configure(DEBUG=True)  # Questionable when set to True
-settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Questionable when set to True
+settings.configure(DEBUG=True)  # Sensitive when set to True
+settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Sensitive when set to True
 
 def custom_config(config):
-    settings.configure(default_settings=config, DEBUG=True)  # Questionable
+    settings.configure(default_settings=config, DEBUG=True)  # Sensitive
 </pre>
 <p>Django's "global_settings.py" configuration file</p>
 <pre>
 # NOTE: The following code raises issues only if the file is named "global_settings.py". This is the default
 # name of Django configuration file
 
-DEBUG = True  # Questionable
-DEBUG_PROPAGATE_EXCEPTIONS = True  # Questionable
+DEBUG = True  # Sensitive
+DEBUG_PROPAGATE_EXCEPTIONS = True  # Sensitive
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Leftover Debug Code </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/215.html">MITRE, CWE-215</a> - Information Exposure Through Debug Information </li>
+</ul>
 

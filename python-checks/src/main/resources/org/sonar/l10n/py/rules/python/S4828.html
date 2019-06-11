@@ -13,13 +13,13 @@ file.</p>
 doesn't own the process.</p>
 <p> * Secure the source from which the process PID is read.</p>
 <p> * Run the process sending the signals with minimal permissions.</p>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 import os
 
 def send_signal(pid, sig, pgid):
-    os.kill(pid, sig)  # Questionable
-    os.killpg(pgid, sig)  # Questionable
+    os.kill(pid, sig)  # Sensitive
+    os.killpg(pgid, sig)  # Sensitive
 </pre>
 <h2>See</h2>
 <p> * <a href="https://cwe.mitre.org/data/definitions/283.html">MITRE, CWE-283</a> - Unverified Ownership</p>

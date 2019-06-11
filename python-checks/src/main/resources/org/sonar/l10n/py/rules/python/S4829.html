@@ -13,48 +13,44 @@ can be dangerous and should be validated.</p>
 <p>You are at risk if you answered yes to this question.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p><a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> all data read from the standard input before using it.</p>
-<h2>See:</h2>
-<ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
-</ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <p>Python 2 and Python 3</p>
 <pre>
 import sys
 from sys import stdin, __stdin__
 
-# Any reference to sys.stdin or sys.__stdin__ without a method call is Questionable
-sys.stdin  # Questionable
+# Any reference to sys.stdin or sys.__stdin__ without a method call is Sensitive
+sys.stdin  # Sensitive
 
-for line in sys.stdin:  # Questionable
+for line in sys.stdin:  # Sensitive
     print(line)
 
-it = iter(sys.stdin)  # Questionable
+it = iter(sys.stdin)  # Sensitive
 line = next(it)
 
-# Calling the following methods on stdin or __stdin__ is questionable
-sys.stdin.read()  # Questionable
-sys.stdin.readline()  # Questionable
-sys.stdin.readlines()  # Questionable
+# Calling the following methods on stdin or __stdin__ is sensitive
+sys.stdin.read()  # Sensitive
+sys.stdin.readline()  # Sensitive
+sys.stdin.readlines()  # Sensitive
 
-# Calling other methods on stdin or __stdin__ does not require a review, thus it is not Questionable
+# Calling other methods on stdin or __stdin__ does not require a review, thus it is not Sensitive
 sys.stdin.seekable()  # Ok
 # ...
 </pre>
 <p>Python 2 only</p>
 <pre>
-raw_input('What is your password?')  # Questionable
+raw_input('What is your password?')  # Sensitive
 </pre>
 <p>Python 3 only</p>
 <pre>
-input('What is your password?')  # Questionable
+input('What is your password?')  # Sensitive
 </pre>
 <p>Function <code>fileinput.input</code> and class <code>fileinput.FileInput</code> read the standard input when the list of files is empty.</p>
 <pre>
-for line in fileinput.input():  # Questionable
+for line in fileinput.input():  # Sensitive
     print(line)
 
-for line in fileinput.FileInput():  # Questionable
+for line in fileinput.FileInput():  # Sensitive
     print(line)
 
 for line in fileinput.input(['setup.py']):  # Ok
@@ -63,4 +59,8 @@ for line in fileinput.input(['setup.py']):  # Ok
 for line in fileinput.FileInput(['setup.py']):  # Ok
     print(line)
 </pre>
+<h2>See:</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
+</ul>
 

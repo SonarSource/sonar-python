@@ -34,39 +34,30 @@ original data with another one having the same hash.</p>
   <li> the strength of hashing algorithms often decreases over time as hardware capabilities increase. Check regularly that the algorithms you are
   using are still considered secure. If needed, rehash your data using a stronger algorithm. </li>
 </ul>
-<h2>See</h2>
-<ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/916.html">MITRE, CWE-916</a> - Use of Password Hash With Insufficient Computational Effort
-  </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/759.html">MITRE, CWE-759</a> - Use of a One-Way Hash without a Salt </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/760.html">MITRE, CWE-760</a> - Use of a One-Way Hash with a Predictable Salt </li>
-  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
-  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
-</ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <p><code>hashlib</code> module</p>
 <pre>
 import hashlib
 
 def hash_data(algorithm):
-    hashlib.new(algorithm)  # Questionable
+    hashlib.new(algorithm)  # Sensitive
 
-    hashlib.blake2b  # Questionable
-    hashlib.blake2s  # Questionable
-    hashlib.md5  # Questionable
-    hashlib.pbkdf2_hmac # Questionable
-    hashlib.sha1  # Questionable
-    hashlib.sha224  # Questionable
-    hashlib.sha256  # Questionable
-    hashlib.sha384  # Questionable
-    hashlib.sha3_224  # Questionable
-    hashlib.sha3_256  # Questionable
-    hashlib.sha3_384  # Questionable
-    hashlib.sha3_512  # Questionable
-    hashlib.sha512  # Questionable
-    hashlib.shake_128  # Questionable
-    hashlib.shake_256  # Questionable
-    hashlib.scrypt  # Questionable
+    hashlib.blake2b  # Sensitive
+    hashlib.blake2s  # Sensitive
+    hashlib.md5  # Sensitive
+    hashlib.pbkdf2_hmac # Sensitive
+    hashlib.sha1  # Sensitive
+    hashlib.sha224  # Sensitive
+    hashlib.sha256  # Sensitive
+    hashlib.sha384  # Sensitive
+    hashlib.sha3_224  # Sensitive
+    hashlib.sha3_256  # Sensitive
+    hashlib.sha3_384  # Sensitive
+    hashlib.sha3_512  # Sensitive
+    hashlib.sha512  # Sensitive
+    hashlib.shake_128  # Sensitive
+    hashlib.shake_256  # Sensitive
+    hashlib.scrypt  # Sensitive
 </pre>
 <p><code>cryptography</code> library</p>
 <pre>
@@ -74,7 +65,7 @@ from cryptography.hazmat.primitives import hashes
 
 
 def my_hash(algorithm):
-    hashes.Hash(algorithm)  # Questionable
+    hashes.Hash(algorithm)  # Sensitive
 </pre>
 <p>Django</p>
 <pre>
@@ -89,50 +80,50 @@ from django.contrib.auth.hashers import make_password
 from django.conf import settings
 
 def update_settings(value):
-    settings.PASSWORD_HASHERS = value  # Questionable, and also a bad practice
+    settings.PASSWORD_HASHERS = value  # Sensitive, and also a bad practice
 
 
 # Creating custom Hasher
 
-class MyBasePasswordHasher(BasePasswordHasher):  # Questionable
+class MyBasePasswordHasher(BasePasswordHasher):  # Sensitive
     pass
 
-class MyPBKDF2PasswordHasher(PBKDF2PasswordHasher):  # Questionable
+class MyPBKDF2PasswordHasher(PBKDF2PasswordHasher):  # Sensitive
     pass
 
-class MyPBKDF2SHA1PasswordHasher(PBKDF2SHA1PasswordHasher):  # Questionable
+class MyPBKDF2SHA1PasswordHasher(PBKDF2SHA1PasswordHasher):  # Sensitive
     pass
 
-class MyArgon2PasswordHasher(Argon2PasswordHasher):  # Questionable
+class MyArgon2PasswordHasher(Argon2PasswordHasher):  # Sensitive
     pass
 
-class MyBCryptSHA256PasswordHasher(BCryptSHA256PasswordHasher):  # Questionable
+class MyBCryptSHA256PasswordHasher(BCryptSHA256PasswordHasher):  # Sensitive
     pass
 
-class MyBCryptPasswordHasher(BCryptPasswordHasher):  # Questionable
+class MyBCryptPasswordHasher(BCryptPasswordHasher):  # Sensitive
     pass
 
-class MySHA1PasswordHasher(SHA1PasswordHasher):  # Questionable
+class MySHA1PasswordHasher(SHA1PasswordHasher):  # Sensitive
     pass
 
-class MyMD5PasswordHasher(MD5PasswordHasher):  # Questionable
+class MyMD5PasswordHasher(MD5PasswordHasher):  # Sensitive
     pass
 
-class MyUnsaltedSHA1PasswordHasher(UnsaltedSHA1PasswordHasher):  # Questionable
+class MyUnsaltedSHA1PasswordHasher(UnsaltedSHA1PasswordHasher):  # Sensitive
     pass
 
-class MyUnsaltedMD5PasswordHasher(UnsaltedMD5PasswordHasher):  # Questionable
+class MyUnsaltedMD5PasswordHasher(UnsaltedMD5PasswordHasher):  # Sensitive
     pass
 
-class MyCryptPasswordHasher(CryptPasswordHasher):  # Questionable
+class MyCryptPasswordHasher(CryptPasswordHasher):  # Sensitive
     pass
 
 
 # Calling make_password with a specific hasher name or salt should be reviewed
 def my_make_password(password, salt, hasher):
-    make_password(password, salt=salt)  # Questionable
-    make_password(password, hasher=hasher)  # Questionable
-    make_password(password, salt=salt, hasher=hasher)  # Questionable
+    make_password(password, salt=salt)  # Sensitive
+    make_password(password, hasher=hasher)  # Sensitive
+    make_password(password, salt=salt, hasher=hasher)  # Sensitive
 
     # No issue is raised when only the password is provided, then only the configuration should be reviewed
     make_password(password)  # OK
@@ -142,94 +133,94 @@ def my_make_password(password, salt, hasher):
 # NOTE: The following code raises issues only if the file is named "global_settings.py". This is the default
 # name of Django configuration file
 
-PASSWORD_HASHERS=[]  # Questionable
+PASSWORD_HASHERS=[]  # Sensitive
 </pre>
 <p>Werkzeug</p>
 <pre>
 from werkzeug.security import generate_password_hash
 
 def hash_password(password):
-    generate_password_hash(password)  # Questionable
+    generate_password_hash(password)  # Sensitive
 </pre>
 <p><code>passlib</code> module</p>
 <pre>
 import passlib.hash
 
-passlib.hash.apr_md5_crypt  # Questionable
-passlib.hash.argon2  # Questionable
-passlib.hash.atlassian_pbkdf2_sha1  # Questionable
-passlib.hash.bcrypt  # Questionable
-passlib.hash.bcrypt_sha256  # Questionable
-passlib.hash.bigcrypt  # Questionable
-passlib.hash.bsd_nthash  # Questionable
-passlib.hash.bsdi_crypt  # Questionable
-passlib.hash.cisco_asa  # Questionable
-passlib.hash.cisco_pix  # Questionable
-passlib.hash.cisco_type7  # Questionable
-passlib.hash.crypt16  # Questionable
-passlib.hash.cta_pbkdf2_sha1  # Questionable
-passlib.hash.des_crypt  # Questionable
-passlib.hash.django_argon2  # Questionable
-passlib.hash.django_bcrypt  # Questionable
-passlib.hash.django_bcrypt_sha256  # Questionable
-passlib.hash.django_des_crypt  # Questionable
-passlib.hash.django_disabled  # Questionable
-passlib.hash.django_pbkdf2_sha1  # Questionable
-passlib.hash.django_pbkdf2_sha256  # Questionable
-passlib.hash.django_salted_md5  # Questionable
-passlib.hash.django_salted_sha1  # Questionable
-passlib.hash.dlitz_pbkdf2_sha1  # Questionable
-passlib.hash.fshp  # Questionable
-passlib.hash.grub_pbkdf2_sha512  # Questionable
-passlib.hash.hex_md4  # Questionable
-passlib.hash.hex_md5  # Questionable
-passlib.hash.hex_sha1  # Questionable
-passlib.hash.hex_sha256  # Questionable
-passlib.hash.hex_sha512  # Questionable
-passlib.hash.htdigest  # Questionable
-passlib.hash.ldap_bcrypt  # Questionable
-passlib.hash.ldap_bsdi_crypt  # Questionable
-passlib.hash.ldap_des_crypt  # Questionable
-passlib.hash.ldap_hex_md5  # Questionable
-passlib.hash.ldap_hex_sha1  # Questionable
-passlib.hash.ldap_md5  # Questionable
-passlib.hash.ldap_md5_crypt  # Questionable
-passlib.hash.ldap_pbkdf2_sha1  # Questionable
-passlib.hash.ldap_pbkdf2_sha256  # Questionable
-passlib.hash.ldap_pbkdf2_sha512  # Questionable
-passlib.hash.ldap_plaintext  # Questionable
-passlib.hash.ldap_salted_md5  # Questionable
-passlib.hash.ldap_salted_sha1  # Questionable
-passlib.hash.ldap_sha1  # Questionable
-passlib.hash.ldap_sha1_crypt  # Questionable
-passlib.hash.ldap_sha256_crypt  # Questionable
-passlib.hash.ldap_sha512_crypt  # Questionable
-passlib.hash.lmhash  # Questionable
-passlib.hash.md5_crypt  # Questionable
-passlib.hash.msdcc  # Questionable
-passlib.hash.msdcc2  # Questionable
-passlib.hash.mssql2000  # Questionable
-passlib.hash.mssql2005  # Questionable
-passlib.hash.mysql323  # Questionable
-passlib.hash.mysql41  # Questionable
-passlib.hash.nthash  # Questionable
-passlib.hash.oracle10  # Questionable
-passlib.hash.oracle11  # Questionable
-passlib.hash.pbkdf2_sha1  # Questionable
-passlib.hash.pbkdf2_sha256  # Questionable
-passlib.hash.pbkdf2_sha512  # Questionable
-passlib.hash.phpass  # Questionable
-passlib.hash.plaintext  # Questionable
-passlib.hash.postgres_md5  # Questionable
-passlib.hash.roundup_plaintext  # Questionable
-passlib.hash.scram  # Questionable
-passlib.hash.scrypt  # Questionable
-passlib.hash.sha1_crypt  # Questionable
-passlib.hash.sha256_crypt  # Questionable
-passlib.hash.sha512_crypt  # Questionable
-passlib.hash.sun_md5_crypt  # Questionable
-passlib.hash.unix_disabled  # Questionable
-passlib.hash.unix_fallback  # Questionable
+passlib.hash.apr_md5_crypt  # Sensitive
+passlib.hash.argon2  # Sensitive
+passlib.hash.atlassian_pbkdf2_sha1  # Sensitive
+passlib.hash.bcrypt  # Sensitive
+passlib.hash.bcrypt_sha256  # Sensitive
+passlib.hash.bigcrypt  # Sensitive
+passlib.hash.bsd_nthash  # Sensitive
+passlib.hash.bsdi_crypt  # Sensitive
+passlib.hash.cisco_asa  # Sensitive
+passlib.hash.cisco_pix  # Sensitive
+passlib.hash.cisco_type7  # Sensitive
+passlib.hash.crypt16  # Sensitive
+passlib.hash.cta_pbkdf2_sha1  # Sensitive
+passlib.hash.des_crypt  # Sensitive
+passlib.hash.django_argon2  # Sensitive
+passlib.hash.django_bcrypt  # Sensitive
+passlib.hash.django_bcrypt_sha256  # Sensitive
+passlib.hash.django_des_crypt  # Sensitive
+passlib.hash.django_disabled  # Sensitive
+passlib.hash.django_pbkdf2_sha1  # Sensitive
+passlib.hash.django_pbkdf2_sha256  # Sensitive
+passlib.hash.django_salted_md5  # Sensitive
+passlib.hash.django_salted_sha1  # Sensitive
+passlib.hash.dlitz_pbkdf2_sha1  # Sensitive
+passlib.hash.fshp  # Sensitive
+passlib.hash.grub_pbkdf2_sha512  # Sensitive
+passlib.hash.hex_md4  # Sensitive
+passlib.hash.hex_md5  # Sensitive
+passlib.hash.hex_sha1  # Sensitive
+passlib.hash.hex_sha256  # Sensitive
+passlib.hash.hex_sha512  # Sensitive
+passlib.hash.htdigest  # Sensitive
+passlib.hash.ldap_bcrypt  # Sensitive
+passlib.hash.ldap_bsdi_crypt  # Sensitive
+passlib.hash.ldap_des_crypt  # Sensitive
+passlib.hash.ldap_hex_md5  # Sensitive
+passlib.hash.ldap_hex_sha1  # Sensitive
+passlib.hash.ldap_md5  # Sensitive
+passlib.hash.ldap_md5_crypt  # Sensitive
+passlib.hash.ldap_pbkdf2_sha1  # Sensitive
+passlib.hash.ldap_pbkdf2_sha256  # Sensitive
+passlib.hash.ldap_pbkdf2_sha512  # Sensitive
+passlib.hash.ldap_plaintext  # Sensitive
+passlib.hash.ldap_salted_md5  # Sensitive
+passlib.hash.ldap_salted_sha1  # Sensitive
+passlib.hash.ldap_sha1  # Sensitive
+passlib.hash.ldap_sha1_crypt  # Sensitive
+passlib.hash.ldap_sha256_crypt  # Sensitive
+passlib.hash.ldap_sha512_crypt  # Sensitive
+passlib.hash.lmhash  # Sensitive
+passlib.hash.md5_crypt  # Sensitive
+passlib.hash.msdcc  # Sensitive
+passlib.hash.msdcc2  # Sensitive
+passlib.hash.mssql2000  # Sensitive
+passlib.hash.mssql2005  # Sensitive
+passlib.hash.mysql323  # Sensitive
+passlib.hash.mysql41  # Sensitive
+passlib.hash.nthash  # Sensitive
+passlib.hash.oracle10  # Sensitive
+passlib.hash.oracle11  # Sensitive
+passlib.hash.pbkdf2_sha1  # Sensitive
+passlib.hash.pbkdf2_sha256  # Sensitive
+passlib.hash.pbkdf2_sha512  # Sensitive
+passlib.hash.phpass  # Sensitive
+passlib.hash.plaintext  # Sensitive
+passlib.hash.postgres_md5  # Sensitive
+passlib.hash.roundup_plaintext  # Sensitive
+passlib.hash.scram  # Sensitive
+passlib.hash.scrypt  # Sensitive
+passlib.hash.sha1_crypt  # Sensitive
+passlib.hash.sha256_crypt  # Sensitive
+passlib.hash.sha512_crypt  # Sensitive
+passlib.hash.sun_md5_crypt  # Sensitive
+passlib.hash.unix_disabled  # Sensitive
+passlib.hash.unix_fallback  # Sensitive
 </pre>
 <p><code>pynacl</code> library</p>
 <pre>
@@ -240,25 +231,37 @@ from nacl.pwhash.scrypt import str as scrypt_str, kdf as scrypt_kdf
 
 from nacl.hash import blake2b, sha256, sha512
 
-blake2b  # Questionable
-sha256  # Questionable
-sha512  # Questionable
+blake2b  # Sensitive
+sha256  # Sensitive
+sha512  # Sensitive
 
-nacl.pwhash.str  # Questionable
-nacl.pwhash.scryptsalsa208sha256_str  # Questionable
-nacl.pwhash.kdf_scryptsalsa208sha256  # Questionable
-nacl.pwhash.argon2id.str  # Questionable
-nacl.pwhash.argon2i.str  # Questionable
-nacl.pwhash.scrypt.str  # Questionable
-nacl.pwhash.argon2id.kdf  # Questionable
-nacl.pwhash.argon2i.kdf  # Questionable
-nacl.pwhash.scrypt.kdf  # Questionable
+nacl.pwhash.str  # Sensitive
+nacl.pwhash.scryptsalsa208sha256_str  # Sensitive
+nacl.pwhash.kdf_scryptsalsa208sha256  # Sensitive
+nacl.pwhash.argon2id.str  # Sensitive
+nacl.pwhash.argon2i.str  # Sensitive
+nacl.pwhash.scrypt.str  # Sensitive
+nacl.pwhash.argon2id.kdf  # Sensitive
+nacl.pwhash.argon2i.kdf  # Sensitive
+nacl.pwhash.scrypt.kdf  # Sensitive
 
-argon2i_str  # Questionable
-argon2id_str  # Questionable
-scrypt_str  # Questionable
-argon2i_kdf  # Questionable
-argon2id_kdf  # Questionable
-scrypt_kdf  # Questionable
+argon2i_str  # Sensitive
+argon2id_str  # Sensitive
+scrypt_str  # Sensitive
+argon2i_kdf  # Sensitive
+argon2id_kdf  # Sensitive
+scrypt_kdf  # Sensitive
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/916.html">MITRE, CWE-916</a> - Use of Password Hash With Insufficient Computational Effort
+  </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/759.html">MITRE, CWE-759</a> - Use of a One-Way Hash without a Salt </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/760.html">MITRE, CWE-760</a> - Use of a One-Way Hash with a Predictable Salt </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
 
