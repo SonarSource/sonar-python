@@ -70,6 +70,9 @@ public class PylintSensor implements Sensor {
       return;
     }
 
+    LOG.warn("Execution of pylint by SonarPython is deprecated and will be removed." +
+      " Instead, pylint should be executed before sonar-scanner and its report should be imported using the '" + PylintImportSensor.REPORT_PATH_KEY + "' property.");
+
     int i = 0;
     FileSystem fileSystem = sensorContext.fileSystem();
     FilePredicates p = fileSystem.predicates();

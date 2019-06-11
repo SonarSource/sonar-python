@@ -142,6 +142,8 @@ public class PylintSensorTest {
     assertThat(context.allIssues().iterator().next().ruleKey().rule()).isEqualTo(C0103_RULE_KEY);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Pylint rule 'C9999' is unknown in Sonar");
     assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain("Pylint rule 'C0111' is unknown in Sonar");
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Execution of pylint by SonarPython is deprecated and will be removed." +
+      " Instead, pylint should be executed before sonar-scanner and its report should be imported using the 'sonar.python.pylint.reportPath' property.");
   }
 
   @Test
