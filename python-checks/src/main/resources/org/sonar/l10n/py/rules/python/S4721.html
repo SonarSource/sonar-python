@@ -35,13 +35,7 @@ potentially leading to loss of confidentiality, integrity or availability.</p>
   <li> refuse to run the command if the process has too many privileges. For example: forbid running the code as "root". </li>
 </ul>
 <p> </p>
-<h2>See</h2>
-<ul>
-  <li> <a href="http://cwe.mitre.org/data/definitions/78">MITRE, CWE-78</a> - Improper Neutralization of Special Elements used in an OS Command </li>
-  <li> OWASP Top 10 2017 Category A1 - Injection </li>
-  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
-</ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <p>Python 3</p>
 <pre>
 import subprocess
@@ -49,49 +43,49 @@ import os
 
 params = ["ls", "-l"]
 
-subprocess.run(params)  # Questionable
-subprocess.Popen(params)  # Questionable
+subprocess.run(params)  # Sensitive
+subprocess.Popen(params)  # Sensitive
 
 # Older API
 
-subprocess.call(params)  # Questionable
-subprocess.check_call(params)  # Questionable
-subprocess.check_output(params)  # Questionable
+subprocess.call(params)  # Sensitive
+subprocess.check_call(params)  # Sensitive
+subprocess.check_output(params)  # Sensitive
 
 cmd = "ls -l"
-os.system(cmd)  # Questionable
+os.system(cmd)  # Sensitive
 
 mode = os.P_WAIT
 file = "ls"
 path = "/bin/ls"
 env = os.environ
-os.spawnl(mode, path, *params)  # Questionable
-os.spawnle(mode, path, *params, env)  # Questionable
-os.spawnlp(mode, file, *params)  # Questionable
-os.spawnlpe(mode, file, *params, env)  # Questionable
-os.spawnv(mode, path, params)  # Questionable
-os.spawnve(mode, path, params, env)  # Questionable
-os.spawnvp(mode, file, params)  # Questionable
-os.spawnvpe(mode, file, params, env)  # Questionable
+os.spawnl(mode, path, *params)  # Sensitive
+os.spawnle(mode, path, *params, env)  # Sensitive
+os.spawnlp(mode, file, *params)  # Sensitive
+os.spawnlpe(mode, file, *params, env)  # Sensitive
+os.spawnv(mode, path, params)  # Sensitive
+os.spawnve(mode, path, params, env)  # Sensitive
+os.spawnvp(mode, file, params)  # Sensitive
+os.spawnvpe(mode, file, params, env)  # Sensitive
 
 mode = 'r'
-(child_stdout) = os.popen(cmd, mode, 1)  # Questionable
+(child_stdout) = os.popen(cmd, mode, 1)  # Sensitive
 # print(child_stdout.read())
 
-(_, output) = subprocess.getstatusoutput(cmd)  # Questionable
+(_, output) = subprocess.getstatusoutput(cmd)  # Sensitive
 
-out = subprocess.getoutput(cmd)  # Questionable
+out = subprocess.getoutput(cmd)  # Sensitive
 
-os.startfile(path)  # Questionable
+os.startfile(path)  # Sensitive
 
-os.execl(path, *params)  # Questionable
-os.execle(path, *params, env)  # Questionable
-os.execlp(file, *params)  # Questionable
-os.execlpe(file, *params, env)  # Questionable
-os.execv(path, params)  # Questionable
-os.execve(path, params, env)  # Questionable
-os.execvp(file, params)  # Questionable
-os.execvpe(file, params, env)  # Questionable
+os.execl(path, *params)  # Sensitive
+os.execle(path, *params, env)  # Sensitive
+os.execlp(file, *params)  # Sensitive
+os.execlpe(file, *params, env)  # Sensitive
+os.execv(path, params)  # Sensitive
+os.execve(path, params, env)  # Sensitive
+os.execvp(file, params)  # Sensitive
+os.execvpe(file, params, env)  # Sensitive
 </pre>
 <p>Python 2</p>
 <pre>
@@ -100,12 +94,18 @@ import popen2
 
 cmd = "ls -l"
 mode = "r"
-(_, child_stdout) = os.popen2(cmd, mode)  # Questionable
-(_, child_stdout, _) = os.popen3(cmd, mode)  # Questionable
-(_, child_stdout) = os.popen4(cmd, mode)  # Questionable
+(_, child_stdout) = os.popen2(cmd, mode)  # Sensitive
+(_, child_stdout, _) = os.popen3(cmd, mode)  # Sensitive
+(_, child_stdout) = os.popen4(cmd, mode)  # Sensitive
 
-(child_stdout, _) = popen2.popen2(cmd)  # Questionable
-(child_stdout, _, _) = popen2.popen3(cmd)  # Questionable
-(child_stdout, _) = popen2.popen4(cmd)  # Questionable
+(child_stdout, _) = popen2.popen2(cmd)  # Sensitive
+(child_stdout, _, _) = popen2.popen3(cmd)  # Sensitive
+(child_stdout, _) = popen2.popen4(cmd)  # Sensitive
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/78">MITRE, CWE-78</a> - Improper Neutralization of Special Elements used in an OS Command </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
+</ul>
 
