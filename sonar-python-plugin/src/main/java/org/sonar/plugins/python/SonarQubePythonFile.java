@@ -37,7 +37,7 @@ public abstract class SonarQubePythonFile implements PythonFile {
 
   @Override
   public String fileName() {
-    return inputFile.path().getFileName().toString();
+    return inputFile.filename();
   }
 
   public InputFile inputFile() {

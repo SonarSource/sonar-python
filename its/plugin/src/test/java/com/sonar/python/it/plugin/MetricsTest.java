@@ -49,10 +49,8 @@ public class MetricsTest {
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
   private static final String EXECUTABLE_LINES_DATA = "executable_lines_data";
   private static final String FILE_COMPLEXITY = "file_complexity";
-  private static final String FILE_COMPLEXITY_DISTRIBUTION = "file_complexity_distribution";
   private static final String FILES = "files";
   private static final String FUNCTION_COMPLEXITY = "function_complexity";
-  private static final String FUNCTION_COMPLEXITY_DISTRIBUTION = "function_complexity_distribution";
   private static final String FUNCTIONS = "functions";
   private static final String LINES = "lines";
   private static final String NCLOC = "ncloc";
@@ -97,9 +95,7 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getProjectMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getProjectMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
-    assertThat(getProjectMeasure(FUNCTION_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("1=0;2=1;4=0;6=0;8=0;10=0;12=0;20=0;30=0");
     assertThat(getProjectMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(1.5, OFFSET);
-    assertThat(getProjectMeasure(FILE_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
     // Duplication
     assertThat(getProjectMeasureAsDouble(DUPLICATED_LINES)).isEqualTo(0.0, OFFSET);
     assertThat(getProjectMeasureAsDouble(DUPLICATED_BLOCKS)).isEqualTo(0.0, OFFSET);
@@ -128,9 +124,7 @@ public class MetricsTest {
     assertThat(getDirectoryMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getDirectoryMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getDirectoryMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
-    assertThat(getDirectoryMeasure(FUNCTION_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("1=0;2=1;4=0;6=0;8=0;10=0;12=0;20=0;30=0");
     assertThat(getDirectoryMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(1.5, OFFSET);
-    assertThat(getDirectoryMeasure(FILE_COMPLEXITY_DISTRIBUTION).getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
     // Duplication
     assertThat(getDirectoryMeasureAsDouble(DUPLICATED_LINES)).isEqualTo(0.0, OFFSET);
     assertThat(getDirectoryMeasureAsDouble(DUPLICATED_BLOCKS)).isEqualTo(0.0, OFFSET);
@@ -156,9 +150,7 @@ public class MetricsTest {
     assertThat(getFileMeasureAsDouble(COMPLEXITY)).isEqualTo(2.0, OFFSET);
     assertThat(getFileMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(1.0, OFFSET);
     assertThat(getFileMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
-    assertThat(getFileMeasureAsDouble(FUNCTION_COMPLEXITY_DISTRIBUTION)).isNull();
     assertThat(getFileMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(2.0, OFFSET);
-    assertThat(getFileMeasureAsDouble(FILE_COMPLEXITY_DISTRIBUTION)).isNull();
     // Duplication
     assertThat(getFileMeasureAsInt(DUPLICATED_LINES)).isZero();
     assertThat(getFileMeasureAsInt(DUPLICATED_BLOCKS)).isZero();
