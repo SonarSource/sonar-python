@@ -148,7 +148,7 @@ public class PythonCoverageSensor implements Sensor {
       InputFile inputFile = entry.getKey();
       coveredFiles.add(inputFile);
       if (LOG.isDebugEnabled()) {
-        LOG.debug("Saving coverage measures for file '{}'", inputFile.relativePath());
+        LOG.debug("Saving coverage measures for file '{}'", inputFile.toString());
       }
       entry.getValue()
         .save();

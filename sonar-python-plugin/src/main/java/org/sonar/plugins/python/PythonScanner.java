@@ -30,7 +30,6 @@ import org.sonar.api.batch.rule.Checks;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.ce.measure.RangeDistributionBuilder;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -97,7 +96,7 @@ public class PythonScanner {
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
-      LOG.error("Unable to parse file: " + inputFile.absolutePath());
+      LOG.error("Unable to parse file: " + inputFile.toString());
       LOG.error(e.getMessage());
       context.newAnalysisError()
         .onFile(inputFile)
@@ -163,9 +162,6 @@ public class PythonScanner {
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
-    saveFilesComplexityDistribution(inputFile, fileMetrics);
-    saveFunctionsComplexityDistribution(inputFile, fileMetrics);
-
     Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
@@ -190,29 +186,6 @@ public class PythonScanner {
       .withValue(value)
       .forMetric(metric)
       .on(inputFile)
-      .save();
-  }
-
-  private void saveFunctionsComplexityDistribution(InputFile inputFile, FileMetrics fileMetrics) {
-    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
-    for (Integer functionComplexity : fileMetrics.functionComplexities()) {
-      complexityDistribution.add(functionComplexity);
-    }
-
-    context.<String>newMeasure()
-      .on(inputFile)
-      .forMetric(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION)
-      .withValue(complexityDistribution.build())
-      .save();
-  }
-
-  private void saveFilesComplexityDistribution(InputFile inputFile, FileMetrics fileMetrics) {
-    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(FILES_DISTRIB_BOTTOM_LIMITS);
-    complexityDistribution.add(fileMetrics.complexity());
-    context.<String>newMeasure()
-      .on(inputFile)
-      .forMetric(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION)
-      .withValue(complexityDistribution.build())
       .save();
   }
 

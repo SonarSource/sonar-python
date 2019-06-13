@@ -24,7 +24,7 @@ import org.apache.commons.lang.StringUtils;
 import org.sonar.api.ExtensionPoint;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 
 @ScannerSide
 @ExtensionPoint
@@ -33,14 +33,14 @@ public class PylintConfiguration {
   public static final String PYLINT_CONFIG_KEY = "sonar.python.pylint_config";
   public static final String PYLINT_KEY = "sonar.python.pylint";
 
-  private final Settings conf;
+  private final Configuration conf;
 
-  public PylintConfiguration(Settings conf) {
+  public PylintConfiguration(Configuration conf) {
     this.conf = conf;
   }
 
   public String getPylintConfigPath(FileSystem fileSystem) {
-    String configPath = conf.getString(PylintConfiguration.PYLINT_CONFIG_KEY);
+    String configPath = conf.get(PylintConfiguration.PYLINT_CONFIG_KEY).orElse("");
     if (StringUtils.isEmpty(configPath)) {
       return null;
     }
@@ -53,7 +53,7 @@ public class PylintConfiguration {
   }
 
   public String getPylintPath() {
-    return conf.getString(PylintConfiguration.PYLINT_KEY);
+    return conf.get(PylintConfiguration.PYLINT_KEY).orElse(null);
   }
 
 }
