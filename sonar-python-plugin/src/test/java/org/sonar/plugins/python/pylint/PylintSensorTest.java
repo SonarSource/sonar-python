@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.mockito.Mockito;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -126,7 +127,8 @@ public class PylintSensorTest {
     settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, "report-is-set");
     PylintSensor sensor = spy(new PylintSensor(conf, new ConfigurationBridge(settings)));
     PylintIssuesAnalyzer analyzer = mock(PylintIssuesAnalyzer.class);
-    when(analyzer.analyze(any(), any(), any())).thenReturn(asList(issue1, issue2, issue3));
+    String absolutePath = new File(FILE1_PATH).getAbsolutePath().replace("\\", "/");
+    when(analyzer.analyze(Mockito.eq(absolutePath), any(), any())).thenReturn(asList(issue1, issue2, issue3));
     doReturn(analyzer).when(sensor).createAnalyzer(any(), any());
 
     sensor.execute(context);

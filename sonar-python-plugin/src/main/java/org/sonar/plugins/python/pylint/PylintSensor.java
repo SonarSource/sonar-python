@@ -108,7 +108,7 @@ public class PylintSensor implements Sensor {
   private void analyzeFile(SensorContext context, InputFile file, File out) throws IOException {
     FileSystem fileSystem = context.fileSystem();
 
-    List<Issue> issues = analyzer.analyze(file.uri().getPath(), fileSystem.encoding(), out);
+    List<Issue> issues = analyzer.analyze(file.absolutePath(), fileSystem.encoding(), out);
 
     for (Issue pylintIssue : issues) {
       ActiveRule rule = context.activeRules().find(RuleKey.of(PylintRuleRepository.REPOSITORY_KEY, pylintIssue.getRuleId()));

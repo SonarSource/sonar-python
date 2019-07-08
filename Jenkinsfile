@@ -46,7 +46,18 @@ pipeline {
           steps {
             runITs("ruling","LATEST_RELEASE")            
           }
-        }                       
+        }
+        stage('ci/windows') {
+          agent {
+            label 'windows'
+          }
+          steps {
+            withMaven(maven: MAVEN_TOOL) {
+              mavenSetBuildVersion()
+              runMaven(JDK_VERSION,"clean install -Dskip.its=true")
+            }
+          }
+         }
       }         
       post {
         always {
