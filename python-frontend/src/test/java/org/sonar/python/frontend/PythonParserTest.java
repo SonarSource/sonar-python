@@ -17,9 +17,15 @@ package org.sonar.python.frontend;/*
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
+import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.python.psi.PyCallExpression;
 import com.jetbrains.python.psi.PyFile;
+import com.jetbrains.python.psi.PyFormattedStringElement;
+import com.jetbrains.python.psi.PyParenthesizedExpression;
+import com.jetbrains.python.psi.PyPrintStatement;
 import com.jetbrains.python.psi.PyRecursiveElementVisitor;
+import com.jetbrains.python.psi.PyStatement;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -28,9 +34,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonParserTest {
 
+  private final PythonParser parser = new PythonParser();
+
   @Test
-  public void parse() {
-    PythonParser parser = new PythonParser();
+  public void print_statement() {
+    PyFile pyFile = parser.parse("print 42");
+    PyStatement statement = pyFile.getStatements().get(0);
+    assertThat(statement).isInstanceOf(PyPrintStatement.class);
+  }
+
+  @Test
+  public void print_with_parentheses() {
+    PyFile pyFile = parser.parse("print(42)");
+    PyStatement statement = pyFile.getStatements().get(0);
+    assertThat(statement).isInstanceOf(PyPrintStatement.class);
+    assertThat(statement.getLastChild()).isInstanceOf(PyParenthesizedExpression.class);
+  }
+
+  @Test
+  public void call_expressions() {
     PyFile pyFile = parser.parse("s = 'abc'\nfoo(s, 42)\nbar(43)");
     List<String> callExpressions = new ArrayList<>();
     pyFile.accept(new PyRecursiveElementVisitor() {
@@ -43,5 +65,12 @@ public class PythonParserTest {
     assertThat(callExpressions).containsExactly(
       "PyCallExpression: foo::[PyReferenceExpression: s, PyNumericLiteralExpression]",
       "PyCallExpression: bar::[PyNumericLiteralExpression]");
+  }
+
+  @Test
+  public void python3_f_string() {
+    PyFile pyFile = parser.parse("f\"Hello {name}!\"");
+    PyFormattedStringElement stringElement = PsiTreeUtil.getParentOfType(pyFile.findElementAt(0), PyFormattedStringElement.class);
+    assertThat(stringElement.getDecodedFragments().stream().map(pair -> pair.second)).containsExactly("Hello ", "{name}", "!");
   }
 }
