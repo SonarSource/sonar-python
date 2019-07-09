@@ -1,4 +1,4 @@
-/*
+package org.sonar.python.frontend;/*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2019 SonarSource SA
  * mailto:info AT sonarsource DOT com
@@ -55,7 +55,7 @@ import com.jetbrains.python.psi.PyFile;
 import java.lang.reflect.Modifier;
 import org.jetbrains.annotations.NotNull;
 
-public class MyParser {
+public class PythonParser {
 
   private static final Disposable TEST_DISPOSABLE = new TestDisposable();
 

@@ -1,4 +1,4 @@
-/*
+package org.sonar.python.frontend;/*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2019 SonarSource SA
  * mailto:info AT sonarsource DOT com
@@ -26,11 +26,11 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MyParserTest {
+public class PythonParserTest {
 
   @Test
   public void parse() {
-    MyParser parser = new MyParser();
+    PythonParser parser = new PythonParser();
     PyFile pyFile = parser.parse("s = 'abc'\nfoo(s, 42)\nbar(43)");
     List<String> callExpressions = new ArrayList<>();
     pyFile.accept(new PyRecursiveElementVisitor() {
