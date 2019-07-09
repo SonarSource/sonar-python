@@ -40,6 +40,8 @@ public class MyParserTest {
         super.visitPyCallExpression(node);
       }
     });
-    assertThat(callExpressions).containsExactly("PyCallExpression: foo::[]", "PyCallExpression: bar::[]");
+    assertThat(callExpressions).containsExactly(
+      "PyCallExpression: foo::[PyReferenceExpression: s, PyNumericLiteralExpression]",
+      "PyCallExpression: bar::[PyNumericLiteralExpression]");
   }
 }

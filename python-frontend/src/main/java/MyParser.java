@@ -33,7 +33,9 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.impl.DocumentImpl;
 import com.intellij.openapi.extensions.ExtensionPoint;
+import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.extensions.Extensions;
+import com.intellij.openapi.extensions.ExtensionsArea;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileTypes.FileTypeRegistry;
 import com.intellij.openapi.progress.ProgressManager;
@@ -48,9 +50,14 @@ import com.jetbrains.python.PythonDialectsTokenSetContributor;
 import com.jetbrains.python.PythonFileType;
 import com.jetbrains.python.PythonLanguage;
 import com.jetbrains.python.PythonParserDefinition;
+import com.jetbrains.python.PythonTokenSetContributor;
 import com.jetbrains.python.psi.PyFile;
+import java.lang.reflect.Modifier;
+import org.jetbrains.annotations.NotNull;
 
 public class MyParser {
+
+  private static final Disposable TEST_DISPOSABLE = new TestDisposable();
 
   private static final PsiFileFactory psiFileFactory = psiFileFactory();
 
@@ -75,7 +82,8 @@ public class MyParser {
 
     Extensions.getArea(null).registerExtensionPoint(MetaLanguage.EP_NAME.getName(), MetaLanguage.class.getName(), ExtensionPoint.Kind.INTERFACE);
     Extensions.registerAreaClass("IDEA_PROJECT", null);
-    Extensions.getArea(null).registerExtensionPoint(PythonDialectsTokenSetContributor.EP_NAME.getName(), PythonDialectsTokenSetContributor.class.getName(), ExtensionPoint.Kind.INTERFACE);
+    registerExtensionPoint(PythonDialectsTokenSetContributor.EP_NAME, PythonDialectsTokenSetContributor.class);
+    registerExtension(PythonDialectsTokenSetContributor.EP_NAME, new PythonTokenSetContributor());
 
     MockProject project = new MockProject(null, disposable);
 
@@ -84,8 +92,40 @@ public class MyParser {
     LanguageASTFactory.INSTANCE.addExplicitExtension(PythonLanguage.getInstance(), astFactory);
     LanguageASTFactory.INSTANCE.addExplicitExtension(Language.ANY, astFactory);
 
+    // https://github.com/JetBrains/intellij-community/blob/93b632941e406178dd5c78fe4d8fdf7d8c357355/platform/testFramework/src/com/intellij/testFramework/ParsingTestCase.java
+    //new MockPsiManager()
     PsiManager psiManager = new PsiManagerImpl(project, fileDocMgr, psiBuilderFactory, null, null, null);
     return new PsiFileFactoryImpl(psiManager);
+  }
+
+  protected static <T> void registerExtension(@NotNull ExtensionPointName<T> extensionPointName, @NotNull T t) {
+    registerExtension(Extensions.getRootArea(), extensionPointName, t);
+  }
+
+  public static <T> void registerExtension(@NotNull ExtensionsArea area, @NotNull ExtensionPointName<T> name, @NotNull T t) {
+    registerExtensionPoint(area, name, (Class<T>)t.getClass());
+    area.<T>getExtensionPoint(name.getName()).registerExtension(t, TEST_DISPOSABLE);
+  }
+
+  private static <T> void registerExtensionPoint(@NotNull ExtensionPointName<T> extensionPointName, @NotNull Class<T> aClass) {
+    registerExtensionPoint(Extensions.getRootArea(), extensionPointName, aClass);
+  }
+
+  private static <T> void registerExtensionPoint(
+    @NotNull ExtensionsArea area,
+    @NotNull ExtensionPointName<T> extensionPointName,
+    @NotNull Class<? extends T> aClass
+  ) {
+    if (!area.hasExtensionPoint(extensionPointName)) {
+      ExtensionPoint.Kind kind = aClass.isInterface() || (aClass.getModifiers() & Modifier.ABSTRACT) != 0 ? ExtensionPoint.Kind.INTERFACE : ExtensionPoint.Kind.BEAN_CLASS;
+      area.registerExtensionPoint(extensionPointName, aClass.getName(), kind, TEST_DISPOSABLE);
+    }
+  }
+
+  protected static class TestDisposable implements Disposable {
+    @Override
+    public void dispose() {
+    }
   }
 
 }
