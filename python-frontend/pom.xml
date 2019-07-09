@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonarsource.python</groupId>
+    <artifactId>python</artifactId>
+    <version>1.14.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>python-frontend</artifactId>
+
+  <name>Python :: Frontend</name>
+
+  <properties>
+    <pycharm.basedir>${user.home}/pycharm-community-${pycharm.version}</pycharm.basedir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>extensions</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/extensions.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>openapi</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/openapi.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>platform-api</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/platform-api.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>platform-impl</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/platform-impl.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>pycharm</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/pycharm.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>pycharm-pydev</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/pycharm-pydev.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>resources_en</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/resources_en.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.pycharm</groupId>
+      <artifactId>util</artifactId>
+      <version>${pycharm.version}</version>
+      <scope>system</scope>
+      <systemPath>${pycharm.basedir}/lib/util.jar</systemPath>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>25.1-jre</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>1.2.50</version>
+    </dependency>
+    <dependency>
+      <groupId>org.picocontainer</groupId>
+      <artifactId>picocontainer</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.intellij.deps</groupId>
+      <artifactId>trove4j</artifactId>
+      <version>1.0.20190514</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>
