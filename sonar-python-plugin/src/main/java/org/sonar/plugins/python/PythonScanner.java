@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.jetbrains.python.psi.PyFile;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
@@ -107,7 +108,10 @@ public class PythonScanner {
     }
     saveIssues(inputFile, visitorContext.getIssues());
 
-    new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(pythonFile.content());
+    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, inputFile);
+    pyFile.accept(pythonHighlighter);
+    pythonHighlighter.getNewHighlighting().save();
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
