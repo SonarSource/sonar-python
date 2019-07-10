@@ -25,6 +25,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.sonarsource.python</groupId>
+      <artifactId>python-frontend</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
     </dependency>
@@ -135,8 +140,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>2800000</maxsize>
-                  <minsize>2600000</minsize>
+                  <maxsize>65000000</maxsize>
+                  <minsize>62000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
