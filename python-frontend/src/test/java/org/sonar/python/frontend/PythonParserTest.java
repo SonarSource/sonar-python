@@ -1,4 +1,4 @@
-package org.sonar.python.frontend;/*
+/*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2019 SonarSource SA
  * mailto:info AT sonarsource DOT com
@@ -17,6 +17,7 @@ package org.sonar.python.frontend;/*
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+package org.sonar.python.frontend;
 
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.python.psi.PyCallExpression;
