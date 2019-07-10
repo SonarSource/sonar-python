@@ -53,9 +53,6 @@ public class PythonScanner {
 
   private static final Logger LOG = Loggers.get(PythonScanner.class);
 
-  private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
-  private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
-
   private final SensorContext context;
   private final Parser<Grammar> parser;
   private final List<InputFile> inputFiles;
