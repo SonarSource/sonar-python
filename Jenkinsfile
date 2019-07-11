@@ -14,6 +14,7 @@ pipeline {
     SONARSOURCE_QA = 'true'
     MAVEN_TOOL = 'Maven 3.6.x'
     JDK_VERSION = 'Java 11'
+    PYCHARM_VERSION = '2019.1.3'
   }
   stages {
     stage('Notify') {
@@ -54,9 +55,19 @@ pipeline {
           steps {
             withMaven(maven: MAVEN_TOOL) {
               mavenSetBuildVersion()
-              sh "curl -L -O https://download-cf.jetbrains.com/python/pycharm-community-2019.1.3.tar.gz"
-              sh "tar xzf pycharm-community-2019.1.3.tar.gz"
-              sh "rm pycharm-community-2019.1.3.tar.gz"
+              sh "curl -L -O https://download-cf.jetbrains.com/python/pycharm-community-${PYCHARM_VERSION}.tar.gz"
+              sh "tar xzf pycharm-community-${PYCHARM_VERSION}.tar.gz"
+              sh "rm pycharm-community-${PYCHARM_VERSION}.tar.gz"
+              dir("pycharm-community-$PYCHARM_VERSION/lib") {
+                runMaven(JDK_VERSION,"install:install-file -Dfile=extensions.jar -DgroupId=com.jetbrains.pycharm -DartifactId=extensions -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=openapi.jar -DgroupId=com.jetbrains.pycharm -DartifactId=openapi -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=platform-api.jar -DgroupId=com.jetbrains.pycharm -DartifactId=platform-api -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=platform-impl.jar -DgroupId=com.jetbrains.pycharm -DartifactId=platform-impl -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=pycharm.jar -DgroupId=com.jetbrains.pycharm -DartifactId=pycharm -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=pycharm-pydev.jar -DgroupId=com.jetbrains.pycharm -DartifactId=pycharm-pydev -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=resources_en.jar -DgroupId=com.jetbrains.pycharm -DartifactId=resources_en   -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+                runMaven(JDK_VERSION,"install:install-file -Dfile=util.jar -DgroupId=com.jetbrains.pycharm -DartifactId=util -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
+              }
               runMaven(JDK_VERSION,"clean install -Dskip.its=true")
             }
           }
