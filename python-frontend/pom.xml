@@ -12,62 +12,66 @@
 
   <name>Python :: Frontend</name>
 
+  <properties>
+    <pycharm.libDir>${project.basedir}/../${pycharm.relativeDir}/lib</pycharm.libDir>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>extensions</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/extensions.jar</systemPath>
+      <systemPath>${pycharm.libDir}/extensions.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>openapi</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/openapi.jar</systemPath>
+      <systemPath>${pycharm.libDir}/openapi.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>platform-api</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/platform-api.jar</systemPath>
+      <systemPath>${pycharm.libDir}/platform-api.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>platform-impl</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/platform-impl.jar</systemPath>
+      <systemPath>${pycharm.libDir}/platform-impl.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>pycharm</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/pycharm.jar</systemPath>
+      <systemPath>${pycharm.libDir}/pycharm.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>pycharm-pydev</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/pycharm-pydev.jar</systemPath>
+      <systemPath>${pycharm.libDir}/pycharm-pydev.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>resources_en</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/resources_en.jar</systemPath>
+      <systemPath>${pycharm.libDir}/resources_en.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.jetbrains.pycharm</groupId>
       <artifactId>util</artifactId>
       <version>${pycharm.version}</version>
       <scope>system</scope>
-      <systemPath>${pycharm.basedir}/lib/util.jar</systemPath>
+      <systemPath>${pycharm.libDir}/util.jar</systemPath>
     </dependency>
 
 
