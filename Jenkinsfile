@@ -54,6 +54,9 @@ pipeline {
           steps {
             withMaven(maven: MAVEN_TOOL) {
               mavenSetBuildVersion()
+              sh "curl -L -O https://download-cf.jetbrains.com/python/pycharm-community-2019.1.3.tar.gz"
+              sh "tar xzf pycharm-community-2019.1.3.tar.gz"
+              sh "rm pycharm-community-2019.1.3.tar.gz"
               runMaven(JDK_VERSION,"clean install -Dskip.its=true")
             }
           }
