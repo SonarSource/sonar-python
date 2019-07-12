@@ -6,6 +6,9 @@ jdk: openjdk11
 git:
   submodules: false
 
+# disable automatic mvn install call
+install: true
+
 script: ./travis.sh
 
 
