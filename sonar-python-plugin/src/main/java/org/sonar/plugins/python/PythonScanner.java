@@ -103,16 +103,16 @@ public class PythonScanner {
     }
 
     for (PythonCheck check : checks.all()) {
-      saveIssues(inputFile, check, check.scanFileForIssues(visitorContext));
+      check.scanFile(visitorContext);
     }
+    saveIssues(inputFile, visitorContext.getIssues());
 
     new PythonHighlighter(context, inputFile).scanFile(visitorContext);
   }
 
-  private void saveIssues(InputFile inputFile, PythonCheck check, List<PreciseIssue> issues) {
-    RuleKey ruleKey = checks.ruleKey(check);
+  private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
     for (PreciseIssue preciseIssue : issues) {
-
+      RuleKey ruleKey = checks.ruleKey(preciseIssue.check());
       NewIssue newIssue = context
         .newIssue()
         .forRule(ruleKey);

@@ -49,7 +49,8 @@ public class ParsingErrorCheckTest {
     }
 
     ParsingErrorCheck check = new ParsingErrorCheck();
-    List<PreciseIssue> issues = check.scanFileForIssues(context);
+    check.scanFile(context);
+    List<PreciseIssue> issues = context.getIssues();
     assertThat(issues).hasSize(1);
     assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
   }

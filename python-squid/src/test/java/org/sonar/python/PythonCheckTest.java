@@ -28,7 +28,6 @@ import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,6 +35,12 @@ public class PythonCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
   public static final String MESSAGE = "message";
+
+  private static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+    check.scanFile(context);
+    return context.getIssues();
+  }
 
   @Test
   public void test() {
@@ -47,7 +52,7 @@ public class PythonCheckTest {
       }
     };
 
-    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
 
     assertThat(issues).hasSize(2);
     PreciseIssue firstIssue = issues.get(0);
@@ -73,7 +78,7 @@ public class PythonCheckTest {
       }
     };
 
-    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
     PreciseIssue firstIssue = issues.get(0);
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
@@ -93,7 +98,7 @@ public class PythonCheckTest {
       }
     };
 
-    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
 
     List<IssueLocation> secondaryLocations = issues.get(0).secondaryLocations();
     assertThat(secondaryLocations).hasSize(2);
@@ -122,7 +127,7 @@ public class PythonCheckTest {
         addFileIssue(MESSAGE);
       }
     };
-    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
     assertThat(issues).hasSize(1);
     PreciseIssue issue = issues.get(0);
     assertThat(issue.primaryLocation().message()).isEqualTo(MESSAGE);
@@ -138,7 +143,7 @@ public class PythonCheckTest {
         addLineIssue(MESSAGE, 3);
       }
     };
-    List<PreciseIssue> issues = PythonCheckVerifier.scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
     assertThat(issues).hasSize(1);
     PreciseIssue issue = issues.get(0);
     assertThat(issue.primaryLocation().message()).isEqualTo(MESSAGE);
