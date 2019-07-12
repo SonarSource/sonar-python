@@ -32,6 +32,7 @@ import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonVisitor;
+import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +43,9 @@ public class PythonCheckVerifier extends PythonVisitor {
   private List<TestIssue> expectedIssues = new ArrayList<>();
 
   public static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
-    return check.scanFileForIssues(TestPythonVisitorRunner.createContext(file));
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+    check.scanFile(context);
+    return context.getIssues();
   }
 
 

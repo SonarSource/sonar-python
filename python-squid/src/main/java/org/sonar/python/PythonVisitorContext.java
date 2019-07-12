@@ -21,6 +21,9 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import java.util.ArrayList;
+import java.util.List;
+import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilderVisitor;
 
@@ -30,6 +33,7 @@ public class PythonVisitorContext {
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
   private SymbolTable symbolTable = null;
+  private List<PreciseIssue> issues = new ArrayList<>();
 
   public PythonVisitorContext(AstNode rootTree, PythonFile pythonFile) {
     this(rootTree, pythonFile, null);
@@ -62,5 +66,13 @@ public class PythonVisitorContext {
 
   public SymbolTable symbolTable() {
     return symbolTable;
+  }
+
+  public void addIssue(PreciseIssue issue) {
+    issues.add(issue);
+  }
+
+  public List<PreciseIssue> getIssues() {
+    return issues;
   }
 }

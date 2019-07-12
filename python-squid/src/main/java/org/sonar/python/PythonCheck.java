@@ -31,35 +31,27 @@ import javax.annotation.Nullable;
 
 public abstract class PythonCheck extends PythonVisitor {
 
-  private List<PreciseIssue> issues = new ArrayList<>();
-
-  public List<PreciseIssue> scanFileForIssues(PythonVisitorContext context) {
-    issues.clear();
-    scanFile(context);
-    return Collections.unmodifiableList(new ArrayList<>(issues));
-  }
-
   protected final PreciseIssue addIssue(AstNode node, @Nullable String message) {
-    PreciseIssue newIssue = new PreciseIssue(IssueLocation.preciseLocation(node, message));
-    issues.add(newIssue);
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
+    getContext().addIssue(newIssue);
     return newIssue;
   }
 
   protected final PreciseIssue addIssue(IssueLocation primaryLocation) {
-    PreciseIssue newIssue = new PreciseIssue(primaryLocation);
-    issues.add(newIssue);
+    PreciseIssue newIssue = new PreciseIssue(this, primaryLocation);
+    getContext().addIssue(newIssue);
     return newIssue;
   }
 
   protected final PreciseIssue addLineIssue(String message, int lineNumber) {
-    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atLineLevel(message, lineNumber));
-    issues.add(newIssue);
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atLineLevel(message, lineNumber));
+    getContext().addIssue(newIssue);
     return newIssue;
   }
 
   protected final PreciseIssue addFileIssue(String message) {
-    PreciseIssue newIssue = new PreciseIssue(IssueLocation.atFileLevel(message));
-    issues.add(newIssue);
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atFileLevel(message));
+    getContext().addIssue(newIssue);
     return newIssue;
   }
 
@@ -69,11 +61,13 @@ public abstract class PythonCheck extends PythonVisitor {
 
   public static class PreciseIssue {
 
+    private final PythonCheck check;
     private final IssueLocation primaryLocation;
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
 
-    private PreciseIssue(IssueLocation primaryLocation) {
+    private PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
+      this.check = check;
       this.primaryLocation = primaryLocation;
       this.secondaryLocations = new ArrayList<>();
     }
@@ -104,6 +98,10 @@ public abstract class PythonCheck extends PythonVisitor {
 
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
+    }
+
+    public PythonCheck check() {
+      return check;
     }
   }
 
