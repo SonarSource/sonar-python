@@ -63,7 +63,12 @@ public class PythonParser {
   private static final PsiFileFactory psiFileFactory = psiFileFactory();
 
   public PyFile parse(String content) {
-    return (PyFile) psiFileFactory.createFileFromText("test.py", PythonFileType.INSTANCE, content, System.currentTimeMillis(), false, false);
+    return (PyFile) psiFileFactory.createFileFromText("test.py", PythonFileType.INSTANCE, normalizeEol(content), System.currentTimeMillis(), false, false);
+  }
+
+  @NotNull
+  private static String normalizeEol(String content) {
+    return content.replaceAll("\\r\\n?", "\n");
   }
 
   private static PsiFileFactory psiFileFactory() {
