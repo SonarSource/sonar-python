@@ -19,6 +19,8 @@
  */
 package org.sonar.python.frontend;
 
+import com.intellij.openapi.editor.Document;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.python.psi.PyCallExpression;
 import com.jetbrains.python.psi.PyFile;
@@ -73,5 +75,23 @@ public class PythonParserTest {
     PyFile pyFile = parser.parse("f\"Hello {name}!\"");
     PyFormattedStringElement stringElement = PsiTreeUtil.getParentOfType(pyFile.findElementAt(0), PyFormattedStringElement.class);
     assertThat(stringElement.getDecodedFragments().stream().map(pair -> pair.second)).containsExactly("Hello ", "{name}", "!");
+  }
+
+  @Test
+  public void line_separator() {
+    PyFile pyFile = parser.parse("print(42)\r\nprint(43)");
+    PsiElement secondPrint = pyFile.getLastChild();
+    Document document = secondPrint.getContainingFile().getViewProvider().getDocument();
+    assertThat(document.getLineNumber(secondPrint.getTextRange().getStartOffset())).isEqualTo(1);
+
+    pyFile = parser.parse("print(42)\rprint(43)");
+    secondPrint = pyFile.getLastChild();
+    document = secondPrint.getContainingFile().getViewProvider().getDocument();
+    assertThat(document.getLineNumber(secondPrint.getTextRange().getStartOffset())).isEqualTo(1);
+
+    pyFile = parser.parse("print(42)\nprint(43)");
+    secondPrint = pyFile.getLastChild();
+    document = secondPrint.getContainingFile().getViewProvider().getDocument();
+    assertThat(document.getLineNumber(secondPrint.getTextRange().getStartOffset())).isEqualTo(1);
   }
 }
