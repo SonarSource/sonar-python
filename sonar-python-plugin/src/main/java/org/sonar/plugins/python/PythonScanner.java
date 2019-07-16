@@ -46,6 +46,7 @@ import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
@@ -89,8 +90,9 @@ public class PythonScanner {
   private void scanFile(InputFile inputFile) {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
+    String fileContent = pythonFile.content();
     try {
-      visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);
+      visitorContext = new PythonVisitorContext(parser.parse(fileContent), pythonFile);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -102,13 +104,14 @@ public class PythonScanner {
         .message(e.getMessage())
         .save();
     }
+    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
 
     for (PythonCheck check : checks.all()) {
       check.scanFile(visitorContext);
     }
+    SubscriptionVisitor.analyze(checks.all(), visitorContext, pyFile);
     saveIssues(inputFile, visitorContext.getIssues());
 
-    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(pythonFile.content());
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, inputFile);
     pyFile.accept(pythonHighlighter);
     pythonHighlighter.getNewHighlighting().save();
