@@ -26,11 +26,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,17 +36,17 @@ import java.util.stream.Collectors;
 
 public class ClassLoaderLogAnalyzer {
 
-  private static final Set<Jar> JARS_TO_FILTER = new HashSet<>(Arrays.asList(
+  private static final List<Jar> JARS_TO_FILTER = new ArrayList<>(Arrays.asList(
     new Jar("com.jetbrains.pycharm", "extensions"),
+    new Jar("org.jetbrains.intellij.deps", "trove4j"),
+    new Jar("org.jetbrains.kotlin", "kotlin-stdlib"),
+    new Jar("com.jetbrains.pycharm", "platform-impl"),
+    new Jar("com.jetbrains.pycharm", "pycharm-pydev"),
+    new Jar("com.jetbrains.pycharm", "util").resource("misc/registry.properties"),
+    new Jar("com.jetbrains.pycharm", "resources_en").resource("com/jetbrains/python/PyBundle.properties"),
     new Jar("com.jetbrains.pycharm", "openapi"),
     new Jar("com.jetbrains.pycharm", "platform-api"),
-    new Jar("com.jetbrains.pycharm", "platform-impl"),
-    new Jar("com.jetbrains.pycharm", "pycharm"),
-    new Jar("com.jetbrains.pycharm", "pycharm-pydev"),
-    new Jar("com.jetbrains.pycharm", "resources_en").resource("com/jetbrains/python/PyBundle.properties"),
-    new Jar("com.jetbrains.pycharm", "util").resource("misc/registry.properties"),
-    new Jar("org.jetbrains.kotlin", "kotlin-stdlib"),
-    new Jar("org.jetbrains.intellij.deps", "trove4j")));
+    new Jar("com.jetbrains.pycharm", "pycharm")));
 
   public static void main(String[] args) throws IOException {
     File file = new File("sonar-python-plugin/target/class-logs.txt");
@@ -108,37 +106,31 @@ public class ClassLoaderLogAnalyzer {
       this.artifactId = artifactId;
     }
 
-    public Jar resource(String resource) {
+    Jar resource(String resource) {
       resources.add(resource);
       return this;
     }
   }
 
-  private static Jar getJar(String fileName) {
-    return JARS_TO_FILTER.stream()
-      .filter(jar ->fileName.contains("/" + jar.groupId.replace('.', '/') + "/" + jar.artifactId + "/"))
-      .findFirst()
-      .orElse(null);
-  }
+  private static class Line {
 
+    private static final Pattern PATTERN_JDK8 = Pattern.compile("\\[Loaded (.*) from (.*/.*)]");
+    private static final Pattern PATTERN_JDK11 = Pattern.compile("\\[.*]\\[info]\\[class,load] (.*) source: (.*/.*)");
 
-  public static class Line {
-
-    private static final Pattern pattern = Pattern.compile("\\[Loaded (.*) from (.*/.*)]");
-
-    public String classFileName() {
+    String classFileName() {
       return fullClassName.replaceAll("\\.", "/") + ".class";
     }
 
     String fullClassName;
     String source;
 
-    public Line(String fullClassName, String source) {
+    Line(String fullClassName, String source) {
       this.fullClassName = fullClassName;
       this.source = source;
     }
 
-    public static Line parse(String line) {
+    static Line parse(String line) {
+      Pattern pattern = line.startsWith("[Loaded ") ? PATTERN_JDK8 : PATTERN_JDK11;
       Matcher matcher = pattern.matcher(line);
       if (!matcher.matches()) {
         return null;
@@ -146,11 +138,11 @@ public class ClassLoaderLogAnalyzer {
       return new Line(matcher.group(1), matcher.group(2));
     }
 
-    public String source() {
+    String source() {
       return source;
     }
 
-    public String packageName() {
+    String packageName() {
       return fullClassName.substring(0, fullClassName.lastIndexOf('.'));
     }
   }
