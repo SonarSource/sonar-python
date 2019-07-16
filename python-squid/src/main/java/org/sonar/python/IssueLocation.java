@@ -19,10 +19,12 @@
  */
 package org.sonar.python;
 
+import com.intellij.psi.PsiElement;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.python.frontend.PythonTokenLocation;
 
 public abstract class IssueLocation {
 
@@ -52,6 +54,10 @@ public abstract class IssueLocation {
     return new PreciseIssueLocation(startNode, message);
   }
 
+  public static IssueLocation preciseLocation(PsiElement element, @Nullable String message) {
+    return new PsiIssueLocation(element, message);
+  }
+
   @CheckForNull
   public String message() {
     return message;
@@ -64,6 +70,36 @@ public abstract class IssueLocation {
   public abstract int endLine();
 
   public abstract int endLineOffset();
+
+  private static class PsiIssueLocation extends IssueLocation {
+    private final PythonTokenLocation location;
+
+    PsiIssueLocation(PsiElement element, @Nullable String message) {
+      super(message);
+      this.location = new PythonTokenLocation(element);
+    }
+
+    @Override
+    public int startLine() {
+      return location.startLine();
+    }
+
+    @Override
+    public int startLineOffset() {
+      return location.startLineOffset();
+    }
+
+    @Override
+    public int endLine() {
+      return location.endLine();
+    }
+
+    @Override
+    public int endLineOffset() {
+      return location.endLineOffset();
+    }
+
+  }
 
   private static class PreciseIssueLocation extends IssueLocation {
 

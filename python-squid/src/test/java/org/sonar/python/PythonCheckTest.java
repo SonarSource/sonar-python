@@ -20,12 +20,20 @@
 package org.sonar.python;
 
 import com.google.common.collect.ImmutableSet;
+import com.intellij.lang.ASTNode;
+import com.jetbrains.python.PyStubElementTypes;
+import com.jetbrains.python.psi.PyFile;
+import com.jetbrains.python.psi.PyFunction;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
+import org.sonar.api.internal.google.common.io.Files;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
 
@@ -39,6 +47,14 @@ public class PythonCheckTest {
   private static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     check.scanFile(context);
+    String fileContent;
+    try {
+      fileContent = Files.toString(file, StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context, pyFile);
     return context.getIssues();
   }
 
@@ -50,11 +66,19 @@ public class PythonCheckTest {
         AstNode funcName = astNode.getFirstChild(PythonGrammar.FUNCNAME);
         addIssue(funcName, funcName.getTokenValue());
       }
+
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(PyStubElementTypes.FUNCTION_DECLARATION, ctx -> {
+          ASTNode nameNode = ((PyFunction) ctx.syntaxNode()).getNameNode();
+          ctx.addIssue(nameNode.getPsi(), nameNode.getText());
+        });
+      }
     };
 
     List<PreciseIssue> issues = scanFileForIssues(FILE, check);
 
-    assertThat(issues).hasSize(2);
+    assertThat(issues).hasSize(4);
     PreciseIssue firstIssue = issues.get(0);
 
     assertThat(firstIssue.cost()).isNull();
@@ -67,6 +91,21 @@ public class PythonCheckTest {
     assertThat(primaryLocation.endLine()).isEqualTo(1);
     assertThat(primaryLocation.startLineOffset()).isEqualTo(4);
     assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
+
+    PreciseIssue issue = issues.get(1);
+    assertThat(issue.primaryLocation().message()).isEqualTo("method");
+
+    issue = issues.get(2);
+    assertThat(issue.primaryLocation().message()).isEqualTo("hello");
+    primaryLocation = issue.primaryLocation();
+    assertThat(primaryLocation.message()).isEqualTo("hello");
+    assertThat(primaryLocation.startLine()).isEqualTo(1);
+    assertThat(primaryLocation.endLine()).isEqualTo(1);
+    assertThat(primaryLocation.startLineOffset()).isEqualTo(4);
+    assertThat(primaryLocation.endLineOffset()).isEqualTo(9);
+
+    issue = issues.get(3);
+    assertThat(issue.primaryLocation().message()).isEqualTo("method");
   }
 
   @Test

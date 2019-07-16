@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-public abstract class PythonCheck extends PythonVisitor {
+public abstract class PythonCheck extends PythonVisitor implements SubscriptionCheck {
 
   protected final PreciseIssue addIssue(AstNode node, @Nullable String message) {
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
@@ -66,7 +66,7 @@ public abstract class PythonCheck extends PythonVisitor {
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
 
-    private PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
+    PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
       this.check = check;
       this.primaryLocation = primaryLocation;
       this.secondaryLocations = new ArrayList<>();
@@ -107,5 +107,9 @@ public abstract class PythonCheck extends PythonVisitor {
 
   public static <T> Set<T> immutableSet(T... el) {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(el)));
+  }
+
+  @Override
+  public void initialize(Context context) {
   }
 }

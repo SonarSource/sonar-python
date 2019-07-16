@@ -25,14 +25,19 @@ import com.google.common.collect.Ordering;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.sonar.api.internal.google.common.io.Files;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,6 +49,13 @@ public class PythonCheckVerifier extends PythonVisitor {
 
   public static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+    String content;
+    try {
+      content = Files.toString(file, StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context, new org.sonar.python.frontend.PythonParser().parse(content));
     check.scanFile(context);
     return context.getIssues();
   }
