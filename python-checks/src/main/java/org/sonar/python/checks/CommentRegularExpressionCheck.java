@@ -19,16 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
+import com.jetbrains.python.PyTokenTypes;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 
-@Rule(key = CommentRegularExpressionCheck.CHECK_KEY)
+@Rule(key = "CommentRegularExpression")
 public class CommentRegularExpressionCheck extends PythonCheck {
-  public static final String CHECK_KEY = "CommentRegularExpression";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
 
@@ -61,14 +59,12 @@ public class CommentRegularExpressionCheck extends PythonCheck {
   }
 
   @Override
-  public void visitToken(Token token) {
-    if (pattern() != null) {
-      for (Trivia trivia : token.getTrivia()) {
-        if (trivia.isComment() && pattern().matcher(trivia.getToken().getOriginalValue()).matches()) {
-          addIssue(trivia.getToken(), message);
-        }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyTokenTypes.END_OF_LINE_COMMENT, ctx -> {
+      if (pattern().matcher(ctx.syntaxNode().getText()).matches()) {
+        ctx.addIssue(ctx.syntaxNode(), message);
       }
-    }
+    });
   }
 
 }
