@@ -19,31 +19,23 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyElementTypes;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonTokenType;
 
-@Rule(key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY)
+@Rule(key = "LongIntegerWithLowercaseSuffixUsage")
 public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonCheck {
 
-  public static final String CHECK_KEY = "LongIntegerWithLowercaseSuffixUsage";
-  private static final String MESSAGE = "Replace suffix in long integers from lower case \"l\" to upper case \"L\".";
-
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonTokenType.NUMBER);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    String value = astNode.getTokenValue();
-    if (value.charAt(value.length() - 1) == 'l') {
-      addIssue(astNode, MESSAGE);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.INTEGER_LITERAL_EXPRESSION, ctx -> {
+      PsiElement node = ctx.syntaxNode();
+      String value = node.getText();
+      if (value.charAt(value.length() - 1) == 'l') {
+        ctx.addIssue(node, "Replace suffix in long integers from lower case \"l\" to upper case \"L\".");
+      }
+    });
   }
 
 }

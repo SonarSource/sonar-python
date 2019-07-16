@@ -19,20 +19,15 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.intellij.lang.ASTNode;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyClass;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
 
-@Rule(key = ClassNameCheck.CHECK_KEY)
+@Rule(key = "S101")
 public class ClassNameCheck extends AbstractNameCheck {
-
-  public static final String CHECK_KEY = "S101";
   private static final String DEFAULT = "^[A-Z_][a-zA-Z0-9]+$";
-  private static final String MESSAGE = "Rename class \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
     key = "format",
@@ -45,18 +40,18 @@ public class ClassNameCheck extends AbstractNameCheck {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    AstNode classNameNode = astNode.getFirstChild(PythonGrammar.CLASSNAME);
-    String className = classNameNode.getTokenValue();
-    if (!pattern().matcher(className).matches()) {
-      String message = String.format(MESSAGE, className, format);
-      addIssue(classNameNode, message);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.CLASS_DECLARATION, ctx -> {
+      ASTNode classNameNode = ((PyClass) ctx.syntaxNode()).getNameNode();
+      if (classNameNode == null) {
+        return;
+      }
+      String className = classNameNode.getText();
+      if (!pattern().matcher(className).matches()) {
+        String message = String.format("Rename class \"%s\" to match the regular expression %s.", className, format);
+        ctx.addIssue(classNameNode.getPsi(), message);
+      }
+    });
   }
 
 }

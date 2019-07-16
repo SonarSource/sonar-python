@@ -19,25 +19,18 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyTokenTypes;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
 
-@Rule(key = NoPersonReferenceInTodoCheck.CHECK_KEY)
+@Rule(key = "S1707")
 public class NoPersonReferenceInTodoCheck extends PythonCheck {
-
-  public static final String CHECK_KEY = "S1707";
-  public static final String MESSAGE = "Add a citation of the person who can best explain this comment.";
-
   private static final String DEFAULT_PERSON_REFERENCE_PATTERN = "[ ]*\\([ _a-zA-Z0-9@.]+\\)";
   private static final String COMMENT_PATTERN = "^#[ ]*(todo|fixme)";
-  private Pattern patternTodoFixme;
-  private Pattern patternPersonReference;
 
   @RuleProperty(
       key = "pattern",
@@ -45,29 +38,21 @@ public class NoPersonReferenceInTodoCheck extends PythonCheck {
   public String personReferencePatternString = DEFAULT_PERSON_REFERENCE_PATTERN;
 
   @Override
-  public void visitFile(AstNode astNode) {
-    patternTodoFixme = Pattern.compile(COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
-    patternPersonReference = Pattern.compile(personReferencePatternString);
+  public void initialize(Context context) {
+    final Pattern patternTodoFixme = Pattern.compile(COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
+    final Pattern patternPersonReference = Pattern.compile(personReferencePatternString);
+    context.registerSyntaxNodeConsumer(PyTokenTypes.END_OF_LINE_COMMENT, ctx -> {
+      PsiElement node = ctx.syntaxNode();
+      String comment = node.getText();
+      Matcher matcher = patternTodoFixme.matcher(comment);
+      if (matcher.find()) {
+        String tail = comment.substring(matcher.end());
+        if (!patternPersonReference.matcher(tail).find()) {
+          ctx.addIssue(node, "Add a citation of the person who can best explain this comment.");
+        }
+      }
+    });
   }
 
-  @Override
-  public void visitToken(Token token) {
-    for (Trivia trivia : token.getTrivia()) {
-      if (trivia.isComment()) {
-        visitComment(trivia);
-      }
-    }
-  }
-
-  private void visitComment(Trivia trivia) {
-    String comment = trivia.getToken().getValue();
-    Matcher matcher = patternTodoFixme.matcher(comment);
-    if (matcher.find()) {
-      String tail = comment.substring(matcher.end());
-      if (!patternPersonReference.matcher(tail).find()) {
-        addIssue(trivia.getToken(), MESSAGE);
-      }
-    }
-  }
 }
 

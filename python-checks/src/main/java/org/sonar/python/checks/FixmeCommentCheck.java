@@ -19,36 +19,27 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyTokenTypes;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
 
-@Rule(key = FixmeCommentCheck.CHECK_KEY)
+@Rule(key = "S1134")
 public class FixmeCommentCheck extends PythonCheck {
-
-  public static final String CHECK_KEY = "S1134";
-
   private static final String FIXME_COMMENT_PATTERN = "^#[ ]*fixme.*";
-  private static final String MESSAGE = "Take the required action to fix the issue indicated by this \"FIXME\" comment.";
-
-  private Pattern pattern;
 
   @Override
-  public void visitFile(AstNode astNode) {
-    pattern = Pattern.compile(FIXME_COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
-  }
-
-  @Override
-  public void visitToken(Token token) {
-    for (Trivia trivia : token.getTrivia()) {
-      String comment = trivia.getToken().getValue();
+  public void initialize(Context context) {
+    final Pattern pattern = Pattern.compile(FIXME_COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
+    context.registerSyntaxNodeConsumer(PyTokenTypes.END_OF_LINE_COMMENT, ctx -> {
+      PsiElement node = ctx.syntaxNode();
+      String comment = node.getText();
       if (pattern.matcher(comment).matches()) {
-        addIssue(trivia.getToken(), MESSAGE);
+        ctx.addIssue(node, "Take the required action to fix the issue indicated by this \"FIXME\" comment.");
       }
-    }
+    });
   }
+
 }
 
