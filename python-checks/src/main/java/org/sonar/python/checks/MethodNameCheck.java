@@ -19,20 +19,19 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
+import com.jetbrains.python.psi.PyFunction;
 import org.sonar.check.Rule;
 
-@Rule(key = MethodNameCheck.CHECK_KEY)
+@Rule(key = "S100")
 public class MethodNameCheck extends AbstractFunctionNameCheck {
-  public static final String CHECK_KEY = "S100";
   @Override
   public String typeName() {
     return "method";
   }
 
   @Override
-  public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return CheckUtils.isMethodOfNonDerivedClass(astNode);
+  public boolean shouldCheckFunctionDeclaration(PyFunction function) {
+    return CheckUtils.isMethodOfNonDerivedClass(function);
   }
 
 }

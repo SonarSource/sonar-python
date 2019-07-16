@@ -14,3 +14,8 @@ def long_function_name_is_still_correct():
 class MyClass:
 	def This_Is_A_Method():
 		pass
+
+class MyClass2:
+	if 1:
+		def Badly_Named_Function(self):
+			pass

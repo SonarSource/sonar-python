@@ -19,6 +19,9 @@
  */
 package org.sonar.python.checks;
 
+import com.jetbrains.python.psi.PyClass;
+import com.jetbrains.python.psi.PyExpression;
+import com.jetbrains.python.psi.PyFunction;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.List;
@@ -37,6 +40,10 @@ public class CheckUtils {
 
   }
 
+  public static boolean isMethodDefinition(PyFunction function) {
+    return function.getContainingClass() != null;
+  }
+
   public static boolean isMethodDefinition(AstNode node) {
     if (!node.is(PythonGrammar.FUNCDEF)) {
       return false;
@@ -48,6 +55,10 @@ public class CheckUtils {
       }
     }
     return parent != null && parent.is(PythonGrammar.CLASSDEF);
+  }
+
+  public static boolean isMethodOfNonDerivedClass(PyFunction function) {
+    return isMethodDefinition(function) && !classHasInheritance(function.getContainingClass());
   }
 
   public static boolean isMethodOfNonDerivedClass(AstNode node) {
@@ -76,6 +87,14 @@ public class CheckUtils {
 
   public static boolean insideFunction(AstNode astNode, AstNode funcDef) {
     return astNode.getFirstAncestor(PythonGrammar.FUNCDEF).equals(funcDef);
+  }
+
+  public static boolean classHasInheritance(PyClass node) {
+    PyExpression[] superClassExpressions = node.getSuperClassExpressions();
+    if (superClassExpressions.length == 0) {
+      return false;
+    }
+    return superClassExpressions.length != 1 || !"object".equals(superClassExpressions[0].getText());
   }
 
   public static boolean classHasInheritance(AstNode classDef) {
