@@ -19,17 +19,13 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.intellij.lang.ASTNode;
+import com.jetbrains.python.PyStubElementTypes;
+import com.jetbrains.python.psi.PyFunction;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
 
 public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
-
   private static final String DEFAULT = "^[a-z_][a-z0-9_]{2,}$";
-  private static final String MESSAGE = "Rename %s \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
     key = "format",
@@ -42,25 +38,26 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (!shouldCheckFunctionDeclaration(astNode)) {
-      return;
-    }
-    AstNode nameNode = astNode.getFirstChild(PythonGrammar.FUNCNAME);
-    String name = nameNode.getTokenValue();
-    if (!pattern().matcher(name).matches()) {
-      String message = String.format(MESSAGE, typeName(), name, this.format);
-      addIssue(nameNode, message);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyStubElementTypes.FUNCTION_DECLARATION, ctx -> {
+      PyFunction node = (PyFunction) ctx.syntaxNode();
+      if (!shouldCheckFunctionDeclaration(node)) {
+        return;
+      }
+      ASTNode nameNode = node.getNameNode();
+      if (nameNode == null) {
+        return;
+      }
+      String name = nameNode.getText();
+      if (!pattern().matcher(name).matches()) {
+        String message = String.format("Rename %s \"%s\" to match the regular expression %s.", typeName(), name, format);
+        ctx.addIssue(nameNode.getPsi(), message);
+      }
+    });
   }
 
   public abstract String typeName();
 
-  public abstract boolean shouldCheckFunctionDeclaration(AstNode astNode);
+  public abstract boolean shouldCheckFunctionDeclaration(PyFunction function);
 
 }
