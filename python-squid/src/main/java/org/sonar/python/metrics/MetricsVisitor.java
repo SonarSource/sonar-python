@@ -41,8 +41,6 @@ import org.sonar.python.frontend.PythonTokenLocation;
 
 public class MetricsVisitor extends PyRecursiveElementVisitor {
 
-  private static final PythonCommentAnalyser COMMENT_ANALYSER = new PythonCommentAnalyser();
-
   private final boolean ignoreHeaderComments;
   private Set<Integer> linesOfCode = new HashSet<>();
   private Set<Integer> executableLines = new HashSet<>();
@@ -56,9 +54,12 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
 
   @Override
   public void visitElement(PsiElement element) {
+    // track the first meaningful element which is not a comment to handle ignoreHeaderComments
     if (!((element instanceof PyFile) || (element instanceof PsiComment) || (element instanceof PsiWhiteSpace))) {
       firstNonCommentSeen = true;
     }
+
+    // track lines of code
     if (element instanceof LeafPsiElement
       && !(element instanceof PsiWhiteSpace)
       && !(element instanceof PsiComment)
@@ -68,15 +69,21 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
         linesOfCode.add(line);
       }
     }
+
+    // track executable lines of code
     if (element instanceof PyStatement) {
       handlePyStatement(element);
-    } else if (element instanceof PsiComment) {
+    }
+
+    // track lines of comments and no_sonar lines
+    if (element instanceof PsiComment) {
       if (ignoreHeaderComments && !firstNonCommentSeen) {
         firstNonCommentSeen = true;
       } else {
         handleComment(((PsiComment) element));
       }
     }
+
     super.visitElement(element);
   }
 
@@ -96,15 +103,14 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
   }
 
   private void handleComment(PsiComment comment) {
-    String[] commentLines = COMMENT_ANALYSER.getContents(comment.getText())
+    String[] commentLines = getCommentContent(comment.getText())
       .split("(\r)?\n|\r", -1);
     int line = new PythonTokenLocation(comment).startLine();
 
     for (String commentLine : commentLines) {
       if (commentLine.contains("NOSONAR")) {
-        linesOfComments.remove(line);
         noSonar.add(line);
-      } else if (!COMMENT_ANALYSER.isBlank(commentLine) && !noSonar.contains(line)) {
+      } else if (!isBlankComment(commentLine) && !noSonar.contains(line)) {
         linesOfComments.add(line);
       }
       line++;
@@ -131,33 +137,30 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
     return false;
   }
 
-  private static class PythonCommentAnalyser {
-
-    boolean isBlank(String line) {
-      for (int i = 0; i < line.length(); i++) {
-        if (Character.isLetterOrDigit(line.charAt(i))) {
-          return false;
-        }
+  private static boolean isBlankComment(String line) {
+    for (int i = 0; i < line.length(); i++) {
+      if (Character.isLetterOrDigit(line.charAt(i))) {
+        return false;
       }
-      return true;
     }
+    return true;
+  }
 
-    String getContents(String comment) {
-      // Comment always starts with "#"
-      return comment.substring(comment.indexOf('#'));
-    }
+  private static String getCommentContent(String comment) {
+    // Comment always starts with "#"
+    return comment.substring(comment.indexOf('#'));
   }
 
   public Set<Integer> getLinesWithNoSonar() {
-    return Collections.unmodifiableSet(new HashSet<>(noSonar));
+    return Collections.unmodifiableSet(noSonar);
   }
 
   public Set<Integer> getExecutableLines() {
-    return Collections.unmodifiableSet(new HashSet<>(executableLines));
+    return Collections.unmodifiableSet(executableLines);
   }
 
   public Set<Integer> getLinesOfCode() {
-    return Collections.unmodifiableSet(new HashSet<>(linesOfCode));
+    return Collections.unmodifiableSet(linesOfCode);
   }
 
   public int getCommentLineCount() {
