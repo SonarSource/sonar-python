@@ -47,9 +47,8 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.metrics.FileLinesVisitor;
-import org.sonar.python.metrics.MetricsVisitor;
 import org.sonar.python.metrics.FileMetrics;
+import org.sonar.python.metrics.MetricsVisitor;
 import org.sonar.python.parser.PythonParser;
 
 public class PythonScanner {
@@ -162,13 +161,12 @@ public class PythonScanner {
   private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext, PyFile pyFile) {
     boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
     FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments, pyFile);
-    FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
     MetricsVisitor metricsVisitor = fileMetrics.metricsVisitor();
 
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     noSonarFilter.noSonarInFile(inputFile, metricsVisitor.getLinesWithNoSonar());
 
-    Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
+    Set<Integer> linesOfCode = metricsVisitor.getLinesOfCode();
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());

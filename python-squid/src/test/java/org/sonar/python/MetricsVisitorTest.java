@@ -36,6 +36,9 @@ public class MetricsVisitorTest {
   public void test() {
     MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines.py"), false);
 
+    assertThat(visitor.getLinesOfCode()).hasSize(12);
+    assertThat(visitor.getLinesOfCode()).containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
+
     assertThat(visitor.getCommentLineCount()).isEqualTo(9);
 
     assertThat(visitor.getLinesWithNoSonar()).containsOnly(11);
@@ -44,6 +47,8 @@ public class MetricsVisitorTest {
   @Test
   public void test_ignoreHeaderComments() {
     MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), true);
+
+    assertThat(visitor.getLinesOfCode()).containsOnly(2, 4);
 
     assertThat(visitor.getCommentLineCount()).isEqualTo(1);
   }

@@ -35,7 +35,6 @@ public class FileMetrics {
   private int numberOfClasses;
   private final ComplexityVisitor complexityVisitor = new ComplexityVisitor();
   private final CognitiveComplexityVisitor cognitiveComplexityVisitor = new CognitiveComplexityVisitor(null);
-  private final FileLinesVisitor fileLinesVisitor;
   private final MetricsVisitor metricsVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
@@ -45,8 +44,6 @@ public class FileMetrics {
     numberOfClasses = PsiTreeUtil.findChildrenOfType(pyFile, PyClass.class).size();
     complexityVisitor.scanFile(context);
     cognitiveComplexityVisitor.scanFile(context);
-    fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
-    fileLinesVisitor.scanFile(context);
     metricsVisitor = new MetricsVisitor(ignoreHeaderComments);
     pyFile.accept(metricsVisitor);
     for (AstNode functionDef : rootTree.getDescendants(PythonGrammar.FUNCDEF)) {
@@ -76,10 +73,6 @@ public class FileMetrics {
 
   public List<Integer> functionComplexities() {
     return functionComplexities;
-  }
-
-  public FileLinesVisitor fileLinesVisitor() {
-    return fileLinesVisitor;
   }
 
   public MetricsVisitor metricsVisitor() {

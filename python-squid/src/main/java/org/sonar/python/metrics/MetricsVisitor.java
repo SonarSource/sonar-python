@@ -22,6 +22,8 @@ package org.sonar.python.metrics;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.jetbrains.python.PyTokenTypes;
 import com.jetbrains.python.psi.PyExceptPart;
 import com.jetbrains.python.psi.PyExpression;
 import com.jetbrains.python.psi.PyExpressionStatement;
@@ -35,17 +37,14 @@ import com.jetbrains.python.psi.PyTryExceptStatement;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import org.sonar.api.measures.CoreMetrics;
 import org.sonar.python.frontend.PythonTokenLocation;
 
-/**
- * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES} metrics used by the DevCockpit.
- */
 public class MetricsVisitor extends PyRecursiveElementVisitor {
 
   private static final PythonCommentAnalyser COMMENT_ANALYSER = new PythonCommentAnalyser();
 
   private final boolean ignoreHeaderComments;
+  private Set<Integer> linesOfCode = new HashSet<>();
   private Set<Integer> executableLines = new HashSet<>();
   private Set<Integer> linesOfComments = new HashSet<>();
   private Set<Integer> noSonar = new HashSet<>();
@@ -59,6 +58,15 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
   public void visitElement(PsiElement element) {
     if (!((element instanceof PyFile) || (element instanceof PsiComment) || (element instanceof PsiWhiteSpace))) {
       firstNonCommentSeen = true;
+    }
+    if (element instanceof LeafPsiElement
+      && !(element instanceof PsiWhiteSpace)
+      && !(element instanceof PsiComment)
+      && element.getNode().getElementType() != PyTokenTypes.DOCSTRING) {
+      PythonTokenLocation location = new PythonTokenLocation(element);
+      for (int line = location.startLine(); line <= location.endLine(); line++) {
+        linesOfCode.add(line);
+      }
     }
     if (element instanceof PyStatement) {
       handlePyStatement(element);
@@ -146,6 +154,10 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
 
   public Set<Integer> getExecutableLines() {
     return Collections.unmodifiableSet(new HashSet<>(executableLines));
+  }
+
+  public Set<Integer> getLinesOfCode() {
+    return Collections.unmodifiableSet(new HashSet<>(linesOfCode));
   }
 
   public int getCommentLineCount() {
