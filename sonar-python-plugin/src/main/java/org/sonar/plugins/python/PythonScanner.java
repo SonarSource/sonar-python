@@ -48,6 +48,7 @@ import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
+import org.sonar.python.metrics.MetricsVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 
@@ -162,6 +163,7 @@ public class PythonScanner {
     boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
     FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments, pyFile);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
+    MetricsVisitor metricsVisitor = fileMetrics.metricsVisitor();
 
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
@@ -179,7 +181,7 @@ public class PythonScanner {
     for (int line : linesOfCode) {
       fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
     }
-    for (int line : fileLinesVisitor.getExecutableLines()) {
+    for (int line : metricsVisitor.getExecutableLines()) {
       fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
     }
     fileLinesContext.save();
