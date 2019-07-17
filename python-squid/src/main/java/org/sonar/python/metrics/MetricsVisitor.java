@@ -19,10 +19,13 @@
  */
 package org.sonar.python.metrics;
 
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiWhiteSpace;
 import com.jetbrains.python.psi.PyExceptPart;
 import com.jetbrains.python.psi.PyExpression;
 import com.jetbrains.python.psi.PyExpressionStatement;
+import com.jetbrains.python.psi.PyFile;
 import com.jetbrains.python.psi.PyIfPart;
 import com.jetbrains.python.psi.PyIfStatement;
 import com.jetbrains.python.psi.PyRecursiveElementVisitor;
@@ -40,8 +43,13 @@ import org.sonar.python.frontend.PythonTokenLocation;
  */
 public class MetricsVisitor extends PyRecursiveElementVisitor {
 
+  private static final PythonCommentAnalyser COMMENT_ANALYSER = new PythonCommentAnalyser();
+
   private final boolean ignoreHeaderComments;
   private Set<Integer> executableLines = new HashSet<>();
+  private Set<Integer> linesOfComments = new HashSet<>();
+  private Set<Integer> noSonar = new HashSet<>();
+  private boolean firstNonCommentSeen = false;
 
   public MetricsVisitor(boolean ignoreHeaderComments) {
     this.ignoreHeaderComments = ignoreHeaderComments;
@@ -49,21 +57,61 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
 
   @Override
   public void visitElement(PsiElement element) {
+    if (!((element instanceof PyFile) || (element instanceof PsiComment) || (element instanceof PsiWhiteSpace))) {
+      firstNonCommentSeen = true;
+    }
     if (element instanceof PyStatement) {
-      if (!isDocString(element)) {
-        executableLines.add(new PythonTokenLocation(element).startLine());
-      }
-      if (element instanceof PyIfStatement) {
-        for (PyIfPart pyIfPart : ((PyIfStatement) element).getElifParts()) {
-          executableLines.add(new PythonTokenLocation(pyIfPart).startLine());
-        }
-      } else if (element instanceof PyTryExceptStatement) {
-        for (PyExceptPart pyExceptPart : ((PyTryExceptStatement) element).getExceptParts()) {
-          executableLines.add(new PythonTokenLocation(pyExceptPart).startLine());
-        }
+      handlePyStatement(element);
+    } else if (element instanceof PsiComment) {
+      if (ignoreHeaderComments && !firstNonCommentSeen) {
+        firstNonCommentSeen = true;
+      } else {
+        handleComment(((PsiComment) element));
       }
     }
     super.visitElement(element);
+  }
+
+  private void handlePyStatement(PsiElement element) {
+    if (!isDocString(element)) {
+      executableLines.add(new PythonTokenLocation(element).startLine());
+    }
+    if (element instanceof PyIfStatement) {
+      for (PyIfPart pyIfPart : ((PyIfStatement) element).getElifParts()) {
+        executableLines.add(new PythonTokenLocation(pyIfPart).startLine());
+      }
+    } else if (element instanceof PyTryExceptStatement) {
+      for (PyExceptPart pyExceptPart : ((PyTryExceptStatement) element).getExceptParts()) {
+        executableLines.add(new PythonTokenLocation(pyExceptPart).startLine());
+      }
+    }
+  }
+
+  private void handleComment(PsiComment comment) {
+    String[] commentLines = COMMENT_ANALYSER.getContents(comment.getText())
+      .split("(\r)?\n|\r", -1);
+    int line = new PythonTokenLocation(comment).startLine();
+
+    for (String commentLine : commentLines) {
+      if (commentLine.contains("NOSONAR")) {
+        linesOfComments.remove(line);
+        noSonar.add(line);
+      } else if (!COMMENT_ANALYSER.isBlank(commentLine) && !noSonar.contains(line)) {
+        linesOfComments.add(line);
+      }
+      line++;
+    }
+  }
+
+  @Override
+  public void visitPyStringLiteralExpression(PyStringLiteralExpression node) {
+    if (node.isDocString()) {
+      PythonTokenLocation location = new PythonTokenLocation(node);
+      for (int line = location.startLine(); line <= location.endLine(); line++) {
+        linesOfComments.add(line);
+      }
+    }
+    super.visitPyStringLiteralExpression(node);
   }
 
   private static boolean isDocString(PsiElement element) {
@@ -75,7 +123,33 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
     return false;
   }
 
+  private static class PythonCommentAnalyser {
+
+    boolean isBlank(String line) {
+      for (int i = 0; i < line.length(); i++) {
+        if (Character.isLetterOrDigit(line.charAt(i))) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    String getContents(String comment) {
+      // Comment always starts with "#"
+      return comment.substring(comment.indexOf('#'));
+    }
+  }
+
+  public Set<Integer> getLinesWithNoSonar() {
+    return Collections.unmodifiableSet(new HashSet<>(noSonar));
+  }
+
   public Set<Integer> getExecutableLines() {
     return Collections.unmodifiableSet(new HashSet<>(executableLines));
   }
+
+  public int getCommentLineCount() {
+    return linesOfComments.size();
+  }
+
 }

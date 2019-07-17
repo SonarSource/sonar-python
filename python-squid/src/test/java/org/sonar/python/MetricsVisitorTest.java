@@ -33,13 +33,30 @@ public class MetricsVisitorTest {
   private static final File BASE_DIR = new File("src/test/resources/metrics");
 
   @Test
+  public void test() {
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines.py"), false);
+
+    assertThat(visitor.getCommentLineCount()).isEqualTo(9);
+
+    assertThat(visitor.getLinesWithNoSonar()).containsOnly(11);
+  }
+
+  @Test
+  public void test_ignoreHeaderComments() {
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), true);
+
+    assertThat(visitor.getCommentLineCount()).isEqualTo(1);
+  }
+
+  @Test
   public void executable_lines() {
-    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "executable_lines.py"));
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "executable_lines.py"), false);
+
     assertThat(visitor.getExecutableLines()).containsOnly(1, 2, 4, 7, 11, 13, 14, 15, 16, 18, 20, 21, 22, 23, 25, 27, 28, 29);
   }
 
-  private static MetricsVisitor metricsVisitor(File file) {
-    MetricsVisitor visitor = new MetricsVisitor(false);
+  private static MetricsVisitor metricsVisitor(File file, boolean ignoreHeaderComments) {
+    MetricsVisitor visitor = new MetricsVisitor(ignoreHeaderComments);
     String fileContent;
     try {
       fileContent = Files.toString(file, StandardCharsets.UTF_8);

@@ -166,7 +166,7 @@ public class PythonScanner {
     MetricsVisitor metricsVisitor = fileMetrics.metricsVisitor();
 
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
-    noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
+    noSonarFilter.noSonarInFile(inputFile, metricsVisitor.getLinesWithNoSonar());
 
     Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
@@ -175,7 +175,7 @@ public class PythonScanner {
     saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
     saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
     saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
+    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, metricsVisitor.getCommentLineCount());
 
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
     for (int line : linesOfCode) {
