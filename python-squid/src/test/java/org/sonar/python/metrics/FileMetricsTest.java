@@ -19,8 +19,12 @@
  */
 package org.sonar.python.metrics;
 
+import com.jetbrains.python.psi.PyFile;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.junit.Test;
+import org.sonar.api.internal.google.common.io.Files;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -61,7 +65,14 @@ public class FileMetricsTest {
   private static FileMetrics metrics(String fileName) {
     File baseDir = new File("src/test/resources/metrics/");
     File file = new File(baseDir, fileName);
-    return new FileMetrics(TestPythonVisitorRunner.createContext(file), true);
+    String fileContent;
+    try {
+      fileContent = Files.toString(file, StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
+    return new FileMetrics(TestPythonVisitorRunner.createContext(file), true, pyFile);
   }
 
 }

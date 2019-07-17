@@ -19,6 +19,10 @@
  */
 package org.sonar.python.metrics;
 
+import com.intellij.psi.util.PsiTreeUtil;
+import com.jetbrains.python.psi.PyClass;
+import com.jetbrains.python.psi.PyFile;
+import com.jetbrains.python.psi.PyStatement;
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +38,10 @@ public class FileMetrics {
   private final FileLinesVisitor fileLinesVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
-  public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
+  public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments, PyFile pyFile) {
     AstNode rootTree = context.rootTree();
-    numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
-    numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
+    numberOfStatements = PsiTreeUtil.findChildrenOfType(pyFile, PyStatement.class).size();
+    numberOfClasses = PsiTreeUtil.findChildrenOfType(pyFile, PyClass.class).size();
     complexityVisitor.scanFile(context);
     cognitiveComplexityVisitor.scanFile(context);
     fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
