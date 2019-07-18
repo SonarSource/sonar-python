@@ -43,16 +43,23 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.impl.ProgressManagerImpl;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.StaticGetter;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiErrorElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.SyntaxTraverser;
 import com.intellij.psi.impl.PsiFileFactoryImpl;
 import com.intellij.psi.impl.PsiManagerImpl;
+import com.intellij.util.containers.JBIterable;
 import com.jetbrains.python.PythonDialectsTokenSetContributor;
 import com.jetbrains.python.PythonFileType;
 import com.jetbrains.python.PythonLanguage;
 import com.jetbrains.python.PythonParserDefinition;
 import com.jetbrains.python.PythonTokenSetContributor;
+import com.jetbrains.python.psi.LanguageLevel;
 import com.jetbrains.python.psi.PyFile;
+import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -67,8 +74,35 @@ public class PythonParser {
   private static final PsiFileFactory psiFileFactory = psiFileFactory();
 
   public PyFile parse(String content) {
-    return (PyFile) psiFileFactory.createFileFromText("test.py", PythonFileType.INSTANCE, normalizeEol(content), System.currentTimeMillis(), false, false);
+    PyFile file = parseAs(content, LanguageLevel.PYTHON38);
+    if (errorElements(file).isEmpty()) {
+      return file;
+    }
+    file = parseAs(content, LanguageLevel.PYTHON27);
+    PsiErrorElement errorElement = errorElements(file).get(0);
+    if (errorElement == null) {
+      return file;
+    }
+    int lineNumber = new PythonTokenLocation(errorElement).startLine();
+    throw new RecognitionException(lineNumber, errorElement.getErrorDescription());
   }
+
+  private static JBIterable<PsiErrorElement> errorElements(PsiElement root) {
+    return SyntaxTraverser.psiTraverser(root).traverse().filter(PsiErrorElement.class);
+  }
+
+  @NotNull
+  private static PyFile parseAs(String content, LanguageLevel languageLevel) {
+    PsiFile file = psiFileFactory.createFileFromText("test.py", PythonFileType.INSTANCE, normalizeEol(content), System.currentTimeMillis(), false, false);
+    file.getViewProvider().getVirtualFile().putUserData(LanguageLevel.KEY, languageLevel);
+    return (PyFile) file;
+  }
+
+  @NotNull
+  private static String normalizeEol(String content) {
+    return content.replaceAll("\\r\\n?", "\n");
+  }
+
 
   public static PyFile parse(File file) {
     String fileContent;
@@ -78,11 +112,6 @@ public class PythonParser {
       throw new IllegalStateException(e);
     }
     return new PythonParser().parse(fileContent);
-  }
-
-  @NotNull
-  private static String normalizeEol(String content) {
-    return content.replaceAll("\\r\\n?", "\n");
   }
 
   private static PsiFileFactory psiFileFactory() {
@@ -145,6 +174,7 @@ public class PythonParser {
   protected static class TestDisposable implements Disposable {
     @Override
     public void dispose() {
+      // Nothing to do
     }
   }
 

@@ -23,14 +23,16 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.python.psi.PyCallExpression;
+import com.jetbrains.python.psi.PyExpressionStatement;
 import com.jetbrains.python.psi.PyFile;
 import com.jetbrains.python.psi.PyFormattedStringElement;
-import com.jetbrains.python.psi.PyParenthesizedExpression;
 import com.jetbrains.python.psi.PyPrintStatement;
 import com.jetbrains.python.psi.PyRecursiveElementVisitor;
 import com.jetbrains.python.psi.PyStatement;
+import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,6 +40,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonParserTest {
 
   private final PythonParser parser = new PythonParser();
+
+  @Test
+  public void parsing_error() {
+    try {
+      parser.parse("x = 1\nx =\nx = 2");
+      Assertions.fail("should have raised an exception");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(2);
+      assertThat(e.getMessage()).isEqualTo("Expression expected");
+    }
+  }
 
   @Test
   public void print_statement() {
@@ -50,8 +63,8 @@ public class PythonParserTest {
   public void print_with_parentheses() {
     PyFile pyFile = parser.parse("print(42)");
     PyStatement statement = pyFile.getStatements().get(0);
-    assertThat(statement).isInstanceOf(PyPrintStatement.class);
-    assertThat(statement.getLastChild()).isInstanceOf(PyParenthesizedExpression.class);
+    assertThat(statement).isInstanceOf(PyExpressionStatement.class);
+    assertThat(statement.getFirstChild()).isInstanceOf(PyCallExpression.class);
   }
 
   @Test

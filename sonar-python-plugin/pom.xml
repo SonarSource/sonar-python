@@ -429,6 +429,8 @@
                     <include>com/intellij/openapi/util/Condition$2.class</include>
                     <include>com/intellij/openapi/util/Condition$3.class</include>
                     <include>com/intellij/openapi/util/Condition.class</include>
+                    <include>com/intellij/openapi/util/Conditions$1.class</include>
+                    <include>com/intellij/openapi/util/Conditions$8.class</include>
                     <include>com/intellij/openapi/util/Conditions.class</include>
                     <include>com/intellij/openapi/util/Disposer$1.class</include>
                     <include>com/intellij/openapi/util/Disposer$2.class</include>
@@ -497,6 +499,7 @@
                     <include>com/intellij/util/Function$2.class</include>
                     <include>com/intellij/util/Function$Mono.class</include>
                     <include>com/intellij/util/Function.class</include>
+                    <include>com/intellij/util/Functions$2.class</include>
                     <include>com/intellij/util/Functions$4.class</include>
                     <include>com/intellij/util/Functions$5.class</include>
                     <include>com/intellij/util/Functions$6.class</include>
@@ -658,7 +661,6 @@
                     <include>com/intellij/openapi/fileTypes/FileTypeRegistry.class</include>
                     <include>com/intellij/openapi/fileTypes/LanguageFileType.class</include>
                     <include>com/intellij/openapi/fileTypes/UnknownFileType.class</include>
-                    <include>com/intellij/openapi/module/ModuleManager.class</include>
                     <include>com/intellij/openapi/options/Scheme.class</include>
                     <include>com/intellij/openapi/progress/NonCancelableSection.class</include>
                     <include>com/intellij/openapi/progress/PerformInBackgroundOption.class</include>
@@ -675,13 +677,11 @@
                     <include>com/intellij/openapi/progress/WrappedProgressIndicator.class</include>
                     <include>com/intellij/openapi/project/DumbAware.class</include>
                     <include>com/intellij/openapi/project/DumbAwareAction.class</include>
-                    <include>com/intellij/openapi/project/DumbModeTask.class</include>
                     <include>com/intellij/openapi/project/DumbService$DumbModeListener.class</include>
                     <include>com/intellij/openapi/project/DumbService.class</include>
                     <include>com/intellij/openapi/project/IndexNotReadyException.class</include>
                     <include>com/intellij/openapi/project/PossiblyDumbAware.class</include>
                     <include>com/intellij/openapi/project/Project.class</include>
-                    <include>com/intellij/openapi/roots/impl/FilePropertyPusher.class</include>
                     <include>com/intellij/openapi/ui/ComponentContainer.class</include>
                     <include>com/intellij/openapi/ui/Queryable.class</include>
                     <include>com/intellij/openapi/util/Iconable.class</include>
@@ -710,7 +710,6 @@
                     <include>com/intellij/openapi/vfs/VirtualFileVisitor.class</include>
                     <include>com/intellij/openapi/vfs/impl/BulkVirtualFileListenerAdapter.class</include>
                     <include>com/intellij/openapi/vfs/newvfs/BulkFileListener.class</include>
-                    <include>com/intellij/openapi/vfs/newvfs/FileAttribute.class</include>
                     <include>com/intellij/pom/Navigatable.class</include>
                     <include>com/intellij/psi/CommonClassNames.class</include>
                     <include>com/intellij/psi/FileViewProvider.class</include>
@@ -747,6 +746,18 @@
                     <include>com/intellij/psi/PsiWhiteSpace.class</include>
                     <include>com/intellij/psi/StubBasedPsiElement.class</include>
                     <include>com/intellij/psi/StubBuilder.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$ASTApi.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$Api$1.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$Api$2.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$Api$3.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$Api.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$ApiEx$1.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$ApiEx.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$FlyweightApi.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$LighterASTApi.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$PsiApi$1.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser$PsiApi.class</include>
+                    <include>com/intellij/psi/SyntaxTraverser.class</include>
                     <include>com/intellij/psi/TokenType$1.class</include>
                     <include>com/intellij/psi/TokenType.class</include>
                     <include>com/intellij/psi/impl/ElementBase$1.class</include>
