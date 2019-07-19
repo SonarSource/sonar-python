@@ -22,20 +22,17 @@ package org.sonar.python;
 import com.google.common.collect.ImmutableSet;
 import com.intellij.lang.ASTNode;
 import com.jetbrains.python.PyStubElementTypes;
-import com.jetbrains.python.psi.PyFile;
 import com.jetbrains.python.psi.PyFunction;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
-import org.sonar.api.internal.google.common.io.Files;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.frontend.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,14 +44,7 @@ public class PythonCheckTest {
   private static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     check.scanFile(context);
-    String fileContent;
-    try {
-      fileContent = Files.toString(file, StandardCharsets.UTF_8);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
-    SubscriptionVisitor.analyze(Collections.singletonList(check), context, pyFile);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context, PythonParser.parse(file));
     return context.getIssues();
   }
 

@@ -20,10 +20,8 @@
 package org.sonar.python;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import org.junit.Test;
-import org.sonar.api.internal.google.common.io.Files;
+import org.sonar.python.frontend.PythonParser;
 import org.sonar.python.metrics.MetricsVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,13 +64,7 @@ public class MetricsVisitorTest {
 
   private static MetricsVisitor metricsVisitor(File file, boolean ignoreHeaderComments) {
     MetricsVisitor visitor = new MetricsVisitor(ignoreHeaderComments);
-    String fileContent;
-    try {
-      fileContent = Files.toString(file, StandardCharsets.UTF_8);
-    } catch (IOException e) {
-      throw new IllegalStateException(e);
-    }
-    new org.sonar.python.frontend.PythonParser().parse(fileContent).accept(visitor);
+    PythonParser.parse(file).accept(visitor);
     return visitor;
   }
 
