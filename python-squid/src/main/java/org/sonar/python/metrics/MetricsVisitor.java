@@ -72,7 +72,7 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
 
     // track executable lines of code
     if (element instanceof PyStatement) {
-      handlePyStatement(element);
+      handlePyStatement((PyStatement) element);
     }
 
     // track lines of comments and no_sonar lines
@@ -87,7 +87,7 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
     super.visitElement(element);
   }
 
-  private void handlePyStatement(PsiElement element) {
+  private void handlePyStatement(PyStatement element) {
     if (!isDocString(element)) {
       executableLines.add(new PythonTokenLocation(element).startLine());
     }
@@ -128,7 +128,7 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
     super.visitPyStringLiteralExpression(node);
   }
 
-  private static boolean isDocString(PsiElement element) {
+  private static boolean isDocString(PyStatement element) {
     if (element instanceof PyExpressionStatement) {
       PyExpression expression = ((PyExpressionStatement) element).getExpression();
       return expression instanceof PyStringLiteralExpression
