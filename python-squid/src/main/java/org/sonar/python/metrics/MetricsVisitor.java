@@ -76,12 +76,8 @@ public class MetricsVisitor extends PyRecursiveElementVisitor {
     }
 
     // track lines of comments and no_sonar lines
-    if (element instanceof PsiComment) {
-      if (ignoreHeaderComments && !firstNonCommentSeen) {
-        firstNonCommentSeen = true;
-      } else {
-        handleComment(((PsiComment) element));
-      }
+    if (element instanceof PsiComment && (firstNonCommentSeen || !ignoreHeaderComments)) {
+      handleComment(((PsiComment) element));
     }
 
     super.visitElement(element);

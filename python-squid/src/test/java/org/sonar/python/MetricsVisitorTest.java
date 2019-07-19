@@ -46,10 +46,14 @@ public class MetricsVisitorTest {
 
   @Test
   public void test_ignoreHeaderComments() {
-    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), true);
+    // do not ignoreHeaderComments
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), false);
+    assertThat(visitor.getLinesOfCode()).containsOnly(6, 8);
+    assertThat(visitor.getCommentLineCount()).isEqualTo(4);
 
-    assertThat(visitor.getLinesOfCode()).containsOnly(2, 4);
-
+    // ignoreHeaderComments
+    visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), true);
+    assertThat(visitor.getLinesOfCode()).containsOnly(6, 8);
     assertThat(visitor.getCommentLineCount()).isEqualTo(1);
   }
 
