@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.python.cpd;
 
+import com.jetbrains.python.psi.PyFile;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,8 +32,7 @@ import org.sonar.api.batch.sensor.cpd.internal.TokensLine;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
-import org.sonar.python.PythonVisitorContext;
-import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.frontend.PythonParser;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,9 +45,21 @@ public class PythonCpdAnalyzerTest {
 
   @Test
   public void code_chunks_2() {
-    DefaultInputFile inputFile = inputFile("code_chunks_2.py");
-    PythonVisitorContext visitorContext = TestPythonVisitorRunner.createContext(inputFile.path().toFile());
-    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
+    File file = new File(BASE_DIR, "code_chunks_2.py");
+
+    String content = TestUtils.fileContent(file, UTF_8);
+    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())
+      .setModuleBaseDir(Paths.get(BASE_DIR))
+      .setCharset(UTF_8)
+      .setType(InputFile.Type.MAIN)
+      .setLanguage(Python.KEY)
+      .initMetadata(content)
+      .build();
+
+    context.fileSystem().add(inputFile);
+
+    PyFile pyFile = new PythonParser().parse(content);
+    cpdAnalyzer.pushCpdTokens(inputFile, pyFile, content);
 
     List<TokensLine> lines = context.cpdTokens("moduleKey:code_chunks_2.py");
     assertThat(lines).isNotNull().hasSize(25);
@@ -89,19 +100,4 @@ public class PythonCpdAnalyzerTest {
       "[itemforiteminitems]");
   }
 
-  private DefaultInputFile inputFile(String fileName) {
-    File file = new File(BASE_DIR, fileName);
-
-    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())
-      .setModuleBaseDir(Paths.get(BASE_DIR))
-      .setCharset(UTF_8)
-      .setType(InputFile.Type.MAIN)
-      .setLanguage(Python.KEY)
-      .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
-      .build();
-
-    context.fileSystem().add(inputFile);
-
-    return inputFile;
-  }
 }

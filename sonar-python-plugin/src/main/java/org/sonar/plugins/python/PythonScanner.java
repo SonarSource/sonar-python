@@ -95,7 +95,7 @@ public class PythonScanner {
     try {
       visitorContext = new PythonVisitorContext(parser.parse(fileContent), pythonFile);
       pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
-      saveMeasures(inputFile, visitorContext, pyFile);
+      saveMeasures(inputFile, visitorContext, pyFile, fileContent);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile.toString());
@@ -162,12 +162,12 @@ public class PythonScanner {
     return newLocation;
   }
 
-  private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext, PyFile pyFile) {
+  private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext, PyFile pyFile, String fileContent) {
     boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
     FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments, pyFile);
     MetricsVisitor metricsVisitor = fileMetrics.metricsVisitor();
 
-    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
+    cpdAnalyzer.pushCpdTokens(inputFile, pyFile, fileContent);
     noSonarFilter.noSonarInFile(inputFile, metricsVisitor.getLinesWithNoSonar());
 
     Set<Integer> linesOfCode = metricsVisitor.getLinesOfCode();
