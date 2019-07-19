@@ -53,7 +53,11 @@ import com.jetbrains.python.PythonLanguage;
 import com.jetbrains.python.PythonParserDefinition;
 import com.jetbrains.python.PythonTokenSetContributor;
 import com.jetbrains.python.psi.PyFile;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.jetbrains.annotations.NotNull;
 
 public class PythonParser {
@@ -64,6 +68,16 @@ public class PythonParser {
 
   public PyFile parse(String content) {
     return (PyFile) psiFileFactory.createFileFromText("test.py", PythonFileType.INSTANCE, normalizeEol(content), System.currentTimeMillis(), false, false);
+  }
+
+  public static PyFile parse(File file) {
+    String fileContent;
+    try {
+      fileContent = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+    return new PythonParser().parse(fileContent);
   }
 
   @NotNull

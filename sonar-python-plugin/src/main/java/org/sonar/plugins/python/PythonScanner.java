@@ -47,8 +47,8 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
+import org.sonar.python.metrics.MetricsVisitor;
 import org.sonar.python.parser.PythonParser;
 
 public class PythonScanner {
@@ -91,9 +91,10 @@ public class PythonScanner {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     String fileContent = pythonFile.content();
+    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
     try {
       visitorContext = new PythonVisitorContext(parser.parse(fileContent), pythonFile);
-      saveMeasures(inputFile, visitorContext);
+      saveMeasures(inputFile, visitorContext, pyFile);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile.toString());
@@ -104,7 +105,6 @@ public class PythonScanner {
         .message(e.getMessage())
         .save();
     }
-    PyFile pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
 
     for (PythonCheck check : checks.all()) {
       check.scanFile(visitorContext);
@@ -158,28 +158,28 @@ public class PythonScanner {
     return newLocation;
   }
 
-  private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext) {
+  private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext, PyFile pyFile) {
     boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
-    FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments);
-    FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
+    FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments, pyFile);
+    MetricsVisitor metricsVisitor = fileMetrics.metricsVisitor();
 
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
-    noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
+    noSonarFilter.noSonarInFile(inputFile, metricsVisitor.getLinesWithNoSonar());
 
-    Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
+    Set<Integer> linesOfCode = metricsVisitor.getLinesOfCode();
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
     saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
     saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
     saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
+    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, metricsVisitor.getCommentLineCount());
 
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
     for (int line : linesOfCode) {
       fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
     }
-    for (int line : fileLinesVisitor.getExecutableLines()) {
+    for (int line : metricsVisitor.getExecutableLines()) {
       fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
     }
     fileLinesContext.save();

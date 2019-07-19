@@ -21,19 +21,18 @@ package org.sonar.python;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.metrics.FileLinesVisitor;
+import org.sonar.python.frontend.PythonParser;
+import org.sonar.python.metrics.MetricsVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FileLinesVisitorTest {
+public class MetricsVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources/metrics");
 
   @Test
   public void test() {
-    FileLinesVisitor visitor = new FileLinesVisitor(false);
-
-    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines.py"), visitor);
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines.py"), false);
 
     assertThat(visitor.getLinesOfCode()).hasSize(12);
     assertThat(visitor.getLinesOfCode()).containsOnly(2, 4, 7, 8, 9, 10, 11, 12, 14, 15, 17, 21);
@@ -45,19 +44,28 @@ public class FileLinesVisitorTest {
 
   @Test
   public void test_ignoreHeaderComments() {
-    FileLinesVisitor visitor = new FileLinesVisitor(true);
+    // do not ignoreHeaderComments
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), false);
+    assertThat(visitor.getLinesOfCode()).containsOnly(6, 8);
+    assertThat(visitor.getCommentLineCount()).isEqualTo(4);
 
-    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines_header_comments.py"), visitor);
-
-    assertThat(visitor.getLinesOfCode()).containsOnly(2, 4);
+    // ignoreHeaderComments
+    visitor = metricsVisitor(new File(BASE_DIR, "file_lines_header_comments.py"), true);
+    assertThat(visitor.getLinesOfCode()).containsOnly(6, 8);
     assertThat(visitor.getCommentLineCount()).isEqualTo(1);
   }
 
   @Test
   public void executable_lines() {
-    FileLinesVisitor visitor = new FileLinesVisitor(false);
-    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "executable_lines.py"), visitor);
+    MetricsVisitor visitor = metricsVisitor(new File(BASE_DIR, "executable_lines.py"), false);
+
     assertThat(visitor.getExecutableLines()).containsOnly(1, 2, 4, 7, 11, 13, 14, 15, 16, 18, 20, 21, 22, 23, 25, 27, 28, 29);
+  }
+
+  private static MetricsVisitor metricsVisitor(File file, boolean ignoreHeaderComments) {
+    MetricsVisitor visitor = new MetricsVisitor(ignoreHeaderComments);
+    PythonParser.parse(file).accept(visitor);
+    return visitor;
   }
 
 }

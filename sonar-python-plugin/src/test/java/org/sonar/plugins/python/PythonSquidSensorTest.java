@@ -111,7 +111,7 @@ public class PythonSquidSensorTest {
 
     String key = "moduleKey:file1.py";
     assertThat(context.measure(key, CoreMetrics.NCLOC).value()).isEqualTo(22);
-    assertThat(context.measure(key, CoreMetrics.STATEMENTS).value()).isEqualTo(20);
+    assertThat(context.measure(key, CoreMetrics.STATEMENTS).value()).isEqualTo(22);
     assertThat(context.measure(key, CoreMetrics.FUNCTIONS).value()).isEqualTo(4);
     assertThat(context.measure(key, CoreMetrics.CLASSES).value()).isEqualTo(1);
     assertThat(context.measure(key, CoreMetrics.COMPLEXITY).value()).isEqualTo(5);
