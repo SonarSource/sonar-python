@@ -41,7 +41,7 @@ import org.sonar.python.frontend.PythonTokenLocation;
 public class PythonCpdAnalyzer {
 
   private final SensorContext context;
-  private static Set<PyElementType> IGNORED_TOKEN_TYPES = new HashSet<>(Arrays.asList(
+  private static final Set<PyElementType> IGNORED_TOKEN_TYPES = new HashSet<>(Arrays.asList(
     PyTokenTypes.LINE_BREAK, PyTokenTypes.DEDENT, PyTokenTypes.INDENT, PyTokenTypes.END_OF_LINE_COMMENT, PyTokenTypes.SPACE, PyTokenTypes.STATEMENT_BREAK));
   private static final Logger LOG = Loggers.get(PythonCpdAnalyzer.class);
 
@@ -86,7 +86,7 @@ public class PythonCpdAnalyzer {
   }
 
   @CheckForNull
-  private Document getDocument(PyFile pyFile) {
+  private static Document getDocument(PyFile pyFile) {
     PsiElement root = pyFile.getFirstChild();
     if (root == null) {
       return null;
