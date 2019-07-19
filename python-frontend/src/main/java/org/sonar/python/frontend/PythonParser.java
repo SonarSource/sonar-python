@@ -99,7 +99,7 @@ public class PythonParser {
   }
 
   @NotNull
-  private static String normalizeEol(String content) {
+  public static String normalizeEol(String content) {
     return content.replaceAll("\\r\\n?", "\n");
   }
 

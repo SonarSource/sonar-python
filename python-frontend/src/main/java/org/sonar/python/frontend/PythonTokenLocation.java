@@ -30,12 +30,13 @@ public class PythonTokenLocation {
   private final int endLineOffset;
 
   public PythonTokenLocation(@NotNull PsiElement element) {
-    Document psiDocument = element.getContainingFile().getViewProvider().getDocument();
-    int startOffset = element.getTextRange().getStartOffset();
+    this(element.getTextRange().getStartOffset(), element.getTextRange().getEndOffset(), element.getContainingFile().getViewProvider().getDocument());
+  }
+
+  public PythonTokenLocation(int startOffset, int endOffset, Document psiDocument) {
     startLine = psiDocument.getLineNumber(startOffset);
     int startLineNumberOffset = psiDocument.getLineStartOffset(startLine);
     startLineOffset = startOffset - startLineNumberOffset;
-    int endOffset = element.getTextRange().getEndOffset();
     endLine = psiDocument.getLineNumber(endOffset);
     int endLineNumberOffset = psiDocument.getLineStartOffset(endLine);
     endLineOffset = endOffset - endLineNumberOffset;
