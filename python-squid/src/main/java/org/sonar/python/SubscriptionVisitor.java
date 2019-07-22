@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
+import org.sonar.python.PythonCheck.PreciseIssue;
 
 public class SubscriptionVisitor extends PyRecursiveElementVisitor {
 
@@ -83,9 +84,13 @@ public class SubscriptionVisitor extends PyRecursiveElementVisitor {
     }
 
     @Override
-    public void addIssue(PsiElement element, @Nullable String message) {
-      pythonVisitorContext.addIssue(check, element, message);
+    public PreciseIssue addIssue(PsiElement element, @Nullable String message) {
+      return pythonVisitorContext.addIssue(check, element, message);
     }
 
+    @Override
+    public PreciseIssue addFileIssue(@Nullable String message) {
+      return pythonVisitorContext.addIssue(check, IssueLocation.atFileLevel(message));
+    }
   }
 }

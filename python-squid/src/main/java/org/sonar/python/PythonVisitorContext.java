@@ -74,8 +74,14 @@ public class PythonVisitorContext {
     issues.add(issue);
   }
 
-  public void addIssue(PythonCheck check, PsiElement element, @Nullable String message) {
-    issues.add(new PreciseIssue(check, IssueLocation.preciseLocation(element, message)));
+  public PreciseIssue addIssue(PythonCheck check, IssueLocation issueLocation) {
+    PreciseIssue issue = new PreciseIssue(check, issueLocation);
+    issues.add(issue);
+    return issue;
+  }
+
+  public PreciseIssue addIssue(PythonCheck check, PsiElement element, @Nullable String message) {
+    return addIssue(check, IssueLocation.preciseLocation(element, message));
   }
 
   public List<PreciseIssue> getIssues() {

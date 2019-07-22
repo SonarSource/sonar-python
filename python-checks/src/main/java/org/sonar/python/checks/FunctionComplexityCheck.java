@@ -19,14 +19,12 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.intellij.lang.ASTNode;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyFunction;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "FunctionComplexity")
@@ -40,18 +38,18 @@ public class FunctionComplexityCheck extends PythonCheck {
   int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    int complexity = ComplexityVisitor.complexity(node);
-    if (complexity > maximumFunctionComplexityThreshold) {
-      String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
-      addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message)
-        .withCost(complexity - maximumFunctionComplexityThreshold);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.FUNCTION_DECLARATION, ctx -> {
+      PyFunction node = (PyFunction) ctx.syntaxNode();
+      int complexity = ComplexityVisitor.complexity(node);
+      if (complexity > maximumFunctionComplexityThreshold) {
+        String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
+        ASTNode nameNode = node.getNameNode();
+        if (nameNode != null) {
+          ctx.addIssue(nameNode.getPsi(), message).withCost(complexity - maximumFunctionComplexityThreshold);
+        }
+      }
+    });
   }
 
 }
