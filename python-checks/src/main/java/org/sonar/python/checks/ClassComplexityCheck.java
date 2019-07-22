@@ -19,14 +19,12 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.intellij.lang.ASTNode;
+import com.jetbrains.python.PyStubElementTypes;
+import com.jetbrains.python.psi.PyClass;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "ClassComplexity")
@@ -38,18 +36,18 @@ public class ClassComplexityCheck extends PythonCheck {
   int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    int complexity = ComplexityVisitor.complexity(node);
-    if (complexity > maximumClassComplexityThreshold) {
-      String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
-      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), message)
-        .withCost(complexity - maximumClassComplexityThreshold);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyStubElementTypes.CLASS_DECLARATION, ctx -> {
+      PyClass node = (PyClass) ctx.syntaxNode();
+      int complexity = ComplexityVisitor.complexity(node);
+      if (complexity > maximumClassComplexityThreshold) {
+        String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
+        ASTNode nameNode = node.getNameNode();
+        if (nameNode != null) {
+          ctx.addIssue(nameNode.getPsi(), message).withCost(complexity - maximumClassComplexityThreshold);
+        }
+      }
+    });
   }
 
 }

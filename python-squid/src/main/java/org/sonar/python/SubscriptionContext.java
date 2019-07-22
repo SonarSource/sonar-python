@@ -21,11 +21,14 @@ package org.sonar.python;
 
 import com.intellij.psi.PsiElement;
 import javax.annotation.Nullable;
+import org.sonar.python.PythonCheck.PreciseIssue;
 
 public interface SubscriptionContext {
 
   PsiElement syntaxNode();
 
-  void addIssue(PsiElement element, @Nullable String message);
+  PreciseIssue addIssue(PsiElement element, @Nullable String message);
+
+  PreciseIssue addFileIssue(@Nullable String message);
 
 }
