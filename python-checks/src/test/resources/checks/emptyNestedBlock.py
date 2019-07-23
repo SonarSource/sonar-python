@@ -28,6 +28,9 @@ try:
 except:
     pass
 
+if 3 > 2: # nothing to do
+    pass
+
 if 3 > 2:
     # nothing to do
     pass
@@ -35,6 +38,12 @@ if 3 > 2:
 if 3 > 2:
     pass  # nothing to do
 
+# Noncompliant@+2
+if 3 > 2:
+    pass
+# just a comment
+elif condition:
+    foo()
 
 def empty_function():
     pass
