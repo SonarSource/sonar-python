@@ -24,3 +24,7 @@ z = "abc\\\\aaa"
 z = "*a*\ s" # Noncompliant
 z = """\ s""" # Noncompliant
 z = ""
+re.compile(r'...'
+           r'\("abc '
+           'def"\)$') # Noncompliant
+
