@@ -21,7 +21,6 @@ package org.sonar.python.metrics;
 
 import java.io.File;
 import org.junit.Test;
-import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.frontend.PythonParser;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -62,7 +61,7 @@ public class FileMetricsTest {
   private static FileMetrics metrics(String fileName) {
     File baseDir = new File("src/test/resources/metrics/");
     File file = new File(baseDir, fileName);
-    return new FileMetrics(TestPythonVisitorRunner.createContext(file), true, PythonParser.parse(file));
+    return new FileMetrics(true, PythonParser.parse(file));
   }
 
 }

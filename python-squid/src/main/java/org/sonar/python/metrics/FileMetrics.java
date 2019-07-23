@@ -26,7 +26,6 @@ import com.jetbrains.python.psi.PyFunction;
 import com.jetbrains.python.psi.PyStatement;
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.PythonVisitorContext;
 
 public class FileMetrics {
 
@@ -37,11 +36,11 @@ public class FileMetrics {
   private final MetricsVisitor metricsVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
-  public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments, PyFile pyFile) {
+  public FileMetrics(boolean ignoreHeaderComments, PyFile pyFile) {
     numberOfStatements = PsiTreeUtil.findChildrenOfType(pyFile, PyStatement.class).size();
     numberOfClasses = PsiTreeUtil.findChildrenOfType(pyFile, PyClass.class).size();
     cyclomaticComplexity = ComplexityVisitor.complexity(pyFile);
-    cognitiveComplexityVisitor.scanFile(context);
+    pyFile.accept(cognitiveComplexityVisitor);
     metricsVisitor = new MetricsVisitor(ignoreHeaderComments);
     pyFile.accept(metricsVisitor);
     for (PyFunction functionDef : PsiTreeUtil.findChildrenOfType(pyFile, PyFunction.class)) {
