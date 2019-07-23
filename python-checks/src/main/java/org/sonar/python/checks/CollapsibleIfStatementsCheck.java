@@ -19,54 +19,53 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyIfPart;
+import com.jetbrains.python.psi.PyIfStatement;
+import com.jetbrains.python.psi.PyStatement;
+import com.jetbrains.python.psi.PyStatementList;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.sslr.ast.AstSelect;
 
-@Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
+@Rule(key = "S1066")
 public class CollapsibleIfStatementsCheck extends PythonCheck {
-  public static final String CHECK_KEY = "S1066";
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.IF_STMT);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.IF_STATEMENT, ctx -> {
+      PyIfStatement ifStatement = (PyIfStatement) ctx.syntaxNode();
+
+      if (ifStatement.getElsePart() != null) {
+        return;
+      }
+
+      PyIfPart[] elifParts = ifStatement.getElifParts();
+      PyIfPart lastIfPart = elifParts.length == 0 ? ifStatement.getIfPart() : elifParts[elifParts.length - 1];
+
+      PyIfStatement singleIfChild = singleIfChild(lastIfPart.getStatementList());
+      if (singleIfChild != null && singleIfChild.getElifParts().length == 0 && singleIfChild.getElsePart() == null) {
+        ctx.addIssue(ifKeyword(singleIfChild), MESSAGE)
+          .secondary(ifKeyword(ifStatement), "enclosing");
+      }
+    });
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode suite = node.getLastChild(PythonGrammar.SUITE);
-    if (suite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
-      return;
-    }
-    AstNode singleIfChild = singleIfChild(suite);
-    if (singleIfChild != null && !hasElseOrElif(singleIfChild)) {
-      addIssue(singleIfChild.getToken(), MESSAGE)
-        .secondary(node.getFirstChild(), "enclosing");
-    }
-  }
-
-  private static boolean hasElseOrElif(AstNode ifNode) {
-    return ifNode.hasDirectChildren(PythonKeyword.ELIF) || ifNode.hasDirectChildren(PythonKeyword.ELSE);
-  }
-
-  private static AstNode singleIfChild(AstNode suite) {
-    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-    if (statements.size() == 1) {
-      AstSelect nestedIf = statements.get(0).select()
-        .children(PythonGrammar.COMPOUND_STMT)
-        .children(PythonGrammar.IF_STMT);
-      if (nestedIf.size() == 1) {
-        return nestedIf.get(0);
+  @CheckForNull
+  private static PyIfStatement singleIfChild(PyStatementList statementList) {
+    PyStatement[] statements = statementList.getStatements();
+    if (statements.length == 1) {
+      PyStatement statement = statements[0];
+      if (statement.getNode().getElementType() == PyElementTypes.IF_STATEMENT) {
+        return (PyIfStatement) statement;
       }
     }
     return null;
+  }
+
+  private static PsiElement ifKeyword(PyIfStatement ifStatement) {
+    return ifStatement.getNode().findLeafElementAt(0).getPsi();
   }
 }

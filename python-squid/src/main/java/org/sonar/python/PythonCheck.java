@@ -19,6 +19,7 @@
  */
 package org.sonar.python;
 
+import com.intellij.psi.PsiElement;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
@@ -93,6 +94,11 @@ public abstract class PythonCheck extends PythonVisitor implements SubscriptionC
 
     public PreciseIssue secondary(IssueLocation issueLocation) {
       secondaryLocations.add(issueLocation);
+      return this;
+    }
+
+    public PreciseIssue secondary(PsiElement element, @Nullable String message) {
+      secondaryLocations.add(IssueLocation.preciseLocation(element, message));
       return this;
     }
 
