@@ -58,6 +58,10 @@ public abstract class IssueLocation {
     return new PsiIssueLocation(element, message);
   }
 
+  public static IssueLocation preciseLocation(PsiElement startElement, PsiElement endElement, @Nullable String message) {
+    return new PsiIssueLocation(startElement, endElement, message);
+  }
+
   @CheckForNull
   public String message() {
     return message;
@@ -72,31 +76,37 @@ public abstract class IssueLocation {
   public abstract int endLineOffset();
 
   private static class PsiIssueLocation extends IssueLocation {
-    private final PythonTokenLocation location;
+    private final PythonTokenLocation startLocation;
+    private final PythonTokenLocation endLocation;
 
     PsiIssueLocation(PsiElement element, @Nullable String message) {
+      this(element, element, message);
+    }
+
+    PsiIssueLocation(PsiElement startElement, PsiElement endElement, @Nullable String message) {
       super(message);
-      this.location = new PythonTokenLocation(element);
+      this.startLocation = new PythonTokenLocation(startElement);
+      this.endLocation = new PythonTokenLocation(endElement);
     }
 
     @Override
     public int startLine() {
-      return location.startLine();
+      return startLocation.startLine();
     }
 
     @Override
     public int startLineOffset() {
-      return location.startLineOffset();
+      return startLocation.startLineOffset();
     }
 
     @Override
     public int endLine() {
-      return location.endLine();
+      return endLocation.endLine();
     }
 
     @Override
     public int endLineOffset() {
-      return location.endLineOffset();
+      return endLocation.endLineOffset();
     }
 
   }

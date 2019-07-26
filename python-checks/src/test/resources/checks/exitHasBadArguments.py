@@ -38,5 +38,11 @@ class MyClass5:
 class MyClass6:
     def __enter__(self):
         pass
+    def __exit__(self, **args2):
+        pass
+
+class MyClass7:
+    def __enter__(self):
+        pass
     def __exit__():  # Noncompliant
         pass

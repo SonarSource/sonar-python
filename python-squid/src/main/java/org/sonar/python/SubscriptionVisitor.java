@@ -89,6 +89,11 @@ public class SubscriptionVisitor extends PyRecursiveElementVisitor {
     }
 
     @Override
+    public PreciseIssue addIssue(IssueLocation issueLocation) {
+      return pythonVisitorContext.addIssue(check, issueLocation);
+    }
+
+    @Override
     public PreciseIssue addFileIssue(@Nullable String message) {
       return pythonVisitorContext.addIssue(check, IssueLocation.atFileLevel(message));
     }
