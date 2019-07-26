@@ -252,6 +252,7 @@ public class PythonParser {
     File sdkDir = initSdk(tmpDir);
 
     System.setProperty("idea.home.path", tmpDir.getAbsolutePath());
+    System.setProperty("apple.awt.UIElement", "true");
     CoreFileTypeRegistry fileTypeRegistry = new CoreFileTypeRegistry();
     fileTypeRegistry.registerFileType(PythonFileType.INSTANCE, "py");
     FileTypeRegistry.ourInstanceGetter = new StaticGetter<>(fileTypeRegistry);

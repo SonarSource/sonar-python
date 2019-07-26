@@ -82,7 +82,7 @@ public class ClassLoaderLogAnalyzer {
           packageLines.stream()
             .map(Line::classFileName)
             .sorted()
-            .map(l -> "    <include>" + l + "</include>")
+            .map(l -> "    <include>" + l.replaceAll("\\$\\$", "??") + "</include>")
             .forEach(System.out::println);
         }
       }

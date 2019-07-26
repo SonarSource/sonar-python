@@ -249,7 +249,7 @@
                     <include>kotlin/collections/CollectionsKt__MutableCollectionsKt.class</include>
                     <include>kotlin/collections/CollectionsKt__ReversedViewsKt.class</include>
                     <include>kotlin/collections/CollectionsKt___CollectionsJvmKt.class</include>
-                    <include>kotlin/collections/CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1.class</include>
+                    <include>kotlin/collections/CollectionsKt___CollectionsKt$asSequence??inlined$Sequence$1.class</include>
                     <include>kotlin/collections/CollectionsKt___CollectionsKt.class</include>
                     <include>kotlin/collections/EmptyIterator.class</include>
                     <include>kotlin/collections/EmptyList.class</include>
@@ -418,6 +418,7 @@
                     <include>com/intellij/lang/impl/PsiBuilderImpl$1.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$ErrorItem.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$LazyParseableToken.class</include>
+                    <include>com/intellij/lang/impl/PsiBuilderImpl$MyTreeStructure.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$Node.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$ProductionMarker.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$RelativeTokenTextView.class</include>
@@ -1425,7 +1426,7 @@
                     <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleOverridingTypeProvider.class</include>
                     <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleType$DefinitionLevel.class</include>
                     <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleType.class</include>
-                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion$getNamedTupleTypeForCallee$$inlined$filterIsInstance$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion$getNamedTupleTypeForCallee??inlined$filterIsInstance$1.class</include>
                     <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion$isTypingNamedTupleDirectInheritor$isTypingNT$1.class</include>
                     <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion.class</include>
                     <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider.class</include>
@@ -1710,15 +1711,7 @@
                 <filter>
                   <artifact>com.jetbrains.pycharm:jps-model</artifact>
                   <includes>
-                    <include>com/intellij/openapi/fileTypes/WildcardFileNameMatcher$MaskMatcher.class</include>
-                    <include>com/intellij/openapi/fileTypes/WildcardFileNameMatcher$SuffixMatcher.class</include>
-                    <include>com/intellij/openapi/fileTypes/WildcardFileNameMatcher.class</include>
-                    <include>com/intellij/openapi/fileTypes/impl/FileTypeAssocTable.class</include>
-                    <include>com/intellij/openapi/fileTypes/impl/IgnoredPatternSet.class</include>
-                    <include>org/jetbrains/jps/model/fileTypes/impl/FileNameMatcherFactoryImpl.class</include>
-                    <include>org/jetbrains/jps/plugin/JpsPluginManager.class</include>
-                    <include>org/jetbrains/jps/service/impl/JpsServiceManagerImpl$SingleClassLoaderPluginManager.class</include>
-                    <include>org/jetbrains/jps/service/impl/JpsServiceManagerImpl.class</include>
+                    <include>**/*</include>
                   </includes>
                 </filter>
               </filters>
