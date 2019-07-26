@@ -151,6 +151,9 @@
                     <include>com/intellij/openapi/extensions/LoadingOrder.class</include>
                     <include>com/intellij/openapi/extensions/PluginAware.class</include>
                     <include>com/intellij/openapi/extensions/PluginDescriptor.class</include>
+                    <include>com/intellij/openapi/extensions/SimpleSmartExtensionPoint.class</include>
+                    <include>com/intellij/openapi/extensions/SmartExtensionPoint$1.class</include>
+                    <include>com/intellij/openapi/extensions/SmartExtensionPoint.class</include>
                     <include>com/intellij/openapi/extensions/SortingException.class</include>
                     <include>com/intellij/openapi/extensions/impl/BeanExtensionPoint.class</include>
                     <include>com/intellij/openapi/extensions/impl/ExtensionComponentAdapter.class</include>
@@ -158,6 +161,7 @@
                     <include>com/intellij/openapi/extensions/impl/ExtensionPointImpl$ObjectComponentAdapter.class</include>
                     <include>com/intellij/openapi/extensions/impl/ExtensionPointImpl.class</include>
                     <include>com/intellij/openapi/extensions/impl/ExtensionsAreaImpl$1.class</include>
+                    <include>com/intellij/openapi/extensions/impl/ExtensionsAreaImpl$2.class</include>
                     <include>com/intellij/openapi/extensions/impl/ExtensionsAreaImpl$3.class</include>
                     <include>com/intellij/openapi/extensions/impl/ExtensionsAreaImpl.class</include>
                     <include>com/intellij/openapi/extensions/impl/InterfaceExtensionPoint.class</include>
@@ -181,6 +185,12 @@
                     <include>gnu/trove/TByteArrayList.class</include>
                     <include>gnu/trove/TByteProcedure.class</include>
                     <include>gnu/trove/THash.class</include>
+                    <include>gnu/trove/THashIterator.class</include>
+                    <include>gnu/trove/THashMap$Entry.class</include>
+                    <include>gnu/trove/THashMap$EntryView$EntryIterator.class</include>
+                    <include>gnu/trove/THashMap$EntryView.class</include>
+                    <include>gnu/trove/THashMap$KeyView.class</include>
+                    <include>gnu/trove/THashMap$MapBackedView.class</include>
                     <include>gnu/trove/THashMap.class</include>
                     <include>gnu/trove/THashSet.class</include>
                     <include>gnu/trove/TIntArrayList.class</include>
@@ -191,11 +201,17 @@
                     <include>gnu/trove/TIntObjectProcedure.class</include>
                     <include>gnu/trove/TIntProcedure.class</include>
                     <include>gnu/trove/TIntStack.class</include>
+                    <include>gnu/trove/TIterator.class</include>
+                    <include>gnu/trove/TLongArrayList.class</include>
+                    <include>gnu/trove/TLongProcedure.class</include>
                     <include>gnu/trove/TObjectCanonicalHashingStrategy.class</include>
                     <include>gnu/trove/TObjectHash$NULL.class</include>
                     <include>gnu/trove/TObjectHash.class</include>
+                    <include>gnu/trove/TObjectHashIterator.class</include>
                     <include>gnu/trove/TObjectHashingStrategy.class</include>
                     <include>gnu/trove/TObjectIdentityHashingStrategy.class</include>
+                    <include>gnu/trove/TObjectIntHashMap.class</include>
+                    <include>gnu/trove/TObjectIntProcedure.class</include>
                     <include>gnu/trove/TObjectObjectProcedure.class</include>
                     <include>gnu/trove/TObjectProcedure.class</include>
                     <include>gnu/trove/TPrimitiveHash.class</include>
@@ -204,11 +220,105 @@
                 <filter>
                   <artifact>org.jetbrains.kotlin:kotlin-stdlib</artifact>
                   <includes>
+                    <include>kotlin/Function.class</include>
                     <include>kotlin/KotlinNullPointerException.class</include>
+                    <include>kotlin/Lazy.class</include>
+                    <include>kotlin/LazyKt.class</include>
+                    <include>kotlin/LazyKt__LazyJVMKt.class</include>
+                    <include>kotlin/LazyKt__LazyKt.class</include>
+                    <include>kotlin/NoWhenBranchMatchedException.class</include>
                     <include>kotlin/Pair.class</include>
+                    <include>kotlin/SynchronizedLazyImpl.class</include>
+                    <include>kotlin/Triple.class</include>
                     <include>kotlin/TypeCastException.class</include>
+                    <include>kotlin/UNINITIALIZED_VALUE.class</include>
                     <include>kotlin/UninitializedPropertyAccessException.class</include>
+                    <include>kotlin/collections/ArraysKt.class</include>
+                    <include>kotlin/collections/ArraysKt__ArraysJVMKt.class</include>
+                    <include>kotlin/collections/ArraysKt__ArraysKt.class</include>
+                    <include>kotlin/collections/ArraysKt___ArraysJvmKt.class</include>
+                    <include>kotlin/collections/ArraysKt___ArraysKt.class</include>
+                    <include>kotlin/collections/ArraysUtilJVM.class</include>
+                    <include>kotlin/collections/CollectionsKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__CollectionsJVMKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__CollectionsKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__IterablesKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__IteratorsJVMKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__IteratorsKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__MutableCollectionsJVMKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__MutableCollectionsKt.class</include>
+                    <include>kotlin/collections/CollectionsKt__ReversedViewsKt.class</include>
+                    <include>kotlin/collections/CollectionsKt___CollectionsJvmKt.class</include>
+                    <include>kotlin/collections/CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1.class</include>
+                    <include>kotlin/collections/CollectionsKt___CollectionsKt.class</include>
+                    <include>kotlin/collections/EmptyIterator.class</include>
+                    <include>kotlin/collections/EmptyList.class</include>
+                    <include>kotlin/collections/MapsKt.class</include>
+                    <include>kotlin/collections/MapsKt__MapWithDefaultKt.class</include>
+                    <include>kotlin/collections/MapsKt__MapsJVMKt.class</include>
+                    <include>kotlin/collections/MapsKt__MapsKt.class</include>
+                    <include>kotlin/collections/MapsKt___MapsKt.class</include>
+                    <include>kotlin/collections/SetsKt.class</include>
+                    <include>kotlin/collections/SetsKt__SetsJVMKt.class</include>
+                    <include>kotlin/collections/SetsKt__SetsKt.class</include>
+                    <include>kotlin/collections/SetsKt___SetsKt.class</include>
+                    <include>kotlin/internal/ProgressionUtilKt.class</include>
+                    <include>kotlin/jvm/KotlinReflectionNotSupportedError.class</include>
+                    <include>kotlin/jvm/functions/Function0.class</include>
+                    <include>kotlin/jvm/functions/Function1.class</include>
+                    <include>kotlin/jvm/functions/Function2.class</include>
+                    <include>kotlin/jvm/internal/CallableReference$NoReceiver.class</include>
+                    <include>kotlin/jvm/internal/CallableReference.class</include>
+                    <include>kotlin/jvm/internal/ClassBasedDeclarationContainer.class</include>
+                    <include>kotlin/jvm/internal/ClassReference.class</include>
+                    <include>kotlin/jvm/internal/CollectionToArray.class</include>
+                    <include>kotlin/jvm/internal/DefaultConstructorMarker.class</include>
+                    <include>kotlin/jvm/internal/FunctionBase.class</include>
+                    <include>kotlin/jvm/internal/FunctionReference.class</include>
                     <include>kotlin/jvm/internal/Intrinsics.class</include>
+                    <include>kotlin/jvm/internal/Lambda.class</include>
+                    <include>kotlin/jvm/internal/PropertyReference.class</include>
+                    <include>kotlin/jvm/internal/PropertyReference1.class</include>
+                    <include>kotlin/jvm/internal/PropertyReference1Impl.class</include>
+                    <include>kotlin/jvm/internal/Reflection.class</include>
+                    <include>kotlin/jvm/internal/ReflectionFactory.class</include>
+                    <include>kotlin/jvm/internal/markers/KMappedMarker.class</include>
+                    <include>kotlin/ranges/ClosedRange.class</include>
+                    <include>kotlin/ranges/IntProgression$Companion.class</include>
+                    <include>kotlin/ranges/IntProgression.class</include>
+                    <include>kotlin/ranges/IntRange$Companion.class</include>
+                    <include>kotlin/ranges/IntRange.class</include>
+                    <include>kotlin/reflect/KAnnotatedElement.class</include>
+                    <include>kotlin/reflect/KCallable.class</include>
+                    <include>kotlin/reflect/KClass.class</include>
+                    <include>kotlin/reflect/KClassifier.class</include>
+                    <include>kotlin/reflect/KDeclarationContainer.class</include>
+                    <include>kotlin/reflect/KFunction.class</include>
+                    <include>kotlin/reflect/KMutableProperty.class</include>
+                    <include>kotlin/reflect/KMutableProperty0.class</include>
+                    <include>kotlin/reflect/KMutableProperty1.class</include>
+                    <include>kotlin/reflect/KMutableProperty2.class</include>
+                    <include>kotlin/reflect/KProperty$Accessor.class</include>
+                    <include>kotlin/reflect/KProperty$Getter.class</include>
+                    <include>kotlin/reflect/KProperty.class</include>
+                    <include>kotlin/reflect/KProperty0.class</include>
+                    <include>kotlin/reflect/KProperty1.class</include>
+                    <include>kotlin/reflect/KProperty2.class</include>
+                    <include>kotlin/sequences/FilteringSequence$iterator$1.class</include>
+                    <include>kotlin/sequences/FilteringSequence.class</include>
+                    <include>kotlin/sequences/FlatteningSequence$iterator$1.class</include>
+                    <include>kotlin/sequences/FlatteningSequence.class</include>
+                    <include>kotlin/sequences/Sequence.class</include>
+                    <include>kotlin/sequences/SequencesKt.class</include>
+                    <include>kotlin/sequences/SequencesKt__SequencesJVMKt.class</include>
+                    <include>kotlin/sequences/SequencesKt__SequencesKt.class</include>
+                    <include>kotlin/sequences/SequencesKt___SequencesJvmKt$filterIsInstance$1.class</include>
+                    <include>kotlin/sequences/SequencesKt___SequencesJvmKt.class</include>
+                    <include>kotlin/sequences/SequencesKt___SequencesKt$filterNotNull$1.class</include>
+                    <include>kotlin/sequences/SequencesKt___SequencesKt$flatMap$1.class</include>
+                    <include>kotlin/sequences/SequencesKt___SequencesKt.class</include>
+                    <include>kotlin/sequences/TransformingSequence$iterator$1.class</include>
+                    <include>kotlin/sequences/TransformingSequence.class</include>
                     <include>kotlin/text/StringsKt.class</include>
                     <include>kotlin/text/StringsKt__IndentKt.class</include>
                     <include>kotlin/text/StringsKt__RegexExtensionsJVMKt.class</include>
@@ -226,14 +336,62 @@
                 <filter>
                   <artifact>com.jetbrains.pycharm:platform-impl</artifact>
                   <includes>
+                    <include>com/intellij/codeInsight/completion/CompletionData$1.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionData.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionUtil$1.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionUtil.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionUtilCoreImpl.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionVariant$CompletionVariantItem.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionVariant$Scope.class</include>
+                    <include>com/intellij/codeInsight/completion/CompletionVariant.class</include>
+                    <include>com/intellij/codeInsight/controlflow/ControlFlowBuilder$PendingProcessor.class</include>
+                    <include>com/intellij/codeInsight/controlflow/ControlFlowBuilder.class</include>
+                    <include>com/intellij/codeInsight/controlflow/ControlFlowUtil$Operation.class</include>
+                    <include>com/intellij/codeInsight/controlflow/ControlFlowUtil.class</include>
+                    <include>com/intellij/codeInsight/controlflow/impl/ConditionalInstructionImpl.class</include>
+                    <include>com/intellij/codeInsight/controlflow/impl/ControlFlowImpl.class</include>
+                    <include>com/intellij/codeInsight/controlflow/impl/InstructionBaseImpl.class</include>
+                    <include>com/intellij/codeInsight/controlflow/impl/InstructionImpl.class</include>
+                    <include>com/intellij/codeInsight/dataflow/DfaInstance.class</include>
+                    <include>com/intellij/codeInsight/dataflow/Semilattice.class</include>
+                    <include>com/intellij/codeInsight/dataflow/map/DfaMapInstance.class</include>
+                    <include>com/intellij/codeInsight/dataflow/map/MapSemilattice.class</include>
+                    <include>com/intellij/codeInsight/lookup/LookupItem.class</include>
+                    <include>com/intellij/configurationStore/Scheme_implKt$CURRENT_NAME_CONVERTER$1.class</include>
+                    <include>com/intellij/configurationStore/Scheme_implKt$MODERN_NAME_CONVERTER$1.class</include>
+                    <include>com/intellij/configurationStore/Scheme_implKt$OLD_NAME_CONVERTER$1.class</include>
+                    <include>com/intellij/configurationStore/Scheme_implKt$sha1MessageDigestThreadLocal$1.class</include>
+                    <include>com/intellij/configurationStore/Scheme_implKt.class</include>
                     <include>com/intellij/core/CoreASTFactory.class</include>
+                    <include>com/intellij/core/CoreEncodingProjectManager.class</include>
                     <include>com/intellij/core/CoreFileTypeRegistry.class</include>
+                    <include>com/intellij/core/CoreModuleManager.class</include>
+                    <include>com/intellij/core/CoreProjectJdkTable.class</include>
+                    <include>com/intellij/core/CoreProjectScopeBuilder$ContentSearchScope.class</include>
+                    <include>com/intellij/core/CoreProjectScopeBuilder$CoreLibrariesScope.class</include>
+                    <include>com/intellij/core/CoreProjectScopeBuilder.class</include>
                     <include>com/intellij/execution/KillableProcess.class</include>
                     <include>com/intellij/execution/console/BaseConsoleExecuteActionHandler.class</include>
                     <include>com/intellij/execution/console/ConsoleExecuteAction$ConsoleExecuteActionHandler.class</include>
                     <include>com/intellij/execution/console/ConsoleRootType.class</include>
+                    <include>com/intellij/execution/console/LanguageConsoleImpl.class</include>
                     <include>com/intellij/execution/console/LanguageConsoleView.class</include>
                     <include>com/intellij/execution/console/ProcessBackedConsoleExecuteActionHandler.class</include>
+                    <include>com/intellij/execution/impl/ConsoleState$NotStartedStated.class</include>
+                    <include>com/intellij/execution/impl/ConsoleState.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$1.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$1ScrollRunnable.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$3.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$6.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$BackSpaceHandler.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$ClearRunnable.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$ConsoleAction.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$DeleteHandler.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$FlushRunnable.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$PasteHandler.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl$TabHandler.class</include>
+                    <include>com/intellij/execution/impl/ConsoleViewImpl.class</include>
+                    <include>com/intellij/execution/impl/MyDiffContainer.class</include>
                     <include>com/intellij/execution/process/ColoredProcessHandler.class</include>
                     <include>com/intellij/execution/process/KillableColoredProcessHandler.class</include>
                     <include>com/intellij/execution/process/KillableProcessHandler.class</include>
@@ -242,6 +400,9 @@
                     <include>com/intellij/extapi/psi/StubBasedPsiElementBase$1.class</include>
                     <include>com/intellij/extapi/psi/StubBasedPsiElementBase.class</include>
                     <include>com/intellij/ide/errorTreeView/NewErrorTreeViewPanel.class</include>
+                    <include>com/intellij/ide/startup/ServiceNotReadyException.class</include>
+                    <include>com/intellij/ide/util/AppPropertiesComponentImpl.class</include>
+                    <include>com/intellij/ide/util/PropertiesComponentImpl.class</include>
                     <include>com/intellij/lang/ASTFactory$DefaultFactoryHolder.class</include>
                     <include>com/intellij/lang/ASTFactory.class</include>
                     <include>com/intellij/lang/DefaultASTFactory.class</include>
@@ -254,6 +415,7 @@
                     <include>com/intellij/lang/impl/MarkerPool.class</include>
                     <include>com/intellij/lang/impl/MarkerProduction.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderFactoryImpl.class</include>
+                    <include>com/intellij/lang/impl/PsiBuilderImpl$1.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$ErrorItem.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$LazyParseableToken.class</include>
                     <include>com/intellij/lang/impl/PsiBuilderImpl$Node.class</include>
@@ -266,14 +428,30 @@
                     <include>com/intellij/lang/impl/TokenSequence$Builder.class</include>
                     <include>com/intellij/lang/impl/TokenSequence.class</include>
                     <include>com/intellij/mock/MockApplication.class</include>
+                    <include>com/intellij/mock/MockApplicationEx.class</include>
                     <include>com/intellij/mock/MockComponentManager$1.class</include>
                     <include>com/intellij/mock/MockComponentManager.class</include>
                     <include>com/intellij/mock/MockFileDocumentManagerImpl.class</include>
+                    <include>com/intellij/mock/MockFileIndexFacade.class</include>
                     <include>com/intellij/mock/MockProject$1.class</include>
                     <include>com/intellij/mock/MockProject.class</include>
                     <include>com/intellij/notebook/editor/BackedVirtualFile.class</include>
+                    <include>com/intellij/openapi/application/ex/ApplicationEx.class</include>
+                    <include>com/intellij/openapi/application/ex/ApplicationInfoEx$UpdateUrls.class</include>
+                    <include>com/intellij/openapi/application/ex/ApplicationInfoEx.class</include>
                     <include>com/intellij/openapi/application/impl/AnyModalityState.class</include>
+                    <include>com/intellij/openapi/application/impl/ApplicationInfoImpl.class</include>
+                    <include>com/intellij/openapi/editor/actions/ScrollToTheEndToolbarAction.class</include>
+                    <include>com/intellij/openapi/editor/ex/DocumentBulkUpdateListener$Adapter.class</include>
+                    <include>com/intellij/openapi/editor/ex/DocumentBulkUpdateListener.class</include>
                     <include>com/intellij/openapi/editor/ex/DocumentEx.class</include>
+                    <include>com/intellij/openapi/editor/ex/EditReadOnlyListener.class</include>
+                    <include>com/intellij/openapi/editor/ex/EditorEventMulticasterEx.class</include>
+                    <include>com/intellij/openapi/editor/ex/EditorEx.class</include>
+                    <include>com/intellij/openapi/editor/ex/EditorPopupHandler.class</include>
+                    <include>com/intellij/openapi/editor/ex/ErrorStripeListener.class</include>
+                    <include>com/intellij/openapi/editor/ex/FocusChangeListener.class</include>
+                    <include>com/intellij/openapi/editor/ex/FoldingListener.class</include>
                     <include>com/intellij/openapi/editor/ex/LineIterator.class</include>
                     <include>com/intellij/openapi/editor/ex/MarkupIterator.class</include>
                     <include>com/intellij/openapi/editor/ex/PrioritizedDocumentListener$1.class</include>
@@ -283,6 +461,9 @@
                     <include>com/intellij/openapi/editor/impl/DocumentImpl$1.class</include>
                     <include>com/intellij/openapi/editor/impl/DocumentImpl$UnexpectedBulkUpdateStateException.class</include>
                     <include>com/intellij/openapi/editor/impl/DocumentImpl.class</include>
+                    <include>com/intellij/openapi/editor/impl/EditorFactoryImpl$1.class</include>
+                    <include>com/intellij/openapi/editor/impl/EditorFactoryImpl.class</include>
+                    <include>com/intellij/openapi/editor/impl/FrozenDocument.class</include>
                     <include>com/intellij/openapi/editor/impl/Interval.class</include>
                     <include>com/intellij/openapi/editor/impl/IntervalTree.class</include>
                     <include>com/intellij/openapi/editor/impl/IntervalTreeImpl$IntervalNode.class</include>
@@ -298,9 +479,30 @@
                     <include>com/intellij/openapi/editor/impl/RedBlackTree$Node.class</include>
                     <include>com/intellij/openapi/editor/impl/RedBlackTree.class</include>
                     <include>com/intellij/openapi/editor/impl/event/DocumentEventImpl.class</include>
+                    <include>com/intellij/openapi/editor/impl/event/EditorEventMulticasterImpl.class</include>
+                    <include>com/intellij/openapi/fileEditor/impl/LoadTextUtil$ConvertResult.class</include>
+                    <include>com/intellij/openapi/fileEditor/impl/LoadTextUtil$DetectResult.class</include>
                     <include>com/intellij/openapi/fileEditor/impl/LoadTextUtil$SevenBitCharset.class</include>
                     <include>com/intellij/openapi/fileEditor/impl/LoadTextUtil.class</include>
                     <include>com/intellij/openapi/fileTypes/PlainTextLanguage.class</include>
+                    <include>com/intellij/openapi/fileTypes/ex/FileTypeManagerEx.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/FileTypeManagerImpl$1.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/FileTypeManagerImpl$2.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/FileTypeManagerImpl$3.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/FileTypeManagerImpl$StandardFileType.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/FileTypeManagerImpl.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/IgnoredFileCache$1.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/IgnoredFileCache.class</include>
+                    <include>com/intellij/openapi/module/impl/ModuleEx.class</include>
+                    <include>com/intellij/openapi/module/impl/ModuleManagerImpl$ModuleModelImpl.class</include>
+                    <include>com/intellij/openapi/module/impl/ModuleManagerImpl.class</include>
+                    <include>com/intellij/openapi/options/EmptySchemesManager.class</include>
+                    <include>com/intellij/openapi/options/NonLazySchemeProcessor.class</include>
+                    <include>com/intellij/openapi/options/SchemeManager$Companion.class</include>
+                    <include>com/intellij/openapi/options/SchemeManager.class</include>
+                    <include>com/intellij/openapi/options/SchemeManagerFactory$Companion.class</include>
+                    <include>com/intellij/openapi/options/SchemeManagerFactory.class</include>
+                    <include>com/intellij/openapi/options/SchemeProcessor.class</include>
                     <include>com/intellij/openapi/progress/impl/CoreProgressManager$1.class</include>
                     <include>com/intellij/openapi/progress/impl/CoreProgressManager$2.class</include>
                     <include>com/intellij/openapi/progress/impl/CoreProgressManager$3.class</include>
@@ -311,29 +513,94 @@
                     <include>com/intellij/openapi/progress/impl/ProgressManagerImpl$1.class</include>
                     <include>com/intellij/openapi/progress/impl/ProgressManagerImpl.class</include>
                     <include>com/intellij/openapi/progress/util/PingProgress.class</include>
+                    <include>com/intellij/openapi/projectRoots/impl/MockSdk$1.class</include>
+                    <include>com/intellij/openapi/projectRoots/impl/MockSdk$2.class</include>
+                    <include>com/intellij/openapi/projectRoots/impl/MockSdk.class</include>
+                    <include>com/intellij/openapi/roots/AdditionalLibraryRootsProvider.class</include>
+                    <include>com/intellij/openapi/roots/ProjectExtension.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryIndex.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryIndexExcludePolicy.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryIndexImpl$1.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryIndexImpl$2.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryIndexImpl$3.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryIndexImpl.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryInfo.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryInfoImpl.class</include>
+                    <include>com/intellij/openapi/roots/impl/DirectoryInfoWithExcludePatterns.class</include>
+                    <include>com/intellij/openapi/roots/impl/FileIndexBase.class</include>
+                    <include>com/intellij/openapi/roots/impl/ModulesOrderEnumerator.class</include>
+                    <include>com/intellij/openapi/roots/impl/NonProjectDirectoryInfo$1.class</include>
+                    <include>com/intellij/openapi/roots/impl/NonProjectDirectoryInfo$2.class</include>
+                    <include>com/intellij/openapi/roots/impl/NonProjectDirectoryInfo.class</include>
+                    <include>com/intellij/openapi/roots/impl/OrderEnumeratorBase.class</include>
+                    <include>com/intellij/openapi/roots/impl/OrderRootsCache.class</include>
+                    <include>com/intellij/openapi/roots/impl/PackageDirectoryCache.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectFileIndexImpl.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectOrderEnumerator.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectRootManagerImpl$1.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectRootManagerImpl$BatchSession.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectRootManagerImpl$JdkTableMultiListener.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectRootManagerImpl$ListenerContainer.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectRootManagerImpl$RootProviderChangeListener.class</include>
+                    <include>com/intellij/openapi/roots/impl/ProjectRootManagerImpl.class</include>
+                    <include>com/intellij/openapi/roots/impl/RootIndex$1.class</include>
+                    <include>com/intellij/openapi/roots/impl/RootIndex$RootInfo.class</include>
+                    <include>com/intellij/openapi/roots/impl/RootIndex.class</include>
+                    <include>com/intellij/openapi/vfs/ex/VirtualFileManagerEx.class</include>
+                    <include>com/intellij/openapi/vfs/impl/VirtualFileManagerImpl$1.class</include>
+                    <include>com/intellij/openapi/vfs/impl/VirtualFileManagerImpl.class</include>
+                    <include>com/intellij/openapi/vfs/local/CoreLocalFileSystem.class</include>
+                    <include>com/intellij/openapi/vfs/local/CoreLocalVirtualFile.class</include>
                     <include>com/intellij/openapi/wm/ex/ProgressIndicatorEx.class</include>
                     <include>com/intellij/psi/AbstractFileViewProvider$Content.class</include>
                     <include>com/intellij/psi/AbstractFileViewProvider$VirtualFileContent.class</include>
                     <include>com/intellij/psi/AbstractFileViewProvider.class</include>
                     <include>com/intellij/psi/SingleRootFileViewProvider.class</include>
+                    <include>com/intellij/psi/filters/TrueFilter.class</include>
+                    <include>com/intellij/psi/impl/AnyPsiChangeListener$Adapter.class</include>
                     <include>com/intellij/psi/impl/AnyPsiChangeListener.class</include>
                     <include>com/intellij/psi/impl/DebugUtil$1.class</include>
                     <include>com/intellij/psi/impl/DebugUtil$IncorrectTreeStructureException.class</include>
                     <include>com/intellij/psi/impl/DebugUtil$TreeToBuffer.class</include>
                     <include>com/intellij/psi/impl/DebugUtil.class</include>
+                    <include>com/intellij/psi/impl/DocumentCommitProcessor.class</include>
+                    <include>com/intellij/psi/impl/DocumentCommitThread.class</include>
                     <include>com/intellij/psi/impl/GeneratedMarkerVisitor.class</include>
+                    <include>com/intellij/psi/impl/PsiCachedValue.class</include>
+                    <include>com/intellij/psi/impl/PsiCachedValueImpl.class</include>
+                    <include>com/intellij/psi/impl/PsiCachedValuesFactory$1.class</include>
+                    <include>com/intellij/psi/impl/PsiCachedValuesFactory$2.class</include>
+                    <include>com/intellij/psi/impl/PsiCachedValuesFactory$3.class</include>
+                    <include>com/intellij/psi/impl/PsiCachedValuesFactory.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentManagerBase$2.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentManagerBase$PriorityEventCollector.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentManagerBase.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentManagerImpl$1.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentManagerImpl$2.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentManagerImpl.class</include>
+                    <include>com/intellij/psi/impl/PsiDocumentTransactionListener.class</include>
                     <include>com/intellij/psi/impl/PsiElementBase.class</include>
                     <include>com/intellij/psi/impl/PsiFileEx.class</include>
                     <include>com/intellij/psi/impl/PsiFileFactoryImpl.class</include>
                     <include>com/intellij/psi/impl/PsiManagerEx.class</include>
                     <include>com/intellij/psi/impl/PsiManagerImpl.class</include>
+                    <include>com/intellij/psi/impl/PsiModificationTrackerImpl$1.class</include>
+                    <include>com/intellij/psi/impl/PsiModificationTrackerImpl$2.class</include>
+                    <include>com/intellij/psi/impl/PsiModificationTrackerImpl.class</include>
+                    <include>com/intellij/psi/impl/PsiParameterizedCachedValue.class</include>
+                    <include>com/intellij/psi/impl/PsiToDocumentSynchronizer.class</include>
                     <include>com/intellij/psi/impl/PsiTreeChangeEventImpl.class</include>
+                    <include>com/intellij/psi/impl/PsiTreeChangePreprocessor.class</include>
                     <include>com/intellij/psi/impl/file/PsiBinaryFileImpl.class</include>
+                    <include>com/intellij/psi/impl/file/PsiDirectoryFactory.class</include>
+                    <include>com/intellij/psi/impl/file/PsiDirectoryFactoryImpl.class</include>
+                    <include>com/intellij/psi/impl/file/PsiDirectoryImpl.class</include>
                     <include>com/intellij/psi/impl/file/PsiLargeBinaryFileImpl.class</include>
                     <include>com/intellij/psi/impl/file/impl/FileManager.class</include>
                     <include>com/intellij/psi/impl/file/impl/FileManagerImpl$1.class</include>
                     <include>com/intellij/psi/impl/file/impl/FileManagerImpl$2.class</include>
                     <include>com/intellij/psi/impl/file/impl/FileManagerImpl.class</include>
+                    <include>com/intellij/psi/impl/light/LightElement.class</include>
                     <include>com/intellij/psi/impl/source/CharTableImpl$1.class</include>
                     <include>com/intellij/psi/impl/source/CharTableImpl$StringHashToCharSequencesMap.class</include>
                     <include>com/intellij/psi/impl/source/CharTableImpl.class</include>
@@ -349,6 +616,14 @@
                     <include>com/intellij/psi/impl/source/SubstrateRef$2.class</include>
                     <include>com/intellij/psi/impl/source/SubstrateRef$StubRef.class</include>
                     <include>com/intellij/psi/impl/source/SubstrateRef.class</include>
+                    <include>com/intellij/psi/impl/source/codeStyle/CodeEditUtil.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/FileContextUtil.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/ResolveCache$1.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/ResolveCache$2.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/ResolveCache$AbstractResolver.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/ResolveCache$PolyVariantResolver.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/ResolveCache$StrongValueReference.class</include>
+                    <include>com/intellij/psi/impl/source/resolve/ResolveCache.class</include>
                     <include>com/intellij/psi/impl/source/tree/AstBufferUtil$BufferVisitor.class</include>
                     <include>com/intellij/psi/impl/source/tree/AstBufferUtil.class</include>
                     <include>com/intellij/psi/impl/source/tree/CompositeElement$1.class</include>
@@ -379,16 +654,71 @@
                     <include>com/intellij/psi/impl/source/tree/TreeUtil$3.class</include>
                     <include>com/intellij/psi/impl/source/tree/TreeUtil$4.class</include>
                     <include>com/intellij/psi/impl/source/tree/TreeUtil.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeBuilderImpl$1.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeBuilderImpl$2.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeBuilderImpl$3.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeBuilderImpl$4.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeBuilderImpl.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeImpl.class</include>
                     <include>com/intellij/psi/stubs/ObjectStubTree.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl$1.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl$2.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl$3.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl$AsyncState.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl$StubIdListContainerAction.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl$StubIndexInitialization.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexImpl.class</include>
+                    <include>com/intellij/psi/stubs/StubProcessingHelper.class</include>
+                    <include>com/intellij/psi/stubs/StubProcessingHelperBase.class</include>
                     <include>com/intellij/psi/stubs/StubTree.class</include>
+                    <include>com/intellij/psi/stubs/StubUpdatingIndex$1.class</include>
+                    <include>com/intellij/psi/stubs/StubUpdatingIndex.class</include>
                     <include>com/intellij/psi/text/BlockSupport$ReparsedSuccessfullyException.class</include>
                     <include>com/intellij/psi/text/BlockSupport.class</include>
                     <include>com/intellij/psi/tree/IStubFileElementType.class</include>
+                    <include>com/intellij/util/CachedValueBase$Data.class</include>
+                    <include>com/intellij/util/CachedValueBase$ProfilingData.class</include>
+                    <include>com/intellij/util/CachedValueBase.class</include>
+                    <include>com/intellij/util/CachedValueLeakChecker.class</include>
+                    <include>com/intellij/util/CachedValuesFactory.class</include>
+                    <include>com/intellij/util/CachedValuesManagerImpl.class</include>
                     <include>com/intellij/util/PatchedWeakReference.class</include>
+                    <include>com/intellij/util/indexing/CustomImplementationFileBasedIndexExtension.class</include>
+                    <include>com/intellij/util/indexing/CustomInputsIndexFileBasedIndexExtension.class</include>
+                    <include>com/intellij/util/indexing/DeletedVirtualFileStub.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$1.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$2.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$3.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$4.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$ChangedFilesCollector$1.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$ChangedFilesCollector.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$DocumentContent.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$ProjectIndexableFilesFilter.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl$VirtualFileUpdateTask.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexImpl.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexScanRunnableCollector.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexScanRunnableCollectorImpl.class</include>
+                    <include>com/intellij/util/indexing/IndexAccessValidator.class</include>
+                    <include>com/intellij/util/indexing/IndexInfrastructure$DataInitialization.class</include>
+                    <include>com/intellij/util/indexing/IndexInfrastructure.class</include>
+                    <include>com/intellij/util/indexing/IndexedFilesListener$1.class</include>
+                    <include>com/intellij/util/indexing/IndexedFilesListener.class</include>
                     <include>com/intellij/util/indexing/IndexingDataKeys.class</include>
+                    <include>com/intellij/util/indexing/MemoryIndexStorage$BufferingStateListener.class</include>
+                    <include>com/intellij/util/indexing/PerIndexDocumentVersionMap.class</include>
+                    <include>com/intellij/util/indexing/SilentProgressIndicator.class</include>
+                    <include>com/intellij/util/indexing/StorageGuard$1.class</include>
+                    <include>com/intellij/util/indexing/StorageGuard$2.class</include>
+                    <include>com/intellij/util/indexing/StorageGuard$StorageModeExitHandler.class</include>
+                    <include>com/intellij/util/indexing/StorageGuard.class</include>
+                    <include>com/intellij/util/indexing/UnindexedFilesUpdater.class</include>
+                    <include>com/intellij/util/indexing/UpdatableIndex.class</include>
+                    <include>com/intellij/util/indexing/UpdateTask.class</include>
+                    <include>com/intellij/util/indexing/VfsEventsMerger.class</include>
                     <include>org/intellij/lang/regexp/DefaultRegExpPropertiesProvider.class</include>
                     <include>org/intellij/lang/regexp/RegExpLanguageHost.class</include>
                     <include>org/intellij/lang/regexp/psi/RegExpGroup$Type.class</include>
+                    <include>org/jetbrains/ide/PooledThreadExecutor.class</include>
                   </includes>
                 </filter>
                 <filter>
@@ -398,6 +728,7 @@
                     <include>com/jetbrains/python/console/pydev/ConsoleCommunication.class</include>
                     <include>com/jetbrains/python/console/pydev/ConsoleCommunicationListener.class</include>
                     <include>com/jetbrains/python/debugger/PyFrameAccessor.class</include>
+                    <include>com/jetbrains/python/debugger/PySignature.class</include>
                   </includes>
                 </filter>
                 <filter>
@@ -413,6 +744,7 @@
                     <include>com/intellij/execution/process/ProcessListener.class</include>
                     <include>com/intellij/openapi/Disposable.class</include>
                     <include>com/intellij/openapi/application/AccessToken.class</include>
+                    <include>com/intellij/openapi/application/PathManager.class</include>
                     <include>com/intellij/openapi/diagnostic/Attachment.class</include>
                     <include>com/intellij/openapi/diagnostic/ControlFlowException.class</include>
                     <include>com/intellij/openapi/diagnostic/DefaultLogger.class</include>
@@ -422,48 +754,12 @@
                     <include>com/intellij/openapi/diagnostic/Logger.class</include>
                     <include>com/intellij/openapi/diagnostic/RuntimeExceptionWithAttachments.class</include>
                     <include>com/intellij/openapi/progress/ProcessCanceledException.class</include>
-                    <include>com/intellij/openapi/util/AtomicNotNullLazyValue$1.class</include>
-                    <include>com/intellij/openapi/util/AtomicNotNullLazyValue.class</include>
-                    <include>com/intellij/openapi/util/Comparing.class</include>
-                    <include>com/intellij/openapi/util/Condition$1.class</include>
-                    <include>com/intellij/openapi/util/Condition$2.class</include>
-                    <include>com/intellij/openapi/util/Condition$3.class</include>
-                    <include>com/intellij/openapi/util/Condition.class</include>
-                    <include>com/intellij/openapi/util/Conditions$1.class</include>
-                    <include>com/intellij/openapi/util/Conditions$8.class</include>
-                    <include>com/intellij/openapi/util/Conditions.class</include>
-                    <include>com/intellij/openapi/util/Disposer$1.class</include>
-                    <include>com/intellij/openapi/util/Disposer$2.class</include>
-                    <include>com/intellij/openapi/util/Disposer.class</include>
-                    <include>com/intellij/openapi/util/EmptyRunnable.class</include>
-                    <include>com/intellij/openapi/util/Getter.class</include>
-                    <include>com/intellij/openapi/util/Key.class</include>
-                    <include>com/intellij/openapi/util/KeyWithDefaultValue.class</include>
-                    <include>com/intellij/openapi/util/LowMemoryWatcher$1.class</include>
-                    <include>com/intellij/openapi/util/LowMemoryWatcher$LowMemoryWatcherType.class</include>
-                    <include>com/intellij/openapi/util/LowMemoryWatcher.class</include>
-                    <include>com/intellij/openapi/util/NotNullLazyKey.class</include>
-                    <include>com/intellij/openapi/util/NotNullLazyValue$1.class</include>
-                    <include>com/intellij/openapi/util/NotNullLazyValue$2.class</include>
-                    <include>com/intellij/openapi/util/NotNullLazyValue.class</include>
-                    <include>com/intellij/openapi/util/Pair.class</include>
-                    <include>com/intellij/openapi/util/RecursionGuard$StackStamp.class</include>
-                    <include>com/intellij/openapi/util/RecursionGuard.class</include>
-                    <include>com/intellij/openapi/util/RecursionManager$1.class</include>
-                    <include>com/intellij/openapi/util/RecursionManager$2.class</include>
-                    <include>com/intellij/openapi/util/RecursionManager$CalculationStack.class</include>
-                    <include>com/intellij/openapi/util/RecursionManager.class</include>
-                    <include>com/intellij/openapi/util/Segment.class</include>
-                    <include>com/intellij/openapi/util/StackOverflowPreventedException.class</include>
-                    <include>com/intellij/openapi/util/StaticGetter.class</include>
-                    <include>com/intellij/openapi/util/SystemInfo.class</include>
-                    <include>com/intellij/openapi/util/SystemInfoRt.class</include>
-                    <include>com/intellij/openapi/util/TextRange.class</include>
-                    <include>com/intellij/openapi/util/UnprotectedUserDataHolder.class</include>
-                    <include>com/intellij/openapi/util/UserDataHolder.class</include>
-                    <include>com/intellij/openapi/util/UserDataHolderBase.class</include>
-                    <include>com/intellij/openapi/util/UserDataHolderEx.class</include>
-                    <include>com/intellij/openapi/util/UserDataHolderUnprotected.class</include>
+                    <include>com/intellij/openapi/ui/Splittable.class</include>
+                    <include>com/intellij/openapi/ui/Splitter.class</include>
+                    <include>com/intellij/openapi/util/*.class</include>
+                    <include>com/intellij/openapi/util/io/BufferExposingByteArrayInputStream.class</include>
+                    <include>com/intellij/openapi/util/io/BufferExposingByteArrayOutputStream.class</include>
+                    <include>com/intellij/openapi/util/io/ByteSequence.class</include>
                     <include>com/intellij/openapi/util/io/FileTooBigException.class</include>
                     <include>com/intellij/openapi/util/io/FileUtil$1.class</include>
                     <include>com/intellij/openapi/util/io/FileUtil$2.class</include>
@@ -474,6 +770,7 @@
                     <include>com/intellij/openapi/util/io/FileUtilRt$RepeatableIOOperation.class</include>
                     <include>com/intellij/openapi/util/io/FileUtilRt$SymlinkResolver.class</include>
                     <include>com/intellij/openapi/util/io/FileUtilRt.class</include>
+                    <include>com/intellij/openapi/util/io/NullAppendable.class</include>
                     <include>com/intellij/openapi/util/io/PathExecLazyValue.class</include>
                     <include>com/intellij/openapi/util/objectTree/ObjectNode.class</include>
                     <include>com/intellij/openapi/util/objectTree/ObjectTree.class</include>
@@ -482,16 +779,24 @@
                     <include>com/intellij/openapi/util/registry/RegistryValue.class</include>
                     <include>com/intellij/openapi/util/text/CharSequenceWithStringHash.class</include>
                     <include>com/intellij/openapi/util/text/LineTokenizer.class</include>
+                    <include>com/intellij/openapi/util/text/StringUtil$1$1.class</include>
+                    <include>com/intellij/openapi/util/text/StringUtil$1.class</include>
                     <include>com/intellij/openapi/util/text/StringUtil$MyHtml2Text.class</include>
                     <include>com/intellij/openapi/util/text/StringUtil.class</include>
                     <include>com/intellij/openapi/util/text/StringUtilRt.class</include>
+                    <include>com/intellij/openapi/vfs/CharsetToolkit$GuessedEncoding.class</include>
                     <include>com/intellij/openapi/vfs/CharsetToolkit.class</include>
                     <include>com/intellij/reference/SoftReference.class</include>
+                    <include>com/intellij/ui/JBColor.class</include>
                     <include>com/intellij/util/ArrayFactory.class</include>
                     <include>com/intellij/util/ArrayUtil.class</include>
                     <include>com/intellij/util/ArrayUtilRt.class</include>
                     <include>com/intellij/util/BitUtil.class</include>
+                    <include>com/intellij/util/CommonProcessors$CollectProcessor.class</include>
+                    <include>com/intellij/util/CommonProcessors$FindFirstProcessor.class</include>
+                    <include>com/intellij/util/CommonProcessors$FindProcessor.class</include>
                     <include>com/intellij/util/ConcurrencyUtil.class</include>
+                    <include>com/intellij/util/Consumer.class</include>
                     <include>com/intellij/util/EventDispatcher$1.class</include>
                     <include>com/intellij/util/EventDispatcher$2.class</include>
                     <include>com/intellij/util/EventDispatcher.class</include>
@@ -512,22 +817,84 @@
                     <include>com/intellij/util/NotNullizer.class</include>
                     <include>com/intellij/util/NullableFunction$1.class</include>
                     <include>com/intellij/util/NullableFunction.class</include>
+                    <include>com/intellij/util/ObjectUtils$1.class</include>
                     <include>com/intellij/util/ObjectUtils$Sentinel.class</include>
                     <include>com/intellij/util/ObjectUtils.class</include>
+                    <include>com/intellij/util/PairProcessor.class</include>
                     <include>com/intellij/util/Processor.class</include>
                     <include>com/intellij/util/ReflectionUtil.class</include>
                     <include>com/intellij/util/SmartFMap.class</include>
                     <include>com/intellij/util/SmartList$SingletonIterator.class</include>
                     <include>com/intellij/util/SmartList.class</include>
+                    <include>com/intellij/util/SystemProperties.class</include>
+                    <include>com/intellij/util/ThreeState.class</include>
                     <include>com/intellij/util/ThrowableRunnable.class</include>
                     <include>com/intellij/util/WalkingState$TreeGuide.class</include>
                     <include>com/intellij/util/WalkingState.class</include>
+                    <include>com/intellij/util/concurrency/AppDelayQueue.class</include>
+                    <include>com/intellij/util/concurrency/AppExecutorUtil.class</include>
+                    <include>com/intellij/util/concurrency/AppScheduledExecutorService$BackendThreadPoolExecutor.class</include>
+                    <include>com/intellij/util/concurrency/AppScheduledExecutorService$Holder.class</include>
+                    <include>com/intellij/util/concurrency/AppScheduledExecutorService$MyThreadFactory.class</include>
+                    <include>com/intellij/util/concurrency/AppScheduledExecutorService.class</include>
                     <include>com/intellij/util/concurrency/AtomicFieldUpdater.class</include>
+                    <include>com/intellij/util/concurrency/BoundedTaskExecutor$1.class</include>
+                    <include>com/intellij/util/concurrency/BoundedTaskExecutor$2.class</include>
+                    <include>com/intellij/util/concurrency/BoundedTaskExecutor.class</include>
+                    <include>com/intellij/util/concurrency/CountingThreadFactory.class</include>
+                    <include>com/intellij/util/concurrency/SchedulingWrapper.class</include>
+                    <include>com/intellij/util/concurrency/Semaphore$Sync.class</include>
+                    <include>com/intellij/util/concurrency/Semaphore.class</include>
+                    <include>com/intellij/util/concurrency/SequentialTaskExecutor.class</include>
                     <include>com/intellij/util/containers/*.class</include>
+                    <include>com/intellij/util/containers/hash/EqualityPolicy$1.class</include>
+                    <include>com/intellij/util/containers/hash/EqualityPolicy$2.class</include>
+                    <include>com/intellij/util/containers/hash/EqualityPolicy.class</include>
+                    <include>com/intellij/util/containers/hash/HashUtil.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$Entry.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$EntrySet$1.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$EntrySet.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$KeySet$1.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$KeySet.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$LinkedHashIterator.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$Values$1.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap$Values.class</include>
+                    <include>com/intellij/util/containers/hash/LinkedHashMap.class</include>
                     <include>com/intellij/util/diff/DiffTreeChangeBuilder.class</include>
                     <include>com/intellij/util/diff/FlyweightCapableTreeStructure.class</include>
                     <include>com/intellij/util/diff/ShallowNodeComparator.class</include>
+                    <include>com/intellij/util/graph/Graph.class</include>
                     <include>com/intellij/util/graph/InboundSemiGraph.class</include>
+                    <include>com/intellij/util/graph/OutboundSemiGraph.class</include>
+                    <include>com/intellij/util/indexing/DataIndexer.class</include>
+                    <include>com/intellij/util/indexing/IndexExtension.class</include>
+                    <include>com/intellij/util/indexing/IndexId.class</include>
+                    <include>com/intellij/util/indexing/InvertedIndex.class</include>
+                    <include>com/intellij/util/indexing/StorageException.class</include>
+                    <include>com/intellij/util/indexing/ValueContainer$ContainerAction.class</include>
+                    <include>com/intellij/util/indexing/impl/IndexStorage.class</include>
+                    <include>com/intellij/util/indexing/impl/InputDataDiffBuilder.class</include>
+                    <include>com/intellij/util/indexing/impl/MapInputDataDiffBuilder.class</include>
+                    <include>com/intellij/util/io/CompressedAppendableFile.class</include>
+                    <include>com/intellij/util/io/DataExternalizer.class</include>
+                    <include>com/intellij/util/io/DataOutputStream.class</include>
+                    <include>com/intellij/util/io/FileAccessorCache$1.class</include>
+                    <include>com/intellij/util/io/FileAccessorCache.class</include>
+                    <include>com/intellij/util/io/InlineKeyDescriptor.class</include>
+                    <include>com/intellij/util/io/IntInlineKeyDescriptor.class</include>
+                    <include>com/intellij/util/io/KeyDescriptor.class</include>
+                    <include>com/intellij/util/io/PersistentEnumeratorBase$CorruptedException.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage$1.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage$2.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage$3.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage$MyCompressedAppendableFile.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage$OutputStreamOverRandomAccessFileCache.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage$RAReader.class</include>
+                    <include>com/intellij/util/io/PersistentHashMapValueStorage.class</include>
+                    <include>com/intellij/util/io/URLUtil$1.class</include>
+                    <include>com/intellij/util/io/URLUtil.class</include>
+                    <include>com/intellij/util/io/UnsyncByteArrayInputStream.class</include>
+                    <include>com/intellij/util/io/UnsyncByteArrayOutputStream.class</include>
                     <include>com/intellij/util/io/storage/HeavyProcessLatch$1.class</include>
                     <include>com/intellij/util/io/storage/HeavyProcessLatch$HeavyProcessListener.class</include>
                     <include>com/intellij/util/io/storage/HeavyProcessLatch.class</include>
@@ -545,6 +912,7 @@
                     <include>com/intellij/util/messages/Topic$BroadcastDirection.class</include>
                     <include>com/intellij/util/messages/Topic.class</include>
                     <include>com/intellij/util/messages/impl/MessageBusConnectionImpl.class</include>
+                    <include>com/intellij/util/messages/impl/MessageBusImpl$1.class</include>
                     <include>com/intellij/util/messages/impl/MessageBusImpl$RootBus.class</include>
                     <include>com/intellij/util/messages/impl/MessageBusImpl.class</include>
                     <include>com/intellij/util/text/ByteArrayCharSequence.class</include>
@@ -553,6 +921,7 @@
                     <include>com/intellij/util/text/CharArrayExternalizable.class</include>
                     <include>com/intellij/util/text/CharArrayUtil.class</include>
                     <include>com/intellij/util/text/CharSequenceBackedByArray.class</include>
+                    <include>com/intellij/util/text/CharSequenceHashingStrategy.class</include>
                     <include>com/intellij/util/text/CharSequenceReader.class</include>
                     <include>com/intellij/util/text/CharSequenceSubSequence.class</include>
                     <include>com/intellij/util/text/FilePathHashingStrategy.class</include>
@@ -565,7 +934,11 @@
                     <include>com/intellij/util/text/ImmutableText$WideLeafNode.class</include>
                     <include>com/intellij/util/text/ImmutableText.class</include>
                     <include>com/intellij/util/text/StringFactory.class</include>
+                    <include>com/intellij/util/text/StringTokenizer.class</include>
                     <include>com/intellij/util/text/UnsyncCharArrayReader.class</include>
+                    <include>com/intellij/util/ui/EditableModel.class</include>
+                    <include>com/intellij/util/ui/ItemRemovable.class</include>
+                    <include>com/intellij/util/ui/JBDimension.class</include>
                     <include>misc/registry.properties</include>
                   </includes>
                 </filter>
@@ -583,22 +956,53 @@
                 <filter>
                   <artifact>com.jetbrains.pycharm:platform-api</artifact>
                   <includes>
+                    <include>com/intellij/AppTopics.class</include>
+                    <include>com/intellij/ProjectTopics.class</include>
+                    <include>com/intellij/codeInsight/CharTailType.class</include>
+                    <include>com/intellij/codeInsight/TailType$1.class</include>
+                    <include>com/intellij/codeInsight/TailType$2.class</include>
+                    <include>com/intellij/codeInsight/TailType$3.class</include>
+                    <include>com/intellij/codeInsight/TailType$4.class</include>
+                    <include>com/intellij/codeInsight/TailType$5.class</include>
+                    <include>com/intellij/codeInsight/TailType$TailTypeEQ.class</include>
+                    <include>com/intellij/codeInsight/TailType.class</include>
                     <include>com/intellij/codeInsight/completion/InsertHandler.class</include>
+                    <include>com/intellij/codeInsight/controlflow/ConditionalInstruction.class</include>
+                    <include>com/intellij/codeInsight/controlflow/ControlFlow.class</include>
+                    <include>com/intellij/codeInsight/controlflow/Instruction.class</include>
+                    <include>com/intellij/codeInsight/controlflow/TransparentInstruction.class</include>
                     <include>com/intellij/codeInsight/lookup/LookupElement.class</include>
                     <include>com/intellij/codeInsight/lookup/LookupElementBuilder.class</include>
+                    <include>com/intellij/codeInsight/lookup/MutableLookupElement.class</include>
                     <include>com/intellij/diagnostic/ImplementationConflictException.class</include>
                     <include>com/intellij/diagnostic/PluginException.class</include>
                     <include>com/intellij/execution/ExecutionException.class</include>
+                    <include>com/intellij/execution/configurations/ConfigurationFactory.class</include>
+                    <include>com/intellij/execution/configurations/ConfigurationType.class</include>
+                    <include>com/intellij/execution/configurations/ConfigurationTypeBase$Companion.class</include>
+                    <include>com/intellij/execution/configurations/ConfigurationTypeBase.class</include>
+                    <include>com/intellij/execution/configurations/ConfigurationTypeUtil.class</include>
+                    <include>com/intellij/execution/configurations/RunConfiguration.class</include>
+                    <include>com/intellij/execution/configurations/RunConfigurationTypeKt.class</include>
+                    <include>com/intellij/execution/configurations/RunProfile.class</include>
                     <include>com/intellij/execution/filters/Filter.class</include>
+                    <include>com/intellij/execution/filters/HyperlinkInfo.class</include>
+                    <include>com/intellij/execution/filters/InputFilter.class</include>
                     <include>com/intellij/execution/process/AnsiEscapeDecoder$ColoredTextAcceptor.class</include>
                     <include>com/intellij/execution/process/OSProcessHandler.class</include>
                     <include>com/intellij/execution/ui/ConsoleView.class</include>
                     <include>com/intellij/execution/ui/ExecutionConsole.class</include>
+                    <include>com/intellij/execution/ui/ObservableConsoleView.class</include>
                     <include>com/intellij/ide/CopyProvider.class</include>
                     <include>com/intellij/ide/OccurenceNavigator.class</include>
                     <include>com/intellij/ide/scratch/RootType.class</include>
+                    <include>com/intellij/ide/scratch/ScratchFileService.class</include>
+                    <include>com/intellij/ide/util/DelegatingProgressIndicator.class</include>
+                    <include>com/intellij/ide/util/PropertiesComponent.class</include>
+                    <include>com/intellij/injected/editor/DocumentWindow.class</include>
                     <include>com/intellij/injected/editor/VirtualFileWindow.class</include>
                     <include>com/intellij/lang/ASTNode.class</include>
+                    <include>com/intellij/lang/DependentLanguage.class</include>
                     <include>com/intellij/lang/FCTSBackedLighterAST.class</include>
                     <include>com/intellij/lang/FileASTNode.class</include>
                     <include>com/intellij/lang/ITokenTypeRemapper.class</include>
@@ -627,41 +1031,90 @@
                     <include>com/intellij/lexer/LexerBase.class</include>
                     <include>com/intellij/lexer/LexerPosition.class</include>
                     <include>com/intellij/lexer/MergeFunction.class</include>
+                    <include>com/intellij/lexer/MergingLexerAdapter$1.class</include>
                     <include>com/intellij/lexer/MergingLexerAdapter$MyMergeFunction.class</include>
                     <include>com/intellij/lexer/MergingLexerAdapter.class</include>
                     <include>com/intellij/lexer/MergingLexerAdapterBase.class</include>
                     <include>com/intellij/model/SymbolReference.class</include>
+                    <include>com/intellij/model/SymbolResolveResult.class</include>
                     <include>com/intellij/navigation/ColoredItemPresentation.class</include>
                     <include>com/intellij/navigation/ItemPresentation.class</include>
                     <include>com/intellij/navigation/NavigationItem.class</include>
+                    <include>com/intellij/notification/NotificationDisplayType.class</include>
+                    <include>com/intellij/notification/NotificationGroup.class</include>
                     <include>com/intellij/openapi/actionSystem/ActionGroup.class</include>
                     <include>com/intellij/openapi/actionSystem/AnAction.class</include>
+                    <include>com/intellij/openapi/actionSystem/DataContext.class</include>
                     <include>com/intellij/openapi/actionSystem/DataProvider.class</include>
                     <include>com/intellij/openapi/actionSystem/DefaultActionGroup.class</include>
+                    <include>com/intellij/openapi/actionSystem/ShortcutSet.class</include>
                     <include>com/intellij/openapi/actionSystem/ToggleAction.class</include>
                     <include>com/intellij/openapi/actionSystem/Toggleable.class</include>
                     <include>com/intellij/openapi/actionSystem/UpdateInBackground.class</include>
                     <include>com/intellij/openapi/application/Application.class</include>
+                    <include>com/intellij/openapi/application/ApplicationInfo.class</include>
+                    <include>com/intellij/openapi/application/ApplicationListener.class</include>
                     <include>com/intellij/openapi/application/ApplicationManager$2.class</include>
                     <include>com/intellij/openapi/application/ApplicationManager.class</include>
+                    <include>com/intellij/openapi/application/BaseActionRunnable.class</include>
                     <include>com/intellij/openapi/application/CachedSingletonsRegistry.class</include>
                     <include>com/intellij/openapi/application/ModalityState.class</include>
+                    <include>com/intellij/openapi/application/ReadAction.class</include>
+                    <include>com/intellij/openapi/components/BaseComponent.class</include>
                     <include>com/intellij/openapi/components/ComponentManager.class</include>
+                    <include>com/intellij/openapi/components/NamedComponent.class</include>
+                    <include>com/intellij/openapi/components/PersistentStateComponent.class</include>
+                    <include>com/intellij/openapi/components/ProjectComponent.class</include>
+                    <include>com/intellij/openapi/components/RoamingType.class</include>
                     <include>com/intellij/openapi/components/ServiceManager.class</include>
                     <include>com/intellij/openapi/editor/Document.class</include>
+                    <include>com/intellij/openapi/editor/Editor.class</include>
+                    <include>com/intellij/openapi/editor/EditorFactory.class</include>
+                    <include>com/intellij/openapi/editor/FoldingModel.class</include>
                     <include>com/intellij/openapi/editor/RangeMarker.class</include>
                     <include>com/intellij/openapi/editor/ReadOnlyFragmentModificationException.class</include>
                     <include>com/intellij/openapi/editor/ReadOnlyModificationException.class</include>
+                    <include>com/intellij/openapi/editor/TextAnnotationGutterProvider.class</include>
                     <include>com/intellij/openapi/editor/actionSystem/EditorAction.class</include>
+                    <include>com/intellij/openapi/editor/actionSystem/TypedActionHandler.class</include>
+                    <include>com/intellij/openapi/editor/colors/EditorColorsListener.class</include>
+                    <include>com/intellij/openapi/editor/colors/EditorColorsManager.class</include>
+                    <include>com/intellij/openapi/editor/colors/EditorColorsScheme.class</include>
+                    <include>com/intellij/openapi/editor/colors/TextAttributesScheme.class</include>
+                    <include>com/intellij/openapi/editor/event/CaretListener.class</include>
                     <include>com/intellij/openapi/editor/event/DocumentEvent.class</include>
                     <include>com/intellij/openapi/editor/event/DocumentListener.class</include>
+                    <include>com/intellij/openapi/editor/event/EditorEventMulticaster.class</include>
+                    <include>com/intellij/openapi/editor/event/EditorFactoryListener.class</include>
+                    <include>com/intellij/openapi/editor/event/EditorMouseListener.class</include>
+                    <include>com/intellij/openapi/editor/event/EditorMouseMotionListener.class</include>
+                    <include>com/intellij/openapi/editor/event/SelectionListener.class</include>
+                    <include>com/intellij/openapi/editor/event/VisibleAreaListener.class</include>
+                    <include>com/intellij/openapi/fileChooser/FileChooserDescriptor.class</include>
                     <include>com/intellij/openapi/fileEditor/FileDocumentManager.class</include>
+                    <include>com/intellij/openapi/fileEditor/FileDocumentManagerListener.class</include>
                     <include>com/intellij/openapi/fileTypes/CharsetUtil.class</include>
+                    <include>com/intellij/openapi/fileTypes/ExactFileNameMatcher.class</include>
+                    <include>com/intellij/openapi/fileTypes/ExtensionFileNameMatcher.class</include>
+                    <include>com/intellij/openapi/fileTypes/FileNameMatcher.class</include>
+                    <include>com/intellij/openapi/fileTypes/FileNameMatcherEx.class</include>
                     <include>com/intellij/openapi/fileTypes/FileType.class</include>
+                    <include>com/intellij/openapi/fileTypes/FileTypeConsumer.class</include>
+                    <include>com/intellij/openapi/fileTypes/FileTypeFactory.class</include>
+                    <include>com/intellij/openapi/fileTypes/FileTypeListener.class</include>
+                    <include>com/intellij/openapi/fileTypes/FileTypeManager.class</include>
                     <include>com/intellij/openapi/fileTypes/FileTypeRegistry.class</include>
                     <include>com/intellij/openapi/fileTypes/LanguageFileType.class</include>
+                    <include>com/intellij/openapi/fileTypes/MockFileTypeManager.class</include>
                     <include>com/intellij/openapi/fileTypes/UnknownFileType.class</include>
+                    <include>com/intellij/openapi/fileTypes/ex/FileTypeIdentifiableByVirtualFile.class</include>
+                    <include>com/intellij/openapi/module/ModifiableModuleModel.class</include>
+                    <include>com/intellij/openapi/module/Module.class</include>
+                    <include>com/intellij/openapi/module/ModuleManager.class</include>
+                    <include>com/intellij/openapi/module/ModuleUtilCore.class</include>
+                    <include>com/intellij/openapi/module/ModuleWithNameAlreadyExists.class</include>
                     <include>com/intellij/openapi/options/Scheme.class</include>
+                    <include>com/intellij/openapi/options/SchemeMetaInfo.class</include>
                     <include>com/intellij/openapi/progress/NonCancelableSection.class</include>
                     <include>com/intellij/openapi/progress/PerformInBackgroundOption.class</include>
                     <include>com/intellij/openapi/progress/ProgressIndicator.class</include>
@@ -677,11 +1130,47 @@
                     <include>com/intellij/openapi/progress/WrappedProgressIndicator.class</include>
                     <include>com/intellij/openapi/project/DumbAware.class</include>
                     <include>com/intellij/openapi/project/DumbAwareAction.class</include>
+                    <include>com/intellij/openapi/project/DumbModeTask.class</include>
                     <include>com/intellij/openapi/project/DumbService$DumbModeListener.class</include>
                     <include>com/intellij/openapi/project/DumbService.class</include>
                     <include>com/intellij/openapi/project/IndexNotReadyException.class</include>
+                    <include>com/intellij/openapi/project/ModuleListener.class</include>
                     <include>com/intellij/openapi/project/PossiblyDumbAware.class</include>
                     <include>com/intellij/openapi/project/Project.class</include>
+                    <include>com/intellij/openapi/project/ProjectCoreUtil.class</include>
+                    <include>com/intellij/openapi/project/impl/ProjectLifecycleListener.class</include>
+                    <include>com/intellij/openapi/projectRoots/ProjectJdkTable$Adapter.class</include>
+                    <include>com/intellij/openapi/projectRoots/ProjectJdkTable$Listener.class</include>
+                    <include>com/intellij/openapi/projectRoots/ProjectJdkTable.class</include>
+                    <include>com/intellij/openapi/projectRoots/Sdk.class</include>
+                    <include>com/intellij/openapi/projectRoots/SdkAdditionalData.class</include>
+                    <include>com/intellij/openapi/projectRoots/SdkModificator.class</include>
+                    <include>com/intellij/openapi/projectRoots/SdkType$1.class</include>
+                    <include>com/intellij/openapi/projectRoots/SdkType.class</include>
+                    <include>com/intellij/openapi/projectRoots/SdkTypeId$1.class</include>
+                    <include>com/intellij/openapi/projectRoots/SdkTypeId.class</include>
+                    <include>com/intellij/openapi/roots/CollectingContentIterator.class</include>
+                    <include>com/intellij/openapi/roots/ContentIterator.class</include>
+                    <include>com/intellij/openapi/roots/FileIndex.class</include>
+                    <include>com/intellij/openapi/roots/FileIndexFacade.class</include>
+                    <include>com/intellij/openapi/roots/ModuleRootListener.class</include>
+                    <include>com/intellij/openapi/roots/OrderEntry.class</include>
+                    <include>com/intellij/openapi/roots/OrderEnumerator.class</include>
+                    <include>com/intellij/openapi/roots/OrderEnumeratorSettings.class</include>
+                    <include>com/intellij/openapi/roots/OrderRootType$DocumentationRootType.class</include>
+                    <include>com/intellij/openapi/roots/OrderRootType.class</include>
+                    <include>com/intellij/openapi/roots/PersistentOrderRootType.class</include>
+                    <include>com/intellij/openapi/roots/ProjectFileIndex$SERVICE.class</include>
+                    <include>com/intellij/openapi/roots/ProjectFileIndex.class</include>
+                    <include>com/intellij/openapi/roots/ProjectRootManager.class</include>
+                    <include>com/intellij/openapi/roots/ProjectRootModificationTracker.class</include>
+                    <include>com/intellij/openapi/roots/RootProvider$RootSetChangedListener.class</include>
+                    <include>com/intellij/openapi/roots/RootProvider.class</include>
+                    <include>com/intellij/openapi/roots/Synthetic.class</include>
+                    <include>com/intellij/openapi/roots/ex/ProjectRootManagerEx$ProjectJdkListener.class</include>
+                    <include>com/intellij/openapi/roots/ex/ProjectRootManagerEx.class</include>
+                    <include>com/intellij/openapi/roots/impl/FilePropertyPusher.class</include>
+                    <include>com/intellij/openapi/roots/libraries/LibraryTable$Listener.class</include>
                     <include>com/intellij/openapi/ui/ComponentContainer.class</include>
                     <include>com/intellij/openapi/ui/Queryable.class</include>
                     <include>com/intellij/openapi/util/Iconable.class</include>
@@ -695,7 +1184,13 @@
                     <include>com/intellij/openapi/vfs/NonPhysicalFileSystem.class</include>
                     <include>com/intellij/openapi/vfs/PersistentFSConstants.class</include>
                     <include>com/intellij/openapi/vfs/SavingRequestor.class</include>
+                    <include>com/intellij/openapi/vfs/StandardFileSystems$1.class</include>
+                    <include>com/intellij/openapi/vfs/StandardFileSystems$2.class</include>
+                    <include>com/intellij/openapi/vfs/StandardFileSystems.class</include>
                     <include>com/intellij/openapi/vfs/VFileProperty.class</include>
+                    <include>com/intellij/openapi/vfs/VfsUtilCore$1.class</include>
+                    <include>com/intellij/openapi/vfs/VfsUtilCore$2.class</include>
+                    <include>com/intellij/openapi/vfs/VfsUtilCore.class</include>
                     <include>com/intellij/openapi/vfs/VirtualFile.class</include>
                     <include>com/intellij/openapi/vfs/VirtualFileCopyEvent.class</include>
                     <include>com/intellij/openapi/vfs/VirtualFileEvent.class</include>
@@ -707,77 +1202,100 @@
                     <include>com/intellij/openapi/vfs/VirtualFileMoveEvent.class</include>
                     <include>com/intellij/openapi/vfs/VirtualFilePropertyEvent.class</include>
                     <include>com/intellij/openapi/vfs/VirtualFileSystem.class</include>
+                    <include>com/intellij/openapi/vfs/VirtualFileVisitor$VisitorException.class</include>
                     <include>com/intellij/openapi/vfs/VirtualFileVisitor.class</include>
+                    <include>com/intellij/openapi/vfs/VirtualFileWithId.class</include>
+                    <include>com/intellij/openapi/vfs/encoding/EncodingManager.class</include>
+                    <include>com/intellij/openapi/vfs/encoding/EncodingProjectManager.class</include>
+                    <include>com/intellij/openapi/vfs/encoding/EncodingRegistry.class</include>
                     <include>com/intellij/openapi/vfs/impl/BulkVirtualFileListenerAdapter.class</include>
                     <include>com/intellij/openapi/vfs/newvfs/BulkFileListener.class</include>
+                    <include>com/intellij/openapi/vfs/newvfs/CachingVirtualFileSystem.class</include>
+                    <include>com/intellij/openapi/vfs/newvfs/FileAttribute.class</include>
+                    <include>com/intellij/openapi/vfs/newvfs/FileSystemInterface.class</include>
+                    <include>com/intellij/openapi/vfs/newvfs/ManagingFS$ManagingFSHolder.class</include>
+                    <include>com/intellij/openapi/vfs/newvfs/ManagingFS.class</include>
+                    <include>com/intellij/openapi/vfs/newvfs/NewVirtualFile.class</include>
+                    <include>com/intellij/openapi/vfs/pointers/VirtualFilePointer.class</include>
+                    <include>com/intellij/openapi/vfs/pointers/VirtualFilePointerContainer.class</include>
+                    <include>com/intellij/openapi/vfs/pointers/VirtualFilePointerListener.class</include>
+                    <include>com/intellij/openapi/wm/IdeGlassPane$TopComponent.class</include>
+                    <include>com/intellij/patterns/CharPattern$1.class</include>
+                    <include>com/intellij/patterns/CharPattern$2.class</include>
+                    <include>com/intellij/patterns/CharPattern$3.class</include>
+                    <include>com/intellij/patterns/CharPattern$4.class</include>
+                    <include>com/intellij/patterns/CharPattern.class</include>
+                    <include>com/intellij/patterns/ElementPattern.class</include>
+                    <include>com/intellij/patterns/ElementPatternCondition.class</include>
+                    <include>com/intellij/patterns/InitialPatternCondition.class</include>
+                    <include>com/intellij/patterns/InitialPatternConditionPlus.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$1.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$10.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$2.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$3.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$4.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$5.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$6.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$7.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$8.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$9.class</include>
+                    <include>com/intellij/patterns/ObjectPattern$Capture.class</include>
+                    <include>com/intellij/patterns/ObjectPattern.class</include>
+                    <include>com/intellij/patterns/PatternCondition.class</include>
+                    <include>com/intellij/patterns/PatternConditionPlus.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$1.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$2.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$3.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$4.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$5.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$6.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$FalsePattern$1.class</include>
+                    <include>com/intellij/patterns/StandardPatterns$FalsePattern.class</include>
+                    <include>com/intellij/patterns/StandardPatterns.class</include>
+                    <include>com/intellij/patterns/ValuePatternCondition.class</include>
                     <include>com/intellij/pom/Navigatable.class</include>
-                    <include>com/intellij/psi/CommonClassNames.class</include>
-                    <include>com/intellij/psi/FileViewProvider.class</include>
-                    <include>com/intellij/psi/LanguageFileViewProviders.class</include>
-                    <include>com/intellij/psi/LanguageSubstitutors.class</include>
-                    <include>com/intellij/psi/LiteralTextEscaper.class</include>
-                    <include>com/intellij/psi/NavigatablePsiElement.class</include>
-                    <include>com/intellij/psi/PsiBinaryFile.class</include>
-                    <include>com/intellij/psi/PsiCheckedRenameElement.class</include>
-                    <include>com/intellij/psi/PsiComment.class</include>
-                    <include>com/intellij/psi/PsiCompiledElement.class</include>
-                    <include>com/intellij/psi/PsiDirectory.class</include>
-                    <include>com/intellij/psi/PsiElement.class</include>
-                    <include>com/intellij/psi/PsiElementVisitor$1.class</include>
-                    <include>com/intellij/psi/PsiElementVisitor.class</include>
-                    <include>com/intellij/psi/PsiErrorElement.class</include>
-                    <include>com/intellij/psi/PsiFile.class</include>
-                    <include>com/intellij/psi/PsiFileFactory.class</include>
-                    <include>com/intellij/psi/PsiFileSystemItem.class</include>
-                    <include>com/intellij/psi/PsiInvalidElementAccessException.class</include>
-                    <include>com/intellij/psi/PsiLanguageInjectionHost.class</include>
-                    <include>com/intellij/psi/PsiLargeBinaryFile.class</include>
-                    <include>com/intellij/psi/PsiLargeFile.class</include>
-                    <include>com/intellij/psi/PsiLiteralValue.class</include>
-                    <include>com/intellij/psi/PsiLock.class</include>
-                    <include>com/intellij/psi/PsiManager.class</include>
-                    <include>com/intellij/psi/PsiNameIdentifierOwner.class</include>
-                    <include>com/intellij/psi/PsiNamedElement.class</include>
-                    <include>com/intellij/psi/PsiPolyVariantReference.class</include>
-                    <include>com/intellij/psi/PsiRecursiveElementWalkingVisitor.class</include>
-                    <include>com/intellij/psi/PsiRecursiveVisitor.class</include>
-                    <include>com/intellij/psi/PsiReference.class</include>
-                    <include>com/intellij/psi/PsiTreeChangeEvent.class</include>
-                    <include>com/intellij/psi/PsiWhiteSpace.class</include>
-                    <include>com/intellij/psi/StubBasedPsiElement.class</include>
-                    <include>com/intellij/psi/StubBuilder.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$ASTApi.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$Api$1.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$Api$2.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$Api$3.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$Api.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$ApiEx$1.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$ApiEx.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$FlyweightApi.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$LighterASTApi.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$PsiApi$1.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser$PsiApi.class</include>
-                    <include>com/intellij/psi/SyntaxTraverser.class</include>
-                    <include>com/intellij/psi/TokenType$1.class</include>
-                    <include>com/intellij/psi/TokenType.class</include>
+                    <include>com/intellij/psi/*.class</include>
+                    <include>com/intellij/psi/filters/ElementFilter.class</include>
                     <include>com/intellij/psi/impl/ElementBase$1.class</include>
                     <include>com/intellij/psi/impl/ElementBase$2.class</include>
                     <include>com/intellij/psi/impl/ElementBase$ElementIconRequest.class</include>
                     <include>com/intellij/psi/impl/ElementBase.class</include>
                     <include>com/intellij/psi/scope/PsiScopeProcessor.class</include>
+                    <include>com/intellij/psi/search/DelegatingGlobalSearchScope.class</include>
+                    <include>com/intellij/psi/search/EverythingGlobalScope.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$1.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$2.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$EmptyScope.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$FileScope.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$FileTypeRestrictionScope.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$FilesScope.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$IntersectionScope.class</include>
+                    <include>com/intellij/psi/search/GlobalSearchScope$NotScope.class</include>
                     <include>com/intellij/psi/search/GlobalSearchScope.class</include>
                     <include>com/intellij/psi/search/LocalSearchScope.class</include>
+                    <include>com/intellij/psi/search/ProjectAndLibrariesScope.class</include>
                     <include>com/intellij/psi/search/ProjectAwareFileFilter.class</include>
+                    <include>com/intellij/psi/search/ProjectScope.class</include>
+                    <include>com/intellij/psi/search/ProjectScopeBuilder.class</include>
                     <include>com/intellij/psi/search/PsiElementProcessor$CollectElements.class</include>
                     <include>com/intellij/psi/search/PsiElementProcessor$FindElement.class</include>
                     <include>com/intellij/psi/search/PsiElementProcessor.class</include>
                     <include>com/intellij/psi/search/SearchScope.class</include>
+                    <include>com/intellij/psi/search/searches/ExtensibleQueryFactory$1.class</include>
+                    <include>com/intellij/psi/search/searches/ExtensibleQueryFactory.class</include>
+                    <include>com/intellij/psi/stubs/AbstractStubIndex.class</include>
                     <include>com/intellij/psi/stubs/IStubElementType.class</include>
                     <include>com/intellij/psi/stubs/NamedStub.class</include>
                     <include>com/intellij/psi/stubs/ObjectStubSerializer.class</include>
                     <include>com/intellij/psi/stubs/PsiFileStub.class</include>
+                    <include>com/intellij/psi/stubs/SerializerNotFoundException.class</include>
+                    <include>com/intellij/psi/stubs/StringStubIndexExtension.class</include>
                     <include>com/intellij/psi/stubs/Stub.class</include>
                     <include>com/intellij/psi/stubs/StubElement.class</include>
+                    <include>com/intellij/psi/stubs/StubIndex$StubIndexHolder.class</include>
+                    <include>com/intellij/psi/stubs/StubIndex.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexExtension.class</include>
+                    <include>com/intellij/psi/stubs/StubIndexKey.class</include>
                     <include>com/intellij/psi/stubs/StubSerializer.class</include>
                     <include>com/intellij/psi/tree/ICompositeElementType.class</include>
                     <include>com/intellij/psi/tree/ICustomParsingType.class</include>
@@ -789,7 +1307,14 @@
                     <include>com/intellij/psi/tree/ILeafElementType.class</include>
                     <include>com/intellij/psi/tree/StubFileElementType.class</include>
                     <include>com/intellij/psi/tree/TokenSet.class</include>
+                    <include>com/intellij/psi/util/CachedValue.class</include>
+                    <include>com/intellij/psi/util/CachedValueProfiler.class</include>
+                    <include>com/intellij/psi/util/CachedValueProvider$Result.class</include>
                     <include>com/intellij/psi/util/CachedValueProvider.class</include>
+                    <include>com/intellij/psi/util/CachedValuesManager.class</include>
+                    <include>com/intellij/psi/util/ParameterizedCachedValue.class</include>
+                    <include>com/intellij/psi/util/ParameterizedCachedValueProvider.class</include>
+                    <include>com/intellij/psi/util/PsiModificationTracker$Listener.class</include>
                     <include>com/intellij/psi/util/PsiModificationTracker$SERVICE.class</include>
                     <include>com/intellij/psi/util/PsiModificationTracker.class</include>
                     <include>com/intellij/psi/util/PsiTreeUtil$1.class</include>
@@ -800,24 +1325,69 @@
                     <include>com/intellij/psi/util/PsiUtilCore$NullPsiElement.class</include>
                     <include>com/intellij/psi/util/PsiUtilCore$NullPsiFile.class</include>
                     <include>com/intellij/psi/util/PsiUtilCore.class</include>
+                    <include>com/intellij/psi/util/QualifiedName.class</include>
                     <include>com/intellij/testFramework/LightVirtualFile$1.class</include>
                     <include>com/intellij/testFramework/LightVirtualFile.class</include>
                     <include>com/intellij/testFramework/LightVirtualFileBase$MyVirtualFileSystem.class</include>
                     <include>com/intellij/testFramework/LightVirtualFileBase.class</include>
                     <include>com/intellij/testFramework/ReadOnlyLightVirtualFile.class</include>
+                    <include>com/intellij/ui/CollectionComboBoxModel.class</include>
+                    <include>com/intellij/ui/CollectionListModel.class</include>
+                    <include>com/intellij/ui/JBSplitter.class</include>
+                    <include>com/intellij/ui/components/Interpolable.class</include>
+                    <include>com/intellij/ui/components/JBLayeredPane.class</include>
+                    <include>com/intellij/ui/components/JBScrollBar.class</include>
+                    <include>com/intellij/util/AbstractQuery.class</include>
+                    <include>com/intellij/util/AstLoadingException.class</include>
+                    <include>com/intellij/util/AstLoadingFilter.class</include>
                     <include>com/intellij/util/CharTable.class</include>
+                    <include>com/intellij/util/ExecutorsQuery.class</include>
                     <include>com/intellij/util/KeyedLazyInstance.class</include>
+                    <include>com/intellij/util/PathUtil.class</include>
+                    <include>com/intellij/util/Processors$1.class</include>
+                    <include>com/intellij/util/Processors.class</include>
+                    <include>com/intellij/util/Query.class</include>
+                    <include>com/intellij/util/QueryExecutor.class</include>
+                    <include>com/intellij/util/QueryFactory.class</include>
+                    <include>com/intellij/util/UniqueResultsQuery.class</include>
+                    <include>com/intellij/util/containers/UtilKt.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndex$1.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndex$InputFilter.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndex.class</include>
+                    <include>com/intellij/util/indexing/FileBasedIndexExtension.class</include>
+                    <include>com/intellij/util/indexing/FileContent.class</include>
+                    <include>com/intellij/util/indexing/ID.class</include>
+                    <include>com/intellij/util/indexing/IdFilter$1.class</include>
+                    <include>com/intellij/util/indexing/IdFilter.class</include>
+                    <include>com/intellij/util/indexing/IdIterator.class</include>
+                    <include>com/intellij/util/indexing/IndexableSetContributor.class</include>
+                    <include>com/intellij/util/indexing/PsiDependentIndex.class</include>
                     <include>com/intellij/util/ui/ErrorTreeView.class</include>
                     <include>com/intellij/util/ui/MutableErrorTreeView.class</include>
                     <include>com/intellij/xdebugger/XDebugProcessStarter.class</include>
+                    <include>com/intellij/xdebugger/evaluation/XDebuggerEditorsProvider.class</include>
+                    <include>com/intellij/xdebugger/frame/XStackFrame.class</include>
+                    <include>com/intellij/xdebugger/frame/XValueContainer.class</include>
+                    <include>org/jetbrains/jps/model/fileTypes/FileNameMatcherFactory.class</include>
+                    <include>org/jetbrains/jps/service/JpsServiceManager$InstanceHolder.class</include>
+                    <include>org/jetbrains/jps/service/JpsServiceManager.class</include>
                   </includes>
                 </filter>
                 <filter>
                   <artifact>com.jetbrains.pycharm:pycharm</artifact>
                   <includes>
                     <include>com/jetbrains/NotNullPredicate.class</include>
+                    <include>com/jetbrains/extensions/python/PyClassExtKt.class</include>
+                    <include>com/jetbrains/numpy/codeInsight/NumpyDocStringTypeProvider.class</include>
+                    <include>com/jetbrains/numpy/codeInsight/NumpyResolveRater.class</include>
+                    <include>com/jetbrains/numpy/codeInsight/NumpyUfuncs.class</include>
+                    <include>com/jetbrains/pyqt/PyQtTypeProvider.class</include>
                     <include>com/jetbrains/python/PyBundle.class</include>
+                    <include>com/jetbrains/python/PyCustomType.class</include>
+                    <include>com/jetbrains/python/PyDirectoryIndexExcludePolicy.class</include>
                     <include>com/jetbrains/python/PyElementTypes.class</include>
+                    <include>com/jetbrains/python/PyNames$BuiltinDescription.class</include>
+                    <include>com/jetbrains/python/PyNames.class</include>
                     <include>com/jetbrains/python/PyStubElementTypes.class</include>
                     <include>com/jetbrains/python/PyTokenTypes.class</include>
                     <include>com/jetbrains/python/PyTypeDeclarationStatementImpl.class</include>
@@ -825,12 +1395,61 @@
                     <include>com/jetbrains/python/PythonDialectsTokenSetContributorBase.class</include>
                     <include>com/jetbrains/python/PythonDialectsTokenSetProvider.class</include>
                     <include>com/jetbrains/python/PythonFileType.class</include>
+                    <include>com/jetbrains/python/PythonFileTypeFactory.class</include>
+                    <include>com/jetbrains/python/PythonHelpersLocator.class</include>
                     <include>com/jetbrains/python/PythonLanguage.class</include>
                     <include>com/jetbrains/python/PythonParserDefinition.class</include>
                     <include>com/jetbrains/python/PythonTokenSetContributor.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/ControlFlowCache.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/InstructionBuilder.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/InstructionTypeCallback.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/PyControlFlowBuilder$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/PyControlFlowBuilder.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/PyTypeAssertionEvaluator$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/PyTypeAssertionEvaluator$Assertion.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/PyTypeAssertionEvaluator.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/ReadWriteInstruction$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/ReadWriteInstruction$ACCESS.class</include>
+                    <include>com/jetbrains/python/codeInsight/controlflow/ReadWriteInstruction.class</include>
                     <include>com/jetbrains/python/codeInsight/controlflow/ScopeOwner.class</include>
+                    <include>com/jetbrains/python/codeInsight/dataflow/scope/Scope.class</include>
+                    <include>com/jetbrains/python/codeInsight/dataflow/scope/ScopeUtil.class</include>
+                    <include>com/jetbrains/python/codeInsight/dataflow/scope/impl/ScopeImpl$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/dataflow/scope/impl/ScopeImpl.class</include>
+                    <include>com/jetbrains/python/codeInsight/functionTypeComments/psi/PyFunctionTypeAnnotation.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyDataclassParameters$Type.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyDataclassTypeProvider$getDataclassTypeForCallee$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyDataclassTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyDataclassesKt$parseDataclassParameters$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyDataclassesKt.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleOverridingTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleType$DefinitionLevel.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleType.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion$getNamedTupleTypeForCallee$$inlined$filterIsInstance$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion$isTypingNamedTupleDirectInheritor$isTypingNT$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider$Companion.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyNamedTupleTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyStdlibCanonicalPathProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/stdlib/PyStdlibTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/Priority.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyAncestorTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyAncestorTypeProviderKt.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyProtocolsKt.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyStubPackages.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyTypeShed$directory$2.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyTypeShed$directoryPath$1.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyTypeShed.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyTypingTypeProvider$Context.class</include>
+                    <include>com/jetbrains/python/codeInsight/typing/PyTypingTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/userSkeletons/PyUserSkeletonsTypeProvider.class</include>
+                    <include>com/jetbrains/python/codeInsight/userSkeletons/PyUserSkeletonsUtil.class</include>
+                    <include>com/jetbrains/python/console/PyCodeExecutor.class</include>
                     <include>com/jetbrains/python/console/PyConsoleProcessHandler.class</include>
                     <include>com/jetbrains/python/console/PyConsoleRootType.class</include>
+                    <include>com/jetbrains/python/console/PyConsoleUtil$1.class</include>
+                    <include>com/jetbrains/python/console/PyConsoleUtil$2.class</include>
+                    <include>com/jetbrains/python/console/PyConsoleUtil$3.class</include>
+                    <include>com/jetbrains/python/console/PyConsoleUtil.class</include>
                     <include>com/jetbrains/python/console/PydevConsoleCommunication.class</include>
                     <include>com/jetbrains/python/console/PydevConsoleCommunicationServer.class</include>
                     <include>com/jetbrains/python/console/PydevConsoleExecuteActionHandler.class</include>
@@ -847,20 +1466,45 @@
                     <include>com/jetbrains/python/console/PydevConsoleRunnerImpl.class</include>
                     <include>com/jetbrains/python/console/PythonConsoleExecuteActionHandler.class</include>
                     <include>com/jetbrains/python/console/PythonConsoleRunnerFactory.class</include>
+                    <include>com/jetbrains/python/console/PythonConsoleView$1.class</include>
+                    <include>com/jetbrains/python/console/PythonConsoleView.class</include>
+                    <include>com/jetbrains/python/console/completion/PydevConsoleElement.class</include>
                     <include>com/jetbrains/python/console/parsing/PyConsoleParser.class</include>
+                    <include>com/jetbrains/python/console/parsing/PythonConsoleData.class</include>
                     <include>com/jetbrains/python/console/parsing/PythonConsoleLexer.class</include>
+                    <include>com/jetbrains/python/debugger/PyCallSignatureTypeProvider.class</include>
+                    <include>com/jetbrains/python/debugger/PyDebuggerEditorsProvider.class</include>
+                    <include>com/jetbrains/python/debugger/PySignatureCacheManager.class</include>
+                    <include>com/jetbrains/python/debugger/PySignatureCacheManagerImpl$1.class</include>
+                    <include>com/jetbrains/python/debugger/PySignatureCacheManagerImpl.class</include>
+                    <include>com/jetbrains/python/debugger/PyStackFrame.class</include>
                     <include>com/jetbrains/python/debugger/PyVariableViewSettings$SimplifiedView.class</include>
                     <include>com/jetbrains/python/debugger/PyVariableViewSettings$VariablesPolicyGroup.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/DocStringFormat.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/DocStringLineParser.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/DocStringUtil$1.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/DocStringUtil.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/GoogleCodeStyleDocString.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/NumpyDocString.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/PlainDocString.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/PyDocStringTypeProvider.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/SectionBasedDocString$FieldType.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/SectionBasedDocString$Section.class</include>
+                    <include>com/jetbrains/python/documentation/docstrings/SectionBasedDocString.class</include>
                     <include>com/jetbrains/python/inspections/PythonVisitorFilter.class</include>
                     <include>com/jetbrains/python/lexer/FlexLexerEx.class</include>
                     <include>com/jetbrains/python/lexer/PyLexerFStringHelper$FStringState.class</include>
                     <include>com/jetbrains/python/lexer/PyLexerFStringHelper$FragmentState.class</include>
                     <include>com/jetbrains/python/lexer/PyLexerFStringHelper.class</include>
+                    <include>com/jetbrains/python/lexer/PythonHighlightingLexer.class</include>
                     <include>com/jetbrains/python/lexer/PythonIndentingLexer.class</include>
                     <include>com/jetbrains/python/lexer/PythonIndentingProcessor$PendingCommentToken.class</include>
                     <include>com/jetbrains/python/lexer/PythonIndentingProcessor$PendingToken.class</include>
                     <include>com/jetbrains/python/lexer/PythonIndentingProcessor.class</include>
+                    <include>com/jetbrains/python/lexer/PythonLexer.class</include>
                     <include>com/jetbrains/python/lexer/_PythonLexer.class</include>
+                    <include>com/jetbrains/python/packaging/PyPackageManager$Listener.class</include>
+                    <include>com/jetbrains/python/packaging/PyPackageManager.class</include>
                     <include>com/jetbrains/python/parsing/ExpressionParsing.class</include>
                     <include>com/jetbrains/python/parsing/FollowingCommentBinder.class</include>
                     <include>com/jetbrains/python/parsing/FunctionParsing.class</include>
@@ -875,9 +1519,23 @@
                     <include>com/jetbrains/python/parsing/StatementParsing.class</include>
                     <include>com/jetbrains/python/psi/*.class</include>
                     <include>com/jetbrains/python/psi/impl/*.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyFromImportNameReference.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyFromImportSourceReference.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyImportReference.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyOperatorReference.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyQualifiedReference$1.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyQualifiedReference.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyReferenceCustomTargetChecker$Companion.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyReferenceCustomTargetChecker.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyReferenceImpl$CachingResolver.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyReferenceImpl.class</include>
+                    <include>com/jetbrains/python/psi/impl/references/PyTargetReference.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/CustomTargetExpressionStub.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/CustomTargetExpressionStubType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyAnnotationElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyClassElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyCustomStub.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyCustomStubType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyCustomizableStubElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyDecoratorCallElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyDecoratorListElementType.class</include>
@@ -887,39 +1545,180 @@
                     <include>com/jetbrains/python/psi/impl/stubs/PyImportElementElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyImportStatementElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyNamedParameterElementType.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyNamedTupleStubImpl$1.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyNamedTupleStubImpl$NamedTupleModule$1.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyNamedTupleStubImpl$NamedTupleModule$2.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyNamedTupleStubImpl$NamedTupleModule.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyNamedTupleStubImpl.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyParameterListElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PySingleStarParameterElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyStarImportElementElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyTargetExpressionElementType.class</include>
                     <include>com/jetbrains/python/psi/impl/stubs/PyTupleParameterElementType.class</include>
+                    <include>com/jetbrains/python/psi/impl/stubs/PyTypingAliasStubType.class</include>
+                    <include>com/jetbrains/python/psi/resolve/ImplicitResolveResult.class</include>
+                    <include>com/jetbrains/python/psi/resolve/ImportedResolveResult.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyCanonicalPathProvider.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyForwardReferenceResolveProvider.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyOverridingReferenceResolveProvider.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyQualifiedNameResolveContext.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyQualifiedNameResolveContextImpl.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyReferenceResolveProvider.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveContext.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveImportUtil$foreignResults$1.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveImportUtil$resolveQualifiedName$1.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveImportUtil$resolveTopLevelMember$1.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveImportUtil$resolveTopLevelMember$2.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveImportUtil$resultsFromRoots$visitor$1.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveImportUtil.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveProcessor.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PyResolveUtil.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PythonBuiltinReferenceResolveProvider.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PythonOverridingBuiltinReferenceResolveProvider.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PythonPathCache$MyVirtualFileListener.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PythonPathCache.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PythonSdkPathCache$1.class</include>
+                    <include>com/jetbrains/python/psi/resolve/PythonSdkPathCache.class</include>
+                    <include>com/jetbrains/python/psi/resolve/QualifiedNameFinder$PathChoosingVisitor.class</include>
+                    <include>com/jetbrains/python/psi/resolve/QualifiedNameFinder.class</include>
+                    <include>com/jetbrains/python/psi/resolve/QualifiedRatedResolveResult.class</include>
+                    <include>com/jetbrains/python/psi/resolve/QualifiedResolveResult$1.class</include>
+                    <include>com/jetbrains/python/psi/resolve/QualifiedResolveResult.class</include>
+                    <include>com/jetbrains/python/psi/resolve/RatedResolveResult.class</include>
+                    <include>com/jetbrains/python/psi/resolve/ResolveImportUtil$ResolveModuleParams.class</include>
+                    <include>com/jetbrains/python/psi/resolve/ResolveImportUtil.class</include>
+                    <include>com/jetbrains/python/psi/resolve/RootVisitor.class</include>
+                    <include>com/jetbrains/python/psi/resolve/RootVisitorHost.class</include>
                     <include>com/jetbrains/python/psi/resolve/VariantsProcessor.class</include>
+                    <include>com/jetbrains/python/psi/search/PyProjectScopeBuilder$1.class</include>
+                    <include>com/jetbrains/python/psi/search/PyProjectScopeBuilder$2.class</include>
+                    <include>com/jetbrains/python/psi/search/PyProjectScopeBuilder.class</include>
+                    <include>com/jetbrains/python/psi/search/PySuperMethodsSearch$SearchParameters.class</include>
+                    <include>com/jetbrains/python/psi/search/PySuperMethodsSearch.class</include>
+                    <include>com/jetbrains/python/psi/search/PySuperMethodsSearchExecutor.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyAnnotationOwnerStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyAnnotationStub.class</include>
+                    <include>com/jetbrains/python/psi/stubs/PyClassAttributesIndex.class</include>
+                    <include>com/jetbrains/python/psi/stubs/PyClassNameIndex.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyClassStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyDecoratorListStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyDecoratorStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyExceptPartStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyFileStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyFromImportStatementStub.class</include>
+                    <include>com/jetbrains/python/psi/stubs/PyFunctionNameIndex.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyFunctionStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyImportElementStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyImportStatementStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyNamedParameterStub.class</include>
+                    <include>com/jetbrains/python/psi/stubs/PyNamedTupleStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyParameterListStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PySingleStarParameterStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyStarImportElementStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyTargetExpressionStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyTupleParameterStub.class</include>
                     <include>com/jetbrains/python/psi/stubs/PyTypeCommentOwnerStub.class</include>
+                    <include>com/jetbrains/python/psi/stubs/PyTypingAliasStub.class</include>
+                    <include>com/jetbrains/python/psi/types/PyABCUtil.class</include>
+                    <include>com/jetbrains/python/psi/types/PyCallableParameter.class</include>
+                    <include>com/jetbrains/python/psi/types/PyCallableParameterImpl.class</include>
                     <include>com/jetbrains/python/psi/types/PyCallableType.class</include>
                     <include>com/jetbrains/python/psi/types/PyClassLikeType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyClassMembersProvider.class</include>
+                    <include>com/jetbrains/python/psi/types/PyClassType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyClassTypeImpl.class</include>
+                    <include>com/jetbrains/python/psi/types/PyCollectionType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyCollectionTypeByModificationsProvider.class</include>
+                    <include>com/jetbrains/python/psi/types/PyCollectionTypeImpl.class</include>
+                    <include>com/jetbrains/python/psi/types/PyCollectionTypeUtil.class</include>
+                    <include>com/jetbrains/python/psi/types/PyDynamicallyEvaluatedType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyFunctionType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyFunctionTypeImpl.class</include>
+                    <include>com/jetbrains/python/psi/types/PyGenericType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyImportedModuleType.class</include>
                     <include>com/jetbrains/python/psi/types/PyInstantiableType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyModuleMembersProvider.class</include>
+                    <include>com/jetbrains/python/psi/types/PyModuleType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyNoneType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyStructuralType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTupleType.class</include>
                     <include>com/jetbrains/python/psi/types/PyType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeChecker$MatchContext.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeChecker.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeProviderBase$1.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeProviderBase$ReturnTypeCallback.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeProviderBase$ReturnTypeDescriptor.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeProviderBase.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypeUtil.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypingNewType$Companion.class</include>
+                    <include>com/jetbrains/python/psi/types/PyTypingNewType.class</include>
+                    <include>com/jetbrains/python/psi/types/PyUnionType.class</include>
+                    <include>com/jetbrains/python/psi/types/TypeEvalConstraints.class</include>
+                    <include>com/jetbrains/python/psi/types/TypeEvalContext$Key.class</include>
+                    <include>com/jetbrains/python/psi/types/TypeEvalContext.class</include>
+                    <include>com/jetbrains/python/psi/types/TypeEvalContextBasedCache$MapCreator.class</include>
+                    <include>com/jetbrains/python/psi/types/TypeEvalContextBasedCache.class</include>
+                    <include>com/jetbrains/python/psi/types/TypeEvalContextCache.class</include>
+                    <include>com/jetbrains/python/pyi/PyiFile.class</include>
+                    <include>com/jetbrains/python/pyi/PyiFileElementType.class</include>
+                    <include>com/jetbrains/python/pyi/PyiFileType.class</include>
+                    <include>com/jetbrains/python/pyi/PyiFileTypeFactory.class</include>
+                    <include>com/jetbrains/python/pyi/PyiLanguageDialect.class</include>
+                    <include>com/jetbrains/python/pyi/PyiParserDefinition.class</include>
+                    <include>com/jetbrains/python/pyi/PyiTypeProvider.class</include>
+                    <include>com/jetbrains/python/pyi/PyiUtil.class</include>
                     <include>com/jetbrains/python/refactoring/PyDefUseUtil$InstructionNotFoundException.class</include>
+                    <include>com/jetbrains/python/refactoring/PyDefUseUtil.class</include>
                     <include>com/jetbrains/python/remote/PythonRemoteInterpreterManager$PyRemoteInterpreterExecutionException.class</include>
+                    <include>com/jetbrains/python/run/PythonConfigurationFactoryBase.class</include>
                     <include>com/jetbrains/python/run/PythonProcessHandler.class</include>
                     <include>com/jetbrains/python/run/PythonRunParams.class</include>
+                    <include>com/jetbrains/python/sdk/InvalidSdkException.class</include>
+                    <include>com/jetbrains/python/sdk/PythonSdkType.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/CPythonSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/CondaEnvSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/IronPythonSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/JythonSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/MacPythonSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/PyPySdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/PyRemoteSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/PythonFlavorProvider.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/PythonSdkFlavor.class</include>
+                    <include>com/jetbrains/python/sdk/flavors/VirtualEnvSdkFlavor.class</include>
+                    <include>com/jetbrains/python/testing/PyAbstractTestFactory.class</include>
+                    <include>com/jetbrains/python/testing/PyNoseTestFactory.class</include>
+                    <include>com/jetbrains/python/testing/PyTestFactory.class</include>
+                    <include>com/jetbrains/python/testing/PyTestFrameworkService.class</include>
+                    <include>com/jetbrains/python/testing/PyTestsSharedKt.class</include>
+                    <include>com/jetbrains/python/testing/PyTrialTestFactory.class</include>
+                    <include>com/jetbrains/python/testing/PyUnitTestFactory.class</include>
+                    <include>com/jetbrains/python/testing/PythonTestConfigurationType$PythonDocTestConfigurationFactory.class</include>
+                    <include>com/jetbrains/python/testing/PythonTestConfigurationType$PythonLegacyNoseTestConfigurationFactory.class</include>
+                    <include>com/jetbrains/python/testing/PythonTestConfigurationType$PythonLegacyPyTestConfigurationFactory.class</include>
+                    <include>com/jetbrains/python/testing/PythonTestConfigurationType$PythonLegacyUnitTestConfigurationFactory.class</include>
+                    <include>com/jetbrains/python/testing/PythonTestConfigurationType.class</include>
+                    <include>com/jetbrains/python/testing/PythonTestConfigurationsModel.class</include>
+                    <include>com/jetbrains/python/testing/PythonUnitTestUtil.class</include>
+                    <include>com/jetbrains/python/testing/pyTestFixtures/PyTestFixtureTargetChecker.class</include>
+                    <include>com/jetbrains/python/testing/pyTestParametrized/PyTestParameter.class</include>
+                    <include>com/jetbrains/python/testing/pyTestParametrized/PyTestParametrizedTypeProvider.class</include>
+                    <include>com/jetbrains/python/testing/pyTestParametrized/PyTestParamterizedKt.class</include>
                     <include>com/jetbrains/python/toolbox/Maybe.class</include>
+                    <include>com/jetbrains/python/toolbox/Substring.class</include>
+                  </includes>
+                </filter>
+                <filter>
+                  <artifact>com.jetbrains.pycharm:jps-model</artifact>
+                  <includes>
+                    <include>com/intellij/openapi/fileTypes/WildcardFileNameMatcher$MaskMatcher.class</include>
+                    <include>com/intellij/openapi/fileTypes/WildcardFileNameMatcher$SuffixMatcher.class</include>
+                    <include>com/intellij/openapi/fileTypes/WildcardFileNameMatcher.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/FileTypeAssocTable.class</include>
+                    <include>com/intellij/openapi/fileTypes/impl/IgnoredPatternSet.class</include>
+                    <include>org/jetbrains/jps/model/fileTypes/impl/FileNameMatcherFactoryImpl.class</include>
+                    <include>org/jetbrains/jps/plugin/JpsPluginManager.class</include>
+                    <include>org/jetbrains/jps/service/impl/JpsServiceManagerImpl$SingleClassLoaderPluginManager.class</include>
+                    <include>org/jetbrains/jps/service/impl/JpsServiceManagerImpl.class</include>
                   </includes>
                 </filter>
               </filters>
@@ -941,8 +1740,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>8000000</maxsize>
-                  <minsize>7000000</minsize>
+                  <maxsize>10500000</maxsize>
+                  <minsize>9500000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

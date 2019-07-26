@@ -19,39 +19,33 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyImportElement;
+import com.jetbrains.python.psi.PyReferenceExpression;
+import com.jetbrains.python.psi.PyTargetExpression;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.checks.AbstractCallExpressionBase;
 
-@Rule(key = CommandLineArgsCheck.CHECK_KEY)
-public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
-  public static final String CHECK_KEY = "S4823";
+@Rule(key = "S4823")
+public class CommandLineArgsCheck extends AbstractCallExpressionBase {
   private static final String MESSAGE = "Make sure that command line arguments are used safely here.";
-  private static final Set<String> questionableFunctions = immutableSet("argparse.ArgumentParser", "optparse.OptionParser");
+  private static final Set<String> questionableFunctions = immutableSet("argparse.ArgumentParser.__init__", "optparse.OptionParser.__init__");
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM)) {
-      if (isSysArgvNode(node)) {
-        addIssue(node, MESSAGE);
+  public void initialize(Context context) {
+    super.initialize(context);
+    context.registerSyntaxNodeConsumer(PyElementTypes.REFERENCE_EXPRESSION, ctx -> {
+      PyReferenceExpression node = (PyReferenceExpression) ctx.syntaxNode();
+      if (node.getParent() instanceof PyImportElement) {
+        return;
       }
-    } else {
-      super.visitNode(node);
-    }
-  }
-
-  private boolean isSysArgvNode(AstNode attributeRef) {
-    Symbol symbol = getContext().symbolTable().getSymbol(attributeRef);
-    return symbol != null && symbol.qualifiedName().equals("sys.argv");
+      PsiElement resolve = node.getReference().resolve();
+      if (resolve instanceof PyTargetExpression && "sys.argv".equals(((PyTargetExpression) resolve).getQualifiedName())) {
+        ctx.addIssue(node, message());
+      }
+    });
   }
 
   @Override

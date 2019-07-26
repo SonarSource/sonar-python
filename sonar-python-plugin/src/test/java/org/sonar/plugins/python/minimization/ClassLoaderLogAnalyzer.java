@@ -46,7 +46,9 @@ public class ClassLoaderLogAnalyzer {
     new Jar("com.jetbrains.pycharm", "resources_en").resource("com/jetbrains/python/PyBundle.properties"),
     new Jar("com.jetbrains.pycharm", "openapi"),
     new Jar("com.jetbrains.pycharm", "platform-api"),
-    new Jar("com.jetbrains.pycharm", "pycharm")));
+    new Jar("com.jetbrains.pycharm", "pycharm"),
+    new Jar("com.jetbrains.pycharm", "jps-model")
+  ));
 
   public static void main(String[] args) throws IOException {
     File file = new File("sonar-python-plugin/target/class-logs.txt");
