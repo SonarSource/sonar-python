@@ -29,6 +29,8 @@ public interface SubscriptionContext {
 
   PreciseIssue addIssue(PsiElement element, @Nullable String message);
 
+  PreciseIssue addIssue(IssueLocation issueLocation);
+
   PreciseIssue addFileIssue(@Nullable String message);
 
 }
