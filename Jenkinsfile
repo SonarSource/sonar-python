@@ -69,7 +69,7 @@ pipeline {
                 runMaven(JDK_VERSION,"install:install-file -Dfile=util.jar -DgroupId=com.jetbrains.pycharm -DartifactId=util -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
                 runMaven(JDK_VERSION,"install:install-file -Dfile=jps-model.jar -DgroupId=com.jetbrains.pycharm -DartifactId=jps-model -Dversion=${PYCHARM_VERSION} -Dpackaging=jar")
               }
-              runMaven(JDK_VERSION,"clean install -Dskip.its=true")
+              runMaven(JDK_VERSION,"clean install -Dskip.its=true -e")
             }
           }
          }
