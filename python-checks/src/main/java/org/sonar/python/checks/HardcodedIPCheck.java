@@ -19,22 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyStringLiteralExpression;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.SubscriptionContext;
 
-@Rule(key = HardcodedIPCheck.CHECK_KEY)
+@Rule(key = "S1313")
 public class HardcodedIPCheck extends PythonCheck {
-  public static final String CHECK_KEY = "S1313";
 
   private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
 
@@ -54,13 +53,17 @@ public class HardcodedIPCheck extends PythonCheck {
   String message = "Make sure using this hardcoded IP address \"%s\" is safe here.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonTokenType.STRING);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.STRING_LITERAL_EXPRESSION, ctx -> {
+      PyStringLiteralExpression expression = (PyStringLiteralExpression) ctx.syntaxNode();
+      for (ASTNode stringNode : expression.getStringNodes()) {
+        checkLiteral(ctx, stringNode.getPsi());
+      }
+    });
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    String value = node.getTokenOriginalValue();
+  private void checkLiteral(SubscriptionContext ctx, PsiElement literal) {
+    String value = literal.getNode().getText();
     if (value.length() <= 2 || isMultilineString(value)) {
       return;
     }
@@ -69,7 +72,7 @@ public class HardcodedIPCheck extends PythonCheck {
     if (matcher.matches()) {
       String ip = matcher.group("ipv4");
       if (isValidIPV4(ip) && !isIPV4Exception(ip)) {
-        addIssue(node, String.format(message, ip));
+        ctx.addIssue(literal, String.format(message, ip));
       }
     } else {
       IPV6_REGEX_LIST.stream()
@@ -81,7 +84,7 @@ public class HardcodedIPCheck extends PythonCheck {
           String ipv4 = match.group("ipv4");
           return isValidIPV6(ipv6, ipv4) && !isIPV6Exception(ipv6) ? ipv6 : null;
         })
-        .ifPresent(ipv6 -> addIssue(node, String.format(message, ipv6)));
+        .ifPresent(ipv6 -> ctx.addIssue(literal, String.format(message, ipv6)));
     }
   }
 
