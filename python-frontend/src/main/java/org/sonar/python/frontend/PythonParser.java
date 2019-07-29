@@ -173,6 +173,9 @@ import com.jetbrains.python.pyi.PyiParserDefinition;
 import com.jetbrains.python.pyi.PyiTypeProvider;
 import com.jetbrains.python.sdk.PythonSdkType;
 import com.jetbrains.python.sdk.flavors.PythonFlavorProvider;
+import com.jetbrains.python.sdk.flavors.WinPythonSdkFlavor;
+import com.jetbrains.python.sdk.flavors.WinRegistryService;
+import com.jetbrains.python.sdk.flavors.WinRegistryServiceImpl;
 import com.jetbrains.python.testing.PythonTestConfigurationType;
 import com.jetbrains.python.testing.pyTestFixtures.PyTestFixtureTargetChecker;
 import com.jetbrains.python.testing.pyTestParametrized.PyTestParametrizedTypeProvider;
@@ -374,6 +377,8 @@ public class PythonParser {
     project.registerService(ProjectFileIndex.class, ProjectFileIndexImpl.class);
     project.registerService(ResolveCache.class, new ResolveCache(project.getMessageBus()));
 
+    application.registerService(WinPythonSdkFlavor.class, getWindowsFlavorSDK());
+
     ProjectRootManagerImpl projectRootManager = new ProjectRootManagerImpl(project);
     project.registerService(ProjectRootManager.class, projectRootManager);
 
@@ -453,6 +458,20 @@ public class PythonParser {
       throw new IllegalStateException(e);
     }
     return pythonSdkType;
+  }
+
+  @NotNull
+  private static WinPythonSdkFlavor getWindowsFlavorSDK() {
+    Constructor<WinPythonSdkFlavor> constructor;
+    WinPythonSdkFlavor winPythonSdkFlavor;
+    try {
+      constructor = WinPythonSdkFlavor.class.getDeclaredConstructor(WinRegistryService.class);
+      constructor.setAccessible(true);
+      winPythonSdkFlavor = constructor.newInstance(new WinRegistryServiceImpl());
+    } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+      throw new IllegalStateException(e);
+    }
+    return winPythonSdkFlavor;
   }
 
   /**
