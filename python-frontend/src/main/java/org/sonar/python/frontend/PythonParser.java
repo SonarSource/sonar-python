@@ -204,12 +204,12 @@ public class PythonParser {
   private static final PsiFileFactory psiFileFactory = psiFileFactory();
   private static CoreLocalFileSystem fileSystem;
 
-  public PyFile parse(String content) {
-    PyFile file = parseAs(content, LanguageLevel.PYTHON38);
+  public PyFile parse(String content, String fileName) {
+    PyFile file = parseAs(content, fileName, LanguageLevel.PYTHON38);
     if (errorElements(file).isEmpty()) {
       return file;
     }
-    file = parseAs(content, LanguageLevel.PYTHON27);
+    file = parseAs(content, fileName, LanguageLevel.PYTHON27);
     PsiErrorElement errorElement = errorElements(file).get(0);
     if (errorElement == null) {
       return file;
@@ -218,13 +218,17 @@ public class PythonParser {
     throw new RecognitionException(lineNumber, errorElement.getErrorDescription());
   }
 
+  public PyFile parse(String content) {
+    return parse(content, "test.py");
+  }
+
   private static JBIterable<PsiErrorElement> errorElements(PsiElement root) {
     return SyntaxTraverser.psiTraverser(root).traverse().filter(PsiErrorElement.class);
   }
 
   @NotNull
-  private static PyFile parseAs(String content, LanguageLevel languageLevel) {
-    PsiFile file = psiFileFactory.createFileFromText("test.py", PythonFileType.INSTANCE, normalizeEol(content), System.currentTimeMillis(), true, false);
+  private static PyFile parseAs(String content, String fileName, LanguageLevel languageLevel) {
+    PsiFile file = psiFileFactory.createFileFromText(fileName, PythonFileType.INSTANCE, normalizeEol(content), System.currentTimeMillis(), true, false);
     file.getViewProvider().getVirtualFile().putUserData(LanguageLevel.KEY, languageLevel);
     return (PyFile) file;
   }
@@ -242,7 +246,7 @@ public class PythonParser {
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
-    return new PythonParser().parse(fileContent);
+    return new PythonParser().parse(fileContent, file.getName());
   }
 
   private static PsiFileFactory psiFileFactory() {
@@ -583,9 +587,14 @@ public class PythonParser {
 
     File python2and3 = new File(typeshed, "2and3");
     createDir(python2and3);
+    File django = new File(python2and3, "django");
+    createDir(django);
+    File djangoConf = new File(django, "conf");
+    createDir(djangoConf);
     copyResource("/org/sonar/python/mySdk/typeshed/2and3/argparse.pyi", new File(python2and3, "argparse.pyi").getAbsolutePath());
     copyResource("/org/sonar/python/mySdk/typeshed/2and3/optparse.pyi", new File(python2and3, "optparse.pyi").getAbsolutePath());
     copyResource("/org/sonar/python/mySdk/typeshed/2and3/sys.pyi", new File(python2and3, "sys.pyi").getAbsolutePath());
+    copyResource("/org/sonar/python/mySdk/typeshed/2and3/django/conf/__init__.pyi", new File(djangoConf, "__init__.pyi").getAbsolutePath());
     return sdkDir;
   }
 

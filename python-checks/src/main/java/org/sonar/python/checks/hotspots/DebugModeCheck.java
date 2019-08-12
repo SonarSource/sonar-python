@@ -19,58 +19,77 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyAssignmentStatement;
+import com.jetbrains.python.psi.PyBoolLiteralExpression;
+import com.jetbrains.python.psi.PyCallExpression;
+import com.jetbrains.python.psi.PyClass;
+import com.jetbrains.python.psi.PyExpression;
+import com.jetbrains.python.psi.PyFunction;
+import com.jetbrains.python.psi.PyKeywordArgument;
+import com.jetbrains.python.psi.PyReferenceExpression;
+import java.util.Arrays;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.SubscriptionContext;
 
-@Rule(key = DebugModeCheck.CHECK_KEY)
+@Rule(key = "S4507")
 public class DebugModeCheck extends PythonCheck {
-  public static final String CHECK_KEY = "S4507";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final Set<String> debugProperties = immutableSet("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.EXPRESSION_STMT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.EXPRESSION_STMT)) {
-      if (getContext().pythonFile().fileName().equals("global_settings.py") && node.hasDirectChildren(PythonPunctuator.ASSIGN)) {
-        checkDebugAssignment(node);
-      }
-    } else {
-      AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
-      AstNode argList = node.getFirstChild(PythonGrammar.ARGLIST);
-      if (argList != null && attributeRef != null &&
-        getQualifiedName(attributeRef.getFirstChild()).equals("django.conf.settings")) {
-        String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
-        if (functionName.equals("configure")) {
-          argList.getChildren(PythonGrammar.ARGUMENT)
-            .forEach(this::checkDebugAssignment);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.ASSIGNMENT_STATEMENT, ctx -> {
+      if (ctx.syntaxNode().getContainingFile().getVirtualFile().getName().equals("global_settings.py")) {
+        PyAssignmentStatement node = (PyAssignmentStatement) ctx.syntaxNode();
+        PyExpression lhs = node.getLeftHandSideExpression();
+        if (lhs != null && debugProperties.contains(lhs.getText()) && node.getAssignedValue() instanceof PyBoolLiteralExpression) {
+          PyBoolLiteralExpression assignedValue = (PyBoolLiteralExpression) node.getAssignedValue();
+          if (assignedValue.getValue()) {
+            ctx.addIssue(node, MESSAGE);
+          }
         }
       }
-    }
+
+    });
+
+    context.registerSyntaxNodeConsumer(PyElementTypes.CALL_EXPRESSION, ctx -> {
+      PyCallExpression node = (PyCallExpression) ctx.syntaxNode();
+      PyExpression callee = node.getCallee();
+      if (callee instanceof PyReferenceExpression) {
+        PsiElement resolve = ((PyReferenceExpression) callee).getReference().resolve();
+        if (resolve instanceof PyFunction) {
+          PyFunction pyFunction = (PyFunction) resolve;
+          PyClass containingClass = pyFunction.getContainingClass();
+          if (containingClass != null) {
+            String qualifiedName = containingClass.getQualifiedName();
+            if ("django.conf.LazySettings.configure".equals(qualifiedName + "." + pyFunction.getName())) {
+              checkDebugArgument(ctx, node);
+            }
+          }
+        }
+      }
+    });
+
   }
 
-  private void checkDebugAssignment(AstNode node) {
-    AstNode lhsExpression = node.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TEST);
-    AstNode rhsExpression = node.getLastChild(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TEST);
-    if (lhsExpression != null && rhsExpression != null
-      && debugProperties.contains(lhsExpression.getTokenValue()) && rhsExpression.getTokenValue().equals("True")) {
-      addIssue(node, MESSAGE);
-    }
-  }
-
-  private String getQualifiedName(AstNode node) {
-    Symbol symbol = getContext().symbolTable().getSymbol(node);
-    return symbol != null ? symbol.qualifiedName() : "";
+  private void checkDebugArgument(SubscriptionContext ctx, PyCallExpression node) {
+    Arrays.stream(node.getArguments()).forEach(arg -> {
+      if (arg instanceof PyKeywordArgument) {
+        PyKeywordArgument pyKeywordArgument = (PyKeywordArgument) arg;
+        if (debugProperties.contains(pyKeywordArgument.getKeyword())) {
+          if (pyKeywordArgument.getValueExpression() instanceof PyBoolLiteralExpression) {
+            PyBoolLiteralExpression valueExpression = (PyBoolLiteralExpression) pyKeywordArgument.getValueExpression();
+            if (valueExpression.getValue()) {
+              ctx.addIssue(pyKeywordArgument, MESSAGE);
+            }
+          }
+        }
+      }
+    });
   }
 
 }
