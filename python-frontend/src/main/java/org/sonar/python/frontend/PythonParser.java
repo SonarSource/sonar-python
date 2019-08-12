@@ -255,6 +255,7 @@ public class PythonParser {
     File sdkDir = initSdk(tmpDir);
 
     System.setProperty("idea.home.path", tmpDir.getAbsolutePath());
+    // avoid opening an icon popup on macOS
     System.setProperty("apple.awt.UIElement", "true");
     CoreFileTypeRegistry fileTypeRegistry = new CoreFileTypeRegistry();
     fileTypeRegistry.registerFileType(PythonFileType.INSTANCE, "py");
@@ -274,8 +275,8 @@ public class PythonParser {
     SchemeManagerFactory schemeManagerFactory = new SchemeManagerFactory() {
       @NotNull
       @Override
-      public <SCHEME, MUTABLE_SCHEME extends SCHEME> SchemeManager<SCHEME> create(@NotNull String fileSpec, @NotNull SchemeProcessor<SCHEME, ? super MUTABLE_SCHEME> schemeProcessor, @Nullable String presentableName, @NotNull RoamingType roamingType, @NotNull Function1<? super String, String> schemeNameToFileName, @Nullable StreamProvider streamProvider, @Nullable Path ioDirectory, boolean b) {
-        return (SchemeManager<SCHEME>) new EmptySchemesManager();
+      public <S, MS extends S> SchemeManager<S> create(@NotNull String fileSpec, @NotNull SchemeProcessor<S, ? super MS> schemeProcessor, @Nullable String presentableName, @NotNull RoamingType roamingType, @NotNull Function1<? super String, String> schemeNameToFileName, @Nullable StreamProvider streamProvider, @Nullable Path ioDirectory, boolean b) {
+        return (SchemeManager<S>) new EmptySchemesManager();
       }
     };
     application.registerService(SchemeManagerFactory.class, schemeManagerFactory);
@@ -296,33 +297,14 @@ public class PythonParser {
     registerExtensionPoint(IndexableSetContributor.EP_NAME, IndexableSetContributor.class);
     registerExtensionPoint(AdditionalLibraryRootsProvider.EP_NAME, AdditionalLibraryRootsProvider.class);
 
-    registerExtensionPoint(PyTypeProvider.EP_NAME, PyTypeProvider.class);
-    registerExtension(PyTypeProvider.EP_NAME, new PyStdlibTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyDataclassTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyNamedTupleTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyNamedTupleOverridingTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyCollectionTypeByModificationsProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyTypingTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyiTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyTestParametrizedTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyUserSkeletonsTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyCallSignatureTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new NumpyDocStringTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyDocStringTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyQtTypeProvider());
-    registerExtension(PyTypeProvider.EP_NAME, new PyAncestorTypeProvider());
+    registerPyTypeProvider();
 
-    registerExtensionPoint(FileTypeFactory.FILE_TYPE_FACTORY_EP, FileTypeFactory.class);
-    registerExtension(PythonFileTypeFactory.FILE_TYPE_FACTORY_EP, new MyPythonFileTypeFactory());
-    registerExtension(PythonFileTypeFactory.FILE_TYPE_FACTORY_EP, new PyiFileTypeFactory());
+    registerFileTypeFactory();
 
     registerExtensionPoint(PyReferenceCustomTargetChecker.Companion.getEP_NAME(), PyReferenceCustomTargetChecker.class);
     registerExtension(PyReferenceCustomTargetChecker.Companion.getEP_NAME(), new PyTestFixtureTargetChecker());
 
-    registerExtensionPoint(PyReferenceResolveProvider.EP_NAME, PyReferenceResolveProvider.class);
-    registerExtension(PyReferenceResolveProvider.EP_NAME, new PyForwardReferenceResolveProvider());
-    registerExtension(PyReferenceResolveProvider.EP_NAME, new PythonBuiltinReferenceResolveProvider());
-    registerExtension(PyReferenceResolveProvider.EP_NAME, new PythonOverridingBuiltinReferenceResolveProvider());
+    registerPyReferenceResolveProvider();
 
     registerExtensionPoint(PyImportResolver.EP_NAME, PyImportResolver.class);
 
@@ -400,7 +382,6 @@ public class PythonParser {
     application.registerService(VirtualFileManager.class, virtualFileManager);
 
     // https://github.com/JetBrains/intellij-community/blob/93b632941e406178dd5c78fe4d8fdf7d8c357355/platform/testFramework/src/com/intellij/testFramework/ParsingTestCase.java
-    //new MockPsiManager()
     PsiManagerImpl psiManager = new PsiManagerImpl(project, fileDocMgr, psiBuilderFactory, fileIndexFacade, project.getMessageBus(), modificationTracker);
 
     DocumentCommitProcessor documentCommitThread = getDocumentCommitThread(disposable);
@@ -432,14 +413,45 @@ public class PythonParser {
     return psiFileFactory;
   }
 
+  private static void registerPyReferenceResolveProvider() {
+    registerExtensionPoint(PyReferenceResolveProvider.EP_NAME, PyReferenceResolveProvider.class);
+    registerExtension(PyReferenceResolveProvider.EP_NAME, new PyForwardReferenceResolveProvider());
+    registerExtension(PyReferenceResolveProvider.EP_NAME, new PythonBuiltinReferenceResolveProvider());
+    registerExtension(PyReferenceResolveProvider.EP_NAME, new PythonOverridingBuiltinReferenceResolveProvider());
+  }
+
+  private static void registerFileTypeFactory() {
+    registerExtensionPoint(FileTypeFactory.FILE_TYPE_FACTORY_EP, FileTypeFactory.class);
+    registerExtension(PythonFileTypeFactory.FILE_TYPE_FACTORY_EP, new MyPythonFileTypeFactory());
+    registerExtension(PythonFileTypeFactory.FILE_TYPE_FACTORY_EP, new PyiFileTypeFactory());
+  }
+
+  private static void registerPyTypeProvider() {
+    registerExtensionPoint(PyTypeProvider.EP_NAME, PyTypeProvider.class);
+    registerExtension(PyTypeProvider.EP_NAME, new PyStdlibTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyDataclassTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyNamedTupleTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyNamedTupleOverridingTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyCollectionTypeByModificationsProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyTypingTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyiTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyTestParametrizedTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyUserSkeletonsTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyCallSignatureTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new NumpyDocStringTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyDocStringTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyQtTypeProvider());
+    registerExtension(PyTypeProvider.EP_NAME, new PyAncestorTypeProvider());
+  }
+
   @NotNull
   private static DocumentCommitProcessor getDocumentCommitThread(Disposable disposable) {
-    Constructor<DocumentCommitThread> constructor2;
+    Constructor<DocumentCommitThread> constructor;
     DocumentCommitProcessor documentCommitThread;
     try {
-      constructor2 = DocumentCommitThread.class.getDeclaredConstructor(ApplicationEx.class);
-      constructor2.setAccessible(true);
-      documentCommitThread = constructor2.newInstance(new MockApplicationEx(disposable));
+      constructor = DocumentCommitThread.class.getDeclaredConstructor(ApplicationEx.class);
+      constructor.setAccessible(true);
+      documentCommitThread = constructor.newInstance(new MockApplicationEx(disposable));
     } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
       throw new IllegalStateException(e);
     }
