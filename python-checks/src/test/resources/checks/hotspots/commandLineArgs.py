@@ -23,3 +23,14 @@ def builtins():
 def optparse_test():
     OptionParser() # Noncompliant
     optparse.OptionParser() # Noncompliant
+
+
+
+def assign_to_argv(original_argv):
+    sys.argv = original_argv # OK
+
+def calling_list_methods():
+    sys.argv.index('-d') # Noncompliant
+    sys.argv.remove('test') # Noncompliant
+    sys.argv.append('test') # Noncompliant
+    sys.argv.extend(['config_fc'] + []) # Noncompliant

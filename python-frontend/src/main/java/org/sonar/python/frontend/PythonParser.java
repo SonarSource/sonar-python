@@ -558,6 +558,9 @@ public class PythonParser {
     return sdk.clone();
   }
 
+  /**
+   * Configure pyi files containing type definition for Python standard library.
+   */
   private static File initSdk(File workDir) {
     File sdkDir = new File(workDir + "/" + SDK_DIR);
     createDir(sdkDir);

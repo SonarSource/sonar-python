@@ -82,6 +82,8 @@ public class ClassLoaderLogAnalyzer {
           packageLines.stream()
             .map(Line::classFileName)
             .sorted()
+            // Kotlin class names may contain `$$`. This is not handled correctly by Maven Shade plugin, so we replace
+            // `$$` with `??`
             .map(l -> "    <include>" + l.replaceAll("\\$\\$", "??") + "</include>")
             .forEach(System.out::println);
         }
