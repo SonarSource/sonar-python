@@ -19,54 +19,49 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyElement;
+import com.jetbrains.python.psi.PyExpression;
+import com.jetbrains.python.psi.PyFunction;
+import com.jetbrains.python.psi.PyReturnStatement;
+import com.jetbrains.python.psi.PyYieldExpression;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
 
 @Rule(key = InitReturnsValueCheck.CHECK_KEY)
 public class InitReturnsValueCheck extends PythonCheck {
 
-  public static final String MESSAGE_RETURN = "Remove this return value.";
-  public static final String MESSAGE_YIELD = "Remove this yield statement.";
+  private static final String MESSAGE_RETURN = "Remove this return value.";
+  private static final String MESSAGE_YIELD = "Remove this yield statement.";
 
   public static final String CHECK_KEY = "S2734";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (!"__init__".equals(node.getFirstChild(PythonGrammar.FUNCNAME).getTokenValue())){
-      return;
-    }
-    List<AstNode> returnYieldStatements = node.getDescendants(PythonGrammar.YIELD_STMT, PythonGrammar.RETURN_STMT);
-    for (AstNode returnYieldStatement : returnYieldStatements){
-      if (CheckUtils.insideFunction(returnYieldStatement, node) && !returnReturnNone(returnYieldStatement)){
-        raiseIssue(returnYieldStatement);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.FUNCTION_DECLARATION, ctx -> {
+      PyFunction function = (PyFunction) ctx.syntaxNode();
+      ASTNode functionNameNode = function.getNameNode();
+      if (functionNameNode == null || !"__init__".equals(functionNameNode.getText())) {
+        return;
       }
-    }
+      for (PyElement returnOrYield : PsiTreeUtil.findChildrenOfAnyType(function, PyReturnStatement.class, PyYieldExpression.class)) {
+        PyFunction returnOrYieldFunction = PsiTreeUtil.getParentOfType(returnOrYield, PyFunction.class);
+        if (returnOrYieldFunction == function && !isReturnNone(returnOrYield)) {
+          String message = returnOrYield instanceof PyYieldExpression ? MESSAGE_YIELD : MESSAGE_RETURN;
+          ctx.addIssue(returnOrYield, message);
+        }
+      }
+    });
   }
 
-  private static boolean returnReturnNone(AstNode stmt) {
-    return stmt.is(PythonGrammar.RETURN_STMT)
-        && (stmt.getFirstChild(PythonGrammar.TESTLIST) == null
-        || stmt.getFirstChild(PythonGrammar.TESTLIST).getToken().getValue().equals(PythonKeyword.NONE.getValue()));
-  }
-
-  private void raiseIssue(AstNode node) {
-    String message = MESSAGE_RETURN;
-    if (node.is(PythonGrammar.YIELD_STMT)){
-      message = MESSAGE_YIELD;
+  private static boolean isReturnNone(PyElement element) {
+    if (element instanceof PyReturnStatement) {
+      PyExpression expression = ((PyReturnStatement) element).getExpression();
+      return expression == null || expression.getNode().getElementType() == PyElementTypes.NONE_LITERAL_EXPRESSION;
     }
-    addIssue(node, message);
+    return false;
   }
 }
 

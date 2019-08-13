@@ -17,7 +17,8 @@ class MyClass4:
 
 class MyClass5:
     def __init__(self):
-        return fun()   # Noncompliant {{Remove this return value.}}
+        # Noncompliant@+1 {{Remove this return value.}}
+        return fun()
 #       ^^^^^^^^^^^^
 
 class MyClass6:
