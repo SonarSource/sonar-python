@@ -19,44 +19,45 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
+import com.intellij.psi.PsiElement;
+import com.jetbrains.python.PyElementTypes;
+import com.jetbrains.python.psi.PyClass;
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.frontend.PythonTokenLocation;
 
-@Rule(key = DuplicatedMethodFieldNamesCheck.CHECK_KEY)
+@Rule(key = "S1845")
 public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
-
-  public static final String CHECK_KEY = "S1845";
   private static final String MESSAGE = "Rename %s \"%s\" to prevent any misunderstanding/clash with %s \"%s\" defined on line %s";
 
   private static class TokenWithTypeInfo {
-    private final Token token;
+    private final PsiElement node;
+    private final PythonTokenLocation token;
     private final String type;
+    private final String name;
 
-    TokenWithTypeInfo(Token token, String type){
-      this.token = token;
+    TokenWithTypeInfo(PsiElement node, String name, String type) {
+      this.node = node;
       this.type = type;
+      this.name = name;
+      this.token = new PythonTokenLocation(node);
     }
 
-    String getValue(){
-      return token.getValue();
+    String getValue() {
+      return name;
     }
 
-    int getLine(){
-      return token.getLine();
+    int getLine() {
+      return token.startLine();
     }
 
-    String getType(){
+    String getType() {
       return type;
     }
   }
@@ -72,40 +73,38 @@ public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(PyElementTypes.CLASS_DECLARATION, ctx -> {
+      PyClass classDecl = (PyClass) ctx.syntaxNode();
+      List<TokenWithTypeInfo> allTokensWithInfo = classDecl.getInstanceAttributes().stream()
+        .filter(attribute -> attribute.getName() != null)
+        .map(attribute -> new TokenWithTypeInfo((PsiElement) attribute.getNode().getLastChildNode(), attribute.getName(), "field"))
+        .collect(Collectors.toList());
+
+      allTokensWithInfo.addAll(Arrays.stream(classDecl.getMethods())
+        .filter(method -> method.getNameIdentifier() != null && method.getName() != null)
+        .map(method -> new TokenWithTypeInfo(method.getNameIdentifier(), method.getName(), "method"))
+        .collect(Collectors.toList()));
+
+      allTokensWithInfo.addAll(classDecl.getClassAttributes().stream()
+        .filter(attribute -> attribute.getName() != null)
+        .map(attribute -> new TokenWithTypeInfo(attribute, attribute.getName(), "field"))
+        .collect(Collectors.toList())
+      );
+
+      lookForDuplications(allTokensWithInfo, ctx);
+    });
   }
 
-  @Override
-  public void visitNode(AstNode astNode) {
-    List<Token> fieldNames = new NewSymbolsAnalyzer().getClassFields(astNode);
-    List<Token> methodNames = getFieldNameTokens(astNode);
-    lookForDuplications(fieldNames, methodNames);
-  }
-
-  private static List<Token> getFieldNameTokens(AstNode astNode) {
-    List<Token> methodNames = new LinkedList<>();
-    AstSelect funcDefSelect = astNode.select()
-        .children(PythonGrammar.SUITE)
-        .children(PythonGrammar.STATEMENT)
-        .children(PythonGrammar.COMPOUND_STMT)
-        .children(PythonGrammar.FUNCDEF);
-    for (AstNode node : funcDefSelect) {
-      methodNames.add(node.getFirstChild(PythonGrammar.FUNCNAME).getToken());
-    }
-    return methodNames;
-  }
-
-  private void lookForDuplications(List<Token> fieldNames, List<Token> methodNames) {
-    List<TokenWithTypeInfo> allTokensWithInfo = mergeLists(fieldNames, methodNames);
-    Collections.sort(allTokensWithInfo, new LineComparator());
-    for (int i = 1; i < allTokensWithInfo.size(); i++){
-      for (int j = i-1; j >= 0; j--){
+  private void lookForDuplications(List<TokenWithTypeInfo> allTokensWithInfo, SubscriptionContext ctx) {
+    allTokensWithInfo.sort(new LineComparator());
+    for (int i = 1; i < allTokensWithInfo.size(); i++) {
+      for (int j = i - 1; j >= 0; j--) {
         TokenWithTypeInfo token1 = allTokensWithInfo.get(j);
         TokenWithTypeInfo token2 = allTokensWithInfo.get(i);
-        if (differOnlyByCapitalization(token1.getValue(), token2.getValue())){
-          addIssue(token2.token, getMessage(token1, token2))
-            .secondary(new AstNode(token1.token), "Original");
+        if (differOnlyByCapitalization(token1.getValue(), token2.getValue())) {
+          ctx.addIssue(token2.node, getMessage(token1, token2))
+            .secondary(token1.node, "Original");
           break;
         }
       }
@@ -114,17 +113,6 @@ public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
 
   private static boolean differOnlyByCapitalization(String name1, String name2) {
     return name1.equalsIgnoreCase(name2) && !name1.equals(name2);
-  }
-
-  private static List<TokenWithTypeInfo> mergeLists(List<Token> fieldNames, List<Token> methodNames) {
-    List<TokenWithTypeInfo> allTokensWithInfo = new LinkedList<>();
-    for (Token token : fieldNames){
-      allTokensWithInfo.add(new TokenWithTypeInfo(token, "field"));
-    }
-    for (Token token : methodNames){
-      allTokensWithInfo.add(new TokenWithTypeInfo(token, "method"));
-    }
-    return allTokensWithInfo;
   }
 
   private static String getMessage(TokenWithTypeInfo token1, TokenWithTypeInfo token2) {

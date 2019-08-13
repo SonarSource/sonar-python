@@ -48,3 +48,13 @@ class A:
 
         def HEllo(self):
             pass
+
+
+class C(object):
+    def __new__(cls):
+        name = "foo"
+        instance = super(C, cls).__new__(cls)
+        return instance
+
+    def __init__(self):
+        self.NAME = "bar" # Noncompliant (FP due to PyCharm limitation)
