@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import com.jetbrains.python.psi.PyFile;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
@@ -46,9 +45,8 @@ import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
-import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
-import org.sonar.python.metrics.MetricsVisitor;
 import org.sonar.python.parser.PythonParser;
 
 public class PythonScanner {
@@ -90,12 +88,9 @@ public class PythonScanner {
   private void scanFile(InputFile inputFile) {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
-    String fileContent = pythonFile.content();
-    PyFile pyFile = null;
     try {
-      visitorContext = new PythonVisitorContext(parser.parse(fileContent), pythonFile);
-      pyFile = new org.sonar.python.frontend.PythonParser().parse(fileContent);
-      saveMeasures(inputFile, pyFile, fileContent);
+      visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);
+      saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
       LOG.error("Unable to parse file: " + inputFile.toString());
@@ -110,15 +105,9 @@ public class PythonScanner {
     for (PythonCheck check : checks.all()) {
       check.scanFile(visitorContext);
     }
-
-    if (pyFile != null) {
-      SubscriptionVisitor.analyze(checks.all(), visitorContext, pyFile);
-      PythonHighlighter pythonHighlighter = new PythonHighlighter(context, inputFile);
-      pyFile.accept(pythonHighlighter);
-      pythonHighlighter.getNewHighlighting().save();
-    }
-
     saveIssues(inputFile, visitorContext.getIssues());
+
+    new PythonHighlighter(context, inputFile).scanFile(visitorContext);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
@@ -162,28 +151,28 @@ public class PythonScanner {
     return newLocation;
   }
 
-  private void saveMeasures(InputFile inputFile, PyFile pyFile, String fileContent) {
+  private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext) {
     boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
-    FileMetrics fileMetrics = new FileMetrics(ignoreHeaderComments, pyFile);
-    MetricsVisitor metricsVisitor = fileMetrics.metricsVisitor();
+    FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments);
+    FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    cpdAnalyzer.pushCpdTokens(inputFile, pyFile, fileContent);
-    noSonarFilter.noSonarInFile(inputFile, metricsVisitor.getLinesWithNoSonar());
+    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
+    noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
-    Set<Integer> linesOfCode = metricsVisitor.getLinesOfCode();
+    Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
     saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
     saveMetricOnFile(inputFile, CoreMetrics.STATEMENTS, fileMetrics.numberOfStatements());
     saveMetricOnFile(inputFile, CoreMetrics.FUNCTIONS, fileMetrics.numberOfFunctions());
     saveMetricOnFile(inputFile, CoreMetrics.CLASSES, fileMetrics.numberOfClasses());
     saveMetricOnFile(inputFile, CoreMetrics.COMPLEXITY, fileMetrics.complexity());
     saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
-    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, metricsVisitor.getCommentLineCount());
+    saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
 
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
     for (int line : linesOfCode) {
       fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
     }
-    for (int line : metricsVisitor.getExecutableLines()) {
+    for (int line : fileLinesVisitor.getExecutableLines()) {
       fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
     }
     fileLinesContext.save();

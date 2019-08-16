@@ -19,21 +19,27 @@
  */
 package org.sonar.python.metrics;
 
-import com.jetbrains.python.psi.PyFile;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.impl.Parser;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import org.junit.Test;
-import org.sonar.python.frontend.PythonParser;
+import org.sonar.python.PythonConfiguration;
+import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.parser.PythonParser;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ComplexityVisitorTest {
 
-  private PythonParser parser = new PythonParser();
+  private ComplexityVisitor visitor = new ComplexityVisitor();
+
+  private Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
   public void file() {
-    PyFile pyFile = PythonParser.parse(new File("src/test/resources/metrics/complexity.py"));
-    assertThat(ComplexityVisitor.complexity(pyFile)).isEqualTo(7);
+    TestPythonVisitorRunner.scanFile(new File("src/test/resources/metrics/complexity.py"), visitor);
+    assertThat(visitor.getComplexity()).isEqualTo(7);
   }
 
   @Test
@@ -44,8 +50,6 @@ public class ComplexityVisitorTest {
   @Test
   public void if_keyword() {
     assertThat(complexity("if x: pass")).isEqualTo(1);
-    assertThat(complexity("x = a if condition else b")).isEqualTo(1);
-    assertThat(complexity("foo([x for x in lst if bar(x)])")).isEqualTo(1);
   }
 
   @Test

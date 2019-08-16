@@ -19,18 +19,20 @@
  */
 package org.sonar.python.metrics;
 
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.jetbrains.python.psi.PyFile;
-import com.jetbrains.python.psi.PyFunction;
-import com.jetbrains.python.psi.PyRecursiveElementVisitor;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import org.junit.Test;
-import org.sonar.python.frontend.PythonParser;
-import org.sonar.python.frontend.PythonTokenLocation;
+import org.sonar.python.PythonVisitor;
+import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.api.PythonGrammar;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -40,40 +42,41 @@ public class CognitiveComplexityVisitorTest {
   public void file() {
     Map<Integer, String> complexityByLine = new TreeMap<>();
     CognitiveComplexityVisitor fileComplexityVisitor = new CognitiveComplexityVisitor(
-      (node, message) -> complexityByLine.merge(line(node), message, (a, b) -> a + " " + b));
+      (node, message) -> complexityByLine.merge(node.getTokenLine(), message, (a, b) -> a + " " + b));
 
     StringBuilder comments = new StringBuilder();
-    PyRecursiveElementVisitor functionAndCommentVisitor = new PyRecursiveElementVisitor() {
-
+    PythonVisitor functionAndCommentVisitor = new PythonVisitor() {
       @Override
-      public void visitPyFunction(PyFunction node) {
-        if (PsiTreeUtil.getParentOfType(node, PyFunction.class) == null) {
-          int functionComplexity = CognitiveComplexityVisitor.complexity(node, null);
-          complexityByLine.merge(line(node), "=" + functionComplexity, (a, b) -> a + " " + b);
-        }
-        super.visitPyFunction(node);
+      public Set<AstNodeType> subscribedKinds() {
+        return new HashSet<>(Arrays.asList(PythonGrammar.FUNCDEF));
       }
 
       @Override
-      public void visitComment(PsiComment comment) {
-        String content = comment.getText().substring(1).trim();
-        if (content.startsWith("=") || content.startsWith("+")) {
-          comments.append("line " + line(comment) + " " + content + "\n");
+      public void visitNode(AstNode node) {
+        if (!node.hasAncestor(PythonGrammar.FUNCDEF)) {
+          int functionComplexity = CognitiveComplexityVisitor.complexity(node, null);
+          complexityByLine.merge(node.getTokenLine(), "=" + functionComplexity, (a, b) -> a + " " + b);
+        }
+      }
+
+      @Override
+      public void visitToken(Token token) {
+        for (Trivia trivia : token.getTrivia()) {
+          if (trivia.isComment()) {
+            String content = trivia.getToken().getValue().substring(1).trim();
+            if (content.startsWith("=") || content.startsWith("+")) {
+              comments.append("line " + trivia.getToken().getLine() + " " + content + "\n");
+            }
+          }
         }
       }
     };
-    PyFile pyFile = PythonParser.parse(new File("src/test/resources/metrics/cognitive-complexities.py"));
-    pyFile.accept(fileComplexityVisitor);
-    pyFile.accept(functionAndCommentVisitor);
+    TestPythonVisitorRunner.scanFile(new File("src/test/resources/metrics/cognitive-complexities.py"), fileComplexityVisitor, functionAndCommentVisitor);
     assertThat(fileComplexityVisitor.getComplexity()).isEqualTo(91);
 
     StringBuilder complexityReport = new StringBuilder();
     complexityByLine.forEach((line, message) -> complexityReport.append("line " + line + " " + message + "\n"));
     assertThat(complexityReport.toString()).isEqualTo(comments.toString());
-  }
-
-  private static int line(PsiElement element) {
-    return new PythonTokenLocation(element).startLine();
   }
 
 }

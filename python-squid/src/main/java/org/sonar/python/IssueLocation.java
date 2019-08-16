@@ -19,12 +19,10 @@
  */
 package org.sonar.python;
 
-import com.intellij.psi.PsiElement;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.frontend.PythonTokenLocation;
 
 public abstract class IssueLocation {
 
@@ -54,14 +52,6 @@ public abstract class IssueLocation {
     return new PreciseIssueLocation(startNode, message);
   }
 
-  public static IssueLocation preciseLocation(PsiElement element, @Nullable String message) {
-    return new PsiIssueLocation(element, message);
-  }
-
-  public static IssueLocation preciseLocation(PsiElement startElement, PsiElement endElement, @Nullable String message) {
-    return new PsiIssueLocation(startElement, endElement, message);
-  }
-
   @CheckForNull
   public String message() {
     return message;
@@ -74,42 +64,6 @@ public abstract class IssueLocation {
   public abstract int endLine();
 
   public abstract int endLineOffset();
-
-  private static class PsiIssueLocation extends IssueLocation {
-    private final PythonTokenLocation startLocation;
-    private final PythonTokenLocation endLocation;
-
-    PsiIssueLocation(PsiElement element, @Nullable String message) {
-      this(element, element, message);
-    }
-
-    PsiIssueLocation(PsiElement startElement, PsiElement endElement, @Nullable String message) {
-      super(message);
-      this.startLocation = new PythonTokenLocation(startElement);
-      this.endLocation = new PythonTokenLocation(endElement);
-    }
-
-    @Override
-    public int startLine() {
-      return startLocation.startLine();
-    }
-
-    @Override
-    public int startLineOffset() {
-      return startLocation.startLineOffset();
-    }
-
-    @Override
-    public int endLine() {
-      return endLocation.endLine();
-    }
-
-    @Override
-    public int endLineOffset() {
-      return endLocation.endLineOffset();
-    }
-
-  }
 
   private static class PreciseIssueLocation extends IssueLocation {
 

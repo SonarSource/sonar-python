@@ -19,11 +19,12 @@
  */
 package org.sonar.python.checks;
 
-import com.jetbrains.python.psi.PyFunction;
+import com.sonar.sslr.api.AstNode;
 import org.sonar.check.Rule;
 
-@Rule(key = "S1542")
+@Rule(key = FunctionNameCheck.CHECK_KEY)
 public class FunctionNameCheck extends AbstractFunctionNameCheck {
+  public static final String CHECK_KEY = "S1542";
 
   @Override
   public String typeName() {
@@ -31,8 +32,8 @@ public class FunctionNameCheck extends AbstractFunctionNameCheck {
   }
 
   @Override
-  public boolean shouldCheckFunctionDeclaration(PyFunction function) {
-    return !CheckUtils.isMethodDefinition(function);
+  public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
+    return !CheckUtils.isMethodDefinition(astNode);
   }
 
 }

@@ -19,7 +19,6 @@
  */
 package org.sonar.python;
 
-import com.intellij.psi.PsiElement;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-public abstract class PythonCheck extends PythonVisitor implements SubscriptionCheck {
+public abstract class PythonCheck extends PythonVisitor {
 
   protected final PreciseIssue addIssue(AstNode node, @Nullable String message) {
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
@@ -67,7 +66,7 @@ public abstract class PythonCheck extends PythonVisitor implements SubscriptionC
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
 
-    PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
+    private PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
       this.check = check;
       this.primaryLocation = primaryLocation;
       this.secondaryLocations = new ArrayList<>();
@@ -97,11 +96,6 @@ public abstract class PythonCheck extends PythonVisitor implements SubscriptionC
       return this;
     }
 
-    public PreciseIssue secondary(PsiElement element, @Nullable String message) {
-      secondaryLocations.add(IssueLocation.preciseLocation(element, message));
-      return this;
-    }
-
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
     }
@@ -113,9 +107,5 @@ public abstract class PythonCheck extends PythonVisitor implements SubscriptionC
 
   public static <T> Set<T> immutableSet(T... el) {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(el)));
-  }
-
-  @Override
-  public void initialize(Context context) {
   }
 }

@@ -19,44 +19,45 @@
  */
 package org.sonar.python.metrics;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.PyTokenTypes;
-import com.jetbrains.python.psi.PyRecursiveElementVisitor;
-import java.util.Arrays;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import org.sonar.python.PythonVisitor;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
 
-public class ComplexityVisitor extends PyRecursiveElementVisitor {
+public class ComplexityVisitor extends PythonVisitor {
 
   private int complexity;
 
-  public static int complexity(PsiElement element) {
-    ComplexityVisitor visitor = isFunctionDeclaration(element) ? new FunctionComplexityVisitor() : new ComplexityVisitor();
-    element.accept(visitor);
+  public static int complexity(AstNode node) {
+    ComplexityVisitor visitor = node.is(PythonGrammar.FUNCDEF) ? new FunctionComplexityVisitor() : new ComplexityVisitor();
+    visitor.scanNode(node);
     return visitor.complexity;
   }
 
-  private static boolean isFunctionDeclaration(PsiElement element) {
-    return PyElementTypes.FUNCTION_DECLARATION.equals(element.getNode().getElementType());
+  @Override
+  public Set<AstNodeType> subscribedKinds() {
+    Set<AstNodeType> set = new HashSet<>();
+    set.add(PythonGrammar.FUNCDEF);
+    set.add(PythonGrammar.FOR_STMT);
+    set.add(PythonGrammar.WHILE_STMT);
+    set.add(PythonKeyword.IF);
+    set.add(PythonKeyword.AND);
+    set.add(PythonKeyword.OR);
+    return Collections.unmodifiableSet(set);
   }
 
-  private static final Set<IElementType> COMPLEXITY_TYPES = new HashSet<>(Arrays.asList(
-    PyElementTypes.FUNCTION_DECLARATION,
-    PyElementTypes.FOR_STATEMENT,
-    PyElementTypes.WHILE_STATEMENT,
-    PyTokenTypes.IF_KEYWORD,
-    PyTokenTypes.AND_KEYWORD,
-    PyTokenTypes.OR_KEYWORD
-  ));
+  @Override
+  public void visitFile(AstNode node) {
+    complexity = 0;
+  }
 
   @Override
-  public void visitElement(PsiElement element) {
-    if (COMPLEXITY_TYPES.contains(element.getNode().getElementType())) {
-      complexity++;
-    }
-    super.visitElement(element);
+  public void visitNode(AstNode node) {
+    complexity++;
   }
 
   public int getComplexity() {
@@ -68,14 +69,18 @@ public class ComplexityVisitor extends PyRecursiveElementVisitor {
     private int functionNestingLevel = 0;
 
     @Override
-    public void visitElement(PsiElement element) {
-      if (isFunctionDeclaration(element)) {
+    public void visitNode(AstNode node) {
+      if (node.is(PythonGrammar.FUNCDEF)) {
         functionNestingLevel++;
       }
       if (functionNestingLevel == 1) {
-        super.visitElement(element);
+        super.visitNode(node);
       }
-      if (isFunctionDeclaration(element)) {
+    }
+
+    @Override
+    public void leaveNode(AstNode node) {
+      if (node.is(PythonGrammar.FUNCDEF)) {
         functionNestingLevel--;
       }
     }

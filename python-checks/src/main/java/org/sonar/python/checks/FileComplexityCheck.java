@@ -19,7 +19,8 @@
  */
 package org.sonar.python.checks;
 
-import com.jetbrains.python.psi.PyFileElementType;
+import com.sonar.sslr.api.AstNode;
+import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheck;
@@ -35,18 +36,16 @@ public class FileComplexityCheck extends PythonCheck {
   int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyFileElementType.INSTANCE, ctx -> {
-      int complexity = ComplexityVisitor.complexity(ctx.syntaxNode());
-      if (complexity > maximumFileComplexityThreshold) {
-        String message = String.format(
-          "File has a complexity of %s which is greater than %s authorized.",
-          complexity,
-          maximumFileComplexityThreshold);
-        ctx.addFileIssue(message).withCost(complexity - maximumFileComplexityThreshold);
-      }
-    });
+  public void leaveFile(AstNode astNode) {
+    int complexity = ComplexityVisitor.complexity(astNode);
+    if (complexity > maximumFileComplexityThreshold) {
+      String message = MessageFormat.format(
+        "File has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
+        complexity,
+        maximumFileComplexityThreshold);
+      addFileIssue(message)
+        .withCost(complexity - maximumFileComplexityThreshold);
+    }
   }
-
 
 }

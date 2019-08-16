@@ -19,35 +19,41 @@
  */
 package org.sonar.python.checks;
 
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyBreakStatement;
-import com.jetbrains.python.psi.PyContinueStatement;
-import com.jetbrains.python.psi.PyLoopStatement;
-import com.jetbrains.python.psi.PyStatement;
-import javax.annotation.Nullable;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.PythonGrammar;
 
-@Rule(key = "S1716")
+@Rule(key = BreakContinueOutsideLoopCheck.CHECK_KEY)
 public class BreakContinueOutsideLoopCheck extends PythonCheck {
 
+  private static final String MESSAGE = "Remove this \"%s\" statement";
+  public static final String CHECK_KEY = "S1716";
+
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.BREAK_STATEMENT, ctx -> {
-      PyBreakStatement node = (PyBreakStatement) ctx.syntaxNode();
-      checkLoopStatement(ctx, node, node.getLoopStatement(), "Remove this \"break\" statement");
-    });
-    context.registerSyntaxNodeConsumer(PyElementTypes.CONTINUE_STATEMENT, ctx -> {
-      PyContinueStatement node = (PyContinueStatement) ctx.syntaxNode();
-      checkLoopStatement(ctx, node, node.getLoopStatement(), "Remove this \"continue\" statement");
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return immutableSet(PythonGrammar.BREAK_STMT, PythonGrammar.CONTINUE_STMT);
   }
 
-  private static void checkLoopStatement(SubscriptionContext ctx, PyStatement node, @Nullable PyLoopStatement loopStatement, String message) {
-    if (loopStatement == null) {
-      ctx.addIssue(node.getNode().getFirstChildNode().getPsi(), message);
+  @Override
+  public void visitNode(AstNode node) {
+    AstNode currentParent = node.getParent();
+    while (currentParent != null){
+      if (currentParent.is(PythonGrammar.WHILE_STMT, PythonGrammar.FOR_STMT)){
+        return;
+      } else if (currentParent.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)){
+        raiseIssue(node);
+        return;
+      }
+      currentParent = currentParent.getParent();
     }
+    raiseIssue(node);
   }
 
+  private void raiseIssue(AstNode node) {
+    addIssue(node, String.format(MESSAGE, node.getToken().getValue()));
+  }
 }
+
