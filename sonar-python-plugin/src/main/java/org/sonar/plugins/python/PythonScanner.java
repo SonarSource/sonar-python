@@ -45,6 +45,8 @@ import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PythonTreeMaker;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
@@ -89,7 +91,8 @@ public class PythonScanner {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
-      visitorContext = new PythonVisitorContext(parser.parse(pythonFile.content()), pythonFile);
+      PyFileInputTree parse = new PythonTreeMaker().fileInput(parser.parse(pythonFile.content()));
+      visitorContext = new PythonVisitorContext(parse, pythonFile);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);

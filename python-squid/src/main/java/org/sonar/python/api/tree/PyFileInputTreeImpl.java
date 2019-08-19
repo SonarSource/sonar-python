@@ -20,6 +20,7 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
 import java.util.List;
 
 public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
@@ -35,6 +36,6 @@ public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
 
   @Override
   public List<PyStatementTree> statements() {
-    return null;
+    return Collections.emptyList();
   }
 }

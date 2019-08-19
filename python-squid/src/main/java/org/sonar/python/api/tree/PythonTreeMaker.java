@@ -20,14 +20,11 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.PythonGrammar;
 
 public class PythonTreeMaker {
 
-  public static PyTree convert(AstNode astNode) {
-    if (astNode.is(PythonGrammar.FILE_INPUT)) {
-      return new PyFileInputTreeImpl(astNode);
-    }
-    return null;
+  public PyFileInputTree fileInput(AstNode astNode) {
+    PyFileInputTreeImpl root = new PyFileInputTreeImpl(astNode);
+    return root;
   }
 }

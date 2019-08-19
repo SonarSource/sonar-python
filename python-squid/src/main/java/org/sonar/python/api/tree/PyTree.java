@@ -20,21 +20,16 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import javax.annotation.Nullable;
 
 public abstract class PyTree extends AstNode implements Tree {
-  public PyTree(AstNodeType type, String name, @Nullable Token token) {
-    super(type, name, token);
-  }
-
-  public PyTree(Token token) {
-    super(token);
-  }
+  private final AstNode node;
 
   public PyTree(AstNode node) {
     super(node.getType(), node.getName(), node.getToken());
+    this.node = node;
+    for (AstNode child : node.getChildren()) {
+      addChild(child);
+    }
   }
 
   public abstract Kind getKind();

@@ -30,8 +30,8 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void fileInputTree() {
     AstNode astNode = p.parse("");
-    PyTree pyTree = PythonTreeMaker.convert(astNode);
-    assertThat(pyTree).isInstanceOf(PyFileInputTree.class);
+    PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).isEmpty();
   }
 
 }
