@@ -20,10 +20,14 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.tree.PyExpressionTreeImpl;
 import org.sonar.python.tree.PyFileInputTreeImpl;
+import org.sonar.python.tree.PyIfStatementTreeImpl;
 
 public class PythonTreeMaker {
 
@@ -34,8 +38,31 @@ public class PythonTreeMaker {
 
   private PyStatementTree statement(AstNode astNode) {
     if (astNode.is(PythonGrammar.IF_STMT)) {
+      return ifStatement(astNode);
     }
     return null;
+  }
+
+  public PyIfStatementTree ifStatement(AstNode astNode) {
+    Token ifToken = astNode.getTokens().get(0);
+    AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
+    AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
+    List<PyStatementTree> statements = suite.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
+    boolean hasElse = false;
+    if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
+      hasElse = true;
+    }
+    return new PyIfStatementTreeImpl(
+      astNode, ifToken, expression(condition), statements);
+  }
+
+  private PyElseStatementTree elseStatement(AstNode astNode) {
+    return null;
+  }
+
+  PyExpressionTree expression(AstNode astNode) {
+    return new PyExpressionTreeImpl(astNode);
   }
 
 

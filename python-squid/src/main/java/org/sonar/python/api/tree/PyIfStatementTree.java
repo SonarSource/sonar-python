@@ -19,29 +19,25 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.RuleTest;
+import com.sonar.sslr.api.Token;
+import java.util.List;
+import javax.annotation.CheckForNull;
 
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * if-elif-else statement
+ */
+public interface PyIfStatementTree extends PyStatementTree {
+  Token keyword();
 
-public class PythonTreeMakerTest extends RuleTest {
+  PyExpressionTree condition();
 
-  @Test
-  public void fileInputTreeOnEmptyFile() {
-    AstNode astNode = p.parse("");
-    PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).isEmpty();
-  }
+  List<PyStatementTree> body();
 
-  @Test
-  public void fileInputTreeWithIfStatement() {
-    setRootRule(PythonGrammar.IF_STMT);
-    AstNode astNode = p.parse("if x: pass");
-    PyIfStatementTree pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
-    assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
-    assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
-  }
+  List<PyIfStatementTree> elifBranches();
+
+  boolean isElif();
+
+  @CheckForNull
+  PyElseStatementTree elseBranch();
 
 }

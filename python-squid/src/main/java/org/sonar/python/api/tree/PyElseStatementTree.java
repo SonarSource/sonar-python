@@ -19,29 +19,12 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.parser.RuleTest;
+import com.sonar.sslr.api.Token;
+import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public interface PyElseStatementTree extends PyStatementTree {
+  Token elseKeyword();
 
-public class PythonTreeMakerTest extends RuleTest {
-
-  @Test
-  public void fileInputTreeOnEmptyFile() {
-    AstNode astNode = p.parse("");
-    PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).isEmpty();
-  }
-
-  @Test
-  public void fileInputTreeWithIfStatement() {
-    setRootRule(PythonGrammar.IF_STMT);
-    AstNode astNode = p.parse("if x: pass");
-    PyIfStatementTree pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
-    assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
-    assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
-  }
+  List<PyStatementTree> body();
 
 }
