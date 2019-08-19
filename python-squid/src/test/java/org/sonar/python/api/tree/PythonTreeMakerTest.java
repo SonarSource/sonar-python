@@ -36,12 +36,26 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void fileInputTreeWithIfStatement() {
+  public void IfStatement() {
     setRootRule(PythonGrammar.IF_STMT);
     AstNode astNode = p.parse("if x: pass");
     PyIfStatementTree pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
     assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
     assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
+
+    astNode = p.parse("if x: pass\nelse: pass");
+    pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
+    assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
+    assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
+    assertThat(pyIfStatementTree.elseBranch()).isNotNull();
+
+    astNode = p.parse("if x: pass\nelif y: pass");
+    pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
+    assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
+    assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
+    assertThat(pyIfStatementTree.elifBranches()).isNotEmpty();
+    PyIfStatementTree elif = pyIfStatementTree.elifBranches().get(0);
+    assertThat(elif.keyword().getValue()).isEqualTo("elif");
   }
 
 }

@@ -21,10 +21,12 @@ package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.tree.PyElseStatementTreeImpl;
 import org.sonar.python.tree.PyExpressionTreeImpl;
 import org.sonar.python.tree.PyFileInputTreeImpl;
 import org.sonar.python.tree.PyIfStatementTreeImpl;
@@ -49,16 +51,31 @@ public class PythonTreeMaker {
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     List<PyStatementTree> statements = suite.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
     AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
-    boolean hasElse = false;
+    PyElseStatementTree elseStatement = null;
     if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
-      hasElse = true;
+      elseStatement = elseStatement(elseSuite);
     }
+    List<PyIfStatementTree> elifBranches = astNode.getChildren(PythonKeyword.ELIF).stream()
+      .map(this::elifStatement)
+      .collect(Collectors.toList());
+
     return new PyIfStatementTreeImpl(
-      astNode, ifToken, expression(condition), statements);
+      astNode, ifToken, expression(condition), statements, elifBranches, elseStatement);
+  }
+
+  private PyIfStatementTree elifStatement(AstNode astNode) {
+    Token elifToken = astNode.getToken();
+    AstNode suite = astNode.getNextSibling().getNextSibling().getNextSibling();
+    AstNode condition = astNode.getNextSibling();
+    List<PyStatementTree> statements = suite.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    return new PyIfStatementTreeImpl(
+      astNode, elifToken, expression(condition), statements, Collections.emptyList(), null);
   }
 
   private PyElseStatementTree elseStatement(AstNode astNode) {
-    return null;
+    Token elseToken = astNode.getPreviousSibling().getPreviousSibling().getToken();
+    List<PyStatementTree> statements = astNode.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    return new PyElseStatementTreeImpl(astNode, elseToken, statements);
   }
 
   PyExpressionTree expression(AstNode astNode) {

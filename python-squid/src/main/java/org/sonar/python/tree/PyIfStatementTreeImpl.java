@@ -34,12 +34,17 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   private final Token keyword;
   private final PyExpressionTree condition;
   private final List<PyStatementTree> statements;
+  private final List<PyIfStatementTree> elifBranches;
+  @CheckForNull
+  private final PyElseStatementTree elseStatement;
 
-  public PyIfStatementTreeImpl(AstNode node, Token keyword, PyExpressionTree condition, List<PyStatementTree> statements) {
+  public PyIfStatementTreeImpl(AstNode node, Token keyword, PyExpressionTree condition, List<PyStatementTree> statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
     super(node);
     this.keyword = keyword;
     this.condition = condition;
     this.statements = statements;
+    this.elifBranches = elifBranches;
+    this.elseStatement = elseStatement;
   }
 
   @Override
@@ -59,7 +64,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   @Override
   public List<PyIfStatementTree> elifBranches() {
-    return null;
+    return elifBranches;
   }
 
   @Override
@@ -70,7 +75,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   @CheckForNull
   @Override
   public PyElseStatementTree elseBranch() {
-    return null;
+    return elseStatement;
   }
 
   @Override
