@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonTreeMakerTest extends RuleTest {
 
   @Test
-  public void fileInputTree() {
+  public void fileInputTreeOnEmptyFile() {
     AstNode astNode = p.parse("");
     PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).isEmpty();

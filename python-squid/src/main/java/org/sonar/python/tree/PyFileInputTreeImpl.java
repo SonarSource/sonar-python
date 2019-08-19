@@ -17,25 +17,31 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
 import java.util.List;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
 
-  public PyFileInputTreeImpl(AstNode astNode) {
+  private final List<PyStatementTree> statements;
+
+  public PyFileInputTreeImpl(AstNode astNode, List<PyStatementTree> statements) {
     super(astNode);
+    this.statements = statements;
   }
 
   @Override
-  public Tree.Kind getKind() {
+  public Kind getKind() {
     return Tree.Kind.FILE_INPUT;
   }
 
   @Override
   public List<PyStatementTree> statements() {
-    return Collections.emptyList();
+    return statements;
   }
 }

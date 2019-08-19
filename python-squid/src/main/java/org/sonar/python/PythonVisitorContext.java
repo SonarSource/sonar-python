@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyFileInputTreeImpl;
+import org.sonar.python.tree.PyFileInputTreeImpl;
 import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilderVisitor;
 

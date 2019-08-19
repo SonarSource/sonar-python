@@ -19,5 +19,5 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyStatementTree {
+public interface PyStatementTree extends Tree {
 }

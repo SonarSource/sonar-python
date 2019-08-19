@@ -20,11 +20,23 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.tree.PyFileInputTreeImpl;
 
 public class PythonTreeMaker {
 
   public PyFileInputTree fileInput(AstNode astNode) {
-    PyFileInputTreeImpl root = new PyFileInputTreeImpl(astNode);
-    return root;
+    List<PyStatementTree> statements = astNode.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    return new PyFileInputTreeImpl(astNode, statements);
   }
+
+  private PyStatementTree statement(AstNode astNode) {
+    if (astNode.is(PythonGrammar.IF_STMT)) {
+    }
+    return null;
+  }
+
+
 }
