@@ -19,13 +19,13 @@
  */
 package org.sonar.python.checks;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyStringLiteralExpression;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.PythonTokenType;
 
 @Rule(key = "S1717")
 public class BackslashInStringCheck extends PythonCheck {
@@ -34,17 +34,13 @@ public class BackslashInStringCheck extends PythonCheck {
   private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.STRING_LITERAL_EXPRESSION, ctx -> {
-      PyStringLiteralExpression expression = (PyStringLiteralExpression) ctx.syntaxNode();
-      for (ASTNode stringNode : expression.getStringNodes()) {
-        checkLiteral(ctx, stringNode.getPsi());
-      }
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return Collections.singleton(PythonTokenType.STRING);
   }
 
-  public void checkLiteral(SubscriptionContext ctx, PsiElement literal) {
-    String string = literal.getNode().getText();
+  @Override
+  public void visitNode(AstNode node) {
+    String string = node.getTokenOriginalValue();
     int length = string.length();
     boolean isEscaped = false;
     boolean inPrefix = true;
@@ -58,7 +54,7 @@ public class BackslashInStringCheck extends PythonCheck {
         }
       } else {
         if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1 && !isBackslashedSpaceAfterInlineMarkup(isThreeQuotes, string, i, c)) {
-          ctx.addIssue(literal, MESSAGE);
+          addIssue(node, MESSAGE);
         }
         isEscaped = c == '\\' && !isEscaped;
       }

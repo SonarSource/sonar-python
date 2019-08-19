@@ -85,7 +85,7 @@ public class MetricsTest {
     assertThat(getProjectMeasureAsInt(NCLOC)).isEqualTo(6);
     assertThat(getProjectMeasureAsInt(LINES)).isEqualTo(13);
     assertThat(getProjectMeasureAsInt(FILES)).isEqualTo(2);
-    assertThat(getProjectMeasureAsInt(STATEMENTS)).isEqualTo(6);
+    assertThat(getProjectMeasureAsInt(STATEMENTS)).isEqualTo(5);
     assertThat(getProjectMeasureAsInt(FUNCTIONS)).isEqualTo(1);
     assertThat(getProjectMeasureAsInt(CLASSES)).isEqualTo(0);
     // Documentation
@@ -114,7 +114,7 @@ public class MetricsTest {
     assertThat(getDirectoryMeasureAsInt(NCLOC)).isEqualTo(6);
     assertThat(getDirectoryMeasureAsInt(LINES)).isEqualTo(13);
     assertThat(getDirectoryMeasureAsInt(FILES)).isEqualTo(2);
-    assertThat(getDirectoryMeasureAsInt(STATEMENTS)).isEqualTo(6);
+    assertThat(getDirectoryMeasureAsInt(STATEMENTS)).isEqualTo(5);
     assertThat(getDirectoryMeasureAsInt(FUNCTIONS)).isEqualTo(1);
     assertThat(getDirectoryMeasureAsInt(CLASSES)).isEqualTo(0);
     // Documentation
@@ -140,7 +140,7 @@ public class MetricsTest {
     assertThat(getFileMeasureAsInt(NCLOC)).isEqualTo(1);
     assertThat(getFileMeasureAsInt(LINES)).isEqualTo(6);
     assertThat(getFileMeasureAsInt(FILES)).isEqualTo(1);
-    assertThat(getFileMeasureAsInt(STATEMENTS)).isEqualTo(2);
+    assertThat(getFileMeasureAsInt(STATEMENTS)).isEqualTo(1);
     assertThat(getFileMeasureAsInt(FUNCTIONS)).isEqualTo(1);
     assertThat(getFileMeasureAsInt(CLASSES)).isEqualTo(0);
     // Documentation

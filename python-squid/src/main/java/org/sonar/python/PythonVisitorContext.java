@@ -19,12 +19,10 @@
  */
 package org.sonar.python;
 
-import com.intellij.psi.PsiElement;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilderVisitor;
@@ -72,16 +70,6 @@ public class PythonVisitorContext {
 
   public void addIssue(PreciseIssue issue) {
     issues.add(issue);
-  }
-
-  public PreciseIssue addIssue(PythonCheck check, IssueLocation issueLocation) {
-    PreciseIssue issue = new PreciseIssue(check, issueLocation);
-    issues.add(issue);
-    return issue;
-  }
-
-  public PreciseIssue addIssue(PythonCheck check, PsiElement element, @Nullable String message) {
-    return addIssue(check, IssueLocation.preciseLocation(element, message));
   }
 
   public List<PreciseIssue> getIssues() {

@@ -19,25 +19,33 @@
  */
 package org.sonar.plugins.python;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.jetbrains.python.PyTokenTypes;
-import com.jetbrains.python.psi.PyElementType;
-import com.jetbrains.python.psi.PyRecursiveElementVisitor;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
-import org.sonar.python.frontend.PythonKeyword;
-import org.sonar.python.frontend.PythonTokenLocation;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonVisitor;
+import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonTokenType;
+
+import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 
 /**
  * Colors Python code. Currently colors:
  * <ul>
- * <li>
- * String literals. Examples:
- * <pre>
+ *   <li>
+ *     String literals. Examples:
+ *     <pre>
  *       "hello"
  *
  *       'hello'
@@ -46,71 +54,110 @@ import org.sonar.python.frontend.PythonTokenLocation;
  *           hello again
  *       """
  *     </pre>
- * </li>
- * <li>
- * Keywords. Example:
- * <pre>
+ *   </li>
+ *   <li>
+ *     Keywords. Example:
+ *     <pre>
  *       def
  *     </pre>
- * </li>
- * <li>
- * Numbers. Example:
- * <pre>
+ *   </li>
+ *   <li>
+ *     Numbers. Example:
+ *     <pre>
  *        123
  *        123L
  *        123.45
  *        123.45e-10
  *        123+88.99J
  *     </pre>
- * For a negative number, the "minus" sign is not colored.
- * </li>
- * <li>
- * Comments. Example:
- * <pre>
+ *     For a negative number, the "minus" sign is not colored.
+ *   </li>
+ *   <li>
+ *     Comments. Example:
+ *     <pre>
  *        # some comment
  *     </pre>
- * </li>
+ *   </li>
  * </ul>
  * Docstrings are handled (i.e., colored) as structured comments, not as normal string literals.
  * "Attribute docstrings" and "additional docstrings" (see PEP 258) are handled as normal string literals.
  * Reminder: a docstring is a string literal that occurs as the first statement in a module,
  * function, class, or method definition.
  */
-public class PythonHighlighter extends PyRecursiveElementVisitor {
+public class PythonHighlighter extends PythonVisitor {
 
   private NewHighlighting newHighlighting;
 
-  PythonHighlighter(SensorContext context, InputFile inputFile) {
+  private Set<Token> docStringTokens;
+
+  public PythonHighlighter(SensorContext context, InputFile inputFile) {
+    docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
     newHighlighting.onFile(inputFile);
   }
 
-  NewHighlighting getNewHighlighting() {
-    return newHighlighting;
+  @Override
+  public Set<AstNodeType> subscribedKinds() {
+    return PythonCheck.immutableSet(
+      PythonGrammar.FUNCDEF,
+      PythonGrammar.CLASSDEF,
+      PythonGrammar.FILE_INPUT);
   }
 
   @Override
-  public void visitElement(PsiElement element) {
-    if (element instanceof LeafPsiElement && !(element instanceof PsiWhiteSpace)) {
-      LeafPsiElement leaf = (LeafPsiElement) element;
-      PyElementType elementType = (PyElementType) leaf.getElementType();
-      if (PythonKeyword.isKeyword(elementType)) {
-        highlight(leaf, TypeOfText.KEYWORD);
-      } else if (PyTokenTypes.NUMERIC_LITERALS.contains(elementType)) {
-        highlight(leaf, TypeOfText.CONSTANT);
-      } else if (elementType == PyTokenTypes.DOCSTRING) {
-        highlight(leaf, TypeOfText.STRUCTURED_COMMENT);
-      } else if (PyTokenTypes.STRING_NODES.contains(elementType)) {
-        highlight(leaf, TypeOfText.STRING);
-      } else if (elementType == PyTokenTypes.END_OF_LINE_COMMENT) {
-        highlight(leaf, TypeOfText.COMMENT);
-      }
+  public void visitNode(AstNode astNode) {
+    if (astNode.is(PythonGrammar.FILE_INPUT)) {
+      checkFirstStatement(astNode.getFirstChild(PythonGrammar.STATEMENT));
+    } else {
+      checkFirstStatement(astNode.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STATEMENT));
     }
-    super.visitElement(element);
   }
 
-  private void highlight(PsiElement token, TypeOfText typeOfText) {
-    PythonTokenLocation tokenLocation = new PythonTokenLocation(token);
+  private void checkFirstStatement(@Nullable AstNode firstStatement) {
+    if (firstStatement != null) {
+      List<Token> tokens = firstStatement.getTokens();
+
+      if (tokens.size() == 2 && tokens.get(0).getType().equals(PythonTokenType.STRING)) {
+        // second token is NEWLINE
+        highlight(tokens.get(0), TypeOfText.STRUCTURED_COMMENT);
+        docStringTokens.add(tokens.get(0));
+      }
+    }
+  }
+
+  @Override
+  public void visitToken(Token token) {
+    if (token.getType().equals(PythonTokenType.NUMBER)) {
+      highlight(token, TypeOfText.CONSTANT);
+
+    } else if (token.getType() instanceof PythonKeyword) {
+      highlight(token, TypeOfText.KEYWORD);
+
+    } else if (token.getType().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
+      highlight(token, TypeOfText.STRING);
+
+    } else if (token.getType().equals(IDENTIFIER) && isPython3Keyword(token.getValue())) {
+      // async and await are keywords starting python 3.5, however, for compatibility with previous versions, we cannot consider them as real keywords
+      highlight(token, TypeOfText.KEYWORD);
+
+    }
+
+    for (Trivia trivia : token.getTrivia()) {
+      highlight(trivia.getToken(), TypeOfText.COMMENT);
+    }
+  }
+
+  private static boolean isPython3Keyword(String value) {
+    return "await".equals(value) || "async".equals(value);
+  }
+
+  @Override
+  public void leaveFile(@Nullable AstNode astNode) {
+    newHighlighting.save();
+  }
+
+  private void highlight(Token token, TypeOfText typeOfText) {
+    TokenLocation tokenLocation = new TokenLocation(token);
     newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
   }
 

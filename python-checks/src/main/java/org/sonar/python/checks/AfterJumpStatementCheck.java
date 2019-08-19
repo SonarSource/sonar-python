@@ -19,51 +19,51 @@
  */
 package org.sonar.python.checks;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyFile;
-import com.jetbrains.python.psi.PyFileElementType;
-import com.jetbrains.python.psi.PyStatement;
-import com.jetbrains.python.psi.PyStatementList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.PythonGrammar;
 
-@Rule(key = "S1763")
+@Rule(key = AfterJumpStatementCheck.CHECK_KEY)
 public class AfterJumpStatementCheck extends PythonCheck {
 
-  private static final Set<IElementType> JUMP_TYPES = new HashSet<>(Arrays.asList(
-    PyElementTypes.RETURN_STATEMENT,
-    PyElementTypes.RAISE_STATEMENT,
-    PyElementTypes.BREAK_STATEMENT,
-    PyElementTypes.CONTINUE_STATEMENT
-  ));
+  public static final String CHECK_KEY = "S1763";
+
+  private static final String MESSAGE = "Remove the code after this \"%s\".";
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.STATEMENT_LIST, ctx -> {
-      PyStatementList statementList = (PyStatementList) ctx.syntaxNode();
-      checkStatements(ctx, Arrays.asList(statementList.getStatements()));
-    });
-    context.registerSyntaxNodeConsumer(PyFileElementType.INSTANCE, ctx -> {
-      PyFile pyFile = (PyFile) ctx.syntaxNode();
-      checkStatements(ctx, pyFile.getStatements());
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return immutableSet(
+        PythonGrammar.RETURN_STMT,
+        PythonGrammar.RAISE_STMT,
+        PythonGrammar.BREAK_STMT,
+        PythonGrammar.CONTINUE_STMT
+    );
   }
 
-  private static void checkStatements(SubscriptionContext ctx, List<PyStatement> statements) {
-    for (PyStatement statement : statements.subList(0, Math.max(statements.size() - 1, 0))) {
-      if (JUMP_TYPES.contains(statement.getNode().getElementType())) {
-        ASTNode keyword = statement.getNode().findLeafElementAt(0);
-        ctx.addIssue(keyword.getPsi(), String.format(
-          "Refactor this piece of code to not have any dead code after this \"%s\".", keyword.getText()));
+  @Override
+  public void visitNode(AstNode node) {
+    AstNode simpleStatement = node.getParent();
+
+    AstNode nextSibling = simpleStatement.getNextSibling();
+    if (nextSibling != null && nextSibling.getNextSibling() != null) {
+      raiseIssue(node);
+      return;
+    }
+
+    AstNode stmtList = simpleStatement.getParent();
+    if (stmtList.getParent().is(PythonGrammar.STATEMENT)){
+      nextSibling = stmtList.getParent().getNextSibling();
+      if (nextSibling != null && nextSibling.getNextSibling() != null){
+        raiseIssue(node);
       }
     }
+  }
+
+  private void raiseIssue(AstNode node) {
+    addIssue(node, String.format(MESSAGE, node.getTokenValue()));
   }
 
 }

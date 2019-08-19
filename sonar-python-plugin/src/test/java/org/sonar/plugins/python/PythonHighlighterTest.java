@@ -29,7 +29,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.python.frontend.PythonParser;
+import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,10 +51,8 @@ public class PythonHighlighterTest {
     context = SensorContextTester.create(new File(dir));
     context.fileSystem().add(inputFile);
 
-    String content = TestUtils.fileContent(file, StandardCharsets.UTF_8);
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, inputFile);
-    new PythonParser().parse(content).accept(pythonHighlighter);
-    pythonHighlighter.getNewHighlighting().save();
+    TestPythonVisitorRunner.scanFile(file, pythonHighlighter);
   }
 
   @Test
@@ -77,16 +75,11 @@ public class PythonHighlighterTest {
     // pass
     checkOnRange(9, 4, 4, TypeOfText.KEYWORD);
 
-    /*
-     *  async and await are keywords starting python 3.5
-     *  For the time being we parsing using PyCharm v2.7 - so they are not considered as keywords
-     */
-
     // async
-    // checkOnRange(95, 0, 5, TypeOfText.KEYWORD);
+    checkOnRange(95, 0, 5, TypeOfText.KEYWORD);
 
     // await
-    // checkOnRange(98, 0, 5, TypeOfText.KEYWORD);
+    checkOnRange(98, 0, 5, TypeOfText.KEYWORD);
   }
 
   @Test

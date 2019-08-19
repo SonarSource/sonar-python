@@ -19,22 +19,27 @@
  */
 package org.sonar.python.checks;
 
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyBinaryExpression;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonPunctuator;
 
-@Rule(key = "InequalityUsage")
+@Rule(key = InequalityUsageCheck.CHECK_KEY)
 public class InequalityUsageCheck extends PythonCheck {
 
+  public static final String CHECK_KEY = "InequalityUsage";
+
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.BINARY_EXPRESSION, ctx -> {
-      PyBinaryExpression node = (PyBinaryExpression) ctx.syntaxNode();
-      if ("<>".equals(node.getPsiOperator().getText())) {
-        ctx.addIssue(node.getPsiOperator(), "Replace \"<>\" by \"!=\".");
-      }
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return Collections.singleton(PythonPunctuator.NOT_EQU2);
+  }
+
+  @Override
+  public void visitNode(AstNode astNode) {
+    addIssue(astNode, "Replace \"<>\" by \"!=\".");
   }
 
 }

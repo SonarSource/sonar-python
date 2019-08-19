@@ -19,45 +19,61 @@
  */
 package org.sonar.python.checks;
 
-import com.intellij.lang.ASTNode;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyFunction;
-import com.jetbrains.python.psi.PyParameterList;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
 
-@Rule(key = "S2733")
+@Rule(key = ExitHasBadArgumentsCheck.CHECK_KEY)
 public class ExitHasBadArgumentsCheck extends PythonCheck {
+
+  public static final String MESSAGE_ADD = "Add the missing argument.";
+  public static final String MESSAGE_REMOVE = "Remove the unnecessary argument.";
 
   private static final int EXIT_ARGUMENTS_NUMBER = 4;
 
+  public static final String CHECK_KEY = "S2733";
+
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.FUNCTION_DECLARATION, ctx -> {
-      PyFunction function = (PyFunction) ctx.syntaxNode();
-      ASTNode nameNode = function.getNameNode();
-      if (nameNode == null || !"__exit__".equals(nameNode.getText())) {
-        return;
-      }
-
-      PyParameterList parameters = function.getParameterList();
-      if (parameters.hasPositionalContainer() || parameters.hasKeywordContainer()) {
-        return;
-      }
-
-      int numberOfParameters = parameters.getParameters().length;
-      if (numberOfParameters < EXIT_ARGUMENTS_NUMBER) {
-        raiseIssue(ctx, nameNode, parameters, "Add the missing argument.");
-      } else if (numberOfParameters > EXIT_ARGUMENTS_NUMBER) {
-        raiseIssue(ctx, nameNode, parameters, "Remove the unnecessary argument.");
-      }
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return Collections.singleton(PythonGrammar.FUNCDEF);
   }
 
-  private static void raiseIssue(SubscriptionContext ctx, ASTNode nameNode, PyParameterList parameterList, String message) {
-    ctx.addIssue(IssueLocation.preciseLocation(nameNode.getPsi(), parameterList, message));
+  @Override
+  public void visitNode(AstNode node) {
+    if (!"__exit__".equals(node.getFirstChild(PythonGrammar.FUNCNAME).getToken().getValue())){
+      return;
+    }
+    AstNode varArgList = node.getFirstChild(PythonGrammar.TYPEDARGSLIST);
+    if (varArgList != null) {
+      List<AstNode> arguments = varArgList.getChildren(PythonGrammar.TFPDEF);
+      for (AstNode argument : arguments) {
+        if (argument.getPreviousSibling() != null && argument.getPreviousSibling().is(PythonPunctuator.MUL_MUL, PythonPunctuator.MUL)) {
+          return;
+        }
+      }
+      raiseIssue(node, arguments.size());
+    } else {
+      raiseIssue(node, 0);
+    }
+  }
+
+  private void raiseIssue(AstNode node, int argumentsNumber) {
+    if (argumentsNumber != EXIT_ARGUMENTS_NUMBER){
+      String message = MESSAGE_ADD;
+      if (argumentsNumber > EXIT_ARGUMENTS_NUMBER){
+        message = MESSAGE_REMOVE;
+      }
+      AstNode funcName = node.getFirstChild(PythonGrammar.FUNCNAME);
+      AstNode rightParenthesis = node.getFirstChild(PythonPunctuator.RPARENTHESIS);
+      addIssue(IssueLocation.preciseLocation(funcName, rightParenthesis, message));
+    }
   }
 }
 

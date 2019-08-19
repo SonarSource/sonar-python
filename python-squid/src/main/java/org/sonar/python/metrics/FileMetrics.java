@@ -19,31 +19,30 @@
  */
 package org.sonar.python.metrics;
 
-import com.intellij.psi.util.PsiTreeUtil;
-import com.jetbrains.python.psi.PyClass;
-import com.jetbrains.python.psi.PyFile;
-import com.jetbrains.python.psi.PyFunction;
-import com.jetbrains.python.psi.PyStatement;
+import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
+import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.api.PythonGrammar;
 
 public class FileMetrics {
 
   private int numberOfStatements;
   private int numberOfClasses;
-  private int cyclomaticComplexity;
+  private final ComplexityVisitor complexityVisitor = new ComplexityVisitor();
   private final CognitiveComplexityVisitor cognitiveComplexityVisitor = new CognitiveComplexityVisitor(null);
-  private final MetricsVisitor metricsVisitor;
+  private final FileLinesVisitor fileLinesVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
-  public FileMetrics(boolean ignoreHeaderComments, PyFile pyFile) {
-    numberOfStatements = PsiTreeUtil.findChildrenOfType(pyFile, PyStatement.class).size();
-    numberOfClasses = PsiTreeUtil.findChildrenOfType(pyFile, PyClass.class).size();
-    cyclomaticComplexity = ComplexityVisitor.complexity(pyFile);
-    pyFile.accept(cognitiveComplexityVisitor);
-    metricsVisitor = new MetricsVisitor(ignoreHeaderComments);
-    pyFile.accept(metricsVisitor);
-    for (PyFunction functionDef : PsiTreeUtil.findChildrenOfType(pyFile, PyFunction.class)) {
+  public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
+    AstNode rootTree = context.rootTree();
+    numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
+    numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
+    complexityVisitor.scanFile(context);
+    cognitiveComplexityVisitor.scanFile(context);
+    fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
+    fileLinesVisitor.scanFile(context);
+    for (AstNode functionDef : rootTree.getDescendants(PythonGrammar.FUNCDEF)) {
       functionComplexities.add(ComplexityVisitor.complexity(functionDef));
     }
   }
@@ -61,7 +60,7 @@ public class FileMetrics {
   }
 
   public int complexity() {
-    return cyclomaticComplexity;
+    return complexityVisitor.getComplexity();
   }
 
   public int cognitiveComplexity() {
@@ -72,8 +71,8 @@ public class FileMetrics {
     return functionComplexities;
   }
 
-  public MetricsVisitor metricsVisitor() {
-    return metricsVisitor;
+  public FileLinesVisitor fileLinesVisitor() {
+    return fileLinesVisitor;
   }
 
 }

@@ -14,13 +14,3 @@ SonarPython is a code analyzer for Python projects.
 Copyright 2011-2018 SonarSource.
 
 Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
-
-## Build
-
-Download required dependency:
-
-> ./tools/download-pycharm.sh
-
-Build the project using Maven:
-
-> mvn clean install

@@ -19,26 +19,25 @@
  */
 package org.sonar.python.checks;
 
-import com.intellij.psi.util.PsiTreeUtil;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyExpression;
-import com.jetbrains.python.psi.PyParenthesizedExpression;
-import java.util.List;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import java.util.Collections;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonGrammar;
 
-@Rule(key = "ExecStatementUsage")
+@Rule(key = ExecStatementUsageCheck.CHECK_KEY)
 public class ExecStatementUsageCheck extends PythonCheck {
+  public static final String CHECK_KEY = "ExecStatementUsage";
+  @Override
+  public Set<AstNodeType> subscribedKinds() {
+    return Collections.singleton(PythonGrammar.EXEC_STMT);
+  }
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.EXEC_STATEMENT, ctx -> {
-      List<PyExpression> expressions = PsiTreeUtil.getChildrenOfTypeAsList(ctx.syntaxNode(), PyExpression.class);
-      if (expressions.size() == 1 && expressions.get(0) instanceof PyParenthesizedExpression) {
-        return;
-      }
-      ctx.addIssue(ctx.syntaxNode().getFirstChild(), "Do not use exec statement.");
-    });
+  public void visitNode(AstNode astNode) {
+    addIssue(astNode.getFirstChild(), "Do not use exec statement.");
   }
 
 }

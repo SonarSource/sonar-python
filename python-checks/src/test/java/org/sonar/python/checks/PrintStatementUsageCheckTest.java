@@ -27,7 +27,6 @@ public class PrintStatementUsageCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/printStatementUsage.py", new PrintStatementUsageCheck());
-    PythonCheckVerifier.verify("src/test/resources/checks/printStatementUsage-validpython3.py", new PrintStatementUsageCheck());
   }
 
 }

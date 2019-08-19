@@ -19,47 +19,77 @@
  */
 package org.sonar.python.checks;
 
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.SyntaxTraverser;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.containers.JBIterable;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyStatement;
-import com.jetbrains.python.psi.PyStatementList;
-import java.util.Arrays;
-import java.util.Optional;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
+import java.util.Collections;
+import java.util.Set;
+import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.sslr.ast.AstSelect;
 
-@Rule(key = "S108")
+@Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
 public class EmptyNestedBlockCheck extends PythonCheck {
+  public static final String CHECK_KEY = "S108";
+  private static final Predicate<AstNode> NOT_PASS_PREDICATE = new NotPassPredicate();
+  private static final String MESSAGE = "Either remove or fill this block of code.";
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.STATEMENT_LIST, ctx -> {
-      PyStatementList statementList = (PyStatementList) ctx.syntaxNode();
-
-      PsiElement parent = statementList.getParent();
-      IElementType parentType = parent.getNode().getElementType();
-      if (parentType == PyElementTypes.FUNCTION_DECLARATION
-        || parentType == PyElementTypes.CLASS_DECLARATION
-        || parentType == PyElementTypes.EXCEPT_PART) {
-        return;
-      }
-
-      Optional<PyStatement> nonPassStatement = Arrays.stream(statementList.getStatements())
-        .filter(s -> s.getNode().getElementType() != PyElementTypes.PASS_STATEMENT)
-        .findFirst();
-      if (!nonPassStatement.isPresent() && !containsComment(statementList)) {
-        ctx.addIssue(statementList, "Either remove or fill this block of code.");
-      }
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return Collections.singleton(PythonGrammar.SUITE);
   }
 
-  private static boolean containsComment(PyStatementList statementList) {
-    JBIterable<PsiComment> comments = SyntaxTraverser.psiTraverser(statementList.getParent()).traverse().filter(PsiComment.class);
-    return !comments.isEmpty();
+  @Override
+  public void visitNode(AstNode suiteNode) {
+    if (suiteNode.getParent().is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF) || isInExcept(suiteNode)) {
+      return;
+    }
+
+    AstSelect suite = suiteNode.select();
+    AstSelect stmtLists = suite.children(PythonGrammar.STMT_LIST);
+    if (stmtLists.isEmpty()) {
+      AstSelect statementSelect = suite.children(PythonGrammar.STATEMENT);
+      if (statementSelect.children(PythonGrammar.COMPOUND_STMT).isNotEmpty()) {
+        return;
+      }
+      stmtLists = statementSelect.children(PythonGrammar.STMT_LIST);
+    }
+
+    AstSelect nonPassSimpleStatements = stmtLists
+      .children(PythonGrammar.SIMPLE_STMT)
+      .children()
+      .filter(NOT_PASS_PREDICATE);
+    if (nonPassSimpleStatements.isEmpty() && !containsComment(suiteNode)) {
+      addIssue(stmtLists.get(0), MESSAGE);
+    }
+  }
+
+  private static boolean isInExcept(AstNode suiteNode) {
+    return suiteNode.getParent().is(PythonGrammar.TRY_STMT)
+      && suiteNode.getPreviousSibling().getPreviousSibling().is(PythonGrammar.EXCEPT_CLAUSE);
+  }
+
+  private static boolean containsComment(AstNode suiteNode) {
+    for (Token token : suiteNode.getTokens()) {
+      for (Trivia trivia : token.getTrivia()) {
+        if (trivia.isComment()) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private static class NotPassPredicate implements Predicate<AstNode> {
+
+    @Override
+    public boolean test(AstNode node) {
+      return !node.getType().equals(PythonGrammar.PASS_STMT);
+    }
+
   }
 
 }

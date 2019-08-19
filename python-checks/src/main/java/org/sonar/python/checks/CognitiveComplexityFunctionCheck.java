@@ -19,22 +19,23 @@
  */
 package org.sonar.python.checks;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.jetbrains.python.PyElementTypes;
-import com.jetbrains.python.psi.PyFunction;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.CognitiveComplexityVisitor;
 
-@Rule(key = "S3776")
+@Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)
 public class CognitiveComplexityFunctionCheck extends PythonCheck {
 
   private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";
+  public static final String CHECK_KEY = "S3776";
   private static final int DEFAULT_THRESHOLD = 15;
 
   @RuleProperty(
@@ -48,24 +49,23 @@ public class CognitiveComplexityFunctionCheck extends PythonCheck {
   }
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(PyElementTypes.FUNCTION_DECLARATION, ctx -> {
-      PyFunction function = (PyFunction) ctx.syntaxNode();
-      if (PsiTreeUtil.getParentOfType(function, PyFunction.class) != null) {
-        return;
-      }
-      List<IssueLocation> secondaryLocations = new ArrayList<>();
-      int complexity = CognitiveComplexityVisitor.complexity(function, (node, message) -> secondaryLocations.add(IssueLocation.preciseLocation(node, message)));
-      if (complexity > threshold){
-        String message = String.format(MESSAGE, complexity, threshold);
-        ASTNode nameNode = function.getNameNode();
-        if (nameNode != null) {
-          PreciseIssue issue = ctx.addIssue(nameNode.getPsi(), message)
-            .withCost(complexity - threshold);
-          secondaryLocations.forEach(issue::secondary);
-        }
-      }
-    });
+  public Set<AstNodeType> subscribedKinds() {
+    return immutableSet(PythonGrammar.FUNCDEF);
+  }
+
+  @Override
+  public void visitNode(AstNode astNode) {
+    if (astNode.hasAncestor(PythonGrammar.FUNCDEF)) {
+      return;
+    }
+    List<IssueLocation> secondaryLocations = new ArrayList<>();
+    int complexity = CognitiveComplexityVisitor.complexity(astNode, (node, message) -> secondaryLocations.add(IssueLocation.preciseLocation(node, message)));
+    if (complexity > threshold){
+      String message = String.format(MESSAGE, complexity, threshold);
+      PreciseIssue issue = addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), message)
+        .withCost(complexity - threshold);
+      secondaryLocations.forEach(issue::secondary);
+    }
   }
 
 }
