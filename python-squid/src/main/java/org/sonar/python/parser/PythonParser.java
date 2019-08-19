@@ -31,7 +31,7 @@ public final class PythonParser {
   }
 
   public static Parser<Grammar> create(PythonConfiguration conf) {
-    return Parser.builder(PythonGrammar.create().build())
+    return Parser.builder(PythonGrammar.create())
       .withLexer(PythonLexer.create(conf)).build();
   }
 
