@@ -19,6 +19,7 @@
  */
 package org.sonar.python.api;
 
+import com.sonar.sslr.api.Grammar;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 
@@ -159,7 +160,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
   FILE_INPUT;
 
-  public static LexerfulGrammarBuilder create() {
+  public static Grammar create() {
     LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
 
     b.rule(FILE_INPUT).is(b.zeroOrMore(b.firstOf(NEWLINE, STATEMENT)), EOF);
@@ -170,9 +171,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     expressions(b);
 
     b.setRootRule(FILE_INPUT);
-    b.buildWithMemoizationOfMatchesForAllRules();
-
-    return b;
+    return b.buildWithMemoizationOfMatchesForAllRules();
   }
 
   public static void grammar(LexerfulGrammarBuilder b) {
