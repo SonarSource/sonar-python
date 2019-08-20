@@ -19,26 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-public interface Tree {
+import com.sonar.sslr.api.Token;
+import java.util.List;
 
-  enum Kind {
+public interface PyDelStatementTree extends PyStatementTree {
+  Token delKeyword();
 
-    ASSERT_STMT(PyAssertStatementTree.class),
-
-    DEL_STMT(PyDelStatementTree.class),
-
-    EXEC_STMT(PyExecStatementTree.class),
-
-    FILE_INPUT(PyFileInputTree.class),
-
-    PASS_STMT(PyPassStatementTree.class),
-
-    PRINT_STMT(PyPrintStatementTree.class);
-
-    final Class<? extends Tree> associatedInterface;
-
-    Kind(Class<? extends Tree> associatedInterface) {
-      this.associatedInterface = associatedInterface;
-    }
-  }
+  List<PyExpressionTree> expressions();
 }

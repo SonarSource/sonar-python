@@ -163,4 +163,26 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(passStatement).isNotNull();
     assertThat(passStatement.passKeyword().getValue()).isEqualTo("pass");
   }
+
+  @Test
+  public void delStatement() {
+    setRootRule(PythonGrammar.DEL_STMT);
+    AstNode astNode = p.parse("del foo");
+    PyDelStatementTree passStatement = new PythonTreeMaker().delStatement(astNode);
+    assertThat(passStatement).isNotNull();
+    assertThat(passStatement.delKeyword().getValue()).isEqualTo("del");
+    assertThat(passStatement.expressions()).hasSize(1);
+
+    astNode = p.parse("del foo, bar");
+    passStatement = new PythonTreeMaker().delStatement(astNode);
+    assertThat(passStatement).isNotNull();
+    assertThat(passStatement.delKeyword().getValue()).isEqualTo("del");
+    assertThat(passStatement.expressions()).hasSize(2);
+
+    astNode = p.parse("del *foo");
+    passStatement = new PythonTreeMaker().delStatement(astNode);
+    assertThat(passStatement).isNotNull();
+    assertThat(passStatement.delKeyword().getValue()).isEqualTo("del");
+    assertThat(passStatement.expressions()).hasSize(1);
+  }
 }

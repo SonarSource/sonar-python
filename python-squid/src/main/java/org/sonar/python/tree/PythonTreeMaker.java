@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -102,6 +103,15 @@ public class PythonTreeMaker {
 
   public PyPassStatementTree passStatement(AstNode astNode) {
     return new PyPassStatementTreeImpl(astNode, astNode.getTokens().get(0));
+  }
+
+
+  public PyDelStatementTree delStatement(AstNode astNode) {
+    AstNode exprListNode = astNode.getFirstChild(PythonGrammar.EXPRLIST);
+    List<PyExpressionTree> expressionTrees = exprListNode.getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    return new PyDelStatementTreeImpl(astNode, astNode.getTokens().get(0), expressionTrees);
   }
 
   // Compound statements

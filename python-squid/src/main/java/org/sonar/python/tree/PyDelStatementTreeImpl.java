@@ -17,28 +17,36 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-public interface Tree {
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import java.util.List;
+import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
 
-  enum Kind {
+public class PyDelStatementTreeImpl extends PyTree implements PyDelStatementTree {
+  private final Token delKeyword;
+  private final List<PyExpressionTree> expressionTrees;
 
-    ASSERT_STMT(PyAssertStatementTree.class),
+  public PyDelStatementTreeImpl(AstNode astNode, Token delKeyword, List<PyExpressionTree> expressionTrees) {
+    super(astNode);
+    this.delKeyword = delKeyword;
+    this.expressionTrees = expressionTrees;
+  }
 
-    DEL_STMT(PyDelStatementTree.class),
+  @Override
+  public Token delKeyword() {
+    return delKeyword;
+  }
 
-    EXEC_STMT(PyExecStatementTree.class),
+  @Override
+  public List<PyExpressionTree> expressions() {
+    return expressionTrees;
+  }
 
-    FILE_INPUT(PyFileInputTree.class),
-
-    PASS_STMT(PyPassStatementTree.class),
-
-    PRINT_STMT(PyPrintStatementTree.class);
-
-    final Class<? extends Tree> associatedInterface;
-
-    Kind(Class<? extends Tree> associatedInterface) {
-      this.associatedInterface = associatedInterface;
-    }
+  @Override
+  public Kind getKind() {
+    return Kind.DEL_STMT;
   }
 }
