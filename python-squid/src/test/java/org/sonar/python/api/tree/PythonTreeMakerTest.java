@@ -138,4 +138,20 @@ public class PythonTreeMakerTest extends RuleTest {
 
     // TODO: exec stmt should parse exec ('foo', globals, locals); see https://docs.python.org/2/reference/simple_stmts.html#exec
   }
+
+  @Test
+  public void assertStatement() {
+    setRootRule(PythonGrammar.ASSERT_STMT);
+    AstNode astNode = p.parse("assert x");
+    PyAssertStatementTree assertStatement = new PythonTreeMaker().assertStatement(astNode);
+    assertThat(assertStatement).isNotNull();
+    assertThat(assertStatement.assertKeyword().getValue()).isEqualTo("assert");
+    assertThat(assertStatement.expressions()).hasSize(1);
+
+    astNode = p.parse("assert x, y");
+    assertStatement = new PythonTreeMaker().assertStatement(astNode);
+    assertThat(assertStatement).isNotNull();
+    assertThat(assertStatement.assertKeyword().getValue()).isEqualTo("assert");
+    assertThat(assertStatement.expressions()).hasSize(2);
+  }
 }

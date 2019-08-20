@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -89,6 +90,12 @@ public class PythonTreeMaker {
       return new PyExecStatementTreeImpl(astNode, astNode.getTokens().get(0), expression);
     }
     return new PyExecStatementTreeImpl(astNode, astNode.getTokens().get(0), expression, expressions.get(0), expressions.size() == 2 ? expressions.get(1) : null);
+  }
+
+
+  public PyAssertStatementTree assertStatement(AstNode astNode) {
+    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    return new PyAssertStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
   }
 
   // Compound statements

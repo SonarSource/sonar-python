@@ -17,24 +17,36 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-public interface Tree {
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import java.util.List;
+import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
 
-  enum Kind {
+public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStatementTree {
+  private final Token assertKeyword;
+  private final List<PyExpressionTree> expressions;
 
-    ASSERT_STMT(PyAssertStatementTree.class),
+  public PyAssertStatementTreeImpl(AstNode astNode, Token assertKeyword, List<PyExpressionTree> expressions) {
+    super(astNode);
+    this.assertKeyword = assertKeyword;
+    this.expressions = expressions;
+  }
 
-    EXEC_STMT(PyExecStatementTree.class),
+  @Override
+  public Token assertKeyword() {
+    return assertKeyword;
+  }
 
-    FILE_INPUT(PyFileInputTree.class),
+  @Override
+  public List<PyExpressionTree> expressions() {
+    return expressions;
+  }
 
-    PRINT_STMT(PyPrintStatementTree.class);
-
-    final Class<? extends Tree> associatedInterface;
-
-    Kind(Class<? extends Tree> associatedInterface) {
-      this.associatedInterface = associatedInterface;
-    }
+  @Override
+  public Kind getKind() {
+    return Kind.ASSERT_STMT;
   }
 }
