@@ -21,7 +21,9 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
+// FIXME : this class is a placeholder while we implement concrete type of expressions and should be deleted.
 public class PyExpressionTreeImpl extends PyTree implements PyExpressionTree {
   public PyExpressionTreeImpl(AstNode astNode) {
     super(astNode);
@@ -32,4 +34,8 @@ public class PyExpressionTreeImpl extends PyTree implements PyExpressionTree {
     return null;
   }
 
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    //TODO : remove
+  }
 }

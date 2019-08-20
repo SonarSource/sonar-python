@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyPrintStatementTreeImpl extends PyTree implements PyPrintStatementTree {
   private final Token printKeyword;
@@ -48,5 +49,10 @@ public class PyPrintStatementTreeImpl extends PyTree implements PyPrintStatement
   @Override
   public Kind getKind() {
     return Kind.PRINT_STMT;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitPrintStatement(this);
   }
 }

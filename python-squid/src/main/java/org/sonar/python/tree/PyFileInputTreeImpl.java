@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
@@ -42,5 +43,10 @@ public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
   @Override
   public List<PyStatementTree> statements() {
     return statements;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitFileInput(this);
   }
 }

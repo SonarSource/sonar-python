@@ -24,6 +24,8 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTree {
   private final Token elseKeyword;
@@ -37,7 +39,7 @@ public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTr
 
   @Override
   public Kind getKind() {
-    return null;
+    return Tree.Kind.ELSE_STATEMENT;
   }
 
   @Override
@@ -48,5 +50,10 @@ public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTr
   @Override
   public List<PyStatementTree> body() {
     return body;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitElseStatement(this);
   }
 }

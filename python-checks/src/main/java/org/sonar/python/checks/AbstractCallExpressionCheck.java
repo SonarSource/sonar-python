@@ -23,11 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.semantic.Symbol;
 
-public abstract class AbstractCallExpressionCheck extends PythonCheck {
+public abstract class AbstractCallExpressionCheck extends PythonCheckAstNode {
 
   protected abstract Set<String> functionsToCheck();
 

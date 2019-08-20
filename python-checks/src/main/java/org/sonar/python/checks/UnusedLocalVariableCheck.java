@@ -28,12 +28,12 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S1481")
-public class UnusedLocalVariableCheck extends PythonCheck {
+public class UnusedLocalVariableCheck extends PythonCheckAstNode {
 
   private static final Pattern IDENTIFIER_SEPARATOR = Pattern.compile("[^a-zA-Z0-9_]+");
 

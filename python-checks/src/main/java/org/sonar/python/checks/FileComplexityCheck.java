@@ -23,11 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "FileComplexity")
-public class FileComplexityCheck extends PythonCheck {
+public class FileComplexityCheck extends PythonCheckAstNode {
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 200;
 
   @RuleProperty(

@@ -42,6 +42,7 @@ import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;

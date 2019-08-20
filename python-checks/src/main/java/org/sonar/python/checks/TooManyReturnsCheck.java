@@ -27,12 +27,12 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = TooManyReturnsCheck.CHECK_KEY)
-public class TooManyReturnsCheck extends PythonCheck {
+public class TooManyReturnsCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S1142";
 
   private static final int DEFAULT_MAX = 3;

@@ -23,13 +23,13 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
-public class DebugModeCheck extends PythonCheck {
+public class DebugModeCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S4507";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final Set<String> debugProperties = immutableSet("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");

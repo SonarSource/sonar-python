@@ -24,12 +24,12 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = BackticksUsageCheck.CHECK_KEY)
-public class BackticksUsageCheck extends PythonCheck {
+public class BackticksUsageCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "BackticksUsage";
 
   @Override

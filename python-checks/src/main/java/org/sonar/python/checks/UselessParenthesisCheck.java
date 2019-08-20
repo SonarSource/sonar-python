@@ -25,13 +25,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
-public class UselessParenthesisCheck extends PythonCheck {
+public class UselessParenthesisCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1110";
 

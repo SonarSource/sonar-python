@@ -19,15 +19,14 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.tree.PyFileInputTreeImpl;
 import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilderVisitor;
+import org.sonar.python.tree.PyFileInputTreeImpl;
 
 public class PythonVisitorContext {
 
@@ -54,7 +53,7 @@ public class PythonVisitorContext {
     this.parsingException = parsingException;
   }
 
-  public AstNode rootTree() {
+  public PyFileInputTree rootTree() {
     return rootTree;
   }
 

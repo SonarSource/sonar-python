@@ -27,12 +27,12 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
-public class EmptyNestedBlockCheck extends PythonCheck {
+public class EmptyNestedBlockCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S108";
   private static final Predicate<AstNode> NOT_PASS_PREDICATE = new NotPassPredicate();
   private static final String MESSAGE = "Either remove or fill this block of code.";

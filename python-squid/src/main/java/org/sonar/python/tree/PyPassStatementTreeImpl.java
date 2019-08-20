@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import org.sonar.python.api.tree.PyPassStatementTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyPassStatementTreeImpl extends PyTree implements PyPassStatementTree {
   private final Token passKeyword;
@@ -39,5 +40,10 @@ public class PyPassStatementTreeImpl extends PyTree implements PyPassStatementTr
   @Override
   public Kind getKind() {
     return Kind.PASS_STMT;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitPassStatement(this);
   }
 }

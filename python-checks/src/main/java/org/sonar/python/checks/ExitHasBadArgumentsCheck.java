@@ -26,12 +26,12 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = ExitHasBadArgumentsCheck.CHECK_KEY)
-public class ExitHasBadArgumentsCheck extends PythonCheck {
+public class ExitHasBadArgumentsCheck extends PythonCheckAstNode {
 
   public static final String MESSAGE_ADD = "Add the missing argument.";
   public static final String MESSAGE_REMOVE = "Remove the unnecessary argument.";

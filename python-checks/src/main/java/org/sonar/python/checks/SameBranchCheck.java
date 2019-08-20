@@ -28,7 +28,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
@@ -36,7 +36,7 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = SameBranchCheck.CHECK_KEY)
-public class SameBranchCheck extends PythonCheck {
+public class SameBranchCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S1871";
   public static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
 

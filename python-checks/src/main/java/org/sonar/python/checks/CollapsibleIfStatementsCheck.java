@@ -19,54 +19,50 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.PythonCheckTree;
+import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
-public class CollapsibleIfStatementsCheck extends PythonCheck {
+public class CollapsibleIfStatementsCheck extends PythonCheckTree {
   public static final String CHECK_KEY = "S1066";
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";
 
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.IF_STMT);
-  }
+  private Set<Tree> ignored = new HashSet<>();
 
   @Override
-  public void visitNode(AstNode node) {
-    AstNode suite = node.getLastChild(PythonGrammar.SUITE);
-    if (suite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
-      return;
-    }
-    AstNode singleIfChild = singleIfChild(suite);
-    if (singleIfChild != null && !hasElseOrElif(singleIfChild)) {
-      addIssue(singleIfChild.getToken(), MESSAGE)
-        .secondary(node.getFirstChild(), "enclosing");
-    }
+  public void scanFile(PythonVisitorContext visitorContext) {
+    ignored.clear();
+    super.scanFile(visitorContext);
   }
 
-  private static boolean hasElseOrElif(AstNode ifNode) {
-    return ifNode.hasDirectChildren(PythonKeyword.ELIF) || ifNode.hasDirectChildren(PythonKeyword.ELSE);
-  }
-
-  private static AstNode singleIfChild(AstNode suite) {
-    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-    if (statements.size() == 1) {
-      AstSelect nestedIf = statements.get(0).select()
-        .children(PythonGrammar.COMPOUND_STMT)
-        .children(PythonGrammar.IF_STMT);
-      if (nestedIf.size() == 1) {
-        return nestedIf.get(0);
+  @Override
+  public void visitIfStatement(PyIfStatementTree ifStatement) {
+    List<PyStatementTree> statements = ifStatement.body();
+    if (!ifStatement.elifBranches().isEmpty()) {
+      if (ifStatement.elseBranch() == null) {
+        ignored.addAll(ifStatement.elifBranches().subList(0, ifStatement.elifBranches().size() - 1));
+      } else {
+        ignored.addAll(ifStatement.elifBranches());
       }
     }
-    return null;
+    if (!ignored.contains(ifStatement)
+      && ifStatement.elseBranch() == null
+      && ifStatement.elifBranches().isEmpty()
+      && statements.size() == 1
+      && statements.get(0).is(Tree.Kind.IF_STATEMENT)) {
+      PyIfStatementTree singleIfChild = (PyIfStatementTree) statements.get(0);
+      if (singleIfChild.isElif() || singleIfChild.elseBranch() != null || !singleIfChild.elifBranches().isEmpty()) {
+        return;
+      }
+      addIssue(singleIfChild.keyword(), MESSAGE).secondary(ifStatement.astNode(), "enclosing");
+    }
+    super.visitIfStatement(ifStatement);
   }
 }

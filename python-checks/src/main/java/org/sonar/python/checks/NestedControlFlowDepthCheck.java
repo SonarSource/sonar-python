@@ -27,11 +27,11 @@ import java.util.Iterator;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = NestedControlFlowDepthCheck.CHECK_KEY)
-public class NestedControlFlowDepthCheck extends PythonCheck {
+public class NestedControlFlowDepthCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S134";
   private static final int DEFAULT_MAX = 4;

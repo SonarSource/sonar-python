@@ -34,4 +34,14 @@ public abstract class PyTree extends AstNode implements Tree {
   }
 
   public abstract Kind getKind();
+
+  @Override
+  public boolean is(Kind kind) {
+    return kind == getKind();
+  }
+
+  @Override
+  public AstNode astNode() {
+    return node;
+  }
 }

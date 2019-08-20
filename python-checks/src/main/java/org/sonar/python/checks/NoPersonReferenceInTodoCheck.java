@@ -26,10 +26,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = NoPersonReferenceInTodoCheck.CHECK_KEY)
-public class NoPersonReferenceInTodoCheck extends PythonCheck {
+public class NoPersonReferenceInTodoCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1707";
   public static final String MESSAGE = "Add a citation of the person who can best explain this comment.";

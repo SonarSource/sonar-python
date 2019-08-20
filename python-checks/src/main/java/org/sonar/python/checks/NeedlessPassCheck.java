@@ -25,13 +25,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = NeedlessPassCheck.CHECK_KEY)
-public class NeedlessPassCheck extends PythonCheck {
+public class NeedlessPassCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S2772";
 

@@ -17,22 +17,25 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.api.tree;
 
-import java.util.regex.Pattern;
-import org.sonar.python.PythonCheckAstNode;
+public interface PyTreeVisitor {
 
-public abstract class AbstractNameCheck extends PythonCheckAstNode {
+  void visitFileInput(PyFileInputTree pyFileInputTree);
 
-  private Pattern pattern = null;
+  void visitIfStatement(PyIfStatementTree pyIfStatementTree);
 
-  protected Pattern pattern() {
-    if (pattern == null) {
-      pattern = Pattern.compile(format());
-    }
-    return pattern;
-  }
+  void visitElseStatement(PyElseStatementTree pyElseStatementTree);
 
-  protected abstract String format();
+  void visitExecStatement(PyExecStatementTree pyExecStatementTree);
 
+  void visitAssertStatement(PyAssertStatementTree pyAssertStatementTree);
+
+  void visitDelStatement(PyDelStatementTree pyDelStatementTree);
+
+  void visitPassStatement(PyPassStatementTree pyPassStatementTree);
+
+  void visitPrintStatement(PyPrintStatementTree pyPrintStatementTree);
+
+  void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree);
 }

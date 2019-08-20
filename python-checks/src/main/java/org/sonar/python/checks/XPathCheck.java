@@ -24,10 +24,10 @@ import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = XPathCheck.CHECK_KEY)
-public class XPathCheck extends PythonCheck {
+public class XPathCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";

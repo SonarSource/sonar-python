@@ -26,11 +26,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.DocstringExtractor;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = MissingDocstringCheck.CHECK_KEY)
-public class MissingDocstringCheck extends PythonCheck {
+public class MissingDocstringCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1720";
 

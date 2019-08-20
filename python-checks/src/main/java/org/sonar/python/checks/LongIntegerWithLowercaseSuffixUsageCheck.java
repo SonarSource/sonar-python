@@ -24,11 +24,11 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonTokenType;
 
 @Rule(key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY)
-public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonCheck {
+public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "LongIntegerWithLowercaseSuffixUsage";
   private static final String MESSAGE = "Replace suffix in long integers from lower case \"l\" to upper case \"L\".";

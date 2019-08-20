@@ -25,13 +25,13 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = RegexCheck.CHECK_KEY)
-public class RegexCheck extends PythonCheck {
+public class RegexCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S4784";
   private static final String MESSAGE = "Make sure that using a regular expression is safe here.";
   private static final int REGEX_ARGUMENT = 0;

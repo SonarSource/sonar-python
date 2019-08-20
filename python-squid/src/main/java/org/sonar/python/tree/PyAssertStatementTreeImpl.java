@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStatementTree {
   private final Token assertKeyword;
@@ -48,5 +49,10 @@ public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStateme
   @Override
   public Kind getKind() {
     return Kind.ASSERT_STMT;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitAssertStatement(this);
   }
 }

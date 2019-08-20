@@ -28,6 +28,8 @@ import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
@@ -99,6 +101,11 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   @Override
   public Kind getKind() {
-    return null;
+    return Tree.Kind.IF_STATEMENT;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitIfStatement(this);
   }
 }

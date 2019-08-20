@@ -25,12 +25,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 
 @Rule(key = InitReturnsValueCheck.CHECK_KEY)
-public class InitReturnsValueCheck extends PythonCheck {
+public class InitReturnsValueCheck extends PythonCheckAstNode {
 
   public static final String MESSAGE_RETURN = "Remove this return value.";
   public static final String MESSAGE_YIELD = "Remove this yield statement.";

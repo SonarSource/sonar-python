@@ -24,10 +24,10 @@ import com.sonar.sslr.api.Token;
 import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = LineLengthCheck.CHECK_KEY)
-public class LineLengthCheck extends PythonCheck {
+public class LineLengthCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "LineLength";
   private static final int DEFAULT_MAXIMUM_LINE_LENGTH = 120;

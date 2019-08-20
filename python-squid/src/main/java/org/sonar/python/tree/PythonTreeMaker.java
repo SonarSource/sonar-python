@@ -48,6 +48,8 @@ public class PythonTreeMaker {
   private PyStatementTree statement(AstNode astNode) {
     if (astNode.is(PythonGrammar.IF_STMT)) {
       return ifStatement(astNode);
+    } else if (astNode.is(PythonGrammar.PASS_STMT)) {
+      return passStatement(astNode);
     }
     if (astNode.is(PythonGrammar.PRINT_STMT)) {
       return printStatement(astNode);

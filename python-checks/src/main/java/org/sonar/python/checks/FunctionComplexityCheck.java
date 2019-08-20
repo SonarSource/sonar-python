@@ -25,12 +25,12 @@ import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "FunctionComplexity")
-public class FunctionComplexityCheck extends PythonCheck {
+public class FunctionComplexityCheck extends PythonCheckAstNode {
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 15;
   private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";
 

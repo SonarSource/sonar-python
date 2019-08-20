@@ -23,11 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = AfterJumpStatementCheck.CHECK_KEY)
-public class AfterJumpStatementCheck extends PythonCheck {
+public class AfterJumpStatementCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1763";
 

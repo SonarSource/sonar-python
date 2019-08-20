@@ -30,11 +30,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = LocalVariableAndParameterNameConventionCheck.CHECK_KEY)
-public class LocalVariableAndParameterNameConventionCheck extends PythonCheck {
+public class LocalVariableAndParameterNameConventionCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S117";
 

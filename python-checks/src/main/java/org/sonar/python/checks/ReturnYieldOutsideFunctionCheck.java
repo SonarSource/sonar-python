@@ -23,11 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = ReturnYieldOutsideFunctionCheck.CHECK_KEY)
-public class ReturnYieldOutsideFunctionCheck extends PythonCheck {
+public class ReturnYieldOutsideFunctionCheck extends PythonCheckAstNode {
 
   public static final String MESSAGE = "Remove this use of \"%s\".";
   public static final String CHECK_KEY = "S2711";

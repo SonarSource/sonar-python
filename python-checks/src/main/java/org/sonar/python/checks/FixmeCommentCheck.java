@@ -24,10 +24,10 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = FixmeCommentCheck.CHECK_KEY)
-public class FixmeCommentCheck extends PythonCheck {
+public class FixmeCommentCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1134";
 

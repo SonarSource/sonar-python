@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyReturnStatementTreeImpl extends PyTree implements PyReturnStatementTree {
   private final Token returnKeyword;
@@ -48,5 +49,10 @@ public class PyReturnStatementTreeImpl extends PyTree implements PyReturnStateme
   @Override
   public Kind getKind() {
     return Kind.RETURN_STMT;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitReturnStatement(this);
   }
 }

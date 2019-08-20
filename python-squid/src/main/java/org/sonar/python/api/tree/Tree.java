@@ -19,10 +19,17 @@
  */
 package org.sonar.python.api.tree;
 
+import com.sonar.sslr.api.AstNode;
+
 public interface Tree {
 
-  enum Kind {
+  void accept(PyTreeVisitor visitor);
 
+  boolean is(Kind kind);
+
+  AstNode astNode();
+
+  enum Kind {
     ASSERT_STMT(PyAssertStatementTree.class),
 
     DEL_STMT(PyDelStatementTree.class),
@@ -35,7 +42,12 @@ public interface Tree {
 
     PRINT_STMT(PyPrintStatementTree.class),
 
-    RETURN_STMT(PyReturnStatementTree.class);
+    RETURN_STMT(PyReturnStatementTree.class),
+
+    IF_STATEMENT(PyIfStatementTree.class),
+
+    ELSE_STATEMENT(PyElseStatementTree.class),
+    ;
 
     final Class<? extends Tree> associatedInterface;
 

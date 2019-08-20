@@ -25,14 +25,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 /**
  * Note that implementation differs from AbstractOneStatementPerLineCheck due to Python specifics
  */
 @Rule(key = OneStatementPerLineCheck.CHECK_KEY)
-public class OneStatementPerLineCheck extends PythonCheck {
+public class OneStatementPerLineCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "OneStatementPerLine";
   private final Map<Integer, Integer> statementsPerLine = new HashMap<>();

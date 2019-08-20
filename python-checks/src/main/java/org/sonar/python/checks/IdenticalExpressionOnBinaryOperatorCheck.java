@@ -26,11 +26,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = "S1764")
-public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheck {
+public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheckAstNode {
 
   private static final List<String> EXCLUDED_OPERATOR_TYPES = Collections.unmodifiableList(Arrays.asList(
     "*",
