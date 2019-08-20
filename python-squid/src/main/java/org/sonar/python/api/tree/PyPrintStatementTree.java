@@ -19,17 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-public interface Tree {
+import com.sonar.sslr.api.Token;
+import java.util.List;
 
-  enum Kind {
-    FILE_INPUT(PyFileInputTree.class),
-
-    PRINT_STMT(PyPrintStatementTree.class);
-
-    final Class<? extends Tree> associatedInterface;
-
-    Kind(Class<? extends Tree> associatedInterface) {
-      this.associatedInterface = associatedInterface;
-    }
-  }
+public interface PyPrintStatementTree extends Tree {
+  Token printKeyword();
+  List<PyExpressionTree> expression();
 }

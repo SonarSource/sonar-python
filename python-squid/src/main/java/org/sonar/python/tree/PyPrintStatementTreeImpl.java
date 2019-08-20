@@ -17,19 +17,36 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-public interface Tree {
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import java.util.List;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyPrintStatementTree;
 
-  enum Kind {
-    FILE_INPUT(PyFileInputTree.class),
+public class PyPrintStatementTreeImpl extends PyTree implements PyPrintStatementTree {
+  private final Token printKeyword;
+  private final List<PyExpressionTree> expressions;
 
-    PRINT_STMT(PyPrintStatementTree.class);
+  public PyPrintStatementTreeImpl(AstNode astNode, Token printKeyword, List<PyExpressionTree> expressions) {
+    super(astNode);
+    this.printKeyword = printKeyword;
+    this.expressions = expressions;
+  }
 
-    final Class<? extends Tree> associatedInterface;
+  @Override
+  public Token printKeyword() {
+    return printKeyword;
+  }
 
-    Kind(Class<? extends Tree> associatedInterface) {
-      this.associatedInterface = associatedInterface;
-    }
+  @Override
+  public List<PyExpressionTree> expression() {
+    return expressions;
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.PRINT_STMT;
   }
 }

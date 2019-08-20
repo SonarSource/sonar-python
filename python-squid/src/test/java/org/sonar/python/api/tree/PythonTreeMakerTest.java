@@ -87,4 +87,25 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyIfStatementTree.body()).hasSize(1);
   }
 
+  @Test
+  public void printStatement() {
+    setRootRule(PythonGrammar.PRINT_STMT);
+    AstNode astNode = p.parse("print 'foo'");
+    PyPrintStatementTree printStmt = new PythonTreeMaker().printStatement(astNode);
+    assertThat(printStmt).isNotNull();
+    assertThat(printStmt.printKeyword().getValue()).isEqualTo("print");
+    assertThat(printStmt.expression()).hasSize(1);
+
+    astNode = p.parse("print 'foo', 'bar'");
+    printStmt = new PythonTreeMaker().printStatement(astNode);
+    assertThat(printStmt).isNotNull();
+    assertThat(printStmt.printKeyword().getValue()).isEqualTo("print");
+    assertThat(printStmt.expression()).hasSize(2);
+
+    astNode = p.parse("print >> 'foo'");
+    printStmt = new PythonTreeMaker().printStatement(astNode);
+    assertThat(printStmt).isNotNull();
+    assertThat(printStmt.printKeyword().getValue()).isEqualTo("print");
+    assertThat(printStmt.expression()).hasSize(1);
+  }
 }

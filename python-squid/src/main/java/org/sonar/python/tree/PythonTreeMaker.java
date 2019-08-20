@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
 
 public class PythonTreeMaker {
@@ -72,6 +73,15 @@ public class PythonTreeMaker {
         .map(AstNode::getFirstChild);
     }).collect(Collectors.toList());
   }
+
+  // Simple statements
+
+  public PyPrintStatementTree printStatement(AstNode astNode) {
+    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    return new PyPrintStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
+  }
+
+  // Compound statements
 
   public PyIfStatementTree ifStatement(AstNode astNode) {
     Token ifToken = astNode.getTokens().get(0);
