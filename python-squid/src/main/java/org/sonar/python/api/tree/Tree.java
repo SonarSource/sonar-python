@@ -32,6 +32,10 @@ public interface Tree {
   enum Kind {
     ASSERT_STMT(PyAssertStatementTree.class),
 
+    BREAK_STMT(PyBreakStatementTree.class),
+
+    CONTINUE_STMT(PyContinueStatementTree.class),
+
     DEL_STMT(PyDelStatementTree.class),
 
     ELSE_STMT(PyElseStatementTree.class),

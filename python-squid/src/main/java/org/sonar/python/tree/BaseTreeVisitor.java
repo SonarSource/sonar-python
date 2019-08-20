@@ -22,6 +22,8 @@ package org.sonar.python.tree;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -119,5 +121,15 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree) {
     scan(pyRaiseStatementTree.expressions());
     scan(pyRaiseStatementTree.fromExpression());
+  }
+
+  @Override
+  public void visitBreakStatement(PyBreakStatementTree pyBreakStatementTree) {
+    // nothing to visit for break statement
+  }
+
+  @Override
+  public void visitContinueStatement(PyContinueStatementTree pyContinueStatementTree) {
+    // nothing to visit for continue statement
   }
 }

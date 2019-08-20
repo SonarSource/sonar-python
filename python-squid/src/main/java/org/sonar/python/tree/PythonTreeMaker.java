@@ -28,6 +28,8 @@ import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -79,6 +81,13 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.RAISE_STMT)) {
       return raiseStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.BREAK_STMT)) {
+      return breakStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.CONTINUE_STMT)) {
+      return continueStatement(astNode);
+    }
+
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
   }
@@ -186,6 +195,14 @@ public class PythonTreeMaker {
       .collect(Collectors.toList());
     return new PyRaiseStatementTreeImpl(astNode, astNode.getFirstChild(PythonKeyword.RAISE).getToken(),
       expressionTrees, fromKeyword == null ? null : fromKeyword.getToken(), fromExpression == null ? null : expression(fromExpression));
+  }
+
+  public PyBreakStatementTree breakStatement(AstNode astNode) {
+    return new PyBreakStatementTreeImpl(astNode, astNode.getToken());
+  }
+
+  public PyContinueStatementTree continueStatement(AstNode astNode) {
+    return new PyContinueStatementTreeImpl(astNode, astNode.getToken());
   }
   // Compound statements
 

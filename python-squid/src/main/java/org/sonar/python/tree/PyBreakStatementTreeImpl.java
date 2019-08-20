@@ -21,55 +21,29 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
-import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyRaiseStatementTree;
+import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 
-public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatementTree {
-  private final Token raiseKeyword;
-  private final List<PyExpressionTree> expressions;
-  private final Token fromKeyword;
-  private final PyExpressionTree fromExpression;
+public class PyBreakStatementTreeImpl extends PyTree implements PyBreakStatementTree {
+  private final Token breakKeyword;
 
-  public PyRaiseStatementTreeImpl(AstNode astNode, Token raiseKeyword, List<PyExpressionTree> expressions, Token fromKeyword, PyExpressionTree fromExpression) {
+  public PyBreakStatementTreeImpl(AstNode astNode, Token breakKeyword) {
     super(astNode);
-    this.raiseKeyword = raiseKeyword;
-    this.expressions = expressions;
-    this.fromKeyword = fromKeyword;
-    this.fromExpression = fromExpression;
+    this.breakKeyword = breakKeyword;
   }
 
   @Override
-  public Token raiseKeyword() {
-    return raiseKeyword;
-  }
-
-  @CheckForNull
-  @Override
-  public Token fromKeyword() {
-    return fromKeyword;
-  }
-
-  @CheckForNull
-  @Override
-  public PyExpressionTree fromExpression() {
-    return fromExpression;
-  }
-
-  @Override
-  public List<PyExpressionTree> expressions() {
-    return expressions;
+  public Token breakKeyword() {
+    return breakKeyword;
   }
 
   @Override
   public Kind getKind() {
-    return Kind.RAISE_STMT;
+    return Kind.BREAK_STMT;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitRaiseStatement(this);
+    visitor.visitBreakStatement(this);
   }
 }

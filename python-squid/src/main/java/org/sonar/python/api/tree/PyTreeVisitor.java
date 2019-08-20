@@ -44,4 +44,8 @@ public interface PyTreeVisitor {
   void visitYieldExpression(PyYieldExpressionTree pyYieldExpressionTree);
 
   void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree);
+
+  void visitBreakStatement(PyBreakStatementTree pyBreakStatementTree);
+
+  void visitContinueStatement(PyContinueStatementTree pyContinueStatementTree);
 }

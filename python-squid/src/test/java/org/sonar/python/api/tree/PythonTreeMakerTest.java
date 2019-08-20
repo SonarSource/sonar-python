@@ -74,6 +74,16 @@ public class PythonTreeMakerTest extends RuleTest {
     pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).hasSize(1);
     assertThat(pyTree.statements().get(0)).isInstanceOf(PyRaiseStatementTree.class);
+
+    astNode = p.parse("break");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyBreakStatementTree.class);
+
+    astNode = p.parse("continue");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyContinueStatementTree.class);
   }
 
   @Test
@@ -307,5 +317,23 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(raiseStatement.fromKeyword()).isNull();
     assertThat(raiseStatement.fromExpression()).isNull();
     assertThat(raiseStatement.expressions()).isEmpty();
+  }
+
+  @Test
+  public void breakStatement() {
+    setRootRule(PythonGrammar.BREAK_STMT);
+    AstNode astNode = p.parse("break");
+    PyBreakStatementTree breakStatement = new PythonTreeMaker().breakStatement(astNode);
+    assertThat(breakStatement).isNotNull();
+    assertThat(breakStatement.breakKeyword().getValue()).isEqualTo("break");
+  }
+
+  @Test
+  public void continueStatement() {
+    setRootRule(PythonGrammar.CONTINUE_STMT);
+    AstNode astNode = p.parse("continue");
+    PyContinueStatementTree continueStatement = new PythonTreeMaker().continueStatement(astNode);
+    assertThat(continueStatement).isNotNull();
+    assertThat(continueStatement.continueKeyword().getValue()).isEqualTo("continue");
   }
 }
