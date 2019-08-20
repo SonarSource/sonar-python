@@ -35,6 +35,7 @@ import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
 
 public class PythonTreeMaker {
@@ -48,6 +49,25 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.IF_STMT)) {
       return ifStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.PRINT_STMT)) {
+      return printStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.EXEC_STMT)) {
+      return execStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.ASSERT_STMT)) {
+      return assertStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.PASS_STMT)) {
+      return passStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.DEL_STMT)) {
+      return delStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.RETURN_STMT)) {
+      return returnStatement(astNode);
+    }
+    // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
   }
 
@@ -94,17 +114,14 @@ public class PythonTreeMaker {
     return new PyExecStatementTreeImpl(astNode, astNode.getTokens().get(0), expression, expressions.get(0), expressions.size() == 2 ? expressions.get(1) : null);
   }
 
-
   public PyAssertStatementTree assertStatement(AstNode astNode) {
     List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
     return new PyAssertStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
   }
 
-
   public PyPassStatementTree passStatement(AstNode astNode) {
     return new PyPassStatementTreeImpl(astNode, astNode.getTokens().get(0));
   }
-
 
   public PyDelStatementTree delStatement(AstNode astNode) {
     AstNode exprListNode = astNode.getFirstChild(PythonGrammar.EXPRLIST);
@@ -112,6 +129,17 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new PyDelStatementTreeImpl(astNode, astNode.getTokens().get(0), expressionTrees);
+  }
+
+  public PyReturnStatementTree returnStatement(AstNode astNode) {
+    AstNode testListNode = astNode.getFirstChild(PythonGrammar.TESTLIST);
+    List<PyExpressionTree> expressionTrees = Collections.emptyList();
+    if (testListNode != null) {
+      expressionTrees = testListNode.getChildren(PythonGrammar.TEST).stream()
+        .map(this::expression)
+        .collect(Collectors.toList());
+    }
+    return new PyReturnStatementTreeImpl(astNode, astNode.getTokens().get(0), expressionTrees);
   }
 
   // Compound statements

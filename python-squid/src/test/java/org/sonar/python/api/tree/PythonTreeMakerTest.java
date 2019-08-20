@@ -38,6 +38,32 @@ public class PythonTreeMakerTest extends RuleTest {
     astNode = p.parse("pass");
     pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyPassStatementTree.class);
+
+    astNode = p.parse("print 'foo'");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyPrintStatementTree.class);
+
+    astNode = p.parse("exec foo");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyExecStatementTree.class);
+
+    astNode = p.parse("assert foo");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyAssertStatementTree.class);
+
+    astNode = p.parse("del foo");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyDelStatementTree.class);
+
+    astNode = p.parse("return foo");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyReturnStatementTree.class);
   }
 
   @Test
@@ -184,5 +210,27 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(passStatement).isNotNull();
     assertThat(passStatement.delKeyword().getValue()).isEqualTo("del");
     assertThat(passStatement.expressions()).hasSize(1);
+  }
+
+  @Test
+  public void returnStatement() {
+    setRootRule(PythonGrammar.RETURN_STMT);
+    AstNode astNode = p.parse("return foo");
+    PyReturnStatementTree returnStatement = new PythonTreeMaker().returnStatement(astNode);
+    assertThat(returnStatement).isNotNull();
+    assertThat(returnStatement.returnKeyword().getValue()).isEqualTo("return");
+    assertThat(returnStatement.expressions()).hasSize(1);
+
+    astNode = p.parse("return foo, bar");
+    returnStatement = new PythonTreeMaker().returnStatement(astNode);
+    assertThat(returnStatement).isNotNull();
+    assertThat(returnStatement.returnKeyword().getValue()).isEqualTo("return");
+    assertThat(returnStatement.expressions()).hasSize(2);
+
+    astNode = p.parse("return");
+    returnStatement = new PythonTreeMaker().returnStatement(astNode);
+    assertThat(returnStatement).isNotNull();
+    assertThat(returnStatement.returnKeyword().getValue()).isEqualTo("return");
+    assertThat(returnStatement.expressions()).hasSize(0);
   }
 }
