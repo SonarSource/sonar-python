@@ -34,9 +34,13 @@ public interface Tree {
 
     DEL_STMT(PyDelStatementTree.class),
 
+    ELSE_STMT(PyElseStatementTree.class),
+
     EXEC_STMT(PyExecStatementTree.class),
 
     FILE_INPUT(PyFileInputTree.class),
+
+    IF_STMT(PyIfStatementTree.class),
 
     PASS_STMT(PyPassStatementTree.class),
 
@@ -44,10 +48,9 @@ public interface Tree {
 
     RETURN_STMT(PyReturnStatementTree.class),
 
-    IF_STATEMENT(PyIfStatementTree.class),
+    YIELD_EXPR(PyYieldExpressionTree.class),
 
-    ELSE_STATEMENT(PyElseStatementTree.class),
-    ;
+    YIELD_STMT(PyYieldStatementTree.class);
 
     final Class<? extends Tree> associatedInterface;
 

@@ -101,7 +101,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   @Override
   public Kind getKind() {
-    return Tree.Kind.IF_STATEMENT;
+    return Tree.Kind.IF_STMT;
   }
 
   @Override

@@ -17,29 +17,33 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-public interface PyTreeVisitor {
+import com.sonar.sslr.api.AstNode;
+import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.PyYieldExpressionTree;
+import org.sonar.python.api.tree.PyYieldStatementTree;
 
-  void visitFileInput(PyFileInputTree pyFileInputTree);
+public class PyYieldStatementTreeImpl extends PyTree implements PyYieldStatementTree {
+  private final PyYieldExpressionTree yieldExpression;
 
-  void visitIfStatement(PyIfStatementTree pyIfStatementTree);
+  public PyYieldStatementTreeImpl(AstNode astNode, PyYieldExpressionTree yieldExpression) {
+    super(astNode);
+    this.yieldExpression = yieldExpression;
+  }
 
-  void visitElseStatement(PyElseStatementTree pyElseStatementTree);
+  @Override
+  public PyYieldExpressionTree yieldExpression() {
+    return yieldExpression;
+  }
 
-  void visitExecStatement(PyExecStatementTree pyExecStatementTree);
+  @Override
+  public Kind getKind() {
+    return Kind.YIELD_STMT;
+  }
 
-  void visitAssertStatement(PyAssertStatementTree pyAssertStatementTree);
-
-  void visitDelStatement(PyDelStatementTree pyDelStatementTree);
-
-  void visitPassStatement(PyPassStatementTree pyPassStatementTree);
-
-  void visitPrintStatement(PyPrintStatementTree pyPrintStatementTree);
-
-  void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree);
-
-  void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree);
-
-  void visitYieldExpression(PyYieldExpressionTree pyYieldExpressionTree);
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitYieldStatement(this);
+  }
 }

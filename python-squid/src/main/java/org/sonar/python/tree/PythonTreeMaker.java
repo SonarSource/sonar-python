@@ -37,6 +37,8 @@ import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyYieldExpressionTree;
+import org.sonar.python.api.tree.PyYieldStatementTree;
 
 public class PythonTreeMaker {
 
@@ -68,6 +70,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.RETURN_STMT)) {
       return returnStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.YIELD_STMT)) {
+      return yieldStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -144,6 +149,22 @@ public class PythonTreeMaker {
     return new PyReturnStatementTreeImpl(astNode, astNode.getTokens().get(0), expressionTrees);
   }
 
+  public PyYieldStatementTree yieldStatement(AstNode astNode) {
+    return new PyYieldStatementTreeImpl(astNode, yieldExpression(astNode.getFirstChild(PythonGrammar.YIELD_EXPR)));
+  }
+
+  public PyYieldExpressionTree yieldExpression(AstNode astNode) {
+    Token yieldKeyword = astNode.getFirstChild(PythonKeyword.YIELD).getToken();
+    AstNode nodeContainingExpression = astNode;
+    AstNode fromKeyword = astNode.getFirstChild(PythonKeyword.FROM);
+    if (fromKeyword == null) {
+      nodeContainingExpression = astNode.getFirstChild(PythonGrammar.TESTLIST);
+    }
+    List<PyExpressionTree> expressionTrees = nodeContainingExpression.getChildren(PythonGrammar.TEST).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    return new PyYieldExpressionTreeImpl(astNode, yieldKeyword, fromKeyword == null ? null : fromKeyword.getToken(), expressionTrees);
+  }
   // Compound statements
 
   public PyIfStatementTree ifStatement(AstNode astNode) {
@@ -180,6 +201,9 @@ public class PythonTreeMaker {
   }
 
   PyExpressionTree expression(AstNode astNode) {
+    if (astNode.is(PythonGrammar.YIELD_EXPR)) {
+      return yieldExpression(astNode);
+    }
     return new PyExpressionTreeImpl(astNode);
   }
 }

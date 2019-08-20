@@ -19,27 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyTreeVisitor {
-
-  void visitFileInput(PyFileInputTree pyFileInputTree);
-
-  void visitIfStatement(PyIfStatementTree pyIfStatementTree);
-
-  void visitElseStatement(PyElseStatementTree pyElseStatementTree);
-
-  void visitExecStatement(PyExecStatementTree pyExecStatementTree);
-
-  void visitAssertStatement(PyAssertStatementTree pyAssertStatementTree);
-
-  void visitDelStatement(PyDelStatementTree pyDelStatementTree);
-
-  void visitPassStatement(PyPassStatementTree pyPassStatementTree);
-
-  void visitPrintStatement(PyPrintStatementTree pyPrintStatementTree);
-
-  void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree);
-
-  void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree);
-
-  void visitYieldExpression(PyYieldExpressionTree pyYieldExpressionTree);
+public interface PyYieldStatementTree extends PyStatementTree {
+  PyYieldExpressionTree yieldExpression();
 }

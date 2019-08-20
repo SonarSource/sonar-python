@@ -56,7 +56,7 @@ public class CollapsibleIfStatementsCheck extends PythonCheckTree {
       && ifStatement.elseBranch() == null
       && ifStatement.elifBranches().isEmpty()
       && statements.size() == 1
-      && statements.get(0).is(Tree.Kind.IF_STATEMENT)) {
+      && statements.get(0).is(Tree.Kind.IF_STMT)) {
       PyIfStatementTree singleIfChild = (PyIfStatementTree) statements.get(0);
       if (singleIfChild.isElif() || singleIfChild.elseBranch() != null || !singleIfChild.elifBranches().isEmpty()) {
         return;

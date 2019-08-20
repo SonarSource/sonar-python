@@ -64,6 +64,11 @@ public class PythonTreeMakerTest extends RuleTest {
     pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).hasSize(1);
     assertThat(pyTree.statements().get(0)).isInstanceOf(PyReturnStatementTree.class);
+
+    astNode = p.parse("yield foo");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyYieldStatementTree.class);
   }
 
   @Test
@@ -232,5 +237,34 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(returnStatement).isNotNull();
     assertThat(returnStatement.returnKeyword().getValue()).isEqualTo("return");
     assertThat(returnStatement.expressions()).hasSize(0);
+  }
+
+  @Test
+  public void yieldStatement() {
+    setRootRule(PythonGrammar.YIELD_STMT);
+    AstNode astNode = p.parse("yield foo");
+    PyYieldStatementTree yieldStatement = new PythonTreeMaker().yieldStatement(astNode);
+    assertThat(yieldStatement).isNotNull();
+    PyYieldExpressionTree yieldExpression = yieldStatement.yieldExpression();
+    assertThat(yieldExpression).isInstanceOf(PyYieldExpressionTree.class);
+    assertThat(yieldExpression.expressions()).hasSize(1);
+
+    astNode = p.parse("yield foo, bar");
+    yieldStatement = new PythonTreeMaker().yieldStatement(astNode);
+    assertThat(yieldStatement).isNotNull();
+    yieldExpression = yieldStatement.yieldExpression();
+    assertThat(yieldExpression).isInstanceOf(PyYieldExpressionTree.class);
+    assertThat(yieldExpression.yieldKeyword().getValue()).isEqualTo("yield");
+    assertThat(yieldExpression.fromKeyword()).isNull();
+    assertThat(yieldExpression.expressions()).hasSize(2);
+
+    astNode = p.parse("yield from foo");
+    yieldStatement = new PythonTreeMaker().yieldStatement(astNode);
+    assertThat(yieldStatement).isNotNull();
+    yieldExpression = yieldStatement.yieldExpression();
+    assertThat(yieldExpression).isInstanceOf(PyYieldExpressionTree.class);
+    assertThat(yieldExpression.yieldKeyword().getValue()).isEqualTo("yield");
+    assertThat(yieldExpression.fromKeyword().getValue()).isEqualTo("from");
+    assertThat(yieldExpression.expressions()).hasSize(1);
   }
 }
