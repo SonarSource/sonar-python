@@ -69,6 +69,11 @@ public class PythonTreeMakerTest extends RuleTest {
     pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).hasSize(1);
     assertThat(pyTree.statements().get(0)).isInstanceOf(PyYieldStatementTree.class);
+
+    astNode = p.parse("raise foo");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
+    assertThat(pyTree.statements().get(0)).isInstanceOf(PyRaiseStatementTree.class);
   }
 
   @Test
@@ -266,5 +271,41 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(yieldExpression.yieldKeyword().getValue()).isEqualTo("yield");
     assertThat(yieldExpression.fromKeyword().getValue()).isEqualTo("from");
     assertThat(yieldExpression.expressions()).hasSize(1);
+  }
+
+  @Test
+  public void raiseStatement() {
+    setRootRule(PythonGrammar.RAISE_STMT);
+    AstNode astNode = p.parse("raise foo");
+    PyRaiseStatementTree raiseStatement = new PythonTreeMaker().raiseStatement(astNode);
+    assertThat(raiseStatement).isNotNull();
+    assertThat(raiseStatement.raiseKeyword().getValue()).isEqualTo("raise");
+    assertThat(raiseStatement.fromKeyword()).isNull();
+    assertThat(raiseStatement.fromExpression()).isNull();
+    assertThat(raiseStatement.expressions()).hasSize(1);
+
+    astNode = p.parse("raise foo, bar");
+    raiseStatement = new PythonTreeMaker().raiseStatement(astNode);
+    assertThat(raiseStatement).isNotNull();
+    assertThat(raiseStatement.raiseKeyword().getValue()).isEqualTo("raise");
+    assertThat(raiseStatement.fromKeyword()).isNull();
+    assertThat(raiseStatement.fromExpression()).isNull();
+    assertThat(raiseStatement.expressions()).hasSize(2);
+
+    astNode = p.parse("raise foo from bar");
+    raiseStatement = new PythonTreeMaker().raiseStatement(astNode);
+    assertThat(raiseStatement).isNotNull();
+    assertThat(raiseStatement.raiseKeyword().getValue()).isEqualTo("raise");
+    assertThat(raiseStatement.fromKeyword().getValue()).isEqualTo("from");
+    assertThat(raiseStatement.fromExpression()).isNotNull();
+    assertThat(raiseStatement.expressions()).hasSize(1);
+
+    astNode = p.parse("raise");
+    raiseStatement = new PythonTreeMaker().raiseStatement(astNode);
+    assertThat(raiseStatement).isNotNull();
+    assertThat(raiseStatement.raiseKeyword().getValue()).isEqualTo("raise");
+    assertThat(raiseStatement.fromKeyword()).isNull();
+    assertThat(raiseStatement.fromExpression()).isNull();
+    assertThat(raiseStatement.expressions()).isEmpty();
   }
 }

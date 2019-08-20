@@ -19,29 +19,18 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyTreeVisitor {
+import com.sonar.sslr.api.Token;
+import java.util.List;
+import javax.annotation.CheckForNull;
 
-  void visitFileInput(PyFileInputTree pyFileInputTree);
+public interface PyRaiseStatementTree extends PyStatementTree {
+  Token raiseKeyword();
 
-  void visitIfStatement(PyIfStatementTree pyIfStatementTree);
+  @CheckForNull
+  Token fromKeyword();
 
-  void visitElseStatement(PyElseStatementTree pyElseStatementTree);
+  @CheckForNull
+  PyExpressionTree fromExpression();
 
-  void visitExecStatement(PyExecStatementTree pyExecStatementTree);
-
-  void visitAssertStatement(PyAssertStatementTree pyAssertStatementTree);
-
-  void visitDelStatement(PyDelStatementTree pyDelStatementTree);
-
-  void visitPassStatement(PyPassStatementTree pyPassStatementTree);
-
-  void visitPrintStatement(PyPrintStatementTree pyPrintStatementTree);
-
-  void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree);
-
-  void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree);
-
-  void visitYieldExpression(PyYieldExpressionTree pyYieldExpressionTree);
-
-  void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree);
+  List<PyExpressionTree> expressions();
 }

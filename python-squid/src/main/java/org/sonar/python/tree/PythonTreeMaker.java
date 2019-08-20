@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +36,7 @@ import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
@@ -73,6 +75,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.YIELD_STMT)) {
       return yieldStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.RAISE_STMT)) {
+      return raiseStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -164,6 +169,23 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new PyYieldExpressionTreeImpl(astNode, yieldKeyword, fromKeyword == null ? null : fromKeyword.getToken(), expressionTrees);
+  }
+
+  public PyRaiseStatementTree raiseStatement(AstNode astNode) {
+    AstNode fromKeyword = astNode.getFirstChild(PythonKeyword.FROM);
+    List<AstNode> expressions = new ArrayList<>();
+    AstNode fromExpression = null;
+    if (fromKeyword != null) {
+      expressions.add(astNode.getFirstChild(PythonGrammar.TEST));
+      fromExpression = astNode.getLastChild(PythonGrammar.TEST);
+    } else {
+      expressions = astNode.getChildren(PythonGrammar.TEST);
+    }
+    List<PyExpressionTree> expressionTrees = expressions.stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    return new PyRaiseStatementTreeImpl(astNode, astNode.getFirstChild(PythonKeyword.RAISE).getToken(),
+      expressionTrees, fromKeyword == null ? null : fromKeyword.getToken(), fromExpression == null ? null : expression(fromExpression));
   }
   // Compound statements
 

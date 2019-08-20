@@ -46,6 +46,8 @@ public interface Tree {
 
     PRINT_STMT(PyPrintStatementTree.class),
 
+    RAISE_STMT(PyRaiseStatementTree.class),
+
     RETURN_STMT(PyReturnStatementTree.class),
 
     YIELD_EXPR(PyYieldExpressionTree.class),

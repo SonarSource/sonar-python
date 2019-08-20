@@ -29,6 +29,7 @@ import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
@@ -112,5 +113,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitYieldExpression(PyYieldExpressionTree pyYieldExpressionTree) {
     scan(pyYieldExpressionTree.expressions());
+  }
+
+  @Override
+  public void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree) {
+    scan(pyRaiseStatementTree.expressions());
+    scan(pyRaiseStatementTree.fromExpression());
   }
 }
