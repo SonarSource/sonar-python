@@ -17,26 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-public interface Tree {
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyPassStatementTree;
 
-  enum Kind {
+public class PyPassStatementTreeImpl extends PyTree implements PyPassStatementTree {
+  private final Token passKeyword;
 
-    ASSERT_STMT(PyAssertStatementTree.class),
+  public PyPassStatementTreeImpl(AstNode astNode, Token passKeyword) {
+    super(astNode);
+    this.passKeyword = passKeyword;
+  }
 
-    EXEC_STMT(PyExecStatementTree.class),
+  @Override
+  public Token passKeyword() {
+    return passKeyword;
+  }
 
-    FILE_INPUT(PyFileInputTree.class),
-
-    PASS_STMT(PyPassStatementTree.class),
-
-    PRINT_STMT(PyPrintStatementTree.class);
-
-    final Class<? extends Tree> associatedInterface;
-
-    Kind(Class<? extends Tree> associatedInterface) {
-      this.associatedInterface = associatedInterface;
-    }
+  @Override
+  public Kind getKind() {
+    return Kind.PASS_STMT;
   }
 }

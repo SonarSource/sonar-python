@@ -32,6 +32,7 @@ import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
 
@@ -96,6 +97,11 @@ public class PythonTreeMaker {
   public PyAssertStatementTree assertStatement(AstNode astNode) {
     List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
     return new PyAssertStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
+  }
+
+
+  public PyPassStatementTree passStatement(AstNode astNode) {
+    return new PyPassStatementTreeImpl(astNode, astNode.getTokens().get(0));
   }
 
   // Compound statements

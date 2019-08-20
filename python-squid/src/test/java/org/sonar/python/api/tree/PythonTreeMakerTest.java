@@ -154,4 +154,13 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(assertStatement.assertKeyword().getValue()).isEqualTo("assert");
     assertThat(assertStatement.expressions()).hasSize(2);
   }
+
+  @Test
+  public void passStatement() {
+    setRootRule(PythonGrammar.PASS_STMT);
+    AstNode astNode = p.parse("pass");
+    PyPassStatementTree passStatement = new PythonTreeMaker().passStatement(astNode);
+    assertThat(passStatement).isNotNull();
+    assertThat(passStatement.passKeyword().getValue()).isEqualTo("pass");
+  }
 }
