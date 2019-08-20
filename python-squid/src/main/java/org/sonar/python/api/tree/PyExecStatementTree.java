@@ -17,36 +17,16 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.tree;
+package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyPrintStatementTree;
 
-public class PyPrintStatementTreeImpl extends PyTree implements PyPrintStatementTree {
-  private final Token printKeyword;
-  private final List<PyExpressionTree> expressions;
+public interface PyExecStatementTree extends PyStatementTree {
+  Token execKeyword();
 
-  public PyPrintStatementTreeImpl(AstNode astNode, Token printKeyword, List<PyExpressionTree> expressions) {
-    super(astNode);
-    this.printKeyword = printKeyword;
-    this.expressions = expressions;
-  }
+  PyExpressionTree expression();
 
-  @Override
-  public Token printKeyword() {
-    return printKeyword;
-  }
+  PyExpressionTree globalsExpression();
 
-  @Override
-  public List<PyExpressionTree> expressions() {
-    return expressions;
-  }
-
-  @Override
-  public Kind getKind() {
-    return Kind.PRINT_STMT;
-  }
+  PyExpressionTree localsExpression();
 }

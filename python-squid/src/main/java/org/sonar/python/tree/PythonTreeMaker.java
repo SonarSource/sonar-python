@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
@@ -81,6 +82,15 @@ public class PythonTreeMaker {
     return new PyPrintStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
   }
 
+  public PyExecStatementTree execStatement(AstNode astNode) {
+    PyExpressionTree expression = expression(astNode.getFirstChild(PythonGrammar.EXPR));
+    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    if (expressions.isEmpty()) {
+      return new PyExecStatementTreeImpl(astNode, astNode.getTokens().get(0), expression);
+    }
+    return new PyExecStatementTreeImpl(astNode, astNode.getTokens().get(0), expression, expressions.get(0), expressions.size() == 2 ? expressions.get(1) : null);
+  }
+
   // Compound statements
 
   public PyIfStatementTree ifStatement(AstNode astNode) {
@@ -119,6 +129,4 @@ public class PythonTreeMaker {
   PyExpressionTree expression(AstNode astNode) {
     return new PyExpressionTreeImpl(astNode);
   }
-
-
 }

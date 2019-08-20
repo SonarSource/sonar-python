@@ -94,18 +94,48 @@ public class PythonTreeMakerTest extends RuleTest {
     PyPrintStatementTree printStmt = new PythonTreeMaker().printStatement(astNode);
     assertThat(printStmt).isNotNull();
     assertThat(printStmt.printKeyword().getValue()).isEqualTo("print");
-    assertThat(printStmt.expression()).hasSize(1);
+    assertThat(printStmt.expressions()).hasSize(1);
 
     astNode = p.parse("print 'foo', 'bar'");
     printStmt = new PythonTreeMaker().printStatement(astNode);
     assertThat(printStmt).isNotNull();
     assertThat(printStmt.printKeyword().getValue()).isEqualTo("print");
-    assertThat(printStmt.expression()).hasSize(2);
+    assertThat(printStmt.expressions()).hasSize(2);
 
     astNode = p.parse("print >> 'foo'");
     printStmt = new PythonTreeMaker().printStatement(astNode);
     assertThat(printStmt).isNotNull();
     assertThat(printStmt.printKeyword().getValue()).isEqualTo("print");
-    assertThat(printStmt.expression()).hasSize(1);
+    assertThat(printStmt.expressions()).hasSize(1);
+  }
+
+  @Test
+  public void execStatement() {
+    setRootRule(PythonGrammar.EXEC_STMT);
+    AstNode astNode = p.parse("exec 'foo'");
+    PyExecStatementTree execStatement = new PythonTreeMaker().execStatement(astNode);
+    assertThat(execStatement).isNotNull();
+    assertThat(execStatement.execKeyword().getValue()).isEqualTo("exec");
+    assertThat(execStatement.expression()).isNotNull();
+    assertThat(execStatement.globalsExpression()).isNull();
+    assertThat(execStatement.localsExpression()).isNull();
+
+    astNode = p.parse("exec 'foo' in globals");
+    execStatement = new PythonTreeMaker().execStatement(astNode);
+    assertThat(execStatement).isNotNull();
+    assertThat(execStatement.execKeyword().getValue()).isEqualTo("exec");
+    assertThat(execStatement.expression()).isNotNull();
+    assertThat(execStatement.globalsExpression()).isNotNull();
+    assertThat(execStatement.localsExpression()).isNull();
+
+    astNode = p.parse("exec 'foo' in globals, locals");
+    execStatement = new PythonTreeMaker().execStatement(astNode);
+    assertThat(execStatement).isNotNull();
+    assertThat(execStatement.execKeyword().getValue()).isEqualTo("exec");
+    assertThat(execStatement.expression()).isNotNull();
+    assertThat(execStatement.globalsExpression()).isNotNull();
+    assertThat(execStatement.localsExpression()).isNotNull();
+
+    // TODO: exec stmt should parse exec ('foo', globals, locals); see https://docs.python.org/2/reference/simple_stmts.html#exec
   }
 }

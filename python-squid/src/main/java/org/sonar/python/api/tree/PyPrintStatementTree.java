@@ -22,7 +22,9 @@ package org.sonar.python.api.tree;
 import com.sonar.sslr.api.Token;
 import java.util.List;
 
-public interface PyPrintStatementTree extends Tree {
+public interface PyPrintStatementTree extends PyStatementTree {
+
   Token printKeyword();
-  List<PyExpressionTree> expression();
+
+  List<PyExpressionTree> expressions();
 }

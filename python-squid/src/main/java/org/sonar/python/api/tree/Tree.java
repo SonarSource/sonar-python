@@ -22,6 +22,9 @@ package org.sonar.python.api.tree;
 public interface Tree {
 
   enum Kind {
+
+    EXEC_STMT(PyExecStatementTree.class),
+
     FILE_INPUT(PyFileInputTree.class),
 
     PRINT_STMT(PyPrintStatementTree.class);
