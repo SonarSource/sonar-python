@@ -21,13 +21,13 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.PyTree;
 
 public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
@@ -35,16 +35,35 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   private final PyExpressionTree condition;
   private final List<PyStatementTree> statements;
   private final List<PyIfStatementTree> elifBranches;
+  private final boolean isElif;
   @CheckForNull
   private final PyElseStatementTree elseStatement;
 
-  public PyIfStatementTreeImpl(AstNode node, Token keyword, PyExpressionTree condition, List<PyStatementTree> statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
+  /**
+   *
+   * If statement constructor
+   */
+  public PyIfStatementTreeImpl(AstNode node, Token ifKeyword, PyExpressionTree condition, List<PyStatementTree> statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
     super(node);
-    this.keyword = keyword;
+    this.keyword = ifKeyword;
     this.condition = condition;
     this.statements = statements;
     this.elifBranches = elifBranches;
+    this.isElif = false;
     this.elseStatement = elseStatement;
+  }
+
+  /**
+   * Elif statement constructor
+   */
+  public PyIfStatementTreeImpl(AstNode node, Token elifKeyword, PyExpressionTree condition, List<PyStatementTree> statements) {
+    super(node);
+    this.keyword = elifKeyword;
+    this.condition = condition;
+    this.statements = statements;
+    this.elifBranches = Collections.emptyList();
+    this.isElif = true;
+    this.elseStatement = null;
   }
 
   @Override
@@ -59,7 +78,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   @Override
   public List<PyStatementTree> body() {
-    return null;
+    return statements;
   }
 
   @Override
@@ -69,7 +88,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   @Override
   public boolean isElif() {
-    return false;
+    return isElif;
   }
 
   @CheckForNull

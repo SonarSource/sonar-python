@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyTree;
 
 public class PyExpressionTreeImpl extends PyTree implements PyExpressionTree {
   public PyExpressionTreeImpl(AstNode astNode) {

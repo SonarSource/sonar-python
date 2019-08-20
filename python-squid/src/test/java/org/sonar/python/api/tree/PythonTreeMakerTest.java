@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
+import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,6 +34,10 @@ public class PythonTreeMakerTest extends RuleTest {
     AstNode astNode = p.parse("");
     PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).isEmpty();
+
+    astNode = p.parse("pass");
+    pyTree = new PythonTreeMaker().fileInput(astNode);
+    assertThat(pyTree.statements()).hasSize(1);
   }
 
   @Test
@@ -42,20 +47,44 @@ public class PythonTreeMakerTest extends RuleTest {
     PyIfStatementTree pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
     assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
     assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
+    assertThat(pyIfStatementTree.isElif()).isFalse();
+    assertThat(pyIfStatementTree.elifBranches()).isEmpty();
+    assertThat(pyIfStatementTree.elseBranch()).isNull();
+    assertThat(pyIfStatementTree.body()).hasSize(1);
 
     astNode = p.parse("if x: pass\nelse: pass");
     pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
     assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
     assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
-    assertThat(pyIfStatementTree.elseBranch()).isNotNull();
+    assertThat(pyIfStatementTree.isElif()).isFalse();
+    assertThat(pyIfStatementTree.elifBranches()).isEmpty();
+    PyElseStatementTree elseBranch = pyIfStatementTree.elseBranch();
+    assertThat(elseBranch).isNotNull();
+    assertThat(elseBranch.elseKeyword().getValue()).isEqualTo("else");
+    assertThat(elseBranch.body()).hasSize(1);
 
     astNode = p.parse("if x: pass\nelif y: pass");
     pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
     assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
     assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
-    assertThat(pyIfStatementTree.elifBranches()).isNotEmpty();
+    assertThat(pyIfStatementTree.isElif()).isFalse();
+    assertThat(pyIfStatementTree.elseBranch()).isNull();
+    assertThat(pyIfStatementTree.elifBranches()).hasSize(1);
     PyIfStatementTree elif = pyIfStatementTree.elifBranches().get(0);
-    assertThat(elif.keyword().getValue()).isEqualTo("elif");
+    assertThat(elif.condition()).isInstanceOf(PyExpressionTree.class);
+    assertThat(elif.isElif()).isTrue();
+    assertThat(elif.elseBranch()).isNull();
+    assertThat(elif.elifBranches()).isEmpty();
+    assertThat(elif.body()).hasSize(1);
+
+    astNode = p.parse("if x:\n pass");
+    pyIfStatementTree = new PythonTreeMaker().ifStatement(astNode);
+    assertThat(pyIfStatementTree.keyword().getValue()).isEqualTo("if");
+    assertThat(pyIfStatementTree.condition()).isInstanceOf(PyExpressionTree.class);
+    assertThat(pyIfStatementTree.isElif()).isFalse();
+    assertThat(pyIfStatementTree.elseBranch()).isNull();
+    assertThat(pyIfStatementTree.elifBranches()).isEmpty();
+    assertThat(pyIfStatementTree.body()).hasSize(1);
   }
 
 }

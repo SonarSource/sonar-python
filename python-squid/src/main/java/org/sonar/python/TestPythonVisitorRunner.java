@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PythonTreeMaker;
+import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.parser.PythonParser;
 
 public class TestPythonVisitorRunner {

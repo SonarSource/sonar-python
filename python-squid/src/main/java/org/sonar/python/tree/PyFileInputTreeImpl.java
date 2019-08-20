@@ -23,7 +23,6 @@ import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.PyTree;
 import org.sonar.python.api.tree.Tree;
 
 public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {

@@ -17,9 +17,10 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import org.sonar.python.api.tree.Tree;
 
 public abstract class PyTree extends AstNode implements Tree {
   private final AstNode node;

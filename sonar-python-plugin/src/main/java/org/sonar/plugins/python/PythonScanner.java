@@ -46,7 +46,7 @@ import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PythonTreeMaker;
+import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;

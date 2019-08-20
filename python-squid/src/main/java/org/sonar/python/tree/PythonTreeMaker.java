@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
@@ -26,15 +26,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.tree.PyElseStatementTreeImpl;
-import org.sonar.python.tree.PyExpressionTreeImpl;
-import org.sonar.python.tree.PyFileInputTreeImpl;
-import org.sonar.python.tree.PyIfStatementTreeImpl;
+import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyStatementTree;
 
 public class PythonTreeMaker {
 
   public PyFileInputTree fileInput(AstNode astNode) {
-    List<PyStatementTree> statements = astNode.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
     return new PyFileInputTreeImpl(astNode, statements);
   }
 
@@ -45,11 +46,38 @@ public class PythonTreeMaker {
     return null;
   }
 
+  private List<AstNode> getStatementsFromSuite(AstNode astNode) {
+    if (astNode.is(PythonGrammar.SUITE)) {
+      List<AstNode> statements = getStatements(astNode);
+      if (statements.isEmpty()) {
+        AstNode stmtListNode = astNode.getFirstChild(PythonGrammar.STMT_LIST);
+        return stmtListNode.getChildren(PythonGrammar.SIMPLE_STMT).stream()
+          .map(AstNode::getFirstChild)
+          .collect(Collectors.toList());
+      }
+      return statements;
+    }
+    return Collections.emptyList();
+  }
+
+  private List<AstNode> getStatements(AstNode astNode) {
+    List<AstNode> statements = astNode.getChildren(PythonGrammar.STATEMENT);
+    return statements.stream().flatMap(stmt -> {
+      if (stmt.hasDirectChildren(PythonGrammar.STMT_LIST)) {
+        AstNode stmtListNode = stmt.getFirstChild(PythonGrammar.STMT_LIST);
+        return stmtListNode.getChildren(PythonGrammar.SIMPLE_STMT).stream()
+          .map(AstNode::getFirstChild);
+      }
+      return stmt.getChildren(PythonGrammar.COMPOUND_STMT).stream()
+        .map(AstNode::getFirstChild);
+    }).collect(Collectors.toList());
+  }
+
   public PyIfStatementTree ifStatement(AstNode astNode) {
     Token ifToken = astNode.getTokens().get(0);
     AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
-    List<PyStatementTree> statements = suite.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatementsFromSuite(suite).stream().map(this::statement).collect(Collectors.toList());
     AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
     PyElseStatementTree elseStatement = null;
     if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
@@ -67,14 +95,14 @@ public class PythonTreeMaker {
     Token elifToken = astNode.getToken();
     AstNode suite = astNode.getNextSibling().getNextSibling().getNextSibling();
     AstNode condition = astNode.getNextSibling();
-    List<PyStatementTree> statements = suite.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatementsFromSuite(suite).stream().map(this::statement).collect(Collectors.toList());
     return new PyIfStatementTreeImpl(
-      astNode, elifToken, expression(condition), statements, Collections.emptyList(), null);
+      astNode, elifToken, expression(condition), statements);
   }
 
   private PyElseStatementTree elseStatement(AstNode astNode) {
     Token elseToken = astNode.getPreviousSibling().getPreviousSibling().getToken();
-    List<PyStatementTree> statements = astNode.getChildren(PythonGrammar.STATEMENT).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatementsFromSuite(astNode).stream().map(this::statement).collect(Collectors.toList());
     return new PyElseStatementTreeImpl(astNode, elseToken, statements);
   }
 
