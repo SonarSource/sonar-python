@@ -50,6 +50,8 @@ public interface Tree {
 
     FILE_INPUT(PyFileInputTree.class),
 
+    FOR_STMT(PyForStatementTree.class),
+
     FUNCDEF(PyFunctionDefTree.class),
 
     IF_STMT(PyIfStatementTree.class),

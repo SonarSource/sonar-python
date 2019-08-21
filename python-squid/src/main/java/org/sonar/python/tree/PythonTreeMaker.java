@@ -41,6 +41,7 @@ import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
@@ -109,6 +110,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.IMPORT_STMT)) {
       return importStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.FOR_STMT)) {
+      return forStatement(astNode);
+    }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
   }
@@ -145,13 +149,13 @@ public class PythonTreeMaker {
   // Simple statements
 
   public PyPrintStatementTree printStatement(AstNode astNode) {
-    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    List<PyExpressionTree> expressions = expressionsFromTest(astNode);
     return new PyPrintStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
   }
 
   public PyExecStatementTree execStatement(AstNode astNode) {
     PyExpressionTree expression = expression(astNode.getFirstChild(PythonGrammar.EXPR));
-    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    List<PyExpressionTree> expressions = expressionsFromTest(astNode);
     if (expressions.isEmpty()) {
       return new PyExecStatementTreeImpl(astNode, astNode.getTokens().get(0), expression);
     }
@@ -159,7 +163,7 @@ public class PythonTreeMaker {
   }
 
   public PyAssertStatementTree assertStatement(AstNode astNode) {
-    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    List<PyExpressionTree> expressions = expressionsFromTest(astNode);
     return new PyAssertStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
   }
 
@@ -168,10 +172,7 @@ public class PythonTreeMaker {
   }
 
   public PyDelStatementTree delStatement(AstNode astNode) {
-    AstNode exprListNode = astNode.getFirstChild(PythonGrammar.EXPRLIST);
-    List<PyExpressionTree> expressionTrees = exprListNode.getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR).stream()
-      .map(this::expression)
-      .collect(Collectors.toList());
+    List<PyExpressionTree> expressionTrees = expressionsFromExprList(astNode.getFirstChild(PythonGrammar.EXPRLIST));
     return new PyDelStatementTreeImpl(astNode, astNode.getTokens().get(0), expressionTrees);
   }
 
@@ -179,9 +180,7 @@ public class PythonTreeMaker {
     AstNode testListNode = astNode.getFirstChild(PythonGrammar.TESTLIST);
     List<PyExpressionTree> expressionTrees = Collections.emptyList();
     if (testListNode != null) {
-      expressionTrees = testListNode.getChildren(PythonGrammar.TEST).stream()
-        .map(this::expression)
-        .collect(Collectors.toList());
+      expressionTrees = expressionsFromTest(testListNode);
     }
     return new PyReturnStatementTreeImpl(astNode, astNode.getTokens().get(0), expressionTrees);
   }
@@ -199,9 +198,7 @@ public class PythonTreeMaker {
     }
     List<PyExpressionTree> expressionTrees = Collections.emptyList();
     if (nodeContainingExpression != null) {
-      expressionTrees = nodeContainingExpression.getChildren(PythonGrammar.TEST).stream()
-        .map(this::expression)
-        .collect(Collectors.toList());
+      expressionTrees = expressionsFromTest(nodeContainingExpression);
     }
     return new PyYieldExpressionTreeImpl(astNode, yieldKeyword, fromKeyword == null ? null : fromKeyword.getToken(), expressionTrees);
   }
@@ -330,13 +327,6 @@ public class PythonTreeMaker {
     return new PyElseStatementTreeImpl(astNode, elseToken, statements);
   }
 
-  PyExpressionTree expression(AstNode astNode) {
-    if (astNode.is(PythonGrammar.YIELD_EXPR)) {
-      return yieldExpression(astNode);
-    }
-    return new PyExpressionTreeImpl(astNode);
-  }
-
   public PyFunctionDefTree funcDefStatement(AstNode astNode) {
     // TODO decorators
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
@@ -357,5 +347,34 @@ public class PythonTreeMaker {
 
   private PyNameTree name(AstNode astNode) {
     return new PyNameTreeImpl(astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
+  }
+
+  public PyForStatementTree forStatement(AstNode astNode) {
+    List<PyExpressionTree> expressions = expressionsFromExprList(astNode.getFirstChild(PythonGrammar.EXPRLIST));
+    List<PyExpressionTree> testExpressions = expressionsFromTest(astNode.getFirstChild(PythonGrammar.TESTLIST));
+    AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
+    List<PyStatementTree> body = getStatementsFromSuite(firstSuite);
+    AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
+    List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
+    return new PyForStatementTreeImpl(astNode, expressions, testExpressions, body, elseBody);
+  }
+
+  // expressions
+
+  private List<PyExpressionTree> expressionsFromTest(AstNode astNode) {
+    return astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+  }
+
+  private List<PyExpressionTree> expressionsFromExprList(AstNode firstChild) {
+    return firstChild
+      .getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR)
+      .stream().map(this::expression).collect(Collectors.toList());
+  }
+
+  PyExpressionTree expression(AstNode astNode) {
+    if (astNode.is(PythonGrammar.YIELD_EXPR)) {
+      return yieldExpression(astNode);
+    }
+    return new PyExpressionTreeImpl(astNode);
   }
 }

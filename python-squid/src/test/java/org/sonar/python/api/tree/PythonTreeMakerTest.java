@@ -54,6 +54,8 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("def foo():pass", PyFunctionDefTree.class);
     testData.put("import foo", PyImportStatementTree.class);
     testData.put("from foo import f", PyImportStatementTree.class);
+    testData.put("class toto:pass", PyClassDefTree.class);
+    testData.put("for foo in bar:pass", PyForStatementTree.class);
 
 
     testData.forEach((c,clazz) -> {
@@ -455,5 +457,26 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(classDefTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(classDefTree.args()).isNull();
     assertThat(classDefTree.decorators()).isNull();
+  }
+
+  @Test
+  public void for_statement() {
+    setRootRule(PythonGrammar.FOR_STMT);
+    AstNode astNode = p.parse("for foo in bar: pass");
+    PyForStatementTree pyForStatementTree = new PythonTreeMaker().forStatement(astNode);
+    assertThat(pyForStatementTree.expressions()).hasSize(1);
+    assertThat(pyForStatementTree.testExpressions()).hasSize(1);
+    assertThat(pyForStatementTree.body()).hasSize(1);
+    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(pyForStatementTree.elseBody()).isEmpty();
+
+    astNode = p.parse("for foo in bar:\n  pass\nelse:\n  pass");
+    pyForStatementTree = new PythonTreeMaker().forStatement(astNode);
+    assertThat(pyForStatementTree.expressions()).hasSize(1);
+    assertThat(pyForStatementTree.testExpressions()).hasSize(1);
+    assertThat(pyForStatementTree.body()).hasSize(1);
+    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(pyForStatementTree.elseBody()).hasSize(1);
+    assertThat(pyForStatementTree.elseBody().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
   }
 }
