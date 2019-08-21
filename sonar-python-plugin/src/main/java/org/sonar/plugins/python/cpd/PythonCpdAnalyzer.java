@@ -40,7 +40,7 @@ public class PythonCpdAnalyzer {
   }
 
   public void pushCpdTokens(InputFile inputFile, PythonVisitorContext visitorContext) {
-    AstNode root = (AstNode) visitorContext.rootTree();
+    AstNode root = visitorContext.rootAstNode();
     if (root != null) {
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
       List<Token> tokens = root.getTokens();

@@ -19,6 +19,7 @@
  */
 package org.sonar.python;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.io.File;
@@ -44,8 +45,9 @@ public class TestPythonVisitorRunner {
   public static PythonVisitorContext createContext(File file) {
     Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     TestPythonFile pythonFile = new TestPythonFile(file);
-    PyFileInputTree rootTree = new PythonTreeMaker().fileInput(parser.parse(pythonFile.content()));
-    return new PythonVisitorContext(rootTree, pythonFile);
+    AstNode astNode = parser.parse(pythonFile.content());
+    PyFileInputTree rootTree = new PythonTreeMaker().fileInput(astNode);
+    return new PythonVisitorContext(astNode, rootTree, pythonFile);
   }
 
   private static class TestPythonFile implements PythonFile {

@@ -60,7 +60,7 @@ public class PythonVisitor {
 
   public void scanFile(PythonVisitorContext context) {
     this.context = context;
-    AstNode tree = (AstNode) context.rootTree();
+    AstNode tree = context.rootAstNode();
     if (tree != null) {
       visitFile(tree);
       scanNode(tree, subscribedKinds());

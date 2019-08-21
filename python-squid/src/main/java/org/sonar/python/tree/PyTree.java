@@ -28,9 +28,6 @@ public abstract class PyTree extends AstNode implements Tree {
   public PyTree(AstNode node) {
     super(node.getType(), node.getName(), node.getToken());
     this.node = node;
-    for (AstNode child : node.getChildren()) {
-      addChild(child);
-    }
   }
 
   public abstract Kind getKind();

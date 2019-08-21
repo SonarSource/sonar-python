@@ -58,7 +58,8 @@ public class PythonTreeMaker {
   private PyStatementTree statement(AstNode astNode) {
     if (astNode.is(PythonGrammar.IF_STMT)) {
       return ifStatement(astNode);
-    } else if (astNode.is(PythonGrammar.PASS_STMT)) {
+    }
+    if (astNode.is(PythonGrammar.PASS_STMT)) {
       return passStatement(astNode);
     }
     if (astNode.is(PythonGrammar.PRINT_STMT)) {
@@ -90,6 +91,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.CONTINUE_STMT)) {
       return continueStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.FUNCDEF)) {
+      return funcDefStatement(astNode);
     }
 
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
@@ -180,9 +184,12 @@ public class PythonTreeMaker {
     if (fromKeyword == null) {
       nodeContainingExpression = astNode.getFirstChild(PythonGrammar.TESTLIST);
     }
-    List<PyExpressionTree> expressionTrees = nodeContainingExpression.getChildren(PythonGrammar.TEST).stream()
-      .map(this::expression)
-      .collect(Collectors.toList());
+    List<PyExpressionTree> expressionTrees = Collections.emptyList();
+    if (nodeContainingExpression != null) {
+      expressionTrees = nodeContainingExpression.getChildren(PythonGrammar.TEST).stream()
+        .map(this::expression)
+        .collect(Collectors.toList());
+    }
     return new PyYieldExpressionTreeImpl(astNode, yieldKeyword, fromKeyword == null ? null : fromKeyword.getToken(), expressionTrees);
   }
 
@@ -252,7 +259,7 @@ public class PythonTreeMaker {
     return new PyExpressionTreeImpl(astNode);
   }
 
-  public PyFunctionDefTree funcdefStatement(AstNode astNode) {
+  public PyFunctionDefTree funcDefStatement(AstNode astNode) {
 
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
 

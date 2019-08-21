@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
@@ -42,15 +43,14 @@ import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PythonTreeMaker;
 
 public class PythonScanner {
 
@@ -92,8 +92,9 @@ public class PythonScanner {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
-      PyFileInputTree parse = new PythonTreeMaker().fileInput(parser.parse(pythonFile.content()));
-      visitorContext = new PythonVisitorContext(parse, pythonFile);
+      AstNode astNode = parser.parse(pythonFile.content());
+      PyFileInputTree parse = new PythonTreeMaker().fileInput(astNode);
+      visitorContext = new PythonVisitorContext(astNode, parse, pythonFile);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);

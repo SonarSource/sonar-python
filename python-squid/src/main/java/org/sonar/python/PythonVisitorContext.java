@@ -19,6 +19,7 @@
  */
 package org.sonar.python;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,21 +34,24 @@ public class PythonVisitorContext {
   private final PyFileInputTreeImpl rootTree;
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
+  private final AstNode rootAst;
   private SymbolTable symbolTable = null;
   private List<PreciseIssue> issues = new ArrayList<>();
 
-  public PythonVisitorContext(PyFileInputTree rootTree, PythonFile pythonFile) {
-    this(rootTree, pythonFile, null);
+
+  public PythonVisitorContext(AstNode rootAst, PyFileInputTree rootTree, PythonFile pythonFile) {
+    this(rootAst, rootTree, pythonFile, null);
     SymbolTableBuilderVisitor symbolTableBuilderVisitor = new SymbolTableBuilderVisitor();
     symbolTableBuilderVisitor.scanFile(this);
     symbolTable = symbolTableBuilderVisitor.symbolTable();
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
-    this(null, pythonFile, parsingException);
+    this(null, null, pythonFile, parsingException);
   }
 
-  private PythonVisitorContext(PyFileInputTree rootTree, PythonFile pythonFile, RecognitionException parsingException) {
+  private PythonVisitorContext(AstNode rootAst, PyFileInputTree rootTree, PythonFile pythonFile, RecognitionException parsingException) {
+    this.rootAst = rootAst;
     this.rootTree = (PyFileInputTreeImpl) rootTree;
     this.pythonFile = pythonFile;
     this.parsingException = parsingException;
@@ -55,6 +59,10 @@ public class PythonVisitorContext {
 
   public PyFileInputTree rootTree() {
     return rootTree;
+  }
+
+  public AstNode rootAstNode() {
+    return rootAst;
   }
 
   public PythonFile pythonFile() {

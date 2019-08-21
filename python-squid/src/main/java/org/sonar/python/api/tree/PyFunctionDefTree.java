@@ -23,7 +23,7 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
-public interface PyFunctionDefTree extends Tree {
+public interface PyFunctionDefTree extends PyStatementTree {
 
   List<PyDecoratorTree> decorators();
 

@@ -20,6 +20,8 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
@@ -34,56 +36,30 @@ public class PythonTreeMakerTest extends RuleTest {
     AstNode astNode = p.parse("");
     PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
     assertThat(pyTree.statements()).isEmpty();
+  }
 
-    astNode = p.parse("pass");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyPassStatementTree.class);
+  @Test
+  public void verify_expected_statement() {
+    Map<String, Class<? extends Tree>> testData = new HashMap<>();
+    testData.put("pass", PyPassStatementTree.class);
+    testData.put("print 'foo'", PyPrintStatementTree.class);
+    testData.put("exec foo", PyExecStatementTree.class);
+    testData.put("assert foo", PyAssertStatementTree.class);
+    testData.put("del foo", PyDelStatementTree.class);
+    testData.put("return foo", PyReturnStatementTree.class);
+    testData.put("yield foo", PyYieldStatementTree.class);
+    testData.put("raise foo", PyRaiseStatementTree.class);
+    testData.put("break", PyBreakStatementTree.class);
+    testData.put("continue", PyContinueStatementTree.class);
+    testData.put("def foo():pass", PyFunctionDefTree.class);
 
-    astNode = p.parse("print 'foo'");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyPrintStatementTree.class);
 
-    astNode = p.parse("exec foo");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyExecStatementTree.class);
-
-    astNode = p.parse("assert foo");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyAssertStatementTree.class);
-
-    astNode = p.parse("del foo");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyDelStatementTree.class);
-
-    astNode = p.parse("return foo");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyReturnStatementTree.class);
-
-    astNode = p.parse("yield foo");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyYieldStatementTree.class);
-
-    astNode = p.parse("raise foo");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyRaiseStatementTree.class);
-
-    astNode = p.parse("break");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyBreakStatementTree.class);
-
-    astNode = p.parse("continue");
-    pyTree = new PythonTreeMaker().fileInput(astNode);
-    assertThat(pyTree.statements()).hasSize(1);
-    assertThat(pyTree.statements().get(0)).isInstanceOf(PyContinueStatementTree.class);
+    testData.forEach((c,clazz) -> {
+      AstNode astNode = p.parse(c);
+      PyFileInputTree pyTree = new PythonTreeMaker().fileInput(astNode);
+      assertThat(pyTree.statements()).hasSize(1);
+      assertThat(pyTree.statements().get(0)).as(c).isInstanceOf(clazz);
+    });
   }
 
   @Test
@@ -281,6 +257,10 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(yieldExpression.yieldKeyword().getValue()).isEqualTo("yield");
     assertThat(yieldExpression.fromKeyword().getValue()).isEqualTo("from");
     assertThat(yieldExpression.expressions()).hasSize(1);
+
+    astNode = p.parse("yield");
+    yieldStatement = new PythonTreeMaker().yieldStatement(astNode);
+    assertThat(yieldStatement).isNotNull();
   }
 
   @Test
@@ -341,7 +321,7 @@ public class PythonTreeMakerTest extends RuleTest {
   public void funcdef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     AstNode astNode = p.parse("def func(): pass");
-    PyFunctionDefTree functionDefTree = new PythonTreeMaker().funcdefStatement(astNode);
+    PyFunctionDefTree functionDefTree = new PythonTreeMaker().funcDefStatement(astNode);
     assertThat(functionDefTree.name()).isNotNull();
     assertThat(functionDefTree.name().name()).isEqualTo("func");
     assertThat(functionDefTree.body()).hasSize(1);
