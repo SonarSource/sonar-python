@@ -72,4 +72,10 @@ public interface PyTreeVisitor {
   void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree);
 
   void visitExpressionStatement(PyExpressionStatementTree pyExpressionStatementTree);
+
+  void visitTryStatement(PyTryStatementTree pyTryStatementTree);
+
+  void visitFinallyClause(PyFinallyClauseTree pyFinallyClauseTree);
+
+  void visitExceptClause(PyExceptClauseTree pyExceptClauseTree);
 }

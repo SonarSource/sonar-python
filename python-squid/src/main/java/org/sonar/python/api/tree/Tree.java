@@ -46,11 +46,15 @@ public interface Tree {
 
     ELSE_STMT(PyElseStatementTree.class),
 
+    EXCEPT_CLAUSE(PyExceptClauseTree.class),
+
     EXEC_STMT(PyExecStatementTree.class),
 
     EXPRESSION_STMT(PyExpressionStatementTree.class),
 
     FILE_INPUT(PyFileInputTree.class),
+
+    FINALLY_CLAUSE(PyFinallyClauseTree.class),
 
     FOR_STMT(PyForStatementTree.class),
 
@@ -77,6 +81,8 @@ public interface Tree {
     RAISE_STMT(PyRaiseStatementTree.class),
 
     RETURN_STMT(PyReturnStatementTree.class),
+
+    TRY_STMT(PyTryStatementTree.class),
 
     WHILE_STMT(PyWhileStatementTree.class),
 

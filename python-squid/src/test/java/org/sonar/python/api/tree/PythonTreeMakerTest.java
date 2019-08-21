@@ -61,6 +61,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("nonlocal foo", PyNonlocalStatementTree.class);
     testData.put("while cond: pass", PyWhileStatementTree.class);
     testData.put("'foo'", PyExpressionStatementTree.class);
+    testData.put("try: this\nexcept Exception: pass", PyTryStatementTree.class);
 
     testData.forEach((c,clazz) -> {
       AstNode astNode = p.parse(c);
@@ -547,5 +548,61 @@ public class PythonTreeMakerTest extends RuleTest {
     astNode = p.parse("'foo', 'bar'");
     expressionStatement = new PythonTreeMaker().expressionStatement(astNode);
     assertThat(expressionStatement.expressions()).hasSize(2);
+  }
+
+  @Test
+  public void try_statement() {
+    setRootRule(PythonGrammar.TRY_STMT);
+    AstNode astNode = p.parse("try: pass\nexcept Error: pass");
+    PyTryStatementTree tryStatement = new PythonTreeMaker().tryStatement(astNode);
+    assertThat(tryStatement.tryKeyword().getValue()).isEqualTo("try");
+    assertThat(tryStatement.body()).hasSize(1);
+    assertThat(tryStatement.elseClause()).isNull();
+    assertThat(tryStatement.finallyClause()).isNull();
+    assertThat(tryStatement.exceptClauses()).hasSize(1);
+    assertThat(tryStatement.exceptClauses().get(0).exceptKeyword().getValue()).isEqualTo("except");
+    assertThat(tryStatement.exceptClauses().get(0).body()).hasSize(1);
+
+    astNode = p.parse("try: pass\nexcept Error: pass\nexcept Error: pass");
+    tryStatement = new PythonTreeMaker().tryStatement(astNode);
+    assertThat(tryStatement.tryKeyword().getValue()).isEqualTo("try");
+    assertThat(tryStatement.elseClause()).isNull();
+    assertThat(tryStatement.finallyClause()).isNull();
+    assertThat(tryStatement.exceptClauses()).hasSize(2);
+
+    astNode = p.parse("try: pass\nexcept Error: pass\nfinally: pass");
+    tryStatement = new PythonTreeMaker().tryStatement(astNode);
+    assertThat(tryStatement.tryKeyword().getValue()).isEqualTo("try");
+    assertThat(tryStatement.elseClause()).isNull();
+    assertThat(tryStatement.exceptClauses()).hasSize(1);
+    assertThat(tryStatement.finallyClause()).isNotNull();
+    assertThat(tryStatement.finallyClause().finallyKeyword().getValue()).isEqualTo("finally");
+    assertThat(tryStatement.finallyClause().body()).hasSize(1);
+
+    astNode = p.parse("try: pass\nexcept Error: pass\nelse: pass");
+    tryStatement = new PythonTreeMaker().tryStatement(astNode);
+    assertThat(tryStatement.tryKeyword().getValue()).isEqualTo("try");
+    assertThat(tryStatement.exceptClauses()).hasSize(1);
+    assertThat(tryStatement.finallyClause()).isNull();
+    assertThat(tryStatement.elseClause().elseKeyword().getValue()).isEqualTo("else");
+    assertThat(tryStatement.elseClause().body()).hasSize(1);
+
+    astNode = p.parse("try: pass\nexcept Error as e: pass");
+    tryStatement = new PythonTreeMaker().tryStatement(astNode);
+    assertThat(tryStatement.tryKeyword().getValue()).isEqualTo("try");
+    assertThat(tryStatement.exceptClauses()).hasSize(1);
+    PyExceptClauseTree exceptClause = tryStatement.exceptClauses().get(0);
+    assertThat(exceptClause.asKeyword().getValue()).isEqualTo("as");
+    assertThat(exceptClause.commaToken()).isNull();
+    assertThat(exceptClause.exceptionInstance()).isNotNull();
+
+    astNode = p.parse("try: pass\nexcept Error, e: pass");
+    tryStatement = new PythonTreeMaker().tryStatement(astNode);
+    assertThat(tryStatement.tryKeyword().getValue()).isEqualTo("try");
+    assertThat(tryStatement.exceptClauses()).hasSize(1);
+    exceptClause = tryStatement.exceptClauses().get(0);
+    assertThat(exceptClause.asKeyword()).isNull();
+    assertThat(exceptClause.commaToken().getValue()).isEqualTo(",");
+    assertThat(exceptClause.exceptionInstance()).isNotNull();
   }
 }

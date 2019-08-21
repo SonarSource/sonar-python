@@ -38,10 +38,12 @@ import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyFinallyClauseTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyGlobalStatementTree;
@@ -56,6 +58,7 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
@@ -127,6 +130,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT)) {
       return expressionStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.TRY_STMT)) {
+      return tryStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -405,6 +411,45 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new PyExpressionStatementTreeImpl(astNode, expressions);
+  }
+
+  public PyTryStatementTree tryStatement(AstNode astNode) {
+    Token tryKeyword = astNode.getFirstChild(PythonKeyword.TRY).getToken();
+    List<PyStatementTree> tryBody = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    List<PyExceptClauseTree> exceptClauseTrees = astNode.getChildren(PythonGrammar.EXCEPT_CLAUSE).stream()
+      .map(except -> {
+        AstNode suite = except.getNextSibling().getNextSibling();
+        return exceptClause(except, getStatementsFromSuite(suite));
+      })
+      .collect(Collectors.toList());
+    PyFinallyClauseTree finallyClause = null;
+    AstNode finallyNode = astNode.getFirstChild(PythonKeyword.FINALLY);
+    if (finallyNode != null) {
+      AstNode finallySuite = finallyNode.getNextSibling().getNextSibling();
+      List<PyStatementTree> body = getStatementsFromSuite(finallySuite);
+      finallyClause = new PyFinallyClauseTreeImpl(finallySuite, finallyNode.getToken(), body);
+    }
+    PyElseStatementTree elseStatementTree = null;
+    AstNode elseNode = astNode.getFirstChild(PythonKeyword.ELSE);
+    if (elseNode != null) {
+      elseStatementTree = elseStatement(elseNode.getNextSibling().getNextSibling());
+    }
+    return new PyTryStatementTreeImpl(astNode, tryKeyword, tryBody, exceptClauseTrees, finallyClause, elseStatementTree);
+  }
+
+  private PyExceptClauseTree exceptClause(AstNode except, List<PyStatementTree> body) {
+    Token exceptKeyword = except.getFirstChild(PythonKeyword.EXCEPT).getToken();
+    AstNode exceptionNode = except.getFirstChild(PythonGrammar.TEST);
+    if (exceptionNode == null) {
+      return new PyExceptClauseTreeImpl(except, exceptKeyword, body);
+    }
+    AstNode asNode = except.getFirstChild(PythonKeyword.AS);
+    AstNode commaNode = except.getFirstChild(PythonPunctuator.COMMA);
+    if (asNode != null || commaNode != null) {
+      PyExpressionTree exceptionInstance = expression(except.getLastChild(PythonGrammar.TEST));
+      return new PyExceptClauseTreeImpl(except, exceptKeyword, body, expression(exceptionNode), asNode, commaNode, exceptionInstance);
+    }
+    return new PyExceptClauseTreeImpl(except, exceptKeyword, body, expression(exceptionNode));
   }
 
   // expressions
