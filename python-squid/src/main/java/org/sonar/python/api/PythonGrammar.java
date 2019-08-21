@@ -351,11 +351,17 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(IMPORT_STMT).is(b.firstOf(IMPORT_NAME, IMPORT_FROM));
     b.rule(IMPORT_NAME).is("import", DOTTED_AS_NAMES);
-    b.rule(IMPORT_FROM).is("from", b.firstOf(b.sequence(b.zeroOrMore("."), DOTTED_NAME), b.oneOrMore(".")), "import",
+    b.rule(IMPORT_FROM).is(
+      "from",
+      b.firstOf(
+        b.sequence(b.zeroOrMore("."), DOTTED_NAME),
+        b.oneOrMore(".")),
+      "import",
       b.firstOf("*", b.sequence("(", IMPORT_AS_NAMES, ")"), IMPORT_AS_NAMES));
     b.rule(IMPORT_AS_NAME).is(NAME, b.optional("as", NAME));
     b.rule(DOTTED_AS_NAME).is(DOTTED_NAME, b.optional("as", NAME));
-    b.rule(IMPORT_AS_NAMES).is(IMPORT_AS_NAME, b.zeroOrMore(",", IMPORT_AS_NAME), b.optional(","));
+    b.rule(IMPORT_AS_NAMES).is(IMPORT_AS_NAME, b.zeroOrMore(",", IMPORT_AS_NAME),
+      b.optional(","));
     b.rule(DOTTED_AS_NAMES).is(DOTTED_AS_NAME, b.zeroOrMore(",", DOTTED_AS_NAME));
 
     b.rule(GLOBAL_STMT).is("global", NAME, b.zeroOrMore(",", NAME));

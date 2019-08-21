@@ -30,6 +30,8 @@ public interface Tree {
   AstNode astNode();
 
   enum Kind {
+    ALIASED_NAME(PyAliasedNameTree.class),
+
     ASSERT_STMT(PyAssertStatementTree.class),
 
     BREAK_STMT(PyBreakStatementTree.class),
@@ -40,6 +42,8 @@ public interface Tree {
 
     DEL_STMT(PyDelStatementTree.class),
 
+    DOTTED_NAME(PyDottedNameTree.class),
+
     ELSE_STMT(PyElseStatementTree.class),
 
     EXEC_STMT(PyExecStatementTree.class),
@@ -49,6 +53,12 @@ public interface Tree {
     FUNCDEF(PyFunctionDefTree.class),
 
     IF_STMT(PyIfStatementTree.class),
+
+    IMPORT_FROM(PyImportFromTree.class),
+
+    IMPORT_NAME(PyDottedNameTree.class),
+
+    IMPORT_STMT(PyDottedNameTree.class),
 
     NAME(PyNameTree.class),
 

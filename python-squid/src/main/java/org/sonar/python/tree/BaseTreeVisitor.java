@@ -21,16 +21,20 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyImportFromTree;
+import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
@@ -156,4 +160,27 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyClassDefTree.args());
     scan(pyClassDefTree.body());
   }
+
+  @Override
+  public void visitAliasedName(PyAliasedNameTree pyAliasedNameTree) {
+    scan(pyAliasedNameTree.dottedName());
+    scan(pyAliasedNameTree.alias());
+  }
+
+  @Override
+  public void visitDottedName(PyDottedNameTree pyDottedNameTree) {
+    scan(pyDottedNameTree.names());
+  }
+
+  @Override
+  public void visitImportFrom(PyImportFromTree pyImportFromTree) {
+    scan(pyImportFromTree.module());
+    scan(pyImportFromTree.importedNames());
+  }
+
+  @Override
+  public void visitImportName(PyImportNameTree pyImportNameTree) {
+    scan(pyImportNameTree.modules());
+  }
+
 }

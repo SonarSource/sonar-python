@@ -29,17 +29,23 @@ import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyImportFromTree;
+import org.sonar.python.api.tree.PyImportNameTree;
+import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
@@ -99,6 +105,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.CLASSDEF)) {
       return classDefStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.IMPORT_STMT)) {
+      return importStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -220,6 +229,71 @@ public class PythonTreeMaker {
 
   public PyContinueStatementTree continueStatement(AstNode astNode) {
     return new PyContinueStatementTreeImpl(astNode, astNode.getToken());
+  }
+
+  public PyImportStatementTree importStatement(AstNode astNode) {
+    AstNode importStmt = astNode.getFirstChild();
+    if (importStmt.is(PythonGrammar.IMPORT_NAME)) {
+      return importName(importStmt);
+    }
+    return importFromStatement(importStmt);
+  }
+
+  private PyImportNameTree importName(AstNode astNode) {
+    Token importKeyword = astNode.getFirstChild(PythonKeyword.IMPORT).getToken();
+    List<PyAliasedNameTree> aliasedNames = astNode
+      .getFirstChild(PythonGrammar.DOTTED_AS_NAMES)
+      .getChildren(PythonGrammar.DOTTED_AS_NAME).stream()
+      .map(this::aliasedName)
+      .collect(Collectors.toList());
+    return new PyImportNameTreeImpl(astNode, importKeyword, aliasedNames);
+  }
+
+  public PyImportFromTree importFromStatement(AstNode astNode) {
+    Token importKeyword = astNode.getFirstChild(PythonKeyword.IMPORT).getToken();
+    Token fromKeyword = astNode.getFirstChild(PythonKeyword.FROM).getToken();
+    List<Token> dottedPrefixForModule = astNode.getChildren(PythonPunctuator.DOT).stream()
+      .map(AstNode::getToken)
+      .collect(Collectors.toList());
+    AstNode moduleNode = astNode.getFirstChild(PythonGrammar.DOTTED_NAME);
+    PyDottedNameTree moduleName = null;
+    if (moduleNode != null) {
+      moduleName = dottedName(moduleNode);
+    }
+    AstNode importAsnames = astNode.getFirstChild(PythonGrammar.IMPORT_AS_NAMES);
+    List<PyAliasedNameTree> aliasedImportNames = null;
+    boolean isWildcardImport = true;
+    if (importAsnames != null) {
+      aliasedImportNames = importAsnames.getChildren(PythonGrammar.IMPORT_AS_NAME).stream()
+        .map(this::aliasedName)
+        .collect(Collectors.toList());
+      isWildcardImport = false;
+    }
+    return new PyImportFromTreeImpl(astNode, fromKeyword, dottedPrefixForModule, moduleName, importKeyword, aliasedImportNames, isWildcardImport);
+  }
+
+  private PyAliasedNameTree aliasedName(AstNode astNode) {
+    AstNode asKeyword = astNode.getFirstChild(PythonKeyword.AS);
+    PyDottedNameTree dottedName;
+    if (astNode.is(PythonGrammar.DOTTED_AS_NAME)) {
+      dottedName = dottedName(astNode.getFirstChild(PythonGrammar.DOTTED_NAME));
+    } else {
+      // astNode is IMPORT_AS_NAME
+      AstNode importedName = astNode.getFirstChild(PythonGrammar.NAME);
+      dottedName = new PyDottedNameTreeImpl(astNode, Collections.singletonList(name(importedName)));
+    }
+    if (asKeyword == null) {
+      return new PyAliasedNameTreeImpl(astNode, null, dottedName, null);
+    }
+    return new PyAliasedNameTreeImpl(astNode, asKeyword.getToken(), dottedName, name(astNode.getLastChild(PythonGrammar.NAME)));
+  }
+
+  private PyDottedNameTree dottedName(AstNode astNode) {
+    List<PyNameTree> names = astNode
+      .getChildren(PythonGrammar.NAME).stream()
+      .map(this::name)
+      .collect(Collectors.toList());
+    return new PyDottedNameTreeImpl(astNode, names);
   }
   // Compound statements
 

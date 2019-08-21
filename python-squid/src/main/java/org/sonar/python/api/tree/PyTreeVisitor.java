@@ -54,4 +54,12 @@ public interface PyTreeVisitor {
   void visitName(PyNameTree pyNameTree);
 
   void visitClassDef(PyClassDefTree pyClassDefTree);
+
+  void visitAliasedName(PyAliasedNameTree pyAliasedNameTree);
+
+  void visitDottedName(PyDottedNameTree pyDottedNameTree);
+
+  void visitImportFrom(PyImportFromTree pyImportFromTree);
+
+  void visitImportName(PyImportNameTree pyImportNameTree);
 }

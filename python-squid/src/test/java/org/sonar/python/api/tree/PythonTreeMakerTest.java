@@ -52,6 +52,8 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("break", PyBreakStatementTree.class);
     testData.put("continue", PyContinueStatementTree.class);
     testData.put("def foo():pass", PyFunctionDefTree.class);
+    testData.put("import foo", PyImportStatementTree.class);
+    testData.put("from foo import f", PyImportStatementTree.class);
 
 
     testData.forEach((c,clazz) -> {
@@ -315,6 +317,117 @@ public class PythonTreeMakerTest extends RuleTest {
     PyContinueStatementTree continueStatement = new PythonTreeMaker().continueStatement(astNode);
     assertThat(continueStatement).isNotNull();
     assertThat(continueStatement.continueKeyword().getValue()).isEqualTo("continue");
+  }
+
+  @Test
+  public void importStatement() {
+    setRootRule(PythonGrammar.IMPORT_STMT);
+    AstNode astNode = p.parse("import foo");
+    PyImportNameTree importStatement = (PyImportNameTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement).isNotNull();
+    assertThat(importStatement.importKeyword().getValue()).isEqualTo("import");
+    assertThat(importStatement.modules()).hasSize(1);
+    PyAliasedNameTree importedName1 = importStatement.modules().get(0);
+    assertThat(importedName1.dottedName().names()).hasSize(1);
+    assertThat(importedName1.dottedName().names().get(0).name()).isEqualTo("foo");
+
+    astNode = p.parse("import foo as f");
+    importStatement = (PyImportNameTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement).isNotNull();
+    assertThat(importStatement.importKeyword().getValue()).isEqualTo("import");
+    assertThat(importStatement.modules()).hasSize(1);
+    importedName1 = importStatement.modules().get(0);
+    assertThat(importedName1.dottedName().names()).hasSize(1);
+    assertThat(importedName1.dottedName().names().get(0).name()).isEqualTo("foo");
+    assertThat(importedName1.asKeyword().getValue()).isEqualTo("as");
+    assertThat(importedName1.alias().name()).isEqualTo("f");
+
+    astNode = p.parse("import foo.bar");
+    importStatement = (PyImportNameTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement).isNotNull();
+    assertThat(importStatement.importKeyword().getValue()).isEqualTo("import");
+    assertThat(importStatement.modules()).hasSize(1);
+    importedName1 = importStatement.modules().get(0);
+    assertThat(importedName1.dottedName().names()).hasSize(2);
+    assertThat(importedName1.dottedName().names().get(0).name()).isEqualTo("foo");
+    assertThat(importedName1.dottedName().names().get(1).name()).isEqualTo("bar");
+
+    astNode = p.parse("import foo, bar");
+    importStatement = (PyImportNameTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement).isNotNull();
+    assertThat(importStatement.importKeyword().getValue()).isEqualTo("import");
+    assertThat(importStatement.modules()).hasSize(2);
+    importedName1 = importStatement.modules().get(0);
+    assertThat(importedName1.dottedName().names()).hasSize(1);
+    assertThat(importedName1.dottedName().names().get(0).name()).isEqualTo("foo");
+    PyAliasedNameTree importedName2 = importStatement.modules().get(1);
+    assertThat(importedName2.dottedName().names()).hasSize(1);
+    assertThat(importedName2.dottedName().names().get(0).name()).isEqualTo("bar");
+  }
+
+  @Test
+  public void importFromStatement() {
+    setRootRule(PythonGrammar.IMPORT_STMT);
+    AstNode astNode = p.parse("from foo import f");
+    PyImportFromTree importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement).isNotNull();
+    assertThat(importStatement.importKeyword().getValue()).isEqualTo("import");
+    assertThat(importStatement.dottedPrefixForModule()).isEmpty();
+    assertThat(importStatement.fromKeyword().getValue()).isEqualTo("from");
+    assertThat(importStatement.module().names().get(0).name()).isEqualTo("foo");
+    assertThat(importStatement.isWildcardImport()).isFalse();
+    assertThat(importStatement.wildcard()).isNull();
+    assertThat(importStatement.importedNames()).hasSize(1);
+    PyAliasedNameTree aliasedNameTree = importStatement.importedNames().get(0);
+    assertThat(aliasedNameTree.asKeyword()).isNull();
+    assertThat(aliasedNameTree.alias()).isNull();
+    assertThat(aliasedNameTree.dottedName().names().get(0).name()).isEqualTo("f");
+
+    astNode = p.parse("from .foo import f");
+    importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement.dottedPrefixForModule()).hasSize(1);
+    assertThat(importStatement.dottedPrefixForModule().get(0).getValue()).isEqualTo(".");
+    assertThat(importStatement.module().names().get(0).name()).isEqualTo("foo");
+
+    astNode = p.parse("from ..foo import f");
+    importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement.dottedPrefixForModule()).hasSize(2);
+    assertThat(importStatement.dottedPrefixForModule().get(0).getValue()).isEqualTo(".");
+    assertThat(importStatement.dottedPrefixForModule().get(1).getValue()).isEqualTo(".");
+    assertThat(importStatement.module().names().get(0).name()).isEqualTo("foo");
+
+    astNode = p.parse("from . import f");
+    importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement.dottedPrefixForModule()).hasSize(1);
+    assertThat(importStatement.dottedPrefixForModule().get(0).getValue()).isEqualTo(".");
+    assertThat(importStatement.module()).isNull();
+
+    astNode = p.parse("from foo import f as g");
+    importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement.importedNames()).hasSize(1);
+    aliasedNameTree = importStatement.importedNames().get(0);
+    assertThat(aliasedNameTree.asKeyword().getValue()).isEqualTo("as");
+    assertThat(aliasedNameTree.alias().name()).isEqualTo("g");
+    assertThat(aliasedNameTree.dottedName().names().get(0).name()).isEqualTo("f");
+
+    astNode = p.parse("from foo import f as g, h");
+    importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement.importedNames()).hasSize(2);
+    PyAliasedNameTree aliasedNameTree1 = importStatement.importedNames().get(0);
+    assertThat(aliasedNameTree1.asKeyword().getValue()).isEqualTo("as");
+    assertThat(aliasedNameTree1.alias().name()).isEqualTo("g");
+    assertThat(aliasedNameTree1.dottedName().names().get(0).name()).isEqualTo("f");
+
+    PyAliasedNameTree aliasedNameTree2 = importStatement.importedNames().get(1);
+    assertThat(aliasedNameTree2.asKeyword()).isNull();
+    assertThat(aliasedNameTree2.alias()).isNull();
+    assertThat(aliasedNameTree2.dottedName().names().get(0).name()).isEqualTo("h");
+
+    astNode = p.parse("from foo import *");
+    importStatement = (PyImportFromTree) new PythonTreeMaker().importStatement(astNode);
+    assertThat(importStatement.importedNames()).isNull();
+    assertThat(importStatement.isWildcardImport()).isTrue();
+    assertThat(importStatement.wildcard().getValue()).isEqualTo("*");
   }
 
   @Test
