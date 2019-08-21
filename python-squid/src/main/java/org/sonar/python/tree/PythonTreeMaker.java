@@ -39,6 +39,7 @@ import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.PyExpressionStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
@@ -120,6 +121,12 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.GLOBAL_STMT)) {
       return globalStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.NONLOCAL_STMT)) {
+      return nonlocalStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.EXPRESSION_STMT)) {
+      return expressionStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -390,6 +397,14 @@ public class PythonTreeMaker {
     AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
     List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
     return new PyWhileStatementTreeImpl(astNode, condition, body, elseBody);
+  }
+
+  public PyExpressionStatementTree expressionStatement(AstNode astNode) {
+    // TODO: handle ANNASSIGN, b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)), b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR)
+    List<PyExpressionTree> expressions = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR).getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    return new PyExpressionStatementTreeImpl(astNode, expressions);
   }
 
   // expressions

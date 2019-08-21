@@ -58,8 +58,9 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("class toto:pass", PyClassDefTree.class);
     testData.put("for foo in bar:pass", PyForStatementTree.class);
     testData.put("global foo", PyGlobalStatementTree.class);
+    testData.put("nonlocal foo", PyNonlocalStatementTree.class);
     testData.put("while cond: pass", PyWhileStatementTree.class);
-
+    testData.put("'foo'", PyExpressionStatementTree.class);
 
     testData.forEach((c,clazz) -> {
       AstNode astNode = p.parse(c);
@@ -534,5 +535,17 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody()).hasSize(1);
     assertThat(pyForStatementTree.elseBody().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+  }
+
+  @Test
+  public void expression_statement() {
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    AstNode astNode = p.parse("'foo'");
+    PyExpressionStatementTree expressionStatement = new PythonTreeMaker().expressionStatement(astNode);
+    assertThat(expressionStatement.expressions()).hasSize(1);
+
+    astNode = p.parse("'foo', 'bar'");
+    expressionStatement = new PythonTreeMaker().expressionStatement(astNode);
+    assertThat(expressionStatement.expressions()).hasSize(2);
   }
 }
