@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,12 +36,15 @@ import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyTypedArgListTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
 
@@ -92,16 +96,18 @@ public class PythonTreeMaker {
     return null;
   }
 
-  private List<AstNode> getStatementsFromSuite(AstNode astNode) {
+  private List<PyStatementTree> getStatementsFromSuite(AstNode astNode) {
     if (astNode.is(PythonGrammar.SUITE)) {
       List<AstNode> statements = getStatements(astNode);
       if (statements.isEmpty()) {
         AstNode stmtListNode = astNode.getFirstChild(PythonGrammar.STMT_LIST);
         return stmtListNode.getChildren(PythonGrammar.SIMPLE_STMT).stream()
           .map(AstNode::getFirstChild)
+          .map(this::statement)
           .collect(Collectors.toList());
       }
-      return statements;
+      return statements.stream().map(this::statement)
+        .collect(Collectors.toList());
     }
     return Collections.emptyList();
   }
@@ -210,7 +216,7 @@ public class PythonTreeMaker {
     Token ifToken = astNode.getTokens().get(0);
     AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
-    List<PyStatementTree> statements = getStatementsFromSuite(suite).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatementsFromSuite(suite);
     AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
     PyElseStatementTree elseStatement = null;
     if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
@@ -228,14 +234,14 @@ public class PythonTreeMaker {
     Token elifToken = astNode.getToken();
     AstNode suite = astNode.getNextSibling().getNextSibling().getNextSibling();
     AstNode condition = astNode.getNextSibling();
-    List<PyStatementTree> statements = getStatementsFromSuite(suite).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatementsFromSuite(suite);
     return new PyIfStatementTreeImpl(
       astNode, elifToken, expression(condition), statements);
   }
 
   private PyElseStatementTree elseStatement(AstNode astNode) {
     Token elseToken = astNode.getPreviousSibling().getPreviousSibling().getToken();
-    List<PyStatementTree> statements = getStatementsFromSuite(astNode).stream().map(this::statement).collect(Collectors.toList());
+    List<PyStatementTree> statements = getStatementsFromSuite(astNode);
     return new PyElseStatementTreeImpl(astNode, elseToken, statements);
   }
 
@@ -244,5 +250,18 @@ public class PythonTreeMaker {
       return yieldExpression(astNode);
     }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  public PyFunctionDefTree funcdefStatement(AstNode astNode) {
+
+    PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
+
+    PyTypedArgListTree typedArgs = null;
+    List<PyStatementTree> body = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    return new PyFunctionDefTreeImpl(astNode, name, typedArgs, body);
+  }
+
+  private PyNameTree name(AstNode astNode) {
+    return new PyNameTreeImpl(astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
   }
 }

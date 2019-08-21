@@ -28,7 +28,9 @@ import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
@@ -131,5 +133,19 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitContinueStatement(PyContinueStatementTree pyContinueStatementTree) {
     // nothing to visit for continue statement
+  }
+
+  @Override
+  public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    scan(pyFunctionDefTree.decorators());
+    scan(pyFunctionDefTree.name());
+    scan(pyFunctionDefTree.typedArgs());
+    scan(pyFunctionDefTree.annotationReturn());
+    scan(pyFunctionDefTree.body());
+  }
+
+  @Override
+  public void visitName(PyNameTree pyNameTree) {
+    // nothing to scan on a name
   }
 }

@@ -48,4 +48,8 @@ public interface PyTreeVisitor {
   void visitBreakStatement(PyBreakStatementTree pyBreakStatementTree);
 
   void visitContinueStatement(PyContinueStatementTree pyContinueStatementTree);
+
+  void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree);
+
+  void visitName(PyNameTree pyNameTree);
 }

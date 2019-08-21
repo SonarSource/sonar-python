@@ -44,7 +44,11 @@ public interface Tree {
 
     FILE_INPUT(PyFileInputTree.class),
 
+    FUNCDEF(PyFunctionDefTree.class),
+
     IF_STMT(PyIfStatementTree.class),
+
+    NAME(PyNameTree.class),
 
     PASS_STMT(PyPassStatementTree.class),
 

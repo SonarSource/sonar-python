@@ -336,4 +336,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(continueStatement).isNotNull();
     assertThat(continueStatement.continueKeyword().getValue()).isEqualTo("continue");
   }
+
+  @Test
+  public void funcdef_statement() {
+    setRootRule(PythonGrammar.FUNCDEF);
+    AstNode astNode = p.parse("def func(): pass");
+    PyFunctionDefTree functionDefTree = new PythonTreeMaker().funcdefStatement(astNode);
+    assertThat(functionDefTree.name()).isNotNull();
+    assertThat(functionDefTree.name().name()).isEqualTo("func");
+    assertThat(functionDefTree.body()).hasSize(1);
+    assertThat(functionDefTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(functionDefTree.typedArgs()).isNull();
+  }
 }
