@@ -76,6 +76,8 @@ public interface Tree {
 
     RETURN_STMT(PyReturnStatementTree.class),
 
+    WHILE_STMT(PyWhileStatementTree.class),
+
     YIELD_EXPR(PyYieldExpressionTree.class),
 
     YIELD_STMT(PyYieldStatementTree.class);

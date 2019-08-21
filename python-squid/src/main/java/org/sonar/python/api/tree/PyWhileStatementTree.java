@@ -23,14 +23,10 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
-public interface PyForStatementTree extends PyStatementTree {
-  Token forKeyword();
+public interface PyWhileStatementTree extends PyStatementTree {
+  Token whileKeyword();
 
-  List<PyExpressionTree> expressions();
-
-  Token inKeyword();
-
-  List<PyExpressionTree> testExpressions();
+  PyExpressionTree condition();
 
   Token colon();
 

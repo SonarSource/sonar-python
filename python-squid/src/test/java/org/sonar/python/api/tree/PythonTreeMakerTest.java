@@ -25,6 +25,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
+import org.sonar.python.tree.PyWhileStatementTreeImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,6 +58,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("class toto:pass", PyClassDefTree.class);
     testData.put("for foo in bar:pass", PyForStatementTree.class);
     testData.put("global foo", PyGlobalStatementTree.class);
+    testData.put("while cond: pass", PyWhileStatementTree.class);
 
 
     testData.forEach((c,clazz) -> {
@@ -509,6 +511,25 @@ public class PythonTreeMakerTest extends RuleTest {
     pyForStatementTree = new PythonTreeMaker().forStatement(astNode);
     assertThat(pyForStatementTree.expressions()).hasSize(1);
     assertThat(pyForStatementTree.testExpressions()).hasSize(1);
+    assertThat(pyForStatementTree.body()).hasSize(1);
+    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(pyForStatementTree.elseBody()).hasSize(1);
+    assertThat(pyForStatementTree.elseBody().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+  }
+
+  @Test
+  public void while_statement() {
+    setRootRule(PythonGrammar.WHILE_STMT);
+    AstNode astNode = p.parse("while foo : pass");
+    PyWhileStatementTreeImpl pyForStatementTree = new PythonTreeMaker().whileStatement(astNode);
+    assertThat(pyForStatementTree.condition()).isNotNull();
+    assertThat(pyForStatementTree.body()).hasSize(1);
+    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(pyForStatementTree.elseBody()).isEmpty();
+
+    astNode = p.parse("while foo:\n  pass\nelse:\n  pass");
+    pyForStatementTree = new PythonTreeMaker().whileStatement(astNode);
+    assertThat(pyForStatementTree.condition()).isNotNull();
     assertThat(pyForStatementTree.body()).hasSize(1);
     assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody()).hasSize(1);

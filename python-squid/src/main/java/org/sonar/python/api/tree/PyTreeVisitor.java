@@ -69,4 +69,5 @@ public interface PyTreeVisitor {
 
   void visitNonlocalStatement(PyNonlocalStatementTree pyNonlocalStatementTree);
 
+  void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree);
 }

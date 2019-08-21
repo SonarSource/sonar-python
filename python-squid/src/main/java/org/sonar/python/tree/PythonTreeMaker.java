@@ -115,6 +115,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.FOR_STMT)) {
       return forStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.WHILE_STMT)) {
+      return whileStatement(astNode);
+    }
     if (astNode.is(PythonGrammar.GLOBAL_STMT)) {
       return globalStatement(astNode);
     }
@@ -378,6 +381,15 @@ public class PythonTreeMaker {
     AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
     List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
     return new PyForStatementTreeImpl(astNode, expressions, testExpressions, body, elseBody);
+  }
+
+  public PyWhileStatementTreeImpl whileStatement(AstNode astNode) {
+    PyExpressionTree condition = expression(astNode.getFirstChild(PythonGrammar.TEST));
+    AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
+    List<PyStatementTree> body = getStatementsFromSuite(firstSuite);
+    AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
+    List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
+    return new PyWhileStatementTreeImpl(astNode, condition, body, elseBody);
   }
 
   // expressions
