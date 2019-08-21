@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -43,11 +43,13 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyGlobalStatementTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
@@ -112,6 +114,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.FOR_STMT)) {
       return forStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.GLOBAL_STMT)) {
+      return globalStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -291,6 +296,22 @@ public class PythonTreeMaker {
       .map(this::name)
       .collect(Collectors.toList());
     return new PyDottedNameTreeImpl(astNode, names);
+  }
+
+  public PyGlobalStatementTree globalStatement(AstNode astNode) {
+    Token globalKeyword = astNode.getFirstChild(PythonKeyword.GLOBAL).getToken();
+    List<PyNameTree> variables = astNode.getChildren(PythonGrammar.NAME).stream()
+      .map(this::name)
+      .collect(Collectors.toList());
+    return new PyGlobalStatementTreeImpl(astNode, globalKeyword, variables);
+  }
+
+  public PyNonlocalStatementTree nonlocalStatement(AstNode astNode) {
+    Token nonlocalKeyword = astNode.getFirstChild(PythonKeyword.NONLOCAL).getToken();
+    List<PyNameTree> variables = astNode.getChildren(PythonGrammar.NAME).stream()
+      .map(this::name)
+      .collect(Collectors.toList());
+    return new PyNonlocalStatementTreeImpl(astNode, nonlocalKeyword, variables);
   }
   // Compound statements
 

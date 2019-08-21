@@ -56,6 +56,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("from foo import f", PyImportStatementTree.class);
     testData.put("class toto:pass", PyClassDefTree.class);
     testData.put("for foo in bar:pass", PyForStatementTree.class);
+    testData.put("global foo", PyGlobalStatementTree.class);
 
 
     testData.forEach((c,clazz) -> {
@@ -430,6 +431,40 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.importedNames()).isNull();
     assertThat(importStatement.isWildcardImport()).isTrue();
     assertThat(importStatement.wildcard().getValue()).isEqualTo("*");
+  }
+
+  @Test
+  public void globalStatement() {
+    setRootRule(PythonGrammar.GLOBAL_STMT);
+    AstNode astNode = p.parse("global foo");
+    PyGlobalStatementTree globalStatement = new PythonTreeMaker().globalStatement(astNode);
+    assertThat(globalStatement.globalKeyword().getValue()).isEqualTo("global");
+    assertThat(globalStatement.variables()).hasSize(1);
+    assertThat(globalStatement.variables().get(0).name()).isEqualTo("foo");
+
+    astNode = p.parse("global foo, bar");
+    globalStatement = new PythonTreeMaker().globalStatement(astNode);
+    assertThat(globalStatement.globalKeyword().getValue()).isEqualTo("global");
+    assertThat(globalStatement.variables()).hasSize(2);
+    assertThat(globalStatement.variables().get(0).name()).isEqualTo("foo");
+    assertThat(globalStatement.variables().get(1).name()).isEqualTo("bar");
+  }
+
+  @Test
+  public void nonlocalStatement() {
+    setRootRule(PythonGrammar.NONLOCAL_STMT);
+    AstNode astNode = p.parse("nonlocal foo");
+    PyNonlocalStatementTree nonlocalStatement = new PythonTreeMaker().nonlocalStatement(astNode);
+    assertThat(nonlocalStatement.nonlocalKeyword().getValue()).isEqualTo("nonlocal");
+    assertThat(nonlocalStatement.variables()).hasSize(1);
+    assertThat(nonlocalStatement.variables().get(0).name()).isEqualTo("foo");
+
+    astNode = p.parse("nonlocal foo, bar");
+    nonlocalStatement = new PythonTreeMaker().nonlocalStatement(astNode);
+    assertThat(nonlocalStatement.nonlocalKeyword().getValue()).isEqualTo("nonlocal");
+    assertThat(nonlocalStatement.variables()).hasSize(2);
+    assertThat(nonlocalStatement.variables().get(0).name()).isEqualTo("foo");
+    assertThat(nonlocalStatement.variables().get(1).name()).isEqualTo("bar");
   }
 
   @Test

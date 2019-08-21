@@ -64,4 +64,9 @@ public interface PyTreeVisitor {
   void visitImportName(PyImportNameTree pyImportNameTree);
 
   void visitForStatement(PyForStatementTree pyForStatementTree);
+
+  void visitGlobalStatement(PyGlobalStatementTree pyGlobalStatementTree);
+
+  void visitNonlocalStatement(PyNonlocalStatementTree pyNonlocalStatementTree);
+
 }

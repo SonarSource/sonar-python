@@ -54,6 +54,8 @@ public interface Tree {
 
     FUNCDEF(PyFunctionDefTree.class),
 
+    GLOBAL_STMT(PyGlobalStatementTree.class),
+
     IF_STMT(PyIfStatementTree.class),
 
     IMPORT_FROM(PyImportFromTree.class),
@@ -63,6 +65,8 @@ public interface Tree {
     IMPORT_STMT(PyDottedNameTree.class),
 
     NAME(PyNameTree.class),
+
+    NONLOCAL_STMT(PyNonlocalStatementTree.class),
 
     PASS_STMT(PyPassStatementTree.class),
 
