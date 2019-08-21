@@ -34,12 +34,12 @@ public class PyExpressionStatementTreeImpl extends PyTree implements PyExpressio
   }
   @Override
   public Kind getKind() {
-    return null;
+    return Kind.EXPRESSION_STMT;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-
+    visitor.visitExpressionStatement(this);
   }
 
   @Override

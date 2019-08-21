@@ -48,6 +48,8 @@ public interface Tree {
 
     EXEC_STMT(PyExecStatementTree.class),
 
+    EXPRESSION_STMT(PyExpressionStatementTree.class),
+
     FILE_INPUT(PyFileInputTree.class),
 
     FOR_STMT(PyForStatementTree.class),

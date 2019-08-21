@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.PyExpressionStatementTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
@@ -210,6 +211,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyWhileStatementTree.condition());
     scan(pyWhileStatementTree.body());
     scan(pyWhileStatementTree.elseBody());
+  }
+
+  @Override
+  public void visitExpressionStatement(PyExpressionStatementTree pyExpressionStatementTree) {
+    scan(pyExpressionStatementTree.expressions());
   }
 
 }
