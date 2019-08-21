@@ -34,6 +34,8 @@ public interface Tree {
 
     BREAK_STMT(PyBreakStatementTree.class),
 
+    CLASSDEF(PyClassDefTree.class),
+
     CONTINUE_STMT(PyContinueStatementTree.class),
 
     DEL_STMT(PyDelStatementTree.class),

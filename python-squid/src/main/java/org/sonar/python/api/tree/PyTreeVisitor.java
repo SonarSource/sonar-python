@@ -52,4 +52,6 @@ public interface PyTreeVisitor {
   void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree);
 
   void visitName(PyNameTree pyNameTree);
+
+  void visitClassDef(PyClassDefTree pyClassDefTree);
 }

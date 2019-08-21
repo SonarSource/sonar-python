@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
@@ -147,5 +148,12 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitName(PyNameTree pyNameTree) {
     // nothing to scan on a name
+  }
+
+  @Override
+  public void visitClassDef(PyClassDefTree pyClassDefTree) {
+    scan(pyClassDefTree.name());
+    scan(pyClassDefTree.args());
+    scan(pyClassDefTree.body());
   }
 }

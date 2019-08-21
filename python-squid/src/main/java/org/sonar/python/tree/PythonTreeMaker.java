@@ -28,8 +28,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
@@ -95,7 +97,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.FUNCDEF)) {
       return funcDefStatement(astNode);
     }
-
+    if (astNode.is(PythonGrammar.CLASSDEF)) {
+      return classDefStatement(astNode);
+    }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
   }
@@ -260,12 +264,21 @@ public class PythonTreeMaker {
   }
 
   public PyFunctionDefTree funcDefStatement(AstNode astNode) {
-
+    // TODO decorators
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
-
+    // TODO argList
     PyTypedArgListTree typedArgs = null;
     List<PyStatementTree> body = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     return new PyFunctionDefTreeImpl(astNode, name, typedArgs, body);
+  }
+
+  public PyClassDefTree classDefStatement(AstNode astNode) {
+    // TODO decorators
+    PyNameTree name = name(astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild(PythonGrammar.NAME));
+    // TODO argList
+    PyArgListTree args = null;
+    List<PyStatementTree> body = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    return new PyClassDefTreeImpl(astNode, name, args, body);
   }
 
   private PyNameTree name(AstNode astNode) {
