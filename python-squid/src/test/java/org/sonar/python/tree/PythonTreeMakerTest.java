@@ -59,6 +59,7 @@ import org.sonar.python.api.tree.Tree;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class PythonTreeMakerTest extends RuleTest {
 
@@ -68,6 +69,16 @@ public class PythonTreeMakerTest extends RuleTest {
   public void fileInputTreeOnEmptyFile() {
     PyFileInputTree pyTree = parse("", treeMaker::fileInput);
     assertThat(pyTree.statements()).isEmpty();
+  }
+
+  @Test
+  public void unexpected_statement_should_throw_an_exception() {
+    try {
+      parse("", treeMaker::statement);
+      fail("unexpected ASTNode type for statement should not succeed to be translated to Strongly typed AST");
+    } catch (IllegalStateException iae) {
+      assertThat(iae).hasMessage("Statement FILE_INPUT not correctly translated to strongly typed AST");
+    }
   }
 
   @Test

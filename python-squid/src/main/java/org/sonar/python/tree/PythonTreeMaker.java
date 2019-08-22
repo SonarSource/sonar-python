@@ -72,7 +72,7 @@ public class PythonTreeMaker {
     return new PyFileInputTreeImpl(astNode, statements);
   }
 
-  private PyStatementTree statement(AstNode astNode) {
+  PyStatementTree statement(AstNode astNode) {
     if (astNode.is(PythonGrammar.IF_STMT)) {
       return ifStatement(astNode);
     }
