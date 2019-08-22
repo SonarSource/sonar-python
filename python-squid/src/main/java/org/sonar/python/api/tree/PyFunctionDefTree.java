@@ -41,12 +41,12 @@ public interface PyFunctionDefTree extends PyStatementTree {
   Token rightPar();
 
   /**
-   * dash of optional '->'
+   * dash of optional {@code ->}
    */
   @CheckForNull
   Token dash();
   /**
-   * pointer of optional '->'
+   * pointer of optional {@code ->}
    */
   @CheckForNull
   Token gt();
