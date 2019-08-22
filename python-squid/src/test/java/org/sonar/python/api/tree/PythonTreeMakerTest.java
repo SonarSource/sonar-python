@@ -66,6 +66,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("'foo'", PyExpressionStatementTree.class);
     testData.put("try: this\nexcept Exception: pass", PyTryStatementTree.class);
     testData.put("with foo, bar as qix : pass", PyWithStatementTree.class);
+    testData.put("async with foo, bar as qix : pass", PyWithStatementTree.class);
 
     testData.forEach((c,clazz) -> {
       PyFileInputTree pyTree = parse(c, treeMaker::fileInput);
@@ -621,12 +622,24 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.body()).hasSize(1);
     assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody()).isEmpty();
+
+    PyWithStatementTree withStatement = parse("async with foo : pass", treeMaker::withStatement);
+    assertThat(withStatement.isAsync()).isTrue();
+    assertThat(withStatement.asyncKeyword().getValue()).isEqualTo("async");
+    PyWithItemTree pyWithItemTree = withStatement.withItems().get(0);
+    assertThat(pyWithItemTree.test()).isNotNull();
+    assertThat(pyWithItemTree.as()).isNull();
+    assertThat(pyWithItemTree.expression()).isNull();
+    assertThat(withStatement.statements()).hasSize(1);
+    assertThat(withStatement.statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
   }
 
   @Test
   public void with_statement() {
     setRootRule(PythonGrammar.WITH_STMT);
     PyWithStatementTree withStatement = parse("with foo : pass", treeMaker::withStatement);
+    assertThat(withStatement.isAsync()).isFalse();
+    assertThat(withStatement.asyncKeyword()).isNull();
     assertThat(withStatement.withItems()).hasSize(1);
     PyWithItemTree pyWithItemTree = withStatement.withItems().get(0);
     assertThat(pyWithItemTree.test()).isNotNull();

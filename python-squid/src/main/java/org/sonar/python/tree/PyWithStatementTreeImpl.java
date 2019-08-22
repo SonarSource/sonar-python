@@ -34,13 +34,17 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
 
   private final List<PyWithItemTree> withItems;
   private final List<PyStatementTree> statements;
+  private final Token asyncKeyword;
+  private final boolean isAsync;
   private final Token colon;
 
-  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, List<PyStatementTree> statements) {
+  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, List<PyStatementTree> statements, Token asyncKeyword) {
     super(node);
     this.withItems = withItems;
     this.colon = colon;
     this.statements = statements;
+    this.asyncKeyword = asyncKeyword;
+    this.isAsync = asyncKeyword != null;
   }
 
   @Override
@@ -56,6 +60,17 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
   @Override
   public List<PyStatementTree> statements() {
     return statements;
+  }
+
+  @Override
+  public boolean isAsync() {
+    return isAsync;
+  }
+
+  @CheckForNull
+  @Override
+  public Token asyncKeyword() {
+    return asyncKeyword;
   }
 
   @Override

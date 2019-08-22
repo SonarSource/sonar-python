@@ -139,11 +139,13 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ASYNC_STMT) && astNode.hasDirectChildren(PythonGrammar.FOR_STMT)) {
       return forStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.ASYNC_STMT) && astNode.hasDirectChildren(PythonGrammar.WITH_STMT)) {
+      return withStatement(astNode);
+    }
     if (astNode.is(PythonGrammar.WITH_STMT)) {
       return withStatement(astNode);
     }
-    // throw new IllegalStateException("Statement not translated to strongly typed AST");
-    return null;
+    throw new IllegalStateException("Statement not translated to strongly typed AST");
   }
 
   private List<PyStatementTree> getStatementsFromSuite(AstNode astNode) {
@@ -452,11 +454,17 @@ public class PythonTreeMaker {
   }
 
   public PyWithStatementTree withStatement(AstNode astNode) {
-    List<PyWithItemTree> withItems = withItems(astNode.getChildren(PythonGrammar.WITH_ITEM));
-    AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
+    AstNode withStmtNode = astNode;
+    Token asyncKeyword = null;
+    if (astNode.is(PythonGrammar.ASYNC_STMT)) {
+      withStmtNode = astNode.getFirstChild(PythonGrammar.WITH_STMT);
+      asyncKeyword = astNode.getFirstChild().getToken();
+    }
+    List<PyWithItemTree> withItems = withItems(withStmtNode.getChildren(PythonGrammar.WITH_ITEM));
+    AstNode suite = withStmtNode.getFirstChild(PythonGrammar.SUITE);
     Token colon = suite.getPreviousSibling().getToken();
     List<PyStatementTree> statements = getStatementsFromSuite(suite);
-    return new PyWithStatementTreeImpl(astNode, withItems, colon, statements);
+    return new PyWithStatementTreeImpl(withStmtNode, withItems, colon, statements, asyncKeyword);
   }
 
   private List<PyWithItemTree> withItems(List<AstNode> withItems) {
@@ -469,7 +477,7 @@ public class PythonTreeMaker {
     AstNode asNode = testNode.getNextSibling();
     PyExpressionTree expr = null;
     Token as = null;
-    if(asNode != null) {
+    if (asNode != null) {
       as = asNode.getToken();
       expr = expression(withItem.getFirstChild(PythonGrammar.EXPR));
     }
