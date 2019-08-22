@@ -24,10 +24,10 @@ import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = CommentRegularExpressionCheck.CHECK_KEY)
-public class CommentRegularExpressionCheck extends PythonCheck {
+public class CommentRegularExpressionCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "CommentRegularExpression";
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";

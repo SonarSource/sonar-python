@@ -27,10 +27,10 @@ import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = TooManyLinesInFileCheck.CHECK_KEY)
-public class TooManyLinesInFileCheck extends PythonCheck {
+public class TooManyLinesInFileCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S104";
   private static final int DEFAULT = 1000;

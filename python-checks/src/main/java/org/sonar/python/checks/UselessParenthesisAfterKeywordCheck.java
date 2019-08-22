@@ -28,12 +28,12 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = UselessParenthesisAfterKeywordCheck.CHECK_KEY)
-public class UselessParenthesisAfterKeywordCheck extends PythonCheck {
+public class UselessParenthesisAfterKeywordCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1721";
   private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = initializeKeywordsFollowedByTest();

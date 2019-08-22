@@ -25,13 +25,13 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonBuiltinFunctions;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)
-public class SelfAssignmentCheck extends PythonCheck {
+public class SelfAssignmentCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1656";
 

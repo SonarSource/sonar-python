@@ -24,11 +24,11 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = InequalityUsageCheck.CHECK_KEY)
-public class InequalityUsageCheck extends PythonCheck {
+public class InequalityUsageCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "InequalityUsage";
 

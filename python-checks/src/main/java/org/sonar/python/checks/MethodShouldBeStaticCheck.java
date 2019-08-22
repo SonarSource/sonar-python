@@ -26,12 +26,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 
 @Rule(key = MethodShouldBeStaticCheck.CHECK_KEY)
-public class MethodShouldBeStaticCheck extends PythonCheck {
+public class MethodShouldBeStaticCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S2325";
 

@@ -24,11 +24,11 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
-public class TooManyParametersCheck extends PythonCheck {
+public class TooManyParametersCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S107";
   private static final String MESSAGE = "%s has %s parameters, which is greater than the %s authorized.";
 

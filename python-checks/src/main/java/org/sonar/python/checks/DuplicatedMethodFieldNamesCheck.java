@@ -29,12 +29,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = DuplicatedMethodFieldNamesCheck.CHECK_KEY)
-public class DuplicatedMethodFieldNamesCheck extends PythonCheck {
+public class DuplicatedMethodFieldNamesCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1845";
   private static final String MESSAGE = "Rename %s \"%s\" to prevent any misunderstanding/clash with %s \"%s\" defined on line %s";

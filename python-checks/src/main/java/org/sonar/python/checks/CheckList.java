@@ -19,7 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import org.sonar.python.PythonCheck;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
@@ -38,7 +40,7 @@ public final class CheckList {
   }
 
   public static Iterable<Class> getChecks() {
-    return PythonCheck.immutableSet(
+    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
@@ -102,7 +104,7 @@ public final class CheckList {
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
       XPathCheck.class
-    );
+    )));
   }
 
 }

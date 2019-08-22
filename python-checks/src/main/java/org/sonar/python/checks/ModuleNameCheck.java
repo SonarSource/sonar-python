@@ -24,10 +24,10 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = ModuleNameCheck.CHECK_KEY)
-public class ModuleNameCheck extends PythonCheck {
+public class ModuleNameCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1578";
   private static final String DEFAULT = "(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$";

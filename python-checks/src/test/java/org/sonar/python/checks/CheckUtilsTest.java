@@ -30,7 +30,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import org.junit.Test;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -57,7 +57,7 @@ public class CheckUtilsTest {
     PythonCheckVerifier.verify("src/test/resources/checks/utils/equalsNode.py", new EqualsNodeCheck());
   }
 
-  private static class EqualsNodeCheck extends PythonCheck {
+  private static class EqualsNodeCheck extends PythonCheckAstNode {
     @Override
     public Set<AstNodeType> subscribedKinds() {
       return ImmutableSet.copyOf(PythonGrammar.values());
@@ -81,7 +81,7 @@ public class CheckUtilsTest {
     PythonCheckVerifier.verify("src/test/resources/checks/utils/isMethodDefinition.py", new IsMethodDefinitionCheck());
   }
 
-  private static class IsMethodDefinitionCheck extends PythonCheck {
+  private static class IsMethodDefinitionCheck extends PythonCheckAstNode {
     @Override
     public Set<AstNodeType> subscribedKinds() {
       return ImmutableSet.of(
@@ -106,7 +106,7 @@ public class CheckUtilsTest {
     PythonCheckVerifier.verify("src/test/resources/checks/utils/classHasInheritance.py", new ClassHasInheritanceCheck());
   }
 
-  private static class ClassHasInheritanceCheck extends PythonCheck {
+  private static class ClassHasInheritanceCheck extends PythonCheckAstNode {
     @Override
     public Set<AstNodeType> subscribedKinds() {
       return ImmutableSet.of(PythonGrammar.CLASSDEF);

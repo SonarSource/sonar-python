@@ -35,7 +35,7 @@ public class FileMetrics {
   private List<Integer> functionComplexities = new ArrayList<>();
 
   public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
-    AstNode rootTree = context.rootTree();
+    AstNode rootTree = context.rootAstNode();
     numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
     numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
     complexityVisitor.scanFile(context);

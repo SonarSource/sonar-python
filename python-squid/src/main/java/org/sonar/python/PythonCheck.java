@@ -20,53 +20,23 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.Nullable;
 
-public abstract class PythonCheck extends PythonVisitor {
+public interface PythonCheck {
 
-  protected final PreciseIssue addIssue(AstNode node, @Nullable String message) {
-    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
-    getContext().addIssue(newIssue);
-    return newIssue;
-  }
 
-  protected final PreciseIssue addIssue(IssueLocation primaryLocation) {
-    PreciseIssue newIssue = new PreciseIssue(this, primaryLocation);
-    getContext().addIssue(newIssue);
-    return newIssue;
-  }
+  void scanFile(PythonVisitorContext visitorContext);
 
-  protected final PreciseIssue addLineIssue(String message, int lineNumber) {
-    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atLineLevel(message, lineNumber));
-    getContext().addIssue(newIssue);
-    return newIssue;
-  }
-
-  protected final PreciseIssue addFileIssue(String message) {
-    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atFileLevel(message));
-    getContext().addIssue(newIssue);
-    return newIssue;
-  }
-
-  protected final PreciseIssue addIssue(Token token, String message) {
-    return addIssue(new AstNode(token), message);
-  }
-
-  public static class PreciseIssue {
+  class PreciseIssue {
 
     private final PythonCheck check;
     private final IssueLocation primaryLocation;
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
 
-    private PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
+    protected PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
       this.check = check;
       this.primaryLocation = primaryLocation;
       this.secondaryLocations = new ArrayList<>();
@@ -103,9 +73,5 @@ public abstract class PythonCheck extends PythonVisitor {
     public PythonCheck check() {
       return check;
     }
-  }
-
-  public static <T> Set<T> immutableSet(T... el) {
-    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(el)));
   }
 }

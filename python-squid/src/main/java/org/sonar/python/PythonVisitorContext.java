@@ -24,36 +24,45 @@ import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
+import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilderVisitor;
+import org.sonar.python.tree.PyFileInputTreeImpl;
 
 public class PythonVisitorContext {
 
-  private final AstNode rootTree;
+  private final PyFileInputTreeImpl rootTree;
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
+  private final AstNode rootAst;
   private SymbolTable symbolTable = null;
   private List<PreciseIssue> issues = new ArrayList<>();
 
-  public PythonVisitorContext(AstNode rootTree, PythonFile pythonFile) {
-    this(rootTree, pythonFile, null);
+
+  public PythonVisitorContext(AstNode rootAst, PyFileInputTree rootTree, PythonFile pythonFile) {
+    this(rootAst, rootTree, pythonFile, null);
     SymbolTableBuilderVisitor symbolTableBuilderVisitor = new SymbolTableBuilderVisitor();
     symbolTableBuilderVisitor.scanFile(this);
     symbolTable = symbolTableBuilderVisitor.symbolTable();
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
-    this(null, pythonFile, parsingException);
+    this(null, null, pythonFile, parsingException);
   }
 
-  private PythonVisitorContext(AstNode rootTree, PythonFile pythonFile, RecognitionException parsingException) {
-    this.rootTree = rootTree;
+  private PythonVisitorContext(AstNode rootAst, PyFileInputTree rootTree, PythonFile pythonFile, RecognitionException parsingException) {
+    this.rootAst = rootAst;
+    this.rootTree = (PyFileInputTreeImpl) rootTree;
     this.pythonFile = pythonFile;
     this.parsingException = parsingException;
   }
 
-  public AstNode rootTree() {
+  public PyFileInputTree rootTree() {
     return rootTree;
+  }
+
+  public AstNode rootAstNode() {
+    return rootAst;
   }
 
   public PythonFile pythonFile() {

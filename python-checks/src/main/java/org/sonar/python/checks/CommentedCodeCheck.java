@@ -32,14 +32,14 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 
 @Rule(key = CommentedCodeCheck.CHECK_KEY)
-public class CommentedCodeCheck extends PythonCheck {
+public class CommentedCodeCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";

@@ -24,11 +24,11 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonTokenType;
 
 @Rule(key = "S1717")
-public class BackslashInStringCheck extends PythonCheck {
+public class BackslashInStringCheck extends PythonCheckAstNode {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
   private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";

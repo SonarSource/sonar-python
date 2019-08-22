@@ -31,7 +31,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonGrammar;
@@ -98,7 +98,7 @@ public class PythonHighlighter extends PythonVisitor {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return PythonCheck.immutableSet(
+    return PythonCheckAstNode.immutableSet(
       PythonGrammar.FUNCDEF,
       PythonGrammar.CLASSDEF,
       PythonGrammar.FILE_INPUT);

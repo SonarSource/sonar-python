@@ -36,7 +36,7 @@ public class PythonCheckTest {
   private static final File FILE = new File("src/test/resources/file.py");
   public static final String MESSAGE = "message";
 
-  private static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
+  private static List<PreciseIssue> scanFileForIssues(File file, PythonCheckAstNode check) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     check.scanFile(context);
     return context.getIssues();
@@ -151,7 +151,7 @@ public class PythonCheckTest {
     assertThat(issue.primaryLocation().endLine()).isEqualTo(3);
   }
 
-  private static class TestPythonCheck extends PythonCheck {
+  private static class TestPythonCheck extends PythonCheckAstNode {
 
     @Override
     public Set<AstNodeType> subscribedKinds() {

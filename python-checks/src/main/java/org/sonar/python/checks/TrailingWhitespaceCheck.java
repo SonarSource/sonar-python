@@ -23,10 +23,10 @@ import com.sonar.sslr.api.AstNode;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = TrailingWhitespaceCheck.CHECK_KEY)
-public class TrailingWhitespaceCheck extends PythonCheck {
+public class TrailingWhitespaceCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1131";
   public static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";

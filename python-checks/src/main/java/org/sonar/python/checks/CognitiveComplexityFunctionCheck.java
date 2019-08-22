@@ -27,12 +27,12 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.CognitiveComplexityVisitor;
 
 @Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)
-public class CognitiveComplexityFunctionCheck extends PythonCheck {
+public class CognitiveComplexityFunctionCheck extends PythonCheckAstNode {
 
   private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";
   public static final String CHECK_KEY = "S3776";

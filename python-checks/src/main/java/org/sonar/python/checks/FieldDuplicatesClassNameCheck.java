@@ -26,11 +26,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = FieldDuplicatesClassNameCheck.CHECK_KEY)
-public class FieldDuplicatesClassNameCheck extends PythonCheck {
+public class FieldDuplicatesClassNameCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S1700";
 

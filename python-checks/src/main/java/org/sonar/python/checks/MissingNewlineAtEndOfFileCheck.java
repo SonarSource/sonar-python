@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = MissingNewlineAtEndOfFileCheck.CHECK_KEY)
-public class MissingNewlineAtEndOfFileCheck extends PythonCheck {
+public class MissingNewlineAtEndOfFileCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S113";
   public static final String MESSAGE = "Add a new line at the end of this file \"%s\".";
 

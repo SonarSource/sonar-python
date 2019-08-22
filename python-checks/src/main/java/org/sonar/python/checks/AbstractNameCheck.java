@@ -20,9 +20,9 @@
 package org.sonar.python.checks;
 
 import java.util.regex.Pattern;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
-public abstract class AbstractNameCheck extends PythonCheck {
+public abstract class AbstractNameCheck extends PythonCheckAstNode {
 
   private Pattern pattern = null;
 

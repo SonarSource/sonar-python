@@ -21,11 +21,11 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.RecognitionException;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonVisitorContext;
 
 @Rule(key = ParsingErrorCheck.CHECK_KEY)
-public class ParsingErrorCheck extends PythonCheck {
+public class ParsingErrorCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "ParsingError";
 

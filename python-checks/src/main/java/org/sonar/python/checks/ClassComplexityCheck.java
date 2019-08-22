@@ -25,12 +25,12 @@ import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "ClassComplexity")
-public class ClassComplexityCheck extends PythonCheck {
+public class ClassComplexityCheck extends PythonCheckAstNode {
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
   private static final String MESSAGE = "Class has a complexity of %s which is greater than %s authorized.";
 

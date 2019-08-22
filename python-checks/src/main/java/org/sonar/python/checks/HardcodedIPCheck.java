@@ -29,11 +29,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonTokenType;
 
 @Rule(key = HardcodedIPCheck.CHECK_KEY)
-public class HardcodedIPCheck extends PythonCheck {
+public class HardcodedIPCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S1313";
 
   private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";

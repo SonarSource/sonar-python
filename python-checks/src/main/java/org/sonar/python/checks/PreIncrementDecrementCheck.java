@@ -25,12 +25,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 
 @Rule(key = PreIncrementDecrementCheck.CHECK_KEY)
-public class PreIncrementDecrementCheck extends PythonCheck {
+public class PreIncrementDecrementCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "PreIncrementDecrement";
   private static final String MESSAGE = "This statement doesn't produce the expected result, replace use of non-existent pre-%srement operator";
 

@@ -25,10 +25,10 @@ import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 
 @Rule(key = TrailingCommentCheck.CHECK_KEY)
-public class TrailingCommentCheck extends PythonCheck {
+public class TrailingCommentCheck extends PythonCheckAstNode {
 
   public static final String CHECK_KEY = "S139";
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";

@@ -25,11 +25,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = ReturnAndYieldInOneFunctionCheck.CHECK_KEY)
-public class ReturnAndYieldInOneFunctionCheck extends PythonCheck {
+public class ReturnAndYieldInOneFunctionCheck extends PythonCheckAstNode {
 
   public static final String MESSAGE = "Use only \"return\" or only \"yield\", not both.";
 

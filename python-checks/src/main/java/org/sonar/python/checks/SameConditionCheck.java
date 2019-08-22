@@ -27,13 +27,13 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.sslr.ast.AstSelect;
 
 @Rule(key = SameConditionCheck.CHECK_KEY)
-public class SameConditionCheck extends PythonCheck {
+public class SameConditionCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "S1862";
   private static final String MESSAGE = "This branch duplicates the one on line %s.";
 

@@ -24,11 +24,11 @@ import com.sonar.sslr.api.AstNodeType;
 import java.util.Collections;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.api.PythonGrammar;
 
 @Rule(key = PrintStatementUsageCheck.CHECK_KEY)
-public class PrintStatementUsageCheck extends PythonCheck {
+public class PrintStatementUsageCheck extends PythonCheckAstNode {
   public static final String CHECK_KEY = "PrintStatementUsage";
 
   @Override
