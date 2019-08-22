@@ -20,10 +20,6 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.Token;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
@@ -46,10 +42,6 @@ public abstract class PythonCheckTree extends BaseTreeVisitor implements PythonC
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node.astNode(), message));
     getContext().addIssue(newIssue);
     return newIssue;
-  }
-
-  public static <T> Set<T> immutableSet(T... el) {
-    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(el)));
   }
 
   @Override
