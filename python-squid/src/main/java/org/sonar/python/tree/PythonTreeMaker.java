@@ -134,6 +134,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.TRY_STMT)) {
       return tryStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.ASYNC_STMT) && astNode.hasDirectChildren(PythonGrammar.FOR_STMT)) {
+      return forStatement(astNode);
+    }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
   }
@@ -387,13 +390,19 @@ public class PythonTreeMaker {
   }
 
   public PyForStatementTree forStatement(AstNode astNode) {
-    List<PyExpressionTree> expressions = expressionsFromExprList(astNode.getFirstChild(PythonGrammar.EXPRLIST));
-    List<PyExpressionTree> testExpressions = expressionsFromTest(astNode.getFirstChild(PythonGrammar.TESTLIST));
-    AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
+    AstNode forStatementNode = astNode;
+    Token asyncToken = null;
+    if (astNode.is(PythonGrammar.ASYNC_STMT)) {
+      asyncToken = astNode.getFirstChild().getToken();
+      forStatementNode = astNode.getFirstChild(PythonGrammar.FOR_STMT);
+    }
+    List<PyExpressionTree> expressions = expressionsFromExprList(forStatementNode.getFirstChild(PythonGrammar.EXPRLIST));
+    List<PyExpressionTree> testExpressions = expressionsFromTest(forStatementNode.getFirstChild(PythonGrammar.TESTLIST));
+    AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
     List<PyStatementTree> body = getStatementsFromSuite(firstSuite);
-    AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
+    AstNode lastSuite = forStatementNode.getLastChild(PythonGrammar.SUITE);
     List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
-    return new PyForStatementTreeImpl(astNode, expressions, testExpressions, body, elseBody);
+    return new PyForStatementTreeImpl(forStatementNode, expressions, testExpressions, body, elseBody, asyncToken);
   }
 
   public PyWhileStatementTreeImpl whileStatement(AstNode astNode) {

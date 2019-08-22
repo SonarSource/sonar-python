@@ -57,6 +57,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("from foo import f", PyImportStatementTree.class);
     testData.put("class toto:pass", PyClassDefTree.class);
     testData.put("for foo in bar:pass", PyForStatementTree.class);
+    testData.put("async for foo in bar: pass", PyForStatementTree.class);
     testData.put("global foo", PyGlobalStatementTree.class);
     testData.put("nonlocal foo", PyNonlocalStatementTree.class);
     testData.put("while cond: pass", PyWhileStatementTree.class);
@@ -508,6 +509,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.body()).hasSize(1);
     assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody()).isEmpty();
+    assertThat(pyForStatementTree.isAsync()).isFalse();
+    assertThat(pyForStatementTree.asyncKeyword()).isNull();
 
     astNode = p.parse("for foo in bar:\n  pass\nelse:\n  pass");
     pyForStatementTree = new PythonTreeMaker().forStatement(astNode);
@@ -604,5 +607,19 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(exceptClause.asKeyword()).isNull();
     assertThat(exceptClause.commaToken().getValue()).isEqualTo(",");
     assertThat(exceptClause.exceptionInstance()).isNotNull();
+  }
+
+  @Test
+  public void async_statement() {
+    setRootRule(PythonGrammar.ASYNC_STMT);
+    AstNode astNode = p.parse("async for foo in bar: pass");
+    PyForStatementTree pyForStatementTree = new PythonTreeMaker().forStatement(astNode);
+    assertThat(pyForStatementTree.isAsync()).isTrue();
+    assertThat(pyForStatementTree.asyncKeyword().getValue()).isEqualTo("async");
+    assertThat(pyForStatementTree.expressions()).hasSize(1);
+    assertThat(pyForStatementTree.testExpressions()).hasSize(1);
+    assertThat(pyForStatementTree.body()).hasSize(1);
+    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(pyForStatementTree.elseBody()).isEmpty();
   }
 }

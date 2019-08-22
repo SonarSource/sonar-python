@@ -34,13 +34,17 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   private final List<PyExpressionTree> testExpressions;
   private final List<PyStatementTree> body;
   private final List<PyStatementTree> elseBody;
+  private final Token asyncKeyword;
+  private final boolean isAsync;
 
-  public PyForStatementTreeImpl(AstNode astNode, List<PyExpressionTree> expressions, List<PyExpressionTree> testExpressions, List<PyStatementTree> body, List<PyStatementTree> elseBody) {
+  public PyForStatementTreeImpl(AstNode astNode, List<PyExpressionTree> expressions, List<PyExpressionTree> testExpressions, List<PyStatementTree> body, List<PyStatementTree> elseBody, Token asyncKeyword) {
     super(astNode);
     this.expressions = expressions;
     this.testExpressions = testExpressions;
     this.body = body;
     this.elseBody = elseBody;
+    this.asyncKeyword = asyncKeyword;
+    this.isAsync = asyncKeyword != null;
   }
 
   @Override
@@ -99,5 +103,16 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   @Override
   public List<PyStatementTree> elseBody() {
     return elseBody;
+  }
+
+  @Override
+  public boolean isAsync() {
+    return isAsync;
+  }
+
+  @CheckForNull
+  @Override
+  public Token asyncKeyword() {
+    return asyncKeyword;
   }
 }

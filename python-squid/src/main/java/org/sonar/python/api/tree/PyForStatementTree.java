@@ -43,4 +43,9 @@ public interface PyForStatementTree extends PyStatementTree {
   Token elseColon();
 
   List<PyStatementTree> elseBody();
+
+  boolean isAsync();
+
+  @CheckForNull
+  Token asyncKeyword();
 }
