@@ -49,6 +49,8 @@ import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.PyWithItemTree;
+import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
 import org.sonar.python.api.tree.Tree;
@@ -239,5 +241,17 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyExceptClauseTree.exception());
     scan(pyExceptClauseTree.exceptionInstance());
     scan(pyExceptClauseTree.body());
+  }
+
+  @Override
+  public void visitWithStatement(PyWithStatementTree pyWithStatementTree) {
+    scan(pyWithStatementTree.withItems());
+    scan(pyWithStatementTree.statements());
+  }
+
+  @Override
+  public void visitWithItem(PyWithItemTree pyWithItemTree) {
+    scan(pyWithItemTree.test());
+    scan(pyWithItemTree.expression());
   }
 }

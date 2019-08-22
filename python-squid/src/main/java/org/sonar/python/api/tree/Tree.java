@@ -86,6 +86,10 @@ public interface Tree {
 
     WHILE_STMT(PyWhileStatementTree.class),
 
+    WITH_ITEM(PyWithItemTree.class),
+
+    WITH_STMT(PyWithStatementTree.class),
+
     YIELD_EXPR(PyYieldExpressionTree.class),
 
     YIELD_STMT(PyYieldStatementTree.class);

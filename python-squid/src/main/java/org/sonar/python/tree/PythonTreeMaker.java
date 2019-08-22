@@ -60,6 +60,8 @@ import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyWithItemTree;
+import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
 
@@ -136,6 +138,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.ASYNC_STMT) && astNode.hasDirectChildren(PythonGrammar.FOR_STMT)) {
       return forStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.WITH_STMT)) {
+      return withStatement(astNode);
     }
     // throw new IllegalStateException("Statement not translated to strongly typed AST");
     return null;
@@ -444,6 +449,31 @@ public class PythonTreeMaker {
       elseStatementTree = elseStatement(elseNode.getNextSibling().getNextSibling());
     }
     return new PyTryStatementTreeImpl(astNode, tryKeyword, tryBody, exceptClauseTrees, finallyClause, elseStatementTree);
+  }
+
+  public PyWithStatementTree withStatement(AstNode astNode) {
+    List<PyWithItemTree> withItems = withItems(astNode.getChildren(PythonGrammar.WITH_ITEM));
+    AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
+    Token colon = suite.getPreviousSibling().getToken();
+    List<PyStatementTree> statements = getStatementsFromSuite(suite);
+    return new PyWithStatementTreeImpl(astNode, withItems, colon, statements);
+  }
+
+  private List<PyWithItemTree> withItems(List<AstNode> withItems) {
+    return withItems.stream().map(this::withItem).collect(Collectors.toList());
+  }
+
+  private PyWithItemTree withItem(AstNode withItem) {
+    AstNode testNode = withItem.getFirstChild(PythonGrammar.TEST);
+    PyExpressionTree test = expression(testNode);
+    AstNode asNode = testNode.getNextSibling();
+    PyExpressionTree expr = null;
+    Token as = null;
+    if(asNode != null) {
+      as = asNode.getToken();
+      expr = expression(withItem.getFirstChild(PythonGrammar.EXPR));
+    }
+    return new PyWithStatementTreeImpl.PyWithItemTreeImpl(withItem, test, as, expr);
   }
 
   private PyExceptClauseTree exceptClause(AstNode except, List<PyStatementTree> body) {

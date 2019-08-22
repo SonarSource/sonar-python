@@ -78,4 +78,8 @@ public interface PyTreeVisitor {
   void visitFinallyClause(PyFinallyClauseTree pyFinallyClauseTree);
 
   void visitExceptClause(PyExceptClauseTree pyExceptClauseTree);
+
+  void visitWithStatement(PyWithStatementTree pyWithStatementTree);
+
+  void visitWithItem(PyWithItemTree pyWithItemTree);
 }
