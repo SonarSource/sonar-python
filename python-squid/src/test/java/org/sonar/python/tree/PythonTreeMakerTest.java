@@ -522,8 +522,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.name().name()).isEqualTo("func");
     assertThat(functionDefTree.body()).hasSize(1);
     assertThat(functionDefTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    // TODO
     assertThat(functionDefTree.typedArgs()).isNull();
     assertThat(functionDefTree.decorators()).isNull();
+    assertThat(functionDefTree.asyncKeyword()).isNull();
+    assertThat(functionDefTree.colon()).isNull();
+    assertThat(functionDefTree.defKeyword()).isNull();
+    assertThat(functionDefTree.dash()).isNull();
+    assertThat(functionDefTree.gt()).isNull();
+    assertThat(functionDefTree.leftPar()).isNull();
+    assertThat(functionDefTree.rightPar()).isNull();
 
   }
 
@@ -561,25 +569,39 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody()).hasSize(1);
     assertThat(pyForStatementTree.elseBody().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+
+    // TODO
+    assertThat(pyForStatementTree.forKeyword()).isNull();
+    assertThat(pyForStatementTree.inKeyword()).isNull();
+    assertThat(pyForStatementTree.colon()).isNull();
+    assertThat(pyForStatementTree.elseKeyword()).isNull();
+    assertThat(pyForStatementTree.elseColon()).isNull();
   }
 
   @Test
   public void while_statement() {
     setRootRule(PythonGrammar.WHILE_STMT);
     AstNode astNode = p.parse("while foo : pass");
-    PyWhileStatementTreeImpl pyForStatementTree = treeMaker.whileStatement(astNode);
-    assertThat(pyForStatementTree.condition()).isNotNull();
-    assertThat(pyForStatementTree.body()).hasSize(1);
-    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(pyForStatementTree.elseBody()).isEmpty();
+    PyWhileStatementTreeImpl whileStatement = treeMaker.whileStatement(astNode);
+    assertThat(whileStatement.condition()).isNotNull();
+    assertThat(whileStatement.body()).hasSize(1);
+    assertThat(whileStatement.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(whileStatement.elseBody()).isEmpty();
 
     astNode = p.parse("while foo:\n  pass\nelse:\n  pass");
-    pyForStatementTree = treeMaker.whileStatement(astNode);
-    assertThat(pyForStatementTree.condition()).isNotNull();
-    assertThat(pyForStatementTree.body()).hasSize(1);
-    assertThat(pyForStatementTree.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(pyForStatementTree.elseBody()).hasSize(1);
-    assertThat(pyForStatementTree.elseBody().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    whileStatement = treeMaker.whileStatement(astNode);
+    assertThat(whileStatement.condition()).isNotNull();
+    assertThat(whileStatement.body()).hasSize(1);
+    assertThat(whileStatement.body().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(whileStatement.elseBody()).hasSize(1);
+    assertThat(whileStatement.elseBody().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+
+    // TODO
+    assertThat(whileStatement.whileKeyword()).isNull();
+    assertThat(whileStatement.colon()).isNull();
+    assertThat(whileStatement.elseKeyword()).isNull();
+    assertThat(whileStatement.elseColon()).isNull();
+
   }
 
   @Test
