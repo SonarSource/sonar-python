@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.HashMap;
@@ -25,9 +25,38 @@ import java.util.Map;
 import java.util.function.Function;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyContinueStatementTree;
+import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExceptClauseTree;
+import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.PyExpressionStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyForStatementTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyGlobalStatementTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyImportFromTree;
+import org.sonar.python.api.tree.PyImportNameTree;
+import org.sonar.python.api.tree.PyImportStatementTree;
+import org.sonar.python.api.tree.PyNonlocalStatementTree;
+import org.sonar.python.api.tree.PyPassStatementTree;
+import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyRaiseStatementTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.PyWithItemTree;
+import org.sonar.python.api.tree.PyWithStatementTree;
+import org.sonar.python.api.tree.PyYieldExpressionTree;
+import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.parser.RuleTest;
-import org.sonar.python.tree.PyWhileStatementTreeImpl;
-import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

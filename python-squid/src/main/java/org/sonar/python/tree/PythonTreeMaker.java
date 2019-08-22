@@ -145,7 +145,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.WITH_STMT)) {
       return withStatement(astNode);
     }
-    throw new IllegalStateException("Statement not translated to strongly typed AST");
+    throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
   }
 
   private List<PyStatementTree> getStatementsFromSuite(AstNode astNode) {
