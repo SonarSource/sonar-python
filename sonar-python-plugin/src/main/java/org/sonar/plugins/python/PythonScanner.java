@@ -25,6 +25,7 @@ import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.Checks;
@@ -45,7 +46,9 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
+import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
@@ -95,6 +98,11 @@ public class PythonScanner {
       AstNode astNode = parser.parse(pythonFile.content());
       PyFileInputTree parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(astNode, parse, pythonFile);
+      List<PythonSubscriptionCheck> checksBasedOnTree = checks.all().stream()
+        .filter(check -> check instanceof PythonSubscriptionCheck)
+        .map(check -> (PythonSubscriptionCheck) check)
+        .collect(Collectors.toList());
+      SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext, parse);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);

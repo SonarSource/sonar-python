@@ -17,26 +17,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.tree;
+package org.sonar.python;
 
-import com.sonar.sslr.api.AstNode;
+import java.util.function.Consumer;
 import org.sonar.python.api.tree.Tree;
 
-public abstract class PyTree extends AstNode implements Tree {
-  private final AstNode node;
+public interface SubscriptionCheck {
+  void initialize(Context context);
 
-  public PyTree(AstNode node) {
-    super(node.getType(), node.getName(), node.getToken());
-    this.node = node;
-  }
+  interface Context {
 
-  @Override
-  public boolean is(Kind kind) {
-    return kind == getKind();
-  }
+    void registerSyntaxNodeConsumer(Tree.Kind elementType, Consumer<SubscriptionContext> consumer);
 
-  @Override
-  public AstNode astNode() {
-    return node;
   }
 }
