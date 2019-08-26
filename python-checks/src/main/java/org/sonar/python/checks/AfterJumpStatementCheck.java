@@ -19,52 +19,41 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Set;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree.Kind;
 
-@Rule(key = AfterJumpStatementCheck.CHECK_KEY)
-public class AfterJumpStatementCheck extends PythonCheckAstNode {
+@Rule(key = "S1763")
+public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S1763";
+  private static final Map<Kind, String> JUMP_KEYWORDS_BY_KIND = jumpKeywordsByKind();
 
-  private static final String MESSAGE = "Remove the code after this \"%s\".";
-
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(
-        PythonGrammar.RETURN_STMT,
-        PythonGrammar.RAISE_STMT,
-        PythonGrammar.BREAK_STMT,
-        PythonGrammar.CONTINUE_STMT
-    );
+  private static Map<Kind, String> jumpKeywordsByKind() {
+    Map<Kind, String> map = new EnumMap<>(Kind.class);
+    map.put(Kind.RETURN_STMT, "return");
+    map.put(Kind.RAISE_STMT, "raise");
+    map.put(Kind.BREAK_STMT, "break");
+    map.put(Kind.CONTINUE_STMT, "continue");
+    return map;
   }
 
   @Override
-  public void visitNode(AstNode node) {
-    AstNode simpleStatement = node.getParent();
-
-    AstNode nextSibling = simpleStatement.getNextSibling();
-    if (nextSibling != null && nextSibling.getNextSibling() != null) {
-      raiseIssue(node);
-      return;
-    }
-
-    AstNode stmtList = simpleStatement.getParent();
-    if (stmtList.getParent().is(PythonGrammar.STATEMENT)){
-      nextSibling = stmtList.getParent().getNextSibling();
-      if (nextSibling != null && nextSibling.getNextSibling() != null){
-        raiseIssue(node);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.STATEMENT_LIST, ctx -> {
+      List<PyStatementTree> statements = ((PyStatementListTree) ctx.syntaxNode()).statements();
+      for (PyStatementTree statement: statements.subList(0, statements.size() - 1)) {
+        String jumpKeyword = JUMP_KEYWORDS_BY_KIND.get(statement.getKind());
+        if (jumpKeyword != null) {
+          ctx.addIssue(statement, String.format("Remove the code after this \"%s\".", jumpKeyword));
+        }
       }
-    }
-  }
+    });
 
-  private void raiseIssue(AstNode node) {
-    addIssue(node, String.format(MESSAGE, node.getTokenValue()));
   }
-
 }
 
