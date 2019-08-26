@@ -19,6 +19,8 @@
  */
 package org.sonar.python.api.tree;
 
+import org.sonar.python.tree.PyExpressionListTreeImpl;
+
 public interface PyTreeVisitor {
 
   void visitFileInput(PyFileInputTree pyFileInputTree);
@@ -90,4 +92,8 @@ public interface PyTreeVisitor {
   void visitCallExpression(PyCallExpressionTree pyCallExpressionTree);
 
   void visitArgument(PyArgumentTree pyArgumentTree);
+
+  void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree);
+
+  void visitExpressionList(PyExpressionListTreeImpl pyExpressionListTree);
 }

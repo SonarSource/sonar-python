@@ -33,9 +33,9 @@ import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
@@ -43,6 +43,7 @@ import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
@@ -58,6 +59,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
@@ -134,6 +136,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.NONLOCAL_STMT)) {
       return nonlocalStatement(astNode);
+    }
+    if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonPunctuator.ASSIGN)) {
+      return assignment(astNode);
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT)) {
       return expressionStatement(astNode);
@@ -436,6 +441,31 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new PyExpressionStatementTreeImpl(astNode, expressions);
+  }
+
+  public PyAssignmentStatementTree assignment(AstNode astNode) {
+    List<Token> assignTokens = new ArrayList<>();
+    List<PyExpressionListTree> lhsExpressions = new ArrayList<>();
+    List<AstNode> assignNodes = astNode.getChildren(PythonPunctuator.ASSIGN);
+    for (AstNode assignNode : assignNodes) {
+      assignTokens.add(assignNode.getToken());
+      lhsExpressions.add(expressionList(assignNode.getPreviousSibling()));
+    }
+    AstNode assignedValues = assignNodes.get(assignNodes.size() - 1).getNextSibling();
+    List<PyExpressionTree> expressions = assignedValues.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    return new PyAssignmentStatementTreeImpl(astNode, assignTokens, lhsExpressions, expressions);
+  }
+
+  private PyExpressionListTree expressionList(AstNode astNode) {
+    if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR)) {
+      List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
+        .map(this::expression)
+        .collect(Collectors.toList());
+      return new PyExpressionListTreeImpl(astNode, expressions);
+    }
+    return new PyExpressionListTreeImpl(astNode, Collections.singletonList(expression(astNode)));
   }
 
   public PyTryStatementTree tryStatement(AstNode astNode) {

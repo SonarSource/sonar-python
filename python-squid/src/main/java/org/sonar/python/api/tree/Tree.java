@@ -36,6 +36,8 @@ public interface Tree {
 
     ASSERT_STMT(PyAssertStatementTree.class),
 
+    ASSIGNEMENT_STMT(PyAssignmentStatementTree.class),
+
     BREAK_STMT(PyBreakStatementTree.class),
 
     CALL_EXPR(PyCallExpressionTree.class),
@@ -53,6 +55,8 @@ public interface Tree {
     EXCEPT_CLAUSE(PyExceptClauseTree.class),
 
     EXEC_STMT(PyExecStatementTree.class),
+
+    EXPRESSION_LIST(PyExpressionListTree.class),
 
     EXPRESSION_STMT(PyExpressionStatementTree.class),
 

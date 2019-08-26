@@ -29,10 +29,9 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
@@ -49,9 +48,11 @@ import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
@@ -114,6 +115,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("try: this\nexcept Exception: pass", PyTryStatementTree.class);
     testData.put("with foo, bar as qix : pass", PyWithStatementTree.class);
     testData.put("async with foo, bar as qix : pass", PyWithStatementTree.class);
+    testData.put("x = y", PyAssignmentStatementTree.class);
 
     testData.forEach((c,clazz) -> {
       PyFileInputTree pyTree = parse(c, treeMaker::fileInput);
@@ -625,6 +627,26 @@ public class PythonTreeMakerTest extends RuleTest {
     astNode = p.parse("'foo', 'bar'");
     expressionStatement = treeMaker.expressionStatement(astNode);
     assertThat(expressionStatement.expressions()).hasSize(2);
+  }
+
+  @Test
+  public void assignement_statement() {
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    AstNode astNode = p.parse("x = y");
+    PyAssignmentStatementTree pyAssignmentStatement = treeMaker.assignment(astNode);
+    PyNameTree assigned = (PyNameTree) pyAssignmentStatement.assignedValues().get(0);
+    PyNameTree lhs = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0);
+    assertThat(assigned.name()).isEqualTo("y");
+    assertThat(lhs.name()).isEqualTo("x");
+
+    astNode = p.parse("x = y = z");
+    pyAssignmentStatement = treeMaker.assignment(astNode);
+    assigned = (PyNameTree) pyAssignmentStatement.assignedValues().get(0);
+    lhs = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0);
+    PyNameTree lhs2 = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(1).expressions().get(0);
+    assertThat(assigned.name()).isEqualTo("z");
+    assertThat(lhs.name()).isEqualTo("x");
+    assertThat(lhs2.name()).isEqualTo("y");
   }
 
   @Test
