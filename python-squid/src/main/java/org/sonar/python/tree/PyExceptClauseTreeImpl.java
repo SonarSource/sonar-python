@@ -21,22 +21,21 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree {
   private final Token exceptKeyword;
-  private final List<PyStatementTree> body;
+  private final PyStatementListTree body;
   private final PyExpressionTree exception;
   private final Token asKeyword;
   private final Token commaToken;
   private final PyExpressionTree exceptionInstance;
 
-  public PyExceptClauseTreeImpl(AstNode astNode, Token exceptKeyword, List<PyStatementTree> body) {
+  public PyExceptClauseTreeImpl(AstNode astNode, Token exceptKeyword, PyStatementListTree body) {
     super(astNode);
     this.exceptKeyword = exceptKeyword;
     this.body = body;
@@ -46,7 +45,7 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = null;
   }
 
-  public PyExceptClauseTreeImpl(AstNode astNode, Token exceptKeyword, List<PyStatementTree> body, PyExpressionTree exception, AstNode asNode, AstNode commaNode, PyExpressionTree exceptionInstance) {
+  public PyExceptClauseTreeImpl(AstNode astNode, Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception, AstNode asNode, AstNode commaNode, PyExpressionTree exceptionInstance) {
     super(astNode);
     this.exceptKeyword = exceptKeyword;
     this.body = body;
@@ -56,7 +55,7 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = exceptionInstance;
   }
 
-  public PyExceptClauseTreeImpl(AstNode except, Token exceptKeyword, List<PyStatementTree> body, PyExpressionTree exception) {
+  public PyExceptClauseTreeImpl(AstNode except, Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception) {
     super(except);
     this.exceptKeyword = exceptKeyword;
     this.body = body;
@@ -72,7 +71,7 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return body;
   }
 

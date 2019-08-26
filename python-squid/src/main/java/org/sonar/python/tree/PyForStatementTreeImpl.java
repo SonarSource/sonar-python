@@ -25,19 +25,19 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree {
 
   private final List<PyExpressionTree> expressions;
   private final List<PyExpressionTree> testExpressions;
-  private final List<PyStatementTree> body;
-  private final List<PyStatementTree> elseBody;
+  private final PyStatementListTree body;
+  private final PyStatementListTree elseBody;
   private final Token asyncKeyword;
   private final boolean isAsync;
 
-  public PyForStatementTreeImpl(AstNode astNode, List<PyExpressionTree> expressions, List<PyExpressionTree> testExpressions, List<PyStatementTree> body, List<PyStatementTree> elseBody, Token asyncKeyword) {
+  public PyForStatementTreeImpl(AstNode astNode, List<PyExpressionTree> expressions, List<PyExpressionTree> testExpressions, PyStatementListTree body, PyStatementListTree elseBody, Token asyncKeyword) {
     super(astNode);
     this.expressions = expressions;
     this.testExpressions = testExpressions;
@@ -83,7 +83,7 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return body;
   }
 
@@ -101,7 +101,7 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
 
   @CheckForNull
   @Override
-  public List<PyStatementTree> elseBody() {
+  public PyStatementListTree elseBody() {
     return elseBody;
   }
 

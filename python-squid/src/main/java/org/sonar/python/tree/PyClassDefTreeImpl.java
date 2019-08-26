@@ -27,16 +27,16 @@ import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   private final PyNameTree name;
   private final PyArgListTree args;
-  private final List<PyStatementTree> body;
+  private final PyStatementListTree body;
 
-  public PyClassDefTreeImpl(AstNode astNode, PyNameTree name, PyArgListTree args, List<PyStatementTree> body) {
+  public PyClassDefTreeImpl(AstNode astNode, PyNameTree name, PyArgListTree args, PyStatementListTree body) {
     super(astNode);
     this.name = name;
     this.args = args;
@@ -92,7 +92,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return body;
   }
 }

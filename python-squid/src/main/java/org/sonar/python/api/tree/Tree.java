@@ -82,6 +82,8 @@ public interface Tree {
 
     RETURN_STMT(PyReturnStatementTree.class),
 
+    STATEMENT_LIST(PyStatementListTree.class),
+
     TRY_STMT(PyTryStatementTree.class),
 
     WHILE_STMT(PyWhileStatementTree.class),

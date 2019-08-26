@@ -57,6 +57,7 @@ import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
@@ -69,7 +70,8 @@ public class PythonTreeMaker {
 
   public PyFileInputTree fileInput(AstNode astNode) {
     List<PyStatementTree> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
-    return new PyFileInputTreeImpl(astNode, statements);
+    PyStatementListTreeImpl statementList = statements.isEmpty() ? null : new PyStatementListTreeImpl(astNode, statements);
+    return new PyFileInputTreeImpl(astNode, statementList);
   }
 
   PyStatementTree statement(AstNode astNode) {
@@ -146,6 +148,10 @@ public class PythonTreeMaker {
       return withStatement(astNode);
     }
     throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
+  }
+
+  private PyStatementListTree getStatementListFromSuite(AstNode suite) {
+    return new PyStatementListTreeImpl(suite, getStatementsFromSuite(suite));
   }
 
   private List<PyStatementTree> getStatementsFromSuite(AstNode astNode) {
@@ -345,7 +351,7 @@ public class PythonTreeMaker {
     Token ifToken = astNode.getTokens().get(0);
     AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
-    List<PyStatementTree> statements = getStatementsFromSuite(suite);
+    PyStatementListTree statements = getStatementListFromSuite(suite);
     AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
     PyElseStatementTree elseStatement = null;
     if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
@@ -363,14 +369,14 @@ public class PythonTreeMaker {
     Token elifToken = astNode.getToken();
     AstNode suite = astNode.getNextSibling().getNextSibling().getNextSibling();
     AstNode condition = astNode.getNextSibling();
-    List<PyStatementTree> statements = getStatementsFromSuite(suite);
+    PyStatementListTree statements = getStatementListFromSuite(suite);
     return new PyIfStatementTreeImpl(
       astNode, elifToken, expression(condition), statements);
   }
 
   private PyElseStatementTree elseStatement(AstNode astNode) {
     Token elseToken = astNode.getPreviousSibling().getPreviousSibling().getToken();
-    List<PyStatementTree> statements = getStatementsFromSuite(astNode);
+    PyStatementListTree statements = getStatementListFromSuite(astNode);
     return new PyElseStatementTreeImpl(astNode, elseToken, statements);
   }
 
@@ -379,7 +385,7 @@ public class PythonTreeMaker {
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
     // TODO argList
     PyTypedArgListTree typedArgs = null;
-    List<PyStatementTree> body = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     return new PyFunctionDefTreeImpl(astNode, name, typedArgs, body);
   }
 
@@ -388,7 +394,7 @@ public class PythonTreeMaker {
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild(PythonGrammar.NAME));
     // TODO argList
     PyArgListTree args = null;
-    List<PyStatementTree> body = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     return new PyClassDefTreeImpl(astNode, name, args, body);
   }
 
@@ -406,18 +412,18 @@ public class PythonTreeMaker {
     List<PyExpressionTree> expressions = expressionsFromExprList(forStatementNode.getFirstChild(PythonGrammar.EXPRLIST));
     List<PyExpressionTree> testExpressions = expressionsFromTest(forStatementNode.getFirstChild(PythonGrammar.TESTLIST));
     AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
-    List<PyStatementTree> body = getStatementsFromSuite(firstSuite);
+    PyStatementListTree body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = forStatementNode.getLastChild(PythonGrammar.SUITE);
-    List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
+    PyStatementListTree elseBody = lastSuite == firstSuite ? null : getStatementListFromSuite(lastSuite);
     return new PyForStatementTreeImpl(forStatementNode, expressions, testExpressions, body, elseBody, asyncToken);
   }
 
   public PyWhileStatementTreeImpl whileStatement(AstNode astNode) {
     PyExpressionTree condition = expression(astNode.getFirstChild(PythonGrammar.TEST));
     AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
-    List<PyStatementTree> body = getStatementsFromSuite(firstSuite);
+    PyStatementListTree body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
-    List<PyStatementTree> elseBody = lastSuite == firstSuite ? Collections.emptyList() : getStatementsFromSuite(lastSuite);
+    PyStatementListTree elseBody = lastSuite == firstSuite ? null : getStatementListFromSuite(lastSuite);
     return new PyWhileStatementTreeImpl(astNode, condition, body, elseBody);
   }
 
@@ -431,18 +437,18 @@ public class PythonTreeMaker {
 
   public PyTryStatementTree tryStatement(AstNode astNode) {
     Token tryKeyword = astNode.getFirstChild(PythonKeyword.TRY).getToken();
-    List<PyStatementTree> tryBody = getStatementsFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    PyStatementListTree tryBody = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     List<PyExceptClauseTree> exceptClauseTrees = astNode.getChildren(PythonGrammar.EXCEPT_CLAUSE).stream()
       .map(except -> {
         AstNode suite = except.getNextSibling().getNextSibling();
-        return exceptClause(except, getStatementsFromSuite(suite));
+        return exceptClause(except, getStatementListFromSuite(suite));
       })
       .collect(Collectors.toList());
     PyFinallyClauseTree finallyClause = null;
     AstNode finallyNode = astNode.getFirstChild(PythonKeyword.FINALLY);
     if (finallyNode != null) {
       AstNode finallySuite = finallyNode.getNextSibling().getNextSibling();
-      List<PyStatementTree> body = getStatementsFromSuite(finallySuite);
+      PyStatementListTree body = getStatementListFromSuite(finallySuite);
       finallyClause = new PyFinallyClauseTreeImpl(finallySuite, finallyNode.getToken(), body);
     }
     PyElseStatementTree elseStatementTree = null;
@@ -463,7 +469,7 @@ public class PythonTreeMaker {
     List<PyWithItemTree> withItems = withItems(withStmtNode.getChildren(PythonGrammar.WITH_ITEM));
     AstNode suite = withStmtNode.getFirstChild(PythonGrammar.SUITE);
     Token colon = suite.getPreviousSibling().getToken();
-    List<PyStatementTree> statements = getStatementsFromSuite(suite);
+    PyStatementListTree statements = getStatementListFromSuite(suite);
     return new PyWithStatementTreeImpl(withStmtNode, withItems, colon, statements, asyncKeyword);
   }
 
@@ -484,7 +490,7 @@ public class PythonTreeMaker {
     return new PyWithStatementTreeImpl.PyWithItemTreeImpl(withItem, test, as, expr);
   }
 
-  private PyExceptClauseTree exceptClause(AstNode except, List<PyStatementTree> body) {
+  private PyExceptClauseTree exceptClause(AstNode except, PyStatementListTree body) {
     Token exceptKeyword = except.getFirstChild(PythonKeyword.EXCEPT).getToken();
     AstNode exceptionNode = except.getFirstChild(PythonGrammar.TEST);
     if (exceptionNode == null) {

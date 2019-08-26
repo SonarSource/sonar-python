@@ -46,6 +46,7 @@ import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
@@ -77,6 +78,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitFileInput(PyFileInputTree pyFileInputTree) {
     scan(pyFileInputTree.statements());
+  }
+
+  @Override
+  public void visitStatementList(PyStatementListTree pyStatementListTree) {
+    scan(pyStatementListTree.statements());
   }
 
   @Override

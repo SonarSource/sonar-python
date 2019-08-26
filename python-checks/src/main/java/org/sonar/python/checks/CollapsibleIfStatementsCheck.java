@@ -44,7 +44,7 @@ public class CollapsibleIfStatementsCheck extends PythonCheckTree {
 
   @Override
   public void visitIfStatement(PyIfStatementTree ifStatement) {
-    List<PyStatementTree> statements = ifStatement.body();
+    List<PyStatementTree> statements = ifStatement.body().statements();
     if (!ifStatement.elifBranches().isEmpty()) {
       if (ifStatement.elseBranch() == null) {
         ignored.addAll(ifStatement.elifBranches().subList(0, ifStatement.elifBranches().size() - 1));

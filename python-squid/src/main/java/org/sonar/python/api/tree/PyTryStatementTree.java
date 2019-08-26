@@ -34,5 +34,5 @@ public interface PyTryStatementTree extends PyStatementTree {
   @CheckForNull
   PyElseStatementTree elseClause();
 
-  List<PyStatementTree> body();
+  PyStatementListTree body();
 }

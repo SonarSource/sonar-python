@@ -20,7 +20,6 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import javax.annotation.CheckForNull;
 
 public interface PyWhileStatementTree extends PyStatementTree {
@@ -30,7 +29,7 @@ public interface PyWhileStatementTree extends PyStatementTree {
 
   Token colon();
 
-  List<PyStatementTree> body();
+  PyStatementListTree body();
 
   @CheckForNull
   Token elseKeyword();
@@ -38,5 +37,6 @@ public interface PyWhileStatementTree extends PyStatementTree {
   @CheckForNull
   Token elseColon();
 
-  List<PyStatementTree> elseBody();
+  @CheckForNull
+  PyStatementListTree elseBody();
 }

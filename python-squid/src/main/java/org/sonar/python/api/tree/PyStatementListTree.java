@@ -19,34 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
-import javax.annotation.CheckForNull;
 
-public interface PyForStatementTree extends PyStatementTree {
-  Token forKeyword();
+public interface PyStatementListTree extends Tree {
 
-  List<PyExpressionTree> expressions();
+  List<PyStatementTree> statements();
 
-  Token inKeyword();
-
-  List<PyExpressionTree> testExpressions();
-
-  Token colon();
-
-  PyStatementListTree body();
-
-  @CheckForNull
-  Token elseKeyword();
-
-  @CheckForNull
-  Token elseColon();
-
-  @CheckForNull
-  PyStatementListTree elseBody();
-
-  boolean isAsync();
-
-  @CheckForNull
-  Token asyncKeyword();
 }

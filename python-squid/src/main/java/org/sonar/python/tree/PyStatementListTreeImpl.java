@@ -17,36 +17,35 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.AstNode;
 import java.util.List;
-import javax.annotation.CheckForNull;
+import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
-public interface PyForStatementTree extends PyStatementTree {
-  Token forKeyword();
+public class PyStatementListTreeImpl extends PyTree implements PyStatementListTree {
 
-  List<PyExpressionTree> expressions();
+  private List<PyStatementTree> statements;
 
-  Token inKeyword();
+  public PyStatementListTreeImpl(AstNode astNode, List<PyStatementTree> statements) {
+    super(astNode);
+    this.statements = statements;
+  }
 
-  List<PyExpressionTree> testExpressions();
+  @Override
+  public List<PyStatementTree> statements() {
+    return statements;
+  }
 
-  Token colon();
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitStatementList(this);
+  }
 
-  PyStatementListTree body();
-
-  @CheckForNull
-  Token elseKeyword();
-
-  @CheckForNull
-  Token elseColon();
-
-  @CheckForNull
-  PyStatementListTree elseBody();
-
-  boolean isAsync();
-
-  @CheckForNull
-  Token asyncKeyword();
+  @Override
+  public Kind getKind() {
+    return Kind.STATEMENT_LIST;
+  }
 }

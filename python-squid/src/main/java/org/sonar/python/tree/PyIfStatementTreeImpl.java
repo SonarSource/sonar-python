@@ -27,15 +27,15 @@ import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   private final Token keyword;
   private final PyExpressionTree condition;
-  private final List<PyStatementTree> statements;
+  private final PyStatementListTree statements;
   private final List<PyIfStatementTree> elifBranches;
   private final boolean isElif;
   @CheckForNull
@@ -45,7 +45,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
    *
    * If statement constructor
    */
-  public PyIfStatementTreeImpl(AstNode node, Token ifKeyword, PyExpressionTree condition, List<PyStatementTree> statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
+  public PyIfStatementTreeImpl(AstNode node, Token ifKeyword, PyExpressionTree condition, PyStatementListTree statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
     super(node);
     this.keyword = ifKeyword;
     this.condition = condition;
@@ -58,7 +58,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   /**
    * Elif statement constructor
    */
-  public PyIfStatementTreeImpl(AstNode node, Token elifKeyword, PyExpressionTree condition, List<PyStatementTree> statements) {
+  public PyIfStatementTreeImpl(AstNode node, Token elifKeyword, PyExpressionTree condition, PyStatementListTree statements) {
     super(node);
     this.keyword = elifKeyword;
     this.condition = condition;
@@ -79,7 +79,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return statements;
   }
 

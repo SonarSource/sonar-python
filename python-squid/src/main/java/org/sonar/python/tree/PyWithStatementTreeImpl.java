@@ -25,7 +25,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -33,12 +33,12 @@ import org.sonar.python.api.tree.PyWithStatementTree;
 public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTree {
 
   private final List<PyWithItemTree> withItems;
-  private final List<PyStatementTree> statements;
+  private final PyStatementListTree statements;
   private final Token asyncKeyword;
   private final boolean isAsync;
   private final Token colon;
 
-  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, List<PyStatementTree> statements, Token asyncKeyword) {
+  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, PyStatementListTree statements, Token asyncKeyword) {
     super(node);
     this.withItems = withItems;
     this.colon = colon;
@@ -58,7 +58,7 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
   }
 
   @Override
-  public List<PyStatementTree> statements() {
+  public PyStatementListTree statements() {
     return statements;
   }
 
