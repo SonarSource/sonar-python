@@ -56,6 +56,6 @@ public interface PyFunctionDefTree extends PyStatementTree {
 
   Token colon();
 
-  List<PyStatementTree> body();
+  PyStatementListTree body();
 
 }

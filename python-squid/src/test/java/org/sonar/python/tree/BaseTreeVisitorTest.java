@@ -54,9 +54,9 @@ public class BaseTreeVisitorTest extends RuleTest {
     visitor.visitIfStatement(tree);
     verify(visitor).visitIfStatement(tree);
     verify(visitor).visitIfStatement(tree.elifBranches().get(0));
-    verify(visitor).visitPrintStatement((PyPrintStatementTree) tree.body().get(0));
-    verify(visitor).visitReturnStatement((PyReturnStatementTree) tree.elifBranches().get(0).body().get(0));
-    verify(visitor).visitYieldStatement((PyYieldStatementTree) tree.elseBranch().body().get(0));
+    verify(visitor).visitPrintStatement((PyPrintStatementTree) tree.body().statements().get(0));
+    verify(visitor).visitReturnStatement((PyReturnStatementTree) tree.elifBranches().get(0).body().statements().get(0));
+    verify(visitor).visitYieldStatement((PyYieldStatementTree) tree.elseBranch().body().statements().get(0));
   }
 
   @Test
@@ -95,7 +95,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitFunctionDef(pyFunctionDefTree);
     verify(visitor).visitName(pyFunctionDefTree.name());
-    verify(visitor).visitPassStatement((PyPassStatementTree) pyFunctionDefTree.body().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) pyFunctionDefTree.body().statements().get(0));
   }
 
   @Test
@@ -119,8 +119,8 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyForStatementTree tree = parse("for foo in bar:pass\nelse: pass", treeMaker::forStatement);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitForStatement(tree);
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.elseBody().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.elseBody().statements().get(0));
   }
 
   @Test
@@ -129,8 +129,8 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyWhileStatementTreeImpl tree = parse("while foo:\n  pass\nelse:\n  pass", treeMaker::whileStatement);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitWhileStatement(tree);
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.elseBody().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.elseBody().statements().get(0));
   }
 
   @Test
@@ -141,7 +141,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     visitor.visitTryStatement(tree);
     verify(visitor).visitFinallyClause(tree.finallyClause());
     verify(visitor).visitExceptClause(tree.exceptClauses().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
   }
 
   @Test
@@ -151,7 +151,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitWithStatement(tree);
     verify(visitor).visitWithItem(tree.withItems().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.statements().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.statements().statements().get(0));
   }
 
   @Test
@@ -161,7 +161,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitClassDef(tree);
     verify(visitor).visitName(tree.name());
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().get(0));
+    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

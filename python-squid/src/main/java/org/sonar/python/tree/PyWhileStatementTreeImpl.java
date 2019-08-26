@@ -21,20 +21,20 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 
 public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatementTree {
 
   private final PyExpressionTree condition;
-  private final List<PyStatementTree> body;
-  private final List<PyStatementTree> elseBody;
+  private final PyStatementListTree body;
+  private final PyStatementListTree elseBody;
 
-  public PyWhileStatementTreeImpl(AstNode astNode, PyExpressionTree condition, List<PyStatementTree> body, List<PyStatementTree> elseBody) {
+  public PyWhileStatementTreeImpl(AstNode astNode, PyExpressionTree condition, PyStatementListTree body, @Nullable PyStatementListTree elseBody) {
     super(astNode);
     this.condition = condition;
     this.body = body;
@@ -67,7 +67,7 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return body;
   }
 
@@ -85,7 +85,7 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
 
   @CheckForNull
   @Override
-  public List<PyStatementTree> elseBody() {
+  public PyStatementListTree elseBody() {
     return elseBody;
   }
 }

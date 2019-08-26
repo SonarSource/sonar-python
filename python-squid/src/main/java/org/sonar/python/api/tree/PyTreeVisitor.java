@@ -23,6 +23,8 @@ public interface PyTreeVisitor {
 
   void visitFileInput(PyFileInputTree pyFileInputTree);
 
+  void visitStatementList(PyStatementListTree pyStatementListTree);
+
   void visitIfStatement(PyIfStatementTree pyIfStatementTree);
 
   void visitElseStatement(PyElseStatementTree pyElseStatementTree);

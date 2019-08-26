@@ -19,8 +19,9 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.List;
+import javax.annotation.CheckForNull;
 
 public interface PyFileInputTree extends Tree {
-  List<PyStatementTree> statements();
+  @CheckForNull
+  PyStatementListTree statements();
 }

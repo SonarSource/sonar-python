@@ -26,18 +26,18 @@ import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyFinallyClauseTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 
 public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree {
   private final Token tryKeyword;
-  private final List<PyStatementTree> tryBody;
+  private final PyStatementListTree tryBody;
   private final List<PyExceptClauseTree> exceptClauses;
   private final PyFinallyClauseTree finallyClause;
   private final PyElseStatementTree elseStatement;
 
-  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, List<PyStatementTree> tryBody, List<PyExceptClauseTree> exceptClauses, PyFinallyClauseTree finallyClause, PyElseStatementTree elseStatement) {
+  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses, PyFinallyClauseTree finallyClause, PyElseStatementTree elseStatement) {
     super(astNode);
     this.tryKeyword = tryKeyword;
     this.tryBody = tryBody;
@@ -69,7 +69,7 @@ public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return tryBody;
   }
 

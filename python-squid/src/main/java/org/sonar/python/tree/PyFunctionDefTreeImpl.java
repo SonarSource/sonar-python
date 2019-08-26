@@ -27,7 +27,7 @@ import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypedArgListTree;
 
@@ -35,9 +35,9 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   private final PyNameTree name;
   private final PyTypedArgListTree typedArgs;
-  private final List<PyStatementTree> body;
+  private final PyStatementListTree body;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyTypedArgListTree typedArgs, List<PyStatementTree> body) {
+  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyTypedArgListTree typedArgs, PyStatementListTree body) {
     super(astNode);
     this.name = name;
     this.typedArgs = typedArgs;
@@ -104,7 +104,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return body;
   }
 

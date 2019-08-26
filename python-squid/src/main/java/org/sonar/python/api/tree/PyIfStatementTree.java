@@ -31,7 +31,7 @@ public interface PyIfStatementTree extends PyStatementTree {
 
   PyExpressionTree condition();
 
-  List<PyStatementTree> body();
+  PyStatementListTree body();
 
   List<PyIfStatementTree> elifBranches();
 

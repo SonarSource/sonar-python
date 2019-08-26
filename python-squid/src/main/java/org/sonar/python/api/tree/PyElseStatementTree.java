@@ -20,11 +20,10 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import java.util.List;
 
 public interface PyElseStatementTree extends PyStatementTree {
   Token elseKeyword();
 
-  List<PyStatementTree> body();
+  PyStatementListTree body();
 
 }

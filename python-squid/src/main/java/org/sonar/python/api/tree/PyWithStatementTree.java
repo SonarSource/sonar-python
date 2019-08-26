@@ -29,7 +29,7 @@ public interface PyWithStatementTree extends PyStatementTree {
 
   Token colon();
 
-  List<PyStatementTree> statements();
+  PyStatementListTree statements();
 
   boolean isAsync();
 

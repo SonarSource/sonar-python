@@ -21,17 +21,16 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.List;
 import org.sonar.python.api.tree.PyElseStatementTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTree {
   private final Token elseKeyword;
-  private final List<PyStatementTree> body;
+  private final PyStatementListTree body;
 
-  public PyElseStatementTreeImpl(AstNode astNode, Token elseKeyword, List<PyStatementTree> body) {
+  public PyElseStatementTreeImpl(AstNode astNode, Token elseKeyword, PyStatementListTree body) {
     super(astNode);
     this.elseKeyword = elseKeyword;
     this.body = body;
@@ -48,7 +47,7 @@ public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTr
   }
 
   @Override
-  public List<PyStatementTree> body() {
+  public PyStatementListTree body() {
     return body;
   }
 
