@@ -22,8 +22,10 @@ package org.sonar.python.tree;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
@@ -44,6 +46,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
@@ -259,5 +262,23 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitWithItem(PyWithItemTree pyWithItemTree) {
     scan(pyWithItemTree.test());
     scan(pyWithItemTree.expression());
+  }
+
+  @Override
+  public void visitQualifiedExpression(PyQualifiedExpressionTree pyQualifiedExpressionTree) {
+    scan(pyQualifiedExpressionTree.qualifier());
+    scan(pyQualifiedExpressionTree.name());
+  }
+
+  @Override
+  public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
+    scan(pyCallExpressionTree.callee());
+    scan(pyCallExpressionTree.arguments());
+  }
+
+  @Override
+  public void visitArgument(PyArgumentTree pyArgumentTree) {
+    scan(pyArgumentTree.keywordArgument());
+    scan(pyArgumentTree.expression());
   }
 }

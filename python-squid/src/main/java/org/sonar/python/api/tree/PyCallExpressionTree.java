@@ -19,7 +19,15 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyNameTree extends PyExpressionTree {
+import com.sonar.sslr.api.Token;
+import java.util.List;
 
-  String name();
+public interface PyCallExpressionTree extends PyExpressionTree {
+  PyExpressionTree callee();
+
+  List<PyArgumentTree> arguments();
+
+  Token leftPar();
+
+  Token rightPar();
 }

@@ -27,7 +27,11 @@ import org.assertj.core.api.ListAssert;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
@@ -729,6 +733,102 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyWithItemTree.expression()).isNull();
     assertThat(withStatement.statements().statements()).hasSize(1);
     assertThat(withStatement.statements().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+  }
+
+  @Test
+  public void verify_expected_expression() {
+    Map<String, Class<? extends Tree>> testData = new HashMap<>();
+    testData.put("foo", PyNameTree.class);
+    testData.put("foo.bar", PyQualifiedExpressionTree.class);
+    testData.put("foo()", PyCallExpressionTree.class);
+
+    testData.forEach((c,clazz) -> {
+      PyFileInputTree pyTree = parse(c, treeMaker::fileInput);
+      assertThat(pyTree.statements()).hasSize(1);
+      PyExpressionStatementTree expressionStmt = (PyExpressionStatementTree) pyTree.statements().get(0);
+      assertThat(expressionStmt).as(c).isInstanceOf(PyExpressionStatementTree.class);
+      assertThat(expressionStmt.expressions().get(0)).as(c).isInstanceOf(clazz);
+    });
+  }
+
+  @Test
+  public void call_expression() {
+    setRootRule(PythonGrammar.CALL_EXPR);
+    PyCallExpressionTree callExpression = parse("foo()", treeMaker::callExpression);
+    assertThat(callExpression.arguments()).isEmpty();
+    PyNameTree name = (PyNameTree) callExpression.callee();
+    assertThat(name.name()).isEqualTo("foo");
+
+    callExpression = parse("foo(x, y)", treeMaker::callExpression);
+    assertThat(callExpression.arguments()).hasSize(2);
+    PyNameTree firstArg = (PyNameTree) callExpression.arguments().get(0).expression();
+    PyNameTree sndArg = (PyNameTree) callExpression.arguments().get(1).expression();
+    assertThat(firstArg.name()).isEqualTo("x");
+    assertThat(sndArg.name()).isEqualTo("y");
+    name = (PyNameTree) callExpression.callee();
+    assertThat(name.name()).isEqualTo("foo");
+
+    callExpression = parse("foo.bar()", treeMaker::callExpression);
+    assertThat(callExpression.arguments()).isEmpty();
+    PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) callExpression.callee();
+    assertThat(callee.name().name()).isEqualTo("bar");
+    assertThat(((PyNameTree) callee.qualifier()).name()).isEqualTo("foo");
+  }
+
+  @Test
+  public void attributeRef_expression() {
+    setRootRule(PythonGrammar.ATTRIBUTE_REF);
+    PyQualifiedExpressionTree qualifiedExpression = parse("foo.bar", treeMaker::qualifiedExpression);
+    assertThat(qualifiedExpression.name().name()).isEqualTo("bar");
+    PyExpressionTree qualifier = qualifiedExpression.qualifier();
+    assertThat(qualifier).isInstanceOf(PyNameTree.class);
+    assertThat(((PyNameTree) qualifier).name()).isEqualTo("foo");
+
+    qualifiedExpression = parse("foo.bar.baz", treeMaker::qualifiedExpression);
+    assertThat(qualifiedExpression.name().name()).isEqualTo("baz");
+    assertThat(qualifiedExpression.qualifier()).isInstanceOf(PyQualifiedExpressionTree.class);
+    PyQualifiedExpressionTree qualExpr = (PyQualifiedExpressionTree) qualifiedExpression.qualifier();
+    assertThat(qualExpr.name().name()).isEqualTo("bar");
+    assertThat(qualExpr.qualifier()).isInstanceOf(PyNameTree.class);
+    PyNameTree name = (PyNameTree) qualExpr.qualifier();
+    assertThat(name.name()).isEqualTo("foo");
+  }
+
+  @Test
+  public void argument() {
+    setRootRule(PythonGrammar.ARGUMENT);
+    PyArgumentTree argumentTree = parse("foo", treeMaker::argument);
+    assertThat(argumentTree.equalToken()).isNull();
+    assertThat(argumentTree.keywordArgument()).isNull();
+    PyNameTree name = (PyNameTree) argumentTree.expression();
+    assertThat(name.name()).isEqualTo("foo");
+    assertThat(argumentTree.starToken()).isNull();
+    assertThat(argumentTree.starStarToken()).isNull();
+
+    argumentTree = parse("*foo", treeMaker::argument);
+    assertThat(argumentTree.equalToken()).isNull();
+    assertThat(argumentTree.keywordArgument()).isNull();
+    name = (PyNameTree) argumentTree.expression();
+    assertThat(name.name()).isEqualTo("foo");
+    assertThat(argumentTree.starToken()).isNotNull();
+    assertThat(argumentTree.starStarToken()).isNull();
+
+    argumentTree = parse("**foo", treeMaker::argument);
+    assertThat(argumentTree.equalToken()).isNull();
+    assertThat(argumentTree.keywordArgument()).isNull();
+    name = (PyNameTree) argumentTree.expression();
+    assertThat(name.name()).isEqualTo("foo");
+    assertThat(argumentTree.starToken()).isNull();
+    assertThat(argumentTree.starStarToken()).isNotNull();
+
+    argumentTree = parse("bar=foo", treeMaker::argument);
+    assertThat(argumentTree.equalToken()).isNotNull();
+    PyNameTree keywordArgument = (PyNameTree) argumentTree.keywordArgument();
+    assertThat(keywordArgument.name()).isEqualTo("bar");
+    name = (PyNameTree) argumentTree.expression();
+    assertThat(name.name()).isEqualTo("foo");
+    assertThat(argumentTree.starToken()).isNull();
+    assertThat(argumentTree.starStarToken()).isNull();
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

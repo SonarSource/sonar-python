@@ -19,7 +19,21 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyNameTree extends PyExpressionTree {
+import com.sonar.sslr.api.Token;
+import javax.annotation.CheckForNull;
 
-  String name();
+public interface PyArgumentTree extends Tree {
+  @CheckForNull
+  PyExpressionTree keywordArgument();
+
+  @CheckForNull
+  Token equalToken();
+
+  PyExpressionTree expression();
+
+  @CheckForNull
+  Token starToken();
+
+  @CheckForNull
+  Token starStarToken();
 }

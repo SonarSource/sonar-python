@@ -32,9 +32,13 @@ public interface Tree {
   enum Kind {
     ALIASED_NAME(PyAliasedNameTree.class),
 
+    ARGUMENT(PyArgumentTree.class),
+
     ASSERT_STMT(PyAssertStatementTree.class),
 
     BREAK_STMT(PyBreakStatementTree.class),
+
+    CALL_EXPR(PyCallExpressionTree.class),
 
     CLASSDEF(PyClassDefTree.class),
 
@@ -77,6 +81,8 @@ public interface Tree {
     PASS_STMT(PyPassStatementTree.class),
 
     PRINT_STMT(PyPrintStatementTree.class),
+
+    QUALIFIED_EXPR(PyQualifiedExpressionTree.class),
 
     RAISE_STMT(PyRaiseStatementTree.class),
 

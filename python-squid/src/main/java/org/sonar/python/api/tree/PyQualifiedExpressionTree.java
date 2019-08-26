@@ -19,7 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyNameTree extends PyExpressionTree {
+/**
+ * Qualified expression like "foo.bar"
+ */
+public interface PyQualifiedExpressionTree extends PyExpressionTree {
+  PyExpressionTree qualifier();
 
-  String name();
+  PyNameTree name();
 }

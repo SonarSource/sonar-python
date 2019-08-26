@@ -84,4 +84,10 @@ public interface PyTreeVisitor {
   void visitWithStatement(PyWithStatementTree pyWithStatementTree);
 
   void visitWithItem(PyWithItemTree pyWithItemTree);
+
+  void visitQualifiedExpression(PyQualifiedExpressionTree pyQualifiedExpressionTree);
+
+  void visitCallExpression(PyCallExpressionTree pyCallExpressionTree);
+
+  void visitArgument(PyArgumentTree pyArgumentTree);
 }

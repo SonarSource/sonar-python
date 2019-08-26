@@ -31,7 +31,10 @@ import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
@@ -518,9 +521,62 @@ public class PythonTreeMaker {
   }
 
   PyExpressionTree expression(AstNode astNode) {
+    if (astNode.is(PythonGrammar.TEST) && astNode.getChildren().size() == 1) {
+      return expression(astNode.getFirstChild());
+    }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
+      return expression(astNode.getFirstChild());
+    }
     if (astNode.is(PythonGrammar.YIELD_EXPR)) {
       return yieldExpression(astNode);
     }
+    if (astNode.is(PythonGrammar.NAME)) {
+      return name(astNode);
+    }
+    if (astNode.is(PythonGrammar.ATTRIBUTE_REF)) {
+      return qualifiedExpression(astNode);
+    }
+    if (astNode.is(PythonGrammar.CALL_EXPR)) {
+      return callExpression(astNode);
+    }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  public PyQualifiedExpressionTree qualifiedExpression(AstNode astNode) {
+    PyExpressionTree qualifier = expression(astNode.getFirstChild());
+    List<AstNode> names = astNode.getChildren(PythonGrammar.NAME);
+    names.remove(names.size() - 1);
+    PyNameTree name = name(astNode.getLastChild());
+    for (AstNode nameNode : names) {
+      qualifier = new PyQualifiedExpressionTreeImpl(astNode, name(nameNode), qualifier);
+    }
+    return new PyQualifiedExpressionTreeImpl(astNode, name, qualifier);
+  }
+
+  public PyCallExpressionTree callExpression(AstNode astNode) {
+    // TODO: handle SUBSCRIPTION_OR_SLICING
+    PyExpressionTree callee = expression(astNode.getFirstChild());
+    AstNode argList = astNode.getFirstChild(PythonGrammar.ARGLIST);
+    List<PyArgumentTree> arguments = Collections.emptyList();
+    if (argList != null) {
+      arguments = argList.getChildren(PythonGrammar.ARGUMENT).stream()
+        .map(this::argument)
+        .collect(Collectors.toList());
+    }
+    return new PyCallExpressionTreeImpl(astNode, callee, arguments,
+      astNode.getFirstChild(PythonPunctuator.LPARENTHESIS), astNode.getFirstChild(PythonPunctuator.RPARENTHESIS));
+  }
+
+  public PyArgumentTree argument(AstNode astNode) {
+    // TODO : handle COMP_FOR
+    AstNode assign = astNode.getFirstChild(PythonPunctuator.ASSIGN);
+    AstNode star = astNode.getFirstChild(PythonPunctuator.MUL);
+    AstNode starStar = astNode.getFirstChild(PythonPunctuator.MUL_MUL);
+    PyExpressionTree arg = expression(astNode.getLastChild(PythonGrammar.TEST));
+    if (assign != null) {
+      PyExpressionTree keyword = expression(astNode.getFirstChild(PythonGrammar.TEST));
+      return new PyArgumentTreeImpl(astNode, keyword, arg, assign.getToken(), star, starStar);
+    }
+    return new PyArgumentTreeImpl(astNode, arg, star, starStar);
   }
 }
