@@ -36,7 +36,7 @@ public interface Tree {
 
     ASSERT_STMT(PyAssertStatementTree.class),
 
-    ASSIGNEMENT_STMT(PyAssignmentStatementTree.class),
+    ASSIGNMENT_STMT(PyAssignmentStatementTree.class),
 
     ATOM(PyAtomTree.class),
 

@@ -29,6 +29,7 @@ import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 public class SubscriptionVisitor extends BaseTreeVisitor {
@@ -95,5 +96,14 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
       return newIssue;
     }
 
+    @Override
+    public SymbolTable symbolTable() {
+      return pythonVisitorContext.symbolTable();
+    }
+
+    @Override
+    public PythonFile pythonFile() {
+      return pythonVisitorContext.pythonFile();
+    }
   }
 }

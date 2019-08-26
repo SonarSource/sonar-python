@@ -61,6 +61,6 @@ public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmen
 
   @Override
   public Kind getKind() {
-    return Kind.ASSIGNEMENT_STMT;
+    return Kind.ASSIGNMENT_STMT;
   }
 }

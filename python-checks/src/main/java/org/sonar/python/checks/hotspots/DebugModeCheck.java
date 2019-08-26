@@ -19,58 +19,92 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyArgumentTree;
+import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyAtomTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionListTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
-public class DebugModeCheck extends PythonCheckAstNode {
+public class DebugModeCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4507";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
-  private static final Set<String> debugProperties = immutableSet("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
+  private static final Set<String> debugProperties = new HashSet<>(Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS"));
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.EXPRESSION_STMT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.EXPRESSION_STMT)) {
-      if (getContext().pythonFile().fileName().equals("global_settings.py") && node.hasDirectChildren(PythonPunctuator.ASSIGN)) {
-        checkDebugAssignment(node);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
+      PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
+      List<PyArgumentTree> arguments = callExpression.arguments();
+      if (!(callExpression.callee() instanceof PyQualifiedExpressionTree)) {
+        return;
       }
-    } else {
-      AstNode attributeRef = node.getFirstChild(PythonGrammar.ATTRIBUTE_REF);
-      AstNode argList = node.getFirstChild(PythonGrammar.ARGLIST);
-      if (argList != null && attributeRef != null &&
-        getQualifiedName(attributeRef.getFirstChild()).equals("django.conf.settings")) {
-        String functionName = attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue();
-        if (functionName.equals("configure")) {
-          argList.getChildren(PythonGrammar.ARGUMENT)
-            .forEach(this::checkDebugAssignment);
+      PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) callExpression.callee();
+      if (getQualifiedName(callee.qualifier(), ctx).equals("django.conf.settings") && callee.name().name().equals("configure") && !arguments.isEmpty()) {
+        arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
+      }
+    });
+
+    context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> {
+      if (!ctx.pythonFile().fileName().equals("global_settings.py")) {
+        return;
+      }
+      PyAssignmentStatementTree assignmentStatementTree = (PyAssignmentStatementTree) ctx.syntaxNode();
+      for (PyExpressionListTree lhsExpression : assignmentStatementTree.lhsExpressions()) {
+        boolean isDebugProperties = lhsExpression.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier);
+        if (isDebugProperties && assignmentStatementTree.assignedValues().stream().anyMatch(DebugModeCheck::isTrueLiteral)) {
+          ctx.addIssue(assignmentStatementTree, MESSAGE);
         }
       }
-    }
+    });
   }
 
-  private void checkDebugAssignment(AstNode node) {
-    AstNode lhsExpression = node.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TEST);
-    AstNode rhsExpression = node.getLastChild(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TEST);
-    if (lhsExpression != null && rhsExpression != null
-      && debugProperties.contains(lhsExpression.getTokenValue()) && rhsExpression.getTokenValue().equals("True")) {
-      addIssue(node, MESSAGE);
+  private static boolean isDebugIdentifier(PyExpressionTree node) {
+    if (!node.is(Kind.ATOM)) {
+      return false;
     }
+    PyExpressionTree expr = ((PyAtomTree) node).atom();
+    return expr.is(Kind.NAME) && debugProperties.contains(((PyNameTree) expr).name());
   }
 
-  private String getQualifiedName(AstNode node) {
-    Symbol symbol = getContext().symbolTable().getSymbol(node);
+  private static boolean isTrueLiteral(PyExpressionTree node) {
+    if (!node.is(Kind.ATOM)) {
+      return false;
+    }
+    PyExpressionTree expr = ((PyAtomTree) node).atom();
+    return expr.is(Kind.NAME) && ((PyNameTree) expr).name().equals("True");
+  }
+
+  private static boolean isDebugArgument(PyArgumentTree argument) {
+    if (!(argument.keywordArgument() instanceof PyAtomTree)) {
+      return false;
+    }
+    PyExpressionTree keywordArgument = ((PyAtomTree) argument.keywordArgument()).atom();
+    if (keywordArgument instanceof PyNameTree && debugProperties.contains(((PyNameTree) keywordArgument).name())) {
+      if (!argument.expression().is(Kind.ATOM)) {
+        return false;
+      }
+      PyExpressionTree argumentValue = ((PyAtomTree) argument.expression()).atom();
+      return argumentValue instanceof PyNameTree && ((PyNameTree) argumentValue).name().equals("True");
+    }
+    return false;
+  }
+
+  private static String getQualifiedName(Tree node, SubscriptionContext ctx) {
+    Symbol symbol = ctx.symbolTable().getSymbol(node.astNode());
     return symbol != null ? symbol.qualifiedName() : "";
   }
-
 }

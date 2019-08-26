@@ -22,6 +22,7 @@ package org.sonar.python;
 import com.sonar.sslr.api.Token;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.SymbolTable;
 
 public interface SubscriptionContext {
   Tree syntaxNode();
@@ -29,4 +30,8 @@ public interface SubscriptionContext {
   PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
 
   PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
+
+  SymbolTable symbolTable();
+
+  PythonFile pythonFile();
 }
