@@ -22,17 +22,18 @@ package org.sonar.python;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 public class SubscriptionVisitor extends BaseTreeVisitor {
 
-  private final Map<Tree.Kind, List<ConsumerWrapper>> consumers = new HashMap<>();
+  private final EnumMap<Kind, List<SubscriptionContextImpl>> consumers = new EnumMap<>(Kind.class);
   private final PythonVisitorContext pythonVisitorContext;
   private Tree currentElement;
 
@@ -45,8 +46,8 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     this.pythonVisitorContext = pythonVisitorContext;
     for (PythonSubscriptionCheck check : checks) {
       check.initialize((elementType, consumer) -> {
-        List<ConsumerWrapper> elementConsumers = consumers.computeIfAbsent(elementType, c -> new ArrayList<>());
-        elementConsumers.add(new ConsumerWrapper(check, consumer));
+        List<SubscriptionContextImpl> elementConsumers = consumers.computeIfAbsent(elementType, c -> new ArrayList<>());
+        elementConsumers.add(new SubscriptionContextImpl(check, consumer));
       });
     }
   }
@@ -55,21 +56,19 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
   public void scan(@Nullable Tree element) {
     if (element != null) {
       currentElement = element;
-      List<ConsumerWrapper> elementConsumers = consumers.get(element.getKind());
-      if (elementConsumers != null) {
-        for (ConsumerWrapper consumer : elementConsumers) {
-          consumer.execute();
-        }
+      List<SubscriptionContextImpl> elementConsumers = consumers.getOrDefault(element.getKind(), Collections.emptyList());
+      for (SubscriptionContextImpl consumer : elementConsumers) {
+        consumer.execute();
       }
     }
     super.scan(element);
   }
 
-  private class ConsumerWrapper implements SubscriptionContext {
+  private class SubscriptionContextImpl implements SubscriptionContext {
     private final PythonCheck check;
     private final Consumer<SubscriptionContext> consumer;
 
-    ConsumerWrapper(PythonCheck check, Consumer<SubscriptionContext> consumer) {
+    SubscriptionContextImpl(PythonCheck check, Consumer<SubscriptionContext> consumer) {
       this.check = check;
       this.consumer = consumer;
     }
