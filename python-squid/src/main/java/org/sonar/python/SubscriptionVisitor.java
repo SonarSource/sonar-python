@@ -37,9 +37,11 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
   private final PythonVisitorContext pythonVisitorContext;
   private Tree currentElement;
 
-  public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext, Tree tree) {
+  public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
     SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext);
-    tree.accept(subscriptionVisitor);
+    if (pythonVisitorContext.rootTree() != null) {
+      pythonVisitorContext.rootTree().accept(subscriptionVisitor);
+    }
   }
 
   private SubscriptionVisitor(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
@@ -56,10 +58,7 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
   public void scan(@Nullable Tree element) {
     if (element != null) {
       currentElement = element;
-      List<SubscriptionContextImpl> elementConsumers = consumers.getOrDefault(element.getKind(), Collections.emptyList());
-      for (SubscriptionContextImpl consumer : elementConsumers) {
-        consumer.execute();
-      }
+      consumers.getOrDefault(element.getKind(), Collections.emptyList()).forEach(SubscriptionContextImpl::execute);
     }
     super.scan(element);
   }

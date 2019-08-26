@@ -49,7 +49,7 @@ public class PythonCheckVerifier extends PythonVisitor {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     check.scanFile(context);
     if (check instanceof PythonSubscriptionCheck) {
-      SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context, context.rootTree());
+      SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context);
     }
     return context.getIssues();
   }

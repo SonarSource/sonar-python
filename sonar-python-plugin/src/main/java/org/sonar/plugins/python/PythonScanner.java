@@ -23,9 +23,9 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.rule.Checks;
@@ -68,7 +68,7 @@ public class PythonScanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
 
   public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
+                       FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
     this.context = context;
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
@@ -98,11 +98,6 @@ public class PythonScanner {
       AstNode astNode = parser.parse(pythonFile.content());
       PyFileInputTree parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(astNode, parse, pythonFile);
-      List<PythonSubscriptionCheck> checksBasedOnTree = checks.all().stream()
-        .filter(check -> check instanceof PythonSubscriptionCheck)
-        .map(check -> (PythonSubscriptionCheck) check)
-        .collect(Collectors.toList());
-      SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext, parse);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -114,10 +109,15 @@ public class PythonScanner {
         .message(e.getMessage())
         .save();
     }
-
+    List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
-      check.scanFile(visitorContext);
+      if (check instanceof PythonSubscriptionCheck) {
+        checksBasedOnTree.add((PythonSubscriptionCheck) check);
+      } else {
+        check.scanFile(visitorContext);
+      }
     }
+    SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
     new PythonHighlighter(context, inputFile).scanFile(visitorContext);

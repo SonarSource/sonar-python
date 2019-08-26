@@ -20,15 +20,17 @@
 package org.sonar.python;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonCheckTreeTest {
+public class PythonSubscriptionCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
   public static final String MESSAGE = "message";
@@ -36,6 +38,7 @@ public class PythonCheckTreeTest {
   private static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     check.scanFile(context);
+    SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context);
     return context.getIssues();
   }
 
@@ -43,10 +46,11 @@ public class PythonCheckTreeTest {
   public void test() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
-      public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
-        super.visitFunctionDef(pyFunctionDefTree);
-        PyNameTree name = pyFunctionDefTree.name();
-        addIssue(name, name.astNode().getTokenValue());
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+          PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
+          ctx.addIssue(tree.name(), tree.name().astNode().getTokenValue());
+        });
       }
     };
 
@@ -71,10 +75,12 @@ public class PythonCheckTreeTest {
   public void test_cost() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
-      public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
-        super.visitFunctionDef(pyFunctionDefTree);
-        PyNameTree name = pyFunctionDefTree.name();
-        addIssue(name.astNode().getToken(), MESSAGE).withCost(42);
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+          PyFunctionDefTree pyFunctionDefTree = (PyFunctionDefTree) ctx.syntaxNode();
+          PyNameTree name = pyFunctionDefTree.name();
+          ctx.addIssue(name.astNode().getToken(), MESSAGE).withCost(42);
+        });
       }
     };
 
@@ -83,7 +89,7 @@ public class PythonCheckTreeTest {
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
 
-  private static class TestPythonCheck extends PythonCheckTree {
+  private abstract static class TestPythonCheck extends PythonSubscriptionCheck {
 
   }
 }
