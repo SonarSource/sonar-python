@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
@@ -45,7 +46,9 @@ import org.sonar.python.PythonCheck;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
+import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
@@ -65,7 +68,7 @@ public class PythonScanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
 
   public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
+                       FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
     this.context = context;
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
@@ -106,10 +109,15 @@ public class PythonScanner {
         .message(e.getMessage())
         .save();
     }
-
+    List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
-      check.scanFile(visitorContext);
+      if (check instanceof PythonSubscriptionCheck) {
+        checksBasedOnTree.add((PythonSubscriptionCheck) check);
+      } else {
+        check.scanFile(visitorContext);
+      }
     }
+    SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
     new PythonHighlighter(context, inputFile).scanFile(visitorContext);

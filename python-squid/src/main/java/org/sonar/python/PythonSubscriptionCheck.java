@@ -17,22 +17,11 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python;
 
-import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyExecStatementTree;
-import org.sonar.python.api.tree.Tree;
-
-@Rule(key = ExecStatementUsageCheck.CHECK_KEY)
-public class ExecStatementUsageCheck extends PythonSubscriptionCheck {
-  public static final String CHECK_KEY = "ExecStatementUsage";
-
+public abstract class PythonSubscriptionCheck implements SubscriptionCheck, PythonCheck {
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.EXEC_STMT, ctx -> {
-      PyExecStatementTree tree = (PyExecStatementTree) ctx.syntaxNode();
-      ctx.addIssue(tree.execKeyword(), "Do not use exec statement.");
-    });
+  public void scanFile(PythonVisitorContext visitorContext) {
+    // empty implementation
   }
 }

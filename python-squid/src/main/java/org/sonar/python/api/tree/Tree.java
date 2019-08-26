@@ -100,4 +100,6 @@ public interface Tree {
       this.associatedInterface = associatedInterface;
     }
   }
+
+  Kind getKind();
 }
