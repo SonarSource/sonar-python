@@ -19,25 +19,20 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = ExecStatementUsageCheck.CHECK_KEY)
-public class ExecStatementUsageCheck extends PythonCheckAstNode {
+public class ExecStatementUsageCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "ExecStatementUsage";
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.EXEC_STMT);
-  }
 
   @Override
-  public void visitNode(AstNode astNode) {
-    addIssue(astNode.getFirstChild(), "Do not use exec statement.");
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.EXEC_STMT, ctx -> {
+      PyExecStatementTree tree = (PyExecStatementTree) ctx.syntaxNode();
+      ctx.addIssue(tree.execKeyword(), "Do not use exec statement.");
+    });
   }
-
 }
