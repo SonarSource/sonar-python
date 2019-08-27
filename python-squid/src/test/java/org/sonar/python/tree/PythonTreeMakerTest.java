@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyAtomTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -634,16 +635,16 @@ public class PythonTreeMakerTest extends RuleTest {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x = y");
     PyAssignmentStatementTree pyAssignmentStatement = treeMaker.assignment(astNode);
-    PyNameTree assigned = (PyNameTree) pyAssignmentStatement.assignedValues().get(0);
-    PyNameTree lhs = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0);
+    PyNameTree assigned = (PyNameTree) ((PyAtomTree) pyAssignmentStatement.assignedValues().get(0)).atom();
+    PyNameTree lhs = (PyNameTree) ((PyAtomTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0)).atom();
     assertThat(assigned.name()).isEqualTo("y");
     assertThat(lhs.name()).isEqualTo("x");
 
     astNode = p.parse("x = y = z");
     pyAssignmentStatement = treeMaker.assignment(astNode);
-    assigned = (PyNameTree) pyAssignmentStatement.assignedValues().get(0);
-    lhs = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0);
-    PyNameTree lhs2 = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(1).expressions().get(0);
+    assigned = (PyNameTree) ((PyAtomTree) pyAssignmentStatement.assignedValues().get(0)).atom();
+    lhs = (PyNameTree) ((PyAtomTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0)).atom();
+    PyNameTree lhs2 = (PyNameTree) ((PyAtomTree) pyAssignmentStatement.lhsExpressions().get(1).expressions().get(0)).atom();
     assertThat(assigned.name()).isEqualTo("z");
     assertThat(lhs.name()).isEqualTo("x");
     assertThat(lhs2.name()).isEqualTo("y");
@@ -760,7 +761,7 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void verify_expected_expression() {
     Map<String, Class<? extends Tree>> testData = new HashMap<>();
-    testData.put("foo", PyNameTree.class);
+    testData.put("foo", PyAtomTree.class);
     testData.put("foo.bar", PyQualifiedExpressionTree.class);
     testData.put("foo()", PyCallExpressionTree.class);
 
@@ -778,23 +779,24 @@ public class PythonTreeMakerTest extends RuleTest {
     setRootRule(PythonGrammar.CALL_EXPR);
     PyCallExpressionTree callExpression = parse("foo()", treeMaker::callExpression);
     assertThat(callExpression.arguments()).isEmpty();
-    PyNameTree name = (PyNameTree) callExpression.callee();
+    PyNameTree name = (PyNameTree) ((PyAtomTree) callExpression.callee()).atom();
     assertThat(name.name()).isEqualTo("foo");
 
     callExpression = parse("foo(x, y)", treeMaker::callExpression);
     assertThat(callExpression.arguments()).hasSize(2);
-    PyNameTree firstArg = (PyNameTree) callExpression.arguments().get(0).expression();
-    PyNameTree sndArg = (PyNameTree) callExpression.arguments().get(1).expression();
+    PyNameTree firstArg = (PyNameTree) ((PyAtomTree) callExpression.arguments().get(0).expression()).atom();
+    PyNameTree sndArg = (PyNameTree) ((PyAtomTree) callExpression.arguments().get(1).expression()).atom();
     assertThat(firstArg.name()).isEqualTo("x");
     assertThat(sndArg.name()).isEqualTo("y");
-    name = (PyNameTree) callExpression.callee();
+    name = (PyNameTree) ((PyAtomTree) callExpression.callee()).atom();
     assertThat(name.name()).isEqualTo("foo");
 
     callExpression = parse("foo.bar()", treeMaker::callExpression);
     assertThat(callExpression.arguments()).isEmpty();
     PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) callExpression.callee();
     assertThat(callee.name().name()).isEqualTo("bar");
-    assertThat(((PyNameTree) callee.qualifier()).name()).isEqualTo("foo");
+    PyAtomTree atom = (PyAtomTree) callee.qualifier();
+    assertThat(((PyNameTree) atom.atom()).name()).isEqualTo("foo");
   }
 
   @Test
@@ -803,16 +805,17 @@ public class PythonTreeMakerTest extends RuleTest {
     PyQualifiedExpressionTree qualifiedExpression = parse("foo.bar", treeMaker::qualifiedExpression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("bar");
     PyExpressionTree qualifier = qualifiedExpression.qualifier();
-    assertThat(qualifier).isInstanceOf(PyNameTree.class);
-    assertThat(((PyNameTree) qualifier).name()).isEqualTo("foo");
+    assertThat(qualifier).isInstanceOf(PyAtomTree.class);
+    PyNameTree nameTree = (PyNameTree) ((PyAtomTree) qualifier).atom();
+    assertThat(nameTree.name()).isEqualTo("foo");
 
     qualifiedExpression = parse("foo.bar.baz", treeMaker::qualifiedExpression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("baz");
     assertThat(qualifiedExpression.qualifier()).isInstanceOf(PyQualifiedExpressionTree.class);
     PyQualifiedExpressionTree qualExpr = (PyQualifiedExpressionTree) qualifiedExpression.qualifier();
     assertThat(qualExpr.name().name()).isEqualTo("bar");
-    assertThat(qualExpr.qualifier()).isInstanceOf(PyNameTree.class);
-    PyNameTree name = (PyNameTree) qualExpr.qualifier();
+    assertThat(qualExpr.qualifier()).isInstanceOf(PyAtomTree.class);
+    PyNameTree name = (PyNameTree) ((PyAtomTree) qualExpr.qualifier()).atom();
     assertThat(name.name()).isEqualTo("foo");
   }
 
@@ -822,7 +825,7 @@ public class PythonTreeMakerTest extends RuleTest {
     PyArgumentTree argumentTree = parse("foo", treeMaker::argument);
     assertThat(argumentTree.equalToken()).isNull();
     assertThat(argumentTree.keywordArgument()).isNull();
-    PyNameTree name = (PyNameTree) argumentTree.expression();
+    PyNameTree name = (PyNameTree) ((PyAtomTree) argumentTree.expression()).atom();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.starToken()).isNull();
     assertThat(argumentTree.starStarToken()).isNull();
@@ -830,7 +833,7 @@ public class PythonTreeMakerTest extends RuleTest {
     argumentTree = parse("*foo", treeMaker::argument);
     assertThat(argumentTree.equalToken()).isNull();
     assertThat(argumentTree.keywordArgument()).isNull();
-    name = (PyNameTree) argumentTree.expression();
+    name = (PyNameTree) ((PyAtomTree) argumentTree.expression()).atom();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.starToken()).isNotNull();
     assertThat(argumentTree.starStarToken()).isNull();
@@ -838,19 +841,27 @@ public class PythonTreeMakerTest extends RuleTest {
     argumentTree = parse("**foo", treeMaker::argument);
     assertThat(argumentTree.equalToken()).isNull();
     assertThat(argumentTree.keywordArgument()).isNull();
-    name = (PyNameTree) argumentTree.expression();
+    name = (PyNameTree) ((PyAtomTree) argumentTree.expression()).atom();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.starToken()).isNull();
     assertThat(argumentTree.starStarToken()).isNotNull();
 
     argumentTree = parse("bar=foo", treeMaker::argument);
     assertThat(argumentTree.equalToken()).isNotNull();
-    PyNameTree keywordArgument = (PyNameTree) argumentTree.keywordArgument();
+    PyNameTree keywordArgument = (PyNameTree) ((PyAtomTree) argumentTree.keywordArgument()).atom();
     assertThat(keywordArgument.name()).isEqualTo("bar");
-    name = (PyNameTree) argumentTree.expression();
+    name = (PyNameTree) ((PyAtomTree) argumentTree.expression()).atom();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.starToken()).isNull();
     assertThat(argumentTree.starStarToken()).isNull();
+  }
+
+  @Test
+  public void atom_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyAtomTree atom = parse("foo", treeMaker::atom);
+    PyNameTree name = (PyNameTree) atom.atom();
+    assertThat(name.name()).isEqualTo("foo");
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

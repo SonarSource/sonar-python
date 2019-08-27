@@ -34,6 +34,7 @@ import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyAtomTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -555,7 +556,7 @@ public class PythonTreeMaker {
       return expression(astNode.getFirstChild());
     }
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
-      return expression(astNode.getFirstChild());
+      return atom(astNode);
     }
     if (astNode.is(PythonGrammar.YIELD_EXPR)) {
       return yieldExpression(astNode);
@@ -608,5 +609,9 @@ public class PythonTreeMaker {
       return new PyArgumentTreeImpl(astNode, keyword, arg, assign.getToken(), star, starStar);
     }
     return new PyArgumentTreeImpl(astNode, arg, star, starStar);
+  }
+
+  public PyAtomTree atom(AstNode astNode) {
+    return new PyAtomTreeImpl(astNode, expression(astNode.getFirstChild()));
   }
 }

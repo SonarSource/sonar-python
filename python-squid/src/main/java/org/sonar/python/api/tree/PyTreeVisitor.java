@@ -96,4 +96,6 @@ public interface PyTreeVisitor {
   void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree);
 
   void visitExpressionList(PyExpressionListTreeImpl pyExpressionListTree);
+
+  void visitAtom(PyAtomTree pyAtomTree);
 }
