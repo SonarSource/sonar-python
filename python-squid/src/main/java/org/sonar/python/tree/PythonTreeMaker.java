@@ -566,7 +566,10 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.CALL_EXPR)) {
       return callExpression(astNode);
     }
-    if (astNode.getChildren().size() == 1) {
+    if (astNode.is(PythonGrammar.EXPR) && astNode.getChildren().size() == 1) {
+      return expression(astNode.getFirstChild());
+    }
+    if (astNode.is(PythonGrammar.TEST) && astNode.getChildren().size() == 1) {
       return expression(astNode.getFirstChild());
     }
     return new PyExpressionTreeImpl(astNode);
