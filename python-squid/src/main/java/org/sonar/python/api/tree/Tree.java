@@ -38,8 +38,6 @@ public interface Tree {
 
     ASSIGNMENT_STMT(PyAssignmentStatementTree.class),
 
-    ATOM(PyAtomTree.class),
-
     BREAK_STMT(PyBreakStatementTree.class),
 
     CALL_EXPR(PyCallExpressionTree.class),

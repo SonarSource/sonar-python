@@ -95,5 +95,4 @@ public interface PyTreeVisitor {
 
   void visitExpressionList(PyExpressionListTree pyExpressionListTree);
 
-  void visitAtom(PyAtomTree pyAtomTree);
 }

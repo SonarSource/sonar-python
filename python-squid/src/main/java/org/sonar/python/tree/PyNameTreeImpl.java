@@ -23,7 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 
-public class PyNameTreeImpl extends PyExpressionTreeImpl implements PyNameTree {
+public class PyNameTreeImpl extends PyTree implements PyNameTree {
   private final String name;
 
   public PyNameTreeImpl(AstNode astNode, String name) {

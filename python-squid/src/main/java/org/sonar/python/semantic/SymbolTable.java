@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import com.sonar.sslr.api.AstNode;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.python.api.tree.PyExpressionTree;
 
 public interface SymbolTable {
 
@@ -37,5 +38,7 @@ public interface SymbolTable {
    */
   @CheckForNull
   Symbol getSymbol(AstNode node);
+
+  Symbol getSymbol(PyExpressionTree expression);
 
 }

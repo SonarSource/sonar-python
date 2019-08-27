@@ -28,13 +28,11 @@ import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyAtomTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
-import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
@@ -72,35 +70,24 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isDebugIdentifier(PyExpressionTree node) {
-    if (!node.is(Kind.ATOM)) {
-      return false;
-    }
-    PyExpressionTree expr = ((PyAtomTree) node).atom();
+  private static boolean isDebugIdentifier(PyExpressionTree expr) {
     return expr.is(Kind.NAME) && debugProperties.contains(((PyNameTree) expr).name());
   }
 
-  private static boolean isTrueLiteral(PyExpressionTree node) {
-    if (!node.is(Kind.ATOM)) {
-      return false;
-    }
-    PyExpressionTree expr = ((PyAtomTree) node).atom();
+  private static boolean isTrueLiteral(PyExpressionTree expr) {
     return expr.is(Kind.NAME) && ((PyNameTree) expr).name().equals("True");
   }
 
   private static boolean isDebugArgument(PyArgumentTree argument) {
     PyNameTree keywordArgument = argument.keywordArgument();
     if (keywordArgument != null && debugProperties.contains((keywordArgument).name())) {
-      if (!argument.expression().is(Kind.ATOM)) {
-        return false;
-      }
       return isTrueLiteral(argument.expression());
     }
     return false;
   }
 
-  private static String getQualifiedName(Tree node, SubscriptionContext ctx) {
-    Symbol symbol = ctx.symbolTable().getSymbol(node.astNode());
+  private static String getQualifiedName(PyExpressionTree node, SubscriptionContext ctx) {
+    Symbol symbol = ctx.symbolTable().getSymbol(node);
     return symbol != null ? symbol.qualifiedName() : "";
   }
 }

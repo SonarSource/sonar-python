@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyAtomTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -173,7 +172,6 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyQualifiedExpressionTree tree = parse("a.b", treeMaker::qualifiedExpression);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitQualifiedExpression(tree);
-    verify(visitor).visitAtom((PyAtomTree) tree.qualifier());
     verify(visitor).visitName(tree.name());
   }
 
@@ -183,7 +181,6 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyAssignmentStatementTree tree = parse("a = b", treeMaker::assignment);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitAssignmentStatement(tree);
-    verify(visitor).visitAtom((PyAtomTree) tree.assignedValues().get(0));
     verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));
   }
 
