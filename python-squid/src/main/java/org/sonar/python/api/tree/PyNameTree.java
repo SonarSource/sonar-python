@@ -19,7 +19,7 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyNameTree extends Tree {
+public interface PyNameTree extends PyExpressionTree {
 
   String name();
 }

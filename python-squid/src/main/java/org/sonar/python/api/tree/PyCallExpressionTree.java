@@ -17,21 +17,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python;
+package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.SymbolTable;
+import java.util.List;
 
-public interface SubscriptionContext {
-  Tree syntaxNode();
+public interface PyCallExpressionTree extends PyExpressionTree {
+  PyExpressionTree callee();
 
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
+  // TODO: create PyArgumentListTree to be closer to Python specification (https://docs.python.org/3/reference/expressions.html#calls)
+  List<PyArgumentTree> arguments();
 
-  PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
+  Token leftPar();
 
-  SymbolTable symbolTable();
-
-  PythonFile pythonFile();
+  Token rightPar();
 }

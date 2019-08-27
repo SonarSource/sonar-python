@@ -17,21 +17,34 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python;
+package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
-import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.SymbolTable;
+import com.sonar.sslr.api.AstNode;
+import java.util.List;
+import org.sonar.python.api.tree.PyExpressionListTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
-public interface SubscriptionContext {
-  Tree syntaxNode();
+public class PyExpressionListTreeImpl extends PyExpressionTreeImpl implements PyExpressionListTree {
+  private final List<PyExpressionTree> expressions;
 
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
+  public PyExpressionListTreeImpl(AstNode astNode, List<PyExpressionTree> expressions) {
+    super(astNode);
+    this.expressions = expressions;
+  }
 
-  PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
+  @Override
+  public List<PyExpressionTree> expressions() {
+    return expressions;
+  }
 
-  SymbolTable symbolTable();
+  @Override
+  public Kind getKind() {
+    return Kind.EXPRESSION_LIST;
+  }
 
-  PythonFile pythonFile();
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitExpressionList(this);
+  }
 }

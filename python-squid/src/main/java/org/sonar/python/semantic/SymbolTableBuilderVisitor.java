@@ -35,6 +35,7 @@ import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.sslr.ast.AstSelect;
 
 public class SymbolTableBuilderVisitor extends PythonVisitor {
@@ -318,6 +319,16 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     @Override
     public Symbol getSymbol(AstNode node) {
       return symbolByNode.get(node);
+    }
+
+    @Override
+    public Symbol getSymbol(PyExpressionTree expression) {
+      AstNode astNode = expression.astNode();
+      // strongly typed ast doesn't have ATOM node, we check for the parent in case of a PyTreeNode
+      if (astNode.is(PythonGrammar.NAME) && astNode.getParent().is(PythonGrammar.ATOM)) {
+        return getSymbol(astNode.getParent());
+      }
+      return getSymbol(astNode);
     }
 
   }

@@ -17,21 +17,23 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python;
+package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.SymbolTable;
+import javax.annotation.CheckForNull;
 
-public interface SubscriptionContext {
-  Tree syntaxNode();
+public interface PyArgumentTree extends Tree {
+  @CheckForNull
+  PyNameTree keywordArgument();
 
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
+  @CheckForNull
+  Token equalToken();
 
-  PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
+  PyExpressionTree expression();
 
-  SymbolTable symbolTable();
+  @CheckForNull
+  Token starToken();
 
-  PythonFile pythonFile();
+  @CheckForNull
+  Token starStarToken();
 }
