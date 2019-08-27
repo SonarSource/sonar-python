@@ -20,6 +20,8 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import javax.annotation.CheckForNull;
 
 public interface Tree {
 
@@ -27,7 +29,13 @@ public interface Tree {
 
   boolean is(Kind kind);
 
+  @CheckForNull
+  @Deprecated
   AstNode astNode();
+
+  Token firstToken();
+
+  Token lastToken();
 
   enum Kind {
     ALIASED_NAME(PyAliasedNameTree.class),

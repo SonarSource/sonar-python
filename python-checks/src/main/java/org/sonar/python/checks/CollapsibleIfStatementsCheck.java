@@ -61,7 +61,7 @@ public class CollapsibleIfStatementsCheck extends PythonCheckTree {
       if (singleIfChild.isElif() || singleIfChild.elseBranch() != null || !singleIfChild.elifBranches().isEmpty()) {
         return;
       }
-      addIssue(singleIfChild.keyword(), MESSAGE).secondary(ifStatement.astNode(), "enclosing");
+      addIssue(singleIfChild.keyword(), MESSAGE).secondary(ifStatement, "enclosing");
     }
     super.visitIfStatement(ifStatement);
   }

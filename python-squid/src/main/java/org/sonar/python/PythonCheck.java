@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.Tree;
 
 public interface PythonCheck {
 
@@ -54,6 +55,11 @@ public interface PythonCheck {
 
     public IssueLocation primaryLocation() {
       return primaryLocation;
+    }
+
+    public PreciseIssue secondary(Tree tree, @Nullable String message) {
+      secondaryLocations.add(IssueLocation.preciseLocation(tree, message));
+      return this;
     }
 
     public PreciseIssue secondary(AstNode node, @Nullable String message) {

@@ -322,10 +322,11 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
     }
 
     @Override
+    @CheckForNull
     public Symbol getSymbol(PyExpressionTree expression) {
       AstNode astNode = expression.astNode();
       // strongly typed ast doesn't have ATOM node, we check for the parent in case of a PyTreeNode
-      if (astNode.is(PythonGrammar.NAME) && astNode.getParent().is(PythonGrammar.ATOM)) {
+      if (astNode != null && astNode.is(PythonGrammar.NAME) && astNode.getParent().is(PythonGrammar.ATOM)) {
         return getSymbol(astNode.getParent());
       }
       return getSymbol(astNode);

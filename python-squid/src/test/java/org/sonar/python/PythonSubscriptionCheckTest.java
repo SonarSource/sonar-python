@@ -49,7 +49,7 @@ public class PythonSubscriptionCheckTest {
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
           PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
-          ctx.addIssue(tree.name(), tree.name().astNode().getTokenValue());
+          ctx.addIssue(tree.name(), tree.name().firstToken().getValue());
         });
       }
     };
@@ -79,7 +79,7 @@ public class PythonSubscriptionCheckTest {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
           PyFunctionDefTree pyFunctionDefTree = (PyFunctionDefTree) ctx.syntaxNode();
           PyNameTree name = pyFunctionDefTree.name();
-          ctx.addIssue(name.astNode().getToken(), MESSAGE).withCost(42);
+          ctx.addIssue(name.firstToken(), MESSAGE).withCost(42);
         });
       }
     };
