@@ -58,4 +58,6 @@ public interface PyFunctionDefTree extends PyStatementTree {
 
   PyStatementListTree body();
 
+  boolean isMethodDefinition();
+
 }

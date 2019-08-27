@@ -19,8 +19,9 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.List;
+import javax.annotation.CheckForNull;
 
-public interface PyTypedArgListTree extends Tree {
-  List<PyTypedArgumentTree> arguments();
+public interface PyTypedArgumentTree extends PyArgumentTree {
+  @CheckForNull
+  PyNameTree type();
 }

@@ -37,6 +37,7 @@ public class CheckUtils {
 
   }
 
+  // TODO: remove this method, in strongly typed AST we have this info directly in PyFunctionDefTree
   public static boolean isMethodDefinition(AstNode node) {
     if (!node.is(PythonGrammar.FUNCDEF)) {
       return false;

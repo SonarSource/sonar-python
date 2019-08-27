@@ -45,6 +45,7 @@ import org.sonar.python.api.tree.PyGlobalStatementTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
+import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
@@ -55,6 +56,8 @@ import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyTypedArgumentTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -300,5 +303,21 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
     scan(pyBinaryExpressionTree.leftOperand());
     scan(pyBinaryExpressionTree.rightOperand());
+  }
+
+  @Override
+  public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
+    scan(pyLambdaExpressionTree.arguments());
+    scan(pyLambdaExpressionTree.expression());
+  }
+
+  @Override
+  public void visitTypedArgList(PyTypedArgListTree pyTypedArgListTree) {
+    scan(pyTypedArgListTree.arguments());
+  }
+
+  @Override
+  public void visitTypeArgument(PyTypedArgumentTree pyTypedArgumentTree) {
+    scan(pyTypedArgumentTree.type());
   }
 }

@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import org.junit.Test;
@@ -48,6 +49,7 @@ import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
+import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
@@ -57,6 +59,7 @@ import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTypedArgumentTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -534,8 +537,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.name().name()).isEqualTo("func");
     assertThat(functionDefTree.body().statements()).hasSize(1);
     assertThat(functionDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    // TODO
     assertThat(functionDefTree.typedArgs()).isNull();
+    assertThat(functionDefTree.isMethodDefinition()).isFalse();
+    // TODO
     assertThat(functionDefTree.decorators()).isNull();
     assertThat(functionDefTree.asyncKeyword()).isNull();
     assertThat(functionDefTree.colon()).isNull();
@@ -545,6 +549,17 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.leftPar()).isNull();
     assertThat(functionDefTree.rightPar()).isNull();
 
+    functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.typedArgs().arguments()).hasSize(1);
+
+    functionDefTree = parse("def func(x, y): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
+
+    functionDefTree = parse("def func(x = 'foo', y): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
+
+    functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
   }
 
   @Test
@@ -558,6 +573,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(classDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(classDefTree.args()).isNull();
     assertThat(classDefTree.decorators()).isNull();
+
+    astNode = p.parse("class clazz:\n  def foo(): pass");
+    classDefTree = treeMaker.classDefStatement(astNode);
+    PyFunctionDefTree funcDef = (PyFunctionDefTree) classDefTree.body().statements().get(0);
+    assertThat(funcDef.isMethodDefinition()).isTrue();
   }
 
   @Test
@@ -762,6 +782,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("foo", PyNameTree.class);
     testData.put("foo.bar", PyQualifiedExpressionTree.class);
     testData.put("foo()", PyCallExpressionTree.class);
+    testData.put("lambda x: x", PyLambdaExpressionTree.class);
 
     testData.forEach((c,clazz) -> {
       PyFileInputTree pyTree = parse(c, treeMaker::fileInput);
@@ -897,6 +918,28 @@ public class PythonTreeMakerTest extends RuleTest {
     PyExpressionTree exp = parse(code, treeMaker::expression);
     assertThat(exp).isInstanceOf(PyBinaryExpressionTree.class);
     return (PyBinaryExpressionTree) exp;
+  }
+
+  @Test
+  public void lambda_expr() {
+    setRootRule(PythonGrammar.LAMBDEF);
+    PyLambdaExpressionTree lambdaExpressionTree = parse("lambda x: x", treeMaker::lambdaExpression);
+    assertThat(lambdaExpressionTree.expression()).isInstanceOf(PyNameTree.class);
+    assertThat(lambdaExpressionTree.lambdaKeyword().getValue()).isEqualTo("lambda");
+    assertThat(lambdaExpressionTree.colonToken().getValue()).isEqualTo(":");
+
+    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(1);
+
+    lambdaExpressionTree = parse("lambda x, y: x", treeMaker::lambdaExpression);
+    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(2);
+
+    lambdaExpressionTree = parse("lambda x = 'foo': x", treeMaker::lambdaExpression);
+    List<PyTypedArgumentTree> arguments = lambdaExpressionTree.arguments().arguments();
+    assertThat(arguments).hasSize(1);
+    assertThat(arguments.get(0).keywordArgument().name()).isEqualTo("x");
+
+    lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
+    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(1);
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

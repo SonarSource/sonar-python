@@ -3,12 +3,16 @@ correct_lamda = lambda p1, p2, p3, p4, p5, p6, p7: p1
 incorrect_lamda = lambda p1, p2, p3, p4, p5, p6, p7, p8: p1 # Noncompliant {{Lambda has 8 parameters, which is greater than the 7 authorized.}}
 #                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+empty_params_lambda = lambda: True
+
 def correct_function(p1, p2, p3, p4, p5, p6, p7):
 	pass
 
 def incorrect_function(p1, p2, p3, p4, p5, p6, p7, p8): # Noncompliant {{Function "incorrect_function" has 8 parameters, which is greater than the 7 authorized.}}
 #                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	pass
+
+def empty_params_function(): pass
 
 class MyClass:
 	def correct_method(p1, p2, p3, p4, p5, p6, p7):

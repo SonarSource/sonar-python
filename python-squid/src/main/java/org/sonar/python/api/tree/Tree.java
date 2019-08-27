@@ -86,6 +86,8 @@ public interface Tree {
 
     IMPORT_STMT(PyDottedNameTree.class),
 
+    LAMBDA(PyLambdaExpressionTree.class),
+
     NAME(PyNameTree.class),
 
     NONLOCAL_STMT(PyNonlocalStatementTree.class),
@@ -103,6 +105,10 @@ public interface Tree {
     STATEMENT_LIST(PyStatementListTree.class),
 
     TRY_STMT(PyTryStatementTree.class),
+
+    TYPED_ARG(PyTypedArgumentTree.class),
+
+    TYPED_ARG_LIST(PyTypedArgListTree.class),
 
     WHILE_STMT(PyWhileStatementTree.class),
 

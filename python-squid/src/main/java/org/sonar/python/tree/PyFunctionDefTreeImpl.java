@@ -36,12 +36,14 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   private final PyNameTree name;
   private final PyTypedArgListTree typedArgs;
   private final PyStatementListTree body;
+  private final boolean isMethodDefinition;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyTypedArgListTree typedArgs, PyStatementListTree body) {
+  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyTypedArgListTree typedArgs, PyStatementListTree body, boolean isMethodDefinition) {
     super(astNode);
     this.name = name;
     this.typedArgs = typedArgs;
     this.body = body;
+    this.isMethodDefinition = isMethodDefinition;
   }
 
   @Override
@@ -106,6 +108,11 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   @Override
   public PyStatementListTree body() {
     return body;
+  }
+
+  @Override
+  public boolean isMethodDefinition() {
+    return isMethodDefinition;
   }
 
   @Override

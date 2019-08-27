@@ -96,4 +96,10 @@ public interface PyTreeVisitor {
   void visitExpressionList(PyExpressionListTree pyExpressionListTree);
 
   void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree);
+
+  void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree);
+
+  void visitTypedArgList(PyTypedArgListTree pyTypedArgListTree);
+
+  void visitTypeArgument(PyTypedArgumentTree pyTypedArgumentTree);
 }
