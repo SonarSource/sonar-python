@@ -25,6 +25,7 @@ import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -293,5 +294,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitExpressionList(PyExpressionListTree pyExpressionListTree) {
     scan(pyExpressionListTree.expressions());
+  }
+
+  @Override
+  public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+    scan(pyBinaryExpressionTree.leftOperand());
+    scan(pyBinaryExpressionTree.rightOperand());
   }
 }
