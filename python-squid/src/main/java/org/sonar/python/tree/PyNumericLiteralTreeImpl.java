@@ -17,27 +17,38 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.tree;
 
-import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
+import com.sonar.sslr.api.AstNode;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.PyTreeVisitor;
 
-@Rule(key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY)
-public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonSubscriptionCheck {
+public class PyNumericLiteralTreeImpl extends PyTree implements PyNumericLiteralTree {
 
-  public static final String CHECK_KEY = "LongIntegerWithLowercaseSuffixUsage";
-  private static final String MESSAGE = "Replace suffix in long integers from lower case \"l\" to upper case \"L\".";
+  private final String valueAsString;
+
+  PyNumericLiteralTreeImpl(AstNode node) {
+    super(node);
+    valueAsString = node.getTokenValue();
+  }
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.NUMERIC_LITERAL, ctx -> {
-      PyNumericLiteralTree pyNumericLiteralTree = (PyNumericLiteralTree) ctx.syntaxNode();
-      String value = pyNumericLiteralTree.valueAsString();
-      if (value.charAt(value.length() - 1) == 'l') {
-        ctx.addIssue(pyNumericLiteralTree, MESSAGE);
-      }
-    });
+  public Kind getKind() {
+    return Kind.NUMERIC_LITERAL;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitNumericLiteral(this);
+  }
+
+  @Override
+  public long valueAsLong() {
+    return Long.parseLong(valueAsString);
+  }
+
+  @Override
+  public String valueAsString() {
+    return valueAsString;
   }
 }
