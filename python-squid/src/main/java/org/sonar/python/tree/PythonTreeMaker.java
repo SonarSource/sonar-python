@@ -566,11 +566,20 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.CALL_EXPR)) {
       return callExpression(astNode);
     }
-    if (astNode.is(PythonGrammar.EXPR) && astNode.getChildren().size() == 1) {
-      return expression(astNode.getFirstChild());
+    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.TEST)) {
+      if (astNode.getChildren().size() == 1) {
+        return expression(astNode.getFirstChild());
+      } else {
+        return binaryExpression(astNode);
+      }
     }
-    if (astNode.is(PythonGrammar.TEST) && astNode.getChildren().size() == 1) {
-      return expression(astNode.getFirstChild());
+    if (astNode.is(
+      PythonGrammar.A_EXPR, PythonGrammar.M_EXPR, PythonGrammar.SHIFT_EXPR,
+      PythonGrammar.AND_EXPR, PythonGrammar.OR_EXPR, PythonGrammar.XOR_EXPR,
+      PythonGrammar.AND_TEST, PythonGrammar.OR_TEST,
+      PythonGrammar.COMPARISON)
+    ) {
+      return binaryExpression(astNode);
     }
     return new PyExpressionTreeImpl(astNode);
   }
@@ -614,5 +623,15 @@ public class PythonTreeMaker {
       return new PyArgumentTreeImpl(astNode, name(nameNode), arg, assign.getToken(), star, starStar);
     }
     return new PyArgumentTreeImpl(astNode, arg, star, starStar);
+  }
+
+  private PyExpressionTree binaryExpression(AstNode astNode) {
+    List<AstNode> children = astNode.getChildren();
+    PyExpressionTree result = expression(children.get(0));
+    for (int i = 1; i < astNode.getNumberOfChildren(); i+=2) {
+      AstNode operator = children.get(i);
+      result = new PyBinaryExpressionTreeImpl(astNode, result, operator.getToken(), expression(operator.getNextSibling()));
+    }
+    return result;
   }
 }

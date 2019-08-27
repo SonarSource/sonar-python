@@ -29,6 +29,7 @@ import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -849,6 +850,53 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.starToken()).isNull();
     assertThat(argumentTree.starStarToken()).isNull();
+  }
+
+  @Test
+  public void binary_expressions() {
+    setRootRule(PythonGrammar.EXPR);
+
+    PyBinaryExpressionTree simplePlus = binaryExpression("a + b");
+    assertThat(simplePlus.leftOperand()).isInstanceOf(PyNameTree.class);
+    assertThat(simplePlus.operator().getValue()).isEqualTo("+");
+    assertThat(simplePlus.rightOperand()).isInstanceOf(PyNameTree.class);
+    assertThat(simplePlus.getKind()).isEqualTo(Tree.Kind.PLUS);
+
+    PyBinaryExpressionTree compoundPlus = binaryExpression("a + b - c");
+    assertThat(compoundPlus.leftOperand()).isInstanceOf(PyBinaryExpressionTree.class);
+    assertThat(compoundPlus.operator().getValue()).isEqualTo("-");
+    assertThat(compoundPlus.rightOperand()).isInstanceOf(PyNameTree.class);
+    assertThat(compoundPlus.getKind()).isEqualTo(Tree.Kind.MINUS);
+    PyBinaryExpressionTree compoundPlusLeft = (PyBinaryExpressionTree) compoundPlus.leftOperand();
+    assertThat(compoundPlusLeft.operator().getValue()).isEqualTo("+");
+
+    assertThat(binaryExpression("a * b").getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
+    assertThat(binaryExpression("a / b").getKind()).isEqualTo(Tree.Kind.DIVISION);
+    assertThat(binaryExpression("a // b").getKind()).isEqualTo(Tree.Kind.FLOOR_DIVISION);
+    assertThat(binaryExpression("a % b").getKind()).isEqualTo(Tree.Kind.MODULO);
+    assertThat(binaryExpression("a @ b").getKind()).isEqualTo(Tree.Kind.MATRIX_MULTIPLICATION);
+    assertThat(binaryExpression("a >> b").getKind()).isEqualTo(Tree.Kind.SHIFT_EXPR);
+    assertThat(binaryExpression("a << b").getKind()).isEqualTo(Tree.Kind.SHIFT_EXPR);
+    assertThat(binaryExpression("a & b").getKind()).isEqualTo(Tree.Kind.BITWISE_AND);
+    assertThat(binaryExpression("a | b").getKind()).isEqualTo(Tree.Kind.BITWISE_OR);
+    assertThat(binaryExpression("a ^ b").getKind()).isEqualTo(Tree.Kind.BITWISE_XOR);
+
+    setRootRule(PythonGrammar.TEST);
+    assertThat(binaryExpression("a == b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a >= b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a <= b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a > b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a < b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a != b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a <> b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(binaryExpression("a and b").getKind()).isEqualTo(Tree.Kind.AND);
+    assertThat(binaryExpression("a or b").getKind()).isEqualTo(Tree.Kind.OR);
+  }
+
+  private PyBinaryExpressionTree binaryExpression(String code) {
+    PyExpressionTree exp = parse(code, treeMaker::expression);
+    assertThat(exp).isInstanceOf(PyBinaryExpressionTree.class);
+    return (PyBinaryExpressionTree) exp;
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

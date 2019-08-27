@@ -112,7 +112,22 @@ public interface Tree {
 
     YIELD_EXPR(PyYieldExpressionTree.class),
 
-    YIELD_STMT(PyYieldStatementTree.class);
+    YIELD_STMT(PyYieldStatementTree.class),
+
+    PLUS(PyBinaryExpressionTree.class),
+    MINUS(PyBinaryExpressionTree.class),
+    MULTIPLICATION(PyBinaryExpressionTree.class),
+    DIVISION(PyBinaryExpressionTree.class),
+    FLOOR_DIVISION(PyBinaryExpressionTree.class),
+    MODULO(PyBinaryExpressionTree.class),
+    MATRIX_MULTIPLICATION(PyBinaryExpressionTree.class),
+    SHIFT_EXPR(PyBinaryExpressionTree.class),
+    BITWISE_AND(PyBinaryExpressionTree.class),
+    BITWISE_OR(PyBinaryExpressionTree.class),
+    BITWISE_XOR(PyBinaryExpressionTree.class),
+    AND(PyBinaryExpressionTree.class),
+    OR(PyBinaryExpressionTree.class),
+    COMPARISON(PyBinaryExpressionTree.class);
 
     final Class<? extends Tree> associatedInterface;
 
