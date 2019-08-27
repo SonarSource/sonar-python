@@ -23,7 +23,6 @@ import com.sonar.sslr.api.AstNode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import org.assertj.core.api.ListAssert;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
@@ -57,7 +56,6 @@ import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
@@ -767,8 +765,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
     testData.forEach((c,clazz) -> {
       PyFileInputTree pyTree = parse(c, treeMaker::fileInput);
-      assertThat(pyTree.statements()).hasSize(1);
-      PyExpressionStatementTree expressionStmt = (PyExpressionStatementTree) pyTree.statements().get(0);
+      assertThat(pyTree.statements().statements()).hasSize(1);
+      PyExpressionStatementTree expressionStmt = (PyExpressionStatementTree) pyTree.statements().statements().get(0);
       assertThat(expressionStmt).as(c).isInstanceOf(PyExpressionStatementTree.class);
       assertThat(expressionStmt.expressions().get(0)).as(c).isInstanceOf(clazz);
     });
