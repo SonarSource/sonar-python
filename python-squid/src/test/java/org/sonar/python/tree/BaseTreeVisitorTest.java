@@ -24,6 +24,8 @@ import java.util.function.Function;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyAtomTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -34,6 +36,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -162,6 +165,26 @@ public class BaseTreeVisitorTest extends RuleTest {
     visitor.visitClassDef(tree);
     verify(visitor).visitName(tree.name());
     verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
+  }
+
+  @Test
+  public void qualified_expr() {
+    setRootRule(PythonGrammar.ATTRIBUTE_REF);
+    PyQualifiedExpressionTree tree = parse("a.b", treeMaker::qualifiedExpression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    visitor.visitQualifiedExpression(tree);
+    verify(visitor).visitAtom((PyAtomTree) tree.qualifier());
+    verify(visitor).visitName(tree.name());
+  }
+
+  @Test
+  public void assignement_stmt() {
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    PyAssignmentStatementTree tree = parse("a = b", treeMaker::assignment);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    visitor.visitAssignmentStatement(tree);
+    verify(visitor).visitAtom((PyAtomTree) tree.assignedValues().get(0));
+    verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
