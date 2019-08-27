@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
@@ -572,6 +573,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
       return expression(astNode.getFirstChild());
     }
+    if (astNode.is(PythonTokenType.NUMBER)) {
+      return numericLiteral(astNode);
+    }
     if (astNode.is(PythonGrammar.YIELD_EXPR)) {
       return yieldExpression(astNode);
     }
@@ -690,5 +694,9 @@ public class PythonTreeMaker {
       return new PyTypedArgumentTreeImpl(parameter, name(nameNode), expression(parameter), nextSibling.getToken(), null, null);
     }
     return new PyTypedArgumentTreeImpl(parameter, null, expression(parameter), null, null, null);
+  }
+
+  private PyExpressionTree numericLiteral(AstNode astNode) {
+    return new PyNumericLiteralTreeImpl(astNode);
   }
 }

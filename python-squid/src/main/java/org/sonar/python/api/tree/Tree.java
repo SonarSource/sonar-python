@@ -92,6 +92,8 @@ public interface Tree {
 
     NONLOCAL_STMT(PyNonlocalStatementTree.class),
 
+    NUMERIC_LITERAL(PyNumericLiteralTree.class),
+
     PASS_STMT(PyPassStatementTree.class),
 
     PRINT_STMT(PyPrintStatementTree.class),

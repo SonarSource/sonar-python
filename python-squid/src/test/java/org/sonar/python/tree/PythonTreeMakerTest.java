@@ -52,6 +52,7 @@ import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
+import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -940,6 +941,16 @@ public class PythonTreeMakerTest extends RuleTest {
 
     lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(1);
+  }
+
+    @Test
+  public void numeric_literal_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyExpressionTree parse = parse("12", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    PyNumericLiteralTree numericLiteral = (PyNumericLiteralTree) parse;
+    assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
+    assertThat(numericLiteral.valueAsString()).isEqualTo("12");
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
