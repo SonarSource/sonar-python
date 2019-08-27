@@ -84,7 +84,7 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
 
     @Override
     public PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message) {
-      PythonCheck.PreciseIssue issue = new PythonCheck.PreciseIssue(check, IssueLocation.preciseLocation(element.astNode(), message));
+      PythonCheck.PreciseIssue issue = new PythonCheck.PreciseIssue(check, IssueLocation.preciseLocation(element, message));
       pythonVisitorContext.addIssue(issue);
       return issue;
     }

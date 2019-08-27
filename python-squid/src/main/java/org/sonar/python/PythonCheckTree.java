@@ -39,7 +39,7 @@ public abstract class PythonCheckTree extends BaseTreeVisitor implements PythonC
   }
 
   protected final PreciseIssue addIssue(Tree node, @Nullable String message) {
-    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node.astNode(), message));
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
     getContext().addIssue(newIssue);
     return newIssue;
   }
