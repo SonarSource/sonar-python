@@ -24,7 +24,7 @@ import javax.annotation.CheckForNull;
 
 public interface PyArgumentTree extends Tree {
   @CheckForNull
-  PyExpressionTree keywordArgument();
+  PyNameTree keywordArgument();
 
   @CheckForNull
   Token equalToken();

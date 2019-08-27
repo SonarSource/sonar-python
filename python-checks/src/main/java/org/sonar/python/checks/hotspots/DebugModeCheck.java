@@ -89,16 +89,12 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isDebugArgument(PyArgumentTree argument) {
-    if (!(argument.keywordArgument() instanceof PyAtomTree)) {
-      return false;
-    }
-    PyExpressionTree keywordArgument = ((PyAtomTree) argument.keywordArgument()).atom();
-    if (keywordArgument instanceof PyNameTree && debugProperties.contains(((PyNameTree) keywordArgument).name())) {
+    PyNameTree keywordArgument = argument.keywordArgument();
+    if (keywordArgument != null && debugProperties.contains((keywordArgument).name())) {
       if (!argument.expression().is(Kind.ATOM)) {
         return false;
       }
-      PyExpressionTree argumentValue = ((PyAtomTree) argument.expression()).atom();
-      return argumentValue instanceof PyNameTree && ((PyNameTree) argumentValue).name().equals("True");
+      return isTrueLiteral(argument.expression());
     }
     return false;
   }

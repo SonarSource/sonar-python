@@ -24,16 +24,17 @@ import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 
 public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
-  private final PyExpressionTree keywordArgument;
+  private final PyNameTree keywordArgument;
   private final PyExpressionTree expression;
   private final Token equalToken;
   private final Token star;
   private final Token starStar;
 
-  public PyArgumentTreeImpl(AstNode node, PyExpressionTree keywordArgument, PyExpressionTree expression, Token equalToken, AstNode star, AstNode starStar) {
+  public PyArgumentTreeImpl(AstNode node, PyNameTree keywordArgument, PyExpressionTree expression, Token equalToken, AstNode star, AstNode starStar) {
     super(node);
     this.keywordArgument = keywordArgument;
     this.expression = expression;
@@ -53,7 +54,7 @@ public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
 
   @CheckForNull
   @Override
-  public PyExpressionTree keywordArgument() {
+  public PyNameTree keywordArgument() {
     return keywordArgument;
   }
 

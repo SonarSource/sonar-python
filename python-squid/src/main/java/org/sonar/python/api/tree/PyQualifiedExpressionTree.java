@@ -19,11 +19,15 @@
  */
 package org.sonar.python.api.tree;
 
+import com.sonar.sslr.api.Token;
+
 /**
  * Qualified expression like "foo.bar"
  */
 public interface PyQualifiedExpressionTree extends PyExpressionTree {
   PyExpressionTree qualifier();
+
+  Token dotToken();
 
   PyNameTree name();
 }

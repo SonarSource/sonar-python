@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -28,16 +29,23 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 public class PyQualifiedExpressionTreeImpl extends PyExpressionTreeImpl implements PyQualifiedExpressionTree {
   private final PyNameTree name;
   private final PyExpressionTree qualifier;
+  private final Token dotToken;
 
-  public PyQualifiedExpressionTreeImpl(AstNode astNode, PyNameTree name, PyExpressionTree qualifier) {
+  public PyQualifiedExpressionTreeImpl(AstNode astNode, PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
     super(astNode);
     this.name = name;
     this.qualifier = qualifier;
+    this.dotToken = dotToken;
   }
 
   @Override
   public PyExpressionTree qualifier() {
     return qualifier;
+  }
+
+  @Override
+  public Token dotToken() {
+    return dotToken;
   }
 
   @Override

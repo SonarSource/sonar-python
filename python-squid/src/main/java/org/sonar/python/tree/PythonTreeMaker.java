@@ -552,9 +552,6 @@ public class PythonTreeMaker {
   }
 
   PyExpressionTree expression(AstNode astNode) {
-    if (astNode.is(PythonGrammar.TEST) && astNode.getChildren().size() == 1) {
-      return expression(astNode.getFirstChild());
-    }
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
       return atom(astNode);
     }
@@ -570,18 +567,22 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.CALL_EXPR)) {
       return callExpression(astNode);
     }
+    if (astNode.getChildren().size() == 1) {
+      return expression(astNode.getFirstChild());
+    }
     return new PyExpressionTreeImpl(astNode);
   }
 
   public PyQualifiedExpressionTree qualifiedExpression(AstNode astNode) {
     PyExpressionTree qualifier = expression(astNode.getFirstChild());
     List<AstNode> names = astNode.getChildren(PythonGrammar.NAME);
-    names.remove(names.size() - 1);
-    PyNameTree name = name(astNode.getLastChild());
+    AstNode lastNameNode = astNode.getLastChild();
     for (AstNode nameNode : names) {
-      qualifier = new PyQualifiedExpressionTreeImpl(astNode, name(nameNode), qualifier);
+      if (nameNode != lastNameNode) {
+        qualifier = new PyQualifiedExpressionTreeImpl(astNode, name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
+      }
     }
-    return new PyQualifiedExpressionTreeImpl(astNode, name, qualifier);
+    return new PyQualifiedExpressionTreeImpl(astNode, name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
   }
 
   public PyCallExpressionTree callExpression(AstNode astNode) {
@@ -605,8 +606,9 @@ public class PythonTreeMaker {
     AstNode starStar = astNode.getFirstChild(PythonPunctuator.MUL_MUL);
     PyExpressionTree arg = expression(astNode.getLastChild(PythonGrammar.TEST));
     if (assign != null) {
-      PyExpressionTree keyword = expression(astNode.getFirstChild(PythonGrammar.TEST));
-      return new PyArgumentTreeImpl(astNode, keyword, arg, assign.getToken(), star, starStar);
+      // Keyword in argument list must be an identifier.
+      AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST).getFirstChild(PythonGrammar.ATOM).getFirstChild(PythonGrammar.NAME);
+      return new PyArgumentTreeImpl(astNode, name(nameNode), arg, assign.getToken(), star, starStar);
     }
     return new PyArgumentTreeImpl(astNode, arg, star, starStar);
   }

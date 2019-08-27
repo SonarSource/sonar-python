@@ -846,7 +846,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
     argumentTree = parse("bar=foo", treeMaker::argument);
     assertThat(argumentTree.equalToken()).isNotNull();
-    PyNameTree keywordArgument = (PyNameTree) ((PyAtomTree) argumentTree.keywordArgument()).atom();
+    PyNameTree keywordArgument = argumentTree.keywordArgument();
     assertThat(keywordArgument.name()).isEqualTo("bar");
     name = (PyNameTree) ((PyAtomTree) argumentTree.expression()).atom();
     assertThat(name.name()).isEqualTo("foo");
