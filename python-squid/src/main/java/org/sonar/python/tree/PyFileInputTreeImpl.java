@@ -21,6 +21,8 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyFileInputTree;
@@ -59,5 +61,10 @@ public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitFileInput(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.singletonList(statements);
   }
 }

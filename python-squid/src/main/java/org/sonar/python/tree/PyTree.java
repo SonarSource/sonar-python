@@ -28,6 +28,7 @@ public abstract class PyTree implements Tree {
   private final AstNode node;
   private final Token firstToken;
   private final Token lastToken;
+  private Tree parent = null;
 
   public PyTree(AstNode node) {
     this.node = node;
@@ -60,5 +61,14 @@ public abstract class PyTree implements Tree {
   @Override
   public Token lastToken() {
     return node == null ? lastToken : node.getLastToken();
+  }
+
+  @Override
+  public Tree parent() {
+    return parent;
+  }
+
+  protected void setParent(Tree parent) {
+    this.parent = parent;
   }
 }

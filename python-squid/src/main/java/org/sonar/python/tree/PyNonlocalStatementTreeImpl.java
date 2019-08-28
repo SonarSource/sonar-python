@@ -21,10 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyNonlocalStatementTreeImpl extends PyTree implements PyNonlocalStatementTree {
   private final Token nonlocalKeyword;
@@ -54,5 +56,10 @@ public class PyNonlocalStatementTreeImpl extends PyTree implements PyNonlocalSta
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitNonlocalStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.unmodifiableList(variables);
   }
 }

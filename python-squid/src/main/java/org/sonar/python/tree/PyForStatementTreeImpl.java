@@ -21,12 +21,16 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree {
 
@@ -114,5 +118,11 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   @Override
   public Token asyncKeyword() {
     return asyncKeyword;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(expressions, testExpressions, Arrays.asList(body, elseBody))
+      .flatMap(List::stream).collect(Collectors.toList());
   }
 }

@@ -41,7 +41,6 @@ public interface PyImportFromTree extends PyImportStatementTree {
   @CheckForNull
   List<Token> dottedPrefixForModule();
 
-  @CheckForNull
   List<PyAliasedNameTree> importedNames();
 
   boolean isWildcardImport();

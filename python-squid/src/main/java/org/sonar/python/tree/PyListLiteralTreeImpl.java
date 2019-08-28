@@ -21,9 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyListLiteralTreeImpl extends PyTree implements PyListLiteralTree {
 
@@ -61,5 +64,10 @@ public class PyListLiteralTreeImpl extends PyTree implements PyListLiteralTree {
   @Override
   public Token rightBracket() {
     return rightBracket;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.singletonList(elements);
   }
 }

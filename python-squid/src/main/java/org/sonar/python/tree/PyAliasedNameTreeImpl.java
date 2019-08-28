@@ -21,11 +21,14 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyAliasedNameTreeImpl extends PyTree implements PyAliasedNameTree {
 
@@ -65,5 +68,10 @@ public class PyAliasedNameTreeImpl extends PyTree implements PyAliasedNameTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitAliasedName(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(dottedName, alias);
   }
 }

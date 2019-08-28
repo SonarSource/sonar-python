@@ -22,10 +22,13 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmentStatementTree {
   private final List<Token> assignTokens;
@@ -62,5 +65,10 @@ public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmen
   @Override
   public Kind getKind() {
     return Kind.ASSIGNMENT_STMT;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(lhsExpressions, assignedValues).flatMap(List::stream).collect(Collectors.toList());
   }
 }

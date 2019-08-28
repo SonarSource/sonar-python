@@ -21,13 +21,17 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
   private final Token fromKeyword;
@@ -44,7 +48,7 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
     this.dottedPrefixForModule = dottedPrefixForModule;
     this.moduleName = moduleName;
     this.importKeyword = importKeyword;
-    this.aliasedImportNames = aliasedImportNames;
+    this.aliasedImportNames = aliasedImportNames == null ? Collections.emptyList() : aliasedImportNames;
     this.isWildcardImport = isWildcardImport;
     this.wildcard = isWildcardImport ? astNode.getFirstChild(PythonPunctuator.MUL).getToken() : null;
   }
@@ -71,7 +75,6 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
     return dottedPrefixForModule;
   }
 
-  @CheckForNull
   @Override
   public List<PyAliasedNameTree> importedNames() {
     return aliasedImportNames;
@@ -96,5 +99,11 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitImportFrom(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(aliasedImportNames, Collections.singletonList(moduleName))
+      .flatMap(List::stream).collect(Collectors.toList());
   }
 }

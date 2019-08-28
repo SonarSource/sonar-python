@@ -20,9 +20,12 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyYieldStatementTreeImpl extends PyTree implements PyYieldStatementTree {
   private final PyYieldExpressionTree yieldExpression;
@@ -45,5 +48,10 @@ public class PyYieldStatementTreeImpl extends PyTree implements PyYieldStatement
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitYieldStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.singletonList(yieldExpression);
   }
 }

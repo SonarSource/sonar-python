@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyDecoratorTree;
@@ -30,6 +31,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
@@ -131,5 +133,10 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitFunctionDef(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(name, typedArgs, body);
   }
 }

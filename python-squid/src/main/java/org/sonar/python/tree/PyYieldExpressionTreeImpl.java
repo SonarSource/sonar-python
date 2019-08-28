@@ -21,11 +21,13 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyYieldExpressionTreeImpl extends PyTree implements PyYieldExpressionTree {
   private final Token yieldKeyword;
@@ -63,5 +65,10 @@ public class PyYieldExpressionTreeImpl extends PyTree implements PyYieldExpressi
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitYieldExpression(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.unmodifiableList(expressionTrees);
   }
 }

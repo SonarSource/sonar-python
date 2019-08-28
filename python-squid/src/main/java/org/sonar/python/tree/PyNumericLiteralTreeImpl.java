@@ -20,8 +20,11 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyNumericLiteralTreeImpl extends PyTree implements PyNumericLiteralTree {
 
@@ -50,5 +53,10 @@ public class PyNumericLiteralTreeImpl extends PyTree implements PyNumericLiteral
   @Override
   public String valueAsString() {
     return valueAsString;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.emptyList();
   }
 }

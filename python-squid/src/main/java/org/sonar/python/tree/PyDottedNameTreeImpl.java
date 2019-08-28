@@ -20,10 +20,12 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyDottedNameTreeImpl extends PyTree implements PyDottedNameTree {
   private final List<PyNameTree> names;
@@ -46,5 +48,10 @@ public class PyDottedNameTreeImpl extends PyTree implements PyDottedNameTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitDottedName(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.unmodifiableList(names);
   }
 }

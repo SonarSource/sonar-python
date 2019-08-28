@@ -21,11 +21,14 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyUnaryExpressionTreeImpl extends PyTree implements PyUnaryExpressionTree {
 
@@ -63,6 +66,11 @@ public class PyUnaryExpressionTreeImpl extends PyTree implements PyUnaryExpressi
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitUnaryExpression(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.singletonList(expression);
   }
 
   @Override

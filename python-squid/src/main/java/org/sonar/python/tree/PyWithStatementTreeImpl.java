@@ -21,7 +21,11 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -29,6 +33,7 @@ import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTree {
 
@@ -83,6 +88,12 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
     visitor.visitWithStatement(this);
   }
 
+  @Override
+  public List<Tree> children() {
+    return Stream.of(withItems, Collections.singletonList(statements))
+      .flatMap(List::stream).collect(Collectors.toList());
+  }
+
   public static class PyWithItemTreeImpl extends PyTree implements PyWithItemTree {
 
     private final PyExpressionTree test;
@@ -121,6 +132,11 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
     @Override
     public void accept(PyTreeVisitor visitor) {
       visitor.visitWithItem(this);
+    }
+
+    @Override
+    public List<Tree> children() {
+      return Arrays.asList(test, expr);
     }
   }
 }

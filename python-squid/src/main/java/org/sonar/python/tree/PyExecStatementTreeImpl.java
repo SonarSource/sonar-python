@@ -21,9 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.List;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyExecStatementTreeImpl extends PyTree implements PyExecStatementTree {
   private final Token execKeyword;
@@ -75,5 +78,10 @@ public class PyExecStatementTreeImpl extends PyTree implements PyExecStatementTr
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitExecStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(expression, globalsExpression, localsExpression);
   }
 }

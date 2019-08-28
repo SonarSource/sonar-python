@@ -21,6 +21,7 @@ package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.List;
 import javax.annotation.CheckForNull;
 
 public interface Tree {
@@ -36,6 +37,10 @@ public interface Tree {
   Token firstToken();
 
   Token lastToken();
+
+  Tree parent();
+
+  List<Tree> children();
 
   enum Kind {
     ALIASED_NAME(PyAliasedNameTree.class),

@@ -21,6 +21,8 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -54,5 +56,10 @@ public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTr
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitElseStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.singletonList(body);
   }
 }

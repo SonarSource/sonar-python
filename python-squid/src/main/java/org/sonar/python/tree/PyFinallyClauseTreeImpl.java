@@ -21,9 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyFinallyClauseTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyFinallyClauseTreeImpl extends PyTree implements PyFinallyClauseTree {
   private final Token finallyKeyword;
@@ -53,5 +56,10 @@ public class PyFinallyClauseTreeImpl extends PyTree implements PyFinallyClauseTr
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitFinallyClause(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.singletonList(body);
   }
 }

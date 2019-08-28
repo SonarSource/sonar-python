@@ -21,11 +21,15 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatementTree {
   private final Token raiseKeyword;
@@ -71,5 +75,11 @@ public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatement
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitRaiseStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(expressions, Collections.singletonList(fromExpression))
+      .flatMap(List::stream).collect(Collectors.toList());
   }
 }

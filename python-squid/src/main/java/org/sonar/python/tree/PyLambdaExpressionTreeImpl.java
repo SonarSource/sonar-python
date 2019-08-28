@@ -21,10 +21,13 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements PyLambdaExpressionTree {
   private final Token lambdaKeyword;
@@ -68,5 +71,10 @@ public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements 
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitLambda(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(typedArgList, body);
   }
 }
