@@ -138,11 +138,11 @@ public interface Tree {
     AND(PyBinaryExpressionTree.class),
     OR(PyBinaryExpressionTree.class),
     COMPARISON(PyBinaryExpressionTree.class),
+    POWER(PyBinaryExpressionTree.class),
 
     UNARY_PLUS(PyUnaryExpressionTree.class),
     UNARY_MINUS(PyUnaryExpressionTree.class),
-    BITWISE_COMPLEMENT(PyUnaryExpressionTree.class),
-    ;
+    BITWISE_COMPLEMENT(PyUnaryExpressionTree.class);
 
     final Class<? extends Tree> associatedInterface;
 

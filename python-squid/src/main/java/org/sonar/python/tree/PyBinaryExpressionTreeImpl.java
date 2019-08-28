@@ -44,6 +44,7 @@ public class PyBinaryExpressionTreeImpl extends PyTree implements PyBinaryExpres
     map.put("/", Kind.DIVISION);
     map.put("//", Kind.FLOOR_DIVISION);
     map.put("%", Kind.MODULO);
+    map.put("**", Kind.POWER);
     map.put("@", Kind.MATRIX_MULTIPLICATION);
     map.put(">>", Kind.SHIFT_EXPR);
     map.put("<<", Kind.SHIFT_EXPR);

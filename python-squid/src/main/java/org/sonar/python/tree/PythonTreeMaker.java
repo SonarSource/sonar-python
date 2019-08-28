@@ -35,6 +35,7 @@ import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -603,9 +604,11 @@ public class PythonTreeMaker {
       PythonGrammar.A_EXPR, PythonGrammar.M_EXPR, PythonGrammar.SHIFT_EXPR,
       PythonGrammar.AND_EXPR, PythonGrammar.OR_EXPR, PythonGrammar.XOR_EXPR,
       PythonGrammar.AND_TEST, PythonGrammar.OR_TEST,
-      PythonGrammar.COMPARISON)
-    ) {
+      PythonGrammar.COMPARISON)) {
       return binaryExpression(astNode);
+    }
+    if (astNode.is(PythonGrammar.POWER) && astNode.hasDirectChildren(PythonPunctuator.MUL_MUL)) {
+      return powerExpression(astNode);
     }
     if (astNode.is(PythonGrammar.LAMBDEF)) {
       return lambdaExpression(astNode);
@@ -614,6 +617,13 @@ public class PythonTreeMaker {
       return new PyUnaryExpressionTreeImpl(astNode, astNode.getFirstChild().getToken(), expression(astNode.getLastChild()));
     }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  private PyBinaryExpressionTree powerExpression(AstNode astNode) {
+    AstNode operator = astNode.getFirstChild(PythonPunctuator.MUL_MUL);
+    // TODO await token, trailers
+    PyExpressionTree expr = expression(astNode.getFirstChild(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM));
+    return new PyBinaryExpressionTreeImpl(astNode, expr, operator.getToken(), expression(operator.getNextSibling()));
   }
 
   private PyListLiteralTree listLiteral(AstNode astNode) {
