@@ -88,6 +88,8 @@ public interface Tree {
 
     LAMBDA(PyLambdaExpressionTree.class),
 
+    LIST_LITERAL(PyListLiteralTree.class),
+
     NAME(PyNameTree.class),
 
     NONLOCAL_STMT(PyNonlocalStatementTree.class),

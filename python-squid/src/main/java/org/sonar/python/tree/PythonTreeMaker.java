@@ -57,6 +57,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
@@ -478,7 +479,7 @@ public class PythonTreeMaker {
   }
 
   private PyExpressionListTree expressionList(AstNode astNode) {
-    if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR)) {
+    if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TESTLIST_COMP)) {
       List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
         .map(this::expression)
         .collect(Collectors.toList());
@@ -573,6 +574,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
       return expression(astNode.getFirstChild());
     }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LBRACKET)) {
+      return listLiteral(astNode);
+    }
     if (astNode.is(PythonTokenType.NUMBER)) {
       return numericLiteral(astNode);
     }
@@ -607,6 +611,19 @@ public class PythonTreeMaker {
       return lambdaExpression(astNode);
     }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  private PyListLiteralTree listLiteral(AstNode astNode) {
+    PyExpressionListTree elements;
+    if (astNode.hasDirectChildren(PythonGrammar.TESTLIST_COMP)) {
+      elements = expressionList(astNode.getFirstChild(PythonGrammar.TESTLIST_COMP));
+    } else {
+      elements = new PyExpressionListTreeImpl(astNode, Collections.emptyList());
+    }
+    return new PyListLiteralTreeImpl(astNode,
+      astNode.getFirstChild(PythonPunctuator.LBRACKET).getToken(),
+      elements,
+      astNode.getFirstChild(PythonPunctuator.RBRACKET).getToken());
   }
 
   public PyQualifiedExpressionTree qualifiedExpression(AstNode astNode) {
