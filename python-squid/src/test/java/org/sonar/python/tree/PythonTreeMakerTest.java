@@ -61,6 +61,7 @@ import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
@@ -1065,7 +1066,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lambdaExpressionTree.children()).hasSize(2);
   }
 
-    @Test
+  @Test
   public void numeric_literal_expression() {
     setRootRule(PythonGrammar.ATOM);
     PyExpressionTree parse = parse("12", treeMaker::expression);
@@ -1074,6 +1075,17 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
     assertThat(numericLiteral.valueAsString()).isEqualTo("12");
     assertThat(numericLiteral.children()).isEmpty();
+  }
+
+  @Test
+  public void string_literal_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyExpressionTree parse = parse("\"plop\"", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.STRING_LITERAL)).isTrue();
+    PyStringLiteralTree stringLiteral = (PyStringLiteralTree) parse;
+    assertThat(stringLiteral.value()).isEqualTo("\"plop\"");
+    assertThat(stringLiteral.trimmedQuotesValue()).isEqualTo("plop");
+    assertThat(stringLiteral.children()).isEmpty();
   }
 
   @Test
