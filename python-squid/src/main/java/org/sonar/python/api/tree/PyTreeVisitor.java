@@ -108,4 +108,6 @@ public interface PyTreeVisitor {
   void visitListLiteral(PyListLiteralTree pyListLiteralTree);
 
   void visitUnaryExpression(PyUnaryExpressionTree pyUnaryExpressionTree);
+
+  void visitStringLiteral(PyStringLiteralTree pyStringLiteralTree);
 }

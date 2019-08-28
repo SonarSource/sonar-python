@@ -594,6 +594,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonTokenType.NUMBER)) {
       return numericLiteral(astNode);
     }
+    if (astNode.is(PythonTokenType.STRING)) {
+      return stringLiteral(astNode);
+    }
     if (astNode.is(PythonGrammar.YIELD_EXPR)) {
       return yieldExpression(astNode);
     }
@@ -741,5 +744,9 @@ public class PythonTreeMaker {
 
   private PyExpressionTree numericLiteral(AstNode astNode) {
     return new PyNumericLiteralTreeImpl(astNode);
+  }
+
+  private PyExpressionTree stringLiteral(AstNode astNode) {
+    return new PyStringLiteralTreeImpl(astNode);
   }
 }

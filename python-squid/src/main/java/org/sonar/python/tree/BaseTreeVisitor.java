@@ -56,6 +56,7 @@ import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
@@ -326,6 +327,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
 
   @Override
   public void visitNumericLiteral(PyNumericLiteralTree pyNumericLiteralTree) {
+    // noop
+  }
+
+  @Override
+  public void visitStringLiteral(PyStringLiteralTree pyStringLiteralTree) {
     // noop
   }
 

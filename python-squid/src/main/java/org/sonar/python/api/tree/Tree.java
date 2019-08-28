@@ -113,6 +113,8 @@ public interface Tree {
 
     STATEMENT_LIST(PyStatementListTree.class),
 
+    STRING_LITERAL(PyStringLiteralTree.class),
+
     TRY_STMT(PyTryStatementTree.class),
 
     TYPED_ARG(PyTypedArgumentTree.class),
