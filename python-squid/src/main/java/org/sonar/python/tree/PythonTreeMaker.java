@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
@@ -81,7 +82,7 @@ public class PythonTreeMaker {
   public PyFileInputTree fileInput(AstNode astNode) {
     List<PyStatementTree> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
     PyStatementListTreeImpl statementList = statements.isEmpty() ? null : new PyStatementListTreeImpl(astNode, statements);
-    return new PyFileInputTreeImpl(astNode, statementList);
+    return new PyFileInputTreeImpl(astNode, statementList, DocstringExtractor.extractDocstring(astNode));
   }
 
   PyStatementTree statement(AstNode astNode) {
@@ -405,7 +406,7 @@ public class PythonTreeMaker {
     }
 
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyFunctionDefTreeImpl(astNode, name, typedArgs, body, isMethodDefinition(astNode));
+    return new PyFunctionDefTreeImpl(astNode, name, typedArgs, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
   }
 
   private static boolean isMethodDefinition(AstNode node) {
@@ -424,7 +425,7 @@ public class PythonTreeMaker {
     // TODO argList
     PyArgListTree args = null;
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyClassDefTreeImpl(astNode, name, args, body);
+    return new PyClassDefTreeImpl(astNode, name, args, body, DocstringExtractor.extractDocstring(astNode));
   }
 
   private PyNameTree name(AstNode astNode) {

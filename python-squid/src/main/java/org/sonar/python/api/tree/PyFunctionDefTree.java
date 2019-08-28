@@ -60,4 +60,7 @@ public interface PyFunctionDefTree extends PyStatementTree {
 
   boolean isMethodDefinition();
 
+  @CheckForNull
+  Token docstring();
+
 }
