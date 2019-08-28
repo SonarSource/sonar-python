@@ -904,6 +904,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(binaryExpression("a & b").getKind()).isEqualTo(Tree.Kind.BITWISE_AND);
     assertThat(binaryExpression("a | b").getKind()).isEqualTo(Tree.Kind.BITWISE_OR);
     assertThat(binaryExpression("a ^ b").getKind()).isEqualTo(Tree.Kind.BITWISE_XOR);
+    assertThat(binaryExpression("a ** b").getKind()).isEqualTo(Tree.Kind.POWER);
 
     setRootRule(PythonGrammar.TEST);
     assertThat(binaryExpression("a == b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
