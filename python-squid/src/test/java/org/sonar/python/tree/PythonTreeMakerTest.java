@@ -62,6 +62,7 @@ import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
+import org.sonar.python.api.tree.PyUnaryExpressionTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -965,6 +966,22 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(expressions.get(0).is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
     assertThat(listLiteralTree.leftBracket()).isNotNull();
     assertThat(listLiteralTree.rightBracket()).isNotNull();
+  }
+
+  @Test
+  public void unary_expression() {
+    assertUnaryExpression("-", Tree.Kind.UNARY_MINUS);
+    assertUnaryExpression("+", Tree.Kind.UNARY_PLUS);
+    assertUnaryExpression("~", Tree.Kind.BITWISE_COMPLEMENT);
+  }
+
+  private void assertUnaryExpression(String operator, Tree.Kind kind) {
+    setRootRule(PythonGrammar.EXPR);
+    PyExpressionTree parse = parse(operator+"1", treeMaker::expression);
+    assertThat(parse.is(kind)).isTrue();
+    PyUnaryExpressionTree unary = (PyUnaryExpressionTree) parse;
+    assertThat(unary.expression().is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(unary.operator().getValue()).isEqualTo(operator);
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
