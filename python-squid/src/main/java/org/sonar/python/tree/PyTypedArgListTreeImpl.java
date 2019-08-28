@@ -20,10 +20,12 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypedArgListTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyTypedArgListTreeImpl extends PyTree implements PyTypedArgListTree {
 
@@ -42,6 +44,11 @@ public class PyTypedArgListTreeImpl extends PyTree implements PyTypedArgListTree
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitTypedArgList(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.unmodifiableList(arguments);
   }
 
   @Override

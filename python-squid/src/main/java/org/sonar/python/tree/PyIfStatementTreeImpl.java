@@ -21,8 +21,11 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -107,5 +110,11 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitIfStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(elifBranches, Arrays.asList(condition, statements, elseStatement))
+      .flatMap(List::stream).collect(Collectors.toList());
   }
 }

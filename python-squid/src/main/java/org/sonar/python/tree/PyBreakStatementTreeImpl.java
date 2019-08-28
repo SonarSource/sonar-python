@@ -21,8 +21,11 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyBreakStatementTreeImpl extends PyTree implements PyBreakStatementTree {
   private final Token breakKeyword;
@@ -45,5 +48,10 @@ public class PyBreakStatementTreeImpl extends PyTree implements PyBreakStatement
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitBreakStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.emptyList();
   }
 }

@@ -20,8 +20,11 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 // FIXME : this class is a placeholder while we implement concrete type of expressions and should be deleted.
 public class PyExpressionTreeImpl extends PyTree implements PyExpressionTree {
@@ -37,5 +40,10 @@ public class PyExpressionTreeImpl extends PyTree implements PyExpressionTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     //TODO : remove
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.emptyList();
   }
 }

@@ -21,11 +21,14 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree {
   private final Token exceptKeyword;
@@ -107,5 +110,10 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitExceptClause(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(body, exception, exceptionInstance);
   }
 }

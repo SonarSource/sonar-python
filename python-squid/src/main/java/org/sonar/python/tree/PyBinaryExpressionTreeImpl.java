@@ -21,11 +21,14 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyBinaryExpressionTreeImpl extends PyTree implements PyBinaryExpressionTree {
 
@@ -94,5 +97,10 @@ public class PyBinaryExpressionTreeImpl extends PyTree implements PyBinaryExpres
   @Override
   public Kind getKind() {
     return kind;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(leftOperand, rightOperand);
   }
 }

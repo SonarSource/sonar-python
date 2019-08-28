@@ -21,11 +21,15 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyCallExpressionTreeImpl extends PyExpressionTreeImpl implements PyCallExpressionTree {
   private final PyExpressionTree callee;
@@ -69,5 +73,10 @@ public class PyCallExpressionTreeImpl extends PyExpressionTreeImpl implements Py
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitCallExpression(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(Collections.singletonList(callee), arguments).flatMap(List::stream).collect(Collectors.toList());
   }
 }

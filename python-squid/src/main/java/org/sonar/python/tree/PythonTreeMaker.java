@@ -76,13 +76,25 @@ import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PythonTreeMaker {
 
   public PyFileInputTree fileInput(AstNode astNode) {
     List<PyStatementTree> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
     PyStatementListTreeImpl statementList = statements.isEmpty() ? null : new PyStatementListTreeImpl(astNode, statements);
-    return new PyFileInputTreeImpl(astNode, statementList, DocstringExtractor.extractDocstring(astNode));
+    PyFileInputTreeImpl pyFileInputTree = new PyFileInputTreeImpl(astNode, statementList, DocstringExtractor.extractDocstring(astNode));
+    setParents(pyFileInputTree);
+    return pyFileInputTree;
+  }
+
+  private void setParents(Tree root) {
+    for (Tree child : root.children()) {
+      if (child != null) {
+        ((PyTree) child).setParent(root);
+        setParents(child);
+      }
+    }
   }
 
   PyStatementTree statement(AstNode astNode) {

@@ -21,12 +21,15 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatementTree {
 
@@ -87,5 +90,10 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
   @Override
   public PyStatementListTree elseBody() {
     return elseBody;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(condition, body, elseBody);
   }
 }

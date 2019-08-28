@@ -21,10 +21,13 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
+import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyQualifiedExpressionTreeImpl extends PyExpressionTreeImpl implements PyQualifiedExpressionTree {
   private final PyNameTree name;
@@ -61,5 +64,10 @@ public class PyQualifiedExpressionTreeImpl extends PyExpressionTreeImpl implemen
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitQualifiedExpression(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(name, qualifier);
   }
 }

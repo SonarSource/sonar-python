@@ -20,8 +20,11 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyNameTreeImpl extends PyTree implements PyNameTree {
   private final String name;
@@ -44,5 +47,10 @@ public class PyNameTreeImpl extends PyTree implements PyNameTree {
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitName(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.emptyList();
   }
 }

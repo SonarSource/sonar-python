@@ -21,7 +21,10 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
@@ -29,6 +32,7 @@ import org.sonar.python.api.tree.PyFinallyClauseTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree {
   private final Token tryKeyword;
@@ -81,5 +85,11 @@ public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree
   @Override
   public void accept(PyTreeVisitor visitor) {
     visitor.visitTryStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(exceptClauses, Arrays.asList(tryBody, finallyClause, elseStatement))
+      .flatMap(List::stream).collect(Collectors.toList());
   }
 }

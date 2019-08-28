@@ -21,11 +21,14 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.List;
+import java.util.Arrays;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
   private final PyNameTree keywordArgument;
@@ -89,5 +92,10 @@ public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
   @Override
   public Kind getKind() {
     return Kind.ARGUMENT;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Arrays.asList(keywordArgument, expression);
   }
 }

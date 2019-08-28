@@ -20,10 +20,12 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
 public class PyExpressionStatementTreeImpl extends PyTree implements PyExpressionStatementTree {
   private final List<PyExpressionTree> expressions;
@@ -45,5 +47,10 @@ public class PyExpressionStatementTreeImpl extends PyTree implements PyExpressio
   @Override
   public List<PyExpressionTree> expressions() {
     return expressions;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.unmodifiableList(expressions);
   }
 }
