@@ -19,27 +19,24 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.sonar.sslr.api.Token;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.Tree;
 
-@Rule(key = InequalityUsageCheck.CHECK_KEY)
-public class InequalityUsageCheck extends PythonCheckAstNode {
-
-  public static final String CHECK_KEY = "InequalityUsage";
-
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonPunctuator.NOT_EQU2);
-  }
+@Rule(key = "InequalityUsage")
+public class InequalityUsageCheck extends PythonSubscriptionCheck {
 
   @Override
-  public void visitNode(AstNode astNode) {
-    addIssue(astNode, "Replace \"<>\" by \"!=\".");
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> {
+      PyBinaryExpressionTree expr = (PyBinaryExpressionTree) ctx.syntaxNode();
+      Token operator = expr.operator();
+      if (operator.getValue().equals(PythonPunctuator.NOT_EQU2.getValue())) {
+        ctx.addIssue(operator, "Replace \"<>\" by \"!=\".");
+      }
+    });
   }
-
 }
