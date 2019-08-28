@@ -610,6 +610,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.LAMBDEF)) {
       return lambdaExpression(astNode);
     }
+    if (astNode.is(PythonGrammar.FACTOR)) {
+      return new PyUnaryExpressionTreeImpl(astNode, astNode.getFirstChild().getToken(), expression(astNode.getLastChild()));
+    }
     return new PyExpressionTreeImpl(astNode);
   }
 

@@ -106,4 +106,6 @@ public interface PyTreeVisitor {
   void visitNumericLiteral(PyNumericLiteralTree pyNumericLiteralTree);
 
   void visitListLiteral(PyListLiteralTree pyListLiteralTree);
+
+  void visitUnaryExpression(PyUnaryExpressionTree pyUnaryExpressionTree);
 }

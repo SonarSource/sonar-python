@@ -137,7 +137,12 @@ public interface Tree {
     BITWISE_XOR(PyBinaryExpressionTree.class),
     AND(PyBinaryExpressionTree.class),
     OR(PyBinaryExpressionTree.class),
-    COMPARISON(PyBinaryExpressionTree.class);
+    COMPARISON(PyBinaryExpressionTree.class),
+
+    UNARY_PLUS(PyUnaryExpressionTree.class),
+    UNARY_MINUS(PyUnaryExpressionTree.class),
+    BITWISE_COMPLEMENT(PyUnaryExpressionTree.class),
+    ;
 
     final Class<? extends Tree> associatedInterface;
 

@@ -60,6 +60,7 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
+import org.sonar.python.api.tree.PyUnaryExpressionTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -331,5 +332,10 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitListLiteral(PyListLiteralTree pyListLiteralTree) {
     scan(pyListLiteralTree.elements());
+  }
+
+  @Override
+  public void visitUnaryExpression(PyUnaryExpressionTree pyUnaryExpressionTree) {
+    scan(pyUnaryExpressionTree.expression());
   }
 }

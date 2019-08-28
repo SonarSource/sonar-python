@@ -4,3 +4,5 @@ def foo():
     1L
 
 qix = [1l] # Noncompliant
+bar = -1l # Noncompliant
+self.enc.sendEncoded(-1015l) # Noncompliant
