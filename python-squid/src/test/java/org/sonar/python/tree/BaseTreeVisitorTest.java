@@ -33,6 +33,7 @@ import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
+import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -182,6 +183,16 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitAssignmentStatement(tree);
     verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));
+  }
+
+  @Test
+  public void lambda() {
+    setRootRule(PythonGrammar.LAMBDEF);
+    PyLambdaExpressionTree tree = parse("lambda x : x", treeMaker::lambdaExpression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    visitor.visitLambda(tree);
+    verify(visitor).visitTypedArgList(tree.arguments());
+    verify(visitor).visitTypeArgument(tree.arguments().arguments().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

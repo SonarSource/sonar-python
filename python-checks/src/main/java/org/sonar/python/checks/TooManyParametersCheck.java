@@ -19,16 +19,15 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
-public class TooManyParametersCheck extends PythonCheckAstNode {
+public class TooManyParametersCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S107";
   private static final String MESSAGE = "%s has %s parameters, which is greater than the %s authorized.";
 
@@ -40,26 +39,30 @@ public class TooManyParametersCheck extends PythonCheckAstNode {
   public int max = DEFAULT_MAX;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.FUNCDEF, PythonGrammar.LAMBDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    int nbParameters = node.select()
-      .children(PythonGrammar.TYPEDARGSLIST, PythonGrammar.VARARGSLIST)
-      .children(PythonGrammar.TFPDEF, PythonGrammar.FPDEF)
-      .size();
-    if (nbParameters > max) {
-      String name = "Lambda";
-      if (node.is(PythonGrammar.FUNCDEF)) {
-        String typeName = CheckUtils.isMethodDefinition(node) ? "Method" : "Function";
-        name = node.getFirstChild(PythonGrammar.FUNCNAME).getTokenOriginalValue();
-        name = String.format("%s \"%s\"", typeName, name);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
+      if (tree.typedArgs() != null) {
+        int nbParameters = tree.typedArgs().arguments().size();
+        if (nbParameters > max) {
+          String typeName = tree.isMethodDefinition() ? "Method" : "Function";
+          String name = String.format("%s \"%s\"", typeName, tree.name().name());
+          String message = String.format(MESSAGE, name, nbParameters, max);
+          ctx.addIssue(tree.typedArgs(), message);
+        }
       }
-      String message = String.format(MESSAGE, name, nbParameters, max);
-      addIssue(node.getFirstChild(PythonGrammar.TYPEDARGSLIST, PythonGrammar.VARARGSLIST), message);
-    }
+    });
+
+    context.registerSyntaxNodeConsumer(Kind.LAMBDA, ctx -> {
+      PyLambdaExpressionTree tree = (PyLambdaExpressionTree) ctx.syntaxNode();
+      if (tree.arguments() != null) {
+        int nbParameters = tree.arguments().arguments().size();
+        if (nbParameters > max) {
+          String name = "Lambda";
+          String message = String.format(MESSAGE, name, nbParameters, max);
+          ctx.addIssue(tree.arguments(), message);
+        }
+      }
+    });
   }
 }
-

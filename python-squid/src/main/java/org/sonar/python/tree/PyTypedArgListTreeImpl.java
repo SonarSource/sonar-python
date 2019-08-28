@@ -17,10 +17,35 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
+import com.sonar.sslr.api.AstNode;
 import java.util.List;
+import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyTypedArgumentTree;
 
-public interface PyTypedArgListTree extends Tree {
-  List<PyTypedArgumentTree> arguments();
+public class PyTypedArgListTreeImpl extends PyTree implements PyTypedArgListTree {
+
+  private final List<PyTypedArgumentTree> arguments;
+
+  public PyTypedArgListTreeImpl(AstNode node, List<PyTypedArgumentTree> arguments) {
+    super(node);
+    this.arguments = arguments;
+  }
+
+  @Override
+  public List<PyTypedArgumentTree> arguments() {
+    return arguments;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitTypedArgList(this);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.TYPED_ARG_LIST;
+  }
 }

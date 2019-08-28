@@ -19,8 +19,15 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.List;
+import com.sonar.sslr.api.Token;
 
-public interface PyTypedArgListTree extends Tree {
-  List<PyTypedArgumentTree> arguments();
+public interface PyLambdaExpressionTree extends PyExpressionTree {
+  Token lambdaKeyword();
+
+  Token colonToken();
+
+  PyExpressionTree expression();
+
+  PyTypedArgListTree arguments();
+
 }
