@@ -104,4 +104,6 @@ public interface PyTreeVisitor {
   void visitTypeArgument(PyTypedArgumentTree pyTypedArgumentTree);
 
   void visitNumericLiteral(PyNumericLiteralTree pyNumericLiteralTree);
+
+  void visitListLiteral(PyListLiteralTree pyListLiteralTree);
 }

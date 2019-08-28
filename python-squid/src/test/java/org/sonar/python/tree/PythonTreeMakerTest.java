@@ -50,6 +50,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
@@ -951,6 +952,19 @@ public class PythonTreeMakerTest extends RuleTest {
     PyNumericLiteralTree numericLiteral = (PyNumericLiteralTree) parse;
     assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
     assertThat(numericLiteral.valueAsString()).isEqualTo("12");
+  }
+
+  @Test
+  public void list_literal() {
+    setRootRule(PythonGrammar.ATOM);
+    PyExpressionTree parse = parse("[1, \"foo\"]", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.LIST_LITERAL)).isTrue();
+    PyListLiteralTree listLiteralTree = (PyListLiteralTree) parse;
+    List<PyExpressionTree> expressions = listLiteralTree.elements().expressions();
+    assertThat(expressions).hasSize(2);
+    assertThat(expressions.get(0).is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(listLiteralTree.leftBracket()).isNotNull();
+    assertThat(listLiteralTree.rightBracket()).isNotNull();
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
