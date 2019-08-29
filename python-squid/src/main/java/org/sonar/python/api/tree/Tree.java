@@ -149,7 +149,8 @@ public interface Tree {
 
     UNARY_PLUS(PyUnaryExpressionTree.class),
     UNARY_MINUS(PyUnaryExpressionTree.class),
-    BITWISE_COMPLEMENT(PyUnaryExpressionTree.class);
+    BITWISE_COMPLEMENT(PyUnaryExpressionTree.class),
+    NOT(PyUnaryExpressionTree.class);
 
     final Class<? extends Tree> associatedInterface;
 

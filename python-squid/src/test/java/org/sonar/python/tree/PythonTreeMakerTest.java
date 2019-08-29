@@ -1111,6 +1111,15 @@ public class PythonTreeMakerTest extends RuleTest {
     assertUnaryExpression("~", Tree.Kind.BITWISE_COMPLEMENT);
   }
 
+  @Test
+  public void not() {
+    setRootRule(PythonGrammar.TEST);
+    PyExpressionTree exp = parse("not 1", treeMaker::expression);
+    assertThat(exp).isInstanceOf(PyUnaryExpressionTree.class);
+    assertThat(exp.getKind()).isEqualTo(Tree.Kind.NOT);
+    assertThat(((PyUnaryExpressionTree) exp).expression().is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+  }
+
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
     setRootRule(PythonGrammar.EXPR);
     PyExpressionTree parse = parse(operator+"1", treeMaker::expression);
