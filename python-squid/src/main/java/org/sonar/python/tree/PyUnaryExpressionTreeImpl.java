@@ -43,6 +43,7 @@ public class PyUnaryExpressionTreeImpl extends PyTree implements PyUnaryExpressi
     map.put("+", Kind.UNARY_PLUS);
     map.put("-", Kind.UNARY_MINUS);
     map.put("~", Kind.BITWISE_COMPLEMENT);
+    map.put("not", Kind.NOT);
     return map;
   }
 
