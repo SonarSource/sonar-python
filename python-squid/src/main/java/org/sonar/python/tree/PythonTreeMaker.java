@@ -701,7 +701,16 @@ public class PythonTreeMaker {
     PyExpressionTree result = expression(children.get(0));
     for (int i = 1; i < astNode.getNumberOfChildren(); i+=2) {
       AstNode operator = children.get(i);
-      result = new PyBinaryExpressionTreeImpl(astNode, result, operator.getToken(), expression(operator.getNextSibling()));
+      PyExpressionTree rightOperand = expression(operator.getNextSibling());
+      AstNode not = operator.getFirstChild(PythonKeyword.NOT);
+      Token notToken = not == null ? null : not.getToken();
+      if (PythonKeyword.IN.equals(operator.getLastToken().getType())) {
+        result = new PyInExpressionTreeImpl(astNode, result, notToken, operator.getLastToken(), rightOperand);
+      } else if (PythonKeyword.IS.equals(operator.getToken().getType())) {
+        result = new PyIsExpressionTreeImpl(astNode, result, operator.getToken(), notToken, rightOperand);
+      } else {
+        result = new PyBinaryExpressionTreeImpl(astNode, result, operator.getToken(), rightOperand);
+      }
     }
     return result;
   }

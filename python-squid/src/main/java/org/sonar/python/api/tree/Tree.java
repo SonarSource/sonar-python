@@ -146,6 +146,8 @@ public interface Tree {
     OR(PyBinaryExpressionTree.class),
     COMPARISON(PyBinaryExpressionTree.class),
     POWER(PyBinaryExpressionTree.class),
+    IN(PyInExpressionTree.class),
+    IS(PyIsExpressionTree.class),
 
     UNARY_PLUS(PyUnaryExpressionTree.class),
     UNARY_MINUS(PyUnaryExpressionTree.class),
