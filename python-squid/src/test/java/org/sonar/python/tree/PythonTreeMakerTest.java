@@ -49,6 +49,8 @@ import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
+import org.sonar.python.api.tree.PyInExpressionTree;
+import org.sonar.python.api.tree.PyIsExpressionTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyNameTree;
@@ -994,7 +996,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void binary_expressions() {
-    setRootRule(PythonGrammar.EXPR);
+    setRootRule(PythonGrammar.TEST);
 
     PyBinaryExpressionTree simplePlus = binaryExpression("a + b");
     assertThat(simplePlus.leftOperand()).isInstanceOf(PyNameTree.class);
@@ -1024,7 +1026,6 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(binaryExpression("a ^ b").getKind()).isEqualTo(Tree.Kind.BITWISE_XOR);
     assertThat(binaryExpression("a ** b").getKind()).isEqualTo(Tree.Kind.POWER);
 
-    setRootRule(PythonGrammar.TEST);
     assertThat(binaryExpression("a == b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
     assertThat(binaryExpression("a >= b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
     assertThat(binaryExpression("a <= b").getKind()).isEqualTo(Tree.Kind.COMPARISON);
@@ -1040,6 +1041,40 @@ public class PythonTreeMakerTest extends RuleTest {
     PyExpressionTree exp = parse(code, treeMaker::expression);
     assertThat(exp).isInstanceOf(PyBinaryExpressionTree.class);
     return (PyBinaryExpressionTree) exp;
+  }
+
+  @Test
+  public void in_expressions() {
+    setRootRule(PythonGrammar.TEST);
+
+    PyInExpressionTree in = (PyInExpressionTree) binaryExpression("1 in [a]");
+    assertThat(in.getKind()).isEqualTo(Tree.Kind.IN);
+    assertThat(in.operator().getValue()).isEqualTo("in");
+    assertThat(in.leftOperand().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(in.rightOperand().getKind()).isEqualTo(Tree.Kind.LIST_LITERAL);
+    assertThat(in.notToken()).isNull();
+
+    PyInExpressionTree notIn = (PyInExpressionTree) binaryExpression("1 not in [a]");
+    assertThat(notIn.getKind()).isEqualTo(Tree.Kind.IN);
+    assertThat(notIn.operator().getValue()).isEqualTo("in");
+    assertThat(notIn.notToken()).isNotNull();
+  }
+
+  @Test
+  public void is_expressions() {
+    setRootRule(PythonGrammar.TEST);
+
+    PyIsExpressionTree in = (PyIsExpressionTree) binaryExpression("a is 1");
+    assertThat(in.getKind()).isEqualTo(Tree.Kind.IS);
+    assertThat(in.operator().getValue()).isEqualTo("is");
+    assertThat(in.leftOperand().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(in.rightOperand().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(in.notToken()).isNull();
+
+    PyIsExpressionTree notIn = (PyIsExpressionTree) binaryExpression("a is not 1");
+    assertThat(notIn.getKind()).isEqualTo(Tree.Kind.IS);
+    assertThat(notIn.operator().getValue()).isEqualTo("is");
+    assertThat(notIn.notToken()).isNotNull();
   }
 
   @Test
