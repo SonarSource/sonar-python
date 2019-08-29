@@ -82,6 +82,15 @@ public class PythonTreeMakerTest extends RuleTest {
   public void fileInputTreeOnEmptyFile() {
     PyFileInputTree pyTree = parse("", treeMaker::fileInput);
     assertThat(pyTree.statements()).isNull();
+    assertThat(pyTree.docstring()).isNull();
+
+    pyTree = parse("\"\"\"\n" +
+      "This is a module docstring\n" +
+      "\"\"\"", treeMaker::fileInput);
+    assertThat(pyTree.docstring().getValue()).isEqualTo("\"\"\"\n" +
+      "This is a module docstring\n" +
+      "\"\"\"");
+
   }
 
   @Test
@@ -542,6 +551,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(functionDefTree.typedArgs()).isNull();
     assertThat(functionDefTree.isMethodDefinition()).isFalse();
+    assertThat(functionDefTree.docstring()).isNull();
     // TODO
     assertThat(functionDefTree.decorators()).isNull();
     assertThat(functionDefTree.asyncKeyword()).isNull();
@@ -563,6 +573,13 @@ public class PythonTreeMakerTest extends RuleTest {
 
     functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
     assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
+
+    functionDefTree = parse("def func(x : int, y):\n  \"\"\"\n" +
+      "This is a function docstring\n" +
+      "\"\"\"\n  pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.docstring().getValue()).isEqualTo("\"\"\"\n" +
+      "This is a function docstring\n" +
+      "\"\"\"");
   }
 
   @Test
@@ -571,6 +588,7 @@ public class PythonTreeMakerTest extends RuleTest {
     AstNode astNode = p.parse("class clazz: pass");
     PyClassDefTree classDefTree = treeMaker.classDefStatement(astNode);
     assertThat(classDefTree.name()).isNotNull();
+    assertThat(classDefTree.docstring()).isNull();
     assertThat(classDefTree.name().name()).isEqualTo("clazz");
     assertThat(classDefTree.body().statements()).hasSize(1);
     assertThat(classDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
@@ -581,6 +599,13 @@ public class PythonTreeMakerTest extends RuleTest {
     classDefTree = treeMaker.classDefStatement(astNode);
     PyFunctionDefTree funcDef = (PyFunctionDefTree) classDefTree.body().statements().get(0);
     assertThat(funcDef.isMethodDefinition()).isTrue();
+
+
+    astNode = p.parse("class ClassWithDocstring:\n" +
+      "\t\"\"\"This is a docstring\"\"\"\n" +
+      "\tpass");
+    classDefTree = treeMaker.classDefStatement(astNode);
+    assertThat(classDefTree.docstring().getValue()).isEqualTo("\"\"\"This is a docstring\"\"\"");
   }
 
   @Test

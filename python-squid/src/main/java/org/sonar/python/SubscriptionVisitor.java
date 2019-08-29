@@ -27,6 +27,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.SymbolTable;
@@ -40,8 +41,9 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
 
   public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
     SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext);
-    if (pythonVisitorContext.rootTree() != null) {
-      pythonVisitorContext.rootTree().accept(subscriptionVisitor);
+    PyFileInputTree rootTree = pythonVisitorContext.rootTree();
+    if (rootTree != null) {
+      subscriptionVisitor.scan(rootTree);
     }
   }
 
@@ -92,6 +94,13 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     @Override
     public PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message) {
       PythonCheck.PreciseIssue newIssue = new PythonCheck.PreciseIssue(check, IssueLocation.preciseLocation(token, message));
+      pythonVisitorContext.addIssue(newIssue);
+      return newIssue;
+    }
+
+    @Override
+    public PythonCheck.PreciseIssue addFileIssue(String message) {
+      PythonCheck.PreciseIssue newIssue = new PythonCheck.PreciseIssue(check, IssueLocation.atFileLevel(message));
       pythonVisitorContext.addIssue(newIssue);
       return newIssue;
     }

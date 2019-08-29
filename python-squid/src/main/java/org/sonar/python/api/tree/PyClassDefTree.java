@@ -43,4 +43,7 @@ public interface PyClassDefTree extends PyStatementTree {
   Token colon();
 
   PyStatementListTree body();
+
+  @CheckForNull
+  Token docstring();
 }

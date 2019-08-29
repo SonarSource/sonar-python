@@ -19,18 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
-import java.util.Set;
 import java.util.regex.Pattern;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
-import org.sonar.python.DocstringExtractor;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = MissingDocstringCheck.CHECK_KEY)
-public class MissingDocstringCheck extends PythonCheckAstNode {
+public class MissingDocstringCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "S1720";
 
@@ -52,53 +55,57 @@ public class MissingDocstringCheck extends PythonCheckAstNode {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return DocstringExtractor.DOCUMENTABLE_NODE_TYPES;
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkDocString(ctx, ((PyFileInputTree) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkDocString(ctx, ((PyFunctionDefTree) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((PyClassDefTree) ctx.syntaxNode()).docstring()));
   }
 
-  @Override
-  public void visitNode(AstNode astNode) {
-    DeclarationType type = getType(astNode);
-    Token docstring = DocstringExtractor.extractDocstring(astNode);
+  private void checkDocString(SubscriptionContext ctx, @CheckForNull Token docstring) {
+    Tree tree = ctx.syntaxNode();
+    DeclarationType type = getType(tree);
     if (docstring == null) {
-      raiseIssueNoDocstring(astNode, type);
+      raiseIssueNoDocstring(tree, type, ctx);
     } else if (EMPTY_STRING_REGEXP.matcher(docstring.getValue()).matches()) {
-      raiseIssue(astNode, MESSAGE_EMPTY_DOCSTRING, type);
+      raiseIssue(tree, MESSAGE_EMPTY_DOCSTRING, type, ctx);
     }
   }
 
-  private static DeclarationType getType(AstNode node) {
-    if (node.is(PythonGrammar.FUNCDEF)) {
-      if (CheckUtils.isMethodDefinition(node)) {
+  private static DeclarationType getType(Tree tree) {
+    if (tree.is(Kind.FUNCDEF)) {
+      if (((PyFunctionDefTree) tree).isMethodDefinition()) {
         return DeclarationType.METHOD;
       } else {
         return DeclarationType.FUNCTION;
       }
-    } else if (node.is(PythonGrammar.CLASSDEF)) {
+    } else if (tree.is(Kind.CLASSDEF)) {
       return DeclarationType.CLASS;
     } else {
-      // node is PythonGrammar.FILE_INPUT
+      // tree is FILE_INPUT
       return DeclarationType.MODULE;
     }
   }
 
-  private void raiseIssueNoDocstring(AstNode astNode, DeclarationType type) {
+  private void raiseIssueNoDocstring(Tree tree, DeclarationType type, SubscriptionContext ctx) {
     if (type != DeclarationType.METHOD) {
-      raiseIssue(astNode, MESSAGE_NO_DOCSTRING, type);
+      raiseIssue(tree, MESSAGE_NO_DOCSTRING, type, ctx);
     }
   }
 
-  private void raiseIssue(AstNode astNode, String message, DeclarationType type) {
+  private void raiseIssue(Tree tree, String message, DeclarationType type, SubscriptionContext ctx) {
     String finalMessage = String.format(message, type.value);
     if (type != DeclarationType.MODULE) {
-      addIssue(getNameNode(astNode), finalMessage);
+      ctx.addIssue(getNameNode(tree), finalMessage);
     } else {
-      addFileIssue(finalMessage);
+      ctx.addFileIssue(finalMessage);
     }
   }
 
-  private static AstNode getNameNode(AstNode astNode) {
-    return astNode.getFirstChild(PythonGrammar.FUNCNAME, PythonGrammar.CLASSNAME);
+  private static PyNameTree getNameNode(Tree tree) {
+    if (tree.is(Kind.FUNCDEF)) {
+      return ((PyFunctionDefTree) tree).name();
+    }
+    return ((PyClassDefTree) tree).name();
   }
 
 }

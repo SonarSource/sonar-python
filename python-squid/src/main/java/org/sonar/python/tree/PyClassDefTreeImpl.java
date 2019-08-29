@@ -35,12 +35,14 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   private final PyNameTree name;
   private final PyArgListTree args;
   private final PyStatementListTree body;
+  private final Token docstring;
 
-  public PyClassDefTreeImpl(AstNode astNode, PyNameTree name, PyArgListTree args, PyStatementListTree body) {
+  public PyClassDefTreeImpl(AstNode astNode, PyNameTree name, PyArgListTree args, PyStatementListTree body, Token docstring) {
     super(astNode);
     this.name = name;
     this.args = args;
     this.body = body;
+    this.docstring = docstring;
   }
 
   @Override
@@ -94,5 +96,11 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   @Override
   public PyStatementListTree body() {
     return body;
+  }
+
+  @CheckForNull
+  @Override
+  public Token docstring() {
+    return docstring;
   }
 }

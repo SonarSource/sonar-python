@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyFileInputTree;
@@ -30,10 +31,12 @@ import org.sonar.python.api.tree.Tree;
 public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
 
   private final PyStatementListTree statements;
+  private final Token docstring;
 
-  public PyFileInputTreeImpl(AstNode astNode, @Nullable PyStatementListTree statements) {
+  public PyFileInputTreeImpl(AstNode astNode, @Nullable PyStatementListTree statements, Token docstring) {
     super(astNode);
     this.statements = statements;
+    this.docstring = docstring;
   }
 
   @Override
@@ -45,6 +48,12 @@ public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
   @CheckForNull
   public PyStatementListTree statements() {
     return statements;
+  }
+
+  @CheckForNull
+  @Override
+  public Token docstring() {
+    return docstring;
   }
 
   @Override

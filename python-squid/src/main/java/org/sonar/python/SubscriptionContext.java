@@ -31,6 +31,8 @@ public interface SubscriptionContext {
 
   PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
 
+  PythonCheck.PreciseIssue addFileIssue(String finalMessage);
+
   SymbolTable symbolTable();
 
   PythonFile pythonFile();
