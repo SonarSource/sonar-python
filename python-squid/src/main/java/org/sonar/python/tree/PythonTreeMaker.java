@@ -82,7 +82,7 @@ public class PythonTreeMaker {
 
   public PyFileInputTree fileInput(AstNode astNode) {
     List<PyStatementTree> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
-    PyStatementListTreeImpl statementList = statements.isEmpty() ? null : new PyStatementListTreeImpl(astNode, statements);
+    PyStatementListTreeImpl statementList = statements.isEmpty() ? null : new PyStatementListTreeImpl(astNode, statements, astNode.getTokens());
     PyFileInputTreeImpl pyFileInputTree = new PyFileInputTreeImpl(astNode, statementList, DocstringExtractor.extractDocstring(astNode));
     setParents(pyFileInputTree);
     return pyFileInputTree;
@@ -177,7 +177,7 @@ public class PythonTreeMaker {
   }
 
   private PyStatementListTree getStatementListFromSuite(AstNode suite) {
-    return new PyStatementListTreeImpl(suite, getStatementsFromSuite(suite));
+    return new PyStatementListTreeImpl(suite, getStatementsFromSuite(suite), suite.getTokens());
   }
 
   private List<PyStatementTree> getStatementsFromSuite(AstNode astNode) {
