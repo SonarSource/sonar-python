@@ -19,37 +19,28 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyUnaryExpressionTree;
+import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = PreIncrementDecrementCheck.CHECK_KEY)
-public class PreIncrementDecrementCheck extends PythonCheckAstNode {
+public class PreIncrementDecrementCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "PreIncrementDecrement";
   private static final String MESSAGE = "This statement doesn't produce the expected result, replace use of non-existent pre-%srement operator";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FACTOR);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.UNARY_PLUS, PreIncrementDecrementCheck::checkIncrementDecrement);
+    context.registerSyntaxNodeConsumer(Kind.UNARY_MINUS, PreIncrementDecrementCheck::checkIncrementDecrement);
   }
 
-  @Override
-  public void visitNode(AstNode astNode) {
-    List<AstNode> children = astNode.getChildren();
-    AstNode firstChild = children.get(0);
-    AstNode secondChild = children.get(1);
-    if (firstChild.is(PythonPunctuator.PLUS) && secondChild.getFirstChild().is(PythonPunctuator.PLUS)) {
-      addIssue(astNode, String.format(MESSAGE, "inc"));
-    }
-    if (firstChild.is(PythonPunctuator.MINUS) && secondChild.getFirstChild().is(PythonPunctuator.MINUS)) {
-      addIssue(astNode, String.format(MESSAGE, "dec"));
+  private static void checkIncrementDecrement(SubscriptionContext ctx) {
+    PyUnaryExpressionTree unaryExpressionTree = (PyUnaryExpressionTree) ctx.syntaxNode();
+    Kind kind = unaryExpressionTree.getKind();
+    if (unaryExpressionTree.expression().is(kind)) {
+      ctx.addIssue(unaryExpressionTree, String.format(MESSAGE, kind == Kind.UNARY_PLUS ? "inc" : "dec"));
     }
   }
-
 }
