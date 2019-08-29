@@ -54,4 +54,9 @@ public class PyStringLiteralTreeImpl extends PyTree implements PyStringLiteralTr
   public String value() {
     return value;
   }
+
+  @Override
+  public String trimmedQuotesValue() {
+    return value.substring(1, value.length() - 1);
+  }
 }

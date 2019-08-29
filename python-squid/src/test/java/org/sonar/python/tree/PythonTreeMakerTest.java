@@ -629,7 +629,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
 
     functionDefTree = parse("def func(x = 'foo', y): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
+    List<PyTypedArgumentTree> args = functionDefTree.typedArgs().arguments();
+    assertThat(args).hasSize(2);
+    assertThat(args.get(0).expression().is(Tree.Kind.STRING_LITERAL)).isTrue();
 
     functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
     assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);

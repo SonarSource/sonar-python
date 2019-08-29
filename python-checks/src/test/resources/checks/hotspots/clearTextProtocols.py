@@ -1,0 +1,83 @@
+import telnetlib
+from telnetlib import Telnet
+import ftplib
+from ftplib import FTP
+
+url = "http://" # Noncompliant {{Using http protocol is insecure. Use https instead}}
+#     ^^^^^^^^^
+url = "http://exemple.com" # Noncompliant
+url = "http://0001::1" # Noncompliant
+url = "http://dead:beef::1" # Noncompliant
+url = "http://::dead:beef:1" # Noncompliant
+url = "http://192.168.0.1" # Noncompliant
+url = "http://10.1.1.123" # Noncompliant
+url = "http://subdomain.exemple.com" # Noncompliant
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+url = "ftp://" # Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead}}
+url = "ftp://anonymous@exemple.com" # Noncompliant
+url = "telnet://" # Noncompliant
+url = "telnet://anonymous@exemple.com" # Noncompliant {{Using telnet protocol is insecure. Use ssh instead}}
+
+# Argument default value
+def download(url='http://exemple.com'): # Noncompliant
+    print(url)
+
+# Non sensitive url scheme
+url = "https://" # Compliant
+url = "sftp://" # Compliant
+url = "ftps://" # Compliant
+url = "scp://" # Compliant
+url = "ssh://" # Compliant
+
+# Only report string staring with the sensitive url scheme
+doc = "See http://exemple.com" # Compliant
+doc = "See ftp://exemple.com" # Compliant
+doc = "See telnet://exemple.com" # Compliant
+
+# The url domain component is a loopback address.
+url = "http://localhost" # Compliant
+url = "http://127.0.0.1" # Compliant
+url = "http://::1" # Compliant
+url = "ftp://user@localhost" # Compliant
+
+# Argument default value
+def download(url='ssh://exemple.com'): # Compliant
+    print(url)
+
+
+cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Noncompliant {{Using telnet protocol is insecure. Use ssh instead}}
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+cnx = Telnet("towel.blinkenlights.nl") # Noncompliant
+cnx = ftplib.FTP("194.244.111.175") # Noncompliant  {{Using ftp protocol is insecure. Use sftp, scp or ftps instead}}
+cnx = FTP("194.244.111.175") # Noncompliant
+cnx = ftplib.FTP_TLS("secure.example.com") # Compliant
+cnx = FTP_TLS("secure.example.com") # Compliant
+
+# Exception: the url domain component is a loopback address.
+url = "http://localhost" # Compliant
+url = "http://LOCALHOST" # Compliant
+url = "http://127.0.0.1" # Compliant
+url = "http://127.0.0.1" # Compliant
+url = "http://127.0.0.001" # Compliant
+url = "http://127.0.00.1" # Compliant
+url = "http://127.00.0.1" # Compliant
+url = "http://127.000.000.001" # Compliant
+url = "http://127.0000.0000.1" # Compliant
+url = "http://127.0.01" # Compliant
+url = "http://127.1" # Compliant
+url = "http://127.001" # Compliant
+url = "http://127.0.0.254" # Compliant
+url = "http://127.63.31.15" # Compliant
+url = "http://127.255.255.254" # Compliant
+
+url = "http://0:0:0:0:0:0:0:1" # Compliant
+url = "http://0000:0000:0000:0000:0000:0000:0000:0001" # Compliant
+url = "http://::1" # Compliant
+url = "http://0::1" # Compliant
+url = "http://0:0:0::1" # Compliant
+url = "http://0000::0001" # Compliant
+url = "http://0000:0:0000::0001" # Compliant
+url = "http://0000:0:0000::1" # Compliant
+url = "http://0::0:1" # Compliant
+url = "ftp://user@localhost" # Compliant
