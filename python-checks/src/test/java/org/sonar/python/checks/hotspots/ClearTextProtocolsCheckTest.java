@@ -17,13 +17,16 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.checks.hotspots;
 
-public interface PyStringLiteralTree extends PyExpressionTree {
-  /**
-   * @return the token value of this literal.
-   */
-  String value();
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-  String trimmedQuotesValue();
+public class ClearTextProtocolsCheckTest {
+
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/clearTextProtocols.py", new ClearTextProtocolsCheck());
+  }
+
 }

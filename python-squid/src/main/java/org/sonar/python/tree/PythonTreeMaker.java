@@ -737,7 +737,7 @@ public class PythonTreeMaker {
     if (nextSibling != null && nextSibling.is(PythonPunctuator.ASSIGN)) {
       // Keyword in argument list must be an identifier.
       AstNode nameNode = parameter.getFirstChild(PythonGrammar.NAME);
-      return new PyTypedArgumentTreeImpl(parameter, name(nameNode), expression(parameter), nextSibling.getToken(), null, null);
+      return new PyTypedArgumentTreeImpl(parameter, name(nameNode), expression(nextSibling.getNextSibling()), nextSibling.getToken(), null, null);
     }
     return new PyTypedArgumentTreeImpl(parameter, null, expression(parameter), null, null, null);
   }

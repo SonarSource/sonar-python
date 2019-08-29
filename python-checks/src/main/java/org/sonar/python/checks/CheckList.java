@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
@@ -47,6 +48,7 @@ public final class CheckList {
       BreakContinueOutsideLoopCheck.class,
       ClassComplexityCheck.class,
       ClassNameCheck.class,
+      ClearTextProtocolsCheck.class,
       CognitiveComplexityFunctionCheck.class,
       CollapsibleIfStatementsCheck.class,
       CommandLineArgsCheck.class,
