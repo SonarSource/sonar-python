@@ -19,17 +19,16 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionCheck;
+import org.sonar.python.api.tree.Tree;
 
-@Rule(key = ModuleNameCheck.CHECK_KEY)
-public class ModuleNameCheck extends PythonCheckAstNode {
+@Rule(key = "S1578")
+public class ModuleNameCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S1578";
   private static final String DEFAULT = "(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$";
   private static final String MESSAGE = "Rename this module to match this regular expression: \"%s\".";
 
@@ -40,15 +39,17 @@ public class ModuleNameCheck extends PythonCheckAstNode {
   private Pattern pattern = null;
 
   @Override
-  public void visitFile(@Nullable AstNode astNode) {
-    String fileName = getContext().pythonFile().fileName();
-    int dotIndex = fileName.lastIndexOf('.');
-    if (dotIndex > 0) {
-      String moduleName = fileName.substring(0, dotIndex);
-      if (!pattern().matcher(moduleName).matches()) {
-        addFileIssue(String.format(MESSAGE, format));
+  public void initialize(SubscriptionCheck.Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      String fileName = ctx.pythonFile().fileName();
+      int dotIndex = fileName.lastIndexOf('.');
+      if (dotIndex > 0) {
+        String moduleName = fileName.substring(0, dotIndex);
+        if (!pattern().matcher(moduleName).matches()) {
+          ctx.addFileIssue(String.format(MESSAGE, format));
+        }
       }
-    }
+    });
   }
 
   private Pattern pattern() {
