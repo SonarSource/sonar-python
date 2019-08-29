@@ -19,10 +19,14 @@
  */
 package org.sonar.python.api.tree;
 
+import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PyStatementListTree extends Tree {
 
   List<PyStatementTree> statements();
+
+  // Temporary API, to be moved to Tree interface
+  List<Token> tokens();
 
 }

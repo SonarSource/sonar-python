@@ -194,6 +194,11 @@ public class PythonTreeMakerTest extends RuleTest {
 
     pyIfStatementTree = parse("if x:\n pass\n pass", treeMaker::ifStatement);
     assertThat(pyIfStatementTree.body().statements()).hasSize(2);
+
+    // tokens
+    AstNode parseTree = p.parse("if x: pass");
+    PyIfStatementTree pyFileInputTree = treeMaker.ifStatement(parseTree);
+    assertThat(pyFileInputTree.body().tokens()).isEqualTo(parseTree.getFirstChild(PythonGrammar.SUITE).getTokens());
   }
 
   @Test
@@ -399,6 +404,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(raiseStatement.raiseKeyword().getValue()).isEqualTo("raise");
     assertThat(raiseStatement.fromKeyword().getValue()).isEqualTo("from");
     assertThat(raiseStatement.fromExpression()).isNotNull();
+    assertThat(raiseStatement.expressions()).hasSize(1);
     assertThat(raiseStatement.children()).hasSize(2);
 
     astNode = p.parse("raise");
