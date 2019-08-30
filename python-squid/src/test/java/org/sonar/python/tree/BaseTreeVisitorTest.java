@@ -28,16 +28,19 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
@@ -193,6 +196,15 @@ public class BaseTreeVisitorTest extends RuleTest {
     visitor.visitLambda(tree);
     verify(visitor).visitTypedArgList(tree.arguments());
     verify(visitor).visitTypeArgument(tree.arguments().arguments().get(0));
+  }
+
+  @Test
+  public void starred_expr() {
+    setRootRule(PythonGrammar.STAR_EXPR);
+    PyStarredExpressionTree tree = (PyStarredExpressionTree) parse("*a", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    tree.accept(visitor);
+    verify(visitor).visitName((PyNameTree) tree.expression());
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

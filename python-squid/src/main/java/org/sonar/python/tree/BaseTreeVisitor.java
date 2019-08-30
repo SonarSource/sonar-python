@@ -55,6 +55,7 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -343,5 +344,10 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitUnaryExpression(PyUnaryExpressionTree pyUnaryExpressionTree) {
     scan(pyUnaryExpressionTree.expression());
+  }
+
+  @Override
+  public void visitStarredExpression(PyStarredExpressionTree pyStarredExpressionTree) {
+    scan(pyStarredExpressionTree.expression());
   }
 }

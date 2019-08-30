@@ -61,6 +61,7 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
@@ -1075,6 +1076,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(notIn.getKind()).isEqualTo(Tree.Kind.IS);
     assertThat(notIn.operator().getValue()).isEqualTo("is");
     assertThat(notIn.notToken()).isNotNull();
+  }
+
+  @Test
+  public void starred_expression() {
+    setRootRule(PythonGrammar.STAR_EXPR);
+    PyStarredExpressionTree starred = (PyStarredExpressionTree) parse("*a", treeMaker::expression);
+    assertThat(starred.getKind()).isEqualTo(Tree.Kind.STARRED_EXPR);
+    assertThat(starred.starToken().getValue()).isEqualTo("*");
+    assertThat(starred.expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(starred.children()).hasSize(1);
   }
 
   @Test

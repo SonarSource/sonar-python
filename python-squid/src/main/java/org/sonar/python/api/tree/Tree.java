@@ -131,6 +131,8 @@ public interface Tree {
 
     YIELD_STMT(PyYieldStatementTree.class),
 
+    STARRED_EXPR(PyStarredExpressionTree.class),
+
     PLUS(PyBinaryExpressionTree.class),
     MINUS(PyBinaryExpressionTree.class),
     MULTIPLICATION(PyBinaryExpressionTree.class),
