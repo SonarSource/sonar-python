@@ -112,9 +112,6 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ASSERT_STMT)) {
       return assertStatement(astNode);
     }
-    if (astNode.is(PythonGrammar.PASS_STMT)) {
-      return passStatement(astNode);
-    }
     if (astNode.is(PythonGrammar.DEL_STMT)) {
       return delStatement(astNode);
     }
