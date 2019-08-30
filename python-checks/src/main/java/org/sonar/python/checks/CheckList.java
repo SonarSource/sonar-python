@@ -97,6 +97,7 @@ public final class CheckList {
       SelfAssignmentCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
+      TempFileCreationCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyParametersCheck.class,
       TooManyReturnsCheck.class,
