@@ -112,4 +112,6 @@ public interface PyTreeVisitor {
   void visitStringLiteral(PyStringLiteralTree pyStringLiteralTree);
 
   void visitStarredExpression(PyStarredExpressionTree pyStarredExpressionTree);
+
+  void visitAwaitExpression(PyAwaitExpressionTree pyAwaitExpressionTree);
 }
