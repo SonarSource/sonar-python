@@ -632,6 +632,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.FACTOR, PythonGrammar.NOT_TEST)) {
       return new PyUnaryExpressionTreeImpl(astNode, astNode.getFirstChild().getToken(), expression(astNode.getLastChild()));
     }
+    if (astNode.is(PythonGrammar.STAR_EXPR)) {
+      return new PyStarredExpressionTreeImpl(astNode, astNode.getToken(), expression(astNode.getLastChild()));
+    }
     return new PyExpressionTreeImpl(astNode);
   }
 
