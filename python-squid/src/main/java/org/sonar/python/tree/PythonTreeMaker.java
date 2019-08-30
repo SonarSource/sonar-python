@@ -644,7 +644,7 @@ public class PythonTreeMaker {
     }
     AstNode powerOperator = astNode.getFirstChild(PythonPunctuator.MUL_MUL);
     if (powerOperator != null) {
-      expr = new PyBinaryExpressionTreeImpl(astNode, expr, powerOperator.getToken(), expression(powerOperator.getNextSibling()));
+      expr = new PyBinaryExpressionTreeImpl(expr, powerOperator.getToken(), expression(powerOperator.getNextSibling()));
     }
     // TODO trailers
     return expr;
@@ -713,11 +713,11 @@ public class PythonTreeMaker {
       AstNode not = operator.getFirstChild(PythonKeyword.NOT);
       Token notToken = not == null ? null : not.getToken();
       if (PythonKeyword.IN.equals(operator.getLastToken().getType())) {
-        result = new PyInExpressionTreeImpl(astNode, result, notToken, operator.getLastToken(), rightOperand);
+        result = new PyInExpressionTreeImpl(result, notToken, operator.getLastToken(), rightOperand);
       } else if (PythonKeyword.IS.equals(operator.getToken().getType())) {
-        result = new PyIsExpressionTreeImpl(astNode, result, operator.getToken(), notToken, rightOperand);
+        result = new PyIsExpressionTreeImpl(result, operator.getToken(), notToken, rightOperand);
       } else {
-        result = new PyBinaryExpressionTreeImpl(astNode, result, operator.getToken(), rightOperand);
+        result = new PyBinaryExpressionTreeImpl(result, operator.getToken(), rightOperand);
       }
     }
     return result;
