@@ -32,6 +32,7 @@ import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.RegexCheck;
 import org.sonar.python.checks.hotspots.SQLQueriesCheck;
 import org.sonar.python.checks.hotspots.StandardInputCheck;
+import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 
 public final class CheckList {
 
@@ -97,6 +98,7 @@ public final class CheckList {
       SelfAssignmentCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
+      StrongCryptographicKeysCheck.class,
       TempFileCreationCheck.class,
       TooManyLinesInFileCheck.class,
       TooManyParametersCheck.class,
