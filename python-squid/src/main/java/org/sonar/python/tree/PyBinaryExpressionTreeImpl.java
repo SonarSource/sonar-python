@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -66,8 +65,8 @@ public class PyBinaryExpressionTreeImpl extends PyTree implements PyBinaryExpres
     return map;
   }
 
-  public PyBinaryExpressionTreeImpl(AstNode node, PyExpressionTree leftOperand, Token operator, PyExpressionTree rightOperand) {
-    super(node);
+  public PyBinaryExpressionTreeImpl(PyExpressionTree leftOperand, Token operator, PyExpressionTree rightOperand) {
+    super(leftOperand.firstToken(), rightOperand.lastToken());
     this.kind = KINDS_BY_OPERATOR.get(operator.getValue());
     this.leftOperand = leftOperand;
     this.operator = operator;
