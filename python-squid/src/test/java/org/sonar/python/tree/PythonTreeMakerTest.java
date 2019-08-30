@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyAwaitExpressionTree;
 import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
@@ -1086,6 +1087,21 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(starred.starToken().getValue()).isEqualTo("*");
     assertThat(starred.expression().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(starred.children()).hasSize(1);
+  }
+
+  @Test
+  public void await_expression() {
+    setRootRule(PythonGrammar.TEST);
+    PyAwaitExpressionTree expr = (PyAwaitExpressionTree) parse("await x", treeMaker::expression);
+    assertThat(expr.getKind()).isEqualTo(Tree.Kind.AWAIT);
+    assertThat(expr.awaitToken().getValue()).isEqualTo("await");
+    assertThat(expr.expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(expr.children()).hasSize(1);
+
+    PyBinaryExpressionTree awaitWithPower = binaryExpression("await a ** 3");
+    assertThat(awaitWithPower.getKind()).isEqualTo(Tree.Kind.POWER);
+    assertThat(awaitWithPower.leftOperand().getKind()).isEqualTo(Tree.Kind.AWAIT);
+    assertThat(awaitWithPower.rightOperand().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
   }
 
   @Test

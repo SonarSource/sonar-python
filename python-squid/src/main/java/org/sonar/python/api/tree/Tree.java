@@ -133,6 +133,8 @@ public interface Tree {
 
     STARRED_EXPR(PyStarredExpressionTree.class),
 
+    AWAIT(PyAwaitExpressionTree.class),
+
     PLUS(PyBinaryExpressionTree.class),
     MINUS(PyBinaryExpressionTree.class),
     MULTIPLICATION(PyBinaryExpressionTree.class),

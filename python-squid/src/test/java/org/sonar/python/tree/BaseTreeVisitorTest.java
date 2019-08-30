@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyAwaitExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -202,6 +203,15 @@ public class BaseTreeVisitorTest extends RuleTest {
   public void starred_expr() {
     setRootRule(PythonGrammar.STAR_EXPR);
     PyStarredExpressionTree tree = (PyStarredExpressionTree) parse("*a", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    tree.accept(visitor);
+    verify(visitor).visitName((PyNameTree) tree.expression());
+  }
+
+  @Test
+  public void await_expr() {
+    setRootRule(PythonGrammar.EXPR);
+    PyAwaitExpressionTree tree = (PyAwaitExpressionTree) parse("await x", treeMaker::expression);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     tree.accept(visitor);
     verify(visitor).visitName((PyNameTree) tree.expression());
