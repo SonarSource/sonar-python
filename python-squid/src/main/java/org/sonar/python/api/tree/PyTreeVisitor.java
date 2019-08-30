@@ -114,4 +114,12 @@ public interface PyTreeVisitor {
   void visitStarredExpression(PyStarredExpressionTree pyStarredExpressionTree);
 
   void visitAwaitExpression(PyAwaitExpressionTree pyAwaitExpressionTree);
+
+  void visitSliceExpression(PySliceExpressionTree pySliceExpressionTree);
+
+  void visitSliceList(PySliceListTree pySliceListTree);
+
+  void visitSliceItem(PySliceItemTree pySliceItemTree);
+
+  void visitSubscriptionExpression(PySubscriptionExpressionTree pySubscriptionExpressionTree);
 }

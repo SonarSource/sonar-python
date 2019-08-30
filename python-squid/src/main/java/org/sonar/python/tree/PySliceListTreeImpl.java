@@ -20,43 +20,45 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
+import com.sonar.sslr.api.Token;
 import java.util.List;
-import org.sonar.python.api.tree.PyExpressionListTree;
-import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyExpressionListTreeImpl extends PyTree implements PyExpressionListTree {
-  private final List<PyExpressionTree> expressions;
+public class PySliceListTreeImpl extends PyTree implements PySliceListTree {
 
-  public PyExpressionListTreeImpl(AstNode astNode, List<PyExpressionTree> expressions) {
-    super(astNode);
-    this.expressions = expressions;
-  }
+  private final List<Tree> slices;
+  private final List<Token> separators;
 
-  public PyExpressionListTreeImpl(List<PyExpressionTree> expressions) {
-    super(expressions.get(0).firstToken(), expressions.get(expressions.size() - 1).lastToken());
-    this.expressions = expressions;
-  }
-
-  @Override
-  public List<PyExpressionTree> expressions() {
-    return expressions;
+  public PySliceListTreeImpl(AstNode node, List<Tree> slices, List<Token> separators) {
+    super(node);
+    this.slices = slices;
+    this.separators = separators;
   }
 
   @Override
-  public Kind getKind() {
-    return Kind.EXPRESSION_LIST;
+  public List<Tree> slices() {
+    return slices;
+  }
+
+  @Override
+  public List<Token> separators() {
+    return separators;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitExpressionList(this);
+    visitor.visitSliceList(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(expressions);
+    return slices;
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.SLICE_LIST;
   }
 }

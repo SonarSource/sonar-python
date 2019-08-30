@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,10 +63,13 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PySliceExpressionTree;
+import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
@@ -1102,6 +1106,83 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(awaitWithPower.getKind()).isEqualTo(Tree.Kind.POWER);
     assertThat(awaitWithPower.leftOperand().getKind()).isEqualTo(Tree.Kind.AWAIT);
     assertThat(awaitWithPower.rightOperand().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+  }
+
+  @Test
+  public void subscription_expressions() {
+    setRootRule(PythonGrammar.TEST);
+
+    PySubscriptionExpressionTree expr = (PySubscriptionExpressionTree) parse("x[a]", treeMaker::expression);
+    assertThat(expr.getKind()).isEqualTo(Tree.Kind.SUBSCRIPTION);
+    assertThat(((PyNameTree) expr.object()).name()).isEqualTo("x");
+    assertThat(((PyNameTree) expr.subscripts().expressions().get(0)).name()).isEqualTo("a");
+    assertThat(expr.leftBracket().getValue()).isEqualTo("[");
+    assertThat(expr.rightBracket().getValue()).isEqualTo("]");
+    assertThat(expr.children()).hasSize(2);
+
+    PySubscriptionExpressionTree multipleSubscripts = (PySubscriptionExpressionTree) parse("x[a, 42]", treeMaker::expression);
+    assertThat(multipleSubscripts.subscripts().expressions()).extracting(Tree::getKind)
+      .containsExactly(Tree.Kind.NAME, Tree.Kind.NUMERIC_LITERAL);
+  }
+
+  @Test
+  public void slice_expressions() {
+    setRootRule(PythonGrammar.TEST);
+
+    PySliceExpressionTree expr = (PySliceExpressionTree) parse("x[a:b:c]", treeMaker::expression);
+    assertThat(expr.getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
+    assertThat(expr.object().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(expr.leftBracket().getValue()).isEqualTo("[");
+    assertThat(expr.rightBracket().getValue()).isEqualTo("]");
+    assertThat(expr.children()).hasSize(2);
+    assertThat(expr.sliceList().getKind()).isEqualTo(Tree.Kind.SLICE_LIST);
+    assertThat(expr.sliceList().children()).hasSize(1);
+    assertThat(expr.sliceList().slices().get(0).getKind()).isEqualTo(Tree.Kind.SLICE_ITEM);
+
+    PySliceExpressionTree multipleSlices = (PySliceExpressionTree) parse("x[a, b:c, :]", treeMaker::expression);
+    List<Tree> slices = multipleSlices.sliceList().slices();
+    assertThat(slices).extracting(Tree::getKind).containsExactly(Tree.Kind.NAME, Tree.Kind.SLICE_ITEM, Tree.Kind.SLICE_ITEM);
+    assertThat(multipleSlices.sliceList().separators()).extracting(Token::getValue).containsExactly(",", ",");
+
+    PyExpressionTree notHandled = parse("x[a:b].foo", treeMaker::expression);
+    assertThat(notHandled.getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
+  }
+
+  @Test
+  public void slice() {
+    setRootRule(PythonGrammar.SUBSCRIPT);
+
+    PySliceItemTree slice = parse("a:b:c", treeMaker::sliceItem);
+    assertThat(((PyNameTree) slice.lowerBound()).name()).isEqualTo("a");
+    assertThat(((PyNameTree) slice.upperBound()).name()).isEqualTo("b");
+    assertThat(((PyNameTree) slice.stride()).name()).isEqualTo("c");
+    assertThat(slice.boundSeparator().getValue()).isEqualTo(":");
+    assertThat(slice.strideSeparator().getValue()).isEqualTo(":");
+    assertThat(slice.children()).hasSize(3);
+
+    PySliceItemTree trivial = parse(":", treeMaker::sliceItem);
+    assertThat(trivial.lowerBound()).isNull();
+    assertThat(trivial.upperBound()).isNull();
+    assertThat(trivial.stride()).isNull();
+    assertThat(trivial.strideSeparator()).isNull();
+
+    PySliceItemTree lowerBoundOnly = parse("a:", treeMaker::sliceItem);
+    assertThat(((PyNameTree) lowerBoundOnly.lowerBound()).name()).isEqualTo("a");
+    assertThat(lowerBoundOnly.upperBound()).isNull();
+    assertThat(lowerBoundOnly.stride()).isNull();
+    assertThat(lowerBoundOnly.strideSeparator()).isNull();
+
+    PySliceItemTree upperBoundOnly = parse(":a", treeMaker::sliceItem);
+    assertThat(upperBoundOnly.lowerBound()).isNull();
+    assertThat(((PyNameTree) upperBoundOnly.upperBound()).name()).isEqualTo("a");
+    assertThat(upperBoundOnly.stride()).isNull();
+    assertThat(upperBoundOnly.strideSeparator()).isNull();
+
+    PySliceItemTree strideOnly = parse("::a", treeMaker::sliceItem);
+    assertThat(strideOnly.lowerBound()).isNull();
+    assertThat(strideOnly.upperBound()).isNull();
+    assertThat(((PyNameTree) strideOnly.stride()).name()).isEqualTo("a");
+    assertThat(strideOnly.strideSeparator()).isNotNull();
   }
 
   @Test

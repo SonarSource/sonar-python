@@ -40,7 +40,10 @@ import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PySliceExpressionTree;
+import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
+import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
@@ -214,6 +217,31 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     tree.accept(visitor);
     verify(visitor).visitName((PyNameTree) tree.expression());
+  }
+
+  @Test
+  public void slice_expr() {
+    setRootRule(PythonGrammar.EXPR);
+    PySliceExpressionTree expr = (PySliceExpressionTree) parse("a[b:c:d]", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+    verify(visitor).visitName((PyNameTree) expr.object());
+    verify(visitor).visitSliceList(expr.sliceList());
+
+    PySliceItemTree slice = (PySliceItemTree) expr.sliceList().slices().get(0);
+    verify(visitor).visitName((PyNameTree) slice.lowerBound());
+    verify(visitor).visitName((PyNameTree) slice.upperBound());
+    verify(visitor).visitName((PyNameTree) slice.stride());
+  }
+
+  @Test
+  public void subscription_expr() {
+    setRootRule(PythonGrammar.EXPR);
+    PySubscriptionExpressionTree expr = (PySubscriptionExpressionTree) parse("a[b]", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+    verify(visitor).visitName((PyNameTree) expr.object());
+    verify(visitor).visitName((PyNameTree) expr.subscripts().expressions().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
