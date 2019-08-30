@@ -29,7 +29,6 @@ import org.sonar.python.api.tree.PyAwaitExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
-import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyIfStatementTree;

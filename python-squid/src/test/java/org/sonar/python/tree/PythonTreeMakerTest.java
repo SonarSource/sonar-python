@@ -1192,7 +1192,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(unary.children()).hasSize(1);
   }
 
-  private <T> T parse(String code, Function<AstNode, T> func) {
-    return func.apply(p.parse(code));
+  private <T extends Tree> T parse(String code, Function<AstNode, T> func) {
+    T tree = func.apply(p.parse(code));
+    // ensure every visit method of base tree visitor is called without errors
+    BaseTreeVisitor visitor = new BaseTreeVisitor();
+    tree.accept(visitor);
+    return tree;
   }
 }
