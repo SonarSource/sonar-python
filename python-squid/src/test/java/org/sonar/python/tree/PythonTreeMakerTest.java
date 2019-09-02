@@ -1139,6 +1139,34 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
     assertThat(numericLiteral.valueAsString()).isEqualTo("12");
     assertThat(numericLiteral.children()).isEmpty();
+
+    parse = parse("12L", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    numericLiteral = (PyNumericLiteralTree) parse;
+    assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
+    assertThat(numericLiteral.valueAsString()).isEqualTo("12L");
+    assertThat(numericLiteral.children()).isEmpty();
+
+    parse = parse("3_0", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    numericLiteral = (PyNumericLiteralTree) parse;
+    assertThat(numericLiteral.valueAsLong()).isEqualTo(30L);
+    assertThat(numericLiteral.valueAsString()).isEqualTo("3_0");
+    assertThat(numericLiteral.children()).isEmpty();
+
+    parse = parse("0b01", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    numericLiteral = (PyNumericLiteralTree) parse;
+    assertThat(numericLiteral.valueAsLong()).isEqualTo(1L);
+    assertThat(numericLiteral.valueAsString()).isEqualTo("0b01");
+    assertThat(numericLiteral.children()).isEmpty();
+
+    parse = parse("0B01", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    numericLiteral = (PyNumericLiteralTree) parse;
+    assertThat(numericLiteral.valueAsLong()).isEqualTo(1L);
+    assertThat(numericLiteral.valueAsString()).isEqualTo("0B01");
+    assertThat(numericLiteral.children()).isEmpty();
   }
 
   @Test
