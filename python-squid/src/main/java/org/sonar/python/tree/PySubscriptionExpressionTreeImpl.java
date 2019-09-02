@@ -19,44 +19,62 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
+import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyExpressionListTreeImpl extends PyTree implements PyExpressionListTree {
-  private final List<PyExpressionTree> expressions;
+public class PySubscriptionExpressionTreeImpl extends PyTree implements PySubscriptionExpressionTree {
 
-  public PyExpressionListTreeImpl(AstNode astNode, List<PyExpressionTree> expressions) {
-    super(astNode);
-    this.expressions = expressions;
-  }
+  private final PyExpressionTree object;
+  private final Token lBracket;
+  private final PyExpressionListTree subscripts;
+  private final Token rBracket;
 
-  public PyExpressionListTreeImpl(List<PyExpressionTree> expressions) {
-    super(expressions.get(0).firstToken(), expressions.get(expressions.size() - 1).lastToken());
-    this.expressions = expressions;
-  }
-
-  @Override
-  public List<PyExpressionTree> expressions() {
-    return expressions;
+  public PySubscriptionExpressionTreeImpl(PyExpressionTree object, Token lBracket, PyExpressionListTree subscripts, Token rBracket) {
+    super(object.firstToken(), rBracket);
+    this.object = object;
+    this.lBracket = lBracket;
+    this.subscripts = subscripts;
+    this.rBracket = rBracket;
   }
 
   @Override
-  public Kind getKind() {
-    return Kind.EXPRESSION_LIST;
+  public PyExpressionTree object() {
+    return object;
+  }
+
+  @Override
+  public Token leftBracket() {
+    return lBracket;
+  }
+
+  @Override
+  public PyExpressionListTree subscripts() {
+    return subscripts;
+  }
+
+  @Override
+  public Token rightBracket() {
+    return rBracket;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitExpressionList(this);
+    visitor.visitSubscriptionExpression(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(expressions);
+    return Arrays.asList(object, subscripts);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.SUBSCRIPTION;
   }
 }

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
@@ -66,6 +67,8 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PySliceItemTree;
+import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
@@ -636,6 +639,9 @@ public class PythonTreeMaker {
 
   private PyExpressionTree powerExpression(AstNode astNode) {
     PyExpressionTree expr = expression(astNode.getFirstChild(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM));
+    for (AstNode trailer : astNode.getChildren(PythonGrammar.TRAILER)) {
+      expr = withTrailer(expr, trailer);
+    }
     if (astNode.getFirstChild().is(GenericTokenType.IDENTIFIER)) {
       expr = new PyAwaitExpressionTreeImpl(astNode, astNode.getFirstChild().getToken(), expr);
     }
@@ -643,8 +649,62 @@ public class PythonTreeMaker {
     if (powerOperator != null) {
       expr = new PyBinaryExpressionTreeImpl(expr, powerOperator.getToken(), expression(powerOperator.getNextSibling()));
     }
-    // TODO trailers
     return expr;
+  }
+
+  private PyExpressionTree withTrailer(PyExpressionTree expr, AstNode trailer) {
+    AstNode subscriptList = trailer.getFirstChild(PythonGrammar.SUBSCRIPTLIST);
+    if (subscriptList == null) {
+      // TODO other kinds of trailer
+      return expr;
+    }
+
+    List<Tree> slices = new ArrayList<>();
+    for (AstNode subscript : subscriptList.getChildren(PythonGrammar.SUBSCRIPT)) {
+      AstNode colon = subscript.getFirstChild(PythonPunctuator.COLON);
+      if (colon == null) {
+        slices.add(expression(subscript.getFirstChild(PythonGrammar.TEST)));
+      } else {
+        slices.add(sliceItem(subscript));
+      }
+    }
+
+    Token leftBracket = trailer.getFirstChild(PythonPunctuator.LBRACKET).getToken();
+    Token rightBracket = trailer.getFirstChild(PythonPunctuator.RBRACKET).getToken();
+
+    // https://docs.python.org/3/reference/expressions.html#slicings
+    // "There is ambiguity in the formal syntax here"
+    // "a subscription takes priority over the interpretation as a slicing (this is the case if the slice list contains no proper slice)"
+    if (slices.stream().anyMatch(s -> Tree.Kind.SLICE_ITEM.equals(s.getKind()))) {
+      List<Token> separators = subscriptList.getChildren(PythonPunctuator.COMMA).stream()
+        .map(AstNode::getToken)
+        .collect(Collectors.toList());
+      PySliceListTree sliceList = new PySliceListTreeImpl(subscriptList, slices, separators);
+      return new PySliceExpressionTreeImpl(expr, leftBracket, sliceList, rightBracket);
+
+    } else {
+      List<PyExpressionTree> expressions = slices.stream().map(PyExpressionTree.class::cast).collect(Collectors.toList());
+      PyExpressionListTree subscripts = new PyExpressionListTreeImpl(expressions);
+      return new PySubscriptionExpressionTreeImpl(expr, leftBracket, subscripts, rightBracket);
+    }
+  }
+
+  PySliceItemTree sliceItem(AstNode subscript) {
+    AstNode boundSeparator = subscript.getFirstChild(PythonPunctuator.COLON);
+    PyExpressionTree lowerBound = sliceBound(boundSeparator.getPreviousSibling());
+    PyExpressionTree upperBound = sliceBound(boundSeparator.getNextSibling());
+    AstNode strideNode = subscript.getFirstChild(PythonGrammar.SLICEOP);
+    Token strideSeparator = strideNode == null ? null : strideNode.getToken();
+    PyExpressionTree stride = strideNode == null ? null : expression(strideNode.getLastChild());
+    return new PySliceItemTreeImpl(subscript, lowerBound, boundSeparator.getToken(), upperBound, strideSeparator, stride);
+  }
+
+  @CheckForNull
+  private PyExpressionTree sliceBound(AstNode node) {
+    if (node == null || !node.is(PythonGrammar.TEST)) {
+      return null;
+    }
+    return expression(node);
   }
 
   private PyListLiteralTree listLiteral(AstNode astNode) {

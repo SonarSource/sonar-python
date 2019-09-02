@@ -56,9 +56,13 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PySliceExpressionTree;
+import org.sonar.python.api.tree.PySliceItemTree;
+import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
@@ -355,5 +359,29 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitAwaitExpression(PyAwaitExpressionTree pyAwaitExpressionTree) {
     scan(pyAwaitExpressionTree.expression());
+  }
+
+  @Override
+  public void visitSliceExpression(PySliceExpressionTree pySliceExpressionTree) {
+    scan(pySliceExpressionTree.object());
+    scan(pySliceExpressionTree.sliceList());
+  }
+
+  @Override
+  public void visitSliceList(PySliceListTree pySliceListTree) {
+    scan(pySliceListTree.slices());
+  }
+
+  @Override
+  public void visitSliceItem(PySliceItemTree pySliceItemTree) {
+    scan(pySliceItemTree.lowerBound());
+    scan(pySliceItemTree.upperBound());
+    scan(pySliceItemTree.stride());
+  }
+
+  @Override
+  public void visitSubscriptionExpression(PySubscriptionExpressionTree pySubscriptionExpressionTree) {
+    scan(pySubscriptionExpressionTree.object());
+    scan(pySubscriptionExpressionTree.subscripts());
   }
 }

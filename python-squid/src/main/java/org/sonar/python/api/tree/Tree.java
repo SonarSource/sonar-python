@@ -135,6 +135,12 @@ public interface Tree {
 
     AWAIT(PyAwaitExpressionTree.class),
 
+    SUBSCRIPTION(PySubscriptionExpressionTree.class),
+
+    SLICE_EXPR(PySliceExpressionTree.class),
+    SLICE_LIST(PySliceListTree.class),
+    SLICE_ITEM(PySliceItemTree.class),
+
     PLUS(PyBinaryExpressionTree.class),
     MINUS(PyBinaryExpressionTree.class),
     MULTIPLICATION(PyBinaryExpressionTree.class),

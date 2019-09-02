@@ -19,44 +19,62 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
+import com.sonar.sslr.api.Token;
+import java.util.Arrays;
 import java.util.List;
-import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PySliceExpressionTree;
+import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyExpressionListTreeImpl extends PyTree implements PyExpressionListTree {
-  private final List<PyExpressionTree> expressions;
+public class PySliceExpressionTreeImpl extends PyTree implements PySliceExpressionTree {
 
-  public PyExpressionListTreeImpl(AstNode astNode, List<PyExpressionTree> expressions) {
-    super(astNode);
-    this.expressions = expressions;
-  }
+  private final PyExpressionTree object;
+  private final Token leftBracket;
+  private final PySliceListTree sliceList;
+  private final Token rightBracket;
 
-  public PyExpressionListTreeImpl(List<PyExpressionTree> expressions) {
-    super(expressions.get(0).firstToken(), expressions.get(expressions.size() - 1).lastToken());
-    this.expressions = expressions;
-  }
-
-  @Override
-  public List<PyExpressionTree> expressions() {
-    return expressions;
+  public PySliceExpressionTreeImpl(PyExpressionTree object, Token leftBracket, PySliceListTree sliceList, Token rightBracket) {
+    super(object.firstToken(), rightBracket);
+    this.object = object;
+    this.leftBracket = leftBracket;
+    this.sliceList = sliceList;
+    this.rightBracket = rightBracket;
   }
 
   @Override
-  public Kind getKind() {
-    return Kind.EXPRESSION_LIST;
+  public PyExpressionTree object() {
+    return object;
+  }
+
+  @Override
+  public Token leftBracket() {
+    return leftBracket;
+  }
+
+  @Override
+  public PySliceListTree sliceList() {
+    return sliceList;
+  }
+
+  @Override
+  public Token rightBracket() {
+    return rightBracket;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitExpressionList(this);
+    visitor.visitSliceExpression(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(expressions);
+    return Arrays.asList(object, sliceList);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.SLICE_EXPR;
   }
 }
