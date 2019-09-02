@@ -1,0 +1,42 @@
+import os
+import myos
+
+# Common
+open("/tmp/f","w+") # Noncompliant
+open("/var/tmp/f","w+") # Noncompliant
+open("/usr/tmp/f","w+") # Noncompliant
+open("/dev/shm/f","w+") # Noncompliant
+open("dev/shm/f","w+") # OK
+
+# Linux
+open("/dev/mqueue/f","w+") # Noncompliant
+open("/run/lock/f","w+") # Noncompliant
+open("/var/run/lock/f","w+") # Noncompliant
+
+# MacOS
+open("/Library/Caches/f","w+") # Noncompliant
+open("/Users/Shared/f","w+") # Noncompliant
+open("/private/tmp/f","w+") # Noncompliant
+open("/private/var/tmp/f","w+") # Noncompliant
+
+# Windows
+open("\Windows\Temp\f") # Noncompliant
+open("D:\Windows\Temp\f") # Noncompliant
+open("\Windows\Temp\f") # Noncompliant
+open("\Temp\f") # Noncompliant
+open("\TEMP\f") # Noncompliant
+open("\TMP\f") # Noncompliant
+
+tmp_dir = os.environ.get('TMPDIR') # Noncompliant
+tmp_dir = os.environ.get('TMP') # Noncompliant
+tmp_dir = os.environ['TMPDIR'] # Noncompliant
+tmp_dir = os.environ[foo] # OK
+tmp_dir = os.environ.other_method('TMPDIR') # OK
+tmp_dir = os.environ.get('OTHER') # OK
+tmp_dir = os.environ['OTHER'] # OK
+tmp_dir = os.environ['OTHER'] # OK
+tmp_dir = os.other['TMPDIR'] # OK
+tmp_dir = os.foo.environ['TMPDIR'] # OK
+tmp_dir = environ['TMPDIR'] # OK
+tmp_dir = myos.environ.get('TMPDIR') # OK
+
