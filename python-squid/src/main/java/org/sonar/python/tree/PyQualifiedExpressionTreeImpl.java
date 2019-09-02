@@ -29,13 +29,20 @@ import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyQualifiedExpressionTreeImpl extends PyExpressionTreeImpl implements PyQualifiedExpressionTree {
+public class PyQualifiedExpressionTreeImpl extends PyTree implements PyQualifiedExpressionTree {
   private final PyNameTree name;
   private final PyExpressionTree qualifier;
   private final Token dotToken;
 
   public PyQualifiedExpressionTreeImpl(AstNode astNode, PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
     super(astNode);
+    this.name = name;
+    this.qualifier = qualifier;
+    this.dotToken = dotToken;
+  }
+
+  public PyQualifiedExpressionTreeImpl(PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
+    super(qualifier.firstToken(), name.lastToken());
     this.name = name;
     this.qualifier = qualifier;
     this.dotToken = dotToken;

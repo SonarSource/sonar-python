@@ -634,6 +634,12 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.STAR_EXPR)) {
       return new PyStarredExpressionTreeImpl(astNode, astNode.getToken(), expression(astNode.getLastChild()));
     }
+    if (astNode.is(PythonGrammar.SUBSCRIPTION_OR_SLICING)) {
+      PyExpressionTree baseExpr = expression(astNode.getFirstChild(PythonGrammar.ATOM));
+      Token leftBracket = astNode.getFirstChild(PythonPunctuator.LBRACKET).getToken();
+      Token rightBracket = astNode.getFirstChild(PythonPunctuator.RBRACKET).getToken();
+      return subscriptionOrSlicing(baseExpr, leftBracket, astNode, rightBracket);
+    }
     return new PyExpressionTreeImpl(astNode);
   }
 
@@ -653,12 +659,24 @@ public class PythonTreeMaker {
   }
 
   private PyExpressionTree withTrailer(PyExpressionTree expr, AstNode trailer) {
-    AstNode subscriptList = trailer.getFirstChild(PythonGrammar.SUBSCRIPTLIST);
-    if (subscriptList == null) {
-      // TODO other kinds of trailer
-      return expr;
-    }
+    AstNode firstChild = trailer.getFirstChild();
 
+    if (firstChild.is(PythonPunctuator.LPARENTHESIS)) {
+      List<PyArgumentTree> arguments = argList(trailer.getFirstChild(PythonGrammar.ARGLIST));
+      return new PyCallExpressionTreeImpl(expr, arguments, firstChild, trailer.getFirstChild(PythonPunctuator.RPARENTHESIS));
+
+    } else if (firstChild.is(PythonPunctuator.LBRACKET)) {
+      Token leftBracket = trailer.getFirstChild(PythonPunctuator.LBRACKET).getToken();
+      Token rightBracket = trailer.getFirstChild(PythonPunctuator.RBRACKET).getToken();
+      return subscriptionOrSlicing(expr, leftBracket, trailer.getFirstChild(PythonGrammar.SUBSCRIPTLIST), rightBracket);
+
+    } else {
+      PyNameTree name = name(trailer.getFirstChild(PythonGrammar.NAME));
+      return new PyQualifiedExpressionTreeImpl(name, expr, trailer.getFirstChild(PythonPunctuator.DOT).getToken());
+    }
+  }
+
+  private PyExpressionTree subscriptionOrSlicing(PyExpressionTree expr, Token leftBracket, AstNode subscriptList, Token rightBracket) {
     List<Tree> slices = new ArrayList<>();
     for (AstNode subscript : subscriptList.getChildren(PythonGrammar.SUBSCRIPT)) {
       AstNode colon = subscript.getFirstChild(PythonPunctuator.COLON);
@@ -668,9 +686,6 @@ public class PythonTreeMaker {
         slices.add(sliceItem(subscript));
       }
     }
-
-    Token leftBracket = trailer.getFirstChild(PythonPunctuator.LBRACKET).getToken();
-    Token rightBracket = trailer.getFirstChild(PythonPunctuator.RBRACKET).getToken();
 
     // https://docs.python.org/3/reference/expressions.html#slicings
     // "There is ambiguity in the formal syntax here"
@@ -734,17 +749,20 @@ public class PythonTreeMaker {
   }
 
   public PyCallExpressionTree callExpression(AstNode astNode) {
-    // TODO: handle SUBSCRIPTION_OR_SLICING
     PyExpressionTree callee = expression(astNode.getFirstChild());
-    AstNode argList = astNode.getFirstChild(PythonGrammar.ARGLIST);
+    List<PyArgumentTree> arguments = argList(astNode.getFirstChild(PythonGrammar.ARGLIST));
+    return new PyCallExpressionTreeImpl(astNode, callee, arguments,
+      astNode.getFirstChild(PythonPunctuator.LPARENTHESIS), astNode.getFirstChild(PythonPunctuator.RPARENTHESIS));
+  }
+
+  private List<PyArgumentTree> argList(AstNode argList) {
     List<PyArgumentTree> arguments = Collections.emptyList();
     if (argList != null) {
       arguments = argList.getChildren(PythonGrammar.ARGUMENT).stream()
         .map(this::argument)
         .collect(Collectors.toList());
     }
-    return new PyCallExpressionTreeImpl(astNode, callee, arguments,
-      astNode.getFirstChild(PythonPunctuator.LPARENTHESIS), astNode.getFirstChild(PythonPunctuator.RPARENTHESIS));
+    return arguments;
   }
 
   public PyArgumentTree argument(AstNode astNode) {

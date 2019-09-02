@@ -939,6 +939,23 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  public void combinations_with_call_expressions() {
+    setRootRule(PythonGrammar.TEST);
+
+    PyCallExpressionTree nestingCall = (PyCallExpressionTree) parse("foo('a').bar(42)", treeMaker::expression);
+    assertThat(nestingCall.arguments()).extracting(t -> t.expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
+    PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) nestingCall.callee();
+    assertThat(callee.name().name()).isEqualTo("bar");
+    assertThat(callee.qualifier().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
+
+    PyCallExpressionTree callOnSubscription = (PyCallExpressionTree) parse("a[42](arg)", treeMaker::expression);
+    PySubscriptionExpressionTree subscription = (PySubscriptionExpressionTree) callOnSubscription.callee();
+    assertThat(((PyNameTree) subscription.object()).name()).isEqualTo("a");
+    assertThat(subscription.subscripts().expressions()).extracting(Tree::getKind).containsExactly(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(((PyNameTree) callOnSubscription.arguments().get(0).expression()).name()).isEqualTo("arg");
+  }
+
+  @Test
   public void attributeRef_expression() {
     setRootRule(PythonGrammar.ATTRIBUTE_REF);
     PyQualifiedExpressionTree qualifiedExpression = parse("foo.bar", treeMaker::qualifiedExpression);
@@ -1143,9 +1160,13 @@ public class PythonTreeMakerTest extends RuleTest {
     List<Tree> slices = multipleSlices.sliceList().slices();
     assertThat(slices).extracting(Tree::getKind).containsExactly(Tree.Kind.NAME, Tree.Kind.SLICE_ITEM, Tree.Kind.SLICE_ITEM);
     assertThat(multipleSlices.sliceList().separators()).extracting(Token::getValue).containsExactly(",", ",");
+  }
 
-    PyExpressionTree notHandled = parse("x[a:b].foo", treeMaker::expression);
-    assertThat(notHandled.getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
+  @Test
+  public void qualified_with_slice() {
+    setRootRule(PythonGrammar.TEST);
+    PyQualifiedExpressionTree qualifiedWithSlice = (PyQualifiedExpressionTree) parse("x[a:b].foo", treeMaker::expression);
+    assertThat(qualifiedWithSlice.qualifier().getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
   }
 
   @Test

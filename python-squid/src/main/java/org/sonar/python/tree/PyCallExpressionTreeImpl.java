@@ -31,7 +31,7 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyCallExpressionTreeImpl extends PyExpressionTreeImpl implements PyCallExpressionTree {
+public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpressionTree {
   private final PyExpressionTree callee;
   private final List<PyArgumentTree> arguments;
   private final Token leftPar;
@@ -39,6 +39,14 @@ public class PyCallExpressionTreeImpl extends PyExpressionTreeImpl implements Py
 
   public PyCallExpressionTreeImpl(AstNode astNode, PyExpressionTree callee, List<PyArgumentTree> arguments, AstNode leftPar, AstNode rightPar) {
     super(astNode);
+    this.callee = callee;
+    this.arguments = arguments;
+    this.leftPar = leftPar.getToken();
+    this.rightPar = rightPar.getToken();
+  }
+
+  public PyCallExpressionTreeImpl(PyExpressionTree callee, List<PyArgumentTree> arguments, AstNode leftPar, AstNode rightPar) {
+    super(callee.firstToken(), rightPar.getToken());
     this.callee = callee;
     this.arguments = arguments;
     this.leftPar = leftPar.getToken();
