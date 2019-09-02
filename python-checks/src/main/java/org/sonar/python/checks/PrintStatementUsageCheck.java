@@ -19,26 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
+import com.sonar.sslr.api.Token;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = PrintStatementUsageCheck.CHECK_KEY)
-public class PrintStatementUsageCheck extends PythonCheckAstNode {
+public class PrintStatementUsageCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "PrintStatementUsage";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.PRINT_STMT);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.PRINT_STMT, ctx -> {
+      Token token = ((PyPrintStatementTree) ctx.syntaxNode()).printKeyword();
+      ctx.addIssue(token, "Replace print statement by built-in function.");
+    });
   }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    addIssue(astNode.getFirstChild(), "Replace print statement by built-in function.");
-  }
-
 }
