@@ -48,7 +48,6 @@ public class ReturnYieldOutsideFunctionCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-
     context.registerSyntaxNodeConsumer(Tree.Kind.YIELD_STMT, SUBSCRIPTION_CONTEXT_CONSUMER);
     context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, SUBSCRIPTION_CONTEXT_CONSUMER);
   }
