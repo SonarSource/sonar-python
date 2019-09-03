@@ -21,6 +21,7 @@ package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
@@ -31,7 +32,6 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
-import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.SymbolTable;
@@ -51,7 +51,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ctx -> {
       PyStringLiteralTree tree = (PyStringLiteralTree) ctx.syntaxNode();
-      String stringLiteral = tree.trimmedQuotesValue().toLowerCase();
+      String stringLiteral = tree.trimmedQuotesValue().toLowerCase(Locale.ENGLISH);
       if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(dir -> containsDirectory(stringLiteral, dir)) ||
         WINDOWS_WRITABLE_DIRECTORIES.matcher(stringLiteral).matches()) {
         ctx.addIssue(tree, MESSAGE);
@@ -61,14 +61,16 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree tree = (PyCallExpressionTree) ctx.syntaxNode();
       if (isOsEnvironGetter(tree.callee(), ctx.symbolTable()) &&
-        tree.arguments().stream().anyMatch(this::isNonCompliantOsEnvironArgument)) {
+        tree.arguments().stream().map(PyArgumentTree::expression)
+          .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }
     });
 
     context.registerSyntaxNodeConsumer(Kind.SUBSCRIPTION, ctx -> {
       PySubscriptionExpressionTree tree = (PySubscriptionExpressionTree) ctx.syntaxNode();
-      if (isOsEnvironQualifiedExpression(tree.object(), ctx.symbolTable()) && tree.subscripts().expressions().stream().anyMatch(this::isNonCompliantOsEnvironArgument)) {
+      if (isOsEnvironQualifiedExpression(tree.object(), ctx.symbolTable()) && tree.subscripts().expressions().stream()
+          .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }
     });
@@ -79,17 +81,13 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
     return stringLiteral.startsWith(dir) || stringLiteral.equals(dir.substring(0, dir.length() - 1));
   }
 
-  private boolean isNonCompliantOsEnvironArgument(Tree tree) {
-    Tree argumentOrExpression = tree;
-    if (tree.is(Kind.ARGUMENT)) {
-      argumentOrExpression = ((PyArgumentTree) tree).expression();
-    }
-    return argumentOrExpression.is(Kind.STRING_LITERAL) &&
-      NONCOMPLIANT_ENVIRON_VARIABLES.contains(((PyStringLiteralTree) argumentOrExpression).trimmedQuotesValue().toLowerCase());
+  private static boolean isNonCompliantOsEnvironArgument(PyExpressionTree expression) {
+    return expression.is(Kind.STRING_LITERAL) &&
+      NONCOMPLIANT_ENVIRON_VARIABLES.contains(((PyStringLiteralTree) expression).trimmedQuotesValue().toLowerCase(Locale.ENGLISH));
   }
 
   // Could be either `os.environ.get` or `environ.get`
-  private boolean isOsEnvironGetter(PyExpressionTree expression, SymbolTable symbolTable) {
+  private static boolean isOsEnvironGetter(PyExpressionTree expression, SymbolTable symbolTable) {
     if (!expression.is(Kind.QUALIFIED_EXPR)) {
       return false;
     }
@@ -101,7 +99,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
   }
 
   // Could be either `os.environ` or `from os import environ; ... ; environ`
-  private boolean isOsEnvironQualifiedExpression(PyExpressionTree expression, SymbolTable symbolTable) {
+  private static boolean isOsEnvironQualifiedExpression(PyExpressionTree expression, SymbolTable symbolTable) {
     Symbol symbol = symbolTable.getSymbol(expression);
     if (symbol != null) {
       return symbol.qualifiedName().equals("os.environ");
