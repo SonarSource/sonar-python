@@ -39,7 +39,7 @@ public class FileMetrics {
     numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
     numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
     complexityVisitor.scanFile(context);
-    cognitiveComplexityVisitor.scanFile(context);
+    context.rootTree().accept(cognitiveComplexityVisitor);
     fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
     fileLinesVisitor.scanFile(context);
     for (AstNode functionDef : rootTree.getDescendants(PythonGrammar.FUNCDEF)) {

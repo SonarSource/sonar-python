@@ -31,8 +31,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import org.junit.Test;
 import org.sonar.python.PythonVisitor;
+import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -42,9 +45,10 @@ public class CognitiveComplexityVisitorTest {
   public void file() {
     Map<Integer, String> complexityByLine = new TreeMap<>();
     CognitiveComplexityVisitor fileComplexityVisitor = new CognitiveComplexityVisitor(
-      (node, message) -> complexityByLine.merge(node.getTokenLine(), message, (a, b) -> a + " " + b));
+      (token, message) -> complexityByLine.merge(token.getLine(), message, (a, b) -> a + " " + b));
 
     StringBuilder comments = new StringBuilder();
+    // TODO: use BaseTreeVisitor when we will have a way to access tokens and comments in strongly typed AST
     PythonVisitor functionAndCommentVisitor = new PythonVisitor() {
       @Override
       public Set<AstNodeType> subscribedKinds() {
@@ -54,7 +58,10 @@ public class CognitiveComplexityVisitorTest {
       @Override
       public void visitNode(AstNode node) {
         if (!node.hasAncestor(PythonGrammar.FUNCDEF)) {
-          int functionComplexity = CognitiveComplexityVisitor.complexity(node, null);
+          PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
+          PyFunctionDefTree tree = pythonTreeMaker.funcDefStatement(node);
+          pythonTreeMaker.setParents(tree);
+          int functionComplexity = CognitiveComplexityVisitor.complexity(tree, null);
           complexityByLine.merge(node.getTokenLine(), "=" + functionComplexity, (a, b) -> a + " " + b);
         }
       }
@@ -71,7 +78,9 @@ public class CognitiveComplexityVisitorTest {
         }
       }
     };
-    TestPythonVisitorRunner.scanFile(new File("src/test/resources/metrics/cognitive-complexities.py"), fileComplexityVisitor, functionAndCommentVisitor);
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/metrics/cognitive-complexities.py"));
+    context.rootTree().accept(fileComplexityVisitor);
+    functionAndCommentVisitor.scanFile(context);
     assertThat(fileComplexityVisitor.getComplexity()).isEqualTo(91);
 
     StringBuilder complexityReport = new StringBuilder();

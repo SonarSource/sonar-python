@@ -96,7 +96,7 @@ public class PythonTreeMaker {
     return pyFileInputTree;
   }
 
-  private void setParents(Tree root) {
+  public void setParents(Tree root) {
     for (Tree child : root.children()) {
       if (child != null) {
         ((PyTree) child).setParent(root);
@@ -459,22 +459,41 @@ public class PythonTreeMaker {
       asyncToken = astNode.getFirstChild().getToken();
       forStatementNode = astNode.getFirstChild(PythonGrammar.FOR_STMT);
     }
+    Token forKeyword = forStatementNode.getFirstChild(PythonKeyword.FOR).getToken();
+    Token inKeyword = forStatementNode.getFirstChild(PythonKeyword.IN).getToken();
+    Token colon = forStatementNode.getFirstChild(PythonPunctuator.COLON).getToken();
     List<PyExpressionTree> expressions = expressionsFromExprList(forStatementNode.getFirstChild(PythonGrammar.EXPRLIST));
     List<PyExpressionTree> testExpressions = expressionsFromTest(forStatementNode.getFirstChild(PythonGrammar.TESTLIST));
     AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
     PyStatementListTree body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = forStatementNode.getLastChild(PythonGrammar.SUITE);
+    AstNode elseKeywordNode = forStatementNode.getFirstChild(PythonKeyword.ELSE);
+    Token elseKeyword = null;
+    Token elseColonKeyword = null;
+    if (elseKeywordNode != null) {
+      elseKeyword = elseKeywordNode.getToken();
+      elseColonKeyword = elseKeywordNode.getNextSibling().getToken();
+    }
     PyStatementListTree elseBody = lastSuite == firstSuite ? null : getStatementListFromSuite(lastSuite);
-    return new PyForStatementTreeImpl(forStatementNode, expressions, testExpressions, body, elseBody, asyncToken);
+    return new PyForStatementTreeImpl(forStatementNode, forKeyword, expressions, inKeyword, testExpressions, colon, body, elseKeyword, elseColonKeyword, elseBody, asyncToken);
   }
 
   public PyWhileStatementTreeImpl whileStatement(AstNode astNode) {
+    Token whileKeyword = astNode.getFirstChild(PythonKeyword.WHILE).getToken();
+    Token colon = astNode.getFirstChild(PythonPunctuator.COLON).getToken();
     PyExpressionTree condition = expression(astNode.getFirstChild(PythonGrammar.TEST));
     AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
     PyStatementListTree body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
+    AstNode elseKeywordNode = astNode.getFirstChild(PythonKeyword.ELSE);
+    Token elseKeyword = null;
+    Token elseColonKeyword = null;
+    if (elseKeywordNode != null) {
+      elseKeyword = elseKeywordNode.getToken();
+      elseColonKeyword = elseKeywordNode.getNextSibling().getToken();
+    }
     PyStatementListTree elseBody = lastSuite == firstSuite ? null : getStatementListFromSuite(lastSuite);
-    return new PyWhileStatementTreeImpl(astNode, condition, body, elseBody);
+    return new PyWhileStatementTreeImpl(astNode, whileKeyword, condition, colon, body, elseKeyword, elseColonKeyword, elseBody);
   }
 
   public PyExpressionStatementTree expressionStatement(AstNode astNode) {

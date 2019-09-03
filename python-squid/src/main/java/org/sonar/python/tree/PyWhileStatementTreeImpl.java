@@ -33,14 +33,22 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatementTree {
 
+  private final Token whileKeyword;
   private final PyExpressionTree condition;
+  private final Token colon;
   private final PyStatementListTree body;
+  private final Token elseKeyword;
+  private final Token elseColon;
   private final PyStatementListTree elseBody;
 
-  public PyWhileStatementTreeImpl(AstNode astNode, PyExpressionTree condition, PyStatementListTree body, @Nullable PyStatementListTree elseBody) {
+  public PyWhileStatementTreeImpl(AstNode astNode, Token whileKeyword, PyExpressionTree condition, Token colon, PyStatementListTree body, @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable PyStatementListTree elseBody) {
     super(astNode);
+    this.whileKeyword = whileKeyword;
     this.condition = condition;
+    this.colon = colon;
     this.body = body;
+    this.elseKeyword = elseKeyword;
+    this.elseColon = elseColon;
     this.elseBody = elseBody;
   }
 
@@ -56,7 +64,7 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
 
   @Override
   public Token whileKeyword() {
-    return null;
+    return whileKeyword;
   }
 
   @Override
@@ -66,7 +74,7 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
 
   @Override
   public Token colon() {
-    return null;
+    return colon;
   }
 
   @Override
@@ -77,13 +85,13 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
   @CheckForNull
   @Override
   public Token elseKeyword() {
-    return null;
+    return elseKeyword;
   }
 
   @CheckForNull
   @Override
   public Token elseColon() {
-    return null;
+    return elseColon;
   }
 
   @CheckForNull
