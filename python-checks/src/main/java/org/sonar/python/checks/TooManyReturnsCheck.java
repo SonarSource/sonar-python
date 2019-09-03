@@ -50,9 +50,7 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
 
       if (returnCountVisitor.returnStatements.size() > max) {
         PreciseIssue preciseIssue = ctx.addIssue(func.name(), String.format(MESSAGE, returnCountVisitor.returnStatements.size(), max));
-        returnCountVisitor.returnStatements.forEach(r -> {
-          preciseIssue.secondary(r, null);
-        });
+        returnCountVisitor.returnStatements.forEach(r -> preciseIssue.secondary(r, null));
       }
     });
   }
