@@ -26,6 +26,7 @@ import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
@@ -47,12 +48,8 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
       ReturnCountVisitor returnCountVisitor = new ReturnCountVisitor();
       func.body().accept(returnCountVisitor);
 
-      if (returnCountVisitor.count > max) {
-        PreciseIssue preciseIssue = ctx.addIssue(func.name(), String.format(MESSAGE, returnCountVisitor.count, max));
-
-        returnCountVisitor.yieldStatements.forEach(y -> {
-          preciseIssue.secondary(y, null);
-        });
+      if (returnCountVisitor.returnStatements.size() > max) {
+        PreciseIssue preciseIssue = ctx.addIssue(func.name(), String.format(MESSAGE, returnCountVisitor.returnStatements.size(), max));
         returnCountVisitor.returnStatements.forEach(r -> {
           preciseIssue.secondary(r, null);
         });
@@ -62,9 +59,7 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
 
   private static class ReturnCountVisitor extends BaseTreeVisitor {
 
-    private int count = 0;
-    private List<PyReturnStatementTree> returnStatements = new ArrayList<>();
-    private List<PyYieldStatementTree> yieldStatements = new ArrayList<>();
+    private List<PyStatementTree> returnStatements = new ArrayList<>();
 
     @Override
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
@@ -74,14 +69,12 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
     public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
       super.visitReturnStatement(pyReturnStatementTree);
       returnStatements.add(pyReturnStatementTree);
-      count++;
     }
 
     @Override
     public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
       super.visitYieldStatement(pyYieldStatementTree);
-      yieldStatements.add(pyYieldStatementTree);
-      count++;
+      returnStatements.add(pyYieldStatementTree);
     }
   }
 }
