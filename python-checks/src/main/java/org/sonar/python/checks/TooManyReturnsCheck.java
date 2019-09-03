@@ -19,20 +19,20 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = TooManyReturnsCheck.CHECK_KEY)
-public class TooManyReturnsCheck extends PythonCheckAstNode {
+public class TooManyReturnsCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1142";
 
   private static final int DEFAULT_MAX = 3;
@@ -42,25 +42,38 @@ public class TooManyReturnsCheck extends PythonCheckAstNode {
   public int max = DEFAULT_MAX;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree func = ((PyFunctionDefTree) ctx.syntaxNode());
+      ReturnCountVisitor returnCountVisitor = new ReturnCountVisitor();
+      func.body().accept(returnCountVisitor);
+
+      if (returnCountVisitor.returnStatements.size() > max) {
+        PreciseIssue preciseIssue = ctx.addIssue(func.name(), String.format(MESSAGE, returnCountVisitor.returnStatements.size(), max));
+        returnCountVisitor.returnStatements.forEach(r -> preciseIssue.secondary(r, null));
+      }
+    });
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    AstSelect returnStatements = node.select().descendants(PythonGrammar.RETURN_STMT, PythonGrammar.YIELD_STMT);
-    List<AstNode> returnNodes = new ArrayList<>();
-    for (AstNode returnStatement : returnStatements){
-      if (CheckUtils.insideFunction(returnStatement, node)){
-        returnNodes.add(returnStatement);
-      }
+  private static class ReturnCountVisitor extends BaseTreeVisitor {
+
+    private List<PyStatementTree> returnStatements = new ArrayList<>();
+
+    @Override
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      // Ignore nested function definitions
     }
 
-    if (returnNodes.size() > max) {
-      String message = String.format(MESSAGE, returnNodes.size(), max);
-      PreciseIssue issue = addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message);
-      returnNodes.forEach(returnNode -> issue.secondary(returnNode, null));
+    @Override
+    public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
+      super.visitReturnStatement(pyReturnStatementTree);
+      returnStatements.add(pyReturnStatementTree);
+    }
+
+    @Override
+    public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
+      super.visitYieldStatement(pyYieldStatementTree);
+      returnStatements.add(pyYieldStatementTree);
     }
   }
 }
-
