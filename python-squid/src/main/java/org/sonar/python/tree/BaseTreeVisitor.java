@@ -30,6 +30,8 @@ import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyComprehensionForTree;
+import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
@@ -49,6 +51,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
+import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
@@ -403,5 +406,24 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyConditionalExpressionTree.condition());
     scan(pyConditionalExpressionTree.trueExpression());
     scan(pyConditionalExpressionTree.falseExpression());
+  }
+
+  @Override
+  public void visitPyListOrSetCompExpression(PyListOrSetCompExpressionTree tree) {
+    scan(tree.resultExpression());
+    scan(tree.comprehensionFor());
+  }
+
+  @Override
+  public void visitComprehensionFor(PyComprehensionForTree tree) {
+    scan(tree.loopExpression());
+    scan(tree.iterable());
+    scan(tree.nestedClause());
+  }
+
+  @Override
+  public void visitComprehensionIf(PyComprehensionIfTree tree) {
+    scan(tree.condition());
+    scan(tree.nestedClause());
   }
 }

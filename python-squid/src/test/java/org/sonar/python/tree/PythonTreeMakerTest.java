@@ -36,6 +36,8 @@ import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyComprehensionForTree;
+import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
@@ -56,6 +58,7 @@ import org.sonar.python.api.tree.PyInExpressionTree;
 import org.sonar.python.api.tree.PyIsExpressionTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
+import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
@@ -1297,6 +1300,51 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(listLiteralTree.leftBracket()).isNotNull();
     assertThat(listLiteralTree.rightBracket()).isNotNull();
     assertThat(listLiteralTree.children()).hasSize(1);
+  }
+
+
+  @Test
+  public void list_comprehension() {
+    setRootRule(PythonGrammar.TEST);
+    PyListOrSetCompExpressionTree comprehension =
+      (PyListOrSetCompExpressionTree) parse("[x+y for x,y in [(42, 43)]]", treeMaker::expression);
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
+    assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.PLUS);
+    assertThat(comprehension.children()).hasSize(2);
+    PyComprehensionForTree forClause = comprehension.comprehensionFor();
+    assertThat(forClause.getKind()).isEqualTo(Tree.Kind.COMP_FOR);
+    assertThat(forClause.forToken().getValue()).isEqualTo("for");
+    assertThat(forClause.loopExpression().getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(forClause.inToken().getValue()).isEqualTo("in");
+    assertThat(forClause.iterable().getKind()).isEqualTo(Tree.Kind.LIST_LITERAL);
+    assertThat(forClause.nestedClause()).isNull();
+    assertThat(forClause.children()).hasSize(3);
+  }
+
+  @Test
+  public void list_comprehension_with_if() {
+    setRootRule(PythonGrammar.TEST);
+    PyListOrSetCompExpressionTree comprehension =
+      (PyListOrSetCompExpressionTree) parse("[x+1 for x in [42, 43] if x%2==0]", treeMaker::expression);
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
+    PyComprehensionForTree forClause = comprehension.comprehensionFor();
+    assertThat(forClause.nestedClause().getKind()).isEqualTo(Tree.Kind.COMP_IF);
+    PyComprehensionIfTree ifClause = (PyComprehensionIfTree) forClause.nestedClause();
+    assertThat(ifClause.ifToken().getValue()).isEqualTo("if");
+    assertThat(ifClause.condition().getKind()).isEqualTo(Tree.Kind.COMPARISON);
+    assertThat(ifClause.nestedClause()).isNull();
+    assertThat(ifClause.children()).hasSize(2);
+  }
+
+  @Test
+  public void list_comprehension_with_nested_for() {
+    setRootRule(PythonGrammar.TEST);
+    PyListOrSetCompExpressionTree comprehension =
+      (PyListOrSetCompExpressionTree) parse("[x+y for x in [42, 43] for y in ('a', 0)]", treeMaker::expression);
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
+    PyComprehensionForTree forClause = comprehension.comprehensionFor();
+    assertThat(forClause.iterable().getKind()).isEqualTo(Tree.Kind.LIST_LITERAL);
+    assertThat(forClause.nestedClause().getKind()).isEqualTo(Tree.Kind.COMP_FOR);
   }
 
   @Test
