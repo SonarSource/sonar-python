@@ -22,7 +22,6 @@ package org.sonar.python.checks.hotspots;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyArgumentTree;
@@ -35,24 +34,25 @@ import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.SymbolTable;
 
 @Rule(key = "S5443")
 public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Make sure publicly writable directories are used safely here.";
   private static final List<String> UNIX_WRITABLE_DIRECTORIES = Arrays.asList(
-    "/tmp", "/var/tmp", "/usr/tmp", "/dev/shm", "/dev/mqueue", "/run/lock", "/var/run/lock",
-    "/library/caches", "/users/shared", "/private/tmp", "/private/var/tmp");
+    "/tmp/", "/var/tmp/", "/usr/tmp/", "/dev/shm/", "/dev/mqueue/", "/run/lock/", "/var/run/lock/",
+    "/library/caches/", "/users/shared/", "/private/tmp/", "/private/var/tmp/");
   private static final List<String> NONCOMPLIANT_ENVIRON_VARIABLES = Arrays.asList("tmpdir", "tmp");
 
-  private static final Pattern WINDOWS_WRITABLE_DIRECTORIES = Pattern.compile("[^\\\\]*\\\\(Windows\\\\Temp|Temp|TMP).*", Pattern.CASE_INSENSITIVE);
+  private static final Pattern WINDOWS_WRITABLE_DIRECTORIES = Pattern.compile("[^\\\\]*\\\\(Windows\\\\Temp|Temp|TMP)(\\\\.*|$)", Pattern.CASE_INSENSITIVE);
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ctx -> {
       PyStringLiteralTree tree = (PyStringLiteralTree) ctx.syntaxNode();
       String stringLiteral = tree.trimmedQuotesValue().toLowerCase();
-      if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(stringLiteral::startsWith) ||
+      if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(dir -> containsDirectory(stringLiteral, dir)) ||
         WINDOWS_WRITABLE_DIRECTORIES.matcher(stringLiteral).matches()) {
         ctx.addIssue(tree, MESSAGE);
       }
@@ -60,7 +60,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree tree = (PyCallExpressionTree) ctx.syntaxNode();
-      if (isOsEnvironCall(tree, ctx.symbolTable().getSymbol(tree)) &&
+      if (isOsEnvironGetter(tree.callee(), ctx.symbolTable()) &&
         tree.arguments().stream().anyMatch(this::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }
@@ -68,11 +68,15 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Kind.SUBSCRIPTION, ctx -> {
       PySubscriptionExpressionTree tree = (PySubscriptionExpressionTree) ctx.syntaxNode();
-      if (isOsEnvironQualifiedExpression(tree.object()) && tree.subscripts().expressions().stream().anyMatch(this::isNonCompliantOsEnvironArgument)) {
+      if (isOsEnvironQualifiedExpression(tree.object(), ctx.symbolTable()) && tree.subscripts().expressions().stream().anyMatch(this::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }
     });
 
+  }
+
+  private static boolean containsDirectory(String stringLiteral, String dir) {
+    return stringLiteral.startsWith(dir) || stringLiteral.equals(dir.substring(0, dir.length() - 1));
   }
 
   private boolean isNonCompliantOsEnvironArgument(Tree tree) {
@@ -84,19 +88,24 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
       NONCOMPLIANT_ENVIRON_VARIABLES.contains(((PyStringLiteralTree) argumentOrExpression).trimmedQuotesValue().toLowerCase());
   }
 
-  private boolean isOsEnvironCall(PyCallExpressionTree callExpressionTree, @CheckForNull Symbol symbol) {
-    if (symbol == null) {
-      if (callExpressionTree.callee().is(Kind.QUALIFIED_EXPR)) {
-        PyQualifiedExpressionTree qualifiedExpression = (PyQualifiedExpressionTree) callExpressionTree.callee();
-        return qualifiedExpression.name().name().equals("get") && isOsEnvironQualifiedExpression(qualifiedExpression.qualifier());
-      }
+  // Could be either `os.environ.get` or `environ.get`
+  private boolean isOsEnvironGetter(PyExpressionTree expression, SymbolTable symbolTable) {
+    if (!expression.is(Kind.QUALIFIED_EXPR)) {
       return false;
     }
-    // for the time being semantic is not resolving types inside an imported module, hence symbol will always be null
-    return symbol.qualifiedName().equals("os.environ.get");
+    PyQualifiedExpressionTree qualifiedExpression = (PyQualifiedExpressionTree) expression;
+    if (qualifiedExpression.name().name().equals("get")) {
+      return isOsEnvironQualifiedExpression(qualifiedExpression.qualifier(), symbolTable);
+    }
+    return false;
   }
 
-  private boolean isOsEnvironQualifiedExpression(PyExpressionTree expression) {
+  // Could be either `os.environ` or `from os import environ; ... ; environ`
+  private boolean isOsEnvironQualifiedExpression(PyExpressionTree expression, SymbolTable symbolTable) {
+    Symbol symbol = symbolTable.getSymbol(expression);
+    if (symbol != null) {
+      return symbol.qualifiedName().equals("os.environ");
+    }
     if (!expression.is(Kind.QUALIFIED_EXPR)) {
       return false;
     }

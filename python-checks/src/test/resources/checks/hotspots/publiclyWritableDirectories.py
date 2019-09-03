@@ -1,12 +1,11 @@
-import os
-import myos
-
 # Common
 open("/tmp/f","w+") # Noncompliant
+open("/tmp","w+") # Noncompliant
 open("/var/tmp/f","w+") # Noncompliant
 open("/usr/tmp/f","w+") # Noncompliant
 open("/dev/shm/f","w+") # Noncompliant
 open("dev/shm/f","w+") # OK
+open("/tmpx","w+") # OK
 
 # Linux
 open("/dev/mqueue/f","w+") # Noncompliant
@@ -26,17 +25,23 @@ open("\Windows\Temp\f") # Noncompliant
 open("\Temp\f") # Noncompliant
 open("\TEMP\f") # Noncompliant
 open("\TMP\f") # Noncompliant
+open("C:\Temperatures") # OK
 
-tmp_dir = os.environ.get('TMPDIR') # Noncompliant
-tmp_dir = os.environ.get('TMP') # Noncompliant
-tmp_dir = os.environ['TMPDIR'] # Noncompliant
-tmp_dir = os.environ[foo] # OK
-tmp_dir = os.environ.other_method('TMPDIR') # OK
-tmp_dir = os.environ.get('OTHER') # OK
-tmp_dir = os.environ['OTHER'] # OK
-tmp_dir = os.environ['OTHER'] # OK
-tmp_dir = os.other['TMPDIR'] # OK
-tmp_dir = os.foo.environ['TMPDIR'] # OK
-tmp_dir = environ['TMPDIR'] # OK
-tmp_dir = myos.environ.get('TMPDIR') # OK
-
+def environ_variables():
+    import os
+    import myos
+    from os import environ
+    tmp_dir = os.environ.get('TMPDIR') # Noncompliant
+    tmp_dir = os.environ.get('TMP') # Noncompliant
+    tmp_dir = os.environ['TMPDIR'] # Noncompliant
+    tmp_dir = os.environ[foo] # OK
+    tmp_dir = os.environ.other_method('TMPDIR') # OK
+    tmp_dir = os.environ.get('OTHER') # OK
+    tmp_dir = os.environ['OTHER'] # OK
+    tmp_dir = os.environ['OTHER'] # OK
+    tmp_dir = os.other['TMPDIR'] # OK
+    tmp_dir = other['TMPDIR'] # OK
+    tmp_dir = os.foo.environ['TMPDIR'] # OK
+    tmp_dir = environ['TMPDIR'] # Noncompliant
+    tmp_dir = environ.get('TMPDIR') # Noncompliant
+    tmp_dir = myos.environ.get('TMPDIR') # OK
