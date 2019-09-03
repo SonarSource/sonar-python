@@ -40,6 +40,7 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
@@ -593,6 +594,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
       return parenthesized(astNode);
     }
+    if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
+      return conditionalExpression(astNode);
+    }
     if (astNode.is(PythonTokenType.NUMBER)) {
       return numericLiteral(astNode);
     }
@@ -670,6 +674,16 @@ public class PythonTreeMaker {
 
     List<Token> commaTokens = commas.stream().map(AstNode::getToken).collect(Collectors.toList());
     return new PyTupleTreeImpl(atom, lPar, expressionList.expressions(), commaTokens, rPar);
+  }
+
+  private PyConditionalExpressionTree conditionalExpression(AstNode astNode) {
+    List<AstNode> children = astNode.getChildren();
+    PyExpressionTree trueExpression = expression(children.get(0));
+    Token ifToken = astNode.getFirstChild(PythonKeyword.IF).getToken();
+    PyExpressionTree condition = expression(children.get(2));
+    Token elseToken = astNode.getFirstChild(PythonKeyword.ELSE).getToken();
+    PyExpressionTree falseExpression = expression(children.get(4));
+    return new PyConditionalExpressionTreeImpl(astNode, trueExpression, ifToken, condition, elseToken, falseExpression);
   }
 
   private PyExpressionTree powerExpression(AstNode astNode) {
@@ -812,7 +826,7 @@ public class PythonTreeMaker {
   private PyExpressionTree binaryExpression(AstNode astNode) {
     List<AstNode> children = astNode.getChildren();
     PyExpressionTree result = expression(children.get(0));
-    for (int i = 1; i < astNode.getNumberOfChildren(); i+=2) {
+    for (int i = 1; i < astNode.getNumberOfChildren(); i += 2) {
       AstNode operator = children.get(i);
       PyExpressionTree rightOperand = expression(operator.getNextSibling());
       AstNode not = operator.getFirstChild(PythonKeyword.NOT);

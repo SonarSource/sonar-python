@@ -126,4 +126,6 @@ public interface PyTreeVisitor {
   void visitParenthesizedExpression(PyParenthesizedExpressionTree pyParenthesizedExpressionTree);
 
   void visitTuple(PyTupleTree pyTupleTree);
+
+  void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree);
 }

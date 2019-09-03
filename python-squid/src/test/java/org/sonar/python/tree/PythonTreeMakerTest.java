@@ -36,6 +36,7 @@ import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
@@ -1349,6 +1350,23 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(exp).isInstanceOf(PyUnaryExpressionTree.class);
     assertThat(exp.getKind()).isEqualTo(Tree.Kind.NOT);
     assertThat(((PyUnaryExpressionTree) exp).expression().is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+  }
+
+  @Test
+  public void conditional_expression() {
+    setRootRule(PythonGrammar.TEST);
+    PyConditionalExpressionTree conditionalExpressionTree = (PyConditionalExpressionTree) parse("1 if condition else 2", treeMaker::expression);
+    assertThat(conditionalExpressionTree.ifKeyword().getValue()).isEqualTo("if");
+    assertThat(conditionalExpressionTree.elseKeyword().getValue()).isEqualTo("else");
+    assertThat(conditionalExpressionTree.condition().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(conditionalExpressionTree.trueExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(conditionalExpressionTree.falseExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+
+    PyConditionalExpressionTree nestedConditionalExpressionTree =
+      (PyConditionalExpressionTree) parse("1 if x else 2 if y else 3", treeMaker::expression);
+    assertThat(nestedConditionalExpressionTree.condition().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(nestedConditionalExpressionTree.trueExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(nestedConditionalExpressionTree.falseExpression().getKind()).isEqualTo(Tree.Kind.CONDITIONAL_EXPR);
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
