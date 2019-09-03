@@ -57,6 +57,8 @@ public interface Tree {
 
     CLASSDEF(PyClassDefTree.class),
 
+    CONDITIONAL_EXPR(PyConditionalExpressionTree.class),
+
     CONTINUE_STMT(PyContinueStatementTree.class),
 
     DEL_STMT(PyDelStatementTree.class),

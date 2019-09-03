@@ -27,6 +27,7 @@ import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyAwaitExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyForStatementTree;
@@ -36,6 +37,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
@@ -262,6 +264,17 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     expr.accept(visitor);
     verify(visitor).visitName((PyNameTree) expr.elements().get(0));
+  }
+
+  @Test
+  public void cond_expression() {
+    setRootRule(PythonGrammar.TEST);
+    PyConditionalExpressionTree expr = (PyConditionalExpressionTree) parse("1 if p else 2", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+    verify(visitor).visitName((PyNameTree) expr.condition());
+    verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.trueExpression());
+    verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.falseExpression());
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

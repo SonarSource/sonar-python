@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
@@ -395,5 +396,12 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitTuple(PyTupleTree pyTupleTree) {
     scan(pyTupleTree.elements());
+  }
+
+  @Override
+  public void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree) {
+    scan(pyConditionalExpressionTree.condition());
+    scan(pyConditionalExpressionTree.trueExpression());
+    scan(pyConditionalExpressionTree.falseExpression());
   }
 }
