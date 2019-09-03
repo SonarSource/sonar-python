@@ -19,40 +19,37 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Set;
+import java.util.function.Consumer;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = ReturnYieldOutsideFunctionCheck.CHECK_KEY)
-public class ReturnYieldOutsideFunctionCheck extends PythonCheckAstNode {
+public class ReturnYieldOutsideFunctionCheck extends PythonSubscriptionCheck {
 
-  public static final String MESSAGE = "Remove this use of \"%s\".";
+  private static final String MESSAGE = "Remove this use of \"%s\".";
   public static final String CHECK_KEY = "S2711";
-
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.RETURN_STMT, PythonGrammar.YIELD_STMT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode currentParent = node.getParent();
+  private static final Consumer<SubscriptionContext> SUBSCRIPTION_CONTEXT_CONSUMER = ctx -> {
+    PyStatementTree returnStatement = ((PyStatementTree) ctx.syntaxNode());
+    Tree currentParent = returnStatement.parent();
     while (currentParent != null) {
-      if (currentParent.is(PythonGrammar.FUNCDEF)) {
+      if (currentParent.is(Tree.Kind.FUNCDEF)) {
         return;
-      } else if (currentParent.is(PythonGrammar.CLASSDEF)) {
-        raiseIssue(node);
+      } else if (currentParent.is(Tree.Kind.CLASSDEF)) {
+        ctx.addIssue(returnStatement, String.format(MESSAGE, returnStatement.firstToken().getValue()));
         return;
       }
-      currentParent = currentParent.getParent();
+      currentParent = currentParent.parent();
     }
-    raiseIssue(node);
-  }
+    ctx.addIssue(returnStatement, String.format(MESSAGE, returnStatement.firstToken().getValue()));
+  };
 
-  private void raiseIssue(AstNode node) {
-    addIssue(node, String.format(MESSAGE, node.getToken().getValue()));
+  @Override
+  public void initialize(Context context) {
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.YIELD_STMT, SUBSCRIPTION_CONTEXT_CONSUMER);
+    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, SUBSCRIPTION_CONTEXT_CONSUMER);
   }
 }
