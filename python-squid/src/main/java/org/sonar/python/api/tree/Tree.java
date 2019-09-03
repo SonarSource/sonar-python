@@ -131,9 +131,13 @@ public interface Tree {
 
     YIELD_STMT(PyYieldStatementTree.class),
 
+    PARENTHESIZED(PyParenthesizedExpressionTree.class),
+
     STARRED_EXPR(PyStarredExpressionTree.class),
 
     AWAIT(PyAwaitExpressionTree.class),
+
+    TUPLE(PyTupleTree.class),
 
     SUBSCRIPTION(PySubscriptionExpressionTree.class),
 
