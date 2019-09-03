@@ -32,7 +32,7 @@ public class ReturnYieldOutsideFunctionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Remove this use of \"%s\".";
   public static final String CHECK_KEY = "S2711";
   private static final Consumer<SubscriptionContext> SUBSCRIPTION_CONTEXT_CONSUMER = ctx -> {
-    PyStatementTree returnStatement = ((PyStatementTree) ctx.syntaxNode());
+    PyStatementTree returnStatement = (PyStatementTree) ctx.syntaxNode();
     Tree currentParent = returnStatement.parent();
     while (currentParent != null) {
       if (currentParent.is(Tree.Kind.FUNCDEF)) {
