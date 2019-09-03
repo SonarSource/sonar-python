@@ -61,6 +61,7 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      // Ignore nested function definitions
     }
 
     @Override
