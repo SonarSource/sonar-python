@@ -19,20 +19,18 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.CognitiveComplexityVisitor;
 
 @Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)
-public class CognitiveComplexityFunctionCheck extends PythonCheckAstNode {
+public class CognitiveComplexityFunctionCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Refactor this function to reduce its Cognitive Complexity from %s to the %s allowed.";
   public static final String CHECK_KEY = "S3776";
@@ -44,28 +42,36 @@ public class CognitiveComplexityFunctionCheck extends PythonCheckAstNode {
     defaultValue = "" + DEFAULT_THRESHOLD)
   private int threshold = DEFAULT_THRESHOLD;
 
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree functionDef = (PyFunctionDefTree) ctx.syntaxNode();
+      if (isInnerFunction(functionDef)) {
+        return;
+      }
+      List<IssueLocation> secondaryLocations = new ArrayList<>();
+      int complexity = CognitiveComplexityVisitor.complexity(functionDef, (node, message) -> secondaryLocations.add(IssueLocation.preciseLocation(node, message)));
+      if (complexity > threshold){
+        String message = String.format(MESSAGE, complexity, threshold);
+        PreciseIssue issue = ctx.addIssue(functionDef.name(), message)
+          .withCost(complexity - threshold);
+        secondaryLocations.forEach(issue::secondary);
+      }
+    });
+  }
+
+  private static boolean isInnerFunction(PyFunctionDefTree functionDef) {
+    Tree parent = functionDef.parent();
+    while (parent != null) {
+      if (parent.is(Tree.Kind.FUNCDEF)) {
+        return true;
+      }
+      parent = parent.parent();
+    }
+    return false;
+  }
+
   public void setThreshold(int threshold) {
     this.threshold = threshold;
   }
-
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (astNode.hasAncestor(PythonGrammar.FUNCDEF)) {
-      return;
-    }
-    List<IssueLocation> secondaryLocations = new ArrayList<>();
-    int complexity = CognitiveComplexityVisitor.complexity(astNode, (node, message) -> secondaryLocations.add(IssueLocation.preciseLocation(node, message)));
-    if (complexity > threshold){
-      String message = String.format(MESSAGE, complexity, threshold);
-      PreciseIssue issue = addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), message)
-        .withCost(complexity - threshold);
-      secondaryLocations.forEach(issue::secondary);
-    }
-  }
-
 }

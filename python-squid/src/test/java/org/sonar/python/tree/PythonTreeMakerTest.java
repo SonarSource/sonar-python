@@ -715,12 +715,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.elseBody().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.children()).hasSize(4);
 
-    // TODO
-    assertThat(pyForStatementTree.forKeyword()).isNull();
-    assertThat(pyForStatementTree.inKeyword()).isNull();
-    assertThat(pyForStatementTree.colon()).isNull();
-    assertThat(pyForStatementTree.elseKeyword()).isNull();
-    assertThat(pyForStatementTree.elseColon()).isNull();
+    assertThat(pyForStatementTree.forKeyword().getValue()).isEqualTo("for");
+    assertThat(pyForStatementTree.inKeyword().getValue()).isEqualTo("in");
+    assertThat(pyForStatementTree.colon().getValue()).isEqualTo(":");
+    assertThat(pyForStatementTree.elseKeyword().getValue()).isEqualTo("else");
+    assertThat(pyForStatementTree.elseColon().getValue()).isEqualTo(":");
   }
 
   @Test
@@ -743,11 +742,10 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(whileStatement.elseBody().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(whileStatement.children()).hasSize(3);
 
-    // TODO
-    assertThat(whileStatement.whileKeyword()).isNull();
-    assertThat(whileStatement.colon()).isNull();
-    assertThat(whileStatement.elseKeyword()).isNull();
-    assertThat(whileStatement.elseColon()).isNull();
+    assertThat(whileStatement.whileKeyword().getValue()).isEqualTo("while");
+    assertThat(whileStatement.colon().getValue()).isEqualTo(":");
+    assertThat(whileStatement.elseKeyword().getValue()).isEqualTo("else");
+    assertThat(whileStatement.elseColon().getValue()).isEqualTo(":");
 
   }
 

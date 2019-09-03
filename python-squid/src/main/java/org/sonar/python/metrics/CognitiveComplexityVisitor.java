@@ -19,31 +19,43 @@
  */
 package org.sonar.python.metrics;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Token;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.python.PythonVisitor;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
+import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExceptClauseTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyForStatementTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.BaseTreeVisitor;
 
-public class CognitiveComplexityVisitor extends PythonVisitor {
+public class CognitiveComplexityVisitor extends BaseTreeVisitor {
 
   private int complexity = 0;
   private Deque<NestingLevel> nestingLevelStack = new LinkedList<>();
+  private Set<Token> alreadyConsideredOperators = new HashSet<>();
 
   @Nullable
   private final SecondaryLocationConsumer secondaryLocationConsumer;
 
   public interface SecondaryLocationConsumer {
-    void consume(AstNode node, String message);
+    void consume(Token secondaryLocation, String message);
   }
 
   CognitiveComplexityVisitor(@Nullable SecondaryLocationConsumer secondaryLocationConsumer) {
@@ -51,9 +63,9 @@ public class CognitiveComplexityVisitor extends PythonVisitor {
     nestingLevelStack.push(new NestingLevel());
   }
 
-  public static int complexity(AstNode node, @Nullable SecondaryLocationConsumer secondaryLocationConsumer) {
+  public static int complexity(Tree tree, @Nullable SecondaryLocationConsumer secondaryLocationConsumer) {
     CognitiveComplexityVisitor visitor = new CognitiveComplexityVisitor(secondaryLocationConsumer);
-    visitor.scanNode(node);
+    visitor.scan(tree);
     return visitor.complexity;
   }
 
@@ -62,80 +74,132 @@ public class CognitiveComplexityVisitor extends PythonVisitor {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-      PythonGrammar.IF_STMT,
-      PythonKeyword.ELIF,
-      PythonKeyword.ELSE,
-
-      PythonGrammar.WHILE_STMT,
-      PythonGrammar.FOR_STMT,
-      PythonGrammar.EXCEPT_CLAUSE,
-
-      PythonGrammar.AND_TEST,
-      PythonGrammar.OR_TEST,
-
-      PythonGrammar.TEST,
-
-      PythonGrammar.FUNCDEF,
-      PythonGrammar.CLASSDEF,
-      PythonGrammar.SUITE)));
+  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
+    if (pyIfStatementTree.isElif()) {
+      incrementWithoutNesting(pyIfStatementTree.keyword());
+    } else {
+      incrementWithNesting(pyIfStatementTree.keyword());
+    }
+    super.visitIfStatement(pyIfStatementTree);
   }
 
   @Override
-  public void visitNode(AstNode astNode) {
-    if (astNode.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
-      nestingLevelStack.push(new NestingLevel(nestingLevelStack.peek(), astNode));
-    } else if (astNode.is(PythonGrammar.SUITE)) {
-      if (isSuiteIncrementsNestingLevel(astNode)) {
-        nestingLevelStack.peek().increment();
+  public void visitElseStatement(PyElseStatementTree pyElseStatementTree) {
+    incrementWithoutNesting(pyElseStatementTree.elseKeyword());
+    super.visitElseStatement(pyElseStatementTree);
+  }
+
+  @Override
+  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+    incrementWithNesting(pyWhileStatementTree.whileKeyword());
+    if (pyWhileStatementTree.elseBody() != null) {
+      incrementWithoutNesting(pyWhileStatementTree.elseKeyword());
+    }
+    super.visitWhileStatement(pyWhileStatementTree);
+  }
+
+  @Override
+  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+    incrementWithNesting(pyForStatementTree.forKeyword());
+    if (pyForStatementTree.elseBody() != null) {
+      incrementWithoutNesting(pyForStatementTree.elseKeyword());
+    }
+    super.visitForStatement(pyForStatementTree);
+  }
+
+  @Override
+  public void visitExceptClause(PyExceptClauseTree pyExceptClauseTree) {
+    incrementWithNesting(pyExceptClauseTree.exceptKeyword());
+    super.visitExceptClause(pyExceptClauseTree);
+  }
+
+  @Override
+  public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+    if (pyBinaryExpressionTree.is(Kind.AND) || pyBinaryExpressionTree.is(Kind.OR)) {
+      if (alreadyConsideredOperators.contains(pyBinaryExpressionTree.operator())) {
+        super.visitBinaryExpression(pyBinaryExpressionTree);
+        return;
       }
-    } else if (astNode.is(PythonGrammar.IF_STMT, PythonGrammar.WHILE_STMT, PythonGrammar.FOR_STMT, PythonGrammar.EXCEPT_CLAUSE)) {
-      incrementWithNesting(astNode.getFirstChild());
-    } else if (astNode.is(PythonKeyword.ELIF) || (astNode.is(PythonKeyword.ELSE) && astNode.getNextSibling().is(PythonPunctuator.COLON))) {
-      incrementWithoutNesting(astNode);
-    } else if (astNode.is(PythonGrammar.AND_TEST, PythonGrammar.OR_TEST)) {
-      incrementWithoutNesting(astNode.getFirstChild(PythonKeyword.AND, PythonKeyword.OR));
-    } else if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
-      // conditional expression
-      incrementWithNesting(astNode.getFirstChild(PythonKeyword.IF));
+      List<Token> operators = new ArrayList<>();
+      flattenOperators(pyBinaryExpressionTree, operators);
+      Token previous = null;
+      for (Token operator : operators) {
+        if (previous == null || !previous.getType().equals(operator.getType())) {
+          incrementWithoutNesting(pyBinaryExpressionTree.operator());
+        }
+        previous = operator;
+        alreadyConsideredOperators.add(operator);
+      }
+    }
+    super.visitBinaryExpression(pyBinaryExpressionTree);
+  }
+
+  private void flattenOperators(PyBinaryExpressionTree binaryExpression, List<Token> operators) {
+    PyExpressionTree left = binaryExpression.leftOperand();
+    if (left.is(Kind.AND) || left.is(Kind.OR)) {
+      flattenOperators((PyBinaryExpressionTree) left, operators);
+    }
+
+    operators.add(binaryExpression.operator());
+
+    PyExpressionTree right = binaryExpression.rightOperand();
+    if (right.is(Kind.AND) || right.is(Kind.OR)) {
+      flattenOperators((PyBinaryExpressionTree) right, operators);
+    }
+  }
+
+  @Override
+  public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    nestingLevelStack.push(new NestingLevel(nestingLevelStack.peek(), pyFunctionDefTree));
+    super.visitFunctionDef(pyFunctionDefTree);
+    nestingLevelStack.pop();
+  }
+
+  @Override
+  public void visitClassDef(PyClassDefTree pyClassDefTree) {
+    nestingLevelStack.push(new NestingLevel(nestingLevelStack.peek(), pyClassDefTree));
+    super.visitClassDef(pyClassDefTree);
+    nestingLevelStack.pop();
+  }
+
+  @Override
+  public void visitStatementList(PyStatementListTree pyStatementListTree) {
+    if (isStmtListIncrementsNestingLevel(pyStatementListTree)) {
       nestingLevelStack.peek().increment();
+      super.visitStatementList(pyStatementListTree);
+      nestingLevelStack.peek().decrement();
+    } else {
+      super.visitStatementList(pyStatementListTree);
     }
   }
 
   @Override
-  public void leaveNode(AstNode astNode) {
-    if (astNode.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
-      nestingLevelStack.pop();
-    } else if (astNode.is(PythonGrammar.SUITE)) {
-      if (isSuiteIncrementsNestingLevel(astNode)) {
-        nestingLevelStack.peek().decrement();
-      }
-    } else if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
-      // conditional expression
-      nestingLevelStack.peek().decrement();
-    }
+  public void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree) {
+    incrementWithNesting(pyConditionalExpressionTree.ifKeyword());
+    nestingLevelStack.peek().increment();
+    super.visitConditionalExpression(pyConditionalExpressionTree);
+    nestingLevelStack.peek().decrement();
   }
 
-  private static boolean isSuiteIncrementsNestingLevel(AstNode astNode) {
-    AstNode previousSibling = astNode.getPreviousSibling().getPreviousSibling();
-    if (previousSibling.is(PythonKeyword.TRY, PythonKeyword.FINALLY)) {
+  private static boolean isStmtListIncrementsNestingLevel(PyStatementListTree statementListTree) {
+    if (statementListTree.parent().is(Kind.FILE_INPUT)) {
       return false;
     }
-    return !astNode.getParent().is(PythonGrammar.CLASSDEF, PythonGrammar.FUNCDEF, PythonGrammar.WITH_STMT);
+    List<Kind> notIncrementingNestingKinds = Arrays.asList(Kind.TRY_STMT, Kind.FINALLY_CLAUSE, Kind.CLASSDEF, Kind.FUNCDEF, Kind.WITH_STMT);
+    return statementListTree.parent() != null && notIncrementingNestingKinds.stream().noneMatch(kind -> statementListTree.parent().is(kind));
   }
 
-  private void incrementWithNesting(AstNode secondaryLocationNode) {
-    incrementComplexity(secondaryLocationNode, 1 + nestingLevelStack.peek().level());
+  private void incrementWithNesting(Token secondaryLocation) {
+    incrementComplexity(secondaryLocation, 1 + nestingLevelStack.peek().level());
   }
 
-  private void incrementWithoutNesting(AstNode secondaryLocationNode) {
-    incrementComplexity(secondaryLocationNode, 1);
+  private void incrementWithoutNesting(Token secondaryLocation) {
+    incrementComplexity(secondaryLocation, 1);
   }
 
-  private void incrementComplexity(AstNode secondaryLocationNode, int currentNodeComplexity) {
+  private void incrementComplexity(Token secondaryLocation, int currentNodeComplexity) {
     if (secondaryLocationConsumer != null) {
-      secondaryLocationConsumer.consume(secondaryLocationNode, secondaryMessage(currentNodeComplexity));
+      secondaryLocationConsumer.consume(secondaryLocation, secondaryMessage(currentNodeComplexity));
     }
     complexity += currentNodeComplexity;
   }
@@ -151,18 +215,18 @@ public class CognitiveComplexityVisitor extends PythonVisitor {
   private static class NestingLevel {
 
     @Nullable
-    private AstNode astNode;
+    private Tree tree;
     private int level;
 
     private NestingLevel() {
-      astNode = null;
+      tree = null;
       level = 0;
     }
 
-    private NestingLevel(NestingLevel parent, AstNode astNode) {
-      this.astNode = astNode;
-      if (astNode.is(PythonGrammar.FUNCDEF)) {
-        if (parent.isWrapperFunction(astNode)) {
+    private NestingLevel(NestingLevel parent, Tree tree) {
+      this.tree = tree;
+      if (tree.is(Kind.FUNCDEF)) {
+        if (parent.isWrapperFunction((PyFunctionDefTree) tree)) {
           level = parent.level;
         } else if (parent.isFunction()) {
           level = parent.level + 1;
@@ -176,43 +240,26 @@ public class CognitiveComplexityVisitor extends PythonVisitor {
     }
 
     private boolean isFunction() {
-      return astNode != null && astNode.is(PythonGrammar.FUNCDEF);
+      return tree != null && tree.is(Kind.FUNCDEF);
     }
 
-    private boolean isWrapperFunction(AstNode childFunction) {
-      if(astNode != null && astNode.is(PythonGrammar.FUNCDEF)) {
-        AstNode childStatement = childFunction.getParent().getParent();
-        return astNode.getFirstChild(PythonGrammar.SUITE)
-          .getChildren(PythonGrammar.STATEMENT)
+    private boolean isWrapperFunction(PyFunctionDefTree childFunction) {
+      if(tree != null && tree.is(Kind.FUNCDEF)) {
+        return ((PyFunctionDefTree) tree).body()
+          .statements()
           .stream()
-          .filter(statement -> statement != childStatement)
+          .filter(statement -> statement != childFunction)
           .allMatch(NestingLevel::isSimpleReturn);
       }
       return false;
     }
 
-    private static boolean isSimpleReturn(AstNode statement) {
-      AstNode returnStatement = lookupOnlyChild(statement.getFirstChild(PythonGrammar.STMT_LIST),
-        PythonGrammar.SIMPLE_STMT, PythonGrammar.RETURN_STMT);
-      return returnStatement != null &&
-        lookupOnlyChild(returnStatement.getFirstChild(PythonGrammar.TESTLIST),
-          PythonGrammar.TEST, PythonGrammar.ATOM, PythonGrammar.NAME) != null;
-    }
-
-    @Nullable
-    private static AstNode lookupOnlyChild(@Nullable AstNode parent, AstNodeType... types) {
-      if (parent == null) {
-        return null;
+    private static boolean isSimpleReturn(PyStatementTree statement) {
+      if (statement.is(Kind.RETURN_STMT)) {
+        PyReturnStatementTree returnStatementTree = (PyReturnStatementTree) statement;
+        return returnStatementTree.expressions().size() == 1 && returnStatementTree.expressions().get(0).is(Kind.NAME);
       }
-      AstNode result = parent;
-      for (AstNodeType type : types) {
-        List<AstNode> children = result.getChildren();
-        if (children.size() != 1 || !children.get(0).is(type)) {
-          return null;
-        }
-        result = children.get(0);
-      }
-      return result;
+      return false;
     }
 
     private int level() {
