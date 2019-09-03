@@ -51,6 +51,7 @@ import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -65,6 +66,7 @@ import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
@@ -383,5 +385,15 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitSubscriptionExpression(PySubscriptionExpressionTree pySubscriptionExpressionTree) {
     scan(pySubscriptionExpressionTree.object());
     scan(pySubscriptionExpressionTree.subscripts());
+  }
+
+  @Override
+  public void visitParenthesizedExpression(PyParenthesizedExpressionTree pyParenthesizedExpressionTree) {
+    scan(pyParenthesizedExpressionTree.expression());
+  }
+
+  @Override
+  public void visitTuple(PyTupleTree pyTupleTree) {
+    scan(pyTupleTree.elements());
   }
 }

@@ -122,4 +122,8 @@ public interface PyTreeVisitor {
   void visitSliceItem(PySliceItemTree pySliceItemTree);
 
   void visitSubscriptionExpression(PySubscriptionExpressionTree pySubscriptionExpressionTree);
+
+  void visitParenthesizedExpression(PyParenthesizedExpressionTree pyParenthesizedExpressionTree);
+
+  void visitTuple(PyTupleTree pyTupleTree);
 }

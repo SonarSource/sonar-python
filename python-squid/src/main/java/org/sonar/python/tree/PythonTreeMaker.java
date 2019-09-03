@@ -590,6 +590,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LBRACKET)) {
       return listLiteral(astNode);
     }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
+      return parenthesized(astNode);
+    }
     if (astNode.is(PythonTokenType.NUMBER)) {
       return numericLiteral(astNode);
     }
@@ -641,6 +644,32 @@ public class PythonTreeMaker {
       return subscriptionOrSlicing(baseExpr, leftBracket, astNode, rightBracket);
     }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  private PyExpressionTree parenthesized(AstNode atom) {
+    Token lPar = atom.getFirstChild().getToken();
+    Token rPar = atom.getLastChild().getToken();
+
+    AstNode yieldNode = atom.getFirstChild(PythonGrammar.YIELD_EXPR);
+    if (yieldNode != null) {
+      return new PyParenthesizedExpressionTreeImpl(lPar, expression(yieldNode), rPar);
+    }
+
+    AstNode testListComp = atom.getFirstChild(PythonGrammar.TESTLIST_COMP);
+    if (testListComp == null) {
+      return new PyTupleTreeImpl(atom, lPar, Collections.emptyList(), Collections.emptyList(), rPar);
+    }
+
+    // TODO COMP_FOR
+    PyExpressionListTree expressionList = expressionList(testListComp);
+    List<AstNode> commas = testListComp.getChildren(PythonPunctuator.COMMA);
+    if (commas.isEmpty()) {
+      PyExpressionTree expression = expressionList.expressions().get(0);
+      return new PyParenthesizedExpressionTreeImpl(lPar, expression, rPar);
+    }
+
+    List<Token> commaTokens = commas.stream().map(AstNode::getToken).collect(Collectors.toList());
+    return new PyTupleTreeImpl(atom, lPar, expressionList.expressions(), commaTokens, rPar);
   }
 
   private PyExpressionTree powerExpression(AstNode astNode) {
@@ -725,6 +754,7 @@ public class PythonTreeMaker {
   private PyListLiteralTree listLiteral(AstNode astNode) {
     PyExpressionListTree elements;
     if (astNode.hasDirectChildren(PythonGrammar.TESTLIST_COMP)) {
+      // TODO COMP_FOR
       elements = expressionList(astNode.getFirstChild(PythonGrammar.TESTLIST_COMP));
     } else {
       elements = new PyExpressionListTreeImpl(astNode, Collections.emptyList());

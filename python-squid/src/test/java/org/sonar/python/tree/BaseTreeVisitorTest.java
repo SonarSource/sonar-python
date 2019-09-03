@@ -36,6 +36,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -45,6 +46,7 @@ import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
 import org.sonar.python.parser.RuleTest;
@@ -242,6 +244,24 @@ public class BaseTreeVisitorTest extends RuleTest {
     expr.accept(visitor);
     verify(visitor).visitName((PyNameTree) expr.object());
     verify(visitor).visitName((PyNameTree) expr.subscripts().expressions().get(0));
+  }
+
+  @Test
+  public void parenthesized_expr() {
+    setRootRule(PythonGrammar.EXPR);
+    PyParenthesizedExpressionTree expr = (PyParenthesizedExpressionTree) parse("(a)", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+    verify(visitor).visitName((PyNameTree) expr.expression());
+  }
+
+  @Test
+  public void tuple() {
+    setRootRule(PythonGrammar.EXPR);
+    PyTupleTree expr = (PyTupleTree) parse("(a,)", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+    verify(visitor).visitName((PyNameTree) expr.elements().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

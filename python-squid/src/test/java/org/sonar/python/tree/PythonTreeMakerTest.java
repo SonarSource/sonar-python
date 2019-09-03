@@ -58,6 +58,7 @@ import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -71,6 +72,7 @@ import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
@@ -1294,6 +1296,43 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(listLiteralTree.leftBracket()).isNotNull();
     assertThat(listLiteralTree.rightBracket()).isNotNull();
     assertThat(listLiteralTree.children()).hasSize(1);
+  }
+
+  @Test
+  public void parenthesized_expression() {
+    setRootRule(PythonGrammar.TEST);
+    PyParenthesizedExpressionTree parenthesized = (PyParenthesizedExpressionTree) parse("(42)", treeMaker::expression);
+    assertThat(parenthesized.getKind()).isEqualTo(Tree.Kind.PARENTHESIZED);
+    assertThat(parenthesized.children()).hasSize(1);
+    assertThat(parenthesized.leftParenthesis().getValue()).isEqualTo("(");
+    assertThat(parenthesized.rightParenthesis().getValue()).isEqualTo(")");
+    assertThat(parenthesized.expression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+
+    parenthesized = (PyParenthesizedExpressionTree) parse("(yield 42)", treeMaker::expression);
+    assertThat(parenthesized.expression().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
+  }
+
+  @Test
+  public void tuples() {
+    PyTupleTree empty = parseTuple("()");
+    assertThat(empty.getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(empty.elements()).isEmpty();
+    assertThat(empty.commas()).isEmpty();
+    assertThat(empty.leftParenthesis().getValue()).isEqualTo("(");
+    assertThat(empty.rightParenthesis().getValue()).isEqualTo(")");
+    assertThat(empty.children()).hasSize(0);
+
+    PyTupleTree singleValue = parseTuple("(a,)");
+    assertThat(singleValue.elements()).extracting(Tree::getKind).containsExactly(Tree.Kind.NAME);
+    assertThat(singleValue.commas()).extracting(Token::getValue).containsExactly(",");
+    assertThat(singleValue.children()).hasSize(1);
+
+    assertThat(parseTuple("(a,b)").elements()).hasSize(2);
+  }
+
+  private PyTupleTree parseTuple(String code) {
+    setRootRule(PythonGrammar.TEST);
+    return (PyTupleTree) parse(code, treeMaker::expression);
   }
 
   @Test
