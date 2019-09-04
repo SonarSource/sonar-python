@@ -24,7 +24,7 @@ import javax.annotation.CheckForNull;
 
 /**
  * <pre>
- * {@link #key()} {@link #colon()} {@link #value() OR {@link #starStarToken()} {@link #expression()}
+ * {@link #key()} {@link #colon()} {@link #value()} OR {@link #starStarToken()} {@link #expression()}
  * </pre>
  */
 public interface PyKeyValuePairTree extends Tree {
