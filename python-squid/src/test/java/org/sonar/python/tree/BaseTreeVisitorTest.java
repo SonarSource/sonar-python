@@ -26,7 +26,11 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyAwaitExpressionTree;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyComprehensionForTree;
+import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -36,6 +40,8 @@ import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.PyListLiteralTree;
+import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
@@ -275,6 +281,24 @@ public class BaseTreeVisitorTest extends RuleTest {
     verify(visitor).visitName((PyNameTree) expr.condition());
     verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.trueExpression());
     verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.falseExpression());
+  }
+
+  @Test
+  public void list_or_set_comprehension() {
+    setRootRule(PythonGrammar.EXPR);
+    PyListOrSetCompExpressionTree expr = (PyListOrSetCompExpressionTree) parse("[x+1 for x in [42, 43] if cond(x)]", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+
+    verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.resultExpression());
+    verify(visitor).visitComprehensionFor(expr.comprehensionFor());
+
+    PyComprehensionForTree forClause = expr.comprehensionFor();
+    verify(visitor).visitName((PyNameTree) forClause.loopExpression());
+    verify(visitor).visitListLiteral((PyListLiteralTree) forClause.iterable());
+
+    PyComprehensionIfTree ifClause = (PyComprehensionIfTree) forClause.nestedClause();
+    verify(visitor).visitCallExpression((PyCallExpressionTree) ifClause.condition());
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

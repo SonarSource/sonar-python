@@ -128,4 +128,10 @@ public interface PyTreeVisitor {
   void visitTuple(PyTupleTree pyTupleTree);
 
   void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree);
+
+  void visitPyListOrSetCompExpression(PyListOrSetCompExpressionTree tree);
+
+  void visitComprehensionFor(PyComprehensionForTree tree);
+
+  void visitComprehensionIf(PyComprehensionIfTree tree);
 }

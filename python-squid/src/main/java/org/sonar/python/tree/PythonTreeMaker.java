@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
@@ -41,6 +42,8 @@ import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
+import org.sonar.python.api.tree.PyComprehensionClauseTree;
+import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
@@ -60,7 +63,6 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
-import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
@@ -584,6 +586,19 @@ public class PythonTreeMaker {
       .stream().map(this::expression).collect(Collectors.toList());
   }
 
+  private PyExpressionTree exprListOrTestList(AstNode exprListOrTestList) {
+    List<PyExpressionTree> expressions = exprListOrTestList
+      .getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR, PythonGrammar.TEST).stream()
+      .map(this::expression)
+      .collect(Collectors.toList());
+    List<AstNode> commas = exprListOrTestList.getChildren(PythonPunctuator.COMMA);
+    if (commas.isEmpty()) {
+      return expressions.get(0);
+    }
+    List<Token> commaTokens = commas.stream().map(AstNode::getToken).collect(Collectors.toList());
+    return new PyTupleTreeImpl(exprListOrTestList, null, expressions, commaTokens, null);
+  }
+
   PyExpressionTree expression(AstNode astNode) {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
       return expression(astNode.getFirstChild());
@@ -615,7 +630,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.CALL_EXPR)) {
       return callExpression(astNode);
     }
-    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.TEST)) {
+    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.TEST, PythonGrammar.TEST_NOCOND)) {
       if (astNode.getChildren().size() == 1) {
         return expression(astNode.getFirstChild());
       } else {
@@ -765,18 +780,48 @@ public class PythonTreeMaker {
     return expression(node);
   }
 
-  private PyListLiteralTree listLiteral(AstNode astNode) {
+  private PyExpressionTree listLiteral(AstNode astNode) {
+    Token leftBracket = astNode.getFirstChild(PythonPunctuator.LBRACKET).getToken();
+    Token rightBracket = astNode.getFirstChild(PythonPunctuator.RBRACKET).getToken();
+
     PyExpressionListTree elements;
-    if (astNode.hasDirectChildren(PythonGrammar.TESTLIST_COMP)) {
-      // TODO COMP_FOR
-      elements = expressionList(astNode.getFirstChild(PythonGrammar.TESTLIST_COMP));
+    AstNode testListComp = astNode.getFirstChild(PythonGrammar.TESTLIST_COMP);
+    if (testListComp != null) {
+      AstNode compForNode = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
+      if (compForNode != null) {
+        PyExpressionTree resultExpression = expression(testListComp.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
+        return new PyListOrSetCompExpressionTreeImpl(leftBracket, resultExpression, compFor(compForNode), rightBracket);
+      }
+      elements = expressionList(testListComp);
     } else {
       elements = new PyExpressionListTreeImpl(astNode, Collections.emptyList());
     }
-    return new PyListLiteralTreeImpl(astNode,
-      astNode.getFirstChild(PythonPunctuator.LBRACKET).getToken(),
-      elements,
-      astNode.getFirstChild(PythonPunctuator.RBRACKET).getToken());
+    return new PyListLiteralTreeImpl(astNode, leftBracket, elements, rightBracket);
+  }
+
+  private PyComprehensionForTree compFor(AstNode compFor) {
+    PyExpressionTree expression = exprListOrTestList(compFor.getFirstChild(PythonGrammar.EXPRLIST));
+    Token forToken = compFor.getFirstChild(PythonKeyword.FOR).getToken();
+    Token inToken = compFor.getFirstChild(PythonKeyword.IN).getToken();
+    PyExpressionTree iterable = exprListOrTestList(compFor.getFirstChild(PythonGrammar.TESTLIST));
+    PyComprehensionClauseTree nested = compClause(compFor.getFirstChild(PythonGrammar.COMP_ITER));
+    return new PyComprehensionForTreeImpl(compFor, forToken, expression, inToken, iterable, nested);
+  }
+
+  @CheckForNull
+  private PyComprehensionClauseTree compClause(@Nullable AstNode node) {
+    if (node == null) {
+      return null;
+    }
+    AstNode child = node.getFirstChild();
+    if (child.is(PythonGrammar.COMP_FOR)) {
+      return compFor(child);
+    } else {
+      PyExpressionTree condition = expression(child.getFirstChild(PythonGrammar.TEST_NOCOND));
+      PyComprehensionClauseTree nestedClause = compClause(child.getFirstChild(PythonGrammar.COMP_ITER));
+      Token ifToken = child.getFirstChild(PythonKeyword.IF).getToken();
+      return new PyComprehensionIfTreeImpl(child, ifToken, condition, nestedClause);
+    }
   }
 
   public PyQualifiedExpressionTree qualifiedExpression(AstNode astNode) {

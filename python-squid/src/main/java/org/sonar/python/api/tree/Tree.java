@@ -141,6 +141,10 @@ public interface Tree {
 
     TUPLE(PyTupleTree.class),
 
+    LIST_COMPREHENSION(PyListOrSetCompExpressionTree.class),
+    COMP_FOR(PyComprehensionForTree.class),
+    COMP_IF(PyComprehensionIfTree.class),
+
     SUBSCRIPTION(PySubscriptionExpressionTree.class),
 
     SLICE_EXPR(PySliceExpressionTree.class),
