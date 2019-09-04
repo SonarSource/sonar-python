@@ -61,6 +61,8 @@ public interface Tree {
 
     CONTINUE_STMT(PyContinueStatementTree.class),
 
+    DICTIONARY_LITERAL(PyDictionaryLiteralTree.class),
+
     DEL_STMT(PyDelStatementTree.class),
 
     DOTTED_NAME(PyDottedNameTree.class),
@@ -112,6 +114,8 @@ public interface Tree {
     RAISE_STMT(PyRaiseStatementTree.class),
 
     RETURN_STMT(PyReturnStatementTree.class),
+
+    SET_LITERAL(PySetLiteralTree.class),
 
     STATEMENT_LIST(PyStatementListTree.class),
 
@@ -172,7 +176,9 @@ public interface Tree {
     UNARY_PLUS(PyUnaryExpressionTree.class),
     UNARY_MINUS(PyUnaryExpressionTree.class),
     BITWISE_COMPLEMENT(PyUnaryExpressionTree.class),
-    NOT(PyUnaryExpressionTree.class);
+    NOT(PyUnaryExpressionTree.class),
+
+    KEY_VALUE_PAIR(PyKeyValuePairTree.class);
 
     final Class<? extends Tree> associatedInterface;
 

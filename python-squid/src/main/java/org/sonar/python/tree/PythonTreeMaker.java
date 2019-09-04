@@ -24,7 +24,9 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -41,9 +43,9 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyComprehensionClauseTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
@@ -62,6 +64,7 @@ import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
+import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
@@ -609,6 +612,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
       return parenthesized(astNode);
     }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LCURLYBRACE)) {
+      return dictOrSetLiteral(astNode);
+    }
     if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
       return conditionalExpression(astNode);
     }
@@ -663,6 +669,38 @@ public class PythonTreeMaker {
       return subscriptionOrSlicing(baseExpr, leftBracket, astNode, rightBracket);
     }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  private PyExpressionTree dictOrSetLiteral(AstNode astNode) {
+    Token lCurlyBrace = astNode.getFirstChild(PythonPunctuator.LCURLYBRACE).getToken();
+    Token rCurlyBrace = astNode.getLastChild(PythonPunctuator.RCURLYBRACE).getToken();
+    AstNode dictOrSetMaker = astNode.getFirstChild(PythonGrammar.DICTORSETMAKER);
+    if (dictOrSetMaker == null) {
+      return new PyDictionaryLiteralTreeImpl(astNode, lCurlyBrace, Collections.emptyList(), Collections.emptySet(), rCurlyBrace);
+    }
+    if (dictOrSetMaker.hasDirectChildren(PythonGrammar.COMP_FOR)) {
+      // TODO: dictionary comprehension and set comprehension
+      return new PyExpressionTreeImpl(astNode);
+    }
+    List<Token> commas = dictOrSetMaker.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList());
+    if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON) || dictOrSetMaker.hasDirectChildren(PythonPunctuator.MUL_MUL)) {
+      Set<PyKeyValuePairTree> keyValuePairTrees = new HashSet<>();
+      List<AstNode> children = dictOrSetMaker.getChildren();
+      int index = 0;
+      while (index < children.size()) {
+        AstNode currentChild = children.get(index);
+        if (currentChild.is(PythonPunctuator.MUL_MUL)) {
+          keyValuePairTrees.add(new PyKeyValuePairTreeImpl(currentChild.getToken(), expression(children.get(index + 1))));
+          index += 3;
+        } else {
+          keyValuePairTrees.add(new PyKeyValuePairTreeImpl(expression(currentChild), children.get(index + 1).getToken(), expression(children.get(index + 2))));
+          index += 4;
+        }
+      }
+      return new PyDictionaryLiteralTreeImpl(astNode, lCurlyBrace, commas, keyValuePairTrees, rCurlyBrace);
+    }
+    Set<PyExpressionTree> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toSet());
+    return new PySetLiteralTreeImpl(astNode, lCurlyBrace, expressions, commas, rCurlyBrace);
   }
 
   private PyExpressionTree parenthesized(AstNode atom) {
