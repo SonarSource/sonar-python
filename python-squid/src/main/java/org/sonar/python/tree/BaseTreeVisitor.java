@@ -69,6 +69,7 @@ import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -347,6 +348,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
 
   @Override
   public void visitStringLiteral(PyStringLiteralTree pyStringLiteralTree) {
+    scan(pyStringLiteralTree.stringElements());
+  }
+
+  @Override
+  public void visitStringElement(PyStringElementTree tree) {
     // noop
   }
 

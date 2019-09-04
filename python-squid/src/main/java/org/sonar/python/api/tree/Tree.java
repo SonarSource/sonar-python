@@ -121,6 +121,8 @@ public interface Tree {
 
     STRING_LITERAL(PyStringLiteralTree.class),
 
+    STRING_ELEMENT(PyStringElementTree.class),
+
     TRY_STMT(PyTryStatementTree.class),
 
     TYPED_ARG(PyTypedArgumentTree.class),

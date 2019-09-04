@@ -75,6 +75,7 @@ import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
 import org.sonar.python.api.tree.PyTypedArgumentTree;
@@ -601,9 +602,6 @@ public class PythonTreeMaker {
   }
 
   PyExpressionTree expression(AstNode astNode) {
-    if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
-      return expression(astNode.getFirstChild());
-    }
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LBRACKET)) {
       return listLiteral(astNode);
     }
@@ -613,14 +611,17 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LCURLYBRACE)) {
       return dictOrSetLiteral(astNode);
     }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonTokenType.STRING)) {
+      return stringLiteral(astNode);
+    }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
+      return expression(astNode.getFirstChild());
+    }
     if (astNode.is(PythonGrammar.TEST) && astNode.hasDirectChildren(PythonKeyword.IF)) {
       return conditionalExpression(astNode);
     }
     if (astNode.is(PythonTokenType.NUMBER)) {
       return numericLiteral(astNode);
-    }
-    if (astNode.is(PythonTokenType.STRING)) {
-      return stringLiteral(astNode);
     }
     if (astNode.is(PythonGrammar.YIELD_EXPR)) {
       return yieldExpression(astNode);
@@ -964,6 +965,7 @@ public class PythonTreeMaker {
   }
 
   private PyExpressionTree stringLiteral(AstNode astNode) {
-    return new PyStringLiteralTreeImpl(astNode);
+    List<PyStringElementTree> stringElements = astNode.getChildren(PythonTokenType.STRING).stream().map(PyStringElementImpl::new).collect(Collectors.toList());
+    return new PyStringLiteralTreeImpl(astNode, stringElements);
   }
 }

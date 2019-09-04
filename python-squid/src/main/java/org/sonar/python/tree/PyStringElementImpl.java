@@ -23,36 +23,65 @@ import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyStringElementTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyStringLiteralTreeImpl extends PyTree implements PyStringLiteralTree {
+public class PyStringElementImpl extends PyTree implements PyStringElementTree {
 
-  private final List<PyStringElementTree> stringElements;
+  private String value;
 
-  PyStringLiteralTreeImpl(AstNode node, List<PyStringElementTree> stringElements) {
+  PyStringElementImpl(AstNode node) {
     super(node);
-    this.stringElements = stringElements;
+    value = node.getTokenValue();
   }
 
   @Override
   public Kind getKind() {
-    return Kind.STRING_LITERAL;
+    return Kind.STRING_ELEMENT;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitStringLiteral(this);
+    visitor.visitStringElement(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(stringElements);
+    return Collections.emptyList();
   }
 
   @Override
-  public List<PyStringElementTree> stringElements() {
-    return stringElements;
+  public String value() {
+    return value;
+  }
+
+  @Override
+  public String trimmedQuotesValue() {
+    String trimmed = removePrefix(value);
+    // determine if string is using long string or short string format
+    int startIndex = 1;
+    if (isTripleQuote(trimmed)) {
+      startIndex = 3;
+    }
+    return trimmed.substring(startIndex, trimmed.length() - startIndex);
+  }
+
+  private static boolean isTripleQuote(String trimmed) {
+    if (trimmed.length() >= 6) {
+      char startChar = trimmed.charAt(0);
+      return startChar == trimmed.charAt(1) && startChar == trimmed.charAt(2);
+    }
+    return false;
+  }
+
+  private static String removePrefix(String value) {
+    if (isCharQuote(value.charAt(0))) {
+      return value;
+    }
+    return removePrefix(value.substring(1));
+  }
+
+  private static boolean isCharQuote(char character) {
+    return character == '\'' || character == '\"';
   }
 }

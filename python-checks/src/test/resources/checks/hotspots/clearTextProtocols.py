@@ -94,5 +94,11 @@ gravatar_url = u'http://www.gravatar.com/avatar/{0}?{1}'.format( # Noncompliant
     urllib.urlencode({'d': no_picture, 's': '256'})
 )
 
+# Noncompliant@+1
 config = "http://cens.ioc.ee/projects/f2py2e/2.x"\
-                                        "/F2PY-2-latest.tar.gz" #false negative, requires multiline string support
+                                        "/F2PY-2-latest.tar.gz"
+url_in_multiline = ("the url is:"
+                    "http://somedomain.com") # Noncompliant
+#                   ^^^^^^^^^^^^^^^^^^^^^^^
+url_in_multiline = ("the url is:"
+                    "http://somedomain.com") # Noncompliant

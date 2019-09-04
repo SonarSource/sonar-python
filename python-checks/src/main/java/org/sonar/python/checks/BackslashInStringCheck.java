@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1717")
@@ -32,8 +32,8 @@ public class BackslashInStringCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
-      PyStringLiteralTree pyStringLiteralTree = ((PyStringLiteralTree) ctx.syntaxNode());
+    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
+      PyStringElementTree pyStringLiteralTree = ((PyStringElementTree) ctx.syntaxNode());
       String string = pyStringLiteralTree.value();
       int length = string.length();
       boolean isEscaped = false;
@@ -42,10 +42,8 @@ public class BackslashInStringCheck extends PythonSubscriptionCheck {
       for (int i = 0; i < length; i++) {
         char c = string.charAt(i);
         inPrefix = isInPrefix(inPrefix, c);
-        if (inPrefix) {
-          if (c == 'r' || c == 'R') {
-            return;
-          }
+        if (isRawStringLiteral(inPrefix, c)) {
+          return;
         } else {
           if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1 && !isBackslashedSpaceAfterInlineMarkup(isThreeQuotes, string, i, c)) {
             ctx.addIssue(pyStringLiteralTree, MESSAGE);
@@ -74,5 +72,12 @@ public class BackslashInStringCheck extends PythonSubscriptionCheck {
 
   private static boolean isInPrefix(boolean wasInPrefix, char currentChar) {
     return wasInPrefix && currentChar != '"' && currentChar != '\'';
+  }
+
+  private static boolean isRawStringLiteral(boolean inPrefix, char c) {
+    if (inPrefix) {
+      return c == 'r' || c == 'R';
+    }
+    return false;
   }
 }

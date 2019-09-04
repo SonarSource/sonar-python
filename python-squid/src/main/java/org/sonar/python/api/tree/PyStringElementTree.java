@@ -19,9 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.List;
+public interface PyStringElementTree extends Tree {
+  /**
+   * @return the token value of this literal.
+   */
+  String value();
 
-public interface PyStringLiteralTree extends PyExpressionTree {
-
-  List<PyStringElementTree> stringElements();
+  String trimmedQuotesValue();
 }
