@@ -19,46 +19,41 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1717")
-public class BackslashInStringCheck extends PythonCheckAstNode {
+public class BackslashInStringCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove this \"\\\", add another \"\\\" to escape it, or make this a raw string.";
   private static final String VALID_ESCAPED_CHARACTERS = "abfnrtvxnNrtuU\\'\"0123456789\n\r";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonTokenType.STRING);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    String string = node.getTokenOriginalValue();
-    int length = string.length();
-    boolean isEscaped = false;
-    boolean inPrefix = true;
-    boolean isThreeQuotes = length > 5 && "\"\"".equals(string.substring(1, 3));
-    for (int i = 0; i < length; i++) {
-      char c = string.charAt(i);
-      inPrefix = isInPrefix(inPrefix, c);
-      if (inPrefix) {
-        if (c == 'r' || c == 'R') {
-          return;
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
+      PyStringLiteralTree pyStringLiteralTree = ((PyStringLiteralTree) ctx.syntaxNode());
+      String string = pyStringLiteralTree.value();
+      int length = string.length();
+      boolean isEscaped = false;
+      boolean inPrefix = true;
+      boolean isThreeQuotes = length > 5 && "\"\"".equals(string.substring(1, 3));
+      for (int i = 0; i < length; i++) {
+        char c = string.charAt(i);
+        inPrefix = isInPrefix(inPrefix, c);
+        if (inPrefix) {
+          if (c == 'r' || c == 'R') {
+            return;
+          }
+        } else {
+          if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1 && !isBackslashedSpaceAfterInlineMarkup(isThreeQuotes, string, i, c)) {
+            ctx.addIssue(pyStringLiteralTree, MESSAGE);
+          }
+          isEscaped = c == '\\' && !isEscaped;
         }
-      } else {
-        if (isEscaped && VALID_ESCAPED_CHARACTERS.indexOf(c) == -1 && !isBackslashedSpaceAfterInlineMarkup(isThreeQuotes, string, i, c)) {
-          addIssue(node, MESSAGE);
-        }
-        isEscaped = c == '\\' && !isEscaped;
       }
-    }
+    });
   }
 
   private static boolean isBackslashedSpaceAfterInlineMarkup(boolean isThreeQuotes, String string, int position, char current) {
@@ -80,6 +75,4 @@ public class BackslashInStringCheck extends PythonCheckAstNode {
   private static boolean isInPrefix(boolean wasInPrefix, char currentChar) {
     return wasInPrefix && currentChar != '"' && currentChar != '\'';
   }
-
 }
-
