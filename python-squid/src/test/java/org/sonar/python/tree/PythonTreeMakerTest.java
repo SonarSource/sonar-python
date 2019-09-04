@@ -1283,11 +1283,25 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void string_literal_expression() {
     setRootRule(PythonGrammar.ATOM);
-    PyExpressionTree parse = parse("\"plop\"", treeMaker::expression);
+    assertStringLiteral("''", "");
+    assertStringLiteral("'\"'", "\"");
+    assertStringLiteral("'\"\"\"\"\"'", "\"\"\"\"\"");
+    assertStringLiteral("\"plop\"", "plop");
+    assertStringLiteral("u\'plop\'", "plop");
+    assertStringLiteral("b\"abcdef\"", "abcdef");
+    assertStringLiteral("f\"\"\"Eric Idle\"\"\"", "Eric Idle");
+    assertStringLiteral("fr'x={4*10}'", "x={4*10}");
+    assertStringLiteral("f'He said his name is {name} and he is {age} years old.'", "He said his name is {name} and he is {age} years old.");
+    assertStringLiteral("f'''He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.'''",
+      "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.");
+  }
+
+  private void assertStringLiteral(String fullValue, String trimmedQuoteValue) {
+    PyExpressionTree parse = parse(fullValue, treeMaker::expression);
     assertThat(parse.is(Tree.Kind.STRING_LITERAL)).isTrue();
     PyStringLiteralTree stringLiteral = (PyStringLiteralTree) parse;
-    assertThat(stringLiteral.value()).isEqualTo("\"plop\"");
-    assertThat(stringLiteral.trimmedQuotesValue()).isEqualTo("plop");
+    assertThat(stringLiteral.value()).isEqualTo(fullValue);
+    assertThat(stringLiteral.trimmedQuotesValue()).isEqualTo(trimmedQuoteValue);
     assertThat(stringLiteral.children()).isEmpty();
   }
 

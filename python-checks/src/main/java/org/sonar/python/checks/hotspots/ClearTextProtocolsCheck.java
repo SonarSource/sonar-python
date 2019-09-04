@@ -38,7 +38,7 @@ import org.sonar.python.semantic.Symbol;
 @Rule(key = "S5332")
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final List<String> SENSITIVE_PROTOCOLS = Arrays.asList("http://", "ftp://", "telnet://");
-  private static final Pattern LOOPBACK = Pattern.compile("^localhost$|^127(?:\\.[0-9]+){0,2}\\.[0-9]+$|^(?:0*\\:)*?:?0*1$", Pattern.CASE_INSENSITIVE);
+  private static final Pattern LOOPBACK = Pattern.compile("localhost|127(?:\\.[0-9]+){0,2}\\.[0-9]+$|^(?:0*\\:)*?:?0*1", Pattern.CASE_INSENSITIVE);
   private static final Map<String, String> ALTERNATIVES = new HashMap<>();
 
   static {
@@ -59,7 +59,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
         .ifPresent(protocol -> ctx.addIssue(node, message(protocol)));
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      Symbol symbol = ctx.symbolTable().getSymbol(((PyCallExpressionTree) ctx.syntaxNode()));
+      Symbol symbol = ctx.symbolTable().getSymbol((PyCallExpressionTree) ctx.syntaxNode());
       isUnsafeLib(symbol).ifPresent(protocol -> ctx.addIssue(ctx.syntaxNode(), message(protocol)));
     });
   }
@@ -78,7 +78,10 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
             return Optional.empty();
           }
         } catch (URISyntaxException e) {
-          // not parseable uri
+          // not parseable uri, try to find loopback in the substring without protocol, this handles case of url formatted as string
+          if (LOOPBACK.matcher(literalValue.substring(protocol.length())).find()) {
+            return Optional.empty();
+          }
         }
         return Optional.of(protocol);
       }

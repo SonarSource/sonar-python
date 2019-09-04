@@ -57,6 +57,31 @@ public class PyStringLiteralTreeImpl extends PyTree implements PyStringLiteralTr
 
   @Override
   public String trimmedQuotesValue() {
-    return value.substring(1, value.length() - 1);
+    String trimmed = removePrefix(value);
+    // determine if string is using long string or short string format
+    int startIndex = 1;
+    if (isTripleQuote(trimmed)) {
+      startIndex = 3;
+    }
+    return trimmed.substring(startIndex, trimmed.length() - startIndex);
+  }
+
+  private boolean isTripleQuote(String trimmed) {
+    if (trimmed.length() >= 6) {
+      char startChar = trimmed.charAt(0);
+      return startChar == trimmed.charAt(1) && startChar == trimmed.charAt(2);
+    }
+    return false;
+  }
+
+  private static String removePrefix(String value) {
+    if (isCharQuote(value.charAt(0))) {
+      return value;
+    }
+    return removePrefix(value.substring(1));
+  }
+
+  private static boolean isCharQuote(char character) {
+    return character == '\'' || character == '\"';
   }
 }
