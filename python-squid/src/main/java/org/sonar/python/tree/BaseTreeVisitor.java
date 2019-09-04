@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
@@ -458,5 +459,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(tree.keyExpression());
     scan(tree.valueExpression());
     scan(tree.comprehensionFor());
+  }
+
+  @Override
+  public void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree) {
+    scan(pyCompoundAssignmentStatementTree.lhsExpression());
+    scan(pyCompoundAssignmentStatementTree.rhsExpression());
   }
 }

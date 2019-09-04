@@ -36,6 +36,7 @@ import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
@@ -154,6 +155,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("with foo, bar as qix : pass", PyWithStatementTree.class);
     testData.put("async with foo, bar as qix : pass", PyWithStatementTree.class);
     testData.put("x = y", PyAssignmentStatementTree.class);
+    testData.put("x += y", PyCompoundAssignmentStatementTree.class);
 
     testData.forEach((c,clazz) -> {
       PyFileInputTree pyTree = parse(c, treeMaker::fileInput);
@@ -783,6 +785,41 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(assigned.name()).isEqualTo("z");
     assertThat(lhs.name()).isEqualTo("x");
     assertThat(lhs2.name()).isEqualTo("y");
+  }
+
+  @Test
+  public void compound_assignement_statement() {
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    AstNode astNode = p.parse("x += y");
+    PyCompoundAssignmentStatementTree pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
+    assertThat(pyCompoundAssignmentStatement.children()).hasSize(2);
+    assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().getValue()).isEqualTo("+=");
+    assertThat(pyCompoundAssignmentStatement.lhsExpression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(pyCompoundAssignmentStatement.rhsExpression().getKind()).isEqualTo(Tree.Kind.NAME);
+
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    astNode = p.parse("x,y,z += 1");
+    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
+    assertThat(pyCompoundAssignmentStatement.children()).hasSize(2);
+    assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().getValue()).isEqualTo("+=");
+    assertThat(pyCompoundAssignmentStatement.lhsExpression().getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(pyCompoundAssignmentStatement.rhsExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    astNode = p.parse("x += yield y");
+    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
+    assertThat(pyCompoundAssignmentStatement.children()).hasSize(2);
+    assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().getValue()).isEqualTo("+=");
+    assertThat(pyCompoundAssignmentStatement.lhsExpression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(pyCompoundAssignmentStatement.rhsExpression().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
+
+    astNode = p.parse("x *= z");
+    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
+    assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().getValue()).isEqualTo("*=");
   }
 
   @Test

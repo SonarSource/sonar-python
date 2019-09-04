@@ -61,6 +61,8 @@ public interface Tree {
 
     CONTINUE_STMT(PyContinueStatementTree.class),
 
+    COMPOUND_ASSIGNMENT(PyCompoundAssignmentStatementTree.class),
+
     DICTIONARY_LITERAL(PyDictionaryLiteralTree.class),
 
     DEL_STMT(PyDelStatementTree.class),
