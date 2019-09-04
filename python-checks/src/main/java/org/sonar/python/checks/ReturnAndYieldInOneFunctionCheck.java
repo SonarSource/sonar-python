@@ -19,53 +19,52 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = ReturnAndYieldInOneFunctionCheck.CHECK_KEY)
-public class ReturnAndYieldInOneFunctionCheck extends PythonCheckAstNode {
-
-  public static final String MESSAGE = "Use only \"return\" or only \"yield\", not both.";
+public class ReturnAndYieldInOneFunctionCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "S2712";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree func = ((PyFunctionDefTree) ctx.syntaxNode());
+      ReturnAndYieldVisitor returnAndYieldVisitor = new ReturnAndYieldVisitor();
+      func.body().accept(returnAndYieldVisitor);
+
+      if (returnAndYieldVisitor.hasYield && returnAndYieldVisitor.hasReturn) {
+        ctx.addIssue(func.name(), "Use only \"return\" or only \"yield\", not both.");
+      }
+    });
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    List<AstNode> returnStatements = node.getDescendants(PythonGrammar.RETURN_STMT);
-    List<AstNode> yieldStatements = node.getDescendants(PythonGrammar.YIELD_STMT);
-    if (yieldStatements.isEmpty() || allInNestedFunction(yieldStatements, node)){
-      return;
+  private static class ReturnAndYieldVisitor extends BaseTreeVisitor {
+
+    private boolean hasYield = false;
+    private boolean hasReturn = false;
+
+    @Override
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      // Ignore nested function definitions
     }
-    for (AstNode returnStatement : returnStatements){
-      if (returnHasArgument(returnStatement) && CheckUtils.insideFunction(returnStatement, node)){
-        addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
-        return;
+
+    @Override
+    public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
+      if(!pyReturnStatementTree.expressions().isEmpty()) {
+        hasReturn = true;
       }
     }
-  }
 
-  private static boolean returnHasArgument(AstNode returnStatement) {
-    return returnStatement.getFirstChild(PythonGrammar.TESTLIST) != null;
-  }
-
-  private static boolean allInNestedFunction(List<AstNode> statements, AstNode func) {
-    for (AstNode statement : statements){
-      if (CheckUtils.insideFunction(statement, func)){
-        return false;
-      }
+    @Override
+    public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
+      hasYield = true;
     }
-    return true;
   }
 }
-
