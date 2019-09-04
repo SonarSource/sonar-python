@@ -134,4 +134,10 @@ public interface PyTreeVisitor {
   void visitComprehensionFor(PyComprehensionForTree tree);
 
   void visitComprehensionIf(PyComprehensionIfTree tree);
+
+  void visitDictionaryLiteral(PyDictionaryLiteralTree pyDictionaryLiteralTree);
+
+  void visitSetLiteral(PySetLiteralTree pySetLiteralTree);
+
+  void visitKeyValuePair(PyKeyValuePairTree pyKeyValuePairTree);
 }

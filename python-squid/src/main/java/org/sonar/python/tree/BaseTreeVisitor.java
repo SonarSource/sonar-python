@@ -35,6 +35,7 @@ import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
@@ -49,6 +50,7 @@ import org.sonar.python.api.tree.PyGlobalStatementTree;
 import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
+import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
@@ -61,6 +63,7 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PySetLiteralTree;
 import org.sonar.python.api.tree.PySliceExpressionTree;
 import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PySliceListTree;
@@ -425,5 +428,22 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitComprehensionIf(PyComprehensionIfTree tree) {
     scan(tree.condition());
     scan(tree.nestedClause());
+  }
+
+  @Override
+  public void visitDictionaryLiteral(PyDictionaryLiteralTree pyDictionaryLiteralTree) {
+    scan(pyDictionaryLiteralTree.elements());
+  }
+
+  @Override
+  public void visitSetLiteral(PySetLiteralTree pySetLiteralTree) {
+    scan((pySetLiteralTree.elements()));
+  }
+
+  @Override
+  public void visitKeyValuePair(PyKeyValuePairTree pyKeyValuePairTree) {
+    scan(pyKeyValuePairTree.expression());
+    scan(pyKeyValuePairTree.key());
+    scan(pyKeyValuePairTree.value());
   }
 }

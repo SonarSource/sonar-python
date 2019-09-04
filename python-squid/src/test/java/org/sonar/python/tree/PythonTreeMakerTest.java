@@ -41,6 +41,7 @@ import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -56,6 +57,7 @@ import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyImportStatementTree;
 import org.sonar.python.api.tree.PyInExpressionTree;
 import org.sonar.python.api.tree.PyIsExpressionTree;
+import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
@@ -68,6 +70,7 @@ import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PySetLiteralTree;
 import org.sonar.python.api.tree.PySliceExpressionTree;
 import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
@@ -1415,6 +1418,55 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(nestedConditionalExpressionTree.condition().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(nestedConditionalExpressionTree.trueExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
     assertThat(nestedConditionalExpressionTree.falseExpression().getKind()).isEqualTo(Tree.Kind.CONDITIONAL_EXPR);
+  }
+
+  @Test
+  public void dictionary_literal() {
+    setRootRule(PythonGrammar.ATOM);
+    PyDictionaryLiteralTree tree = (PyDictionaryLiteralTree) parse("{'key': 'value'}", treeMaker::expression);
+    assertThat(tree.getKind()).isEqualTo(Tree.Kind.DICTIONARY_LITERAL);
+    assertThat(tree.elements()).hasSize(1);
+    PyKeyValuePairTree keyValuePair = tree.elements().iterator().next();
+    assertThat(keyValuePair.getKind()).isEqualTo(Tree.Kind.KEY_VALUE_PAIR);
+    assertThat(keyValuePair.key().getKind()).isEqualTo(Tree.Kind.STRING_LITERAL);
+    assertThat(keyValuePair.colon().getValue()).isEqualTo(":");
+    assertThat(keyValuePair.value().getKind()).isEqualTo(Tree.Kind.STRING_LITERAL);
+    assertThat(tree.children()).hasSize(1);
+
+    tree = (PyDictionaryLiteralTree) parse("{'key': 'value', 'key2': 'value2'}", treeMaker::expression);
+    assertThat(tree.elements()).hasSize(2);
+
+    tree = (PyDictionaryLiteralTree) parse("{** var}", treeMaker::expression);
+    assertThat(tree.elements()).hasSize(1);
+    keyValuePair = tree.elements().iterator().next();
+    assertThat(keyValuePair.expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(keyValuePair.starStarToken().getValue()).isEqualTo("**");
+
+    tree = (PyDictionaryLiteralTree) parse("{** var, key: value}", treeMaker::expression);
+    assertThat(tree.elements()).hasSize(2);
+  }
+
+  @Test
+  public void set_literal() {
+    setRootRule(PythonGrammar.ATOM);
+    PySetLiteralTree tree = (PySetLiteralTree) parse("{ x }", treeMaker::expression);
+    assertThat(tree.getKind()).isEqualTo(Tree.Kind.SET_LITERAL);
+    assertThat(tree.elements()).hasSize(1);
+    PyExpressionTree element = tree.elements().iterator().next();
+    assertThat(element.getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(tree.lCurlyBrace().getValue()).isEqualTo("{");
+    assertThat(tree.rCurlyBrace().getValue()).isEqualTo("}");
+    assertThat(tree.commas()).hasSize(0);
+    assertThat(tree.children()).hasSize(1);
+
+    tree = (PySetLiteralTree) parse("{ x, y }", treeMaker::expression);
+    assertThat(tree.elements()).hasSize(2);
+
+    tree = (PySetLiteralTree) parse("{ *x }", treeMaker::expression);
+    assertThat(tree.elements()).hasSize(1);
+    element = tree.elements().iterator().next();
+    assertThat(element.getKind()).isEqualTo(Tree.Kind.STARRED_EXPR);
+
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
