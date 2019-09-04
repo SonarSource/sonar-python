@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -50,9 +50,9 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
+    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       Tree node = ctx.syntaxNode();
-      String value = ((PyStringLiteralTree) node).trimmedQuotesValue();
+      String value = ((PyStringElementTree) node).trimmedQuotesValue();
       unsafeProtocol(value)
         // cleanup slashes
         .map(protocol -> protocol.substring(0, protocol.length() - 3))

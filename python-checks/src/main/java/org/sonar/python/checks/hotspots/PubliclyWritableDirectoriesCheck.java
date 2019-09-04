@@ -30,6 +30,7 @@ import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.Tree.Kind;
@@ -49,11 +50,11 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ctx -> {
-      PyStringLiteralTree tree = (PyStringLiteralTree) ctx.syntaxNode();
-      String stringLiteral = tree.trimmedQuotesValue().toLowerCase(Locale.ENGLISH);
-      if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(dir -> containsDirectory(stringLiteral, dir)) ||
-        WINDOWS_WRITABLE_DIRECTORIES.matcher(stringLiteral).matches()) {
+    context.registerSyntaxNodeConsumer(Kind.STRING_ELEMENT, ctx -> {
+      PyStringElementTree tree = (PyStringElementTree) ctx.syntaxNode();
+      String stringElement = tree.trimmedQuotesValue().toLowerCase(Locale.ENGLISH);
+      if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(dir -> containsDirectory(stringElement, dir)) ||
+        WINDOWS_WRITABLE_DIRECTORIES.matcher(stringElement).matches()) {
         ctx.addIssue(tree, MESSAGE);
       }
     });
@@ -70,20 +71,20 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.SUBSCRIPTION, ctx -> {
       PySubscriptionExpressionTree tree = (PySubscriptionExpressionTree) ctx.syntaxNode();
       if (isOsEnvironQualifiedExpression(tree.object(), ctx.symbolTable()) && tree.subscripts().expressions().stream()
-          .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
+        .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }
     });
 
   }
 
-  private static boolean containsDirectory(String stringLiteral, String dir) {
-    return stringLiteral.startsWith(dir) || stringLiteral.equals(dir.substring(0, dir.length() - 1));
+  private static boolean containsDirectory(String stringElement, String dir) {
+    return stringElement.startsWith(dir) || stringElement.equals(dir.substring(0, dir.length() - 1));
   }
 
   private static boolean isNonCompliantOsEnvironArgument(PyExpressionTree expression) {
     return expression.is(Kind.STRING_LITERAL) &&
-      NONCOMPLIANT_ENVIRON_VARIABLES.contains(((PyStringLiteralTree) expression).trimmedQuotesValue().toLowerCase(Locale.ENGLISH));
+      ((PyStringLiteralTree) expression).stringElements().stream().map(s -> s.trimmedQuotesValue().toLowerCase(Locale.ENGLISH)).anyMatch(NONCOMPLIANT_ENVIRON_VARIABLES::contains);
   }
 
   // Could be either `os.environ.get` or `environ.get`

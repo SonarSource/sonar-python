@@ -24,3 +24,13 @@ z = "abc\\\\aaa"
 z = "*a*\ s" # Noncompliant
 z = """\ s""" # Noncompliant
 z = ""
+dictionary = {'x': '\&'} # Noncompliant
+dictionary = {'x': 'y'}
+multiline = ('Hello \ ' #Noncompliant
+            'world')
+multiline = (r'Hello '
+             '\ world') #Noncompliant
+multiline = ('Hello '
+            'World')
+list = ['Hello', '\ World'] #Noncompliant
+list = ['Hello', 'World']

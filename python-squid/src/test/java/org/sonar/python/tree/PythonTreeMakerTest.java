@@ -76,6 +76,7 @@ import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
@@ -1300,9 +1301,29 @@ public class PythonTreeMakerTest extends RuleTest {
     PyExpressionTree parse = parse(fullValue, treeMaker::expression);
     assertThat(parse.is(Tree.Kind.STRING_LITERAL)).isTrue();
     PyStringLiteralTree stringLiteral = (PyStringLiteralTree) parse;
-    assertThat(stringLiteral.value()).isEqualTo(fullValue);
-    assertThat(stringLiteral.trimmedQuotesValue()).isEqualTo(trimmedQuoteValue);
-    assertThat(stringLiteral.children()).isEmpty();
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    PyStringElementTree firstElement = stringLiteral.stringElements().get(0);
+    assertThat(firstElement.value()).isEqualTo(fullValue);
+    assertThat(firstElement.trimmedQuotesValue()).isEqualTo(trimmedQuoteValue);
+    assertThat(firstElement.children()).isEmpty();
+  }
+
+  @Test
+  public void multiline_string_literal_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyExpressionTree parse = parse("('Hello \\ ' #Noncompliant\n            'world')", treeMaker::expression);
+    assertThat(parse.is(Tree.Kind.PARENTHESIZED)).isTrue();
+    PyParenthesizedExpressionTree parenthesized = (PyParenthesizedExpressionTree) parse;
+    assertThat(parenthesized.expression().is(Tree.Kind.STRING_LITERAL)).isTrue();
+    PyStringLiteralTree pyStringLiteralTree = (PyStringLiteralTree) parenthesized.expression();
+    assertThat(pyStringLiteralTree.children()).hasSize(2);
+    assertThat(pyStringLiteralTree.stringElements().size()).isEqualTo(2);
+    assertThat(pyStringLiteralTree.stringElements().get(0).value()).isEqualTo("\'Hello \\ '");
+    PyStringElementTree firstElement = pyStringLiteralTree.stringElements().get(0);
+    PyStringElementTree secondElement = pyStringLiteralTree.stringElements().get(1);
+    assertThat(secondElement.value()).isEqualTo("'world'");
+    assertThat(firstElement.trimmedQuotesValue()).isEqualTo("Hello \\ ");
+    assertThat(secondElement.trimmedQuotesValue()).isEqualTo("world");
   }
 
   @Test
