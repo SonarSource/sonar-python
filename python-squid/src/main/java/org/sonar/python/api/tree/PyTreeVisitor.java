@@ -146,4 +146,6 @@ public interface PyTreeVisitor {
   void visitKeyValuePair(PyKeyValuePairTree pyKeyValuePairTree);
 
   void visitDictCompExpression(PyDictCompExpressionTreeImpl tree);
+
+  void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree);
 }

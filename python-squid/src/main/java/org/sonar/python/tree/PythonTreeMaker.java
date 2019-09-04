@@ -41,6 +41,7 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionClauseTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
@@ -161,6 +162,9 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonPunctuator.ASSIGN)) {
       return assignment(astNode);
+    }
+    if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonGrammar.AUGASSIGN)) {
+      return compoundAssignment(astNode);
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT)) {
       return expressionStatement(astNode);
@@ -494,6 +498,19 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new PyAssignmentStatementTreeImpl(astNode, assignTokens, lhsExpressions, expressions);
+  }
+
+  public PyCompoundAssignmentStatementTree compoundAssignment(AstNode astNode) {
+    AstNode augAssignNodes = astNode.getFirstChild(PythonGrammar.AUGASSIGN);
+    PyExpressionTree lhsExpression = exprListOrTestList(augAssignNodes.getPreviousSibling());
+    AstNode rhsAstNode = augAssignNodes.getNextSibling();
+    PyExpressionTree rhsExpression;
+    if (rhsAstNode.is(PythonGrammar.YIELD_EXPR)) {
+      rhsExpression = yieldExpression(rhsAstNode);
+    } else {
+      rhsExpression = exprListOrTestList(rhsAstNode);
+    }
+    return new PyCompoundAssignmentStatementTreeImpl(astNode,lhsExpression, augAssignNodes.getToken(), rhsExpression);
   }
 
   private PyExpressionListTree expressionList(AstNode astNode) {
