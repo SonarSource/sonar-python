@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAliasedNameTree;
@@ -433,12 +432,12 @@ public class BaseTreeVisitor implements PyTreeVisitor {
 
   @Override
   public void visitDictionaryLiteral(PyDictionaryLiteralTree pyDictionaryLiteralTree) {
-    scan(new ArrayList<>(pyDictionaryLiteralTree.elements()));
+    scan(pyDictionaryLiteralTree.elements());
   }
 
   @Override
   public void visitSetLiteral(PySetLiteralTree pySetLiteralTree) {
-    scan(new ArrayList<>(pySetLiteralTree.elements()));
+    scan((pySetLiteralTree.elements()));
   }
 
   @Override

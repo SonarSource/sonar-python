@@ -24,9 +24,7 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -676,7 +674,7 @@ public class PythonTreeMaker {
     Token rCurlyBrace = astNode.getLastChild(PythonPunctuator.RCURLYBRACE).getToken();
     AstNode dictOrSetMaker = astNode.getFirstChild(PythonGrammar.DICTORSETMAKER);
     if (dictOrSetMaker == null) {
-      return new PyDictionaryLiteralTreeImpl(astNode, lCurlyBrace, Collections.emptyList(), Collections.emptySet(), rCurlyBrace);
+      return new PyDictionaryLiteralTreeImpl(astNode, lCurlyBrace, Collections.emptyList(), Collections.emptyList(), rCurlyBrace);
     }
     if (dictOrSetMaker.hasDirectChildren(PythonGrammar.COMP_FOR)) {
       // TODO: dictionary comprehension and set comprehension
@@ -684,7 +682,7 @@ public class PythonTreeMaker {
     }
     List<Token> commas = dictOrSetMaker.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList());
     if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON) || dictOrSetMaker.hasDirectChildren(PythonPunctuator.MUL_MUL)) {
-      Set<PyKeyValuePairTree> keyValuePairTrees = new HashSet<>();
+      List<PyKeyValuePairTree> keyValuePairTrees = new ArrayList<>();
       List<AstNode> children = dictOrSetMaker.getChildren();
       int index = 0;
       while (index < children.size()) {
@@ -699,7 +697,7 @@ public class PythonTreeMaker {
       }
       return new PyDictionaryLiteralTreeImpl(astNode, lCurlyBrace, commas, keyValuePairTrees, rCurlyBrace);
     }
-    Set<PyExpressionTree> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toSet());
+    List<PyExpressionTree> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toList());
     return new PySetLiteralTreeImpl(astNode, lCurlyBrace, expressions, commas, rCurlyBrace);
   }
 

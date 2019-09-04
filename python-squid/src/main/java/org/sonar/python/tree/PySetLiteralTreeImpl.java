@@ -21,24 +21,23 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PySetLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PySetLiteralTreeImpl extends PyDictOrSetLiteralTreeImpl implements PySetLiteralTree {
-  private final Set<PyExpressionTree> elements;
+  private final List<PyExpressionTree> elements;
 
-  public PySetLiteralTreeImpl(AstNode node, Token lCurlyBrace, Set<PyExpressionTree> elements, List<Token> commas, Token rCurlyBrace) {
+  public PySetLiteralTreeImpl(AstNode node, Token lCurlyBrace, List<PyExpressionTree> elements, List<Token> commas, Token rCurlyBrace) {
     super(node, lCurlyBrace, commas, rCurlyBrace);
     this.elements = elements;
   }
 
   @Override
-  public Set<PyExpressionTree> elements() {
+  public List<PyExpressionTree> elements() {
     return elements;
   }
 
@@ -49,7 +48,7 @@ public class PySetLiteralTreeImpl extends PyDictOrSetLiteralTreeImpl implements 
 
   @Override
   public List<Tree> children() {
-    return new ArrayList<>(elements());
+    return elements.stream().map(element -> (Tree) element).collect(Collectors.toList());
   }
 
   @Override

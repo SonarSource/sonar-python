@@ -21,9 +21,8 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -31,15 +30,15 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyDictionaryLiteralTreeImpl extends PyDictOrSetLiteralTreeImpl implements PyDictionaryLiteralTree {
 
-  private final Set<PyKeyValuePairTree> elements;
+  private final List<PyKeyValuePairTree> elements;
 
-  public PyDictionaryLiteralTreeImpl(AstNode node, Token lCurlyBrace, List<Token> commas, Set<PyKeyValuePairTree> elements, Token rCurlyBrace) {
+  public PyDictionaryLiteralTreeImpl(AstNode node, Token lCurlyBrace, List<Token> commas, List<PyKeyValuePairTree> elements, Token rCurlyBrace) {
     super(node, lCurlyBrace, commas, rCurlyBrace);
     this.elements = elements;
   }
 
   @Override
-  public Set<PyKeyValuePairTree> elements() {
+  public List<PyKeyValuePairTree> elements() {
     return elements;
   }
 
@@ -50,7 +49,7 @@ public class PyDictionaryLiteralTreeImpl extends PyDictOrSetLiteralTreeImpl impl
 
   @Override
   public List<Tree> children() {
-    return new ArrayList<>(elements);
+    return elements.stream().map(element -> (Tree) element).collect(Collectors.toList());
   }
 
   @Override

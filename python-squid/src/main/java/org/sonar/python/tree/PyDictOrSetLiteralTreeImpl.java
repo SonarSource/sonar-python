@@ -22,9 +22,8 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.List;
-import org.sonar.python.api.tree.PyDictOrSetLiteralTree;
 
-public abstract class PyDictOrSetLiteralTreeImpl extends PyTree implements PyDictOrSetLiteralTree {
+public abstract class PyDictOrSetLiteralTreeImpl extends PyTree {
   private final Token lCurlyBrace;
   private final List<Token> commas;
   private final Token rCurlyBrace;
@@ -36,17 +35,14 @@ public abstract class PyDictOrSetLiteralTreeImpl extends PyTree implements PyDic
     this.rCurlyBrace = rCurlyBrace;
   }
 
-  @Override
   public Token lCurlyBrace() {
     return lCurlyBrace;
   }
 
-  @Override
   public Token rCurlyBrace() {
     return rCurlyBrace;
   }
 
-  @Override
   public List<Token> commas() {
     return commas;
   }
