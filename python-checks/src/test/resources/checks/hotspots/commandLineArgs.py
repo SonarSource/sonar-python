@@ -23,3 +23,8 @@ def builtins():
 def optparse_test():
     OptionParser() # Noncompliant
     optparse.OptionParser() # Noncompliant
+
+
+@metrics.countMethod('AbstractBuildSlave.attached()')
+def attached(self, bot):
+  pass

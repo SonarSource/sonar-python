@@ -19,39 +19,43 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.checks.AbstractCallExpressionCheck2;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = CommandLineArgsCheck.CHECK_KEY)
-public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
+public class CommandLineArgsCheck extends AbstractCallExpressionCheck2 {
   public static final String CHECK_KEY = "S4823";
   private static final String MESSAGE = "Make sure that command line arguments are used safely here.";
   private static final Set<String> questionableFunctions = immutableSet("argparse.ArgumentParser", "optparse.OptionParser");
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkSysArgNode);
+    super.initialize(context);
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM)) {
-      if (isSysArgvNode(node)) {
-        addIssue(node, MESSAGE);
-      }
-    } else {
-      super.visitNode(node);
+  private void checkSysArgNode(SubscriptionContext ctx) {
+    Tree node = ctx.syntaxNode();
+    Tree parent = node.parent();
+    Symbol symbol = ctx.symbolTable().getSymbol((PyNameTree) node);
+    if (symbol == null && parent != null) {
+      symbol = ctx.symbolTable().getSymbol(parent.astNode());
+      node = parent;
     }
-  }
-
-  private boolean isSysArgvNode(AstNode attributeRef) {
-    Symbol symbol = getContext().symbolTable().getSymbol(attributeRef);
-    return symbol != null && symbol.qualifiedName().equals("sys.argv");
+    if (symbol != null && symbol.qualifiedName().equals("sys.argv")) {
+      while (parent != null) {
+        if (parent.is(Tree.Kind.IMPORT_NAME) || parent.is(Tree.Kind.IMPORT_FROM)) {
+          return;
+        }
+        parent = parent.parent();
+      }
+      ctx.addIssue(node, MESSAGE);
+    }
   }
 
   @Override
