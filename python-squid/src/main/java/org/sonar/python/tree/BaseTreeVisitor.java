@@ -452,4 +452,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyKeyValuePairTree.key());
     scan(pyKeyValuePairTree.value());
   }
+
+  @Override
+  public void visitDictCompExpression(PyDictCompExpressionTreeImpl tree) {
+    scan(tree.keyExpression());
+    scan(tree.valueExpression());
+    scan(tree.comprehensionFor());
+  }
 }

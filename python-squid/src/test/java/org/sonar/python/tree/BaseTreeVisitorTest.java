@@ -33,6 +33,7 @@ import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyDictCompExpressionTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
@@ -299,6 +300,18 @@ public class BaseTreeVisitorTest extends RuleTest {
 
     PyComprehensionIfTree ifClause = (PyComprehensionIfTree) forClause.nestedClause();
     verify(visitor).visitCallExpression((PyCallExpressionTree) ifClause.condition());
+  }
+
+  @Test
+  public void dict_comprehension() {
+    setRootRule(PythonGrammar.TEST);
+    PyDictCompExpressionTree expr = (PyDictCompExpressionTree) parse("{x+1:y-1 for x,y in map}", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+
+    verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.keyExpression());
+    verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.valueExpression());
+    verify(visitor).visitComprehensionFor(expr.comprehensionFor());
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
