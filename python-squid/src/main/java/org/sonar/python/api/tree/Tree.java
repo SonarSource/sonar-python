@@ -145,6 +145,7 @@ public interface Tree {
 
     TUPLE(PyTupleTree.class),
 
+    DICT_COMPREHENSION(PyDictCompExpressionTree.class),
     LIST_COMPREHENSION(PyListOrSetCompExpressionTree.class),
     SET_COMPREHENSION(PyListOrSetCompExpressionTree.class),
     COMP_FOR(PyComprehensionForTree.class),

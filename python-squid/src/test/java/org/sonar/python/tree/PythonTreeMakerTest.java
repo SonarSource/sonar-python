@@ -41,6 +41,7 @@ import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyDictCompExpressionTree;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
@@ -1458,6 +1459,21 @@ public class PythonTreeMakerTest extends RuleTest {
 
     tree = (PyDictionaryLiteralTree) parse("{** var, key: value}", treeMaker::expression);
     assertThat(tree.elements()).hasSize(2);
+  }
+
+  @Test
+  public void dict_comprehension() {
+    setRootRule(PythonGrammar.TEST);
+    PyDictCompExpressionTree comprehension =
+      (PyDictCompExpressionTree) parse("{x-1:y+1 for x,y in [(42,43)]}", treeMaker::expression);
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.DICT_COMPREHENSION);
+    assertThat(comprehension.colonToken().getValue()).isEqualTo(":");
+    assertThat(comprehension.keyExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
+    assertThat(comprehension.valueExpression().getKind()).isEqualTo(Tree.Kind.PLUS);
+    assertThat(comprehension.comprehensionFor().loopExpression().getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(comprehension.children()).hasSize(3);
+    assertThat(comprehension.firstToken().getValue()).isEqualTo("{");
+    assertThat(comprehension.lastToken().getValue()).isEqualTo("}");
   }
 
   @Test

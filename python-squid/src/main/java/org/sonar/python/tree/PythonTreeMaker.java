@@ -678,12 +678,15 @@ public class PythonTreeMaker {
     }
     AstNode compForNode = dictOrSetMaker.getFirstChild(PythonGrammar.COMP_FOR);
     if (compForNode != null) {
-      if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON)) {
-        // TODO: dictionary comprehension
-        return new PyExpressionTreeImpl(astNode);
+      PyComprehensionForTree compFor = compFor(compForNode);
+      AstNode colon = dictOrSetMaker.getFirstChild(PythonPunctuator.COLON);
+      if (colon != null) {
+        PyExpressionTree keyExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.TEST));
+        PyExpressionTree valueExpression = expression(dictOrSetMaker.getLastChild(PythonGrammar.TEST));
+        return new PyDictCompExpressionTreeImpl(lCurlyBrace, keyExpression, colon.getToken(), valueExpression, compFor, rCurlyBrace);
       } else {
         PyExpressionTree resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
-        return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor(compForNode), rCurlyBrace);
+        return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor, rCurlyBrace);
       }
     }
     List<Token> commas = dictOrSetMaker.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList());

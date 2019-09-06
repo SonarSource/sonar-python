@@ -19,6 +19,8 @@
  */
 package org.sonar.python.api.tree;
 
+import org.sonar.python.tree.PyDictCompExpressionTreeImpl;
+
 public interface PyTreeVisitor {
 
   void visitFileInput(PyFileInputTree pyFileInputTree);
@@ -140,4 +142,6 @@ public interface PyTreeVisitor {
   void visitSetLiteral(PySetLiteralTree pySetLiteralTree);
 
   void visitKeyValuePair(PyKeyValuePairTree pyKeyValuePairTree);
+
+  void visitDictCompExpression(PyDictCompExpressionTreeImpl tree);
 }
