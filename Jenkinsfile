@@ -54,7 +54,7 @@ pipeline {
           steps {
             withMaven(maven: MAVEN_TOOL) {
               mavenSetBuildVersion()
-              runMaven(JDK_VERSION,"clean install -Dskip.its=true")
+              runMaven(JDK_VERSION,"clean install -e -B -V -Dskip.its=true", '-Dmaven.test.redirectTestOutputToFile=false')
             }
           }
          }
