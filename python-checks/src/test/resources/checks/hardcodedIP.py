@@ -68,7 +68,7 @@ url = "https://[3FFE:1A05:510:1111:0:5EFE:131.107.129.8]:8080/" # Noncompliant
 "http://[::0]:100/"
 "0000:0000:0000:0000:0000:0000:0000:0000"
 ''
-'''http://123.1.1.1'''  # multiline strings are not considered
+'''http://123.1.1.1'''  # Noncompliant - triple quoted but not multiline
 
 '''123.1.1.1
 some long message with ip address inside is compliant'''
