@@ -1278,6 +1278,17 @@ public class PythonTreeMakerTest extends RuleTest {
     lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(1);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
+
+    lambdaExpressionTree = parse("lambda *a, **b: 42", treeMaker::lambdaExpression);
+    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(2);
+    PyTypedArgumentTree starArg = lambdaExpressionTree.arguments().arguments().get(0);
+    assertThat(starArg.starToken().getValue()).isEqualTo("*");
+    assertThat(starArg.starStarToken()).isNull();
+    assertThat(((PyNameTree) starArg.expression()).name()).isEqualTo("a");
+    PyTypedArgumentTree starStarArg = lambdaExpressionTree.arguments().arguments().get(1);
+    assertThat(starStarArg.starToken()).isNull();
+    assertThat(starStarArg.starStarToken().getValue()).isEqualTo("**");
+    assertThat(((PyNameTree) starStarArg.expression()).name()).isEqualTo("b");
   }
 
   @Test
