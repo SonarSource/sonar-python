@@ -1480,7 +1480,18 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tree.elements()).hasSize(1);
     element = tree.elements().iterator().next();
     assertThat(element.getKind()).isEqualTo(Tree.Kind.STARRED_EXPR);
+  }
 
+  @Test
+  public void set_comprehension() {
+    setRootRule(PythonGrammar.TEST);
+    PyListOrSetCompExpressionTree comprehension =
+      (PyListOrSetCompExpressionTree) parse("{x-1 for x in [42, 43]}", treeMaker::expression);
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.SET_COMPREHENSION);
+    assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
+    assertThat(comprehension.children()).hasSize(2);
+    assertThat(comprehension.firstToken().getValue()).isEqualTo("{");
+    assertThat(comprehension.lastToken().getValue()).isEqualTo("}");
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {

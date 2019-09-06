@@ -30,11 +30,14 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyListOrSetCompExpressionTreeImpl extends PyTree implements PyListOrSetCompExpressionTree {
 
+  private final Kind kind;
   private final PyExpressionTree resultExpression;
   private final PyComprehensionForTree comprehensionFor;
 
-  public PyListOrSetCompExpressionTreeImpl(Token openingToken, PyExpressionTree resultExpression, PyComprehensionForTree compFor, Token closingToken) {
+  public PyListOrSetCompExpressionTreeImpl(Kind kind, Token openingToken, PyExpressionTree resultExpression,
+                                           PyComprehensionForTree compFor, Token closingToken) {
     super(openingToken, closingToken);
+    this.kind = kind;
     this.resultExpression = resultExpression;
     this.comprehensionFor = compFor;
   }
@@ -61,6 +64,6 @@ public class PyListOrSetCompExpressionTreeImpl extends PyTree implements PyListO
 
   @Override
   public Kind getKind() {
-    return Kind.LIST_COMPREHENSION;
+    return kind;
   }
 }

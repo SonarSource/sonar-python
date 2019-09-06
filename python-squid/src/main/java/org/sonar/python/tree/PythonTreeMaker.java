@@ -676,9 +676,15 @@ public class PythonTreeMaker {
     if (dictOrSetMaker == null) {
       return new PyDictionaryLiteralTreeImpl(astNode, lCurlyBrace, Collections.emptyList(), Collections.emptyList(), rCurlyBrace);
     }
-    if (dictOrSetMaker.hasDirectChildren(PythonGrammar.COMP_FOR)) {
-      // TODO: dictionary comprehension and set comprehension
-      return new PyExpressionTreeImpl(astNode);
+    AstNode compForNode = dictOrSetMaker.getFirstChild(PythonGrammar.COMP_FOR);
+    if (compForNode != null) {
+      if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON)) {
+        // TODO: dictionary comprehension
+        return new PyExpressionTreeImpl(astNode);
+      } else {
+        PyExpressionTree resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
+        return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor(compForNode), rCurlyBrace);
+      }
     }
     List<Token> commas = dictOrSetMaker.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList());
     if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON) || dictOrSetMaker.hasDirectChildren(PythonPunctuator.MUL_MUL)) {
@@ -826,7 +832,7 @@ public class PythonTreeMaker {
       AstNode compForNode = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
       if (compForNode != null) {
         PyExpressionTree resultExpression = expression(testListComp.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
-        return new PyListOrSetCompExpressionTreeImpl(leftBracket, resultExpression, compFor(compForNode), rightBracket);
+        return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.LIST_COMPREHENSION, leftBracket, resultExpression, compFor(compForNode), rightBracket);
       }
       elements = expressionList(testListComp);
     } else {
