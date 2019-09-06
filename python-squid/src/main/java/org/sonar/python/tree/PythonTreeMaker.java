@@ -420,7 +420,7 @@ public class PythonTreeMaker {
     PyTypedArgListTree typedArgs = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (typedArgListNode != null) {
-      List<PyTypedArgumentTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF, PythonGrammar.NAME).stream()
+      List<PyTypedArgumentTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
         .map(this::typedArgument).collect(Collectors.toList());
       typedArgs = new PyTypedArgListTreeImpl(typedArgListNode, arguments);
     }
