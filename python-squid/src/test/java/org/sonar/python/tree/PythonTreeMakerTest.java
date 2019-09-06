@@ -1497,16 +1497,20 @@ public class PythonTreeMakerTest extends RuleTest {
     assertStringLiteral("'\"'", "\"");
     assertStringLiteral("'\"\"\"\"\"'", "\"\"\"\"\"");
     assertStringLiteral("\"plop\"", "plop");
-    assertStringLiteral("u\'plop\'", "plop");
-    assertStringLiteral("b\"abcdef\"", "abcdef");
-    assertStringLiteral("f\"\"\"Eric Idle\"\"\"", "Eric Idle");
-    assertStringLiteral("fr'x={4*10}'", "x={4*10}");
-    assertStringLiteral("f'He said his name is {name} and he is {age} years old.'", "He said his name is {name} and he is {age} years old.");
+    assertStringLiteral("u\'plop\'", "plop", "u");
+    assertStringLiteral("b\"abcdef\"", "abcdef", "b");
+    assertStringLiteral("f\"\"\"Eric Idle\"\"\"", "Eric Idle", "f");
+    assertStringLiteral("fr'x={4*10}'", "x={4*10}", "fr");
+    assertStringLiteral("f'He said his name is {name} and he is {age} years old.'", "He said his name is {name} and he is {age} years old.", "f");
     assertStringLiteral("f'''He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.'''",
-      "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.");
+      "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.", "f");
   }
 
   private void assertStringLiteral(String fullValue, String trimmedQuoteValue) {
+    assertStringLiteral(fullValue, trimmedQuoteValue, "");
+  }
+
+  private void assertStringLiteral(String fullValue, String trimmedQuoteValue, String prefix) {
     PyExpressionTree parse = parse(fullValue, treeMaker::expression);
     assertThat(parse.is(Tree.Kind.STRING_LITERAL)).isTrue();
     PyStringLiteralTree stringLiteral = (PyStringLiteralTree) parse;
@@ -1514,6 +1518,7 @@ public class PythonTreeMakerTest extends RuleTest {
     PyStringElementTree firstElement = stringLiteral.stringElements().get(0);
     assertThat(firstElement.value()).isEqualTo(fullValue);
     assertThat(firstElement.trimmedQuotesValue()).isEqualTo(trimmedQuoteValue);
+    assertThat(firstElement.prefix()).isEqualTo(prefix);
     assertThat(firstElement.children()).isEmpty();
   }
 

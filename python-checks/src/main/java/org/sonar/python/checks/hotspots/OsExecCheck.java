@@ -19,17 +19,19 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.checks.AbstractCallExpressionCheck2;
 
 @Rule(key = OsExecCheck.CHECK_KEY)
-public class OsExecCheck extends AbstractCallExpressionCheck {
+public class OsExecCheck extends AbstractCallExpressionCheck2 {
 
   public static final String CHECK_KEY = "S4721";
   private static final String MESSAGE = "Make sure that executing this OS command is safe here.";
 
-  private static final Set<String> questionableFunctions = immutableSet("subprocess.run",
+  private static final Set<String> questionableFunctions = new HashSet<>(Arrays.asList("subprocess.run",
     "subprocess.Popen",
     "subprocess.call",
     "subprocess.check_call",
@@ -61,7 +63,7 @@ public class OsExecCheck extends AbstractCallExpressionCheck {
     "popen2.popen2",
     "popen2.popen3",
     "popen2.popen4"
-  );
+  ));
 
   @Override
   protected Set<String> functionsToCheck() {
