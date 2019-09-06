@@ -81,3 +81,18 @@ url = "http://0000:0:0000::0001" # Compliant
 url = "http://0000:0:0000::1" # Compliant
 url = "http://0::0:1" # Compliant
 url = "ftp://user@localhost" # Compliant
+
+self.server_url = 'http://127.0.0.1:%s' % self.server.port # compliant, loopback
+def get_url(self, path):
+        return "http://127.0.0.1:%d%s" % (self.port, path) # compliant, loopback
+
+data = self.urlopen("http://localhost:%s/" % handler.port) # compliant, loopback
+
+
+gravatar_url = u'http://www.gravatar.com/avatar/{0}?{1}'.format( # Noncompliant
+    hashlib.md5(self.user.email.lower()).hexdigest(),
+    urllib.urlencode({'d': no_picture, 's': '256'})
+)
+
+config = "http://cens.ioc.ee/projects/f2py2e/2.x"\
+                                        "/F2PY-2-latest.tar.gz" #false negative, requires multiline string support
