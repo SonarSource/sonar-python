@@ -45,6 +45,7 @@ import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
+import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
@@ -111,10 +112,13 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void fundef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
-    PyFunctionDefTree pyFunctionDefTree = parse("def foo(): pass", treeMaker::funcDefStatement);
+    PyFunctionDefTree pyFunctionDefTree = parse("def foo(x:int): pass", treeMaker::funcDefStatement);
+    PyParameterTree parameter = pyFunctionDefTree.typedArgs().arguments().get(0);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitFunctionDef(pyFunctionDefTree);
     verify(visitor).visitName(pyFunctionDefTree.name());
+    verify(visitor).visitParameter(parameter);
+    verify(visitor).visitTypeAnnotation(parameter.typeAnnotation());
     verify(visitor).visitPassStatement((PyPassStatementTree) pyFunctionDefTree.body().statements().get(0));
   }
 
@@ -210,7 +214,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitLambda(tree);
     verify(visitor).visitTypedArgList(tree.arguments());
-    verify(visitor).visitTypeArgument(tree.arguments().arguments().get(0));
+    verify(visitor).visitParameter(tree.arguments().arguments().get(0));
   }
 
   @Test

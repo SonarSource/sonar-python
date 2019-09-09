@@ -78,8 +78,9 @@ import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.PyTypedArgListTree;
-import org.sonar.python.api.tree.PyTypedArgumentTree;
+import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
@@ -420,7 +421,7 @@ public class PythonTreeMaker {
     PyTypedArgListTree typedArgs = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (typedArgListNode != null) {
-      List<PyTypedArgumentTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
+      List<PyParameterTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
         .map(this::typedArgument).collect(Collectors.toList());
       typedArgs = new PyTypedArgListTreeImpl(typedArgListNode, arguments);
     }
@@ -981,7 +982,7 @@ public class PythonTreeMaker {
     AstNode varArgsListNode = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
     PyTypedArgListTree argListTree = null;
     if (varArgsListNode != null) {
-      List<PyTypedArgumentTree> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME).stream()
+      List<PyParameterTree> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME).stream()
         .map(this::typedArgument).collect(Collectors.toList());
       argListTree = new PyTypedArgListTreeImpl(varArgsListNode, parameters);
     }
@@ -989,25 +990,40 @@ public class PythonTreeMaker {
     return new PyLambdaExpressionTreeImpl(astNode, lambdaKeyword, colonToken, body, argListTree);
   }
 
-  private PyTypedArgumentTreeImpl typedArgument(AstNode parameter) {
+  private PyParameterTree typedArgument(AstNode parameter) {
+    AstNode prevSibling = parameter.getPreviousSibling();
+
     if (parameter.is(PythonGrammar.NAME)) {
-      AstNode star = null;
-      AstNode starStar = null;
-      if (parameter.getPreviousSibling().is(PythonPunctuator.MUL)) {
-        star = parameter.getPreviousSibling();
-      } else {
-        starStar = parameter.getPreviousSibling();
-      }
-      return new PyTypedArgumentTreeImpl(parameter, null, expression(parameter), null, star, starStar);
+      return new PyParameterTreeImpl(parameter, prevSibling.getToken(), name(parameter), null, null, null);
     }
+
     // parameter is FPDEF or TFPDEF
-    AstNode nextSibling = parameter.getNextSibling();
-    if (nextSibling != null && nextSibling.is(PythonPunctuator.ASSIGN)) {
-      // Keyword in argument list must be an identifier.
-      AstNode nameNode = parameter.getFirstChild(PythonGrammar.NAME);
-      return new PyTypedArgumentTreeImpl(parameter, name(nameNode), expression(nextSibling.getNextSibling()), nextSibling.getToken(), null, null);
+
+    Token starOrStarStar = null;
+    if (prevSibling != null && prevSibling.is(PythonPunctuator.MUL, PythonPunctuator.MUL_MUL)) {
+      starOrStarStar = prevSibling.getToken();
     }
-    return new PyTypedArgumentTreeImpl(parameter, null, expression(parameter), null, null, null);
+
+    // TODO TFPLIST/FPLIST: Python 2 only (PEP 3113: Tuple parameter unpacking removed)
+    AstNode nameNode = parameter.getFirstChild(PythonGrammar.NAME);
+    PyNameTree name = nameNode == null ? null : name(nameNode);
+
+    AstNode nextSibling = parameter.getNextSibling();
+    Token assignToken = null;
+    PyExpressionTree defaultValue = null;
+    if (nextSibling != null && nextSibling.is(PythonPunctuator.ASSIGN)) {
+      assignToken = nextSibling.getToken();
+      defaultValue = expression(nextSibling.getNextSibling());
+    }
+
+    PyTypeAnnotationTree typeAnnotation = null;
+    AstNode testNode = parameter.getFirstChild(PythonGrammar.TEST);
+    if (testNode != null) {
+      Token colonToken = parameter.getFirstChild(PythonPunctuator.COLON).getToken();
+      typeAnnotation = new PyTypeAnnotationTreeImpl(colonToken, expression(testNode));
+    }
+
+    return new PyParameterTreeImpl(parameter, starOrStarStar, name, typeAnnotation, assignToken, defaultValue);
   }
 
   private PyExpressionTree numericLiteral(AstNode astNode) {

@@ -19,52 +19,45 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyTypedArgumentTree;
+import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
 
-public class PyTypedArgumentTreeImpl extends PyArgumentTreeImpl implements PyTypedArgumentTree {
+public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotationTree {
 
-  private final PyNameTree type;
+  private final PyExpressionTree expression;
 
-  public PyTypedArgumentTreeImpl(AstNode node, PyNameTree keywordArgument, PyExpressionTree expression, Token equalToken, AstNode star, AstNode starStar) {
-    super(node, keywordArgument, expression, equalToken, star, starStar);
-    this.type = null;
-  }
-
-  public PyTypedArgumentTreeImpl(AstNode node, PyNameTree keywordArgument, PyExpressionTree expression, Token equalToken, AstNode star, AstNode starStar, PyNameTree type) {
-    super(node, keywordArgument, expression, equalToken, star, starStar);
-    this.type = type;
+  public PyTypeAnnotationTreeImpl(Token colonToken, PyExpressionTree expression) {
+    super(colonToken, expression.lastToken());
+    this.expression = expression;
   }
 
   @Override
-  public Kind getKind() {
-    return Kind.TYPED_ARG;
+  public Token colonToken() {
+    return firstToken();
+  }
+
+  @Override
+  public PyExpressionTree expression() {
+    return expression;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitTypeArgument(this);
-    super.accept(visitor);
-  }
-
-  @Override
-  @CheckForNull
-  public PyNameTree type() {
-    return type;
+    visitor.visitTypeAnnotation(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Stream.of(super.children(), Collections.singletonList(type)).flatMap(List::stream).collect(Collectors.toList());
+    return Collections.singletonList(expression);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.TYPE_ANNOTATION;
   }
 }
