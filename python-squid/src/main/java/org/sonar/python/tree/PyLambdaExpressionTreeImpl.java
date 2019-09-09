@@ -29,7 +29,7 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.Tree;
 
-public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements PyLambdaExpressionTree {
+public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpressionTree {
   private final Token lambdaKeyword;
   private final Token colonToken;
   private final PyExpressionTree body;
