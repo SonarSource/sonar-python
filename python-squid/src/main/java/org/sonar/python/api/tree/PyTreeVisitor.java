@@ -101,6 +101,8 @@ public interface PyTreeVisitor {
 
   void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree);
 
+  void visitArgumentList(PyArgListTree pyArgListTree);
+
   void visitTypedArgList(PyTypedArgListTree pyTypedArgListTree);
 
   void visitTypeArgument(PyTypedArgumentTree pyTypedArgumentTree);

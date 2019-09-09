@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
 import org.sonar.check.Rule;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 

@@ -42,7 +42,7 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree pyFunctionDefTree = ((PyFunctionDefTree) ctx.syntaxNode());
+      PyFunctionDefTree pyFunctionDefTree = (PyFunctionDefTree) ctx.syntaxNode();
       if (!shouldCheckFunctionDeclaration(pyFunctionDefTree)) {
         return;
       }
