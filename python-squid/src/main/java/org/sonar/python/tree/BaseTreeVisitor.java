@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
@@ -301,6 +302,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
     scan(pyCallExpressionTree.callee());
     scan(pyCallExpressionTree.arguments());
+  }
+
+  @Override
+  public void visitArgumentList(PyArgListTree pyArgListTree) {
+    scan(pyArgListTree.arguments());
   }
 
   @Override

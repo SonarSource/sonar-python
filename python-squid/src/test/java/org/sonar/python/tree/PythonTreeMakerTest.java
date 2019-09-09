@@ -668,14 +668,16 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void classdef_statement() {
     setRootRule(PythonGrammar.CLASSDEF);
-    AstNode astNode = p.parse("class clazz: pass");
+    AstNode astNode = p.parse("class clazz(Parent): pass");
     PyClassDefTree classDefTree = treeMaker.classDefStatement(astNode);
     assertThat(classDefTree.name()).isNotNull();
     assertThat(classDefTree.docstring()).isNull();
     assertThat(classDefTree.name().name()).isEqualTo("clazz");
     assertThat(classDefTree.body().statements()).hasSize(1);
     assertThat(classDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(classDefTree.args()).isNull();
+    assertThat(classDefTree.args().is(Tree.Kind.ARG_LIST)).isTrue();
+    assertThat(classDefTree.args().children()).hasSize(1);
+    assertThat(classDefTree.args().arguments().get(0).is(Tree.Kind.ARGUMENT)).isTrue();
     assertThat(classDefTree.decorators()).isNull();
 
     astNode = p.parse("class clazz:\n  def foo(): pass");

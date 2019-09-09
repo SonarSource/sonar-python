@@ -47,6 +47,8 @@ public interface Tree {
 
     ARGUMENT(PyArgumentTree.class),
 
+    ARG_LIST(PyArgListTree.class),
+
     ASSERT_STMT(PyAssertStatementTree.class),
 
     ASSIGNMENT_STMT(PyAssignmentStatementTree.class),

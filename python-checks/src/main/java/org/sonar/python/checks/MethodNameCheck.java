@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.Tree;
@@ -29,6 +30,7 @@ import org.sonar.python.api.tree.Tree;
 @Rule(key = MethodNameCheck.CHECK_KEY)
 public class MethodNameCheck extends AbstractFunctionNameCheck {
   public static final String CHECK_KEY = "S100";
+
   @Override
   public String typeName() {
     return "method";
@@ -39,25 +41,25 @@ public class MethodNameCheck extends AbstractFunctionNameCheck {
     return pyFunctionDefTree.isMethodDefinition() && !classHasInheritance(getParentClassDef(pyFunctionDefTree));
   }
 
-  PyClassDefTree getParentClassDef(Tree current) {
-    if(current == null) {
-      return null;
-    } else if (current.is(Tree.Kind.CLASSDEF)) {
-      return (PyClassDefTree) current;
-    } else {
-      return getParentClassDef(current.parent());
+  private static PyClassDefTree getParentClassDef(Tree current) {
+    while (current != null) {
+      if (current.is(Tree.Kind.CLASSDEF)) {
+        return (PyClassDefTree) current;
+      }
+      current = current.parent();
     }
+    return null;
   }
 
   private static boolean classHasInheritance(PyClassDefTree classDef) {
-    PyArgListTree args = classDef.args();
-    if(args == null) {
+    PyArgListTree argList = classDef.args();
+    if (argList == null) {
       return false;
     }
-    List<Tree> children = args.children();
-    if(children.isEmpty()) {
+    List<PyArgumentTree> arguments = argList.arguments();
+    if (arguments.isEmpty()) {
       return false;
     }
-    return children.size() != 1 || !"object".equals(children.get(0).firstToken().getValue());
+    return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().getValue());
   }
 }

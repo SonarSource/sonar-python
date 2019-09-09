@@ -45,7 +45,7 @@ public class ClassNameCheck extends AbstractNameCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree pyClassDefTree = ((PyClassDefTree) ctx.syntaxNode());
+      PyClassDefTree pyClassDefTree = (PyClassDefTree) ctx.syntaxNode();
       PyNameTree classNameTree = pyClassDefTree.name();
       String className = classNameTree.name();
       if(!pattern().matcher(className).matches()) {

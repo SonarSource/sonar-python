@@ -17,10 +17,42 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
+import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
 import java.util.List;
+import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyArgumentTree;
+import org.sonar.python.api.tree.PyTreeVisitor;
+import org.sonar.python.api.tree.Tree;
 
-public interface PyArgListTree extends Tree {
-  List<PyArgumentTree> arguments();
+public class PyArgListTreeImpl extends PyTree implements PyArgListTree {
+
+  List<PyArgumentTree> arguments;
+
+  public PyArgListTreeImpl(AstNode node, List<PyArgumentTree> arguments) {
+    super(node);
+    this.arguments = arguments;
+  }
+
+  @Override
+  public List<PyArgumentTree> arguments() {
+    return arguments;
+  }
+
+  @Override
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitArgumentList(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Collections.unmodifiableList(arguments);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Tree.Kind.ARG_LIST;
+  }
 }

@@ -177,10 +177,11 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void class_statement() {
     setRootRule(PythonGrammar.CLASSDEF);
-    PyClassDefTree tree = parse("class clazz: pass", treeMaker::classDefStatement);
+    PyClassDefTree tree = parse("class clazz(Parent): pass", treeMaker::classDefStatement);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitClassDef(tree);
     verify(visitor).visitName(tree.name());
+    verify(visitor).visitArgumentList(tree.args());
     verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
   }
 

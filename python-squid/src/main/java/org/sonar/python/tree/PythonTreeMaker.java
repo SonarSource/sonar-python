@@ -442,8 +442,13 @@ public class PythonTreeMaker {
   public PyClassDefTree classDefStatement(AstNode astNode) {
     // TODO decorators
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild(PythonGrammar.NAME));
-    // TODO argList
     PyArgListTree args = null;
+    AstNode leftPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
+    if (leftPar != null) {
+      AstNode argList = astNode.getFirstChild(PythonGrammar.ARGLIST);
+      List<PyArgumentTree> arguments = argList(argList);
+      args = new PyArgListTreeImpl(argList, arguments);
+    }
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     return new PyClassDefTreeImpl(astNode, name, args, body, DocstringExtractor.extractDocstring(astNode));
   }

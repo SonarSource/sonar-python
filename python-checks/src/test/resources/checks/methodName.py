@@ -15,3 +15,18 @@ class MyTestCase(unittest.TestCase):
 
 def This_Is_A_Function():
     pass
+
+class AnotherClass():
+    def correct_method(self):
+        pass
+    def SomeMethod(self): # Noncompliant
+#       ^^^^^^^^^^
+        pass
+
+class AnotherClass(SomeParent, AnotherParent):
+    def A_Method(self): # Potentially overriden method
+        pass
+
+class AnotherClass(object):
+    def A_Method(self): # Noncompliant (inherits object)
+        pass
