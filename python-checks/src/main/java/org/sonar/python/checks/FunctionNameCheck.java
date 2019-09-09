@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import org.sonar.check.Rule;
+import org.sonar.python.api.tree.PyFunctionDefTree;
 
 @Rule(key = FunctionNameCheck.CHECK_KEY)
 public class FunctionNameCheck extends AbstractFunctionNameCheck {
@@ -32,8 +33,8 @@ public class FunctionNameCheck extends AbstractFunctionNameCheck {
   }
 
   @Override
-  public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return !CheckUtils.isMethodDefinition(astNode);
+  public boolean shouldCheckFunctionDeclaration(PyFunctionDefTree pyFunctionDefTree) {
+    return !pyFunctionDefTree.isMethodDefinition();
   }
 
 }

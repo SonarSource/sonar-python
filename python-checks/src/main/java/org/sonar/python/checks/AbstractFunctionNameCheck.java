@@ -19,12 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
 
 public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
 
@@ -42,25 +40,23 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (!shouldCheckFunctionDeclaration(astNode)) {
-      return;
-    }
-    AstNode nameNode = astNode.getFirstChild(PythonGrammar.FUNCNAME);
-    String name = nameNode.getTokenValue();
-    if (!pattern().matcher(name).matches()) {
-      String message = String.format(MESSAGE, typeName(), name, this.format);
-      addIssue(nameNode, message);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree pyFunctionDefTree = ((PyFunctionDefTree) ctx.syntaxNode());
+      if (!shouldCheckFunctionDeclaration(pyFunctionDefTree)) {
+        return;
+      }
+      PyNameTree functionNameTree = pyFunctionDefTree.name();
+      String name = functionNameTree.name();
+      if (!pattern().matcher(name).matches()) {
+        String message = String.format(MESSAGE, typeName(), name, this.format);
+        ctx.addIssue(functionNameTree, message);
+      }
+    });
   }
 
   public abstract String typeName();
 
-  public abstract boolean shouldCheckFunctionDeclaration(AstNode astNode);
+  public abstract boolean shouldCheckFunctionDeclaration(PyFunctionDefTree pyFunctionDefTree);
 
 }
