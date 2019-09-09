@@ -63,7 +63,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       PyAssignmentStatementTree assignmentStatementTree = (PyAssignmentStatementTree) ctx.syntaxNode();
       for (PyExpressionListTree lhsExpression : assignmentStatementTree.lhsExpressions()) {
         boolean isDebugProperties = lhsExpression.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier);
-        if (isDebugProperties && assignmentStatementTree.assignedValues().stream().anyMatch(DebugModeCheck::isTrueLiteral)) {
+        if (isDebugProperties && isTrueLiteral(assignmentStatementTree.assignedValue())) {
           ctx.addIssue(assignmentStatementTree, MESSAGE);
         }
       }

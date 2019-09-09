@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,18 +34,18 @@ import org.sonar.python.api.tree.Tree;
 public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmentStatementTree {
   private final List<Token> assignTokens;
   private final List<PyExpressionListTree> lhsExpressions;
-  private final List<PyExpressionTree> assignedValues;
+  private final PyExpressionTree assignedValue;
 
-  public PyAssignmentStatementTreeImpl(AstNode astNode, List<Token> assignTokens, List<PyExpressionListTree> lhsExpressions, List<PyExpressionTree> assignedValue) {
+  public PyAssignmentStatementTreeImpl(AstNode astNode, List<Token> assignTokens, List<PyExpressionListTree> lhsExpressions,PyExpressionTree assignedValue) {
     super(astNode);
     this.assignTokens = assignTokens;
     this.lhsExpressions = lhsExpressions;
-    this.assignedValues = assignedValue;
+    this.assignedValue = assignedValue;
   }
 
   @Override
-  public List<PyExpressionTree> assignedValues() {
-    return assignedValues;
+  public PyExpressionTree assignedValue() {
+    return assignedValue;
   }
 
   @Override
@@ -69,6 +70,6 @@ public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmen
 
   @Override
   public List<Tree> children() {
-    return Stream.of(lhsExpressions, assignedValues).flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(lhsExpressions, Collections.singletonList(assignedValue)).flatMap(List::stream).collect(Collectors.toList());
   }
 }

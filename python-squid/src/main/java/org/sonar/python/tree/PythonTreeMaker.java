@@ -34,6 +34,7 @@ import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
@@ -160,6 +161,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.NONLOCAL_STMT)) {
       return nonlocalStatement(astNode);
     }
+    if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonGrammar.ANNASSIGN)) {
+      return annotatedAssignment(astNode);
+    }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonPunctuator.ASSIGN)) {
       return assignment(astNode);
     }
@@ -182,6 +186,21 @@ public class PythonTreeMaker {
       return withStatement(astNode);
     }
     throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
+  }
+
+  public PyAnnotatedAssignmentTree annotatedAssignment(AstNode astNode) {
+    AstNode annAssign = astNode.getFirstChild(PythonGrammar.ANNASSIGN);
+    AstNode colonTokenNode = annAssign.getFirstChild(PythonPunctuator.COLON);
+    PyExpressionTree variable = exprListOrTestList(astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR));
+    PyExpressionTree annotation = expression(annAssign.getFirstChild(PythonGrammar.TEST));
+    AstNode equalTokenNode = annAssign.getFirstChild(PythonPunctuator.ASSIGN);
+    Token equalToken = null;
+    PyExpressionTree assignedValue = null;
+    if (equalTokenNode != null) {
+      equalToken = equalTokenNode.getToken();
+      assignedValue = expression(equalTokenNode.getNextSibling());
+    }
+    return new PyAnnotatedAssignmentTreeImpl(variable, colonTokenNode.getToken(), annotation, equalToken, assignedValue);
   }
 
   private PyStatementListTree getStatementListFromSuite(AstNode suite) {
@@ -502,7 +521,6 @@ public class PythonTreeMaker {
   }
 
   public PyExpressionStatementTree expressionStatement(AstNode astNode) {
-    // TODO: handle ANNASSIGN, b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)), b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR)
     List<PyExpressionTree> expressions = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR).getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
       .map(this::expression)
       .collect(Collectors.toList());
@@ -517,11 +535,9 @@ public class PythonTreeMaker {
       assignTokens.add(assignNode.getToken());
       lhsExpressions.add(expressionList(assignNode.getPreviousSibling()));
     }
-    AstNode assignedValues = assignNodes.get(assignNodes.size() - 1).getNextSibling();
-    List<PyExpressionTree> expressions = assignedValues.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
-      .map(this::expression)
-      .collect(Collectors.toList());
-    return new PyAssignmentStatementTreeImpl(astNode, assignTokens, lhsExpressions, expressions);
+    AstNode assignedValueNode = assignNodes.get(assignNodes.size() - 1).getNextSibling();
+    PyExpressionTree assignedValue = assignedValueNode.is(PythonGrammar.YIELD_EXPR) ? yieldExpression(assignedValueNode) : exprListOrTestList(assignedValueNode);
+    return new PyAssignmentStatementTreeImpl(astNode, assignTokens, lhsExpressions, assignedValue);
   }
 
   public PyCompoundAssignmentStatementTree compoundAssignment(AstNode astNode) {

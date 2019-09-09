@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.function.Function;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyAwaitExpressionTree;
@@ -201,6 +202,17 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitAssignmentStatement(tree);
     verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));
+  }
+
+  @Test
+  public void annotated_assignment() {
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    PyAnnotatedAssignmentTree tree = parse("a : int = b", treeMaker::annotatedAssignment);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    visitor.visitAnnotatedAssignment(tree);
+    verify(visitor).visitName((PyNameTree) tree.variable());
+    verify(visitor).visitName((PyNameTree) tree.annotation());
+    verify(visitor).visitName((PyNameTree) tree.assignedValue());
   }
 
   @Test
