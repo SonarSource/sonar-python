@@ -19,21 +19,18 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = HardcodedIPCheck.CHECK_KEY)
-public class HardcodedIPCheck extends PythonCheckAstNode {
+public class HardcodedIPCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1313";
 
   private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
@@ -54,39 +51,36 @@ public class HardcodedIPCheck extends PythonCheckAstNode {
   String message = "Make sure using this hardcoded IP address \"%s\" is safe here.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonTokenType.STRING);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    String value = node.getTokenOriginalValue();
-    if (value.length() <= 2 || isMultilineString(value)) {
-      return;
-    }
-    String content = value.substring(1, value.length() - 1);
-    Matcher matcher = IPV4_URL_REGEX.matcher(content);
-    if (matcher.matches()) {
-      String ip = matcher.group("ipv4");
-      if (isValidIPV4(ip) && !isIPV4Exception(ip)) {
-        addIssue(node, String.format(message, ip));
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
+      PyStringLiteralTree stringLiteral = (PyStringLiteralTree) ctx.syntaxNode();
+      if (isMultilineString(stringLiteral)) {
+        return;
       }
-    } else {
-      IPV6_REGEX_LIST.stream()
-        .map(pattern -> pattern.matcher(content))
-        .filter(Matcher::matches)
-        .findFirst()
-        .map(match -> {
-          String ipv6 = match.group("ipv6");
-          String ipv4 = match.group("ipv4");
-          return isValidIPV6(ipv6, ipv4) && !isIPV6Exception(ipv6) ? ipv6 : null;
-        })
-        .ifPresent(ipv6 -> addIssue(node, String.format(message, ipv6)));
-    }
+      String content = stringLiteral.stringElements().get(0).trimmedQuotesValue();
+      Matcher matcher = IPV4_URL_REGEX.matcher(content);
+      if (matcher.matches()) {
+        String ip = matcher.group("ipv4");
+        if (isValidIPV4(ip) && !isIPV4Exception(ip)) {
+          ctx.addIssue(stringLiteral, String.format(message, ip));
+        }
+      } else {
+        IPV6_REGEX_LIST.stream()
+          .map(pattern -> pattern.matcher(content))
+          .filter(Matcher::matches)
+          .findFirst()
+          .map(match -> {
+            String ipv6 = match.group("ipv6");
+            String ipv4 = match.group("ipv4");
+            return isValidIPV6(ipv6, ipv4) && !isIPV6Exception(ipv6) ? ipv6 : null;
+          })
+          .ifPresent(ipv6 -> ctx.addIssue(stringLiteral, String.format(message, ipv6)));
+      }
+    });
   }
 
-  private static boolean isMultilineString(String string) {
-    return string.endsWith("'''") || string.endsWith("\"\"\"");
+  private static boolean isMultilineString(PyStringLiteralTree pyStringLiteralTree) {
+    return pyStringLiteralTree.stringElements().size() > 1;
   }
 
   private static boolean isValidIPV4(String ip) {
