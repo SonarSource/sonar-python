@@ -20,12 +20,21 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import java.util.List;
+import javax.annotation.CheckForNull;
 
-public interface PyAssignmentStatementTree extends PyStatementTree {
+public interface PyAnnotatedAssignmentTree extends PyStatementTree {
+  // Using PyExpressionTree because variable can be `identifier | attributeref | subscription | slicing`
+  PyExpressionTree variable();
+
+  // TODO: move to a dedicated tree for typed expression
+  Token colonToken();
+
+  // TODO: move to a dedicated tree for typed expression
+  PyExpressionTree annotation();
+
+  @CheckForNull
+  Token equalToken();
+
+  @CheckForNull
   PyExpressionTree assignedValue();
-
-  List<Token> equalTokens();
-
-  List<PyExpressionListTree> lhsExpressions();
 }

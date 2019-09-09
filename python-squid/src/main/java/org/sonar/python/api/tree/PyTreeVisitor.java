@@ -150,4 +150,6 @@ public interface PyTreeVisitor {
   void visitDictCompExpression(PyDictCompExpressionTreeImpl tree);
 
   void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree);
+
+  void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree);
 }

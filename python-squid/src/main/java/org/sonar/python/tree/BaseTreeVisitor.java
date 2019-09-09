@@ -23,6 +23,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
@@ -318,7 +319,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree) {
     scan(pyAssignmentStatementTree.lhsExpressions());
-    scan(pyAssignmentStatementTree.assignedValues());
+    scan(pyAssignmentStatementTree.assignedValue());
   }
 
   @Override
@@ -471,5 +472,12 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree) {
     scan(pyCompoundAssignmentStatementTree.lhsExpression());
     scan(pyCompoundAssignmentStatementTree.rhsExpression());
+  }
+
+  @Override
+  public void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree) {
+    scan(pyAnnotatedAssignmentTree.variable());
+    scan(pyAnnotatedAssignmentTree.annotation());
+    scan(pyAnnotatedAssignmentTree.assignedValue());
   }
 }

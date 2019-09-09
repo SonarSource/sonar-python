@@ -28,6 +28,7 @@ import java.util.function.Function;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
@@ -47,6 +48,7 @@ import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
@@ -770,7 +772,7 @@ public class PythonTreeMakerTest extends RuleTest {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x = y");
     PyAssignmentStatementTree pyAssignmentStatement = treeMaker.assignment(astNode);
-    PyNameTree assigned = (PyNameTree) pyAssignmentStatement.assignedValues().get(0);
+    PyNameTree assigned = (PyNameTree) pyAssignmentStatement.assignedValue();
     PyNameTree lhs = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0);
     assertThat(assigned.name()).isEqualTo("y");
     assertThat(lhs.name()).isEqualTo("x");
@@ -778,13 +780,70 @@ public class PythonTreeMakerTest extends RuleTest {
 
     astNode = p.parse("x = y = z");
     pyAssignmentStatement = treeMaker.assignment(astNode);
+    assertThat(pyAssignmentStatement.equalTokens()).hasSize(2);
     assertThat(pyAssignmentStatement.children()).hasSize(3);
-    assigned = (PyNameTree) pyAssignmentStatement.assignedValues().get(0);
+    assigned = (PyNameTree) pyAssignmentStatement.assignedValue();
     lhs = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(0).expressions().get(0);
     PyNameTree lhs2 = (PyNameTree) pyAssignmentStatement.lhsExpressions().get(1).expressions().get(0);
     assertThat(assigned.name()).isEqualTo("z");
     assertThat(lhs.name()).isEqualTo("x");
     assertThat(lhs2.name()).isEqualTo("y");
+
+    astNode = p.parse("a,b = x");
+    pyAssignmentStatement = treeMaker.assignment(astNode);
+    assertThat(pyAssignmentStatement.children()).hasSize(2);
+    assigned = (PyNameTree) pyAssignmentStatement.assignedValue();
+    List<PyExpressionTree> expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
+    assertThat(assigned.name()).isEqualTo("x");
+    assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(expressions.get(1).getKind()).isEqualTo(Tree.Kind.NAME);
+
+    astNode = p.parse("x = a,b");
+    pyAssignmentStatement = treeMaker.assignment(astNode);
+    assertThat(pyAssignmentStatement.children()).hasSize(2);
+    expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
+    assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(pyAssignmentStatement.assignedValue().getKind()).isEqualTo(Tree.Kind.TUPLE);
+
+    astNode = p.parse("x = yield 1");
+    pyAssignmentStatement = treeMaker.assignment(astNode);
+    assertThat(pyAssignmentStatement.children()).hasSize(2);
+    expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
+    assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(pyAssignmentStatement.assignedValue().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
+
+    // FIXME: lhs expression list shouldn't allow yield expressions. We need to change the grammar
+    astNode = p.parse("x = yield 1 = y");
+    pyAssignmentStatement = treeMaker.assignment(astNode);
+    assertThat(pyAssignmentStatement.children()).hasSize(3);
+    List<PyExpressionListTree> lhsExpressions = pyAssignmentStatement.lhsExpressions();
+    assertThat(lhsExpressions.get(1).expressions().get(0).getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
+    assertThat(pyAssignmentStatement.assignedValue().getKind()).isEqualTo(Tree.Kind.NAME);
+  }
+
+  @Test
+  public void annotated_assignment() {
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    AstNode astNode = p.parse("x : string = 1");
+    PyAnnotatedAssignmentTree annAssign = treeMaker.annotatedAssignment(astNode);
+    assertThat(annAssign.getKind()).isEqualTo(Tree.Kind.ANNOTATED_ASSIGNMENT);
+    assertThat(annAssign.children()).hasSize(3);
+    assertThat(annAssign.variable().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(((PyNameTree) annAssign.variable()).name()).isEqualTo("x");
+    assertThat(annAssign.assignedValue().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(annAssign.equalToken().getValue()).isEqualTo("=");
+    assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(((PyNameTree) annAssign.annotation()).name()).isEqualTo("string");
+
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    astNode = p.parse("x : string");
+    annAssign = treeMaker.annotatedAssignment(astNode);
+    assertThat(annAssign.variable().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(((PyNameTree) annAssign.variable()).name()).isEqualTo("x");
+    assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(((PyNameTree) annAssign.annotation()).name()).isEqualTo("string");
+    assertThat(annAssign.assignedValue()).isNull();
+    assertThat(annAssign.equalToken()).isNull();
   }
 
   @Test
