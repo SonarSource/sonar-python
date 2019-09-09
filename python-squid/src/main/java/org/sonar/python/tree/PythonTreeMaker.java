@@ -79,7 +79,7 @@ import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
-import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
@@ -418,16 +418,16 @@ public class PythonTreeMaker {
   public PyFunctionDefTree funcDefStatement(AstNode astNode) {
     // TODO decorators
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
-    PyTypedArgListTree typedArgs = null;
+    PyParameterListTree parameterList = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (typedArgListNode != null) {
       List<PyParameterTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
-        .map(this::typedArgument).collect(Collectors.toList());
-      typedArgs = new PyTypedArgListTreeImpl(typedArgListNode, arguments);
+        .map(this::parameter).collect(Collectors.toList());
+      parameterList = new PyParameterListTreeImpl(typedArgListNode, arguments);
     }
 
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyFunctionDefTreeImpl(astNode, name, typedArgs, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
+    return new PyFunctionDefTreeImpl(astNode, name, parameterList, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
   }
 
   private static boolean isMethodDefinition(AstNode node) {
@@ -980,17 +980,17 @@ public class PythonTreeMaker {
     Token colonToken = astNode.getFirstChild(PythonPunctuator.COLON).getToken();
     PyExpressionTree body = expression(astNode.getFirstChild(PythonGrammar.TEST));
     AstNode varArgsListNode = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
-    PyTypedArgListTree argListTree = null;
+    PyParameterListTree argListTree = null;
     if (varArgsListNode != null) {
       List<PyParameterTree> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME).stream()
-        .map(this::typedArgument).collect(Collectors.toList());
-      argListTree = new PyTypedArgListTreeImpl(varArgsListNode, parameters);
+        .map(this::parameter).collect(Collectors.toList());
+      argListTree = new PyParameterListTreeImpl(varArgsListNode, parameters);
     }
 
     return new PyLambdaExpressionTreeImpl(astNode, lambdaKeyword, colonToken, body, argListTree);
   }
 
-  private PyParameterTree typedArgument(AstNode parameter) {
+  private PyParameterTree parameter(AstNode parameter) {
     AstNode prevSibling = parameter.getPreviousSibling();
 
     if (parameter.is(PythonGrammar.NAME)) {

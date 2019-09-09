@@ -113,7 +113,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   public void fundef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     PyFunctionDefTree pyFunctionDefTree = parse("def foo(x:int): pass", treeMaker::funcDefStatement);
-    PyParameterTree parameter = pyFunctionDefTree.typedArgs().arguments().get(0);
+    PyParameterTree parameter = pyFunctionDefTree.parameters().parameters().get(0);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitFunctionDef(pyFunctionDefTree);
     verify(visitor).visitName(pyFunctionDefTree.name());
@@ -213,8 +213,8 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyLambdaExpressionTree tree = parse("lambda x : x", treeMaker::lambdaExpression);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitLambda(tree);
-    verify(visitor).visitTypedArgList(tree.arguments());
-    verify(visitor).visitParameter(tree.arguments().arguments().get(0));
+    verify(visitor).visitParameterList(tree.arguments());
+    verify(visitor).visitParameter(tree.arguments().parameters().get(0));
   }
 
   @Test

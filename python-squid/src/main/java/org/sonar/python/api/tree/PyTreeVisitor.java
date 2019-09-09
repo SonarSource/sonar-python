@@ -103,7 +103,7 @@ public interface PyTreeVisitor {
 
   void visitArgumentList(PyArgListTree pyArgListTree);
 
-  void visitTypedArgList(PyTypedArgListTree pyTypedArgListTree);
+  void visitParameterList(PyParameterListTree pyParameterListTree);
 
   void visitParameter(PyParameterTree tree);
 

@@ -26,21 +26,21 @@ import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.Tree;
 
 public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements PyLambdaExpressionTree {
   private final Token lambdaKeyword;
   private final Token colonToken;
   private final PyExpressionTree body;
-  private final PyTypedArgListTree typedArgList;
+  private final PyParameterListTree parameterList;
 
-  public PyLambdaExpressionTreeImpl(AstNode astNode, Token lambdaKeyword, Token colonToken, PyExpressionTree body, PyTypedArgListTree typedArgList) {
+  public PyLambdaExpressionTreeImpl(AstNode astNode, Token lambdaKeyword, Token colonToken, PyExpressionTree body, PyParameterListTree parameterList) {
     super(astNode);
     this.lambdaKeyword = lambdaKeyword;
     this.colonToken = colonToken;
     this.body = body;
-    this.typedArgList = typedArgList;
+    this.parameterList = parameterList;
   }
 
   @Override
@@ -59,8 +59,8 @@ public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements 
   }
 
   @Override
-  public PyTypedArgListTree arguments() {
-    return typedArgList;
+  public PyParameterListTree arguments() {
+    return parameterList;
   }
 
   @Override
@@ -75,6 +75,6 @@ public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements 
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(typedArgList, body);
+    return Arrays.asList(parameterList, body);
   }
 }

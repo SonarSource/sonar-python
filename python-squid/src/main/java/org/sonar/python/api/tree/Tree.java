@@ -133,7 +133,7 @@ public interface Tree {
 
     TYPE_ANNOTATION(PyTypeAnnotationTree.class),
 
-    TYPED_ARG_LIST(PyTypedArgListTree.class),
+    PARAMETER_LIST(PyParameterListTree.class),
 
     WHILE_STMT(PyWhileStatementTree.class),
 

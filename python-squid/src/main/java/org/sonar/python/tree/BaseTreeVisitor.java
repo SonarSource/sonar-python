@@ -79,7 +79,7 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
-import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
@@ -192,7 +192,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
     scan(pyFunctionDefTree.decorators());
     scan(pyFunctionDefTree.name());
-    scan(pyFunctionDefTree.typedArgs());
+    scan(pyFunctionDefTree.parameters());
     scan(pyFunctionDefTree.annotationReturn());
     scan(pyFunctionDefTree.body());
   }
@@ -340,8 +340,8 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitTypedArgList(PyTypedArgListTree pyTypedArgListTree) {
-    scan(pyTypedArgListTree.arguments());
+  public void visitParameterList(PyParameterListTree pyParameterListTree) {
+    scan(pyParameterListTree.parameters());
   }
 
   @Override

@@ -28,6 +28,6 @@ public interface PyLambdaExpressionTree extends PyExpressionTree {
 
   PyExpressionTree expression();
 
-  PyTypedArgListTree arguments();
+  PyParameterListTree arguments();
 
 }

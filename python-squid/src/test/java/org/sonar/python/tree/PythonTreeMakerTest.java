@@ -631,7 +631,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(functionDefTree.children()).hasSize(3);
     // TODO
-    assertThat(functionDefTree.typedArgs()).isNull();
+    assertThat(functionDefTree.parameters()).isNull();
     assertThat(functionDefTree.isMethodDefinition()).isFalse();
     assertThat(functionDefTree.docstring()).isNull();
     // TODO
@@ -645,13 +645,13 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.rightPar()).isNull();
 
     functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.typedArgs().arguments()).hasSize(1);
+    assertThat(functionDefTree.parameters().parameters()).hasSize(1);
 
     functionDefTree = parse("def func(x, y): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.typedArgs().arguments()).hasSize(2);
+    assertThat(functionDefTree.parameters().parameters()).hasSize(2);
 
     functionDefTree = parse("def func(x = 'foo', y): pass", treeMaker::funcDefStatement);
-    List<PyParameterTree> parameters = functionDefTree.typedArgs().arguments();
+    List<PyParameterTree> parameters = functionDefTree.parameters().parameters();
     assertThat(parameters).hasSize(2);
     PyParameterTree parameter1 = parameters.get(0);
     assertThat(parameter1.name().name()).isEqualTo("x");
@@ -662,12 +662,12 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parameter2.defaultValue()).isNull();
 
     functionDefTree = parse("def func(p1, *p2, **p3): pass", treeMaker::funcDefStatement);
-    parameters = functionDefTree.typedArgs().arguments();
+    parameters = functionDefTree.parameters().parameters();
     assertThat(parameters).extracting(p -> p.name().name()).containsExactly("p1", "p2", "p3");
     assertThat(parameters).extracting(p -> p.starToken() == null ? null : p.starToken().getValue()).containsExactly(null, "*", "**");
 
     functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
-    parameters = functionDefTree.typedArgs().arguments();
+    parameters = functionDefTree.parameters().parameters();
     assertThat(parameters).hasSize(2);
     PyTypeAnnotationTree annotation = parameters.get(0).typeAnnotation();
     assertThat(annotation.getKind()).isEqualTo(Tree.Kind.TYPE_ANNOTATION);
@@ -1281,29 +1281,29 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lambdaExpressionTree.lambdaKeyword().getValue()).isEqualTo("lambda");
     assertThat(lambdaExpressionTree.colonToken().getValue()).isEqualTo(":");
 
-    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(1);
+    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(1);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda x, y: x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(2);
+    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda x = 'foo': x", treeMaker::lambdaExpression);
-    List<PyParameterTree> arguments = lambdaExpressionTree.arguments().arguments();
+    List<PyParameterTree> arguments = lambdaExpressionTree.arguments().parameters();
     assertThat(arguments).hasSize(1);
     assertThat(arguments.get(0).name().name()).isEqualTo("x");
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(1);
+    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(1);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda *a, **b: 42", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().arguments()).hasSize(2);
-    PyParameterTree starArg = lambdaExpressionTree.arguments().arguments().get(0);
+    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(2);
+    PyParameterTree starArg = lambdaExpressionTree.arguments().parameters().get(0);
     assertThat(starArg.starToken().getValue()).isEqualTo("*");
     assertThat(starArg.name().name()).isEqualTo("a");
-    PyParameterTree starStarArg = lambdaExpressionTree.arguments().arguments().get(1);
+    PyParameterTree starStarArg = lambdaExpressionTree.arguments().parameters().get(1);
     assertThat(starStarArg.starToken().getValue()).isEqualTo("**");
     assertThat(starStarArg.name().name()).isEqualTo("b");
   }
