@@ -152,4 +152,10 @@ public interface PyTreeVisitor {
   void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree);
 
   void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree);
+
+  void visitNone(PyNoneExpressionTree pyNoneExpressionTree);
+
+  void visitRepr(PyReprExpressionTree pyReprExpressionTree);
+
+  void visitEllipsis(PyEllipsisExpressionTree pyEllipsisExpressionTree);
 }

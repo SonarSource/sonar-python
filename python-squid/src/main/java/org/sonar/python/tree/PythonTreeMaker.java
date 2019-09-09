@@ -668,6 +668,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LCURLYBRACE)) {
       return dictOrSetLiteral(astNode);
     }
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.BACKTICK)) {
+      return repr(astNode);
+    }
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonTokenType.STRING)) {
       return stringLiteral(astNode);
     }
@@ -724,7 +727,21 @@ public class PythonTreeMaker {
       Token rightBracket = astNode.getFirstChild(PythonPunctuator.RBRACKET).getToken();
       return subscriptionOrSlicing(baseExpr, leftBracket, astNode, rightBracket);
     }
+    if (astNode.is(PythonKeyword.NONE)) {
+      return new PyNoneExpressionTreeImpl(astNode, astNode.getToken());
+    }
+    if (astNode.is(PythonGrammar.ELLIPSIS)) {
+      return new PyEllipsisExpressionTreeImpl(astNode);
+    }
     return new PyExpressionTreeImpl(astNode);
+  }
+
+  private PyExpressionTree repr(AstNode astNode) {
+    Token openingBacktick = astNode.getFirstChild(PythonPunctuator.BACKTICK).getToken();
+    Token closingBacktick = astNode.getLastChild(PythonPunctuator.BACKTICK).getToken();
+    List<PyExpressionTree> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    PyExpressionListTree expressionListTree = new PyExpressionListTreeImpl(expressions);
+    return new PyReprExpressionTreeImpl(astNode, openingBacktick, expressionListTree, closingBacktick);
   }
 
   private PyExpressionTree dictOrSetLiteral(AstNode astNode) {

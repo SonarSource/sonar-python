@@ -73,6 +73,8 @@ public interface Tree {
 
     DOTTED_NAME(PyDottedNameTree.class),
 
+    ELLIPSIS(PyEllipsisExpressionTree.class),
+
     ELSE_STMT(PyElseStatementTree.class),
 
     EXCEPT_CLAUSE(PyExceptClauseTree.class),
@@ -109,6 +111,8 @@ public interface Tree {
 
     NONLOCAL_STMT(PyNonlocalStatementTree.class),
 
+    NONE(PyNoneExpressionTree.class),
+
     NUMERIC_LITERAL(PyNumericLiteralTree.class),
 
     PASS_STMT(PyPassStatementTree.class),
@@ -118,6 +122,8 @@ public interface Tree {
     QUALIFIED_EXPR(PyQualifiedExpressionTree.class),
 
     RAISE_STMT(PyRaiseStatementTree.class),
+
+    REPR(PyReprExpressionTree.class),
 
     RETURN_STMT(PyReturnStatementTree.class),
 

@@ -45,6 +45,7 @@ import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDictCompExpressionTree;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
+import org.sonar.python.api.tree.PyEllipsisExpressionTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -66,6 +67,7 @@ import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyNoneExpressionTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
@@ -73,6 +75,7 @@ import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
+import org.sonar.python.api.tree.PyReprExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PySetLiteralTree;
 import org.sonar.python.api.tree.PySliceExpressionTree;
@@ -1626,6 +1629,42 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.children()).hasSize(2);
     assertThat(comprehension.firstToken().getValue()).isEqualTo("{");
     assertThat(comprehension.lastToken().getValue()).isEqualTo("}");
+  }
+
+  @Test
+  public void repr_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyReprExpressionTree reprExpressionTree = (PyReprExpressionTree) parse("`1`", treeMaker::expression);
+    assertThat(reprExpressionTree.getKind()).isEqualTo(Tree.Kind.REPR);
+    assertThat(reprExpressionTree.openingBacktick().getValue()).isEqualTo("`");
+    assertThat(reprExpressionTree.closingBacktick().getValue()).isEqualTo("`");
+    assertThat(reprExpressionTree.expressionList().expressions()).hasSize(1);
+    assertThat(reprExpressionTree.expressionList().expressions().get(0).getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(reprExpressionTree.children()).hasSize(1);
+
+    reprExpressionTree = (PyReprExpressionTree) parse("`x, y`", treeMaker::expression);
+    assertThat(reprExpressionTree.getKind()).isEqualTo(Tree.Kind.REPR);
+    assertThat(reprExpressionTree.expressionList().expressions()).hasSize(2);
+    assertThat(reprExpressionTree.expressionList().expressions().get(0).getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(reprExpressionTree.expressionList().expressions().get(1).getKind()).isEqualTo(Tree.Kind.NAME);
+  }
+
+  @Test
+  public void ellipsis_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyEllipsisExpressionTree ellipsisExpressionTree = (PyEllipsisExpressionTree) parse("...", treeMaker::expression);
+    assertThat(ellipsisExpressionTree.getKind()).isEqualTo(Tree.Kind.ELLIPSIS);
+    assertThat(ellipsisExpressionTree.ellipsis()).extracting(Token::getValue).containsExactly(".", ".", ".");
+    assertThat(ellipsisExpressionTree.children()).isEmpty();
+  }
+
+  @Test
+  public void none_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyNoneExpressionTree noneExpressionTree = (PyNoneExpressionTree) parse("None", treeMaker::expression);
+    assertThat(noneExpressionTree.getKind()).isEqualTo(Tree.Kind.NONE);
+    assertThat(noneExpressionTree.none().getValue()).isEqualTo("None");
+    assertThat(noneExpressionTree.children()).isEmpty();
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {

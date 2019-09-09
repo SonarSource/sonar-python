@@ -40,6 +40,7 @@ import org.sonar.python.api.tree.PyContinueStatementTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
+import org.sonar.python.api.tree.PyEllipsisExpressionTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExecStatementTree;
@@ -58,6 +59,7 @@ import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
 import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyNoneExpressionTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
@@ -65,6 +67,7 @@ import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
+import org.sonar.python.api.tree.PyReprExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PySetLiteralTree;
 import org.sonar.python.api.tree.PySliceExpressionTree;
@@ -479,5 +482,20 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyAnnotatedAssignmentTree.variable());
     scan(pyAnnotatedAssignmentTree.annotation());
     scan(pyAnnotatedAssignmentTree.assignedValue());
+  }
+
+  @Override
+  public void visitNone(PyNoneExpressionTree pyNoneExpressionTree) {
+    // noop
+  }
+
+  @Override
+  public void visitRepr(PyReprExpressionTree pyReprExpressionTree) {
+    scan(pyReprExpressionTree.expressionList());
+  }
+
+  @Override
+  public void visitEllipsis(PyEllipsisExpressionTree pyEllipsisExpressionTree) {
+    // noop
   }
 }
