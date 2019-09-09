@@ -19,8 +19,12 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
+import java.util.List;
 import org.sonar.check.Rule;
+import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = MethodNameCheck.CHECK_KEY)
 public class MethodNameCheck extends AbstractFunctionNameCheck {
@@ -31,8 +35,29 @@ public class MethodNameCheck extends AbstractFunctionNameCheck {
   }
 
   @Override
-  public boolean shouldCheckFunctionDeclaration(AstNode astNode) {
-    return CheckUtils.isMethodOfNonDerivedClass(astNode);
+  public boolean shouldCheckFunctionDeclaration(PyFunctionDefTree pyFunctionDefTree) {
+    return pyFunctionDefTree.isMethodDefinition() && !classHasInheritance(getParentClassDef(pyFunctionDefTree));
   }
 
+  PyClassDefTree getParentClassDef(Tree current) {
+    if(current == null) {
+      return null;
+    } else if (current.is(Tree.Kind.CLASSDEF)) {
+      return (PyClassDefTree) current;
+    } else {
+      return getParentClassDef(current.parent());
+    }
+  }
+
+  private static boolean classHasInheritance(PyClassDefTree classDef) {
+    PyArgListTree args = classDef.args();
+    if(args == null) {
+      return false;
+    }
+    List<Tree> children = args.children();
+    if(children.isEmpty()) {
+      return false;
+    }
+    return children.size() != 1 || !"object".equals(children.get(0).firstToken().getValue());
+  }
 }

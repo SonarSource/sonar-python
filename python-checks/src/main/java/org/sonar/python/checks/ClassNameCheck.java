@@ -19,13 +19,11 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = ClassNameCheck.CHECK_KEY)
 public class ClassNameCheck extends AbstractNameCheck {
@@ -45,18 +43,15 @@ public class ClassNameCheck extends AbstractNameCheck {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+      PyClassDefTree pyClassDefTree = ((PyClassDefTree) ctx.syntaxNode());
+      PyNameTree classNameTree = pyClassDefTree.name();
+      String className = classNameTree.name();
+      if(!pattern().matcher(className).matches()) {
+        String message = String.format(MESSAGE, className, format);
+        ctx.addIssue(classNameTree, message);
+      }
+    });
   }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    AstNode classNameNode = astNode.getFirstChild(PythonGrammar.CLASSNAME);
-    String className = classNameNode.getTokenValue();
-    if (!pattern().matcher(className).matches()) {
-      String message = String.format(MESSAGE, className, format);
-      addIssue(classNameNode, message);
-    }
-  }
-
 }
