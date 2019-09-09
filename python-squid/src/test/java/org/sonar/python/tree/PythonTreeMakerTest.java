@@ -834,6 +834,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(annAssign.equalToken().getValue()).isEqualTo("=");
     assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(((PyNameTree) annAssign.annotation()).name()).isEqualTo("string");
+    assertThat(annAssign.colonToken().getValue()).isEqualTo(":");
 
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     astNode = p.parse("x : string");
