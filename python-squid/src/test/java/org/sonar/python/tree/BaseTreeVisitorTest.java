@@ -51,6 +51,7 @@ import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.PyReprExpressionTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PySliceExpressionTree;
 import org.sonar.python.api.tree.PySliceItemTree;
@@ -329,6 +330,16 @@ public class BaseTreeVisitorTest extends RuleTest {
     verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.keyExpression());
     verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.valueExpression());
     verify(visitor).visitComprehensionFor(expr.comprehensionFor());
+  }
+
+  @Test
+  public void repr_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    PyReprExpressionTree expr = (PyReprExpressionTree) parse("`1`", treeMaker::expression);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    expr.accept(visitor);
+
+    verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.expressionList().expressions().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {
