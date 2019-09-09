@@ -21,6 +21,6 @@ package org.sonar.python.api.tree;
 
 import java.util.List;
 
-public interface PyTypedArgListTree extends Tree {
-  List<PyTypedArgumentTree> arguments();
+public interface PyParameterListTree extends Tree {
+  List<PyParameterTree> parameters();
 }

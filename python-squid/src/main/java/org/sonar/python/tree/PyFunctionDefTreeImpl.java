@@ -30,21 +30,21 @@ import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyTypedArgListTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.Tree;
 
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   private final PyNameTree name;
-  private final PyTypedArgListTree typedArgs;
+  private final PyParameterListTree parameters;
   private final PyStatementListTree body;
   private final boolean isMethodDefinition;
   private final Token docstring;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyTypedArgListTree typedArgs, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
+  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyParameterListTree parameters, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
     super(astNode);
     this.name = name;
-    this.typedArgs = typedArgs;
+    this.parameters = parameters;
     this.body = body;
     this.isMethodDefinition = isMethodDefinition;
     this.docstring = docstring;
@@ -77,8 +77,8 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public PyTypedArgListTree typedArgs() {
-    return typedArgs;
+  public PyParameterListTree parameters() {
+    return parameters;
   }
 
   @Override
@@ -137,6 +137,6 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(name, typedArgs, body);
+    return Arrays.asList(name, parameters, body);
   }
 }

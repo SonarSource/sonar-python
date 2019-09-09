@@ -22,37 +22,37 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
+import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyTypedArgListTree;
-import org.sonar.python.api.tree.PyTypedArgumentTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.Tree;
 
-public class PyTypedArgListTreeImpl extends PyTree implements PyTypedArgListTree {
+public class PyParameterListTreeImpl extends PyTree implements PyParameterListTree {
 
-  private final List<PyTypedArgumentTree> arguments;
+  private final List<PyParameterTree> parameters;
 
-  public PyTypedArgListTreeImpl(AstNode node, List<PyTypedArgumentTree> arguments) {
+  public PyParameterListTreeImpl(AstNode node, List<PyParameterTree> parameters) {
     super(node);
-    this.arguments = arguments;
+    this.parameters = parameters;
   }
 
   @Override
-  public List<PyTypedArgumentTree> arguments() {
-    return arguments;
+  public List<PyParameterTree> parameters() {
+    return parameters;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitTypedArgList(this);
+    visitor.visitParameterList(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(arguments);
+    return Collections.unmodifiableList(parameters);
   }
 
   @Override
   public Kind getKind() {
-    return Kind.TYPED_ARG_LIST;
+    return Kind.PARAMETER_LIST;
   }
 }

@@ -36,7 +36,7 @@ public interface PyFunctionDefTree extends PyStatementTree {
 
   Token leftPar();
 
-  PyTypedArgListTree typedArgs();
+  PyParameterListTree parameters();
 
   Token rightPar();
 

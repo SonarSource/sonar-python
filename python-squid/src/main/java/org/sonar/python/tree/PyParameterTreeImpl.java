@@ -23,58 +23,72 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyParameterListTree;
+import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
 
-public class PyLambdaExpressionTreeImpl extends PyExpressionTreeImpl implements PyLambdaExpressionTree {
-  private final Token lambdaKeyword;
-  private final Token colonToken;
-  private final PyExpressionTree body;
-  private final PyParameterListTree parameterList;
+public class PyParameterTreeImpl extends PyTree implements PyParameterTree {
 
-  public PyLambdaExpressionTreeImpl(AstNode astNode, Token lambdaKeyword, Token colonToken, PyExpressionTree body, PyParameterListTree parameterList) {
-    super(astNode);
-    this.lambdaKeyword = lambdaKeyword;
-    this.colonToken = colonToken;
-    this.body = body;
-    this.parameterList = parameterList;
+  private final PyNameTree name;
+  private final PyTypeAnnotationTree annotation;
+  private final Token equalToken;
+  private final PyExpressionTree defaultValue;
+  private final Token starToken;
+
+  public PyParameterTreeImpl(AstNode node, Token starToken, PyNameTree name, PyTypeAnnotationTree annotation, Token equalToken, PyExpressionTree defaultValue) {
+    super(node);
+    this.starToken = starToken;
+    this.name = name;
+    this.annotation = annotation;
+    this.equalToken = equalToken;
+    this.defaultValue = defaultValue;
+  }
+
+  @CheckForNull
+  @Override
+  public Token starToken() {
+    return starToken;
   }
 
   @Override
-  public Token lambdaKeyword() {
-    return lambdaKeyword;
+  public PyNameTree name() {
+    return name;
   }
 
+  @CheckForNull
   @Override
-  public Token colonToken() {
-    return colonToken;
+  public PyTypeAnnotationTree typeAnnotation() {
+    return annotation;
   }
 
+  @CheckForNull
   @Override
-  public PyExpressionTree expression() {
-    return body;
+  public Token equalToken() {
+    return equalToken;
   }
 
+  @CheckForNull
   @Override
-  public PyParameterListTree arguments() {
-    return parameterList;
+  public PyExpressionTree defaultValue() {
+    return defaultValue;
   }
 
   @Override
   public Kind getKind() {
-    return Kind.LAMBDA;
+    return Kind.PARAMETER;
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitLambda(this);
+    visitor.visitParameter(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(parameterList, body);
+    return Arrays.asList(name, annotation, defaultValue);
   }
 }

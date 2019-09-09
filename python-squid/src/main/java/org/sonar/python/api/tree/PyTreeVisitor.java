@@ -103,9 +103,11 @@ public interface PyTreeVisitor {
 
   void visitArgumentList(PyArgListTree pyArgListTree);
 
-  void visitTypedArgList(PyTypedArgListTree pyTypedArgListTree);
+  void visitParameterList(PyParameterListTree pyParameterListTree);
 
-  void visitTypeArgument(PyTypedArgumentTree pyTypedArgumentTree);
+  void visitParameter(PyParameterTree tree);
+
+  void visitTypeAnnotation(PyTypeAnnotationTree tree);
 
   void visitNumericLiteral(PyNumericLiteralTree pyNumericLiteralTree);
 

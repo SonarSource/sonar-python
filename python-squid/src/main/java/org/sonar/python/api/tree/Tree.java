@@ -131,9 +131,11 @@ public interface Tree {
 
     TRY_STMT(PyTryStatementTree.class),
 
-    TYPED_ARG(PyTypedArgumentTree.class),
+    PARAMETER(PyParameterTree.class),
 
-    TYPED_ARG_LIST(PyTypedArgListTree.class),
+    TYPE_ANNOTATION(PyTypeAnnotationTree.class),
+
+    PARAMETER_LIST(PyParameterListTree.class),
 
     WHILE_STMT(PyWhileStatementTree.class),
 
