@@ -48,6 +48,7 @@ import org.sonar.python.api.tree.PyComprehensionClauseTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
+import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyElseStatementTree;
@@ -435,7 +436,13 @@ public class PythonTreeMaker {
   }
 
   public PyFunctionDefTree funcDefStatement(AstNode astNode) {
-    // TODO decorators
+    AstNode decoratorsNode = astNode.getFirstChild(PythonGrammar.DECORATORS);
+    List<PyDecoratorTree> decorators = Collections.emptyList();
+    if (decoratorsNode != null) {
+      decorators = decoratorsNode.getChildren(PythonGrammar.DECORATOR).stream()
+        .map(this::decorator)
+        .collect(Collectors.toList());
+    }
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
     PyParameterListTree parameterList = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
@@ -446,7 +453,20 @@ public class PythonTreeMaker {
     }
 
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyFunctionDefTreeImpl(astNode, name, parameterList, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
+    return new PyFunctionDefTreeImpl(astNode, decorators, name, parameterList, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
+  }
+
+  private PyDecoratorTree decorator(AstNode astNode) {
+    Token atToken = astNode.getFirstChild(PythonPunctuator.AT).getToken();
+    PyDottedNameTree dottedName = dottedName(astNode.getFirstChild(PythonGrammar.DOTTED_NAME));
+    AstNode lPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
+    AstNode rPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS);
+    PyArgListTree argListTree = null;
+    AstNode argListNode = astNode.getFirstChild(PythonGrammar.ARGLIST);
+    if (argListNode != null) {
+      argListTree = new PyArgListTreeImpl(argListNode, argList(argListNode));
+    }
+    return new PyDecoratorTreeImpl(astNode, atToken, dottedName, lPar, argListTree, rPar);
   }
 
   private static boolean isMethodDefinition(AstNode node) {
@@ -460,7 +480,13 @@ public class PythonTreeMaker {
   }
 
   public PyClassDefTree classDefStatement(AstNode astNode) {
-    // TODO decorators
+    AstNode decoratorsNode = astNode.getFirstChild(PythonGrammar.DECORATORS);
+    List<PyDecoratorTree> decorators = Collections.emptyList();
+    if (decoratorsNode != null) {
+      decorators = decoratorsNode.getChildren(PythonGrammar.DECORATOR).stream()
+        .map(this::decorator)
+        .collect(Collectors.toList());
+    }
     PyNameTree name = name(astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild(PythonGrammar.NAME));
     PyArgListTree args = null;
     AstNode leftPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
@@ -470,7 +496,7 @@ public class PythonTreeMaker {
       args = new PyArgListTreeImpl(argList, arguments);
     }
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyClassDefTreeImpl(astNode, name, args, body, DocstringExtractor.extractDocstring(astNode));
+    return new PyClassDefTreeImpl(astNode, decorators, name, args, body, DocstringExtractor.extractDocstring(astNode));
   }
 
   private PyNameTree name(AstNode astNode) {

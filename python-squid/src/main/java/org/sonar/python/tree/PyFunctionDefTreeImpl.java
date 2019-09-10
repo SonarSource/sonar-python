@@ -35,14 +35,16 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
+  private final List<PyDecoratorTree> decorators;
   private final PyNameTree name;
   private final PyParameterListTree parameters;
   private final PyStatementListTree body;
   private final boolean isMethodDefinition;
   private final Token docstring;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, PyNameTree name, PyParameterListTree parameters, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
+  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, PyNameTree name, PyParameterListTree parameters, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
     super(astNode);
+    this.decorators = decorators;
     this.name = name;
     this.parameters = parameters;
     this.body = body;
@@ -52,7 +54,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   @Override
   public List<PyDecoratorTree> decorators() {
-    return null;
+    return decorators;
   }
 
   @Override
