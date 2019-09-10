@@ -69,6 +69,8 @@ public interface Tree {
 
     DICTIONARY_LITERAL(PyDictionaryLiteralTree.class),
 
+    DECORATOR(PyDecoratorTree.class),
+
     DEL_STMT(PyDelStatementTree.class),
 
     DOTTED_NAME(PyDottedNameTree.class),

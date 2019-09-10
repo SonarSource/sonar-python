@@ -36,6 +36,7 @@ public interface PyFunctionDefTree extends PyStatementTree {
 
   Token leftPar();
 
+  @CheckForNull
   PyParameterListTree parameters();
 
   Token rightPar();

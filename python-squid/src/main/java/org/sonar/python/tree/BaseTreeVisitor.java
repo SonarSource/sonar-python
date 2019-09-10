@@ -37,6 +37,7 @@ import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
+import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
@@ -511,5 +512,11 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitEllipsis(PyEllipsisExpressionTree pyEllipsisExpressionTree) {
     // noop
+  }
+
+  @Override
+  public void visitDecorator(PyDecoratorTree pyDecoratorTree) {
+    scan(pyDecoratorTree.name());
+    scan(pyDecoratorTree.arguments());
   }
 }

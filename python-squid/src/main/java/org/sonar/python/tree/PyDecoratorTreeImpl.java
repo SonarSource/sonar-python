@@ -25,91 +25,67 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyArgListTree;
-import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
+public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
+  private final Token atToken;
+  private final PyDottedNameTree dottedName;
+  private final Token lPar;
+  private final PyArgListTree argListTree;
+  private final Token rPar;
 
-  private final List<PyDecoratorTree> decorators;
-  private final PyNameTree name;
-  private final PyArgListTree args;
-  private final PyStatementListTree body;
-  private final Token docstring;
-
-  public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, PyNameTree name, PyArgListTree args, PyStatementListTree body, Token docstring) {
+  public PyDecoratorTreeImpl(AstNode astNode, Token atToken, PyDottedNameTree dottedName, AstNode lPar, PyArgListTree argListTree, AstNode rPar) {
     super(astNode);
-    this.decorators = decorators;
-    this.name = name;
-    this.args = args;
-    this.body = body;
-    this.docstring = docstring;
+    this.atToken = atToken;
+    this.dottedName = dottedName;
+    this.lPar = lPar != null ? lPar.getToken() : null;
+    this.argListTree = argListTree;
+    this.rPar = rPar != null ? rPar.getToken() : null;
   }
 
   @Override
-  public Kind getKind() {
-    return Kind.CLASSDEF;
+  public Token atToken() {
+    return atToken;
   }
 
   @Override
-  public void accept(PyTreeVisitor visitor) {
-    visitor.visitClassDef(this);
-  }
-
-  @Override
-  public List<PyDecoratorTree> decorators() {
-    return decorators;
-  }
-
-  @Override
-  public Token classKeyword() {
-    return null;
-  }
-
-  @Override
-  public PyNameTree name() {
-    return name;
+  public PyDottedNameTree name() {
+    return dottedName;
   }
 
   @CheckForNull
   @Override
   public Token leftPar() {
-    return null;
+    return lPar;
   }
 
   @CheckForNull
   @Override
-  public PyArgListTree args() {
-    return args;
+  public PyArgListTree arguments() {
+    return argListTree;
   }
 
   @CheckForNull
   @Override
   public Token rightPar() {
-    return null;
+    return rPar;
   }
 
   @Override
-  public Token colon() {
-    return null;
-  }
-
-  @Override
-  public PyStatementListTree body() {
-    return body;
-  }
-
-  @CheckForNull
-  @Override
-  public Token docstring() {
-    return docstring;
+  public void accept(PyTreeVisitor visitor) {
+    visitor.visitDecorator(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(name, args, body);
+    return Arrays.asList(dottedName, argListTree);
+  }
+
+  @Override
+  public Kind getKind() {
+    return Kind.DECORATOR;
   }
 }

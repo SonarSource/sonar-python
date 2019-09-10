@@ -42,6 +42,7 @@ import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
+import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyDictCompExpressionTree;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
@@ -646,12 +647,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.body().statements()).hasSize(1);
     assertThat(functionDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(functionDefTree.children()).hasSize(3);
-    // TODO
     assertThat(functionDefTree.parameters()).isNull();
     assertThat(functionDefTree.isMethodDefinition()).isFalse();
     assertThat(functionDefTree.docstring()).isNull();
+    assertThat(functionDefTree.decorators()).isEmpty();
     // TODO
-    assertThat(functionDefTree.decorators()).isNull();
     assertThat(functionDefTree.asyncKeyword()).isNull();
     assertThat(functionDefTree.colon()).isNull();
     assertThat(functionDefTree.defKeyword()).isNull();
@@ -662,6 +662,25 @@ public class PythonTreeMakerTest extends RuleTest {
 
     functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
     assertThat(functionDefTree.parameters().all()).hasSize(1);
+
+    functionDefTree = parse("@foo\ndef func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.decorators()).hasSize(1);
+    PyDecoratorTree decoratorTree = functionDefTree.decorators().get(0);
+    assertThat(decoratorTree.getKind()).isEqualTo(Tree.Kind.DECORATOR);
+    assertThat(decoratorTree.atToken().getValue()).isEqualTo("@");
+    assertThat(decoratorTree.name().names().get(0).name()).isEqualTo("foo");
+    assertThat(decoratorTree.leftPar()).isNull();
+    assertThat(decoratorTree.arguments()).isNull();
+    assertThat(decoratorTree.rightPar()).isNull();
+
+    functionDefTree = parse("@foo()\n@bar(1)\ndef func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.decorators()).hasSize(2);
+    PyDecoratorTree decoratorTree1 = functionDefTree.decorators().get(0);
+    assertThat(decoratorTree1.leftPar().getValue()).isEqualTo("(");
+    assertThat(decoratorTree1.arguments()).isNull();
+    assertThat(decoratorTree1.rightPar().getValue()).isEqualTo(")");
+    PyDecoratorTree decoratorTree2 = functionDefTree.decorators().get(1);
+    assertThat(decoratorTree2.arguments().arguments()).extracting(arg -> arg.expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
 
     functionDefTree = parse("def func(x, y): pass", treeMaker::funcDefStatement);
     assertThat(functionDefTree.parameters().all()).hasSize(2);
@@ -724,7 +743,13 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(classDefTree.args().is(Tree.Kind.ARG_LIST)).isTrue();
     assertThat(classDefTree.args().children()).hasSize(1);
     assertThat(classDefTree.args().arguments().get(0).is(Tree.Kind.ARGUMENT)).isTrue();
-    assertThat(classDefTree.decorators()).isNull();
+    assertThat(classDefTree.decorators()).isEmpty();
+
+    astNode = p.parse("@foo.bar\nclass clazz: pass");
+    classDefTree = treeMaker.classDefStatement(astNode);
+    assertThat(classDefTree.decorators()).hasSize(1);
+    PyDecoratorTree decorator = classDefTree.decorators().get(0);
+    assertThat(decorator.name().names()).extracting(PyNameTree::name).containsExactly("foo", "bar");
 
     astNode = p.parse("class clazz:\n  def foo(): pass");
     classDefTree = treeMaker.classDefStatement(astNode);
