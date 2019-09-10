@@ -62,7 +62,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree tree = (PyCallExpressionTree) ctx.syntaxNode();
       if (isOsEnvironGetter(tree.callee(), ctx.symbolTable()) &&
-        tree.arguments().stream().map(PyArgumentTree::expression)
+        tree.arguments().arguments().stream().map(PyArgumentTree::expression)
           .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }

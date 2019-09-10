@@ -21,11 +21,9 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.sonar.python.api.tree.PyArgumentTree;
+import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -33,11 +31,11 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpressionTree {
   private final PyExpressionTree callee;
-  private final List<PyArgumentTree> arguments;
+  private final PyArgListTree arguments;
   private final Token leftPar;
   private final Token rightPar;
 
-  public PyCallExpressionTreeImpl(AstNode astNode, PyExpressionTree callee, List<PyArgumentTree> arguments, AstNode leftPar, AstNode rightPar) {
+  public PyCallExpressionTreeImpl(AstNode astNode, PyExpressionTree callee, PyArgListTree arguments, AstNode leftPar, AstNode rightPar) {
     super(astNode);
     this.callee = callee;
     this.arguments = arguments;
@@ -45,7 +43,7 @@ public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpression
     this.rightPar = rightPar.getToken();
   }
 
-  public PyCallExpressionTreeImpl(PyExpressionTree callee, List<PyArgumentTree> arguments, AstNode leftPar, AstNode rightPar) {
+  public PyCallExpressionTreeImpl(PyExpressionTree callee, PyArgListTree arguments, AstNode leftPar, AstNode rightPar) {
     super(callee.firstToken(), rightPar.getToken());
     this.callee = callee;
     this.arguments = arguments;
@@ -59,7 +57,7 @@ public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpression
   }
 
   @Override
-  public List<PyArgumentTree> arguments() {
+  public PyArgListTree arguments() {
     return arguments;
   }
 
@@ -85,6 +83,6 @@ public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpression
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(callee), arguments).flatMap(List::stream).collect(Collectors.toList());
+    return Arrays.asList(callee, arguments);
   }
 }

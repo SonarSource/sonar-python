@@ -46,7 +46,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = callExpression.arguments();
+      List<PyArgumentTree> arguments = callExpression.arguments().arguments();
       String qualifiedName = getQualifiedName(callExpression, ctx);
       if (CRYPTOGRAPHY.matcher(qualifiedName).matches()) {
         new CryptographyModuleCheck().checkArguments(ctx, arguments);

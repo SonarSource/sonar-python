@@ -20,15 +20,13 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import java.util.List;
 
 public interface PyCallExpressionTree extends PyExpressionTree {
   PyExpressionTree callee();
 
-  // TODO: create PyArgumentListTree to be closer to Python specification (https://docs.python.org/3/reference/expressions.html#calls)
-  List<PyArgumentTree> arguments();
-
   Token leftPar();
+
+  PyArgListTree arguments();
 
   Token rightPar();
 }
