@@ -164,6 +164,7 @@ public interface Tree {
     DICT_COMPREHENSION(PyDictCompExpressionTree.class),
     LIST_COMPREHENSION(PyListOrSetCompExpressionTree.class),
     SET_COMPREHENSION(PyListOrSetCompExpressionTree.class),
+    GENERATOR_EXPR(PyListOrSetCompExpressionTree.class),
     COMP_FOR(PyComprehensionForTree.class),
     COMP_IF(PyComprehensionIfTree.class),
 

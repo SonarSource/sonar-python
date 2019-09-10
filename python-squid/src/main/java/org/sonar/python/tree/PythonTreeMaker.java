@@ -800,7 +800,10 @@ public class PythonTreeMaker {
       return new PyTupleTreeImpl(atom, lPar, Collections.emptyList(), Collections.emptyList(), rPar);
     }
 
-    // TODO COMP_FOR
+    AstNode compFor = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
+    if (compFor != null) {
+      return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.GENERATOR_EXPR, lPar, expression(testListComp.getFirstChild()), compFor(compFor), rPar);
+    }
     PyExpressionListTree expressionList = expressionList(testListComp);
     List<AstNode> commas = testListComp.getChildren(PythonPunctuator.COMMA);
     if (commas.isEmpty()) {

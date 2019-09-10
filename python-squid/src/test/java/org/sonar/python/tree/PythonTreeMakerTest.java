@@ -1552,6 +1552,19 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parenthesized.expression().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
   }
 
+
+  @Test
+  public void generator_expression() {
+    setRootRule(PythonGrammar.TEST);
+    PyListOrSetCompExpressionTree generator = (PyListOrSetCompExpressionTree) parse("(x*x for x in range(10))", treeMaker::expression);
+    assertThat(generator.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
+    assertThat(generator.children()).hasSize(2);
+    assertThat(generator.firstToken().getValue()).isEqualTo("(");
+    assertThat(generator.lastToken().getValue()).isEqualTo(")");
+    assertThat(generator.resultExpression().getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
+    assertThat(generator.comprehensionFor().iterable().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
+  }
+
   @Test
   public void tuples() {
     PyTupleTree empty = parseTuple("()");
