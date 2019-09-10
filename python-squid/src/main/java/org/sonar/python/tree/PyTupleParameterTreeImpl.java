@@ -20,40 +20,48 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.python.api.tree.PyAnyParameterTree;
-import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyParameterListTree;
+import org.sonar.python.api.tree.PyTupleParameterTree;
 import org.sonar.python.api.tree.Tree;
 
-public class PyParameterListTreeImpl extends PyTree implements PyParameterListTree {
+public class PyTupleParameterTreeImpl extends PyTree implements PyTupleParameterTree {
 
   private final List<PyAnyParameterTree> parameters;
+  private final List<Token> commas;
 
-  public PyParameterListTreeImpl(AstNode node, List<PyAnyParameterTree> parameters) {
+  public PyTupleParameterTreeImpl(AstNode node, List<PyAnyParameterTree> parameters, List<Token> commas) {
     super(node);
     this.parameters = parameters;
+    this.commas = commas;
   }
 
   @Override
-  public List<PyParameterTree> nonTuple() {
-    return parameters.stream()
-      .filter(PyParameterTree.class::isInstance)
-      .map(PyParameterTree.class::cast)
-      .collect(Collectors.toList());
+  public Token openingParenthesis() {
+    return firstToken();
   }
 
   @Override
-  public List<PyAnyParameterTree> all() {
-    return Collections.unmodifiableList(parameters);
+  public List<PyAnyParameterTree> parameters() {
+    return parameters;
+  }
+
+  @Override
+  public List<Token> commas() {
+    return commas;
+  }
+
+  @Override
+  public Token closingParenthesis() {
+    return lastToken();
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitParameterList(this);
+    visitor.visitTupleParameter(this);
   }
 
   @Override
@@ -63,6 +71,6 @@ public class PyParameterListTreeImpl extends PyTree implements PyParameterListTr
 
   @Override
   public Kind getKind() {
-    return Kind.PARAMETER_LIST;
+    return Kind.TUPLE_PARAMETER;
   }
 }

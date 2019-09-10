@@ -20,10 +20,12 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.List;
 import java.util.function.Function;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
+import org.sonar.python.api.tree.PyAnyParameterTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyAwaitExpressionTree;
@@ -58,6 +60,7 @@ import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyStarredExpressionTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTupleParameterTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldStatementTree;
@@ -115,13 +118,28 @@ public class BaseTreeVisitorTest extends RuleTest {
   public void fundef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     PyFunctionDefTree pyFunctionDefTree = parse("def foo(x:int): pass", treeMaker::funcDefStatement);
-    PyParameterTree parameter = pyFunctionDefTree.parameters().parameters().get(0);
+    PyParameterTree parameter = pyFunctionDefTree.parameters().nonTuple().get(0);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitFunctionDef(pyFunctionDefTree);
     verify(visitor).visitName(pyFunctionDefTree.name());
     verify(visitor).visitParameter(parameter);
     verify(visitor).visitTypeAnnotation(parameter.typeAnnotation());
     verify(visitor).visitPassStatement((PyPassStatementTree) pyFunctionDefTree.body().statements().get(0));
+  }
+
+  @Test
+  public void fundef_with_tuple_param() {
+    setRootRule(PythonGrammar.FUNCDEF);
+    PyFunctionDefTree pyFunctionDefTree = parse("def foo(x, (y, z)): pass", treeMaker::funcDefStatement);
+    BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
+    visitor.visitFunctionDef(pyFunctionDefTree);
+
+    List<PyAnyParameterTree> parameters = pyFunctionDefTree.parameters().all();
+    PyTupleParameterTree tupleParam = (PyTupleParameterTree) parameters.get(1);
+    verify(visitor).visitParameter((PyParameterTree) parameters.get(0));
+    verify(visitor).visitTupleParameter(tupleParam);
+    verify(visitor).visitParameter((PyParameterTree) tupleParam.parameters().get(0));
+    verify(visitor).visitParameter((PyParameterTree) tupleParam.parameters().get(1));
   }
 
   @Test
@@ -227,7 +245,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitLambda(tree);
     verify(visitor).visitParameterList(tree.arguments());
-    verify(visitor).visitParameter(tree.arguments().parameters().get(0));
+    verify(visitor).visitParameter(tree.arguments().nonTuple().get(0));
   }
 
   @Test

@@ -35,6 +35,7 @@ import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
+import org.sonar.python.api.tree.PyAnyParameterTree;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
@@ -68,6 +69,7 @@ import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
 import org.sonar.python.api.tree.PyPrintStatementTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -80,8 +82,6 @@ import org.sonar.python.api.tree.PyStatementTree;
 import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
-import org.sonar.python.api.tree.PyParameterListTree;
-import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyWithItemTree;
 import org.sonar.python.api.tree.PyWithStatementTree;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
@@ -440,7 +440,7 @@ public class PythonTreeMaker {
     PyParameterListTree parameterList = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (typedArgListNode != null) {
-      List<PyParameterTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
+      List<PyAnyParameterTree> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
         .map(this::parameter).collect(Collectors.toList());
       parameterList = new PyParameterListTreeImpl(typedArgListNode, arguments);
     }
@@ -1018,7 +1018,7 @@ public class PythonTreeMaker {
     AstNode varArgsListNode = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
     PyParameterListTree argListTree = null;
     if (varArgsListNode != null) {
-      List<PyParameterTree> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME).stream()
+      List<PyAnyParameterTree> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME).stream()
         .map(this::parameter).collect(Collectors.toList());
       argListTree = new PyParameterListTreeImpl(varArgsListNode, parameters);
     }
@@ -1026,7 +1026,7 @@ public class PythonTreeMaker {
     return new PyLambdaExpressionTreeImpl(astNode, lambdaKeyword, colonToken, body, argListTree);
   }
 
-  private PyParameterTree parameter(AstNode parameter) {
+  private PyAnyParameterTree parameter(AstNode parameter) {
     AstNode prevSibling = parameter.getPreviousSibling();
 
     if (parameter.is(PythonGrammar.NAME)) {
@@ -1035,12 +1035,21 @@ public class PythonTreeMaker {
 
     // parameter is FPDEF or TFPDEF
 
+    AstNode paramList = parameter.getFirstChild(PythonGrammar.TFPLIST, PythonGrammar.FPLIST);
+    // Python 2 only, PEP 3113: Tuple parameter unpacking removed
+    if (paramList != null) {
+      List<PyAnyParameterTree> params = paramList.getChildren(PythonGrammar.TFPDEF, PythonGrammar.FPDEF).stream()
+        .map(this::parameter)
+        .collect(Collectors.toList());
+      List<Token> commas = paramList.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList());
+      return new PyTupleParameterTreeImpl(parameter, params, commas);
+    }
+
     Token starOrStarStar = null;
     if (prevSibling != null && prevSibling.is(PythonPunctuator.MUL, PythonPunctuator.MUL_MUL)) {
       starOrStarStar = prevSibling.getToken();
     }
 
-    // TODO TFPLIST/FPLIST: Python 2 only (PEP 3113: Tuple parameter unpacking removed)
     AstNode nameNode = parameter.getFirstChild(PythonGrammar.NAME);
     PyNameTree name = nameNode == null ? null : name(nameNode);
 

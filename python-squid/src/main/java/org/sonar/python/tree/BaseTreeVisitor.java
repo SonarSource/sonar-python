@@ -81,6 +81,7 @@ import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTupleParameterTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.PyParameterListTree;
@@ -345,7 +346,12 @@ public class BaseTreeVisitor implements PyTreeVisitor {
 
   @Override
   public void visitParameterList(PyParameterListTree pyParameterListTree) {
-    scan(pyParameterListTree.parameters());
+    scan(pyParameterListTree.all());
+  }
+
+  @Override
+  public void visitTupleParameter(PyTupleParameterTree tree) {
+    scan(tree.parameters());
   }
 
   @Override
