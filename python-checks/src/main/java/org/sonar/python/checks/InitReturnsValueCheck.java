@@ -19,54 +19,60 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = InitReturnsValueCheck.CHECK_KEY)
-public class InitReturnsValueCheck extends PythonCheckAstNode {
+public class InitReturnsValueCheck extends PythonSubscriptionCheck {
 
-  public static final String MESSAGE_RETURN = "Remove this return value.";
-  public static final String MESSAGE_YIELD = "Remove this yield statement.";
+  private static final String MESSAGE_RETURN = "Remove this return value.";
+  private static final String MESSAGE_YIELD = "Remove this yield statement.";
 
   public static final String CHECK_KEY = "S2734";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (!"__init__".equals(node.getFirstChild(PythonGrammar.FUNCNAME).getTokenValue())){
-      return;
-    }
-    List<AstNode> returnYieldStatements = node.getDescendants(PythonGrammar.YIELD_STMT, PythonGrammar.RETURN_STMT);
-    for (AstNode returnYieldStatement : returnYieldStatements){
-      if (CheckUtils.insideFunction(returnYieldStatement, node) && !returnReturnNone(returnYieldStatement)){
-        raiseIssue(returnYieldStatement);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree func = (PyFunctionDefTree) ctx.syntaxNode();
+      if (!"__init__".equals(func.name().name())) {
+        return;
       }
-    }
+      ReturnAndYieldVisitor returnAndYieldVisitor = new ReturnAndYieldVisitor();
+      func.body().accept(returnAndYieldVisitor);
+      for (Tree returnNode : returnAndYieldVisitor.returnNodes) {
+        String message = returnNode.is(Tree.Kind.RETURN_STMT) ? MESSAGE_RETURN : MESSAGE_YIELD;
+        ctx.addIssue(returnNode, message);
+      }
+    });
   }
 
-  private static boolean returnReturnNone(AstNode stmt) {
-    return stmt.is(PythonGrammar.RETURN_STMT)
-        && (stmt.getFirstChild(PythonGrammar.TESTLIST) == null
-        || stmt.getFirstChild(PythonGrammar.TESTLIST).getToken().getValue().equals(PythonKeyword.NONE.getValue()));
-  }
+  private static class ReturnAndYieldVisitor extends BaseTreeVisitor {
 
-  private void raiseIssue(AstNode node) {
-    String message = MESSAGE_RETURN;
-    if (node.is(PythonGrammar.YIELD_STMT)){
-      message = MESSAGE_YIELD;
+    List<Tree> returnNodes = new ArrayList<>();
+
+    @Override
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      // Ignore nested function definitions
     }
-    addIssue(node, message);
+
+    @Override
+    public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
+      if (pyReturnStatementTree.expressions().isEmpty() || pyReturnStatementTree.expressions().get(0).is(Tree.Kind.NONE)) {
+        return;
+      }
+      returnNodes.add(pyReturnStatementTree);
+    }
+
+    @Override
+    public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
+      returnNodes.add(pyYieldStatementTree);
+    }
   }
 }
-
