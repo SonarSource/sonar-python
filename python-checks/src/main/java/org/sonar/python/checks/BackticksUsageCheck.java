@@ -19,29 +19,16 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = BackticksUsageCheck.CHECK_KEY)
-public class BackticksUsageCheck extends PythonCheckAstNode {
+public class BackticksUsageCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "BackticksUsage";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.ATOM);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.REPR, ctx -> ctx.addIssue(ctx.syntaxNode(), "Use \"repr\" instead."));
   }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (astNode.hasDirectChildren(PythonPunctuator.BACKTICK)) {
-      addIssue(astNode, "Use \"repr\" instead.");
-    }
-  }
-
 }
