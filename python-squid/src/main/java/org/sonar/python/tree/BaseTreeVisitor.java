@@ -199,7 +199,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     scan(pyFunctionDefTree.decorators());
     scan(pyFunctionDefTree.name());
     scan(pyFunctionDefTree.parameters());
-    scan(pyFunctionDefTree.annotationReturn());
+    scan(pyFunctionDefTree.returnTypeAnnotation());
     scan(pyFunctionDefTree.body());
   }
 

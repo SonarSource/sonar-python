@@ -25,28 +25,42 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyDecoratorTree;
-import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyParameterListTree;
+import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
 
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   private final List<PyDecoratorTree> decorators;
+  private final Token asyncKeyword;
+  private final Token defKeyword;
   private final PyNameTree name;
+  private final Token leftPar;
   private final PyParameterListTree parameters;
+  private final Token rightPar;
+  private final PyTypeAnnotationTree returnType;
+  private final Token colon;
   private final PyStatementListTree body;
   private final boolean isMethodDefinition;
   private final Token docstring;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, PyNameTree name, PyParameterListTree parameters, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
+  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, Token asyncKeyword, Token defKeyword, PyNameTree name,
+                               Token leftPar, PyParameterListTree parameters, Token rightPar, PyTypeAnnotationTree returnType,
+                               Token colon, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
     super(astNode);
     this.decorators = decorators;
+    this.asyncKeyword = asyncKeyword;
+    this.defKeyword = defKeyword;
     this.name = name;
+    this.leftPar = leftPar;
     this.parameters = parameters;
+    this.rightPar = rightPar;
+    this.returnType = returnType;
+    this.colon = colon;
     this.body = body;
     this.isMethodDefinition = isMethodDefinition;
     this.docstring = docstring;
@@ -59,13 +73,13 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   @Override
   public Token defKeyword() {
-    return null;
+    return defKeyword;
   }
 
   @CheckForNull
   @Override
   public Token asyncKeyword() {
-    return null;
+    return asyncKeyword;
   }
 
   @Override
@@ -75,7 +89,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   @Override
   public Token leftPar() {
-    return null;
+    return leftPar;
   }
 
   @Override
@@ -85,30 +99,18 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   @Override
   public Token rightPar() {
-    return null;
+    return rightPar;
   }
 
   @CheckForNull
   @Override
-  public Token dash() {
-    return null;
-  }
-
-  @CheckForNull
-  @Override
-  public Token gt() {
-    return null;
-  }
-
-  @CheckForNull
-  @Override
-  public PyExpressionTree annotationReturn() {
-    return null;
+  public PyTypeAnnotationTree returnTypeAnnotation() {
+    return returnType;
   }
 
   @Override
   public Token colon() {
-    return null;
+    return colon;
   }
 
   @Override

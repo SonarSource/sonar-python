@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.Token;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
@@ -29,16 +30,46 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotationTree {
 
+  private final Token dash;
+  private final Token gt;
+  private final Token colonToken;
   private final PyExpressionTree expression;
+  private final Kind kind;
 
   public PyTypeAnnotationTreeImpl(Token colonToken, PyExpressionTree expression) {
     super(colonToken, expression.lastToken());
+    this.colonToken = colonToken;
+    this.dash = null;
+    this.gt = null;
     this.expression = expression;
+    this.kind = Kind.TYPE_ANNOTATION;
   }
 
+  public PyTypeAnnotationTreeImpl(Token dash, Token gt, PyExpressionTree expression) {
+    super(dash, expression.lastToken());
+    this.colonToken = null;
+    this.dash = dash;
+    this.gt = gt;
+    this.expression = expression;
+    this.kind = Kind.RETURN_TYPE_ANNOTATION;
+  }
+
+  @CheckForNull
   @Override
   public Token colonToken() {
-    return firstToken();
+    return colonToken;
+  }
+
+  @CheckForNull
+  @Override
+  public Token dash() {
+    return dash;
+  }
+
+  @CheckForNull
+  @Override
+  public Token gt() {
+    return gt;
   }
 
   @Override
@@ -58,6 +89,6 @@ public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotation
 
   @Override
   public Kind getKind() {
-    return Kind.TYPE_ANNOTATION;
+    return kind;
   }
 }

@@ -42,18 +42,10 @@ public interface PyFunctionDefTree extends PyStatementTree {
   Token rightPar();
 
   /**
-   * dash of optional {@code ->}
+   * {@code -> returnType}
    */
   @CheckForNull
-  Token dash();
-  /**
-   * pointer of optional {@code ->}
-   */
-  @CheckForNull
-  Token gt();
-
-  @CheckForNull
-  PyExpressionTree annotationReturn();
+  PyTypeAnnotationTree returnTypeAnnotation();
 
   Token colon();
 
