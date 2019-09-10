@@ -20,6 +20,7 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = callExpression.arguments().arguments();
+      List<PyArgumentTree> arguments = callExpression.arguments() != null ? callExpression.arguments().arguments() : Collections.emptyList();
       if (!(callExpression.callee() instanceof PyQualifiedExpressionTree)) {
         return;
       }

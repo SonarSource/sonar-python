@@ -20,6 +20,7 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -61,8 +62,9 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree tree = (PyCallExpressionTree) ctx.syntaxNode();
+      List<PyArgumentTree> arguments = tree.arguments() != null ? tree.arguments().arguments() : Collections.emptyList();
       if (isOsEnvironGetter(tree.callee(), ctx.symbolTable()) &&
-        tree.arguments().arguments().stream().map(PyArgumentTree::expression)
+        arguments.stream().map(PyArgumentTree::expression)
           .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }

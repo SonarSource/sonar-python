@@ -893,8 +893,11 @@ public class PythonTreeMaker {
 
     if (firstChild.is(PythonPunctuator.LPARENTHESIS)) {
       AstNode argListNode = trailer.getFirstChild(PythonGrammar.ARGLIST);
-      List<PyArgumentTree> arguments = argList(argListNode);
-      return new PyCallExpressionTreeImpl(expr, new PyArgListTreeImpl(argListNode, arguments), firstChild, trailer.getFirstChild(PythonPunctuator.RPARENTHESIS));
+      PyArgListTree argListTree = null;
+      if (argListNode != null) {
+        argListTree = new PyArgListTreeImpl(argListNode, argList(argListNode));
+      }
+      return new PyCallExpressionTreeImpl(expr, argListTree, firstChild, trailer.getFirstChild(PythonPunctuator.RPARENTHESIS));
 
     } else if (firstChild.is(PythonPunctuator.LBRACKET)) {
       Token leftBracket = trailer.getFirstChild(PythonPunctuator.LBRACKET).getToken();
@@ -1016,8 +1019,11 @@ public class PythonTreeMaker {
   public PyCallExpressionTree callExpression(AstNode astNode) {
     PyExpressionTree callee = expression(astNode.getFirstChild());
     AstNode argListNode = astNode.getFirstChild(PythonGrammar.ARGLIST);
-    List<PyArgumentTree> arguments = argList(argListNode);
-    return new PyCallExpressionTreeImpl(astNode, callee, new PyArgListTreeImpl(argListNode, arguments),
+    PyArgListTree argListTree = null;
+    if (argListNode != null) {
+      argListTree = new PyArgListTreeImpl(argListNode, argList(argListNode));
+    }
+    return new PyCallExpressionTreeImpl(astNode, callee, argListTree,
       astNode.getFirstChild(PythonPunctuator.LPARENTHESIS), astNode.getFirstChild(PythonPunctuator.RPARENTHESIS));
   }
 

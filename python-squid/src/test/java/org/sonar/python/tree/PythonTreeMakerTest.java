@@ -1104,7 +1104,7 @@ public class PythonTreeMakerTest extends RuleTest {
   public void call_expression() {
     setRootRule(PythonGrammar.CALL_EXPR);
     PyCallExpressionTree callExpression = parse("foo()", treeMaker::callExpression);
-    assertThat(callExpression.arguments().arguments()).isEmpty();
+    assertThat(callExpression.arguments()).isNull();
     PyNameTree name = (PyNameTree) callExpression.callee();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(callExpression.children()).hasSize(2);
@@ -1122,7 +1122,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callExpression.children()).hasSize(2);
 
     callExpression = parse("foo.bar()", treeMaker::callExpression);
-    assertThat(callExpression.arguments().arguments()).isEmpty();
+    assertThat(callExpression.arguments()).isNull();
     PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) callExpression.callee();
     assertThat(callee.name().name()).isEqualTo("bar");
     assertThat(((PyNameTree) callee.qualifier()).name()).isEqualTo("foo");
