@@ -19,41 +19,38 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Set;
+import java.util.function.Consumer;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = BreakContinueOutsideLoopCheck.CHECK_KEY)
-public class BreakContinueOutsideLoopCheck extends PythonCheckAstNode {
+public class BreakContinueOutsideLoopCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove this \"%s\" statement";
   public static final String CHECK_KEY = "S1716";
 
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.BREAK_STMT, PythonGrammar.CONTINUE_STMT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode currentParent = node.getParent();
-    while (currentParent != null){
-      if (currentParent.is(PythonGrammar.WHILE_STMT, PythonGrammar.FOR_STMT)){
+  private static final Consumer<SubscriptionContext> SUBSCRIPTION_CONTEXT_CONSUMER = ctx -> {
+    PyStatementTree statement = (PyStatementTree) ctx.syntaxNode();
+    Tree currentParent = statement.parent();
+    while (currentParent != null) {
+      if (currentParent.is(Tree.Kind.WHILE_STMT) || currentParent.is(Tree.Kind.FOR_STMT)) {
         return;
-      } else if (currentParent.is(PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)){
-        raiseIssue(node);
+      } else if (currentParent.is(Tree.Kind.CLASSDEF) || currentParent.is(Tree.Kind.FUNCDEF)) {
+        ctx.addIssue(statement, String.format(MESSAGE, statement.firstToken().getValue()));
         return;
       }
-      currentParent = currentParent.getParent();
+      currentParent = currentParent.parent();
     }
-    raiseIssue(node);
-  }
+    ctx.addIssue(statement, String.format(MESSAGE, statement.firstToken().getValue()));
+  };
 
-  private void raiseIssue(AstNode node) {
-    addIssue(node, String.format(MESSAGE, node.getToken().getValue()));
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.BREAK_STMT, SUBSCRIPTION_CONTEXT_CONSUMER);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CONTINUE_STMT, SUBSCRIPTION_CONTEXT_CONSUMER);
   }
 }
 
