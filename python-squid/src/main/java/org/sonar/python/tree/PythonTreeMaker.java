@@ -713,7 +713,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.POWER)) {
       return powerExpression(astNode);
     }
-    if (astNode.is(PythonGrammar.LAMBDEF)) {
+    if (astNode.is(PythonGrammar.LAMBDEF, PythonGrammar.LAMBDEF_NOCOND)) {
       return lambdaExpression(astNode);
     }
     if (astNode.is(PythonGrammar.FACTOR, PythonGrammar.NOT_TEST)) {
@@ -734,7 +734,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ELLIPSIS)) {
       return new PyEllipsisExpressionTreeImpl(astNode);
     }
-    return new PyExpressionTreeImpl(astNode);
+    throw new IllegalStateException("Expression " + astNode.getType() + " not correctly translated to strongly typed AST");
   }
 
   private PyExpressionTree repr(AstNode astNode) {
@@ -889,7 +889,10 @@ public class PythonTreeMaker {
     PyExpressionTree upperBound = sliceBound(boundSeparator.getNextSibling());
     AstNode strideNode = subscript.getFirstChild(PythonGrammar.SLICEOP);
     Token strideSeparator = strideNode == null ? null : strideNode.getToken();
-    PyExpressionTree stride = strideNode == null ? null : expression(strideNode.getLastChild());
+    PyExpressionTree stride = null;
+    if (strideNode != null && strideNode.hasDirectChildren(PythonGrammar.TEST)) {
+      stride = expression(strideNode.getLastChild());
+    }
     return new PySliceItemTreeImpl(subscript, lowerBound, boundSeparator.getToken(), upperBound, strideSeparator, stride);
   }
 
@@ -1011,7 +1014,7 @@ public class PythonTreeMaker {
   public PyLambdaExpressionTree lambdaExpression(AstNode astNode) {
     Token lambdaKeyword = astNode.getFirstChild(PythonKeyword.LAMBDA).getToken();
     Token colonToken = astNode.getFirstChild(PythonPunctuator.COLON).getToken();
-    PyExpressionTree body = expression(astNode.getFirstChild(PythonGrammar.TEST));
+    PyExpressionTree body = expression(astNode.getFirstChild(PythonGrammar.TEST, PythonGrammar.TEST_NOCOND));
     AstNode varArgsListNode = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
     PyParameterListTree argListTree = null;
     if (varArgsListNode != null) {

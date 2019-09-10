@@ -135,6 +135,16 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  public void unexpected_expression_should_throw_an_exception() {
+    try {
+      parse("", treeMaker::expression);
+      fail("unexpected ASTNode type for expression should not succeed to be translated to Strongly typed AST");
+    } catch (IllegalStateException iae) {
+      assertThat(iae).hasMessage("Expression FILE_INPUT not correctly translated to strongly typed AST");
+    }
+  }
+
+  @Test
   public void verify_expected_statement() {
     Map<String, Class<? extends Tree>> testData = new HashMap<>();
     testData.put("pass", PyPassStatementTree.class);
@@ -1334,6 +1344,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(strideOnly.upperBound()).isNull();
     assertThat(((PyNameTree) strideOnly.stride()).name()).isEqualTo("a");
     assertThat(strideOnly.strideSeparator()).isNotNull();
+
+    PySliceItemTree strideContainingOnlyColon = parse("::", treeMaker::sliceItem);
+    assertThat(strideContainingOnlyColon.lowerBound()).isNull();
+    assertThat(strideContainingOnlyColon.upperBound()).isNull();
+    assertThat(strideContainingOnlyColon.strideSeparator()).isNotNull();
   }
 
   @Test
@@ -1369,6 +1384,15 @@ public class PythonTreeMakerTest extends RuleTest {
     PyParameterTree starStarArg = lambdaExpressionTree.arguments().parameters().get(1);
     assertThat(starStarArg.starToken().getValue()).isEqualTo("**");
     assertThat(starStarArg.name().name()).isEqualTo("b");
+
+    lambdaExpressionTree = parse("lambda x: x if x > 1 else 0", treeMaker::lambdaExpression);
+    assertThat(lambdaExpressionTree.getKind()).isEqualTo(Tree.Kind.LAMBDA);
+    assertThat(lambdaExpressionTree.expression()).isInstanceOf(PyConditionalExpressionTree.class);
+
+    setRootRule(PythonGrammar.LAMBDEF_NOCOND);
+    lambdaExpressionTree = parse("lambda x: x", treeMaker::lambdaExpression);
+    assertThat(lambdaExpressionTree.getKind()).isEqualTo(Tree.Kind.LAMBDA);
+    assertThat(lambdaExpressionTree.expression()).isInstanceOf(PyNameTree.class);
   }
 
   @Test
