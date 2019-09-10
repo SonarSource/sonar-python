@@ -1139,6 +1139,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callee.name().name()).isEqualTo("bar");
     assertThat(callee.qualifier().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
 
+    nestingCall = (PyCallExpressionTree) parse("foo('a').bar()", treeMaker::expression);
+    assertThat(nestingCall.arguments()).isNull();
+
     PyCallExpressionTree callOnSubscription = (PyCallExpressionTree) parse("a[42](arg)", treeMaker::expression);
     PySubscriptionExpressionTree subscription = (PySubscriptionExpressionTree) callOnSubscription.callee();
     assertThat(((PyNameTree) subscription.object()).name()).isEqualTo("a");

@@ -6,6 +6,7 @@ open("/usr/tmp/f","w+") # Noncompliant
 open("/dev/shm/f","w+") # Noncompliant
 open("dev/shm/f","w+") # OK
 open("/tmpx","w+") # OK
+open() # OK
 
 # Linux
 open("/dev/mqueue/f","w+") # Noncompliant
