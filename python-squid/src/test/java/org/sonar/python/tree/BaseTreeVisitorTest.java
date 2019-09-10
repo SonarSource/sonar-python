@@ -244,8 +244,8 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyLambdaExpressionTree tree = parse("lambda x : x", treeMaker::lambdaExpression);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     visitor.visitLambda(tree);
-    verify(visitor).visitParameterList(tree.arguments());
-    verify(visitor).visitParameter(tree.arguments().nonTuple().get(0));
+    verify(visitor).visitParameterList(tree.parameters());
+    verify(visitor).visitParameter(tree.parameters().nonTuple().get(0));
   }
 
   @Test

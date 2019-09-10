@@ -29,7 +29,6 @@ import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
-import org.sonar.python.api.tree.PyAnyParameterTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
@@ -1372,29 +1371,29 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lambdaExpressionTree.lambdaKeyword().getValue()).isEqualTo("lambda");
     assertThat(lambdaExpressionTree.colonToken().getValue()).isEqualTo(":");
 
-    assertThat(lambdaExpressionTree.arguments().nonTuple()).hasSize(1);
+    assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(1);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda x, y: x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().nonTuple()).hasSize(2);
+    assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda x = 'foo': x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER);
-    assertThat(lambdaExpressionTree.arguments().nonTuple().get(0).name().name()).isEqualTo("x");
+    assertThat(lambdaExpressionTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER);
+    assertThat(lambdaExpressionTree.parameters().nonTuple().get(0).name().name()).isEqualTo("x");
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER);
-    assertThat(((PyTupleParameterTree) lambdaExpressionTree.arguments().all().get(0)).parameters()).hasSize(2);
+    assertThat(lambdaExpressionTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER);
+    assertThat(((PyTupleParameterTree) lambdaExpressionTree.parameters().all().get(0)).parameters()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda *a, **b: 42", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().nonTuple()).hasSize(2);
-    PyParameterTree starArg = lambdaExpressionTree.arguments().nonTuple().get(0);
+    assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(2);
+    PyParameterTree starArg = lambdaExpressionTree.parameters().nonTuple().get(0);
     assertThat(starArg.starToken().getValue()).isEqualTo("*");
     assertThat(starArg.name().name()).isEqualTo("a");
-    PyParameterTree starStarArg = lambdaExpressionTree.arguments().nonTuple().get(1);
+    PyParameterTree starStarArg = lambdaExpressionTree.parameters().nonTuple().get(1);
     assertThat(starStarArg.starToken().getValue()).isEqualTo("**");
     assertThat(starStarArg.name().name()).isEqualTo("b");
 

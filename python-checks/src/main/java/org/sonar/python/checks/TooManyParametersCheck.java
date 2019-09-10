@@ -55,12 +55,12 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Kind.LAMBDA, ctx -> {
       PyLambdaExpressionTree tree = (PyLambdaExpressionTree) ctx.syntaxNode();
-      if (tree.arguments() != null) {
-        int nbParameters = tree.arguments().all().size();
+      if (tree.parameters() != null) {
+        int nbParameters = tree.parameters().all().size();
         if (nbParameters > max) {
           String name = "Lambda";
           String message = String.format(MESSAGE, name, nbParameters, max);
-          ctx.addIssue(tree.arguments(), message);
+          ctx.addIssue(tree.parameters(), message);
         }
       }
     });

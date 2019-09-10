@@ -340,7 +340,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
 
   @Override
   public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
-    scan(pyLambdaExpressionTree.arguments());
+    scan(pyLambdaExpressionTree.parameters());
     scan(pyLambdaExpressionTree.expression());
   }
 
