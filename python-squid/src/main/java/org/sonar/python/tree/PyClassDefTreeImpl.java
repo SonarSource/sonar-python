@@ -35,16 +35,25 @@ import org.sonar.python.api.tree.Tree;
 public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   private final List<PyDecoratorTree> decorators;
+  private final Token classKeyword;
   private final PyNameTree name;
+  private final Token leftPar;
   private final PyArgListTree args;
+  private final Token rightPar;
+  private final Token colon;
   private final PyStatementListTree body;
   private final Token docstring;
 
-  public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, PyNameTree name, PyArgListTree args, PyStatementListTree body, Token docstring) {
+  public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, Token classKeyword, PyNameTree name,
+                            Token leftPar, PyArgListTree args, Token rightPar, Token colon, PyStatementListTree body, Token docstring) {
     super(astNode);
     this.decorators = decorators;
+    this.classKeyword = classKeyword;
     this.name = name;
+    this.leftPar = leftPar;
     this.args = args;
+    this.rightPar = rightPar;
+    this.colon = colon;
     this.body = body;
     this.docstring = docstring;
   }
@@ -66,7 +75,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   @Override
   public Token classKeyword() {
-    return null;
+    return classKeyword;
   }
 
   @Override
@@ -77,7 +86,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   @CheckForNull
   @Override
   public Token leftPar() {
-    return null;
+    return leftPar;
   }
 
   @CheckForNull
@@ -89,12 +98,12 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   @CheckForNull
   @Override
   public Token rightPar() {
-    return null;
+    return rightPar;
   }
 
   @Override
   public Token colon() {
-    return null;
+    return colon;
   }
 
   @Override

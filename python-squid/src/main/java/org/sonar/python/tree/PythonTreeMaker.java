@@ -514,7 +514,11 @@ public class PythonTreeMaker {
       args = new PyArgListTreeImpl(argList, arguments);
     }
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyClassDefTreeImpl(astNode, decorators, name, args, body, DocstringExtractor.extractDocstring(astNode));
+    Token classToken = astNode.getFirstChild(PythonKeyword.CLASS).getToken();
+    AstNode rightPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS);
+    Token colon = astNode.getFirstChild(PythonPunctuator.COLON).getToken();
+    return new PyClassDefTreeImpl(astNode, decorators, classToken, name,
+      leftPar != null ? leftPar.getToken() : null, args, rightPar != null ? rightPar.getToken() : null, colon, body, DocstringExtractor.extractDocstring(astNode));
   }
 
   private PyNameTree name(AstNode astNode) {
