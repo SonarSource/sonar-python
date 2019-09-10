@@ -105,6 +105,8 @@ public interface PyTreeVisitor {
 
   void visitParameterList(PyParameterListTree pyParameterListTree);
 
+  void visitTupleParameter(PyTupleParameterTree tree);
+
   void visitParameter(PyParameterTree tree);
 
   void visitTypeAnnotation(PyTypeAnnotationTree tree);

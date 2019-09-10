@@ -139,6 +139,8 @@ public interface Tree {
 
     PARAMETER(PyParameterTree.class),
 
+    TUPLE_PARAMETER(PyTupleParameterTree.class),
+
     TYPE_ANNOTATION(PyTypeAnnotationTree.class),
 
     PARAMETER_LIST(PyParameterListTree.class),

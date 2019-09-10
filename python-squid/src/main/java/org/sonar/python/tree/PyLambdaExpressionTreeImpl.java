@@ -59,7 +59,7 @@ public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpres
   }
 
   @Override
-  public PyParameterListTree arguments() {
+  public PyParameterListTree parameters() {
     return parameterList;
   }
 

@@ -19,12 +19,17 @@
  */
 package org.sonar.python.api.tree;
 
+import com.sonar.sslr.api.Token;
 import java.util.List;
 
-public interface PyParameterListTree extends Tree {
+public interface PyTupleParameterTree extends PyAnyParameterTree {
 
-  List<PyParameterTree> nonTuple();
+  Token openingParenthesis();
 
-  List<PyAnyParameterTree> all();
+  List<PyAnyParameterTree> parameters();
+
+  List<Token> commas();
+
+  Token closingParenthesis();
 
 }

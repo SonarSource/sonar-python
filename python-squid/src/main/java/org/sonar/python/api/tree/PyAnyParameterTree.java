@@ -19,12 +19,5 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.List;
-
-public interface PyParameterListTree extends Tree {
-
-  List<PyParameterTree> nonTuple();
-
-  List<PyAnyParameterTree> all();
-
+public interface PyAnyParameterTree extends Tree {
 }

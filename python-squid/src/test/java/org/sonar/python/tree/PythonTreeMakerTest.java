@@ -88,6 +88,7 @@ import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyTupleParameterTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
@@ -660,13 +661,14 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.rightPar()).isNull();
 
     functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.parameters().parameters()).hasSize(1);
+    assertThat(functionDefTree.parameters().all()).hasSize(1);
 
     functionDefTree = parse("def func(x, y): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.parameters().parameters()).hasSize(2);
+    assertThat(functionDefTree.parameters().all()).hasSize(2);
 
     functionDefTree = parse("def func(x = 'foo', y): pass", treeMaker::funcDefStatement);
-    List<PyParameterTree> parameters = functionDefTree.parameters().parameters();
+    assertThat(functionDefTree.parameters().all()).isEqualTo(functionDefTree.parameters().nonTuple());
+    List<PyParameterTree> parameters = functionDefTree.parameters().nonTuple();
     assertThat(parameters).hasSize(2);
     PyParameterTree parameter1 = parameters.get(0);
     assertThat(parameter1.name().name()).isEqualTo("x");
@@ -677,12 +679,12 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parameter2.defaultValue()).isNull();
 
     functionDefTree = parse("def func(p1, *p2, **p3): pass", treeMaker::funcDefStatement);
-    parameters = functionDefTree.parameters().parameters();
+    parameters = functionDefTree.parameters().nonTuple();
     assertThat(parameters).extracting(p -> p.name().name()).containsExactly("p1", "p2", "p3");
     assertThat(parameters).extracting(p -> p.starToken() == null ? null : p.starToken().getValue()).containsExactly(null, "*", "**");
 
     functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
-    parameters = functionDefTree.parameters().parameters();
+    parameters = functionDefTree.parameters().nonTuple();
     assertThat(parameters).hasSize(2);
     PyTypeAnnotationTree annotation = parameters.get(0).typeAnnotation();
     assertThat(annotation.getKind()).isEqualTo(Tree.Kind.TYPE_ANNOTATION);
@@ -690,6 +692,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(((PyNameTree) annotation.expression()).name()).isEqualTo("int");
     assertThat(annotation.children()).hasSize(1);
     assertThat(parameters.get(1).typeAnnotation()).isNull();
+
+    functionDefTree = parse("def func(a, ((b, c), d)): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.parameters().all()).hasSize(2);
+    assertThat(functionDefTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER, Tree.Kind.TUPLE_PARAMETER);
+    PyTupleParameterTree tupleParam = (PyTupleParameterTree) functionDefTree.parameters().all().get(1);
+    assertThat(tupleParam.openingParenthesis().getValue()).isEqualTo("(");
+    assertThat(tupleParam.closingParenthesis().getValue()).isEqualTo(")");
+    assertThat(tupleParam.parameters()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER, Tree.Kind.PARAMETER);
+    assertThat(tupleParam.commas()).extracting(Token::getValue).containsExactly(",");
+    assertThat(tupleParam.children()).hasSize(2);
 
     functionDefTree = parse("def func(x : int, y):\n  \"\"\"\n" +
       "This is a function docstring\n" +
@@ -1359,29 +1371,29 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lambdaExpressionTree.lambdaKeyword().getValue()).isEqualTo("lambda");
     assertThat(lambdaExpressionTree.colonToken().getValue()).isEqualTo(":");
 
-    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(1);
+    assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(1);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda x, y: x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(2);
+    assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda x = 'foo': x", treeMaker::lambdaExpression);
-    List<PyParameterTree> arguments = lambdaExpressionTree.arguments().parameters();
-    assertThat(arguments).hasSize(1);
-    assertThat(arguments.get(0).name().name()).isEqualTo("x");
+    assertThat(lambdaExpressionTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER);
+    assertThat(lambdaExpressionTree.parameters().nonTuple().get(0).name().name()).isEqualTo("x");
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(1);
+    assertThat(lambdaExpressionTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER);
+    assertThat(((PyTupleParameterTree) lambdaExpressionTree.parameters().all().get(0)).parameters()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(2);
 
     lambdaExpressionTree = parse("lambda *a, **b: 42", treeMaker::lambdaExpression);
-    assertThat(lambdaExpressionTree.arguments().parameters()).hasSize(2);
-    PyParameterTree starArg = lambdaExpressionTree.arguments().parameters().get(0);
+    assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(2);
+    PyParameterTree starArg = lambdaExpressionTree.parameters().nonTuple().get(0);
     assertThat(starArg.starToken().getValue()).isEqualTo("*");
     assertThat(starArg.name().name()).isEqualTo("a");
-    PyParameterTree starStarArg = lambdaExpressionTree.arguments().parameters().get(1);
+    PyParameterTree starStarArg = lambdaExpressionTree.parameters().nonTuple().get(1);
     assertThat(starStarArg.starToken().getValue()).isEqualTo("**");
     assertThat(starStarArg.name().name()).isEqualTo("b");
 

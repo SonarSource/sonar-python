@@ -22,7 +22,7 @@ package org.sonar.python.api.tree;
 import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
-public interface PyParameterTree extends Tree {
+public interface PyParameterTree extends PyAnyParameterTree {
 
   @CheckForNull
   Token starToken();

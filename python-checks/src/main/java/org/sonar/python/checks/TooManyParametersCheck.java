@@ -43,7 +43,7 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
       PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
       if (tree.parameters() != null) {
-        int nbParameters = tree.parameters().parameters().size();
+        int nbParameters = tree.parameters().all().size();
         if (nbParameters > max) {
           String typeName = tree.isMethodDefinition() ? "Method" : "Function";
           String name = String.format("%s \"%s\"", typeName, tree.name().name());
@@ -55,12 +55,12 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Kind.LAMBDA, ctx -> {
       PyLambdaExpressionTree tree = (PyLambdaExpressionTree) ctx.syntaxNode();
-      if (tree.arguments() != null) {
-        int nbParameters = tree.arguments().parameters().size();
+      if (tree.parameters() != null) {
+        int nbParameters = tree.parameters().all().size();
         if (nbParameters > max) {
           String name = "Lambda";
           String message = String.format(MESSAGE, name, nbParameters, max);
-          ctx.addIssue(tree.arguments(), message);
+          ctx.addIssue(tree.parameters(), message);
         }
       }
     });
