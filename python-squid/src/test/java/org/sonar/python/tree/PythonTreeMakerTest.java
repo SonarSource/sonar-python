@@ -745,6 +745,10 @@ public class PythonTreeMakerTest extends RuleTest {
     PyClassDefTree classDefTree = treeMaker.classDefStatement(astNode);
     assertThat(classDefTree.name()).isNotNull();
     assertThat(classDefTree.docstring()).isNull();
+    assertThat(classDefTree.classKeyword().getValue()).isEqualTo("class");
+    assertThat(classDefTree.leftPar().getValue()).isEqualTo("(");
+    assertThat(classDefTree.rightPar().getValue()).isEqualTo(")");
+    assertThat(classDefTree.colon().getValue()).isEqualTo(":");
     assertThat(classDefTree.name().name()).isEqualTo("clazz");
     assertThat(classDefTree.body().statements()).hasSize(1);
     assertThat(classDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
