@@ -453,7 +453,25 @@ public class PythonTreeMaker {
     }
 
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
-    return new PyFunctionDefTreeImpl(astNode, decorators, name, parameterList, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
+    AstNode defNode = astNode.getFirstChild(PythonKeyword.DEF);
+    Token asyncToken = null;
+    AstNode defPreviousSibling = defNode.getPreviousSibling();
+    if (defPreviousSibling != null && defPreviousSibling.getToken().getValue().equals("async")) {
+      asyncToken = defPreviousSibling.getToken();
+    }
+    Token lPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken();
+    Token rPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken();
+
+    PyTypeAnnotationTree returnType = null;
+    AstNode returnTypeNode = astNode.getFirstChild(PythonGrammar.FUN_RETURN_ANNOTATION);
+    if (returnTypeNode != null) {
+      List<AstNode> children = returnTypeNode.getChildren();
+      returnType = new PyTypeAnnotationTreeImpl(children.get(0).getToken(), children.get(1).getToken(), expression(children.get(2)));
+    }
+
+    Token colon = astNode.getFirstChild(PythonPunctuator.COLON).getToken();
+    return new PyFunctionDefTreeImpl(astNode, decorators, asyncToken, defNode.getToken(), name, lPar, parameterList, rPar,
+      returnType, colon, body, isMethodDefinition(astNode), DocstringExtractor.extractDocstring(astNode));
   }
 
   private PyDecoratorTree decorator(AstNode astNode) {

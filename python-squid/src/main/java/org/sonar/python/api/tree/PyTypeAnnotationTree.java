@@ -20,10 +20,17 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
+import javax.annotation.CheckForNull;
 
 public interface PyTypeAnnotationTree extends Tree {
-
+  @CheckForNull
   Token colonToken();
+
+  @CheckForNull
+  Token dash();
+
+  @CheckForNull
+  Token gt();
 
   PyExpressionTree expression();
 

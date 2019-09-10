@@ -651,17 +651,25 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.isMethodDefinition()).isFalse();
     assertThat(functionDefTree.docstring()).isNull();
     assertThat(functionDefTree.decorators()).isEmpty();
-    // TODO
     assertThat(functionDefTree.asyncKeyword()).isNull();
-    assertThat(functionDefTree.colon()).isNull();
-    assertThat(functionDefTree.defKeyword()).isNull();
-    assertThat(functionDefTree.dash()).isNull();
-    assertThat(functionDefTree.gt()).isNull();
-    assertThat(functionDefTree.leftPar()).isNull();
-    assertThat(functionDefTree.rightPar()).isNull();
+    assertThat(functionDefTree.returnTypeAnnotation()).isNull();
+    assertThat(functionDefTree.colon().getValue()).isEqualTo(":");
+    assertThat(functionDefTree.defKeyword().getValue()).isEqualTo("def");
+    assertThat(functionDefTree.leftPar().getValue()).isEqualTo("(");
+    assertThat(functionDefTree.rightPar().getValue()).isEqualTo(")");
 
     functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
     assertThat(functionDefTree.parameters().all()).hasSize(1);
+
+    functionDefTree = parse("async def func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.asyncKeyword().getValue()).isEqualTo("async");
+
+    functionDefTree = parse("def func(x) -> string : pass", treeMaker::funcDefStatement);
+    PyTypeAnnotationTree returnType = functionDefTree.returnTypeAnnotation();
+    assertThat(returnType.getKind()).isEqualTo(Tree.Kind.RETURN_TYPE_ANNOTATION);
+    assertThat(returnType.dash().getValue()).isEqualTo("-");
+    assertThat(returnType.gt().getValue()).isEqualTo(">");
+    assertThat(returnType.expression().getKind()).isEqualTo(Tree.Kind.NAME);
 
     functionDefTree = parse("@foo\ndef func(x): pass", treeMaker::funcDefStatement);
     assertThat(functionDefTree.decorators()).hasSize(1);
