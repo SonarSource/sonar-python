@@ -19,30 +19,24 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = NewStyleClassCheck.CHECK_KEY)
-public class NewStyleClassCheck extends PythonCheckAstNode {
+public class NewStyleClassCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "S1722";
   private static final String MESSAGE = "Add inheritance from \"object\" or some other new-style class.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CLASSDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      if (classDef.args() == null || classDef.args().arguments() == null || classDef.args().arguments().isEmpty()) {
+        ctx.addIssue(classDef.name(), MESSAGE);
+      }
+    });
   }
-
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode argListNode = node.getFirstChild(PythonGrammar.ARGLIST);
-    if (argListNode == null || !argListNode.hasDirectChildren(PythonGrammar.ARGUMENT)) {
-      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), MESSAGE);
-    }
-  }
-
 }
