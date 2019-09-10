@@ -1067,27 +1067,29 @@ public class PythonTreeMakerTest extends RuleTest {
   public void call_expression() {
     setRootRule(PythonGrammar.CALL_EXPR);
     PyCallExpressionTree callExpression = parse("foo()", treeMaker::callExpression);
-    assertThat(callExpression.arguments()).isEmpty();
+    assertThat(callExpression.arguments().arguments()).isEmpty();
     PyNameTree name = (PyNameTree) callExpression.callee();
     assertThat(name.name()).isEqualTo("foo");
-    assertThat(callExpression.children()).hasSize(1);
+    assertThat(callExpression.children()).hasSize(2);
+    assertThat(callExpression.leftPar().getValue()).isEqualTo("(");
+    assertThat(callExpression.rightPar().getValue()).isEqualTo(")");
 
     callExpression = parse("foo(x, y)", treeMaker::callExpression);
-    assertThat(callExpression.arguments()).hasSize(2);
-    PyNameTree firstArg = (PyNameTree) callExpression.arguments().get(0).expression();
-    PyNameTree sndArg = (PyNameTree) callExpression.arguments().get(1).expression();
+    assertThat(callExpression.arguments().arguments()).hasSize(2);
+    PyNameTree firstArg = (PyNameTree) callExpression.arguments().arguments().get(0).expression();
+    PyNameTree sndArg = (PyNameTree) callExpression.arguments().arguments().get(1).expression();
     assertThat(firstArg.name()).isEqualTo("x");
     assertThat(sndArg.name()).isEqualTo("y");
     name = (PyNameTree) callExpression.callee();
     assertThat(name.name()).isEqualTo("foo");
-    assertThat(callExpression.children()).hasSize(3);
+    assertThat(callExpression.children()).hasSize(2);
 
     callExpression = parse("foo.bar()", treeMaker::callExpression);
-    assertThat(callExpression.arguments()).isEmpty();
+    assertThat(callExpression.arguments().arguments()).isEmpty();
     PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) callExpression.callee();
     assertThat(callee.name().name()).isEqualTo("bar");
     assertThat(((PyNameTree) callee.qualifier()).name()).isEqualTo("foo");
-    assertThat(callExpression.children()).hasSize(1);
+    assertThat(callExpression.children()).hasSize(2);
   }
 
   @Test
@@ -1095,7 +1097,7 @@ public class PythonTreeMakerTest extends RuleTest {
     setRootRule(PythonGrammar.TEST);
 
     PyCallExpressionTree nestingCall = (PyCallExpressionTree) parse("foo('a').bar(42)", treeMaker::expression);
-    assertThat(nestingCall.arguments()).extracting(t -> t.expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(nestingCall.arguments().arguments()).extracting(t -> t.expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
     PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) nestingCall.callee();
     assertThat(callee.name().name()).isEqualTo("bar");
     assertThat(callee.qualifier().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
@@ -1104,7 +1106,7 @@ public class PythonTreeMakerTest extends RuleTest {
     PySubscriptionExpressionTree subscription = (PySubscriptionExpressionTree) callOnSubscription.callee();
     assertThat(((PyNameTree) subscription.object()).name()).isEqualTo("a");
     assertThat(subscription.subscripts().expressions()).extracting(Tree::getKind).containsExactly(Tree.Kind.NUMERIC_LITERAL);
-    assertThat(((PyNameTree) callOnSubscription.arguments().get(0).expression()).name()).isEqualTo("arg");
+    assertThat(((PyNameTree) callOnSubscription.arguments().arguments().get(0).expression()).name()).isEqualTo("arg");
   }
 
   @Test
