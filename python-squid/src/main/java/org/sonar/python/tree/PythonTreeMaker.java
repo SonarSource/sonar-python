@@ -762,7 +762,7 @@ public class PythonTreeMaker {
         return new PyDictCompExpressionTreeImpl(lCurlyBrace, keyExpression, colon.getToken(), valueExpression, compFor, rCurlyBrace);
       } else {
         PyExpressionTree resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
-        return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor, rCurlyBrace);
+        return new PyComprehensionExpressionTreeImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor, rCurlyBrace);
       }
     }
     List<Token> commas = dictOrSetMaker.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList());
@@ -800,7 +800,10 @@ public class PythonTreeMaker {
       return new PyTupleTreeImpl(atom, lPar, Collections.emptyList(), Collections.emptyList(), rPar);
     }
 
-    // TODO COMP_FOR
+    AstNode compFor = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
+    if (compFor != null) {
+      return new PyComprehensionExpressionTreeImpl(Tree.Kind.GENERATOR_EXPR, lPar, expression(testListComp.getFirstChild()), compFor(compFor), rPar);
+    }
     PyExpressionListTree expressionList = expressionList(testListComp);
     List<AstNode> commas = testListComp.getChildren(PythonPunctuator.COMMA);
     if (commas.isEmpty()) {
@@ -914,7 +917,7 @@ public class PythonTreeMaker {
       AstNode compForNode = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
       if (compForNode != null) {
         PyExpressionTree resultExpression = expression(testListComp.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
-        return new PyListOrSetCompExpressionTreeImpl(Tree.Kind.LIST_COMPREHENSION, leftBracket, resultExpression, compFor(compForNode), rightBracket);
+        return new PyComprehensionExpressionTreeImpl(Tree.Kind.LIST_COMPREHENSION, leftBracket, resultExpression, compFor(compForNode), rightBracket);
       }
       elements = expressionList(testListComp);
     } else {

@@ -19,7 +19,7 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyListOrSetCompExpressionTree extends PyExpressionTree {
+public interface PyComprehensionExpressionTree extends PyExpressionTree {
 
   PyExpressionTree resultExpression();
 

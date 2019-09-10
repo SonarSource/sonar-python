@@ -24,17 +24,17 @@ import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyListOrSetCompExpressionTreeImpl extends PyTree implements PyListOrSetCompExpressionTree {
+public class PyComprehensionExpressionTreeImpl extends PyTree implements PyComprehensionExpressionTree {
 
   private final Kind kind;
   private final PyExpressionTree resultExpression;
   private final PyComprehensionForTree comprehensionFor;
 
-  public PyListOrSetCompExpressionTreeImpl(Kind kind, Token openingToken, PyExpressionTree resultExpression,
+  public PyComprehensionExpressionTreeImpl(Kind kind, Token openingToken, PyExpressionTree resultExpression,
                                            PyComprehensionForTree compFor, Token closingToken) {
     super(openingToken, closingToken);
     this.kind = kind;

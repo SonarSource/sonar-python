@@ -65,7 +65,7 @@ import org.sonar.python.api.tree.PyIsExpressionTree;
 import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNoneExpressionTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
@@ -1509,8 +1509,8 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void list_comprehension() {
     setRootRule(PythonGrammar.TEST);
-    PyListOrSetCompExpressionTree comprehension =
-      (PyListOrSetCompExpressionTree) parse("[x+y for x,y in [(42, 43)]]", treeMaker::expression);
+    PyComprehensionExpressionTree comprehension =
+      (PyComprehensionExpressionTree) parse("[x+y for x,y in [(42, 43)]]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
     assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.PLUS);
     assertThat(comprehension.children()).hasSize(2);
@@ -1527,8 +1527,8 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void list_comprehension_with_if() {
     setRootRule(PythonGrammar.TEST);
-    PyListOrSetCompExpressionTree comprehension =
-      (PyListOrSetCompExpressionTree) parse("[x+1 for x in [42, 43] if x%2==0]", treeMaker::expression);
+    PyComprehensionExpressionTree comprehension =
+      (PyComprehensionExpressionTree) parse("[x+1 for x in [42, 43] if x%2==0]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
     PyComprehensionForTree forClause = comprehension.comprehensionFor();
     assertThat(forClause.nestedClause().getKind()).isEqualTo(Tree.Kind.COMP_IF);
@@ -1542,8 +1542,8 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void list_comprehension_with_nested_for() {
     setRootRule(PythonGrammar.TEST);
-    PyListOrSetCompExpressionTree comprehension =
-      (PyListOrSetCompExpressionTree) parse("[x+y for x in [42, 43] for y in ('a', 0)]", treeMaker::expression);
+    PyComprehensionExpressionTree comprehension =
+      (PyComprehensionExpressionTree) parse("[x+y for x in [42, 43] for y in ('a', 0)]", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
     PyComprehensionForTree forClause = comprehension.comprehensionFor();
     assertThat(forClause.iterable().getKind()).isEqualTo(Tree.Kind.LIST_LITERAL);
@@ -1562,6 +1562,19 @@ public class PythonTreeMakerTest extends RuleTest {
 
     parenthesized = (PyParenthesizedExpressionTree) parse("(yield 42)", treeMaker::expression);
     assertThat(parenthesized.expression().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
+  }
+
+
+  @Test
+  public void generator_expression() {
+    setRootRule(PythonGrammar.TEST);
+    PyComprehensionExpressionTree generator = (PyComprehensionExpressionTree) parse("(x*x for x in range(10))", treeMaker::expression);
+    assertThat(generator.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
+    assertThat(generator.children()).hasSize(2);
+    assertThat(generator.firstToken().getValue()).isEqualTo("(");
+    assertThat(generator.lastToken().getValue()).isEqualTo(")");
+    assertThat(generator.resultExpression().getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
+    assertThat(generator.comprehensionFor().iterable().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
   }
 
   @Test
@@ -1686,8 +1699,8 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void set_comprehension() {
     setRootRule(PythonGrammar.TEST);
-    PyListOrSetCompExpressionTree comprehension =
-      (PyListOrSetCompExpressionTree) parse("{x-1 for x in [42, 43]}", treeMaker::expression);
+    PyComprehensionExpressionTree comprehension =
+      (PyComprehensionExpressionTree) parse("{x-1 for x in [42, 43]}", treeMaker::expression);
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.SET_COMPREHENSION);
     assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
     assertThat(comprehension.children()).hasSize(2);

@@ -45,7 +45,7 @@ import org.sonar.python.api.tree.PyImportFromTree;
 import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyParameterTree;
@@ -323,7 +323,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void list_or_set_comprehension() {
     setRootRule(PythonGrammar.EXPR);
-    PyListOrSetCompExpressionTree expr = (PyListOrSetCompExpressionTree) parse("[x+1 for x in [42, 43] if cond(x)]", treeMaker::expression);
+    PyComprehensionExpressionTree expr = (PyComprehensionExpressionTree) parse("[x+1 for x in [42, 43] if cond(x)]", treeMaker::expression);
     BaseTreeVisitor visitor = spy(BaseTreeVisitor.class);
     expr.accept(visitor);
 

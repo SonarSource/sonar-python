@@ -57,7 +57,7 @@ import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyListOrSetCompExpressionTree;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNoneExpressionTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
@@ -443,7 +443,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitPyListOrSetCompExpression(PyListOrSetCompExpressionTree tree) {
+  public void visitPyListOrSetCompExpression(PyComprehensionExpressionTree tree) {
     scan(tree.resultExpression());
     scan(tree.comprehensionFor());
   }
