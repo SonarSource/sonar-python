@@ -87,13 +87,16 @@ for (x) in ((range(0, 3))):            # Noncompliant
 #          ^
     pass
 
-for candidate in (((d not in models) for d in deps)): #Noncompliant
+for candidate in ((d not in models) for d in deps):
     pass
 
-for candidate in (((d not in models), d,)):           #Noncompliant
+for candidate in (((d not in models) for d in deps)): # Noncompliant
     pass
 
-for candidate in (((d not in models) ,*d,)):          #Noncompliant
+for candidate in (((d not in models), d,)):           # Noncompliant
+    pass
+
+for candidate in (((d not in models) ,*d,)):          # Noncompliant
     pass
 
 if x:

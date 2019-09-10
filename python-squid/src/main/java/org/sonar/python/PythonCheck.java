@@ -20,6 +20,7 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -59,6 +60,11 @@ public interface PythonCheck {
 
     public PreciseIssue secondary(Tree tree, @Nullable String message) {
       secondaryLocations.add(IssueLocation.preciseLocation(tree, message));
+      return this;
+    }
+
+    public PreciseIssue secondary(Token token, @Nullable String message) {
+      secondaryLocations.add(IssueLocation.preciseLocation(token, message));
       return this;
     }
 
