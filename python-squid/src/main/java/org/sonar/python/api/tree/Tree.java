@@ -162,9 +162,9 @@ public interface Tree {
     TUPLE(PyTupleTree.class),
 
     DICT_COMPREHENSION(PyDictCompExpressionTree.class),
-    LIST_COMPREHENSION(PyListOrSetCompExpressionTree.class),
-    SET_COMPREHENSION(PyListOrSetCompExpressionTree.class),
-    GENERATOR_EXPR(PyListOrSetCompExpressionTree.class),
+    LIST_COMPREHENSION(PyComprehensionExpressionTree.class),
+    SET_COMPREHENSION(PyComprehensionExpressionTree.class),
+    GENERATOR_EXPR(PyComprehensionExpressionTree.class),
     COMP_FOR(PyComprehensionForTree.class),
     COMP_IF(PyComprehensionIfTree.class),
 

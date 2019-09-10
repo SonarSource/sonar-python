@@ -137,7 +137,7 @@ public interface PyTreeVisitor {
 
   void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree);
 
-  void visitPyListOrSetCompExpression(PyListOrSetCompExpressionTree tree);
+  void visitPyListOrSetCompExpression(PyComprehensionExpressionTree tree);
 
   void visitComprehensionFor(PyComprehensionForTree tree);
 
