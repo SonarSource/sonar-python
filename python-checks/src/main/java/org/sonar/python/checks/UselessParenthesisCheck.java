@@ -19,47 +19,27 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
-public class UselessParenthesisCheck extends PythonCheckAstNode {
+public class UselessParenthesisCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "S1110";
 
   private static final String MESSAGE = "Remove those useless parentheses.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.ATOM);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    List<AstNode> children = node.getChildren();
-    boolean hasParentheses = children.size() == 3 && children.get(0).is(PythonPunctuator.LPARENTHESIS);
-    if (hasParentheses) {
-      AstNode child1 = children.get(1);
-      if (child1.getChildren(PythonGrammar.TEST).size() == 1
-        && child1.getFirstChild(PythonPunctuator.COMMA) == null
-        && !child1.hasDirectChildren(PythonGrammar.COMP_FOR)) {
-        AstNode test = child1.getFirstChild(PythonGrammar.TEST);
-        if (!test.hasDirectChildren(PythonKeyword.IF)) {
-          AstNode testChild0 = test.getFirstChild();
-          if (testChild0.is(PythonGrammar.ATOM) && testChild0.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
-            addIssue(children.get(0), MESSAGE).secondary(children.get(2), null);
-          }
-        }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.PARENTHESIZED, ctx -> {
+      PyParenthesizedExpressionTree parenthesized = (PyParenthesizedExpressionTree) ctx.syntaxNode();
+      PyExpressionTree expression = parenthesized.expression();
+      if (expression.is(Tree.Kind.PARENTHESIZED) || expression.is(Tree.Kind.TUPLE) || expression.is(Tree.Kind.GENERATOR_EXPR)) {
+        ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
       }
-    }
+    });
   }
-
 }
