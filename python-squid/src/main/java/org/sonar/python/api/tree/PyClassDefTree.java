@@ -34,6 +34,9 @@ public interface PyClassDefTree extends PyStatementTree {
   @CheckForNull
   Token leftPar();
 
+  /**
+   * null if class is defined without args {@code class Foo:...} or {@code class Foo():...}
+   */
   @CheckForNull
   PyArgListTree args();
 
