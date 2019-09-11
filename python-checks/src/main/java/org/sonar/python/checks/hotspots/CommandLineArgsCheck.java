@@ -35,11 +35,11 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkSysArgNode);
+    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, CommandLineArgsCheck::checkSysArgNode);
     super.initialize(context);
   }
 
-  private void checkSysArgNode(SubscriptionContext ctx) {
+  private static void checkSysArgNode(SubscriptionContext ctx) {
     Tree node = ctx.syntaxNode();
     Tree parent = node.parent();
     Symbol symbol = ctx.symbolTable().getSymbol((PyNameTree) node);

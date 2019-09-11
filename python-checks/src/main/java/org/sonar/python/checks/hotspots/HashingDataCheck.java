@@ -123,7 +123,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     if (ctx.pythonFile().fileName().equals("global_settings.py") &&
       assignmentStatementTree.lhsExpressions().stream()
         .flatMap(pelt -> pelt.expressions().stream())
-        .anyMatch(expression -> expression.astNode().getTokenValue().equals("PASSWORD_HASHERS"))) {
+        .anyMatch(expression -> expression.firstToken().getValue().equals("PASSWORD_HASHERS"))) {
       ctx.addIssue(assignmentStatementTree, MESSAGE);
     }
   }
@@ -181,7 +181,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     return false;
   }
 
-  private String getQualifiedName(PyExpressionTree node, SubscriptionContext ctx) {
+  private static String getQualifiedName(PyExpressionTree node, SubscriptionContext ctx) {
     Symbol symbol = ctx.symbolTable().getSymbol(node);
     return symbol != null ? symbol.qualifiedName() : "";
   }

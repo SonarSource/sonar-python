@@ -111,18 +111,18 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     return isException(callExpression, "");
   }
 
-  private boolean isFormatted(PyExpressionTree tree) {
+  private static boolean isFormatted(PyExpressionTree tree) {
     FormattedStringVisitor visitor = new FormattedStringVisitor();
     tree.accept(visitor);
     return visitor.hasFormattedString;
   }
 
-  private boolean extraContainsFormattedSqlQueries(List<PyArgumentTree> argListNode, String functionName) {
+  private static boolean extraContainsFormattedSqlQueries(List<PyArgumentTree> argListNode, String functionName) {
     if (functionName.equals("extra")) {
       return argListNode.stream()
         .filter(SQLQueriesCheck::isAssignment)
         .map(PyArgumentTree::expression)
-        .anyMatch(this::isFormatted);
+        .anyMatch(SQLQueriesCheck::isFormatted);
     }
     return false;
   }

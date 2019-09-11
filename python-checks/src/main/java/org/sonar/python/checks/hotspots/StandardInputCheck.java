@@ -77,7 +77,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
     return !callExpression.arguments().isEmpty();
   }
 
-  private boolean isQuestionablePropertyAccess(PyNameTree pyNameTree, SubscriptionContext ctx) {
+  private static boolean isQuestionablePropertyAccess(PyNameTree pyNameTree, SubscriptionContext ctx) {
     Symbol symbol = ctx.symbolTable().getSymbol(pyNameTree);
     return symbol != null && questionablePropertyAccess.contains(symbol.qualifiedName());
   }

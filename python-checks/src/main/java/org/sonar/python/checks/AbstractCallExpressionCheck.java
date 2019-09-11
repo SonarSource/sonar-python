@@ -46,7 +46,7 @@ public abstract class AbstractCallExpressionCheck extends PythonSubscriptionChec
 
   public void visitNode(SubscriptionContext ctx) {
     PyCallExpressionTree node = (PyCallExpressionTree) ctx.syntaxNode();
-    Symbol symbol = ctx.symbolTable().getSymbol(node);
+    Symbol symbol = ctx.symbolTable().getSymbol(node.callee());
     if (!isException(node) && symbol != null && functionsToCheck().contains(symbol.qualifiedName())) {
       ctx.addIssue(node, message());
     }
