@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
@@ -47,7 +46,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = callExpression.arguments() != null ? callExpression.arguments().arguments() : Collections.emptyList();
+      List<PyArgumentTree> arguments = callExpression.arguments();
       String qualifiedName = getQualifiedName(callExpression, ctx);
       if (CRYPTOGRAPHY.matcher(qualifiedName).matches()) {
         new CryptographyModuleCheck().checkArguments(ctx, arguments);
