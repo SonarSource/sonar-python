@@ -4,7 +4,7 @@ import fileinput
 
 def python_3_builtin():
     sys.stdin  # Noncompliant {{Make sure that reading the standard input is safe here.}}
-#   ^^^^^^^^^
+#       ^^^^^
 
     sys.__stdin__  # Noncompliant
 
