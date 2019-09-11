@@ -20,13 +20,21 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
+import java.util.List;
+import javax.annotation.CheckForNull;
 
 public interface PyCallExpressionTree extends PyExpressionTree {
   PyExpressionTree callee();
 
   Token leftPar();
 
-  PyArgListTree arguments();
+  @CheckForNull
+  PyArgListTree argumentList();
+
+  /**
+   * Utility method to return {@code argumentList().arguments()} or an empty list when argumentList is null.
+   */
+  List<PyArgumentTree> arguments();
 
   Token rightPar();
 }

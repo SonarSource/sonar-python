@@ -46,7 +46,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = callExpression.arguments().arguments();
+      List<PyArgumentTree> arguments = callExpression.arguments();
       if (!(callExpression.callee() instanceof PyQualifiedExpressionTree)) {
         return;
       }

@@ -308,7 +308,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   @Override
   public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
     scan(pyCallExpressionTree.callee());
-    scan(pyCallExpressionTree.arguments());
+    scan(pyCallExpressionTree.argumentList());
   }
 
   @Override

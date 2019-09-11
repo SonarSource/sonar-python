@@ -17,6 +17,8 @@ def cryptography():
     dsa.generate_private_key(key_size=3.14)
     rsa.generate_private_key(public_exponent=3.14, key_size=2048)
 
+    rsa.generate_private_key()
+
     # key_size = RSA key size
     # public_exponent = RSA public key exponent
     rsa.generate_private_key(public_exponent=65537, key_size=1024) # Noncompliant {{Use a key length of at least 2048 bits.}}

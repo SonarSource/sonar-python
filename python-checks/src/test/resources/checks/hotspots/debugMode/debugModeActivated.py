@@ -11,6 +11,7 @@ mysettings.configure(DEBUG=True)  # OK
 settings.otherFn(DEBUG=True)  # OK
 
 configure(DEBUG=True) # OK
+configure() # OK
 
 def custom_config(config):
     settings.configure(default_settings=config, DEBUG=True)  # Noncompliant
