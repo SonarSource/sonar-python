@@ -27,11 +27,11 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.checks.AbstractCallExpressionCheck2;
+import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = StandardInputCheck.CHECK_KEY)
-public class StandardInputCheck extends AbstractCallExpressionCheck2 {
+public class StandardInputCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4829";
   private static final String MESSAGE = "Make sure that reading the standard input is safe here.";
   private static final Set<String> questionableFunctions = immutableSet("fileinput.input", "fileinput.FileInput");
@@ -74,7 +74,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck2 {
 
   @Override
   protected boolean isException(PyCallExpressionTree callExpression) {
-    return !callExpression.arguments().arguments().isEmpty();
+    return !callExpression.arguments().isEmpty();
   }
 
   private boolean isQuestionablePropertyAccess(PyNameTree pyNameTree, SubscriptionContext ctx) {

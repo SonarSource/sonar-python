@@ -23,10 +23,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.checks.AbstractCallExpressionCheck2;
+import org.sonar.python.checks.AbstractCallExpressionCheck;
 
 @Rule(key = OsExecCheck.CHECK_KEY)
-public class OsExecCheck extends AbstractCallExpressionCheck2 {
+public class OsExecCheck extends AbstractCallExpressionCheck {
 
   public static final String CHECK_KEY = "S4721";
   private static final String MESSAGE = "Make sure that executing this OS command is safe here.";

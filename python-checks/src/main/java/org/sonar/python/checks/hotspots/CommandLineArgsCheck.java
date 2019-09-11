@@ -24,11 +24,11 @@ import org.sonar.check.Rule;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.checks.AbstractCallExpressionCheck2;
+import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = CommandLineArgsCheck.CHECK_KEY)
-public class CommandLineArgsCheck extends AbstractCallExpressionCheck2 {
+public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4823";
   private static final String MESSAGE = "Make sure that command line arguments are used safely here.";
   private static final Set<String> questionableFunctions = immutableSet("argparse.ArgumentParser", "optparse.OptionParser");

@@ -31,12 +31,12 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.checks.AbstractCallExpressionCheck2;
+import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = SQLQueriesCheck.CHECK_KEY)
-public class SQLQueriesCheck extends AbstractCallExpressionCheck2 {
+public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S2077";
   private static final String MESSAGE = "Make sure that formatting this SQL query is safe here.";
   private boolean isUsingDjangoModel = false;
@@ -95,7 +95,7 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck2 {
   }
 
   private boolean isException(PyCallExpressionTree callExpression, String functionName) {
-    List<PyArgumentTree> argListNode = callExpression.arguments().arguments();
+    List<PyArgumentTree> argListNode = callExpression.arguments();
     if (extraContainsFormattedSqlQueries(argListNode, functionName)) {
       return false;
     }

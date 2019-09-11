@@ -23,10 +23,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.checks.AbstractCallExpressionCheck2;
+import org.sonar.python.checks.AbstractCallExpressionCheck;
 
 @Rule(key = ProcessSignallingCheck.CHECK_KEY)
-public class ProcessSignallingCheck extends AbstractCallExpressionCheck2 {
+public class ProcessSignallingCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4828";
   private static final String MESSAGE = "Make sure that sending signals is safe here.";
   private static final Set<String> questionableFunctions = new HashSet<>(Arrays.asList("os.kill", "os.killpg"));
