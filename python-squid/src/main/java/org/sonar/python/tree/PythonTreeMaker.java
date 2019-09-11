@@ -1001,11 +1001,10 @@ public class PythonTreeMaker {
     AstNode lastNameNode = astNode.getLastChild();
     for (AstNode nameNode : names) {
       if (nameNode != lastNameNode) {
-        // FIXME: there is no corresponding astNode, parseTree and strongly typed AST are structurally different
-        qualifier = new PyQualifiedExpressionTreeImpl(astNode, name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
+        qualifier = new PyQualifiedExpressionTreeImpl(name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
       }
     }
-    return new PyQualifiedExpressionTreeImpl(astNode, name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
+    return new PyQualifiedExpressionTreeImpl(name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
   }
 
   public PyCallExpressionTree callExpression(AstNode astNode) {

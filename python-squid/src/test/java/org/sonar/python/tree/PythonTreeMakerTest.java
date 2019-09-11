@@ -1163,9 +1163,13 @@ public class PythonTreeMakerTest extends RuleTest {
 
     qualifiedExpression = parse("foo.bar.baz", treeMaker::qualifiedExpression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("baz");
+    assertThat(qualifiedExpression.firstToken().getValue()).isEqualTo("foo");
+    assertThat(qualifiedExpression.lastToken().getValue()).isEqualTo("baz");
     assertThat(qualifiedExpression.qualifier()).isInstanceOf(PyQualifiedExpressionTree.class);
     PyQualifiedExpressionTree qualExpr = (PyQualifiedExpressionTree) qualifiedExpression.qualifier();
     assertThat(qualExpr.name().name()).isEqualTo("bar");
+    assertThat(qualExpr.firstToken().getValue()).isEqualTo("foo");
+    assertThat(qualExpr.lastToken().getValue()).isEqualTo("bar");
     assertThat(qualExpr.qualifier()).isInstanceOf(PyNameTree.class);
     PyNameTree name = (PyNameTree) qualExpr.qualifier();
     assertThat(name.name()).isEqualTo("foo");

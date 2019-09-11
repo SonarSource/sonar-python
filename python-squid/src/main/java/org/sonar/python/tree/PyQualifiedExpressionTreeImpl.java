@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
@@ -33,13 +32,6 @@ public class PyQualifiedExpressionTreeImpl extends PyTree implements PyQualified
   private final PyNameTree name;
   private final PyExpressionTree qualifier;
   private final Token dotToken;
-
-  public PyQualifiedExpressionTreeImpl(AstNode astNode, PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
-    super(astNode);
-    this.name = name;
-    this.qualifier = qualifier;
-    this.dotToken = dotToken;
-  }
 
   public PyQualifiedExpressionTreeImpl(PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
     super(qualifier.firstToken(), name.lastToken());
