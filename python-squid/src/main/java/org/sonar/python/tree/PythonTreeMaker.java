@@ -505,9 +505,7 @@ public class PythonTreeMaker {
     PyArgListTree args = null;
     AstNode leftPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
     if (leftPar != null) {
-      AstNode argList = astNode.getFirstChild(PythonGrammar.ARGLIST);
-      // FIXME: PyArgList should never have null firstToken and lastToken
-      args = argList != null ? argList(argList) : new PyArgListTreeImpl(argList, Collections.emptyList());
+      args = argList(astNode.getFirstChild(PythonGrammar.ARGLIST));
     }
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     Token classToken = astNode.getFirstChild(PythonKeyword.CLASS).getToken();
