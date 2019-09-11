@@ -24,9 +24,11 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.api.tree.Tree;
 
 public class CheckUtils {
 
@@ -73,6 +75,38 @@ public class CheckUtils {
       }
     }
     return true;
+  }
+
+  public static boolean areEquivalent(@Nullable Tree leftTree, @Nullable Tree rightTree) {
+    if (leftTree == rightTree) {
+      return true;
+    }
+    if (leftTree == null || rightTree == null) {
+      return false;
+    }
+    if (leftTree.getKind() != rightTree.getKind() || leftTree.children().size() != rightTree.children().size()) {
+      return false;
+    }
+    if (leftTree.children().isEmpty() && rightTree.children().isEmpty()) {
+      return areLeavesEquivalent(leftTree, rightTree);
+    }
+
+    List<Tree> children1 = leftTree.children();
+    List<Tree> children2 = rightTree.children();
+    for (int i = 0; i < children1.size(); i++) {
+      if (!areEquivalent(children1.get(i), children2.get(i))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean areLeavesEquivalent(Tree leftLeaf, Tree rightLeaf) {
+    if (leftLeaf.firstToken() == null && rightLeaf.firstToken() == null) {
+      return true;
+    }
+    return leftLeaf.firstToken().getType().equals(PythonTokenType.INDENT) || leftLeaf.firstToken().getType().equals(PythonTokenType.DEDENT) ||
+      leftLeaf.firstToken().getValue().equals(rightLeaf.firstToken().getValue());
   }
 
   public static boolean insideFunction(AstNode astNode, AstNode funcDef) {
