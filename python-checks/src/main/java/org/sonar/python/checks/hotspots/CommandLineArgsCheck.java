@@ -48,11 +48,8 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck2 {
       node = parent;
     }
     if (symbol != null && symbol.qualifiedName().equals("sys.argv")) {
-      while (parent != null) {
-        if (parent.is(Tree.Kind.IMPORT_NAME) || parent.is(Tree.Kind.IMPORT_FROM)) {
-          return;
-        }
-        parent = parent.parent();
+      if (isWithinImport(parent)) {
+        return;
       }
       ctx.addIssue(node, MESSAGE);
     }

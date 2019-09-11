@@ -329,6 +329,9 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
       if (astNode != null && astNode.is(PythonGrammar.NAME) && astNode.getParent().is(PythonGrammar.ATOM)) {
         return getSymbol(astNode.getParent());
       }
+      if (astNode != null && astNode.is(PythonGrammar.NAME) && astNode.getParent().is(PythonGrammar.ATTRIBUTE_REF) && astNode.getParent().getLastChild(PythonGrammar.NAME) == astNode) {
+        return getSymbol(astNode.getParent());
+      }
       return getSymbol(astNode);
     }
 

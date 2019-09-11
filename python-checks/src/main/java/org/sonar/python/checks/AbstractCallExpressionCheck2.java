@@ -52,6 +52,17 @@ public abstract class AbstractCallExpressionCheck2 extends PythonSubscriptionChe
     }
   }
 
+  protected static boolean isWithinImport(Tree tree) {
+    Tree parent = tree.parent();
+    while (parent != null) {
+      if (parent.is(Tree.Kind.IMPORT_NAME) || parent.is(Tree.Kind.IMPORT_FROM)) {
+        return true;
+      }
+      parent = parent.parent();
+    }
+    return false;
+  }
+
   protected static <T> Set<T> immutableSet(T...args) {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(args)));
   }

@@ -16,7 +16,7 @@ def argparse_test():
 
 def builtins():
     sys.argv # Noncompliant
-#   ^^^^^^^^
+#       ^^^^
     argv # Noncompliant
     mySys.argv # OK
 
