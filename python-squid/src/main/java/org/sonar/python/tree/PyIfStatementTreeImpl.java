@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,8 +47,8 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
    *
    * If statement constructor
    */
-  public PyIfStatementTreeImpl(AstNode node, Token ifKeyword, PyExpressionTree condition, PyStatementListTree statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
-    super(node);
+  public PyIfStatementTreeImpl(Token ifKeyword, PyExpressionTree condition, PyStatementListTree statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
+    super(ifKeyword, statements.lastToken());
     this.keyword = ifKeyword;
     this.condition = condition;
     this.statements = statements;
@@ -61,8 +60,8 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   /**
    * Elif statement constructor
    */
-  public PyIfStatementTreeImpl(AstNode node, Token elifKeyword, PyExpressionTree condition, PyStatementListTree statements) {
-    super(node);
+  public PyIfStatementTreeImpl(Token elifKeyword, PyExpressionTree condition, PyStatementListTree statements) {
+    super(elifKeyword, statements.lastToken());
     this.keyword = elifKeyword;
     this.condition = condition;
     this.statements = statements;

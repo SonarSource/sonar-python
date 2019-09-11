@@ -38,8 +38,8 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
   private final Token commaToken;
   private final PyExpressionTree exceptionInstance;
 
-  public PyExceptClauseTreeImpl(AstNode astNode, Token exceptKeyword, PyStatementListTree body) {
-    super(astNode);
+  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body) {
+    super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;
     this.exception = null;
@@ -48,8 +48,8 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = null;
   }
 
-  public PyExceptClauseTreeImpl(AstNode astNode, Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception, AstNode asNode, AstNode commaNode, PyExpressionTree exceptionInstance) {
-    super(astNode);
+  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception, AstNode asNode, AstNode commaNode, PyExpressionTree exceptionInstance) {
+    super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;
     this.exception = exception;
@@ -58,8 +58,8 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = exceptionInstance;
   }
 
-  public PyExceptClauseTreeImpl(AstNode except, Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception) {
-    super(except);
+  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception) {
+    super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;
     this.exception = exception;
