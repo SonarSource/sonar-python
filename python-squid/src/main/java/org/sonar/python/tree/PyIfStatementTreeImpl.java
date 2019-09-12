@@ -47,7 +47,8 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
    *
    * If statement constructor
    */
-  public PyIfStatementTreeImpl(Token ifKeyword, PyExpressionTree condition, PyStatementListTree statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
+  public PyIfStatementTreeImpl(Token ifKeyword, PyExpressionTree condition, PyStatementListTree statements,
+                               List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
     super(ifKeyword, statements.lastToken());
     this.keyword = ifKeyword;
     this.condition = condition;

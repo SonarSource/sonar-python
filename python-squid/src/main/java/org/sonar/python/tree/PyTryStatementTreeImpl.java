@@ -41,7 +41,8 @@ public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree
   private final PyFinallyClauseTree finallyClause;
   private final PyElseStatementTree elseStatement;
 
-  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses, PyFinallyClauseTree finallyClause, PyElseStatementTree elseStatement) {
+  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses,
+                                PyFinallyClauseTree finallyClause, PyElseStatementTree elseStatement) {
     super(astNode);
     this.tryKeyword = tryKeyword;
     this.tryBody = tryBody;

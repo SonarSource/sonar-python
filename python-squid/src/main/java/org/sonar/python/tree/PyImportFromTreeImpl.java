@@ -42,7 +42,8 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
   private final boolean isWildcardImport;
   private final Token wildcard;
 
-  public PyImportFromTreeImpl(AstNode astNode, Token fromKeyword, List<Token> dottedPrefixForModule, PyDottedNameTree moduleName, Token importKeyword, List<PyAliasedNameTree> aliasedImportNames, boolean isWildcardImport) {
+  public PyImportFromTreeImpl(AstNode astNode, Token fromKeyword, List<Token> dottedPrefixForModule, PyDottedNameTree moduleName,
+                              Token importKeyword, List<PyAliasedNameTree> aliasedImportNames, boolean isWildcardImport) {
     super(astNode);
     this.fromKeyword = fromKeyword;
     this.dottedPrefixForModule = dottedPrefixForModule;
