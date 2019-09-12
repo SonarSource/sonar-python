@@ -31,12 +31,12 @@ pipeline {
             runITs("plugin","DOGFOOD")
           }
         }     
-        stage('plugin/LATEST_RELEASE[6.7]/linux') {
+        stage('plugin/LATEST_RELEASE[7.9]/linux') {
           agent {
             label 'linux'
           }
           steps {
-            runITs("plugin","LATEST_RELEASE[6.7]")
+            runITs("plugin","LATEST_RELEASE[7.9]")
           }
         }
         stage('ruling/LATEST_RELEASE/linux') {
