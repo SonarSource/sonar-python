@@ -26,4 +26,6 @@ public interface PyStringElementTree extends Tree {
   String value();
 
   String trimmedQuotesValue();
+
+  String prefix();
 }

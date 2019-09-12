@@ -19,11 +19,11 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 
@@ -34,24 +34,25 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
   private static final Set<String> questionableFunctions = immutableSet("argparse.ArgumentParser", "optparse.OptionParser");
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, CommandLineArgsCheck::checkSysArgNode);
+    super.initialize(context);
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM)) {
-      if (isSysArgvNode(node)) {
-        addIssue(node, MESSAGE);
-      }
-    } else {
-      super.visitNode(node);
+  private static void checkSysArgNode(SubscriptionContext ctx) {
+    Tree node = ctx.syntaxNode();
+    Tree parent = node.parent();
+    Symbol symbol = ctx.symbolTable().getSymbol((PyNameTree) node);
+    if (symbol == null && parent != null) {
+      symbol = ctx.symbolTable().getSymbol(parent.astNode());
+      node = parent;
     }
-  }
-
-  private boolean isSysArgvNode(AstNode attributeRef) {
-    Symbol symbol = getContext().symbolTable().getSymbol(attributeRef);
-    return symbol != null && symbol.qualifiedName().equals("sys.argv");
+    if (symbol != null && symbol.qualifiedName().equals("sys.argv")) {
+      if (isWithinImport(parent)) {
+        return;
+      }
+      ctx.addIssue(node, MESSAGE);
+    }
   }
 
   @Override

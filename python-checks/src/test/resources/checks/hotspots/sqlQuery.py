@@ -28,6 +28,12 @@ class MyUser(models.Model):
 
         MyUser.objects.extra(  # Noncompliant
             select={
-                'mycol': "select col from sometable here mycol = %s and othercol = " + value
+                'mycol': "select col from sometable here mycol = %s and othercol = " + fun()
             },
         )
+
+        MyUser.objects.extra({ 'mycol': "select col from sometable here mycol = %s and othercol = " + value}) # Noncompliant
+        MyUser.objects.extra({ 'mycol': "select col from sometable here mycol = %s and othercol = " + ""}) # Noncompliant
+
+     def fun():
+        pass

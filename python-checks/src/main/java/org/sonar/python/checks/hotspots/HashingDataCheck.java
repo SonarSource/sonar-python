@@ -19,18 +19,22 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyExpressionListTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 
@@ -76,38 +80,15 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     .map(hasher -> "django.contrib.auth.hashers." + hasher)
     .collect(Collectors.toSet());
 
+  private SubscriptionContext ctx;
+
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(
-      PythonGrammar.CALL_EXPR,
-      PythonGrammar.ATTRIBUTE_REF,
-      PythonGrammar.ATOM,
-      PythonGrammar.EXPRESSION_STMT,
-      PythonGrammar.CLASSDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    PythonGrammar nodeType = (PythonGrammar) node.getType();
-    switch (nodeType) {
-      case ATTRIBUTE_REF:
-      case ATOM:
-        checkQuestionableHashingAlgorithm(node);
-        break;
-      case EXPRESSION_STMT:
-        checkOverwriteDjangoHashers(node);
-        break;
-      case CLASSDEF:
-        checkCreatingCustomHasher(node);
-        break;
-      case CALL_EXPR:
-        // using visitNode from AbstractCallExpressionCheck,
-        // taking care to check `questionableFunctions` calls
-        super.visitNode(node);
-      default:
-        // do nothing - reacting on all the registered nodes
-    }
+  public void initialize(Context context) {
+    super.initialize(context);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkOverwriteDjangoHashers);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, this::checkCreatingCustomHasher);
+    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, this::checkQuestionableHashingAlgorithm);
   }
 
   /**
@@ -121,93 +102,99 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
    * make_password(password)  # OK
    */
   @Override
-  protected boolean isException(AstNode callExpression) {
+  protected boolean isException(PyCallExpressionTree callExpression) {
     return isDjangoMakePasswordFunctionWithoutSaltAndHasher(callExpression);
   }
 
-  private boolean isDjangoMakePasswordFunctionWithoutSaltAndHasher(AstNode callExpression) {
-    if (getQualifiedName(callExpression).equals("django.contrib.auth.hashers.make_password")) {
-      AstNode argList = callExpression.getFirstChild(PythonGrammar.ARGLIST);
-      if (argList != null) {
-        return argList.getChildren(PythonGrammar.ARGUMENT).size() == 1;
-      }
-    }
-    return false;
+  private boolean isDjangoMakePasswordFunctionWithoutSaltAndHasher(PyCallExpressionTree callExpression) {
+    return getQualifiedName(callExpression, ctx).equals("django.contrib.auth.hashers.make_password") && callExpression.arguments().size() == 1;
   }
 
-  private void checkOverwriteDjangoHashers(AstNode expressionStatement) {
-    List<AstNode> lhsExpressions = getLHSExpressions(expressionStatement);
-    if (lhsExpressions == null) {
-      return;
-    }
+  private void checkOverwriteDjangoHashers(SubscriptionContext ctx) {
+    this.ctx = ctx;
+    PyAssignmentStatementTree assignmentStatementTree = (PyAssignmentStatementTree) ctx.syntaxNode();
 
-    if (isOverwritingDjangoHashers(lhsExpressions)) {
-      addIssue(expressionStatement, MESSAGE);
+    if (isOverwritingDjangoHashers(assignmentStatementTree.lhsExpressions())) {
+      ctx.addIssue(assignmentStatementTree, MESSAGE);
       return;
     }
 
     // checks for `PASSWORD_HASHERS = []` in a global_settings.py file
-    if (getContext().pythonFile().fileName().equals("global_settings.py") &&
-      lhsExpressions.stream().anyMatch(expression -> expression.getTokenValue().equals("PASSWORD_HASHERS"))) {
-      addIssue(expressionStatement, MESSAGE);
+    if (ctx.pythonFile().fileName().equals("global_settings.py") &&
+      assignmentStatementTree.lhsExpressions().stream()
+        .flatMap(pelt -> pelt.expressions().stream())
+        .anyMatch(expression -> expression.firstToken().getValue().equals("PASSWORD_HASHERS"))) {
+      ctx.addIssue(assignmentStatementTree, MESSAGE);
     }
   }
 
   /**
    * checks for `settings.PASSWORD_HASHERS = value`
    */
-  private boolean isOverwritingDjangoHashers(List<AstNode> lhsExpressions) {
-    return lhsExpressions.stream()
-      .map(expression -> expression.getFirstDescendant(PythonGrammar.ATTRIBUTE_REF))
-      .filter(Objects::nonNull)
-      .anyMatch(attributeRef -> {
-        AstNode atom = attributeRef.getFirstChild(PythonGrammar.ATOM);
-        return atom != null && getQualifiedName(atom).equals("django.conf.settings") &&
-          attributeRef.getLastChild(PythonGrammar.NAME).getTokenValue().equals("PASSWORD_HASHERS");
-      });
-  }
-
-  private void checkQuestionableHashingAlgorithm(AstNode node) {
-    String qualifiedName = getQualifiedName(node);
-    if (qualifiedName.equals("cryptography.hazmat.primitives.hashes") && isHashesFunctionCall(node.getParent())) {
-      addIssue(node.getParent(), MESSAGE);
-    } else if (questionableHashlibAlgorithm.contains(qualifiedName) || questionablePasslibAlgorithm.contains(qualifiedName)) {
-      addIssue(node, MESSAGE);
-    }
-  }
-
-  private static boolean isHashesFunctionCall(@Nullable AstNode node) {
-    if (node != null && node.is(PythonGrammar.ATTRIBUTE_REF)) {
-      String propertyName = node.getLastChild(PythonGrammar.NAME).getTokenValue();
-      AstNode parent = node.getParent();
-      return propertyName.equals("Hash") && parent != null && parent.is(PythonGrammar.CALL_EXPR);
+  private boolean isOverwritingDjangoHashers(List<PyExpressionListTree> lhsExpressions) {
+    for (PyExpressionListTree expr : lhsExpressions) {
+      for (PyExpressionTree expression : expr.expressions()) {
+        PyExpressionTree baseExpr = removeParenthesis(expression);
+        if (baseExpr.lastToken().getValue().equals("PASSWORD_HASHERS")) {
+          return baseExpr.is(Tree.Kind.QUALIFIED_EXPR) && getQualifiedName(((PyQualifiedExpressionTree) baseExpr).qualifier(), ctx).equals("django.conf.settings");
+        }
+      }
     }
     return false;
   }
 
-  @CheckForNull
-  private static List<AstNode> getLHSExpressions(AstNode expressionStatement) {
-    if (expressionStatement.hasDirectChildren(PythonPunctuator.ASSIGN)) {
-      return expressionStatement
-        .getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR)
-        .getChildren(PythonGrammar.TEST);
+  private static PyExpressionTree removeParenthesis(PyExpressionTree expression) {
+    PyExpressionTree res = expression;
+    while (res.is(Tree.Kind.PARENTHESIZED)) {
+      res = ((PyParenthesizedExpressionTree) res).expression();
     }
-    return null;
+    return res;
   }
 
+  private void checkQuestionableHashingAlgorithm(SubscriptionContext ctx) {
+    this.ctx = ctx;
+    PyNameTree name = (PyNameTree) ctx.syntaxNode();
+    if (isWithinImport(name)) {
+      return;
+    }
+    String qualifiedName = getQualifiedName(name, ctx);
+    if (qualifiedName.equals("cryptography.hazmat.primitives.hashes") && isHashesFunctionCall(name)) {
+      ctx.addIssue(name.parent(), MESSAGE);
+    } else if (questionableHashlibAlgorithm.contains(qualifiedName) || questionablePasslibAlgorithm.contains(qualifiedName)) {
+      ctx.addIssue(name, MESSAGE);
+    }
+  }
 
-  private String getQualifiedName(AstNode node) {
-    Symbol symbol = getContext().symbolTable().getSymbol(node);
+  private static boolean isHashesFunctionCall(PyNameTree nameTree) {
+    Tree parent = nameTree.parent();
+    while (parent != null) {
+      if (parent.is(Tree.Kind.CALL_EXPR)) {
+        PyCallExpressionTree call = (PyCallExpressionTree) parent;
+        if (call.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+          PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) call.callee();
+          return callee.name().name().equals("Hash");
+        }
+        return false;
+      }
+      parent = parent.parent();
+    }
+    return false;
+  }
+
+  private static String getQualifiedName(PyExpressionTree node, SubscriptionContext ctx) {
+    Symbol symbol = ctx.symbolTable().getSymbol(node);
     return symbol != null ? symbol.qualifiedName() : "";
   }
 
-  private void checkCreatingCustomHasher(AstNode classDef) {
-    AstNode argList = classDef.getFirstChild(PythonGrammar.ARGLIST);
+  private void checkCreatingCustomHasher(SubscriptionContext ctx) {
+    this.ctx = ctx;
+    PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+    PyArgListTree argList = classDef.args();
     if (argList != null) {
-      argList.getDescendants(PythonGrammar.ATOM)
+      argList.arguments()
         .stream()
-        .filter(atom -> questionableDjangoHashers.contains(getQualifiedName(atom)))
-        .forEach(atom -> addIssue(atom, MESSAGE));
+        .filter(arg -> questionableDjangoHashers.contains(getQualifiedName(arg.expression(), ctx)))
+        .forEach(arg -> ctx.addIssue(arg, MESSAGE));
     }
   }
 

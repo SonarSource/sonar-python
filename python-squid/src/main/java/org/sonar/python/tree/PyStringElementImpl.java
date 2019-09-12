@@ -66,6 +66,11 @@ public class PyStringElementImpl extends PyTree implements PyStringElementTree {
     return trimmed.substring(startIndex, trimmed.length() - startIndex);
   }
 
+  @Override
+  public String prefix() {
+    return value.substring(0, value.length() - removePrefix(value).length());
+  }
+
   private static boolean isTripleQuote(String trimmed) {
     if (trimmed.length() >= 6) {
       char startChar = trimmed.charAt(0);

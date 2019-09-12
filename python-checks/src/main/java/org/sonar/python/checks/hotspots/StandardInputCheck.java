@@ -19,12 +19,14 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 
@@ -39,45 +41,44 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
   private static final Set<String> questionablePropertyAccess = immutableSet("sys.stdin", "sys.__stdin__");
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM)) {
-      if (isQuestionablePropertyAccess(node)) {
-        addIssue(node, message());
-      }
-    } else {
-      if (questionableFunctionsBuiltIn.contains(getFunctionName(node))) {
-        addIssue(node, message());
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      PyCallExpressionTree callExpr = (PyCallExpressionTree) ctx.syntaxNode();
+      if (questionableFunctionsBuiltIn.contains(getFunctionName(callExpr.callee()))) {
+        ctx.addIssue(callExpr, message());
       } else {
-        super.visitNode(node);
+        visitNode(ctx);
       }
-    }
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
+      PyNameTree node = (PyNameTree) ctx.syntaxNode();
+      if(isWithinImport(node)) {
+        return;
+      }
+      if (isQuestionablePropertyAccess(node, ctx)) {
+        ctx.addIssue(node, message());
+      }
+    });
   }
 
-  private static String getFunctionName(AstNode callExpr) {
+  private static String getFunctionName(PyExpressionTree expr) {
     String functionName = "";
-    AstNode firstChild = callExpr.getFirstChild();
-    if (firstChild.is(PythonGrammar.ATTRIBUTE_REF)) {
-      functionName = firstChild.getChildren(PythonGrammar.ATOM, PythonGrammar.NAME).stream()
-        .map(AstNode::getTokenValue)
-        .collect(Collectors.joining( "." ));
-    } else if(firstChild.is(PythonGrammar.ATOM)) {
-      functionName = firstChild.getTokenValue();
+    if (expr.is(Tree.Kind.QUALIFIED_EXPR)) {
+      PyQualifiedExpressionTree qualExpr = (PyQualifiedExpressionTree) expr;
+      functionName = getFunctionName(qualExpr.qualifier()) + "." + qualExpr.name().name();
+    } else if (expr.is(Tree.Kind.NAME)) {
+      functionName = ((PyNameTree) expr).name();
     }
     return functionName;
   }
 
   @Override
-  protected boolean isException(AstNode callExpression) {
-    return callExpression.getFirstChild(PythonGrammar.ARGLIST) != null;
+  protected boolean isException(PyCallExpressionTree callExpression) {
+    return !callExpression.arguments().isEmpty();
   }
 
-  private boolean isQuestionablePropertyAccess(AstNode attributeRef) {
-    Symbol symbol = getContext().symbolTable().getSymbol(attributeRef);
+  private static boolean isQuestionablePropertyAccess(PyNameTree pyNameTree, SubscriptionContext ctx) {
+    Symbol symbol = ctx.symbolTable().getSymbol(pyNameTree);
     return symbol != null && questionablePropertyAccess.contains(symbol.qualifiedName());
   }
 

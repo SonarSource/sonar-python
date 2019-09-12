@@ -16,10 +16,15 @@ def argparse_test():
 
 def builtins():
     sys.argv # Noncompliant
-#   ^^^^^^^^
+#       ^^^^
     argv # Noncompliant
     mySys.argv # OK
 
 def optparse_test():
     OptionParser() # Noncompliant
     optparse.OptionParser() # Noncompliant
+
+
+@metrics.countMethod('AbstractBuildSlave.attached()')
+def attached(self, bot):
+  pass

@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
@@ -27,7 +29,7 @@ import org.sonar.python.checks.AbstractCallExpressionCheck;
 public class ProcessSignallingCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4828";
   private static final String MESSAGE = "Make sure that sending signals is safe here.";
-  private static final Set<String> questionableFunctions = immutableSet("os.kill", "os.killpg");
+  private static final Set<String> questionableFunctions = new HashSet<>(Arrays.asList("os.kill", "os.killpg"));
 
   @Override
   protected Set<String> functionsToCheck() {

@@ -10,7 +10,8 @@ from cryptography.hazmat.primitives import hashes
 def my_hash(algorithm):
     hashes.Hash(algorithm)  # Noncompliant {{Make sure that hashing data is safe here.}}
 #   ^^^^^^^^^^^
-
+    foo(hashes) #coverage
+hashes #coverage
 ############################################
 ###                Django                ###
 ############################################

@@ -19,34 +19,51 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
-public abstract class AbstractCallExpressionCheck extends PythonCheckAstNode {
+public abstract class AbstractCallExpressionCheck extends PythonSubscriptionCheck {
 
   protected abstract Set<String> functionsToCheck();
 
   protected abstract String message();
 
-  protected boolean isException(AstNode callExpression) {
+  protected boolean isException(PyCallExpressionTree callExpression) {
     return false;
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CALL_EXPR);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::visitNode);
   }
 
-  @Override
-  public void visitNode(AstNode node) {
-    Symbol symbol = getContext().symbolTable().getSymbol(node);
+  public void visitNode(SubscriptionContext ctx) {
+    PyCallExpressionTree node = (PyCallExpressionTree) ctx.syntaxNode();
+    Symbol symbol = ctx.symbolTable().getSymbol(node.callee());
     if (!isException(node) && symbol != null && functionsToCheck().contains(symbol.qualifiedName())) {
-      addIssue(node, message());
+      ctx.addIssue(node, message());
     }
+  }
+
+  protected static boolean isWithinImport(Tree tree) {
+    Tree parent = tree.parent();
+    while (parent != null) {
+      if (parent.is(Tree.Kind.IMPORT_NAME) || parent.is(Tree.Kind.IMPORT_FROM)) {
+        return true;
+      }
+      parent = parent.parent();
+    }
+    return false;
+  }
+
+  protected static <T> Set<T> immutableSet(T...args) {
+    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(args)));
   }
 }

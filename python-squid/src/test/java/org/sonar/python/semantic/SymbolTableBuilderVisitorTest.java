@@ -23,27 +23,34 @@ import com.google.common.base.Functions;
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SymbolTableBuilderVisitorTest {
 
-  private SymbolTable symbolTable;
-  private AstNode rootTree;
-  private Map<String, AstNode> functionTreesByName = new HashMap<>();
+  private static SymbolTable symbolTable;
+  private static AstNode rootTree;
+  private static Map<String, AstNode> functionTreesByName = new HashMap<>();
+  private static PyFileInputTree rootTreeStronglyTyped;
 
-  @Before
-  public void init() {
+  @BeforeClass
+  public static void init() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/symbols.py"));
     SymbolTableBuilderVisitor symbolTableBuilderVisitor = new SymbolTableBuilderVisitor();
     symbolTableBuilderVisitor.scanFile(context);
@@ -231,6 +238,62 @@ public class SymbolTableBuilderVisitorTest {
   }
 
   @Test
+  public void strongly_typed_api_symbols() {
+    FuncNameVisitor visitor = new FuncNameVisitor();
+    rootTreeStronglyTyped.accept(visitor);
+    assertThat(visitor.funcNames).containsExactly("myModuleName.eval",
+      "myModuleName.bar",
+      "original.foo",
+      "myModuleName.run",
+      "toplevel.myModule.g",
+      "myModuleName.f");
+    assertThat(visitor.names).containsExactly("myModuleName.eval",
+      "myModuleName.p",
+      "a",
+      "b",
+      "myModuleName.prop",
+      "i",
+      "j",
+      "k",
+      "params",
+      "myModuleName",
+      "myModuleName.bar",
+      "toplevel",
+      "original.foo",
+      "x",
+      "alias",
+      "self",
+      "unread_lambda_param",
+      "y",
+      "myModuleName.run",
+      "toplevel.myModule.g",
+      "myModuleName.f");
+  }
+
+  private static class FuncNameVisitor extends BaseTreeVisitor {
+    private Set<String> funcNames = new HashSet<>();
+    private Set<String> names = new HashSet<>();
+
+    @Override
+    public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
+      super.visitCallExpression(pyCallExpressionTree);
+      Symbol symbol = symbolTable.getSymbol(pyCallExpressionTree.callee());
+      if(symbol != null) {
+        funcNames.add(symbol.qualifiedName());
+      }
+    }
+
+    @Override
+    public void visitName(PyNameTree pyNameTree) {
+      Symbol symbol = symbolTable.getSymbol(pyNameTree);
+      if(symbol != null) {
+        names.add(symbol.qualifiedName());
+      }
+      super.visitName(pyNameTree);
+    }
+  }
+
+  @Test
   public void same_function_call() {
     List<AstNode> callExpressions = functionTreesByName.get("calling_same_function_multiple_times").getDescendants(PythonGrammar.CALL_EXPR);
     Symbol bar1 = symbolTable.getSymbol(callExpressions.get(0));
@@ -276,11 +339,12 @@ public class SymbolTableBuilderVisitorTest {
       .findFirst().get();
   }
 
-  private class TestVisitor extends PythonVisitor {
+  private static class TestVisitor extends PythonVisitor {
 
     @Override
     public void visitFile(AstNode node) {
       rootTree = node;
+      rootTreeStronglyTyped = new PythonTreeMaker().fileInput(rootTree);
       for (AstNode functionTree : node.getDescendants(PythonGrammar.FUNCDEF)) {
         String name = functionTree.getFirstChild(PythonGrammar.FUNCNAME).getTokenValue();
         functionTreesByName.put(name, functionTree);
