@@ -33,7 +33,7 @@ public class PyImportNameTreeImpl extends PyTree implements PyImportNameTree {
   private final Token importKeyword;
   private final List<PyAliasedNameTree> aliasedNames;
 
-  public PyImportNameTreeImpl(AstNode astNode, Token importKeyword, java.util.List<PyAliasedNameTree> aliasedNames) {
+  public PyImportNameTreeImpl(AstNode astNode, Token importKeyword, List<PyAliasedNameTree> aliasedNames) {
     super(astNode);
     this.importKeyword = importKeyword;
     this.aliasedNames = aliasedNames;
