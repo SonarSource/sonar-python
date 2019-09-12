@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Collections;
 import java.util.List;
@@ -32,8 +31,8 @@ public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTr
   private final Token elseKeyword;
   private final PyStatementListTree body;
 
-  public PyElseStatementTreeImpl(AstNode astNode, Token elseKeyword, PyStatementListTree body) {
-    super(astNode);
+  public PyElseStatementTreeImpl(Token elseKeyword, PyStatementListTree body) {
+    super(elseKeyword, body.lastToken());
     this.elseKeyword = elseKeyword;
     this.body = body;
   }

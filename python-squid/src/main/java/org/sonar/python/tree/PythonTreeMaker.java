@@ -416,8 +416,7 @@ public class PythonTreeMaker {
       .map(this::elifStatement)
       .collect(Collectors.toList());
 
-    return new PyIfStatementTreeImpl(
-      astNode, ifToken, expression(condition), statements, elifBranches, elseStatement);
+    return new PyIfStatementTreeImpl(ifToken, expression(condition), statements, elifBranches, elseStatement);
   }
 
   private PyIfStatementTree elifStatement(AstNode astNode) {
@@ -425,14 +424,13 @@ public class PythonTreeMaker {
     AstNode suite = astNode.getNextSibling().getNextSibling().getNextSibling();
     AstNode condition = astNode.getNextSibling();
     PyStatementListTree statements = getStatementListFromSuite(suite);
-    return new PyIfStatementTreeImpl(
-      astNode, elifToken, expression(condition), statements);
+    return new PyIfStatementTreeImpl(elifToken, expression(condition), statements);
   }
 
   private PyElseStatementTree elseStatement(AstNode astNode) {
     Token elseToken = astNode.getPreviousSibling().getPreviousSibling().getToken();
     PyStatementListTree statements = getStatementListFromSuite(astNode);
-    return new PyElseStatementTreeImpl(astNode, elseToken, statements);
+    return new PyElseStatementTreeImpl(elseToken, statements);
   }
 
   public PyFunctionDefTree funcDefStatement(AstNode astNode) {
@@ -505,9 +503,7 @@ public class PythonTreeMaker {
     PyArgListTree args = null;
     AstNode leftPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
     if (leftPar != null) {
-      AstNode argList = astNode.getFirstChild(PythonGrammar.ARGLIST);
-      // FIXME: PyArgList should never have null firstToken and lastToken
-      args = argList != null ? argList(argList) : new PyArgListTreeImpl(argList, Collections.emptyList());
+      args = argList(astNode.getFirstChild(PythonGrammar.ARGLIST));
     }
     PyStatementListTree body = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
     Token classToken = astNode.getFirstChild(PythonKeyword.CLASS).getToken();
@@ -622,7 +618,7 @@ public class PythonTreeMaker {
     if (finallyNode != null) {
       AstNode finallySuite = finallyNode.getNextSibling().getNextSibling();
       PyStatementListTree body = getStatementListFromSuite(finallySuite);
-      finallyClause = new PyFinallyClauseTreeImpl(finallySuite, finallyNode.getToken(), body);
+      finallyClause = new PyFinallyClauseTreeImpl(finallyNode.getToken(), body);
     }
     PyElseStatementTree elseStatementTree = null;
     AstNode elseNode = astNode.getFirstChild(PythonKeyword.ELSE);
@@ -667,15 +663,15 @@ public class PythonTreeMaker {
     Token exceptKeyword = except.getFirstChild(PythonKeyword.EXCEPT).getToken();
     AstNode exceptionNode = except.getFirstChild(PythonGrammar.TEST);
     if (exceptionNode == null) {
-      return new PyExceptClauseTreeImpl(except, exceptKeyword, body);
+      return new PyExceptClauseTreeImpl(exceptKeyword, body);
     }
     AstNode asNode = except.getFirstChild(PythonKeyword.AS);
     AstNode commaNode = except.getFirstChild(PythonPunctuator.COMMA);
     if (asNode != null || commaNode != null) {
       PyExpressionTree exceptionInstance = expression(except.getLastChild(PythonGrammar.TEST));
-      return new PyExceptClauseTreeImpl(except, exceptKeyword, body, expression(exceptionNode), asNode, commaNode, exceptionInstance);
+      return new PyExceptClauseTreeImpl(exceptKeyword, body, expression(exceptionNode), asNode, commaNode, exceptionInstance);
     }
-    return new PyExceptClauseTreeImpl(except, exceptKeyword, body, expression(exceptionNode));
+    return new PyExceptClauseTreeImpl(exceptKeyword, body, expression(exceptionNode));
   }
 
   // expressions
@@ -1001,11 +997,10 @@ public class PythonTreeMaker {
     AstNode lastNameNode = astNode.getLastChild();
     for (AstNode nameNode : names) {
       if (nameNode != lastNameNode) {
-        // FIXME: there is no corresponding astNode, parseTree and strongly typed AST are structurally different
-        qualifier = new PyQualifiedExpressionTreeImpl(astNode, name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
+        qualifier = new PyQualifiedExpressionTreeImpl(name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
       }
     }
-    return new PyQualifiedExpressionTreeImpl(astNode, name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
+    return new PyQualifiedExpressionTreeImpl(name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
   }
 
   public PyCallExpressionTree callExpression(AstNode astNode) {
