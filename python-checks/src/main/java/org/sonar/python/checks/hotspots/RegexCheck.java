@@ -20,55 +20,50 @@
 package org.sonar.python.checks.hotspots;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.tree.PyArgumentTree;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = RegexCheck.CHECK_KEY)
-public class RegexCheck extends PythonCheckAstNode {
+public class RegexCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4784";
   private static final String MESSAGE = "Make sure that using a regular expression is safe here.";
   private static final int REGEX_ARGUMENT = 0;
-  private static final Set<String> questionableFunctions = immutableSet(
+  private static final Set<String> questionableFunctions = new HashSet<>(Arrays.asList(
     "django.core.validators.RegexValidator", "django.urls.re_path",
     "re.compile", "re.match", "re.search", "re.fullmatch", "re.split", "re.findall", "re.finditer", "re.sub", "re.subn",
     "regex.compile", "regex.match", "regex.search", "regex.fullmatch", "regex.split", "regex.findall", "regex.finditer", "regex.sub", "regex.subn",
-    "regex.subf", "regex.subfn", "regex.splititer");
+    "regex.subf", "regex.subfn", "regex.splititer"));
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    Symbol symbol = getContext().symbolTable().getSymbol(node);
-    if (symbol != null && questionableFunctions.contains(symbol.qualifiedName())) {
-      AstNode parent = node.getParent();
-      if (parent != null && parent.is(PythonGrammar.CALL_EXPR)) {
-        AstNode argListNode = parent.getFirstChild(PythonGrammar.ARGLIST);
-        if (argListNode != null) {
-          // ARGLIST is not null => we have at least one child
-          checkRegexArgument(argListNode.getChildren().get(REGEX_ARGUMENT));
-        }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      PyCallExpressionTree call = (PyCallExpressionTree) ctx.syntaxNode();
+      Symbol symbol = ctx.symbolTable().getSymbol(call.callee());
+      if (symbol != null && questionableFunctions.contains(symbol.qualifiedName()) && !call.arguments().isEmpty()) {
+        checkRegexArgument(call.arguments().get(REGEX_ARGUMENT), ctx);
       }
-    }
+    });
   }
 
-  private void checkRegexArgument(AstNode arg) {
-    AstNode atom = arg.getFirstDescendant(PythonGrammar.ATOM);
-    if (atom == null) {
-      return;
-    }
-    String literal = atom.getTokenValue();
-    Symbol argSymbol = getContext().symbolTable().getSymbol(atom);
+  private void checkRegexArgument(PyArgumentTree arg, SubscriptionContext ctx) {
+    Symbol argSymbol = ctx.symbolTable().getSymbol(getExpression(arg.expression()));
+    String literal = arg.firstToken().getValue();
     IssueLocation secondaryLocation = null;
+    // TODO : this cannot be migrated to strongly typed AST as long as semantic is not migrated to strongly typed AST
     if (argSymbol != null && argSymbol.writeUsages().size() == 1) {
       AstNode expressionStatement = argSymbol.writeUsages().iterator().next().getFirstAncestor(PythonGrammar.EXPRESSION_STMT);
       if (isAssignment(expressionStatement)) {
@@ -78,11 +73,18 @@ public class RegexCheck extends PythonCheckAstNode {
       }
     }
     if (isSuspiciousRegex(literal)) {
-      PreciseIssue preciseIssue = addIssue(atom, MESSAGE);
+      PreciseIssue preciseIssue = ctx.addIssue(arg, MESSAGE);
       if (secondaryLocation != null) {
         preciseIssue.secondary(secondaryLocation);
       }
     }
+  }
+
+  private static PyExpressionTree getExpression(PyExpressionTree expr) {
+    if (expr.is(Tree.Kind.MODULO) || expr.is(Tree.Kind.PLUS)) {
+      return getExpression(((PyBinaryExpressionTree) expr).leftOperand());
+    }
+    return expr;
   }
 
   private static boolean isAssignment(@CheckForNull AstNode expressionStatement) {
