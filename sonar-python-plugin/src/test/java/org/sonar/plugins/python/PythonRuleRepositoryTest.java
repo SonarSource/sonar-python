@@ -21,7 +21,6 @@ package org.sonar.plugins.python;
 
 import java.util.List;
 import org.junit.Test;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.python.checks.CheckList;
@@ -84,19 +83,8 @@ public class PythonRuleRepositoryTest {
     assertThat(hardcodedIp.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
   }
 
-  @Test
-  public void hotspotRulesNotSupported() {
-    RulesDefinition.Repository repository = buildRepository(TestUtils.SONAR_RUNTIME_67);
-    RulesDefinition.Rule hardcodedIp = repository.rule("S1313");
-    assertThat(hardcodedIp.type()).isEqualTo(RuleType.VULNERABILITY);
-  }
-
   private static RulesDefinition.Repository buildRepository() {
-    return buildRepository(TestUtils.SONAR_RUNTIME_72);
-  }
-
-  private static RulesDefinition.Repository buildRepository(SonarRuntime sonarRuntime) {
-    PythonRuleRepository ruleRepository = new PythonRuleRepository(sonarRuntime);
+    PythonRuleRepository ruleRepository = new PythonRuleRepository(TestUtils.SONAR_RUNTIME_79);
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
     return context.repository(CheckList.REPOSITORY_KEY);

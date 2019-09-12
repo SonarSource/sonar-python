@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
@@ -30,8 +31,7 @@ import org.sonar.api.utils.Version;
 
 public final class TestUtils {
 
-  static final SonarRuntime SONAR_RUNTIME_67 = SonarRuntimeImpl.forSonarQube(Version.create(6, 7), SonarQubeSide.SCANNER);
-  static final SonarRuntime SONAR_RUNTIME_72 = SonarRuntimeImpl.forSonarQube(Version.create(7, 6), SonarQubeSide.SCANNER);
+  static final SonarRuntime SONAR_RUNTIME_79 = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.DEVELOPER);
 
   private TestUtils() {
     // Utility class

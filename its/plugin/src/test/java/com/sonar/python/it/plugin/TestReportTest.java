@@ -19,7 +19,6 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -125,7 +124,7 @@ public class TestReportTest {
 
   private static Map<String, Integer> nullMeasures() {
     Set<String> metrics = ImmutableSet.of(TESTS, TEST_FAILURES, TEST_ERRORS, SKIPPED_TESTS, TEST_SUCCESS_DENSITY, TEST_EXECUTION_TIME);
-    return Maps.asMap(metrics, Functions.<Integer>constant(null));
+    return Maps.asMap(metrics, i -> null);
   }
 
 }

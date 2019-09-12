@@ -28,8 +28,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -97,13 +95,11 @@ public final class Tests {
     }
   }
 
-  @CheckForNull
   static Measure getMeasure(String componentKey, String metricKey) {
     List<Measure> measures = getMeasures(componentKey, singletonList(metricKey));
     return measures != null && measures.size() == 1 ? measures.get(0) : null;
   }
 
-  @CheckForNull
   private static List<Measure> getMeasures(String componentKey, List<String> metricKeys) {
     ComponentWsResponse response = newWsClient().measures().component(new ComponentRequest()
       .setComponent(componentKey)
@@ -111,13 +107,11 @@ public final class Tests {
     return response.getComponent().getMeasuresList();
   }
 
-  @CheckForNull
   static Integer getMeasureAsInt(String componentKey, String metricKey) {
     Measure measure = getMeasure(componentKey, metricKey);
     return (measure == null) ? null : Integer.parseInt(measure.getValue());
   }
 
-  @CheckForNull
   static Double getMeasureAsDouble(String componentKey, String metricKey) {
     Measure measure = getMeasure(componentKey, metricKey);
     return (measure == null) ? null : parseDouble(measure.getValue());
@@ -131,7 +125,7 @@ public final class Tests {
     return newWsClient(ADMIN_LOGIN, ADMIN_PASSWORD);
   }
 
-  static WsClient newWsClient(@Nullable String login, @Nullable String password) {
+  static WsClient newWsClient(String login, String password) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(ORCHESTRATOR.getServer().getUrl())
       .credentials(login, password)
