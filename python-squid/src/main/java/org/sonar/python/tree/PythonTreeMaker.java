@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +46,7 @@ import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionClauseTree;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyContinueStatementTree;
@@ -1006,7 +1008,11 @@ public class PythonTreeMaker {
   public PyCallExpressionTree callExpression(AstNode astNode) {
     PyExpressionTree callee = expression(astNode.getFirstChild());
     AstNode argListNode = astNode.getFirstChild(PythonGrammar.ARGLIST);
-    return new PyCallExpressionTreeImpl(astNode, callee, argList(argListNode),
+    PyArgListTree argumentList = argList(argListNode);
+    if (argumentList != null) {
+      checkGeneratorExpressionInArgument(argumentList.arguments());
+    }
+    return new PyCallExpressionTreeImpl(astNode, callee, argumentList,
       astNode.getFirstChild(PythonPunctuator.LPARENTHESIS), astNode.getFirstChild(PythonPunctuator.RPARENTHESIS));
   }
 
@@ -1020,8 +1026,27 @@ public class PythonTreeMaker {
     return null;
   }
 
+  /*
+   * Post Condition on Generator Expression: parentheses can be omitted on calls with only one argument.
+   * https://docs.python.org/3/reference/expressions.html#grammar-token-generator-expression
+   */
+  private static void checkGeneratorExpressionInArgument(List<PyArgumentTree> arguments) {
+    List<PyArgumentTree> nonParenthesizedGeneratorExpressions = arguments.stream()
+      .filter(arg -> arg.expression().is(Tree.Kind.GENERATOR_EXPR) && !arg.expression().firstToken().getValue().equals("("))
+      .collect(Collectors.toList());
+    if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
+      throw new RecognitionException(nonParenthesizedGeneratorExpressions.get(0).firstToken().getLine(), "Generator expression must be parenthesized.");
+    }
+  }
+
   public PyArgumentTree argument(AstNode astNode) {
-    // TODO : handle COMP_FOR
+    AstNode compFor = astNode.getFirstChild(PythonGrammar.COMP_FOR);
+    if (compFor != null) {
+      PyExpressionTree expression = expression(astNode.getFirstChild());
+      PyComprehensionExpressionTree comprehension =
+        new PyComprehensionExpressionTreeImpl(Tree.Kind.GENERATOR_EXPR, expression.firstToken(), expression, compFor(compFor), compFor.getLastToken());
+      return new PyArgumentTreeImpl(astNode, comprehension, null, null);
+    }
     AstNode assign = astNode.getFirstChild(PythonPunctuator.ASSIGN);
     AstNode star = astNode.getFirstChild(PythonPunctuator.MUL);
     AstNode starStar = astNode.getFirstChild(PythonPunctuator.MUL_MUL);
