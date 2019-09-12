@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.semantic.SymbolTable;
@@ -50,7 +51,7 @@ public class PythonVisitorContext {
     this(null, null, pythonFile, parsingException);
   }
 
-  private PythonVisitorContext(AstNode rootAst, PyFileInputTree rootTree, PythonFile pythonFile, RecognitionException parsingException) {
+  private PythonVisitorContext(@Nullable AstNode rootAst, @Nullable PyFileInputTree rootTree, PythonFile pythonFile, @Nullable RecognitionException parsingException) {
     this.rootAst = rootAst;
     this.rootTree = (PyFileInputTreeImpl) rootTree;
     this.pythonFile = pythonFile;

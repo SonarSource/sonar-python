@@ -38,7 +38,8 @@ public class MethodNameCheck extends AbstractFunctionNameCheck {
 
   @Override
   public boolean shouldCheckFunctionDeclaration(PyFunctionDefTree pyFunctionDefTree) {
-    return pyFunctionDefTree.isMethodDefinition() && !classHasInheritance(getParentClassDef(pyFunctionDefTree));
+    PyClassDefTree parentClassDef = getParentClassDef(pyFunctionDefTree);
+    return parentClassDef != null && !classHasInheritance(parentClassDef);
   }
 
   private static PyClassDefTree getParentClassDef(Tree current) {

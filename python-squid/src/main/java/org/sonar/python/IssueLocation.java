@@ -97,7 +97,7 @@ public abstract class IssueLocation {
       this.lastTokenLocation = new TokenLocation(lastToken);
     }
 
-    public PreciseIssueLocation(Token token, String message) {
+    public PreciseIssueLocation(Token token, @Nullable String message) {
       super(message);
       this.firstToken = token;
       this.lastTokenLocation = new TokenLocation(token);

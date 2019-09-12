@@ -317,7 +317,7 @@ public class SymbolTableBuilderVisitor extends PythonVisitor {
 
     @CheckForNull
     @Override
-    public Symbol getSymbol(AstNode node) {
+    public Symbol getSymbol(@Nullable AstNode node) {
       return symbolByNode.get(node);
     }
 

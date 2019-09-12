@@ -92,7 +92,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   @Override
   public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
     incrementWithNesting(pyWhileStatementTree.whileKeyword());
-    if (pyWhileStatementTree.elseBody() != null) {
+    if (pyWhileStatementTree.elseKeyword() != null) {
       incrementWithoutNesting(pyWhileStatementTree.elseKeyword());
     }
     super.visitWhileStatement(pyWhileStatementTree);
@@ -101,7 +101,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   @Override
   public void visitForStatement(PyForStatementTree pyForStatementTree) {
     incrementWithNesting(pyForStatementTree.forKeyword());
-    if (pyForStatementTree.elseBody() != null) {
+    if (pyForStatementTree.elseKeyword() != null) {
       incrementWithoutNesting(pyForStatementTree.elseKeyword());
     }
     super.visitForStatement(pyForStatementTree);
