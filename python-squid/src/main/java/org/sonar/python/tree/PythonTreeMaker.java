@@ -225,7 +225,7 @@ public class PythonTreeMaker {
     return Collections.emptyList();
   }
 
-  private List<AstNode> getStatements(AstNode astNode) {
+  private static List<AstNode> getStatements(AstNode astNode) {
     List<AstNode> statements = astNode.getChildren(PythonGrammar.STATEMENT);
     return statements.stream().flatMap(stmt -> {
       if (stmt.hasDirectChildren(PythonGrammar.STMT_LIST)) {
@@ -380,7 +380,7 @@ public class PythonTreeMaker {
   private PyDottedNameTree dottedName(AstNode astNode) {
     List<PyNameTree> names = astNode
       .getChildren(PythonGrammar.NAME).stream()
-      .map(this::name)
+      .map(PythonTreeMaker::name)
       .collect(Collectors.toList());
     return new PyDottedNameTreeImpl(astNode, names);
   }
@@ -388,7 +388,7 @@ public class PythonTreeMaker {
   public PyGlobalStatementTree globalStatement(AstNode astNode) {
     Token globalKeyword = astNode.getFirstChild(PythonKeyword.GLOBAL).getToken();
     List<PyNameTree> variables = astNode.getChildren(PythonGrammar.NAME).stream()
-      .map(this::name)
+      .map(PythonTreeMaker::name)
       .collect(Collectors.toList());
     return new PyGlobalStatementTreeImpl(astNode, globalKeyword, variables);
   }
@@ -396,7 +396,7 @@ public class PythonTreeMaker {
   public PyNonlocalStatementTree nonlocalStatement(AstNode astNode) {
     Token nonlocalKeyword = astNode.getFirstChild(PythonKeyword.NONLOCAL).getToken();
     List<PyNameTree> variables = astNode.getChildren(PythonGrammar.NAME).stream()
-      .map(this::name)
+      .map(PythonTreeMaker::name)
       .collect(Collectors.toList());
     return new PyNonlocalStatementTreeImpl(astNode, nonlocalKeyword, variables);
   }
@@ -513,7 +513,7 @@ public class PythonTreeMaker {
       leftPar != null ? leftPar.getToken() : null, args, rightPar != null ? rightPar.getToken() : null, colon, body, DocstringExtractor.extractDocstring(astNode));
   }
 
-  private PyNameTree name(AstNode astNode) {
+  private static PyNameTree name(AstNode astNode) {
     return new PyNameTreeImpl(astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
   }
 
@@ -1113,11 +1113,11 @@ public class PythonTreeMaker {
     return new PyParameterTreeImpl(parameter, starOrStarStar, name, typeAnnotation, assignToken, defaultValue);
   }
 
-  private PyExpressionTree numericLiteral(AstNode astNode) {
+  private static PyExpressionTree numericLiteral(AstNode astNode) {
     return new PyNumericLiteralTreeImpl(astNode);
   }
 
-  private PyExpressionTree stringLiteral(AstNode astNode) {
+  private static PyExpressionTree stringLiteral(AstNode astNode) {
     List<PyStringElementTree> stringElements = astNode.getChildren(PythonTokenType.STRING).stream().map(PyStringElementImpl::new).collect(Collectors.toList());
     return new PyStringLiteralTreeImpl(astNode, stringElements);
   }

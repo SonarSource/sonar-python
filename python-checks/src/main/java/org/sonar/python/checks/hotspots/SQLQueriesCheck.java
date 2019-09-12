@@ -94,7 +94,7 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     super.visitNode(context);
   }
 
-  private boolean isException(PyCallExpressionTree callExpression, String functionName) {
+  private static boolean isException(PyCallExpressionTree callExpression, String functionName) {
     List<PyArgumentTree> argListNode = callExpression.arguments();
     if (extraContainsFormattedSqlQueries(argListNode, functionName)) {
       return false;

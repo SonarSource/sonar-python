@@ -113,7 +113,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       return (keywordArgument).name().equals(getExponentKeywordName()) && isLessThan65537(argument.expression());
     }
 
-    private boolean isNonCompliantCurveArgument(PyArgumentTree argument, int index, SubscriptionContext ctx) {
+    private static boolean isNonCompliantCurveArgument(PyArgumentTree argument, int index, SubscriptionContext ctx) {
       PyNameTree keywordArgument = argument.keywordArgument();
       if (keywordArgument == null) {
         return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(argument.expression(), ctx);
@@ -121,7 +121,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       return (keywordArgument).name().equals("curve") && isNonCompliantCurve(argument.expression(), ctx);
     }
 
-    private boolean isNonCompliantCurve(PyExpressionTree expression, SubscriptionContext ctx) {
+    private static boolean isNonCompliantCurve(PyExpressionTree expression, SubscriptionContext ctx) {
       if (!expression.is(Kind.QUALIFIED_EXPR)) {
         return false;
       }
