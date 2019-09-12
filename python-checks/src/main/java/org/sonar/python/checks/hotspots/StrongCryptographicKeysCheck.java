@@ -59,22 +59,6 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   }
 
 
-  private static boolean isLessThan2048(PyExpressionTree expression) {
-    try {
-      return expression.is(Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) expression).valueAsLong() < 2048;
-    } catch (NumberFormatException nfe) {
-      return false;
-    }
-  }
-
-  private static boolean isLessThan65537(PyExpressionTree expression) {
-    try {
-      return expression.is(Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) expression).valueAsLong() < 65537;
-    } catch (NumberFormatException nfe) {
-      return false;
-    }
-  }
-
   private static String getQualifiedName(PyCallExpressionTree callExpression, SubscriptionContext ctx) {
     PyExpressionTree node = callExpression.callee();
     String functionNameSuffix = "";
@@ -83,7 +67,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       node = ((PyQualifiedExpressionTree) node).qualifier();
     }
     Symbol symbol = ctx.symbolTable().getSymbol(node);
-    return symbol != null ? symbol.qualifiedName() + functionNameSuffix : "";
+    return symbol != null ? (symbol.qualifiedName() + functionNameSuffix) : "";
   }
 
   private abstract static class CryptoAPICheck {
@@ -111,6 +95,22 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
         return index == getExponentArgumentPosition() && isLessThan65537(argument.expression());
       }
       return (keywordArgument).name().equals(getExponentKeywordName()) && isLessThan65537(argument.expression());
+    }
+
+    private static boolean isLessThan2048(PyExpressionTree expression) {
+      try {
+        return expression.is(Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) expression).valueAsLong() < 2048;
+      } catch (NumberFormatException nfe) {
+        return false;
+      }
+    }
+
+    private static boolean isLessThan65537(PyExpressionTree expression) {
+      try {
+        return expression.is(Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) expression).valueAsLong() < 65537;
+      } catch (NumberFormatException nfe) {
+        return false;
+      }
     }
 
     private static boolean isNonCompliantCurveArgument(PyArgumentTree argument, int index, SubscriptionContext ctx) {
