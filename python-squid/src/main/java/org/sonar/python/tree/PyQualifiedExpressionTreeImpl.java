@@ -19,9 +19,11 @@
  */
 package org.sonar.python.tree;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
@@ -32,12 +34,21 @@ public class PyQualifiedExpressionTreeImpl extends PyTree implements PyQualified
   private final PyNameTree name;
   private final PyExpressionTree qualifier;
   private final Token dotToken;
+  private final AstNode astNode;
 
-  public PyQualifiedExpressionTreeImpl(PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
+  public PyQualifiedExpressionTreeImpl(AstNode astNode, PyNameTree name, PyExpressionTree qualifier, Token dotToken) {
     super(qualifier.firstToken(), name.lastToken());
+    // FIXME : astNode is required to make semantic work at function level, this should disappear once semantic relies on strongly typed AST.
+    this.astNode = astNode;
     this.name = name;
     this.qualifier = qualifier;
     this.dotToken = dotToken;
+  }
+
+  @CheckForNull
+  @Override
+  public AstNode astNode() {
+    return astNode;
   }
 
   @Override

@@ -894,7 +894,7 @@ public class PythonTreeMaker {
 
     } else {
       PyNameTree name = name(trailer.getFirstChild(PythonGrammar.NAME));
-      return new PyQualifiedExpressionTreeImpl(name, expr, trailer.getFirstChild(PythonPunctuator.DOT).getToken());
+      return new PyQualifiedExpressionTreeImpl(trailer, name, expr, trailer.getFirstChild(PythonPunctuator.DOT).getToken());
     }
   }
 
@@ -997,10 +997,10 @@ public class PythonTreeMaker {
     AstNode lastNameNode = astNode.getLastChild();
     for (AstNode nameNode : names) {
       if (nameNode != lastNameNode) {
-        qualifier = new PyQualifiedExpressionTreeImpl(name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
+        qualifier = new PyQualifiedExpressionTreeImpl(astNode, name(nameNode), qualifier, nameNode.getPreviousSibling().getToken());
       }
     }
-    return new PyQualifiedExpressionTreeImpl(name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
+    return new PyQualifiedExpressionTreeImpl(astNode, name(lastNameNode), qualifier, lastNameNode.getPreviousSibling().getToken());
   }
 
   public PyCallExpressionTree callExpression(AstNode astNode) {
