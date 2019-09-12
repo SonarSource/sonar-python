@@ -37,19 +37,10 @@ public class PythonProfileTest {
 
   @Test
   public void profile() {
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile(TestUtils.SONAR_RUNTIME_72);
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile(TestUtils.SONAR_RUNTIME_79);
     assertThat(profile.rules()).extracting("repoKey").containsOnly("python");
     assertThat(profile.rules().size()).isGreaterThan(25);
     assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("S100");
-  }
-
-  @Test
-  public void remove_hotspot_when_not_supported() {
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile(TestUtils.SONAR_RUNTIME_67);
-    assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).doesNotContain("S1313");
-
-    profile = getProfile(TestUtils.SONAR_RUNTIME_72);
-    assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("S1313");
   }
 
 }

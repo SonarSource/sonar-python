@@ -22,12 +22,12 @@ package org.sonar.plugins.python;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.api.Plugin;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
-import org.sonar.plugins.python.warnings.NoOpAnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,20 +35,10 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() {
-    Version v60 = Version.create(6, 0);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v60, SonarQubeSide.SERVER))).hasSize(20);
-    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v60))).hasSize(5);
-
-    Version v72 = Version.create(7, 2);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v72, SonarQubeSide.SERVER))).hasSize(22);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v72, SonarQubeSide.SERVER))).contains(NoOpAnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v72, SonarQubeSide.SERVER))).doesNotContain(DefaultAnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v72))).hasSize(5);
-
-    Version v74 = Version.create(7, 4);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v74, SonarQubeSide.SERVER))).hasSize(22);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v74, SonarQubeSide.SERVER))).doesNotContain(NoOpAnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarQube(v74, SonarQubeSide.SERVER))).contains(DefaultAnalysisWarningsWrapper.class);
+    Version v74 = Version.create(7, 9);
+    SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v74, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
+    assertThat(extensions(runtime)).hasSize(22);
+    assertThat(extensions(runtime)).contains(DefaultAnalysisWarningsWrapper.class);
     assertThat(extensions(SonarRuntimeImpl.forSonarLint(v74))).hasSize(5);
   }
 

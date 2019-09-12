@@ -31,10 +31,6 @@ public class AnalysisWarningsWrapperTest {
 
   @Test
   public void test() {
-    NoOpAnalysisWarningsWrapper noOpAnalysisWarningsWrapper = new NoOpAnalysisWarningsWrapper();
-    // for coverage
-    noOpAnalysisWarningsWrapper.addWarning("");
-
     AnalysisWarnings analysisWarnings = spy(AnalysisWarnings.class);
     DefaultAnalysisWarningsWrapper defaultAnalysisWarningsWrapper = new DefaultAnalysisWarningsWrapper(analysisWarnings);
     defaultAnalysisWarningsWrapper.addWarning("abcd");

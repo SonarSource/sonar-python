@@ -29,6 +29,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.junit.Rule;
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -70,16 +71,10 @@ public class BanditSensorTest {
     assertNoErrorWarnDebugLogs(logTester);
   }
 
-  @Test
-  public void no_issues_with_sonarqube_71() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 1, BANDIT_REPORT_JSON);
-    assertThat(externalIssues).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.ERROR)).containsExactly("Import of external issues requires SonarQube 7.2 or greater.");
-  }
 
   @Test
   public void issues_with_sonarqube_72() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, BANDIT_REPORT_JSON);
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, BANDIT_REPORT_JSON);
     assertThat(externalIssues).hasSize(4);
 
     ExternalIssue first = externalIssues.get(0);
@@ -130,52 +125,17 @@ public class BanditSensorTest {
     assertNoErrorWarnDebugLogs(logTester);
   }
 
-  @Test
-  public void issues_with_sonarqube_75() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 5, BANDIT_REPORT_JSON);
-    assertThat(externalIssues).hasSize(4);
-
-    ExternalIssue first = externalIssues.get(0);
-    assertThat(first.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
-    assertThat(first.ruleKey().toString()).isEqualTo(BANDIT_B413);
-    TextRange firstTextRange = first.primaryLocation().textRange();
-    assertThat(firstTextRange).isNotNull();
-    assertThat(firstTextRange.start().line()).isEqualTo(2);
-
-    ExternalIssue second = externalIssues.get(1);
-    assertThat(second.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_bandit:B107");
-    TextRange secondTextRange = second.primaryLocation().textRange();
-    assertThat(secondTextRange).isNotNull();
-    assertThat(secondTextRange.start().line()).isEqualTo(5);
-
-    ExternalIssue third = externalIssues.get(2);
-    assertThat(third.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
-    assertThat(third.ruleKey().toString()).isEqualTo("external_bandit:B605");
-    TextRange thirdTextRange = third.primaryLocation().textRange();
-    assertThat(thirdTextRange).isNotNull();
-    assertThat(thirdTextRange.start().line()).isEqualTo(6);
-
-    ExternalIssue fourth = externalIssues.get(3);
-    assertThat(fourth.primaryLocation().inputComponent().key()).isEqualTo(BANDIT_FILE);
-    assertThat(fourth.ruleKey().toString()).isEqualTo("external_bandit:B311");
-    TextRange fourthTextRange = fourth.primaryLocation().textRange();
-    assertThat(fourthTextRange).isNotNull();
-    assertThat(fourthTextRange.start().line()).isEqualTo(7);
-
-    assertNoErrorWarnDebugLogs(logTester);
-  }
 
   @Test
   public void no_issues_without_report_paths_property() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, null);
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, null);
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
   public void no_issues_with_invalid_report_path() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, "invalid-path.txt");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
@@ -184,7 +144,7 @@ public class BanditSensorTest {
 
   @Test
   public void no_issues_with_invalid_bandit_file() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, "not-bandit-file.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "not-bandit-file.json");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
@@ -193,14 +153,14 @@ public class BanditSensorTest {
 
   @Test
   public void no_issues_with_empty_bandit_file() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, "bandit-report-empty.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-empty.json");
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
   public void issues_when_bandit_file_has_errors() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, "bandit-report-with-errors.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-with-errors.json");
     assertThat(externalIssues).hasSize(1);
 
     ExternalIssue first = externalIssues.get(0);
@@ -228,7 +188,7 @@ public class BanditSensorTest {
 
   @Test
   public void issues_when_bandit_file_and_line_errors() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 2, "bandit-report-with-file-and-line-errors.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-with-file-and-line-errors.json");
     assertThat(externalIssues).hasSize(0);
 
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
@@ -243,7 +203,7 @@ public class BanditSensorTest {
     SensorContextTester context = SensorContextTester.create(baseDir);
     try (Stream<Path> fileStream = Files.list(PROJECT_DIR)) {
       fileStream.forEach(file -> addFileToContext(context, baseDir, file));
-      context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER));
+      context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER));
       if (fileName != null) {
         String path = PROJECT_DIR.resolve(fileName).toAbsolutePath().toString();
         context.settings().setProperty("sonar.python.bandit.reportPaths", path);

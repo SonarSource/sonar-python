@@ -22,14 +22,17 @@ package com.sonar.python.it.plugin;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.issue.Issue;
-import org.sonar.wsclient.issue.IssueQuery;
+import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Qualityprofiles;
+import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.PostRequest;
+import org.sonarqube.ws.client.WsClient;
+import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.qualityprofiles.SearchRequest;
 
 import static com.sonar.python.it.plugin.Tests.newAdminWsClient;
@@ -69,17 +72,24 @@ public class XPathRuleTest {
       .setSourceDirs(".");
     ORCHESTRATOR.executeBuild(build);
 
-    List<Issue> issues = getIssues(RULE_KEY_WITH_PREFIX);
+    List<Issues.Issue> issues = getIssues(RULE_KEY_WITH_PREFIX);
     assertThat(issues.size()).isEqualTo(1);
-    Issue issue = issues.get(0);
-    assertThat(issue.componentKey()).endsWith("myClass.py");
-    assertThat(issue.line()).isEqualTo(1);
-    assertThat(issue.message()).isEqualTo("Do something fantastic!");
+    Issues.Issue issue = issues.get(0);
+    assertThat(issue.getComponent()).endsWith("myClass.py");
+    assertThat(issue.getLine()).isEqualTo(1);
+    assertThat(issue.getMessage()).isEqualTo("Do something fantastic!");
   }
 
-  private static List<Issue> getIssues(String ruleKey) {
-    IssueQuery query = IssueQuery.create().componentRoots(PROJECT).rules(ruleKey);
-    return ORCHESTRATOR.getServer().wsClient().issueClient().find(query).list();
+  private static List<Issues.Issue> getIssues(String ruleKey) {
+    WsClient client = WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
+      .url(ORCHESTRATOR.getServer().getUrl())
+      .credentials("admin", "admin")
+      .build());
+    org.sonarqube.ws.client.issues.SearchRequest searchRequest = new org.sonarqube.ws.client.issues.SearchRequest()
+      .setComponentKeys(Collections.singletonList(PROJECT))
+      .setRules(Collections.singletonList(ruleKey));
+    Issues.SearchWsResponse response = client.issues().search(searchRequest);
+    return response.getIssuesList();
   }
 
   private static void createAndActivateRuleFromTemplate() {
