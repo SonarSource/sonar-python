@@ -61,7 +61,7 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((PyClassDefTree) ctx.syntaxNode()).docstring()));
   }
 
-  private void checkDocString(SubscriptionContext ctx, @CheckForNull Token docstring) {
+  private static void checkDocString(SubscriptionContext ctx, @CheckForNull Token docstring) {
     Tree tree = ctx.syntaxNode();
     DeclarationType type = getType(tree);
     if (docstring == null) {
@@ -86,13 +86,13 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void raiseIssueNoDocstring(Tree tree, DeclarationType type, SubscriptionContext ctx) {
+  private static void raiseIssueNoDocstring(Tree tree, DeclarationType type, SubscriptionContext ctx) {
     if (type != DeclarationType.METHOD) {
       raiseIssue(tree, MESSAGE_NO_DOCSTRING, type, ctx);
     }
   }
 
-  private void raiseIssue(Tree tree, String message, DeclarationType type, SubscriptionContext ctx) {
+  private static void raiseIssue(Tree tree, String message, DeclarationType type, SubscriptionContext ctx) {
     String finalMessage = String.format(message, type.value);
     if (type != DeclarationType.MODULE) {
       ctx.addIssue(getNameNode(tree), finalMessage);

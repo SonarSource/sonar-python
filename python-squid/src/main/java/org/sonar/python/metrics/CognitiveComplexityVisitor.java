@@ -134,7 +134,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     super.visitBinaryExpression(pyBinaryExpressionTree);
   }
 
-  private void flattenOperators(PyBinaryExpressionTree binaryExpression, List<Token> operators) {
+  private static void flattenOperators(PyBinaryExpressionTree binaryExpression, List<Token> operators) {
     PyExpressionTree left = binaryExpression.leftOperand();
     if (left.is(Kind.AND) || left.is(Kind.OR)) {
       flattenOperators((PyBinaryExpressionTree) left, operators);
