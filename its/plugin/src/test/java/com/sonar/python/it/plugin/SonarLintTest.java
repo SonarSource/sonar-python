@@ -22,13 +22,12 @@ package com.sonar.python.it.plugin;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -81,7 +80,10 @@ public class SonarLintTest {
 
     List<Issue> issues = new ArrayList<>();
     StandaloneAnalysisConfiguration configuration =
-      new StandaloneAnalysisConfiguration(baseDir.toPath(), TEMP.newFolder().toPath(), Arrays.asList(inputFile), new HashMap<>());
+      StandaloneAnalysisConfiguration.builder()
+        .setBaseDir(baseDir.toPath())
+        .addInputFile(inputFile)
+        .build();
     sonarlintEngine.analyze(configuration, issues::add, null, null);
 
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
@@ -92,10 +94,10 @@ public class SonarLintTest {
   private static ClientInputFile prepareInputFile(String relativePath, String content, final boolean isTest) throws IOException {
     File file = new File(baseDir, relativePath);
     FileUtils.write(file, content, StandardCharsets.UTF_8);
-    return createInputFile(file.toPath(), isTest);
+    return createInputFile(file.toPath(), relativePath, isTest);
   }
 
-  private static ClientInputFile createInputFile(final Path path, final boolean isTest) {
+  private static ClientInputFile createInputFile(final Path path, String relativePath, final boolean isTest) {
     return new ClientInputFile() {
 
       @Override
@@ -126,6 +128,16 @@ public class SonarLintTest {
       @Override
       public String contents() throws IOException {
         return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+      }
+
+      @Override
+      public String relativePath() {
+        return relativePath;
+      }
+
+      @Override
+      public URI uri() {
+        return path.toUri();
       }
 
     };
