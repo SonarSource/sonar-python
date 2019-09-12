@@ -19,31 +19,33 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
 
-@Rule(key = DynamicCodeExecutionCheck.CHECK_KEY)
-public class DynamicCodeExecutionCheck extends PythonCheckAstNode {
-  public static final String CHECK_KEY = "S1523";
+@Rule(key = "S1523")
+public class DynamicCodeExecutionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Make sure that this dynamic injection or execution of code is safe.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.CALL_EXPR);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      PyCallExpressionTree callExpr = (PyCallExpressionTree) ctx.syntaxNode();
+      if (isFuncNameExecOrEval(callExpr)) {
+        ctx.addIssue(callExpr, MESSAGE);
+      }
+    });
   }
 
-  @Override
-  public void visitNode(AstNode callExpression) {
-    AstNode functionNameNode = callExpression.getFirstChild(PythonGrammar.ATOM);
-    if (functionNameNode != null) {
-      String functionName = functionNameNode.getTokenValue();
-      if (functionName.equals("exec") || functionName.equals("eval")) {
-        addIssue(callExpression, MESSAGE);
-      }
+  private static boolean isFuncNameExecOrEval(PyCallExpressionTree call) {
+    PyExpressionTree expr = call.callee();
+    if (expr.is(Tree.Kind.NAME)) {
+      String functionName = ((PyNameTree) expr).name();
+      return functionName.equals("exec") || functionName.equals("eval");
     }
+    return false;
   }
 }
