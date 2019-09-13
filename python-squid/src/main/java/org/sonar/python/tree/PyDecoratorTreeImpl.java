@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
@@ -37,7 +38,7 @@ public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
   private final PyArgListTree argListTree;
   private final Token rPar;
 
-  public PyDecoratorTreeImpl(AstNode astNode, Token atToken, PyDottedNameTree dottedName, AstNode lPar, PyArgListTree argListTree, AstNode rPar) {
+  public PyDecoratorTreeImpl(AstNode astNode, Token atToken, PyDottedNameTree dottedName, @Nullable AstNode lPar, PyArgListTree argListTree, @Nullable AstNode rPar) {
     super(astNode);
     this.atToken = atToken;
     this.dottedName = dottedName;
