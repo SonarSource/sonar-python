@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyRaiseStatementTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -37,7 +38,8 @@ public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatement
   private final Token fromKeyword;
   private final PyExpressionTree fromExpression;
 
-  public PyRaiseStatementTreeImpl(AstNode astNode, Token raiseKeyword, List<PyExpressionTree> expressions, Token fromKeyword, PyExpressionTree fromExpression) {
+  public PyRaiseStatementTreeImpl(AstNode astNode, Token raiseKeyword, List<PyExpressionTree> expressions,
+                                  @Nullable Token fromKeyword, @Nullable PyExpressionTree fromExpression) {
     super(astNode);
     this.raiseKeyword = raiseKeyword;
     this.expressions = expressions;

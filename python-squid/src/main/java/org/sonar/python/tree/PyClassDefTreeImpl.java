@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
@@ -45,7 +46,8 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   private final Token docstring;
 
   public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, Token classKeyword, PyNameTree name,
-                            Token leftPar, PyArgListTree args, Token rightPar, Token colon, PyStatementListTree body, Token docstring) {
+                            @Nullable Token leftPar, @Nullable PyArgListTree args, @Nullable Token rightPar,
+                            Token colon, PyStatementListTree body, Token docstring) {
     super(astNode);
     this.decorators = decorators;
     this.classKeyword = classKeyword;

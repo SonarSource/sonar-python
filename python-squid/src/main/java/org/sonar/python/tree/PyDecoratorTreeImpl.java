@@ -38,7 +38,7 @@ public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
   private final PyArgListTree argListTree;
   private final Token rPar;
 
-  public PyDecoratorTreeImpl(AstNode astNode, Token atToken, PyDottedNameTree dottedName, @Nullable AstNode lPar, PyArgListTree argListTree, @Nullable AstNode rPar) {
+  public PyDecoratorTreeImpl(AstNode astNode, Token atToken, PyDottedNameTree dottedName, @Nullable AstNode lPar, @Nullable PyArgListTree argListTree, @Nullable AstNode rPar) {
     super(astNode);
     this.atToken = atToken;
     this.dottedName = dottedName;
