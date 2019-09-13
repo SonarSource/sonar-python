@@ -44,6 +44,7 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     PyFileInputTree rootTree = pythonVisitorContext.rootTree();
     if (rootTree != null) {
       subscriptionVisitor.scan(rootTree);
+      checks.forEach(PythonSubscriptionCheck::leaveFile);
     }
   }
 
@@ -97,6 +98,11 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     @Override
     public PythonCheck.PreciseIssue addFileIssue(String message) {
       return addIssue(IssueLocation.atFileLevel(message));
+    }
+
+    @Override
+    public PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber) {
+      return addIssue(IssueLocation.atLineLevel(message, lineNumber));
     }
 
     private PythonCheck.PreciseIssue addIssue(IssueLocation issueLocation) {

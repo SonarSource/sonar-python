@@ -89,6 +89,23 @@ public class PythonSubscriptionCheckTest {
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
 
+  @Test
+  public void test_file_line() {
+    TestPythonCheck check = new TestPythonCheck (){
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.PASS_STMT, ctx -> {
+          ctx.addLineIssue(MESSAGE, ctx.syntaxNode().firstToken().getLine());
+          ctx.addFileIssue(MESSAGE);
+        });
+      }
+    };
+
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    assertThat(issues).hasSize(2);
+    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(8);
+  }
+
   private abstract static class TestPythonCheck extends PythonSubscriptionCheck {
 
   }
