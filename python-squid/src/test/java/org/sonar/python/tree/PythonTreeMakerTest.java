@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.api.Token;
 import java.util.HashMap;
 import java.util.List;
@@ -1682,6 +1683,24 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(generator.lastToken().getValue()).isEqualTo(")");
     assertThat(generator.resultExpression().getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
     assertThat(generator.comprehensionFor().iterable().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
+
+    setRootRule(PythonGrammar.CALL_EXPR);
+    PyCallExpressionTree call = (PyCallExpressionTree) parse("foo(x*x for x in range(10))", treeMaker::expression);
+    assertThat(call.arguments()).hasSize(1);
+    PyExpressionTree firstArg = call.arguments().get(0).expression();
+    assertThat(firstArg.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
+
+    call = (PyCallExpressionTree) parse("foo((x*x for x in range(10)))", treeMaker::expression);
+    assertThat(call.arguments()).hasSize(1);
+    firstArg = call.arguments().get(0).expression();
+    assertThat(firstArg.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
+
+    try {
+      parse("foo(1, x*x for x in range(10))", treeMaker::expression);
+      fail("generator expression must be parenthesized unless it's the unique argument in arglist");
+    } catch (RecognitionException re) {
+      assertThat(re).hasMessage("Parse error at line 1: Generator expression must be parenthesized if not sole argument.");
+    }
   }
 
   @Test
