@@ -1035,7 +1035,8 @@ public class PythonTreeMaker {
       .filter(arg -> arg.expression().is(Tree.Kind.GENERATOR_EXPR) && !arg.expression().firstToken().getValue().equals("("))
       .collect(Collectors.toList());
     if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
-      throw new RecognitionException(nonParenthesizedGeneratorExpressions.get(0).firstToken().getLine(), "Generator expression must be parenthesized.");
+      int line = nonParenthesizedGeneratorExpressions.get(0).firstToken().getLine();
+      throw new RecognitionException(line, "Parse error at line " + line + ": Generator expression must be parenthesized if not sole argument.");
     }
   }
 

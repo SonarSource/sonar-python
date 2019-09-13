@@ -1699,7 +1699,7 @@ public class PythonTreeMakerTest extends RuleTest {
       parse("foo(1, x*x for x in range(10))", treeMaker::expression);
       fail("generator expression must be parenthesized unless it's the unique argument in arglist");
     } catch (RecognitionException re) {
-      assertThat(re).hasMessage("Generator expression must be parenthesized.");
+      assertThat(re).hasMessage("Parse error at line 1: Generator expression must be parenthesized if not sole argument.");
     }
   }
 
