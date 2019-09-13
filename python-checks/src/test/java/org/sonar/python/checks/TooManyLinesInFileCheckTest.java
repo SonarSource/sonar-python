@@ -38,4 +38,10 @@ public class TooManyLinesInFileCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFile-2.py", check);
   }
 
+  @Test
+  public void test_empty_file() {
+    check.maximum = 2;
+    PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFile-empty.py", check);
+  }
+
 }
