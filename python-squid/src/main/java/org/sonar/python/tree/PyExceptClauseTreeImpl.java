@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
@@ -48,7 +49,7 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = null;
   }
 
-  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception, AstNode asNode, AstNode commaNode, PyExpressionTree exceptionInstance) {
+  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception, @Nullable AstNode asNode, @Nullable AstNode commaNode, PyExpressionTree exceptionInstance) {
     super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;

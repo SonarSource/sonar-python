@@ -23,6 +23,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -35,7 +36,7 @@ public class PyAnnotatedAssignmentTreeImpl extends PyTree implements PyAnnotated
   private final Token equalToken;
   private final PyExpressionTree assignedValue;
 
-  public PyAnnotatedAssignmentTreeImpl(PyExpressionTree variable, Token colonToken, PyExpressionTree annotation, Token equalToken, PyExpressionTree assignedValue) {
+  public PyAnnotatedAssignmentTreeImpl(PyExpressionTree variable, Token colonToken, PyExpressionTree annotation, Token equalToken, @Nullable PyExpressionTree assignedValue) {
     super(variable.firstToken(), assignedValue != null ? assignedValue.lastToken() : annotation.lastToken());
     this.variable = variable;
     this.colonToken = colonToken;
