@@ -26,6 +26,7 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.lang.reflect.Constructor;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
@@ -33,8 +34,12 @@ import org.junit.Test;
 import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PyArgListTreeImpl;
+import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -158,5 +163,51 @@ public class CheckUtilsTest {
     assertThat(firstStatement.test("a: int = 2")).isTrue();
     assertThat(firstStatement.test("a.b = (1, 2)")).isTrue();
     assertThat(firstStatement.test("a.b: int = (1, 2)")).isTrue();
+  }
+
+  @Test
+  public void statement_equivalence() {
+    assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 1"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 1"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 1"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 2"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("foo()"), parse("foo()"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("foo()"), parse("foo"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("foo"), parse("foo()"))).isFalse();
+  }
+
+  @Test
+  public void tree_equivalence() {
+    assertThat(CheckUtils.areEquivalent(new PyArgListTreeImpl(null, Collections.emptyList()), new PyArgListTreeImpl(null, Collections.emptyList()))).isTrue();
+  }
+
+  @Test
+  public void null_equivalence() {
+    assertThat(CheckUtils.areEquivalent(null, null)).isTrue();
+    assertThat(CheckUtils.areEquivalent(null, parse("class clazz(): \n pass"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("class clazz(): \n pass"), null)).isFalse();
+  }
+
+  @Test
+  public void statement_list_equivalence() {
+    assertThat(CheckUtils.areEquivalent(parse("foo()\nbar()"), parse("foo()\nbar()"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("foo()\n  "), parse("foo()\n"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("foo()\n"), parse("foo()\n  "))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("foo()"), parse("foo()\nfoo()"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("foo()\nfoo()"), parse("foo()"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("foo()\nbar()"), parse("foo()\nbar"))).isFalse();
+  }
+
+  @Test
+  public void lambda_equivalence() {
+    assertThat(CheckUtils.areEquivalent(parse("x = lambda a : a + 10"), parse("x = lambda a : a + 10"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("x = lambda a : a + 10"), parse("x = lambda a : a + 5"))).isFalse();
+  }
+
+  private Tree parse(String content) {
+    Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    AstNode astNode = parser.parse(content);
+    PyFileInputTree parse = new PythonTreeMaker().fileInput(astNode);
+    return parse;
   }
 }

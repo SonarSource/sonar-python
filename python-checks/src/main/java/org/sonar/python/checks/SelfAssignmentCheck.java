@@ -19,19 +19,27 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonBuiltinFunctions;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyAliasedNameTree;
+import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
+import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyImportFromTree;
+import org.sonar.python.api.tree.PyImportNameTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)
-public class SelfAssignmentCheck extends PythonCheckAstNode {
+public class SelfAssignmentCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "S1656";
 
@@ -40,72 +48,78 @@ public class SelfAssignmentCheck extends PythonCheckAstNode {
   private Set<String> importedNames = new HashSet<>();
 
   @Override
-  public void visitFile(AstNode node) {
-    importedNames.clear();
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> this.importedNames.clear());
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, ctx ->
+      ((PyImportFromTree) ctx.syntaxNode()).importedNames().forEach(this::addImportedName));
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME, ctx ->
+      ((PyImportNameTree) ctx.syntaxNode()).modules().forEach(this::addImportedName));
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignement);
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, this::checkAnnotatedAssignment);
   }
 
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(
-      PythonGrammar.EXPRESSION_STMT,
-      PythonGrammar.IMPORT_NAME,
-      PythonGrammar.IMPORT_AS_NAME);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.is(PythonGrammar.IMPORT_NAME)) {
-      for (AstNode dottedAsName : node.select().children(PythonGrammar.DOTTED_AS_NAMES).children(PythonGrammar.DOTTED_AS_NAME)) {
-        AstNode importedName = dottedAsName.getFirstChild().getLastChild(PythonGrammar.NAME);
-        addImportedName(dottedAsName, importedName);
+  private void checkAssignement(SubscriptionContext ctx) {
+    PyAssignmentStatementTree assignment = (PyAssignmentStatementTree) ctx.syntaxNode();
+    PyExpressionTree assignedValue = assignment.assignedValue();
+    for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
+      List<PyExpressionTree> expressions = assignment.lhsExpressions().get(i).expressions();
+      if (expressions.size() == 1 && CheckUtils.areEquivalent(assignedValue, expressions.get(0)) && !isException(assignment, assignedValue)) {
+        ctx.addIssue(assignment.equalTokens().get(i), MESSAGE);
       }
+    }
+  }
 
-    } else if (node.is(PythonGrammar.IMPORT_AS_NAME)) {
-      AstNode importedName = node.getFirstChild(PythonGrammar.NAME);
-      addImportedName(node, importedName);
+  private void checkAnnotatedAssignment(SubscriptionContext ctx) {
+    PyAnnotatedAssignmentTree assignment = (PyAnnotatedAssignmentTree) ctx.syntaxNode();
+    PyExpressionTree assignedValue = assignment.assignedValue();
+    PyExpressionTree variable = assignment.variable();
+    if (CheckUtils.areEquivalent(assignedValue, variable) && !isException(assignment, assignedValue)) {
+      ctx.addIssue(assignment.equalToken(), MESSAGE);
+    }
+  }
 
+  private void addImportedName(PyAliasedNameTree aliasedName) {
+    if (aliasedName.alias() != null) {
+      importedNames.add(aliasedName.alias().name());
     } else {
-      checkExpressionStatement(node);
+      List<PyNameTree> names = aliasedName.dottedName().names();
+      importedNames.add(names.get(names.size() - 1).name());
     }
   }
 
-  private void checkExpressionStatement(AstNode node) {
-    for (AstNode assignOperator : node.getChildren(PythonPunctuator.ASSIGN, PythonGrammar.ANNASSIGN)) {
-      AstNode assigned = assignOperator.getPreviousSibling();
-      if (assignOperator.is(PythonGrammar.ANNASSIGN)) {
-        assignOperator = assignOperator.getFirstChild(PythonPunctuator.ASSIGN);
-        if (assigned.is(PythonGrammar.TESTLIST_STAR_EXPR) && assigned.getNumberOfChildren() == 1) {
-          assigned =  assigned.getFirstChild();
-        }
-      }
-      if (assignOperator != null && CheckUtils.equalNodes(assigned, assignOperator.getNextSibling()) && !isException(node, assigned)) {
-        addIssue(assignOperator, MESSAGE);
-      }
-    }
-  }
-
-  private void addImportedName(AstNode node, AstNode importedName) {
-    AstNode name = importedName;
-    AstNode as = node.getFirstChild(PythonKeyword.AS);
-    if (as != null) {
-      name = as.getNextSibling();
-    }
-    importedNames.add(name.getTokenValue());
-  }
-
-  private boolean isException(AstNode expressionStatement, AstNode assigned) {
-    if (!expressionStatement.getDescendants(PythonGrammar.CALL_EXPR).isEmpty()) {
+  private boolean isException(PyStatementTree assignment, PyExpressionTree assignedValue) {
+    if (assignedValue.is(Tree.Kind.NAME) && isAllowedName((PyNameTree) assignedValue)) {
       return true;
     }
+    return inClassDef(assignment) || hasCallExpressionDescendant(assignment);
+  }
 
-    if (assigned.getTokens().size() == 1) {
-      String tokenValue = assigned.getTokenValue();
-      if (importedNames.contains(tokenValue) || PythonBuiltinFunctions.contains(tokenValue)) {
-        return true;
-      }
+  private boolean isAllowedName(PyNameTree name) {
+    return importedNames.contains(name.name()) || PythonBuiltinFunctions.contains(name.name());
+  }
+
+  private static boolean inClassDef(Tree tree) {
+    Tree currentParent = tree.parent();
+    currentParent = currentParent.is(Tree.Kind.STATEMENT_LIST) ? currentParent.parent() : currentParent;
+    return currentParent.is(Tree.Kind.CLASSDEF);
+  }
+
+  private static boolean hasCallExpressionDescendant(Tree tree) {
+    CallExpressionDescendantVisitor visitor = new CallExpressionDescendantVisitor();
+    tree.accept(visitor);
+    return visitor.hasCallExpressionDescendant;
+  }
+
+  private static class CallExpressionDescendantVisitor extends BaseTreeVisitor {
+    private boolean hasCallExpressionDescendant = false;
+
+    @Override
+    public void visitCallExpression(PyCallExpressionTree callExpressionTree) {
+      hasCallExpressionDescendant = true;
     }
-
-    AstNode suite = expressionStatement.getFirstAncestor(PythonGrammar.SUITE);
-    return suite != null && suite.getParent().is(PythonGrammar.CLASSDEF, PythonGrammar.TRY_STMT);
   }
 }
