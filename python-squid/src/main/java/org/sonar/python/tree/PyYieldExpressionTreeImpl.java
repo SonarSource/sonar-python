@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyYieldExpressionTree;
@@ -34,7 +35,7 @@ public class PyYieldExpressionTreeImpl extends PyTree implements PyYieldExpressi
   private final Token fromKeyword;
   private final List<PyExpressionTree> expressionTrees;
 
-  public PyYieldExpressionTreeImpl(AstNode astNode, Token yieldKeyword, Token fromKeyword, List<PyExpressionTree> expressionTrees) {
+  public PyYieldExpressionTreeImpl(AstNode astNode, Token yieldKeyword, @Nullable Token fromKeyword, List<PyExpressionTree> expressionTrees) {
     super(astNode);
     this.yieldKeyword = yieldKeyword;
     this.fromKeyword = fromKeyword;

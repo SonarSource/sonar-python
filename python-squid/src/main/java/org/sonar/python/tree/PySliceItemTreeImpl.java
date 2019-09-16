@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PySliceItemTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -38,8 +39,8 @@ public class PySliceItemTreeImpl extends PyTree implements PySliceItemTree {
   private final PyExpressionTree stride;
 
   public PySliceItemTreeImpl(
-    AstNode node, PyExpressionTree lowerBound, Token boundSeparator, PyExpressionTree upperBound,
-    Token strideSeparator, PyExpressionTree stride
+    AstNode node, @Nullable PyExpressionTree lowerBound, Token boundSeparator, @Nullable PyExpressionTree upperBound,
+    @Nullable Token strideSeparator, @Nullable PyExpressionTree stride
   ) {
     super(node);
     this.lowerBound = lowerBound;

@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyParameterTree;
@@ -39,7 +40,8 @@ public class PyParameterTreeImpl extends PyTree implements PyParameterTree {
   private final PyExpressionTree defaultValue;
   private final Token starToken;
 
-  public PyParameterTreeImpl(AstNode node, Token starToken, PyNameTree name, PyTypeAnnotationTree annotation, Token equalToken, PyExpressionTree defaultValue) {
+  public PyParameterTreeImpl(AstNode node, @Nullable Token starToken, PyNameTree name, @Nullable PyTypeAnnotationTree annotation,
+                             @Nullable Token equalToken, @Nullable PyExpressionTree defaultValue) {
     super(node);
     this.starToken = starToken;
     this.name = name;

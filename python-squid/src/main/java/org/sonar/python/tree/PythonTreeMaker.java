@@ -942,7 +942,7 @@ public class PythonTreeMaker {
   }
 
   @CheckForNull
-  private PyExpressionTree sliceBound(AstNode node) {
+  private PyExpressionTree sliceBound(@Nullable AstNode node) {
     if (node == null || !node.is(PythonGrammar.TEST)) {
       return null;
     }
@@ -1016,7 +1016,8 @@ public class PythonTreeMaker {
       astNode.getFirstChild(PythonPunctuator.LPARENTHESIS), astNode.getFirstChild(PythonPunctuator.RPARENTHESIS));
   }
 
-  private PyArgListTree argList(AstNode argList) {
+  @CheckForNull
+  private PyArgListTree argList(@Nullable AstNode argList) {
     if (argList != null) {
       List<PyArgumentTree> arguments = argList.getChildren(PythonGrammar.ARGUMENT).stream()
         .map(this::argument)
@@ -1118,8 +1119,7 @@ public class PythonTreeMaker {
       starOrStarStar = prevSibling.getToken();
     }
 
-    AstNode nameNode = parameter.getFirstChild(PythonGrammar.NAME);
-    PyNameTree name = nameNode == null ? null : name(nameNode);
+    PyNameTree name = name(parameter.getFirstChild(PythonGrammar.NAME));
 
     AstNode nextSibling = parameter.getNextSibling();
     Token assignToken = null;

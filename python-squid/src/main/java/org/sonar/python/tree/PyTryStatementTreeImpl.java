@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyFinallyClauseTree;
@@ -41,7 +42,8 @@ public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree
   private final PyFinallyClauseTree finallyClause;
   private final PyElseStatementTree elseStatement;
 
-  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses, PyFinallyClauseTree finallyClause, PyElseStatementTree elseStatement) {
+  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses,
+                                @Nullable PyFinallyClauseTree finallyClause, @Nullable PyElseStatementTree elseStatement) {
     super(astNode);
     this.tryKeyword = tryKeyword;
     this.tryBody = tryBody;

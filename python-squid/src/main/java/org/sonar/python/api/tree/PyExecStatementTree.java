@@ -20,13 +20,16 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
+import javax.annotation.CheckForNull;
 
 public interface PyExecStatementTree extends PyStatementTree {
   Token execKeyword();
 
   PyExpressionTree expression();
 
+  @CheckForNull
   PyExpressionTree globalsExpression();
 
+  @CheckForNull
   PyExpressionTree localsExpression();
 }

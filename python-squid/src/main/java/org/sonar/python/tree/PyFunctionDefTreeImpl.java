@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
@@ -48,9 +49,9 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   private final boolean isMethodDefinition;
   private final Token docstring;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, Token asyncKeyword, Token defKeyword, PyNameTree name,
-                               Token leftPar, PyParameterListTree parameters, Token rightPar, PyTypeAnnotationTree returnType,
-                               Token colon, PyStatementListTree body, boolean isMethodDefinition, Token docstring) {
+  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, @Nullable Token asyncKeyword, Token defKeyword, PyNameTree name,
+                               Token leftPar, @Nullable PyParameterListTree parameters, Token rightPar, @Nullable PyTypeAnnotationTree returnType,
+                               Token colon, PyStatementListTree body, boolean isMethodDefinition, @Nullable Token docstring) {
     super(astNode);
     this.decorators = decorators;
     this.asyncKeyword = asyncKeyword;
@@ -92,6 +93,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
     return leftPar;
   }
 
+  @CheckForNull
   @Override
   public PyParameterListTree parameters() {
     return parameters;

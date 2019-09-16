@@ -36,7 +36,8 @@ public class PyAnnotatedAssignmentTreeImpl extends PyTree implements PyAnnotated
   private final Token equalToken;
   private final PyExpressionTree assignedValue;
 
-  public PyAnnotatedAssignmentTreeImpl(PyExpressionTree variable, Token colonToken, PyExpressionTree annotation, Token equalToken, @Nullable PyExpressionTree assignedValue) {
+  public PyAnnotatedAssignmentTreeImpl(PyExpressionTree variable, Token colonToken, PyExpressionTree annotation,
+                                       @Nullable Token equalToken, @Nullable PyExpressionTree assignedValue) {
     super(variable.firstToken(), assignedValue != null ? assignedValue.lastToken() : annotation.lastToken());
     this.variable = variable;
     this.colonToken = colonToken;

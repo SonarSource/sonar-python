@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTupleTree;
@@ -36,7 +37,7 @@ public class PyTupleTreeImpl extends PyTree implements PyTupleTree {
   private final List<Token> commas;
   private final Token rightParenthesis;
 
-  public PyTupleTreeImpl(AstNode node, Token leftParenthesis, List<PyExpressionTree> elements, List<Token> commas, Token rightParenthesis) {
+  public PyTupleTreeImpl(AstNode node, @Nullable Token leftParenthesis, List<PyExpressionTree> elements, List<Token> commas, @Nullable Token rightParenthesis) {
     super(node);
     this.leftParenthesis = leftParenthesis;
     this.elements = elements;

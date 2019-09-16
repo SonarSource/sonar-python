@@ -24,6 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyComprehensionClauseTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -39,7 +40,7 @@ public class PyComprehensionForTreeImpl extends PyTree implements PyComprehensio
   private final PyComprehensionClauseTree nested;
 
   public PyComprehensionForTreeImpl(AstNode node, Token forToken, PyExpressionTree loopExpression, Token inToken,
-                                    PyExpressionTree iterable, PyComprehensionClauseTree nested) {
+                                    PyExpressionTree iterable, @Nullable PyComprehensionClauseTree nested) {
     super(node);
     this.forToken = forToken;
     this.loopExpression = loopExpression;

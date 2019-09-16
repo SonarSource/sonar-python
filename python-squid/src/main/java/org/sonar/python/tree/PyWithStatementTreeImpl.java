@@ -43,7 +43,7 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
   private final boolean isAsync;
   private final Token colon;
 
-  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, PyStatementListTree statements, Token asyncKeyword) {
+  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, PyStatementListTree statements, @Nullable Token asyncKeyword) {
     super(node);
     this.withItems = withItems;
     this.colon = colon;
