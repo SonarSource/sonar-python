@@ -49,7 +49,8 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = null;
   }
 
-  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception, @Nullable AstNode asNode, @Nullable AstNode commaNode, PyExpressionTree exceptionInstance) {
+  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body,
+                                PyExpressionTree exception, @Nullable AstNode asNode, @Nullable AstNode commaNode, PyExpressionTree exceptionInstance) {
     super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;

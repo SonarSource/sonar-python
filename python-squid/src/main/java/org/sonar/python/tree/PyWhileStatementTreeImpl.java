@@ -41,7 +41,8 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
   private final Token elseColon;
   private final PyStatementListTree elseBody;
 
-  public PyWhileStatementTreeImpl(AstNode astNode, Token whileKeyword, PyExpressionTree condition, Token colon, PyStatementListTree body, @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable PyStatementListTree elseBody) {
+  public PyWhileStatementTreeImpl(AstNode astNode, Token whileKeyword, PyExpressionTree condition, Token colon, PyStatementListTree body,
+                                  @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable PyStatementListTree elseBody) {
     super(astNode);
     this.whileKeyword = whileKeyword;
     this.condition = condition;

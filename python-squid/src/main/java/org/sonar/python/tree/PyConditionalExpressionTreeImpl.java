@@ -35,7 +35,8 @@ public class PyConditionalExpressionTreeImpl extends PyTree implements PyConditi
   private final Token elseToken;
   private final PyExpressionTree falseExpression;
 
-  public PyConditionalExpressionTreeImpl(AstNode node, PyExpressionTree trueExpression, Token ifToken, PyExpressionTree condition, Token elseToken, PyExpressionTree falseExpression) {
+  public PyConditionalExpressionTreeImpl(AstNode node, PyExpressionTree trueExpression,
+                                         Token ifToken, PyExpressionTree condition, Token elseToken, PyExpressionTree falseExpression) {
     super(node);
     this.trueExpression = trueExpression;
     this.ifToken = ifToken;
