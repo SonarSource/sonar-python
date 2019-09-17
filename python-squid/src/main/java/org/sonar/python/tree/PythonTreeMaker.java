@@ -379,7 +379,7 @@ public class PythonTreeMaker {
     return new PyAliasedNameTreeImpl(astNode, asKeyword.getToken(), dottedName, name(astNode.getLastChild(PythonGrammar.NAME)));
   }
 
-  private PyDottedNameTree dottedName(AstNode astNode) {
+  private static PyDottedNameTree dottedName(AstNode astNode) {
     List<PyNameTree> names = astNode
       .getChildren(PythonGrammar.NAME).stream()
       .map(PythonTreeMaker::name)

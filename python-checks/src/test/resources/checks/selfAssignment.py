@@ -7,6 +7,7 @@ x = x # Noncompliant
 # ^
 x: int = x # Noncompliant
 #      ^
+x: int
 x += x
 x = c = c # Noncompliant
 x = c = x # Noncompliant

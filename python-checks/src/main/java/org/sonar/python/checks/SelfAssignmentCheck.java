@@ -77,14 +77,15 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     PyAnnotatedAssignmentTree assignment = (PyAnnotatedAssignmentTree) ctx.syntaxNode();
     PyExpressionTree assignedValue = assignment.assignedValue();
     PyExpressionTree variable = assignment.variable();
-    if (CheckUtils.areEquivalent(assignedValue, variable) && !isException(assignment, assignedValue)) {
+    if (assignedValue != null && CheckUtils.areEquivalent(assignedValue, variable) && !isException(assignment, assignedValue)) {
       ctx.addIssue(assignment.equalToken(), MESSAGE);
     }
   }
 
   private void addImportedName(PyAliasedNameTree aliasedName) {
-    if (aliasedName.alias() != null) {
-      importedNames.add(aliasedName.alias().name());
+    PyNameTree alias = aliasedName.alias();
+    if (alias != null) {
+      importedNames.add(alias.name());
     } else {
       List<PyNameTree> names = aliasedName.dottedName().names();
       importedNames.add(names.get(names.size() - 1).name());
