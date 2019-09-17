@@ -47,7 +47,7 @@ public class PyNumericLiteralTreeImpl extends PyTree implements PyNumericLiteral
 
   @Override
   public long valueAsLong() {
-    String literalValue = valueAsString.replaceAll("_", "");
+    String literalValue = valueAsString.replace("_", "");
     if (literalValue.startsWith("0b") || literalValue.startsWith("0B")) {
       return Integer.valueOf(literalValue.substring(2), 2);
     }

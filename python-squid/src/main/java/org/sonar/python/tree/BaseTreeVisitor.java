@@ -105,7 +105,7 @@ public class BaseTreeVisitor implements PyTreeVisitor {
     }
   }
 
-  protected void scan(List<? extends Tree> trees) {
+  protected void scan(@Nullable List<? extends Tree> trees) {
     if (trees != null) {
       for (Tree tree : trees) {
         scan(tree);

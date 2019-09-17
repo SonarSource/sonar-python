@@ -158,8 +158,9 @@ public class PythonScanner {
       newLocation.at(range);
     }
 
-    if (location.message() != null) {
-      newLocation.message(location.message());
+    String message = location.message();
+    if (message != null) {
+      newLocation.message(message);
     }
     return newLocation;
   }
