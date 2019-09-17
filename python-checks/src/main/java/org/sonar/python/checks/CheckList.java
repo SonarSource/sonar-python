@@ -29,6 +29,7 @@ import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
+import org.sonar.python.checks.hotspots.PseudoRandomCheck;
 import org.sonar.python.checks.hotspots.PubliclyWritableDirectoriesCheck;
 import org.sonar.python.checks.hotspots.RegexCheck;
 import org.sonar.python.checks.hotspots.SQLQueriesCheck;
@@ -91,6 +92,7 @@ public final class CheckList {
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
       ProcessSignallingCheck.class,
+      PseudoRandomCheck.class,
       PubliclyWritableDirectoriesCheck.class,
       RegexCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
