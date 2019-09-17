@@ -258,7 +258,12 @@ public class PythonTreeMaker {
 
   public PyAssertStatementTree assertStatement(AstNode astNode) {
     List<PyExpressionTree> expressions = expressionsFromTest(astNode);
-    return new PyAssertStatementTreeImpl(astNode, astNode.getTokens().get(0), expressions);
+    PyExpressionTree condition = expressions.get(0);
+    PyExpressionTree message = null;
+    if (expressions.size() > 1) {
+      message = expressions.get(1);
+    }
+    return new PyAssertStatementTreeImpl(astNode, astNode.getTokens().get(0), condition, message);
   }
 
   public PyPassStatementTree passStatement(AstNode astNode) {

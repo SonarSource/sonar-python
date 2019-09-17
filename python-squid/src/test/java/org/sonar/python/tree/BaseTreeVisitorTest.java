@@ -118,7 +118,8 @@ public class BaseTreeVisitorTest extends RuleTest {
     PyAssertStatementTree tree = parse("assert x, y", treeMaker::assertStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssertStatement(tree);
-    verify(visitor).scan(tree.expressions());
+    verify(visitor).scan(tree.condition());
+    verify(visitor).scan(tree.message());
   }
 
   @Test

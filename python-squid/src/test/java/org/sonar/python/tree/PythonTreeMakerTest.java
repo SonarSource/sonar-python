@@ -310,14 +310,16 @@ public class PythonTreeMakerTest extends RuleTest {
     PyAssertStatementTree assertStatement = treeMaker.assertStatement(astNode);
     assertThat(assertStatement).isNotNull();
     assertThat(assertStatement.assertKeyword().getValue()).isEqualTo("assert");
-    assertThat(assertStatement.expressions()).hasSize(1);
-    assertThat(assertStatement.children()).hasSize(1);
+    assertThat(assertStatement.condition()).isNotNull();
+    assertThat(assertStatement.message()).isNull();
+    assertThat(assertStatement.children()).hasSize(2);
 
     astNode = p.parse("assert x, y");
     assertStatement = treeMaker.assertStatement(astNode);
     assertThat(assertStatement).isNotNull();
     assertThat(assertStatement.assertKeyword().getValue()).isEqualTo("assert");
-    assertThat(assertStatement.expressions()).hasSize(2);
+    assertThat(assertStatement.condition()).isNotNull();
+    assertThat(assertStatement.message()).isNotNull();
     assertThat(assertStatement.children()).hasSize(2);
   }
 
