@@ -28,15 +28,22 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyNameTreeImpl extends PyTree implements PyNameTree {
   private final String name;
+  private final boolean isVariable;
 
-  public PyNameTreeImpl(AstNode astNode, String name) {
+  public PyNameTreeImpl(AstNode astNode, String name, boolean isVariable) {
     super(astNode);
     this.name = name;
+    this.isVariable = isVariable;
   }
 
   @Override
   public String name() {
     return name;
+  }
+
+  @Override
+  public boolean isVariable() {
+    return isVariable;
   }
 
   @Override

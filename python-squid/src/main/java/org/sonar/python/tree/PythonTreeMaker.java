@@ -521,7 +521,7 @@ public class PythonTreeMaker {
   }
 
   private static PyNameTree name(AstNode astNode) {
-    return new PyNameTreeImpl(astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
+    return new PyNameTreeImpl(astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue(), astNode.getParent().is(PythonGrammar.ATOM));
   }
 
   public PyForStatementTree forStatement(AstNode astNode) {
