@@ -21,8 +21,9 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -30,12 +31,15 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStatementTree {
   private final Token assertKeyword;
-  private final List<PyExpressionTree> expressions;
+  private final PyExpressionTree condition;
+  @Nullable
+  private final PyExpressionTree message;
 
-  public PyAssertStatementTreeImpl(AstNode astNode, Token assertKeyword, List<PyExpressionTree> expressions) {
+  public PyAssertStatementTreeImpl(AstNode astNode, Token assertKeyword, PyExpressionTree condition, @Nullable PyExpressionTree message) {
     super(astNode);
     this.assertKeyword = assertKeyword;
-    this.expressions = expressions;
+    this.condition = condition;
+    this.message = message;
   }
 
   @Override
@@ -44,8 +48,14 @@ public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStateme
   }
 
   @Override
-  public List<PyExpressionTree> expressions() {
-    return expressions;
+  public PyExpressionTree condition() {
+    return condition;
+  }
+
+  @Override
+  @Nullable
+  public PyExpressionTree message() {
+    return message;
   }
 
   @Override
@@ -60,6 +70,6 @@ public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStateme
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(expressions);
+    return Arrays.asList(condition, message);
   }
 }

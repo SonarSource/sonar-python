@@ -145,7 +145,8 @@ public class BaseTreeVisitor implements PyTreeVisitor {
 
   @Override
   public void visitAssertStatement(PyAssertStatementTree pyAssertStatementTree) {
-    scan(pyAssertStatementTree.expressions());
+    scan(pyAssertStatementTree.condition());
+    scan(pyAssertStatementTree.message());
   }
 
   @Override

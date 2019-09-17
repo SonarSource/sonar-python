@@ -20,10 +20,13 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.Token;
-import java.util.List;
+import javax.annotation.Nullable;
 
 public interface PyAssertStatementTree extends PyStatementTree {
   Token assertKeyword();
 
-  List<PyExpressionTree> expressions();
+  PyExpressionTree condition();
+
+  @Nullable
+  PyExpressionTree message();
 }
