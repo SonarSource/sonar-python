@@ -19,130 +19,108 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyAssertStatementTree;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.PyDelStatementTree;
+import org.sonar.python.api.tree.PyExceptClauseTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyForStatementTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
+import org.sonar.python.api.tree.PyRaiseStatementTree;
+import org.sonar.python.api.tree.PyReturnStatementTree;
+import org.sonar.python.api.tree.PyTupleTree;
+import org.sonar.python.api.tree.PyUnaryExpressionTree;
+import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.PyYieldExpressionTree;
+import org.sonar.python.api.tree.Tree;
 
-@Rule(key = UselessParenthesisAfterKeywordCheck.CHECK_KEY)
-public class UselessParenthesisAfterKeywordCheck extends PythonCheckAstNode {
+@Rule(key = "S1721")
+public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S1721";
-  private static final Map<PythonGrammar, String> KEYWORDS_FOLLOWED_BY_TEST = initializeKeywordsFollowedByTest();
-
-  private static Map<PythonGrammar, String> initializeKeywordsFollowedByTest() {
-    Map<PythonGrammar, String> map = new EnumMap<>(PythonGrammar.class);
-    map.put(PythonGrammar.ASSERT_STMT, "assert");
-    map.put(PythonGrammar.RAISE_STMT, "raise");
-    map.put(PythonGrammar.WHILE_STMT, "while");
-    return Collections.unmodifiableMap(map);
-  }
-
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(
-      PythonGrammar.ASSERT_STMT,
-      PythonGrammar.DEL_STMT,
-      PythonGrammar.IF_STMT,
-      PythonGrammar.FOR_STMT,
-      PythonGrammar.RAISE_STMT,
-      PythonGrammar.RETURN_STMT,
-      PythonGrammar.WHILE_STMT,
-      PythonGrammar.YIELD_EXPR,
-      PythonGrammar.EXCEPT_CLAUSE,
-      PythonGrammar.NOT_TEST);
-  }
+  private static final String MESSAGE = "Remove the parentheses after this \"%s\" keyword.";
 
   @Override
-  public void visitNode(AstNode node) {
-    String keyword = KEYWORDS_FOLLOWED_BY_TEST.get(node.getType());
-    if (keyword != null) {
-      checkParenthesisOnOnlyChild(node.getFirstChild(PythonGrammar.TEST), keyword, node);
-    } else if (node.is(PythonGrammar.DEL_STMT)) {
-      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.EXPRLIST), "del", node);
-    } else if (node.is(PythonGrammar.IF_STMT)) {
-      List<AstNode> testNodes = node.getChildren(PythonGrammar.TEST);
-      checkParenthesisOnOnlyChild(testNodes.get(0), "if", node);
-      if (testNodes.size() > 1) {
-        checkParenthesisOnOnlyChild(testNodes.get(1), "elif", testNodes.get(1));
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> checkExpr(((PyAssertStatementTree) ctx.syntaxNode()).condition(), ctx, "assert"));
+    context.registerSyntaxNodeConsumer(Tree.Kind.DEL_STMT, ctx -> checkExpr(((PyDelStatementTree) ctx.syntaxNode()).expressions().get(0), ctx, "del"));
+    context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> {
+      PyIfStatementTree ifStmt = (PyIfStatementTree) ctx.syntaxNode();
+      checkExpr(ifStmt.condition(), ctx, ifStmt.keyword().getValue());
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.WHILE_STMT, ctx -> {
+      PyWhileStatementTree whileStmt = (PyWhileStatementTree) ctx.syntaxNode();
+      checkExpr(whileStmt.condition(), ctx, whileStmt.whileKeyword().getValue());
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> handleForStatement(ctx, (PyForStatementTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ctx -> handleRaiseStatement(ctx, (PyRaiseStatementTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, ctx -> handleReturnStatement(ctx, (PyReturnStatementTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.YIELD_EXPR, ctx -> handleYieldExpression(ctx, (PyYieldExpressionTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ctx -> {
+      PyExpressionTree exception = ((PyExceptClauseTree) ctx.syntaxNode()).exception();
+      if( exception != null) {
+        checkExprExcludeTuples(exception, ctx, "except");
       }
-    } else if (node.is(PythonGrammar.FOR_STMT)) {
-      visitForExpression(node);
-    } else if (node.is(PythonGrammar.RETURN_STMT)) {
-      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.TESTLIST), "return", node);
-    } else if (node.is(PythonGrammar.YIELD_EXPR)) {
-      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.TESTLIST), "yield", node);
-    } else if (node.is(PythonGrammar.EXCEPT_CLAUSE)) {
-      visitExceptClause(node);
-    } else if (node.is(PythonGrammar.NOT_TEST)) {
-      visitNotTest(node);
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.NOT, ctx -> handleNotOperator(ctx, (PyUnaryExpressionTree) ctx.syntaxNode()));
+  }
+
+  private static void handleYieldExpression(SubscriptionContext ctx, PyYieldExpressionTree yieldExpr) {
+    if (yieldExpr.fromKeyword() == null && yieldExpr.expressions().size() == 1) {
+      yieldExpr.expressions().forEach(e -> checkExpr(e, ctx, "yield"));
     }
   }
 
-  private void visitForExpression(AstNode node) {
-    if (node.getFirstChild(PythonGrammar.EXPRLIST).getNumberOfChildren() == 1) {
-      checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.EXPRLIST), "for", node);
-    }
-    checkParenthesisOnExprList(node.getFirstChild(PythonGrammar.TESTLIST), "in", node);
-  }
-
-  private void visitNotTest(AstNode node) {
-    boolean hasUselessParenthesis = node.select()
-      .children(PythonGrammar.ATOM)
-      .children(PythonGrammar.TESTLIST_COMP)
-      .children(PythonGrammar.TEST)
-      .children(PythonGrammar.ATOM, PythonGrammar.COMPARISON)
-      .isNotEmpty();
-    if (hasUselessParenthesis) {
-      checkParenthesis(node.getFirstChild().getNextSibling(), "not", node);
+  private static void handleReturnStatement(SubscriptionContext ctx, PyReturnStatementTree retStmt) {
+    if (retStmt.expressions().size() == 1) {
+      PyExpressionTree expr = retStmt.expressions().get(0);
+      if ((expr.is(Tree.Kind.PARENTHESIZED) || (expr.is(Tree.Kind.TUPLE) && !((PyTupleTree) expr).elements().isEmpty()))
+        && expr.firstToken().getLine() == expr.lastToken().getLine()) {
+        ctx.addIssue(expr, String.format(MESSAGE, "return"));
+      }
     }
   }
 
-  private void visitExceptClause(AstNode node) {
-    int nbTests = node.select()
-      .children(PythonGrammar.TEST)
-      .children(PythonGrammar.ATOM)
-      .children(PythonGrammar.TESTLIST_COMP)
-      .children(PythonGrammar.TEST)
-      .size();
-    if (nbTests == 1) {
-      checkParenthesisOnOnlyChild(node.getFirstChild(PythonGrammar.TEST), "except", node);
+  private static void handleNotOperator(SubscriptionContext ctx, PyUnaryExpressionTree unary) {
+    PyExpressionTree negatedExpr = unary.expression();
+    if (negatedExpr.is(Tree.Kind.PARENTHESIZED)) {
+      negatedExpr = ((PyParenthesizedExpressionTree) negatedExpr).expression();
+      if (negatedExpr.is(Tree.Kind.COMPARISON) || !(negatedExpr instanceof PyBinaryExpressionTree)) {
+        ctx.addIssue(negatedExpr, String.format(MESSAGE, "not"));
+      }
     }
   }
 
-  private void checkParenthesis(AstNode child, String keyword, AstNode errorNode) {
-    if (isParenthesisExpression(child) && isOnASingleLine(child)) {
-      String message = String.format("Remove the parentheses after this \"%s\" keyword.", keyword);
-      addLineIssue(message, errorNode.getTokenLine());
+  private static void handleRaiseStatement(SubscriptionContext ctx, PyRaiseStatementTree raiseStmt) {
+    if (!raiseStmt.expressions().isEmpty()) {
+      checkExpr(raiseStmt.expressions().get(0), ctx, "raise");
     }
   }
 
-  private static boolean isParenthesisExpression(AstNode node) {
-    return node.is(PythonGrammar.ATOM) && node.getNumberOfChildren() == 3 && node.getFirstChild().is(PythonPunctuator.LPARENTHESIS);
-  }
-
-  private void checkParenthesisOnExprList(@Nullable AstNode testList, String keyword, AstNode errorNode) {
-    if (testList != null && testList.getNumberOfChildren() == 1) {
-      checkParenthesisOnOnlyChild(testList.getFirstChild(), keyword, errorNode);
+  private static void handleForStatement(SubscriptionContext ctx, PyForStatementTree forStmt) {
+    if(forStmt.expressions().size() == 1) {
+      checkExpr(forStmt.expressions().get(0), ctx, "for");
+    }
+    if(forStmt.testExpressions().size() == 1) {
+      checkExpr(forStmt.testExpressions().get(0), ctx, "in");
     }
   }
 
-  private void checkParenthesisOnOnlyChild(@Nullable AstNode parent, String keyword, AstNode errorNode) {
-    if (parent != null && parent.getNumberOfChildren() == 1) {
-      checkParenthesis(parent.getFirstChild(), keyword, errorNode);
+  private static void checkExprExcludeTuples(PyExpressionTree expr, SubscriptionContext ctx, String keyword) {
+    checkExpr(expr, ctx, keyword, false);
+  }
+
+  private static void checkExpr(PyExpressionTree expr, SubscriptionContext ctx, String keyword) {
+    checkExpr(expr, ctx, keyword, true);
+  }
+
+  private static void checkExpr(PyExpressionTree expr, SubscriptionContext ctx, String keyword, boolean raiseForTuple) {
+    if ((expr.is(Tree.Kind.PARENTHESIZED) || (raiseForTuple && expr.is(Tree.Kind.TUPLE)))
+      && expr.firstToken().getLine() == expr.lastToken().getLine()) {
+      ctx.addIssue(expr, String.format(MESSAGE, keyword));
     }
   }
-
-  private static boolean isOnASingleLine(AstNode node) {
-    return node.getTokenLine() == node.getLastToken().getLine();
-  }
-
 }

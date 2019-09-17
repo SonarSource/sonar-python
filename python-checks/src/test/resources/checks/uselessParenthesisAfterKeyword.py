@@ -45,7 +45,9 @@ def func():
 
 def func(x):
     return (x.a, x.b) #Noncompliant
-
+def func(x):
+    return (x.a,
+            x.b)
 def func(x):
     return x.a, x.b
 
@@ -55,7 +57,9 @@ def func():
 def func():
 	return
 
-def func():
+def func(x):
+  return () # compliant, empty tuple
+def func(x):
 	return 1, 2
 
 def func(x):
@@ -66,10 +70,12 @@ while x < 2:
 
 while (x < 2): #Noncompliant {{Remove the parentheses after this "while" keyword.}}
 	pass
-
+yield
 yield x
 yield (x) #Noncompliant {{Remove the parentheses after this "yield" keyword.}}
 yield (a, b) #Noncompliant
+yield a, (b,c) #compliant
+yield (a,b), c #compliant
 
 try:
 	x = 1
@@ -95,6 +101,11 @@ if not(x): #Noncompliant {{Remove the parentheses after this "not" keyword.}}
 if not(x and y):
 	pass
 
+if not(x <= 200 < y): # Noncompliant
+  pass
+
+for j in (s.id.strip() for s in alignment):
+    print j
 # Line continuation: parenthesis are required to be able to split the line
 if (x > 0 and 
 	x < 3):
@@ -112,6 +123,8 @@ for x, y in (foo): # Noncompliant {{Remove the parentheses after this "in" keywo
     pass
 
 for x in ("who", "comments", "revlink", "category", "branch", "revision"): # Noncompliant
+	pass
+for x in ("who", "comments", "revlink", "category", "branch", "revision"), foo:
 	pass
 
 a = (10, 5)
