@@ -19,7 +19,11 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
@@ -30,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonRuleRepositoryTest {
 
   @Test
-  public void createRulesTest() {
+  public void createRulesTest() throws IOException {
     RulesDefinition.Repository repository = buildRepository();
 
     assertThat(repository).isNotNull();
@@ -39,7 +43,7 @@ public class PythonRuleRepositoryTest {
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();
-    assertThat(rules).hasSize(68);
+    assertThat(rules).hasSameSizeAs(nonAbstractCheckFiles());
 
     RulesDefinition.Rule s1578 = repository.rule("S1578");
     assertThat(s1578).isNotNull();
@@ -47,6 +51,15 @@ public class PythonRuleRepositoryTest {
     RulesDefinition.Rule backstickUsage = repository.rule("BackticksUsage");
     assertThat(backstickUsage).isNotNull();
     assertThat(backstickUsage.activatedByDefault()).isTrue();
+  }
+
+  private List<String> nonAbstractCheckFiles() throws IOException {
+    return Files.walk(new File("../python-checks/src/main/java/org/sonar/python/checks").toPath())
+      .filter(Files::isRegularFile)
+      .map(p -> p.getFileName().toString())
+      .filter(f -> f.endsWith("Check.java"))
+      .filter(f -> !f.startsWith("Abstract"))
+      .collect(Collectors.toList());
   }
 
   @Test
