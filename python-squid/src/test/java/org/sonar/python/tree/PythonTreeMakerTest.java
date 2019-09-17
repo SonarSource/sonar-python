@@ -1888,6 +1888,21 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(noneExpressionTree.children()).isEmpty();
   }
 
+  @Test
+  public void variables() {
+    setRootRule(PythonGrammar.ATOM);
+    PyNameTree name = (PyNameTree) parse("foo", treeMaker::expression);
+    assertThat(name.isVariable()).isTrue();
+
+    setRootRule(PythonGrammar.ATTRIBUTE_REF);
+    PyQualifiedExpressionTree qualifiedExpressionTree = (PyQualifiedExpressionTree) parse("a.b", treeMaker::expression);
+    assertThat(qualifiedExpressionTree.name().isVariable()).isFalse();
+
+    setRootRule(PythonGrammar.FUNCDEF);
+    PyFunctionDefTree functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.name().isVariable()).isFalse();
+  }
+
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
     setRootRule(PythonGrammar.EXPR);
     PyExpressionTree parse = parse(operator+"1", treeMaker::expression);
