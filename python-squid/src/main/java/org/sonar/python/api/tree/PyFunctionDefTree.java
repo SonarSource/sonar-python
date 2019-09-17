@@ -20,7 +20,9 @@
 package org.sonar.python.api.tree;
 
 import java.util.List;
+import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.TreeSymbol;
 
 public interface PyFunctionDefTree extends PyStatementTree {
 
@@ -55,4 +57,5 @@ public interface PyFunctionDefTree extends PyStatementTree {
   @CheckForNull
   PyToken docstring();
 
+  Set<TreeSymbol> localVariables();
 }

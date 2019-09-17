@@ -21,10 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyDecoratorTree;
@@ -36,6 +38,7 @@ import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
@@ -51,6 +54,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   private final PyStatementListTree body;
   private final boolean isMethodDefinition;
   private final PyToken docstring;
+  private Set<TreeSymbol> symbols = new HashSet<>();
 
   public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, @Nullable PyToken asyncKeyword, PyToken defKeyword, PyNameTree name,
                                PyToken leftPar, @Nullable PyParameterListTree parameters, PyToken rightPar, @Nullable PyTypeAnnotationTree returnType,
@@ -132,6 +136,15 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   @Override
   public PyToken docstring() {
     return docstring;
+  }
+
+  @Override
+  public Set<TreeSymbol> localVariables() {
+    return symbols;
+  }
+
+  public void addLocalVariableSymbol(TreeSymbol symbol) {
+    symbols.add(symbol);
   }
 
   @Override
