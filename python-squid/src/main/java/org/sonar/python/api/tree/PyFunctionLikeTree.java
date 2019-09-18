@@ -19,37 +19,15 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.List;
+import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.TreeSymbol;
 
-public interface PyFunctionDefTree extends PyStatementTree, PyFunctionLikeTree {
-
-  List<PyDecoratorTree> decorators();
-
-  PyToken defKeyword();
-
+public interface PyFunctionLikeTree extends Tree {
   @CheckForNull
-  PyToken asyncKeyword();
+  PyParameterListTree parameters();
 
-  PyNameTree name();
+  Set<TreeSymbol> localVariables();
 
-  PyToken leftPar();
-
-  PyToken rightPar();
-
-  /**
-   * {@code -> returnType}
-   */
-  @CheckForNull
-  PyTypeAnnotationTree returnTypeAnnotation();
-
-  PyToken colon();
-
-  PyStatementListTree body();
-
-  boolean isMethodDefinition();
-
-  @CheckForNull
-  PyToken docstring();
-
+  void addLocalVariableSymbol(TreeSymbol symbol);
 }

@@ -19,12 +19,15 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.TreeSymbol;
 
@@ -44,7 +47,10 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         return;
       }
       for (TreeSymbol symbol : functionTree.localVariables()) {
-        if (!"_".equals(symbol.name()) && symbol.usages().size() == 1) {
+        List<Tree> usages = symbol.usages().stream()
+          .filter(tree -> !tree.parent().is(Kind.PARAMETER))
+          .collect(Collectors.toList());
+        if (!"_".equals(symbol.name()) && usages.size() == 1) {
           symbol.usages().forEach(usage -> ctx.addIssue(usage, String.format(MESSAGE, symbol.name())));
         }
       }

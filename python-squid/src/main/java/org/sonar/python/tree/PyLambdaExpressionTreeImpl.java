@@ -20,7 +20,9 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -31,12 +33,14 @@ import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
 public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpressionTree {
   private final PyToken lambdaKeyword;
   private final PyToken colonToken;
   private final PyExpressionTree body;
   private final PyParameterListTree parameterList;
+  private Set<TreeSymbol> symbols = new HashSet<>();
 
   public PyLambdaExpressionTreeImpl(AstNode astNode, PyToken lambdaKeyword, PyToken colonToken, PyExpressionTree body, @Nullable PyParameterListTree parameterList) {
     super(astNode);
@@ -65,6 +69,15 @@ public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpres
   @Override
   public PyParameterListTree parameters() {
     return parameterList;
+  }
+
+  @Override
+  public Set<TreeSymbol> localVariables() {
+    return symbols;
+  }
+
+  public void addLocalVariableSymbol(TreeSymbol symbol) {
+    symbols.add(symbol);
   }
 
   @Override

@@ -130,7 +130,7 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void descendants() {
     PyFileInputTree pyTree = parse("def foo(): pass\ndef bar(): pass", treeMaker::fileInput);
-    assertThat(pyTree.descendants().count()).isEqualTo(9);
+    assertThat(pyTree.descendants().filter(tree -> tree.getKind() != Tree.Kind.TOKEN).count()).isEqualTo(9);
     assertThat(pyTree.descendants(Tree.Kind.STATEMENT_LIST).count()).isEqualTo(3);
     assertThat(pyTree.descendants(Tree.Kind.FUNCDEF).count()).isEqualTo(2);
     assertThat(pyTree.descendants(Tree.Kind.NAME).count()).isEqualTo(2);

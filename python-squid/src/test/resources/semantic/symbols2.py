@@ -8,15 +8,15 @@ def function_with_local():
     foo().x *= 1
     foo().x : int = 1
 
-x = 10
+global_x = 10
 
 def function_with_free_variable():
-    foo(x) # x is a free variable, not in local variable
+    foo(global_x) # x is a free variable, not in local variable
 
 
 def function_with_rebound_variable():
-    foo(x) # x is bound, it's in local variable
-    x = 1
+    foo(global_x) # x is bound, it's in local variable
+    global_x = 1
 
 def simple_parameter(a):
     pass
@@ -36,3 +36,9 @@ def function_with_global_var():
 def function_with_nonlocal_var():
     nonlocal non_local_var
     non_local_var = 10
+
+def function_with_lambdas():
+    x = 42
+    foo((lambda x: x*x))
+    y = 42
+    foo((lambda z: z*y))
