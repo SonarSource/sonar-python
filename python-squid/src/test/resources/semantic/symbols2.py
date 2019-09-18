@@ -49,3 +49,12 @@ def function_with_loops():
 
 def function_with_comprehension():
     [2 for a in range(3)]
+
+def func_wrapping_class():
+    class A:
+        myParam = 2
+
+def var_with_usages_in_decorator():
+    x = 10
+    @x
+    def foo(): pass

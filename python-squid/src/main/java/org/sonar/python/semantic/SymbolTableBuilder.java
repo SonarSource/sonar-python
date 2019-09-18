@@ -31,8 +31,10 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
+import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
+import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
@@ -103,6 +105,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree.parameters());
       super.visitFunctionDef(pyFunctionDefTree);
+      super.scopeRootTrees.pop();
+    }
+
+    @Override
+    public void visitClassDef(PyClassDefTree pyClassDefTree) {
+      createScope(pyClassDefTree, currentScope());
+      enterScope(pyClassDefTree);
+      super.visitClassDef(pyClassDefTree);
       super.scopeRootTrees.pop();
     }
 
@@ -296,6 +306,24 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
       super.scopeRootTrees.pop();
+    }
+
+    @Override
+    public void visitClassDef(PyClassDefTree pyClassDefTree) {
+      enterScope(pyClassDefTree);
+      super.visitClassDef(pyClassDefTree);
+      super.scopeRootTrees.pop();
+    }
+
+    @Override
+    public void visitDecorator(PyDecoratorTree pyDecoratorTree) {
+      PyNameTree nameTree = pyDecoratorTree.name().names().get(0);
+      Scope scope = scopesByRootTree.get(currentScopeRootTree());
+      SymbolImpl symbol = scope.resolve(nameTree.name());
+      if (symbol != null && !symbol.usages().contains(nameTree)) {
+        symbol.addUsage(nameTree);
+      }
+      super.visitDecorator(pyDecoratorTree);
     }
 
     @Override
