@@ -19,14 +19,20 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyStringElementTree;
+import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.TreeSymbol;
@@ -34,7 +40,7 @@ import org.sonar.python.semantic.TreeSymbol;
 @Rule(key = "S1481")
 public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
-  private static final Pattern IDENTIFIER_SEPARATOR = Pattern.compile("[^a-zA-Z0-9_]+");
+  private static final Pattern INTERPOLATION_PATTERN = Pattern.compile("\\{(.*?)\\}");
 
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
 
@@ -46,11 +52,12 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       if (isCallingLocalsFunction(functionTree)) {
         return;
       }
+      Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
       for (TreeSymbol symbol : functionTree.localVariables()) {
         List<Tree> usages = symbol.usages().stream()
           .filter(tree -> !tree.parent().is(Kind.PARAMETER))
           .collect(Collectors.toList());
-        if (!"_".equals(symbol.name()) && usages.size() == 1) {
+        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && usages.size() == 1) {
           symbol.usages().forEach(usage -> ctx.addIssue(usage, String.format(MESSAGE, symbol.name())));
         }
       }
@@ -63,5 +70,24 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       .map(PyCallExpressionTree.class::cast)
       .map(PyCallExpressionTree::callee)
       .anyMatch(callee -> callee.is(Kind.NAME) && "locals".equals(((PyNameTree) callee).name()));
+  }
+
+  private static Set<String> extractStringInterpolationIdentifiers(PyFunctionDefTree functionTree) {
+    return functionTree.descendants(Kind.STRING_LITERAL)
+      .map(PyStringLiteralTree.class::cast)
+      .flatMap(str -> str.stringElements().stream())
+      .filter(str -> str.prefix().equals("f"))
+      .map(PyStringElementTree::trimmedQuotesValue)
+      .flatMap(UnusedLocalVariableCheck::extractInterpolations)
+      .collect(Collectors.toSet());
+  }
+
+  private static Stream<String> extractInterpolations(String str) {
+    Matcher matcher = INTERPOLATION_PATTERN.matcher(str);
+    List<String> identifiers = new ArrayList<>();
+    while (matcher.find()) {
+      identifiers.add(matcher.group(1));
+    }
+    return identifiers.stream();
   }
 }
