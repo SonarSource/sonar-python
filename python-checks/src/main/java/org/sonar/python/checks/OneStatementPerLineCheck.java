@@ -19,37 +19,41 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.Tree;
 
 /**
  * Note that implementation differs from AbstractOneStatementPerLineCheck due to Python specifics
  */
 @Rule(key = OneStatementPerLineCheck.CHECK_KEY)
-public class OneStatementPerLineCheck extends PythonCheckAstNode {
+public class OneStatementPerLineCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "OneStatementPerLine";
   private final Map<Integer, Integer> statementsPerLine = new HashMap<>();
+  private SubscriptionContext subscriptionContext;
+  private static final List<Tree.Kind> kinds = Arrays.asList(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.COMPOUND_ASSIGNMENT, Tree.Kind.EXPRESSION_STMT, Tree.Kind.IMPORT_STMT,
+    Tree.Kind.IMPORT_NAME, Tree.Kind.IMPORT_FROM, Tree.Kind.CONTINUE_STMT, Tree.Kind.BREAK_STMT, Tree.Kind.YIELD_STMT, Tree.Kind.RETURN_STMT, Tree.Kind.PRINT_STMT,
+    Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.ELSE_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
+    Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.SIMPLE_STMT, PythonGrammar.SUITE);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      statementsPerLine.clear();
+      this.subscriptionContext = ctx;
+    });
+
+    kinds.forEach(k -> context.registerSyntaxNodeConsumer(k, this::checkStatement));
   }
 
-  @Override
-  public void visitFile(AstNode astNode) {
-    statementsPerLine.clear();
-  }
-
-  @Override
-  public void visitNode(AstNode statementNode) {
-    int line = statementNode.getTokenLine();
+  private void checkStatement(SubscriptionContext ctx) {
+    int line = ctx.syntaxNode().firstToken().getLine();
     if (!statementsPerLine.containsKey(line)) {
       statementsPerLine.put(line, 0);
     }
@@ -57,14 +61,13 @@ public class OneStatementPerLineCheck extends PythonCheckAstNode {
   }
 
   @Override
-  public void leaveFile(AstNode astNode) {
+  public void leaveFile() {
     for (Map.Entry<Integer, Integer> statementsAtLine : statementsPerLine.entrySet()) {
       if (statementsAtLine.getValue() > 1) {
         String message = String.format("At most one statement is allowed per line, but %s statements were found on this line.", statementsAtLine.getValue());
         int lineNumber = statementsAtLine.getKey();
-        addLineIssue(message, lineNumber);
+        subscriptionContext.addLineIssue(message, lineNumber);
       }
     }
   }
-
 }

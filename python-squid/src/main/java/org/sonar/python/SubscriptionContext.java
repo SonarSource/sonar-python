@@ -33,6 +33,8 @@ public interface SubscriptionContext {
 
   PythonCheck.PreciseIssue addFileIssue(String finalMessage);
 
+  PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
+
   SymbolTable symbolTable();
 
   PythonFile pythonFile();

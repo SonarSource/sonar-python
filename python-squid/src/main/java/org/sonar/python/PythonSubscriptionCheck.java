@@ -24,4 +24,8 @@ public abstract class PythonSubscriptionCheck implements SubscriptionCheck, Pyth
   public void scanFile(PythonVisitorContext visitorContext) {
     // empty implementation
   }
+
+  public void leaveFile() {
+    // callback when leaving file
+  }
 }
