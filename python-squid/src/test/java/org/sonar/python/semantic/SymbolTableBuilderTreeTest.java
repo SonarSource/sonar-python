@@ -169,6 +169,22 @@ public class SymbolTableBuilderTreeTest {
     assertThat(a.usages()).hasSize(1);
   }
 
+  @Test
+  public void func_wrapping_class() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("func_wrapping_class");
+    assertThat(functionTree.localVariables()).isEmpty();
+  }
+
+  @Test
+  public void var_with_usages_in_decorator() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("var_with_usages_in_decorator");
+    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+
+    assertThat(symbolByName.keySet()).containsOnly("x");
+    TreeSymbol x = symbolByName.get("x");
+    assertThat(x.usages()).hasSize(2);
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
