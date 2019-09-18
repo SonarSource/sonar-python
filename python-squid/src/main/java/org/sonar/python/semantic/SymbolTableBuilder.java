@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
@@ -34,6 +35,7 @@ import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
@@ -102,6 +104,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree) {
       pyAssignmentStatementTree.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
+        .flatMap(expr -> expr.is(Kind.TUPLE) ? ((PyTupleTree) expr).elements().stream() : Stream.of(expr))
         .filter(expr -> expr.is(Kind.NAME))
         .map(PyNameTree.class::cast)
         .forEach(this::addUsage);
@@ -202,8 +205,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   }
 
   /**
-   * Read usages have to be visited in a second phase.
-   * They can't be visited in the same phase as write usages,
+   * Read (i.e. non-binding) usages have to be visited in a second phase.
+   * They can't be visited in the same phase as write (i.e. binding) usages,
    * since a read usage may appear in the syntax tree "before" it's declared (written).
    */
   private class SecondPhaseVisitor extends ScopeVisitor {
