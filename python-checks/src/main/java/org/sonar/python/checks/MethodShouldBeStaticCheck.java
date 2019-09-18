@@ -19,109 +19,118 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyExpressionStatementTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyParameterListTree;
+import org.sonar.python.api.tree.PyParameterTree;
+import org.sonar.python.api.tree.PyRaiseStatementTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.BaseTreeVisitor;
 
-@Rule(key = MethodShouldBeStaticCheck.CHECK_KEY)
-public class MethodShouldBeStaticCheck extends PythonCheckAstNode {
+import static org.sonar.python.checks.CheckUtils.classHasInheritance;
+import static org.sonar.python.checks.CheckUtils.getParentClassDef;
 
-  public static final String CHECK_KEY = "S2325";
+@Rule(key = "S2325")
+public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Make this method static.";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (CheckUtils.isMethodOfNonDerivedClass(node)
-      && !alreadyStaticMethod(node)
-      && !isBuiltInMethod(node)
-      && hasValuableCode(node)
-      && !mayRaiseNotImplementedError(node)) {
-      String self = getFirstArgument(node);
-      if (self != null && !isUsed(node, self)) {
-        addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree funcDef = (PyFunctionDefTree) ctx.syntaxNode();
+      if (funcDef.isMethodDefinition()
+        && !classHasInheritance(getParentClassDef(funcDef))
+        && !isBuiltInMethod(funcDef)
+        && !isStatic(funcDef)
+        && hasValuableCode(funcDef)
+        && !mayRaiseNotImplementedError(funcDef)
+        && !isUsingSelfArg(funcDef)
+      ) {
+        ctx.addIssue(funcDef.name(), MESSAGE);
       }
+    });
+  }
+
+  private static boolean mayRaiseNotImplementedError(PyFunctionDefTree funcDef) {
+    RaiseStatementVisitor visitor = new RaiseStatementVisitor();
+    funcDef.accept(visitor);
+    return visitor.hasNotImplementedError;
+
+  }
+
+  private static boolean hasValuableCode(PyFunctionDefTree funcDef) {
+    List<PyStatementTree> statements = funcDef.body().statements();
+    return !statements.stream().allMatch(st -> isStringLiteral(st) || st.is(Tree.Kind.PASS_STMT));
+  }
+
+  private static boolean isStringLiteral(PyStatementTree st) {
+    return st.is(Tree.Kind.EXPRESSION_STMT) && ((PyExpressionStatementTree) st).expressions().stream().allMatch(e -> e.is(Tree.Kind.STRING_LITERAL));
+  }
+
+  private static boolean isUsingSelfArg(PyFunctionDefTree funcDef) {
+    PyParameterListTree parameters = funcDef.parameters();
+    if (parameters == null) {
+      // if a method has no parameters then it can't be a instance method.
+      return true;
     }
-  }
-
-  private static boolean mayRaiseNotImplementedError(AstNode function) {
-    return function.getDescendants(PythonGrammar.RAISE_STMT).stream()
-      .map(raise -> raise.getFirstDescendant(PythonGrammar.TEST))
-      .filter(Objects::nonNull)
-      .anyMatch(test -> "NotImplementedError".equals(test.getToken().getValue()));
-  }
-  
-  private static boolean hasValuableCode(AstNode funcDef) {
-    AstNode statementList = funcDef.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STMT_LIST);
-    if (statementList != null && statementList.getChildren(PythonGrammar.SIMPLE_STMT).size() == 1) {
-      return !statementList.getFirstChild(PythonGrammar.SIMPLE_STMT).getFirstChild().is(PythonGrammar.PASS_STMT);
+    List<PyParameterTree> params = parameters.nonTuple();
+    if (params.isEmpty()) {
+      return false;
     }
-
-    List<AstNode> statements = funcDef.getFirstChild(PythonGrammar.SUITE).getChildren(PythonGrammar.STATEMENT);
-    if (statements.size() == 1) {
-      return !isDocstringOrPass(statements.get(0));
-    }
-
-    return statements.size() != 2 || !isDocstringAndPass(statements.get(0), statements.get(1));
+    PyParameterTree first = params.get(0);
+    SelfVisitor visitor = new SelfVisitor(first.name().name());
+    funcDef.body().accept(visitor);
+    return visitor.isUsingSelfArg;
   }
 
-  private static boolean isDocstringOrPass(AstNode statement) {
-    return statement.getFirstDescendant(PythonGrammar.PASS_STMT) != null || statement.getToken().getType().equals(PythonTokenType.STRING);
+  private static boolean isStatic(PyFunctionDefTree funcDef) {
+    return funcDef.decorators().stream()
+      .map(d -> d.name().names().get(d.name().names().size() - 1))
+      .anyMatch(n -> n.name().equals("staticmethod") || n.name().equals("classmethod"));
   }
 
-  private static boolean isDocstringAndPass(AstNode statement1, AstNode statement2) {
-    return statement1.getToken().getType().equals(PythonTokenType.STRING) && statement2.getFirstDescendant(PythonGrammar.PASS_STMT) != null;
-  }
-
-  private static boolean isUsed(AstNode funcDef, String self) {
-    List<AstNode> names = funcDef.getFirstChild(PythonGrammar.SUITE).getDescendants(PythonGrammar.NAME);
-    for (AstNode name : names) {
-      if (name.getTokenValue().equals(self)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  private static String getFirstArgument(AstNode funcDef) {
-    AstNode argList = funcDef.getFirstChild(PythonGrammar.TYPEDARGSLIST);
-    if (argList != null) {
-      return argList.getFirstDescendant(PythonGrammar.NAME).getTokenValue();
-    } else {
-      return null;
-    }
-  }
-
-  private static boolean alreadyStaticMethod(AstNode funcDef) {
-    AstNode decorators = funcDef.getFirstChild(PythonGrammar.DECORATORS);
-    if (decorators != null) {
-      List<AstNode> decoratorList = decorators.getChildren(PythonGrammar.DECORATOR);
-      for (AstNode decorator : decoratorList) {
-        AstNode name = decorator.getFirstDescendant(PythonGrammar.NAME);
-        if (name != null && ("staticmethod".equals(name.getTokenValue()) || "classmethod".equals(name.getTokenValue()))) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  private static boolean isBuiltInMethod(AstNode funcDef) {
-    String name = funcDef.getFirstChild(PythonGrammar.FUNCNAME).getToken().getValue();
+  private static boolean isBuiltInMethod(PyFunctionDefTree funcDef) {
+    String name = funcDef.name().name();
     String doubleUnderscore = "__";
     return name.startsWith(doubleUnderscore) && name.endsWith(doubleUnderscore);
   }
 
+  private static class RaiseStatementVisitor extends BaseTreeVisitor {
+    private int withinRaise = 0;
+    boolean hasNotImplementedError = false;
+
+    @Override
+    public void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree) {
+      withinRaise++;
+      scan(pyRaiseStatementTree.expressions());
+      withinRaise--;
+    }
+
+    @Override
+    public void visitName(PyNameTree pyNameTree) {
+      if (withinRaise > 0) {
+        hasNotImplementedError |= pyNameTree.name().equals("NotImplementedError");
+      }
+    }
+  }
+
+  private static class SelfVisitor extends BaseTreeVisitor {
+    private final String selfName;
+    boolean isUsingSelfArg = false;
+
+    SelfVisitor(String selfName) {
+      this.selfName = selfName;
+    }
+
+    @Override
+    public void visitName(PyNameTree pyNameTree) {
+      isUsingSelfArg |= selfName.equals(pyNameTree.name());
+    }
+  }
 }

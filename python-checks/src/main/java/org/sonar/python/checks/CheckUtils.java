@@ -28,6 +28,9 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.api.tree.PyArgListTree;
+import org.sonar.python.api.tree.PyArgumentTree;
+import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.Tree;
 
 public class CheckUtils {
@@ -161,6 +164,28 @@ public class CheckUtils {
       throw new IllegalStateException("Invalid string literal: " + stringLiteral);
     }
     return stringLiteral.substring(quote.end(), stringLiteral.length() - 1);
+  }
+
+  public static PyClassDefTree getParentClassDef(Tree current) {
+    while (current != null) {
+      if (current.is(Tree.Kind.CLASSDEF)) {
+        return (PyClassDefTree) current;
+      }
+      current = current.parent();
+    }
+    return null;
+  }
+
+  public static boolean classHasInheritance(PyClassDefTree classDef) {
+    PyArgListTree argList = classDef.args();
+    if (argList == null) {
+      return false;
+    }
+    List<PyArgumentTree> arguments = argList.arguments();
+    if (arguments.isEmpty()) {
+      return false;
+    }
+    return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().getValue());
   }
 
 }
