@@ -19,15 +19,14 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
 public interface PyRaiseStatementTree extends PyStatementTree {
-  Token raiseKeyword();
+  PyToken raiseKeyword();
 
   @CheckForNull
-  Token fromKeyword();
+  PyToken fromKeyword();
 
   @CheckForNull
   PyExpressionTree fromExpression();

@@ -123,7 +123,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     if (ctx.pythonFile().fileName().equals("global_settings.py") &&
       assignmentStatementTree.lhsExpressions().stream()
         .flatMap(pelt -> pelt.expressions().stream())
-        .anyMatch(expression -> expression.firstToken().getValue().equals("PASSWORD_HASHERS"))) {
+        .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
       ctx.addIssue(assignmentStatementTree, MESSAGE);
     }
   }
@@ -135,7 +135,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     for (PyExpressionListTree expr : lhsExpressions) {
       for (PyExpressionTree expression : expr.expressions()) {
         PyExpressionTree baseExpr = removeParenthesis(expression);
-        if (baseExpr.lastToken().getValue().equals("PASSWORD_HASHERS")) {
+        if (baseExpr.lastToken().value().equals("PASSWORD_HASHERS")) {
           return baseExpr.is(Tree.Kind.QUALIFIED_EXPR) && getQualifiedName(((PyQualifiedExpressionTree) baseExpr).qualifier(), ctx).equals("django.conf.settings");
         }
       }

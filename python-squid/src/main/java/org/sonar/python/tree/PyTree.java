@@ -20,23 +20,24 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 
 public abstract class PyTree implements Tree {
   private final AstNode node;
-  private final Token firstToken;
-  private final Token lastToken;
+  private final PyToken firstToken;
+  private final PyToken lastToken;
   private Tree parent = null;
 
-  public PyTree(AstNode node) {
+  public PyTree(@Nullable AstNode node) {
     this.node = node;
-    this.firstToken = null;
-    this.lastToken = null;
+    this.firstToken = node == null ? null : new PyTokenImpl(node.getToken());
+    this.lastToken = node == null ? null : new PyTokenImpl(node.getLastToken());
   }
 
-  public PyTree(Token firstToken, Token lastToken) {
+  public PyTree(PyToken firstToken, PyToken lastToken) {
     this.node = null;
     this.firstToken = firstToken;
     this.lastToken = lastToken;
@@ -54,13 +55,13 @@ public abstract class PyTree implements Tree {
   }
 
   @Override
-  public Token firstToken() {
-    return node == null ? firstToken : node.getToken();
+  public PyToken firstToken() {
+    return firstToken;
   }
 
   @Override
-  public Token lastToken() {
-    return node == null ? lastToken : node.getLastToken();
+  public PyToken lastToken() {
+    return lastToken;
   }
 
   @Override

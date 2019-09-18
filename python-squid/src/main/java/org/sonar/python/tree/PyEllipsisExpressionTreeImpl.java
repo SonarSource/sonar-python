@@ -20,7 +20,8 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import java.util.stream.Collectors;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyEllipsisExpressionTree;
@@ -29,15 +30,15 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyEllipsisExpressionTreeImpl extends PyTree implements PyEllipsisExpressionTree {
 
-  private final List<Token> ellipsis;
+  private final List<PyToken> ellipsis;
 
   public PyEllipsisExpressionTreeImpl(AstNode node) {
     super(node);
-    this.ellipsis = node.getTokens();
+    this.ellipsis = node.getTokens().stream().map(PyTokenImpl::new).collect(Collectors.toList());
   }
 
   @Override
-  public List<Token> ellipsis() {
+  public List<PyToken> ellipsis() {
     return ellipsis;
   }
 

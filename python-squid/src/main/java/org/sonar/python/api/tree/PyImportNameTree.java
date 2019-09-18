@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 /**
@@ -30,7 +29,7 @@ import java.util.List;
  * </pre>
  */
 public interface PyImportNameTree extends PyImportStatementTree {
-  Token importKeyword();
+  PyToken importKeyword();
 
   List<PyAliasedNameTree> modules();
 }

@@ -19,8 +19,8 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.SymbolTable;
 
@@ -29,9 +29,9 @@ public interface SubscriptionContext {
 
   PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
 
-  PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
+  PythonCheck.PreciseIssue addIssue(PyToken token, @Nullable String message);
 
-  PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message);
+  PythonCheck.PreciseIssue addIssue(PyToken from, PyToken to, @Nullable String message);
 
   PythonCheck.PreciseIssue addFileIssue(String finalMessage);
 

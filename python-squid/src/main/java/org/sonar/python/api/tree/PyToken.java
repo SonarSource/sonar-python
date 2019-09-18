@@ -17,26 +17,25 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.api.tree;
 
-import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyToken;
-import org.sonar.python.api.tree.Tree;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.TokenType;
+import com.sonar.sslr.api.Trivia;
+import java.util.List;
 
-@Rule(key = "InequalityUsage")
-public class InequalityUsageCheck extends PythonSubscriptionCheck {
+public interface PyToken extends Tree {
 
-  @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> {
-      PyBinaryExpressionTree expr = (PyBinaryExpressionTree) ctx.syntaxNode();
-      PyToken operator = expr.operator();
-      if (operator.value().equals(PythonPunctuator.NOT_EQU2.getValue())) {
-        ctx.addIssue(operator, "Replace \"<>\" by \"!=\".");
-      }
-    });
-  }
+  Token token();
+
+  String value();
+
+  int line();
+
+  int column();
+
+  List<Trivia> trivia();
+
+  TokenType type();
+
 }

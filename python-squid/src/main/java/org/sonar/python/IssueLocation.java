@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 
 public abstract class IssueLocation {
@@ -57,11 +58,11 @@ public abstract class IssueLocation {
     return new PreciseIssueLocation(tree.firstToken(), tree.lastToken(), message);
   }
 
-  public static IssueLocation preciseLocation(Token token, @Nullable String message) {
+  public static IssueLocation preciseLocation(PyToken token, @Nullable String message) {
     return new PreciseIssueLocation(token, message);
   }
 
-  public static IssueLocation preciseLocation(Token from, Token to, @Nullable String message) {
+  public static IssueLocation preciseLocation(PyToken from, PyToken to, @Nullable String message) {
     return new PreciseIssueLocation(from, to, message);
   }
 
@@ -95,16 +96,16 @@ public abstract class IssueLocation {
       this.lastTokenLocation = new TokenLocation(endNode.getLastToken());
     }
 
-    public PreciseIssueLocation(Token firstToken, Token lastToken, @Nullable String message) {
+    public PreciseIssueLocation(PyToken firstToken, PyToken lastToken, @Nullable String message) {
       super(message);
-      this.firstToken = firstToken;
-      this.lastTokenLocation = new TokenLocation(lastToken);
+      this.firstToken = firstToken.token();
+      this.lastTokenLocation = new TokenLocation(lastToken.token());
     }
 
-    public PreciseIssueLocation(Token token, @Nullable String message) {
+    public PreciseIssueLocation(PyToken token, @Nullable String message) {
       super(message);
-      this.firstToken = token;
-      this.lastTokenLocation = new TokenLocation(token);
+      this.firstToken = token.token();
+      this.lastTokenLocation = new TokenLocation(token.token());
     }
 
     @Override

@@ -19,13 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyBinaryExpressionTree extends PyExpressionTree {
 
   PyExpressionTree leftOperand();
 
-  Token operator();
+  PyToken operator();
 
   PyExpressionTree rightOperand();
 

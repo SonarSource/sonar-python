@@ -19,47 +19,74 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.TokenType;
+import com.sonar.sslr.api.Trivia;
 import java.util.Collections;
 import java.util.List;
-import org.sonar.python.api.tree.PyDelStatementTree;
-import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class PyDelStatementTreeImpl extends PyTree implements PyDelStatementTree {
-  private final PyToken delKeyword;
-  private final List<PyExpressionTree> expressionTrees;
+public class PyTokenImpl extends PyTree implements PyToken {
 
-  public PyDelStatementTreeImpl(AstNode astNode, PyToken delKeyword, List<PyExpressionTree> expressionTrees) {
-    super(astNode);
-    this.delKeyword = delKeyword;
-    this.expressionTrees = expressionTrees;
+  private Token token;
+
+  public PyTokenImpl(Token token) {
+    super(null);
+    this.token = token;
+  }
+
+  public Token token() {
+    return token;
   }
 
   @Override
-  public PyToken delKeyword() {
-    return delKeyword;
+  public String value() {
+    return token.getValue();
   }
 
   @Override
-  public List<PyExpressionTree> expressions() {
-    return expressionTrees;
+  public int line() {
+    return token.getLine();
   }
 
   @Override
-  public Kind getKind() {
-    return Kind.DEL_STMT;
+  public int column() {
+    return token.getColumn();
+  }
+
+  @Override
+  public List<Trivia> trivia() {
+    return token.getTrivia();
+  }
+
+  public TokenType type() {
+    return token.getType();
   }
 
   @Override
   public void accept(PyTreeVisitor visitor) {
-    visitor.visitDelStatement(this);
+    visitor.visitToken(this);
   }
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(expressionTrees);
+    return Collections.emptyList();
+  }
+
+  @Override
+  public Kind getKind() {
+    return Tree.Kind.TOKEN;
+  }
+
+  @Override
+  public PyToken firstToken() {
+    return this;
+  }
+
+  @Override
+  public PyToken lastToken() {
+    return this;
   }
 }

@@ -19,12 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
 public interface PyTryStatementTree extends PyStatementTree {
-  Token tryKeyword();
+  PyToken tryKeyword();
 
   List<PyExceptClauseTree> exceptClauses();
 

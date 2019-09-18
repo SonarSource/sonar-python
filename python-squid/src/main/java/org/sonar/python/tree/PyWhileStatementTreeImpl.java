@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -33,16 +33,16 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatementTree {
 
-  private final Token whileKeyword;
+  private final PyToken whileKeyword;
   private final PyExpressionTree condition;
-  private final Token colon;
+  private final PyToken colon;
   private final PyStatementListTree body;
-  private final Token elseKeyword;
-  private final Token elseColon;
+  private final PyToken elseKeyword;
+  private final PyToken elseColon;
   private final PyStatementListTree elseBody;
 
-  public PyWhileStatementTreeImpl(AstNode astNode, Token whileKeyword, PyExpressionTree condition, Token colon, PyStatementListTree body,
-                                  @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable PyStatementListTree elseBody) {
+  public PyWhileStatementTreeImpl(AstNode astNode, PyToken whileKeyword, PyExpressionTree condition, PyToken colon, PyStatementListTree body,
+                                  @Nullable PyToken elseKeyword, @Nullable PyToken elseColon, @Nullable PyStatementListTree elseBody) {
     super(astNode);
     this.whileKeyword = whileKeyword;
     this.condition = condition;
@@ -64,7 +64,7 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
   }
 
   @Override
-  public Token whileKeyword() {
+  public PyToken whileKeyword() {
     return whileKeyword;
   }
 
@@ -74,7 +74,7 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
   }
 
   @Override
-  public Token colon() {
+  public PyToken colon() {
     return colon;
   }
 
@@ -85,13 +85,13 @@ public class PyWhileStatementTreeImpl extends PyTree implements PyWhileStatement
 
   @CheckForNull
   @Override
-  public Token elseKeyword() {
+  public PyToken elseKeyword() {
     return elseKeyword;
   }
 
   @CheckForNull
   @Override
-  public Token elseColon() {
+  public PyToken elseColon() {
     return elseColon;
   }
 

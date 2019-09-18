@@ -19,15 +19,14 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
 public interface PyYieldExpressionTree extends PyExpressionTree {
-  Token yieldKeyword();
+  PyToken yieldKeyword();
 
   @CheckForNull
-  Token fromKeyword();
+  PyToken fromKeyword();
 
   List<PyExpressionTree> expressions();
 }

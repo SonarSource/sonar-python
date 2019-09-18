@@ -19,10 +19,8 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyFinallyClauseTree extends Tree {
-  Token finallyKeyword();
+  PyToken finallyKeyword();
 
   PyStatementListTree body();
 }

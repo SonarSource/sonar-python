@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PyWithItemTree extends Tree {
@@ -27,7 +26,7 @@ public interface PyWithItemTree extends Tree {
   PyExpressionTree test();
 
   @CheckForNull
-  Token as();
+  PyToken as();
 
   @CheckForNull
   PyExpressionTree expression();

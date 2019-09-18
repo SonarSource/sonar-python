@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -30,12 +30,12 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStatementTree {
-  private final Token assertKeyword;
+  private final PyToken assertKeyword;
   private final PyExpressionTree condition;
   @Nullable
   private final PyExpressionTree message;
 
-  public PyAssertStatementTreeImpl(AstNode astNode, Token assertKeyword, PyExpressionTree condition, @Nullable PyExpressionTree message) {
+  public PyAssertStatementTreeImpl(AstNode astNode, PyToken assertKeyword, PyExpressionTree condition, @Nullable PyExpressionTree message) {
     super(astNode);
     this.assertKeyword = assertKeyword;
     this.condition = condition;
@@ -43,7 +43,7 @@ public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStateme
   }
 
   @Override
-  public Token assertKeyword() {
+  public PyToken assertKeyword() {
     return assertKeyword;
   }
 

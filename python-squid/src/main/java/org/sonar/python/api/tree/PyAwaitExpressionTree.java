@@ -19,11 +19,9 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyAwaitExpressionTree extends PyExpressionTree {
 
-  Token awaitToken();
+  PyToken awaitToken();
 
   PyExpressionTree expression();
 

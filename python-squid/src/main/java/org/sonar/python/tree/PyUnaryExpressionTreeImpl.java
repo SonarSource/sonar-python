@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +35,7 @@ public class PyUnaryExpressionTreeImpl extends PyTree implements PyUnaryExpressi
   private static final Map<String, Kind> KINDS_BY_OPERATOR = kindsByOperator();
 
   private final Kind kind;
-  private final Token operator;
+  private final PyToken operator;
   private final PyExpressionTree expression;
 
   private static Map<String, Kind> kindsByOperator() {
@@ -47,15 +47,15 @@ public class PyUnaryExpressionTreeImpl extends PyTree implements PyUnaryExpressi
     return map;
   }
 
-  public PyUnaryExpressionTreeImpl(AstNode node, Token operator, PyExpressionTree expression) {
+  public PyUnaryExpressionTreeImpl(AstNode node, PyToken operator, PyExpressionTree expression) {
     super(node);
-    this.kind = KINDS_BY_OPERATOR.get(operator.getValue());
+    this.kind = KINDS_BY_OPERATOR.get(operator.value());
     this.operator = operator;
     this.expression = expression;
   }
 
   @Override
-  public Token operator() {
+  public PyToken operator() {
     return operator;
   }
 

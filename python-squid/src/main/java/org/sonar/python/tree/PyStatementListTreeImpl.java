@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyStatementListTree;
@@ -31,9 +31,9 @@ import org.sonar.python.api.tree.Tree;
 public class PyStatementListTreeImpl extends PyTree implements PyStatementListTree {
 
   private List<PyStatementTree> statements;
-  private final List<Token> tokens;
+  private final List<PyToken> tokens;
 
-  public PyStatementListTreeImpl(AstNode astNode, List<PyStatementTree> statements, List<Token> tokens) {
+  public PyStatementListTreeImpl(AstNode astNode, List<PyStatementTree> statements, List<PyToken> tokens) {
     super(astNode);
     this.statements = statements;
     this.tokens = tokens;
@@ -60,7 +60,7 @@ public class PyStatementListTreeImpl extends PyTree implements PyStatementListTr
   }
 
   @Override
-  public List<Token> tokens() {
+  public List<PyToken> tokens() {
     return tokens;
   }
 }

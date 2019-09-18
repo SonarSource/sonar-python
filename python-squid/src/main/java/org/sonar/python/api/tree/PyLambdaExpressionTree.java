@@ -19,13 +19,12 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PyLambdaExpressionTree extends PyExpressionTree {
-  Token lambdaKeyword();
+  PyToken lambdaKeyword();
 
-  Token colonToken();
+  PyToken colonToken();
 
   PyExpressionTree expression();
 

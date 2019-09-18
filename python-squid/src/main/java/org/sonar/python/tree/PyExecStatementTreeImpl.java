@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -30,12 +30,12 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyExecStatementTreeImpl extends PyTree implements PyExecStatementTree {
-  private final Token execKeyword;
+  private final PyToken execKeyword;
   private final PyExpressionTree expression;
   private final PyExpressionTree globalsExpression;
   private final PyExpressionTree localsExpression;
 
-  public PyExecStatementTreeImpl(AstNode astNode, Token execKeyword, PyExpressionTree expression,
+  public PyExecStatementTreeImpl(AstNode astNode, PyToken execKeyword, PyExpressionTree expression,
                                  @Nullable PyExpressionTree globalsExpression, @Nullable PyExpressionTree localsExpression) {
     super(astNode);
     this.execKeyword = execKeyword;
@@ -44,7 +44,7 @@ public class PyExecStatementTreeImpl extends PyTree implements PyExecStatementTr
     this.localsExpression = localsExpression;
   }
 
-  public PyExecStatementTreeImpl(AstNode astNode, Token execKeyword, PyExpressionTree expression) {
+  public PyExecStatementTreeImpl(AstNode astNode, PyToken execKeyword, PyExpressionTree expression) {
     super(astNode);
     this.execKeyword = execKeyword;
     this.expression = expression;
@@ -53,7 +53,7 @@ public class PyExecStatementTreeImpl extends PyTree implements PyExecStatementTr
   }
 
   @Override
-  public Token execKeyword() {
+  public PyToken execKeyword() {
     return execKeyword;
   }
 

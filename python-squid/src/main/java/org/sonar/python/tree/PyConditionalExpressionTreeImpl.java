@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
@@ -30,13 +30,13 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyConditionalExpressionTreeImpl extends PyTree implements PyConditionalExpressionTree {
   private final PyExpressionTree trueExpression;
-  private final Token ifToken;
+  private final PyToken ifToken;
   private final PyExpressionTree condition;
-  private final Token elseToken;
+  private final PyToken elseToken;
   private final PyExpressionTree falseExpression;
 
   public PyConditionalExpressionTreeImpl(AstNode node, PyExpressionTree trueExpression,
-                                         Token ifToken, PyExpressionTree condition, Token elseToken, PyExpressionTree falseExpression) {
+                                         PyToken ifToken, PyExpressionTree condition, PyToken elseToken, PyExpressionTree falseExpression) {
     super(node);
     this.trueExpression = trueExpression;
     this.ifToken = ifToken;
@@ -46,12 +46,12 @@ public class PyConditionalExpressionTreeImpl extends PyTree implements PyConditi
   }
 
   @Override
-  public Token ifKeyword() {
+  public PyToken ifKeyword() {
     return ifToken;
   }
 
   @Override
-  public Token elseKeyword() {
+  public PyToken elseKeyword() {
     return elseToken;
   }
 

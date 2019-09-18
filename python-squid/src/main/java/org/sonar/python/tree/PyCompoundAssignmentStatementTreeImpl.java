@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
@@ -30,10 +30,10 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyCompoundAssignmentStatementTreeImpl extends PyTree implements PyCompoundAssignmentStatementTree {
   private final PyExpressionTree lhsExpression;
-  private final Token augAssignToken;
+  private final PyToken augAssignToken;
   private final PyExpressionTree rhsExpression;
 
-  public PyCompoundAssignmentStatementTreeImpl(AstNode astNode, PyExpressionTree lhsExpression, Token augAssignToken, PyExpressionTree rhsExpression) {
+  public PyCompoundAssignmentStatementTreeImpl(AstNode astNode, PyExpressionTree lhsExpression, PyToken augAssignToken, PyExpressionTree rhsExpression) {
     super(astNode);
     this.lhsExpression = lhsExpression;
     this.augAssignToken = augAssignToken;
@@ -46,7 +46,7 @@ public class PyCompoundAssignmentStatementTreeImpl extends PyTree implements PyC
   }
 
   @Override
-  public Token compoundAssignmentToken() {
+  public PyToken compoundAssignmentToken() {
     return augAssignToken;
   }
 

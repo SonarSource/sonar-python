@@ -19,13 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyListLiteralTree extends PyExpressionTree {
 
-  Token leftBracket();
+  PyToken leftBracket();
 
   PyExpressionListTree elements();
 
-  Token rightBracket();
+  PyToken rightBracket();
 }

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -59,9 +59,9 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean containsComment(List<Token> tokens) {
-    for (Token token : tokens) {
-      for (Trivia trivia : token.getTrivia()) {
+  private static boolean containsComment(List<PyToken> tokens) {
+    for (PyToken token : tokens) {
+      for (Trivia trivia : token.trivia()) {
         if (trivia.isComment()) {
           return true;
         }

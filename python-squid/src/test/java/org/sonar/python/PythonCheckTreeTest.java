@@ -46,7 +46,7 @@ public class PythonCheckTreeTest {
       public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
         super.visitFunctionDef(pyFunctionDefTree);
         PyNameTree name = pyFunctionDefTree.name();
-        addIssue(name, name.firstToken().getValue());
+        addIssue(name, name.firstToken().value());
       }
     };
 

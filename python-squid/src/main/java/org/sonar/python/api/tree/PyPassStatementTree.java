@@ -19,8 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyPassStatementTree extends PyStatementTree {
-  Token passKeyword();
+  PyToken passKeyword();
 }

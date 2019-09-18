@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyDictionaryLiteralTree;
@@ -32,7 +32,7 @@ public class PyDictionaryLiteralTreeImpl extends PyDictOrSetLiteralTreeImpl impl
 
   private final List<PyKeyValuePairTree> elements;
 
-  public PyDictionaryLiteralTreeImpl(AstNode node, Token lCurlyBrace, List<Token> commas, List<PyKeyValuePairTree> elements, Token rCurlyBrace) {
+  public PyDictionaryLiteralTreeImpl(AstNode node, PyToken lCurlyBrace, List<PyToken> commas, List<PyKeyValuePairTree> elements, PyToken rCurlyBrace) {
     super(node, lCurlyBrace, commas, rCurlyBrace);
     this.elements = elements;
   }

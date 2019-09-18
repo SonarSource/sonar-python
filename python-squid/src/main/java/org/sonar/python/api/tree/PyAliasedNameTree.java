@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 /**
@@ -31,7 +30,7 @@ import javax.annotation.CheckForNull;
  */
 public interface PyAliasedNameTree extends Tree {
   @CheckForNull
-  Token asKeyword();
+  PyToken asKeyword();
 
   @CheckForNull
   PyNameTree alias();

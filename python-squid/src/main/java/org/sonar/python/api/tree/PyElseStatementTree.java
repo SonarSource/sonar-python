@@ -19,10 +19,8 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyElseStatementTree extends PyStatementTree {
-  Token elseKeyword();
+  PyToken elseKeyword();
 
   PyStatementListTree body();
 

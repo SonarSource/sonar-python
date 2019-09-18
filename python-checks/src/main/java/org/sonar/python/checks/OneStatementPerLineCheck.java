@@ -53,7 +53,7 @@ public class OneStatementPerLineCheck extends PythonSubscriptionCheck {
   }
 
   private void checkStatement(SubscriptionContext ctx) {
-    int line = ctx.syntaxNode().firstToken().getLine();
+    int line = ctx.syntaxNode().firstToken().line();
     if (!statementsPerLine.containsKey(line)) {
       statementsPerLine.put(line, 0);
     }

@@ -19,8 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyNoneExpressionTree extends PyExpressionTree {
-  Token none();
+  PyToken none();
 }

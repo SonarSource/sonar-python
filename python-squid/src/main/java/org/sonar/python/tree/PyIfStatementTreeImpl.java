@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +35,7 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
-  private final Token keyword;
+  private final PyToken keyword;
   private final PyExpressionTree condition;
   private final PyStatementListTree statements;
   private final List<PyIfStatementTree> elifBranches;
@@ -47,7 +47,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
    *
    * If statement constructor
    */
-  public PyIfStatementTreeImpl(Token ifKeyword, PyExpressionTree condition,
+  public PyIfStatementTreeImpl(PyToken ifKeyword, PyExpressionTree condition,
                                PyStatementListTree statements, List<PyIfStatementTree> elifBranches, @CheckForNull PyElseStatementTree elseStatement) {
     super(ifKeyword, statements.lastToken());
     this.keyword = ifKeyword;
@@ -61,7 +61,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   /**
    * Elif statement constructor
    */
-  public PyIfStatementTreeImpl(Token elifKeyword, PyExpressionTree condition, PyStatementListTree statements) {
+  public PyIfStatementTreeImpl(PyToken elifKeyword, PyExpressionTree condition, PyStatementListTree statements) {
     super(elifKeyword, statements.lastToken());
     this.keyword = elifKeyword;
     this.condition = condition;
@@ -72,7 +72,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
   }
 
   @Override
-  public Token keyword() {
+  public PyToken keyword() {
     return keyword;
   }
 

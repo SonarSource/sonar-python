@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.List;
 import java.util.Arrays;
 import javax.annotation.CheckForNull;
@@ -34,26 +34,26 @@ import org.sonar.python.api.tree.Tree;
 public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
   private final PyNameTree keywordArgument;
   private final PyExpressionTree expression;
-  private final Token equalToken;
-  private final Token star;
-  private final Token starStar;
+  private final PyToken equalToken;
+  private final PyToken star;
+  private final PyToken starStar;
 
-  public PyArgumentTreeImpl(AstNode node, PyNameTree keywordArgument, PyExpressionTree expression, Token equalToken, @Nullable AstNode star, @Nullable AstNode starStar) {
+  public PyArgumentTreeImpl(AstNode node, PyNameTree keywordArgument, PyExpressionTree expression, PyToken equalToken, @Nullable PyToken star, @Nullable PyToken starStar) {
     super(node);
     this.keywordArgument = keywordArgument;
     this.expression = expression;
     this.equalToken = equalToken;
-    this.star = star != null ? star.getToken() : null;
-    this.starStar = starStar != null ? starStar.getToken() : null;
+    this.star = star;
+    this.starStar = starStar;
   }
 
-  public PyArgumentTreeImpl(AstNode astNode, PyExpressionTree expression, @Nullable AstNode star, @Nullable AstNode starStar) {
+  public PyArgumentTreeImpl(AstNode astNode, PyExpressionTree expression, @Nullable PyToken star, @Nullable PyToken starStar) {
     super(astNode);
     this.keywordArgument = null;
     this.expression = expression;
     this.equalToken = null;
-    this.star = star != null ? star.getToken() : null;
-    this.starStar = starStar != null ? starStar.getToken() : null;
+    this.star = star;
+    this.starStar = starStar;
   }
 
   @CheckForNull
@@ -64,7 +64,7 @@ public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
 
   @CheckForNull
   @Override
-  public Token equalToken() {
+  public PyToken equalToken() {
     return equalToken;
   }
 
@@ -75,13 +75,13 @@ public class PyArgumentTreeImpl extends PyTree implements PyArgumentTree {
 
   @CheckForNull
   @Override
-  public Token starToken() {
+  public PyToken starToken() {
     return star;
   }
 
   @CheckForNull
   @Override
-  public Token starStarToken() {
+  public PyToken starStarToken() {
     return starStar;
   }
 

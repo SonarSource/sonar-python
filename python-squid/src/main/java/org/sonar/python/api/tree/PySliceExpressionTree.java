@@ -19,16 +19,14 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PySliceExpressionTree extends PyExpressionTree {
 
   PyExpressionTree object();
 
-  Token leftBracket();
+  PyToken leftBracket();
 
   PySliceListTree sliceList();
 
-  Token rightBracket();
+  PyToken rightBracket();
 
 }

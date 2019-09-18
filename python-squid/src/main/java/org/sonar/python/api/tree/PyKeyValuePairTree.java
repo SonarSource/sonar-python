@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 /**
@@ -32,13 +31,13 @@ public interface PyKeyValuePairTree extends Tree {
   PyExpressionTree key();
 
   @CheckForNull
-  Token colon();
+  PyToken colon();
 
   @CheckForNull
   PyExpressionTree value();
 
   @CheckForNull
-  Token starStarToken();
+  PyToken starStarToken();
 
   @CheckForNull
   PyExpressionTree expression();

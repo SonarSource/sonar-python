@@ -19,9 +19,8 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PyEllipsisExpressionTree extends PyExpressionTree {
-  List<Token> ellipsis();
+  List<PyToken> ellipsis();
 }

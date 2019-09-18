@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,13 +36,13 @@ import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.Tree;
 
 public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree {
-  private final Token tryKeyword;
+  private final PyToken tryKeyword;
   private final PyStatementListTree tryBody;
   private final List<PyExceptClauseTree> exceptClauses;
   private final PyFinallyClauseTree finallyClause;
   private final PyElseStatementTree elseStatement;
 
-  public PyTryStatementTreeImpl(AstNode astNode, Token tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses,
+  public PyTryStatementTreeImpl(AstNode astNode, PyToken tryKeyword, PyStatementListTree tryBody, List<PyExceptClauseTree> exceptClauses,
                                 @Nullable PyFinallyClauseTree finallyClause, @Nullable PyElseStatementTree elseStatement) {
     super(astNode);
     this.tryKeyword = tryKeyword;
@@ -53,7 +53,7 @@ public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree
   }
 
   @Override
-  public Token tryKeyword() {
+  public PyToken tryKeyword() {
     return tryKeyword;
   }
 

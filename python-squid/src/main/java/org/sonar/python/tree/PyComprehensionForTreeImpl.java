@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -33,13 +33,13 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyComprehensionForTreeImpl extends PyTree implements PyComprehensionForTree {
 
-  private final Token forToken;
+  private final PyToken forToken;
   private final PyExpressionTree loopExpression;
-  private final Token inToken;
+  private final PyToken inToken;
   private final PyExpressionTree iterable;
   private final PyComprehensionClauseTree nested;
 
-  public PyComprehensionForTreeImpl(AstNode node, Token forToken, PyExpressionTree loopExpression, Token inToken,
+  public PyComprehensionForTreeImpl(AstNode node, PyToken forToken, PyExpressionTree loopExpression, PyToken inToken,
                                     PyExpressionTree iterable, @Nullable PyComprehensionClauseTree nested) {
     super(node);
     this.forToken = forToken;
@@ -50,7 +50,7 @@ public class PyComprehensionForTreeImpl extends PyTree implements PyComprehensio
   }
 
   @Override
-  public Token forToken() {
+  public PyToken forToken() {
     return forToken;
   }
 
@@ -60,7 +60,7 @@ public class PyComprehensionForTreeImpl extends PyTree implements PyComprehensio
   }
 
   @Override
-  public Token inToken() {
+  public PyToken inToken() {
     return inToken;
   }
 

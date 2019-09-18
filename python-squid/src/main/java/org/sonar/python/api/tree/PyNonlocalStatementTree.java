@@ -19,11 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PyNonlocalStatementTree extends PyStatementTree {
-  Token nonlocalKeyword();
+  PyToken nonlocalKeyword();
 
   List<PyNameTree> variables();
 }

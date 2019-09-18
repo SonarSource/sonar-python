@@ -19,19 +19,18 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PyExceptClauseTree extends Tree {
-  Token exceptKeyword();
+  PyToken exceptKeyword();
 
   PyStatementListTree body();
 
   @CheckForNull
-  Token asKeyword();
+  PyToken asKeyword();
 
   @CheckForNull
-  Token commaToken();
+  PyToken commaToken();
 
   @CheckForNull
   PyExpressionTree exception();

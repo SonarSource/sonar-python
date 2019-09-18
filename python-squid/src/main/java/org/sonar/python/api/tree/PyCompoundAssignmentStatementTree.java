@@ -19,12 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyCompoundAssignmentStatementTree extends PyStatementTree {
   PyExpressionTree rhsExpression();
 
-  Token compoundAssignmentToken();
+  PyToken compoundAssignmentToken();
 
   PyExpressionTree lhsExpression();
 }

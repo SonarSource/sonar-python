@@ -108,8 +108,8 @@ public class CheckUtils {
     if (leftLeaf.firstToken() == null && rightLeaf.firstToken() == null) {
       return true;
     }
-    return leftLeaf.firstToken().getType().equals(PythonTokenType.INDENT) || leftLeaf.firstToken().getType().equals(PythonTokenType.DEDENT) ||
-      leftLeaf.firstToken().getValue().equals(rightLeaf.firstToken().getValue());
+    return leftLeaf.firstToken().type().equals(PythonTokenType.INDENT) || leftLeaf.firstToken().type().equals(PythonTokenType.DEDENT) ||
+      leftLeaf.firstToken().value().equals(rightLeaf.firstToken().value());
   }
 
   public static boolean insideFunction(AstNode astNode, AstNode funcDef) {
@@ -185,7 +185,7 @@ public class CheckUtils {
     if (arguments.isEmpty()) {
       return false;
     }
-    return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().getValue());
+    return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().value());
   }
 
 }

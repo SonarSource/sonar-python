@@ -19,12 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyConditionalExpressionTree extends PyExpressionTree {
-  Token ifKeyword();
+  PyToken ifKeyword();
 
-  Token elseKeyword();
+  PyToken elseKeyword();
 
   PyExpressionTree trueExpression();
 

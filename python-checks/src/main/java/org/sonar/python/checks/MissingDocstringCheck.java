@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Token;
 import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
@@ -29,6 +28,7 @@ import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -61,12 +61,12 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((PyClassDefTree) ctx.syntaxNode()).docstring()));
   }
 
-  private static void checkDocString(SubscriptionContext ctx, @CheckForNull Token docstring) {
+  private static void checkDocString(SubscriptionContext ctx, @CheckForNull PyToken docstring) {
     Tree tree = ctx.syntaxNode();
     DeclarationType type = getType(tree);
     if (docstring == null) {
       raiseIssueNoDocstring(tree, type, ctx);
-    } else if (EMPTY_STRING_REGEXP.matcher(docstring.getValue()).matches()) {
+    } else if (EMPTY_STRING_REGEXP.matcher(docstring.value()).matches()) {
       raiseIssue(tree, MESSAGE_EMPTY_DOCSTRING, type, ctx);
     }
   }

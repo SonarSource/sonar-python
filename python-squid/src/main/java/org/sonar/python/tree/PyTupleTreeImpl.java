@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -32,12 +32,12 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyTupleTreeImpl extends PyTree implements PyTupleTree {
 
-  private final Token leftParenthesis;
+  private final PyToken leftParenthesis;
   private final List<PyExpressionTree> elements;
-  private final List<Token> commas;
-  private final Token rightParenthesis;
+  private final List<PyToken> commas;
+  private final PyToken rightParenthesis;
 
-  public PyTupleTreeImpl(AstNode node, @Nullable Token leftParenthesis, List<PyExpressionTree> elements, List<Token> commas, @Nullable Token rightParenthesis) {
+  public PyTupleTreeImpl(AstNode node, @Nullable PyToken leftParenthesis, List<PyExpressionTree> elements, List<PyToken> commas, @Nullable PyToken rightParenthesis) {
     super(node);
     this.leftParenthesis = leftParenthesis;
     this.elements = elements;
@@ -47,7 +47,7 @@ public class PyTupleTreeImpl extends PyTree implements PyTupleTree {
 
   @CheckForNull
   @Override
-  public Token leftParenthesis() {
+  public PyToken leftParenthesis() {
     return leftParenthesis;
   }
 
@@ -57,13 +57,13 @@ public class PyTupleTreeImpl extends PyTree implements PyTupleTree {
   }
 
   @Override
-  public List<Token> commas() {
+  public List<PyToken> commas() {
     return commas;
   }
 
   @CheckForNull
   @Override
-  public Token rightParenthesis() {
+  public PyToken rightParenthesis() {
     return rightParenthesis;
   }
 

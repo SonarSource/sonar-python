@@ -19,20 +19,19 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PyDecoratorTree extends Tree {
-  Token atToken();
+  PyToken atToken();
 
   PyDottedNameTree name();
 
   @CheckForNull
-  Token leftPar();
+  PyToken leftPar();
 
   @CheckForNull
   PyArgListTree arguments();
 
   @CheckForNull
-  Token rightPar();
+  PyToken rightPar();
 }

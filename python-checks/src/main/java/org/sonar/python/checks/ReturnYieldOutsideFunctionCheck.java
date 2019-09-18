@@ -38,12 +38,12 @@ public class ReturnYieldOutsideFunctionCheck extends PythonSubscriptionCheck {
       if (currentParent.is(Tree.Kind.FUNCDEF)) {
         return;
       } else if (currentParent.is(Tree.Kind.CLASSDEF)) {
-        ctx.addIssue(returnStatement, String.format(MESSAGE, returnStatement.firstToken().getValue()));
+        ctx.addIssue(returnStatement, String.format(MESSAGE, returnStatement.firstToken().value()));
         return;
       }
       currentParent = currentParent.parent();
     }
-    ctx.addIssue(returnStatement, String.format(MESSAGE, returnStatement.firstToken().getValue()));
+    ctx.addIssue(returnStatement, String.format(MESSAGE, returnStatement.firstToken().value()));
   };
 
   @Override

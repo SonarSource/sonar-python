@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,11 +39,11 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
 
   private final List<PyWithItemTree> withItems;
   private final PyStatementListTree statements;
-  private final Token asyncKeyword;
+  private final PyToken asyncKeyword;
   private final boolean isAsync;
-  private final Token colon;
+  private final PyToken colon;
 
-  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, Token colon, PyStatementListTree statements, @Nullable Token asyncKeyword) {
+  public PyWithStatementTreeImpl(AstNode node, List<PyWithItemTree> withItems, PyToken colon, PyStatementListTree statements, @Nullable PyToken asyncKeyword) {
     super(node);
     this.withItems = withItems;
     this.colon = colon;
@@ -58,7 +58,7 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
   }
 
   @Override
-  public Token colon() {
+  public PyToken colon() {
     return colon;
   }
 
@@ -74,7 +74,7 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
 
   @CheckForNull
   @Override
-  public Token asyncKeyword() {
+  public PyToken asyncKeyword() {
     return asyncKeyword;
   }
 
@@ -97,10 +97,10 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
   public static class PyWithItemTreeImpl extends PyTree implements PyWithItemTree {
 
     private final PyExpressionTree test;
-    private final Token as;
+    private final PyToken as;
     private final PyExpressionTree expr;
 
-    public PyWithItemTreeImpl(AstNode node, PyExpressionTree test, @Nullable Token as, @Nullable PyExpressionTree expr) {
+    public PyWithItemTreeImpl(AstNode node, PyExpressionTree test, @Nullable PyToken as, @Nullable PyExpressionTree expr) {
       super(node);
       this.test = test;
       this.as = as;
@@ -114,7 +114,7 @@ public class PyWithStatementTreeImpl extends PyTree implements PyWithStatementTr
 
     @CheckForNull
     @Override
-    public Token as() {
+    public PyToken as() {
       return as;
     }
 

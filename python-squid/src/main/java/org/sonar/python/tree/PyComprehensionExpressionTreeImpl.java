@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyComprehensionForTree;
@@ -34,8 +34,8 @@ public class PyComprehensionExpressionTreeImpl extends PyTree implements PyCompr
   private final PyExpressionTree resultExpression;
   private final PyComprehensionForTree comprehensionFor;
 
-  public PyComprehensionExpressionTreeImpl(Kind kind, Token openingToken, PyExpressionTree resultExpression,
-                                           PyComprehensionForTree compFor, Token closingToken) {
+  public PyComprehensionExpressionTreeImpl(Kind kind, PyToken openingToken, PyExpressionTree resultExpression,
+                                           PyComprehensionForTree compFor, PyToken closingToken) {
     super(openingToken, closingToken);
     this.kind = kind;
     this.resultExpression = resultExpression;

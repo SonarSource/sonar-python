@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PyFileInputTree extends Tree {
@@ -27,5 +26,5 @@ public interface PyFileInputTree extends Tree {
   PyStatementListTree statements();
 
   @CheckForNull
-  Token docstring();
+  PyToken docstring();
 }

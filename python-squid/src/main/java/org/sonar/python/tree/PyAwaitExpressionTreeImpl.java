@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyAwaitExpressionTree;
@@ -30,17 +30,17 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyAwaitExpressionTreeImpl extends PyTree implements PyAwaitExpressionTree {
 
-  private final Token awaitToken;
+  private final PyToken awaitToken;
   private final PyExpressionTree expression;
 
-  public PyAwaitExpressionTreeImpl(AstNode node, Token await, PyExpressionTree expression) {
+  public PyAwaitExpressionTreeImpl(AstNode node, PyToken await, PyExpressionTree expression) {
     super(node);
     this.awaitToken = await;
     this.expression = expression;
   }
 
   @Override
-  public Token awaitToken() {
+  public PyToken awaitToken() {
     return awaitToken;
   }
 

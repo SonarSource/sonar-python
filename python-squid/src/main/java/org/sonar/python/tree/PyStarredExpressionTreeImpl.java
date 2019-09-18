@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -30,17 +30,17 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyStarredExpressionTreeImpl extends PyTree implements PyStarredExpressionTree {
 
-  private final Token starToken;
+  private final PyToken starToken;
   private final PyExpressionTree expression;
 
-  public PyStarredExpressionTreeImpl(AstNode node, Token starToken, PyExpressionTree expression) {
+  public PyStarredExpressionTreeImpl(AstNode node, PyToken starToken, PyExpressionTree expression) {
     super(node);
     this.starToken = starToken;
     this.expression = expression;
   }
 
   @Override
-  public Token starToken() {
+  public PyToken starToken() {
     return starToken;
   }
 

@@ -49,7 +49,7 @@ public class PythonSubscriptionCheckTest {
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
           PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
-          ctx.addIssue(tree.name(), tree.name().firstToken().getValue());
+          ctx.addIssue(tree.name(), tree.name().firstToken().value());
         });
       }
     };
@@ -95,7 +95,7 @@ public class PythonSubscriptionCheckTest {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.PASS_STMT, ctx -> {
-          ctx.addLineIssue(MESSAGE, ctx.syntaxNode().firstToken().getLine());
+          ctx.addLineIssue(MESSAGE, ctx.syntaxNode().firstToken().line());
           ctx.addFileIssue(MESSAGE);
         });
       }
