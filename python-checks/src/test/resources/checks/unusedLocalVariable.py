@@ -29,7 +29,8 @@ def function_with_lambdas():
     print([(lambda x: x*x)(i) for i in range(10)])
     y = 42
     print([(lambda x: x*x + y)(i) for i in range(10)])
-    {y**2 for a in range(3) if lambda x: x > 1 and y > 1} # FN (create scope for comprehensions)
+    {y**2 for a in range(3) if lambda x: x > 1 and y > 1} # Noncompliant
+#             ^
 
 def using_tuples():
     x, y = (1, 2) # Noncompliant {{Remove the unused local variable "y".}} previously FN
@@ -40,7 +41,7 @@ def using_tuples():
 def for_loops():
     for _ in range(10):
         do_something()
-    for j in range(10): # FN (create scope for loops)
+    for j in range(10): # Noncompliant
         do_something()
     for i in range(10):
         do_something(i)
