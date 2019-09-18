@@ -21,7 +21,6 @@ package org.sonar.python.api.tree;
 
 /**
  * Import statement
- *
  */
 public interface PyImportStatementTree extends PyStatementTree {
 }

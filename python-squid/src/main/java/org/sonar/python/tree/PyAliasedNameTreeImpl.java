@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -33,11 +33,11 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyAliasedNameTreeImpl extends PyTree implements PyAliasedNameTree {
 
-  private final Token asKeyword;
+  private final PyToken asKeyword;
   private final PyDottedNameTree dottedName;
   private final PyNameTree alias;
 
-  public PyAliasedNameTreeImpl(AstNode astNode, @Nullable Token asKeyword, PyDottedNameTree dottedName, @Nullable PyNameTree alias) {
+  public PyAliasedNameTreeImpl(AstNode astNode, @Nullable PyToken asKeyword, PyDottedNameTree dottedName, @Nullable PyNameTree alias) {
     super(astNode);
     this.asKeyword = asKeyword;
     this.dottedName = dottedName;
@@ -46,7 +46,7 @@ public class PyAliasedNameTreeImpl extends PyTree implements PyAliasedNameTree {
 
   @CheckForNull
   @Override
-  public Token asKeyword() {
+  public PyToken asKeyword() {
     return asKeyword;
   }
 

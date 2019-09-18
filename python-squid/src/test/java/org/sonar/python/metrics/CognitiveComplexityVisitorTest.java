@@ -45,7 +45,7 @@ public class CognitiveComplexityVisitorTest {
   public void file() {
     Map<Integer, String> complexityByLine = new TreeMap<>();
     CognitiveComplexityVisitor fileComplexityVisitor = new CognitiveComplexityVisitor(
-      (token, message) -> complexityByLine.merge(token.getLine(), message, (a, b) -> a + " " + b));
+      (token, message) -> complexityByLine.merge(token.line(), message, (a, b) -> a + " " + b));
 
     StringBuilder comments = new StringBuilder();
     // TODO: use BaseTreeVisitor when we will have a way to access tokens and comments in strongly typed AST

@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,16 +35,16 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
-  private final Token fromKeyword;
-  private final List<Token> dottedPrefixForModule;
+  private final PyToken fromKeyword;
+  private final List<PyToken> dottedPrefixForModule;
   private final PyDottedNameTree moduleName;
-  private final Token importKeyword;
+  private final PyToken importKeyword;
   private final List<PyAliasedNameTree> aliasedImportNames;
   private final boolean isWildcardImport;
-  private final Token wildcard;
+  private final PyToken wildcard;
 
-  public PyImportFromTreeImpl(AstNode astNode, Token fromKeyword, @Nullable List<Token> dottedPrefixForModule,
-                              @Nullable PyDottedNameTree moduleName, Token importKeyword,
+  public PyImportFromTreeImpl(AstNode astNode, PyToken fromKeyword, @Nullable List<PyToken> dottedPrefixForModule,
+                              @Nullable PyDottedNameTree moduleName, PyToken importKeyword,
                               @Nullable List<PyAliasedNameTree> aliasedImportNames, boolean isWildcardImport) {
     super(astNode);
     this.fromKeyword = fromKeyword;
@@ -53,11 +53,11 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
     this.importKeyword = importKeyword;
     this.aliasedImportNames = aliasedImportNames == null ? Collections.emptyList() : aliasedImportNames;
     this.isWildcardImport = isWildcardImport;
-    this.wildcard = isWildcardImport ? astNode.getFirstChild(PythonPunctuator.MUL).getToken() : null;
+    this.wildcard = isWildcardImport ? new PyTokenImpl(astNode.getFirstChild(PythonPunctuator.MUL).getToken()) : null;
   }
 
   @Override
-  public Token fromKeyword() {
+  public PyToken fromKeyword() {
     return fromKeyword;
   }
 
@@ -68,13 +68,13 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
   }
 
   @Override
-  public Token importKeyword() {
+  public PyToken importKeyword() {
     return importKeyword;
   }
 
   @CheckForNull
   @Override
-  public List<Token> dottedPrefixForModule() {
+  public List<PyToken> dottedPrefixForModule() {
     return dottedPrefixForModule;
   }
 
@@ -90,7 +90,7 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
 
   @CheckForNull
   @Override
-  public Token wildcard() {
+  public PyToken wildcard() {
     return wildcard;
   }
 

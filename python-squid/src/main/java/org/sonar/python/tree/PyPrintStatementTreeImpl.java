@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -29,17 +29,17 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyPrintStatementTreeImpl extends PyTree implements PyPrintStatementTree {
-  private final Token printKeyword;
+  private final PyToken printKeyword;
   private final List<PyExpressionTree> expressions;
 
-  public PyPrintStatementTreeImpl(AstNode astNode, Token printKeyword, List<PyExpressionTree> expressions) {
+  public PyPrintStatementTreeImpl(AstNode astNode, PyToken printKeyword, List<PyExpressionTree> expressions) {
     super(astNode);
     this.printKeyword = printKeyword;
     this.expressions = expressions;
   }
 
   @Override
-  public Token printKeyword() {
+  public PyToken printKeyword() {
     return printKeyword;
   }
 

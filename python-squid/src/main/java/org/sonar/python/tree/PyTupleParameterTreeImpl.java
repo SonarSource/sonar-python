@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyAnyParameterTree;
@@ -31,16 +31,16 @@ import org.sonar.python.api.tree.Tree;
 public class PyTupleParameterTreeImpl extends PyTree implements PyTupleParameterTree {
 
   private final List<PyAnyParameterTree> parameters;
-  private final List<Token> commas;
+  private final List<PyToken> commas;
 
-  public PyTupleParameterTreeImpl(AstNode node, List<PyAnyParameterTree> parameters, List<Token> commas) {
+  public PyTupleParameterTreeImpl(AstNode node, List<PyAnyParameterTree> parameters, List<PyToken> commas) {
     super(node);
     this.parameters = parameters;
     this.commas = commas;
   }
 
   @Override
-  public Token openingParenthesis() {
+  public PyToken openingParenthesis() {
     return firstToken();
   }
 
@@ -50,12 +50,12 @@ public class PyTupleParameterTreeImpl extends PyTree implements PyTupleParameter
   }
 
   @Override
-  public List<Token> commas() {
+  public List<PyToken> commas() {
     return commas;
   }
 
   @Override
-  public Token closingParenthesis() {
+  public PyToken closingParenthesis() {
     return lastToken();
   }
 

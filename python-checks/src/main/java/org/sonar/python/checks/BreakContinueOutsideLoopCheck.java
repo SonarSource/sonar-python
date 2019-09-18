@@ -39,12 +39,12 @@ public class BreakContinueOutsideLoopCheck extends PythonSubscriptionCheck {
       if (currentParent.is(Tree.Kind.WHILE_STMT) || currentParent.is(Tree.Kind.FOR_STMT)) {
         return;
       } else if (currentParent.is(Tree.Kind.CLASSDEF) || currentParent.is(Tree.Kind.FUNCDEF)) {
-        ctx.addIssue(statement, String.format(MESSAGE, statement.firstToken().getValue()));
+        ctx.addIssue(statement, String.format(MESSAGE, statement.firstToken().value()));
         return;
       }
       currentParent = currentParent.parent();
     }
-    ctx.addIssue(statement, String.format(MESSAGE, statement.firstToken().getValue()));
+    ctx.addIssue(statement, String.format(MESSAGE, statement.firstToken().value()));
   };
 
   @Override

@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -33,11 +33,11 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyComprehensionIfTreeImpl extends PyTree implements PyComprehensionIfTree {
 
-  private final Token ifToken;
+  private final PyToken ifToken;
   private final PyExpressionTree condition;
   private final PyComprehensionClauseTree nestedClause;
 
-  public PyComprehensionIfTreeImpl(AstNode node, Token ifToken, PyExpressionTree condition, @Nullable PyComprehensionClauseTree nestedClause) {
+  public PyComprehensionIfTreeImpl(AstNode node, PyToken ifToken, PyExpressionTree condition, @Nullable PyComprehensionClauseTree nestedClause) {
     super(node);
     this.ifToken = ifToken;
     this.condition = condition;
@@ -45,7 +45,7 @@ public class PyComprehensionIfTreeImpl extends PyTree implements PyComprehension
   }
 
   @Override
-  public Token ifToken() {
+  public PyToken ifToken() {
     return ifToken;
   }
 

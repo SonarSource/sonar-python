@@ -19,14 +19,12 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyParenthesizedExpressionTree extends PyExpressionTree {
 
-  Token leftParenthesis();
+  PyToken leftParenthesis();
 
   PyExpressionTree expression();
 
-  Token rightParenthesis();
+  PyToken rightParenthesis();
 
 }

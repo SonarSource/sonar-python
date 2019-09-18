@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -33,14 +33,14 @@ import org.sonar.python.api.tree.Tree;
 public class PySliceItemTreeImpl extends PyTree implements PySliceItemTree {
 
   private final PyExpressionTree lowerBound;
-  private final Token boundSeparator;
+  private final PyToken boundSeparator;
   private final PyExpressionTree upperBound;
-  private final Token strideSeparator;
+  private final PyToken strideSeparator;
   private final PyExpressionTree stride;
 
   public PySliceItemTreeImpl(
-    AstNode node, @Nullable PyExpressionTree lowerBound, Token boundSeparator, @Nullable PyExpressionTree upperBound,
-    @Nullable Token strideSeparator, @Nullable PyExpressionTree stride
+    AstNode node, @Nullable PyExpressionTree lowerBound, PyToken boundSeparator, @Nullable PyExpressionTree upperBound,
+    @Nullable PyToken strideSeparator, @Nullable PyExpressionTree stride
   ) {
     super(node);
     this.lowerBound = lowerBound;
@@ -57,7 +57,7 @@ public class PySliceItemTreeImpl extends PyTree implements PySliceItemTree {
   }
 
   @Override
-  public Token boundSeparator() {
+  public PyToken boundSeparator() {
     return boundSeparator;
   }
 
@@ -69,7 +69,7 @@ public class PySliceItemTreeImpl extends PyTree implements PySliceItemTree {
 
   @CheckForNull
   @Override
-  public Token strideSeparator() {
+  public PyToken strideSeparator() {
     return strideSeparator;
   }
 

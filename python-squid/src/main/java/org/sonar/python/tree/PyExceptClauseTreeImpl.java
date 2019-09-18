@@ -19,8 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -28,18 +26,19 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExceptClauseTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree {
-  private final Token exceptKeyword;
+  private final PyToken exceptKeyword;
   private final PyStatementListTree body;
   private final PyExpressionTree exception;
-  private final Token asKeyword;
-  private final Token commaToken;
+  private final PyToken asKeyword;
+  private final PyToken commaToken;
   private final PyExpressionTree exceptionInstance;
 
-  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body) {
+  public PyExceptClauseTreeImpl(PyToken exceptKeyword, PyStatementListTree body) {
     super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;
@@ -49,18 +48,18 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
     this.exceptionInstance = null;
   }
 
-  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body,
-                                PyExpressionTree exception, @Nullable AstNode asNode, @Nullable AstNode commaNode, PyExpressionTree exceptionInstance) {
+  public PyExceptClauseTreeImpl(PyToken exceptKeyword, PyStatementListTree body,
+                                PyExpressionTree exception, @Nullable PyToken asNode, @Nullable PyToken commaNode, PyExpressionTree exceptionInstance) {
     super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;
     this.exception = exception;
-    this.asKeyword = asNode != null ? asNode.getToken() : null;
-    this.commaToken = commaNode != null ? commaNode.getToken() : null;
+    this.asKeyword = asNode;
+    this.commaToken = commaNode;
     this.exceptionInstance = exceptionInstance;
   }
 
-  public PyExceptClauseTreeImpl(Token exceptKeyword, PyStatementListTree body, PyExpressionTree exception) {
+  public PyExceptClauseTreeImpl(PyToken exceptKeyword, PyStatementListTree body, PyExpressionTree exception) {
     super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.body = body;
@@ -71,7 +70,7 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
   }
 
   @Override
-  public Token exceptKeyword() {
+  public PyToken exceptKeyword() {
     return exceptKeyword;
   }
 
@@ -82,13 +81,13 @@ public class PyExceptClauseTreeImpl extends PyTree implements PyExceptClauseTree
 
   @CheckForNull
   @Override
-  public Token asKeyword() {
+  public PyToken asKeyword() {
     return asKeyword;
   }
 
   @CheckForNull
   @Override
-  public Token commaToken() {
+  public PyToken commaToken() {
     return commaToken;
   }
 

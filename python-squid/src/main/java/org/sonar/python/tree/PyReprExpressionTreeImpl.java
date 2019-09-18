@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionListTree;
@@ -29,11 +29,11 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyReprExpressionTreeImpl extends PyTree implements PyReprExpressionTree {
-  private final Token openingBacktick;
+  private final PyToken openingBacktick;
   private final PyExpressionListTree expressionListTree;
-  private final Token closingBacktick;
+  private final PyToken closingBacktick;
 
-  public PyReprExpressionTreeImpl(AstNode astNode, Token openingBacktick, PyExpressionListTree expressionListTree, Token closingBacktick) {
+  public PyReprExpressionTreeImpl(AstNode astNode, PyToken openingBacktick, PyExpressionListTree expressionListTree, PyToken closingBacktick) {
     super(astNode);
     this.openingBacktick = openingBacktick;
     this.expressionListTree = expressionListTree;
@@ -56,7 +56,7 @@ public class PyReprExpressionTreeImpl extends PyTree implements PyReprExpression
   }
 
   @Override
-  public Token openingBacktick() {
+  public PyToken openingBacktick() {
     return openingBacktick;
   }
 
@@ -66,7 +66,7 @@ public class PyReprExpressionTreeImpl extends PyTree implements PyReprExpression
   }
 
   @Override
-  public Token closingBacktick() {
+  public PyToken closingBacktick() {
     return closingBacktick;
   }
 }

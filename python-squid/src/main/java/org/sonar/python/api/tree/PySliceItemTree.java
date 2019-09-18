@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PySliceItemTree extends Tree {
@@ -27,13 +26,13 @@ public interface PySliceItemTree extends Tree {
   @CheckForNull
   PyExpressionTree lowerBound();
 
-  Token boundSeparator();
+  PyToken boundSeparator();
 
   @CheckForNull
   PyExpressionTree upperBound();
 
   @CheckForNull
-  Token strideSeparator();
+  PyToken strideSeparator();
 
   @CheckForNull
   PyExpressionTree stride();

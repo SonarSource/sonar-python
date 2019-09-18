@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
@@ -31,20 +30,20 @@ import javax.annotation.CheckForNull;
  * </pre>
  */
 public interface PyImportFromTree extends PyImportStatementTree {
-  Token fromKeyword();
+  PyToken fromKeyword();
 
   @CheckForNull
   PyDottedNameTree module();
 
-  Token importKeyword();
+  PyToken importKeyword();
 
   @CheckForNull
-  List<Token> dottedPrefixForModule();
+  List<PyToken> dottedPrefixForModule();
 
   List<PyAliasedNameTree> importedNames();
 
   boolean isWildcardImport();
 
   @CheckForNull
-  Token wildcard();
+  PyToken wildcard();
 }

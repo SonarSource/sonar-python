@@ -19,13 +19,12 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PySliceListTree extends Tree {
 
   List<Tree> slices();
 
-  List<Token> separators();
+  List<PyToken> separators();
 
 }

@@ -19,11 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.Nullable;
 
 public interface PyAssertStatementTree extends PyStatementTree {
-  Token assertKeyword();
+  PyToken assertKeyword();
 
   PyExpressionTree condition();
 

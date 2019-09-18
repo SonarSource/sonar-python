@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,13 +33,13 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatementTree {
-  private final Token raiseKeyword;
+  private final PyToken raiseKeyword;
   private final List<PyExpressionTree> expressions;
-  private final Token fromKeyword;
+  private final PyToken fromKeyword;
   private final PyExpressionTree fromExpression;
 
-  public PyRaiseStatementTreeImpl(AstNode astNode, Token raiseKeyword, List<PyExpressionTree> expressions,
-                                  @Nullable Token fromKeyword, @Nullable PyExpressionTree fromExpression) {
+  public PyRaiseStatementTreeImpl(AstNode astNode, PyToken raiseKeyword, List<PyExpressionTree> expressions,
+                                  @Nullable PyToken fromKeyword, @Nullable PyExpressionTree fromExpression) {
     super(astNode);
     this.raiseKeyword = raiseKeyword;
     this.expressions = expressions;
@@ -48,13 +48,13 @@ public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatement
   }
 
   @Override
-  public Token raiseKeyword() {
+  public PyToken raiseKeyword() {
     return raiseKeyword;
   }
 
   @CheckForNull
   @Override
-  public Token fromKeyword() {
+  public PyToken fromKeyword() {
     return fromKeyword;
   }
 

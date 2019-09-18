@@ -20,7 +20,6 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
@@ -34,9 +33,9 @@ public interface Tree {
   @Deprecated
   AstNode astNode();
 
-  Token firstToken();
+  PyToken firstToken();
 
-  Token lastToken();
+  PyToken lastToken();
 
   Tree parent();
 
@@ -202,8 +201,8 @@ public interface Tree {
     BITWISE_COMPLEMENT(PyUnaryExpressionTree.class),
     NOT(PyUnaryExpressionTree.class),
 
-    KEY_VALUE_PAIR(PyKeyValuePairTree.class);
-
+    KEY_VALUE_PAIR(PyKeyValuePairTree.class),
+    TOKEN(PyToken.class);
     final Class<? extends Tree> associatedInterface;
 
     Kind(Class<? extends Tree> associatedInterface) {

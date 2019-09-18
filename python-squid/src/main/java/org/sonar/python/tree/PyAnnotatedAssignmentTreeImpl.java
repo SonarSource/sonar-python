@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -31,13 +31,13 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyAnnotatedAssignmentTreeImpl extends PyTree implements PyAnnotatedAssignmentTree {
   private final PyExpressionTree variable;
-  private final Token colonToken;
+  private final PyToken colonToken;
   private final PyExpressionTree annotation;
-  private final Token equalToken;
+  private final PyToken equalToken;
   private final PyExpressionTree assignedValue;
 
-  public PyAnnotatedAssignmentTreeImpl(PyExpressionTree variable, Token colonToken, PyExpressionTree annotation,
-                                       @Nullable Token equalToken, @Nullable PyExpressionTree assignedValue) {
+  public PyAnnotatedAssignmentTreeImpl(PyExpressionTree variable, PyToken colonToken, PyExpressionTree annotation,
+                                       @Nullable PyToken equalToken, @Nullable PyExpressionTree assignedValue) {
     super(variable.firstToken(), assignedValue != null ? assignedValue.lastToken() : annotation.lastToken());
     this.variable = variable;
     this.colonToken = colonToken;
@@ -52,7 +52,7 @@ public class PyAnnotatedAssignmentTreeImpl extends PyTree implements PyAnnotated
   }
 
   @Override
-  public Token colonToken() {
+  public PyToken colonToken() {
     return colonToken;
   }
 
@@ -63,7 +63,7 @@ public class PyAnnotatedAssignmentTreeImpl extends PyTree implements PyAnnotated
 
   @CheckForNull
   @Override
-  public Token equalToken() {
+  public PyToken equalToken() {
     return equalToken;
   }
 

@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Token;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyPrintStatementTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = PrintStatementUsageCheck.CHECK_KEY)
@@ -32,7 +32,7 @@ public class PrintStatementUsageCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.PRINT_STMT, ctx -> {
-      Token token = ((PyPrintStatementTree) ctx.syntaxNode()).printKeyword();
+      PyToken token = ((PyPrintStatementTree) ctx.syntaxNode()).printKeyword();
       ctx.addIssue(token, "Replace print statement by built-in function.");
     });
   }

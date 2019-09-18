@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
@@ -27,19 +26,19 @@ public interface PyFunctionDefTree extends PyStatementTree {
 
   List<PyDecoratorTree> decorators();
 
-  Token defKeyword();
+  PyToken defKeyword();
 
   @CheckForNull
-  Token asyncKeyword();
+  PyToken asyncKeyword();
 
   PyNameTree name();
 
-  Token leftPar();
+  PyToken leftPar();
 
   @CheckForNull
   PyParameterListTree parameters();
 
-  Token rightPar();
+  PyToken rightPar();
 
   /**
    * {@code -> returnType}
@@ -47,13 +46,13 @@ public interface PyFunctionDefTree extends PyStatementTree {
   @CheckForNull
   PyTypeAnnotationTree returnTypeAnnotation();
 
-  Token colon();
+  PyToken colon();
 
   PyStatementListTree body();
 
   boolean isMethodDefinition();
 
   @CheckForNull
-  Token docstring();
+  PyToken docstring();
 
 }

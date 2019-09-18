@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -31,11 +31,11 @@ import org.sonar.python.api.tree.Tree;
 public class PySliceExpressionTreeImpl extends PyTree implements PySliceExpressionTree {
 
   private final PyExpressionTree object;
-  private final Token leftBracket;
+  private final PyToken leftBracket;
   private final PySliceListTree sliceList;
-  private final Token rightBracket;
+  private final PyToken rightBracket;
 
-  public PySliceExpressionTreeImpl(PyExpressionTree object, Token leftBracket, PySliceListTree sliceList, Token rightBracket) {
+  public PySliceExpressionTreeImpl(PyExpressionTree object, PyToken leftBracket, PySliceListTree sliceList, PyToken rightBracket) {
     super(object.firstToken(), rightBracket);
     this.object = object;
     this.leftBracket = leftBracket;
@@ -49,7 +49,7 @@ public class PySliceExpressionTreeImpl extends PyTree implements PySliceExpressi
   }
 
   @Override
-  public Token leftBracket() {
+  public PyToken leftBracket() {
     return leftBracket;
   }
 
@@ -59,7 +59,7 @@ public class PySliceExpressionTreeImpl extends PyTree implements PySliceExpressi
   }
 
   @Override
-  public Token rightBracket() {
+  public PyToken rightBracket() {
     return rightBracket;
   }
 

@@ -19,11 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PyReturnStatementTree extends PyStatementTree {
-  Token returnKeyword();
+  PyToken returnKeyword();
 
   List<PyExpressionTree> expressions();
 }

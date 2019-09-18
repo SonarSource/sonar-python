@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyGlobalStatementTree;
@@ -29,17 +29,17 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyGlobalStatementTreeImpl extends PyTree implements PyGlobalStatementTree {
-  private final Token globalKeyword;
+  private final PyToken globalKeyword;
   private final List<PyNameTree> variables;
 
-  public PyGlobalStatementTreeImpl(AstNode astNode, Token globalKeyword, List<PyNameTree> variables) {
+  public PyGlobalStatementTreeImpl(AstNode astNode, PyToken globalKeyword, List<PyNameTree> variables) {
     super(astNode);
     this.globalKeyword = globalKeyword;
     this.variables = variables;
   }
 
   @Override
-  public Token globalKeyword() {
+  public PyToken globalKeyword() {
     return globalKeyword;
   }
 

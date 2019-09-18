@@ -19,13 +19,13 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Token;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyParameterTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S2733")
@@ -45,8 +45,8 @@ public class ExitHasBadArgumentsCheck extends PythonSubscriptionCheck {
       }
       PyParameterListTree parameters = funcDef.parameters();
       int arity = 0;
-      if(parameters != null) {
-        if(parameters.nonTuple().stream().anyMatch(ExitHasBadArgumentsCheck::isStarredParam)) {
+      if (parameters != null) {
+        if (parameters.nonTuple().stream().anyMatch(ExitHasBadArgumentsCheck::isStarredParam)) {
           return;
         }
         arity = parameters.all().size();
@@ -60,13 +60,13 @@ public class ExitHasBadArgumentsCheck extends PythonSubscriptionCheck {
   }
 
   private static void raiseIssue(SubscriptionContext ctx, PyFunctionDefTree tree, int argumentsNumber) {
-    if (argumentsNumber != EXIT_ARGUMENTS_NUMBER){
+    if (argumentsNumber != EXIT_ARGUMENTS_NUMBER) {
       String message = MESSAGE_ADD;
-      if (argumentsNumber > EXIT_ARGUMENTS_NUMBER){
+      if (argumentsNumber > EXIT_ARGUMENTS_NUMBER) {
         message = MESSAGE_REMOVE;
       }
       Tree funcName = tree.name();
-      Token rightParenthesis = tree.rightPar();
+      PyToken rightParenthesis = tree.rightPar();
       ctx.addIssue(funcName.firstToken(), rightParenthesis, message);
     }
   }

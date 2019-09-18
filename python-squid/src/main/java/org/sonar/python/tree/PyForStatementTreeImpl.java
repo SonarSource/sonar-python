@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,23 +35,23 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree {
 
-  private final Token forKeyword;
+  private final PyToken forKeyword;
   private final List<PyExpressionTree> expressions;
-  private final Token inKeyword;
+  private final PyToken inKeyword;
   private final List<PyExpressionTree> testExpressions;
-  private final Token colon;
+  private final PyToken colon;
   private final PyStatementListTree body;
   @Nullable
-  private final Token elseKeyword;
+  private final PyToken elseKeyword;
   @Nullable
-  private final Token elseColon;
+  private final PyToken elseColon;
   private final PyStatementListTree elseBody;
-  private final Token asyncKeyword;
+  private final PyToken asyncKeyword;
   private final boolean isAsync;
 
-  public PyForStatementTreeImpl(AstNode astNode, Token forKeyword, List<PyExpressionTree> expressions, Token inKeyword,
-                                List<PyExpressionTree> testExpressions, Token colon, PyStatementListTree body,
-                                @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable PyStatementListTree elseBody, @Nullable Token asyncKeyword) {
+  public PyForStatementTreeImpl(AstNode astNode, PyToken forKeyword, List<PyExpressionTree> expressions, PyToken inKeyword,
+                                List<PyExpressionTree> testExpressions, PyToken colon, PyStatementListTree body,
+                                @Nullable PyToken elseKeyword, @Nullable PyToken elseColon, @Nullable PyStatementListTree elseBody, @Nullable PyToken asyncKeyword) {
     super(astNode);
     this.forKeyword = forKeyword;
     this.expressions = expressions;
@@ -77,7 +77,7 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   }
 
   @Override
-  public Token forKeyword() {
+  public PyToken forKeyword() {
     return forKeyword;
   }
 
@@ -87,7 +87,7 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   }
 
   @Override
-  public Token inKeyword() {
+  public PyToken inKeyword() {
     return inKeyword;
   }
 
@@ -97,7 +97,7 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
   }
 
   @Override
-  public Token colon() {
+  public PyToken colon() {
     return colon;
   }
 
@@ -108,13 +108,13 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
 
   @CheckForNull
   @Override
-  public Token elseKeyword() {
+  public PyToken elseKeyword() {
     return elseKeyword;
   }
 
   @CheckForNull
   @Override
-  public Token elseColon() {
+  public PyToken elseColon() {
     return elseColon;
   }
 
@@ -131,7 +131,7 @@ public class PyForStatementTreeImpl extends PyTree implements PyForStatementTree
 
   @CheckForNull
   @Override
-  public Token asyncKeyword() {
+  public PyToken asyncKeyword() {
     return asyncKeyword;
   }
 

@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -37,21 +37,21 @@ import org.sonar.python.api.tree.Tree;
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   private final List<PyDecoratorTree> decorators;
-  private final Token asyncKeyword;
-  private final Token defKeyword;
+  private final PyToken asyncKeyword;
+  private final PyToken defKeyword;
   private final PyNameTree name;
-  private final Token leftPar;
+  private final PyToken leftPar;
   private final PyParameterListTree parameters;
-  private final Token rightPar;
+  private final PyToken rightPar;
   private final PyTypeAnnotationTree returnType;
-  private final Token colon;
+  private final PyToken colon;
   private final PyStatementListTree body;
   private final boolean isMethodDefinition;
-  private final Token docstring;
+  private final PyToken docstring;
 
-  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, @Nullable Token asyncKeyword, Token defKeyword, PyNameTree name,
-                               Token leftPar, @Nullable PyParameterListTree parameters, Token rightPar, @Nullable PyTypeAnnotationTree returnType,
-                               Token colon, PyStatementListTree body, boolean isMethodDefinition, @Nullable Token docstring) {
+  public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, @Nullable PyToken asyncKeyword, PyToken defKeyword, PyNameTree name,
+                               PyToken leftPar, @Nullable PyParameterListTree parameters, PyToken rightPar, @Nullable PyTypeAnnotationTree returnType,
+                               PyToken colon, PyStatementListTree body, boolean isMethodDefinition, @Nullable PyToken docstring) {
     super(astNode);
     this.decorators = decorators;
     this.asyncKeyword = asyncKeyword;
@@ -73,13 +73,13 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public Token defKeyword() {
+  public PyToken defKeyword() {
     return defKeyword;
   }
 
   @CheckForNull
   @Override
-  public Token asyncKeyword() {
+  public PyToken asyncKeyword() {
     return asyncKeyword;
   }
 
@@ -89,7 +89,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public Token leftPar() {
+  public PyToken leftPar() {
     return leftPar;
   }
 
@@ -100,7 +100,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public Token rightPar() {
+  public PyToken rightPar() {
     return rightPar;
   }
 
@@ -111,7 +111,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public Token colon() {
+  public PyToken colon() {
     return colon;
   }
 
@@ -127,7 +127,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
   @CheckForNull
   @Override
-  public Token docstring() {
+  public PyToken docstring() {
     return docstring;
   }
 

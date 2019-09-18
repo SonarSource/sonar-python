@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionListTree;
@@ -30,11 +30,11 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyListLiteralTreeImpl extends PyTree implements PyListLiteralTree {
 
-  private final Token leftBracket;
+  private final PyToken leftBracket;
   private final PyExpressionListTree elements;
-  private final Token rightBracket;
+  private final PyToken rightBracket;
 
-  public PyListLiteralTreeImpl(AstNode astNode, Token leftBracket, PyExpressionListTree elements, Token rightBracket) {
+  public PyListLiteralTreeImpl(AstNode astNode, PyToken leftBracket, PyExpressionListTree elements, PyToken rightBracket) {
     super(astNode);
     this.leftBracket = leftBracket;
     this.elements = elements;
@@ -52,7 +52,7 @@ public class PyListLiteralTreeImpl extends PyTree implements PyListLiteralTree {
   }
 
   @Override
-  public Token leftBracket() {
+  public PyToken leftBracket() {
     return leftBracket;
   }
 
@@ -62,7 +62,7 @@ public class PyListLiteralTreeImpl extends PyTree implements PyListLiteralTree {
   }
 
   @Override
-  public Token rightBracket() {
+  public PyToken rightBracket() {
     return rightBracket;
   }
 

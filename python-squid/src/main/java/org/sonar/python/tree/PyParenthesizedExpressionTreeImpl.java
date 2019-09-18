@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -29,11 +29,11 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyParenthesizedExpressionTreeImpl extends PyTree implements PyParenthesizedExpressionTree {
 
-  private final Token leftParenthesis;
+  private final PyToken leftParenthesis;
   private final PyExpressionTree expression;
-  private final Token rightParenthesis;
+  private final PyToken rightParenthesis;
 
-  public PyParenthesizedExpressionTreeImpl(Token leftParenthesis, PyExpressionTree expression, Token rightParenthesis) {
+  public PyParenthesizedExpressionTreeImpl(PyToken leftParenthesis, PyExpressionTree expression, PyToken rightParenthesis) {
     super(leftParenthesis, rightParenthesis);
     this.leftParenthesis = leftParenthesis;
     this.expression = expression;
@@ -41,7 +41,7 @@ public class PyParenthesizedExpressionTreeImpl extends PyTree implements PyParen
   }
 
   @Override
-  public Token leftParenthesis() {
+  public PyToken leftParenthesis() {
     return leftParenthesis;
   }
 
@@ -51,7 +51,7 @@ public class PyParenthesizedExpressionTreeImpl extends PyTree implements PyParen
   }
 
   @Override
-  public Token rightParenthesis() {
+  public PyToken rightParenthesis() {
     return rightParenthesis;
   }
 

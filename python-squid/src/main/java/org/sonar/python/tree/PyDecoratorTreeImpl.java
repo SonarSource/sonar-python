@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -32,23 +32,23 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
-  private final Token atToken;
+  private final PyToken atToken;
   private final PyDottedNameTree dottedName;
-  private final Token lPar;
+  private final PyToken lPar;
   private final PyArgListTree argListTree;
-  private final Token rPar;
+  private final PyToken rPar;
 
-  public PyDecoratorTreeImpl(AstNode astNode, Token atToken, PyDottedNameTree dottedName, @Nullable AstNode lPar, @Nullable PyArgListTree argListTree, @Nullable AstNode rPar) {
+  public PyDecoratorTreeImpl(AstNode astNode, PyToken atToken, PyDottedNameTree dottedName, @Nullable PyToken lPar, @Nullable PyArgListTree argListTree, @Nullable PyToken rPar) {
     super(astNode);
     this.atToken = atToken;
     this.dottedName = dottedName;
-    this.lPar = lPar != null ? lPar.getToken() : null;
+    this.lPar = lPar != null ? lPar : null;
     this.argListTree = argListTree;
-    this.rPar = rPar != null ? rPar.getToken() : null;
+    this.rPar = rPar != null ? rPar : null;
   }
 
   @Override
-  public Token atToken() {
+  public PyToken atToken() {
     return atToken;
   }
 
@@ -59,7 +59,7 @@ public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
 
   @CheckForNull
   @Override
-  public Token leftPar() {
+  public PyToken leftPar() {
     return lPar;
   }
 
@@ -71,7 +71,7 @@ public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
 
   @CheckForNull
   @Override
-  public Token rightPar() {
+  public PyToken rightPar() {
     return rPar;
   }
 

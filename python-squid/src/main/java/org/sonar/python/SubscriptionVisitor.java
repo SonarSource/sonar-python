@@ -19,7 +19,6 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +27,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.SymbolTable;
@@ -91,12 +91,12 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     }
 
     @Override
-    public PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message) {
+    public PythonCheck.PreciseIssue addIssue(PyToken token, @Nullable String message) {
       return addIssue(IssueLocation.preciseLocation(token, message));
     }
 
     @Override
-    public PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message) {
+    public PythonCheck.PreciseIssue addIssue(PyToken from, PyToken to, @Nullable String message) {
       return addIssue(IssueLocation.preciseLocation(from, to, message));
     }
 

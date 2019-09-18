@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -27,9 +27,9 @@ import org.sonar.python.api.tree.PyInExpressionTree;
 
 public class PyInExpressionTreeImpl extends PyBinaryExpressionTreeImpl implements PyInExpressionTree {
 
-  private final Token notToken;
+  private final PyToken notToken;
 
-  public PyInExpressionTreeImpl(PyExpressionTree leftOperand, @Nullable Token not, Token operator, PyExpressionTree rightOperand) {
+  public PyInExpressionTreeImpl(PyExpressionTree leftOperand, @Nullable PyToken not, PyToken operator, PyExpressionTree rightOperand) {
     super(leftOperand, operator, rightOperand);
     this.notToken = not;
   }
@@ -41,7 +41,7 @@ public class PyInExpressionTreeImpl extends PyBinaryExpressionTreeImpl implement
 
   @CheckForNull
   @Override
-  public Token notToken() {
+  public PyToken notToken() {
     return notToken;
   }
 }

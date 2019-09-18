@@ -57,7 +57,7 @@ public class TooManyLinesInFileCheck extends PythonSubscriptionCheck {
     @Override
     public void visitFileInput(PyFileInputTree fileInput) {
       if (fileInput.statements() != null) {
-        numberOfLines = fileInput.statements().tokens().get(fileInput.statements().tokens().size() - 1).getLine();
+        numberOfLines = fileInput.statements().tokens().get(fileInput.statements().tokens().size() - 1).line();
       }
     }
   }

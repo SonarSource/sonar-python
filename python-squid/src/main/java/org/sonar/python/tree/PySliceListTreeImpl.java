@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.List;
 import org.sonar.python.api.tree.PySliceListTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -29,9 +29,9 @@ import org.sonar.python.api.tree.Tree;
 public class PySliceListTreeImpl extends PyTree implements PySliceListTree {
 
   private final List<Tree> slices;
-  private final List<Token> separators;
+  private final List<PyToken> separators;
 
-  public PySliceListTreeImpl(AstNode node, List<Tree> slices, List<Token> separators) {
+  public PySliceListTreeImpl(AstNode node, List<Tree> slices, List<PyToken> separators) {
     super(node);
     this.slices = slices;
     this.separators = separators;
@@ -43,7 +43,7 @@ public class PySliceListTreeImpl extends PyTree implements PySliceListTree {
   }
 
   @Override
-  public List<Token> separators() {
+  public List<PyToken> separators() {
     return separators;
   }
 

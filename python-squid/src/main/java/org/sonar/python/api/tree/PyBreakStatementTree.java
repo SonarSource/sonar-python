@@ -19,8 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyBreakStatementTree extends PyStatementTree {
-  Token breakKeyword();
+  PyToken breakKeyword();
 }

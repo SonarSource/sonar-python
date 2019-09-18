@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.python.api.tree.PyComprehensionForTree;
@@ -31,12 +31,12 @@ import org.sonar.python.api.tree.Tree;
 public class PyDictCompExpressionTreeImpl extends PyTree implements PyDictCompExpressionTree {
 
   private final PyExpressionTree keyExpression;
-  private final Token colon;
+  private final PyToken colon;
   private final PyExpressionTree valueExpression;
   private final PyComprehensionForTree comprehensionFor;
 
-  public PyDictCompExpressionTreeImpl(Token openingBrace, PyExpressionTree keyExpression, Token colon, PyExpressionTree valueExpression,
-                                      PyComprehensionForTree compFor, Token closingBrace) {
+  public PyDictCompExpressionTreeImpl(PyToken openingBrace, PyExpressionTree keyExpression, PyToken colon, PyExpressionTree valueExpression,
+                                      PyComprehensionForTree compFor, PyToken closingBrace) {
     super(openingBrace, closingBrace);
     this.keyExpression = keyExpression;
     this.colon = colon;
@@ -50,7 +50,7 @@ public class PyDictCompExpressionTreeImpl extends PyTree implements PyDictCompEx
   }
 
   @Override
-  public Token colonToken() {
+  public PyToken colonToken() {
     return colon;
   }
 

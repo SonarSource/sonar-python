@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -29,17 +29,17 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyReturnStatementTreeImpl extends PyTree implements PyReturnStatementTree {
-  private final Token returnKeyword;
+  private final PyToken returnKeyword;
   private final List<PyExpressionTree> expressionTrees;
 
-  public PyReturnStatementTreeImpl(AstNode astNode, Token returnKeyword, List<PyExpressionTree> expressionTrees) {
+  public PyReturnStatementTreeImpl(AstNode astNode, PyToken returnKeyword, List<PyExpressionTree> expressionTrees) {
     super(astNode);
     this.returnKeyword = returnKeyword;
     this.expressionTrees = expressionTrees;
   }
 
   @Override
-  public Token returnKeyword() {
+  public PyToken returnKeyword() {
     return returnKeyword;
   }
 

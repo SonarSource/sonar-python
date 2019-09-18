@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyPassStatementTree;
@@ -28,15 +28,15 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyPassStatementTreeImpl extends PyTree implements PyPassStatementTree {
-  private final Token passKeyword;
+  private final PyToken passKeyword;
 
-  public PyPassStatementTreeImpl(AstNode astNode, Token passKeyword) {
+  public PyPassStatementTreeImpl(AstNode astNode, PyToken passKeyword) {
     super(astNode);
     this.passKeyword = passKeyword;
   }
 
   @Override
-  public Token passKeyword() {
+  public PyToken passKeyword() {
     return passKeyword;
   }
 

@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyContinueStatementTree;
@@ -28,15 +28,15 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyContinueStatementTreeImpl extends PyTree implements PyContinueStatementTree {
-  private final Token continueKeyword;
+  private final PyToken continueKeyword;
 
-  public PyContinueStatementTreeImpl(AstNode astNode, Token continueKeyword) {
+  public PyContinueStatementTreeImpl(AstNode astNode, PyToken continueKeyword) {
     super(astNode);
     this.continueKeyword = continueKeyword;
   }
 
   @Override
-  public Token continueKeyword() {
+  public PyToken continueKeyword() {
     return continueKeyword;
   }
 

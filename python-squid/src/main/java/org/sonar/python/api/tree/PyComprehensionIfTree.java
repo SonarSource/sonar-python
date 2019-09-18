@@ -19,11 +19,9 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyComprehensionIfTree extends PyComprehensionClauseTree {
 
-  Token ifToken();
+  PyToken ifToken();
 
   PyExpressionTree condition();
 

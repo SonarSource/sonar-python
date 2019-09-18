@@ -19,11 +19,9 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyStarredExpressionTree extends PyExpressionTree {
 
-  Token starToken();
+  PyToken starToken();
 
   PyExpressionTree expression();
 

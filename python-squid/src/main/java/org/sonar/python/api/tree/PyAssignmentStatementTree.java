@@ -19,13 +19,12 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PyAssignmentStatementTree extends PyStatementTree {
   PyExpressionTree assignedValue();
 
-  List<Token> equalTokens();
+  List<PyToken> equalTokens();
 
   List<PyExpressionListTree> lhsExpressions();
 }

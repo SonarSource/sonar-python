@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
@@ -27,12 +26,12 @@ public interface PyClassDefTree extends PyStatementTree {
 
   List<PyDecoratorTree> decorators();
 
-  Token classKeyword();
+  PyToken classKeyword();
 
   PyNameTree name();
 
   @CheckForNull
-  Token leftPar();
+  PyToken leftPar();
 
   /**
    * null if class is defined without args {@code class Foo:...} or {@code class Foo():...}
@@ -41,12 +40,12 @@ public interface PyClassDefTree extends PyStatementTree {
   PyArgListTree args();
 
   @CheckForNull
-  Token rightPar();
+  PyToken rightPar();
 
-  Token colon();
+  PyToken colon();
 
   PyStatementListTree body();
 
   @CheckForNull
-  Token docstring();
+  PyToken docstring();
 }

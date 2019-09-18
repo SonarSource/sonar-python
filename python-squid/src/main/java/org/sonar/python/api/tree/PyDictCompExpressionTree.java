@@ -19,13 +19,11 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyDictCompExpressionTree extends PyExpressionTree {
 
   PyExpressionTree keyExpression();
 
-  Token colonToken();
+  PyToken colonToken();
 
   PyExpressionTree valueExpression();
 

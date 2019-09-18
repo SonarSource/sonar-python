@@ -19,20 +19,19 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
 public interface PyTupleTree extends PyExpressionTree {
 
   @CheckForNull
-  Token leftParenthesis();
+  PyToken leftParenthesis();
 
   List<PyExpressionTree> elements();
 
-  List<Token> commas();
+  List<PyToken> commas();
 
   @CheckForNull
-  Token rightParenthesis();
+  PyToken rightParenthesis();
 
 }

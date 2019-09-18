@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
@@ -27,12 +26,12 @@ public interface PyWithStatementTree extends PyStatementTree {
 
   List<PyWithItemTree> withItems();
 
-  Token colon();
+  PyToken colon();
 
   PyStatementListTree statements();
 
   boolean isAsync();
 
   @CheckForNull
-  Token asyncKeyword();
+  PyToken asyncKeyword();
 }

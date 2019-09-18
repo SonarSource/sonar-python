@@ -19,15 +19,14 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import java.util.List;
 
 public interface PySetLiteralTree extends PyExpressionTree {
-  Token lCurlyBrace();
+  PyToken lCurlyBrace();
 
   List<PyExpressionTree> elements();
 
-  List<Token> commas();
+  List<PyToken> commas();
 
-  Token rCurlyBrace();
+  PyToken rCurlyBrace();
 }

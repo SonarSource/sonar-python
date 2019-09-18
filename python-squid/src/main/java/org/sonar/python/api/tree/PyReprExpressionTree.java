@@ -19,15 +19,13 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 /**
  * Python 2 only.
  */
 public interface PyReprExpressionTree extends PyExpressionTree {
-  Token openingBacktick();
+  PyToken openingBacktick();
 
   PyExpressionListTree expressionList();
 
-  Token closingBacktick();
+  PyToken closingBacktick();
 }

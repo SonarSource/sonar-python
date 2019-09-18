@@ -22,8 +22,8 @@ package org.sonar.python.tree;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAliasedNameTree;
-import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
+import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
@@ -33,6 +33,7 @@ import org.sonar.python.api.tree.PyBreakStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyComprehensionIfTree;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
@@ -58,11 +59,11 @@ import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyKeyValuePairTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNoneExpressionTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyPassStatementTree;
@@ -80,12 +81,12 @@ import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTryStatementTree;
 import org.sonar.python.api.tree.PyTupleParameterTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
-import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyUnaryExpressionTree;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.PyWithItemTree;
@@ -519,5 +520,9 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   public void visitDecorator(PyDecoratorTree pyDecoratorTree) {
     scan(pyDecoratorTree.name());
     scan(pyDecoratorTree.arguments());
+  }
+
+  public void visitToken(PyToken token) {
+    // noop
   }
 }

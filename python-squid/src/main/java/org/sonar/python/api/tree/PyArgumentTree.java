@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
 import javax.annotation.CheckForNull;
 
 public interface PyArgumentTree extends Tree {
@@ -27,13 +26,13 @@ public interface PyArgumentTree extends Tree {
   PyNameTree keywordArgument();
 
   @CheckForNull
-  Token equalToken();
+  PyToken equalToken();
 
   PyExpressionTree expression();
 
   @CheckForNull
-  Token starToken();
+  PyToken starToken();
 
   @CheckForNull
-  Token starStarToken();
+  PyToken starStarToken();
 }

@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -36,18 +36,18 @@ import org.sonar.python.api.tree.Tree;
 public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   private final List<PyDecoratorTree> decorators;
-  private final Token classKeyword;
+  private final PyToken classKeyword;
   private final PyNameTree name;
-  private final Token leftPar;
+  private final PyToken leftPar;
   private final PyArgListTree args;
-  private final Token rightPar;
-  private final Token colon;
+  private final PyToken rightPar;
+  private final PyToken colon;
   private final PyStatementListTree body;
-  private final Token docstring;
+  private final PyToken docstring;
 
-  public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, Token classKeyword, PyNameTree name,
-                            @Nullable Token leftPar, @Nullable PyArgListTree args, @Nullable Token rightPar,
-                            Token colon, PyStatementListTree body, Token docstring) {
+  public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, PyToken classKeyword, PyNameTree name,
+                            @Nullable PyToken leftPar, @Nullable PyArgListTree args, @Nullable PyToken rightPar,
+                            PyToken colon, PyStatementListTree body, PyToken docstring) {
     super(astNode);
     this.decorators = decorators;
     this.classKeyword = classKeyword;
@@ -76,7 +76,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   }
 
   @Override
-  public Token classKeyword() {
+  public PyToken classKeyword() {
     return classKeyword;
   }
 
@@ -87,7 +87,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   @CheckForNull
   @Override
-  public Token leftPar() {
+  public PyToken leftPar() {
     return leftPar;
   }
 
@@ -99,12 +99,12 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   @CheckForNull
   @Override
-  public Token rightPar() {
+  public PyToken rightPar() {
     return rightPar;
   }
 
   @Override
-  public Token colon() {
+  public PyToken colon() {
     return colon;
   }
 
@@ -115,7 +115,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   @CheckForNull
   @Override
-  public Token docstring() {
+  public PyToken docstring() {
     return docstring;
   }
 

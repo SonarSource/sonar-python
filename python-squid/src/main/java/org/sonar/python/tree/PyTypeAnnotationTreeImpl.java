@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -30,13 +30,13 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotationTree {
 
-  private final Token dash;
-  private final Token gt;
-  private final Token colonToken;
+  private final PyToken dash;
+  private final PyToken gt;
+  private final PyToken colonToken;
   private final PyExpressionTree expression;
   private final Kind kind;
 
-  public PyTypeAnnotationTreeImpl(Token colonToken, PyExpressionTree expression) {
+  public PyTypeAnnotationTreeImpl(PyToken colonToken, PyExpressionTree expression) {
     super(colonToken, expression.lastToken());
     this.colonToken = colonToken;
     this.dash = null;
@@ -45,7 +45,7 @@ public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotation
     this.kind = Kind.TYPE_ANNOTATION;
   }
 
-  public PyTypeAnnotationTreeImpl(Token dash, Token gt, PyExpressionTree expression) {
+  public PyTypeAnnotationTreeImpl(PyToken dash, PyToken gt, PyExpressionTree expression) {
     super(dash, expression.lastToken());
     this.colonToken = null;
     this.dash = dash;
@@ -56,19 +56,19 @@ public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotation
 
   @CheckForNull
   @Override
-  public Token colonToken() {
+  public PyToken colonToken() {
     return colonToken;
   }
 
   @CheckForNull
   @Override
-  public Token dash() {
+  public PyToken dash() {
     return dash;
   }
 
   @CheckForNull
   @Override
-  public Token gt() {
+  public PyToken gt() {
     return gt;
   }
 

@@ -164,4 +164,6 @@ public interface PyTreeVisitor {
   void visitEllipsis(PyEllipsisExpressionTree pyEllipsisExpressionTree);
 
   void visitDecorator(PyDecoratorTree pyDecoratorTree);
+
+  void visitToken(PyToken token);
 }

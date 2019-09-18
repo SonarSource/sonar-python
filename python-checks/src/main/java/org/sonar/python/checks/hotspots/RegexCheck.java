@@ -61,7 +61,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
 
   private void checkRegexArgument(PyArgumentTree arg, SubscriptionContext ctx) {
     Symbol argSymbol = ctx.symbolTable().getSymbol(getExpression(arg.expression()));
-    String literal = arg.firstToken().getValue();
+    String literal = arg.firstToken().value();
     IssueLocation secondaryLocation = null;
     // TODO : this cannot be migrated to strongly typed AST as long as semantic is not migrated to strongly typed AST
     if (argSymbol != null && argSymbol.writeUsages().size() == 1) {

@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyAliasedNameTree;
@@ -30,17 +30,17 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyImportNameTreeImpl extends PyTree implements PyImportNameTree {
 
-  private final Token importKeyword;
+  private final PyToken importKeyword;
   private final List<PyAliasedNameTree> aliasedNames;
 
-  public PyImportNameTreeImpl(AstNode astNode, Token importKeyword, List<PyAliasedNameTree> aliasedNames) {
+  public PyImportNameTreeImpl(AstNode astNode, PyToken importKeyword, List<PyAliasedNameTree> aliasedNames) {
     super(astNode);
     this.importKeyword = importKeyword;
     this.aliasedNames = aliasedNames;
   }
 
   @Override
-  public Token importKeyword() {
+  public PyToken importKeyword() {
     return importKeyword;
   }
 

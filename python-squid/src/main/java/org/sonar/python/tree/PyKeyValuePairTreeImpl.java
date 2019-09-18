@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -30,13 +30,13 @@ import org.sonar.python.api.tree.Tree;
 
 public class PyKeyValuePairTreeImpl extends PyTree implements PyKeyValuePairTree {
 
-  private final Token starStarToken;
+  private final PyToken starStarToken;
   private final PyExpressionTree expression;
   private final PyExpressionTree key;
-  private final Token colon;
+  private final PyToken colon;
   private final PyExpressionTree value;
 
-  public PyKeyValuePairTreeImpl(Token starStarToken, PyExpressionTree expression) {
+  public PyKeyValuePairTreeImpl(PyToken starStarToken, PyExpressionTree expression) {
     super(starStarToken, expression.lastToken());
     this.starStarToken = starStarToken;
     this.expression = expression;
@@ -45,7 +45,7 @@ public class PyKeyValuePairTreeImpl extends PyTree implements PyKeyValuePairTree
     this.value = null;
   }
 
-  public PyKeyValuePairTreeImpl(PyExpressionTree key, Token colon, PyExpressionTree value) {
+  public PyKeyValuePairTreeImpl(PyExpressionTree key, PyToken colon, PyExpressionTree value) {
     super(key.firstToken(), value.lastToken());
     this.key = key;
     this.colon = colon;
@@ -62,7 +62,7 @@ public class PyKeyValuePairTreeImpl extends PyTree implements PyKeyValuePairTree
 
   @CheckForNull
   @Override
-  public Token colon() {
+  public PyToken colon() {
     return colon;
   }
 
@@ -74,7 +74,7 @@ public class PyKeyValuePairTreeImpl extends PyTree implements PyKeyValuePairTree
 
   @CheckForNull
   @Override
-  public Token starStarToken() {
+  public PyToken starStarToken() {
     return starStarToken;
   }
 

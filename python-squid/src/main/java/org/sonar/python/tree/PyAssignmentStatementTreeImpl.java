@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,11 +32,11 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmentStatementTree {
-  private final List<Token> assignTokens;
+  private final List<PyToken> assignTokens;
   private final List<PyExpressionListTree> lhsExpressions;
   private final PyExpressionTree assignedValue;
 
-  public PyAssignmentStatementTreeImpl(AstNode astNode, List<Token> assignTokens, List<PyExpressionListTree> lhsExpressions,PyExpressionTree assignedValue) {
+  public PyAssignmentStatementTreeImpl(AstNode astNode, List<PyToken> assignTokens, List<PyExpressionListTree> lhsExpressions,PyExpressionTree assignedValue) {
     super(astNode);
     this.assignTokens = assignTokens;
     this.lhsExpressions = lhsExpressions;
@@ -49,7 +49,7 @@ public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmen
   }
 
   @Override
-  public List<Token> equalTokens() {
+  public List<PyToken> equalTokens() {
     return assignTokens;
   }
 

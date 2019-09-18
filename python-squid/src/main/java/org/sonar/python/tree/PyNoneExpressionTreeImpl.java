@@ -20,7 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
+import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.PyNoneExpressionTree;
@@ -28,15 +28,15 @@ import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class PyNoneExpressionTreeImpl extends PyTree implements PyNoneExpressionTree {
-  private final Token none;
+  private final PyToken none;
 
-  public PyNoneExpressionTreeImpl(AstNode astNode, Token none) {
+  public PyNoneExpressionTreeImpl(AstNode astNode, PyToken none) {
     super(astNode);
     this.none = none;
   }
 
   @Override
-  public Token none() {
+  public PyToken none() {
     return none;
   }
 

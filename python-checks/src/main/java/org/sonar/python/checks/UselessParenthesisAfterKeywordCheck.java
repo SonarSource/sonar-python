@@ -49,11 +49,11 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
     context.registerSyntaxNodeConsumer(Tree.Kind.DEL_STMT, ctx -> checkExpr(((PyDelStatementTree) ctx.syntaxNode()).expressions().get(0), ctx, "del"));
     context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> {
       PyIfStatementTree ifStmt = (PyIfStatementTree) ctx.syntaxNode();
-      checkExpr(ifStmt.condition(), ctx, ifStmt.keyword().getValue());
+      checkExpr(ifStmt.condition(), ctx, ifStmt.keyword().value());
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.WHILE_STMT, ctx -> {
       PyWhileStatementTree whileStmt = (PyWhileStatementTree) ctx.syntaxNode();
-      checkExpr(whileStmt.condition(), ctx, whileStmt.whileKeyword().getValue());
+      checkExpr(whileStmt.condition(), ctx, whileStmt.whileKeyword().value());
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> handleForStatement(ctx, (PyForStatementTree) ctx.syntaxNode()));
     context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ctx -> handleRaiseStatement(ctx, (PyRaiseStatementTree) ctx.syntaxNode()));
@@ -78,7 +78,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
     if (retStmt.expressions().size() == 1) {
       PyExpressionTree expr = retStmt.expressions().get(0);
       if ((expr.is(Tree.Kind.PARENTHESIZED) || (expr.is(Tree.Kind.TUPLE) && !((PyTupleTree) expr).elements().isEmpty()))
-        && expr.firstToken().getLine() == expr.lastToken().getLine()) {
+        && expr.firstToken().line() == expr.lastToken().line()) {
         ctx.addIssue(expr, String.format(MESSAGE, "return"));
       }
     }
@@ -119,7 +119,7 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
 
   private static void checkExpr(PyExpressionTree expr, SubscriptionContext ctx, String keyword, boolean raiseForTuple) {
     if ((expr.is(Tree.Kind.PARENTHESIZED) || (raiseForTuple && expr.is(Tree.Kind.TUPLE)))
-      && expr.firstToken().getLine() == expr.lastToken().getLine()) {
+      && expr.firstToken().line() == expr.lastToken().line()) {
       ctx.addIssue(expr, String.format(MESSAGE, keyword));
     }
   }

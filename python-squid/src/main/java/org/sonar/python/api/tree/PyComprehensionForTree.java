@@ -19,15 +19,13 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
-
 public interface PyComprehensionForTree extends PyComprehensionClauseTree {
 
-  Token forToken();
+  PyToken forToken();
 
   PyExpressionTree loopExpression();
 
-  Token inToken();
+  PyToken inToken();
 
   PyExpressionTree iterable();
 

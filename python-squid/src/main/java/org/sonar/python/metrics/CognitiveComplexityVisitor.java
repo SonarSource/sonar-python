@@ -19,7 +19,6 @@
  */
 package org.sonar.python.metrics;
 
-import com.sonar.sslr.api.Token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
@@ -40,6 +39,7 @@ import org.sonar.python.api.tree.PyIfStatementTree;
 import org.sonar.python.api.tree.PyReturnStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyWhileStatementTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
@@ -49,13 +49,13 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
 
   private int complexity = 0;
   private Deque<NestingLevel> nestingLevelStack = new LinkedList<>();
-  private Set<Token> alreadyConsideredOperators = new HashSet<>();
+  private Set<PyToken> alreadyConsideredOperators = new HashSet<>();
 
   @Nullable
   private final SecondaryLocationConsumer secondaryLocationConsumer;
 
   public interface SecondaryLocationConsumer {
-    void consume(Token secondaryLocation, String message);
+    void consume(PyToken secondaryLocation, String message);
   }
 
   CognitiveComplexityVisitor(@Nullable SecondaryLocationConsumer secondaryLocationConsumer) {
@@ -120,11 +120,11 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
         super.visitBinaryExpression(pyBinaryExpressionTree);
         return;
       }
-      List<Token> operators = new ArrayList<>();
+      List<PyToken> operators = new ArrayList<>();
       flattenOperators(pyBinaryExpressionTree, operators);
-      Token previous = null;
-      for (Token operator : operators) {
-        if (previous == null || !previous.getType().equals(operator.getType())) {
+      PyToken previous = null;
+      for (PyToken operator : operators) {
+        if (previous == null || !previous.type().equals(operator.type())) {
           incrementWithoutNesting(pyBinaryExpressionTree.operator());
         }
         previous = operator;
@@ -134,7 +134,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     super.visitBinaryExpression(pyBinaryExpressionTree);
   }
 
-  private static void flattenOperators(PyBinaryExpressionTree binaryExpression, List<Token> operators) {
+  private static void flattenOperators(PyBinaryExpressionTree binaryExpression, List<PyToken> operators) {
     PyExpressionTree left = binaryExpression.leftOperand();
     if (left.is(Kind.AND) || left.is(Kind.OR)) {
       flattenOperators((PyBinaryExpressionTree) left, operators);
@@ -189,15 +189,15 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     return statementListTree.parent() != null && notIncrementingNestingKinds.stream().noneMatch(kind -> statementListTree.parent().is(kind));
   }
 
-  private void incrementWithNesting(Token secondaryLocation) {
+  private void incrementWithNesting(PyToken secondaryLocation) {
     incrementComplexity(secondaryLocation, 1 + nestingLevelStack.peek().level());
   }
 
-  private void incrementWithoutNesting(Token secondaryLocation) {
+  private void incrementWithoutNesting(PyToken secondaryLocation) {
     incrementComplexity(secondaryLocation, 1);
   }
 
-  private void incrementComplexity(Token secondaryLocation, int currentNodeComplexity) {
+  private void incrementComplexity(PyToken secondaryLocation, int currentNodeComplexity) {
     if (secondaryLocationConsumer != null) {
       secondaryLocationConsumer.consume(secondaryLocation, secondaryMessage(currentNodeComplexity));
     }
