@@ -77,6 +77,32 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("x");
   }
 
+  @Test
+  public void multiple_assignment() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("multiple_assignment");
+    Set<TreeSymbol> symbols = functionTree.localVariables();
+    Map<String, TreeSymbol> symbolByName = symbols.stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    int functionStartLine = functionTree.firstToken().getLine();
+    TreeSymbol x = symbolByName.get("x");
+    assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+    TreeSymbol y = symbolByName.get("y");
+    assertThat(y.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+  }
+
+  @Test
+  public void tuple_assignment() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("tuple_assignment");
+    Set<TreeSymbol> symbols = functionTree.localVariables();
+    Map<String, TreeSymbol> symbolByName = symbols.stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    int functionStartLine = functionTree.firstToken().getLine();
+    TreeSymbol x = symbolByName.get("x");
+    assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+    TreeSymbol y = symbolByName.get("y");
+    assertThat(y.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {

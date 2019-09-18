@@ -20,3 +20,9 @@ def function_with_rebound_variable():
 
 def simple_parameter(a):
     pass
+
+def multiple_assignment():
+    x, y = (1, 2)
+
+def tuple_assignment():
+    (x, y) = (1, 2)
