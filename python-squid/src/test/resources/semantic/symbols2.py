@@ -58,3 +58,10 @@ def var_with_usages_in_decorator():
     x = 10
     @x
     def foo(): pass
+
+def function_with_unused_import():
+    import mod1
+    import mod2 as aliased_mod2
+    from mod3 import x
+    from mod3 import y as z
+

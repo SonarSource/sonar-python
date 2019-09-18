@@ -24,11 +24,13 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
@@ -40,6 +42,8 @@ import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyFunctionLikeTree;
 import org.sonar.python.api.tree.PyGlobalStatementTree;
+import org.sonar.python.api.tree.PyImportFromTree;
+import org.sonar.python.api.tree.PyImportNameTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
@@ -114,6 +118,28 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
       super.scopeRootTrees.pop();
+    }
+
+    @Override
+    public void visitImportName(PyImportNameTree pyImportNameTree) {
+      createImportedNames(pyImportNameTree.modules());
+      super.visitImportName(pyImportNameTree);
+    }
+
+    @Override
+    public void visitImportFrom(PyImportFromTree pyImportFromTree) {
+      createImportedNames(pyImportFromTree.importedNames());
+      super.visitImportFrom(pyImportFromTree);
+    }
+
+    private void createImportedNames(List<PyAliasedNameTree> importedNames) {
+      importedNames.forEach(module -> {
+        if (module.alias() != null) {
+          addUsage(module.alias());
+        } else {
+          addUsage(module.dottedName().names().get(0));
+        }
+      });
     }
 
     @Override

@@ -185,6 +185,18 @@ public class SymbolTableBuilderTreeTest {
     assertThat(x.usages()).hasSize(2);
   }
 
+  @Test
+  public void function_with_unused_import() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("function_with_unused_import");
+    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+
+    assertThat(symbolByName.keySet()).containsOnly("mod1", "aliased_mod2", "x", "z");
+    assertThat(symbolByName.get("mod1").usages()).hasSize(1);
+    assertThat(symbolByName.get("aliased_mod2").usages()).hasSize(1);
+    assertThat(symbolByName.get("x").usages()).hasSize(1);
+    assertThat(symbolByName.get("z").usages()).hasSize(1);
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
