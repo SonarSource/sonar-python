@@ -17,8 +17,8 @@ def using_locals(a, b):
   return locals()
 
 def string_interpolation():
-    value1 = 1 # Noncompliant FP
-    value2 = 2 # Noncompliant FP
+    value1 = 1
+    value2 = 2
     value3 = 3 # Noncompliant
     value4 = 4 # Noncompliant (previously FN)
     return f'{value1}, {2*value2}, value3bis, value4'
