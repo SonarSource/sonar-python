@@ -22,6 +22,8 @@ package org.sonar.python.api.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 
 public interface Tree {
@@ -212,4 +214,14 @@ public interface Tree {
   }
 
   Kind getKind();
+
+  default Stream<Tree> descendants(Kind kind) {
+    return descendants().filter(tree -> tree.is(kind));
+  }
+
+  default Stream<Tree> descendants() {
+    return children().stream()
+      .filter(Objects::nonNull)
+      .flatMap(tree -> Stream.concat(Stream.of(tree), tree.descendants()));
+  }
 }
