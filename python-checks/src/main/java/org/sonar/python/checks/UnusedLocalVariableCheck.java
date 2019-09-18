@@ -19,69 +19,43 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.semantic.TreeSymbol;
 
 @Rule(key = "S1481")
-public class UnusedLocalVariableCheck extends PythonCheckAstNode {
+public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static final Pattern IDENTIFIER_SEPARATOR = Pattern.compile("[^a-zA-Z0-9_]+");
 
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode functionTree) {
-    // https://docs.python.org/3/library/functions.html#locals
-    if (isCallingLocalsFunction(functionTree)) {
-      return;
-    }
-    Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
-    for (Symbol symbol : getContext().symbolTable().symbols(functionTree)) {
-      if (!interpolationIdentifiers.contains(symbol.name()) && !"_".equals(symbol.name())) {
-        checkSymbol(symbol);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree functionTree = (PyFunctionDefTree) ctx.syntaxNode();
+      // https://docs.python.org/3/library/functions.html#locals
+      if (isCallingLocalsFunction(functionTree)) {
+        return;
       }
-    }
-  }
-
-  private static boolean isCallingLocalsFunction(AstNode functionTree) {
-    return functionTree
-      .getDescendants(PythonGrammar.NAME)
-      .stream()
-      .anyMatch(node -> "locals".equals(node.getTokenValue()));
-  }
-
-  private static Set<String> extractStringInterpolationIdentifiers(AstNode functionTree) {
-    return functionTree.getTokens().stream()
-      .filter(CheckUtils::isStringInterpolation)
-      .map(Token::getOriginalValue)
-      .map(CheckUtils::stringLiteralContent)
-      .map(IDENTIFIER_SEPARATOR::split)
-      .flatMap(Arrays::stream)
-      .collect(Collectors.toSet());
-  }
-
-  private void checkSymbol(Symbol symbol) {
-    if (symbol.readUsages().isEmpty()) {
-      for (AstNode writeUsage : symbol.writeUsages()) {
-        if (!writeUsage.hasAncestor(PythonGrammar.TYPEDARGSLIST)) {
-          addIssue(writeUsage, String.format(MESSAGE, symbol.name()));
+      for (TreeSymbol symbol : functionTree.localVariables()) {
+        if (!"_".equals(symbol.name()) && symbol.usages().size() == 1) {
+          symbol.usages().forEach(usage -> ctx.addIssue(usage, String.format(MESSAGE, symbol.name())));
         }
       }
-    }
+    });
+  }
+
+  private static boolean isCallingLocalsFunction(PyFunctionDefTree functionTree) {
+    return functionTree
+      .descendants(Kind.CALL_EXPR)
+      .map(PyCallExpressionTree.class::cast)
+      .map(PyCallExpressionTree::callee)
+      .anyMatch(callee -> callee.is(Kind.NAME) && "locals".equals(((PyNameTree) callee).name()));
   }
 }

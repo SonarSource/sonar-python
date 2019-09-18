@@ -26,6 +26,7 @@ import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.semantic.SymbolTable;
+import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.SymbolTableBuilderVisitor;
 
 public class PythonVisitorContext {
@@ -45,6 +46,7 @@ public class PythonVisitorContext {
     this.parsingException = null;
     SymbolTableBuilderVisitor symbolTableBuilderVisitor = new SymbolTableBuilderVisitor();
     symbolTableBuilderVisitor.scanFile(this);
+    new SymbolTableBuilder().visitFileInput(rootTree);
     symbolTable = symbolTableBuilderVisitor.symbolTable();
   }
 
