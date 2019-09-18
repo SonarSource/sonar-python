@@ -140,6 +140,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
     return symbols;
   }
 
+  @Override
   public void addLocalVariableSymbol(TreeSymbol symbol) {
     symbols.add(symbol);
   }

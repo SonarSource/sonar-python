@@ -34,14 +34,16 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyFunctionLikeTree;
 import org.sonar.python.api.tree.PyGlobalStatementTree;
+import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
+import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
-import org.sonar.python.tree.PyFunctionDefTreeImpl;
 
 public class SymbolTableBuilder extends BaseTreeVisitor {
 
@@ -53,11 +55,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     pyFileInputTree.accept(new FirstPhaseVisitor());
     pyFileInputTree.accept(new SecondPhaseVisitor());
     scopesByRootTree.values().stream()
-      .filter(scope -> scope.rootTree.is(Kind.FUNCDEF))
+      .filter(scope -> scope.rootTree instanceof PyFunctionLikeTree)
       .forEach(scope -> {
-        PyFunctionDefTree funcDef = (PyFunctionDefTree) scope.rootTree;
+        PyFunctionLikeTree funcDef = (PyFunctionLikeTree) scope.rootTree;
         for (TreeSymbol symbol : scope.symbols()) {
-          ((PyFunctionDefTreeImpl) funcDef).addLocalVariableSymbol(symbol);
+          funcDef.addLocalVariableSymbol(symbol);
         }
       });
   }
@@ -65,19 +67,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private static class ScopeVisitor extends BaseTreeVisitor {
 
     private Deque<Tree> scopeRootTrees = new LinkedList<>();
-
-    @Override
-    public void visitFileInput(PyFileInputTree tree) {
-      enterScope(tree);
-      super.visitFileInput(tree);
-    }
-
-    @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
-      enterScope(pyFunctionDefTree);
-      super.visitFunctionDef(pyFunctionDefTree);
-      scopeRootTrees.pop();
-    }
 
     Tree currentScopeRootTree() {
       return scopeRootTrees.peek();
@@ -93,13 +82,39 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitFileInput(PyFileInputTree tree) {
       createScope(tree, null);
+      enterScope(tree);
       super.visitFileInput(tree);
+    }
+
+    @Override
+    public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
+      createScope(pyLambdaExpressionTree, currentScope());
+      enterScope(pyLambdaExpressionTree);
+      createParameters(pyLambdaExpressionTree.parameters());
+      super.visitLambda(pyLambdaExpressionTree);
+      super.scopeRootTrees.pop();
+    }
+
+    private void createParameters(@Nullable PyParameterListTree parameterList) {
+      if (parameterList == null) {
+        return;
+      }
+      parameterList.nonTuple().forEach(param -> addUsage(param.name()));
+      parameterList.all().stream()
+        .filter(param -> param.is(Kind.TUPLE))
+        .flatMap(param -> ((PyTupleTree) param).elements().stream())
+        .filter(param -> param.is(Kind.NAME))
+        .map(PyNameTree.class::cast)
+        .forEach(this::addUsage);
     }
 
     @Override
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
       createScope(pyFunctionDefTree, currentScope());
+      enterScope(pyFunctionDefTree);
+      createParameters(pyFunctionDefTree.parameters());
       super.visitFunctionDef(pyFunctionDefTree);
+      super.scopeRootTrees.pop();
     }
 
     @Override
@@ -238,6 +253,26 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
    * since a read usage may appear in the syntax tree "before" it's declared (written).
    */
   private class SecondPhaseVisitor extends ScopeVisitor {
+
+    @Override
+    public void visitFileInput(PyFileInputTree tree) {
+      enterScope(tree);
+      super.visitFileInput(tree);
+    }
+
+    @Override
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      enterScope(pyFunctionDefTree);
+      super.visitFunctionDef(pyFunctionDefTree);
+      super.scopeRootTrees.pop();
+    }
+
+    @Override
+    public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
+      enterScope(pyLambdaExpressionTree);
+      super.visitLambda(pyLambdaExpressionTree);
+      super.scopeRootTrees.pop();
+    }
 
     @Override
     public void visitName(PyNameTree pyNameTree) {

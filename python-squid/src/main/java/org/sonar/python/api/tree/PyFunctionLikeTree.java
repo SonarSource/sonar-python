@@ -19,13 +19,15 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.Token;
+import java.util.Set;
+import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.TreeSymbol;
 
-public interface PyLambdaExpressionTree extends PyExpressionTree, PyFunctionLikeTree {
-  Token lambdaKeyword();
+public interface PyFunctionLikeTree extends Tree {
+  @CheckForNull
+  PyParameterListTree parameters();
 
-  Token colonToken();
+  Set<TreeSymbol> localVariables();
 
-  PyExpressionTree expression();
-
+  void addLocalVariableSymbol(TreeSymbol symbol);
 }
