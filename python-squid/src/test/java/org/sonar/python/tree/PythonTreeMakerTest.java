@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
@@ -128,13 +129,20 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void descendants() {
+  public void descendants_and_ancestors() {
     PyFileInputTree pyTree = parse("def foo(): pass\ndef bar(): pass", treeMaker::fileInput);
     assertThat(pyTree.descendants().count()).isEqualTo(9);
     assertThat(pyTree.descendants(Tree.Kind.STATEMENT_LIST).count()).isEqualTo(3);
     assertThat(pyTree.descendants(Tree.Kind.FUNCDEF).count()).isEqualTo(2);
     assertThat(pyTree.descendants(Tree.Kind.NAME).count()).isEqualTo(2);
     assertThat(pyTree.descendants(Tree.Kind.PASS_STMT).count()).isEqualTo(2);
+
+    PyFunctionDefTree functionDef = (PyFunctionDefTree) pyTree.descendants(Tree.Kind.FUNCDEF).collect(Collectors.toList()).get(0);
+    assertThat(functionDef.ancestors()).extracting(Tree::getKind).containsExactly(Tree.Kind.STATEMENT_LIST, Tree.Kind.FILE_INPUT);
+
+    PyPassStatementTree passStmt = (PyPassStatementTree) pyTree.descendants(Tree.Kind.PASS_STMT).collect(Collectors.toList()).get(0);
+    assertThat(passStmt.ancestors()).extracting(Tree::getKind).containsExactly(
+      Tree.Kind.STATEMENT_LIST, Tree.Kind.FUNCDEF, Tree.Kind.STATEMENT_LIST, Tree.Kind.FILE_INPUT);
   }
 
   @Test

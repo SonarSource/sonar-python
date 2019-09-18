@@ -29,6 +29,8 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionListTree;
+import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyStringElementTree;
@@ -54,14 +56,21 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       }
       Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
       for (TreeSymbol symbol : functionTree.localVariables()) {
-        List<Tree> usages = symbol.usages().stream()
-          .filter(tree -> !tree.parent().is(Kind.PARAMETER))
-          .collect(Collectors.toList());
-        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && usages.size() == 1) {
-          symbol.usages().forEach(usage -> ctx.addIssue(usage, String.format(MESSAGE, symbol.name())));
+        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && symbol.usages().size() == 1) {
+          symbol.usages().stream()
+            .filter(tree -> tree.parent() == null || !tree.parent().is(Kind.PARAMETER))
+            .filter(tree -> !isTupleDeclaration(tree))
+            .forEach(usage -> ctx.addIssue(usage, String.format(MESSAGE, symbol.name())));
         }
       }
     });
+  }
+
+  private static boolean isTupleDeclaration(Tree tree) {
+    return tree.ancestors().stream()
+      .anyMatch(t -> t.is(Kind.TUPLE)
+        || (t.is(Kind.EXPRESSION_LIST) && ((PyExpressionListTree) t).expressions().size() > 1)
+        || t.is(Kind.FOR_STMT) && ((PyForStatementTree) t).expressions().size() > 1 && ((PyForStatementTree) t).expressions().contains(tree));
   }
 
   private static boolean isCallingLocalsFunction(PyFunctionDefTree functionTree) {

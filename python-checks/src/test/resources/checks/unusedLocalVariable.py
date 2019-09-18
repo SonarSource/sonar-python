@@ -33,10 +33,13 @@ def function_with_lambdas():
 #             ^
 
 def using_tuples():
-    x, y = (1, 2) # Noncompliant {{Remove the unused local variable "y".}} previously FN
+    x, y = (1, 2)
     print x
-    (a, b) = (1, 2) # Noncompliant {{Remove the unused local variable "a".}} previously FN
+    (a, b) = (1, 2)
     print b
+
+    for name, b in self.builders.items():
+        pass
 
 def for_loops():
     for _ in range(10):
