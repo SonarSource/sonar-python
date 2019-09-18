@@ -26,3 +26,13 @@ def multiple_assignment():
 
 def tuple_assignment():
     (x, y) = (1, 2)
+
+global_var = 1
+
+def function_with_global_var():
+    global global_var
+    global_var = 10
+
+def function_with_nonlocal_var():
+    nonlocal non_local_var
+    non_local_var = 10
