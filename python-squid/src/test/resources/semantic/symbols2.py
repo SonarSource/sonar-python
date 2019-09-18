@@ -42,3 +42,10 @@ def function_with_lambdas():
     foo((lambda x: x*x))
     y = 42
     foo((lambda z: z*y))
+
+def function_with_loops():
+    for x in [1,2,3]:
+        pass;
+
+def function_with_comprehension():
+    [2 for a in range(3)]

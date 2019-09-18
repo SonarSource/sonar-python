@@ -32,7 +32,9 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
+import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyFunctionLikeTree;
 import org.sonar.python.api.tree.PyGlobalStatementTree;
@@ -95,6 +97,37 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       super.scopeRootTrees.pop();
     }
 
+    @Override
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      createScope(pyFunctionDefTree, currentScope());
+      enterScope(pyFunctionDefTree);
+      createParameters(pyFunctionDefTree.parameters());
+      super.visitFunctionDef(pyFunctionDefTree);
+      super.scopeRootTrees.pop();
+    }
+
+    @Override
+    public void visitForStatement(PyForStatementTree pyForStatementTree) {
+      createLoopVariables(pyForStatementTree);
+      super.visitForStatement(pyForStatementTree);
+    }
+
+    @Override
+    public void visitComprehensionFor(PyComprehensionForTree tree) {
+      if (tree.loopExpression().is(Tree.Kind.NAME)) {
+        addUsage((PyNameTree) tree.loopExpression());
+      }
+      super.visitComprehensionFor(tree);
+    }
+
+    private void createLoopVariables(PyForStatementTree loopTree) {
+      loopTree.expressions().forEach(expr -> {
+        if (expr.is(Tree.Kind.NAME)) {
+          addUsage((PyNameTree) expr);
+        }
+      });
+    }
+
     private void createParameters(@Nullable PyParameterListTree parameterList) {
       if (parameterList == null) {
         return;
@@ -106,15 +139,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         .filter(param -> param.is(Kind.NAME))
         .map(PyNameTree.class::cast)
         .forEach(this::addUsage);
-    }
-
-    @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
-      createScope(pyFunctionDefTree, currentScope());
-      enterScope(pyFunctionDefTree);
-      createParameters(pyFunctionDefTree.parameters());
-      super.visitFunctionDef(pyFunctionDefTree);
-      super.scopeRootTrees.pop();
     }
 
     @Override
