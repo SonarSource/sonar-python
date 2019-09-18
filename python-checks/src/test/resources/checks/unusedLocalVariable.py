@@ -2,7 +2,7 @@ unread_global = 1
 
 def f(unread_param):
     global unread_global
-    unread_global = 1 # Noncompliant FP
+    unread_global = 1
     unread_local = 1 # FN (more than 1 write)
     unread_local = 2 # FN (more than 1 write)
     read_local = 1

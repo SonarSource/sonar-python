@@ -43,8 +43,6 @@ public class SymbolTableBuilderTreeTest {
   public static void init() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/symbols2.py"));
     PyFileInputTree fileInput = context.rootTree();
-    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder();
-    symbolTableBuilder.visitFileInput(context.rootTree());
     fileInput.accept(new TestVisitor());
   }
 
@@ -101,6 +99,18 @@ public class SymbolTableBuilderTreeTest {
     assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
     TreeSymbol y = symbolByName.get("y");
     assertThat(y.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+  }
+
+  @Test
+  public void function_with_global_var() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("function_with_global_var");
+    assertThat(functionTree.localVariables()).isEmpty();
+  }
+
+  @Test
+  public void function_with_nonlocal_var() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("function_with_nonlocal_var");
+    assertThat(functionTree.localVariables()).isEmpty();
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

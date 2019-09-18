@@ -34,7 +34,9 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyGlobalStatementTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
@@ -127,6 +129,22 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       super.visitCompoundAssignment(pyCompoundAssignmentStatementTree);
     }
 
+    @Override
+    public void visitGlobalStatement(PyGlobalStatementTree pyGlobalStatementTree) {
+      pyGlobalStatementTree.variables().stream()
+        .map(PyNameTree::name)
+        .forEach(name -> currentScope().addGlobalName(name));
+      super.visitGlobalStatement(pyGlobalStatementTree);
+    }
+
+    @Override
+    public void visitNonlocalStatement(PyNonlocalStatementTree pyNonlocalStatementTree) {
+      pyNonlocalStatementTree.variables().stream()
+        .map(PyNameTree::name)
+        .forEach(name -> currentScope().addNonLocalName(name));
+      super.visitNonlocalStatement(pyNonlocalStatementTree);
+    }
+
     private void createScope(Tree tree, @Nullable Scope parent) {
       scopesByRootTree.put(tree, new Scope(parent, tree));
     }
@@ -147,6 +165,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private final Scope parent;
     private final Map<String, TreeSymbol> symbolsByName = new HashMap<>();
     private final Set<TreeSymbol> symbols = new HashSet<>();
+    private final Set<String> globalNames = new HashSet<>();
+    private final Set<String> nonlocalNames = new HashSet<>();
 
     private Scope(@Nullable Scope parent, Tree rootTree) {
       this.parent = parent;
@@ -159,7 +179,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     void addUsage(PyNameTree nameTree) {
       String symbolName = nameTree.name();
-      if (!symbolsByName.containsKey(symbolName)) {
+      if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
         SymbolImpl symbol = new SymbolImpl(symbolName);
         symbols.add(symbol);
         symbolsByName.put(symbolName, symbol);
@@ -177,6 +197,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         return (SymbolImpl) symbol;
       }
       return parent.resolve(symbolName);
+    }
+
+    void addGlobalName(String name) {
+      globalNames.add(name);
+    }
+
+    void addNonLocalName(String name) {
+      nonlocalNames.add(name);
     }
   }
 
