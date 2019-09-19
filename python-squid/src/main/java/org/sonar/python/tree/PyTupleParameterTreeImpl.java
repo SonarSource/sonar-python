@@ -20,10 +20,12 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyAnyParameterTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTupleParameterTree;
 import org.sonar.python.api.tree.Tree;
@@ -66,7 +68,7 @@ public class PyTupleParameterTreeImpl extends PyTree implements PyTupleParameter
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(parameters);
+    return Stream.of(parameters, commas).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

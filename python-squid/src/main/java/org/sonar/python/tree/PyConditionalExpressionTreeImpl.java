@@ -20,11 +20,13 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyConditionalExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -77,7 +79,7 @@ public class PyConditionalExpressionTreeImpl extends PyTree implements PyConditi
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(condition, trueExpression, falseExpression);
+    return Stream.of(ifToken, condition, trueExpression, elseToken, falseExpression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

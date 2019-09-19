@@ -19,12 +19,14 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyKeyValuePairTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -91,7 +93,7 @@ public class PyKeyValuePairTreeImpl extends PyTree implements PyKeyValuePairTree
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(expression, key, value);
+    return Stream.of(expression, key, colon, value, starStarToken).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

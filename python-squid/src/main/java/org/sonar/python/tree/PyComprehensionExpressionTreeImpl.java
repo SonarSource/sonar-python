@@ -19,12 +19,14 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.sonar.python.api.tree.PyComprehensionExpressionTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyComprehensionExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -59,7 +61,7 @@ public class PyComprehensionExpressionTreeImpl extends PyTree implements PyCompr
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(resultExpression, comprehensionFor);
+    return Stream.of(resultExpression, comprehensionFor).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

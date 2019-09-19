@@ -20,11 +20,14 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyDelStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -60,6 +63,6 @@ public class PyDelStatementTreeImpl extends PyTree implements PyDelStatementTree
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(expressionTrees);
+    return Stream.of(Collections.singletonList(delKeyword), expressionTrees).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

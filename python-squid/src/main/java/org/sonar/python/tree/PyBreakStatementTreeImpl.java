@@ -52,6 +52,6 @@ public class PyBreakStatementTreeImpl extends PyTree implements PyBreakStatement
 
   @Override
   public List<Tree> children() {
-    return Collections.emptyList();
+    return Collections.singletonList(breakKeyword);
   }
 }

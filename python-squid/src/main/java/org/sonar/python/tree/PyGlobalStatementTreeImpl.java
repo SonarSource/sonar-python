@@ -20,11 +20,14 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyGlobalStatementTree;
 import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -60,6 +63,6 @@ public class PyGlobalStatementTreeImpl extends PyTree implements PyGlobalStateme
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(variables);
+    return Stream.of(Collections.singletonList(globalKeyword), variables).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

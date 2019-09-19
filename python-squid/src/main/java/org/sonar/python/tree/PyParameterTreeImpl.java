@@ -20,14 +20,15 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyParameterTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
@@ -91,6 +92,6 @@ public class PyParameterTreeImpl extends PyTree implements PyParameterTree {
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(name, annotation, defaultValue);
+    return Stream.of(name, annotation, equalToken, defaultValue, starToken).collect(Collectors.toList());
   }
 }

@@ -19,11 +19,12 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -62,7 +63,7 @@ public class PyParenthesizedExpressionTreeImpl extends PyTree implements PyParen
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(expression);
+    return Stream.of(leftParenthesis, expression, rightParenthesis).collect(Collectors.toList());
   }
 
   @Override

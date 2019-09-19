@@ -20,11 +20,13 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -62,7 +64,7 @@ public class PyCompoundAssignmentStatementTreeImpl extends PyTree implements PyC
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(lhsExpression, rhsExpression);
+    return Stream.of(lhsExpression, augAssignToken, rhsExpression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

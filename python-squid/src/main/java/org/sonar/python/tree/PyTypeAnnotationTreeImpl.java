@@ -19,11 +19,13 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
@@ -84,7 +86,7 @@ public class PyTypeAnnotationTreeImpl extends PyTree implements PyTypeAnnotation
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(expression);
+    return Stream.of(dash, gt, colonToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Objects;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
@@ -91,7 +92,7 @@ public class PyTryStatementTreeImpl extends PyTree implements PyTryStatementTree
 
   @Override
   public List<Tree> children() {
-    return Stream.of(exceptClauses, Arrays.asList(tryBody, finallyClause, elseStatement))
-      .flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(Arrays.asList(tryKeyword, tryBody), exceptClauses, Arrays.asList(finallyClause, elseStatement))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

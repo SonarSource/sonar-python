@@ -52,6 +52,6 @@ public class PyContinueStatementTreeImpl extends PyTree implements PyContinueSta
 
   @Override
   public List<Tree> children() {
-    return Collections.emptyList();
+    return Collections.singletonList(continueKeyword);
   }
 }

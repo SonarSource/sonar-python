@@ -52,6 +52,6 @@ public class PyPassStatementTreeImpl extends PyTree implements PyPassStatementTr
 
   @Override
   public List<Tree> children() {
-    return Collections.emptyList();
+    return Collections.singletonList(passKeyword);
   }
 }

@@ -20,6 +20,9 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
@@ -74,7 +77,8 @@ public class PyTupleTreeImpl extends PyTree implements PyTupleTree {
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(elements);
+    return Stream.of(Collections.singletonList(leftParenthesis), elements, commas, Collections.singletonList(rightParenthesis))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override
