@@ -61,6 +61,10 @@ public abstract class IssueLocation {
     return new PreciseIssueLocation(token, message);
   }
 
+  public static IssueLocation preciseLocation(Token from, Token to, @Nullable String message) {
+    return new PreciseIssueLocation(from, to, message);
+  }
+
   @CheckForNull
   public String message() {
     return message;
