@@ -57,11 +57,14 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("a", "t2");
     TreeSymbol a = symbolByName.get("a");
     int functionStartLine = functionTree.firstToken().getLine();
-    assertThat(a.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(
+    assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().getLine()).containsOnly(
       functionStartLine + 1, functionStartLine + 2, functionStartLine + 3, functionStartLine + 4);
+    assertThat(a.usages()).extracting(Usage::kind).containsOnly(
+      Usage.Kind.ASSIGNMENT, Usage.Kind.COMPOUND_ASSIGNMENT, Usage.Kind.ASSIGNMENT, Usage.Kind.OTHER);
     TreeSymbol t2 = symbolByName.get("t2");
-    assertThat(t2.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(
+    assertThat(t2.usages()).extracting(usage -> usage.tree().firstToken().getLine()).containsOnly(
       functionStartLine + 5);
+    assertThat(t2.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT);
   }
 
   @Test
@@ -93,9 +96,11 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     int functionStartLine = functionTree.firstToken().getLine();
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT);
     TreeSymbol y = symbolByName.get("y");
-    assertThat(y.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT);
   }
 
   @Test
@@ -106,9 +111,11 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     int functionStartLine = functionTree.firstToken().getLine();
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT);
     TreeSymbol y = symbolByName.get("y");
-    assertThat(y.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT);
   }
 
   @Test
@@ -156,7 +163,7 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.keySet()).containsOnly("x");
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).hasSize(1);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
   }
 
   @Test
@@ -166,7 +173,7 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.keySet()).containsOnly("a");
     TreeSymbol a = symbolByName.get("a");
-    assertThat(a.usages()).hasSize(1);
+    assertThat(a.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.COMP_DECLARATION);
   }
 
   @Test
@@ -182,7 +189,7 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.keySet()).containsOnly("x");
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).hasSize(2);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT, Usage.Kind.OTHER);
   }
 
   @Test
@@ -191,10 +198,11 @@ public class SymbolTableBuilderTreeTest {
     Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
 
     assertThat(symbolByName.keySet()).containsOnly("mod1", "aliased_mod2", "x", "z");
-    assertThat(symbolByName.get("mod1").usages()).hasSize(1);
-    assertThat(symbolByName.get("aliased_mod2").usages()).hasSize(1);
-    assertThat(symbolByName.get("x").usages()).hasSize(1);
-    assertThat(symbolByName.get("z").usages()).hasSize(1);
+    assertThat(symbolByName.get("mod1").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+    assertThat(symbolByName.get("aliased_mod2").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+
+    assertThat(symbolByName.get("x").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+    assertThat(symbolByName.get("z").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

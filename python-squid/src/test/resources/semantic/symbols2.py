@@ -65,3 +65,5 @@ def function_with_unused_import():
     from mod3 import x
     from mod3 import y as z
 
+def binding_usages(param):
+    pass

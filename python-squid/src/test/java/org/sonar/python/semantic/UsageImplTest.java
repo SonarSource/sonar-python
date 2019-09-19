@@ -19,11 +19,30 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.List;
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.sonar.python.api.tree.Tree;
 
-public interface TreeSymbol {
+import static org.assertj.core.api.Assertions.assertThat;
 
-  String name();
 
-  List<Usage> usages();
+public class UsageImplTest {
+
+  @Test
+  public void binding_usages() {
+    assertBindingUsage(Usage.Kind.ASSIGNMENT, true);
+    assertBindingUsage(Usage.Kind.COMPOUND_ASSIGNMENT, true);
+    assertBindingUsage(Usage.Kind.IMPORT, true);
+    assertBindingUsage(Usage.Kind.LOOP_DECLARATION, true);
+    assertBindingUsage(Usage.Kind.COMP_DECLARATION, true);
+    assertBindingUsage(Usage.Kind.PARAMETER, true);
+    assertBindingUsage(Usage.Kind.OTHER, false);
+  }
+
+  private static void assertBindingUsage(Usage.Kind kind, boolean isBinding) {
+    Tree mockTree = Mockito.mock(Tree.class);
+    UsageImpl usage = new UsageImpl(mockTree, kind);
+    assertThat(usage.kind()).isEqualTo(kind);
+    assertThat(usage.isBindingUsage()).isEqualTo(isBinding);
+  }
 }

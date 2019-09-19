@@ -19,11 +19,25 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.List;
+import org.sonar.python.api.tree.Tree;
 
-public interface TreeSymbol {
+public interface Usage {
 
-  String name();
+  default boolean isBindingUsage() {
+    return kind() != Kind.OTHER;
+  }
 
-  List<Usage> usages();
+  Tree tree();
+
+  Kind kind();
+
+  enum Kind {
+    ASSIGNMENT,
+    COMPOUND_ASSIGNMENT,
+    IMPORT,
+    LOOP_DECLARATION,
+    COMP_DECLARATION,
+    OTHER,
+    PARAMETER
+  }
 }
