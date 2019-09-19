@@ -68,7 +68,9 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean hasOnlyBindingUsages(TreeSymbol symbol) {
-    return symbol.usages().stream().allMatch(Usage::isBindingUsage);
+    List<Usage> usages = symbol.usages();
+    return usages.stream().noneMatch(usage -> usage.kind() == Usage.Kind.IMPORT)
+      && usages.stream().allMatch(Usage::isBindingUsage);
   }
 
   private static boolean isTupleDeclaration(Tree tree) {
