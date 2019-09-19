@@ -38,6 +38,7 @@ import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S1481")
 public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
@@ -56,7 +57,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       }
       Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
       for (TreeSymbol symbol : functionTree.localVariables()) {
-        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && symbol.usages().size() == 1) {
+        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && hasOnlyBindingUsages(symbol)) {
           symbol.usages().stream()
             .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
             .filter(usage -> !isTupleDeclaration(usage.tree()))
@@ -64,6 +65,10 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         }
       }
     });
+  }
+
+  private static boolean hasOnlyBindingUsages(TreeSymbol symbol) {
+    return symbol.usages().stream().allMatch(Usage::isBindingUsage);
   }
 
   private static boolean isTupleDeclaration(Tree tree) {
