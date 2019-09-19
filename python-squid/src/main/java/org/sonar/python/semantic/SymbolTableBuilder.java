@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -146,9 +147,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void createImportedNames(List<PyAliasedNameTree> importedNames) {
       importedNames.forEach(module -> {
         if (module.alias() != null) {
-          addBindingUsage(module.alias());
+          addBindingUsage(module.alias(), Usage.Kind.IMPORT);
         } else {
-          addBindingUsage(module.dottedName().names().get(0));
+          addBindingUsage(module.dottedName().names().get(0), Usage.Kind.IMPORT);
         }
       });
     }
@@ -162,7 +163,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitComprehensionFor(PyComprehensionForTree tree) {
       if (tree.loopExpression().is(Tree.Kind.NAME)) {
-        addBindingUsage((PyNameTree) tree.loopExpression());
+        addBindingUsage((PyNameTree) tree.loopExpression(), Usage.Kind.COMP_DECLARATION);
       }
       super.visitComprehensionFor(tree);
     }
@@ -170,7 +171,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void createLoopVariables(PyForStatementTree loopTree) {
       loopTree.expressions().forEach(expr -> {
         if (expr.is(Tree.Kind.NAME)) {
-          addBindingUsage((PyNameTree) expr);
+          addBindingUsage((PyNameTree) expr, Usage.Kind.LOOP_DECLARATION);
         }
       });
     }
@@ -179,13 +180,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (parameterList == null) {
         return;
       }
-      parameterList.nonTuple().forEach(param -> addBindingUsage(param.name()));
+      parameterList.nonTuple().forEach(param -> addBindingUsage(param.name(), Usage.Kind.PARAMETER));
       parameterList.all().stream()
         .filter(param -> param.is(Kind.TUPLE))
         .flatMap(param -> ((PyTupleTree) param).elements().stream())
         .filter(param -> param.is(Kind.NAME))
         .map(PyNameTree.class::cast)
-        .forEach(this::addBindingUsage);
+        .forEach(name -> addBindingUsage(name, Usage.Kind.PARAMETER));
     }
 
     @Override
@@ -195,14 +196,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         .flatMap(expr -> expr.is(Kind.TUPLE) ? ((PyTupleTree) expr).elements().stream() : Stream.of(expr))
         .filter(expr -> expr.is(Kind.NAME))
         .map(PyNameTree.class::cast)
-        .forEach(this::addBindingUsage);
+        .forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS));
       super.visitAssignmentStatement(pyAssignmentStatementTree);
     }
 
     @Override
     public void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree) {
       if (pyAnnotatedAssignmentTree.variable().is(Kind.NAME)) {
-        addBindingUsage((PyNameTree) pyAnnotatedAssignmentTree.variable());
+        addBindingUsage((PyNameTree) pyAnnotatedAssignmentTree.variable(), Usage.Kind.ASSIGNMENT_LHS);
       }
       super.visitAnnotatedAssignment(pyAnnotatedAssignmentTree);
     }
@@ -210,7 +211,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree) {
       if (pyCompoundAssignmentStatementTree.lhsExpression().is(Kind.NAME)) {
-        addBindingUsage((PyNameTree) pyCompoundAssignmentStatementTree.lhsExpression());
+        addBindingUsage((PyNameTree) pyCompoundAssignmentStatementTree.lhsExpression(), Usage.Kind.COMPOUND_ASSIGNMENT_LHS);
       }
       super.visitCompoundAssignment(pyCompoundAssignmentStatementTree);
     }
@@ -235,8 +236,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scopesByRootTree.put(tree, new Scope(parent, tree));
     }
 
-    private void addBindingUsage(PyNameTree nameTree) {
-      currentScope().addBindingUsage(nameTree);
+
+    private void addBindingUsage(PyNameTree nameTree, Usage.Kind usage) {
+      currentScope().addBindingUsage(nameTree, usage);
     }
 
     private Scope currentScope() {
@@ -263,7 +265,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       return Collections.unmodifiableSet(symbols);
     }
 
-    void addBindingUsage(PyNameTree nameTree) {
+
+    void addBindingUsage(PyNameTree nameTree, Usage.Kind kind) {
       String symbolName = nameTree.name();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
         SymbolImpl symbol = new SymbolImpl(symbolName);
@@ -272,7 +275,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       }
       SymbolImpl symbol = resolve(symbolName);
       if (symbol != null) {
-        symbol.addUsage(nameTree);
+        symbol.addUsage(nameTree, kind);
       }
     }
 
@@ -297,7 +300,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private static class SymbolImpl implements TreeSymbol {
 
     private final String name;
-    private final Set<Tree> usages = new HashSet<>();
+    private final List<Usage> usages = new ArrayList<>();
 
     private SymbolImpl(String name) {
       this.name = name;
@@ -309,12 +312,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public Set<Tree> usages() {
-      return Collections.unmodifiableSet(usages);
+    public List<Usage> usages() {
+      return Collections.unmodifiableList(usages);
     }
 
-    public void addUsage(Tree tree) {
-      usages.add(tree);
+    void addUsage(Tree tree, Usage.Kind kind) {
+      usages.add(new UsageImpl(tree, kind));
     }
   }
 
@@ -371,8 +374,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void addSymbolUsage(PyNameTree nameTree) {
       Scope scope = scopesByRootTree.get(currentScopeRootTree());
       SymbolImpl symbol = scope.resolve(nameTree.name());
-      if (symbol != null && !symbol.usages().contains(nameTree)) {
-        symbol.addUsage(nameTree);
+      // TODO: use Set to improve performances
+      if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(nameTree))) {
+        symbol.addUsage(nameTree, Usage.Kind.OTHER);
       }
     }
   }

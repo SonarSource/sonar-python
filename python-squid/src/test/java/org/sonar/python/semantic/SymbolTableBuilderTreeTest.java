@@ -59,11 +59,14 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("a", "t2");
     TreeSymbol a = symbolByName.get("a");
     int functionStartLine = functionTree.firstToken().token().getLine();
-    assertThat(a.usages()).extracting(tree -> tree.firstToken().token().getLine()).containsOnly(
+    assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(
       functionStartLine + 1, functionStartLine + 2, functionStartLine + 3, functionStartLine + 4);
+    assertThat(a.usages()).extracting(Usage::kind).containsOnly(
+      Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.COMPOUND_ASSIGNMENT_LHS, Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
     TreeSymbol t2 = symbolByName.get("t2");
-    assertThat(t2.usages()).extracting(tree -> tree.firstToken().token().getLine()).containsOnly(
+    assertThat(t2.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(
       functionStartLine + 5);
+    assertThat(t2.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
   }
 
   @Test
@@ -93,9 +96,11 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     int functionStartLine = functionTree.firstToken().token().getLine();
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).extracting(tree -> tree.firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
     TreeSymbol y = symbolByName.get("y");
-    assertThat(y.usages()).extracting(tree -> tree.firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
   }
 
   @Test
@@ -105,9 +110,11 @@ public class SymbolTableBuilderTreeTest {
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     int functionStartLine = functionTree.firstToken().token().getLine();
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).extracting(tree -> tree.firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
     TreeSymbol y = symbolByName.get("y");
-    assertThat(y.usages()).extracting(tree -> tree.firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
   }
 
   @Test
@@ -128,8 +135,8 @@ public class SymbolTableBuilderTreeTest {
     Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsExactly("x");
     TreeSymbol x = symbolByName.get("x");
-    int functionStartLine = functionTree.firstToken().getLine();
-    assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1, functionStartLine + 4);
+    int functionStartLine = functionTree.firstToken().token().getLine();
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1, functionStartLine + 4);
     PyFunctionDefTree innerFunctionTree = functionTreesByName.get("innerFn");
     assertThat(innerFunctionTree.localVariables()).isEmpty();
   }
@@ -167,7 +174,7 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.keySet()).containsOnly("x");
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).hasSize(1);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
   }
 
   @Test
@@ -177,7 +184,7 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.keySet()).containsOnly("a");
     TreeSymbol a = symbolByName.get("a");
-    assertThat(a.usages()).hasSize(1);
+    assertThat(a.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.COMP_DECLARATION);
   }
 
   @Test
@@ -193,7 +200,7 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.keySet()).containsOnly("x");
     TreeSymbol x = symbolByName.get("x");
-    assertThat(x.usages()).hasSize(2);
+    assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
   }
 
   @Test
@@ -202,10 +209,11 @@ public class SymbolTableBuilderTreeTest {
     Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
 
     assertThat(symbolByName.keySet()).containsOnly("mod1", "aliased_mod2", "x", "z");
-    assertThat(symbolByName.get("mod1").usages()).hasSize(1);
-    assertThat(symbolByName.get("aliased_mod2").usages()).hasSize(1);
-    assertThat(symbolByName.get("x").usages()).hasSize(1);
-    assertThat(symbolByName.get("z").usages()).hasSize(1);
+    assertThat(symbolByName.get("mod1").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+    assertThat(symbolByName.get("aliased_mod2").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+
+    assertThat(symbolByName.get("x").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+    assertThat(symbolByName.get("z").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

@@ -19,11 +19,25 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.List;
+import org.sonar.python.api.tree.Tree;
 
-public interface TreeSymbol {
+public class UsageImpl implements Usage {
 
-  String name();
+  private final Tree tree;
+  private final Kind kind;
 
-  List<Usage> usages();
+  public UsageImpl(Tree tree, Kind kind) {
+    this.tree = tree;
+    this.kind = kind;
+  }
+
+  @Override
+  public Tree tree() {
+    return tree;
+  }
+
+  @Override
+  public Kind kind() {
+    return kind;
+  }
 }

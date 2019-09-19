@@ -58,9 +58,9 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       for (TreeSymbol symbol : functionTree.localVariables()) {
         if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && symbol.usages().size() == 1) {
           symbol.usages().stream()
-            .filter(tree -> tree.parent() == null || !tree.parent().is(Kind.PARAMETER))
-            .filter(tree -> !isTupleDeclaration(tree))
-            .forEach(usage -> ctx.addIssue(usage, String.format(MESSAGE, symbol.name())));
+            .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
+            .filter(usage -> !isTupleDeclaration(usage.tree()))
+            .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())));
         }
       }
     });
