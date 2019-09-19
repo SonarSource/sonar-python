@@ -19,12 +19,14 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyExpressionListTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -70,7 +72,7 @@ public class PySubscriptionExpressionTreeImpl extends PyTree implements PySubscr
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(object, subscripts);
+    return Stream.of(object, lBracket, subscripts, rBracket).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

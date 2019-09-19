@@ -20,9 +20,10 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -31,6 +32,7 @@ import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyImportFromTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -106,7 +108,7 @@ public class PyImportFromTreeImpl extends PyTree implements PyImportFromTree {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(aliasedImportNames, Collections.singletonList(moduleName))
-      .flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(importKeyword), aliasedImportNames, Collections.singletonList(fromKeyword),
+      dottedPrefixForModule, Arrays.asList(moduleName, wildcard)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

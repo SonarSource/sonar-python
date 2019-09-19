@@ -19,11 +19,17 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyInExpressionTree;
+import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.Tree;
 
 public class PyInExpressionTreeImpl extends PyBinaryExpressionTreeImpl implements PyInExpressionTree {
 
@@ -43,5 +49,10 @@ public class PyInExpressionTreeImpl extends PyBinaryExpressionTreeImpl implement
   @Override
   public PyToken notToken() {
     return notToken;
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(Collections.singletonList(notToken), super.children()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

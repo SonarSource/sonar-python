@@ -20,6 +20,9 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
@@ -60,6 +63,6 @@ public class PyNonlocalStatementTreeImpl extends PyTree implements PyNonlocalSta
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(variables);
+    return Stream.of(Collections.singletonList(nonlocalKeyword), variables).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

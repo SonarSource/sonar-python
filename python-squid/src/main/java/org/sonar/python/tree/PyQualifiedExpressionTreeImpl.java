@@ -20,13 +20,14 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -78,6 +79,6 @@ public class PyQualifiedExpressionTreeImpl extends PyTree implements PyQualified
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(name, qualifier);
+    return Stream.of(name, dotToken, qualifier).collect(Collectors.toList());
   }
 }

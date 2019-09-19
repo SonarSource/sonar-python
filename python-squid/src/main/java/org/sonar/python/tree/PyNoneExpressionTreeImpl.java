@@ -47,7 +47,7 @@ public class PyNoneExpressionTreeImpl extends PyTree implements PyNoneExpression
 
   @Override
   public List<Tree> children() {
-    return Collections.emptyList();
+    return Collections.singletonList(none);
   }
 
   @Override

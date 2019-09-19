@@ -20,13 +20,15 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -65,6 +67,6 @@ public class PyFileInputTreeImpl extends PyTree implements PyFileInputTree {
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(statements);
+    return Stream.of(statements, docstring).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

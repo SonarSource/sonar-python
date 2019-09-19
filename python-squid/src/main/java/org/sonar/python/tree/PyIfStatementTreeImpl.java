@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Objects;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.Collections;
@@ -114,7 +115,7 @@ public class PyIfStatementTreeImpl extends PyTree implements PyIfStatementTree {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(elifBranches, Arrays.asList(condition, statements, elseStatement))
-      .flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(Arrays.asList(keyword, condition, statements), elifBranches, Collections.singletonList(elseStatement))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

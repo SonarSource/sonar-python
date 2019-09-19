@@ -20,14 +20,16 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyArgListTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -82,7 +84,7 @@ public class PyDecoratorTreeImpl extends PyTree implements PyDecoratorTree {
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(dottedName, argListTree);
+    return Stream.of(atToken, dottedName, lPar, argListTree, rPar).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

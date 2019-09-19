@@ -20,6 +20,9 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyToken;
 import java.util.List;
 import org.sonar.python.api.tree.PySliceListTree;
@@ -54,7 +57,7 @@ public class PySliceListTreeImpl extends PyTree implements PySliceListTree {
 
   @Override
   public List<Tree> children() {
-    return slices;
+    return Stream.of(slices, separators).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

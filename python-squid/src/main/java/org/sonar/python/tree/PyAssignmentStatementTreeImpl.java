@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Objects;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
@@ -70,6 +71,7 @@ public class PyAssignmentStatementTreeImpl extends PyTree implements PyAssignmen
 
   @Override
   public List<Tree> children() {
-    return Stream.of(lhsExpressions, Collections.singletonList(assignedValue)).flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(assignTokens, lhsExpressions, Collections.singletonList(assignedValue))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

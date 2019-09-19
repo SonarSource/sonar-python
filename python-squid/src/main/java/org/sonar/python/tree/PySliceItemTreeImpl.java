@@ -20,13 +20,15 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PySliceItemTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -86,7 +88,7 @@ public class PySliceItemTreeImpl extends PyTree implements PySliceItemTree {
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(lowerBound, upperBound, stride);
+    return Stream.of(lowerBound, boundSeparator, upperBound, strideSeparator, stride).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

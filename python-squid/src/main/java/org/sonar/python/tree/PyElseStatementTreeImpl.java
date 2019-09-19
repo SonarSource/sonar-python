@@ -19,11 +19,13 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyElseStatementTree;
 import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -59,6 +61,6 @@ public class PyElseStatementTreeImpl extends PyTree implements PyElseStatementTr
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(body);
+    return Stream.of(elseKeyword, body).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

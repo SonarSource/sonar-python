@@ -20,9 +20,11 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyArgListTree;
@@ -30,6 +32,7 @@ import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -121,6 +124,7 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(name, args, body);
+    return Stream.of(decorators, Arrays.asList(classKeyword, name, leftPar, args, rightPar, colon, body, docstring))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

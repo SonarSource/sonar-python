@@ -19,12 +19,14 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyDictCompExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -71,7 +73,7 @@ public class PyDictCompExpressionTreeImpl extends PyTree implements PyDictCompEx
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(keyExpression, valueExpression, comprehensionFor);
+    return Stream.of(keyExpression, colon, valueExpression, comprehensionFor).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

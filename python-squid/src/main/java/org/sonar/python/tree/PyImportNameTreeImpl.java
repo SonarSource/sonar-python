@@ -20,6 +20,9 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
@@ -61,6 +64,6 @@ public class PyImportNameTreeImpl extends PyTree implements PyImportNameTree {
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(aliasedNames);
+    return Stream.of(Collections.singletonList(importKeyword), aliasedNames).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

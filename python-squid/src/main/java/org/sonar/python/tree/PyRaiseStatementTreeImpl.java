@@ -20,6 +20,8 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Arrays;
+import java.util.Objects;
 import org.sonar.python.api.tree.PyToken;
 import java.util.Collections;
 import java.util.List;
@@ -81,7 +83,7 @@ public class PyRaiseStatementTreeImpl extends PyTree implements PyRaiseStatement
 
   @Override
   public List<Tree> children() {
-    return Stream.of(expressions, Collections.singletonList(fromExpression))
-      .flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(raiseKeyword), expressions, Arrays.asList(fromKeyword, fromExpression))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

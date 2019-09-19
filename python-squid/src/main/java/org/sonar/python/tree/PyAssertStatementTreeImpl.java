@@ -20,12 +20,14 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.PyToken;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyAssertStatementTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
@@ -70,6 +72,6 @@ public class PyAssertStatementTreeImpl extends PyTree implements PyAssertStateme
 
   @Override
   public List<Tree> children() {
-    return Arrays.asList(condition, message);
+    return Stream.of(assertKeyword, condition, message).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
