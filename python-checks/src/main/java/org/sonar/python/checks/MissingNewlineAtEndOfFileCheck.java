@@ -19,22 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.Tree;
 
-@Rule(key = MissingNewlineAtEndOfFileCheck.CHECK_KEY)
-public class MissingNewlineAtEndOfFileCheck extends PythonCheckAstNode {
-  public static final String CHECK_KEY = "S113";
-  public static final String MESSAGE = "Add a new line at the end of this file \"%s\".";
+@Rule(key = "S113")
+public class MissingNewlineAtEndOfFileCheck extends PythonSubscriptionCheck {
+  private static final String MESSAGE = "Add a new line at the end of this file \"%s\".";
 
   @Override
-  public void visitFile(@Nullable AstNode astNode) {
-    String fileContent = getContext().pythonFile().content();
-    if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")){
-      addFileIssue(String.format(MESSAGE, getContext().pythonFile().fileName()));
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      String fileContent = ctx.pythonFile().content();
+      if (fileContent.length() > 0 && !fileContent.endsWith("\n") && !fileContent.endsWith("\r")) {
+        ctx.addFileIssue(String.format(MESSAGE, ctx.pythonFile().fileName()));
+      }
+    });
   }
-
 }
