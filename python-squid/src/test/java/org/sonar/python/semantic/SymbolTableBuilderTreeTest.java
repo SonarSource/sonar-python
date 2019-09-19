@@ -24,7 +24,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,6 +41,10 @@ public class SymbolTableBuilderTreeTest {
   private static Map<String, PyFunctionDefTree> functionTreesByName = new HashMap<>();
 
 
+  private Map<String, TreeSymbol> getSymbolByName(PyFunctionDefTree functionTree) {
+    return functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+  }
+
   @BeforeClass
   public static void init() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/symbols2.py"));
@@ -52,8 +55,7 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void local_variable() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_local");
-    Set<TreeSymbol> symbols = functionTree.localVariables();
-    Map<String, TreeSymbol> symbolByName = symbols.stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("a", "t2");
     TreeSymbol a = symbolByName.get("a");
     int functionStartLine = functionTree.firstToken().token().getLine();
@@ -73,23 +75,21 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void rebound_variable() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_rebound_variable");
-    Set<TreeSymbol> symbols = functionTree.localVariables();
-    Map<String, TreeSymbol> symbolByName = symbols.stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("global_x");
   }
 
   @Test
   public void simple_parameter() {
     PyFunctionDefTree functionTree = functionTreesByName.get("simple_parameter");
-    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("a");
   }
 
   @Test
   public void multiple_assignment() {
     PyFunctionDefTree functionTree = functionTreesByName.get("multiple_assignment");
-    Set<TreeSymbol> symbols = functionTree.localVariables();
-    Map<String, TreeSymbol> symbolByName = symbols.stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     int functionStartLine = functionTree.firstToken().token().getLine();
     TreeSymbol x = symbolByName.get("x");
@@ -101,8 +101,7 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void tuple_assignment() {
     PyFunctionDefTree functionTree = functionTreesByName.get("tuple_assignment");
-    Set<TreeSymbol> symbols = functionTree.localVariables();
-    Map<String, TreeSymbol> symbolByName = symbols.stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     int functionStartLine = functionTree.firstToken().token().getLine();
     TreeSymbol x = symbolByName.get("x");
@@ -124,9 +123,21 @@ public class SymbolTableBuilderTreeTest {
   }
 
   @Test
+  public void function_with_nested_nonlocal_var() {
+    PyFunctionDefTree functionTree = functionTreesByName.get("function_with_nested_nonlocal_var");
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName.keySet()).containsExactly("x");
+    TreeSymbol x = symbolByName.get("x");
+    int functionStartLine = functionTree.firstToken().getLine();
+    assertThat(x.usages()).extracting(tree -> tree.firstToken().getLine()).containsOnly(functionStartLine + 1, functionStartLine + 4);
+    PyFunctionDefTree innerFunctionTree = functionTreesByName.get("innerFn");
+    assertThat(innerFunctionTree.localVariables()).isEmpty();
+  }
+
+  @Test
   public void lambdas() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_lambdas");
-    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
 
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
     TreeSymbol x = symbolByName.get("x");
@@ -152,7 +163,7 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void for_stmt() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_loops");
-    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
 
     assertThat(symbolByName.keySet()).containsOnly("x");
     TreeSymbol x = symbolByName.get("x");
@@ -162,7 +173,7 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void comprehension() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_comprehension");
-    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
 
     assertThat(symbolByName.keySet()).containsOnly("a");
     TreeSymbol a = symbolByName.get("a");
@@ -178,7 +189,7 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void var_with_usages_in_decorator() {
     PyFunctionDefTree functionTree = functionTreesByName.get("var_with_usages_in_decorator");
-    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
 
     assertThat(symbolByName.keySet()).containsOnly("x");
     TreeSymbol x = symbolByName.get("x");
@@ -188,7 +199,7 @@ public class SymbolTableBuilderTreeTest {
   @Test
   public void function_with_unused_import() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_unused_import");
-    Map<String, TreeSymbol> symbolByName = functionTree.localVariables().stream().collect(Collectors.toMap(TreeSymbol::name, Functions.identity()));
+    Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
 
     assertThat(symbolByName.keySet()).containsOnly("mod1", "aliased_mod2", "x", "z");
     assertThat(symbolByName.get("mod1").usages()).hasSize(1);

@@ -37,6 +37,12 @@ def function_with_nonlocal_var():
     nonlocal non_local_var
     non_local_var = 10
 
+def function_with_nested_nonlocal_var():
+    x = 10
+    def innerFn():
+        nonlocal x
+        x = 4
+
 def function_with_lambdas():
     x = 42
     foo((lambda x: x*x))

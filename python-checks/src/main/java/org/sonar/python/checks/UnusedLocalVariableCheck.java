@@ -85,7 +85,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     return functionTree.descendants(Kind.STRING_LITERAL)
       .map(PyStringLiteralTree.class::cast)
       .flatMap(str -> str.stringElements().stream())
-      .filter(str -> str.prefix().equals("f"))
+      .filter(str -> str.prefix().equalsIgnoreCase("f"))
       .map(PyStringElementTree::trimmedQuotesValue)
       .flatMap(UnusedLocalVariableCheck::extractInterpolations)
       .collect(Collectors.toSet());

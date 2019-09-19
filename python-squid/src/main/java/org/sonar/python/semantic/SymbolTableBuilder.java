@@ -52,7 +52,10 @@ import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.python.tree.PyFunctionDefTreeImpl;
+import org.sonar.python.tree.PyLambdaExpressionTreeImpl;
 
+// SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
 
   private Map<Tree, Scope> scopesByRootTree;
@@ -67,7 +70,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       .forEach(scope -> {
         PyFunctionLikeTree funcDef = (PyFunctionLikeTree) scope.rootTree;
         for (TreeSymbol symbol : scope.symbols()) {
-          funcDef.addLocalVariableSymbol(symbol);
+          if (funcDef.is(Kind.LAMBDA)) {
+            ((PyLambdaExpressionTreeImpl) funcDef).addLocalVariableSymbol(symbol);
+          } else {
+            ((PyFunctionDefTreeImpl) funcDef).addLocalVariableSymbol(symbol);
+          }
         }
       });
   }
@@ -82,6 +89,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     void enterScope(Tree tree) {
       scopeRootTrees.push(tree);
+    }
+
+    void leaveScope() {
+      scopeRootTrees.pop();
     }
   }
 
@@ -100,7 +111,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyLambdaExpressionTree);
       createParameters(pyLambdaExpressionTree.parameters());
       super.visitLambda(pyLambdaExpressionTree);
-      super.scopeRootTrees.pop();
+      leaveScope();
     }
 
     @Override
@@ -109,7 +120,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree.parameters());
       super.visitFunctionDef(pyFunctionDefTree);
-      super.scopeRootTrees.pop();
+      leaveScope();
     }
 
     @Override
@@ -117,7 +128,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
-      super.scopeRootTrees.pop();
+      leaveScope();
     }
 
     @Override
@@ -135,9 +146,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void createImportedNames(List<PyAliasedNameTree> importedNames) {
       importedNames.forEach(module -> {
         if (module.alias() != null) {
-          addUsage(module.alias());
+          addBindingUsage(module.alias());
         } else {
-          addUsage(module.dottedName().names().get(0));
+          addBindingUsage(module.dottedName().names().get(0));
         }
       });
     }
@@ -151,7 +162,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitComprehensionFor(PyComprehensionForTree tree) {
       if (tree.loopExpression().is(Tree.Kind.NAME)) {
-        addUsage((PyNameTree) tree.loopExpression());
+        addBindingUsage((PyNameTree) tree.loopExpression());
       }
       super.visitComprehensionFor(tree);
     }
@@ -159,7 +170,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void createLoopVariables(PyForStatementTree loopTree) {
       loopTree.expressions().forEach(expr -> {
         if (expr.is(Tree.Kind.NAME)) {
-          addUsage((PyNameTree) expr);
+          addBindingUsage((PyNameTree) expr);
         }
       });
     }
@@ -168,13 +179,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (parameterList == null) {
         return;
       }
-      parameterList.nonTuple().forEach(param -> addUsage(param.name()));
+      parameterList.nonTuple().forEach(param -> addBindingUsage(param.name()));
       parameterList.all().stream()
         .filter(param -> param.is(Kind.TUPLE))
         .flatMap(param -> ((PyTupleTree) param).elements().stream())
         .filter(param -> param.is(Kind.NAME))
         .map(PyNameTree.class::cast)
-        .forEach(this::addUsage);
+        .forEach(this::addBindingUsage);
     }
 
     @Override
@@ -184,14 +195,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         .flatMap(expr -> expr.is(Kind.TUPLE) ? ((PyTupleTree) expr).elements().stream() : Stream.of(expr))
         .filter(expr -> expr.is(Kind.NAME))
         .map(PyNameTree.class::cast)
-        .forEach(this::addUsage);
+        .forEach(this::addBindingUsage);
       super.visitAssignmentStatement(pyAssignmentStatementTree);
     }
 
     @Override
     public void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree) {
       if (pyAnnotatedAssignmentTree.variable().is(Kind.NAME)) {
-        addUsage((PyNameTree) pyAnnotatedAssignmentTree.variable());
+        addBindingUsage((PyNameTree) pyAnnotatedAssignmentTree.variable());
       }
       super.visitAnnotatedAssignment(pyAnnotatedAssignmentTree);
     }
@@ -199,7 +210,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree) {
       if (pyCompoundAssignmentStatementTree.lhsExpression().is(Kind.NAME)) {
-        addUsage((PyNameTree) pyCompoundAssignmentStatementTree.lhsExpression());
+        addBindingUsage((PyNameTree) pyCompoundAssignmentStatementTree.lhsExpression());
       }
       super.visitCompoundAssignment(pyCompoundAssignmentStatementTree);
     }
@@ -224,8 +235,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scopesByRootTree.put(tree, new Scope(parent, tree));
     }
 
-    private void addUsage(PyNameTree nameTree) {
-      currentScope().addUsage(nameTree);
+    private void addBindingUsage(PyNameTree nameTree) {
+      currentScope().addBindingUsage(nameTree);
     }
 
     private Scope currentScope() {
@@ -252,7 +263,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       return Collections.unmodifiableSet(symbols);
     }
 
-    void addUsage(PyNameTree nameTree) {
+    void addBindingUsage(PyNameTree nameTree) {
       String symbolName = nameTree.name();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
         SymbolImpl symbol = new SymbolImpl(symbolName);
@@ -324,31 +335,27 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
       enterScope(pyFunctionDefTree);
       super.visitFunctionDef(pyFunctionDefTree);
-      super.scopeRootTrees.pop();
+      leaveScope();
     }
 
     @Override
     public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
       enterScope(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
-      super.scopeRootTrees.pop();
+      leaveScope();
     }
 
     @Override
     public void visitClassDef(PyClassDefTree pyClassDefTree) {
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
-      super.scopeRootTrees.pop();
+      leaveScope();
     }
 
     @Override
     public void visitDecorator(PyDecoratorTree pyDecoratorTree) {
       PyNameTree nameTree = pyDecoratorTree.name().names().get(0);
-      Scope scope = scopesByRootTree.get(currentScopeRootTree());
-      SymbolImpl symbol = scope.resolve(nameTree.name());
-      if (symbol != null && !symbol.usages().contains(nameTree)) {
-        symbol.addUsage(nameTree);
-      }
+      addSymbolUsage(nameTree);
       super.visitDecorator(pyDecoratorTree);
     }
 
@@ -357,11 +364,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (!pyNameTree.isVariable()) {
         return;
       }
+      addSymbolUsage(pyNameTree);
       super.visitName(pyNameTree);
+    }
+
+    private void addSymbolUsage(PyNameTree nameTree) {
       Scope scope = scopesByRootTree.get(currentScopeRootTree());
-      SymbolImpl symbol = scope.resolve(pyNameTree.name());
-      if (symbol != null && !symbol.usages().contains(pyNameTree)) {
-        symbol.addUsage(pyNameTree);
+      SymbolImpl symbol = scope.resolve(nameTree.name());
+      if (symbol != null && !symbol.usages().contains(nameTree)) {
+        symbol.addUsage(nameTree);
       }
     }
   }

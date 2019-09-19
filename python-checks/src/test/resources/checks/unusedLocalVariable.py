@@ -21,6 +21,10 @@ def string_interpolation():
     value2 = 2
     value3 = 3 # Noncompliant
     value4 = 4 # Noncompliant (previously FN)
+    value5 = 1
+    foo(F'{value5} foo')
+    value6 = '' # Noncompliant FP
+    print(f"{'}' + value6}")
     return f'{value1}, {2*value2}, value3bis, value4'
 
 def function_with_lambdas():
@@ -38,7 +42,9 @@ def using_tuples():
     (a, b) = (1, 2)
     print b
 
-    for name, b in self.builders.items():
+    for name, b in foo():
+        pass
+    for (c, d) in foo():
         pass
 
 def for_loops():

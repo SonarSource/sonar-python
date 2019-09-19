@@ -28,6 +28,4 @@ public interface PyFunctionLikeTree extends Tree {
   PyParameterListTree parameters();
 
   Set<TreeSymbol> localVariables();
-
-  void addLocalVariableSymbol(TreeSymbol symbol);
 }
