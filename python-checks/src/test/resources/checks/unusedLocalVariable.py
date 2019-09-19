@@ -54,3 +54,7 @@ def for_loops():
         do_something()
     for i in range(10):
         do_something(i)
+
+def unused_import():
+    import foo        # OK, should be handled in a dedicated rule
+    from x import y   # OK, should be handled in a dedicated rule
