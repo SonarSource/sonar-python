@@ -3,8 +3,8 @@ unread_global = 1
 def f(unread_param):
     global unread_global
     unread_global = 1
-    unread_local = 1 # FN (more than 1 write)
-    unread_local = 2 # FN (more than 1 write)
+    unread_local = 1 # Noncompliant
+    unread_local = 2 # Noncompliant
     read_local = 1
     print(read_local)
     read_in_nested_function = 1
