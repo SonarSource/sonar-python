@@ -96,6 +96,11 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     }
 
     @Override
+    public PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message) {
+      return addIssue(IssueLocation.preciseLocation(from, to, message));
+    }
+
+    @Override
     public PythonCheck.PreciseIssue addFileIssue(String message) {
       return addIssue(IssueLocation.atFileLevel(message));
     }

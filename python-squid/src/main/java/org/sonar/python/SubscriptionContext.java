@@ -31,6 +31,8 @@ public interface SubscriptionContext {
 
   PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
 
+  PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message);
+
   PythonCheck.PreciseIssue addFileIssue(String finalMessage);
 
   PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
