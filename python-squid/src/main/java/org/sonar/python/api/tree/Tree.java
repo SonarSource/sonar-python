@@ -20,7 +20,10 @@
 package org.sonar.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 
 public interface Tree {
@@ -211,4 +214,24 @@ public interface Tree {
   }
 
   Kind getKind();
+
+  default Stream<Tree> descendants(Kind kind) {
+    return descendants().filter(tree -> tree.is(kind));
+  }
+
+  default Stream<Tree> descendants() {
+    return children().stream()
+      .filter(Objects::nonNull)
+      .flatMap(tree -> Stream.concat(Stream.of(tree), tree.descendants()));
+  }
+
+  default List<Tree> ancestors() {
+    Tree currentParent = parent();
+    List<Tree> ancestors = new ArrayList<>();
+    while (currentParent != null) {
+      ancestors.add(currentParent);
+      currentParent = currentParent.parent();
+    }
+    return ancestors;
+  }
 }

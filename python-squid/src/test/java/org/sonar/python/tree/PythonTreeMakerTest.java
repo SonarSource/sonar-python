@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.PyAliasedNameTree;
@@ -125,6 +126,23 @@ public class PythonTreeMakerTest extends RuleTest {
     pyTree = parse("if x:\n pass", treeMaker::fileInput);
     PyIfStatementTree ifStmt = (PyIfStatementTree) pyTree.statements().statements().get(0);
     assertThat(ifStmt.body().parent()).isEqualTo(ifStmt);
+  }
+
+  @Test
+  public void descendants_and_ancestors() {
+    PyFileInputTree pyTree = parse("def foo(): pass\ndef bar(): pass", treeMaker::fileInput);
+    assertThat(pyTree.descendants().filter(tree -> tree.getKind() != Tree.Kind.TOKEN).count()).isEqualTo(9);
+    assertThat(pyTree.descendants(Tree.Kind.STATEMENT_LIST).count()).isEqualTo(3);
+    assertThat(pyTree.descendants(Tree.Kind.FUNCDEF).count()).isEqualTo(2);
+    assertThat(pyTree.descendants(Tree.Kind.NAME).count()).isEqualTo(2);
+    assertThat(pyTree.descendants(Tree.Kind.PASS_STMT).count()).isEqualTo(2);
+
+    PyFunctionDefTree functionDef = (PyFunctionDefTree) pyTree.descendants(Tree.Kind.FUNCDEF).collect(Collectors.toList()).get(0);
+    assertThat(functionDef.ancestors()).extracting(Tree::getKind).containsExactly(Tree.Kind.STATEMENT_LIST, Tree.Kind.FILE_INPUT);
+
+    PyPassStatementTree passStmt = (PyPassStatementTree) pyTree.descendants(Tree.Kind.PASS_STMT).collect(Collectors.toList()).get(0);
+    assertThat(passStmt.ancestors()).extracting(Tree::getKind).containsExactly(
+      Tree.Kind.STATEMENT_LIST, Tree.Kind.FUNCDEF, Tree.Kind.STATEMENT_LIST, Tree.Kind.FILE_INPUT);
   }
 
   @Test
@@ -1888,6 +1906,21 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(noneExpressionTree.getKind()).isEqualTo(Tree.Kind.NONE);
     assertThat(noneExpressionTree.none().value()).isEqualTo("None");
     assertThat(noneExpressionTree.children()).hasSize(1);
+  }
+
+  @Test
+  public void variables() {
+    setRootRule(PythonGrammar.ATOM);
+    PyNameTree name = (PyNameTree) parse("foo", treeMaker::expression);
+    assertThat(name.isVariable()).isTrue();
+
+    setRootRule(PythonGrammar.ATTRIBUTE_REF);
+    PyQualifiedExpressionTree qualifiedExpressionTree = (PyQualifiedExpressionTree) parse("a.b", treeMaker::expression);
+    assertThat(qualifiedExpressionTree.name().isVariable()).isFalse();
+
+    setRootRule(PythonGrammar.FUNCDEF);
+    PyFunctionDefTree functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDefTree.name().isVariable()).isFalse();
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {

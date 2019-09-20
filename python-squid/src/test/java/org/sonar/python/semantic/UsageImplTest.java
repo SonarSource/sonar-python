@@ -17,47 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.tree;
+package org.sonar.python.semantic;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
-import java.util.List;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyTreeVisitor;
+import org.junit.Test;
+import org.mockito.Mockito;
 import org.sonar.python.api.tree.Tree;
 
-public class PyNameTreeImpl extends PyTree implements PyNameTree {
-  private final String name;
-  private final boolean isVariable;
+import static org.assertj.core.api.Assertions.assertThat;
 
-  public PyNameTreeImpl(AstNode astNode, String name, boolean isVariable) {
-    super(astNode);
-    this.name = name;
-    this.isVariable = isVariable;
+
+public class UsageImplTest {
+
+  @Test
+  public void binding_usages() {
+    assertBindingUsage(Usage.Kind.ASSIGNMENT_LHS, true);
+    assertBindingUsage(Usage.Kind.COMPOUND_ASSIGNMENT_LHS, true);
+    assertBindingUsage(Usage.Kind.IMPORT, true);
+    assertBindingUsage(Usage.Kind.LOOP_DECLARATION, true);
+    assertBindingUsage(Usage.Kind.COMP_DECLARATION, true);
+    assertBindingUsage(Usage.Kind.PARAMETER, true);
+    assertBindingUsage(Usage.Kind.OTHER, false);
   }
 
-  @Override
-  public String name() {
-    return name;
-  }
-
-  @Override
-  public boolean isVariable() {
-    return isVariable;
-  }
-
-  @Override
-  public Kind getKind() {
-    return Kind.NAME;
-  }
-
-  @Override
-  public void accept(PyTreeVisitor visitor) {
-    visitor.visitName(this);
-  }
-
-  @Override
-  public List<Tree> children() {
-    return Collections.emptyList();
+  private static void assertBindingUsage(Usage.Kind kind, boolean isBinding) {
+    Tree mockTree = Mockito.mock(Tree.class);
+    UsageImpl usage = new UsageImpl(mockTree, kind);
+    assertThat(usage.kind()).isEqualTo(kind);
+    assertThat(usage.isBindingUsage()).isEqualTo(isBinding);
   }
 }

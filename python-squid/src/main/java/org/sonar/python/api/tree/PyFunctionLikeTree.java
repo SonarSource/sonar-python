@@ -19,10 +19,13 @@
  */
 package org.sonar.python.api.tree;
 
-public interface PyNameTree extends PyExpressionTree {
+import java.util.Set;
+import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.TreeSymbol;
 
-  String name();
+public interface PyFunctionLikeTree extends Tree {
+  @CheckForNull
+  PyParameterListTree parameters();
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
+  Set<TreeSymbol> localVariables();
 }

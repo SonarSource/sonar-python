@@ -22,7 +22,7 @@ package org.sonar.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
-public interface PyFunctionDefTree extends PyStatementTree {
+public interface PyFunctionDefTree extends PyStatementTree, PyFunctionLikeTree {
 
   List<PyDecoratorTree> decorators();
 
@@ -34,9 +34,6 @@ public interface PyFunctionDefTree extends PyStatementTree {
   PyNameTree name();
 
   PyToken leftPar();
-
-  @CheckForNull
-  PyParameterListTree parameters();
 
   PyToken rightPar();
 

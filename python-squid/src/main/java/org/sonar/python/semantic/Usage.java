@@ -17,12 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.semantic;
 
-public interface PyNameTree extends PyExpressionTree {
+import org.sonar.python.api.tree.Tree;
 
-  String name();
+public interface Usage {
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
+  default boolean isBindingUsage() {
+    return kind() != Kind.OTHER;
+  }
+
+  Tree tree();
+
+  Kind kind();
+
+  enum Kind {
+    ASSIGNMENT_LHS,
+    COMPOUND_ASSIGNMENT_LHS,
+    IMPORT,
+    LOOP_DECLARATION,
+    COMP_DECLARATION,
+    OTHER,
+    PARAMETER
+  }
 }

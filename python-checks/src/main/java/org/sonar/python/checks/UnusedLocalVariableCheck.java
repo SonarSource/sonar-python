@@ -19,69 +19,91 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.PyExpressionListTree;
+import org.sonar.python.api.tree.PyForStatementTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.PyStringElementTree;
+import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S1481")
-public class UnusedLocalVariableCheck extends PythonCheckAstNode {
+public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
-  private static final Pattern IDENTIFIER_SEPARATOR = Pattern.compile("[^a-zA-Z0-9_]+");
+  private static final Pattern INTERPOLATION_PATTERN = Pattern.compile("\\{(.*?)\\}");
 
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode functionTree) {
-    // https://docs.python.org/3/library/functions.html#locals
-    if (isCallingLocalsFunction(functionTree)) {
-      return;
-    }
-    Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
-    for (Symbol symbol : getContext().symbolTable().symbols(functionTree)) {
-      if (!interpolationIdentifiers.contains(symbol.name()) && !"_".equals(symbol.name())) {
-        checkSymbol(symbol);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree functionTree = (PyFunctionDefTree) ctx.syntaxNode();
+      // https://docs.python.org/3/library/functions.html#locals
+      if (isCallingLocalsFunction(functionTree)) {
+        return;
       }
-    }
+      Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
+      for (TreeSymbol symbol : functionTree.localVariables()) {
+        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && hasOnlyBindingUsages(symbol)) {
+          symbol.usages().stream()
+            .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
+            .filter(usage -> !isTupleDeclaration(usage.tree()))
+            .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())));
+        }
+      }
+    });
   }
 
-  private static boolean isCallingLocalsFunction(AstNode functionTree) {
+  private static boolean hasOnlyBindingUsages(TreeSymbol symbol) {
+    List<Usage> usages = symbol.usages();
+    return usages.stream().noneMatch(usage -> usage.kind() == Usage.Kind.IMPORT)
+      && usages.stream().allMatch(Usage::isBindingUsage);
+  }
+
+  private static boolean isTupleDeclaration(Tree tree) {
+    return tree.ancestors().stream()
+      .anyMatch(t -> t.is(Kind.TUPLE)
+        || (t.is(Kind.EXPRESSION_LIST) && ((PyExpressionListTree) t).expressions().size() > 1)
+        || (t.is(Kind.FOR_STMT) && ((PyForStatementTree) t).expressions().size() > 1 && ((PyForStatementTree) t).expressions().contains(tree)));
+  }
+
+  private static boolean isCallingLocalsFunction(PyFunctionDefTree functionTree) {
     return functionTree
-      .getDescendants(PythonGrammar.NAME)
-      .stream()
-      .anyMatch(node -> "locals".equals(node.getTokenValue()));
+      .descendants(Kind.CALL_EXPR)
+      .map(PyCallExpressionTree.class::cast)
+      .map(PyCallExpressionTree::callee)
+      .anyMatch(callee -> callee.is(Kind.NAME) && "locals".equals(((PyNameTree) callee).name()));
   }
 
-  private static Set<String> extractStringInterpolationIdentifiers(AstNode functionTree) {
-    return functionTree.getTokens().stream()
-      .filter(CheckUtils::isStringInterpolation)
-      .map(Token::getOriginalValue)
-      .map(CheckUtils::stringLiteralContent)
-      .map(IDENTIFIER_SEPARATOR::split)
-      .flatMap(Arrays::stream)
+  private static Set<String> extractStringInterpolationIdentifiers(PyFunctionDefTree functionTree) {
+    return functionTree.descendants(Kind.STRING_LITERAL)
+      .map(PyStringLiteralTree.class::cast)
+      .flatMap(str -> str.stringElements().stream())
+      .filter(str -> str.prefix().equalsIgnoreCase("f"))
+      .map(PyStringElementTree::trimmedQuotesValue)
+      .flatMap(UnusedLocalVariableCheck::extractInterpolations)
       .collect(Collectors.toSet());
   }
 
-  private void checkSymbol(Symbol symbol) {
-    if (symbol.readUsages().isEmpty()) {
-      for (AstNode writeUsage : symbol.writeUsages()) {
-        if (!writeUsage.hasAncestor(PythonGrammar.TYPEDARGSLIST)) {
-          addIssue(writeUsage, String.format(MESSAGE, symbol.name()));
-        }
-      }
+  private static Stream<String> extractInterpolations(String str) {
+    Matcher matcher = INTERPOLATION_PATTERN.matcher(str);
+    List<String> identifiers = new ArrayList<>();
+    while (matcher.find()) {
+      identifiers.add(matcher.group(1));
     }
+    return identifiers.stream();
   }
 }

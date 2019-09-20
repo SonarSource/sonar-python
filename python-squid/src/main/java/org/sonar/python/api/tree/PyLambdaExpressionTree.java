@@ -19,16 +19,10 @@
  */
 package org.sonar.python.api.tree;
 
-import javax.annotation.CheckForNull;
-
-public interface PyLambdaExpressionTree extends PyExpressionTree {
+public interface PyLambdaExpressionTree extends PyExpressionTree, PyFunctionLikeTree {
   PyToken lambdaKeyword();
 
   PyToken colonToken();
 
   PyExpressionTree expression();
-
-  @CheckForNull
-  PyParameterListTree parameters();
-
 }

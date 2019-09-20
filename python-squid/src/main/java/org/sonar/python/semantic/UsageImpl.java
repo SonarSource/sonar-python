@@ -17,12 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.semantic;
 
-public interface PyNameTree extends PyExpressionTree {
+import org.sonar.python.api.tree.Tree;
 
-  String name();
+public class UsageImpl implements Usage {
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
+  private final Tree tree;
+  private final Kind kind;
+
+  public UsageImpl(Tree tree, Kind kind) {
+    this.tree = tree;
+    this.kind = kind;
+  }
+
+  @Override
+  public Tree tree() {
+    return tree;
+  }
+
+  @Override
+  public Kind kind() {
+    return kind;
+  }
 }
