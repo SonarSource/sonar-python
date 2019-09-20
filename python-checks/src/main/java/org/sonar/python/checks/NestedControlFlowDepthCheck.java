@@ -19,21 +19,24 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonCheckTree;
+import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.tree.PyForStatementTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.PyTryStatementTree;
+import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.PyWithStatementTree;
 
-@Rule(key = NestedControlFlowDepthCheck.CHECK_KEY)
-public class NestedControlFlowDepthCheck extends PythonCheckAstNode {
+@Rule(key = "S134")
+public class NestedControlFlowDepthCheck extends PythonCheckTree {
 
-  public static final String CHECK_KEY = "S134";
   private static final int DEFAULT_MAX = 4;
   private static final String MESSAGE = "Refactor this code to not nest more than %s \"if\", \"for\", \"while\", \"try\" and \"with\" statements.";
 
@@ -42,31 +45,66 @@ public class NestedControlFlowDepthCheck extends PythonCheckAstNode {
     defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 
-  private Deque<AstNode> depthNodes;
+  private Deque<PyToken> depthNodes = new ArrayDeque<>();
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(
-      PythonGrammar.IF_STMT,
-      PythonGrammar.FOR_STMT,
-      PythonGrammar.WHILE_STMT,
-      PythonGrammar.TRY_STMT,
-      PythonGrammar.WITH_STMT);
+  public void scanFile(PythonVisitorContext visitorContext) {
+    depthNodes.clear();
+    super.scanFile(visitorContext);
   }
 
   @Override
-  public void visitFile(AstNode astNode) {
-    depthNodes = new ArrayDeque<>();
+  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
+    PyToken keyword = pyIfStatementTree.keyword();
+    boolean isIFKeyword = keyword.type().equals(PythonKeyword.IF);
+    if (isIFKeyword) {
+      depthNodes.push(keyword);
+      checkNode();
+    }
+    super.visitIfStatement(pyIfStatementTree);
+    if (isIFKeyword) {
+      depthNodes.pop();
+    }
   }
 
   @Override
-  public void visitNode(AstNode node) {
-    AstNode stmtKeywordNode = node.getFirstChild();
-    depthNodes.push(stmtKeywordNode);
+  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+    depthNodes.push(pyForStatementTree.forKeyword());
+    checkNode();
+    super.visitForStatement(pyForStatementTree);
+    depthNodes.pop();
+  }
+
+  @Override
+  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+    depthNodes.push(pyWhileStatementTree.whileKeyword());
+    checkNode();
+    super.visitWhileStatement(pyWhileStatementTree);
+    depthNodes.pop();
+  }
+
+  @Override
+  public void visitTryStatement(PyTryStatementTree pyTryStatementTree) {
+    depthNodes.push(pyTryStatementTree.tryKeyword());
+    checkNode();
+    super.visitTryStatement(pyTryStatementTree);
+    depthNodes.pop();
+  }
+
+  @Override
+  public void visitWithStatement(PyWithStatementTree pyWithStatementTree) {
+    depthNodes.push(pyWithStatementTree.firstToken());
+    checkNode();
+    super.visitWithStatement(pyWithStatementTree);
+    depthNodes.pop();
+  }
+
+  private void checkNode() {
     if (depthNodes.size() == max + 1) {
-      PreciseIssue issue = addIssue(stmtKeywordNode, String.format(MESSAGE, max));
+      PyToken lastToken = depthNodes.peek();
+      PreciseIssue issue = addIssue(lastToken, String.format(MESSAGE, max));
 
-      Iterator<AstNode> depthNodesIterator = depthNodes.iterator();
+      Iterator<PyToken> depthNodesIterator = depthNodes.iterator();
 
       // skip current node
       depthNodesIterator.next();
@@ -75,10 +113,5 @@ public class NestedControlFlowDepthCheck extends PythonCheckAstNode {
         issue.secondary(depthNodesIterator.next(), "Nesting +1");
       }
     }
-  }
-
-  @Override
-  public void leaveNode(AstNode astNode) {
-    depthNodes.pop();
   }
 }
