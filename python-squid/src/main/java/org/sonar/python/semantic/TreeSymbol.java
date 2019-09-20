@@ -20,10 +20,14 @@
 package org.sonar.python.semantic;
 
 import java.util.List;
+import javax.annotation.CheckForNull;
 
 public interface TreeSymbol {
 
   String name();
 
   List<Usage> usages();
+
+  @CheckForNull
+  String fullyQualifiedName();
 }

@@ -56,7 +56,7 @@ public class SymbolTableBuilderTreeTest {
   public void local_variable() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_local");
     Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("a", "t2");
+    assertThat(symbolByName.keySet()).containsOnly("a","foo", "t2");
     TreeSymbol a = symbolByName.get("a");
     int functionStartLine = functionTree.firstToken().token().getLine();
     assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(

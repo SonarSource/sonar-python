@@ -33,12 +33,14 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
 public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpressionTree {
   private final PyExpressionTree callee;
   private final PyArgListTree argumentList;
   private final PyToken leftPar;
   private final PyToken rightPar;
+  private TreeSymbol calleeSymbol;
 
   public PyCallExpressionTreeImpl(AstNode astNode, PyExpressionTree callee, @Nullable PyArgListTree argumentList, PyToken leftPar, PyToken rightPar) {
     super(astNode);
@@ -79,6 +81,15 @@ public class PyCallExpressionTreeImpl extends PyTree implements PyCallExpression
   @Override
   public PyToken rightPar() {
     return rightPar;
+  }
+
+  @Override
+  public TreeSymbol calleeSymbol() {
+    return calleeSymbol;
+  }
+
+  public void setCalleeSymbol(TreeSymbol calleeSymbol) {
+    this.calleeSymbol = calleeSymbol;
   }
 
   @Override

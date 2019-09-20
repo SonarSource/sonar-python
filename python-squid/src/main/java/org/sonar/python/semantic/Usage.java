@@ -24,7 +24,7 @@ import org.sonar.python.api.tree.Tree;
 public interface Usage {
 
   default boolean isBindingUsage() {
-    return kind() != Kind.OTHER;
+    return kind() != Kind.OTHER && kind() != Kind.CALLEE;
   }
 
   Tree tree();
@@ -33,6 +33,7 @@ public interface Usage {
 
   enum Kind {
     ASSIGNMENT_LHS,
+    CALLEE,
     COMPOUND_ASSIGNMENT_LHS,
     IMPORT,
     LOOP_DECLARATION,

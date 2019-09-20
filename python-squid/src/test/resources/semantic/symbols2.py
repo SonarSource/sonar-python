@@ -11,11 +11,11 @@ def function_with_local():
 global_x = 10
 
 def function_with_free_variable():
-    foo(global_x) # x is a free variable, not in local variable
+    global_x # x is a free variable, not in local variable
 
 
 def function_with_rebound_variable():
-    foo(global_x) # x is bound, it's in local variable
+    global_x # x is bound, it's in local variable
     global_x = 1
 
 def simple_parameter(a):
@@ -45,16 +45,16 @@ def function_with_nested_nonlocal_var():
 
 def function_with_lambdas():
     x = 42
-    foo((lambda x: x*x))
+    (lambda x: x*x)
     y = 42
-    foo((lambda z: z*y))
+    (lambda z: z*y)
 
 def function_with_loops():
     for x in [1,2,3]:
         pass;
 
 def function_with_comprehension():
-    [2 for a in range(3)]
+    [2 for a in [1,2,3]]
 
 def func_wrapping_class():
     class A:
