@@ -38,7 +38,7 @@ public interface PythonCheck {
     private Integer cost;
     private final List<IssueLocation> secondaryLocations;
 
-    protected PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
+    public PreciseIssue(PythonCheck check, IssueLocation primaryLocation) {
       this.check = check;
       this.primaryLocation = primaryLocation;
       this.secondaryLocations = new ArrayList<>();

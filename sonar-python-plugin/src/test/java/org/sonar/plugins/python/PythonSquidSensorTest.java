@@ -51,7 +51,6 @@ import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.checks.CheckList;
-import org.sonar.python.checks.ParsingErrorCheck;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -214,7 +213,7 @@ public class PythonSquidSensorTest {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
-        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ParsingErrorCheck.CHECK_KEY))
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "ParsingError"))
         .build())
       .build();
 
