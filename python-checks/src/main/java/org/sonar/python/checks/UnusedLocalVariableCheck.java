@@ -77,7 +77,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     return tree.ancestors().stream()
       .anyMatch(t -> t.is(Kind.TUPLE)
         || (t.is(Kind.EXPRESSION_LIST) && ((PyExpressionListTree) t).expressions().size() > 1)
-        || t.is(Kind.FOR_STMT) && ((PyForStatementTree) t).expressions().size() > 1 && ((PyForStatementTree) t).expressions().contains(tree));
+        || (t.is(Kind.FOR_STMT) && ((PyForStatementTree) t).expressions().size() > 1 && ((PyForStatementTree) t).expressions().contains(tree)));
   }
 
   private static boolean isCallingLocalsFunction(PyFunctionDefTree functionTree) {
