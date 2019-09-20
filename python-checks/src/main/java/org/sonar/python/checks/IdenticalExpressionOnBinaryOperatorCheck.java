@@ -19,50 +19,40 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyNumericLiteralTree;
+import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1764")
-public class IdenticalExpressionOnBinaryOperatorCheck extends PythonCheckAstNode {
+public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscriptionCheck {
 
-  private static final List<String> EXCLUDED_OPERATOR_TYPES = Collections.unmodifiableList(Arrays.asList(
-    "*",
-    "+"));
+  private static final List<Tree.Kind> kinds = Arrays.asList(Tree.Kind.MINUS, Tree.Kind.DIVISION, Tree.Kind.FLOOR_DIVISION, Tree.Kind.MODULO,
+    Tree.Kind.SHIFT_EXPR, Tree.Kind.BITWISE_AND, Tree.Kind.BITWISE_OR, Tree.Kind.BITWISE_XOR, Tree.Kind.AND, Tree.Kind.OR, Tree.Kind.COMPARISON, Tree.Kind.IS, Tree.Kind.IN);
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(
-      PythonGrammar.M_EXPR,
-      PythonGrammar.A_EXPR,
-      PythonGrammar.SHIFT_EXPR,
-      PythonGrammar.AND_EXPR,
-      PythonGrammar.XOR_EXPR,
-      PythonGrammar.OR_EXPR,
-      PythonGrammar.COMPARISON,
-      PythonGrammar.OR_TEST,
-      PythonGrammar.AND_TEST);
+  public void initialize(Context context) {
+    kinds.forEach(k -> context.registerSyntaxNodeConsumer(k, this::checkBinaryExpression));
   }
 
-  @Override
-  public void visitNode(AstNode expression) {
-    List<AstNode> children = expression.getChildren();
-    AstNode leftOperand = children.get(0);
-    String operator = children.get(1).getTokenValue();
-    AstNode rightOperand = children.get(2);
-    if (!EXCLUDED_OPERATOR_TYPES.contains(operator) && CheckUtils.equalNodes(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator)) {
-      addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator + "\".")
+  private void checkBinaryExpression(SubscriptionContext ctx) {
+    PyBinaryExpressionTree binaryExpression = (PyBinaryExpressionTree) ctx.syntaxNode();
+    PyExpressionTree leftOperand = binaryExpression.leftOperand();
+    PyExpressionTree rightOperand = binaryExpression.rightOperand();
+    PyToken operator = binaryExpression.operator();
+    if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator)) {
+      ctx.addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator.value() + "\".")
         .secondary(leftOperand, "");
     }
   }
 
-  private static boolean isLeftShiftBy1(AstNode leftOperand, String operator) {
-    return "<<".equals(operator) && "1".equals(leftOperand.getTokenValue());
+  private static boolean isLeftShiftBy1(PyExpressionTree leftOperand, PyToken operator) {
+    return "<<".equals(operator.value()) && leftOperand.is(Tree.Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) leftOperand).valueAsLong() == 1;
   }
 }
