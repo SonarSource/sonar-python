@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.FileInput;
@@ -62,6 +63,11 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     if (element != null) {
       currentElement = element;
       consumers.getOrDefault(element.getKind(), Collections.emptyList()).forEach(SubscriptionContextImpl::execute);
+      consumers.getOrDefault(Kind.TOKEN, Collections.emptyList())
+        .forEach(ctx -> element.children().stream().filter(c -> Objects.nonNull(c) && c.is(Kind.TOKEN)).forEach(t -> {
+          currentElement = t;
+          ctx.execute();
+        }));
     }
     super.scan(element);
   }

@@ -19,7 +19,10 @@
  */
 package org.sonar.python;
 
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
@@ -44,7 +47,7 @@ public class PythonSubscriptionCheckTest {
 
   @Test
   public void test() {
-    TestPythonCheck check = new TestPythonCheck (){
+    TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -73,7 +76,7 @@ public class PythonSubscriptionCheckTest {
 
   @Test
   public void test_cost() {
-    TestPythonCheck check = new TestPythonCheck (){
+    TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -90,8 +93,38 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
+  public void test_tokens() {
+    TestPythonCheck check = new TestPythonCheck() {
+      private List<Token> ignoreList;
+
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+          ignoreList = new ArrayList<>();
+        });
+        context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+          PyToken pyToken = (PyToken) ctx.syntaxNode();
+          if (ignoreList.contains(pyToken.token())) {
+            return;
+          }
+          ignoreList.add(pyToken.token());
+          for (Trivia trivia : pyToken.trivia()) {
+            if (trivia.isComment()) {
+              ctx.addIssue(new PyTokenImpl(trivia.getToken()), MESSAGE);
+            }
+          }
+        });
+      }
+    };
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    assertThat(issues).hasSize(1);
+    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(5);
+    assertThat(issues.get(0).primaryLocation().endLine()).isEqualTo(5);
+  }
+
+  @Test
   public void test_file_line() {
-    TestPythonCheck check = new TestPythonCheck (){
+    TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.PASS_STMT, ctx -> {
