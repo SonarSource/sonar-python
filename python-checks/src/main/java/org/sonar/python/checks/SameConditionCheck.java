@@ -19,88 +19,79 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = SameConditionCheck.CHECK_KEY)
-public class SameConditionCheck extends PythonCheckAstNode {
+public class SameConditionCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1862";
   private static final String MESSAGE = "This branch duplicates the one on line %s.";
 
-  private List<AstNode> ignoreList;
+  private List<PyIfStatementTree> ignoreList;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.IF_STMT);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> this.ignoreList = new ArrayList<>());
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> {
+      PyIfStatementTree ifStatement = (PyIfStatementTree) ctx.syntaxNode();
+      if (ignoreList.contains(ifStatement)) {
+        return;
+      }
+      List<PyExpressionTree> conditions = getConditionsToCompare(ifStatement);
+      findSameConditions(conditions, ctx);
+    });
   }
 
-  @Override
-  public void visitFile(@Nullable AstNode astNode) {
-    ignoreList = new LinkedList<>();
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (ignoreList.contains(node)) {
-      return;
-    }
-    List<AstNode> conditions = getConditionsToCompare(node);
-    findSameConditions(conditions);
-  }
-
-  private List<AstNode> getConditionsToCompare(AstNode ifStmt) {
-    List<AstNode> conditions = ifStmt.getChildren(PythonGrammar.TEST);
-    AstNode elseNode = ifStmt.getFirstChild(PythonKeyword.ELSE);
-    if (conditions.size() == 1 && elseNode != null) {
-      AstNode suite = elseNode.getNextSibling().getNextSibling();
-      lookForElseIfs(conditions, suite);
+  private List<PyExpressionTree> getConditionsToCompare(PyIfStatementTree ifStatement) {
+    List<PyExpressionTree> conditions = new ArrayList<>();
+    conditions.add(ifStatement.condition());
+    conditions.addAll(ifStatement.elifBranches().stream().map(PyIfStatementTree::condition).collect(Collectors.toList()));
+    PyElseStatementTree elseStatement = ifStatement.elseBranch();
+    if (elseStatement != null) {
+      lookForElseIfs(conditions, elseStatement);
     }
     return conditions;
   }
 
-  private void lookForElseIfs(List<AstNode> conditions, AstNode suite) {
-    AstNode singleIfChild = singleIfChild(suite);
+  private void lookForElseIfs(List<PyExpressionTree> conditions, PyElseStatementTree elseBranch) {
+    PyIfStatementTree singleIfChild = singleIfChild(elseBranch.body());
     if (singleIfChild != null) {
       ignoreList.add(singleIfChild);
       conditions.addAll(getConditionsToCompare(singleIfChild));
     }
   }
 
-  private void findSameConditions(List<AstNode> conditions) {
+  private void findSameConditions(List<PyExpressionTree> conditions, SubscriptionContext ctx) {
     for (int i = 1; i < conditions.size(); i++) {
-      checkCondition(conditions, i);
+      compareConditions(conditions, i, ctx);
     }
   }
 
-  private void checkCondition(List<AstNode> conditions, int index) {
+  private void compareConditions(List<PyExpressionTree> conditions, int index, SubscriptionContext ctx) {
     for (int j = 0; j < index; j++) {
-      if (CheckUtils.equalNodes(conditions.get(j), conditions.get(index))) {
-        String message = String.format(MESSAGE, conditions.get(j).getToken().getLine());
-        addIssue(conditions.get(index), message).secondary(conditions.get(j), "Original");
+      if (CheckUtils.areEquivalent(conditions.get(j), conditions.get(index))) {
+        String message = String.format(MESSAGE, conditions.get(j).firstToken().line());
+        ctx.addIssue(conditions.get(index), message).secondary(conditions.get(j), "Original");
         return;
       }
     }
   }
 
-  private static AstNode singleIfChild(AstNode suite) {
-    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-    if (statements.size() == 1) {
-      AstSelect nestedIf = statements.get(0).select()
-          .children(PythonGrammar.COMPOUND_STMT)
-          .children(PythonGrammar.IF_STMT);
-      if (nestedIf.size() == 1) {
-        return nestedIf.get(0);
-      }
+  private static PyIfStatementTree singleIfChild(PyStatementListTree statementList) {
+    List<PyStatementTree> statements = statementList.statements();
+    if (statements.size() == 1 && statements.get(0).is(Tree.Kind.IF_STMT)) {
+      return (PyIfStatementTree) statements.get(0);
     }
     return null;
   }

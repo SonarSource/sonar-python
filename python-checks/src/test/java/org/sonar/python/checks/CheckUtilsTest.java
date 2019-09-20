@@ -177,6 +177,14 @@ public class CheckUtilsTest {
   }
 
   @Test
+  public void comparison_equivalence() {
+    assertThat(CheckUtils.areEquivalent(parse("foo is None"), parse("foo is not None"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("x < 2"), parse("x > 2"))).isFalse();
+    assertThat(CheckUtils.areEquivalent(parse("foo is None"), parse("foo is  None"))).isTrue();
+    assertThat(CheckUtils.areEquivalent(parse("x < 1"), parse("x < 1"))).isTrue();
+  }
+
+  @Test
   public void tree_equivalence() {
     assertThat(CheckUtils.areEquivalent(new PyArgListTreeImpl(null, Collections.emptyList()), new PyArgListTreeImpl(null, Collections.emptyList()))).isTrue();
   }
