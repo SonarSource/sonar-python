@@ -31,4 +31,4 @@ def fun7():
     '''
     pass
 
-pass
+pass # Noncompliant

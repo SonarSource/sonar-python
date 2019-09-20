@@ -19,64 +19,42 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonTokenType;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyExpressionStatementTree;
+import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStatementTree;
 
-@Rule(key = NeedlessPassCheck.CHECK_KEY)
-public class NeedlessPassCheck extends PythonCheckAstNode {
+import static org.sonar.python.api.tree.Tree.Kind.EXPRESSION_STMT;
+import static org.sonar.python.api.tree.Tree.Kind.PASS_STMT;
+import static org.sonar.python.api.tree.Tree.Kind.STATEMENT_LIST;
+import static org.sonar.python.api.tree.Tree.Kind.STRING_LITERAL;
 
-  public static final String CHECK_KEY = "S2772";
+@Rule(key = "S2772")
+public class NeedlessPassCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove this unneeded \"pass\".";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.PASS_STMT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode suite = node.getFirstAncestor(PythonGrammar.SUITE);
-    if (suite != null) {
-      List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-      if (statements.size() > 1) {
-        if (!docstringException(statements)) {
-          addIssue(node, MESSAGE);
-        }
-      } else {
-        visitOneOrZeroStatement(node, suite, statements.size());
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(STATEMENT_LIST, ctx -> {
+      List<PyStatementTree> statements = ((PyStatementListTree) ctx.syntaxNode()).statements().stream()
+        .filter(NeedlessPassCheck::isNotStringLiteralExpressionStatement)
+        .collect(Collectors.toList());
+      if (statements.size() <= 1) {
+        return;
       }
-    }
+      statements.stream()
+        .filter(st -> st.is(PASS_STMT))
+        .findFirst()
+        .ifPresent(st -> ctx.addIssue(st, MESSAGE));
+    });
   }
 
-  private static boolean docstringException(List<AstNode> statements) {
-    return statements.size() == 2 && statements.get(0).getToken().getType().equals(PythonTokenType.STRING);
+  private static boolean isNotStringLiteralExpressionStatement(PyStatementTree st) {
+    return !(st.is(EXPRESSION_STMT) && ((PyExpressionStatementTree) st).expressions().stream().allMatch(e -> e.is(STRING_LITERAL)));
   }
-
-  private void visitOneOrZeroStatement(AstNode node, AstNode suite, int statementNumber) {
-    AstSelect simpleStatements;
-    if (statementNumber == 1) {
-      simpleStatements = suite.select()
-          .children(PythonGrammar.STATEMENT)
-          .children(PythonGrammar.STMT_LIST)
-          .children(PythonGrammar.SIMPLE_STMT);
-    } else {
-      simpleStatements = suite.select()
-          .children(PythonGrammar.STMT_LIST)
-          .children(PythonGrammar.SIMPLE_STMT);
-    }
-    if (simpleStatements.size() > 1) {
-      addIssue(node, MESSAGE);
-    }
-  }
-
 }
 
