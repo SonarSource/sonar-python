@@ -388,6 +388,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitQualifiedExpression(PyQualifiedExpressionTree qualifiedExpression) {
+      // We need to firstly create symbol for qualifier
       super.visitQualifiedExpression(qualifiedExpression);
       if (qualifiedExpression.qualifier() instanceof HasSymbol) {
         TreeSymbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
