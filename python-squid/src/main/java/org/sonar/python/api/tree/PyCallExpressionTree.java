@@ -39,5 +39,10 @@ public interface PyCallExpressionTree extends PyExpressionTree {
   PyToken rightPar();
 
   @CheckForNull
-  TreeSymbol calleeSymbol();
+  default TreeSymbol calleeSymbol() {
+    if (callee() instanceof HasSymbol) {
+      return ((HasSymbol) callee()).symbol();
+    }
+    return null;
+  }
 }

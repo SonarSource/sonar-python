@@ -32,6 +32,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
 import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -56,8 +57,12 @@ public class SymbolTableBuilderTreeTest {
   public void local_variable() {
     PyFunctionDefTree functionTree = functionTreesByName.get("function_with_local");
     Map<String, TreeSymbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsOnly("a","foo", "t2");
+    assertThat(symbolByName.keySet()).containsOnly("a", "t2");
     TreeSymbol a = symbolByName.get("a");
+    PyNameTree aTree = (PyNameTree) functionTree.descendants(Tree.Kind.NAME)
+      .filter(name -> ((PyNameTree) name).name().equals("a"))
+      .findFirst().get();
+    assertThat(aTree.symbol()).isEqualTo(a);
     int functionStartLine = functionTree.firstToken().token().getLine();
     assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(
       functionStartLine + 1, functionStartLine + 2, functionStartLine + 3, functionStartLine + 4);

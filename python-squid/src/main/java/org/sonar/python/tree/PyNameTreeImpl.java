@@ -22,13 +22,16 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
 public class PyNameTreeImpl extends PyTree implements PyNameTree {
   private final String name;
   private final boolean isVariable;
+  private TreeSymbol symbol;
 
   public PyNameTreeImpl(AstNode astNode, String name, boolean isVariable) {
     super(astNode);
@@ -59,5 +62,15 @@ public class PyNameTreeImpl extends PyTree implements PyNameTree {
   @Override
   public List<Tree> children() {
     return Collections.emptyList();
+  }
+
+  @CheckForNull
+  @Override
+  public TreeSymbol symbol() {
+    return symbol;
+  }
+
+  public void setSymbol(TreeSymbol symbol) {
+    this.symbol = symbol;
   }
 }

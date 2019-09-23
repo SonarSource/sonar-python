@@ -31,15 +31,14 @@ import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.HasSymbol;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
-import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
@@ -56,9 +55,9 @@ import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
-import org.sonar.python.tree.PyCallExpressionTreeImpl;
 import org.sonar.python.tree.PyFunctionDefTreeImpl;
 import org.sonar.python.tree.PyLambdaExpressionTreeImpl;
+import org.sonar.python.tree.PyNameTreeImpl;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
@@ -150,10 +149,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     private void createImportedNames(List<PyAliasedNameTree> importedNames) {
       importedNames.forEach(module -> {
+        PyNameTree nameTree = module.dottedName().names().get(0);
         if (module.alias() != null) {
-          addBindingUsage(module.alias(), Usage.Kind.IMPORT);
+          addBindingUsage(module.alias(), Usage.Kind.IMPORT, nameTree.name());
         } else {
-          addBindingUsage(module.dottedName().names().get(0), Usage.Kind.IMPORT);
+          addBindingUsage(nameTree, Usage.Kind.IMPORT, nameTree.name());
         }
       });
     }
@@ -241,8 +241,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
 
+    private void addBindingUsage(PyNameTree nameTree, Usage.Kind usage, @Nullable String fullyQualifiedName) {
+      currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
+    }
+
     private void addBindingUsage(PyNameTree nameTree, Usage.Kind usage) {
-      currentScope().addBindingUsage(nameTree, usage);
+      currentScope().addBindingUsage(nameTree, usage, null);
     }
 
     private Scope currentScope() {
@@ -259,7 +263,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private final Set<TreeSymbol> symbols = new HashSet<>();
     private final Set<String> globalNames = new HashSet<>();
     private final Set<String> nonlocalNames = new HashSet<>();
-    private final Map<String, TreeSymbol> importedSymbols = new HashMap<>();
 
     private Scope(@Nullable Scope parent, Tree rootTree) {
       this.parent = parent;
@@ -271,18 +274,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
 
-    void addBindingUsage(PyNameTree nameTree, Usage.Kind kind) {
+    void addBindingUsage(PyNameTree nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {
       String symbolName = nameTree.name();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
-        SymbolImpl symbol = new SymbolImpl(symbolName);
+        SymbolImpl symbol = new SymbolImpl(symbolName, fullyQualifiedName);
         symbols.add(symbol);
         symbolsByName.put(symbolName, symbol);
       }
       SymbolImpl symbol = resolve(symbolName);
       if (symbol != null) {
-        if (kind == Usage.Kind.IMPORT) {
-          importedSymbols.put(symbolName, symbol);
-        }
         symbol.addUsage(nameTree, kind);
       }
     }
@@ -303,53 +303,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     void addNonLocalName(String name) {
       nonlocalNames.add(name);
     }
-
-    void createSymbolFromCallExpression(PyCallExpressionTree callExpression) {
-      String symbolName = functionName(callExpression.callee());
-      if (symbolName == null) {
-        return;
-      }
-      SymbolImpl symbol = resolve(symbolName);
-      if (symbol == null) {
-        String fullyQualifiedName = fullyQualifiedName(callExpression.callee());
-        symbol = new SymbolImpl(symbolName, fullyQualifiedName);
-        symbols.add(symbol);
-        symbolsByName.put(symbolName, symbol);
-      }
-      symbol.addUsage(callExpression.callee(), Usage.Kind.CALLEE);
-      ((PyCallExpressionTreeImpl) callExpression).setCalleeSymbol(symbol);
-    }
-
-    @CheckForNull
-    static String functionName(PyExpressionTree callee) {
-      if (callee.is(Kind.QUALIFIED_EXPR)) {
-        PyQualifiedExpressionTree qualifiedExpression = (PyQualifiedExpressionTree) callee;
-        return functionName(qualifiedExpression.qualifier()) + "." + qualifiedExpression.name().name();
-      }
-      if (callee.is(Kind.NAME)) {
-        return ((PyNameTree) callee).name();
-      }
-      return null;
-    }
-
-    @CheckForNull
-    private String fullyQualifiedName(PyExpressionTree callee) {
-      if (callee.is(Kind.QUALIFIED_EXPR)) {
-        PyQualifiedExpressionTree qualifiedExpression = (PyQualifiedExpressionTree) callee;
-        String qualifierName = fullyQualifiedName(qualifiedExpression.qualifier());
-        if (qualifierName != null) {
-          return qualifierName + "." + qualifiedExpression.name().name();
-        }
-      }
-      if (callee.is(Kind.NAME)) {
-        PyNameTree name = (PyNameTree) callee;
-        TreeSymbol symbol = importedSymbols.get(name.name());
-        if (symbol != null) {
-          return symbol.name();
-        }
-      }
-      return null;
-    }
   }
 
   private static class SymbolImpl implements TreeSymbol {
@@ -358,11 +311,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Nullable
     private final String fullyQualifiedName;
     private final List<Usage> usages = new ArrayList<>();
-
-    private SymbolImpl(String name) {
-      this.name = name;
-      this.fullyQualifiedName = null;
-    }
+    private Map<String, TreeSymbol> childrenSymbolByName = new HashMap<>();
 
     public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
       this.name = name;
@@ -387,6 +336,19 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     void addUsage(Tree tree, Usage.Kind kind) {
       usages.add(new UsageImpl(tree, kind));
+      if (tree.is(Kind.NAME)) {
+        ((PyNameTreeImpl) tree).setSymbol(this);
+      }
+    }
+
+    void addOrCreateChildUsage(PyNameTree name) {
+      String childSymbolName = name.name();
+      if (!childrenSymbolByName.containsKey(childSymbolName)) {
+        SymbolImpl symbol = new SymbolImpl(childSymbolName, fullyQualifiedName + "." + childSymbolName);
+        childrenSymbolByName.put(childSymbolName, symbol);
+      }
+      TreeSymbol symbol = childrenSymbolByName.get(childSymbolName);
+      ((SymbolImpl) symbol).addUsage(name, Usage.Kind.OTHER);
     }
   }
 
@@ -425,9 +387,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
-      scopesByRootTree.get(currentScopeRootTree()).createSymbolFromCallExpression(pyCallExpressionTree);
-      super.visitCallExpression(pyCallExpressionTree);
+    public void visitQualifiedExpression(PyQualifiedExpressionTree qualifiedExpression) {
+      super.visitQualifiedExpression(qualifiedExpression);
+      if (qualifiedExpression.qualifier() instanceof HasSymbol) {
+        TreeSymbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
+        if (qualifierSymbol != null) {
+          ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name());
+        }
+      }
     }
 
     @Override

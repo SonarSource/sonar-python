@@ -17,27 +17,12 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.semantic;
+package org.sonar.python.api.tree;
 
-import org.sonar.python.api.tree.Tree;
+import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.TreeSymbol;
 
-public interface Usage {
-
-  default boolean isBindingUsage() {
-    return kind() != Kind.OTHER;
-  }
-
-  Tree tree();
-
-  Kind kind();
-
-  enum Kind {
-    ASSIGNMENT_LHS,
-    COMPOUND_ASSIGNMENT_LHS,
-    IMPORT,
-    LOOP_DECLARATION,
-    COMP_DECLARATION,
-    OTHER,
-    PARAMETER
-  }
+public interface HasSymbol {
+  @CheckForNull
+  TreeSymbol symbol();
 }
