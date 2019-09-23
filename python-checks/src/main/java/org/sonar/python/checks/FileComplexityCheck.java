@@ -19,15 +19,15 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
 import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "FileComplexity")
-public class FileComplexityCheck extends PythonCheckAstNode {
+public class FileComplexityCheck extends PythonSubscriptionCheck {
   private static final int DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD = 200;
 
   @RuleProperty(
@@ -36,16 +36,16 @@ public class FileComplexityCheck extends PythonCheckAstNode {
   int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
 
   @Override
-  public void leaveFile(AstNode astNode) {
-    int complexity = ComplexityVisitor.complexity(astNode);
-    if (complexity > maximumFileComplexityThreshold) {
-      String message = MessageFormat.format(
-        "File has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
-        complexity,
-        maximumFileComplexityThreshold);
-      addFileIssue(message)
-        .withCost(complexity - maximumFileComplexityThreshold);
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      int complexity = ComplexityVisitor.complexity(ctx.syntaxNode());
+      if (complexity > maximumFileComplexityThreshold) {
+        String message = MessageFormat.format(
+          "File has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.",
+          complexity,
+          maximumFileComplexityThreshold);
+        ctx.addFileIssue(message).withCost(complexity - maximumFileComplexityThreshold);
+      }
+    });
   }
-
 }

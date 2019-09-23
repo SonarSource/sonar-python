@@ -19,18 +19,15 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "ClassComplexity")
-public class ClassComplexityCheck extends PythonCheckAstNode {
+public class ClassComplexityCheck extends PythonSubscriptionCheck {
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
   private static final String MESSAGE = "Class has a complexity of %s which is greater than %s authorized.";
 
@@ -38,18 +35,14 @@ public class ClassComplexityCheck extends PythonCheckAstNode {
   int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      int complexity = ComplexityVisitor.complexity(classDef);
+      if (complexity > maximumClassComplexityThreshold) {
+        String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
+        ctx.addIssue(classDef.name(), message).withCost(complexity - maximumClassComplexityThreshold);
+      }
+    });
   }
-
-  @Override
-  public void visitNode(AstNode node) {
-    int complexity = ComplexityVisitor.complexity(node);
-    if (complexity > maximumClassComplexityThreshold) {
-      String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);
-      addIssue(node.getFirstChild(PythonGrammar.CLASSNAME), message)
-        .withCost(complexity - maximumClassComplexityThreshold);
-    }
-  }
-
 }

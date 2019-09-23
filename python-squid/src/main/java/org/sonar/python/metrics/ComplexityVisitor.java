@@ -19,45 +19,73 @@
  */
 package org.sonar.python.metrics;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import org.sonar.python.PythonVisitor;
-import org.sonar.python.api.PythonGrammar;
+import com.sonar.sslr.api.TokenType;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.tree.PyBinaryExpressionTree;
+import org.sonar.python.api.tree.PyComprehensionIfTree;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
+import org.sonar.python.api.tree.PyForStatementTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.BaseTreeVisitor;
 
-public class ComplexityVisitor extends PythonVisitor {
+public class ComplexityVisitor extends BaseTreeVisitor {
 
-  private int complexity;
+  private int complexity = 0;
 
-  public static int complexity(AstNode node) {
-    ComplexityVisitor visitor = node.is(PythonGrammar.FUNCDEF) ? new FunctionComplexityVisitor() : new ComplexityVisitor();
-    visitor.scanNode(node);
+  public static int complexity(Tree pyTree) {
+    ComplexityVisitor visitor = pyTree.is(Tree.Kind.FUNCDEF) ? new FunctionComplexityVisitor() : new ComplexityVisitor();
+    pyTree.accept(visitor);
     return visitor.complexity;
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    Set<AstNodeType> set = new HashSet<>();
-    set.add(PythonGrammar.FUNCDEF);
-    set.add(PythonGrammar.FOR_STMT);
-    set.add(PythonGrammar.WHILE_STMT);
-    set.add(PythonKeyword.IF);
-    set.add(PythonKeyword.AND);
-    set.add(PythonKeyword.OR);
-    return Collections.unmodifiableSet(set);
-  }
-
-  @Override
-  public void visitFile(AstNode node) {
-    complexity = 0;
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
+  public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
     complexity++;
+    super.visitFunctionDef(pyFunctionDefTree);
+  }
+
+  @Override
+  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+    complexity++;
+    super.visitForStatement(pyForStatementTree);
+  }
+
+  @Override
+  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+    complexity++;
+    super.visitWhileStatement(pyWhileStatementTree);
+  }
+
+  @Override
+  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
+    if (!pyIfStatementTree.isElif()) {
+      complexity++;
+    }
+    super.visitIfStatement(pyIfStatementTree);
+  }
+
+  @Override
+  public void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree) {
+    complexity++;
+    super.visitConditionalExpression(pyConditionalExpressionTree);
+  }
+
+  @Override
+  public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+    TokenType type = pyBinaryExpressionTree.operator().type();
+    if (type.equals(PythonKeyword.AND) || type.equals(PythonKeyword.OR)) {
+      complexity++;
+    }
+    super.visitBinaryExpression(pyBinaryExpressionTree);
+  }
+
+  @Override
+  public void visitComprehensionIf(PyComprehensionIfTree tree) {
+    complexity++;
+    super.visitComprehensionIf(tree);
   }
 
   public int getComplexity() {
@@ -69,21 +97,12 @@ public class ComplexityVisitor extends PythonVisitor {
     private int functionNestingLevel = 0;
 
     @Override
-    public void visitNode(AstNode node) {
-      if (node.is(PythonGrammar.FUNCDEF)) {
-        functionNestingLevel++;
-      }
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      functionNestingLevel++;
       if (functionNestingLevel == 1) {
-        super.visitNode(node);
+        super.visitFunctionDef(pyFunctionDefTree);
       }
-    }
-
-    @Override
-    public void leaveNode(AstNode node) {
-      if (node.is(PythonGrammar.FUNCDEF)) {
-        functionNestingLevel--;
-      }
+      functionNestingLevel--;
     }
   }
-
 }
