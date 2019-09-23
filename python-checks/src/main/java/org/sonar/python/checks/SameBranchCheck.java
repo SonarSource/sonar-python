@@ -19,167 +19,151 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import javax.annotation.Nullable;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.PythonTokenType;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyConditionalExpressionTree;
+import org.sonar.python.api.tree.PyElseStatementTree;
+import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyIfStatementTree;
+import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
+import org.sonar.python.api.tree.PyStatementListTree;
+import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.Tree;
 
-@Rule(key = SameBranchCheck.CHECK_KEY)
-public class SameBranchCheck extends PythonCheckAstNode {
-  public static final String CHECK_KEY = "S1871";
-  public static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
+@Rule(key = "S1871")
+public class SameBranchCheck extends PythonSubscriptionCheck {
+  private static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
 
-  private static final int CONDITIONAL_EXPRESSION_SIZE = 5;
-  private static final int CONDITIONAL_EXPRESSION_TRUE_BRANCH = 0;
-  private static final int CONDITIONAL_EXPRESSION_IF = 1;
-  private static final int CONDITIONAL_EXPRESSION_FALSE_BRANCH = 4;
-
-  private List<AstNode> ignoreList;
+  private List<Tree> ignoreList;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return immutableSet(PythonGrammar.IF_STMT, PythonGrammar.TEST);
-  }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> ignoreList = new ArrayList<>());
 
-  @Override
-  public void visitFile(@Nullable AstNode astNode) {
-    ignoreList = new LinkedList<>();
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (ignoreList.contains(node)) {
-      return;
-    }
-    List<AstNode> branches = node.is(PythonGrammar.IF_STMT) ? getIfBranches(node) : getConditionalExpressionBranches(node);
-    findSameBranches(branches);
-  }
-
-  private List<AstNode> getConditionalExpressionBranches(AstNode node) {
-    List<AstNode> branches = new ArrayList<>();
-    appendConditionalExpressionBranches(branches, node);
-    return branches;
-  }
-
-  private void appendConditionalExpressionBranches(List<AstNode> branches, AstNode node) {
-    if (node.is(PythonGrammar.TEST)) {
-      ignoreList.add(node);
-      List<AstNode> children = node.getChildren();
-      if (children.size() == 1) {
-        appendConditionalExpressionBranches(branches, children.get(0));
-      } else if (children.size() == CONDITIONAL_EXPRESSION_SIZE && children.get(CONDITIONAL_EXPRESSION_IF).is(PythonKeyword.IF)) {
-        appendConditionalExpressionBranches(branches, children.get(CONDITIONAL_EXPRESSION_TRUE_BRANCH));
-        appendConditionalExpressionBranches(branches, children.get(CONDITIONAL_EXPRESSION_FALSE_BRANCH));
+    context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> {
+      PyIfStatementTree ifStmt = (PyIfStatementTree) ctx.syntaxNode();
+      if (ignoreList.contains(ifStmt)) {
+        return;
       }
-    } else if (node.is(PythonGrammar.ATOM) && node.getNumberOfChildren() == 3 && node.getFirstChild().is(PythonPunctuator.LPARENTHESIS)) {
-      appendConditionalExpressionBranches(branches, node.getChildren().get(1));
-    } else if (node.is(PythonGrammar.TESTLIST_COMP) && node.getNumberOfChildren() == 1) {
-      appendConditionalExpressionBranches(branches, node.getFirstChild());
-    } else {
-      branches.add(node);
+      List<PyStatementListTree> branches = getIfBranches(ifStmt);
+      findSameBranches(branches, ctx);
+    });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.CONDITIONAL_EXPR, ctx -> {
+      PyConditionalExpressionTree conditionalExpression = (PyConditionalExpressionTree) ctx.syntaxNode();
+      if (ignoreList.contains(conditionalExpression)) {
+        return;
+      }
+      List<PyExpressionTree> expressions = new ArrayList<>();
+      addConditionalExpressionBranches(expressions, conditionalExpression);
+      findSameBranches(expressions, ctx);
+    });
+  }
+
+  private static void findSameBranches(List<? extends Tree> branches, SubscriptionContext ctx) {
+    for (int i = 1; i < branches.size(); i++) {
+      checkBranches(branches, i, ctx);
     }
   }
 
-  private List<AstNode> getIfBranches(AstNode ifStmt) {
-    List<AstNode> branches = ifStmt.getChildren(PythonGrammar.SUITE);
-    AstNode elseNode = ifStmt.getFirstChild(PythonKeyword.ELSE);
-    if (branches.size() == 2 && elseNode != null) {
-      AstNode suite = branches.get(1);
-      lookForElseIfs(branches, suite);
+  private static void checkBranches(List<? extends Tree> branches, int index, SubscriptionContext ctx) {
+    Tree duplicateBlock = branches.get(index);
+    boolean isOnASingleLine = isOnASingleLine(duplicateBlock);
+    List<Tree> equivalentBlocks = new ArrayList<>();
+    for (int j = 0; j < index; j++) {
+      Tree originalBlock = branches.get(j);
+      if (CheckUtils.areEquivalent(originalBlock, duplicateBlock)) {
+        equivalentBlocks.add(originalBlock);
+        boolean allBranchesIdentical = equivalentBlocks.size() == branches.size() - 1;
+        if (!isOnASingleLine || allBranchesIdentical) {
+          int line = getFirstToken(originalBlock).line();
+          String message = String.format(MESSAGE, line);
+          PreciseIssue issue = ctx.addIssue(getFirstToken(duplicateBlock), getLastToken(duplicateBlock), message);
+          equivalentBlocks.forEach(e -> issue.secondary(getFirstToken(e), "Original"));
+        }
+      }
+    }
+  }
+
+  private List<PyStatementListTree> getIfBranches(PyIfStatementTree ifStmt) {
+    List<PyStatementListTree> branches = new ArrayList<>();
+    branches.add(ifStmt.body());
+    branches.addAll(ifStmt.elifBranches().stream().map(PyIfStatementTree::body).collect(Collectors.toList()));
+    PyElseStatementTree elseStatement = ifStmt.elseBranch();
+    if (elseStatement != null) {
+      branches.add(elseStatement.body());
+      lookForElseIfs(branches, elseStatement);
     }
     return branches;
   }
 
-  private void lookForElseIfs(List<AstNode> branches, AstNode suite) {
-    AstNode singleIfChild = singleIfChild(suite);
+  private void addConditionalExpressionBranches(List<PyExpressionTree> branches, PyConditionalExpressionTree conditionalExpression) {
+    PyExpressionTree trueExpression = removeParentheses(conditionalExpression.trueExpression());
+    PyExpressionTree falseExpression = removeParentheses(conditionalExpression.falseExpression());
+    if (trueExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
+      ignoreList.add(trueExpression);
+      addConditionalExpressionBranches(branches, (PyConditionalExpressionTree) trueExpression);
+    } else {
+      branches.add(trueExpression);
+    }
+    if (falseExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
+      ignoreList.add(falseExpression);
+      addConditionalExpressionBranches(branches, (PyConditionalExpressionTree) falseExpression);
+    } else {
+      branches.add(falseExpression);
+    }
+  }
+
+  private static PyExpressionTree removeParentheses(PyExpressionTree expression) {
+    if (expression.is(Tree.Kind.PARENTHESIZED)) {
+      return removeParentheses(((PyParenthesizedExpressionTree) expression).expression());
+    } else {
+      return expression;
+    }
+  }
+
+  private void lookForElseIfs(List<PyStatementListTree> branches, PyElseStatementTree elseBranch) {
+    PyIfStatementTree singleIfChild = singleIfChild(elseBranch.body());
     if (singleIfChild != null) {
       ignoreList.add(singleIfChild);
       branches.addAll(getIfBranches(singleIfChild));
     }
   }
 
-  private void findSameBranches(List<AstNode> branches) {
-    for (int i = 1; i < branches.size(); i++) {
-      checkBranch(branches, i);
-    }
-  }
-
-  private void checkBranch(List<AstNode> branches, int index) {
-    AstNode duplicateBlock = branches.get(index);
-    boolean isOnASingleLine = isOnASingleLine(duplicateBlock);
-    List<AstNode> equivalentBlocks = new ArrayList<>();
-    for (int j = 0; j < index; j++) {
-      AstNode originalBlock = branches.get(j);
-      if (CheckUtils.equalNodes(originalBlock, duplicateBlock)) {
-        equivalentBlocks.add(originalBlock);
-        boolean isLastComparisonInBranches = j == branches.size() - 2;
-        if (!isOnASingleLine || isLastComparisonInBranches) {
-          int line = originalBlock.getTokenLine() + (originalBlock.is(PythonGrammar.SUITE) ? 1 : 0);
-          String message = String.format(MESSAGE, line);
-          PreciseIssue issue = addIssue(location(duplicateBlock, message));
-          equivalentBlocks.forEach(original -> issue.secondary(location(original, "Original")));
-          return;
-        }
-      } else if (isOnASingleLine) {
-        return;
-      }
-    }
-  }
-
-  private static IssueLocation location(AstNode node, String message) {
-    AstNode firstStatement = node.getFirstChild(PythonGrammar.STATEMENT);
-    if (firstStatement != null) {
-      return IssueLocation.preciseLocation(firstStatement, getLastNode(node), message);
-    } else {
-      return IssueLocation.preciseLocation(node, message);
-    }
-  }
-
-  /**
-   * We need this method to avoid passing of new line or dedent as pointer to end of issue location
-   */
-  private static AstNode getLastNode(AstNode node) {
-    if (node.getNumberOfChildren() == 0) {
-      return node;
-    }
-
-    AstNode lastChild = node.getLastChild();
-    while (lastChild.is(PythonTokenType.NEWLINE, PythonTokenType.DEDENT, PythonTokenType.INDENT)) {
-      lastChild = lastChild.getPreviousSibling();
-    }
-
-    return getLastNode(lastChild);
-  }
-
-  private static AstNode singleIfChild(AstNode suite) {
-    List<AstNode> statements = suite.getChildren(PythonGrammar.STATEMENT);
-    if (statements.size() == 1) {
-      AstSelect nestedIf = statements.get(0).select()
-        .children(PythonGrammar.COMPOUND_STMT)
-        .children(PythonGrammar.IF_STMT);
-      if (nestedIf.size() == 1) {
-        return nestedIf.get(0);
-      }
+  private static PyIfStatementTree singleIfChild(PyStatementListTree statementList) {
+    List<PyStatementTree> statements = statementList.statements();
+    if (statements.size() == 1 && statements.get(0).is(Tree.Kind.IF_STMT)) {
+      return (PyIfStatementTree) statements.get(0);
     }
     return null;
   }
 
-  public static boolean isOnASingleLine(AstNode parent) {
-    List<AstNode> statements = parent.getChildren(PythonGrammar.STATEMENT);
-    if (statements.isEmpty()) {
-      return true;
+  private static boolean isOnASingleLine(Tree tree) {
+    if (tree.is(Tree.Kind.STATEMENT_LIST)) {
+      PyStatementListTree duplicateBlock = (PyStatementListTree) tree;
+      return duplicateBlock.statements().get(0).firstToken().line() == duplicateBlock.statements().get(duplicateBlock.statements().size() - 1).lastToken().line();
+    } else {
+      return tree.firstToken().line() == tree.lastToken().line();
     }
-    return statements.get(0).getTokenLine() == statements.get(statements.size() - 1).getLastToken().getLine();
+  }
+
+  private static PyToken getFirstToken(Tree tree) {
+    if (tree.is(Tree.Kind.STATEMENT_LIST)) {
+      return getFirstToken(((PyStatementListTree) tree).statements().get(0));
+    }
+    return tree.firstToken();
+  }
+
+  private static PyToken getLastToken(Tree tree) {
+    if (tree.is(Tree.Kind.STATEMENT_LIST)) {
+      List<PyStatementTree> statements = ((PyStatementListTree) tree).statements();
+      return getLastToken(statements.get(statements.size()-1));
+    }
+    return tree.lastToken();
   }
 }
