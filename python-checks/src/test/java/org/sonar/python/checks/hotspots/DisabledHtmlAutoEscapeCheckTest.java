@@ -17,13 +17,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.checks.hotspots;
 
-import java.util.List;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public interface PyStringLiteralTree extends PyExpressionTree {
+public class DisabledHtmlAutoEscapeCheckTest {
 
-  List<PyStringElementTree> stringElements();
+  @Test
+  public void test() {
+    DisabledHtmlAutoEscapeCheck check = new DisabledHtmlAutoEscapeCheck();
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/disabledHtmlAutoEscape/jinja2.py", check);
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/disabledHtmlAutoEscape/settings.py", check);
+  }
 
-  String trimmedQuotesValue();
 }

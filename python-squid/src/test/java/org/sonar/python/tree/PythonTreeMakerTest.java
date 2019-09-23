@@ -1526,40 +1526,22 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void numeric_literal_expression() {
+    testNumericLiteral("12", 12L);
+    testNumericLiteral("12L", 12L);
+    testNumericLiteral("3_0", 30L);
+    testNumericLiteral("0b01", 1L);
+    testNumericLiteral("0B01", 1L);
+    testNumericLiteral("0B01", 1L);
+    testNumericLiteral("0B101", 5L);
+  }
+
+  private void testNumericLiteral(String code, Long expectedValue) {
     setRootRule(PythonGrammar.ATOM);
-    PyExpressionTree parse = parse("12", treeMaker::expression);
-    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
-    PyNumericLiteralTree numericLiteral = (PyNumericLiteralTree) parse;
-    assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
-    assertThat(numericLiteral.valueAsString()).isEqualTo("12");
-    assertThat(numericLiteral.children()).isEmpty();
-
-    parse = parse("12L", treeMaker::expression);
-    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
-    numericLiteral = (PyNumericLiteralTree) parse;
-    assertThat(numericLiteral.valueAsLong()).isEqualTo(12L);
-    assertThat(numericLiteral.valueAsString()).isEqualTo("12L");
-    assertThat(numericLiteral.children()).isEmpty();
-
-    parse = parse("3_0", treeMaker::expression);
-    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
-    numericLiteral = (PyNumericLiteralTree) parse;
-    assertThat(numericLiteral.valueAsLong()).isEqualTo(30L);
-    assertThat(numericLiteral.valueAsString()).isEqualTo("3_0");
-    assertThat(numericLiteral.children()).isEmpty();
-
-    parse = parse("0b01", treeMaker::expression);
-    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
-    numericLiteral = (PyNumericLiteralTree) parse;
-    assertThat(numericLiteral.valueAsLong()).isEqualTo(1L);
-    assertThat(numericLiteral.valueAsString()).isEqualTo("0b01");
-    assertThat(numericLiteral.children()).isEmpty();
-
-    parse = parse("0B01", treeMaker::expression);
-    assertThat(parse.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
-    numericLiteral = (PyNumericLiteralTree) parse;
-    assertThat(numericLiteral.valueAsLong()).isEqualTo(1L);
-    assertThat(numericLiteral.valueAsString()).isEqualTo("0B01");
+    PyExpressionTree expression = parse(code, treeMaker::expression);
+    assertThat(expression.is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
+    PyNumericLiteralTree numericLiteral = (PyNumericLiteralTree) expression;
+    assertThat(numericLiteral.valueAsLong()).isEqualTo(expectedValue);
+    assertThat(numericLiteral.valueAsString()).isEqualTo(code);
     assertThat(numericLiteral.children()).isEmpty();
   }
 
@@ -1577,6 +1559,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertStringLiteral("f'He said his name is {name} and he is {age} years old.'", "He said his name is {name} and he is {age} years old.", "f");
     assertStringLiteral("f'''He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.'''",
       "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.", "f");
+    assertThat(((PyStringLiteralTree) parse("'ab' 'cd'", treeMaker::expression)).trimmedQuotesValue()).isEqualTo("abcd");
   }
 
   private void assertStringLiteral(String fullValue, String trimmedQuoteValue) {

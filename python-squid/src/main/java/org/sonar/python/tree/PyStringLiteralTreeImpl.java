@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
@@ -54,5 +55,12 @@ public class PyStringLiteralTreeImpl extends PyTree implements PyStringLiteralTr
   @Override
   public List<PyStringElementTree> stringElements() {
     return stringElements;
+  }
+
+  @Override
+  public String trimmedQuotesValue() {
+    return stringElements().stream()
+      .map(PyStringElementTree::trimmedQuotesValue)
+      .collect(Collectors.joining());
   }
 }
