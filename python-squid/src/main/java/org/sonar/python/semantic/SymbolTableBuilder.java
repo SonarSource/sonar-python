@@ -157,7 +157,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       importedNames.forEach(module -> {
         PyNameTree nameTree = module.dottedName().names().get(0);
         String fullyQualifiedName = fromModuleName != null
-          ? fromModuleName + "." + nameTree.name()
+          ? (fromModuleName + "." + nameTree.name())
           : nameTree.name();
         if (isRelativeImport) {
           fullyQualifiedName = null;
@@ -361,7 +361,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       String childSymbolName = name.name();
       if (!childrenSymbolByName.containsKey(childSymbolName)) {
         String childFullyQualifiedName = fullyQualifiedName != null
-          ? fullyQualifiedName + "." + childSymbolName
+          ? (fullyQualifiedName + "." + childSymbolName)
           : null;
         SymbolImpl symbol = new SymbolImpl(childSymbolName, childFullyQualifiedName);
         childrenSymbolByName.put(childSymbolName, symbol);
