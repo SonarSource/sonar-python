@@ -258,6 +258,21 @@ public class FullyQualifiedNameTest {
     assertNameAndQualifiedName(tree, "fn", null);
   }
 
+  @Test
+  public void from_import_submodule() {
+    PyFileInputTree tree = parse(
+      "from mod.submod import fn",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.submod.fn");
+
+    tree = parse(
+      "from mod import submod",
+      "submod.fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.submod.fn");
+  }
+
 
   private void assertNameAndQualifiedName(PyFileInputTree tree, String name, @Nullable String qualifiedName) {
     PyCallExpressionTree callExpression = (PyCallExpressionTree) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
