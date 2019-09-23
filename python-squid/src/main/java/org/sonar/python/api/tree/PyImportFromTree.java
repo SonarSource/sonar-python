@@ -37,7 +37,6 @@ public interface PyImportFromTree extends PyImportStatementTree {
 
   PyToken importKeyword();
 
-  @CheckForNull
   List<PyToken> dottedPrefixForModule();
 
   List<PyAliasedNameTree> importedNames();

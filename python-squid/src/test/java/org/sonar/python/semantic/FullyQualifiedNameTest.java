@@ -48,6 +48,27 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void callee_qualified_expression_alias() {
+    PyFileInputTree tree = parse(
+      "import mod as alias",
+      "alias.fn()"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.fn");
+  }
+
+  @Test
+  public void import_alias_reassigned() {
+    PyFileInputTree tree = parse(
+      "if x:",
+      "  import mod1 as alias",
+      "else:",
+      "  import mod2 as alias",
+      "alias.fn()"
+    );
+    assertNameAndQualifiedName(tree, "fn", null);
+  }
+
+  @Test
   public void callee_qualified_expression_without_import() {
     PyFileInputTree tree = parse(
       "mod.fn()"
@@ -141,8 +162,7 @@ public class FullyQualifiedNameTest {
     nameTree = (PyNameTree) tree.descendants(Tree.Kind.NAME)
       .filter(name -> ((PyNameTree) name).name().equals("fn"))
       .findFirst().get();
-    // TODO: fully qualified name should be `mod.fn`
-    assertThat(nameTree.symbol().fullyQualifiedName()).isEqualTo("fn");
+    assertThat(nameTree.symbol().fullyQualifiedName()).isEqualTo("mod.fn");
   }
 
   @Test
@@ -168,6 +188,91 @@ public class FullyQualifiedNameTest {
     assertThat(symbol.name()).isEqualTo("prop");
     assertThat(symbol.fullyQualifiedName()).isEqualTo("mod.prop");
   }
+
+  @Test
+  public void from_import() {
+    PyFileInputTree tree = parse(
+      "from mod import fn",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.fn");
+  }
+
+  @Test
+  public void from_import_multiple_names() {
+    PyFileInputTree tree = parse(
+      "from mod import f, g, h",
+      "f('foo')",
+      "g('foo')",
+      "h('foo')"
+    );
+    tree.descendants(Tree.Kind.CALL_EXPR).forEach(
+      descendant -> {
+        PyCallExpressionTree callExpression = (PyCallExpressionTree) descendant;
+        assertThat(callExpression.calleeSymbol()).isNotNull();
+        TreeSymbol symbol = callExpression.calleeSymbol();
+        PyNameTree callee = (PyNameTree) callExpression.callee();
+        assertThat(symbol.fullyQualifiedName()).isEqualTo("mod." + callee.name());
+      }
+    );
+  }
+
+  @Test
+  public void from_import_reassigned() {
+    PyFileInputTree tree = parse(
+      "fn = 42",
+      "from mod import fn",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", null);
+
+    tree = parse(
+      "from mod import fn",
+      "fn = 42",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", null);
+  }
+
+  @Test
+  public void from_import_alias() {
+    PyFileInputTree tree = parse(
+      "from mod import fn as g",
+      "g('foo')"
+    );
+    assertNameAndQualifiedName(tree, "g", "mod.fn");
+  }
+
+  @Test
+  public void from_import_relative() {
+    PyFileInputTree tree = parse(
+      "from . import fn",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", null);
+
+    tree = parse(
+      "from .foo import fn",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", null);
+  }
+
+  @Test
+  public void from_import_submodule() {
+    PyFileInputTree tree = parse(
+      "from mod.submod import fn",
+      "fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.submod.fn");
+
+    tree = parse(
+      "from mod import submod",
+      "submod.fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.submod.fn");
+  }
+
 
   private void assertNameAndQualifiedName(PyFileInputTree tree, String name, @Nullable String qualifiedName) {
     PyCallExpressionTree callExpression = (PyCallExpressionTree) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();

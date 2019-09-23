@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -39,6 +40,7 @@ import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
+import org.sonar.python.api.tree.PyDottedNameTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
@@ -137,23 +139,33 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitImportName(PyImportNameTree pyImportNameTree) {
-      createImportedNames(pyImportNameTree.modules());
+      createImportedNames(pyImportNameTree.modules(), null, false);
       super.visitImportName(pyImportNameTree);
     }
 
     @Override
     public void visitImportFrom(PyImportFromTree pyImportFromTree) {
-      createImportedNames(pyImportFromTree.importedNames());
+      PyDottedNameTree moduleTree = pyImportFromTree.module();
+      String moduleName = moduleTree != null
+        ? moduleTree.names().stream().map(PyNameTree::name).collect(Collectors.joining("."))
+        : null;
+      createImportedNames(pyImportFromTree.importedNames(), moduleName, !pyImportFromTree.dottedPrefixForModule().isEmpty());
       super.visitImportFrom(pyImportFromTree);
     }
 
-    private void createImportedNames(List<PyAliasedNameTree> importedNames) {
+    private void createImportedNames(List<PyAliasedNameTree> importedNames, @Nullable String fromModuleName, boolean isRelativeImport) {
       importedNames.forEach(module -> {
         PyNameTree nameTree = module.dottedName().names().get(0);
+        String fullyQualifiedName = fromModuleName != null
+          ? (fromModuleName + "." + nameTree.name())
+          : nameTree.name();
+        if (isRelativeImport) {
+          fullyQualifiedName = null;
+        }
         if (module.alias() != null) {
-          addBindingUsage(module.alias(), Usage.Kind.IMPORT, nameTree.name());
+          addBindingUsage(module.alias(), Usage.Kind.IMPORT, fullyQualifiedName);
         } else {
-          addBindingUsage(nameTree, Usage.Kind.IMPORT, nameTree.name());
+          addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
         }
       });
     }
@@ -309,7 +321,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     private final String name;
     @Nullable
-    private final String fullyQualifiedName;
+    private String fullyQualifiedName;
     private final List<Usage> usages = new ArrayList<>();
     private Map<String, TreeSymbol> childrenSymbolByName = new HashMap<>();
 
@@ -339,12 +351,19 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (tree.is(Kind.NAME)) {
         ((PyNameTreeImpl) tree).setSymbol(this);
       }
+       // we cannot know what is the fully qualified name (see FullyQualifiedNameTest#import_alias_reassigned)
+      if (fullyQualifiedName != null && usages.stream().filter(Usage::isBindingUsage).count() > 1) {
+        fullyQualifiedName = null;
+      }
     }
 
     void addOrCreateChildUsage(PyNameTree name) {
       String childSymbolName = name.name();
       if (!childrenSymbolByName.containsKey(childSymbolName)) {
-        SymbolImpl symbol = new SymbolImpl(childSymbolName, fullyQualifiedName + "." + childSymbolName);
+        String childFullyQualifiedName = fullyQualifiedName != null
+          ? (fullyQualifiedName + "." + childSymbolName)
+          : null;
+        SymbolImpl symbol = new SymbolImpl(childSymbolName, childFullyQualifiedName);
         childrenSymbolByName.put(childSymbolName, symbol);
       }
       TreeSymbol symbol = childrenSymbolByName.get(childSymbolName);
