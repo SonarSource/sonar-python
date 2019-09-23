@@ -25,8 +25,10 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
+import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -38,8 +40,9 @@ public class ComplexityVisitorTest {
 
   @Test
   public void file() {
-    TestPythonVisitorRunner.scanFile(new File("src/test/resources/metrics/complexity.py"), visitor);
-    assertThat(visitor.getComplexity()).isEqualTo(7);
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/metrics/complexity.py"));
+    context.rootTree().accept(visitor);
+    assertThat(visitor.getComplexity()).isEqualTo(8);
   }
 
   @Test
@@ -78,7 +81,7 @@ public class ComplexityVisitorTest {
   }
 
   private int complexity(String source) {
-    return ComplexityVisitor.complexity(parser.parse(source));
+    return ComplexityVisitor.complexity(new PythonTreeMaker().fileInput(parser.parse(source)));
   }
 
 }

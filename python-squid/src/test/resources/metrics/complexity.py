@@ -13,6 +13,7 @@ expression = a or b  # +1
 expression = a and b # +1
 expression = a if b else c # +1
 expression = lambda x: x*2 # +0
+expression = [y for y in a if y not in b] # +1
 
 try:
     raise "message" # +0

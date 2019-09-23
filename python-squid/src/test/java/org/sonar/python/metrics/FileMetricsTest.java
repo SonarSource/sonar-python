@@ -44,7 +44,7 @@ public class FileMetricsTest {
 
   @Test
   public void complexity() {
-    assertThat(metrics("complexity.py").complexity()).isEqualTo(7);
+    assertThat(metrics("complexity.py").complexity()).isEqualTo(8);
   }
 
   @Test

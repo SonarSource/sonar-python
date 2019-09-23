@@ -19,18 +19,15 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import java.util.Collections;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.ComplexityVisitor;
 
 @Rule(key = "FunctionComplexity")
-public class FunctionComplexityCheck extends PythonCheckAstNode {
+public class FunctionComplexityCheck extends PythonSubscriptionCheck {
   private static final int DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD = 15;
   private static final String MESSAGE = "Function has a complexity of %s which is greater than %s authorized.";
 
@@ -40,18 +37,15 @@ public class FunctionComplexityCheck extends PythonCheckAstNode {
   int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.FUNCDEF);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      PyFunctionDefTree funcDef = (PyFunctionDefTree) ctx.syntaxNode();
+      int complexity = ComplexityVisitor.complexity(funcDef);
+      if (complexity > maximumFunctionComplexityThreshold) {
+        String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
+        ctx.addIssue(funcDef.name(), message)
+          .withCost(complexity - maximumFunctionComplexityThreshold);
+      }
+    });
   }
-
-  @Override
-  public void visitNode(AstNode node) {
-    int complexity = ComplexityVisitor.complexity(node);
-    if (complexity > maximumFunctionComplexityThreshold) {
-      String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);
-      addIssue(node.getFirstChild(PythonGrammar.FUNCNAME), message)
-        .withCost(complexity - maximumFunctionComplexityThreshold);
-    }
-  }
-
 }
