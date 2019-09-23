@@ -19,28 +19,26 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.IssueLocation;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonVisitorContext;
 
-@Rule(key = TrailingWhitespaceCheck.CHECK_KEY)
-public class TrailingWhitespaceCheck extends PythonCheckAstNode {
+@Rule(key = "S1131")
+public class TrailingWhitespaceCheck implements PythonCheck {
 
-  public static final String CHECK_KEY = "S1131";
-  public static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
-
+  private static final String MESSAGE = "Remove the useless trailing whitespaces at the end of this line.";
   private static final Pattern TRAILING_WS = Pattern.compile("\\s$");
 
   @Override
-  public void visitFile(@Nullable AstNode astNode) {
-    String[] lines = getContext().pythonFile().content().split("\r\n|\n|\r", -1);
+  public void scanFile(PythonVisitorContext ctx) {
+    String[] lines = ctx.pythonFile().content().split("\r\n|\n|\r", -1);
     for (int i = 0; i < lines.length; i++) {
       if (TRAILING_WS.matcher(lines[i]).find()) {
-        addLineIssue(MESSAGE, i + 1);
+        ctx.addIssue(new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, i + 1)));
       }
     }
   }
-
 }
+
