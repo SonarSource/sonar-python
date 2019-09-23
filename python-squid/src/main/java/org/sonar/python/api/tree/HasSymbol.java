@@ -22,22 +22,7 @@ package org.sonar.python.api.tree;
 import javax.annotation.CheckForNull;
 import org.sonar.python.semantic.TreeSymbol;
 
-/**
- * Qualified expression like "foo.bar"
- */
-public interface PyQualifiedExpressionTree extends PyExpressionTree, HasSymbol {
-  PyExpressionTree qualifier();
-
-  PyToken dotToken();
-
-  PyNameTree name();
-
-  /**
-   * Returns the symbol of {@link #name()}
-   */
+public interface HasSymbol {
   @CheckForNull
-  @Override
-  default TreeSymbol symbol() {
-    return name().symbol();
-  }
+  TreeSymbol symbol();
 }
