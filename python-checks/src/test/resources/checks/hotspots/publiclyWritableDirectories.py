@@ -42,6 +42,7 @@ def environ_variables():
     tmp_dir = os.environ['OTHER'] # OK
     tmp_dir = os.other['TMPDIR'] # OK
     tmp_dir = other['TMPDIR'] # OK
+    tmp_dir = foo()['TMPDIR'] # OK
     tmp_dir = os.foo.environ['TMPDIR'] # OK
     tmp_dir = environ['TMPDIR'] # Noncompliant
     tmp_dir = environ.get('TMPDIR') # Noncompliant
