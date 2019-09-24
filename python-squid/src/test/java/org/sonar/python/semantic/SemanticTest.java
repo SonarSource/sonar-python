@@ -17,17 +17,26 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.semantic;
 
-import java.util.Set;
-import javax.annotation.CheckForNull;
-import org.sonar.python.semantic.TreeSymbol;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.impl.Parser;
+import java.nio.charset.StandardCharsets;
+import org.sonar.python.PythonConfiguration;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PythonTreeMaker;
 
-public interface PyFunctionLikeTree extends Tree {
-  @CheckForNull
-  PyParameterListTree parameters();
+public class SemanticTest {
 
-  Set<TreeSymbol> localVariables();
+  private final Parser<Grammar> p = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private final PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
 
-  boolean isMethodDefinition();
+  public PyFileInputTree parse(String... lines) {
+    String code = String.join(System.getProperty("line.separator"), lines);
+    PyFileInputTree tree = pythonTreeMaker.fileInput(p.parse(code));
+    new SymbolTableBuilder().visitFileInput(tree);
+    return tree;
+  }
+
 }

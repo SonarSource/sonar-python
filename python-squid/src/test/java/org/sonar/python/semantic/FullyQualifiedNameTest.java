@@ -19,25 +19,18 @@
  */
 package org.sonar.python.semantic;
 
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.impl.Parser;
-import java.nio.charset.StandardCharsets;
 import javax.annotation.Nullable;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.parser.PythonParser;
-import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FullyQualifiedNameTest {
-  private Parser<Grammar> p = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
-  private PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
+public class FullyQualifiedNameTest extends SemanticTest {
+
   @Test
   public void callee_qualified_expression() {
     PyFileInputTree tree = parse(
@@ -280,13 +273,6 @@ public class FullyQualifiedNameTest {
     TreeSymbol symbol = callExpression.calleeSymbol();
     assertThat(symbol.name()).isEqualTo(name);
     assertThat(symbol.fullyQualifiedName()).isEqualTo(qualifiedName);
-  }
-
-  private PyFileInputTree parse(String ...lines) {
-    String code = String.join(System.getProperty("line.separator"), lines);
-    PyFileInputTree tree = pythonTreeMaker.fileInput(p.parse(code));
-    new SymbolTableBuilder().visitFileInput(tree);
-    return tree;
   }
 
 }

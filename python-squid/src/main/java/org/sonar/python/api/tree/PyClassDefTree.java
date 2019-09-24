@@ -20,7 +20,9 @@
 package org.sonar.python.api.tree;
 
 import java.util.List;
+import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.TreeSymbol;
 
 public interface PyClassDefTree extends PyStatementTree {
 
@@ -48,4 +50,8 @@ public interface PyClassDefTree extends PyStatementTree {
 
   @CheckForNull
   PyToken docstring();
+
+  Set<TreeSymbol> classFields();
+
+  Set<TreeSymbol> instanceFields();
 }

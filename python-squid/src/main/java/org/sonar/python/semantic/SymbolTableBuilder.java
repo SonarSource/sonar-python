@@ -35,12 +35,14 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.HasSymbol;
 import org.sonar.python.api.tree.PyAliasedNameTree;
 import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
+import org.sonar.python.api.tree.PyAnyParameterTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
 import org.sonar.python.api.tree.PyComprehensionForTree;
 import org.sonar.python.api.tree.PyDecoratorTree;
 import org.sonar.python.api.tree.PyDottedNameTree;
+import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyForStatementTree;
 import org.sonar.python.api.tree.PyFunctionDefTree;
@@ -52,11 +54,13 @@ import org.sonar.python.api.tree.PyLambdaExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNonlocalStatementTree;
 import org.sonar.python.api.tree.PyParameterListTree;
+import org.sonar.python.api.tree.PyParameterTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.python.tree.PyClassDefTreeImpl;
 import org.sonar.python.tree.PyFunctionDefTreeImpl;
 import org.sonar.python.tree.PyLambdaExpressionTreeImpl;
 import org.sonar.python.tree.PyNameTreeImpl;
@@ -65,6 +69,7 @@ import org.sonar.python.tree.PyNameTreeImpl;
 public class SymbolTableBuilder extends BaseTreeVisitor {
 
   private Map<Tree, Scope> scopesByRootTree;
+  private Set<Tree> assignmentLeftHandSides = new HashSet<>();
 
   @Override
   public void visitFileInput(PyFileInputTree pyFileInputTree) {
@@ -82,6 +87,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
             ((PyFunctionDefTreeImpl) funcDef).addLocalVariableSymbol(symbol);
           }
         }
+      });
+    scopesByRootTree.values().stream()
+      .filter(scope -> scope.rootTree instanceof PyClassDefTree)
+      .forEach(scope -> {
+        PyClassDefTreeImpl classDef = (PyClassDefTreeImpl) scope.rootTree;
+        scope.symbols.forEach(classDef::addClassField);
+        scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
       });
   }
 
@@ -115,7 +127,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
       createScope(pyLambdaExpressionTree, currentScope());
       enterScope(pyLambdaExpressionTree);
-      createParameters(pyLambdaExpressionTree.parameters());
+      createParameters(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
       leaveScope();
     }
@@ -124,7 +136,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
-      createParameters(pyFunctionDefTree.parameters());
+      createParameters(pyFunctionDefTree);
       super.visitFunctionDef(pyFunctionDefTree);
       leaveScope();
     }
@@ -192,11 +204,25 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       });
     }
 
-    private void createParameters(@Nullable PyParameterListTree parameterList) {
-      if (parameterList == null) {
+    private void createParameters(PyFunctionLikeTree function) {
+      PyParameterListTree parameterList = function.parameters();
+      if (parameterList == null || parameterList.all().isEmpty()) {
         return;
       }
-      parameterList.nonTuple().forEach(param -> addBindingUsage(param.name(), Usage.Kind.PARAMETER));
+
+      boolean hasSelf = false;
+      if (function.isMethodDefinition()) {
+        PyAnyParameterTree first = parameterList.all().get(0);
+        if (first.is(Kind.PARAMETER)) {
+          currentScope().createSelfParameter((PyParameterTree) first);
+          hasSelf = true;
+        }
+      }
+
+      parameterList.nonTuple().stream()
+        .skip(hasSelf ? 1 : 0)
+        .forEach(param -> addBindingUsage(param.name(), Usage.Kind.PARAMETER));
+
       parameterList.all().stream()
         .filter(param -> param.is(Kind.TUPLE))
         .flatMap(param -> ((PyTupleTree) param).elements().stream())
@@ -207,13 +233,28 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree) {
-      pyAssignmentStatementTree.lhsExpressions().stream()
+      List<PyExpressionTree> lhs = pyAssignmentStatementTree.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
-        .flatMap(expr -> expr.is(Kind.TUPLE) ? ((PyTupleTree) expr).elements().stream() : Stream.of(expr))
+        .flatMap(this::flattenTuples)
+        .collect(Collectors.toList());
+
+      assignmentLeftHandSides.addAll(lhs);
+
+      lhs.stream()
         .filter(expr -> expr.is(Kind.NAME))
         .map(PyNameTree.class::cast)
         .forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS));
+
       super.visitAssignmentStatement(pyAssignmentStatementTree);
+    }
+
+    private Stream<PyExpressionTree> flattenTuples(PyExpressionTree expression) {
+      if (expression.is(Kind.TUPLE)) {
+        PyTupleTree tuple = (PyTupleTree) expression;
+        return tuple.elements().stream().flatMap(this::flattenTuples);
+      } else {
+        return Stream.of(expression);
+      }
     }
 
     @Override
@@ -275,6 +316,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private final Set<TreeSymbol> symbols = new HashSet<>();
     private final Set<String> globalNames = new HashSet<>();
     private final Set<String> nonlocalNames = new HashSet<>();
+    private final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
 
     private Scope(@Nullable Scope parent, Tree rootTree) {
       this.parent = parent;
@@ -285,6 +327,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       return Collections.unmodifiableSet(symbols);
     }
 
+    private void createSelfParameter(PyParameterTree parameter) {
+      PyNameTree nameTree = parameter.name();
+      String symbolName = nameTree.name();
+      SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
+      symbols.add(symbol);
+      symbolsByName.put(symbolName, symbol);
+      symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
+    }
 
     void addBindingUsage(PyNameTree nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {
       String symbolName = nameTree.name();
@@ -357,7 +407,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       }
     }
 
-    void addOrCreateChildUsage(PyNameTree name) {
+    void addOrCreateChildUsage(PyNameTree name, Usage.Kind kind) {
       String childSymbolName = name.name();
       if (!childrenSymbolByName.containsKey(childSymbolName)) {
         String childFullyQualifiedName = fullyQualifiedName != null
@@ -367,7 +417,23 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         childrenSymbolByName.put(childSymbolName, symbol);
       }
       TreeSymbol symbol = childrenSymbolByName.get(childSymbolName);
-      ((SymbolImpl) symbol).addUsage(name, Usage.Kind.OTHER);
+      ((SymbolImpl) symbol).addUsage(name, kind);
+    }
+  }
+
+  private static class SelfSymbolImpl extends SymbolImpl {
+
+    private final Scope classScope;
+
+    SelfSymbolImpl(String name, Scope classScope) {
+      super(name, null);
+      this.classScope = classScope;
+    }
+
+    @Override
+    void addOrCreateChildUsage(PyNameTree nameTree, Usage.Kind kind) {
+      SymbolImpl symbol = classScope.instanceAttributesByName.computeIfAbsent(nameTree.name(), name -> new SymbolImpl(name, null));
+      symbol.addUsage(nameTree, kind);
     }
   }
 
@@ -412,7 +478,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (qualifiedExpression.qualifier() instanceof HasSymbol) {
         TreeSymbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
         if (qualifierSymbol != null) {
-          ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name());
+          Usage.Kind usageKind = assignmentLeftHandSides.contains(qualifiedExpression) ? Usage.Kind.ASSIGNMENT_LHS : Usage.Kind.OTHER;
+          ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name(), usageKind);
         }
       }
     }

@@ -47,8 +47,6 @@ public interface PyFunctionDefTree extends PyStatementTree, PyFunctionLikeTree {
 
   PyStatementListTree body();
 
-  boolean isMethodDefinition();
-
   @CheckForNull
   PyToken docstring();
 
