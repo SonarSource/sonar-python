@@ -23,9 +23,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
@@ -34,7 +34,7 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.TreeSymbol;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
 public class DebugModeCheck extends PythonSubscriptionCheck {
@@ -50,8 +50,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       if (!(callExpression.callee() instanceof PyQualifiedExpressionTree)) {
         return;
       }
-      PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) callExpression.callee();
-      if (getQualifiedName(callee.qualifier(), ctx).equals("django.conf.settings") && callee.name().name().equals("configure") && !arguments.isEmpty()) {
+      if ("django.conf.settings.configure".equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
         arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
       }
     });
@@ -86,8 +85,9 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static String getQualifiedName(PyExpressionTree node, SubscriptionContext ctx) {
-    Symbol symbol = ctx.symbolTable().getSymbol(node);
-    return symbol != null ? symbol.qualifiedName() : "";
+  @CheckForNull
+  private static String getQualifiedName(PyCallExpressionTree callExpression) {
+    TreeSymbol symbol = callExpression.calleeSymbol();
+    return symbol != null ? symbol.fullyQualifiedName() : "";
   }
 }
