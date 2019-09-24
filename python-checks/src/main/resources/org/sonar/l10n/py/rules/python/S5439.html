@@ -1,0 +1,57 @@
+<p>Template engines have an HTML autoescape mechanism that protects web applications against most common cross-site-scripting (XSS)
+vulnerabilities.</p>
+<p>By default, it automatically replaces HTML special characters in any template variables. This secure by design configuration should not be globally
+disabled.</p>
+<p>Escaping HTML from template variables prevents switching into any execution context, like <code>&lt;script&gt;</code>. Disabling autoescaping
+forces developers to manually escape each template variable for the application to be safe. A more pragmatic approach is to escape by default and to
+manually disable escaping when needed.</p>
+<p>A successful exploitation of a cross-site-scripting vulnerability by an attacker allow him to execute malicious JavaScript code in a user's web
+browser. The most severe XSS attacks involve:</p>
+<ul>
+  <li> Forced redirection </li>
+  <li> Modify presentation of content </li>
+  <li> User accounts takeover after disclosure of sensitive information like session cookies or passwords </li>
+</ul>
+<p>This rule raises supports the following libraries:</p>
+<ul>
+  <li> <a href="https://github.com/django/django">Django Templates</a> </li>
+  <li> <a href="https://github.com/pallets/jinja">Jinja2</a> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+from jinja2 import Environment
+
+env = Environment() # Noncompliant; New Jinja2 Environment has autoescape set to false
+env = Environment(autoescape=False) # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+from jinja2 import Environment
+env = Environment(autoescape=True) # Compliant
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md">OWASP Cheat
+  Sheet</a> - XSS Prevention Cheat Sheet </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A7-Cross-Site_Scripting_(XSS)">OWASP Top 10 2017 Category A7</a> - Cross-Site Scripting
+  (XSS) </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A9</a> - Security
+  Misconfiguration </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/79.html">MITRE, CWE-79</a> - Improper Neutralization of Input During Web Page Generation
+  ('Cross-site Scripting') </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/80.html">MITRE, CWE-80</a> - Improper Neutralization of Script-Related HTML Tags in a Web Page
+  (Basic XSS) </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/81.html">MITRE, CWE-81</a> - Improper Neutralization of Script in an Error Message Web Page
+  </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/82.html">MITRE, CWE-82</a> - Improper Neutralization of Script in Attributes of IMG Tags in a
+  Web Page </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/83.html">MITRE, CWE-83</a> - Improper Neutralization of Script in Attributes in a Web Page
+  </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/84.html">MITRE, CWE-84</a> - Improper Neutralization of Encoded URI Schemes in a Web Page </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/85.html">MITRE, CWE-85</a> - Doubled Character XSS Manipulations </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/86.html">MITRE, CWE-86</a> - Improper Neutralization of Invalid Characters in Identifiers in
+  Web Pages </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/87.html">MITRE, CWE-87</a> - Improper Neutralization of Alternate XSS Syntax </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
+</ul>
+

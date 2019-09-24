@@ -25,6 +25,7 @@ import java.util.HashSet;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
+import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
@@ -58,6 +59,7 @@ public final class CheckList {
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
       DebugModeCheck.class,
+      DisabledHtmlAutoEscapeCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
       DynamicCodeExecutionCheck.class,
       EmptyNestedBlockCheck.class,
