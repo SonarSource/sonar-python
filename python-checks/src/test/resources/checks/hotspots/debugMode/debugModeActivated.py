@@ -20,3 +20,5 @@ def custom_config(config):
 
 settings.configure(DEBUG=False) # OK
 settings.configure(OTHER=False) # OK
+
+DEBUG = True  # OK, filename is not globalsetting.py nor settings.py
