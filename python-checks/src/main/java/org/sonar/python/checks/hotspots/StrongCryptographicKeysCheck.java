@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.HasSymbol;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
@@ -31,7 +32,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.TreeSymbol;
 
 @Rule(key = "S4426")
 public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
@@ -47,7 +48,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
       List<PyArgumentTree> arguments = callExpression.arguments();
-      String qualifiedName = getQualifiedName(callExpression, ctx);
+      String qualifiedName = getQualifiedName(callExpression);
       if (CRYPTOGRAPHY.matcher(qualifiedName).matches()) {
         new CryptographyModuleCheck().checkArguments(ctx, arguments);
       } else if (CRYPTO.matcher(qualifiedName).matches()) {
@@ -59,15 +60,9 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   }
 
 
-  private static String getQualifiedName(PyCallExpressionTree callExpression, SubscriptionContext ctx) {
-    PyExpressionTree node = callExpression.callee();
-    String functionNameSuffix = "";
-    if (node.is(Kind.QUALIFIED_EXPR)) {
-      functionNameSuffix = "." + ((PyQualifiedExpressionTree) node).name().name();
-      node = ((PyQualifiedExpressionTree) node).qualifier();
-    }
-    Symbol symbol = ctx.symbolTable().getSymbol(node);
-    return symbol != null ? (symbol.qualifiedName() + functionNameSuffix) : "";
+  private static String getQualifiedName(PyCallExpressionTree callExpression) {
+    TreeSymbol symbol = callExpression.calleeSymbol();
+    return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
   }
 
   private abstract static class CryptoAPICheck {
@@ -113,24 +108,27 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       }
     }
 
-    private static boolean isNonCompliantCurveArgument(PyArgumentTree argument, int index, SubscriptionContext ctx) {
+    private static boolean isNonCompliantCurveArgument(PyArgumentTree argument, int index) {
       PyNameTree keywordArgument = argument.keywordArgument();
       if (keywordArgument == null) {
-        return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(argument.expression(), ctx);
+        return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(argument.expression());
       }
-      return (keywordArgument).name().equals("curve") && isNonCompliantCurve(argument.expression(), ctx);
+      return (keywordArgument).name().equals("curve") && isNonCompliantCurve(argument.expression());
     }
 
-    private static boolean isNonCompliantCurve(PyExpressionTree expression, SubscriptionContext ctx) {
+    private static boolean isNonCompliantCurve(PyExpressionTree expression) {
       if (!expression.is(Kind.QUALIFIED_EXPR)) {
         return false;
       }
       PyQualifiedExpressionTree qualifiedExpressionTree = (PyQualifiedExpressionTree) expression;
-      Symbol symbol = ctx.symbolTable().getSymbol(qualifiedExpressionTree.qualifier());
-      if (symbol == null || !symbol.qualifiedName().equals("cryptography.hazmat.primitives.asymmetric.ec")) {
-        return false;
+      if (qualifiedExpressionTree.qualifier() instanceof HasSymbol) {
+        TreeSymbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
+        if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
+          return false;
+        }
+        return CRYPTOGRAPHY_FORBIDDEN_CURVE.matcher(qualifiedExpressionTree.name().name()).matches();
       }
-      return CRYPTOGRAPHY_FORBIDDEN_CURVE.matcher(qualifiedExpressionTree.name().name()).matches();
+      return false;
     }
 
     void checkArguments(SubscriptionContext ctx, List<PyArgumentTree> arguments) {
@@ -144,7 +142,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
           ctx.addIssue(argument, "Use a public key exponent of at least 65537.");
         }
 
-        if (this instanceof CryptographyModuleCheck && isNonCompliantCurveArgument(argument, index, ctx)) {
+        if (this instanceof CryptographyModuleCheck && isNonCompliantCurveArgument(argument, index)) {
           ctx.addIssue(argument, "Use a key length of at least 224 bits.");
         }
       }

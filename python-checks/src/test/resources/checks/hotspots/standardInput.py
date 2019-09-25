@@ -19,6 +19,9 @@ def python_3_builtin():
     sys.__stdin__.read() # Noncompliant
     sys.stdin.seekable()  # Ok
 
+    foo('stdin', sys.stdin) # Noncompliant
+    data = sys.stdin.read(1) # Noncompliant
+
     input('What is your password?') # Noncompliant
 
 def python_2_builtin():

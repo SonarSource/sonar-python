@@ -21,13 +21,12 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.TreeSymbol;
 
 @Rule(key = "S4423")
 public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
@@ -49,20 +48,13 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
       PyNameTree pyNameTree = (PyNameTree) ctx.syntaxNode();
-      Symbol symbol = ctx.symbolTable().getSymbol(pyNameTree);
-      if (isWeakProtocol(pyNameTree, symbol)) {
+      if (isWeakProtocol(pyNameTree.symbol())) {
         ctx.addIssue(pyNameTree, "Change this code to use a stronger protocol.");
       }
     });
   }
 
-  private static boolean isWeakProtocol(PyNameTree pyNameTree, @Nullable Symbol symbol) {
-    Predicate<String> matchWeakProtocol;
-    if (symbol == null) {
-      matchWeakProtocol = s -> s.substring(s.lastIndexOf('.') + 1).equals(pyNameTree.name());
-    } else {
-      matchWeakProtocol = symbol.qualifiedName()::equals;
-    }
-    return WEAK_PROTOCOL_CONSTANTS.stream().anyMatch(matchWeakProtocol);
+  private static boolean isWeakProtocol(@Nullable TreeSymbol symbol) {
+    return symbol != null && WEAK_PROTOCOL_CONSTANTS.contains(symbol.fullyQualifiedName());
   }
 }

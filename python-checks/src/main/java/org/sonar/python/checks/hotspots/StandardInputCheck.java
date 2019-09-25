@@ -19,25 +19,27 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
-import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.TreeSymbol;
 
 @Rule(key = StandardInputCheck.CHECK_KEY)
 public class StandardInputCheck extends AbstractCallExpressionCheck {
   public static final String CHECK_KEY = "S4829";
   private static final String MESSAGE = "Make sure that reading the standard input is safe here.";
-  private static final Set<String> questionableFunctions = immutableSet("fileinput.input", "fileinput.FileInput");
-  private static final Set<String> questionableFunctionsBuiltIn = immutableSet(
-    "raw_input", "input", "sys.stdin.read", "sys.stdin.readline", "sys.stdin.readlines",
+  private static final Set<String> fileInputFunctions = immutableSet("fileinput.input", "fileinput.FileInput");
+  private static final Set<String> sysFunctions = immutableSet("sys.stdin.read", "sys.stdin.readline", "sys.stdin.readlines",
     "sys.__stdin__.read", "sys.__stdin__.readline", "sys.__stdin__.readlines");
+  private static final Set<String> questionableFunctionsBuiltIn = immutableSet(
+    "raw_input", "input");
   private static final Set<String> questionablePropertyAccess = immutableSet("sys.stdin", "sys.__stdin__");
 
   @Override
@@ -52,10 +54,10 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
       PyNameTree node = (PyNameTree) ctx.syntaxNode();
-      if(isWithinImport(node)) {
+      if (isWithinImport(node)) {
         return;
       }
-      if (isQuestionablePropertyAccess(node, ctx)) {
+      if (isQuestionablePropertyAccess(node)) {
         ctx.addIssue(node, message());
       }
     });
@@ -63,10 +65,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
 
   private static String getFunctionName(PyExpressionTree expr) {
     String functionName = "";
-    if (expr.is(Tree.Kind.QUALIFIED_EXPR)) {
-      PyQualifiedExpressionTree qualExpr = (PyQualifiedExpressionTree) expr;
-      functionName = getFunctionName(qualExpr.qualifier()) + "." + qualExpr.name().name();
-    } else if (expr.is(Tree.Kind.NAME)) {
+    if (expr.is(Tree.Kind.NAME)) {
       functionName = ((PyNameTree) expr).name();
     }
     return functionName;
@@ -74,17 +73,29 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
 
   @Override
   protected boolean isException(PyCallExpressionTree callExpression) {
-    return !callExpression.arguments().isEmpty();
+    TreeSymbol symbol = callExpression.calleeSymbol();
+    return symbol != null && fileInputFunctions.contains(symbol.fullyQualifiedName()) && !callExpression.arguments().isEmpty();
   }
 
-  private static boolean isQuestionablePropertyAccess(PyNameTree pyNameTree, SubscriptionContext ctx) {
-    Symbol symbol = ctx.symbolTable().getSymbol(pyNameTree);
-    return symbol != null && questionablePropertyAccess.contains(symbol.qualifiedName());
+  private static boolean isQuestionablePropertyAccess(PyNameTree pyNameTree) {
+    Optional<Tree> callExpression = pyNameTree.ancestors().stream()
+      .filter(tree -> tree.is(Tree.Kind.CALL_EXPR))
+      .findFirst();
+    if (callExpression.isPresent()) {
+      // avoid raising twice the issue on call expressions like sys.stdin.read()
+      PyCallExpressionTree call = (PyCallExpressionTree) callExpression.get();
+      if (call.callee().descendants().anyMatch(tree -> tree == pyNameTree)) {
+        return false;
+      }
+    }
+    TreeSymbol symbol = pyNameTree.symbol();
+    return symbol != null && questionablePropertyAccess.contains(symbol.fullyQualifiedName());
   }
 
   @Override
   protected Set<String> functionsToCheck() {
-    return questionableFunctions;
+    return Stream.concat(fileInputFunctions.stream(), sysFunctions.stream())
+      .collect(Collectors.toSet());
   }
 
   @Override

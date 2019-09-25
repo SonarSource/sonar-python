@@ -40,6 +40,7 @@ def cryptography():
     ec.generate_private_key(curve=other.SECT409R1) # Compliant
     ec.generate_private_key(curve=rsa.SECT409R1) # Compliant
     ec.generate_private_key(curve=c) # Compliant
+    ec.generate_private_key(curve=getCurve().SECT163R2) # Compliant
 
 
 ############################################

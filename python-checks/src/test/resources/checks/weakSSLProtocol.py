@@ -51,6 +51,6 @@ class Tls12Adapter(HTTPAdapter):
 
 class unrelated():
     someClass.S = toto
-    PROTOCOL_SSLv2 = "someconstant" # Noncompliant FP due to lack of semantic
+    PROTOCOL_SSLv2 = "someconstant"
     def met():
         foo(PROTOCOL_SSLv2) # compliant, symbol does not match qualified name
