@@ -22,7 +22,6 @@ package org.sonar.python;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.SymbolTable;
 
 public interface SubscriptionContext {
   Tree syntaxNode();
@@ -36,8 +35,6 @@ public interface SubscriptionContext {
   PythonCheck.PreciseIssue addFileIssue(String finalMessage);
 
   PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
-
-  SymbolTable symbolTable();
 
   PythonFile pythonFile();
 }
