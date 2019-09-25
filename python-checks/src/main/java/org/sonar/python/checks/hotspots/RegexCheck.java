@@ -35,7 +35,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = RegexCheck.CHECK_KEY)
 public class RegexCheck extends PythonSubscriptionCheck {
@@ -52,7 +52,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree call = (PyCallExpressionTree) ctx.syntaxNode();
-      TreeSymbol symbol = call.calleeSymbol();
+      Symbol symbol = call.calleeSymbol();
       if (symbol != null && questionableFunctions.contains(symbol.fullyQualifiedName()) && !call.arguments().isEmpty()) {
         checkRegexArgument(call.arguments().get(REGEX_ARGUMENT), ctx);
       }

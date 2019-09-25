@@ -35,7 +35,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.Expressions;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5439")
 public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
@@ -67,7 +67,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkCallExpression(SubscriptionContext ctx, PyCallExpressionTree call) {
-    TreeSymbol symbol = call.calleeSymbol();
+    Symbol symbol = call.calleeSymbol();
 
     if (symbol != null && "jinja2.Environment".equals(symbol.fullyQualifiedName())) {
       List<PyArgumentTree> arguments = call.arguments();

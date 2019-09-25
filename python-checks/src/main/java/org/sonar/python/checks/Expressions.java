@@ -33,7 +33,7 @@ import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PyTupleTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
 public class Expressions {
@@ -69,7 +69,7 @@ public class Expressions {
   }
 
   public static PyExpressionTree singleAssignedValue(PyNameTree name) {
-    TreeSymbol symbol = name.symbol();
+    Symbol symbol = name.symbol();
     if (symbol == null) {
       return null;
     }

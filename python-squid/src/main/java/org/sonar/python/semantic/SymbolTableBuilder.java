@@ -80,7 +80,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       .filter(scope -> scope.rootTree instanceof PyFunctionLikeTree)
       .forEach(scope -> {
         PyFunctionLikeTree funcDef = (PyFunctionLikeTree) scope.rootTree;
-        for (TreeSymbol symbol : scope.symbols()) {
+        for (Symbol symbol : scope.symbols()) {
           if (funcDef.is(Kind.LAMBDA)) {
             ((PyLambdaExpressionTreeImpl) funcDef).addLocalVariableSymbol(symbol);
           } else {
@@ -312,8 +312,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     private final Tree rootTree;
     private final Scope parent;
-    private final Map<String, TreeSymbol> symbolsByName = new HashMap<>();
-    private final Set<TreeSymbol> symbols = new HashSet<>();
+    private final Map<String, Symbol> symbolsByName = new HashMap<>();
+    private final Set<Symbol> symbols = new HashSet<>();
     private final Set<String> globalNames = new HashSet<>();
     private final Set<String> nonlocalNames = new HashSet<>();
     private final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
@@ -323,7 +323,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       this.rootTree = rootTree;
     }
 
-    private Set<TreeSymbol> symbols() {
+    private Set<Symbol> symbols() {
       return Collections.unmodifiableSet(symbols);
     }
 
@@ -357,7 +357,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @CheckForNull
     SymbolImpl resolve(String symbolName) {
-      TreeSymbol symbol = symbolsByName.get(symbolName);
+      Symbol symbol = symbolsByName.get(symbolName);
       if (parent == null || symbol != null) {
         return (SymbolImpl) symbol;
       }
@@ -373,13 +373,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  private static class SymbolImpl implements TreeSymbol {
+  private static class SymbolImpl implements Symbol {
 
     private final String name;
     @Nullable
     private String fullyQualifiedName;
     private final List<Usage> usages = new ArrayList<>();
-    private Map<String, TreeSymbol> childrenSymbolByName = new HashMap<>();
+    private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
 
     public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
       this.name = name;
@@ -418,7 +418,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         SymbolImpl symbol = new SymbolImpl(childSymbolName, childFullyQualifiedName);
         childrenSymbolByName.put(childSymbolName, symbol);
       }
-      TreeSymbol symbol = childrenSymbolByName.get(childSymbolName);
+      Symbol symbol = childrenSymbolByName.get(childSymbolName);
       ((SymbolImpl) symbol).addUsage(name, kind);
     }
   }
@@ -478,7 +478,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       // We need to firstly create symbol for qualifier
       super.visitQualifiedExpression(qualifiedExpression);
       if (qualifiedExpression.qualifier() instanceof HasSymbol) {
-        TreeSymbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
+        Symbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
         if (qualifierSymbol != null) {
           Usage.Kind usageKind = assignmentLeftHandSides.contains(qualifiedExpression) ? Usage.Kind.ASSIGNMENT_LHS : Usage.Kind.OTHER;
           ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name(), usageKind);

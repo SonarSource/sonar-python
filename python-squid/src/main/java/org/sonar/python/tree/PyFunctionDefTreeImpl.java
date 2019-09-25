@@ -38,7 +38,7 @@ import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.PyTypeAnnotationTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
 
@@ -54,7 +54,7 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   private final PyStatementListTree body;
   private final boolean isMethodDefinition;
   private final PyToken docstring;
-  private Set<TreeSymbol> symbols = new HashSet<>();
+  private Set<Symbol> symbols = new HashSet<>();
 
   public PyFunctionDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, @Nullable PyToken asyncKeyword, PyToken defKeyword, PyNameTree name,
                                PyToken leftPar, @Nullable PyParameterListTree parameters, PyToken rightPar, @Nullable PyTypeAnnotationTree returnType,
@@ -139,11 +139,11 @@ public class PyFunctionDefTreeImpl extends PyTree implements PyFunctionDefTree {
   }
 
   @Override
-  public Set<TreeSymbol> localVariables() {
+  public Set<Symbol> localVariables() {
     return symbols;
   }
 
-  public void addLocalVariableSymbol(TreeSymbol symbol) {
+  public void addLocalVariableSymbol(Symbol symbol) {
     symbols.add(symbol);
   }
 

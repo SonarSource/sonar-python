@@ -33,7 +33,7 @@ import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5332")
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
@@ -59,7 +59,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
         .ifPresent(protocol -> ctx.addIssue(node, message(protocol)));
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      TreeSymbol symbol = ((PyCallExpressionTree) ctx.syntaxNode()).calleeSymbol();
+      Symbol symbol = ((PyCallExpressionTree) ctx.syntaxNode()).calleeSymbol();
       isUnsafeLib(symbol).ifPresent(protocol -> ctx.addIssue(ctx.syntaxNode(), message(protocol)));
     });
   }
@@ -89,7 +89,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     return Optional.empty();
   }
 
-  private static Optional<String> isUnsafeLib(@Nullable TreeSymbol symbol) {
+  private static Optional<String> isUnsafeLib(@Nullable Symbol symbol) {
     if (symbol != null) {
       String qualifiedName = symbol.fullyQualifiedName();
       if ("telnetlib.Telnet".equals(qualifiedName)) {

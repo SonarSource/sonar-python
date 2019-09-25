@@ -31,7 +31,7 @@ import org.sonar.python.api.tree.PyAssignmentStatementTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S4792")
 public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
@@ -54,7 +54,7 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpressionTree = (PyCallExpressionTree) ctx.syntaxNode();
-      TreeSymbol symbol = callExpressionTree.calleeSymbol();
+      Symbol symbol = callExpressionTree.calleeSymbol();
       if (symbol != null && FUNCTIONS_TO_CHECK.contains(symbol.fullyQualifiedName())) {
         ctx.addIssue(callExpressionTree, MESSAGE);
       }
@@ -82,7 +82,7 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
       .flatMap(exprList -> exprList.expressions().stream())
       .forEach(expr -> {
         if (expr instanceof HasSymbol) {
-          TreeSymbol symbol = ((HasSymbol) expr).symbol();
+          Symbol symbol = ((HasSymbol) expr).symbol();
           if (symbol != null && "logging.lastResort".equals(symbol.fullyQualifiedName())) {
             ctx.addIssue(expr, MESSAGE);
           }

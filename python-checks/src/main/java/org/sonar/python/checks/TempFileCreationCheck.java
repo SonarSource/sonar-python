@@ -27,7 +27,7 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5445")
 public class TempFileCreationCheck extends PythonSubscriptionCheck {
@@ -38,12 +38,12 @@ public class TempFileCreationCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpr = (PyCallExpressionTree) ctx.syntaxNode();
-      TreeSymbol symbol = callExpr.calleeSymbol();
+      Symbol symbol = callExpr.calleeSymbol();
       isInsecureTempFile(symbol).ifPresent(s -> ctx.addIssue(callExpr, String.format("'%s' is insecure. Use 'tempfile.TemporaryFile' instead", s)));
     });
   }
 
-  private static Optional<String> isInsecureTempFile(@Nullable TreeSymbol symbol) {
+  private static Optional<String> isInsecureTempFile(@Nullable Symbol symbol) {
     if (symbol == null) {
       return Optional.empty();
     }

@@ -37,7 +37,7 @@ import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = HashingDataCheck.CHECK_KEY)
 public class HashingDataCheck extends AbstractCallExpressionCheck {
@@ -167,7 +167,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
 
   private static String getQualifiedName(PyExpressionTree node) {
     if (node instanceof HasSymbol) {
-      TreeSymbol symbol = ((HasSymbol) node).symbol();
+      Symbol symbol = ((HasSymbol) node).symbol();
       return symbol != null ? symbol.fullyQualifiedName() : "";
     }
     return "";

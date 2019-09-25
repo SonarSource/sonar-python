@@ -33,14 +33,14 @@ import org.sonar.python.api.tree.PyParameterListTree;
 import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpressionTree {
   private final PyToken lambdaKeyword;
   private final PyToken colonToken;
   private final PyExpressionTree body;
   private final PyParameterListTree parameterList;
-  private Set<TreeSymbol> symbols = new HashSet<>();
+  private Set<Symbol> symbols = new HashSet<>();
 
   public PyLambdaExpressionTreeImpl(AstNode astNode, PyToken lambdaKeyword, PyToken colonToken, PyExpressionTree body, @Nullable PyParameterListTree parameterList) {
     super(astNode);
@@ -72,7 +72,7 @@ public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpres
   }
 
   @Override
-  public Set<TreeSymbol> localVariables() {
+  public Set<Symbol> localVariables() {
     return symbols;
   }
 
@@ -81,7 +81,7 @@ public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpres
     return false;
   }
 
-  public void addLocalVariableSymbol(TreeSymbol symbol) {
+  public void addLocalVariableSymbol(Symbol symbol) {
     symbols.add(symbol);
   }
 

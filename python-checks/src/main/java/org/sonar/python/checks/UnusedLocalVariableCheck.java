@@ -37,7 +37,7 @@ import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S1481")
@@ -56,7 +56,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         return;
       }
       Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
-      for (TreeSymbol symbol : functionTree.localVariables()) {
+      for (Symbol symbol : functionTree.localVariables()) {
         if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && hasOnlyBindingUsages(symbol)) {
           symbol.usages().stream()
             .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
@@ -67,7 +67,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean hasOnlyBindingUsages(TreeSymbol symbol) {
+  private static boolean hasOnlyBindingUsages(Symbol symbol) {
     List<Usage> usages = symbol.usages();
     return usages.stream().noneMatch(usage -> usage.kind() == Usage.Kind.IMPORT)
       && usages.stream().allMatch(Usage::isBindingUsage);

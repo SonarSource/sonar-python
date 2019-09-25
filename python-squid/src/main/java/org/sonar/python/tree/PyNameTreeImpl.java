@@ -26,12 +26,12 @@ import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public class PyNameTreeImpl extends PyTree implements PyNameTree {
   private final String name;
   private final boolean isVariable;
-  private TreeSymbol symbol;
+  private Symbol symbol;
 
   public PyNameTreeImpl(AstNode astNode, String name, boolean isVariable) {
     super(astNode);
@@ -66,11 +66,11 @@ public class PyNameTreeImpl extends PyTree implements PyNameTree {
 
   @CheckForNull
   @Override
-  public TreeSymbol symbol() {
+  public Symbol symbol() {
     return symbol;
   }
 
-  public void setSymbol(TreeSymbol symbol) {
+  public void setSymbol(Symbol symbol) {
     this.symbol = symbol;
   }
 }

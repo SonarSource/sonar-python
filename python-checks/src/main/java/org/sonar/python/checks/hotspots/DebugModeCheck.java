@@ -32,7 +32,7 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
 public class DebugModeCheck extends PythonSubscriptionCheck {
@@ -86,7 +86,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
 
   @CheckForNull
   private static String getQualifiedName(PyCallExpressionTree callExpression) {
-    TreeSymbol symbol = callExpression.calleeSymbol();
+    Symbol symbol = callExpression.calleeSymbol();
     return symbol != null ? symbol.fullyQualifiedName() : "";
   }
 }

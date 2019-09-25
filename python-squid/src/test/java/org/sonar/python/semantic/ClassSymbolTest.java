@@ -52,7 +52,7 @@ public class ClassSymbolTest {
       "  f1 = 1",
       "  f1 = 2",
       "  f2 = 3");
-    assertThat(c.classFields()).extracting(TreeSymbol::name).containsExactlyInAnyOrder("f1", "f2");
+    assertThat(c.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f1", "f2");
     assertThat(c.instanceFields()).isEmpty();
   }
 
@@ -68,7 +68,7 @@ public class ClassSymbolTest {
       "    self.a = 3",
       "    self.c = 4");
     assertThat(c1.classFields()).isEmpty();
-    assertThat(c1.instanceFields()).extracting(TreeSymbol::name).containsExactlyInAnyOrder("a", "b", "c");
+    assertThat(c1.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "c");
 
     PyClassDefTree c2 = parseClass(
       "class C:",
@@ -77,8 +77,8 @@ public class ClassSymbolTest {
       "  def g(self):",
       "     self.a = 1");
     assertThat(c2.classFields()).isEmpty();
-    assertThat(c2.instanceFields()).extracting(TreeSymbol::name).containsExactlyInAnyOrder("a");
-    TreeSymbol field = c2.instanceFields().iterator().next();
+    assertThat(c2.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a");
+    Symbol field = c2.instanceFields().iterator().next();
     assertThat(field.usages())
       .extracting(Usage::kind, u -> u.tree().firstToken().line())
       .containsExactlyInAnyOrder(

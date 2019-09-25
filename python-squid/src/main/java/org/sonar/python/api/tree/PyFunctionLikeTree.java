@@ -21,13 +21,13 @@ package org.sonar.python.api.tree;
 
 import java.util.Set;
 import javax.annotation.CheckForNull;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public interface PyFunctionLikeTree extends Tree {
   @CheckForNull
   PyParameterListTree parameters();
 
-  Set<TreeSymbol> localVariables();
+  Set<Symbol> localVariables();
 
   boolean isMethodDefinition();
 }

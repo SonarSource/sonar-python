@@ -29,7 +29,7 @@ import org.sonar.python.api.tree.PyExpressionTree;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = StandardInputCheck.CHECK_KEY)
 public class StandardInputCheck extends AbstractCallExpressionCheck {
@@ -73,7 +73,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
 
   @Override
   protected boolean isException(PyCallExpressionTree callExpression) {
-    TreeSymbol symbol = callExpression.calleeSymbol();
+    Symbol symbol = callExpression.calleeSymbol();
     return symbol != null && fileInputFunctions.contains(symbol.fullyQualifiedName()) && !callExpression.arguments().isEmpty();
   }
 
@@ -88,7 +88,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
         return false;
       }
     }
-    TreeSymbol symbol = pyNameTree.symbol();
+    Symbol symbol = pyNameTree.symbol();
     return symbol != null && questionablePropertyAccess.contains(symbol.fullyQualifiedName());
   }
 

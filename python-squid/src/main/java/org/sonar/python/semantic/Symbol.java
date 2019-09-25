@@ -22,7 +22,7 @@ package org.sonar.python.semantic;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
-public interface TreeSymbol {
+public interface Symbol {
 
   String name();
 
