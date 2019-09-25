@@ -39,14 +39,17 @@ public class DecoratorImpl extends PyTree implements Decorator {
   private final Token lPar;
   private final ArgList argListTree;
   private final Token rPar;
+  private final Token newLineToken;
 
-  public DecoratorImpl(AstNode astNode, Token atToken, DottedName dottedName, @Nullable Token lPar, @Nullable ArgList argListTree, @Nullable Token rPar) {
+  public DecoratorImpl(AstNode astNode, Token atToken, DottedName dottedName,
+                       @Nullable Token lPar, @Nullable ArgList argListTree, @Nullable Token rPar, @Nullable Token newLineToken) {
     super(astNode);
     this.atToken = atToken;
     this.dottedName = dottedName;
     this.lPar = lPar != null ? lPar : null;
     this.argListTree = argListTree;
     this.rPar = rPar != null ? rPar : null;
+    this.newLineToken = newLineToken != null ? newLineToken : null;
   }
 
   @Override
@@ -84,7 +87,7 @@ public class DecoratorImpl extends PyTree implements Decorator {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(atToken, dottedName, lPar, argListTree, rPar).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(atToken, dottedName, lPar, argListTree, rPar, newLineToken).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

@@ -496,7 +496,8 @@ public class PythonTreeMaker {
     Token lPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken());
     Token rPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken());
     ArgList argListTree = argList(astNode.getFirstChild(PythonGrammar.ARGLIST));
-    return new DecoratorImpl(astNode, atToken, dottedName, lPar, argListTree, rPar);
+    Token newLineToken = astNode.getFirstChild(PythonTokenType.NEWLINE) == null ? null : toPyToken(astNode.getFirstChild(PythonTokenType.NEWLINE).getToken());
+    return new DecoratorImpl(astNode, atToken, dottedName, lPar, argListTree, rPar, newLineToken);
   }
 
   private static boolean isMethodDefinition(AstNode node) {
