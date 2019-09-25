@@ -345,6 +345,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       }
       SymbolImpl symbol = resolve(symbolName);
       if (symbol != null) {
+        if (fullyQualifiedName != null && !fullyQualifiedName.equals(symbol.fullyQualifiedName)) {
+          symbol.fullyQualifiedName = null;
+        }
+        if (fullyQualifiedName == null && symbol.fullyQualifiedName != null) {
+          symbol.fullyQualifiedName = null;
+        }
         symbol.addUsage(nameTree, kind);
       }
     }
@@ -400,10 +406,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       usages.add(new UsageImpl(tree, kind));
       if (tree.is(Kind.NAME)) {
         ((PyNameTreeImpl) tree).setSymbol(this);
-      }
-       // we cannot know what is the fully qualified name (see FullyQualifiedNameTest#import_alias_reassigned)
-      if (fullyQualifiedName != null && usages.stream().filter(Usage::isBindingUsage).count() > 1) {
-        fullyQualifiedName = null;
       }
     }
 

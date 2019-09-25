@@ -229,6 +229,16 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void import_reassigned_exceptions() {
+    PyFileInputTree tree = parse(
+      "import mod",
+      "import mod",
+      "mod.fn('foo')"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.fn");
+  }
+
+  @Test
   public void from_import_alias() {
     PyFileInputTree tree = parse(
       "from mod import fn as g",
