@@ -28,6 +28,7 @@ import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
+import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.PseudoRandomCheck;
@@ -78,6 +79,7 @@ public final class CheckList {
       InitReturnsValueCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
+      LoggersConfigurationCheck.class,
       LongIntegerWithLowercaseSuffixUsageCheck.class,
       MethodNameCheck.class,
       MethodShouldBeStaticCheck.class,
