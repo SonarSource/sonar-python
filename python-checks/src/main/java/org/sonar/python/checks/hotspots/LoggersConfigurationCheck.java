@@ -20,8 +20,7 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
@@ -37,17 +36,17 @@ import org.sonar.python.semantic.TreeSymbol;
 @Rule(key = "S4792")
 public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> FUNCTIONS_TO_CHECK = new HashSet<>(Arrays.asList(
+  private static final List<String> FUNCTIONS_TO_CHECK = Arrays.asList(
     "logging.basicConfig",
     "logging.disable",
     "logging.setLoggerClass",
     "logging.config.fileConfig",
-    "logging.config.dictConfig"));
+    "logging.config.dictConfig");
 
-  private static final Set<String> LOGGERS_CLASSES = new HashSet<>(Arrays.asList(
+  private static final List<String> LOGGERS_CLASSES = Arrays.asList(
     "logging.Logger",
     "logging.Handler",
-    "logging.Filter"));
+    "logging.Filter");
 
   private static final String MESSAGE = "Make sure that this logger's configuration is safe.";
 
