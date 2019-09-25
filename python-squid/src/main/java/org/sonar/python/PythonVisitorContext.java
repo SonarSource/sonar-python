@@ -25,9 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
-import org.sonar.python.semantic.SymbolTableBuilderVisitor;
 
 public class PythonVisitorContext {
 
@@ -35,7 +33,6 @@ public class PythonVisitorContext {
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
   private final AstNode rootAst;
-  private SymbolTable symbolTable = null;
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
@@ -44,10 +41,7 @@ public class PythonVisitorContext {
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
     this.parsingException = null;
-    SymbolTableBuilderVisitor symbolTableBuilderVisitor = new SymbolTableBuilderVisitor();
-    symbolTableBuilderVisitor.scanFile(this);
     new SymbolTableBuilder().visitFileInput(rootTree);
-    symbolTable = symbolTableBuilderVisitor.symbolTable();
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
@@ -71,10 +65,6 @@ public class PythonVisitorContext {
 
   public RecognitionException parsingException() {
     return parsingException;
-  }
-
-  public SymbolTable symbolTable() {
-    return symbolTable;
   }
 
   public void addIssue(PreciseIssue issue) {

@@ -30,7 +30,6 @@ import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.SymbolTable;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 public class SubscriptionVisitor extends BaseTreeVisitor {
@@ -114,11 +113,6 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
       PythonCheck.PreciseIssue newIssue = new PythonCheck.PreciseIssue(check, issueLocation);
       pythonVisitorContext.addIssue(newIssue);
       return newIssue;
-    }
-
-    @Override
-    public SymbolTable symbolTable() {
-      return pythonVisitorContext.symbolTable();
     }
 
     @Override
