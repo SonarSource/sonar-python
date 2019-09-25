@@ -19,21 +19,21 @@
  */
 package org.sonar.python;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.tree.BaseTreeVisitor;
 
-public class SubscriptionVisitor extends BaseTreeVisitor {
+public class SubscriptionVisitor {
 
   private final EnumMap<Kind, List<SubscriptionContextImpl>> consumers = new EnumMap<>(Kind.class);
   private final PythonVisitorContext pythonVisitorContext;
@@ -58,18 +58,18 @@ public class SubscriptionVisitor extends BaseTreeVisitor {
     }
   }
 
-  @Override
-  public void scan(@Nullable Tree element) {
-    if (element != null) {
-      currentElement = element;
-      consumers.getOrDefault(element.getKind(), Collections.emptyList()).forEach(SubscriptionContextImpl::execute);
-      consumers.getOrDefault(Kind.TOKEN, Collections.emptyList())
-        .forEach(ctx -> element.children().stream().filter(c -> Objects.nonNull(c) && c.is(Kind.TOKEN)).forEach(t -> {
-          currentElement = t;
-          ctx.execute();
-        }));
+  private void scan(Tree element) {
+    Deque<Tree> stack = new ArrayDeque<>();
+    stack.push(element);
+    while (!stack.isEmpty()) {
+      currentElement = stack.poll();
+      consumers.getOrDefault(currentElement.getKind(), Collections.emptyList()).forEach(SubscriptionContextImpl::execute);
+      for (int i = currentElement.children().size() - 1; i >= 0; i--) {
+        if (currentElement.children().get(i) != null) {
+          stack.push(currentElement.children().get(i));
+        }
+      }
     }
-    super.scan(element);
   }
 
   private class SubscriptionContextImpl implements SubscriptionContext {
