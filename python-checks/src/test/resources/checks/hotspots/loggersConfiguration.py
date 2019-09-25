@@ -17,11 +17,13 @@ def update_logging(logger_class):
 def set_last_resort(last_resort):
     logging.lastResort = last_resort          # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^
-    logging.lastResort, foo = last_resort, 2  # Noncompliant
     foo().lastResort = last_resort            # OK
     lastResort()  = last_resort               # OK
     logging.other = last_resort               # OK
 
+def set_last_resert_multiple_assignment(last_resort):
+    import logging
+    logging.lastResort, foo = last_resort, 2  # Noncompliant
 
 class CustomLogger(Logger):    # Noncompliant
 #                  ^^^^^^
