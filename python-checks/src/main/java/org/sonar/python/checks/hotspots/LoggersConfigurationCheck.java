@@ -61,16 +61,12 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
       }
     });
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> {
-      isSettingLastResort(ctx, (PyAssignmentStatementTree) ctx.syntaxNode());
-    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> isSettingLastResort(ctx, (PyAssignmentStatementTree) ctx.syntaxNode()));
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      isClassExtendingLogger(ctx, (PyClassDefTree) ctx.syntaxNode());
-    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> isClassExtendingLogger(ctx, (PyClassDefTree) ctx.syntaxNode()));
   }
 
-  private void isClassExtendingLogger(SubscriptionContext ctx, PyClassDefTree classDef) {
+  private static void isClassExtendingLogger(SubscriptionContext ctx, PyClassDefTree classDef) {
     PyArgListTree argList = classDef.args();
     if (argList != null) {
       argList.arguments().stream()
@@ -82,7 +78,7 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
   }
 
   // check if logging.lastResort is being set
-  private void isSettingLastResort(SubscriptionContext ctx, PyAssignmentStatementTree assignment) {
+  private static void isSettingLastResort(SubscriptionContext ctx, PyAssignmentStatementTree assignment) {
     assignment.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
       .forEach(expr -> {
