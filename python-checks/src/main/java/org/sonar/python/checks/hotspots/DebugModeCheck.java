@@ -41,6 +41,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4507";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final Set<String> debugProperties = new HashSet<>(Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS"));
+  private static final Set<String> settingFiles = new HashSet<>(Arrays.asList("global_settings.py", "settings.py"));
 
   @Override
   public void initialize(Context context) {
@@ -56,7 +57,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     });
 
     context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> {
-      if (!ctx.pythonFile().fileName().equals("global_settings.py")) {
+      if (!settingFiles.contains(ctx.pythonFile().fileName())) {
         return;
       }
       PyAssignmentStatementTree assignmentStatementTree = (PyAssignmentStatementTree) ctx.syntaxNode();
