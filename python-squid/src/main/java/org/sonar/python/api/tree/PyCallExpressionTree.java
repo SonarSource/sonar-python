@@ -21,7 +21,7 @@ package org.sonar.python.api.tree;
 
 import java.util.List;
 import javax.annotation.CheckForNull;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public interface PyCallExpressionTree extends PyExpressionTree {
   PyExpressionTree callee();
@@ -39,7 +39,7 @@ public interface PyCallExpressionTree extends PyExpressionTree {
   PyToken rightPar();
 
   @CheckForNull
-  default TreeSymbol calleeSymbol() {
+  default Symbol calleeSymbol() {
     if (callee() instanceof HasSymbol) {
       return ((HasSymbol) callee()).symbol();
     }

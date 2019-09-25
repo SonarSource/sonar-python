@@ -32,7 +32,7 @@ import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyNumericLiteralTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S4426")
 public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
@@ -61,7 +61,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
 
 
   private static String getQualifiedName(PyCallExpressionTree callExpression) {
-    TreeSymbol symbol = callExpression.calleeSymbol();
+    Symbol symbol = callExpression.calleeSymbol();
     return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
   }
 
@@ -122,7 +122,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       }
       PyQualifiedExpressionTree qualifiedExpressionTree = (PyQualifiedExpressionTree) expression;
       if (qualifiedExpressionTree.qualifier() instanceof HasSymbol) {
-        TreeSymbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
+        Symbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
         if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
           return false;
         }

@@ -29,7 +29,7 @@ import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S116")
@@ -53,7 +53,7 @@ public class FieldNameCheck extends PythonSubscriptionCheck {
       if (CheckUtils.classHasInheritance(classDef)) {
         return;
       }
-      for (TreeSymbol field : fieldsToCheck(classDef)) {
+      for (Symbol field : fieldsToCheck(classDef)) {
         String name = field.name();
         if (!pattern.matcher(name).matches() && !constantPattern.matcher(name).matches()) {
           String message = String.format(MESSAGE, name, this.format);
@@ -66,9 +66,9 @@ public class FieldNameCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static List<TreeSymbol> fieldsToCheck(PyClassDefTree classDef) {
-    Set<String> classFieldNames = classDef.classFields().stream().map(TreeSymbol::name).collect(Collectors.toSet());
-    List<TreeSymbol> result = new ArrayList<>(classDef.classFields());
+  private static List<Symbol> fieldsToCheck(PyClassDefTree classDef) {
+    Set<String> classFieldNames = classDef.classFields().stream().map(Symbol::name).collect(Collectors.toSet());
+    List<Symbol> result = new ArrayList<>(classDef.classFields());
     classDef.instanceFields().stream().filter(f -> !classFieldNames.contains(f.name())).forEach(result::add);
     return result;
   }

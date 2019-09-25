@@ -27,7 +27,7 @@ import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public abstract class AbstractCallExpressionCheck extends PythonSubscriptionCheck {
 
@@ -46,7 +46,7 @@ public abstract class AbstractCallExpressionCheck extends PythonSubscriptionChec
 
   public void visitNode(SubscriptionContext ctx) {
     PyCallExpressionTree node = (PyCallExpressionTree) ctx.syntaxNode();
-    TreeSymbol symbol = node.calleeSymbol();
+    Symbol symbol = node.calleeSymbol();
     if (!isException(node) && symbol != null && functionsToCheck().contains(symbol.fullyQualifiedName())) {
       ctx.addIssue(node, message());
     }

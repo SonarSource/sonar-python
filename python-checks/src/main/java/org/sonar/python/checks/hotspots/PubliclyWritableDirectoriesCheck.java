@@ -33,7 +33,7 @@ import org.sonar.python.api.tree.PyStringElementTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.PySubscriptionExpressionTree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5443")
 public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
@@ -87,13 +87,13 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isOsEnvironGetter(PyCallExpressionTree callExpressionTree) {
-    TreeSymbol symbol = callExpressionTree.calleeSymbol();
+    Symbol symbol = callExpressionTree.calleeSymbol();
     return symbol != null && "os.environ.get".equals(symbol.fullyQualifiedName());
   }
 
   private static boolean isOsEnvironQualifiedExpression(PyExpressionTree expression) {
     if (expression instanceof HasSymbol) {
-      TreeSymbol symbol = ((HasSymbol) expression).symbol();
+      Symbol symbol = ((HasSymbol) expression).symbol();
       if (symbol != null) {
         return "os.environ".equals(symbol.fullyQualifiedName());
       }

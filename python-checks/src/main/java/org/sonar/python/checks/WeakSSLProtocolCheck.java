@@ -26,7 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S4423")
 public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
@@ -54,7 +54,7 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isWeakProtocol(@Nullable TreeSymbol symbol) {
+  private static boolean isWeakProtocol(@Nullable Symbol symbol) {
     return symbol != null && WEAK_PROTOCOL_CONSTANTS.contains(symbol.fullyQualifiedName());
   }
 }

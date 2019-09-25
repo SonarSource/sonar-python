@@ -25,7 +25,7 @@ import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = CommandLineArgsCheck.CHECK_KEY)
 public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
@@ -42,7 +42,7 @@ public class CommandLineArgsCheck extends AbstractCallExpressionCheck {
   private static void checkSysArgNode(SubscriptionContext ctx) {
     PyNameTree nameTree = (PyNameTree) ctx.syntaxNode();
     Tree parent = nameTree.parent();
-    TreeSymbol symbol = nameTree.symbol();
+    Symbol symbol = nameTree.symbol();
     if (symbol != null && "sys.argv".equals(symbol.fullyQualifiedName())) {
       if (isWithinImport(parent)) {
         return;

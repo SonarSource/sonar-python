@@ -36,7 +36,7 @@ import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = SQLQueriesCheck.CHECK_KEY)
@@ -66,13 +66,13 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     isUsingDjangoModel = false;
     isUsingDjangoDBConnection = false;
     PyFileInputTree tree = (PyFileInputTree) ctx.syntaxNode();
-    List<TreeSymbol> symbols = tree.descendants()
+    List<Symbol> symbols = tree.descendants()
       .filter(node -> node.is(Tree.Kind.IMPORT_FROM) || node.is(Tree.Kind.IMPORT_NAME))
       .flatMap(node -> node.descendants(Tree.Kind.NAME))
       .map(node -> ((PyNameTree) node).symbol())
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
-    for (TreeSymbol symbol : symbols) {
+    for (Symbol symbol : symbols) {
       String qualifiedName = symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
       if (qualifiedName.contains("django.db.models")) {
         isUsingDjangoModel = true;

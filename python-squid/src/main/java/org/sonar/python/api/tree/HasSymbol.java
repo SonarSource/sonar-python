@@ -20,9 +20,9 @@
 package org.sonar.python.api.tree;
 
 import javax.annotation.CheckForNull;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 public interface HasSymbol {
   @CheckForNull
-  TreeSymbol symbol();
+  Symbol symbol();
 }

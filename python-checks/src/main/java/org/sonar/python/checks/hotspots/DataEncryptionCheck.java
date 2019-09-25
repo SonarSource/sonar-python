@@ -25,7 +25,7 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S4787")
 public class DataEncryptionCheck extends PythonSubscriptionCheck {
@@ -74,7 +74,7 @@ public class DataEncryptionCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      TreeSymbol symbol = callExpression.calleeSymbol();
+      Symbol symbol = callExpression.calleeSymbol();
       if (symbol != null && FUNCTIONS_TO_CHECK.contains(symbol.fullyQualifiedName())) {
         ctx.addIssue(callExpression, "Make sure that encrypting data is safe here.");
       }

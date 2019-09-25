@@ -177,7 +177,7 @@ public class FullyQualifiedNameTest {
       "mod.prop"
     );
     PyQualifiedExpressionTree qualifiedExpression = (PyQualifiedExpressionTree) tree.descendants(Tree.Kind.QUALIFIED_EXPR).findFirst().get();
-    TreeSymbol symbol = qualifiedExpression.symbol();
+    Symbol symbol = qualifiedExpression.symbol();
     assertThat(symbol).isNotNull();
     assertThat(symbol.name()).isEqualTo("prop");
     assertThat(symbol.fullyQualifiedName()).isEqualTo("mod.prop");
@@ -204,7 +204,7 @@ public class FullyQualifiedNameTest {
       descendant -> {
         PyCallExpressionTree callExpression = (PyCallExpressionTree) descendant;
         assertThat(callExpression.calleeSymbol()).isNotNull();
-        TreeSymbol symbol = callExpression.calleeSymbol();
+        Symbol symbol = callExpression.calleeSymbol();
         PyNameTree callee = (PyNameTree) callExpression.callee();
         assertThat(symbol.fullyQualifiedName()).isEqualTo("mod." + callee.name());
       }
@@ -281,7 +281,7 @@ public class FullyQualifiedNameTest {
   private void assertNameAndQualifiedName(PyFileInputTree tree, String name, @Nullable String qualifiedName) {
     PyCallExpressionTree callExpression = (PyCallExpressionTree) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
     assertThat(callExpression.calleeSymbol()).isNotNull();
-    TreeSymbol symbol = callExpression.calleeSymbol();
+    Symbol symbol = callExpression.calleeSymbol();
     assertThat(symbol.name()).isEqualTo(name);
     assertThat(symbol.fullyQualifiedName()).isEqualTo(qualifiedName);
   }
