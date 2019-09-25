@@ -9,7 +9,7 @@ from cryptography.hazmat.primitives import hashes
 
 def my_hash(algorithm):
     hashes.Hash(algorithm)  # Noncompliant {{Make sure that hashing data is safe here.}}
-#   ^^^^^^^^^^^
+#   ^^^^^^^^^^^^^^^^^^^^^^
     foo(hashes) #coverage
 hashes #coverage
 ############################################
@@ -27,6 +27,9 @@ class MyPBKDF2PasswordHasher(PBKDF2PasswordHasher):  # Noncompliant
     pass
 
 class MyPBKDF2PasswordHasher2(OtherPBKDF2PasswordHasher): # OK
+    pass
+
+class MyPBKDF2PasswordHasher2(getHasher()): # OK
     pass
 
 # Changing default hashers

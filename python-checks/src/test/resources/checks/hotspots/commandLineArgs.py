@@ -19,6 +19,7 @@ def builtins():
 #       ^^^^
     argv # Noncompliant
     mySys.argv # OK
+    sys.argv.remove('--force') # Noncompliant
 
 def optparse_test():
     OptionParser() # Noncompliant

@@ -21,18 +21,22 @@ package org.sonar.python.checks.hotspots;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.PyArgumentTree;
 import org.sonar.python.api.tree.PyBinaryExpressionTree;
 import org.sonar.python.api.tree.PyCallExpressionTree;
 import org.sonar.python.api.tree.PyExpressionTree;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.PyNameTree;
 import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.PyStringLiteralTree;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.TreeSymbol;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = SQLQueriesCheck.CHECK_KEY)
@@ -61,8 +65,15 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   private void visitFile(SubscriptionContext ctx) {
     isUsingDjangoModel = false;
     isUsingDjangoDBConnection = false;
-    for (Symbol symbol : ctx.symbolTable().symbols(ctx.syntaxNode().astNode())) {
-      String qualifiedName = symbol.qualifiedName();
+    PyFileInputTree tree = (PyFileInputTree) ctx.syntaxNode();
+    List<TreeSymbol> symbols = tree.descendants()
+      .filter(node -> node.is(Tree.Kind.IMPORT_FROM) || node.is(Tree.Kind.IMPORT_NAME))
+      .flatMap(node -> node.descendants(Tree.Kind.NAME))
+      .map(node -> ((PyNameTree) node).symbol())
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
+    for (TreeSymbol symbol : symbols) {
+      String qualifiedName = symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
       if (qualifiedName.contains("django.db.models")) {
         isUsingDjangoModel = true;
       }
@@ -84,8 +95,6 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   public void visitNode(SubscriptionContext context) {
     PyCallExpressionTree callExpressionTree = (PyCallExpressionTree) context.syntaxNode();
     if(callExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-      // According to grammar definition `ATTRIBUTE_REF` has always at least one child of
-      // kind NAME, hence we don't need to check for null on `getLastChild` call
       String functionName = ((PyQualifiedExpressionTree) callExpressionTree.callee()).name().name();
       if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) && !isException(callExpressionTree, functionName)) {
         context.addIssue(callExpressionTree, MESSAGE);
