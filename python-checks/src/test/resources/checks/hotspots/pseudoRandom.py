@@ -10,6 +10,7 @@ random.randint(0,9) # Noncompliant
 random.sample(['a', 'b'], 1)  # Noncompliant
 random.choice(['a', 'b'])  # Noncompliant
 random.choices(['a', 'b'])  # Noncompliant
+random.choice(['a', 'b'])() # Noncompliant
 
 getrandbits
 getrandbits() # Noncompliant

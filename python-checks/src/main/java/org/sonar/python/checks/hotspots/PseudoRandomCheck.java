@@ -23,10 +23,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
 @Rule(key = "S2245")
-public class PseudoRandomCheck extends AbstractCallExpressionCheck {
+public class PseudoRandomCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> FUNCTIONS_TO_CHECK = new HashSet<>(Arrays.asList(
     "random.random",
@@ -37,13 +40,14 @@ public class PseudoRandomCheck extends AbstractCallExpressionCheck {
     "random.choices"));
 
   @Override
-  protected Set<String> functionsToCheck() {
-    return FUNCTIONS_TO_CHECK;
-  }
-
-  @Override
-  protected String message() {
-    return "Make sure that using this pseudorandom number generator is safe here.";
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
+      TreeSymbol symbol = callExpression.calleeSymbol();
+      if (symbol != null && FUNCTIONS_TO_CHECK.contains(symbol.fullyQualifiedName())) {
+        ctx.addIssue(callExpression, "Make sure that using this pseudorandom number generator is safe here.");
+      }
+    });
   }
 
 }
