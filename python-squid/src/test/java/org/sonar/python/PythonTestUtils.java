@@ -17,15 +17,34 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.parser;
+package org.sonar.python;
+
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.impl.Parser;
+import java.nio.charset.StandardCharsets;
+import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolTableBuilder;
+import org.sonar.python.tree.PythonTreeMaker;
 
 public final class PythonTestUtils {
+
+  private static final Parser<Grammar> p = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private static final PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
+
+  private PythonTestUtils() {
+  }
 
   public static String appendNewLine(String s) {
     return s + "\n";
   }
 
-  private PythonTestUtils() {
+  public static PyFileInputTree parse(String... lines) {
+    String code = String.join(System.getProperty("line.separator"), lines);
+    PyFileInputTree tree = pythonTreeMaker.fileInput(p.parse(code));
+    new SymbolTableBuilder().visitFileInput(tree);
+    return tree;
   }
+
 
 }

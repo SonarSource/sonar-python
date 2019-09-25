@@ -76,6 +76,11 @@ public class PyLambdaExpressionTreeImpl extends PyTree implements PyLambdaExpres
     return symbols;
   }
 
+  @Override
+  public boolean isMethodDefinition() {
+    return false;
+  }
+
   public void addLocalVariableSymbol(TreeSymbol symbol) {
     symbols.add(symbol);
   }

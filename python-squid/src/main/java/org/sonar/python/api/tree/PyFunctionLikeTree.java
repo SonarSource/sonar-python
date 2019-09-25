@@ -28,4 +28,6 @@ public interface PyFunctionLikeTree extends Tree {
   PyParameterListTree parameters();
 
   Set<TreeSymbol> localVariables();
+
+  boolean isMethodDefinition();
 }

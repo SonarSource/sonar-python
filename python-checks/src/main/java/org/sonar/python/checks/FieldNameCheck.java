@@ -19,22 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Usage;
 
-@Rule(key = FieldNameCheck.CHECK_KEY)
-public class FieldNameCheck extends PythonCheckAstNode {
-
-  public static final String CHECK_KEY = "S116";
+@Rule(key = "S116")
+public class FieldNameCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Rename this field \"%s\" to match the regular expression %s.";
 
@@ -44,41 +43,34 @@ public class FieldNameCheck extends PythonCheckAstNode {
   @RuleProperty(key = "format", defaultValue = DEFAULT)
   public String format = DEFAULT;
 
-  private Pattern pattern = null;
-  private Pattern constantPattern = null;
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (!CheckUtils.classHasInheritance(astNode)) {
-      List<Token> allFields = new NewSymbolsAnalyzer().getClassFields(astNode);
-      checkNames(allFields);
-    }
-  }
-
-  private void checkNames(List<Token> varNames) {
-    if (constantPattern == null) {
-      constantPattern = Pattern.compile(CONSTANT_PATTERN);
-    }
-    for (Token name : varNames) {
-      if (!constantPattern.matcher(name.getValue()).matches()) {
-        checkName(name);
+  public void initialize(Context context) {
+    Pattern pattern = Pattern.compile(format);
+    Pattern constantPattern = Pattern.compile(CONSTANT_PATTERN);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      if (CheckUtils.classHasInheritance(classDef)) {
+        return;
       }
-    }
+      for (TreeSymbol field : fieldsToCheck(classDef)) {
+        String name = field.name();
+        if (!pattern.matcher(name).matches() && !constantPattern.matcher(name).matches()) {
+          String message = String.format(MESSAGE, name, this.format);
+          field.usages().stream()
+            .filter(usage -> usage.kind() == Usage.Kind.ASSIGNMENT_LHS)
+            .limit(1)
+            .forEach(usage -> ctx.addIssue(usage.tree(), message));
+        }
+      }
+    });
   }
 
-  private void checkName(Token token) {
-    String name = token.getValue();
-    if (pattern == null) {
-      pattern = Pattern.compile(format);
-    }
-    if (!pattern.matcher(name).matches()) {
-      addIssue(token, String.format(MESSAGE, name, format));
-    }
+  private static List<TreeSymbol> fieldsToCheck(PyClassDefTree classDef) {
+    Set<String> classFieldNames = classDef.classFields().stream().map(TreeSymbol::name).collect(Collectors.toSet());
+    List<TreeSymbol> result = new ArrayList<>(classDef.classFields());
+    classDef.instanceFields().stream().filter(f -> !classFieldNames.contains(f.name())).forEach(result::add);
+    return result;
   }
 
 }

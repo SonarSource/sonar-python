@@ -2,6 +2,7 @@
 class MyClass:
     myField = 4 # Noncompliant {{Rename this field "myField" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
 #   ^^^^^^^
+    myField = 5
     myField2: int = 4 # Noncompliant {{Rename this field "myField2" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
 #   ^^^^^^^^
     my_field = 4
@@ -9,9 +10,13 @@ class MyClass:
     def __init__(self):
         localVar = 0
         self.myField = 0
+        self.myField = 0
         self.my_field1 = 0
         self.myField1 = 0 # Noncompliant
 #            ^^^^^^^^
+
+    def instance_field_usage(self):
+        print(self.newField)
 
     def fun(self):
         self.myField.field = 1

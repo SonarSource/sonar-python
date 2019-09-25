@@ -21,8 +21,10 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -35,6 +37,7 @@ import org.sonar.python.api.tree.PyStatementListTree;
 import org.sonar.python.api.tree.PyToken;
 import org.sonar.python.api.tree.PyTreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
 public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
 
@@ -47,6 +50,8 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   private final PyToken colon;
   private final PyStatementListTree body;
   private final PyToken docstring;
+  private final Set<TreeSymbol> classFields = new HashSet<>();
+  private final Set<TreeSymbol> instanceFields = new HashSet<>();
 
   public PyClassDefTreeImpl(AstNode astNode, List<PyDecoratorTree> decorators, PyToken classKeyword, PyNameTree name,
                             @Nullable PyToken leftPar, @Nullable PyArgListTree args, @Nullable PyToken rightPar,
@@ -120,6 +125,24 @@ public class PyClassDefTreeImpl extends PyTree implements PyClassDefTree {
   @Override
   public PyToken docstring() {
     return docstring;
+  }
+
+  @Override
+  public Set<TreeSymbol> classFields() {
+    return classFields;
+  }
+
+  @Override
+  public Set<TreeSymbol> instanceFields() {
+    return instanceFields;
+  }
+
+  public void addClassField(TreeSymbol field) {
+    classFields.add(field);
+  }
+
+  public void addInstanceField(TreeSymbol field) {
+    instanceFields.add(field);
   }
 
   @Override
