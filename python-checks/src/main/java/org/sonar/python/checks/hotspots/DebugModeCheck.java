@@ -20,9 +20,7 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
@@ -40,8 +38,8 @@ import org.sonar.python.semantic.TreeSymbol;
 public class DebugModeCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4507";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
-  private static final Set<String> debugProperties = new HashSet<>(Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS"));
-  private static final Set<String> settingFiles = new HashSet<>(Arrays.asList("global_settings.py", "settings.py"));
+  private static final List<String> debugProperties = Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
+  private static final List<String> settingFiles = Arrays.asList("global_settings.py", "settings.py");
 
   @Override
   public void initialize(Context context) {
