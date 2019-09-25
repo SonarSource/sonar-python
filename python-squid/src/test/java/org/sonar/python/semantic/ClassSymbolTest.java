@@ -23,12 +23,13 @@ import org.junit.Test;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.PyFileInputTree;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 
-public class ClassSymbolTest extends SemanticTest {
+public class ClassSymbolTest {
   @Test
   public void no_field() {
     PyClassDefTree empty = parseClass(
@@ -86,7 +87,7 @@ public class ClassSymbolTest extends SemanticTest {
   }
 
   private PyClassDefTree parseClass(String... lines) {
-    PyFileInputTree fileInput = parse(lines);
+    PyFileInputTree fileInput = PythonTestUtils.parse(lines);
     return fileInput.descendants(Tree.Kind.CLASSDEF)
       .map(PyClassDefTree.class::cast)
       .findFirst().get();

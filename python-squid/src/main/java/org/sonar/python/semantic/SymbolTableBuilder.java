@@ -89,7 +89,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         }
       });
     scopesByRootTree.values().stream()
-      .filter(scope -> scope.rootTree instanceof PyClassDefTree)
+      .filter(scope -> scope.rootTree.is(Kind.CLASSDEF))
       .forEach(scope -> {
         PyClassDefTreeImpl classDef = (PyClassDefTreeImpl) scope.rootTree;
         scope.symbols.forEach(classDef::addClassField);

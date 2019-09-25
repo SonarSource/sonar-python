@@ -28,8 +28,9 @@ import org.sonar.python.api.tree.PyQualifiedExpressionTree;
 import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.parse;
 
-public class FullyQualifiedNameTest extends SemanticTest {
+public class FullyQualifiedNameTest {
 
   @Test
   public void callee_qualified_expression() {
