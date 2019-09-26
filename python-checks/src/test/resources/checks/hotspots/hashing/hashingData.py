@@ -98,3 +98,58 @@ import passlib.hash
 passlib.hash.apr_md5_crypt  # Noncompliant
 
 apr_md5_crypt  # Noncompliant
+
+
+############################################
+###                Cryptodome            ###
+############################################
+
+def cryptodome():
+    import Cryptodome
+    from Cryptodome.Hash import MD2
+    from Cryptodome.Hash import MD4
+    from Cryptodome.Hash import MD5
+    from Cryptodome.Hash import SHA
+    from Cryptodome.Hash import SHA224
+    from Cryptodome.Hash import SHA256
+    from Cryptodome.Hash import SHA384
+    from Cryptodome.Hash import SHA512
+    from Cryptodome.Hash import HMAC
+
+    Cryptodome.Hash.MD2.new() # Noncompliant
+    MD2.new()                 # Noncompliant
+    MD4.new()                 # Noncompliant
+    MD5.new()                 # Noncompliant
+    SHA.new()                 # Noncompliant
+    SHA224.new()              # Noncompliant
+    SHA256.new()              # Noncompliant
+    SHA384.new()              # Noncompliant
+    SHA512.new()              # Noncompliant
+    HMAC.new(b"\x00")         # Noncompliant
+
+############################################
+###                PyCrypto              ###
+############################################
+
+def pycrypto():
+    import Crypto
+    from Crypto.Hash import MD2
+    from Crypto.Hash import MD4
+    from Crypto.Hash import MD5
+    from Crypto.Hash import SHA
+    from Crypto.Hash import SHA224
+    from Crypto.Hash import SHA256
+    from Crypto.Hash import SHA384
+    from Crypto.Hash import SHA512
+    from Crypto.Hash import HMAC
+
+    Crypto.Hash.MD2.new() # Noncompliant
+    MD2.new() # Noncompliant
+    MD4.new() # Noncompliant
+    MD5.new() # Noncompliant
+    SHA.new() # Noncompliant
+    SHA224.new() # Noncompliant
+    SHA256.new() # Noncompliant
+    SHA384.new() # Noncompliant
+    SHA512.new() # Noncompliant
+    HMAC.new(b"\x00") # Noncompliant
