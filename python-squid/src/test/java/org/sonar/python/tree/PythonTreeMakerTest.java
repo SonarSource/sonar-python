@@ -811,6 +811,11 @@ public class PythonTreeMakerTest extends RuleTest {
     PyFunctionDefTree funcDef = (PyFunctionDefTree) classDefTree.body().statements().get(0);
     assertThat(funcDef.isMethodDefinition()).isTrue();
 
+    astNode = p.parse("class clazz:\n  if True:\n    def foo(): pass");
+    classDefTree = treeMaker.classDefStatement(astNode);
+    funcDef = (PyFunctionDefTree) ((PyIfStatementTree) classDefTree.body().statements().get(0)).body().statements().get(0);
+    assertThat(funcDef.isMethodDefinition()).isTrue();
+
     astNode = p.parse("class ClassWithDocstring:\n" +
       "\t\"\"\"This is a docstring\"\"\"\n" +
       "\tpass");
