@@ -19,41 +19,35 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.TreeSymbol;
 
-@Rule(key = FieldDuplicatesClassNameCheck.CHECK_KEY)
-public class FieldDuplicatesClassNameCheck extends PythonCheckAstNode {
-
-  public static final String CHECK_KEY = "S1700";
+@Rule(key = "S1700")
+public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Rename field \"%s\"";
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (!CheckUtils.classHasInheritance(astNode)) {
-      List<Token> allFields = new NewSymbolsAnalyzer().getClassFields(astNode);
-      String className = astNode.getFirstChild(PythonGrammar.CLASSNAME).getTokenValue();
-
-      for (Token name : allFields) {
-        if (className.equalsIgnoreCase(name.getValue())) {
-          addIssue(name, String.format(MESSAGE, name.getValue()))
-            .secondary(astNode.getFirstChild(PythonGrammar.CLASSNAME), "Class declaration");
-        }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      if (CheckUtils.classHasInheritance(classDef)) {
+        return;
       }
-    }
+      String className = classDef.name().name();
+      Set<TreeSymbol> allFields = new HashSet<>(classDef.classFields());
+      allFields.addAll(classDef.instanceFields());
+      allFields.stream()
+        .filter(symbol -> className.equalsIgnoreCase(symbol.name()))
+        .forEach(symbol -> symbol.usages()
+          .stream()
+          .findFirst()
+          .ifPresent(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())).secondary(classDef.name(), "Class declaration")));
+    });
   }
-
 }

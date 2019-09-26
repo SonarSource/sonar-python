@@ -502,10 +502,8 @@ public class PythonTreeMaker {
 
   private static boolean isMethodDefinition(AstNode node) {
     AstNode parent = node.getParent();
-    for (int i = 0; i < 3; i++) {
-      if (parent != null) {
-        parent = parent.getParent();
-      }
+    while (parent != null && !parent.is(PythonGrammar.CLASSDEF, PythonGrammar.FUNCDEF)) {
+      parent = parent.getParent();
     }
     return parent != null && parent.is(PythonGrammar.CLASSDEF);
   }
