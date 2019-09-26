@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -95,7 +96,7 @@ public class PythonSubscriptionCheckTest {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
-          PyToken pyToken = (PyToken) ctx.syntaxNode();
+          Token pyToken = (Token) ctx.syntaxNode();
           if (pyToken.value().equals("def")) {
             ctx.addIssue(pyToken, MESSAGE);
           }

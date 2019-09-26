@@ -104,7 +104,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void exec_statement() {
     setRootRule(PythonGrammar.EXEC_STMT);
-    ExecStatement tree = parse("exec 'foo' in globals, locals", treeMaker::execStatement);
+    AstNode astNode = p.parse("exec 'foo' in globals, locals");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ExecStatement tree = treeMaker.execStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitExecStatement(tree);
     verify(visitor).scan(tree.expression());
@@ -115,7 +117,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void assert_statement() {
     setRootRule(PythonGrammar.ASSERT_STMT);
-    AssertStatement tree = parse("assert x, y", treeMaker::assertStatement);
+    AstNode astNode = p.parse("assert x, y");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssertStatement tree = treeMaker.assertStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssertStatement(tree);
     verify(visitor).scan(tree.condition());
@@ -125,7 +129,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void delete_statement() {
     setRootRule(PythonGrammar.DEL_STMT);
-    DelStatement tree = parse("del x", treeMaker::delStatement);
+    AstNode astNode = p.parse("del x");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    DelStatement tree = treeMaker.delStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitDelStatement(tree);
     verify(visitor).scan(tree.expressions());

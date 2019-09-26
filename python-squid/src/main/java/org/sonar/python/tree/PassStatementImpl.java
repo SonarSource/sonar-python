@@ -20,24 +20,35 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.PassStatement;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class PassStatementImpl extends PyTree implements PassStatement {
   private final Token passKeyword;
+  private final Token separator;
 
-  public PassStatementImpl(AstNode astNode, Token passKeyword) {
+  public PassStatementImpl(AstNode astNode, Token passKeyword, @Nullable Token separator) {
     super(astNode);
     this.passKeyword = passKeyword;
+    this.separator = separator;
   }
 
   @Override
   public Token passKeyword() {
     return passKeyword;
+  }
+
+  @Nullable
+  @Override
+  public Token separator() {
+    return this.separator;
   }
 
   @Override
@@ -52,6 +63,6 @@ public class PassStatementImpl extends PyTree implements PassStatement {
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(passKeyword);
+    return Stream.of(passKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

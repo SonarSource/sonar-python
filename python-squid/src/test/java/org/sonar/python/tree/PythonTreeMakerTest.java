@@ -28,6 +28,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.AnnotatedAssignment;
 import org.sonar.python.api.tree.Argument;
@@ -52,9 +54,9 @@ import org.sonar.python.api.tree.EllipsisExpression;
 import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.ExecStatement;
+import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionList;
 import org.sonar.python.api.tree.ExpressionStatement;
-import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.FunctionDef;
@@ -84,15 +86,16 @@ import org.sonar.python.api.tree.SetLiteral;
 import org.sonar.python.api.tree.SliceExpression;
 import org.sonar.python.api.tree.SliceItem;
 import org.sonar.python.api.tree.StarredExpression;
-import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.StringElement;
 import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.SubscriptionExpression;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TryStatement;
-import org.sonar.python.api.tree.TupleParameter;
 import org.sonar.python.api.tree.Tuple;
+import org.sonar.python.api.tree.TupleParameter;
 import org.sonar.python.api.tree.TypeAnnotation;
 import org.sonar.python.api.tree.UnaryExpression;
 import org.sonar.python.api.tree.WhileStatement;
@@ -100,7 +103,6 @@ import org.sonar.python.api.tree.WithItem;
 import org.sonar.python.api.tree.WithStatement;
 import org.sonar.python.api.tree.YieldExpression;
 import org.sonar.python.api.tree.YieldStatement;
-import org.sonar.python.api.tree.Tree;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -258,21 +260,24 @@ public class PythonTreeMakerTest extends RuleTest {
   public void printStatement() {
     setRootRule(PythonGrammar.PRINT_STMT);
     AstNode astNode = p.parse("print 'foo'");
-    PrintStatement printStmt = treeMaker.printStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    PrintStatement printStmt = treeMaker.printStatement(statementWithSeparator);
     assertThat(printStmt).isNotNull();
     assertThat(printStmt.printKeyword().value()).isEqualTo("print");
     assertThat(printStmt.expressions()).hasSize(1);
     assertThat(printStmt.children()).hasSize(2);
 
     astNode = p.parse("print 'foo', 'bar'");
-    printStmt = treeMaker.printStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    printStmt = treeMaker.printStatement(statementWithSeparator);
     assertThat(printStmt).isNotNull();
     assertThat(printStmt.printKeyword().value()).isEqualTo("print");
     assertThat(printStmt.expressions()).hasSize(2);
     assertThat(printStmt.children()).hasSize(3);
 
     astNode = p.parse("print >> 'foo'");
-    printStmt = treeMaker.printStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    printStmt = treeMaker.printStatement(statementWithSeparator);
     assertThat(printStmt).isNotNull();
     assertThat(printStmt.printKeyword().value()).isEqualTo("print");
     assertThat(printStmt.expressions()).hasSize(1);
@@ -282,7 +287,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void execStatement() {
     setRootRule(PythonGrammar.EXEC_STMT);
     AstNode astNode = p.parse("exec 'foo'");
-    ExecStatement execStatement = treeMaker.execStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ExecStatement execStatement = treeMaker.execStatement(statementWithSeparator);
     assertThat(execStatement).isNotNull();
     assertThat(execStatement.execKeyword().value()).isEqualTo("exec");
     assertThat(execStatement.expression()).isNotNull();
@@ -291,7 +297,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(execStatement.children()).hasSize(2);
 
     astNode = p.parse("exec 'foo' in globals");
-    execStatement = treeMaker.execStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    execStatement = treeMaker.execStatement(statementWithSeparator);
     assertThat(execStatement).isNotNull();
     assertThat(execStatement.execKeyword().value()).isEqualTo("exec");
     assertThat(execStatement.expression()).isNotNull();
@@ -300,7 +307,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(execStatement.children()).hasSize(3);
 
     astNode = p.parse("exec 'foo' in globals, locals");
-    execStatement = treeMaker.execStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    execStatement = treeMaker.execStatement(statementWithSeparator);
     assertThat(execStatement).isNotNull();
     assertThat(execStatement.execKeyword().value()).isEqualTo("exec");
     assertThat(execStatement.expression()).isNotNull();
@@ -315,7 +323,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void assertStatement() {
     setRootRule(PythonGrammar.ASSERT_STMT);
     AstNode astNode = p.parse("assert x");
-    AssertStatement assertStatement = treeMaker.assertStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssertStatement assertStatement = treeMaker.assertStatement(statementWithSeparator);
     assertThat(assertStatement).isNotNull();
     assertThat(assertStatement.assertKeyword().value()).isEqualTo("assert");
     assertThat(assertStatement.condition()).isNotNull();
@@ -323,7 +332,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(assertStatement.children()).hasSize(2);
 
     astNode = p.parse("assert x, y");
-    assertStatement = treeMaker.assertStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    assertStatement = treeMaker.assertStatement(statementWithSeparator);
     assertThat(assertStatement).isNotNull();
     assertThat(assertStatement.assertKeyword().value()).isEqualTo("assert");
     assertThat(assertStatement.condition()).isNotNull();
@@ -335,7 +345,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void passStatement() {
     setRootRule(PythonGrammar.PASS_STMT);
     AstNode astNode = p.parse("pass");
-    PassStatement passStatement = treeMaker.passStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    PassStatement passStatement = treeMaker.passStatement(statementWithSeparator);
     assertThat(passStatement).isNotNull();
     assertThat(passStatement.passKeyword().value()).isEqualTo("pass");
     assertThat(passStatement.children()).hasSize(1);
@@ -345,7 +356,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void delStatement() {
     setRootRule(PythonGrammar.DEL_STMT);
     AstNode astNode = p.parse("del foo");
-    DelStatement passStatement = treeMaker.delStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    DelStatement passStatement = treeMaker.delStatement(statementWithSeparator);
     assertThat(passStatement).isNotNull();
     assertThat(passStatement.delKeyword().value()).isEqualTo("del");
     assertThat(passStatement.expressions()).hasSize(1);
@@ -353,14 +365,16 @@ public class PythonTreeMakerTest extends RuleTest {
 
 
     astNode = p.parse("del foo, bar");
-    passStatement = treeMaker.delStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    passStatement = treeMaker.delStatement(statementWithSeparator);
     assertThat(passStatement).isNotNull();
     assertThat(passStatement.delKeyword().value()).isEqualTo("del");
     assertThat(passStatement.expressions()).hasSize(2);
     assertThat(passStatement.children()).hasSize(3);
 
     astNode = p.parse("del *foo");
-    passStatement = treeMaker.delStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    passStatement = treeMaker.delStatement(statementWithSeparator);
     assertThat(passStatement).isNotNull();
     assertThat(passStatement.delKeyword().value()).isEqualTo("del");
     assertThat(passStatement.expressions()).hasSize(1);
@@ -371,12 +385,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void returnStatement() {
     setRootRule(PythonGrammar.RETURN_STMT);
     AstNode astNode = p.parse("return foo");
-<<<<<<< HEAD
-    ReturnStatement returnStatement = treeMaker.returnStatement(astNode);
-=======
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
-    PyReturnStatementTree returnStatement = treeMaker.returnStatement(statementWithSeparator);
->>>>>>> Add newline tokens in return, expression statement & if statements
+    ReturnStatement returnStatement = treeMaker.returnStatement(statementWithSeparator);
     assertThat(returnStatement).isNotNull();
     assertThat(returnStatement.returnKeyword().value()).isEqualTo("return");
     assertThat(returnStatement.expressions()).hasSize(1);
@@ -403,7 +413,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void yieldStatement() {
     setRootRule(PythonGrammar.YIELD_STMT);
     AstNode astNode = p.parse("yield foo");
-    YieldStatement yieldStatement = treeMaker.yieldStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    YieldStatement yieldStatement = treeMaker.yieldStatement(statementWithSeparator);
     assertThat(yieldStatement).isNotNull();
     assertThat(yieldStatement.children()).hasSize(1);
     YieldExpression yieldExpression = yieldStatement.yieldExpression();
@@ -412,7 +423,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(yieldExpression.children()).hasSize(2);
 
     astNode = p.parse("yield foo, bar");
-    yieldStatement = treeMaker.yieldStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    yieldStatement = treeMaker.yieldStatement(statementWithSeparator);
     assertThat(yieldStatement).isNotNull();
     assertThat(yieldStatement.children()).hasSize(1);
     yieldExpression = yieldStatement.yieldExpression();
@@ -423,7 +435,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(yieldExpression.children()).hasSize(3);
 
     astNode = p.parse("yield from foo");
-    yieldStatement = treeMaker.yieldStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    yieldStatement = treeMaker.yieldStatement(statementWithSeparator);
     assertThat(yieldStatement).isNotNull();
     assertThat(yieldStatement.children()).hasSize(1);
     yieldExpression = yieldStatement.yieldExpression();
@@ -434,7 +447,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(yieldExpression.children()).hasSize(3);
 
     astNode = p.parse("yield");
-    yieldStatement = treeMaker.yieldStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    yieldStatement = treeMaker.yieldStatement(statementWithSeparator);
     assertThat(yieldStatement.children()).hasSize(1);
     assertThat(yieldStatement).isNotNull();
   }
@@ -883,12 +897,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void expression_statement() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("'foo'");
-<<<<<<< HEAD
-    ExpressionStatement expressionStatement = treeMaker.expressionStatement(astNode);
-=======
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
-    PyExpressionStatementTree expressionStatement = treeMaker.expressionStatement(statementWithSeparator);
->>>>>>> Add newline tokens in return, expression statement & if statements
+    ExpressionStatement expressionStatement = treeMaker.expressionStatement(statementWithSeparator);
     assertThat(expressionStatement.expressions()).hasSize(1);
     assertThat(expressionStatement.children()).hasSize(1);
 
@@ -1916,17 +1926,17 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void statements_separators() {
-    PyFileInputTree tree = parse("foo(); bar()\ntoto()", treeMaker::fileInput);
-    List<PyStatementTree> statements = tree.statements().statements();
+    FileInput tree = parse("foo(); bar()\ntoto()", treeMaker::fileInput);
+    List<Statement> statements = tree.statements().statements();
 
     List<Tree> statementChildren = statements.get(0).children();
     assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    PyToken token = (PyToken) statementChildren.get(statementChildren.size()-1);
+    Token token = (Token) statementChildren.get(statementChildren.size()-1);
     assertThat(token.token().getType()).isEqualTo(PythonPunctuator.SEMICOLON);
 
     statementChildren = statements.get(1).children();
     assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    token = (PyToken) statementChildren.get(statementChildren.size()-1);
+    token = (Token) statementChildren.get(statementChildren.size()-1);
     assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
   }
 
