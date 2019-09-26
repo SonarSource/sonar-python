@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "InequalityUsage")
@@ -32,8 +32,8 @@ public class InequalityUsageCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> {
-      PyBinaryExpressionTree expr = (PyBinaryExpressionTree) ctx.syntaxNode();
-      PyToken operator = expr.operator();
+      BinaryExpression expr = (BinaryExpression) ctx.syntaxNode();
+      Token operator = expr.operator();
       if (operator.value().equals(PythonPunctuator.NOT_EQU2.getValue())) {
         ctx.addIssue(operator, "Replace \"<>\" by \"!=\".");
       }

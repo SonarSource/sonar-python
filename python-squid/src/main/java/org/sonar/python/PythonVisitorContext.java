@@ -24,19 +24,19 @@ import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
 public class PythonVisitorContext {
 
-  private final PyFileInputTree rootTree;
+  private final FileInput rootTree;
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
   private final AstNode rootAst;
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
-  public PythonVisitorContext(AstNode rootAst, PyFileInputTree rootTree, PythonFile pythonFile) {
+  public PythonVisitorContext(AstNode rootAst, FileInput rootTree, PythonFile pythonFile) {
     this.rootAst = rootAst;
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
@@ -51,7 +51,7 @@ public class PythonVisitorContext {
     this.parsingException = parsingException;
   }
 
-  public PyFileInputTree rootTree() {
+  public FileInput rootTree() {
     return rootTree;
   }
 

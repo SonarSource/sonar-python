@@ -21,8 +21,8 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.ParenthesizedExpression;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
@@ -35,8 +35,8 @@ public class UselessParenthesisCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.PARENTHESIZED, ctx -> {
-      PyParenthesizedExpressionTree parenthesized = (PyParenthesizedExpressionTree) ctx.syntaxNode();
-      PyExpressionTree expression = parenthesized.expression();
+      ParenthesizedExpression parenthesized = (ParenthesizedExpression) ctx.syntaxNode();
+      Expression expression = parenthesized.expression();
       if (expression.is(Tree.Kind.PARENTHESIZED) || expression.is(Tree.Kind.TUPLE) || expression.is(Tree.Kind.GENERATOR_EXPR)) {
         ctx.addIssue(parenthesized.leftParenthesis(), MESSAGE).secondary(parenthesized.rightParenthesis(), null);
       }

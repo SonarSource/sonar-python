@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyStringElementTree;
+import org.sonar.python.api.tree.StringElement;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1717")
@@ -33,7 +33,7 @@ public class BackslashInStringCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
-      PyStringElementTree pyStringLiteralTree = ((PyStringElementTree) ctx.syntaxNode());
+      StringElement pyStringLiteralTree = ((StringElement) ctx.syntaxNode());
       String string = pyStringLiteralTree.value();
       int length = string.length();
       boolean isEscaped = false;

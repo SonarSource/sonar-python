@@ -28,7 +28,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.tree.PyTokenImpl;
+import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -88,7 +88,7 @@ public class IssueLocationTest {
     AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
     AstNode firstNode = root.getFirstDescendant(PythonTokenType.NUMBER);
     AstNode lastNode = root.getFirstDescendant(PythonPunctuator.RPARENTHESIS);
-    IssueLocation issueLocation = IssueLocation.preciseLocation(new PyTokenImpl(firstNode.getToken()), new PyTokenImpl(lastNode.getToken()), MESSAGE);
+    IssueLocation issueLocation = IssueLocation.preciseLocation(new TokenImpl(firstNode.getToken()), new TokenImpl(lastNode.getToken()), MESSAGE);
     assertThat(issueLocation.message()).isEqualTo(MESSAGE);
     assertThat(issueLocation.startLine()).isEqualTo(3);
     assertThat(issueLocation.endLine()).isEqualTo(3);

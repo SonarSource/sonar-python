@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
@@ -49,7 +49,7 @@ public class FieldNameCheck extends PythonSubscriptionCheck {
     Pattern pattern = Pattern.compile(format);
     Pattern constantPattern = Pattern.compile(CONSTANT_PATTERN);
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      ClassDef classDef = (ClassDef) ctx.syntaxNode();
       if (CheckUtils.classHasInheritance(classDef)) {
         return;
       }
@@ -66,7 +66,7 @@ public class FieldNameCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static List<Symbol> fieldsToCheck(PyClassDefTree classDef) {
+  private static List<Symbol> fieldsToCheck(ClassDef classDef) {
     Set<String> classFieldNames = classDef.classFields().stream().map(Symbol::name).collect(Collectors.toSet());
     List<Symbol> result = new ArrayList<>(classDef.classFields());
     classDef.instanceFields().stream().filter(f -> !classFieldNames.contains(f.name())).forEach(result::add);

@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 public class FileMetrics {
@@ -39,19 +39,19 @@ public class FileMetrics {
 
   public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
     AstNode rootTree = context.rootAstNode();
-    PyFileInputTree pyFileInputTree = context.rootTree();
+    FileInput fileInput = context.rootTree();
     numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
     numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
-    pyFileInputTree.accept(complexityVisitor);
-    pyFileInputTree.accept(cognitiveComplexityVisitor);
+    fileInput.accept(complexityVisitor);
+    fileInput.accept(cognitiveComplexityVisitor);
     fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
     fileLinesVisitor.scanFile(context);
-    pyFileInputTree.accept(new FunctionVisitor());
+    fileInput.accept(new FunctionVisitor());
   }
 
   private class FunctionVisitor extends BaseTreeVisitor {
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       functionComplexities.add(ComplexityVisitor.complexity(pyFunctionDefTree));
       super.visitFunctionDef(pyFunctionDefTree);
     }

@@ -26,15 +26,15 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.PyArgListTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyExpressionListTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.ArgList;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.ExpressionList;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.ParenthesizedExpression;
+import org.sonar.python.api.tree.QualifiedExpression;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
@@ -124,18 +124,18 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
    * make_password(password)  # OK
    */
   @Override
-  protected boolean isException(PyCallExpressionTree callExpression) {
+  protected boolean isException(CallExpression callExpression) {
     return isDjangoMakePasswordFunctionWithoutSaltAndHasher(callExpression);
   }
 
-  private static boolean isDjangoMakePasswordFunctionWithoutSaltAndHasher(PyCallExpressionTree callExpression) {
+  private static boolean isDjangoMakePasswordFunctionWithoutSaltAndHasher(CallExpression callExpression) {
     return callExpression.calleeSymbol() != null
       && "django.contrib.auth.hashers.make_password".equals(callExpression.calleeSymbol().fullyQualifiedName())
       && callExpression.arguments().size() == 1;
   }
 
   private static void checkOverwriteDjangoHashers(SubscriptionContext ctx) {
-    PyAssignmentStatementTree assignmentStatementTree = (PyAssignmentStatementTree) ctx.syntaxNode();
+    AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
 
     if (isOverwritingDjangoHashers(assignmentStatementTree.lhsExpressions())) {
       ctx.addIssue(assignmentStatementTree, MESSAGE);
@@ -154,12 +154,12 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   /**
    * checks for `settings.PASSWORD_HASHERS = value`
    */
-  private static boolean isOverwritingDjangoHashers(List<PyExpressionListTree> lhsExpressions) {
-    for (PyExpressionListTree expr : lhsExpressions) {
-      for (PyExpressionTree expression : expr.expressions()) {
-        PyExpressionTree baseExpr = removeParenthesis(expression);
+  private static boolean isOverwritingDjangoHashers(List<ExpressionList> lhsExpressions) {
+    for (ExpressionList expr : lhsExpressions) {
+      for (Expression expression : expr.expressions()) {
+        Expression baseExpr = removeParenthesis(expression);
         if (baseExpr.is(Tree.Kind.QUALIFIED_EXPR)) {
-          PyQualifiedExpressionTree qualifiedExpression = (PyQualifiedExpressionTree) baseExpr;
+          QualifiedExpression qualifiedExpression = (QualifiedExpression) baseExpr;
           if (qualifiedExpression.symbol() != null
             && "django.conf.settings.PASSWORD_HASHERS".equals(qualifiedExpression.symbol().fullyQualifiedName())) {
             return true;
@@ -170,16 +170,16 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     return false;
   }
 
-  private static PyExpressionTree removeParenthesis(PyExpressionTree expression) {
-    PyExpressionTree res = expression;
+  private static Expression removeParenthesis(Expression expression) {
+    Expression res = expression;
     while (res.is(Tree.Kind.PARENTHESIZED)) {
-      res = ((PyParenthesizedExpressionTree) res).expression();
+      res = ((ParenthesizedExpression) res).expression();
     }
     return res;
   }
 
   private static void checkQuestionableHashingAlgorithm(SubscriptionContext ctx) {
-    PyNameTree name = (PyNameTree) ctx.syntaxNode();
+    Name name = (Name) ctx.syntaxNode();
     if (isWithinImport(name)) {
       return;
     }
@@ -189,7 +189,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     }
   }
 
-  private static String getQualifiedName(PyExpressionTree node) {
+  private static String getQualifiedName(Expression node) {
     if (node instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) node).symbol();
       return symbol != null ? symbol.fullyQualifiedName() : "";
@@ -198,8 +198,8 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   }
 
   private static void checkCreatingCustomHasher(SubscriptionContext ctx) {
-    PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
-    PyArgListTree argList = classDef.args();
+    ClassDef classDef = (ClassDef) ctx.syntaxNode();
+    ArgList argList = classDef.args();
     if (argList != null) {
       argList.arguments()
         .stream()

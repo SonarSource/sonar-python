@@ -24,7 +24,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -47,7 +47,7 @@ public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
-      PyNameTree pyNameTree = (PyNameTree) ctx.syntaxNode();
+      Name pyNameTree = (Name) ctx.syntaxNode();
       if (isWeakProtocol(pyNameTree.symbol())) {
         ctx.addIssue(pyNameTree, "Change this code to use a stronger protocol.");
       }

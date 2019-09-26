@@ -24,8 +24,8 @@ import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,7 +48,7 @@ public class PythonSubscriptionCheckTest {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-          PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
+          FunctionDef tree = (FunctionDef) ctx.syntaxNode();
           ctx.addIssue(tree.name(), tree.name().firstToken().value());
         });
       }
@@ -77,8 +77,8 @@ public class PythonSubscriptionCheckTest {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-          PyFunctionDefTree pyFunctionDefTree = (PyFunctionDefTree) ctx.syntaxNode();
-          PyNameTree name = pyFunctionDefTree.name();
+          FunctionDef pyFunctionDefTree = (FunctionDef) ctx.syntaxNode();
+          Name name = pyFunctionDefTree.name();
           ctx.addIssue(name.firstToken(), MESSAGE).withCost(42);
         });
       }

@@ -34,11 +34,11 @@ import org.junit.Test;
 import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.tree.PyArgListTreeImpl;
+import org.sonar.python.tree.ArgListImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -186,7 +186,7 @@ public class CheckUtilsTest {
 
   @Test
   public void tree_equivalence() {
-    assertThat(CheckUtils.areEquivalent(new PyArgListTreeImpl(null, Collections.emptyList()), new PyArgListTreeImpl(null, Collections.emptyList()))).isTrue();
+    assertThat(CheckUtils.areEquivalent(new ArgListImpl(null, Collections.emptyList()), new ArgListImpl(null, Collections.emptyList()))).isTrue();
   }
 
   @Test
@@ -215,7 +215,7 @@ public class CheckUtilsTest {
   private Tree parse(String content) {
     Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     AstNode astNode = parser.parse(content);
-    PyFileInputTree parse = new PythonTreeMaker().fileInput(astNode);
+    FileInput parse = new PythonTreeMaker().fileInput(astNode);
     return parse;
   }
 }

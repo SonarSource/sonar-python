@@ -49,7 +49,7 @@ import org.sonar.python.PythonFile;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
@@ -96,7 +96,7 @@ public class PythonScanner {
     PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parser.parse(pythonFile.content());
-      PyFileInputTree parse = new PythonTreeMaker().fileInput(astNode);
+      FileInput parse = new PythonTreeMaker().fileInput(astNode);
       visitorContext = new PythonVisitorContext(astNode, parse, pythonFile);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {

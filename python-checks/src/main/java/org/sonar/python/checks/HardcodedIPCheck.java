@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = HardcodedIPCheck.CHECK_KEY)
@@ -53,7 +53,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
-      PyStringLiteralTree stringLiteral = (PyStringLiteralTree) ctx.syntaxNode();
+      StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
       if (isMultilineString(stringLiteral)) {
         return;
       }
@@ -79,7 +79,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isMultilineString(PyStringLiteralTree pyStringLiteralTree) {
+  private static boolean isMultilineString(StringLiteral pyStringLiteralTree) {
     return pyStringLiteralTree.stringElements().size() > 1;
   }
 

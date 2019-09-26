@@ -24,9 +24,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
@@ -45,7 +45,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree callExpr = (PyCallExpressionTree) ctx.syntaxNode();
+      CallExpression callExpr = (CallExpression) ctx.syntaxNode();
       if (questionableFunctionsBuiltIn.contains(getFunctionName(callExpr.callee()))) {
         ctx.addIssue(callExpr, message());
       } else {
@@ -53,7 +53,7 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
       }
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
-      PyNameTree node = (PyNameTree) ctx.syntaxNode();
+      Name node = (Name) ctx.syntaxNode();
       if (isWithinImport(node)) {
         return;
       }
@@ -63,27 +63,27 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
     });
   }
 
-  private static String getFunctionName(PyExpressionTree expr) {
+  private static String getFunctionName(Expression expr) {
     String functionName = "";
     if (expr.is(Tree.Kind.NAME)) {
-      functionName = ((PyNameTree) expr).name();
+      functionName = ((Name) expr).name();
     }
     return functionName;
   }
 
   @Override
-  protected boolean isException(PyCallExpressionTree callExpression) {
+  protected boolean isException(CallExpression callExpression) {
     Symbol symbol = callExpression.calleeSymbol();
     return symbol != null && fileInputFunctions.contains(symbol.fullyQualifiedName()) && !callExpression.arguments().isEmpty();
   }
 
-  private static boolean isQuestionablePropertyAccess(PyNameTree pyNameTree) {
+  private static boolean isQuestionablePropertyAccess(Name pyNameTree) {
     Optional<Tree> callExpression = pyNameTree.ancestors().stream()
       .filter(tree -> tree.is(Tree.Kind.CALL_EXPR))
       .findFirst();
     if (callExpression.isPresent()) {
       // avoid raising twice the issue on call expressions like sys.stdin.read()
-      PyCallExpressionTree call = (PyCallExpressionTree) callExpression.get();
+      CallExpression call = (CallExpression) callExpression.get();
       if (call.callee().descendants().anyMatch(tree -> tree == pyNameTree)) {
         return false;
       }

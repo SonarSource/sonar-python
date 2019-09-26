@@ -22,20 +22,20 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyAssertStatementTree;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyDelStatementTree;
-import org.sonar.python.api.tree.PyExceptClauseTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
-import org.sonar.python.api.tree.PyRaiseStatementTree;
-import org.sonar.python.api.tree.PyReturnStatementTree;
-import org.sonar.python.api.tree.PyTupleTree;
-import org.sonar.python.api.tree.PyUnaryExpressionTree;
-import org.sonar.python.api.tree.PyWhileStatementTree;
-import org.sonar.python.api.tree.PyYieldExpressionTree;
+import org.sonar.python.api.tree.AssertStatement;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.DelStatement;
+import org.sonar.python.api.tree.ExceptClause;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.ParenthesizedExpression;
+import org.sonar.python.api.tree.RaiseStatement;
+import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.Tuple;
+import org.sonar.python.api.tree.UnaryExpression;
+import org.sonar.python.api.tree.WhileStatement;
+import org.sonar.python.api.tree.YieldExpression;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1721")
@@ -45,62 +45,62 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> checkExpr(((PyAssertStatementTree) ctx.syntaxNode()).condition(), ctx, "assert"));
-    context.registerSyntaxNodeConsumer(Tree.Kind.DEL_STMT, ctx -> checkExpr(((PyDelStatementTree) ctx.syntaxNode()).expressions().get(0), ctx, "del"));
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSERT_STMT, ctx -> checkExpr(((AssertStatement) ctx.syntaxNode()).condition(), ctx, "assert"));
+    context.registerSyntaxNodeConsumer(Tree.Kind.DEL_STMT, ctx -> checkExpr(((DelStatement) ctx.syntaxNode()).expressions().get(0), ctx, "del"));
     context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> {
-      PyIfStatementTree ifStmt = (PyIfStatementTree) ctx.syntaxNode();
+      IfStatement ifStmt = (IfStatement) ctx.syntaxNode();
       checkExpr(ifStmt.condition(), ctx, ifStmt.keyword().value());
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.WHILE_STMT, ctx -> {
-      PyWhileStatementTree whileStmt = (PyWhileStatementTree) ctx.syntaxNode();
+      WhileStatement whileStmt = (WhileStatement) ctx.syntaxNode();
       checkExpr(whileStmt.condition(), ctx, whileStmt.whileKeyword().value());
     });
-    context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> handleForStatement(ctx, (PyForStatementTree) ctx.syntaxNode()));
-    context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ctx -> handleRaiseStatement(ctx, (PyRaiseStatementTree) ctx.syntaxNode()));
-    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, ctx -> handleReturnStatement(ctx, (PyReturnStatementTree) ctx.syntaxNode()));
-    context.registerSyntaxNodeConsumer(Tree.Kind.YIELD_EXPR, ctx -> handleYieldExpression(ctx, (PyYieldExpressionTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> handleForStatement(ctx, (ForStatement) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ctx -> handleRaiseStatement(ctx, (RaiseStatement) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_STMT, ctx -> handleReturnStatement(ctx, (ReturnStatement) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.YIELD_EXPR, ctx -> handleYieldExpression(ctx, (YieldExpression) ctx.syntaxNode()));
     context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ctx -> {
-      PyExpressionTree exception = ((PyExceptClauseTree) ctx.syntaxNode()).exception();
+      Expression exception = ((ExceptClause) ctx.syntaxNode()).exception();
       if( exception != null) {
         checkExprExcludeTuples(exception, ctx, "except");
       }
     });
-    context.registerSyntaxNodeConsumer(Tree.Kind.NOT, ctx -> handleNotOperator(ctx, (PyUnaryExpressionTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.NOT, ctx -> handleNotOperator(ctx, (UnaryExpression) ctx.syntaxNode()));
   }
 
-  private static void handleYieldExpression(SubscriptionContext ctx, PyYieldExpressionTree yieldExpr) {
+  private static void handleYieldExpression(SubscriptionContext ctx, YieldExpression yieldExpr) {
     if (yieldExpr.fromKeyword() == null && yieldExpr.expressions().size() == 1) {
       yieldExpr.expressions().forEach(e -> checkExpr(e, ctx, "yield"));
     }
   }
 
-  private static void handleReturnStatement(SubscriptionContext ctx, PyReturnStatementTree retStmt) {
+  private static void handleReturnStatement(SubscriptionContext ctx, ReturnStatement retStmt) {
     if (retStmt.expressions().size() == 1) {
-      PyExpressionTree expr = retStmt.expressions().get(0);
-      if ((expr.is(Tree.Kind.PARENTHESIZED) || (expr.is(Tree.Kind.TUPLE) && !((PyTupleTree) expr).elements().isEmpty()))
+      Expression expr = retStmt.expressions().get(0);
+      if ((expr.is(Tree.Kind.PARENTHESIZED) || (expr.is(Tree.Kind.TUPLE) && !((Tuple) expr).elements().isEmpty()))
         && expr.firstToken().line() == expr.lastToken().line()) {
         ctx.addIssue(expr, String.format(MESSAGE, "return"));
       }
     }
   }
 
-  private static void handleNotOperator(SubscriptionContext ctx, PyUnaryExpressionTree unary) {
-    PyExpressionTree negatedExpr = unary.expression();
+  private static void handleNotOperator(SubscriptionContext ctx, UnaryExpression unary) {
+    Expression negatedExpr = unary.expression();
     if (negatedExpr.is(Tree.Kind.PARENTHESIZED)) {
-      negatedExpr = ((PyParenthesizedExpressionTree) negatedExpr).expression();
-      if (negatedExpr.is(Tree.Kind.COMPARISON) || !(negatedExpr instanceof PyBinaryExpressionTree)) {
+      negatedExpr = ((ParenthesizedExpression) negatedExpr).expression();
+      if (negatedExpr.is(Tree.Kind.COMPARISON) || !(negatedExpr instanceof BinaryExpression)) {
         ctx.addIssue(negatedExpr, String.format(MESSAGE, "not"));
       }
     }
   }
 
-  private static void handleRaiseStatement(SubscriptionContext ctx, PyRaiseStatementTree raiseStmt) {
+  private static void handleRaiseStatement(SubscriptionContext ctx, RaiseStatement raiseStmt) {
     if (!raiseStmt.expressions().isEmpty()) {
       checkExpr(raiseStmt.expressions().get(0), ctx, "raise");
     }
   }
 
-  private static void handleForStatement(SubscriptionContext ctx, PyForStatementTree forStmt) {
+  private static void handleForStatement(SubscriptionContext ctx, ForStatement forStmt) {
     if(forStmt.expressions().size() == 1) {
       checkExpr(forStmt.expressions().get(0), ctx, "for");
     }
@@ -109,15 +109,15 @@ public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck
     }
   }
 
-  private static void checkExprExcludeTuples(PyExpressionTree expr, SubscriptionContext ctx, String keyword) {
+  private static void checkExprExcludeTuples(Expression expr, SubscriptionContext ctx, String keyword) {
     checkExpr(expr, ctx, keyword, false);
   }
 
-  private static void checkExpr(PyExpressionTree expr, SubscriptionContext ctx, String keyword) {
+  private static void checkExpr(Expression expr, SubscriptionContext ctx, String keyword) {
     checkExpr(expr, ctx, keyword, true);
   }
 
-  private static void checkExpr(PyExpressionTree expr, SubscriptionContext ctx, String keyword, boolean raiseForTuple) {
+  private static void checkExpr(Expression expr, SubscriptionContext ctx, String keyword, boolean raiseForTuple) {
     if ((expr.is(Tree.Kind.PARENTHESIZED) || (raiseForTuple && expr.is(Tree.Kind.TUPLE)))
       && expr.firstToken().line() == expr.lastToken().line()) {
       ctx.addIssue(expr, String.format(MESSAGE, keyword));

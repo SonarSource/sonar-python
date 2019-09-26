@@ -24,13 +24,13 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionListTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ExpressionList;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.QualifiedExpression;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
@@ -44,9 +44,9 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = callExpression.arguments();
-      if (!(callExpression.callee() instanceof PyQualifiedExpressionTree)) {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      List<Argument> arguments = callExpression.arguments();
+      if (!(callExpression.callee() instanceof QualifiedExpression)) {
         return;
       }
       if ("django.conf.settings.configure".equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
@@ -58,8 +58,8 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       if (!settingFiles.contains(ctx.pythonFile().fileName())) {
         return;
       }
-      PyAssignmentStatementTree assignmentStatementTree = (PyAssignmentStatementTree) ctx.syntaxNode();
-      for (PyExpressionListTree lhsExpression : assignmentStatementTree.lhsExpressions()) {
+      AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
+      for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
         boolean isDebugProperties = lhsExpression.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier);
         if (isDebugProperties && isTrueLiteral(assignmentStatementTree.assignedValue())) {
           ctx.addIssue(assignmentStatementTree, MESSAGE);
@@ -68,16 +68,16 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isDebugIdentifier(PyExpressionTree expr) {
-    return expr.is(Kind.NAME) && debugProperties.contains(((PyNameTree) expr).name());
+  private static boolean isDebugIdentifier(Expression expr) {
+    return expr.is(Kind.NAME) && debugProperties.contains(((Name) expr).name());
   }
 
-  private static boolean isTrueLiteral(PyExpressionTree expr) {
-    return expr.is(Kind.NAME) && ((PyNameTree) expr).name().equals("True");
+  private static boolean isTrueLiteral(Expression expr) {
+    return expr.is(Kind.NAME) && ((Name) expr).name().equals("True");
   }
 
-  private static boolean isDebugArgument(PyArgumentTree argument) {
-    PyNameTree keywordArgument = argument.keywordArgument();
+  private static boolean isDebugArgument(Argument argument) {
+    Name keywordArgument = argument.keywordArgument();
     if (keywordArgument != null && debugProperties.contains((keywordArgument).name())) {
       return isTrueLiteral(argument.expression());
     }
@@ -85,7 +85,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   }
 
   @CheckForNull
-  private static String getQualifiedName(PyCallExpressionTree callExpression) {
+  private static String getQualifiedName(CallExpression callExpression) {
     Symbol symbol = callExpression.calleeSymbol();
     return symbol != null ? symbol.fullyQualifiedName() : "";
   }

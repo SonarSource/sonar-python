@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyExecStatementTree;
+import org.sonar.python.api.tree.ExecStatement;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = ExecStatementUsageCheck.CHECK_KEY)
@@ -31,7 +31,7 @@ public class ExecStatementUsageCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.EXEC_STMT, ctx -> {
-      PyExecStatementTree tree = (PyExecStatementTree) ctx.syntaxNode();
+      ExecStatement tree = (ExecStatement) ctx.syntaxNode();
       ctx.addIssue(tree.execKeyword(), "Do not use exec statement.");
     });
   }

@@ -20,7 +20,7 @@
 package org.sonar.python;
 
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -32,7 +32,7 @@ public abstract class PythonCheckTree extends BaseTreeVisitor implements PythonC
     return context;
   }
 
-  protected final PreciseIssue addIssue(PyToken token, @Nullable String message) {
+  protected final PreciseIssue addIssue(Token token, @Nullable String message) {
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(token, message));
     getContext().addIssue(newIssue);
     return newIssue;

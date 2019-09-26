@@ -26,15 +26,15 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonBuiltinFunctions;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyAliasedNameTree;
-import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyImportFromTree;
-import org.sonar.python.api.tree.PyImportNameTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.AliasedName;
+import org.sonar.python.api.tree.AnnotatedAssignment;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.ImportFrom;
+import org.sonar.python.api.tree.ImportName;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -52,10 +52,10 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> this.importedNames.clear());
 
     context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, ctx ->
-      ((PyImportFromTree) ctx.syntaxNode()).importedNames().forEach(this::addImportedName));
+      ((ImportFrom) ctx.syntaxNode()).importedNames().forEach(this::addImportedName));
 
     context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME, ctx ->
-      ((PyImportNameTree) ctx.syntaxNode()).modules().forEach(this::addImportedName));
+      ((ImportName) ctx.syntaxNode()).modules().forEach(this::addImportedName));
 
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignement);
 
@@ -63,10 +63,10 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private void checkAssignement(SubscriptionContext ctx) {
-    PyAssignmentStatementTree assignment = (PyAssignmentStatementTree) ctx.syntaxNode();
-    PyExpressionTree assignedValue = assignment.assignedValue();
+    AssignmentStatement assignment = (AssignmentStatement) ctx.syntaxNode();
+    Expression assignedValue = assignment.assignedValue();
     for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
-      List<PyExpressionTree> expressions = assignment.lhsExpressions().get(i).expressions();
+      List<Expression> expressions = assignment.lhsExpressions().get(i).expressions();
       if (expressions.size() == 1 && CheckUtils.areEquivalent(assignedValue, expressions.get(0)) && !isException(assignment, assignedValue)) {
         ctx.addIssue(assignment.equalTokens().get(i), MESSAGE);
       }
@@ -74,32 +74,32 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private void checkAnnotatedAssignment(SubscriptionContext ctx) {
-    PyAnnotatedAssignmentTree assignment = (PyAnnotatedAssignmentTree) ctx.syntaxNode();
-    PyExpressionTree assignedValue = assignment.assignedValue();
-    PyExpressionTree variable = assignment.variable();
+    AnnotatedAssignment assignment = (AnnotatedAssignment) ctx.syntaxNode();
+    Expression assignedValue = assignment.assignedValue();
+    Expression variable = assignment.variable();
     if (assignedValue != null && CheckUtils.areEquivalent(assignedValue, variable) && !isException(assignment, assignedValue)) {
       ctx.addIssue(assignment.equalToken(), MESSAGE);
     }
   }
 
-  private void addImportedName(PyAliasedNameTree aliasedName) {
-    PyNameTree alias = aliasedName.alias();
+  private void addImportedName(AliasedName aliasedName) {
+    Name alias = aliasedName.alias();
     if (alias != null) {
       importedNames.add(alias.name());
     } else {
-      List<PyNameTree> names = aliasedName.dottedName().names();
+      List<Name> names = aliasedName.dottedName().names();
       importedNames.add(names.get(names.size() - 1).name());
     }
   }
 
-  private boolean isException(PyStatementTree assignment, PyExpressionTree assignedValue) {
-    if (assignedValue.is(Tree.Kind.NAME) && isAllowedName((PyNameTree) assignedValue)) {
+  private boolean isException(Statement assignment, Expression assignedValue) {
+    if (assignedValue.is(Tree.Kind.NAME) && isAllowedName((Name) assignedValue)) {
       return true;
     }
     return inClassDef(assignment) || hasCallExpressionDescendant(assignment);
   }
 
-  private boolean isAllowedName(PyNameTree name) {
+  private boolean isAllowedName(Name name) {
     return importedNames.contains(name.name()) || PythonBuiltinFunctions.contains(name.name());
   }
 
@@ -119,7 +119,7 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     private boolean hasCallExpressionDescendant = false;
 
     @Override
-    public void visitCallExpression(PyCallExpressionTree callExpressionTree) {
+    public void visitCallExpression(CallExpression callExpressionTree) {
       hasCallExpressionDescendant = true;
     }
   }

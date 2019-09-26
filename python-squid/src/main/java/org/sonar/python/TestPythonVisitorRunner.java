@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.parser.PythonParser;
 
@@ -46,7 +46,7 @@ public class TestPythonVisitorRunner {
     Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode astNode = parser.parse(pythonFile.content());
-    PyFileInputTree rootTree = new PythonTreeMaker().fileInput(astNode);
+    FileInput rootTree = new PythonTreeMaker().fileInput(astNode);
     return new PythonVisitorContext(astNode, rootTree, pythonFile);
   }
 

@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = NewStyleClassCheck.CHECK_KEY)
@@ -33,7 +33,7 @@ public class NewStyleClassCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      ClassDef classDef = (ClassDef) ctx.syntaxNode();
       if (classDef.args() == null || classDef.args().arguments() == null || classDef.args().arguments().isEmpty()) {
         ctx.addIssue(classDef.name(), MESSAGE);
       }

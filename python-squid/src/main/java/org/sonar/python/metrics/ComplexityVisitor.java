@@ -21,13 +21,13 @@ package org.sonar.python.metrics;
 
 import com.sonar.sslr.api.TokenType;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyComprehensionIfTree;
-import org.sonar.python.api.tree.PyConditionalExpressionTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.ComprehensionIf;
+import org.sonar.python.api.tree.ConditionalExpression;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.WhileStatement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -42,25 +42,25 @@ public class ComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+  public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
     complexity++;
     super.visitFunctionDef(pyFunctionDefTree);
   }
 
   @Override
-  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+  public void visitForStatement(ForStatement pyForStatementTree) {
     complexity++;
     super.visitForStatement(pyForStatementTree);
   }
 
   @Override
-  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+  public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
     complexity++;
     super.visitWhileStatement(pyWhileStatementTree);
   }
 
   @Override
-  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
+  public void visitIfStatement(IfStatement pyIfStatementTree) {
     if (!pyIfStatementTree.isElif()) {
       complexity++;
     }
@@ -68,13 +68,13 @@ public class ComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree) {
+  public void visitConditionalExpression(ConditionalExpression pyConditionalExpressionTree) {
     complexity++;
     super.visitConditionalExpression(pyConditionalExpressionTree);
   }
 
   @Override
-  public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+  public void visitBinaryExpression(BinaryExpression pyBinaryExpressionTree) {
     TokenType type = pyBinaryExpressionTree.operator().type();
     if (type.equals(PythonKeyword.AND) || type.equals(PythonKeyword.OR)) {
       complexity++;
@@ -83,7 +83,7 @@ public class ComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitComprehensionIf(PyComprehensionIfTree tree) {
+  public void visitComprehensionIf(ComprehensionIf tree) {
     complexity++;
     super.visitComprehensionIf(tree);
   }
@@ -97,7 +97,7 @@ public class ComplexityVisitor extends BaseTreeVisitor {
     private int functionNestingLevel = 0;
 
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       functionNestingLevel++;
       if (functionNestingLevel == 1) {
         super.visitFunctionDef(pyFunctionDefTree);

@@ -20,8 +20,8 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 
 public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
@@ -42,11 +42,11 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree pyFunctionDefTree = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef pyFunctionDefTree = (FunctionDef) ctx.syntaxNode();
       if (!shouldCheckFunctionDeclaration(pyFunctionDefTree)) {
         return;
       }
-      PyNameTree functionNameTree = pyFunctionDefTree.name();
+      Name functionNameTree = pyFunctionDefTree.name();
       String name = functionNameTree.name();
       if (!pattern().matcher(name).matches()) {
         String message = String.format(MESSAGE, typeName(), name, this.format);
@@ -57,6 +57,6 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
 
   public abstract String typeName();
 
-  public abstract boolean shouldCheckFunctionDeclaration(PyFunctionDefTree pyFunctionDefTree);
+  public abstract boolean shouldCheckFunctionDeclaration(FunctionDef pyFunctionDefTree);
 
 }

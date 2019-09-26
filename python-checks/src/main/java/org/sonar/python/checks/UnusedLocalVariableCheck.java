@@ -28,13 +28,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionListTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyStringElementTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ExpressionList;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.StringElement;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
@@ -50,7 +50,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree functionTree = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef functionTree = (FunctionDef) ctx.syntaxNode();
       // https://docs.python.org/3/library/functions.html#locals
       if (isCallingLocalsFunction(functionTree)) {
         return;
@@ -76,24 +76,24 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   private static boolean isTupleDeclaration(Tree tree) {
     return tree.ancestors().stream()
       .anyMatch(t -> t.is(Kind.TUPLE)
-        || (t.is(Kind.EXPRESSION_LIST) && ((PyExpressionListTree) t).expressions().size() > 1)
-        || (t.is(Kind.FOR_STMT) && ((PyForStatementTree) t).expressions().size() > 1 && ((PyForStatementTree) t).expressions().contains(tree)));
+        || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
+        || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree)));
   }
 
-  private static boolean isCallingLocalsFunction(PyFunctionDefTree functionTree) {
+  private static boolean isCallingLocalsFunction(FunctionDef functionTree) {
     return functionTree
       .descendants(Kind.CALL_EXPR)
-      .map(PyCallExpressionTree.class::cast)
-      .map(PyCallExpressionTree::callee)
-      .anyMatch(callee -> callee.is(Kind.NAME) && "locals".equals(((PyNameTree) callee).name()));
+      .map(CallExpression.class::cast)
+      .map(CallExpression::callee)
+      .anyMatch(callee -> callee.is(Kind.NAME) && "locals".equals(((Name) callee).name()));
   }
 
-  private static Set<String> extractStringInterpolationIdentifiers(PyFunctionDefTree functionTree) {
+  private static Set<String> extractStringInterpolationIdentifiers(FunctionDef functionTree) {
     return functionTree.descendants(Kind.STRING_LITERAL)
-      .map(PyStringLiteralTree.class::cast)
+      .map(StringLiteral.class::cast)
       .flatMap(str -> str.stringElements().stream())
       .filter(str -> str.prefix().equalsIgnoreCase("f"))
-      .map(PyStringElementTree::trimmedQuotesValue)
+      .map(StringElement::trimmedQuotesValue)
       .flatMap(UnusedLocalVariableCheck::extractInterpolations)
       .collect(Collectors.toSet());
   }

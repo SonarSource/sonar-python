@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
@@ -74,16 +74,16 @@ public class ExpressionsTest {
     assertThat(isFalsy(exp("x.y"))).isFalse();
   }
 
-  private PyExpressionTree exp(String code) {
-    PyFileInputTree tree = parse(code);
+  private Expression exp(String code) {
+    FileInput tree = parse(code);
     return tree.descendants()
-      .filter(PyExpressionTree.class::isInstance)
-      .map(PyExpressionTree.class::cast)
+      .filter(Expression.class::isInstance)
+      .map(Expression.class::cast)
       .findFirst()
       .get();
   }
 
-  private PyFileInputTree parse(String code) {
+  private FileInput parse(String code) {
     return new PythonTreeMaker().fileInput(parser.parse(code));
   }
 
@@ -97,11 +97,11 @@ public class ExpressionsTest {
     assertThat(lastNameValue("x = 42; y")).isNull();
   }
 
-  private PyExpressionTree lastNameValue(String code) {
-    PyFileInputTree root = parse(code);
+  private Expression lastNameValue(String code) {
+    FileInput root = parse(code);
     new SymbolTableBuilder().visitFileInput(root);
-    List<PyNameTree> names = root.descendants(Kind.NAME)
-      .map(PyNameTree.class::cast)
+    List<Name> names = root.descendants(Kind.NAME)
+      .map(Name.class::cast)
       .collect(Collectors.toList());
     return Expressions.singleAssignedValue(names.get(names.size() - 1));
   }

@@ -27,20 +27,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyConditionalExpressionTree;
-import org.sonar.python.api.tree.PyElseStatementTree;
-import org.sonar.python.api.tree.PyExceptClauseTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyReturnStatementTree;
-import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.PyToken;
-import org.sonar.python.api.tree.PyWhileStatementTree;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.ConditionalExpression;
+import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ExceptClause;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.WhileStatement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
@@ -49,13 +49,13 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
 
   private int complexity = 0;
   private Deque<NestingLevel> nestingLevelStack = new LinkedList<>();
-  private Set<PyToken> alreadyConsideredOperators = new HashSet<>();
+  private Set<Token> alreadyConsideredOperators = new HashSet<>();
 
   @Nullable
   private final SecondaryLocationConsumer secondaryLocationConsumer;
 
   public interface SecondaryLocationConsumer {
-    void consume(PyToken secondaryLocation, String message);
+    void consume(Token secondaryLocation, String message);
   }
 
   CognitiveComplexityVisitor(@Nullable SecondaryLocationConsumer secondaryLocationConsumer) {
@@ -74,7 +74,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
+  public void visitIfStatement(IfStatement pyIfStatementTree) {
     if (pyIfStatementTree.isElif()) {
       incrementWithoutNesting(pyIfStatementTree.keyword());
     } else {
@@ -84,13 +84,13 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitElseStatement(PyElseStatementTree pyElseStatementTree) {
+  public void visitElseStatement(ElseStatement pyElseStatementTree) {
     incrementWithoutNesting(pyElseStatementTree.elseKeyword());
     super.visitElseStatement(pyElseStatementTree);
   }
 
   @Override
-  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+  public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
     incrementWithNesting(pyWhileStatementTree.whileKeyword());
     if (pyWhileStatementTree.elseBody() != null) {
       incrementWithoutNesting(pyWhileStatementTree.elseKeyword());
@@ -99,7 +99,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+  public void visitForStatement(ForStatement pyForStatementTree) {
     incrementWithNesting(pyForStatementTree.forKeyword());
     if (pyForStatementTree.elseBody() != null) {
       incrementWithoutNesting(pyForStatementTree.elseKeyword());
@@ -108,22 +108,22 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitExceptClause(PyExceptClauseTree pyExceptClauseTree) {
-    incrementWithNesting(pyExceptClauseTree.exceptKeyword());
-    super.visitExceptClause(pyExceptClauseTree);
+  public void visitExceptClause(ExceptClause exceptClause) {
+    incrementWithNesting(exceptClause.exceptKeyword());
+    super.visitExceptClause(exceptClause);
   }
 
   @Override
-  public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+  public void visitBinaryExpression(BinaryExpression pyBinaryExpressionTree) {
     if (pyBinaryExpressionTree.is(Kind.AND) || pyBinaryExpressionTree.is(Kind.OR)) {
       if (alreadyConsideredOperators.contains(pyBinaryExpressionTree.operator())) {
         super.visitBinaryExpression(pyBinaryExpressionTree);
         return;
       }
-      List<PyToken> operators = new ArrayList<>();
+      List<Token> operators = new ArrayList<>();
       flattenOperators(pyBinaryExpressionTree, operators);
-      PyToken previous = null;
-      for (PyToken operator : operators) {
+      Token previous = null;
+      for (Token operator : operators) {
         if (previous == null || !previous.type().equals(operator.type())) {
           incrementWithoutNesting(pyBinaryExpressionTree.operator());
         }
@@ -134,54 +134,54 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     super.visitBinaryExpression(pyBinaryExpressionTree);
   }
 
-  private static void flattenOperators(PyBinaryExpressionTree binaryExpression, List<PyToken> operators) {
-    PyExpressionTree left = binaryExpression.leftOperand();
+  private static void flattenOperators(BinaryExpression binaryExpression, List<Token> operators) {
+    Expression left = binaryExpression.leftOperand();
     if (left.is(Kind.AND) || left.is(Kind.OR)) {
-      flattenOperators((PyBinaryExpressionTree) left, operators);
+      flattenOperators((BinaryExpression) left, operators);
     }
 
     operators.add(binaryExpression.operator());
 
-    PyExpressionTree right = binaryExpression.rightOperand();
+    Expression right = binaryExpression.rightOperand();
     if (right.is(Kind.AND) || right.is(Kind.OR)) {
-      flattenOperators((PyBinaryExpressionTree) right, operators);
+      flattenOperators((BinaryExpression) right, operators);
     }
   }
 
   @Override
-  public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+  public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
     nestingLevelStack.push(new NestingLevel(nestingLevelStack.peek(), pyFunctionDefTree));
     super.visitFunctionDef(pyFunctionDefTree);
     nestingLevelStack.pop();
   }
 
   @Override
-  public void visitClassDef(PyClassDefTree pyClassDefTree) {
+  public void visitClassDef(ClassDef pyClassDefTree) {
     nestingLevelStack.push(new NestingLevel(nestingLevelStack.peek(), pyClassDefTree));
     super.visitClassDef(pyClassDefTree);
     nestingLevelStack.pop();
   }
 
   @Override
-  public void visitStatementList(PyStatementListTree pyStatementListTree) {
-    if (isStmtListIncrementsNestingLevel(pyStatementListTree)) {
+  public void visitStatementList(StatementList statementList) {
+    if (isStmtListIncrementsNestingLevel(statementList)) {
       nestingLevelStack.peek().increment();
-      super.visitStatementList(pyStatementListTree);
+      super.visitStatementList(statementList);
       nestingLevelStack.peek().decrement();
     } else {
-      super.visitStatementList(pyStatementListTree);
+      super.visitStatementList(statementList);
     }
   }
 
   @Override
-  public void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree) {
+  public void visitConditionalExpression(ConditionalExpression pyConditionalExpressionTree) {
     incrementWithNesting(pyConditionalExpressionTree.ifKeyword());
     nestingLevelStack.peek().increment();
     super.visitConditionalExpression(pyConditionalExpressionTree);
     nestingLevelStack.peek().decrement();
   }
 
-  private static boolean isStmtListIncrementsNestingLevel(PyStatementListTree statementListTree) {
+  private static boolean isStmtListIncrementsNestingLevel(StatementList statementListTree) {
     if (statementListTree.parent().is(Kind.FILE_INPUT)) {
       return false;
     }
@@ -189,15 +189,15 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     return statementListTree.parent() != null && notIncrementingNestingKinds.stream().noneMatch(kind -> statementListTree.parent().is(kind));
   }
 
-  private void incrementWithNesting(PyToken secondaryLocation) {
+  private void incrementWithNesting(Token secondaryLocation) {
     incrementComplexity(secondaryLocation, 1 + nestingLevelStack.peek().level());
   }
 
-  private void incrementWithoutNesting(PyToken secondaryLocation) {
+  private void incrementWithoutNesting(Token secondaryLocation) {
     incrementComplexity(secondaryLocation, 1);
   }
 
-  private void incrementComplexity(PyToken secondaryLocation, int currentNodeComplexity) {
+  private void incrementComplexity(Token secondaryLocation, int currentNodeComplexity) {
     if (secondaryLocationConsumer != null) {
       secondaryLocationConsumer.consume(secondaryLocation, secondaryMessage(currentNodeComplexity));
     }
@@ -226,7 +226,7 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
     private NestingLevel(NestingLevel parent, Tree tree) {
       this.tree = tree;
       if (tree.is(Kind.FUNCDEF)) {
-        if (parent.isWrapperFunction((PyFunctionDefTree) tree)) {
+        if (parent.isWrapperFunction((FunctionDef) tree)) {
           level = parent.level;
         } else if (parent.isFunction()) {
           level = parent.level + 1;
@@ -243,9 +243,9 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
       return tree != null && tree.is(Kind.FUNCDEF);
     }
 
-    private boolean isWrapperFunction(PyFunctionDefTree childFunction) {
+    private boolean isWrapperFunction(FunctionDef childFunction) {
       if(tree != null && tree.is(Kind.FUNCDEF)) {
-        return ((PyFunctionDefTree) tree).body()
+        return ((FunctionDef) tree).body()
           .statements()
           .stream()
           .filter(statement -> statement != childFunction)
@@ -254,9 +254,9 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
       return false;
     }
 
-    private static boolean isSimpleReturn(PyStatementTree statement) {
+    private static boolean isSimpleReturn(Statement statement) {
       if (statement.is(Kind.RETURN_STMT)) {
-        PyReturnStatementTree returnStatementTree = (PyReturnStatementTree) statement;
+        ReturnStatement returnStatementTree = (ReturnStatement) statement;
         return returnStatementTree.expressions().size() == 1 && returnStatementTree.expressions().get(0).is(Kind.NAME);
       }
       return false;

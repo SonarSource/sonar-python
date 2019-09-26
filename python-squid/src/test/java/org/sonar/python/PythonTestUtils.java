@@ -22,7 +22,7 @@ package org.sonar.python;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -39,9 +39,9 @@ public final class PythonTestUtils {
     return s + "\n";
   }
 
-  public static PyFileInputTree parse(String... lines) {
+  public static FileInput parse(String... lines) {
     String code = String.join(System.getProperty("line.separator"), lines);
-    PyFileInputTree tree = pythonTreeMaker.fileInput(p.parse(code));
+    FileInput tree = pythonTreeMaker.fileInput(p.parse(code));
     new SymbolTableBuilder().visitFileInput(tree);
     return tree;
   }

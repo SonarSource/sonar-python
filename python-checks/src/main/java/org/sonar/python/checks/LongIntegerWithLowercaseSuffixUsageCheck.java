@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyNumericLiteralTree;
+import org.sonar.python.api.tree.NumericLiteral;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY)
@@ -33,7 +33,7 @@ public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonSubscription
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.NUMERIC_LITERAL, ctx -> {
-      PyNumericLiteralTree pyNumericLiteralTree = (PyNumericLiteralTree) ctx.syntaxNode();
+      NumericLiteral pyNumericLiteralTree = (NumericLiteral) ctx.syntaxNode();
       String value = pyNumericLiteralTree.valueAsString();
       if (value.charAt(value.length() - 1) == 'l') {
         ctx.addIssue(pyNumericLiteralTree, MESSAGE);
