@@ -17,11 +17,25 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-public interface Statement extends Tree {
-  default Token separator() {
-    return null;
+import com.sonar.sslr.api.AstNode;
+import javax.annotation.CheckForNull;
+
+public class StatementWithSeparator {
+  private AstNode statement;
+  private AstNode separator;
+
+  StatementWithSeparator(AstNode statement, @CheckForNull AstNode separator) {
+    this.statement = statement;
+    this.separator = separator;
   }
 
+  public AstNode statement() {
+    return statement;
+  }
+
+  public AstNode separator() {
+    return separator;
+  }
 }
