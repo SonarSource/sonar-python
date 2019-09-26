@@ -25,7 +25,7 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.PyClassDefTree;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.semantic.TreeSymbol;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S1700")
 public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {
@@ -40,7 +40,7 @@ public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {
         return;
       }
       String className = classDef.name().name();
-      Set<TreeSymbol> allFields = new HashSet<>(classDef.classFields());
+      Set<Symbol> allFields = new HashSet<>(classDef.classFields());
       allFields.addAll(classDef.instanceFields());
       allFields.stream()
         .filter(symbol -> className.equalsIgnoreCase(symbol.name()))
