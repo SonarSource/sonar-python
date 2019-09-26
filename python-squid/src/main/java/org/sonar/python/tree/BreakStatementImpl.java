@@ -20,24 +20,36 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.BreakStatement;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class BreakStatementImpl extends PyTree implements BreakStatement {
   private final Token breakKeyword;
+  private final Token separator;
 
-  public BreakStatementImpl(AstNode astNode, Token breakKeyword) {
+  public BreakStatementImpl(AstNode astNode, Token breakKeyword, @Nullable Token separator) {
     super(astNode);
     this.breakKeyword = breakKeyword;
+    this.separator = separator;
   }
 
   @Override
   public Token breakKeyword() {
     return breakKeyword;
+  }
+
+  @CheckForNull
+  @Override
+  public Token separator() {
+    return separator;
   }
 
   @Override
@@ -52,6 +64,6 @@ public class BreakStatementImpl extends PyTree implements BreakStatement {
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(breakKeyword);
+    return Stream.of(breakKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

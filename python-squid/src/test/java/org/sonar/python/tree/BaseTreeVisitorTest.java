@@ -253,7 +253,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void annotated_assignment() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
-    AnnotatedAssignment tree = parse("a : int = b", treeMaker::annotatedAssignment);
+    AstNode astNode = p.parse("a : int = b");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AnnotatedAssignment tree = treeMaker.annotatedAssignment(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAnnotatedAssignment(tree);
     verify(visitor).visitName((Name) tree.variable());

@@ -148,13 +148,13 @@ public class PythonTreeMaker {
       return yieldStatement(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.RAISE_STMT)) {
-      return raiseStatement(astNode);
+      return raiseStatement(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.BREAK_STMT)) {
-      return breakStatement(astNode);
+      return breakStatement(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.CONTINUE_STMT)) {
-      return continueStatement(astNode);
+      return continueStatement(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.FUNCDEF)) {
       return funcDefStatement(astNode);
@@ -178,7 +178,7 @@ public class PythonTreeMaker {
       return nonlocalStatement(astNode);
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonGrammar.ANNASSIGN)) {
-      return annotatedAssignment(astNode);
+      return annotatedAssignment(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonPunctuator.ASSIGN)) {
       return assignment(astNode);
@@ -204,7 +204,9 @@ public class PythonTreeMaker {
     throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
   }
 
-  public AnnotatedAssignment annotatedAssignment(AstNode astNode) {
+  public AnnotatedAssignment annotatedAssignment(StatementWithSeparator statementWithSeparator) {
+    AstNode astNode = statementWithSeparator.statement();
+    Token separator = statementWithSeparator.separator() == null ? null : toPyToken(statementWithSeparator.separator().getToken());
     AstNode annAssign = astNode.getFirstChild(PythonGrammar.ANNASSIGN);
     AstNode colonTokenNode = annAssign.getFirstChild(PythonPunctuator.COLON);
     Expression variable = exprListOrTestList(astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR));
@@ -216,7 +218,7 @@ public class PythonTreeMaker {
       equalToken = toPyToken(equalTokenNode.getToken());
       assignedValue = expression(equalTokenNode.getNextSibling());
     }
-    return new AnnotatedAssignmentImpl(variable, toPyToken(colonTokenNode.getToken()), annotation, equalToken, assignedValue);
+    return new AnnotatedAssignmentImpl(variable, toPyToken(colonTokenNode.getToken()), annotation, equalToken, assignedValue, separator);
   }
 
   private StatementList getStatementListFromSuite(AstNode suite) {
@@ -347,7 +349,9 @@ public class PythonTreeMaker {
     return new YieldExpressionImpl(astNode, yieldKeyword, fromKeyword == null ? null : toPyToken(fromKeyword.getToken()), expressionTrees);
   }
 
-  public RaiseStatement raiseStatement(AstNode astNode) {
+  public RaiseStatement raiseStatement(StatementWithSeparator statementWithSeparator) {
+    AstNode astNode = statementWithSeparator.statement();
+    Token separator = statementWithSeparator.separator() == null ? null : toPyToken(statementWithSeparator.separator().getToken());
     AstNode fromKeyword = astNode.getFirstChild(PythonKeyword.FROM);
     List<AstNode> expressions = new ArrayList<>();
     AstNode fromExpression = null;
@@ -361,15 +365,19 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new RaiseStatementImpl(astNode, toPyToken(astNode.getFirstChild(PythonKeyword.RAISE).getToken()),
-      expressionTrees, fromKeyword == null ? null : toPyToken(fromKeyword.getToken()), fromExpression == null ? null : expression(fromExpression));
+      expressionTrees, fromKeyword == null ? null : toPyToken(fromKeyword.getToken()), fromExpression == null ? null : expression(fromExpression), separator);
   }
 
-  public BreakStatement breakStatement(AstNode astNode) {
-    return new BreakStatementImpl(astNode, toPyToken(astNode.getToken()));
+  public BreakStatement breakStatement(StatementWithSeparator statementWithSeparator) {
+    AstNode astNode = statementWithSeparator.statement();
+    Token separator = statementWithSeparator.separator() == null ? null : toPyToken(statementWithSeparator.separator().getToken());
+    return new BreakStatementImpl(astNode, toPyToken(astNode.getToken()), separator);
   }
 
-  public ContinueStatement continueStatement(AstNode astNode) {
-    return new ContinueStatementImpl(astNode, toPyToken(astNode.getToken()));
+  public ContinueStatement continueStatement(StatementWithSeparator statementWithSeparator) {
+    AstNode astNode = statementWithSeparator.statement();
+    Token separator = statementWithSeparator.separator() == null ? null : toPyToken(statementWithSeparator.separator().getToken());
+    return new ContinueStatementImpl(astNode, toPyToken(astNode.getToken()), separator);
   }
 
   public ImportStatement importStatement(AstNode astNode) {
