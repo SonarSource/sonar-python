@@ -5,7 +5,7 @@ class MyClass:
     self.myclass: type = myclass # Noncompliant [[secondary=-4]]
 
   def fun(self):
-    self.myClass += 1
+    self.myClass += 1  # Noncompliant
     if True:
       self.MYCLASS = 10 # Noncompliant
     self.field = 5
