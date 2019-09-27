@@ -21,9 +21,9 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyReturnStatementTree;
-import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.YieldStatement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -35,7 +35,7 @@ public class ReturnAndYieldInOneFunctionCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree func = ((PyFunctionDefTree) ctx.syntaxNode());
+      FunctionDef func = ((FunctionDef) ctx.syntaxNode());
       ReturnAndYieldVisitor returnAndYieldVisitor = new ReturnAndYieldVisitor();
       func.body().accept(returnAndYieldVisitor);
 
@@ -51,19 +51,19 @@ public class ReturnAndYieldInOneFunctionCheck extends PythonSubscriptionCheck {
     private boolean hasReturn = false;
 
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       // Ignore nested function definitions
     }
 
     @Override
-    public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
+    public void visitReturnStatement(ReturnStatement pyReturnStatementTree) {
       if(!pyReturnStatementTree.expressions().isEmpty()) {
         hasReturn = true;
       }
     }
 
     @Override
-    public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
+    public void visitYieldStatement(YieldStatement pyYieldStatementTree) {
       hasYield = true;
     }
   }

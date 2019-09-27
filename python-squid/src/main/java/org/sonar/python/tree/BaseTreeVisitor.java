@@ -21,84 +21,84 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.PyAliasedNameTree;
-import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
-import org.sonar.python.api.tree.PyArgListTree;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyAssertStatementTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyAwaitExpressionTree;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyBreakStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
-import org.sonar.python.api.tree.PyComprehensionExpressionTree;
-import org.sonar.python.api.tree.PyComprehensionForTree;
-import org.sonar.python.api.tree.PyComprehensionIfTree;
-import org.sonar.python.api.tree.PyConditionalExpressionTree;
-import org.sonar.python.api.tree.PyContinueStatementTree;
-import org.sonar.python.api.tree.PyDecoratorTree;
-import org.sonar.python.api.tree.PyDelStatementTree;
-import org.sonar.python.api.tree.PyDictionaryLiteralTree;
-import org.sonar.python.api.tree.PyDottedNameTree;
-import org.sonar.python.api.tree.PyEllipsisExpressionTree;
-import org.sonar.python.api.tree.PyElseStatementTree;
-import org.sonar.python.api.tree.PyExceptClauseTree;
-import org.sonar.python.api.tree.PyExecStatementTree;
-import org.sonar.python.api.tree.PyExpressionListTree;
-import org.sonar.python.api.tree.PyExpressionStatementTree;
-import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyFinallyClauseTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyGlobalStatementTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyImportFromTree;
-import org.sonar.python.api.tree.PyImportNameTree;
-import org.sonar.python.api.tree.PyKeyValuePairTree;
-import org.sonar.python.api.tree.PyLambdaExpressionTree;
-import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyNoneExpressionTree;
-import org.sonar.python.api.tree.PyNonlocalStatementTree;
-import org.sonar.python.api.tree.PyNumericLiteralTree;
-import org.sonar.python.api.tree.PyParameterListTree;
-import org.sonar.python.api.tree.PyParameterTree;
-import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
-import org.sonar.python.api.tree.PyPassStatementTree;
-import org.sonar.python.api.tree.PyPrintStatementTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
-import org.sonar.python.api.tree.PyRaiseStatementTree;
-import org.sonar.python.api.tree.PyReprExpressionTree;
-import org.sonar.python.api.tree.PyReturnStatementTree;
-import org.sonar.python.api.tree.PySetLiteralTree;
-import org.sonar.python.api.tree.PySliceExpressionTree;
-import org.sonar.python.api.tree.PySliceItemTree;
-import org.sonar.python.api.tree.PySliceListTree;
-import org.sonar.python.api.tree.PyStarredExpressionTree;
-import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStringElementTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
-import org.sonar.python.api.tree.PySubscriptionExpressionTree;
-import org.sonar.python.api.tree.PyToken;
-import org.sonar.python.api.tree.PyTreeVisitor;
-import org.sonar.python.api.tree.PyTryStatementTree;
-import org.sonar.python.api.tree.PyTupleParameterTree;
-import org.sonar.python.api.tree.PyTupleTree;
-import org.sonar.python.api.tree.PyTypeAnnotationTree;
-import org.sonar.python.api.tree.PyUnaryExpressionTree;
-import org.sonar.python.api.tree.PyWhileStatementTree;
-import org.sonar.python.api.tree.PyWithItemTree;
-import org.sonar.python.api.tree.PyWithStatementTree;
-import org.sonar.python.api.tree.PyYieldExpressionTree;
-import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.AliasedName;
+import org.sonar.python.api.tree.AnnotatedAssignment;
+import org.sonar.python.api.tree.ArgList;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.AssertStatement;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.AwaitExpression;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.BreakStatement;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.CompoundAssignmentStatement;
+import org.sonar.python.api.tree.ComprehensionExpression;
+import org.sonar.python.api.tree.ComprehensionFor;
+import org.sonar.python.api.tree.ComprehensionIf;
+import org.sonar.python.api.tree.ConditionalExpression;
+import org.sonar.python.api.tree.ContinueStatement;
+import org.sonar.python.api.tree.Decorator;
+import org.sonar.python.api.tree.DelStatement;
+import org.sonar.python.api.tree.DictionaryLiteral;
+import org.sonar.python.api.tree.DottedName;
+import org.sonar.python.api.tree.EllipsisExpression;
+import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ExceptClause;
+import org.sonar.python.api.tree.ExecStatement;
+import org.sonar.python.api.tree.ExpressionList;
+import org.sonar.python.api.tree.ExpressionStatement;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.FinallyClause;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.GlobalStatement;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.ImportFrom;
+import org.sonar.python.api.tree.ImportName;
+import org.sonar.python.api.tree.KeyValuePair;
+import org.sonar.python.api.tree.LambdaExpression;
+import org.sonar.python.api.tree.ListLiteral;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.NoneExpression;
+import org.sonar.python.api.tree.NonlocalStatement;
+import org.sonar.python.api.tree.NumericLiteral;
+import org.sonar.python.api.tree.ParameterList;
+import org.sonar.python.api.tree.Parameter;
+import org.sonar.python.api.tree.ParenthesizedExpression;
+import org.sonar.python.api.tree.PassStatement;
+import org.sonar.python.api.tree.PrintStatement;
+import org.sonar.python.api.tree.QualifiedExpression;
+import org.sonar.python.api.tree.RaiseStatement;
+import org.sonar.python.api.tree.ReprExpression;
+import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.SetLiteral;
+import org.sonar.python.api.tree.SliceExpression;
+import org.sonar.python.api.tree.SliceItem;
+import org.sonar.python.api.tree.SliceList;
+import org.sonar.python.api.tree.StarredExpression;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.StringElement;
+import org.sonar.python.api.tree.StringLiteral;
+import org.sonar.python.api.tree.SubscriptionExpression;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.TryStatement;
+import org.sonar.python.api.tree.TupleParameter;
+import org.sonar.python.api.tree.Tuple;
+import org.sonar.python.api.tree.TypeAnnotation;
+import org.sonar.python.api.tree.UnaryExpression;
+import org.sonar.python.api.tree.WhileStatement;
+import org.sonar.python.api.tree.WithItem;
+import org.sonar.python.api.tree.WithStatement;
+import org.sonar.python.api.tree.YieldExpression;
+import org.sonar.python.api.tree.YieldStatement;
 import org.sonar.python.api.tree.Tree;
 
 /**
- * Default implementation of {@link org.sonar.python.api.tree.PyTreeVisitor}.
+ * Default implementation of {@link TreeVisitor}.
  */
-public class BaseTreeVisitor implements PyTreeVisitor {
+public class BaseTreeVisitor implements TreeVisitor {
 
   protected void scan(@Nullable Tree tree) {
     if (tree != null) {
@@ -115,17 +115,17 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitFileInput(PyFileInputTree pyFileInputTree) {
-    scan(pyFileInputTree.statements());
+  public void visitFileInput(FileInput fileInput) {
+    scan(fileInput.statements());
   }
 
   @Override
-  public void visitStatementList(PyStatementListTree pyStatementListTree) {
-    scan(pyStatementListTree.statements());
+  public void visitStatementList(StatementList statementList) {
+    scan(statementList.statements());
   }
 
   @Override
-  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
+  public void visitIfStatement(IfStatement pyIfStatementTree) {
     scan(pyIfStatementTree.condition());
     scan(pyIfStatementTree.body());
     scan(pyIfStatementTree.elifBranches());
@@ -133,71 +133,71 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitElseStatement(PyElseStatementTree pyElseStatementTree) {
+  public void visitElseStatement(ElseStatement pyElseStatementTree) {
     scan(pyElseStatementTree.body());
   }
 
   @Override
-  public void visitExecStatement(PyExecStatementTree pyExecStatementTree) {
+  public void visitExecStatement(ExecStatement pyExecStatementTree) {
     scan(pyExecStatementTree.expression());
     scan(pyExecStatementTree.globalsExpression());
     scan(pyExecStatementTree.localsExpression());
   }
 
   @Override
-  public void visitAssertStatement(PyAssertStatementTree pyAssertStatementTree) {
+  public void visitAssertStatement(AssertStatement pyAssertStatementTree) {
     scan(pyAssertStatementTree.condition());
     scan(pyAssertStatementTree.message());
   }
 
   @Override
-  public void visitDelStatement(PyDelStatementTree pyDelStatementTree) {
+  public void visitDelStatement(DelStatement pyDelStatementTree) {
     scan(pyDelStatementTree.expressions());
   }
 
   @Override
-  public void visitPassStatement(PyPassStatementTree pyPassStatementTree) {
+  public void visitPassStatement(PassStatement pyPassStatementTree) {
     // nothing to visit for pass statement
   }
 
   @Override
-  public void visitPrintStatement(PyPrintStatementTree pyPrintStatementTree) {
+  public void visitPrintStatement(PrintStatement pyPrintStatementTree) {
     scan(pyPrintStatementTree.expressions());
   }
 
   @Override
-  public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
+  public void visitReturnStatement(ReturnStatement pyReturnStatementTree) {
     scan(pyReturnStatementTree.expressions());
   }
 
   @Override
-  public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
+  public void visitYieldStatement(YieldStatement pyYieldStatementTree) {
     scan(pyYieldStatementTree.yieldExpression());
   }
 
   @Override
-  public void visitYieldExpression(PyYieldExpressionTree pyYieldExpressionTree) {
+  public void visitYieldExpression(YieldExpression pyYieldExpressionTree) {
     scan(pyYieldExpressionTree.expressions());
   }
 
   @Override
-  public void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree) {
+  public void visitRaiseStatement(RaiseStatement pyRaiseStatementTree) {
     scan(pyRaiseStatementTree.expressions());
     scan(pyRaiseStatementTree.fromExpression());
   }
 
   @Override
-  public void visitBreakStatement(PyBreakStatementTree pyBreakStatementTree) {
+  public void visitBreakStatement(BreakStatement pyBreakStatementTree) {
     // nothing to visit for break statement
   }
 
   @Override
-  public void visitContinueStatement(PyContinueStatementTree pyContinueStatementTree) {
+  public void visitContinueStatement(ContinueStatement pyContinueStatementTree) {
     // nothing to visit for continue statement
   }
 
   @Override
-  public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+  public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
     scan(pyFunctionDefTree.decorators());
     scan(pyFunctionDefTree.name());
     scan(pyFunctionDefTree.parameters());
@@ -206,36 +206,36 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitName(PyNameTree pyNameTree) {
+  public void visitName(Name pyNameTree) {
     // nothing to scan on a name
   }
 
   @Override
-  public void visitClassDef(PyClassDefTree pyClassDefTree) {
+  public void visitClassDef(ClassDef pyClassDefTree) {
     scan(pyClassDefTree.name());
     scan(pyClassDefTree.args());
     scan(pyClassDefTree.body());
   }
 
   @Override
-  public void visitAliasedName(PyAliasedNameTree pyAliasedNameTree) {
-    scan(pyAliasedNameTree.dottedName());
-    scan(pyAliasedNameTree.alias());
+  public void visitAliasedName(AliasedName aliasedName) {
+    scan(aliasedName.dottedName());
+    scan(aliasedName.alias());
   }
 
   @Override
-  public void visitDottedName(PyDottedNameTree pyDottedNameTree) {
-    scan(pyDottedNameTree.names());
+  public void visitDottedName(DottedName dottedName) {
+    scan(dottedName.names());
   }
 
   @Override
-  public void visitImportFrom(PyImportFromTree pyImportFromTree) {
+  public void visitImportFrom(ImportFrom pyImportFromTree) {
     scan(pyImportFromTree.module());
     scan(pyImportFromTree.importedNames());
   }
 
   @Override
-  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+  public void visitForStatement(ForStatement pyForStatementTree) {
     scan(pyForStatementTree.expressions());
     scan(pyForStatementTree.testExpressions());
     scan(pyForStatementTree.body());
@@ -243,34 +243,34 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitImportName(PyImportNameTree pyImportNameTree) {
+  public void visitImportName(ImportName pyImportNameTree) {
     scan(pyImportNameTree.modules());
   }
 
   @Override
-  public void visitGlobalStatement(PyGlobalStatementTree pyGlobalStatementTree) {
+  public void visitGlobalStatement(GlobalStatement pyGlobalStatementTree) {
     scan(pyGlobalStatementTree.variables());
   }
 
   @Override
-  public void visitNonlocalStatement(PyNonlocalStatementTree pyNonlocalStatementTree) {
+  public void visitNonlocalStatement(NonlocalStatement pyNonlocalStatementTree) {
     scan(pyNonlocalStatementTree.variables());
   }
 
   @Override
-  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+  public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
     scan(pyWhileStatementTree.condition());
     scan(pyWhileStatementTree.body());
     scan(pyWhileStatementTree.elseBody());
   }
 
   @Override
-  public void visitExpressionStatement(PyExpressionStatementTree pyExpressionStatementTree) {
+  public void visitExpressionStatement(ExpressionStatement pyExpressionStatementTree) {
     scan(pyExpressionStatementTree.expressions());
   }
 
   @Override
-  public void visitTryStatement(PyTryStatementTree pyTryStatementTree) {
+  public void visitTryStatement(TryStatement pyTryStatementTree) {
     scan(pyTryStatementTree.body());
     scan(pyTryStatementTree.exceptClauses());
     scan(pyTryStatementTree.finallyClause());
@@ -278,251 +278,251 @@ public class BaseTreeVisitor implements PyTreeVisitor {
   }
 
   @Override
-  public void visitFinallyClause(PyFinallyClauseTree pyFinallyClauseTree) {
-    scan(pyFinallyClauseTree.body());
+  public void visitFinallyClause(FinallyClause finallyClause) {
+    scan(finallyClause.body());
   }
 
   @Override
-  public void visitExceptClause(PyExceptClauseTree pyExceptClauseTree) {
-    scan(pyExceptClauseTree.exception());
-    scan(pyExceptClauseTree.exceptionInstance());
-    scan(pyExceptClauseTree.body());
+  public void visitExceptClause(ExceptClause exceptClause) {
+    scan(exceptClause.exception());
+    scan(exceptClause.exceptionInstance());
+    scan(exceptClause.body());
   }
 
   @Override
-  public void visitWithStatement(PyWithStatementTree pyWithStatementTree) {
+  public void visitWithStatement(WithStatement pyWithStatementTree) {
     scan(pyWithStatementTree.withItems());
     scan(pyWithStatementTree.statements());
   }
 
   @Override
-  public void visitWithItem(PyWithItemTree pyWithItemTree) {
-    scan(pyWithItemTree.test());
-    scan(pyWithItemTree.expression());
+  public void visitWithItem(WithItem withItem) {
+    scan(withItem.test());
+    scan(withItem.expression());
   }
 
   @Override
-  public void visitQualifiedExpression(PyQualifiedExpressionTree pyQualifiedExpressionTree) {
+  public void visitQualifiedExpression(QualifiedExpression pyQualifiedExpressionTree) {
     scan(pyQualifiedExpressionTree.qualifier());
     scan(pyQualifiedExpressionTree.name());
   }
 
   @Override
-  public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
+  public void visitCallExpression(CallExpression pyCallExpressionTree) {
     scan(pyCallExpressionTree.callee());
     scan(pyCallExpressionTree.argumentList());
   }
 
   @Override
-  public void visitArgumentList(PyArgListTree pyArgListTree) {
-    scan(pyArgListTree.arguments());
+  public void visitArgumentList(ArgList argList) {
+    scan(argList.arguments());
   }
 
   @Override
-  public void visitArgument(PyArgumentTree pyArgumentTree) {
+  public void visitArgument(Argument pyArgumentTree) {
     scan(pyArgumentTree.keywordArgument());
     scan(pyArgumentTree.expression());
   }
 
   @Override
-  public void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree) {
+  public void visitAssignmentStatement(AssignmentStatement pyAssignmentStatementTree) {
     scan(pyAssignmentStatementTree.lhsExpressions());
     scan(pyAssignmentStatementTree.assignedValue());
   }
 
   @Override
-  public void visitExpressionList(PyExpressionListTree pyExpressionListTree) {
+  public void visitExpressionList(ExpressionList pyExpressionListTree) {
     scan(pyExpressionListTree.expressions());
   }
 
   @Override
-  public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+  public void visitBinaryExpression(BinaryExpression pyBinaryExpressionTree) {
     scan(pyBinaryExpressionTree.leftOperand());
     scan(pyBinaryExpressionTree.rightOperand());
   }
 
   @Override
-  public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
+  public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
     scan(pyLambdaExpressionTree.parameters());
     scan(pyLambdaExpressionTree.expression());
   }
 
   @Override
-  public void visitParameterList(PyParameterListTree pyParameterListTree) {
-    scan(pyParameterListTree.all());
+  public void visitParameterList(ParameterList parameterList) {
+    scan(parameterList.all());
   }
 
   @Override
-  public void visitTupleParameter(PyTupleParameterTree tree) {
+  public void visitTupleParameter(TupleParameter tree) {
     scan(tree.parameters());
   }
 
   @Override
-  public void visitParameter(PyParameterTree tree) {
+  public void visitParameter(Parameter tree) {
     scan(tree.name());
     scan(tree.typeAnnotation());
     scan(tree.defaultValue());
   }
 
   @Override
-  public void visitTypeAnnotation(PyTypeAnnotationTree tree) {
+  public void visitTypeAnnotation(TypeAnnotation tree) {
     scan(tree.expression());
   }
 
   @Override
-  public void visitNumericLiteral(PyNumericLiteralTree pyNumericLiteralTree) {
+  public void visitNumericLiteral(NumericLiteral pyNumericLiteralTree) {
     // noop
   }
 
   @Override
-  public void visitStringLiteral(PyStringLiteralTree pyStringLiteralTree) {
+  public void visitStringLiteral(StringLiteral pyStringLiteralTree) {
     scan(pyStringLiteralTree.stringElements());
   }
 
   @Override
-  public void visitStringElement(PyStringElementTree tree) {
+  public void visitStringElement(StringElement tree) {
     // noop
   }
 
   @Override
-  public void visitListLiteral(PyListLiteralTree pyListLiteralTree) {
+  public void visitListLiteral(ListLiteral pyListLiteralTree) {
     scan(pyListLiteralTree.elements());
   }
 
   @Override
-  public void visitUnaryExpression(PyUnaryExpressionTree pyUnaryExpressionTree) {
+  public void visitUnaryExpression(UnaryExpression pyUnaryExpressionTree) {
     scan(pyUnaryExpressionTree.expression());
   }
 
   @Override
-  public void visitStarredExpression(PyStarredExpressionTree pyStarredExpressionTree) {
+  public void visitStarredExpression(StarredExpression pyStarredExpressionTree) {
     scan(pyStarredExpressionTree.expression());
   }
 
   @Override
-  public void visitAwaitExpression(PyAwaitExpressionTree pyAwaitExpressionTree) {
+  public void visitAwaitExpression(AwaitExpression pyAwaitExpressionTree) {
     scan(pyAwaitExpressionTree.expression());
   }
 
   @Override
-  public void visitSliceExpression(PySliceExpressionTree pySliceExpressionTree) {
+  public void visitSliceExpression(SliceExpression pySliceExpressionTree) {
     scan(pySliceExpressionTree.object());
     scan(pySliceExpressionTree.sliceList());
   }
 
   @Override
-  public void visitSliceList(PySliceListTree pySliceListTree) {
-    scan(pySliceListTree.slices());
+  public void visitSliceList(SliceList sliceList) {
+    scan(sliceList.slices());
   }
 
   @Override
-  public void visitSliceItem(PySliceItemTree pySliceItemTree) {
-    scan(pySliceItemTree.lowerBound());
-    scan(pySliceItemTree.upperBound());
-    scan(pySliceItemTree.stride());
+  public void visitSliceItem(SliceItem sliceItem) {
+    scan(sliceItem.lowerBound());
+    scan(sliceItem.upperBound());
+    scan(sliceItem.stride());
   }
 
   @Override
-  public void visitSubscriptionExpression(PySubscriptionExpressionTree pySubscriptionExpressionTree) {
+  public void visitSubscriptionExpression(SubscriptionExpression pySubscriptionExpressionTree) {
     scan(pySubscriptionExpressionTree.object());
     scan(pySubscriptionExpressionTree.subscripts());
   }
 
   @Override
-  public void visitParenthesizedExpression(PyParenthesizedExpressionTree pyParenthesizedExpressionTree) {
+  public void visitParenthesizedExpression(ParenthesizedExpression pyParenthesizedExpressionTree) {
     scan(pyParenthesizedExpressionTree.expression());
   }
 
   @Override
-  public void visitTuple(PyTupleTree pyTupleTree) {
+  public void visitTuple(Tuple pyTupleTree) {
     scan(pyTupleTree.elements());
   }
 
   @Override
-  public void visitConditionalExpression(PyConditionalExpressionTree pyConditionalExpressionTree) {
+  public void visitConditionalExpression(ConditionalExpression pyConditionalExpressionTree) {
     scan(pyConditionalExpressionTree.condition());
     scan(pyConditionalExpressionTree.trueExpression());
     scan(pyConditionalExpressionTree.falseExpression());
   }
 
   @Override
-  public void visitPyListOrSetCompExpression(PyComprehensionExpressionTree tree) {
+  public void visitPyListOrSetCompExpression(ComprehensionExpression tree) {
     scan(tree.resultExpression());
     scan(tree.comprehensionFor());
   }
 
   @Override
-  public void visitComprehensionFor(PyComprehensionForTree tree) {
+  public void visitComprehensionFor(ComprehensionFor tree) {
     scan(tree.loopExpression());
     scan(tree.iterable());
     scan(tree.nestedClause());
   }
 
   @Override
-  public void visitComprehensionIf(PyComprehensionIfTree tree) {
+  public void visitComprehensionIf(ComprehensionIf tree) {
     scan(tree.condition());
     scan(tree.nestedClause());
   }
 
   @Override
-  public void visitDictionaryLiteral(PyDictionaryLiteralTree pyDictionaryLiteralTree) {
+  public void visitDictionaryLiteral(DictionaryLiteral pyDictionaryLiteralTree) {
     scan(pyDictionaryLiteralTree.elements());
   }
 
   @Override
-  public void visitSetLiteral(PySetLiteralTree pySetLiteralTree) {
+  public void visitSetLiteral(SetLiteral pySetLiteralTree) {
     scan((pySetLiteralTree.elements()));
   }
 
   @Override
-  public void visitKeyValuePair(PyKeyValuePairTree pyKeyValuePairTree) {
-    scan(pyKeyValuePairTree.expression());
-    scan(pyKeyValuePairTree.key());
-    scan(pyKeyValuePairTree.value());
+  public void visitKeyValuePair(KeyValuePair keyValuePair) {
+    scan(keyValuePair.expression());
+    scan(keyValuePair.key());
+    scan(keyValuePair.value());
   }
 
   @Override
-  public void visitDictCompExpression(PyDictCompExpressionTreeImpl tree) {
+  public void visitDictCompExpression(DictCompExpressionImpl tree) {
     scan(tree.keyExpression());
     scan(tree.valueExpression());
     scan(tree.comprehensionFor());
   }
 
   @Override
-  public void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree) {
+  public void visitCompoundAssignment(CompoundAssignmentStatement pyCompoundAssignmentStatementTree) {
     scan(pyCompoundAssignmentStatementTree.lhsExpression());
     scan(pyCompoundAssignmentStatementTree.rhsExpression());
   }
 
   @Override
-  public void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree) {
-    scan(pyAnnotatedAssignmentTree.variable());
-    scan(pyAnnotatedAssignmentTree.annotation());
-    scan(pyAnnotatedAssignmentTree.assignedValue());
+  public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
+    scan(annotatedAssignment.variable());
+    scan(annotatedAssignment.annotation());
+    scan(annotatedAssignment.assignedValue());
   }
 
   @Override
-  public void visitNone(PyNoneExpressionTree pyNoneExpressionTree) {
+  public void visitNone(NoneExpression pyNoneExpressionTree) {
     // noop
   }
 
   @Override
-  public void visitRepr(PyReprExpressionTree pyReprExpressionTree) {
+  public void visitRepr(ReprExpression pyReprExpressionTree) {
     scan(pyReprExpressionTree.expressionList());
   }
 
   @Override
-  public void visitEllipsis(PyEllipsisExpressionTree pyEllipsisExpressionTree) {
+  public void visitEllipsis(EllipsisExpression pyEllipsisExpressionTree) {
     // noop
   }
 
   @Override
-  public void visitDecorator(PyDecoratorTree pyDecoratorTree) {
-    scan(pyDecoratorTree.name());
-    scan(pyDecoratorTree.arguments());
+  public void visitDecorator(Decorator decorator) {
+    scan(decorator.name());
+    scan(decorator.arguments());
   }
 
-  public void visitToken(PyToken token) {
+  public void visitToken(Token token) {
     // noop
   }
 }

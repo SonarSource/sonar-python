@@ -20,8 +20,8 @@
 package org.sonar.python.semantic;
 
 import org.junit.Test;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
@@ -32,13 +32,13 @@ import static org.assertj.core.api.Assertions.tuple;
 public class ClassSymbolTest {
   @Test
   public void no_field() {
-    PyClassDefTree empty = parseClass(
+    ClassDef empty = parseClass(
       "class C: ",
       "  pass");
     assertThat(empty.classFields()).isEmpty();
     assertThat(empty.instanceFields()).isEmpty();
 
-    PyClassDefTree empty2 = parseClass(
+    ClassDef empty2 = parseClass(
       "class C:",
       "  def f(): pass");
     assertThat(empty2.classFields()).isEmpty();
@@ -47,7 +47,7 @@ public class ClassSymbolTest {
 
   @Test
   public void class_fields() {
-    PyClassDefTree c = parseClass(
+    ClassDef c = parseClass(
       "class C: ",
       "  f1 = 1",
       "  f1 = 2",
@@ -58,7 +58,7 @@ public class ClassSymbolTest {
 
   @Test
   public void instance_fields() {
-    PyClassDefTree c1 = parseClass(
+    ClassDef c1 = parseClass(
       "class C: ",
       "  def f(self):",
       "    self.a = 1",
@@ -70,7 +70,7 @@ public class ClassSymbolTest {
     assertThat(c1.classFields()).isEmpty();
     assertThat(c1.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "c");
 
-    PyClassDefTree c2 = parseClass(
+    ClassDef c2 = parseClass(
       "class C:",
       "  def f(self):",
       "     print(self.a)",
@@ -86,10 +86,10 @@ public class ClassSymbolTest {
         tuple(Usage.Kind.ASSIGNMENT_LHS, 5));
   }
 
-  private PyClassDefTree parseClass(String... lines) {
-    PyFileInputTree fileInput = PythonTestUtils.parse(lines);
+  private ClassDef parseClass(String... lines) {
+    FileInput fileInput = PythonTestUtils.parse(lines);
     return fileInput.descendants(Tree.Kind.CLASSDEF)
-      .map(PyClassDefTree.class::cast)
+      .map(ClassDef.class::cast)
       .findFirst().get();
   }
 

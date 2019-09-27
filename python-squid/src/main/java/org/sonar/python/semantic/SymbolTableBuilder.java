@@ -33,37 +33,37 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.PyAliasedNameTree;
-import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
-import org.sonar.python.api.tree.PyAnyParameterTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyCompoundAssignmentStatementTree;
-import org.sonar.python.api.tree.PyComprehensionForTree;
-import org.sonar.python.api.tree.PyDecoratorTree;
-import org.sonar.python.api.tree.PyDottedNameTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyFunctionLikeTree;
-import org.sonar.python.api.tree.PyGlobalStatementTree;
-import org.sonar.python.api.tree.PyImportFromTree;
-import org.sonar.python.api.tree.PyImportNameTree;
-import org.sonar.python.api.tree.PyLambdaExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyNonlocalStatementTree;
-import org.sonar.python.api.tree.PyParameterListTree;
-import org.sonar.python.api.tree.PyParameterTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
-import org.sonar.python.api.tree.PyTupleTree;
+import org.sonar.python.api.tree.AliasedName;
+import org.sonar.python.api.tree.AnnotatedAssignment;
+import org.sonar.python.api.tree.AnyParameter;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.CompoundAssignmentStatement;
+import org.sonar.python.api.tree.ComprehensionFor;
+import org.sonar.python.api.tree.Decorator;
+import org.sonar.python.api.tree.DottedName;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.FunctionLike;
+import org.sonar.python.api.tree.GlobalStatement;
+import org.sonar.python.api.tree.ImportFrom;
+import org.sonar.python.api.tree.ImportName;
+import org.sonar.python.api.tree.LambdaExpression;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.NonlocalStatement;
+import org.sonar.python.api.tree.ParameterList;
+import org.sonar.python.api.tree.Parameter;
+import org.sonar.python.api.tree.QualifiedExpression;
+import org.sonar.python.api.tree.Tuple;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.BaseTreeVisitor;
-import org.sonar.python.tree.PyClassDefTreeImpl;
-import org.sonar.python.tree.PyFunctionDefTreeImpl;
-import org.sonar.python.tree.PyLambdaExpressionTreeImpl;
-import org.sonar.python.tree.PyNameTreeImpl;
+import org.sonar.python.tree.ClassDefImpl;
+import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.tree.LambdaExpressionImpl;
+import org.sonar.python.tree.NameImpl;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
@@ -72,26 +72,26 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
 
   @Override
-  public void visitFileInput(PyFileInputTree pyFileInputTree) {
+  public void visitFileInput(FileInput fileInput) {
     scopesByRootTree = new HashMap<>();
-    pyFileInputTree.accept(new FirstPhaseVisitor());
-    pyFileInputTree.accept(new SecondPhaseVisitor());
+    fileInput.accept(new FirstPhaseVisitor());
+    fileInput.accept(new SecondPhaseVisitor());
     scopesByRootTree.values().stream()
-      .filter(scope -> scope.rootTree instanceof PyFunctionLikeTree)
+      .filter(scope -> scope.rootTree instanceof FunctionLike)
       .forEach(scope -> {
-        PyFunctionLikeTree funcDef = (PyFunctionLikeTree) scope.rootTree;
+        FunctionLike funcDef = (FunctionLike) scope.rootTree;
         for (Symbol symbol : scope.symbols()) {
           if (funcDef.is(Kind.LAMBDA)) {
-            ((PyLambdaExpressionTreeImpl) funcDef).addLocalVariableSymbol(symbol);
+            ((LambdaExpressionImpl) funcDef).addLocalVariableSymbol(symbol);
           } else {
-            ((PyFunctionDefTreeImpl) funcDef).addLocalVariableSymbol(symbol);
+            ((FunctionDefImpl) funcDef).addLocalVariableSymbol(symbol);
           }
         }
       });
     scopesByRootTree.values().stream()
       .filter(scope -> scope.rootTree.is(Kind.CLASSDEF))
       .forEach(scope -> {
-        PyClassDefTreeImpl classDef = (PyClassDefTreeImpl) scope.rootTree;
+        ClassDefImpl classDef = (ClassDefImpl) scope.rootTree;
         scope.symbols.forEach(classDef::addClassField);
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
       });
@@ -117,14 +117,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private class FirstPhaseVisitor extends ScopeVisitor {
 
     @Override
-    public void visitFileInput(PyFileInputTree tree) {
+    public void visitFileInput(FileInput tree) {
       createScope(tree, null);
       enterScope(tree);
       super.visitFileInput(tree);
     }
 
     @Override
-    public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
+    public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       createScope(pyLambdaExpressionTree, currentScope());
       enterScope(pyLambdaExpressionTree);
       createParameters(pyLambdaExpressionTree);
@@ -133,7 +133,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree);
@@ -142,7 +142,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitClassDef(PyClassDefTree pyClassDefTree) {
+    public void visitClassDef(ClassDef pyClassDefTree) {
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
@@ -150,24 +150,24 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitImportName(PyImportNameTree pyImportNameTree) {
+    public void visitImportName(ImportName pyImportNameTree) {
       createImportedNames(pyImportNameTree.modules(), null, false);
       super.visitImportName(pyImportNameTree);
     }
 
     @Override
-    public void visitImportFrom(PyImportFromTree pyImportFromTree) {
-      PyDottedNameTree moduleTree = pyImportFromTree.module();
+    public void visitImportFrom(ImportFrom pyImportFromTree) {
+      DottedName moduleTree = pyImportFromTree.module();
       String moduleName = moduleTree != null
-        ? moduleTree.names().stream().map(PyNameTree::name).collect(Collectors.joining("."))
+        ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
       createImportedNames(pyImportFromTree.importedNames(), moduleName, !pyImportFromTree.dottedPrefixForModule().isEmpty());
       super.visitImportFrom(pyImportFromTree);
     }
 
-    private void createImportedNames(List<PyAliasedNameTree> importedNames, @Nullable String fromModuleName, boolean isRelativeImport) {
+    private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, boolean isRelativeImport) {
       importedNames.forEach(module -> {
-        PyNameTree nameTree = module.dottedName().names().get(0);
+        Name nameTree = module.dottedName().names().get(0);
         String fullyQualifiedName = fromModuleName != null
           ? (fromModuleName + "." + nameTree.name())
           : nameTree.name();
@@ -183,38 +183,38 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitForStatement(PyForStatementTree pyForStatementTree) {
+    public void visitForStatement(ForStatement pyForStatementTree) {
       createLoopVariables(pyForStatementTree);
       super.visitForStatement(pyForStatementTree);
     }
 
     @Override
-    public void visitComprehensionFor(PyComprehensionForTree tree) {
+    public void visitComprehensionFor(ComprehensionFor tree) {
       if (tree.loopExpression().is(Tree.Kind.NAME)) {
-        addBindingUsage((PyNameTree) tree.loopExpression(), Usage.Kind.COMP_DECLARATION);
+        addBindingUsage((Name) tree.loopExpression(), Usage.Kind.COMP_DECLARATION);
       }
       super.visitComprehensionFor(tree);
     }
 
-    private void createLoopVariables(PyForStatementTree loopTree) {
+    private void createLoopVariables(ForStatement loopTree) {
       loopTree.expressions().forEach(expr -> {
         if (expr.is(Tree.Kind.NAME)) {
-          addBindingUsage((PyNameTree) expr, Usage.Kind.LOOP_DECLARATION);
+          addBindingUsage((Name) expr, Usage.Kind.LOOP_DECLARATION);
         }
       });
     }
 
-    private void createParameters(PyFunctionLikeTree function) {
-      PyParameterListTree parameterList = function.parameters();
+    private void createParameters(FunctionLike function) {
+      ParameterList parameterList = function.parameters();
       if (parameterList == null || parameterList.all().isEmpty()) {
         return;
       }
 
       boolean hasSelf = false;
       if (function.isMethodDefinition()) {
-        PyAnyParameterTree first = parameterList.all().get(0);
+        AnyParameter first = parameterList.all().get(0);
         if (first.is(Kind.PARAMETER)) {
-          currentScope().createSelfParameter((PyParameterTree) first);
+          currentScope().createSelfParameter((Parameter) first);
           hasSelf = true;
         }
       }
@@ -225,15 +225,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
       parameterList.all().stream()
         .filter(param -> param.is(Kind.TUPLE))
-        .flatMap(param -> ((PyTupleTree) param).elements().stream())
+        .flatMap(param -> ((Tuple) param).elements().stream())
         .filter(param -> param.is(Kind.NAME))
-        .map(PyNameTree.class::cast)
+        .map(Name.class::cast)
         .forEach(name -> addBindingUsage(name, Usage.Kind.PARAMETER));
     }
 
     @Override
-    public void visitAssignmentStatement(PyAssignmentStatementTree pyAssignmentStatementTree) {
-      List<PyExpressionTree> lhs = pyAssignmentStatementTree.lhsExpressions().stream()
+    public void visitAssignmentStatement(AssignmentStatement pyAssignmentStatementTree) {
+      List<Expression> lhs = pyAssignmentStatementTree.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
         .flatMap(this::flattenTuples)
         .collect(Collectors.toList());
@@ -242,15 +242,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
       lhs.stream()
         .filter(expr -> expr.is(Kind.NAME))
-        .map(PyNameTree.class::cast)
+        .map(Name.class::cast)
         .forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS));
 
       super.visitAssignmentStatement(pyAssignmentStatementTree);
     }
 
-    private Stream<PyExpressionTree> flattenTuples(PyExpressionTree expression) {
+    private Stream<Expression> flattenTuples(Expression expression) {
       if (expression.is(Kind.TUPLE)) {
-        PyTupleTree tuple = (PyTupleTree) expression;
+        Tuple tuple = (Tuple) expression;
         return tuple.elements().stream().flatMap(this::flattenTuples);
       } else {
         return Stream.of(expression);
@@ -258,33 +258,33 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitAnnotatedAssignment(PyAnnotatedAssignmentTree pyAnnotatedAssignmentTree) {
-      if (pyAnnotatedAssignmentTree.variable().is(Kind.NAME)) {
-        addBindingUsage((PyNameTree) pyAnnotatedAssignmentTree.variable(), Usage.Kind.ASSIGNMENT_LHS);
+    public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
+      if (annotatedAssignment.variable().is(Kind.NAME)) {
+        addBindingUsage((Name) annotatedAssignment.variable(), Usage.Kind.ASSIGNMENT_LHS);
       }
-      super.visitAnnotatedAssignment(pyAnnotatedAssignmentTree);
+      super.visitAnnotatedAssignment(annotatedAssignment);
     }
 
     @Override
-    public void visitCompoundAssignment(PyCompoundAssignmentStatementTree pyCompoundAssignmentStatementTree) {
+    public void visitCompoundAssignment(CompoundAssignmentStatement pyCompoundAssignmentStatementTree) {
       if (pyCompoundAssignmentStatementTree.lhsExpression().is(Kind.NAME)) {
-        addBindingUsage((PyNameTree) pyCompoundAssignmentStatementTree.lhsExpression(), Usage.Kind.COMPOUND_ASSIGNMENT_LHS);
+        addBindingUsage((Name) pyCompoundAssignmentStatementTree.lhsExpression(), Usage.Kind.COMPOUND_ASSIGNMENT_LHS);
       }
       super.visitCompoundAssignment(pyCompoundAssignmentStatementTree);
     }
 
     @Override
-    public void visitGlobalStatement(PyGlobalStatementTree pyGlobalStatementTree) {
+    public void visitGlobalStatement(GlobalStatement pyGlobalStatementTree) {
       pyGlobalStatementTree.variables().stream()
-        .map(PyNameTree::name)
+        .map(Name::name)
         .forEach(name -> currentScope().addGlobalName(name));
       super.visitGlobalStatement(pyGlobalStatementTree);
     }
 
     @Override
-    public void visitNonlocalStatement(PyNonlocalStatementTree pyNonlocalStatementTree) {
+    public void visitNonlocalStatement(NonlocalStatement pyNonlocalStatementTree) {
       pyNonlocalStatementTree.variables().stream()
-        .map(PyNameTree::name)
+        .map(Name::name)
         .forEach(name -> currentScope().addNonLocalName(name));
       super.visitNonlocalStatement(pyNonlocalStatementTree);
     }
@@ -294,11 +294,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
 
-    private void addBindingUsage(PyNameTree nameTree, Usage.Kind usage, @Nullable String fullyQualifiedName) {
+    private void addBindingUsage(Name nameTree, Usage.Kind usage, @Nullable String fullyQualifiedName) {
       currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
     }
 
-    private void addBindingUsage(PyNameTree nameTree, Usage.Kind usage) {
+    private void addBindingUsage(Name nameTree, Usage.Kind usage) {
       currentScope().addBindingUsage(nameTree, usage, null);
     }
 
@@ -327,8 +327,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       return Collections.unmodifiableSet(symbols);
     }
 
-    private void createSelfParameter(PyParameterTree parameter) {
-      PyNameTree nameTree = parameter.name();
+    private void createSelfParameter(Parameter parameter) {
+      Name nameTree = parameter.name();
       String symbolName = nameTree.name();
       SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
       symbols.add(symbol);
@@ -336,7 +336,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
     }
 
-    void addBindingUsage(PyNameTree nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {
+    void addBindingUsage(Name nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {
       String symbolName = nameTree.name();
       if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
         SymbolImpl symbol = new SymbolImpl(symbolName, fullyQualifiedName);
@@ -405,11 +405,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     void addUsage(Tree tree, Usage.Kind kind) {
       usages.add(new UsageImpl(tree, kind));
       if (tree.is(Kind.NAME)) {
-        ((PyNameTreeImpl) tree).setSymbol(this);
+        ((NameImpl) tree).setSymbol(this);
       }
     }
 
-    void addOrCreateChildUsage(PyNameTree name, Usage.Kind kind) {
+    void addOrCreateChildUsage(Name name, Usage.Kind kind) {
       String childSymbolName = name.name();
       if (!childrenSymbolByName.containsKey(childSymbolName)) {
         String childFullyQualifiedName = fullyQualifiedName != null
@@ -433,7 +433,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    void addOrCreateChildUsage(PyNameTree nameTree, Usage.Kind kind) {
+    void addOrCreateChildUsage(Name nameTree, Usage.Kind kind) {
       SymbolImpl symbol = classScope.instanceAttributesByName.computeIfAbsent(nameTree.name(), name -> new SymbolImpl(name, null));
       symbol.addUsage(nameTree, kind);
     }
@@ -447,34 +447,34 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private class SecondPhaseVisitor extends ScopeVisitor {
 
     @Override
-    public void visitFileInput(PyFileInputTree tree) {
+    public void visitFileInput(FileInput tree) {
       enterScope(tree);
       super.visitFileInput(tree);
     }
 
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       enterScope(pyFunctionDefTree);
       super.visitFunctionDef(pyFunctionDefTree);
       leaveScope();
     }
 
     @Override
-    public void visitLambda(PyLambdaExpressionTree pyLambdaExpressionTree) {
+    public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       enterScope(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
       leaveScope();
     }
 
     @Override
-    public void visitClassDef(PyClassDefTree pyClassDefTree) {
+    public void visitClassDef(ClassDef pyClassDefTree) {
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
       leaveScope();
     }
 
     @Override
-    public void visitQualifiedExpression(PyQualifiedExpressionTree qualifiedExpression) {
+    public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
       // We need to firstly create symbol for qualifier
       super.visitQualifiedExpression(qualifiedExpression);
       if (qualifiedExpression.qualifier() instanceof HasSymbol) {
@@ -487,14 +487,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitDecorator(PyDecoratorTree pyDecoratorTree) {
-      PyNameTree nameTree = pyDecoratorTree.name().names().get(0);
+    public void visitDecorator(Decorator decorator) {
+      Name nameTree = decorator.name().names().get(0);
       addSymbolUsage(nameTree);
-      super.visitDecorator(pyDecoratorTree);
+      super.visitDecorator(decorator);
     }
 
     @Override
-    public void visitName(PyNameTree pyNameTree) {
+    public void visitName(Name pyNameTree) {
       if (!pyNameTree.isVariable()) {
         return;
       }
@@ -502,7 +502,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       super.visitName(pyNameTree);
     }
 
-    private void addSymbolUsage(PyNameTree nameTree) {
+    private void addSymbolUsage(Name nameTree) {
       Scope scope = scopesByRootTree.get(currentScopeRootTree());
       SymbolImpl symbol = scope.resolve(nameTree.name());
       // TODO: use Set to improve performances

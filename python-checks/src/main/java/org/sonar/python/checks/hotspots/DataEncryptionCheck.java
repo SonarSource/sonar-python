@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyCallExpressionTree;
+import org.sonar.python.api.tree.CallExpression;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -73,7 +73,7 @@ public class DataEncryptionCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Symbol symbol = callExpression.calleeSymbol();
       if (symbol != null && FUNCTIONS_TO_CHECK.contains(symbol.fullyQualifiedName())) {
         ctx.addIssue(callExpression, "Make sure that encrypting data is safe here.");

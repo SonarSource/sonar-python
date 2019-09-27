@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
-import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.FunctionDef;
 
 import static org.sonar.python.checks.CheckUtils.classHasInheritance;
 import static org.sonar.python.checks.CheckUtils.getParentClassDef;
@@ -35,7 +35,7 @@ public class MethodNameCheck extends AbstractFunctionNameCheck {
   }
 
   @Override
-  public boolean shouldCheckFunctionDeclaration(PyFunctionDefTree pyFunctionDefTree) {
+  public boolean shouldCheckFunctionDeclaration(FunctionDef pyFunctionDefTree) {
     return pyFunctionDefTree.isMethodDefinition() && !classHasInheritance(getParentClassDef(pyFunctionDefTree));
   }
 }

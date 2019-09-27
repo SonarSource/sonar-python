@@ -26,14 +26,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.QualifiedExpression;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
@@ -65,11 +65,11 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
   private void visitFile(SubscriptionContext ctx) {
     isUsingDjangoModel = false;
     isUsingDjangoDBConnection = false;
-    PyFileInputTree tree = (PyFileInputTree) ctx.syntaxNode();
+    FileInput tree = (FileInput) ctx.syntaxNode();
     List<Symbol> symbols = tree.descendants()
       .filter(node -> node.is(Tree.Kind.IMPORT_FROM) || node.is(Tree.Kind.IMPORT_NAME))
       .flatMap(node -> node.descendants(Tree.Kind.NAME))
-      .map(node -> ((PyNameTree) node).symbol())
+      .map(node -> ((Name) node).symbol())
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
     for (Symbol symbol : symbols) {
@@ -93,9 +93,9 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
 
   @Override
   public void visitNode(SubscriptionContext context) {
-    PyCallExpressionTree callExpressionTree = (PyCallExpressionTree) context.syntaxNode();
+    CallExpression callExpressionTree = (CallExpression) context.syntaxNode();
     if(callExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-      String functionName = ((PyQualifiedExpressionTree) callExpressionTree.callee()).name().name();
+      String functionName = ((QualifiedExpression) callExpressionTree.callee()).name().name();
       if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) && !isException(callExpressionTree, functionName)) {
         context.addIssue(callExpressionTree, MESSAGE);
       }
@@ -103,40 +103,40 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     super.visitNode(context);
   }
 
-  private static boolean isException(PyCallExpressionTree callExpression, String functionName) {
-    List<PyArgumentTree> argListNode = callExpression.arguments();
+  private static boolean isException(CallExpression callExpression, String functionName) {
+    List<Argument> argListNode = callExpression.arguments();
     if (extraContainsFormattedSqlQueries(argListNode, functionName)) {
       return false;
     }
     if (argListNode.isEmpty()) {
       return true;
     }
-    PyArgumentTree arg = argListNode.get(0);
+    Argument arg = argListNode.get(0);
     return !isFormatted(arg.expression());
   }
 
   @Override
-  protected boolean isException(PyCallExpressionTree callExpression) {
+  protected boolean isException(CallExpression callExpression) {
     return isException(callExpression, "");
   }
 
-  private static boolean isFormatted(PyExpressionTree tree) {
+  private static boolean isFormatted(Expression tree) {
     FormattedStringVisitor visitor = new FormattedStringVisitor();
     tree.accept(visitor);
     return visitor.hasFormattedString;
   }
 
-  private static boolean extraContainsFormattedSqlQueries(List<PyArgumentTree> argListNode, String functionName) {
+  private static boolean extraContainsFormattedSqlQueries(List<Argument> argListNode, String functionName) {
     if (functionName.equals("extra")) {
       return argListNode.stream()
         .filter(SQLQueriesCheck::isAssignment)
-        .map(PyArgumentTree::expression)
+        .map(Argument::expression)
         .anyMatch(SQLQueriesCheck::isFormatted);
     }
     return false;
   }
 
-  private static boolean isAssignment(PyArgumentTree arg) {
+  private static boolean isAssignment(Argument arg) {
     return arg.equalToken() != null;
   }
 
@@ -144,22 +144,22 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     boolean hasFormattedString = false;
 
     @Override
-    public void visitStringLiteral(PyStringLiteralTree pyStringLiteralTree) {
+    public void visitStringLiteral(StringLiteral pyStringLiteralTree) {
       super.visitStringLiteral(pyStringLiteralTree);
       hasFormattedString |= pyStringLiteralTree.stringElements().stream().anyMatch(se -> se.prefix().equalsIgnoreCase("f"));
     }
 
     @Override
-    public void visitCallExpression(PyCallExpressionTree pyCallExpressionTree) {
+    public void visitCallExpression(CallExpression pyCallExpressionTree) {
       if(pyCallExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-        PyQualifiedExpressionTree callee = (PyQualifiedExpressionTree) pyCallExpressionTree.callee();
+        QualifiedExpression callee = (QualifiedExpression) pyCallExpressionTree.callee();
         hasFormattedString |=  callee.name().name().equals("format") && callee.qualifier().is(Tree.Kind.STRING_LITERAL);
       }
       super.visitCallExpression(pyCallExpressionTree);
     }
 
     @Override
-    public void visitBinaryExpression(PyBinaryExpressionTree pyBinaryExpressionTree) {
+    public void visitBinaryExpression(BinaryExpression pyBinaryExpressionTree) {
       hasFormattedString |= pyBinaryExpressionTree.leftOperand().is(Tree.Kind.STRING_LITERAL) || pyBinaryExpressionTree.rightOperand().is(Tree.Kind.STRING_LITERAL);
       super.visitBinaryExpression(pyBinaryExpressionTree);
     }

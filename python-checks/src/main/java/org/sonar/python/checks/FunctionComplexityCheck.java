@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.ComplexityVisitor;
 
@@ -39,7 +39,7 @@ public class FunctionComplexityCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree funcDef = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
       int complexity = ComplexityVisitor.complexity(funcDef);
       if (complexity > maximumFunctionComplexityThreshold) {
         String message = String.format(MESSAGE, complexity, maximumFunctionComplexityThreshold);

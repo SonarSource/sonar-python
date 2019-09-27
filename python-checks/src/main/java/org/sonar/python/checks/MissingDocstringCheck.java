@@ -24,11 +24,11 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyFileInputTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -56,12 +56,12 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkDocString(ctx, ((PyFileInputTree) ctx.syntaxNode()).docstring()));
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkDocString(ctx, ((PyFunctionDefTree) ctx.syntaxNode()).docstring()));
-    context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((PyClassDefTree) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkDocString(ctx, ((FileInput) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkDocString(ctx, ((FunctionDef) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((ClassDef) ctx.syntaxNode()).docstring()));
   }
 
-  private static void checkDocString(SubscriptionContext ctx, @CheckForNull PyToken docstring) {
+  private static void checkDocString(SubscriptionContext ctx, @CheckForNull Token docstring) {
     Tree tree = ctx.syntaxNode();
     DeclarationType type = getType(tree);
     if (docstring == null) {
@@ -73,7 +73,7 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
 
   private static DeclarationType getType(Tree tree) {
     if (tree.is(Kind.FUNCDEF)) {
-      if (((PyFunctionDefTree) tree).isMethodDefinition()) {
+      if (((FunctionDef) tree).isMethodDefinition()) {
         return DeclarationType.METHOD;
       } else {
         return DeclarationType.FUNCTION;
@@ -101,11 +101,11 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static PyNameTree getNameNode(Tree tree) {
+  private static Name getNameNode(Tree tree) {
     if (tree.is(Kind.FUNCDEF)) {
-      return ((PyFunctionDefTree) tree).name();
+      return ((FunctionDef) tree).name();
     }
-    return ((PyClassDefTree) tree).name();
+    return ((ClassDef) tree).name();
   }
 
 }

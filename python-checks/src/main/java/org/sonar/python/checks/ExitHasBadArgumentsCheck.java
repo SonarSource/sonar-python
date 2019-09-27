@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyParameterListTree;
-import org.sonar.python.api.tree.PyParameterTree;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.ParameterList;
+import org.sonar.python.api.tree.Parameter;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S2733")
@@ -39,11 +39,11 @@ public class ExitHasBadArgumentsCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree funcDef = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
       if (!funcDef.name().name().equals("__exit__")) {
         return;
       }
-      PyParameterListTree parameters = funcDef.parameters();
+      ParameterList parameters = funcDef.parameters();
       int arity = 0;
       if (parameters != null) {
         if (parameters.nonTuple().stream().anyMatch(ExitHasBadArgumentsCheck::isStarredParam)) {
@@ -55,18 +55,18 @@ public class ExitHasBadArgumentsCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isStarredParam(PyParameterTree param) {
+  private static boolean isStarredParam(Parameter param) {
     return param.starToken() != null;
   }
 
-  private static void raiseIssue(SubscriptionContext ctx, PyFunctionDefTree tree, int argumentsNumber) {
+  private static void raiseIssue(SubscriptionContext ctx, FunctionDef tree, int argumentsNumber) {
     if (argumentsNumber != EXIT_ARGUMENTS_NUMBER) {
       String message = MESSAGE_ADD;
       if (argumentsNumber > EXIT_ARGUMENTS_NUMBER) {
         message = MESSAGE_REMOVE;
       }
       Tree funcName = tree.name();
-      PyToken rightParenthesis = tree.rightPar();
+      Token rightParenthesis = tree.rightPar();
       ctx.addIssue(funcName.firstToken(), rightParenthesis, message);
     }
   }

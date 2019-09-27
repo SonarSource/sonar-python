@@ -24,10 +24,10 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyReturnStatementTree;
-import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.YieldStatement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -44,7 +44,7 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree func = ((PyFunctionDefTree) ctx.syntaxNode());
+      FunctionDef func = ((FunctionDef) ctx.syntaxNode());
       ReturnCountVisitor returnCountVisitor = new ReturnCountVisitor();
       func.body().accept(returnCountVisitor);
 
@@ -57,21 +57,21 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
 
   private static class ReturnCountVisitor extends BaseTreeVisitor {
 
-    private List<PyStatementTree> returnStatements = new ArrayList<>();
+    private List<Statement> returnStatements = new ArrayList<>();
 
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       // Ignore nested function definitions
     }
 
     @Override
-    public void visitReturnStatement(PyReturnStatementTree pyReturnStatementTree) {
+    public void visitReturnStatement(ReturnStatement pyReturnStatementTree) {
       super.visitReturnStatement(pyReturnStatementTree);
       returnStatements.add(pyReturnStatementTree);
     }
 
     @Override
-    public void visitYieldStatement(PyYieldStatementTree pyYieldStatementTree) {
+    public void visitYieldStatement(YieldStatement pyYieldStatementTree) {
       super.visitYieldStatement(pyYieldStatementTree);
       returnStatements.add(pyYieldStatementTree);
     }

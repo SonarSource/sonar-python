@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.ComplexityVisitor;
 
@@ -37,7 +37,7 @@ public class ClassComplexityCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      ClassDef classDef = (ClassDef) ctx.syntaxNode();
       int complexity = ComplexityVisitor.complexity(classDef);
       if (complexity > maximumClassComplexityThreshold) {
         String message = String.format(MESSAGE, complexity, maximumClassComplexityThreshold);

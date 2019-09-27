@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyUnaryExpressionTree;
+import org.sonar.python.api.tree.UnaryExpression;
 import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = PreIncrementDecrementCheck.CHECK_KEY)
@@ -37,7 +37,7 @@ public class PreIncrementDecrementCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkIncrementDecrement(SubscriptionContext ctx) {
-    PyUnaryExpressionTree unaryExpressionTree = (PyUnaryExpressionTree) ctx.syntaxNode();
+    UnaryExpression unaryExpressionTree = (UnaryExpression) ctx.syntaxNode();
     Kind kind = unaryExpressionTree.getKind();
     if (unaryExpressionTree.expression().is(kind)) {
       ctx.addIssue(unaryExpressionTree, String.format(MESSAGE, kind == Kind.UNARY_PLUS ? "inc" : "dec"));

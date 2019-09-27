@@ -25,12 +25,12 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyNumericLiteralTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.NumericLiteral;
+import org.sonar.python.api.tree.QualifiedExpression;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
@@ -46,8 +46,8 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree callExpression = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = callExpression.arguments();
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      List<Argument> arguments = callExpression.arguments();
       String qualifiedName = getQualifiedName(callExpression);
       if (CRYPTOGRAPHY.matcher(qualifiedName).matches()) {
         new CryptographyModuleCheck().checkArguments(ctx, arguments);
@@ -60,7 +60,7 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
   }
 
 
-  private static String getQualifiedName(PyCallExpressionTree callExpression) {
+  private static String getQualifiedName(CallExpression callExpression) {
     Symbol symbol = callExpression.calleeSymbol();
     return symbol != null && symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
   }
@@ -76,51 +76,51 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
 
     abstract String getExponentKeywordName();
 
-    private boolean isNonCompliantKeySizeArgument(PyArgumentTree argument, int index) {
-      PyNameTree keywordArgument = argument.keywordArgument();
+    private boolean isNonCompliantKeySizeArgument(Argument argument, int index) {
+      Name keywordArgument = argument.keywordArgument();
       if (keywordArgument == null) {
         return index == getKeySizeArgumentPosition() && isLessThan2048(argument.expression());
       }
       return (keywordArgument).name().equals(getKeySizeKeywordName()) && isLessThan2048(argument.expression());
     }
 
-    private boolean isNonCompliantExponentArgument(PyArgumentTree argument, int index) {
-      PyNameTree keywordArgument = argument.keywordArgument();
+    private boolean isNonCompliantExponentArgument(Argument argument, int index) {
+      Name keywordArgument = argument.keywordArgument();
       if (keywordArgument == null) {
         return index == getExponentArgumentPosition() && isLessThan65537(argument.expression());
       }
       return (keywordArgument).name().equals(getExponentKeywordName()) && isLessThan65537(argument.expression());
     }
 
-    private static boolean isLessThan2048(PyExpressionTree expression) {
+    private static boolean isLessThan2048(Expression expression) {
       try {
-        return expression.is(Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) expression).valueAsLong() < 2048;
+        return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < 2048;
       } catch (NumberFormatException nfe) {
         return false;
       }
     }
 
-    private static boolean isLessThan65537(PyExpressionTree expression) {
+    private static boolean isLessThan65537(Expression expression) {
       try {
-        return expression.is(Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) expression).valueAsLong() < 65537;
+        return expression.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) expression).valueAsLong() < 65537;
       } catch (NumberFormatException nfe) {
         return false;
       }
     }
 
-    private static boolean isNonCompliantCurveArgument(PyArgumentTree argument, int index) {
-      PyNameTree keywordArgument = argument.keywordArgument();
+    private static boolean isNonCompliantCurveArgument(Argument argument, int index) {
+      Name keywordArgument = argument.keywordArgument();
       if (keywordArgument == null) {
         return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(argument.expression());
       }
       return (keywordArgument).name().equals("curve") && isNonCompliantCurve(argument.expression());
     }
 
-    private static boolean isNonCompliantCurve(PyExpressionTree expression) {
+    private static boolean isNonCompliantCurve(Expression expression) {
       if (!expression.is(Kind.QUALIFIED_EXPR)) {
         return false;
       }
-      PyQualifiedExpressionTree qualifiedExpressionTree = (PyQualifiedExpressionTree) expression;
+      QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) expression;
       if (qualifiedExpressionTree.qualifier() instanceof HasSymbol) {
         Symbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
         if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
@@ -131,9 +131,9 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    void checkArguments(SubscriptionContext ctx, List<PyArgumentTree> arguments) {
+    void checkArguments(SubscriptionContext ctx, List<Argument> arguments) {
       int index = 0;
-      for (PyArgumentTree argument : arguments) {
+      for (Argument argument : arguments) {
         if (isNonCompliantKeySizeArgument(argument, index)) {
           ctx.addIssue(argument, "Use a key length of at least 2048 bits.");
         }

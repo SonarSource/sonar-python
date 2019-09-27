@@ -21,9 +21,9 @@ package org.sonar.python.checks.hotspots;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1523")
@@ -33,17 +33,17 @@ public class DynamicCodeExecutionCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree callExpr = (PyCallExpressionTree) ctx.syntaxNode();
+      CallExpression callExpr = (CallExpression) ctx.syntaxNode();
       if (isFuncNameExecOrEval(callExpr)) {
         ctx.addIssue(callExpr, MESSAGE);
       }
     });
   }
 
-  private static boolean isFuncNameExecOrEval(PyCallExpressionTree call) {
-    PyExpressionTree expr = call.callee();
+  private static boolean isFuncNameExecOrEval(CallExpression call) {
+    Expression expr = call.callee();
     if (expr.is(Tree.Kind.NAME)) {
-      String functionName = ((PyNameTree) expr).name();
+      String functionName = ((Name) expr).name();
       return functionName.equals("exec") || functionName.equals("eval");
     }
     return false;

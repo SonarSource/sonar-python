@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyLambdaExpressionTree;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.LambdaExpression;
 import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
@@ -41,7 +41,7 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree tree = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef tree = (FunctionDef) ctx.syntaxNode();
       if (tree.parameters() != null) {
         int nbParameters = tree.parameters().all().size();
         if (nbParameters > max) {
@@ -54,7 +54,7 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
     });
 
     context.registerSyntaxNodeConsumer(Kind.LAMBDA, ctx -> {
-      PyLambdaExpressionTree tree = (PyLambdaExpressionTree) ctx.syntaxNode();
+      LambdaExpression tree = (LambdaExpression) ctx.syntaxNode();
       if (tree.parameters() != null) {
         int nbParameters = tree.parameters().all().size();
         if (nbParameters > max) {

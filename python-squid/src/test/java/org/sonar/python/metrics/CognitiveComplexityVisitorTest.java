@@ -34,7 +34,7 @@ import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -59,7 +59,7 @@ public class CognitiveComplexityVisitorTest {
       public void visitNode(AstNode node) {
         if (!node.hasAncestor(PythonGrammar.FUNCDEF)) {
           PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
-          PyFunctionDefTree tree = pythonTreeMaker.funcDefStatement(node);
+          FunctionDef tree = pythonTreeMaker.funcDefStatement(node);
           pythonTreeMaker.setParents(tree);
           int functionComplexity = CognitiveComplexityVisitor.complexity(tree, null);
           complexityByLine.merge(node.getTokenLine(), "=" + functionComplexity, (a, b) -> a + " " + b);

@@ -26,12 +26,12 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyStringElementTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
-import org.sonar.python.api.tree.PySubscriptionExpressionTree;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.StringElement;
+import org.sonar.python.api.tree.StringLiteral;
+import org.sonar.python.api.tree.SubscriptionExpression;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
@@ -49,7 +49,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STRING_ELEMENT, ctx -> {
-      PyStringElementTree tree = (PyStringElementTree) ctx.syntaxNode();
+      StringElement tree = (StringElement) ctx.syntaxNode();
       String stringElement = tree.trimmedQuotesValue().toLowerCase(Locale.ENGLISH);
       if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(dir -> containsDirectory(stringElement, dir)) ||
         WINDOWS_WRITABLE_DIRECTORIES.matcher(stringElement).matches()) {
@@ -58,17 +58,17 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
     });
 
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree tree = (PyCallExpressionTree) ctx.syntaxNode();
-      List<PyArgumentTree> arguments = tree.arguments();
+      CallExpression tree = (CallExpression) ctx.syntaxNode();
+      List<Argument> arguments = tree.arguments();
       if (isOsEnvironGetter(tree) &&
-        arguments.stream().map(PyArgumentTree::expression)
+        arguments.stream().map(Argument::expression)
           .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }
     });
 
     context.registerSyntaxNodeConsumer(Kind.SUBSCRIPTION, ctx -> {
-      PySubscriptionExpressionTree tree = (PySubscriptionExpressionTree) ctx.syntaxNode();
+      SubscriptionExpression tree = (SubscriptionExpression) ctx.syntaxNode();
       if (isOsEnvironQualifiedExpression(tree.object()) && tree.subscripts().expressions().stream()
         .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
@@ -81,17 +81,17 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
     return stringElement.startsWith(dir) || stringElement.equals(dir.substring(0, dir.length() - 1));
   }
 
-  private static boolean isNonCompliantOsEnvironArgument(PyExpressionTree expression) {
+  private static boolean isNonCompliantOsEnvironArgument(Expression expression) {
     return expression.is(Kind.STRING_LITERAL) &&
-      ((PyStringLiteralTree) expression).stringElements().stream().map(s -> s.trimmedQuotesValue().toLowerCase(Locale.ENGLISH)).anyMatch(NONCOMPLIANT_ENVIRON_VARIABLES::contains);
+      ((StringLiteral) expression).stringElements().stream().map(s -> s.trimmedQuotesValue().toLowerCase(Locale.ENGLISH)).anyMatch(NONCOMPLIANT_ENVIRON_VARIABLES::contains);
   }
 
-  private static boolean isOsEnvironGetter(PyCallExpressionTree callExpressionTree) {
+  private static boolean isOsEnvironGetter(CallExpression callExpressionTree) {
     Symbol symbol = callExpressionTree.calleeSymbol();
     return symbol != null && "os.environ.get".equals(symbol.fullyQualifiedName());
   }
 
-  private static boolean isOsEnvironQualifiedExpression(PyExpressionTree expression) {
+  private static boolean isOsEnvironQualifiedExpression(Expression expression) {
     if (expression instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) expression).symbol();
       if (symbol != null) {

@@ -1,0 +1,121 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2019 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.tree;
+
+import java.util.Objects;
+import org.sonar.python.api.tree.Token;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Tree;
+
+public class IfStatementImpl extends PyTree implements IfStatement {
+
+  private final Token keyword;
+  private final Expression condition;
+  private final StatementList statements;
+  private final List<IfStatement> elifBranches;
+  private final boolean isElif;
+  @CheckForNull
+  private final ElseStatement elseStatement;
+
+  /**
+   *
+   * If statement constructor
+   */
+  public IfStatementImpl(Token ifKeyword, Expression condition,
+                         StatementList statements, List<IfStatement> elifBranches, @CheckForNull ElseStatement elseStatement) {
+    super(ifKeyword, statements.lastToken());
+    this.keyword = ifKeyword;
+    this.condition = condition;
+    this.statements = statements;
+    this.elifBranches = elifBranches;
+    this.isElif = false;
+    this.elseStatement = elseStatement;
+  }
+
+  /**
+   * Elif statement constructor
+   */
+  public IfStatementImpl(Token elifKeyword, Expression condition, StatementList statements) {
+    super(elifKeyword, statements.lastToken());
+    this.keyword = elifKeyword;
+    this.condition = condition;
+    this.statements = statements;
+    this.elifBranches = Collections.emptyList();
+    this.isElif = true;
+    this.elseStatement = null;
+  }
+
+  @Override
+  public Token keyword() {
+    return keyword;
+  }
+
+  @Override
+  public Expression condition() {
+    return condition;
+  }
+
+  @Override
+  public StatementList body() {
+    return statements;
+  }
+
+  @Override
+  public List<IfStatement> elifBranches() {
+    return elifBranches;
+  }
+
+  @Override
+  public boolean isElif() {
+    return isElif;
+  }
+
+  @CheckForNull
+  @Override
+  public ElseStatement elseBranch() {
+    return elseStatement;
+  }
+
+  @Override
+  public Kind getKind() {
+    return Tree.Kind.IF_STMT;
+  }
+
+  @Override
+  public void accept(TreeVisitor visitor) {
+    visitor.visitIfStatement(this);
+  }
+
+  @Override
+  public List<Tree> children() {
+    return Stream.of(Arrays.asList(keyword, condition, statements), elifBranches, Collections.singletonList(elseStatement))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  }
+}

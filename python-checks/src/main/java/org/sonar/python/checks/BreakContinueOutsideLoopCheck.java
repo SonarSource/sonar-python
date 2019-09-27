@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = BreakContinueOutsideLoopCheck.CHECK_KEY)
@@ -33,7 +33,7 @@ public class BreakContinueOutsideLoopCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S1716";
 
   private static final Consumer<SubscriptionContext> SUBSCRIPTION_CONTEXT_CONSUMER = ctx -> {
-    PyStatementTree statement = (PyStatementTree) ctx.syntaxNode();
+    Statement statement = (Statement) ctx.syntaxNode();
     Tree currentParent = statement.parent();
     while (currentParent != null) {
       if (currentParent.is(Tree.Kind.WHILE_STMT) || currentParent.is(Tree.Kind.FOR_STMT)) {

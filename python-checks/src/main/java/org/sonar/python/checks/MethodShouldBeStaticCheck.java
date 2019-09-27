@@ -22,13 +22,13 @@ package org.sonar.python.checks;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyExpressionStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyParameterListTree;
-import org.sonar.python.api.tree.PyParameterTree;
-import org.sonar.python.api.tree.PyRaiseStatementTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.ExpressionStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.ParameterList;
+import org.sonar.python.api.tree.Parameter;
+import org.sonar.python.api.tree.RaiseStatement;
+import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -43,7 +43,7 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree funcDef = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
       if (funcDef.isMethodDefinition()
         && !classHasInheritance(getParentClassDef(funcDef))
         && !isBuiltInMethod(funcDef)
@@ -57,45 +57,45 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean mayRaiseNotImplementedError(PyFunctionDefTree funcDef) {
+  private static boolean mayRaiseNotImplementedError(FunctionDef funcDef) {
     RaiseStatementVisitor visitor = new RaiseStatementVisitor();
     funcDef.accept(visitor);
     return visitor.hasNotImplementedError;
 
   }
 
-  private static boolean hasValuableCode(PyFunctionDefTree funcDef) {
-    List<PyStatementTree> statements = funcDef.body().statements();
+  private static boolean hasValuableCode(FunctionDef funcDef) {
+    List<Statement> statements = funcDef.body().statements();
     return !statements.stream().allMatch(st -> isStringLiteral(st) || st.is(Tree.Kind.PASS_STMT));
   }
 
-  private static boolean isStringLiteral(PyStatementTree st) {
-    return st.is(Tree.Kind.EXPRESSION_STMT) && ((PyExpressionStatementTree) st).expressions().stream().allMatch(e -> e.is(Tree.Kind.STRING_LITERAL));
+  private static boolean isStringLiteral(Statement st) {
+    return st.is(Tree.Kind.EXPRESSION_STMT) && ((ExpressionStatement) st).expressions().stream().allMatch(e -> e.is(Tree.Kind.STRING_LITERAL));
   }
 
-  private static boolean isUsingSelfArg(PyFunctionDefTree funcDef) {
-    PyParameterListTree parameters = funcDef.parameters();
+  private static boolean isUsingSelfArg(FunctionDef funcDef) {
+    ParameterList parameters = funcDef.parameters();
     if (parameters == null) {
       // if a method has no parameters then it can't be a instance method.
       return true;
     }
-    List<PyParameterTree> params = parameters.nonTuple();
+    List<Parameter> params = parameters.nonTuple();
     if (params.isEmpty()) {
       return false;
     }
-    PyParameterTree first = params.get(0);
+    Parameter first = params.get(0);
     SelfVisitor visitor = new SelfVisitor(first.name().name());
     funcDef.body().accept(visitor);
     return visitor.isUsingSelfArg;
   }
 
-  private static boolean isStatic(PyFunctionDefTree funcDef) {
+  private static boolean isStatic(FunctionDef funcDef) {
     return funcDef.decorators().stream()
       .map(d -> d.name().names().get(d.name().names().size() - 1))
       .anyMatch(n -> n.name().equals("staticmethod") || n.name().equals("classmethod"));
   }
 
-  private static boolean isBuiltInMethod(PyFunctionDefTree funcDef) {
+  private static boolean isBuiltInMethod(FunctionDef funcDef) {
     String name = funcDef.name().name();
     String doubleUnderscore = "__";
     return name.startsWith(doubleUnderscore) && name.endsWith(doubleUnderscore);
@@ -106,14 +106,14 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
     boolean hasNotImplementedError = false;
 
     @Override
-    public void visitRaiseStatement(PyRaiseStatementTree pyRaiseStatementTree) {
+    public void visitRaiseStatement(RaiseStatement pyRaiseStatementTree) {
       withinRaise++;
       scan(pyRaiseStatementTree.expressions());
       withinRaise--;
     }
 
     @Override
-    public void visitName(PyNameTree pyNameTree) {
+    public void visitName(Name pyNameTree) {
       if (withinRaise > 0) {
         hasNotImplementedError |= pyNameTree.name().equals("NotImplementedError");
       }
@@ -129,7 +129,7 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    public void visitName(PyNameTree pyNameTree) {
+    public void visitName(Name pyNameTree) {
       isUsingSelfArg |= selfName.equals(pyNameTree.name());
     }
   }

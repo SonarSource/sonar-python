@@ -30,8 +30,8 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyStringElementTree;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.StringElement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -52,14 +52,14 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       Tree node = ctx.syntaxNode();
-      String value = ((PyStringElementTree) node).trimmedQuotesValue();
+      String value = ((StringElement) node).trimmedQuotesValue();
       unsafeProtocol(value)
         // cleanup slashes
         .map(protocol -> protocol.substring(0, protocol.length() - 3))
         .ifPresent(protocol -> ctx.addIssue(node, message(protocol)));
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      Symbol symbol = ((PyCallExpressionTree) ctx.syntaxNode()).calleeSymbol();
+      Symbol symbol = ((CallExpression) ctx.syntaxNode()).calleeSymbol();
       isUnsafeLib(symbol).ifPresent(protocol -> ctx.addIssue(ctx.syntaxNode(), message(protocol)));
     });
   }

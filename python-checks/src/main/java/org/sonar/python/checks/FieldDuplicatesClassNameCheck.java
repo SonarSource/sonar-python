@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -35,7 +35,7 @@ public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      ClassDef classDef = (ClassDef) ctx.syntaxNode();
       if (CheckUtils.classHasInheritance(classDef)) {
         return;
       }

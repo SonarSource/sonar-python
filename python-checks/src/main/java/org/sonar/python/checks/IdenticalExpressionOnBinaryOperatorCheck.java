@@ -24,10 +24,10 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNumericLiteralTree;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.NumericLiteral;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1764")
@@ -42,17 +42,17 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscription
   }
 
   private void checkBinaryExpression(SubscriptionContext ctx) {
-    PyBinaryExpressionTree binaryExpression = (PyBinaryExpressionTree) ctx.syntaxNode();
-    PyExpressionTree leftOperand = binaryExpression.leftOperand();
-    PyExpressionTree rightOperand = binaryExpression.rightOperand();
-    PyToken operator = binaryExpression.operator();
+    BinaryExpression binaryExpression = (BinaryExpression) ctx.syntaxNode();
+    Expression leftOperand = binaryExpression.leftOperand();
+    Expression rightOperand = binaryExpression.rightOperand();
+    Token operator = binaryExpression.operator();
     if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator)) {
       ctx.addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator.value() + "\".")
         .secondary(leftOperand, "");
     }
   }
 
-  private static boolean isLeftShiftBy1(PyExpressionTree leftOperand, PyToken operator) {
-    return "<<".equals(operator.value()) && leftOperand.is(Tree.Kind.NUMERIC_LITERAL) && ((PyNumericLiteralTree) leftOperand).valueAsLong() == 1;
+  private static boolean isLeftShiftBy1(Expression leftOperand, Token operator) {
+    return "<<".equals(operator.value()) && leftOperand.is(Tree.Kind.NUMERIC_LITERAL) && ((NumericLiteral) leftOperand).valueAsLong() == 1;
   }
 }

@@ -25,8 +25,8 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheckTree;
 import org.sonar.python.PythonVisitorContext;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
@@ -43,8 +43,8 @@ public class CollapsibleIfStatementsCheck extends PythonCheckTree {
   }
 
   @Override
-  public void visitIfStatement(PyIfStatementTree ifStatement) {
-    List<PyStatementTree> statements = ifStatement.body().statements();
+  public void visitIfStatement(IfStatement ifStatement) {
+    List<Statement> statements = ifStatement.body().statements();
     if (!ifStatement.elifBranches().isEmpty()) {
       if (ifStatement.elseBranch() == null) {
         ignored.addAll(ifStatement.elifBranches().subList(0, ifStatement.elifBranches().size() - 1));
@@ -57,7 +57,7 @@ public class CollapsibleIfStatementsCheck extends PythonCheckTree {
       && ifStatement.elifBranches().isEmpty()
       && statements.size() == 1
       && statements.get(0).is(Tree.Kind.IF_STMT)) {
-      PyIfStatementTree singleIfChild = (PyIfStatementTree) statements.get(0);
+      IfStatement singleIfChild = (IfStatement) statements.get(0);
       if (singleIfChild.isElif() || singleIfChild.elseBranch() != null || !singleIfChild.elifBranches().isEmpty()) {
         return;
       }

@@ -27,12 +27,12 @@ import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
@@ -51,7 +51,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree call = (PyCallExpressionTree) ctx.syntaxNode();
+      CallExpression call = (CallExpression) ctx.syntaxNode();
       Symbol symbol = call.calleeSymbol();
       if (symbol != null && questionableFunctions.contains(symbol.fullyQualifiedName()) && !call.arguments().isEmpty()) {
         checkRegexArgument(call.arguments().get(REGEX_ARGUMENT), ctx);
@@ -59,15 +59,15 @@ public class RegexCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private void checkRegexArgument(PyArgumentTree arg, SubscriptionContext ctx) {
+  private void checkRegexArgument(Argument arg, SubscriptionContext ctx) {
     String literal = arg.firstToken().value();
     IssueLocation secondaryLocation = null;
-    PyExpressionTree argExpression = getExpression(arg.expression());
+    Expression argExpression = getExpression(arg.expression());
     if (argExpression.is(Tree.Kind.NAME)) {
-      PyExpressionTree expression = getExpression(Expressions.singleAssignedValue((PyNameTree) argExpression));
+      Expression expression = getExpression(Expressions.singleAssignedValue((Name) argExpression));
       if (expression != null && expression.is(Tree.Kind.STRING_LITERAL)) {
         secondaryLocation = IssueLocation.preciseLocation(expression, "");
-        literal = ((PyStringLiteralTree) expression).trimmedQuotesValue();
+        literal = ((StringLiteral) expression).trimmedQuotesValue();
       }
     }
     if (isSuspiciousRegex(literal)) {
@@ -78,12 +78,12 @@ public class RegexCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static PyExpressionTree getExpression(@Nullable PyExpressionTree expr) {
+  private static Expression getExpression(@Nullable Expression expr) {
     if (expr == null) {
       return null;
     }
     if (expr.is(Tree.Kind.MODULO) || expr.is(Tree.Kind.PLUS)) {
-      return getExpression(((PyBinaryExpressionTree) expr).leftOperand());
+      return getExpression(((BinaryExpression) expr).leftOperand());
     }
     return expr;
   }

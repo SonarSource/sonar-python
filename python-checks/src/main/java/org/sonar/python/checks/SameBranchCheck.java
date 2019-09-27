@@ -25,14 +25,14 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyConditionalExpressionTree;
-import org.sonar.python.api.tree.PyElseStatementTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
-import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.ConditionalExpression;
+import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.ParenthesizedExpression;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = "S1871")
@@ -46,20 +46,20 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> ignoreList = new ArrayList<>());
 
     context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> {
-      PyIfStatementTree ifStmt = (PyIfStatementTree) ctx.syntaxNode();
+      IfStatement ifStmt = (IfStatement) ctx.syntaxNode();
       if (ignoreList.contains(ifStmt)) {
         return;
       }
-      List<PyStatementListTree> branches = getIfBranches(ifStmt);
+      List<StatementList> branches = getIfBranches(ifStmt);
       findSameBranches(branches, ctx);
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CONDITIONAL_EXPR, ctx -> {
-      PyConditionalExpressionTree conditionalExpression = (PyConditionalExpressionTree) ctx.syntaxNode();
+      ConditionalExpression conditionalExpression = (ConditionalExpression) ctx.syntaxNode();
       if (ignoreList.contains(conditionalExpression)) {
         return;
       }
-      List<PyExpressionTree> expressions = new ArrayList<>();
+      List<Expression> expressions = new ArrayList<>();
       addConditionalExpressionBranches(expressions, conditionalExpression);
       findSameBranches(expressions, ctx);
     });
@@ -90,11 +90,11 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private List<PyStatementListTree> getIfBranches(PyIfStatementTree ifStmt) {
-    List<PyStatementListTree> branches = new ArrayList<>();
+  private List<StatementList> getIfBranches(IfStatement ifStmt) {
+    List<StatementList> branches = new ArrayList<>();
     branches.add(ifStmt.body());
-    branches.addAll(ifStmt.elifBranches().stream().map(PyIfStatementTree::body).collect(Collectors.toList()));
-    PyElseStatementTree elseStatement = ifStmt.elseBranch();
+    branches.addAll(ifStmt.elifBranches().stream().map(IfStatement::body).collect(Collectors.toList()));
+    ElseStatement elseStatement = ifStmt.elseBranch();
     if (elseStatement != null) {
       branches.add(elseStatement.body());
       lookForElseIfs(branches, elseStatement);
@@ -102,66 +102,66 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
     return branches;
   }
 
-  private void addConditionalExpressionBranches(List<PyExpressionTree> branches, PyConditionalExpressionTree conditionalExpression) {
-    PyExpressionTree trueExpression = removeParentheses(conditionalExpression.trueExpression());
-    PyExpressionTree falseExpression = removeParentheses(conditionalExpression.falseExpression());
+  private void addConditionalExpressionBranches(List<Expression> branches, ConditionalExpression conditionalExpression) {
+    Expression trueExpression = removeParentheses(conditionalExpression.trueExpression());
+    Expression falseExpression = removeParentheses(conditionalExpression.falseExpression());
     if (trueExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
       ignoreList.add(trueExpression);
-      addConditionalExpressionBranches(branches, (PyConditionalExpressionTree) trueExpression);
+      addConditionalExpressionBranches(branches, (ConditionalExpression) trueExpression);
     } else {
       branches.add(trueExpression);
     }
     if (falseExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
       ignoreList.add(falseExpression);
-      addConditionalExpressionBranches(branches, (PyConditionalExpressionTree) falseExpression);
+      addConditionalExpressionBranches(branches, (ConditionalExpression) falseExpression);
     } else {
       branches.add(falseExpression);
     }
   }
 
-  private static PyExpressionTree removeParentheses(PyExpressionTree expression) {
+  private static Expression removeParentheses(Expression expression) {
     if (expression.is(Tree.Kind.PARENTHESIZED)) {
-      return removeParentheses(((PyParenthesizedExpressionTree) expression).expression());
+      return removeParentheses(((ParenthesizedExpression) expression).expression());
     } else {
       return expression;
     }
   }
 
-  private void lookForElseIfs(List<PyStatementListTree> branches, PyElseStatementTree elseBranch) {
-    PyIfStatementTree singleIfChild = singleIfChild(elseBranch.body());
+  private void lookForElseIfs(List<StatementList> branches, ElseStatement elseBranch) {
+    IfStatement singleIfChild = singleIfChild(elseBranch.body());
     if (singleIfChild != null) {
       ignoreList.add(singleIfChild);
       branches.addAll(getIfBranches(singleIfChild));
     }
   }
 
-  private static PyIfStatementTree singleIfChild(PyStatementListTree statementList) {
-    List<PyStatementTree> statements = statementList.statements();
+  private static IfStatement singleIfChild(StatementList statementList) {
+    List<Statement> statements = statementList.statements();
     if (statements.size() == 1 && statements.get(0).is(Tree.Kind.IF_STMT)) {
-      return (PyIfStatementTree) statements.get(0);
+      return (IfStatement) statements.get(0);
     }
     return null;
   }
 
   private static boolean isOnASingleLine(Tree tree) {
     if (tree.is(Tree.Kind.STATEMENT_LIST)) {
-      PyStatementListTree duplicateBlock = (PyStatementListTree) tree;
+      StatementList duplicateBlock = (StatementList) tree;
       return duplicateBlock.statements().get(0).firstToken().line() == duplicateBlock.statements().get(duplicateBlock.statements().size() - 1).lastToken().line();
     } else {
       return tree.firstToken().line() == tree.lastToken().line();
     }
   }
 
-  private static PyToken getFirstToken(Tree tree) {
+  private static Token getFirstToken(Tree tree) {
     if (tree.is(Tree.Kind.STATEMENT_LIST)) {
-      return getFirstToken(((PyStatementListTree) tree).statements().get(0));
+      return getFirstToken(((StatementList) tree).statements().get(0));
     }
     return tree.firstToken();
   }
 
-  private static PyToken getLastToken(Tree tree) {
+  private static Token getLastToken(Tree tree) {
     if (tree.is(Tree.Kind.STATEMENT_LIST)) {
-      List<PyStatementTree> statements = ((PyStatementListTree) tree).statements();
+      List<Statement> statements = ((StatementList) tree).statements();
       return getLastToken(statements.get(statements.size()-1));
     }
     return tree.lastToken();

@@ -25,46 +25,46 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.tree.PyAnnotatedAssignmentTree;
-import org.sonar.python.api.tree.PyAnyParameterTree;
-import org.sonar.python.api.tree.PyAssertStatementTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyAwaitExpressionTree;
-import org.sonar.python.api.tree.PyBinaryExpressionTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyComprehensionForTree;
-import org.sonar.python.api.tree.PyComprehensionIfTree;
-import org.sonar.python.api.tree.PyConditionalExpressionTree;
-import org.sonar.python.api.tree.PyDelStatementTree;
-import org.sonar.python.api.tree.PyDictCompExpressionTree;
-import org.sonar.python.api.tree.PyExecStatementTree;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyImportFromTree;
-import org.sonar.python.api.tree.PyImportNameTree;
-import org.sonar.python.api.tree.PyLambdaExpressionTree;
-import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyComprehensionExpressionTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyNumericLiteralTree;
-import org.sonar.python.api.tree.PyParameterTree;
-import org.sonar.python.api.tree.PyParenthesizedExpressionTree;
-import org.sonar.python.api.tree.PyPassStatementTree;
-import org.sonar.python.api.tree.PyPrintStatementTree;
-import org.sonar.python.api.tree.PyQualifiedExpressionTree;
-import org.sonar.python.api.tree.PyReprExpressionTree;
-import org.sonar.python.api.tree.PyReturnStatementTree;
-import org.sonar.python.api.tree.PySliceExpressionTree;
-import org.sonar.python.api.tree.PySliceItemTree;
-import org.sonar.python.api.tree.PyStarredExpressionTree;
-import org.sonar.python.api.tree.PySubscriptionExpressionTree;
-import org.sonar.python.api.tree.PyTryStatementTree;
-import org.sonar.python.api.tree.PyTupleParameterTree;
-import org.sonar.python.api.tree.PyTupleTree;
-import org.sonar.python.api.tree.PyWithStatementTree;
-import org.sonar.python.api.tree.PyYieldStatementTree;
+import org.sonar.python.api.tree.AnnotatedAssignment;
+import org.sonar.python.api.tree.AnyParameter;
+import org.sonar.python.api.tree.AssertStatement;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.AwaitExpression;
+import org.sonar.python.api.tree.BinaryExpression;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.ComprehensionFor;
+import org.sonar.python.api.tree.ComprehensionIf;
+import org.sonar.python.api.tree.ConditionalExpression;
+import org.sonar.python.api.tree.DelStatement;
+import org.sonar.python.api.tree.DictCompExpression;
+import org.sonar.python.api.tree.ExecStatement;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.ImportFrom;
+import org.sonar.python.api.tree.ImportName;
+import org.sonar.python.api.tree.LambdaExpression;
+import org.sonar.python.api.tree.ListLiteral;
+import org.sonar.python.api.tree.ComprehensionExpression;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.NumericLiteral;
+import org.sonar.python.api.tree.Parameter;
+import org.sonar.python.api.tree.ParenthesizedExpression;
+import org.sonar.python.api.tree.PassStatement;
+import org.sonar.python.api.tree.PrintStatement;
+import org.sonar.python.api.tree.QualifiedExpression;
+import org.sonar.python.api.tree.ReprExpression;
+import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.SliceExpression;
+import org.sonar.python.api.tree.SliceItem;
+import org.sonar.python.api.tree.StarredExpression;
+import org.sonar.python.api.tree.SubscriptionExpression;
+import org.sonar.python.api.tree.TryStatement;
+import org.sonar.python.api.tree.TupleParameter;
+import org.sonar.python.api.tree.Tuple;
+import org.sonar.python.api.tree.WithStatement;
+import org.sonar.python.api.tree.YieldStatement;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.parser.RuleTest;
 
@@ -91,20 +91,20 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void if_statement() {
     setRootRule(PythonGrammar.IF_STMT);
-    PyIfStatementTree tree = parse("if p1: print 'a'\nelif p2: return\nelse: yield", treeMaker::ifStatement);
+    IfStatement tree = parse("if p1: print 'a'\nelif p2: return\nelse: yield", treeMaker::ifStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitIfStatement(tree);
     verify(visitor).visitIfStatement(tree);
     verify(visitor).visitIfStatement(tree.elifBranches().get(0));
-    verify(visitor).visitPrintStatement((PyPrintStatementTree) tree.body().statements().get(0));
-    verify(visitor).visitReturnStatement((PyReturnStatementTree) tree.elifBranches().get(0).body().statements().get(0));
-    verify(visitor).visitYieldStatement((PyYieldStatementTree) tree.elseBranch().body().statements().get(0));
+    verify(visitor).visitPrintStatement((PrintStatement) tree.body().statements().get(0));
+    verify(visitor).visitReturnStatement((ReturnStatement) tree.elifBranches().get(0).body().statements().get(0));
+    verify(visitor).visitYieldStatement((YieldStatement) tree.elseBranch().body().statements().get(0));
   }
 
   @Test
   public void exec_statement() {
     setRootRule(PythonGrammar.EXEC_STMT);
-    PyExecStatementTree tree = parse("exec 'foo' in globals, locals", treeMaker::execStatement);
+    ExecStatement tree = parse("exec 'foo' in globals, locals", treeMaker::execStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitExecStatement(tree);
     verify(visitor).scan(tree.expression());
@@ -115,7 +115,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void assert_statement() {
     setRootRule(PythonGrammar.ASSERT_STMT);
-    PyAssertStatementTree tree = parse("assert x, y", treeMaker::assertStatement);
+    AssertStatement tree = parse("assert x, y", treeMaker::assertStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssertStatement(tree);
     verify(visitor).scan(tree.condition());
@@ -125,7 +125,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void delete_statement() {
     setRootRule(PythonGrammar.DEL_STMT);
-    PyDelStatementTree tree = parse("del x", treeMaker::delStatement);
+    DelStatement tree = parse("del x", treeMaker::delStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitDelStatement(tree);
     verify(visitor).scan(tree.expressions());
@@ -134,41 +134,41 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void fundef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
-    PyFunctionDefTree pyFunctionDefTree = parse("def foo(x:int): pass", treeMaker::funcDefStatement);
-    PyParameterTree parameter = pyFunctionDefTree.parameters().nonTuple().get(0);
+    FunctionDef pyFunctionDefTree = parse("def foo(x:int): pass", treeMaker::funcDefStatement);
+    Parameter parameter = pyFunctionDefTree.parameters().nonTuple().get(0);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitFunctionDef(pyFunctionDefTree);
     verify(visitor).visitName(pyFunctionDefTree.name());
     verify(visitor).visitParameter(parameter);
     verify(visitor).visitTypeAnnotation(parameter.typeAnnotation());
-    verify(visitor).visitPassStatement((PyPassStatementTree) pyFunctionDefTree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) pyFunctionDefTree.body().statements().get(0));
   }
 
   @Test
   public void fundef_with_tuple_param() {
     setRootRule(PythonGrammar.FUNCDEF);
-    PyFunctionDefTree pyFunctionDefTree = parse("def foo(x, (y, z)): pass", treeMaker::funcDefStatement);
+    FunctionDef pyFunctionDefTree = parse("def foo(x, (y, z)): pass", treeMaker::funcDefStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitFunctionDef(pyFunctionDefTree);
 
-    List<PyAnyParameterTree> parameters = pyFunctionDefTree.parameters().all();
-    PyTupleParameterTree tupleParam = (PyTupleParameterTree) parameters.get(1);
-    verify(visitor).visitParameter((PyParameterTree) parameters.get(0));
+    List<AnyParameter> parameters = pyFunctionDefTree.parameters().all();
+    TupleParameter tupleParam = (TupleParameter) parameters.get(1);
+    verify(visitor).visitParameter((Parameter) parameters.get(0));
     verify(visitor).visitTupleParameter(tupleParam);
-    verify(visitor).visitParameter((PyParameterTree) tupleParam.parameters().get(0));
-    verify(visitor).visitParameter((PyParameterTree) tupleParam.parameters().get(1));
+    verify(visitor).visitParameter((Parameter) tupleParam.parameters().get(0));
+    verify(visitor).visitParameter((Parameter) tupleParam.parameters().get(1));
   }
 
   @Test
   public void import_statement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
-    PyImportFromTree tree = (PyImportFromTree) parse("from foo import f as g", treeMaker::importStatement);
+    ImportFrom tree = (ImportFrom) parse("from foo import f as g", treeMaker::importStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitImportFrom(tree);
     verify(visitor).visitAliasedName(tree.importedNames().get(0));
     verify(visitor).visitDottedName(tree.module());
 
-    PyImportNameTree pyTree = (PyImportNameTree) parse("import f as g", treeMaker::importStatement);
+    ImportName pyTree = (ImportName) parse("import f as g", treeMaker::importStatement);
     visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitImportName(pyTree);
     verify(visitor).visitAliasedName(pyTree.modules().get(0));
@@ -177,59 +177,59 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void for_statement() {
     setRootRule(PythonGrammar.FOR_STMT);
-    PyForStatementTree tree = parse("for foo in bar:pass\nelse: pass", treeMaker::forStatement);
+    ForStatement tree = parse("for foo in bar:pass\nelse: pass", treeMaker::forStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitForStatement(tree);
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.elseBody().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.elseBody().statements().get(0));
   }
 
   @Test
   public void while_statement() {
     setRootRule(PythonGrammar.WHILE_STMT);
-    PyWhileStatementTreeImpl tree = parse("while foo:\n  pass\nelse:\n  pass", treeMaker::whileStatement);
+    WhileStatementImpl tree = parse("while foo:\n  pass\nelse:\n  pass", treeMaker::whileStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitWhileStatement(tree);
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.elseBody().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.elseBody().statements().get(0));
   }
 
   @Test
   public void try_statement() {
     setRootRule(PythonGrammar.TRY_STMT);
-    PyTryStatementTree tree = parse("try: pass\nexcept Error: pass\nfinally: pass", treeMaker::tryStatement);
+    TryStatement tree = parse("try: pass\nexcept Error: pass\nfinally: pass", treeMaker::tryStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitTryStatement(tree);
     verify(visitor).visitFinallyClause(tree.finallyClause());
     verify(visitor).visitExceptClause(tree.exceptClauses().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
   }
 
   @Test
   public void with_statement() {
     setRootRule(PythonGrammar.WITH_STMT);
-    PyWithStatementTree tree = parse("with foo as bar, qix : pass", treeMaker::withStatement);
+    WithStatement tree = parse("with foo as bar, qix : pass", treeMaker::withStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitWithStatement(tree);
     verify(visitor).visitWithItem(tree.withItems().get(0));
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.statements().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.statements().statements().get(0));
   }
 
   @Test
   public void class_statement() {
     setRootRule(PythonGrammar.CLASSDEF);
-    PyClassDefTree tree = parse("class clazz(Parent): pass", treeMaker::classDefStatement);
+    ClassDef tree = parse("class clazz(Parent): pass", treeMaker::classDefStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitClassDef(tree);
     verify(visitor).visitName(tree.name());
     verify(visitor).visitArgumentList(tree.args());
-    verify(visitor).visitPassStatement((PyPassStatementTree) tree.body().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
   }
 
   @Test
   public void qualified_expr() {
     setRootRule(PythonGrammar.ATTRIBUTE_REF);
-    PyQualifiedExpressionTree tree = parse("a.b", treeMaker::qualifiedExpression);
+    QualifiedExpression tree = parse("a.b", treeMaker::qualifiedExpression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitQualifiedExpression(tree);
     verify(visitor).visitName(tree.name());
@@ -238,7 +238,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void assignement_stmt() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
-    PyAssignmentStatementTree tree = parse("a = b", treeMaker::assignment);
+    AssignmentStatement tree = parse("a = b", treeMaker::assignment);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssignmentStatement(tree);
     verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));
@@ -247,18 +247,18 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void annotated_assignment() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
-    PyAnnotatedAssignmentTree tree = parse("a : int = b", treeMaker::annotatedAssignment);
+    AnnotatedAssignment tree = parse("a : int = b", treeMaker::annotatedAssignment);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAnnotatedAssignment(tree);
-    verify(visitor).visitName((PyNameTree) tree.variable());
-    verify(visitor).visitName((PyNameTree) tree.annotation());
-    verify(visitor).visitName((PyNameTree) tree.assignedValue());
+    verify(visitor).visitName((Name) tree.variable());
+    verify(visitor).visitName((Name) tree.annotation());
+    verify(visitor).visitName((Name) tree.assignedValue());
   }
 
   @Test
   public void lambda() {
     setRootRule(PythonGrammar.LAMBDEF);
-    PyLambdaExpressionTree tree = parse("lambda x : x", treeMaker::lambdaExpression);
+    LambdaExpression tree = parse("lambda x : x", treeMaker::lambdaExpression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitLambda(tree);
     verify(visitor).visitParameterList(tree.parameters());
@@ -268,113 +268,113 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void starred_expr() {
     setRootRule(PythonGrammar.STAR_EXPR);
-    PyStarredExpressionTree tree = (PyStarredExpressionTree) parse("*a", treeMaker::expression);
+    StarredExpression tree = (StarredExpression) parse("*a", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     tree.accept(visitor);
-    verify(visitor).visitName((PyNameTree) tree.expression());
+    verify(visitor).visitName((Name) tree.expression());
   }
 
   @Test
   public void await_expr() {
     setRootRule(PythonGrammar.EXPR);
-    PyAwaitExpressionTree tree = (PyAwaitExpressionTree) parse("await x", treeMaker::expression);
+    AwaitExpression tree = (AwaitExpression) parse("await x", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     tree.accept(visitor);
-    verify(visitor).visitName((PyNameTree) tree.expression());
+    verify(visitor).visitName((Name) tree.expression());
   }
 
   @Test
   public void slice_expr() {
     setRootRule(PythonGrammar.EXPR);
-    PySliceExpressionTree expr = (PySliceExpressionTree) parse("a[b:c:d]", treeMaker::expression);
+    SliceExpression expr = (SliceExpression) parse("a[b:c:d]", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
-    verify(visitor).visitName((PyNameTree) expr.object());
+    verify(visitor).visitName((Name) expr.object());
     verify(visitor).visitSliceList(expr.sliceList());
 
-    PySliceItemTree slice = (PySliceItemTree) expr.sliceList().slices().get(0);
-    verify(visitor).visitName((PyNameTree) slice.lowerBound());
-    verify(visitor).visitName((PyNameTree) slice.upperBound());
-    verify(visitor).visitName((PyNameTree) slice.stride());
+    SliceItem slice = (SliceItem) expr.sliceList().slices().get(0);
+    verify(visitor).visitName((Name) slice.lowerBound());
+    verify(visitor).visitName((Name) slice.upperBound());
+    verify(visitor).visitName((Name) slice.stride());
   }
 
   @Test
   public void subscription_expr() {
     setRootRule(PythonGrammar.EXPR);
-    PySubscriptionExpressionTree expr = (PySubscriptionExpressionTree) parse("a[b]", treeMaker::expression);
+    SubscriptionExpression expr = (SubscriptionExpression) parse("a[b]", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
-    verify(visitor).visitName((PyNameTree) expr.object());
-    verify(visitor).visitName((PyNameTree) expr.subscripts().expressions().get(0));
+    verify(visitor).visitName((Name) expr.object());
+    verify(visitor).visitName((Name) expr.subscripts().expressions().get(0));
   }
 
   @Test
   public void parenthesized_expr() {
     setRootRule(PythonGrammar.EXPR);
-    PyParenthesizedExpressionTree expr = (PyParenthesizedExpressionTree) parse("(a)", treeMaker::expression);
+    ParenthesizedExpression expr = (ParenthesizedExpression) parse("(a)", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
-    verify(visitor).visitName((PyNameTree) expr.expression());
+    verify(visitor).visitName((Name) expr.expression());
   }
 
   @Test
   public void tuple() {
     setRootRule(PythonGrammar.EXPR);
-    PyTupleTree expr = (PyTupleTree) parse("(a,)", treeMaker::expression);
+    Tuple expr = (Tuple) parse("(a,)", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
-    verify(visitor).visitName((PyNameTree) expr.elements().get(0));
+    verify(visitor).visitName((Name) expr.elements().get(0));
   }
 
   @Test
   public void cond_expression() {
     setRootRule(PythonGrammar.TEST);
-    PyConditionalExpressionTree expr = (PyConditionalExpressionTree) parse("1 if p else 2", treeMaker::expression);
+    ConditionalExpression expr = (ConditionalExpression) parse("1 if p else 2", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
-    verify(visitor).visitName((PyNameTree) expr.condition());
-    verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.trueExpression());
-    verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.falseExpression());
+    verify(visitor).visitName((Name) expr.condition());
+    verify(visitor).visitNumericLiteral((NumericLiteral) expr.trueExpression());
+    verify(visitor).visitNumericLiteral((NumericLiteral) expr.falseExpression());
   }
 
   @Test
   public void list_or_set_comprehension() {
     setRootRule(PythonGrammar.EXPR);
-    PyComprehensionExpressionTree expr = (PyComprehensionExpressionTree) parse("[x+1 for x in [42, 43] if cond(x)]", treeMaker::expression);
+    ComprehensionExpression expr = (ComprehensionExpression) parse("[x+1 for x in [42, 43] if cond(x)]", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
 
-    verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.resultExpression());
+    verify(visitor).visitBinaryExpression((BinaryExpression) expr.resultExpression());
     verify(visitor).visitComprehensionFor(expr.comprehensionFor());
 
-    PyComprehensionForTree forClause = expr.comprehensionFor();
-    verify(visitor).visitName((PyNameTree) forClause.loopExpression());
-    verify(visitor).visitListLiteral((PyListLiteralTree) forClause.iterable());
+    ComprehensionFor forClause = expr.comprehensionFor();
+    verify(visitor).visitName((Name) forClause.loopExpression());
+    verify(visitor).visitListLiteral((ListLiteral) forClause.iterable());
 
-    PyComprehensionIfTree ifClause = (PyComprehensionIfTree) forClause.nestedClause();
-    verify(visitor).visitCallExpression((PyCallExpressionTree) ifClause.condition());
+    ComprehensionIf ifClause = (ComprehensionIf) forClause.nestedClause();
+    verify(visitor).visitCallExpression((CallExpression) ifClause.condition());
   }
 
   @Test
   public void dict_comprehension() {
     setRootRule(PythonGrammar.TEST);
-    PyDictCompExpressionTree expr = (PyDictCompExpressionTree) parse("{x+1:y-1 for x,y in map}", treeMaker::expression);
+    DictCompExpression expr = (DictCompExpression) parse("{x+1:y-1 for x,y in map}", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
 
-    verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.keyExpression());
-    verify(visitor).visitBinaryExpression((PyBinaryExpressionTree) expr.valueExpression());
+    verify(visitor).visitBinaryExpression((BinaryExpression) expr.keyExpression());
+    verify(visitor).visitBinaryExpression((BinaryExpression) expr.valueExpression());
     verify(visitor).visitComprehensionFor(expr.comprehensionFor());
   }
 
   @Test
   public void repr_expression() {
     setRootRule(PythonGrammar.ATOM);
-    PyReprExpressionTree expr = (PyReprExpressionTree) parse("`1`", treeMaker::expression);
+    ReprExpression expr = (ReprExpression) parse("`1`", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     expr.accept(visitor);
 
-    verify(visitor).visitNumericLiteral((PyNumericLiteralTree) expr.expressionList().expressions().get(0));
+    verify(visitor).visitNumericLiteral((NumericLiteral) expr.expressionList().expressions().get(0));
   }
 
   private <T> T parse(String code, Function<AstNode, T> func) {

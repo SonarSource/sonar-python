@@ -28,7 +28,7 @@ import javax.annotation.CheckForNull;
 
 public interface Tree {
 
-  void accept(PyTreeVisitor visitor);
+  void accept(TreeVisitor visitor);
 
   boolean is(Kind kind);
 
@@ -36,176 +36,176 @@ public interface Tree {
   @Deprecated
   AstNode astNode();
 
-  PyToken firstToken();
+  Token firstToken();
 
-  PyToken lastToken();
+  Token lastToken();
 
   Tree parent();
 
   List<Tree> children();
 
   enum Kind {
-    ALIASED_NAME(PyAliasedNameTree.class),
+    ALIASED_NAME(AliasedName.class),
 
-    ARGUMENT(PyArgumentTree.class),
+    ARGUMENT(Argument.class),
 
-    ARG_LIST(PyArgListTree.class),
+    ARG_LIST(ArgList.class),
 
-    ANNOTATED_ASSIGNMENT(PyAnnotatedAssignmentTree.class),
+    ANNOTATED_ASSIGNMENT(AnnotatedAssignment.class),
 
-    ASSERT_STMT(PyAssertStatementTree.class),
+    ASSERT_STMT(AssertStatement.class),
 
-    ASSIGNMENT_STMT(PyAssignmentStatementTree.class),
+    ASSIGNMENT_STMT(AssignmentStatement.class),
 
-    BREAK_STMT(PyBreakStatementTree.class),
+    BREAK_STMT(BreakStatement.class),
 
-    CALL_EXPR(PyCallExpressionTree.class),
+    CALL_EXPR(CallExpression.class),
 
-    CLASSDEF(PyClassDefTree.class),
+    CLASSDEF(ClassDef.class),
 
-    CONDITIONAL_EXPR(PyConditionalExpressionTree.class),
+    CONDITIONAL_EXPR(ConditionalExpression.class),
 
-    CONTINUE_STMT(PyContinueStatementTree.class),
+    CONTINUE_STMT(ContinueStatement.class),
 
-    COMPOUND_ASSIGNMENT(PyCompoundAssignmentStatementTree.class),
+    COMPOUND_ASSIGNMENT(CompoundAssignmentStatement.class),
 
-    DICTIONARY_LITERAL(PyDictionaryLiteralTree.class),
+    DICTIONARY_LITERAL(DictionaryLiteral.class),
 
-    DECORATOR(PyDecoratorTree.class),
+    DECORATOR(Decorator.class),
 
-    DEL_STMT(PyDelStatementTree.class),
+    DEL_STMT(DelStatement.class),
 
-    DOTTED_NAME(PyDottedNameTree.class),
+    DOTTED_NAME(DottedName.class),
 
-    ELLIPSIS(PyEllipsisExpressionTree.class),
+    ELLIPSIS(EllipsisExpression.class),
 
-    ELSE_STMT(PyElseStatementTree.class),
+    ELSE_STMT(ElseStatement.class),
 
-    EXCEPT_CLAUSE(PyExceptClauseTree.class),
+    EXCEPT_CLAUSE(ExceptClause.class),
 
-    EXEC_STMT(PyExecStatementTree.class),
+    EXEC_STMT(ExecStatement.class),
 
-    EXPRESSION_LIST(PyExpressionListTree.class),
+    EXPRESSION_LIST(ExpressionList.class),
 
-    EXPRESSION_STMT(PyExpressionStatementTree.class),
+    EXPRESSION_STMT(ExpressionStatement.class),
 
-    FILE_INPUT(PyFileInputTree.class),
+    FILE_INPUT(FileInput.class),
 
-    FINALLY_CLAUSE(PyFinallyClauseTree.class),
+    FINALLY_CLAUSE(FinallyClause.class),
 
-    FOR_STMT(PyForStatementTree.class),
+    FOR_STMT(ForStatement.class),
 
-    FUNCDEF(PyFunctionDefTree.class),
+    FUNCDEF(FunctionDef.class),
 
-    GLOBAL_STMT(PyGlobalStatementTree.class),
+    GLOBAL_STMT(GlobalStatement.class),
 
-    IF_STMT(PyIfStatementTree.class),
+    IF_STMT(IfStatement.class),
 
-    IMPORT_FROM(PyImportFromTree.class),
+    IMPORT_FROM(ImportFrom.class),
 
-    IMPORT_NAME(PyDottedNameTree.class),
+    IMPORT_NAME(DottedName.class),
 
-    IMPORT_STMT(PyDottedNameTree.class),
+    IMPORT_STMT(DottedName.class),
 
-    LAMBDA(PyLambdaExpressionTree.class),
+    LAMBDA(LambdaExpression.class),
 
-    LIST_LITERAL(PyListLiteralTree.class),
+    LIST_LITERAL(ListLiteral.class),
 
-    NAME(PyNameTree.class),
+    NAME(Name.class),
 
-    NONLOCAL_STMT(PyNonlocalStatementTree.class),
+    NONLOCAL_STMT(NonlocalStatement.class),
 
-    NONE(PyNoneExpressionTree.class),
+    NONE(NoneExpression.class),
 
-    NUMERIC_LITERAL(PyNumericLiteralTree.class),
+    NUMERIC_LITERAL(NumericLiteral.class),
 
-    PASS_STMT(PyPassStatementTree.class),
+    PASS_STMT(PassStatement.class),
 
-    PRINT_STMT(PyPrintStatementTree.class),
+    PRINT_STMT(PrintStatement.class),
 
-    QUALIFIED_EXPR(PyQualifiedExpressionTree.class),
+    QUALIFIED_EXPR(QualifiedExpression.class),
 
-    RAISE_STMT(PyRaiseStatementTree.class),
+    RAISE_STMT(RaiseStatement.class),
 
-    REPR(PyReprExpressionTree.class),
+    REPR(ReprExpression.class),
 
-    RETURN_STMT(PyReturnStatementTree.class),
+    RETURN_STMT(ReturnStatement.class),
 
-    SET_LITERAL(PySetLiteralTree.class),
+    SET_LITERAL(SetLiteral.class),
 
-    STATEMENT_LIST(PyStatementListTree.class),
+    STATEMENT_LIST(StatementList.class),
 
-    STRING_LITERAL(PyStringLiteralTree.class),
+    STRING_LITERAL(StringLiteral.class),
 
-    STRING_ELEMENT(PyStringElementTree.class),
+    STRING_ELEMENT(StringElement.class),
 
-    TRY_STMT(PyTryStatementTree.class),
+    TRY_STMT(TryStatement.class),
 
-    PARAMETER(PyParameterTree.class),
+    PARAMETER(Parameter.class),
 
-    TUPLE_PARAMETER(PyTupleParameterTree.class),
+    TUPLE_PARAMETER(TupleParameter.class),
 
-    TYPE_ANNOTATION(PyTypeAnnotationTree.class),
-    RETURN_TYPE_ANNOTATION(PyTypeAnnotationTree.class),
+    TYPE_ANNOTATION(TypeAnnotation.class),
+    RETURN_TYPE_ANNOTATION(TypeAnnotation.class),
 
-    PARAMETER_LIST(PyParameterListTree.class),
+    PARAMETER_LIST(ParameterList.class),
 
-    WHILE_STMT(PyWhileStatementTree.class),
+    WHILE_STMT(WhileStatement.class),
 
-    WITH_ITEM(PyWithItemTree.class),
+    WITH_ITEM(WithItem.class),
 
-    WITH_STMT(PyWithStatementTree.class),
+    WITH_STMT(WithStatement.class),
 
-    YIELD_EXPR(PyYieldExpressionTree.class),
+    YIELD_EXPR(YieldExpression.class),
 
-    YIELD_STMT(PyYieldStatementTree.class),
+    YIELD_STMT(YieldStatement.class),
 
-    PARENTHESIZED(PyParenthesizedExpressionTree.class),
+    PARENTHESIZED(ParenthesizedExpression.class),
 
-    STARRED_EXPR(PyStarredExpressionTree.class),
+    STARRED_EXPR(StarredExpression.class),
 
-    AWAIT(PyAwaitExpressionTree.class),
+    AWAIT(AwaitExpression.class),
 
-    TUPLE(PyTupleTree.class),
+    TUPLE(Tuple.class),
 
-    DICT_COMPREHENSION(PyDictCompExpressionTree.class),
-    LIST_COMPREHENSION(PyComprehensionExpressionTree.class),
-    SET_COMPREHENSION(PyComprehensionExpressionTree.class),
-    GENERATOR_EXPR(PyComprehensionExpressionTree.class),
-    COMP_FOR(PyComprehensionForTree.class),
-    COMP_IF(PyComprehensionIfTree.class),
+    DICT_COMPREHENSION(DictCompExpression.class),
+    LIST_COMPREHENSION(ComprehensionExpression.class),
+    SET_COMPREHENSION(ComprehensionExpression.class),
+    GENERATOR_EXPR(ComprehensionExpression.class),
+    COMP_FOR(ComprehensionFor.class),
+    COMP_IF(ComprehensionIf.class),
 
-    SUBSCRIPTION(PySubscriptionExpressionTree.class),
+    SUBSCRIPTION(SubscriptionExpression.class),
 
-    SLICE_EXPR(PySliceExpressionTree.class),
-    SLICE_LIST(PySliceListTree.class),
-    SLICE_ITEM(PySliceItemTree.class),
+    SLICE_EXPR(SliceExpression.class),
+    SLICE_LIST(SliceList.class),
+    SLICE_ITEM(SliceItem.class),
 
-    PLUS(PyBinaryExpressionTree.class),
-    MINUS(PyBinaryExpressionTree.class),
-    MULTIPLICATION(PyBinaryExpressionTree.class),
-    DIVISION(PyBinaryExpressionTree.class),
-    FLOOR_DIVISION(PyBinaryExpressionTree.class),
-    MODULO(PyBinaryExpressionTree.class),
-    MATRIX_MULTIPLICATION(PyBinaryExpressionTree.class),
-    SHIFT_EXPR(PyBinaryExpressionTree.class),
-    BITWISE_AND(PyBinaryExpressionTree.class),
-    BITWISE_OR(PyBinaryExpressionTree.class),
-    BITWISE_XOR(PyBinaryExpressionTree.class),
-    AND(PyBinaryExpressionTree.class),
-    OR(PyBinaryExpressionTree.class),
-    COMPARISON(PyBinaryExpressionTree.class),
-    POWER(PyBinaryExpressionTree.class),
-    IN(PyInExpressionTree.class),
-    IS(PyIsExpressionTree.class),
+    PLUS(BinaryExpression.class),
+    MINUS(BinaryExpression.class),
+    MULTIPLICATION(BinaryExpression.class),
+    DIVISION(BinaryExpression.class),
+    FLOOR_DIVISION(BinaryExpression.class),
+    MODULO(BinaryExpression.class),
+    MATRIX_MULTIPLICATION(BinaryExpression.class),
+    SHIFT_EXPR(BinaryExpression.class),
+    BITWISE_AND(BinaryExpression.class),
+    BITWISE_OR(BinaryExpression.class),
+    BITWISE_XOR(BinaryExpression.class),
+    AND(BinaryExpression.class),
+    OR(BinaryExpression.class),
+    COMPARISON(BinaryExpression.class),
+    POWER(BinaryExpression.class),
+    IN(InExpression.class),
+    IS(IsExpression.class),
 
-    UNARY_PLUS(PyUnaryExpressionTree.class),
-    UNARY_MINUS(PyUnaryExpressionTree.class),
-    BITWISE_COMPLEMENT(PyUnaryExpressionTree.class),
-    NOT(PyUnaryExpressionTree.class),
+    UNARY_PLUS(UnaryExpression.class),
+    UNARY_MINUS(UnaryExpression.class),
+    BITWISE_COMPLEMENT(UnaryExpression.class),
+    NOT(UnaryExpression.class),
 
-    KEY_VALUE_PAIR(PyKeyValuePairTree.class),
-    TOKEN(PyToken.class);
+    KEY_VALUE_PAIR(KeyValuePair.class),
+    TOKEN(Token.class);
     final Class<? extends Tree> associatedInterface;
 
     Kind(Class<? extends Tree> associatedInterface) {

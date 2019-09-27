@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStatementTree;
-import org.sonar.python.api.tree.PyToken;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -38,8 +38,8 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STATEMENT_LIST, ctx -> {
-      PyStatementListTree statementListTree = (PyStatementListTree) ctx.syntaxNode();
-      List<PyStatementTree> nonPassStatements = statementListTree.statements().stream()
+      StatementList statementListTree = (StatementList) ctx.syntaxNode();
+      List<Statement> nonPassStatements = statementListTree.statements().stream()
         .filter(stmt -> !stmt.is(Kind.PASS_STMT))
         .collect(Collectors.toList());
       if (!nonPassStatements.isEmpty()) {
@@ -59,8 +59,8 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean containsComment(List<PyToken> tokens) {
-    for (PyToken token : tokens) {
+  private static boolean containsComment(List<Token> tokens) {
+    for (Token token : tokens) {
       for (Trivia trivia : token.trivia()) {
         if (trivia.isComment()) {
           return true;

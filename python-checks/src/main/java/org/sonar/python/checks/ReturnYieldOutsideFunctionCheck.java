@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = ReturnYieldOutsideFunctionCheck.CHECK_KEY)
@@ -32,7 +32,7 @@ public class ReturnYieldOutsideFunctionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Remove this use of \"%s\".";
   public static final String CHECK_KEY = "S2711";
   private static final Consumer<SubscriptionContext> SUBSCRIPTION_CONTEXT_CONSUMER = ctx -> {
-    PyStatementTree returnStatement = (PyStatementTree) ctx.syntaxNode();
+    Statement returnStatement = (Statement) ctx.syntaxNode();
     Tree currentParent = returnStatement.parent();
     while (currentParent != null) {
       if (currentParent.is(Tree.Kind.FUNCDEF)) {

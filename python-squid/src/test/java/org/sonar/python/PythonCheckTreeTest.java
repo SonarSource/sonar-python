@@ -23,8 +23,8 @@ import java.io.File;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.tree.PyFunctionDefTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Name;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,9 +43,9 @@ public class PythonCheckTreeTest {
   public void test() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
-      public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
         super.visitFunctionDef(pyFunctionDefTree);
-        PyNameTree name = pyFunctionDefTree.name();
+        Name name = pyFunctionDefTree.name();
         addIssue(name, name.firstToken().value());
       }
     };
@@ -71,9 +71,9 @@ public class PythonCheckTreeTest {
   public void test_cost() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
-      public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
         super.visitFunctionDef(pyFunctionDefTree);
-        PyNameTree name = pyFunctionDefTree.name();
+        Name name = pyFunctionDefTree.name();
         addIssue(name.firstToken(), MESSAGE).withCost(42);
       }
     };

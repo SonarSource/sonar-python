@@ -25,7 +25,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.metrics.CognitiveComplexityVisitor;
 
@@ -45,7 +45,7 @@ public class CognitiveComplexityFunctionCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      PyFunctionDefTree functionDef = (PyFunctionDefTree) ctx.syntaxNode();
+      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (isInnerFunction(functionDef)) {
         return;
       }
@@ -60,7 +60,7 @@ public class CognitiveComplexityFunctionCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isInnerFunction(PyFunctionDefTree functionDef) {
+  private static boolean isInnerFunction(FunctionDef functionDef) {
     Tree parent = functionDef.parent();
     while (parent != null) {
       if (parent.is(Tree.Kind.FUNCDEF)) {

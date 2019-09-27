@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyExpressionStatementTree;
-import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.ExpressionStatement;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Statement;
 
 import static org.sonar.python.api.tree.Tree.Kind.EXPRESSION_STMT;
 import static org.sonar.python.api.tree.Tree.Kind.PASS_STMT;
@@ -40,7 +40,7 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(STATEMENT_LIST, ctx -> {
-      List<PyStatementTree> statements = ((PyStatementListTree) ctx.syntaxNode()).statements().stream()
+      List<Statement> statements = ((StatementList) ctx.syntaxNode()).statements().stream()
         .filter(NeedlessPassCheck::isNotStringLiteralExpressionStatement)
         .collect(Collectors.toList());
       if (statements.size() <= 1) {
@@ -53,8 +53,8 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isNotStringLiteralExpressionStatement(PyStatementTree st) {
-    return !(st.is(EXPRESSION_STMT) && ((PyExpressionStatementTree) st).expressions().stream().allMatch(e -> e.is(STRING_LITERAL)));
+  private static boolean isNotStringLiteralExpressionStatement(Statement st) {
+    return !(st.is(EXPRESSION_STMT) && ((ExpressionStatement) st).expressions().stream().allMatch(e -> e.is(STRING_LITERAL)));
   }
 }
 

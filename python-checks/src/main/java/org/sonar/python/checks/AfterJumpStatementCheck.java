@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyStatementListTree;
-import org.sonar.python.api.tree.PyStatementTree;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = "S1763")
@@ -45,8 +45,8 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STATEMENT_LIST, ctx -> {
-      List<PyStatementTree> statements = ((PyStatementListTree) ctx.syntaxNode()).statements();
-      for (PyStatementTree statement: statements.subList(0, statements.size() - 1)) {
+      List<Statement> statements = ((StatementList) ctx.syntaxNode()).statements();
+      for (Statement statement: statements.subList(0, statements.size() - 1)) {
         String jumpKeyword = JUMP_KEYWORDS_BY_KIND.get(statement.getKind());
         if (jumpKeyword != null) {
           ctx.addIssue(statement, String.format("Remove the code after this \"%s\".", jumpKeyword));

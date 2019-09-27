@@ -30,8 +30,8 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.BaseTreeVisitor;
@@ -44,7 +44,7 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      ClassDef classDef = (ClassDef) ctx.syntaxNode();
       Set<Symbol> allFields = new HashSet<>(classDef.classFields());
       allFields.addAll(classDef.instanceFields());
       MethodVisitor methodVisitor = new MethodVisitor();
@@ -62,12 +62,12 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
     private List<Tree> methodNames = new ArrayList<>();
 
     @Override
-    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       methodNames.add(pyFunctionDefTree.name());
     }
 
     @Override
-    public void visitClassDef(PyClassDefTree pyClassDefTree) {
+    public void visitClassDef(ClassDef pyClassDefTree) {
       // skip nested class definition
     }
   }

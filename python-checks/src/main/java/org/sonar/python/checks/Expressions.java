@@ -23,14 +23,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyDictionaryLiteralTree;
-import org.sonar.python.api.tree.PyExpressionTree;
-import org.sonar.python.api.tree.PyListLiteralTree;
-import org.sonar.python.api.tree.PyNameTree;
-import org.sonar.python.api.tree.PyNumericLiteralTree;
-import org.sonar.python.api.tree.PyStringLiteralTree;
-import org.sonar.python.api.tree.PyTupleTree;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.DictionaryLiteral;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.ListLiteral;
+import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.NumericLiteral;
+import org.sonar.python.api.tree.StringLiteral;
+import org.sonar.python.api.tree.Tuple;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
@@ -44,36 +44,36 @@ public class Expressions {
   }
 
   // https://docs.python.org/3/library/stdtypes.html#truth-value-testing
-  public static boolean isFalsy(@Nullable PyExpressionTree expression) {
+  public static boolean isFalsy(@Nullable Expression expression) {
     if (expression == null) {
       return false;
     }
     switch (expression.getKind()) {
       case NAME: 
-        return "False".equals(((PyNameTree) expression).name());
+        return "False".equals(((Name) expression).name());
       case NONE:
         return true;
       case STRING_LITERAL:
-        return ((PyStringLiteralTree) expression).trimmedQuotesValue().isEmpty();
+        return ((StringLiteral) expression).trimmedQuotesValue().isEmpty();
       case NUMERIC_LITERAL:
-        return ZERO_VALUES.contains(((PyNumericLiteralTree) expression).valueAsString());
+        return ZERO_VALUES.contains(((NumericLiteral) expression).valueAsString());
       case LIST_LITERAL:
-        return ((PyListLiteralTree) expression).elements().expressions().isEmpty();
+        return ((ListLiteral) expression).elements().expressions().isEmpty();
       case TUPLE:
-        return ((PyTupleTree) expression).elements().isEmpty();
+        return ((Tuple) expression).elements().isEmpty();
       case DICTIONARY_LITERAL:
-        return ((PyDictionaryLiteralTree) expression).elements().isEmpty();
+        return ((DictionaryLiteral) expression).elements().isEmpty();
       default:
         return false;
     }
   }
 
-  public static PyExpressionTree singleAssignedValue(PyNameTree name) {
+  public static Expression singleAssignedValue(Name name) {
     Symbol symbol = name.symbol();
     if (symbol == null) {
       return null;
     }
-    PyExpressionTree result = null;
+    Expression result = null;
     for (Usage usage : symbol.usages()) {
       if (usage.kind() == Usage.Kind.ASSIGNMENT_LHS) {
         if (result != null) {
@@ -81,7 +81,7 @@ public class Expressions {
         }
         Tree parent = usage.tree().parent();
         if (parent.is(Kind.EXPRESSION_LIST) && parent.parent().is(Kind.ASSIGNMENT_STMT)) {
-          result = ((PyAssignmentStatementTree) parent.parent()).assignedValue();
+          result = ((AssignmentStatement) parent.parent()).assignedValue();
         } else {
           return null;
         }

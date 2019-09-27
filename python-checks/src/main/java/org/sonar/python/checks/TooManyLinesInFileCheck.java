@@ -23,7 +23,7 @@ import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.PyFileInputTree;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
@@ -55,7 +55,7 @@ public class TooManyLinesInFileCheck extends PythonSubscriptionCheck {
     private int numberOfLines = 0;
 
     @Override
-    public void visitFileInput(PyFileInputTree fileInput) {
+    public void visitFileInput(FileInput fileInput) {
       if (fileInput.statements() != null) {
         numberOfLines = fileInput.statements().tokens().get(fileInput.statements().tokens().size() - 1).line();
       }

@@ -21,8 +21,8 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.tree.PyClassDefTree;
-import org.sonar.python.api.tree.PyNameTree;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = ClassNameCheck.CHECK_KEY)
@@ -45,8 +45,8 @@ public class ClassNameCheck extends AbstractNameCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
-      PyClassDefTree pyClassDefTree = (PyClassDefTree) ctx.syntaxNode();
-      PyNameTree classNameTree = pyClassDefTree.name();
+      ClassDef pyClassDefTree = (ClassDef) ctx.syntaxNode();
+      Name classNameTree = pyClassDefTree.name();
       String className = classNameTree.name();
       if(!pattern().matcher(className).matches()) {
         String message = String.format(MESSAGE, className, format);

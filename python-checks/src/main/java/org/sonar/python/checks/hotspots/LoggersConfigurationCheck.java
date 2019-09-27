@@ -25,11 +25,11 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.PyArgListTree;
-import org.sonar.python.api.tree.PyArgumentTree;
-import org.sonar.python.api.tree.PyAssignmentStatementTree;
-import org.sonar.python.api.tree.PyCallExpressionTree;
-import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.ArgList;
+import org.sonar.python.api.tree.Argument;
+import org.sonar.python.api.tree.AssignmentStatement;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -53,23 +53,23 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      PyCallExpressionTree callExpressionTree = (PyCallExpressionTree) ctx.syntaxNode();
+      CallExpression callExpressionTree = (CallExpression) ctx.syntaxNode();
       Symbol symbol = callExpressionTree.calleeSymbol();
       if (symbol != null && FUNCTIONS_TO_CHECK.contains(symbol.fullyQualifiedName())) {
         ctx.addIssue(callExpressionTree, MESSAGE);
       }
     });
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> isSettingLastResort(ctx, (PyAssignmentStatementTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> isSettingLastResort(ctx, (AssignmentStatement) ctx.syntaxNode()));
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> isClassExtendingLogger(ctx, (PyClassDefTree) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> isClassExtendingLogger(ctx, (ClassDef) ctx.syntaxNode()));
   }
 
-  private static void isClassExtendingLogger(SubscriptionContext ctx, PyClassDefTree classDef) {
-    PyArgListTree argList = classDef.args();
+  private static void isClassExtendingLogger(SubscriptionContext ctx, ClassDef classDef) {
+    ArgList argList = classDef.args();
     if (argList != null) {
       argList.arguments().stream()
-        .map(PyArgumentTree::expression)
+        .map(Argument::expression)
         .filter(expr -> expr instanceof HasSymbol && ((HasSymbol) expr).symbol() != null)
         .filter(expr -> LOGGERS_CLASSES.contains(((HasSymbol) expr).symbol().fullyQualifiedName()))
         .forEach(expr -> ctx.addIssue(expr, MESSAGE));
@@ -77,7 +77,7 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
   }
 
   // check if logging.lastResort is being set
-  private static void isSettingLastResort(SubscriptionContext ctx, PyAssignmentStatementTree assignment) {
+  private static void isSettingLastResort(SubscriptionContext ctx, AssignmentStatement assignment) {
     assignment.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
       .forEach(expr -> {

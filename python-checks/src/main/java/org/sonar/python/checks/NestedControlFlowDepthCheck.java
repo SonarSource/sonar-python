@@ -27,12 +27,12 @@ import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheckTree;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.tree.PyForStatementTree;
-import org.sonar.python.api.tree.PyIfStatementTree;
-import org.sonar.python.api.tree.PyToken;
-import org.sonar.python.api.tree.PyTryStatementTree;
-import org.sonar.python.api.tree.PyWhileStatementTree;
-import org.sonar.python.api.tree.PyWithStatementTree;
+import org.sonar.python.api.tree.ForStatement;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.TryStatement;
+import org.sonar.python.api.tree.WhileStatement;
+import org.sonar.python.api.tree.WithStatement;
 
 @Rule(key = "S134")
 public class NestedControlFlowDepthCheck extends PythonCheckTree {
@@ -45,7 +45,7 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
     defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 
-  private Deque<PyToken> depthNodes = new ArrayDeque<>();
+  private Deque<Token> depthNodes = new ArrayDeque<>();
 
   @Override
   public void scanFile(PythonVisitorContext visitorContext) {
@@ -54,8 +54,8 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
   }
 
   @Override
-  public void visitIfStatement(PyIfStatementTree pyIfStatementTree) {
-    PyToken keyword = pyIfStatementTree.keyword();
+  public void visitIfStatement(IfStatement pyIfStatementTree) {
+    Token keyword = pyIfStatementTree.keyword();
     boolean isIFKeyword = keyword.type().equals(PythonKeyword.IF);
     if (isIFKeyword) {
       depthNodes.push(keyword);
@@ -68,7 +68,7 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
   }
 
   @Override
-  public void visitForStatement(PyForStatementTree pyForStatementTree) {
+  public void visitForStatement(ForStatement pyForStatementTree) {
     depthNodes.push(pyForStatementTree.forKeyword());
     checkNode();
     super.visitForStatement(pyForStatementTree);
@@ -76,7 +76,7 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
   }
 
   @Override
-  public void visitWhileStatement(PyWhileStatementTree pyWhileStatementTree) {
+  public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
     depthNodes.push(pyWhileStatementTree.whileKeyword());
     checkNode();
     super.visitWhileStatement(pyWhileStatementTree);
@@ -84,7 +84,7 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
   }
 
   @Override
-  public void visitTryStatement(PyTryStatementTree pyTryStatementTree) {
+  public void visitTryStatement(TryStatement pyTryStatementTree) {
     depthNodes.push(pyTryStatementTree.tryKeyword());
     checkNode();
     super.visitTryStatement(pyTryStatementTree);
@@ -92,7 +92,7 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
   }
 
   @Override
-  public void visitWithStatement(PyWithStatementTree pyWithStatementTree) {
+  public void visitWithStatement(WithStatement pyWithStatementTree) {
     depthNodes.push(pyWithStatementTree.firstToken());
     checkNode();
     super.visitWithStatement(pyWithStatementTree);
@@ -101,10 +101,10 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
 
   private void checkNode() {
     if (depthNodes.size() == max + 1) {
-      PyToken lastToken = depthNodes.peek();
+      Token lastToken = depthNodes.peek();
       PreciseIssue issue = addIssue(lastToken, String.format(MESSAGE, max));
 
-      Iterator<PyToken> depthNodesIterator = depthNodes.iterator();
+      Iterator<Token> depthNodesIterator = depthNodes.iterator();
 
       // skip current node
       depthNodesIterator.next();
