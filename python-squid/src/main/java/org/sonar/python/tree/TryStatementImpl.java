@@ -38,16 +38,24 @@ import org.sonar.python.api.tree.Tree;
 
 public class TryStatementImpl extends PyTree implements TryStatement {
   private final Token tryKeyword;
+  private final Token colon;
+  private final Token newLine;
+  private final Token indent;
   private final StatementList tryBody;
+  private final Token dedent;
   private final List<ExceptClause> exceptClauses;
   private final FinallyClause finallyClause;
   private final ElseStatement elseStatement;
 
-  public TryStatementImpl(AstNode astNode, Token tryKeyword, StatementList tryBody, List<ExceptClause> exceptClauses,
-                          @Nullable FinallyClause finallyClause, @Nullable ElseStatement elseStatement) {
+  public TryStatementImpl(AstNode astNode, Token tryKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList tryBody,
+                          @Nullable Token dedent, List<ExceptClause> exceptClauses, @Nullable FinallyClause finallyClause, @Nullable ElseStatement elseStatement) {
     super(astNode);
     this.tryKeyword = tryKeyword;
+    this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.tryBody = tryBody;
+    this.dedent = dedent;
     this.exceptClauses = exceptClauses;
     this.finallyClause = finallyClause;
     this.elseStatement = elseStatement;
@@ -92,7 +100,7 @@ public class TryStatementImpl extends PyTree implements TryStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Arrays.asList(tryKeyword, tryBody), exceptClauses, Arrays.asList(finallyClause, elseStatement))
+    return Stream.of(Arrays.asList(tryKeyword, colon, newLine, indent, tryBody, dedent), exceptClauses, Arrays.asList(finallyClause, elseStatement))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

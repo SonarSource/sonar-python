@@ -664,14 +664,16 @@ public class PythonTreeMakerTest extends RuleTest {
   public void globalStatement() {
     setRootRule(PythonGrammar.GLOBAL_STMT);
     AstNode astNode = p.parse("global foo");
-    GlobalStatement globalStatement = treeMaker.globalStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    GlobalStatement globalStatement = treeMaker.globalStatement(statementWithSeparator);
     assertThat(globalStatement.globalKeyword().value()).isEqualTo("global");
     assertThat(globalStatement.variables()).hasSize(1);
     assertThat(globalStatement.variables().get(0).name()).isEqualTo("foo");
     assertThat(globalStatement.children()).hasSize(2);
 
     astNode = p.parse("global foo, bar");
-    globalStatement = treeMaker.globalStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    globalStatement = treeMaker.globalStatement(statementWithSeparator);
     assertThat(globalStatement.globalKeyword().value()).isEqualTo("global");
     assertThat(globalStatement.variables()).hasSize(2);
     assertThat(globalStatement.variables().get(0).name()).isEqualTo("foo");
@@ -683,14 +685,16 @@ public class PythonTreeMakerTest extends RuleTest {
   public void nonlocalStatement() {
     setRootRule(PythonGrammar.NONLOCAL_STMT);
     AstNode astNode = p.parse("nonlocal foo");
-    NonlocalStatement nonlocalStatement = treeMaker.nonlocalStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    NonlocalStatement nonlocalStatement = treeMaker.nonlocalStatement(statementWithSeparator);
     assertThat(nonlocalStatement.nonlocalKeyword().value()).isEqualTo("nonlocal");
     assertThat(nonlocalStatement.variables()).hasSize(1);
     assertThat(nonlocalStatement.variables().get(0).name()).isEqualTo("foo");
     assertThat(nonlocalStatement.children()).hasSize(2);
 
     astNode = p.parse("nonlocal foo, bar");
-    nonlocalStatement = treeMaker.nonlocalStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    nonlocalStatement = treeMaker.nonlocalStatement(statementWithSeparator);
     assertThat(nonlocalStatement.nonlocalKeyword().value()).isEqualTo("nonlocal");
     assertThat(nonlocalStatement.variables()).hasSize(2);
     assertThat(nonlocalStatement.variables().get(0).name()).isEqualTo("foo");
@@ -1075,7 +1079,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tryStatement.exceptClauses().get(0).lastToken().value()).isEqualTo("pass");
     assertThat(tryStatement.exceptClauses().get(0).exceptKeyword().value()).isEqualTo("except");
     assertThat(tryStatement.exceptClauses().get(0).body().statements()).hasSize(1);
-    assertThat(tryStatement.children()).hasSize(3);
+    assertThat(tryStatement.children()).hasSize(4);
 
 
     astNode = p.parse("try: pass\nexcept Error: pass\nexcept Error: pass");
@@ -1084,7 +1088,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tryStatement.elseClause()).isNull();
     assertThat(tryStatement.finallyClause()).isNull();
     assertThat(tryStatement.exceptClauses()).hasSize(2);
-    assertThat(tryStatement.children()).hasSize(4);
+    assertThat(tryStatement.children()).hasSize(5);
 
     astNode = p.parse("try: pass\nexcept Error: pass\nfinally: pass");
     tryStatement = treeMaker.tryStatement(astNode);
@@ -1096,7 +1100,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tryStatement.finallyClause().lastToken().value()).isEqualTo("pass");
     assertThat(tryStatement.finallyClause().finallyKeyword().value()).isEqualTo("finally");
     assertThat(tryStatement.finallyClause().body().statements()).hasSize(1);
-    assertThat(tryStatement.children()).hasSize(4);
+    assertThat(tryStatement.children()).hasSize(5);
 
     astNode = p.parse("try: pass\nexcept Error: pass\nelse: pass");
     tryStatement = treeMaker.tryStatement(astNode);
@@ -1107,7 +1111,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tryStatement.elseClause().firstToken().value()).isEqualTo("else");
     assertThat(tryStatement.elseClause().lastToken().value()).isEqualTo("pass");
     assertThat(tryStatement.elseClause().body().statements()).hasSize(1);
-    assertThat(tryStatement.children()).hasSize(4);
+    assertThat(tryStatement.children()).hasSize(5);
 
     astNode = p.parse("try: pass\nexcept Error as e: pass");
     tryStatement = treeMaker.tryStatement(astNode);
@@ -1117,7 +1121,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(exceptClause.asKeyword().value()).isEqualTo("as");
     assertThat(exceptClause.commaToken()).isNull();
     assertThat(exceptClause.exceptionInstance()).isNotNull();
-    assertThat(tryStatement.children()).hasSize(3);
+    assertThat(tryStatement.children()).hasSize(4);
 
     astNode = p.parse("try: pass\nexcept Error, e: pass");
     tryStatement = treeMaker.tryStatement(astNode);
@@ -1127,7 +1131,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(exceptClause.asKeyword()).isNull();
     assertThat(exceptClause.commaToken().value()).isEqualTo(",");
     assertThat(exceptClause.exceptionInstance()).isNotNull();
-    assertThat(tryStatement.children()).hasSize(3);
+    assertThat(tryStatement.children()).hasSize(4);
   }
 
   @Test

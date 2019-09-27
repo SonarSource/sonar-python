@@ -172,10 +172,10 @@ public class PythonTreeMaker {
       return whileStatement(astNode);
     }
     if (astNode.is(PythonGrammar.GLOBAL_STMT)) {
-      return globalStatement(astNode);
+      return globalStatement(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.NONLOCAL_STMT)) {
-      return nonlocalStatement(astNode);
+      return nonlocalStatement(statementWithSeparator);
     }
     if (astNode.is(PythonGrammar.EXPRESSION_STMT) && astNode.hasDirectChildren(PythonGrammar.ANNASSIGN)) {
       return annotatedAssignment(statementWithSeparator);
@@ -447,20 +447,24 @@ public class PythonTreeMaker {
     return new DottedNameImpl(astNode, names);
   }
 
-  public GlobalStatement globalStatement(AstNode astNode) {
+  public GlobalStatement globalStatement(StatementWithSeparator statementWithSeparator) {
+    AstNode astNode = statementWithSeparator.statement();
+    Token separator = statementWithSeparator.separator() == null ? null : toPyToken(statementWithSeparator.separator().getToken());
     Token globalKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.GLOBAL).getToken());
     List<Name> variables = astNode.getChildren(PythonGrammar.NAME).stream()
       .map(PythonTreeMaker::name)
       .collect(Collectors.toList());
-    return new GlobalStatementImpl(astNode, globalKeyword, variables);
+    return new GlobalStatementImpl(astNode, globalKeyword, variables, separator);
   }
 
-  public NonlocalStatement nonlocalStatement(AstNode astNode) {
+  public NonlocalStatement nonlocalStatement(StatementWithSeparator statementWithSeparator) {
+    AstNode astNode = statementWithSeparator.statement();
+    Token separator = statementWithSeparator.separator() == null ? null : toPyToken(statementWithSeparator.separator().getToken());
     Token nonlocalKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.NONLOCAL).getToken());
     List<Name> variables = astNode.getChildren(PythonGrammar.NAME).stream()
       .map(PythonTreeMaker::name)
       .collect(Collectors.toList());
-    return new NonlocalStatementImpl(astNode, nonlocalKeyword, variables);
+    return new NonlocalStatementImpl(astNode, nonlocalKeyword, variables, separator);
   }
   // Compound statements
 
@@ -709,7 +713,12 @@ public class PythonTreeMaker {
 
   public TryStatement tryStatement(AstNode astNode) {
     Token tryKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.TRY).getToken());
-    StatementList tryBody = getStatementListFromSuite(astNode.getFirstChild(PythonGrammar.SUITE));
+    Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
+    AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
+    Token indent = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.INDENT).getToken());
+    Token newLine = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
+    Token dedent = firstSuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.DEDENT).getToken());
+    StatementList tryBody = getStatementListFromSuite(firstSuite);
     List<ExceptClause> exceptClauseTrees = astNode.getChildren(PythonGrammar.EXCEPT_CLAUSE).stream()
       .map(except -> {
         AstNode suite = except.getNextSibling().getNextSibling();
@@ -719,16 +728,20 @@ public class PythonTreeMaker {
     FinallyClause finallyClause = null;
     AstNode finallyNode = astNode.getFirstChild(PythonKeyword.FINALLY);
     if (finallyNode != null) {
+      Token finallyColon = toPyToken(finallyNode.getNextSibling().getToken());
       AstNode finallySuite = finallyNode.getNextSibling().getNextSibling();
       StatementList body = getStatementListFromSuite(finallySuite);
-      finallyClause = new FinallyClauseImpl(toPyToken(finallyNode.getToken()), body);
+      Token finallyIndent = finallySuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(finallySuite.getFirstChild(PythonTokenType.INDENT).getToken());
+      Token finallyNewLine = finallySuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(finallySuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
+      Token finallyDedent = finallySuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(finallySuite.getFirstChild(PythonTokenType.DEDENT).getToken());
+      finallyClause = new FinallyClauseImpl(toPyToken(finallyNode.getToken()), finallyColon, finallyNewLine, finallyIndent, body, finallyDedent);
     }
     ElseStatement elseStatementTree = null;
     AstNode elseNode = astNode.getFirstChild(PythonKeyword.ELSE);
     if (elseNode != null) {
       elseStatementTree = elseStatement(elseNode.getNextSibling().getNextSibling());
     }
-    return new TryStatementImpl(astNode, tryKeyword, tryBody, exceptClauseTrees, finallyClause, elseStatementTree);
+    return new TryStatementImpl(astNode, tryKeyword, colon, newLine, indent, tryBody, dedent, exceptClauseTrees, finallyClause, elseStatementTree);
   }
 
   public WithStatement withStatement(AstNode astNode) {
@@ -763,10 +776,15 @@ public class PythonTreeMaker {
   }
 
   private ExceptClause exceptClause(AstNode except, StatementList body) {
+    Token colon = toPyToken(except.getNextSibling().getToken());
+    AstNode suite = except.getNextSibling().getNextSibling();
     Token exceptKeyword = toPyToken(except.getFirstChild(PythonKeyword.EXCEPT).getToken());
+    Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
+    Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
+    Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
     AstNode exceptionNode = except.getFirstChild(PythonGrammar.TEST);
     if (exceptionNode == null) {
-      return new ExceptClauseImpl(exceptKeyword, body);
+      return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent);
     }
     AstNode asNode = except.getFirstChild(PythonKeyword.AS);
     AstNode commaNode = except.getFirstChild(PythonPunctuator.COMMA);
@@ -774,9 +792,9 @@ public class PythonTreeMaker {
       Expression exceptionInstance = expression(except.getLastChild(PythonGrammar.TEST));
       Token asNodeToken = asNode != null ? toPyToken(asNode.getToken()) : null;
       Token commaNodeToken = commaNode != null ? toPyToken(commaNode.getToken()) : null;
-      return new ExceptClauseImpl(exceptKeyword, body, expression(exceptionNode), asNodeToken, commaNodeToken, exceptionInstance);
+      return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent, expression(exceptionNode), asNodeToken, commaNodeToken, exceptionInstance);
     }
-    return new ExceptClauseImpl(exceptKeyword, body, expression(exceptionNode));
+    return new ExceptClauseImpl(exceptKeyword, colon, newLine, indent, body, dedent, expression(exceptionNode));
   }
 
   // expressions

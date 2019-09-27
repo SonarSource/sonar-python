@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
@@ -31,12 +32,20 @@ import org.sonar.python.api.tree.Tree;
 
 public class FinallyClauseImpl extends PyTree implements FinallyClause {
   private final Token finallyKeyword;
+  private final Token colon;
+  private final Token newLine;
+  private final Token indent;
   private final StatementList body;
+  private final Token dedent;
 
-  public FinallyClauseImpl(Token finallyKeyword, StatementList body) {
+  public FinallyClauseImpl(Token finallyKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent) {
     super(finallyKeyword, body.lastToken());
     this.finallyKeyword = finallyKeyword;
+    this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.body = body;
+    this.dedent = dedent;
   }
 
   @Override
@@ -61,6 +70,6 @@ public class FinallyClauseImpl extends PyTree implements FinallyClause {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(finallyKeyword, body).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(finallyKeyword, colon, newLine, indent, body, dedent).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
