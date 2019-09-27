@@ -38,21 +38,34 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
   private final Token whileKeyword;
   private final Expression condition;
   private final Token colon;
+  private final Token firstNewline;
+  private final Token firstIndent;
   private final StatementList body;
+  private final Token firstDedent;
   private final Token elseKeyword;
   private final Token elseColon;
+  private final Token lastNewLine;
+  private final Token lastIndent;
   private final StatementList elseBody;
+  private final Token lastDedent;
 
-  public WhileStatementImpl(AstNode astNode, Token whileKeyword, Expression condition, Token colon, StatementList body,
-                            @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable StatementList elseBody) {
+  public WhileStatementImpl(AstNode astNode, Token whileKeyword, Expression condition, Token colon, @Nullable Token firstNewline,
+                            @Nullable Token firstIndent, StatementList body, @Nullable Token firstDedent, @Nullable Token elseKeyword, @Nullable Token elseColon,
+                            @Nullable Token lastNewLine, @Nullable Token lastIndent, @Nullable StatementList elseBody, @Nullable Token lastDedent) {
     super(astNode);
     this.whileKeyword = whileKeyword;
     this.condition = condition;
     this.colon = colon;
+    this.firstNewline = firstNewline;
+    this.firstIndent = firstIndent;
     this.body = body;
+    this.firstDedent = firstDedent;
     this.elseKeyword = elseKeyword;
     this.elseColon = elseColon;
+    this.lastNewLine = lastNewLine;
+    this.lastIndent = lastIndent;
     this.elseBody = elseBody;
+    this.lastDedent = lastDedent;
   }
 
   @Override
@@ -105,7 +118,7 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(whileKeyword, condition, colon, body, elseKeyword, elseColon, elseBody).filter(Objects::nonNull)
+    return Stream.of(whileKeyword, condition, colon, firstNewline, firstIndent, body, firstDedent, elseKeyword, elseColon, lastNewLine, lastIndent, elseBody, lastDedent).filter(Objects::nonNull)
       .collect(Collectors.toList());
   }
 }

@@ -168,13 +168,17 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void import_statement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
-    ImportFrom tree = (ImportFrom) parse("from foo import f as g", treeMaker::importStatement);
+    AstNode astNode = p.parse("from foo import f as g");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ImportFrom tree = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitImportFrom(tree);
     verify(visitor).visitAliasedName(tree.importedNames().get(0));
     verify(visitor).visitDottedName(tree.module());
 
-    ImportName pyTree = (ImportName) parse("import f as g", treeMaker::importStatement);
+    astNode = p.parse("import f as g");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ImportName pyTree = (ImportName) treeMaker.importStatement(statementWithSeparator);
     visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitImportName(pyTree);
     verify(visitor).visitAliasedName(pyTree.modules().get(0));

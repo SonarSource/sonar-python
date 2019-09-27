@@ -523,7 +523,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void importStatement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
     AstNode astNode = p.parse("import foo");
-    ImportName importStatement = (ImportName) treeMaker.importStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ImportName importStatement = (ImportName) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.firstToken().value()).isEqualTo("import");
     assertThat(importStatement.lastToken().value()).isEqualTo("foo");
     assertThat(importStatement).isNotNull();
@@ -535,7 +536,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.children()).hasSize(2);
 
     astNode = p.parse("import foo as f");
-    importStatement = (ImportName) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportName) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement).isNotNull();
     assertThat(importStatement.firstToken().value()).isEqualTo("import");
     assertThat(importStatement.lastToken().value()).isEqualTo("f");
@@ -551,7 +553,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.children()).hasSize(2);
 
     astNode = p.parse("import foo.bar");
-    importStatement = (ImportName) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportName) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement).isNotNull();
     assertThat(importStatement.importKeyword().value()).isEqualTo("import");
     assertThat(importStatement.modules()).hasSize(1);
@@ -562,7 +565,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.children()).hasSize(2);
 
     astNode = p.parse("import foo, bar");
-    importStatement = (ImportName) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportName) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement).isNotNull();
     assertThat(importStatement.importKeyword().value()).isEqualTo("import");
     assertThat(importStatement.modules()).hasSize(2);
@@ -579,7 +583,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void importFromStatement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
     AstNode astNode = p.parse("from foo import f");
-    ImportFrom importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ImportFrom importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement).isNotNull();
     assertThat(importStatement.firstToken().value()).isEqualTo("from");
     assertThat(importStatement.lastToken().value()).isEqualTo("f");
@@ -597,14 +602,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.children()).hasSize(4);
 
     astNode = p.parse("from .foo import f");
-    importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.dottedPrefixForModule()).hasSize(1);
     assertThat(importStatement.dottedPrefixForModule().get(0).value()).isEqualTo(".");
     assertThat(importStatement.module().names().get(0).name()).isEqualTo("foo");
     assertThat(importStatement.children()).hasSize(5);
 
     astNode = p.parse("from ..foo import f");
-    importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.dottedPrefixForModule()).hasSize(2);
     assertThat(importStatement.dottedPrefixForModule().get(0).value()).isEqualTo(".");
     assertThat(importStatement.dottedPrefixForModule().get(1).value()).isEqualTo(".");
@@ -612,14 +619,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.children()).hasSize(6);
 
     astNode = p.parse("from . import f");
-    importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.dottedPrefixForModule()).hasSize(1);
     assertThat(importStatement.dottedPrefixForModule().get(0).value()).isEqualTo(".");
     assertThat(importStatement.module()).isNull();
     assertThat(importStatement.children()).hasSize(4);
 
     astNode = p.parse("from foo import f as g");
-    importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.importedNames()).hasSize(1);
     aliasedNameTree = importStatement.importedNames().get(0);
     assertThat(aliasedNameTree.asKeyword().value()).isEqualTo("as");
@@ -628,7 +637,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.children()).hasSize(4);
 
     astNode = p.parse("from foo import f as g, h");
-    importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.importedNames()).hasSize(2);
     AliasedName aliasedNameTree1 = importStatement.importedNames().get(0);
     assertThat(aliasedNameTree1.asKeyword().value()).isEqualTo("as");
@@ -642,7 +652,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(aliasedNameTree2.dottedName().names().get(0).name()).isEqualTo("h");
 
     astNode = p.parse("from foo import *");
-    importStatement = (ImportFrom) treeMaker.importStatement(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    importStatement = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     assertThat(importStatement.importedNames()).isEmpty();
     assertThat(importStatement.isWildcardImport()).isTrue();
     assertThat(importStatement.wildcard().value()).isEqualTo("*");
@@ -863,7 +874,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody().statements()).hasSize(1);
     assertThat(pyForStatementTree.elseBody().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(pyForStatementTree.children()).hasSize(9);
+    assertThat(pyForStatementTree.children()).hasSize(15);
 
     assertThat(pyForStatementTree.forKeyword().value()).isEqualTo("for");
     assertThat(pyForStatementTree.inKeyword().value()).isEqualTo("in");
@@ -890,7 +901,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(whileStatement.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(whileStatement.elseBody().statements()).hasSize(1);
     assertThat(whileStatement.elseBody().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(whileStatement.children()).hasSize(7);
+    assertThat(whileStatement.children()).hasSize(13);
 
     assertThat(whileStatement.whileKeyword().value()).isEqualTo("while");
     assertThat(whileStatement.colon().value()).isEqualTo(":");

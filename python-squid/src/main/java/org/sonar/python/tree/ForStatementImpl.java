@@ -42,28 +42,39 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   private final Token inKeyword;
   private final List<Expression> testExpressions;
   private final Token colon;
+  private final Token firstNewLine;
+  private final Token firstIndent;
   private final StatementList body;
-  @Nullable
+  private final Token firstDedent;
   private final Token elseKeyword;
-  @Nullable
   private final Token elseColon;
+  private final Token lastNewline;
+  private final Token lastIndent;
   private final StatementList elseBody;
+  private final Token lastDedent;
   private final Token asyncKeyword;
   private final boolean isAsync;
 
   public ForStatementImpl(AstNode astNode, Token forKeyword, List<Expression> expressions, Token inKeyword,
-                          List<Expression> testExpressions, Token colon, StatementList body,
-                          @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable StatementList elseBody, @Nullable Token asyncKeyword) {
+                          List<Expression> testExpressions, Token colon, Token firstNewLine, @Nullable Token firstIndent, StatementList body,
+                          @Nullable Token firstDedent, @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable Token lastNewline,
+                          @Nullable Token lastIndent, @Nullable StatementList elseBody, @Nullable Token lastDedent, @Nullable Token asyncKeyword) {
     super(astNode);
     this.forKeyword = forKeyword;
     this.expressions = expressions;
     this.inKeyword = inKeyword;
     this.testExpressions = testExpressions;
     this.colon = colon;
+    this.firstNewLine = firstNewLine;
+    this.firstIndent = firstIndent;
     this.body = body;
+    this.firstDedent = firstDedent;
     this.elseKeyword = elseKeyword;
     this.elseColon = elseColon;
+    this.lastNewline = lastNewline;
+    this.lastIndent = lastIndent;
     this.elseBody = elseBody;
+    this.lastDedent = lastDedent;
     this.asyncKeyword = asyncKeyword;
     this.isAsync = asyncKeyword != null;
   }
@@ -140,6 +151,6 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   @Override
   public List<Tree> children() {
     return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressions, Collections.singletonList(inKeyword), testExpressions,
-      Arrays.asList(colon, body, elseKeyword, colon, elseBody)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+      Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseKeyword, colon, lastNewline, lastIndent, elseBody, lastDedent)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
