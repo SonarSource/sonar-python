@@ -914,7 +914,7 @@ public class PythonTreeMaker {
 
     } else {
       Name name = name(trailer.getFirstChild(PythonGrammar.NAME));
-      return new QualifiedExpressionImpl(trailer, name, expr, toPyToken(trailer.getFirstChild(PythonPunctuator.DOT).getToken()));
+      return new QualifiedExpressionImpl(name, expr, toPyToken(trailer.getFirstChild(PythonPunctuator.DOT).getToken()));
     }
   }
 
@@ -1017,10 +1017,10 @@ public class PythonTreeMaker {
     AstNode lastNameNode = astNode.getLastChild();
     for (AstNode nameNode : names) {
       if (nameNode != lastNameNode) {
-        qualifier = new QualifiedExpressionImpl(astNode, name(nameNode), qualifier, toPyToken(nameNode.getPreviousSibling().getToken()));
+        qualifier = new QualifiedExpressionImpl(name(nameNode), qualifier, toPyToken(nameNode.getPreviousSibling().getToken()));
       }
     }
-    return new QualifiedExpressionImpl(astNode, name(lastNameNode), qualifier, toPyToken(lastNameNode.getPreviousSibling().getToken()));
+    return new QualifiedExpressionImpl(name(lastNameNode), qualifier, toPyToken(lastNameNode.getPreviousSibling().getToken()));
   }
 
   public CallExpression callExpression(AstNode astNode) {
