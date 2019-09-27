@@ -23,18 +23,18 @@ will be generated, and use this guess to impersonate another user or access sens
   <li> Use the generated random values only once. </li>
   <li> You should not expose the generated random value. If you have to store it, make sure that the database or file is secure. </li>
 </ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 import random
 
-random.getrandbits(1) # Questionable
-random.randint(0,9) # Questionable
-random.random()  # Questionable
+random.getrandbits(1) # Sensitive
+random.randint(0,9) # Sensitive
+random.random()  # Sensitive
 
 # the following functions are sadly used to generate salt by selecting characters in a string ex: "abcdefghijk"...
-random.sample(['a', 'b'], 1)  # Questionable
-random.choice(['a', 'b'])  # Questionable
-random.choices(['a', 'b'])  # Questionable
+random.sample(['a', 'b'], 1)  # Sensitive
+random.choice(['a', 'b'])  # Sensitive
+random.choices(['a', 'b'])  # Sensitive
 </pre>
 <h2>See</h2>
 <ul>
