@@ -35,11 +35,12 @@ public class TestPythonVisitorRunner {
   private TestPythonVisitorRunner() {
   }
 
-  public static void scanFile(File file, PythonVisitor... visitors) {
+  public static PythonVisitorContext scanFile(File file, PythonVisitor... visitors) {
     PythonVisitorContext context = createContext(file);
     for (PythonVisitor visitor : visitors) {
       visitor.scanFile(context);
     }
+    return context;
   }
 
   public static PythonVisitorContext createContext(File file) {

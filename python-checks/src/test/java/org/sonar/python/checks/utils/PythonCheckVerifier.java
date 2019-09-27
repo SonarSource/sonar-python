@@ -45,8 +45,7 @@ public class PythonCheckVerifier extends PythonVisitor {
 
   private List<TestIssue> expectedIssues = new ArrayList<>();
 
-  public static List<PreciseIssue> scanFileForIssues(File file, PythonCheck check) {
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+  private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
     check.scanFile(context);
     if (check instanceof PythonSubscriptionCheck) {
       SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context);
@@ -58,9 +57,9 @@ public class PythonCheckVerifier extends PythonVisitor {
   public static void verify(String path, PythonCheck check) {
     PythonCheckVerifier verifier = new PythonCheckVerifier();
     File file = new File(path);
-    TestPythonVisitorRunner.scanFile(file, verifier);
+    PythonVisitorContext pythonVisitorContext = TestPythonVisitorRunner.scanFile(file, verifier);
 
-    Iterator<PreciseIssue> actualIssues = getActualIssues(file, check);
+    Iterator<PreciseIssue> actualIssues = getActualIssues(file, check, pythonVisitorContext);
     List<TestIssue> expectedIssues = verifier.expectedIssues;
 
     for (TestIssue expected : expectedIssues) {
@@ -119,8 +118,8 @@ public class PythonCheckVerifier extends PythonVisitor {
     return Ordering.natural().sortedCopy(result);
   }
 
-  private static Iterator<PreciseIssue> getActualIssues(File file, PythonCheck check) {
-    List<PreciseIssue> issues = scanFileForIssues(file, check);
+  private static Iterator<PreciseIssue> getActualIssues(File file, PythonCheck check, PythonVisitorContext pythonVisitorContext) {
+    List<PreciseIssue> issues = scanFileForIssues(check, pythonVisitorContext);
     List<PreciseIssue> sortedIssues = Ordering.natural().onResultOf(new IssueToLine()).sortedCopy(issues);
     return sortedIssues.iterator();
   }
