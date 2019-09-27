@@ -20,28 +20,32 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.Objects;
-import org.sonar.python.api.tree.Token;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.AssignmentStatement;
-import org.sonar.python.api.tree.ExpressionList;
 import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.ExpressionList;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class AssignmentStatementImpl extends PyTree implements AssignmentStatement {
   private final List<Token> assignTokens;
   private final List<ExpressionList> lhsExpressions;
   private final Expression assignedValue;
+  private final Token separator;
 
-  public AssignmentStatementImpl(AstNode astNode, List<Token> assignTokens, List<ExpressionList> lhsExpressions, Expression assignedValue) {
+  public AssignmentStatementImpl(AstNode astNode, List<Token> assignTokens, List<ExpressionList> lhsExpressions, Expression assignedValue, @Nullable Token separator) {
     super(astNode);
     this.assignTokens = assignTokens;
     this.lhsExpressions = lhsExpressions;
     this.assignedValue = assignedValue;
+    this.separator = separator;
   }
 
   @Override
@@ -59,6 +63,12 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
     return lhsExpressions;
   }
 
+  @CheckForNull
+  @Override
+  public Token separator() {
+    return separator;
+  }
+
   @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitAssignmentStatement(this);
@@ -71,7 +81,7 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
 
   @Override
   public List<Tree> children() {
-    return Stream.of(assignTokens, lhsExpressions, Collections.singletonList(assignedValue))
+    return Stream.of(assignTokens, lhsExpressions, Collections.singletonList(assignedValue), Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

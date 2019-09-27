@@ -40,7 +40,6 @@ import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 public class ClassDefImpl extends PyTree implements ClassDef {
-
   private final List<Decorator> decorators;
   private final Token classKeyword;
   private final Name name;
@@ -48,14 +47,17 @@ public class ClassDefImpl extends PyTree implements ClassDef {
   private final ArgList args;
   private final Token rightPar;
   private final Token colon;
+  private final Token newLine;
+  private final Token indent;
+  private final Token dedent;
   private final StatementList body;
   private final Token docstring;
   private final Set<Symbol> classFields = new HashSet<>();
   private final Set<Symbol> instanceFields = new HashSet<>();
 
   public ClassDefImpl(AstNode astNode, List<Decorator> decorators, Token classKeyword, Name name,
-                      @Nullable Token leftPar, @Nullable ArgList args, @Nullable Token rightPar,
-                      Token colon, StatementList body, Token docstring) {
+                            @Nullable Token leftPar, @Nullable ArgList args, @Nullable Token rightPar,
+                            Token colon, Token newLine, Token indent, StatementList body, Token dedent, Token docstring) {
     super(astNode);
     this.decorators = decorators;
     this.classKeyword = classKeyword;
@@ -64,8 +66,11 @@ public class ClassDefImpl extends PyTree implements ClassDef {
     this.args = args;
     this.rightPar = rightPar;
     this.colon = colon;
-    this.body = body;
+    this.newLine = newLine;
+    this.indent = indent;
     this.docstring = docstring;
+    this.body = body;
+    this.dedent = dedent;
   }
 
   @Override
@@ -147,7 +152,7 @@ public class ClassDefImpl extends PyTree implements ClassDef {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(decorators, Arrays.asList(classKeyword, name, leftPar, args, rightPar, colon, body, docstring))
+    return Stream.of(decorators, Arrays.asList(classKeyword, name, leftPar, args, rightPar, colon, newLine, indent, docstring, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -244,7 +244,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void assignement_stmt() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
-    AssignmentStatement tree = parse("a = b", treeMaker::assignment);
+    AstNode astNode = p.parse("a = b");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssignmentStatement tree = treeMaker.assignment(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssignmentStatement(tree);
     verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));

@@ -838,7 +838,7 @@ public class PythonTreeMakerTest extends RuleTest {
       "\tpass");
     classDefTree = treeMaker.classDefStatement(astNode);
     assertThat(classDefTree.docstring().value()).isEqualTo("\"\"\"This is a docstring\"\"\"");
-    assertThat(classDefTree.children()).hasSize(5);
+    assertThat(classDefTree.children()).hasSize(8);
   }
 
   @Test
@@ -919,7 +919,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void assignement_statement() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x = y");
-    AssignmentStatement pyAssignmentStatement = treeMaker.assignment(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssignmentStatement pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.firstToken().value()).isEqualTo("x");
     assertThat(pyAssignmentStatement.lastToken().value()).isEqualTo("y");
     Name assigned = (Name) pyAssignmentStatement.assignedValue();
@@ -929,7 +930,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyAssignmentStatement.children()).hasSize(3);
 
     astNode = p.parse("x = y = z");
-    pyAssignmentStatement = treeMaker.assignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.equalTokens()).hasSize(2);
     assertThat(pyAssignmentStatement.children()).hasSize(5);
     assigned = (Name) pyAssignmentStatement.assignedValue();
@@ -940,7 +942,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lhs2.name()).isEqualTo("y");
 
     astNode = p.parse("a,b = x");
-    pyAssignmentStatement = treeMaker.assignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.children()).hasSize(3);
     assigned = (Name) pyAssignmentStatement.assignedValue();
     List<Expression> expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
@@ -949,14 +952,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(expressions.get(1).getKind()).isEqualTo(Tree.Kind.NAME);
 
     astNode = p.parse("x = a,b");
-    pyAssignmentStatement = treeMaker.assignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.children()).hasSize(3);
     expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
     assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(pyAssignmentStatement.assignedValue().getKind()).isEqualTo(Tree.Kind.TUPLE);
 
     astNode = p.parse("x = yield 1");
-    pyAssignmentStatement = treeMaker.assignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.children()).hasSize(3);
     expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
     assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
@@ -964,7 +969,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
     // FIXME: lhs expression list shouldn't allow yield expressions. We need to change the grammar
     astNode = p.parse("x = yield 1 = y");
-    pyAssignmentStatement = treeMaker.assignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.children()).hasSize(5);
     List<ExpressionList> lhsExpressions = pyAssignmentStatement.lhsExpressions();
     assertThat(lhsExpressions.get(1).expressions().get(0).getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
@@ -1005,7 +1011,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void compound_assignement_statement() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x += y");
-    CompoundAssignmentStatement pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    CompoundAssignmentStatement pyCompoundAssignmentStatement = treeMaker.compoundAssignment(statementWithSeparator);
     assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
     assertThat(pyCompoundAssignmentStatement.children()).hasSize(3);
     assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().value()).isEqualTo("+=");
@@ -1014,7 +1021,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     astNode = p.parse("x,y,z += 1");
-    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(statementWithSeparator);
     assertThat(pyCompoundAssignmentStatement.firstToken().value()).isEqualTo("x");
     assertThat(pyCompoundAssignmentStatement.lastToken().value()).isEqualTo("1");
     assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
@@ -1025,7 +1033,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     astNode = p.parse("x += yield y");
-    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(statementWithSeparator);
     assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
     assertThat(pyCompoundAssignmentStatement.children()).hasSize(3);
     assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().value()).isEqualTo("+=");
@@ -1033,7 +1042,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyCompoundAssignmentStatement.rhsExpression().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
 
     astNode = p.parse("x *= z");
-    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(astNode);
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyCompoundAssignmentStatement = treeMaker.compoundAssignment(statementWithSeparator);
     assertThat(pyCompoundAssignmentStatement.getKind()).isEqualTo(Tree.Kind.COMPOUND_ASSIGNMENT);
     assertThat(pyCompoundAssignmentStatement.compoundAssignmentToken().value()).isEqualTo("*=");
   }
