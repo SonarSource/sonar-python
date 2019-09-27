@@ -11,3 +11,9 @@ def func(self):
 # Noncompliant@+1
         return None #This should not happen
     self.bar()
+
+SOMEVAR = [
+# Noncompliant@+1
+  'asd', 'asd', # comment more than one word
+  'asdpj'
+]

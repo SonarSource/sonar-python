@@ -22,7 +22,6 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
-import org.sonar.python.api.tree.Token;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,9 +55,9 @@ import org.sonar.python.api.tree.DottedName;
 import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.ExecStatement;
+import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionList;
 import org.sonar.python.api.tree.ExpressionStatement;
-import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.ForStatement;
@@ -80,16 +79,17 @@ import org.sonar.python.api.tree.RaiseStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.SliceItem;
 import org.sonar.python.api.tree.SliceList;
-import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.StringElement;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TryStatement;
 import org.sonar.python.api.tree.TypeAnnotation;
 import org.sonar.python.api.tree.WithItem;
 import org.sonar.python.api.tree.WithStatement;
 import org.sonar.python.api.tree.YieldExpression;
 import org.sonar.python.api.tree.YieldStatement;
-import org.sonar.python.api.tree.Tree;
 
 public class PythonTreeMaker {
 
@@ -600,7 +600,7 @@ public class PythonTreeMaker {
   }
 
   private static Name name(AstNode astNode) {
-    return new NameImpl(astNode, astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue(), astNode.getParent().is(PythonGrammar.ATOM));
+    return new NameImpl(toPyToken(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getToken()), astNode.getParent().is(PythonGrammar.ATOM));
   }
 
   public ForStatement forStatement(AstNode astNode) {

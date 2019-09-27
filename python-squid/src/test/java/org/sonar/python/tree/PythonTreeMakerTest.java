@@ -1626,7 +1626,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(firstElement.value()).isEqualTo(fullValue);
     assertThat(firstElement.trimmedQuotesValue()).isEqualTo(trimmedQuoteValue);
     assertThat(firstElement.prefix()).isEqualTo(prefix);
-    assertThat(firstElement.children()).isEmpty();
+    assertThat(firstElement.children()).hasSize(1);
   }
 
   @Test

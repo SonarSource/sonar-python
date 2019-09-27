@@ -19,23 +19,25 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.semantic.Symbol;
 
 public class NameImpl extends PyTree implements Name {
+  private final Token token;
   private final String name;
   private final boolean isVariable;
   private Symbol symbol;
 
-  public NameImpl(AstNode astNode, String name, boolean isVariable) {
-    super(astNode);
-    this.name = name;
+  public NameImpl(Token token, boolean isVariable) {
+    super(token, token);
+    this.token = token;
+    this.name = token.value();
     this.isVariable = isVariable;
   }
 
@@ -61,7 +63,7 @@ public class NameImpl extends PyTree implements Name {
 
   @Override
   public List<Tree> children() {
-    return Collections.emptyList();
+    return Collections.singletonList(token);
   }
 
   @CheckForNull
