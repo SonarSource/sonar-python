@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import javax.annotation.CheckForNull;
+import org.sonar.python.api.tree.Token;
 
 public class StatementWithSeparator {
   private AstNode statement;
@@ -35,7 +36,10 @@ public class StatementWithSeparator {
     return statement;
   }
 
-  public AstNode separator() {
-    return separator;
+  public Token separator() {
+    if (separator == null) {
+      return null;
+    }
+    return new TokenImpl(separator.getToken());
   }
 }

@@ -62,7 +62,7 @@ public class SubscriptionVisitor {
     Deque<Tree> stack = new ArrayDeque<>();
     stack.push(element);
     while (!stack.isEmpty()) {
-      currentElement = stack.poll();
+      currentElement = stack.pop();
       consumers.getOrDefault(currentElement.getKind(), Collections.emptyList()).forEach(SubscriptionContextImpl::execute);
       for (int i = currentElement.children().size() - 1; i >= 0; i--) {
         if (currentElement.children().get(i) != null) {

@@ -1971,6 +1971,26 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size()-1);
     assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
+
+    tree = parse("foo()\ntoto()", treeMaker::fileInput);
+    statements = tree.statements().statements();
+    statementChildren = statements.get(0).children();
+    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
+
+    // Check that the second semicolon should be ignored
+    tree = parse("foo(); bar();\ntoto()", treeMaker::fileInput);
+    statements = tree.statements().statements();
+    statementChildren = statements.get(0).children();
+    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(token.token().getType()).isEqualTo(PythonPunctuator.SEMICOLON);
+
+    statementChildren = statements.get(1).children();
+    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
