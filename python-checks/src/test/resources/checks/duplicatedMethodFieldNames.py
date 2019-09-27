@@ -48,3 +48,7 @@ class A:
 
         def HEllo(self):
             pass
+
+class C():
+    def setUp(self):
+        self.reactor = self.Reactor() # Noncompliant

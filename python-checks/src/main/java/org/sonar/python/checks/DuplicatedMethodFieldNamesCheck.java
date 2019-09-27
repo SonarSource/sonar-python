@@ -19,93 +19,91 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.sslr.ast.AstSelect;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.PyClassDefTree;
+import org.sonar.python.api.tree.PyFunctionDefTree;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.semantic.Symbol;
+import org.sonar.python.tree.BaseTreeVisitor;
 
-@Rule(key = DuplicatedMethodFieldNamesCheck.CHECK_KEY)
-public class DuplicatedMethodFieldNamesCheck extends PythonCheckAstNode {
+@Rule(key = "S1845")
+public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S1845";
   private static final String MESSAGE = "Rename %s \"%s\" to prevent any misunderstanding/clash with %s \"%s\" defined on line %s";
 
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+      PyClassDefTree classDef = (PyClassDefTree) ctx.syntaxNode();
+      Set<Symbol> allFields = new HashSet<>(classDef.classFields());
+      allFields.addAll(classDef.instanceFields());
+      MethodVisitor methodVisitor = new MethodVisitor();
+      classDef.body().accept(methodVisitor);
+      List<Tree> fieldNames = allFields.stream()
+        .map(s -> s.usages().stream().findFirst())
+        .filter(Optional::isPresent)
+        .map(usage -> usage.get().tree())
+        .collect(Collectors.toList());
+      lookForDuplications(ctx, fieldNames, methodVisitor.methodNames);
+    });
+  }
+
+  private static class MethodVisitor extends BaseTreeVisitor {
+    private List<Tree> methodNames = new ArrayList<>();
+
+    @Override
+    public void visitFunctionDef(PyFunctionDefTree pyFunctionDefTree) {
+      methodNames.add(pyFunctionDefTree.name());
+    }
+
+    @Override
+    public void visitClassDef(PyClassDefTree pyClassDefTree) {
+      // skip nested class definition
+    }
+  }
+
   private static class TokenWithTypeInfo {
-    private final Token token;
+    private final Tree tree;
     private final String type;
 
-    TokenWithTypeInfo(Token token, String type){
-      this.token = token;
+    TokenWithTypeInfo(Tree tree, String type) {
+      this.tree = tree;
       this.type = type;
     }
 
-    String getValue(){
-      return token.getValue();
+    String getValue() {
+      return tree.firstToken().value();
     }
 
-    int getLine(){
-      return token.getLine();
+    int getLine() {
+      return tree.firstToken().line();
     }
 
-    String getType(){
+    String getType() {
       return type;
     }
   }
 
-  private static class LineComparator implements Comparator<TokenWithTypeInfo>, Serializable {
-
-    private static final long serialVersionUID = 4759444000993633906L;
-
-    @Override
-    public int compare(TokenWithTypeInfo t1, TokenWithTypeInfo t2) {
-      return Integer.compare(t1.getLine(), t2.getLine());
-    }
-  }
-
-  @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonGrammar.CLASSDEF);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    List<Token> fieldNames = new NewSymbolsAnalyzer().getClassFields(astNode);
-    List<Token> methodNames = getFieldNameTokens(astNode);
-    lookForDuplications(fieldNames, methodNames);
-  }
-
-  private static List<Token> getFieldNameTokens(AstNode astNode) {
-    List<Token> methodNames = new LinkedList<>();
-    AstSelect funcDefSelect = astNode.select()
-        .children(PythonGrammar.SUITE)
-        .children(PythonGrammar.STATEMENT)
-        .children(PythonGrammar.COMPOUND_STMT)
-        .children(PythonGrammar.FUNCDEF);
-    for (AstNode node : funcDefSelect) {
-      methodNames.add(node.getFirstChild(PythonGrammar.FUNCNAME).getToken());
-    }
-    return methodNames;
-  }
-
-  private void lookForDuplications(List<Token> fieldNames, List<Token> methodNames) {
+  private static void lookForDuplications(SubscriptionContext ctx, List<Tree> fieldNames, List<Tree> methodNames) {
     List<TokenWithTypeInfo> allTokensWithInfo = mergeLists(fieldNames, methodNames);
-    Collections.sort(allTokensWithInfo, new LineComparator());
-    for (int i = 1; i < allTokensWithInfo.size(); i++){
-      for (int j = i-1; j >= 0; j--){
+    allTokensWithInfo.sort(Comparator.comparingInt(TokenWithTypeInfo::getLine));
+    for (int i = 1; i < allTokensWithInfo.size(); i++) {
+      for (int j = i - 1; j >= 0; j--) {
         TokenWithTypeInfo token1 = allTokensWithInfo.get(j);
         TokenWithTypeInfo token2 = allTokensWithInfo.get(i);
-        if (differOnlyByCapitalization(token1.getValue(), token2.getValue())){
-          addIssue(token2.token, getMessage(token1, token2))
-            .secondary(new AstNode(token1.token), "Original");
+        if (differOnlyByCapitalization(token1.getValue(), token2.getValue())) {
+          ctx.addIssue(token2.tree, getMessage(token1, token2))
+            .secondary(token1.tree, "Original");
           break;
         }
       }
@@ -116,13 +114,13 @@ public class DuplicatedMethodFieldNamesCheck extends PythonCheckAstNode {
     return name1.equalsIgnoreCase(name2) && !name1.equals(name2);
   }
 
-  private static List<TokenWithTypeInfo> mergeLists(List<Token> fieldNames, List<Token> methodNames) {
+  private static List<TokenWithTypeInfo> mergeLists(List<Tree> fieldNames, List<Tree> methodNames) {
     List<TokenWithTypeInfo> allTokensWithInfo = new LinkedList<>();
-    for (Token token : fieldNames){
-      allTokensWithInfo.add(new TokenWithTypeInfo(token, "field"));
+    for (Tree tree : fieldNames) {
+      allTokensWithInfo.add(new TokenWithTypeInfo(tree, "field"));
     }
-    for (Token token : methodNames){
-      allTokensWithInfo.add(new TokenWithTypeInfo(token, "method"));
+    for (Tree tree : methodNames) {
+      allTokensWithInfo.add(new TokenWithTypeInfo(tree, "method"));
     }
     return allTokensWithInfo;
   }
