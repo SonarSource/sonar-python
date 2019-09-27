@@ -32,19 +32,19 @@ href="https://blog.mozilla.org/security/2015/04/30/deprecating-non-secure-http">
 application or system. </p>
 <h2>Exceptions</h2>
 <p>Exception: the url domain component is a loopback address.</p>
-<h3>Noncompliant Code Example</h3>
+<h3>Sensitive Code Example</h3>
 <pre>
-url = "http://exemple.com" # Noncompliant
-url = "ftp://anonymous@exemple.com" # Noncompliant
-url = "telnet://anonymous@exemple.com" # Noncompliant
+url = "http://exemple.com" # Sensitive
+url = "ftp://anonymous@exemple.com" # Sensitive
+url = "telnet://anonymous@exemple.com" # Sensitive
 
 
 import telnetlib
-cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Noncompliant
+cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Sensitive
 
 
 import ftplib
-cnx = ftplib.FTP("194.244.111.175") # Noncompliant
+cnx = ftplib.FTP("194.244.111.175") # Sensitive
 </pre>
 <h3>Compliant Solution</h3>
 <pre>

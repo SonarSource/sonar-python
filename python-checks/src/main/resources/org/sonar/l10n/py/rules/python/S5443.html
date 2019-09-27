@@ -42,12 +42,12 @@ It also detects access to <code>TMP</code> and <code>TMPDIR</code> environment v
       <li> The file will be destroyed as soon as it is closed </li>
     </ul> </li>
 </ul>
-<h2>Sensitive Code Examples</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
-file = open("/tmp/temporary_file","w+") # Questionable
+file = open("/tmp/temporary_file","w+") # Sensitive
 </pre>
 <pre>
-tmp_dir = os.environ.get('TMPDIR') # Questionable
+tmp_dir = os.environ.get('TMPDIR') # Sensitive
 file = open(tmp_dir+"/temporary_file","w+")
 </pre>
 <h2>Compliant Solution</h2>
