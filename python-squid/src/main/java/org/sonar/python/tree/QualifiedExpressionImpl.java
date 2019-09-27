@@ -19,37 +19,26 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.QualifiedExpression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class QualifiedExpressionImpl extends PyTree implements QualifiedExpression {
   private final Name name;
   private final Expression qualifier;
   private final Token dotToken;
-  private final AstNode astNode;
 
-  public QualifiedExpressionImpl(AstNode astNode, Name name, Expression qualifier, Token dotToken) {
+  public QualifiedExpressionImpl(Name name, Expression qualifier, Token dotToken) {
     super(qualifier.firstToken(), name.lastToken());
-    // FIXME : astNode is required to make semantic work at function level, this should disappear once semantic relies on strongly typed AST.
-    this.astNode = astNode;
     this.name = name;
     this.qualifier = qualifier;
     this.dotToken = dotToken;
-  }
-
-  @CheckForNull
-  @Override
-  public AstNode astNode() {
-    return astNode;
   }
 
   @Override
