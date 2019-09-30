@@ -35,11 +35,13 @@ import org.sonar.python.api.tree.Tree;
 public class FileInputImpl extends PyTree implements FileInput {
 
   private final StatementList statements;
+  private final Token endOfFile;
   private final Token docstring;
 
-  public FileInputImpl(AstNode astNode, @Nullable StatementList statements, Token docstring) {
+  public FileInputImpl(AstNode astNode, @Nullable StatementList statements, Token endOfFile, Token docstring) {
     super(astNode);
     this.statements = statements;
+    this.endOfFile = endOfFile;
     this.docstring = docstring;
   }
 
@@ -67,6 +69,6 @@ public class FileInputImpl extends PyTree implements FileInput {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(statements, docstring).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(docstring, statements, endOfFile).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
