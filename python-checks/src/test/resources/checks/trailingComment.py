@@ -17,3 +17,10 @@ SOMEVAR = [
   'asd', 'asd', # comment more than one word
   'asdpj'
 ]
+
+changes = sa.Table('foo', bar,
+    # Noncompliant@+1
+    sa.Column('id', sa.Integer), # yet another comment
+    # some comment
+    sa.Column('name', sa.String(256)),
+    )

@@ -1280,6 +1280,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(qualifier).isInstanceOf(Name.class);
     assertThat(((Name) qualifier).name()).isEqualTo("foo");
     assertThat(qualifiedExpression.children()).hasSize(3);
+    assertThat(((Name) qualifiedExpression.children().get(0)).name()).isEqualTo("foo");
+    assertThat(((Token) qualifiedExpression.children().get(1)).type()).isEqualTo(PythonPunctuator.DOT);
+    assertThat(((Name) qualifiedExpression.children().get(2)).name()).isEqualTo("bar");
 
     qualifiedExpression = parse("foo.bar.baz", treeMaker::qualifiedExpression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("baz");
