@@ -50,6 +50,18 @@ public class ControlFlowGraphTest {
     assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
   }
 
+  @Test
+  public void single_element() {
+    ControlFlowGraph cfg = verifyCfg("b1(succ = [END])");
+    assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
+  }
+
+  private ControlFlowGraph verifyCfg(String... lines) {
+    ControlFlowGraph cfg = cfg(lines);
+    CfgValidator.assertCfgStructure(cfg);
+    return cfg;
+  }
+
   private ControlFlowGraph cfg(String... lines) {
     FileInput fileInput = PythonTestUtils.parse("def f():", Arrays.stream(lines).map(s -> "  " + s).collect(Collectors.joining("\n")));
     FunctionDef fun = (FunctionDef) fileInput.descendants(Kind.FUNCDEF).findFirst().get();

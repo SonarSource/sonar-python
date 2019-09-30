@@ -33,6 +33,11 @@ public class PythonCfgEndBlock implements CfgBlock {
   }
 
   @Override
+  public Set<CfgBlock> predecessors() {
+    return Collections.emptySet();
+  }
+
+  @Override
   public List<Tree> elements() {
     return Collections.emptyList();
   }

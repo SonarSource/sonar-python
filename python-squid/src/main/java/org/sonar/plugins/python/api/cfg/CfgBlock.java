@@ -27,6 +27,8 @@ public interface CfgBlock {
 
   Set<CfgBlock> successors();
 
+  Set<CfgBlock> predecessors();
+
   List<Tree> elements();
 
 }
