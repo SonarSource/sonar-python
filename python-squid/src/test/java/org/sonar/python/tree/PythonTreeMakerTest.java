@@ -1593,7 +1593,7 @@ public class PythonTreeMakerTest extends RuleTest {
     NumericLiteral numericLiteral = (NumericLiteral) expression;
     assertThat(numericLiteral.valueAsLong()).isEqualTo(expectedValue);
     assertThat(numericLiteral.valueAsString()).isEqualTo(code);
-    assertThat(numericLiteral.children()).isEmpty();
+    assertThat(numericLiteral.children()).hasSize(1);
   }
 
   @Test

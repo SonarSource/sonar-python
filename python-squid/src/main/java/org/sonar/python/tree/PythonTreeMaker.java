@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.impl.ast.AstXmlPrinter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -1265,7 +1266,7 @@ public class PythonTreeMaker {
   }
 
   private static Expression numericLiteral(AstNode astNode) {
-    return new NumericLiteralImpl(astNode);
+    return new NumericLiteralImpl(toPyToken(astNode.getToken()));
   }
 
   private static Expression stringLiteral(AstNode astNode) {

@@ -19,20 +19,22 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.NumericLiteral;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   private final String valueAsString;
+  private final Token token;
 
-  NumericLiteralImpl(AstNode node) {
-    super(node);
-    valueAsString = node.getTokenValue();
+  NumericLiteralImpl(Token token) {
+    super(token, token);
+    this.token = token;
+    valueAsString = token.value();
   }
 
   @Override
@@ -64,6 +66,6 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   @Override
   public List<Tree> children() {
-    return Collections.emptyList();
+    return Collections.singletonList(token);
   }
 }
