@@ -63,7 +63,7 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
   }
 
   @CheckForNull
-  @Nullable
+  @Override
   public Token separator() {
     return separator;
   }

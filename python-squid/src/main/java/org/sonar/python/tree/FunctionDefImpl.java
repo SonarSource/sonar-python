@@ -61,8 +61,9 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private Set<Symbol> symbols = new HashSet<>();
 
   public FunctionDefImpl(AstNode astNode, List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
-                               Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
-                               Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent, boolean isMethodDefinition, @Nullable Token docstring) {
+                         Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
+                         Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
+                         boolean isMethodDefinition, @Nullable Token docstring) {
     super(astNode);
     this.decorators = decorators;
     this.asyncKeyword = asyncKeyword;

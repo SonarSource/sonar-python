@@ -72,6 +72,7 @@ public class DelStatementImpl extends PyTree implements DelStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(delKeyword), expressionTrees, Collections.singletonList(separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(delKeyword), expressionTrees, Collections.singletonList(separator))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

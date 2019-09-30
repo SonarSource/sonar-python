@@ -39,12 +39,11 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     defaultValue = DEFAULT_LEGAL_COMMENT_PATTERN)
   public String legalCommentPattern = DEFAULT_LEGAL_COMMENT_PATTERN;
 
-  private Pattern pattern;
   private int previousTokenLine;
 
   @Override
   public void initialize(Context context) {
-    pattern = Pattern.compile(legalCommentPattern);
+    Pattern pattern = Pattern.compile(legalCommentPattern);
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousTokenLine = -1);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {

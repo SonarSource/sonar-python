@@ -56,7 +56,7 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   private final boolean isAsync;
 
   public ForStatementImpl(AstNode astNode, Token forKeyword, List<Expression> expressions, Token inKeyword,
-                          List<Expression> testExpressions, Token colon, Token firstNewLine, @Nullable Token firstIndent, StatementList body,
+                          List<Expression> testExpressions, Token colon, @Nullable Token firstNewLine, @Nullable Token firstIndent, StatementList body,
                           @Nullable Token firstDedent, @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable Token lastNewline,
                           @Nullable Token lastIndent, @Nullable StatementList elseBody, @Nullable Token lastDedent, @Nullable Token asyncKeyword) {
     super(astNode);
@@ -151,6 +151,7 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   @Override
   public List<Tree> children() {
     return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressions, Collections.singletonList(inKeyword), testExpressions,
-      Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseKeyword, colon, lastNewline, lastIndent, elseBody, lastDedent)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+      Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseKeyword, colon, lastNewline, lastIndent, elseBody, lastDedent))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -597,7 +597,8 @@ public class PythonTreeMaker {
     AstNode rightPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS);
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     return new ClassDefImpl(astNode, decorators, classToken, name,
-      leftPar != null ? toPyToken(leftPar.getToken()) : null, args, rightPar != null ? toPyToken(rightPar.getToken()) : null, colon, newLine, indent, body, dedent, toPyToken(DocstringExtractor.extractDocstring(astNode)));
+      leftPar != null ? toPyToken(leftPar.getToken()) : null, args, rightPar != null ? toPyToken(rightPar.getToken()) : null,
+      colon, newLine, indent, body, dedent, toPyToken(DocstringExtractor.extractDocstring(astNode)));
   }
 
   private static Name name(AstNode astNode) {

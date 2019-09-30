@@ -40,7 +40,7 @@ public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignme
   private final Token separator;
 
   public AnnotatedAssignmentImpl(Expression variable, Token colonToken, Expression annotation,
-                                       @Nullable Token equalToken, @Nullable Expression assignedValue, @Nullable Token separator) {
+                                 @Nullable Token equalToken, @Nullable Expression assignedValue, @Nullable Token separator) {
     super(variable.firstToken(), assignedValue != null ? assignedValue.lastToken() : annotation.lastToken());
     this.variable = variable;
     this.colonToken = colonToken;

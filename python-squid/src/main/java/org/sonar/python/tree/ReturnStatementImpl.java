@@ -66,7 +66,8 @@ public class ReturnStatementImpl extends PyTree implements ReturnStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, Collections.singletonList(separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, Collections.singletonList(separator))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

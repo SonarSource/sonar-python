@@ -133,6 +133,7 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(exceptKeyword, exception, asKeyword, exceptionInstance, commaToken, colon, newLine, indent, body, dedent).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(exceptKeyword, exception, asKeyword, exceptionInstance, commaToken, colon, newLine, indent, body, dedent)
+      .filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

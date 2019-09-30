@@ -118,7 +118,8 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(whileKeyword, condition, colon, firstNewline, firstIndent, body, firstDedent, elseKeyword, elseColon, lastNewLine, lastIndent, elseBody, lastDedent).filter(Objects::nonNull)
+    return Stream.of(whileKeyword, condition, colon, firstNewline, firstIndent, body, firstDedent,
+      elseKeyword, elseColon, lastNewLine, lastIndent, elseBody, lastDedent).filter(Objects::nonNull)
       .collect(Collectors.toList());
   }
 }

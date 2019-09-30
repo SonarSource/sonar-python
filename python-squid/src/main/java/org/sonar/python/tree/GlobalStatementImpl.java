@@ -73,6 +73,7 @@ public class GlobalStatementImpl extends PyTree implements GlobalStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(globalKeyword), variables, Collections.singletonList(separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(globalKeyword), variables, Collections.singletonList(separator))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
