@@ -1157,7 +1157,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(withItem.expression()).isNull();
     assertThat(withStatement.statements().statements()).hasSize(1);
     assertThat(withStatement.statements().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(withStatement.children()).hasSize(4);
+    assertThat(withStatement.children()).hasSize(5);
   }
 
   @Test
@@ -1178,7 +1178,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(withStatement.children()).hasSize(4);
 
 
-    withStatement = parse("with foo as bar, qix : pass", treeMaker::withStatement);
+    withStatement = parse("with foo as bar, qix :\n pass", treeMaker::withStatement);
     assertThat(withStatement.withItems()).hasSize(2);
     withItem = withStatement.withItems().get(0);
     assertThat(withItem.firstToken().value()).isEqualTo("foo");
@@ -1194,7 +1194,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(withItem.expression()).isNull();
     assertThat(withStatement.statements().statements()).hasSize(1);
     assertThat(withStatement.statements().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(withStatement.children()).hasSize(5);
+    assertThat(withStatement.children()).hasSize(8);
   }
 
   @Test

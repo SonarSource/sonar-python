@@ -43,3 +43,8 @@ var = (some.method(arg1, arg2)
            # Noncompliant@+1
         if hasattr(umath, 'nextafter')  # Missing on some platforms?
         else float64_ma.huge)
+
+#Noncompliant@+1
+with errstate(over='ignore'): #some comment
+    if bar:
+        print("hello")

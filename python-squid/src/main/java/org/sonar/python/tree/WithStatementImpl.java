@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,24 +30,33 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.WithItem;
 import org.sonar.python.api.tree.WithStatement;
-import org.sonar.python.api.tree.Tree;
 
 public class WithStatementImpl extends PyTree implements WithStatement {
 
+  private final Token withKeyword;
   private final List<WithItem> withItems;
+  private final Token newLine;
+  private final Token indent;
   private final StatementList statements;
+  private final Token dedent;
   private final Token asyncKeyword;
   private final boolean isAsync;
   private final Token colon;
 
-  public WithStatementImpl(AstNode node, List<WithItem> withItems, Token colon, StatementList statements, @Nullable Token asyncKeyword) {
+  public WithStatementImpl(AstNode node, Token withKeyword, List<WithItem> withItems, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
+                           @Nullable Token dedent, @Nullable Token asyncKeyword) {
     super(node);
+    this.withKeyword = withKeyword;
     this.withItems = withItems;
     this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.statements = statements;
+    this.dedent = dedent;
     this.asyncKeyword = asyncKeyword;
     this.isAsync = asyncKeyword != null;
   }
@@ -91,8 +99,8 @@ public class WithStatementImpl extends PyTree implements WithStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(asyncKeyword), withItems, Arrays.asList(colon, statements))
-      .flatMap(List::stream).collect(Collectors.toList());
+    return Stream.of(Arrays.asList(asyncKeyword, withKeyword), withItems, Arrays.asList(colon, newLine, indent, statements, dedent))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   public static class WithItemImpl extends PyTree implements WithItem {

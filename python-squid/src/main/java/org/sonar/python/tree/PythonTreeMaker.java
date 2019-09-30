@@ -754,9 +754,13 @@ public class PythonTreeMaker {
     }
     List<WithItem> withItems = withItems(withStmtNode.getChildren(PythonGrammar.WITH_ITEM));
     AstNode suite = withStmtNode.getFirstChild(PythonGrammar.SUITE);
+    Token withKeyword = toPyToken(withStmtNode.getToken());
+    Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
+    Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
+    Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
     Token colon = toPyToken(suite.getPreviousSibling().getToken());
     StatementList statements = getStatementListFromSuite(suite);
-    return new WithStatementImpl(withStmtNode, withItems, colon, statements, asyncKeyword);
+    return new WithStatementImpl(withStmtNode, withKeyword, withItems, colon, newLine, indent, statements, dedent, asyncKeyword);
   }
 
   private List<WithItem> withItems(List<AstNode> withItems) {
