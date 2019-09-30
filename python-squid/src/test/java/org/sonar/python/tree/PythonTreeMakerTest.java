@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
@@ -134,6 +135,8 @@ public class PythonTreeMakerTest extends RuleTest {
     pyTree = parse("if x:\n pass", treeMaker::fileInput);
     IfStatement ifStmt = (IfStatement) pyTree.statements().statements().get(0);
     assertThat(ifStmt.body().parent()).isEqualTo(ifStmt);
+    assertThat(pyTree.children()).hasSize(2);
+    assertThat(((Token) pyTree.children().get(1)).type()).isEqualTo(GenericTokenType.EOF);
   }
 
   @Test
