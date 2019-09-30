@@ -19,36 +19,31 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 
-@Rule(key = FixmeCommentCheck.CHECK_KEY)
-public class FixmeCommentCheck extends PythonCheckAstNode {
-
-  public static final String CHECK_KEY = "S1134";
+@Rule(key = "S1134")
+public class FixmeCommentCheck extends PythonSubscriptionCheck {
 
   private static final String FIXME_COMMENT_PATTERN = "^#[ ]*fixme.*";
   private static final String MESSAGE = "Take the required action to fix the issue indicated by this \"FIXME\" comment.";
 
-  private Pattern pattern;
-
   @Override
-  public void visitFile(AstNode astNode) {
-    pattern = Pattern.compile(FIXME_COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
-  }
-
-  @Override
-  public void visitToken(Token token) {
-    for (Trivia trivia : token.getTrivia()) {
-      String comment = trivia.getToken().getValue();
-      if (pattern.matcher(comment).matches()) {
-        addIssue(trivia.getToken(), MESSAGE);
+  public void initialize(Context context) {
+    Pattern pattern = Pattern.compile(FIXME_COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      Token token = (Token) ctx.syntaxNode();
+      for (Trivia trivia : token.trivia()) {
+        String comment = trivia.value();
+        if (pattern.matcher(comment).matches()) {
+          ctx.addIssue(trivia.token(), MESSAGE);
+        }
       }
-    }
+    });
   }
 }
 
