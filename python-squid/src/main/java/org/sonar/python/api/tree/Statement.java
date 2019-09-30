@@ -20,4 +20,8 @@
 package org.sonar.python.api.tree;
 
 public interface Statement extends Tree {
+  default Token separator() {
+    return null;
+  }
+
 }

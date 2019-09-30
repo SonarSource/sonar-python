@@ -25,20 +25,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.PrintStatement;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class PrintStatementImpl extends PyTree implements PrintStatement {
   private final Token printKeyword;
   private final List<Expression> expressions;
+  private final Token separator;
 
-  public PrintStatementImpl(AstNode astNode, Token printKeyword, List<Expression> expressions) {
+  public PrintStatementImpl(AstNode astNode, Token printKeyword, List<Expression> expressions, @Nullable Token separator) {
     super(astNode);
     this.printKeyword = printKeyword;
     this.expressions = expressions;
+    this.separator = separator;
   }
 
   @Override
@@ -63,6 +66,7 @@ public class PrintStatementImpl extends PyTree implements PrintStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(printKeyword), expressions).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(printKeyword), expressions, Collections.singletonList(separator))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

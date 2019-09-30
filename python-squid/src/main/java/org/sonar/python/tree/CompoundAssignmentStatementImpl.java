@@ -24,22 +24,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class CompoundAssignmentStatementImpl extends PyTree implements CompoundAssignmentStatement {
   private final Expression lhsExpression;
   private final Token augAssignToken;
   private final Expression rhsExpression;
+  private final Token separator;
 
-  public CompoundAssignmentStatementImpl(AstNode astNode, Expression lhsExpression, Token augAssignToken, Expression rhsExpression) {
+
+  public CompoundAssignmentStatementImpl(AstNode astNode, Expression lhsExpression, Token augAssignToken, Expression rhsExpression, @Nullable Token separator) {
     super(astNode);
     this.lhsExpression = lhsExpression;
     this.augAssignToken = augAssignToken;
     this.rhsExpression = rhsExpression;
+    this.separator = separator;
   }
 
   @Override
@@ -57,6 +62,12 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
     return lhsExpression;
   }
 
+  @CheckForNull
+  @Override
+  public Token separator() {
+    return separator;
+  }
+
   @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitCompoundAssignment(this);
@@ -64,7 +75,7 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
 
   @Override
   public List<Tree> children() {
-    return Stream.of(lhsExpression, augAssignToken, rhsExpression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(lhsExpression, augAssignToken, rhsExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

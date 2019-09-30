@@ -25,20 +25,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.DelStatement;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class DelStatementImpl extends PyTree implements DelStatement {
   private final Token delKeyword;
   private final List<Expression> expressionTrees;
+  private final Token separator;
 
-  public DelStatementImpl(AstNode astNode, Token delKeyword, List<Expression> expressionTrees) {
+  public DelStatementImpl(AstNode astNode, Token delKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
     super(astNode);
     this.delKeyword = delKeyword;
     this.expressionTrees = expressionTrees;
+    this.separator = separator;
   }
 
   @Override
@@ -49,6 +52,12 @@ public class DelStatementImpl extends PyTree implements DelStatement {
   @Override
   public List<Expression> expressions() {
     return expressionTrees;
+  }
+
+  @Nullable
+  @Override
+  public Token separator() {
+    return separator;
   }
 
   @Override
@@ -63,6 +72,7 @@ public class DelStatementImpl extends PyTree implements DelStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(delKeyword), expressionTrees).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(delKeyword), expressionTrees, Collections.singletonList(separator))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

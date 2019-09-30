@@ -23,20 +23,29 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ElseStatementImpl extends PyTree implements ElseStatement {
   private final Token elseKeyword;
+  private final Token colon;
+  private final Token newLine;
+  private final Token indent;
   private final StatementList body;
+  private final Token dedent;
 
-  public ElseStatementImpl(Token elseKeyword, StatementList body) {
+  public ElseStatementImpl(Token elseKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent) {
     super(elseKeyword, body.lastToken());
     this.elseKeyword = elseKeyword;
+    this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.body = body;
+    this.dedent = dedent;
   }
 
   @Override
@@ -61,6 +70,6 @@ public class ElseStatementImpl extends PyTree implements ElseStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(elseKeyword, body).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(elseKeyword, colon, newLine, indent, body, dedent).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

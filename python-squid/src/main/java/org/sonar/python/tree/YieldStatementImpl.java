@@ -20,24 +20,35 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.YieldExpression;
 import org.sonar.python.api.tree.YieldStatement;
-import org.sonar.python.api.tree.Tree;
 
 public class YieldStatementImpl extends PyTree implements YieldStatement {
   private final YieldExpression yieldExpression;
+  private final Token separator;
 
-  public YieldStatementImpl(AstNode astNode, YieldExpression yieldExpression) {
+  public YieldStatementImpl(AstNode astNode, YieldExpression yieldExpression, @Nullable Token separator) {
     super(astNode);
     this.yieldExpression = yieldExpression;
+    this.separator = separator;
   }
 
   @Override
   public YieldExpression yieldExpression() {
     return yieldExpression;
+  }
+
+  @Override
+  public Token separator() {
+    return separator;
   }
 
   @Override
@@ -52,6 +63,6 @@ public class YieldStatementImpl extends PyTree implements YieldStatement {
 
   @Override
   public List<Tree> children() {
-    return Collections.singletonList(yieldExpression);
+    return Stream.of(yieldExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

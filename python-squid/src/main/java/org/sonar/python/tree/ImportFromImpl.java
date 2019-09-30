@@ -44,10 +44,10 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   private final List<AliasedName> aliasedImportNames;
   private final boolean isWildcardImport;
   private final Token wildcard;
+  private final Token separator;
 
-  public ImportFromImpl(AstNode astNode, Token fromKeyword, @Nullable List<Token> dottedPrefixForModule,
-                        @Nullable DottedName moduleName, Token importKeyword,
-                        @Nullable List<AliasedName> aliasedImportNames, boolean isWildcardImport) {
+  public ImportFromImpl(AstNode astNode, Token fromKeyword, @Nullable List<Token> dottedPrefixForModule, @Nullable DottedName moduleName,
+                        Token importKeyword, @Nullable List<AliasedName> aliasedImportNames, boolean isWildcardImport, @Nullable Token separator) {
     super(astNode);
     this.fromKeyword = fromKeyword;
     this.dottedPrefixForModule = dottedPrefixForModule;
@@ -56,6 +56,7 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
     this.aliasedImportNames = aliasedImportNames == null ? Collections.emptyList() : aliasedImportNames;
     this.isWildcardImport = isWildcardImport;
     this.wildcard = isWildcardImport ? new TokenImpl(astNode.getFirstChild(PythonPunctuator.MUL).getToken()) : null;
+    this.separator = separator;
   }
 
   @Override
@@ -96,6 +97,12 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
     return wildcard;
   }
 
+  @CheckForNull
+  @Override
+  public Token separator() {
+    return separator;
+  }
+
   @Override
   public Kind getKind() {
     return Kind.IMPORT_FROM;
@@ -109,6 +116,6 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   @Override
   public List<Tree> children() {
     return Stream.of(Collections.singletonList(importKeyword), aliasedImportNames, Collections.singletonList(fromKeyword),
-      dottedPrefixForModule, Arrays.asList(moduleName, wildcard)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+      dottedPrefixForModule, Arrays.asList(moduleName, wildcard, separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

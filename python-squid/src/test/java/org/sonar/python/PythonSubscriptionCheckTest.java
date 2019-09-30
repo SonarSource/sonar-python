@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +45,7 @@ public class PythonSubscriptionCheckTest {
 
   @Test
   public void test() {
-    TestPythonCheck check = new TestPythonCheck (){
+    TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -73,7 +74,7 @@ public class PythonSubscriptionCheckTest {
 
   @Test
   public void test_cost() {
-    TestPythonCheck check = new TestPythonCheck (){
+    TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -90,8 +91,27 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
+  public void test_tokens() {
+    TestPythonCheck check = new TestPythonCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+          Token pyToken = (Token) ctx.syntaxNode();
+          if (pyToken.value().equals("def")) {
+            ctx.addIssue(pyToken, MESSAGE);
+          }
+        });
+      }
+    };
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    assertThat(issues).hasSize(2);
+    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
+    assertThat(issues.get(1).primaryLocation().startLine()).isEqualTo(7);
+  }
+
+  @Test
   public void test_file_line() {
-    TestPythonCheck check = new TestPythonCheck (){
+    TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.PASS_STMT, ctx -> {

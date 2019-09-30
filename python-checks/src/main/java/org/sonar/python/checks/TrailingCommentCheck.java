@@ -19,18 +19,18 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.TokenImpl;
 
-@Rule(key = TrailingCommentCheck.CHECK_KEY)
-public class TrailingCommentCheck extends PythonCheckAstNode {
+@Rule(key = "S139")
+public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S139";
   private static final String DEFAULT_LEGAL_COMMENT_PATTERN = "^#\\s*+[^\\s]++$";
   private static final String MESSAGE = "Move this trailing comment on the previous empty line.";
 
@@ -39,26 +39,25 @@ public class TrailingCommentCheck extends PythonCheckAstNode {
     defaultValue = DEFAULT_LEGAL_COMMENT_PATTERN)
   public String legalCommentPattern = DEFAULT_LEGAL_COMMENT_PATTERN;
 
-  private Pattern pattern;
   private int previousTokenLine;
 
   @Override
-  public void visitFile(AstNode astNode) {
-    previousTokenLine = -1;
-    pattern = Pattern.compile(legalCommentPattern);
-  }
+  public void initialize(Context context) {
+    Pattern pattern = Pattern.compile(legalCommentPattern);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousTokenLine = -1);
 
-  @Override
-  public void visitToken(Token token) {
-    for (Trivia trivia : token.getTrivia()) {
-      if (trivia.getToken().getLine() == previousTokenLine) {
-        String comment = trivia.getToken().getValue();
-        if (!pattern.matcher(comment).matches()) {
-          addIssue(trivia.getToken(), MESSAGE);
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      Token pyToken = (Token) ctx.syntaxNode();
+      for (Trivia trivia : pyToken.trivia()) {
+        if (previousTokenLine == trivia.getToken().getLine()) {
+          String comment = trivia.getToken().getValue();
+          if (!pattern.matcher(comment).matches()) {
+            ctx.addIssue(new TokenImpl(trivia.getToken()), MESSAGE);
+          }
         }
       }
-    }
-    previousTokenLine = token.getLine();
+      previousTokenLine = pyToken.line();
+    });
   }
 }
 

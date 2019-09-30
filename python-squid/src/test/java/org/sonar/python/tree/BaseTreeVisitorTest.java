@@ -104,7 +104,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void exec_statement() {
     setRootRule(PythonGrammar.EXEC_STMT);
-    ExecStatement tree = parse("exec 'foo' in globals, locals", treeMaker::execStatement);
+    AstNode astNode = p.parse("exec 'foo' in globals, locals");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ExecStatement tree = treeMaker.execStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitExecStatement(tree);
     verify(visitor).scan(tree.expression());
@@ -115,7 +117,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void assert_statement() {
     setRootRule(PythonGrammar.ASSERT_STMT);
-    AssertStatement tree = parse("assert x, y", treeMaker::assertStatement);
+    AstNode astNode = p.parse("assert x, y");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssertStatement tree = treeMaker.assertStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssertStatement(tree);
     verify(visitor).scan(tree.condition());
@@ -125,7 +129,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void delete_statement() {
     setRootRule(PythonGrammar.DEL_STMT);
-    DelStatement tree = parse("del x", treeMaker::delStatement);
+    AstNode astNode = p.parse("del x");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    DelStatement tree = treeMaker.delStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitDelStatement(tree);
     verify(visitor).scan(tree.expressions());
@@ -162,13 +168,17 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void import_statement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
-    ImportFrom tree = (ImportFrom) parse("from foo import f as g", treeMaker::importStatement);
+    AstNode astNode = p.parse("from foo import f as g");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ImportFrom tree = (ImportFrom) treeMaker.importStatement(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitImportFrom(tree);
     verify(visitor).visitAliasedName(tree.importedNames().get(0));
     verify(visitor).visitDottedName(tree.module());
 
-    ImportName pyTree = (ImportName) parse("import f as g", treeMaker::importStatement);
+    astNode = p.parse("import f as g");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    ImportName pyTree = (ImportName) treeMaker.importStatement(statementWithSeparator);
     visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitImportName(pyTree);
     verify(visitor).visitAliasedName(pyTree.modules().get(0));
@@ -238,7 +248,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void assignement_stmt() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
-    AssignmentStatement tree = parse("a = b", treeMaker::assignment);
+    AstNode astNode = p.parse("a = b");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssignmentStatement tree = treeMaker.assignment(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAssignmentStatement(tree);
     verify(visitor).visitExpressionList(tree.lhsExpressions().get(0));
@@ -247,7 +259,9 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void annotated_assignment() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
-    AnnotatedAssignment tree = parse("a : int = b", treeMaker::annotatedAssignment);
+    AstNode astNode = p.parse("a : int = b");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AnnotatedAssignment tree = treeMaker.annotatedAssignment(statementWithSeparator);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAnnotatedAssignment(tree);
     verify(visitor).visitName((Name) tree.variable());

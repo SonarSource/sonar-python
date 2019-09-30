@@ -68,6 +68,6 @@ public class QualifiedExpressionImpl extends PyTree implements QualifiedExpressi
 
   @Override
   public List<Tree> children() {
-    return Stream.of(name, dotToken, qualifier).collect(Collectors.toList());
+    return Stream.of(qualifier, dotToken, name).collect(Collectors.toList());
   }
 }

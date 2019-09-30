@@ -20,50 +20,26 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
-import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
 
-public class ContinueStatementImpl extends PyTree implements ContinueStatement {
-  private final Token continueKeyword;
-  private final Token separator;
+public class StatementWithSeparator {
+  private AstNode statement;
+  private AstNode separator;
 
-  public ContinueStatementImpl(AstNode astNode, Token continueKeyword, @Nullable Token separator) {
-    super(astNode);
-    this.continueKeyword = continueKeyword;
+  StatementWithSeparator(AstNode statement, @CheckForNull AstNode separator) {
+    this.statement = statement;
     this.separator = separator;
   }
 
-  @Override
-  public Token continueKeyword() {
-    return continueKeyword;
+  public AstNode statement() {
+    return statement;
   }
 
-  @CheckForNull
-  @Override
   public Token separator() {
-    return separator;
-  }
-
-  @Override
-  public Kind getKind() {
-    return Kind.CONTINUE_STMT;
-  }
-
-  @Override
-  public void accept(TreeVisitor visitor) {
-    visitor.visitContinueStatement(this);
-  }
-
-  @Override
-  public List<Tree> children() {
-    return Stream.of(continueKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
+    if (separator == null) {
+      return null;
+    }
+    return new TokenImpl(separator.getToken());
   }
 }

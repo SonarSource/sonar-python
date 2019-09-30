@@ -51,14 +51,19 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private final Token rightPar;
   private final TypeAnnotation returnType;
   private final Token colon;
+  private final Token newLine;
+  private final Token indent;
   private final StatementList body;
+  private final Token dedent;
+
   private final boolean isMethodDefinition;
   private final Token docstring;
   private Set<Symbol> symbols = new HashSet<>();
 
   public FunctionDefImpl(AstNode astNode, List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
                          Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
-                         Token colon, StatementList body, boolean isMethodDefinition, @Nullable Token docstring) {
+                         Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
+                         boolean isMethodDefinition, @Nullable Token docstring) {
     super(astNode);
     this.decorators = decorators;
     this.asyncKeyword = asyncKeyword;
@@ -69,7 +74,10 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
     this.rightPar = rightPar;
     this.returnType = returnType;
     this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.body = body;
+    this.dedent = dedent;
     this.isMethodDefinition = isMethodDefinition;
     this.docstring = docstring;
   }
@@ -159,7 +167,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, docstring, body))
+    return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, docstring, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

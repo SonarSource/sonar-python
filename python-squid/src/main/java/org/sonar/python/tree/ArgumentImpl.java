@@ -99,6 +99,6 @@ public class ArgumentImpl extends PyTree implements Argument {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(keywordArgument, expression, equalToken, star, starStar).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(keywordArgument, equalToken, expression, star, starStar).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

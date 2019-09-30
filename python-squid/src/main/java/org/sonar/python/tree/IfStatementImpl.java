@@ -38,22 +38,32 @@ public class IfStatementImpl extends PyTree implements IfStatement {
 
   private final Token keyword;
   private final Expression condition;
+  private final Token colon;
+  @CheckForNull
+  private final Token newLine;
+  @CheckForNull
+  private final Token indent;
   private final StatementList statements;
+  private final Token dedent;
   private final List<IfStatement> elifBranches;
   private final boolean isElif;
   @CheckForNull
   private final ElseStatement elseStatement;
 
   /**
-   *
    * If statement constructor
    */
   public IfStatementImpl(Token ifKeyword, Expression condition,
-                         StatementList statements, List<IfStatement> elifBranches, @CheckForNull ElseStatement elseStatement) {
+                               Token colon, @CheckForNull Token newLine, @CheckForNull Token indent, StatementList statements, @CheckForNull Token dedent,
+                               List<IfStatement> elifBranches, @CheckForNull ElseStatement elseStatement) {
     super(ifKeyword, statements.lastToken());
     this.keyword = ifKeyword;
     this.condition = condition;
+    this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.statements = statements;
+    this.dedent = dedent;
     this.elifBranches = elifBranches;
     this.isElif = false;
     this.elseStatement = elseStatement;
@@ -62,11 +72,16 @@ public class IfStatementImpl extends PyTree implements IfStatement {
   /**
    * Elif statement constructor
    */
-  public IfStatementImpl(Token elifKeyword, Expression condition, StatementList statements) {
+  public IfStatementImpl(Token elifKeyword, Expression condition, Token colon,
+                               @CheckForNull Token newLine, @CheckForNull Token indent, StatementList statements, @CheckForNull Token dedent) {
     super(elifKeyword, statements.lastToken());
     this.keyword = elifKeyword;
     this.condition = condition;
+    this.colon = colon;
+    this.newLine = newLine;
+    this.indent = indent;
     this.statements = statements;
+    this.dedent = dedent;
     this.elifBranches = Collections.emptyList();
     this.isElif = true;
     this.elseStatement = null;
@@ -115,7 +130,7 @@ public class IfStatementImpl extends PyTree implements IfStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Arrays.asList(keyword, condition, statements), elifBranches, Collections.singletonList(elseStatement))
+    return Stream.of(Arrays.asList(keyword, condition, colon, newLine, indent, statements, dedent), elifBranches, Collections.singletonList(elseStatement))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -36,22 +36,25 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
   private final Expression expression;
   private final Expression globalsExpression;
   private final Expression localsExpression;
+  private final Token separator;
 
   public ExecStatementImpl(AstNode astNode, Token execKeyword, Expression expression,
-                           @Nullable Expression globalsExpression, @Nullable Expression localsExpression) {
+                                 @Nullable Expression globalsExpression, @Nullable Expression localsExpression, @Nullable Token separator) {
     super(astNode);
     this.execKeyword = execKeyword;
     this.expression = expression;
     this.globalsExpression = globalsExpression;
     this.localsExpression = localsExpression;
+    this.separator = separator;
   }
 
-  public ExecStatementImpl(AstNode astNode, Token execKeyword, Expression expression) {
+  public ExecStatementImpl(AstNode astNode, Token execKeyword, Expression expression, @Nullable Token separator) {
     super(astNode);
     this.execKeyword = execKeyword;
     this.expression = expression;
     globalsExpression = null;
     localsExpression = null;
+    this.separator =separator;
   }
 
   @Override
@@ -74,6 +77,12 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
     return localsExpression;
   }
 
+  @Nullable
+  @Override
+  public Token separator() {
+    return separator;
+  }
+
   @Override
   public Kind getKind() {
     return Kind.EXEC_STMT;
@@ -86,6 +95,6 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(execKeyword, expression, globalsExpression, localsExpression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(execKeyword, expression, globalsExpression, localsExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

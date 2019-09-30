@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -36,15 +37,17 @@ public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignme
   private final Expression annotation;
   private final Token equalToken;
   private final Expression assignedValue;
+  private final Token separator;
 
   public AnnotatedAssignmentImpl(Expression variable, Token colonToken, Expression annotation,
-                                 @Nullable Token equalToken, @Nullable Expression assignedValue) {
+                                 @Nullable Token equalToken, @Nullable Expression assignedValue, @Nullable Token separator) {
     super(variable.firstToken(), assignedValue != null ? assignedValue.lastToken() : annotation.lastToken());
     this.variable = variable;
     this.colonToken = colonToken;
     this.annotation = annotation;
     this.equalToken = equalToken;
     this.assignedValue = assignedValue;
+    this.separator = separator;
   }
 
   @Override
@@ -74,6 +77,12 @@ public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignme
     return assignedValue;
   }
 
+  @CheckForNull
+  @Override
+  public Token separator() {
+    return separator;
+  }
+
   @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitAnnotatedAssignment(this);
@@ -81,7 +90,7 @@ public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignme
 
   @Override
   public List<Tree> children() {
-    return Stream.of(variable, colonToken, annotation, equalToken, assignedValue).collect(Collectors.toList());
+    return Stream.of(variable, colonToken, annotation, equalToken, assignedValue, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

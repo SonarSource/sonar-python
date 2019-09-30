@@ -36,12 +36,14 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   private final Expression condition;
   @Nullable
   private final Expression message;
+  private final Token separator;
 
-  public AssertStatementImpl(AstNode astNode, Token assertKeyword, Expression condition, @Nullable Expression message) {
+  public AssertStatementImpl(AstNode astNode, Token assertKeyword, Expression condition, @Nullable Expression message, @Nullable Token separator) {
     super(astNode);
     this.assertKeyword = assertKeyword;
     this.condition = condition;
     this.message = message;
+    this.separator = separator;
   }
 
   @Override
@@ -61,6 +63,12 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   }
 
   @Override
+  @Nullable
+  public Token separator() {
+    return separator;
+  }
+
+  @Override
   public Kind getKind() {
     return Kind.ASSERT_STMT;
   }
@@ -72,6 +80,6 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(assertKeyword, condition, message).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(assertKeyword, condition, message, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

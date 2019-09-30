@@ -20,25 +20,28 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
-import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ReturnStatement;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ReturnStatementImpl extends PyTree implements ReturnStatement {
   private final Token returnKeyword;
   private final List<Expression> expressionTrees;
+  private final Token separator;
 
-  public ReturnStatementImpl(AstNode astNode, Token returnKeyword, List<Expression> expressionTrees) {
+  public ReturnStatementImpl(AstNode astNode, Token returnKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
     super(astNode);
     this.returnKeyword = returnKeyword;
     this.expressionTrees = expressionTrees;
+    this.separator = separator;
   }
 
   @Override
@@ -63,6 +66,12 @@ public class ReturnStatementImpl extends PyTree implements ReturnStatement {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, Collections.singletonList(separator))
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  @Override
+  public Token separator() {
+    return separator;
   }
 }
