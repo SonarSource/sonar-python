@@ -186,7 +186,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("x = y", AssignmentStatement.class);
     testData.put("x += y", CompoundAssignmentStatement.class);
 
-    testData.forEach((c,clazz) -> {
+    testData.forEach((c, clazz) -> {
       FileInput pyTree = parse(c, treeMaker::fileInput);
       StatementList statementList = pyTree.statements();
       assertThat(statementList.statements()).hasSize(1);
@@ -1205,7 +1205,7 @@ public class PythonTreeMakerTest extends RuleTest {
     testData.put("foo()", CallExpression.class);
     testData.put("lambda x: x", LambdaExpression.class);
 
-    testData.forEach((c,clazz) -> {
+    testData.forEach((c, clazz) -> {
       FileInput pyTree = parse(c, treeMaker::fileInput);
       assertThat(pyTree.statements().statements()).hasSize(1);
       ExpressionStatement expressionStmt = (ExpressionStatement) pyTree.statements().statements().get(0);
@@ -1738,8 +1738,8 @@ public class PythonTreeMakerTest extends RuleTest {
     ComprehensionExpression generator = (ComprehensionExpression) parse("(x*x for x in range(10))", treeMaker::expression);
     assertThat(generator.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
     assertThat(generator.children()).hasSize(4);
-    assertThat(((Token) generator.children().get(0)).value()).isEqualTo("(");
-    assertThat(((Token) generator.children().get(3)).value()).isEqualTo(")");
+    assertThat(generator.children().get(0)).isEqualTo(generator.firstToken());
+    assertThat(generator.children().get(3)).isEqualTo(generator.lastToken());
     assertThat(generator.firstToken().value()).isEqualTo("(");
     assertThat(generator.lastToken().value()).isEqualTo(")");
     assertThat(generator.resultExpression().getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
@@ -1976,39 +1976,39 @@ public class PythonTreeMakerTest extends RuleTest {
     List<Statement> statements = tree.statements().statements();
 
     List<Tree> statementChildren = statements.get(0).children();
-    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    Token token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
+    Token token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.token().getType()).isEqualTo(PythonPunctuator.SEMICOLON);
 
     statementChildren = statements.get(1).children();
-    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
 
     tree = parse("foo()\ntoto()", treeMaker::fileInput);
     statements = tree.statements().statements();
     statementChildren = statements.get(0).children();
-    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
 
     // Check that the second semicolon should be ignored
     tree = parse("foo(); bar();\ntoto()", treeMaker::fileInput);
     statements = tree.statements().statements();
     statementChildren = statements.get(0).children();
-    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.token().getType()).isEqualTo(PythonPunctuator.SEMICOLON);
 
     statementChildren = statements.get(1).children();
-    assertThat(statementChildren.get(statementChildren.size()-1).is(Tree.Kind.TOKEN)).isTrue();
-    token = (Token) statementChildren.get(statementChildren.size()-1);
+    assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
   }
 
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
     setRootRule(PythonGrammar.EXPR);
-    Expression parse = parse(operator+"1", treeMaker::expression);
+    Expression parse = parse(operator + "1", treeMaker::expression);
     assertThat(parse.is(kind)).isTrue();
     UnaryExpression unary = (UnaryExpression) parse;
     assertThat(unary.expression().is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
