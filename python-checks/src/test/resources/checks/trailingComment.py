@@ -24,3 +24,7 @@ changes = sa.Table('foo', bar,
     # some comment
     sa.Column('name', sa.String(256)),
     )
+
+#Noncompliant@+1
+toto = (state, None, # a comment
+        [foo(b) for b in bar])

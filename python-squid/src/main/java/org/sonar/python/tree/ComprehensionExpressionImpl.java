@@ -33,8 +33,10 @@ import org.sonar.python.api.tree.Tree;
 public class ComprehensionExpressionImpl extends PyTree implements ComprehensionExpression {
 
   private final Kind kind;
+  private final Token openingToken;
   private final Expression resultExpression;
   private final ComprehensionFor comprehensionFor;
+  private final Token closingToken;
 
   public ComprehensionExpressionImpl(Kind kind, Token openingToken, Expression resultExpression,
                                      ComprehensionFor compFor, Token closingToken) {
@@ -42,6 +44,8 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
     this.kind = kind;
     this.resultExpression = resultExpression;
     this.comprehensionFor = compFor;
+    this.openingToken = openingToken;
+    this.closingToken = closingToken;
   }
 
   @Override
@@ -61,7 +65,7 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
 
   @Override
   public List<Tree> children() {
-    return Stream.of(resultExpression, comprehensionFor).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(openingToken, resultExpression, comprehensionFor, closingToken).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

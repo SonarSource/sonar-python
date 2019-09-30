@@ -1676,7 +1676,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.firstToken().value()).isEqualTo("[");
     assertThat(comprehension.lastToken().value()).isEqualTo("]");
     assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.PLUS);
-    assertThat(comprehension.children()).hasSize(2);
+    assertThat(comprehension.children()).hasSize(4);
+    assertThat(((Token) comprehension.children().get(0)).value()).isEqualTo("[");
+    assertThat(((Token) comprehension.children().get(3)).value()).isEqualTo("]");
     ComprehensionFor forClause = comprehension.comprehensionFor();
     assertThat(forClause.firstToken().value()).isEqualTo("for");
     assertThat(forClause.lastToken().value()).isEqualTo("]");
@@ -1735,7 +1737,9 @@ public class PythonTreeMakerTest extends RuleTest {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression generator = (ComprehensionExpression) parse("(x*x for x in range(10))", treeMaker::expression);
     assertThat(generator.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
-    assertThat(generator.children()).hasSize(2);
+    assertThat(generator.children()).hasSize(4);
+    assertThat(((Token) generator.children().get(0)).value()).isEqualTo("(");
+    assertThat(((Token) generator.children().get(3)).value()).isEqualTo(")");
     assertThat(generator.firstToken().value()).isEqualTo("(");
     assertThat(generator.lastToken().value()).isEqualTo(")");
     assertThat(generator.resultExpression().getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
@@ -1905,7 +1909,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.SET_COMPREHENSION);
     assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
-    assertThat(comprehension.children()).hasSize(2);
+    assertThat(comprehension.children()).hasSize(4);
+    assertThat(((Token) comprehension.children().get(0)).value()).isEqualTo("{");
+    assertThat(((Token) comprehension.children().get(3)).value()).isEqualTo("}");
     assertThat(comprehension.firstToken().value()).isEqualTo("{");
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
   }
