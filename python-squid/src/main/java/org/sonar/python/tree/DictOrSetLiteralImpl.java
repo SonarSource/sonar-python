@@ -19,19 +19,22 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.Token;
+import java.util.ArrayList;
 import java.util.List;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 
-public abstract class DictOrSetLiteralImpl extends PyTree {
+public abstract class DictOrSetLiteralImpl<E extends Tree> extends PyTree {
   private final Token lCurlyBrace;
   private final List<Token> commas;
+  private final List<E> elements;
   private final Token rCurlyBrace;
 
-  public DictOrSetLiteralImpl(AstNode node, Token lCurlyBrace, List<Token> commas, Token rCurlyBrace) {
-    super(node);
+  public DictOrSetLiteralImpl(Token lCurlyBrace, List<Token> commas, List<E> elements, Token rCurlyBrace) {
+    super(lCurlyBrace, rCurlyBrace);
     this.lCurlyBrace = lCurlyBrace;
     this.commas = commas;
+    this.elements = elements;
     this.rCurlyBrace = rCurlyBrace;
   }
 
@@ -45,5 +48,25 @@ public abstract class DictOrSetLiteralImpl extends PyTree {
 
   public List<Token> commas() {
     return commas;
+  }
+
+  public List<E> elements() {
+    return elements;
+  }
+
+  @Override
+  public List<Tree> children() {
+    List<Tree> child = new ArrayList<>();
+    child.add(lCurlyBrace);
+    int i = 0;
+    for (E element : elements) {
+      child.add(element);
+      if (i < commas.size()) {
+        child.add(commas.get(i));
+      }
+      i++;
+    }
+    child.add(rCurlyBrace);
+    return child;
   }
 }

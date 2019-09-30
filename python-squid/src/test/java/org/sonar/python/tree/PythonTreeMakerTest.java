@@ -1837,10 +1837,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(keyValuePair.key().getKind()).isEqualTo(Tree.Kind.STRING_LITERAL);
     assertThat(keyValuePair.colon().value()).isEqualTo(":");
     assertThat(keyValuePair.value().getKind()).isEqualTo(Tree.Kind.STRING_LITERAL);
-    assertThat(tree.children()).hasSize(1);
+    assertThat(tree.children()).hasSize(3).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.rCurlyBrace());
 
     tree = (DictionaryLiteral) parse("{'key': 'value', 'key2': 'value2'}", treeMaker::expression);
     assertThat(tree.elements()).hasSize(2);
+    assertThat(tree.children()).hasSize(5).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.commas().get(0), tree.elements().get(1), tree.rCurlyBrace());
 
     tree = (DictionaryLiteral) parse("{** var}", treeMaker::expression);
     assertThat(tree.elements()).hasSize(1);
@@ -1882,10 +1883,12 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tree.lCurlyBrace().value()).isEqualTo("{");
     assertThat(tree.rCurlyBrace().value()).isEqualTo("}");
     assertThat(tree.commas()).hasSize(0);
-    assertThat(tree.children()).hasSize(1);
+    assertThat(tree.children()).hasSize(3).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.rCurlyBrace());
 
-    tree = (SetLiteral) parse("{ x, y }", treeMaker::expression);
+    tree = (SetLiteral) parse("{ x, y, }", treeMaker::expression);
     assertThat(tree.elements()).hasSize(2);
+    assertThat(tree.children()).hasSize(6).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.commas().get(0),
+      tree.elements().get(1), tree.commas().get(1), tree.rCurlyBrace());
 
     tree = (SetLiteral) parse("{ *x }", treeMaker::expression);
     assertThat(tree.elements()).hasSize(1);

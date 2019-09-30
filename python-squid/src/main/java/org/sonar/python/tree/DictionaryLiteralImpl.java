@@ -19,37 +19,20 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.DictionaryLiteral;
 import org.sonar.python.api.tree.KeyValuePair;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Tree;
 
-public class DictionaryLiteralImpl extends DictOrSetLiteralImpl implements DictionaryLiteral {
+public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<KeyValuePair> implements DictionaryLiteral {
 
-  private final List<KeyValuePair> elements;
-
-  public DictionaryLiteralImpl(AstNode node, Token lCurlyBrace, List<Token> commas, List<KeyValuePair> elements, Token rCurlyBrace) {
-    super(node, lCurlyBrace, commas, rCurlyBrace);
-    this.elements = elements;
+  public DictionaryLiteralImpl(Token lCurlyBrace, List<Token> commas, List<KeyValuePair> elements, Token rCurlyBrace) {
+    super(lCurlyBrace, commas, elements, rCurlyBrace);
   }
-
-  @Override
-  public List<KeyValuePair> elements() {
-    return elements;
-  }
-
   @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitDictionaryLiteral(this);
-  }
-
-  @Override
-  public List<Tree> children() {
-    return Collections.unmodifiableList(elements);
   }
 
   @Override

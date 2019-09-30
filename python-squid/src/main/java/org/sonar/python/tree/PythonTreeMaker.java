@@ -22,7 +22,6 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
-import com.sonar.sslr.impl.ast.AstXmlPrinter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -915,7 +914,7 @@ public class PythonTreeMaker {
     Token rCurlyBrace = toPyToken(astNode.getLastChild(PythonPunctuator.RCURLYBRACE).getToken());
     AstNode dictOrSetMaker = astNode.getFirstChild(PythonGrammar.DICTORSETMAKER);
     if (dictOrSetMaker == null) {
-      return new DictionaryLiteralImpl(astNode, lCurlyBrace, Collections.emptyList(), Collections.emptyList(), rCurlyBrace);
+      return new DictionaryLiteralImpl(lCurlyBrace, Collections.emptyList(), Collections.emptyList(), rCurlyBrace);
     }
     AstNode compForNode = dictOrSetMaker.getFirstChild(PythonGrammar.COMP_FOR);
     if (compForNode != null) {
@@ -945,10 +944,10 @@ public class PythonTreeMaker {
           index += 4;
         }
       }
-      return new DictionaryLiteralImpl(astNode, lCurlyBrace, commas, keyValuePairTrees, rCurlyBrace);
+      return new DictionaryLiteralImpl(lCurlyBrace, commas, keyValuePairTrees, rCurlyBrace);
     }
     List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toList());
-    return new SetLiteralImpl(astNode, lCurlyBrace, expressions, commas, rCurlyBrace);
+    return new SetLiteralImpl(lCurlyBrace, expressions, commas, rCurlyBrace);
   }
 
   private Expression parenthesized(AstNode atom) {

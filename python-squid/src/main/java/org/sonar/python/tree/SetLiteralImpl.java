@@ -19,40 +19,25 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.SetLiteral;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Tree;
 
-public class SetLiteralImpl extends DictOrSetLiteralImpl implements SetLiteral {
-  private final List<Expression> elements;
+public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements SetLiteral {
 
-  public SetLiteralImpl(AstNode node, Token lCurlyBrace, List<Expression> elements, List<Token> commas, Token rCurlyBrace) {
-    super(node, lCurlyBrace, commas, rCurlyBrace);
-    this.elements = elements;
+  public SetLiteralImpl(Token lCurlyBrace, List<Expression> elements, List<Token> commas, Token rCurlyBrace) {
+    super(lCurlyBrace, commas, elements, rCurlyBrace);
   }
-
-  @Override
-  public List<Expression> elements() {
-    return elements;
-  }
-
   @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitSetLiteral(this);
   }
 
   @Override
-  public List<Tree> children() {
-    return Collections.unmodifiableList(elements);
-  }
-
-  @Override
   public Kind getKind() {
     return Kind.SET_LITERAL;
   }
+
 }
