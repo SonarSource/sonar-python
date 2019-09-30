@@ -1809,14 +1809,15 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void conditional_expression() {
     setRootRule(PythonGrammar.TEST);
-    ConditionalExpression conditionalExpressionTree = (ConditionalExpression) parse("1 if condition else 2", treeMaker::expression);
-    assertThat(conditionalExpressionTree.firstToken().value()).isEqualTo("1");
-    assertThat(conditionalExpressionTree.lastToken().value()).isEqualTo("2");
-    assertThat(conditionalExpressionTree.ifKeyword().value()).isEqualTo("if");
-    assertThat(conditionalExpressionTree.elseKeyword().value()).isEqualTo("else");
-    assertThat(conditionalExpressionTree.condition().getKind()).isEqualTo(Tree.Kind.NAME);
-    assertThat(conditionalExpressionTree.trueExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
-    assertThat(conditionalExpressionTree.falseExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    ConditionalExpression tree = (ConditionalExpression) parse("1 if condition else 2", treeMaker::expression);
+    assertThat(tree.firstToken().value()).isEqualTo("1");
+    assertThat(tree.lastToken().value()).isEqualTo("2");
+    assertThat(tree.ifKeyword().value()).isEqualTo("if");
+    assertThat(tree.elseKeyword().value()).isEqualTo("else");
+    assertThat(tree.condition().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(tree.trueExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(tree.falseExpression().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(tree.children()).containsExactly(tree.trueExpression(), tree.ifKeyword(), tree.condition(), tree.elseKeyword(), tree.falseExpression());
 
     ConditionalExpression nestedConditionalExpressionTree =
       (ConditionalExpression) parse("1 if x else 2 if y else 3", treeMaker::expression);

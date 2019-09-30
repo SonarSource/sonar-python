@@ -38,3 +38,8 @@ foo.bar(
                           l='l', p='p', i='i'))
           + 0
       )
+
+var = (some.method(arg1, arg2)
+           # Noncompliant@+1
+        if hasattr(umath, 'nextafter')  # Missing on some platforms?
+        else float64_ma.huge)
