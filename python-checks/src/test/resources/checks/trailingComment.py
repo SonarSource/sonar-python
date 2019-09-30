@@ -28,3 +28,13 @@ changes = sa.Table('foo', bar,
 #Noncompliant@+1
 toto = (state, None, # a comment
         [foo(b) for b in bar])
+foo.bar(
+         SomeClass(workdir='wkdir',
+                      command=['cmd',
+                               # Noncompliant@+1
+                               'foo'], # note extra param
+                      env=some.method(
+                          r'sf',
+                          l='l', p='p', i='i'))
+          + 0
+      )

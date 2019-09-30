@@ -1337,7 +1337,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.starToken()).isNull();
     assertThat(argumentTree.starStarToken()).isNull();
-    assertThat(argumentTree.children()).hasSize(3);
+    assertThat(argumentTree.children()).hasSize(3).containsExactly(argumentTree.keywordArgument(), argumentTree.equalToken(), argumentTree.expression());
   }
 
   @Test
