@@ -21,6 +21,11 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -2006,6 +2011,23 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
   }
 
+  @Test
+  public void separators() {
+    List<Tree.Kind> compoundStatements = Arrays.asList(Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.ELSE_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF,
+      Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE);
+    File file = new File("src/test/resources/separator.py");
+    String content = fileContent(file);
+    FileInput tree = parse(content, treeMaker::fileInput);
+    for (Statement statement : tree.statements().statements()) {
+      if (compoundStatements.contains(statement.getKind())) {
+        assertThat(statement.separator()).isNull();
+      } else {
+        assertThat(statement.separator()).isNotNull();
+        assertThat(statement.separator().type()).isEqualTo(PythonTokenType.NEWLINE);
+      }
+    }
+  }
+
   private void assertUnaryExpression(String operator, Tree.Kind kind) {
     setRootRule(PythonGrammar.EXPR);
     Expression parse = parse(operator + "1", treeMaker::expression);
@@ -2022,5 +2044,13 @@ public class PythonTreeMakerTest extends RuleTest {
     BaseTreeVisitor visitor = new BaseTreeVisitor();
     tree.accept(visitor);
     return tree;
+  }
+
+  public String fileContent(File file) {
+    try {
+      return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot read " + file, e);
+    }
   }
 }
