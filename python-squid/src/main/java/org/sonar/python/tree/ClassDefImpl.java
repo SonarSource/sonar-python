@@ -57,7 +57,7 @@ public class ClassDefImpl extends PyTree implements ClassDef {
 
   public ClassDefImpl(AstNode astNode, List<Decorator> decorators, Token classKeyword, Name name,
                             @Nullable Token leftPar, @Nullable ArgList args, @Nullable Token rightPar,
-                            Token colon, Token newLine, Token indent, StatementList body, Token dedent, Token docstring) {
+                            Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent, Token docstring) {
     super(astNode);
     this.decorators = decorators;
     this.classKeyword = classKeyword;

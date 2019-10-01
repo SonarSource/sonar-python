@@ -475,10 +475,7 @@ public class PythonTreeMaker {
     AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
-    Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
-    StatementList statements = getStatementListFromSuite(suite);
+    StatementList body = getStatementListFromSuite(suite);
     AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
     ElseStatement elseStatement = null;
     if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
@@ -488,7 +485,7 @@ public class PythonTreeMaker {
       .map(this::elifStatement)
       .collect(Collectors.toList());
 
-    return new IfStatementImpl(ifToken, expression(condition), colon, newLine, indent, statements, dedent, elifBranches, elseStatement);
+    return new IfStatementImpl(ifToken, expression(condition), colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), elifBranches, elseStatement);
   }
 
   private IfStatement elifStatement(AstNode astNode) {
@@ -496,22 +493,16 @@ public class PythonTreeMaker {
     AstNode condition = astNode.getNextSibling();
     AstNode colon = condition.getNextSibling();
     AstNode suite = colon.getNextSibling();
+    StatementList body = getStatementListFromSuite(suite);
     Token colonToken = toPyToken(colon.getToken());
-    Token newLineToken = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token indentToken = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token dedentToken = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
-    StatementList statements = getStatementListFromSuite(suite);
-    return new IfStatementImpl(elifToken, expression(condition), colonToken, newLineToken, indentToken, statements, dedentToken);
+    return new IfStatementImpl(elifToken, expression(condition), colonToken, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite));
   }
 
   private ElseStatement elseStatement(AstNode astNode) {
     Token elseToken = toPyToken(astNode.getPreviousSibling().getPreviousSibling().getToken());
     Token colon = toPyToken(astNode.getPreviousSibling().getToken());
-    Token indent = astNode.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(astNode.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token newLine = astNode.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(astNode.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token dedent = astNode.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(astNode.getFirstChild(PythonTokenType.DEDENT).getToken());
-    StatementList statements = getStatementListFromSuite(astNode);
-    return new ElseStatementImpl(elseToken, colon, newLine, indent, statements, dedent);
+    StatementList body = getStatementListFromSuite(astNode);
+    return new ElseStatementImpl(elseToken, colon, suiteNewLine(astNode), suiteIndent(astNode), body, suiteDedent(astNode));
   }
 
   public FunctionDef funcDefStatement(AstNode astNode) {
@@ -532,9 +523,6 @@ public class PythonTreeMaker {
     }
 
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
-    Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
     StatementList body = getStatementListFromSuite(suite);
     AstNode defNode = astNode.getFirstChild(PythonKeyword.DEF);
     Token asyncToken = null;
@@ -554,7 +542,8 @@ public class PythonTreeMaker {
 
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     return new FunctionDefImpl(astNode, decorators, asyncToken, toPyToken(defNode.getToken()), name, lPar, parameterList, rPar,
-      returnType, colon, newLine, indent, body, dedent, isMethodDefinition(astNode), toPyToken(DocstringExtractor.extractDocstring(astNode)));
+      returnType, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite),
+      isMethodDefinition(astNode), toPyToken(DocstringExtractor.extractDocstring(astNode)));
   }
 
   private Decorator decorator(AstNode astNode) {
@@ -591,15 +580,12 @@ public class PythonTreeMaker {
     }
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(suite);
-    Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token dedent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
     Token classToken = toPyToken(astNode.getFirstChild(PythonKeyword.CLASS).getToken());
     AstNode rightPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS);
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     return new ClassDefImpl(astNode, decorators, classToken, name,
       leftPar != null ? toPyToken(leftPar.getToken()) : null, args, rightPar != null ? toPyToken(rightPar.getToken()) : null,
-      colon, newLine, indent, body, dedent, toPyToken(DocstringExtractor.extractDocstring(astNode)));
+      colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), toPyToken(DocstringExtractor.extractDocstring(astNode)));
   }
 
   private static Name name(AstNode astNode) {
@@ -619,14 +605,8 @@ public class PythonTreeMaker {
     List<Expression> expressions = expressionsFromExprList(forStatementNode.getFirstChild(PythonGrammar.EXPRLIST));
     List<Expression> testExpressions = expressionsFromTest(forStatementNode.getFirstChild(PythonGrammar.TESTLIST));
     AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
-    Token firstIndent = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token firstNewLine = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token firstDedent = firstSuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.DEDENT).getToken());
     StatementList body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = forStatementNode.getLastChild(PythonGrammar.SUITE);
-    Token lastIndent = lastSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(lastSuite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token lastNewLine = lastSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(lastSuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token lastDedent = lastSuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(lastSuite.getFirstChild(PythonTokenType.DEDENT).getToken());
     AstNode elseKeywordNode = forStatementNode.getFirstChild(PythonKeyword.ELSE);
     Token elseKeyword = null;
     Token elseColonKeyword = null;
@@ -634,9 +614,12 @@ public class PythonTreeMaker {
       elseKeyword = toPyToken(elseKeywordNode.getToken());
       elseColonKeyword = toPyToken(elseKeywordNode.getNextSibling().getToken());
     }
-    StatementList elseBody = lastSuite == firstSuite ? null : getStatementListFromSuite(lastSuite);
-    return new ForStatementImpl(forStatementNode, forKeyword, expressions, inKeyword, testExpressions, colon, firstNewLine, firstIndent,
-      body, firstDedent, elseKeyword, elseColonKeyword, lastNewLine, lastIndent, elseBody, lastDedent, asyncToken);
+    Token lastIndent = firstSuite == lastSuite ? null : suiteIndent(lastSuite);
+    Token lastNewLine = firstSuite == lastSuite ? null : suiteNewLine(lastSuite);
+    Token lastDedent = firstSuite == lastSuite ? null : suiteDedent(lastSuite);
+    StatementList elseBody = firstSuite == lastSuite ? null : getStatementListFromSuite(lastSuite);
+    return new ForStatementImpl(forStatementNode, forKeyword, expressions, inKeyword, testExpressions, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite),
+      body, suiteDedent(firstSuite), elseKeyword, elseColonKeyword, lastNewLine, lastIndent, elseBody, lastDedent, asyncToken);
   }
 
   public WhileStatementImpl whileStatement(AstNode astNode) {
@@ -644,14 +627,8 @@ public class PythonTreeMaker {
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     Expression condition = expression(astNode.getFirstChild(PythonGrammar.TEST));
     AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
-    Token firstIndent = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token firstNewLine = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token firstDedent = firstSuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.DEDENT).getToken());
     StatementList body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
-    Token lastIndent = lastSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(lastSuite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token lastNewLine = lastSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(lastSuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token lastDedent = lastSuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(lastSuite.getFirstChild(PythonTokenType.DEDENT).getToken());
     AstNode elseKeywordNode = astNode.getFirstChild(PythonKeyword.ELSE);
     Token elseKeyword = null;
     Token elseColonKeyword = null;
@@ -659,9 +636,12 @@ public class PythonTreeMaker {
       elseKeyword = toPyToken(elseKeywordNode.getToken());
       elseColonKeyword = toPyToken(elseKeywordNode.getNextSibling().getToken());
     }
-    StatementList elseBody = lastSuite == firstSuite ? null : getStatementListFromSuite(lastSuite);
-    return new WhileStatementImpl(astNode, whileKeyword, condition, colon, firstNewLine, firstIndent,
-      body, firstDedent, elseKeyword, elseColonKeyword, lastNewLine, lastIndent, elseBody, lastDedent);
+    Token lastIndent = firstSuite == lastSuite ? null : suiteIndent(lastSuite);
+    Token lastNewLine = firstSuite == lastSuite ? null : suiteNewLine(lastSuite);
+    Token lastDedent = firstSuite == lastSuite ? null : suiteDedent(lastSuite);
+    StatementList elseBody = firstSuite == lastSuite ? null : getStatementListFromSuite(lastSuite);
+    return new WhileStatementImpl(astNode, whileKeyword, condition, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite),
+      body, suiteDedent(firstSuite), elseKeyword, elseColonKeyword, lastNewLine, lastIndent, elseBody, lastDedent);
   }
 
 
@@ -718,10 +698,7 @@ public class PythonTreeMaker {
     Token tryKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.TRY).getToken());
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
-    Token indent = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token newLine = firstSuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token dedent = firstSuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(firstSuite.getFirstChild(PythonTokenType.DEDENT).getToken());
-    StatementList tryBody = getStatementListFromSuite(firstSuite);
+    StatementList body = getStatementListFromSuite(firstSuite);
     List<ExceptClause> exceptClauseTrees = astNode.getChildren(PythonGrammar.EXCEPT_CLAUSE).stream()
       .map(except -> {
         AstNode suite = except.getNextSibling().getNextSibling();
@@ -733,18 +710,17 @@ public class PythonTreeMaker {
     if (finallyNode != null) {
       Token finallyColon = toPyToken(finallyNode.getNextSibling().getToken());
       AstNode finallySuite = finallyNode.getNextSibling().getNextSibling();
-      StatementList body = getStatementListFromSuite(finallySuite);
-      Token finallyIndent = finallySuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(finallySuite.getFirstChild(PythonTokenType.INDENT).getToken());
-      Token finallyNewLine = finallySuite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(finallySuite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-      Token finallyDedent = finallySuite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(finallySuite.getFirstChild(PythonTokenType.DEDENT).getToken());
-      finallyClause = new FinallyClauseImpl(toPyToken(finallyNode.getToken()), finallyColon, finallyNewLine, finallyIndent, body, finallyDedent);
+      StatementList finallyBody = getStatementListFromSuite(finallySuite);
+      finallyClause = new FinallyClauseImpl(toPyToken(finallyNode.getToken()), finallyColon,
+        suiteNewLine(finallySuite), suiteIndent(finallySuite), finallyBody, suiteDedent(finallySuite));
     }
     ElseStatement elseStatementTree = null;
     AstNode elseNode = astNode.getFirstChild(PythonKeyword.ELSE);
     if (elseNode != null) {
       elseStatementTree = elseStatement(elseNode.getNextSibling().getNextSibling());
     }
-    return new TryStatementImpl(astNode, tryKeyword, colon, newLine, indent, tryBody, dedent, exceptClauseTrees, finallyClause, elseStatementTree);
+    return new TryStatementImpl(astNode, tryKeyword, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite), body, suiteDedent(firstSuite),
+      exceptClauseTrees, finallyClause, elseStatementTree);
   }
 
   public WithStatement withStatement(AstNode astNode) {
@@ -757,12 +733,9 @@ public class PythonTreeMaker {
     List<WithItem> withItems = withItems(withStmtNode.getChildren(PythonGrammar.WITH_ITEM));
     AstNode suite = withStmtNode.getFirstChild(PythonGrammar.SUITE);
     Token withKeyword = toPyToken(withStmtNode.getToken());
-    Token indent = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
-    Token newLine = suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    Token dedent = suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
     Token colon = toPyToken(suite.getPreviousSibling().getToken());
-    StatementList statements = getStatementListFromSuite(suite);
-    return new WithStatementImpl(withStmtNode, withKeyword, withItems, colon, newLine, indent, statements, dedent, asyncKeyword);
+    StatementList body = getStatementListFromSuite(suite);
+    return new WithStatementImpl(withStmtNode, withKeyword, withItems, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), asyncKeyword);
   }
 
   private List<WithItem> withItems(List<AstNode> withItems) {
@@ -1277,5 +1250,17 @@ public class PythonTreeMaker {
   private static Expression stringLiteral(AstNode astNode) {
     List<StringElement> stringElements = astNode.getChildren(PythonTokenType.STRING).stream().map(StringElementImpl::new).collect(Collectors.toList());
     return new StringLiteralImpl(astNode, stringElements);
+  }
+
+  private static Token suiteIndent(AstNode suite) {
+    return suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.INDENT).getToken());
+  }
+
+  private static Token suiteNewLine(AstNode suite) {
+    return suite.getFirstChild(PythonTokenType.INDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.NEWLINE).getToken());
+  }
+
+  private static Token suiteDedent(AstNode suite) {
+    return suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
   }
 }
