@@ -1,0 +1,17 @@
+<p>Jump statements, such as <code>return</code>, <code>break</code> and <code>continue</code> let you change the default flow of program execution,
+but jump statements that direct the control flow to the original direction are just a waste of keystrokes.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def redundant_jump(x):
+    if x == 1:
+        print(True)
+        return  # NonCompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def redundant_jump(x):
+    if x == 1:
+        print(True)
+</pre>
+
