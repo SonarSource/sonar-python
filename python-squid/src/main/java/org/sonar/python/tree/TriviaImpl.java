@@ -17,27 +17,26 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api.tree;
+package org.sonar.python.tree;
 
-import com.sonar.sslr.api.TokenType;
-import java.util.List;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Trivia;
 
-public interface Token extends Tree {
+public class TriviaImpl implements Trivia {
 
-  /**
-   * @deprecated Use of sslr dependencies should be avoided
-   */
-  @Deprecated
-  com.sonar.sslr.api.Token token();
+  private final Token token;
 
-  String value();
+  public TriviaImpl(com.sonar.sslr.api.Trivia trivia) {
+    token = new TokenImpl(trivia.getToken());
+  }
 
-  int line();
+  @Override
+  public Token token() {
+    return token;
+  }
 
-  int column();
-
-  List<Trivia> trivia();
-
-  TokenType type();
-
+  @Override
+  public String value() {
+    return token.value();
+  }
 }

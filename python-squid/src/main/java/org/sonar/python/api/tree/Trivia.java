@@ -19,25 +19,12 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.TokenType;
-import java.util.List;
-
-public interface Token extends Tree {
+public interface Trivia {
 
   /**
-   * @deprecated Use of sslr dependencies should be avoided
+   * Returns the token of the comment
    */
-  @Deprecated
-  com.sonar.sslr.api.Token token();
+  Token token();
 
   String value();
-
-  int line();
-
-  int column();
-
-  List<Trivia> trivia();
-
-  TokenType type();
-
 }

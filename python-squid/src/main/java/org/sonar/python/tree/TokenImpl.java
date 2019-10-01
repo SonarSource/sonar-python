@@ -20,20 +20,23 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.TokenType;
-import com.sonar.sslr.api.Trivia;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Trivia;
 
 public class TokenImpl extends PyTree implements Token {
 
   private com.sonar.sslr.api.Token token;
+  private List<Trivia> trivia;
 
   public TokenImpl(com.sonar.sslr.api.Token token) {
     super(null);
     this.token = token;
+    this.trivia = token.getTrivia().stream().map(TriviaImpl::new).collect(Collectors.toList());
   }
 
   public com.sonar.sslr.api.Token token() {
@@ -57,7 +60,7 @@ public class TokenImpl extends PyTree implements Token {
 
   @Override
   public List<Trivia> trivia() {
-    return token.getTrivia();
+    return trivia;
   }
 
   public TokenType type() {

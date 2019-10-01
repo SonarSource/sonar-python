@@ -98,6 +98,7 @@ import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.SubscriptionExpression;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 import org.sonar.python.api.tree.TryStatement;
 import org.sonar.python.api.tree.Tuple;
 import org.sonar.python.api.tree.TupleParameter;
@@ -1975,6 +1976,24 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(functionDefTree.name().isVariable()).isFalse();
   }
 
+
+  @Test
+  public void test_trivia() {
+    FileInput fileInput = parse("#A comment\npass", treeMaker::fileInput);
+
+    assertThat(fileInput.firstToken().value()).isEqualTo("pass");
+    Token passToken = fileInput.firstToken();
+    assertThat(passToken.trivia()).hasSize(1);
+    Trivia trivia = passToken.trivia().get(0);
+    assertThat(trivia.token().value()).isEqualTo("#A comment");
+    assertThat(trivia.value()).isEqualTo("#A comment");
+
+    fileInput = parse("foo", treeMaker::fileInput);
+    assertThat(fileInput.firstToken().value()).isEqualTo("foo");
+    passToken = fileInput.firstToken();
+    assertThat(passToken.trivia()).hasSize(0);
+  }
+
   @Test
   public void statements_separators() {
     FileInput tree = parse("foo(); bar()\ntoto()", treeMaker::fileInput);
@@ -1983,19 +2002,19 @@ public class PythonTreeMakerTest extends RuleTest {
     List<Tree> statementChildren = statements.get(0).children();
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     Token token = (Token) statementChildren.get(statementChildren.size() - 1);
-    assertThat(token.token().getType()).isEqualTo(PythonPunctuator.SEMICOLON);
+    assertThat(token.type()).isEqualTo(PythonPunctuator.SEMICOLON);
 
     statementChildren = statements.get(1).children();
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
-    assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
+    assertThat(token.type()).isEqualTo(PythonTokenType.NEWLINE);
 
     tree = parse("foo()\ntoto()", treeMaker::fileInput);
     statements = tree.statements().statements();
     statementChildren = statements.get(0).children();
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
-    assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
+    assertThat(token.type()).isEqualTo(PythonTokenType.NEWLINE);
 
     // Check that the second semicolon should be ignored
     tree = parse("foo(); bar();\ntoto()", treeMaker::fileInput);
@@ -2003,12 +2022,12 @@ public class PythonTreeMakerTest extends RuleTest {
     statementChildren = statements.get(0).children();
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
-    assertThat(token.token().getType()).isEqualTo(PythonPunctuator.SEMICOLON);
+    assertThat(token.type()).isEqualTo(PythonPunctuator.SEMICOLON);
 
     statementChildren = statements.get(1).children();
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
-    assertThat(token.token().getType()).isEqualTo(PythonTokenType.NEWLINE);
+    assertThat(token.type()).isEqualTo(PythonTokenType.NEWLINE);
   }
 
   @Test

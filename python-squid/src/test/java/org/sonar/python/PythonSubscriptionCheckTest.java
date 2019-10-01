@@ -28,6 +28,7 @@ import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -107,6 +108,28 @@ public class PythonSubscriptionCheckTest {
     assertThat(issues).hasSize(2);
     assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
     assertThat(issues.get(1).primaryLocation().startLine()).isEqualTo(7);
+  }
+
+  @Test
+  public void test_trivia() {
+    TestPythonCheck check = new TestPythonCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+          Token token = (Token) ctx.syntaxNode();
+          for (Trivia trivia : token.trivia()) {
+            ctx.addIssue(trivia.token(), MESSAGE);
+          }
+        });
+      }
+    };
+    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    assertThat(issues).hasSize(1);
+    IssueLocation primaryLocation = issues.get(0).primaryLocation();
+    assertThat(primaryLocation.startLine()).isEqualTo(5);
+    assertThat(primaryLocation.endLine()).isEqualTo(5);
+    assertThat(primaryLocation.startLineOffset()).isEqualTo(0);
+    assertThat(primaryLocation.endLineOffset()).isEqualTo(10);
   }
 
   @Test
