@@ -19,14 +19,13 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.tree.TokenImpl;
+import org.sonar.python.api.tree.Trivia;
 
 @Rule(key = "S139")
 public class TrailingCommentCheck extends PythonSubscriptionCheck {
@@ -49,10 +48,10 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
       Token pyToken = (Token) ctx.syntaxNode();
       for (Trivia trivia : pyToken.trivia()) {
-        if (previousTokenLine == trivia.getToken().getLine()) {
-          String comment = trivia.getToken().getValue();
+        if (previousTokenLine == trivia.token().line()) {
+          String comment = trivia.token().value();
           if (!pattern.matcher(comment).matches()) {
-            ctx.addIssue(new TokenImpl(trivia.getToken()), MESSAGE);
+            ctx.addIssue(trivia.token(), MESSAGE);
           }
         }
       }

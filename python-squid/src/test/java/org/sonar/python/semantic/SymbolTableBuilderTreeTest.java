@@ -63,13 +63,13 @@ public class SymbolTableBuilderTreeTest {
       .filter(name -> ((Name) name).name().equals("a"))
       .findFirst().get();
     assertThat(aTree.symbol()).isEqualTo(a);
-    int functionStartLine = functionTree.firstToken().token().getLine();
-    assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(
+    int functionStartLine = functionTree.firstToken().line();
+    assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(
       functionStartLine + 1, functionStartLine + 2, functionStartLine + 3, functionStartLine + 4);
     assertThat(a.usages()).extracting(Usage::kind).containsOnly(
       Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.COMPOUND_ASSIGNMENT_LHS, Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
     Symbol t2 = symbolByName.get("t2");
-    assertThat(t2.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(
+    assertThat(t2.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(
       functionStartLine + 5);
     assertThat(t2.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
   }
@@ -99,12 +99,12 @@ public class SymbolTableBuilderTreeTest {
     FunctionDef functionTree = functionTreesByName.get("multiple_assignment");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
-    int functionStartLine = functionTree.firstToken().token().getLine();
+    int functionStartLine = functionTree.firstToken().line();
     Symbol x = symbolByName.get("x");
-    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1);
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
     Symbol y = symbolByName.get("y");
-    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1);
     assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
   }
 
@@ -113,12 +113,12 @@ public class SymbolTableBuilderTreeTest {
     FunctionDef functionTree = functionTreesByName.get("tuple_assignment");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
-    int functionStartLine = functionTree.firstToken().token().getLine();
+    int functionStartLine = functionTree.firstToken().line();
     Symbol x = symbolByName.get("x");
-    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1);
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
     Symbol y = symbolByName.get("y");
-    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1);
+    assertThat(y.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1);
     assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS);
   }
 
@@ -140,8 +140,8 @@ public class SymbolTableBuilderTreeTest {
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsExactly("x");
     Symbol x = symbolByName.get("x");
-    int functionStartLine = functionTree.firstToken().token().getLine();
-    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().token().getLine()).containsOnly(functionStartLine + 1, functionStartLine + 4);
+    int functionStartLine = functionTree.firstToken().line();
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1, functionStartLine + 4);
     FunctionDef innerFunctionTree = functionTreesByName.get("innerFn");
     assertThat(innerFunctionTree.localVariables()).isEmpty();
   }
