@@ -26,7 +26,11 @@ import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.python.api.tree.Tree;
 
-public class PythonCfgEndBlock implements CfgBlock {
+public class PythonCfgEndBlock extends PythonCfgBlock {
+
+  public PythonCfgEndBlock() {
+    super(Collections.emptySet());
+  }
 
   @Override
   public Set<CfgBlock> successors() {
