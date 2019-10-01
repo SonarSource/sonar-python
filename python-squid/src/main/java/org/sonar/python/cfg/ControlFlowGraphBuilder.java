@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.api.internal.google.common.collect.Lists;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.api.tree.ReturnStatement;
@@ -57,7 +56,8 @@ public class ControlFlowGraphBuilder {
 
   private PythonCfgBlock build(List<Statement> statements, PythonCfgBlock successor) {
     PythonCfgBlock currentBlock = successor;
-    for (Statement statement : Lists.reverse(statements)) {
+    for (int i = statements.size() - 1; i >= 0; i--) {
+      Statement statement = statements.get(i);
       currentBlock = build(statement, currentBlock);
     }
     return currentBlock;
