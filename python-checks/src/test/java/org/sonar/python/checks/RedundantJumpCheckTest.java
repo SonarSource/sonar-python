@@ -17,21 +17,16 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.cfg;
+package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.Set;
-import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.Tree;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public interface CfgBlock {
+public class RedundantJumpCheckTest {
 
-  Set<CfgBlock> successors();
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/redundantJump.py", new RedundantJumpCheck());
+  }
 
-  Set<CfgBlock> predecessors();
-
-  List<Tree> elements();
-
-  @CheckForNull
-  CfgBlock syntacticSuccessor();
 }

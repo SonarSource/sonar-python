@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.python.api.tree.Tree;
 
@@ -30,6 +31,7 @@ public class PythonCfgBlock implements CfgBlock {
 
   private final LinkedList<Tree> elements = new LinkedList<>();
   private final CfgBlock successor;
+  private CfgBlock syntacticSuccessor;
 
   public PythonCfgBlock(CfgBlock successor) {
     this.successor = successor;
@@ -52,5 +54,19 @@ public class PythonCfgBlock implements CfgBlock {
 
   public void addElement(Tree tree) {
     elements.addFirst(tree);
+  }
+
+  @CheckForNull
+  @Override
+  public CfgBlock syntacticSuccessor() {
+    return syntacticSuccessor;
+  }
+
+  public void setSyntacticSuccessor(CfgBlock syntacticSuccessor) {
+    this.syntacticSuccessor = syntacticSuccessor;
+  }
+
+  public boolean isEmptyBlock() {
+    return elements.isEmpty() && successors().size() == 1;
   }
 }

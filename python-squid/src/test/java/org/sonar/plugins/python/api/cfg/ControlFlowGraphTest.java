@@ -39,6 +39,7 @@ public class ControlFlowGraphTest {
     assertThat(start).isEqualTo(cfg.end());
     assertThat(start.elements()).isEmpty();
     assertThat(start.successors()).isEmpty();
+    assertThat(start.syntacticSuccessor()).isNull();
     assertThat(cfg.blocks()).containsExactly(start);
   }
 
@@ -47,6 +48,7 @@ public class ControlFlowGraphTest {
     ControlFlowGraph cfg = cfg("pass");
     assertThat(cfg.start().elements()).extracting(Tree::getKind).containsExactly(Kind.PASS_STMT);
     assertThat(cfg.start().successors()).containsExactly(cfg.end());
+    assertThat(cfg.start().syntacticSuccessor()).isNull();
     assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
   }
 
@@ -64,8 +66,11 @@ public class ControlFlowGraphTest {
 
   @Test
   public void return_statement() {
+    verifyCfg(
+      "b1(succ = [END], syntSucc = END)",
+      "return");
     ControlFlowGraph cfg = verifyCfg(
-      "b1(succ = [END])",
+      "b1(succ = [END], syntSucc = b2)",
       "return",
       "b2(succ = [END])");
     assertThat(cfg.start().elements().get(0).firstToken().value()).isEqualTo("b1");

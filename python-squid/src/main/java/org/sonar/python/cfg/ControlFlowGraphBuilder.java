@@ -66,7 +66,7 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock build(Statement statement, PythonCfgBlock currentBlock) {
     switch (statement.getKind()) {
       case RETURN_STMT:
-        return buildReturnStatement((ReturnStatement) statement);
+        return buildReturnStatement((ReturnStatement) statement, currentBlock);
       default:
         currentBlock.addElement(statement);
     }
@@ -74,10 +74,17 @@ public class ControlFlowGraphBuilder {
     return currentBlock;
   }
 
-  private PythonCfgBlock buildReturnStatement(ReturnStatement statement) {
-    PythonCfgBlock block = createSimpleBlock(end);
-    block.addElement(statement);
-    return block;
+  private PythonCfgBlock buildReturnStatement(ReturnStatement statement, PythonCfgBlock syntacticSuccessor) {
+    if (syntacticSuccessor.isEmptyBlock()) {
+      syntacticSuccessor.addElement(statement);
+      syntacticSuccessor.setSyntacticSuccessor(syntacticSuccessor.successors().iterator().next());
+      return syntacticSuccessor;
+    } else {
+      PythonCfgBlock block = createSimpleBlock(end);
+      block.setSyntacticSuccessor(syntacticSuccessor);
+      block.addElement(statement);
+      return block;
+    }
   }
 
 }

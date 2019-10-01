@@ -72,6 +72,7 @@ public class CfgValidator {
       assertSuccessors(actualBlock);
       assertPredecessors(actualBlock, blockTestId);
       assertElements(actualBlock, blockTestId);
+      assertSyntacticSuccessor(actualBlock);
     }
   }
 
@@ -120,6 +121,20 @@ public class CfgValidator {
       .isEqualTo(expectedSucc);
 
   }
+
+  private void assertSyntacticSuccessor(CfgBlock actualBlock) {
+    String blockTestId = expectedCfg.testId(actualBlock);
+    String expectedSyntSucc = expectedCfg.expectedSyntSucc(actualBlock);
+
+    if (expectedSyntSucc != null) {
+      assertThat(actualBlock.syntacticSuccessor())
+        .withFailMessage(buildDebugMessage("syntactic successor", blockTestId))
+        .isEqualTo(expectedCfg.cfgBlock(expectedSyntSucc));
+    } else {
+      assertThat(actualBlock.syntacticSuccessor()).withFailMessage(buildDebugMessage("syntactic successor", blockTestId)).isNull();
+    }
+  }
+
 
   private String buildDebugMessage(String hint, String blockId) {
     return format(DEBUG_MESSAGE_TEMPLATE, hint, blockId, null);

@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.CallExpression;
@@ -102,7 +103,7 @@ public class ExpectedCfgStructure {
     return getExpectation(block).expectedSuccessorIds;
   }
 
-  @Nullable
+  @CheckForNull
   String expectedSyntSucc(CfgBlock block) {
     return getExpectation(block).expectedSyntacticSuccessor;
   }
