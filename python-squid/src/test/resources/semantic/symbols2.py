@@ -50,7 +50,7 @@ def function_with_lambdas():
     foo((lambda z: z*y))
 
 def function_with_loops():
-    for x in [1,2,3]:
+    for (x, y) in [1,2,3]:
         pass;
 
 def function_with_comprehension():
@@ -73,3 +73,6 @@ def function_with_unused_import():
 
 def binding_usages(param):
     pass
+
+def func_with_tuple_param((a, (b, c)), d):
+  pass
