@@ -1,4 +1,4 @@
-/*
+  /*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2019 SonarSource SA
  * mailto:info AT sonarsource DOT com

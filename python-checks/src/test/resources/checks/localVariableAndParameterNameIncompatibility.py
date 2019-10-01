@@ -54,7 +54,7 @@ def fun8():
 
 def fun9():
     CONSTANT_NAME = "Hello, world"
-    for counterName in names: # Noncompliant
+    for counterName in names: # Noncompliant {{Rename this local variable "counterName" to match the regular expression ^[_a-z][a-z0-9_]+$.}}
         pass
 
 def fun10():
@@ -62,3 +62,6 @@ def fun10():
     # Noncompliant@+1
     a = b = 1
     name = d.e = 1
+    #Noncompliant@+1
+    for (builderName, stepName) in foo: #Noncompliant
+      pass
