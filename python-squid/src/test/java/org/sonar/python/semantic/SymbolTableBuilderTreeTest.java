@@ -177,9 +177,11 @@ public class SymbolTableBuilderTreeTest {
     FunctionDef functionTree = functionTreesByName.get("function_with_loops");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x");
+    assertThat(symbolByName.keySet()).containsOnly("x", "y");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
+    Symbol y = symbolByName.get("y");
+    assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
   }
 
   @Test
@@ -219,6 +221,13 @@ public class SymbolTableBuilderTreeTest {
 
     assertThat(symbolByName.get("x").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
     assertThat(symbolByName.get("z").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+  }
+
+  @Test
+  public void function_with_tuple_param() {
+    FunctionDef functionTree = functionTreesByName.get("func_with_tuple_param");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(4);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

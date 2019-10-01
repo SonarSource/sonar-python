@@ -59,6 +59,7 @@ import org.sonar.python.api.tree.QualifiedExpression;
 import org.sonar.python.api.tree.Tuple;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.api.tree.TupleParameter;
 import org.sonar.python.tree.BaseTreeVisitor;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.FunctionDefImpl;
@@ -197,7 +198,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void createLoopVariables(ForStatement loopTree) {
-      loopTree.expressions().forEach(expr -> {
+      loopTree.expressions().stream().flatMap(this::flattenTuples).forEach(expr -> {
         if (expr.is(Tree.Kind.NAME)) {
           addBindingUsage((Name) expr, Usage.Kind.LOOP_DECLARATION);
         }
@@ -219,16 +220,26 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         }
       }
 
-      parameterList.nonTuple().stream()
+      parameterList.nonTuple()
+        .stream()
         .skip(hasSelf ? 1 : 0)
         .forEach(param -> addBindingUsage(param.name(), Usage.Kind.PARAMETER));
 
       parameterList.all().stream()
-        .filter(param -> param.is(Kind.TUPLE))
-        .flatMap(param -> ((Tuple) param).elements().stream())
-        .filter(param -> param.is(Kind.NAME))
-        .map(Name.class::cast)
+        .filter(param -> param.is(Kind.TUPLE_PARAMETER))
+        .map(TupleParameter.class::cast)
+        .forEach(this::addTupleParamElementsToBindingUsage);
+    }
+
+    private void addTupleParamElementsToBindingUsage(TupleParameter param) {
+      param.parameters().stream()
+        .filter(p -> p.is(Kind.PARAMETER))
+        .map(p -> ((Parameter) p).name())
         .forEach(name -> addBindingUsage(name, Usage.Kind.PARAMETER));
+      param.parameters().stream()
+        .filter(p -> p.is(Kind.TUPLE_PARAMETER))
+        .map(TupleParameter.class::cast)
+        .forEach(this::addTupleParamElementsToBindingUsage);
     }
 
     @Override
