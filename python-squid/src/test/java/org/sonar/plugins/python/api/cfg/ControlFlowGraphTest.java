@@ -56,6 +56,21 @@ public class ControlFlowGraphTest {
     assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
   }
 
+  @Test
+  public void element_order() {
+    ControlFlowGraph cfg = verifyCfg("b1(succ = [END]); pass");
+    assertThat(cfg.start().elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT, Kind.PASS_STMT);
+  }
+
+  @Test
+  public void return_statement() {
+    ControlFlowGraph cfg = verifyCfg(
+      "b1(succ = [END])",
+      "return",
+      "b2(succ = [END])");
+    assertThat(cfg.start().elements().get(0).firstToken().value()).isEqualTo("b1");
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);

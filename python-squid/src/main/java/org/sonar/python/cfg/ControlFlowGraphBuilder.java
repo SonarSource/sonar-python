@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import org.sonar.api.internal.google.common.collect.Lists;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
 
@@ -63,8 +64,20 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock build(Statement statement, PythonCfgBlock currentBlock) {
-    currentBlock.addElement(statement);
+    switch (statement.getKind()) {
+      case RETURN_STMT:
+        return buildReturnStatement((ReturnStatement) statement);
+      default:
+        currentBlock.addElement(statement);
+    }
+
     return currentBlock;
+  }
+
+  private PythonCfgBlock buildReturnStatement(ReturnStatement statement) {
+    PythonCfgBlock block = createSimpleBlock(end);
+    block.addElement(statement);
+    return block;
   }
 
 }

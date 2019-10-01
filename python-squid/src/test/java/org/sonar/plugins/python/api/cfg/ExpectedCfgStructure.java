@@ -27,9 +27,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.CallExpression;
@@ -181,13 +183,19 @@ public class ExpectedCfgStructure {
           continue;
         }
 
-        if (block.elements().isEmpty()) {
+        List<Tree> elements = block.elements();
+        if (elements.isEmpty()) {
           continue;
         }
 
-        CallExpression callExpression = getBlockFunctionCall(block.elements());
+        CallExpression callExpression = getBlockFunctionCall(elements);
         if (callExpression == null) {
           throw new UnsupportedOperationException("CFG Block metadata must be the first statement in the block.");
+        }
+
+        Optional<CallExpression> otherCallWithSuccArg = callsWithSuccArg(elements.subList(1, elements.size())).findFirst();
+        if (otherCallWithSuccArg.isPresent()) {
+          throw new UnsupportedOperationException("Found block declaration which is not at the beginning of a block: " + getValue(otherCallWithSuccArg.get().callee()));
         }
 
         String id = getValue(callExpression.callee());
@@ -236,7 +244,14 @@ public class ExpectedCfgStructure {
         return null;
       }
       return call;
+    }
 
+    private static Stream<CallExpression> callsWithSuccArg(List<Tree> elements) {
+      return elements.stream()
+        .map(e -> e.is(Tree.Kind.EXPRESSION_STMT) ? ((ExpressionStatement) e).expressions().get(0) : e)
+        .filter(e -> e.is(Tree.Kind.CALL_EXPR))
+        .map(CallExpression.class::cast)
+        .filter(c -> c.arguments().stream().anyMatch(arg -> isNameWithValue(arg.keywordArgument(), "succ")));
     }
 
     private static String[] names(Tree tree) {

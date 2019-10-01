@@ -19,8 +19,8 @@
  */
 package org.sonar.python.cfg;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
@@ -28,7 +28,7 @@ import org.sonar.python.api.tree.Tree;
 
 public class PythonCfgBlock implements CfgBlock {
 
-  private final List<Tree> elements = new ArrayList<>();
+  private final LinkedList<Tree> elements = new LinkedList<>();
   private final CfgBlock successor;
 
   public PythonCfgBlock(CfgBlock successor) {
@@ -51,6 +51,6 @@ public class PythonCfgBlock implements CfgBlock {
   }
 
   public void addElement(Tree tree) {
-    elements.add(tree);
+    elements.addFirst(tree);
   }
 }
