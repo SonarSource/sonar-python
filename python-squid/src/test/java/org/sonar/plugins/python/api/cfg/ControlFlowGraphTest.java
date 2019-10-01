@@ -27,6 +27,7 @@ import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.cfg.PythonCfgBlock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,6 +40,7 @@ public class ControlFlowGraphTest {
     assertThat(start).isEqualTo(cfg.end());
     assertThat(start.elements()).isEmpty();
     assertThat(start.successors()).isEmpty();
+    assertThat(start.predecessors()).isEmpty();
     assertThat(start.syntacticSuccessor()).isNull();
     assertThat(cfg.blocks()).containsExactly(start);
   }
@@ -46,40 +48,49 @@ public class ControlFlowGraphTest {
   @Test
   public void pass_statement() {
     ControlFlowGraph cfg = cfg("pass");
-    assertThat(cfg.start().elements()).extracting(Tree::getKind).containsExactly(Kind.PASS_STMT);
-    assertThat(cfg.start().successors()).containsExactly(cfg.end());
-    assertThat(cfg.start().syntacticSuccessor()).isNull();
-    assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
+    CfgBlock start = cfg.start();
+    assertThat(start.elements()).extracting(Tree::getKind).containsExactly(Kind.PASS_STMT);
+    assertThat(start.successors()).containsExactly(cfg.end());
+    assertThat(start.predecessors()).isEmpty();
+    assertThat(start.syntacticSuccessor()).isNull();
+    assertThat(cfg.blocks()).containsExactlyInAnyOrder(start, cfg.end());
   }
 
   @Test
   public void single_element() {
-    ControlFlowGraph cfg = verifyCfg("b1(succ = [END])");
+    ControlFlowGraph cfg = verifyCfg("b1(succ = [END], pred = [])");
     assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
   }
 
   @Test
   public void element_order() {
-    ControlFlowGraph cfg = verifyCfg("b1(succ = [END]); pass");
+    ControlFlowGraph cfg = verifyCfg("b1(succ = [END], pred = []); pass");
     assertThat(cfg.start().elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT, Kind.PASS_STMT);
   }
 
   @Test
   public void return_statement() {
     verifyCfg(
-      "b1(succ = [END], syntSucc = END)",
+      "b1(succ = [END], syntSucc = END, pred = [])",
       "return");
     ControlFlowGraph cfg = verifyCfg(
-      "b1(succ = [END], syntSucc = b2)",
+      "b1(succ = [END], syntSucc = b2, pred = [])",
       "return",
-      "b2(succ = [END])");
+      "b2(succ = [END], pred = [])");
     assertThat(cfg.start().elements().get(0).firstToken().value()).isEqualTo("b1");
   }
 
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
+    assertNoEmptyBlocksInCFG(cfg);
     return cfg;
+  }
+
+  private void assertNoEmptyBlocksInCFG(ControlFlowGraph cfg) {
+    cfg.blocks().stream()
+      .filter(block -> block instanceof PythonCfgBlock)
+      .forEach(block -> assertThat(((PythonCfgBlock) block).isEmptyBlock()).isFalse());
   }
 
   private ControlFlowGraph cfg(String... lines) {

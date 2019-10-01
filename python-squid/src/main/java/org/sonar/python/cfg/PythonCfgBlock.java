@@ -67,6 +67,7 @@ public class PythonCfgBlock implements CfgBlock {
   }
 
   public boolean isEmptyBlock() {
-    return elements.isEmpty() && successors().size() == 1;
+    // TODO: check that successors has size 1
+    return elements.isEmpty();
   }
 }
