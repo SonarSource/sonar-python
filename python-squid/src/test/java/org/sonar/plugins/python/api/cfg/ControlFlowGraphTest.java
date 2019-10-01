@@ -28,6 +28,7 @@ import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBlock;
+import org.sonar.python.cfg.PythonCfgEndBlock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -80,6 +81,40 @@ public class ControlFlowGraphTest {
     assertThat(cfg.start().elements().get(0).firstToken().value()).isEqualTo("b1");
   }
 
+  @Test
+  public void if_statement() {
+    verifyCfg(
+      "before(succ = [if_body, END], elem = 2)",
+      "if cond:",
+      "  if_body(succ = [END], elem = 1)"
+    );
+
+    verifyCfg(
+      "before(succ = [if_body, after], elem = 2)",
+      "if cond:",
+      "  if_body(succ = [after], elem = 1)",
+      "after(succ = [END], elem = 1)"
+    );
+  }
+
+  @Test
+  public void if_statement_with_return() {
+    verifyCfg(
+      "before(succ = [if_body, END])",
+      "if cond:",
+      "  if_body(succ = [END], syntSucc = END)",
+      "  return"
+    );
+
+    verifyCfg(
+      "before(succ = [if_body, after])",
+      "if cond:",
+      "  if_body(succ = [END], syntSucc = after)",
+      "  return",
+      "after(succ = [END])"
+    );
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
@@ -89,7 +124,7 @@ public class ControlFlowGraphTest {
 
   private void assertNoEmptyBlocksInCFG(ControlFlowGraph cfg) {
     cfg.blocks().stream()
-      .filter(block -> block instanceof PythonCfgBlock)
+      .filter(block -> !(block instanceof PythonCfgEndBlock))
       .forEach(block -> assertThat(((PythonCfgBlock) block).isEmptyBlock()).isFalse());
   }
 

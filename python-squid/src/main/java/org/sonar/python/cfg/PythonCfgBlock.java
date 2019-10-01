@@ -22,7 +22,9 @@ package org.sonar.python.cfg;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.python.api.tree.Tree;
@@ -30,16 +32,20 @@ import org.sonar.python.api.tree.Tree;
 public class PythonCfgBlock implements CfgBlock {
 
   private final LinkedList<Tree> elements = new LinkedList<>();
-  private final CfgBlock successor;
   private CfgBlock syntacticSuccessor;
+  private Set<CfgBlock> successors;
 
   public PythonCfgBlock(CfgBlock successor) {
-    this.successor = successor;
+    this.successors = Collections.singleton(successor);
+  }
+
+  public PythonCfgBlock(Set<CfgBlock> successors) {
+    this.successors = successors;
   }
 
   @Override
   public Set<CfgBlock> successors() {
-    return Collections.singleton(successor);
+    return successors;
   }
 
   @Override
@@ -67,7 +73,30 @@ public class PythonCfgBlock implements CfgBlock {
   }
 
   public boolean isEmptyBlock() {
-    // TODO: check that successors has size 1
-    return elements.isEmpty();
+    return elements.isEmpty() && successors.size() == 1;
   }
+
+  PythonCfgBlock firstNonEmptySuccessor() {
+    PythonCfgBlock block = this;
+    while (block.isEmptyBlock()) {
+      // TODO: handle loops with empty blocks
+      block = (PythonCfgBlock) block.successors().iterator().next();
+    }
+    return block;
+  }
+
+  /**
+   * Replace successors based on a replacement map.
+   * This method is used when we remove empty blocks:
+   * we have to replace empty successors in the remaining blocks by non-empty successors.
+   */
+  void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements) {
+    successors = successors.stream()
+      .map(successor -> replacements.getOrDefault(successor, (PythonCfgBlock) successor))
+      .collect(Collectors.toSet());
+    if (syntacticSuccessor != null) {
+      syntacticSuccessor = replacements.getOrDefault(syntacticSuccessor, (PythonCfgBlock) syntacticSuccessor);
+    }
+  }
+
 }
