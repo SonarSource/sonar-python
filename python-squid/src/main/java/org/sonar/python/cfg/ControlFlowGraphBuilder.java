@@ -107,19 +107,52 @@ public class ControlFlowGraphBuilder {
     return currentBlock;
   }
 
-  private PythonCfgBlock buildIfStatement(IfStatement ifStatement, PythonCfgBlock currentBlock) {
-    PythonCfgBlock ifBodyBlock = createSimpleBlock(currentBlock);
+
+  /**
+   * CFG for if-elif-else statement:
+   *
+   *                +-----------+
+   *       +--------+ before_if +-------+
+   *       |        +-----------+       |
+   *       |                            |
+   * +-----v----+                +------v-----+
+   * | if_body  |          +-----+ elif_cond  +-----+
+   * +----+-----+          |     +------------+     |
+   *      |                |                        |
+   *      |          +-----v-----+            +-----v-----+
+   *      |          | elif_body |            | else_body |
+   *      |          +-----+-----+            +-----+-----+
+   *      |                |                        |
+   *      |        +-------v-----+                  |
+   *      +-------->  after_if   <------------------+
+   *               +-------------+
+   */
+  private PythonCfgBlock buildIfStatement(IfStatement ifStatement, PythonCfgBlock afterBlock) {
+    PythonCfgBlock ifBodyBlock = createSimpleBlock(afterBlock);
     ifBodyBlock = build(ifStatement.body().statements(), ifBodyBlock);
     ElseStatement elseClause = ifStatement.elseBranch();
-    PythonCfgBlock falseSuccessor = currentBlock;
+    PythonCfgBlock falseSuccessor = afterBlock;
     if (elseClause != null) {
-      PythonCfgBlock elseBodyBlock = createSimpleBlock(currentBlock);
+      PythonCfgBlock elseBodyBlock = createSimpleBlock(afterBlock);
       elseBodyBlock = build(elseClause.body().statements(), elseBodyBlock);
       falseSuccessor = elseBodyBlock;
     }
+    falseSuccessor = buildElifClauses(afterBlock, falseSuccessor, ifStatement.elifBranches());
     PythonCfgBlock beforeIfBlock = createSimpleBlock(ifBodyBlock, falseSuccessor);
     beforeIfBlock.addElement(ifStatement.condition());
     return beforeIfBlock;
+  }
+
+  private PythonCfgBlock buildElifClauses(PythonCfgBlock currentBlock, PythonCfgBlock falseSuccessor, List<IfStatement> elifBranches) {
+    for (int i = elifBranches.size() - 1; i >= 0; i--) {
+      IfStatement elifStatement = elifBranches.get(i);
+      PythonCfgBlock elifBodyBlock = createSimpleBlock(currentBlock);
+      elifBodyBlock = build(elifStatement.body().statements(), elifBodyBlock);
+      PythonCfgBlock beforeElifBlock = createSimpleBlock(elifBodyBlock, falseSuccessor);
+      beforeElifBlock.addElement(elifStatement.condition());
+      falseSuccessor = beforeElifBlock;
+    }
+    return falseSuccessor;
   }
 
   private PythonCfgBlock buildReturnStatement(ReturnStatement statement, PythonCfgBlock syntacticSuccessor) {
