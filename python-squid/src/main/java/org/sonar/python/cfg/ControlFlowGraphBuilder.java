@@ -29,6 +29,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
@@ -109,7 +110,14 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock buildIfStatement(IfStatement ifStatement, PythonCfgBlock currentBlock) {
     PythonCfgBlock ifBodyBlock = createSimpleBlock(currentBlock);
     ifBodyBlock = build(ifStatement.body().statements(), ifBodyBlock);
-    PythonCfgBlock beforeIfBlock = createSimpleBlock(ifBodyBlock, currentBlock);
+    ElseStatement elseClause = ifStatement.elseBranch();
+    PythonCfgBlock falseSuccessor = currentBlock;
+    if (elseClause != null) {
+      PythonCfgBlock elseBodyBlock = createSimpleBlock(currentBlock);
+      elseBodyBlock = build(elseClause.body().statements(), elseBodyBlock);
+      falseSuccessor = elseBodyBlock;
+    }
+    PythonCfgBlock beforeIfBlock = createSimpleBlock(ifBodyBlock, falseSuccessor);
     beforeIfBlock.addElement(ifStatement.condition());
     return beforeIfBlock;
   }

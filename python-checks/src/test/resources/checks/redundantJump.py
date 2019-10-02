@@ -29,3 +29,20 @@ def redundant_return_in_if_elif(cond, cond2):
         return #Noncompliant
     elif cond2:
         x = 42
+
+def two_redundant_return_if_else(cond):
+    if cond:
+        x = 10
+        return #Noncompliant
+    else:
+        x = 42
+        return #Noncompliant
+
+def two_non_redundant_return_if_else(cond):
+    if cond:
+        x = 10
+        return
+    else:
+        x = 42
+        return
+    x = 2

@@ -115,6 +115,48 @@ public class ControlFlowGraphTest {
     );
   }
 
+  @Test
+  public void if_else_statement() {
+    verifyCfg(
+      "before(succ = [if_body, else_body], elem = 2)",
+      "if cond:",
+      "  if_body(succ = [END], elem = 1)",
+      "else:",
+      "  else_body(succ = [END], elem = 1)"
+    );
+
+    verifyCfg(
+      "before(succ = [if_body, else_body], elem = 2)",
+      "if cond:",
+      "  if_body(succ = [after], elem = 1)",
+      "else:",
+      "  else_body(succ = [after], elem = 1)",
+      "after(succ = [END], elem = 1)"
+    );
+  }
+
+  @Test
+  public void if_else_statement_with_return() {
+    verifyCfg(
+      "before(succ = [if_body, else_body], elem = 2)",
+      "if cond:",
+      "  if_body(succ = [END], elem = 2, syntSucc = END)",
+      "  return",
+      "else:",
+      "  else_body(succ = [END], elem = 1)"
+    );
+
+    verifyCfg(
+      "before(succ = [if_body, else_body])",
+      "if cond:",
+      "  if_body(succ = [END], syntSucc = END)",
+      "  return",
+      "else:",
+      "  else_body(succ = [END], syntSucc = END)",
+      "  return"
+    );
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
