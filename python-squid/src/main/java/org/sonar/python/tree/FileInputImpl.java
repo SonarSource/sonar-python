@@ -69,6 +69,6 @@ public class FileInputImpl extends PyTree implements FileInput {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(docstring, statements, endOfFile).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(statements, endOfFile).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -120,23 +120,24 @@ public class PythonTreeMakerTest extends RuleTest {
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 
   @Test
-  public void fileInputTreeOnEmptyFile() {
-    FileInput pyTree = parse("", treeMaker::fileInput);
-    assertThat(pyTree.statements()).isNull();
-    assertThat(pyTree.docstring()).isNull();
+  public void file_input() {
+    FileInput fileInput = parse("", treeMaker::fileInput);
+    assertThat(fileInput.statements()).isNull();
+    assertThat(fileInput.docstring()).isNull();
 
-    pyTree = parse("\"\"\"\n" +
+    fileInput = parse("\"\"\"\n" +
       "This is a module docstring\n" +
       "\"\"\"", treeMaker::fileInput);
-    assertThat(pyTree.docstring().value()).isEqualTo("\"\"\"\n" +
+    assertThat(fileInput.docstring().value()).isEqualTo("\"\"\"\n" +
       "This is a module docstring\n" +
       "\"\"\"");
+    assertThat(fileInput.children()).hasSize(2);
 
-    pyTree = parse("if x:\n pass", treeMaker::fileInput);
-    IfStatement ifStmt = (IfStatement) pyTree.statements().statements().get(0);
+    fileInput = parse("if x:\n pass", treeMaker::fileInput);
+    IfStatement ifStmt = (IfStatement) fileInput.statements().statements().get(0);
     assertThat(ifStmt.body().parent()).isEqualTo(ifStmt);
-    assertThat(pyTree.children()).hasSize(2);
-    assertThat(((Token) pyTree.children().get(1)).type()).isEqualTo(GenericTokenType.EOF);
+    assertThat(fileInput.children()).hasSize(2);
+    assertThat(((Token) fileInput.children().get(1)).type()).isEqualTo(GenericTokenType.EOF);
   }
 
   @Test
