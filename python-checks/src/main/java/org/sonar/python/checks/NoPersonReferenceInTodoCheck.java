@@ -19,19 +19,19 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 
-@Rule(key = NoPersonReferenceInTodoCheck.CHECK_KEY)
-public class NoPersonReferenceInTodoCheck extends PythonCheckAstNode {
+@Rule(key = "S1707")
+public class NoPersonReferenceInTodoCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S1707";
   public static final String MESSAGE = "Add a citation of the person who can best explain this comment.";
 
   private static final String DEFAULT_PERSON_REFERENCE_PATTERN = "[ ]*\\([ _a-zA-Z0-9@.]+\\)";
@@ -40,32 +40,29 @@ public class NoPersonReferenceInTodoCheck extends PythonCheckAstNode {
   private Pattern patternPersonReference;
 
   @RuleProperty(
-      key = "pattern",
-      defaultValue = DEFAULT_PERSON_REFERENCE_PATTERN)
+    key = "pattern",
+    defaultValue = DEFAULT_PERSON_REFERENCE_PATTERN)
   public String personReferencePatternString = DEFAULT_PERSON_REFERENCE_PATTERN;
 
   @Override
-  public void visitFile(AstNode astNode) {
+  public void initialize(Context context) {
     patternTodoFixme = Pattern.compile(COMMENT_PATTERN, Pattern.CASE_INSENSITIVE);
     patternPersonReference = Pattern.compile(personReferencePatternString);
-  }
-
-  @Override
-  public void visitToken(Token token) {
-    for (Trivia trivia : token.getTrivia()) {
-      if (trivia.isComment()) {
-        visitComment(trivia);
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      Token token = (Token) ctx.syntaxNode();
+      for (Trivia trivia : token.trivia()) {
+        checkComment(trivia, ctx);
       }
-    }
+    });
   }
 
-  private void visitComment(Trivia trivia) {
-    String comment = trivia.getToken().getValue();
+  private void checkComment(Trivia trivia, SubscriptionContext ctx) {
+    String comment = trivia.value();
     Matcher matcher = patternTodoFixme.matcher(comment);
     if (matcher.find()) {
       String tail = comment.substring(matcher.end());
       if (!patternPersonReference.matcher(tail).find()) {
-        addIssue(trivia.getToken(), MESSAGE);
+        ctx.addIssue(trivia.token(), MESSAGE);
       }
     }
   }
