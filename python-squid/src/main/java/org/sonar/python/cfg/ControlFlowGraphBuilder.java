@@ -19,8 +19,10 @@
  */
 package org.sonar.python.cfg;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,17 +31,20 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.WhileStatement;
 
 public class ControlFlowGraphBuilder {
 
   private PythonCfgBlock start;
   private final PythonCfgBlock end = new PythonCfgEndBlock();
   private final Set<PythonCfgBlock> blocks = new HashSet<>();
+  private final Deque<PythonCfgBlock> continueTargets = new ArrayDeque<>();
 
   public ControlFlowGraphBuilder(@Nullable StatementList statementList) {
     blocks.add(end);
@@ -100,6 +105,10 @@ public class ControlFlowGraphBuilder {
         return buildReturnStatement((ReturnStatement) statement, currentBlock);
       case IF_STMT:
         return buildIfStatement(((IfStatement) statement), currentBlock);
+      case WHILE_STMT:
+        return buildWhileStatement(((WhileStatement) statement), currentBlock);
+      case CONTINUE_STMT:
+        return buildContinueStatement(((ContinueStatement) statement), currentBlock);
       default:
         currentBlock.addElement(statement);
     }
@@ -107,6 +116,22 @@ public class ControlFlowGraphBuilder {
     return currentBlock;
   }
 
+  private PythonCfgBlock buildContinueStatement(ContinueStatement continueStatement, PythonCfgBlock syntacticSuccessor) {
+    PythonCfgBlock block = createSimpleBlock(continueTargets.peek());
+    block.setSyntacticSuccessor(syntacticSuccessor);
+    block.addElement(continueStatement);
+    return block;
+  }
+
+  private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
+    PythonCfgBlock conditionBlock = createSimpleBlock(currentBlock);
+    conditionBlock.addElement(whileStatement.condition());
+    continueTargets.push(conditionBlock);
+    PythonCfgBlock whileBodyBlock = build(whileStatement.body().statements(), createSimpleBlock(conditionBlock));
+    continueTargets.pop();
+    conditionBlock.addSuccessor(whileBodyBlock);
+    return createSimpleBlock(conditionBlock);
+  }
 
   /**
    * CFG for if-elif-else statement:

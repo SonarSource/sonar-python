@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.python.api.tree.Tree;
@@ -99,4 +100,7 @@ public class PythonCfgBlock implements CfgBlock {
     }
   }
 
+  void addSuccessor(PythonCfgBlock conditionBlock) {
+    successors = Stream.concat(successors.stream(), Stream.of(conditionBlock)).collect(Collectors.toSet());
+  }
 }

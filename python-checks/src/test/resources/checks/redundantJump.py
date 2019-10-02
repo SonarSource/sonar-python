@@ -87,3 +87,37 @@ def three_non_redundant_return_if_elif_else(cond1, cond2):
         x = 11
         return
     x = 2
+
+def redundant_continue_in_while(cond):
+    while cond:
+        continue # Noncompliant
+
+def redundant_continue_in_while_if(cond, p):
+    while cond:
+        if p:
+            continue # Noncompliant
+
+def redundant_continue_in_while_if_else(cond, p):
+    while cond:
+        if p:
+            continue # Noncompliant
+        else:
+            x = 42
+
+def non_redundant_continue_in_while(cond, p):
+    while cond:
+        if p:
+            continue
+        x = 42
+
+def redundant_continue_in_nested_while(cond1, cond2):
+    while cond1:
+        while cond2:
+          continue # Noncompliant
+
+def non_redundant_continue_in_nested_while(cond1, cond2, p):
+    while cond1:
+        while cond2:
+            if p:
+                continue
+            x = 42
