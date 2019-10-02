@@ -19,16 +19,17 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 
-@Rule(key = CommentRegularExpressionCheck.CHECK_KEY)
-public class CommentRegularExpressionCheck extends PythonCheckAstNode {
-  public static final String CHECK_KEY = "CommentRegularExpression";
+@Rule(key = "CommentRegularExpression")
+public class CommentRegularExpressionCheck extends PythonSubscriptionCheck {
+
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
 
@@ -61,14 +62,16 @@ public class CommentRegularExpressionCheck extends PythonCheckAstNode {
   }
 
   @Override
-  public void visitToken(Token token) {
-    if (pattern() != null) {
-      for (Trivia trivia : token.getTrivia()) {
-        if (trivia.isComment() && pattern().matcher(trivia.getToken().getOriginalValue()).matches()) {
-          addIssue(trivia.getToken(), message);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      Token token = (Token) ctx.syntaxNode();
+      if (pattern() != null) {
+        for (Trivia trivia : token.trivia()) {
+          if (pattern().matcher(trivia.value()).matches()) {
+            ctx.addIssue(trivia.token(), message);
+          }
         }
       }
-    }
+    });
   }
-
 }
