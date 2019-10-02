@@ -157,6 +157,50 @@ public class ControlFlowGraphTest {
     );
   }
 
+  @Test
+  public void if_elif_statement() {
+    verifyCfg(
+      "before(succ = [if_body, before_elif_body], elem = 2)",
+      "if cond1:",
+      "  if_body(succ = [END], elem = 1)",
+      "elif before_elif_body(succ = [elif_body, END], elem = 1):",
+      "  elif_body(succ = [END], elem = 1)"
+    );
+
+    verifyCfg(
+      "before(succ = [if_body, before_elif_body], elem = 2)",
+      "if cond1:",
+      "  if_body(succ = [after], elem = 1)",
+      "elif before_elif_body(succ = [elif_body, after], elem = 1):",
+      "  elif_body(succ = [after], elem = 1)",
+      "after(succ = [END], elem = 1)"
+    );
+
+    verifyCfg(
+      "before(succ = [if_body, before_elif_body_1], elem = 2)",
+      "if cond1:",
+      "  if_body(succ = [END], elem = 1)",
+      "elif before_elif_body_1(succ = [elif_body_1, before_elif_body_2], elem = 1):",
+      "  elif_body_1(succ = [END], elem = 1)",
+      "elif before_elif_body_2(succ = [elif_body_2, END], elem = 1):",
+      "  elif_body_2(succ = [END], elem = 1)"
+    );
+  }
+
+  @Test
+  public void if_elif_else_statement() {
+    verifyCfg(
+      "before(succ = [if_body, before_elif_body_1], elem = 2)",
+      "if cond1:",
+      "  if_body(succ = [END], elem = 1)",
+      "elif before_elif_body_1(succ = [else_body, elif_body_1], elem = 1):",
+      "  elif_body_1(succ = [END], elem = 1)",
+      "else:",
+      "  else_body(succ = [END], elem = 1)"
+    );
+  }
+
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
