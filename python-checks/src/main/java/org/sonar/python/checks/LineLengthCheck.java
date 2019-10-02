@@ -19,15 +19,16 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 
 @Rule(key = LineLengthCheck.CHECK_KEY)
-public class LineLengthCheck extends PythonCheckAstNode {
+public class LineLengthCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "LineLength";
   private static final int DEFAULT_MAXIMUM_LINE_LENGTH = 120;
@@ -39,44 +40,28 @@ public class LineLengthCheck extends PythonCheckAstNode {
     defaultValue = "" + DEFAULT_MAXIMUM_LINE_LENGTH)
   public int maximumLineLength = DEFAULT_MAXIMUM_LINE_LENGTH;
 
-  public int getMaximumLineLength() {
-    return maximumLineLength;
-  }
-
   @Override
-  public void visitFile(AstNode astNode) {
-    previousToken = null;
-  }
-
-  @Override
-  public void leaveFile(AstNode astNode) {
-    previousToken = null;
-  }
-
-  @Override
-  public void visitToken(Token token) {
-    if (token.isGeneratedCode()) {
-      return;
-    }
-
-    if (previousToken != null && previousToken.getLine() != token.getLine()) {
-      // Note that AbstractLineLengthCheck doesn't support tokens which span multiple lines - see SONARPLUGINS-2025
-      String[] lines = previousToken.getValue().split("\r?\n|\r", -1);
-      int length = previousToken.getColumn();
-      for (String line : lines) {
-        length += line.length();
-        if (length > getMaximumLineLength()) {
-          // Note that method from AbstractLineLengthCheck generates other message - see SONARPLUGINS-1809
-          String message = MessageFormat.format(
-            "The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
-            length,
-            getMaximumLineLength());
-          addLineIssue(message, previousToken.getLine());
-        }
-        length = 0;
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousToken = null);
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      Token token = (Token) ctx.syntaxNode();
+      if (token.type().equals(PythonTokenType.NEWLINE)) {
+        return;
       }
-    }
-    previousToken = token;
+      if (previousToken != null && previousToken.line() != token.line()) {
+        String[] lines = previousToken.value().split("\r?\n|\r", -1);
+        int length = previousToken.column();
+        for (String line : lines) {
+          length += line.length();
+          if (length > maximumLineLength) {
+            String message = MessageFormat.format("The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
+              length, maximumLineLength);
+            ctx.addLineIssue(message, previousToken.line());
+          }
+          length = 0;
+        }
+      }
+      previousToken = token;
+    });
   }
-
 }
