@@ -54,8 +54,7 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isReturnWithExpression(Tree lastElement) {
-    // TODO: check that lastElement has RETURN kind, for the time being it can only be RETURN
-    return !((ReturnStatement) lastElement).expressions().isEmpty();
+    return lastElement.is(Kind.RETURN_STMT) && !((ReturnStatement) lastElement).expressions().isEmpty();
   }
 
 }

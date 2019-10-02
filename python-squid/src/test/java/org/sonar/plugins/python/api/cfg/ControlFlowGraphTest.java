@@ -200,6 +200,36 @@ public class ControlFlowGraphTest {
     );
   }
 
+  @Test
+  public void while_statement() {
+    verifyCfg(
+      "before(succ = [cond_block], elem = 1)",
+      "while cond_block(succ = [while_body, END], elem = 1):",
+      "  while_body(succ = [cond_block], elem = 1)"
+    );
+  }
+
+  @Test
+  public void continue_statement() {
+    verifyCfg(
+      "before(succ = [cond_block], elem = 1)",
+      "while cond_block(succ = [while_body, END], elem = 1):",
+      "  while_body(succ = [cond_block], elem = 2, syntSucc = after_continue)",
+      "  continue",
+      "  after_continue(succ = [cond_block], elem = 1)"
+    );
+  }
+
+  @Test
+  public void continue_nested_while() {
+    verifyCfg(
+      "while cond_block(succ = [cond_block_inner, END]):",
+      "  while cond_block_inner(succ = [cond_block, inner_while_block]):",
+      "    inner_while_block(succ = [cond_block_inner], syntSucc = after_continue)",
+      "    continue",
+      "    after_continue(succ = [cond_block_inner])"
+    );
+  }
 
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
