@@ -1842,7 +1842,10 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(singleValue.commas()).extracting(Token::value).containsExactly(",");
     assertThat(singleValue.children()).hasSize(4);
 
-    assertThat(parseTuple("(a,b)").elements()).hasSize(2);
+    Tuple tuple = parseTuple("(a,b)");
+    assertThat(tuple.elements()).hasSize(2);
+    assertThat(tuple.children()).hasSize(5);
+    assertThat(tuple.children()).containsExactly(tuple.leftParenthesis(), tuple.elements().get(0), tuple.commas().get(0), tuple.elements().get(1), tuple.rightParenthesis());
   }
 
   private Tuple parseTuple(String code) {
