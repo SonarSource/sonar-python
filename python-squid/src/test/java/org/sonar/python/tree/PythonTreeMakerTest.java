@@ -38,6 +38,7 @@ import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.AnnotatedAssignment;
+import org.sonar.python.api.tree.ArgList;
 import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.AssertStatement;
 import org.sonar.python.api.tree.AssignmentStatement;
@@ -1287,7 +1288,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void call_expression() {
     setRootRule(PythonGrammar.CALL_EXPR);
     CallExpression callExpression = parse("foo()", treeMaker::callExpression);
-    assertThat(callExpression.argumentList()).isNull();
+    ArgList argList = callExpression.argumentList();
+    assertThat(argList).isNull();
     assertThat(callExpression.firstToken().value()).isEqualTo("foo");
     assertThat(callExpression.lastToken().value()).isEqualTo(")");
     assertThat(callExpression.arguments()).isEmpty();
@@ -1298,10 +1300,15 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callExpression.rightPar().value()).isEqualTo(")");
 
     callExpression = parse("foo(x, y)", treeMaker::callExpression);
-    assertThat(callExpression.argumentList().arguments()).hasSize(2);
+    argList = callExpression.argumentList();
+    assertThat(argList.children()).hasSize(3);
+    assertThat(argList.children().get(0)).isEqualTo(argList.arguments().get(0));
+    assertThat(((Token) argList.children().get(1)).value()).isEqualTo(",");
+    assertThat(argList.children().get(2)).isEqualTo(argList.arguments().get(1));
+    assertThat(argList.arguments()).hasSize(2);
     assertThat(callExpression.arguments()).hasSize(2);
-    Name firstArg = (Name) callExpression.argumentList().arguments().get(0).expression();
-    Name sndArg = (Name) callExpression.argumentList().arguments().get(1).expression();
+    Name firstArg = (Name) argList.arguments().get(0).expression();
+    Name sndArg = (Name) argList.arguments().get(1).expression();
     assertThat(firstArg.name()).isEqualTo("x");
     assertThat(sndArg.name()).isEqualTo("y");
     name = (Name) callExpression.callee();
@@ -1309,7 +1316,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callExpression.children()).hasSize(4);
 
     callExpression = parse("foo.bar()", treeMaker::callExpression);
-    assertThat(callExpression.argumentList()).isNull();
+    argList = callExpression.argumentList();
+    assertThat(argList).isNull();
     QualifiedExpression callee = (QualifiedExpression) callExpression.callee();
     assertThat(callExpression.firstToken().value()).isEqualTo("foo");
     assertThat(callExpression.lastToken().value()).isEqualTo(")");

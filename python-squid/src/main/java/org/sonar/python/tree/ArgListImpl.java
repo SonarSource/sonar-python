@@ -20,20 +20,23 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.api.tree.ArgList;
 import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ArgListImpl extends PyTree implements ArgList {
 
-  List<Argument> arguments;
+  private final List<Argument> arguments;
+  private final List<Token> commas;
 
-  public ArgListImpl(AstNode node, List<Argument> arguments) {
+  public ArgListImpl(AstNode node, List<Argument> arguments, List<Token> commas) {
     super(node);
     this.arguments = arguments;
+    this.commas = commas;
   }
 
   @Override
@@ -48,7 +51,16 @@ public class ArgListImpl extends PyTree implements ArgList {
 
   @Override
   public List<Tree> children() {
-    return Collections.unmodifiableList(arguments);
+    List<Tree> children = new ArrayList<>();
+    int i = 0;
+    for (Tree argument : arguments) {
+      children.add(argument);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    return children;
   }
 
   @Override

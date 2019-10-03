@@ -1126,7 +1126,8 @@ public class PythonTreeMaker {
       List<Argument> arguments = argList.getChildren(PythonGrammar.ARGUMENT).stream()
         .map(this::argument)
         .collect(Collectors.toList());
-      return new ArgListImpl(argList, arguments);
+      List<Token> commas = toPyToken(argList.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList()));
+      return new ArgListImpl(argList, arguments, commas);
     }
     return null;
   }
