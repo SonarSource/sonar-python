@@ -610,6 +610,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(aliasedNameTree.alias()).isNull();
     assertThat(aliasedNameTree.dottedName().names().get(0).name()).isEqualTo("f");
     assertThat(importStatement.children()).hasSize(4);
+    assertThat(importStatement.children()).containsExactly(importStatement.fromKeyword(), importStatement.module(), importStatement.importKeyword(), aliasedNameTree);
+
 
     astNode = p.parse("from .foo import f");
     statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -617,7 +619,10 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.dottedPrefixForModule()).hasSize(1);
     assertThat(importStatement.dottedPrefixForModule().get(0).value()).isEqualTo(".");
     assertThat(importStatement.module().names().get(0).name()).isEqualTo("foo");
+    aliasedNameTree = importStatement.importedNames().get(0);
     assertThat(importStatement.children()).hasSize(5);
+    assertThat(importStatement.children()).containsExactly(importStatement.fromKeyword(), importStatement.dottedPrefixForModule().get(0),
+      importStatement.module(), importStatement.importKeyword(), aliasedNameTree);
 
     astNode = p.parse("from ..foo import f");
     statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -668,6 +673,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(importStatement.isWildcardImport()).isTrue();
     assertThat(importStatement.wildcard().value()).isEqualTo("*");
     assertThat(importStatement.children()).hasSize(4);
+    assertThat(importStatement.children()).containsExactly(importStatement.fromKeyword(), importStatement.module(), importStatement.importKeyword(), importStatement.wildcard());
   }
 
   @Test
