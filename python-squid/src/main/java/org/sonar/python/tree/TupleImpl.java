@@ -20,18 +20,15 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tuple;
-import org.sonar.python.api.tree.Tree;
 
 public class TupleImpl extends PyTree implements Tuple {
 
@@ -77,8 +74,18 @@ public class TupleImpl extends PyTree implements Tuple {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(Collections.singletonList(leftParenthesis), elements, commas, Collections.singletonList(rightParenthesis))
-      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    List<Tree> children = new ArrayList<>();
+    children.add(leftParenthesis);
+    int i = 0;
+    for (Tree element : elements) {
+      children.add(element);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    children.add(rightParenthesis);
+    return children;
   }
 
   @Override
