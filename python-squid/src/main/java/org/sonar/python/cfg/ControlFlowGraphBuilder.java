@@ -33,10 +33,12 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.WhileStatement;
 
 public class ControlFlowGraphBuilder {
@@ -107,6 +109,8 @@ public class ControlFlowGraphBuilder {
         return buildIfStatement(((IfStatement) statement), currentBlock);
       case WHILE_STMT:
         return buildWhileStatement(((WhileStatement) statement), currentBlock);
+      case FOR_STMT:
+        return buildForStatement(((ForStatement) statement), currentBlock);
       case CONTINUE_STMT:
         return buildContinueStatement(((ContinueStatement) statement), currentBlock);
       default:
@@ -123,14 +127,24 @@ public class ControlFlowGraphBuilder {
     return block;
   }
 
-  private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
-    PythonCfgBlock conditionBlock = createSimpleBlock(currentBlock);
-    conditionBlock.addElement(whileStatement.condition());
+  private PythonCfgBlock buildLoop(Tree conditionElement, StatementList body, PythonCfgBlock successor) {
+    PythonCfgBlock conditionBlock = createSimpleBlock(successor);
+    conditionBlock.addElement(conditionElement);
     continueTargets.push(conditionBlock);
-    PythonCfgBlock whileBodyBlock = build(whileStatement.body().statements(), createSimpleBlock(conditionBlock));
+    PythonCfgBlock whileBodyBlock = build(body.statements(), createSimpleBlock(conditionBlock));
     continueTargets.pop();
     conditionBlock.addSuccessor(whileBodyBlock);
     return createSimpleBlock(conditionBlock);
+  }
+
+  private PythonCfgBlock buildForStatement(ForStatement forStatement, PythonCfgBlock successor) {
+    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement.body(), successor);
+    forStatement.testExpressions().forEach(beforeForStmt::addElement);
+    return beforeForStmt;
+  }
+
+  private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
+    return buildLoop(whileStatement.condition(), whileStatement.body(), currentBlock);
   }
 
   /**

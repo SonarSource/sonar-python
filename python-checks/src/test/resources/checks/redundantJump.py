@@ -121,3 +121,37 @@ def non_redundant_continue_in_nested_while(cond1, cond2, p):
             if p:
                 continue
             x = 42
+
+def redundant_continue_in_for(collection):
+    for elem in collection:
+        continue # Noncompliant
+
+def redundant_continue_in_for_if(collection, p):
+    for elem in collection:
+        if p:
+            continue # Noncompliant
+
+def redundant_continue_in_for_if_else(collection, p):
+    for elem in collection:
+        if p:
+            continue # Noncompliant
+        else:
+            x = 42
+
+def non_redundant_continue_in_for(collection, p):
+    for elem in collection:
+        if p:
+            continue
+        x = 42
+
+def redundant_continue_in_nested_for(collection1, collection2):
+    for elem1 in collection1:
+        for elem2 in collection2:
+          continue # Noncompliant
+
+def non_redundant_continue_in_nested_for(collection1, collection2, p):
+    for elem1 in collection1:
+        for elem2 in collection2:
+            if p:
+                continue
+            x = 42
