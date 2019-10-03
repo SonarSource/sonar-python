@@ -38,6 +38,7 @@ import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.CallExpression;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionStatement;
+import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.ListLiteral;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.NumericLiteral;
@@ -233,6 +234,8 @@ public class ExpectedCfgStructure {
         expression = ((ExpressionStatement) firstElement).expressions().get(0);
       } else if (firstElement instanceof Expression) {
         expression = (Expression) firstElement;
+      } else if (firstElement instanceof ForStatement) {
+        expression = ((ForStatement) firstElement).expressions().get(0);
       } else {
         return null;
       }

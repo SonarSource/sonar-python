@@ -231,6 +231,39 @@ public class ControlFlowGraphTest {
     );
   }
 
+  @Test
+  public void for_statement() {
+    verifyCfg(
+      "before(succ = [cond_block], elem = 2)",
+      "for cond_block(succ = [for_body, END], elem = 1) in collection:",
+      "  for_body(succ = [cond_block], elem = 1)"
+    );
+  }
+
+  @Test
+  public void continue_statement_in_for() {
+    verifyCfg(
+      "before(succ = [cond_block], elem = 2)",
+      "for cond_block(succ = [for_body, END], elem = 1) in collection:",
+      "  for_body(succ = [cond_block], elem = 2, syntSucc = after_continue)",
+      "  continue",
+      "  after_continue(succ = [cond_block], elem = 1)"
+    );
+  }
+
+  @Test
+  public void continue_nested_for() {
+    verifyCfg(
+      "before(succ = [cond_block])",
+      "for cond_block(succ = [outer_for_block, END]) in collection1:",
+      "  outer_for_block(succ = [cond_block_inner])",
+      "  for cond_block_inner(succ = [inner_for_block, cond_block]) in collection2:",
+      "    inner_for_block(succ = [cond_block_inner], syntSucc = after_continue)",
+      "    continue",
+      "    after_continue(succ = [cond_block_inner])"
+    );
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
