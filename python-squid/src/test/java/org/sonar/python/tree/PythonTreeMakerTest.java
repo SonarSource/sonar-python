@@ -786,9 +786,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parameter1.name().name()).isEqualTo("x");
     assertThat(parameter1.equalToken().value()).isEqualTo("=");
     assertThat(parameter1.defaultValue().is(Tree.Kind.STRING_LITERAL)).isTrue();
+    assertThat(parameter1.children()).doesNotContainNull();
     Parameter parameter2 = parameters.get(1);
     assertThat(parameter2.equalToken()).isNull();
     assertThat(parameter2.defaultValue()).isNull();
+    assertThat(parameter2.children()).doesNotContainNull();
 
     functionDefTree = parse("def func(p1, *p2, **p3): pass", treeMaker::funcDefStatement);
     parameters = functionDefTree.parameters().nonTuple();
