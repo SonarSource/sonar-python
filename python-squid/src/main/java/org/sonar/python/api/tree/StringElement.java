@@ -28,4 +28,6 @@ public interface StringElement extends Tree {
   String trimmedQuotesValue();
 
   String prefix();
+
+  boolean isTripleQuoted();
 }
