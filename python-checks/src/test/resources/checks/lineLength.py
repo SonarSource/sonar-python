@@ -1,3 +1,4 @@
+#Noncompliant@+1
 #Noncompliant@+1 {{The line contains 40 characters which is greater than 30 authorized.}}
 print "This line contains 40 characters"
 print
@@ -9,7 +10,7 @@ from some.where import foo, bar
 
 # Noncompliant@+1
 something = call(('arg1', 'arg2',
-                  # Noncompliant@+1
+# Noncompliant@+1
                   'arg3', 'ar'),
                  'arg'
                  )

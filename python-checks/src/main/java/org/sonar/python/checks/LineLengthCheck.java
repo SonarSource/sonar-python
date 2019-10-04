@@ -23,8 +23,6 @@ import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 @Rule(key = LineLengthCheck.CHECK_KEY)
@@ -33,8 +31,6 @@ public class LineLengthCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "LineLength";
   private static final int DEFAULT_MAXIMUM_LINE_LENGTH = 120;
 
-  private Token previousToken;
-
   @RuleProperty(
     key = "maximumLineLength",
     defaultValue = "" + DEFAULT_MAXIMUM_LINE_LENGTH)
@@ -42,26 +38,16 @@ public class LineLengthCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> previousToken = null);
-    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
-      Token token = (Token) ctx.syntaxNode();
-      if (token.type().equals(PythonTokenType.NEWLINE)) {
-        return;
-      }
-      if (previousToken != null && previousToken.line() != token.line()) {
-        String[] lines = previousToken.value().split("\r?\n|\r", -1);
-        int length = previousToken.column();
-        for (String line : lines) {
-          length += line.length();
-          if (length > maximumLineLength) {
-            String message = MessageFormat.format("The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
-              length, maximumLineLength);
-            ctx.addLineIssue(message, previousToken.line());
-          }
-          length = 0;
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      String[] lines = ctx.pythonFile().content().split("\r?\n|\r", -1);
+      for (int i = 0; i < lines.length; i++) {
+        String line = lines[i];
+        if (line.length() > maximumLineLength) {
+          String message = MessageFormat.format("The line contains {0,number,integer} characters which is greater than {1,number,integer} authorized.",
+            line.length(), maximumLineLength);
+          ctx.addLineIssue(message, i + 1);
         }
       }
-      previousToken = token;
     });
   }
 }
