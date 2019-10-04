@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -92,6 +93,6 @@ public class ParameterImpl extends PyTree implements Parameter {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(name, annotation, equalToken, defaultValue, starToken).collect(Collectors.toList());
+    return Stream.of(name, annotation, equalToken, defaultValue, starToken).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
