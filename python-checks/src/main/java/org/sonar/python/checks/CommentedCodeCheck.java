@@ -20,88 +20,78 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonConfiguration;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.StringElement;
+import org.sonar.python.api.tree.StringLiteral;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PythonTreeMaker;
 
-@Rule(key = CommentedCodeCheck.CHECK_KEY)
-public class CommentedCodeCheck extends PythonCheckAstNode {
+@Rule(key = "S125")
+public class CommentedCodeCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S125";
   public static final String MESSAGE = "Remove this commented out code.";
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return Collections.singleton(PythonTokenType.STRING);
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+      Token token = (Token) ctx.syntaxNode();
+      List<List<Trivia>> groupedTrivias = groupTrivias(token);
+      for (List<Trivia> triviaGroup : groupedTrivias) {
+        checkTriviaGroup(triviaGroup, ctx);
+      }
+    });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> {
+      StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
+      if (isMultilineComment(stringLiteral)) {
+        visitMultilineComment(stringLiteral, ctx);
+      }
+    });
   }
 
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (isMultilineComment(astNode)) {
-      visitMultilineComment(astNode.getToken());
-    }
+  private static boolean isMultilineComment(StringLiteral stringLiteral) {
+    Tree parent = stringLiteral.parent();
+    StringElement firstElement = stringLiteral.stringElements().get(0);
+    return firstElement.isTripleQuoted() && parent.is(Tree.Kind.EXPRESSION_STMT);
   }
 
-  @Override
-  public void visitToken(Token token) {
-    List<List<Trivia>> groupedTrivias = groupTrivias(token);
-    for (List<Trivia> triviaGroup : groupedTrivias) {
-      checkTriviaGroup(triviaGroup);
-    }
-  }
-
-  private void visitMultilineComment(Token token) {
-    String value = token.getValue();
-    int startStringContent;
-    if (value.endsWith("'''")) {
-      startStringContent = value.indexOf("'''") + 3;
-    } else {
-      startStringContent = value.indexOf("\"\"\"") + 3;
-    }
-    int endStringContent = value.length() - 3;
-    String text = value.substring(startStringContent, endStringContent);
+  private static void visitMultilineComment(StringLiteral stringLiteral, SubscriptionContext ctx) {
+    String text = stringLiteral.trimmedQuotesValue();
     text = text.trim();
     if (!isEmpty(text) && isTextParsedAsCode(text)) {
-      addIssue(token, MESSAGE);
+      ctx.addIssue(stringLiteral, MESSAGE);
     }
-
   }
 
-  private static boolean isMultilineComment(AstNode node) {
-    String str = node.getTokenValue();
-    AstNode expressionStatement = node.getFirstAncestor(PythonGrammar.EXPRESSION_STMT);
-    return (str.endsWith("'''") || str.endsWith("\"\"\"")) && expressionStatement != null && expressionStatement.getNumberOfChildren() == 1;
-  }
-
-  private void checkTriviaGroup(List<Trivia> triviaGroup) {
+  private static void checkTriviaGroup(List<Trivia> triviaGroup, SubscriptionContext ctx) {
     String text = getTextForParsing(triviaGroup);
     if (isEmpty(text)) {
       return;
     }
     if (isTextParsedAsCode(text)) {
-      addIssue(triviaGroup.get(0).getToken(), MESSAGE);
+      ctx.addIssue(triviaGroup.get(0).token(), MESSAGE);
     }
   }
 
   private static String getTextForParsing(List<Trivia> triviaGroup) {
     StringBuilder commentTextSB = new StringBuilder();
     for (Trivia trivia : triviaGroup) {
-      String value = trivia.getToken().getValue();
+      String value = trivia.value();
       while (value.startsWith("#") || value.startsWith(" #")) {
         value = value.substring(1);
       }
@@ -130,26 +120,25 @@ public class CommentedCodeCheck extends PythonCheckAstNode {
   private static boolean isTextParsedAsCode(String text) {
     try {
       AstNode astNode = parser.parse(text);
-      List<AstNode> expressions = astNode.getDescendants(PythonGrammar.EXPRESSION_STMT);
-      return astNode.getNumberOfChildren() > 1 && !isSimpleExpression(expressions);
+      FileInput parse = new PythonTreeMaker().fileInput(astNode);
+      return parse.statements() != null && !isSimpleExpression(parse);
     } catch (Exception e) {
       return false;
     }
   }
 
-  private static boolean isSimpleExpression(List<AstNode> expressionStatements) {
-    if (expressionStatements.size() != 1) {
+  private static boolean isSimpleExpression(FileInput fileInput) {
+    if (fileInput.statements().statements().size() > 1) {
       return false;
     }
-    AstNode expressionStatement = expressionStatements.get(0);
-    return (expressionStatement.getNumberOfChildren() == 1 && expressionStatement.getFirstChild().is(PythonGrammar.TESTLIST_STAR_EXPR))
-      || expressionStatement.hasDirectChildren(PythonGrammar.ANNASSIGN);
+    Statement statement = fileInput.statements().statements().get(0);
+    return statement.is(Tree.Kind.EXPRESSION_STMT) || statement.is(Tree.Kind.ANNOTATED_ASSIGNMENT);
   }
 
   private static List<List<Trivia>> groupTrivias(Token token) {
-    List<List<Trivia>> result = new LinkedList<>();
+    List<List<Trivia>> result = new ArrayList<>();
     List<Trivia> currentGroup = null;
-    for (Trivia trivia : token.getTrivia()) {
+    for (Trivia trivia : token.trivia()) {
       currentGroup = handleOneLineComment(result, currentGroup, trivia);
     }
     if (currentGroup != null) {
@@ -161,13 +150,13 @@ public class CommentedCodeCheck extends PythonCheckAstNode {
   private static List<Trivia> handleOneLineComment(List<List<Trivia>> result, @Nullable List<Trivia> currentGroup, Trivia trivia) {
     List<Trivia> newTriviaGroup = currentGroup;
     if (currentGroup == null) {
-      newTriviaGroup = new LinkedList<>();
+      newTriviaGroup = new ArrayList<>();
       newTriviaGroup.add(trivia);
-    } else if (currentGroup.get(currentGroup.size() - 1).getToken().getLine() + 1 == trivia.getToken().getLine()) {
+    } else if (currentGroup.get(currentGroup.size() - 1).token().line() + 1 == trivia.token().line()) {
       newTriviaGroup.add(trivia);
     } else {
       result.add(currentGroup);
-      newTriviaGroup = new LinkedList<>();
+      newTriviaGroup = new ArrayList<>();
       newTriviaGroup.add(trivia);
     }
     return newTriviaGroup;

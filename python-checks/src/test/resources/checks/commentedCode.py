@@ -3,7 +3,29 @@
 # x += 1
 
 x = 1
+#Noncompliant@+2
 
+#x = 3
+
+self.setContent('''
+"A module string"
+
+from foo import bar
+
+def testFunction():
+    "A doc string"
+    a = 1 + 2
+    return a
+''')
+
+something = '''
+from foo import bar
+
+def testFunction():
+    "A doc string"
+    a = 1 + 2
+    return a
+'''
 # Noncompliant@+2
 
 # if x != 2:
@@ -55,7 +77,10 @@ x = 1
 print("x is 4")
 
 # 'string'
-
+'''
+this is a
+multiline comment
+'''
 # # Check that the parsed result does a round trip to the same format
 
 # IBuildRequestStatus

@@ -71,6 +71,11 @@ public class StringElementImpl extends PyTree implements StringElement {
     return value.substring(0, value.length() - removePrefix(value).length());
   }
 
+  @Override
+  public boolean isTripleQuoted() {
+    return isTripleQuote(removePrefix(value));
+  }
+
   private static boolean isTripleQuote(String trimmed) {
     if (trimmed.length() >= 6) {
       char startChar = trimmed.charAt(0);
