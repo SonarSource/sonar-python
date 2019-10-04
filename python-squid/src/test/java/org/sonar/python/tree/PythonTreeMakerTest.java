@@ -1848,6 +1848,8 @@ public class PythonTreeMakerTest extends RuleTest {
   public void tuples() {
     Tuple empty = parseTuple("()");
     assertThat(empty.getKind()).isEqualTo(Tree.Kind.TUPLE);
+    assertThat(empty.firstToken().value()).isEqualTo("(");
+    assertThat(empty.lastToken().value()).isEqualTo(")");
     assertThat(empty.elements()).isEmpty();
     assertThat(empty.commas()).isEmpty();
     assertThat(empty.leftParenthesis().value()).isEqualTo("(");
@@ -1855,21 +1857,33 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(empty.children()).hasSize(2);
 
     Tuple singleValue = parseTuple("(a,)");
+    assertThat(singleValue.firstToken().value()).isEqualTo("(");
+    assertThat(singleValue.lastToken().value()).isEqualTo(")");
     assertThat(singleValue.elements()).extracting(Tree::getKind).containsExactly(Tree.Kind.NAME);
     assertThat(singleValue.commas()).extracting(Token::value).containsExactly(",");
     assertThat(singleValue.children()).hasSize(4);
 
     Tuple tuple = parseTuple("(a,b)");
+    assertThat(tuple.firstToken().value()).isEqualTo("(");
+    assertThat(tuple.lastToken().value()).isEqualTo(")");
     assertThat(tuple.elements()).hasSize(2);
     assertThat(tuple.children()).hasSize(5);
     assertThat(tuple.children()).containsExactly(tuple.leftParenthesis(), tuple.elements().get(0), tuple.commas().get(0), tuple.elements().get(1), tuple.rightParenthesis());
+
+    setRootRule(PythonGrammar.EXPRESSION_STMT);
+    AstNode astNode = p.parse("x = a,b");
+    StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
+    AssignmentStatement assignementstatement = treeMaker.assignment(statementWithSeparator);
+    assertThat(assignementstatement.assignedValue().getKind()).isEqualTo(Tree.Kind.TUPLE);
+    Tuple assignedTuple = (Tuple) assignementstatement.assignedValue();
+    assertThat(assignedTuple.leftParenthesis()).isNull();
+    assertThat(assignedTuple.rightParenthesis()).isNull();
+    assertThat(assignedTuple.children()).doesNotContainNull();
   }
 
   private Tuple parseTuple(String code) {
     setRootRule(PythonGrammar.TEST);
     Tuple tuple = (Tuple) parse(code, treeMaker::expression);
-    assertThat(tuple.firstToken().value()).isEqualTo("(");
-    assertThat(tuple.lastToken().value()).isEqualTo(")");
     return tuple;
   }
 
