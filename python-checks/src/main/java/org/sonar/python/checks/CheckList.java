@@ -83,6 +83,7 @@ public final class CheckList {
       LocalVariableAndParameterNameConventionCheck.class,
       LoggersConfigurationCheck.class,
       LongIntegerWithLowercaseSuffixUsageCheck.class,
+      LoopExecutingAtMostOnceCheck.class,
       MethodNameCheck.class,
       MethodShouldBeStaticCheck.class,
       MissingDocstringCheck.class,
