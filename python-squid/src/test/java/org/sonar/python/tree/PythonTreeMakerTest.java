@@ -1621,23 +1621,36 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(lambdaExpressionTree.expression()).isInstanceOf(Name.class);
     assertThat(lambdaExpressionTree.lambdaKeyword().value()).isEqualTo("lambda");
     assertThat(lambdaExpressionTree.colonToken().value()).isEqualTo(":");
+    assertThat(lambdaExpressionTree.children()).doesNotContainNull();
+    assertThat(lambdaExpressionTree.children()).containsExactly(lambdaExpressionTree.lambdaKeyword(),
+      lambdaExpressionTree.parameters(), lambdaExpressionTree.colonToken(), lambdaExpressionTree.expression());
 
     assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(1);
     assertThat(lambdaExpressionTree.children()).hasSize(4);
+    assertThat(lambdaExpressionTree.children()).doesNotContainNull();
 
     lambdaExpressionTree = parse("lambda x, y: x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(4);
+    assertThat(lambdaExpressionTree.children()).doesNotContainNull();
+    assertThat(lambdaExpressionTree.children()).containsExactly(lambdaExpressionTree.lambdaKeyword(),
+      lambdaExpressionTree.parameters(), lambdaExpressionTree.colonToken(), lambdaExpressionTree.expression());
 
     lambdaExpressionTree = parse("lambda x = 'foo': x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER);
     assertThat(lambdaExpressionTree.parameters().nonTuple().get(0).name().name()).isEqualTo("x");
     assertThat(lambdaExpressionTree.children()).hasSize(4);
+    assertThat(lambdaExpressionTree.children()).doesNotContainNull();
+    assertThat(lambdaExpressionTree.children()).containsExactly(lambdaExpressionTree.lambdaKeyword(),
+      lambdaExpressionTree.parameters(), lambdaExpressionTree.colonToken(), lambdaExpressionTree.expression());
 
     lambdaExpressionTree = parse("lambda (x, y): x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER);
     assertThat(((TupleParameter) lambdaExpressionTree.parameters().all().get(0)).parameters()).hasSize(2);
     assertThat(lambdaExpressionTree.children()).hasSize(4);
+    assertThat(lambdaExpressionTree.children()).doesNotContainNull();
+    assertThat(lambdaExpressionTree.children()).containsExactly(lambdaExpressionTree.lambdaKeyword(),
+      lambdaExpressionTree.parameters(), lambdaExpressionTree.colonToken(), lambdaExpressionTree.expression());
 
     lambdaExpressionTree = parse("lambda *a, **b: 42", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.parameters().nonTuple()).hasSize(2);

@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -97,6 +98,6 @@ public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
 
   @Override
   public List<Tree> children() {
-    return Stream.of(lambdaKeyword, parameterList, colonToken, body).collect(Collectors.toList());
+    return Stream.of(lambdaKeyword, parameterList, colonToken, body).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
