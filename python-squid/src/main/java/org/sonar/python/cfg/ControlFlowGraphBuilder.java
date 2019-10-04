@@ -20,7 +20,6 @@
 package org.sonar.python.cfg;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -84,14 +83,20 @@ public class ControlFlowGraphBuilder {
     return new ControlFlowGraph(Collections.unmodifiableSet(blocks), start, end);
   }
 
-  private PythonCfgBlock createSimpleBlock(CfgBlock successor) {
-    PythonCfgBlock block = new PythonCfgBlock(successor);
+  private PythonCfgSimpleBlock createSimpleBlock(CfgBlock successor) {
+    PythonCfgSimpleBlock block = new PythonCfgSimpleBlock(successor);
     blocks.add(block);
     return block;
   }
 
-  private PythonCfgBlock createSimpleBlock(CfgBlock... successors) {
-    PythonCfgBlock block = new PythonCfgBlock(new HashSet<>(Arrays.asList(successors)));
+  private PythonCfgBranchingBlock createBranchingBlock(Tree branchingTree, CfgBlock trueSuccessor, CfgBlock falseSuccessor) {
+    PythonCfgBranchingBlock block = new PythonCfgBranchingBlock(branchingTree, trueSuccessor, falseSuccessor);
+    blocks.add(block);
+    return block;
+  }
+
+  private PythonCfgBranchingBlock createBranchingBlock(Tree branchingTree, CfgBlock falseSuccessor) {
+    PythonCfgBranchingBlock block = new PythonCfgBranchingBlock(branchingTree, null, falseSuccessor);
     blocks.add(block);
     return block;
   }
@@ -140,7 +145,7 @@ public class ControlFlowGraphBuilder {
     if (elseClause != null) {
       tryBlockSuccessor = build(elseClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
     }
-    PythonCfgBlock firstTryBlock = build(tryStatement.body().statements(), createSimpleBlock(tryBlockSuccessor, firstExceptClauseBlock));
+    PythonCfgBlock firstTryBlock = build(tryStatement.body().statements(), createBranchingBlock(tryStatement, tryBlockSuccessor, firstExceptClauseBlock));
     return createSimpleBlock(firstTryBlock);
   }
 
@@ -150,7 +155,7 @@ public class ControlFlowGraphBuilder {
     for (int i = exceptClauses.size() - 1; i >= 0; i--) {
       ExceptClause exceptClause = exceptClauses.get(i);
       PythonCfgBlock exceptBlock = build(exceptClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
-      PythonCfgBlock exceptCondition = createSimpleBlock(exceptBlock, falseSuccessor);
+      PythonCfgBlock exceptCondition = createBranchingBlock(exceptClause, exceptBlock, falseSuccessor);
       exceptCondition.addElement(exceptClause);
       falseSuccessor = exceptCondition;
     }
@@ -158,37 +163,37 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildBreakStatement(BreakStatement breakStatement, PythonCfgBlock syntacticSuccessor) {
-    PythonCfgBlock block = createSimpleBlock(loops.peek().breakTarget);
+    PythonCfgSimpleBlock block = createSimpleBlock(loops.peek().breakTarget);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(breakStatement);
     return block;
   }
 
   private PythonCfgBlock buildContinueStatement(ContinueStatement continueStatement, PythonCfgBlock syntacticSuccessor) {
-    PythonCfgBlock block = createSimpleBlock(loops.peek().continueTarget);
+    PythonCfgSimpleBlock block = createSimpleBlock(loops.peek().continueTarget);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(continueStatement);
     return block;
   }
 
-  private PythonCfgBlock buildLoop(Tree conditionElement, StatementList body, PythonCfgBlock successor) {
-    PythonCfgBlock conditionBlock = createSimpleBlock(successor);
+  private PythonCfgBlock buildLoop(Tree branchingTree, Tree conditionElement, StatementList body, PythonCfgBlock successor) {
+    PythonCfgBranchingBlock conditionBlock = createBranchingBlock(branchingTree, successor);
     conditionBlock.addElement(conditionElement);
     loops.push(new Loop(successor, conditionBlock));
     PythonCfgBlock whileBodyBlock = build(body.statements(), createSimpleBlock(conditionBlock));
     loops.pop();
-    conditionBlock.addSuccessor(whileBodyBlock);
+    conditionBlock.setTrueSuccessor(whileBodyBlock);
     return createSimpleBlock(conditionBlock);
   }
 
   private PythonCfgBlock buildForStatement(ForStatement forStatement, PythonCfgBlock successor) {
-    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement.body(), successor);
+    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement, forStatement.body(), successor);
     forStatement.testExpressions().forEach(beforeForStmt::addElement);
     return beforeForStmt;
   }
 
   private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
-    return buildLoop(whileStatement.condition(), whileStatement.body(), currentBlock);
+    return buildLoop(whileStatement, whileStatement.condition(), whileStatement.body(), currentBlock);
   }
 
   /**
@@ -221,7 +226,7 @@ public class ControlFlowGraphBuilder {
       falseSuccessor = elseBodyBlock;
     }
     falseSuccessor = buildElifClauses(afterBlock, falseSuccessor, ifStatement.elifBranches());
-    PythonCfgBlock beforeIfBlock = createSimpleBlock(ifBodyBlock, falseSuccessor);
+    PythonCfgBlock beforeIfBlock = createBranchingBlock(ifStatement, ifBodyBlock, falseSuccessor);
     beforeIfBlock.addElement(ifStatement.condition());
     return beforeIfBlock;
   }
@@ -231,7 +236,7 @@ public class ControlFlowGraphBuilder {
       IfStatement elifStatement = elifBranches.get(i);
       PythonCfgBlock elifBodyBlock = createSimpleBlock(currentBlock);
       elifBodyBlock = build(elifStatement.body().statements(), elifBodyBlock);
-      PythonCfgBlock beforeElifBlock = createSimpleBlock(elifBodyBlock, falseSuccessor);
+      PythonCfgBlock beforeElifBlock = createBranchingBlock(elifStatement, elifBodyBlock, falseSuccessor);
       beforeElifBlock.addElement(elifStatement.condition());
       falseSuccessor = beforeElifBlock;
     }
@@ -239,7 +244,7 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildReturnStatement(ReturnStatement statement, PythonCfgBlock syntacticSuccessor) {
-    PythonCfgBlock block = createSimpleBlock(end);
+    PythonCfgSimpleBlock block = createSimpleBlock(end);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(statement);
     return block;

@@ -19,9 +19,8 @@
  */
 package org.sonar.plugins.python.api.cfg;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -114,12 +113,16 @@ public class CfgValidator {
   private void assertSuccessors(CfgBlock actualBlock) {
     String blockTestId = expectedCfg.testId(actualBlock);
 
-    Set<String> expectedSucc = new HashSet<>(expectedCfg.expectedSucc(actualBlock));
-    Set<String> actual = new HashSet<>(expectedCfg.blockIds(actualBlock.successors()));
+    List<String> expectedSucc = expectedCfg.expectedSucc(actualBlock);
+    List<String> actual = expectedCfg.blockIds(actualBlock.successors());
+    if (actualBlock instanceof CfgBranchingBlock) {
+      CfgBranchingBlock branchingBlock = (CfgBranchingBlock) actualBlock;
+      actual = expectedCfg.blockIds(Arrays.asList(branchingBlock.trueSuccessor(), branchingBlock.falseSuccessor()));
+    }
+
     assertThat(actual)
       .withFailMessage(buildDebugMessage(format("successors actual: %s expected %s", actual, expectedSucc), blockTestId))
       .isEqualTo(expectedSucc);
-
   }
 
   private void assertSyntacticSuccessor(CfgBlock actualBlock) {

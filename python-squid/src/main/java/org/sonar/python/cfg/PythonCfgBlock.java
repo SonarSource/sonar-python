@@ -25,29 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.python.api.tree.Tree;
 
-public class PythonCfgBlock implements CfgBlock {
+public abstract class PythonCfgBlock implements CfgBlock {
 
   private final LinkedList<Tree> elements = new LinkedList<>();
-  private CfgBlock syntacticSuccessor;
-  private Set<CfgBlock> successors;
-
-  public PythonCfgBlock(CfgBlock successor) {
-    this.successors = Collections.singleton(successor);
-  }
-
-  public PythonCfgBlock(Set<CfgBlock> successors) {
-    this.successors = successors;
-  }
-
-  @Override
-  public Set<CfgBlock> successors() {
-    return successors;
-  }
 
   @Override
   public Set<CfgBlock> predecessors() {
@@ -63,18 +46,8 @@ public class PythonCfgBlock implements CfgBlock {
     elements.addFirst(tree);
   }
 
-  @CheckForNull
-  @Override
-  public CfgBlock syntacticSuccessor() {
-    return syntacticSuccessor;
-  }
-
-  public void setSyntacticSuccessor(CfgBlock syntacticSuccessor) {
-    this.syntacticSuccessor = syntacticSuccessor;
-  }
-
   public boolean isEmptyBlock() {
-    return elements.isEmpty() && successors.size() == 1;
+    return elements.isEmpty() && successors().size() == 1;
   }
 
   PythonCfgBlock firstNonEmptySuccessor() {
@@ -91,18 +64,7 @@ public class PythonCfgBlock implements CfgBlock {
    * This method is used when we remove empty blocks:
    * we have to replace empty successors in the remaining blocks by non-empty successors.
    */
-  void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements) {
-    successors = successors.stream()
-      .map(successor -> replacements.getOrDefault(successor, (PythonCfgBlock) successor))
-      .collect(Collectors.toSet());
-    if (syntacticSuccessor != null) {
-      syntacticSuccessor = replacements.getOrDefault(syntacticSuccessor, (PythonCfgBlock) syntacticSuccessor);
-    }
-  }
-
-  void addSuccessor(PythonCfgBlock conditionBlock) {
-    successors = Stream.concat(successors.stream(), Stream.of(conditionBlock)).collect(Collectors.toSet());
-  }
+  abstract void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements);
 
   @Override
   public String toString() {

@@ -20,43 +20,42 @@
 package org.sonar.python.cfg;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
-import org.sonar.python.api.tree.Tree;
 
-public class PythonCfgEndBlock extends PythonCfgBlock {
+public class PythonCfgSimpleBlock extends PythonCfgBlock {
+
+  private CfgBlock successor;
+  private CfgBlock syntacticSuccessor;
+
+
+  public PythonCfgSimpleBlock(CfgBlock successor) {
+    this.successor = successor;
+  }
 
   @Override
   public Set<CfgBlock> successors() {
-    return Collections.emptySet();
-  }
-
-  @Override
-  public Set<CfgBlock> predecessors() {
-    return Collections.emptySet();
-  }
-
-  @Override
-  public List<Tree> elements() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements) {
-    // nothing to do
+    return Collections.singleton(successor);
   }
 
   @CheckForNull
   @Override
   public CfgBlock syntacticSuccessor() {
-    return null;
+    return syntacticSuccessor;
   }
 
-  @Override
-  public String toString() {
-    return "END";
+  public void setSyntacticSuccessor(CfgBlock syntacticSuccessor) {
+    this.syntacticSuccessor = syntacticSuccessor;
   }
+
+
+  void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements) {
+    successor = replacements.getOrDefault(successor, (PythonCfgBlock) successor);
+    if (syntacticSuccessor != null) {
+      syntacticSuccessor = replacements.getOrDefault(syntacticSuccessor, (PythonCfgBlock) syntacticSuccessor);
+    }
+  }
+
 }
