@@ -36,3 +36,6 @@ def try_statements():
             return doSomething()
         except:
             return 42
+
+def invalid_continue():
+    continue

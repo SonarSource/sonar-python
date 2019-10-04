@@ -241,3 +241,7 @@ def redundant_return_inside_else_block():
     else:
         print(42)
         return # Noncompliant
+
+def invalid_continue():
+    continue
+

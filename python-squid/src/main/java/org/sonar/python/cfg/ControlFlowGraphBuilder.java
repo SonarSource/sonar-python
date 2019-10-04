@@ -40,6 +40,7 @@ import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TryStatement;
 import org.sonar.python.api.tree.WhileStatement;
@@ -162,15 +163,24 @@ public class ControlFlowGraphBuilder {
     return falseSuccessor;
   }
 
+  private Loop currentLoop(Tree tree) {
+    Loop loop = loops.peek();
+    if (loop == null) {
+      Token token = tree.firstToken();
+      throw new IllegalStateException("Invalid \"" + token.value() + "\" outside loop at line " + token.line());
+    }
+    return loop;
+  }
+
   private PythonCfgBlock buildBreakStatement(BreakStatement breakStatement, PythonCfgBlock syntacticSuccessor) {
-    PythonCfgSimpleBlock block = createSimpleBlock(loops.peek().breakTarget);
+    PythonCfgSimpleBlock block = createSimpleBlock(currentLoop(breakStatement).breakTarget);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(breakStatement);
     return block;
   }
 
   private PythonCfgBlock buildContinueStatement(ContinueStatement continueStatement, PythonCfgBlock syntacticSuccessor) {
-    PythonCfgSimpleBlock block = createSimpleBlock(loops.peek().continueTarget);
+    PythonCfgSimpleBlock block = createSimpleBlock(currentLoop(continueStatement).continueTarget);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(continueStatement);
     return block;

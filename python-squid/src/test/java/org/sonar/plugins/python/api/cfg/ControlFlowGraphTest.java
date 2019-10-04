@@ -22,6 +22,8 @@ package org.sonar.plugins.python.api.cfg;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.sonar.python.PythonFile;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
@@ -34,6 +36,8 @@ import org.sonar.python.cfg.PythonCfgSimpleBlock;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ControlFlowGraphTest {
+
+  private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test
   public void empty_file() {
@@ -224,6 +228,11 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void continue_outside_loop() {
+    assertThat(cfg("continue")).isNull();
+  }
+
+  @Test
   public void continue_nested_while() {
     verifyCfg(
       "while cond_block(succ = [cond_block_inner, END]):",
@@ -367,12 +376,11 @@ public class ControlFlowGraphTest {
   private ControlFlowGraph cfg(String... lines) {
     FileInput fileInput = PythonTestUtils.parse("def f():", Arrays.stream(lines).map(s -> "  " + s).collect(Collectors.joining("\n")));
     FunctionDef fun = (FunctionDef) fileInput.descendants(Kind.FUNCDEF).findFirst().get();
-    return ControlFlowGraph.build(fun);
+    return ControlFlowGraph.build(fun, file);
   }
 
   private ControlFlowGraph fileCfg(String... lines) {
     FileInput fileInput = PythonTestUtils.parse(lines);
-    return ControlFlowGraph.build(fileInput);
+    return ControlFlowGraph.build(fileInput, file);
   }
-
 }
