@@ -31,6 +31,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.python.api.tree.BreakStatement;
 import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.ExceptClause;
@@ -49,7 +50,7 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock start;
   private final PythonCfgBlock end = new PythonCfgEndBlock();
   private final Set<PythonCfgBlock> blocks = new HashSet<>();
-  private final Deque<PythonCfgBlock> continueTargets = new ArrayDeque<>();
+  private final Deque<Loop> loops = new ArrayDeque<>();
 
   public ControlFlowGraphBuilder(@Nullable StatementList statementList) {
     blocks.add(end);
@@ -118,6 +119,8 @@ public class ControlFlowGraphBuilder {
         return buildContinueStatement(((ContinueStatement) statement), currentBlock);
       case TRY_STMT:
         return tryStatement(((TryStatement) statement), currentBlock);
+      case BREAK_STMT:
+        return buildBreakStatement((BreakStatement) statement, currentBlock);
       default:
         currentBlock.addElement(statement);
     }
@@ -154,8 +157,15 @@ public class ControlFlowGraphBuilder {
     return falseSuccessor;
   }
 
+  private PythonCfgBlock buildBreakStatement(BreakStatement breakStatement, PythonCfgBlock syntacticSuccessor) {
+    PythonCfgBlock block = createSimpleBlock(loops.peek().breakTarget);
+    block.setSyntacticSuccessor(syntacticSuccessor);
+    block.addElement(breakStatement);
+    return block;
+  }
+
   private PythonCfgBlock buildContinueStatement(ContinueStatement continueStatement, PythonCfgBlock syntacticSuccessor) {
-    PythonCfgBlock block = createSimpleBlock(continueTargets.peek());
+    PythonCfgBlock block = createSimpleBlock(loops.peek().continueTarget);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(continueStatement);
     return block;
@@ -164,9 +174,9 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock buildLoop(Tree conditionElement, StatementList body, PythonCfgBlock successor) {
     PythonCfgBlock conditionBlock = createSimpleBlock(successor);
     conditionBlock.addElement(conditionElement);
-    continueTargets.push(conditionBlock);
+    loops.push(new Loop(successor, conditionBlock));
     PythonCfgBlock whileBodyBlock = build(body.statements(), createSimpleBlock(conditionBlock));
-    continueTargets.pop();
+    loops.pop();
     conditionBlock.addSuccessor(whileBodyBlock);
     return createSimpleBlock(conditionBlock);
   }
@@ -233,6 +243,17 @@ public class ControlFlowGraphBuilder {
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(statement);
     return block;
+  }
+
+  private static class Loop {
+
+    final PythonCfgBlock breakTarget;
+    final PythonCfgBlock continueTarget;
+
+    private Loop(PythonCfgBlock breakTarget, PythonCfgBlock continueTarget) {
+      this.breakTarget = breakTarget;
+      this.continueTarget = continueTarget;
+    }
   }
 
 }
