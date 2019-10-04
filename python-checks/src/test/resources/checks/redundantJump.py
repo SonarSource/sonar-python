@@ -155,3 +155,13 @@ def non_redundant_continue_in_nested_for(collection1, collection2, p):
             if p:
                 continue
             x = 42
+
+# outside function
+
+for elem in collection:
+    continue # Noncompliant
+
+for elem in collection:
+    if elem == 1:
+      continue
+    x = 42

@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Tree;
@@ -35,10 +36,12 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
-      ControlFlowGraph cfg = ControlFlowGraph.build((FunctionDef) ctx.syntaxNode());
-      checkCfg(cfg, ctx);
-    });
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
+      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode()), ctx)
+    );
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
+      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode()), ctx)
+    );
   }
 
   private static void checkCfg(ControlFlowGraph cfg, SubscriptionContext ctx) {
