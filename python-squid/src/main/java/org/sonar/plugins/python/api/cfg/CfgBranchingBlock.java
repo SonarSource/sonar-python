@@ -17,46 +17,23 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.cfg;
+package org.sonar.plugins.python.api.cfg;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.python.api.tree.Tree;
 
-public class PythonCfgEndBlock extends PythonCfgBlock {
+/**
+ * A {@link CfgBlock} with 2 successors: represents a block ending
+ * with a condition which determines which successor is executed next.
+ */
+public interface CfgBranchingBlock extends CfgBlock {
 
-  @Override
-  public Set<CfgBlock> successors() {
-    return Collections.emptySet();
-  }
+  CfgBlock trueSuccessor();
 
-  @Override
-  public Set<CfgBlock> predecessors() {
-    return Collections.emptySet();
-  }
+  CfgBlock falseSuccessor();
 
-  @Override
-  public List<Tree> elements() {
-    return Collections.emptyList();
-  }
+  /**
+   * Syntax tree causing branching: e.g. loop tree, if statement tree
+   */
+  Tree branchingTree();
 
-  @Override
-  void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements) {
-    // nothing to do
-  }
-
-  @CheckForNull
-  @Override
-  public CfgBlock syntacticSuccessor() {
-    return null;
-  }
-
-  @Override
-  public String toString() {
-    return "END";
-  }
 }

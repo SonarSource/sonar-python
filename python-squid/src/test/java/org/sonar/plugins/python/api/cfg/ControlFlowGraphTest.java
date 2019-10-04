@@ -29,6 +29,7 @@ import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBlock;
 import org.sonar.python.cfg.PythonCfgEndBlock;
+import org.sonar.python.cfg.PythonCfgSimpleBlock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -193,7 +194,7 @@ public class ControlFlowGraphTest {
       "before(succ = [if_body, before_elif_body_1], elem = 2)",
       "if cond1:",
       "  if_body(succ = [END], elem = 1)",
-      "elif before_elif_body_1(succ = [else_body, elif_body_1], elem = 1):",
+      "elif before_elif_body_1(succ = [elif_body_1, else_body], elem = 1):",
       "  elif_body_1(succ = [END], elem = 1)",
       "else:",
       "  else_body(succ = [END], elem = 1)"
@@ -202,11 +203,13 @@ public class ControlFlowGraphTest {
 
   @Test
   public void while_statement() {
-    verifyCfg(
+    ControlFlowGraph cfg = verifyCfg(
       "before(succ = [cond_block], elem = 1)",
       "while cond_block(succ = [while_body, END], elem = 1):",
       "  while_body(succ = [cond_block], elem = 1)"
     );
+    CfgBranchingBlock condBlock = (CfgBranchingBlock) cfg.start().successors().iterator().next();
+    assertThat(condBlock.branchingTree().getKind()).isEqualTo(Kind.WHILE_STMT);
   }
 
   @Test
@@ -224,7 +227,7 @@ public class ControlFlowGraphTest {
   public void continue_nested_while() {
     verifyCfg(
       "while cond_block(succ = [cond_block_inner, END]):",
-      "  while cond_block_inner(succ = [cond_block, inner_while_block]):",
+      "  while cond_block_inner(succ = [inner_while_block, cond_block]):",
       "    inner_while_block(succ = [cond_block_inner], syntSucc = after_continue)",
       "    continue",
       "    after_continue(succ = [cond_block_inner])"
@@ -282,7 +285,7 @@ public class ControlFlowGraphTest {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
-      "  try_block(succ = [except_cond, END])",
+      "  try_block(succ = [END, except_cond])",
       "except except_cond(succ = [except_block, END]) as e:",
       "  except_block(succ = [END])"
     );
@@ -293,7 +296,7 @@ public class ControlFlowGraphTest {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
-      "  try_block(succ = [except_cond, finally_block])",
+      "  try_block(succ = [finally_block, except_cond])",
       "except except_cond(succ = [except_block, finally_block]) as e:",
       "  except_block(succ = [finally_block])",
       "finally:",
@@ -306,7 +309,7 @@ public class ControlFlowGraphTest {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
-      "  try_block(succ = [except_cond_1, else_block])",
+      "  try_block(succ = [else_block, except_cond_1])",
       "except except_cond_1(succ = [except_block_1, except_cond_2]) as e:",
       "  except_block_1(succ = [finally_block])",
       "except except_cond_2(succ = [except_block_2, finally_block]) as e:",
@@ -339,7 +342,7 @@ public class ControlFlowGraphTest {
   public void CFGBlock_toString() {
     PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
     assertThat(endBlock.toString()).isEqualTo("END");
-    PythonCfgBlock pythonCfgBlock = new PythonCfgBlock(endBlock);
+    PythonCfgBlock pythonCfgBlock = new PythonCfgSimpleBlock(endBlock);
     assertThat(pythonCfgBlock.toString()).isEqualTo("empty");
     ControlFlowGraph cfg = cfg(
      "pass",
