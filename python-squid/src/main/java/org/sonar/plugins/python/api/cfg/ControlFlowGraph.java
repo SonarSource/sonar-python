@@ -19,16 +19,30 @@
  */
 package org.sonar.plugins.python.api.cfg;
 
+import java.util.Collections;
 import java.util.Set;
+import java.util.WeakHashMap;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+import org.sonar.python.PythonFile;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.cfg.ControlFlowGraphBuilder;
 
 public class ControlFlowGraph {
 
+  private static final Logger LOG = Loggers.get(ControlFlowGraph.class);
+
   private final Set<CfgBlock> blocks;
   private final CfgBlock start;
   private final CfgBlock end;
+
+  // we shouldn't prevent trees from being garbage collected
+  private static Set<Tree> treesWithCfgErrors = Collections.newSetFromMap(new WeakHashMap<>());
 
   public ControlFlowGraph(Set<CfgBlock> blocks, CfgBlock start, CfgBlock end) {
     this.blocks = blocks;
@@ -36,12 +50,27 @@ public class ControlFlowGraph {
     this.end = end;
   }
 
-  public static ControlFlowGraph build(FunctionDef functionDef) {
-    return new ControlFlowGraphBuilder(functionDef.body()).getCfg();
+  @CheckForNull
+  private static ControlFlowGraph build(@Nullable StatementList statementList, PythonFile file) {
+    if (!treesWithCfgErrors.contains(statementList)) {
+      try {
+        return new ControlFlowGraphBuilder(statementList).getCfg();
+      } catch (Exception e) {
+        treesWithCfgErrors.add(statementList);
+        LOG.warn("Failed to build control flow graph in file [{}]: {}", file, e.getMessage());
+      }
+    }
+    return null;
   }
 
-  public static ControlFlowGraph build(FileInput fileInput) {
-    return new ControlFlowGraphBuilder(fileInput.statements()).getCfg();
+  @CheckForNull
+  public static ControlFlowGraph build(FunctionDef functionDef, PythonFile file) {
+    return build(functionDef.body(), file);
+  }
+
+  @CheckForNull
+  public static ControlFlowGraph build(FileInput fileInput, PythonFile file) {
+    return build(fileInput.statements(), file);
   }
 
   public CfgBlock start() {

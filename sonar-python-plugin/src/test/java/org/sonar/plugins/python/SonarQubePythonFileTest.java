@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 public class SonarQubePythonFileTest {
 
-  private InputFile inputFile = mock(InputFile.class);
+  private InputFile inputFile = mock(InputFile.class, "file1.py");
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -42,6 +42,7 @@ public class SonarQubePythonFileTest {
     when(inputFile.contents()).thenReturn("Hello 6.2!");
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
+    assertThat(pythonFile.toString()).isEqualTo(inputFile.toString());
   }
 
   @Test

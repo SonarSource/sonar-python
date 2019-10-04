@@ -44,6 +44,11 @@ public abstract class SonarQubePythonFile implements PythonFile {
     return inputFile;
   }
 
+  @Override
+  public String toString() {
+    return inputFile.toString();
+  }
+
   private static class Sq62File extends SonarQubePythonFile {
 
     public Sq62File(InputFile inputFile) {

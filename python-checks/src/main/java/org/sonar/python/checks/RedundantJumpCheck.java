@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -37,14 +38,17 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
-      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode()), ctx)
+      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx)
     );
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
-      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode()), ctx)
+      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx)
     );
   }
 
-  private static void checkCfg(ControlFlowGraph cfg, SubscriptionContext ctx) {
+  private static void checkCfg(@Nullable ControlFlowGraph cfg, SubscriptionContext ctx) {
+    if (cfg == null) {
+      return;
+    }
     for (CfgBlock cfgBlock : cfg.blocks()) {
       if (cfgBlock.successors().size() == 1 && cfgBlock.successors().contains(cfgBlock.syntacticSuccessor())) {
         List<Tree> elements = cfgBlock.elements();
