@@ -232,6 +232,19 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void break_statement() {
+    verifyCfg(
+      "while cond(succ = [while_body, after_while], elem = 1):",
+      "  while_body(succ = [if_body, after_break], elem = 2)",
+      "  if cond2:",
+      "    if_body(succ = [after_while], elem = 2, syntSucc = after_break)",
+      "    break",
+      "  after_break(succ = [cond], elem = 1)",
+      "after_while(succ = [END], elem = 1)"
+    );
+  }
+
+  @Test
   public void for_statement() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
