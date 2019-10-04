@@ -19,40 +19,37 @@
  */
 package org.sonar.python;
 
-import com.google.common.collect.ImmutableSet;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import java.io.File;
 import java.util.List;
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.ReturnStatement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythonCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
-  public static final String MESSAGE = "message";
+  private static final String MESSAGE = "message";
 
-  private static List<PreciseIssue> scanFileForIssues(File file, PythonCheckAstNode check) {
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+  private static List<PreciseIssue> scanFileForIssues(PythonCheck check) {
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(PythonCheckTest.FILE);
     check.scanFile(context);
     return context.getIssues();
   }
 
   @Test
   public void test() {
-    TestPythonCheck check = new TestPythonCheck (){
+    PythonCheckTree check = new PythonCheckTree() {
       @Override
-      public void visitNode(AstNode astNode) {
-        AstNode funcName = astNode.getFirstChild(PythonGrammar.FUNCNAME);
-        addIssue(funcName, funcName.getTokenValue());
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+        addIssue(pyFunctionDefTree.name(), pyFunctionDefTree.name().name());
+        super.visitFunctionDef(pyFunctionDefTree);
       }
     };
 
-    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(check);
 
     assertThat(issues).hasSize(2);
     PreciseIssue firstIssue = issues.get(0);
@@ -71,34 +68,38 @@ public class PythonCheckTest {
 
   @Test
   public void test_cost() {
-    TestPythonCheck check = new TestPythonCheck (){
+    PythonCheckTree check = new PythonCheckTree() {
       @Override
-      public void visitNode(AstNode astNode) {
-        addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE).withCost(42);
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+        addIssue(pyFunctionDefTree.name(), MESSAGE).withCost(42);
+        super.visitFunctionDef(pyFunctionDefTree);
       }
     };
 
-    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(check);
     PreciseIssue firstIssue = issues.get(0);
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
 
   @Test
   public void test_secondary_location() {
-    TestPythonCheck check = new TestPythonCheck (){
-      @Override
-      public void visitNode(AstNode astNode) {
-        PreciseIssue issue = addIssue(astNode.getFirstChild(PythonGrammar.FUNCNAME), MESSAGE)
-          .secondary(astNode.getFirstChild(), "def keyword");
+    PythonCheckTree check = new PythonCheckTree() {
 
-        AstNode returnStmt = astNode.getFirstDescendant(PythonGrammar.RETURN_STMT);
-        if (returnStmt != null) {
-          issue.secondary(returnStmt, "return statement");
-        }
+      private PreciseIssue preciseIssue;
+
+      @Override
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+        preciseIssue = addIssue(pyFunctionDefTree.name(), MESSAGE).secondary(pyFunctionDefTree.defKeyword(), "def keyword");
+        super.visitFunctionDef(pyFunctionDefTree);
+      }
+      @Override
+      public void visitReturnStatement(ReturnStatement pyReturnStatementTree) {
+        preciseIssue.secondary(pyReturnStatementTree, "return statement");
+        super.visitReturnStatement(pyReturnStatementTree);
       }
     };
 
-    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
+    List<PreciseIssue> issues = scanFileForIssues(check);
 
     List<IssueLocation> secondaryLocations = issues.get(0).secondaryLocations();
     assertThat(secondaryLocations).hasSize(2);
@@ -117,46 +118,5 @@ public class PythonCheckTest {
     assertThat(secondSecondaryLocation.startLineOffset()).isEqualTo(4);
     assertThat(secondSecondaryLocation.endLine()).isEqualTo(4);
     assertThat(secondSecondaryLocation.endLineOffset()).isEqualTo(5);
-  }
-
-  @Test
-  public void file_level_issue() {
-    TestPythonCheck check = new TestPythonCheck() {
-      @Override
-      public void visitFile(AstNode astNode) {
-        addFileIssue(MESSAGE);
-      }
-    };
-    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
-    assertThat(issues).hasSize(1);
-    PreciseIssue issue = issues.get(0);
-    assertThat(issue.primaryLocation().message()).isEqualTo(MESSAGE);
-    assertThat(issue.primaryLocation().startLine()).isEqualTo(0);
-    assertThat(issue.primaryLocation().endLine()).isEqualTo(0);
-  }
-
-  @Test
-  public void line_issue() {
-    TestPythonCheck check = new TestPythonCheck() {
-      @Override
-      public void visitFile(AstNode astNode) {
-        addLineIssue(MESSAGE, 3);
-      }
-    };
-    List<PreciseIssue> issues = scanFileForIssues(FILE, check);
-    assertThat(issues).hasSize(1);
-    PreciseIssue issue = issues.get(0);
-    assertThat(issue.primaryLocation().message()).isEqualTo(MESSAGE);
-    assertThat(issue.primaryLocation().startLine()).isEqualTo(3);
-    assertThat(issue.primaryLocation().endLine()).isEqualTo(3);
-  }
-
-  private static class TestPythonCheck extends PythonCheckAstNode {
-
-    @Override
-    public Set<AstNodeType> subscribedKinds() {
-      return ImmutableSet.of(PythonGrammar.FUNCDEF);
-    }
-
   }
 }
