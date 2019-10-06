@@ -103,4 +103,12 @@ public class PythonCfgBlock implements CfgBlock {
   void addSuccessor(PythonCfgBlock conditionBlock) {
     successors = Stream.concat(successors.stream(), Stream.of(conditionBlock)).collect(Collectors.toSet());
   }
+
+  @Override
+  public String toString() {
+    if (elements.isEmpty()) {
+      return "empty";
+    }
+    return elements.stream().map(elem -> elem.getKind().toString()).collect(Collectors.joining(";"));
+  }
 }

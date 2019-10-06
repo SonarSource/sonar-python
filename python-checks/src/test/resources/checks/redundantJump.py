@@ -165,3 +165,79 @@ for elem in collection:
     if elem == 1:
       continue
     x = 42
+
+def redundant_return_inside_try_block():
+    try:
+        print('foo')
+        return # FN
+    except E as e:
+        print(e)
+
+def non_redundant_return_inside_try_block():
+    try:
+        return # OK
+    except E as e:
+        print(e)
+    else:
+        print(42)
+
+def redundant_return_inside_catch_block():
+    try:
+        pass
+    except E as e:
+        print(e)
+        return # Noncompliant
+    else:
+        print(42)
+
+def redundant_return_inside_catch_block_multiple():
+    try:
+        pass
+    except E as e:
+        print(e)
+        return # Noncompliant
+    except E1 as e:
+        print(e)
+    else:
+        print(42)
+
+
+def redundant_return_inside_catch_block_with_finally():
+    try:
+        pass
+    except E as e:
+        print(e)
+        return # FN
+    finally:
+        print(42)
+
+def redundant_return_inside_finally_block():
+    try:
+        pass
+    except E as e:
+        print(e)
+    else:
+        print(42)
+    finally:
+        print(e)
+        return # Noncompliant
+
+def non_redundant_return_inside_else_block():
+    try:
+        pass
+    except E as e:
+        print(e)
+    else:
+        print(42)
+        return # OK - finally to be executed
+    finally:
+        print(e)
+
+def redundant_return_inside_else_block():
+    try:
+        pass
+    except E as e:
+        print(e)
+    else:
+        print(42)
+        return # Noncompliant
