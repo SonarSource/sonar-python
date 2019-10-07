@@ -245,3 +245,8 @@ def redundant_return_inside_else_block():
 def invalid_continue():
     continue
 
+
+with A() as a:
+    while cond:
+        print("foo")
+        continue # Noncompliant

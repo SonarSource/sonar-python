@@ -44,6 +44,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TryStatement;
 import org.sonar.python.api.tree.WhileStatement;
+import org.sonar.python.api.tree.WithStatement;
 
 public class ControlFlowGraphBuilder {
 
@@ -113,6 +114,8 @@ public class ControlFlowGraphBuilder {
 
   private PythonCfgBlock build(Statement statement, PythonCfgBlock currentBlock) {
     switch (statement.getKind()) {
+      case WITH_STMT:
+        return build(((WithStatement) statement).statements().statements(), currentBlock);
       case RETURN_STMT:
         return buildReturnStatement((ReturnStatement) statement, currentBlock);
       case IF_STMT:

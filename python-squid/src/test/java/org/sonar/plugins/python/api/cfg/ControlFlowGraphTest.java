@@ -348,6 +348,16 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void with_statement() {
+    verifyCfg(
+      "before(succ = [if_body, END])",
+      "with A() as a:",
+      "  if cond:",
+      "    if_body(succ = [END])"
+    );
+  }
+
+  @Test
   public void CFGBlock_toString() {
     PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
     assertThat(endBlock.toString()).isEqualTo("END");
