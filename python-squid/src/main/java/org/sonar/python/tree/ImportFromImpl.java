@@ -111,7 +111,7 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Collections.singletonList(fromKeyword), dottedPrefixForModule, Arrays.asList(moduleName, importKeyword), aliasedImportNames,
       Arrays.asList(wildcard, separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

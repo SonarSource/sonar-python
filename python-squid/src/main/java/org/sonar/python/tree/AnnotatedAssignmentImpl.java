@@ -89,7 +89,7 @@ public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignme
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(variable, colonToken, annotation, equalToken, assignedValue, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

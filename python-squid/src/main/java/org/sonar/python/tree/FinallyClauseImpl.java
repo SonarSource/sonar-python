@@ -69,7 +69,7 @@ public class FinallyClauseImpl extends PyTree implements FinallyClause {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(finallyKeyword, colon, newLine, indent, body, dedent).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

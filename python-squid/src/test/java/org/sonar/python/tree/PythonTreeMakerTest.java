@@ -819,7 +819,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tupleParam.closingParenthesis().value()).isEqualTo(")");
     assertThat(tupleParam.parameters()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER, Tree.Kind.PARAMETER);
     assertThat(tupleParam.commas()).extracting(Token::value).containsExactly(",");
-    assertThat(tupleParam.children()).hasSize(3);
+    assertThat(tupleParam.children()).hasSize(5);
 
     functionDefTree = parse("def func(x : int, y):\n  \"\"\"\n" +
       "This is a function docstring\n" +

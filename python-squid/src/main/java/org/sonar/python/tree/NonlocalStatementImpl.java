@@ -71,7 +71,7 @@ public class NonlocalStatementImpl extends PyTree implements NonlocalStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Collections.singletonList(nonlocalKeyword), variables, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

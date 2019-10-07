@@ -46,7 +46,7 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.singletonList(firstToken());
   }
 

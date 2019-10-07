@@ -71,7 +71,7 @@ public class TupleImpl extends PyTree implements Tuple {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     List<Tree> children = new ArrayList<>();
     if (leftParenthesis != null) {
       children.add(leftParenthesis);

@@ -73,7 +73,7 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(lhsExpression, augAssignToken, rhsExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

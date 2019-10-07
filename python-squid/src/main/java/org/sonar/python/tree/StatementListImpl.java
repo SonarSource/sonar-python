@@ -55,7 +55,7 @@ public class StatementListImpl extends PyTree implements StatementList {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(statements).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

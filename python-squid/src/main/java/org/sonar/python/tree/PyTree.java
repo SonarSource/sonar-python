@@ -85,11 +85,11 @@ public abstract class PyTree implements Tree {
     this.parent = parent;
   }
 
-  abstract List<Tree> childs();
+  abstract List<Tree> computeChildren();
 
   public List<Tree> children() {
     if (childs == null) {
-      childs = childs();
+      childs = computeChildren();
     }
     return childs;
   }

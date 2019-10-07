@@ -90,7 +90,7 @@ public class ParameterImpl extends PyTree implements Parameter {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(starToken, name, annotation, equalToken, defaultValue).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

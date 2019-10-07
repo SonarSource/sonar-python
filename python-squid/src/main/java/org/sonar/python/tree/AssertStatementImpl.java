@@ -77,7 +77,7 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(assertKeyword, condition, message, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

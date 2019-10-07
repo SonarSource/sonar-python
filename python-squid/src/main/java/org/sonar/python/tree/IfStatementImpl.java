@@ -129,7 +129,7 @@ public class IfStatementImpl extends PyTree implements IfStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Arrays.asList(keyword, condition, colon, newLine, indent, statements, dedent), elifBranches, Collections.singletonList(elseStatement))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

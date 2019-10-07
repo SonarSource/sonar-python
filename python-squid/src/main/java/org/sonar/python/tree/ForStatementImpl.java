@@ -147,7 +147,7 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressions, Collections.singletonList(inKeyword), testExpressions,
       Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseKeyword, elseColon, lastNewline, lastIndent, elseBody, lastDedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());

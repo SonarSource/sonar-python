@@ -62,7 +62,7 @@ public class ContinueStatementImpl extends PyTree implements ContinueStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(continueKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

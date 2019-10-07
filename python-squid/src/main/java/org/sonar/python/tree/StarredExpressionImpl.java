@@ -56,7 +56,7 @@ public class StarredExpressionImpl extends PyTree implements StarredExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(starToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

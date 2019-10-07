@@ -63,7 +63,7 @@ public class PrintStatementImpl extends PyTree implements PrintStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Collections.singletonList(printKeyword), expressions, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

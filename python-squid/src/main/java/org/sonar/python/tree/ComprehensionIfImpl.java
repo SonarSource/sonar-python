@@ -66,7 +66,7 @@ public class ComprehensionIfImpl extends PyTree implements ComprehensionIf {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(ifToken, condition, nestedClause).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

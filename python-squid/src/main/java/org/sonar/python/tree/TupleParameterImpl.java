@@ -35,6 +35,7 @@ public class TupleParameterImpl extends PyTree implements TupleParameter {
   private final Token rParenthesis;
 
   public TupleParameterImpl(Token lParenthesis, List<AnyParameter> parameters, List<Token> commas, Token rParenthesis) {
+    super(lParenthesis, rParenthesis);
     this.lParenthesis = lParenthesis;
     this.parameters = parameters;
     this.commas = commas;
@@ -67,8 +68,9 @@ public class TupleParameterImpl extends PyTree implements TupleParameter {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     List<Tree> children = new ArrayList<>();
+    children.add(lParenthesis);
     int i = 0;
     for (Tree argument : parameters) {
       children.add(argument);
@@ -77,6 +79,7 @@ public class TupleParameterImpl extends PyTree implements TupleParameter {
       }
       i++;
     }
+    children.add(rParenthesis);
     return children;
   }
 

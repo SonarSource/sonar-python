@@ -75,7 +75,7 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     List<Tree> children = new ArrayList<>();
     int i = 0;
     for (Tree lhs : lhsExpressions) {

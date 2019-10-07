@@ -46,7 +46,7 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.unmodifiableList(stringElements);
   }
 

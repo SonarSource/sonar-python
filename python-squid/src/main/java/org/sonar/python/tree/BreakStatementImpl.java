@@ -62,7 +62,7 @@ public class BreakStatementImpl extends PyTree implements BreakStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(breakKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

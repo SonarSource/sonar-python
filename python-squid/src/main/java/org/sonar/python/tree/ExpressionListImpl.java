@@ -51,7 +51,7 @@ public class ExpressionListImpl extends PyTree implements ExpressionList {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.unmodifiableList(expressions);
   }
 }

@@ -72,7 +72,7 @@ public class ImportNameImpl extends PyTree implements ImportName {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Collections.singletonList(importKeyword), aliasedNames, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

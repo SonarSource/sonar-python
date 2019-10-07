@@ -93,7 +93,7 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(execKeyword, expression, globalsExpression, localsExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -71,7 +71,7 @@ public class SubscriptionExpressionImpl extends PyTree implements SubscriptionEx
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(object, lBracket, subscripts, rBracket).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

@@ -72,7 +72,7 @@ public class TokenImpl extends PyTree implements Token {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.emptyList();
   }
 

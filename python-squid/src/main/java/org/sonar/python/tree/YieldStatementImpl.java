@@ -60,7 +60,7 @@ public class YieldStatementImpl extends PyTree implements YieldStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(yieldExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
