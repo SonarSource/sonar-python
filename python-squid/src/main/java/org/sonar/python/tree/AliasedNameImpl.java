@@ -19,19 +19,17 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.DottedName;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class AliasedNameImpl extends PyTree implements AliasedName {
 
@@ -39,11 +37,18 @@ public class AliasedNameImpl extends PyTree implements AliasedName {
   private final DottedName dottedName;
   private final Name alias;
 
-  public AliasedNameImpl(AstNode astNode, @Nullable Token asKeyword, DottedName dottedName, @Nullable Name alias) {
-    super(astNode);
+  public AliasedNameImpl(Token asKeyword, DottedName dottedName, Name alias) {
+    super(dottedName.firstToken(), alias.lastToken());
     this.asKeyword = asKeyword;
     this.dottedName = dottedName;
     this.alias = alias;
+  }
+
+  public AliasedNameImpl(DottedName dottedName) {
+    super(dottedName.firstToken(), dottedName.lastToken());
+    this.asKeyword = null;
+    this.dottedName = dottedName;
+    this.alias = null;
   }
 
   @CheckForNull

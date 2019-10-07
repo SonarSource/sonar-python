@@ -436,9 +436,9 @@ public class PythonTreeMaker {
       dottedName = new DottedNameImpl(astNode, Collections.singletonList(name(importedName)));
     }
     if (asKeyword == null) {
-      return new AliasedNameImpl(astNode, null, dottedName, null);
+      return new AliasedNameImpl(dottedName);
     }
-    return new AliasedNameImpl(astNode, toPyToken(asKeyword.getToken()), dottedName, name(astNode.getLastChild(PythonGrammar.NAME)));
+    return new AliasedNameImpl(toPyToken(asKeyword.getToken()), dottedName, name(astNode.getLastChild(PythonGrammar.NAME)));
   }
 
   private static DottedName dottedName(AstNode astNode) {

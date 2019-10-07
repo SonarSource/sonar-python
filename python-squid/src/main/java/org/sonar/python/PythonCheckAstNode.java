@@ -21,10 +21,6 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import javax.annotation.Nullable;
 
 public abstract class PythonCheckAstNode extends PythonVisitor implements PythonCheck {
@@ -57,7 +53,4 @@ public abstract class PythonCheckAstNode extends PythonVisitor implements Python
     return addIssue(new AstNode(token), message);
   }
 
-  public static <T> Set<T> immutableSet(T... el) {
-    return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(el)));
-  }
 }

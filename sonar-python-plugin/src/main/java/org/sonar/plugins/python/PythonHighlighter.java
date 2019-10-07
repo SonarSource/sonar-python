@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,7 +32,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
-import org.sonar.python.PythonCheckAstNode;
 import org.sonar.python.PythonVisitor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonGrammar;
@@ -98,10 +98,10 @@ public class PythonHighlighter extends PythonVisitor {
 
   @Override
   public Set<AstNodeType> subscribedKinds() {
-    return PythonCheckAstNode.immutableSet(
+    return new HashSet<>(Arrays.asList(
       PythonGrammar.FUNCDEF,
       PythonGrammar.CLASSDEF,
-      PythonGrammar.FILE_INPUT);
+      PythonGrammar.FILE_INPUT));
   }
 
   @Override
