@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class PythonVisitor {
+public class PythonVisitor implements PythonCheck {
 
   private PythonVisitorContext context;
 

@@ -28,6 +28,10 @@ public class TokenLocation {
   private final int endLine;
   private final int endLineOffset;
 
+  public TokenLocation(org.sonar.python.api.tree.Token token) {
+    this(token.token());
+  }
+
   public TokenLocation(Token token) {
     this.startLine = token.getLine();
     this.startLineOffset = token.getColumn();
