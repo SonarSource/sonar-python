@@ -13,12 +13,13 @@ def non_redundant_return_in_if(cond):
 
 def redundant_return_in_if(cond):
     if cond:
+        print("foo")
         return #Noncompliant
 
 def redundant_return_in_if_else(cond):
     if cond:
         x = 10
-        return #Noncompliant {{Remove this redundant jump.}}
+        return #Noncompliant {{Remove this redundant return.}}
 #       ^^^^^^
     else:
         x = 42
@@ -90,16 +91,19 @@ def three_non_redundant_return_if_elif_else(cond1, cond2):
 
 def redundant_continue_in_while(cond):
     while cond:
-        continue # Noncompliant
+        print("foo")
+        continue # Noncompliant {{Remove this redundant continue.}}
 
 def redundant_continue_in_while_if(cond, p):
     while cond:
         if p:
+            print("foo")
             continue # Noncompliant
 
 def redundant_continue_in_while_if_else(cond, p):
     while cond:
         if p:
+            print("foo")
             continue # Noncompliant
         else:
             x = 42
@@ -113,6 +117,7 @@ def non_redundant_continue_in_while(cond, p):
 def redundant_continue_in_nested_while(cond1, cond2):
     while cond1:
         while cond2:
+          print("foo")
           continue # Noncompliant
 
 def non_redundant_continue_in_nested_while(cond1, cond2, p):
@@ -124,16 +129,19 @@ def non_redundant_continue_in_nested_while(cond1, cond2, p):
 
 def redundant_continue_in_for(collection):
     for elem in collection:
+        print(elem)
         continue # Noncompliant
 
 def redundant_continue_in_for_if(collection, p):
     for elem in collection:
         if p:
+            print("foo")
             continue # Noncompliant
 
 def redundant_continue_in_for_if_else(collection, p):
     for elem in collection:
         if p:
+            print("foo")
             continue # Noncompliant
         else:
             x = 42
@@ -147,6 +155,7 @@ def non_redundant_continue_in_for(collection, p):
 def redundant_continue_in_nested_for(collection1, collection2):
     for elem1 in collection1:
         for elem2 in collection2:
+          print(elem2)
           continue # Noncompliant
 
 def non_redundant_continue_in_nested_for(collection1, collection2, p):
@@ -159,6 +168,7 @@ def non_redundant_continue_in_nested_for(collection1, collection2, p):
 # outside function
 
 for elem in collection:
+    print(elem)
     continue # Noncompliant
 
 for elem in collection:
@@ -255,3 +265,6 @@ class Foo:
     while cond:
         print("foo")
         continue # Noncompliant
+
+def single_return():
+    return # OK
