@@ -31,6 +31,7 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.api.tree.BreakStatement;
+import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.ExceptClause;
@@ -116,6 +117,8 @@ public class ControlFlowGraphBuilder {
     switch (statement.getKind()) {
       case WITH_STMT:
         return build(((WithStatement) statement).statements().statements(), currentBlock);
+      case CLASSDEF:
+        return build(((ClassDef) statement).body().statements(), currentBlock);
       case RETURN_STMT:
         return buildReturnStatement((ReturnStatement) statement, currentBlock);
       case IF_STMT:

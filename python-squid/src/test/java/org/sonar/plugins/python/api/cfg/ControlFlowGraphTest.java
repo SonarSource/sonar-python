@@ -370,6 +370,16 @@ public class ControlFlowGraphTest {
     assertThat(cfg.start().toString()).isEqualTo("PASS_STMT;ASSERT_STMT");
   }
 
+  @Test
+  public void class_def() {
+    verifyCfg(
+      "before(succ = [if_body, END])",
+      "class A:",
+      "  if cond:",
+      "    if_body(succ = [END])"
+    );
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
