@@ -55,10 +55,15 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
         List<Tree> elements = cfgBlock.elements();
         Tree lastElement = elements.get(elements.size() - 1);
         if (!isInsideSingleStatementBlock(lastElement) && !isReturnWithExpression(lastElement)) {
-          ctx.addIssue(lastElement, "Remove this redundant jump.");
+          ctx.addIssue(lastElement, message(lastElement));
         }
       }
     }
+  }
+
+  private static String message(Tree jumpStatement) {
+    String jumpKind = jumpStatement.is(Kind.RETURN_STMT) ? "return" : "continue";
+    return "Remove this redundant " + jumpKind + ".";
   }
 
   // assumption: parent of BREAK, CONTINUE and RETURN is always a StatementList

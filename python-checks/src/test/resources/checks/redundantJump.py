@@ -19,7 +19,7 @@ def redundant_return_in_if(cond):
 def redundant_return_in_if_else(cond):
     if cond:
         x = 10
-        return #Noncompliant {{Remove this redundant jump.}}
+        return #Noncompliant {{Remove this redundant return.}}
 #       ^^^^^^
     else:
         x = 42
@@ -92,7 +92,7 @@ def three_non_redundant_return_if_elif_else(cond1, cond2):
 def redundant_continue_in_while(cond):
     while cond:
         print("foo")
-        continue # Noncompliant
+        continue # Noncompliant {{Remove this redundant continue.}}
 
 def redundant_continue_in_while_if(cond, p):
     while cond:
