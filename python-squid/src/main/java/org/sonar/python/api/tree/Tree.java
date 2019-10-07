@@ -19,22 +19,16 @@
  */
 package org.sonar.python.api.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
 
 public interface Tree {
 
   void accept(TreeVisitor visitor);
 
   boolean is(Kind kind);
-
-  @CheckForNull
-  @Deprecated
-  AstNode astNode();
 
   Token firstToken();
 
