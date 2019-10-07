@@ -70,7 +70,7 @@ public class YieldExpressionImpl extends PyTree implements YieldExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Arrays.asList(yieldKeyword, fromKeyword), expressionTrees)
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

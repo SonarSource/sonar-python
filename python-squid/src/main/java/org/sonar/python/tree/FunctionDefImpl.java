@@ -164,7 +164,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, docstring, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

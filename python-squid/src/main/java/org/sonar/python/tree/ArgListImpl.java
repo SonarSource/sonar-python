@@ -48,7 +48,7 @@ public class ArgListImpl extends PyTree implements ArgList {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     List<Tree> children = new ArrayList<>();
     int i = 0;
     for (Tree argument : arguments) {

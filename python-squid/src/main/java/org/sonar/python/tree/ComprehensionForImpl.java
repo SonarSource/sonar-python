@@ -81,7 +81,7 @@ public class ComprehensionForImpl extends PyTree implements ComprehensionFor {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(forToken, loopExpression, inToken, iterable, nested).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

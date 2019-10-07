@@ -55,7 +55,7 @@ public class ParameterListImpl extends PyTree implements ParameterList {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.unmodifiableList(parameters);
   }
 

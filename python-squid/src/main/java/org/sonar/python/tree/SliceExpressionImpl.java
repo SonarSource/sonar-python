@@ -71,7 +71,7 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(object, leftBracket, sliceList, rightBracket).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

@@ -45,7 +45,7 @@ public class NoneExpressionImpl extends PyTree implements NoneExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.singletonList(none);
   }
 

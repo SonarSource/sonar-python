@@ -96,7 +96,7 @@ public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(lambdaKeyword, parameterList, colonToken, body).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

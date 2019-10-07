@@ -88,7 +88,7 @@ public class RaiseStatementImpl extends PyTree implements RaiseStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Collections.singletonList(raiseKeyword), expressions, Arrays.asList(fromKeyword, fromExpression), Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

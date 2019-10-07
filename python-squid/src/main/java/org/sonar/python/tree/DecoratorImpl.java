@@ -85,7 +85,7 @@ public class DecoratorImpl extends PyTree implements Decorator {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(atToken, dottedName, lPar, argListTree, rPar, newLineToken).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

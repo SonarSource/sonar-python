@@ -55,7 +55,7 @@ public abstract class DictOrSetLiteralImpl<E extends Tree> extends PyTree {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     List<Tree> child = new ArrayList<>();
     child.add(lCurlyBrace);
     int i = 0;

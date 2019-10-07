@@ -69,7 +69,7 @@ public class ElseStatementImpl extends PyTree implements ElseStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(elseKeyword, colon, newLine, indent, body, dedent).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

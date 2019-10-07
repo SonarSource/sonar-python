@@ -71,7 +71,7 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(operator, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

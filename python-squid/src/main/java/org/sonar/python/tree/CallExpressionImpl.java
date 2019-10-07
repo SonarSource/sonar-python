@@ -83,7 +83,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(callee, leftPar, argumentList, rightPar).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -45,7 +45,7 @@ public class EllipsisExpressionImpl extends PyTree implements EllipsisExpression
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.unmodifiableList(ellipsis);
   }
 

@@ -85,7 +85,7 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(dash, gt, colonToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

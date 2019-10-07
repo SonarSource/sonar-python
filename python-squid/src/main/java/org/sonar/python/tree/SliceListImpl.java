@@ -52,7 +52,7 @@ public class SliceListImpl extends PyTree implements SliceList {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     List<Tree> children = new ArrayList<>();
     int i = 0;
     for (Tree argument : slices) {

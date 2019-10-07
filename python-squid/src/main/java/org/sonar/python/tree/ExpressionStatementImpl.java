@@ -57,7 +57,7 @@ public class ExpressionStatementImpl extends PyTree implements ExpressionStateme
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(expressions, Collections.singletonList(separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

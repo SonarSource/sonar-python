@@ -55,7 +55,7 @@ public class AwaitExpressionImpl extends PyTree implements AwaitExpression {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(awaitToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

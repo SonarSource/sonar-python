@@ -101,7 +101,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Stream.of(Arrays.asList(asyncKeyword, withKeyword), withItems, Arrays.asList(colon, newLine, indent, statements, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
@@ -146,7 +146,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
     }
 
     @Override
-    public List<Tree> childs() {
+    public List<Tree> computeChildren() {
       return Stream.of(test, as, expr).filter(Objects::nonNull).collect(Collectors.toList());
     }
   }

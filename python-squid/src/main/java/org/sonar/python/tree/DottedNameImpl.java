@@ -49,7 +49,7 @@ public class DottedNameImpl extends PyTree implements DottedName {
   }
 
   @Override
-  public List<Tree> childs() {
+  public List<Tree> computeChildren() {
     return Collections.unmodifiableList(names);
   }
 }
