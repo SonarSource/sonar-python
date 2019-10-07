@@ -24,10 +24,12 @@ import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonCheckAstNode;
+import org.sonar.python.IssueLocation;
+import org.sonar.python.PythonCheck;
+import org.sonar.python.PythonVisitor;
 
 @Rule(key = XPathCheck.CHECK_KEY)
-public class XPathCheck extends PythonCheckAstNode {
+public class XPathCheck extends PythonVisitor implements PythonCheck {
   public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";
@@ -70,6 +72,16 @@ public class XPathCheck extends PythonCheckAstNode {
     } else if (object instanceof Boolean && (Boolean) object) {
       addFileIssue(message);
     }
+  }
+
+  private void addIssue(AstNode node, String message) {
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
+    getContext().addIssue(newIssue);
+  }
+
+  private void addFileIssue(String message) {
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atFileLevel(message));
+    getContext().addIssue(newIssue);
   }
 
 }
