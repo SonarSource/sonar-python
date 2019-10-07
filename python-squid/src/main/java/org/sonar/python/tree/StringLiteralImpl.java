@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,8 +31,7 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
 
   private final List<StringElement> stringElements;
 
-  StringLiteralImpl(AstNode node, List<StringElement> stringElements) {
-    super(node);
+  StringLiteralImpl(List<StringElement> stringElements) {
     this.stringElements = stringElements;
   }
 
@@ -48,7 +46,7 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.unmodifiableList(stringElements);
   }
 

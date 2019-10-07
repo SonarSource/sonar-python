@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -37,8 +36,7 @@ public class PrintStatementImpl extends PyTree implements PrintStatement {
   private final List<Expression> expressions;
   private final Token separator;
 
-  public PrintStatementImpl(AstNode astNode, Token printKeyword, List<Expression> expressions, @Nullable Token separator) {
-    super(astNode);
+  public PrintStatementImpl(Token printKeyword, List<Expression> expressions, @Nullable Token separator) {
     this.printKeyword = printKeyword;
     this.expressions = expressions;
     this.separator = separator;
@@ -65,7 +63,7 @@ public class PrintStatementImpl extends PyTree implements PrintStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(printKeyword), expressions, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

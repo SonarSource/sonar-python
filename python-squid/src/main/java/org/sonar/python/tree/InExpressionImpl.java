@@ -52,7 +52,7 @@ public class InExpressionImpl extends BinaryExpressionImpl implements InExpressi
   }
 
   @Override
-  public List<Tree> children() {
-    return Stream.of(Collections.singletonList(notToken), super.children()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  public List<Tree> childs() {
+    return Stream.of(Collections.singletonList(notToken), super.childs()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

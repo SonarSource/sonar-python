@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,8 +29,8 @@ import org.sonar.python.api.tree.ComprehensionClause;
 import org.sonar.python.api.tree.ComprehensionFor;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ComprehensionForImpl extends PyTree implements ComprehensionFor {
 
@@ -41,9 +40,8 @@ public class ComprehensionForImpl extends PyTree implements ComprehensionFor {
   private final Expression iterable;
   private final ComprehensionClause nested;
 
-  public ComprehensionForImpl(AstNode node, Token forToken, Expression loopExpression, Token inToken,
+  public ComprehensionForImpl(Token forToken, Expression loopExpression, Token inToken,
                               Expression iterable, @Nullable ComprehensionClause nested) {
-    super(node);
     this.forToken = forToken;
     this.loopExpression = loopExpression;
     this.inToken = inToken;
@@ -83,7 +81,7 @@ public class ComprehensionForImpl extends PyTree implements ComprehensionFor {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(forToken, loopExpression, inToken, iterable, nested).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

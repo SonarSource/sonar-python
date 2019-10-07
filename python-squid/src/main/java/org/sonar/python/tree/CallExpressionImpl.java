@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -31,22 +30,14 @@ import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.CallExpression;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class CallExpressionImpl extends PyTree implements CallExpression {
   private final Expression callee;
   private final ArgList argumentList;
   private final Token leftPar;
   private final Token rightPar;
-
-  public CallExpressionImpl(AstNode astNode, Expression callee, @Nullable ArgList argumentList, Token leftPar, Token rightPar) {
-    super(astNode);
-    this.callee = callee;
-    this.argumentList = argumentList;
-    this.leftPar = leftPar;
-    this.rightPar = rightPar;
-  }
 
   public CallExpressionImpl(Expression callee, @Nullable ArgList argumentList, Token leftPar, Token rightPar) {
     super(callee.firstToken(), rightPar);
@@ -92,7 +83,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(callee, leftPar, argumentList, rightPar).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

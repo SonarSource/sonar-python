@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -39,8 +38,8 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
   private final Token separator;
 
 
-  public CompoundAssignmentStatementImpl(AstNode astNode, Expression lhsExpression, Token augAssignToken, Expression rhsExpression, @Nullable Token separator) {
-    super(astNode);
+  public CompoundAssignmentStatementImpl(Expression lhsExpression, Token augAssignToken, Expression rhsExpression, @Nullable Token separator) {
+    super(lhsExpression.firstToken(), rhsExpression.lastToken());
     this.lhsExpression = lhsExpression;
     this.augAssignToken = augAssignToken;
     this.rhsExpression = rhsExpression;
@@ -74,7 +73,7 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(lhsExpression, augAssignToken, rhsExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

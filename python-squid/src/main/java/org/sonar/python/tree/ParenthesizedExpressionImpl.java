@@ -62,7 +62,7 @@ public class ParenthesizedExpressionImpl extends PyTree implements Parenthesized
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(leftParenthesis, expression, rightParenthesis).collect(Collectors.toList());
   }
 

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -32,8 +31,8 @@ import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.LambdaExpression;
 import org.sonar.python.api.tree.ParameterList;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.semantic.Symbol;
 
 public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
@@ -43,8 +42,8 @@ public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
   private final ParameterList parameterList;
   private Set<Symbol> symbols = new HashSet<>();
 
-  public LambdaExpressionImpl(AstNode astNode, Token lambdaKeyword, Token colonToken, Expression body, @Nullable ParameterList parameterList) {
-    super(astNode);
+  public LambdaExpressionImpl(Token lambdaKeyword, Token colonToken, Expression body, @Nullable ParameterList parameterList) {
+    super(lambdaKeyword, body.lastToken());
     this.lambdaKeyword = lambdaKeyword;
     this.colonToken = colonToken;
     this.body = body;
@@ -97,7 +96,7 @@ public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(lambdaKeyword, parameterList, colonToken, body).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

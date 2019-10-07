@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -47,9 +46,8 @@ public class WithStatementImpl extends PyTree implements WithStatement {
   private final boolean isAsync;
   private final Token colon;
 
-  public WithStatementImpl(AstNode node, Token withKeyword, List<WithItem> withItems, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
+  public WithStatementImpl(Token withKeyword, List<WithItem> withItems, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
                            @Nullable Token dedent, @Nullable Token asyncKeyword) {
-    super(node);
     this.withKeyword = withKeyword;
     this.withItems = withItems;
     this.colon = colon;
@@ -59,6 +57,11 @@ public class WithStatementImpl extends PyTree implements WithStatement {
     this.dedent = dedent;
     this.asyncKeyword = asyncKeyword;
     this.isAsync = asyncKeyword != null;
+  }
+
+  @Override
+  public Token withKeyword() {
+    return withKeyword;
   }
 
   @Override
@@ -98,7 +101,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Arrays.asList(asyncKeyword, withKeyword), withItems, Arrays.asList(colon, newLine, indent, statements, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
@@ -109,8 +112,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
     private final Token as;
     private final Expression expr;
 
-    public WithItemImpl(AstNode node, Expression test, @Nullable Token as, @Nullable Expression expr) {
-      super(node);
+    public WithItemImpl(Expression test, @Nullable Token as, @Nullable Expression expr) {
       this.test = test;
       this.as = as;
       this.expr = expr;
@@ -144,7 +146,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
     }
 
     @Override
-    public List<Tree> children() {
+    public List<Tree> childs() {
       return Stream.of(test, as, expr).filter(Objects::nonNull).collect(Collectors.toList());
     }
   }

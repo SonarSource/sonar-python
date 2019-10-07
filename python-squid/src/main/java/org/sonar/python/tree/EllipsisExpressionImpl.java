@@ -19,22 +19,19 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.stream.Collectors;
-import org.sonar.python.api.tree.Token;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.EllipsisExpression;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class EllipsisExpressionImpl extends PyTree implements EllipsisExpression {
 
   private final List<Token> ellipsis;
 
-  public EllipsisExpressionImpl(AstNode node) {
-    super(node);
-    this.ellipsis = node.getTokens().stream().map(TokenImpl::new).collect(Collectors.toList());
+  public EllipsisExpressionImpl(List<Token> ellipsis) {
+    this.ellipsis = ellipsis;
   }
 
   @Override
@@ -48,7 +45,7 @@ public class EllipsisExpressionImpl extends PyTree implements EllipsisExpression
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.unmodifiableList(ellipsis);
   }
 

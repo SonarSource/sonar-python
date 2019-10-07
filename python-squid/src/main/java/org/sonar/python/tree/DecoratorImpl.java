@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,8 +29,8 @@ import org.sonar.python.api.tree.ArgList;
 import org.sonar.python.api.tree.Decorator;
 import org.sonar.python.api.tree.DottedName;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class DecoratorImpl extends PyTree implements Decorator {
   private final Token atToken;
@@ -41,9 +40,9 @@ public class DecoratorImpl extends PyTree implements Decorator {
   private final Token rPar;
   private final Token newLineToken;
 
-  public DecoratorImpl(AstNode astNode, Token atToken, DottedName dottedName,
+  public DecoratorImpl(Token atToken, DottedName dottedName,
                        @Nullable Token lPar, @Nullable ArgList argListTree, @Nullable Token rPar, @Nullable Token newLineToken) {
-    super(astNode);
+    super(atToken, rPar == null ? dottedName.lastToken() : rPar);
     this.atToken = atToken;
     this.dottedName = dottedName;
     this.lPar = lPar != null ? lPar : null;
@@ -86,7 +85,7 @@ public class DecoratorImpl extends PyTree implements Decorator {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(atToken, dottedName, lPar, argListTree, rPar, newLineToken).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

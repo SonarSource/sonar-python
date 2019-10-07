@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,8 +27,8 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.AssertStatement;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class AssertStatementImpl extends PyTree implements AssertStatement {
   private final Token assertKeyword;
@@ -38,8 +37,7 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   private final Expression message;
   private final Token separator;
 
-  public AssertStatementImpl(AstNode astNode, Token assertKeyword, Expression condition, @Nullable Expression message, @Nullable Token separator) {
-    super(astNode);
+  public AssertStatementImpl(Token assertKeyword, Expression condition, @Nullable Expression message, @Nullable Token separator) {
     this.assertKeyword = assertKeyword;
     this.condition = condition;
     this.message = message;
@@ -79,7 +77,7 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(assertKeyword, condition, message, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

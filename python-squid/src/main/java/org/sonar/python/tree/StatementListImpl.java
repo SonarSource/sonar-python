@@ -19,24 +19,22 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class StatementListImpl extends PyTree implements StatementList {
 
   private List<Statement> statements;
   private final List<Token> tokens;
 
-  public StatementListImpl(AstNode astNode, List<Statement> statements, List<Token> tokens) {
-    super(astNode);
+  public StatementListImpl(List<Statement> statements, List<Token> tokens) {
     this.statements = statements;
     this.tokens = tokens;
   }
@@ -57,7 +55,7 @@ public class StatementListImpl extends PyTree implements StatementList {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(statements).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

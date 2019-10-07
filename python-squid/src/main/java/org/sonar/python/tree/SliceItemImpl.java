@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,8 +28,8 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.SliceItem;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class SliceItemImpl extends PyTree implements SliceItem {
 
@@ -41,10 +40,9 @@ public class SliceItemImpl extends PyTree implements SliceItem {
   private final Expression stride;
 
   public SliceItemImpl(
-    AstNode node, @Nullable Expression lowerBound, Token boundSeparator, @Nullable Expression upperBound,
+    @Nullable Expression lowerBound, Token boundSeparator, @Nullable Expression upperBound,
     @Nullable Token strideSeparator, @Nullable Expression stride
   ) {
-    super(node);
     this.lowerBound = lowerBound;
     this.boundSeparator = boundSeparator;
     this.upperBound = upperBound;
@@ -87,7 +85,7 @@ public class SliceItemImpl extends PyTree implements SliceItem {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(lowerBound, boundSeparator, upperBound, strideSeparator, stride).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

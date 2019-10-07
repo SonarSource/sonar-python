@@ -62,7 +62,7 @@ public class NameImpl extends PyTree implements Name {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.singletonList(token);
   }
 

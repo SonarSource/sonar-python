@@ -796,6 +796,10 @@ public class PythonTreeMakerTest extends RuleTest {
     parameters = functionDefTree.parameters().nonTuple();
     assertThat(parameters).extracting(p -> p.name().name()).containsExactly("p1", "p2", "p3");
     assertThat(parameters).extracting(p -> p.starToken() == null ? null : p.starToken().value()).containsExactly(null, "*", "**");
+    Parameter parameter = parameters.get(2);
+    assertThat(parameter.children()).containsExactly(parameter.starToken(), parameter.name());
+    assertThat(parameter.firstToken()).isSameAs(parameter.starToken());
+    assertThat(parameter.lastToken()).isSameAs(parameter.name().lastToken());
 
     functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
     parameters = functionDefTree.parameters().nonTuple();
@@ -890,7 +894,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(forStatement.elseBody()).isNull();
     assertThat(forStatement.isAsync()).isFalse();
     assertThat(forStatement.asyncKeyword()).isNull();
-    assertThat(forStatement.children()).hasSize(7);
+    assertThat(forStatement.children()).hasSize(6);
     long nbNewline = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     long nbIndent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     long nbDedent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
@@ -905,7 +909,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(forStatement.body().statements()).hasSize(1);
     assertThat(forStatement.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(forStatement.elseBody()).isNull();
-    assertThat(forStatement.children()).hasSize(10);
+    assertThat(forStatement.children()).hasSize(9);
     nbNewline = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     nbDedent = forStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
@@ -1221,7 +1225,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyForStatementTree.body().statements()).hasSize(1);
     assertThat(pyForStatementTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(pyForStatementTree.elseBody()).isNull();
-    assertThat(pyForStatementTree.children()).hasSize(8);
+    assertThat(pyForStatementTree.children()).hasSize(7);
 
     WithStatement withStatement = parse("async with foo : pass", treeMaker::withStatement);
     assertThat(withStatement.isAsync()).isTrue();

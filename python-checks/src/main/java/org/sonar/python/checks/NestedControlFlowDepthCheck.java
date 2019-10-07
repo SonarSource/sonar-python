@@ -93,7 +93,7 @@ public class NestedControlFlowDepthCheck extends PythonCheckTree {
 
   @Override
   public void visitWithStatement(WithStatement pyWithStatementTree) {
-    depthNodes.push(pyWithStatementTree.firstToken());
+    depthNodes.push(pyWithStatementTree.withKeyword());
     checkNode();
     super.visitWithStatement(pyWithStatementTree);
     depthNodes.pop();

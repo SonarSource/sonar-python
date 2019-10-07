@@ -19,20 +19,20 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.StringElement;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
 public class StringElementImpl extends PyTree implements StringElement {
 
-  private String value;
+  private final String value;
 
-  StringElementImpl(AstNode node) {
-    super(node);
-    value = node.getTokenValue();
+  public StringElementImpl(Token token) {
+    super(token, token);
+    value = token.value();
   }
 
   @Override
@@ -46,7 +46,7 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.singletonList(firstToken());
   }
 

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,16 +26,16 @@ import java.util.stream.Stream;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.StarredExpression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class StarredExpressionImpl extends PyTree implements StarredExpression {
 
   private final Token starToken;
   private final Expression expression;
 
-  public StarredExpressionImpl(AstNode node, Token starToken, Expression expression) {
-    super(node);
+  public StarredExpressionImpl(Token starToken, Expression expression) {
+    super(starToken, expression.lastToken());
     this.starToken = starToken;
     this.expression = expression;
   }
@@ -57,7 +56,7 @@ public class StarredExpressionImpl extends PyTree implements StarredExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(starToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

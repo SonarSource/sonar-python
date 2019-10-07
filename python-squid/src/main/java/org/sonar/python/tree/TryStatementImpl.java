@@ -19,11 +19,9 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Objects;
-import org.sonar.python.api.tree.Token;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -32,9 +30,10 @@ import org.sonar.python.api.tree.ElseStatement;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.TryStatement;
-import org.sonar.python.api.tree.Tree;
 
 public class TryStatementImpl extends PyTree implements TryStatement {
   private final Token tryKeyword;
@@ -47,9 +46,8 @@ public class TryStatementImpl extends PyTree implements TryStatement {
   private final FinallyClause finallyClause;
   private final ElseStatement elseStatement;
 
-  public TryStatementImpl(AstNode astNode, Token tryKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList tryBody,
+  public TryStatementImpl(Token tryKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList tryBody,
                           @Nullable Token dedent, List<ExceptClause> exceptClauses, @Nullable FinallyClause finallyClause, @Nullable ElseStatement elseStatement) {
-    super(astNode);
     this.tryKeyword = tryKeyword;
     this.colon = colon;
     this.newLine = newLine;
@@ -99,7 +97,7 @@ public class TryStatementImpl extends PyTree implements TryStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Arrays.asList(tryKeyword, colon, newLine, indent, tryBody, dedent), exceptClauses, Arrays.asList(finallyClause, elseStatement))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

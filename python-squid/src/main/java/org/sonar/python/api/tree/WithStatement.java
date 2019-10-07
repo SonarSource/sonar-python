@@ -24,6 +24,8 @@ import javax.annotation.CheckForNull;
 
 public interface WithStatement extends Statement {
 
+  Token withKeyword();
+
   List<WithItem> withItems();
 
   Token colon();

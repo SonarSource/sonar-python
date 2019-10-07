@@ -19,23 +19,19 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.sonar.python.api.tree.Token;
+import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.api.tree.SliceList;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class SliceListImpl extends PyTree implements SliceList {
 
   private final List<Tree> slices;
   private final List<Token> separators;
 
-  public SliceListImpl(AstNode node, List<Tree> slices, List<Token> separators) {
-    super(node);
+  public SliceListImpl(List<Tree> slices, List<Token> separators) {
     this.slices = slices;
     this.separators = separators;
   }
@@ -56,8 +52,17 @@ public class SliceListImpl extends PyTree implements SliceList {
   }
 
   @Override
-  public List<Tree> children() {
-    return Stream.of(slices, separators).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  public List<Tree> childs() {
+    List<Tree> children = new ArrayList<>();
+    int i = 0;
+    for (Tree argument : slices) {
+      children.add(argument);
+      if (i < separators.size()) {
+        children.add(separators.get(i));
+      }
+      i++;
+    }
+    return children;
   }
 
   @Override

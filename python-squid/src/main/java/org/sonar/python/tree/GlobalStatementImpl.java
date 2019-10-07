@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -38,8 +37,8 @@ public class GlobalStatementImpl extends PyTree implements GlobalStatement {
   private final List<Name> variables;
   private final Token separator;
 
-  public GlobalStatementImpl(AstNode astNode, Token globalKeyword, List<Name> variables, @Nullable Token separator) {
-    super(astNode);
+  public GlobalStatementImpl(Token globalKeyword, List<Name> variables, @Nullable Token separator) {
+    super(globalKeyword, variables.get(variables.size() - 1).lastToken());
     this.globalKeyword = globalKeyword;
     this.variables = variables;
     this.separator = separator;
@@ -72,7 +71,7 @@ public class GlobalStatementImpl extends PyTree implements GlobalStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(globalKeyword), variables, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

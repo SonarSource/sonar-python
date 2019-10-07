@@ -26,8 +26,8 @@ public class TriviaImpl implements Trivia {
 
   private final Token token;
 
-  public TriviaImpl(com.sonar.sslr.api.Trivia trivia) {
-    token = new TokenImpl(trivia.getToken());
+  public TriviaImpl(Token triviaToken) {
+    token = triviaToken;
   }
 
   @Override

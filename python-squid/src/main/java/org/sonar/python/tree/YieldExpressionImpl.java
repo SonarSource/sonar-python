@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -29,17 +28,16 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.YieldExpression;
-import org.sonar.python.api.tree.Tree;
 
 public class YieldExpressionImpl extends PyTree implements YieldExpression {
   private final Token yieldKeyword;
   private final Token fromKeyword;
   private final List<Expression> expressionTrees;
 
-  public YieldExpressionImpl(AstNode astNode, Token yieldKeyword, @Nullable Token fromKeyword, List<Expression> expressionTrees) {
-    super(astNode);
+  public YieldExpressionImpl(Token yieldKeyword, @Nullable Token fromKeyword, List<Expression> expressionTrees) {
     this.yieldKeyword = yieldKeyword;
     this.fromKeyword = fromKeyword;
     this.expressionTrees = expressionTrees;
@@ -72,7 +70,7 @@ public class YieldExpressionImpl extends PyTree implements YieldExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Arrays.asList(yieldKeyword, fromKeyword), expressionTrees)
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

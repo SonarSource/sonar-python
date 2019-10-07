@@ -66,8 +66,8 @@ public class CheckUtilsTest {
 
   @Test
   public void tree_equivalence() {
-    assertThat(CheckUtils.areEquivalent(new ArgListImpl(null, Collections.emptyList(), Collections.emptyList()),
-      new ArgListImpl(null, Collections.emptyList(), Collections.emptyList()))).isTrue();
+    assertThat(CheckUtils.areEquivalent(new ArgListImpl(Collections.emptyList(), Collections.emptyList()),
+      new ArgListImpl(Collections.emptyList(), Collections.emptyList()))).isTrue();
   }
 
   @Test

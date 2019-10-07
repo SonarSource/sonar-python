@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -37,8 +36,7 @@ public class ReturnStatementImpl extends PyTree implements ReturnStatement {
   private final List<Expression> expressionTrees;
   private final Token separator;
 
-  public ReturnStatementImpl(AstNode astNode, Token returnKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
-    super(astNode);
+  public ReturnStatementImpl(Token returnKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
     this.returnKeyword = returnKeyword;
     this.expressionTrees = expressionTrees;
     this.separator = separator;
@@ -65,7 +63,7 @@ public class ReturnStatementImpl extends PyTree implements ReturnStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,9 +29,9 @@ import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Parameter;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.TypeAnnotation;
-import org.sonar.python.api.tree.Tree;
 
 public class ParameterImpl extends PyTree implements Parameter {
 
@@ -42,9 +41,8 @@ public class ParameterImpl extends PyTree implements Parameter {
   private final Expression defaultValue;
   private final Token starToken;
 
-  public ParameterImpl(AstNode node, @Nullable Token starToken, Name name, @Nullable TypeAnnotation annotation,
+  public ParameterImpl(@Nullable Token starToken, Name name, @Nullable TypeAnnotation annotation,
                        @Nullable Token equalToken, @Nullable Expression defaultValue) {
-    super(node);
     this.starToken = starToken;
     this.name = name;
     this.annotation = annotation;
@@ -92,7 +90,7 @@ public class ParameterImpl extends PyTree implements Parameter {
   }
 
   @Override
-  public List<Tree> children() {
-    return Stream.of(name, annotation, equalToken, defaultValue, starToken).filter(Objects::nonNull).collect(Collectors.toList());
+  public List<Tree> childs() {
+    return Stream.of(starToken, name, annotation, equalToken, defaultValue).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

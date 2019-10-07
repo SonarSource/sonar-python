@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,9 +28,9 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.WhileStatement;
-import org.sonar.python.api.tree.Tree;
 
 public class WhileStatementImpl extends PyTree implements WhileStatement {
 
@@ -49,10 +48,9 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
   private final StatementList elseBody;
   private final Token lastDedent;
 
-  public WhileStatementImpl(AstNode astNode, Token whileKeyword, Expression condition, Token colon, @Nullable Token firstNewline,
+  public WhileStatementImpl(Token whileKeyword, Expression condition, Token colon, @Nullable Token firstNewline,
                             @Nullable Token firstIndent, StatementList body, @Nullable Token firstDedent, @Nullable Token elseKeyword, @Nullable Token elseColon,
                             @Nullable Token lastNewLine, @Nullable Token lastIndent, @Nullable StatementList elseBody, @Nullable Token lastDedent) {
-    super(astNode);
     this.whileKeyword = whileKeyword;
     this.condition = condition;
     this.colon = colon;
@@ -117,7 +115,7 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(whileKeyword, condition, colon, firstNewline, firstIndent, body, firstDedent,
       elseKeyword, elseColon, lastNewLine, lastIndent, elseBody, lastDedent).filter(Objects::nonNull)
       .collect(Collectors.toList());

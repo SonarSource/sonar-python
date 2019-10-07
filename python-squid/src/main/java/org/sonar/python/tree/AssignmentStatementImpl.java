@@ -19,12 +19,8 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.AssignmentStatement;
@@ -40,8 +36,7 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
   private final Expression assignedValue;
   private final Token separator;
 
-  public AssignmentStatementImpl(AstNode astNode, List<Token> assignTokens, List<ExpressionList> lhsExpressions, Expression assignedValue, @Nullable Token separator) {
-    super(astNode);
+  public AssignmentStatementImpl(List<Token> assignTokens, List<ExpressionList> lhsExpressions, Expression assignedValue, @Nullable Token separator) {
     this.assignTokens = assignTokens;
     this.lhsExpressions = lhsExpressions;
     this.assignedValue = assignedValue;
@@ -80,8 +75,20 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
   }
 
   @Override
-  public List<Tree> children() {
-    return Stream.of(assignTokens, lhsExpressions, Collections.singletonList(assignedValue), Collections.singletonList(separator))
-      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  public List<Tree> childs() {
+    List<Tree> children = new ArrayList<>();
+    int i = 0;
+    for (Tree lhs : lhsExpressions) {
+      children.add(lhs);
+      if (i < assignTokens.size()) {
+        children.add(assignTokens.get(i));
+      }
+      i++;
+    }
+    children.add(assignedValue);
+    if (separator != null) {
+      children.add(separator);
+    }
+    return children;
   }
 }

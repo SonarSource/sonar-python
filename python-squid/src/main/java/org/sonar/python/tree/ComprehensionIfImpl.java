@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,8 +29,8 @@ import org.sonar.python.api.tree.ComprehensionClause;
 import org.sonar.python.api.tree.ComprehensionIf;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ComprehensionIfImpl extends PyTree implements ComprehensionIf {
 
@@ -39,8 +38,7 @@ public class ComprehensionIfImpl extends PyTree implements ComprehensionIf {
   private final Expression condition;
   private final ComprehensionClause nestedClause;
 
-  public ComprehensionIfImpl(AstNode node, Token ifToken, Expression condition, @Nullable ComprehensionClause nestedClause) {
-    super(node);
+  public ComprehensionIfImpl(Token ifToken, Expression condition, @Nullable ComprehensionClause nestedClause) {
     this.ifToken = ifToken;
     this.condition = condition;
     this.nestedClause = nestedClause;
@@ -68,7 +66,7 @@ public class ComprehensionIfImpl extends PyTree implements ComprehensionIf {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(ifToken, condition, nestedClause).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

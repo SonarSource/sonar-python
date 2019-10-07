@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -34,8 +33,8 @@ public class PassStatementImpl extends PyTree implements PassStatement {
   private final Token passKeyword;
   private final Token separator;
 
-  public PassStatementImpl(AstNode astNode, Token passKeyword, @Nullable Token separator) {
-    super(astNode);
+  public PassStatementImpl(Token passKeyword, @Nullable Token separator) {
+    super(passKeyword, passKeyword);
     this.passKeyword = passKeyword;
     this.separator = separator;
   }
@@ -62,7 +61,7 @@ public class PassStatementImpl extends PyTree implements PassStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(passKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
