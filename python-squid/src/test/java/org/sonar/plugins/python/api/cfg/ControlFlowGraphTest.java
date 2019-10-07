@@ -276,6 +276,19 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void simple_try_except_finally() {
+    verifyCfg(
+      "before(succ = [try_block])",
+      "try:",
+      "  try_block(succ = [except_cond, finally_block])",
+      "except except_cond(succ = [except_block, finally_block]) as e:",
+      "  except_block(succ = [finally_block])",
+      "finally:",
+      "  finally_block(succ = [END])"
+    );
+  }
+
+  @Test
   public void simple_try_except_finally_else() {
     verifyCfg(
       "before(succ = [try_block])",
@@ -307,6 +320,19 @@ public class ControlFlowGraphTest {
     CfgBlock exceptCondition = start.successors().stream().filter(succ -> !(succ instanceof PythonCfgEndBlock)).findFirst().get();
     assertThat(exceptCondition.elements()).extracting(Tree::getKind).containsExactly(Kind.EXCEPT_CLAUSE);
     assertThat(exceptCondition.successors()).hasSize(2);
+  }
+
+  @Test
+  public void CFGBlock_toString() {
+    PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
+    assertThat(endBlock.toString()).isEqualTo("END");
+    PythonCfgBlock pythonCfgBlock = new PythonCfgBlock(endBlock);
+    assertThat(pythonCfgBlock.toString()).isEqualTo("empty");
+    ControlFlowGraph cfg = cfg(
+     "pass",
+     "assert 2"
+    );
+    assertThat(cfg.start().toString()).isEqualTo("PASS_STMT;ASSERT_STMT");
   }
 
   private ControlFlowGraph verifyCfg(String... lines) {
