@@ -250,3 +250,8 @@ with A() as a:
     while cond:
         print("foo")
         continue # Noncompliant
+
+class Foo:
+    while cond:
+        print("foo")
+        continue # Noncompliant
