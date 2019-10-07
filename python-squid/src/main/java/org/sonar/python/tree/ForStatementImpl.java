@@ -19,12 +19,10 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import java.util.Collections;
-import java.util.Objects;
-import org.sonar.python.api.tree.Token;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -32,8 +30,9 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ForStatementImpl extends PyTree implements ForStatement {
 
@@ -55,11 +54,10 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   private final Token asyncKeyword;
   private final boolean isAsync;
 
-  public ForStatementImpl(AstNode astNode, Token forKeyword, List<Expression> expressions, Token inKeyword,
+  public ForStatementImpl(Token forKeyword, List<Expression> expressions, Token inKeyword,
                           List<Expression> testExpressions, Token colon, @Nullable Token firstNewLine, @Nullable Token firstIndent, StatementList body,
                           @Nullable Token firstDedent, @Nullable Token elseKeyword, @Nullable Token elseColon, @Nullable Token lastNewline,
                           @Nullable Token lastIndent, @Nullable StatementList elseBody, @Nullable Token lastDedent, @Nullable Token asyncKeyword) {
-    super(astNode);
     this.forKeyword = forKeyword;
     this.expressions = expressions;
     this.inKeyword = inKeyword;
@@ -149,9 +147,9 @@ public class ForStatementImpl extends PyTree implements ForStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Arrays.asList(asyncKeyword, forKeyword), expressions, Collections.singletonList(inKeyword), testExpressions,
-      Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseKeyword, colon, lastNewline, lastIndent, elseBody, lastDedent))
+      Arrays.asList(colon, firstNewLine, firstIndent, body, firstDedent, elseKeyword, elseColon, lastNewline, lastIndent, elseBody, lastDedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

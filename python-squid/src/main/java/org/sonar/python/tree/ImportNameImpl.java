@@ -19,19 +19,18 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Token;
-import java.util.Collections;
-import java.util.List;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.ImportName;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ImportNameImpl extends PyTree implements ImportName {
 
@@ -39,8 +38,8 @@ public class ImportNameImpl extends PyTree implements ImportName {
   private final List<AliasedName> aliasedNames;
   private final Token separator;
 
-  public ImportNameImpl(AstNode astNode, Token importKeyword, List<AliasedName> aliasedNames, @Nullable Token separator) {
-    super(astNode);
+  public ImportNameImpl(Token importKeyword, List<AliasedName> aliasedNames, @Nullable Token separator) {
+    super(importKeyword, aliasedNames.get(aliasedNames.size() - 1).lastToken());
     this.importKeyword = importKeyword;
     this.aliasedNames = aliasedNames;
     this.separator = separator;
@@ -73,7 +72,7 @@ public class ImportNameImpl extends PyTree implements ImportName {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(importKeyword), aliasedNames, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,8 +28,8 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class FileInputImpl extends PyTree implements FileInput {
 
@@ -38,8 +37,8 @@ public class FileInputImpl extends PyTree implements FileInput {
   private final Token endOfFile;
   private final Token docstring;
 
-  public FileInputImpl(AstNode astNode, @Nullable StatementList statements, Token endOfFile, Token docstring) {
-    super(astNode);
+  public FileInputImpl(@Nullable StatementList statements, Token endOfFile, Token docstring) {
+    super(statements == null ? endOfFile : statements.firstToken(), endOfFile);
     this.statements = statements;
     this.endOfFile = endOfFile;
     this.docstring = docstring;
@@ -68,7 +67,7 @@ public class FileInputImpl extends PyTree implements FileInput {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(statements, endOfFile).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

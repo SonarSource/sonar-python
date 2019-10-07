@@ -115,3 +115,15 @@ def fun(self, other):
         return False
     elif not self.changes and other.changes:
         return False
+
+def fun():
+    for element in iterable:
+        if (hasattr(element, '__iter__') and
+                not isinstance(element, basestring)):
+            for f in _izip_fields(element):
+                yield f
+        elif isinstance(element, np.void) and len(tuple(element)) == 1:
+            for f in _izip_fields(element): # Noncompliant
+                yield f
+        else:
+            yield element

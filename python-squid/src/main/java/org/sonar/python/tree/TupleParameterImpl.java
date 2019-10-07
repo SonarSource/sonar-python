@@ -19,31 +19,31 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.python.api.tree.AnyParameter;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.TupleParameter;
-import org.sonar.python.api.tree.Tree;
 
 public class TupleParameterImpl extends PyTree implements TupleParameter {
 
+  private final Token lParenthesis;
   private final List<AnyParameter> parameters;
   private final List<Token> commas;
+  private final Token rParenthesis;
 
-  public TupleParameterImpl(AstNode node, List<AnyParameter> parameters, List<Token> commas) {
-    super(node);
+  public TupleParameterImpl(Token lParenthesis, List<AnyParameter> parameters, List<Token> commas, Token rParenthesis) {
+    this.lParenthesis = lParenthesis;
     this.parameters = parameters;
     this.commas = commas;
+    this.rParenthesis = rParenthesis;
   }
 
   @Override
   public Token openingParenthesis() {
-    return firstToken();
+    return lParenthesis;
   }
 
   @Override
@@ -58,7 +58,7 @@ public class TupleParameterImpl extends PyTree implements TupleParameter {
 
   @Override
   public Token closingParenthesis() {
-    return lastToken();
+    return rParenthesis;
   }
 
   @Override
@@ -67,8 +67,17 @@ public class TupleParameterImpl extends PyTree implements TupleParameter {
   }
 
   @Override
-  public List<Tree> children() {
-    return Stream.of(parameters, commas).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  public List<Tree> childs() {
+    List<Tree> children = new ArrayList<>();
+    int i = 0;
+    for (Tree argument : parameters) {
+      children.add(argument);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    return children;
   }
 
   @Override

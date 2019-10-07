@@ -19,23 +19,22 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.python.api.tree.ExpressionList;
 import org.sonar.python.api.tree.ReprExpression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ReprExpressionImpl extends PyTree implements ReprExpression {
   private final Token openingBacktick;
   private final ExpressionList expressionListTree;
   private final Token closingBacktick;
 
-  public ReprExpressionImpl(AstNode astNode, Token openingBacktick, ExpressionList expressionListTree, Token closingBacktick) {
-    super(astNode);
+  public ReprExpressionImpl(Token openingBacktick, ExpressionList expressionListTree, Token closingBacktick) {
+    super(openingBacktick, closingBacktick);
     this.openingBacktick = openingBacktick;
     this.expressionListTree = expressionListTree;
     this.closingBacktick = closingBacktick;
@@ -47,7 +46,7 @@ public class ReprExpressionImpl extends PyTree implements ReprExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(openingBacktick, expressionListTree, closingBacktick).collect(Collectors.toList());
   }
 

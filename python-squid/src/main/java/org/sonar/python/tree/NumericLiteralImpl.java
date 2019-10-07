@@ -65,7 +65,7 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.singletonList(token);
   }
 }

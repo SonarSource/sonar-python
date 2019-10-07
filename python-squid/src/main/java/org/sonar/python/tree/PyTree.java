@@ -19,24 +19,23 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
-import javax.annotation.Nullable;
+import java.util.List;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 public abstract class PyTree implements Tree {
-  private final Token firstToken;
-  private final Token lastToken;
+  private Token firstToken;
+  private Token lastToken;
+  private List<Tree> childs;
   private Tree parent = null;
-
-  public PyTree(@Nullable AstNode node) {
-    this.firstToken = node == null ? null : new TokenImpl(node.getToken());
-    this.lastToken = node == null ? null : new TokenImpl(node.getLastToken());
-  }
 
   public PyTree(Token firstToken, Token lastToken) {
     this.firstToken = firstToken;
     this.lastToken = lastToken;
+  }
+
+  protected PyTree() {
   }
 
   @Override
@@ -46,13 +45,36 @@ public abstract class PyTree implements Tree {
 
   @Override
   public Token firstToken() {
+    if(firstToken == null) {
+      List<Tree> children = children();
+      if (children.isEmpty()) {
+        this.firstToken = null;
+      } else {
+        Tree first = children.get(0);
+        this.firstToken = first.is(Kind.TOKEN) ? (Token) first : first.firstToken();
+      }
+    }
     return firstToken;
   }
 
   @Override
   public Token lastToken() {
+    if(lastToken == null) {
+      List<Tree> children = children();
+      if (children.isEmpty()) {
+        this.lastToken = null;
+      } else {
+        Tree last = children.get(children.size() - 1);
+        if (last.is(Kind.TOKEN) && ((Token) last).type() == PythonTokenType.NEWLINE) {
+          last = children.get(children.size() - 2);
+        }
+        this.lastToken = last.is(Kind.TOKEN) ? (Token) last : last.lastToken();
+      }
+    }
     return lastToken;
   }
+
+
 
   @Override
   public Tree parent() {
@@ -61,5 +83,14 @@ public abstract class PyTree implements Tree {
 
   protected void setParent(Tree parent) {
     this.parent = parent;
+  }
+
+  abstract List<Tree> childs();
+
+  public List<Tree> children() {
+    if (childs == null) {
+      childs = childs();
+    }
+    return childs;
   }
 }

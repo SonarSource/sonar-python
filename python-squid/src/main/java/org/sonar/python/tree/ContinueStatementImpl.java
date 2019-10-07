@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,8 +34,8 @@ public class ContinueStatementImpl extends PyTree implements ContinueStatement {
   private final Token continueKeyword;
   private final Token separator;
 
-  public ContinueStatementImpl(AstNode astNode, Token continueKeyword, @Nullable Token separator) {
-    super(astNode);
+  public ContinueStatementImpl(Token continueKeyword, @Nullable Token separator) {
+    super(continueKeyword, continueKeyword);
     this.continueKeyword = continueKeyword;
     this.separator = separator;
   }
@@ -63,7 +62,7 @@ public class ContinueStatementImpl extends PyTree implements ContinueStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(continueKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

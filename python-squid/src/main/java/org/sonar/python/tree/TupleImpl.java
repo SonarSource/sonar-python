@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -37,8 +36,7 @@ public class TupleImpl extends PyTree implements Tuple {
   private final List<Token> commas;
   private final Token rightParenthesis;
 
-  public TupleImpl(AstNode node, @Nullable Token leftParenthesis, List<Expression> elements, List<Token> commas, @Nullable Token rightParenthesis) {
-    super(node);
+  public TupleImpl(@Nullable Token leftParenthesis, List<Expression> elements, List<Token> commas, @Nullable Token rightParenthesis) {
     this.leftParenthesis = leftParenthesis;
     this.elements = elements;
     this.commas = commas;
@@ -73,7 +71,7 @@ public class TupleImpl extends PyTree implements Tuple {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     List<Tree> children = new ArrayList<>();
     if (leftParenthesis != null) {
       children.add(leftParenthesis);

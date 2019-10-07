@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -28,13 +27,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.DottedName;
 import org.sonar.python.api.tree.ImportFrom;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ImportFromImpl extends PyTree implements ImportFrom {
   private final Token fromKeyword;
@@ -46,16 +44,15 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   private final Token wildcard;
   private final Token separator;
 
-  public ImportFromImpl(AstNode astNode, Token fromKeyword, @Nullable List<Token> dottedPrefixForModule, @Nullable DottedName moduleName,
-                        Token importKeyword, @Nullable List<AliasedName> aliasedImportNames, boolean isWildcardImport, @Nullable Token separator) {
-    super(astNode);
+  public ImportFromImpl(Token fromKeyword, @Nullable List<Token> dottedPrefixForModule, @Nullable DottedName moduleName,
+                        Token importKeyword, @Nullable List<AliasedName> aliasedImportNames, @Nullable Token wildcard, @Nullable Token separator) {
     this.fromKeyword = fromKeyword;
     this.dottedPrefixForModule = dottedPrefixForModule;
     this.moduleName = moduleName;
     this.importKeyword = importKeyword;
     this.aliasedImportNames = aliasedImportNames == null ? Collections.emptyList() : aliasedImportNames;
-    this.isWildcardImport = isWildcardImport;
-    this.wildcard = isWildcardImport ? new TokenImpl(astNode.getFirstChild(PythonPunctuator.MUL).getToken()) : null;
+    this.wildcard = wildcard;
+    this.isWildcardImport = wildcard != null;
     this.separator = separator;
   }
 
@@ -114,7 +111,7 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(fromKeyword), dottedPrefixForModule, Arrays.asList(moduleName, importKeyword), aliasedImportNames,
       Arrays.asList(wildcard, separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

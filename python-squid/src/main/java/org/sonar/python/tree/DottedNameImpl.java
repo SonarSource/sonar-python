@@ -19,19 +19,17 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import org.sonar.python.api.tree.DottedName;
 import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class DottedNameImpl extends PyTree implements DottedName {
   private final List<Name> names;
 
-  public DottedNameImpl(AstNode astNode, List<Name> names) {
-    super(astNode);
+  public DottedNameImpl(List<Name> names) {
     this.names = names;
   }
 
@@ -51,7 +49,7 @@ public class DottedNameImpl extends PyTree implements DottedName {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.unmodifiableList(names);
   }
 }

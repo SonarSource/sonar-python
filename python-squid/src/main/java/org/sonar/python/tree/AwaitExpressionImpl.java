@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,16 +26,15 @@ import java.util.stream.Stream;
 import org.sonar.python.api.tree.AwaitExpression;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class AwaitExpressionImpl extends PyTree implements AwaitExpression {
 
   private final Token awaitToken;
   private final Expression expression;
 
-  public AwaitExpressionImpl(AstNode node, Token await, Expression expression) {
-    super(node);
+  public AwaitExpressionImpl(Token await, Expression expression) {
     this.awaitToken = await;
     this.expression = expression;
   }
@@ -57,7 +55,7 @@ public class AwaitExpressionImpl extends PyTree implements AwaitExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(awaitToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

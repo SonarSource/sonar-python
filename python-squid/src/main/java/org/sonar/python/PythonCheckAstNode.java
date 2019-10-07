@@ -31,18 +31,6 @@ public abstract class PythonCheckAstNode extends PythonVisitor implements Python
     return newIssue;
   }
 
-  protected final PreciseIssue addIssue(IssueLocation primaryLocation) {
-    PreciseIssue newIssue = new PreciseIssue(this, primaryLocation);
-    getContext().addIssue(newIssue);
-    return newIssue;
-  }
-
-  protected final PreciseIssue addLineIssue(String message, int lineNumber) {
-    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atLineLevel(message, lineNumber));
-    getContext().addIssue(newIssue);
-    return newIssue;
-  }
-
   protected final PreciseIssue addFileIssue(String message) {
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atFileLevel(message));
     getContext().addIssue(newIssue);

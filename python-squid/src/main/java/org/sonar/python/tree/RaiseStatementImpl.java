@@ -19,20 +19,19 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
-import java.util.Objects;
-import org.sonar.python.api.tree.Token;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.RaiseStatement;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class RaiseStatementImpl extends PyTree implements RaiseStatement {
   private final Token raiseKeyword;
@@ -41,9 +40,8 @@ public class RaiseStatementImpl extends PyTree implements RaiseStatement {
   private final Expression fromExpression;
   private final Token separator;
 
-  public RaiseStatementImpl(AstNode astNode, Token raiseKeyword, List<Expression> expressions,
-                                  @Nullable Token fromKeyword, @Nullable Expression fromExpression, @Nullable Token separator) {
-    super(astNode);
+  public RaiseStatementImpl(Token raiseKeyword, List<Expression> expressions,
+                            @Nullable Token fromKeyword, @Nullable Expression fromExpression, @Nullable Token separator) {
     this.raiseKeyword = raiseKeyword;
     this.expressions = expressions;
     this.fromKeyword = fromKeyword;
@@ -90,7 +88,7 @@ public class RaiseStatementImpl extends PyTree implements RaiseStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(raiseKeyword), expressions, Arrays.asList(fromKeyword, fromExpression), Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

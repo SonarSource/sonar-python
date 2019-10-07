@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,8 +29,8 @@ import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ArgumentImpl extends PyTree implements Argument {
   private final Name keywordArgument;
@@ -40,8 +39,7 @@ public class ArgumentImpl extends PyTree implements Argument {
   private final Token star;
   private final Token starStar;
 
-  public ArgumentImpl(AstNode node, Name keywordArgument, Expression expression, Token equalToken, @Nullable Token star, @Nullable Token starStar) {
-    super(node);
+  public ArgumentImpl(Name keywordArgument, Expression expression, Token equalToken, @Nullable Token star, @Nullable Token starStar) {
     this.keywordArgument = keywordArgument;
     this.expression = expression;
     this.equalToken = equalToken;
@@ -49,8 +47,7 @@ public class ArgumentImpl extends PyTree implements Argument {
     this.starStar = starStar;
   }
 
-  public ArgumentImpl(AstNode astNode, Expression expression, @Nullable Token star, @Nullable Token starStar) {
-    super(astNode);
+  public ArgumentImpl(Expression expression, @Nullable Token star, @Nullable Token starStar) {
     this.keywordArgument = null;
     this.expression = expression;
     this.equalToken = null;
@@ -98,7 +95,7 @@ public class ArgumentImpl extends PyTree implements Argument {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(keywordArgument, equalToken, expression, star, starStar).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +27,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.UnaryExpression;
-import org.sonar.python.api.tree.Tree;
 
 public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
 
@@ -49,8 +48,8 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
     return map;
   }
 
-  public UnaryExpressionImpl(AstNode node, Token operator, Expression expression) {
-    super(node);
+  public UnaryExpressionImpl(Token operator, Expression expression) {
+    super(operator, expression.lastToken());
     this.kind = KINDS_BY_OPERATOR.get(operator.value());
     this.operator = operator;
     this.expression = expression;
@@ -72,7 +71,7 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(operator, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

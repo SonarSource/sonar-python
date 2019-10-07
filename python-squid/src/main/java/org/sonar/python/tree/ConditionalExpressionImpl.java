@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,8 +26,8 @@ import java.util.stream.Stream;
 import org.sonar.python.api.tree.ConditionalExpression;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ConditionalExpressionImpl extends PyTree implements ConditionalExpression {
   private final Expression trueExpression;
@@ -37,9 +36,8 @@ public class ConditionalExpressionImpl extends PyTree implements ConditionalExpr
   private final Token elseToken;
   private final Expression falseExpression;
 
-  public ConditionalExpressionImpl(AstNode node, Expression trueExpression,
+  public ConditionalExpressionImpl(Expression trueExpression,
                                    Token ifToken, Expression condition, Token elseToken, Expression falseExpression) {
-    super(node);
     this.trueExpression = trueExpression;
     this.ifToken = ifToken;
     this.condition = condition;
@@ -78,7 +76,7 @@ public class ConditionalExpressionImpl extends PyTree implements ConditionalExpr
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(trueExpression, ifToken, condition, elseToken, falseExpression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

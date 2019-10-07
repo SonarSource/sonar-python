@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -36,8 +35,8 @@ public class ExpressionStatementImpl extends PyTree implements ExpressionStateme
   private final List<Expression> expressions;
   private final Token separator;
 
-  public ExpressionStatementImpl(AstNode astNode, List<Expression> expressions, @Nullable Token separator) {
-    super(astNode);
+  public ExpressionStatementImpl(List<Expression> expressions, @Nullable Token separator) {
+    super(expressions.get(0).firstToken(), expressions.get(expressions.size() - 1).lastToken());
     this.expressions = expressions;
     this.separator = separator;
   }
@@ -58,7 +57,7 @@ public class ExpressionStatementImpl extends PyTree implements ExpressionStateme
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(expressions, Collections.singletonList(separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

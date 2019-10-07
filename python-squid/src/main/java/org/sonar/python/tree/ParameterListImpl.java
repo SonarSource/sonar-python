@@ -19,22 +19,20 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.tree.AnyParameter;
 import org.sonar.python.api.tree.Parameter;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.ParameterList;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ParameterListImpl extends PyTree implements ParameterList {
 
   private final List<AnyParameter> parameters;
 
-  public ParameterListImpl(AstNode node, List<AnyParameter> parameters) {
-    super(node);
+  public ParameterListImpl(List<AnyParameter> parameters) {
     this.parameters = parameters;
   }
 
@@ -57,7 +55,7 @@ public class ParameterListImpl extends PyTree implements ParameterList {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Collections.unmodifiableList(parameters);
   }
 

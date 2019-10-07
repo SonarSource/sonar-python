@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -35,8 +34,8 @@ import org.sonar.python.api.tree.Decorator;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.semantic.Symbol;
 
 public class ClassDefImpl extends PyTree implements ClassDef {
@@ -55,10 +54,10 @@ public class ClassDefImpl extends PyTree implements ClassDef {
   private final Set<Symbol> classFields = new HashSet<>();
   private final Set<Symbol> instanceFields = new HashSet<>();
 
-  public ClassDefImpl(AstNode astNode, List<Decorator> decorators, Token classKeyword, Name name,
+  public ClassDefImpl(List<Decorator> decorators, Token classKeyword, Name name,
                             @Nullable Token leftPar, @Nullable ArgList args, @Nullable Token rightPar,
                             Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent, Token docstring) {
-    super(astNode);
+    super(decorators.isEmpty() ? classKeyword : decorators.get(0).firstToken(), body.lastToken());
     this.decorators = decorators;
     this.classKeyword = classKeyword;
     this.name = name;
@@ -151,7 +150,7 @@ public class ClassDefImpl extends PyTree implements ClassDef {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(decorators, Arrays.asList(classKeyword, name, leftPar, args, rightPar, colon, newLine, indent, docstring, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

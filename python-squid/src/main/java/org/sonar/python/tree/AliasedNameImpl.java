@@ -79,7 +79,7 @@ public class AliasedNameImpl extends PyTree implements AliasedName {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(dottedName, asKeyword, alias).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

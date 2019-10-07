@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -37,8 +36,8 @@ public class DelStatementImpl extends PyTree implements DelStatement {
   private final List<Expression> expressionTrees;
   private final Token separator;
 
-  public DelStatementImpl(AstNode astNode, Token delKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
-    super(astNode);
+  public DelStatementImpl(Token delKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
+    super(delKeyword, expressionTrees.isEmpty() ? delKeyword : expressionTrees.get(expressionTrees.size() - 1).lastToken());
     this.delKeyword = delKeyword;
     this.expressionTrees = expressionTrees;
     this.separator = separator;
@@ -71,7 +70,7 @@ public class DelStatementImpl extends PyTree implements DelStatement {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(Collections.singletonList(delKeyword), expressionTrees, Collections.singletonList(separator))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

@@ -19,14 +19,13 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Decorator;
@@ -35,9 +34,9 @@ import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.ParameterList;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.TypeAnnotation;
-import org.sonar.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 public class FunctionDefImpl extends PyTree implements FunctionDef {
@@ -60,11 +59,10 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private final Token docstring;
   private Set<Symbol> symbols = new HashSet<>();
 
-  public FunctionDefImpl(AstNode astNode, List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
+  public FunctionDefImpl(List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
                          Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
                          Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
                          boolean isMethodDefinition, @Nullable Token docstring) {
-    super(astNode);
     this.decorators = decorators;
     this.asyncKeyword = asyncKeyword;
     this.defKeyword = defKeyword;
@@ -166,7 +164,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, docstring, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }

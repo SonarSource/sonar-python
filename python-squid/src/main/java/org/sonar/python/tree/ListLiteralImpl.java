@@ -19,15 +19,14 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.python.api.tree.ExpressionList;
 import org.sonar.python.api.tree.ListLiteral;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TreeVisitor;
 
 public class ListLiteralImpl extends PyTree implements ListLiteral {
 
@@ -35,8 +34,8 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
   private final ExpressionList elements;
   private final Token rightBracket;
 
-  public ListLiteralImpl(AstNode astNode, Token leftBracket, ExpressionList elements, Token rightBracket) {
-    super(astNode);
+  public ListLiteralImpl(Token leftBracket, ExpressionList elements, Token rightBracket) {
+    super(leftBracket, rightBracket);
     this.leftBracket = leftBracket;
     this.elements = elements;
     this.rightBracket = rightBracket;
@@ -68,7 +67,7 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
   }
 
   @Override
-  public List<Tree> children() {
+  public List<Tree> childs() {
     return Stream.of(leftBracket, elements, rightBracket).collect(Collectors.toList());
   }
 }
