@@ -53,4 +53,8 @@ public class PythonCfgEndBlock extends PythonCfgBlock {
     return null;
   }
 
+  @Override
+  public String toString() {
+    return "END";
+  }
 }

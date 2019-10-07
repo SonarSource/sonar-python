@@ -264,6 +264,77 @@ public class ControlFlowGraphTest {
     );
   }
 
+  @Test
+  public void simple_try_except() {
+    verifyCfg(
+      "before(succ = [try_block])",
+      "try:",
+      "  try_block(succ = [except_cond, END])",
+      "except except_cond(succ = [except_block, END]) as e:",
+      "  except_block(succ = [END])"
+    );
+  }
+
+  @Test
+  public void simple_try_except_finally() {
+    verifyCfg(
+      "before(succ = [try_block])",
+      "try:",
+      "  try_block(succ = [except_cond, finally_block])",
+      "except except_cond(succ = [except_block, finally_block]) as e:",
+      "  except_block(succ = [finally_block])",
+      "finally:",
+      "  finally_block(succ = [END])"
+    );
+  }
+
+  @Test
+  public void simple_try_except_finally_else() {
+    verifyCfg(
+      "before(succ = [try_block])",
+      "try:",
+      "  try_block(succ = [except_cond_1, else_block])",
+      "except except_cond_1(succ = [except_block_1, except_cond_2]) as e:",
+      "  except_block_1(succ = [finally_block])",
+      "except except_cond_2(succ = [except_block_2, finally_block]) as e:",
+      "  except_block_2(succ = [finally_block])",
+      "else:",
+      "  else_block(succ = [finally_block])",
+      "finally:",
+      "  finally_block(succ = [END])"
+    );
+  }
+
+  @Test
+  public void simple_try_except_all_exceptions() {
+    ControlFlowGraph cfg = cfg(
+      "try:",
+      "  foo()",
+      "except:",
+      "  print('exception')"
+    );
+    assertNoEmptyBlocksInCFG(cfg);
+    CfgBlock start = cfg.start();
+    assertThat(start.elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
+    assertThat(start.successors()).hasSize(2);
+    CfgBlock exceptCondition = start.successors().stream().filter(succ -> !(succ instanceof PythonCfgEndBlock)).findFirst().get();
+    assertThat(exceptCondition.elements()).extracting(Tree::getKind).containsExactly(Kind.EXCEPT_CLAUSE);
+    assertThat(exceptCondition.successors()).hasSize(2);
+  }
+
+  @Test
+  public void CFGBlock_toString() {
+    PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
+    assertThat(endBlock.toString()).isEqualTo("END");
+    PythonCfgBlock pythonCfgBlock = new PythonCfgBlock(endBlock);
+    assertThat(pythonCfgBlock.toString()).isEqualTo("empty");
+    ControlFlowGraph cfg = cfg(
+     "pass",
+     "assert 2"
+    );
+    assertThat(cfg.start().toString()).isEqualTo("PASS_STMT;ASSERT_STMT");
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);

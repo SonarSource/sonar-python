@@ -33,12 +33,15 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ExceptClause;
+import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.TryStatement;
 import org.sonar.python.api.tree.WhileStatement;
 
 public class ControlFlowGraphBuilder {
@@ -113,11 +116,42 @@ public class ControlFlowGraphBuilder {
         return buildForStatement(((ForStatement) statement), currentBlock);
       case CONTINUE_STMT:
         return buildContinueStatement(((ContinueStatement) statement), currentBlock);
+      case TRY_STMT:
+        return tryStatement(((TryStatement) statement), currentBlock);
       default:
         currentBlock.addElement(statement);
     }
 
     return currentBlock;
+  }
+
+  private PythonCfgBlock tryStatement(TryStatement tryStatement, PythonCfgBlock successor) {
+    PythonCfgBlock finallyOrAfterTryBlock = successor;
+    FinallyClause finallyClause = tryStatement.finallyClause();
+    if (finallyClause != null) {
+      finallyOrAfterTryBlock = build(finallyClause.body().statements(), createSimpleBlock(successor));
+    }
+    PythonCfgBlock firstExceptClauseBlock = exceptClauses(tryStatement, finallyOrAfterTryBlock);
+    ElseStatement elseClause = tryStatement.elseClause();
+    PythonCfgBlock tryBlockSuccessor = finallyOrAfterTryBlock;
+    if (elseClause != null) {
+      tryBlockSuccessor = build(elseClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
+    }
+    PythonCfgBlock firstTryBlock = build(tryStatement.body().statements(), createSimpleBlock(tryBlockSuccessor, firstExceptClauseBlock));
+    return createSimpleBlock(firstTryBlock);
+  }
+
+  private PythonCfgBlock exceptClauses(TryStatement tryStatement, PythonCfgBlock finallyOrAfterTryBlock) {
+    PythonCfgBlock falseSuccessor = finallyOrAfterTryBlock;
+    List<ExceptClause> exceptClauses = tryStatement.exceptClauses();
+    for (int i = exceptClauses.size() - 1; i >= 0; i--) {
+      ExceptClause exceptClause = exceptClauses.get(i);
+      PythonCfgBlock exceptBlock = build(exceptClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
+      PythonCfgBlock exceptCondition = createSimpleBlock(exceptBlock, falseSuccessor);
+      exceptCondition.addElement(exceptClause);
+      falseSuccessor = exceptCondition;
+    }
+    return falseSuccessor;
   }
 
   private PythonCfgBlock buildContinueStatement(ContinueStatement continueStatement, PythonCfgBlock syntacticSuccessor) {

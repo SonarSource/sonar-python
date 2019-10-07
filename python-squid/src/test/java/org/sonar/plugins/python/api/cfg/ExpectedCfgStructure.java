@@ -36,6 +36,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionStatement;
 import org.sonar.python.api.tree.ForStatement;
@@ -236,6 +237,8 @@ public class ExpectedCfgStructure {
         expression = (Expression) firstElement;
       } else if (firstElement instanceof ForStatement) {
         expression = ((ForStatement) firstElement).expressions().get(0);
+      } else if (firstElement instanceof ExceptClause) {
+        expression = ((ExceptClause) firstElement).exception();
       } else {
         return null;
       }
