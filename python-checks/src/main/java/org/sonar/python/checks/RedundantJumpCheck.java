@@ -29,6 +29,7 @@ import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.ReturnStatement;
+import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -53,11 +54,17 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
       if (cfgBlock.successors().size() == 1 && cfgBlock.successors().contains(cfgBlock.syntacticSuccessor())) {
         List<Tree> elements = cfgBlock.elements();
         Tree lastElement = elements.get(elements.size() - 1);
-        if (!isReturnWithExpression(lastElement)) {
+        if (!isInsideSingleStatementBlock(lastElement) && !isReturnWithExpression(lastElement)) {
           ctx.addIssue(lastElement, "Remove this redundant jump.");
         }
       }
     }
+  }
+
+  // assumption: parent of BREAK, CONTINUE and RETURN is always a StatementList
+  private static boolean isInsideSingleStatementBlock(Tree lastElement) {
+    StatementList block = (StatementList) lastElement.parent();
+    return block.statements().size() == 1;
   }
 
   private static boolean isReturnWithExpression(Tree lastElement) {
