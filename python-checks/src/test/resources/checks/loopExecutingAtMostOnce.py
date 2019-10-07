@@ -23,6 +23,9 @@ def foo(cond, cond2):
         else:
             break
 
+   while cond: # Noncompliant [[secondary=+1]]
+       raise error
+
 def try_statements():
 
     while cond:
@@ -36,6 +39,12 @@ def try_statements():
             return doSomething()
         except:
             return 42
+
+    while cond:
+        try:
+            raise error
+        except Error as e:
+            print(e)
 
 def invalid_continue():
     continue
