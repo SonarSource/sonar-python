@@ -35,9 +35,9 @@ public class TestPythonVisitorRunner {
   private TestPythonVisitorRunner() {
   }
 
-  public static PythonVisitorContext scanFile(File file, PythonVisitor... visitors) {
+  public static PythonVisitorContext scanFile(File file, PythonCheck... visitors) {
     PythonVisitorContext context = createContext(file);
-    for (PythonVisitor visitor : visitors) {
+    for (PythonCheck visitor : visitors) {
       visitor.scanFile(context);
     }
     return context;
