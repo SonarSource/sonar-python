@@ -19,7 +19,9 @@
  */
 package org.sonar.python.api.tree;
 
+import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.python.semantic.Symbol;
 
 public interface FileInput extends Tree {
   @CheckForNull
@@ -27,4 +29,6 @@ public interface FileInput extends Tree {
 
   @CheckForNull
   Token docstring();
+
+  Set<Symbol> globalVariables();
 }

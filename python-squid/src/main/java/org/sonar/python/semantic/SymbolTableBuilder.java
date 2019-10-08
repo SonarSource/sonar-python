@@ -62,6 +62,7 @@ import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.api.tree.TupleParameter;
 import org.sonar.python.tree.BaseTreeVisitor;
 import org.sonar.python.tree.ClassDefImpl;
+import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.NameImpl;
@@ -96,6 +97,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         scope.symbols.forEach(classDef::addClassField);
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
       });
+    scopesByRootTree.values().stream()
+      .filter(scope -> scope.rootTree.is(Kind.FILE_INPUT))
+      .forEach(scope -> scope.symbols.forEach(((FileInputImpl) fileInput)::addGlobalVariables));
   }
 
   private static class ScopeVisitor extends BaseTreeVisitor {

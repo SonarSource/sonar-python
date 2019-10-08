@@ -19,8 +19,10 @@
  */
 package org.sonar.python.tree;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -30,12 +32,14 @@ import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.python.semantic.Symbol;
 
 public class FileInputImpl extends PyTree implements FileInput {
 
   private final StatementList statements;
   private final Token endOfFile;
   private final Token docstring;
+  private final Set<Symbol> globalVariables = new HashSet<>();
 
   public FileInputImpl(@Nullable StatementList statements, Token endOfFile, Token docstring) {
     super(statements == null ? endOfFile : statements.firstToken(), endOfFile);
@@ -59,6 +63,15 @@ public class FileInputImpl extends PyTree implements FileInput {
   @Override
   public Token docstring() {
     return docstring;
+  }
+
+  @Override
+  public Set<Symbol> globalVariables() {
+    return globalVariables;
+  }
+
+  public void addGlobalVariables(Symbol globalVariable) {
+    globalVariables.add(globalVariable);
   }
 
   @Override
