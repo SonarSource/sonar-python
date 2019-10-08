@@ -19,24 +19,26 @@
  */
 package org.sonar.plugins.python;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
-import org.sonar.python.PythonVisitor;
+import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TokenLocation;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 
@@ -84,7 +86,7 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
  * Reminder: a docstring is a string literal that occurs as the first statement in a module,
  * function, class, or method definition.
  */
-public class PythonHighlighter extends PythonVisitor {
+public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private NewHighlighting newHighlighting;
 
@@ -97,53 +99,44 @@ public class PythonHighlighter extends PythonVisitor {
   }
 
   @Override
-  public Set<AstNodeType> subscribedKinds() {
-    return new HashSet<>(Arrays.asList(
-      PythonGrammar.FUNCDEF,
-      PythonGrammar.CLASSDEF,
-      PythonGrammar.FILE_INPUT));
+  public void scanFile(PythonVisitorContext visitorContext) {
+    SubscriptionVisitor.analyze(Collections.singletonList(this), visitorContext);
   }
 
   @Override
-  public void visitNode(AstNode astNode) {
-    if (astNode.is(PythonGrammar.FILE_INPUT)) {
-      checkFirstStatement(astNode.getFirstChild(PythonGrammar.STATEMENT));
-    } else {
-      checkFirstStatement(astNode.getFirstChild(PythonGrammar.SUITE).getFirstChild(PythonGrammar.STATEMENT));
-    }
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> checkFirstStatement(((FileInput) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFirstStatement(((FunctionDef) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> checkFirstStatement(((ClassDef) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken(((Token) ctx.syntaxNode())));
   }
 
-  private void checkFirstStatement(@Nullable AstNode firstStatement) {
-    if (firstStatement != null) {
-      List<Token> tokens = firstStatement.getTokens();
-
-      if (tokens.size() == 2 && tokens.get(0).getType().equals(PythonTokenType.STRING)) {
-        // second token is NEWLINE
-        highlight(tokens.get(0), TypeOfText.STRUCTURED_COMMENT);
-        docStringTokens.add(tokens.get(0));
-      }
+  private void checkFirstStatement(@Nullable Token docStringToken) {
+    if (docStringToken == null) {
+      return;
     }
+    highlight(docStringToken, TypeOfText.STRUCTURED_COMMENT);
+    docStringTokens.add(docStringToken);
   }
 
-  @Override
-  public void visitToken(Token token) {
-    if (token.getType().equals(PythonTokenType.NUMBER)) {
+  private void visitToken(Token token) {
+    if (token.type().equals(PythonTokenType.NUMBER)) {
       highlight(token, TypeOfText.CONSTANT);
 
-    } else if (token.getType() instanceof PythonKeyword) {
+    } else if (token.type() instanceof PythonKeyword) {
       highlight(token, TypeOfText.KEYWORD);
 
-    } else if (token.getType().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
+    } else if (token.type().equals(PythonTokenType.STRING) && !docStringTokens.contains(token)) {
       highlight(token, TypeOfText.STRING);
 
-    } else if (token.getType().equals(IDENTIFIER) && isPython3Keyword(token.getValue())) {
+    } else if (token.type().equals(IDENTIFIER) && isPython3Keyword(token.value())) {
       // async and await are keywords starting python 3.5, however, for compatibility with previous versions, we cannot consider them as real keywords
       highlight(token, TypeOfText.KEYWORD);
 
     }
 
-    for (Trivia trivia : token.getTrivia()) {
-      highlight(trivia.getToken(), TypeOfText.COMMENT);
+    for (Trivia trivia : token.trivia()) {
+      highlight(trivia.token(), TypeOfText.COMMENT);
     }
   }
 
@@ -152,7 +145,7 @@ public class PythonHighlighter extends PythonVisitor {
   }
 
   @Override
-  public void leaveFile(@Nullable AstNode astNode) {
+  public void leaveFile() {
     newHighlighting.save();
   }
 

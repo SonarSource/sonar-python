@@ -90,4 +90,22 @@ public class TokenImpl extends PyTree implements Token {
   public Token lastToken() {
     return this;
   }
+
+  @Override
+  public int hashCode() {
+    return token.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    // FIXME : this is currently required to compare docstring tokens with the first statement in fileinput, classdef and funcdef
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TokenImpl other = (TokenImpl) o;
+    return token.equals(other.token);
+  }
 }
