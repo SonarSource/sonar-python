@@ -26,7 +26,7 @@ public class TestPythonVisitorRunnerTest {
 
   @Test(expected = IllegalStateException.class)
   public void unknown_file() {
-    TestPythonVisitorRunner.scanFile(new File("xxx"), new PythonVisitor());
+    TestPythonVisitorRunner.scanFile(new File("xxx"), visitorContext -> {});
   }
 
 }
