@@ -20,13 +20,12 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 
@@ -71,18 +70,23 @@ public class DocstringExtractorTest {
     return null;
   }
 
-  private class DocstringVisitor extends PythonVisitor {
+  private class DocstringVisitor implements PythonCheck {
 
     @Override
-    public Set<AstNodeType> subscribedKinds() {
-      return DocstringExtractor.DOCUMENTABLE_NODE_TYPES;
-    }
+    public void scanFile(PythonVisitorContext visitorContext) {
+      scanNode(visitorContext.rootAstNode());
 
-    @Override
-    public void visitNode(AstNode astNode) {
-      docstrings.put(astNode, DocstringExtractor.extractDocstring(astNode));
     }
+    private void scanNode(AstNode node) {
+      if (node.is(PythonGrammar.FILE_INPUT, PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
+        docstrings.put(node, DocstringExtractor.extractDocstring(node));
+      }
 
+      List<AstNode> children = node.getChildren();
+      for (AstNode child : children) {
+        scanNode(child);
+      }
+    }
   }
 
 }
