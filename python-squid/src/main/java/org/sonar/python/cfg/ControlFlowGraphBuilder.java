@@ -278,10 +278,18 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildReturnStatement(ReturnStatement statement, PythonCfgBlock syntacticSuccessor) {
+    if (statement.ancestors().stream().noneMatch(tree -> tree.is(Tree.Kind.FUNCDEF)) || isStatementAtClassLevel(statement)) {
+      throw new IllegalStateException("Invalid return outside of a function");
+    }
     PythonCfgSimpleBlock block = createSimpleBlock(end);
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(statement);
     return block;
+  }
+
+  // assumption: parent of return statement is always a statementList, which, in turn, has always a parent
+  private static boolean isStatementAtClassLevel(ReturnStatement statement) {
+    return statement.parent().parent().is(Tree.Kind.CLASSDEF);
   }
 
   private PythonCfgBlock buildRaiseStatement(RaiseStatement statement, PythonCfgBlock syntacticSuccessor) {

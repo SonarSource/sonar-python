@@ -233,6 +233,15 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void return_outside_function() {
+    assertThat(ControlFlowGraph.build(PythonTestUtils.parse("return"), file)).isNull();
+    assertThat(cfg(
+      "class Foo:",
+      "  return"
+      )).isNull();
+  }
+
+  @Test
   public void continue_nested_while() {
     verifyCfg(
       "while cond_block(succ = [cond_block_inner, END]):",
