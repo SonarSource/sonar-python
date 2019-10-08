@@ -137,7 +137,7 @@ public class PythonHighlighterTest {
     checkOnRange(84, 0, 23, TypeOfText.STRING);
     checkOnRange(87, 4, 23, TypeOfText.STRING);
 
-    checkOnRange(93, 11, 17, TypeOfText.STRING);
+    checkOnRange(93, 11, 17, TypeOfText.STRUCTURED_COMMENT);
     checkOnRange(91, 8, 17, TypeOfText.STRING);
   }
 

@@ -90,7 +90,7 @@ if (condition):
 def foo():
     foo("Not a docstring")
 
-def foo(): "Not a docstring"
+def foo(): "it is docstring"
 
 async def doSomethingAsync():
     return 1
