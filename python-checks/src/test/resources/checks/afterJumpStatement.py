@@ -146,3 +146,8 @@ def try_stmt_return_finally():
         return
     finally:
         print("error") # OK
+
+def with_stmt_raise(expect_raise, e):
+    with expect_raise():
+        raise e
+    print("foo") # OK

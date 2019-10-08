@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
@@ -51,20 +53,28 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
     for (CfgBlock cfgBlock : cfg.blocks()) {
       if (cfgBlock.predecessors().isEmpty() && !cfgBlock.equals(cfg.start()) && !cfgBlock.elements().isEmpty()) {
         Tree firstElement = cfgBlock.elements().get(0);
-        // due to CFG limitation on jump statements inside try blocks, we exclude finally clause to avoid FP.
-        // TODO: After SONARPY-448 is implemented, we should remove this exclusion
-        if (isInsideFinallyClause(firstElement)) {
+        List<Tree> jumpStatements = cfg.blocks().stream()
+          .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
+          .map(block -> block.elements().get(block.elements().size() - 1))
+          .collect(Collectors.toList());
+        if (isInsideFinallyClause(firstElement) || jumpStatements.stream().anyMatch(AfterJumpStatementCheck::isRaiseInsideWithStatement)) {
           continue;
         }
         Tree lastElement = cfgBlock.elements().get(cfgBlock.elements().size() - 1);
         PreciseIssue issue = ctx.addIssue(firstElement.firstToken(), lastElement.lastToken(), "Delete this unreachable code or refactor the code to make it reachable.");
-        cfg.blocks().stream()
-          .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
-          .forEach(block -> issue.secondary(block.elements().get(block.elements().size() - 1), null));
+        jumpStatements.forEach(jumpStatement -> issue.secondary(jumpStatement, null));
       }
     }
   }
 
+  // To avoid FP, we assume that exception raised inside with statement will be suppressed by __exit__() method of Context Manager
+  // see https://docs.python.org/3/reference/compound_stmts.html#the-with-statement
+  private static boolean isRaiseInsideWithStatement(Tree element) {
+    return element.is(Kind.RAISE_STMT) && element.ancestors().stream().anyMatch(tree -> tree.is(Kind.WITH_STMT));
+  }
+
+  // due to CFG limitation on jump statements inside try blocks, we exclude finally clause to avoid FP.
+  // TODO: After SONARPY-448 is implemented, we should remove this exclusion
   private static boolean isInsideFinallyClause(Tree element) {
     return element.ancestors().stream().anyMatch(tree -> tree.is(Kind.FINALLY_CLAUSE));
   }
