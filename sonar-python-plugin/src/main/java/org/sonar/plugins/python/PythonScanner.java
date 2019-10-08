@@ -120,6 +120,7 @@ public class PythonScanner {
     SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
+    new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
     new PythonHighlighter(context, inputFile).scanFile(visitorContext);
   }
 
