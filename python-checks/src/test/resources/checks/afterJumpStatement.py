@@ -2,18 +2,22 @@ for i in range(1):
     break
 
 for i in range(1):
-    break; print(i) # Noncompliant {{Remove the code after this "break".}}
-#   ^^^^^
+    break; print(i) # Noncompliant {{Delete this unreachable code or refactor the code to make it reachable.}}
+#          ^^^^^^^^
 
 for i in range(1):
-    continue # Noncompliant {{Remove the code after this "continue".}}
-    print(i)
+    break
+    print("a") # Noncompliant [[sc=5;el=11;ec=15]]
+    print("b")
+
+for i in range(1):
+    continue
+    print(i) # Noncompliant
 
 if True:
     print(1)
-    raise TypeError("message") # Noncompliant {{Remove the code after this "raise".}}
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^
-    if True: pass
+    raise TypeError("message")
+    if True: pass # Noncompliant [[secondary=-1]]
 
 def fun1():
     return 1
@@ -23,11 +27,122 @@ def fun2():
     return 2
 
 def fun3():
-    return 2 # Noncompliant {{Remove the code after this "return".}}
-    print(1)
+    return 2
+    print(1) # Noncompliant
 
 def fun4():
     return 2;
 
 def fun5():
-    return 2; print(1) # Noncompliant {{Remove the code after this "return".}}
+    return 2; print(1) # Noncompliant
+
+def if_else_return(x):
+    if x:
+        print(True)
+        return
+    else:
+        print(False)
+        return
+    print('dead code!') # Noncompliant [[secondary=-4,-1]]
+
+def if_else_yield(x):
+    if x:
+        print(True)
+        yield
+    else:
+        print(False)
+        yield
+    print('Not dead code!') # OK
+
+
+def if_else_raise():
+    if x:
+        print(True)
+        raise TypeError("message")
+    else:
+        print(False)
+        raise TypeError("message")
+    print('dead code!') # Noncompliant
+
+def while_if_else_break(x):
+    while True:
+        if x:
+            print(True)
+            break
+        else:
+            print(False)
+            break
+        print('dead code!') # Noncompliant
+    print("end of loop")
+
+def while_if_else_continue(x):
+    while True:
+        if x:
+            print(True)
+            continue
+        else:
+            print(False)
+            continue
+        print('dead code!') # Noncompliant
+    print("end of loop")
+
+def for_if_else_break():
+    for value in range(1, 10):
+        if value > 2:
+            print(True)
+            break
+        else:
+            print(False)
+            break
+        print('dead code!') # Noncompliant
+    print("end of loop")
+
+def for_if_else_continue():
+    for value in range(1, 10):
+        if value > 2:
+            print(True)
+            continue
+        else:
+            print(False)
+            continue
+        print('dead code!') # Noncompliant
+    print("end of loop")
+
+def try_stmt_return():
+    try:
+        print("try")
+        return
+        print("dead code") # Noncompliant
+    except Error:
+        print("error")
+
+def try_stmt_return_else():
+    try:
+        print("try")
+        return
+    except Error:
+        print("error")
+    else:
+        print("dead code") # FN
+
+def try_stmt_return_inside_except():
+    try:
+        print("try")
+        return
+    except Error:
+        return
+        print("error") # Noncompliant
+
+def try_stmt_return_except():
+    try:
+        print("try")
+        return
+    except Error:
+        print("error") # OK
+
+def try_stmt_return_finally():
+    try:
+        print("try")
+        return
+    finally:
+        print("error") # OK

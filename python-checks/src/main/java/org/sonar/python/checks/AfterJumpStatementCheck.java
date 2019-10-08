@@ -19,41 +19,54 @@
  */
 package org.sonar.python.checks;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Statement;
+import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
 @Rule(key = "S1763")
 public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
 
-  private static final Map<Kind, String> JUMP_KEYWORDS_BY_KIND = jumpKeywordsByKind();
-
-  private static Map<Kind, String> jumpKeywordsByKind() {
-    Map<Kind, String> map = new EnumMap<>(Kind.class);
-    map.put(Kind.RETURN_STMT, "return");
-    map.put(Kind.RAISE_STMT, "raise");
-    map.put(Kind.BREAK_STMT, "break");
-    map.put(Kind.CONTINUE_STMT, "continue");
-    return map;
-  }
-
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.STATEMENT_LIST, ctx -> {
-      List<Statement> statements = ((StatementList) ctx.syntaxNode()).statements();
-      for (Statement statement: statements.subList(0, statements.size() - 1)) {
-        String jumpKeyword = JUMP_KEYWORDS_BY_KIND.get(statement.getKind());
-        if (jumpKeyword != null) {
-          ctx.addIssue(statement, String.format("Remove the code after this \"%s\".", jumpKeyword));
-        }
-      }
-    });
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
+      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx)
+    );
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
+      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx)
+    );
 
+  }
+
+  private static void checkCfg(@Nullable ControlFlowGraph cfg, SubscriptionContext ctx) {
+    if (cfg == null) {
+      return;
+    }
+    for (CfgBlock cfgBlock : cfg.blocks()) {
+      if (cfgBlock.predecessors().isEmpty() && !cfgBlock.equals(cfg.start()) && !cfgBlock.elements().isEmpty()) {
+        Tree firstElement = cfgBlock.elements().get(0);
+        // due to CFG limitation on jump statements inside try blocks, we exclude finally clause to avoid FP.
+        // TODO: After SONARPY-448 is implemented, we should remove this exclusion
+        if (isInsideFinallyClause(firstElement)) {
+          continue;
+        }
+        Tree lastElement = cfgBlock.elements().get(cfgBlock.elements().size() - 1);
+        PreciseIssue issue = ctx.addIssue(firstElement.firstToken(), lastElement.lastToken(), "Delete this unreachable code or refactor the code to make it reachable.");
+        cfg.blocks().stream()
+          .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
+          .forEach(block -> issue.secondary(block.elements().get(block.elements().size() - 1), null));
+      }
+    }
+  }
+
+  private static boolean isInsideFinallyClause(Tree element) {
+    return element.ancestors().stream().anyMatch(tree -> tree.is(Kind.FINALLY_CLAUSE));
   }
 }
 
