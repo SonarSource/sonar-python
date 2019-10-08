@@ -65,6 +65,15 @@ public class ControlFlowGraphBuilder {
       start = end;
     }
     removeEmptyBlocks();
+    computePredecessors();
+  }
+
+  private void computePredecessors() {
+    for (PythonCfgBlock block : blocks) {
+      for (CfgBlock successor : block.successors()) {
+        ((PythonCfgBlock) successor).addPredecessor(block);
+      }
+    }
   }
 
   private void removeEmptyBlocks() {

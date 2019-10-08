@@ -404,6 +404,19 @@ public class ControlFlowGraphTest {
     );
   }
 
+  /**
+   * Because the predecessors are constructed based on the successors, there is no need to have assertions on predecessors on all other CFG tests
+   */
+  @Test
+  public void if_stmt_test_predecessors() {
+    verifyCfg("" +
+      "before(succ = [if_body, after_if], pred = [])",
+      "foo()",
+      "if a: ",
+      "  if_body(succ = [after_if], pred = [before])",
+      "after_if(succ = [END], pred = [before, if_body])");
+  }
+
   private ControlFlowGraph verifyCfg(String... lines) {
     ControlFlowGraph cfg = cfg(lines);
     CfgValidator.assertCfgStructure(cfg);
