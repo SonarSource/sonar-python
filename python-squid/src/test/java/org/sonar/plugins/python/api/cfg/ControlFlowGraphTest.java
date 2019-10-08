@@ -294,9 +294,10 @@ public class ControlFlowGraphTest {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
-      "  try_block(succ = [END, except_cond])",
+      "  try_block(succ = [after, except_cond])",
       "except except_cond(succ = [except_block, END]) as e:",
-      "  except_block(succ = [END])"
+      "  except_block(succ = [after])",
+      "after(succ = [END])"
     );
   }
 
@@ -345,6 +346,29 @@ public class ControlFlowGraphTest {
     CfgBlock exceptCondition = start.successors().stream().filter(succ -> !(succ instanceof PythonCfgEndBlock)).findFirst().get();
     assertThat(exceptCondition.elements()).extracting(Tree::getKind).containsExactly(Kind.EXCEPT_CLAUSE);
     assertThat(exceptCondition.successors()).hasSize(2);
+  }
+
+  //TODO nested try
+
+  @Test
+  public void raise_without_try() {
+    verifyCfg(
+      "before(succ = [END], elem = 2, syntSucc = after)",
+      "raise my_error",
+      "after(succ = [END], elem = 1)");
+  }
+
+  @Test
+  public void raise_in_try() {
+    verifyCfg(
+      "before_try(succ = [try_body], elem = 1)",
+      "try:",
+      "  try_body(succ = [cond1], syntSucc = after_raise, elem = 2)",
+      "  raise my_error",
+      "  after_raise(succ = [after_try, cond1], elem = 1)",
+      "except cond1(succ = [except_body, END], elem = 1):",
+      "  except_body(succ = [after_try], elem = 1)",
+      "after_try(succ = [END], elem = 1)");
   }
 
   @Test

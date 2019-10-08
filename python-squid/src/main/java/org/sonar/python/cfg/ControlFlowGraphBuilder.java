@@ -38,6 +38,7 @@ import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.RaiseStatement;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
@@ -53,9 +54,11 @@ public class ControlFlowGraphBuilder {
   private final PythonCfgBlock end = new PythonCfgEndBlock();
   private final Set<PythonCfgBlock> blocks = new HashSet<>();
   private final Deque<Loop> loops = new ArrayDeque<>();
+  private final Deque<PythonCfgBlock> exceptionTargets = new ArrayDeque<>();
 
   public ControlFlowGraphBuilder(@Nullable StatementList statementList) {
     blocks.add(end);
+    exceptionTargets.push(end);
     if (statementList != null) {
       start = build(statementList.statements(), createSimpleBlock(end));
     } else {
@@ -121,6 +124,8 @@ public class ControlFlowGraphBuilder {
         return build(((ClassDef) statement).body().statements(), currentBlock);
       case RETURN_STMT:
         return buildReturnStatement((ReturnStatement) statement, currentBlock);
+      case RAISE_STMT:
+        return buildRaiseStatement((RaiseStatement) statement, currentBlock);
       case IF_STMT:
         return buildIfStatement(((IfStatement) statement), currentBlock);
       case WHILE_STMT:
@@ -143,21 +148,25 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock tryStatement(TryStatement tryStatement, PythonCfgBlock successor) {
     PythonCfgBlock finallyOrAfterTryBlock = successor;
     FinallyClause finallyClause = tryStatement.finallyClause();
+    PythonCfgBlock finallyBlock = null;
     if (finallyClause != null) {
       finallyOrAfterTryBlock = build(finallyClause.body().statements(), createSimpleBlock(successor));
+      finallyBlock = finallyOrAfterTryBlock;
     }
-    PythonCfgBlock firstExceptClauseBlock = exceptClauses(tryStatement, finallyOrAfterTryBlock);
+    PythonCfgBlock firstExceptClauseBlock = exceptClauses(tryStatement, finallyOrAfterTryBlock, finallyBlock);
     ElseStatement elseClause = tryStatement.elseClause();
     PythonCfgBlock tryBlockSuccessor = finallyOrAfterTryBlock;
     if (elseClause != null) {
       tryBlockSuccessor = build(elseClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
     }
+    exceptionTargets.push(firstExceptClauseBlock);
     PythonCfgBlock firstTryBlock = build(tryStatement.body().statements(), createBranchingBlock(tryStatement, tryBlockSuccessor, firstExceptClauseBlock));
+    exceptionTargets.pop();
     return createSimpleBlock(firstTryBlock);
   }
 
-  private PythonCfgBlock exceptClauses(TryStatement tryStatement, PythonCfgBlock finallyOrAfterTryBlock) {
-    PythonCfgBlock falseSuccessor = finallyOrAfterTryBlock;
+  private PythonCfgBlock exceptClauses(TryStatement tryStatement, PythonCfgBlock finallyOrAfterTryBlock, @Nullable PythonCfgBlock finallyBlock) {
+    PythonCfgBlock falseSuccessor = finallyBlock == null ? exceptionTargets.peek() : finallyBlock;
     List<ExceptClause> exceptClauses = tryStatement.exceptClauses();
     for (int i = exceptClauses.size() - 1; i >= 0; i--) {
       ExceptClause exceptClause = exceptClauses.get(i);
@@ -266,6 +275,13 @@ public class ControlFlowGraphBuilder {
     return block;
   }
 
+  private PythonCfgBlock buildRaiseStatement(RaiseStatement statement, PythonCfgBlock syntacticSuccessor) {
+    PythonCfgSimpleBlock block = createSimpleBlock(exceptionTargets.peek());
+    block.setSyntacticSuccessor(syntacticSuccessor);
+    block.addElement(statement);
+    return block;
+  }
+
   private static class Loop {
 
     final PythonCfgBlock breakTarget;
@@ -276,5 +292,4 @@ public class ControlFlowGraphBuilder {
       this.continueTarget = continueTarget;
     }
   }
-
 }

@@ -252,6 +252,9 @@ def redundant_return_inside_else_block():
         print(42)
         return # Noncompliant
 
+def raise_statement():
+    raise Error()
+
 def invalid_continue():
     continue
 

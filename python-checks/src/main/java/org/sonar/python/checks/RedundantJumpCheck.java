@@ -54,7 +54,7 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
       if (cfgBlock.successors().size() == 1 && cfgBlock.successors().contains(cfgBlock.syntacticSuccessor())) {
         List<Tree> elements = cfgBlock.elements();
         Tree lastElement = elements.get(elements.size() - 1);
-        if (!isInsideSingleStatementBlock(lastElement) && !isReturnWithExpression(lastElement)) {
+        if (!isException(lastElement)) {
           ctx.addIssue(lastElement, message(lastElement));
         }
       }
@@ -74,6 +74,12 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
 
   private static boolean isReturnWithExpression(Tree lastElement) {
     return lastElement.is(Kind.RETURN_STMT) && !((ReturnStatement) lastElement).expressions().isEmpty();
+  }
+
+  private static boolean isException(Tree lastElement) {
+    return lastElement.is(Kind.RAISE_STMT)
+      || isReturnWithExpression(lastElement)
+      || isInsideSingleStatementBlock(lastElement);
   }
 
 }
