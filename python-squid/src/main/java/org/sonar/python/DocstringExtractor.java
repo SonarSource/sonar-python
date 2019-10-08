@@ -20,11 +20,7 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Token;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonTokenType;
@@ -37,17 +33,7 @@ import org.sonar.python.api.PythonTokenType;
  */
 public class DocstringExtractor {
 
-  public static final Set<AstNodeType> DOCUMENTABLE_NODE_TYPES = initializeDocumentableNodeTypes();
-
   private DocstringExtractor() {
-  }
-
-  private static Set<AstNodeType> initializeDocumentableNodeTypes() {
-    Set<AstNodeType> set = new HashSet<>();
-    set.add(PythonGrammar.FILE_INPUT);
-    set.add(PythonGrammar.FUNCDEF);
-    set.add(PythonGrammar.CLASSDEF);
-    return Collections.unmodifiableSet(set);
   }
 
   public static Token extractDocstring(AstNode documentableNode) {
