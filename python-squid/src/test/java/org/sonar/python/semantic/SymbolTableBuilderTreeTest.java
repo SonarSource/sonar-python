@@ -59,7 +59,7 @@ public class SymbolTableBuilderTreeTest {
   public void global_variable() {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
     assertThat(moduleSymbols.size()).isEqualTo(2);
-    assertThat(moduleSymbols).extracting(Symbol::name).containsExactly("global_x", "global_var");
+    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("global_x", "global_var");
   }
 
   @Test

@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,10 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.TextPointer;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.DefaultTextPointer;
+import org.sonar.api.batch.fs.internal.DefaultTextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -60,6 +64,7 @@ import static org.mockito.Mockito.when;
 public class PythonSquidSensorTest {
 
   private static final String FILE_1 = "file1.py";
+  private static final String FILE_2 = "file2.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
 
@@ -84,7 +89,7 @@ public class PythonSquidSensorTest {
 
   @Test
   public void sensor_descriptor() {
-    activeRules = (new ActiveRulesBuilder()).build();
+    activeRules = new ActiveRulesBuilder().build();
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     sensor().describe(descriptor);
 
@@ -126,6 +131,27 @@ public class PythonSquidSensorTest {
   }
 
   @Test
+  public void test_symbol_visitor() {
+    activeRules = new ActiveRulesBuilder().build();
+    inputFile(FILE_2);
+    inputFile("symbolVisitor.py");
+    sensor().execute(context);
+
+    String key = "moduleKey:file2.py";
+    assertThat(context.referencesForSymbolAt(key, 1, 10)).isNull();
+    verifyUsages(key, 3, 4, reference(4, 10, 4, 11),
+      reference(6, 15, 6, 16), reference(7, 19, 7, 20));
+    verifyUsages(key, 5, 12, reference(6, 19, 6, 20));
+
+    key = "moduleKey:symbolVisitor.py";
+    assertThat(context.referencesForSymbolAt(key, 1, 10)).isNull();
+    verifyUsages(key, 1, 0);
+    verifyUsages(key, 2, 0, reference(10, 4, 10, 5));
+    verifyUsages(key, 5, 4, reference(6, 4, 6, 5), reference(7, 4, 7, 5),
+      reference(8, 8, 8, 9), reference(13, 9, 13, 10));
+  }
+
+  @Test
   public void test_issues() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -140,7 +166,7 @@ public class PythonSquidSensorTest {
         .build())
       .build();
 
-    InputFile inputFile = inputFile("file2.py");
+    InputFile inputFile = inputFile(FILE_2);
     sensor().execute(context);
 
     assertThat(context.allIssues()).hasSize(3);
@@ -201,7 +227,7 @@ public class PythonSquidSensorTest {
     when(inputFile.contents()).thenThrow(RuntimeException.class);
 
     context.fileSystem().add(inputFile);
-    inputFile("file2.py");
+    inputFile(FILE_2);
 
     sensor().execute(context);
 
@@ -258,4 +284,12 @@ public class PythonSquidSensorTest {
     return inputFile;
   }
 
+  private void verifyUsages(String componentKey, int line, int offset, TextRange... trs) {
+    Collection<TextRange> textRanges = context.referencesForSymbolAt(componentKey, line, offset);
+    assertThat(textRanges).containsExactly(trs);
+  }
+
+  private static TextRange reference(int lineStart, int columnStart, int lineEnd, int columnEnd) {
+    return new DefaultTextRange(new DefaultTextPointer(lineStart, columnStart), new DefaultTextPointer(lineEnd, columnEnd));
+  }
 }
