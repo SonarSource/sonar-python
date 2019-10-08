@@ -151,3 +151,9 @@ def with_stmt_raise(expect_raise, e):
     with expect_raise():
         raise e
     print("foo") # OK
+
+# this is semantically incorrect python code, preventing the CFG generation, and so no issue is raised in this case
+def return_inside_class():
+    class Foo:
+        return
+    print("foo") # OK
