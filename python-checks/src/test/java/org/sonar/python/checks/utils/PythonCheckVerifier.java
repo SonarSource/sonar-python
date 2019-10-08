@@ -22,8 +22,6 @@ package org.sonar.python.checks.utils;
 import com.google.common.base.Function;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Ordering;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,19 +29,30 @@ import java.util.Iterator;
 import java.util.List;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.PythonVisitor;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-public class PythonCheckVerifier extends PythonVisitor {
+public class PythonCheckVerifier extends PythonSubscriptionCheck {
 
   private List<TestIssue> expectedIssues = new ArrayList<>();
+
+  @Override
+  public void scanFile(PythonVisitorContext visitorContext) {
+    SubscriptionVisitor.analyze(Collections.singletonList(this), visitorContext);
+  }
+
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken(((Token) ctx.syntaxNode())));
+  }
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
     check.scanFile(context);
@@ -131,14 +140,13 @@ public class PythonCheckVerifier extends PythonVisitor {
     }
   }
 
-  @Override
-  public void visitToken(Token token) {
-    for (Trivia trivia : token.getTrivia()) {
-      String text = trivia.getToken().getValue().substring(1).trim();
+  private void visitToken(Token token) {
+    for (Trivia trivia : token.trivia()) {
+      String text = trivia.token().value().substring(1).trim();
       String marker = "Noncompliant";
 
       if (text.startsWith(marker)) {
-        int issueLine = trivia.getToken().getLine();
+        int issueLine = trivia.token().line();
         String paramsAndMessage = text.substring(marker.length()).trim();
         expectedIssues.add(createIssue(issueLine, paramsAndMessage));
       } else if (text.startsWith("^")) {
@@ -150,7 +158,7 @@ public class PythonCheckVerifier extends PythonVisitor {
   private static TestIssue createIssue(int issueLine, String paramsAndMessage) {
     if (paramsAndMessage.startsWith("@")) {
       String[] spaceSplit = paramsAndMessage.split("[\\s\\[{]", 2);
-      issueLine += Integer.valueOf(spaceSplit[0].substring(1));
+      issueLine += Integer.parseInt(spaceSplit[0].substring(1));
       paramsAndMessage = spaceSplit.length > 1 ? spaceSplit[1] : "";
     }
 
@@ -180,13 +188,13 @@ public class PythonCheckVerifier extends PythonVisitor {
       String value = param.substring(equalIndex + 1);
 
       if ("effortToFix".equalsIgnoreCase(name)) {
-        issue.effortToFix(Integer.valueOf(value));
+        issue.effortToFix(Integer.parseInt(value));
 
       } else if ("sc".equalsIgnoreCase(name)) {
-        issue.startColumn(Integer.valueOf(value));
+        issue.startColumn(Integer.parseInt(value));
 
       } else if ("ec".equalsIgnoreCase(name)) {
-        issue.endColumn(Integer.valueOf(value));
+        issue.endColumn(Integer.parseInt(value));
 
       } else if ("el".equalsIgnoreCase(name)) {
         issue.endLine(lineValue(issue.line(), value));
@@ -212,19 +220,19 @@ public class PythonCheckVerifier extends PythonVisitor {
 
   private static int lineValue(int baseLine, String shift) {
     if (shift.startsWith("+")) {
-      return baseLine + Integer.valueOf(shift.substring(1));
+      return baseLine + Integer.parseInt(shift.substring(1));
     }
     if (shift.startsWith("-")) {
-      return baseLine - Integer.valueOf(shift.substring(1));
+      return baseLine - Integer.parseInt(shift.substring(1));
     }
-    return Integer.valueOf(shift);
+    return Integer.parseInt(shift);
   }
 
   private void addPreciseLocation(Trivia trivia) {
-    Token token = trivia.getToken();
-    int line = token.getLine();
-    String text = token.getValue();
-    if (token.getColumn() > 1) {
+    Token token = trivia.token();
+    int line = token.line();
+    String text = token.value();
+    if (token.column() > 1) {
       throw new IllegalStateException("Line " + line + ": comments asserting a precise location should start at column 1");
     }
     String missingAssertionMessage = String.format("Invalid test file: a precise location is provided at line %s but no issue is asserted at line %s", line, line - 1);

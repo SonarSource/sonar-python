@@ -68,10 +68,6 @@ public class PythonVisitor implements PythonCheck {
     }
   }
 
-  public void scanNode(AstNode node) {
-    scanNode(node, subscribedKinds());
-  }
-
   private void scanNode(AstNode node, Set<AstNodeType> subscribedKinds) {
     boolean isSubscribedType = subscribedKinds.contains(node.getType());
 
