@@ -19,23 +19,20 @@
  */
 package org.sonar.python.metrics;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import org.junit.Test;
-import org.sonar.python.PythonVisitor;
+import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
+import org.sonar.python.api.tree.Trivia;
+import org.sonar.python.tree.BaseTreeVisitor;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -44,48 +41,52 @@ public class CognitiveComplexityVisitorTest {
   @Test
   public void file() {
     Map<Integer, String> complexityByLine = new TreeMap<>();
-    CognitiveComplexityVisitor fileComplexityVisitor = new CognitiveComplexityVisitor(
-      (token, message) -> complexityByLine.merge(token.line(), message, (a, b) -> a + " " + b));
+    CognitiveComplexityVisitor fileComplexityVisitor = new CognitiveComplexityVisitor((token, message) -> complexityByLine.merge(token.line(), message, (a, b) -> a + " " + b));
 
-    StringBuilder comments = new StringBuilder();
-    // TODO: use BaseTreeVisitor when we will have a way to access tokens and comments in strongly typed AST
-    PythonVisitor functionAndCommentVisitor = new PythonVisitor() {
-      @Override
-      public Set<AstNodeType> subscribedKinds() {
-        return new HashSet<>(Arrays.asList(PythonGrammar.FUNCDEF));
-      }
 
+    BaseTreeVisitor functionVisitor = new BaseTreeVisitor() {
       @Override
-      public void visitNode(AstNode node) {
-        if (!node.hasAncestor(PythonGrammar.FUNCDEF)) {
-          PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
-          FunctionDef tree = pythonTreeMaker.funcDefStatement(node);
-          pythonTreeMaker.setParents(tree);
-          int functionComplexity = CognitiveComplexityVisitor.complexity(tree, null);
-          complexityByLine.merge(node.getTokenLine(), "=" + functionComplexity, (a, b) -> a + " " + b);
-        }
-      }
-
-      @Override
-      public void visitToken(Token token) {
-        for (Trivia trivia : token.getTrivia()) {
-          if (trivia.isComment()) {
-            String content = trivia.getToken().getValue().substring(1).trim();
-            if (content.startsWith("=") || content.startsWith("+")) {
-              comments.append("line " + trivia.getToken().getLine() + " " + content + "\n");
-            }
-          }
-        }
+      public void visitFunctionDef(FunctionDef tree) {
+        int functionComplexity = CognitiveComplexityVisitor.complexity(tree, null);
+        complexityByLine.merge(tree.firstToken().line(), "=" + functionComplexity, (a, b) -> a + " " + b);
       }
     };
+
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/metrics/cognitive-complexities.py"));
     context.rootTree().accept(fileComplexityVisitor);
-    functionAndCommentVisitor.scanFile(context);
+    context.rootTree().accept(functionVisitor);
+    CommentVisitor commentVisitor = new CommentVisitor();
+    commentVisitor.scanFile(context);
     assertThat(fileComplexityVisitor.getComplexity()).isEqualTo(91);
 
     StringBuilder complexityReport = new StringBuilder();
     complexityByLine.forEach((line, message) -> complexityReport.append("line " + line + " " + message + "\n"));
-    assertThat(complexityReport.toString()).isEqualTo(comments.toString());
+    assertThat(complexityReport.toString()).isEqualTo(commentVisitor.comments.toString());
+  }
+
+  private static class CommentVisitor extends PythonSubscriptionCheck {
+    StringBuilder comments = new StringBuilder();
+
+    @Override
+    public void scanFile(PythonVisitorContext visitorContext) {
+      SubscriptionVisitor.analyze(Collections.singletonList(this), visitorContext);
+    }
+
+    @Override
+    public void initialize(Context context) {
+      context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> {
+        for (Trivia trivia : ((Token) ctx.syntaxNode()).trivia()) {
+          String content = trivia.token().value().substring(1).trim();
+          if (content.startsWith("=") || content.startsWith("+")) {
+            comments.append("line ")
+              .append(trivia.token().line())
+              .append(" ")
+              .append(content)
+              .append("\n");
+          }
+        }
+      });
+    }
   }
 
 }
