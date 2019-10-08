@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,6 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SymbolTableBuilderTreeTest {
   private static Map<String, FunctionDef> functionTreesByName = new HashMap<>();
+  private static FileInput fileInput;
 
 
   private Map<String, Symbol> getSymbolByName(FunctionDef functionTree) {
@@ -49,8 +51,15 @@ public class SymbolTableBuilderTreeTest {
   @BeforeClass
   public static void init() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/symbols2.py"));
-    FileInput fileInput = context.rootTree();
+    fileInput = context.rootTree();
     fileInput.accept(new TestVisitor());
+  }
+
+  @Test
+  public void global_variable() {
+    Set<Symbol> moduleSymbols = fileInput.globalVariables();
+    assertThat(moduleSymbols.size()).isEqualTo(2);
+    assertThat(moduleSymbols).extracting(Symbol::name).containsExactly("global_x", "global_var");
   }
 
   @Test
