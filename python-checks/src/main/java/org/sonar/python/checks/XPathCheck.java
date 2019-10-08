@@ -21,15 +21,16 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonVisitor;
+import org.sonar.python.PythonVisitorContext;
 
 @Rule(key = XPathCheck.CHECK_KEY)
-public class XPathCheck extends PythonVisitor implements PythonCheck {
+public class XPathCheck implements PythonCheck {
   public static final String CHECK_KEY = "XPath";
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";
@@ -45,6 +46,7 @@ public class XPathCheck extends PythonVisitor implements PythonCheck {
   public String message = DEFAULT_MESSAGE;
 
   private AstNodeXPathQuery<Object> query = null;
+  private PythonVisitorContext context;
 
   @CheckForNull
   private AstNodeXPathQuery<Object> query() {
@@ -58,8 +60,23 @@ public class XPathCheck extends PythonVisitor implements PythonCheck {
     return query;
   }
 
-  @Override
-  public void visitFile(AstNode fileNode) {
+  public void scanFile(PythonVisitorContext context) {
+    this.context = context;
+    AstNode tree = context.rootAstNode();
+    if (tree != null) {
+      visitFile(tree);
+      scanNode(tree);
+    }
+  }
+
+  private void scanNode(AstNode node) {
+    List<AstNode> children = node.getChildren();
+    for (AstNode child : children) {
+      scanNode(child);
+    }
+  }
+
+  private void visitFile(AstNode fileNode) {
     AstNodeXPathQuery<Object> compiledQuery = query();
     if (compiledQuery != null) {
       compiledQuery.selectNodes(fileNode).forEach(this::reportIssue);
@@ -76,12 +93,12 @@ public class XPathCheck extends PythonVisitor implements PythonCheck {
 
   private void addIssue(AstNode node, String message) {
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
-    getContext().addIssue(newIssue);
+    context.addIssue(newIssue);
   }
 
   private void addFileIssue(String message) {
     PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.atFileLevel(message));
-    getContext().addIssue(newIssue);
+    context.addIssue(newIssue);
   }
 
 }
