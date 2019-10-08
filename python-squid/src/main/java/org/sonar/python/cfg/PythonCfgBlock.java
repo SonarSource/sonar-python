@@ -19,7 +19,7 @@
  */
 package org.sonar.python.cfg;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +31,11 @@ import org.sonar.python.api.tree.Tree;
 public abstract class PythonCfgBlock implements CfgBlock {
 
   private final LinkedList<Tree> elements = new LinkedList<>();
+  private final Set<CfgBlock> predecessors = new HashSet<>();
 
   @Override
   public Set<CfgBlock> predecessors() {
-    return Collections.emptySet();
+    return predecessors;
   }
 
   @Override
@@ -72,5 +73,9 @@ public abstract class PythonCfgBlock implements CfgBlock {
       return "empty";
     }
     return elements.stream().map(elem -> elem.getKind().toString()).collect(Collectors.joining(";"));
+  }
+
+  void addPredecessor(PythonCfgBlock block) {
+    predecessors.add(block);
   }
 }
