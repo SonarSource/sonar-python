@@ -19,10 +19,9 @@
  */
 package org.sonar.plugins.python.cpd;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.TokenType;
+import java.util.ArrayList;
 import java.util.List;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -30,6 +29,8 @@ import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.Tree;
 
 public class PythonCpdAnalyzer {
 
@@ -40,20 +41,20 @@ public class PythonCpdAnalyzer {
   }
 
   public void pushCpdTokens(InputFile inputFile, PythonVisitorContext visitorContext) {
-    AstNode root = visitorContext.rootAstNode();
+    Tree root = visitorContext.rootTree();
     if (root != null) {
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
-      List<Token> tokens = root.getTokens();
+      List<Token> tokens = tokens(root);
       for (int i = 0; i < tokens.size(); i++) {
         Token token = tokens.get(i);
-        TokenType currentTokenType = token.getType();
-        TokenType nextTokenType = i + 1 < tokens.size() ? tokens.get(i + 1).getType() : GenericTokenType.EOF;
+        TokenType currentTokenType = token.type();
+        TokenType nextTokenType = i + 1 < tokens.size() ? tokens.get(i + 1).type() : GenericTokenType.EOF;
         // INDENT/DEDENT could not be completely ignored during CPD see https://docs.python.org/3/reference/lexical_analysis.html#indentation
         // Just taking into account DEDENT is enough, but because the DEDENT token has an empty value, it's the
         // preceding new line which is added in its place to create a difference
         if (isNewLineWithIndentationChange(currentTokenType, nextTokenType) || !isIgnoredType(currentTokenType)) {
           TokenLocation location = new TokenLocation(token);
-          cpdTokens.addToken(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset(), token.getValue());
+          cpdTokens.addToken(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset(), token.value());
         }
       }
       cpdTokens.save();
@@ -69,6 +70,18 @@ public class PythonCpdAnalyzer {
       type.equals(PythonTokenType.DEDENT) ||
       type.equals(PythonTokenType.INDENT) ||
       type.equals(GenericTokenType.EOF);
+  }
+
+  private static List<Token> tokens(Tree tree) {
+    List<Token> tokens = new ArrayList<>();
+    for (Tree child : tree.children()) {
+      if (child.is(Tree.Kind.TOKEN)) {
+        tokens.add(((Token) child));
+      } else {
+        tokens.addAll(tokens(child));
+      }
+    }
+    return tokens;
   }
 
 }

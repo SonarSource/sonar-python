@@ -19,8 +19,6 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Token;
-
 public class TokenLocation {
 
   private final int startLine;
@@ -29,23 +27,19 @@ public class TokenLocation {
   private final int endLineOffset;
 
   public TokenLocation(org.sonar.python.api.tree.Token token) {
-    this(token.token());
-  }
+    this.startLine = token.line();
+    this.startLineOffset = token.column();
 
-  public TokenLocation(Token token) {
-    this.startLine = token.getLine();
-    this.startLineOffset = token.getColumn();
-
-    String value = token.getValue();
+    String value = token.value();
     String[] lines = value.split("\r\n|\n|\r", -1);
 
     if (lines.length > 1) {
-      endLine = token.getLine() + lines.length - 1;
+      endLine = token.line() + lines.length - 1;
       endLineOffset = lines[lines.length - 1].length();
 
     } else {
       this.endLine = this.startLine;
-      this.endLineOffset = this.startLineOffset + token.getValue().length();
+      this.endLineOffset = this.startLineOffset + token.value().length();
     }
   }
 
