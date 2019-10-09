@@ -19,11 +19,9 @@
  */
 package org.sonar.python.metrics;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonVisitorContext;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.tree.BaseTreeVisitor;
@@ -38,14 +36,13 @@ public class FileMetrics {
   private List<Integer> functionComplexities = new ArrayList<>();
 
   public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
-    AstNode rootTree = context.rootAstNode();
     FileInput fileInput = context.rootTree();
-    numberOfStatements = rootTree.getDescendants(PythonGrammar.STATEMENT).size();
-    numberOfClasses = rootTree.getDescendants(PythonGrammar.CLASSDEF).size();
-    fileInput.accept(complexityVisitor);
-    fileInput.accept(cognitiveComplexityVisitor);
     fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
     fileLinesVisitor.scanFile(context);
+    numberOfStatements = fileLinesVisitor.getStatements();
+    numberOfClasses = fileLinesVisitor.getClassDefs();
+    fileInput.accept(complexityVisitor);
+    fileInput.accept(cognitiveComplexityVisitor);
     fileInput.accept(new FunctionVisitor());
   }
 
