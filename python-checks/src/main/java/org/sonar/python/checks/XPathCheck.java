@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.xpath.api.AstNodeXPathQuery;
-import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -65,14 +64,6 @@ public class XPathCheck implements PythonCheck {
     AstNode tree = context.rootAstNode();
     if (tree != null) {
       visitFile(tree);
-      scanNode(tree);
-    }
-  }
-
-  private static void scanNode(AstNode node) {
-    List<AstNode> children = node.getChildren();
-    for (AstNode child : children) {
-      scanNode(child);
     }
   }
 
