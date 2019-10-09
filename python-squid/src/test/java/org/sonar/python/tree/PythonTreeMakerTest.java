@@ -1040,7 +1040,24 @@ public class PythonTreeMakerTest extends RuleTest {
     pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
     assertThat(pyAssignmentStatement.children()).hasSize(3);
     assigned = (Name) pyAssignmentStatement.assignedValue();
-    List<Expression> expressions = pyAssignmentStatement.lhsExpressions().get(0).expressions();
+    ExpressionList expressionList = pyAssignmentStatement.lhsExpressions().get(0);
+    assertThat(expressionList.children()).hasSize(3);
+    assertThat(expressionList.children().get(1)).isSameAs(expressionList.commas().get(0));
+    List<Expression> expressions = expressionList.expressions();
+    assertThat(assigned.name()).isEqualTo("x");
+    assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(expressions.get(1).getKind()).isEqualTo(Tree.Kind.NAME);
+
+    astNode = p.parse("a,b, = x");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    pyAssignmentStatement = treeMaker.assignment(statementWithSeparator);
+    assertThat(pyAssignmentStatement.children()).hasSize(3);
+    assigned = (Name) pyAssignmentStatement.assignedValue();
+    expressionList = pyAssignmentStatement.lhsExpressions().get(0);
+    assertThat(expressionList.children()).hasSize(4);
+    assertThat(expressionList.children().get(1)).isSameAs(expressionList.commas().get(0));
+    assertThat(expressionList.children().get(3)).isSameAs(expressionList.commas().get(1));
+    expressions = expressionList.expressions();
     assertThat(assigned.name()).isEqualTo("x");
     assertThat(expressions.get(0).getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(expressions.get(1).getKind()).isEqualTo(Tree.Kind.NAME);
@@ -1547,7 +1564,10 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(expr.children()).hasSize(4);
 
     SubscriptionExpression multipleSubscripts = (SubscriptionExpression) parse("x[a, 42]", treeMaker::expression);
-    assertThat(multipleSubscripts.subscripts().expressions()).extracting(Tree::getKind)
+    ExpressionList subscripts = multipleSubscripts.subscripts();
+    assertThat(subscripts.children()).hasSize(3);
+    assertThat(subscripts.children().get(1)).isSameAs(subscripts.commas().get(0));
+    assertThat(subscripts.expressions()).extracting(Tree::getKind)
       .containsExactly(Tree.Kind.NAME, Tree.Kind.NUMERIC_LITERAL);
   }
 
@@ -1756,13 +1776,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parse.is(Tree.Kind.LIST_LITERAL)).isTrue();
     assertThat(parse.firstToken().value()).isEqualTo("[");
     assertThat(parse.lastToken().value()).isEqualTo("]");
-    ListLiteral listLiteralTree = (ListLiteral) parse;
-    List<Expression> expressions = listLiteralTree.elements().expressions();
+    ListLiteral listLiteral = (ListLiteral) parse;
+    ExpressionList expressionList = listLiteral.elements();
+    assertThat(expressionList.children()).hasSize(3);
+    assertThat(expressionList.children().get(1)).isSameAs(expressionList.commas().get(0));
+    List<Expression> expressions = expressionList.expressions();
     assertThat(expressions).hasSize(2);
     assertThat(expressions.get(0).is(Tree.Kind.NUMERIC_LITERAL)).isTrue();
-    assertThat(listLiteralTree.leftBracket()).isNotNull();
-    assertThat(listLiteralTree.rightBracket()).isNotNull();
-    assertThat(listLiteralTree.children()).hasSize(3);
+    assertThat(listLiteral.leftBracket()).isNotNull();
+    assertThat(listLiteral.rightBracket()).isNotNull();
+    assertThat(listLiteral.children()).hasSize(3);
   }
 
 
@@ -2049,6 +2072,9 @@ public class PythonTreeMakerTest extends RuleTest {
     reprExpressionTree = (ReprExpression) parse("`x, y`", treeMaker::expression);
     assertThat(reprExpressionTree.getKind()).isEqualTo(Tree.Kind.REPR);
     assertThat(reprExpressionTree.expressionList().expressions()).hasSize(2);
+    assertThat(reprExpressionTree.expressionList().children()).hasSize(3);
+    assertThat(reprExpressionTree.expressionList().commas()).hasSize(1);
+    assertThat(reprExpressionTree.expressionList().commas().get(0)).isSameAs(reprExpressionTree.expressionList().children().get(1));
     assertThat(reprExpressionTree.expressionList().expressions().get(0).getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(reprExpressionTree.expressionList().expressions().get(1).getKind()).isEqualTo(Tree.Kind.NAME);
   }

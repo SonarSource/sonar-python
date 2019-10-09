@@ -692,9 +692,10 @@ public class PythonTreeMaker {
       List<Expression> expressions = astNode.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
         .map(this::expression)
         .collect(Collectors.toList());
-      return new ExpressionListImpl(expressions);
+      List<Token> commas = toPyToken(astNode.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList()));
+      return new ExpressionListImpl(expressions, commas);
     }
-    return new ExpressionListImpl(Collections.singletonList(expression(astNode)));
+    return new ExpressionListImpl(Collections.singletonList(expression(astNode)), Collections.emptyList());
   }
 
   public TryStatement tryStatement(AstNode astNode) {
@@ -887,7 +888,8 @@ public class PythonTreeMaker {
     Token openingBacktick = toPyToken(astNode.getFirstChild(PythonPunctuator.BACKTICK).getToken());
     Token closingBacktick = toPyToken(astNode.getLastChild(PythonPunctuator.BACKTICK).getToken());
     List<Expression> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
-    ExpressionList expressionListTree = new ExpressionListImpl(expressions);
+    List<Token> commas = toPyToken(astNode.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList()));
+    ExpressionList expressionListTree = new ExpressionListImpl(expressions, commas);
     return new ReprExpressionImpl(openingBacktick, expressionListTree, closingBacktick);
   }
 
@@ -1029,7 +1031,8 @@ public class PythonTreeMaker {
 
     } else {
       List<Expression> expressions = slices.stream().map(Expression.class::cast).collect(Collectors.toList());
-      ExpressionList subscripts = new ExpressionListImpl(expressions);
+      List<Token> commas = toPyToken(subscriptList.getChildren(PythonPunctuator.COMMA).stream().map(AstNode::getToken).collect(Collectors.toList()));
+      ExpressionList subscripts = new ExpressionListImpl(expressions, commas);
       return new SubscriptionExpressionImpl(expr, leftBracket, subscripts, rightBracket);
     }
   }
@@ -1069,7 +1072,7 @@ public class PythonTreeMaker {
       }
       elements = expressionList(testListComp);
     } else {
-      elements = new ExpressionListImpl(Collections.emptyList());
+      elements = new ExpressionListImpl(Collections.emptyList(), Collections.emptyList());
     }
     return new ListLiteralImpl(leftBracket, elements, rightBracket);
   }
