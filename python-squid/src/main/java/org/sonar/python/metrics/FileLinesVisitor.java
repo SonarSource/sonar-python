@@ -63,6 +63,8 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private Set<Integer> linesOfComments = new HashSet<>();
   private Set<Integer> linesOfDocstring = new HashSet<>();
   private Set<Integer> executableLines = new HashSet<>();
+  private int statements = 0;
+  private int classDefs = 0;
 
   public FileLinesVisitor(boolean ignoreHeaderComments) {
     this.ignoreHeaderComments = ignoreHeaderComments;
@@ -92,15 +94,17 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private void visitNode(SubscriptionContext ctx) {
     Tree tree = ctx.syntaxNode();
     if (tree.is(Tree.Kind.FILE_INPUT)) {
+      statements--;
       docStringToken(((FileInput) tree).docstring());
     }
     if (tree.is(Tree.Kind.CLASSDEF)) {
+      classDefs++;
       docStringToken(((ClassDef) tree).docstring());
     }
     if (tree.is(Tree.Kind.FUNCDEF)) {
       docStringToken(((FunctionDef) tree).docstring());
     }
-
+    statements++;
     executableLines.add(tree.firstToken().line());
   }
 
@@ -194,5 +198,13 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private static String getContents(String comment) {
     // Comment always starts with "#"
     return comment.substring(comment.indexOf('#'));
+  }
+
+  public int getStatements() {
+    return statements;
+  }
+
+  public int getClassDefs() {
+    return classDefs;
   }
 }
