@@ -39,6 +39,7 @@ import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1481")
 public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
@@ -74,10 +75,9 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isTupleDeclaration(Tree tree) {
-    return tree.ancestors().stream()
-      .anyMatch(t -> t.is(Kind.TUPLE)
+    return TreeUtils.firstAncestor(tree, t -> t.is(Kind.TUPLE)
         || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
-        || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree)));
+        || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree))) != null;
   }
 
   private static boolean isCallingLocalsFunction(FunctionDef functionTree) {

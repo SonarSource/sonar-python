@@ -47,6 +47,7 @@ import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TryStatement;
 import org.sonar.python.api.tree.WhileStatement;
 import org.sonar.python.api.tree.WithStatement;
+import org.sonar.python.tree.TreeUtils;
 
 public class ControlFlowGraphBuilder {
 
@@ -278,7 +279,7 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildReturnStatement(ReturnStatement statement, PythonCfgBlock syntacticSuccessor) {
-    if (statement.ancestors().stream().noneMatch(tree -> tree.is(Tree.Kind.FUNCDEF)) || isStatementAtClassLevel(statement)) {
+    if (TreeUtils.firstAncestorOfKind(statement, Tree.Kind.FUNCDEF) == null || isStatementAtClassLevel(statement)) {
       throw new IllegalStateException("Invalid return outside of a function");
     }
     PythonCfgSimpleBlock block = createSimpleBlock(end);

@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,6 +29,7 @@ import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = StandardInputCheck.CHECK_KEY)
 public class StandardInputCheck extends AbstractCallExpressionCheck {
@@ -78,12 +78,10 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
   }
 
   private static boolean isQuestionablePropertyAccess(Name pyNameTree) {
-    Optional<Tree> callExpression = pyNameTree.ancestors().stream()
-      .filter(tree -> tree.is(Tree.Kind.CALL_EXPR))
-      .findFirst();
-    if (callExpression.isPresent()) {
+    Tree callExpression = TreeUtils.firstAncestorOfKind(pyNameTree, Tree.Kind.CALL_EXPR);
+    if (callExpression != null) {
       // avoid raising twice the issue on call expressions like sys.stdin.read()
-      CallExpression call = (CallExpression) callExpression.get();
+      CallExpression call = (CallExpression) callExpression;
       if (call.callee().descendants().anyMatch(tree -> tree == pyNameTree)) {
         return false;
       }

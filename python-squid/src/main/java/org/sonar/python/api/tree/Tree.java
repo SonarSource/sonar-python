@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api.tree;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -28,7 +27,7 @@ public interface Tree {
 
   void accept(TreeVisitor visitor);
 
-  boolean is(Kind kind);
+  boolean is(Kind... kinds);
 
   Token firstToken();
 
@@ -217,15 +216,5 @@ public interface Tree {
     return children().stream()
       .filter(Objects::nonNull)
       .flatMap(tree -> Stream.concat(Stream.of(tree), tree.descendants()));
-  }
-
-  default List<Tree> ancestors() {
-    Tree currentParent = parent();
-    List<Tree> ancestors = new ArrayList<>();
-    while (currentParent != null) {
-      ancestors.add(currentParent);
-      currentParent = currentParent.parent();
-    }
-    return ancestors;
   }
 }

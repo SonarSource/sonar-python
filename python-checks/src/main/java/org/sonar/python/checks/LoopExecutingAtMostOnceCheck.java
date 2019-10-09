@@ -37,6 +37,7 @@ import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1751")
 public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
@@ -94,7 +95,7 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
 
   private static boolean blockInsideLoop(CfgBlock block, Tree loop) {
     List<Tree> elements = block.elements();
-    return elements.isEmpty() || elements.get(0).ancestors().contains(loop);
+    return elements.isEmpty() || TreeUtils.firstAncestor(elements.get(0), tree -> tree == loop) != null;
   }
 
 }
