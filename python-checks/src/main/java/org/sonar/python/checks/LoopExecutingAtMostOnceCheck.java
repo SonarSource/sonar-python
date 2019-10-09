@@ -77,7 +77,7 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
         return;
       }
       if (seen.add(b)) {
-        if (b.syntacticSuccessor() != null) {
+        if (b.syntacticSuccessor() != null && !breakOfInnerLoop(b, loopBlock)) {
           jumps.add(b.elements().get(b.elements().size() - 1).firstToken());
         }
         b.successors().stream()
@@ -91,6 +91,12 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
     }
     PreciseIssue issue = ctx.addIssue(loop.firstToken(), "Refactor this loop to do more than one iteration.");
     jumps.forEach(j -> issue.secondary(j, null));
+  }
+
+  private static boolean breakOfInnerLoop(CfgBlock block, CfgBranchingBlock loopBlock) {
+    Tree jumpStatement = block.elements().get(block.elements().size() - 1);
+    // TODO: handle loops having else clause when SONARPY-445 will be implemented
+    return jumpStatement.is(Kind.BREAK_STMT) && block.successors().stream().noneMatch(b -> b == loopBlock.falseSuccessor());
   }
 
   private static boolean blockInsideLoop(CfgBlock block, Tree loop) {
