@@ -69,14 +69,14 @@ public class XPathCheck implements PythonCheck {
     }
   }
 
-  private void scanNode(AstNode node) {
+  private static void scanNode(AstNode node) {
     List<AstNode> children = node.getChildren();
     for (AstNode child : children) {
       scanNode(child);
     }
   }
 
-  private void visitFile(AstNode fileNode) {
+  private  void visitFile(AstNode fileNode) {
     AstNodeXPathQuery<Object> compiledQuery = query();
     if (compiledQuery != null) {
       compiledQuery.selectNodes(fileNode).forEach(this::reportIssue);
