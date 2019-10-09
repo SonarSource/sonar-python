@@ -22,5 +22,8 @@ package org.sonar.python.api.tree;
 import java.util.List;
 
 public interface ExpressionList extends Expression {
+
   List<Expression> expressions();
+
+  List<Token> commas();
 }

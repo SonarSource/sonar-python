@@ -19,25 +19,33 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionList;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
 public class ExpressionListImpl extends PyTree implements ExpressionList {
   private final List<Expression> expressions;
+  private final List<Token> commas;
 
-  public ExpressionListImpl(List<Expression> expressions) {
+  public ExpressionListImpl(List<Expression> expressions, List<Token> commas) {
     super(expressions.isEmpty() ? null : expressions.get(0).firstToken(),
       expressions.isEmpty() ? null : expressions.get(expressions.size() - 1).lastToken());
     this.expressions = expressions;
+    this.commas = commas;
   }
 
   @Override
   public List<Expression> expressions() {
     return expressions;
+  }
+
+  @Override
+  public List<Token> commas() {
+    return commas;
   }
 
   @Override
@@ -52,6 +60,15 @@ public class ExpressionListImpl extends PyTree implements ExpressionList {
 
   @Override
   public List<Tree> computeChildren() {
-    return Collections.unmodifiableList(expressions);
+    List<Tree> children = new ArrayList<>();
+    int i = 0;
+    for (Expression expression : expressions) {
+      children.add(expression);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    return children;
   }
 }
