@@ -24,6 +24,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.TokenImpl;
 
 public abstract class IssueLocation {
 
@@ -45,12 +46,12 @@ public abstract class IssueLocation {
     return new LineLevelIssueLocation(message, lineNumber);
   }
 
-  public static IssueLocation preciseLocation(AstNode startNode, AstNode endNode, String message) {
-    return new PreciseIssueLocation(startNode, endNode, message);
-  }
-
+  /**
+   * @deprecated for removal :Should be removed when getting rid of XpathCheck : only used by this deprecated check. Reporting should be done using Tree or Token
+   */
+  @Deprecated
   public static IssueLocation preciseLocation(AstNode startNode, @Nullable String message) {
-    return new PreciseIssueLocation(startNode, message);
+    return new PreciseIssueLocation(new TokenImpl(startNode.getToken()), new TokenImpl(startNode.getLastToken()), message);
   }
 
   public static IssueLocation preciseLocation(Tree tree, @Nullable String message) {
@@ -80,41 +81,29 @@ public abstract class IssueLocation {
 
   private static class PreciseIssueLocation extends IssueLocation {
 
-    private final com.sonar.sslr.api.Token firstToken;
+    private final Token firstToken;
     private final TokenLocation lastTokenLocation;
-
-    public PreciseIssueLocation(AstNode node, @Nullable String message) {
-      super(message);
-      this.firstToken = node.getToken();
-      this.lastTokenLocation = new TokenLocation(node.getLastToken());
-    }
-
-    public PreciseIssueLocation(AstNode startNode, AstNode endNode, String message) {
-      super(message);
-      this.firstToken = startNode.getToken();
-      this.lastTokenLocation = new TokenLocation(endNode.getLastToken());
-    }
 
     public PreciseIssueLocation(Token firstToken, Token lastToken, @Nullable String message) {
       super(message);
-      this.firstToken = firstToken.token();
-      this.lastTokenLocation = new TokenLocation(lastToken.token());
+      this.firstToken = firstToken;
+      this.lastTokenLocation = new TokenLocation(lastToken);
     }
 
     public PreciseIssueLocation(Token token, @Nullable String message) {
       super(message);
-      this.firstToken = token.token();
-      this.lastTokenLocation = new TokenLocation(token.token());
+      this.firstToken = token;
+      this.lastTokenLocation = new TokenLocation(token);
     }
 
     @Override
     public int startLine() {
-      return firstToken.getLine();
+      return firstToken.line();
     }
 
     @Override
     public int startLineOffset() {
-      return firstToken.getColumn();
+      return firstToken.column();
     }
 
     @Override

@@ -19,12 +19,14 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.lexer.PythonLexer;
+import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -61,7 +63,7 @@ public class TokenLocationTest {
 
   @Test
   public void test_comment() {
-    TokenLocation commentLocation = new TokenLocation(lex("#comment\n").get(0).getTrivia().get(0).getToken());
+    TokenLocation commentLocation = new TokenLocation(lex("#comment\n").get(0).trivia().get(0).token());
     assertOffsets(commentLocation, 1, 0, 1, 8);
   }
 
@@ -73,7 +75,7 @@ public class TokenLocationTest {
   }
 
   private List<Token> lex(String toLex) {
-    return lexer.lex(toLex);
+    return lexer.lex(toLex).stream().map(TokenImpl::new).collect(Collectors.toList());
   }
 
 }

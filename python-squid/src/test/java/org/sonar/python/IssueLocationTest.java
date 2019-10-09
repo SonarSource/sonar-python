@@ -71,19 +71,6 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void multiple_nodes() {
-    AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
-    AstNode firstNode = root.getFirstDescendant(PythonTokenType.NUMBER);
-    AstNode lastNode = root.getFirstDescendant(PythonPunctuator.RPARENTHESIS);
-    IssueLocation issueLocation = IssueLocation.preciseLocation(firstNode, lastNode, MESSAGE);
-    assertThat(issueLocation.message()).isEqualTo(MESSAGE);
-    assertThat(issueLocation.startLine()).isEqualTo(3);
-    assertThat(issueLocation.endLine()).isEqualTo(3);
-    assertThat(issueLocation.startLineOffset()).isEqualTo(4);
-    assertThat(issueLocation.endLineOffset()).isEqualTo(11);
-  }
-
-  @Test
   public void tokens() {
     AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
     AstNode firstNode = root.getFirstDescendant(PythonTokenType.NUMBER);
