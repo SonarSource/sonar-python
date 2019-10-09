@@ -78,9 +78,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     scopesByRootTree = new HashMap<>();
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
-    scopesByRootTree.values().stream()
-      .filter(scope -> scope.rootTree instanceof FunctionLike)
-      .forEach(scope -> {
+    for (Scope scope : scopesByRootTree.values()) {
+      if (scope.rootTree instanceof FunctionLike) {
         FunctionLike funcDef = (FunctionLike) scope.rootTree;
         for (Symbol symbol : scope.symbols()) {
           if (funcDef.is(Kind.LAMBDA)) {
@@ -89,17 +88,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
             ((FunctionDefImpl) funcDef).addLocalVariableSymbol(symbol);
           }
         }
-      });
-    scopesByRootTree.values().stream()
-      .filter(scope -> scope.rootTree.is(Kind.CLASSDEF))
-      .forEach(scope -> {
+      } else if (scope.rootTree.is(Kind.CLASSDEF)) {
         ClassDefImpl classDef = (ClassDefImpl) scope.rootTree;
         scope.symbols.forEach(classDef::addClassField);
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
-      });
-    scopesByRootTree.values().stream()
-      .filter(scope -> scope.rootTree.is(Kind.FILE_INPUT))
-      .forEach(scope -> scope.symbols.forEach(((FileInputImpl) fileInput)::addGlobalVariables));
+      } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
+        scope.symbols.forEach(((FileInputImpl) fileInput)::addGlobalVariables);
+      }
+    }
   }
 
   private static class ScopeVisitor extends BaseTreeVisitor {
