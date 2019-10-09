@@ -32,6 +32,10 @@ public interface CfgBlock {
 
   List<Tree> elements();
 
+  /**
+   * @return block following this one if no jump is applied
+   * Returns {@code null} if this block doesn't end with jump statement (break, continue, return, raise)
+   */
   @CheckForNull
   CfgBlock syntacticSuccessor();
 }
