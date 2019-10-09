@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
@@ -142,20 +141,22 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void descendants_and_ancestors() {
+  public void descendants() {
     FileInput pyTree = parse("def foo(): pass\ndef bar(): pass", treeMaker::fileInput);
     assertThat(pyTree.descendants().filter(tree -> tree.getKind() != Tree.Kind.TOKEN).count()).isEqualTo(9);
     assertThat(pyTree.descendants(Tree.Kind.STATEMENT_LIST).count()).isEqualTo(3);
     assertThat(pyTree.descendants(Tree.Kind.FUNCDEF).count()).isEqualTo(2);
     assertThat(pyTree.descendants(Tree.Kind.NAME).count()).isEqualTo(2);
     assertThat(pyTree.descendants(Tree.Kind.PASS_STMT).count()).isEqualTo(2);
+  }
 
-    FunctionDef functionDef = (FunctionDef) pyTree.descendants(Tree.Kind.FUNCDEF).collect(Collectors.toList()).get(0);
-    assertThat(functionDef.ancestors()).extracting(Tree::getKind).containsExactly(Tree.Kind.STATEMENT_LIST, Tree.Kind.FILE_INPUT);
-
-    PassStatement passStmt = (PassStatement) pyTree.descendants(Tree.Kind.PASS_STMT).collect(Collectors.toList()).get(0);
-    assertThat(passStmt.ancestors()).extracting(Tree::getKind).containsExactly(
-      Tree.Kind.STATEMENT_LIST, Tree.Kind.FUNCDEF, Tree.Kind.STATEMENT_LIST, Tree.Kind.FILE_INPUT);
+  @Test
+  public void variadic_is_kind() {
+    FileInput fileInput = parse("def foo(): pass", treeMaker::fileInput);
+    assertThat(fileInput.is(Tree.Kind.FILE_INPUT, Tree.Kind.STATEMENT_LIST)).isTrue();
+    FunctionDef functionDef = (FunctionDef) fileInput.statements().statements().get(0);
+    assertThat(functionDef.is(Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF)).isTrue();
+    assertThat(functionDef.is(Tree.Kind.WHILE_STMT, Tree.Kind.CLASSDEF)).isFalse();
   }
 
   @Test

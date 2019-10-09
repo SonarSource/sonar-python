@@ -31,6 +31,7 @@ import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1763")
 public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
@@ -70,13 +71,13 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
   // To avoid FP, we assume that exception raised inside with statement will be suppressed by __exit__() method of Context Manager
   // see https://docs.python.org/3/reference/compound_stmts.html#the-with-statement
   private static boolean isRaiseInsideWithStatement(Tree element) {
-    return element.is(Kind.RAISE_STMT) && element.ancestors().stream().anyMatch(tree -> tree.is(Kind.WITH_STMT));
+    return element.is(Kind.RAISE_STMT) && TreeUtils.firstAncestorOfKind(element, Kind.WITH_STMT) != null;
   }
 
   // due to CFG limitation on jump statements inside try blocks, we exclude finally clause to avoid FP.
   // TODO: After SONARPY-448 is implemented, we should remove this exclusion
   private static boolean isInsideFinallyClause(Tree element) {
-    return element.ancestors().stream().anyMatch(tree -> tree.is(Kind.FINALLY_CLAUSE));
+    return  TreeUtils.firstAncestorOfKind(element, Kind.FINALLY_CLAUSE) != null;
   }
 }
 

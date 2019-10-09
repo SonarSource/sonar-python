@@ -39,8 +39,14 @@ public abstract class PyTree implements Tree {
   }
 
   @Override
-  public boolean is(Kind kind) {
-    return kind == getKind();
+  public boolean is(Kind... kinds) {
+    Kind treeKind = getKind();
+    for (Kind kindIter : kinds) {
+      if (treeKind == kindIter) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
