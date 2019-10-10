@@ -211,24 +211,28 @@ public class ControlFlowGraphBuilder {
     return block;
   }
 
-  private PythonCfgBlock buildLoop(Tree branchingTree, Tree conditionElement, StatementList body, PythonCfgBlock successor) {
-    PythonCfgBranchingBlock conditionBlock = createBranchingBlock(branchingTree, successor);
+  private PythonCfgBlock buildLoop(Tree branchingTree, Tree conditionElement, StatementList body, @Nullable StatementList elseBody, PythonCfgBlock successor) {
+    PythonCfgBlock afterLoopBlock = successor;
+    if (elseBody != null) {
+      afterLoopBlock = build(elseBody.statements(), createSimpleBlock(successor));
+    }
+    PythonCfgBranchingBlock conditionBlock = createBranchingBlock(branchingTree, afterLoopBlock);
     conditionBlock.addElement(conditionElement);
     loops.push(new Loop(successor, conditionBlock));
-    PythonCfgBlock whileBodyBlock = build(body.statements(), createSimpleBlock(conditionBlock));
+    PythonCfgBlock loopBodyBlock = build(body.statements(), createSimpleBlock(conditionBlock));
     loops.pop();
-    conditionBlock.setTrueSuccessor(whileBodyBlock);
+    conditionBlock.setTrueSuccessor(loopBodyBlock);
     return createSimpleBlock(conditionBlock);
   }
 
   private PythonCfgBlock buildForStatement(ForStatement forStatement, PythonCfgBlock successor) {
-    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement, forStatement.body(), successor);
+    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement, forStatement.body(), forStatement.elseBody(), successor);
     forStatement.testExpressions().forEach(beforeForStmt::addElement);
     return beforeForStmt;
   }
 
   private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
-    return buildLoop(whileStatement, whileStatement.condition(), whileStatement.body(), currentBlock);
+    return buildLoop(whileStatement, whileStatement.condition(), whileStatement.body(), whileStatement.elseBody(), currentBlock);
   }
 
   /**

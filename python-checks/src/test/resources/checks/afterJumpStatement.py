@@ -157,3 +157,22 @@ def return_inside_class():
     class Foo:
         return
     print("foo") # OK
+
+def while_dead_code_in_else_clause(x):
+    while x:
+        print("foo")
+    else:
+        raise e
+        print("dead code") # Noncompliant
+
+def while_dead_code_in_else_clause_condition_true(x):
+    while True:
+        if x:
+            print(True)
+            break
+        else:
+            print(False)
+            break
+    else:
+        print('dead code!') # FN, we don't take into account while condition being always true
+    print("end of loop")

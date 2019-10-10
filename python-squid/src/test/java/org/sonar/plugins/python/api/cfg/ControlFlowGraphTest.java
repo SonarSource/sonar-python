@@ -275,6 +275,30 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void for_statement_else() {
+    verifyCfg(
+      "before(succ = [cond_block], elem = 2)",
+      "for cond_block(succ = [for_body, else_body], elem = 1) in collection:",
+      "  for_body(succ = [cond_block], elem = 1)",
+      "else:",
+      "  else_body(succ = [END], elem = 1)"
+    );
+  }
+
+  @Test
+  public void for_statement_else_break() {
+    verifyCfg(
+      "before(succ = [cond_block])",
+      "for cond_block(succ = [for_body, else_body]) in collection:",
+      "  for_body(succ = [after_for], syntSucc = cond_block)",
+      "  break",
+      "else:",
+      "  else_body(succ = [after_for])",
+      "after_for(succ = [END])"
+    );
+  }
+
+  @Test
   public void continue_statement_in_for() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",

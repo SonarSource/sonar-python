@@ -68,3 +68,14 @@ def nested_jump_statements_with_else(items, p):
         print("foo")
     print("after")
 
+def nested_jump_statements_with_else_continuing_outer_loop(items, p):
+    while p:
+        for item in items:
+            if not item:
+                break
+            print(item)
+        else:
+            print("foo")
+            continue
+        break
+    print("after")
