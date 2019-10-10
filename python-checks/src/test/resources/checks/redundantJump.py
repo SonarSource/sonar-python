@@ -118,7 +118,7 @@ def redundant_continue_in_nested_while(cond1, cond2):
     while cond1:
         while cond2:
           print("foo")
-          continue # Noncompliant
+          continue # Noncompliant [[secondary=-2]]
 
 def non_redundant_continue_in_nested_while(cond1, cond2, p):
     while cond1:

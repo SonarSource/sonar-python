@@ -32,6 +32,7 @@ import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.cfg.PythonCfgBranchingBlock;
 
 @Rule(key = "S3626")
 public class RedundantJumpCheck extends PythonSubscriptionCheck {
@@ -55,7 +56,11 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
         List<Tree> elements = cfgBlock.elements();
         Tree lastElement = elements.get(elements.size() - 1);
         if (!isException(lastElement)) {
-          ctx.addIssue(lastElement, message(lastElement));
+          PreciseIssue preciseIssue = ctx.addIssue(lastElement, message(lastElement));
+          if (lastElement.is(Kind.CONTINUE_STMT)) {
+            Tree loop = ((PythonCfgBranchingBlock) cfgBlock.successors().iterator().next()).branchingTree();
+            preciseIssue.secondary(loop.firstToken(), null);
+          }
         }
       }
     }
