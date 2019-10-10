@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,13 +36,13 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   private final Expression condition;
   @Nullable
   private final Expression message;
-  private final Token separator;
+  private final Separators separators;
 
-  public AssertStatementImpl(Token assertKeyword, Expression condition, @Nullable Expression message, @Nullable Token separator) {
+  public AssertStatementImpl(Token assertKeyword, Expression condition, @Nullable Expression message, Separators separators) {
     this.assertKeyword = assertKeyword;
     this.condition = condition;
     this.message = message;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -63,7 +64,7 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
   @Override
   @Nullable
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -78,6 +79,6 @@ public class AssertStatementImpl extends PyTree implements AssertStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(assertKeyword, condition, message, separator).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Arrays.asList(assertKeyword, condition, message), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

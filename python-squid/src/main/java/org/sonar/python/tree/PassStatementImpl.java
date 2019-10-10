@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,12 +32,12 @@ import org.sonar.python.api.tree.TreeVisitor;
 
 public class PassStatementImpl extends PyTree implements PassStatement {
   private final Token passKeyword;
-  private final Token separator;
+  private final Separators separators;
 
-  public PassStatementImpl(Token passKeyword, @Nullable Token separator) {
+  public PassStatementImpl(Token passKeyword, Separators separators) {
     super(passKeyword, passKeyword);
     this.passKeyword = passKeyword;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -47,7 +48,7 @@ public class PassStatementImpl extends PyTree implements PassStatement {
   @Nullable
   @Override
   public Token separator() {
-    return this.separator;
+    return separators.last();
   }
 
   @Override
@@ -62,6 +63,6 @@ public class PassStatementImpl extends PyTree implements PassStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(passKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(passKeyword), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

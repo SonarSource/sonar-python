@@ -19,6 +19,8 @@
  */
 package org.sonar.python;
 
+import org.sonar.python.api.tree.Token;
+
 public class TokenLocation {
 
   private final int startLine;
@@ -26,7 +28,7 @@ public class TokenLocation {
   private final int endLine;
   private final int endLineOffset;
 
-  public TokenLocation(org.sonar.python.api.tree.Token token) {
+  public TokenLocation(Token token) {
     this.startLine = token.line();
     this.startLineOffset = token.column();
 

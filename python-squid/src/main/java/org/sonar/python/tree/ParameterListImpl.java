@@ -19,21 +19,25 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.python.api.tree.AnyParameter;
 import org.sonar.python.api.tree.Parameter;
 import org.sonar.python.api.tree.ParameterList;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
 public class ParameterListImpl extends PyTree implements ParameterList {
 
   private final List<AnyParameter> parameters;
+  private final List<Token> commas;
 
-  public ParameterListImpl(List<AnyParameter> parameters) {
+  public ParameterListImpl(List<AnyParameter> parameters, List<Token> commas) {
     this.parameters = parameters;
+    this.commas = commas;
   }
 
   @Override
@@ -56,7 +60,16 @@ public class ParameterListImpl extends PyTree implements ParameterList {
 
   @Override
   public List<Tree> computeChildren() {
-    return Collections.unmodifiableList(parameters);
+    List<Tree> children = new ArrayList<>();
+    int i = 0;
+    for (Tree param : parameters) {
+      children.add(param);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    return children;
   }
 
   @Override

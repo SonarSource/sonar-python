@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ReturnStatement;
 import org.sonar.python.api.tree.Token;
@@ -34,12 +33,12 @@ import org.sonar.python.api.tree.TreeVisitor;
 public class ReturnStatementImpl extends PyTree implements ReturnStatement {
   private final Token returnKeyword;
   private final List<Expression> expressionTrees;
-  private final Token separator;
+  private final Separators separators;
 
-  public ReturnStatementImpl(Token returnKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
+  public ReturnStatementImpl(Token returnKeyword, List<Expression> expressionTrees, Separators separators) {
     this.returnKeyword = returnKeyword;
     this.expressionTrees = expressionTrees;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -64,12 +63,12 @@ public class ReturnStatementImpl extends PyTree implements ReturnStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, Collections.singletonList(separator))
+    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 }

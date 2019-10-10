@@ -22,7 +22,6 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.AssignmentStatement;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionList;
@@ -34,13 +33,13 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
   private final List<Token> assignTokens;
   private final List<ExpressionList> lhsExpressions;
   private final Expression assignedValue;
-  private final Token separator;
+  private final Separators separators;
 
-  public AssignmentStatementImpl(List<Token> assignTokens, List<ExpressionList> lhsExpressions, Expression assignedValue, @Nullable Token separator) {
+  public AssignmentStatementImpl(List<Token> assignTokens, List<ExpressionList> lhsExpressions, Expression assignedValue, Separators separators) {
     this.assignTokens = assignTokens;
     this.lhsExpressions = lhsExpressions;
     this.assignedValue = assignedValue;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -61,7 +60,7 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -86,9 +85,7 @@ public class AssignmentStatementImpl extends PyTree implements AssignmentStateme
       i++;
     }
     children.add(assignedValue);
-    if (separator != null) {
-      children.add(separator);
-    }
+    children.addAll(separators.elements());
     return children;
   }
 }

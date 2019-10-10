@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,25 +36,25 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
   private final Expression expression;
   private final Expression globalsExpression;
   private final Expression localsExpression;
-  private final Token separator;
+  private final Separators separators;
 
   public ExecStatementImpl(Token execKeyword, Expression expression,
-                                 @Nullable Expression globalsExpression, @Nullable Expression localsExpression, @Nullable Token separator) {
+                                 @Nullable Expression globalsExpression, @Nullable Expression localsExpression, Separators separators) {
     super(execKeyword, localsExpression == null ? (globalsExpression == null ? expression.lastToken() : globalsExpression.lastToken()): localsExpression.lastToken());
     this.execKeyword = execKeyword;
     this.expression = expression;
     this.globalsExpression = globalsExpression;
     this.localsExpression = localsExpression;
-    this.separator = separator;
+    this.separators = separators;
   }
 
-  public ExecStatementImpl(Token execKeyword, Expression expression, @Nullable Token separator) {
+  public ExecStatementImpl(Token execKeyword, Expression expression, Separators separators) {
     super(execKeyword, expression.lastToken());
     this.execKeyword = execKeyword;
     this.expression = expression;
     globalsExpression = null;
     localsExpression = null;
-    this.separator =separator;
+    this.separators = separators;
   }
 
   @Override
@@ -79,7 +80,7 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
   @Nullable
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -94,6 +95,7 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(execKeyword, expression, globalsExpression, localsExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Arrays.asList(execKeyword, expression, globalsExpression, localsExpression), separators.elements())
+      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
