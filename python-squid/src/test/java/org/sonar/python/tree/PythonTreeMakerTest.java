@@ -128,7 +128,8 @@ public class PythonTreeMakerTest extends RuleTest {
     fileInput = parse("\"\"\"\n" +
       "This is a module docstring\n" +
       "\"\"\"", treeMaker::fileInput);
-    assertThat(fileInput.docstring().value()).isEqualTo("\"\"\"\n" +
+    assertThat(fileInput.docstring().stringElements()).hasSize(1);
+    assertThat(fileInput.docstring().stringElements().get(0).value()).isEqualTo("\"\"\"\n" +
       "This is a module docstring\n" +
       "\"\"\"");
     assertThat(fileInput.children()).hasSize(2);
@@ -727,39 +728,39 @@ public class PythonTreeMakerTest extends RuleTest {
   public void funcdef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     AstNode astNode = p.parse("def func(): pass");
-    FunctionDef functionDefTree = treeMaker.funcDefStatement(astNode);
-    assertThat(functionDefTree.name()).isNotNull();
-    assertThat(functionDefTree.name().name()).isEqualTo("func");
-    assertThat(functionDefTree.body().statements()).hasSize(1);
-    assertThat(functionDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(functionDefTree.children()).hasSize(6);
-    assertThat(functionDefTree.parameters()).isNull();
-    assertThat(functionDefTree.isMethodDefinition()).isFalse();
-    assertThat(functionDefTree.docstring()).isNull();
-    assertThat(functionDefTree.decorators()).isEmpty();
-    assertThat(functionDefTree.asyncKeyword()).isNull();
-    assertThat(functionDefTree.returnTypeAnnotation()).isNull();
-    assertThat(functionDefTree.colon().value()).isEqualTo(":");
-    assertThat(functionDefTree.defKeyword().value()).isEqualTo("def");
-    assertThat(functionDefTree.leftPar().value()).isEqualTo("(");
-    assertThat(functionDefTree.rightPar().value()).isEqualTo(")");
+    FunctionDef functionDef = treeMaker.funcDefStatement(astNode);
+    assertThat(functionDef.name()).isNotNull();
+    assertThat(functionDef.name().name()).isEqualTo("func");
+    assertThat(functionDef.body().statements()).hasSize(1);
+    assertThat(functionDef.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(functionDef.children()).hasSize(6);
+    assertThat(functionDef.parameters()).isNull();
+    assertThat(functionDef.isMethodDefinition()).isFalse();
+    assertThat(functionDef.docstring()).isNull();
+    assertThat(functionDef.decorators()).isEmpty();
+    assertThat(functionDef.asyncKeyword()).isNull();
+    assertThat(functionDef.returnTypeAnnotation()).isNull();
+    assertThat(functionDef.colon().value()).isEqualTo(":");
+    assertThat(functionDef.defKeyword().value()).isEqualTo("def");
+    assertThat(functionDef.leftPar().value()).isEqualTo("(");
+    assertThat(functionDef.rightPar().value()).isEqualTo(")");
 
-    functionDefTree = parse("def func(x): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.parameters().all()).hasSize(1);
+    functionDef = parse("def func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).hasSize(1);
 
-    functionDefTree = parse("async def func(x): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.asyncKeyword().value()).isEqualTo("async");
+    functionDef = parse("async def func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.asyncKeyword().value()).isEqualTo("async");
 
-    functionDefTree = parse("def func(x) -> string : pass", treeMaker::funcDefStatement);
-    TypeAnnotation returnType = functionDefTree.returnTypeAnnotation();
+    functionDef = parse("def func(x) -> string : pass", treeMaker::funcDefStatement);
+    TypeAnnotation returnType = functionDef.returnTypeAnnotation();
     assertThat(returnType.getKind()).isEqualTo(Tree.Kind.RETURN_TYPE_ANNOTATION);
     assertThat(returnType.dash().value()).isEqualTo("-");
     assertThat(returnType.gt().value()).isEqualTo(">");
     assertThat(returnType.expression().getKind()).isEqualTo(Tree.Kind.NAME);
 
-    functionDefTree = parse("@foo\ndef func(x): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.decorators()).hasSize(1);
-    Decorator decoratorTree = functionDefTree.decorators().get(0);
+    functionDef = parse("@foo\ndef func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.decorators()).hasSize(1);
+    Decorator decoratorTree = functionDef.decorators().get(0);
     assertThat(decoratorTree.getKind()).isEqualTo(Tree.Kind.DECORATOR);
     assertThat(decoratorTree.atToken().value()).isEqualTo("@");
     assertThat(decoratorTree.name().names().get(0).name()).isEqualTo("foo");
@@ -767,21 +768,21 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(decoratorTree.arguments()).isNull();
     assertThat(decoratorTree.rightPar()).isNull();
 
-    functionDefTree = parse("@foo()\n@bar(1)\ndef func(x): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.decorators()).hasSize(2);
-    Decorator decoratorTree1 = functionDefTree.decorators().get(0);
+    functionDef = parse("@foo()\n@bar(1)\ndef func(x): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.decorators()).hasSize(2);
+    Decorator decoratorTree1 = functionDef.decorators().get(0);
     assertThat(decoratorTree1.leftPar().value()).isEqualTo("(");
     assertThat(decoratorTree1.arguments()).isNull();
     assertThat(decoratorTree1.rightPar().value()).isEqualTo(")");
-    Decorator decoratorTree2 = functionDefTree.decorators().get(1);
+    Decorator decoratorTree2 = functionDef.decorators().get(1);
     assertThat(decoratorTree2.arguments().arguments()).extracting(arg -> arg.expression().getKind()).containsExactly(Tree.Kind.NUMERIC_LITERAL);
 
-    functionDefTree = parse("def func(x, y): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.parameters().all()).hasSize(2);
+    functionDef = parse("def func(x, y): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).hasSize(2);
 
-    functionDefTree = parse("def func(x = 'foo', y): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.parameters().all()).isEqualTo(functionDefTree.parameters().nonTuple());
-    List<Parameter> parameters = functionDefTree.parameters().nonTuple();
+    functionDef = parse("def func(x = 'foo', y): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).isEqualTo(functionDef.parameters().nonTuple());
+    List<Parameter> parameters = functionDef.parameters().nonTuple();
     assertThat(parameters).hasSize(2);
     Parameter parameter1 = parameters.get(0);
     assertThat(parameter1.name().name()).isEqualTo("x");
@@ -793,8 +794,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parameter2.defaultValue()).isNull();
     assertThat(parameter2.children()).doesNotContainNull();
 
-    functionDefTree = parse("def func(p1, *p2, **p3): pass", treeMaker::funcDefStatement);
-    parameters = functionDefTree.parameters().nonTuple();
+    functionDef = parse("def func(p1, *p2, **p3): pass", treeMaker::funcDefStatement);
+    parameters = functionDef.parameters().nonTuple();
     assertThat(parameters).extracting(p -> p.name().name()).containsExactly("p1", "p2", "p3");
     assertThat(parameters).extracting(p -> p.starToken() == null ? null : p.starToken().value()).containsExactly(null, "*", "**");
     Parameter parameter = parameters.get(2);
@@ -802,8 +803,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(parameter.firstToken()).isSameAs(parameter.starToken());
     assertThat(parameter.lastToken()).isSameAs(parameter.name().lastToken());
 
-    functionDefTree = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
-    parameters = functionDefTree.parameters().nonTuple();
+    functionDef = parse("def func(x : int, y): pass", treeMaker::funcDefStatement);
+    parameters = functionDef.parameters().nonTuple();
     assertThat(parameters).hasSize(2);
     TypeAnnotation annotation = parameters.get(0).typeAnnotation();
     assertThat(annotation.getKind()).isEqualTo(Tree.Kind.TYPE_ANNOTATION);
@@ -812,75 +813,77 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(annotation.children()).hasSize(2);
     assertThat(parameters.get(1).typeAnnotation()).isNull();
 
-    functionDefTree = parse("def func(a, ((b, c), d)): pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.parameters().all()).hasSize(2);
-    assertThat(functionDefTree.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER, Tree.Kind.TUPLE_PARAMETER);
-    TupleParameter tupleParam = (TupleParameter) functionDefTree.parameters().all().get(1);
+    functionDef = parse("def func(a, ((b, c), d)): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).hasSize(2);
+    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Tree.Kind.PARAMETER, Tree.Kind.TUPLE_PARAMETER);
+    TupleParameter tupleParam = (TupleParameter) functionDef.parameters().all().get(1);
     assertThat(tupleParam.openingParenthesis().value()).isEqualTo("(");
     assertThat(tupleParam.closingParenthesis().value()).isEqualTo(")");
     assertThat(tupleParam.parameters()).extracting(Tree::getKind).containsExactly(Tree.Kind.TUPLE_PARAMETER, Tree.Kind.PARAMETER);
     assertThat(tupleParam.commas()).extracting(Token::value).containsExactly(",");
     assertThat(tupleParam.children()).hasSize(5);
 
-    functionDefTree = parse("def func(x : int, y):\n  \"\"\"\n" +
+    functionDef = parse("def func(x : int, y):\n  \"\"\"\n" +
       "This is a function docstring\n" +
       "\"\"\"\n  pass", treeMaker::funcDefStatement);
-    assertThat(functionDefTree.docstring().value()).isEqualTo("\"\"\"\n" +
+    assertThat(functionDef.docstring().stringElements().get(0).value()).isEqualTo("\"\"\"\n" +
       "This is a function docstring\n" +
       "\"\"\"");
+    assertThat(functionDef.children()).hasSize(10);
   }
 
   @Test
   public void classdef_statement() {
     setRootRule(PythonGrammar.CLASSDEF);
     AstNode astNode = p.parse("class clazz(Parent): pass");
-    ClassDef classDefTree = treeMaker.classDefStatement(astNode);
-    assertThat(classDefTree.name()).isNotNull();
-    assertThat(classDefTree.docstring()).isNull();
-    assertThat(classDefTree.classKeyword().value()).isEqualTo("class");
-    assertThat(classDefTree.leftPar().value()).isEqualTo("(");
-    assertThat(classDefTree.rightPar().value()).isEqualTo(")");
-    assertThat(classDefTree.colon().value()).isEqualTo(":");
-    assertThat(classDefTree.name().name()).isEqualTo("clazz");
-    assertThat(classDefTree.body().statements()).hasSize(1);
-    assertThat(classDefTree.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(classDefTree.args().is(Tree.Kind.ARG_LIST)).isTrue();
-    assertThat(classDefTree.args().children()).hasSize(1);
-    assertThat(classDefTree.args().arguments().get(0).is(Tree.Kind.ARGUMENT)).isTrue();
-    assertThat(classDefTree.decorators()).isEmpty();
+    ClassDef classDef = treeMaker.classDefStatement(astNode);
+    assertThat(classDef.name()).isNotNull();
+    assertThat(classDef.docstring()).isNull();
+    assertThat(classDef.classKeyword().value()).isEqualTo("class");
+    assertThat(classDef.leftPar().value()).isEqualTo("(");
+    assertThat(classDef.rightPar().value()).isEqualTo(")");
+    assertThat(classDef.colon().value()).isEqualTo(":");
+    assertThat(classDef.name().name()).isEqualTo("clazz");
+    assertThat(classDef.body().statements()).hasSize(1);
+    assertThat(classDef.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(classDef.args().is(Tree.Kind.ARG_LIST)).isTrue();
+    assertThat(classDef.args().children()).hasSize(1);
+    assertThat(classDef.args().arguments().get(0).is(Tree.Kind.ARGUMENT)).isTrue();
+    assertThat(classDef.decorators()).isEmpty();
 
-    classDefTree = parse("class clazz: pass", treeMaker::classDefStatement);
-    assertThat(classDefTree.leftPar()).isNull();
-    assertThat(classDefTree.rightPar()).isNull();
-    assertThat(classDefTree.args()).isNull();
+    classDef = parse("class clazz: pass", treeMaker::classDefStatement);
+    assertThat(classDef.leftPar()).isNull();
+    assertThat(classDef.rightPar()).isNull();
+    assertThat(classDef.args()).isNull();
 
-    classDefTree = parse("class clazz(): pass", treeMaker::classDefStatement);
-    assertThat(classDefTree.leftPar().value()).isEqualTo("(");
-    assertThat(classDefTree.rightPar().value()).isEqualTo(")");
-    assertThat(classDefTree.args()).isNull();
+    classDef = parse("class clazz(): pass", treeMaker::classDefStatement);
+    assertThat(classDef.leftPar().value()).isEqualTo("(");
+    assertThat(classDef.rightPar().value()).isEqualTo(")");
+    assertThat(classDef.args()).isNull();
 
     astNode = p.parse("@foo.bar\nclass clazz: pass");
-    classDefTree = treeMaker.classDefStatement(astNode);
-    assertThat(classDefTree.decorators()).hasSize(1);
-    Decorator decorator = classDefTree.decorators().get(0);
+    classDef = treeMaker.classDefStatement(astNode);
+    assertThat(classDef.decorators()).hasSize(1);
+    Decorator decorator = classDef.decorators().get(0);
     assertThat(decorator.name().names()).extracting(Name::name).containsExactly("foo", "bar");
 
     astNode = p.parse("class clazz:\n  def foo(): pass");
-    classDefTree = treeMaker.classDefStatement(astNode);
-    FunctionDef funcDef = (FunctionDef) classDefTree.body().statements().get(0);
+    classDef = treeMaker.classDefStatement(astNode);
+    FunctionDef funcDef = (FunctionDef) classDef.body().statements().get(0);
     assertThat(funcDef.isMethodDefinition()).isTrue();
 
     astNode = p.parse("class clazz:\n  if True:\n    def foo(): pass");
-    classDefTree = treeMaker.classDefStatement(astNode);
-    funcDef = (FunctionDef) ((IfStatement) classDefTree.body().statements().get(0)).body().statements().get(0);
+    classDef = treeMaker.classDefStatement(astNode);
+    funcDef = (FunctionDef) ((IfStatement) classDef.body().statements().get(0)).body().statements().get(0);
     assertThat(funcDef.isMethodDefinition()).isTrue();
 
     astNode = p.parse("class ClassWithDocstring:\n" +
       "\t\"\"\"This is a docstring\"\"\"\n" +
       "\tpass");
-    classDefTree = treeMaker.classDefStatement(astNode);
-    assertThat(classDefTree.docstring().value()).isEqualTo("\"\"\"This is a docstring\"\"\"");
-    assertThat(classDefTree.children()).hasSize(8);
+    classDef = treeMaker.classDefStatement(astNode);
+    assertThat(classDef.docstring().stringElements()).hasSize(1);
+    assertThat(classDef.docstring().stringElements().get(0).value()).isEqualTo("\"\"\"This is a docstring\"\"\"");
+    assertThat(classDef.children()).hasSize(7);
   }
 
   @Test

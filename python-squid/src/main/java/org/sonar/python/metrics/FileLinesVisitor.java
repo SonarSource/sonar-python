@@ -36,6 +36,7 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Trivia;
@@ -48,7 +49,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   /**
    * Tree.Kind.ELSE_STMT is not in this list to avoid counting else: lines as executables.
    * This is to replicate behavior of some python coverage tools (like what is done by coveralls).
-   * */
+   */
   private static final List<Tree.Kind> EXECUTABLE_LINES = Arrays.asList(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.COMPOUND_ASSIGNMENT, Tree.Kind.EXPRESSION_STMT, Tree.Kind.IMPORT_STMT,
     Tree.Kind.IMPORT_NAME, Tree.Kind.IMPORT_FROM, Tree.Kind.CONTINUE_STMT, Tree.Kind.BREAK_STMT, Tree.Kind.YIELD_STMT, Tree.Kind.RETURN_STMT, Tree.Kind.PRINT_STMT,
     Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
@@ -95,24 +96,26 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     Tree tree = ctx.syntaxNode();
     if (tree.is(Tree.Kind.FILE_INPUT)) {
       statements--;
-      docStringToken(((FileInput) tree).docstring());
+      handleDocString(((FileInput) tree).docstring());
     }
     if (tree.is(Tree.Kind.CLASSDEF)) {
       classDefs++;
-      docStringToken(((ClassDef) tree).docstring());
+      handleDocString(((ClassDef) tree).docstring());
     }
     if (tree.is(Tree.Kind.FUNCDEF)) {
-      docStringToken(((FunctionDef) tree).docstring());
+      handleDocString(((FunctionDef) tree).docstring());
     }
     statements++;
     executableLines.add(tree.firstToken().line());
   }
 
-  private void docStringToken(@Nullable Token docstringToken) {
-    if (docstringToken != null) {
-      TokenLocation location = new TokenLocation(docstringToken);
-      for (int line = location.startLine(); line <= location.endLine(); line++) {
-        linesOfDocstring.add(line);
+  private void handleDocString(@Nullable StringLiteral docstring) {
+    if (docstring != null) {
+      for (Tree stringElement : docstring.children()) {
+        TokenLocation location = new TokenLocation(stringElement.firstToken());
+        for (int line = location.startLine(); line <= location.endLine(); line++) {
+          linesOfDocstring.add(line);
+        }
       }
     }
   }

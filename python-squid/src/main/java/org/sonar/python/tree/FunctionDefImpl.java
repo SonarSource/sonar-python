@@ -33,6 +33,7 @@ import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.ParameterList;
 import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
@@ -56,13 +57,13 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private final Token dedent;
 
   private final boolean isMethodDefinition;
-  private final Token docstring;
+  private final StringLiteral docstring;
   private Set<Symbol> symbols = new HashSet<>();
 
   public FunctionDefImpl(List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
                          Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
                          Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
-                         boolean isMethodDefinition, @Nullable Token docstring) {
+                         boolean isMethodDefinition, @Nullable StringLiteral docstring) {
     this.decorators = decorators;
     this.asyncKeyword = asyncKeyword;
     this.defKeyword = defKeyword;
@@ -140,7 +141,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
 
   @CheckForNull
   @Override
-  public Token docstring() {
+  public StringLiteral docstring() {
     return docstring;
   }
 
@@ -165,7 +166,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, docstring, body, dedent))
+    return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

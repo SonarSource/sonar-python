@@ -28,3 +28,8 @@ class ClassWithoutDocstring:
 
 	def method_without_docstring():
 		pass
+
+def function_with_unusual_docstring(): "This is still" \
+							 "a docstring"; pass
+
+def function_with_no_docstring(): "This is not", "a docstring"; pass

@@ -49,7 +49,7 @@ public interface ClassDef extends Statement {
   StatementList body();
 
   @CheckForNull
-  Token docstring();
+  StringLiteral docstring();
 
   Set<Symbol> classFields();
 

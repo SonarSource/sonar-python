@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
@@ -28,7 +27,7 @@ import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Token;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -37,7 +36,6 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
 
   public static final String CHECK_KEY = "S1720";
 
-  private static final Pattern EMPTY_STRING_REGEXP = Pattern.compile("([bruBRU]+)?('\\s*')|(\"\\s*\")|('''\\s*''')|(\"\"\"\\s*\"\"\")");
   private static final String MESSAGE_NO_DOCSTRING = "Add a docstring to this %s.";
   private static final String MESSAGE_EMPTY_DOCSTRING = "The docstring for this %s should not be empty.";
 
@@ -61,12 +59,12 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((ClassDef) ctx.syntaxNode()).docstring()));
   }
 
-  private static void checkDocString(SubscriptionContext ctx, @CheckForNull Token docstring) {
+  private static void checkDocString(SubscriptionContext ctx, @CheckForNull StringLiteral docstring) {
     Tree tree = ctx.syntaxNode();
     DeclarationType type = getType(tree);
     if (docstring == null) {
       raiseIssueNoDocstring(tree, type, ctx);
-    } else if (EMPTY_STRING_REGEXP.matcher(docstring.value()).matches()) {
+    } else if (docstring.trimmedQuotesValue().trim().length() == 0) {
       raiseIssue(tree, MESSAGE_EMPTY_DOCSTRING, type, ctx);
     }
   }
