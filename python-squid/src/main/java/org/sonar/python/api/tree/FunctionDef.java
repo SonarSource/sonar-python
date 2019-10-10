@@ -48,6 +48,6 @@ public interface FunctionDef extends Statement, FunctionLike {
   StatementList body();
 
   @CheckForNull
-  Token docstring();
+  StringLiteral docstring();
 
 }

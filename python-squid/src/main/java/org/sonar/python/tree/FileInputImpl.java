@@ -29,6 +29,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
@@ -38,10 +39,10 @@ public class FileInputImpl extends PyTree implements FileInput {
 
   private final StatementList statements;
   private final Token endOfFile;
-  private final Token docstring;
+  private final StringLiteral docstring;
   private final Set<Symbol> globalVariables = new HashSet<>();
 
-  public FileInputImpl(@Nullable StatementList statements, Token endOfFile, Token docstring) {
+  public FileInputImpl(@Nullable StatementList statements, Token endOfFile, @Nullable StringLiteral docstring) {
     super(statements == null ? endOfFile : statements.firstToken(), endOfFile);
     this.statements = statements;
     this.endOfFile = endOfFile;
@@ -61,7 +62,7 @@ public class FileInputImpl extends PyTree implements FileInput {
 
   @CheckForNull
   @Override
-  public Token docstring() {
+  public StringLiteral docstring() {
     return docstring;
   }
 

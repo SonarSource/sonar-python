@@ -19,15 +19,16 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.tree.ClassDef;
+import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.StringLiteral;
+import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,58 +36,58 @@ public class DocstringExtractorTest {
 
   private static final File BASE_DIR = new File("src/test/resources");
 
-  private static final String TRIPLE_QUOTES = "\"\"\"";
-
-  private Map<AstNode, Token> docstrings = new HashMap<>();
+  private Map<Tree, StringLiteral> docstrings = new HashMap<>();
 
   @Test
   public void test() {
     File file = new File(BASE_DIR, "docstring.py");
     TestPythonVisitorRunner.scanFile(file, new DocstringVisitor());
 
-    assertDocstring(PythonGrammar.FILE_INPUT, 1, String.format("%s\nThis is a module docstring\n%s", TRIPLE_QUOTES, TRIPLE_QUOTES));
-    assertDocstring(PythonGrammar.FUNCDEF, 5, TRIPLE_QUOTES + "This is a function docstring" + TRIPLE_QUOTES);
-    assertDocstring(PythonGrammar.FUNCDEF, 12, TRIPLE_QUOTES + " " + TRIPLE_QUOTES);
-    assertDocstring(PythonGrammar.FUNCDEF, 16, "\"This is a function docstring\"");
-    assertDocstring(PythonGrammar.CLASSDEF, 20, TRIPLE_QUOTES + "This is a class docstring" + TRIPLE_QUOTES);
-    assertDocstring(PythonGrammar.FUNCDEF, 25, "''' This is a method docstring '''");
+    assertDocstring(Tree.Kind.FILE_INPUT, 1, "\nThis is a module docstring\n");
+    assertDocstring(Tree.Kind.FUNCDEF, 5, "This is a function docstring");
+    assertDocstring(Tree.Kind.FUNCDEF, 12, " ");
+    assertDocstring(Tree.Kind.FUNCDEF, 16, "This is a function docstring");
+    assertDocstring(Tree.Kind.CLASSDEF, 20, "This is a class docstring");
+    assertDocstring(Tree.Kind.FUNCDEF, 25, " This is a method docstring ");
+    assertDocstring(Tree.Kind.FUNCDEF, 32, "This is stilla docstring");
 
-    assertThat(docstrings).hasSize(10);
-    assertThat(docstrings.values().stream().filter(Objects::nonNull)).hasSize(6);
+    assertThat(docstrings).hasSize(12);
+    assertThat(docstrings.values().stream().filter(Objects::nonNull)).hasSize(7);
   }
 
-  private void assertDocstring(PythonGrammar nodeType, int line, String expectedDocString) {
-    Token docString = getDocstring(nodeType, line);
-    assertThat(docString).as("docstring for AstNode of type " + nodeType + " at line " + line).isNotNull();
-    assertThat(docString.getValue()).isEqualTo(expectedDocString);
+  private void assertDocstring(Tree.Kind kind, int line, String expectedDocstring) {
+    StringLiteral docString = getDocstring(kind, line);
+    assertThat(docString).as("docstring for AstNode of type " + kind + " at line " + line).isNotNull();
+    assertThat(docString.trimmedQuotesValue()).isEqualTo(expectedDocstring);
   }
 
-  private Token getDocstring(PythonGrammar nodeType, int line) {
-    for (Map.Entry<AstNode, Token> e : docstrings.entrySet()) {
-      if (e.getKey().getType().equals(nodeType) && e.getKey().getTokenLine() == line) {
+  private StringLiteral getDocstring(Tree.Kind kind, int line) {
+    for (Map.Entry<Tree, StringLiteral> e : docstrings.entrySet()) {
+      if (e.getKey().is(kind) && e.getKey().firstToken().line() == line) {
         return e.getValue();
       }
     }
     return null;
   }
 
-  private class DocstringVisitor implements PythonCheck {
+  private class DocstringVisitor extends PythonCheckTree {
 
     @Override
-    public void scanFile(PythonVisitorContext visitorContext) {
-      scanNode(visitorContext.rootAstNode());
-
+    public void visitFileInput(FileInput fileInput) {
+      docstrings.put(fileInput, DocstringExtractor.extractDocstring(fileInput.statements()));
+      super.visitFileInput(fileInput);
     }
-    private void scanNode(AstNode node) {
-      if (node.is(PythonGrammar.FILE_INPUT, PythonGrammar.FUNCDEF, PythonGrammar.CLASSDEF)) {
-        docstrings.put(node, DocstringExtractor.extractDocstring(node));
-      }
 
-      List<AstNode> children = node.getChildren();
-      for (AstNode child : children) {
-        scanNode(child);
-      }
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      docstrings.put(functionDef, DocstringExtractor.extractDocstring(functionDef.body()));
+      super.visitFunctionDef(functionDef);
+    }
+
+    @Override
+    public void visitClassDef(ClassDef classDef) {
+      docstrings.put(classDef, DocstringExtractor.extractDocstring(classDef.body()));
+      super.visitClassDef(classDef);
     }
   }
-
 }

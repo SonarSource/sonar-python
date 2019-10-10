@@ -36,6 +36,7 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Trivia;
@@ -111,12 +112,14 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken(((Token) ctx.syntaxNode())));
   }
 
-  private void checkFirstStatement(@Nullable Token docStringToken) {
-    if (docStringToken == null) {
+  private void checkFirstStatement(@Nullable StringLiteral docString) {
+    if (docString == null) {
       return;
     }
-    highlight(docStringToken, TypeOfText.STRUCTURED_COMMENT);
-    docStringTokens.add(docStringToken);
+    for (Tree stringElement : docString.children()) {
+      highlight(stringElement.firstToken(), TypeOfText.STRUCTURED_COMMENT);
+      docStringTokens.add(stringElement.firstToken());
+    }
   }
 
   private void visitToken(Token token) {

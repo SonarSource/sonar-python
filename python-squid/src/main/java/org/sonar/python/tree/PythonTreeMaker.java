@@ -97,7 +97,7 @@ public class PythonTreeMaker {
     List<Statement> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
     StatementListImpl statementList = statements.isEmpty() ? null : new StatementListImpl(statements, toPyToken(astNode.getTokens()));
     Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
-    FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, toPyToken(DocstringExtractor.extractDocstring(astNode)));
+    FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
     setParents(pyFileInputTree);
     return pyFileInputTree;
   }
@@ -546,7 +546,7 @@ public class PythonTreeMaker {
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     return new FunctionDefImpl(decorators, asyncToken, toPyToken(defNode.getToken()), name, lPar, parameterList, rPar,
       returnType, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite),
-      isMethodDefinition(astNode), toPyToken(DocstringExtractor.extractDocstring(astNode)));
+      isMethodDefinition(astNode), DocstringExtractor.extractDocstring(body));
   }
 
   private Decorator decorator(AstNode astNode) {
@@ -588,7 +588,7 @@ public class PythonTreeMaker {
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     return new ClassDefImpl(decorators, classToken, name,
       leftPar != null ? toPyToken(leftPar.getToken()) : null, args, rightPar != null ? toPyToken(rightPar.getToken()) : null,
-      colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), toPyToken(DocstringExtractor.extractDocstring(astNode)));
+      colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), DocstringExtractor.extractDocstring(body));
   }
 
   private static Name name(AstNode astNode) {

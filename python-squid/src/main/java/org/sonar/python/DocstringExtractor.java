@@ -19,11 +19,12 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 import javax.annotation.Nullable;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.api.tree.ExpressionStatement;
+import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.StatementList;
+import org.sonar.python.api.tree.StringLiteral;
+import org.sonar.python.api.tree.Tree;
 
 /**
  * Extractor of docstring tokens.
@@ -36,50 +37,14 @@ public class DocstringExtractor {
   private DocstringExtractor() {
   }
 
-  public static Token extractDocstring(AstNode documentableNode) {
-    if (documentableNode.is(PythonGrammar.FILE_INPUT)) {
-      return extractModuleDocstring(documentableNode);
-    }
-    return extractDocstringFromFirstSuite(documentableNode);
-  }
-
-  private static Token extractModuleDocstring(AstNode astNode) {
-    AstNode firstStatement = astNode.getFirstChild(PythonGrammar.STATEMENT);
-    AstNode firstSimpleStmt = null;
-    if (firstStatement != null) {
-      firstSimpleStmt = getFirstSimpleStmt(firstStatement);
-    }
-    return extractDocstringFromSimpleStmt(firstSimpleStmt);
-  }
-
-  private static AstNode getFirstSimpleStmt(AstNode statement) {
-    AstNode stmtList = statement.getFirstChild(PythonGrammar.STMT_LIST);
-    if (stmtList != null) {
-      return stmtList.getFirstChild(PythonGrammar.SIMPLE_STMT);
-    }
-    return null;
-  }
-
-  private static Token extractDocstringFromFirstSuite(AstNode documentableNode) {
-    AstNode suite = documentableNode.getFirstChild(PythonGrammar.SUITE);
-    AstNode firstStatement = suite.getFirstChild(PythonGrammar.STATEMENT);
-    AstNode firstSimpleStmt;
-    if (firstStatement == null) {
-      firstSimpleStmt = suite.getFirstChild(PythonGrammar.STMT_LIST).getFirstChild(PythonGrammar.SIMPLE_STMT);
-    } else {
-      firstSimpleStmt = getFirstSimpleStmt(firstStatement);
-    }
-    return extractDocstringFromSimpleStmt(firstSimpleStmt);
-  }
-
-  private static Token extractDocstringFromSimpleStmt(@Nullable AstNode firstSimpleStmt) {
-    if (firstSimpleStmt != null) {
-      Token token = firstSimpleStmt.getToken();
-      if (token.getType().equals(PythonTokenType.STRING)) {
-        return token;
+  public static StringLiteral extractDocstring(@Nullable StatementList statements) {
+    if (statements != null) {
+      Statement firstStatement = statements.statements().get(0);
+      if (firstStatement.is(Tree.Kind.EXPRESSION_STMT) && ((ExpressionStatement) firstStatement).expressions().size() == 1
+        && firstStatement.children().get(0).is(Tree.Kind.STRING_LITERAL)) {
+        return (StringLiteral) firstStatement.children().get(0);
       }
     }
     return null;
   }
-
 }

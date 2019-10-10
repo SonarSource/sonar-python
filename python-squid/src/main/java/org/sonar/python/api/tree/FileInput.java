@@ -28,7 +28,7 @@ public interface FileInput extends Tree {
   StatementList statements();
 
   @CheckForNull
-  Token docstring();
+  StringLiteral docstring();
 
   Set<Symbol> globalVariables();
 }
