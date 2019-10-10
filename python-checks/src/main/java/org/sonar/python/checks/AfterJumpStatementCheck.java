@@ -58,7 +58,7 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
           .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
           .map(block -> block.elements().get(block.elements().size() - 1))
           .collect(Collectors.toList());
-        if (isInsideFinallyClause(firstElement) || jumpStatements.stream().anyMatch(AfterJumpStatementCheck::isRaiseInsideWithStatement)) {
+        if (isInsideFinallyClause(firstElement)) {
           continue;
         }
         Tree lastElement = cfgBlock.elements().get(cfgBlock.elements().size() - 1);
@@ -66,12 +66,6 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
         jumpStatements.forEach(jumpStatement -> issue.secondary(jumpStatement, null));
       }
     }
-  }
-
-  // To avoid FP, we assume that exception raised inside with statement will be suppressed by __exit__() method of Context Manager
-  // see https://docs.python.org/3/reference/compound_stmts.html#the-with-statement
-  private static boolean isRaiseInsideWithStatement(Tree element) {
-    return element.is(Kind.RAISE_STMT) && TreeUtils.firstAncestorOfKind(element, Kind.WITH_STMT) != null;
   }
 
   // due to CFG limitation on jump statements inside try blocks, we exclude finally clause to avoid FP.

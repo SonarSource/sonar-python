@@ -176,3 +176,8 @@ def while_dead_code_in_else_clause_condition_true(x):
     else:
         print('dead code!') # FN, we don't take into account while condition being always true
     print("end of loop")
+
+def code_after_with():
+    with A():
+        return e
+    return False

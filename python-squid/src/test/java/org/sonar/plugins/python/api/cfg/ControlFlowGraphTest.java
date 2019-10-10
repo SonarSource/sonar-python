@@ -407,9 +407,9 @@ public class ControlFlowGraphTest {
   @Test
   public void with_statement() {
     verifyCfg(
-      "before(succ = [if_body, END])",
+      "before(succ = [with_block, END])",
       "with A() as a:",
-      "  if cond:",
+      "  if with_block(succ = [if_body, END]):",
       "    if_body(succ = [END])"
     );
   }
