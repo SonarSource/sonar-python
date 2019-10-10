@@ -30,12 +30,11 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class ContinueStatementImpl extends PyTree implements ContinueStatement {
+public class ContinueStatementImpl extends SimpleStatement implements ContinueStatement {
   private final Token continueKeyword;
   private final Separators separators;
 
   public ContinueStatementImpl(Token continueKeyword, Separators separators) {
-    super(continueKeyword, continueKeyword);
     this.continueKeyword = continueKeyword;
     this.separators = separators;
   }

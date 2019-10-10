@@ -40,7 +40,6 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
 
   public ComprehensionExpressionImpl(Kind kind, Token openingToken, Expression resultExpression,
                                      ComprehensionFor compFor, Token closingToken) {
-    super(openingToken, closingToken);
     this.kind = kind;
     this.resultExpression = resultExpression;
     this.comprehensionFor = compFor;

@@ -32,18 +32,21 @@ import org.sonar.python.api.tree.Tree;
 
 public class DictCompExpressionImpl extends PyTree implements DictCompExpression {
 
+  private final Token openingBrace;
   private final Expression keyExpression;
   private final Token colon;
   private final Expression valueExpression;
   private final ComprehensionFor comprehensionFor;
+  private final Token closingBrace;
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
                                 ComprehensionFor compFor, Token closingBrace) {
-    super(openingBrace, closingBrace);
+    this.openingBrace = openingBrace;
     this.keyExpression = keyExpression;
     this.colon = colon;
     this.valueExpression = valueExpression;
     this.comprehensionFor = compFor;
+    this.closingBrace = closingBrace;
   }
 
   @Override
@@ -73,7 +76,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(keyExpression, colon, valueExpression, comprehensionFor).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(openingBrace, keyExpression, colon, valueExpression, comprehensionFor, closingBrace).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

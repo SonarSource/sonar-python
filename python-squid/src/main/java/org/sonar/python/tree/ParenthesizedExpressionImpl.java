@@ -35,7 +35,6 @@ public class ParenthesizedExpressionImpl extends PyTree implements Parenthesized
   private final Token rightParenthesis;
 
   public ParenthesizedExpressionImpl(Token leftParenthesis, Expression expression, Token rightParenthesis) {
-    super(leftParenthesis, rightParenthesis);
     this.leftParenthesis = leftParenthesis;
     this.expression = expression;
     this.rightParenthesis = rightParenthesis;

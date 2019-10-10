@@ -39,7 +39,6 @@ public class KeyValuePairImpl extends PyTree implements KeyValuePair {
   private final Expression value;
 
   public KeyValuePairImpl(Token starStarToken, Expression expression) {
-    super(starStarToken, expression.lastToken());
     this.starStarToken = starStarToken;
     this.expression = expression;
     this.key = null;
@@ -48,7 +47,6 @@ public class KeyValuePairImpl extends PyTree implements KeyValuePair {
   }
 
   public KeyValuePairImpl(Expression key, Token colon, Expression value) {
-    super(key.firstToken(), value.lastToken());
     this.key = key;
     this.colon = colon;
     this.value = value;

@@ -31,13 +31,12 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class DelStatementImpl extends PyTree implements DelStatement {
+public class DelStatementImpl extends SimpleStatement implements DelStatement {
   private final Token delKeyword;
   private final List<Expression> expressionTrees;
   private final Separators separators;
 
   public DelStatementImpl(Token delKeyword, List<Expression> expressionTrees, Separators separators) {
-    super(delKeyword, expressionTrees.isEmpty() ? delKeyword : expressionTrees.get(expressionTrees.size() - 1).lastToken());
     this.delKeyword = delKeyword;
     this.expressionTrees = expressionTrees;
     this.separators = separators;

@@ -35,7 +35,6 @@ public class NameImpl extends PyTree implements Name {
   private Symbol symbol;
 
   public NameImpl(Token token, boolean isVariable) {
-    super(token, token);
     this.token = token;
     this.name = token.value();
     this.isVariable = isVariable;

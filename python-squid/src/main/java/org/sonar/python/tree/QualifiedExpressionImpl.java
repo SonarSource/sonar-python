@@ -35,7 +35,6 @@ public class QualifiedExpressionImpl extends PyTree implements QualifiedExpressi
   private final Token dotToken;
 
   public QualifiedExpressionImpl(Name name, Expression qualifier, Token dotToken) {
-    super(qualifier.firstToken(), name.lastToken());
     this.name = name;
     this.qualifier = qualifier;
     this.dotToken = dotToken;

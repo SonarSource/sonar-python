@@ -29,10 +29,11 @@ import org.sonar.python.api.tree.Tree;
 public class StringElementImpl extends PyTree implements StringElement {
 
   private final String value;
+  private final Token token;
 
   public StringElementImpl(Token token) {
-    super(token, token);
     value = token.value();
+    this.token = token;
   }
 
   @Override
@@ -47,7 +48,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Collections.singletonList(firstToken());
+    return Collections.singletonList(token);
   }
 
   @Override

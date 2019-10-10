@@ -31,7 +31,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class AssertStatementImpl extends PyTree implements AssertStatement {
+public class AssertStatementImpl extends SimpleStatement implements AssertStatement {
   private final Token assertKeyword;
   private final Expression condition;
   @Nullable

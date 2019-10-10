@@ -31,13 +31,12 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class GlobalStatementImpl extends PyTree implements GlobalStatement {
+public class GlobalStatementImpl extends SimpleStatement implements GlobalStatement {
   private final Token globalKeyword;
   private final List<Name> variables;
   private final Separators separators;
 
   public GlobalStatementImpl(Token globalKeyword, List<Name> variables, Separators separators) {
-    super(globalKeyword, variables.get(variables.size() - 1).lastToken());
     this.globalKeyword = globalKeyword;
     this.variables = variables;
     this.separators = separators;

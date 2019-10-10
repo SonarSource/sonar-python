@@ -20,20 +20,14 @@
 package org.sonar.python.tree;
 
 import java.util.List;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 public abstract class PyTree implements Tree {
-  private Token firstToken;
-  private Token lastToken;
+  protected Token firstToken;
+  protected Token lastToken;
   private List<Tree> childs;
   private Tree parent = null;
-
-  public PyTree(Token firstToken, Token lastToken) {
-    this.firstToken = firstToken;
-    this.lastToken = lastToken;
-  }
 
   protected PyTree() {
   }
@@ -51,7 +45,7 @@ public abstract class PyTree implements Tree {
 
   @Override
   public Token firstToken() {
-    if(firstToken == null) {
+    if (firstToken == null) {
       List<Tree> children = children();
       if (children.isEmpty()) {
         this.firstToken = null;
@@ -65,21 +59,17 @@ public abstract class PyTree implements Tree {
 
   @Override
   public Token lastToken() {
-    if(lastToken == null) {
+    if (lastToken == null) {
       List<Tree> children = children();
       if (children.isEmpty()) {
-        this.lastToken = null;
+        this.firstToken = null;
       } else {
         Tree last = children.get(children.size() - 1);
-        if (last.is(Kind.TOKEN) && ((Token) last).type() == PythonTokenType.NEWLINE) {
-          last = children.get(children.size() - 2);
-        }
         this.lastToken = last.is(Kind.TOKEN) ? (Token) last : last.lastToken();
       }
     }
     return lastToken;
   }
-
 
 
   @Override

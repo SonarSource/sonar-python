@@ -43,7 +43,6 @@ public class FileInputImpl extends PyTree implements FileInput {
   private final Set<Symbol> globalVariables = new HashSet<>();
 
   public FileInputImpl(@Nullable StatementList statements, Token endOfFile, @Nullable StringLiteral docstring) {
-    super(statements == null ? endOfFile : statements.firstToken(), endOfFile);
     this.statements = statements;
     this.endOfFile = endOfFile;
     this.docstring = docstring;

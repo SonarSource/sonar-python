@@ -30,7 +30,7 @@ import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.YieldExpression;
 import org.sonar.python.api.tree.YieldStatement;
 
-public class YieldStatementImpl extends PyTree implements YieldStatement {
+public class YieldStatementImpl extends SimpleStatement implements YieldStatement {
   private final YieldExpression yieldExpression;
   private final Separators separators;
 

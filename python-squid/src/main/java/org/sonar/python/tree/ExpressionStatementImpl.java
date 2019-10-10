@@ -29,12 +29,11 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class ExpressionStatementImpl extends PyTree implements ExpressionStatement {
+public class ExpressionStatementImpl extends SimpleStatement implements ExpressionStatement {
   private final List<Expression> expressions;
   private final Separators separators;
 
   public ExpressionStatementImpl(List<Expression> expressions, Separators separators) {
-    super(expressions.get(0).firstToken(), expressions.get(expressions.size() - 1).lastToken());
     this.expressions = expressions;
     this.separators = separators;
   }

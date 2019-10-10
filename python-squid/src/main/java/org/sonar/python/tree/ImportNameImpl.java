@@ -31,14 +31,13 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class ImportNameImpl extends PyTree implements ImportName {
+public class ImportNameImpl extends SimpleStatement implements ImportName {
 
   private final Token importKeyword;
   private final List<AliasedName> aliasedNames;
   private final Separators separators;
 
   public ImportNameImpl(Token importKeyword, List<AliasedName> aliasedNames, Separators separators) {
-    super(importKeyword, aliasedNames.get(aliasedNames.size() - 1).lastToken());
     this.importKeyword = importKeyword;
     this.aliasedNames = aliasedNames;
     this.separators = separators;

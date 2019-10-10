@@ -34,7 +34,6 @@ public class ReprExpressionImpl extends PyTree implements ReprExpression {
   private final Token closingBacktick;
 
   public ReprExpressionImpl(Token openingBacktick, ExpressionList expressionListTree, Token closingBacktick) {
-    super(openingBacktick, closingBacktick);
     this.openingBacktick = openingBacktick;
     this.expressionListTree = expressionListTree;
     this.closingBacktick = closingBacktick;

@@ -31,6 +31,10 @@ public interface Tree {
 
   Token firstToken();
 
+  /**
+   * @return the last meaningful token of the Tree.
+   * Separators of simple statements (semicolon and/or newline) should not be returned by this method.
+   */
   Token lastToken();
 
   Tree parent();

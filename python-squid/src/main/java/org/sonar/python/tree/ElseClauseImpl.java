@@ -39,7 +39,6 @@ public class ElseClauseImpl extends PyTree implements ElseClause {
   private final Token dedent;
 
   public ElseClauseImpl(Token elseKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent) {
-    super(elseKeyword, body.lastToken());
     this.elseKeyword = elseKeyword;
     this.colon = colon;
     this.newLine = newLine;

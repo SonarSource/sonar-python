@@ -34,7 +34,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class ImportFromImpl extends PyTree implements ImportFrom {
+public class ImportFromImpl extends SimpleStatement implements ImportFrom {
   private final Token fromKeyword;
   private final List<Token> dottedPrefixForModule;
   private final DottedName moduleName;

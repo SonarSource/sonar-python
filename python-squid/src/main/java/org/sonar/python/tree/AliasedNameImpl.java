@@ -38,14 +38,12 @@ public class AliasedNameImpl extends PyTree implements AliasedName {
   private final Name alias;
 
   public AliasedNameImpl(Token asKeyword, DottedName dottedName, Name alias) {
-    super(dottedName.firstToken(), alias.lastToken());
     this.asKeyword = asKeyword;
     this.dottedName = dottedName;
     this.alias = alias;
   }
 
   public AliasedNameImpl(DottedName dottedName) {
-    super(dottedName.firstToken(), dottedName.lastToken());
     this.asKeyword = null;
     this.dottedName = dottedName;
     this.alias = null;

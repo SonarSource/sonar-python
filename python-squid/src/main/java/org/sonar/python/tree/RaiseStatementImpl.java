@@ -33,7 +33,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class RaiseStatementImpl extends PyTree implements RaiseStatement {
+public class RaiseStatementImpl extends SimpleStatement implements RaiseStatement {
   private final Token raiseKeyword;
   private final List<Expression> expressions;
   private final Token fromKeyword;

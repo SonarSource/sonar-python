@@ -32,7 +32,6 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
   private final Token token;
 
   NumericLiteralImpl(Token token) {
-    super(token, token);
     this.token = token;
     valueAsString = token.value();
   }

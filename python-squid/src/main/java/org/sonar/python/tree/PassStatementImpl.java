@@ -30,12 +30,11 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class PassStatementImpl extends PyTree implements PassStatement {
+public class PassStatementImpl extends SimpleStatement implements PassStatement {
   private final Token passKeyword;
   private final Separators separators;
 
   public PassStatementImpl(Token passKeyword, Separators separators) {
-    super(passKeyword, passKeyword);
     this.passKeyword = passKeyword;
     this.separators = separators;
   }

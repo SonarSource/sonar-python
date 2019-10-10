@@ -32,8 +32,6 @@ public class ExpressionListImpl extends PyTree implements ExpressionList {
   private final List<Token> commas;
 
   public ExpressionListImpl(List<Expression> expressions, List<Token> commas) {
-    super(expressions.isEmpty() ? null : expressions.get(0).firstToken(),
-      expressions.isEmpty() ? null : expressions.get(expressions.size() - 1).lastToken());
     this.expressions = expressions;
     this.commas = commas;
   }

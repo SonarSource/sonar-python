@@ -31,7 +31,6 @@ public abstract class DictOrSetLiteralImpl<E extends Tree> extends PyTree {
   private final Token rCurlyBrace;
 
   public DictOrSetLiteralImpl(Token lCurlyBrace, List<Token> commas, List<E> elements, Token rCurlyBrace) {
-    super(lCurlyBrace, rCurlyBrace);
     this.lCurlyBrace = lCurlyBrace;
     this.commas = commas;
     this.elements = elements;

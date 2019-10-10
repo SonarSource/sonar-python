@@ -45,7 +45,6 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   private final Expression exceptionInstance;
 
   public ExceptClauseImpl(Token exceptKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent) {
-    super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.colon = colon;
     this.newLine = newLine;
@@ -60,7 +59,6 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
 
   public ExceptClauseImpl(Token exceptKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
                           Expression exception, @Nullable Token asNode, @Nullable Token commaNode, Expression exceptionInstance) {
-    super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.colon = colon;
     this.newLine = newLine;
@@ -74,7 +72,6 @@ public class ExceptClauseImpl extends PyTree implements ExceptClause {
   }
 
   public ExceptClauseImpl(Token exceptKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent, Expression exception) {
-    super(exceptKeyword, body.lastToken());
     this.exceptKeyword = exceptKeyword;
     this.colon = colon;
     this.newLine = newLine;
