@@ -37,6 +37,7 @@ import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.api.tree.WhileStatement;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1751")
@@ -94,9 +95,13 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean breakOfInnerLoop(CfgBlock block, CfgBranchingBlock loopBlock) {
+    WhileStatement loop = (WhileStatement) loopBlock.branchingTree();
+    CfgBlock breakTarget = loop.elseBody() == null
+      ? loopBlock.falseSuccessor()
+      // assumption: elseBlock is always a simple block, hence having only one successor
+      : loopBlock.falseSuccessor().successors().iterator().next();
     Tree jumpStatement = block.elements().get(block.elements().size() - 1);
-    // TODO: handle loops having else clause when SONARPY-445 will be implemented
-    return jumpStatement.is(Kind.BREAK_STMT) && block.successors().stream().noneMatch(b -> b == loopBlock.falseSuccessor());
+    return jumpStatement.is(Kind.BREAK_STMT) && block.successors().stream().noneMatch(b -> b == breakTarget);
   }
 
   private static boolean blockInsideLoop(CfgBlock block, Tree loop) {
