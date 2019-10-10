@@ -20,26 +20,22 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.Token;
+import javax.annotation.Nullable;
 
 public class StatementWithSeparator {
   private AstNode statement;
-  private AstNode separator;
+  private Separators separators;
 
-  StatementWithSeparator(AstNode statement, @CheckForNull AstNode separator) {
+  StatementWithSeparator(AstNode statement, @Nullable Separators separators) {
     this.statement = statement;
-    this.separator = separator;
+    this.separators = separators == null ? Separators.EMPTY : separators;
   }
 
   public AstNode statement() {
     return statement;
   }
 
-  public Token separator() {
-    if (separator == null) {
-      return null;
-    }
-    return new TokenImpl(separator.getToken());
+  public Separators separator() {
+    return separators;
   }
 }

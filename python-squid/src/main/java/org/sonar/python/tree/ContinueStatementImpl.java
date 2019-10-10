@@ -19,12 +19,12 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
@@ -32,12 +32,12 @@ import org.sonar.python.api.tree.TreeVisitor;
 
 public class ContinueStatementImpl extends PyTree implements ContinueStatement {
   private final Token continueKeyword;
-  private final Token separator;
+  private final Separators separators;
 
-  public ContinueStatementImpl(Token continueKeyword, @Nullable Token separator) {
+  public ContinueStatementImpl(Token continueKeyword, Separators separators) {
     super(continueKeyword, continueKeyword);
     this.continueKeyword = continueKeyword;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -48,7 +48,7 @@ public class ContinueStatementImpl extends PyTree implements ContinueStatement {
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -63,6 +63,6 @@ public class ContinueStatementImpl extends PyTree implements ContinueStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(continueKeyword, separator).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(continueKeyword), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

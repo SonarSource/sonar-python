@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.GlobalStatement;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Token;
@@ -35,13 +34,13 @@ import org.sonar.python.api.tree.TreeVisitor;
 public class GlobalStatementImpl extends PyTree implements GlobalStatement {
   private final Token globalKeyword;
   private final List<Name> variables;
-  private final Token separator;
+  private final Separators separators;
 
-  public GlobalStatementImpl(Token globalKeyword, List<Name> variables, @Nullable Token separator) {
+  public GlobalStatementImpl(Token globalKeyword, List<Name> variables, Separators separators) {
     super(globalKeyword, variables.get(variables.size() - 1).lastToken());
     this.globalKeyword = globalKeyword;
     this.variables = variables;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -62,7 +61,7 @@ public class GlobalStatementImpl extends PyTree implements GlobalStatement {
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -72,7 +71,7 @@ public class GlobalStatementImpl extends PyTree implements GlobalStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(globalKeyword), variables, Collections.singletonList(separator))
+    return Stream.of(Collections.singletonList(globalKeyword), variables, separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

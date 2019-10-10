@@ -42,10 +42,10 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   private final List<AliasedName> aliasedImportNames;
   private final boolean isWildcardImport;
   private final Token wildcard;
-  private final Token separator;
+  private final Separators separators;
 
   public ImportFromImpl(Token fromKeyword, @Nullable List<Token> dottedPrefixForModule, @Nullable DottedName moduleName,
-                        Token importKeyword, @Nullable List<AliasedName> aliasedImportNames, @Nullable Token wildcard, @Nullable Token separator) {
+                        Token importKeyword, @Nullable List<AliasedName> aliasedImportNames, @Nullable Token wildcard, Separators separators) {
     this.fromKeyword = fromKeyword;
     this.dottedPrefixForModule = dottedPrefixForModule;
     this.moduleName = moduleName;
@@ -53,7 +53,7 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
     this.aliasedImportNames = aliasedImportNames == null ? Collections.emptyList() : aliasedImportNames;
     this.wildcard = wildcard;
     this.isWildcardImport = wildcard != null;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -97,7 +97,7 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -113,6 +113,6 @@ public class ImportFromImpl extends PyTree implements ImportFrom {
   @Override
   public List<Tree> computeChildren() {
     return Stream.of(Collections.singletonList(fromKeyword), dottedPrefixForModule, Arrays.asList(moduleName, importKeyword), aliasedImportNames,
-      Arrays.asList(wildcard, separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+      Collections.singletonList(wildcard), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

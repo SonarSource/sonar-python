@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.ImportName;
 import org.sonar.python.api.tree.Token;
@@ -36,13 +35,13 @@ public class ImportNameImpl extends PyTree implements ImportName {
 
   private final Token importKeyword;
   private final List<AliasedName> aliasedNames;
-  private final Token separator;
+  private final Separators separators;
 
-  public ImportNameImpl(Token importKeyword, List<AliasedName> aliasedNames, @Nullable Token separator) {
+  public ImportNameImpl(Token importKeyword, List<AliasedName> aliasedNames, Separators separators) {
     super(importKeyword, aliasedNames.get(aliasedNames.size() - 1).lastToken());
     this.importKeyword = importKeyword;
     this.aliasedNames = aliasedNames;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -58,7 +57,7 @@ public class ImportNameImpl extends PyTree implements ImportName {
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -73,7 +72,7 @@ public class ImportNameImpl extends PyTree implements ImportName {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(importKeyword), aliasedNames, Collections.singletonList(separator))
+    return Stream.of(Collections.singletonList(importKeyword), aliasedNames, separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

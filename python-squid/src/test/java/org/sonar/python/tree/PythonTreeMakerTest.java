@@ -2153,7 +2153,7 @@ public class PythonTreeMakerTest extends RuleTest {
     token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.type()).isEqualTo(PythonTokenType.NEWLINE);
 
-    // Check that the second semicolon should be ignored
+    // Check that the second semicolon is not ignored
     tree = parse("foo(); bar();\ntoto()", treeMaker::fileInput);
     statements = tree.statements().statements();
     statementChildren = statements.get(0).children();
@@ -2162,6 +2162,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(token.type()).isEqualTo(PythonPunctuator.SEMICOLON);
 
     statementChildren = statements.get(1).children();
+    assertThat(statementChildren.get(statementChildren.size() - 2).is(Tree.Kind.TOKEN)).isTrue();
+    token = (Token) statementChildren.get(statementChildren.size() - 2);
+    assertThat(token.type()).isEqualTo(PythonPunctuator.SEMICOLON);
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.type()).isEqualTo(PythonTokenType.NEWLINE);

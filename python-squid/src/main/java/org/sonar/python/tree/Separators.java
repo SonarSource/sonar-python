@@ -19,50 +19,35 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
+import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.BreakStatement;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
 
-public class BreakStatementImpl extends PyTree implements BreakStatement {
-  private final Token breakKeyword;
-  private final Separators separators;
+public class Separators {
+  public static final Separators EMPTY = new Separators(null, null);
+  @Nullable
+  private final Token separator;
+  @Nullable
+  private final Token newline;
+  private final List<Token> elements;
 
-  public BreakStatementImpl(Token breakKeyword, Separators separators) {
-    super(breakKeyword, breakKeyword);
-    this.breakKeyword = breakKeyword;
-    this.separators = separators;
-  }
-
-  @Override
-  public Token breakKeyword() {
-    return breakKeyword;
+  Separators(@Nullable AstNode separator, @Nullable AstNode newline){
+    this.separator = separator == null ? null : new TokenImpl(separator.getToken());
+    this.newline = newline == null ? null : new TokenImpl(newline.getToken());
+    this.elements = Stream.of(this.separator, this.newline).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @CheckForNull
-  @Override
-  public Token separator() {
-    return separators.last();
+  public Token last() {
+    return newline == null ? separator : newline;
   }
 
-  @Override
-  public Kind getKind() {
-    return Kind.BREAK_STMT;
-  }
-
-  @Override
-  public void accept(TreeVisitor visitor) {
-    visitor.visitBreakStatement(this);
-  }
-
-  @Override
-  public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(breakKeyword), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  public List<Token> elements() {
+    return elements;
   }
 }

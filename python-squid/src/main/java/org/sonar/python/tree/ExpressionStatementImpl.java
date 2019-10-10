@@ -19,12 +19,10 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionStatement;
 import org.sonar.python.api.tree.Token;
@@ -33,12 +31,12 @@ import org.sonar.python.api.tree.TreeVisitor;
 
 public class ExpressionStatementImpl extends PyTree implements ExpressionStatement {
   private final List<Expression> expressions;
-  private final Token separator;
+  private final Separators separators;
 
-  public ExpressionStatementImpl(List<Expression> expressions, @Nullable Token separator) {
+  public ExpressionStatementImpl(List<Expression> expressions, Separators separators) {
     super(expressions.get(0).firstToken(), expressions.get(expressions.size() - 1).lastToken());
     this.expressions = expressions;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -58,11 +56,11 @@ public class ExpressionStatementImpl extends PyTree implements ExpressionStateme
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(expressions, Collections.singletonList(separator)).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(expressions, separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 }

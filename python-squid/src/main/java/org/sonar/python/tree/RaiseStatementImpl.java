@@ -38,15 +38,15 @@ public class RaiseStatementImpl extends PyTree implements RaiseStatement {
   private final List<Expression> expressions;
   private final Token fromKeyword;
   private final Expression fromExpression;
-  private final Token separator;
+  private final Separators separators;
 
   public RaiseStatementImpl(Token raiseKeyword, List<Expression> expressions,
-                            @Nullable Token fromKeyword, @Nullable Expression fromExpression, @Nullable Token separator) {
+                            @Nullable Token fromKeyword, @Nullable Expression fromExpression, Separators separators) {
     this.raiseKeyword = raiseKeyword;
     this.expressions = expressions;
     this.fromKeyword = fromKeyword;
     this.fromExpression = fromExpression;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -74,7 +74,7 @@ public class RaiseStatementImpl extends PyTree implements RaiseStatement {
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -89,7 +89,7 @@ public class RaiseStatementImpl extends PyTree implements RaiseStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(raiseKeyword), expressions, Arrays.asList(fromKeyword, fromExpression), Collections.singletonList(separator))
+    return Stream.of(Collections.singletonList(raiseKeyword), expressions, Arrays.asList(fromKeyword, fromExpression), separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

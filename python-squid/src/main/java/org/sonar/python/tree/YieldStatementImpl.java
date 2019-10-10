@@ -19,11 +19,11 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
@@ -32,11 +32,11 @@ import org.sonar.python.api.tree.YieldStatement;
 
 public class YieldStatementImpl extends PyTree implements YieldStatement {
   private final YieldExpression yieldExpression;
-  private final Token separator;
+  private final Separators separators;
 
-  public YieldStatementImpl(YieldExpression yieldExpression, @Nullable Token separator) {
+  public YieldStatementImpl(YieldExpression yieldExpression, Separators separators) {
     this.yieldExpression = yieldExpression;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -46,7 +46,7 @@ public class YieldStatementImpl extends PyTree implements YieldStatement {
 
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -61,6 +61,6 @@ public class YieldStatementImpl extends PyTree implements YieldStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(yieldExpression, separator).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(Collections.singletonList(yieldExpression), separators.elements()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

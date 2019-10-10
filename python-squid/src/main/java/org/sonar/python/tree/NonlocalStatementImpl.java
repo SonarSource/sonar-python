@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.NonlocalStatement;
 import org.sonar.python.api.tree.Token;
@@ -35,13 +34,13 @@ import org.sonar.python.api.tree.TreeVisitor;
 public class NonlocalStatementImpl extends PyTree implements NonlocalStatement {
   private final Token nonlocalKeyword;
   private final List<Name> variables;
-  private final Token separator;
+  private final Separators separators;
 
-  public NonlocalStatementImpl(Token nonlocalKeyword, List<Name> variables, @Nullable Token separator) {
+  public NonlocalStatementImpl(Token nonlocalKeyword, List<Name> variables, Separators separators) {
     super(nonlocalKeyword, variables.get(variables.size() - 1).lastToken());
     this.nonlocalKeyword = nonlocalKeyword;
     this.variables = variables;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -57,7 +56,7 @@ public class NonlocalStatementImpl extends PyTree implements NonlocalStatement {
   @CheckForNull
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -72,7 +71,7 @@ public class NonlocalStatementImpl extends PyTree implements NonlocalStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(nonlocalKeyword), variables, Collections.singletonList(separator))
+    return Stream.of(Collections.singletonList(nonlocalKeyword), variables, separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -34,13 +34,13 @@ import org.sonar.python.api.tree.TreeVisitor;
 public class DelStatementImpl extends PyTree implements DelStatement {
   private final Token delKeyword;
   private final List<Expression> expressionTrees;
-  private final Token separator;
+  private final Separators separators;
 
-  public DelStatementImpl(Token delKeyword, List<Expression> expressionTrees, @Nullable Token separator) {
+  public DelStatementImpl(Token delKeyword, List<Expression> expressionTrees, Separators separators) {
     super(delKeyword, expressionTrees.isEmpty() ? delKeyword : expressionTrees.get(expressionTrees.size() - 1).lastToken());
     this.delKeyword = delKeyword;
     this.expressionTrees = expressionTrees;
-    this.separator = separator;
+    this.separators = separators;
   }
 
   @Override
@@ -56,7 +56,7 @@ public class DelStatementImpl extends PyTree implements DelStatement {
   @Nullable
   @Override
   public Token separator() {
-    return separator;
+    return separators.last();
   }
 
   @Override
@@ -71,7 +71,7 @@ public class DelStatementImpl extends PyTree implements DelStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(delKeyword), expressionTrees, Collections.singletonList(separator))
+    return Stream.of(Collections.singletonList(delKeyword), expressionTrees, separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
