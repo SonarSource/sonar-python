@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.StatementList;
@@ -48,14 +48,14 @@ public class IfStatementImpl extends PyTree implements IfStatement {
   private final List<IfStatement> elifBranches;
   private final boolean isElif;
   @CheckForNull
-  private final ElseStatement elseStatement;
+  private final ElseClause elseClause;
 
   /**
    * If statement constructor
    */
   public IfStatementImpl(Token ifKeyword, Expression condition,
                                Token colon, @CheckForNull Token newLine, @CheckForNull Token indent, StatementList statements, @CheckForNull Token dedent,
-                               List<IfStatement> elifBranches, @CheckForNull ElseStatement elseStatement) {
+                               List<IfStatement> elifBranches, @CheckForNull ElseClause elseClause) {
     super(ifKeyword, statements.lastToken());
     this.keyword = ifKeyword;
     this.condition = condition;
@@ -66,7 +66,7 @@ public class IfStatementImpl extends PyTree implements IfStatement {
     this.dedent = dedent;
     this.elifBranches = elifBranches;
     this.isElif = false;
-    this.elseStatement = elseStatement;
+    this.elseClause = elseClause;
   }
 
   /**
@@ -84,7 +84,7 @@ public class IfStatementImpl extends PyTree implements IfStatement {
     this.dedent = dedent;
     this.elifBranches = Collections.emptyList();
     this.isElif = true;
-    this.elseStatement = null;
+    this.elseClause = null;
   }
 
   @Override
@@ -114,8 +114,8 @@ public class IfStatementImpl extends PyTree implements IfStatement {
 
   @CheckForNull
   @Override
-  public ElseStatement elseBranch() {
-    return elseStatement;
+  public ElseClause elseBranch() {
+    return elseClause;
   }
 
   @Override
@@ -130,7 +130,7 @@ public class IfStatementImpl extends PyTree implements IfStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(keyword, condition, colon, newLine, indent, statements, dedent), elifBranches, Collections.singletonList(elseStatement))
+    return Stream.of(Arrays.asList(keyword, condition, colon, newLine, indent, statements, dedent), elifBranches, Collections.singletonList(elseClause))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

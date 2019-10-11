@@ -43,7 +43,7 @@ import org.sonar.python.api.tree.DelStatement;
 import org.sonar.python.api.tree.DictionaryLiteral;
 import org.sonar.python.api.tree.DottedName;
 import org.sonar.python.api.tree.EllipsisExpression;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.ExecStatement;
 import org.sonar.python.api.tree.ExpressionList;
@@ -133,8 +133,8 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitElseStatement(ElseStatement pyElseStatementTree) {
-    scan(pyElseStatementTree.body());
+  public void visitElseStatement(ElseClause pyElseClauseTree) {
+    scan(pyElseClauseTree.body());
   }
 
   @Override

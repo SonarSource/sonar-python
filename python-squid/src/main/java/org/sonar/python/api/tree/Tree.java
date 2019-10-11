@@ -72,7 +72,7 @@ public interface Tree {
 
     ELLIPSIS(EllipsisExpression.class),
 
-    ELSE_STMT(ElseStatement.class),
+    ELSE_STMT(ElseClause.class),
 
     EXCEPT_CLAUSE(ExceptClause.class),
 

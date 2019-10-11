@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 import org.sonar.python.api.tree.BinaryExpression;
 import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.ConditionalExpression;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ForStatement;
@@ -84,9 +84,9 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitElseStatement(ElseStatement pyElseStatementTree) {
-    incrementWithoutNesting(pyElseStatementTree.elseKeyword());
-    super.visitElseStatement(pyElseStatementTree);
+  public void visitElseStatement(ElseClause pyElseClauseTree) {
+    incrementWithoutNesting(pyElseClauseTree.elseKeyword());
+    super.visitElseStatement(pyElseClauseTree);
   }
 
   @Override

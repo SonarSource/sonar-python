@@ -31,7 +31,7 @@ public interface TryStatement extends Statement {
   FinallyClause finallyClause();
 
   @CheckForNull
-  ElseStatement elseClause();
+  ElseClause elseClause();
 
   StatementList body();
 }

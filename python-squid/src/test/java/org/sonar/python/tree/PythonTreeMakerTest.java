@@ -57,7 +57,7 @@ import org.sonar.python.api.tree.DelStatement;
 import org.sonar.python.api.tree.DictCompExpression;
 import org.sonar.python.api.tree.DictionaryLiteral;
 import org.sonar.python.api.tree.EllipsisExpression;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.ExecStatement;
 import org.sonar.python.api.tree.Expression;
@@ -227,7 +227,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(pyIfStatementTree.condition()).isInstanceOf(Expression.class);
     assertThat(pyIfStatementTree.isElif()).isFalse();
     assertThat(pyIfStatementTree.elifBranches()).isEmpty();
-    ElseStatement elseBranch = pyIfStatementTree.elseBranch();
+    ElseClause elseBranch = pyIfStatementTree.elseBranch();
     assertThat(elseBranch.firstToken().value()).isEqualTo("else");
     assertThat(elseBranch.lastToken().value()).isEqualTo("pass");
     assertThat(elseBranch).isNotNull();
