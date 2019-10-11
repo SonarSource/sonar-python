@@ -33,7 +33,7 @@ public interface Tree {
 
   /**
    * @return the last meaningful token of the Tree.
-   * Separators of simple statements (semicolon and/or newline) should not be returned by this method.
+   * Separators of simple statements (semicolon and/or newline) are not be returned by this method.
    */
   Token lastToken();
 
