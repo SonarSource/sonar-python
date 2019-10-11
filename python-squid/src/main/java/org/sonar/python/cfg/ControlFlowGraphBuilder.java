@@ -129,7 +129,7 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock build(Statement statement, PythonCfgBlock currentBlock) {
     switch (statement.getKind()) {
       case WITH_STMT:
-        return build(((WithStatement) statement).statements().statements(), currentBlock);
+        return buildWithStatement((WithStatement) statement, currentBlock);
       case CLASSDEF:
         return build(((ClassDef) statement).body().statements(), currentBlock);
       case RETURN_STMT:
@@ -153,6 +153,13 @@ public class ControlFlowGraphBuilder {
     }
 
     return currentBlock;
+  }
+
+  private PythonCfgBlock buildWithStatement(WithStatement withStatement, PythonCfgBlock successor) {
+    PythonCfgBlock withBodyBlock = build(withStatement.statements().statements(), createSimpleBlock(successor));
+    // exceptions may be raised inside with block and be caught by context manager
+    // see https://docs.python.org/3/reference/compound_stmts.html#the-with-statement
+    return createBranchingBlock(withStatement, withBodyBlock, successor);
   }
 
   private PythonCfgBlock tryStatement(TryStatement tryStatement, PythonCfgBlock successor) {
