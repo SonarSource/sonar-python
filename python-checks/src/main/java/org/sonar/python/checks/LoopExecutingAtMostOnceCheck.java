@@ -96,7 +96,7 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
 
   private static boolean breakOfInnerLoop(CfgBlock block, CfgBranchingBlock loopBlock) {
     WhileStatement loop = (WhileStatement) loopBlock.branchingTree();
-    CfgBlock breakTarget = loop.elseBody() == null
+    CfgBlock breakTarget = loop.elseClause() == null
       ? loopBlock.falseSuccessor()
       // assumption: elseBlock is always a simple block, hence having only one successor
       : loopBlock.falseSuccessor().successors().iterator().next();

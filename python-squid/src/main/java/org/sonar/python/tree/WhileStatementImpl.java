@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
@@ -41,16 +42,10 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
   private final Token firstIndent;
   private final StatementList body;
   private final Token firstDedent;
-  private final Token elseKeyword;
-  private final Token elseColon;
-  private final Token lastNewLine;
-  private final Token lastIndent;
-  private final StatementList elseBody;
-  private final Token lastDedent;
+  private final ElseClause elseClause;
 
   public WhileStatementImpl(Token whileKeyword, Expression condition, Token colon, @Nullable Token firstNewline,
-                            @Nullable Token firstIndent, StatementList body, @Nullable Token firstDedent, @Nullable Token elseKeyword, @Nullable Token elseColon,
-                            @Nullable Token lastNewLine, @Nullable Token lastIndent, @Nullable StatementList elseBody, @Nullable Token lastDedent) {
+                            @Nullable Token firstIndent, StatementList body, @Nullable Token firstDedent, @Nullable ElseClause elseClause) {
     this.whileKeyword = whileKeyword;
     this.condition = condition;
     this.colon = colon;
@@ -58,12 +53,7 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
     this.firstIndent = firstIndent;
     this.body = body;
     this.firstDedent = firstDedent;
-    this.elseKeyword = elseKeyword;
-    this.elseColon = elseColon;
-    this.lastNewLine = lastNewLine;
-    this.lastIndent = lastIndent;
-    this.elseBody = elseBody;
-    this.lastDedent = lastDedent;
+    this.elseClause = elseClause;
   }
 
   @Override
@@ -98,26 +88,14 @@ public class WhileStatementImpl extends PyTree implements WhileStatement {
 
   @CheckForNull
   @Override
-  public Token elseKeyword() {
-    return elseKeyword;
-  }
-
-  @CheckForNull
-  @Override
-  public Token elseColon() {
-    return elseColon;
-  }
-
-  @CheckForNull
-  @Override
-  public StatementList elseBody() {
-    return elseBody;
+  public ElseClause elseClause() {
+    return elseClause;
   }
 
   @Override
   public List<Tree> computeChildren() {
     return Stream.of(whileKeyword, condition, colon, firstNewline, firstIndent, body, firstDedent,
-      elseKeyword, elseColon, lastNewLine, lastIndent, elseBody, lastDedent).filter(Objects::nonNull)
+      elseClause).filter(Objects::nonNull)
       .collect(Collectors.toList());
   }
 }

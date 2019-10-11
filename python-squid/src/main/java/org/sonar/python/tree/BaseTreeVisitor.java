@@ -261,7 +261,7 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
     scan(pyWhileStatementTree.condition());
     scan(pyWhileStatementTree.body());
-    scan(pyWhileStatementTree.elseBody());
+    scan(pyWhileStatementTree.elseClause());
   }
 
   @Override

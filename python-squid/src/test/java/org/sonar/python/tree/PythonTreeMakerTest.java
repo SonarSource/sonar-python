@@ -952,7 +952,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(whileStatement.condition()).isNotNull();
     assertThat(whileStatement.body().statements()).hasSize(1);
     assertThat(whileStatement.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(whileStatement.elseBody()).isNull();
+    assertThat(whileStatement.elseClause()).isNull();
     assertThat(whileStatement.children()).hasSize(4);
     long nbNewline = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     long nbIndent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
@@ -966,7 +966,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(whileStatement.condition()).isNotNull();
     assertThat(whileStatement.body().statements()).hasSize(1);
     assertThat(whileStatement.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(whileStatement.elseBody()).isNull();
+    assertThat(whileStatement.elseClause()).isNull();
     assertThat(whileStatement.children()).hasSize(7);
     nbNewline = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
@@ -980,21 +980,19 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(whileStatement.condition()).isNotNull();
     assertThat(whileStatement.body().statements()).hasSize(1);
     assertThat(whileStatement.body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(whileStatement.elseBody().statements()).hasSize(1);
-    assertThat(whileStatement.elseBody().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(whileStatement.children()).hasSize(13);
+    assertThat(whileStatement.elseClause().body().statements()).hasSize(1);
+    assertThat(whileStatement.elseClause().body().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
+    assertThat(whileStatement.children()).hasSize(8);
     nbNewline = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.NEWLINE)).count();
     nbIndent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.INDENT)).count();
     nbDedent = whileStatement.children().stream().filter(c -> c.is(Tree.Kind.TOKEN) && ((Token) c).type().equals(PythonTokenType.DEDENT)).count();
-    assertThat(nbNewline).isEqualTo(2);
-    assertThat(nbIndent).isEqualTo(2);
-    assertThat(nbDedent).isEqualTo(2);
+    assertThat(nbNewline).isEqualTo(1);
+    assertThat(nbIndent).isEqualTo(1);
+    assertThat(nbDedent).isEqualTo(1);
 
     assertThat(whileStatement.whileKeyword().value()).isEqualTo("while");
     assertThat(whileStatement.colon().value()).isEqualTo(":");
-    assertThat(whileStatement.elseKeyword().value()).isEqualTo("else");
-    assertThat(whileStatement.elseColon().value()).isEqualTo(":");
-
+    assertThat(whileStatement.elseClause().elseKeyword().value()).isEqualTo("else");
   }
 
   @Test
