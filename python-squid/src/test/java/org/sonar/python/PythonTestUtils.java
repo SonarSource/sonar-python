@@ -22,7 +22,11 @@ package org.sonar.python;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 import org.sonar.python.api.tree.FileInput;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -47,4 +51,27 @@ public final class PythonTestUtils {
   }
 
 
+  public static <T extends Tree> T getFirstChild(Tree tree, Predicate<Tree> predicate) {
+    for (Tree child : tree.children()) {
+      if(predicate.test(child)) {
+        return (T) child;
+      }
+      Tree firstChild = getFirstChild(child, predicate);
+      if(firstChild != null) {
+        return (T) firstChild;
+      }
+    }
+    return null;
+  }
+
+  public static <T extends Tree> List<T> getAllDescendant(Tree tree, Predicate<Tree> predicate) {
+    List<T> res = new ArrayList<>();
+    for (Tree child : tree.children()) {
+      if(predicate.test(child)) {
+        res.add((T) child);
+      }
+      res.addAll(getAllDescendant(child, predicate));
+    }
+    return res;
+  }
 }

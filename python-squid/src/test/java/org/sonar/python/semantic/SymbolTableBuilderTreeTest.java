@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.api.tree.FileInput;
@@ -68,9 +69,7 @@ public class SymbolTableBuilderTreeTest {
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("a", "t2");
     Symbol a = symbolByName.get("a");
-    Name aTree = (Name) functionTree.descendants(Tree.Kind.NAME)
-      .filter(name -> ((Name) name).name().equals("a"))
-      .findFirst().get();
+    Name aTree = PythonTestUtils.getFirstChild(functionTree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("a"));
     assertThat(aTree.symbol()).isEqualTo(a);
     int functionStartLine = functionTree.firstToken().line();
     assertThat(a.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(
@@ -167,9 +166,7 @@ public class SymbolTableBuilderTreeTest {
     Symbol y = symbolByName.get("y");
     assertThat(y.usages()).hasSize(2);
 
-    List<LambdaExpression> lambdas = functionTree.descendants(Tree.Kind.LAMBDA)
-      .map(LambdaExpression.class::cast)
-      .collect(Collectors.toList());
+    List<LambdaExpression> lambdas = PythonTestUtils.getAllDescendant(functionTree, t -> t.is(Tree.Kind.LAMBDA));
     LambdaExpression firstLambdaFunction = lambdas.get(0);
     symbolByName = firstLambdaFunction.localVariables().stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
     assertThat(symbolByName.keySet()).containsOnly("x");

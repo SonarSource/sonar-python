@@ -22,12 +22,14 @@ package org.sonar.python.semantic;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.ExpressionStatement;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.QualifiedExpression;
 import org.sonar.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.getFirstChild;
 import static org.sonar.python.PythonTestUtils.parse;
 
 public class FullyQualifiedNameTest {
@@ -67,7 +69,7 @@ public class FullyQualifiedNameTest {
     FileInput tree = parse(
       "mod.fn()"
     );
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNull();
   }
 
@@ -76,7 +78,7 @@ public class FullyQualifiedNameTest {
     FileInput tree = parse(
       "fn()"
     );
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNull();
   }
 
@@ -85,7 +87,7 @@ public class FullyQualifiedNameTest {
     FileInput tree = parse(
       "foo['a']()"
     );
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNull();
   }
 
@@ -105,7 +107,7 @@ public class FullyQualifiedNameTest {
       "fn = 2",
       "mod.fn('foo')"
     );
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol().usages()).extracting(Usage::kind).containsExactly(Usage.Kind.OTHER);
     assertNameAndQualifiedName(tree, "fn", "mod.fn");
   }
@@ -117,7 +119,7 @@ public class FullyQualifiedNameTest {
       "fn('foo')"
     );
     // TODO: create a symbol for function declaration
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNull();
   }
 
@@ -126,20 +128,16 @@ public class FullyQualifiedNameTest {
     FileInput tree = parse(
       "import mod"
     );
-    Name nameTree = (Name) tree.descendants(Tree.Kind.NAME).findFirst().get();
+    Name nameTree = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
     assertThat(nameTree.symbol().fullyQualifiedName()).isEqualTo("mod");
 
     tree = parse(
       "import mod.submod"
     );
-    nameTree = (Name) tree.descendants(Tree.Kind.NAME)
-      .filter(name -> ((Name) name).name().equals("mod"))
-      .findFirst().get();
+    nameTree = getNameEqualTo(tree, "mod");
     assertThat(nameTree.symbol().fullyQualifiedName()).isEqualTo("mod");
 
-    nameTree = (Name) tree.descendants(Tree.Kind.NAME)
-      .filter(name -> ((Name) name).name().equals("submod"))
-      .findFirst().get();
+    nameTree = getNameEqualTo(tree, "submod");
     assertThat(nameTree.symbol()).isNull();
   }
 
@@ -148,14 +146,10 @@ public class FullyQualifiedNameTest {
     FileInput tree = parse(
       "from mod import fn"
     );
-    Name nameTree = (Name) tree.descendants(Tree.Kind.NAME)
-      .filter(name -> ((Name) name).name().equals("mod"))
-      .findFirst().get();
+    Name nameTree = getNameEqualTo(tree, "mod");
     assertThat(nameTree.symbol()).isNull();
 
-    nameTree = (Name) tree.descendants(Tree.Kind.NAME)
-      .filter(name -> ((Name) name).name().equals("fn"))
-      .findFirst().get();
+    nameTree = getNameEqualTo(tree, "fn");
     assertThat(nameTree.symbol().fullyQualifiedName()).isEqualTo("mod.fn");
   }
 
@@ -166,8 +160,20 @@ public class FullyQualifiedNameTest {
       "mod.fn()",
       "mod.fn()"
     );
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol().usages()).extracting(Usage::kind).containsExactly(Usage.Kind.OTHER, Usage.Kind.OTHER);
+  }
+
+  private static Name getNameEqualTo(FileInput tree, String strName) {
+    return getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals(strName));
+  }
+
+  private static CallExpression getCallExpression(FileInput tree) {
+    return getFirstChild(tree, t -> t.is(Tree.Kind.CALL_EXPR));
+  }
+
+  private static QualifiedExpression getQualifiedExpression(FileInput tree) {
+    return getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
   }
 
   @Test
@@ -176,7 +182,7 @@ public class FullyQualifiedNameTest {
       "import mod",
       "mod.prop"
     );
-    QualifiedExpression qualifiedExpression = (QualifiedExpression) tree.descendants(Tree.Kind.QUALIFIED_EXPR).findFirst().get();
+    QualifiedExpression qualifiedExpression = getQualifiedExpression(tree);
     Symbol symbol = qualifiedExpression.symbol();
     assertThat(symbol).isNotNull();
     assertThat(symbol.name()).isEqualTo("prop");
@@ -200,7 +206,11 @@ public class FullyQualifiedNameTest {
       "g('foo')",
       "h('foo')"
     );
-    tree.descendants(Tree.Kind.CALL_EXPR).forEach(
+    tree.statements().statements().stream()
+      .filter(t -> t.is(Tree.Kind.EXPRESSION_STMT))
+      .map(t -> ((ExpressionStatement) t).expressions().get(0))
+      .filter(t -> t.is(Tree.Kind.CALL_EXPR))
+      .forEach(
       descendant -> {
         CallExpression callExpression = (CallExpression) descendant;
         assertThat(callExpression.calleeSymbol()).isNotNull();
@@ -279,7 +289,7 @@ public class FullyQualifiedNameTest {
 
 
   private void assertNameAndQualifiedName(FileInput tree, String name, @Nullable String qualifiedName) {
-    CallExpression callExpression = (CallExpression) tree.descendants(Tree.Kind.CALL_EXPR).findFirst().get();
+    CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNotNull();
     Symbol symbol = callExpression.calleeSymbol();
     assertThat(symbol.name()).isEqualTo(name);

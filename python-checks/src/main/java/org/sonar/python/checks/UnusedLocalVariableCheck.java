@@ -19,16 +19,16 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.ExpressionList;
 import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.FunctionDef;
@@ -39,6 +39,7 @@ import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
+import org.sonar.python.tree.BaseTreeVisitor;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1481")
@@ -81,29 +82,36 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isCallingLocalsFunction(FunctionDef functionTree) {
-    return functionTree
-      .descendants(Kind.CALL_EXPR)
-      .map(CallExpression.class::cast)
-      .map(CallExpression::callee)
-      .anyMatch(callee -> callee.is(Kind.NAME) && "locals".equals(((Name) callee).name()));
+    return TreeUtils.hasDescendant(functionTree, t -> t.is(Kind.CALL_EXPR) && calleeHasNameLocals(((CallExpression) t)));
+  }
+
+  private static boolean calleeHasNameLocals(CallExpression callExpression) {
+    Expression callee = callExpression.callee();
+    return callee.is(Kind.NAME) && "locals".equals(((Name) callee).name());
   }
 
   private static Set<String> extractStringInterpolationIdentifiers(FunctionDef functionTree) {
-    return functionTree.descendants(Kind.STRING_LITERAL)
-      .map(StringLiteral.class::cast)
-      .flatMap(str -> str.stringElements().stream())
-      .filter(str -> str.prefix().equalsIgnoreCase("f"))
-      .map(StringElement::trimmedQuotesValue)
-      .flatMap(UnusedLocalVariableCheck::extractInterpolations)
-      .collect(Collectors.toSet());
+    StringInterpolationVisitor visitor = new StringInterpolationVisitor();
+    functionTree.accept(visitor);
+    return visitor.stringInterpolations;
   }
 
-  private static Stream<String> extractInterpolations(String str) {
+  private static class StringInterpolationVisitor extends BaseTreeVisitor {
+    Set<String> stringInterpolations = new HashSet<>();
+    @Override
+    public void visitStringElement(StringElement tree) {
+      if(tree.prefix().equalsIgnoreCase("f")) {
+        stringInterpolations.addAll(extractInterpolations(tree.trimmedQuotesValue()));
+      }
+    }
+  }
+
+  private static Set<String> extractInterpolations(String str) {
     Matcher matcher = INTERPOLATION_PATTERN.matcher(str);
-    List<String> identifiers = new ArrayList<>();
+    Set<String> identifiers = new HashSet<>();
     while (matcher.find()) {
       identifiers.add(matcher.group(1));
     }
-    return identifiers.stream();
+    return identifiers;
   }
 }

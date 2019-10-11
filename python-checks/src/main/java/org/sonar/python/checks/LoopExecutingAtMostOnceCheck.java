@@ -87,7 +87,7 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
           .forEach(workList::push);
       }
     }
-    if (loop.descendants(Kind.TRY_STMT).findFirst().isPresent()) {
+    if (TreeUtils.hasDescendant(loop, t -> t.is(Kind.TRY_STMT))) {
       return;
     }
     PreciseIssue issue = ctx.addIssue(loop.firstToken(), "Refactor this loop to do more than one iteration.");

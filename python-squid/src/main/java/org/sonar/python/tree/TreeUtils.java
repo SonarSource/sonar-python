@@ -64,4 +64,8 @@ public class TreeUtils {
     }
     return tokens;
   }
+
+  public static boolean hasDescendant(Tree tree, Predicate<Tree> predicate) {
+    return tree.children().stream().anyMatch(child -> predicate.test(child) || hasDescendant(child, predicate));
+  }
 }
