@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.api.tree.BreakStatement;
 import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.ContinueStatement;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.ForStatement;
@@ -171,7 +171,7 @@ public class ControlFlowGraphBuilder {
       finallyBlock = finallyOrAfterTryBlock;
     }
     PythonCfgBlock firstExceptClauseBlock = exceptClauses(tryStatement, finallyOrAfterTryBlock, finallyBlock);
-    ElseStatement elseClause = tryStatement.elseClause();
+    ElseClause elseClause = tryStatement.elseClause();
     PythonCfgBlock tryBlockSuccessor = finallyOrAfterTryBlock;
     if (elseClause != null) {
       tryBlockSuccessor = build(elseClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
@@ -264,7 +264,7 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock buildIfStatement(IfStatement ifStatement, PythonCfgBlock afterBlock) {
     PythonCfgBlock ifBodyBlock = createSimpleBlock(afterBlock);
     ifBodyBlock = build(ifStatement.body().statements(), ifBodyBlock);
-    ElseStatement elseClause = ifStatement.elseBranch();
+    ElseClause elseClause = ifStatement.elseBranch();
     PythonCfgBlock falseSuccessor = afterBlock;
     if (elseClause != null) {
       PythonCfgBlock elseBodyBlock = createSimpleBlock(afterBlock);

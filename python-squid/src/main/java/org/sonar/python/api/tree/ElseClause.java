@@ -19,7 +19,7 @@
  */
 package org.sonar.python.api.tree;
 
-public interface ElseStatement extends Statement {
+public interface ElseClause extends Tree {
   Token elseKeyword();
 
   StatementList body();

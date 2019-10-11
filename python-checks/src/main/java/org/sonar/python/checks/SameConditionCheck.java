@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.StatementList;
@@ -57,14 +57,14 @@ public class SameConditionCheck extends PythonSubscriptionCheck {
     List<Expression> conditions = new ArrayList<>();
     conditions.add(ifStatement.condition());
     conditions.addAll(ifStatement.elifBranches().stream().map(IfStatement::condition).collect(Collectors.toList()));
-    ElseStatement elseStatement = ifStatement.elseBranch();
-    if (elseStatement != null) {
-      lookForElseIfs(conditions, elseStatement);
+    ElseClause elseClause = ifStatement.elseBranch();
+    if (elseClause != null) {
+      lookForElseIfs(conditions, elseClause);
     }
     return conditions;
   }
 
-  private void lookForElseIfs(List<Expression> conditions, ElseStatement elseBranch) {
+  private void lookForElseIfs(List<Expression> conditions, ElseClause elseBranch) {
     IfStatement singleIfChild = singleIfChild(elseBranch.body());
     if (singleIfChild != null) {
       ignoreList.add(singleIfChild);

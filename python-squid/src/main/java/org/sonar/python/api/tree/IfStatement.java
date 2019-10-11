@@ -37,6 +37,6 @@ public interface IfStatement extends Statement {
   boolean isElif();
 
   @CheckForNull
-  ElseStatement elseBranch();
+  ElseClause elseBranch();
 
 }

@@ -52,7 +52,7 @@ import org.sonar.python.api.tree.ContinueStatement;
 import org.sonar.python.api.tree.Decorator;
 import org.sonar.python.api.tree.DelStatement;
 import org.sonar.python.api.tree.DottedName;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.ExecStatement;
 import org.sonar.python.api.tree.Expression;
@@ -476,15 +476,15 @@ public class PythonTreeMaker {
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(suite);
     AstNode elseSuite = astNode.getLastChild(PythonGrammar.SUITE);
-    ElseStatement elseStatement = null;
+    ElseClause elseClause = null;
     if (elseSuite.getPreviousSibling().getPreviousSibling().is(PythonKeyword.ELSE)) {
-      elseStatement = elseStatement(elseSuite);
+      elseClause = elseClause(elseSuite);
     }
     List<IfStatement> elifBranches = astNode.getChildren(PythonKeyword.ELIF).stream()
       .map(this::elifStatement)
       .collect(Collectors.toList());
 
-    return new IfStatementImpl(ifToken, expression(condition), colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), elifBranches, elseStatement);
+    return new IfStatementImpl(ifToken, expression(condition), colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), elifBranches, elseClause);
   }
 
   private IfStatement elifStatement(AstNode astNode) {
@@ -497,11 +497,11 @@ public class PythonTreeMaker {
     return new IfStatementImpl(elifToken, expression(condition), colonToken, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite));
   }
 
-  private ElseStatement elseStatement(AstNode astNode) {
+  private ElseClause elseClause(AstNode astNode) {
     Token elseToken = toPyToken(astNode.getPreviousSibling().getPreviousSibling().getToken());
     Token colon = toPyToken(astNode.getPreviousSibling().getToken());
     StatementList body = getStatementListFromSuite(astNode);
-    return new ElseStatementImpl(elseToken, colon, suiteNewLine(astNode), suiteIndent(astNode), body, suiteDedent(astNode));
+    return new ElseClauseImpl(elseToken, colon, suiteNewLine(astNode), suiteIndent(astNode), body, suiteDedent(astNode));
   }
 
   public FunctionDef funcDefStatement(AstNode astNode) {
@@ -715,13 +715,13 @@ public class PythonTreeMaker {
       finallyClause = new FinallyClauseImpl(toPyToken(finallyNode.getToken()), finallyColon,
         suiteNewLine(finallySuite), suiteIndent(finallySuite), finallyBody, suiteDedent(finallySuite));
     }
-    ElseStatement elseStatementTree = null;
+    ElseClause elseClauseTree = null;
     AstNode elseNode = astNode.getFirstChild(PythonKeyword.ELSE);
     if (elseNode != null) {
-      elseStatementTree = elseStatement(elseNode.getNextSibling().getNextSibling());
+      elseClauseTree = elseClause(elseNode.getNextSibling().getNextSibling());
     }
     return new TryStatementImpl(tryKeyword, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite), body, suiteDedent(firstSuite),
-      exceptClauseTrees, finallyClause, elseStatementTree);
+      exceptClauseTrees, finallyClause, elseClauseTree);
   }
 
   public WithStatement withStatement(AstNode astNode) {

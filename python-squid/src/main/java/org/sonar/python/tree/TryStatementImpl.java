@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.ExceptClause;
 import org.sonar.python.api.tree.FinallyClause;
 import org.sonar.python.api.tree.StatementList;
@@ -44,10 +44,10 @@ public class TryStatementImpl extends PyTree implements TryStatement {
   private final Token dedent;
   private final List<ExceptClause> exceptClauses;
   private final FinallyClause finallyClause;
-  private final ElseStatement elseStatement;
+  private final ElseClause elseClause;
 
   public TryStatementImpl(Token tryKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList tryBody,
-                          @Nullable Token dedent, List<ExceptClause> exceptClauses, @Nullable FinallyClause finallyClause, @Nullable ElseStatement elseStatement) {
+                          @Nullable Token dedent, List<ExceptClause> exceptClauses, @Nullable FinallyClause finallyClause, @Nullable ElseClause elseClause) {
     this.tryKeyword = tryKeyword;
     this.colon = colon;
     this.newLine = newLine;
@@ -56,7 +56,7 @@ public class TryStatementImpl extends PyTree implements TryStatement {
     this.dedent = dedent;
     this.exceptClauses = exceptClauses;
     this.finallyClause = finallyClause;
-    this.elseStatement = elseStatement;
+    this.elseClause = elseClause;
   }
 
   @Override
@@ -77,8 +77,8 @@ public class TryStatementImpl extends PyTree implements TryStatement {
 
   @CheckForNull
   @Override
-  public ElseStatement elseClause() {
-    return elseStatement;
+  public ElseClause elseClause() {
+    return elseClause;
   }
 
   @Override
@@ -98,7 +98,7 @@ public class TryStatementImpl extends PyTree implements TryStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(tryKeyword, colon, newLine, indent, tryBody, dedent), exceptClauses, Arrays.asList(finallyClause, elseStatement))
+    return Stream.of(Arrays.asList(tryKeyword, colon, newLine, indent, tryBody, dedent), exceptClauses, Arrays.asList(finallyClause, elseClause))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

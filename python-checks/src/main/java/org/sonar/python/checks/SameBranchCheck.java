@@ -26,7 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.ConditionalExpression;
-import org.sonar.python.api.tree.ElseStatement;
+import org.sonar.python.api.tree.ElseClause;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.IfStatement;
 import org.sonar.python.api.tree.ParenthesizedExpression;
@@ -94,10 +94,10 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
     List<StatementList> branches = new ArrayList<>();
     branches.add(ifStmt.body());
     branches.addAll(ifStmt.elifBranches().stream().map(IfStatement::body).collect(Collectors.toList()));
-    ElseStatement elseStatement = ifStmt.elseBranch();
-    if (elseStatement != null) {
-      branches.add(elseStatement.body());
-      lookForElseIfs(branches, elseStatement);
+    ElseClause elseClause = ifStmt.elseBranch();
+    if (elseClause != null) {
+      branches.add(elseClause.body());
+      lookForElseIfs(branches, elseClause);
     }
     return branches;
   }
@@ -127,7 +127,7 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void lookForElseIfs(List<StatementList> branches, ElseStatement elseBranch) {
+  private void lookForElseIfs(List<StatementList> branches, ElseClause elseBranch) {
     IfStatement singleIfChild = singleIfChild(elseBranch.body());
     if (singleIfChild != null) {
       ignoreList.add(singleIfChild);
