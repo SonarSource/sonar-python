@@ -31,13 +31,12 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class NonlocalStatementImpl extends PyTree implements NonlocalStatement {
+public class NonlocalStatementImpl extends SimpleStatement implements NonlocalStatement {
   private final Token nonlocalKeyword;
   private final List<Name> variables;
   private final Separators separators;
 
   public NonlocalStatementImpl(Token nonlocalKeyword, List<Name> variables, Separators separators) {
-    super(nonlocalKeyword, variables.get(variables.size() - 1).lastToken());
     this.nonlocalKeyword = nonlocalKeyword;
     this.variables = variables;
     this.separators = separators;

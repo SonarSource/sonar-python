@@ -31,7 +31,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class CompoundAssignmentStatementImpl extends PyTree implements CompoundAssignmentStatement {
+public class CompoundAssignmentStatementImpl extends SimpleStatement implements CompoundAssignmentStatement {
   private final Expression lhsExpression;
   private final Token augAssignToken;
   private final Expression rhsExpression;
@@ -39,7 +39,6 @@ public class CompoundAssignmentStatementImpl extends PyTree implements CompoundA
 
 
   public CompoundAssignmentStatementImpl(Expression lhsExpression, Token augAssignToken, Expression rhsExpression, Separators separators) {
-    super(lhsExpression.firstToken(), rhsExpression.lastToken());
     this.lhsExpression = lhsExpression;
     this.augAssignToken = augAssignToken;
     this.rhsExpression = rhsExpression;

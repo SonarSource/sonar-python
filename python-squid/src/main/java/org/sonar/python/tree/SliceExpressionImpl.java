@@ -38,7 +38,6 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression {
   private final Token rightBracket;
 
   public SliceExpressionImpl(Expression object, Token leftBracket, SliceList sliceList, Token rightBracket) {
-    super(object.firstToken(), rightBracket);
     this.object = object;
     this.leftBracket = leftBracket;
     this.sliceList = sliceList;

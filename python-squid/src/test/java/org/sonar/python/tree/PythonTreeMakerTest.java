@@ -420,6 +420,17 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(returnStatement.returnKeyword().value()).isEqualTo("return");
     assertThat(returnStatement.expressions()).hasSize(0);
     assertThat(returnStatement.children()).hasSize(1);
+
+    astNode = p.parse("return []");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    returnStatement = treeMaker.returnStatement(statementWithSeparator);
+    ListLiteral listLiteral = (ListLiteral) returnStatement.expressions().get(0);
+    assertThat(listLiteral.leftBracket()).isSameAs(listLiteral.children().get(0));
+    assertThat(listLiteral.rightBracket()).isSameAs(listLiteral.children().get(2));
+    ExpressionList emptyExpressionList = listLiteral.elements();
+    assertThat(emptyExpressionList.children()).isEmpty();
+    assertThat(emptyExpressionList.firstToken()).isNull();
+    assertThat(emptyExpressionList.lastToken()).isNull();
   }
 
   @Test
@@ -2010,7 +2021,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.keyExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
     assertThat(comprehension.valueExpression().getKind()).isEqualTo(Tree.Kind.PLUS);
     assertThat(comprehension.comprehensionFor().loopExpression().getKind()).isEqualTo(Tree.Kind.TUPLE);
-    assertThat(comprehension.children()).hasSize(4);
+    assertThat(comprehension.children()).hasSize(6);
     assertThat(comprehension.firstToken().value()).isEqualTo("{");
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
   }
@@ -2156,6 +2167,7 @@ public class PythonTreeMakerTest extends RuleTest {
     // Check that the second semicolon is not ignored
     tree = parse("foo(); bar();\ntoto()", treeMaker::fileInput);
     statements = tree.statements().statements();
+    assertThat(statements.get(0).lastToken().value()).isEqualTo(")");
     statementChildren = statements.get(0).children();
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
@@ -2168,6 +2180,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(statementChildren.get(statementChildren.size() - 1).is(Tree.Kind.TOKEN)).isTrue();
     token = (Token) statementChildren.get(statementChildren.size() - 1);
     assertThat(token.type()).isEqualTo(PythonTokenType.NEWLINE);
+    assertThat(statements.get(1).lastToken().value()).isEqualTo(")");
+
+    assertThat(statements.get(2).lastToken().value()).isEqualTo(")");
   }
 
   @Test

@@ -32,7 +32,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.TreeVisitor;
 import org.sonar.python.api.tree.Tree;
 
-public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignment {
+public class AnnotatedAssignmentImpl extends SimpleStatement implements AnnotatedAssignment {
   private final Expression variable;
   private final Token colonToken;
   private final Expression annotation;
@@ -42,7 +42,6 @@ public class AnnotatedAssignmentImpl extends PyTree implements AnnotatedAssignme
 
   public AnnotatedAssignmentImpl(Expression variable, Token colonToken, Expression annotation,
                                  @Nullable Token equalToken, @Nullable Expression assignedValue, Separators separators) {
-    super(variable.firstToken(), assignedValue != null ? assignedValue.lastToken() : annotation.lastToken());
     this.variable = variable;
     this.colonToken = colonToken;
     this.annotation = annotation;

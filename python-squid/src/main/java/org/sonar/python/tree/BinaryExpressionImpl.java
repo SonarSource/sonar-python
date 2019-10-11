@@ -68,7 +68,6 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression {
   }
 
   public BinaryExpressionImpl(Expression leftOperand, Token operator, Expression rightOperand) {
-    super(leftOperand.firstToken(), rightOperand.lastToken());
     this.kind = KINDS_BY_OPERATOR.get(operator.value());
     this.leftOperand = leftOperand;
     this.operator = operator;

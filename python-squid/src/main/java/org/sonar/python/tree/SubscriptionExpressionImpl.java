@@ -38,7 +38,6 @@ public class SubscriptionExpressionImpl extends PyTree implements SubscriptionEx
   private final Token rBracket;
 
   public SubscriptionExpressionImpl(Expression object, Token lBracket, ExpressionList subscripts, Token rBracket) {
-    super(object.firstToken(), rBracket);
     this.object = object;
     this.lBracket = lBracket;
     this.subscripts = subscripts;

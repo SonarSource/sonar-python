@@ -35,7 +35,6 @@ public class TupleParameterImpl extends PyTree implements TupleParameter {
   private final Token rParenthesis;
 
   public TupleParameterImpl(Token lParenthesis, List<AnyParameter> parameters, List<Token> commas, Token rParenthesis) {
-    super(lParenthesis, rParenthesis);
     this.lParenthesis = lParenthesis;
     this.parameters = parameters;
     this.commas = commas;

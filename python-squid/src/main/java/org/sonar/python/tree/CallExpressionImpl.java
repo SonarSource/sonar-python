@@ -40,7 +40,6 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
   private final Token rightPar;
 
   public CallExpressionImpl(Expression callee, @Nullable ArgList argumentList, Token leftPar, Token rightPar) {
-    super(callee.firstToken(), rightPar);
     this.callee = callee;
     this.argumentList = argumentList;
     this.leftPar = leftPar;

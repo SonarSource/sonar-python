@@ -39,7 +39,6 @@ public class FinallyClauseImpl extends PyTree implements FinallyClause {
   private final Token dedent;
 
   public FinallyClauseImpl(Token finallyKeyword, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent) {
-    super(finallyKeyword, body.lastToken());
     this.finallyKeyword = finallyKeyword;
     this.colon = colon;
     this.newLine = newLine;

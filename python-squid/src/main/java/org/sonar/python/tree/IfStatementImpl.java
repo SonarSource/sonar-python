@@ -56,7 +56,6 @@ public class IfStatementImpl extends PyTree implements IfStatement {
   public IfStatementImpl(Token ifKeyword, Expression condition,
                                Token colon, @CheckForNull Token newLine, @CheckForNull Token indent, StatementList statements, @CheckForNull Token dedent,
                                List<IfStatement> elifBranches, @CheckForNull ElseClause elseClause) {
-    super(ifKeyword, statements.lastToken());
     this.keyword = ifKeyword;
     this.condition = condition;
     this.colon = colon;
@@ -74,7 +73,6 @@ public class IfStatementImpl extends PyTree implements IfStatement {
    */
   public IfStatementImpl(Token elifKeyword, Expression condition, Token colon,
                                @CheckForNull Token newLine, @CheckForNull Token indent, StatementList statements, @CheckForNull Token dedent) {
-    super(elifKeyword, statements.lastToken());
     this.keyword = elifKeyword;
     this.condition = condition;
     this.colon = colon;

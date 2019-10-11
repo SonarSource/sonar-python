@@ -43,7 +43,6 @@ public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
   private Set<Symbol> symbols = new HashSet<>();
 
   public LambdaExpressionImpl(Token lambdaKeyword, Token colonToken, Expression body, @Nullable ParameterList parameterList) {
-    super(lambdaKeyword, body.lastToken());
     this.lambdaKeyword = lambdaKeyword;
     this.colonToken = colonToken;
     this.body = body;

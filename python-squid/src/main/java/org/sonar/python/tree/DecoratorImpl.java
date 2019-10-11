@@ -42,7 +42,6 @@ public class DecoratorImpl extends PyTree implements Decorator {
 
   public DecoratorImpl(Token atToken, DottedName dottedName,
                        @Nullable Token lPar, @Nullable ArgList argListTree, @Nullable Token rPar, @Nullable Token newLineToken) {
-    super(atToken, rPar == null ? dottedName.lastToken() : rPar);
     this.atToken = atToken;
     this.dottedName = dottedName;
     this.lPar = lPar != null ? lPar : null;

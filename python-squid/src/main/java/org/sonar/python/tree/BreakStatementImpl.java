@@ -30,12 +30,11 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class BreakStatementImpl extends PyTree implements BreakStatement {
+public class BreakStatementImpl extends SimpleStatement implements BreakStatement {
   private final Token breakKeyword;
   private final Separators separators;
 
   public BreakStatementImpl(Token breakKeyword, Separators separators) {
-    super(breakKeyword, breakKeyword);
     this.breakKeyword = breakKeyword;
     this.separators = separators;
   }

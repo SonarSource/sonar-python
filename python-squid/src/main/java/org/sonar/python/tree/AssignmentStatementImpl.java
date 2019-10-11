@@ -29,7 +29,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class AssignmentStatementImpl extends PyTree implements AssignmentStatement {
+public class AssignmentStatementImpl extends SimpleStatement implements AssignmentStatement {
   private final List<Token> assignTokens;
   private final List<ExpressionList> lhsExpressions;
   private final Expression assignedValue;

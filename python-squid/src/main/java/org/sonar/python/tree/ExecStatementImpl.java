@@ -31,7 +31,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class ExecStatementImpl extends PyTree implements ExecStatement {
+public class ExecStatementImpl extends SimpleStatement implements ExecStatement {
   private final Token execKeyword;
   private final Expression expression;
   private final Expression globalsExpression;
@@ -40,7 +40,6 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
 
   public ExecStatementImpl(Token execKeyword, Expression expression,
                                  @Nullable Expression globalsExpression, @Nullable Expression localsExpression, Separators separators) {
-    super(execKeyword, localsExpression == null ? (globalsExpression == null ? expression.lastToken() : globalsExpression.lastToken()): localsExpression.lastToken());
     this.execKeyword = execKeyword;
     this.expression = expression;
     this.globalsExpression = globalsExpression;
@@ -49,7 +48,6 @@ public class ExecStatementImpl extends PyTree implements ExecStatement {
   }
 
   public ExecStatementImpl(Token execKeyword, Expression expression, Separators separators) {
-    super(execKeyword, expression.lastToken());
     this.execKeyword = execKeyword;
     this.expression = expression;
     globalsExpression = null;

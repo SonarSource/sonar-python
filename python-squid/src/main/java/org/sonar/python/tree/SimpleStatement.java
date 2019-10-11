@@ -19,37 +19,31 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
+
 import java.util.List;
-import org.sonar.python.api.tree.NoneExpression;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
 
-public class NoneExpressionImpl extends PyTree implements NoneExpression {
-  private final Token none;
+public abstract class SimpleStatement extends PyTree {
 
-  public NoneExpressionImpl(Token none) {
-    this.none = none;
-  }
-
+  //Returns the last child that is not a newline nor a semicolon
   @Override
-  public Token none() {
-    return none;
-  }
-
-  @Override
-  public void accept(TreeVisitor visitor) {
-    visitor.visitNone(this);
-  }
-
-  @Override
-  public List<Tree> computeChildren() {
-    return Collections.singletonList(none);
-  }
-
-  @Override
-  public Kind getKind() {
-    return Kind.NONE;
+  public Token lastToken() {
+    if (lastToken == null) {
+      List<Tree> children = children();
+      Tree last = children.get(children.size() - 1);
+      int index = 2;
+      if (last.is(Kind.TOKEN) && ((Token) last).type() == PythonTokenType.NEWLINE) {
+        last = children.get(children.size() - index);
+        index++;
+      }
+      if (last.is(Kind.TOKEN) && ((Token) last).type() == PythonPunctuator.SEMICOLON) {
+        last = children.get(children.size() - index);
+      }
+      this.lastToken = last.is(Kind.TOKEN) ? (Token) last : last.lastToken();
+    }
+    return lastToken;
   }
 }

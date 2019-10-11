@@ -49,7 +49,6 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
   }
 
   public UnaryExpressionImpl(Token operator, Expression expression) {
-    super(operator, expression.lastToken());
     this.kind = KINDS_BY_OPERATOR.get(operator.value());
     this.operator = operator;
     this.expression = expression;

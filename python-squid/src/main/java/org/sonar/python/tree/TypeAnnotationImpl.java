@@ -39,7 +39,6 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
   private final Kind kind;
 
   public TypeAnnotationImpl(Token colonToken, Expression expression) {
-    super(colonToken, expression.lastToken());
     this.colonToken = colonToken;
     this.dash = null;
     this.gt = null;
@@ -48,7 +47,6 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
   }
 
   public TypeAnnotationImpl(Token dash, Token gt, Expression expression) {
-    super(dash, expression.lastToken());
     this.colonToken = null;
     this.dash = dash;
     this.gt = gt;

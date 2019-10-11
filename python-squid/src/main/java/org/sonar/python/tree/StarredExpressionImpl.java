@@ -35,7 +35,6 @@ public class StarredExpressionImpl extends PyTree implements StarredExpression {
   private final Expression expression;
 
   public StarredExpressionImpl(Token starToken, Expression expression) {
-    super(starToken, expression.lastToken());
     this.starToken = starToken;
     this.expression = expression;
   }

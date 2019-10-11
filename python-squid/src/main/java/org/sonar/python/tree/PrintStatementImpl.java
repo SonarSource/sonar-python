@@ -30,7 +30,7 @@ import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
-public class PrintStatementImpl extends PyTree implements PrintStatement {
+public class PrintStatementImpl extends SimpleStatement implements PrintStatement {
   private final Token printKeyword;
   private final List<Expression> expressions;
   private final Separators separators;
