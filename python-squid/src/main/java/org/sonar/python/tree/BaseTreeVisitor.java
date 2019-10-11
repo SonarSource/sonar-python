@@ -239,7 +239,7 @@ public class BaseTreeVisitor implements TreeVisitor {
     scan(pyForStatementTree.expressions());
     scan(pyForStatementTree.testExpressions());
     scan(pyForStatementTree.body());
-    scan(pyForStatementTree.elseBody());
+    scan(pyForStatementTree.elseClause());
   }
 
   @Override

@@ -191,7 +191,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitForStatement(tree);
     verify(visitor).visitPassStatement((PassStatement) tree.body().statements().get(0));
-    verify(visitor).visitPassStatement((PassStatement) tree.elseBody().statements().get(0));
+    verify(visitor).visitPassStatement((PassStatement) tree.elseClause().body().statements().get(0));
   }
 
   @Test

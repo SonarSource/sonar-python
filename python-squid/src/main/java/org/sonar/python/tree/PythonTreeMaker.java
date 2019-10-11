@@ -607,19 +607,9 @@ public class PythonTreeMaker {
     AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = forStatementNode.getLastChild(PythonGrammar.SUITE);
-    AstNode elseKeywordNode = forStatementNode.getFirstChild(PythonKeyword.ELSE);
-    Token elseKeyword = null;
-    Token elseColonKeyword = null;
-    if (elseKeywordNode != null) {
-      elseKeyword = toPyToken(elseKeywordNode.getToken());
-      elseColonKeyword = toPyToken(elseKeywordNode.getNextSibling().getToken());
-    }
-    Token lastIndent = firstSuite == lastSuite ? null : suiteIndent(lastSuite);
-    Token lastNewLine = firstSuite == lastSuite ? null : suiteNewLine(lastSuite);
-    Token lastDedent = firstSuite == lastSuite ? null : suiteDedent(lastSuite);
-    StatementList elseBody = firstSuite == lastSuite ? null : getStatementListFromSuite(lastSuite);
+    ElseClause elseClause = firstSuite == lastSuite ? null : elseClause(lastSuite);
     return new ForStatementImpl(forKeyword, expressions, inKeyword, testExpressions, colon, suiteNewLine(firstSuite), suiteIndent(firstSuite),
-      body, suiteDedent(firstSuite), elseKeyword, elseColonKeyword, lastNewLine, lastIndent, elseBody, lastDedent, asyncToken);
+      body, suiteDedent(firstSuite), elseClause, asyncToken);
   }
 
   public WhileStatementImpl whileStatement(AstNode astNode) {
