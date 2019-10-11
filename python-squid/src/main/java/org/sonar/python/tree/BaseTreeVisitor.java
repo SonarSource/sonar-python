@@ -133,7 +133,7 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitElseStatement(ElseClause pyElseClauseTree) {
+  public void visitElseClause(ElseClause pyElseClauseTree) {
     scan(pyElseClauseTree.body());
   }
 

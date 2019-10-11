@@ -84,9 +84,9 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitElseStatement(ElseClause pyElseClauseTree) {
+  public void visitElseClause(ElseClause pyElseClauseTree) {
     incrementWithoutNesting(pyElseClauseTree.elseKeyword());
-    super.visitElseStatement(pyElseClauseTree);
+    super.visitElseClause(pyElseClauseTree);
   }
 
   @Override

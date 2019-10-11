@@ -65,7 +65,7 @@ public class ElseClauseImpl extends PyTree implements ElseClause {
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitElseStatement(this);
+    visitor.visitElseClause(this);
   }
 
   @Override

@@ -29,7 +29,7 @@ public interface TreeVisitor {
 
   void visitIfStatement(IfStatement ifStatement);
 
-  void visitElseStatement(ElseClause elseClause);
+  void visitElseClause(ElseClause elseClause);
 
   void visitExecStatement(ExecStatement execStatement);
 
