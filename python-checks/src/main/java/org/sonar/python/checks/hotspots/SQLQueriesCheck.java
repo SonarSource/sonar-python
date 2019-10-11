@@ -20,12 +20,13 @@
 package org.sonar.python.checks.hotspots;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.SubscriptionContext;
+import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.Argument;
 import org.sonar.python.api.tree.BinaryExpression;
 import org.sonar.python.api.tree.CallExpression;
@@ -66,20 +67,29 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     isUsingDjangoModel = false;
     isUsingDjangoDBConnection = false;
     FileInput tree = (FileInput) ctx.syntaxNode();
-    List<Symbol> symbols = tree.descendants()
-      .filter(node -> node.is(Tree.Kind.IMPORT_FROM) || node.is(Tree.Kind.IMPORT_NAME))
-      .flatMap(node -> node.descendants(Tree.Kind.NAME))
-      .map(node -> ((Name) node).symbol())
+    SymbolsFromImport visitor = new SymbolsFromImport();
+    tree.accept(visitor);
+    visitor.symbols.stream()
       .filter(Objects::nonNull)
-      .collect(Collectors.toList());
-    for (Symbol symbol : symbols) {
-      String qualifiedName = symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "";
+      .map(symbol -> symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "")
+      .forEach(qualifiedName -> {
       if (qualifiedName.contains("django.db.models")) {
         isUsingDjangoModel = true;
       }
       if (qualifiedName.contains("django.db.connection")) {
         isUsingDjangoDBConnection = true;
       }
+    });
+  }
+
+  private static class SymbolsFromImport extends BaseTreeVisitor {
+
+    private Set<Symbol> symbols = new HashSet<>();
+
+    @Override
+    public void visitAliasedName(AliasedName aliasedName) {
+      List<Name> names = aliasedName.dottedName().names();
+      symbols.add(names.get(names.size() - 1).symbol());
     }
   }
 
