@@ -20,14 +20,14 @@
 package org.sonar.python.checks;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)
 public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
@@ -38,17 +38,20 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STATEMENT_LIST, ctx -> {
       StatementList statementListTree = (StatementList) ctx.syntaxNode();
-      List<Statement> nonPassStatements = statementListTree.statements().stream()
-        .filter(stmt -> !stmt.is(Kind.PASS_STMT))
-        .collect(Collectors.toList());
-      if (!nonPassStatements.isEmpty()) {
+      if (statementListTree.statements().stream().anyMatch(stmt -> !stmt.is(Kind.PASS_STMT))) {
         return;
       }
       Tree parent = statementListTree.parent();
       if (parent.is(Kind.FUNCDEF) || parent.is(Kind.CLASSDEF) || parent.is(Kind.EXCEPT_CLAUSE)) {
         return;
       }
-      if (!containsComment(statementListTree.tokens())) {
+      List<Token> parentTokens = TreeUtils.tokens(statementListTree.parent());
+      int from = parentTokens.stream().filter(t -> t.type() == PythonTokenType.NEWLINE).findFirst()
+        .map(parentTokens::indexOf)
+        .orElseThrow(() -> new IllegalStateException(String.format("No newline token in parent of statement list at line %s", statementListTree.firstToken().line())));
+      // sublist call is excluding last index and token following last token of statement list (dedent) should be included in the comment verification.
+      int to = parentTokens.indexOf(statementListTree.lastToken()) + 2;
+      if (!containsComment(parentTokens.subList(from, to))) {
         if (statementListTree.statements().isEmpty()) {
           ctx.addIssue(statementListTree.firstToken(), MESSAGE);
         } else {
@@ -59,11 +62,6 @@ public class EmptyNestedBlockCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean containsComment(List<Token> tokens) {
-    for (Token token : tokens) {
-      if (!token.trivia().isEmpty()) {
-        return true;
-      }
-    }
-    return false;
+    return tokens.stream().anyMatch(t -> !t.trivia().isEmpty());
   }
 }

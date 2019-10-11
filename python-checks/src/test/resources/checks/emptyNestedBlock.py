@@ -35,6 +35,11 @@ if 3 > 2:
 if 3 > 2:
     pass  # nothing to do
 
+if 3 > 2:
+   # no issue
+   pass
+elif k == 5: # unknown
+    pass
 
 def empty_function():
     pass

@@ -95,7 +95,7 @@ public class PythonTreeMaker {
 
   public FileInput fileInput(AstNode astNode) {
     List<Statement> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
-    StatementListImpl statementList = statements.isEmpty() ? null : new StatementListImpl(statements, toPyToken(astNode.getTokens()));
+    StatementListImpl statementList = statements.isEmpty() ? null : new StatementListImpl(statements);
     Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
     FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
     setParents(pyFileInputTree);
@@ -223,7 +223,7 @@ public class PythonTreeMaker {
   }
 
   private StatementList getStatementListFromSuite(AstNode suite) {
-    return new StatementListImpl(getStatementsFromSuite(suite), toPyToken(suite.getTokens()));
+    return new StatementListImpl(getStatementsFromSuite(suite));
   }
 
   private List<Statement> getStatementsFromSuite(AstNode astNode) {

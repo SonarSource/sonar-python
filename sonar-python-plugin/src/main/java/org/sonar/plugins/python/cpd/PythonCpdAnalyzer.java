@@ -21,7 +21,6 @@ package org.sonar.plugins.python.cpd;
 
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.TokenType;
-import java.util.ArrayList;
 import java.util.List;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -31,6 +30,7 @@ import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 public class PythonCpdAnalyzer {
 
@@ -44,7 +44,7 @@ public class PythonCpdAnalyzer {
     Tree root = visitorContext.rootTree();
     if (root != null) {
       NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
-      List<Token> tokens = tokens(root);
+      List<Token> tokens = TreeUtils.tokens(root);
       for (int i = 0; i < tokens.size(); i++) {
         Token token = tokens.get(i);
         TokenType currentTokenType = token.type();
@@ -70,18 +70,6 @@ public class PythonCpdAnalyzer {
       type.equals(PythonTokenType.DEDENT) ||
       type.equals(PythonTokenType.INDENT) ||
       type.equals(GenericTokenType.EOF);
-  }
-
-  private static List<Token> tokens(Tree tree) {
-    List<Token> tokens = new ArrayList<>();
-    for (Tree child : tree.children()) {
-      if (child.is(Tree.Kind.TOKEN)) {
-        tokens.add(((Token) child));
-      } else {
-        tokens.addAll(tokens(child));
-      }
-    }
-    return tokens;
   }
 
 }

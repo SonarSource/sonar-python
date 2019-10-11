@@ -23,9 +23,7 @@ import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Tree;
-import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = TooManyLinesInFileCheck.CHECK_KEY)
 public class TooManyLinesInFileCheck extends PythonSubscriptionCheck {
@@ -42,24 +40,11 @@ public class TooManyLinesInFileCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      FileVisitor visitor = new FileVisitor();
-      ctx.syntaxNode().accept(visitor);
-      if (visitor.numberOfLines > maximum) {
-        ctx.addFileIssue(MessageFormat.format(MESSAGE, ctx.pythonFile().fileName(), visitor.numberOfLines, maximum));
+      int line = ctx.syntaxNode().lastToken().line();
+      if (line > maximum) {
+        ctx.addFileIssue(MessageFormat.format(MESSAGE, ctx.pythonFile().fileName(), line, maximum));
       }
     });
-  }
-
-  private static class FileVisitor extends BaseTreeVisitor {
-
-    private int numberOfLines = 0;
-
-    @Override
-    public void visitFileInput(FileInput fileInput) {
-      if (fileInput.statements() != null) {
-        numberOfLines = fileInput.statements().tokens().get(fileInput.statements().tokens().size() - 1).line();
-      }
-    }
   }
 }
 

@@ -25,7 +25,4 @@ public interface StatementList extends Tree {
 
   List<Statement> statements();
 
-  // Temporary API, to be moved to Tree interface
-  List<Token> tokens();
-
 }
