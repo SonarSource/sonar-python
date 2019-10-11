@@ -2175,7 +2175,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void separators() {
-    List<Tree.Kind> compoundStatements = Arrays.asList(Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.ELSE_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF,
+    List<Tree.Kind> compoundStatements = Arrays.asList(Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.ELSE_CLAUSE, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF,
       Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE);
     File file = new File("src/test/resources/separator.py");
     String content = fileContent(file);

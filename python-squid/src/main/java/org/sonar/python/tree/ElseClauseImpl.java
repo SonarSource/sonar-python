@@ -50,7 +50,7 @@ public class ElseClauseImpl extends PyTree implements ElseClause {
 
   @Override
   public Kind getKind() {
-    return Tree.Kind.ELSE_STMT;
+    return Tree.Kind.ELSE_CLAUSE;
   }
 
   @Override

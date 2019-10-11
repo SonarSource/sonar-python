@@ -47,7 +47,7 @@ import org.sonar.python.api.tree.Trivia;
 public class FileLinesVisitor extends PythonSubscriptionCheck {
 
   /**
-   * Tree.Kind.ELSE_STMT is not in this list to avoid counting else: lines as executables.
+   * Tree.Kind.ELSE_CLAUSE is not in this list to avoid counting else: lines as executables.
    * This is to replicate behavior of some python coverage tools (like what is done by coveralls).
    */
   private static final List<Tree.Kind> EXECUTABLE_LINES = Arrays.asList(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.COMPOUND_ASSIGNMENT, Tree.Kind.EXPRESSION_STMT, Tree.Kind.IMPORT_STMT,
