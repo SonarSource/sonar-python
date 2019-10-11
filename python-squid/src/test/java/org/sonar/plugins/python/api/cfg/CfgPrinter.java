@@ -55,7 +55,7 @@ class CfgPrinter {
   }
 
   private static String blockLabel(CfgBlock block) {
-    return "Expected: " + block.toString();
+    return block.toString();
   }
 
 }

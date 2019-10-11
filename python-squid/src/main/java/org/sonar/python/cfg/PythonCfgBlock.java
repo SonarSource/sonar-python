@@ -26,6 +26,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.python.api.tree.CallExpression;
+import org.sonar.python.api.tree.Expression;
+import org.sonar.python.api.tree.ExpressionStatement;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 
 public abstract class PythonCfgBlock implements CfgBlock {
@@ -72,7 +76,21 @@ public abstract class PythonCfgBlock implements CfgBlock {
     if (elements.isEmpty()) {
       return "empty";
     }
-    return elements.stream().map(elem -> elem.getKind().toString()).collect(Collectors.joining(";"));
+    CallExpression callExpression = null;
+    if (elements.get(0).is(Tree.Kind.EXPRESSION_STMT)) {
+      Expression expression = ((ExpressionStatement) elements.get(0)).expressions().get(0);
+      if (expression.is(Tree.Kind.CALL_EXPR)) {
+        callExpression = (CallExpression) expression;
+      }
+    }
+    if (elements.get(0).is(Tree.Kind.CALL_EXPR)) {
+      callExpression = (CallExpression) elements.get(0);
+    }
+    String result = "";
+    if (callExpression != null && callExpression.callee().is(Tree.Kind.NAME)) {
+      result += ((Name) callExpression.callee()).name();
+    }
+    return result + ": " + elements.stream().map(elem -> elem.getKind().toString()).collect(Collectors.joining(";"));
   }
 
   void addPredecessor(PythonCfgBlock block) {

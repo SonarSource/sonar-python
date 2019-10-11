@@ -56,10 +56,12 @@ public class ControlFlowGraphBuilder {
   private final Set<PythonCfgBlock> blocks = new HashSet<>();
   private final Deque<Loop> loops = new ArrayDeque<>();
   private final Deque<PythonCfgBlock> exceptionTargets = new ArrayDeque<>();
+  private final Deque<PythonCfgBlock> exitTargets = new ArrayDeque<>();
 
   public ControlFlowGraphBuilder(@Nullable StatementList statementList) {
     blocks.add(end);
     exceptionTargets.push(end);
+    exitTargets.push(end);
     if (statementList != null) {
       start = build(statementList.statements(), createSimpleBlock(end));
     } else {
@@ -167,7 +169,7 @@ public class ControlFlowGraphBuilder {
     FinallyClause finallyClause = tryStatement.finallyClause();
     PythonCfgBlock finallyBlock = null;
     if (finallyClause != null) {
-      finallyOrAfterTryBlock = build(finallyClause.body().statements(), createSimpleBlock(successor));
+      finallyOrAfterTryBlock = build(finallyClause.body().statements(), createBranchingBlock(finallyClause, successor, exitTargets.peek()));
       finallyBlock = finallyOrAfterTryBlock;
     }
     PythonCfgBlock firstExceptClauseBlock = exceptClauses(tryStatement, finallyOrAfterTryBlock, finallyBlock);
@@ -177,8 +179,12 @@ public class ControlFlowGraphBuilder {
       tryBlockSuccessor = build(elseClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
     }
     exceptionTargets.push(firstExceptClauseBlock);
+    exitTargets.push(firstExceptClauseBlock);
+    loops.push(new Loop(firstExceptClauseBlock, firstExceptClauseBlock));
     PythonCfgBlock firstTryBlock = build(tryStatement.body().statements(), createBranchingBlock(tryStatement, tryBlockSuccessor, firstExceptClauseBlock));
     exceptionTargets.pop();
+    exitTargets.pop();
+    loops.pop();
     return createSimpleBlock(firstTryBlock);
   }
 
@@ -293,7 +299,7 @@ public class ControlFlowGraphBuilder {
     if (TreeUtils.firstAncestorOfKind(statement, Tree.Kind.FUNCDEF) == null || isStatementAtClassLevel(statement)) {
       throw new IllegalStateException("Invalid return outside of a function");
     }
-    PythonCfgSimpleBlock block = createSimpleBlock(end);
+    PythonCfgSimpleBlock block = createSimpleBlock(exitTargets.peek());
     block.setSyntacticSuccessor(syntacticSuccessor);
     block.addElement(statement);
     return block;

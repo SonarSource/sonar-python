@@ -217,7 +217,7 @@ def redundant_return_inside_catch_block_with_finally():
         pass
     except E as e:
         print(e)
-        return # FN
+        return # Noncompliant
     finally:
         print(42)
 
@@ -230,7 +230,7 @@ def redundant_return_inside_finally_block():
         print(42)
     finally:
         print(e)
-        return # Noncompliant
+        return # FN
 
 def non_redundant_return_inside_else_block():
     try:
@@ -242,6 +242,7 @@ def non_redundant_return_inside_else_block():
         return # OK - finally to be executed
     finally:
         print(e)
+    print("foo")
 
 def redundant_return_inside_else_block():
     try:
