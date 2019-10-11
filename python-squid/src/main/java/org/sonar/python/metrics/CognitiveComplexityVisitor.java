@@ -98,9 +98,6 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   @Override
   public void visitForStatement(ForStatement pyForStatementTree) {
     incrementWithNesting(pyForStatementTree.forKeyword());
-    if (pyForStatementTree.elseBody() != null) {
-      incrementWithoutNesting(pyForStatementTree.elseKeyword());
-    }
     super.visitForStatement(pyForStatementTree);
   }
 

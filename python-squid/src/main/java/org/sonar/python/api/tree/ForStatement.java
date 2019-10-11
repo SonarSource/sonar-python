@@ -36,13 +36,7 @@ public interface ForStatement extends Statement {
   StatementList body();
 
   @CheckForNull
-  Token elseKeyword();
-
-  @CheckForNull
-  Token elseColon();
-
-  @CheckForNull
-  StatementList elseBody();
+  ElseClause elseClause();
 
   boolean isAsync();
 
