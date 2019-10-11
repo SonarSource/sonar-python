@@ -31,11 +31,5 @@ public interface WhileStatement extends Statement {
   StatementList body();
 
   @CheckForNull
-  Token elseKeyword();
-
-  @CheckForNull
-  Token elseColon();
-
-  @CheckForNull
-  StatementList elseBody();
+  ElseClause elseClause();
 }

@@ -239,7 +239,8 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
-    return buildLoop(whileStatement, whileStatement.condition(), whileStatement.body(), whileStatement.elseBody(), currentBlock);
+    ElseClause elseClause = whileStatement.elseClause();
+    return buildLoop(whileStatement, whileStatement.condition(), whileStatement.body(), elseClause == null ? null : elseClause.body(), currentBlock);
   }
 
   /**

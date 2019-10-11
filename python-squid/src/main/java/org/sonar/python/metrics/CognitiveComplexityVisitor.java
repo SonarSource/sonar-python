@@ -92,9 +92,6 @@ public class CognitiveComplexityVisitor extends BaseTreeVisitor {
   @Override
   public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
     incrementWithNesting(pyWhileStatementTree.whileKeyword());
-    if (pyWhileStatementTree.elseBody() != null) {
-      incrementWithoutNesting(pyWhileStatementTree.elseKeyword());
-    }
     super.visitWhileStatement(pyWhileStatementTree);
   }
 
