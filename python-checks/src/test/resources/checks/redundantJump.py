@@ -196,7 +196,7 @@ def redundant_return_inside_catch_block():
         pass
     except E as e:
         print(e)
-        return # Noncompliant
+        return # FN
     else:
         print(42)
 
@@ -205,7 +205,7 @@ def redundant_return_inside_catch_block_multiple():
         pass
     except E as e:
         print(e)
-        return # Noncompliant
+        return # FN
     except E1 as e:
         print(e)
     else:
@@ -217,7 +217,7 @@ def redundant_return_inside_catch_block_with_finally():
         pass
     except E as e:
         print(e)
-        return # Noncompliant
+        return # FN
     finally:
         print(42)
 
@@ -251,7 +251,7 @@ def redundant_return_inside_else_block():
         print(e)
     else:
         print(42)
-        return # Noncompliant
+        return # FN
 
 def raise_statement():
     raise Error()
