@@ -68,7 +68,7 @@ public class PythonCheckVerifier extends PythonSubscriptionCheck {
     File file = new File(path);
     PythonVisitorContext pythonVisitorContext = TestPythonVisitorRunner.scanFile(file, verifier);
 
-    Iterator<PreciseIssue> actualIssues = getActualIssues(file, check, pythonVisitorContext);
+    Iterator<PreciseIssue> actualIssues = getActualIssues(check, pythonVisitorContext);
     List<TestIssue> expectedIssues = verifier.expectedIssues;
 
     for (TestIssue expected : expectedIssues) {
@@ -127,7 +127,7 @@ public class PythonCheckVerifier extends PythonSubscriptionCheck {
     return Ordering.natural().sortedCopy(result);
   }
 
-  private static Iterator<PreciseIssue> getActualIssues(File file, PythonCheck check, PythonVisitorContext pythonVisitorContext) {
+  private static Iterator<PreciseIssue> getActualIssues(PythonCheck check, PythonVisitorContext pythonVisitorContext) {
     List<PreciseIssue> issues = scanFileForIssues(check, pythonVisitorContext);
     List<PreciseIssue> sortedIssues = Ordering.natural().onResultOf(new IssueToLine()).sortedCopy(issues);
     return sortedIssues.iterator();

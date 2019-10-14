@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>it-python-plugin</artifactId>
-  
+  <packaging>pom</packaging>
   <name>Python :: ITs :: Plugin</name>
   <inceptionYear>2012</inceptionYear>
   <organization>
@@ -20,7 +20,6 @@
   <properties>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
