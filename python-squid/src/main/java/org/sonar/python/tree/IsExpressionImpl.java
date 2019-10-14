@@ -19,16 +19,15 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.python.api.tree.Token;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.IsExpression;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 
 public class IsExpressionImpl extends BinaryExpressionImpl implements IsExpression {
@@ -53,6 +52,6 @@ public class IsExpressionImpl extends BinaryExpressionImpl implements IsExpressi
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(notToken), super.computeChildren()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(leftOperand(), operator(), notToken, rightOperand()).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
