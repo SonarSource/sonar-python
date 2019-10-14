@@ -6,7 +6,6 @@ def redundant_jump(x):
     if x == 1:
         print(True)
         return  # NonCompliant
-}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -14,4 +13,21 @@ def redundant_jump(x):
     if x == 1:
         print(True)
 </pre>
+<h2>Exceptions</h2>
+<ul>
+  <li> No issue is raised if the jump statement is the only statement of a statement suite: </li>
+</ul>
+<pre>
+def my_function(x):
+    if x &gt; 5:
+        do_something()
+    elif x == 0:
+        return # ok even it could be changed to "pass"
+    else:
+        do_something_else()
+</pre>
+<ul>
+  <li> No issue is raised for <code>return None</code> because this was certainly done on purpose to be explicit that a function is really returning
+  <code>None</code>. </li>
+</ul>
 
