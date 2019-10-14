@@ -23,7 +23,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
+import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -53,6 +56,11 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
+import org.sonar.check.Rule;
+import org.sonar.check.RuleProperty;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.checks.CheckList;
 
@@ -71,6 +79,36 @@ public class PythonSquidSensorTest {
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(6, 0);
 
   private static final SonarRuntime SONARLINT_RUNTIME = SonarRuntimeImpl.forSonarLint(SONARLINT_DETECTABLE_VERSION);
+
+  private static final PythonCustomRuleRepository[] CUSTOM_RULES = {new PythonCustomRuleRepository() {
+    @Override
+    public String repositoryKey() {
+      return "customKey";
+    }
+
+    @Override
+    public List<Class> checkClasses() {
+      return Collections.singletonList(MyCustomRule.class);
+    }
+  }};
+
+  @Rule(
+    key = "key",
+    name = "name",
+    description = "desc",
+    tags = {"bug"})
+  public static class MyCustomRule implements PythonCheck {
+    @RuleProperty(
+      key = "customParam",
+      description = "Custom parameter",
+      defaultValue = "value")
+    public String customParam = "value";
+
+    @Override
+    public void scanFile(PythonVisitorContext visitorContext) {
+      // do nothing
+    }
+  }
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor").getAbsoluteFile();
 
@@ -179,26 +217,30 @@ public class PythonSquidSensorTest {
       IssueLocation issueLocation = issue.primaryLocation();
       assertThat(issueLocation.inputComponent()).isEqualTo(inputFile);
 
-      if (issue.ruleKey().rule().equals("S134")) {
-        assertThat(issueLocation.message()).isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
-        assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(7, 16, 7, 18));
-        assertThat(issue.flows()).hasSize(4);
-        assertThat(issue.gap()).isNull();
-        checkedIssues++;
-      } else if (issue.ruleKey().rule().equals(ONE_STATEMENT_PER_LINE_RULE_KEY)) {
-        assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
-        assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
-        assertThat(issue.flows()).isEmpty();
-        assertThat(issue.gap()).isNull();
-        checkedIssues++;
-      } else if (issue.ruleKey().rule().equals(FILE_COMPLEXITY_RULE_KEY)) {
-        assertThat(issueLocation.message()).isEqualTo("File has a complexity of 5 which is greater than 2 authorized.");
-        assertThat(issueLocation.textRange()).isNull();
-        assertThat(issue.flows()).isEmpty();
-        assertThat(issue.gap()).isEqualTo(3.0);
-        checkedIssues++;
-      } else {
-        throw new IllegalStateException();
+      switch (issue.ruleKey().rule()) {
+        case "S134":
+          assertThat(issueLocation.message()).isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
+          assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(7, 16, 7, 18));
+          assertThat(issue.flows()).hasSize(4);
+          assertThat(issue.gap()).isNull();
+          checkedIssues++;
+          break;
+        case ONE_STATEMENT_PER_LINE_RULE_KEY:
+          assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
+          assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
+          assertThat(issue.flows()).isEmpty();
+          assertThat(issue.gap()).isNull();
+          checkedIssues++;
+          break;
+        case FILE_COMPLEXITY_RULE_KEY:
+          assertThat(issueLocation.message()).isEqualTo("File has a complexity of 5 which is greater than 2 authorized.");
+          assertThat(issueLocation.textRange()).isNull();
+          assertThat(issue.flows()).isEmpty();
+          assertThat(issue.gap()).isEqualTo(3.0);
+          checkedIssues++;
+          break;
+        default:
+          throw new IllegalStateException();
       }
     }
 
@@ -259,17 +301,24 @@ public class PythonSquidSensorTest {
     InputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
-    sensor().execute(context);
+    sensor(null).execute(context);
     assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
   private PythonSquidSensor sensor() {
+    return sensor(CUSTOM_RULES);
+  }
+
+  private PythonSquidSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new PythonSquidSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
+    if(customRuleRepositories == null) {
+      return new PythonSquidSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
+    }
+    return new PythonSquidSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories);
   }
 
   private InputFile inputFile(String name) {

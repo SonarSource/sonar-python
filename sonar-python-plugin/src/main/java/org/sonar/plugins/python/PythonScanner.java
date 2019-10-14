@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
-import org.sonar.api.batch.rule.Checks;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
@@ -62,12 +61,12 @@ public class PythonScanner {
   private final SensorContext context;
   private final Parser<Grammar> parser;
   private final List<InputFile> inputFiles;
-  private final Checks<PythonCheck> checks;
+  private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
 
-  public PythonScanner(SensorContext context, Checks<PythonCheck> checks,
+  public PythonScanner(SensorContext context, PythonChecks checks,
                        FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> inputFiles) {
     this.context = context;
     this.checks = checks;

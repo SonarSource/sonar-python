@@ -67,6 +67,9 @@ public final class Tests {
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)
+    // Custom rules plugin
+    .addPlugin(FileLocation.byWildcardMavenFilename(new File("python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))

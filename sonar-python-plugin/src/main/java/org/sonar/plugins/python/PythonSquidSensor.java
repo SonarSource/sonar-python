@@ -22,29 +22,37 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.CheckFactory;
-import org.sonar.api.batch.rule.Checks;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.python.checks.CheckList;
 
 public final class PythonSquidSensor implements Sensor {
 
-  private final Checks<PythonCheck> checks;
+  private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
 
+  /**
+   * Constructor to be used by pico if no PythonCustomRuleRepository are to be found and injected.
+   */
   public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this.checks = checkFactory
-      .<PythonCheck>create(CheckList.REPOSITORY_KEY)
-      .addAnnotatedChecks(CheckList.getChecks());
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+  }
+
+  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+                           @Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+    this.checks = new PythonChecks(checkFactory)
+      .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
+      .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
   }
