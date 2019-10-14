@@ -53,9 +53,14 @@ public abstract class PythonCfgBlock implements CfgBlock {
 
   PythonCfgBlock firstNonEmptySuccessor() {
     PythonCfgBlock block = this;
+    Set<CfgBlock> skippedBlocks = new HashSet<>();
     while (block.isEmptyBlock()) {
-      // TODO: handle loops with empty blocks
-      block = (PythonCfgBlock) block.successors().iterator().next();
+      PythonCfgBlock next = (PythonCfgBlock) block.successors().iterator().next();
+      if (skippedBlocks.add(next)) {
+        block = next;
+      } else {
+        return block;
+      }
     }
     return block;
   }
