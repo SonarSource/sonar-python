@@ -467,6 +467,107 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void return_in_except() {
+    verifyCfg(
+      "before_try(succ = [try_body])",
+      "try:",
+      "  try_body(succ = [finally_block, except_cond])",
+      "except except_cond(succ = [except_block, finally_block]):",
+      "  except_block(succ = [finally_block], syntSucc = finally_block)",
+      "  return",
+      "finally:",
+      "  finally_block(succ = [after_try, END])",
+      "  pass",
+      "after_try(succ = [END])");
+  }
+
+  @Test
+  public void return_in_else() {
+    verifyCfg(
+      "before_try(succ = [try_body])",
+      "try:",
+      "  try_body(succ = [else_block, except_cond])",
+      "except except_cond(succ = [except_block, finally_block]):",
+      "  except_block(succ = [finally_block])",
+      "else:",
+      "  else_block(succ = [finally_block], syntSucc = finally_block)",
+      "  return",
+      "finally:",
+      "  finally_block(succ = [after_try, END])",
+      "  pass",
+      "after_try(succ = [END])");
+  }
+
+
+  @Test
+  public void continue_in_except() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [finally_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block], syntSucc=finally_block)",
+      "    continue",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void continue_in_else() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [else_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block])",
+      "  else:",
+      "    else_block(succ = [finally_block], syntSucc=finally_block)",
+      "    continue",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void break_in_except() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [finally_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block], syntSucc=finally_block)",
+      "    break",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void break_in_else() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [else_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block])",
+      "  else:",
+      "    else_block(succ = [finally_block], syntSucc=finally_block)",
+      "    break",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
   public void with_statement() {
     verifyCfg(
       "before(succ = [with_block, END])",
@@ -486,7 +587,7 @@ public class ControlFlowGraphTest {
      "pass",
      "assert 2"
     );
-    assertThat(cfg.start().toString()).isEqualTo(": PASS_STMT;ASSERT_STMT");
+    assertThat(cfg.start().toString()).isEqualTo("PASS_STMT;ASSERT_STMT");
   }
 
   @Test

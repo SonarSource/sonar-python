@@ -171,12 +171,18 @@ public class ControlFlowGraphBuilder {
     if (finallyClause != null) {
       finallyOrAfterTryBlock = build(finallyClause.body().statements(), createBranchingBlock(finallyClause, successor, exitTargets.peek()));
       finallyBlock = finallyOrAfterTryBlock;
+      exitTargets.push(finallyBlock);
+      loops.push(new Loop(finallyBlock, finallyBlock));
     }
     PythonCfgBlock firstExceptClauseBlock = exceptClauses(tryStatement, finallyOrAfterTryBlock, finallyBlock);
     ElseClause elseClause = tryStatement.elseClause();
     PythonCfgBlock tryBlockSuccessor = finallyOrAfterTryBlock;
     if (elseClause != null) {
       tryBlockSuccessor = build(elseClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
+    }
+    if (finallyClause != null) {
+      exitTargets.pop();
+      loops.pop();
     }
     exceptionTargets.push(firstExceptClauseBlock);
     exitTargets.push(firstExceptClauseBlock);
