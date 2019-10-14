@@ -28,4 +28,9 @@ public class AfterJumpStatementCheckTest {
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/afterJumpStatement.py", new AfterJumpStatementCheck());
   }
+
+  @Test
+  public void test_empty_file() {
+    PythonCheckVerifier.verify("src/test/resources/checks/afterJumpStatement_emptyFile.py", new AfterJumpStatementCheck());
+  }
 }
