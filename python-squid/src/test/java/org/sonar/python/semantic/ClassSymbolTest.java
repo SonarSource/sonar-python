@@ -88,9 +88,7 @@ public class ClassSymbolTest {
 
   private ClassDef parseClass(String... lines) {
     FileInput fileInput = PythonTestUtils.parse(lines);
-    return fileInput.descendants(Tree.Kind.CLASSDEF)
-      .map(ClassDef.class::cast)
-      .findFirst().get();
+    return PythonTestUtils.getFirstChild(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
   }
 
 }

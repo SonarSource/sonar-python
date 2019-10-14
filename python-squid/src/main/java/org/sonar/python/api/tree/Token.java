@@ -24,12 +24,6 @@ import java.util.List;
 
 public interface Token extends Tree {
 
-  /**
-   * @deprecated Use of sslr dependencies should be avoided
-   */
-  @Deprecated
-  com.sonar.sslr.api.Token token();
-
   String value();
 
   int line();

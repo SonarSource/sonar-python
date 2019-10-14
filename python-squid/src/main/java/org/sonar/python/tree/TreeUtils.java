@@ -19,8 +19,12 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 
@@ -44,5 +48,24 @@ public class TreeUtils {
   @CheckForNull
   public static Tree firstAncestorOfKind(Tree tree, Kind... kinds) {
     return firstAncestor(tree, t -> t.is(kinds));
+  }
+
+  public static List<Token> tokens(Tree tree) {
+    if (tree.is(Kind.TOKEN)) {
+      return Collections.singletonList((Token) tree);
+    }
+    List<Token> tokens = new ArrayList<>();
+    for (Tree child : tree.children()) {
+      if (child.is(Kind.TOKEN)) {
+        tokens.add(((Token) child));
+      } else {
+        tokens.addAll(tokens(child));
+      }
+    }
+    return tokens;
+  }
+
+  public static boolean hasDescendant(Tree tree, Predicate<Tree> predicate) {
+    return tree.children().stream().anyMatch(child -> predicate.test(child) || hasDescendant(child, predicate));
   }
 }

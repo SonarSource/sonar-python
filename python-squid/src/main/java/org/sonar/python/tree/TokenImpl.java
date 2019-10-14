@@ -38,10 +38,6 @@ public class TokenImpl extends PyTree implements Token {
     this.trivia = token.getTrivia().stream().map(tr -> new TriviaImpl(new TokenImpl(tr.getToken()))).collect(Collectors.toList());
   }
 
-  public com.sonar.sslr.api.Token token() {
-    return token;
-  }
-
   @Override
   public String value() {
     return token.getValue();

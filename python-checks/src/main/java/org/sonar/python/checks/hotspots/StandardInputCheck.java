@@ -29,7 +29,6 @@ import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = StandardInputCheck.CHECK_KEY)
 public class StandardInputCheck extends AbstractCallExpressionCheck {
@@ -53,12 +52,12 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
       }
     });
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
-      Name node = (Name) ctx.syntaxNode();
-      if (isWithinImport(node)) {
+      Name name = (Name) ctx.syntaxNode();
+      if (isWithinImport(name)) {
         return;
       }
-      if (isQuestionablePropertyAccess(node)) {
-        ctx.addIssue(node, message());
+      if (isQuestionablePropertyAccess(name)) {
+        ctx.addIssue(name, message());
       }
     });
   }
@@ -78,13 +77,14 @@ public class StandardInputCheck extends AbstractCallExpressionCheck {
   }
 
   private static boolean isQuestionablePropertyAccess(Name pyNameTree) {
-    Tree callExpression = TreeUtils.firstAncestorOfKind(pyNameTree, Tree.Kind.CALL_EXPR);
-    if (callExpression != null) {
-      // avoid raising twice the issue on call expressions like sys.stdin.read()
-      CallExpression call = (CallExpression) callExpression;
-      if (call.callee().descendants().anyMatch(tree -> tree == pyNameTree)) {
+    Tree parent = pyNameTree.parent();
+    while (parent != null && !parent.is(Tree.Kind.CALL_EXPR)) {
+      Tree grandParent = parent.parent();
+      if (grandParent != null && grandParent.is(Tree.Kind.CALL_EXPR) && ((CallExpression) grandParent).callee() == parent) {
+        // avoid raising twice the issue on call expressions like sys.stdin.read()
         return false;
       }
+      parent = grandParent;
     }
     Symbol symbol = pyNameTree.symbol();
     return symbol != null && questionablePropertyAccess.contains(symbol.fullyQualifiedName());

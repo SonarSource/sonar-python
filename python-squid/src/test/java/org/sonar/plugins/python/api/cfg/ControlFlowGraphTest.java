@@ -465,7 +465,7 @@ public class ControlFlowGraphTest {
 
   private ControlFlowGraph cfg(String... lines) {
     FileInput fileInput = PythonTestUtils.parse("def f():", Arrays.stream(lines).map(s -> "  " + s).collect(Collectors.joining("\n")));
-    FunctionDef fun = (FunctionDef) fileInput.descendants(Kind.FUNCDEF).findFirst().get();
+    FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
     return ControlFlowGraph.build(fun, file);
   }
 

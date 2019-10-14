@@ -142,16 +142,6 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void descendants() {
-    FileInput pyTree = parse("def foo(): pass\ndef bar(): pass", treeMaker::fileInput);
-    assertThat(pyTree.descendants().filter(tree -> tree.getKind() != Tree.Kind.TOKEN).count()).isEqualTo(9);
-    assertThat(pyTree.descendants(Tree.Kind.STATEMENT_LIST).count()).isEqualTo(3);
-    assertThat(pyTree.descendants(Tree.Kind.FUNCDEF).count()).isEqualTo(2);
-    assertThat(pyTree.descendants(Tree.Kind.NAME).count()).isEqualTo(2);
-    assertThat(pyTree.descendants(Tree.Kind.PASS_STMT).count()).isEqualTo(2);
-  }
-
-  @Test
   public void variadic_is_kind() {
     FileInput fileInput = parse("def foo(): pass", treeMaker::fileInput);
     assertThat(fileInput.is(Tree.Kind.FILE_INPUT, Tree.Kind.STATEMENT_LIST)).isTrue();
@@ -263,10 +253,6 @@ public class PythonTreeMakerTest extends RuleTest {
     pyIfStatementTree = parse("if x:\n pass\n pass", treeMaker::ifStatement);
     assertThat(pyIfStatementTree.body().statements()).hasSize(2);
 
-    // tokens
-    AstNode parseTree = p.parse("if x: pass");
-    IfStatement pyFileInputTree = treeMaker.ifStatement(parseTree);
-    assertThat(pyFileInputTree.body().tokens().stream().map(Token::token)).isEqualTo(parseTree.getFirstChild(PythonGrammar.SUITE).getTokens());
   }
 
   @Test

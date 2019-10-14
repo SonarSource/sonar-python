@@ -25,18 +25,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.TreeVisitor;
 
 public class StatementListImpl extends PyTree implements StatementList {
 
   private List<Statement> statements;
-  private final List<Token> tokens;
 
-  public StatementListImpl(List<Statement> statements, List<Token> tokens) {
+  public StatementListImpl(List<Statement> statements) {
     this.statements = statements;
-    this.tokens = tokens;
   }
 
   @Override
@@ -59,8 +56,4 @@ public class StatementListImpl extends PyTree implements StatementList {
     return Stream.of(statements).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
-  @Override
-  public List<Token> tokens() {
-    return tokens;
-  }
 }

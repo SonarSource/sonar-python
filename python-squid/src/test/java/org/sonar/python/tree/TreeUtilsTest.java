@@ -23,13 +23,19 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.PassStatement;
 import org.sonar.python.api.tree.Statement;
+import org.sonar.python.api.tree.Token;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.api.tree.WhileStatement;
@@ -75,6 +81,28 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.firstAncestor(passStatement, TreeUtilsTest::isOuterFunction)).isEqualTo(outerFunction);
   }
 
+  @Test
+  public void tokens() {
+    // simple statement parsed so that we easily get all tokens from children or first token.
+    FileInput parsed = parse("if foo:\n  pass");
+    IfStatement ifStmt = (IfStatement) parsed.statements().statements().get(0);
+    List<Token> collect = new ArrayList<>(ifStmt.children().stream().map(t -> t.is(Kind.TOKEN) ? (Token) t : t.firstToken()).collect(Collectors.toList()));
+    collect.add(parsed.lastToken());
+    assertThat(TreeUtils.tokens(parsed)).containsExactly(collect.toArray(new Token[0]));
+
+    assertThat(TreeUtils.tokens(parsed.lastToken())).containsExactly(parsed.lastToken());
+
+  }
+
+  @Test
+  public void hasDescendants() {
+    FileInput fileInput = parse("class A:\n  def foo(): pass");
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.PASS_STMT))).isTrue();
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("foo")))).isTrue();
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("bar")))).isFalse();
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.IF_STMT))).isFalse();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }
@@ -82,7 +110,6 @@ public class TreeUtilsTest {
   private FileInput parse(String content) {
     Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     AstNode astNode = parser.parse(content);
-    FileInput parse = new PythonTreeMaker().fileInput(astNode);
-    return parse;
+    return new PythonTreeMaker().fileInput(astNode);
   }
 }

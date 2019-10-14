@@ -21,16 +21,18 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.tree.Expression;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Name;
+import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
+import org.sonar.python.tree.BaseTreeVisitor;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -75,12 +77,20 @@ public class ExpressionsTest {
   }
 
   private Expression exp(String code) {
-    FileInput tree = parse(code);
-    return tree.descendants()
-      .filter(Expression.class::isInstance)
-      .map(Expression.class::cast)
-      .findFirst()
-      .get();
+    return exp(parse(code));
+  }
+
+  private Expression exp(Tree tree) {
+    if (tree instanceof Expression) {
+      return (Expression) tree;
+    }
+    for (Tree child : tree.children()) {
+      Expression exp = exp(child);
+      if (exp != null) {
+        return exp;
+      }
+    }
+    return null;
   }
 
   private FileInput parse(String code) {
@@ -100,10 +110,19 @@ public class ExpressionsTest {
   private Expression lastNameValue(String code) {
     FileInput root = parse(code);
     new SymbolTableBuilder().visitFileInput(root);
-    List<Name> names = root.descendants(Kind.NAME)
-      .map(Name.class::cast)
-      .collect(Collectors.toList());
+    NameVisitor nameVisitor = new NameVisitor();
+    root.accept(nameVisitor);
+    List<Name> names = nameVisitor.names;
     return Expressions.singleAssignedValue(names.get(names.size() - 1));
+  }
+
+  private static class NameVisitor extends BaseTreeVisitor {
+    private List<Name> names = new ArrayList<>();
+
+    @Override
+    public void visitName(Name pyNameTree) {
+      names.add(pyNameTree);
+    }
   }
 
 }
