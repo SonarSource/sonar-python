@@ -61,7 +61,7 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TupleParameter;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;

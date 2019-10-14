@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.regex.Pattern;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 
 public abstract class AbstractNameCheck extends PythonSubscriptionCheck {
 

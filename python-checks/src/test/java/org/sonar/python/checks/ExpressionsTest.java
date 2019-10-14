@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;

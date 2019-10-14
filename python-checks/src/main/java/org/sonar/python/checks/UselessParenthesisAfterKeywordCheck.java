@@ -20,8 +20,8 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.DelStatement;

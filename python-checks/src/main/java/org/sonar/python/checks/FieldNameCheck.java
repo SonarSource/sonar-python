@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;

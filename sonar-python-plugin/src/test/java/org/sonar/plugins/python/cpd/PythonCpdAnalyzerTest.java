@@ -32,7 +32,7 @@ import org.sonar.api.batch.sensor.cpd.internal.TokensLine;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static java.nio.charset.StandardCharsets.UTF_8;

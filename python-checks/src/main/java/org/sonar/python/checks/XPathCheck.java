@@ -25,8 +25,8 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 
 @Rule(key = XPathCheck.CHECK_KEY)
 public class XPathCheck implements PythonCheck {

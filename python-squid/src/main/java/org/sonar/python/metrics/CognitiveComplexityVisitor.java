@@ -43,7 +43,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.WhileStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 public class CognitiveComplexityVisitor extends BaseTreeVisitor {
 

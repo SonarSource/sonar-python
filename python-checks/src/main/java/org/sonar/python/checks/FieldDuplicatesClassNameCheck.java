@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;

@@ -24,15 +24,15 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 import org.junit.Test;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 import static org.fest.assertions.Assertions.assertThat;
 

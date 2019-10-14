@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;

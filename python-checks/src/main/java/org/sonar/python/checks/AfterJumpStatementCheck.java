@@ -23,15 +23,15 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.TryStatement;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.tree.BaseTreeVisitor;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1763")

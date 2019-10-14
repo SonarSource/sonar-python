@@ -17,83 +17,11 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.tree;
+package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.AliasedName;
-import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
-import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
-import org.sonar.plugins.python.api.tree.AssertStatement;
-import org.sonar.plugins.python.api.tree.AssignmentStatement;
-import org.sonar.plugins.python.api.tree.AwaitExpression;
-import org.sonar.plugins.python.api.tree.BinaryExpression;
-import org.sonar.plugins.python.api.tree.BreakStatement;
-import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.ClassDef;
-import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
-import org.sonar.plugins.python.api.tree.ComprehensionExpression;
-import org.sonar.plugins.python.api.tree.ComprehensionFor;
-import org.sonar.plugins.python.api.tree.ComprehensionIf;
-import org.sonar.plugins.python.api.tree.ConditionalExpression;
-import org.sonar.plugins.python.api.tree.ContinueStatement;
-import org.sonar.plugins.python.api.tree.Decorator;
-import org.sonar.plugins.python.api.tree.DelStatement;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.plugins.python.api.tree.DottedName;
-import org.sonar.plugins.python.api.tree.EllipsisExpression;
-import org.sonar.plugins.python.api.tree.ElseClause;
-import org.sonar.plugins.python.api.tree.ExceptClause;
-import org.sonar.plugins.python.api.tree.ExecStatement;
-import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.ExpressionStatement;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FinallyClause;
-import org.sonar.plugins.python.api.tree.ForStatement;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.GlobalStatement;
-import org.sonar.plugins.python.api.tree.IfStatement;
-import org.sonar.plugins.python.api.tree.ImportFrom;
-import org.sonar.plugins.python.api.tree.ImportName;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
-import org.sonar.plugins.python.api.tree.LambdaExpression;
-import org.sonar.plugins.python.api.tree.ListLiteral;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.NoneExpression;
-import org.sonar.plugins.python.api.tree.NonlocalStatement;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
-import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.Parameter;
-import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
-import org.sonar.plugins.python.api.tree.PassStatement;
-import org.sonar.plugins.python.api.tree.PrintStatement;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.RaiseStatement;
-import org.sonar.plugins.python.api.tree.ReprExpression;
-import org.sonar.plugins.python.api.tree.ReturnStatement;
-import org.sonar.plugins.python.api.tree.SetLiteral;
-import org.sonar.plugins.python.api.tree.SliceExpression;
-import org.sonar.plugins.python.api.tree.SliceItem;
-import org.sonar.plugins.python.api.tree.SliceList;
-import org.sonar.plugins.python.api.tree.StarredExpression;
-import org.sonar.plugins.python.api.tree.StatementList;
-import org.sonar.plugins.python.api.tree.StringElement;
-import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.plugins.python.api.tree.SubscriptionExpression;
-import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.plugins.python.api.tree.TryStatement;
-import org.sonar.plugins.python.api.tree.TupleParameter;
-import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.plugins.python.api.tree.WhileStatement;
-import org.sonar.plugins.python.api.tree.WithItem;
-import org.sonar.plugins.python.api.tree.WithStatement;
-import org.sonar.plugins.python.api.tree.YieldExpression;
-import org.sonar.plugins.python.api.tree.YieldStatement;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.DictCompExpressionImpl;
 
 /**
  * Default implementation of {@link TreeVisitor}.

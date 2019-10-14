@@ -21,8 +21,8 @@ package org.sonar.python.checks;
 
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;

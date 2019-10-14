@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -37,7 +37,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1481")

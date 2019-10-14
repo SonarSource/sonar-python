@@ -25,7 +25,7 @@ import java.util.List;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.Token;

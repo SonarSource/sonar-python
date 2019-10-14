@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.python.SubscriptionContext;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
@@ -38,7 +38,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 @Rule(key = SQLQueriesCheck.CHECK_KEY)
 public class SQLQueriesCheck extends AbstractCallExpressionCheck {

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
