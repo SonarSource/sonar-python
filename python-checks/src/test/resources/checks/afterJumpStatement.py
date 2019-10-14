@@ -197,7 +197,7 @@ def try_block_having_jump_statement(p):
         raise AnsibleVaultError(msg)
     print("a") # OK
 
-def try_block_without_jumo_statements():
+def try_block_without_jump_statements():
     try:
         print("try")
     except E:
