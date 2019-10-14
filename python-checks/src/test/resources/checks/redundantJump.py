@@ -259,6 +259,8 @@ def non_redundant_return_inside_except():
     except E as e:
         print(e)
         return # OK
+    finally:
+        print("finally")
     print("after try")
 
 def non_redundant_return_inside_else():
@@ -267,7 +269,10 @@ def non_redundant_return_inside_else():
     except E as e:
         print(e)
     else:
+        print("else")
         return # OK
+    finally:
+        print("finally")
     print("after try")
 
 def non_redundant_continue_inside_except(cond):
@@ -277,6 +282,8 @@ def non_redundant_continue_inside_except(cond):
         except E as e:
             print(e)
             continue # OK
+        finally:
+            print("finally")
         print("after try")
 
 def non_redundant_continue_inside_else(cond):
@@ -286,7 +293,10 @@ def non_redundant_continue_inside_else(cond):
         except E as e:
             print(e)
         else:
+            print("else")
             continue # OK
+        finally:
+            print("finally")
         print("after try")
 
 def redundant_continue_inside_while_stmt_in_except(cond):
