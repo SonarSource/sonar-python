@@ -31,7 +31,6 @@ import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1763")
 public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
@@ -58,20 +57,10 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
           .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
           .map(block -> block.elements().get(block.elements().size() - 1))
           .collect(Collectors.toList());
-        if (isInsideFinallyClause(firstElement)) {
-          continue;
-        }
         Tree lastElement = cfgBlock.elements().get(cfgBlock.elements().size() - 1);
         PreciseIssue issue = ctx.addIssue(firstElement.firstToken(), lastElement.lastToken(), "Delete this unreachable code or refactor the code to make it reachable.");
         jumpStatements.forEach(jumpStatement -> issue.secondary(jumpStatement, null));
       }
     }
   }
-
-  // due to CFG limitation on jump statements inside try blocks, we exclude finally clause to avoid FP.
-  // TODO: After SONARPY-448 is implemented, we should remove this exclusion
-  private static boolean isInsideFinallyClause(Tree element) {
-    return  TreeUtils.firstAncestorOfKind(element, Kind.FINALLY_CLAUSE) != null;
-  }
 }
-

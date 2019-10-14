@@ -253,6 +253,50 @@ def redundant_return_inside_else_block():
         print(42)
         return # FN
 
+def non_redundant_return_inside_except():
+    try:
+        pass
+    except E as e:
+        print(e)
+        return # OK
+    print("after try")
+
+def non_redundant_return_inside_else():
+    try:
+        pass
+    except E as e:
+        print(e)
+    else:
+        return # OK
+    print("after try")
+
+def non_redundant_continue_inside_except(cond):
+    while cond:
+        try:
+            pass
+        except E as e:
+            print(e)
+            continue # OK
+        print("after try")
+
+def non_redundant_continue_inside_else(cond):
+    while cond:
+        try:
+            pass
+        except E as e:
+            print(e)
+        else:
+            continue # OK
+        print("after try")
+
+def redundant_continue_inside_while_stmt_in_except(cond):
+    try:
+        pass
+    except E:
+        while cond:
+            print("foo")
+            continue # FN
+
 def raise_statement():
     raise Error()
 

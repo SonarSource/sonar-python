@@ -79,3 +79,17 @@ def nested_jump_statements_with_else_continuing_outer_loop(items, p):
             continue
         break
     print("after")
+
+def non_redundant_continue_in_nested_try(p):
+    i = 0
+    while i < 10:
+        try:
+            try:
+                i = i + 1
+                if p:
+                    raise
+            except:
+                continue # OK
+        finally:
+            print("finally")
+        break
