@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.python.api.tree.ComprehensionFor;
-import org.sonar.python.api.tree.DictCompExpression;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ComprehensionFor;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class DictCompExpressionImpl extends PyTree implements DictCompExpression {
 

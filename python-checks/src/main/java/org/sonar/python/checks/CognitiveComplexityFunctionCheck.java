@@ -25,8 +25,8 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.metrics.CognitiveComplexityVisitor;
 
 @Rule(key = CognitiveComplexityFunctionCheck.CHECK_KEY)

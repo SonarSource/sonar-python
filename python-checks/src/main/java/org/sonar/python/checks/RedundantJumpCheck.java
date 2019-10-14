@@ -26,12 +26,12 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.FileInput;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.ReturnStatement;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
 import org.sonar.python.tree.TreeUtils;
 

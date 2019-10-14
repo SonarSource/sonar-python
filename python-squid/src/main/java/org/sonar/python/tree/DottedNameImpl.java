@@ -21,10 +21,10 @@ package org.sonar.python.tree;
 
 import java.util.Collections;
 import java.util.List;
-import org.sonar.python.api.tree.DottedName;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.DottedName;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class DottedNameImpl extends PyTree implements DottedName {
   private final List<Name> names;

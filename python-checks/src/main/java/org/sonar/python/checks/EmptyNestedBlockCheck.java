@@ -23,10 +23,10 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = EmptyNestedBlockCheck.CHECK_KEY)

@@ -22,9 +22,9 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.tree.BinaryExpression;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "InequalityUsage")
 public class InequalityUsageCheck extends PythonSubscriptionCheck {

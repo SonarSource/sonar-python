@@ -24,8 +24,8 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S2245")

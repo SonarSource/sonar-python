@@ -23,8 +23,8 @@ package org.sonar.python.tree;
 import java.util.List;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public abstract class SimpleStatement extends PyTree {
 

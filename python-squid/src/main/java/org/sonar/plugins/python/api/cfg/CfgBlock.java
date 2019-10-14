@@ -22,7 +22,7 @@ package org.sonar.plugins.python.api.cfg;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public interface CfgBlock {
 

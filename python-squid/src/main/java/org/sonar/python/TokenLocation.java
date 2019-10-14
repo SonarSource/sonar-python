@@ -19,7 +19,7 @@
  */
 package org.sonar.python;
 
-import org.sonar.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Token;
 
 public class TokenLocation {
 

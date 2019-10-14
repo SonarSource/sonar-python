@@ -24,14 +24,14 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.AssignmentStatement;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.ExpressionList;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.QualifiedExpression;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)

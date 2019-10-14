@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
-import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 
 import static org.sonar.python.checks.CheckUtils.classHasInheritance;
 import static org.sonar.python.checks.CheckUtils.getParentClassDef;

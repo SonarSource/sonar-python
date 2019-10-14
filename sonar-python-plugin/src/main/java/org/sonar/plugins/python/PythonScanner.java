@@ -49,7 +49,7 @@ import org.sonar.python.PythonFile;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;

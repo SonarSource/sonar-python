@@ -21,11 +21,11 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.api.tree.AnyParameter;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.TupleParameter;
+import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.TupleParameter;
 
 public class TupleParameterImpl extends PyTree implements TupleParameter {
 

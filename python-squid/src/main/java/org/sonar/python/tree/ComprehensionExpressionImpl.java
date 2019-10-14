@@ -24,12 +24,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.ComprehensionExpression;
-import org.sonar.python.api.tree.ComprehensionFor;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.ComprehensionFor;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class ComprehensionExpressionImpl extends PyTree implements ComprehensionExpression {
 

@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.junit.Test;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.FileInput;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.StringLiteral;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

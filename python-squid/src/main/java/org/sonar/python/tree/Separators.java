@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Token;
 
 public class Separators {
   public static final Separators EMPTY = new Separators(null, null);

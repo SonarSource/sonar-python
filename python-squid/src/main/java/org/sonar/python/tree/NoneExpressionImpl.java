@@ -21,10 +21,10 @@ package org.sonar.python.tree;
 
 import java.util.Collections;
 import java.util.List;
-import org.sonar.python.api.tree.NoneExpression;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.NoneExpression;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class NoneExpressionImpl extends PyTree implements NoneExpression {
   private final Token none;

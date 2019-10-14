@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.UnaryExpression;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 @Rule(key = PreIncrementDecrementCheck.CHECK_KEY)
 public class PreIncrementDecrementCheck extends PythonSubscriptionCheck {

@@ -22,11 +22,11 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.ParameterList;
-import org.sonar.python.api.tree.Parameter;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S2733")
 public class ExitHasBadArgumentsCheck extends PythonSubscriptionCheck {

@@ -24,7 +24,7 @@ import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
 public class PythonVisitorContext {

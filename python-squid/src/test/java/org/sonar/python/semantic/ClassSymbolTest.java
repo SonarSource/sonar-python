@@ -20,9 +20,9 @@
 package org.sonar.python.semantic;
 
 import org.junit.Test;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.FileInput;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;

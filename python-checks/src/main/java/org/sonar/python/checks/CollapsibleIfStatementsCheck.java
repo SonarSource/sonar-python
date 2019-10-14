@@ -25,9 +25,9 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonCheckTree;
 import org.sonar.python.PythonVisitorContext;
-import org.sonar.python.api.tree.IfStatement;
-import org.sonar.python.api.tree.Statement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
 public class CollapsibleIfStatementsCheck extends PythonCheckTree {

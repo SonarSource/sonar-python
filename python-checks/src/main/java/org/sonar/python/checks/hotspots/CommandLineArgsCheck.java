@@ -22,8 +22,8 @@ package org.sonar.python.checks.hotspots;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
 

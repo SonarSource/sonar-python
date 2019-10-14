@@ -22,8 +22,8 @@ package org.sonar.python;
 import com.sonar.sslr.api.AstNode;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TokenImpl;
 
 public abstract class IssueLocation {

@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import org.sonar.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.parser.PythonParser;
 

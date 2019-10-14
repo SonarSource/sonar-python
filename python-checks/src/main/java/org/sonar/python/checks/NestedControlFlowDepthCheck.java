@@ -27,12 +27,12 @@ import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonCheckTree;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.tree.ForStatement;
-import org.sonar.python.api.tree.IfStatement;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TryStatement;
-import org.sonar.python.api.tree.WhileStatement;
-import org.sonar.python.api.tree.WithStatement;
+import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.plugins.python.api.tree.WithStatement;
 
 @Rule(key = "S134")
 public class NestedControlFlowDepthCheck extends PythonCheckTree {

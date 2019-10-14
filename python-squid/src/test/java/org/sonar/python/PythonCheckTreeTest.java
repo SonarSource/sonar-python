@@ -23,8 +23,8 @@ import java.io.File;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

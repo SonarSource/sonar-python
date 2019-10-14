@@ -28,8 +28,8 @@ import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
 public class PythonCpdAnalyzer {

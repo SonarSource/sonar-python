@@ -21,9 +21,9 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.ParenthesizedExpression;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = UselessParenthesisCheck.CHECK_KEY)
 public class UselessParenthesisCheck extends PythonSubscriptionCheck {

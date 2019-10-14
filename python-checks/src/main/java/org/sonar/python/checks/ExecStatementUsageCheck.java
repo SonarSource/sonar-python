@@ -21,8 +21,8 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.ExecStatement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ExecStatement;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = ExecStatementUsageCheck.CHECK_KEY)
 public class ExecStatementUsageCheck extends PythonSubscriptionCheck {

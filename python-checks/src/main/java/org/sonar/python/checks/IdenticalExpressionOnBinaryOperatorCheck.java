@@ -24,11 +24,11 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.BinaryExpression;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.NumericLiteral;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S1764")
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscriptionCheck {

@@ -25,14 +25,14 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.StringElement;
-import org.sonar.python.api.tree.StringLiteral;
-import org.sonar.python.api.tree.SubscriptionExpression;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5443")
