@@ -17,24 +17,37 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python;
+package org.sonar.plugins.python.api;
 
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.IssueLocation;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
-public interface SubscriptionContext {
-  Tree syntaxNode();
+public abstract class PythonCheckTree extends BaseTreeVisitor implements PythonCheck {
 
-  PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
+  private PythonVisitorContext context;
 
-  PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
+  private PythonVisitorContext getContext() {
+    return context;
+  }
 
-  PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message);
+  protected final PreciseIssue addIssue(Token token, @Nullable String message) {
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(token, message));
+    getContext().addIssue(newIssue);
+    return newIssue;
+  }
 
-  PythonCheck.PreciseIssue addFileIssue(String finalMessage);
+  protected final PreciseIssue addIssue(Tree node, @Nullable String message) {
+    PreciseIssue newIssue = new PreciseIssue(this, IssueLocation.preciseLocation(node, message));
+    getContext().addIssue(newIssue);
+    return newIssue;
+  }
 
-  PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
-
-  PythonFile pythonFile();
+  @Override
+  public void scanFile(PythonVisitorContext visitorContext) {
+    this.context = visitorContext;
+    scan(context.rootTree());
+  }
 }

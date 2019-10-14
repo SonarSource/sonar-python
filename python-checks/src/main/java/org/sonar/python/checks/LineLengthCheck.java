@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import java.text.MessageFormat;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = LineLengthCheck.CHECK_KEY)

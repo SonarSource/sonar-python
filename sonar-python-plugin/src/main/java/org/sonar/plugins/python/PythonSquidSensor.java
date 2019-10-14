@@ -32,7 +32,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.python.PythonCheck;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.CheckList;
 
 public final class PythonSquidSensor implements Sensor {

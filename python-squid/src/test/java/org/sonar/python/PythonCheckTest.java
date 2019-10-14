@@ -22,7 +22,10 @@ package org.sonar.python;
 import java.io.File;
 import java.util.List;
 import org.junit.Test;
-import org.sonar.python.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 

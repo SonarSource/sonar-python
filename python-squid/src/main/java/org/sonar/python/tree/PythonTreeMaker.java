@@ -785,7 +785,7 @@ public class PythonTreeMaker {
     return new TupleImpl(null, expressions, commaTokens, null);
   }
 
-  Expression expression(AstNode astNode) {
+  public Expression expression(AstNode astNode) {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.LBRACKET)) {
       return listLiteral(astNode);
     }

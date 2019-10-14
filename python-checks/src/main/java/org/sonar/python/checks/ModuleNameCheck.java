@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.SubscriptionCheck;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S1578")

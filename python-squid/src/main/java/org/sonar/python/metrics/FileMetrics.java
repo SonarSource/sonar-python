@@ -21,10 +21,10 @@ package org.sonar.python.metrics;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 public class FileMetrics {
 

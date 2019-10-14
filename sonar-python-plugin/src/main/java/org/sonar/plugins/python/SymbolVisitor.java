@@ -31,7 +31,7 @@ import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
-import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 public class SymbolVisitor extends BaseTreeVisitor {
 

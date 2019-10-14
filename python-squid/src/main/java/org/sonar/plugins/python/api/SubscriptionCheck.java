@@ -17,23 +17,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.plugins.python.api;
 
-import com.sonar.sslr.api.RecognitionException;
-import org.sonar.check.Rule;
-import org.sonar.python.IssueLocation;
-import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonVisitorContext;
+import java.util.function.Consumer;
+import org.sonar.plugins.python.api.tree.Tree;
 
-@Rule(key = "ParsingError")
-public class ParsingErrorCheck implements PythonCheck {
+public interface SubscriptionCheck {
+  void initialize(Context context);
 
-  @Override
-  public void scanFile(PythonVisitorContext context) {
-    RecognitionException parsingException = context.parsingException();
-    if (parsingException != null) {
-      context.addIssue(new PreciseIssue(this, IssueLocation.atLineLevel(parsingException.getMessage(), parsingException.getLine())));
-    }
+  interface Context {
+
+    void registerSyntaxNodeConsumer(Tree.Kind elementType, Consumer<SubscriptionContext> consumer);
+
   }
-
 }

@@ -17,14 +17,15 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python;
+package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.PythonFile;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
 public class PythonVisitorContext {

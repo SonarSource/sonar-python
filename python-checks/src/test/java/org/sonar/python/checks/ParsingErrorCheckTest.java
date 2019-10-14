@@ -26,9 +26,9 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.junit.Test;
-import org.sonar.python.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.python.PythonConfiguration;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;

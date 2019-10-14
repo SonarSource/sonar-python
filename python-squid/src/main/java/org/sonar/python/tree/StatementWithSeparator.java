@@ -26,7 +26,7 @@ public class StatementWithSeparator {
   private AstNode statement;
   private Separators separators;
 
-  StatementWithSeparator(AstNode statement, @Nullable Separators separators) {
+  public StatementWithSeparator(AstNode statement, @Nullable Separators separators) {
     this.statement = statement;
     this.separators = separators == null ? Separators.EMPTY : separators;
   }

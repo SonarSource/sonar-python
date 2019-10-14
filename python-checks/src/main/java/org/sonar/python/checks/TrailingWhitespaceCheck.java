@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonCheck;
-import org.sonar.python.PythonVisitorContext;
+import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 
 @Rule(key = "S1131")
 public class TrailingWhitespaceCheck implements PythonCheck {

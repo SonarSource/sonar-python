@@ -17,17 +17,15 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python;
+package org.sonar.plugins.python.api;
 
-import java.util.function.Consumer;
-import org.sonar.plugins.python.api.tree.Tree;
+public abstract class PythonSubscriptionCheck implements SubscriptionCheck, PythonCheck {
+  @Override
+  public void scanFile(PythonVisitorContext visitorContext) {
+    // empty implementation
+  }
 
-public interface SubscriptionCheck {
-  void initialize(Context context);
-
-  interface Context {
-
-    void registerSyntaxNodeConsumer(Tree.Kind elementType, Consumer<SubscriptionContext> consumer);
-
+  public void leaveFile() {
+    // callback when leaving file
   }
 }
