@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.api.tree.CallExpression;
@@ -34,7 +33,6 @@ import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.StringElement;
-import org.sonar.python.api.tree.StringLiteral;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
@@ -44,8 +42,6 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1481")
 public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
-
-  private static final Pattern INTERPOLATION_PATTERN = Pattern.compile("\\{(.*?)\\}");
 
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
 
@@ -97,6 +93,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   }
 
   private static class StringInterpolationVisitor extends BaseTreeVisitor {
+    private static final Pattern INTERPOLATION_PATTERN = Pattern.compile("\\{(.*?)\\}");
+
     Set<String> stringInterpolations = new HashSet<>();
     @Override
     public void visitStringElement(StringElement tree) {
@@ -104,14 +102,15 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         stringInterpolations.addAll(extractInterpolations(tree.trimmedQuotesValue()));
       }
     }
-  }
 
-  private static Set<String> extractInterpolations(String str) {
-    Matcher matcher = INTERPOLATION_PATTERN.matcher(str);
-    Set<String> identifiers = new HashSet<>();
-    while (matcher.find()) {
-      identifiers.add(matcher.group(1));
+    private static Set<String> extractInterpolations(String str) {
+      Matcher matcher = INTERPOLATION_PATTERN.matcher(str);
+      Set<String> identifiers = new HashSet<>();
+      while (matcher.find()) {
+        identifiers.add(matcher.group(1));
+      }
+      return identifiers;
     }
-    return identifiers;
+
   }
 }

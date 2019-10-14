@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import javax.annotation.CheckForNull;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
@@ -51,6 +52,7 @@ public final class PythonTestUtils {
   }
 
 
+  @CheckForNull
   public static <T extends Tree> T getFirstChild(Tree tree, Predicate<Tree> predicate) {
     for (Tree child : tree.children()) {
       if(predicate.test(child)) {

@@ -32,6 +32,7 @@ import org.sonar.python.api.tree.ClassDef;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.IfStatement;
+import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.PassStatement;
 import org.sonar.python.api.tree.Statement;
 import org.sonar.python.api.tree.Token;
@@ -91,6 +92,15 @@ public class TreeUtilsTest {
 
     assertThat(TreeUtils.tokens(parsed.lastToken())).containsExactly(parsed.lastToken());
 
+  }
+
+  @Test
+  public void hasDescendants() {
+    FileInput fileInput = parse("class A:\n  def foo(): pass");
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.PASS_STMT))).isTrue();
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("foo")))).isTrue();
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("bar")))).isFalse();
+    assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.IF_STMT))).isFalse();
   }
 
   private static boolean isOuterFunction(Tree tree) {

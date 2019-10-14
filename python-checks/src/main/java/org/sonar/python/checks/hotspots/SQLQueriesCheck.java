@@ -71,7 +71,8 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     tree.accept(visitor);
     visitor.symbols.stream()
       .filter(Objects::nonNull)
-      .map(symbol -> symbol.fullyQualifiedName() != null ? symbol.fullyQualifiedName() : "")
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
       .forEach(qualifiedName -> {
       if (qualifiedName.contains("django.db.models")) {
         isUsingDjangoModel = true;
