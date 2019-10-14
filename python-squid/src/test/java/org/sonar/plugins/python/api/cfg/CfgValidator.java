@@ -130,9 +130,15 @@ public class CfgValidator {
     String expectedSyntSucc = expectedCfg.expectedSyntSucc(actualBlock);
 
     if (expectedSyntSucc != null) {
-      assertThat(actualBlock.syntacticSuccessor())
-        .withFailMessage(buildDebugMessage("syntactic successor", blockTestId))
-        .isEqualTo(expectedCfg.cfgBlock(expectedSyntSucc));
+      if (expectedSyntSucc.equals(ExpectedCfgStructure.EMPTY)) {
+        assertThat(actualBlock.syntacticSuccessor().elements())
+          .withFailMessage("syntactic successor should be _empty", blockTestId)
+          .isEmpty();
+      } else {
+        assertThat(actualBlock.syntacticSuccessor())
+          .withFailMessage(buildDebugMessage("syntactic successor", blockTestId))
+          .isEqualTo(expectedCfg.cfgBlock(expectedSyntSucc));
+      }
     } else {
       assertThat(actualBlock.syntacticSuccessor()).withFailMessage(buildDebugMessage("syntactic successor", blockTestId)).isNull();
     }

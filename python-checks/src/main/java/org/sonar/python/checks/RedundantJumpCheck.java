@@ -33,6 +33,7 @@ import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3626")
 public class RedundantJumpCheck extends PythonSubscriptionCheck {
@@ -84,7 +85,12 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
   private static boolean isException(Tree lastElement) {
     return lastElement.is(Kind.RAISE_STMT)
       || isReturnWithExpression(lastElement)
-      || isInsideSingleStatementBlock(lastElement);
+      || isInsideSingleStatementBlock(lastElement)
+      || hasTryAncestor(lastElement);
+  }
+  // ignore jumps in try statement because CFG is not precise
+  private static boolean hasTryAncestor(Tree element) {
+    return TreeUtils.firstAncestorOfKind(element, Kind.TRY_STMT) != null;
   }
 
 }

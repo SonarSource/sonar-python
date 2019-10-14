@@ -196,7 +196,7 @@ def redundant_return_inside_catch_block():
         pass
     except E as e:
         print(e)
-        return # Noncompliant
+        return # FN
     else:
         print(42)
 
@@ -205,7 +205,7 @@ def redundant_return_inside_catch_block_multiple():
         pass
     except E as e:
         print(e)
-        return # Noncompliant
+        return # FN
     except E1 as e:
         print(e)
     else:
@@ -230,7 +230,7 @@ def redundant_return_inside_finally_block():
         print(42)
     finally:
         print(e)
-        return # Noncompliant
+        return # FN
 
 def non_redundant_return_inside_else_block():
     try:
@@ -242,6 +242,7 @@ def non_redundant_return_inside_else_block():
         return # OK - finally to be executed
     finally:
         print(e)
+    print("foo")
 
 def redundant_return_inside_else_block():
     try:
@@ -250,7 +251,61 @@ def redundant_return_inside_else_block():
         print(e)
     else:
         print(42)
-        return # Noncompliant
+        return # FN
+
+def non_redundant_return_inside_except():
+    try:
+        pass
+    except E as e:
+        print(e)
+        return # OK
+    finally:
+        print("finally")
+    print("after try")
+
+def non_redundant_return_inside_else():
+    try:
+        pass
+    except E as e:
+        print(e)
+    else:
+        print("else")
+        return # OK
+    finally:
+        print("finally")
+    print("after try")
+
+def non_redundant_continue_inside_except(cond):
+    while cond:
+        try:
+            pass
+        except E as e:
+            print(e)
+            continue # OK
+        finally:
+            print("finally")
+        print("after try")
+
+def non_redundant_continue_inside_else(cond):
+    while cond:
+        try:
+            pass
+        except E as e:
+            print(e)
+        else:
+            print("else")
+            continue # OK
+        finally:
+            print("finally")
+        print("after try")
+
+def redundant_continue_inside_while_stmt_in_except(cond):
+    try:
+        pass
+    except E:
+        while cond:
+            print("foo")
+            continue # FN
 
 def raise_statement():
     raise Error()

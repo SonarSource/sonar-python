@@ -79,3 +79,16 @@ def nested_jump_statements_with_else_continuing_outer_loop(items, p):
             continue
         break
     print("after")
+
+def continue_in_except_block(p):
+    i = 0
+    while i < 10:
+        try:
+            i = i + 1
+            if p:
+                raise
+        except E:
+            continue
+        finally:
+            print("finally")
+        break # OK

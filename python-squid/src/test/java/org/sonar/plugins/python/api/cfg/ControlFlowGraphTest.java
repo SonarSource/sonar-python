@@ -343,7 +343,8 @@ public class ControlFlowGraphTest {
       "except except_cond(succ = [except_block, finally_block]) as e:",
       "  except_block(succ = [finally_block])",
       "finally:",
-      "  finally_block(succ = [END])"
+      "  finally_block(succ = [after, END])",
+      "after(succ=[END])"
     );
   }
 
@@ -360,7 +361,7 @@ public class ControlFlowGraphTest {
       "else:",
       "  else_block(succ = [finally_block])",
       "finally:",
-      "  finally_block(succ = [END])"
+      "  finally_block(succ = [END, END])"
     );
   }
 
@@ -402,6 +403,168 @@ public class ControlFlowGraphTest {
       "except cond1(succ = [except_body, END], elem = 1):",
       "  except_body(succ = [after_try], elem = 1)",
       "after_try(succ = [END], elem = 1)");
+  }
+
+  @Test
+  public void return_in_try() {
+    ControlFlowGraph cfg = cfg(
+      "before_try(succ = [try_body])",
+      "try:",
+      "  try_body(succ = [except_cond], syntSucc = _empty)",
+      "  return",
+      "except except_cond(succ = [except_block, finally_block]):",
+      " except_block(succ = [finally_block])",
+      "finally:",
+      "  finally_block(succ = [after_try, END])",
+      "  pass",
+      "after_try(succ = [END])");
+
+    ExpectedCfgStructure expectedCfgStructure = ExpectedCfgStructure.parse(cfg.blocks(), expected -> {
+      expected.createEmptyBlockExpectation()
+        .withSuccessorsIds("except_cond", "finally_block");
+      return expected;
+    });
+    new CfgValidator(expectedCfgStructure).assertCfg(cfg);
+  }
+
+  @Test
+  public void break_in_try() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [finally_block], syntSucc = finally_block)",
+      "    break",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "    pass",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void continue_in_try() {
+    ControlFlowGraph cfg = cfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [except_cond], syntSucc = _empty)",
+      "    continue",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block])",
+      "    print()",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "    pass",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+    ExpectedCfgStructure expectedCfgStructure = ExpectedCfgStructure.parse(cfg.blocks(), expected -> {
+      expected.createEmptyBlockExpectation()
+        .withSuccessorsIds("except_cond", "finally_block");
+      return expected;
+    });
+    new CfgValidator(expectedCfgStructure).assertCfg(cfg);
+  }
+
+  @Test
+  public void return_in_except() {
+    verifyCfg(
+      "before_try(succ = [try_body])",
+      "try:",
+      "  try_body(succ = [finally_block, except_cond])",
+      "except except_cond(succ = [except_block, finally_block]):",
+      "  except_block(succ = [finally_block], syntSucc = finally_block)",
+      "  return",
+      "finally:",
+      "  finally_block(succ = [after_try, END])",
+      "  pass",
+      "after_try(succ = [END])");
+  }
+
+  @Test
+  public void return_in_else() {
+    verifyCfg(
+      "before_try(succ = [try_body])",
+      "try:",
+      "  try_body(succ = [else_block, except_cond])",
+      "except except_cond(succ = [except_block, finally_block]):",
+      "  except_block(succ = [finally_block])",
+      "else:",
+      "  else_block(succ = [finally_block], syntSucc = finally_block)",
+      "  return",
+      "finally:",
+      "  finally_block(succ = [after_try, END])",
+      "  pass",
+      "after_try(succ = [END])");
+  }
+
+
+  @Test
+  public void continue_in_except() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [finally_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block], syntSucc=finally_block)",
+      "    continue",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void continue_in_else() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [else_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block])",
+      "  else:",
+      "    else_block(succ = [finally_block], syntSucc=finally_block)",
+      "    continue",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void break_in_except() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [finally_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block], syntSucc=finally_block)",
+      "    break",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
+  }
+
+  @Test
+  public void break_in_else() {
+    verifyCfg(
+      "before_while(succ = [cond])",
+      "while cond(succ = [try_body, after_while]):",
+      "  try:",
+      "    try_body(succ = [else_block, except_cond])",
+      "  except except_cond(succ = [except_block, finally_block]):",
+      "    except_block(succ = [finally_block])",
+      "  else:",
+      "    else_block(succ = [finally_block], syntSucc=finally_block)",
+      "    break",
+      "  finally:",
+      "    finally_block(succ = [after_try, END])",
+      "  after_try(succ = [cond])",
+      "after_while(succ = [END])");
   }
 
   @Test
