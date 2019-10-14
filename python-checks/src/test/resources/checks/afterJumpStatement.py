@@ -112,7 +112,7 @@ def try_stmt_return():
     try:
         print("try")
         return
-        print("dead code") # Noncompliant
+        print("dead code") # FN
     except Error:
         print("error")
 
@@ -131,7 +131,7 @@ def try_stmt_return_inside_except():
         return
     except Error:
         return
-        print("error") # Noncompliant
+        print("error") # FN
 
 def try_stmt_return_except():
     try:
@@ -181,3 +181,26 @@ def code_after_with():
     with A():
         return e
     return False
+
+
+def try_block_having_jump_statement(p):
+    while p :
+        try:
+            if p:
+                break
+            print("try")
+        except AnsibleVaultFormatError as exc:
+            raise
+        except AnsibleError as e:
+            continue
+    else:
+        raise AnsibleVaultError(msg)
+    print("a") # OK
+
+def try_block_without_jumo_statements():
+    try:
+        print("try")
+    except E:
+        print("except")
+    return 42
+    print("dead code") # Noncompliant

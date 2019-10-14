@@ -27,8 +27,12 @@ import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
 import org.sonar.python.api.tree.FileInput;
 import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.python.api.tree.StatementList;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.api.tree.TryStatement;
+import org.sonar.python.tree.BaseTreeVisitor;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1763")
 public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
@@ -36,16 +40,28 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx ->
-      checkCfg(ControlFlowGraph.build((FileInput) ctx.syntaxNode(), ctx.pythonFile()), ctx)
+      {
+        FileInput fileInput = (FileInput) ctx.syntaxNode();
+        checkCfg(ControlFlowGraph.build(fileInput, ctx.pythonFile()), ctx, fileInput.statements());
+      }
     );
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx ->
-      checkCfg(ControlFlowGraph.build((FunctionDef) ctx.syntaxNode(), ctx.pythonFile()), ctx)
+      {
+        FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+        checkCfg(ControlFlowGraph.build(functionDef, ctx.pythonFile()), ctx, functionDef.body());
+      }
     );
 
   }
 
-  private static void checkCfg(@Nullable ControlFlowGraph cfg, SubscriptionContext ctx) {
-    if (cfg == null) {
+  private static void checkCfg(@Nullable ControlFlowGraph cfg, SubscriptionContext ctx, @Nullable StatementList body) {
+    if (cfg == null || body == null) {
+      return;
+    }
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
+    body.accept(tryStatementVisitor);
+    // to avoid FP in the CFG, we exclude try statement containing jumps
+    if (tryStatementVisitor.hasTryStatementContainingJump) {
       return;
     }
     for (CfgBlock cfgBlock : cfg.blocks()) {
@@ -57,6 +73,21 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
           .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
           .map(block -> block.elements().get(block.elements().size() - 1))
           .forEach(jumpStatement -> issue.secondary(jumpStatement, null));
+      }
+    }
+  }
+
+  private static class TryStatementVisitor extends BaseTreeVisitor {
+    boolean hasTryStatementContainingJump = false;
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      // don't go inside functions
+    }
+
+    @Override
+    public void visitTryStatement(TryStatement tryStatement) {
+      if (!hasTryStatementContainingJump) {
+        hasTryStatementContainingJump = TreeUtils.hasDescendant(tryStatement, tree -> tree.is(Kind.BREAK_STMT, Kind.CONTINUE_STMT, Kind.RETURN_STMT));
       }
     }
   }
