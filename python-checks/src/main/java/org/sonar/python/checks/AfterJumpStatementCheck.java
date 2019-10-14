@@ -19,8 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
@@ -53,13 +51,12 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
     for (CfgBlock cfgBlock : cfg.blocks()) {
       if (cfgBlock.predecessors().isEmpty() && !cfgBlock.equals(cfg.start()) && !cfgBlock.elements().isEmpty()) {
         Tree firstElement = cfgBlock.elements().get(0);
-        List<Tree> jumpStatements = cfg.blocks().stream()
-          .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
-          .map(block -> block.elements().get(block.elements().size() - 1))
-          .collect(Collectors.toList());
         Tree lastElement = cfgBlock.elements().get(cfgBlock.elements().size() - 1);
         PreciseIssue issue = ctx.addIssue(firstElement.firstToken(), lastElement.lastToken(), "Delete this unreachable code or refactor the code to make it reachable.");
-        jumpStatements.forEach(jumpStatement -> issue.secondary(jumpStatement, null));
+        cfg.blocks().stream()
+          .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
+          .map(block -> block.elements().get(block.elements().size() - 1))
+          .forEach(jumpStatement -> issue.secondary(jumpStatement, null));
       }
     }
   }
