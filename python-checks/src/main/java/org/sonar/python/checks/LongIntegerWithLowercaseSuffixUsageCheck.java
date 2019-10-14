@@ -21,8 +21,8 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.NumericLiteral;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = LongIntegerWithLowercaseSuffixUsageCheck.CHECK_KEY)
 public class LongIntegerWithLowercaseSuffixUsageCheck extends PythonSubscriptionCheck {

@@ -28,10 +28,10 @@ import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Trivia;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 import static org.fest.assertions.Assertions.assertThat;

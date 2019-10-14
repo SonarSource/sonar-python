@@ -25,9 +25,9 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Trivia;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Trivia;
 
 @Rule(key = "S1707")
 public class NoPersonReferenceInTodoCheck extends PythonSubscriptionCheck {

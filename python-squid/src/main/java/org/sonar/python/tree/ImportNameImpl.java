@@ -25,11 +25,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.AliasedName;
-import org.sonar.python.api.tree.ImportName;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.AliasedName;
+import org.sonar.plugins.python.api.tree.ImportName;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class ImportNameImpl extends SimpleStatement implements ImportName {
 

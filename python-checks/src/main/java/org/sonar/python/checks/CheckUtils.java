@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.api.tree.ArgList;
-import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class CheckUtils {
 

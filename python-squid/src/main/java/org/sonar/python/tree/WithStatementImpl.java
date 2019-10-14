@@ -27,13 +27,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.WithItem;
-import org.sonar.python.api.tree.WithStatement;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.WithItem;
+import org.sonar.plugins.python.api.tree.WithStatement;
 
 public class WithStatementImpl extends PyTree implements WithStatement {
 

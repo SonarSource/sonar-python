@@ -24,14 +24,14 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.NumericLiteral;
-import org.sonar.python.api.tree.QualifiedExpression;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S4426")

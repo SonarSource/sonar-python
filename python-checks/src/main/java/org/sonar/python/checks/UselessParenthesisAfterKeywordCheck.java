@@ -22,21 +22,21 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.AssertStatement;
-import org.sonar.python.api.tree.BinaryExpression;
-import org.sonar.python.api.tree.DelStatement;
-import org.sonar.python.api.tree.ExceptClause;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.ForStatement;
-import org.sonar.python.api.tree.IfStatement;
-import org.sonar.python.api.tree.ParenthesizedExpression;
-import org.sonar.python.api.tree.RaiseStatement;
-import org.sonar.python.api.tree.ReturnStatement;
-import org.sonar.python.api.tree.Tuple;
-import org.sonar.python.api.tree.UnaryExpression;
-import org.sonar.python.api.tree.WhileStatement;
-import org.sonar.python.api.tree.YieldExpression;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.DelStatement;
+import org.sonar.plugins.python.api.tree.ExceptClause;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
+import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.plugins.python.api.tree.YieldExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S1721")
 public class UselessParenthesisAfterKeywordCheck extends PythonSubscriptionCheck {

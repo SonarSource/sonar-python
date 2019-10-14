@@ -30,9 +30,9 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.BaseTreeVisitor;
 

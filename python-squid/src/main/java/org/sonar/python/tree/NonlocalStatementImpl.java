@@ -25,11 +25,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.NonlocalStatement;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NonlocalStatement;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class NonlocalStatementImpl extends SimpleStatement implements NonlocalStatement {
   private final Token nonlocalKeyword;

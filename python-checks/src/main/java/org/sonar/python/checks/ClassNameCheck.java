@@ -21,9 +21,9 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = ClassNameCheck.CHECK_KEY)
 public class ClassNameCheck extends AbstractNameCheck {

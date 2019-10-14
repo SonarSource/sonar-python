@@ -34,16 +34,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.ExceptClause;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.ExpressionStatement;
-import org.sonar.python.api.tree.ForStatement;
-import org.sonar.python.api.tree.ListLiteral;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.NumericLiteral;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ExceptClause;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
+import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.ListLiteral;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.PythonCfgEndBlock;
 
 public class ExpectedCfgStructure {

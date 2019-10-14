@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python.api.cfg;
 
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 /**
  * A {@link CfgBlock} with 2 successors: represents a block ending

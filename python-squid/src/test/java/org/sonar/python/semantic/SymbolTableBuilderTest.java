@@ -31,11 +31,11 @@ import org.junit.Test;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
-import org.sonar.python.api.tree.FileInput;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.LambdaExpression;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -22,8 +22,8 @@ package org.sonar.python;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public interface PythonCheck {
 

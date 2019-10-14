@@ -24,11 +24,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.YieldExpression;
-import org.sonar.python.api.tree.YieldStatement;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.YieldExpression;
+import org.sonar.plugins.python.api.tree.YieldStatement;
 
 public class YieldStatementImpl extends SimpleStatement implements YieldStatement {
   private final YieldExpression yieldExpression;

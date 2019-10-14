@@ -20,7 +20,7 @@
 package org.sonar.python;
 
 import java.util.function.Consumer;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public interface SubscriptionCheck {
   void initialize(Context context);

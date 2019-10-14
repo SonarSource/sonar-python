@@ -25,8 +25,8 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 public abstract class AbstractCallExpressionCheck extends PythonSubscriptionCheck {

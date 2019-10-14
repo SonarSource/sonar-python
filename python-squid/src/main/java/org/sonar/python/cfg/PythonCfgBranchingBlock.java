@@ -27,7 +27,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.CfgBranchingBlock;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class PythonCfgBranchingBlock extends PythonCfgBlock implements CfgBranchingBlock {
 

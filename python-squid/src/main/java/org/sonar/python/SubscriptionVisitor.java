@@ -28,10 +28,10 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.FileInput;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 public class SubscriptionVisitor {
 

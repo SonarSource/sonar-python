@@ -23,8 +23,8 @@ import java.util.function.Consumer;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.Statement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = ReturnYieldOutsideFunctionCheck.CHECK_KEY)
 public class ReturnYieldOutsideFunctionCheck extends PythonSubscriptionCheck {

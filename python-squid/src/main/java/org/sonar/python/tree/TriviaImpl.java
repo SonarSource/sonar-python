@@ -19,8 +19,8 @@
  */
 package org.sonar.python.tree;
 
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Trivia;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Trivia;
 
 public class TriviaImpl implements Trivia {
 

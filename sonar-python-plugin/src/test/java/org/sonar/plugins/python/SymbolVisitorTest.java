@@ -32,7 +32,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.python.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
-import org.sonar.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FileInput;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

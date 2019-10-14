@@ -19,7 +19,7 @@
  */
 package org.sonar.python.semantic;
 
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public interface Usage {
 

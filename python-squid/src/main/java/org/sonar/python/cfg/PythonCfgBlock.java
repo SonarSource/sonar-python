@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public abstract class PythonCfgBlock implements CfgBlock {
 

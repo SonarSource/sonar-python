@@ -21,7 +21,7 @@ package org.sonar.python.semantic;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

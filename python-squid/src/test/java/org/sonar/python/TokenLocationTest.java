@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
-import org.sonar.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.lexer.PythonLexer;
 import org.sonar.python.tree.TokenImpl;
 

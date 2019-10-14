@@ -23,10 +23,10 @@ import com.sonar.sslr.api.TokenType;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Trivia;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Trivia;
 
 public class TokenImpl extends PyTree implements Token {
 

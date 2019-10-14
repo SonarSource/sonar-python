@@ -21,11 +21,11 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.ExpressionList;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class ExpressionListImpl extends PyTree implements ExpressionList {
   private final List<Expression> expressions;

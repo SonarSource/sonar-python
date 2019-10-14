@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.AnnotatedAssignment;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class AnnotatedAssignmentImpl extends SimpleStatement implements AnnotatedAssignment {
   private final Expression variable;

@@ -20,10 +20,10 @@
 package org.sonar.python.tree;
 
 import java.util.List;
-import org.sonar.python.api.tree.DictionaryLiteral;
-import org.sonar.python.api.tree.KeyValuePair;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<KeyValuePair> implements DictionaryLiteral {
 

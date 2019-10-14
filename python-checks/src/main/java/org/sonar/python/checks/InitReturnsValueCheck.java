@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.ReturnStatement;
-import org.sonar.python.api.tree.YieldStatement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = InitReturnsValueCheck.CHECK_KEY)

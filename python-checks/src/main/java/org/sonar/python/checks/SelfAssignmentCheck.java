@@ -26,16 +26,16 @@ import org.sonar.check.Rule;
 import org.sonar.python.PythonBuiltinFunctions;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.AliasedName;
-import org.sonar.python.api.tree.AnnotatedAssignment;
-import org.sonar.python.api.tree.AssignmentStatement;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.ImportFrom;
-import org.sonar.python.api.tree.ImportName;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Statement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.AliasedName;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ImportFrom;
+import org.sonar.plugins.python.api.tree.ImportName;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)

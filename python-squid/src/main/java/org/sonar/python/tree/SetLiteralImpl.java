@@ -20,10 +20,10 @@
 package org.sonar.python.tree;
 
 import java.util.List;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.SetLiteral;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.SetLiteral;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements SetLiteral {
 

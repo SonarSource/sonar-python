@@ -24,13 +24,13 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.HasSymbol;
-import org.sonar.python.api.tree.ArgList;
-import org.sonar.python.api.tree.Argument;
-import org.sonar.python.api.tree.AssignmentStatement;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S4792")

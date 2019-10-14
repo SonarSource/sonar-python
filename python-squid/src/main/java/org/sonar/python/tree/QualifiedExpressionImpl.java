@@ -22,12 +22,12 @@ package org.sonar.python.tree;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.QualifiedExpression;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class QualifiedExpressionImpl extends PyTree implements QualifiedExpression {
   private final Name name;

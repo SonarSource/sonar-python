@@ -20,11 +20,11 @@
 package org.sonar.python;
 
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.ExpressionStatement;
-import org.sonar.python.api.tree.Statement;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.StringLiteral;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 
 /**
  * Extractor of docstring tokens.

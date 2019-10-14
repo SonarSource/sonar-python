@@ -24,7 +24,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionCheck;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S1578")
 public class ModuleNameCheck extends PythonSubscriptionCheck {

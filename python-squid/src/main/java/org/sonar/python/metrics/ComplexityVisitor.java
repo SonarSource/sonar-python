@@ -21,14 +21,14 @@ package org.sonar.python.metrics;
 
 import com.sonar.sslr.api.TokenType;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.tree.BinaryExpression;
-import org.sonar.python.api.tree.ComprehensionIf;
-import org.sonar.python.api.tree.ConditionalExpression;
-import org.sonar.python.api.tree.ForStatement;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.IfStatement;
-import org.sonar.python.api.tree.WhileStatement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.ComprehensionIf;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
+import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.BaseTreeVisitor;
 
 public class ComplexityVisitor extends BaseTreeVisitor {

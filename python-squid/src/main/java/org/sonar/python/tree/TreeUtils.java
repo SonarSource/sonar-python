@@ -24,9 +24,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 public class TreeUtils {
   private TreeUtils() {

@@ -23,14 +23,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.ExpressionStatement;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Statement;
 
-import static org.sonar.python.api.tree.Tree.Kind.EXPRESSION_STMT;
-import static org.sonar.python.api.tree.Tree.Kind.PASS_STMT;
-import static org.sonar.python.api.tree.Tree.Kind.STATEMENT_LIST;
-import static org.sonar.python.api.tree.Tree.Kind.STRING_LITERAL;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.EXPRESSION_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.PASS_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.STATEMENT_LIST;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 
 @Rule(key = "S2772")
 public class NeedlessPassCheck extends PythonSubscriptionCheck {

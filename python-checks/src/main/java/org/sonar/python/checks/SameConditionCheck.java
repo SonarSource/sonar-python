@@ -25,12 +25,12 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.ElseClause;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.IfStatement;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Statement;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ElseClause;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = SameConditionCheck.CHECK_KEY)
 public class SameConditionCheck extends PythonSubscriptionCheck {

@@ -23,13 +23,13 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
 import org.sonar.python.SubscriptionContext;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.FileInput;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.StringLiteral;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 @Rule(key = MissingDocstringCheck.CHECK_KEY)
 public class MissingDocstringCheck extends PythonSubscriptionCheck {

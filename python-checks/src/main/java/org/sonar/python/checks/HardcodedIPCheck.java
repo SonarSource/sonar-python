@@ -26,8 +26,8 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.StringLiteral;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = HardcodedIPCheck.CHECK_KEY)
 public class HardcodedIPCheck extends PythonSubscriptionCheck {

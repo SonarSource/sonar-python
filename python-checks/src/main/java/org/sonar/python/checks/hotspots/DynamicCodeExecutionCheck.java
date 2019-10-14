@@ -21,10 +21,10 @@ package org.sonar.python.checks.hotspots;
 
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.CallExpression;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S1523")
 public class DynamicCodeExecutionCheck extends PythonSubscriptionCheck {

@@ -24,11 +24,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.FinallyClause;
-import org.sonar.python.api.tree.StatementList;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.TreeVisitor;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.FinallyClause;
+import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Tree;
 
 public class FinallyClauseImpl extends PyTree implements FinallyClause {
   private final Token finallyKeyword;

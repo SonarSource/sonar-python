@@ -23,8 +23,8 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.ClassDef;
-import org.sonar.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S1700")

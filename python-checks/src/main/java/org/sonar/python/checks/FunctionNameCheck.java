@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
-import org.sonar.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 
 @Rule(key = FunctionNameCheck.CHECK_KEY)
 public class FunctionNameCheck extends AbstractFunctionNameCheck {

@@ -24,11 +24,11 @@ import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.python.PythonCheck.PreciseIssue;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.Name;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.Trivia;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Trivia;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

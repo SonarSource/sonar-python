@@ -22,12 +22,12 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
-import org.sonar.python.api.tree.AssignmentStatement;
-import org.sonar.python.api.tree.Expression;
-import org.sonar.python.api.tree.ExpressionList;
-import org.sonar.python.api.tree.Token;
-import org.sonar.python.api.tree.Tree;
-import org.sonar.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class AssignmentStatementImpl extends SimpleStatement implements AssignmentStatement {
   private final List<Token> assignTokens;

@@ -22,9 +22,9 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.python.PythonSubscriptionCheck;
-import org.sonar.python.api.tree.FunctionDef;
-import org.sonar.python.api.tree.LambdaExpression;
-import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
 public class TooManyParametersCheck extends PythonSubscriptionCheck {
