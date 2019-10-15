@@ -1227,6 +1227,9 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(exceptClause.asKeyword()).isNull();
     assertThat(exceptClause.commaToken().value()).isEqualTo(",");
     assertThat(exceptClause.exceptionInstance()).isNotNull();
+    assertThat(exceptClause.children())
+      .containsExactly(exceptClause.exceptKeyword(), exceptClause.exception(), exceptClause.commaToken(), exceptClause.exceptionInstance(),
+        /*colon token is not accessible through API*/ exceptClause.children().get(4), exceptClause.body());
     assertThat(tryStatement.children()).hasSize(4);
   }
 
