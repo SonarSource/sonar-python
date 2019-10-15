@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.python.api.tree.ComprehensionExpression;
 import org.sonar.python.api.tree.ComprehensionFor;
 import org.sonar.python.api.tree.Expression;
@@ -38,8 +39,8 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   private final ComprehensionFor comprehensionFor;
   private final Token closingToken;
 
-  public ComprehensionExpressionImpl(Kind kind, Token openingToken, Expression resultExpression,
-                                     ComprehensionFor compFor, Token closingToken) {
+  public ComprehensionExpressionImpl(Kind kind, @Nullable Token openingToken, Expression resultExpression,
+                                     ComprehensionFor compFor, @Nullable Token closingToken) {
     this.kind = kind;
     this.resultExpression = resultExpression;
     this.comprehensionFor = compFor;

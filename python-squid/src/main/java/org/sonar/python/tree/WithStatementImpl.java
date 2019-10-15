@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +39,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
 
   private final Token withKeyword;
   private final List<WithItem> withItems;
+  private final List<Token> commas;
   private final Token newLine;
   private final Token indent;
   private final StatementList statements;
@@ -46,10 +48,11 @@ public class WithStatementImpl extends PyTree implements WithStatement {
   private final boolean isAsync;
   private final Token colon;
 
-  public WithStatementImpl(Token withKeyword, List<WithItem> withItems, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
+  public WithStatementImpl(Token withKeyword, List<WithItem> withItems, List<Token> commas, Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList statements,
                            @Nullable Token dedent, @Nullable Token asyncKeyword) {
     this.withKeyword = withKeyword;
     this.withItems = withItems;
+    this.commas = commas;
     this.colon = colon;
     this.newLine = newLine;
     this.indent = indent;
@@ -102,8 +105,17 @@ public class WithStatementImpl extends PyTree implements WithStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(asyncKeyword, withKeyword), withItems, Arrays.asList(colon, newLine, indent, statements, dedent))
-      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    List<Tree> children = new ArrayList<>(Arrays.asList(asyncKeyword, withKeyword));
+    int i = 0;
+    for (Tree item : withItems) {
+      children.add(item);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    children.addAll(Arrays.asList(colon, newLine, indent, statements, dedent));
+    return children.stream().filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   public static class WithItemImpl extends PyTree implements WithItem {

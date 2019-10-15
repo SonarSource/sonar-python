@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.api.TokenType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -31,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
@@ -1288,7 +1290,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(withItem.expression()).isNull();
     assertThat(withStatement.statements().statements()).hasSize(1);
     assertThat(withStatement.statements().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
-    assertThat(withStatement.children()).hasSize(8);
+    assertThat(withStatement.children()).hasSize(9);
   }
 
   @Test
@@ -2205,6 +2207,15 @@ public class PythonTreeMakerTest extends RuleTest {
     // ensure every visit method of base tree visitor is called without errors
     BaseTreeVisitor visitor = new BaseTreeVisitor();
     tree.accept(visitor);
+    List<TokenType> ptt = Arrays.asList(PythonTokenType.NEWLINE, PythonTokenType.DEDENT, PythonTokenType.INDENT, GenericTokenType.EOF);
+    String tokens = TreeUtils.tokens(tree).stream().filter(t -> !ptt.contains(t.type())).map(token -> {
+      if(token.type() == PythonTokenType.STRING) {
+        return token.value().replaceAll("\n", "").replaceAll(" ", "");
+      }
+      return token.value();
+    }).collect(Collectors.joining(""));
+    String originalCode = code.replaceAll("#.*\\n", "").replaceAll("\\n", "").replaceAll(" ", "");
+    assertThat(tokens).isEqualTo(originalCode);
     return tree;
   }
 
