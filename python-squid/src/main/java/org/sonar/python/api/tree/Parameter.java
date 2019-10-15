@@ -26,6 +26,10 @@ public interface Parameter extends AnyParameter {
   @CheckForNull
   Token starToken();
 
+  /**
+   * @return null only in case of star parameter
+   */
+  @CheckForNull
   Name name();
 
   @CheckForNull

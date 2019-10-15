@@ -76,3 +76,11 @@ def binding_usages(param):
 
 def func_with_tuple_param((a, (b, c)), d):
   pass
+
+
+def func_with_star_param(a, *, d):
+  pass
+
+class a:
+  def method_with_star_param(*, d):
+    pass

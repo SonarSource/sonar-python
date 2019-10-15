@@ -829,6 +829,11 @@ public class PythonTreeMakerTest extends RuleTest {
       "This is a function docstring\n" +
       "\"\"\"");
     assertThat(functionDef.children()).hasSize(10);
+
+    functionDef = parse("def __call__(self, *, manager):\n  pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).hasSize(3);
+    functionDef = parse("def __call__(*):\n  pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).hasSize(1);
   }
 
   @Test
@@ -2211,7 +2216,9 @@ public class PythonTreeMakerTest extends RuleTest {
     BaseTreeVisitor visitor = new BaseTreeVisitor();
     tree.accept(visitor);
     List<TokenType> ptt = Arrays.asList(PythonTokenType.NEWLINE, PythonTokenType.DEDENT, PythonTokenType.INDENT, GenericTokenType.EOF);
-    String tokens = TreeUtils.tokens(tree).stream().filter(t -> !ptt.contains(t.type())).map(token -> {
+    List<Token> tokenList = TreeUtils.tokens(tree);
+
+    String tokens = tokenList.stream().filter(t -> !ptt.contains(t.type())).map(token -> {
       if(token.type() == PythonTokenType.STRING) {
         return token.value().replaceAll("\n", "").replaceAll(" ", "");
       }
