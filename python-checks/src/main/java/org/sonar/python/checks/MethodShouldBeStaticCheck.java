@@ -84,7 +84,12 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
       return false;
     }
     Parameter first = params.get(0);
-    SelfVisitor visitor = new SelfVisitor(first.name().name());
+    Name paramName = first.name();
+    if(paramName == null) {
+      // star argument should not raise issue
+      return true;
+    }
+    SelfVisitor visitor = new SelfVisitor(paramName.name());
     funcDef.body().accept(visitor);
     return visitor.isUsingSelfArg;
   }

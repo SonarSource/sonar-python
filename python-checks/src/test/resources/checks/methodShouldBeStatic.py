@@ -137,3 +137,7 @@ def fun():
 
 def __abs__(x):
     print(1)
+
+class MethodWithStarParam:
+  def fun(*, b):
+    print(1)
