@@ -91,7 +91,7 @@ public class KeyValuePairImpl extends PyTree implements KeyValuePair {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(expression, key, colon, value, starStarToken).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(starStarToken, expression, key, colon, value).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

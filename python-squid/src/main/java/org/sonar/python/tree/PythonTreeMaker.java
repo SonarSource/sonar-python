@@ -712,11 +712,12 @@ public class PythonTreeMaker {
       asyncKeyword = toPyToken(astNode.getFirstChild().getToken());
     }
     List<WithItem> withItems = withItems(withStmtNode.getChildren(PythonGrammar.WITH_ITEM));
+    List<Token> commas = punctuators(withStmtNode, PythonPunctuator.COMMA);
     AstNode suite = withStmtNode.getFirstChild(PythonGrammar.SUITE);
     Token withKeyword = toPyToken(withStmtNode.getToken());
     Token colon = toPyToken(suite.getPreviousSibling().getToken());
     StatementList body = getStatementListFromSuite(suite);
-    return new WithStatementImpl(withKeyword, withItems, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), asyncKeyword);
+    return new WithStatementImpl(withKeyword, withItems, commas, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), asyncKeyword);
   }
 
   private List<WithItem> withItems(List<AstNode> withItems) {
@@ -1136,7 +1137,7 @@ public class PythonTreeMaker {
     if (compFor != null) {
       Expression expression = expression(astNode.getFirstChild());
       ComprehensionExpression comprehension =
-        new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, expression.firstToken(), expression, compFor(compFor), toPyToken(compFor.getLastToken()));
+        new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, null, expression, compFor(compFor), null);
       return new ArgumentImpl(comprehension, null, null);
     }
     AstNode assign = astNode.getFirstChild(PythonPunctuator.ASSIGN);
