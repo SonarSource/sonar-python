@@ -25,6 +25,7 @@ import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -516,8 +517,8 @@ public class PythonTreeMaker {
     ParameterList parameterList = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (typedArgListNode != null) {
-      List<AnyParameter> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF).stream()
-        .map(this::parameter).collect(Collectors.toList());
+      List<AnyParameter> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF, PythonPunctuator.MUL).stream()
+        .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
       List<Token> commas = punctuators(typedArgListNode, PythonPunctuator.COMMA);
       parameterList = new ParameterListImpl(arguments, commas);
     }
@@ -1188,6 +1189,12 @@ public class PythonTreeMaker {
   }
 
   private AnyParameter parameter(AstNode parameter) {
+    if(parameter.is(PythonPunctuator.MUL)) {
+      if(parameter.getNextSibling()==null || parameter.getNextSibling().is(PythonPunctuator.COMMA)) {
+        return new ParameterImpl(toPyToken(parameter.getToken()));
+      }
+      return null;
+    }
     AstNode prevSibling = parameter.getPreviousSibling();
 
     if (parameter.is(PythonGrammar.NAME)) {

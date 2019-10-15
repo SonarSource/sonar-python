@@ -27,12 +27,12 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.api.tree.HasSymbol;
 import org.sonar.python.api.tree.AliasedName;
 import org.sonar.python.api.tree.AnnotatedAssignment;
 import org.sonar.python.api.tree.AnyParameter;
@@ -48,17 +48,18 @@ import org.sonar.python.api.tree.ForStatement;
 import org.sonar.python.api.tree.FunctionDef;
 import org.sonar.python.api.tree.FunctionLike;
 import org.sonar.python.api.tree.GlobalStatement;
+import org.sonar.python.api.tree.HasSymbol;
 import org.sonar.python.api.tree.ImportFrom;
 import org.sonar.python.api.tree.ImportName;
 import org.sonar.python.api.tree.LambdaExpression;
 import org.sonar.python.api.tree.Name;
 import org.sonar.python.api.tree.NonlocalStatement;
-import org.sonar.python.api.tree.ParameterList;
 import org.sonar.python.api.tree.Parameter;
+import org.sonar.python.api.tree.ParameterList;
 import org.sonar.python.api.tree.QualifiedExpression;
-import org.sonar.python.api.tree.Tuple;
 import org.sonar.python.api.tree.Tree;
 import org.sonar.python.api.tree.Tree.Kind;
+import org.sonar.python.api.tree.Tuple;
 import org.sonar.python.api.tree.TupleParameter;
 import org.sonar.python.tree.BaseTreeVisitor;
 import org.sonar.python.tree.ClassDefImpl;
@@ -223,7 +224,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       parameterList.nonTuple()
         .stream()
         .skip(hasSelf ? 1 : 0)
-        .forEach(param -> addBindingUsage(param.name(), Usage.Kind.PARAMETER));
+        .map(Parameter::name)
+        .filter(Objects::nonNull)
+        .forEach(param -> addBindingUsage(param, Usage.Kind.PARAMETER));
 
       parameterList.all().stream()
         .filter(param -> param.is(Kind.TUPLE_PARAMETER))
@@ -340,11 +343,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     private void createSelfParameter(Parameter parameter) {
       Name nameTree = parameter.name();
-      String symbolName = nameTree.name();
-      SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
-      symbols.add(symbol);
-      symbolsByName.put(symbolName, symbol);
-      symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
+      if (nameTree != null) {
+        String symbolName = nameTree.name();
+        SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
+        symbols.add(symbol);
+        symbolsByName.put(symbolName, symbol);
+        symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
+      }
     }
 
     void addBindingUsage(Name nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {

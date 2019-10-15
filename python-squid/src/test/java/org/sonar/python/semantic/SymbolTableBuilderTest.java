@@ -40,7 +40,7 @@ import org.sonar.python.tree.BaseTreeVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SymbolTableBuilderTreeTest {
+public class SymbolTableBuilderTest {
   private static Map<String, FunctionDef> functionTreesByName = new HashMap<>();
   private static FileInput fileInput;
 
@@ -234,6 +234,17 @@ public class SymbolTableBuilderTreeTest {
     FunctionDef functionTree = functionTreesByName.get("func_with_tuple_param");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(4);
+  }
+
+  @Test
+  public void function_with_star_param() {
+    FunctionDef functionTree = functionTreesByName.get("func_with_star_param");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(2);
+
+    functionTree = functionTreesByName.get("method_with_star_param");
+    symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {
