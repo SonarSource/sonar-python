@@ -51,7 +51,7 @@ public class PythonCpdAnalyzerTest {
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
 
     List<TokensLine> lines = context.cpdTokens("moduleKey:code_chunks_2.py");
-    assertThat(lines).isNotNull().hasSize(25);
+    assertThat(lines).isNotNull().hasSize(29);
     TokensLine line1 = lines.get(0);
     assertThat(line1.getStartLine()).isEqualTo(2);
     assertThat(line1.getEndLine()).isEqualTo(2);
@@ -86,7 +86,11 @@ public class PythonCpdAnalyzerTest {
       "yield;\n",
       "items=[]",
       "(itemforiteminitems)",
-      "[itemforiteminitems]");
+      "[itemforiteminitems]",
+      "ifitemisnotNone:",
+      "pass\n",
+      "ifitemnotinitems:",
+      "pass\n");
   }
 
   private DefaultInputFile inputFile(String fileName) {

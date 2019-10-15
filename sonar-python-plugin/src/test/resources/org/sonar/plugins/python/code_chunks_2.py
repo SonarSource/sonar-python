@@ -26,3 +26,9 @@ def bar2(**baz):   #star syntax
 items = []
 (item for item in items)
 [item for item in items]
+
+if item is not None: # make sure "is not" binary expression tokens are provided in order
+    pass
+
+if item not in items: # make sure "not in" binary expression tokens are provided in order
+    pass

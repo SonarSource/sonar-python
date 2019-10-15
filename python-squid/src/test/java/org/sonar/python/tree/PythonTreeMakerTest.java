@@ -1505,23 +1505,25 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(notIn.getKind()).isEqualTo(Tree.Kind.IN);
     assertThat(notIn.operator().value()).isEqualTo("in");
     assertThat(notIn.notToken()).isNotNull();
+    assertThat(notIn.children()).containsExactly(notIn.leftOperand(), notIn.notToken(), notIn.operator(), notIn.rightOperand());
   }
 
   @Test
   public void is_expressions() {
     setRootRule(PythonGrammar.TEST);
 
-    IsExpression in = (IsExpression) binaryExpression("a is 1");
-    assertThat(in.getKind()).isEqualTo(Tree.Kind.IS);
-    assertThat(in.operator().value()).isEqualTo("is");
-    assertThat(in.leftOperand().getKind()).isEqualTo(Tree.Kind.NAME);
-    assertThat(in.rightOperand().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
-    assertThat(in.notToken()).isNull();
+    IsExpression is = (IsExpression) binaryExpression("a is 1");
+    assertThat(is.getKind()).isEqualTo(Tree.Kind.IS);
+    assertThat(is.operator().value()).isEqualTo("is");
+    assertThat(is.leftOperand().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(is.rightOperand().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
+    assertThat(is.notToken()).isNull();
 
-    IsExpression notIn = (IsExpression) binaryExpression("a is not 1");
-    assertThat(notIn.getKind()).isEqualTo(Tree.Kind.IS);
-    assertThat(notIn.operator().value()).isEqualTo("is");
-    assertThat(notIn.notToken()).isNotNull();
+    IsExpression notIs = (IsExpression) binaryExpression("a is not 1");
+    assertThat(notIs.getKind()).isEqualTo(Tree.Kind.IS);
+    assertThat(notIs.operator().value()).isEqualTo("is");
+    assertThat(notIs.notToken()).isNotNull();
+    assertThat(notIs.children()).containsExactly(notIs.leftOperand(), notIs.operator(), notIs.notToken(), notIs.rightOperand());
   }
 
   @Test

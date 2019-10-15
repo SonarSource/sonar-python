@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -53,6 +52,6 @@ public class InExpressionImpl extends BinaryExpressionImpl implements InExpressi
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(notToken), super.computeChildren()).flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(leftOperand(), notToken, operator(), rightOperand()).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
