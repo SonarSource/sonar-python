@@ -98,7 +98,7 @@ public class TryStatementImpl extends PyTree implements TryStatement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(tryKeyword, colon, newLine, indent, tryBody, dedent), exceptClauses, Arrays.asList(finallyClause, elseClause))
+    return Stream.of(Arrays.asList(tryKeyword, colon, newLine, indent, tryBody, dedent), exceptClauses, Arrays.asList(elseClause, finallyClause))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
