@@ -1236,6 +1236,13 @@ public class PythonTreeMakerTest extends RuleTest {
       .containsExactly(exceptClause.exceptKeyword(), exceptClause.exception(), exceptClause.commaToken(), exceptClause.exceptionInstance(),
         /*colon token is not accessible through API*/ exceptClause.children().get(4), exceptClause.body());
     assertThat(tryStatement.children()).hasSize(4);
+
+    astNode = p.parse("try:\n    pass\nexcept Error:\n    pass\nelse:\n    pass\nfinally:\n    pass");
+    tryStatement = treeMaker.tryStatement(astNode);
+    List<Tree> children = tryStatement.children();
+    assertThat(children.get(children.size() - 2)).isSameAs(tryStatement.elseClause());
+    assertThat(children.get(children.size() - 1)).isSameAs(tryStatement.finallyClause());
+
   }
 
   @Test
