@@ -390,17 +390,17 @@ public class PythonTreeMaker {
     return importFromStatement(importStmt, separators);
   }
 
-  private ImportName importName(AstNode astNode, Separators separators) {
+  private static ImportName importName(AstNode astNode, Separators separators) {
     Token importKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.IMPORT).getToken());
     List<AliasedName> aliasedNames = astNode
       .getFirstChild(PythonGrammar.DOTTED_AS_NAMES)
       .getChildren(PythonGrammar.DOTTED_AS_NAME).stream()
-      .map(this::aliasedName)
+      .map(PythonTreeMaker::aliasedName)
       .collect(Collectors.toList());
     return new ImportNameImpl(importKeyword, aliasedNames, separators);
   }
 
-  public ImportFrom importFromStatement(AstNode astNode, Separators separators) {
+  private static ImportFrom importFromStatement(AstNode astNode, Separators separators) {
     Token importKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.IMPORT).getToken());
     Token fromKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.FROM).getToken());
     List<Token> dottedPrefixForModule = punctuators(astNode, PythonPunctuator.DOT);
@@ -414,7 +414,7 @@ public class PythonTreeMaker {
     boolean isWildcardImport = true;
     if (importAsnames != null) {
       aliasedImportNames = importAsnames.getChildren(PythonGrammar.IMPORT_AS_NAME).stream()
-        .map(this::aliasedName)
+        .map(PythonTreeMaker::aliasedName)
         .collect(Collectors.toList());
       isWildcardImport = false;
     }
@@ -425,7 +425,7 @@ public class PythonTreeMaker {
     return new ImportFromImpl(fromKeyword, dottedPrefixForModule, moduleName, importKeyword, aliasedImportNames, wildcard, separators);
   }
 
-  private AliasedName aliasedName(AstNode astNode) {
+  private static AliasedName aliasedName(AstNode astNode) {
     AstNode asKeyword = astNode.getFirstChild(PythonKeyword.AS);
     DottedName dottedName;
     if (astNode.is(PythonGrammar.DOTTED_AS_NAME)) {

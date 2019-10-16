@@ -38,10 +38,10 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscription
 
   @Override
   public void initialize(Context context) {
-    kinds.forEach(k -> context.registerSyntaxNodeConsumer(k, this::checkBinaryExpression));
+    kinds.forEach(k -> context.registerSyntaxNodeConsumer(k, IdenticalExpressionOnBinaryOperatorCheck::checkBinaryExpression));
   }
 
-  private void checkBinaryExpression(SubscriptionContext ctx) {
+  private static void checkBinaryExpression(SubscriptionContext ctx) {
     BinaryExpression binaryExpression = (BinaryExpression) ctx.syntaxNode();
     Expression leftOperand = binaryExpression.leftOperand();
     Expression rightOperand = binaryExpression.rightOperand();

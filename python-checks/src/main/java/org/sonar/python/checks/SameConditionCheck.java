@@ -72,13 +72,13 @@ public class SameConditionCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void findSameConditions(List<Expression> conditions, SubscriptionContext ctx) {
+  private static void findSameConditions(List<Expression> conditions, SubscriptionContext ctx) {
     for (int i = 1; i < conditions.size(); i++) {
       compareConditions(conditions, i, ctx);
     }
   }
 
-  private void compareConditions(List<Expression> conditions, int index, SubscriptionContext ctx) {
+  private static void compareConditions(List<Expression> conditions, int index, SubscriptionContext ctx) {
     for (int j = 0; j < index; j++) {
       if (CheckUtils.areEquivalent(conditions.get(j), conditions.get(index))) {
         String message = String.format(MESSAGE, conditions.get(j).firstToken().line());
