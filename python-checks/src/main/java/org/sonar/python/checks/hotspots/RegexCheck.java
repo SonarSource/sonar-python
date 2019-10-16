@@ -59,7 +59,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private void checkRegexArgument(Argument arg, SubscriptionContext ctx) {
+  private static void checkRegexArgument(Argument arg, SubscriptionContext ctx) {
     String literal = arg.firstToken().value();
     IssueLocation secondaryLocation = null;
     Expression argExpression = getExpression(arg.expression());
