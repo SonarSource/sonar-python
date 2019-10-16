@@ -19,21 +19,23 @@
  */
 package org.sonar.samples.python;
 
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.ForStatement;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.junit.Test;
+import org.sonar.api.Plugin;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
+import org.sonar.api.SonarRuntime;
+import org.sonar.api.internal.PluginContextImpl;
+import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.Version;
 
-@Rule(
-  key = "subscription",
-  priority = Priority.MINOR,
-  name = "Python subscription visitor check",
-  description = "desc")
-public class CustomPythonSubscriptionCheck extends PythonSubscriptionCheck {
+import static org.assertj.core.api.Assertions.assertThat;
 
-  @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> ctx.addIssue(((ForStatement) ctx.syntaxNode()).forKeyword(), "For statement."));
+public class CustomPythonRulesPluginTest {
+  @Test
+  public void test() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.DEVELOPER);
+    Plugin.Context context = new PluginContextImpl.Builder().setSonarRuntime(sonarRuntime).build();
+    new CustomPythonRulesPlugin().define(context);
+    assertThat(context.getExtensions()).hasSize(1);
   }
 }

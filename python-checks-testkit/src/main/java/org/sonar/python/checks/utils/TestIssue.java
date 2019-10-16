@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks.utils;
 
-import com.google.common.primitives.Ints;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -47,12 +46,6 @@ class TestIssue {
     return this;
   }
 
-  public TestIssue columns(int startColumn, int endColumn) {
-    startColumn(startColumn);
-    endColumn(endColumn);
-    return this;
-  }
-
   public TestIssue startColumn(int startColumn) {
     this.startColumn = startColumn;
     return this;
@@ -71,10 +64,6 @@ class TestIssue {
   public TestIssue endLine(int endLine) {
     this.endLine = endLine;
     return this;
-  }
-
-  public TestIssue secondary(int... lines) {
-    return secondary(Ints.asList(lines));
   }
 
   public TestIssue secondary(List<Integer> secondaryLines) {
