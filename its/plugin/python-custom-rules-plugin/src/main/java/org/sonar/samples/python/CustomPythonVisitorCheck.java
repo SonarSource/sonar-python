@@ -33,7 +33,7 @@ public class CustomPythonVisitorCheck extends PythonCheckTree {
 
   @Override
   public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-    addIssue(pyFunctionDefTree, "Function def.");
+    addIssue(pyFunctionDefTree.name(), "Function def.");
     super.visitFunctionDef(pyFunctionDefTree);
   }
 

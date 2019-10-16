@@ -19,21 +19,12 @@
  */
 package org.sonar.samples.python;
 
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.ForStatement;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-@Rule(
-  key = "subscription",
-  priority = Priority.MINOR,
-  name = "Python subscription visitor check",
-  description = "desc")
-public class CustomPythonSubscriptionCheck extends PythonSubscriptionCheck {
-
-  @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> ctx.addIssue(((ForStatement) ctx.syntaxNode()).forKeyword(), "For statement."));
+public class CustomPythonSubscriptionCheckTest {
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/customPythonSubscriptionCheck.py", new CustomPythonSubscriptionCheck());
   }
 }

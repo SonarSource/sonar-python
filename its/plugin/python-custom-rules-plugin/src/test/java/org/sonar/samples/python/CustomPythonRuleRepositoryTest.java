@@ -19,21 +19,21 @@
  */
 package org.sonar.samples.python;
 
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.ForStatement;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.junit.Test;
+import org.sonar.api.server.rule.RulesDefinition;
 
-@Rule(
-  key = "subscription",
-  priority = Priority.MINOR,
-  name = "Python subscription visitor check",
-  description = "desc")
-public class CustomPythonSubscriptionCheck extends PythonSubscriptionCheck {
+import static org.assertj.core.api.Assertions.assertThat;
 
-  @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FOR_STMT, ctx -> ctx.addIssue(((ForStatement) ctx.syntaxNode()).forKeyword(), "For statement."));
+public class CustomPythonRuleRepositoryTest {
+
+  @Test
+  public void test_rule_repository() {
+    CustomPythonRuleRepository customPythonRuleRepository = new CustomPythonRuleRepository();
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    customPythonRuleRepository.define(context);
+    assertThat(customPythonRuleRepository.repositoryKey()).isEqualTo("python-custom-rules");
+    assertThat(context.repositories()).hasSize(1).extracting("key").containsExactly(customPythonRuleRepository.repositoryKey());
+    assertThat(context.repositories().get(0).rules()).hasSize(2);
+    assertThat(customPythonRuleRepository.checkClasses()).hasSize(2);
   }
 }
