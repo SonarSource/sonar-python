@@ -20,7 +20,6 @@
 package org.sonar.plugins.python.coverage;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,12 +50,8 @@ public class PythonCoverageSensor implements Sensor {
   public static final String REPORT_PATHS_KEY = "sonar.python.coverage.reportPaths";
   public static final String DEFAULT_REPORT_PATH = "coverage-reports/*coverage-*.xml";
 
-  // Deprecated report path keys
+  // Deprecated report path key
   public static final String REPORT_PATH_KEY = "sonar.python.coverage.reportPath";
-
-  // Ignored report path keys
-  public static final String IT_REPORT_PATH_KEY = "sonar.python.coverage.itReportPath";
-  public static final String OVERALL_REPORT_PATH_KEY = "sonar.python.coverage.overallReportPath";
 
   private final AnalysisWarningsWrapper analysisWarnings;
 
@@ -76,10 +71,6 @@ public class PythonCoverageSensor implements Sensor {
     String baseDir = context.fileSystem().baseDir().getPath();
     Configuration config = context.config();
 
-    // These warning can be removed starting next LTS 7.X (see SONARPY-308)
-    warnIgnoredPropertyUsage(config, IT_REPORT_PATH_KEY);
-    warnIgnoredPropertyUsage(config, OVERALL_REPORT_PATH_KEY);
-
     warnDeprecatedPropertyUsage(config);
 
     HashSet<InputFile> filesCovered = new HashSet<>();
@@ -94,33 +85,20 @@ public class PythonCoverageSensor implements Sensor {
   }
 
   private static List<File> getCoverageReports(String baseDir, Configuration config) {
-    if (!config.hasKey(REPORT_PATH_KEY) && !config.hasKey(REPORT_PATHS_KEY)) {
+    if (!config.hasKey(REPORT_PATHS_KEY)) {
       return getReports(config, baseDir, REPORT_PATHS_KEY, DEFAULT_REPORT_PATH);
     }
 
-    List<File> reports = new ArrayList<>();
-    config.get(REPORT_PATH_KEY)
-      .map(path -> getReports(config, baseDir, REPORT_PATH_KEY, path))
-      .ifPresent(reports::addAll);
-
-    Arrays.stream(config.getStringArray(REPORT_PATHS_KEY))
-      .map(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path))
-      .forEach(reports::addAll);
-
-    return reports;
+    return Arrays.stream(config.getStringArray(REPORT_PATHS_KEY))
+      .flatMap(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path).stream())
+      .collect(Collectors.toList());
   }
 
-  private static void warnDeprecatedPropertyUsage(Configuration config) {
+  private void warnDeprecatedPropertyUsage(Configuration config) {
     if (config.hasKey(REPORT_PATH_KEY)) {
-      LOG.warn("Property 'sonar.python.coverage.reportPath' is deprecated. Please use 'sonar.python.coverage.reportPaths' instead.");
-    }
-  }
-
-  private void warnIgnoredPropertyUsage(Configuration config, String ignoredKey) {
-    if (config.hasKey(ignoredKey)) {
-      String message = String.format("Property '%s' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.", ignoredKey);
-      LOG.warn(message);
-      analysisWarnings.addWarning(message);
+      String msg = "Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.";
+      LOG.warn(msg);
+      analysisWarnings.addWarning(msg);
     }
   }
 

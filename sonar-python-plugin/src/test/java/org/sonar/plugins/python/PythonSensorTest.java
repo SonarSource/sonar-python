@@ -61,7 +61,6 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -122,7 +121,6 @@ public class PythonSensorTest {
   @Before
   public void init() {
     context = SensorContextTester.create(baseDir);
-    context.settings().setProperty(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY, "coverage.xml");
   }
 
   @Test
