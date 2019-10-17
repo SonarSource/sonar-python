@@ -77,16 +77,12 @@ public class PythonRuleRepositoryTest {
     assertThat(rule).isNotNull();
     assertThat(rule.template()).isTrue();
 
-    rule = repository.rule("XPath");
-    assertThat(rule).isNotNull();
-    assertThat(rule.template()).isTrue();
-
     long templateCount = repository.rules().stream()
       .map(RulesDefinition.Rule::template)
       .filter(Boolean::booleanValue)
       .count();
     assertThat(repository.rules().size()).isGreaterThan(50);
-    assertThat(templateCount).isEqualTo(2);
+    assertThat(templateCount).isEqualTo(1);
   }
 
   @Test

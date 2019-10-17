@@ -120,8 +120,7 @@ public final class CheckList {
       UnusedLocalVariableCheck.class,
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
-      WeakSSLProtocolCheck.class,
-      XPathCheck.class
+      WeakSSLProtocolCheck.class
     )));
   }
 

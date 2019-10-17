@@ -50,7 +50,6 @@ public class PythonRulingTest {
   @BeforeClass
   public static void prepare_quality_profile() {
     ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
-      .add("XPath", "message", "The XPath expression matches this piece of code")
       .add("CommentRegularExpression", "message", "The regular expression matches this comment");
     String serverUrl = ORCHESTRATOR.getServer().getUrl();
     File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
