@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python.api;
 
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +32,10 @@ public class PythonVisitorContext {
   private final FileInput rootTree;
   private final PythonFile pythonFile;
   private final RecognitionException parsingException;
-  private final AstNode rootAst;
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
-  public PythonVisitorContext(AstNode rootAst, FileInput rootTree, PythonFile pythonFile) {
-    this.rootAst = rootAst;
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile) {
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
     this.parsingException = null;
@@ -46,7 +43,6 @@ public class PythonVisitorContext {
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
-    this.rootAst = null;
     this.rootTree = null;
     this.pythonFile = pythonFile;
     this.parsingException = parsingException;
@@ -54,10 +50,6 @@ public class PythonVisitorContext {
 
   public FileInput rootTree() {
     return rootTree;
-  }
-
-  public AstNode rootAstNode() {
-    return rootAst;
   }
 
   public PythonFile pythonFile() {

@@ -96,7 +96,7 @@ public class PythonScanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(astNode, parse, pythonFile);
+      visitorContext = new PythonVisitorContext(parse, pythonFile);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
