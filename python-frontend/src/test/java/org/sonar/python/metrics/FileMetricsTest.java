@@ -61,7 +61,7 @@ public class FileMetricsTest {
   private static FileMetrics metrics(String fileName) {
     File baseDir = new File("src/test/resources/metrics/");
     File file = new File(baseDir, fileName);
-    return new FileMetrics(TestPythonVisitorRunner.createContext(file), true);
+    return new FileMetrics(TestPythonVisitorRunner.createContext(file));
   }
 
 }

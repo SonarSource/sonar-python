@@ -35,9 +35,9 @@ public class FileMetrics {
   private final FileLinesVisitor fileLinesVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
-  public FileMetrics(PythonVisitorContext context, boolean ignoreHeaderComments) {
+  public FileMetrics(PythonVisitorContext context) {
     FileInput fileInput = context.rootTree();
-    fileLinesVisitor = new FileLinesVisitor(ignoreHeaderComments);
+    fileLinesVisitor = new FileLinesVisitor();
     fileLinesVisitor.scanFile(context);
     numberOfStatements = fileLinesVisitor.getStatements();
     numberOfClasses = fileLinesVisitor.getClassDefs();
