@@ -69,7 +69,7 @@ public class PythonPlugin implements Plugin {
 
       PythonProfile.class,
 
-      PythonSquidSensor.class,
+      PythonSensor.class,
       PythonRuleRepository.class);
 
     SonarRuntime sonarRuntime = context.getRuntime();

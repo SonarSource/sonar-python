@@ -35,7 +35,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.python.checks.CheckList;
 
-public final class PythonSquidSensor implements Sensor {
+public final class PythonSensor implements Sensor {
 
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -44,12 +44,12 @@ public final class PythonSquidSensor implements Sensor {
   /**
    * Constructor to be used by pico if no PythonCustomRuleRepository are to be found and injected.
    */
-  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
   }
 
-  public PythonSquidSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                           @Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
@@ -61,7 +61,7 @@ public final class PythonSquidSensor implements Sensor {
   public void describe(SensorDescriptor descriptor) {
     descriptor
       .onlyOnLanguage(Python.KEY)
-      .name("Python Squid Sensor")
+      .name("Python Sensor")
       .onlyOnFileType(Type.MAIN);
   }
 

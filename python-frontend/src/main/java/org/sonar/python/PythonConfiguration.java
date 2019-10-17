@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 public class PythonConfiguration {
 
   private Charset charset;
-  private boolean stopSquidOnException = false;
+  private boolean stopOnException = false;
   private boolean ignoreHeaderComments;
 
   public PythonConfiguration(Charset charset) {
@@ -44,12 +44,12 @@ public class PythonConfiguration {
     return charset;
   }
 
-  public void setStopSquidOnException(boolean stopSquidOnException) {
-    this.stopSquidOnException = stopSquidOnException;
+  public void setStopOnException(boolean stopOnException) {
+    this.stopOnException = stopOnException;
   }
 
-  public boolean stopSquidOnException() {
-    return stopSquidOnException;
+  public boolean stopOnException() {
+    return stopOnException;
   }
 
 }

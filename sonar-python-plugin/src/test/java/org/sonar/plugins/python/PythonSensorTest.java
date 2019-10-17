@@ -69,7 +69,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-public class PythonSquidSensorTest {
+public class PythonSensorTest {
 
   private static final String FILE_1 = "file1.py";
   private static final String FILE_2 = "file2.py";
@@ -110,7 +110,7 @@ public class PythonSquidSensorTest {
     }
   }
 
-  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/squid-sensor").getAbsoluteFile();
+  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/sensor").getAbsoluteFile();
 
   private SensorContextTester context;
 
@@ -131,7 +131,7 @@ public class PythonSquidSensorTest {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     sensor().describe(descriptor);
 
-    assertThat(descriptor.name()).isEqualTo("Python Squid Sensor");
+    assertThat(descriptor.name()).isEqualTo("Python Sensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(Type.MAIN);
   }
@@ -306,19 +306,19 @@ public class PythonSquidSensorTest {
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
-  private PythonSquidSensor sensor() {
+  private PythonSensor sensor() {
     return sensor(CUSTOM_RULES);
   }
 
-  private PythonSquidSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if(customRuleRepositories == null) {
-      return new PythonSquidSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
+      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
     }
-    return new PythonSquidSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories);
   }
 
   private InputFile inputFile(String name) {
