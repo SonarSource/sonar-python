@@ -166,8 +166,8 @@ public class PythonScanner {
   }
 
   private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext) {
-    boolean ignoreHeaderComments = new PythonConfiguration(context.fileSystem().encoding()).getIgnoreHeaderComments();
-    FileMetrics fileMetrics = new FileMetrics(visitorContext, ignoreHeaderComments);
+    new PythonConfiguration(context.fileSystem().encoding());
+    FileMetrics fileMetrics = new FileMetrics(visitorContext);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);

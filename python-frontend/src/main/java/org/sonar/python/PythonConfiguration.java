@@ -24,32 +24,13 @@ import java.nio.charset.Charset;
 public class PythonConfiguration {
 
   private Charset charset;
-  private boolean stopOnException = false;
-  private boolean ignoreHeaderComments;
 
   public PythonConfiguration(Charset charset) {
     this.charset = charset;
   }
 
-  // TODO this method seems to be unused, should we create plugin property to ignore header comments?
-  public void setIgnoreHeaderComments(boolean ignoreHeaderComments) {
-    this.ignoreHeaderComments = ignoreHeaderComments;
-  }
-
-  public boolean getIgnoreHeaderComments() {
-    return ignoreHeaderComments;
-  }
-
   public Charset getCharset() {
     return charset;
-  }
-
-  public void setStopOnException(boolean stopOnException) {
-    this.stopOnException = stopOnException;
-  }
-
-  public boolean stopOnException() {
-    return stopOnException;
   }
 
 }

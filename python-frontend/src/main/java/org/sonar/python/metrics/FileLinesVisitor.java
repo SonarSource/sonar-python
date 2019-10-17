@@ -30,9 +30,6 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.TokenLocation;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -40,6 +37,9 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonTokenType;
 
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES} metrics used by the DevCockpit.
@@ -55,10 +55,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
     Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
 
-  private boolean seenFirstToken;
-
-  private final boolean ignoreHeaderComments;
-
   private Set<Integer> noSonar = new HashSet<>();
   private Set<Integer> linesOfCode = new HashSet<>();
   private Set<Integer> linesOfComments = new HashSet<>();
@@ -66,10 +62,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private Set<Integer> executableLines = new HashSet<>();
   private int statements = 0;
   private int classDefs = 0;
-
-  public FileLinesVisitor(boolean ignoreHeaderComments) {
-    this.ignoreHeaderComments = ignoreHeaderComments;
-  }
 
   @Override
   public void scanFile(PythonVisitorContext visitorContext) {
@@ -89,7 +81,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     linesOfComments.clear();
     linesOfDocstring.clear();
     executableLines.clear();
-    seenFirstToken = false;
   }
 
   private void visitNode(SubscriptionContext ctx) {
@@ -136,11 +127,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
       for (int line = tokenLine; line < tokenLine + tokenLines.length; line++) {
         linesOfCode.add(line);
       }
-    }
-
-    if (ignoreHeaderComments && !seenFirstToken) {
-      seenFirstToken = true;
-      return;
     }
 
     for (Trivia trivia : token.trivia()) {
