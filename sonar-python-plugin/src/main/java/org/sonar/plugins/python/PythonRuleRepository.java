@@ -19,8 +19,7 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,7 +35,7 @@ public class PythonRuleRepository implements RulesDefinition {
 
   static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
 
-  private static final Set<String> TEMPLATE_RULE_KEYS = new HashSet<>(Arrays.asList("XPath", "CommentRegularExpression"));
+  private static final Set<String> TEMPLATE_RULE_KEYS = Collections.singleton("CommentRegularExpression");
   private final SonarRuntime sonarRuntime;
 
   public PythonRuleRepository(SonarRuntime sonarRuntime) {

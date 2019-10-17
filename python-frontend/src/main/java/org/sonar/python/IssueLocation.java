@@ -19,12 +19,10 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.AstNode;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.TokenImpl;
 
 public abstract class IssueLocation {
 
@@ -44,14 +42,6 @@ public abstract class IssueLocation {
 
   public static IssueLocation atLineLevel(String message, int lineNumber) {
     return new LineLevelIssueLocation(message, lineNumber);
-  }
-
-  /**
-   * @deprecated for removal :Should be removed when getting rid of XpathCheck : only used by this deprecated check. Reporting should be done using Tree or Token
-   */
-  @Deprecated
-  public static IssueLocation preciseLocation(AstNode startNode, @Nullable String message) {
-    return new PreciseIssueLocation(new TokenImpl(startNode.getToken()), new TokenImpl(startNode.getLastToken()), message);
   }
 
   public static IssueLocation preciseLocation(Tree tree, @Nullable String message) {

@@ -53,7 +53,6 @@ import static org.assertj.core.api.Assertions.assertThat;
   PylintReportTest.class,
   TestReportTest.class,
   NoSonarTest.class,
-  XPathRuleTest.class,
   SonarLintTest.class
 })
 public final class Tests {
@@ -73,7 +72,6 @@ public final class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/xpath_rule.xml"))
     .build();
 
   private Tests() {

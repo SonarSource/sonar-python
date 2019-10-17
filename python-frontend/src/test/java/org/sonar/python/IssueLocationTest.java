@@ -24,7 +24,6 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
@@ -56,18 +55,6 @@ public class IssueLocationTest {
     assertThat(issueLocation.endLine()).isEqualTo(42);
     assertThat(issueLocation.startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
     assertThat(issueLocation.endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
-  }
-
-  @Test
-  public void single_node() {
-    AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
-    AstNode node = root.getFirstDescendant(PythonGrammar.ARGLIST);
-    IssueLocation issueLocation = IssueLocation.preciseLocation(node, MESSAGE);
-    assertThat(issueLocation.message()).isEqualTo(MESSAGE);
-    assertThat(issueLocation.startLine()).isEqualTo(3);
-    assertThat(issueLocation.endLine()).isEqualTo(3);
-    assertThat(issueLocation.startLineOffset()).isEqualTo(4);
-    assertThat(issueLocation.endLineOffset()).isEqualTo(10);
   }
 
   @Test
