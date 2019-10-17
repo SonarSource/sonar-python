@@ -29,7 +29,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarsource.analyzer.commons.xml.SafetyFactory;
+import org.sonar.plugins.python.parser.StaxParser;
 
 public class PylintRuleParser {
 
@@ -39,7 +39,7 @@ public class PylintRuleParser {
 
   public PylintRuleParser(String rulesPath) {
     try (InputStream inputStream = getClass().getResourceAsStream(rulesPath)) {
-      XMLEventReader reader = SafetyFactory.createXMLInputFactory().createXMLEventReader(inputStream);
+      XMLEventReader reader = StaxParser.createXMLInputFactory().createXMLEventReader(inputStream);
       while (reader.hasNext()) {
         onXmlEvent(reader.nextEvent());
       }

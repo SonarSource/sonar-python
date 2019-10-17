@@ -43,16 +43,17 @@
       <artifactId>sonar-analyzer-commons</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.sonarsource.analyzer-commons</groupId>
-      <artifactId>sonar-xml-parsing</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.sonarsource.sslr</groupId>
       <artifactId>sslr-testing-harness</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.woodstox</groupId>
+      <artifactId>woodstox-core</artifactId>
+      <version>5.2.0</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.staxmate</groupId>
@@ -129,8 +130,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>3100000</maxsize>
-                  <minsize>2800000</minsize>
+                  <maxsize>2000000</maxsize>
+                  <minsize>1700000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

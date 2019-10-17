@@ -24,17 +24,31 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
-import org.sonarsource.analyzer.commons.xml.SafetyFactory;
 
 /**
  * Class copied from deprecated class StaxParser of sonar-plugin-api.
  */
 public class StaxParser {
+
+  // Copy of org.sonarsource.analyzer.commons.xml.SafetyFactory.createXMLInputFactory
+  // SafetyFactory has another method which depends on Xerxes so using SafetyFactory increases jar size by 1MB
+  public static XMLInputFactory createXMLInputFactory() {
+    // forcing the XMLInputFactory implementation class, in order to be sure that we are going to use the adequate
+    // stream reader while retrieving locations
+    XMLInputFactory factory = new com.ctc.wstx.stax.WstxInputFactory();
+
+    factory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+    factory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
+    factory.setProperty(XMLInputFactory.IS_VALIDATING, false);
+    factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+    return factory;
+  }
 
   private SMInputFactory inf;
 
@@ -42,7 +56,7 @@ public class StaxParser {
 
   public StaxParser(XmlStreamHandler streamHandler) {
     this.streamHandler = streamHandler;
-    WstxInputFactory xmlFactory = (WstxInputFactory) SafetyFactory.createXMLInputFactory();
+    WstxInputFactory xmlFactory = (WstxInputFactory) createXMLInputFactory();
     xmlFactory.configureForLowMemUsage();
     xmlFactory.getConfig().setUndeclaredEntityResolver(new UndeclaredEntitiesXMLResolver());
     inf = new SMInputFactory(xmlFactory);
