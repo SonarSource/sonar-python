@@ -43,7 +43,7 @@ public class SymbolVisitorTest {
 
   @BeforeClass
   public static void scanFile() {
-    File file = new File("src/test/resources/org/sonar/plugins/python/squid-sensor", "/symbolVisitor.py");
+    File file = new File("src/test/resources/org/sonar/plugins/python/sensor", "/symbolVisitor.py");
     DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())
       .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
       .build();
