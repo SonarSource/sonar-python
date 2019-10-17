@@ -26,11 +26,13 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(
-  key = "subscription",
+  key = CustomPythonSubscriptionCheck.RULE_KEY_SUBSCRIPTION,
   priority = Priority.MINOR,
   name = "Python subscription visitor check",
   description = "desc")
 public class CustomPythonSubscriptionCheck extends PythonSubscriptionCheck {
+
+  public static final String RULE_KEY_SUBSCRIPTION = "subscription";
 
   @Override
   public void initialize(Context context) {

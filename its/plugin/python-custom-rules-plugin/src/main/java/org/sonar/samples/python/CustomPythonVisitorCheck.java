@@ -25,11 +25,13 @@ import org.sonar.plugins.python.api.PythonCheckTree;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 
 @Rule(
-  key = "visitor",
+  key = CustomPythonVisitorCheck.RULE_KEY_VISITOR,
   priority = Priority.MINOR,
   name = "Python visitor check",
   description = "desc")
 public class CustomPythonVisitorCheck extends PythonCheckTree {
+
+  public static final String RULE_KEY_VISITOR = "visitor";
 
   @Override
   public void visitFunctionDef(FunctionDef pyFunctionDefTree) {

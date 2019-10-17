@@ -34,8 +34,8 @@ public class CustomPythonRuleRepository implements RulesDefinition, PythonCustom
     NewRepository repository = context.createRepository(repositoryKey(), "py").setName("My custom repo");
     new RulesDefinitionAnnotationLoader().load(repository, checkClasses().toArray(new Class[] {}));
     Map<String, String> remediationCosts = new HashMap<>();
-    remediationCosts.put("visitor", "5min");
-    remediationCosts.put("subscription", "10min");
+    remediationCosts.put(CustomPythonVisitorCheck.RULE_KEY_VISITOR, "5min");
+    remediationCosts.put(CustomPythonSubscriptionCheck.RULE_KEY_SUBSCRIPTION, "10min");
     repository.rules().forEach(rule -> rule.setDebtRemediationFunction(
       rule.debtRemediationFunctions().constantPerIssue(remediationCosts.get(rule.key()))));
     repository.done();
