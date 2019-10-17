@@ -60,11 +60,9 @@ public class CoverageTest {
   private static void basicCoverageReports(String utReportPath) {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT))
-      .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, utReportPath)
-      .setProperty(COVERAGE_REPORT_PATHS, "it-coverage1.xml,it-coverage2.xml")
-      // The 2 following properties are now ignored, so they should have no impact on result
-      .setProperty("sonar.python.coverage.itReportPath", "ignored-it-coverage.xml")
-      .setProperty("sonar.python.coverage.overallReportPath", "ignored-it-coverage.xml");
+      .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "someReport")
+      .setProperty(COVERAGE_REPORT_PATHS, utReportPath+",it-coverage1.xml,it-coverage2.xml");
+
     BuildResult result = ORCHESTRATOR.executeBuild(build);
 
     ImmutableMap<String, Integer> values = new Builder<String, Integer>()
@@ -75,9 +73,7 @@ public class CoverageTest {
         .build();
 
     Tests.assertProjectMeasures(PROJECT_KEY, values);
-    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.itReportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
-    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.overallReportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
-    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.reportPath' is deprecated. Please use 'sonar.python.coverage.reportPaths' instead.");
+    assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
   }
 
   @Test

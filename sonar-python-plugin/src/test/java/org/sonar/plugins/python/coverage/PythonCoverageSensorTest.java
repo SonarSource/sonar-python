@@ -45,7 +45,6 @@ import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -195,17 +194,11 @@ public class PythonCoverageSensorTest {
   public void test_unique_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "*coverage.4.4.2*.xml");
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "*coverage.4.4.2*.xml");
-    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "coverage*.4.4.2.xml");
-    settings.setProperty(PythonCoverageSensor.OVERALL_REPORT_PATH_KEY, "*coverage.4.4.2.xml");
     coverageSensor.execute(context);
     List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
     Integer coverageAtLine6 = actual.get(5);
     assertThat(coverageAtLine6).isEqualTo(1);
-    verify(analysisWarnings, times(2))
-      .addWarning(
-        or(
-          eq("Property 'sonar.python.coverage.itReportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead."),
-          eq("Property 'sonar.python.coverage.overallReportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.")));
+    verify(analysisWarnings, times(1)).addWarning(eq("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead."));
   }
 
   @Test
@@ -231,22 +224,19 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context);
 
     String currentFileSeparator = File.separator;
-    String expectedLogMessage = String.format(
-      "Cannot resolve the file path 'sources%snot_exist.py' of the coverage report, the file does not exist in all <source>.",
-      currentFileSeparator);
 
-    assertThat(logTester.logs(LoggerLevel.ERROR))
-      .containsExactly(expectedLogMessage);
+    // no error expected REPORT_PATH_KEY is ignored.
+    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN))
-      .contains("Property 'sonar.python.coverage.reportPath' is deprecated. Please use 'sonar.python.coverage.reportPaths' instead.");
-    assertThat(context.lineHits(FILE1_KEY, 1)).isEqualTo(1);
+      .contains("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
+    assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
 
     logTester.clear();
 
-    settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_absolute_path.xml");
+    settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_with_unresolved_absolute_path.xml");
     coverageSensor.execute(context);
 
-    expectedLogMessage = String.format(
+    String expectedLogMessage = String.format(
       "Cannot resolve the file path '%sabsolute%ssources%snot_exist.py' of the coverage report, the file does not exist in all <source>.",
       currentFileSeparator,
       currentFileSeparator,
@@ -305,7 +295,6 @@ public class PythonCoverageSensorTest {
   @Test
   public void should_do_nothing_on_empty_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "empty-coverage-result.xml");
-    settings.setProperty(PythonCoverageSensor.IT_REPORT_PATH_KEY, "this-file-does-not-exist.xml");
     coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
