@@ -47,3 +47,9 @@ def empty_function():
 
 class empty_class:
     pass
+# Noncompliant@+2
+if condition1:
+    pass
+# just a comment
+elif condition2:
+    foo()
