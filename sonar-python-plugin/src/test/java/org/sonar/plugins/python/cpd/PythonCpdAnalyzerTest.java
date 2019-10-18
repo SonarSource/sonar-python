@@ -93,6 +93,28 @@ public class PythonCpdAnalyzerTest {
       "pass\n");
   }
 
+  @Test
+  public void dedent_with_cpd() {
+    DefaultInputFile inputFile = inputFile("cpd_dedent.py");
+    PythonVisitorContext visitorContext = TestPythonVisitorRunner.createContext(inputFile.path().toFile());
+    cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
+    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:cpd_dedent.py");
+    assertThat(tokensLines).isNotNull();
+    assertThat(tokensLines.size() % 2).isEqualTo(0);
+    int mid = tokensLines.size() / 2;
+    for (int i = 0; i < mid; i++) {
+      TokensLine tokensLine = tokensLines.get(i);
+      TokensLine dup = tokensLines.get(mid + i);
+      assertThat(tokensLine.getStartLine() + 5).isEqualTo(dup.getStartLine());
+      if (dup.getStartLine() == 9) {
+        // line 9 contains a different DEDENT and thus the token values should not be equal
+        assertThat(tokensLine.getValue()).isNotEqualTo(dup.getValue());
+      } else {
+        assertThat(tokensLine.getValue()).isEqualTo(dup.getValue());
+      }
+    }
+  }
+
   private DefaultInputFile inputFile(String fileName) {
     File file = new File(BASE_DIR, fileName);
 
