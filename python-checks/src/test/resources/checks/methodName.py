@@ -30,3 +30,11 @@ class AnotherClass(SomeParent, AnotherParent):
 class AnotherClass(object):
     def A_Method(self): # Noncompliant (inherits object)
         pass
+class A():
+    if 1:
+        def Badly_Named(self): # Noncompliant
+            pass
+class B(SuperClass):
+    if 1:
+        def Badly_Named(self): # compliant, might be overriding
+            pass
