@@ -84,3 +84,6 @@ def func_with_star_param(a, *, d):
 class a:
   def method_with_star_param(*, d):
     pass
+
+def print_var():
+  print = 42

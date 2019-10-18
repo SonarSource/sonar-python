@@ -35,29 +35,25 @@ public class PrintStatementTest extends RuleTest {
 
   @Test
   public void ok() {
-    assertThat(p).matches("print");
+    assertThat(p).matches("print")
 
-    assertThat(p).matches("print >> test");
-    assertThat(p).matches("print >> test, test");
-    assertThat(p).matches("print >> test, test,");
+      .matches("print >> test")
+      .matches("print >> test, test")
+      .matches("print >> test, test,")
 
-    assertThat(p).matches("print test");
-    assertThat(p).matches("print test,");
-    assertThat(p).matches("print test,test");
-    assertThat(p).matches("print test,test,");
-  }
+      .matches("print test")
+      .matches("print test,")
+      .matches("print test,test")
+      .matches("print test,test,")
 
-  @Test
-  public void ko() {
-    assertThat(p).notMatches("print >>");
-  }
+      .notMatches("print >>")
 
-  @Test
-  public void realLife() {
-    assertThat(p).matches("print 1");
-    assertThat(p).matches("print 1,");
-    assertThat(p).matches("print >> 1");
-    assertThat(p).notMatches("print('')");
+      .matches("print 1")
+      .matches("print 1,")
+      .matches("print >> 1")
+      .notMatches("print('')")
+      .notMatches("print = 12")
+    ;
   }
 
 }

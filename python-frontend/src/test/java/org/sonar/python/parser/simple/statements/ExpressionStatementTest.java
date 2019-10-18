@@ -35,16 +35,23 @@ public class ExpressionStatementTest extends RuleTest {
 
   @Test
   public void realLife() {
-    assertThat(p).matches("i = 10");
-    assertThat(p).matches("list[1] = 10");
-    assertThat(p).matches("self.balance = initial_balance");
-    assertThat(p).matches("var1: int = 5");
-    assertThat(p).matches("var2: [int, str]");
-    assertThat(p).matches("st: str = 'Hello'");
-    assertThat(p).matches("a.b: int = (1, 2)");
-    assertThat(p).matches("x: int");
-    assertThat(p).matches("self.x: int = x");
-    assertThat(p).matches("lst: List[int] = []");
+    assertThat(p)
+      .matches("i = 10")
+      .matches("list[1] = 10")
+      .matches("self.balance = initial_balance")
+      .matches("var1: int = 5")
+      .matches("var2: [int, str]")
+      .matches("st: str = 'Hello'")
+      .matches("a.b: int = (1, 2)")
+      .matches("x: int")
+      .matches("self.x: int = x")
+      .matches("lst: List[int] = []")
+      .matches("lst: List[int] = []")
+      .matches("print = 12")
+      .notMatches("print 1")
+      // EXPRESSION_STMT matches this but that should be match by print statement first.
+      .matches("print >> test")
+    ;
   }
 
 }
