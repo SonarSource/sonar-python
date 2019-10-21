@@ -21,8 +21,8 @@ package org.sonar.python.parser.compound.statements;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
@@ -36,18 +36,10 @@ public class ForStatementTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.EXPRLIST).mock();
-    p.getGrammar().rule(PythonGrammar.TESTLIST).mock();
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
-
-    assertThat(p).matches("for EXPRLIST in TESTLIST : SUITE");
-    assertThat(p).matches("for EXPRLIST in TESTLIST : SUITE else : SUITE");
-  }
-
-  @Test
-  public void realLife() {
-    assertThat(p).matches(PythonTestUtils.appendNewLine("for i in [0,2] : pass"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("for x in [0,10] : print(x)"));
+    assertThat(p).matches("for EXPRLIST in [] : pass;")
+      .matches(PythonTestUtils.appendNewLine("for i in [0,2] : pass"))
+      .matches(PythonTestUtils.appendNewLine("for x in [0,10] : print(x)"))
+      .matches("for x in [0,10] : print(x);\nelse : pass");
   }
 
 }

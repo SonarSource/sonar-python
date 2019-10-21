@@ -35,16 +35,13 @@ public class TryStatementTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-    p.getGrammar().rule(PythonGrammar.EXCEPT_CLAUSE).mock();
 
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE EXCEPT_CLAUSE : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE finally : SUITE");
-    assertThat(p).matches("try : SUITE EXCEPT_CLAUSE : SUITE else : SUITE finally : SUITE");
-    assertThat(p).matches("try : SUITE finally : SUITE");
+    assertThat(p).matches("try : pass\nexcept e : pass")
+      .matches("try : pass\nexcept e : pass\nexcept f : pass")
+      .matches("try : pass\nexcept e : pass\nelse : pass")
+      .matches("try : pass\nexcept e : pass\nfinally : pass")
+      .matches("try : pass\nexcept e : pass\nelse : pass\nfinally : pass")
+      .matches("try : pass\nfinally : pass");
   }
 
 }

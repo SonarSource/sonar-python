@@ -34,19 +34,11 @@ public class WithStatementTest extends RuleTest {
     setRootRule(PythonGrammar.WITH_STMT);
   }
 
-  @Test
-  public void ok() {
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
-    p.getGrammar().rule(PythonGrammar.WITH_ITEM).mock();
-
-    assertThat(p).matches("with WITH_ITEM , WITH_ITEM : SUITE");
-    assertThat(p).matches("with WITH_ITEM : SUITE");
-  }
 
   @Test
   public void realLife() {
-    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a : pass"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a, B() as b : pass"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a : pass"))
+      .matches(PythonTestUtils.appendNewLine("with A() as a, B() as b : pass"));
   }
 
 }

@@ -35,12 +35,10 @@ public class ExceptClauseTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-
-    assertThat(p).matches("except");
-    assertThat(p).matches("except TEST");
-    assertThat(p).matches("except TEST as TEST");
-    assertThat(p).matches("except TEST , TEST");
+    assertThat(p).matches("except")
+      .matches("except TEST")
+      .matches("except TEST as TEST")
+      .matches("except TEST , TEST");
   }
 
 }
