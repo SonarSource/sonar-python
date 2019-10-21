@@ -14,3 +14,11 @@ def long_function_name_is_still_correct():
 class MyClass:
 	def This_Is_A_Method():
 		pass
+class A():
+    if 1:
+        def Badly_Named(self): # compliant, this is a method, not a function
+            pass
+class B(SuperClass):
+    if 1:
+        def Badly_Named(self): # compliant, this is a method, not a function
+            pass
