@@ -40,10 +40,10 @@ public class AnnotatedAssignmentImpl extends SimpleStatement implements Annotate
   private final Separators separators;
   private final TypeAnnotation annotation;
 
-  public AnnotatedAssignmentImpl(Expression variable, Token colonToken, Expression typeAnnotation,
-                                 @Nullable Token equalToken, @Nullable Expression assignedValue, Separators separators) {
+  public AnnotatedAssignmentImpl(Expression variable, TypeAnnotation annotation, @Nullable Token equalToken,
+                                 @Nullable Expression assignedValue, Separators separators) {
     this.variable = variable;
-    this.annotation = new TypeAnnotationImpl(colonToken, typeAnnotation);
+    this.annotation = annotation;
     this.equalToken = equalToken;
     this.assignedValue = assignedValue;
     this.separators = separators;
