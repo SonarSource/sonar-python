@@ -87,3 +87,10 @@ class a:
 
 def print_var():
   print = 42
+
+def symbols_in_comp():
+  [x+y+z for (x, (y, z)) in [(1,(2,3)), (3,(4,5))]]
+
+def for_comp_with_no_name_var():
+  # test for comp that are not names nor tuple
+  [x for fun() in [1,2]]
