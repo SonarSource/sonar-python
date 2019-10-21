@@ -21,6 +21,8 @@ package org.sonar.plugins.python.api.tree;
 
 public interface ComprehensionFor extends ComprehensionClause {
 
+  Token asyncToken();
+
   Token forToken();
 
   Expression loopExpression();

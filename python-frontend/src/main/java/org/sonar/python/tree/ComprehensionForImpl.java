@@ -34,19 +34,26 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class ComprehensionForImpl extends PyTree implements ComprehensionFor {
 
+  private final Token asyncToken;
   private final Token forToken;
   private final Expression loopExpression;
   private final Token inToken;
   private final Expression iterable;
   private final ComprehensionClause nested;
 
-  public ComprehensionForImpl(Token forToken, Expression loopExpression, Token inToken,
+  public ComprehensionForImpl(@Nullable Token asyncToken, Token forToken, Expression loopExpression, Token inToken,
                               Expression iterable, @Nullable ComprehensionClause nested) {
+    this.asyncToken = asyncToken;
     this.forToken = forToken;
     this.loopExpression = loopExpression;
     this.inToken = inToken;
     this.iterable = iterable;
     this.nested = nested;
+  }
+
+  @Override
+  public Token asyncToken() {
+    return asyncToken;
   }
 
   @Override
@@ -82,7 +89,7 @@ public class ComprehensionForImpl extends PyTree implements ComprehensionFor {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(forToken, loopExpression, inToken, iterable, nested).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(asyncToken, forToken, loopExpression, inToken, iterable, nested).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

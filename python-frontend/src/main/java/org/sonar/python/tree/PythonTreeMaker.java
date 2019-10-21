@@ -29,11 +29,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.python.DocstringExtractor;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
@@ -91,6 +86,11 @@ import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.python.DocstringExtractor;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
 
 public class PythonTreeMaker {
 
@@ -1060,11 +1060,18 @@ public class PythonTreeMaker {
 
   private ComprehensionFor compFor(AstNode compFor) {
     Expression expression = exprListOrTestList(compFor.getFirstChild(PythonGrammar.EXPRLIST));
-    Token forToken = toPyToken(compFor.getFirstChild(PythonKeyword.FOR).getToken());
+    AstNode forSSLRToken = compFor.getFirstChild(PythonKeyword.FOR);
+    Token asyncToken = null;
+    AstNode previousSibling = forSSLRToken.getPreviousSibling();
+    if (previousSibling != null) {
+      // preious sibling can only be "async"
+      asyncToken = toPyToken(previousSibling.getToken());
+    }
+    Token forToken = toPyToken(forSSLRToken.getToken());
     Token inToken = toPyToken(compFor.getFirstChild(PythonKeyword.IN).getToken());
     Expression iterable = exprListOrTestList(compFor.getFirstChild(PythonGrammar.TESTLIST));
     ComprehensionClause nested = compClause(compFor.getFirstChild(PythonGrammar.COMP_ITER));
-    return new ComprehensionForImpl(forToken, expression, inToken, iterable, nested);
+    return new ComprehensionForImpl(asyncToken, forToken, expression, inToken, iterable, nested);
   }
 
   @CheckForNull

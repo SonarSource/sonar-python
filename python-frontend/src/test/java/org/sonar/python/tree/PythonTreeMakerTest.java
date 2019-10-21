@@ -1832,6 +1832,17 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  public void async_list_comprehension() {
+    setRootRule(PythonGrammar.TEST);
+    ComprehensionExpression comprehension =
+      (ComprehensionExpression) parse("[i async for i in aiter() if i % 2]", treeMaker::expression);
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
+    ComprehensionFor forClause = comprehension.comprehensionFor();
+    assertThat(forClause.firstToken()).isSameAs(forClause.asyncToken());
+    assertThat(forClause.children()).hasSize(6);
+  }
+
+  @Test
   public void list_comprehension_with_if() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression comprehension =
