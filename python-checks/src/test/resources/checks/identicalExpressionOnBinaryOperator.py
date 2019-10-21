@@ -40,3 +40,4 @@ c8 = 3 not in 3 # Noncompliant
 c9 = 3 in 3 # Noncompliant
 exclusion = 1 << 1
 exclusion2 = (a * b) << 1
+result = x @ x #compliant matrix operator should not raise issue on this rule.
