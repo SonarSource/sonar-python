@@ -1064,7 +1064,7 @@ public class PythonTreeMaker {
     Token asyncToken = null;
     AstNode previousSibling = forSSLRToken.getPreviousSibling();
     if (previousSibling != null) {
-      // preious sibling can only be "async"
+      // previous sibling can only be "async"
       asyncToken = toPyToken(previousSibling.getToken());
     }
     Token forToken = toPyToken(forSSLRToken.getToken());
