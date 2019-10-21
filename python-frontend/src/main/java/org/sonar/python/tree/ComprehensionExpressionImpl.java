@@ -19,8 +19,10 @@
  */
 package org.sonar.python.tree;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -28,8 +30,9 @@ import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.python.semantic.Symbol;
 
 public class ComprehensionExpressionImpl extends PyTree implements ComprehensionExpression {
 
@@ -38,6 +41,7 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   private final Expression resultExpression;
   private final ComprehensionFor comprehensionFor;
   private final Token closingToken;
+  private Set<Symbol> symbols = new HashSet<>();
 
   public ComprehensionExpressionImpl(Kind kind, @Nullable Token openingToken, Expression resultExpression,
                                      ComprehensionFor compFor, @Nullable Token closingToken) {
@@ -59,6 +63,11 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   }
 
   @Override
+  public Set<Symbol> localVariables() {
+    return symbols;
+  }
+
+  @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitPyListOrSetCompExpression(this);
   }
@@ -71,5 +80,9 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   @Override
   public Kind getKind() {
     return kind;
+  }
+
+  public void addLocalVariableSymbol(Symbol symbol) {
+    symbols.add(symbol);
   }
 }

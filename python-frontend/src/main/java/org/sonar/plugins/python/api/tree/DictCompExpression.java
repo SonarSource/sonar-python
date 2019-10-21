@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import java.util.Set;
+import org.sonar.python.semantic.Symbol;
+
 public interface DictCompExpression extends Expression {
 
   Expression keyExpression();
@@ -29,4 +32,5 @@ public interface DictCompExpression extends Expression {
 
   ComprehensionFor comprehensionFor();
 
+  Set<Symbol> localVariables();
 }

@@ -19,10 +19,18 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import java.util.Set;
+import org.sonar.python.semantic.Symbol;
+
 public interface ComprehensionExpression extends Expression {
 
   Expression resultExpression();
 
   ComprehensionFor comprehensionFor();
+
+  /**
+   * local variables are following python3 scoping rules for comprehension expressions.
+   */
+  Set<Symbol> localVariables();
 
 }

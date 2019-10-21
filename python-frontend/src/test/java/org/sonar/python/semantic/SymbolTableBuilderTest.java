@@ -21,6 +21,7 @@ package org.sonar.python.semantic;
 
 import com.google.common.base.Functions;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,15 +29,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.sonar.python.PythonTestUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.PythonTestUtils;
+import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -197,9 +202,10 @@ public class SymbolTableBuilderTest {
   public void comprehension() {
     FunctionDef functionTree = functionTreesByName.get("function_with_comprehension");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-
-    assertThat(symbolByName.keySet()).containsOnly("a");
-    Symbol a = symbolByName.get("a");
+    assertThat(symbolByName).isEmpty();
+    List<Name> names = getNameFromExpression(((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0)).comprehensionFor().loopExpression());
+    assertThat(names).hasSize(1).extracting(Name::name).containsOnly("a");
+    Symbol a = names.get(0).symbol();
     assertThat(a.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.COMP_DECLARATION);
   }
 
@@ -261,10 +267,33 @@ public class SymbolTableBuilderTest {
   public void tuples_in_comp() {
     FunctionDef functionTree = functionTreesByName.get("symbols_in_comp");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName).hasSize(3).containsOnlyKeys("x", "y", "z");
+    assertThat(symbolByName).isEmpty();
+    List<Name> names = getNameFromExpression(((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0)).comprehensionFor().loopExpression());
+    assertThat(names).hasSize(3).extracting(Name::name).containsOnly("x", "y", "z");
     for (Symbol symbol : symbolByName.values()) {
       assertThat(symbol.usages()).hasSize(2);
     }
+  }
+
+  @Test
+  public void comprehension_scope() {
+    FunctionDef functionTree = functionTreesByName.get("scope_of_comprehension");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).containsOnlyKeys("x");
+    assertThat(symbolByName.get("x").usages()).extracting(u -> u.tree().firstToken().line()).containsExactly(98, 100).doesNotContain(99);
+    Name name = (Name) ((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0)).comprehensionFor().loopExpression();
+    assertThat(name.symbol().usages()).extracting(u -> u.tree().firstToken().line()).doesNotContain(98, 100).containsExactly(99, 99);
+  }
+
+  @Test
+  public void comprehension_shadowing_names() {
+    FunctionDef functionTree = functionTreesByName.get("comprehension_reusing_name");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
+    assertThat(symbolByName.get("a").usages()).hasSize(2);
+    List<Name> names = getNameFromExpression(((DictCompExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0)).comprehensionFor().loopExpression());
+    assertThat(names).hasSize(1);
+    assertThat(names.get(0).symbol().usages()).hasSize(2);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {
@@ -273,6 +302,16 @@ public class SymbolTableBuilderTest {
       functionTreesByName.put(pyFunctionDefTree.name().name(), pyFunctionDefTree);
       super.visitFunctionDef(pyFunctionDefTree);
     }
+  }
+
+  private static List<Name> getNameFromExpression(Tree tree) {
+    List<Name> res = new ArrayList<>();
+    if (tree.is(Tree.Kind.NAME)) {
+      res.add(((Name) tree));
+    } else if(tree.is(Tree.Kind.TUPLE)) {
+      ((Tuple) tree).elements().forEach(t -> res.addAll(getNameFromExpression(t)));
+    }
+    return res;
   }
 
 }
