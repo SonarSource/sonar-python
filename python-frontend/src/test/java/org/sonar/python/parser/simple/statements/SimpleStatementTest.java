@@ -54,6 +54,7 @@ public class SimpleStatementTest extends RuleTest {
   @Test
   public void realLife() {
     assertThat(p).matches("print 'Hello world'");
+    assertThat(p).matches("print = 12");
     assertThat(p).matches("exec 'print 1'");
     assertThat(p).matches("i += 1");
     assertThat(p).matches("print('something', file=out_file)");

@@ -332,7 +332,7 @@ public enum PythonGrammar implements GrammarRuleKey {
       GLOBAL_STMT,
       NONLOCAL_STMT));
 
-    b.rule(PRINT_STMT).is("print", b.nextNot("("), b.firstOf(
+    b.rule(PRINT_STMT).is("print", b.nextNot("="), b.nextNot("("), b.firstOf(
       b.sequence(">>", TEST, b.optional(b.oneOrMore(",", TEST), b.optional(","))),
       b.optional(TEST, b.zeroOrMore(",", TEST), b.optional(","))));
 

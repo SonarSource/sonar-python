@@ -247,6 +247,13 @@ public class SymbolTableBuilderTest {
     assertThat(symbolByName).hasSize(1);
   }
 
+  @Test
+  public void print_local_var() {
+    FunctionDef functionTree = functionTreesByName.get("print_var");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1).containsOnlyKeys("print");
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
