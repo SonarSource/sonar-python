@@ -181,6 +181,12 @@ public class PythonXUnitSensorTest {
     assertThat(measure(testFile1, CoreMetrics.TEST_FAILURES)).isEqualTo(0);
   }
 
+  @Test
+  public void missingAttributes() {
+    settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/missing-attribute-xunit-report.xml");
+    sensor.execute(context);
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot read report 'xunit-reports/missing-attribute-xunit-report.xml', the following exception occurred: Missing attribute 'time' at line 3");
+  }
   private Integer moduleMeasure(Metric<Integer> metric) {
     return measure(context.module(), metric);
   }
