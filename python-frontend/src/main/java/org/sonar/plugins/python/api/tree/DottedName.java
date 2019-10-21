@@ -21,6 +21,9 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * Example: <code>os.env</code> or <code>Crypto.Cipher.AES</code>
+ */
 public interface DottedName extends Tree {
 
   List<Name> names();

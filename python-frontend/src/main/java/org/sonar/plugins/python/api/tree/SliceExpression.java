@@ -19,6 +19,15 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   {@link #object()}[{@link #sliceList()}]
+ * </pre>
+ *
+ * Example: <pre>foo[1:10]</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#slicings
+ */
 public interface SliceExpression extends Expression {
 
   Expression object();

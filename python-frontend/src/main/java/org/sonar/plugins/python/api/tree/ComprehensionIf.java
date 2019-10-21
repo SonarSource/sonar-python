@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   if {@link #condition()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-comp-if
+ */
 public interface ComprehensionIf extends ComprehensionClause {
 
   Token ifToken();

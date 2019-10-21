@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.Nullable;
 
+/**
+ * <pre>
+ * assert {@link #condition()}, {@link #message()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-assert-stmt
+ */
 public interface AssertStatement extends Statement {
   Token assertKeyword();
 

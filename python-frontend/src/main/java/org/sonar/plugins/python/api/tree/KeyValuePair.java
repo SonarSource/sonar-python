@@ -23,9 +23,18 @@ import javax.annotation.CheckForNull;
 
 /**
  * <pre>
- * {@link #key()} {@link #colon()} {@link #value()} OR {@link #starStarToken()} {@link #expression()}
+ *   {@link #key()} {@link #colon()} {@link #value()}
  * </pre>
+ *
+ * or
+ *
+ * <pre>
+ *   ** {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-key-datum
  */
+// TODO: Use separate interface for dictionary unpacking
 public interface KeyValuePair extends Tree {
   @CheckForNull
   Expression key();

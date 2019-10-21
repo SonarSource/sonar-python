@@ -24,6 +24,12 @@ import org.sonar.python.semantic.Symbol;
 
 /**
  * Qualified expression like "foo.bar"
+ *
+ * <pre>
+ *   {@link #qualifier()}.{@link #name()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-attributeref
  */
 public interface QualifiedExpression extends Expression, HasSymbol {
   Expression qualifier();

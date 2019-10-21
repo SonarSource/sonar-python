@@ -21,6 +21,11 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * Example: <pre>"foo", bar()</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-expression-list
+ */
 public interface ExpressionList extends Expression {
 
   List<Expression> expressions();

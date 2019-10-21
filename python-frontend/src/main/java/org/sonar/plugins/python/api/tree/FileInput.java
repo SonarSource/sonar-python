@@ -23,12 +23,20 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.python.semantic.Symbol;
 
+/**
+ * Root of the AST.
+ *
+ * <pre>
+ *   {@link #docstring()}
+ *   {@link #statements()}
+ * </pre>
+ */
 public interface FileInput extends Tree {
   @CheckForNull
-  StatementList statements();
+  StringLiteral docstring();
 
   @CheckForNull
-  StringLiteral docstring();
+  StatementList statements();
 
   Set<Symbol> globalVariables();
 }

@@ -22,16 +22,41 @@ package org.sonar.plugins.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   try:
+ *     {@link #body()}
+ *   {@link #exceptClauses()}
+ *   {@link #elseClause()}
+ *   {@link #finallyClause()}
+ * </pre>
+ *
+ * Example:
+ * <pre>
+ *   try:
+ *     pass
+ *   except E1 as e:
+ *     pass
+ *   except E2 as e:
+ *     pass
+ *   else:
+ *     pass
+ *   finally:
+ *     pass
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#the-try-statement
+ */
 public interface TryStatement extends Statement {
   Token tryKeyword();
+
+  StatementList body();
 
   List<ExceptClause> exceptClauses();
 
   @CheckForNull
-  FinallyClause finallyClause();
-
-  @CheckForNull
   ElseClause elseClause();
 
-  StatementList body();
+  @CheckForNull
+  FinallyClause finallyClause();
 }

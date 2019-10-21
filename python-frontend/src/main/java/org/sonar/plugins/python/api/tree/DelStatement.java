@@ -21,6 +21,15 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ *   del {@link #expressions()}
+ * </pre>
+ *
+ * Example: <pre>del x, y</pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-del-stmt
+ */
 public interface DelStatement extends Statement {
   Token delKeyword();
 

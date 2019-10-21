@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-break-stmt
+ */
 public interface BreakStatement extends Statement {
   Token breakKeyword();
 }

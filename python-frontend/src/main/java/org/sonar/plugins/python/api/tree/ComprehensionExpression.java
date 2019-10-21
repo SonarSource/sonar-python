@@ -22,6 +22,21 @@ package org.sonar.plugins.python.api.tree;
 import java.util.Set;
 import org.sonar.python.semantic.Symbol;
 
+/**
+ *
+ * <pre>
+ *   {@link #resultExpression()} {@link #comprehensionFor()}
+ * </pre>
+ *
+ * Common interface for:
+ *  <ul>
+ *    <li>Set Comprehension <pre>{x for x in range(1, 100)}</pre></li>
+ *    <li>List Comprehension <pre>[x for x in range(1, 100)]</pre></li>
+ *    <li>Generator Expression <pre>x for x in range(1, 100)</pre></li>
+ *  </ul>
+ *
+ *  See https://docs.python.org/3/reference/expressions.html#displays-for-lists-sets-and-dictionaries
+ */
 public interface ComprehensionExpression extends Expression {
 
   Expression resultExpression();

@@ -19,14 +19,23 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   {@link #trueExpression()} if {@link #condition()} else {@link #falseExpression()}
+ * </pre>
+ *
+ * Example: <pre>1 if x == 42 else 2</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#conditional-expressions
+ */
 public interface ConditionalExpression extends Expression {
+  Expression trueExpression();
+
   Token ifKeyword();
+
+  Expression condition();
 
   Token elseKeyword();
 
-  Expression trueExpression();
-
   Expression falseExpression();
-
-  Expression condition();
 }

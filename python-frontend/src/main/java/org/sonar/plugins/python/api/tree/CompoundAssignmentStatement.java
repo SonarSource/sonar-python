@@ -19,10 +19,19 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   {@link #lhsExpression()} {@link #compoundAssignmentToken()} {@link #rhsExpression()}
+ * </pre>
+ *
+ * Example: <pre>x += y</pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-augmented-assignment-stmt
+ */
 public interface CompoundAssignmentStatement extends Statement {
-  Expression rhsExpression();
+  Expression lhsExpression();
 
   Token compoundAssignmentToken();
 
-  Expression lhsExpression();
+  Expression rhsExpression();
 }

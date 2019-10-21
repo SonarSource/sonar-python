@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * See https://docs.python.org/3/library/constants.html#None
+ */
 public interface NoneExpression extends Expression {
   Token none();
 }

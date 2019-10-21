@@ -21,6 +21,9 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-expression-stmt
+ */
 public interface ExpressionStatement extends Statement {
   List<Expression> expressions();
 }

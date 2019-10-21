@@ -21,6 +21,8 @@ package org.sonar.plugins.python.api.tree;
 
 /**
  * Import statement
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-import-stmt
  */
 public interface ImportStatement extends Statement {
 }

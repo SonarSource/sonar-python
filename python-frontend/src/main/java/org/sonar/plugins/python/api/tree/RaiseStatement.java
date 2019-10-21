@@ -22,14 +22,22 @@ package org.sonar.plugins.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   raise {@link #expressions()} from {@link #fromExpression()}
+ * </pre>
+ * Example: <pre>raise foo from bar</pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#the-raise-statement
+ */
 public interface RaiseStatement extends Statement {
   Token raiseKeyword();
+
+  List<Expression> expressions();
 
   @CheckForNull
   Token fromKeyword();
 
   @CheckForNull
   Expression fromExpression();
-
-  List<Expression> expressions();
 }

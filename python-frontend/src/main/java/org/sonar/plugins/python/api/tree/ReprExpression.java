@@ -21,6 +21,12 @@ package org.sonar.plugins.python.api.tree;
 
 /**
  * Python 2 only.
+ *
+ * <pre>
+ *   `{@link #expressionList()}`
+ * </pre>
+ *
+ * See https://portingguide.readthedocs.io/en/latest/syntax.html#backticks
  */
 public interface ReprExpression extends Expression {
   Token openingBacktick();

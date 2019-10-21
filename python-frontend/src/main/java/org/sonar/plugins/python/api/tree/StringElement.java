@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   {@link #prefix()}{@link #value()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/lexical_analysis.html#grammar-token-stringliteral
+ */
 public interface StringElement extends Tree {
   /**
    * @return the token value of this literal.

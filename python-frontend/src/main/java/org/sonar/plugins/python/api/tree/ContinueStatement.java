@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * See https://docs.python.org/3/reference/simple_stmts.html#the-continue-statement
+ */
 public interface ContinueStatement extends Statement {
   Token continueKeyword();
 }

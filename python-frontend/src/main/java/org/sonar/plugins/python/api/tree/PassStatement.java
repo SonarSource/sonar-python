@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * https://docs.python.org/3/reference/simple_stmts.html#grammar-token-pass-stmt
+ */
 public interface PassStatement extends Statement {
   Token passKeyword();
 }

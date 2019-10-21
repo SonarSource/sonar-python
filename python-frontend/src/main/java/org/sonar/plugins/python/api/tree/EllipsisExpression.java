@@ -21,6 +21,14 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * Represents singleton Ellipsis object
+ * <pre>
+ *   ...
+ * </pre>
+ *
+ * See https://docs.python.org/3/library/constants.html#Ellipsis
+ */
 public interface EllipsisExpression extends Expression {
   List<Token> ellipsis();
 }

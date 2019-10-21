@@ -24,6 +24,16 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.python.semantic.Symbol;
 
+/**
+ * <pre>
+ *   {@link #decorators()}
+ *   class {@link #name()}( {@link #args()} ):
+ *     {@link #docstring()}
+ *     {@link #body()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#class-definitions
+ */
 public interface ClassDef extends Statement {
 
   List<Decorator> decorators();

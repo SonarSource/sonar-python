@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ *   return {@link #expressions()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-return-stmt
+ */
 public interface ReturnStatement extends Statement {
   Token returnKeyword();
 

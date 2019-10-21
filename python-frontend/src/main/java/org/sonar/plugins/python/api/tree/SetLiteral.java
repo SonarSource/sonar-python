@@ -21,6 +21,15 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ *   { {@link #elements()} }
+ * </pre>
+ *
+ * Example: <pre>{ x, y, z }</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-set-display
+ */
 public interface SetLiteral extends Expression {
   Token lCurlyBrace();
 

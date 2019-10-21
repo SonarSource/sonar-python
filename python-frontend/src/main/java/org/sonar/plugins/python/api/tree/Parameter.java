@@ -21,8 +21,30 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@link #name()} {@link #typeAnnotation()} = {@link #defaultValue()}
+ * </pre>
+ *
+ * or (star parameter)
+ *
+ * <pre>
+ *   *
+ * </pre>
+ *
+ * or
+ *
+ * <pre>
+ *   {@link #starToken()} {@link #name()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-parameter
+ */
 public interface Parameter extends AnyParameter {
 
+  /**
+   * Represents both '*' and '**'
+   */
   @CheckForNull
   Token starToken();
 

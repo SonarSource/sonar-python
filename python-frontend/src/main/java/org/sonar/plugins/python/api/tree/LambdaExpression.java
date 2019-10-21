@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   lambda {@link FunctionLike#parameters()} : {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-lambda-expr
+ */
 public interface LambdaExpression extends Expression, FunctionLike {
   Token lambdaKeyword();
 

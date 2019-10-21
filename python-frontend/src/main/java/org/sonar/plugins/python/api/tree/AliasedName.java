@@ -25,8 +25,10 @@ import javax.annotation.CheckForNull;
  * Aliased name
  *
  * <pre>
- * {@link Name#name()} {@link #asKeyword()} {@link #alias()}
+ * {@link #dottedName()} {@link #asKeyword()} {@link #alias()}
  * </pre>
+ *
+ * Example: <pre>foo.bar as f</pre>
  */
 public interface AliasedName extends Tree {
   @CheckForNull

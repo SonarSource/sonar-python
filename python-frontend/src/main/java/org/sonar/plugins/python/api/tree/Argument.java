@@ -21,6 +21,12 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>{@link #keywordArgument()} = {@link #expression()}</pre> or <pre>{@link #expression()}</pre>
+ * or <pre>* {@link #expression()}</pre> or <pre>** {@link #expression()}</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-argument-list
+ */
 public interface Argument extends Tree {
   @CheckForNull
   Name keywordArgument();

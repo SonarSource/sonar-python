@@ -22,6 +22,14 @@ package org.sonar.plugins.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   with {@link #withItems()}
+ *     {@link #statements()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-with-stmt
+ */
 public interface WithStatement extends Statement {
 
   Token withKeyword();

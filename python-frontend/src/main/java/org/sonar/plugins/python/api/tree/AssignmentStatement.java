@@ -21,10 +21,17 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ * {@link #lhsExpressions()}, {@link #lhsExpressions()}, {@link #lhsExpressions()} = {@link #assignedValue()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-assignment-stmt
+ */
 public interface AssignmentStatement extends Statement {
-  Expression assignedValue();
+  List<ExpressionList> lhsExpressions();
 
   List<Token> equalTokens();
 
-  List<ExpressionList> lhsExpressions();
+  Expression assignedValue();
 }

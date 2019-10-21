@@ -21,6 +21,22 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@link #lowerBound()} {@link #boundSeparator()} {@link #upperBound()} {@link #strideSeparator()} {@link #stride()}
+ * </pre>
+ *
+ * Examples:
+ * <ul>
+ *   <li><pre>1:10</pre></li>
+ *   <li><pre>1:10:2</pre></li>
+ *   <li><pre>1:</pre></li>
+ *   <li><pre>1:</pre></li>
+ *   <li><pre>:10</pre></li>
+ *   <li><pre>:</pre></li>
+ * </ul>
+ * https://docs.python.org/3/reference/expressions.html#slicings
+ */
 public interface SliceItem extends Tree {
 
   @CheckForNull
