@@ -220,7 +220,7 @@ public class PythonTreeMaker {
       equalToken = toPyToken(equalTokenNode.getToken());
       assignedValue = expression(equalTokenNode.getNextSibling());
     }
-    return new AnnotatedAssignmentImpl(variable, toPyToken(colonTokenNode.getToken()), annotation, equalToken, assignedValue, separators);
+    return new AnnotatedAssignmentImpl(variable, new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), annotation), equalToken, assignedValue, separators);
   }
 
   private StatementList getStatementListFromSuite(AstNode suite) {
