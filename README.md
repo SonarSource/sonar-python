@@ -1,4 +1,4 @@
-# SonarPython [![Build Status](https://travis-ci.org/SonarSource/sonar-python.svg?branch=master)](https://travis-ci.org/SonarSource/sonar-python)  [![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.python%3Apython&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython)
+# SonarPython [![Build Status](https://api.cirrus-ci.com/github/SonarSource/sonar-python.svg?branch=master)](https://cirrus-ci.com/github/SonarSource/sonar-python)  [![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.python%3Apython&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython)
 
 SonarPython is a code analyzer for Python projects. 
 
