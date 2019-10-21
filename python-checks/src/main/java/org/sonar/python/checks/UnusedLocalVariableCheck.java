@@ -26,7 +26,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -47,22 +50,27 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
-      FunctionDef functionTree = (FunctionDef) ctx.syntaxNode();
-      // https://docs.python.org/3/library/functions.html#locals
-      if (isCallingLocalsFunction(functionTree)) {
-        return;
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((FunctionDef) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.DICT_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((DictCompExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.LIST_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.SET_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.GENERATOR_EXPR, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
+  }
+
+  private void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
+    // https://docs.python.org/3/library/functions.html#locals
+    if (isCallingLocalsFunction(functionTree)) {
+      return;
+    }
+    Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
+    for (Symbol symbol : symbols) {
+      if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && hasOnlyBindingUsages(symbol)) {
+        symbol.usages().stream()
+          .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
+          .filter(usage -> !isTupleDeclaration(usage.tree()))
+          .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())));
       }
-      Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
-      for (Symbol symbol : functionTree.localVariables()) {
-        if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && hasOnlyBindingUsages(symbol)) {
-          symbol.usages().stream()
-            .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
-            .filter(usage -> !isTupleDeclaration(usage.tree()))
-            .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())));
-        }
-      }
-    });
+    }
   }
 
   private static boolean hasOnlyBindingUsages(Symbol symbol) {
@@ -77,8 +85,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree))) != null;
   }
 
-  private static boolean isCallingLocalsFunction(FunctionDef functionTree) {
-    return TreeUtils.hasDescendant(functionTree, t -> t.is(Kind.CALL_EXPR) && calleeHasNameLocals(((CallExpression) t)));
+  private static boolean isCallingLocalsFunction(Tree tree) {
+    return TreeUtils.hasDescendant(tree, t -> t.is(Kind.CALL_EXPR) && calleeHasNameLocals(((CallExpression) t)));
   }
 
   private static boolean calleeHasNameLocals(CallExpression callExpression) {
@@ -86,9 +94,9 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     return callee.is(Kind.NAME) && "locals".equals(((Name) callee).name());
   }
 
-  private static Set<String> extractStringInterpolationIdentifiers(FunctionDef functionTree) {
+  private static Set<String> extractStringInterpolationIdentifiers(Tree tree) {
     StringInterpolationVisitor visitor = new StringInterpolationVisitor();
-    functionTree.accept(visitor);
+    tree.accept(visitor);
     return visitor.stringInterpolations;
   }
 

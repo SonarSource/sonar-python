@@ -19,16 +19,19 @@
  */
 package org.sonar.python.tree;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.python.semantic.Symbol;
 
 public class DictCompExpressionImpl extends PyTree implements DictCompExpression {
 
@@ -38,6 +41,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   private final Expression valueExpression;
   private final ComprehensionFor comprehensionFor;
   private final Token closingBrace;
+  private Set<Symbol> symbols = new HashSet<>();
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
                                 ComprehensionFor compFor, Token closingBrace) {
@@ -70,6 +74,11 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   }
 
   @Override
+  public Set<Symbol> localVariables() {
+    return symbols;
+  }
+
+  @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitDictCompExpression(this);
   }
@@ -82,5 +91,9 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   @Override
   public Kind getKind() {
     return Kind.DICT_COMPREHENSION;
+  }
+
+  public void addLocalVariableSymbol(Symbol symbol) {
+    symbols.add(symbol);
   }
 }

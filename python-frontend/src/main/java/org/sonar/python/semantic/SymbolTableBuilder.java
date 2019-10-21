@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
@@ -63,6 +64,8 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
 import org.sonar.python.tree.ClassDefImpl;
+import org.sonar.python.tree.ComprehensionExpressionImpl;
+import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
@@ -95,6 +98,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
       } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
         scope.symbols.forEach(((FileInputImpl) fileInput)::addGlobalVariables);
+      } else if (scope.rootTree.is(Kind.DICT_COMPREHENSION)) {
+        scope.symbols.forEach(((DictCompExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
+      } else if (scope.rootTree instanceof ComprehensionExpression) {
+        scope.symbols.forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       }
     }
   }
@@ -131,6 +138,22 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyLambdaExpressionTree);
       createParameters(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
+      leaveScope();
+    }
+
+    @Override
+    public void visitDictCompExpression(DictCompExpressionImpl tree) {
+      createScope(tree, currentScope());
+      enterScope(tree);
+      super.visitDictCompExpression(tree);
+      leaveScope();
+    }
+
+    @Override
+    public void visitPyListOrSetCompExpression(ComprehensionExpression tree) {
+      createScope(tree, currentScope());
+      enterScope(tree);
+      super.visitPyListOrSetCompExpression(tree);
       leaveScope();
     }
 
@@ -485,6 +508,33 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       enterScope(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
+      leaveScope();
+    }
+
+    @Override
+    public void visitPyListOrSetCompExpression(ComprehensionExpression tree) {
+      enterScope(tree);
+      scan(tree.resultExpression());
+      ComprehensionFor comprehensionFor = tree.comprehensionFor();
+      scan(comprehensionFor.loopExpression());
+      leaveScope();
+      scan(comprehensionFor.iterable());
+      enterScope(tree);
+      scan(comprehensionFor.nestedClause());
+      leaveScope();
+    }
+
+    @Override
+    public void visitDictCompExpression(DictCompExpressionImpl tree) {
+      enterScope(tree);
+      scan(tree.keyExpression());
+      scan(tree.valueExpression());
+      ComprehensionFor comprehensionFor = tree.comprehensionFor();
+      scan(comprehensionFor.loopExpression());
+      leaveScope();
+      scan(comprehensionFor.iterable());
+      enterScope(tree);
+      scan(comprehensionFor.nestedClause());
       leaveScope();
     }
 
