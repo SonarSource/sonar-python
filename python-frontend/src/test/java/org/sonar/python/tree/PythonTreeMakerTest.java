@@ -1103,14 +1103,14 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(annAssign.firstToken().value()).isEqualTo("x");
     assertThat(annAssign.lastToken().value()).isEqualTo("1");
     assertThat(annAssign.getKind()).isEqualTo(Tree.Kind.ANNOTATED_ASSIGNMENT);
-    assertThat(annAssign.children()).hasSize(5);
+    assertThat(annAssign.children()).hasSize(4);
     assertThat(annAssign.variable().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(((Name) annAssign.variable()).name()).isEqualTo("x");
     assertThat(annAssign.assignedValue().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
     assertThat(annAssign.equalToken().value()).isEqualTo("=");
-    assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.NAME);
-    assertThat(((Name) annAssign.annotation()).name()).isEqualTo("string");
-    assertThat(annAssign.colonToken().value()).isEqualTo(":");
+    assertThat(annAssign.annotation().expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
+    assertThat(annAssign.annotation().colonToken().value()).isEqualTo(":");
 
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     astNode = p.parse("x : string");
@@ -1118,8 +1118,8 @@ public class PythonTreeMakerTest extends RuleTest {
     annAssign = treeMaker.annotatedAssignment(statementWithSeparator);
     assertThat(annAssign.variable().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(((Name) annAssign.variable()).name()).isEqualTo("x");
-    assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.NAME);
-    assertThat(((Name) annAssign.annotation()).name()).isEqualTo("string");
+    assertThat(annAssign.annotation().expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
     assertThat(annAssign.assignedValue()).isNull();
     assertThat(annAssign.equalToken()).isNull();
   }

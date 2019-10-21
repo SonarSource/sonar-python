@@ -31,20 +31,19 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 
 public class AnnotatedAssignmentImpl extends SimpleStatement implements AnnotatedAssignment {
   private final Expression variable;
-  private final Token colonToken;
-  private final Expression annotation;
   private final Token equalToken;
   private final Expression assignedValue;
   private final Separators separators;
+  private final TypeAnnotation annotation;
 
-  public AnnotatedAssignmentImpl(Expression variable, Token colonToken, Expression annotation,
+  public AnnotatedAssignmentImpl(Expression variable, Token colonToken, Expression typeAnnotation,
                                  @Nullable Token equalToken, @Nullable Expression assignedValue, Separators separators) {
     this.variable = variable;
-    this.colonToken = colonToken;
-    this.annotation = annotation;
+    this.annotation = new TypeAnnotationImpl(colonToken, typeAnnotation);
     this.equalToken = equalToken;
     this.assignedValue = assignedValue;
     this.separators = separators;
@@ -56,12 +55,7 @@ public class AnnotatedAssignmentImpl extends SimpleStatement implements Annotate
   }
 
   @Override
-  public Token colonToken() {
-    return colonToken;
-  }
-
-  @Override
-  public Expression annotation() {
+  public TypeAnnotation annotation() {
     return annotation;
   }
 
@@ -90,7 +84,7 @@ public class AnnotatedAssignmentImpl extends SimpleStatement implements Annotate
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(variable, colonToken, annotation, equalToken, assignedValue), separators.elements())
+    return Stream.of(Arrays.asList(variable, annotation, equalToken, assignedValue), separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

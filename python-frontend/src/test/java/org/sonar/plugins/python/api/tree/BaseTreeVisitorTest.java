@@ -227,7 +227,7 @@ public class BaseTreeVisitorTest extends RuleTest {
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitAnnotatedAssignment(tree);
     verify(visitor).visitName((Name) tree.variable());
-    verify(visitor).visitName((Name) tree.annotation());
+    verify(visitor).visitTypeAnnotation(tree.annotation());
     verify(visitor).visitName((Name) tree.assignedValue());
   }
 

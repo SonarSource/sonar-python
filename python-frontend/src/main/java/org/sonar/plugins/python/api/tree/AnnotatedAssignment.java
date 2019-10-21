@@ -25,11 +25,7 @@ public interface AnnotatedAssignment extends Statement {
   // Using PyExpressionTree because variable can be `identifier | attributeref | subscription | slicing`
   Expression variable();
 
-  // TODO: move to a dedicated tree for typed expression
-  Token colonToken();
-
-  // TODO: move to a dedicated tree for typed expression
-  Expression annotation();
+  TypeAnnotation annotation();
 
   @CheckForNull
   Token equalToken();
