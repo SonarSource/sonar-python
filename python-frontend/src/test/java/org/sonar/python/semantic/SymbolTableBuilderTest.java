@@ -254,6 +254,16 @@ public class SymbolTableBuilderTest {
     assertThat(symbolByName).hasSize(1).containsOnlyKeys("print");
   }
 
+  @Test
+  public void tuples_in_comp() {
+    FunctionDef functionTree = functionTreesByName.get("symbols_in_comp");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(3).containsOnlyKeys("x", "y", "z");
+    for (Symbol symbol : symbolByName.values()) {
+      assertThat(symbol.usages()).hasSize(2);
+    }
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {

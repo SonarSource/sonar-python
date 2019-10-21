@@ -33,11 +33,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
@@ -49,19 +49,19 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.FunctionLike;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
-import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
@@ -192,10 +192,16 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitComprehensionFor(ComprehensionFor tree) {
-      if (tree.loopExpression().is(Tree.Kind.NAME)) {
-        addBindingUsage((Name) tree.loopExpression(), Usage.Kind.COMP_DECLARATION);
-      }
+      addCompDeclarationParam(tree.loopExpression());
       super.visitComprehensionFor(tree);
+    }
+
+    private void addCompDeclarationParam(Tree tree) {
+      if (tree.is(Tree.Kind.NAME)) {
+        addBindingUsage((Name) tree, Usage.Kind.COMP_DECLARATION);
+      } else if (tree.is(Kind.TUPLE)) {
+        ((Tuple) tree).elements().forEach(this::addCompDeclarationParam);
+      }
     }
 
     private void createLoopVariables(ForStatement loopTree) {
