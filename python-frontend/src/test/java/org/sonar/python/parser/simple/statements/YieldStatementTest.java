@@ -35,9 +35,7 @@ public class YieldStatementTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.YIELD_EXPR).mock();
-
-    assertThat(p).matches("YIELD_EXPR");
+    assertThat(p).matches("yield from foo");
   }
 
 }

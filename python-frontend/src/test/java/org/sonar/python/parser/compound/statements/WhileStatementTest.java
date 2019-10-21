@@ -35,11 +35,8 @@ public class WhileStatementTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
-
-    assertThat(p).matches("while TEST : SUITE");
-    assertThat(p).matches("while TEST : SUITE else : SUITE");
+    assertThat(p).matches("while TEST : pass")
+      .matches("while TEST : pass\nelse : pass");
   }
 
 }

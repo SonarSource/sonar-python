@@ -35,12 +35,11 @@ public class FileInputTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.STATEMENT).mock();
-
-    assertThat(p).matches("STATEMENT");
-    assertThat(p).matches("STATEMENT STATEMENT");
-    assertThat(p).matches("\n");
-    assertThat(p).matches("STATEMENT\nSTATEMENT");
+    assertThat(p)
+      .matches("print foo")
+      .matches("print foo; print toto")
+      .matches("\n")
+      .matches("print foo\nprint foo");
   }
 
 }

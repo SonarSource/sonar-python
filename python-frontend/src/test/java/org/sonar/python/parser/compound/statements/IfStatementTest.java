@@ -35,12 +35,10 @@ public class IfStatementTest extends RuleTest {
 
   @Test
   public void ok() {
-    p.getGrammar().rule(PythonGrammar.TEST).mock();
-    p.getGrammar().rule(PythonGrammar.SUITE).mock();
 
-    assertThat(p).matches("if TEST : SUITE");
-    assertThat(p).matches("if TEST : SUITE elif TEST : SUITE");
-    assertThat(p).matches("if TEST : SUITE elif TEST : SUITE else : SUITE");
+    assertThat(p).matches("if TEST : pass")
+      .matches("if TEST : pass\nelif TEST : pass")
+      .matches("if TEST : pass\nelif TEST : pass\nelse : pass");
   }
 
 }

@@ -35,17 +35,10 @@ public class SuiteTest extends RuleTest {
   }
 
   @Test
-  public void ok() {
-    p.getGrammar().rule(PythonGrammar.STMT_LIST).mock();
-
-    assertThat(p).matches("STMT_LIST\n");
-  }
-
-  @Test
   public void realLife() {
-    assertThat(p).matches(PythonTestUtils.appendNewLine("pass"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("x = 1"));
-    assertThat(p).matches(PythonTestUtils.appendNewLine("print(x)"));
+    assertThat(p).matches(PythonTestUtils.appendNewLine("pass"))
+     .matches(PythonTestUtils.appendNewLine("x = 1"))
+     .matches(PythonTestUtils.appendNewLine("print(x)"));
   }
 
 }
