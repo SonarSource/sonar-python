@@ -61,7 +61,7 @@ public class SymbolVisitorTest {
   @Test
   public void symbol_visitor() {
     assertThat(context.referencesForSymbolAt(componentKey, 1, 10)).isNull();
-    verifyUsages(1, 0);
+    verifyUsages(1, 0, reference(29, 14, 29, 15), reference(30, 18, 30, 19));
     verifyUsages(2, 0, reference(10, 4, 10, 5));
     verifyUsages(5, 4, reference(6, 4, 6, 5), reference(7, 4, 7, 5),
       reference(8, 8, 8, 9), reference(13, 9, 13, 10));
@@ -73,6 +73,8 @@ public class SymbolVisitorTest {
     verifyUsages(21, 18, reference(22, 8, 22, 12), reference(23, 8, 23, 12));
     verifyUsages(25, 19, reference(26, 8, 26, 12));
     verifyUsages(28, 11, reference(28, 15, 28, 16), reference(28, 17, 28, 18));
+    verifyUsages(29, 9, reference(29, 1, 29, 2));
+    verifyUsages(30, 11, reference(30, 1, 30, 4));
   }
 
   private void verifyUsages(int line, int offset, TextRange... trs) {

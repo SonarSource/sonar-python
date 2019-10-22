@@ -25,6 +25,7 @@ import java.util.List;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
 import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
@@ -32,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.python.tree.DictCompExpressionImpl;
 
 public class SymbolVisitor extends BaseTreeVisitor {
 
@@ -58,6 +60,18 @@ public class SymbolVisitor extends BaseTreeVisitor {
   public void visitLambda(LambdaExpression lambdaExpression) {
     lambdaExpression.localVariables().forEach(this::handleSymbol);
     super.visitLambda(lambdaExpression);
+  }
+
+  @Override
+  public void visitPyListOrSetCompExpression(ComprehensionExpression tree) {
+    tree.localVariables().forEach(this::handleSymbol);
+    super.visitPyListOrSetCompExpression(tree);
+  }
+
+  @Override
+  public void visitDictCompExpression(DictCompExpressionImpl tree) {
+    tree.localVariables().forEach(this::handleSymbol);
+    super.visitDictCompExpression(tree);
   }
 
   @Override
