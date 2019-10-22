@@ -42,11 +42,21 @@ import static org.junit.Assert.assertThat;
 
 public class PythonLexerTest {
 
-  private static Lexer lexer;
+  private static TestLexer lexer;
 
   @BeforeClass
   public static void init() {
-    lexer = PythonLexer.create(new PythonConfiguration(UTF_8));
+    lexer = new TestLexer();
+  }
+
+  private static class TestLexer {
+    private LexerState lexerState = new LexerState();
+    private Lexer lexer = PythonLexer.create(new PythonConfiguration(UTF_8), lexerState);
+
+    List<Token> lex(String code) {
+      lexerState.reset();
+      return lexer.lex(code);
+    }
   }
 
   /**

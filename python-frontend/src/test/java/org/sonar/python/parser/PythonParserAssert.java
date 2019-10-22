@@ -1,0 +1,128 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2019 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.parser;
+
+import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.impl.Parser;
+import com.sonar.sslr.impl.matcher.RuleDefinition;
+import java.nio.charset.StandardCharsets;
+import org.fest.assertions.GenericAssert;
+import org.sonar.python.PythonConfiguration;
+import org.sonar.sslr.grammar.GrammarRuleKey;
+import org.sonar.sslr.internal.vm.EndOfInputExpression;
+import org.sonar.sslr.internal.vm.FirstOfExpression;
+import org.sonar.sslr.internal.vm.lexerful.TokenTypeExpression;
+import org.sonar.sslr.tests.Assertions;
+import org.sonar.sslr.tests.ParsingResultComparisonFailure;
+
+// Mostly copied from SSLR: org.sonar.sslr.tests.ParserAssert
+// We couldn't use org.sonar.sslr.tests.ParserAssert because it creates a new instance of Parser
+// and SonarPython's parser now has its own Parser class.
+public class PythonParserAssert extends GenericAssert<PythonParserAssert, Parser> {
+
+  public static PythonParserAssert assertThat(Parser actual) {
+    return new PythonParserAssert(actual);
+  }
+
+  public PythonParserAssert(Parser actual) {
+    super(PythonParserAssert.class, actual);
+  }
+
+  private Parser createParserWithEofMatcher() {
+    RuleDefinition rule = actual.getRootRule();
+    RuleDefinition endOfInput = new RuleDefinition(new EndOfInput())
+      .is(new FirstOfExpression(EndOfInputExpression.INSTANCE, new TokenTypeExpression(GenericTokenType.EOF)));
+    RuleDefinition withEndOfInput = new RuleDefinition(new WithEndOfInput(actual.getRootRule().getRuleKey()))
+      .is(rule, endOfInput);
+
+    Parser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    parser.setRootRule(withEndOfInput);
+
+    return parser;
+  }
+
+  /**
+   * Verifies that the actual <code>{@link Parser}</code> fully matches a given input.
+   * @return this assertion object.
+   */
+  public PythonParserAssert matches(String input) {
+    isNotNull();
+    hasRootRule();
+    Parser parser = createParserWithEofMatcher();
+    String expected = "Rule '" + getRuleName() + "' should match:\n" + input;
+    try {
+      parser.parse(input);
+    } catch (RecognitionException e) {
+      String actual = e.getMessage();
+      throw new ParsingResultComparisonFailure(expected, actual);
+    }
+    return this;
+  }
+
+  /**
+   * Verifies that the actual <code>{@link Parser}</code> not matches a given input.
+   * @return this assertion object.
+   */
+  public PythonParserAssert notMatches(String input) {
+    isNotNull();
+    hasRootRule();
+    Parser parser = createParserWithEofMatcher();
+    try {
+      parser.parse(input);
+    } catch (RecognitionException e) {
+      // expected
+      return this;
+    }
+    throw new AssertionError("Rule '" + getRuleName() + "' should not match:\n" + input);
+  }
+
+  private void hasRootRule() {
+    Assertions.assertThat(actual.getRootRule())
+      .overridingErrorMessage("Root rule of the parser should not be null")
+      .isNotNull();
+  }
+
+  private String getRuleName() {
+    return actual.getRootRule().getName();
+  }
+
+  static class EndOfInput implements GrammarRuleKey {
+    @Override
+    public String toString() {
+      return "end of input";
+    }
+  }
+
+  static class WithEndOfInput implements GrammarRuleKey {
+    private final GrammarRuleKey ruleKey;
+
+    public WithEndOfInput(GrammarRuleKey ruleKey) {
+      this.ruleKey = ruleKey;
+    }
+
+    @Override
+    public String toString() {
+      return ruleKey + " with end of input";
+    }
+  }
+
+
+}

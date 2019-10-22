@@ -19,10 +19,18 @@
  */
 package org.sonar.python.parser;
 
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.Parser;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;
 
 public final class PythonParser {
@@ -31,8 +39,57 @@ public final class PythonParser {
   }
 
   public static Parser<Grammar> create(PythonConfiguration conf) {
-    return Parser.builder(PythonGrammar.create())
-      .withLexer(PythonLexer.create(conf)).build();
+    return new InternalPythonParser(conf);
   }
 
+  // We can't use com.sonar.sslr.impl.Parser directly because we need to add
+  // DEDENT tokens before the EOF token (without using SSLR deprecated preprocessor API)
+  // and we can't create a subclass of com.sonar.sslr.impl.Lexer.
+  // The only solution seems to subclass com.sonar.sslr.impl.Parser.
+  private static class InternalPythonParser extends Parser<Grammar> {
+
+    private final LexerState lexerState;
+    private final Lexer lexer;
+
+    private InternalPythonParser(PythonConfiguration conf) {
+      super(PythonGrammar.create());
+      super.setRootRule(super.getGrammar().getRootRule());
+      this.lexerState = new LexerState();
+      this.lexer = PythonLexer.create(conf, lexerState);
+    }
+
+    @Override
+    public AstNode parse(String source) {
+      lexerState.reset();
+      lexer.lex(source);
+      return super.parse(tokens());
+    }
+
+    @Override
+    public AstNode parse(File file) {
+      lexerState.reset();
+      lexer.lex(file);
+      return parse(tokens());
+    }
+
+    private List<Token> tokens() {
+      List<Token> tokens = lexer.getTokens();
+      if (lexerState.indentationStack.peek() > 0) {
+        Token eofToken = tokens.get(tokens.size() - 1);
+        tokens = new ArrayList<>(tokens.subList(0, tokens.size() - 1));
+        while (lexerState.indentationStack.peek() > 0) {
+          lexerState.indentationStack.pop();
+          tokens.add(Token.builder()
+            .setURI(eofToken.getURI())
+            .setType(PythonTokenType.DEDENT)
+            .setLine(eofToken.getLine())
+            .setColumn(eofToken.getColumn())
+            .setValueAndOriginalValue("")
+            .build());
+        }
+        tokens.add(eofToken);
+      }
+      return tokens;
+    }
+  }
 }

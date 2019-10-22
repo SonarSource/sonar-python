@@ -24,7 +24,7 @@ import java.util.Deque;
 
 public class LexerState {
 
-  final Deque<Integer> indentationStack = new ArrayDeque<>();
+  public final Deque<Integer> indentationStack = new ArrayDeque<>();
 
   int brackets;
   boolean joined;

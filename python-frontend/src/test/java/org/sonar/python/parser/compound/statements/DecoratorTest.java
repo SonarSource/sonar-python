@@ -25,7 +25,7 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.parser.RuleTest;
 
-import static org.sonar.sslr.tests.Assertions.assertThat;
+import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
 
 public class DecoratorTest extends RuleTest {

@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
-import static org.sonar.sslr.tests.Assertions.assertThat;
+import static org.sonar.python.parser.PythonParserAssert.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExpressionTest extends RuleTest {
