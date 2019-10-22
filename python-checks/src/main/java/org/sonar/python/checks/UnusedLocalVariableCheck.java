@@ -57,7 +57,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.GENERATOR_EXPR, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
   }
 
-  private void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
+  private static void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
     // https://docs.python.org/3/library/functions.html#locals
     if (isCallingLocalsFunction(functionTree)) {
       return;
