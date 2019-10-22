@@ -19,7 +19,12 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import javax.annotation.CheckForNull;
+
 public interface ComprehensionFor extends ComprehensionClause {
+
+  @CheckForNull
+  Token asyncToken();
 
   Token forToken();
 
