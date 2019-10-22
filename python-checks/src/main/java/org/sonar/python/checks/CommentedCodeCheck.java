@@ -25,6 +25,7 @@ import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.python.PythonConfiguration;
@@ -44,6 +45,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 public class CommentedCodeCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Remove this commented out code.";
+  private static final Pattern ENCODING_PATTERN =  Pattern.compile("^[ \\t\\f]*#.*?coding[:=][ \\t]*([-_.a-zA-Z0-9]+)"); // PEP 263
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Override
@@ -84,14 +86,24 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
       return;
     }
     if (isTextParsedAsCode(text)) {
-      ctx.addIssue(triviaGroup.get(0).token(), MESSAGE);
+      if (!isEncoding(getTextForParsing(triviaGroup, false)) || triviaGroup.get(0).token().line() > 2) {
+        ctx.addIssue(triviaGroup.get(0).token(), MESSAGE);
+      }
     }
   }
 
   private static String getTextForParsing(List<Trivia> triviaGroup) {
+    return getTextForParsing(triviaGroup, true);
+  }
+
+  private static String getTextForParsing(List<Trivia> triviaGroup, boolean filtered) {
     StringBuilder commentTextSB = new StringBuilder();
     for (Trivia trivia : triviaGroup) {
       String value = trivia.value();
+      if (!filtered) {
+        commentTextSB.append(value);
+        continue;
+      }
       while (value.startsWith("#") || value.startsWith(" #")) {
         value = value.substring(1);
       }
@@ -115,6 +127,10 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
 
   private static boolean isEmpty(String text) {
     return text.matches("\\s*");
+  }
+
+  private static boolean isEncoding(String text) {
+    return ENCODING_PATTERN.matcher(text).find();
   }
 
   private static boolean isTextParsedAsCode(String text) {
