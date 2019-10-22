@@ -1,3 +1,5 @@
+# coding=utf8
+
 # Noncompliant@+2 {{Remove this commented out code.}} [[sc=0;el=+0;ec=9]]
 
 # x += 1
