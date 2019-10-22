@@ -25,14 +25,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;
 import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokenLocationTest {
-
-  private Lexer lexer = PythonLexer.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
   public void test_multiline() {
@@ -75,6 +74,9 @@ public class TokenLocationTest {
   }
 
   private List<Token> lex(String toLex) {
+    LexerState lexerState = new LexerState();
+    lexerState.reset();
+    Lexer lexer = PythonLexer.create(new PythonConfiguration(StandardCharsets.UTF_8), lexerState);
     return lexer.lex(toLex).stream().map(TokenImpl::new).collect(Collectors.toList());
   }
 

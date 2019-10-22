@@ -45,9 +45,7 @@ public final class PythonLexer {
   private PythonLexer() {
   }
 
-  public static Lexer create(PythonConfiguration conf) {
-    LexerState lexerState = new LexerState();
-
+  public static Lexer create(PythonConfiguration conf, LexerState lexerState) {
     return Lexer.builder()
         .withCharset(conf.getCharset())
         .withFailIfNoChannelToConsumeOneCharacter(true)
@@ -55,7 +53,6 @@ public final class PythonLexer {
         .withChannel(new NewLineChannel(lexerState))
 
         .withChannel(new IndentationChannel(lexerState))
-        .withPreprocessor(new IndentationPreprocessor(lexerState))
 
         .withChannel(new BlackHoleChannel("\\s"))
 
