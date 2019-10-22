@@ -19,17 +19,17 @@
  */
 package org.sonar.plugins.python.xunit;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
+import javax.xml.stream.XMLStreamException;
 import org.codehaus.staxmate.in.ElementFilter;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
-import javax.xml.stream.XMLStreamException;
-import java.text.ParseException;
-import java.util.Collection;
-import java.util.Locale;
 
 public class TestSuiteParser implements XmlStreamHandler {
 
@@ -39,7 +39,7 @@ public class TestSuiteParser implements XmlStreamHandler {
   public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
     SMInputCursor testSuiteCursor = rootCursor.constructDescendantCursor(new ElementFilter("testsuite"));
     while (testSuiteCursor.getNext() != null) {
-      String testSuiteClassName = testSuiteCursor.getAttrValue("name");
+      String testSuiteClassName = getExpectedAttribute(testSuiteCursor, "name");
       TestSuite testSuite = new TestSuite(testSuiteClassName);
       testSuites.add(testSuite);
       SMInputCursor testCaseCursor = testSuiteCursor.childElementCursor("testcase");
@@ -74,11 +74,11 @@ public class TestSuiteParser implements XmlStreamHandler {
         status = TestCase.STATUS_SKIPPED;
       } else if (TestCase.STATUS_FAILURE.equals(elementName)) {
         status = TestCase.STATUS_FAILURE;
-        msg = childCursor.getAttrValue("message");
+        msg = getExpectedAttribute(childCursor, "message");
         stack = childCursor.collectDescendantText();
       } else if (TestCase.STATUS_ERROR.equals(elementName)) {
         status = TestCase.STATUS_ERROR;
-        msg = childCursor.getAttrValue("message");
+        msg = getExpectedAttribute(childCursor, "message");
         stack = childCursor.collectDescendantText();
       }
     }
@@ -88,7 +88,7 @@ public class TestSuiteParser implements XmlStreamHandler {
   private static double parseTime(SMInputCursor testCaseCursor) throws XMLStreamException {
     double time;
     try {
-      Double tmp = ParsingUtils.parseNumber(testCaseCursor.getAttrValue("time"), Locale.ENGLISH);
+      Double tmp = ParsingUtils.parseNumber(getExpectedAttribute(testCaseCursor, "time"), Locale.ENGLISH);
       time = ParsingUtils.scaleValue(tmp * 1000, 3);
     } catch (ParseException e) {
       throw new XMLStreamException(e);
@@ -96,8 +96,16 @@ public class TestSuiteParser implements XmlStreamHandler {
     return time;
   }
 
+  private static String getExpectedAttribute(SMInputCursor testCaseCursor, String attributeName) throws XMLStreamException {
+    String attrValue = testCaseCursor.getAttrValue(attributeName);
+    if(attrValue == null) {
+      throw new IllegalStateException(String.format("Missing attribute '%s' at line %d", attributeName, testCaseCursor.getStreamLocation().getLineNumber()));
+    }
+    return attrValue;
+  }
+
   private static String parseTestCaseName(SMInputCursor testCaseCursor) throws XMLStreamException {
-    String name = testCaseCursor.getAttrValue("name");
+    String name = getExpectedAttribute(testCaseCursor, "name");
     String classname = testCaseCursor.getAttrValue("CLASSNAME");
     if (classname != null) {
       name = classname + "/" + name;
