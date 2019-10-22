@@ -61,6 +61,9 @@ public class SymbolTableBuilderTest {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
     assertThat(moduleSymbols.size()).isEqualTo(2);
     assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("global_x", "global_var");
+    moduleSymbols.stream().filter(s -> s.name().equals("global_var")).findFirst().ifPresent(s -> {
+      assertThat(s.usages()).hasSize(3);
+    });
   }
 
   @Test
@@ -149,7 +152,7 @@ public class SymbolTableBuilderTest {
     assertThat(symbolByName.keySet()).containsExactly("x");
     Symbol x = symbolByName.get("x");
     int functionStartLine = functionTree.firstToken().line();
-    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1, functionStartLine + 4);
+    assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1, functionStartLine + 3, functionStartLine + 4);
     FunctionDef innerFunctionTree = functionTreesByName.get("innerFn");
     assertThat(innerFunctionTree.localVariables()).isEmpty();
   }

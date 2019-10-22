@@ -454,7 +454,7 @@ public class PythonTreeMaker {
     Separators separators = statementWithSeparator.separator();
     Token globalKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.GLOBAL).getToken());
     List<Name> variables = astNode.getChildren(PythonGrammar.NAME).stream()
-      .map(PythonTreeMaker::name)
+      .map(PythonTreeMaker::variable)
       .collect(Collectors.toList());
     return new GlobalStatementImpl(globalKeyword, variables, separators);
   }
@@ -464,7 +464,7 @@ public class PythonTreeMaker {
     Separators separators = statementWithSeparator.separator();
     Token nonlocalKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.NONLOCAL).getToken());
     List<Name> variables = astNode.getChildren(PythonGrammar.NAME).stream()
-      .map(PythonTreeMaker::name)
+      .map(PythonTreeMaker::variable)
       .collect(Collectors.toList());
     return new NonlocalStatementImpl(nonlocalKeyword, variables, separators);
   }
@@ -591,6 +591,9 @@ public class PythonTreeMaker {
 
   private static Name name(AstNode astNode) {
     return new NameImpl(toPyToken(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getToken()), astNode.getParent().is(PythonGrammar.ATOM));
+  }
+  private static Name variable(AstNode astNode) {
+    return new NameImpl(toPyToken(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getToken()), true);
   }
 
   public ForStatement forStatement(AstNode astNode) {
