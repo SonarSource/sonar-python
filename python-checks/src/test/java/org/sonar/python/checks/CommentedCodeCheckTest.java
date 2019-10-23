@@ -29,4 +29,9 @@ public class CommentedCodeCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/commentedCode.py", new CommentedCodeCheck());
   }
 
+  @Test
+  public void test_encoding() {
+    PythonCheckVerifier.verify("src/test/resources/checks/commentedCodeEncoding.py", new CommentedCodeCheck());
+  }
+
 }
