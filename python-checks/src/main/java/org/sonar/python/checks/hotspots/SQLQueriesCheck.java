@@ -19,49 +19,39 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 @Rule(key = SQLQueriesCheck.CHECK_KEY)
-public class SQLQueriesCheck extends AbstractCallExpressionCheck {
+public class SQLQueriesCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S2077";
   private static final String MESSAGE = "Make sure that formatting this SQL query is safe here.";
   private boolean isUsingDjangoModel = false;
   private boolean isUsingDjangoDBConnection = false;
 
   @Override
-  protected Set<String> functionsToCheck() {
-    return Collections.singleton("django.db.models.expressions.RawSQL");
-  }
-
-  @Override
-  protected String message() {
-    return MESSAGE;
-  }
-
-  @Override
   public void initialize(Context context) {
-    super.initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::visitFile);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
   }
 
   private void visitFile(SubscriptionContext ctx) {
@@ -75,13 +65,13 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
       .map(Symbol::fullyQualifiedName)
       .filter(Objects::nonNull)
       .forEach(qualifiedName -> {
-      if (qualifiedName.contains("django.db.models")) {
-        isUsingDjangoModel = true;
-      }
-      if (qualifiedName.contains("django.db.connection")) {
-        isUsingDjangoDBConnection = true;
-      }
-    });
+        if (qualifiedName.contains("django.db.models")) {
+          isUsingDjangoModel = true;
+        }
+        if (qualifiedName.contains("django.db.connection")) {
+          isUsingDjangoDBConnection = true;
+        }
+      });
   }
 
   private static class SymbolsFromImport extends BaseTreeVisitor {
@@ -103,16 +93,31 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     return isUsingDjangoDBConnection && functionName.equals("execute");
   }
 
-  @Override
-  public void visitNode(SubscriptionContext context) {
-    CallExpression callExpressionTree = (CallExpression) context.syntaxNode();
-    if(callExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-      String functionName = ((QualifiedExpression) callExpressionTree.callee()).name().name();
-      if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName)) && !isException(callExpressionTree, functionName)) {
-        context.addIssue(callExpressionTree, MESSAGE);
+  private void checkCallExpression(SubscriptionContext context) {
+    CallExpression callExpression = (CallExpression) context.syntaxNode();
+    List<Tree> secondaryLocations = new ArrayList<>();
+
+    Symbol symbol = callExpression.calleeSymbol();
+    if (symbol != null && "django.db.models.expressions.RawSQL".equals(symbol.fullyQualifiedName())
+      && isSensitive(callExpression, secondaryLocations)) {
+
+      addIssue(context, callExpression, secondaryLocations);
+      return;
+    }
+
+    if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+      String functionName = ((QualifiedExpression) callExpression.callee()).name().name();
+      if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName))
+        && !isException(callExpression, functionName) && isSensitive(callExpression, secondaryLocations)) {
+
+        addIssue(context, callExpression, secondaryLocations);
       }
     }
-    super.visitNode(context);
+  }
+
+  private static void addIssue(SubscriptionContext context, CallExpression callExpression, List<Tree> secondaryLocations) {
+    PreciseIssue preciseIssue = context.addIssue(callExpression, MESSAGE);
+    secondaryLocations.forEach(secondary -> preciseIssue.secondary(secondary, null));
   }
 
   private static boolean isException(CallExpression callExpression, String functionName) {
@@ -120,19 +125,23 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     if (extraContainsFormattedSqlQueries(argListNode, functionName)) {
       return false;
     }
+    return argListNode.isEmpty();
+  }
+
+  private static boolean isSensitive(CallExpression callExpression, List<Tree> secondaryLocations) {
+    List<Argument> argListNode = callExpression.arguments();
     if (argListNode.isEmpty()) {
-      return true;
+      return false;
     }
     Argument arg = argListNode.get(0);
     Expression expression = arg.expression().is(Tree.Kind.NAME)
       ? Expressions.singleAssignedValue((Name) arg.expression())
       : arg.expression();
-    return expression == null || !isFormatted(expression);
-  }
-
-  @Override
-  protected boolean isException(CallExpression callExpression) {
-    return isException(callExpression, "");
+    if (expression != null && isFormatted(expression)) {
+      secondaryLocations.add(expression);
+      return true;
+    }
+    return false;
   }
 
   private static boolean isFormatted(Expression tree) {
@@ -159,16 +168,16 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
     boolean hasFormattedString = false;
 
     @Override
-    public void visitStringLiteral(StringLiteral pyStringLiteralTree) {
-      super.visitStringLiteral(pyStringLiteralTree);
-      hasFormattedString |= pyStringLiteralTree.stringElements().stream().anyMatch(se -> se.prefix().equalsIgnoreCase("f"));
+    public void visitStringElement(StringElement stringElement) {
+      super.visitStringElement(stringElement);
+      hasFormattedString |= stringElement.isInterpolated();
     }
 
     @Override
     public void visitCallExpression(CallExpression pyCallExpressionTree) {
-      if(pyCallExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+      if (pyCallExpressionTree.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
         QualifiedExpression callee = (QualifiedExpression) pyCallExpressionTree.callee();
-        hasFormattedString |=  callee.name().name().equals("format") && callee.qualifier().is(Tree.Kind.STRING_LITERAL);
+        hasFormattedString |= callee.name().name().equals("format") && callee.qualifier().is(Tree.Kind.STRING_LITERAL);
       }
       super.visitCallExpression(pyCallExpressionTree);
     }
