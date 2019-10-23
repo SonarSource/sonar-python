@@ -306,7 +306,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(execStatement.expression()).isNotNull();
     assertThat(execStatement.globalsExpression()).isNotNull();
     assertThat(execStatement.localsExpression()).isNull();
-    assertThat(execStatement.children()).hasSize(3);
+    assertThat(execStatement.children()).extracting(child -> child.firstToken().value())
+      .containsExactly("exec", "'foo'", "in", "globals");
 
     astNode = p.parse("exec 'foo' in globals, locals");
     statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -316,7 +317,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(execStatement.expression()).isNotNull();
     assertThat(execStatement.globalsExpression()).isNotNull();
     assertThat(execStatement.localsExpression()).isNotNull();
-    assertThat(execStatement.children()).hasSize(4);
+    assertThat(execStatement.children()).extracting(child -> child.firstToken().value())
+      .containsExactly("exec", "'foo'", "in", "globals", ",", "locals");
 
     // TODO: exec stmt should parse exec ('foo', globals, locals); see https://docs.python.org/2/reference/simple_stmts.html#exec
   }
