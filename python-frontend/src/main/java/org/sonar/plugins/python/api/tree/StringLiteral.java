@@ -21,6 +21,9 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * See https://docs.python.org/3/reference/lexical_analysis.html#string-literal-concatenation
+ */
 public interface StringLiteral extends Expression {
 
   List<StringElement> stringElements();

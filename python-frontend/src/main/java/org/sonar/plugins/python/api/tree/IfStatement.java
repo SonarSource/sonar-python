@@ -23,7 +23,24 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 
 /**
- * if-elif-else statement
+ * if-elif-else statement.
+ *
+ * Note that this interface has a recursive structure because it represents both 'if' clause and 'elif' clause
+ *
+ * <pre>
+ *   if {@link #condition()}:
+ *     {@link #body()}
+ *   {@link #elseBranch()}
+ * </pre>
+ *
+ * or
+ *
+ * <pre>
+ *   elif {@link #condition()}:
+ *     {@link #body()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-if-stmt
  */
 public interface IfStatement extends Statement {
   Token keyword();

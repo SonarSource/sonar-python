@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   for {@link #loopExpression()} in {@link #iterable()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-comp-for
+ */
 public interface ComprehensionFor extends ComprehensionClause {
 
   @CheckForNull

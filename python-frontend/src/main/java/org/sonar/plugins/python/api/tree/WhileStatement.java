@@ -21,6 +21,15 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   while {@link #condition()}:
+ *     {@link #body()}
+ *   {@link #elseClause()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#while
+ */
 public interface WhileStatement extends Statement {
   Token whileKeyword();
 

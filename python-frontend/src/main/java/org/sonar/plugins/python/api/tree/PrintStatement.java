@@ -21,6 +21,15 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * Python 2 only.
+ *
+ * <pre>
+ *   print {@link #expressions()}
+ * </pre>
+ *
+ * See https://docs.python.org/2.0/ref/print.html
+ */
 public interface PrintStatement extends Statement {
 
   Token printKeyword();

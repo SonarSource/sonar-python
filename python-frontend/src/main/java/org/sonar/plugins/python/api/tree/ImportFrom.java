@@ -28,6 +28,8 @@ import javax.annotation.CheckForNull;
  * <pre>
  *   {@link #fromKeyword()} {@link #dottedPrefixForModule()} {@link #module()} {@link #importKeyword()} {@link #importedNames()}
  * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-import-stmt
  */
 public interface ImportFrom extends ImportStatement {
   Token fromKeyword();

@@ -22,6 +22,19 @@ package org.sonar.plugins.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   yield {@link #expressions()}
+ * </pre>
+ *
+ * or
+ *
+ * <pre>
+ *   yield from {@link #expressions()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-yield-expression
+ */
 public interface YieldExpression extends Expression {
   Token yieldKeyword();
 

@@ -23,6 +23,13 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.python.semantic.Symbol;
 
+/**
+ * <pre>
+ * {@link #callee()} ( {@link #argumentList()} )
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#calls
+ */
 public interface CallExpression extends Expression {
   Expression callee();
 

@@ -21,6 +21,15 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ *   { {@link #elements()} }
+ * </pre>
+ *
+ * Example: <pre>{x = 1, y = 2}</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#dictionary-displays
+ */
 public interface DictionaryLiteral extends Expression {
 
   Token lCurlyBrace();

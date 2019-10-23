@@ -22,6 +22,16 @@ package org.sonar.plugins.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@link #decorators()}
+ *   def {@link #name()} ( {@link FunctionLike#parameters()} ) {@link #returnTypeAnnotation()}:
+ *     {@link #docstring()}
+ *     {@link #body()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+ */
 public interface FunctionDef extends Statement, FunctionLike {
 
   List<Decorator> decorators();
@@ -45,9 +55,9 @@ public interface FunctionDef extends Statement, FunctionLike {
 
   Token colon();
 
-  StatementList body();
-
   @CheckForNull
   StringLiteral docstring();
+
+  StatementList body();
 
 }

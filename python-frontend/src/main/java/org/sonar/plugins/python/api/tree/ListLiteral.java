@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   [ {@link #elements()} ]
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#list-displays
+ */
 public interface ListLiteral extends Expression {
 
   Token leftBracket();

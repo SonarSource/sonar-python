@@ -19,6 +19,15 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * Common interface for ElseClause used in {@link IfStatement#elseBranch()}, {@link ForStatement#elseClause()},
+ * {@link WhileStatement#elseClause()} and {@link TryStatement#elseClause()}
+ *
+ * <pre>
+ *   else:
+ *     {@link #body()}
+ * </pre>
+ */
 public interface ElseClause extends Tree {
   Token elseKeyword();
 

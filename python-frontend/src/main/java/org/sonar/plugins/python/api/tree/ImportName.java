@@ -27,6 +27,8 @@ import java.util.List;
  * <pre>
  *   {@link #importKeyword()} {@link #modules()}}
  * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-import-stmt
  */
 public interface ImportName extends ImportStatement {
   Token importKeyword();

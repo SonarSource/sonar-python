@@ -21,8 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-parameter-list
+ */
 public interface ParameterList extends Tree {
-
+  /**
+   * Note that tuple in parameters are allowed only in Python 2.
+   */
   List<Parameter> nonTuple();
 
   List<AnyParameter> all();

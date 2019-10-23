@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@link BinaryExpression#leftOperand()} not in {@link BinaryExpression#rightOperand()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#membership-test-operations
+ */
 public interface InExpression extends BinaryExpression {
 
   @CheckForNull

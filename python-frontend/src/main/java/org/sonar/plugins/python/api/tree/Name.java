@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * See https://docs.python.org/3/reference/expressions.html#atom-identifiers
+ */
 public interface Name extends Expression, HasSymbol {
 
   String name();

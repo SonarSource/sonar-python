@@ -21,6 +21,15 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@code @}{@link #name()} ( {@link #arguments()} )
+ * </pre>
+ *
+ * Example: <pre>@foo.bar()</pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-decorators
+ */
 public interface Decorator extends Tree {
   Token atToken();
 

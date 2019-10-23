@@ -19,6 +19,15 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   {@link #object()}[{@link #subscripts()}]
+ * </pre>
+ *
+ * Example: <pre>x[a]</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-subscription
+ */
 public interface SubscriptionExpression extends Expression {
 
   Expression object();

@@ -21,6 +21,17 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * Python 2 only
+ * <pre>
+ *   ({@link #parameters()})
+ * </pre>
+ *
+ * Examples:
+ *  <pre>(a, b, (c, d))</pre>
+ *
+ *  See https://docs.python.org/2.0/ref/function.html
+ */
 public interface TupleParameter extends AnyParameter {
 
   Token openingParenthesis();

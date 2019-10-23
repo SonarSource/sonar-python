@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@link #test()} as {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-with-item
+ */
 public interface WithItem extends Tree {
 
   Expression test();

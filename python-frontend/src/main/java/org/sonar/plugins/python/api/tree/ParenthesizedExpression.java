@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   ( {@link #expression()} )
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#parenthesized-forms
+ */
 public interface ParenthesizedExpression extends Expression {
 
   Token leftParenthesis();

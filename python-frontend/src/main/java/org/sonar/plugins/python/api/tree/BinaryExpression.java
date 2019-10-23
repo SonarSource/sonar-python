@@ -19,6 +19,11 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *  {@link #leftOperand()} {@link #operator()} {@link #rightOperand()}
+ * </pre>
+ */
 public interface BinaryExpression extends Expression {
 
   Expression leftOperand();

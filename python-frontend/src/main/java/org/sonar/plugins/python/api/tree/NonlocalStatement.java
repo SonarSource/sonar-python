@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ *   nonlocal {@link #variables()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-nonlocal-stmt
+ */
 public interface NonlocalStatement extends Statement {
   Token nonlocalKeyword();
 

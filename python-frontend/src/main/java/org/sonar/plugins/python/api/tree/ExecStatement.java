@@ -21,6 +21,16 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ *
+ * Python 2 only.
+ *
+ * <pre>
+ *   exec {@link #expression()} in {@link #globalsExpression()} , {@link #localsExpression()}
+ * </pre>
+ *
+ * See https://docs.python.org/2.0/ref/exec.html
+ */
 public interface ExecStatement extends Statement {
   Token execKeyword();
 

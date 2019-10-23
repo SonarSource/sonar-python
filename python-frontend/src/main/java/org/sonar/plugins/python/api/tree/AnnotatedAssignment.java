@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   {@link #variable()} {@link #annotation()} = {@link #assignedValue()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#annotated-assignment-statements
+ */
 public interface AnnotatedAssignment extends Statement {
   // Using PyExpressionTree because variable can be `identifier | attributeref | subscription | slicing`
   Expression variable();

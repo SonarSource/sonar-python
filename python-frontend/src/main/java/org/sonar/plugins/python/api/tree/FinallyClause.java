@@ -19,6 +19,14 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   finally:
+ *     {@link #body()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#the-try-statement
+ */
 public interface FinallyClause extends Tree {
   Token finallyKeyword();
 

@@ -21,6 +21,21 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   : {@link #expression()}
+ * </pre>
+ *
+ * or (return type annotation)
+ *
+ * <pre>
+ *   {@code ->} {@link #expression()}
+ * </pre>
+ *
+ * See https://www.python.org/dev/peps/pep-0484/
+ * See https://www.python.org/dev/peps/pep-0526/
+ */
+// TODO: Model ReturnTypeAnnotation in a different interface
 public interface TypeAnnotation extends Tree {
   @CheckForNull
   Token colonToken();

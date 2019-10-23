@@ -21,6 +21,13 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 
+/**
+ * <pre>
+ *   global {@link #variables()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#the-global-statement
+ */
 public interface GlobalStatement extends Statement {
   Token globalKeyword();
 

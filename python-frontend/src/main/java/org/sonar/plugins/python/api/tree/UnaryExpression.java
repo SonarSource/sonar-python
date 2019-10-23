@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ *   {@link #operator()} {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#unary-arithmetic-and-bitwise-operations
+ */
 public interface UnaryExpression extends Expression {
 
   Token operator();

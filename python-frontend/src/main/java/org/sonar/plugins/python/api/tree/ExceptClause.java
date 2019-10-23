@@ -21,10 +21,25 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 
+/**
+ * <pre>
+ *   except {@link #exception()} as {@link #exceptionInstance()}:
+ *     {@link #body()}
+ * </pre>
+ *
+ * or (Python 2 syntax)
+ * <pre>
+ *   except {@link #exception()} , {@link #exceptionInstance()}:
+ *     {@link #body()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/compound_stmts.html#the-try-statement
+ */
 public interface ExceptClause extends Tree {
   Token exceptKeyword();
 
-  StatementList body();
+  @CheckForNull
+  Expression exception();
 
   @CheckForNull
   Token asKeyword();
@@ -33,8 +48,7 @@ public interface ExceptClause extends Tree {
   Token commaToken();
 
   @CheckForNull
-  Expression exception();
-
-  @CheckForNull
   Expression exceptionInstance();
+
+  StatementList body();
 }

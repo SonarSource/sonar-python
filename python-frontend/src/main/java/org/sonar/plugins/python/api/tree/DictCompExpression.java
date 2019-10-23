@@ -22,6 +22,16 @@ package org.sonar.plugins.python.api.tree;
 import java.util.Set;
 import org.sonar.python.semantic.Symbol;
 
+/**
+ * Dictionary Comprehension
+ * <pre>
+ *  { {@link #keyExpression()} : {@link #valueExpression()} {@link #comprehensionFor()} }
+ * </pre>
+ *
+ * Example: <pre> { key:value for i in list } </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-dict-comprehension
+ */
 public interface DictCompExpression extends Expression {
 
   Expression keyExpression();

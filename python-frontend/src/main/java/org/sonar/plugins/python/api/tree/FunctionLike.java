@@ -23,10 +23,16 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.python.semantic.Symbol;
 
+/**
+ * Common interface for {@link FunctionDef} and {@link LambdaExpression}
+ */
 public interface FunctionLike extends Tree {
   @CheckForNull
   ParameterList parameters();
 
+  /**
+   * @return symbols of local variables and parameters
+   */
   Set<Symbol> localVariables();
 
   boolean isMethodDefinition();

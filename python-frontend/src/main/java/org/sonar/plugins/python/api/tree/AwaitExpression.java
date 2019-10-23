@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+/**
+ * <pre>
+ * await {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#await-expression
+ */
 public interface AwaitExpression extends Expression {
 
   Token awaitToken();
