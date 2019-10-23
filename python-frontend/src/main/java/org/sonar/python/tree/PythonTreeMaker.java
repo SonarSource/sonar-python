@@ -290,7 +290,15 @@ public class PythonTreeMaker {
     if (expressions.isEmpty()) {
       return new ExecStatementImpl(toPyToken(astNode.getTokens()).get(0), expression, separators);
     }
-    return new ExecStatementImpl(toPyToken(astNode.getTokens().get(0)), expression, expressions.get(0), expressions.size() == 2 ? expressions.get(1) : null, separators);
+    Token inToken = toPyToken(astNode.getFirstChild(PythonKeyword.IN).getToken());
+    Expression globalsExpression = expressions.get(0);
+    Token commaToken = null;
+    Expression localsExpression = null;
+    if (expressions.size() == 2) {
+      commaToken = toPyToken(astNode.getFirstChild(PythonPunctuator.COMMA).getToken());
+      localsExpression = expressions.get(1);
+    }
+    return new ExecStatementImpl(toPyToken(astNode.getTokens().get(0)), expression, inToken, globalsExpression, commaToken, localsExpression, separators);
   }
 
   public AssertStatement assertStatement(StatementWithSeparator statementWithSeparator) {

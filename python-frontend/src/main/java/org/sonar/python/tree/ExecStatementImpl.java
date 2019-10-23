@@ -34,15 +34,19 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 public class ExecStatementImpl extends SimpleStatement implements ExecStatement {
   private final Token execKeyword;
   private final Expression expression;
+  private final Token in;
   private final Expression globalsExpression;
+  private final Token comma;
   private final Expression localsExpression;
   private final Separators separators;
 
-  public ExecStatementImpl(Token execKeyword, Expression expression,
-                                 @Nullable Expression globalsExpression, @Nullable Expression localsExpression, Separators separators) {
+  public ExecStatementImpl(Token execKeyword, Expression expression, Token in, @Nullable Expression globalsExpression,
+                           @Nullable Token comma, @Nullable Expression localsExpression, Separators separators) {
     this.execKeyword = execKeyword;
     this.expression = expression;
+    this.in = in;
     this.globalsExpression = globalsExpression;
+    this.comma = comma;
     this.localsExpression = localsExpression;
     this.separators = separators;
   }
@@ -50,8 +54,10 @@ public class ExecStatementImpl extends SimpleStatement implements ExecStatement 
   public ExecStatementImpl(Token execKeyword, Expression expression, Separators separators) {
     this.execKeyword = execKeyword;
     this.expression = expression;
-    globalsExpression = null;
-    localsExpression = null;
+    this.in = null;
+    this.globalsExpression = null;
+    this.comma = null;
+    this.localsExpression = null;
     this.separators = separators;
   }
 
@@ -93,7 +99,7 @@ public class ExecStatementImpl extends SimpleStatement implements ExecStatement 
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Arrays.asList(execKeyword, expression, globalsExpression, localsExpression), separators.elements())
+    return Stream.of(Arrays.asList(execKeyword, expression, in, globalsExpression, comma, localsExpression), separators.elements())
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }
