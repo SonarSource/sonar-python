@@ -45,7 +45,8 @@ import org.sonar.python.tree.PythonTreeMaker;
 public class CommentedCodeCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Remove this commented out code.";
-  private static final Pattern ENCODING_PATTERN =  Pattern.compile("^[ \\t\\f]*#.*?coding[:=][ \\t]*([-_.a-zA-Z0-9]+)"); // PEP 263
+  // Regex coming from https://www.python.org/dev/peps/pep-0263/#defining-the-encoding
+  private static final Pattern ENCODING_PATTERN = Pattern.compile(".*?coding[:=][ \\t]*([-_.a-zA-Z0-9]+)\n");
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Override
@@ -85,25 +86,15 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     if (isEmpty(text)) {
       return;
     }
-    if (isTextParsedAsCode(text)) {
-      if (!isEncoding(getTextForParsing(triviaGroup, false)) || triviaGroup.get(0).token().line() > 2) {
-        ctx.addIssue(triviaGroup.get(0).token(), MESSAGE);
-      }
+    if (isTextParsedAsCode(text) && !isEncoding(triviaGroup.get(0).token().line(), text)) {
+      ctx.addIssue(triviaGroup.get(0).token(), MESSAGE);
     }
   }
 
   private static String getTextForParsing(List<Trivia> triviaGroup) {
-    return getTextForParsing(triviaGroup, true);
-  }
-
-  private static String getTextForParsing(List<Trivia> triviaGroup, boolean filtered) {
     StringBuilder commentTextSB = new StringBuilder();
     for (Trivia trivia : triviaGroup) {
       String value = trivia.value();
-      if (!filtered) {
-        commentTextSB.append(value);
-        continue;
-      }
       while (value.startsWith("#") || value.startsWith(" #")) {
         value = value.substring(1);
       }
@@ -129,8 +120,10 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     return text.matches("\\s*");
   }
 
-  private static boolean isEncoding(String text) {
-    return ENCODING_PATTERN.matcher(text).find();
+  // "source code encoding" comments (e.g. # coding=utf8) should be excluded (SONARPY-465)
+  // Note that encoding must be on line 1 or 2
+  private static boolean isEncoding(int line, String text) {
+    return line < 3 && ENCODING_PATTERN.matcher(text).matches();
   }
 
   private static boolean isTextParsedAsCode(String text) {
