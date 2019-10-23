@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
@@ -123,7 +124,10 @@ public class SQLQueriesCheck extends AbstractCallExpressionCheck {
       return true;
     }
     Argument arg = argListNode.get(0);
-    return !isFormatted(arg.expression());
+    Expression expression = arg.expression().is(Tree.Kind.NAME)
+      ? Expressions.singleAssignedValue((Name) arg.expression())
+      : arg.expression();
+    return expression == null || !isFormatted(expression);
   }
 
   @Override
