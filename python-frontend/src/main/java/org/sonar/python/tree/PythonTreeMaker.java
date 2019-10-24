@@ -21,9 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
-import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -106,7 +104,7 @@ public class PythonTreeMaker {
    */
   private static final String INTERPOLATED_EXPR = "(('[^']*'|\"[^\"]*\"|[^{}])";
   private static final Pattern INTERPOLATED_EXPR_PATTERN = Pattern.compile("(?<!\\{)\\{(\\{\\{)*" + INTERPOLATED_EXPR + "*)}");
-  private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private static final PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
 
   public FileInput fileInput(AstNode astNode) {

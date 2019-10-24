@@ -19,20 +19,19 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,7 +39,7 @@ import static org.sonar.python.checks.Expressions.isFalsy;
 
 public class ExpressionsTest {
 
-  private Parser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
   public void falsy() {

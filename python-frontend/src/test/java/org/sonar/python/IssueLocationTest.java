@@ -20,8 +20,6 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 import org.sonar.python.api.PythonPunctuator;
@@ -35,7 +33,7 @@ public class IssueLocationTest {
 
   private static final String MESSAGE = "message";
 
-  private Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   @Test
   public void file_level() {

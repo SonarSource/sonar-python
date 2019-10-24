@@ -19,16 +19,15 @@
  */
 package org.sonar.python.checks;
 
-import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
-import com.sonar.sslr.impl.Parser;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,13 +35,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ParsingErrorCheckTest {
 
   @Test
-  public void test() {
+  public void test() throws Exception {
     File file = new File("src/test/resources/checks/parsingError.py");
 
-    Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     PythonVisitorContext context;
     try {
-      parser.parse(file);
+      String fileContent = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+      parser.parse(fileContent);
       throw new IllegalStateException("Expected RecognitionException");
     } catch (RecognitionException e) {
       context = new PythonVisitorContext(null, e);

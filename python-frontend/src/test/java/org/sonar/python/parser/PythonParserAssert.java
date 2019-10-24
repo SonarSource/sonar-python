@@ -36,24 +36,24 @@ import org.sonar.sslr.tests.ParsingResultComparisonFailure;
 // Mostly copied from SSLR: org.sonar.sslr.tests.ParserAssert
 // We couldn't use org.sonar.sslr.tests.ParserAssert because it creates a new instance of Parser
 // and SonarPython's parser now has its own Parser class.
-public class PythonParserAssert extends GenericAssert<PythonParserAssert, Parser> {
+public class PythonParserAssert extends GenericAssert<PythonParserAssert, PythonParser> {
 
-  public static PythonParserAssert assertThat(Parser actual) {
+  public static PythonParserAssert assertThat(PythonParser actual) {
     return new PythonParserAssert(actual);
   }
 
-  public PythonParserAssert(Parser actual) {
+  public PythonParserAssert(PythonParser actual) {
     super(PythonParserAssert.class, actual);
   }
 
-  private Parser createParserWithEofMatcher() {
+  private PythonParser createParserWithEofMatcher() {
     RuleDefinition rule = actual.getRootRule();
     RuleDefinition endOfInput = new RuleDefinition(new EndOfInput())
       .is(new FirstOfExpression(EndOfInputExpression.INSTANCE, new TokenTypeExpression(GenericTokenType.EOF)));
     RuleDefinition withEndOfInput = new RuleDefinition(new WithEndOfInput(actual.getRootRule().getRuleKey()))
       .is(rule, endOfInput);
 
-    Parser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     parser.setRootRule(withEndOfInput);
 
     return parser;
@@ -66,7 +66,7 @@ public class PythonParserAssert extends GenericAssert<PythonParserAssert, Parser
   public PythonParserAssert matches(String input) {
     isNotNull();
     hasRootRule();
-    Parser parser = createParserWithEofMatcher();
+    PythonParser parser = createParserWithEofMatcher();
     String expected = "Rule '" + getRuleName() + "' should match:\n" + input;
     try {
       parser.parse(input);
@@ -84,7 +84,7 @@ public class PythonParserAssert extends GenericAssert<PythonParserAssert, Parser
   public PythonParserAssert notMatches(String input) {
     isNotNull();
     hasRootRule();
-    Parser parser = createParserWithEofMatcher();
+    PythonParser parser = createParserWithEofMatcher();
     try {
       parser.parse(input);
     } catch (RecognitionException e) {

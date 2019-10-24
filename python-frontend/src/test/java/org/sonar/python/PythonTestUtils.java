@@ -19,8 +19,6 @@
  */
 package org.sonar.python;
 
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 public final class PythonTestUtils {
 
-  private static final Parser<Grammar> p = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private static final PythonParser p = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
   private static final PythonTreeMaker pythonTreeMaker = new PythonTreeMaker();
 
   private PythonTestUtils() {
