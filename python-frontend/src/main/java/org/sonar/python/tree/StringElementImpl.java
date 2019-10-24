@@ -19,17 +19,20 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class StringElementImpl extends PyTree implements StringElement {
 
   private final String value;
   private final Token token;
+  private List<Expression> interpolatedExpressions = new ArrayList<>();
 
   public StringElementImpl(Token token) {
     value = token.value();
@@ -76,6 +79,21 @@ public class StringElementImpl extends PyTree implements StringElement {
   public boolean isTripleQuoted() {
     return isTripleQuote(removePrefix(value));
   }
+
+  @Override
+  public boolean isInterpolated() {
+    return prefix().contains("F") || prefix().contains("f");
+  }
+
+  @Override
+  public List<Expression> interpolatedExpressions() {
+    return interpolatedExpressions;
+  }
+
+  void addInterpolatedExpression(Expression expression) {
+    interpolatedExpressions.add(expression);
+  }
+
 
   private static boolean isTripleQuote(String trimmed) {
     if (trimmed.length() >= 6) {

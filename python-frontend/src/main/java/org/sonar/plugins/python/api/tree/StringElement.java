@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import java.util.List;
+
 /**
  * <pre>
  *   {@link #prefix()}{@link #value()}
@@ -37,4 +39,8 @@ public interface StringElement extends Tree {
   String prefix();
 
   boolean isTripleQuoted();
+
+  boolean isInterpolated();
+
+  List<Expression> interpolatedExpressions();
 }
