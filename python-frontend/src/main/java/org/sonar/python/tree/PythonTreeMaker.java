@@ -21,11 +21,16 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.impl.Parser;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -87,12 +92,16 @@ import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.python.DocstringExtractor;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.parser.PythonParser;
 
 public class PythonTreeMaker {
+
+  private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
 
   public FileInput fileInput(AstNode astNode) {
     List<Statement> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
@@ -1262,10 +1271,26 @@ public class PythonTreeMaker {
     return new NumericLiteralImpl(toPyToken(astNode.getToken()));
   }
 
-  private static Expression stringLiteral(AstNode astNode) {
-    List<StringElement> stringElements = astNode.getChildren(PythonTokenType.STRING).stream()
+  private Expression stringLiteral(AstNode astNode) {
+    List<StringElementImpl> stringElements = astNode.getChildren(PythonTokenType.STRING).stream()
       .map(node -> new StringElementImpl(toPyToken(node.getToken()))).collect(Collectors.toList());
-    return new StringLiteralImpl(stringElements);
+    stringElements.stream().filter(StringElement::isInterpolated).forEach(se -> interpolatedExpressions(se.trimmedQuotesValue()).forEach(se::addInterpolatedExpression));
+    List<StringElement> stringElems = new ArrayList<>(stringElements);
+    return new StringLiteralImpl(stringElems);
+  }
+
+  private static final Pattern INTERPOLATED_EXPR  = Pattern.compile("(?<!\\{)\\{(\\{\\{)*((\\'[^\\']*\\'|\\\"[^\\\"]*\\\"|[^\\{\\}])*)\\}");
+
+  private List<Expression> interpolatedExpressions(String literalValue) {
+    List<Expression> res = new ArrayList<>();
+    parser.setRootRule(parser.getGrammar().rule(PythonGrammar.EXPR));
+    // get escaped interpolation
+    Matcher matcher = INTERPOLATED_EXPR.matcher(literalValue);
+    while (matcher.find()) {
+      AstNode parse = parser.parse(matcher.group(2));
+      res.add(expression(parse));
+    }
+    return res;
   }
 
   private static Token suiteIndent(AstNode suite) {

@@ -34,10 +34,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.python.api.PythonGrammar;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -45,6 +41,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -113,6 +110,9 @@ import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.python.api.PythonGrammar;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -1753,6 +1753,38 @@ public class PythonTreeMakerTest extends RuleTest {
     assertStringLiteral("f'''He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.'''",
       "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.", "f");
     assertThat(((StringLiteral) parse("'ab' 'cd'", treeMaker::expression)).trimmedQuotesValue()).isEqualTo("abcd");
+  }
+
+  @Test
+  public void string_interpolation() {
+    setRootRule(PythonGrammar.ATOM);
+    Expression expr = parseInterpolated("{x}");
+    assertThat(expr.is(Tree.Kind.NAME)).isTrue();
+    assertThat(((Name) expr).name()).isEqualTo("x");
+
+    expr = parseInterpolated("{\"}\" + value6}");
+    assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
+    expr = parseInterpolated("{\"}}\" + value6}");
+    assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
+    expr = parseInterpolated("{{{\"}\" + value6}}}");
+    assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
+
+    Expression exp = parse("f'{{bar}}'", treeMaker::expression);
+    StringLiteral stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElement elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.interpolatedExpressions()).isEmpty();
+  }
+
+  private Expression parseInterpolated(String interpolatedExpr) {
+    Expression exp = parse("f'" + interpolatedExpr + "'", treeMaker::expression);
+    StringLiteral stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElement elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.interpolatedExpressions()).hasSize(1);
+    return elmt.interpolatedExpressions().get(0);
   }
 
   private void assertStringLiteral(String fullValue, String trimmedQuoteValue) {
