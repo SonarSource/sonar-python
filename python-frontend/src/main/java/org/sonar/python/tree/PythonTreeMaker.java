@@ -49,6 +49,7 @@ import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.ContinueStatement;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DelStatement;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -921,20 +922,20 @@ public class PythonTreeMaker {
     }
     List<Token> commas = punctuators(dictOrSetMaker, PythonPunctuator.COMMA);
     if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON) || dictOrSetMaker.hasDirectChildren(PythonPunctuator.MUL_MUL)) {
-      List<KeyValuePair> keyValuePairTrees = new ArrayList<>();
+      List<DictionaryLiteralElement> dictionaryLiteralElements = new ArrayList<>();
       List<AstNode> children = dictOrSetMaker.getChildren();
       int index = 0;
       while (index < children.size()) {
         AstNode currentChild = children.get(index);
         if (currentChild.is(PythonPunctuator.MUL_MUL)) {
-          keyValuePairTrees.add(new KeyValuePairImpl(toPyToken(currentChild.getToken()), expression(children.get(index + 1))));
+          dictionaryLiteralElements.add(new StarredExpressionImpl(toPyToken(currentChild.getToken()), expression(children.get(index + 1))));
           index += 3;
         } else {
-          keyValuePairTrees.add(new KeyValuePairImpl(expression(currentChild), toPyToken(children.get(index + 1).getToken()), expression(children.get(index + 2))));
+          dictionaryLiteralElements.add(new KeyValuePairImpl(expression(currentChild), toPyToken(children.get(index + 1).getToken()), expression(children.get(index + 2))));
           index += 4;
         }
       }
-      return new DictionaryLiteralImpl(lCurlyBrace, commas, keyValuePairTrees, rCurlyBrace);
+      return new DictionaryLiteralImpl(lCurlyBrace, commas, dictionaryLiteralElements, rCurlyBrace);
     }
     List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toList());
     return new SetLiteralImpl(lCurlyBrace, expressions, commas, rCurlyBrace);

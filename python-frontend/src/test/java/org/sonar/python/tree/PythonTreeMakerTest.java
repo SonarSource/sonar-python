@@ -2039,7 +2039,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(tree.lastToken().value()).isEqualTo("}");
     assertThat(tree.getKind()).isEqualTo(Tree.Kind.DICTIONARY_LITERAL);
     assertThat(tree.elements()).hasSize(1);
-    KeyValuePair keyValuePair = tree.elements().iterator().next();
+    KeyValuePair keyValuePair = (KeyValuePair) tree.elements().iterator().next();
     assertThat(keyValuePair.getKind()).isEqualTo(Tree.Kind.KEY_VALUE_PAIR);
     assertThat(keyValuePair.key().getKind()).isEqualTo(Tree.Kind.STRING_LITERAL);
     assertThat(keyValuePair.colon().value()).isEqualTo(":");
@@ -2052,9 +2052,9 @@ public class PythonTreeMakerTest extends RuleTest {
 
     tree = (DictionaryLiteral) parse("{** var}", treeMaker::expression);
     assertThat(tree.elements()).hasSize(1);
-    keyValuePair = tree.elements().iterator().next();
-    assertThat(keyValuePair.expression().getKind()).isEqualTo(Tree.Kind.NAME);
-    assertThat(keyValuePair.starStarToken().value()).isEqualTo("**");
+    StarredExpression dictUnpacking = (StarredExpression) tree.elements().iterator().next();
+    assertThat(dictUnpacking.expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(dictUnpacking.starToken().value()).isEqualTo("**");
 
     tree = (DictionaryLiteral) parse("{** var, key: value}", treeMaker::expression);
     assertThat(tree.elements()).hasSize(2);

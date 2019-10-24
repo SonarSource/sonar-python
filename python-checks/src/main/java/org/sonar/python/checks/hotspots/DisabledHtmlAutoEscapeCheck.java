@@ -22,7 +22,6 @@ package org.sonar.python.checks.hotspots;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -62,8 +61,8 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isStringLiteral(@Nullable Expression tree, String testedValue) {
-    return tree != null && tree.is(Kind.STRING_LITERAL) && testedValue.equals(((StringLiteral) tree).trimmedQuotesValue());
+  private static boolean isStringLiteral(Expression tree, String testedValue) {
+    return tree.is(Kind.STRING_LITERAL) && testedValue.equals(((StringLiteral) tree).trimmedQuotesValue());
   }
 
   private static void checkCallExpression(SubscriptionContext ctx, CallExpression call) {
@@ -92,6 +91,8 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
     if (options != null && options.is(Kind.DICTIONARY_LITERAL)) {
       DictionaryLiteral dict = (DictionaryLiteral) options;
       Optional<Expression> autoEscapeOption = dict.elements().stream()
+        .filter(elem -> elem.is(Kind.KEY_VALUE_PAIR))
+        .map(KeyValuePair.class::cast)
         .filter(kv -> isStringLiteral(kv.key(), AUTO_ESCAPE))
         .map(KeyValuePair::value)
         .findFirst();

@@ -406,7 +406,6 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitKeyValuePair(KeyValuePair keyValuePair) {
-    scan(keyValuePair.expression());
     scan(keyValuePair.key());
     scan(keyValuePair.value());
   }

@@ -34,7 +34,7 @@ public interface DictionaryLiteral extends Expression {
 
   Token lCurlyBrace();
 
-  List<KeyValuePair> elements();
+  List<DictionaryLiteralElement> elements();
 
   List<Token> commas();
 
