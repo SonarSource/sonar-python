@@ -19,11 +19,8 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -35,12 +32,10 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1481")
@@ -62,15 +57,15 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     if (isCallingLocalsFunction(functionTree)) {
       return;
     }
-    Set<String> interpolationIdentifiers = extractStringInterpolationIdentifiers(functionTree);
-    for (Symbol symbol : symbols) {
-      if (interpolationIdentifiers.stream().noneMatch(id -> id.contains(symbol.name())) && !"_".equals(symbol.name()) && hasOnlyBindingUsages(symbol)) {
+    symbols.stream()
+      .filter(s -> !"_".equals(s.name()))
+      .filter(UnusedLocalVariableCheck::hasOnlyBindingUsages)
+      .forEach(symbol ->
         symbol.usages().stream()
-          .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
-          .filter(usage -> !isTupleDeclaration(usage.tree()))
-          .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())));
-      }
-    }
+        .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
+        .filter(usage -> !isTupleDeclaration(usage.tree()))
+        .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())))
+      );
   }
 
   private static boolean hasOnlyBindingUsages(Symbol symbol) {
@@ -92,33 +87,5 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   private static boolean calleeHasNameLocals(CallExpression callExpression) {
     Expression callee = callExpression.callee();
     return callee.is(Kind.NAME) && "locals".equals(((Name) callee).name());
-  }
-
-  private static Set<String> extractStringInterpolationIdentifiers(Tree tree) {
-    StringInterpolationVisitor visitor = new StringInterpolationVisitor();
-    tree.accept(visitor);
-    return visitor.stringInterpolations;
-  }
-
-  private static class StringInterpolationVisitor extends BaseTreeVisitor {
-    private static final Pattern INTERPOLATION_PATTERN = Pattern.compile("\\{(.*?)\\}");
-
-    Set<String> stringInterpolations = new HashSet<>();
-    @Override
-    public void visitStringElement(StringElement tree) {
-      if(tree.prefix().equalsIgnoreCase("f")) {
-        stringInterpolations.addAll(extractInterpolations(tree.trimmedQuotesValue()));
-      }
-    }
-
-    private static Set<String> extractInterpolations(String str) {
-      Matcher matcher = INTERPOLATION_PATTERN.matcher(str);
-      Set<String> identifiers = new HashSet<>();
-      while (matcher.find()) {
-        identifiers.add(matcher.group(1));
-      }
-      return identifiers;
-    }
-
   }
 }
