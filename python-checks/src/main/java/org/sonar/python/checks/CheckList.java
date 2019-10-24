@@ -74,6 +74,7 @@ public final class CheckList {
       FixmeCommentCheck.class,
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,
+      FunctionParamDuplicateNameCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
