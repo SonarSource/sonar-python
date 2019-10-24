@@ -1,6 +1,6 @@
 a = 3
 b = foo()
-
+F"foo{b}"
 def function_with_local():
     a = 11
     a += 1
