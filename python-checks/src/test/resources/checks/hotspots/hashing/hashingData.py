@@ -37,7 +37,7 @@ class MyPBKDF2PasswordHasher2(getHasher()): # OK
 from django.conf import settings
 
 def update_settings(value):
-    settings.PASSWORD_HASHERS = value  # Noncompliant, and also a bad practice
+    settings.PASSWORD_HASHERS = value  # Noncompliant [[and also a bad practice]]
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     (settings.PASSWORD_HASHERS) = value  # Noncompliant
     mySettings.PASSWORD_HASHERS = value # OK

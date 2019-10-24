@@ -1,4 +1,4 @@
-# Noncompliant@+1 [[secondary=2]] {{the message.}}
+# Noncompliant@+1 {{the message.}} [[secondary=2]]
 def fun():
 #   ^^^
    pass

@@ -20,7 +20,9 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -30,13 +32,22 @@ import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
-import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.IssueLocation;
+import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1871")
 public class SameBranchCheck extends PythonSubscriptionCheck {
+
+  private static final Set<PythonTokenType> WHITESPACE_TOKEN_TYPES = EnumSet.of(
+    PythonTokenType.NEWLINE,
+    PythonTokenType.INDENT,
+    PythonTokenType.DEDENT);
+
   private static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
 
   private List<Tree> ignoreList;
@@ -81,13 +92,23 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
         equivalentBlocks.add(originalBlock);
         boolean allBranchesIdentical = equivalentBlocks.size() == branches.size() - 1;
         if (!isOnASingleLine || allBranchesIdentical) {
-          int line = getFirstToken(originalBlock).line();
+          int line = nonWhitespaceTokens(originalBlock).get(0).line();
           String message = String.format(MESSAGE, line);
-          PreciseIssue issue = ctx.addIssue(getFirstToken(duplicateBlock), getLastToken(duplicateBlock), message);
-          equivalentBlocks.forEach(e -> issue.secondary(getFirstToken(e), "Original"));
+          List<Token> issueTokens = nonWhitespaceTokens(duplicateBlock);
+          PreciseIssue issue = ctx.addIssue(issueTokens.get(0), issueTokens.get(issueTokens.size() - 1), message);
+          equivalentBlocks.forEach(e -> {
+            List<Token> tokens = nonWhitespaceTokens(e);
+            issue.secondary(IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), "Original"));
+          });
         }
       }
     }
+  }
+
+  private static List<Token> nonWhitespaceTokens(Tree tree) {
+    return TreeUtils.tokens(tree).stream()
+      .filter(t -> !WHITESPACE_TOKEN_TYPES.contains(t.type()))
+      .collect(Collectors.toList());
   }
 
   private List<StatementList> getIfBranches(IfStatement ifStmt) {
@@ -150,20 +171,5 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
     } else {
       return tree.firstToken().line() == tree.lastToken().line();
     }
-  }
-
-  private static Token getFirstToken(Tree tree) {
-    if (tree.is(Tree.Kind.STATEMENT_LIST)) {
-      return getFirstToken(((StatementList) tree).statements().get(0));
-    }
-    return tree.firstToken();
-  }
-
-  private static Token getLastToken(Tree tree) {
-    if (tree.is(Tree.Kind.STATEMENT_LIST)) {
-      List<Statement> statements = ((StatementList) tree).statements();
-      return getLastToken(statements.get(statements.size()-1));
-    }
-    return tree.lastToken();
   }
 }

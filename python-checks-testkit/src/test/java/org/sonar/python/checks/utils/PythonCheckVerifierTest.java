@@ -30,7 +30,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 @RunWith(Parameterized.class)
@@ -38,7 +37,7 @@ public class PythonCheckVerifierTest {
 
   private static final String BASE_DIR = "src/test/resources/";
   private final String file;
-  private final String expectedMessage;
+  private final boolean expectSuccess;
   private static final FuncdefVisitor baseTreeCheck = new FuncdefVisitor();
   private static final FunctiondefSubscription subscriptionCheck = new FunctiondefSubscription();
 
@@ -63,42 +62,39 @@ public class PythonCheckVerifierTest {
   @Parameters(name = "{0}")
   public static Object[][] data() {
     return new Object[][]{
-      {"compliant", ""},
-      {"compliant_notation", ""},
-      {"compliant_notation_with_minus", ""},
-      {"invalid_param", "Invalid param at line 1: someInvalidParam"},
-      {"invalid_param_separator", "Invalid param at line 1: someInvalidParam!!!!!42"},
-      {"missing_assertion", "Invalid test file: a precise location is provided at line 2 but no issue is asserted at line 1"},
-      {"missing_assertion_with_issue", "Invalid test file: a precise location is provided at line 4 but no issue is asserted at line 3"},
-      {"missing_issue", "Missing issue at line 1"},
-      {"missing_issue_multiple", "Missing issue at line 1"},
-      {"unexpected_issue", "Unexpected issue at line 1: \"the message.\""},
-      {"unexpected_issue_multiple", "Unexpected issue at line 1: \"the message.\""},
-      {"wrong_cost", "[Bad effortToFix at line 1] expected:<[23]> but was:<[42]>"},
-      {"wrong_precise_comment", "Line 2: comments asserting a precise location should start at column 1"},
+      {"compliant", true},
+      {"compliant_notation", true},
+      {"compliant_notation_with_minus", true},
+      {"missing_assertion", false},
+      {"missing_assertion_with_issue", false},
+      {"missing_issue", false},
+      {"missing_issue_multiple", false},
+      {"unexpected_issue", false},
+      {"unexpected_issue_multiple", false},
+      {"wrong_cost", false},
     };
   }
 
-  public PythonCheckVerifierTest(String file, String expectedMessage) {
+  public PythonCheckVerifierTest(String file, boolean expectSuccess) {
     this.file = BASE_DIR+file+".py";
-    this.expectedMessage = expectedMessage;
+    this.expectSuccess = expectSuccess;
   }
 
   @Test
   public void basetree_test() {
-    if(expectedMessage.isEmpty()) {
+    if(expectSuccess) {
       assertNoFailureOfVerifier(file, baseTreeCheck);
     } else {
-      assertFailOfVerifier(file, expectedMessage, baseTreeCheck);
+      assertFailOfVerifier(file, baseTreeCheck);
     }
   }
 
   @Test
   public void subscription_test() {
-    if(expectedMessage.isEmpty()) {
+    if(expectSuccess) {
       assertNoFailureOfVerifier(file, subscriptionCheck);
     } else {
-      assertFailOfVerifier(file, expectedMessage, subscriptionCheck);
+      assertFailOfVerifier(file, subscriptionCheck);
     }
   }
 
@@ -110,12 +106,13 @@ public class PythonCheckVerifierTest {
     }
   }
 
-  private static void assertFailOfVerifier(String filepath, String expectedFailureMessage, PythonCheck check) {
+  private static void assertFailOfVerifier(String filepath, PythonCheck check) {
     try {
       PythonCheckVerifier.verify(filepath, check);
-      fail("should have failed");
     } catch (AssertionError | IllegalStateException e) {
-      assertThat(e.getMessage()).isEqualTo(expectedFailureMessage);
+      // OK, expected
+      return;
     }
+    fail("should have failed");
   }
 }

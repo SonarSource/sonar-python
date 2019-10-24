@@ -2,7 +2,7 @@ x = 1 + 2
 
 x = (1 + 2)
 
-x = ((1 + 2))                          # Noncompliant [[secondary=+0]] {{Remove those useless parentheses.}}
+x = ((1 + 2))                          # Noncompliant {{Remove those useless parentheses.}} [[secondary=+0]]
 #   ^
 
 x = ((((1 + 2))))

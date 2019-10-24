@@ -4,7 +4,7 @@ b = 1
 def work():
     pass
 
-if a == a: # Noncompliant [[secondary=+0;sc=9;ec=10]] {{Correct one of the identical sub-expressions on both sides of operator "==".}}
+if a == a: # Noncompliant {{Correct one of the identical sub-expressions on both sides of operator "==".}} [[secondary=+0;sc=9;ec=10]]
 #       ^
     work()
 

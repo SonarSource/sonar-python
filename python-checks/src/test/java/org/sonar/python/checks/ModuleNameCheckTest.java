@@ -33,12 +33,12 @@ public class ModuleNameCheckTest {
 
   @Test
   public void good_name_camel_case() {
-    PythonCheckVerifier.verify("src/test/resources/checks/ModuleName.py", check);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/ModuleName.py", check);
   }
 
   @Test
   public void good_name_snake_case() {
-    PythonCheckVerifier.verify("src/test/resources/checks/module_name.py", check);
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/module_name.py", check);
   }
 
 }
