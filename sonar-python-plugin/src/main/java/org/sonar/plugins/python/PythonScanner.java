@@ -44,7 +44,6 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.PythonFile;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
@@ -72,7 +71,7 @@ public class PythonScanner {
     this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.inputFiles = inputFiles;
-    this.parser = PythonParser.create(new PythonConfiguration(context.fileSystem().encoding()));
+    this.parser = PythonParser.create();
   }
 
   public void scanFiles() {
@@ -164,7 +163,6 @@ public class PythonScanner {
   }
 
   private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext) {
-    new PythonConfiguration(context.fileSystem().encoding());
     FileMetrics fileMetrics = new FileMetrics(visitorContext);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 

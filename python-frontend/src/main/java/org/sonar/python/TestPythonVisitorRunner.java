@@ -44,7 +44,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static PythonVisitorContext createContext(File file) {
-    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create();
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode astNode = parser.parse(pythonFile.content());
     FileInput rootTree = new PythonTreeMaker().fileInput(astNode);

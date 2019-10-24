@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -35,7 +34,6 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -45,7 +43,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   public static final String MESSAGE = "Remove this commented out code.";
   // Regex coming from https://www.python.org/dev/peps/pep-0263/#defining-the-encoding
   private static final Pattern ENCODING_PATTERN = Pattern.compile(".*?coding[:=][ \\t]*([-_.a-zA-Z0-9]+)\n");
-  private static final PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private static final PythonParser parser = PythonParser.create();
 
   @Override
   public void initialize(Context context) {

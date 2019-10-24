@@ -76,7 +76,7 @@ public class TokenLocationTest {
   private List<Token> lex(String toLex) {
     LexerState lexerState = new LexerState();
     lexerState.reset();
-    Lexer lexer = PythonLexer.create(new PythonConfiguration(StandardCharsets.UTF_8), lexerState);
+    Lexer lexer = PythonLexer.create(StandardCharsets.UTF_8, lexerState);
     return lexer.lex(toLex).stream().map(TokenImpl::new).collect(Collectors.toList());
   }
 

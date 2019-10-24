@@ -23,9 +23,7 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.matcher.RuleDefinition;
-import java.nio.charset.StandardCharsets;
 import org.fest.assertions.GenericAssert;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.internal.vm.EndOfInputExpression;
 import org.sonar.sslr.internal.vm.FirstOfExpression;
@@ -53,7 +51,7 @@ public class PythonParserAssert extends GenericAssert<PythonParserAssert, Python
     RuleDefinition withEndOfInput = new RuleDefinition(new WithEndOfInput(actual.getRootRule().getRuleKey()))
       .is(rule, endOfInput);
 
-    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create();
     parser.setRootRule(withEndOfInput);
 
     return parser;

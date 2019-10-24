@@ -20,10 +20,8 @@
 package org.sonar.python.metrics;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -34,7 +32,7 @@ public class ComplexityVisitorTest {
 
   private ComplexityVisitor visitor = new ComplexityVisitor();
 
-  private PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private PythonParser parser = PythonParser.create();
 
   @Test
   public void file() {
