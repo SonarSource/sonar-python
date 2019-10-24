@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -29,7 +28,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -39,7 +37,7 @@ import static org.sonar.python.checks.Expressions.isFalsy;
 
 public class ExpressionsTest {
 
-  private PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+  private PythonParser parser = PythonParser.create();
 
   @Test
   public void falsy() {

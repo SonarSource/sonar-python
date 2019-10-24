@@ -24,13 +24,12 @@ import java.nio.file.Files;
 import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class PythonParserTest {
 
-  private final PythonParser parser = PythonParser.create(new PythonConfiguration(UTF_8));
+  private final PythonParser parser = PythonParser.create();
 
   @Test
   public void test() throws Exception {

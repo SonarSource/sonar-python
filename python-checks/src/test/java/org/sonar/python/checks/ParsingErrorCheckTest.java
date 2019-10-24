@@ -27,7 +27,6 @@ import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +37,7 @@ public class ParsingErrorCheckTest {
   public void test() throws Exception {
     File file = new File("src/test/resources/checks/parsingError.py");
 
-    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create();
     PythonVisitorContext context;
     try {
       String fileContent = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);

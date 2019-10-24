@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -51,7 +50,7 @@ public class PythonLexerTest {
 
   private static class TestLexer {
     private LexerState lexerState = new LexerState();
-    private Lexer lexer = PythonLexer.create(new PythonConfiguration(UTF_8), lexerState);
+    private Lexer lexer = PythonLexer.create(UTF_8, lexerState);
 
     List<Token> lex(String code) {
       lexerState.reset();

@@ -24,7 +24,7 @@ import com.sonar.sslr.impl.channel.BlackHoleChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
-import org.sonar.python.PythonConfiguration;
+import java.nio.charset.Charset;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -45,9 +45,9 @@ public final class PythonLexer {
   private PythonLexer() {
   }
 
-  public static Lexer create(PythonConfiguration conf, LexerState lexerState) {
+  public static Lexer create(Charset charset, LexerState lexerState) {
     return Lexer.builder()
-        .withCharset(conf.getCharset())
+        .withCharset(charset)
         .withFailIfNoChannelToConsumeOneCharacter(true)
 
         .withChannel(new NewLineChannel(lexerState))
