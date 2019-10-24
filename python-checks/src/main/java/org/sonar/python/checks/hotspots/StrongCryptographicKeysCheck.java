@@ -24,13 +24,14 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.Symbol;
 
@@ -77,19 +78,27 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     abstract String getExponentKeywordName();
 
     private boolean isNonCompliantKeySizeArgument(Argument argument, int index) {
-      Name keywordArgument = argument.keywordArgument();
-      if (keywordArgument == null) {
-        return index == getKeySizeArgumentPosition() && isLessThan2048(argument.expression());
+      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
+        return false;
       }
-      return (keywordArgument).name().equals(getKeySizeKeywordName()) && isLessThan2048(argument.expression());
+      RegularArgument regularArgument = ((RegularArgument) argument);
+      Name keyword = regularArgument.keywordArgument();
+      if (keyword == null) {
+        return index == getKeySizeArgumentPosition() && isLessThan2048(regularArgument.expression());
+      }
+      return keyword.name().equals(getKeySizeKeywordName()) && isLessThan2048(regularArgument.expression());
     }
 
     private boolean isNonCompliantExponentArgument(Argument argument, int index) {
-      Name keywordArgument = argument.keywordArgument();
-      if (keywordArgument == null) {
-        return index == getExponentArgumentPosition() && isLessThan65537(argument.expression());
+      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
+        return false;
       }
-      return (keywordArgument).name().equals(getExponentKeywordName()) && isLessThan65537(argument.expression());
+      RegularArgument regularArgument = ((RegularArgument) argument);
+      Name keyword = regularArgument.keywordArgument();
+      if (keyword == null) {
+        return index == getExponentArgumentPosition() && isLessThan65537(regularArgument.expression());
+      }
+      return keyword.name().equals(getExponentKeywordName()) && isLessThan65537(regularArgument.expression());
     }
 
     private static boolean isLessThan2048(Expression expression) {
@@ -109,11 +118,15 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
     }
 
     private static boolean isNonCompliantCurveArgument(Argument argument, int index) {
-      Name keywordArgument = argument.keywordArgument();
-      if (keywordArgument == null) {
-        return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(argument.expression());
+      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
+        return false;
       }
-      return (keywordArgument).name().equals("curve") && isNonCompliantCurve(argument.expression());
+      RegularArgument regularArgument = ((RegularArgument) argument);
+      Name keyword = regularArgument.keywordArgument();
+      if (keyword == null) {
+        return index == CURVE_ARGUMENT_POSITION && isNonCompliantCurve(regularArgument.expression());
+      }
+      return keyword.name().equals("curve") && isNonCompliantCurve(regularArgument.expression());
     }
 
     private static boolean isNonCompliantCurve(Expression expression) {

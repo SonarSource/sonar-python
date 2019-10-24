@@ -33,9 +33,9 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
@@ -66,7 +66,6 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ImportStatement;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
@@ -75,6 +74,7 @@ import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.PrintStatement;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.SliceList;
@@ -1156,6 +1156,8 @@ public class PythonTreeMaker {
    */
   private static void checkGeneratorExpressionInArgument(List<Argument> arguments) {
     List<Argument> nonParenthesizedGeneratorExpressions = arguments.stream()
+      .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
+      .map(RegularArgument.class::cast)
       .filter(arg -> arg.expression().is(Tree.Kind.GENERATOR_EXPR) && !arg.expression().firstToken().value().equals("("))
       .collect(Collectors.toList());
     if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
@@ -1170,18 +1172,20 @@ public class PythonTreeMaker {
       Expression expression = expression(astNode.getFirstChild());
       ComprehensionExpression comprehension =
         new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, null, expression, compFor(compFor), null);
-      return new ArgumentImpl(comprehension, null, null);
+      return new RegularArgumentImpl(comprehension);
     }
     AstNode assign = astNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token star = astNode.getFirstChild(PythonPunctuator.MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL).getToken());
-    Token starStar = astNode.getFirstChild(PythonPunctuator.MUL_MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL_MUL).getToken());
+    if (star == null) {
+      star = astNode.getFirstChild(PythonPunctuator.MUL_MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL_MUL).getToken());
+    }
     Expression arg = expression(astNode.getLastChild(PythonGrammar.TEST));
     if (assign != null) {
       // Keyword in argument list must be an identifier.
       AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST).getFirstChild(PythonGrammar.ATOM).getFirstChild(PythonGrammar.NAME);
-      return new ArgumentImpl(name(nameNode), arg, toPyToken(assign.getToken()), star, starStar);
+      return new RegularArgumentImpl(name(nameNode), toPyToken(assign.getToken()), arg);
     }
-    return new ArgumentImpl(arg, star, starStar);
+    return star == null ? new RegularArgumentImpl(arg) : new StarredExpressionImpl(star, arg);
   }
 
   private Expression binaryExpression(AstNode astNode) {

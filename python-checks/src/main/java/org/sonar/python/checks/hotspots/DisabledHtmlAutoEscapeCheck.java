@@ -26,11 +26,13 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.StarredExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.Expressions;
@@ -72,14 +74,19 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
       List<Argument> arguments = call.arguments();
 
       for (Argument argument : arguments) {
-        Expression expression = argument.expression();
-        if (expression.is(Kind.NAME) && argument.starStarToken() != null) {
-          checkJinjaOptions(ctx, call, (Name) expression);
-          return;
+        if (argument.is(Kind.STARRED_EXPR)) {
+          Expression expression = ((StarredExpression) argument).expression();
+          if (expression.is(Kind.NAME)) {
+            checkJinjaOptions(ctx, call, (Name) expression);
+            return;
+          }
         }
       }
 
-      Stream<Argument> autoEscapeArgs = arguments.stream().filter(DisabledHtmlAutoEscapeCheck::isAutoEscapeArgument);
+      Stream<RegularArgument> autoEscapeArgs = arguments.stream()
+        .filter(arg -> arg.is(Kind.REGULAR_ARGUMENT))
+        .map(RegularArgument.class::cast)
+        .filter(DisabledHtmlAutoEscapeCheck::isAutoEscapeArgument);
       if (autoEscapeArgs.allMatch(arg -> Expressions.isFalsy(arg.expression()))) {
         ctx.addIssue(call, MESSAGE);
       }
@@ -102,7 +109,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean isAutoEscapeArgument(Argument argument) {
+  private static boolean isAutoEscapeArgument(RegularArgument argument) {
     Name keyword = argument.keywordArgument();
     return keyword != null && AUTO_ESCAPE.equals(keyword.name());
   }

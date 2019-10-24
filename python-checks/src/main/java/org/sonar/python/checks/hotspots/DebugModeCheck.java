@@ -25,6 +25,7 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -77,9 +78,9 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isDebugArgument(Argument argument) {
-    Name keywordArgument = argument.keywordArgument();
+    Name keywordArgument = argument.is(Kind.REGULAR_ARGUMENT) ? ((RegularArgument) argument).keywordArgument() : null;
     if (keywordArgument != null && debugProperties.contains((keywordArgument).name())) {
-      return isTrueLiteral(argument.expression());
+      return isTrueLiteral(((RegularArgument) argument).expression());
     }
     return false;
   }

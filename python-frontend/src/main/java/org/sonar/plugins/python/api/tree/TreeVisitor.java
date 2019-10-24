@@ -91,7 +91,7 @@ public interface TreeVisitor {
 
   void visitCallExpression(CallExpression callExpression);
 
-  void visitArgument(Argument argument);
+  void visitRegularArgument(RegularArgument regularArgument);
 
   void visitAssignmentStatement(AssignmentStatement assignmentStatement);
 

@@ -42,7 +42,7 @@ public interface Tree {
   enum Kind {
     ALIASED_NAME(AliasedName.class),
 
-    ARGUMENT(Argument.class),
+    REGULAR_ARGUMENT(RegularArgument.class),
 
     ARG_LIST(ArgList.class),
 

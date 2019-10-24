@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.python.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -32,8 +31,10 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.IssueLocation;
 import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
 
@@ -62,7 +63,10 @@ public class RegexCheck extends PythonSubscriptionCheck {
   private static void checkRegexArgument(Argument arg, SubscriptionContext ctx) {
     String literal = arg.firstToken().value();
     IssueLocation secondaryLocation = null;
-    Expression argExpression = getExpression(arg.expression());
+    if (!arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
+      return;
+    }
+    Expression argExpression = getExpression(((RegularArgument) arg).expression());
     if (argExpression.is(Tree.Kind.NAME)) {
       Expression expression = getExpression(Expressions.singleAssignedValue((Name) argExpression));
       if (expression != null && expression.is(Tree.Kind.STRING_LITERAL)) {

@@ -26,7 +26,7 @@ package org.sonar.plugins.python.api.tree;
  *
  * See https://docs.python.org/3/reference/expressions.html#grammar-token-starred-expression
  */
-public interface StarredExpression extends Expression, DictionaryLiteralElement {
+public interface StarredExpression extends Expression, DictionaryLiteralElement, Argument {
 
   Token starToken();
 

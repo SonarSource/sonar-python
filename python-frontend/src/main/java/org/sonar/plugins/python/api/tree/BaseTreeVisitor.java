@@ -247,9 +247,9 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitArgument(Argument pyArgumentTree) {
-    scan(pyArgumentTree.keywordArgument());
-    scan(pyArgumentTree.expression());
+  public void visitRegularArgument(RegularArgument regularArgumentTree) {
+    scan(regularArgumentTree.keywordArgument());
+    scan(regularArgumentTree.expression());
   }
 
   @Override

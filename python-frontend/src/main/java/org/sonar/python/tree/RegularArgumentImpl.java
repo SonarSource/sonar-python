@@ -24,35 +24,28 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class ArgumentImpl extends PyTree implements Argument {
+public class RegularArgumentImpl extends PyTree implements RegularArgument {
   private final Name keywordArgument;
   private final Expression expression;
   private final Token equalToken;
-  private final Token star;
-  private final Token starStar;
 
-  public ArgumentImpl(Name keywordArgument, Expression expression, Token equalToken, @Nullable Token star, @Nullable Token starStar) {
+  public RegularArgumentImpl(Name keywordArgument, Token equalToken, Expression expression) {
     this.keywordArgument = keywordArgument;
-    this.expression = expression;
     this.equalToken = equalToken;
-    this.star = star;
-    this.starStar = starStar;
+    this.expression = expression;
   }
 
-  public ArgumentImpl(Expression expression, @Nullable Token star, @Nullable Token starStar) {
+  public RegularArgumentImpl(Expression expression) {
     this.keywordArgument = null;
-    this.expression = expression;
     this.equalToken = null;
-    this.star = star;
-    this.starStar = starStar;
+    this.expression = expression;
   }
 
   @CheckForNull
@@ -72,30 +65,18 @@ public class ArgumentImpl extends PyTree implements Argument {
     return expression;
   }
 
-  @CheckForNull
-  @Override
-  public Token starToken() {
-    return star;
-  }
-
-  @CheckForNull
-  @Override
-  public Token starStarToken() {
-    return starStar;
-  }
-
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitArgument(this);
+    visitor.visitRegularArgument(this);
   }
 
   @Override
   public Kind getKind() {
-    return Kind.ARGUMENT;
+    return Kind.REGULAR_ARGUMENT;
   }
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(keywordArgument, equalToken, star, starStar, expression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(keywordArgument, equalToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

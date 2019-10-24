@@ -19,8 +19,19 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import javax.annotation.CheckForNull;
+
 /**
- * Common interface for {@link RegularArgument}, {@link StarredExpression}
+ * <pre>{@link #keywordArgument()} = {@link #expression()}</pre> or <pre>{@link #expression()}</pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-argument-list
  */
-public interface Argument extends Tree {
+public interface RegularArgument extends Argument {
+  @CheckForNull
+  Name keywordArgument();
+
+  @CheckForNull
+  Token equalToken();
+
+  Expression expression();
 }

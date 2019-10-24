@@ -18,6 +18,7 @@ def cryptography():
     rsa.generate_private_key(public_exponent=3.14, key_size=2048)
 
     rsa.generate_private_key()
+    rsa.generate_private_key(*foo)
 
     # key_size = RSA key size
     # public_exponent = RSA public key exponent
