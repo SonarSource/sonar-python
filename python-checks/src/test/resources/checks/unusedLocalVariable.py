@@ -23,7 +23,7 @@ def string_interpolation():
     value4 = 4 # Noncompliant (previously FN)
     value5 = 1
     foo(F'{value5} foo')
-    value6 = '' # Noncompliant FP
+    value6 = ''
     print(f"{'}' + value6}")
     return f'{value1}, {2*value2}, value3bis, value4'
 

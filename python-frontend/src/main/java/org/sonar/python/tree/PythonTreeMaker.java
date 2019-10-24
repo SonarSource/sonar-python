@@ -101,7 +101,13 @@ import org.sonar.python.parser.PythonParser;
 
 public class PythonTreeMaker {
 
+  /**
+   * interpolated expressions takes escaping string in consideration.
+   */
+  private static final String INTERPOLATED_EXPR = "(('[^']*'|\"[^\"]*\"|[^{}])";
+  private static final Pattern INTERPOLATED_EXPR_PATTERN = Pattern.compile("(?<!\\{)\\{(\\{\\{)*" + INTERPOLATED_EXPR + "*)}");
   private static final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+
 
   public FileInput fileInput(AstNode astNode) {
     List<Statement> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
@@ -485,8 +491,8 @@ public class PythonTreeMaker {
       .collect(Collectors.toList());
     return new NonlocalStatementImpl(nonlocalKeyword, variables, separators);
   }
-  // Compound statements
 
+  // Compound statements
   public IfStatement ifStatement(AstNode astNode) {
     Token ifToken = toPyToken(astNode.getTokens().get(0));
     AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
@@ -609,6 +615,7 @@ public class PythonTreeMaker {
   private static Name name(AstNode astNode) {
     return new NameImpl(toPyToken(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getToken()), astNode.getParent().is(PythonGrammar.ATOM));
   }
+
   private static Name variable(AstNode astNode) {
     return new NameImpl(toPyToken(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getToken()), true);
   }
@@ -1274,18 +1281,18 @@ public class PythonTreeMaker {
   private Expression stringLiteral(AstNode astNode) {
     List<StringElementImpl> stringElements = astNode.getChildren(PythonTokenType.STRING).stream()
       .map(node -> new StringElementImpl(toPyToken(node.getToken()))).collect(Collectors.toList());
-    stringElements.stream().filter(StringElement::isInterpolated).forEach(se -> interpolatedExpressions(se.trimmedQuotesValue()).forEach(se::addInterpolatedExpression));
+    stringElements.stream()
+      .filter(StringElement::isInterpolated)
+      .forEach(se -> interpolatedExpressions(se.trimmedQuotesValue()).forEach(se::addInterpolatedExpression));
     List<StringElement> stringElems = new ArrayList<>(stringElements);
     return new StringLiteralImpl(stringElems);
   }
-
-  private static final Pattern INTERPOLATED_EXPR  = Pattern.compile("(?<!\\{)\\{(\\{\\{)*((\\'[^\\']*\\'|\\\"[^\\\"]*\\\"|[^\\{\\}])*)\\}");
 
   private List<Expression> interpolatedExpressions(String literalValue) {
     List<Expression> res = new ArrayList<>();
     parser.setRootRule(parser.getGrammar().rule(PythonGrammar.EXPR));
     // get escaped interpolation
-    Matcher matcher = INTERPOLATED_EXPR.matcher(literalValue);
+    Matcher matcher = INTERPOLATED_EXPR_PATTERN.matcher(literalValue);
     while (matcher.find()) {
       AstNode parse = parser.parse(matcher.group(2));
       res.add(expression(parse));
