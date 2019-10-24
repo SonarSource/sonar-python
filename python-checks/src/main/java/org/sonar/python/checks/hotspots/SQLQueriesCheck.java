@@ -19,10 +19,10 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -95,29 +95,25 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
 
   private void checkCallExpression(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
-    List<Tree> secondaryLocations = new ArrayList<>();
 
     Symbol symbol = callExpression.calleeSymbol();
-    if (symbol != null && "django.db.models.expressions.RawSQL".equals(symbol.fullyQualifiedName())
-      && isSensitive(callExpression, secondaryLocations)) {
-
-      addIssue(context, callExpression, secondaryLocations);
+    if (symbol != null && "django.db.models.expressions.RawSQL".equals(symbol.fullyQualifiedName())) {
+      addIssue(context, callExpression);
       return;
     }
 
     if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
       String functionName = ((QualifiedExpression) callExpression.callee()).name().name();
       if ((isSQLQueryFromDjangoModel(functionName) || isSQLQueryFromDjangoDBConnection(functionName))
-        && !isException(callExpression, functionName) && isSensitive(callExpression, secondaryLocations)) {
-
-        addIssue(context, callExpression, secondaryLocations);
+        && !isException(callExpression, functionName)) {
+        addIssue(context, callExpression);
       }
     }
   }
 
-  private static void addIssue(SubscriptionContext context, CallExpression callExpression, List<Tree> secondaryLocations) {
-    PreciseIssue preciseIssue = context.addIssue(callExpression, MESSAGE);
-    secondaryLocations.forEach(secondary -> preciseIssue.secondary(secondary, null));
+  private static void addIssue(SubscriptionContext context, CallExpression callExpression) {
+    Optional<Tree> secondary = sensitiveArgumentValue(callExpression);
+    secondary.ifPresent(tree ->  context.addIssue(callExpression, MESSAGE).secondary(tree, null));
   }
 
   private static boolean isException(CallExpression callExpression, String functionName) {
@@ -128,20 +124,19 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     return argListNode.isEmpty();
   }
 
-  private static boolean isSensitive(CallExpression callExpression, List<Tree> secondaryLocations) {
+  private static Optional<Tree> sensitiveArgumentValue(CallExpression callExpression) {
     List<Argument> argListNode = callExpression.arguments();
     if (argListNode.isEmpty()) {
-      return false;
+      return Optional.empty();
     }
     Argument arg = argListNode.get(0);
     Expression expression = arg.expression().is(Tree.Kind.NAME)
       ? Expressions.singleAssignedValue((Name) arg.expression())
       : arg.expression();
     if (expression != null && isFormatted(expression)) {
-      secondaryLocations.add(expression);
-      return true;
+      return Optional.of(expression);
     }
-    return false;
+    return Optional.empty();
   }
 
   private static boolean isFormatted(Expression tree) {
