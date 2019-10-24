@@ -309,7 +309,9 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitStringElement(StringElement tree) {
-    // noop
+    if (tree.isInterpolated()) {
+      scan(tree.interpolatedExpressions());
+    }
   }
 
   @Override

@@ -1769,7 +1769,7 @@ public class PythonTreeMakerTest extends RuleTest {
     expr = parseInterpolated("{{{\"}\" + value6}}}");
     assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
 
-    Expression exp = parse("f'{{bar}}'", treeMaker::expression);
+    Expression exp = parse("F'{{bar}}'", treeMaker::expression);
     StringLiteral stringLiteral = (StringLiteral) exp;
     assertThat(stringLiteral.stringElements()).hasSize(1);
     StringElement elmt = stringLiteral.stringElements().get(0);

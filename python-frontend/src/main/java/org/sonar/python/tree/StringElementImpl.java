@@ -82,7 +82,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public boolean isInterpolated() {
-    return prefix().contains("F") || prefix().contains("f");
+    return prefix().equalsIgnoreCase("F");
   }
 
   @Override
