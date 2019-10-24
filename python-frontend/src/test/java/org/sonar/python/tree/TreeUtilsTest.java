@@ -20,14 +20,11 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.impl.Parser;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -39,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -108,7 +106,7 @@ public class TreeUtilsTest {
   }
 
   private FileInput parse(String content) {
-    Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     AstNode astNode = parser.parse(content);
     return new PythonTreeMaker().fileInput(astNode);
   }

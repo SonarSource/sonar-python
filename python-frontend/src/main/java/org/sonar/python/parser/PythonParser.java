@@ -21,10 +21,11 @@ package org.sonar.python.parser;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Rule;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.Parser;
-import java.io.File;
+import com.sonar.sslr.impl.matcher.RuleDefinition;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.PythonConfiguration;
@@ -35,23 +36,41 @@ import org.sonar.python.lexer.PythonLexer;
 
 public final class PythonParser {
 
-  private PythonParser() {
+  private final Parser<Grammar> sslrParser;
+
+  public static PythonParser create(PythonConfiguration conf) {
+    return new PythonParser(conf);
   }
 
-  public static Parser<Grammar> create(PythonConfiguration conf) {
-    return new InternalPythonParser(conf);
+  private PythonParser(PythonConfiguration conf) {
+    sslrParser = new SslrPythonParser(conf);
+  }
+
+  public AstNode parse(String source) {
+    return sslrParser.parse(source);
+  }
+
+  public void setRootRule(Rule rule) {
+    sslrParser.setRootRule(rule);
+  }
+
+  public Grammar getGrammar() {
+    return sslrParser.getGrammar();
+  }
+
+  public RuleDefinition getRootRule() {
+    return sslrParser.getRootRule();
   }
 
   // We can't use com.sonar.sslr.impl.Parser directly because we need to add
   // DEDENT tokens before the EOF token (without using SSLR deprecated preprocessor API)
   // and we can't create a subclass of com.sonar.sslr.impl.Lexer.
   // The only solution seems to subclass com.sonar.sslr.impl.Parser.
-  private static class InternalPythonParser extends Parser<Grammar> {
-
+  private static class SslrPythonParser extends Parser<Grammar> {
     private final LexerState lexerState;
     private final Lexer lexer;
 
-    private InternalPythonParser(PythonConfiguration conf) {
+    private SslrPythonParser(PythonConfiguration conf) {
       super(PythonGrammar.create());
       super.setRootRule(super.getGrammar().getRootRule());
       this.lexerState = new LexerState();
@@ -63,13 +82,6 @@ public final class PythonParser {
       lexerState.reset();
       lexer.lex(source);
       return super.parse(tokens());
-    }
-
-    @Override
-    public AstNode parse(File file) {
-      lexerState.reset();
-      lexer.lex(file);
-      return parse(tokens());
     }
 
     private List<Token> tokens() {
@@ -92,4 +104,5 @@ public final class PythonParser {
       return tokens;
     }
   }
+
 }

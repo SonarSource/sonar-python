@@ -20,15 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.impl.Parser;
 import java.lang.reflect.Constructor;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import org.junit.Test;
-import org.sonar.python.PythonConfiguration;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonConfiguration;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.ArgListImpl;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -94,7 +92,7 @@ public class CheckUtilsTest {
   }
 
   private Tree parse(String content) {
-    Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
+    PythonParser parser = PythonParser.create(new PythonConfiguration(StandardCharsets.UTF_8));
     AstNode astNode = parser.parse(content);
     FileInput parse = new PythonTreeMaker().fileInput(astNode);
     return parse;

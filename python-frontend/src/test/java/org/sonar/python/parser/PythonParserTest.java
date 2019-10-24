@@ -19,9 +19,8 @@
  */
 package org.sonar.python.parser;
 
-import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.impl.Parser;
 import java.io.File;
+import java.nio.file.Files;
 import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -31,13 +30,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class PythonParserTest {
 
-  private final Parser<Grammar> parser = PythonParser.create(new PythonConfiguration(UTF_8));
+  private final PythonParser parser = PythonParser.create(new PythonConfiguration(UTF_8));
 
   @Test
-  public void test() {
+  public void test() throws Exception {
     Collection<File> files = listFiles();
     for (File file : files) {
-      parser.parse(file);
+      String fileContent = new String(Files.readAllBytes(file.toPath()), UTF_8);
+      parser.parse(fileContent);
     }
   }
 
