@@ -232,7 +232,8 @@ public class PythonTreeMaker {
       equalToken = toPyToken(equalTokenNode.getToken());
       assignedValue = expression(equalTokenNode.getNextSibling());
     }
-    return new AnnotatedAssignmentImpl(variable, new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), annotation), equalToken, assignedValue, separators);
+    TypeAnnotationImpl typeAnnotation = new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), annotation, Tree.Kind.VARIABLE_TYPE_ANNOTATION);
+    return new AnnotatedAssignmentImpl(variable, typeAnnotation, equalToken, assignedValue, separators);
   }
 
   private StatementList getStatementListFromSuite(AstNode suite) {
@@ -1269,7 +1270,7 @@ public class PythonTreeMaker {
     AstNode testNode = parameter.getFirstChild(PythonGrammar.TEST);
     if (testNode != null) {
       Token colonToken = toPyToken(parameter.getFirstChild(PythonPunctuator.COLON).getToken());
-      typeAnnotation = new TypeAnnotationImpl(colonToken, expression(testNode));
+      typeAnnotation = new TypeAnnotationImpl(colonToken, expression(testNode), Tree.Kind.PARAMETER_TYPE_ANNOTATION);
     }
 
     return new ParameterImpl(starOrStarStar, name, typeAnnotation, assignToken, defaultValue);

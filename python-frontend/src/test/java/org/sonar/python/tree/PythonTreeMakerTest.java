@@ -756,8 +756,6 @@ public class PythonTreeMakerTest extends RuleTest {
     functionDef = parse("def func(x) -> string : pass", treeMaker::funcDefStatement);
     TypeAnnotation returnType = functionDef.returnTypeAnnotation();
     assertThat(returnType.getKind()).isEqualTo(Tree.Kind.RETURN_TYPE_ANNOTATION);
-    assertThat(returnType.dash().value()).isEqualTo("-");
-    assertThat(returnType.gt().value()).isEqualTo(">");
     assertThat(returnType.expression().getKind()).isEqualTo(Tree.Kind.NAME);
 
     functionDef = parse("@foo\ndef func(x): pass", treeMaker::funcDefStatement);
@@ -809,8 +807,7 @@ public class PythonTreeMakerTest extends RuleTest {
     parameters = functionDef.parameters().nonTuple();
     assertThat(parameters).hasSize(2);
     TypeAnnotation annotation = parameters.get(0).typeAnnotation();
-    assertThat(annotation.getKind()).isEqualTo(Tree.Kind.TYPE_ANNOTATION);
-    assertThat(annotation.colonToken().value()).isEqualTo(":");
+    assertThat(annotation.getKind()).isEqualTo(Tree.Kind.PARAMETER_TYPE_ANNOTATION);
     assertThat(((Name) annotation.expression()).name()).isEqualTo("int");
     assertThat(annotation.children()).hasSize(2);
     assertThat(parameters.get(1).typeAnnotation()).isNull();
@@ -1111,8 +1108,8 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(annAssign.assignedValue().getKind()).isEqualTo(Tree.Kind.NUMERIC_LITERAL);
     assertThat(annAssign.equalToken().value()).isEqualTo("=");
     assertThat(annAssign.annotation().expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.VARIABLE_TYPE_ANNOTATION);
     assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
-    assertThat(annAssign.annotation().colonToken().value()).isEqualTo(":");
 
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     astNode = p.parse("x : string");
@@ -1121,6 +1118,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(annAssign.variable().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(((Name) annAssign.variable()).name()).isEqualTo("x");
     assertThat(annAssign.annotation().expression().getKind()).isEqualTo(Tree.Kind.NAME);
+    assertThat(annAssign.annotation().getKind()).isEqualTo(Tree.Kind.VARIABLE_TYPE_ANNOTATION);
     assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
     assertThat(annAssign.assignedValue()).isNull();
     assertThat(annAssign.equalToken()).isNull();

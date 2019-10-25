@@ -140,7 +140,8 @@ public interface Tree {
 
     TUPLE_PARAMETER(TupleParameter.class),
 
-    TYPE_ANNOTATION(TypeAnnotation.class),
+    VARIABLE_TYPE_ANNOTATION(TypeAnnotation.class),
+    PARAMETER_TYPE_ANNOTATION(TypeAnnotation.class),
     RETURN_TYPE_ANNOTATION(TypeAnnotation.class),
 
     PARAMETER_LIST(ParameterList.class),
