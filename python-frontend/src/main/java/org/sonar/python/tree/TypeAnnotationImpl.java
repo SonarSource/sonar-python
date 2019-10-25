@@ -23,12 +23,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.plugins.python.api.tree.Tree;
 
 public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
 
@@ -38,12 +37,12 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
   private final Expression expression;
   private final Kind kind;
 
-  public TypeAnnotationImpl(Token colonToken, Expression expression) {
+  public TypeAnnotationImpl(Token colonToken, Expression expression, Kind kind) {
     this.colonToken = colonToken;
     this.dash = null;
     this.gt = null;
     this.expression = expression;
-    this.kind = Kind.TYPE_ANNOTATION;
+    this.kind = kind;
   }
 
   public TypeAnnotationImpl(Token dash, Token gt, Expression expression) {
@@ -52,24 +51,6 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
     this.gt = gt;
     this.expression = expression;
     this.kind = Kind.RETURN_TYPE_ANNOTATION;
-  }
-
-  @CheckForNull
-  @Override
-  public Token colonToken() {
-    return colonToken;
-  }
-
-  @CheckForNull
-  @Override
-  public Token dash() {
-    return dash;
-  }
-
-  @CheckForNull
-  @Override
-  public Token gt() {
-    return gt;
   }
 
   @Override
