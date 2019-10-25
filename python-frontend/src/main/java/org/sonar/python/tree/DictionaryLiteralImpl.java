@@ -21,13 +21,13 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<KeyValuePair> implements DictionaryLiteral {
+public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<DictionaryLiteralElement> implements DictionaryLiteral {
 
-  public DictionaryLiteralImpl(Token lCurlyBrace, List<Token> commas, List<KeyValuePair> elements, Token rCurlyBrace) {
+  public DictionaryLiteralImpl(Token lCurlyBrace, List<Token> commas, List<DictionaryLiteralElement> elements, Token rCurlyBrace) {
     super(lCurlyBrace, commas, elements, rCurlyBrace);
   }
   @Override

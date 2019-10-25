@@ -24,12 +24,12 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 
@@ -69,7 +69,9 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
     ArgList argList = classDef.args();
     if (argList != null) {
       argList.arguments().stream()
-        .map(Argument::expression)
+        .filter(argument -> argument.is(Tree.Kind.REGULAR_ARGUMENT))
+        .map(RegularArgument.class::cast)
+        .map(RegularArgument::expression)
         .filter(expr -> expr instanceof HasSymbol && ((HasSymbol) expr).symbol() != null)
         .filter(expr -> LOGGERS_CLASSES.contains(((HasSymbol) expr).symbol().fullyQualifiedName()))
         .forEach(expr -> ctx.addIssue(expr, MESSAGE));

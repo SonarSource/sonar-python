@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.semantic.Symbol;
@@ -203,6 +204,8 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     if (argList != null) {
       argList.arguments()
         .stream()
+        .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
+        .map(RegularArgument.class::cast)
         .filter(arg -> questionableDjangoHashers.contains(getQualifiedName(arg.expression())))
         .forEach(arg -> ctx.addIssue(arg, MESSAGE));
     }

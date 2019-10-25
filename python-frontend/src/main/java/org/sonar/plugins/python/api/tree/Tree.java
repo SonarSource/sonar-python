@@ -42,7 +42,7 @@ public interface Tree {
   enum Kind {
     ALIASED_NAME(AliasedName.class),
 
-    ARGUMENT(Argument.class),
+    REGULAR_ARGUMENT(RegularArgument.class),
 
     ARG_LIST(ArgList.class),
 
@@ -157,7 +157,7 @@ public interface Tree {
 
     PARENTHESIZED(ParenthesizedExpression.class),
 
-    STARRED_EXPR(StarredExpression.class),
+    UNPACKING_EXPR(UnpackingExpression.class),
 
     AWAIT(AwaitExpression.class),
 

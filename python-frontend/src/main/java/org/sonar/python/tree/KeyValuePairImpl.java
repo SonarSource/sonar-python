@@ -20,38 +20,24 @@
 package org.sonar.python.tree;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class KeyValuePairImpl extends PyTree implements KeyValuePair {
-
-  private final Token starStarToken;
-  private final Expression expression;
   private final Expression key;
   private final Token colon;
   private final Expression value;
-
-  public KeyValuePairImpl(Token starStarToken, Expression expression) {
-    this.starStarToken = starStarToken;
-    this.expression = expression;
-    this.key = null;
-    this.colon = null;
-    this.value = null;
-  }
 
   public KeyValuePairImpl(Expression key, Token colon, Expression value) {
     this.key = key;
     this.colon = colon;
     this.value = value;
-    this.starStarToken = null;
-    this.expression = null;
   }
 
   @CheckForNull
@@ -72,18 +58,6 @@ public class KeyValuePairImpl extends PyTree implements KeyValuePair {
     return value;
   }
 
-  @CheckForNull
-  @Override
-  public Token starStarToken() {
-    return starStarToken;
-  }
-
-  @CheckForNull
-  @Override
-  public Expression expression() {
-    return expression;
-  }
-
   @Override
   public void accept(TreeVisitor visitor) {
     visitor.visitKeyValuePair(this);
@@ -91,7 +65,7 @@ public class KeyValuePairImpl extends PyTree implements KeyValuePair {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(starStarToken, expression, key, colon, value).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(key, colon, value).collect(Collectors.toList());
   }
 
   @Override

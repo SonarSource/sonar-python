@@ -247,9 +247,9 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitArgument(Argument pyArgumentTree) {
-    scan(pyArgumentTree.keywordArgument());
-    scan(pyArgumentTree.expression());
+  public void visitRegularArgument(RegularArgument regularArgumentTree) {
+    scan(regularArgumentTree.keywordArgument());
+    scan(regularArgumentTree.expression());
   }
 
   @Override
@@ -325,8 +325,8 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitStarredExpression(StarredExpression pyStarredExpressionTree) {
-    scan(pyStarredExpressionTree.expression());
+  public void visitUnpackingExpression(UnpackingExpression unpackingExpressionTree) {
+    scan(unpackingExpressionTree.expression());
   }
 
   @Override
@@ -406,7 +406,6 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitKeyValuePair(KeyValuePair keyValuePair) {
-    scan(keyValuePair.expression());
     scan(keyValuePair.key());
     scan(keyValuePair.value());
   }

@@ -19,25 +19,20 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import java.util.List;
-
 /**
  * <pre>
- *   { {@link #elements()} }
+ * {@link #starToken()} {@link #expression()}
  * </pre>
  *
- * Example: <pre>{x = 1, y = 2}</pre>
- *
- * See https://docs.python.org/3/reference/expressions.html#dictionary-displays
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-starred-expression
+ * See https://www.python.org/dev/peps/pep-0448/
  */
-public interface DictionaryLiteral extends Expression {
+public interface UnpackingExpression extends Expression, DictionaryLiteralElement, Argument {
+  /**
+   * Can be either {@code *} or {@code **}
+   */
+  Token starToken();
 
-  Token lCurlyBrace();
-
-  List<DictionaryLiteralElement> elements();
-
-  List<Token> commas();
-
-  Token rCurlyBrace();
+  Expression expression();
 
 }

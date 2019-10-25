@@ -91,7 +91,7 @@ public interface TreeVisitor {
 
   void visitCallExpression(CallExpression callExpression);
 
-  void visitArgument(Argument argument);
+  void visitRegularArgument(RegularArgument regularArgument);
 
   void visitAssignmentStatement(AssignmentStatement assignmentStatement);
 
@@ -121,7 +121,7 @@ public interface TreeVisitor {
 
   void visitStringElement(StringElement stringElement);
 
-  void visitStarredExpression(StarredExpression starredExpression);
+  void visitUnpackingExpression(UnpackingExpression unpackingExpression);
 
   void visitAwaitExpression(AwaitExpression awaitExpression);
 

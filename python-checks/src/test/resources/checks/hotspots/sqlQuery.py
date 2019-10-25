@@ -26,6 +26,7 @@ class MyUser(models.Model):
         MyUser.objects.raw(formatted_request3)  # Noncompliant
         MyUser.objects.raw(formatted_request4)  # FN, multiple assignments
         MyUser.objects.raw(formatted_request5)  # OK
+        MyUser.objects.raw(*formatted_request5)  # OK
 
         # Parametrized queries
         MyUser.objects.raw('SELECT * FROM mytable WHERE name = "%s"' + value, params) # Noncompliant

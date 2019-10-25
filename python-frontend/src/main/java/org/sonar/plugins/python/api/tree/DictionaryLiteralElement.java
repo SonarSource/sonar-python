@@ -20,16 +20,7 @@
 package org.sonar.plugins.python.api.tree;
 
 /**
- * <pre>
- * {@link #starToken()} {@link #expression()}
- * </pre>
- *
- * See https://docs.python.org/3/reference/expressions.html#grammar-token-starred-expression
+ * It can be either {@link KeyValuePair} or {@link UnpackingExpression}
  */
-public interface StarredExpression extends Expression {
-
-  Token starToken();
-
-  Expression expression();
-
+public interface DictionaryLiteralElement extends Tree {
 }

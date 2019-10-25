@@ -19,25 +19,19 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import java.util.List;
+import javax.annotation.CheckForNull;
 
 /**
- * <pre>
- *   { {@link #elements()} }
- * </pre>
+ * <pre>{@link #keywordArgument()} = {@link #expression()}</pre> or <pre>{@link #expression()}</pre>
  *
- * Example: <pre>{x = 1, y = 2}</pre>
- *
- * See https://docs.python.org/3/reference/expressions.html#dictionary-displays
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-argument-list
  */
-public interface DictionaryLiteral extends Expression {
+public interface RegularArgument extends Argument {
+  @CheckForNull
+  Name keywordArgument();
 
-  Token lCurlyBrace();
+  @CheckForNull
+  Token equalToken();
 
-  List<DictionaryLiteralElement> elements();
-
-  List<Token> commas();
-
-  Token rCurlyBrace();
-
+  Expression expression();
 }

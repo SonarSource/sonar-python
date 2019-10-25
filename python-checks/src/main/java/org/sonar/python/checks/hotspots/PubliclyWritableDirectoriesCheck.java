@@ -25,10 +25,11 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
@@ -61,7 +62,10 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
       CallExpression tree = (CallExpression) ctx.syntaxNode();
       List<Argument> arguments = tree.arguments();
       if (isOsEnvironGetter(tree) &&
-        arguments.stream().map(Argument::expression)
+        arguments.stream()
+          .filter(arg -> arg.is(Kind.REGULAR_ARGUMENT))
+          .map(RegularArgument.class::cast)
+          .map(RegularArgument::expression)
           .anyMatch(PubliclyWritableDirectoriesCheck::isNonCompliantOsEnvironArgument)) {
         ctx.addIssue(tree, MESSAGE);
       }

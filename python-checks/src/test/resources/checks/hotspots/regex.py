@@ -24,6 +24,7 @@ def define_http_endpoint(path, view):
     regexp = '(a*)*'
     RegexValidator(regexp) # Noncompliant [[secondary=-1]]
 #                  ^^^^^^
+    RegexValidator(*path)
 
 import re
 from re import compile

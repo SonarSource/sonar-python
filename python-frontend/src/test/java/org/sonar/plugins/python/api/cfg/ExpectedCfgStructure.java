@@ -35,6 +35,7 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -206,20 +207,23 @@ public class ExpectedCfgStructure {
           throw new UnsupportedOperationException("CFG Block metadata is not in expected format");
         }
         BlockExpectation expectation = result.createExpectation(block, id);
-        for (Argument argument : callExpression.arguments()) {
-          Name name = argument.keywordArgument();
-          if (name == null) {
-            throw new UnsupportedOperationException("The arguments of block function call must be keyword arguments");
-          }
-          Expression expression = argument.expression();
-          if (isNameWithValue(name, "succ")) {
-            expectation.withSuccessorsIds(names(expression));
-          } else if (isNameWithValue(name, "pred")) {
-            expectation.withPredecessorIds(names(expression));
-          } else if (isNameWithValue(name, "elem")) {
-            expectation.withElementNumber(Integer.parseInt(getValue(expression)));
-          } else if (isNameWithValue(name, "syntSucc")) {
-            expectation.withSyntacticSuccessor(getValue(expression));
+        for (Argument arg : callExpression.arguments()) {
+          if (arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
+            RegularArgument argument = (RegularArgument) arg;
+            Name name = argument.keywordArgument();
+            if (name == null) {
+              throw new UnsupportedOperationException("The arguments of block function call must be keyword arguments");
+            }
+            Expression expression = argument.expression();
+            if (isNameWithValue(name, "succ")) {
+              expectation.withSuccessorsIds(names(expression));
+            } else if (isNameWithValue(name, "pred")) {
+              expectation.withPredecessorIds(names(expression));
+            } else if (isNameWithValue(name, "elem")) {
+              expectation.withElementNumber(Integer.parseInt(getValue(expression)));
+            } else if (isNameWithValue(name, "syntSucc")) {
+              expectation.withSyntacticSuccessor(getValue(expression));
+            }
           }
         }
       }
@@ -258,7 +262,10 @@ public class ExpectedCfgStructure {
         .map(e -> e.is(Tree.Kind.EXPRESSION_STMT) ? ((ExpressionStatement) e).expressions().get(0) : e)
         .filter(e -> e.is(Tree.Kind.CALL_EXPR))
         .map(CallExpression.class::cast)
-        .filter(c -> c.arguments().stream().anyMatch(arg -> isNameWithValue(arg.keywordArgument(), "succ")));
+        .filter(c -> c.arguments().stream()
+          .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
+          .map(RegularArgument.class::cast)
+          .anyMatch(arg -> isNameWithValue(arg.keywordArgument(), "succ")));
     }
 
     private static String[] names(Tree tree) {

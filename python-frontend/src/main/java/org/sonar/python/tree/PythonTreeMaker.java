@@ -33,9 +33,9 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
@@ -49,6 +49,7 @@ import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.ContinueStatement;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DelStatement;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -65,7 +66,6 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ImportStatement;
-import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
@@ -74,6 +74,7 @@ import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.PrintStatement;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.SliceList;
@@ -869,7 +870,7 @@ public class PythonTreeMaker {
       return new UnaryExpressionImpl(toPyToken(astNode.getFirstChild().getToken()), expression(astNode.getLastChild()));
     }
     if (astNode.is(PythonGrammar.STAR_EXPR)) {
-      return new StarredExpressionImpl(toPyToken(astNode.getToken()), expression(astNode.getLastChild()));
+      return new UnpackingExpressionImpl(toPyToken(astNode.getToken()), expression(astNode.getLastChild()));
     }
     if (astNode.is(PythonGrammar.SUBSCRIPTION_OR_SLICING)) {
       Expression baseExpr = expression(astNode.getFirstChild(PythonGrammar.ATOM));
@@ -921,20 +922,20 @@ public class PythonTreeMaker {
     }
     List<Token> commas = punctuators(dictOrSetMaker, PythonPunctuator.COMMA);
     if (dictOrSetMaker.hasDirectChildren(PythonPunctuator.COLON) || dictOrSetMaker.hasDirectChildren(PythonPunctuator.MUL_MUL)) {
-      List<KeyValuePair> keyValuePairTrees = new ArrayList<>();
+      List<DictionaryLiteralElement> dictionaryLiteralElements = new ArrayList<>();
       List<AstNode> children = dictOrSetMaker.getChildren();
       int index = 0;
       while (index < children.size()) {
         AstNode currentChild = children.get(index);
         if (currentChild.is(PythonPunctuator.MUL_MUL)) {
-          keyValuePairTrees.add(new KeyValuePairImpl(toPyToken(currentChild.getToken()), expression(children.get(index + 1))));
+          dictionaryLiteralElements.add(new UnpackingExpressionImpl(toPyToken(currentChild.getToken()), expression(children.get(index + 1))));
           index += 3;
         } else {
-          keyValuePairTrees.add(new KeyValuePairImpl(expression(currentChild), toPyToken(children.get(index + 1).getToken()), expression(children.get(index + 2))));
+          dictionaryLiteralElements.add(new KeyValuePairImpl(expression(currentChild), toPyToken(children.get(index + 1).getToken()), expression(children.get(index + 2))));
           index += 4;
         }
       }
-      return new DictionaryLiteralImpl(lCurlyBrace, commas, keyValuePairTrees, rCurlyBrace);
+      return new DictionaryLiteralImpl(lCurlyBrace, commas, dictionaryLiteralElements, rCurlyBrace);
     }
     List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toList());
     return new SetLiteralImpl(lCurlyBrace, expressions, commas, rCurlyBrace);
@@ -1155,6 +1156,8 @@ public class PythonTreeMaker {
    */
   private static void checkGeneratorExpressionInArgument(List<Argument> arguments) {
     List<Argument> nonParenthesizedGeneratorExpressions = arguments.stream()
+      .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
+      .map(RegularArgument.class::cast)
       .filter(arg -> arg.expression().is(Tree.Kind.GENERATOR_EXPR) && !arg.expression().firstToken().value().equals("("))
       .collect(Collectors.toList());
     if (!nonParenthesizedGeneratorExpressions.isEmpty() && arguments.size() > 1) {
@@ -1169,18 +1172,20 @@ public class PythonTreeMaker {
       Expression expression = expression(astNode.getFirstChild());
       ComprehensionExpression comprehension =
         new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, null, expression, compFor(compFor), null);
-      return new ArgumentImpl(comprehension, null, null);
+      return new RegularArgumentImpl(comprehension);
     }
     AstNode assign = astNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token star = astNode.getFirstChild(PythonPunctuator.MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL).getToken());
-    Token starStar = astNode.getFirstChild(PythonPunctuator.MUL_MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL_MUL).getToken());
+    if (star == null) {
+      star = astNode.getFirstChild(PythonPunctuator.MUL_MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL_MUL).getToken());
+    }
     Expression arg = expression(astNode.getLastChild(PythonGrammar.TEST));
     if (assign != null) {
       // Keyword in argument list must be an identifier.
       AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST).getFirstChild(PythonGrammar.ATOM).getFirstChild(PythonGrammar.NAME);
-      return new ArgumentImpl(name(nameNode), arg, toPyToken(assign.getToken()), star, starStar);
+      return new RegularArgumentImpl(name(nameNode), toPyToken(assign.getToken()), arg);
     }
-    return new ArgumentImpl(arg, star, starStar);
+    return star == null ? new RegularArgumentImpl(arg) : new UnpackingExpressionImpl(star, arg);
   }
 
   private Expression binaryExpression(AstNode astNode) {

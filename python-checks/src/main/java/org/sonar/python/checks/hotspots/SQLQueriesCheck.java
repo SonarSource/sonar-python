@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
@@ -130,9 +131,13 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
       return Optional.empty();
     }
     Argument arg = argListNode.get(0);
-    Expression expression = arg.expression().is(Tree.Kind.NAME)
-      ? Expressions.singleAssignedValue((Name) arg.expression())
-      : arg.expression();
+    if (!arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
+      return Optional.empty();
+    }
+    Expression expression = ((RegularArgument) arg).expression();
+    if (expression.is(Tree.Kind.NAME)) {
+      expression = Expressions.singleAssignedValue((Name) expression);
+    }
     if (expression != null && isFormatted(expression)) {
       return Optional.of(expression);
     }
@@ -148,14 +153,16 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
   private static boolean extraContainsFormattedSqlQueries(List<Argument> argListNode, String functionName) {
     if (functionName.equals("extra")) {
       return argListNode.stream()
+        .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
+        .map(RegularArgument.class::cast)
         .filter(SQLQueriesCheck::isAssignment)
-        .map(Argument::expression)
+        .map(RegularArgument::expression)
         .anyMatch(SQLQueriesCheck::isFormatted);
     }
     return false;
   }
 
-  private static boolean isAssignment(Argument arg) {
+  private static boolean isAssignment(RegularArgument arg) {
     return arg.equalToken() != null;
   }
 
