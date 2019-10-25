@@ -26,6 +26,6 @@ public class SQLQueriesCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQuery.py", new SQLQueriesCheck());
-    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQueryNoDjango.py", new SQLQueriesCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/sqlQueryNoDjango.py", new SQLQueriesCheck());
   }
 }

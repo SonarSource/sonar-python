@@ -3,7 +3,7 @@ if 3 > 2:
 else:
     print "xx"
 
-# Noncompliant@+3 [[sc=5;ec=9]] {{Either remove or fill this block of code.}}
+# Noncompliant@+3 {{Either remove or fill this block of code.}} [[sc=5;ec=9]]
 # Noncompliant@+4
 if 3 > 2:
     pass

@@ -1,4 +1,4 @@
-expression = 3 # Noncompliant@-1 [[effortToFix=2]] {{File has a complexity of 4 which is greater than 2 authorized.}}
+expression = 3 # Noncompliant@-1 {{File has a complexity of 4 which is greater than 2 authorized.}} [[effortToFix=2]]
 
 def fun():
   if expression:

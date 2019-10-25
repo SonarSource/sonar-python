@@ -28,7 +28,7 @@ class AnotherClass(SomeParent, AnotherParent):
         pass
 
 class AnotherClass(object):
-    def A_Method(self): # Noncompliant (inherits object)
+    def A_Method(self): # Noncompliant [[inherits object]]
         pass
 class A():
     if 1:

@@ -34,7 +34,7 @@ public class FileComplexityCheckTest {
 
   @Test
   public void defaults() {
-    PythonCheckVerifier.verify("src/test/resources/checks/fileComplexityDefaults.py", new FileComplexityCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileComplexityDefaults.py", new FileComplexityCheck());
   }
 
 }

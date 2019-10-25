@@ -1,6 +1,6 @@
 expression = 3
 
-class MyClass: # Noncompliant [[effortToFix=2]] {{Class has a complexity of 4 which is greater than 2 authorized.}}
+class MyClass: # Noncompliant {{Class has a complexity of 4 which is greater than 2 authorized.}} [[effortToFix=2]]
 #     ^^^^^^^
     def hello(self):
         if expression:

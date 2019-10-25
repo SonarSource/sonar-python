@@ -11,7 +11,8 @@ if a:
     pass
 
 if a:
-  if b: # Noncompliant [[secondary=-1]] {{Merge this if statement with the enclosing one.}}
+#^[sc=1;ec=2]>
+  if b: # Noncompliant {{Merge this if statement with the enclosing one.}}
 # ^^
     pass
 

@@ -31,6 +31,6 @@ public class AfterJumpStatementCheckTest {
 
   @Test
   public void test_empty_file() {
-    PythonCheckVerifier.verify("src/test/resources/checks/afterJumpStatement_emptyFile.py", new AfterJumpStatementCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/afterJumpStatement_emptyFile.py", new AfterJumpStatementCheck());
   }
 }

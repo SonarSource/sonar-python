@@ -36,12 +36,12 @@ public class MissingNewlineAtEndOfFileCheckTest {
 
   @Test
   public void file_with_new_line() {
-    PythonCheckVerifier.verify("src/test/resources/checks/missingNewlineAtEndOfFile3.py", new MissingNewlineAtEndOfFileCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/missingNewlineAtEndOfFile3.py", new MissingNewlineAtEndOfFileCheck());
   }
 
   @Test
   public void empty_file() {
-    PythonCheckVerifier.verify("src/test/resources/checks/missingNewlineAtEndOfFile4.py", new MissingNewlineAtEndOfFileCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/missingNewlineAtEndOfFile4.py", new MissingNewlineAtEndOfFileCheck());
   }
 
 }

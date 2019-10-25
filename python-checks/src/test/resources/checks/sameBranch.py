@@ -22,19 +22,21 @@ else:
 
 if param == 1:
     if True:
+   #^[el=+2;ec=12]>
         pass
 else:
     if param == 2:
         print(2)
     else:
-        if True: # Noncompliant [[secondary=-6]]
+        if True: # Noncompliant
+       #^[el=+2;ec=16]
             pass
 
 if True:
     if True:
         print(1)
     else:
-        print(1)  # Noncompliant {{Either merge this branch with the identical one on line "35" or change one of the implementations.}}
+        print(1)  # Noncompliant {{Either merge this branch with the identical one on line "37" or change one of the implementations.}}
 
 if param == 1:
     print(1)

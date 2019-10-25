@@ -26,8 +26,7 @@ def cryptography():
     rsa.generate_private_key(key_size=1024, public_exponent=65537) # Noncompliant {{Use a key length of at least 2048 bits.}}
     rsa.generate_private_key(public_exponent=999, key_size=2048)   # Noncompliant {{Use a public key exponent of at least 65537.}}
     generate_private_key(public_exponent=999, key_size=2048)   # Noncompliant {{Use a public key exponent of at least 65537.}}
-    # Noncompliant@+1 {{Use a public key exponent of at least 65537.}}
-    rsa.generate_private_key(public_exponent=999, key_size=1024) # Noncompliant
+    rsa.generate_private_key(public_exponent=999, key_size=1024) # Noncompliant {{Use a key length of at least 2048 bits.}} {{Use a public key exponent of at least 65537.}}
     rsa.generate_private_key(public_exponent=65537, key_size=2048) # Compliant
     rsa.generate_private_key(public_exponent=exp, key_size=2048) # Compliant
     foo(key_size=1024) # Compliant
