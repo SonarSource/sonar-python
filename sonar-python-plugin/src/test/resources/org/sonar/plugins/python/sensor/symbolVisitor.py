@@ -28,3 +28,5 @@ class clazz:
 l = lambda z : z*z
 [x+1 for x in a]
 {key:1 for key in a}
+f"answer is \
+{b}"

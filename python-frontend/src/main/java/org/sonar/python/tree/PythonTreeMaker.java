@@ -1288,6 +1288,7 @@ public class PythonTreeMaker {
     String literalValue = se.trimmedQuotesValue();
     Token token = se.firstToken();
     int startOfLiteral = token.value().indexOf(literalValue);
+    LineOffsetCounter lineOffsetCounter = new LineOffsetCounter(literalValue);
     List<Expression> res = new ArrayList<>();
     parser.setRootRule(parser.getGrammar().rule(PythonGrammar.EXPR));
     // get escaped interpolation
@@ -1296,11 +1297,23 @@ public class PythonTreeMaker {
       AstNode parse = parser.parse(matcher.group(2));
       Expression exp = expression(parse);
       int start = matcher.start(2);
-      // update token line and column with offset of string element.
-      TreeUtils.tokens(exp).forEach(t -> ((TokenImpl) t).setLineColumn(token.line(), token.column() + startOfLiteral + start));
+      updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, start);
       res.add(exp);
     }
     return res;
+  }
+
+  private static void updateTokensLineAndColumn(Token token, int startOfLiteral, LineOffsetCounter lineOffsetCounter, Expression exp, int start) {
+    int line = lineOffsetCounter.findLine(start);
+    int col;
+    if (line == 1) {
+      col = token.column() + startOfLiteral + start;
+    } else {
+      col = lineOffsetCounter.findColumn(line, start);
+    }
+    int newline = (line - 1) + token.line();
+    // update token line and column with offset of string element.
+    TreeUtils.tokens(exp).forEach(t -> ((TokenImpl) t).setLineColumn(newline, col));
   }
 
   private static Token suiteIndent(AstNode suite) {
@@ -1314,4 +1327,6 @@ public class PythonTreeMaker {
   private static Token suiteDedent(AstNode suite) {
     return suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
   }
+
+
 }
