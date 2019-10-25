@@ -23,14 +23,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = CollapsibleIfStatementsCheck.CHECK_KEY)
-public class CollapsibleIfStatementsCheck extends PythonCheckTree {
+public class CollapsibleIfStatementsCheck extends PythonVisitorCheck {
   public static final String CHECK_KEY = "S1066";
   private static final String MESSAGE = "Merge this if statement with the enclosing one.";
 

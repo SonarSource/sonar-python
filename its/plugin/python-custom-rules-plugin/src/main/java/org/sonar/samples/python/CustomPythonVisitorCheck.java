@@ -21,7 +21,7 @@ package org.sonar.samples.python;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 
 @Rule(
@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
   priority = Priority.MINOR,
   name = "Python visitor check",
   description = "desc")
-public class CustomPythonVisitorCheck extends PythonCheckTree {
+public class CustomPythonVisitorCheck extends PythonVisitorCheck {
 
   public static final String RULE_KEY_VISITOR = "visitor";
 

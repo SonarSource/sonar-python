@@ -25,7 +25,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.IssueLocation;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
-public abstract class PythonCheckTree extends BaseTreeVisitor implements PythonCheck {
+public abstract class PythonVisitorCheck extends BaseTreeVisitor implements PythonCheck {
 
   private PythonVisitorContext context;
 

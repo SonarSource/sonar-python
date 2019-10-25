@@ -23,7 +23,7 @@ import java.io.File;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -44,7 +44,7 @@ public class PythonCheckTest {
 
   @Test
   public void test() {
-    PythonCheckTree check = new PythonCheckTree() {
+    PythonVisitorCheck check = new PythonVisitorCheck() {
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
         addIssue(pyFunctionDefTree.name(), pyFunctionDefTree.name().name());
@@ -71,7 +71,7 @@ public class PythonCheckTest {
 
   @Test
   public void test_cost() {
-    PythonCheckTree check = new PythonCheckTree() {
+    PythonVisitorCheck check = new PythonVisitorCheck() {
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
         addIssue(pyFunctionDefTree.name(), MESSAGE).withCost(42);
@@ -86,7 +86,7 @@ public class PythonCheckTest {
 
   @Test
   public void test_secondary_location() {
-    PythonCheckTree check = new PythonCheckTree() {
+    PythonVisitorCheck check = new PythonVisitorCheck() {
 
       private PreciseIssue preciseIssue;
 
