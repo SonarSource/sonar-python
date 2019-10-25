@@ -870,7 +870,7 @@ public class PythonTreeMaker {
       return new UnaryExpressionImpl(toPyToken(astNode.getFirstChild().getToken()), expression(astNode.getLastChild()));
     }
     if (astNode.is(PythonGrammar.STAR_EXPR)) {
-      return new StarredExpressionImpl(toPyToken(astNode.getToken()), expression(astNode.getLastChild()));
+      return new UnpackingExpressionImpl(toPyToken(astNode.getToken()), expression(astNode.getLastChild()));
     }
     if (astNode.is(PythonGrammar.SUBSCRIPTION_OR_SLICING)) {
       Expression baseExpr = expression(astNode.getFirstChild(PythonGrammar.ATOM));
@@ -928,7 +928,7 @@ public class PythonTreeMaker {
       while (index < children.size()) {
         AstNode currentChild = children.get(index);
         if (currentChild.is(PythonPunctuator.MUL_MUL)) {
-          dictionaryLiteralElements.add(new StarredExpressionImpl(toPyToken(currentChild.getToken()), expression(children.get(index + 1))));
+          dictionaryLiteralElements.add(new UnpackingExpressionImpl(toPyToken(currentChild.getToken()), expression(children.get(index + 1))));
           index += 3;
         } else {
           dictionaryLiteralElements.add(new KeyValuePairImpl(expression(currentChild), toPyToken(children.get(index + 1).getToken()), expression(children.get(index + 2))));
@@ -1185,7 +1185,7 @@ public class PythonTreeMaker {
       AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST).getFirstChild(PythonGrammar.ATOM).getFirstChild(PythonGrammar.NAME);
       return new RegularArgumentImpl(name(nameNode), toPyToken(assign.getToken()), arg);
     }
-    return star == null ? new RegularArgumentImpl(arg) : new StarredExpressionImpl(star, arg);
+    return star == null ? new RegularArgumentImpl(arg) : new UnpackingExpressionImpl(star, arg);
   }
 
   private Expression binaryExpression(AstNode astNode) {

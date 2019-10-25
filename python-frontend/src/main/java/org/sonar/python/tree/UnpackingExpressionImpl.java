@@ -24,17 +24,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.StarredExpression;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class StarredExpressionImpl extends PyTree implements StarredExpression {
+public class UnpackingExpressionImpl extends PyTree implements UnpackingExpression {
 
   private final Token starToken;
   private final Expression expression;
 
-  public StarredExpressionImpl(Token starToken, Expression expression) {
+  public UnpackingExpressionImpl(Token starToken, Expression expression) {
     this.starToken = starToken;
     this.expression = expression;
   }
@@ -51,7 +51,7 @@ public class StarredExpressionImpl extends PyTree implements StarredExpression {
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitStarredExpression(this);
+    visitor.visitUnpackingExpression(this);
   }
 
   @Override
@@ -61,6 +61,6 @@ public class StarredExpressionImpl extends PyTree implements StarredExpression {
 
   @Override
   public Kind getKind() {
-    return Kind.STARRED_EXPR;
+    return Kind.UNPACKING_EXPR;
   }
 }

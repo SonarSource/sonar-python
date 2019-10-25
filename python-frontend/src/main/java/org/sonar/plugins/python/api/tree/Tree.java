@@ -157,7 +157,7 @@ public interface Tree {
 
     PARENTHESIZED(ParenthesizedExpression.class),
 
-    STARRED_EXPR(StarredExpression.class),
+    UNPACKING_EXPR(UnpackingExpression.class),
 
     AWAIT(AwaitExpression.class),
 

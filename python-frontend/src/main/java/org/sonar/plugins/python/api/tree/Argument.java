@@ -20,7 +20,7 @@
 package org.sonar.plugins.python.api.tree;
 
 /**
- * Common interface for {@link RegularArgument}, {@link StarredExpression}
+ * Common interface for {@link RegularArgument}, {@link UnpackingExpression}
  */
 public interface Argument extends Tree {
 }

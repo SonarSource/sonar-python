@@ -25,9 +25,12 @@ package org.sonar.plugins.python.api.tree;
  * </pre>
  *
  * See https://docs.python.org/3/reference/expressions.html#grammar-token-starred-expression
+ * See https://www.python.org/dev/peps/pep-0448/
  */
-public interface StarredExpression extends Expression, DictionaryLiteralElement, Argument {
-
+public interface UnpackingExpression extends Expression, DictionaryLiteralElement, Argument {
+  /**
+   * Can be either {@code *} or {@code **}
+   */
   Token starToken();
 
   Expression expression();

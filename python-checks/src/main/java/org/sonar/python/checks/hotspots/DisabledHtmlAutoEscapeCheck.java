@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.StarredExpression;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.Expressions;
@@ -74,8 +74,8 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
       List<Argument> arguments = call.arguments();
 
       for (Argument argument : arguments) {
-        if (argument.is(Kind.STARRED_EXPR)) {
-          Expression expression = ((StarredExpression) argument).expression();
+        if (argument.is(Kind.UNPACKING_EXPR)) {
+          Expression expression = ((UnpackingExpression) argument).expression();
           if (expression.is(Kind.NAME)) {
             checkJinjaOptions(ctx, call, (Name) expression);
             return;

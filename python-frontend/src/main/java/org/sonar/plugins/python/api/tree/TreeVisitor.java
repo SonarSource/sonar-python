@@ -121,7 +121,7 @@ public interface TreeVisitor {
 
   void visitStringElement(StringElement stringElement);
 
-  void visitStarredExpression(StarredExpression starredExpression);
+  void visitUnpackingExpression(UnpackingExpression unpackingExpression);
 
   void visitAwaitExpression(AwaitExpression awaitExpression);
 

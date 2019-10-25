@@ -91,7 +91,7 @@ import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
-import org.sonar.plugins.python.api.tree.StarredExpression;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -1430,12 +1430,12 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(name.name()).isEqualTo("foo");
     assertThat(argumentTree.children()).hasSize(1);
 
-    StarredExpression iterableUnpacking = (StarredExpression) parse("*foo", treeMaker::argument);
+    UnpackingExpression iterableUnpacking = (UnpackingExpression) parse("*foo", treeMaker::argument);
     name = (Name) iterableUnpacking.expression();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(iterableUnpacking.children()).hasSize(2);
 
-    StarredExpression dictionaryUnpacking = (StarredExpression) parse("**foo", treeMaker::argument);
+    UnpackingExpression dictionaryUnpacking = (UnpackingExpression) parse("**foo", treeMaker::argument);
     name = (Name) dictionaryUnpacking.expression();
     assertThat(name.name()).isEqualTo("foo");
     assertThat(dictionaryUnpacking.starToken()).isNotNull();
@@ -1538,8 +1538,8 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void starred_expression() {
     setRootRule(PythonGrammar.STAR_EXPR);
-    StarredExpression starred = (StarredExpression) parse("*a", treeMaker::expression);
-    assertThat(starred.getKind()).isEqualTo(Tree.Kind.STARRED_EXPR);
+    UnpackingExpression starred = (UnpackingExpression) parse("*a", treeMaker::expression);
+    assertThat(starred.getKind()).isEqualTo(Tree.Kind.UNPACKING_EXPR);
     assertThat(starred.starToken().value()).isEqualTo("*");
     assertThat(starred.expression().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(starred.children()).hasSize(2);
@@ -2041,7 +2041,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
     tree = (DictionaryLiteral) parse("{** var}", treeMaker::expression);
     assertThat(tree.elements()).hasSize(1);
-    StarredExpression dictUnpacking = (StarredExpression) tree.elements().iterator().next();
+    UnpackingExpression dictUnpacking = (UnpackingExpression) tree.elements().iterator().next();
     assertThat(dictUnpacking.expression().getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(dictUnpacking.starToken().value()).isEqualTo("**");
 
@@ -2089,7 +2089,7 @@ public class PythonTreeMakerTest extends RuleTest {
     tree = (SetLiteral) parse("{ *x }", treeMaker::expression);
     assertThat(tree.elements()).hasSize(1);
     element = tree.elements().iterator().next();
-    assertThat(element.getKind()).isEqualTo(Tree.Kind.STARRED_EXPR);
+    assertThat(element.getKind()).isEqualTo(Tree.Kind.UNPACKING_EXPR);
   }
 
   @Test

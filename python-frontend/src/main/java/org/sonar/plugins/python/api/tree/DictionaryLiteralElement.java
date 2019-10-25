@@ -20,7 +20,7 @@
 package org.sonar.plugins.python.api.tree;
 
 /**
- * It can be either {@link KeyValuePair} or {@link StarredExpression}
+ * It can be either {@link KeyValuePair} or {@link UnpackingExpression}
  */
 public interface DictionaryLiteralElement extends Tree {
 }

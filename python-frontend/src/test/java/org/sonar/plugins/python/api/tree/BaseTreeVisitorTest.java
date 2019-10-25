@@ -244,7 +244,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   @Test
   public void starred_expr() {
     setRootRule(PythonGrammar.STAR_EXPR);
-    StarredExpression tree = (StarredExpression) parse("*a", treeMaker::expression);
+    UnpackingExpression tree = (UnpackingExpression) parse("*a", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     tree.accept(visitor);
     verify(visitor).visitName((Name) tree.expression());

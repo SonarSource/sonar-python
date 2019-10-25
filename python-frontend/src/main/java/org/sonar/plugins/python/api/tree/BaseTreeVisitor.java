@@ -325,8 +325,8 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitStarredExpression(StarredExpression pyStarredExpressionTree) {
-    scan(pyStarredExpressionTree.expression());
+  public void visitUnpackingExpression(UnpackingExpression unpackingExpressionTree) {
+    scan(unpackingExpressionTree.expression());
   }
 
   @Override
