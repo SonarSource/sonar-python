@@ -20,7 +20,7 @@ def string_interpolation():
     value1 = 1
     value2 = 2
     value3 = 3 # Noncompliant
-    value4 = 4 # Noncompliant [[previously FN]]
+    value4 = 4 # Noncompliant
     value5 = 1
     foo(F'{value5} foo')
     value6 = ''

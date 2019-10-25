@@ -39,6 +39,9 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class PythonCheckVerifier {
 
+  private PythonCheckVerifier() {
+  }
+
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
     check.scanFile(context);
     if (check instanceof PythonSubscriptionCheck) {
@@ -50,20 +53,20 @@ public class PythonCheckVerifier {
 
   public static void verify(String path, PythonCheck check) {
     File file = new File(path);
-    new PythonCheckVerifier().createVerifier(file, check).assertOneOrMoreIssues();
+    createVerifier(file, check).assertOneOrMoreIssues();
   }
 
   public static void verifyNoIssue(String path, PythonCheck check) {
     File file = new File(path);
-    new PythonCheckVerifier().createVerifier(file, check).assertNoIssues();
+    createVerifier(file, check).assertNoIssues();
   }
 
-  private SingleFileVerifier createVerifier(File file, PythonCheck check) {
+  private static SingleFileVerifier createVerifier(File file, PythonCheck check) {
     SingleFileVerifier verifier = SingleFileVerifier.create(file.toPath(), UTF_8);
     return getSingleFileVerifier(check, verifier, file);
   }
 
-  private SingleFileVerifier getSingleFileVerifier(PythonCheck check, SingleFileVerifier verifier, File file) {
+  private static SingleFileVerifier getSingleFileVerifier(PythonCheck check, SingleFileVerifier verifier, File file) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     for (PreciseIssue issue : scanFileForIssues(check, context)) {
       if (!issue.check().equals(check)) {
