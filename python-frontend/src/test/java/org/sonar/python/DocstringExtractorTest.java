@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.junit.Test;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -71,7 +71,7 @@ public class DocstringExtractorTest {
     return null;
   }
 
-  private class DocstringVisitor extends PythonCheckTree {
+  private class DocstringVisitor extends PythonVisitorCheck {
 
     @Override
     public void visitFileInput(FileInput fileInput) {

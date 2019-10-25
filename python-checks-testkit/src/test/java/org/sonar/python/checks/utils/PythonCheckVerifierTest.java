@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -41,7 +41,7 @@ public class PythonCheckVerifierTest {
   private static final FuncdefVisitor baseTreeCheck = new FuncdefVisitor();
   private static final FunctiondefSubscription subscriptionCheck = new FunctiondefSubscription();
 
-  private static class FuncdefVisitor extends PythonCheckTree {
+  private static class FuncdefVisitor extends PythonVisitorCheck {
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       addIssue(pyFunctionDefTree.name(), "the message.").secondary(pyFunctionDefTree.colon(), "second").withCost(42);

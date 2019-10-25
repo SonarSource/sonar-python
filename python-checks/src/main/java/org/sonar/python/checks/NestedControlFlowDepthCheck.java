@@ -24,7 +24,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.tree.WhileStatement;
 import org.sonar.plugins.python.api.tree.WithStatement;
 
 @Rule(key = "S134")
-public class NestedControlFlowDepthCheck extends PythonCheckTree {
+public class NestedControlFlowDepthCheck extends PythonVisitorCheck {
 
   private static final int DEFAULT_MAX = 4;
   private static final String MESSAGE = "Refactor this code to not nest more than %s \"if\", \"for\", \"while\", \"try\" and \"with\" statements.";

@@ -23,7 +23,7 @@ import java.io.File;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonCheckTree;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -31,7 +31,7 @@ import org.sonar.plugins.python.api.tree.Name;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonCheckTreeTest {
+public class PythonVisitorCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
   public static final String MESSAGE = "message";
@@ -86,7 +86,7 @@ public class PythonCheckTreeTest {
     assertThat(firstIssue.cost()).isEqualTo(42);
   }
 
-  private static class TestPythonCheck extends PythonCheckTree {
+  private static class TestPythonCheck extends PythonVisitorCheck {
 
   }
 }
