@@ -60,14 +60,14 @@ public final class Tests {
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
-  public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
+  public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)
     // Custom rules plugin
-    .addPlugin(FileLocation.byWildcardMavenFilename(new File("python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
+    .addPlugin(FileLocation.byWildcardMavenFilename(new File("../python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
     .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/pylint.xml"))
