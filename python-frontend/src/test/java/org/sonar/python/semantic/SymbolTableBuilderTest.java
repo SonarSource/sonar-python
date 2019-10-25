@@ -296,6 +296,14 @@ public class SymbolTableBuilderTest {
     assertThat(names.get(0).symbol().usages()).hasSize(2);
   }
 
+  @Test
+  public void interpolated_string() {
+    FunctionDef functionTree = functionTreesByName.get("ref_in_interpolated");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
+    assertThat(symbolByName.get("p1").usages()).hasSize(2);
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {

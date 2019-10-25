@@ -1,6 +1,6 @@
 a = 3
 b = foo()
-
+F"foo{b}"
 def function_with_local():
     a = 11
     a += 1
@@ -28,3 +28,5 @@ class clazz:
 l = lambda z : z*z
 [x+1 for x in a]
 {key:1 for key in a}
+f"answer is \
+{b}"

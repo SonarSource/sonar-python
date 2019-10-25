@@ -101,3 +101,6 @@ def scope_of_comprehension(x):
 
 def comprehension_reusing_name(a):
   {a:1 for a in a.foo}
+
+def ref_in_interpolated(p1):
+  fun(f"fun{p1}")

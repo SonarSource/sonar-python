@@ -182,7 +182,7 @@ public class PythonSensorTest {
     key = "moduleKey:symbolVisitor.py";
     assertThat(context.referencesForSymbolAt(key, 1, 10)).isNull();
     verifyUsages(key, 1, 0, reference(29, 14, 29, 15), reference(30, 18, 30, 19));
-    verifyUsages(key, 2, 0, reference(10, 4, 10, 5));
+    verifyUsages(key, 2, 0, reference(3, 6, 3, 7), reference(10, 4, 10, 5), reference(32, 1, 32, 2));
     verifyUsages(key, 5, 4, reference(6, 4, 6, 5), reference(7, 4, 7, 5),
       reference(8, 8, 8, 9), reference(13, 9, 13, 10));
   }

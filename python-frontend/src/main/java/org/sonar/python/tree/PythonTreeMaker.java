@@ -1284,21 +1284,41 @@ public class PythonTreeMaker {
       .map(node -> new StringElementImpl(toPyToken(node.getToken()))).collect(Collectors.toList());
     stringElements.stream()
       .filter(StringElement::isInterpolated)
-      .forEach(se -> interpolatedExpressions(se.trimmedQuotesValue()).forEach(se::addInterpolatedExpression));
+      .forEach(se -> interpolatedExpressions(se).forEach(se::addInterpolatedExpression));
     List<StringElement> stringElems = new ArrayList<>(stringElements);
     return new StringLiteralImpl(stringElems);
   }
 
-  private List<Expression> interpolatedExpressions(String literalValue) {
+  private List<Expression> interpolatedExpressions(StringElementImpl se) {
+    String literalValue = se.trimmedQuotesValue();
+    Token token = se.firstToken();
+    int startOfLiteral = token.value().indexOf(literalValue);
+    LineOffsetCounter lineOffsetCounter = new LineOffsetCounter(literalValue);
     List<Expression> res = new ArrayList<>();
     parser.setRootRule(parser.getGrammar().rule(PythonGrammar.EXPR));
     // get escaped interpolation
     Matcher matcher = INTERPOLATED_EXPR_PATTERN.matcher(literalValue);
     while (matcher.find()) {
       AstNode parse = parser.parse(matcher.group(2));
-      res.add(expression(parse));
+      Expression exp = expression(parse);
+      int start = matcher.start(2);
+      updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, start);
+      res.add(exp);
     }
     return res;
+  }
+
+  private static void updateTokensLineAndColumn(Token token, int startOfLiteral, LineOffsetCounter lineOffsetCounter, Expression exp, int start) {
+    int line = lineOffsetCounter.findLine(start);
+    int col;
+    if (line == 1) {
+      col = token.column() + startOfLiteral + start;
+    } else {
+      col = lineOffsetCounter.findColumn(line, start);
+    }
+    int newline = (line - 1) + token.line();
+    // update token line and column with offset of string element.
+    TreeUtils.tokens(exp).forEach(t -> ((TokenImpl) t).setLineColumn(newline, col));
   }
 
   private static Token suiteIndent(AstNode suite) {
@@ -1312,4 +1332,6 @@ public class PythonTreeMaker {
   private static Token suiteDedent(AstNode suite) {
     return suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
   }
+
+
 }
