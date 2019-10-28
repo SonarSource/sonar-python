@@ -285,7 +285,9 @@ public class PythonSensorTest {
 
     sensor().execute(context);
     assertThat(context.allIssues()).hasSize(1);
-    assertThat(String.join("\n", logTester.logs())).contains("Parse error at line 2");
+    String log = String.join("\n", logTester.logs());
+    assertThat(log).contains("Parse error at line 2");
+    assertThat(log).doesNotContain("java.lang.NullPointerException");
     assertThat(context.allAnalysisErrors()).hasSize(1);
     AnalysisError analysisError = context.allAnalysisErrors().iterator().next();
     assertThat(analysisError.inputFile().filename()).isEqualTo("parse_error.py");
