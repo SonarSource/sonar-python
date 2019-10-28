@@ -116,8 +116,10 @@ public class PythonScanner {
     SubscriptionVisitor.analyze(checksBasedOnTree, visitorContext);
     saveIssues(inputFile, visitorContext.getIssues());
 
-    new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
-    new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+    if (visitorContext.rootTree() != null) {
+      new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
+      new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+    }
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
