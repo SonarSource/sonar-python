@@ -30,6 +30,8 @@ import org.sonar.python.semantic.Symbol;
  *   {@link #docstring()}
  *   {@link #statements()}
  * </pre>
+ *
+ * See https://docs.python.org/3/reference/toplevel_components.html#file-input
  */
 public interface FileInput extends Tree {
   @CheckForNull
