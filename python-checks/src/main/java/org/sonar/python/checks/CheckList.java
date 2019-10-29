@@ -82,6 +82,7 @@ public final class CheckList {
       HashingDataCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
       InequalityUsageCheck.class,
+      InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
