@@ -49,6 +49,7 @@ public final class CheckList {
   public static Iterable<Class> getChecks() {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
+      AllBranchesAreIdenticalCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BreakContinueOutsideLoopCheck.class,
