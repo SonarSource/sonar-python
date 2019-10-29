@@ -33,10 +33,11 @@ else:
             pass
 
 if True:
+#In this case, S3923 will raise a bug
     if True:
         print(1)
     else:
-        print(1)  # Noncompliant {{Either merge this branch with the identical one on line "37" or change one of the implementations.}}
+        print(1)
 
 if param == 1:
     print(1)
@@ -56,12 +57,13 @@ elif 2:
 else:
     print("1")
 
+#In this case, S3923 will raise a bug
 if 1:
     print("1")
 elif 2:
     print("1")
 else:
-    print("1") # Noncompliant
+    print("1")
 
 if 1:
     print("1")

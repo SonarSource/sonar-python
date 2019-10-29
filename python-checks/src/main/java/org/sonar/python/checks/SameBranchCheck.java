@@ -61,6 +61,11 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
       if (ignoreList.contains(ifStmt)) {
         return;
       }
+      boolean hasElseClause = ifStmt.elseBranch() != null;
+      //In this case, S3923 will raise a bug
+      if (hasElseClause && allIdenticalBranches(ifStmt)) {
+        return;
+      }
       List<StatementList> branches = getIfBranches(ifStmt);
       findSameBranches(branches, ctx);
     });
@@ -74,6 +79,16 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
       addConditionalExpressionBranches(expressions, conditionalExpression);
       findSameBranches(expressions, ctx);
     });
+  }
+
+  private static boolean allIdenticalBranches(IfStatement ifStmt) {
+    StatementList body = ifStmt.body();
+    for (IfStatement elifBranch : ifStmt.elifBranches()) {
+      if (!CheckUtils.areEquivalent(body, elifBranch.body())) {
+        return false;
+      }
+    }
+    return CheckUtils.areEquivalent(body, ifStmt.elseBranch().body());
   }
 
   private static void findSameBranches(List<? extends Tree> branches, SubscriptionContext ctx) {
