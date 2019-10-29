@@ -90,6 +90,7 @@ public final class CheckList {
       MissingNewlineAtEndOfFileCheck.class,
       ModuleNameCheck.class,
       NeedlessPassCheck.class,
+      NestedConditionalExpressionCheck.class,
       NestedControlFlowDepthCheck.class,
       NewStyleClassCheck.class,
       NoPersonReferenceInTodoCheck.class,
