@@ -27,6 +27,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -230,13 +232,13 @@ public class ControlFlowGraphBuilder {
     return block;
   }
 
-  private PythonCfgBlock buildLoop(Tree branchingTree, Tree conditionElement, StatementList body, @Nullable ElseClause elseClause, PythonCfgBlock successor) {
+  private PythonCfgBlock buildLoop(Tree branchingTree, List<Tree> conditionElements, StatementList body, @Nullable ElseClause elseClause, PythonCfgBlock successor) {
     PythonCfgBlock afterLoopBlock = successor;
     if (elseClause != null) {
       afterLoopBlock = build(elseClause.body().statements(), createSimpleBlock(successor));
     }
     PythonCfgBranchingBlock conditionBlock = createBranchingBlock(branchingTree, afterLoopBlock);
-    conditionBlock.addElement(conditionElement);
+    conditionElements.forEach(conditionBlock::addElement);
     loops.push(new Loop(successor, conditionBlock));
     PythonCfgBlock loopBodyBlock = build(body.statements(), createSimpleBlock(conditionBlock));
     loops.pop();
@@ -245,13 +247,14 @@ public class ControlFlowGraphBuilder {
   }
 
   private PythonCfgBlock buildForStatement(ForStatement forStatement, PythonCfgBlock successor) {
-    PythonCfgBlock beforeForStmt = buildLoop(forStatement, forStatement, forStatement.body(), forStatement.elseClause(), successor);
+    List<Tree> conditionElements = Stream.concat(forStatement.testExpressions().stream(), forStatement.expressions().stream()).collect(Collectors.toList());
+    PythonCfgBlock beforeForStmt = buildLoop(forStatement, conditionElements, forStatement.body(), forStatement.elseClause(), successor);
     forStatement.testExpressions().forEach(beforeForStmt::addElement);
     return beforeForStmt;
   }
 
   private PythonCfgBlock buildWhileStatement(WhileStatement whileStatement, PythonCfgBlock currentBlock) {
-    return buildLoop(whileStatement, whileStatement.condition(), whileStatement.body(), whileStatement.elseClause(), currentBlock);
+    return buildLoop(whileStatement, Collections.singletonList(whileStatement.condition()), whileStatement.body(), whileStatement.elseClause(), currentBlock);
   }
 
   /**

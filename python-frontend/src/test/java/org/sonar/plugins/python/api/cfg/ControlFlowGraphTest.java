@@ -269,7 +269,7 @@ public class ControlFlowGraphTest {
   public void for_statement() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
-      "for cond_block(succ = [for_body, END], elem = 1) in collection:",
+      "for cond_block(succ = [for_body, END], elem = 2) in collection:",
       "  for_body(succ = [cond_block], elem = 1)"
     );
   }
@@ -278,7 +278,7 @@ public class ControlFlowGraphTest {
   public void for_statement_else() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
-      "for cond_block(succ = [for_body, else_body], elem = 1) in collection:",
+      "for cond_block(succ = [for_body, else_body], elem = 2) in collection:",
       "  for_body(succ = [cond_block], elem = 1)",
       "else:",
       "  else_body(succ = [END], elem = 1)"
@@ -302,7 +302,7 @@ public class ControlFlowGraphTest {
   public void continue_statement_in_for() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
-      "for cond_block(succ = [for_body, END], elem = 1) in collection:",
+      "for cond_block(succ = [for_body, END], elem = 2) in collection:",
       "  for_body(succ = [cond_block], elem = 2, syntSucc = after_continue)",
       "  continue",
       "  after_continue(succ = [cond_block], elem = 1)"
