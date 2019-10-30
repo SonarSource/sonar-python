@@ -1,0 +1,37 @@
+<p>When two functions or methods have the same implementation, either it was a mistake - something else was intended - or the duplication was
+intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other. Numerical and string literals are
+not taken into account. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass:
+    code = "bounteous"
+
+    def calculate_code(self):
+        self.do_the_thing()
+        return self.__class__.code
+
+    def get_name(self):  # Noncompliant
+        self.do_the_thing()
+        return self.__class__.code
+
+    def do_the_thing(self):
+        pass  # on purpose
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass:
+    code = "bounteous"
+
+    def calculate_code(self):
+        self.do_the_thing()
+        return self.__class__.code
+
+    def get_name(self):
+        return self.calculate_code()
+
+    def do_the_thing(self):
+        pass  # on purpose
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised on empty methods/functions and methods/functions with only one line of code.</p>
+
