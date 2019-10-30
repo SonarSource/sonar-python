@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,7 +36,6 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Argument;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.PythonCfgEndBlock;
 
@@ -115,6 +116,22 @@ public class ExpectedCfgStructure {
     return getExpectation(block).expectedPredecessorIds;
   }
 
+  Set<String> expectedLiveInVariables(CfgBlock block) {
+    return getExpectation(block).expectedLiveInVariables;
+  }
+
+  Set<String> expectedLiveOutVariables(CfgBlock block) {
+    return getExpectation(block).expectedLiveOutVariables;
+  }
+
+  Set<String> expectedGenVariables(CfgBlock block) {
+    return getExpectation(block).expectedGenVariables;
+  }
+
+  Set<String> expectedKilledVariables(CfgBlock block) {
+    return getExpectation(block).expectedKilledVariables;
+  }
+
   int expectedNumberOfElements(CfgBlock block) {
     return getExpectation(block).expectedNumberOfElements;
   }
@@ -141,6 +158,11 @@ public class ExpectedCfgStructure {
     private String expectedSyntacticSuccessor = null;
     final List<String> expectedPredecessorIds = new ArrayList<>();
     private int expectedNumberOfElements = -1;
+    private final Set<String> expectedLiveInVariables = new HashSet<>();
+    private final Set<String> expectedLiveOutVariables = new HashSet<>();
+    private final Set<String> expectedGenVariables = new HashSet<>();
+    private final Set<String> expectedKilledVariables = new HashSet<>();
+
 
     BlockExpectation withSuccessorsIds(String... ids) {
       Collections.addAll(expectedSuccessorIds, ids);
@@ -159,6 +181,26 @@ public class ExpectedCfgStructure {
 
     BlockExpectation withSyntacticSuccessor(@Nullable String syntacticSuccessor) {
       expectedSyntacticSuccessor = syntacticSuccessor;
+      return this;
+    }
+
+    BlockExpectation withLiveInVariables(String... ids) {
+      Collections.addAll(expectedLiveInVariables, ids);
+      return this;
+    }
+
+    BlockExpectation withLiveOutVariables(String... ids) {
+      Collections.addAll(expectedLiveOutVariables, ids);
+      return this;
+    }
+
+    BlockExpectation withGenVariables(String... ids) {
+      Collections.addAll(expectedGenVariables, ids);
+      return this;
+    }
+
+    BlockExpectation withKilledVariables(String... ids) {
+      Collections.addAll(expectedKilledVariables, ids);
       return this;
     }
 
@@ -223,6 +265,14 @@ public class ExpectedCfgStructure {
               expectation.withElementNumber(Integer.parseInt(getValue(expression)));
             } else if (isNameWithValue(name, "syntSucc")) {
               expectation.withSyntacticSuccessor(getValue(expression));
+            } else if (isNameWithValue(name, "gen")) {
+              expectation.withGenVariables(getVariableStrings(expression));
+            } else if (isNameWithValue(name, "kill")) {
+              expectation.withKilledVariables(getVariableStrings(expression));
+            } else if (isNameWithValue(name, "liveIn")) {
+              expectation.withLiveInVariables(getVariableStrings(expression));
+            } else if (isNameWithValue(name, "liveOut")) {
+              expectation.withLiveOutVariables(getVariableStrings(expression));
             }
           }
         }
@@ -270,6 +320,10 @@ public class ExpectedCfgStructure {
 
     private static String[] names(Tree tree) {
       return getStringList(tree).toArray(new String[] {});
+    }
+
+    private static String[] getVariableStrings(Tree tree) {
+      return getStringList(tree).stream().map(s -> s.substring(1)).collect(Collectors.toList()).toArray(new String[] {});
     }
 
     private static List<String> getStringList(Tree tree) {
