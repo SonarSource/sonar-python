@@ -33,3 +33,6 @@ class MyClass:
 
 class MyClass2:
   myClass2: int = 3      # Noncompliant {{Rename field "myClass2"}}
+
+class MyClass3:
+  def myClass3(self): pass # OK

@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S1700")
 public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {
@@ -44,6 +45,7 @@ public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {
       allFields.addAll(classDef.instanceFields());
       allFields.stream()
         .filter(symbol -> className.equalsIgnoreCase(symbol.name()))
+        .filter(symbol -> symbol.usages().stream().noneMatch(usage -> usage.kind() == Usage.Kind.FUNC_DECLARATION))
         .forEach(symbol -> symbol.usages()
           .stream()
           .findFirst()

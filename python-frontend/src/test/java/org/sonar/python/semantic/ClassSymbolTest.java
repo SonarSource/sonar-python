@@ -37,11 +37,14 @@ public class ClassSymbolTest {
       "  pass");
     assertThat(empty.classFields()).isEmpty();
     assertThat(empty.instanceFields()).isEmpty();
+  }
 
+  @Test
+  public void only_methods() {
     ClassDef empty2 = parseClass(
       "class C:",
       "  def f(): pass");
-    assertThat(empty2.classFields()).isEmpty();
+    assertThat(empty2.classFields()).extracting(Symbol::name).containsExactly("f");
     assertThat(empty2.instanceFields()).isEmpty();
   }
 
@@ -67,7 +70,7 @@ public class ClassSymbolTest {
       "  def g(self):",
       "    self.a = 3",
       "    self.c = 4");
-    assertThat(c1.classFields()).isEmpty();
+    assertThat(c1.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f", "g");
     assertThat(c1.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "c");
 
     ClassDef c2 = parseClass(
@@ -76,7 +79,7 @@ public class ClassSymbolTest {
       "     print(self.a)",
       "  def g(self):",
       "     self.a = 1");
-    assertThat(c2.classFields()).isEmpty();
+    assertThat(c2.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f", "g");
     assertThat(c2.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a");
     Symbol field = c2.instanceFields().iterator().next();
     assertThat(field.usages())
@@ -84,6 +87,17 @@ public class ClassSymbolTest {
       .containsExactlyInAnyOrder(
         tuple(Usage.Kind.OTHER, 3),
         tuple(Usage.Kind.ASSIGNMENT_LHS, 5));
+  }
+
+  @Test
+  public void same_name() {
+    ClassDef c = parseClass(
+      "class C: ",
+      "  f1 = 1",
+      "  def fn():",
+      "    self.f1 = 2");
+    assertThat(c.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f1", "fn");
+    assertThat(c.instanceFields()).isEmpty();
   }
 
   private ClassDef parseClass(String... lines) {

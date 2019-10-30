@@ -104,3 +104,7 @@ def comprehension_reusing_name(a):
 
 def ref_in_interpolated(p1):
   fun(f"fun{p1}")
+
+def fn_inside_comprehension_same_name():
+    def fn():
+        return [fn() for fn in [lambda: 1, lambda: 2]]

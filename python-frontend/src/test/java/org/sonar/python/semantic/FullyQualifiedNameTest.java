@@ -118,9 +118,7 @@ public class FullyQualifiedNameTest {
       "def fn(): pass",
       "fn('foo')"
     );
-    // TODO: create a symbol for function declaration
-    CallExpression callExpression = getCallExpression(tree);
-    assertThat(callExpression.calleeSymbol()).isNull();
+    assertNameAndQualifiedName(tree, "fn", null);
   }
 
   @Test

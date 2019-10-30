@@ -38,6 +38,7 @@ public interface Usage {
     LOOP_DECLARATION,
     COMP_DECLARATION,
     OTHER,
-    PARAMETER
+    PARAMETER,
+    FUNC_DECLARATION
   }
 }
