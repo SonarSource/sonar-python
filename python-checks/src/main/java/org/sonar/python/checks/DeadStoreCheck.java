@@ -1,0 +1,88 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2019 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.checks;
+
+import java.util.HashSet;
+import java.util.ListIterator;
+import java.util.Set;
+import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.cfg.LiveVariablesAnalysis;
+import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.Usage;
+import org.sonar.python.tree.TreeUtils;
+
+@Rule(key = "S1854")
+public class DeadStoreCheck extends PythonSubscriptionCheck {
+
+  private static final String MESSAGE_TEMPLATE = "Remove this useless assignment to local variable '%s'.";
+
+  @Override
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+      if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
+        return;
+      }
+      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
+      if (cfg == null) {
+        return;
+      }
+      LiveVariablesAnalysis lva = LiveVariablesAnalysis.analyze(cfg);
+      cfg.blocks().forEach(block -> verifyBlock(ctx, block, lva.getLiveVariables(block), lva.getReadSymbols(), functionDef.localVariables()));
+    });
+  }
+
+  /**
+   * Bottom-up approach, keeping track of which variables will be read by successor elements.
+   */
+  private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
+                                  Set<Symbol> readSymbols, Set<Symbol> localVars) {
+
+    Set<Symbol> willBeRead = new HashSet<>(blockLiveVariables.getOut());
+    ListIterator<Tree> elementsReverseIterator = block.elements().listIterator(block.elements().size());
+    while (elementsReverseIterator.hasPrevious()) {
+      Tree element = elementsReverseIterator.previous();
+      blockLiveVariables.getVariableUsages(element).forEach((symbol, usage) -> {
+        if (!readSymbols.contains(symbol)) {
+          // will be reported by S1481
+          return;
+        }
+        if (usage.isWrite() && !usage.isRead()) {
+          if (!willBeRead.contains(symbol) && localVars.contains(symbol) && !isFunctionDeclarationSymbol(symbol)) {
+            ctx.addIssue(element, String.format(MESSAGE_TEMPLATE, symbol.name()));
+          }
+          willBeRead.remove(symbol);
+        } else if (usage.isRead()) {
+          willBeRead.add(symbol);
+        }
+      });
+    }
+  }
+
+  private static boolean isFunctionDeclarationSymbol(Symbol symbol) {
+    return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
+  }
+}
