@@ -66,6 +66,7 @@ public final class CheckList {
       DebugModeCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
+      DuplicatedMethodImplementationCheck.class,
       DynamicCodeExecutionCheck.class,
       EmptyNestedBlockCheck.class,
       ExecStatementUsageCheck.class,
