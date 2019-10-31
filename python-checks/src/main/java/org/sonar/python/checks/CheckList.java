@@ -112,6 +112,7 @@ public final class CheckList {
       SelfAssignmentCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
+      StringLiteralDuplicationCheck.class,
       StrongCryptographicKeysCheck.class,
       TempFileCreationCheck.class,
       TooManyLinesInFileCheck.class,
