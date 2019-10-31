@@ -61,7 +61,11 @@ public interface ClassDef extends Statement {
   @CheckForNull
   StringLiteral docstring();
 
+  /**
+   * Contains fields and methods symbols
+   */
   Set<Symbol> classFields();
 
   Set<Symbol> instanceFields();
+
 }

@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S1845")
 public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
@@ -50,6 +51,7 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
       MethodVisitor methodVisitor = new MethodVisitor();
       classDef.body().accept(methodVisitor);
       List<Tree> fieldNames = allFields.stream()
+        .filter(s -> s.usages().stream().anyMatch(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION))
         .map(s -> s.usages().stream().findFirst())
         .filter(Optional::isPresent)
         .map(usage -> usage.get().tree())

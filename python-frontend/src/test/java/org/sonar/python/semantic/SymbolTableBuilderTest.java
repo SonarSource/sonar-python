@@ -64,8 +64,13 @@ public class SymbolTableBuilderTest {
   @Test
   public void global_variable() {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
-    assertThat(moduleSymbols.size()).isEqualTo(2);
-    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("global_x", "global_var");
+    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder(
+      "global_x", "global_var", "function_with_local", "function_with_free_variable", "function_with_rebound_variable",
+      "ref_in_interpolated", "print_var", "function_with_global_var", "func_wrapping_class", "function_with_unused_import",
+      "function_with_nonlocal_var", "symbols_in_comp", "scope_of_comprehension", "for_comp_with_no_name_var",
+      "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
+      "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
+      "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name");
     moduleSymbols.stream().filter(s -> s.name().equals("global_var")).findFirst().ifPresent(s -> {
       assertThat(s.usages()).hasSize(3);
     });
@@ -154,7 +159,7 @@ public class SymbolTableBuilderTest {
   public void function_with_nested_nonlocal_var() {
     FunctionDef functionTree = functionTreesByName.get("function_with_nested_nonlocal_var");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
-    assertThat(symbolByName.keySet()).containsExactly("x");
+    assertThat(symbolByName.keySet()).containsExactly("x", "innerFn");
     Symbol x = symbolByName.get("x");
     int functionStartLine = functionTree.firstToken().line();
     assertThat(x.usages()).extracting(usage -> usage.tree().firstToken().line()).containsOnly(functionStartLine + 1, functionStartLine + 3, functionStartLine + 4);
@@ -220,7 +225,7 @@ public class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("var_with_usages_in_decorator");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x");
+    assertThat(symbolByName.keySet()).containsOnly("x", "foo");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
   }
@@ -302,6 +307,14 @@ public class SymbolTableBuilderTest {
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
     assertThat(symbolByName.get("p1").usages()).hasSize(2);
+  }
+
+  @Test
+  public void fn_inside_comprehension_same_name() {
+    FunctionDef functionTree = functionTreesByName.get("fn_inside_comprehension_same_name");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
+    assertThat(symbolByName.get("fn").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.FUNC_DECLARATION);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

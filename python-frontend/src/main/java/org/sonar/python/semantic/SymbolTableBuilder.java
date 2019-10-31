@@ -159,6 +159,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+      addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION);
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree);

@@ -27,7 +27,7 @@ def python_3_builtin():
 def python_2_builtin():
     raw_input('What is your password?') # Noncompliant
 
-def fileinput():
+def from_fileinput():
     fileinput.input() # Noncompliant
     fileinput.FileInput() # Noncompliant
 
