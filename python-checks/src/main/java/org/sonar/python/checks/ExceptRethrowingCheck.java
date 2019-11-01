@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -26,6 +27,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TryStatement;
 
 @Rule(key = "S2737")
 public class ExceptRethrowingCheck extends PythonSubscriptionCheck {
@@ -34,8 +36,13 @@ public class ExceptRethrowingCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ctx -> {
-      ExceptClause exceptClause = (ExceptClause) ctx.syntaxNode();
+    context.registerSyntaxNodeConsumer(Tree.Kind.TRY_STMT, ctx -> {
+      TryStatement tryStatement = (TryStatement) ctx.syntaxNode();
+      List<ExceptClause> exceptClauses = tryStatement.exceptClauses();
+      if (exceptClauses.isEmpty()) {
+        return;
+      }
+      ExceptClause exceptClause = exceptClauses.get(exceptClauses.size() - 1);
       if (!exceptClause.body().statements().get(0).is(Tree.Kind.RAISE_STMT)) {
         return;
       }
@@ -44,7 +51,6 @@ public class ExceptRethrowingCheck extends PythonSubscriptionCheck {
         ctx.addIssue(raiseStatement, MESSAGE);
         return;
       }
-
       if (exceptClause.exceptionInstance() != null) {
         Expression exceptionInstance = exceptClause.exceptionInstance();
         if (raiseStatement.expressions().size() == 1 && CheckUtils.areEquivalent(removeParentheses(exceptionInstance), removeParentheses(raiseStatement.expressions().get(0)))) {
