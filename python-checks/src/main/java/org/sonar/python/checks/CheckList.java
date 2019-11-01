@@ -121,6 +121,7 @@ public final class CheckList {
       TooManyReturnsCheck.class,
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
+      UndeclaredNameUsageCheck.class,
       UnusedLocalVariableCheck.class,
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,

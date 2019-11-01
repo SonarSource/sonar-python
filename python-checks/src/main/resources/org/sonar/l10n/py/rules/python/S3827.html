@@ -1,0 +1,40 @@
+<p>Variables, Classes and functions should be defined before they are used, otherwise the code will fail.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+unknown_var  # Noncompliant (variable is never defined)
+
+foo()  # Noncompliant
+foo = sum
+
+func()  # Noncompliant
+def func():
+    pass
+
+MyClass()  # Noncompliant
+class MyClass:
+    pass
+
+myglobal = 42
+def use_global():
+    print(myglobal)  # Noncompliant
+    global myglobal
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+foo = sum
+foo()
+
+def func():
+    pass
+func()
+
+class MyClass:
+    pass
+MyClass()
+
+myglobal = 42
+def use_global():
+    global myglobal
+    print(myglobal)
+</pre>
+
