@@ -147,7 +147,7 @@ public class LiveVariablesAnalysisTest {
       "condition( succ = [body, END], liveIn = [], liveOut = [], gen = [], kill = [_a])",
       "a = 1",
       "foo(a)",
-      "if True:",
+      "if p:",
       "  body( succ = [END], liveIn = [], liveOut = [], gen = [], kill = [_a]);",
       "  a = 1",
       "  foo(a)");
@@ -164,7 +164,7 @@ public class LiveVariablesAnalysisTest {
       "    a = 1",
       "    foo(a)",
       "after_loop(succ = [END], liveIn = [_a], liveOut = [], gen = [_a], kill = [])",
-      "print(a)");
+      "foo(a)");
   }
 
   @Test
@@ -178,7 +178,7 @@ public class LiveVariablesAnalysisTest {
       "    a = 1",
       "    foo(a)",
       "after_loop(succ = [END], liveIn = [_a], liveOut = [], gen = [_a], kill = [])",
-      "print(a)");
+      "foo(a)");
   }
 
   @Test

@@ -51,7 +51,11 @@ def function_with_lambdas():
 
 def function_with_loops():
     for (x, y) in [1,2,3]:
-        pass;
+        pass
+
+    for [x1, y1] in [1,2,3]:
+        pass
+
 
 def function_with_comprehension():
     [2 for a in range(3)]
@@ -108,3 +112,41 @@ def ref_in_interpolated(p1):
 def fn_inside_comprehension_same_name():
     def fn():
         return [fn() for fn in [lambda: 1, lambda: 2]]
+
+def exception_instance():
+    try:
+        pass
+    except Exception as e1:
+        pass
+
+    try:
+        pass
+    except Exception as (e2,e3):
+        pass
+
+    try:
+        pass
+    except Exception as [e4,e5]:
+        pass
+
+    try:
+        pass
+    except Exception as (e6):
+        pass
+
+def with_instance():
+    with open() as file1:
+        pass
+
+    with open() as (file2, file3):
+        pass
+
+def unpacking():
+    *foo = f()
+
+def using_builtin_symbol():
+    print(42)
+
+def keyword_usage():
+    x = 42
+    f(x = 43) # keyword x is not the same symbol of x defined as local var

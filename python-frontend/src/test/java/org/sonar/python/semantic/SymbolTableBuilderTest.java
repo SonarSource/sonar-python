@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import com.google.common.base.Functions;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
@@ -64,13 +66,18 @@ public class SymbolTableBuilderTest {
   @Test
   public void global_variable() {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
-    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder(
-      "global_x", "global_var", "function_with_local", "function_with_free_variable", "function_with_rebound_variable",
+    List<String> topLevelFunctions = Arrays.asList("global_x", "global_var", "function_with_local", "function_with_free_variable", "function_with_rebound_variable",
       "ref_in_interpolated", "print_var", "function_with_global_var", "func_wrapping_class", "function_with_unused_import",
       "function_with_nonlocal_var", "symbols_in_comp", "scope_of_comprehension", "for_comp_with_no_name_var",
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
-      "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name");
+      "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
+      "using_builtin_symbol", "keyword_usage");
+
+    List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
+    globalSymbols.add("a"); // top level class
+
+    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder(globalSymbols.toArray(new String[] {}));
     moduleSymbols.stream().filter(s -> s.name().equals("global_var")).findFirst().ifPresent(s -> {
       assertThat(s.usages()).hasSize(3);
     });
@@ -196,11 +203,15 @@ public class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("function_with_loops");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x", "y");
+    assertThat(symbolByName.keySet()).containsOnly("x", "y", "x1", "y1");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
     Symbol y = symbolByName.get("y");
     assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
+    Symbol x1 = symbolByName.get("x1");
+    assertThat(x1.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
+    Symbol y1 = symbolByName.get("y1");
+    assertThat(y1.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.LOOP_DECLARATION);
   }
 
   @Test
@@ -217,7 +228,7 @@ public class SymbolTableBuilderTest {
   @Test
   public void func_wrapping_class() {
     FunctionDef functionTree = functionTreesByName.get("func_wrapping_class");
-    assertThat(functionTree.localVariables()).isEmpty();
+    assertThat(functionTree.localVariables()).extracting(Symbol::name).containsExactly("A");
   }
 
   @Test
@@ -285,9 +296,9 @@ public class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("scope_of_comprehension");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).containsOnlyKeys("x");
-    assertThat(symbolByName.get("x").usages()).extracting(u -> u.tree().firstToken().line()).containsExactly(98, 100).doesNotContain(99);
+    assertThat(symbolByName.get("x").usages()).extracting(u -> u.tree().firstToken().line()).containsExactly(102, 104).doesNotContain(103);
     Name name = (Name) ((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0)).comprehensionFor().loopExpression();
-    assertThat(name.symbol().usages()).extracting(u -> u.tree().firstToken().line()).doesNotContain(98, 100).containsExactly(99, 99);
+    assertThat(name.symbol().usages()).extracting(u -> u.tree().firstToken().line()).doesNotContain(102, 104).containsExactly(103, 103);
   }
 
   @Test
@@ -315,6 +326,50 @@ public class SymbolTableBuilderTest {
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
     assertThat(symbolByName.get("fn").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.FUNC_DECLARATION);
+  }
+
+  @Test
+  public void exception_instance() {
+    FunctionDef functionTree = functionTreesByName.get("exception_instance");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(6);
+    assertThat(symbolByName.get("e1").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.EXCEPTION_INSTANCE);
+  }
+
+  @Test
+  public void with_instance() {
+    FunctionDef functionTree = functionTreesByName.get("with_instance");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(3);
+    assertThat(symbolByName.get("file1").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.WITH_INSTANCE);
+  }
+
+  @Test
+  public void unpacking() {
+    FunctionDef functionTree = functionTreesByName.get("unpacking");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
+    assertThat(symbolByName.get("foo").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS);
+  }
+
+  @Test
+  public void using_builtin_symbol() {
+    FunctionDef functionTree = functionTreesByName.get("using_builtin_symbol");
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0);
+    Name print = (Name) callExpression.callee();
+    assertThat(print.symbol()).isNotNull();
+    assertThat(print.symbol().name()).isEqualTo("print");
+    assertThat(print.symbol().usages()).extracting(Usage::kind).containsExactly(Usage.Kind.OTHER);
+    assertThat(print.symbol().fullyQualifiedName()).isEqualTo("print");
+  }
+
+  @Test
+  public void keyword_usage() {
+    FunctionDef functionTree = functionTreesByName.get("keyword_usage");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(1);
+    Symbol x = symbolByName.get("x");
+    assertThat(x.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

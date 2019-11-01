@@ -82,6 +82,10 @@ public class SymbolVisitor extends BaseTreeVisitor {
   }
 
   private void handleSymbol(Symbol symbol) {
+    if (symbol.usages().isEmpty()) {
+      // global symbols might not have any usages
+      return;
+    }
     List<Usage> usages = new ArrayList<>(symbol.usages());
     usages.sort(Comparator.comparingInt(u -> u.tree().firstToken().line()));
     Tree firstUsageTree = usages.get(0).tree();
