@@ -248,11 +248,11 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
 
     @CheckForNull
     private static String findParentClassName(FunctionDef functionDef) {
-      Tree grandParent = functionDef.parent().parent();
-      if (grandParent.is(Tree.Kind.CLASSDEF)) {
+      ClassDef parentClass = CheckUtils.getParentClassDef(functionDef);
+      if (parentClass != null) {
         // classes symbols can not only be compared by their string names with the current semantic
         // and to prevent false-position, we ignore then a local variable with the same name exists
-        String className = ((ClassDef) grandParent).name().name();
+        String className = parentClass.name().name();
         boolean conflictsWithLocalVariable = functionDef.localVariables().stream().map(Symbol::name).anyMatch(className::equals);
         if (!conflictsWithLocalVariable) {
           return className;

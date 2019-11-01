@@ -198,6 +198,21 @@ class A:
             self.func17 = x
         self.func17()
 
+    if True:
+        def func18():
+            func18()
+
+        def func19(self): # Noncompliant
+            self.func19()
+
+        @staticmethod
+        def func20():
+            func20()
+
+        @staticmethod
+        def func21(): # Noncompliant
+            A.func21()
+
 # coverage
 
 def func100():

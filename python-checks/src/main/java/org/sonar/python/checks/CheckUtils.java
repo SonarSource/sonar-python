@@ -65,10 +65,13 @@ public class CheckUtils {
       leftLeaf.firstToken().value().equals(rightLeaf.firstToken().value());
   }
 
-  public static ClassDef getParentClassDef(Tree current) {
+  public static ClassDef getParentClassDef(Tree tree) {
+    Tree current = tree.parent();
     while (current != null) {
       if (current.is(Tree.Kind.CLASSDEF)) {
         return (ClassDef) current;
+      } else if (current.is(Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA)) {
+        return null;
       }
       current = current.parent();
     }
