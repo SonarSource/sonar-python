@@ -20,41 +20,57 @@ print("aa\\aa") # compliant
 print("aa\\aa")
 print(r"aa\\aa")
 
-name = "Alice"
-print(f"hello {name}")
-print(f"hello {name}")
-name = "Bob"
-print(f"hello {name}")
+def literals_with_multiple_elements():
+    print("First element of a string literal." # Noncompliant [[el=+1]]
+          "Second element of a string literal.")
+    print("First element of a string literal."
+          "Second element of a string literal.")
+    print("First element of a string literal."
+          "Second element of a string literal.")
+    print("First element"
+          "Second element 1")
+    print("First element"
+          "Second element 1")
+    print("First element"
+          "Second element 2")
 
-from flask import Flask
-app = Flask(__name__)
+def fstrings_should_be_excluded():
+    name = "Alice"
+    print(f"hello {name}")
+    print(f"hello {name}")
+    name = "Bob"
+    print(f"hello {name}")
 
-@app.route("/api/users/", methods=['GET'])
-def users_get():
-    pass
+def decorators_should_be_excluded():
+    from flask import Flask
+    app = Flask(__name__)
 
-@app.route("/api/users/", methods=['PUT'])
-def users_put():
-    pass
+    @app.route("/api/users/", methods=['GET'])
+    def users_get():
+        pass
 
-@app.route("/api/users/", methods=['POST'])
-def users_post():
-    pass
+    @app.route("/api/users/", methods=['PUT'])
+    def users_put():
+        pass
 
+    @app.route("/api/users/", methods=['POST'])
+    def users_post():
+        pass
 
-options = { 'suppress': False }
-if options['suppress']:
-    print(options['suppress'])
+def literals_with_only_letters_and_digits_should_be_excluded():
+    options = { 'suppress': False }
+    if options['suppress']:
+        print(options['suppress'])
 
+def docstrings_should_be_excluded():
+    def duplicated_docstring_1():
+        """This is a duplicated docstring"""
+        pass
 
-def duplicated_docstring_1():
-    """This is a duplicated docstring"""
-    pass
+    def duplicated_docstring_2():
+        """This is a duplicated docstring"""
+        pass
 
-def duplicated_docstring_2():
-    """This is a duplicated docstring"""
-    pass
-
-def duplicated_docstring_3():
-    """This is a duplicated docstring"""
-    pass
+    def duplicated_docstring_3():
+        """This is a duplicated docstring"""
+        pass

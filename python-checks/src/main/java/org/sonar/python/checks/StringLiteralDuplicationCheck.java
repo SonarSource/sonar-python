@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
@@ -31,7 +32,10 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1192")
 public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
@@ -46,7 +50,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
     defaultValue = "" + DEFAULT_THRESHOLD)
   public int threshold = DEFAULT_THRESHOLD;
 
-  private Map<String, List<StringElement>> literalsByValue = new HashMap<>();
+  private Map<String, List<StringLiteral>> literalsByValue = new HashMap<>();
 
   @Override
   public void visitFileInput(FileInput fileInput) {
@@ -54,11 +58,11 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
 
     super.visitFileInput(fileInput);
 
-    for (Map.Entry<String, List<StringElement>> entry : literalsByValue.entrySet()) {
-      List<StringElement> occurrences = entry.getValue();
+    for (Map.Entry<String, List<StringLiteral>> entry : literalsByValue.entrySet()) {
+      List<StringLiteral> occurrences = entry.getValue();
       int nbOfOccurrences = occurrences.size();
       if (nbOfOccurrences >= threshold) {
-        StringElement first = occurrences.get(0);
+        StringLiteral first = occurrences.get(0);
         String message = String.format(
           "Define a constant instead of duplicating this literal %s %s times.",
           first.firstToken().value(),
@@ -80,10 +84,12 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   }
 
   @Override
-  public void visitStringElement(StringElement literal) {
+  public void visitStringLiteral(StringLiteral literal) {
     String value = literal.trimmedQuotesValue();
-    if (value.length() >= MINIMUM_LITERAL_LENGTH && !literal.isInterpolated() && !EXCLUSION_PATTERN.matcher(value).matches()) {
-      literalsByValue.computeIfAbsent(literal.firstToken().value(), key -> new ArrayList<>()).add(literal);
+    boolean hasInterpolation = literal.stringElements().stream().anyMatch(StringElement::isInterpolated);
+    if (value.length() >= MINIMUM_LITERAL_LENGTH && !hasInterpolation && !EXCLUSION_PATTERN.matcher(value).matches()) {
+      String valueWithQuotes = TreeUtils.tokens(literal).stream().map(Token::value).collect(Collectors.joining());
+      literalsByValue.computeIfAbsent(valueWithQuotes, key -> new ArrayList<>()).add(literal);
     }
   }
 
