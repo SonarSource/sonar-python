@@ -1,0 +1,20 @@
+<p>It is highly suspicious when a value is saved in a collection for a given key or index and then unconditionally overwritten. Such replacements are
+likely errors.</p>
+<p>This rule raises an issue when the <a href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__"><code>__setitem__</code></a>
+method of the same object is called multiple times with the same index, slice or key without any other action done between the calls.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def swap(mylist, index1, index2):
+    tmp = mylist[index2]
+    mylist[index2] = mylist[index1]
+    mylist[index2] = tmp  # Noncompliant
+
+list2 = [0,1,2,3,4,5,6,7,8,9]
+list2[3:5] = [42,42]
+list2[3:5] = [42,42]  # Noncompliant
+
+mymap = {'a': {}}
+mymap['a']['b'] = 42
+mymap['a']['b'] = 42  # Noncompliant
+</pre>
+
