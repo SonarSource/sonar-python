@@ -16,6 +16,9 @@ def using_locals(a, b):
   # "locals" will include the "c" value
   return locals()
 
+def unused_class():
+    class A: pass # OK
+
 def string_interpolation():
     value1 = 1
     value2 = 2
