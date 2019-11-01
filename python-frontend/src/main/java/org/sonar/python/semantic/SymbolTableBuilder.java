@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
+import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -54,15 +55,19 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
@@ -97,7 +102,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         scope.symbols.forEach(classDef::addClassField);
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
       } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
-        scope.symbols.forEach(((FileInputImpl) fileInput)::addGlobalVariables);
+        scope.symbols.stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(((FileInputImpl) fileInput)::addGlobalVariables);
       } else if (scope.rootTree.is(Kind.DICT_COMPREHENSION)) {
         scope.symbols.forEach(((DictCompExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       } else if (scope.rootTree instanceof ComprehensionExpression) {
@@ -109,6 +114,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private static class ScopeVisitor extends BaseTreeVisitor {
 
     private Deque<Tree> scopeRootTrees = new LinkedList<>();
+    protected Scope moduleScope;
 
     Tree currentScopeRootTree() {
       return scopeRootTrees.peek();
@@ -129,6 +135,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitFileInput(FileInput tree) {
       createScope(tree, null);
       enterScope(tree);
+      moduleScope = currentScope();
+      BuiltinSymbols.all().forEach(currentScope()::createBuiltinSymbol);
       super.visitFileInput(tree);
     }
 
@@ -169,6 +177,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
+      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
@@ -229,11 +238,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void createLoopVariables(ForStatement loopTree) {
-      loopTree.expressions().stream().flatMap(this::flattenTuples).forEach(expr -> {
-        if (expr.is(Tree.Kind.NAME)) {
-          addBindingUsage((Name) expr, Usage.Kind.LOOP_DECLARATION);
-        }
-      });
+      loopTree.expressions().forEach(expr ->
+        boundNamesFromExpression(expr).forEach(name -> addBindingUsage(name, Usage.Kind.LOOP_DECLARATION)));
     }
 
     private void createParameters(FunctionLike function) {
@@ -284,10 +290,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
       assignmentLeftHandSides.addAll(lhs);
 
-      lhs.stream()
-        .filter(expr -> expr.is(Kind.NAME))
-        .map(Name.class::cast)
-        .forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS));
+      lhs.forEach(expression -> boundNamesFromExpression(expression).forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS)));
 
       super.visitAssignmentStatement(pyAssignmentStatementTree);
     }
@@ -319,9 +322,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitGlobalStatement(GlobalStatement pyGlobalStatementTree) {
-      pyGlobalStatementTree.variables().stream()
-        .map(Name::name)
-        .forEach(name -> currentScope().addGlobalName(name));
+      pyGlobalStatementTree.variables()
+        .forEach(name -> {
+          currentScope().addGlobalName(name.name());
+          moduleScope.addBindingUsage(name, Usage.Kind.GLOBAL_DECLARATION, null);
+        });
+
       super.visitGlobalStatement(pyGlobalStatementTree);
     }
 
@@ -331,6 +337,18 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         .map(Name::name)
         .forEach(name -> currentScope().addNonLocalName(name));
       super.visitNonlocalStatement(pyNonlocalStatementTree);
+    }
+
+    @Override
+    public void visitExceptClause(ExceptClause exceptClause) {
+      boundNamesFromExpression(exceptClause.exceptionInstance()).forEach(name -> addBindingUsage(name, Usage.Kind.EXCEPTION_INSTANCE));
+      super.visitExceptClause(exceptClause);
+    }
+
+    @Override
+    public void visitWithItem(WithItem withItem) {
+      boundNamesFromExpression(withItem.expression()).forEach(name -> addBindingUsage(name, Usage.Kind.WITH_INSTANCE));
+      super.visitWithItem(withItem);
     }
 
     private void createScope(Tree tree, @Nullable Scope parent) {
@@ -352,12 +370,32 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   }
 
-  private static class Scope {
+  private static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
+    List<Name> names = new ArrayList<>();
+    if (tree == null) {
+      return names;
+    }
+    if (tree.is(Tree.Kind.NAME)) {
+      names.add(((Name) tree));
+    } else if(tree.is(Tree.Kind.TUPLE)) {
+      ((Tuple) tree).elements().forEach(t -> names.addAll(boundNamesFromExpression(t)));
+    } else if(tree.is(Kind.LIST_LITERAL)) {
+      ((ListLiteral) tree).elements().expressions().forEach(t -> names.addAll(boundNamesFromExpression(t)));
+    } else if (tree.is(Kind.PARENTHESIZED)) {
+      names.addAll(boundNamesFromExpression(((ParenthesizedExpression) tree).expression()));
+    } else if (tree.is(Kind.UNPACKING_EXPR)) {
+      names.addAll(boundNamesFromExpression(((UnpackingExpression) tree).expression()));
+    }
+    return names;
+  }
+
+  static class Scope {
 
     private final Tree rootTree;
     private final Scope parent;
     private final Map<String, Symbol> symbolsByName = new HashMap<>();
     private final Set<Symbol> symbols = new HashSet<>();
+    private final Set<Symbol> builtinSymbols = new HashSet<>();
     private final Set<String> globalNames = new HashSet<>();
     private final Set<String> nonlocalNames = new HashSet<>();
     private final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
@@ -369,6 +407,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     private Set<Symbol> symbols() {
       return Collections.unmodifiableSet(symbols);
+    }
+
+    void createBuiltinSymbol(String name) {
+      SymbolImpl symbol = new SymbolImpl(name, name);
+      symbols.add(symbol);
+      builtinSymbols.add(symbol);
+      symbolsByName.put(name, symbol);
     }
 
     private void createSelfParameter(Parameter parameter) {
