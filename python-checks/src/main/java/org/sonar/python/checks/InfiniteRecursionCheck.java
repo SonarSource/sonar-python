@@ -19,37 +19,40 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.AliasedName;
+import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
-import org.sonar.plugins.python.api.tree.ComprehensionFor;
-import org.sonar.plugins.python.api.tree.ComprehensionIf;
-import org.sonar.plugins.python.api.tree.ConditionalExpression;
+import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.IfStatement;
-import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.RaiseStatement;
-import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TryStatement;
-import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.python.PythonFile;
 import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S2190")
 public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
@@ -60,124 +63,98 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      List<Tree> unconditionalCalls = unconditionalRecursiveCalls(functionDef);
-      if (!unconditionalCalls.isEmpty()) {
+      List<Tree> allRecursiveCalls = new ArrayList<>();
+      boolean endBlockIsReachable = collectRecursiveCallsAndCheckIfEndBlockIsReachable(functionDef, ctx.pythonFile(), allRecursiveCalls);
+      if (!allRecursiveCalls.isEmpty() && !endBlockIsReachable) {
         String message = String.format(MESSAGE, functionDef.isMethodDefinition() ? "method" : "function");
         PreciseIssue issue = ctx.addIssue(functionDef.name(), message);
-        unconditionalCalls.forEach(call -> issue.secondary(call, "recursive call"));
+        allRecursiveCalls.forEach(call -> issue.secondary(call, "recursive call"));
       }
     });
   }
 
-  private static List<Tree> unconditionalRecursiveCalls(FunctionDef functionDef) {
-    List<String> lookupNames = new ArrayList<>();
-    if (functionDef.isMethodDefinition()) {
-      lookupNames.add("self." + functionDef.name().name());
-      String className = parentClassName(functionDef);
-      if (className != null) {
-        lookupNames.add(className + "." + functionDef.name().name());
+  private static boolean collectRecursiveCallsAndCheckIfEndBlockIsReachable(FunctionDef functionDef, PythonFile pythonFile, List<Tree> allRecursiveCalls) {
+    Symbol functionSymbol = functionDef.name().symbol();
+    if (functionSymbol == null) {
+      return true;
+    }
+    ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, pythonFile);
+    if (cfg == null) {
+      return true;
+    }
+    RecursiveCallCollector recursiveCallCollector = new RecursiveCallCollector(functionDef, functionSymbol);
+    Set<CfgBlock> pushedBlocks = new HashSet<>();
+    Deque<CfgBlock> blockToVisit = new ArrayDeque<>();
+    blockToVisit.addLast(cfg.start());
+    pushedBlocks.add(cfg.start());
+    while (!blockToVisit.isEmpty()) {
+      CfgBlock block = blockToVisit.removeFirst();
+      if (block == cfg.end()) {
+        return true;
       }
-    } else {
-      lookupNames.add(functionDef.name().name());
+      List<Tree> blockRecursiveCalls = recursiveCallCollector.findRecursiveCalls(block.elements());
+      if (!blockRecursiveCalls.isEmpty()) {
+        allRecursiveCalls.addAll(blockRecursiveCalls);
+      } else {
+        block.successors().stream().filter(pushedBlocks::add).forEach(blockToVisit::addLast);
+      }
     }
-    UnconditionalCallVisitor visitor = new UnconditionalCallVisitor(lookupNames);
-    functionDef.body().accept(visitor);
-    return visitor.unconditionalCalls;
+    return recursiveCallCollector.functionSymbolHasBeenReassigned;
   }
 
-  @Nullable
-  private static String parentClassName(FunctionDef functionDef) {
-    if (functionDef.parent().parent().is(Tree.Kind.CLASSDEF)) {
-      return ((ClassDef) functionDef.parent().parent()).name().name();
+  private static class RecursiveCallCollector extends BaseTreeVisitor {
+
+    private final boolean isMethod;
+    private final Symbol functionSymbol;
+    @Nullable
+    private final Symbol selfSymbol;
+    // Classes can not only be compared by their string names with the current semantic
+    @Nullable
+    private final String className;
+    private boolean functionSymbolHasBeenReassigned = false;
+    private final List<Tree> recursiveCalls = new ArrayList<>();
+
+    private RecursiveCallCollector(FunctionDef currentFunction, Symbol functionSymbol) {
+      isMethod = currentFunction.isMethodDefinition();
+      this.functionSymbol = functionSymbol;
+      if (isMethod) {
+        boolean isStatic = currentFunction.decorators().stream()
+          .map(Decorator::name).map(DottedName::names).map(d -> d.get(d.size() - 1)).map(Name::name)
+          .anyMatch(decorator -> decorator.equals("staticmethod") || decorator.equals("classmethod"));
+        if (isStatic) {
+          selfSymbol = null;
+          className = findParentClassName(currentFunction);
+        } else {
+          selfSymbol = findSelfParameterSymbol(currentFunction);
+          className = null;
+        }
+      } else {
+        selfSymbol = null;
+        className = null;
+      }
     }
-    return null;
-  }
 
-  private static class UnconditionalCallVisitor extends BaseTreeVisitor {
-
-    private final List<String> lookupNames;
-    private List<Tree> unconditionalCalls = new ArrayList<>();
-    private int conditional = 0;
-    private int exit = 0;
-
-    private UnconditionalCallVisitor(List<String> lookupNames) {
-      this.lookupNames = lookupNames;
+    private List<Tree> findRecursiveCalls(List<Tree> elements) {
+      recursiveCalls.clear();
+      elements.forEach(element -> element.accept(this));
+      return recursiveCalls;
     }
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      if (conditional == 0 && exit == 0) {
-        Expression callee = callExpression.callee();
-        String name = nameOf(callee);
-        if (lookupNames.contains(name)) {
-          unconditionalCalls.add(callee);
+      Expression callee = callExpression.callee();
+      if (matchesLookupFunction(callee) || matchesLookupMethod(callee)) {
+        boolean exclusionDueToWrongCfg = isInComprehensionResultExpression(callExpression);
+        if (!exclusionDueToWrongCfg) {
+          recursiveCalls.add(callee);
         }
       }
       super.visitCallExpression(callExpression);
     }
 
-    @Nullable
-    private static String nameOf(Expression expression) {
-      if (expression.is(Tree.Kind.NAME)) {
-        return ((Name) expression).name();
-      } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
-        QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
-        String qualifier = nameOf(qualifiedExpression.qualifier());
-        if (qualifier != null) {
-          return qualifier + "." + qualifiedExpression.name().name();
-        }
-      }
-      return null;
-    }
-
-    @Override
-    public void visitReturnStatement(ReturnStatement pyReturnStatementTree) {
-      super.visitReturnStatement(pyReturnStatementTree);
-      exit++;
-    }
-
-    @Override
-    public void visitRaiseStatement(RaiseStatement pyRaiseStatementTree) {
-      super.visitRaiseStatement(pyRaiseStatementTree);
-      exit++;
-    }
-
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-      if (lookupNames.contains(pyFunctionDefTree.name().name())) {
-        exit++;
-      }
       // ignore
-    }
-
-    @Override
-    public void visitImportFrom(ImportFrom pyImportFromTree) {
-      for (AliasedName aliasedName : pyImportFromTree.importedNames()) {
-        Name alias = aliasedName.alias();
-        if (alias != null) {
-          if (lookupNames.contains(alias.name())) {
-            exit++;
-          }
-        } else if (aliasedName.dottedName().names().size() == 1) {
-          Name name = aliasedName.dottedName().names().get(0);
-          if (lookupNames.contains(name.name())) {
-            exit++;
-          }
-        }
-      }
-      super.visitImportFrom(pyImportFromTree);
-    }
-
-    @Override
-    public void visitTryStatement(TryStatement pyTryStatementTree) {
-      scan(pyTryStatementTree.body());
-      conditional++;
-      scan(pyTryStatementTree.exceptClauses());
-      conditional--;
-      scan(pyTryStatementTree.finallyClause());
-      conditional++;
-      scan(pyTryStatementTree.elseClause());
-      conditional--;
     }
 
     @Override
@@ -186,93 +163,104 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    public void visitClassDef(ClassDef pyClassDefTree) {
+    public void visitForStatement(ForStatement pyForStatementTree) {
       // ignore
     }
 
     @Override
     public void visitAssignmentStatement(AssignmentStatement assignment) {
-      assignment.lhsExpressions().stream()
+      if (isMethod && assignment.lhsExpressions().stream()
         .map(ExpressionList::expressions)
         .flatMap(Collection::stream)
-        .map(UnconditionalCallVisitor::nameOf)
-        .filter(lookupNames::contains)
-        .findAny().ifPresent(name -> exit++);
+        .anyMatch(expression -> matchesLookupSelf(expression) || matchesLookupMethod(expression))) {
+        this.functionSymbolHasBeenReassigned = true;
+      }
       super.visitAssignmentStatement(assignment);
     }
 
     @Override
-    public void visitIfStatement(IfStatement pyIfStatementTree) {
-      scan(pyIfStatementTree.condition());
-      conditional++;
-      scan(pyIfStatementTree.body());
-      scan(pyIfStatementTree.elifBranches());
-      scan(pyIfStatementTree.elseBranch());
-      conditional--;
-    }
-
-    @Override
-    public void visitComprehensionIf(ComprehensionIf tree) {
-      scan(tree.condition());
-      conditional++;
-      scan(tree.nestedClause());
-      conditional--;
-    }
-
-    @Override
-    public void visitForStatement(ForStatement pyForStatementTree) {
-      scan(pyForStatementTree.expressions()); // TODO variable
-      scan(pyForStatementTree.testExpressions());
-      conditional++;
-      scan(pyForStatementTree.body());
-      scan(pyForStatementTree.elseClause());
-      conditional--;
-    }
-
-    @Override
-    public void visitComprehensionFor(ComprehensionFor tree) {
-      // TODO variable
-      super.visitComprehensionFor(tree);
-    }
-
-    @Override
-    public void visitPyListOrSetCompExpression(ComprehensionExpression tree) {
-      scan(tree.comprehensionFor());
-      conditional++;
-      scan(tree.resultExpression());
-      conditional--;
-    }
-
-    @Override
-    public void visitWhileStatement(WhileStatement pyWhileStatementTree) {
-      scan(pyWhileStatementTree.condition());
-      conditional++;
-      scan(pyWhileStatementTree.body());
-      scan(pyWhileStatementTree.elseClause());
-      conditional--;
-    }
-
-    @Override
-    public void visitConditionalExpression(ConditionalExpression pyConditionalExpressionTree) {
-      scan(pyConditionalExpressionTree.condition());
-      conditional++;
-      scan(pyConditionalExpressionTree.trueExpression());
-      scan(pyConditionalExpressionTree.falseExpression());
-      conditional--;
-    }
-
-    @Override
     public void visitBinaryExpression(BinaryExpression pyBinaryExpressionTree) {
+      scan(pyBinaryExpressionTree.leftOperand());
+      // ignore conditional right hand side calls
       String operator = pyBinaryExpressionTree.operator().value();
-      if (PythonKeyword.OR.getValue().equals(operator) || PythonKeyword.AND.getValue().equals(operator)) {
-        scan(pyBinaryExpressionTree.leftOperand());
-        conditional++;
+      if (!(PythonKeyword.OR.getValue().equals(operator) || PythonKeyword.AND.getValue().equals(operator))) {
         scan(pyBinaryExpressionTree.rightOperand());
-        conditional--;
-      } else {
-        super.visitBinaryExpression(pyBinaryExpressionTree);
       }
     }
+
+    private static boolean isInComprehensionResultExpression(Tree tree) {
+      Tree parent = tree.parent();
+      if (parent == null) {
+        return false;
+      }
+      boolean inComprehension = parent instanceof ComprehensionExpression && ((ComprehensionExpression) parent).resultExpression() == tree;
+      return inComprehension || isInComprehensionResultExpression(parent);
+    }
+
+    private boolean matchesLookupFunction(Expression expression) {
+      if (!expression.is(Tree.Kind.NAME)) {
+        return false;
+      }
+      Name name = (Name) expression;
+      return !isMethod && functionSymbol.equals(name.symbol());
+    }
+
+    private boolean matchesLookupMethod(Expression expression) {
+      if (!expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+        return false;
+      }
+      QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
+      // qualifiedExpression.name() symbols can not only be compared by their string names with the current semantic
+      if (!isMethod || !functionSymbol.name().equals(qualifiedExpression.name().name())) {
+        return false;
+      }
+      Expression qualifier = qualifiedExpression.qualifier();
+      return matchesLookupSelf(qualifier) || matchesLookupClassName(qualifier);
+    }
+
+    private boolean matchesLookupSelf(Expression expression) {
+      if (selfSymbol == null || !expression.is(Tree.Kind.NAME)) {
+        return false;
+      }
+      return selfSymbol.equals(((Name) expression).symbol());
+    }
+
+    private boolean matchesLookupClassName(Expression expression) {
+      if (className == null || !expression.is(Tree.Kind.NAME)) {
+        return false;
+      }
+      return className.equals(((Name) expression).name());
+    }
+
+    @CheckForNull
+    private static Symbol findSelfParameterSymbol(FunctionDef functionDef) {
+      ParameterList parameters = functionDef.parameters();
+      if (parameters == null) {
+        return null;
+      }
+      List<Parameter> params = parameters.nonTuple();
+      if (params.isEmpty()) {
+        return null;
+      }
+      Name firstParameterName = params.get(0).name();
+      return firstParameterName != null ? firstParameterName.symbol() : null;
+    }
+
+    @CheckForNull
+    private static String findParentClassName(FunctionDef functionDef) {
+      Tree grandParent = functionDef.parent().parent();
+      if (grandParent.is(Tree.Kind.CLASSDEF)) {
+        // classes symbols can not only be compared by their string names with the current semantic
+        // and to prevent false-position, we ignore then a local variable with the same name exists
+        String className = ((ClassDef) grandParent).name().name();
+        boolean conflictsWithLocalVariable = functionDef.localVariables().stream().map(Symbol::name).anyMatch(className::equals);
+        if (!conflictsWithLocalVariable) {
+          return className;
+        }
+      }
+      return null;
+    }
+
   }
 
 }
