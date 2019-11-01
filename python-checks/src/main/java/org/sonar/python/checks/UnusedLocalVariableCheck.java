@@ -65,6 +65,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
         .filter(usage -> !isTupleDeclaration(usage.tree()))
         .filter(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION)
+        .filter(usage -> usage.kind() != Usage.Kind.CLASS_DECLARATION)
         .forEach(usage -> ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name())))
       );
   }
