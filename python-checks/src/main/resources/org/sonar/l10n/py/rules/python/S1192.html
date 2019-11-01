@@ -1,0 +1,36 @@
+<p>Duplicated string literals make the process of refactoring error-prone, since you must be sure to update all occurrences.</p>
+<p>On the other hand, constants can be referenced from many places, but only need to be updated in a single place.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With the default threshold of 3:</p>
+<pre>
+def run:
+    prepare("action1")  # Noncompliant - "action1" is duplicated 3 times
+    execute("action1")
+    release("action1")
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+ACTION_1 = "action1"
+
+def run():
+    prepare(ACTION_1)
+    execute(ACTION_1);
+    release(ACTION_1);
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised on:</p>
+<ul>
+  <li> duplicated string in decorators </li>
+  <li> strings with less than 5 characters </li>
+  <li> strings with only letters, numbers and underscores </li>
+</ul>
+<pre>
+@app.route("/api/users/", methods=['GET', 'POST', 'PUT'])
+def users():
+    pass
+
+@app.route("/api/projects/", methods=['GET', 'POST', 'PUT'])  # Compliant
+def projects():
+    pass
+</pre>
+
