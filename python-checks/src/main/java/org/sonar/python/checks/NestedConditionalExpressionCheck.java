@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 
@@ -34,7 +35,9 @@ public class NestedConditionalExpressionCheck extends PythonSubscriptionCheck {
       Tree parent = conditionalExpression.parent();
       while (parent != null) {
         if (parent.is(Kind.CONDITIONAL_EXPR)) {
-          ctx.addIssue(conditionalExpression, "Extract this nested conditional expression into an independent statement.");
+          ConditionalExpression parentConditional = (ConditionalExpression) parent;
+          ctx.addIssue(conditionalExpression, "Extract this nested conditional expression into an independent statement.")
+            .secondary(parentConditional.ifKeyword(), null);
           return;
         } else if (parent.is(Kind.LIST_COMPREHENSION, Kind.DICT_COMPREHENSION, Kind.SET_COMPREHENSION, Kind.GENERATOR_EXPR)) {
           return;
