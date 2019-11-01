@@ -41,6 +41,20 @@ def users_put():
 def users_post():
     pass
 
+
 options = { 'suppress': False }
 if options['suppress']:
     print(options['suppress'])
+
+
+def duplicated_docstring_1():
+    """This is a duplicated docstring"""
+    pass
+
+def duplicated_docstring_2():
+    """This is a duplicated docstring"""
+    pass
+
+def duplicated_docstring_3():
+    """This is a duplicated docstring"""
+    pass

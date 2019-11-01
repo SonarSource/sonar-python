@@ -28,8 +28,10 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S1192")
 public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
@@ -66,6 +68,14 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
           .skip(1)
           .forEach(stringLiteral -> issue.secondary(stringLiteral, "Duplication"));
       }
+    }
+  }
+
+  @Override
+  public void visitExpressionStatement(ExpressionStatement expressionStatement) {
+    // exclude docstrings
+    if (!expressionStatement.expressions().get(0).is(Tree.Kind.STRING_LITERAL)) {
+      super.visitExpressionStatement(expressionStatement);
     }
   }
 
