@@ -140,6 +140,7 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitClassDef(ClassDef pyClassDefTree) {
+    scan(pyClassDefTree.decorators());
     scan(pyClassDefTree.name());
     scan(pyClassDefTree.args());
     scan(pyClassDefTree.body());
