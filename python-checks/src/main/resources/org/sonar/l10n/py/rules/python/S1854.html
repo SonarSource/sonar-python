@@ -1,4 +1,3 @@
-
 <p>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value
 only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it's not an error, it is at best a waste of resources.
 Therefore all calculated values should be used.</p>
@@ -12,6 +11,8 @@ i = compute()
 i = a + b
 i += compute()
 </pre>
+<h2>Exceptions</h2>
+<p>This rule ignores initializations to -1, 0, 1, <code>None</code>, <code>True</code>, <code>False</code> and <code>""</code>.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/563.html">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
