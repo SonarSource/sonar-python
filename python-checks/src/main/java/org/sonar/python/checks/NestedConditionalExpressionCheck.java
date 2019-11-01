@@ -21,25 +21,26 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 @Rule(key = "S3358")
 public class NestedConditionalExpressionCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CONDITIONAL_EXPR, ctx -> {
-      TreeVisitor visitor = new BaseTreeVisitor() {
-        @Override
-        public void visitConditionalExpression(ConditionalExpression conditionalExpression) {
-          // cut the exploration to report only 1 level
+    context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, ctx -> {
+      Tree conditionalExpression = ctx.syntaxNode();
+      Tree parent = conditionalExpression.parent();
+      while (parent != null) {
+        if (parent.is(Kind.CONDITIONAL_EXPR)) {
           ctx.addIssue(conditionalExpression, "Extract this nested conditional expression into an independent statement.");
+          return;
+        } else if (parent.is(Kind.LIST_COMPREHENSION, Kind.DICT_COMPREHENSION, Kind.SET_COMPREHENSION, Kind.GENERATOR_EXPR)) {
+          return;
         }
-      };
-      ctx.syntaxNode().children().forEach(child -> child.accept(visitor));
+        parent = parent.parent();
+      }
     });
   }
 
