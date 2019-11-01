@@ -105,7 +105,13 @@ def func17(x): # Noncompliant
 
 def func18(x):
     [func18(a) if a == 2 else func18(a + 1) for a in x]
-    print(1)
+    [func18(a) if func18(a) is not None else func18(a) for a in x]
+    [func18(a) for i in x if i%2!=0]
+    v = {a : func18(a) for i in x if i%2!=0}
+    return (func18(a) for i in x if i%2!=0)
+
+def func19(condition, x):
+    return func19(False, x) if condition else 0
 
 class A:
 

@@ -38,6 +38,8 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.ComprehensionIf;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -53,6 +55,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonFile;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.tree.DictCompExpressionImpl;
 
 @Rule(key = "S2190")
 public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
@@ -144,10 +147,7 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     public void visitCallExpression(CallExpression callExpression) {
       Expression callee = callExpression.callee();
       if (matchesLookupFunction(callee) || matchesLookupMethod(callee)) {
-        boolean exclusionDueToWrongCfg = isInComprehensionResultExpression(callExpression);
-        if (!exclusionDueToWrongCfg) {
-          recursiveCalls.add(callee);
-        }
+        recursiveCalls.add(callee);
       }
       super.visitCallExpression(callExpression);
     }
@@ -164,7 +164,29 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitForStatement(ForStatement pyForStatementTree) {
-      // ignore
+      // ignore, unexpected "for" element in cfg blocks
+    }
+
+    @Override
+    public void visitConditionalExpression(ConditionalExpression pyConditionalExpressionTree) {
+      scan(pyConditionalExpressionTree.condition());
+      // ignore trueExpression and falseExpression, not broken down in the cfg
+    }
+
+    @Override
+    public void visitPyListOrSetCompExpression(ComprehensionExpression tree) {
+      scan(tree.comprehensionFor());
+      // ignore resultExpression, not broken down in the cfg
+    }
+
+    @Override
+    public void visitComprehensionIf(ComprehensionIf tree) {
+      // ignore, not broken down in the cfg
+    }
+
+    @Override
+    public void visitDictCompExpression(DictCompExpressionImpl tree) {
+      // ignore, not broken down in the cfg
     }
 
     @Override
@@ -181,20 +203,11 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     @Override
     public void visitBinaryExpression(BinaryExpression pyBinaryExpressionTree) {
       scan(pyBinaryExpressionTree.leftOperand());
-      // ignore conditional right hand side calls
+      // ignore conditional rightOperand, not broken down in the cfg
       String operator = pyBinaryExpressionTree.operator().value();
       if (!(PythonKeyword.OR.getValue().equals(operator) || PythonKeyword.AND.getValue().equals(operator))) {
         scan(pyBinaryExpressionTree.rightOperand());
       }
-    }
-
-    private static boolean isInComprehensionResultExpression(Tree tree) {
-      Tree parent = tree.parent();
-      if (parent == null) {
-        return false;
-      }
-      boolean inComprehension = parent instanceof ComprehensionExpression && ((ComprehensionExpression) parent).resultExpression() == tree;
-      return inComprehension || isInComprehensionResultExpression(parent);
     }
 
     private boolean matchesLookupFunction(Expression expression) {
