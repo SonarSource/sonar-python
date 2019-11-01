@@ -32,7 +32,7 @@ from re import compile
 def dynamic_pattern():
     pattern = '(a*)*'
     re.compile(pattern)  # Noncompliant
-    compile(pattern) # Noncompliant
+    compile(pattern) # FN - Same name as built-in symbol compile
     regexpressions.map(compile) # OK
 
 import regex
