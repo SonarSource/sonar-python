@@ -52,6 +52,7 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
       classDef.body().accept(methodVisitor);
       List<Tree> fieldNames = allFields.stream()
         .filter(s -> s.usages().stream().anyMatch(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION))
+        .filter(s -> s.usages().stream().noneMatch(usage -> usage.kind() == Usage.Kind.CLASS_DECLARATION))
         .map(s -> s.usages().stream().findFirst())
         .filter(Optional::isPresent)
         .map(usage -> usage.get().tree())
