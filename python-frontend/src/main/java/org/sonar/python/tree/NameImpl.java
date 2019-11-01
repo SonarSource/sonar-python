@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
@@ -47,7 +48,11 @@ public class NameImpl extends PyTree implements Name {
 
   @Override
   public boolean isVariable() {
-    return isVariable;
+    boolean isKeyword = false;
+    if (parent() != null && parent().is(Kind.REGULAR_ARGUMENT)) {
+      isKeyword = ((RegularArgument) parent()).keywordArgument() == this;
+    }
+    return isVariable && !isKeyword;
   }
 
   @Override
