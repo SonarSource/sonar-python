@@ -52,3 +52,7 @@ class A:
 class C():
     def setUp(self):
         self.reactor = self.Reactor() # Noncompliant
+
+class D():
+    Foo = 10
+    class FoO(): pass
