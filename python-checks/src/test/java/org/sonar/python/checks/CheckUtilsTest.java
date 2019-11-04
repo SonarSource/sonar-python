@@ -22,8 +22,12 @@ package org.sonar.python.checks;
 import com.sonar.sslr.api.AstNode;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
+import java.util.Objects;
+import javax.annotation.Nullable;
 import org.junit.Test;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.ArgListImpl;
@@ -89,10 +93,66 @@ public class CheckUtilsTest {
     assertThat(CheckUtils.areEquivalent(parse("x = lambda a : a + 10"), parse("x = lambda a : a + 5"))).isFalse();
   }
 
+  @Test
+  public void no_parent_class() {
+    FileInput file = (FileInput) parse("" +
+      "def f():\n" +
+      "    pass\n");
+    FunctionDef f = descendantFunction(file, "f");
+    assertThat(f).isNotNull();
+    assertThat(CheckUtils.getParentClassDef(f)).isNull();
+  }
+
+  @Test
+  public void parent_class() {
+    FileInput file = (FileInput) parse("" +
+      "class A:\n" +
+      "    def f():\n" +
+      "        def g():\n" +
+      "            pass\n" +
+      "        pass\n" +
+      "\n" +
+      "    if x:\n" +
+      "        def h():\n" +
+      "            pass\n");
+    FunctionDef f = descendantFunction(file, "f");
+    FunctionDef g = descendantFunction(file, "g");
+    FunctionDef h = descendantFunction(file, "h");
+    assertThat(f).isNotNull();
+    assertThat(g).isNotNull();
+    assertThat(h).isNotNull();
+
+    ClassDef parent = CheckUtils.getParentClassDef(f);
+    assertThat(parent).isNotNull();
+    assertThat(parent.name().name()).isEqualTo("A");
+
+    parent = CheckUtils.getParentClassDef(g);
+    assertThat(parent).isNull();
+
+    parent = CheckUtils.getParentClassDef(h);
+    assertThat(parent).isNotNull();
+    assertThat(parent.name().name()).isEqualTo("A");
+  }
+
   private Tree parse(String content) {
     PythonParser parser = PythonParser.create();
     AstNode astNode = parser.parse(content);
     FileInput parse = new PythonTreeMaker().fileInput(astNode);
     return parse;
   }
+
+  @Nullable
+  private static FunctionDef descendantFunction(Tree tree, String name) {
+    if (tree.is(Tree.Kind.FUNCDEF)) {
+      FunctionDef functionDef = (FunctionDef) tree;
+      if (functionDef.name().name().equals(name)) {
+        return functionDef;
+      }
+    }
+    return tree.children().stream()
+      .map(child -> descendantFunction(child, name))
+      .filter(Objects::nonNull)
+      .findFirst().orElse(null);
+  }
+
 }

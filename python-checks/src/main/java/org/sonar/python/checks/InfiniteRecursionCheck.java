@@ -163,11 +163,6 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    public void visitForStatement(ForStatement pyForStatementTree) {
-      // ignore, unexpected "for" element in cfg blocks
-    }
-
-    @Override
     public void visitConditionalExpression(ConditionalExpression pyConditionalExpressionTree) {
       scan(pyConditionalExpressionTree.condition());
       // ignore trueExpression and falseExpression, not broken down in the cfg

@@ -113,6 +113,36 @@ def func18(x):
 def func19(condition, x):
     return func19(False, x) if condition else 0
 
+def func20(condition, x): # false-negative, ConditionalExpression is not broken down in the cfg
+    return func20(False, x) if condition else func20(False, x)
+
+def fun21(x): # Noncompliant
+    if fun21(x + 1) or x == 10:
+        print(2)
+
+def fun22(r):
+    for x in r:
+        fun22(r)
+
+def fun23(r): # Noncompliant
+    for x in r:
+        fun23(r)
+    else:
+        fun23(r)
+
+def fun24(r):
+    for x in r:
+        if x:
+            break
+    else:
+        fun24([1])
+
+def fun25(r): # Noncompliant
+    for x in r:
+        print (x)
+    else:
+        fun25([1])
+
 class A:
 
     def func0():
