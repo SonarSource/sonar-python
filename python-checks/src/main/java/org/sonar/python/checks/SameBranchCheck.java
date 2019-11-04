@@ -25,11 +25,8 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.ElseClause;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
-import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
@@ -60,16 +57,6 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
       }
       List<StatementList> branches = getIfBranches(ifStmt);
       findSameBranches(branches, ctx);
-    });
-
-    context.registerSyntaxNodeConsumer(Tree.Kind.CONDITIONAL_EXPR, ctx -> {
-      ConditionalExpression conditionalExpression = (ConditionalExpression) ctx.syntaxNode();
-      if (ignoreList.contains(conditionalExpression)) {
-        return;
-      }
-      List<Expression> expressions = new ArrayList<>();
-      addConditionalExpressionBranches(expressions, conditionalExpression);
-      findSameBranches(expressions, ctx);
     });
   }
 
@@ -122,31 +109,6 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
       lookForElseIfs(branches, elseClause);
     }
     return branches;
-  }
-
-  private void addConditionalExpressionBranches(List<Expression> branches, ConditionalExpression conditionalExpression) {
-    Expression trueExpression = removeParentheses(conditionalExpression.trueExpression());
-    Expression falseExpression = removeParentheses(conditionalExpression.falseExpression());
-    if (trueExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
-      ignoreList.add(trueExpression);
-      addConditionalExpressionBranches(branches, (ConditionalExpression) trueExpression);
-    } else {
-      branches.add(trueExpression);
-    }
-    if (falseExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
-      ignoreList.add(falseExpression);
-      addConditionalExpressionBranches(branches, (ConditionalExpression) falseExpression);
-    } else {
-      branches.add(falseExpression);
-    }
-  }
-
-  private static Expression removeParentheses(Expression expression) {
-    if (expression.is(Tree.Kind.PARENTHESIZED)) {
-      return removeParentheses(((ParenthesizedExpression) expression).expression());
-    } else {
-      return expression;
-    }
   }
 
   private void lookForElseIfs(List<StatementList> branches, ElseClause elseBranch) {
