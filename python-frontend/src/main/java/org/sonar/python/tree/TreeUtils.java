@@ -21,17 +21,26 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.api.PythonTokenType;
 
 public class TreeUtils {
   private TreeUtils() {
     // empty constructor
   }
+
+  private static final Set<PythonTokenType> WHITESPACE_TOKEN_TYPES = EnumSet.of(
+    PythonTokenType.NEWLINE,
+    PythonTokenType.INDENT,
+    PythonTokenType.DEDENT);
 
   @CheckForNull
   public static Tree firstAncestor(Tree tree, Predicate<Tree> predicate) {
@@ -63,6 +72,12 @@ public class TreeUtils {
       }
     }
     return tokens;
+  }
+
+  public static List<Token> nonWhitespaceTokens(Tree tree) {
+    return TreeUtils.tokens(tree).stream()
+      .filter(t -> !WHITESPACE_TOKEN_TYPES.contains(t.type()))
+      .collect(Collectors.toList());
   }
 
   public static boolean hasDescendant(Tree tree, Predicate<Tree> predicate) {
