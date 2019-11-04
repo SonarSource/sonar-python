@@ -41,8 +41,8 @@ def minus():
     return x
 
 def chain_assign():
-    a = b = 0 # Noncompliant 2
-#   ^^^^^^^^^
+    a = b = 42 # Noncompliant 2
+#   ^^^^^^^^^^
     a = foo()
     b = 42
     print(a, b)
@@ -190,3 +190,34 @@ def outer_fn():
     def inner_fn_2(): # OK
         pass
     print("outer_fn")
+
+def falsy_or_true_initialization():
+    x = None # OK
+    x = 42
+    print(x)
+
+    y = [] # OK
+    y = 42
+    print(y)
+
+    z =  True # OK
+    z = 42
+    print(z)
+
+    x1 = -1 # OK
+    x1 = 42
+    print(x1)
+
+    x2 = 1 # OK
+    x2 = 42
+    print(x2)
+
+    x3 = -2 # Noncompliant
+    x3 = 42
+    print(x3)
+
+    x4= "" # OK
+    x4 = 42
+    print(x4)
+
+

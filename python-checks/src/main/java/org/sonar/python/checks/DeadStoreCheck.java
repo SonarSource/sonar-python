@@ -27,8 +27,13 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.LiveVariablesAnalysis;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
@@ -71,7 +76,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
           return;
         }
         if (usage.isWrite() && !usage.isRead()) {
-          if (!willBeRead.contains(symbol) && localVars.contains(symbol) && !isFunctionDeclarationSymbol(symbol)) {
+          if (!willBeRead.contains(symbol) && localVars.contains(symbol) && !isException(symbol, element)) {
             ctx.addIssue(element, String.format(MESSAGE_TEMPLATE, symbol.name()));
           }
           willBeRead.remove(symbol);
@@ -80,6 +85,33 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         }
       });
     }
+  }
+
+  private static boolean isException(Symbol symbol, Tree element) {
+    return isAssignmentToFalsyOrTrueLiteral(element) || isFunctionDeclarationSymbol(symbol);
+  }
+
+  private static boolean isAssignmentToFalsyOrTrueLiteral(Tree element) {
+    if (element.is(Tree.Kind.ASSIGNMENT_STMT)) {
+      Expression assignedValue = ((AssignmentStatement) element).assignedValue();
+      return Expressions.isFalsy(assignedValue)
+        || (assignedValue.is(Tree.Kind.NAME) && "True".equals(((Name) assignedValue).name()))
+        || isNumericLiteralOne(assignedValue)
+        || isMinusOne(assignedValue);
+    }
+    return false;
+  }
+
+  private static boolean isMinusOne(Expression assignedValue) {
+    if (assignedValue.is(Tree.Kind.UNARY_MINUS)) {
+      Expression expression = ((UnaryExpression) assignedValue).expression();
+      return isNumericLiteralOne(expression);
+    }
+    return false;
+  }
+
+  private static boolean isNumericLiteralOne(Expression expression) {
+    return (expression.is(Tree.Kind.NUMERIC_LITERAL) && "1".equals((((NumericLiteral) expression).valueAsString())));
   }
 
   private static boolean isFunctionDeclarationSymbol(Symbol symbol) {
