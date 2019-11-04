@@ -85,18 +85,32 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
       if (CheckUtils.areEquivalent(originalBlock, duplicateBlock)) {
         equivalentBlocks.add(originalBlock);
         boolean allBranchesIdentical = equivalentBlocks.size() == branches.size() - 1;
-        if (!isOnASingleLine || allBranchesIdentical) {
+        if (!isOnASingleLine && !allBranchesIdentical) {
           int line = TreeUtils.nonWhitespaceTokens(originalBlock).get(0).line();
           String message = String.format(MESSAGE, line);
           List<Token> issueTokens = TreeUtils.nonWhitespaceTokens(duplicateBlock);
-          PreciseIssue issue = ctx.addIssue(issueTokens.get(0), issueTokens.get(issueTokens.size() - 1), message);
-          equivalentBlocks.forEach(e -> {
-            List<Token> tokens = TreeUtils.nonWhitespaceTokens(e);
-            issue.secondary(IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), "Original"));
+          ctx.addIssue(issueTokens.get(0), issueTokens.get(issueTokens.size() - 1), message)
+            .secondary(issueLocation(originalBlock, "Original"));
+          break;
+        }
+        if (allBranchesIdentical) {
+          equivalentBlocks.add(duplicateBlock);
+          Tree firstBlock = branches.get(0);
+          int line = TreeUtils.nonWhitespaceTokens(firstBlock).get(0).line();
+          String message = String.format(MESSAGE, line);
+          equivalentBlocks.stream().skip(1).forEach(e -> {
+            List<Token> issueTokens = TreeUtils.nonWhitespaceTokens(e);
+            ctx.addIssue(issueTokens.get(0), issueTokens.get(issueTokens.size() - 1), message)
+              .secondary(issueLocation(firstBlock, "Original"));
           });
         }
       }
     }
+  }
+
+  private static IssueLocation issueLocation(Tree body, String message) {
+    List<Token> tokens = TreeUtils.nonWhitespaceTokens(body);
+    return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), message);
   }
 
   private List<StatementList> getIfBranches(IfStatement ifStmt) {

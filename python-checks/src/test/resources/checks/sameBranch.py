@@ -32,6 +32,16 @@ else:
        #^[el=+2;ec=16]
             pass
 
+if cond:
+  foo()
+  bar()
+elif cond:
+  foo() #Noncompliant
+  bar()
+elif cond:
+  foo() #Noncompliant
+  bar()
+
 if True:
 #In this case, S3923 will raise a bug
     if True:
@@ -50,12 +60,21 @@ if 1: print("1"); foo()
 elif 2: print("1"); foo()
 else: print("2")
 
+#ok, no issue raised for branches with 1 line of code
 if 1:
     print("1")
 elif 2:
     print("2")
 else:
     print("1")
+
+#exception: all branches identical without else clause
+if cond:
+  foo()
+elif cond:
+  foo() # Noncompliant
+elif cond:
+  foo() # Noncompliant
 
 #In this case, S3923 will raise a bug
 if 1:
