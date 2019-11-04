@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ContinueStatement;
 import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.ExceptClause;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.IfStatement;
@@ -203,7 +204,14 @@ public class ControlFlowGraphBuilder {
       ExceptClause exceptClause = exceptClauses.get(i);
       PythonCfgBlock exceptBlock = build(exceptClause.body().statements(), createSimpleBlock(finallyOrAfterTryBlock));
       PythonCfgBlock exceptCondition = createBranchingBlock(exceptClause, exceptBlock, falseSuccessor);
-      exceptCondition.addElement(exceptClause);
+      Expression exceptionInstance = exceptClause.exceptionInstance();
+      if (exceptionInstance != null) {
+        exceptCondition.addElement(exceptionInstance);
+      }
+      Expression exception = exceptClause.exception();
+      if (exception != null) {
+        exceptCondition.addElement(exception);
+      }
       falseSuccessor = exceptCondition;
     }
     return falseSuccessor;

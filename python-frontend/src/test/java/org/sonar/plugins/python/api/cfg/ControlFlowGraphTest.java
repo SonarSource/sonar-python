@@ -366,6 +366,23 @@ public class ControlFlowGraphTest {
   }
 
   @Test
+  public void simple_try_except_value_error() {
+    ControlFlowGraph cfg = cfg(
+      "try:",
+      "  foo()",
+      "except ValueError as error:",
+      "  print(error)"
+    );
+    assertNoEmptyBlocksInCFG(cfg);
+    CfgBlock start = cfg.start();
+    assertThat(start.elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
+    assertThat(start.successors()).hasSize(2);
+    CfgBlock exceptCondition = start.successors().stream().filter(succ -> !(succ instanceof PythonCfgEndBlock)).findFirst().get();
+    assertThat(exceptCondition.elements()).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.NAME);
+    assertThat(exceptCondition.successors()).hasSize(2);
+  }
+
+  @Test
   public void simple_try_except_all_exceptions() {
     ControlFlowGraph cfg = cfg(
       "try:",
@@ -378,7 +395,7 @@ public class ControlFlowGraphTest {
     assertThat(start.elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT);
     assertThat(start.successors()).hasSize(2);
     CfgBlock exceptCondition = start.successors().stream().filter(succ -> !(succ instanceof PythonCfgEndBlock)).findFirst().get();
-    assertThat(exceptCondition.elements()).extracting(Tree::getKind).containsExactly(Kind.EXCEPT_CLAUSE);
+    assertThat(exceptCondition.elements()).isEmpty();
     assertThat(exceptCondition.successors()).hasSize(2);
   }
 

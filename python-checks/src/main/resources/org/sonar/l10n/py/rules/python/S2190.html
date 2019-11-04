@@ -1,0 +1,17 @@
+<p>Recursion happens when control enters a loop that has no exit. This can happen when a method invokes itself or when a pair of methods invoke each
+other. It can be a useful tool, but unless the method includes a provision to break out of the recursion and <code>return</code>, the recursion will
+continue until the stack overflows and the program crashes.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def my_pow(num, exponent):  # Noncompliant
+    num = num * my_pow(num, exponent - 1)
+    return num  # this is never reached
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def my_pow(num, exponent):  # Compliant
+    if exponent &gt; 1:
+      num = num * my_pow(num, exponent - 1)
+    return num
+</pre>
+
