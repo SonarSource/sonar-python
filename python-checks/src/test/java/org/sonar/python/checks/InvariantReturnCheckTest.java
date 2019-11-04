@@ -17,41 +17,19 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.cfg;
+package org.sonar.python.checks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.cfg.CfgBlock;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.junit.Test;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class PythonCfgEndBlock extends PythonCfgBlock {
+import static org.junit.Assert.*;
 
-  @Override
-  public Set<CfgBlock> successors() {
-    return Collections.emptySet();
+public class InvariantReturnCheckTest {
+
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/invariantReturn.py", new InvariantReturnCheck());
   }
 
-  @Override
-  public List<Tree> elements() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  void replaceSuccessors(Map<PythonCfgBlock, PythonCfgBlock> replacements) {
-    // nothing to do
-  }
-
-  @CheckForNull
-  @Override
-  public CfgBlock syntacticSuccessor() {
-    return null;
-  }
-
-  @Override
-  public String toString() {
-    return "END";
-  }
 }

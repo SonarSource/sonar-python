@@ -85,6 +85,7 @@ public final class CheckList {
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,
+      InvariantReturnCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
       LoggersConfigurationCheck.class,
