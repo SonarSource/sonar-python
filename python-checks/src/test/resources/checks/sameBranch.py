@@ -74,37 +74,6 @@ elif 2:
 else:
     print("2")
 
-a = 1 if 1 else 2
-a = 1 if x else 1 # Noncompliant [[secondary=+0]]
-#               ^
-a = 1 if x else 2 if y else 2
-a = 2 if x else 1 if y else 2
-a = 2 if x else 2 if y else 2 # Noncompliant
-#                           ^
-a = 2 \
-    if x else 2 if y \
-    else 2
-# Noncompliant@-1
-a = 2 if x else (t + 4) if y else (t +
-                               4)
-# Noncompliant@-2
-a = (1 if x else 3) if y else 5
-
-a = 1 if x else (1) # Noncompliant
-#                ^
-a = ((1)) if x else (1) # Noncompliant
-#                    ^
-a = ((1)) if x else 1 # Noncompliant
-#                   ^
-a = 2 if x else ((2) if y else 2) # Noncompliant
-#                              ^
-a = (1, 2) if x else (1, 3)
-a = (1, 2) if x else (1, 2) # Noncompliant
-#                    ^^^^^^
-a = [1] if x else [2]
-a = [1] if x else [1] # Noncompliant
-#                 ^^^
-
 if x in ('a', 'b'):
     print("1")
     print("2")
