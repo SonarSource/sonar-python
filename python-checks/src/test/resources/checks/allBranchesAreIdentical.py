@@ -2,9 +2,23 @@ def func():
   if b == 0:  # Noncompliant {{Remove this if statement or edit its code blocks so that they're not all the same.}}
 # ^^
     doOneMoreThing()
+#   ^^^^^^^^^^^^^^^^<
   elif b == 1:
     doOneMoreThing()
+#   ^^^^^^^^^^^^^^^^<
   else:
+    doOneMoreThing()
+#   ^^^^^^^^^^^^^^^^<
+
+def func():
+  if b == 0:  # Noncompliant {{Remove this if statement or edit its code blocks so that they're not all the same.}}
+# ^^
+    doSomething()
+#   ^[el=+2;ec=20]<
+    doOneMoreThing()
+  else:
+    doSomething()
+#   ^[el=+2;ec=20]<
     doOneMoreThing()
 
 if b == 0:  # ok, exception when no else clause

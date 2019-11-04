@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -26,7 +27,10 @@ import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.IssueLocation;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
@@ -53,7 +57,15 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     if (!CheckUtils.areEquivalent(body, ifStmt.elseBranch().body())) {
       return;
     }
-    ctx.addIssue(ifStmt.keyword(), "Remove this if statement or edit its code blocks so that they're not all the same.");
+    PreciseIssue issue = ctx.addIssue(ifStmt.keyword(), "Remove this if statement or edit its code blocks so that they're not all the same.");
+    issue.secondary(issueLocation(ifStmt.body()));
+    ifStmt.elifBranches().forEach(e -> issue.secondary(issueLocation(e.body())));
+    issue.secondary(issueLocation(ifStmt.elseBranch().body()));
+  }
+
+  private static IssueLocation issueLocation(StatementList body) {
+    List<Token> tokens = TreeUtils.nonWhitespaceTokens(body);
+    return IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), null);
   }
 
   private static void handleConditionalExpression(ConditionalExpression conditionalExpression, SubscriptionContext ctx) {
