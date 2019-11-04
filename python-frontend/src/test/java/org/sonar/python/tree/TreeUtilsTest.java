@@ -35,8 +35,10 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 
+import static org.assertj.core.api.Assertions.allOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TreeUtilsTest {
@@ -88,6 +90,16 @@ public class TreeUtilsTest {
 
     assertThat(TreeUtils.tokens(parsed.lastToken())).containsExactly(parsed.lastToken());
 
+  }
+
+  @Test
+  public void non_whitespace_tokens() {
+    FileInput parsed = parse("if foo:\n  pass");
+    IfStatement ifStmt = (IfStatement) parsed.statements().statements().get(0);
+    List<Token> nonWhitespaceTokens = TreeUtils.nonWhitespaceTokens(ifStmt);
+    nonWhitespaceTokens.forEach(t -> assertThat(t.type()).isNotIn(PythonTokenType.NEWLINE, PythonTokenType.INDENT, PythonTokenType.DEDENT));
+    assertThat(nonWhitespaceTokens).hasSize(4);
+    assertThat(nonWhitespaceTokens.stream().map(Token::value)).containsExactly("if", "foo", ":", "pass");
   }
 
   @Test

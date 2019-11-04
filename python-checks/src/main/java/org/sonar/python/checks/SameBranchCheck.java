@@ -20,9 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -37,16 +35,10 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.IssueLocation;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1871")
 public class SameBranchCheck extends PythonSubscriptionCheck {
-
-  private static final Set<PythonTokenType> WHITESPACE_TOKEN_TYPES = EnumSet.of(
-    PythonTokenType.NEWLINE,
-    PythonTokenType.INDENT,
-    PythonTokenType.DEDENT);
 
   private static final String MESSAGE = "Either merge this branch with the identical one on line \"%s\" or change one of the implementations.";
 
@@ -107,23 +99,17 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
         equivalentBlocks.add(originalBlock);
         boolean allBranchesIdentical = equivalentBlocks.size() == branches.size() - 1;
         if (!isOnASingleLine || allBranchesIdentical) {
-          int line = nonWhitespaceTokens(originalBlock).get(0).line();
+          int line = TreeUtils.nonWhitespaceTokens(originalBlock).get(0).line();
           String message = String.format(MESSAGE, line);
-          List<Token> issueTokens = nonWhitespaceTokens(duplicateBlock);
+          List<Token> issueTokens = TreeUtils.nonWhitespaceTokens(duplicateBlock);
           PreciseIssue issue = ctx.addIssue(issueTokens.get(0), issueTokens.get(issueTokens.size() - 1), message);
           equivalentBlocks.forEach(e -> {
-            List<Token> tokens = nonWhitespaceTokens(e);
+            List<Token> tokens = TreeUtils.nonWhitespaceTokens(e);
             issue.secondary(IssueLocation.preciseLocation(tokens.get(0), tokens.get(tokens.size() - 1), "Original"));
           });
         }
       }
     }
-  }
-
-  private static List<Token> nonWhitespaceTokens(Tree tree) {
-    return TreeUtils.tokens(tree).stream()
-      .filter(t -> !WHITESPACE_TOKEN_TYPES.contains(t.type()))
-      .collect(Collectors.toList());
   }
 
   private List<StatementList> getIfBranches(IfStatement ifStmt) {
