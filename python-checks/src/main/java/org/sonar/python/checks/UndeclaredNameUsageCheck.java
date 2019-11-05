@@ -19,14 +19,22 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
+import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S3827")
 public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
@@ -47,9 +55,38 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
       Name name = (Name) ctx.syntaxNode();
       if (!callGlobalsOrLocals && !hasWildcardImport && name.isVariable() && name.symbol() == null) {
-        ctx.addIssue(name, "Change its name or define it before using it");
+        ctx.addIssue(name, name.name() + " is not defined. Change its name or define it before using it");
       }
     });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
+      if (cfg == null) {
+        return;
+      }
+      DefinedVariablesAnalysis analysis = DefinedVariablesAnalysis.analyze(cfg, functionDef.localVariables());
+      cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block)));
+    });
+  }
+
+  private static void checkCfgBlock(CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariablesAnalysis.DefinedVariables definedVariables) {
+    Map<Symbol, DefinedVariablesAnalysis.VariableDefinition> currentState = new HashMap<>(definedVariables.getIn());
+    for (Tree element : cfgBlock.elements()) {
+      definedVariables.getVariableUsages(element).forEach((symbol, symbolUsage) -> {
+        if (symbolUsage.isWrite()) {
+          currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
+        }
+        DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.BOTTOM);
+        if (symbolUsage.isRead() && isUndefined(varDef)) {
+          ctx.addIssue(element, symbol.name() + " is used before it is defined. Move the definition before.");
+        }
+      });
+    }
+  }
+
+  private static boolean isUndefined(DefinedVariablesAnalysis.VariableDefinition varDef) {
+    return varDef == DefinedVariablesAnalysis.VariableDefinition.UNDEFINED;
   }
 
   private static class ExceptionVisitor extends BaseTreeVisitor {
