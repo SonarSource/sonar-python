@@ -27,6 +27,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.CfgBranchingBlock;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
 public class PythonCfgBranchingBlock extends PythonCfgBlock implements CfgBranchingBlock {
@@ -76,4 +77,11 @@ public class PythonCfgBranchingBlock extends PythonCfgBlock implements CfgBranch
   public void setTrueSuccessor(PythonCfgBlock trueSuccessor) {
     this.trueSuccessor = trueSuccessor;
   }
+
+  @Override
+  protected String toStringDisplayPosition() {
+    Token token = branchingTree.firstToken();
+    return token.line() + ":" + token.column() + ":";
+  }
+
 }

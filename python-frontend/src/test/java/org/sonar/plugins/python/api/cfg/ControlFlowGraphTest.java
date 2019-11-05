@@ -604,7 +604,24 @@ public class ControlFlowGraphTest {
      "pass",
      "assert 2"
     );
-    assertThat(cfg.start().toString()).isEqualTo("PASS_STMT;ASSERT_STMT");
+    assertThat(cfg.start().toString()).isEqualTo("2:2:PASS_STMT;ASSERT_STMT");
+  }
+
+  @Test
+  public void CFG_toString() {
+    ControlFlowGraph cfg = cfg("" +
+      "if x:",
+      "    return 1",
+      "else:",
+      "    foo()",
+      "    return 2"
+    );
+    assertThat(cfg.toString()).isEqualTo("" +
+      "0[label=\"2:2:NAME\"];" +
+      "1[label=\"3:6:RETURN_STMT\"];" +
+      "2[label=\"5:6:EXPRESSION_STMT;RETURN_STMT\"];" +
+      "3[label=\"END\"];" +
+      "0->1;0->2;1->3;1->3[style=dotted];2->3;2->3[style=dotted];");
   }
 
   @Test
