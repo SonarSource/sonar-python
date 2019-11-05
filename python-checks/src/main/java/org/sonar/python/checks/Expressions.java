@@ -29,10 +29,11 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
@@ -90,5 +91,16 @@ public class Expressions {
       }
     }
     return result;
+  }
+
+  public static Expression removeParentheses(@Nullable Expression expression) {
+    if (expression == null) {
+      return null;
+    }
+    Expression res = expression;
+    while (res.is(Kind.PARENTHESIZED)) {
+      res = ((ParenthesizedExpression) res).expression();
+    }
+    return res;
   }
 }

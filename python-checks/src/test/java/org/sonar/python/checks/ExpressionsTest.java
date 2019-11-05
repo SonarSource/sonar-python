@@ -34,6 +34,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.checks.Expressions.isFalsy;
+import static org.sonar.python.checks.Expressions.removeParentheses;
 
 public class ExpressionsTest {
 
@@ -71,6 +72,15 @@ public class ExpressionsTest {
     assertThat(isFalsy(exp("{}"))).isTrue();
 
     assertThat(isFalsy(exp("x.y"))).isFalse();
+  }
+
+  @Test
+  public void remove_parentheses() {
+    assertThat(removeParentheses(exp("42")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
+    assertThat(removeParentheses(exp("(42)")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
+    assertThat(removeParentheses(exp("((42))")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
+    assertThat(removeParentheses(exp("((a))")).getKind()).isEqualTo(Kind.NAME);
+    assertThat(removeParentheses(null)).isNull();
   }
 
   private Expression exp(String code) {

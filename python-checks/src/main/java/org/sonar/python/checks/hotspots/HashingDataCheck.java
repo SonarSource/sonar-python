@@ -25,19 +25,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
-import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = HashingDataCheck.CHECK_KEY)
@@ -158,7 +158,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   private static boolean isOverwritingDjangoHashers(List<ExpressionList> lhsExpressions) {
     for (ExpressionList expr : lhsExpressions) {
       for (Expression expression : expr.expressions()) {
-        Expression baseExpr = removeParenthesis(expression);
+        Expression baseExpr = Expressions.removeParentheses(expression);
         if (baseExpr.is(Tree.Kind.QUALIFIED_EXPR)) {
           QualifiedExpression qualifiedExpression = (QualifiedExpression) baseExpr;
           if (qualifiedExpression.symbol() != null
@@ -169,14 +169,6 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
       }
     }
     return false;
-  }
-
-  private static Expression removeParenthesis(Expression expression) {
-    Expression res = expression;
-    while (res.is(Tree.Kind.PARENTHESIZED)) {
-      res = ((ParenthesizedExpression) res).expression();
-    }
-    return res;
   }
 
   private static void checkQuestionableHashingAlgorithm(SubscriptionContext ctx) {

@@ -24,10 +24,11 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+
+import static org.sonar.python.checks.Expressions.removeParentheses;
 
 @Rule(key = "S2737")
 public class ExceptRethrowingCheck extends PythonSubscriptionCheck {
@@ -59,13 +60,4 @@ public class ExceptRethrowingCheck extends PythonSubscriptionCheck {
       }
     });
   }
-
-  private static Expression removeParentheses(Expression expression) {
-    if (expression.is(Tree.Kind.PARENTHESIZED)) {
-      return removeParentheses(((ParenthesizedExpression) expression).expression());
-    } else {
-      return expression;
-    }
-  }
-
 }
