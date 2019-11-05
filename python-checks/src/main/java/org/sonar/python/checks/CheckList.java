@@ -101,6 +101,7 @@ public final class CheckList {
       NoPersonReferenceInTodoCheck.class,
       OneStatementPerLineCheck.class,
       OsExecCheck.class,
+      OverwrittenCollectionEntryCheck.class,
       ParsingErrorCheck.class,
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
