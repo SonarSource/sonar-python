@@ -7,19 +7,19 @@ def non_empty_function():
   foo()
 
 #Not yet implemented
-def fp():
+def comment_on_previous_dedent():
   pass
 
 foo()
-# Not yet implemented - comment associated with def keyword
-def func():
+# Not yet implemented
+def comment_on_def_keyword():
   pass
 
-def comment_before_pass():
+def comment_in_body():
   # Not yet implemented
   pass
 
-def same_line_as_pass():
+def comment_same_line_as_pass():
   pass # Not yet implemented
 
 def comment_at_func_def(): # Not yet implemented
@@ -35,7 +35,7 @@ bar()
 def empty_function_fn():
   pass
 
-#FN: some unrelated comment after dedent is attached to the previous function
+#FN: some unrelated comment after dedent is linked to the previous function
 bar()
 
 foo() # Fixme (FN)
@@ -82,11 +82,11 @@ def function_with_multiple_statements():
 
 class clazz:
   # Not implemented
-  def func():
+  def comment_on_indent():
     pass
 
   if cond:
     #Not implemented
-    def  func():
+    def  comment_on_indent():
       pass
 
