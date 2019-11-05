@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
 public abstract class PythonCfgBlock implements CfgBlock {
@@ -74,10 +75,15 @@ public abstract class PythonCfgBlock implements CfgBlock {
 
   @Override
   public String toString() {
+    return toStringDisplayPosition() + elements.stream().map(elem -> elem.getKind().toString()).collect(Collectors.joining(";"));
+  }
+
+  protected String toStringDisplayPosition() {
     if (elements.isEmpty()) {
       return "empty";
     }
-    return elements.stream().map(elem -> elem.getKind().toString()).collect(Collectors.joining(";"));
+    Token token = elements.get(0).firstToken();
+    return token.line() + ":" + token.column() + ":";
   }
 
   void addPredecessor(PythonCfgBlock block) {
