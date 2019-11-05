@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.python.cfg.LiveVariablesAnalysis;
+import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 import org.sonar.python.tree.TreeUtils;

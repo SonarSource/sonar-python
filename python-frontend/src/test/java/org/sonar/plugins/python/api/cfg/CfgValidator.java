@@ -21,11 +21,13 @@ package org.sonar.plugins.python.api.cfg;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.LiveVariablesAnalysis;
+import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
+import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.semantic.Symbol;
 
 import static java.lang.String.format;
@@ -151,6 +153,35 @@ public class CfgValidator {
   public static void assertLiveVariables(ControlFlowGraph actualCfg, LiveVariablesAnalysis actualLva) {
     ExpectedCfgStructure expectedCfg = ExpectedCfgStructure.parse(actualCfg.blocks());
     new CfgValidator(expectedCfg).assertLva(actualCfg, actualLva);
+  }
+
+  public static void assertDefinedVariables(ControlFlowGraph actualCfg, DefinedVariablesAnalysis actualAnalysis) {
+    ExpectedCfgStructure expectedCfg = ExpectedCfgStructure.parse(actualCfg.blocks());
+    new CfgValidator(expectedCfg).assertDefinedVars(actualCfg, actualAnalysis);
+  }
+
+  private void assertDefinedVars(ControlFlowGraph actualCfg, DefinedVariablesAnalysis actualAnalysis) {
+    assertThat(actualCfg.blocks())
+      .withFailMessage(buildDebugMessage("size", "CFG"))
+      .hasSize(expectedCfg.size());
+
+    for (CfgBlock actualBlock : actualCfg.blocks()) {
+      if (actualBlock.equals(actualCfg.end())) {
+        continue;
+      }
+
+      String blockTestId = expectedCfg.testId(actualBlock);
+      DefinedVariablesAnalysis.DefinedVariables actualDefinedVariables = actualAnalysis.getDefinedVariables(actualBlock);
+      assertVariablesAreEqual("In Defined Variables", definedVariables(actualDefinedVariables.getIn()), expectedCfg.expecteInDefVariables(actualBlock), blockTestId);
+      assertVariablesAreEqual("Out Defined Variables", definedVariables(actualDefinedVariables.getOut()), expectedCfg.expecteOutDefVariables(actualBlock), blockTestId);
+    }
+  }
+
+  private Set<Symbol> definedVariables(Map<Symbol, DefinedVariablesAnalysis.VariableDefinition> vars) {
+    return vars.entrySet().stream()
+      .filter(entry -> entry.getValue() == DefinedVariablesAnalysis.VariableDefinition.DEFINED)
+      .map(Map.Entry::getKey)
+      .collect(Collectors.toSet());
   }
 
   private void assertLva(ControlFlowGraph actualCfg, LiveVariablesAnalysis actualLva) {

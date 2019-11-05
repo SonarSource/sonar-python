@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.LiveVariablesAnalysis;
+import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
