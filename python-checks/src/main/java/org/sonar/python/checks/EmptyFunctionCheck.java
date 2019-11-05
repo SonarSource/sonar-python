@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -31,6 +32,7 @@ import org.sonar.python.tree.TreeUtils;
 public class EmptyFunctionCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Add a nested comment explaining why this %s is empty, or complete the implementation.";
+  private static final List<String> ABC_DECORATORS = Arrays.asList("abstractmethod", "abstractstaticmethod", "abstractproperty", "abstractclassmethod");
 
   @Override
   public void initialize(Context context) {
@@ -38,7 +40,7 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (functionDef.decorators().stream()
         .map(d -> d.name().names().get(d.name().names().size() - 1))
-        .anyMatch(n -> n.name().equals("abstractmethod"))) {
+        .anyMatch(n -> ABC_DECORATORS.contains(n.name()))) {
         return;
       }
 

@@ -46,13 +46,26 @@ def fn():
 class clazz():
 
   @abstractmethod
-  def abstract_method():
+  def abstract_method(self):
     pass
 
   @abc.abstractmethod
+  def abstract_method(self):
+    pass
+
+  @abc.abstractproperty
+  def abstract_method(self):
+    pass
+
+  @abc.abstractclassmethod
+  def abstract_method(cls):
+    pass
+
+  @abc.abstractstaticmethod
   def abstract_method():
     pass
 
+  foo()
   # Noncompliant@+2 {{Add a nested comment explaining why this method is empty, or complete the implementation.}}
   bar()
   def emtpy_method():
