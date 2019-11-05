@@ -249,3 +249,19 @@ def with_stmt_ok_2():
     with open2() as x:
         pass
     print(x)
+
+def used_in_subfunction():
+    var = 42
+    print(var)
+    def inner(): print(var)
+    var = 43 # OK
+    inner()
+    var = 44 # FN
+
+def used_in_lambda():
+    var = 42
+    print(var)
+    inner = lambda : print(var)
+    var = 43 # OK
+    inner()
+    var = 44 # FN
