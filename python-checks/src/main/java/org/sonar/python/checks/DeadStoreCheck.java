@@ -56,7 +56,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         return;
       }
       LiveVariablesAnalysis lva = LiveVariablesAnalysis.analyze(cfg);
-      cfg.blocks().forEach(block -> verifyBlock(ctx, block, lva.getLiveVariables(block), lva.getReadSymbols(), functionDef.localVariables()));
+      cfg.blocks().forEach(block -> verifyBlock(ctx, block, lva.getLiveVariables(block), lva.getReadSymbols(), functionDef));
     });
   }
 
@@ -64,7 +64,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
    * Bottom-up approach, keeping track of which variables will be read by successor elements.
    */
   private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
-                                  Set<Symbol> readSymbols, Set<Symbol> localVars) {
+                                  Set<Symbol> readSymbols, FunctionDef functionDef) {
 
     Set<Symbol> willBeRead = new HashSet<>(blockLiveVariables.getOut());
     ListIterator<Tree> elementsReverseIterator = block.elements().listIterator(block.elements().size());
@@ -76,7 +76,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
           return;
         }
         if (usage.isWrite() && !usage.isRead()) {
-          if (!willBeRead.contains(symbol) && localVars.contains(symbol) && !isException(symbol, element)) {
+          if (!willBeRead.contains(symbol) && functionDef.localVariables().contains(symbol) && !isException(symbol, element, functionDef)) {
             String message = isMultipleAssignement(element)
               ? "Rename \"" + symbol.name() + "\" to \"_\" as it is not used after assignment."
               : String.format(MESSAGE_TEMPLATE, symbol.name());
@@ -95,11 +95,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       ((AssignmentStatement) element).lhsExpressions().stream().anyMatch(lhsExpression -> lhsExpression.expressions().size() > 1);
   }
 
-  private static boolean isException(Symbol symbol, Tree element) {
+  private static boolean isException(Symbol symbol, Tree element, FunctionDef functionDef) {
     return isAssignmentToFalsyOrTrueLiteral(element)
       || isFunctionDeclarationSymbol(symbol)
       || isLoopDeclarationSymbol(symbol, element)
-      || isWithInstance(element);
+      || isWithInstance(element)
+      || isUsedInSubFunction(symbol, functionDef);
   }
 
   private static boolean isLoopDeclarationSymbol(Symbol symbol, Tree element) {
@@ -136,5 +137,10 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static boolean isFunctionDeclarationSymbol(Symbol symbol) {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
+  }
+
+  private static boolean isUsedInSubFunction(Symbol symbol, FunctionDef functionDef) {
+    return symbol.usages().stream()
+      .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA) != functionDef);
   }
 }
