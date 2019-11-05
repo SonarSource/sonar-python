@@ -19,9 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
@@ -44,9 +46,25 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
         if (TreeUtils.tokens(functionDef).stream().anyMatch(t -> !t.trivia().isEmpty())) {
           return;
         }
+        if (hasCommentAbove(functionDef)) {
+          return;
+        }
         String type = functionDef.isMethodDefinition() ? "method" : "function";
         ctx.addIssue(functionDef.name(), String.format(MESSAGE, type));
       }
     });
+  }
+
+  private static boolean hasCommentAbove(FunctionDef functionDef) {
+    Tree parent = functionDef.parent();
+    List<Token> tokens = TreeUtils.tokens(parent);
+    Token defKeyword = functionDef.defKeyword();
+    int index = tokens.indexOf(defKeyword);
+    if (index == 0) {
+      parent = parent.parent();
+      tokens = TreeUtils.tokens(parent);
+      index = tokens.indexOf(defKeyword);
+    }
+    return index > 0 && !tokens.get(index - 1).trivia().isEmpty();
   }
 }

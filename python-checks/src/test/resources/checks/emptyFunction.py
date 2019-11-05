@@ -6,8 +6,7 @@ def empty_function():
 def non_empty_function():
   foo()
 
-# Noncompliant@+2
-#FP: Comment is associated with previous dedent
+#Not yet implemented
 def fp():
   pass
 
@@ -39,6 +38,11 @@ def empty_function_fn():
 #FN: some unrelated comment after dedent is attached to the previous function
 bar()
 
+foo() # Fixme (FN)
+
+def fn():
+  pass
+
 class clazz():
 
   @abstractmethod
@@ -62,3 +66,14 @@ class clazz():
 def function_with_multiple_statements():
   foo()
   bar()
+
+class clazz:
+  # Not implemented
+  def func():
+    pass
+
+  if cond:
+    #Not implemented
+    def  func():
+      pass
+
