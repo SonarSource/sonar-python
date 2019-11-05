@@ -142,10 +142,9 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
       return ((Name) tree).name();
     } else if (tree.is(Kind.SLICE_ITEM)) {
       SliceItem sliceItem = (SliceItem) tree;
-      List<String> keyParts = Stream.of(sliceItem.lowerBound(), sliceItem.upperBound(), sliceItem.stride())
+      return Stream.of(sliceItem.lowerBound(), sliceItem.upperBound(), sliceItem.stride())
         .map(e -> e == null ? "" : key(e))
-        .collect(Collectors.toList());
-      return keyParts.contains(null) ? null : String.join(":", keyParts);
+        .collect(Collectors.joining(":"));
     }
     return null;
   }
