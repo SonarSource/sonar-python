@@ -230,3 +230,22 @@ def foreach_block_nok(list):
     i = 42 # Noncompliant
     for i in list:
         print i
+
+def with_stmt_ok():
+    x = 42
+    with open(x): # OK
+        pass
+    print(x)
+
+def with_stmt_nok():
+    x = 42  # Noncompliant
+    with open() as x:
+        pass
+    print(x)
+
+def with_stmt_ok_2():
+    with open1() as x:  # OK
+        pass
+    with open2() as x:
+        pass
+    print(x)

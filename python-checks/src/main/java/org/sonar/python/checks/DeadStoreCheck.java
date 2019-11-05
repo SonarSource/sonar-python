@@ -96,12 +96,19 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isException(Symbol symbol, Tree element) {
-    return isAssignmentToFalsyOrTrueLiteral(element) || isFunctionDeclarationSymbol(symbol) || isLoopDeclarationSymbol(symbol, element);
+    return isAssignmentToFalsyOrTrueLiteral(element)
+      || isFunctionDeclarationSymbol(symbol)
+      || isLoopDeclarationSymbol(symbol, element)
+      || isWithInstance(element);
   }
 
   private static boolean isLoopDeclarationSymbol(Symbol symbol, Tree element) {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.LOOP_DECLARATION)
       && TreeUtils.firstAncestorOfKind(element, Tree.Kind.FOR_STMT) != null;
+  }
+
+  private static boolean isWithInstance(Tree element) {
+    return element.is(Tree.Kind.WITH_ITEM);
   }
 
   private static boolean isAssignmentToFalsyOrTrueLiteral(Tree element) {
