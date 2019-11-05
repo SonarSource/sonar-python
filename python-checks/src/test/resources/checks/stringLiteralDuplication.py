@@ -57,10 +57,21 @@ def decorators_should_be_excluded():
     def users_post():
         pass
 
-def literals_with_only_letters_and_digits_should_be_excluded():
-    options = { 'suppress': False }
-    if options['suppress']:
-        print(options['suppress'])
+def literals_with_only_letters_and_digits_and_underscore_or_dash_should_be_excluded():
+    options = { 'debug_logs': False }
+    if options['debug_logs']:
+        print(options['debug_logs'])
+    encoding = 'utf-8'
+    encoding = 'utf-8'
+    encoding = 'utf-8'
+
+def simple_formatting_patterns_should_be_excluded(args):
+    print("%s %s" % args)
+    print("%s %s" % args)
+    print("%s %s" % args)
+    print('{:>10}'.format(args))
+    print('{:>10}'.format(args))
+    print('{:>10}'.format(args))
 
 def docstrings_should_be_excluded():
     def duplicated_docstring_1():
