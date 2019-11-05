@@ -58,6 +58,7 @@ public final class CheckList {
       ClearTextProtocolsCheck.class,
       CognitiveComplexityFunctionCheck.class,
       CollapsibleIfStatementsCheck.class,
+      CollectionLengthComparisonCheck.class,
       CommandLineArgsCheck.class,
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
