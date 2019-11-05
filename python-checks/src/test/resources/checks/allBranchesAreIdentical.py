@@ -48,6 +48,14 @@ elif b == 1:
 
 
 a = 1 if x else 1 # Noncompliant
+#   ^>^^        ^<
+
+a = (lambda x: x+1
+#              ^^^>
+     if x > 0 # Noncompliant
+#    ^^
+     else x+1)
+#         ^^^<
 
 a = 1 if x else 1 if y else 1 # Noncompliant 2
 

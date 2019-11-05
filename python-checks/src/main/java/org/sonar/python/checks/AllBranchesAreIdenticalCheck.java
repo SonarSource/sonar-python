@@ -69,12 +69,13 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
   }
 
   private static void handleConditionalExpression(ConditionalExpression conditionalExpression, SubscriptionContext ctx) {
-    if (CheckUtils.areEquivalent(conditionalExpression.trueExpression(), conditionalExpression.falseExpression())) {
-      ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_EXP_MSG);
-    }
-    if (conditionalExpression.falseExpression().is(Tree.Kind.CONDITIONAL_EXPR) && nestedConditionalExpressionsIdentical(conditionalExpression.trueExpression(),
-      (ConditionalExpression) conditionalExpression.falseExpression())) {
-      ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_EXP_MSG);
+    boolean equivalentExpressions = CheckUtils.areEquivalent(conditionalExpression.trueExpression(), conditionalExpression.falseExpression());
+    boolean equivalentNestedExpressions = conditionalExpression.falseExpression().is(Tree.Kind.CONDITIONAL_EXPR) &&
+      nestedConditionalExpressionsIdentical(conditionalExpression.trueExpression(), (ConditionalExpression) conditionalExpression.falseExpression());
+    if (equivalentExpressions || equivalentNestedExpressions) {
+      ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_EXP_MSG)
+        .secondary(conditionalExpression.trueExpression(), null)
+        .secondary(conditionalExpression.falseExpression(), null);
     }
   }
 
