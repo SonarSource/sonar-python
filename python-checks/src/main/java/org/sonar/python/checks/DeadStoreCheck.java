@@ -77,7 +77,10 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
         }
         if (usage.isWrite() && !usage.isRead()) {
           if (!willBeRead.contains(symbol) && localVars.contains(symbol) && !isException(symbol, element)) {
-            ctx.addIssue(element, String.format(MESSAGE_TEMPLATE, symbol.name()));
+            String message = isMultipleAssignement(element)
+              ? "Rename \"" + symbol.name() + "\" to \"_\" as it is not used after assignment."
+              : String.format(MESSAGE_TEMPLATE, symbol.name());
+            ctx.addIssue(element, message);
           }
           willBeRead.remove(symbol);
         } else if (usage.isRead()) {
@@ -87,8 +90,18 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private static boolean isMultipleAssignement(Tree element) {
+    return element.is(Tree.Kind.ASSIGNMENT_STMT) &&
+      ((AssignmentStatement) element).lhsExpressions().stream().anyMatch(lhsExpression -> lhsExpression.expressions().size() > 1);
+  }
+
   private static boolean isException(Symbol symbol, Tree element) {
-    return isAssignmentToFalsyOrTrueLiteral(element) || isFunctionDeclarationSymbol(symbol);
+    return isAssignmentToFalsyOrTrueLiteral(element) || isFunctionDeclarationSymbol(symbol) || isLoopDeclarationSymbol(symbol, element);
+  }
+
+  private static boolean isLoopDeclarationSymbol(Symbol symbol, Tree element) {
+    return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.LOOP_DECLARATION)
+      && TreeUtils.firstAncestorOfKind(element, Tree.Kind.FOR_STMT) != null;
   }
 
   private static boolean isAssignmentToFalsyOrTrueLiteral(Tree element) {

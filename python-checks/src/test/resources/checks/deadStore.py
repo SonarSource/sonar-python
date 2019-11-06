@@ -130,11 +130,11 @@ def loop_only_assignment():
     while p:
         x = foo() # Noncompliant
 
-def foreach_nok():
+def foreach():
     elem = 42
     print(elem)
     x = 42
-    for elem in foo(): # Noncompliant
+    for elem in foo(): # OK
         print(x)
     print()
 
@@ -220,4 +220,13 @@ def falsy_or_true_initialization():
     x4 = 42
     print(x4)
 
+def multiple_assignment():
+    a, b = foo() # Noncompliant {{Rename "a" to "_" as it is not used after assignment.}}
+    print(b)
+    a = 42
+    print(a)
 
+def foreach_block_nok(list):
+    i = 42 # Noncompliant
+    for i in list:
+        print i
