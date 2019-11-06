@@ -1,3 +1,5 @@
+a = (1 if x else 1) if cond else (1 if x else 1) # Noncompliant
+
 def func():
   if b == 0:  # Noncompliant {{Remove this if statement or edit its code blocks so that they're not all the same.}}
 # ^^
@@ -57,12 +59,19 @@ a = (lambda x: x+1
      else x+1)
 #         ^^^<
 
-a = 1 if x else 1 if y else 1 # Noncompliant 2
+a = 1 if x else 1 if y else 1 # Noncompliant
 
-a = 1 if x else 1 if y else 1 if z else 1 # Noncompliant 3
+a = 1 if x else 1 if y else 1 if z else 1 # Noncompliant
 
 a = (1 if x else 1) if cond else (2 if x else 3) # Noncompliant
-#      ^^
+#    ^>^^        ^<
 a = 1 if x else 2 if y else 1
 
 a = 1 if x else 1 if y else 2
+
+a = (1 if x else 1) if cond else 1 # Noncompliant
+
+a = (1 if x else 1) if cond else (1 if x else 1) # Noncompliant
+
+a = ((1 if x else 1) if cond else (1 if x else 1)) if other else (1 if x else (1 if y else 1 if z else 1)) # Noncompliant
+#     ^>          ^>               ^>          ^>  ^^             ^<           ^<          ^<          ^<
