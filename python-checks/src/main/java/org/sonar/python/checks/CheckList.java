@@ -69,6 +69,7 @@ public final class CheckList {
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
       DynamicCodeExecutionCheck.class,
+      EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
       ExceptRethrowingCheck.class,
       ExecStatementUsageCheck.class,

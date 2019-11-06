@@ -1,0 +1,67 @@
+<p>There are several reasons for a function or a method not to have a body:</p>
+<ul>
+  <li> It is an unintentional omission, and should be fixed to prevent an unexpected behavior in production. </li>
+  <li> It is not yet, or never will be, supported. In this case an exception should be thrown. </li>
+  <li> The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def myfunc1():  # Noncompliant
+    pass
+
+class MyClass:
+    def mymethod1(self):  # Noncompliant
+        pass
+
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def myfunc1():
+    pass  # comment explaining why this function is empty
+
+def myfunc2():
+    raise NotImplementedError()
+
+def myfunc3():
+    """
+    Docstring explaining why this function is empty.
+    """
+
+class MyClass:
+    def mymethod1(self):
+        pass  # comment explaining why this function is empty
+
+    def mymethod2(self):
+        raise NotImplementedError()
+
+    def mymethod3(self):
+        """
+        Docstring explaining why this method is empty. Note that this is not recommended for classes
+        which are meant to be subclassed.
+        """
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised when the empty method is abstract and meant to be overriden in a subclass, i.e. it is decorated with
+<code>abc.abstractmethod</code>, <code>abc.abstractstaticmethod</code>, <code>abc.abstractclassmethod</code> or <code>abc.abstractproperty</code>.
+Note however that these methods should normally have a docstring explaining how subclasses should implement these methods.</p>
+<pre>
+import abc
+
+class MyAbstractClass(abc.ABC):
+    @abc.abstractproperty
+    def myproperty(self):
+        pass
+
+    @abc.abstractclassmethod
+    def myclassmethod(cls):
+        pass
+
+    @abc.abstractmethod
+    def mymethod(self):
+        pass
+
+    @abc.abstractstaticmethod
+    def mystaticmethod():
+        pass
+</pre>
+
