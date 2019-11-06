@@ -21,7 +21,7 @@ container_definition: &CONTAINER_DEFINITION
 win_vm_definition: &WINDOWS_VM_DEFINITION
   gce_instance:
     image_project: language-team
-    image_name: windows-dotnet
+    image_family: lt-base-windows
     platform: windows
     zone: us-central1-a
     preemptible: false
