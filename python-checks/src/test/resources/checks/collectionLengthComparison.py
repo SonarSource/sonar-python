@@ -2,14 +2,14 @@ def comparison_of_len_and_zero(a):
     if len(a) > 0: pass
     if len(a) < 0: pass # Noncompliant
     if len(a) >= 0: pass # Noncompliant
-    if len(a) <= 0: pass # Noncompliant
+    if len(a) <= 0: pass # ok, this is a questionable construct, but the result is not known in advance.
     if len(a) == 0: pass
 
 def reversed_comparison_of_len_and_zero(a):
     if 0 < len(a): pass
     if 0 > len(a): pass # Noncompliant
     if 0 <= len(a): pass # Noncompliant
-    if 0 >= len(a): pass # Noncompliant
+    if 0 >= len(a): pass # ok, this is a questionable construct, but the result is not known in advance.
     if 0 == len(a): pass
 
 def with_parentheses(a):

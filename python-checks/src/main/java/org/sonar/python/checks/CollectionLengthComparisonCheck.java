@@ -37,10 +37,10 @@ import static org.sonar.python.checks.Expressions.removeParentheses;
 public class CollectionLengthComparisonCheck extends PythonSubscriptionCheck {
 
   private static final EnumSet<PythonPunctuator> INVALID_OPERATORS =
-    EnumSet.of(PythonPunctuator.LT, PythonPunctuator.LT_EQU, PythonPunctuator.GT_EQU);
+    EnumSet.of(PythonPunctuator.LT, PythonPunctuator.GT_EQU);
 
   private static final EnumSet<PythonPunctuator> INVALID_REVERSE_OPERATORS =
-    EnumSet.of(PythonPunctuator.GT, PythonPunctuator.LT_EQU, PythonPunctuator.GT_EQU);
+    EnumSet.of(PythonPunctuator.GT, PythonPunctuator.LT_EQU);
 
   @Override
   public void initialize(Context context) {
