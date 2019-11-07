@@ -19,8 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashSet;
-import java.util.ListIterator;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -66,28 +64,17 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
                                   Set<Symbol> readSymbols, FunctionDef functionDef) {
 
-    Set<Symbol> willBeRead = new HashSet<>(blockLiveVariables.getOut());
-    ListIterator<Tree> elementsReverseIterator = block.elements().listIterator(block.elements().size());
-    while (elementsReverseIterator.hasPrevious()) {
-      Tree element = elementsReverseIterator.previous();
-      blockLiveVariables.getVariableUsages(element).forEach((symbol, usage) -> {
-        if (!readSymbols.contains(symbol)) {
-          // will be reported by S1481
-          return;
-        }
-        if (usage.isWrite() && !usage.isRead()) {
-          if (!willBeRead.contains(symbol) && functionDef.localVariables().contains(symbol) && !isException(symbol, element, functionDef)) {
-            String message = isMultipleAssignement(element)
-              ? "Rename \"" + symbol.name() + "\" to \"_\" as it is not used after assignment."
-              : String.format(MESSAGE_TEMPLATE, symbol.name());
-            ctx.addIssue(element, message);
-          }
-          willBeRead.remove(symbol);
-        } else if (usage.isRead()) {
-          willBeRead.add(symbol);
-        }
+    DeadStoreUtils.findUnnecessaryAssignments(block, blockLiveVariables, functionDef)
+      .stream()
+      // symbols should have at least one read usage (otherwise will be reported by S1481)
+      .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
+      .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
+      .forEach(unnecessaryAssignment -> {
+        String message = isMultipleAssignement(unnecessaryAssignment.element)
+          ? "Rename \"" + unnecessaryAssignment.symbol.name() + "\" to \"_\" as it is not used after assignment."
+          : String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
+        ctx.addIssue(unnecessaryAssignment.element, message);
       });
-    }
   }
 
   private static boolean isMultipleAssignement(Tree element) {
@@ -100,7 +87,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       || isFunctionDeclarationSymbol(symbol)
       || isLoopDeclarationSymbol(symbol, element)
       || isWithInstance(element)
-      || isUsedInSubFunction(symbol, functionDef);
+      || isUsedInSubFunction(symbol, functionDef)
+      || DeadStoreUtils.isParameter(element);
   }
 
   private static boolean isLoopDeclarationSymbol(Symbol symbol, Tree element) {
