@@ -67,6 +67,9 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+      if (functionDef.asyncKeyword() != null) {
+        return;
+      }
       List<Tree> allRecursiveCalls = new ArrayList<>();
       boolean endBlockIsReachable = collectRecursiveCallsAndCheckIfEndBlockIsReachable(functionDef, ctx.pythonFile(), allRecursiveCalls);
       if (!allRecursiveCalls.isEmpty() && !endBlockIsReachable) {

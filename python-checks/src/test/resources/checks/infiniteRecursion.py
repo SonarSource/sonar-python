@@ -298,3 +298,7 @@ def recursion_in_try_block():
             f() # OK, compute could raise exception
         except Exception as e:
             print(e)
+
+def async_functions():
+    async def f():
+        await f() # OK
