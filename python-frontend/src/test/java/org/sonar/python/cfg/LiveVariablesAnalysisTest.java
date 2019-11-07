@@ -198,6 +198,21 @@ public class LiveVariablesAnalysisTest {
     assertThat(readSymbols).extracting("name").containsExactlyInAnyOrder("bar", "qix");
   }
 
+  @Test
+  public void used_symbols() {
+    List<String> lines = Arrays.asList(
+      "a = 10",
+      "b = 42",
+      "print(a+b)"
+    );
+    FileInput fileInput = PythonTestUtils.parse("def wrapper():", lines.stream().map(s -> "  " + s).collect(Collectors.joining("\n")));
+    FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
+    ControlFlowGraph cfg = ControlFlowGraph.build(fun, file);
+    LiveVariablesAnalysis analysis = LiveVariablesAnalysis.analyze(cfg);
+    assertThat(analysis.getLiveVariables(cfg.start()).usedSymbols()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "print");
+  }
+
+
   private void verifyLiveVariableAnalysis(String... lines) {
     verifyLiveVariableAnalysisWithArgs("", lines);
   }

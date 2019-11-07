@@ -82,6 +82,7 @@ public final class CheckList {
       FunctionNameCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
+      IgnoredParameterCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
