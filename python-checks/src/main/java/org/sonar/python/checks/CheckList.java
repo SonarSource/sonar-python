@@ -130,6 +130,7 @@ public final class CheckList {
       TrailingWhitespaceCheck.class,
       UndeclaredNameUsageCheck.class,
       UnusedLocalVariableCheck.class,
+      UnusedNestedDefinitionCheck.class,
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
       WeakSSLProtocolCheck.class,
