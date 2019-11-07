@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -35,10 +36,11 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S3923")
 public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
 
-  private static final String CONDITIONAL_EXP_MSG = "This conditional operation returns the same value whether the condition is \"true\" or \"false\".";
+  private static final List<ConditionalExpression> ignoreList = new ArrayList<>();
 
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> ignoreList.clear());
     context.registerSyntaxNodeConsumer(Tree.Kind.IF_STMT, ctx -> handleIfStatement((IfStatement) ctx.syntaxNode(), ctx));
     context.registerSyntaxNodeConsumer(Tree.Kind.CONDITIONAL_EXPR, ctx -> handleConditionalExpression((ConditionalExpression) ctx.syntaxNode(), ctx));
   }
@@ -69,25 +71,44 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
   }
 
   private static void handleConditionalExpression(ConditionalExpression conditionalExpression, SubscriptionContext ctx) {
-    if (CheckUtils.areEquivalent(conditionalExpression.trueExpression(), conditionalExpression.falseExpression())) {
-      ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_EXP_MSG);
+    if (ignoreList.contains(conditionalExpression)) {
+      return;
     }
-    if (conditionalExpression.falseExpression().is(Tree.Kind.CONDITIONAL_EXPR) && nestedConditionalExpressionsIdentical(conditionalExpression.trueExpression(),
-      (ConditionalExpression) conditionalExpression.falseExpression())) {
-      ctx.addIssue(conditionalExpression.ifKeyword(), CONDITIONAL_EXP_MSG);
+    if (areIdentical(conditionalExpression.trueExpression(), conditionalExpression.falseExpression())) {
+      PreciseIssue issue = ctx.addIssue(conditionalExpression.ifKeyword(), "This conditional expression returns the same value whether the condition is \"true\" or \"false\".");
+      addSecondaryLocations(issue, conditionalExpression.trueExpression());
+      addSecondaryLocations(issue, conditionalExpression.falseExpression());
     }
   }
 
-  private static boolean nestedConditionalExpressionsIdentical(Expression trueExpression, ConditionalExpression conditionalExpression) {
-    if (!CheckUtils.areEquivalent(trueExpression, conditionalExpression.trueExpression())) {
-      return false;
+  private static void addSecondaryLocations(PreciseIssue issue, Expression expression) {
+    Expression unwrappedExpression = Expressions.removeParentheses(expression);
+    if (unwrappedExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
+      ConditionalExpression conditionalExpression = (ConditionalExpression) unwrappedExpression;
+      ignoreList.add(conditionalExpression);
+      addSecondaryLocations(issue, conditionalExpression.trueExpression());
+      addSecondaryLocations(issue, conditionalExpression.falseExpression());
+    } else {
+      issue.secondary(unwrappedExpression, null);
     }
-    if (CheckUtils.areEquivalent(trueExpression, conditionalExpression.falseExpression())) {
-      return true;
+  }
+
+  private static boolean areIdentical(Expression trueExpression, Expression falseExpression) {
+    Expression unwrappedTrueExpression = unwrapIdenticalExpressions(trueExpression);
+    Expression unwrappedFalseExpression = unwrapIdenticalExpressions(falseExpression);
+    return CheckUtils.areEquivalent(unwrappedTrueExpression, unwrappedFalseExpression);
+  }
+
+  private static Expression unwrapIdenticalExpressions(Expression expression) {
+    Expression unwrappedExpression = Expressions.removeParentheses(expression);
+    if (unwrappedExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
+      boolean identicalExpressions = areIdentical(((ConditionalExpression) unwrappedExpression).trueExpression(), ((ConditionalExpression) unwrappedExpression).falseExpression());
+      if (identicalExpressions) {
+        while (unwrappedExpression.is(Tree.Kind.CONDITIONAL_EXPR)) {
+          unwrappedExpression = Expressions.removeParentheses(((ConditionalExpression) unwrappedExpression).trueExpression());
+        }
+      }
     }
-    if (conditionalExpression.falseExpression().is(Tree.Kind.CONDITIONAL_EXPR)) {
-      return nestedConditionalExpressionsIdentical(trueExpression, (ConditionalExpression) conditionalExpression.falseExpression());
-    }
-    return false;
+    return unwrappedExpression;
   }
 }
