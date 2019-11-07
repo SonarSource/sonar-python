@@ -19,14 +19,17 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5603")
 public class UnusedNestedDefinitionCheck extends PythonSubscriptionCheck {
@@ -40,7 +43,7 @@ public class UnusedNestedDefinitionCheck extends PythonSubscriptionCheck {
       if (!functionDef.decorators().isEmpty() || functionDef.isMethodDefinition()) {
         return;
       }
-      checkNestedDefinition(functionDef, functionDef.name().name(), Usage.Kind.FUNC_DECLARATION, ctx);
+      checkNestedDefinition(functionDef, functionDef.name(), ctx);
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
@@ -48,22 +51,16 @@ public class UnusedNestedDefinitionCheck extends PythonSubscriptionCheck {
       if (!classDef.decorators().isEmpty()) {
         return;
       }
-      checkNestedDefinition(classDef, classDef.name().name(), Usage.Kind.CLASS_DECLARATION, ctx);
+      checkNestedDefinition(classDef, classDef.name(), ctx);
     });
   }
 
-  private static void checkNestedDefinition(Tree tree, String name, Usage.Kind kind, SubscriptionContext ctx) {
-    Tree parent = tree.parent();
-    while (parent != null && !parent.is(Tree.Kind.CLASSDEF) && !parent.is(Tree.Kind.FUNCDEF)) {
-      parent = parent.parent();
-    }
+  private static void checkNestedDefinition(Tree tree, Name name, SubscriptionContext ctx) {
+    Tree parent = TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
     if (parent == null || !parent.is(Tree.Kind.FUNCDEF)) {
       return;
     }
-    FunctionDef parentFunction = (FunctionDef) parent;
-    parentFunction.localVariables().stream().filter(s -> s.name().equals(name))
-      .filter(s -> s.usages().stream().anyMatch(u -> u.kind().equals(kind)))
-      .findFirst().ifPresent(s -> checkSymbolUsages(s, ctx));
+    Optional.ofNullable(name.symbol()).ifPresent(s -> checkSymbolUsages(s, ctx));
   }
 
   private static void checkSymbolUsages(Symbol symbol, SubscriptionContext ctx) {

@@ -28,18 +28,14 @@ def noncompliant():
 
 
 def callbacks():
-
   @d.callback
   def using():  # Ok
-    nested_function()
+    pass
 
   @d.callback
   class NestedClass:  # Ok
       def __init__(self):
           print("NestedClass")
-
-  def nested_function():  # Ok
-    print("nested_function")
 
 def func():
   def otherfunc():
