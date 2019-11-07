@@ -44,6 +44,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   private static final int DEFAULT_THRESHOLD = 3;
   private static final Pattern BASIC_EXCLUSION_PATTERN = Pattern.compile("[_\\-a-zA-Z0-9]+");
   private static final Pattern FORMATTING_PATTERN = Pattern.compile("[0-9{} .-_%:dfrsymhYMHS]+");
+  private static final Pattern COLOR_PATTERN = Pattern.compile("#[0-9a-fA-F]{6}");
 
   @RuleProperty(
     key = "threshold",
@@ -91,7 +92,8 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
     boolean isExcluded = hasInterpolation
       || value.length() < MINIMUM_LITERAL_LENGTH
       || BASIC_EXCLUSION_PATTERN.matcher(value).matches()
-      || FORMATTING_PATTERN.matcher(value).matches();
+      || FORMATTING_PATTERN.matcher(value).matches()
+      || COLOR_PATTERN.matcher(value).matches();
     if (!isExcluded) {
       String valueWithQuotes = TreeUtils.tokens(literal).stream().map(Token::value).collect(Collectors.joining());
       literalsByValue.computeIfAbsent(valueWithQuotes, key -> new ArrayList<>()).add(literal);
