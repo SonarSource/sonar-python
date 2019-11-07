@@ -26,6 +26,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -44,7 +45,6 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
@@ -56,6 +56,7 @@ import org.sonar.python.PythonFile;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.DictCompExpressionImpl;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2190")
 public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
@@ -97,12 +98,19 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
       }
       List<Tree> blockRecursiveCalls = recursiveCallCollector.findRecursiveCalls(block.elements());
       if (!blockRecursiveCalls.isEmpty()) {
-        allRecursiveCalls.addAll(blockRecursiveCalls);
+        allRecursiveCalls.addAll(blockRecursiveCalls.stream()
+          .filter(tree -> !isInsideTryBlock(tree))
+          .collect(Collectors.toList()));
       } else {
         block.successors().stream().filter(pushedBlocks::add).forEach(blockToVisit::addLast);
       }
     }
     return recursiveCallCollector.functionSymbolHasBeenReassigned;
+  }
+
+  private static boolean isInsideTryBlock(Tree tree) {
+    Tree ancestor = TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FINALLY_CLAUSE, Tree.Kind.TRY_STMT);
+    return ancestor != null && ancestor.is(Tree.Kind.TRY_STMT);
   }
 
   private static class RecursiveCallCollector extends BaseTreeVisitor {

@@ -20,11 +20,9 @@ def func4(x):
         return 2
     return func4(x)
 
-def func5(x): # Noncompliant
-#   ^^^^^
+def func5(x): # OK
     try:
         return func5(x)
-#              ^^^^^<
     except:
         return 0
 
@@ -291,3 +289,12 @@ class C105:
         a.add(v1)
         v2 = lambda _: self.func105()
         a.add(v2)
+
+
+def recursion_in_try_block():
+    def f():
+        try:
+            compute()
+            f() # OK, compute could raise exception
+        except Exception as e:
+            print(e)
