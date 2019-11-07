@@ -40,7 +40,9 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.IfStatement;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -48,6 +50,7 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.plugins.python.api.tree.TupleParameter;
 import org.sonar.plugins.python.api.tree.WhileStatement;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.python.tree.TreeUtils;
@@ -67,11 +70,39 @@ public class ControlFlowGraphBuilder {
     exitTargets.push(end);
     if (statementList != null) {
       start = build(statementList.statements(), createSimpleBlock(end));
+      addParametersToStartBlock(statementList);
     } else {
       start = end;
     }
     removeEmptyBlocks();
     computePredecessors();
+  }
+
+  private void addParametersToStartBlock(StatementList statementList) {
+    if (statementList.parent().is(Tree.Kind.FUNCDEF)) {
+      ParameterList parameterList = ((FunctionDef) statementList.parent()).parameters();
+      if (parameterList != null) {
+        PythonCfgSimpleBlock parametersBlock = createSimpleBlock(start);
+        parameterList.all().forEach(parameter -> {
+          if (parameter.is(Tree.Kind.PARAMETER)) {
+            parametersBlock.addElement(parameter);
+            return;
+          }
+          addTupleParam((TupleParameter) parameter, parametersBlock);
+        });
+        start = parametersBlock;
+      }
+    }
+  }
+
+  private static void addTupleParam(TupleParameter tupleParameter, PythonCfgSimpleBlock parametersBlock) {
+    tupleParameter.parameters().forEach(parameter -> {
+      if (parameter.is(Tree.Kind.PARAMETER)) {
+        parametersBlock.addElement(parameter);
+        return;
+      }
+      addTupleParam((TupleParameter) parameter, parametersBlock);
+    });
   }
 
   private void computePredecessors() {

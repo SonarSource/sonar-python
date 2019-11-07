@@ -23,12 +23,13 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.sonar.python.PythonFile;
-import org.sonar.python.PythonTestUtils;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.PythonFile;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.cfg.PythonCfgBlock;
 import org.sonar.python.cfg.PythonCfgEndBlock;
 import org.sonar.python.cfg.PythonCfgSimpleBlock;
@@ -645,6 +646,19 @@ public class ControlFlowGraphTest {
       "if a: ",
       "  if_body(succ = [after_if], pred = [before])",
       "after_if(succ = [END], pred = [before, if_body])");
+  }
+
+  @Test
+  public void parameters() {
+    FileInput fileInput = PythonTestUtils.parse("def f(p1, p2): pass");
+    FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
+    ControlFlowGraph cfg = ControlFlowGraph.build(fun, file);
+    assertThat(cfg.start().elements()).extracting(element -> ((Parameter) element).name().name()).containsExactlyInAnyOrder("p1", "p2");
+
+    fileInput = PythonTestUtils.parse("def f((p1, (p2, p3)), p4): pass");
+    fun = (FunctionDef) fileInput.statements().statements().get(0);
+    cfg = ControlFlowGraph.build(fun, file);
+    assertThat(cfg.start().elements()).extracting(element -> ((Parameter) element).name().name()).containsExactlyInAnyOrder("p1", "p2", "p3", "p4");
   }
 
   private ControlFlowGraph verifyCfg(String... lines) {

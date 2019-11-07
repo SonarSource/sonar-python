@@ -230,7 +230,7 @@ public class ExpectedCfgStructure {
         }
 
         List<Tree> elements = block.elements();
-        if (elements.isEmpty()) {
+        if (elements.isEmpty() || elements.stream().allMatch(element -> element.is(Tree.Kind.PARAMETER))) {
           continue;
         }
 
