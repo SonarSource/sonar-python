@@ -65,6 +65,15 @@ def literals_with_only_letters_and_digits_and_underscore_or_dash_should_be_exclu
     encoding = 'utf-8'
     encoding = 'utf-8'
 
+def color_patterns_should_be_excluded():
+  color = "#ffffcc"
+  color2 = "#ffffcc"
+  color3 = "#ffffcc"
+
+  not_a_color = "#ffffcca" #Noncompliant
+  not_a_color = "#ffffcca"
+  not_a_color = "#ffffcca"
+
 def simple_formatting_patterns_should_be_excluded(args):
     print("%s %s" % args)
     print("%s %s" % args)
