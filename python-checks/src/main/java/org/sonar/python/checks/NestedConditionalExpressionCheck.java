@@ -24,25 +24,29 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3358")
 public class NestedConditionalExpressionCheck extends PythonSubscriptionCheck {
+
+  private static final Kind[] COMPREHENSION_KINDS = {
+    Kind.LIST_COMPREHENSION,
+    Kind.DICT_COMPREHENSION,
+    Kind.SET_COMPREHENSION,
+    Kind.GENERATOR_EXPR
+  };
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, ctx -> {
       Tree conditionalExpression = ctx.syntaxNode();
-      Tree parent = conditionalExpression.parent();
-      while (parent != null) {
-        if (parent.is(Kind.CONDITIONAL_EXPR)) {
-          ConditionalExpression parentConditional = (ConditionalExpression) parent;
+      Tree parentConditional = TreeUtils.firstAncestorOfKind(conditionalExpression, Kind.CONDITIONAL_EXPR);
+      if (parentConditional != null) {
+        boolean isInsideComprehension = TreeUtils.firstAncestorOfKind(conditionalExpression, COMPREHENSION_KINDS) != null;
+        if (!isInsideComprehension) {
           ctx.addIssue(conditionalExpression, "Extract this nested conditional expression into an independent statement.")
-            .secondary(parentConditional.ifKeyword(), null);
-          return;
-        } else if (parent.is(Kind.LIST_COMPREHENSION, Kind.DICT_COMPREHENSION, Kind.SET_COMPREHENSION, Kind.GENERATOR_EXPR)) {
-          return;
+            .secondary(((ConditionalExpression) parentConditional).ifKeyword(), null);
         }
-        parent = parent.parent();
       }
     });
   }
