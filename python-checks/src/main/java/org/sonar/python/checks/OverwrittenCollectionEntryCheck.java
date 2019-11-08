@@ -85,12 +85,12 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
   private static CollectionWrite collectionWrite(AssignmentStatement assignment, Expression expression) {
     if (expression.is(Kind.SLICE_EXPR)) {
       SliceExpression sliceExpression = (SliceExpression) expression;
-      String key = key(sliceExpression.sliceList().slices());
+      String key = key(sliceExpression.sliceList().children());
       return collectionWrite(assignment, sliceExpression.object(), key, sliceExpression.leftBracket(), sliceExpression.rightBracket());
 
     } else if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
-      String key = key(subscription.subscripts().expressions());
+      String key = key(subscription.subscripts().children());
       return collectionWrite(assignment, subscription.object(), key, subscription.leftBracket(), subscription.rightBracket());
 
     } else {
@@ -122,21 +122,23 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
   }
 
   @CheckForNull
-  private static String key(List<? extends Tree> subscriptsOrSlices) {
+  private static String key(List<Tree> trees) {
     StringBuilder key = new StringBuilder();
-    for (Tree tree : subscriptsOrSlices) {
+    for (Tree tree : trees) {
       String keyElement = key(tree);
       if (keyElement == null) {
         return null;
       }
-      key.append(",").append(keyElement);
+      key.append(keyElement);
     }
     return key.toString();
   }
 
   @CheckForNull
   private static String key(Tree tree) {
-    if (tree.is(Kind.NUMERIC_LITERAL)) {
+    if (tree.is(Kind.TOKEN)) {
+      return ((Token) tree).value();
+    } else if (tree.is(Kind.NUMERIC_LITERAL)) {
       return ((NumericLiteral) tree).valueAsString();
     } else if (tree.is(Kind.STRING_LITERAL)) {
       return ((StringLiteral) tree).trimmedQuotesValue();

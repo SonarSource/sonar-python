@@ -52,6 +52,8 @@ def tuple_keys(list1):
     list1[1, 3] = "a"
     list1[1, 3] = "a" # Noncompliant
     list1[1, 4] = "a"
+    list1[5] = "a"
+    list1[5,] = "a"
 
 def slicings(list1):
     list1[1:] = "a"
