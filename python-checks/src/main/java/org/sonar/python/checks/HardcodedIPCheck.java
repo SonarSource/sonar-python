@@ -57,7 +57,7 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
       if (isMultilineString(stringLiteral)) {
         return;
       }
-      String content = stringLiteral.stringElements().get(0).trimmedQuotesValue();
+      String content = Expressions.unescape(stringLiteral);
       Matcher matcher = IPV4_URL_REGEX.matcher(content);
       if (matcher.matches()) {
         String ip = matcher.group("ipv4");

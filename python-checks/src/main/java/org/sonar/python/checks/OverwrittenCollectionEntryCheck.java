@@ -141,7 +141,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     } else if (tree.is(Kind.NUMERIC_LITERAL)) {
       return ((NumericLiteral) tree).valueAsString();
     } else if (tree.is(Kind.STRING_LITERAL)) {
-      return ((StringLiteral) tree).trimmedQuotesValue();
+      return Expressions.unescape((StringLiteral) tree);
     } else if (tree.is(Kind.NAME)) {
       return ((Name) tree).name();
     } else if (tree.is(Kind.SLICE_ITEM)) {

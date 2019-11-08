@@ -20,13 +20,13 @@ open("/private/tmp/f","w+") # Noncompliant
 open("/private/var/tmp/f","w+") # Noncompliant
 
 # Windows
-open("\Windows\Temp\f") # Noncompliant
-open("D:\Windows\Temp\f") # Noncompliant
-open("\Windows\Temp\f") # Noncompliant
-open("\Temp\f") # Noncompliant
-open("\TEMP\f") # Noncompliant
-open("\TMP\f") # Noncompliant
-open("C:\Temperatures") # OK
+open(r"\Windows\Temp\f") # Noncompliant
+open(r"D:\Windows\Temp\f") # Noncompliant
+open(r"\Windows\Temp\f") # Noncompliant
+open(r"\Temp\f") # Noncompliant
+open(r"\TEMP\f") # Noncompliant
+open(r"\TMP\f") # Noncompliant
+open(r"C:\Temperatures") # OK
 
 def environ_variables():
     import os

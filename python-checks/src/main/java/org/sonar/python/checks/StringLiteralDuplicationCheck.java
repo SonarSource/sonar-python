@@ -87,7 +87,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
 
   @Override
   public void visitStringLiteral(StringLiteral literal) {
-    String value = literal.trimmedQuotesValue();
+    String value = Expressions.unescape(literal);
     boolean hasInterpolation = literal.stringElements().stream().anyMatch(StringElement::isInterpolated);
     boolean isExcluded = hasInterpolation
       || value.length() < MINIMUM_LITERAL_LENGTH

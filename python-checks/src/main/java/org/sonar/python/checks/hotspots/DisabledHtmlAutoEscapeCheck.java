@@ -64,7 +64,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isStringLiteral(Expression tree, String testedValue) {
-    return tree.is(Kind.STRING_LITERAL) && testedValue.equals(((StringLiteral) tree).trimmedQuotesValue());
+    return tree.is(Kind.STRING_LITERAL) && testedValue.equals(Expressions.unescape((StringLiteral) tree));
   }
 
   private static void checkCallExpression(SubscriptionContext ctx, CallExpression call) {

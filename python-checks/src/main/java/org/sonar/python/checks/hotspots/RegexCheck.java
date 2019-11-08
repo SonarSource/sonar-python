@@ -71,7 +71,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
       Expression expression = getExpression(Expressions.singleAssignedValue((Name) argExpression));
       if (expression != null && expression.is(Tree.Kind.STRING_LITERAL)) {
         secondaryLocation = IssueLocation.preciseLocation(expression, "");
-        literal = ((StringLiteral) expression).trimmedQuotesValue();
+        literal = Expressions.unescape((StringLiteral) expression);
       }
     }
     if (isSuspiciousRegex(literal)) {

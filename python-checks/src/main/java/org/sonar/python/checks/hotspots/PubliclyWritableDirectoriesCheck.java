@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5443")
@@ -51,7 +52,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.STRING_ELEMENT, ctx -> {
       StringElement tree = (StringElement) ctx.syntaxNode();
-      String stringElement = tree.trimmedQuotesValue().toLowerCase(Locale.ENGLISH);
+      String stringElement = Expressions.unescape(tree).toLowerCase(Locale.ENGLISH);
       if (UNIX_WRITABLE_DIRECTORIES.stream().anyMatch(dir -> containsDirectory(stringElement, dir)) ||
         WINDOWS_WRITABLE_DIRECTORIES.matcher(stringElement).matches()) {
         ctx.addIssue(tree, MESSAGE);
@@ -87,7 +88,7 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
 
   private static boolean isNonCompliantOsEnvironArgument(Expression expression) {
     return expression.is(Kind.STRING_LITERAL) &&
-      ((StringLiteral) expression).stringElements().stream().map(s -> s.trimmedQuotesValue().toLowerCase(Locale.ENGLISH)).anyMatch(NONCOMPLIANT_ENVIRON_VARIABLES::contains);
+      ((StringLiteral) expression).stringElements().stream().map(s -> Expressions.unescape(s).toLowerCase(Locale.ENGLISH)).anyMatch(NONCOMPLIANT_ENVIRON_VARIABLES::contains);
   }
 
   private static boolean isOsEnvironGetter(CallExpression callExpressionTree) {

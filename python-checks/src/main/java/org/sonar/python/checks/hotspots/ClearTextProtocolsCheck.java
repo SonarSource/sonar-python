@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S5332")
@@ -52,7 +53,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       Tree node = ctx.syntaxNode();
-      String value = ((StringElement) node).trimmedQuotesValue();
+      String value = Expressions.unescape((StringElement) node);
       unsafeProtocol(value)
         // cleanup slashes
         .map(protocol -> protocol.substring(0, protocol.length() - 3))
