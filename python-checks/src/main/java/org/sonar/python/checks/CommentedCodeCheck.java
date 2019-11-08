@@ -70,7 +70,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   }
 
   private static void visitMultilineComment(StringLiteral stringLiteral, SubscriptionContext ctx) {
-    String text = stringLiteral.trimmedQuotesValue();
+    String text = Expressions.unescape(stringLiteral);
     text = text.trim();
     if (!isEmpty(text) && isTextParsedAsCode(text)) {
       ctx.addIssue(stringLiteral, MESSAGE);
