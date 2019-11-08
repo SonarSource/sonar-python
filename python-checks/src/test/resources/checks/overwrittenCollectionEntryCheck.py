@@ -67,6 +67,16 @@ def slicings(list1):
     list1[:2:4] = "a"
     list1[:2:3] = "a" # Noncompliant
 
+def negative_indices(list1, f):
+    list1[-1] = "a"
+    list1[-2] = "a"
+    list1[-2] = "a" # Noncompliant
+    list1[-5:-3] = "a"
+    list1[-7:-5] = "a"
+    list1[-7:-5] = "a" # Noncompliant
+    list1[-9:-f()] = "a"
+    list1[-9:-f()] = "a"
+
 def non_trivial_collections(f, obj1, obj2):
     f()[1] = "a"
     f()[1] = "a"

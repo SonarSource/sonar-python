@@ -45,6 +45,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.IssueLocation;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.TreeUtils;
@@ -133,6 +134,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     return key.toString();
   }
 
+  @CheckForNull
   private static String key(Tree tree) {
     if (tree.is(Kind.NUMERIC_LITERAL)) {
       return ((NumericLiteral) tree).valueAsString();
@@ -142,9 +144,13 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
       return ((Name) tree).name();
     } else if (tree.is(Kind.SLICE_ITEM)) {
       SliceItem sliceItem = (SliceItem) tree;
-      return Stream.of(sliceItem.lowerBound(), sliceItem.upperBound(), sliceItem.stride())
+      List<String> keyParts = Stream.of(sliceItem.lowerBound(), sliceItem.upperBound(), sliceItem.stride())
         .map(e -> e == null ? "" : key(e))
-        .collect(Collectors.joining(":"));
+        .collect(Collectors.toList());
+      return keyParts.contains(null) ? null : String.join(":", keyParts);
+    } else if (tree.is(Kind.UNARY_MINUS)) {
+      String nested = key(((UnaryExpression) tree).expression());
+      return nested == null ? null : ("-" + nested);
     }
     return null;
   }
