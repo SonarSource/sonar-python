@@ -82,7 +82,7 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
         if (symbolUsage.isWrite()) {
           currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         }
-        DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.BOTTOM);
+        DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol)) {
           ctx.addIssue(element, symbol.name() + " is used before it is defined. Move the definition before.");
         }

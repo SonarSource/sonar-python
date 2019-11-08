@@ -85,7 +85,7 @@ public class DefinedVariablesAnalysisTest {
       "a = 1",
       "foo(a)",
       "if p:",
-      "  body( succ = [END], defIn = [], defOut = [])",
+      "  body( succ = [END], defIn = [_a], defOut = [_a])",
       "  foo(a)");
   }
 
@@ -94,12 +94,12 @@ public class DefinedVariablesAnalysisTest {
     verifyDefVariableAnalysis(
       "before_loop( succ = [cond], defIn = [], defOut = [_a])",
       "a = 1",
-      "while cond( succ = [after_loop, if_cond], defIn = [], defOut = [], gen = [], kill = []):",
-      "  if if_cond(succ = [cond, body], defIn = [], defOut = [], gen = [], kill = []):",
-      "    body( succ = [cond], defIn = [], defOut = [_a], gen = [], kill = [_a]);",
+      "while cond( succ = [after_loop, if_cond], defIn = [_a], defOut = [_a], gen = [], kill = []):",
+      "  if if_cond(succ = [cond, body], defIn = [_a], defOut = [_a], gen = [], kill = []):",
+      "    body( succ = [cond], defIn = [_a], defOut = [_a], gen = [], kill = [_a]);",
       "    a = 1",
       "    foo(a)",
-      "after_loop(succ = [END], defIn = [], defOut = [], gen = [_a], kill = [])",
+      "after_loop(succ = [END], defIn = [_a], defOut = [_a], gen = [_a], kill = [])",
       "foo(a)");
   }
   private void verifyDefVariableAnalysis(String... lines) {

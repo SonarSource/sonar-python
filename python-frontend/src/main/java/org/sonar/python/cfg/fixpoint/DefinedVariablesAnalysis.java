@@ -64,22 +64,14 @@ public class DefinedVariablesAnalysis {
   }
 
   public enum VariableDefinition {
-    BOTTOM,
     UNDEFINED,
-    DEFINED,
-    TOP;
+    DEFINED;
 
     static VariableDefinition join(VariableDefinition v1, VariableDefinition v2) {
-      if (v1 == BOTTOM) {
-        return v2;
+      if (v1 == UNDEFINED && v2 == UNDEFINED) {
+        return UNDEFINED;
       }
-      if (v2 == BOTTOM) {
-        return v1;
-      }
-      if (v1 != v2) {
-        return TOP;
-      }
-      return v1;
+      return DEFINED;
     }
   }
 
@@ -123,8 +115,8 @@ public class DefinedVariablesAnalysis {
       Set<Symbol> allKeys = new HashSet<>(programState1.keySet());
       allKeys.addAll(programState2.keySet());
       for (Symbol key : allKeys) {
-        VariableDefinition varDef1 = programState1.getOrDefault(key, VariableDefinition.BOTTOM);
-        VariableDefinition varDef2 = programState2.getOrDefault(key, VariableDefinition.BOTTOM);
+        VariableDefinition varDef1 = programState1.getOrDefault(key, VariableDefinition.UNDEFINED);
+        VariableDefinition varDef2 = programState2.getOrDefault(key, VariableDefinition.UNDEFINED);
         result.put(key, VariableDefinition.join(varDef1, varDef2));
       }
       return result;
