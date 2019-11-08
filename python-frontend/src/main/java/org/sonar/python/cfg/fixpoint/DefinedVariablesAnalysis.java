@@ -22,6 +22,7 @@ package org.sonar.python.cfg.fixpoint;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
@@ -41,13 +42,10 @@ public class DefinedVariablesAnalysis {
 
   private void compute(ControlFlowGraph cfg, Set<Symbol> localVariables) {
     Map<Symbol, VariableDefinition> initialState = new HashMap<>();
-    localVariables.forEach(variable -> {
-      if (variable.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.PARAMETER)) {
-        initialState.put(variable, VariableDefinition.DEFINED);
-        return;
-      }
-      initialState.put(variable, VariableDefinition.UNDEFINED);
-    });
+    for (Symbol variable : localVariables) {
+      boolean isParameter = variable.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.PARAMETER);
+      initialState.put(variable, isParameter ? VariableDefinition.DEFINED : VariableDefinition.UNDEFINED);
+    }
     Set<CfgBlock> blocks = cfg.blocks();
     blocks.forEach(block -> definedVariablesPerBlock.put(block, DefinedVariables.build(block, initialState)));
     Deque<CfgBlock> workList = new ArrayDeque<>(blocks);
@@ -122,10 +120,13 @@ public class DefinedVariablesAnalysis {
 
     private static Map<Symbol, VariableDefinition> join(Map<Symbol, VariableDefinition> programState1, Map<Symbol, VariableDefinition> programState2) {
       Map<Symbol, VariableDefinition> result = new HashMap<>();
-      programState1.forEach((symbol, varDef) -> {
-        VariableDefinition varDef2 = programState2.getOrDefault(symbol, VariableDefinition.BOTTOM);
-        result.put(symbol, VariableDefinition.join(varDef, varDef2));
-      });
+      Set<Symbol> allKeys = new HashSet<>(programState1.keySet());
+      allKeys.addAll(programState2.keySet());
+      for (Symbol key : allKeys) {
+        VariableDefinition varDef1 = programState1.getOrDefault(key, VariableDefinition.BOTTOM);
+        VariableDefinition varDef2 = programState2.getOrDefault(key, VariableDefinition.BOTTOM);
+        result.put(key, VariableDefinition.join(varDef1, varDef2));
+      }
       return result;
     }
 

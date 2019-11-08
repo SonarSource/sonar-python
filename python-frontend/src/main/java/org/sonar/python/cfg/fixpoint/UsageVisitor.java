@@ -38,11 +38,8 @@ public class UsageVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitFunctionDef(FunctionDef functionDef) {
-    Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
-      SymbolUsage symbolUsage = symbolToUsages.getOrDefault(symbol, new SymbolUsage());
-      symbolUsage.isWrite = true;
-      symbolToUsages.put(symbol, symbolUsage);
-    });
+    Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol ->
+      symbolToUsages.computeIfAbsent(symbol, s -> new SymbolUsage()).isWrite = true);
     // don't go inside function definitions
   }
 
