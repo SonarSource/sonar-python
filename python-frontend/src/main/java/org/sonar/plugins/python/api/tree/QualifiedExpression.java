@@ -21,6 +21,7 @@ package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.Usage;
 
 /**
  * Qualified expression like "foo.bar"
@@ -45,5 +46,14 @@ public interface QualifiedExpression extends Expression, HasSymbol {
   @Override
   default Symbol symbol() {
     return name().symbol();
+  }
+
+  /**
+   * Returns the usage of {@link #name()}
+   */
+  @CheckForNull
+  @Override
+  default Usage usage() {
+    return name().usage();
   }
 }

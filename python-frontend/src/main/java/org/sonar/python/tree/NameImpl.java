@@ -28,12 +28,14 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.Usage;
 
 public class NameImpl extends PyTree implements Name {
   private final Token token;
   private final String name;
   private final boolean isVariable;
   private Symbol symbol;
+  private Usage usage;
 
   public NameImpl(Token token, boolean isVariable) {
     this.token = token;
@@ -76,7 +78,17 @@ public class NameImpl extends PyTree implements Name {
     return symbol;
   }
 
+  @CheckForNull
+  @Override
+  public Usage usage() {
+    return usage;
+  }
+
   public void setSymbol(Symbol symbol) {
     this.symbol = symbol;
+  }
+
+  public void setUsage(Usage usage) {
+    this.usage = usage;
   }
 }

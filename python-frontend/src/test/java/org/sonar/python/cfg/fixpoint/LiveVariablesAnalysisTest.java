@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.cfg;
+package org.sonar.python.cfg.fixpoint;
 
 import java.util.Arrays;
 import java.util.List;
@@ -209,7 +209,7 @@ public class LiveVariablesAnalysisTest {
     FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
     ControlFlowGraph cfg = ControlFlowGraph.build(fun, file);
     LiveVariablesAnalysis analysis = LiveVariablesAnalysis.analyze(cfg);
-    fun.localVariables().forEach(symbol -> assertThat(analysis.isSymbolUsedInBlock(cfg.start(), symbol)).isTrue());
+    fun.localVariables().forEach(symbol -> assertThat(analysis.getLiveVariables(cfg.start()).isSymbolUsedInBlock(symbol)).isTrue());
   }
 
 

@@ -628,10 +628,10 @@ public class ControlFlowGraphTest {
   @Test
   public void class_def() {
     verifyCfg(
-      "before(succ = [if_body, END])",
+      "before(succ = [if_body, END], elem = 3)",
       "class A:",
       "  if cond:",
-      "    if_body(succ = [END])"
+      "    if_body(succ = [END], elem = 1)"
     );
   }
 

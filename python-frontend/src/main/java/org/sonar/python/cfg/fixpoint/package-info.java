@@ -17,16 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+@ParametersAreNonnullByDefault
+package org.sonar.python.cfg.fixpoint;
 
-import javax.annotation.CheckForNull;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public interface HasSymbol {
-  @CheckForNull
-  Symbol symbol();
-
-  @CheckForNull
-  Usage usage();
-}

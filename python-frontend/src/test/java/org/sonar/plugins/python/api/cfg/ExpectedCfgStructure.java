@@ -124,6 +124,14 @@ public class ExpectedCfgStructure {
     return getExpectation(block).expectedLiveOutVariables;
   }
 
+  Set<String> expecteInDefVariables(CfgBlock block) {
+    return getExpectation(block).expectedInDefVariables;
+  }
+
+  Set<String> expecteOutDefVariables(CfgBlock block) {
+    return getExpectation(block).expectedOutDefVariables;
+  }
+
   Set<String> expectedGenVariables(CfgBlock block) {
     return getExpectation(block).expectedGenVariables;
   }
@@ -158,6 +166,8 @@ public class ExpectedCfgStructure {
     private String expectedSyntacticSuccessor = null;
     final List<String> expectedPredecessorIds = new ArrayList<>();
     private int expectedNumberOfElements = -1;
+    private final Set<String> expectedInDefVariables = new HashSet<>();
+    private final Set<String> expectedOutDefVariables = new HashSet<>();
     private final Set<String> expectedLiveInVariables = new HashSet<>();
     private final Set<String> expectedLiveOutVariables = new HashSet<>();
     private final Set<String> expectedGenVariables = new HashSet<>();
@@ -181,6 +191,16 @@ public class ExpectedCfgStructure {
 
     BlockExpectation withSyntacticSuccessor(@Nullable String syntacticSuccessor) {
       expectedSyntacticSuccessor = syntacticSuccessor;
+      return this;
+    }
+
+    BlockExpectation withDefInVariables(String... ids) {
+      Collections.addAll(expectedInDefVariables, ids);
+      return this;
+    }
+
+    BlockExpectation withDefOutVariables(String... ids) {
+      Collections.addAll(expectedOutDefVariables, ids);
       return this;
     }
 
@@ -273,6 +293,10 @@ public class ExpectedCfgStructure {
               expectation.withLiveInVariables(getVariableStrings(expression));
             } else if (isNameWithValue(name, "liveOut")) {
               expectation.withLiveOutVariables(getVariableStrings(expression));
+            } else if (isNameWithValue(name, "defIn")) {
+              expectation.withDefInVariables(getVariableStrings(expression));
+            } else if (isNameWithValue(name, "defOut")) {
+              expectation.withDefOutVariables(getVariableStrings(expression));
             }
           }
         }

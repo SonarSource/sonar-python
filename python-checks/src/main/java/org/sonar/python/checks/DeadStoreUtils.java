@@ -28,7 +28,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.LiveVariablesAnalysis.LiveVariables;
+import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis.LiveVariables;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
@@ -42,7 +42,7 @@ public class DeadStoreUtils {
   /**
    * Bottom-up approach, keeping track of which variables will be read by successor elements.
    */
-  static List<UnnecessaryAssignment> findUnnecessaryAssignments(CfgBlock block, LiveVariables blockLiveVariables,FunctionDef functionDef) {
+  static List<UnnecessaryAssignment> findUnnecessaryAssignments(CfgBlock block, LiveVariables blockLiveVariables, FunctionDef functionDef) {
     List<UnnecessaryAssignment> unnecessaryAssignments = new ArrayList<>();
     Set<Symbol> willBeRead = new HashSet<>(blockLiveVariables.getOut());
     ListIterator<Tree> elementsReverseIterator = block.elements().listIterator(block.elements().size());
@@ -64,6 +64,11 @@ public class DeadStoreUtils {
 
   static boolean isParameter(Tree element) {
     return element.is(Tree.Kind.PARAMETER) || TreeUtils.firstAncestorOfKind(element, Tree.Kind.PARAMETER) != null;
+  }
+
+  static boolean isUsedInSubFunction(Symbol symbol, FunctionDef functionDef) {
+    return symbol.usages().stream()
+      .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA) != functionDef);
   }
 
   static class UnnecessaryAssignment {
