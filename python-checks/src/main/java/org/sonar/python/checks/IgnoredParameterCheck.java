@@ -19,9 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -30,6 +27,7 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
@@ -50,7 +48,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
         return;
       }
       LiveVariablesAnalysis lva = LiveVariablesAnalysis.analyze(cfg);
-      Set<CfgBlock> unreachableBlocks = unreachableBlocks(cfg);
+      Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
       cfg.blocks().forEach(block -> {
         List<DeadStoreUtils.UnnecessaryAssignment> unnecessaryAssignments =
           DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
@@ -67,24 +65,5 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
 
   private static boolean isSymbolUsedInUnreachableBlocks(LiveVariablesAnalysis lva, Set<CfgBlock> unreachableBlocks, Symbol symbol) {
     return unreachableBlocks.stream().anyMatch(b -> lva.isSymbolUsedInBlock(b, symbol));
-  }
-
-  private static Set<CfgBlock> unreachableBlocks(ControlFlowGraph cfg) {
-    Set<CfgBlock> reachableBlocks = new HashSet<>();
-    Deque<CfgBlock> workList = new ArrayDeque<>();
-    workList.push(cfg.start());
-    while (!workList.isEmpty()) {
-      CfgBlock currentBlock = workList.pop();
-      if (reachableBlocks.add(currentBlock)) {
-        currentBlock.successors().forEach(workList::push);
-      }
-    }
-    return difference(cfg.blocks(), reachableBlocks);
-  }
-
-  private static <T> Set<T> difference(Set<T> a, Set<T> b) {
-    Set<T> result = new HashSet<>(a);
-    result.removeIf(b::contains);
-    return result;
   }
 }
