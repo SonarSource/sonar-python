@@ -1,6 +1,10 @@
-print("aa a") # ok, to short
+print("aa a") # ok, too short
 print("aa a")
 print("aa a")
+
+print("\x61\x61\x20\x61") # ok, too short
+print("\x61\x61\x20\x61")
+print("\x61\x61\x20\x61")
 
 print("aa aa") # Noncompliant {{Define a constant instead of duplicating this literal "aa aa" 3 times.}} [[effortToFix=2]]
 #     ^^^^^^^
