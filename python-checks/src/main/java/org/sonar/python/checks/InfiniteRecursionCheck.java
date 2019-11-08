@@ -55,6 +55,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonFile;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.semantic.Usage;
 import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 
@@ -221,7 +222,8 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
         return false;
       }
       Name name = (Name) expression;
-      return !isMethod && functionSymbol.equals(name.symbol());
+      return !isMethod && functionSymbol.equals(name.symbol()) &&
+        functionSymbol.usages().stream().filter(Usage::isBindingUsage).count() < 2;
     }
 
     private boolean matchesLookupMethod(Expression expression) {

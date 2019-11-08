@@ -302,3 +302,8 @@ def recursion_in_try_block():
 def async_functions():
     async def f():
         await f() # OK
+
+def global_variable(text):
+    global global_variable
+    global_variable = print
+    global_variable(text)
