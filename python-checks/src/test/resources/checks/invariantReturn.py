@@ -193,6 +193,11 @@ def f_return_boolean_true(x): # Noncompliant
         return True
     return True
 
+def f_return_boolean_false(x): # Noncompliant
+    if x:
+        return False
+    return False
+
 def f_return_boolean_false_true(x):
     if x:
         return False
@@ -207,6 +212,11 @@ def f_different_return_list(x):
     if x:
         return 1, 2
     return 1, 3
+
+def f_return_list_with_different_size(x):
+    if x:
+        return 1, 2, 3
+    return 1, 2
 
 def f_same_return_list(x): # Noncompliant
     if x:

@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +42,6 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
 import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
 
 @Rule(key = "S3516")
 public class InvariantReturnCheck extends PythonSubscriptionCheck {
@@ -57,17 +55,6 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
 
   private static final Kind[] UNARY_EXPRESSION_KINDS = {
     Kind.UNARY_MINUS, Kind.UNARY_PLUS, Kind.BITWISE_COMPLEMENT, Kind.NOT};
-
-  private static final Set<Usage.Kind> DECLARATION_USAGE_KINDS = EnumSet.of(
-    Usage.Kind.IMPORT,
-    Usage.Kind.LOOP_DECLARATION,
-    Usage.Kind.COMP_DECLARATION,
-    Usage.Kind.PARAMETER,
-    Usage.Kind.FUNC_DECLARATION,
-    Usage.Kind.CLASS_DECLARATION,
-    Usage.Kind.EXCEPTION_INSTANCE,
-    Usage.Kind.WITH_INSTANCE,
-    Usage.Kind.GLOBAL_DECLARATION);
 
   @Override
   public void initialize(Context context) {
@@ -93,21 +80,21 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
     List<LatestExecutedBlock> collectedBlocks = new ArrayList<>();
     for (CfgBlock predecessor : cfg.end().predecessors()) {
       if (predecessor instanceof PythonCfgBranchingBlock) {
-        collectBlocksHavingReturnBeforeExceptOrFinallyBlock(cfg, collectedBlocks, (PythonCfgBranchingBlock) predecessor);
+        collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, (PythonCfgBranchingBlock) predecessor);
       } else if (!endsWithElementKind(predecessor, Kind.RAISE_STMT)) {
-        collectedBlocks.add(new LatestExecutedBlock(cfg, predecessor));
+        collectedBlocks.add(new LatestExecutedBlock(predecessor));
       }
     }
     return collectedBlocks;
   }
 
-  private static void collectBlocksHavingReturnBeforeExceptOrFinallyBlock(ControlFlowGraph cfg, List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
+  private static void collectBlocksHavingReturnBeforeExceptOrFinallyBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
     if (branchingBlock.branchingTree().is(Kind.EXCEPT_CLAUSE, Kind.FINALLY_CLAUSE)) {
       for (CfgBlock predecessor : branchingBlock.predecessors()) {
         if (predecessor instanceof PythonCfgBranchingBlock) {
-          collectBlocksHavingReturnBeforeExceptOrFinallyBlock(cfg, collectedBlocks, (PythonCfgBranchingBlock) predecessor);
+          collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, (PythonCfgBranchingBlock) predecessor);
         } else if (endsWithElementKind(predecessor, Kind.RETURN_STMT)) {
-          collectedBlocks.add(new LatestExecutedBlock(cfg, predecessor));
+          collectedBlocks.add(new LatestExecutedBlock(predecessor));
         }
       }
     }
@@ -195,8 +182,6 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       Tree binding = findLastBinding(block.elements(), identifier);
       if (binding != null) {
         bindings.add(binding);
-      } else if (block == context.cfg.start()) {
-        bindings.add(findDeclarationBinding(identifier));
       } else {
         for (CfgBlock predecessor : block.predecessors()) {
           if (pushedBlocks.add(predecessor)) {
@@ -206,14 +191,6 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       }
     }
     return bindings.size() == 1 ? bindings.iterator().next() : null;
-  }
-
-  private static Tree findDeclarationBinding(Symbol identifier) {
-    return identifier.usages().stream()
-      .filter(usage -> DECLARATION_USAGE_KINDS.contains(usage.kind()))
-      .map(Usage::tree)
-      .findFirst()
-      .orElse(null);
   }
 
   @Nullable
@@ -264,14 +241,11 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
 
   private static class LatestExecutedBlock {
 
-    private final ControlFlowGraph cfg;
-
     private final CfgBlock block;
     @Nullable
     private final ReturnStatement returnStatement;
 
-    private LatestExecutedBlock(ControlFlowGraph cfg, CfgBlock block) {
-      this.cfg = cfg;
+    private LatestExecutedBlock(CfgBlock block) {
       this.block = block;
       returnStatement = (ReturnStatement) lastElement(block, Kind.RETURN_STMT);
     }
