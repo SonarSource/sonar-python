@@ -128,6 +128,7 @@ public class FullyQualifiedNameTest {
     );
     Name nameTree = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
     assertThat(nameTree.symbol().fullyQualifiedName()).isEqualTo("mod");
+    assertThat(nameTree.usage().kind()).isEqualTo(Usage.Kind.IMPORT);
 
     tree = parse(
       "import mod.submod"
@@ -185,6 +186,7 @@ public class FullyQualifiedNameTest {
     assertThat(symbol).isNotNull();
     assertThat(symbol.name()).isEqualTo("prop");
     assertThat(symbol.fullyQualifiedName()).isEqualTo("mod.prop");
+    assertThat(qualifiedExpression.usage().kind()).isEqualTo(Usage.Kind.OTHER);
   }
 
   @Test

@@ -50,12 +50,7 @@ public class UsageVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitName(Name name) {
-    Optional.ofNullable(name.symbol()).ifPresent(symbol ->
-      symbol.usages().stream()
-        .filter(usage -> usage.tree() == name)
-        .findFirst()
-        .ifPresent(usage -> addToSymbolToUsageMap(usage, symbol))
-    );
+    Optional.ofNullable(name.usage()).ifPresent(usage -> addToSymbolToUsageMap(usage, name.symbol()));
     super.visitName(name);
   }
 

@@ -494,9 +494,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     void addUsage(Tree tree, Usage.Kind kind) {
-      usages.add(new UsageImpl(tree, kind));
+      UsageImpl usage = new UsageImpl(tree, kind);
+      usages.add(usage);
       if (tree.is(Kind.NAME)) {
         ((NameImpl) tree).setSymbol(this);
+        ((NameImpl) tree).setUsage(usage);
       }
     }
 
