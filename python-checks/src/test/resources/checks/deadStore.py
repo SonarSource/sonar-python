@@ -23,7 +23,7 @@ def params_are_ignored(x, y):
     print(y)
 
 def simple_assignments():
-    x = 42 # Noncompliant {{Remove this useless assignment to local variable 'x'.}}
+    x = 42 # Noncompliant {{Remove this assignment to local variable 'x'; the value is never used.}}
 #   ^^^^^^
     x = 3
     print(x)
@@ -220,8 +220,16 @@ def falsy_or_true_initialization():
     x4 = 42
     print(x4)
 
+    x5: int = None # OK
+    x5 = 42
+    print(x)
+
+    x6: int
+    x = 42
+    print(x)
+
 def multiple_assignment():
-    a, b = foo() # Noncompliant {{Rename "a" to "_" as it is not used after assignment.}}
+    a, b = foo() # OK
     print(b)
     a = 42
     print(a)
@@ -265,3 +273,8 @@ def used_in_lambda():
     var = 43 # OK
     inner()
     var = 44 # FN
+
+def underscore_dead_store():
+    _ = foo() # OK
+    _ = bar()
+    print(_)

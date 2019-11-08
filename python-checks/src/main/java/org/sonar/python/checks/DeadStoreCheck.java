@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -40,7 +41,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S1854")
 public class DeadStoreCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE_TEMPLATE = "Remove this useless assignment to local variable '%s'.";
+  private static final String MESSAGE_TEMPLATE = "Remove this assignment to local variable '%s'; the value is never used.";
 
   @Override
   public void initialize(Context context) {
@@ -69,12 +70,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       // symbols should have at least one read usage (otherwise will be reported by S1481)
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
       .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
-      .forEach(unnecessaryAssignment -> {
-        String message = isMultipleAssignement(unnecessaryAssignment.element)
-          ? ("Rename \"" + unnecessaryAssignment.symbol.name() + "\" to \"_\" as it is not used after assignment.")
-          : String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
-        ctx.addIssue(unnecessaryAssignment.element, message);
-      });
+      .forEach(unnecessaryAssignment ->
+        ctx.addIssue(unnecessaryAssignment.element, String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name())));
   }
 
   private static boolean isMultipleAssignement(Tree element) {
@@ -83,12 +80,18 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isException(Symbol symbol, Tree element, FunctionDef functionDef) {
-    return isAssignmentToFalsyOrTrueLiteral(element)
+    return isUnderscoreVariable(symbol)
+      || isAssignmentToFalsyOrTrueLiteral(element)
       || isFunctionDeclarationSymbol(symbol)
       || isLoopDeclarationSymbol(symbol, element)
       || isWithInstance(element)
       || isUsedInSubFunction(symbol, functionDef)
-      || DeadStoreUtils.isParameter(element);
+      || DeadStoreUtils.isParameter(element)
+      || isMultipleAssignement(element);
+  }
+
+  private static boolean isUnderscoreVariable(Symbol symbol) {
+    return symbol.name().equals("_");
   }
 
   private static boolean isLoopDeclarationSymbol(Symbol symbol, Tree element) {
@@ -101,12 +104,14 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isAssignmentToFalsyOrTrueLiteral(Tree element) {
-    if (element.is(Tree.Kind.ASSIGNMENT_STMT)) {
-      Expression assignedValue = ((AssignmentStatement) element).assignedValue();
-      return Expressions.isFalsy(assignedValue)
+    if (element.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      Expression assignedValue = element.is(Tree.Kind.ASSIGNMENT_STMT)
+        ? ((AssignmentStatement) element).assignedValue()
+        : ((AnnotatedAssignment) element).assignedValue();
+      return assignedValue != null && (Expressions.isFalsy(assignedValue)
         || (assignedValue.is(Tree.Kind.NAME) && "True".equals(((Name) assignedValue).name()))
         || isNumericLiteralOne(assignedValue)
-        || isMinusOne(assignedValue);
+        || isMinusOne(assignedValue));
     }
     return false;
   }
