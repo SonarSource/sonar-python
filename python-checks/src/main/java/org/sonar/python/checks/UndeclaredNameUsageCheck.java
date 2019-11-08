@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -33,7 +34,9 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
+import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis.DefinedVariables;
 import org.sonar.python.semantic.Symbol;
 
 @Rule(key = "S3827")
@@ -66,11 +69,13 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
         return;
       }
       DefinedVariablesAnalysis analysis = DefinedVariablesAnalysis.analyze(cfg, functionDef.localVariables());
-      cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block)));
+      Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
+      cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block), unreachableBlocks, analysis));
     });
   }
 
-  private static void checkCfgBlock(CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariablesAnalysis.DefinedVariables definedVariables) {
+  private static void checkCfgBlock(
+    CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariables definedVariables, Set<CfgBlock> unreachableBlocks, DefinedVariablesAnalysis analysis) {
     Map<Symbol, DefinedVariablesAnalysis.VariableDefinition> currentState = new HashMap<>(definedVariables.getIn());
     for (Tree element : cfgBlock.elements()) {
       definedVariables.getVariableUsages(element).forEach((symbol, symbolUsage) -> {
@@ -78,11 +83,15 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
           currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         }
         DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.BOTTOM);
-        if (symbolUsage.isRead() && isUndefined(varDef)) {
+        if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol)) {
           ctx.addIssue(element, symbol.name() + " is used before it is defined. Move the definition before.");
         }
       });
     }
+  }
+
+  private static boolean isSymbolUsedInUnreachableBlocks(DefinedVariablesAnalysis analysis, Set<CfgBlock> unreachableBlocks, Symbol symbol) {
+    return unreachableBlocks.stream().anyMatch(b -> analysis.getDefinedVariables(b).isSymbolUsedInBlock(symbol));
   }
 
   private static boolean isUndefined(DefinedVariablesAnalysis.VariableDefinition varDef) {

@@ -88,8 +88,7 @@ def dead_code():
     x = 10
     print(x)
     return
-    # FP
-    print(x) # Noncompliant
+    print(x) # OK
 
 def class_def():
     class A(): pass

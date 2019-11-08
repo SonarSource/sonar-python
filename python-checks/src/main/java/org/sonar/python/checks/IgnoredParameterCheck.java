@@ -64,6 +64,6 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isSymbolUsedInUnreachableBlocks(LiveVariablesAnalysis lva, Set<CfgBlock> unreachableBlocks, Symbol symbol) {
-    return unreachableBlocks.stream().anyMatch(b -> lva.isSymbolUsedInBlock(b, symbol));
+    return unreachableBlocks.stream().anyMatch(b -> lva.getLiveVariables(b).isSymbolUsedInBlock(symbol));
   }
 }

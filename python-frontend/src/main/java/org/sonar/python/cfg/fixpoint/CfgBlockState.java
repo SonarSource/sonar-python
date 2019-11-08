@@ -91,4 +91,10 @@ public abstract class CfgBlockState {
   public Set<Symbol> getKill() {
     return kill;
   }
+
+  public boolean isSymbolUsedInBlock(Symbol symbol) {
+    return variableUsagesPerElement.values().stream()
+      .flatMap(m -> m.keySet().stream())
+      .anyMatch(s -> s == symbol);
+  }
 }
