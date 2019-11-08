@@ -47,7 +47,7 @@ public class CfgUtils {
 
   private static Set<CfgBlock> difference(Set<CfgBlock> a, Set<CfgBlock> b) {
     Set<CfgBlock> result = new HashSet<>(a);
-    result.removeIf(b::contains);
+    result.removeAll(b);
     return result;
   }
 }
