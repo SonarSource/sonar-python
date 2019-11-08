@@ -80,6 +80,12 @@ public class LiveVariablesAnalysis {
     return readAtLeastOnce;
   }
 
+  public boolean isSymbolUsedInBlock(CfgBlock block, Symbol symbol) {
+    return getLiveVariables(block).variableUsagesPerElement.values().stream()
+      .flatMap(m -> m.keySet().stream())
+      .anyMatch(s -> s == symbol);
+  }
+
   public static final class SymbolUsage {
     private boolean isRead = false;
     private boolean isWrite = false;
@@ -96,6 +102,7 @@ public class LiveVariablesAnalysis {
   public static class LiveVariables {
 
     private final CfgBlock block;
+
     private final Map<Tree, Map<Symbol, SymbolUsage>> variableUsagesPerElement;
 
     /**

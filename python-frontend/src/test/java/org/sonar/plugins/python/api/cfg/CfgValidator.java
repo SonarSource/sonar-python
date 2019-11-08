@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.LiveVariablesAnalysis;
 import org.sonar.python.semantic.Symbol;
 
@@ -153,12 +154,16 @@ public class CfgValidator {
   }
 
   private void assertLva(ControlFlowGraph actualCfg, LiveVariablesAnalysis actualLva) {
+    int size = expectedCfg.size();
+    if (isParameterBlock(actualCfg.start())) {
+      size += 1;
+    }
     assertThat(actualCfg.blocks())
       .withFailMessage(buildDebugMessage("size", "CFG"))
-      .hasSize(expectedCfg.size());
+      .hasSize(size);
 
     for (CfgBlock actualBlock : actualCfg.blocks()) {
-      if (actualBlock.equals(actualCfg.end())) {
+      if (actualBlock.equals(actualCfg.end()) || isParameterBlock(actualBlock)) {
         continue;
       }
 
@@ -169,6 +174,10 @@ public class CfgValidator {
       assertVariablesAreEqual("Live In Variables", actualLiveVariables.getIn(), expectedCfg.expectedLiveInVariables(actualBlock), blockTestId);
       assertVariablesAreEqual("Live Out Variables", actualLiveVariables.getOut(), expectedCfg.expectedLiveOutVariables(actualBlock), blockTestId);
     }
+  }
+
+  private boolean isParameterBlock(CfgBlock block) {
+    return block.elements().stream().allMatch(element -> element.is(Tree.Kind.PARAMETER));
   }
 
   private void assertVariablesAreEqual(String variableType, Set<Symbol> actualVariables, Set<String> expectedVariables, String blockTestId) {
