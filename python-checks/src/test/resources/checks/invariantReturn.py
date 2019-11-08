@@ -307,6 +307,20 @@ def f_assignment_in_the_return_block(x, a):
     else:
         return a
 
+def f_subscript_assignment(x, a):
+    if x:
+        a['name'] = 4
+        return a
+    else:
+        return a
+
+def f_subscript_read_usage(x, a): # Noncompliant
+    if x:
+        x = a['name']
+        return a
+    else:
+        return a
+
 def f_nested_modification(x, y):
     a = 0
     if x:
@@ -329,6 +343,30 @@ def f_conditional_return_in_a_loop(x, y): # Noncompliant
     for e in x:
         if y == e:
             return a
+    return a
+
+def f_for_when_it_changes_the_value(x, y):
+    a = 0
+    if x:
+        return a
+    for a in x:
+        pass
+    return a
+
+def f_for_when_it_does_not_change_the_value(x, y): # Noncompliant
+    a = 0
+    if x:
+        return a
+    for i in a:
+        pass
+    return a
+
+def f_while_does_not_change_the_value(x, y): # Noncompliant
+    a = 0
+    if x:
+        return a
+    while a:
+        pass
     return a
 
 def f_same_global_variable(x): # Noncompliant

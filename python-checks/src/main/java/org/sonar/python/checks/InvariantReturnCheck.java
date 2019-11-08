@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
@@ -206,16 +207,19 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
 
   @Nullable
   private static Tree findLastBinding(Tree context, Symbol identifier) {
-    if (context.is(Kind.NAME) && identifier.equals(((Name) context).symbol()) && couldBeModified(context)) {
-      return context;
+    if (context.is(Kind.NAME)) {
+      Name name = (Name) context;
+      if (identifier.equals(name.symbol()) && couldBeModified(name)) {
+        return name;
+      }
     }
     return findLastBinding(context.children(), identifier);
   }
 
-  private static boolean couldBeModified(Tree tree) {
-    Tree child = tree;
+  private static boolean couldBeModified(Name name) {
+    Tree child = name;
     Tree parent = child.parent();
-    while (parent.is(Kind.STATEMENT_LIST, Kind.PARENTHESIZED, Kind.QUALIFIED_EXPR, Kind.TUPLE)) {
+    while (parent.is(Kind.STATEMENT_LIST, Kind.PARENTHESIZED, Kind.QUALIFIED_EXPR, Kind.SUBSCRIPTION, Kind.TUPLE)) {
       child = parent;
       parent = child.parent();
     }
@@ -224,6 +228,8 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       return false;
     } else if (parent.is(Kind.ASSIGNMENT_STMT)) {
       return ((AssignmentStatement) parent).lhsExpressions() == child;
+    } else if (parent.is(Kind.FOR_STMT)) {
+      return ((ForStatement) parent).expressions().contains(child);
     }
     return true;
   }
