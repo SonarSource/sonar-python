@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -81,6 +80,12 @@ public class LiveVariablesAnalysis {
     return readAtLeastOnce;
   }
 
+  public boolean isSymbolUsedInBlock(CfgBlock block, Symbol symbol) {
+    return getLiveVariables(block).variableUsagesPerElement.values().stream()
+      .flatMap(m -> m.keySet().stream())
+      .anyMatch(s -> s == symbol);
+  }
+
   public static final class SymbolUsage {
     private boolean isRead = false;
     private boolean isWrite = false;
@@ -126,12 +131,6 @@ public class LiveVariablesAnalysis {
     private LiveVariables(CfgBlock block) {
       this.block = block;
       this.variableUsagesPerElement = new HashMap<>();
-    }
-
-    public Set<Symbol> usedSymbols() {
-      return variableUsagesPerElement.values().stream()
-        .flatMap(m -> m.keySet().stream())
-        .collect(Collectors.toSet());
     }
 
     public Map<Symbol, SymbolUsage> getVariableUsages(Tree tree) {

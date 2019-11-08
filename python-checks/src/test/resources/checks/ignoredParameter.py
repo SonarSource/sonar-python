@@ -27,3 +27,7 @@ def dead_code(param):
 
 def tuple_param((param)): # Noncompliant
     param = 42
+
+def param_can_be_falsy(p): # OK
+    p = p or 42
+    print(p)

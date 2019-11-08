@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.LiveVariablesAnalysis;
+import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
 import static org.sonar.python.checks.DeadStoreUtils.isParameter;
@@ -54,15 +55,18 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
         List<DeadStoreUtils.UnnecessaryAssignment> unnecessaryAssignments =
           DeadStoreUtils.findUnnecessaryAssignments(block, lva.getLiveVariables(block), functionDef);
         unnecessaryAssignments.stream()
+          .filter((assignment -> isParameter(assignment.element)))
           // symbols should have at least two binding usages
           .filter(assignment -> assignment.symbol.usages().stream().filter(Usage::isBindingUsage).count() > 1)
           // no usages in unreachable blocks
-          .filter(assignment -> unreachableBlocks.stream().noneMatch(unreachableBlock ->
-            lva.getLiveVariables(unreachableBlock).usedSymbols().contains(assignment.symbol)))
-          .filter((assignment -> isParameter(assignment.element)))
+          .filter(assignment -> !isSymbolUsedInUnreachableBlocks(lva, unreachableBlocks, assignment.symbol))
           .forEach(assignment -> ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name())));
       });
     });
+  }
+
+  private static boolean isSymbolUsedInUnreachableBlocks(LiveVariablesAnalysis lva, Set<CfgBlock> unreachableBlocks, Symbol symbol) {
+    return unreachableBlocks.stream().anyMatch(b -> lva.isSymbolUsedInBlock(b, symbol));
   }
 
   private static Set<CfgBlock> unreachableBlocks(ControlFlowGraph cfg) {

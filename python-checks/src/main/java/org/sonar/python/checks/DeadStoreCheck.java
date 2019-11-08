@@ -71,7 +71,7 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
       .forEach(unnecessaryAssignment -> {
         String message = isMultipleAssignement(unnecessaryAssignment.element)
-          ? "Rename \"" + unnecessaryAssignment.symbol.name() + "\" to \"_\" as it is not used after assignment."
+          ? ("Rename \"" + unnecessaryAssignment.symbol.name() + "\" to \"_\" as it is not used after assignment.")
           : String.format(MESSAGE_TEMPLATE, unnecessaryAssignment.symbol.name());
         ctx.addIssue(unnecessaryAssignment.element, message);
       });

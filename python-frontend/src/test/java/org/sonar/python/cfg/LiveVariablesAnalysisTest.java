@@ -199,7 +199,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void used_symbols() {
+  public void is_symbol_used_in_block() {
     List<String> lines = Arrays.asList(
       "a = 10",
       "b = 42",
@@ -209,7 +209,7 @@ public class LiveVariablesAnalysisTest {
     FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
     ControlFlowGraph cfg = ControlFlowGraph.build(fun, file);
     LiveVariablesAnalysis analysis = LiveVariablesAnalysis.analyze(cfg);
-    assertThat(analysis.getLiveVariables(cfg.start()).usedSymbols()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "print");
+    fun.localVariables().forEach(symbol -> assertThat(analysis.isSymbolUsedInBlock(cfg.start(), symbol)).isTrue());
   }
 
 

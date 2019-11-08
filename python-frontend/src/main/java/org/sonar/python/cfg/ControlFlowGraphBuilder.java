@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ContinueStatement;
@@ -83,26 +84,20 @@ public class ControlFlowGraphBuilder {
       ParameterList parameterList = ((FunctionDef) statementList.parent()).parameters();
       if (parameterList != null) {
         PythonCfgSimpleBlock parametersBlock = createSimpleBlock(start);
-        parameterList.all().forEach(parameter -> {
-          if (parameter.is(Tree.Kind.PARAMETER)) {
-            parametersBlock.addElement(parameter);
-            return;
-          }
-          addTupleParam((TupleParameter) parameter, parametersBlock);
-        });
+        addParameters(parameterList.all(), parametersBlock);
         start = parametersBlock;
       }
     }
   }
 
-  private static void addTupleParam(TupleParameter tupleParameter, PythonCfgSimpleBlock parametersBlock) {
-    tupleParameter.parameters().forEach(parameter -> {
-      if (parameter.is(Tree.Kind.PARAMETER)) {
+  private static void addParameters(List<AnyParameter> parameters, PythonCfgSimpleBlock parametersBlock) {
+    for (AnyParameter parameter : parameters) {
+      if (parameter.is(Tree.Kind.TUPLE_PARAMETER)) {
+        addParameters(((TupleParameter) parameter).parameters(), parametersBlock);
+      } else {
         parametersBlock.addElement(parameter);
-        return;
       }
-      addTupleParam((TupleParameter) parameter, parametersBlock);
-    });
+    }
   }
 
   private void computePredecessors() {
