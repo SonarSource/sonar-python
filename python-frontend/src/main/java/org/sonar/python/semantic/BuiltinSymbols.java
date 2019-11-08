@@ -34,7 +34,7 @@ public class BuiltinSymbols {
    * See https://docs.python.org/3/library/constants.html#built-in-consts
    */
   static final Set<String> CONSTANTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-    "True", "False", "None", "NotImplemented", "__debug__", "copyright", "credit", "license", "quit", "exit", "Ellipsis")));
+    "True", "False", "None", "NotImplemented", "__debug__", "copyright", "credits", "license", "quit", "exit", "Ellipsis")));
 
   /**
    * See https://docs.python.org/3/reference/import.html?highlight=__package__#import-related-module-attributes
