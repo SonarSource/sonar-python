@@ -1,0 +1,27 @@
+<p>When a class or function is defined in a parent function or method, it is only visible in this parent function or method's scope. If the defined
+class or function is not used within this scope it is dead code, i.e. unnecessary, inoperative code that should be removed. Cleaning out dead code
+decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def noncompliant():
+    def nested_function():  # Noncompliant
+        print("nested_function")
+
+    class NestedClass:  # Noncompliant
+        def __init__(self):
+            print("NestedClass")
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def compliant():
+    def nested_function():
+        print("nested_function")
+
+    class NestedClass:
+        def __init__(self):
+            print("NestedClass")
+
+    nested_function()
+    NestedClass()
+</pre>
+
