@@ -33,6 +33,7 @@ import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 
 import static org.sonar.python.checks.DeadStoreUtils.isParameter;
+import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
 
 @Rule(key = "S1226")
 public class IgnoredParameterCheck extends PythonSubscriptionCheck {
@@ -58,6 +59,7 @@ public class IgnoredParameterCheck extends PythonSubscriptionCheck {
           .filter(assignment -> assignment.symbol.usages().stream().filter(Usage::isBindingUsage).count() > 1)
           // no usages in unreachable blocks
           .filter(assignment -> !isSymbolUsedInUnreachableBlocks(lva, unreachableBlocks, assignment.symbol))
+          .filter((assignment -> !isUsedInSubFunction(assignment.symbol, functionDef)))
           .forEach(assignment -> ctx.addIssue(assignment.element, String.format(MESSAGE_TEMPLATE, assignment.symbol.name())));
       });
     });

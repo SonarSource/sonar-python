@@ -37,6 +37,8 @@ import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;
 import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
+
 @Rule(key = "S1854")
 public class DeadStoreCheck extends PythonSubscriptionCheck {
 
@@ -125,10 +127,5 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
 
   private static boolean isFunctionDeclarationSymbol(Symbol symbol) {
     return symbol.usages().stream().anyMatch(u -> u.kind() == Usage.Kind.FUNC_DECLARATION);
-  }
-
-  private static boolean isUsedInSubFunction(Symbol symbol, FunctionDef functionDef) {
-    return symbol.usages().stream()
-      .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA) != functionDef);
   }
 }

@@ -66,6 +66,11 @@ public class DeadStoreUtils {
     return element.is(Tree.Kind.PARAMETER) || TreeUtils.firstAncestorOfKind(element, Tree.Kind.PARAMETER) != null;
   }
 
+  static boolean isUsedInSubFunction(Symbol symbol, FunctionDef functionDef) {
+    return symbol.usages().stream()
+      .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA) != functionDef);
+  }
+
   static class UnnecessaryAssignment {
     final Symbol symbol;
     final Tree element;

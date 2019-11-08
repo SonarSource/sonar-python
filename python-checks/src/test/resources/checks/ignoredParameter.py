@@ -31,3 +31,10 @@ def tuple_param((param)): # Noncompliant
 def param_can_be_falsy(p): # OK
     p = p or 42
     print(p)
+
+def used_in_subfunction(p):
+    def fn():
+        nonlocal p
+        print(p)
+        p = 42
+    fn()
