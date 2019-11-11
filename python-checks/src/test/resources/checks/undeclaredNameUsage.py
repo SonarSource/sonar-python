@@ -133,3 +133,8 @@ def compound_assignment():
 def with_usages():
     with f() as a, a() as b: # OK
         pass
+
+def default_parameter():
+    foo = 42
+    def f(param = foo): # OK
+        foo = 'hello'
