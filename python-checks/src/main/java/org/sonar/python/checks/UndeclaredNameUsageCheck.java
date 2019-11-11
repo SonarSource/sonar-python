@@ -38,6 +38,7 @@ import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis.DefinedVariables;
 import org.sonar.python.semantic.Symbol;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3827")
 public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
@@ -64,6 +65,9 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+      if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
+        return;
+      }
       ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, ctx.pythonFile());
       if (cfg == null) {
         return;

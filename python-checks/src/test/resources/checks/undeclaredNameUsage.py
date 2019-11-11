@@ -141,3 +141,12 @@ def default_parameter():
 
 def comprehension(list):
     [x1 for [x1] in list]
+
+def declaration_in_try_with_break():
+    for _ in range(1000):
+        try:
+            res = 42
+            break
+        except Exception:
+            raise TypeError()
+    return res # OK
