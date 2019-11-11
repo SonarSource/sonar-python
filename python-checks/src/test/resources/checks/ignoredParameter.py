@@ -38,3 +38,6 @@ def used_in_subfunction(p):
         print(p)
         p = 42
     fn()
+
+def underscore_param(_): # OK
+    _ = 42
