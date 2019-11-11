@@ -83,11 +83,15 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
           currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         }
         DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
-        if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol)) {
+        if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)) {
           ctx.addIssue(element, symbol.name() + " is used before it is defined. Move the definition before.");
         }
       });
     }
+  }
+
+  private static boolean isParameter(Tree element) {
+    return element.is(Tree.Kind.PARAMETER);
   }
 
   private static boolean isSymbolUsedInUnreachableBlocks(DefinedVariablesAnalysis analysis, Set<CfgBlock> unreachableBlocks, Symbol symbol) {
