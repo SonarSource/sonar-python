@@ -6,11 +6,11 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-def myfunc1():  # Noncompliant
+def myfunc1(foo="Noncompliant"):
     pass
 
 class MyClass:
-    def mymethod1(self):  # Noncompliant
+    def mymethod1(self, foo="Noncompliant"):
         pass
 
 </pre>

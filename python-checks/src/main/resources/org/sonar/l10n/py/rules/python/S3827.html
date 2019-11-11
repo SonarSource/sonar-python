@@ -3,38 +3,30 @@
 <pre>
 unknown_var  # Noncompliant (variable is never defined)
 
-foo()  # Noncompliant
-foo = sum
+def noncompliant():
+    foo()  # Noncompliant
+    foo = sum
 
-func()  # Noncompliant
-def func():
-    pass
+    func()  # Noncompliant
+    def func():
+        pass
 
-MyClass()  # Noncompliant
-class MyClass:
-    pass
-
-myglobal = 42
-def use_global():
-    print(myglobal)  # Noncompliant
-    global myglobal
+    MyClass()  # Noncompliant
+    class MyClass:
+        pass
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-foo = sum
-foo()
+def compliant():
+    foo = sum
+    foo()
 
-def func():
-    pass
-func()
+    def func():
+        pass
+    func()
 
-class MyClass:
-    pass
-MyClass()
-
-myglobal = 42
-def use_global():
-    global myglobal
-    print(myglobal)
+    class MyClass:
+        pass
+    MyClass()
 </pre>
 

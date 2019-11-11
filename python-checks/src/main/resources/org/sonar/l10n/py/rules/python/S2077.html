@@ -49,16 +49,8 @@ class MyUser(models.Model):
 
 
 def query_my_user(request, params, value):
-    MyUser.objects.raw(request + value)  # Sensitive
-
-    # Parametrized queries
-    MyUser.objects.raw(request + value, params)  # Sensitive.
-
     with connection.cursor() as cursor:
-        cursor.execute(request + value)  # Sensitive
-
-    with connections['my_db'].cursor() as cursor:
-        cursor.execute(request + value)  # Sensitive
+        cursor.execute("{0}".format(value))  # Sensitive
 
     # https://docs.djangoproject.com/en/2.1/ref/models/expressions/#raw-sql-expressions
 
@@ -69,12 +61,10 @@ def query_my_user(request, params, value):
     MyUser.objects.extra(
         select={
             'mycol':  "select col from sometable here mycol = %s and othercol = " + value}, # Sensitive
-...     select_params=(someparam,),
+           select_params=(someparam,),
         },
     )
 </pre>
-<h2>Exceptions</h2>
-<p>The current implementation does not follow variables. It will only detect SQL queries which are formatted directly in the function call.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
