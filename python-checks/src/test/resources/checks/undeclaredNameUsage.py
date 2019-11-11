@@ -138,3 +138,6 @@ def default_parameter():
     foo = 42
     def f(param = foo): # OK
         foo = 'hello'
+
+def comprehension(list):
+    [x1 for [x1] in list]

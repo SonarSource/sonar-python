@@ -230,11 +230,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void addCompDeclarationParam(Tree tree) {
-      if (tree.is(Tree.Kind.NAME)) {
-        addBindingUsage((Name) tree, Usage.Kind.COMP_DECLARATION);
-      } else if (tree.is(Kind.TUPLE)) {
-        ((Tuple) tree).elements().forEach(this::addCompDeclarationParam);
-      }
+      boundNamesFromExpression(tree).forEach(name -> addBindingUsage(name, Usage.Kind.COMP_DECLARATION));
     }
 
     private void createLoopVariables(ForStatement loopTree) {
