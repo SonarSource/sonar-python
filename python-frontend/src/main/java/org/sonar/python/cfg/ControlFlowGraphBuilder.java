@@ -194,7 +194,9 @@ public class ControlFlowGraphBuilder {
     // exceptions may be raised inside with block and be caught by context manager
     // see https://docs.python.org/3/reference/compound_stmts.html#the-with-statement
     PythonCfgBranchingBlock branchingBlock = createBranchingBlock(withStatement, withBodyBlock, successor);
-    withStatement.withItems().forEach(branchingBlock::addElement);
+    for (int i = withStatement.withItems().size() - 1; i >= 0; i--) {
+      branchingBlock.addElement(withStatement.withItems().get(i));
+    }
     return branchingBlock;
   }
 
