@@ -129,3 +129,7 @@ def declared_in_while(p):
 
 def compound_assignment():
     a += 1 # FN
+
+def with_usages():
+    with f() as a, a() as b: # OK
+        pass
