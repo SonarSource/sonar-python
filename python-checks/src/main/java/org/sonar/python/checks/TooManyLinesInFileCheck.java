@@ -34,6 +34,7 @@ public class TooManyLinesInFileCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "maximum",
+    description = "Maximum authorized lines in a file",
     defaultValue = "" + DEFAULT)
   public int maximum = DEFAULT;
 

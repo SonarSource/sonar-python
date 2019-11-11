@@ -31,6 +31,7 @@ public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
 
   @RuleProperty(
     key = "format",
+    description = "Regular expression used to check the names against.",
     defaultValue = "" + DEFAULT)
   public String format = DEFAULT;
 

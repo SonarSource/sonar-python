@@ -31,7 +31,10 @@ public class ClassComplexityCheck extends PythonSubscriptionCheck {
   private static final int DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD = 200;
   private static final String MESSAGE = "Class has a complexity of %s which is greater than %s authorized.";
 
-  @RuleProperty(key = "maximumClassComplexityThreshold", defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
+  @RuleProperty(
+    key = "maximumClassComplexityThreshold",
+    description = "Maximum complexity allowed",
+    defaultValue = "" + DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD)
   int maximumClassComplexityThreshold = DEFAULT_MAXIMUM_CLASS_COMPLEXITY_THRESHOLD;
 
   @Override

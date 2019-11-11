@@ -32,6 +32,7 @@ public class FileComplexityCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "maximumFileComplexityThreshold",
+    description = "The maximum authorized complexity in file",
     defaultValue = "" + DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD)
   int maximumFileComplexityThreshold = DEFAULT_MAXIMUM_FILE_COMPLEXITY_THRESHOLD;
 

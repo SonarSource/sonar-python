@@ -42,7 +42,10 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   private static final String CONSTANT_PATTERN = "^[_A-Z][A-Z0-9_]*$";
 
   private static final String DEFAULT = "^[_a-z][a-z0-9_]*$";
-  @RuleProperty(key = "format", defaultValue = DEFAULT)
+  @RuleProperty(
+    key = "format",
+    description = "Regular expression used to check the names against.",
+    defaultValue = DEFAULT)
   public String format = DEFAULT;
   private Pattern constantPattern;
   private Pattern pattern;

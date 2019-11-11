@@ -33,6 +33,7 @@ public class LineLengthCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "maximumLineLength",
+    description = "The maximum authorized line length",
     defaultValue = "" + DEFAULT_MAXIMUM_LINE_LENGTH)
   public int maximumLineLength = DEFAULT_MAXIMUM_LINE_LENGTH;
 

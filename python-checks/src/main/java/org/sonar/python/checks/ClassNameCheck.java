@@ -34,6 +34,7 @@ public class ClassNameCheck extends AbstractNameCheck {
 
   @RuleProperty(
     key = "format",
+    description = "Regular expression used to check the class names against",
     defaultValue = "" + DEFAULT)
   public String format = DEFAULT;
 

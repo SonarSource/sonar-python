@@ -41,6 +41,7 @@ public class NoPersonReferenceInTodoCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "pattern",
+    description = "A regular expression defining the pattern that should be present after \"TODO\" or \"FIXME\"",
     defaultValue = DEFAULT_PERSON_REFERENCE_PATTERN)
   public String personReferencePatternString = DEFAULT_PERSON_REFERENCE_PATTERN;
 

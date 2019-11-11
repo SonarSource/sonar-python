@@ -35,6 +35,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "legalTrailingCommentPattern",
+    description = "Pattern for text of trailing comments that are allowed. By default, comments containing only one word.",
     defaultValue = DEFAULT_LEGAL_COMMENT_PATTERN)
   public String legalCommentPattern = DEFAULT_LEGAL_COMMENT_PATTERN;
 

@@ -38,7 +38,10 @@ public class TooManyReturnsCheck extends PythonSubscriptionCheck {
   private static final int DEFAULT_MAX = 3;
   private static final String MESSAGE = "This function has %s returns or yields, which is more than the %s allowed.";
 
-  @RuleProperty(key = "max", defaultValue = "" + DEFAULT_MAX)
+  @RuleProperty(
+    key = "max",
+    description = "Maximum allowed return statements per function",
+    defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 
   @Override

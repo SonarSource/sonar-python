@@ -35,6 +35,7 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "max",
+    description = "Maximum authorized number of parameters",
     defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 

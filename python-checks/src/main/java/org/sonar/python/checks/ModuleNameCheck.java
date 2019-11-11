@@ -34,8 +34,10 @@ public class ModuleNameCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "format",
+    description = "Regular expression used to check the module names against.",
     defaultValue = "" + DEFAULT)
   public String format = DEFAULT;
+
   private Pattern pattern = null;
 
   @Override

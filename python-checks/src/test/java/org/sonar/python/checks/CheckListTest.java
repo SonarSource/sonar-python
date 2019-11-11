@@ -20,28 +20,18 @@
 package org.sonar.python.checks;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.batch.rule.CheckFactory;
-import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleParam;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -79,39 +69,6 @@ public class CheckListTest {
       assertThat(getClass().getResource(testName))
           .overridingErrorMessage("No test for " + cls.getSimpleName())
           .isNotNull();
-    }
-
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("org.sonar.l10n.py", Locale.ENGLISH);
-
-    Set<String> keys = Sets.newHashSet();
-
-    ActiveRules activeRules = (new ActiveRulesBuilder())
-        .build();
-    CheckFactory checkFactory = new CheckFactory(activeRules);
-    Collection<Rule> rules = checkFactory
-        .<Rule>create("repositoryKey")
-        .addAnnotatedChecks(CheckList.getChecks())
-        .all();
-    for (Rule rule : rules) {
-      assertThat(keys).as("Duplicate key " + rule.getKey()).doesNotContain(rule.getKey());
-      keys.add(rule.getKey());
-
-      resourceBundle.getString("rule." + CheckList.REPOSITORY_KEY + "." + rule.getKey() + ".name");
-      assertThat(getClass().getResource("/org/sonar/l10n/python/rules/python/" + rule.getKey() + ".html"))
-          .overridingErrorMessage("No description for " + rule.getKey())
-          .isNotNull();
-
-      assertThat(rule.getDescription())
-          .overridingErrorMessage("Description of " + rule.getKey() + " should be in separate file")
-          .isNull();
-
-      for (RuleParam param : rule.getParams()) {
-        resourceBundle.getString("rule." + CheckList.REPOSITORY_KEY + "." + rule.getKey() + ".param." + param.getKey());
-
-        assertThat(param.getDescription())
-            .overridingErrorMessage("Description for param " + param.getKey() + " of " + rule.getKey() + " should be in separate file")
-            .isEmpty();
-      }
     }
   }
 
