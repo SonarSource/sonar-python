@@ -3,20 +3,22 @@ only to then overwrite it or throw it away, could indicate a serious error in th
 Therefore all calculated values should be used.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-i = a + b // Noncompliant; calculation result not used before value is overwritten
-i = compute()
+def func(a, b, compute):
+    i = a + b  # Noncompliant; calculation result not used before value is overwritten
+    i = compute()  # Noncompliant; the value is not used before leaving the function
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-i = a + b
-i += compute()
+def func(a, b, compute):
+    i = a + b
+    i += compute()
+    return i
 </pre>
 <h2>Exceptions</h2>
 <p>This rule ignores initializations to -1, 0, 1, <code>None</code>, <code>True</code>, <code>False</code> and <code>""</code>.</p>
+<p>No issue will be raised on unpacked variables.</p>
 <h2>See</h2>
-<ul>
-  <li> <a href="http://cwe.mitre.org/data/definitions/563.html">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/QYA5">CERT, MSC13-C.</a> - Detect and remove unused values </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/uQCSBg">CERT, MSC56-J.</a> - Detect and remove superfluous code and values </li>
-</ul>
+<p> * <a href="http://cwe.mitre.org/data/definitions/563.html">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable')</p>
+<p> * <a href="https://www.securecoding.cert.org/confluence/x/QYA5">CERT, MSC13-C.</a> - Detect and remove unused values</p>
+<p> * <a href="https://www.securecoding.cert.org/confluence/x/uQCSBg">CERT, MSC56-J.</a> - Detect and remove superfluous code and values</p>
 

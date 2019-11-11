@@ -3,10 +3,10 @@
 <h2>Noncompliant Code Example</h2>
 <p>With the default threshold of 3:</p>
 <pre>
-def run:
-    prepare("action1")  # Noncompliant - "action1" is duplicated 3 times
-    execute("action1")
-    release("action1")
+def run():
+    prepare("this is a duplicate")  # Noncompliant - "this is a duplicate" is duplicated 3 times
+    execute("this is a duplicate")
+    release("this is a duplicate")
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -14,8 +14,8 @@ ACTION_1 = "action1"
 
 def run():
     prepare(ACTION_1)
-    execute(ACTION_1);
-    release(ACTION_1);
+    execute(ACTION_1)
+    release(ACTION_1)
 </pre>
 <h2>Exceptions</h2>
 <p>No issue will be raised on:</p>
