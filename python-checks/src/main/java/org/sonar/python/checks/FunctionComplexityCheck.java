@@ -33,6 +33,7 @@ public class FunctionComplexityCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "maximumFunctionComplexityThreshold",
+    description = "The maximum authorized complexity in function",
     defaultValue = "" + DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD)
   int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
 

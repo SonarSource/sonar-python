@@ -51,6 +51,11 @@ public class PythonRuleRepositoryTest {
     RulesDefinition.Rule backstickUsage = repository.rule("BackticksUsage");
     assertThat(backstickUsage).isNotNull();
     assertThat(backstickUsage.activatedByDefault()).isTrue();
+
+    for (RulesDefinition.Rule rule : rules) {
+      assertThat(rule.htmlDescription()).isNotEmpty();
+      rule.params().forEach(p -> assertThat(p.description()).isNotEmpty());
+    }
   }
 
   private List<String> nonAbstractCheckFiles() throws IOException {

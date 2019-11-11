@@ -42,6 +42,7 @@ public class NestedControlFlowDepthCheck extends PythonVisitorCheck {
 
   @RuleProperty(
     key = "max",
+    description = "Maximum allowed \"if\", \"for\", \"while\", \"try\" and \"with\" statements nesting depth",
     defaultValue = "" + DEFAULT_MAX)
   public int max = DEFAULT_MAX;
 

@@ -40,7 +40,11 @@ public class FieldNameCheck extends PythonSubscriptionCheck {
   private static final String CONSTANT_PATTERN = "^[_A-Z][A-Z0-9_]*$";
 
   private static final String DEFAULT = "^[_a-z][_a-z0-9]*$";
-  @RuleProperty(key = "format", defaultValue = DEFAULT)
+
+  @RuleProperty(
+    key = "format",
+    description = "Regular expression used to check the field names against.",
+    defaultValue = DEFAULT)
   public String format = DEFAULT;
 
 
