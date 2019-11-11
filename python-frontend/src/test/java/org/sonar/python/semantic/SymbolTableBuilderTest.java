@@ -72,7 +72,7 @@ public class SymbolTableBuilderTest {
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
-      "using_builtin_symbol", "keyword_usage");
+      "using_builtin_symbol", "keyword_usage", "comprehension_vars");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.add("a"); // top level class
@@ -370,6 +370,16 @@ public class SymbolTableBuilderTest {
     assertThat(symbolByName).hasSize(1);
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS);
+  }
+
+  @Test
+  public void comprehension_vars() {
+    FunctionDef functionTree = functionTreesByName.get("comprehension_vars");
+    ComprehensionExpression comprehensionExpression = ((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0));
+    assertThat(comprehensionExpression.localVariables()).hasSize(1);
+    Map<String, Symbol> symbolByName = comprehensionExpression.localVariables().stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    Symbol a = symbolByName.get("a");
+    assertThat(a.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.COMP_DECLARATION);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

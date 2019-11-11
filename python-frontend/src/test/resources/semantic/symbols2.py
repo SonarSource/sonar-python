@@ -150,3 +150,6 @@ def using_builtin_symbol():
 def keyword_usage():
     x = 42
     f(x = 43) # keyword x is not the same symbol of x defined as local var
+
+def comprehension_vars():
+    [42 for [a] in range(3)]
