@@ -22,6 +22,8 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -60,7 +62,11 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,6 +96,7 @@ public class PythonSensorTest {
       return Collections.singletonList(MyCustomRule.class);
     }
   }};
+  private static Path workDir;
 
   @Rule(
     key = "key",
@@ -119,8 +126,26 @@ public class PythonSensorTest {
   public LogTester logTester = new LogTester();
 
   @Before
-  public void init() {
+  public void init() throws IOException {
     context = SensorContextTester.create(baseDir);
+    workDir = Files.createTempDirectory("workDir");
+    context.fileSystem().setWorkDir(workDir);
+  }
+
+  private abstract static class TestRule extends PythonSubscriptionCheck { }
+
+  @Test
+  public void working_directory() throws IOException {
+    TestRule check = new TestRule() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> assertThat(ctx.workingDirectory()).isEqualTo(workDir.toFile()));
+      }
+    };
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(Files.createTempFile("foo", "py").toFile(), workDir.toFile());
+    assertThat(context.workingDirectory()).isEqualTo(workDir.toFile());
+    check.scanFile(context);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }
 
   @Test

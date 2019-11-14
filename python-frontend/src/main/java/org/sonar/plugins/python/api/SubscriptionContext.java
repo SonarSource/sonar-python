@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.io.File;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -37,4 +39,7 @@ public interface SubscriptionContext {
   PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
 
   PythonFile pythonFile();
+
+  @CheckForNull
+  File workingDirectory();
 }

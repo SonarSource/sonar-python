@@ -20,8 +20,11 @@
 package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.SymbolTableBuilder;
@@ -30,13 +33,15 @@ public class PythonVisitorContext {
 
   private final FileInput rootTree;
   private final PythonFile pythonFile;
+  private File workingDirectory = null;
   private final RecognitionException parsingException;
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile) {
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory) {
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
+    this.workingDirectory = workingDirectory;
     this.parsingException = null;
     new SymbolTableBuilder().visitFileInput(rootTree);
   }
@@ -65,5 +70,10 @@ public class PythonVisitorContext {
 
   public List<PreciseIssue> getIssues() {
     return issues;
+  }
+
+  @CheckForNull
+  public File workingDirectory() {
+    return workingDirectory;
   }
 }
