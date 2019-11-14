@@ -19,6 +19,7 @@
  */
 package org.sonar.python;
 
+import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ import java.util.Deque;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -130,6 +132,12 @@ public class SubscriptionVisitor {
     @Override
     public PythonFile pythonFile() {
       return pythonVisitorContext.pythonFile();
+    }
+
+    @Override
+    @CheckForNull
+    public File workingDirectory() {
+      return pythonVisitorContext.workingDirectory();
     }
   }
 }
