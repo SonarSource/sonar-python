@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
-import org.sonar.python.IssueLocation;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 

@@ -21,6 +21,7 @@ package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
 import org.junit.Test;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
