@@ -24,7 +24,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.IssueLocation;
 
 public interface PythonCheck {
 

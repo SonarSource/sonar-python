@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import com.sonar.sslr.api.RecognitionException;
 import org.sonar.check.Rule;
-import org.sonar.python.IssueLocation;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 

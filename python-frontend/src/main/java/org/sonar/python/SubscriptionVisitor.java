@@ -28,6 +28,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;

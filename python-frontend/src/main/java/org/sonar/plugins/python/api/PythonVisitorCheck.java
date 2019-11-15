@@ -22,7 +22,6 @@ package org.sonar.plugins.python.api;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.IssueLocation;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 public abstract class PythonVisitorCheck extends BaseTreeVisitor implements PythonCheck {

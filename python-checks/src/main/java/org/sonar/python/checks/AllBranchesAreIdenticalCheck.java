@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.IssueLocation;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3923")

@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Trivia;
-import org.sonar.python.IssueLocation;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.tree.TreeUtils;
