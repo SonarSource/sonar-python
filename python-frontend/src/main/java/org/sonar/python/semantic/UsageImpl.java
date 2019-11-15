@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Tree;
 
 public class UsageImpl implements Usage {

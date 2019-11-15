@@ -31,7 +31,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

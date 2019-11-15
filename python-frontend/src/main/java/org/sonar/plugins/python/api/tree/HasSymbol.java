@@ -20,8 +20,8 @@
 package org.sonar.plugins.python.api.tree;
 
 import javax.annotation.CheckForNull;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 
 public interface HasSymbol {
   @CheckForNull

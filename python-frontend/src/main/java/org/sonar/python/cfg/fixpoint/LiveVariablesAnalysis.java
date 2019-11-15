@@ -28,7 +28,7 @@ import java.util.Set;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.python.cfg.fixpoint.UsageVisitor.SymbolUsage;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 public class LiveVariablesAnalysis {
 

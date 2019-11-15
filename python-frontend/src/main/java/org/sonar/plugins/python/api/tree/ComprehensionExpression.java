@@ -20,7 +20,7 @@
 package org.sonar.plugins.python.api.tree;
 
 import java.util.Set;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 /**
  *

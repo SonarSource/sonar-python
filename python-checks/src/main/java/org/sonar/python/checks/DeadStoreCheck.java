@@ -34,8 +34,8 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;

@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.sonar.python.checks.Expressions.removeParentheses;
 
