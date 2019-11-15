@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.PythonFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.cfg.PythonCfgBlock;
 import org.sonar.python.cfg.PythonCfgEndBlock;

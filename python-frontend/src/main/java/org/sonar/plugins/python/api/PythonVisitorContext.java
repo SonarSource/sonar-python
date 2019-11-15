@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.python.PythonFile;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
 public class PythonVisitorContext {
