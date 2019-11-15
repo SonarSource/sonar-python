@@ -62,11 +62,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -130,24 +126,6 @@ public class PythonSensorTest {
     context = SensorContextTester.create(baseDir);
     workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
-  }
-
-  private abstract static class TestRule extends PythonSubscriptionCheck { }
-
-  @Test
-  public void working_directory() throws IOException {
-    TestRule check = new TestRule() {
-      @Override
-      public void initialize(Context context) {
-        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> assertThat(ctx.workingDirectory()).isEqualTo(workDir.toFile()));
-      }
-    };
-    File tmpFile = Files.createTempFile("foo", "py").toFile();
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, workDir.toFile());
-    assertThat(context.workingDirectory()).isEqualTo(workDir.toFile());
-    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
-    check.scanFile(context);
-    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }
 
   @Test

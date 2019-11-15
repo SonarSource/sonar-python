@@ -20,15 +20,22 @@
 package org.sonar.python;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -85,6 +92,23 @@ public class PythonVisitorCheckTest {
     List<PreciseIssue> issues = scanFileForIssues(FILE, check);
     PreciseIssue firstIssue = issues.get(0);
     assertThat(firstIssue.cost()).isEqualTo(42);
+  }
+
+  @Test
+  public void working_directory() throws IOException {
+    Path workDir = Files.createTempDirectory("workDir");
+    PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(SubscriptionCheck.Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> assertThat(ctx.workingDirectory()).isEqualTo(workDir.toFile()));
+      }
+    };
+    File tmpFile = Files.createTempFile("foo", "py").toFile();
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, workDir.toFile());
+    assertThat(context.workingDirectory()).isEqualTo(workDir.toFile());
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+    check.scanFile(context);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }
 
   private static class TestPythonCheck extends PythonVisitorCheck {
