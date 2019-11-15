@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.IOException;
+import java.net.URI;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonFile;
 
@@ -42,6 +43,11 @@ public abstract class SonarQubePythonFile implements PythonFile {
 
   public InputFile inputFile() {
     return inputFile;
+  }
+
+  @Override
+  public URI uri() {
+    return inputFile().uri();
   }
 
   @Override
