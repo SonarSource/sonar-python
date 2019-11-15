@@ -22,6 +22,7 @@ package org.sonar.python;
 import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import javax.annotation.Nullable;
@@ -77,6 +78,11 @@ public class TestPythonVisitorRunner {
     @Override
     public String fileName() {
       return file.getName();
+    }
+
+    @Override
+    public URI uri() {
+      return file.toURI();
     }
 
   }

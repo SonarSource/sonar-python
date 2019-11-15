@@ -20,7 +20,12 @@
 package org.sonar.python;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonVisitorContext;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestPythonVisitorRunnerTest {
 
@@ -29,4 +34,10 @@ public class TestPythonVisitorRunnerTest {
     TestPythonVisitorRunner.scanFile(new File("xxx"), visitorContext -> {});
   }
 
+  @Test
+  public void file_uri() throws IOException {
+    File tmpFile = Files.createTempFile("foo", "py").toFile();
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+  }
 }

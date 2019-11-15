@@ -142,8 +142,10 @@ public class PythonSensorTest {
         context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> assertThat(ctx.workingDirectory()).isEqualTo(workDir.toFile()));
       }
     };
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(Files.createTempFile("foo", "py").toFile(), workDir.toFile());
+    File tmpFile = Files.createTempFile("foo", "py").toFile();
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, workDir.toFile());
     assertThat(context.workingDirectory()).isEqualTo(workDir.toFile());
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
     check.scanFile(context);
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }

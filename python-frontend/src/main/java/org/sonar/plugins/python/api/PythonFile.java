@@ -19,10 +19,14 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.net.URI;
+
 public interface PythonFile {
 
   String content();
 
   String fileName();
+
+  URI uri();
 
 }

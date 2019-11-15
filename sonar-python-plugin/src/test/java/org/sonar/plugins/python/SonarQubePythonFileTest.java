@@ -43,6 +43,7 @@ public class SonarQubePythonFileTest {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
     assertThat(pythonFile.toString()).isEqualTo(inputFile.toString());
+    assertThat(pythonFile.uri()).isEqualTo(inputFile.uri());
   }
 
   @Test
