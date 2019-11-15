@@ -52,7 +52,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.PythonFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.semantic.Symbol;
 import org.sonar.python.semantic.Usage;

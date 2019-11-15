@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.cfg.CfgValidator;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.python.PythonFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.Symbol;
 

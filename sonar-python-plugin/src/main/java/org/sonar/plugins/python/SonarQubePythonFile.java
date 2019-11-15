@@ -21,7 +21,7 @@ package org.sonar.plugins.python;
 
 import java.io.IOException;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.python.PythonFile;
+import org.sonar.plugins.python.api.PythonFile;
 
 public abstract class SonarQubePythonFile implements PythonFile {
 
