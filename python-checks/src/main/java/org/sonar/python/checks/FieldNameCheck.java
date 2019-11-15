@@ -29,8 +29,8 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 
 @Rule(key = "S116")
 public class FieldNameCheck extends PythonSubscriptionCheck {

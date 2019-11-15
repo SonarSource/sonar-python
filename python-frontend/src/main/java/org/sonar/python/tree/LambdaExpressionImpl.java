@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 public class LambdaExpressionImpl extends PyTree implements LambdaExpression {
   private final Token lambdaKeyword;

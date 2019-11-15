@@ -38,7 +38,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.checks.Expressions;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = HashingDataCheck.CHECK_KEY)
 public class HashingDataCheck extends AbstractCallExpressionCheck {

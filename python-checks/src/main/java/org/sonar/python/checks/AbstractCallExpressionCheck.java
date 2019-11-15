@@ -27,7 +27,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 public abstract class AbstractCallExpressionCheck extends PythonSubscriptionCheck {
 

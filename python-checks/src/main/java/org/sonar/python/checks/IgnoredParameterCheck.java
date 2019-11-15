@@ -29,8 +29,8 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 
 import static org.sonar.python.checks.DeadStoreUtils.isParameter;
 import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;

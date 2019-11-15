@@ -37,7 +37,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis.DefinedVariables;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3827")

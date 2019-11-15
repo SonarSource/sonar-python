@@ -28,8 +28,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 
 @Rule(key = "S117")
 public class LocalVariableAndParameterNameConventionCheck extends PythonSubscriptionCheck {

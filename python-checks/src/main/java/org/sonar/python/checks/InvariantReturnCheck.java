@@ -42,7 +42,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = "S3516")
 public class InvariantReturnCheck extends PythonSubscriptionCheck {

@@ -21,6 +21,8 @@ package org.sonar.python.semantic;
 
 import javax.annotation.Nullable;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;

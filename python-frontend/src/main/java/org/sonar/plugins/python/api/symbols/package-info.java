@@ -17,32 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.semantic;
+@ParametersAreNonnullByDefault
+package org.sonar.plugins.python.api.symbols;
 
-import org.sonar.plugins.python.api.tree.Tree;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-public interface Usage {
-
-  default boolean isBindingUsage() {
-    return kind() != Kind.OTHER;
-  }
-
-  Tree tree();
-
-  Kind kind();
-
-  enum Kind {
-    ASSIGNMENT_LHS,
-    COMPOUND_ASSIGNMENT_LHS,
-    IMPORT,
-    LOOP_DECLARATION,
-    COMP_DECLARATION,
-    OTHER,
-    PARAMETER,
-    FUNC_DECLARATION,
-    CLASS_DECLARATION,
-    EXCEPTION_INSTANCE,
-    WITH_INSTANCE,
-    GLOBAL_DECLARATION
-  }
-}

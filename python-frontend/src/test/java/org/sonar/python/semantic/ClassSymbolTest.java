@@ -20,6 +20,8 @@
 package org.sonar.python.semantic;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;

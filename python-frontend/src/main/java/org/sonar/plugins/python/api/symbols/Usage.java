@@ -17,43 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.plugins.python.api.symbols;
 
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.Tree;
 
-/**
- * Qualified expression like "foo.bar"
- *
- * <pre>
- *   {@link #qualifier()}.{@link #name()}
- * </pre>
- *
- * See https://docs.python.org/3/reference/expressions.html#grammar-token-attributeref
- */
-public interface QualifiedExpression extends Expression, HasSymbol {
-  Expression qualifier();
+public interface Usage {
 
-  Token dotToken();
-
-  Name name();
-
-  /**
-   * Returns the symbol of {@link #name()}
-   */
-  @CheckForNull
-  @Override
-  default Symbol symbol() {
-    return name().symbol();
+  default boolean isBindingUsage() {
+    return kind() != Kind.OTHER;
   }
 
-  /**
-   * Returns the usage of {@link #name()}
-   */
-  @CheckForNull
-  @Override
-  default Usage usage() {
-    return name().usage();
+  Tree tree();
+
+  Kind kind();
+
+  enum Kind {
+    ASSIGNMENT_LHS,
+    COMPOUND_ASSIGNMENT_LHS,
+    IMPORT,
+    LOOP_DECLARATION,
+    COMP_DECLARATION,
+    OTHER,
+    PARAMETER,
+    FUNC_DECLARATION,
+    CLASS_DECLARATION,
+    EXCEPTION_INSTANCE,
+    WITH_INSTANCE,
+    GLOBAL_DECLARATION
   }
 }

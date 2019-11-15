@@ -36,7 +36,7 @@ import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.Expressions;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = "S5439")
 public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {

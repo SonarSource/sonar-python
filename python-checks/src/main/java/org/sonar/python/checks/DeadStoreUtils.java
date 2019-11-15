@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis.LiveVariables;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1854")

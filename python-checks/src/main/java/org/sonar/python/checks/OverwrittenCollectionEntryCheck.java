@@ -47,7 +47,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S4143")

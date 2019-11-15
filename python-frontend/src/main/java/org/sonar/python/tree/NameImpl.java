@@ -27,8 +27,8 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 
 public class NameImpl extends PyTree implements Name {
   private final Token token;

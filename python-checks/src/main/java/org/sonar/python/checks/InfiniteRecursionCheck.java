@@ -54,8 +54,8 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.semantic.Symbol;
-import org.sonar.python.semantic.Usage;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 

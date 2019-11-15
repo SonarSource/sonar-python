@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = "S4426")
 public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {

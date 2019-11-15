@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;

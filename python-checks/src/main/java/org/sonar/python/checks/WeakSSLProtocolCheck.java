@@ -26,7 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = "S4423")
 public class WeakSSLProtocolCheck extends PythonSubscriptionCheck {
