@@ -55,16 +55,13 @@ build_task:
   cleanup_before_cache_script: cleanup_maven_repository
 
 build_win_task:
-  depends_on:
-    - build
   <<: *WINDOWS_VM_DEFINITION
   only_if: $CIRRUS_PR != "" || $CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*"
   maven_cache:
     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     folder: ~/.m2/repository
   build_script:
-    - source cirrus-env CI
-    - mvn.cmd test
+    - mvn.cmd -s /c/buildTools-docker/settings-public.xml test
   cleanup_before_cache_script: cleanup_maven_repository
  
 plugin_qa_task:
