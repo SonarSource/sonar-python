@@ -23,7 +23,7 @@ import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,7 +60,7 @@ public class ControlFlowGraphBuilder {
 
   private PythonCfgBlock start;
   private final PythonCfgBlock end = new PythonCfgEndBlock();
-  private final Set<PythonCfgBlock> blocks = new HashSet<>();
+  private final Set<PythonCfgBlock> blocks = new LinkedHashSet<>();
   private final Deque<Loop> loops = new ArrayDeque<>();
   private final Deque<PythonCfgBlock> exceptionTargets = new ArrayDeque<>();
   private final Deque<PythonCfgBlock> exitTargets = new ArrayDeque<>();
