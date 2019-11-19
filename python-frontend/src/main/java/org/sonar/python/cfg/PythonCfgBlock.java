@@ -20,6 +20,7 @@
 package org.sonar.python.cfg;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public abstract class PythonCfgBlock implements CfgBlock {
 
   private final LinkedList<Tree> elements = new LinkedList<>();
-  private final Set<CfgBlock> predecessors = new HashSet<>();
+  private final Set<CfgBlock> predecessors = new LinkedHashSet<>();
 
   @Override
   public Set<CfgBlock> predecessors() {

@@ -20,7 +20,7 @@
 package org.sonar.python.cfg;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
@@ -44,7 +44,7 @@ public class PythonCfgBranchingBlock extends PythonCfgBlock implements CfgBranch
 
   @Override
   public Set<CfgBlock> successors() {
-    return new HashSet<>(Arrays.asList(trueSuccessor, falseSuccessor));
+    return new LinkedHashSet<>(Arrays.asList(trueSuccessor, falseSuccessor));
   }
 
   @CheckForNull

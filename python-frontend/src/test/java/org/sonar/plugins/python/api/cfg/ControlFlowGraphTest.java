@@ -23,14 +23,15 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.cfg.PythonCfgBlock;
+import org.sonar.python.cfg.PythonCfgBranchingBlock;
 import org.sonar.python.cfg.PythonCfgEndBlock;
 import org.sonar.python.cfg.PythonCfgSimpleBlock;
 
@@ -659,6 +660,17 @@ public class ControlFlowGraphTest {
     fun = (FunctionDef) fileInput.statements().statements().get(0);
     cfg = ControlFlowGraph.build(fun, file);
     assertThat(cfg.start().elements()).extracting(element -> ((Parameter) element).name().name()).containsExactlyInAnyOrder("p1", "p2", "p3", "p4");
+  }
+
+  @Test
+  public void successors_predecessors_order() {
+    ControlFlowGraph cfg = cfg(
+      "if p:",
+      "  print('True')"
+    );
+    PythonCfgBranchingBlock branchingBlock = (PythonCfgBranchingBlock) cfg.start();
+    assertThat(branchingBlock.successors()).containsExactly(branchingBlock.trueSuccessor(), branchingBlock.falseSuccessor());
+    assertThat(cfg.end().predecessors()).containsExactly(branchingBlock.trueSuccessor(), branchingBlock);
   }
 
   private ControlFlowGraph verifyCfg(String... lines) {
