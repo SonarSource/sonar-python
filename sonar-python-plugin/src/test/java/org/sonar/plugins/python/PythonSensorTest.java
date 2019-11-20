@@ -21,13 +21,16 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
@@ -309,6 +312,17 @@ public class PythonSensorTest {
     sensor(null).execute(context);
     assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
+  }
+
+  @Test
+  public void package_name_by_file() {
+    List<InputFile> inputFiles = Arrays.asList(inputFile("packages/sound/__init__.py"),
+      inputFile("packages/sound/formats/__init__.py"),
+      inputFile("packages/sound/formats/wavread.py"));
+    Map<URI, String> inputFileByPackage = PythonSensor.getInputFileByPackage(baseDir, inputFiles);
+    assertThat(inputFileByPackage.get(inputFiles.get(0).uri())).isEqualTo("sound");
+    assertThat(inputFileByPackage.get(inputFiles.get(1).uri())).isEqualTo("sound.formats");
+    assertThat(inputFileByPackage.get(inputFiles.get(2).uri())).isEqualTo("sound.formats");
   }
 
   private PythonSensor sensor() {

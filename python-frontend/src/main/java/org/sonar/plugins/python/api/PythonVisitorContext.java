@@ -38,12 +38,12 @@ public class PythonVisitorContext {
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory) {
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.parsingException = null;
-    new SymbolTableBuilder().visitFileInput(rootTree);
+    new SymbolTableBuilder(pythonFile, packageName).visitFileInput(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {

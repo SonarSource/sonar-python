@@ -55,7 +55,7 @@ public class TestPythonVisitorRunner {
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode astNode = parser.parse(pythonFile.content());
     FileInput rootTree = new PythonTreeMaker().fileInput(astNode);
-    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory);
+    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, null);
   }
 
   private static class TestPythonFile implements PythonFile {

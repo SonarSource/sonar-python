@@ -21,8 +21,10 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -74,26 +76,26 @@ public class PythonScanner {
     this.parser = PythonParser.create();
   }
 
-  public void scanFiles() {
+  public void scanFiles(Map<URI, String> inputFileByPackage) {
     for (InputFile pythonFile : inputFiles) {
       if (context.isCancelled()) {
         return;
       }
       try {
-        scanFile(pythonFile);
+        scanFile(pythonFile, inputFileByPackage.get(pythonFile.uri()));
       } catch (Exception e) {
         LOG.warn("Unable to analyze file '{}'. Error: {}", pythonFile.toString(), e);
       }
     }
   }
 
-  private void scanFile(InputFile inputFile) {
+  private void scanFile(InputFile inputFile, String packageName) {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir());
+      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), packageName);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);

@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -81,8 +82,20 @@ import org.sonar.python.tree.NameImpl;
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
 
+  private final PythonFile pythonFile;
+  private final String packageName;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
+
+  public SymbolTableBuilder() {
+    this.pythonFile = null;
+    this.packageName = null;
+  }
+
+  public SymbolTableBuilder(PythonFile pythonFile, @Nullable String packageName) {
+    this.pythonFile = pythonFile;
+    this.packageName = packageName;
+  }
 
   @Override
   public void visitFileInput(FileInput fileInput) {
