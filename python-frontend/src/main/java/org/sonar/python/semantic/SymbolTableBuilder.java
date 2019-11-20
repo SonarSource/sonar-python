@@ -179,9 +179,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-      String fullyQualifiedName = fullyQualifiedModuleName != null
-        ? (fullyQualifiedModuleName + "." + pyFunctionDefTree.name().name())
-        : null;
+      String functionName = pyFunctionDefTree.name().name();
+      String fullyQualifiedName = getFullyQualifiedName(functionName);
       addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
@@ -192,14 +191,23 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
-      String fullyQualifiedName = fullyQualifiedModuleName != null
-        ? (fullyQualifiedModuleName + "." + pyClassDefTree.name().name())
-        : null;
+      String className = pyClassDefTree.name().name();
+      String fullyQualifiedName = getFullyQualifiedName(className);
       addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
       leaveScope();
+    }
+
+    private String getFullyQualifiedName(String className) {
+      String fullyQualifiedName = fullyQualifiedModuleName != null
+        ? (fullyQualifiedModuleName + "." + className)
+        : null;
+      if (currentScopeRootTree().is(Kind.CLASSDEF)) {
+        fullyQualifiedName = ((ClassDef) currentScopeRootTree()).name().symbol().fullyQualifiedName() + "." + className;
+      }
+      return fullyQualifiedName;
     }
 
     @Override

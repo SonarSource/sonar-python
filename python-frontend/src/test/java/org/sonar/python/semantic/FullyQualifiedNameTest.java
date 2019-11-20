@@ -26,11 +26,13 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.getAllDescendant;
 import static org.sonar.python.PythonTestUtils.getFirstChild;
 import static org.sonar.python.PythonTestUtils.parse;
 
@@ -132,6 +134,33 @@ public class FullyQualifiedNameTest {
       "A()"
     );
     assertNameAndQualifiedName(tree, "A", "my_package.my_module.A");
+  }
+
+  @Test
+  public void method_definition_symbol() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "class A:",
+      "  def fn(): pass"
+    );
+    FunctionDef method = (FunctionDef) getAllDescendant(tree, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
+    Symbol symbol = method.name().symbol();
+    assertThat(symbol.name()).isEqualTo("fn");
+    assertThat(symbol.fullyQualifiedName()).isEqualTo("my_package.my_module.A.fn");
+  }
+
+  @Test
+  public void method_definition_subclass_symbol() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "class A:",
+      "  class B:",
+      "    def fn(): pass"
+    );
+    FunctionDef method = (FunctionDef) getAllDescendant(tree, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
+    Symbol symbol = method.name().symbol();
+    assertThat(symbol.name()).isEqualTo("fn");
+    assertThat(symbol.fullyQualifiedName()).isEqualTo("my_package.my_module.A.B.fn");
   }
 
   @Test
