@@ -117,10 +117,11 @@ public class FullyQualifiedNameTest {
   @Test
   public void definition_callee_symbol() {
     FileInput tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
       "def fn(): pass",
       "fn('foo')"
     );
-    assertNameAndQualifiedName(tree, "fn", null);
+    assertNameAndQualifiedName(tree, "fn", "my_package.my_module.fn");
   }
 
   @Test
