@@ -37,5 +37,9 @@ public class PythonVisitorContextTest {
     new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
+
+    // no package
+    new PythonVisitorContext(fileInput, pythonFile, null, "");
+    assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_module.foo");
   }
 }
