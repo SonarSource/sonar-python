@@ -179,7 +179,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-      addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION);
+      String fullyQualifiedName = fullyQualifiedModuleName != null
+        ? (fullyQualifiedModuleName + "." + pyFunctionDefTree.name().name())
+        : null;
+      addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree);
@@ -189,7 +192,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
-      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION);
+      String fullyQualifiedName = fullyQualifiedModuleName != null
+        ? (fullyQualifiedModuleName + "." + pyClassDefTree.name().name())
+        : null;
+      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
@@ -369,10 +375,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {
-      String fullyQualifiedName = fullyQualifiedModuleName != null
-        ? fullyQualifiedModuleName + "." + nameTree.name()
-        : null;
-      currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
+      currentScope().addBindingUsage(nameTree, usage, null);
     }
 
     private Scope currentScope() {

@@ -115,13 +115,23 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void definition_callee_symbol() {
+  public void function_definition_callee_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package.my_module"),
       "def fn(): pass",
       "fn('foo')"
     );
     assertNameAndQualifiedName(tree, "fn", "my_package.my_module.fn");
+  }
+
+  @Test
+  public void class_definition_callee_symbol() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "class A: pass",
+      "A()"
+    );
+    assertNameAndQualifiedName(tree, "A", "my_package.my_module.A");
   }
 
   @Test
