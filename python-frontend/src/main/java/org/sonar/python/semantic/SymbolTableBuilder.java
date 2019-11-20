@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -200,14 +201,16 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       leaveScope();
     }
 
-    private String getFullyQualifiedName(String className) {
-      String fullyQualifiedName = fullyQualifiedModuleName != null
-        ? (fullyQualifiedModuleName + "." + className)
-        : null;
+    @CheckForNull
+    private String getFullyQualifiedName(String name) {
       if (currentScopeRootTree().is(Kind.CLASSDEF)) {
-        fullyQualifiedName = ((ClassDef) currentScopeRootTree()).name().symbol().fullyQualifiedName() + "." + className;
+        Name className = ((ClassDef) currentScopeRootTree()).name();
+        String enclosingClassQualifiedName = Optional.ofNullable(className.symbol()).map(Symbol::fullyQualifiedName).orElse(className.name());
+        return enclosingClassQualifiedName + "." + name;
       }
-      return fullyQualifiedName;
+      return fullyQualifiedModuleName != null
+        ? (fullyQualifiedModuleName + "." + name)
+        : null;
     }
 
     @Override
