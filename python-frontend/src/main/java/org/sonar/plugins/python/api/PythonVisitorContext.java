@@ -38,12 +38,25 @@ public class PythonVisitorContext {
   private List<PreciseIssue> issues = new ArrayList<>();
 
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory) {
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.parsingException = null;
-    new SymbolTableBuilder().visitFileInput(rootTree);
+    SymbolTableBuilder symbolTableBuilder = packageName != null
+      ? new SymbolTableBuilder(fullyQualifiedModuleName(pythonFile.fileName(), packageName))
+      : new SymbolTableBuilder();
+    symbolTableBuilder.visitFileInput(rootTree);
+  }
+
+  private static String fullyQualifiedModuleName(String fileName, String packageName) {
+    int extensionIndex = fileName.lastIndexOf('.');
+    String moduleName = extensionIndex > 0
+      ? fileName.substring(0, extensionIndex)
+      : fileName;
+    return packageName.isEmpty()
+      ? moduleName
+      : (packageName + "." + moduleName);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {

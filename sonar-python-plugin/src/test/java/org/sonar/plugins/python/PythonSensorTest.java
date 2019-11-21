@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -69,6 +70,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.python.PythonScanner.pythonPackageName;
 
 public class PythonSensorTest {
 
@@ -309,6 +311,17 @@ public class PythonSensorTest {
     sensor(null).execute(context);
     assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
+  }
+
+  @Test
+  public void package_name_by_file() {
+    List<InputFile> inputFiles = Arrays.asList(inputFile("packages/sound/__init__.py"),
+      inputFile("packages/sound/formats/__init__.py"),
+      inputFile("packages/sound/formats/wavread.py"));
+
+    assertThat(pythonPackageName(inputFile("packages/sound/__init__.py"), baseDir)).isEqualTo("sound");
+    assertThat(pythonPackageName(inputFile("packages/sound/formats/__init__.py"), baseDir)).isEqualTo("sound.formats");
+    assertThat(pythonPackageName(inputFile("packages/sound/formats/wavread.py"), baseDir)).isEqualTo("sound.formats");
   }
 
   private PythonSensor sensor() {

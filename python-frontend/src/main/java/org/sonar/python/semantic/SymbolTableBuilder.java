@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -81,8 +82,18 @@ import org.sonar.python.tree.NameImpl;
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
 
+
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
+  private String fullyQualifiedModuleName;
+
+  public SymbolTableBuilder() {
+    fullyQualifiedModuleName = null;
+  }
+
+  public SymbolTableBuilder(String fullyQualifiedModuleName) {
+    this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+  }
 
   @Override
   public void visitFileInput(FileInput fileInput) {
@@ -169,7 +180,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-      addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION);
+      String functionName = pyFunctionDefTree.name().name();
+      String fullyQualifiedName = getFullyQualifiedName(functionName);
+      addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree);
@@ -179,11 +192,32 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
-      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION);
+      String className = pyClassDefTree.name().name();
+      String fullyQualifiedName = getFullyQualifiedName(className);
+      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
       leaveScope();
+    }
+
+    @CheckForNull
+    private String getFullyQualifiedName(String name) {
+      String prefix = scopeQualifiedName();
+      return prefix != null
+        ? (prefix + "." + name)
+        : null;
+    }
+
+    private String scopeQualifiedName() {
+      Tree scopeTree = currentScopeRootTree();
+      if (scopeTree.is(Kind.CLASSDEF, Kind.FUNCDEF)) {
+        Name name = scopeTree.is(Kind.CLASSDEF)
+          ? ((ClassDef) scopeTree).name()
+          : ((FunctionDef) scopeTree).name();
+        return Optional.ofNullable(name.symbol()).map(Symbol::fullyQualifiedName).orElse(name.name());
+      }
+      return fullyQualifiedModuleName;
     }
 
     @Override

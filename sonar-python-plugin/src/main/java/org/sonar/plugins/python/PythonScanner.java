@@ -21,7 +21,10 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
@@ -37,14 +40,14 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
-import org.sonar.plugins.python.api.IssueLocation;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
@@ -93,7 +96,7 @@ public class PythonScanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir());
+      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), pythonPackageName(inputFile, context.fileSystem().baseDir()));
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -120,6 +123,21 @@ public class PythonScanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
+  }
+
+  // visible for testing
+  static String pythonPackageName(InputFile inputFile, File projectBaseDir) {
+    File currentDirectory = inputFile.file().getParentFile();
+    Deque<String> packages = new ArrayDeque<>();
+    while (!currentDirectory.getAbsolutePath().equals(projectBaseDir.getAbsolutePath())) {
+      File initFile = new File(currentDirectory, "__init__.py");
+      if (!initFile.exists()) {
+        break;
+      }
+      packages.push(currentDirectory.getName());
+      currentDirectory = currentDirectory.getParentFile();
+    }
+    return String.join(".", packages);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {

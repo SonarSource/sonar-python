@@ -72,7 +72,6 @@ public final class PythonSensor implements Sensor {
     List<InputFile> list = new ArrayList<>();
     it.forEach(list::add);
     List<InputFile> inputFiles = Collections.unmodifiableList(list);
-
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, inputFiles);
     scanner.scanFiles();
   }

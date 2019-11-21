@@ -42,9 +42,13 @@ public final class PythonTestUtils {
   }
 
   public static FileInput parse(String... lines) {
+    return parse(new SymbolTableBuilder(), lines);
+  }
+
+  public static FileInput parse(SymbolTableBuilder symbolTableBuilder, String... lines) {
     String code = String.join(System.getProperty("line.separator"), lines);
     FileInput tree = pythonTreeMaker.fileInput(p.parse(code));
-    new SymbolTableBuilder().visitFileInput(tree);
+    symbolTableBuilder.visitFileInput(tree);
     return tree;
   }
 
@@ -52,11 +56,11 @@ public final class PythonTestUtils {
   @CheckForNull
   public static <T extends Tree> T getFirstChild(Tree tree, Predicate<Tree> predicate) {
     for (Tree child : tree.children()) {
-      if(predicate.test(child)) {
+      if (predicate.test(child)) {
         return (T) child;
       }
       Tree firstChild = getFirstChild(child, predicate);
-      if(firstChild != null) {
+      if (firstChild != null) {
         return (T) firstChild;
       }
     }
@@ -66,7 +70,7 @@ public final class PythonTestUtils {
   public static <T extends Tree> List<T> getAllDescendant(Tree tree, Predicate<Tree> predicate) {
     List<T> res = new ArrayList<>();
     for (Tree child : tree.children()) {
-      if(predicate.test(child)) {
+      if (predicate.test(child)) {
         res.add((T) child);
       }
       res.addAll(getAllDescendant(child, predicate));
