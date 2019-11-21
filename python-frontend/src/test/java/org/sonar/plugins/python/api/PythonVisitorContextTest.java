@@ -41,5 +41,11 @@ public class PythonVisitorContextTest {
     // no package
     new PythonVisitorContext(fileInput, pythonFile, null, "");
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_module.foo");
+
+    // file without extension
+    Mockito.when(pythonFile.fileName()).thenReturn("my_module");
+    new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
+    assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
   }
 }

@@ -164,6 +164,17 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void subfunction_definition() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "def fn():",
+      "  def inner(): pass",
+      "  inner()"
+    );
+    assertNameAndQualifiedName(tree, "inner", "my_package.my_module.fn.inner");
+  }
+
+  @Test
   public void imported_symbol() {
     FileInput tree = parse(
       "import mod"

@@ -19,15 +19,9 @@
  */
 package org.sonar.plugins.python;
 
-import java.io.File;
-import java.net.URI;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -78,31 +72,8 @@ public final class PythonSensor implements Sensor {
     List<InputFile> list = new ArrayList<>();
     it.forEach(list::add);
     List<InputFile> inputFiles = Collections.unmodifiableList(list);
-    Map<URI, String> inputFileByPackage = getInputFileByPackage(context.fileSystem().baseDir(), inputFiles);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, inputFiles);
-    scanner.scanFiles(inputFileByPackage);
-  }
-  // visible for testing
-  static Map<URI, String> getInputFileByPackage(File projectBaseDir, List<InputFile> inputFiles) {
-    Map<URI, String> packageNamePerFile = new HashMap<>();
-    for (InputFile inputFile : inputFiles) {
-      String packageName = findInitFiles(inputFile, projectBaseDir);
-      packageNamePerFile.put(inputFile.uri(), packageName);
-    }
-    return packageNamePerFile;
-  }
-
-  private static String findInitFiles(InputFile inputFile, File projectBaseDir) {
-    File currentDirectory = inputFile.file().getParentFile();
-    Deque<String> packages = new ArrayDeque<>();
-    while(!currentDirectory.getAbsolutePath().equals(projectBaseDir.getAbsolutePath())) {
-      File initFile = new File(currentDirectory, "__init__.py");
-      if (initFile.exists()) {
-        packages.push(currentDirectory.getName());
-      }
-      currentDirectory = currentDirectory.getParentFile();
-    }
-    return String.join(".", packages);
+    scanner.scanFiles();
   }
 
 }

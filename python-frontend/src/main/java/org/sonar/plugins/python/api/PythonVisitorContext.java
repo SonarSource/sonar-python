@@ -51,7 +51,9 @@ public class PythonVisitorContext {
 
   private static String fullyQualifiedModuleName(String fileName, String packageName) {
     int extensionIndex = fileName.lastIndexOf('.');
-    String moduleName = fileName.substring(0, extensionIndex);
+    String moduleName = extensionIndex > 0
+      ? fileName.substring(0, extensionIndex)
+      : fileName;
     return packageName.isEmpty()
       ? moduleName
       : (packageName + "." + moduleName);

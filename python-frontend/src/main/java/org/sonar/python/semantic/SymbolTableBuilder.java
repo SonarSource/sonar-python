@@ -203,14 +203,21 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @CheckForNull
     private String getFullyQualifiedName(String name) {
-      if (currentScopeRootTree().is(Kind.CLASSDEF)) {
-        Name className = ((ClassDef) currentScopeRootTree()).name();
-        String enclosingClassQualifiedName = Optional.ofNullable(className.symbol()).map(Symbol::fullyQualifiedName).orElse(className.name());
-        return enclosingClassQualifiedName + "." + name;
-      }
-      return fullyQualifiedModuleName != null
-        ? (fullyQualifiedModuleName + "." + name)
+      String prefix = scopeQualifiedName();
+      return prefix != null
+        ? (prefix + "." + name)
         : null;
+    }
+
+    private String scopeQualifiedName() {
+      Tree scopeTree = currentScopeRootTree();
+      if (scopeTree.is(Kind.CLASSDEF, Kind.FUNCDEF)) {
+        Name name = scopeTree.is(Kind.CLASSDEF)
+          ? ((ClassDef) scopeTree).name()
+          : ((FunctionDef) scopeTree).name();
+        return Optional.ofNullable(name.symbol()).map(Symbol::fullyQualifiedName).orElse(name.name());
+      }
+      return fullyQualifiedModuleName;
     }
 
     @Override
