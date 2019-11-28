@@ -19,12 +19,18 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonar.plugins.security.api.PythonRules;
 import org.junit.Test;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActiveRule;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.plugins.python.PythonProfile.SECURITY_RULES_CLASS_NAME;
+import static org.sonar.plugins.python.PythonProfile.SECURITY_RULE_KEYS_METHOD_NAME;
+import static org.sonar.plugins.python.PythonProfile.SECURITY_RULE_REPO_METHOD_NAME;
+import static org.sonar.plugins.python.PythonProfile.getSecurityRuleKeys;
 
 public class PythonProfileTest {
 
@@ -38,9 +44,32 @@ public class PythonProfileTest {
   @Test
   public void profile() {
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile(TestUtils.SONAR_RUNTIME_79);
-    assertThat(profile.rules()).extracting("repoKey").containsOnly("python");
+    assertThat(profile.rules()).extracting("repoKey").containsOnly("python", "pythonsecurity");
     assertThat(profile.rules().size()).isGreaterThan(25);
     assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("S100");
   }
 
+  @Test
+  public void should_contains_security_rules_if_available() {
+    // no security rule available
+    PythonRules.getRuleKeys().clear();
+    assertThat(getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME))
+      .isEmpty();
+
+    // one security rule available
+    PythonRules.getRuleKeys().add("S3649");
+    assertThat(getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME))
+      .containsOnly(RuleKey.of("pythonsecurity", "S3649"));
+
+    // invalid class name
+    assertThat(getSecurityRuleKeys("xxx", SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME)).isEmpty();
+
+    // invalid method name
+    assertThat(getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, "xxx", SECURITY_RULE_REPO_METHOD_NAME)).isEmpty();
+
+    PythonRules.throwOnCall = true;
+    assertThat(getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME))
+      .isEmpty();
+    PythonRules.throwOnCall = false;
+  }
 }

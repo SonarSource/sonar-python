@@ -19,8 +19,17 @@
  */
 package org.sonar.plugins.python;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
@@ -28,8 +37,13 @@ import static org.sonar.plugins.python.PythonRuleRepository.RESOURCE_FOLDER;
 
 public class PythonProfile implements BuiltInQualityProfilesDefinition {
 
+  private static final Logger LOG = Loggers.get(PythonProfile.class);
+
   static final String PROFILE_NAME = "Sonar way";
   static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
+  static final String SECURITY_RULES_CLASS_NAME = "com.sonar.plugins.security.api.PythonRules";
+  static final String SECURITY_RULE_KEYS_METHOD_NAME = "getRuleKeys";
+  static final String SECURITY_RULE_REPO_METHOD_NAME = "getRepositoryKey";
   private final SonarRuntime sonarRuntime;
 
   public PythonProfile(SonarRuntime sonarRuntime) {
@@ -40,7 +54,34 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
   public void define(Context context) {
     NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, Python.KEY);
     BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION, RESOURCE_FOLDER, sonarRuntime);
+    getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME)
+      .forEach(key -> profile.activateRule(key.repository(), key.rule()));
     profile.done();
   }
 
+  @VisibleForTesting
+  static Set<RuleKey> getSecurityRuleKeys(String className, String ruleKeysMethodName, String ruleRepoMethodName) {
+    try {
+
+      Class<?> rulesClass = Class.forName(className);
+      Method getRuleKeysMethod = rulesClass.getMethod(ruleKeysMethodName);
+      Set<String> ruleKeys = (Set<String>) getRuleKeysMethod.invoke(null);
+      Method getRepositoryKeyMethod = rulesClass.getMethod(ruleRepoMethodName);
+      String repositoryKey = (String) getRepositoryKeyMethod.invoke(null);
+      return ruleKeys.stream().map(k -> RuleKey.of(repositoryKey, k)).collect(Collectors.toSet());
+
+    } catch (ClassNotFoundException e) {
+      LOG.debug(className + " is not found, " + securityRuleMessage(e));
+    } catch (NoSuchMethodException e) {
+      LOG.debug("Method not found on " + className +", " + securityRuleMessage(e));
+    } catch (IllegalAccessException | InvocationTargetException e) {
+      LOG.debug(e.getClass().getSimpleName() + ": " + securityRuleMessage(e));
+    }
+
+    return Collections.emptySet();
+  }
+
+  private static String securityRuleMessage(Exception e) {
+    return "no security rules added to Sonar way Python profile: " + e.getMessage();
+  }
 }
