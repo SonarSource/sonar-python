@@ -41,6 +41,9 @@ url = "http://127.0.0.1" # Compliant
 url = "http://::1" # Compliant
 url = "ftp://user@localhost" # Compliant
 
+# url without authority
+url = "http:///" # Compliant
+
 # Argument default value
 def download(url='ssh://exemple.com'): # Compliant
     print(url)
