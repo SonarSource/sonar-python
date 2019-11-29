@@ -75,7 +75,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
             // handle ipv6 loopback
             host = uri.getAuthority();
           }
-          if (LOOPBACK.matcher(host).matches()) {
+          if (host == null || LOOPBACK.matcher(host).matches()) {
             return Optional.empty();
           }
         } catch (URISyntaxException e) {
