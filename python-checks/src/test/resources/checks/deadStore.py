@@ -278,3 +278,12 @@ def underscore_dead_store():
     _ = foo() # OK
     _ = bar()
     print(_)
+
+def annotated_assignments():
+    x:str # OK
+    x = 'foo'
+    print(x)
+
+    y:str = 'foo' # Noncompliant
+    y = 'bar'
+    print(y)
