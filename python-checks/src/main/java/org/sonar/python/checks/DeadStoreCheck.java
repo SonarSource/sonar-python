@@ -89,7 +89,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       || isWithInstance(element)
       || isUsedInSubFunction(symbol, functionDef)
       || DeadStoreUtils.isParameter(element)
-      || isMultipleAssignement(element);
+      || isMultipleAssignement(element)
+      || isAnnotatedAssignmentWithoutRhs(element);
+  }
+
+  private static boolean isAnnotatedAssignmentWithoutRhs(Tree element) {
+    return element.is(Tree.Kind.ANNOTATED_ASSIGNMENT) && ((AnnotatedAssignment) element).assignedValue() == null;
   }
 
   private static boolean isUnderscoreVariable(Symbol symbol) {
