@@ -20,6 +20,7 @@
 package org.sonar.python.semantic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -65,6 +66,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -85,14 +87,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
-  private String fullyQualifiedModuleName;
+  private final List<String> fullyQualifiedModuleName;
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
   }
 
   public SymbolTableBuilder(String fullyQualifiedModuleName) {
-    this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+    this.fullyQualifiedModuleName = Arrays.asList(fullyQualifiedModuleName.split("\\."));
   }
 
   @Override
@@ -217,12 +219,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           : ((FunctionDef) scopeTree).name();
         return Optional.ofNullable(name.symbol()).map(Symbol::fullyQualifiedName).orElse(name.name());
       }
-      return fullyQualifiedModuleName;
+      return fullyQualifiedModuleName != null
+        ? String.join(".", fullyQualifiedModuleName)
+        : null;
     }
 
     @Override
     public void visitImportName(ImportName pyImportNameTree) {
-      createImportedNames(pyImportNameTree.modules(), null, false);
+      createImportedNames(pyImportNameTree.modules(), null, Collections.emptyList());
       super.visitImportName(pyImportNameTree);
     }
 
@@ -232,18 +236,18 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       String moduleName = moduleTree != null
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
-      createImportedNames(pyImportFromTree.importedNames(), moduleName, !pyImportFromTree.dottedPrefixForModule().isEmpty());
+      createImportedNames(pyImportFromTree.importedNames(), moduleName, pyImportFromTree.dottedPrefixForModule());
       super.visitImportFrom(pyImportFromTree);
     }
 
-    private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, boolean isRelativeImport) {
+    private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, List<Token> dottedPrefix) {
       importedNames.forEach(module -> {
         Name nameTree = module.dottedName().names().get(0);
         String fullyQualifiedName = fromModuleName != null
           ? (fromModuleName + "." + nameTree.name())
           : nameTree.name();
-        if (isRelativeImport) {
-          fullyQualifiedName = null;
+        if (!dottedPrefix.isEmpty()) {
+          fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
         }
         if (module.alias() != null) {
           addBindingUsage(module.alias(), Usage.Kind.IMPORT, fullyQualifiedName);
@@ -251,6 +255,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
         }
       });
+    }
+
+    @CheckForNull
+    private String resolveFullyQualifiedNameBasedOnRelativeImport(List<Token> dottedPrefix, String moduleName) {
+      if (fullyQualifiedModuleName == null || dottedPrefix.size() > fullyQualifiedModuleName.size()) {
+        return null;
+      }
+      String packageName = String.join("", fullyQualifiedModuleName.subList(0, fullyQualifiedModuleName.size() - dottedPrefix.size()));
+      return packageName.isEmpty() ? moduleName : (packageName + "." + moduleName);
     }
 
     @Override

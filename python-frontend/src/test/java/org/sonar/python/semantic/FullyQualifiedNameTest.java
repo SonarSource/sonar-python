@@ -175,6 +175,55 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void relative_import_symbols() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "from . import b"
+    );
+    Name b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
+    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.b");
+
+    // no package
+    tree = parse(
+      new SymbolTableBuilder("my_module"),
+      "from . import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
+    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("b");
+
+    // two levels up
+    tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "from ..my_package import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
+    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.b");
+
+    tree = parse(
+      new SymbolTableBuilder("my_package1.my_package2.my_module"),
+      "from ..other import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
+    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package1.other.b");
+
+    // overflow packages hierarchy
+    tree = parse(
+      new SymbolTableBuilder("my_package.my_module"),
+      "from ...my_package import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
+    assertThat(b.symbol().fullyQualifiedName()).isNull();
+
+    // no fully qualified module name
+    tree = parse(
+      new SymbolTableBuilder(),
+      "from . import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
+    assertThat(b.symbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
   public void imported_symbol() {
     FileInput tree = parse(
       "import mod"
