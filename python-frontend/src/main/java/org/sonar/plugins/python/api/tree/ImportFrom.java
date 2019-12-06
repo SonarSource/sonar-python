@@ -39,6 +39,13 @@ public interface ImportFrom extends ImportStatement {
 
   Token importKeyword();
 
+  /**
+   * prefix '.' tokens used in relative import
+   * <pre>
+   *   from ..a.b import fn
+   *   #    ^^
+   * </pre>
+   */
   List<Token> dottedPrefixForModule();
 
   List<AliasedName> importedNames();
