@@ -206,9 +206,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @CheckForNull
     private String getFullyQualifiedName(String name) {
       String prefix = scopeQualifiedName();
-      return prefix != null
-        ? (prefix + "." + name)
-        : null;
+      if (prefix!=null) {
+        return prefix.isEmpty() ? name : (prefix + "." + name);
+      }
+      return null;
     }
 
     private String scopeQualifiedName() {

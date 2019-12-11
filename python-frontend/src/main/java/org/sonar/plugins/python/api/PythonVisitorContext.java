@@ -54,6 +54,9 @@ public class PythonVisitorContext {
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
       : fileName;
+    if (moduleName.equals("__init__")) {
+      return packageName;
+    }
     return packageName.isEmpty()
       ? moduleName
       : (packageName + "." + moduleName);
