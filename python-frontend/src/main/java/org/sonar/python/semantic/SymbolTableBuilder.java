@@ -206,7 +206,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @CheckForNull
     private String getFullyQualifiedName(String name) {
       String prefix = scopeQualifiedName();
-      if (prefix!=null) {
+      if (prefix != null) {
         return prefix.isEmpty() ? name : (prefix + "." + name);
       }
       return null;
@@ -423,9 +423,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
     if (tree.is(Tree.Kind.NAME)) {
       names.add(((Name) tree));
-    } else if(tree.is(Tree.Kind.TUPLE)) {
+    } else if (tree.is(Tree.Kind.TUPLE)) {
       ((Tuple) tree).elements().forEach(t -> names.addAll(boundNamesFromExpression(t)));
-    } else if(tree.is(Kind.LIST_LITERAL)) {
+    } else if (tree.is(Kind.LIST_LITERAL)) {
       ((ListLiteral) tree).elements().expressions().forEach(t -> names.addAll(boundNamesFromExpression(t)));
     } else if (tree.is(Kind.PARENTHESIZED)) {
       names.addAll(boundNamesFromExpression(((ParenthesizedExpression) tree).expression()));
