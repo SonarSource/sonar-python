@@ -44,17 +44,18 @@ public class PythonVisitorContext {
     this.workingDirectory = workingDirectory;
     this.parsingException = null;
     SymbolTableBuilder symbolTableBuilder = packageName != null
-      ? new SymbolTableBuilder(fullyQualifiedModuleName(pythonFile.fileName(), packageName))
+      ? new SymbolTableBuilder(fullyQualifiedModuleName(pythonFile.fileName(), packageName, true),
+      fullyQualifiedModuleName(pythonFile.fileName(), packageName, false))
       : new SymbolTableBuilder();
     symbolTableBuilder.visitFileInput(rootTree);
   }
 
-  private static String fullyQualifiedModuleName(String fileName, String packageName) {
+  private static String fullyQualifiedModuleName(String fileName, String packageName, boolean isInitExcluded) {
     int extensionIndex = fileName.lastIndexOf('.');
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
       : fileName;
-    if (moduleName.equals("__init__")) {
+    if (isInitExcluded && moduleName.equals("__init__")) {
       return packageName;
     }
     return packageName.isEmpty()

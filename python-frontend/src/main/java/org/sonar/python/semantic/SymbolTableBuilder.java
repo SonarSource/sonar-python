@@ -88,13 +88,21 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final List<String> fullyQualifiedModuleName;
+  private final List<String> relativePath;
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
+    relativePath = null;
   }
 
   public SymbolTableBuilder(String fullyQualifiedModuleName) {
     this.fullyQualifiedModuleName = Arrays.asList(fullyQualifiedModuleName.split("\\."));
+    this.relativePath = this.fullyQualifiedModuleName;
+  }
+
+  public SymbolTableBuilder(String fullyQualifiedModuleName, String relativePath) {
+    this.fullyQualifiedModuleName = Arrays.asList(fullyQualifiedModuleName.split("\\."));
+    this.relativePath = Arrays.asList(relativePath.split("\\."));
   }
 
   @Override
@@ -260,10 +268,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @CheckForNull
     private String resolveFullyQualifiedNameBasedOnRelativeImport(List<Token> dottedPrefix, String moduleName) {
-      if (fullyQualifiedModuleName == null || dottedPrefix.size() > fullyQualifiedModuleName.size()) {
+      if (relativePath == null || dottedPrefix.size() > relativePath.size()) {
         return null;
       }
-      String packageName = String.join("", fullyQualifiedModuleName.subList(0, fullyQualifiedModuleName.size() - dottedPrefix.size()));
+      String packageName = String.join("", relativePath.subList(0, relativePath.size() - dottedPrefix.size()));
       return packageName.isEmpty() ? moduleName : (packageName + "." + moduleName);
     }
 
