@@ -48,4 +48,18 @@ public class PythonVisitorContextTest {
     functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
   }
+
+  @Test
+  public void initModuleFullyQualifiedName() {
+    FileInput fileInput = PythonTestUtils.parse("def fn(): pass");
+    PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
+    Mockito.when(pythonFile.fileName()).thenReturn("__init__.py");
+    new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
+    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
+    assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.fn");
+
+    // no package
+    new PythonVisitorContext(fileInput, pythonFile, null, "");
+    assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("fn");
+  }
 }

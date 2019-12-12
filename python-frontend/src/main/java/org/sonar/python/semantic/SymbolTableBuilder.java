@@ -83,18 +83,30 @@ import org.sonar.python.tree.NameImpl;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
-
-
+  private final String fullyQualifiedModuleName;
+  private final List<String> filePath;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
-  private final List<String> fullyQualifiedModuleName;
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
+    filePath = null;
   }
 
-  public SymbolTableBuilder(String fullyQualifiedModuleName) {
-    this.fullyQualifiedModuleName = Arrays.asList(fullyQualifiedModuleName.split("\\."));
+  public SymbolTableBuilder(String packageName, String fileName) {
+    int extensionIndex = fileName.lastIndexOf('.');
+    String moduleName = extensionIndex > 0
+      ? fileName.substring(0, extensionIndex)
+      : fileName;
+    filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
+    filePath.add(moduleName);
+    if (moduleName.equals("__init__")) {
+      fullyQualifiedModuleName = packageName;
+    } else {
+      fullyQualifiedModuleName = packageName.isEmpty()
+        ? moduleName
+        : (packageName + "." + moduleName);
+    }
   }
 
   @Override
@@ -206,9 +218,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @CheckForNull
     private String getFullyQualifiedName(String name) {
       String prefix = scopeQualifiedName();
-      return prefix != null
-        ? (prefix + "." + name)
-        : null;
+      if (prefix != null) {
+        return prefix.isEmpty() ? name : (prefix + "." + name);
+      }
+      return null;
     }
 
     private String scopeQualifiedName() {
@@ -219,9 +232,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           : ((FunctionDef) scopeTree).name();
         return Optional.ofNullable(name.symbol()).map(Symbol::fullyQualifiedName).orElse(name.name());
       }
-      return fullyQualifiedModuleName != null
-        ? String.join(".", fullyQualifiedModuleName)
-        : null;
+      return fullyQualifiedModuleName;
     }
 
     @Override
@@ -259,11 +270,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @CheckForNull
     private String resolveFullyQualifiedNameBasedOnRelativeImport(List<Token> dottedPrefix, String moduleName) {
-      if (fullyQualifiedModuleName == null || dottedPrefix.size() > fullyQualifiedModuleName.size()) {
+      if (filePath == null || dottedPrefix.size() > filePath.size()) {
         return null;
       }
-      String packageName = String.join("", fullyQualifiedModuleName.subList(0, fullyQualifiedModuleName.size() - dottedPrefix.size()));
-      return packageName.isEmpty() ? moduleName : (packageName + "." + moduleName);
+      String resolvedPackageName = String.join("", filePath.subList(0, filePath.size() - dottedPrefix.size()));
+      return resolvedPackageName.isEmpty() ? moduleName : (resolvedPackageName + "." + moduleName);
     }
 
     @Override
@@ -422,9 +433,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
     if (tree.is(Tree.Kind.NAME)) {
       names.add(((Name) tree));
-    } else if(tree.is(Tree.Kind.TUPLE)) {
+    } else if (tree.is(Tree.Kind.TUPLE)) {
       ((Tuple) tree).elements().forEach(t -> names.addAll(boundNamesFromExpression(t)));
-    } else if(tree.is(Kind.LIST_LITERAL)) {
+    } else if (tree.is(Kind.LIST_LITERAL)) {
       ((ListLiteral) tree).elements().expressions().forEach(t -> names.addAll(boundNamesFromExpression(t)));
     } else if (tree.is(Kind.PARENTHESIZED)) {
       names.addAll(boundNamesFromExpression(((ParenthesizedExpression) tree).expression()));
