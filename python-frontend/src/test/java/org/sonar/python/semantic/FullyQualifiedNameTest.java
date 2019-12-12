@@ -19,8 +19,6 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.Arrays;
-import java.util.List;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -29,6 +27,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -127,7 +126,7 @@ public class FullyQualifiedNameTest {
   @Test
   public void function_definition_callee_symbol() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "def fn(): pass",
       "fn('foo')"
     );
@@ -137,7 +136,7 @@ public class FullyQualifiedNameTest {
   @Test
   public void class_definition_callee_symbol() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "class A: pass",
       "A()"
     );
@@ -147,7 +146,7 @@ public class FullyQualifiedNameTest {
   @Test
   public void method_definition_symbol() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "class A:",
       "  def fn(): pass"
     );
@@ -160,7 +159,7 @@ public class FullyQualifiedNameTest {
   @Test
   public void method_definition_subclass_symbol() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "class A:",
       "  class B:",
       "    def fn(): pass"
@@ -174,7 +173,7 @@ public class FullyQualifiedNameTest {
   @Test
   public void subfunction_definition() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "def fn():",
       "  def inner(): pass",
       "  inner()"
@@ -185,7 +184,7 @@ public class FullyQualifiedNameTest {
   @Test
   public void relative_import_symbols() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "from . import b"
     );
     Name b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
@@ -193,7 +192,15 @@ public class FullyQualifiedNameTest {
 
     // no package
     tree = parse(
-      new SymbolTableBuilder("my_module"),
+      new SymbolTableBuilder("", "my_module.py"),
+      "from . import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
+    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("b");
+
+    // no package, init file
+    tree = parse(
+      new SymbolTableBuilder("", "__init__.py"),
       "from . import b"
     );
     b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
@@ -201,14 +208,14 @@ public class FullyQualifiedNameTest {
 
     // two levels up
     tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "from ..my_package import b"
     );
     b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
     assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.b");
 
     tree = parse(
-      new SymbolTableBuilder("my_package1.my_package2.my_module"),
+      new SymbolTableBuilder("my_package1.my_package2", "my_module.py"),
       "from ..other import b"
     );
     b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
@@ -216,7 +223,7 @@ public class FullyQualifiedNameTest {
 
     // overflow packages hierarchy
     tree = parse(
-      new SymbolTableBuilder("my_package.my_module"),
+      new SymbolTableBuilder("my_package", "my_module.py"),
       "from ...my_package import b"
     );
     b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
@@ -405,11 +412,10 @@ public class FullyQualifiedNameTest {
     when(pythonFile.fileName()).thenReturn("__init__.py");
     PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
     fileInput = context.rootTree();
-    assertThat(fileInput.globalVariables().size()).isEqualTo(2);
-    List<String> fqn = Arrays.asList("foo.fn", "foo.bar.A");
-    fileInput.globalVariables().forEach(s -> {
-      assertThat(s.fullyQualifiedName()).isIn(fqn);
-    });
+    CallExpression callExpression = (CallExpression) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
+    assertThat(callExpression.calleeSymbol().fullyQualifiedName()).isEqualTo("foo.fn");
+    ClassDef classDef = (ClassDef) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CLASSDEF)).get(0);
+    assertThat(classDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.A");
   }
 
 

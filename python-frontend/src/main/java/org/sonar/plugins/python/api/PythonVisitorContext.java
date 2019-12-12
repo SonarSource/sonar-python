@@ -43,24 +43,8 @@ public class PythonVisitorContext {
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.parsingException = null;
-    SymbolTableBuilder symbolTableBuilder = packageName != null
-      ? new SymbolTableBuilder(fullyQualifiedModuleName(pythonFile.fileName(), packageName, true),
-      fullyQualifiedModuleName(pythonFile.fileName(), packageName, false))
-      : new SymbolTableBuilder();
+    SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile.fileName()): new SymbolTableBuilder();
     symbolTableBuilder.visitFileInput(rootTree);
-  }
-
-  private static String fullyQualifiedModuleName(String fileName, String packageName, boolean isInitExcluded) {
-    int extensionIndex = fileName.lastIndexOf('.');
-    String moduleName = extensionIndex > 0
-      ? fileName.substring(0, extensionIndex)
-      : fileName;
-    if (isInitExcluded && moduleName.equals("__init__")) {
-      return packageName;
-    }
-    return packageName.isEmpty()
-      ? moduleName
-      : (packageName + "." + moduleName);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {

@@ -83,26 +83,30 @@ import org.sonar.python.tree.NameImpl;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
-
-
+  private final String fullyQualifiedModuleName;
+  private final List<String> filePath;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
-  private final List<String> fullyQualifiedModuleName;
-  private final List<String> relativePath;
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
-    relativePath = null;
+    filePath = null;
   }
 
-  public SymbolTableBuilder(String fullyQualifiedModuleName) {
-    this.fullyQualifiedModuleName = Arrays.asList(fullyQualifiedModuleName.split("\\."));
-    this.relativePath = this.fullyQualifiedModuleName;
-  }
-
-  public SymbolTableBuilder(String fullyQualifiedModuleName, String relativePath) {
-    this.fullyQualifiedModuleName = Arrays.asList(fullyQualifiedModuleName.split("\\."));
-    this.relativePath = Arrays.asList(relativePath.split("\\."));
+  public SymbolTableBuilder(String packageName, String fileName) {
+    int extensionIndex = fileName.lastIndexOf('.');
+    String moduleName = extensionIndex > 0
+      ? fileName.substring(0, extensionIndex)
+      : fileName;
+    filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
+    filePath.add(moduleName);
+    if (moduleName.equals("__init__")) {
+      fullyQualifiedModuleName = packageName;
+    } else {
+      fullyQualifiedModuleName = packageName.isEmpty()
+        ? moduleName
+        : (packageName + "." + moduleName);
+    }
   }
 
   @Override
@@ -228,9 +232,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           : ((FunctionDef) scopeTree).name();
         return Optional.ofNullable(name.symbol()).map(Symbol::fullyQualifiedName).orElse(name.name());
       }
-      return fullyQualifiedModuleName != null
-        ? String.join(".", fullyQualifiedModuleName)
-        : null;
+      return fullyQualifiedModuleName;
     }
 
     @Override
@@ -268,11 +270,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @CheckForNull
     private String resolveFullyQualifiedNameBasedOnRelativeImport(List<Token> dottedPrefix, String moduleName) {
-      if (relativePath == null || dottedPrefix.size() > relativePath.size()) {
+      if (filePath == null || dottedPrefix.size() > filePath.size()) {
         return null;
       }
-      String packageName = String.join("", relativePath.subList(0, relativePath.size() - dottedPrefix.size()));
-      return packageName.isEmpty() ? moduleName : (packageName + "." + moduleName);
+      String resolvedPackageName = String.join("", filePath.subList(0, filePath.size() - dottedPrefix.size()));
+      return resolvedPackageName.isEmpty() ? moduleName : (resolvedPackageName + "." + moduleName);
     }
 
     @Override
