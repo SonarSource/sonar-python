@@ -19,8 +19,13 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.annotation.Nullable;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -30,8 +35,11 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.getAllDescendant;
 import static org.sonar.python.PythonTestUtils.getFirstChild;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -387,6 +395,21 @@ public class FullyQualifiedNameTest {
       "submod.fn('foo')"
     );
     assertNameAndQualifiedName(tree, "fn", "mod.submod.fn");
+  }
+
+  @Test
+  public void init_module_relative_import() {
+    String code = String.join(System.getProperty("line.separator"), "from .. import fn", "fn()", "class A: pass");
+    FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
+    PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
+    when(pythonFile.fileName()).thenReturn("__init__.py");
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
+    fileInput = context.rootTree();
+    assertThat(fileInput.globalVariables().size()).isEqualTo(2);
+    List<String> fqn = Arrays.asList("foo.fn", "foo.bar.A");
+    fileInput.globalVariables().forEach(s -> {
+      assertThat(s.fullyQualifiedName()).isIn(fqn);
+    });
   }
 
 
