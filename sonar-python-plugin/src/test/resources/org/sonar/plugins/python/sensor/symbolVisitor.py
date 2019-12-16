@@ -32,10 +32,10 @@ f"answer is \
 {b}"
 
 u = 42
-nested = f'some：{f"nested interpolation：{u}"}'
+nested = f'some: {f"nested interpolation：{u}"}'
 
-nested = f'some：{f"nested interpolation：\
+nested = f'some: {f"nested interpolation：\
 {u}"}'
 
-nested = f'some：{f"nested interpolation：\
+nested = f'some: {f"nested interpolation：\
          {u} and then some {f"more {u}"}"}'
