@@ -30,3 +30,12 @@ l = lambda z : z*z
 {key:1 for key in a}
 f"answer is \
 {b}"
+
+u = 42
+nested = f'some: {f"nested interpolation：{u}"}'
+
+nested = f'some: {f"nested interpolation：\
+{u}"}'
+
+nested = f'some: {f"nested interpolation：\
+         {u} and then some {f"more {u}"}"}'

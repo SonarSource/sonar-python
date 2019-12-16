@@ -81,6 +81,7 @@ import org.sonar.plugins.python.api.tree.SliceList;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringElement;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
@@ -1320,6 +1321,17 @@ public class PythonTreeMaker {
     int newline = (line - 1) + token.line();
     // update token line and column with offset of string element.
     TreeUtils.tokens(exp).forEach(t -> ((TokenImpl) t).setLineColumn(newline, col));
+    if (exp.is(Tree.Kind.STRING_LITERAL)) {
+      ((StringLiteral) exp).stringElements().forEach(PythonTreeMaker::adjustNestedInterpolations);
+    }
+  }
+
+  private static void adjustNestedInterpolations(StringElement se) {
+    se.interpolatedExpressions().forEach(e -> TreeUtils.tokens(e).forEach(t -> {
+      int newline = t.line() - 1 + se.firstToken().line();
+      int col = t.line() == 1 ? (t.column() + se.firstToken().column()) : t.column();
+      ((TokenImpl) t).setLineColumn(newline, col);
+    }));
   }
 
   private static Token suiteIndent(AstNode suite) {
