@@ -1329,7 +1329,7 @@ public class PythonTreeMaker {
   private static void adjustNestedInterpolations(StringElement se) {
     se.interpolatedExpressions().forEach(e -> TreeUtils.tokens(e).forEach(t -> {
       int newline = t.line() - 1 + se.firstToken().line();
-      int col = t.line() == 1 ? t.column() + se.firstToken().column() : t.column();
+      int col = t.line() == 1 ? (t.column() + se.firstToken().column()) : t.column();
       ((TokenImpl) t).setLineColumn(newline, col);
     }));
   }

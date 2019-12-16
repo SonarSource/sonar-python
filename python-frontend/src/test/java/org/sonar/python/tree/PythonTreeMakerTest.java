@@ -1739,6 +1739,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertStringLiteral("f'He said his name is {name} and he is {age} years old.'", "He said his name is {name} and he is {age} years old.", "f");
     assertStringLiteral("f'''He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.'''",
       "He said his name is {name.upper()}\n    ...    and he is {6 * seven} years old.", "f");
+    assertStringLiteral("f'some: {f\"nested interpolation: {u}\"}'", "some: {f\"nested interpolation: {u}\"}", "f");
     assertThat(((StringLiteral) parse("'ab' 'cd'", treeMaker::expression)).trimmedQuotesValue()).isEqualTo("abcd");
   }
 
@@ -1762,6 +1763,22 @@ public class PythonTreeMakerTest extends RuleTest {
     StringElement elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.interpolatedExpressions()).isEmpty();
+
+    exp = parse("f'Some nested {f\"string \\ \n" +
+                      "interpolation {x}\"}'", treeMaker::expression);
+    stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.interpolatedExpressions()).hasSize(1);
+    StringLiteral interpolation = (StringLiteral) elmt.interpolatedExpressions().get(0);
+    StringElement stringElement = interpolation.stringElements().get(0);
+    assertThat(stringElement.isInterpolated()).isTrue();
+    Expression nestedInterpolation = stringElement.interpolatedExpressions().get(0);
+    assertThat(nestedInterpolation.is(Tree.Kind.NAME)).isTrue();
+    assertThat(((Name) nestedInterpolation).name()).isEqualTo("x");
+    assertThat(nestedInterpolation.firstToken().line()).isEqualTo(2);
+    assertThat(nestedInterpolation.firstToken().column()).isEqualTo(15);
   }
 
   private Expression parseInterpolated(String interpolatedExpr) {
