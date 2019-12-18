@@ -19,14 +19,18 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -42,28 +46,20 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3827")
 public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
-  private boolean hasWildcardImport = false;
-  private boolean callGlobalsOrLocals = false;
 
   @Override
   public void initialize(Context context) {
-
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       FileInput fileInput = (FileInput) ctx.syntaxNode();
-      ExceptionVisitor exceptionVisitor = new ExceptionVisitor();
-      fileInput.accept(exceptionVisitor);
-      hasWildcardImport = exceptionVisitor.hasWildcardImport;
-      callGlobalsOrLocals = exceptionVisitor.callGlobalsOrLocals;
-    });
-
-    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, ctx -> {
-      Name name = (Name) ctx.syntaxNode();
-      if (!callGlobalsOrLocals && !hasWildcardImport && name.isVariable() && name.symbol() == null) {
-        ctx.addIssue(name, name.name() + " is not defined. Change its name or define it before using it");
+      UnresolvedSymbolsVisitor unresolvedSymbolsVisitor = new UnresolvedSymbolsVisitor();
+      fileInput.accept(unresolvedSymbolsVisitor);
+      if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasWildcardImport) {
+        addNameIssues(unresolvedSymbolsVisitor.nameIssues, ctx);
       }
     });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
+      List<Symbol> ignoredSymbols = new ArrayList<>();
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
         return;
@@ -74,12 +70,12 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
       }
       DefinedVariablesAnalysis analysis = DefinedVariablesAnalysis.analyze(cfg, functionDef.localVariables());
       Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
-      cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block), unreachableBlocks, analysis));
+      cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block), unreachableBlocks, analysis, ignoredSymbols));
     });
   }
 
-  private static void checkCfgBlock(
-    CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariables definedVariables, Set<CfgBlock> unreachableBlocks, DefinedVariablesAnalysis analysis) {
+  private static void checkCfgBlock(CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariables definedVariables,
+                                    Set<CfgBlock> unreachableBlocks, DefinedVariablesAnalysis analysis, List<Symbol> ignoredSymbols) {
     Map<Symbol, DefinedVariablesAnalysis.VariableDefinition> currentState = new HashMap<>(definedVariables.getIn());
     for (Tree element : cfgBlock.elements()) {
       definedVariables.getVariableUsages(element).forEach((symbol, symbolUsage) -> {
@@ -87,8 +83,14 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
           currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         }
         DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
-        if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)) {
-          ctx.addIssue(element, symbol.name() + " is used before it is defined. Move the definition before.");
+        if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)
+          && !ignoredSymbols.contains(symbol)) {
+          ignoredSymbols.add(symbol);
+          Optional<Usage> suspectUsage = symbol.usages().stream().filter(u -> TreeUtils.hasDescendant(element, t -> t.equals(u.tree()))).findFirst();
+          suspectUsage.ifPresent(s -> {
+            PreciseIssue issue = ctx.addIssue(s.tree(), symbol.name() + " is used before it is defined. Move the definition before.");
+            symbol.usages().stream().filter(u -> !u.equals(s)).forEach(us -> issue.secondary(us.tree(), null));
+          });
         }
       });
     }
@@ -106,9 +108,26 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
     return varDef == DefinedVariablesAnalysis.VariableDefinition.UNDEFINED;
   }
 
-  private static class ExceptionVisitor extends BaseTreeVisitor {
+  private void addNameIssues(Map<String, List<Name>> nameIssues, SubscriptionContext subscriptionContext) {
+    nameIssues.forEach((name, list) -> {
+      Name first = list.get(0);
+      PreciseIssue issue = subscriptionContext.addIssue(first, first.name() + " is not defined. Change its name or define it before using it");
+      list.stream().skip(1).forEach(n -> issue.secondary(n, null));
+    });
+  }
+
+  private static class UnresolvedSymbolsVisitor extends BaseTreeVisitor {
+
     private boolean hasWildcardImport = false;
     private boolean callGlobalsOrLocals = false;
+    private Map<String, List<Name>> nameIssues = new HashMap<>();
+
+    @Override
+    public void visitName(Name name) {
+      if (name.isVariable() && name.symbol() == null) {
+        nameIssues.computeIfAbsent(name.name(), k -> new ArrayList<>()).add(name);
+      }
+    }
 
     @Override
     public void visitImportFrom(ImportFrom importFrom) {
