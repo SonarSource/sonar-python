@@ -48,13 +48,13 @@ public class DeadStoreUtils {
     ListIterator<Tree> elementsReverseIterator = block.elements().listIterator(block.elements().size());
     while (elementsReverseIterator.hasPrevious()) {
       Tree element = elementsReverseIterator.previous();
-      blockLiveVariables.getVariableUsages(element).forEach((symbol, usage) -> {
-        if (usage.isWrite() && !usage.isRead()) {
+      blockLiveVariables.getSymbolReadWrites(element).forEach((symbol, symbolReadWrite) -> {
+        if (symbolReadWrite.isWrite() && !symbolReadWrite.isRead()) {
           if (!willBeRead.contains(symbol) && functionDef.localVariables().contains(symbol)) {
             unnecessaryAssignments.add(new UnnecessaryAssignment(symbol, element));
           }
           willBeRead.remove(symbol);
-        } else if (usage.isRead()) {
+        } else if (symbolReadWrite.isRead()) {
           willBeRead.add(symbol);
         }
       });

@@ -77,15 +77,15 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
                                     Set<CfgBlock> unreachableBlocks, DefinedVariablesAnalysis analysis, List<Symbol> ignoredSymbols) {
     Map<Symbol, DefinedVariablesAnalysis.VariableDefinition> currentState = new HashMap<>(definedVariables.getIn());
     for (Tree element : cfgBlock.elements()) {
-      definedVariables.getVariableUsages(element).forEach((symbol, symbolUsage) -> {
-        if (symbolUsage.isWrite()) {
+      definedVariables.getSymbolReadWrites(element).forEach((symbol, symbolReadWrite) -> {
+        if (symbolReadWrite.isWrite()) {
           currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         }
         DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
-        if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)
+        if (symbolReadWrite.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)
           && !ignoredSymbols.contains(symbol)) {
           ignoredSymbols.add(symbol);
-          Usage suspectUsage = symbolUsage.usages().get(0);
+          Usage suspectUsage = symbolReadWrite.usages().get(0);
           PreciseIssue issue = ctx.addIssue(suspectUsage.tree(), symbol.name() + " is used before it is defined. Move the definition before.");
           symbol.usages().stream().filter(u -> !u.equals(suspectUsage)).forEach(us -> issue.secondary(us.tree(), null));
         }

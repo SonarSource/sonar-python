@@ -27,19 +27,19 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.UsageVisitor;
+import org.sonar.python.cfg.fixpoint.ReadWriteVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class UsageVisitorTest {
+public class ReadWriteVisitorTest {
 
   @Test
   public void test_usages() {
     FileInput tree = parse("x = 1; print(x); x += 3\ndef fun(): print(x)\n");
     StatementList statementList = tree.statements();
     Symbol x = ((Name) ((AssignmentStatement) statementList.statements().get(0)).lhsExpressions().get(0).expressions().get(0)).symbol();
-    UsageVisitor visitor = new UsageVisitor();
+    ReadWriteVisitor visitor = new ReadWriteVisitor();
     statementList.accept(visitor);
     assertThat(visitor.symbolToUsages().get(x).usages()).hasSize(3);
     assertThat(x.usages()).hasSize(4);

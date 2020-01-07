@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
-import org.sonar.python.cfg.fixpoint.UsageVisitor.SymbolUsage;
+import org.sonar.python.cfg.fixpoint.ReadWriteVisitor.SymbolReadWrite;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
 public class LiveVariablesAnalysis {
@@ -64,8 +64,8 @@ public class LiveVariablesAnalysis {
   public Set<Symbol> getReadSymbols() {
     Set<Symbol> readAtLeastOnce = new HashSet<>();
     for (LiveVariables liveVariables : liveVariablesPerBlock.values()) {
-      for (Map<Symbol, SymbolUsage> symbolVariableUsageMap : liveVariables.variableUsagesPerElement.values()) {
-        for (Map.Entry<Symbol, SymbolUsage> symbolWithUsage : symbolVariableUsageMap.entrySet()) {
+      for (Map<Symbol, SymbolReadWrite> symbolVariableUsageMap : liveVariables.variableReadWritesPerElement.values()) {
+        for (Map.Entry<Symbol, SymbolReadWrite> symbolWithUsage : symbolVariableUsageMap.entrySet()) {
           if (symbolWithUsage.getValue().isRead()) {
             readAtLeastOnce.add(symbolWithUsage.getKey());
           }

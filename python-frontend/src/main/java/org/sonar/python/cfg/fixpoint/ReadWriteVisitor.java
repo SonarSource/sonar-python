@@ -31,17 +31,17 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 
-public class UsageVisitor extends BaseTreeVisitor {
-  private Map<Symbol, SymbolUsage> symbolToUsages = new HashMap<>();
+public class ReadWriteVisitor extends BaseTreeVisitor {
+  private Map<Symbol, SymbolReadWrite> symbolToUsages = new HashMap<>();
 
-  public Map<Symbol, SymbolUsage> symbolToUsages() {
+  public Map<Symbol, SymbolReadWrite> symbolToUsages() {
     return symbolToUsages;
   }
 
   @Override
   public void visitFunctionDef(FunctionDef functionDef) {
     Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol ->
-      symbolToUsages.computeIfAbsent(symbol, s -> new SymbolUsage()).isWrite = true);
+      symbolToUsages.computeIfAbsent(symbol, s -> new SymbolReadWrite()).isWrite = true);
     // don't go inside function definitions
   }
 
@@ -57,20 +57,20 @@ public class UsageVisitor extends BaseTreeVisitor {
   }
 
   private void addToSymbolToUsageMap(Usage usage, Symbol symbol) {
-    SymbolUsage symbolUsage = symbolToUsages.getOrDefault(symbol, new SymbolUsage());
-    symbolUsage.addUsage(usage);
+    SymbolReadWrite symbolReadWrite = symbolToUsages.getOrDefault(symbol, new SymbolReadWrite());
+    symbolReadWrite.addUsage(usage);
     if (!usage.isBindingUsage()) {
-      symbolUsage.isRead = true;
+      symbolReadWrite.isRead = true;
     } else if (usage.kind() == Usage.Kind.COMPOUND_ASSIGNMENT_LHS) {
-      symbolUsage.isRead = true;
-      symbolUsage.isWrite = true;
+      symbolReadWrite.isRead = true;
+      symbolReadWrite.isWrite = true;
     } else {
-      symbolUsage.isWrite = true;
+      symbolReadWrite.isWrite = true;
     }
-    symbolToUsages.put(symbol, symbolUsage);
+    symbolToUsages.put(symbol, symbolReadWrite);
   }
 
-  public static final class SymbolUsage {
+  public static final class SymbolReadWrite {
     private boolean isRead = false;
     private boolean isWrite = false;
     private List<Usage> usages = new ArrayList<>();
