@@ -70,8 +70,10 @@ def loop():
 def conditional():
     if False:
         condition_var = 0
+#       ^^^^^^^^^^^^^>
     else:
         print(condition_var)  # Noncompliant {{condition_var is used before it is defined. Move the definition before.}}
+#             ^^^^^^^^^^^^^
 
 def except_instance():
     try:
@@ -150,3 +152,36 @@ def declaration_in_try_with_break():
         except Exception:
             raise TypeError()
     return res # OK
+
+def one_issue_per_unresolved_name():
+  print(xxx) # Noncompliant {{xxx is not defined. Change its name or define it before using it}}
+#       ^^^
+  print(xxx) # OK, don't raise the same issue multiple times
+#       ^^^<
+
+def one_issue_per_unresolved_name_2():
+  print(xxx) # OK, don't raise the same issue multiple times
+#       ^^^<
+
+def one_issue_per_unresolved_name_3():
+  print(yyy) # Noncompliant
+  def inner():
+      pass
+  print(yyy) # OK, don't raise the same issue multiple times
+
+def one_issue_per_symbol():
+  print(xxx) # Noncompliant {{xxx is used before it is defined. Move the definition before.}}
+#       ^^^
+  print(xxx) # OK, don't raise the same issue multiple times
+#       ^^^<
+  xxx = "hello"
+# ^^^<
+
+def one_issue_per_symbol_2():
+  print(zzz) # Noncompliant
+#       ^^^
+  def inner():
+    print(zzz)
+#         ^^^<
+  zzz = "hello"
+# ^^^<
