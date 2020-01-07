@@ -19,7 +19,9 @@
  */
 package org.sonar.python.cfg.fixpoint;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -56,6 +58,7 @@ public class UsageVisitor extends BaseTreeVisitor {
 
   private void addToSymbolToUsageMap(Usage usage, Symbol symbol) {
     SymbolUsage symbolUsage = symbolToUsages.getOrDefault(symbol, new SymbolUsage());
+    symbolUsage.addUsage(usage);
     if (!usage.isBindingUsage()) {
       symbolUsage.isRead = true;
     } else if (usage.kind() == Usage.Kind.COMPOUND_ASSIGNMENT_LHS) {
@@ -70,6 +73,7 @@ public class UsageVisitor extends BaseTreeVisitor {
   public static final class SymbolUsage {
     private boolean isRead = false;
     private boolean isWrite = false;
+    private List<Usage> usages = new ArrayList<>();
 
     public boolean isWrite() {
       return isWrite;
@@ -77,6 +81,15 @@ public class UsageVisitor extends BaseTreeVisitor {
 
     public boolean isRead() {
       return isRead;
+    }
+
+    public void addUsage(Usage usage) {
+      usages.add(usage);
+    }
+
+    // Returns the list of symbol usages within the visited element
+    public List<Usage> usages() {
+      return usages;
     }
   }
 }

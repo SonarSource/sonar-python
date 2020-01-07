@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -86,11 +85,9 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
         if (symbolUsage.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)
           && !ignoredSymbols.contains(symbol)) {
           ignoredSymbols.add(symbol);
-          Optional<Usage> suspectUsage = symbol.usages().stream().filter(u -> TreeUtils.hasDescendant(element, t -> t.equals(u.tree()))).findFirst();
-          suspectUsage.ifPresent(s -> {
-            PreciseIssue issue = ctx.addIssue(s.tree(), symbol.name() + " is used before it is defined. Move the definition before.");
-            symbol.usages().stream().filter(u -> !u.equals(s)).forEach(us -> issue.secondary(us.tree(), null));
-          });
+          Usage suspectUsage = symbolUsage.usages().get(0);
+          PreciseIssue issue = ctx.addIssue(suspectUsage.tree(), symbol.name() + " is used before it is defined. Move the definition before.");
+          symbol.usages().stream().filter(u -> !u.equals(suspectUsage)).forEach(us -> issue.secondary(us.tree(), null));
         }
       });
     }
@@ -108,7 +105,7 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
     return varDef == DefinedVariablesAnalysis.VariableDefinition.UNDEFINED;
   }
 
-  private void addNameIssues(Map<String, List<Name>> nameIssues, SubscriptionContext subscriptionContext) {
+  private static void addNameIssues(Map<String, List<Name>> nameIssues, SubscriptionContext subscriptionContext) {
     nameIssues.forEach((name, list) -> {
       Name first = list.get(0);
       PreciseIssue issue = subscriptionContext.addIssue(first, first.name() + " is not defined. Change its name or define it before using it");
