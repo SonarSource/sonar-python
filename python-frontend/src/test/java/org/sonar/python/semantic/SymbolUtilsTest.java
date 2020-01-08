@@ -37,8 +37,9 @@ public class SymbolUtilsTest {
       "def fn(): pass",
       "class A: pass"
     );
-    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree);
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A");
+    assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A");
   }
 
   @Test
@@ -47,7 +48,7 @@ public class SymbolUtilsTest {
     FileInput tree = parse(
       "def _private_fn(): pass"
     );
-    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree);
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("_private_fn");
   }
 
@@ -60,7 +61,7 @@ public class SymbolUtilsTest {
       "class A:",
       "  def meth(): pass"
     );
-    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree);
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "A");
   }
 
@@ -74,7 +75,7 @@ public class SymbolUtilsTest {
       "else:",
       "  conditionally_defined = 2"
     );
-    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree);
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     // for the time being, accepting multiple symbols having the same name
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "fn", "conditionally_defined", "conditionally_defined");
   }

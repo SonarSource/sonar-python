@@ -80,17 +80,27 @@ import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
-  private final String fullyQualifiedModuleName;
-  private final List<String> filePath;
+  private String fullyQualifiedModuleName;
+  private List<String> filePath;
+  private Map<String, Set<Symbol>> globalSymbols;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
     filePath = null;
+    globalSymbols = Collections.emptyMap();
   }
 
   public SymbolTableBuilder(String packageName, String fileName) {
+    initialize(packageName, fileName, Collections.emptyMap());
+  }
+
+  public SymbolTableBuilder(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbols) {
+    initialize(packageName, fileName, globalSymbols);
+  }
+
+  private void initialize(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbols) {
     int extensionIndex = fileName.lastIndexOf('.');
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
@@ -98,6 +108,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
     filePath.add(moduleName);
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
+    this.globalSymbols = globalSymbols;
   }
 
   @Override
@@ -233,13 +244,16 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitImportFrom(ImportFrom pyImportFromTree) {
-      DottedName moduleTree = pyImportFromTree.module();
+    public void visitImportFrom(ImportFrom importFrom) {
+      DottedName moduleTree = importFrom.module();
       String moduleName = moduleTree != null
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
-      createImportedNames(pyImportFromTree.importedNames(), moduleName, pyImportFromTree.dottedPrefixForModule());
-      super.visitImportFrom(pyImportFromTree);
+      if (moduleName != null && importFrom.isWildcardImport()) {
+        currentScope().createSymbolsFromWildcardImport(globalSymbols.getOrDefault(moduleName, Collections.emptySet()));
+      }
+      createImportedNames(importFrom.importedNames(), moduleName, importFrom.dottedPrefixForModule());
+      super.visitImportFrom(importFrom);
     }
 
     private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, List<Token> dottedPrefix) {
@@ -432,6 +446,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       symbolsByName.put(name, symbol);
     }
 
+    void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols) {
+      importedSymbols.forEach(symbol -> {
+        symbols.add(symbol);
+        symbolsByName.put(symbol.name(), symbol);
+      });
+    }
+
     private void createSelfParameter(Parameter parameter) {
       Name nameTree = parameter.name();
       if (nameTree != null) {
@@ -480,7 +501,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  static class SymbolImpl implements Symbol {
+  public static class SymbolImpl implements Symbol {
 
     private final String name;
     @Nullable

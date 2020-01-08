@@ -110,7 +110,7 @@ public class PythonScanner {
         String packageName = pythonPackageName(inputFile, context.fileSystem().baseDir());
         packageNames.put(inputFile, packageName);
         String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
-        globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot));
+        globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
       } catch (Exception e) {
         LOG.debug("Unable to construct project-level symbol table for file: " + inputFile.toString());
         LOG.debug(e.getMessage());

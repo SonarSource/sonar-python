@@ -61,23 +61,32 @@ public class SymbolUtils {
       : (packageName + "." + moduleName);
   }
 
-  public static Set<Symbol> globalSymbols(FileInput fileInput) {
-    GlobalSymbolsVisitor globalSymbolsVisitor = new GlobalSymbolsVisitor();
+  public static Set<Symbol> globalSymbols(FileInput fileInput, String fullyQualifiedModuleName) {
+    GlobalSymbolsVisitor globalSymbolsVisitor = new GlobalSymbolsVisitor(fullyQualifiedModuleName);
     fileInput.accept(globalSymbolsVisitor);
     return globalSymbolsVisitor.symbols;
   }
 
   private static class GlobalSymbolsVisitor extends BaseTreeVisitor {
     private Set<Symbol> symbols = new HashSet<>();
+    private String fullyQualifiedModuleName;
+
+    GlobalSymbolsVisitor(String fullyQualifiedModuleName) {
+      this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+    }
+
+    private Symbol symbol(Name name) {
+      return new SymbolImpl(name.name(), fullyQualifiedModuleName + "." + name.name());
+    }
 
     @Override
     public void visitFunctionDef(FunctionDef functionDef) {
-      symbols.add(new SymbolImpl(functionDef.name().name(), null));
+      symbols.add(symbol(functionDef.name()));
     }
 
     @Override
     public void visitClassDef(ClassDef classDef) {
-      symbols.add(new SymbolImpl(classDef.name().name(), null));
+      symbols.add(symbol(classDef.name()));
     }
 
     @Override
@@ -85,7 +94,7 @@ public class SymbolUtils {
       assignmentsLhs((assignmentStatement)).stream()
         .map(SymbolUtils::boundNamesFromExpression)
         .flatMap(Collection::stream)
-        .map(name -> new SymbolImpl(name.name(), null))
+        .map(this::symbol)
         .forEach(symbols::add);
       super.visitAssignmentStatement(assignmentStatement);
     }
@@ -93,7 +102,7 @@ public class SymbolUtils {
     @Override
     public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
       if (annotatedAssignment.variable().is(Kind.NAME)) {
-        symbols.add(new SymbolImpl(((Name) annotatedAssignment.variable()).name(), null));
+        symbols.add(symbol(((Name) annotatedAssignment.variable())));
       }
       super.visitAnnotatedAssignment(annotatedAssignment);
     }
