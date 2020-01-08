@@ -32,7 +32,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -59,19 +58,15 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
-import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
@@ -80,6 +75,8 @@ import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.NameImpl;
+
+import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
@@ -100,13 +97,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       : fileName;
     filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
     filePath.add(moduleName);
-    if (moduleName.equals("__init__")) {
-      fullyQualifiedModuleName = packageName;
-    } else {
-      fullyQualifiedModuleName = packageName.isEmpty()
-        ? moduleName
-        : (packageName + "." + moduleName);
-    }
+    fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
   }
 
   @Override
@@ -339,25 +330,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitAssignmentStatement(AssignmentStatement pyAssignmentStatementTree) {
-      List<Expression> lhs = pyAssignmentStatementTree.lhsExpressions().stream()
-        .flatMap(exprList -> exprList.expressions().stream())
-        .flatMap(this::flattenTuples)
-        .collect(Collectors.toList());
+      List<Expression> lhs = SymbolUtils.assignmentsLhs(pyAssignmentStatementTree);
 
       assignmentLeftHandSides.addAll(lhs);
 
       lhs.forEach(expression -> boundNamesFromExpression(expression).forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS)));
 
       super.visitAssignmentStatement(pyAssignmentStatementTree);
-    }
-
-    private Stream<Expression> flattenTuples(Expression expression) {
-      if (expression.is(Kind.TUPLE)) {
-        Tuple tuple = (Tuple) expression;
-        return tuple.elements().stream().flatMap(this::flattenTuples);
-      } else {
-        return Stream.of(expression);
-      }
     }
 
     @Override
@@ -424,25 +403,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       return scopesByRootTree.get(currentScopeRootTree());
     }
 
-  }
-
-  private static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
-    List<Name> names = new ArrayList<>();
-    if (tree == null) {
-      return names;
-    }
-    if (tree.is(Tree.Kind.NAME)) {
-      names.add(((Name) tree));
-    } else if (tree.is(Tree.Kind.TUPLE)) {
-      ((Tuple) tree).elements().forEach(t -> names.addAll(boundNamesFromExpression(t)));
-    } else if (tree.is(Kind.LIST_LITERAL)) {
-      ((ListLiteral) tree).elements().expressions().forEach(t -> names.addAll(boundNamesFromExpression(t)));
-    } else if (tree.is(Kind.PARENTHESIZED)) {
-      names.addAll(boundNamesFromExpression(((ParenthesizedExpression) tree).expression()));
-    } else if (tree.is(Kind.UNPACKING_EXPR)) {
-      names.addAll(boundNamesFromExpression(((UnpackingExpression) tree).expression()));
-    }
-    return names;
   }
 
   static class Scope {
@@ -520,7 +480,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  private static class SymbolImpl implements Symbol {
+  static class SymbolImpl implements Symbol {
 
     private final String name;
     @Nullable
