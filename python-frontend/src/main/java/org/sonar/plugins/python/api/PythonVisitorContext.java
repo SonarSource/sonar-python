@@ -23,9 +23,12 @@ import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
@@ -45,6 +48,14 @@ public class PythonVisitorContext {
     this.parsingException = null;
     SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile.fileName()): new SymbolTableBuilder();
     symbolTableBuilder.visitFileInput(rootTree);
+  }
+
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName, Map<String, Set<Symbol>> globalSymbols) {
+    this.rootTree = rootTree;
+    this.pythonFile = pythonFile;
+    this.workingDirectory = workingDirectory;
+    this.parsingException = null;
+    new SymbolTableBuilder(packageName, pythonFile.fileName(), globalSymbols).visitFileInput(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {

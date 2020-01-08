@@ -24,13 +24,16 @@ import com.sonarsource.checks.verifier.SingleFileVerifier;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Trivia;
-import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.tree.TreeUtils;
@@ -56,6 +59,13 @@ public class PythonCheckVerifier {
     createVerifier(file, check).assertOneOrMoreIssues();
   }
 
+  public static void verifyWithGlobals(String path, PythonCheck check, String packageName, Map<String, Set<Symbol>> globalSymbols) {
+    File file = new File(path);
+    SingleFileVerifier verifier = SingleFileVerifier.create(file.toPath(), UTF_8);
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file, null, packageName, globalSymbols);
+    getSingleFileVerifier(check, verifier, context).assertOneOrMoreIssues();
+  }
+
   public static void verifyNoIssue(String path, PythonCheck check) {
     File file = new File(path);
     createVerifier(file, check).assertNoIssues();
@@ -63,11 +73,11 @@ public class PythonCheckVerifier {
 
   private static SingleFileVerifier createVerifier(File file, PythonCheck check) {
     SingleFileVerifier verifier = SingleFileVerifier.create(file.toPath(), UTF_8);
-    return getSingleFileVerifier(check, verifier, file);
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+    return getSingleFileVerifier(check, verifier, context);
   }
 
-  private static SingleFileVerifier getSingleFileVerifier(PythonCheck check, SingleFileVerifier verifier, File file) {
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
+  private static SingleFileVerifier getSingleFileVerifier(PythonCheck check, SingleFileVerifier verifier, PythonVisitorContext context) {
     for (PreciseIssue issue : scanFileForIssues(check, context)) {
       if (!issue.check().equals(check)) {
         throw new IllegalStateException("Verifier support only one kind of issue " + issue.check() + " != " + check);

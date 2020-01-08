@@ -25,10 +25,14 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -51,11 +55,15 @@ public class TestPythonVisitorRunner {
   }
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory) {
+    return createContext(file, workingDirectory, "", Collections.emptyMap());
+  }
+
+  public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName, Map<String, Set<Symbol>> globalSymbols) {
     PythonParser parser = PythonParser.create();
     TestPythonFile pythonFile = new TestPythonFile(file);
     AstNode astNode = parser.parse(pythonFile.content());
     FileInput rootTree = new PythonTreeMaker().fileInput(astNode);
-    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, null);
+    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, globalSymbols);
   }
 
   private static class TestPythonFile implements PythonFile {

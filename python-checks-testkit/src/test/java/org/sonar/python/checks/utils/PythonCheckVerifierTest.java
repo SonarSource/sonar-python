@@ -20,6 +20,7 @@
 package org.sonar.python.checks.utils;
 
 
+import java.util.Collections;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -101,6 +102,12 @@ public class PythonCheckVerifierTest {
   private void assertNoFailureOfVerifier(String filePath, PythonCheck check) {
     try {
       PythonCheckVerifier.verify(filePath, check);
+    } catch (AssertionError e) {
+      fail("should not fail", e);
+    }
+
+    try {
+      PythonCheckVerifier.verifyWithGlobals(filePath, check, "", Collections.emptyMap());
     } catch (AssertionError e) {
       fail("should not fail", e);
     }

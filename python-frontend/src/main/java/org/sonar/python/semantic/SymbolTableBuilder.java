@@ -73,6 +73,7 @@ import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.NameImpl;
 
@@ -249,10 +250,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       String moduleName = moduleTree != null
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
-      if (moduleName != null && importFrom.isWildcardImport()) {
-        currentScope().createSymbolsFromWildcardImport(globalSymbols.getOrDefault(moduleName, Collections.emptySet()));
+      if (importFrom.isWildcardImport()) {
+        Set<Symbol> importedModuleSymbols = globalSymbols.get(moduleName);
+        if (importedModuleSymbols != null) {
+          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols);
+          ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
+        }
+      } else {
+        createImportedNames(importFrom.importedNames(), moduleName, importFrom.dottedPrefixForModule());
       }
-      createImportedNames(importFrom.importedNames(), moduleName, importFrom.dottedPrefixForModule());
       super.visitImportFrom(importFrom);
     }
 
