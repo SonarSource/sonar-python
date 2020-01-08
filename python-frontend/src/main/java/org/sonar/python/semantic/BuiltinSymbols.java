@@ -330,13 +330,36 @@ public class BuiltinSymbols {
 
   static Set<String> all() {
     Set<String> all = new HashSet<>();
-    all.addAll(BuiltinSymbols.CONSTANTS);
-    all.addAll(BuiltinSymbols.FUNCTIONS);
-    all.addAll(BuiltinSymbols.FUNCTIONS_PYTHON2);
-    all.addAll(BuiltinSymbols.EXCEPTIONS);
-    all.addAll(BuiltinSymbols.EXCEPTIONS_PYTHON2);
-    all.addAll(BuiltinSymbols.MODULE_ATTRIBUTES);
+    all.addAll(builtinConstants());
+    all.addAll(builtinFunctions());
+    all.addAll(builtinFunctionsPython2());
+    all.addAll(builtinExceptions());
+    all.addAll(builtinExceptionsPython2());
+    all.addAll(builtinModuleAttributes());
     return all;
   }
 
+  public static Set<String> builtinConstants() {
+    return BuiltinSymbols.CONSTANTS;
+  }
+
+  public static Set<String> builtinFunctions() {
+    return BuiltinSymbols.FUNCTIONS;
+  }
+
+  public static Set<String> builtinFunctionsPython2() {
+    return BuiltinSymbols.FUNCTIONS_PYTHON2;
+  }
+
+  public static Set<String> builtinModuleAttributes() {
+    return BuiltinSymbols.MODULE_ATTRIBUTES;
+  }
+
+  public static Set<String> builtinExceptions() {
+    return BuiltinSymbols.EXCEPTIONS;
+  }
+
+  public static Set<String> builtinExceptionsPython2() {
+    return BuiltinSymbols.EXCEPTIONS_PYTHON2;
+  }
 }
