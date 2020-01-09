@@ -19,8 +19,11 @@
  */
 package org.sonar.python.semantic;
 
+import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -141,5 +144,19 @@ public class SymbolUtils {
       names.addAll(boundNamesFromExpression(((UnpackingExpression) tree).expression()));
     }
     return names;
+  }
+
+  public static String pythonPackageName(File file, File projectBaseDir) {
+    File currentDirectory = file.getParentFile();
+    Deque<String> packages = new ArrayDeque<>();
+    while (!currentDirectory.getAbsolutePath().equals(projectBaseDir.getAbsolutePath())) {
+      File initFile = new File(currentDirectory, "__init__.py");
+      if (!initFile.exists()) {
+        break;
+      }
+      packages.push(currentDirectory.getName());
+      currentDirectory = currentDirectory.getParentFile();
+    }
+    return String.join(".", packages);
   }
 }

@@ -20,12 +20,15 @@
 package org.sonar.python.checks.utils;
 
 import com.google.common.base.Preconditions;
-import com.sonarsource.checks.verifier.SingleFileVerifier;
+import com.sonarsource.checks.verifier.MultiFileVerifier;
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -39,6 +42,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.tree.TreeUtils;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonCheckVerifier {
 
@@ -56,62 +60,66 @@ public class PythonCheckVerifier {
 
   public static void verify(String path, PythonCheck check) {
     File file = new File(path);
-    createVerifier(file, check).assertOneOrMoreIssues();
-  }
-
-  public static void verifyWithGlobals(String path, PythonCheck check, String packageName, Map<String, Set<Symbol>> globalSymbols) {
-    File file = new File(path);
-    SingleFileVerifier verifier = SingleFileVerifier.create(file.toPath(), UTF_8);
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file, null, packageName, globalSymbols);
-    getSingleFileVerifier(check, verifier, context).assertOneOrMoreIssues();
+    createVerifier(Collections.singletonList(file), check, Collections.emptyMap(), null).assertOneOrMoreIssues();
   }
 
   public static void verifyNoIssue(String path, PythonCheck check) {
     File file = new File(path);
-    createVerifier(file, check).assertNoIssues();
+    createVerifier(Collections.singletonList(file), check, Collections.emptyMap(), null).assertNoIssues();
   }
 
-  private static SingleFileVerifier createVerifier(File file, PythonCheck check) {
-    SingleFileVerifier verifier = SingleFileVerifier.create(file.toPath(), UTF_8);
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
-    return getSingleFileVerifier(check, verifier, context);
+  public static void verify(List<String> paths, PythonCheck check) {
+    List<File> files = paths.stream().map(File::new).collect(Collectors.toList());
+    File baseDirFile = new File(files.get(0).getParent());
+    Map<String, Set<Symbol>> globalSymbolsPerModule = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
+    createVerifier(files, check, globalSymbolsPerModule, baseDirFile).assertOneOrMoreIssues();
   }
 
-  private static SingleFileVerifier getSingleFileVerifier(PythonCheck check, SingleFileVerifier verifier, PythonVisitorContext context) {
+  private static MultiFileVerifier createVerifier(List<File> files, PythonCheck check, Map<String, Set<Symbol>> globalSymbolsPerModule, @Nullable File baseDir) {
+    MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
+    for (File file : files) {
+      PythonVisitorContext context = baseDir != null
+        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir), globalSymbolsPerModule)
+        : TestPythonVisitorRunner.createContext(file);
+      addFileIssues(check, multiFileVerifier, file, context);
+    }
+    return multiFileVerifier;
+  }
+
+  private static void addFileIssues(PythonCheck check, MultiFileVerifier multiFileVerifier, File file, PythonVisitorContext context) {
     for (PreciseIssue issue : scanFileForIssues(check, context)) {
       if (!issue.check().equals(check)) {
         throw new IllegalStateException("Verifier support only one kind of issue " + issue.check() + " != " + check);
       }
       Integer cost = issue.cost();
-      addPreciseIssue(verifier, issue).withGap(cost == null ? null : (double) cost);
+      addPreciseIssue(file.toPath(), multiFileVerifier, issue).withGap(cost == null ? null : (double) cost);
     }
 
     for (Token token : TreeUtils.tokens(context.rootTree())) {
       for (Trivia trivia : token.trivia()) {
-        verifier.addComment(trivia.token().line(), trivia.token().column() + 1, trivia.value(), 1, 0);
+        multiFileVerifier.addComment(file.toPath(), trivia.token().line(), trivia.token().column() + 1, trivia.value(), 1, 0);
       }
     }
-    return verifier;
   }
 
-  private static SingleFileVerifier.Issue addPreciseIssue(SingleFileVerifier verifier, PreciseIssue preciseIssue) {
+  private static MultiFileVerifier.Issue addPreciseIssue(Path path, MultiFileVerifier verifier, PreciseIssue preciseIssue) {
     IssueLocation location = preciseIssue.primaryLocation();
     String message = location.message();
     Preconditions.checkNotNull(message, "Primary location message should never be null.");
 
     if (location.startLine() == IssueLocation.UNDEFINED_LINE) {
-      return verifier.reportIssue(message).onFile();
+      return verifier.reportIssue(path, message).onFile();
     }
 
     if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
-      return verifier.reportIssue(message).onLine(location.startLine());
+      return verifier.reportIssue(path, message).onLine(location.startLine());
     }
 
 
-    SingleFileVerifier.Issue issueBuilder = verifier.reportIssue(message)
+    MultiFileVerifier.Issue issueBuilder = verifier.reportIssue(path, message)
       .onRange(location.startLine(), location.startLineOffset() + 1, location.endLine(), location.endLineOffset());
     for (IssueLocation secondary : preciseIssue.secondaryLocations()) {
-      issueBuilder.addSecondary(secondary.startLine(), secondary.startLineOffset() + 1, secondary.endLine(), secondary.endLineOffset(), secondary.message());
+      issueBuilder.addSecondary(path, secondary.startLine(), secondary.startLineOffset() + 1, secondary.endLine(), secondary.endLineOffset(), secondary.message());
     }
     return issueBuilder;
   }

@@ -21,10 +21,7 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
-import java.io.File;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +54,8 @@ import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
+
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonScanner {
 
@@ -107,7 +106,7 @@ public class PythonScanner {
       try {
         AstNode astNode = parser.parse(inputFile.contents());
         FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-        String packageName = pythonPackageName(inputFile, context.fileSystem().baseDir());
+        String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
         packageNames.put(inputFile, packageName);
         String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
         globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
@@ -152,21 +151,6 @@ public class PythonScanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
-  }
-
-  // visible for testing
-  static String pythonPackageName(InputFile inputFile, File projectBaseDir) {
-    File currentDirectory = inputFile.file().getParentFile();
-    Deque<String> packages = new ArrayDeque<>();
-    while (!currentDirectory.getAbsolutePath().equals(projectBaseDir.getAbsolutePath())) {
-      File initFile = new File(currentDirectory, "__init__.py");
-      if (!initFile.exists()) {
-        break;
-      }
-      packages.push(currentDirectory.getName());
-      currentDirectory = currentDirectory.getParentFile();
-    }
-    return String.join(".", packages);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {

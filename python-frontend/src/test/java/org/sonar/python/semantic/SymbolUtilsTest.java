@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import java.io.File;
 import java.util.Set;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -26,6 +27,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class SymbolUtilsTest {
 
@@ -78,5 +80,13 @@ public class SymbolUtilsTest {
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     // for the time being, accepting multiple symbols having the same name
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "fn", "conditionally_defined", "conditionally_defined");
+  }
+
+  @Test
+  public void package_name_by_file() {
+    File baseDir = new File("src/test/resources").getAbsoluteFile();
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), baseDir)).isEqualTo("sound");
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/__init__.py"), baseDir)).isEqualTo("sound.formats");
+    assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/wavread.py"), baseDir)).isEqualTo("sound.formats");
   }
 }

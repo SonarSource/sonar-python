@@ -26,8 +26,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.sonar.plugins.python.api.PythonCheck;
-import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -107,7 +107,7 @@ public class PythonCheckVerifierTest {
     }
 
     try {
-      PythonCheckVerifier.verifyWithGlobals(filePath, check, "", Collections.emptyMap());
+      PythonCheckVerifier.verify(Collections.singletonList(filePath), check);
     } catch (AssertionError e) {
       fail("should not fail", e);
     }

@@ -22,8 +22,12 @@ package org.sonar.python;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,5 +43,12 @@ public class TestPythonVisitorRunnerTest {
     File tmpFile = Files.createTempFile("foo", "py").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+  }
+
+  @Test
+  public void global_symbols() {
+    File baseDir = new File("src/test/resources").getAbsoluteFile();
+    Map<String, Set<Symbol>> globalSymbols = TestPythonVisitorRunner.globalSymbols(Collections.singletonList(new File(baseDir, "file.py")), baseDir);
+    assertThat(globalSymbols.get("file")).extracting(Symbol::name).containsExactlyInAnyOrder("hello", "A");
   }
 }

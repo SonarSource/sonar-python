@@ -20,15 +20,8 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.junit.Test;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import org.sonar.python.semantic.SymbolTableBuilder.SymbolImpl;
 
 public class UndeclaredNameUsageCheckTest {
 
@@ -39,9 +32,9 @@ public class UndeclaredNameUsageCheckTest {
 
   @Test
   public void test_wildcard_import() {
-    List<Symbol> modSymbols = Arrays.asList(new SymbolImpl("a", null), new SymbolImpl("b", null));
-    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
-    PythonCheckVerifier.verifyWithGlobals("src/test/resources/checks/undeclaredNameUsageWithWildcardImport.py", new UndeclaredNameUsageCheck(), "", globalSymbols);
+    PythonCheckVerifier.verify(
+      Arrays.asList("src/test/resources/checks/undeclaredNameUsageWithWildcardImport.py","src/test/resources/checks/undeclaredNameUsageImported.py" ),
+      new UndeclaredNameUsageCheck());
   }
 
   @Test

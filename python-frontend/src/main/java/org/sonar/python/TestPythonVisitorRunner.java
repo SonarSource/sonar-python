@@ -26,6 +26,8 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -35,7 +37,10 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
+
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class TestPythonVisitorRunner {
 
@@ -64,6 +69,19 @@ public class TestPythonVisitorRunner {
     AstNode astNode = parser.parse(pythonFile.content());
     FileInput rootTree = new PythonTreeMaker().fileInput(astNode);
     return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, globalSymbols);
+  }
+
+  public static Map<String, Set<Symbol>> globalSymbols(List<File> files, File baseDir) {
+    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+    for (File file : files) {
+      TestPythonFile pythonFile = new TestPythonFile(file);
+      AstNode astNode = PythonParser.create().parse(pythonFile.content());
+      FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
+      String packageName = pythonPackageName(file, baseDir);
+      String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+      globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
+    }
+    return globalSymbols;
   }
 
   private static class TestPythonFile implements PythonFile {
