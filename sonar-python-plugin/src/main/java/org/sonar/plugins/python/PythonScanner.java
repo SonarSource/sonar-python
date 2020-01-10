@@ -21,11 +21,10 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
-import java.io.File;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -46,13 +45,17 @@ import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
+
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonScanner {
 
@@ -61,6 +64,7 @@ public class PythonScanner {
   private final SensorContext context;
   private final PythonParser parser;
   private final List<InputFile> inputFiles;
+  private final Map<InputFile, String> packageNames = new HashMap<>();
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
@@ -78,25 +82,48 @@ public class PythonScanner {
   }
 
   public void scanFiles() {
+    Map<String, Set<Symbol>> globalSymbolsByModuleName = globalSymbolsByModuleName();
     for (InputFile pythonFile : inputFiles) {
       if (context.isCancelled()) {
         return;
       }
       try {
-        scanFile(pythonFile);
+        scanFile(pythonFile, globalSymbolsByModuleName);
       } catch (Exception e) {
         LOG.warn("Unable to analyze file '{}'. Error: {}", pythonFile.toString(), e);
       }
     }
   }
 
-  private void scanFile(InputFile inputFile) {
+
+  private Map<String, Set<Symbol>> globalSymbolsByModuleName() {
+    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+    for (InputFile inputFile : inputFiles) {
+      if (context.isCancelled()) {
+        return globalSymbols;
+      }
+      try {
+        AstNode astNode = parser.parse(inputFile.contents());
+        FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
+        String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
+        packageNames.put(inputFile, packageName);
+        String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
+        globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
+      } catch (Exception e) {
+        LOG.debug("Unable to construct project-level symbol table for file: " + inputFile.toString());
+        LOG.debug(e.getMessage());
+      }
+    }
+    return globalSymbols;
+  }
+
+  private void scanFile(InputFile inputFile, Map<String, Set<Symbol>> globalSymbols) {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), pythonPackageName(inputFile, context.fileSystem().baseDir()));
+      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), packageNames.get(inputFile), globalSymbols);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -123,21 +150,6 @@ public class PythonScanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
-  }
-
-  // visible for testing
-  static String pythonPackageName(InputFile inputFile, File projectBaseDir) {
-    File currentDirectory = inputFile.file().getParentFile();
-    Deque<String> packages = new ArrayDeque<>();
-    while (!currentDirectory.getAbsolutePath().equals(projectBaseDir.getAbsolutePath())) {
-      File initFile = new File(currentDirectory, "__init__.py");
-      if (!initFile.exists()) {
-        break;
-      }
-      packages.push(currentDirectory.getName());
-      currentDirectory = currentDirectory.getParentFile();
-    }
-    return String.join(".", packages);
   }
 
   private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
@@ -215,5 +227,4 @@ public class PythonScanner {
       .on(inputFile)
       .save();
   }
-
 }

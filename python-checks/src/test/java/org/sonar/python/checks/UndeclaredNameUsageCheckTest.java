@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -31,7 +32,14 @@ public class UndeclaredNameUsageCheckTest {
 
   @Test
   public void test_wildcard_import() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undeclaredNameUsageWithWildcardImport.py", new UndeclaredNameUsageCheck());
+    PythonCheckVerifier.verify(
+      Arrays.asList("src/test/resources/checks/undeclaredNameUsageWithWildcardImport.py","src/test/resources/checks/undeclaredNameUsageImported.py" ),
+      new UndeclaredNameUsageCheck());
+  }
+
+  @Test
+  public void test_unresolved_wildcard_import() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undeclaredNameUsageWithUnresolvedWildcardImport.py", new UndeclaredNameUsageCheck());
   }
 
   @Test

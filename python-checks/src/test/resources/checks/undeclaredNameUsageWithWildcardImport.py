@@ -1,5 +1,5 @@
-from mod import *
+from undeclaredNameUsageImported import *
 
 def f():
-    print(a) # OK, could be imported from wildcard import
-
+    print(a) # OK, mod exports symbol a
+    print(c) # Noncompliant

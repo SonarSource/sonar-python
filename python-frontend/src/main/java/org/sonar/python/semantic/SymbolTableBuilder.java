@@ -32,7 +32,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -59,54 +58,54 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
-import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.NameImpl;
 
+import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
+
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
-  private final String fullyQualifiedModuleName;
-  private final List<String> filePath;
+  private String fullyQualifiedModuleName;
+  private List<String> filePath;
+  private Map<String, Set<Symbol>> globalSymbolsByModuleName;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
     filePath = null;
+    globalSymbolsByModuleName = Collections.emptyMap();
   }
 
   public SymbolTableBuilder(String packageName, String fileName) {
+    this(packageName, fileName, Collections.emptyMap());
+  }
+
+  public SymbolTableBuilder(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
     int extensionIndex = fileName.lastIndexOf('.');
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
       : fileName;
     filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
     filePath.add(moduleName);
-    if (moduleName.equals("__init__")) {
-      fullyQualifiedModuleName = packageName;
-    } else {
-      fullyQualifiedModuleName = packageName.isEmpty()
-        ? moduleName
-        : (packageName + "." + moduleName);
-    }
+    fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
+    this.globalSymbolsByModuleName = globalSymbolsByModuleName;
   }
 
   @Override
@@ -242,13 +241,23 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitImportFrom(ImportFrom pyImportFromTree) {
-      DottedName moduleTree = pyImportFromTree.module();
+    public void visitImportFrom(ImportFrom importFrom) {
+      DottedName moduleTree = importFrom.module();
       String moduleName = moduleTree != null
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
-      createImportedNames(pyImportFromTree.importedNames(), moduleName, pyImportFromTree.dottedPrefixForModule());
-      super.visitImportFrom(pyImportFromTree);
+      if (importFrom.isWildcardImport()) {
+        Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
+        if (importedModuleSymbols != null) {
+          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols);
+          ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
+        } else {
+          ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(true);
+        }
+      } else {
+        createImportedNames(importFrom.importedNames(), moduleName, importFrom.dottedPrefixForModule());
+      }
+      super.visitImportFrom(importFrom);
     }
 
     private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, List<Token> dottedPrefix) {
@@ -339,25 +348,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitAssignmentStatement(AssignmentStatement pyAssignmentStatementTree) {
-      List<Expression> lhs = pyAssignmentStatementTree.lhsExpressions().stream()
-        .flatMap(exprList -> exprList.expressions().stream())
-        .flatMap(this::flattenTuples)
-        .collect(Collectors.toList());
+      List<Expression> lhs = SymbolUtils.assignmentsLhs(pyAssignmentStatementTree);
 
       assignmentLeftHandSides.addAll(lhs);
 
       lhs.forEach(expression -> boundNamesFromExpression(expression).forEach(name -> addBindingUsage(name, Usage.Kind.ASSIGNMENT_LHS)));
 
       super.visitAssignmentStatement(pyAssignmentStatementTree);
-    }
-
-    private Stream<Expression> flattenTuples(Expression expression) {
-      if (expression.is(Kind.TUPLE)) {
-        Tuple tuple = (Tuple) expression;
-        return tuple.elements().stream().flatMap(this::flattenTuples);
-      } else {
-        return Stream.of(expression);
-      }
     }
 
     @Override
@@ -426,25 +423,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   }
 
-  private static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
-    List<Name> names = new ArrayList<>();
-    if (tree == null) {
-      return names;
-    }
-    if (tree.is(Tree.Kind.NAME)) {
-      names.add(((Name) tree));
-    } else if (tree.is(Tree.Kind.TUPLE)) {
-      ((Tuple) tree).elements().forEach(t -> names.addAll(boundNamesFromExpression(t)));
-    } else if (tree.is(Kind.LIST_LITERAL)) {
-      ((ListLiteral) tree).elements().expressions().forEach(t -> names.addAll(boundNamesFromExpression(t)));
-    } else if (tree.is(Kind.PARENTHESIZED)) {
-      names.addAll(boundNamesFromExpression(((ParenthesizedExpression) tree).expression()));
-    } else if (tree.is(Kind.UNPACKING_EXPR)) {
-      names.addAll(boundNamesFromExpression(((UnpackingExpression) tree).expression()));
-    }
-    return names;
-  }
-
   static class Scope {
 
     private final Tree rootTree;
@@ -470,6 +448,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       symbols.add(symbol);
       builtinSymbols.add(symbol);
       symbolsByName.put(name, symbol);
+    }
+
+    void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols) {
+      importedSymbols.forEach(symbol -> {
+        symbols.add(symbol);
+        symbolsByName.put(symbol.name(), symbol);
+      });
     }
 
     private void createSelfParameter(Parameter parameter) {
@@ -520,7 +505,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  private static class SymbolImpl implements Symbol {
+  public static class SymbolImpl implements Symbol {
 
     private final String name;
     @Nullable

@@ -54,4 +54,6 @@ public interface ImportFrom extends ImportStatement {
 
   @CheckForNull
   Token wildcard();
+
+  boolean hasUnresolvedWildcardImport();
 }

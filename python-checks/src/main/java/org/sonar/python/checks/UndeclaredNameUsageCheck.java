@@ -52,7 +52,7 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
       FileInput fileInput = (FileInput) ctx.syntaxNode();
       UnresolvedSymbolsVisitor unresolvedSymbolsVisitor = new UnresolvedSymbolsVisitor();
       fileInput.accept(unresolvedSymbolsVisitor);
-      if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasWildcardImport) {
+      if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasUnresolvedWildcardImport) {
         addNameIssues(unresolvedSymbolsVisitor.nameIssues, ctx);
       }
     });
@@ -115,7 +115,7 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
 
   private static class UnresolvedSymbolsVisitor extends BaseTreeVisitor {
 
-    private boolean hasWildcardImport = false;
+    private boolean hasUnresolvedWildcardImport = false;
     private boolean callGlobalsOrLocals = false;
     private Map<String, List<Name>> nameIssues = new HashMap<>();
 
@@ -128,7 +128,7 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitImportFrom(ImportFrom importFrom) {
-      hasWildcardImport |= importFrom.isWildcardImport();
+      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
       super.visitImportFrom(importFrom);
     }
 
