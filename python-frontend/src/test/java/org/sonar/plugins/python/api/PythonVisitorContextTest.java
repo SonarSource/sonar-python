@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.semantic.SymbolTableBuilder.SymbolImpl;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
