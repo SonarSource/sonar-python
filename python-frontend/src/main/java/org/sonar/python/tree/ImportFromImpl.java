@@ -43,7 +43,7 @@ public class ImportFromImpl extends SimpleStatement implements ImportFrom {
   private final boolean isWildcardImport;
   private final Token wildcard;
   private final Separators separators;
-  private boolean hasUnresolvedWildcardImport = true;
+  private boolean hasUnresolvedWildcardImport = false;
 
   public ImportFromImpl(Token fromKeyword, @Nullable List<Token> dottedPrefixForModule, @Nullable DottedName moduleName,
                         Token importKeyword, @Nullable List<AliasedName> aliasedImportNames, @Nullable Token wildcard, Separators separators) {

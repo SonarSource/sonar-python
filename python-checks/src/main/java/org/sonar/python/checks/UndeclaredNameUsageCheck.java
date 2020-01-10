@@ -128,7 +128,7 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitImportFrom(ImportFrom importFrom) {
-      hasUnresolvedWildcardImport |= (importFrom.isWildcardImport() && importFrom.hasUnresolvedWildcardImport());
+      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
       super.visitImportFrom(importFrom);
     }
 

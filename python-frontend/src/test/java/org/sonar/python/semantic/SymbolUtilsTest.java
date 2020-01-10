@@ -42,6 +42,7 @@ public class SymbolUtilsTest {
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A");
     assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
   }
 
   @Test
@@ -52,6 +53,7 @@ public class SymbolUtilsTest {
     );
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("_private_fn");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
   }
 
   @Test
@@ -65,6 +67,7 @@ public class SymbolUtilsTest {
     );
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "A");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
   }
 
   @Test
@@ -80,6 +83,7 @@ public class SymbolUtilsTest {
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     // for the time being, accepting multiple symbols having the same name
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "fn", "conditionally_defined", "conditionally_defined");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
   }
 
   @Test

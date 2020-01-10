@@ -64,7 +64,7 @@ public class PythonScanner {
   private final SensorContext context;
   private final PythonParser parser;
   private final List<InputFile> inputFiles;
-  private final Map<InputFile, String> packageNames;
+  private final Map<InputFile, String> packageNames = new HashMap<>();
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
@@ -79,17 +79,16 @@ public class PythonScanner {
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.inputFiles = inputFiles;
     this.parser = PythonParser.create();
-    this.packageNames = new HashMap<>();
   }
 
   public void scanFiles() {
-    Map<String, Set<Symbol>> globalSymbols = globalSymbols();
+    Map<String, Set<Symbol>> globalSymbolsByModuleName = globalSymbolsByModuleName();
     for (InputFile pythonFile : inputFiles) {
       if (context.isCancelled()) {
         return;
       }
       try {
-        scanFile(pythonFile, globalSymbols);
+        scanFile(pythonFile, globalSymbolsByModuleName);
       } catch (Exception e) {
         LOG.warn("Unable to analyze file '{}'. Error: {}", pythonFile.toString(), e);
       }
@@ -97,7 +96,7 @@ public class PythonScanner {
   }
 
 
-  private Map<String, Set<Symbol>> globalSymbols() {
+  private Map<String, Set<Symbol>> globalSymbolsByModuleName() {
     Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
     for (InputFile inputFile : inputFiles) {
       if (context.isCancelled()) {

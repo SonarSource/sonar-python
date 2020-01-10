@@ -83,25 +83,21 @@ import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 public class SymbolTableBuilder extends BaseTreeVisitor {
   private String fullyQualifiedModuleName;
   private List<String> filePath;
-  private Map<String, Set<Symbol>> globalSymbols;
+  private Map<String, Set<Symbol>> globalSymbolsByModuleName;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
 
   public SymbolTableBuilder() {
     fullyQualifiedModuleName = null;
     filePath = null;
-    globalSymbols = Collections.emptyMap();
+    globalSymbolsByModuleName = Collections.emptyMap();
   }
 
   public SymbolTableBuilder(String packageName, String fileName) {
-    initialize(packageName, fileName, Collections.emptyMap());
+    this(packageName, fileName, Collections.emptyMap());
   }
 
-  public SymbolTableBuilder(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbols) {
-    initialize(packageName, fileName, globalSymbols);
-  }
-
-  private void initialize(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbols) {
+  public SymbolTableBuilder(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
     int extensionIndex = fileName.lastIndexOf('.');
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
@@ -109,7 +105,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
     filePath.add(moduleName);
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
-    this.globalSymbols = globalSymbols;
+    this.globalSymbolsByModuleName = globalSymbolsByModuleName;
   }
 
   @Override
@@ -251,10 +247,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
       if (importFrom.isWildcardImport()) {
-        Set<Symbol> importedModuleSymbols = globalSymbols.get(moduleName);
+        Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
         if (importedModuleSymbols != null) {
           currentScope().createSymbolsFromWildcardImport(importedModuleSymbols);
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
+        } else {
+          ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(true);
         }
       } else {
         createImportedNames(importFrom.importedNames(), moduleName, importFrom.dottedPrefixForModule());

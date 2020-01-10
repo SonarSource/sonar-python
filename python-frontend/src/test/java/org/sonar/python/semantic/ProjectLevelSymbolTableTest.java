@@ -31,6 +31,9 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.ImportFrom;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolTableBuilder.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,4 +64,14 @@ public class ProjectLevelSymbolTableTest {
     assertThat(b.usages()).isEmpty();
   }
 
+  @Test
+  public void unresolved_wildcard_import() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", "my_module.py", Collections.emptyMap()),
+      "from external import *",
+      "print(a)"
+    );
+    ImportFrom importFrom = ((ImportFrom) PythonTestUtils.getAllDescendant(tree, t -> t.is(Tree.Kind.IMPORT_FROM)).get(0));
+    assertThat(importFrom.hasUnresolvedWildcardImport()).isTrue();
+  }
 }
