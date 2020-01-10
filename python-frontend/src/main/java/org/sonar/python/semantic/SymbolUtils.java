@@ -45,7 +45,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
-import org.sonar.python.semantic.SymbolTableBuilder.SymbolImpl;
 
 public class SymbolUtils {
   private SymbolUtils() {

@@ -75,7 +75,6 @@ import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
-import org.sonar.python.tree.NameImpl;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 
@@ -125,14 +124,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         }
       } else if (scope.rootTree.is(Kind.CLASSDEF)) {
         ClassDefImpl classDef = (ClassDefImpl) scope.rootTree;
-        scope.symbols.forEach(classDef::addClassField);
+        scope.symbols().forEach(classDef::addClassField);
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
       } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
-        scope.symbols.stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(((FileInputImpl) fileInput)::addGlobalVariables);
+        scope.symbols().stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(((FileInputImpl) fileInput)::addGlobalVariables);
       } else if (scope.rootTree.is(Kind.DICT_COMPREHENSION)) {
-        scope.symbols.forEach(((DictCompExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
+        scope.symbols().forEach(((DictCompExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       } else if (scope.rootTree instanceof ComprehensionExpression) {
-        scope.symbols.forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
+        scope.symbols().forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       }
     }
   }
@@ -421,156 +420,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       return scopesByRootTree.get(currentScopeRootTree());
     }
 
-  }
-
-  static class Scope {
-
-    private final Tree rootTree;
-    private final Scope parent;
-    private final Map<String, Symbol> symbolsByName = new HashMap<>();
-    private final Set<Symbol> symbols = new HashSet<>();
-    private final Set<Symbol> builtinSymbols = new HashSet<>();
-    private final Set<String> globalNames = new HashSet<>();
-    private final Set<String> nonlocalNames = new HashSet<>();
-    private final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
-
-    private Scope(@Nullable Scope parent, Tree rootTree) {
-      this.parent = parent;
-      this.rootTree = rootTree;
-    }
-
-    private Set<Symbol> symbols() {
-      return Collections.unmodifiableSet(symbols);
-    }
-
-    void createBuiltinSymbol(String name) {
-      SymbolImpl symbol = new SymbolImpl(name, name);
-      symbols.add(symbol);
-      builtinSymbols.add(symbol);
-      symbolsByName.put(name, symbol);
-    }
-
-    void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols) {
-      importedSymbols.forEach(symbol -> {
-        symbols.add(symbol);
-        symbolsByName.put(symbol.name(), symbol);
-      });
-    }
-
-    private void createSelfParameter(Parameter parameter) {
-      Name nameTree = parameter.name();
-      if (nameTree != null) {
-        String symbolName = nameTree.name();
-        SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
-        symbols.add(symbol);
-        symbolsByName.put(symbolName, symbol);
-        symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
-      }
-    }
-
-    void addBindingUsage(Name nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {
-      String symbolName = nameTree.name();
-      if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
-        SymbolImpl symbol = new SymbolImpl(symbolName, fullyQualifiedName);
-        symbols.add(symbol);
-        symbolsByName.put(symbolName, symbol);
-      }
-      SymbolImpl symbol = resolve(symbolName);
-      if (symbol != null) {
-        if (fullyQualifiedName != null && !fullyQualifiedName.equals(symbol.fullyQualifiedName)) {
-          symbol.fullyQualifiedName = null;
-        }
-        if (fullyQualifiedName == null && symbol.fullyQualifiedName != null) {
-          symbol.fullyQualifiedName = null;
-        }
-        symbol.addUsage(nameTree, kind);
-      }
-    }
-
-    @CheckForNull
-    SymbolImpl resolve(String symbolName) {
-      Symbol symbol = symbolsByName.get(symbolName);
-      if (parent == null || symbol != null) {
-        return (SymbolImpl) symbol;
-      }
-      return parent.resolve(symbolName);
-    }
-
-    void addGlobalName(String name) {
-      globalNames.add(name);
-    }
-
-    void addNonLocalName(String name) {
-      nonlocalNames.add(name);
-    }
-  }
-
-  public static class SymbolImpl implements Symbol {
-
-    private final String name;
-    @Nullable
-    private String fullyQualifiedName;
-    private final List<Usage> usages = new ArrayList<>();
-    private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
-
-    public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
-      this.name = name;
-      this.fullyQualifiedName = fullyQualifiedName;
-    }
-
-    @Override
-    public String name() {
-      return name;
-    }
-
-    @Override
-    public List<Usage> usages() {
-      return Collections.unmodifiableList(usages);
-    }
-
-    @CheckForNull
-    @Override
-    public String fullyQualifiedName() {
-      return fullyQualifiedName;
-    }
-
-    void addUsage(Tree tree, Usage.Kind kind) {
-      UsageImpl usage = new UsageImpl(tree, kind);
-      usages.add(usage);
-      if (tree.is(Kind.NAME)) {
-        ((NameImpl) tree).setSymbol(this);
-        ((NameImpl) tree).setUsage(usage);
-      }
-    }
-
-    void addOrCreateChildUsage(Name name, Usage.Kind kind) {
-      String childSymbolName = name.name();
-      if (!childrenSymbolByName.containsKey(childSymbolName)) {
-        String childFullyQualifiedName = fullyQualifiedName != null
-          ? (fullyQualifiedName + "." + childSymbolName)
-          : null;
-        SymbolImpl symbol = new SymbolImpl(childSymbolName, childFullyQualifiedName);
-        childrenSymbolByName.put(childSymbolName, symbol);
-      }
-      Symbol symbol = childrenSymbolByName.get(childSymbolName);
-      ((SymbolImpl) symbol).addUsage(name, kind);
-    }
-  }
-
-  private static class SelfSymbolImpl extends SymbolImpl {
-
-    private final Scope classScope;
-
-    SelfSymbolImpl(String name, Scope classScope) {
-      super(name, null);
-      this.classScope = classScope;
-    }
-
-    @Override
-    void addOrCreateChildUsage(Name nameTree, Usage.Kind kind) {
-      SymbolImpl symbol = classScope.instanceAttributesByName.computeIfAbsent(nameTree.name(), name -> new SymbolImpl(name, null));
-      symbol.addUsage(nameTree, kind);
-    }
   }
 
   /**
