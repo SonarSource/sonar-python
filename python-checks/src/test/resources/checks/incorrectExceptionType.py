@@ -97,3 +97,11 @@ class SomeUnpacked(*smth):
 
 def fun():
   raise SomeUnpacked()
+
+# Symbol with multiple bindings
+if p:
+  class MultipleBindings: pass
+else:
+  class MultipleBindings(BaseException): pass
+
+raise MultipleBindings() # OK

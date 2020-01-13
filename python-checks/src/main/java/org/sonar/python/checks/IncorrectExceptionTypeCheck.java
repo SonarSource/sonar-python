@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -50,12 +52,9 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       }
       if (raiseStatement.expressions().get(0).is(Tree.Kind.CALL_EXPR)) {
         CallExpression callExpression = ((CallExpression) raiseStatement.expressions().get(0));
-        Expression callee = callExpression.callee();
-        if (callee.is(Tree.Kind.NAME)) {
-          Symbol calleeSymbol = callExpression.calleeSymbol();
-          if (!inheritsFromBaseException(calleeSymbol)) {
-            ctx.addIssue(raiseStatement, MESSAGE);
-          }
+        Symbol calleeSymbol = callExpression.calleeSymbol();
+        if (!inheritsFromBaseException(calleeSymbol)) {
+          ctx.addIssue(raiseStatement, MESSAGE);
         }
       }
       if (raiseStatement.expressions().get(0).is(Tree.Kind.NAME)) {
@@ -72,23 +71,24 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       // S3827 will raise the issue in this case
       return true;
     }
-    if (BuiltinSymbols.builtinExceptions().contains(symbol.name()) || BuiltinSymbols.builtinExceptionsPython2().contains(symbol.name())) {
+    if (BuiltinSymbols.EXCEPTIONS.contains(symbol.name()) || BuiltinSymbols.EXCEPTIONS_PYTHON2.contains(symbol.name())) {
       return true;
     }
-    for (Usage usage : symbol.usages()) {
-      if (usage.isBindingUsage()) {
-        if (usage.kind().equals(Usage.Kind.IMPORT)) {
-          return true;
-        }
-        Tree tree = usage.tree();
-        Tree parent = tree.parent();
-        if (parent.is(Tree.Kind.CLASSDEF)) {
-          return classInheritsFromBaseException((ClassDef) parent);
-        }
+    List<Usage> bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).collect(Collectors.toList());
+    if (bindingUsages.size() > 1) {
+      return true;
+    }
+    if (bindingUsages.size() == 1) {
+      Usage usage = bindingUsages.get(0);
+      if (usage.kind().equals(Usage.Kind.IMPORT)) {
+        return true;
+      }
+      if (usage.kind().equals(Usage.Kind.CLASS_DECLARATION)) {
+        return classInheritsFromBaseException((ClassDef) usage.tree().parent());
       }
     }
-    // returns true in case of unknown symbol
-    return !isABuiltinNonExceptionType(symbol.name());
+    // returns true in case of unknown symbol to avoid FP
+    return !BuiltinSymbols.all().contains(symbol.name());
   }
 
   private boolean classInheritsFromBaseException(ClassDef classDef) {
@@ -105,14 +105,9 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       return true;
     }
     Expression expression = ((RegularArgument) argument).expression();
-    if (expression.is(Tree.Kind.NAME) || expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+    if (expression instanceof HasSymbol) {
       return inheritsFromBaseException(((HasSymbol) expression).symbol());
     }
     return true;
-  }
-
-  private static boolean isABuiltinNonExceptionType(String symbolName) {
-    return BuiltinSymbols.builtinConstants().contains(symbolName) || BuiltinSymbols.builtinFunctions().contains(symbolName)
-      || BuiltinSymbols.builtinFunctionsPython2().contains(symbolName) || BuiltinSymbols.builtinModuleAttributes().contains(symbolName);
   }
 }

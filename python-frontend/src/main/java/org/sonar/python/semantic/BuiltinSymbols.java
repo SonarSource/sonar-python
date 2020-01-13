@@ -33,19 +33,19 @@ public class BuiltinSymbols {
   /**
    * See https://docs.python.org/3/library/constants.html#built-in-consts
    */
-  static final Set<String> CONSTANTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public static final Set<String> CONSTANTS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
     "True", "False", "None", "NotImplemented", "__debug__", "copyright", "credits", "license", "quit", "exit", "Ellipsis")));
 
   /**
    * See https://docs.python.org/3/reference/import.html?highlight=__package__#import-related-module-attributes
    */
-  static final Set<String> MODULE_ATTRIBUTES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public static final Set<String> MODULE_ATTRIBUTES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
     "__name__", "__loader__", "__package__", "__spec__", "__path__", "__file__", "__cached__", "__doc__", "__builtins__")));
 
   /**
    * See https://docs.python.org/3/library/functions.html
    */
-  static final Set<String> FUNCTIONS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public static final Set<String> FUNCTIONS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
     "abs",
     "delattr",
     "hash",
@@ -119,7 +119,7 @@ public class BuiltinSymbols {
   /**
    * See https://docs.python.org/2.7/library/functions.html
    */
-  static final Set<String> FUNCTIONS_PYTHON2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public static final Set<String> FUNCTIONS_PYTHON2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
     "abs",
     "divmod",
     "input",
@@ -205,7 +205,7 @@ public class BuiltinSymbols {
   /**
    * See https://docs.python.org/3/library/exceptions.html
    */
-  static final Set<String> EXCEPTIONS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public static final Set<String> EXCEPTIONS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
     "BaseException",
     "SystemExit",
     "KeyboardInterrupt",
@@ -275,7 +275,7 @@ public class BuiltinSymbols {
   /**
    * See https://docs.python.org/2.7/library/exceptions.html
    */
-  static final Set<String> EXCEPTIONS_PYTHON2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+  public static final Set<String> EXCEPTIONS_PYTHON2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
     "BaseException",
     "SystemExit",
     "KeyboardInterrupt",
@@ -328,38 +328,14 @@ public class BuiltinSymbols {
     "BytesWarning"
   )));
 
-  static Set<String> all() {
+  public static Set<String> all() {
     Set<String> all = new HashSet<>();
-    all.addAll(builtinConstants());
-    all.addAll(builtinFunctions());
-    all.addAll(builtinFunctionsPython2());
-    all.addAll(builtinExceptions());
-    all.addAll(builtinExceptionsPython2());
-    all.addAll(builtinModuleAttributes());
+    all.addAll(BuiltinSymbols.CONSTANTS);
+    all.addAll(BuiltinSymbols.FUNCTIONS);
+    all.addAll(BuiltinSymbols.FUNCTIONS_PYTHON2);
+    all.addAll(BuiltinSymbols.EXCEPTIONS);
+    all.addAll(BuiltinSymbols.EXCEPTIONS_PYTHON2);
+    all.addAll(BuiltinSymbols.MODULE_ATTRIBUTES);
     return all;
-  }
-
-  public static Set<String> builtinConstants() {
-    return BuiltinSymbols.CONSTANTS;
-  }
-
-  public static Set<String> builtinFunctions() {
-    return BuiltinSymbols.FUNCTIONS;
-  }
-
-  public static Set<String> builtinFunctionsPython2() {
-    return BuiltinSymbols.FUNCTIONS_PYTHON2;
-  }
-
-  public static Set<String> builtinModuleAttributes() {
-    return BuiltinSymbols.MODULE_ATTRIBUTES;
-  }
-
-  public static Set<String> builtinExceptions() {
-    return BuiltinSymbols.EXCEPTIONS;
-  }
-
-  public static Set<String> builtinExceptionsPython2() {
-    return BuiltinSymbols.EXCEPTIONS_PYTHON2;
   }
 }
