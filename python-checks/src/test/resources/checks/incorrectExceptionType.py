@@ -1,0 +1,107 @@
+from module import usage
+from mod2 import pb
+from mod2 import ImportedError
+
+class SomeClass:
+  pass
+
+class AnotherClass(object):
+  pass
+
+class SomeError(BaseException):
+  pass
+
+class SomeDerivedError(SomeError):
+  pass
+
+class DefinedError(pb.Error):
+  pass
+
+class ClassWithCallExpression(foo()):
+  pass
+
+def raise_class_with_call_expression_arg():
+  raise ClassWithCallExpression
+
+def raise_child_of_imported_type():
+  raise DefinedError()
+
+def raise_imported_error():
+  raise ImportedError()
+
+def func():
+  err_dict = {1: (BaseException, 'error message 1'), 2: (BaseException, 'error message 2')}
+  e, msg = err_dict[0]
+  raise e(msg)
+
+def raise_builtin_exception_type():
+  raise NotImplementedError() # OK
+
+def raise_builtin_exception_type_python2():
+  raise StandardError() # OK
+
+def raise_builtin_constant():
+  raise NotImplemented # Noncompliant
+
+def raise_builtin_function():
+  raise object() # Noncompliant
+
+def raise_builtin_function_python2():
+  raise super2() # Noncompliant
+
+def raise_BaseException_type():
+  raise SomeError() # OK
+
+def raise_BaseException_class():
+  raise SomeError
+
+def raise_non_exception_class():
+  raise SomeClass # Noncompliant
+
+def raise_unknown_type():
+  raise UnknownType() # OK: unknown symbol will be reported by S3827
+
+def raise_regular_class():
+  raise SomeClass() # Noncompliant
+
+def raise_regular_class_child():
+  raise AnotherClass() # Noncompliant
+
+def raise_exception_child():
+  raise SomeDerivedError() # OK
+
+def empty_raise():
+  raise # OK
+
+def raise_imported_type():
+  raise usage.UsageError("error")
+
+def raise_from_variable():
+  e = Whatever()
+  raise e # Not handled yet
+
+def raise_module_attribue():
+  raise __package__ # Noncompliant
+
+class Clazz(object):
+  def get_some_error(self):
+          return SomeError()
+
+  def raise_from_method_call(self):
+    raise self.get_some_error()
+
+
+smth = SomeClass, AnotherClass
+class SomeUnpacked(*smth):
+  pass
+
+def fun():
+  raise SomeUnpacked()
+
+# Symbol with multiple bindings
+if p:
+  class MultipleBindings: pass
+else:
+  class MultipleBindings(BaseException): pass
+
+raise MultipleBindings() # OK

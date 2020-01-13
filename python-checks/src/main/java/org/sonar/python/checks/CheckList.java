@@ -84,6 +84,7 @@ public final class CheckList {
       HashingDataCheck.class,
       IgnoredParameterCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
+      IncorrectExceptionTypeCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,
