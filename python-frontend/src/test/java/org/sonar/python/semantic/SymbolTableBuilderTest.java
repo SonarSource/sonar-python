@@ -68,7 +68,7 @@ public class SymbolTableBuilderTest {
   @Test
   public void global_variable() {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
-    List<String> topLevelFunctions = Arrays.asList("global_x", "global_var", "function_with_local", "function_with_free_variable", "function_with_rebound_variable",
+    List<String> topLevelFunctions = Arrays.asList("function_with_local", "function_with_free_variable", "function_with_rebound_variable",
       "ref_in_interpolated", "print_var", "function_with_global_var", "func_wrapping_class", "function_with_unused_import",
       "function_with_nonlocal_var", "symbols_in_comp", "scope_of_comprehension", "for_comp_with_no_name_var",
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
@@ -77,7 +77,11 @@ public class SymbolTableBuilderTest {
       "using_builtin_symbol", "keyword_usage", "comprehension_vars");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
-    globalSymbols.add("a"); // top level class
+    globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
+
+    assertThat(moduleSymbols)
+      .filteredOn(symbol -> topLevelFunctions.contains(symbol.name()))
+      .extracting(Symbol::kind).containsOnly(Symbol.Kind.FUNCTION);
 
     assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder(globalSymbols.toArray(new String[] {}));
     moduleSymbols.stream().filter(s -> s.name().equals("global_var")).findFirst().ifPresent(s -> {

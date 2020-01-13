@@ -197,7 +197,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       String functionName = pyFunctionDefTree.name().name();
       String fullyQualifiedName = getFullyQualifiedName(functionName);
-      addBindingUsage(pyFunctionDefTree.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
+      currentScope().addFunctionSymbol(pyFunctionDefTree, fullyQualifiedName);
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
       createParameters(pyFunctionDefTree);
