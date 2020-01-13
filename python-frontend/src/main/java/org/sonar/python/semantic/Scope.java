@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -75,6 +76,18 @@ class Scope {
       symbols.add(symbol);
       symbolsByName.put(symbolName, symbol);
       symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
+    }
+  }
+
+  void addFunctionSymbol(FunctionDef functionDef, @Nullable String fullyQualifiedName) {
+    String symbolName = functionDef.name().name();
+    if (symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName)) {
+      addBindingUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
+    } else {
+      FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, fullyQualifiedName);
+      symbols.add(functionSymbol);
+      symbolsByName.put(symbolName, functionSymbol);
+      functionSymbol.addUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION);
     }
   }
 
