@@ -149,8 +149,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scopeRootTrees.push(tree);
     }
 
-    void leaveScope() {
-      scopeRootTrees.pop();
+    Tree leaveScope() {
+      return scopeRootTrees.pop();
     }
   }
 
@@ -443,6 +443,16 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
+    public void visitParameter(Parameter parameter) {
+      // parameter default value should not be in the function scope.
+      Tree currentScopeTree = leaveScope();
+      scan(parameter.defaultValue());
+      enterScope(currentScopeTree);
+      scan(parameter.name());
+      scan(parameter.typeAnnotation());
+    }
+
+    @Override
     public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       enterScope(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
@@ -478,8 +488,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
+      scan(pyClassDefTree.args());
       enterScope(pyClassDefTree);
-      super.visitClassDef(pyClassDefTree);
+      scan(pyClassDefTree.decorators());
+      scan(pyClassDefTree.name());
+      scan(pyClassDefTree.body());
       leaveScope();
     }
 

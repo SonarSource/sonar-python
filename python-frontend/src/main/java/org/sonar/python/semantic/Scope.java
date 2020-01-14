@@ -102,6 +102,9 @@ class Scope {
     if (parent == null || symbol != null) {
       return (SymbolImpl) symbol;
     }
+    if (parent.rootTree.is(Tree.Kind.CLASSDEF)) {
+      return parent.parent.resolve(symbolName);
+    }
     return parent.resolve(symbolName);
   }
 

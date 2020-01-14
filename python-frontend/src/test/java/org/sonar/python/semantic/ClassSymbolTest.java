@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
@@ -100,6 +101,26 @@ public class ClassSymbolTest {
       "    self.f1 = 2");
     assertThat(c.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f1", "fn");
     assertThat(c.instanceFields()).isEmpty();
+  }
+
+  @Test
+  public void same_name_method_fn() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "def fn(): pass",
+      "class C: ",
+      "  class X: pass",
+      "  def fn(param = X):",
+      "    fn()",
+      "  class Y(X): pass");
+
+    Symbol functionFn = ((FunctionDef) fileInput.statements().statements().get(0)).name().symbol();
+    ClassDef c = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    Symbol methodFn = ((FunctionDef) c.body().statements().get(1)).name().symbol();
+    Symbol classXSymbol = ((ClassDef) c.body().statements().get(0)).name().symbol();
+
+    assertThat(functionFn.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.FUNC_DECLARATION, Usage.Kind.OTHER);
+    assertThat(methodFn.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.FUNC_DECLARATION);
+    assertThat(classXSymbol.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.CLASS_DECLARATION, Usage.Kind.OTHER, Usage.Kind.OTHER);
   }
 
   private ClassDef parseClass(String... lines) {
