@@ -50,6 +50,7 @@ public final class CheckList {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
+      ArgumentNumberCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BreakContinueOutsideLoopCheck.class,
