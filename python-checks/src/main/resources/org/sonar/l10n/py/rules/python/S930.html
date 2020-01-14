@@ -1,0 +1,69 @@
+<p>Calling a function or a method with fewer or more arguments than expected will raise a <code>TypeError</code>. This is usually a bug and should be
+fixed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+######################
+# Positional Arguments
+######################
+
+param_args = [1, 2, 3]
+param_kwargs = {'x': 1, 'y': 2}
+
+def func(a, b=1):
+    print(a, b)
+
+def positional_unlimited(a, b=1, *args):
+    print(a, b, *args)
+
+func(1)
+func(1, 42)
+func(1, 2, 3)  # Noncompliant. Too many positional arguments
+func()  # Noncompliant. Missing positional argument for "a"
+
+func(1, 42, *param_args)  # Noncompliant. Maximum number of positional arguments already reached, *args should be removed
+
+positional_unlimited(1, 2, 3, 4, 5)
+
+def positional_limited(a, *, b=2):
+    print(a, b)
+
+positional_limited(1, 2)  # Noncompliant. Too many positional arguments
+
+
+#############################
+# Unexpected Keyword argument
+#############################
+
+def keywords(a=1, b=2, *, c=3):
+    print(a, b, c)
+
+keywords(1)
+keywords(1, z=42)  # Noncompliant. Unexpected keyword argument "z"
+
+keywords(a=21, b=22, **param_kwargs)  # Noncompliant. Maximum number of keyword arguments already reached, **kwargs should be removed
+
+def keywords_unlimited(a=1, b=2, *, c=3, **kwargs):
+    print(a, b, kwargs)
+
+keywords_unlimited(a=1, b=2, z=42)
+
+#################################
+# Mandatory Keyword argument only
+#################################
+
+def mandatory_keyword(a, *, b):
+    print(a, b)
+
+mandatory_keyword(1, b=2)
+mandatory_keyword(1)  # Noncompliant. Missing keyword argument "b"
+</pre>
+<h2>See</h2>
+<ul>
+  <li> MISRA C:2004, 16.6 - The number of arguments passed to a function shall match the number of parameters. </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/628.html">MITRE, CWE-628</a> - Function Call with Incorrectly Specified Arguments </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/LoAg">CERT, DCL07-C.</a> - Include the appropriate type information in function
+  declarators </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/VQBc">CERT, EXP37-C.</a> - Call functions with the correct number and type of arguments
+  </li>
+</ul>
+
