@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -87,7 +88,20 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
         return classInheritsFromBaseException((ClassDef) usage.tree().parent());
       }
     }
-    // returns true in case of unknown symbol to avoid FP
+    if (Symbol.Kind.CLASS.equals(symbol.kind())) {
+      // we know it's a class defined in the project
+      ClassSymbol classSymbol = (ClassSymbol) symbol;
+      if (classSymbol.hasUnresolvedParents()) {
+        return true;
+      }
+      for (Symbol parent : classSymbol.parents()) {
+        if (BuiltinSymbols.EXCEPTIONS.contains(parent.name()) || BuiltinSymbols.EXCEPTIONS_PYTHON2.contains(parent.name())) {
+          return true;
+        }
+      }
+      return false;
+    }
+    // returns true in case of unknown symbol
     return !BuiltinSymbols.all().contains(symbol.name());
   }
 
