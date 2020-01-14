@@ -17,25 +17,37 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.symbols;
+package org.sonar.python.semantic;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
-public interface Symbol {
+public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
-  String name();
+  List<Symbol> parents = new ArrayList<>();
+  boolean hasUnresolvedParents = true;
 
-  List<Usage> usages();
+  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
+    super(name, fullyQualifiedName);
+    this.setKind(Kind.CLASS);
+  }
 
-  @CheckForNull
-  String fullyQualifiedName();
+  @Override
+  public List<Symbol> parents() {
+    return Collections.unmodifiableList(parents);
+  }
 
-  Kind kind();
+  public void addParent(Symbol symbol) {
+    this.parents.add(symbol);
+  }
 
-  enum Kind {
-    FUNCTION,
-    CLASS,
-    OTHER
+  @Override
+  public boolean hasUnresolvedParents() {
+    return hasUnresolvedParents;
   }
 }

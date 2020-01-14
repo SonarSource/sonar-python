@@ -22,7 +22,9 @@ package org.sonar.python.semantic;
 import java.io.File;
 import java.util.Set;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,6 +86,18 @@ public class SymbolUtilsTest {
     // for the time being, accepting multiple symbols having the same name
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "fn", "conditionally_defined", "conditionally_defined");
     assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void redefined_class_symbol() {
+    FileInput fileInput = parse(
+      "C = \"hello\"",
+      "class C: ",
+      "  pass");
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    // for the time being, accepting multiple symbols having the same name
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C", "C");
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
   }
 
   @Test

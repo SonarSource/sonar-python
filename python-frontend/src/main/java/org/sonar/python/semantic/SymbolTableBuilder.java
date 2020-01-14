@@ -39,6 +39,8 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -63,6 +65,7 @@ import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -136,6 +139,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
+  private static boolean hasMultipleBindingUsages(Symbol symbol) {
+    return symbol.usages().stream().filter(Usage::isBindingUsage).count() > 1;
+  }
+
   private static class ScopeVisitor extends BaseTreeVisitor {
 
     private Deque<Tree> scopeRootTrees = new LinkedList<>();
@@ -206,7 +213,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitClassDef(ClassDef pyClassDefTree) {
       String className = pyClassDefTree.name().name();
       String fullyQualifiedName = getFullyQualifiedName(className);
-      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
+      currentScope().addClassSymbol(pyClassDefTree, fullyQualifiedName);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
@@ -268,6 +275,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (!dottedPrefix.isEmpty()) {
           fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
         }
+        //TODO: Use global symbol table to extract info from imported symbol
         if (module.alias() != null) {
           addBindingUsage(module.alias(), Usage.Kind.IMPORT, fullyQualifiedName);
         } else {
@@ -480,6 +488,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitClassDef(ClassDef pyClassDefTree) {
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
+      resolveParents(pyClassDefTree);
       leaveScope();
     }
 
@@ -517,7 +526,52 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       SymbolImpl symbol = scope.resolve(nameTree.name());
       // TODO: use Set to improve performances
       if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(nameTree))) {
-        symbol.addUsage(nameTree, Usage.Kind.OTHER);
+          symbol.addUsage(nameTree, Usage.Kind.OTHER);
+      }
+    }
+
+    private void resolveParents(ClassDef classDef) {
+      Symbol symbol = classDef.name().symbol();
+      if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
+        return;
+      }
+      ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+      if (hasMultipleBindingUsages(classSymbol)) {
+        classSymbol.setKind(Symbol.Kind.OTHER);
+        return;
+      }
+      ArgList argList = classDef.args();
+      classSymbol.hasUnresolvedParents = false;
+      if (argList == null) {
+        return;
+      }
+      for (Argument argument : argList.arguments()) {
+        if (!argument.is(Kind.REGULAR_ARGUMENT) || !(((RegularArgument) argument).expression() instanceof HasSymbol)) {
+          classSymbol.hasUnresolvedParents = true;
+          return;
+        }
+        Symbol parentSymbol = ((HasSymbol) ((RegularArgument) argument).expression()).symbol();
+        if (parentSymbol == null) {
+          classSymbol.hasUnresolvedParents = true;
+          return;
+        }
+        if (hasMultipleBindingUsages(parentSymbol)) {
+          classSymbol.hasUnresolvedParents = true;
+          return;
+        }
+        if (parentSymbol.fullyQualifiedName() != null && BuiltinSymbols.all().contains(parentSymbol.fullyQualifiedName())) {
+          if (!classSymbol.parents().contains(parentSymbol)) {
+            classSymbol.addParent(parentSymbol);
+          }
+          continue;
+        }
+        if (!Symbol.Kind.CLASS.equals(parentSymbol.kind())) {
+          classSymbol.hasUnresolvedParents = true;
+          return;
+        }
+        if (!classSymbol.parents().contains(parentSymbol)) {
+          classSymbol.addParent(parentSymbol);
+        }
       }
     }
   }
