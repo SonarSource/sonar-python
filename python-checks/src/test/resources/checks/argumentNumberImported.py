@@ -1,0 +1,1 @@
+def fn(p): pass

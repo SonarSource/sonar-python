@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -81,7 +82,7 @@ class Scope {
 
   void addFunctionSymbol(FunctionDef functionDef, @Nullable String fullyQualifiedName) {
     String symbolName = functionDef.name().name();
-    if (symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName)) {
+    if (isExistingSymbol(symbolName)) {
       addBindingUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
     } else {
       FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, fullyQualifiedName);
@@ -91,9 +92,44 @@ class Scope {
     }
   }
 
+  private static Symbol copySymbol(String symbolName, Symbol symbol) {
+    return symbol.kind() == Symbol.Kind.FUNCTION
+      ? new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol)
+      : new SymbolImpl(symbolName, symbol.fullyQualifiedName());
+  }
+
+  void addModuleSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
+    String symbolName = nameTree.name();
+    Set<Symbol> moduleExportedSymbols = globalSymbolsByModuleName.get(fullyQualifiedName);
+    if (moduleExportedSymbols != null && !isExistingSymbol(symbolName)) {
+      SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
+      moduleExportedSymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
+      this.symbols.add(moduleSymbol);
+      symbolsByName.put(symbolName, moduleSymbol);
+    }
+    addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
+  }
+
+  void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, Map<String, Symbol> globalSymbolsByFQN) {
+    String symbolName = nameTree.name();
+    Symbol globalSymbol = globalSymbolsByFQN.get(fullyQualifiedName);
+    if (globalSymbol == null || isExistingSymbol(symbolName)) {
+      addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
+    } else {
+      Symbol symbol = copySymbol(symbolName, globalSymbol);
+      this.symbols.add(symbol);
+      symbolsByName.put(symbolName, symbol);
+      ((SymbolImpl) symbol).addUsage(nameTree, Usage.Kind.IMPORT);
+    }
+  }
+
+  private boolean isExistingSymbol(String symbolName) {
+    return symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName);
+  }
+
   void addBindingUsage(Name nameTree, Usage.Kind kind, @Nullable String fullyQualifiedName) {
     String symbolName = nameTree.name();
-    if (!symbolsByName.containsKey(symbolName) && !globalNames.contains(symbolName) && !nonlocalNames.contains(symbolName)) {
+    if (!isExistingSymbol(symbolName)) {
       SymbolImpl symbol = new SymbolImpl(symbolName, fullyQualifiedName);
       symbols.add(symbol);
       symbolsByName.put(symbolName, symbol);
@@ -135,7 +171,7 @@ class Scope {
 
   void addClassSymbol(ClassDef classDef, @Nullable String fullyQualifiedName) {
     String symbolName = classDef.name().name();
-    if (symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName)) {
+    if (isExistingSymbol(symbolName)) {
       addBindingUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
     } else {
       ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, fullyQualifiedName);

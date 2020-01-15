@@ -47,6 +47,15 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
   }
 
+  FunctionSymbolImpl(String name, FunctionSymbol functionSymbol) {
+    super(name, functionSymbol.fullyQualifiedName());
+    setKind(Kind.FUNCTION);
+    isInstanceMethod = functionSymbol.isInstanceMethod();
+    hasDecorators = functionSymbol.hasDecorators();
+    hasVariadicParameter = functionSymbol.hasVariadicParameter();
+    parameters.addAll(functionSymbol.parameters());
+  }
+
   private static boolean isInstanceMethod(FunctionDef functionDef) {
     return functionDef.isMethodDefinition() && functionDef.decorators().stream()
       .map(decorator -> {
