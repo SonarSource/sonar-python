@@ -20,22 +20,11 @@
 package org.sonar.plugins.python.api.symbols;
 
 import java.util.List;
-import javax.annotation.CheckForNull;
 
-public interface Symbol {
+public interface ClassSymbol extends Symbol {
+  List<Symbol> parents();
 
-  String name();
+  void addParent(Symbol symbol);
 
-  List<Usage> usages();
-
-  @CheckForNull
-  String fullyQualifiedName();
-
-  Kind kind();
-
-  enum Kind {
-    FUNCTION,
-    CLASS,
-    OTHER
-  }
+  boolean hasUnresolvedParents();
 }

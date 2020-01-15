@@ -20,112 +20,232 @@
 package org.sonar.python.semantic;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-
+import static org.sonar.python.PythonTestUtils.parse;
 
 public class ClassSymbolTest {
+
   @Test
-  public void no_field() {
-    ClassDef empty = parseClass(
+  public void no_parents() {
+    FileInput fileInput = parse(
       "class C: ",
       "  pass");
-    assertThat(empty.classFields()).isEmpty();
-    assertThat(empty.instanceFields()).isEmpty();
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedParents()).isFalse();
   }
 
   @Test
-  public void only_methods() {
-    ClassDef empty2 = parseClass(
-      "class C:",
-      "  def f(): pass");
-    assertThat(empty2.classFields()).extracting(Symbol::name).containsExactly("f");
-    assertThat(empty2.instanceFields()).isEmpty();
-  }
-
-  @Test
-  public void class_fields() {
-    ClassDef c = parseClass(
+  public void local_parent() {
+    FileInput fileInput = parse(
       "class C: ",
-      "  f1 = 1",
-      "  f1 = 2",
-      "  f2 = 3");
-    assertThat(c.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f1", "f2");
-    assertThat(c.instanceFields()).isEmpty();
+      "  pass",
+      "class B(C): ",
+      "  pass");
+    ClassDef parentClass = (ClassDef) fileInput.statements().statements().get(0);
+    Symbol parentSymbol = parentClass.name().symbol();
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(1);
+    assertThat(classSymbol.parents()).containsExactlyInAnyOrder(parentSymbol);
+
+    assertThat(fileInput.globalVariables()).hasSize(2);
+    assertThat(fileInput.globalVariables()).containsExactlyInAnyOrder(symbol, parentSymbol);
   }
 
   @Test
-  public void instance_fields() {
-    ClassDef c1 = parseClass(
+  public void multiple_local_parents() {
+    FileInput fileInput = parse(
       "class C: ",
-      "  def f(self):",
-      "    self.a = 1",
-      "    self.b = 2",
-      "    x = 2",
-      "  def g(self):",
-      "    self.a = 3",
-      "    self.c = 4");
-    assertThat(c1.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f", "g");
-    assertThat(c1.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "c");
+      "  pass",
+      "class A:",
+      "  pass",
+      "class B(C, A): ",
+      "  pass");
+    ClassDef parentClass = (ClassDef) fileInput.statements().statements().get(0);
+    Symbol parentSymbol = parentClass.name().symbol();
+    ClassDef parentClass2 = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol parentSymbol2 = parentClass2.name().symbol();
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(2);
+    assertThat(classSymbol.parents()).containsExactlyInAnyOrder(parentSymbol, parentSymbol2);
 
-    ClassDef c2 = parseClass(
-      "class C:",
-      "  def f(self):",
-      "     print(self.a)",
-      "  def g(self):",
-      "     self.a = 1");
-    assertThat(c2.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f", "g");
-    assertThat(c2.instanceFields()).extracting(Symbol::name).containsExactlyInAnyOrder("a");
-    Symbol field = c2.instanceFields().iterator().next();
-    assertThat(field.usages())
-      .extracting(Usage::kind, u -> u.tree().firstToken().line())
-      .containsExactlyInAnyOrder(
-        tuple(Usage.Kind.OTHER, 3),
-        tuple(Usage.Kind.ASSIGNMENT_LHS, 5));
+    assertThat(fileInput.globalVariables()).hasSize(3);
+    assertThat(fileInput.globalVariables()).containsExactlyInAnyOrder(symbol, parentSymbol, parentSymbol2);
   }
 
   @Test
-  public void same_name() {
-    ClassDef c = parseClass(
-      "class C: ",
-      "  f1 = 1",
-      "  def fn():",
-      "    self.f1 = 2");
-    assertThat(c.classFields()).extracting(Symbol::name).containsExactlyInAnyOrder("f1", "fn");
-    assertThat(c.instanceFields()).isEmpty();
+  public void unknown_parent() {
+    FileInput fileInput = parse(
+      "class B(C): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
   }
 
   @Test
-  public void same_name_method_fn() {
-    FileInput fileInput = PythonTestUtils.parse(
-      "def fn(): pass",
+  public void builtin_parent() {
+    FileInput fileInput = parse(
       "class C: ",
-      "  class X: pass",
-      "  def fn(param = X):",
-      "    fn()",
-      "  class Y(X): pass");
-
-    Symbol functionFn = ((FunctionDef) fileInput.statements().statements().get(0)).name().symbol();
-    ClassDef c = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
-    Symbol methodFn = ((FunctionDef) c.body().statements().get(1)).name().symbol();
-    Symbol classXSymbol = ((ClassDef) c.body().statements().get(0)).name().symbol();
-
-    assertThat(functionFn.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.FUNC_DECLARATION, Usage.Kind.OTHER);
-    assertThat(methodFn.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.FUNC_DECLARATION);
-    assertThat(classXSymbol.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.CLASS_DECLARATION, Usage.Kind.OTHER, Usage.Kind.OTHER);
+      "  pass",
+      "class B(C, BaseException): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(2);
+    assertThat(classSymbol.hasUnresolvedParents()).isFalse();
   }
 
-  private ClassDef parseClass(String... lines) {
-    FileInput fileInput = PythonTestUtils.parse(lines);
-    return PythonTestUtils.getFirstChild(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+  @Test
+  public void builtin_parent_with_unknown() {
+    FileInput fileInput = parse(
+      "class C: ",
+      "  pass",
+      "class B(C, BaseException, unknown): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(2);
+    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
   }
 
+  @Test
+  public void multiple_bindings() {
+    FileInput fileInput = parse(
+      "class C: ",
+      "  pass",
+      "C = \"hello\"");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.OTHER)).isTrue();
+  }
+
+  @Test
+  public void multiple_bindings_2() {
+    FileInput fileInput = parse(
+      "C = \"hello\"",
+      "class C: ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isFalse();
+    assertThat(Symbol.Kind.CLASS.equals(symbol.kind())).isFalse();
+  }
+
+  @Test
+  public void call_expression_argument() {
+    FileInput fileInput = parse(
+      "def foo():",
+      "  pass",
+      "class C(foo()): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+  }
+
+  @Test
+  public void parent_is_not_a_class() {
+    FileInput fileInput = parse(
+      "def foo():",
+      "  pass",
+      "A = foo()",
+      "class C(A): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+  }
+
+  @Test
+  public void unpacking_expression_as_parent() {
+    FileInput fileInput = parse(
+      "foo = (Something, SomethingElse)",
+      "class C(*foo): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.parents()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+  }
+
+  @Test
+  public void parent_has_multiple_bindings() {
+    FileInput fileInput = parse(
+      "class C: ",
+      "  pass",
+      "C = \"hello\"",
+      "class B(C): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol instanceof ClassSymbol).isTrue();
+    assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+  }
+
+  @Test
+  public void class_with_global_statement() {
+    FileInput fileInput = parse(
+      "global B",
+      "class B(): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    //Currently, no symbol is created in case of global symbol
+    assertThat(symbol instanceof ClassSymbol).isFalse();
+  }
+
+  @Test
+  public void class_with_nonlocal_statement() {
+    FileInput fileInput = parse(
+      "nonlocal B",
+      "class B(): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    //Currently, no symbol is created in case of nonlocal symbol
+    assertThat(symbol instanceof ClassSymbol).isFalse();
+  }
 }

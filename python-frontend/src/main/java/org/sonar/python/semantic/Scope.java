@@ -28,6 +28,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -86,6 +87,9 @@ class Scope {
     }
     SymbolImpl symbol = resolve(symbolName);
     if (symbol != null) {
+      if (!Symbol.Kind.OTHER.equals(symbol.kind())) {
+        symbol.setKind(Symbol.Kind.OTHER);
+      }
       if (fullyQualifiedName != null && !fullyQualifiedName.equals(symbol.fullyQualifiedName)) {
         symbol.fullyQualifiedName = null;
       }
@@ -114,5 +118,17 @@ class Scope {
 
   void addNonLocalName(String name) {
     nonlocalNames.add(name);
+  }
+
+  void addClassSymbol(ClassDef classDef, @Nullable String fullyQualifiedName) {
+    String symbolName = classDef.name().name();
+    if (symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName)) {
+      addBindingUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
+    } else {
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, fullyQualifiedName);
+      symbols.add(classSymbol);
+      symbolsByName.put(symbolName, classSymbol);
+      classSymbol.addUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION);
+    }
   }
 }
