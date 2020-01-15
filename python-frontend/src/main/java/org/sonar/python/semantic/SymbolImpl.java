@@ -39,10 +39,12 @@ public class SymbolImpl implements Symbol {
   String fullyQualifiedName;
   private final List<Usage> usages = new ArrayList<>();
   private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
+  private Kind kind;
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
+    this.kind = Kind.OTHER;
   }
 
   @Override
@@ -59,6 +61,15 @@ public class SymbolImpl implements Symbol {
   @Override
   public String fullyQualifiedName() {
     return fullyQualifiedName;
+  }
+
+  @Override
+  public Kind kind() {
+    return this.kind;
+  }
+
+  public void setKind(Kind kind) {
+    this.kind = kind;
   }
 
   void addUsage(Tree tree, Usage.Kind kind) {

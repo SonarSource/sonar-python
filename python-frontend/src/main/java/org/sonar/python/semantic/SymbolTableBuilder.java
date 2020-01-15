@@ -39,6 +39,8 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -63,6 +65,7 @@ import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -206,7 +209,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitClassDef(ClassDef pyClassDefTree) {
       String className = pyClassDefTree.name().name();
       String fullyQualifiedName = getFullyQualifiedName(className);
-      addBindingUsage(pyClassDefTree.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
+      currentScope().addClassSymbol(pyClassDefTree, fullyQualifiedName);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
       super.visitClassDef(pyClassDefTree);
@@ -493,6 +496,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scan(pyClassDefTree.decorators());
       scan(pyClassDefTree.name());
       scan(pyClassDefTree.body());
+      resolveParents(pyClassDefTree);
       leaveScope();
     }
 
@@ -531,6 +535,39 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       // TODO: use Set to improve performances
       if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(nameTree))) {
         symbol.addUsage(nameTree, Usage.Kind.OTHER);
+      }
+    }
+
+    private void resolveParents(ClassDef classDef) {
+      Symbol symbol = classDef.name().symbol();
+      if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
+        return;
+      }
+      ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+      ArgList argList = classDef.args();
+      classSymbol.setHasUnresolvedParents(false);
+      if (argList == null) {
+        return;
+      }
+      for (Argument argument : argList.arguments()) {
+        if (!argument.is(Kind.REGULAR_ARGUMENT) || !(((RegularArgument) argument).expression() instanceof HasSymbol)) {
+          classSymbol.setHasUnresolvedParents(true);
+          return;
+        }
+        Symbol parentSymbol = ((HasSymbol) ((RegularArgument) argument).expression()).symbol();
+        if (parentSymbol == null) {
+          classSymbol.setHasUnresolvedParents(true);
+          return;
+        }
+        if (BuiltinSymbols.all().contains(parentSymbol.fullyQualifiedName())) {
+          classSymbol.addParent(parentSymbol);
+          continue;
+        }
+        if (!Symbol.Kind.CLASS.equals(parentSymbol.kind())) {
+          classSymbol.setHasUnresolvedParents(true);
+          return;
+        }
+        classSymbol.addParent(parentSymbol);
       }
     }
   }
