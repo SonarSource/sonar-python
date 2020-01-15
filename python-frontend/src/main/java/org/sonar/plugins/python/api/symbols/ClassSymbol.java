@@ -24,7 +24,5 @@ import java.util.List;
 public interface ClassSymbol extends Symbol {
   List<Symbol> parents();
 
-  void addParent(Symbol symbol);
-
   boolean hasUnresolvedParents();
 }

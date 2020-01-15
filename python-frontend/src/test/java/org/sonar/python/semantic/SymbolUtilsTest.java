@@ -102,6 +102,30 @@ public class SymbolUtilsTest {
   }
 
   @Test
+  public void redefined_class_symbol() {
+    FileInput fileInput = parse(
+      "C = \"hello\"",
+      "class C: ",
+      "  pass");
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    // for the time being, accepting multiple symbols having the same name
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C", "C");
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
+  }
+
+  @Test
+  public void classdef_with_missing_symbol() {
+    FileInput fileInput = parse(
+      "global C",
+      "class C: ",
+      "  pass");
+    //TODO: When global variables are present, class definitions do not have a symbol associated with them
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
+  }
+
+  @Test
   public void package_name_by_file() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), baseDir)).isEqualTo("sound");

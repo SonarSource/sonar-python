@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -105,6 +106,17 @@ public class SymbolUtils {
     @Override
     public void visitClassDef(ClassDef classDef) {
       addSymbol(classDef.name(), classDef.name().name());
+      Symbol symbol = classDef.name().symbol();
+      ClassSymbolImpl classSymbol;
+      if (symbol != null && Symbol.Kind.CLASS.equals(symbol.kind())) {
+        ClassSymbol classDefSymbol = (ClassSymbol) symbol;
+        classSymbol = new ClassSymbolImpl(classDef.name().name(), fullyQualifiedModuleName + "." + classDef.name().name());
+        classDefSymbol.parents().forEach(classSymbol::addParent);
+        classSymbol.setHasUnresolvedParents(classDefSymbol.hasUnresolvedParents());
+      } else {
+        classSymbol = new ClassSymbolImpl(classDef.name().name(), fullyQualifiedModuleName + "." + classDef.name().name());
+        classSymbol.setKind(Symbol.Kind.OTHER);
+      }
     }
 
     @Override

@@ -52,6 +52,7 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -108,6 +109,8 @@ public class PythonScanner {
         String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
         packageNames.put(inputFile, packageName);
         String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
+        SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, inputFile.filename());
+        symbolTableBuilder.visitFileInput(astRoot);
         globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
       } catch (Exception e) {
         LOG.debug("Unable to construct project-level symbol table for file: " + inputFile.toString());

@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -79,6 +80,8 @@ public class TestPythonVisitorRunner {
       FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
       String packageName = pythonPackageName(file, baseDir);
       String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+      SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile.fileName());
+      symbolTableBuilder.visitFileInput(astRoot);
       globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
     }
     return globalSymbols;
