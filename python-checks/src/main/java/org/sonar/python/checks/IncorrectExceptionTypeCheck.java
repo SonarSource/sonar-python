@@ -19,22 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.ClassDef;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.BuiltinSymbols;
 
@@ -74,40 +66,20 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
     if (BuiltinSymbols.EXCEPTIONS.contains(symbol.name()) || BuiltinSymbols.EXCEPTIONS_PYTHON2.contains(symbol.name())) {
       return true;
     }
-    List<Usage> bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).collect(Collectors.toList());
-    if (bindingUsages.size() > 1) {
-      return true;
-    }
-    if (bindingUsages.size() == 1) {
-      Usage usage = bindingUsages.get(0);
-      if (usage.kind().equals(Usage.Kind.IMPORT)) {
+    if (Symbol.Kind.CLASS.equals(symbol.kind())) {
+      // we know it's a class defined in the project
+      ClassSymbol classSymbol = (ClassSymbol) symbol;
+      if (classSymbol.hasUnresolvedParents()) {
         return true;
       }
-      if (usage.kind().equals(Usage.Kind.CLASS_DECLARATION)) {
-        return classInheritsFromBaseException((ClassDef) usage.tree().parent());
+      for (Symbol parent : classSymbol.parents()) {
+        if (inheritsFromBaseException(parent)) {
+          return true;
+        }
       }
-    }
-    // returns true in case of unknown symbol to avoid FP
-    return !BuiltinSymbols.all().contains(symbol.name());
-  }
-
-  private boolean classInheritsFromBaseException(ClassDef classDef) {
-    ArgList args = classDef.args();
-    if (args == null) {
       return false;
     }
-    return args.arguments().stream().anyMatch(this::argumentInheritsFromBaseException);
-  }
-
-  private boolean argumentInheritsFromBaseException(Argument argument) {
-    if (!argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-      // Need type inference to assess further
-      return true;
-    }
-    Expression expression = ((RegularArgument) argument).expression();
-    if (expression instanceof HasSymbol) {
-      return inheritsFromBaseException(((HasSymbol) expression).symbol());
-    }
-    return true;
+    // returns true in case of unknown symbol
+    return !BuiltinSymbols.all().contains(symbol.name());
   }
 }

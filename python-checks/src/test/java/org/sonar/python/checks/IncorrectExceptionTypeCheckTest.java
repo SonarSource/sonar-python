@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,5 +28,12 @@ public class IncorrectExceptionTypeCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/incorrectExceptionType.py", new IncorrectExceptionTypeCheck());
+  }
+
+  @Test
+  public void test_wildcard_import() {
+    PythonCheckVerifier.verify(
+      Arrays.asList("src/test/resources/checks/incorrectExceptionTypeWithWildcardImport.py","src/test/resources/checks/incorrectExceptionTypeImported.py" ),
+      new IncorrectExceptionTypeCheck());
   }
 }
