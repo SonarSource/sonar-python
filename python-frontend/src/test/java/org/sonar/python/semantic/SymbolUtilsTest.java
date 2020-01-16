@@ -81,9 +81,24 @@ public class SymbolUtilsTest {
       "  conditionally_defined = 2"
     );
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
-    // for the time being, accepting multiple symbols having the same name
-    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "fn", "conditionally_defined", "conditionally_defined");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "conditionally_defined");
     assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void function_symbols() {
+    FileInput tree = parse(
+      "def fn(): pass"
+    );
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
+    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.FUNCTION);
+
+    tree = parse(
+      "def fn(): pass",
+      "fn = 42"
+    );
+    globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
+    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.OTHER);
   }
 
   @Test

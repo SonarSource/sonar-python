@@ -21,6 +21,7 @@ package org.sonar.python.semantic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -86,6 +88,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private String fullyQualifiedModuleName;
   private List<String> filePath;
   private Map<String, Set<Symbol>> globalSymbolsByModuleName;
+  private Map<String, Symbol> globalSymbolsByFQN;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
 
@@ -93,6 +96,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     fullyQualifiedModuleName = null;
     filePath = null;
     globalSymbolsByModuleName = Collections.emptyMap();
+    globalSymbolsByFQN = Collections.emptyMap();
   }
 
   public SymbolTableBuilder(String packageName, String fileName) {
@@ -108,6 +112,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     filePath.add(moduleName);
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
     this.globalSymbolsByModuleName = globalSymbolsByModuleName;
+    this.globalSymbolsByFQN = globalSymbolsByModuleName.values()
+      .stream()
+      .flatMap(Collection::stream)
+      .filter(symbol -> symbol.fullyQualifiedName() != null)
+      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
   }
 
   @Override
@@ -271,10 +280,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (!dottedPrefix.isEmpty()) {
           fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
         }
-        if (module.alias() != null) {
-          addBindingUsage(module.alias(), Usage.Kind.IMPORT, fullyQualifiedName);
+        Name alias = module.alias();
+        if (fromModuleName != null) {
+          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByFQN);
         } else {
-          addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
+          currentScope().addModuleSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByModuleName);
         }
       });
     }

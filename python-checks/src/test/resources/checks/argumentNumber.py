@@ -1,3 +1,6 @@
+from argumentNumberImported import fn
+fn(1, 2) # OK, no project level information
+
 def functions():
 
     def foo(p1,p2): pass

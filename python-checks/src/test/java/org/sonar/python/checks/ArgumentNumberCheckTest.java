@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -29,4 +30,10 @@ public class ArgumentNumberCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentNumber.py", new ArgumentNumberCheck());
   }
 
+  @Test
+  public void test_multiple_files() {
+    PythonCheckVerifier.verify(
+      Arrays.asList("src/test/resources/checks/argumentNumberWithImport.py", "src/test/resources/checks/argumentNumberImported.py"),
+      new ArgumentNumberCheck());
+  }
 }

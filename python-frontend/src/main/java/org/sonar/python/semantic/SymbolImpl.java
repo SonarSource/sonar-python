@@ -93,4 +93,8 @@ public class SymbolImpl implements Symbol {
     Symbol symbol = childrenSymbolByName.get(childSymbolName);
     ((SymbolImpl) symbol).addUsage(name, kind);
   }
+
+  void addChildSymbol(Symbol symbol) {
+    childrenSymbolByName.put(symbol.name(), symbol);
+  }
 }

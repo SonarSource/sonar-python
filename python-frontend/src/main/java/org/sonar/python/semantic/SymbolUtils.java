@@ -24,8 +24,10 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -66,29 +68,43 @@ public class SymbolUtils {
   public static Set<Symbol> globalSymbols(FileInput fileInput, String fullyQualifiedModuleName) {
     GlobalSymbolsVisitor globalSymbolsVisitor = new GlobalSymbolsVisitor(fullyQualifiedModuleName);
     fileInput.accept(globalSymbolsVisitor);
-    return globalSymbolsVisitor.symbols;
+    return new HashSet<>(globalSymbolsVisitor.symbolsByName.values());
   }
 
   private static class GlobalSymbolsVisitor extends BaseTreeVisitor {
-    private Set<Symbol> symbols = new HashSet<>();
+    private Map<String, Symbol> symbolsByName = new HashMap<>();
     private String fullyQualifiedModuleName;
 
     GlobalSymbolsVisitor(String fullyQualifiedModuleName) {
       this.fullyQualifiedModuleName = fullyQualifiedModuleName;
     }
 
-    private Symbol symbol(Name name) {
+    private Symbol symbol(Tree tree) {
+      if (tree.is(Kind.FUNCDEF)) {
+        FunctionDef functionDef = (FunctionDef) tree;
+        return new FunctionSymbolImpl(functionDef, fullyQualifiedModuleName + "." + functionDef.name().name());
+      }
+      Name name = (Name) tree;
       return new SymbolImpl(name.name(), fullyQualifiedModuleName + "." + name.name());
+    }
+
+    private void addSymbol(Tree tree, String name) {
+      SymbolImpl symbol = (SymbolImpl) symbolsByName.get(name);
+      if (symbol != null) {
+        symbol.setKind(Symbol.Kind.OTHER);
+      } else {
+        symbolsByName.put(name, symbol(tree));
+      }
     }
 
     @Override
     public void visitFunctionDef(FunctionDef functionDef) {
-      symbols.add(symbol(functionDef.name()));
+      addSymbol(functionDef, functionDef.name().name());
     }
 
     @Override
     public void visitClassDef(ClassDef classDef) {
-      symbols.add(symbol(classDef.name()));
+      addSymbol(classDef.name(), classDef.name().name());
     }
 
     @Override
@@ -96,15 +112,15 @@ public class SymbolUtils {
       assignmentsLhs((assignmentStatement)).stream()
         .map(SymbolUtils::boundNamesFromExpression)
         .flatMap(Collection::stream)
-        .map(this::symbol)
-        .forEach(symbols::add);
+        .forEach(name -> addSymbol(name, name.name()));
       super.visitAssignmentStatement(assignmentStatement);
     }
 
     @Override
     public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
       if (annotatedAssignment.variable().is(Kind.NAME)) {
-        symbols.add(symbol(((Name) annotatedAssignment.variable())));
+        Name variable = (Name) annotatedAssignment.variable();
+        addSymbol(variable, variable.name());
       }
       super.visitAnnotatedAssignment(annotatedAssignment);
     }
