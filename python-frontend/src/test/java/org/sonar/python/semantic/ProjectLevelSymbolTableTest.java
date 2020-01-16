@@ -48,7 +48,9 @@ public class ProjectLevelSymbolTableTest {
 
   @Test
   public void wildcard_import() {
-    List<Symbol> modSymbols = Arrays.asList(new SymbolImpl("a", "mod.a"), new SymbolImpl("b", "mod.b"));
+    SymbolImpl exportedA = new SymbolImpl("a", "mod.a");
+    SymbolImpl exportedB = new SymbolImpl("b", "mod.b");
+    List<Symbol> modSymbols = Arrays.asList(exportedA, exportedB);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
@@ -57,10 +59,14 @@ public class ProjectLevelSymbolTableTest {
     );
     assertThat(tree.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
     Symbol a = getSymbolByName(tree).get("a");
+    assertThat(exportedA.usages()).isEmpty();
+    assertThat(a).isNotEqualTo(exportedA);
     assertThat(a.fullyQualifiedName()).isEqualTo("mod.a");
     assertThat(a.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.OTHER);
 
     Symbol b = getSymbolByName(tree).get("b");
+    assertThat(exportedB.usages()).isEmpty();
+    assertThat(b).isNotEqualTo(exportedB);
     assertThat(b.fullyQualifiedName()).isEqualTo("mod.b");
     assertThat(b.usages()).isEmpty();
   }

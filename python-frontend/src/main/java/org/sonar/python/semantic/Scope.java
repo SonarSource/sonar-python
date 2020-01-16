@@ -64,8 +64,9 @@ class Scope {
 
   void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols) {
     importedSymbols.forEach(symbol -> {
-      symbols.add(symbol);
-      symbolsByName.put(symbol.name(), symbol);
+      Symbol importedSymbol = copySymbol(symbol.name(), symbol);
+      symbols.add(importedSymbol);
+      symbolsByName.put(symbol.name(), importedSymbol);
     });
   }
 
