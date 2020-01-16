@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,17 +33,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -66,16 +72,18 @@ public class SymbolUtils {
   }
 
   public static Set<Symbol> globalSymbols(FileInput fileInput, String fullyQualifiedModuleName) {
-    GlobalSymbolsVisitor globalSymbolsVisitor = new GlobalSymbolsVisitor(fullyQualifiedModuleName);
-    fileInput.accept(globalSymbolsVisitor);
-    return new HashSet<>(globalSymbolsVisitor.symbolsByName.values());
+    GlobalSymbolsBindingVisitor globalSymbolsBindingVisitor = new GlobalSymbolsBindingVisitor(fullyQualifiedModuleName);
+    fileInput.accept(globalSymbolsBindingVisitor);
+    GlobalSymbolsReadVisitor globalSymbolsReadVisitor = new GlobalSymbolsReadVisitor(globalSymbolsBindingVisitor.symbolsByName);
+    fileInput.accept(globalSymbolsReadVisitor);
+    return new HashSet<>(globalSymbolsReadVisitor.symbolsByName.values());
   }
 
-  private static class GlobalSymbolsVisitor extends BaseTreeVisitor {
+  private static class GlobalSymbolsBindingVisitor extends BaseTreeVisitor {
     private Map<String, Symbol> symbolsByName = new HashMap<>();
     private String fullyQualifiedModuleName;
 
-    GlobalSymbolsVisitor(String fullyQualifiedModuleName) {
+    GlobalSymbolsBindingVisitor(String fullyQualifiedModuleName) {
       this.fullyQualifiedModuleName = fullyQualifiedModuleName;
     }
 
@@ -83,6 +91,9 @@ public class SymbolUtils {
       if (tree.is(Kind.FUNCDEF)) {
         FunctionDef functionDef = (FunctionDef) tree;
         return new FunctionSymbolImpl(functionDef, fullyQualifiedModuleName + "." + functionDef.name().name());
+      } else if (tree.is(Kind.CLASSDEF)) {
+        String className = ((ClassDef) tree).name().name();
+        return new ClassSymbolImpl(className, fullyQualifiedModuleName + "." + className);
       }
       Name name = (Name) tree;
       return new SymbolImpl(name.name(), fullyQualifiedModuleName + "." + name.name());
@@ -104,7 +115,7 @@ public class SymbolUtils {
 
     @Override
     public void visitClassDef(ClassDef classDef) {
-      addSymbol(classDef.name(), classDef.name().name());
+      addSymbol(classDef, classDef.name().name());
     }
 
     @Override
@@ -123,6 +134,59 @@ public class SymbolUtils {
         addSymbol(variable, variable.name());
       }
       super.visitAnnotatedAssignment(annotatedAssignment);
+    }
+  }
+
+  private static class GlobalSymbolsReadVisitor extends BaseTreeVisitor {
+    private Map<String, Symbol> symbolsByName;
+
+    GlobalSymbolsReadVisitor(Map<String, Symbol> symbolsByName) {
+      this.symbolsByName = symbolsByName;
+    }
+
+    @Override
+    public void visitClassDef(ClassDef classDef) {
+      resolveParents(classDef, symbolsByName.get(classDef.name().name()), symbolsByName);
+    }
+  }
+
+  static void resolveParents(ClassDef classDef, @Nullable Symbol symbol) {
+    resolveParents(classDef, symbol, Collections.emptyMap());
+  }
+
+  private static void resolveParents(ClassDef classDef, @Nullable Symbol symbol, Map<String, Symbol> symbolsByName) {
+    if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
+      return;
+    }
+    ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+    ArgList argList = classDef.args();
+    classSymbol.setHasUnresolvedParents(false);
+    if (argList == null) {
+      return;
+    }
+    for (Argument argument : argList.arguments()) {
+      if (!argument.is(Kind.REGULAR_ARGUMENT) || !(((RegularArgument) argument).expression() instanceof HasSymbol)) {
+        classSymbol.setHasUnresolvedParents(true);
+        return;
+      }
+      Expression expression = ((RegularArgument) argument).expression();
+      Symbol parentSymbol = ((HasSymbol) expression).symbol();
+      if (parentSymbol == null && expression.is(Kind.NAME)) {
+        parentSymbol = symbolsByName.get(((Name) expression).name());
+      }
+      if (parentSymbol == null) {
+        classSymbol.setHasUnresolvedParents(true);
+        return;
+      }
+      if (BuiltinSymbols.all().contains(parentSymbol.fullyQualifiedName())) {
+        classSymbol.addParent(parentSymbol);
+        continue;
+      }
+      if (!Symbol.Kind.CLASS.equals(parentSymbol.kind())) {
+        classSymbol.setHasUnresolvedParents(true);
+        return;
+      }
+      classSymbol.addParent(parentSymbol);
     }
   }
 
