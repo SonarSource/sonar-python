@@ -50,14 +50,15 @@ public class ProjectLevelSymbolTableTest {
   public void wildcard_import() {
     SymbolImpl exportedA = new SymbolImpl("a", "mod.a");
     SymbolImpl exportedB = new SymbolImpl("b", "mod.b");
-    List<Symbol> modSymbols = Arrays.asList(exportedA, exportedB);
+    SymbolImpl exportedC = new ClassSymbolImpl("C", "mod.C");
+    List<Symbol> modSymbols = Arrays.asList(exportedA, exportedB, exportedC);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
       "from mod import *",
       "print(a)"
     );
-    assertThat(tree.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
+    assertThat(tree.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b", "C");
     Symbol a = getSymbolByName(tree).get("a");
     assertThat(exportedA.usages()).isEmpty();
     assertThat(a).isNotEqualTo(exportedA);
@@ -69,6 +70,12 @@ public class ProjectLevelSymbolTableTest {
     assertThat(b).isNotEqualTo(exportedB);
     assertThat(b.fullyQualifiedName()).isEqualTo("mod.b");
     assertThat(b.usages()).isEmpty();
+
+    Symbol c = getSymbolByName(tree).get("C");
+    assertThat(exportedC.usages()).isEmpty();
+    assertThat(c).isNotEqualTo(exportedC);
+    assertThat(c.fullyQualifiedName()).isEqualTo("mod.C");
+    assertThat(c.usages()).isEmpty();
   }
 
   @Test
