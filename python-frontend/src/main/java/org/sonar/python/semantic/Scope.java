@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -94,9 +95,15 @@ class Scope {
   }
 
   private static Symbol copySymbol(String symbolName, Symbol symbol) {
-    return symbol.kind() == Symbol.Kind.FUNCTION
-      ? new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol)
-      : new SymbolImpl(symbolName, symbol.fullyQualifiedName());
+    if (symbol.kind() == Symbol.Kind.FUNCTION) {
+      return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
+    } else if (symbol.kind() == Symbol.Kind.CLASS) {
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, symbol.fullyQualifiedName());
+      ((ClassSymbol) symbol).parents().forEach(classSymbol::addParent);
+      classSymbol.setHasUnresolvedParents(((ClassSymbol) symbol).hasUnresolvedParents());
+      return classSymbol;
+    }
+    return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
   }
 
   void addModuleSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
