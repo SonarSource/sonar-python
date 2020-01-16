@@ -52,6 +52,11 @@ public final class PythonTestUtils {
     return tree;
   }
 
+  public static FileInput parseWithoutSymbols(String... lines) {
+    String code = String.join(System.getProperty("line.separator"), lines);
+    return pythonTreeMaker.fileInput(p.parse(code));
+  }
+
 
   @CheckForNull
   public static <T extends Tree> T getFirstChild(Tree tree, Predicate<Tree> predicate) {

@@ -19,21 +19,25 @@
  */
 package org.sonar.python.semantic;
 
+import com.google.common.base.Functions;
 import java.io.File;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class SymbolUtilsTest {
 
   @Test
   public void global_symbols() {
-    FileInput tree = parse(
+    FileInput tree = parseWithoutSymbols(
       "obj1 = 42",
       "obj2: int = 42",
       "def fn(): pass",
@@ -48,7 +52,7 @@ public class SymbolUtilsTest {
   @Test
   public void global_symbols_private_by_convention() {
     // although being private by convention, it's considered as exported
-    FileInput tree = parse(
+    FileInput tree = parseWithoutSymbols(
       "def _private_fn(): pass"
     );
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
@@ -58,7 +62,7 @@ public class SymbolUtilsTest {
 
   @Test
   public void local_symbols_not_exported() {
-    FileInput tree = parse(
+    FileInput tree = parseWithoutSymbols(
       "def fn():",
       "  def inner(): pass",
       "  class Inner_class: pass",
@@ -72,7 +76,7 @@ public class SymbolUtilsTest {
 
   @Test
   public void redefined_symbols() {
-    FileInput tree = parse(
+    FileInput tree = parseWithoutSymbols(
       "def fn(): pass",
       "def fn(): ...",
       "if True:",
@@ -87,13 +91,13 @@ public class SymbolUtilsTest {
 
   @Test
   public void function_symbols() {
-    FileInput tree = parse(
+    FileInput tree = parseWithoutSymbols(
       "def fn(): pass"
     );
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod");
     assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.FUNCTION);
 
-    tree = parse(
+    tree = parseWithoutSymbols(
       "def fn(): pass",
       "fn = 42"
     );
@@ -103,26 +107,77 @@ public class SymbolUtilsTest {
 
   @Test
   public void redefined_class_symbol() {
-    FileInput fileInput = parse(
+    FileInput fileInput = parseWithoutSymbols(
       "C = \"hello\"",
       "class C: ",
       "  pass");
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
-    // for the time being, accepting multiple symbols having the same name
-    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C", "C");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
     assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
   }
 
   @Test
   public void classdef_with_missing_symbol() {
-    FileInput fileInput = parse(
+    FileInput fileInput = parseWithoutSymbols(
       "global C",
       "class C: ",
       "  pass");
     //TODO: When global variables are present, class definitions do not have a symbol associated with them
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
-    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isTrue());
+  }
+
+  @Test
+  public void class_symbol() {
+    FileInput fileInput = parseWithoutSymbols(
+      "class C: ",
+      "  pass");
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    assertThat(globalSymbols).hasSize(1);
+    Symbol cSymbol = globalSymbols.iterator().next();
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).parents()).isEmpty();
+
+    fileInput = parseWithoutSymbols(
+      "class A: pass",
+      "class C(A): ",
+      "  pass");
+    globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    Map<String, Symbol> symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    cSymbol = symbols.get("C");
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).parents()).hasSize(1);
+
+    // for the time being, we only consider symbols defined in the global scope
+    fileInput = parseWithoutSymbols(
+      "class A:",
+      "  class A1: pass",
+      "class C(A.A1): ",
+      "  pass");
+    globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    cSymbol = symbols.get("C");
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).parents()).isEmpty();
+  }
+
+  @Test
+  public void class_inheriting_from_imported_symbol() {
+    FileInput fileInput = parseWithoutSymbols(
+      "from mod import A",
+      "class C(A): ",
+      "  pass");
+
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod");
+    Map<String, Symbol> symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    Symbol cSymbol = symbols.get("C");
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).parents()).hasSize(0);
   }
 
   @Test
