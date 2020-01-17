@@ -1,6 +1,7 @@
 from module import usage
 from mod2 import pb
 from mod2 import ImportedError
+import external
 
 class SomeClass:
   pass
@@ -90,6 +91,8 @@ class Clazz(object):
   def raise_from_method_call(self):
     raise self.get_some_error()
 
+def raise_from_external_import_with_same_name_as_builtin():
+  raise external.next() # OK
 
 smth = SomeClass, AnotherClass
 class SomeUnpacked(*smth):
