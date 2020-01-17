@@ -26,7 +26,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -147,47 +146,47 @@ public class SymbolUtils {
 
     @Override
     public void visitClassDef(ClassDef classDef) {
-      resolveParents(classDef, symbolsByName.get(classDef.name().name()), symbolsByName);
+      resolveTypeHierarchy(classDef, symbolsByName.get(classDef.name().name()), symbolsByName);
     }
   }
 
-  static void resolveParents(ClassDef classDef, @Nullable Symbol symbol) {
-    resolveParents(classDef, symbol, Collections.emptyMap());
+  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol) {
+    resolveTypeHierarchy(classDef, symbol, Collections.emptyMap());
   }
 
-  private static void resolveParents(ClassDef classDef, @Nullable Symbol symbol, Map<String, Symbol> symbolsByName) {
+  private static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, Map<String, Symbol> symbolsByName) {
     if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
     ArgList argList = classDef.args();
-    classSymbol.setHasUnresolvedParents(false);
+    classSymbol.setHasUnresolvedTypeHierarchy(false);
     if (argList == null) {
       return;
     }
     for (Argument argument : argList.arguments()) {
       if (!argument.is(Kind.REGULAR_ARGUMENT) || !(((RegularArgument) argument).expression() instanceof HasSymbol)) {
-        classSymbol.setHasUnresolvedParents(true);
+        classSymbol.setHasUnresolvedTypeHierarchy(true);
         return;
       }
       Expression expression = ((RegularArgument) argument).expression();
-      Symbol parentSymbol = ((HasSymbol) expression).symbol();
-      if (parentSymbol == null && expression.is(Kind.NAME)) {
-        parentSymbol = symbolsByName.get(((Name) expression).name());
+      Symbol argumentSymbol = ((HasSymbol) expression).symbol();
+      if (argumentSymbol == null && expression.is(Kind.NAME)) {
+        argumentSymbol = symbolsByName.get(((Name) expression).name());
       }
-      if (parentSymbol == null) {
-        classSymbol.setHasUnresolvedParents(true);
+      if (argumentSymbol == null) {
+        classSymbol.setHasUnresolvedTypeHierarchy(true);
         return;
       }
-      if (BuiltinSymbols.all().contains(parentSymbol.fullyQualifiedName())) {
-        classSymbol.addParent(parentSymbol);
+      if (BuiltinSymbols.all().contains(argumentSymbol.fullyQualifiedName())) {
+        classSymbol.addSuperClass(argumentSymbol);
         continue;
       }
-      if (!Symbol.Kind.CLASS.equals(parentSymbol.kind())) {
-        classSymbol.setHasUnresolvedParents(true);
+      if (!Symbol.Kind.CLASS.equals(argumentSymbol.kind())) {
+        classSymbol.setHasUnresolvedTypeHierarchy(true);
         return;
       }
-      classSymbol.addParent(parentSymbol);
+      classSymbol.addSuperClass(argumentSymbol);
     }
   }
 

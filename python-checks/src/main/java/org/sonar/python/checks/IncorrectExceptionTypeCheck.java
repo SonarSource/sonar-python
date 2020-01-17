@@ -69,10 +69,10 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
     if (Symbol.Kind.CLASS.equals(symbol.kind())) {
       // we know it's a class defined in the project
       ClassSymbol classSymbol = (ClassSymbol) symbol;
-      if (classSymbol.hasUnresolvedParents()) {
+      if (classSymbol.hasUnresolvedTypeHierarchy()) {
         return true;
       }
-      for (Symbol parent : classSymbol.parents()) {
+      for (Symbol parent : classSymbol.superClasses()) {
         if (inheritsFromBaseException(parent)) {
           return true;
         }

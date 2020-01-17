@@ -29,8 +29,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
-  private List<Symbol> parents = new ArrayList<>();
-  private boolean hasUnresolvedParents = true;
+  private List<Symbol> superClasses = new ArrayList<>();
+  private boolean hasUnresolvedTypeHierarchy = true;
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
     super(name, fullyQualifiedName);
@@ -38,20 +38,20 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   @Override
-  public List<Symbol> parents() {
-    return Collections.unmodifiableList(parents);
+  public List<Symbol> superClasses() {
+    return Collections.unmodifiableList(superClasses);
   }
 
-  public void addParent(Symbol symbol) {
-    this.parents.add(symbol);
+  public void addSuperClass(Symbol symbol) {
+    this.superClasses.add(symbol);
   }
 
   @Override
-  public boolean hasUnresolvedParents() {
-    return hasUnresolvedParents;
+  public boolean hasUnresolvedTypeHierarchy() {
+    return hasUnresolvedTypeHierarchy;
   }
 
-  public void setHasUnresolvedParents(boolean hasUnresolvedParents) {
-    this.hasUnresolvedParents = hasUnresolvedParents;
+  public void setHasUnresolvedTypeHierarchy(boolean hasUnresolvedTypeHierarchy) {
+    this.hasUnresolvedTypeHierarchy = hasUnresolvedTypeHierarchy;
   }
 }

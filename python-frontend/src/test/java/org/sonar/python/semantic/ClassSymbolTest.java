@@ -41,8 +41,8 @@ public class ClassSymbolTest {
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
 
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(0);
-    assertThat(classSymbol.hasUnresolvedParents()).isFalse();
+    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
   }
 
   @Test
@@ -59,8 +59,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(1);
-    assertThat(classSymbol.parents()).containsExactlyInAnyOrder(parentSymbol);
+    assertThat(classSymbol.superClasses()).hasSize(1);
+    assertThat(classSymbol.superClasses()).containsExactlyInAnyOrder(parentSymbol);
 
     assertThat(fileInput.globalVariables()).hasSize(2);
     assertThat(fileInput.globalVariables()).containsExactlyInAnyOrder(symbol, parentSymbol);
@@ -84,8 +84,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(2);
-    assertThat(classSymbol.parents()).containsExactlyInAnyOrder(parentSymbol, parentSymbol2);
+    assertThat(classSymbol.superClasses()).hasSize(2);
+    assertThat(classSymbol.superClasses()).containsExactlyInAnyOrder(parentSymbol, parentSymbol2);
 
     assertThat(fileInput.globalVariables()).hasSize(3);
     assertThat(fileInput.globalVariables()).containsExactlyInAnyOrder(symbol, parentSymbol, parentSymbol2);
@@ -101,8 +101,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(0);
-    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test
@@ -117,8 +117,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(2);
-    assertThat(classSymbol.hasUnresolvedParents()).isFalse();
+    assertThat(classSymbol.superClasses()).hasSize(2);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
   }
 
   @Test
@@ -133,8 +133,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(2);
-    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+    assertThat(classSymbol.superClasses()).hasSize(2);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test
@@ -173,8 +173,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(0);
-    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test
@@ -190,8 +190,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(0);
-    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test
@@ -205,8 +205,8 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.parents()).hasSize(0);
-    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+    assertThat(classSymbol.superClasses()).hasSize(0);
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test
@@ -222,7 +222,7 @@ public class ClassSymbolTest {
     assertThat(symbol instanceof ClassSymbol).isTrue();
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    assertThat(classSymbol.hasUnresolvedParents()).isTrue();
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test

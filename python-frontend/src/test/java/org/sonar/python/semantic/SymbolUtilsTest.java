@@ -138,7 +138,7 @@ public class SymbolUtilsTest {
     Symbol cSymbol = globalSymbols.iterator().next();
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    assertThat(((ClassSymbol) cSymbol).parents()).isEmpty();
+    assertThat(((ClassSymbol) cSymbol).superClasses()).isEmpty();
 
     fileInput = parseWithoutSymbols(
       "class A: pass",
@@ -149,7 +149,7 @@ public class SymbolUtilsTest {
     cSymbol = symbols.get("C");
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    assertThat(((ClassSymbol) cSymbol).parents()).hasSize(1);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
 
     // for the time being, we only consider symbols defined in the global scope
     fileInput = parseWithoutSymbols(
@@ -162,7 +162,7 @@ public class SymbolUtilsTest {
     cSymbol = symbols.get("C");
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    assertThat(((ClassSymbol) cSymbol).parents()).isEmpty();
+    assertThat(((ClassSymbol) cSymbol).superClasses()).isEmpty();
   }
 
   @Test
@@ -177,7 +177,7 @@ public class SymbolUtilsTest {
     Symbol cSymbol = symbols.get("C");
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    assertThat(((ClassSymbol) cSymbol).parents()).hasSize(0);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(0);
   }
 
   @Test

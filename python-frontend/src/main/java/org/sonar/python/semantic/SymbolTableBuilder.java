@@ -79,7 +79,7 @@ import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
-import static org.sonar.python.semantic.SymbolUtils.resolveParents;
+import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
@@ -504,7 +504,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scan(pyClassDefTree.decorators());
       scan(pyClassDefTree.name());
       scan(pyClassDefTree.body());
-      resolveParents(pyClassDefTree, pyClassDefTree.name().symbol());
+      resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol());
       leaveScope();
     }
 

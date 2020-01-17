@@ -99,8 +99,8 @@ class Scope {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
     } else if (symbol.kind() == Symbol.Kind.CLASS) {
       ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, symbol.fullyQualifiedName());
-      ((ClassSymbol) symbol).parents().forEach(classSymbol::addParent);
-      classSymbol.setHasUnresolvedParents(((ClassSymbol) symbol).hasUnresolvedParents());
+      ((ClassSymbol) symbol).superClasses().forEach(classSymbol::addSuperClass);
+      classSymbol.setHasUnresolvedTypeHierarchy(((ClassSymbol) symbol).hasUnresolvedTypeHierarchy());
       return classSymbol;
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
