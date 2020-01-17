@@ -22,7 +22,7 @@ package org.sonar.plugins.python.api.symbols;
 import java.util.List;
 
 public interface ClassSymbol extends Symbol {
-  List<Symbol> parents();
+  List<Symbol> superClasses();
 
-  boolean hasUnresolvedParents();
+  boolean hasUnresolvedTypeHierarchy();
 }
