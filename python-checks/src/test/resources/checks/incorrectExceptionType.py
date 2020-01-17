@@ -42,13 +42,15 @@ def raise_builtin_exception_type_python2():
   raise StandardError() # OK
 
 def raise_builtin_constant():
-  raise NotImplemented # Noncompliant
+  raise NotImplemented # Noncompliant {{Change this code so that it raises an object deriving from BaseException.}}
+# ^^^^^^^^^^^^^^^^^^^^
 
 def raise_builtin_function():
   raise object() # Noncompliant
 
 def raise_builtin_function_python2():
-  raise super2() # Noncompliant
+  raise super2() # Noncompliant {{Change this code so that it raises an object deriving from BaseException.}}
+# ^^^^^^^^^^^^^^
 
 def raise_BaseException_type():
   raise SomeError() # OK

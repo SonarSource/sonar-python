@@ -36,4 +36,12 @@ public class IncorrectExceptionTypeCheckTest {
       Arrays.asList("src/test/resources/checks/incorrectExceptionTypeWithWildcardImport.py","src/test/resources/checks/incorrectExceptionTypeImported.py" ),
       new IncorrectExceptionTypeCheck());
   }
+
+  @Test
+  public void test_regular_import() {
+    PythonCheckVerifier.verify(
+      Arrays.asList("src/test/resources/checks/incorrectExceptionTypeWithRegularImport.py","src/test/resources/checks/incorrectExceptionTypeImported2.py",
+        "src/test/resources/checks/incorrectExceptionTypeImported3.py", "src/test/resources/checks/incorrectExceptionTypeImported4.py"),
+      new IncorrectExceptionTypeCheck());
+  }
 }

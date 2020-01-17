@@ -18,5 +18,8 @@ def raise_enclosing_class():
 def raise_a_nested_class_derived_from_BaseException():
   raise Enclosing.Nested() # OK
 
+def raise_a_nested_non_exception_class():
+  raise Enclosing.Nested2() # FN as only top-level imported symbols are considered
+
 def raise_a_nested_class_derived_from_python2_Exception():
   raise DerivedFromPython2Exception() # OK
