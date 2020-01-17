@@ -80,6 +80,6 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       return false;
     }
     // returns true in case of unknown symbol
-    return !BuiltinSymbols.all().contains(symbol.name());
+    return !BuiltinSymbols.all().contains(symbol.fullyQualifiedName());
   }
 }
