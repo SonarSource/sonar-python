@@ -63,7 +63,7 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       // S3827 will raise the issue in this case
       return true;
     }
-    if (BuiltinSymbols.EXCEPTIONS.contains(symbol.name()) || BuiltinSymbols.EXCEPTIONS_PYTHON2.contains(symbol.name())) {
+    if (BuiltinSymbols.EXCEPTIONS.contains(symbol.fullyQualifiedName()) || BuiltinSymbols.EXCEPTIONS_PYTHON2.contains(symbol.fullyQualifiedName())) {
       return true;
     }
     if (Symbol.Kind.CLASS.equals(symbol.kind())) {

@@ -74,9 +74,10 @@ public class SymbolUtils {
   public static Set<Symbol> globalSymbols(FileInput fileInput, String fullyQualifiedModuleName) {
     GlobalSymbolsBindingVisitor globalSymbolsBindingVisitor = new GlobalSymbolsBindingVisitor(fullyQualifiedModuleName);
     fileInput.accept(globalSymbolsBindingVisitor);
+    BuiltinSymbols.all().forEach(b -> globalSymbolsBindingVisitor.symbolsByName.putIfAbsent(b, new SymbolImpl(b, b)));
     GlobalSymbolsReadVisitor globalSymbolsReadVisitor = new GlobalSymbolsReadVisitor(globalSymbolsBindingVisitor.symbolsByName);
     fileInput.accept(globalSymbolsReadVisitor);
-    return new HashSet<>(globalSymbolsReadVisitor.symbolsByName.values());
+    return globalSymbolsReadVisitor.symbolsByName.values().stream().filter(v -> !BuiltinSymbols.all().contains(v.fullyQualifiedName())).collect(Collectors.toSet());
   }
 
   private static class GlobalSymbolsBindingVisitor extends BaseTreeVisitor {

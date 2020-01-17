@@ -17,6 +17,8 @@ class Enclosing():
     print("Hello")
   class Nested(BaseException):
     pass
+  class Nested2():
+    pass
 
 class DerivedFromPython2Exception(StandardError):
   pass
