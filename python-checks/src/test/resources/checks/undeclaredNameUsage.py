@@ -200,3 +200,10 @@ class A:
     _ATTR = 42
     @decorator(_ATTR)  # OK
     class Foo: pass
+
+def foo(param):
+    return 42
+
+print(f'{foo(param=3)}')  # OK, param is a keyword argument
+
+print(f'{foo(param)}')  # Noncompliant

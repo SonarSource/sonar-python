@@ -1303,6 +1303,7 @@ public class PythonTreeMaker {
     while (matcher.find()) {
       AstNode parse = parser.parse(matcher.group(2));
       Expression exp = expression(parse);
+      setParents(exp);
       int start = matcher.start(2);
       updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, start);
       res.add(exp);
