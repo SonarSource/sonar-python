@@ -22,6 +22,7 @@ package org.sonar.python;
 import com.sonar.sslr.api.AstNode;
 import org.junit.Test;
 import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
@@ -43,6 +44,7 @@ public class IssueLocationTest {
     assertThat(issueLocation.endLine()).isEqualTo(IssueLocation.UNDEFINED_LINE);
     assertThat(issueLocation.startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
     assertThat(issueLocation.endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
+    assertThat(issueLocation.fileId()).isNull();
   }
 
   @Test
@@ -53,6 +55,18 @@ public class IssueLocationTest {
     assertThat(issueLocation.endLine()).isEqualTo(42);
     assertThat(issueLocation.startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
     assertThat(issueLocation.endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
+    assertThat(issueLocation.fileId()).isNull();
+  }
+
+  @Test
+  public void precise_issue_location() {
+    LocationInFile locationInFile = new LocationInFile("foo.py", 1, 1, 1, 10);
+    IssueLocation issueLocation = IssueLocation.preciseLocation(locationInFile, "foo");
+    assertThat(issueLocation.fileId()).isEqualTo("foo.py");
+    assertThat(issueLocation.startLine()).isEqualTo(1);
+    assertThat(issueLocation.startLineOffset()).isEqualTo(1);
+    assertThat(issueLocation.endLine()).isEqualTo(1);
+    assertThat(issueLocation.endLineOffset()).isEqualTo(10);
   }
 
   @Test
@@ -66,5 +80,6 @@ public class IssueLocationTest {
     assertThat(issueLocation.endLine()).isEqualTo(3);
     assertThat(issueLocation.startLineOffset()).isEqualTo(4);
     assertThat(issueLocation.endLineOffset()).isEqualTo(11);
+    assertThat(issueLocation.fileId()).isNull();
   }
 }

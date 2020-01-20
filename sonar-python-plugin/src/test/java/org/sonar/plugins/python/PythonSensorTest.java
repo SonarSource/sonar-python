@@ -251,6 +251,27 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void cross_files_secondary_locations() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    InputFile mainFile = inputFile("main.py");
+    InputFile modFile = inputFile("mod.py");
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.flows()).hasSize(1);
+    Issue.Flow flow = issue.flows().get(0);
+    assertThat(flow.locations()).hasSize(2);
+    assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile);
+    assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile);
+  }
+
+  @Test
   public void test_exception_does_not_fail_analysis() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()

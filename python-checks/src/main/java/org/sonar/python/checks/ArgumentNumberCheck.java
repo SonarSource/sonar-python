@@ -37,6 +37,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
+  private static final String FUNCTION_DEFINITION = "Function definition.";
+
   private static String message(String functionName, long minRequiredPositionalArguments, int nArguments, long nPositionalParamWithDefaultValue) {
     String message = "";
     if (minRequiredPositionalArguments > nArguments) {
@@ -64,16 +66,18 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
           .filter(parameterName -> !parameterName.isKeywordOnly() && !parameterName.hasDefaultValue()).count();
         if (nArguments < minRequiredPositionalArguments || nArguments > functionSymbol.parameters().size()) {
           ctx.addIssue(callExpression.callee(),
-            message(functionSymbol.name(), minRequiredPositionalArguments, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments));
+            message(functionSymbol.name(), minRequiredPositionalArguments, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments))
+          .secondary(functionSymbol.definitionLocation(), FUNCTION_DEFINITION);
         }
 
-        checkKeywordArguments(ctx, callExpression, functionSymbol.parameters(), callExpression.callee());
+        checkKeywordArguments(ctx, callExpression, functionSymbol, callExpression.callee());
       }
 
     });
   }
 
-  private static void checkKeywordArguments(SubscriptionContext ctx, CallExpression callExpression, List<FunctionSymbol.Parameter> parameters, Expression callee) {
+  private static void checkKeywordArguments(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol, Expression callee) {
+    List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();
     Set<String> mandatoryParamNamesKeywordOnly = parameters.stream()
       .filter(parameterName -> parameterName.isKeywordOnly() && !parameterName.hasDefaultValue())
       .map(FunctionSymbol.Parameter::name).collect(Collectors.toSet());
@@ -83,7 +87,8 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       Name keyword = arg.keywordArgument();
       if (keyword != null) {
         if (parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()))) {
-          ctx.addIssue(argument, "Remove this unexpected named argument '" + keyword.name() +  "'.");
+          ctx.addIssue(argument, "Remove this unexpected named argument '" + keyword.name() +  "'.")
+            .secondary(functionSymbol.definitionLocation(), FUNCTION_DEFINITION);
         } else {
           mandatoryParamNamesKeywordOnly.remove(keyword.name());
         }
@@ -94,7 +99,8 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       for (String param : mandatoryParamNamesKeywordOnly) {
         message.append("'").append(param).append("' ");
       }
-      ctx.addIssue(callee, message.toString().trim());
+      ctx.addIssue(callee, message.toString().trim())
+        .secondary(functionSymbol.definitionLocation(), FUNCTION_DEFINITION);
     }
   }
 }

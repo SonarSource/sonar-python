@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -39,6 +40,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 class Scope {
 
   final Tree rootTree;
+  private PythonFile pythonFile;
   private final Scope parent;
   private final Map<String, Symbol> symbolsByName = new HashMap<>();
   private final Set<Symbol> symbols = new HashSet<>();
@@ -47,9 +49,10 @@ class Scope {
   private final Set<String> nonlocalNames = new HashSet<>();
   final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
 
-  Scope(@Nullable Scope parent, Tree rootTree) {
+  Scope(@Nullable Scope parent, Tree rootTree, PythonFile pythonFile) {
     this.parent = parent;
     this.rootTree = rootTree;
+    this.pythonFile = pythonFile;
   }
 
   Set<Symbol> symbols() {
@@ -87,7 +90,7 @@ class Scope {
     if (isExistingSymbol(symbolName)) {
       addBindingUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
     } else {
-      FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, fullyQualifiedName);
+      FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, fullyQualifiedName, pythonFile);
       symbols.add(functionSymbol);
       symbolsByName.put(symbolName, functionSymbol);
       functionSymbol.addUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION);

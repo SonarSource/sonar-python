@@ -57,6 +57,10 @@ public abstract class IssueLocation {
     return new PreciseIssueLocation(from, to, message);
   }
 
+  public static IssueLocation preciseLocation(LocationInFile locationInFile, @Nullable String message) {
+    return new PreciseIssueLocation(locationInFile, message);
+  }
+
   @CheckForNull
   public String message() {
     return message;
@@ -70,41 +74,63 @@ public abstract class IssueLocation {
 
   public abstract int endLineOffset();
 
-  private static class PreciseIssueLocation extends IssueLocation {
+  @CheckForNull
+  public abstract String fileId();
 
-    private final Token firstToken;
-    private final TokenLocation lastTokenLocation;
+  private static class PreciseIssueLocation extends IssueLocation {
+    @CheckForNull
+    private final String fileId;
+    private final int startLine;
+    private final int startLineOffset;
+    private final int endLine;
+    private final int endLineOffset;
 
     public PreciseIssueLocation(Token firstToken, Token lastToken, @Nullable String message) {
       super(message);
-      this.firstToken = firstToken;
-      this.lastTokenLocation = new TokenLocation(lastToken);
+      startLine = firstToken.line();
+      startLineOffset = firstToken.column();
+      TokenLocation tokenLocation = new TokenLocation(lastToken);
+      endLine = tokenLocation.endLine();
+      endLineOffset = tokenLocation.endLineOffset();
+      fileId = null;
     }
 
     public PreciseIssueLocation(Token token, @Nullable String message) {
+      this(token, token, message);
+    }
+
+    public PreciseIssueLocation(LocationInFile locationInFile, @Nullable String message) {
       super(message);
-      this.firstToken = token;
-      this.lastTokenLocation = new TokenLocation(token);
+      startLine = locationInFile.startLine();
+      startLineOffset = locationInFile.startLineOffset();
+      endLine = locationInFile.endLine();
+      endLineOffset = locationInFile.endLineOffset();
+      fileId = locationInFile.fileId();
     }
 
     @Override
     public int startLine() {
-      return firstToken.line();
+      return startLine;
     }
 
     @Override
     public int startLineOffset() {
-      return firstToken.column();
+      return startLineOffset;
     }
 
     @Override
     public int endLine() {
-      return lastTokenLocation.endLine();
+      return endLine;
     }
 
     @Override
     public int endLineOffset() {
-      return lastTokenLocation.endLineOffset();
+      return endLineOffset;
+    }
+
+    @Override
+    public String fileId() {
+      return fileId;
     }
 
   }
@@ -138,6 +164,11 @@ public abstract class IssueLocation {
       return UNDEFINED_OFFSET;
     }
 
+    @Override
+    public String fileId() {
+      return null;
+    }
+
   }
 
   private static class FileLevelIssueLocation extends IssueLocation {
@@ -164,6 +195,11 @@ public abstract class IssueLocation {
     @Override
     public int endLineOffset() {
       return UNDEFINED_OFFSET;
+    }
+
+    @Override
+    public String fileId() {
+      return null;
     }
 
   }

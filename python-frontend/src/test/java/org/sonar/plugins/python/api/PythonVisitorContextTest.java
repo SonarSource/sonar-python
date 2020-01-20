@@ -37,13 +37,14 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 
 public class PythonVisitorContextTest {
   @Test
   public void fullyQualifiedModuleName() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
-    PythonFile pythonFile = Mockito.mock(PythonFile.class, "my_module.py");
-    Mockito.when(pythonFile.fileName()).thenReturn("my_module.py");
+
+    PythonFile pythonFile = pythonFile("my_module.py");
     new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
@@ -62,8 +63,7 @@ public class PythonVisitorContextTest {
   @Test
   public void initModuleFullyQualifiedName() {
     FileInput fileInput = PythonTestUtils.parse("def fn(): pass");
-    PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
-    Mockito.when(pythonFile.fileName()).thenReturn("__init__.py");
+    PythonFile pythonFile = pythonFile("__init__.py");
     new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.fn");

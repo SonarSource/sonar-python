@@ -17,27 +17,40 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.symbols;
+package org.sonar.plugins.python.api;
 
-import java.util.List;
-import javax.annotation.CheckForNull;
-import org.sonar.plugins.python.api.LocationInFile;
+public class LocationInFile {
+  private final String fileId;
+  private final int startLine;
+  private final int startLineOffset;
+  private final int endLine;
+  private final int endLineOffset;
 
-public interface FunctionSymbol extends Symbol {
-  List<Parameter> parameters();
+  public LocationInFile(String fileId, int startLine, int startLineOffset, int endLine, int endLineOffset) {
+    this.fileId = fileId;
+    this.startLine = startLine;
+    this.startLineOffset = startLineOffset;
+    this.endLine = endLine;
+    this.endLineOffset = endLineOffset;
+  }
 
-  boolean hasVariadicParameter();
+  public String fileId() {
+    return fileId;
+  }
 
-  boolean isInstanceMethod();
+  public int startLine() {
+    return startLine;
+  }
 
-  boolean hasDecorators();
+  public int startLineOffset() {
+    return startLineOffset;
+  }
 
-  LocationInFile definitionLocation();
+  public int endLine() {
+    return endLine;
+  }
 
-  interface Parameter {
-    @CheckForNull
-    String name();
-    boolean hasDefaultValue();
-    boolean isKeywordOnly();
+  public int endLineOffset() {
+    return endLineOffset;
   }
 }

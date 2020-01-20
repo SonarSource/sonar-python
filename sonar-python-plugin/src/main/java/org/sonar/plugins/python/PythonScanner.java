@@ -21,11 +21,15 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
+import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -108,7 +112,8 @@ public class PythonScanner {
         String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
         packageNames.put(inputFile, packageName);
         String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
-        globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName));
+        PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+        globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName, pythonFile));
       } catch (Exception e) {
         LOG.debug("Unable to construct project-level symbol table for file: " + inputFile.toString());
         LOG.debug(e.getMessage());
@@ -164,14 +169,39 @@ public class PythonScanner {
         newIssue.gap(cost.doubleValue());
       }
 
-      newIssue.at(newLocation(inputFile, newIssue, preciseIssue.primaryLocation()));
+      NewIssueLocation primaryLocation = newLocation(inputFile, newIssue, preciseIssue.primaryLocation());
+      newIssue.at(primaryLocation);
+
+      Deque<NewIssueLocation> secondaryLocationsFlow = new ArrayDeque<>();
 
       for (IssueLocation secondaryLocation : preciseIssue.secondaryLocations()) {
-        newIssue.addLocation(newLocation(inputFile, newIssue, secondaryLocation));
+        String fileId = secondaryLocation.fileId();
+        if (fileId != null) {
+          InputFile issueLocationFile = component(fileId, context);
+          if (issueLocationFile != null) {
+            secondaryLocationsFlow.addFirst(newLocation(issueLocationFile, newIssue, secondaryLocation));
+          }
+        } else {
+          newIssue.addLocation(newLocation(inputFile, newIssue, secondaryLocation));
+        }
       }
 
+      // secondary locations on multiple files are only supported using flows
+      if (!secondaryLocationsFlow.isEmpty()) {
+        secondaryLocationsFlow.addFirst(primaryLocation);
+        newIssue.addFlow(secondaryLocationsFlow);
+      }
       newIssue.save();
     }
+  }
+
+  @CheckForNull
+  private static InputFile component(String fileId, SensorContext sensorContext) {
+    InputFile inputFile = sensorContext.fileSystem().inputFile(sensorContext.fileSystem().predicates().is(new File(fileId)));
+    if (inputFile == null) {
+      LOG.debug("Failed to find InputFile for {}", fileId);
+    }
+    return inputFile;
   }
 
   private static NewIssueLocation newLocation(InputFile inputFile, NewIssue issue, IssueLocation location) {

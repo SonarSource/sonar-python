@@ -227,7 +227,7 @@ public class ExpressionsTest {
 
   private Expression lastNameValue(String code) {
     FileInput root = parse(code);
-    new SymbolTableBuilder().visitFileInput(root);
+    new SymbolTableBuilder(null).visitFileInput(root);
     NameVisitor nameVisitor = new NameVisitor();
     root.accept(nameVisitor);
     List<Name> names = nameVisitor.names;

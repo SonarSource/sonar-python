@@ -39,6 +39,7 @@ import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 
 public class ProjectLevelSymbolTableTest {
 
@@ -54,7 +55,7 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Arrays.asList(exportedA, exportedB, exportedC);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "from mod import *",
       "print(a)"
     );
@@ -81,7 +82,7 @@ public class ProjectLevelSymbolTableTest {
   @Test
   public void unresolved_wildcard_import() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", Collections.emptyMap()),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), Collections.emptyMap()),
       "from external import *",
       "print(a)"
     );
@@ -92,11 +93,11 @@ public class ProjectLevelSymbolTableTest {
   @Test
   public void function_symbol() {
     FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
-    FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn");
+    FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "from mod import fn",
       "fn(1, 2)"
     );
@@ -108,7 +109,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFnSymbol.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.IMPORT, Usage.Kind.OTHER);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "import mod",
       "mod.fn(1, 2)"
     );
@@ -120,7 +121,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFnSymbol.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.OTHER);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "import mod as mod1",
       "mod1.fn(1, 2)"
     );
@@ -134,11 +135,11 @@ public class ProjectLevelSymbolTableTest {
   @Test
   public void import_already_existing_symbol() {
     FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
-    FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn");
+    FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "fn = 42",
       "from mod import fn"
     );
@@ -149,7 +150,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFnSymbol.fullyQualifiedName()).isEqualTo(null);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "mod = 42",
       "import mod"
     );
@@ -166,7 +167,7 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Collections.singletonList(xSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "from mod import x"
     );
     Symbol importedXSymbol = tree.globalVariables().iterator().next();
@@ -184,14 +185,14 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Collections.singletonList(xSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "from mod import x as y"
     );
     Symbol importedYSymbol = tree.globalVariables().iterator().next();
     assertThat(importedYSymbol.name()).isEqualTo("y");
 
     tree = parse(
-      new SymbolTableBuilder("my_package", "my_module.py", globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
       "import mod as mod1"
     );
     Symbol importedModSymbol = tree.globalVariables().iterator().next();

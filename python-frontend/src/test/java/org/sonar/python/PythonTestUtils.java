@@ -19,10 +19,14 @@
  */
 package org.sonar.python;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
+import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
@@ -42,7 +46,7 @@ public final class PythonTestUtils {
   }
 
   public static FileInput parse(String... lines) {
-    return parse(new SymbolTableBuilder(), lines);
+    return parse(new SymbolTableBuilder(pythonFile("")), lines);
   }
 
   public static FileInput parse(SymbolTableBuilder symbolTableBuilder, String... lines) {
@@ -81,5 +85,16 @@ public final class PythonTestUtils {
       res.addAll(getAllDescendant(child, predicate));
     }
     return res;
+  }
+
+  public static PythonFile pythonFile(String fileName) {
+    PythonFile pythonFile = Mockito.mock(PythonFile.class);
+    Mockito.when(pythonFile.fileName()).thenReturn(fileName);
+    try {
+      Mockito.when(pythonFile.uri()).thenReturn(Files.createTempFile(fileName, "py").toUri());
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot create temporary file");
+    }
+    return pythonFile;
   }
 }
