@@ -36,6 +36,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -89,19 +90,23 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Map<String, Symbol> globalSymbolsByFQN;
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
+  private final PythonFile pythonFile;
 
-  public SymbolTableBuilder() {
+  public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
     filePath = null;
     globalSymbolsByModuleName = Collections.emptyMap();
     globalSymbolsByFQN = Collections.emptyMap();
+    this.pythonFile = pythonFile;
   }
 
-  public SymbolTableBuilder(String packageName, String fileName) {
-    this(packageName, fileName, Collections.emptyMap());
+  public SymbolTableBuilder(String packageName, PythonFile pythonFile) {
+    this(packageName, pythonFile, Collections.emptyMap());
   }
 
-  public SymbolTableBuilder(String packageName, String fileName, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
+  public SymbolTableBuilder(String packageName, PythonFile pythonFile, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
+    this.pythonFile = pythonFile;
+    String fileName = pythonFile.fileName();
     int extensionIndex = fileName.lastIndexOf('.');
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
@@ -415,7 +420,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void createScope(Tree tree, @Nullable Scope parent) {
-      scopesByRootTree.put(tree, new Scope(parent, tree));
+      scopesByRootTree.put(tree, new Scope(parent, tree, pythonFile));
     }
 
 

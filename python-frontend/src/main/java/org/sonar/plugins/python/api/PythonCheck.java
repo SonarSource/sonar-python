@@ -72,6 +72,11 @@ public interface PythonCheck {
       return this;
     }
 
+    public PreciseIssue secondary(LocationInFile locationInFile, @Nullable String message) {
+      secondaryLocations.add(IssueLocation.preciseLocation(locationInFile, message));
+      return this;
+    }
+
     public List<IssueLocation> secondaryLocations() {
       return secondaryLocations;
     }

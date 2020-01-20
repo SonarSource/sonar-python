@@ -19,24 +19,31 @@
  */
 package org.sonar.python.semantic;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.TokenLocation;
+
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final List<Parameter> parameters = new ArrayList<>();
+  private final LocationInFile functionDefinitionLocation;
   private boolean hasVariadicParameter = false;
   private final boolean isInstanceMethod;
   private final boolean hasDecorators;
 
-  FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName) {
+  FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
     setKind(Kind.FUNCTION);
     isInstanceMethod = isInstanceMethod(functionDef);
@@ -45,6 +52,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     if (parametersList != null) {
       createParameterNames(parametersList.all());
     }
+    TokenLocation functionName = new TokenLocation(functionDef.name().firstToken());
+    Path path = pathOf(pythonFile);
+    String fileId = path != null ? path.toString() : pythonFile.toString();
+    functionDefinitionLocation = new LocationInFile(fileId, functionName.startLine(), functionName.startLineOffset(), functionName.endLine(), functionName.endLineOffset());
   }
 
   FunctionSymbolImpl(String name, FunctionSymbol functionSymbol) {
@@ -54,6 +65,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     hasDecorators = functionSymbol.hasDecorators();
     hasVariadicParameter = functionSymbol.hasVariadicParameter();
     parameters.addAll(functionSymbol.parameters());
+    functionDefinitionLocation = functionSymbol.definitionLocation();
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
@@ -103,6 +115,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   @Override
   public boolean hasDecorators() {
     return hasDecorators;
+  }
+
+  @Override
+  public LocationInFile definitionLocation() {
+    return functionDefinitionLocation;
   }
 
   private static class ParameterImpl implements Parameter {

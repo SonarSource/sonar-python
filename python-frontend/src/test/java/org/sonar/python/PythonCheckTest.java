@@ -24,9 +24,10 @@ import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 
@@ -48,7 +49,8 @@ public class PythonCheckTest {
     PythonVisitorCheck check = new PythonVisitorCheck() {
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-        addIssue(pyFunctionDefTree.name(), pyFunctionDefTree.name().name());
+        FunctionSymbol symbol = ((FunctionSymbol) pyFunctionDefTree.name().symbol());
+        addIssue(pyFunctionDefTree.name(), pyFunctionDefTree.name().name()).secondary(symbol.definitionLocation(), null);
         super.visitFunctionDef(pyFunctionDefTree);
       }
     };
@@ -59,7 +61,7 @@ public class PythonCheckTest {
     PreciseIssue firstIssue = issues.get(0);
 
     assertThat(firstIssue.cost()).isNull();
-    assertThat(firstIssue.secondaryLocations()).isEmpty();
+    assertThat(firstIssue.secondaryLocations()).hasSize(1);
 
     IssueLocation primaryLocation = firstIssue.primaryLocation();
     assertThat(primaryLocation.message()).isEqualTo("hello");

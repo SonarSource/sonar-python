@@ -20,6 +20,10 @@
 package org.sonar.python.semantic;
 
 import java.io.File;
+import java.net.URI;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,6 +37,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -70,8 +75,8 @@ public class SymbolUtils {
       : (packageName + "." + moduleName);
   }
 
-  public static Set<Symbol> globalSymbols(FileInput fileInput, String fullyQualifiedModuleName) {
-    GlobalSymbolsBindingVisitor globalSymbolsBindingVisitor = new GlobalSymbolsBindingVisitor(fullyQualifiedModuleName);
+  public static Set<Symbol> globalSymbols(FileInput fileInput, String fullyQualifiedModuleName, PythonFile pythonFile) {
+    GlobalSymbolsBindingVisitor globalSymbolsBindingVisitor = new GlobalSymbolsBindingVisitor(fullyQualifiedModuleName, pythonFile);
     fileInput.accept(globalSymbolsBindingVisitor);
     BuiltinSymbols.all().forEach(b -> globalSymbolsBindingVisitor.symbolsByName.putIfAbsent(b, new SymbolImpl(b, b)));
     GlobalSymbolsReadVisitor globalSymbolsReadVisitor = new GlobalSymbolsReadVisitor(globalSymbolsBindingVisitor.symbolsByName);
@@ -82,15 +87,17 @@ public class SymbolUtils {
   private static class GlobalSymbolsBindingVisitor extends BaseTreeVisitor {
     private Map<String, Symbol> symbolsByName = new HashMap<>();
     private String fullyQualifiedModuleName;
+    private final PythonFile pythonFile;
 
-    GlobalSymbolsBindingVisitor(String fullyQualifiedModuleName) {
+    GlobalSymbolsBindingVisitor(String fullyQualifiedModuleName, PythonFile pythonFile) {
       this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+      this.pythonFile = pythonFile;
     }
 
     private Symbol symbol(Tree tree) {
       if (tree.is(Kind.FUNCDEF)) {
         FunctionDef functionDef = (FunctionDef) tree;
-        return new FunctionSymbolImpl(functionDef, fullyQualifiedModuleName + "." + functionDef.name().name());
+        return new FunctionSymbolImpl(functionDef, fullyQualifiedModuleName + "." + functionDef.name().name(), pythonFile);
       } else if (tree.is(Kind.CLASSDEF)) {
         String className = ((ClassDef) tree).name().name();
         return new ClassSymbolImpl(className, fullyQualifiedModuleName + "." + className);
@@ -237,5 +244,18 @@ public class SymbolUtils {
       currentDirectory = currentDirectory.getParentFile();
     }
     return String.join(".", packages);
+  }
+
+  @CheckForNull
+  static Path pathOf(PythonFile pythonFile) {
+    try {
+      URI uri = pythonFile.uri();
+      if ("file".equalsIgnoreCase(uri.getScheme())) {
+        return Paths.get(uri);
+      }
+      return null;
+    } catch (InvalidPathException e) {
+      return null;
+    }
   }
 }
