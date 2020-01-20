@@ -448,8 +448,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+      scan(pyFunctionDefTree.decorators());
       enterScope(pyFunctionDefTree);
-      super.visitFunctionDef(pyFunctionDefTree);
+      scan(pyFunctionDefTree.name());
+      scan(pyFunctionDefTree.parameters());
+      scan(pyFunctionDefTree.returnTypeAnnotation());
+      scan(pyFunctionDefTree.body());
       leaveScope();
     }
 
@@ -500,8 +504,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitClassDef(ClassDef pyClassDefTree) {
       scan(pyClassDefTree.args());
-      enterScope(pyClassDefTree);
       scan(pyClassDefTree.decorators());
+      enterScope(pyClassDefTree);
       scan(pyClassDefTree.name());
       scan(pyClassDefTree.body());
       resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol());
