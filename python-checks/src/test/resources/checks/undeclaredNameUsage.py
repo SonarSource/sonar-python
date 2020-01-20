@@ -185,3 +185,18 @@ def one_issue_per_symbol_2():
 #         ^^^<
   zzz = "hello"
 # ^^^<
+
+
+def decorator(param):
+    pass
+
+class A:
+    _ATTR = 42
+    @decorator(_ATTR)  # OK
+    def foo(self):
+        print("foo")
+
+class A:
+    _ATTR = 42
+    @decorator(_ATTR)  # OK
+    class Foo: pass
