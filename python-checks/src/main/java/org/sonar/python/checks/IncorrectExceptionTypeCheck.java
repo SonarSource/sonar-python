@@ -58,7 +58,7 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private boolean inheritsFromBaseException(@Nullable Symbol symbol) {
+  private static boolean inheritsFromBaseException(@Nullable Symbol symbol) {
     if (symbol == null) {
       // S3827 will raise the issue in this case
       return true;
