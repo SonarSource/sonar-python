@@ -8,6 +8,11 @@ which is not an error. See <a href="https://www.python.org/dev/peps/pep-0352/#ex
 <h2>Noncompliant Code Example</h2>
 <pre>
 raise "Something went wrong"  # Noncompliant
+
+class A:
+    pass
+
+raise A  # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -15,6 +20,7 @@ class MyError(Exception):
     pass
 
 raise MyError("Something went wrong")
+raise MyError
 </pre>
 <h2>See</h2>
 <p> * <a href="https://docs.python.org/3/tutorial/errors.html">Python documentation - Errors and Exceptions</a></p>
