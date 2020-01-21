@@ -55,6 +55,9 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
           ctx.addIssue(raiseStatement, MESSAGE);
         }
       }
+      if (raiseStatement.expressions().get(0).is(Tree.Kind.STRING_LITERAL)) {
+        ctx.addIssue(raiseStatement, MESSAGE);
+      }
     });
   }
 
