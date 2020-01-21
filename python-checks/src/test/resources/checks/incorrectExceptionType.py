@@ -21,6 +21,9 @@ class DefinedError(pb.Error):
 class ClassWithCallExpression(foo()):
   pass
 
+def raise_string_literal():
+  raise "something went wrong" # Noncompliant
+
 def raise_class_with_call_expression_arg():
   raise ClassWithCallExpression
 
