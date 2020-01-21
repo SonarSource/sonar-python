@@ -20,15 +20,8 @@ func(1, 42)
 func(1, 2, 3)  # Noncompliant. Too many positional arguments
 func()  # Noncompliant. Missing positional argument for "a"
 
-func(1, 42, *param_args)  # Noncompliant. Maximum number of positional arguments already reached, *args should be removed
 
 positional_unlimited(1, 2, 3, 4, 5)
-
-def positional_limited(a, *, b=2):
-    print(a, b)
-
-positional_limited(1, 2)  # Noncompliant. Too many positional arguments
-
 
 #############################
 # Unexpected Keyword argument
@@ -39,8 +32,6 @@ def keywords(a=1, b=2, *, c=3):
 
 keywords(1)
 keywords(1, z=42)  # Noncompliant. Unexpected keyword argument "z"
-
-keywords(a=21, b=22, **param_kwargs)  # Noncompliant. Maximum number of keyword arguments already reached, **kwargs should be removed
 
 def keywords_unlimited(a=1, b=2, *, c=3, **kwargs):
     print(a, b, kwargs)
