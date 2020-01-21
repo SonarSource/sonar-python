@@ -423,11 +423,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scopesByRootTree.put(tree, new Scope(parent, tree, pythonFile));
     }
 
-
-    private void addBindingUsage(Name nameTree, Usage.Kind usage, @Nullable String fullyQualifiedName) {
-      currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
-    }
-
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {
       currentScope().addBindingUsage(nameTree, usage, null);
     }
