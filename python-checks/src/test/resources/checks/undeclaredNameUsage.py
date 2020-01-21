@@ -207,3 +207,4 @@ def foo(param):
 print(f'{foo(param=3)}')  # OK, param is a keyword argument
 
 print(f'{foo(param)}')  # Noncompliant
+#            ^^^^^

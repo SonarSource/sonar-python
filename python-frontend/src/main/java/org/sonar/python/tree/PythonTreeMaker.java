@@ -33,9 +33,9 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
@@ -1321,7 +1321,7 @@ public class PythonTreeMaker {
     }
     int newline = (line - 1) + token.line();
     // update token line and column with offset of string element.
-    TreeUtils.tokens(exp).forEach(t -> ((TokenImpl) t).setLineColumn(newline, col));
+    TreeUtils.tokens(exp).forEach(t -> ((TokenImpl) t).setLineColumn(newline, col + t.column()));
     if (exp.is(Tree.Kind.STRING_LITERAL)) {
       ((StringLiteral) exp).stringElements().forEach(PythonTreeMaker::adjustNestedInterpolations);
     }
