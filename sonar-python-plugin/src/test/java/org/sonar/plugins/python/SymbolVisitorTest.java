@@ -77,6 +77,7 @@ public class SymbolVisitorTest {
     verifyUsages(30, 11, reference(30, 1, 30, 4));
     verifyUsages(34, 0, reference(35, 42, 35, 43), reference(38, 1, 38, 2),
       reference(41, 10, 41, 11), reference(41, 36, 41, 37));
+    verifyUsages(43, 61, reference(43, 54, 43, 55));
   }
 
   private void verifyUsages(int line, int offset, TextRange... trs) {

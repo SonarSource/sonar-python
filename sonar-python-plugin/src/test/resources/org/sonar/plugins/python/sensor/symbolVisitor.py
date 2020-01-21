@@ -39,3 +39,5 @@ nested = f'some: {f"nested interpolation：\
 
 nested = f'some: {f"nested interpolation：\
          {u} and then some {f"more {u}"}"}'
+
+f"symbol created and used inside interpolation: {[len(x) for x in []]}"
