@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
@@ -128,6 +129,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
     for (Scope scope : scopesByRootTree.values()) {
+      scope.symbols().forEach(symbol -> ((SymbolImpl) symbol).updateChildrenFQNBasedOnType());
       if (scope.rootTree instanceof FunctionLike) {
         FunctionLike funcDef = (FunctionLike) scope.rootTree;
         for (Symbol symbol : scope.symbols()) {
@@ -151,7 +153,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  private static class ScopeVisitor extends BaseTreeVisitor {
+  private class ScopeVisitor extends BaseTreeVisitor {
 
     private Deque<Tree> scopeRootTrees = new LinkedList<>();
     protected Scope moduleScope;
@@ -166,6 +168,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     Tree leaveScope() {
       return scopeRootTrees.pop();
+    }
+
+    Scope currentScope() {
+      return scopesByRootTree.get(currentScopeRootTree());
     }
   }
 
@@ -426,11 +432,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {
       currentScope().addBindingUsage(nameTree, usage, null);
     }
-
-    private Scope currentScope() {
-      return scopesByRootTree.get(currentScopeRootTree());
-    }
-
   }
 
   /**
@@ -465,6 +466,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(currentScopeTree);
       scan(parameter.name());
       scan(parameter.typeAnnotation());
+    }
+
+    @Override
+    public void visitAssignmentStatement(AssignmentStatement assignment) {
+      List<Expression> lhs = SymbolUtils.assignmentsLhs(assignment);
+      lhs.forEach(expression -> boundNamesFromExpression(expression).forEach(name -> addTypeToSymbol(name, assignment.assignedValue())));
+      super.visitAssignmentStatement(assignment);
     }
 
     @Override
@@ -549,5 +557,23 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         symbol.addUsage(nameTree, Usage.Kind.OTHER);
       }
     }
+
+    private void addTypeToSymbol(Name nameTree, Expression rhs) {
+      Type type = null;
+      if (rhs.is(Kind.CALL_EXPR)) {
+        Expression callee = ((CallExpression) rhs).callee();
+        if (callee.is(Kind.NAME)) {
+          Symbol calleeSymbol = currentScope().resolve(((Name) callee).name());
+          if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
+            type = new Type(calleeSymbol);
+          }
+        }
+      }
+      SymbolImpl symbol = currentScope().resolve(nameTree.name());
+      if (symbol != null && symbol.usages().stream().filter(Usage::isBindingUsage).count() == 1) {
+        symbol.setType(type);
+      }
+    }
+
   }
 }

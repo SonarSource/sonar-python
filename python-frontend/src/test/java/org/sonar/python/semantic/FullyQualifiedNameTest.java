@@ -419,6 +419,113 @@ public class FullyQualifiedNameTest {
     assertThat(classDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.A");
   }
 
+  @Test
+  public void virtual_call_having_instance_as_qualifier() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "class A:",
+      "  def foo(): pass",
+      "a = A()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(a.type()).isNotNull();
+    ClassDef classDef = getFirstChild(tree, t -> t.is(Tree.Kind.CLASSDEF));
+    assertThat(a.type().symbol()).isEqualTo(classDef.name().symbol());
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
+  }
+
+  @Test
+  public void virtual_call_qualifier_unknown_type() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "from mod import A",
+      "a = A()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(a.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
+  public void subclass_type() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "class A:",
+      "  class B:",
+      "    def foo(): pass",
+      "b = A.B()",
+      "b.foo()"
+    );
+    QualifiedExpression qualifiedExpression = (QualifiedExpression) getAllDescendant(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR)).get(1);
+    SymbolImpl b = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(b.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
+  public void type_symbol_different_than_class() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "def bar(): pass",
+      "a = bar()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(a.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
+  public void type_symbol_null() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "a = bar()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(a.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
+  public void add_type_to_global_symbol() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "global a",
+      "class A:",
+      "  def foo(): pass",
+      "a = A()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(a).isNull();
+    assertThat(qualifiedExpression.symbol()).isNull();
+  }
+
+  @Test
+  public void add_type_more_than_one_binding_usage() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "if True:",
+      "  class A:",
+      "    def foo(): pass",
+      "else:",
+      "  class A: pass",
+      "a = A()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(a.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
 
   private void assertNameAndQualifiedName(FileInput tree, String name, @Nullable String qualifiedName) {
     CallExpression callExpression = getCallExpression(tree);
