@@ -40,11 +40,13 @@ public class SymbolImpl implements Symbol {
   private final List<Usage> usages = new ArrayList<>();
   private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
   private Kind kind;
+  private Type type;
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.kind = Kind.OTHER;
+    this.type = null;
   }
 
   @Override
@@ -94,7 +96,24 @@ public class SymbolImpl implements Symbol {
     ((SymbolImpl) symbol).addUsage(name, kind);
   }
 
+  void updateChildrenFQNBasedOnType() {
+    if (type != null) {
+      String typeFQN = type.symbol().fullyQualifiedName();
+      childrenSymbolByName.values().forEach(childSymbol ->
+        ((SymbolImpl) childSymbol).fullyQualifiedName = typeFQN + "." + childSymbol.name());
+    }
+  }
+
   void addChildSymbol(Symbol symbol) {
     childrenSymbolByName.put(symbol.name(), symbol);
+  }
+
+  void setType(@Nullable Type type) {
+    this.type = type;
+  }
+
+  @CheckForNull
+  public Type type() {
+    return type;
   }
 }
