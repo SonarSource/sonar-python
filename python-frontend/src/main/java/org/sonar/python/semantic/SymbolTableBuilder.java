@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -565,7 +566,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (callee.is(Kind.NAME)) {
           Symbol calleeSymbol = currentScope().resolve(((Name) callee).name());
           if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
-            type = new Type(calleeSymbol);
+            ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
+            if (classSymbol.superClasses().isEmpty() && !classSymbol.hasUnresolvedTypeHierarchy()) {
+              type = new Type(calleeSymbol);
+            }
           }
         }
       }

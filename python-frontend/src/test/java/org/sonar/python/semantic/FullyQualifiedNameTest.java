@@ -527,6 +527,37 @@ public class FullyQualifiedNameTest {
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
+  @Test
+  public void fqn_of_inherited_method() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "class A():",
+      "  def method(): pass",
+      "class B(A): pass",
+      "b = B()",
+      "b.method()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl b = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(b.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
+  public void fqn_of_inherited_method_with_import() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "from external_module import A",
+      "class B(A): pass",
+      "b = B()",
+      "b.method()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    SymbolImpl b = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
+    assertThat(b.type()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+  }
+
   private void assertNameAndQualifiedName(FileInput tree, String name, @Nullable String qualifiedName) {
     CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol()).isNotNull();
