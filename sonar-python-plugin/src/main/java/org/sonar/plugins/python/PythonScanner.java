@@ -99,9 +99,9 @@ public class PythonScanner {
     }
   }
 
-
   private Map<String, Set<Symbol>> globalSymbolsByModuleName() {
-    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+    Map<String, Set<Symbol>> globalSymbols = SymbolUtils.externalModulesSymbols();
+
     for (InputFile inputFile : inputFiles) {
       if (context.isCancelled()) {
         return globalSymbols;

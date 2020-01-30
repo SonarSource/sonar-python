@@ -26,10 +26,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,6 +61,7 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 
 public class SymbolUtils {
+
   private SymbolUtils() {
   }
 
@@ -257,5 +260,26 @@ public class SymbolUtils {
     } catch (InvalidPathException e) {
       return null;
     }
+  }
+
+  public static Map<String, Set<Symbol>> externalModulesSymbols() {
+    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+    ClassSymbolImpl flaskMail = new ClassSymbolImpl("Mail", "flask_mail.Mail");
+    flaskMail.setHasUnresolvedTypeHierarchy(false);
+    ClassSymbolImpl flaskConnection = new ClassSymbolImpl("Connection", "flask_mail.Connection");
+    flaskConnection.setHasUnresolvedTypeHierarchy(false);
+    globalSymbols.put("flask_mail", new HashSet<>(Arrays.asList(
+      flaskMail,
+      flaskConnection
+      )));
+    ClassSymbolImpl smtp = new ClassSymbolImpl("SMTP", "smtplib.SMTP");
+    smtp.setHasUnresolvedTypeHierarchy(false);
+    ClassSymbolImpl smtpSSL = new ClassSymbolImpl("SMTP_SSL", "smtplib.SMTP_SSL");
+    smtpSSL.setHasUnresolvedTypeHierarchy(false);
+    globalSymbols.put("smtplib", new HashSet<>(Arrays.asList(
+      smtp,
+      smtpSSL
+    )));
+    return globalSymbols;
   }
 }

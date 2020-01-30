@@ -26,7 +26,6 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,7 +71,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static Map<String, Set<Symbol>> globalSymbols(List<File> files, File baseDir) {
-    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+    Map<String, Set<Symbol>> globalSymbols = SymbolUtils.externalModulesSymbols();
     for (File file : files) {
       TestPythonFile pythonFile = new TestPythonFile(file);
       AstNode astNode = PythonParser.create().parse(pythonFile.content());
