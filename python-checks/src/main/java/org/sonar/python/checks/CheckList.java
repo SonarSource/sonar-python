@@ -28,6 +28,7 @@ import org.sonar.python.checks.hotspots.DataEncryptionCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
+import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
@@ -70,6 +71,7 @@ public final class CheckList {
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
       DynamicCodeExecutionCheck.class,
+      EmailSendingCheck.class,
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
       ExceptRethrowingCheck.class,

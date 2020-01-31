@@ -471,9 +471,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitAssignmentStatement(AssignmentStatement assignment) {
+      super.visitAssignmentStatement(assignment);
       List<Expression> lhs = SymbolUtils.assignmentsLhs(assignment);
       lhs.forEach(expression -> boundNamesFromExpression(expression).forEach(name -> addTypeToSymbol(name, assignment.assignedValue())));
-      super.visitAssignmentStatement(assignment);
     }
 
     @Override
@@ -562,14 +562,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void addTypeToSymbol(Name nameTree, Expression rhs) {
       Type type = null;
       if (rhs.is(Kind.CALL_EXPR)) {
-        Expression callee = ((CallExpression) rhs).callee();
-        if (callee.is(Kind.NAME)) {
-          Symbol calleeSymbol = currentScope().resolve(((Name) callee).name());
-          if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
-            ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
-            if (classSymbol.superClasses().isEmpty() && !classSymbol.hasUnresolvedTypeHierarchy()) {
-              type = new Type(calleeSymbol);
-            }
+        Symbol calleeSymbol = ((CallExpression) rhs).calleeSymbol();
+        if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
+          ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
+          if (classSymbol.superClasses().isEmpty() && !classSymbol.hasUnresolvedTypeHierarchy()) {
+            type = new Type(calleeSymbol);
           }
         }
       }
