@@ -139,8 +139,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private void handleRegularArgument(RegularArgument regularArgument, SubscriptionContext ctx) {
     Name keywordArgument = regularArgument.keywordArgument();
-    if (keywordArgument != null && isCredential(keywordArgument.name(), variablePatterns())
-      && regularArgument.expression().is(Kind.STRING_LITERAL) && !isEmptyStringLiteral((StringLiteral) regularArgument.expression())) {
+    if (keywordArgument != null && isCredential(keywordArgument.name(), variablePatterns()) && isNonEmptyStringLiteral(regularArgument.expression())) {
       ctx.addIssue(regularArgument, MESSAGE);
     }
   }
@@ -259,11 +258,9 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private void checkAssignedValue(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
-    if (assignmentStatement.assignedValue().is(Kind.STRING_LITERAL)) {
-      StringLiteral literal = (StringLiteral) assignmentStatement.assignedValue();
-      if (!isEmptyStringLiteral(literal) && !isCredential(literal.trimmedQuotesValue(), variablePatterns())) {
-        ctx.addIssue(assignmentStatement, MESSAGE);
-      }
+    Expression assignedValue = assignmentStatement.assignedValue();
+    if (isNonEmptyStringLiteral(assignedValue) && !isCredential(((StringLiteral) assignedValue).trimmedQuotesValue(), variablePatterns())) {
+      ctx.addIssue(assignmentStatement, MESSAGE);
     }
   }
 
@@ -272,11 +269,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isNonEmptyStringLiteral(Tree tree) {
-    return tree.is(Kind.STRING_LITERAL) && !isEmptyStringLiteral((StringLiteral) tree);
-  }
-
-  private static boolean isEmptyStringLiteral(StringLiteral stringLiteral) {
-    return stringLiteral.trimmedQuotesValue().isEmpty();
+    return tree.is(Kind.STRING_LITERAL) && !((StringLiteral) tree).trimmedQuotesValue().isEmpty();
   }
 
   private static boolean isCredential(String target, Stream<Pattern> patterns) {
