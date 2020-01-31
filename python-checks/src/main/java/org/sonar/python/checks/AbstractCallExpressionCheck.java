@@ -48,7 +48,7 @@ public abstract class AbstractCallExpressionCheck extends PythonSubscriptionChec
     CallExpression node = (CallExpression) ctx.syntaxNode();
     Symbol symbol = node.calleeSymbol();
     if (!isException(node) && symbol != null && functionsToCheck().contains(symbol.fullyQualifiedName())) {
-      ctx.addIssue(node, message());
+      ctx.addIssue(node.callee(), message());
     }
   }
 
