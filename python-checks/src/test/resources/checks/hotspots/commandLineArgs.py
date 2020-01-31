@@ -10,7 +10,7 @@ import optparse
 
 def argparse_test():
     argparse.ArgumentParser() # Noncompliant {{Make sure that command line arguments are used safely here.}}
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^
+#   ^^^^^^^^^^^^^^^^^^^^^^^
     ArgumentParser() # Noncompliant
     argparse.otherFunction() # OK
 

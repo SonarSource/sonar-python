@@ -2,7 +2,7 @@ def django_tests(subject, msg, from_email, to_email):
   from django.core.mail import send_mail, send_mass_mail
 
   send_mail(subject, msg, from_email, [to_email]) # Noncompliant {{Make sure that this email is sent in a safe manner.}}
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# ^^^^^^^^^
   send_mass_mail((subject, msg, from_email, [to_email])) # Noncompliant
 
 def smtplib_tests(from_email, to_email, msg):
