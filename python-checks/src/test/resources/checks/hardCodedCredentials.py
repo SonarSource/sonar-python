@@ -11,7 +11,7 @@ import pg
 # default words list: password,passwd,pwd,passphrase
 
 secret_key = '1234567890123456'
-
+something = something()
 def getDecrypted(encodedtext):
     cipher = AES.new(secret_key, AES.MODE_ECB)
     return cipher.decrypt(base64.b64decode(encodedtext))

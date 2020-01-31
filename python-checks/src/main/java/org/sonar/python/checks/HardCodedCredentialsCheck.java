@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -41,6 +42,7 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -51,6 +53,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 
 @Rule(key = "S2068")
 public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
@@ -94,6 +97,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private Stream<Pattern> literalPatterns() {
     if (literalPatterns == null) {
+      // Avoid raising on prepared statements
       literalPatterns = toPatterns("=[^:%'?\\s]+");
     }
     return literalPatterns.stream();
@@ -101,21 +105,21 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> handleAssignmentStatement((AssignmentStatement) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> handleBinaryExpression((BinaryExpression) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, ctx -> handleStringLiteral((StringLiteral) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> handleCallExpression((CallExpression) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, ctx -> handleRegularArgument((RegularArgument) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER_LIST, ctx -> handleParameterList((ParameterList) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Tree.Kind.DICTIONARY_LITERAL, ctx -> handleDictionaryLiteral((DictionaryLiteral) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> handleAssignmentStatement((AssignmentStatement) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.COMPARISON, ctx -> handleBinaryExpression((BinaryExpression) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ctx -> handleStringLiteral((StringLiteral) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> handleCallExpression((CallExpression) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.REGULAR_ARGUMENT, ctx -> handleRegularArgument((RegularArgument) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.PARAMETER_LIST, ctx -> handleParameterList((ParameterList) ctx.syntaxNode(), ctx));
+    context.registerSyntaxNodeConsumer(Kind.DICTIONARY_LITERAL, ctx -> handleDictionaryLiteral((DictionaryLiteral) ctx.syntaxNode(), ctx));
   }
 
   private void handleDictionaryLiteral(DictionaryLiteral dictionaryLiteral, SubscriptionContext ctx) {
     for (DictionaryLiteralElement dictionaryLiteralElement : dictionaryLiteral.elements()) {
-      if (dictionaryLiteralElement.is(Tree.Kind.KEY_VALUE_PAIR)) {
+      if (dictionaryLiteralElement.is(Kind.KEY_VALUE_PAIR)) {
         KeyValuePair keyValuePair = (KeyValuePair) dictionaryLiteralElement;
-        if (keyValuePair.key().is(Tree.Kind.STRING_LITERAL) && isCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns())
-          && keyValuePair.value().is(Tree.Kind.STRING_LITERAL)) {
+        if (keyValuePair.key().is(Kind.STRING_LITERAL) && isCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns())
+          && keyValuePair.value().is(Kind.STRING_LITERAL)) {
           ctx.addIssue(dictionaryLiteralElement, MESSAGE);
         }
       }
@@ -127,7 +131,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       Name parameterName = parameter.name();
       Expression defaultValue = parameter.defaultValue();
       if (parameterName != null && isCredential(parameterName.name(), variablePatterns()) && defaultValue != null
-        && defaultValue.is(Tree.Kind.STRING_LITERAL) && !isEmptyStringLiteral(((StringLiteral) defaultValue))) {
+        && isNonEmptyStringLiteral(defaultValue)) {
         ctx.addIssue(parameter, MESSAGE);
       }
     }
@@ -136,7 +140,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   private void handleRegularArgument(RegularArgument regularArgument, SubscriptionContext ctx) {
     Name keywordArgument = regularArgument.keywordArgument();
     if (keywordArgument != null && isCredential(keywordArgument.name(), variablePatterns())
-      && regularArgument.expression().is(Tree.Kind.STRING_LITERAL) && !isEmptyStringLiteral((StringLiteral) regularArgument.expression())) {
+      && regularArgument.expression().is(Kind.STRING_LITERAL) && !isEmptyStringLiteral((StringLiteral) regularArgument.expression())) {
       ctx.addIssue(regularArgument, MESSAGE);
     }
   }
@@ -145,14 +149,15 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (callExpression.arguments().isEmpty()) {
       return;
     }
-    if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+    // Raising issues on pwd.__eq__("literal") calls
+    if (callExpression.callee().is(Kind.QUALIFIED_EXPR)) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
       if (qualifiedExpression.name().name().equals("__eq__")) {
         if (isQualifiedExpressionCredential(qualifiedExpression)) {
           if (isFirstArgumentAStringLiteral(callExpression)) {
             ctx.addIssue(callExpression, MESSAGE);
           }
-        } else if (qualifiedExpression.qualifier().is(Tree.Kind.STRING_LITERAL) && isFirstArgumentCredentials(callExpression)) {
+        } else if (qualifiedExpression.qualifier().is(Kind.STRING_LITERAL) && isFirstArgumentCredentials(callExpression)) {
           ctx.addIssue(callExpression, MESSAGE);
         }
       }
@@ -164,28 +169,31 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isFirstArgumentCredentials(CallExpression callExpression) {
-    return callExpression.arguments().get(0).is(Tree.Kind.REGULAR_ARGUMENT) &&
-      ((RegularArgument) callExpression.arguments().get(0)).expression().is(Tree.Kind.NAME)
-      && isCredential(((Name) ((RegularArgument) callExpression.arguments().get(0)).expression()).name(), variablePatterns());
+    Argument argument = callExpression.arguments().get(0);
+    if (argument.is(Kind.REGULAR_ARGUMENT)) {
+      RegularArgument regularArgument = (RegularArgument) argument;
+      return regularArgument.expression().is(Kind.NAME) && isCredential(((Name) regularArgument.expression()).name(), variablePatterns());
+    }
+    return false;
   }
 
   private static boolean isFirstArgumentAStringLiteral(CallExpression callExpression) {
-    return callExpression.arguments().get(0).is(Tree.Kind.REGULAR_ARGUMENT)
-      && ((RegularArgument) callExpression.arguments().get(0)).expression().is(Tree.Kind.STRING_LITERAL);
+    return callExpression.arguments().get(0).is(Kind.REGULAR_ARGUMENT)
+      && ((RegularArgument) callExpression.arguments().get(0)).expression().is(Kind.STRING_LITERAL);
   }
 
   private boolean isQualifiedExpressionCredential(QualifiedExpression qualifiedExpression) {
-    return qualifiedExpression.qualifier().is(Tree.Kind.NAME) && isCredential(((Name) qualifiedExpression.qualifier()).name(), variablePatterns());
+    return qualifiedExpression.qualifier().is(Kind.NAME) && isCredential(((Name) qualifiedExpression.qualifier()).name(), variablePatterns());
   }
 
   private static void checkSensitiveArgument(CallExpression callExpression, int argNb, SubscriptionContext ctx) {
     for (int i = 0; i < callExpression.arguments().size(); i++) {
       Argument argument = callExpression.arguments().get(i);
-      if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
+      if (argument.is(Kind.REGULAR_ARGUMENT)) {
         RegularArgument regularArgument = (RegularArgument) argument;
         if (regularArgument.keywordArgument() != null) {
           return;
-        } else if (i == argNb && regularArgument.expression().is(Tree.Kind.STRING_LITERAL)) {
+        } else if (i == argNb && regularArgument.expression().is(Kind.STRING_LITERAL)) {
           ctx.addIssue(callExpression, MESSAGE);
         }
       }
@@ -219,22 +227,14 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private void handleBinaryExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
     boolean shouldReport = false;
-    if (binaryExpression.leftOperand().is(Tree.Kind.NAME, Tree.Kind.QUALIFIED_EXPR) && binaryExpression.rightOperand().is(Tree.Kind.STRING_LITERAL)) {
-      shouldReport = checkBinaryExpression(binaryExpression.leftOperand());
+    if (binaryExpression.leftOperand() instanceof HasSymbol && binaryExpression.rightOperand().is(Tree.Kind.STRING_LITERAL)) {
+      shouldReport = isSymbolCredential(((HasSymbol) binaryExpression.leftOperand()).symbol());
     }
-    if (binaryExpression.rightOperand().is(Tree.Kind.NAME, Tree.Kind.QUALIFIED_EXPR) && binaryExpression.leftOperand().is(Tree.Kind.STRING_LITERAL)) {
-      shouldReport = checkBinaryExpression(binaryExpression.rightOperand());
+    if (binaryExpression.rightOperand() instanceof HasSymbol && binaryExpression.leftOperand().is(Tree.Kind.STRING_LITERAL)) {
+      shouldReport = isSymbolCredential(((HasSymbol) binaryExpression.rightOperand()).symbol());
     }
     if (shouldReport) {
       ctx.addIssue(binaryExpression, MESSAGE);
-    }
-  }
-
-  private boolean checkBinaryExpression(Expression operand) {
-    if (operand.is(Tree.Kind.NAME)) {
-      return isCredential(((Name) operand).name(), variablePatterns());
-    } else {
-      return isCredential(((QualifiedExpression) operand).name().name(), variablePatterns());
     }
   }
 
@@ -242,17 +242,16 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     ExpressionList lhs = assignmentStatement.lhsExpressions().get(0);
     Expression expression = lhs.expressions().get(0);
 
-    if (expression.is(Tree.Kind.NAME) && isCredential(((Name) expression).name(), variablePatterns())) {
-      checkAssignedValue(assignmentStatement, ctx);
+    if (expression instanceof HasSymbol) {
+      Symbol symbol = ((HasSymbol) expression).symbol();
+      if (isSymbolCredential(symbol)) {
+        checkAssignedValue(assignmentStatement, ctx);
+      }
     }
 
-    if (expression.is(Tree.Kind.QUALIFIED_EXPR) && isCredential(((QualifiedExpression) expression).name().name(), variablePatterns())) {
-      checkAssignedValue(assignmentStatement, ctx);
-    }
-
-    if (expression.is(Tree.Kind.SUBSCRIPTION)) {
+    if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
-      if (subscriptionExpression.subscripts().expressions().stream().anyMatch(e -> e.is(Tree.Kind.STRING_LITERAL) &&
+      if (subscriptionExpression.subscripts().expressions().stream().anyMatch(e -> e.is(Kind.STRING_LITERAL) &&
         isCredential(((StringLiteral) e).trimmedQuotesValue(), variablePatterns()))) {
         checkAssignedValue(assignmentStatement, ctx);
       }
@@ -260,7 +259,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private void checkAssignedValue(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
-    if (assignmentStatement.assignedValue().is(Tree.Kind.STRING_LITERAL)) {
+    if (assignmentStatement.assignedValue().is(Kind.STRING_LITERAL)) {
       StringLiteral literal = (StringLiteral) assignmentStatement.assignedValue();
       if (!isEmptyStringLiteral(literal) && !isCredential(literal.trimmedQuotesValue(), variablePatterns())) {
         ctx.addIssue(assignmentStatement, MESSAGE);
@@ -268,6 +267,13 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private boolean isSymbolCredential(@CheckForNull Symbol symbol) {
+    return symbol != null && isCredential(symbol.name(), variablePatterns());
+  }
+
+  private static boolean isNonEmptyStringLiteral(Tree tree) {
+    return tree.is(Kind.STRING_LITERAL) && !isEmptyStringLiteral((StringLiteral) tree);
+  }
 
   private static boolean isEmptyStringLiteral(StringLiteral stringLiteral) {
     return stringLiteral.trimmedQuotesValue().isEmpty();
