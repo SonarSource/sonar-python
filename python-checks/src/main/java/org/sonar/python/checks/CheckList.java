@@ -115,6 +115,7 @@ public final class CheckList {
       OsExecCheck.class,
       OverwrittenCollectionEntryCheck.class,
       ParsingErrorCheck.class,
+      PredictableSaltCheck.class,
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
       ProcessSignallingCheck.class,
