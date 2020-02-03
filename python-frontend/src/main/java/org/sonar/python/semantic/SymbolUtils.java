@@ -299,6 +299,9 @@ public class SymbolUtils {
       classSymbol("HttpResponseServerError", "django.http.HttpResponseServerError"),
       classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest")
     )));
+
+    globalSymbols.put("flask", new HashSet<>(Collections.singletonList(classSymbol("Response", "flask.Response"))));
+
     return globalSymbols;
   }
 

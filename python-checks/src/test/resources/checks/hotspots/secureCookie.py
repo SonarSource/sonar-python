@@ -65,3 +65,13 @@ def django_tests():
     response9.set_cookie("C12", "world") # Noncompliant
     response10 = HttpResponseServerError()
     response10.set_cookie("C13", "world") # Noncompliant
+
+def flask_tests():
+    import flask
+    from flask import Response
+
+    response1 = Response('OK')
+    response1.set_cookie('c1', 'value') # Noncompliant
+
+    response2 = flask.Response('OK')
+    response2.set_cookie('c1', 'value', secure = True) # OK

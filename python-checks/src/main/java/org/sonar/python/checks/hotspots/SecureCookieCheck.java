@@ -70,7 +70,8 @@ public class SecureCookieCheck extends PythonSubscriptionCheck {
     "django.http.HttpResponseGone.set_cookie",
     "django.http.HttpResponseGone.set_signed_cookie",
     "django.http.HttpResponseServerError.set_cookie",
-    "django.http.HttpResponseServerError.set_signed_cookie"
+    "django.http.HttpResponseServerError.set_signed_cookie",
+    "flask.Response.set_cookie"
   ));
 
   private static final String SECURE = "secure";
