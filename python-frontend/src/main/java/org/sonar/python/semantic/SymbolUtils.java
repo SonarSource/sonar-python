@@ -87,6 +87,18 @@ public class SymbolUtils {
     return globalSymbolsReadVisitor.symbolsByName.values().stream().filter(v -> !BuiltinSymbols.all().contains(v.fullyQualifiedName())).collect(Collectors.toSet());
   }
 
+  @CheckForNull
+  public static String getTypeName(@Nullable Symbol objectSymbol) {
+    if (objectSymbol == null) {
+      return null;
+    }
+    Type type = ((SymbolImpl) objectSymbol).type();
+    if (type != null) {
+      return type.symbol().fullyQualifiedName();
+    }
+    return null;
+  }
+
   private static class GlobalSymbolsBindingVisitor extends BaseTreeVisitor {
     private Map<String, Symbol> symbolsByName = new HashMap<>();
     private String fullyQualifiedModuleName;
@@ -283,6 +295,9 @@ public class SymbolUtils {
     ClassSymbolImpl zipFile = new ClassSymbolImpl("ZipFile", "zipfile.ZipFile");
     zipFile.setHasUnresolvedTypeHierarchy(false);
     globalSymbols.put("zipfile", new HashSet<>(Collections.singleton(zipFile)));
+    ClassSymbolImpl httpCookies = new ClassSymbolImpl("SimpleCookie", "http.cookies.SimpleCookie");
+    httpCookies.setHasUnresolvedTypeHierarchy(false);
+    globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(httpCookies)));
     return globalSymbols;
   }
 }

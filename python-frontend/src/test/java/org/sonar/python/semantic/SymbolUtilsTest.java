@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.semantic.SymbolUtils.getTypeName;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
@@ -213,4 +214,19 @@ public class SymbolUtilsTest {
     Mockito.when(pythonFile.uri()).thenThrow(InvalidPathException.class);
     assertThat(pathOf(pythonFile)).isNull();
   }
+
+  @Test
+  public void type_name() {
+    assertThat(getTypeName(null)).isNull();
+
+    SymbolImpl symbol = new SymbolImpl("foo", "mod.foo");
+    assertThat(getTypeName(symbol)).isNull();
+
+    symbol.setType(new Type(new SymbolImpl("x", "mod.x")));
+    assertThat(getTypeName(symbol)).isEqualTo("mod.x");
+
+    symbol.setType(new Type(new ClassSymbolImpl("A", "mod.A")));
+    assertThat(getTypeName(symbol)).isEqualTo("mod.A");
+  }
+
 }

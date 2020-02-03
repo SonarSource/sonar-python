@@ -39,6 +39,7 @@ import org.sonar.python.checks.hotspots.PseudoRandomCheck;
 import org.sonar.python.checks.hotspots.PubliclyWritableDirectoriesCheck;
 import org.sonar.python.checks.hotspots.RegexCheck;
 import org.sonar.python.checks.hotspots.SQLQueriesCheck;
+import org.sonar.python.checks.hotspots.SecureCookieCheck;
 import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
 
@@ -127,6 +128,7 @@ public final class CheckList {
       ReturnYieldOutsideFunctionCheck.class,
       SameBranchCheck.class,
       SameConditionCheck.class,
+      SecureCookieCheck.class,
       SelfAssignmentCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
