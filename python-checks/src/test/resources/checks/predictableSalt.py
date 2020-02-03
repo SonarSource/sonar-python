@@ -9,7 +9,7 @@ password = 'password123'
 salt = crypt.mksalt(crypt.METHOD_SHA256)
 
 hash = crypt.crypt(password)         # Noncompliant {{Add an unpredictable salt value to this hash.}}
-#      ^^^^^^^^^^^^^^^^^^^^^
+#      ^^^^^^^^^^^
 hash = crypt.crypt(password, "")     # Noncompliant {{Make this salt unpredictable.}}
 #                            ^^
 hash = crypt.crypt(password, salt)     # Compliant

@@ -21,17 +21,15 @@ package org.sonar.python.checks;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -62,7 +60,7 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
 
   private static void checkArguments(CallExpression callExpression, int argNb, SubscriptionContext ctx) {
     if (callExpression.arguments().size() <= argNb) {
-      ctx.addIssue(callExpression, MISSING_SALT_MESSAGE);
+      ctx.addIssue(callExpression.callee(), MISSING_SALT_MESSAGE);
     }
     for (int i = 0; i < callExpression.arguments().size(); i++) {
       Argument argument = callExpression.arguments().get(i);
@@ -82,19 +80,13 @@ public class PredictableSaltCheck extends PythonSubscriptionCheck {
 
   private static void checkSensitiveArgument(RegularArgument regularArgument, SubscriptionContext ctx) {
     if (regularArgument.expression().is(Tree.Kind.NAME)) {
-      Symbol symbol = ((Name) regularArgument.expression()).symbol();
-      if (symbol == null) {
+      Expression expression = Expressions.singleAssignedValue((Name) regularArgument.expression());
+      if (expression == null) {
         return;
       }
-      List<Usage> bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).collect(Collectors.toList());
-      if (bindingUsages.size() == 1) {
-        Usage bindingUsage = bindingUsages.get(0);
-        if (bindingUsage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
-          AssignmentStatement assignmentStatement = (AssignmentStatement) TreeUtils.firstAncestorOfKind(bindingUsage.tree(), Tree.Kind.ASSIGNMENT_STMT);
-          if (assignmentStatement.assignedValue().is(Tree.Kind.STRING_LITERAL, Tree.Kind.NUMERIC_LITERAL)) {
-            ctx.addIssue(regularArgument, PREDICTABLE_SALT_MESSAGE).secondary(assignmentStatement, null);
-          }
-        }
+      if (expression.is(Tree.Kind.STRING_LITERAL)) {
+        AssignmentStatement assignmentStatement = (AssignmentStatement) TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
+        ctx.addIssue(regularArgument, PREDICTABLE_SALT_MESSAGE).secondary(assignmentStatement, null);
       }
     }
     if (regularArgument.expression().is(Tree.Kind.STRING_LITERAL)) {
