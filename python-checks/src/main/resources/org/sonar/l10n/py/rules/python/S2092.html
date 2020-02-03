@@ -19,7 +19,8 @@ request and thus cannot be observed by an unauthorized person during a man-in-th
 import http.cookies
 
 cookie = http.cookies.SimpleCookie()
-cookie['key'] = 'value' # Sensitive
+cookie['key'] = 'value'
+cookie['key']['secure'] = False # Sensitive
 </pre>
 <p>Flask</p>
 <pre>
