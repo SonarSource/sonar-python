@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Collections;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -26,7 +27,7 @@ public class ClearTextProtocolsCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/clearTextProtocols.py", new ClearTextProtocolsCheck());
+    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/clearTextProtocols.py"), new ClearTextProtocolsCheck());
   }
 
 }
