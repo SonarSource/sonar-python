@@ -21,27 +21,59 @@ package org.sonar.python.checks.hotspots;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.semantic.SymbolUtils;
 
+import static org.sonar.python.checks.Expressions.isFalsy;
+
 @Rule(key = "S2092")
 public class SecureCookieCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Make sure creating this cookie without the \"secure\" flag is safe.";
+  private static final Set<String> SET_COOKIE_METHODS = new HashSet<>(Arrays.asList(
+    "django.http.HttpResponse.set_cookie",
+    "django.http.HttpResponse.set_signed_cookie",
+    "django.http.HttpResponseRedirect.set_cookie",
+    "django.http.HttpResponseRedirect.set_signed_cookie",
+    "django.http.HttpResponsePermanentRedirect.set_cookie",
+    "django.http.HttpResponsePermanentRedirect.set_signed_cookie",
+    "django.http.HttpResponseNotModified.set_cookie",
+    "django.http.HttpResponseNotModified.set_signed_cookie",
+    "django.http.HttpResponseBadRequest.set_cookie",
+    "django.http.HttpResponseBadRequest.set_signed_cookie",
+    "django.http.HttpResponseNotFound.set_cookie",
+    "django.http.HttpResponseNotFound.set_signed_cookie",
+    "django.http.HttpResponseForbidden.set_cookie",
+    "django.http.HttpResponseForbidden.set_signed_cookie",
+    "django.http.HttpResponseNotAllowed.set_cookie",
+    "django.http.HttpResponseNotAllowed.set_signed_cookie",
+    "django.http.HttpResponseGone.set_cookie",
+    "django.http.HttpResponseGone.set_signed_cookie",
+    "django.http.HttpResponseServerError.set_cookie",
+    "django.http.HttpResponseServerError.set_signed_cookie"
+  ));
+
+  private static final String SECURE = "secure";
 
   @Override
   public void initialize(Context context) {
@@ -49,11 +81,36 @@ public class SecureCookieCheck extends PythonSubscriptionCheck {
       AssignmentStatement assignment = (AssignmentStatement) ctx.syntaxNode();
       getSubscriptionToCookies(assignment.lhsExpressions())
         .forEach(sub -> {
-          if (isSettingSecureFlag(sub) && isFalse(assignment.assignedValue())) {
+          if (isSettingSecureFlag(sub) && isFalsy(assignment.assignedValue())) {
             ctx.addIssue(assignment, MESSAGE);
           }
         });
     });
+
+    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      if (calleeSymbol != null && SET_COOKIE_METHODS.contains(calleeSymbol.fullyQualifiedName())) {
+        if (callExpression.arguments().stream().anyMatch(argument -> argument.is(Kind.UNPACKING_EXPR))) {
+          return;
+        }
+        RegularArgument secureArgument = getSecureArgument(callExpression.arguments());
+        if (secureArgument == null || isFalsy(secureArgument.expression())) {
+          ctx.addIssue(callExpression.callee(), MESSAGE);
+        }
+      }
+    });
+  }
+
+  @CheckForNull
+  private static RegularArgument getSecureArgument(List<Argument> arguments) {
+    return arguments.stream()
+      .map(RegularArgument.class::cast)
+      .filter(argument -> {
+        Name keywordArgument = argument.keywordArgument();
+        return keywordArgument != null && keywordArgument.name().equals(SECURE);
+      })
+      .findFirst().orElse(null);
   }
 
   private static Stream<SubscriptionExpression> getSubscriptionToCookies(List<ExpressionList> lhsExpressions) {
@@ -92,7 +149,7 @@ public class SecureCookieCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isSecureStringLiteral(Expression expression) {
-    return expression.is(Kind.STRING_LITERAL) && ((StringLiteral) expression).trimmedQuotesValue().equalsIgnoreCase("secure");
+    return expression.is(Kind.STRING_LITERAL) && ((StringLiteral) expression).trimmedQuotesValue().equalsIgnoreCase(SECURE);
   }
 
   @CheckForNull
@@ -106,7 +163,4 @@ public class SecureCookieCheck extends PythonSubscriptionCheck {
     return null;
   }
 
-  private static boolean isFalse(Expression expression) {
-    return expression.is(Kind.NAME) && ((Name) expression).name().equals("False");
-  }
 }
