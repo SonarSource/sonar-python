@@ -36,11 +36,13 @@ def django_tests():
 
     response2 = HttpResponseRedirect()
     response2.set_cookie("C5", "world") # Noncompliant
+    response2.set_cookie("C5", "world", None, None, "/", None, True) # OK
     response2.set_signed_cookie("C5", "world") # Noncompliant
     response2.set_signed_cookie("C5", "world", secure=True) # OK
     response2.set_signed_cookie("C5", "world", other=False, secure=True) # OK
     response2.set_signed_cookie("C5", "world", secure=False) # Noncompliant
     response2.set_signed_cookie("C5", "world", secure=None) # Noncompliant
+    response2.set_signed_cookie("C5", "", "world", None, None, "/", None, True) # OK
     kwargs = { secure : True }
     response2.set_signed_cookie("C5", "world", **kwargs) # OK
 
