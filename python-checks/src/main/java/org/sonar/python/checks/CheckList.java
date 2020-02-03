@@ -30,6 +30,7 @@ import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
+import org.sonar.python.checks.hotspots.HardCodedCredentialsCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
