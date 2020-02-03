@@ -280,6 +280,9 @@ public class SymbolUtils {
       smtp,
       smtpSSL
     )));
+    ClassSymbolImpl zipFile = new ClassSymbolImpl("ZipFile", "zipfile.ZipFile");
+    zipFile.setHasUnresolvedTypeHierarchy(false);
+    globalSymbols.put("zipfile", new HashSet<>(Collections.singleton(zipFile)));
     return globalSymbols;
   }
 }
