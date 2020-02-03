@@ -306,8 +306,8 @@ public class SymbolUtils {
   }
 
   private static ClassSymbolImpl classSymbol(String name, String fullyQualifiedName) {
-    ClassSymbolImpl djangoHttpResponseRedirect = new ClassSymbolImpl(name, fullyQualifiedName);
-    djangoHttpResponseRedirect.setHasUnresolvedTypeHierarchy(false);
-    return djangoHttpResponseRedirect;
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
+    classSymbol.setHasUnresolvedTypeHierarchy(false);
+    return classSymbol;
   }
 }
