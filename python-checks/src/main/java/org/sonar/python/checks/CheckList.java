@@ -68,6 +68,7 @@ public final class CheckList {
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
       DataEncryptionCheck.class,
+      DbNoPasswordCheck.class,
       DeadStoreCheck.class,
       DebugModeCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
