@@ -115,7 +115,7 @@ public class SecureCookieCheck extends PythonSubscriptionCheck {
         Name keywordArgument = argument.keywordArgument();
         return keywordArgument != null && keywordArgument.name().equals(SECURE);
       })
-      .findFirst().orElse(checkSensitivePositionalArgument(arguments, nArg));
+      .findFirst().orElseGet(() -> checkSensitivePositionalArgument(arguments, nArg));
   }
 
   private static RegularArgument checkSensitivePositionalArgument(List<Argument> arguments, int nArg) {
