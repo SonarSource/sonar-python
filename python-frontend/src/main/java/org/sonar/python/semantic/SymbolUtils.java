@@ -87,6 +87,18 @@ public class SymbolUtils {
     return globalSymbolsReadVisitor.symbolsByName.values().stream().filter(v -> !BuiltinSymbols.all().contains(v.fullyQualifiedName())).collect(Collectors.toSet());
   }
 
+  @CheckForNull
+  public static String getTypeName(@Nullable Symbol objectSymbol) {
+    if (objectSymbol == null) {
+      return null;
+    }
+    Type type = ((SymbolImpl) objectSymbol).type();
+    if (type != null) {
+      return type.symbol().fullyQualifiedName();
+    }
+    return null;
+  }
+
   private static class GlobalSymbolsBindingVisitor extends BaseTreeVisitor {
     private Map<String, Symbol> symbolsByName = new HashMap<>();
     private String fullyQualifiedModuleName;
@@ -264,25 +276,38 @@ public class SymbolUtils {
 
   public static Map<String, Set<Symbol>> externalModulesSymbols() {
     Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
-    ClassSymbolImpl flaskMail = new ClassSymbolImpl("Mail", "flask_mail.Mail");
-    flaskMail.setHasUnresolvedTypeHierarchy(false);
-    ClassSymbolImpl flaskConnection = new ClassSymbolImpl("Connection", "flask_mail.Connection");
-    flaskConnection.setHasUnresolvedTypeHierarchy(false);
     globalSymbols.put("flask_mail", new HashSet<>(Arrays.asList(
-      flaskMail,
-      flaskConnection
+      classSymbol("Mail", "flask_mail.Mail"),
+      classSymbol("Connection", "flask_mail.Connection")
       )));
-    ClassSymbolImpl smtp = new ClassSymbolImpl("SMTP", "smtplib.SMTP");
-    smtp.setHasUnresolvedTypeHierarchy(false);
-    ClassSymbolImpl smtpSSL = new ClassSymbolImpl("SMTP_SSL", "smtplib.SMTP_SSL");
-    smtpSSL.setHasUnresolvedTypeHierarchy(false);
     globalSymbols.put("smtplib", new HashSet<>(Arrays.asList(
-      smtp,
-      smtpSSL
+      classSymbol("SMTP", "smtplib.SMTP"),
+      classSymbol("SMTP_SSL", "smtplib.SMTP_SSL")
     )));
-    ClassSymbolImpl zipFile = new ClassSymbolImpl("ZipFile", "zipfile.ZipFile");
-    zipFile.setHasUnresolvedTypeHierarchy(false);
-    globalSymbols.put("zipfile", new HashSet<>(Collections.singleton(zipFile)));
+    globalSymbols.put("zipfile", new HashSet<>(Collections.singleton(classSymbol("ZipFile", "zipfile.ZipFile"))));
+    globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(classSymbol("SimpleCookie", "http.cookies.SimpleCookie"))));
+
+    globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
+      classSymbol("HttpResponse", "django.http.HttpResponse"),
+      classSymbol("HttpResponseRedirect", "django.http.HttpResponseRedirect"),
+      classSymbol("HttpResponsePermanentRedirect", "django.http.HttpResponsePermanentRedirect"),
+      classSymbol("HttpResponseNotModified", "django.http.HttpResponseNotModified"),
+      classSymbol("HttpResponseNotFound", "django.http.HttpResponseNotFound"),
+      classSymbol("HttpResponseForbidden", "django.http.HttpResponseForbidden"),
+      classSymbol("HttpResponseNotAllowed", "django.http.HttpResponseNotAllowed"),
+      classSymbol("HttpResponseGone", "django.http.HttpResponseGone"),
+      classSymbol("HttpResponseServerError", "django.http.HttpResponseServerError"),
+      classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest")
+    )));
+
+    globalSymbols.put("flask", new HashSet<>(Collections.singletonList(classSymbol("Response", "flask.Response"))));
+
     return globalSymbols;
+  }
+
+  private static ClassSymbolImpl classSymbol(String name, String fullyQualifiedName) {
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
+    classSymbol.setHasUnresolvedTypeHierarchy(false);
+    return classSymbol;
   }
 }
