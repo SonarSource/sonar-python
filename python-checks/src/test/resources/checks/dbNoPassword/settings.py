@@ -36,7 +36,7 @@ DATABASES[42] = {
 
 DATABASES, OTHER = {
     'postgresql_db': {
-        'PASSWORD': '',                            # Compliant
+        'PASSWORD': '',                            # out of scope
     }
 }, 42
 
