@@ -560,20 +560,32 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void addTypeToSymbol(Name nameTree, Expression rhs) {
-      Type type = null;
-      if (rhs.is(Kind.CALL_EXPR)) {
-        Symbol calleeSymbol = ((CallExpression) rhs).calleeSymbol();
-        if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
-          ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
-          if (classSymbol.superClasses().isEmpty() && !classSymbol.hasUnresolvedTypeHierarchy()) {
-            type = new Type(calleeSymbol);
-          }
-        }
-      }
+      Type type = rhs.is(Kind.CALL_EXPR) ? getReturnType((CallExpression) rhs) : null;
       SymbolImpl symbol = currentScope().resolve(nameTree.name());
       if (symbol != null && symbol.usages().stream().filter(Usage::isBindingUsage).count() == 1) {
         symbol.setType(type);
       }
+    }
+
+    @CheckForNull
+    private Type getReturnType(CallExpression rhs) {
+      Symbol calleeSymbol = rhs.calleeSymbol();
+      if (calleeSymbol == null) {
+        return null;
+      }
+      if (calleeSymbol.kind() == Symbol.Kind.CLASS) {
+        ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
+        // type of inherited methods is not handled - See SONARPY-561
+        if (classSymbol.superClasses().isEmpty() && !classSymbol.hasUnresolvedTypeHierarchy()) {
+          return new Type(calleeSymbol);
+        }
+      } else if (calleeSymbol.kind() == Symbol.Kind.FUNCTION) {
+        Type returnType = ((FunctionSymbolImpl) calleeSymbol).returnType();
+        if (returnType != null) {
+          return new Type(returnType.symbol());
+        }
+      }
+      return null;
     }
 
   }
