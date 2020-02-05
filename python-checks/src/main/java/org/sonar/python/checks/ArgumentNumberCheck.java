@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -65,15 +66,22 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
         long minRequiredPositionalArguments = functionSymbol.parameters().stream()
           .filter(parameterName -> !parameterName.isKeywordOnly() && !parameterName.hasDefaultValue()).count();
         if (nArguments < minRequiredPositionalArguments || nArguments > functionSymbol.parameters().size()) {
-          ctx.addIssue(callExpression.callee(),
-            message(functionSymbol.name(), minRequiredPositionalArguments, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments))
-          .secondary(functionSymbol.definitionLocation(), FUNCTION_DEFINITION);
+          PreciseIssue preciseIssue = ctx.addIssue(callExpression.callee(),
+            message(functionSymbol.name(), minRequiredPositionalArguments, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments));
+          addSecondary(functionSymbol, preciseIssue);
         }
 
         checkKeywordArguments(ctx, callExpression, functionSymbol, callExpression.callee());
       }
 
     });
+  }
+
+  private static void addSecondary(FunctionSymbol functionSymbol, PreciseIssue preciseIssue) {
+    LocationInFile definitionLocation = functionSymbol.definitionLocation();
+    if (definitionLocation != null) {
+      preciseIssue.secondary(definitionLocation, FUNCTION_DEFINITION);
+    }
   }
 
   private static void checkKeywordArguments(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol, Expression callee) {
@@ -87,8 +95,8 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       Name keyword = arg.keywordArgument();
       if (keyword != null) {
         if (parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()))) {
-          ctx.addIssue(argument, "Remove this unexpected named argument '" + keyword.name() +  "'.")
-            .secondary(functionSymbol.definitionLocation(), FUNCTION_DEFINITION);
+          PreciseIssue preciseIssue = ctx.addIssue(argument, "Remove this unexpected named argument '" + keyword.name() + "'.");
+          addSecondary(functionSymbol, preciseIssue);
         } else {
           mandatoryParamNamesKeywordOnly.remove(keyword.name());
         }
@@ -99,8 +107,8 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       for (String param : mandatoryParamNamesKeywordOnly) {
         message.append("'").append(param).append("' ");
       }
-      ctx.addIssue(callee, message.toString().trim())
-        .secondary(functionSymbol.definitionLocation(), FUNCTION_DEFINITION);
+      PreciseIssue preciseIssue = ctx.addIssue(callee, message.toString().trim());
+      addSecondary(functionSymbol, preciseIssue);
     }
   }
 }
