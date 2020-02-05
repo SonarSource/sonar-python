@@ -32,6 +32,7 @@ public interface FunctionSymbol extends Symbol {
 
   boolean hasDecorators();
 
+  @CheckForNull
   LocationInFile definitionLocation();
 
   interface Parameter {
