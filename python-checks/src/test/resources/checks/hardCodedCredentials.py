@@ -36,9 +36,9 @@ class A:
     def a(self,pwd="azerty123", other=None):  # Noncompliant
 
         var1 = 'admin'
-        var1 = 'user=admin&password=Password123'        # Noncompliant
-        var1 = 'user=admin&passwd=Password123'          # Noncompliant
-        var1 = 'user=admin&pwd=Password123'             # Noncompliant
+        var1 = 'user=admin&password=Azerty123'        # Noncompliant
+        var1 = 'user=admin&passwd=Azerty123'          # Noncompliant
+        var1 = 'user=admin&pwd=Azerty123'             # Noncompliant
         var1 = 'user=admin&password='                   # OK
         var1 = 'user=admin&password= '                  # OK
         var1 = "user=%s&password=%s" % "Password123"    # OK FN?
@@ -133,34 +133,34 @@ class A:
         password = getDecrypted(encoded_password)                   # OK
     
     def db(self, pwd):
-        mysql.connector.connect(host='localhost', user='root', password='password')  # Noncompliant
-        mysql.connector.connection.MySQLConnection(host='localhost', user='root', password='password')  # Noncompliant
+        mysql.connector.connect(host='localhost', user='root', password='Azerty123')  # Noncompliant
+        mysql.connector.connection.MySQLConnection(host='localhost', user='root', password='password')  # OK (avoid FPs)
         mysql.connector.connect(host='localhost', user='root', password=pwd)  # OK
         mysql.connector.connection.MySQLConnection(host='localhost', user='root', password=pwd)  # OK
 
-        pymysql.connect(host='localhost', user='root', password='password') # Noncompliant
+        pymysql.connect(host='localhost', user='root', password='Azerty123') # Noncompliant
         pymysql.connect('localhost', 'root', 'password') # Noncompliant
-        pymysql.connections.Connection(host='localhost', user='root', password='password') # Noncompliant
+        pymysql.connections.Connection(host='localhost', user='root', password='password') # OK (avoid FPs)
         pymysql.connections.Connection('localhost', 'root', 'password') # Noncompliant
         pymysql.connect(host='localhost', user='root', password=pwd) # OK
         pymysql.connect('localhost', 'root', pwd) # OK
         pymysql.connections.Connection(host='localhost', user='root', password=pwd) # OK
         pymysql.connections.Connection('localhost', 'root', pwd) # OK
 
-        psycopg2.connect(host='localhost', user='postgres', password='password') # Noncompliant
+        psycopg2.connect(host='localhost', user='postgres', password='Azerty123') # Noncompliant
         psycopg2.connect(host='localhost', user='postgres', password=pwd,) # OK
 
-        pgdb.connect(host='localhost', user='postgres', password='password') # Noncompliant
+        pgdb.connect(host='localhost', user='postgres', password='Azerty123') # Noncompliant
         pgdb.connect('localhost', 'postgres', 'password') # Noncompliant
         pgdb.connect(host='localhost', user='postgres', password=pwd) # OK
         pgdb.connect('localhost', 'postgres', pwd) # OK
 
-        pg.DB(host='localhost', user='postgres', passwd='password') # Noncompliant
+        pg.DB(host='localhost', user='postgres', passwd='Azerty123') # Noncompliant
         pg.DB(None, 'localhost', 5432, None, 'postgres', 'password') # Noncompliant
         pg.DB(host='localhost', user='postgres', passwd=pwd) # OK
         pg.DB(None, 'localhost', 5432, None, 'postgres', pwd) # OK
 
-        pg.connect(host='localhost', user='postgres', passwd='password') # Noncompliant
+        pg.connect(host='localhost', user='postgres', passwd='Azerty123') # Noncompliant
         pg.connect(None, 'localhost', 5432, None, 'postgres', 'password') # Noncompliant
         pg.connect(host='localhost', user='postgres', passwd=pwd) # OK
         pg.connect(None, 'localhost', 5432, None, 'postgres', pwd) # OK
@@ -205,3 +205,14 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
+dict1 = {'password': ''} # Compliant
+dict2 = dict(password='AZURE_PASSWORD') # Compliant
+dict3 = {'password': 'password'} # Compliant
+dict4 = {"login_password": "password"} # Compliant
+module.fail_json(msg="Password parameter is missing."
+                                     " Please specify this parameter in task or"
+                                     " export environment variable like 'export VMWARE_PASSWORD=ESXI_PASSWORD'") # Compliant
+jim = User(username='jimcarry',password="password88") # Compliant
+conn = pymssql.connect(server='yourserver', user='yourusername@yourserver',
+             password='yourpassword', database='yourdatabase') # Compliant

@@ -58,7 +58,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 @Rule(key = "S2068")
 public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
-  private static final String DEFAULT_CREDENTIAL_WORDS = "password,passwd,pwd, passphrase";
+  private static final String DEFAULT_CREDENTIAL_WORDS = "password,passwd,pwd,passphrase";
 
   @RuleProperty(
     key = "credentialWords",
@@ -66,7 +66,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     defaultValue = DEFAULT_CREDENTIAL_WORDS)
   public String credentialWords = DEFAULT_CREDENTIAL_WORDS;
 
-  public static final String MESSAGE = "Remove this hard-coded password.";
+  public static final String MESSAGE = "Review this potentially hard-coded credential.";
 
   private List<Pattern> variablePatterns = null;
   private List<Pattern> literalPatterns = null;
@@ -98,7 +98,9 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   private Stream<Pattern> literalPatterns() {
     if (literalPatterns == null) {
       // Avoid raising on prepared statements
-      literalPatterns = toPatterns("=[^:%'?\\s]+");
+      String credentials = Stream.of(credentialWords.split(","))
+        .map(String::trim).collect(Collectors.joining("|"));
+      literalPatterns = toPatterns("=(?!.*(" + credentials + "))[^:%'?\\s]+");
     }
     return literalPatterns.stream();
   }
@@ -120,7 +122,10 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
         KeyValuePair keyValuePair = (KeyValuePair) dictionaryLiteralElement;
         if (keyValuePair.key().is(Kind.STRING_LITERAL) && isCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns())
           && keyValuePair.value().is(Kind.STRING_LITERAL)) {
-          ctx.addIssue(dictionaryLiteralElement, MESSAGE);
+          StringLiteral literal = (StringLiteral) keyValuePair.value();
+          if (isNonEmptyStringLiteral(literal) && !isCredential(literal.trimmedQuotesValue(), variablePatterns())) {
+            ctx.addIssue(dictionaryLiteralElement, MESSAGE);
+          }
         }
       }
     }
@@ -131,7 +136,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       Name parameterName = parameter.name();
       Expression defaultValue = parameter.defaultValue();
       if (parameterName != null && isCredential(parameterName.name(), variablePatterns()) && defaultValue != null
-        && isNonEmptyStringLiteral(defaultValue)) {
+        && isNonEmptyStringLiteral(defaultValue) && !isCredential(((StringLiteral) defaultValue).trimmedQuotesValue(), variablePatterns())) {
         ctx.addIssue(parameter, MESSAGE);
       }
     }
@@ -139,7 +144,8 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private void handleRegularArgument(RegularArgument regularArgument, SubscriptionContext ctx) {
     Name keywordArgument = regularArgument.keywordArgument();
-    if (keywordArgument != null && isCredential(keywordArgument.name(), variablePatterns()) && isNonEmptyStringLiteral(regularArgument.expression())) {
+    if (keywordArgument != null && isCredential(keywordArgument.name(), variablePatterns()) && isNonEmptyStringLiteral(regularArgument.expression())
+      && !isCredential(((StringLiteral) regularArgument.expression()).trimmedQuotesValue(), variablePatterns())) {
       ctx.addIssue(regularArgument, MESSAGE);
     }
   }
