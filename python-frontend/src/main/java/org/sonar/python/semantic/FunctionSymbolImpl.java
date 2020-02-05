@@ -42,6 +42,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private boolean hasVariadicParameter = false;
   private final boolean isInstanceMethod;
   private final boolean hasDecorators;
+  private Type returnType = null;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
@@ -66,6 +67,19 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     hasVariadicParameter = functionSymbol.hasVariadicParameter();
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
+    returnType = ((FunctionSymbolImpl) functionSymbol).returnType();
+  }
+
+  FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
+                     boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters, Type returnType) {
+    super(name, fullyQualifiedName);
+    setKind(Kind.FUNCTION);
+    this.hasVariadicParameter = hasVariadicParameter;
+    this.isInstanceMethod = isInstanceMethod;
+    this.hasDecorators = hasDecorators;
+    this.parameters.addAll(parameters);
+    this.returnType = returnType;
+    this.functionDefinitionLocation = null;
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
@@ -120,6 +134,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   @Override
   public LocationInFile definitionLocation() {
     return functionDefinitionLocation;
+  }
+
+  @CheckForNull
+  Type returnType() {
+    return returnType;
   }
 
   private static class ParameterImpl implements Parameter {
