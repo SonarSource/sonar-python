@@ -32,6 +32,7 @@ import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
 import org.sonar.python.checks.hotspots.HardCodedCredentialsCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
+import org.sonar.python.checks.hotspots.HttpOnlyCookieCheck;
 import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
@@ -91,6 +92,7 @@ public final class CheckList {
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
+      HttpOnlyCookieCheck.class,
       IgnoredParameterCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
       IncorrectExceptionTypeCheck.class,
