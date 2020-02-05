@@ -30,11 +30,16 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5332")
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
@@ -63,6 +68,35 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       Symbol symbol = ((CallExpression) ctx.syntaxNode()).calleeSymbol();
       isUnsafeLib(symbol).ifPresent(protocol -> ctx.addIssue(ctx.syntaxNode(), message(protocol)));
     });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> handleAssignmentStatement((AssignmentStatement) ctx.syntaxNode(), ctx));
+  }
+
+  private static void handleAssignmentStatement(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
+    if (assignmentStatement.lhsExpressions().size() > 1) {
+      // avoid potential FPs
+      return;
+    }
+    if (assignmentStatement.lhsExpressions().get(0).expressions().get(0) instanceof HasSymbol) {
+      Symbol symbol = ((HasSymbol) assignmentStatement.lhsExpressions().get(0).expressions().get(0)).symbol();
+      if (symbol == null) {
+        return;
+      }
+      String symbolTypeName = SymbolUtils.getTypeName(symbol);
+      if (symbolTypeName != null && symbolTypeName.equals("smtplib.SMTP")) {
+        boolean usesEncryption = symbol.usages().stream().anyMatch(u -> {
+          Tree tree = TreeUtils.firstAncestorOfKind(u.tree(), Tree.Kind.CALL_EXPR);
+          if (tree != null) {
+            Symbol calleeSymbol = ((CallExpression) tree).calleeSymbol();
+            return calleeSymbol != null && "smtplib.SMTP.starttls".equals(calleeSymbol.fullyQualifiedName());
+          }
+          return false;
+        });
+        if (!usesEncryption) {
+          ctx.addIssue(assignmentStatement.assignedValue(), "Make sure STARTTLS is used to upgrade to a secure connection using SSL/TLS.");
+        }
+      }
+    }
   }
 
   private static Optional<String> unsafeProtocol(String literalValue) {
