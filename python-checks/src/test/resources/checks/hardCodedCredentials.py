@@ -28,17 +28,17 @@ class A:
 
     def __init__(self):
         self.passed = "passed"
-        fieldNameWithPasswordInIt = "azerty123"            # Noncompliant
+        fieldNameWithPasswordInIt = "azerty123"            # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         fieldNameWithPasswordInIt = os.getenv("password", "")  # OK
-        self.fieldNameWithPasswordInIt = "azerty123"            # Noncompliant
+        self.fieldNameWithPasswordInIt = "azerty123"            # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         self.fieldNameWithPasswordInIt = os.getenv("password", "")  # OK
 
-    def a(self,pwd="azerty123", other=None):  # Noncompliant
+    def a(self,pwd="azerty123", other=None):  # Noncompliant {{"pwd" detected here, review this potentially hard-coded credential.}}
 
         var1 = 'admin'
-        var1 = 'user=admin&password=Azerty123'        # Noncompliant
-        var1 = 'user=admin&passwd=Azerty123'          # Noncompliant
-        var1 = 'user=admin&pwd=Azerty123'             # Noncompliant
+        var1 = 'user=admin&password=Azerty123'        # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
+        var1 = 'user=admin&passwd=Azerty123'          # Noncompliant {{"passwd" detected here, review this potentially hard-coded credential.}}
+        var1 = 'user=admin&pwd=Azerty123'             # Noncompliant {{"pwd" detected here, review this potentially hard-coded credential.}}
         var1 = 'user=admin&password='                   # OK
         var1 = 'user=admin&password= '                  # OK
         var1 = "user=%s&password=%s" % "Password123"    # OK FN?
@@ -50,7 +50,7 @@ class A:
         var1 = "&password=:param"                       # OK
         var1 = "&password='"+pwd+"'"                    # OK
 
-        url = "http://user:azerty123@domain.com"      # Noncompliant
+        url = "http://user:azerty123@domain.com"      # Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
         url = "http://user:@domain.com"               # OK
         url = "http://user@domain.com:80"             # OK
         url = "http://user@domain.com"                # OK
@@ -58,7 +58,7 @@ class A:
 
         username = 'admin'        
         password = pwd
-        password = 'azerty123'                                    # Noncompliant
+        password = 'azerty123'                                    # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         password = "azerty123"                                    # Noncompliant
         password = '''azerty123'''                                # Noncompliant
         password = """azerty123"""                                # Noncompliant
@@ -87,7 +87,7 @@ class A:
             pass
         elif 'Password123' == password: # Noncompliant
             pass
-        elif password.__eq__('Password123'): # Noncompliant
+        elif password.__eq__('Password123'): # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
             pass
         elif something.__eq__('Password123'): # OK
              pass
@@ -95,7 +95,7 @@ class A:
             pass
         elif password.__eq__(*unpack): # OK
             pass
-        elif 'Password123'.__eq__(password): # Noncompliant
+        elif 'Password123'.__eq__(password): # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
             pass
         elif 'Password123'.__eq__(something): # OK
             pass
@@ -118,7 +118,7 @@ class A:
         if foo.bar == "Azerty123": # OK
             pass
 
-        hash_map = { 'password': "azerty123"} # Noncompliant
+        hash_map = { 'password': "azerty123"} # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         hash_map = { ("a", "b") : "c"} # OK
         hash_map = { something : "c"} # OK
         hash_map = {'admin_form' : adminForm, **self.admin.context(request),} # OK
@@ -139,7 +139,8 @@ class A:
         mysql.connector.connection.MySQLConnection(host='localhost', user='root', password=pwd)  # OK
 
         pymysql.connect(host='localhost', user='root', password='Azerty123') # Noncompliant
-        pymysql.connect('localhost', 'root', 'password') # Noncompliant
+        pymysql.connect('localhost', 'root', 'password') # Noncompliant {{Review this potentially hard-coded credential.}}
+#                                            ^^^^^^^^^^
         pymysql.connections.Connection(host='localhost', user='root', password='password') # OK (avoid FPs)
         pymysql.connections.Connection('localhost', 'root', 'password') # Noncompliant
         pymysql.connect(host='localhost', user='root', password=pwd) # OK

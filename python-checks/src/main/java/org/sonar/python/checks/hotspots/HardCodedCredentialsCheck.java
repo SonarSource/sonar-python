@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -66,7 +67,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     defaultValue = DEFAULT_CREDENTIAL_WORDS)
   public String credentialWords = DEFAULT_CREDENTIAL_WORDS;
 
-  public static final String MESSAGE = "Review this potentially hard-coded credential.";
+  public static final String MESSAGE = "\"%s\" detected here, review this potentially hard-coded credential.";
 
   private List<Pattern> variablePatterns = null;
   private List<Pattern> literalPatterns = null;
@@ -120,11 +121,13 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     for (DictionaryLiteralElement dictionaryLiteralElement : dictionaryLiteral.elements()) {
       if (dictionaryLiteralElement.is(Kind.KEY_VALUE_PAIR)) {
         KeyValuePair keyValuePair = (KeyValuePair) dictionaryLiteralElement;
-        if (keyValuePair.key().is(Kind.STRING_LITERAL) && isCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns())
-          && keyValuePair.value().is(Kind.STRING_LITERAL)) {
-          StringLiteral literal = (StringLiteral) keyValuePair.value();
-          if (isNonEmptyStringLiteral(literal) && !isCredential(literal.trimmedQuotesValue(), variablePatterns())) {
-            ctx.addIssue(dictionaryLiteralElement, MESSAGE);
+        if (keyValuePair.key().is(Kind.STRING_LITERAL) && keyValuePair.value().is(Kind.STRING_LITERAL)) {
+          String matchedCredential = matchedCredential(((StringLiteral) keyValuePair.key()).trimmedQuotesValue(), variablePatterns());
+          if (matchedCredential != null) {
+            StringLiteral literal = (StringLiteral) keyValuePair.value();
+            if (isNonEmptyStringLiteral(literal) && !isCredential(literal.trimmedQuotesValue(), variablePatterns())) {
+              ctx.addIssue(dictionaryLiteralElement, String.format(MESSAGE, matchedCredential));
+            }
           }
         }
       }
@@ -135,18 +138,25 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     for (Parameter parameter : parameterList.nonTuple()) {
       Name parameterName = parameter.name();
       Expression defaultValue = parameter.defaultValue();
-      if (parameterName != null && isCredential(parameterName.name(), variablePatterns()) && defaultValue != null
-        && isNonEmptyStringLiteral(defaultValue) && !isCredential(((StringLiteral) defaultValue).trimmedQuotesValue(), variablePatterns())) {
-        ctx.addIssue(parameter, MESSAGE);
+      if (parameterName == null) {
+        continue;
+      }
+      String matchedCredential = matchedCredential(parameterName.name(), variablePatterns());
+      if (matchedCredential != null && defaultValue != null && isNonEmptyStringLiteral(defaultValue)
+        && !isCredential(((StringLiteral) defaultValue).trimmedQuotesValue(), variablePatterns())) {
+        ctx.addIssue(parameter, String.format(MESSAGE, matchedCredential));
       }
     }
   }
 
   private void handleRegularArgument(RegularArgument regularArgument, SubscriptionContext ctx) {
     Name keywordArgument = regularArgument.keywordArgument();
-    if (keywordArgument != null && isCredential(keywordArgument.name(), variablePatterns()) && isNonEmptyStringLiteral(regularArgument.expression())
-      && !isCredential(((StringLiteral) regularArgument.expression()).trimmedQuotesValue(), variablePatterns())) {
-      ctx.addIssue(regularArgument, MESSAGE);
+    if (keywordArgument != null) {
+      String matchedCredential = matchedCredential(keywordArgument.name(), variablePatterns());
+      if (matchedCredential != null && isNonEmptyStringLiteral(regularArgument.expression())
+        && !isCredential(((StringLiteral) regularArgument.expression()).trimmedQuotesValue(), variablePatterns())) {
+        ctx.addIssue(regularArgument, String.format(MESSAGE, matchedCredential));
+      }
     }
   }
 
@@ -158,12 +168,16 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (callExpression.callee().is(Kind.QUALIFIED_EXPR)) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
       if (qualifiedExpression.name().name().equals("__eq__")) {
-        if (isQualifiedExpressionCredential(qualifiedExpression)) {
+        String matchedCredential = matchedCredentialFromQualifiedExpression(qualifiedExpression);
+        if (matchedCredential != null) {
           if (isFirstArgumentAStringLiteral(callExpression)) {
-            ctx.addIssue(callExpression, MESSAGE);
+            ctx.addIssue(callExpression, String.format(MESSAGE, matchedCredential));
           }
-        } else if (qualifiedExpression.qualifier().is(Kind.STRING_LITERAL) && isFirstArgumentCredentials(callExpression)) {
-          ctx.addIssue(callExpression, MESSAGE);
+        } else if (qualifiedExpression.qualifier().is(Kind.STRING_LITERAL)) {
+          String matched = firstArgumentCredential(callExpression);
+          if (matched != null) {
+            ctx.addIssue(callExpression, String.format(MESSAGE, matched));
+          }
         }
       }
     }
@@ -173,13 +187,16 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private boolean isFirstArgumentCredentials(CallExpression callExpression) {
+  private String firstArgumentCredential(CallExpression callExpression) {
     Argument argument = callExpression.arguments().get(0);
+    String matchedCredential = null;
     if (argument.is(Kind.REGULAR_ARGUMENT)) {
       RegularArgument regularArgument = (RegularArgument) argument;
-      return regularArgument.expression().is(Kind.NAME) && isCredential(((Name) regularArgument.expression()).name(), variablePatterns());
+      if (regularArgument.expression().is(Kind.NAME)) {
+        matchedCredential = matchedCredential(((Name) regularArgument.expression()).name(), variablePatterns());
+      }
     }
-    return false;
+    return matchedCredential;
   }
 
   private static boolean isFirstArgumentAStringLiteral(CallExpression callExpression) {
@@ -187,8 +204,12 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       && ((RegularArgument) callExpression.arguments().get(0)).expression().is(Kind.STRING_LITERAL);
   }
 
-  private boolean isQualifiedExpressionCredential(QualifiedExpression qualifiedExpression) {
-    return qualifiedExpression.qualifier().is(Kind.NAME) && isCredential(((Name) qualifiedExpression.qualifier()).name(), variablePatterns());
+  private String matchedCredentialFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
+    String matchedCredential = null;
+    if (qualifiedExpression.qualifier().is(Kind.NAME)) {
+      matchedCredential = matchedCredential(((Name) qualifiedExpression.qualifier()).name(), variablePatterns());
+    }
+    return matchedCredential;
   }
 
   private static void checkSensitiveArgument(CallExpression callExpression, int argNb, SubscriptionContext ctx) {
@@ -199,7 +220,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
         if (regularArgument.keywordArgument() != null) {
           return;
         } else if (i == argNb && regularArgument.expression().is(Kind.STRING_LITERAL)) {
-          ctx.addIssue(callExpression, MESSAGE);
+          ctx.addIssue(regularArgument, "Review this potentially hard-coded credential.");
         }
       }
     }
@@ -209,11 +230,12 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (stringLiteral.stringElements().stream().anyMatch(StringElement::isInterpolated)) {
       return;
     }
-    if (isCredential(stringLiteral.trimmedQuotesValue(), literalPatterns())) {
-      ctx.addIssue(stringLiteral, MESSAGE);
+    String matchedCredential = matchedCredential(stringLiteral.trimmedQuotesValue(), literalPatterns());
+    if (matchedCredential != null) {
+      ctx.addIssue(stringLiteral, String.format(MESSAGE, matchedCredential));
     }
     if (isURLWithCredentials(stringLiteral)) {
-      ctx.addIssue(stringLiteral, MESSAGE);
+      ctx.addIssue(stringLiteral, "Review this hard-coded URL, which may contain a credential.");
     }
   }
 
@@ -231,15 +253,15 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private void handleBinaryExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
-    boolean shouldReport = false;
+    String matchedCredential = null;
     if (binaryExpression.leftOperand() instanceof HasSymbol && binaryExpression.rightOperand().is(Tree.Kind.STRING_LITERAL)) {
-      shouldReport = isSymbolCredential(((HasSymbol) binaryExpression.leftOperand()).symbol());
+      matchedCredential = credentialSymbolName(((HasSymbol) binaryExpression.leftOperand()).symbol());
     }
     if (binaryExpression.rightOperand() instanceof HasSymbol && binaryExpression.leftOperand().is(Tree.Kind.STRING_LITERAL)) {
-      shouldReport = isSymbolCredential(((HasSymbol) binaryExpression.rightOperand()).symbol());
+      matchedCredential = credentialSymbolName(((HasSymbol) binaryExpression.rightOperand()).symbol());
     }
-    if (shouldReport) {
-      ctx.addIssue(binaryExpression, MESSAGE);
+    if (matchedCredential != null) {
+      ctx.addIssue(binaryExpression, String.format(MESSAGE, matchedCredential));
     }
   }
 
@@ -249,29 +271,37 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
     if (expression instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) expression).symbol();
-      if (isSymbolCredential(symbol)) {
-        checkAssignedValue(assignmentStatement, ctx);
+      String matchedCredential = credentialSymbolName(symbol);
+      if (matchedCredential != null) {
+        checkAssignedValue(assignmentStatement, matchedCredential, ctx);
       }
     }
 
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
-      if (subscriptionExpression.subscripts().expressions().stream().anyMatch(e -> e.is(Kind.STRING_LITERAL) &&
-        isCredential(((StringLiteral) e).trimmedQuotesValue(), variablePatterns()))) {
-        checkAssignedValue(assignmentStatement, ctx);
+      for (Expression expr : subscriptionExpression.subscripts().expressions()) {
+        if (expr.is(Kind.STRING_LITERAL)) {
+          String matchedCredential = matchedCredential(((StringLiteral) expr).trimmedQuotesValue(), variablePatterns());
+          if (matchedCredential != null) {
+            checkAssignedValue(assignmentStatement, matchedCredential, ctx);
+          }
+        }
       }
     }
   }
 
-  private void checkAssignedValue(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
+  private void checkAssignedValue(AssignmentStatement assignmentStatement, String matchedCredential, SubscriptionContext ctx) {
     Expression assignedValue = assignmentStatement.assignedValue();
     if (isNonEmptyStringLiteral(assignedValue) && !isCredential(((StringLiteral) assignedValue).trimmedQuotesValue(), variablePatterns())) {
-      ctx.addIssue(assignmentStatement, MESSAGE);
+      ctx.addIssue(assignmentStatement, String.format(MESSAGE, matchedCredential));
     }
   }
 
-  private boolean isSymbolCredential(@CheckForNull Symbol symbol) {
-    return symbol != null && isCredential(symbol.name(), variablePatterns());
+  private String credentialSymbolName(@CheckForNull Symbol symbol) {
+    if (symbol != null) {
+      return matchedCredential(symbol.name(), variablePatterns());
+    }
+    return null;
   }
 
   private static boolean isNonEmptyStringLiteral(Tree tree) {
@@ -280,6 +310,20 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
 
   private static boolean isCredential(String target, Stream<Pattern> patterns) {
     return patterns.anyMatch(pattern -> pattern.matcher(target).find());
+  }
+
+  private String matchedCredential(String target, Stream<Pattern> patterns) {
+    Optional<Pattern> matched = patterns.filter(pattern -> pattern.matcher(target).find()).findFirst();
+    if (matched.isPresent()) {
+      String matchedPattern = matched.get().pattern();
+      int suffixStart = matchedPattern.indexOf('=');
+      if (suffixStart > 0) {
+        return matchedPattern.substring(0, suffixStart);
+      } else {
+        return matchedPattern;
+      }
+    }
+    return null;
   }
 
   private List<Pattern> toPatterns(String suffix) {
