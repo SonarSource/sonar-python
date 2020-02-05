@@ -207,6 +207,7 @@ DATABASES = {
     }
 }
 
+#To avoid false positives, no issue is raised when a credential word is present both as a key/variable name and as a value
 dict1 = {'password': ''} # Compliant
 dict2 = dict(password='AZURE_PASSWORD') # Compliant
 dict3 = {'password': 'password'} # Compliant
