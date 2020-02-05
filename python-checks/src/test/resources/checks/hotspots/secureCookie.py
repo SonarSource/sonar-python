@@ -70,10 +70,16 @@ def django_tests():
 
 def flask_tests():
     import flask
-    from flask import Response
+    from flask import Response, make_response, redirect
 
     response1 = Response('OK')
     response1.set_cookie('c1', 'value') # Noncompliant
 
     response2 = flask.Response('OK')
     response2.set_cookie('c1', 'value', secure = True) # OK
+
+    response3 = make_response()
+    response3.set_cookie('c', 'value') # Noncompliant
+
+    response4 = redirect()
+    response4.set_cookie('c', 'value') # Noncompliant

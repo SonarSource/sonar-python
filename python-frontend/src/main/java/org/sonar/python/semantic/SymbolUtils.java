@@ -300,7 +300,12 @@ public class SymbolUtils {
       classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest")
     )));
 
-    globalSymbols.put("flask", new HashSet<>(Collections.singletonList(classSymbol("Response", "flask.Response"))));
+    ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response");
+    globalSymbols.put("flask", new HashSet<>(Arrays.asList(
+      flaskResponse,
+      new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList(), new Type(flaskResponse)),
+      new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList(), new Type(flaskResponse))
+    )));
 
     return globalSymbols;
   }
