@@ -123,3 +123,21 @@ unknown.unknwon(smtp4)
 
 def method(self):
   self.something[smth] = None
+
+def ignore_multiple_assignments():
+  smtp1 = smtp2 = smtplib.SMTP("smtp.gmail.com", port=587) # OK
+  smtp2.starttls(context=context)
+
+#FP
+def FP_same_reference():
+  smtp1 =  smtplib.SMTP("smtp.gmail.com", port=587) # Noncompliant
+  smtp2 = smtp1
+  smtp2.starttls(context=context)
+
+#FP
+def FP_starttls_in_different_method():
+  smtp_safe =  smtplib.SMTP("smtp.gmail.com", port=587) # Noncompliant
+  start_tls(smtp_safe)
+
+def start_tls(x):
+  x.starttls(context=context)

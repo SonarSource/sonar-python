@@ -31,13 +31,13 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -73,6 +73,10 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   }
 
   private static void handleAssignmentStatement(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {
+    if (assignmentStatement.lhsExpressions().size() > 1) {
+      // avoid potential FPs
+      return;
+    }
     if (assignmentStatement.lhsExpressions().get(0).expressions().get(0) instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) assignmentStatement.lhsExpressions().get(0).expressions().get(0)).symbol();
       if (symbol == null) {
