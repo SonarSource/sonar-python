@@ -42,6 +42,7 @@ import org.sonar.python.checks.hotspots.SQLQueriesCheck;
 import org.sonar.python.checks.hotspots.SecureCookieCheck;
 import org.sonar.python.checks.hotspots.StandardInputCheck;
 import org.sonar.python.checks.hotspots.StrongCryptographicKeysCheck;
+import org.sonar.python.checks.hotspots.UnverifiedHostnameCheck;
 
 public final class CheckList {
 
@@ -144,6 +145,7 @@ public final class CheckList {
       UndeclaredNameUsageCheck.class,
       UnusedLocalVariableCheck.class,
       UnusedNestedDefinitionCheck.class,
+      UnverifiedHostnameCheck.class,
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
       WeakSSLProtocolCheck.class,

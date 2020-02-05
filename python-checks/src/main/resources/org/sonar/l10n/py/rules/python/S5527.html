@@ -1,0 +1,68 @@
+<p>To establish a SSL/TLS connection not vulnerable to man-in-the-middle attacks, it's essential to make sure the server presents the right
+certificate. </p>
+<p>The certificate's hostname-specific data should match the server hostname.</p>
+<p>It's not recommended to re-invent the wheel by implementing custom hostname verification.</p>
+<p>TLS/SSL libraries provide built-in hostname verification functions that should be used.</p>
+<h2>Noncompliant Code Example</h2>
+<p>Python ssl standard library</p>
+<pre>
+import ssl
+
+ctx = ssl._create_unverified_context() # Noncompliant: by default hostname verification is not done
+ctx = ssl._create_stdlib_context() # Noncompliant: by default hostname verification is not done
+
+ctx = ssl.create_default_context()
+ctx.check_hostname = False # Noncompliant
+</pre>
+<p>pyca/pyopenssl: by default <a href="https://github.com/pyca/pyopenssl/issues/795">hostname verification is not done</a> and cannot be activated
+directly.</p>
+<pre>
+from OpenSSL import SSL
+
+ctx = SSL.Context(SSL.TLSv1_2_METHOD) # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<p>Python ssl standard library</p>
+<pre>
+import ssl
+
+ctx = ssl.create_default_context()
+ctx.check_hostname = True
+
+ctx = ssl._create_default_https_context() # by default hostname verification is activated
+</pre>
+<p>pyca/pyopenssl: by default <a href="https://github.com/pyca/pyopenssl/issues/795">hostname verification is not done</a> and cannot be activated
+directly but <a href="https://service-identity.readthedocs.io/en/stable/api.html#service_identity.pyopenssl.verify_hostname">there is a
+workaround</a></p>
+<pre>
+from OpenSSL import SSL
+import sys, os, select, socket
+from service_identity import VerificationError
+from service_identity.pyopenssl import verify_hostname
+
+ctx1 = SSL.Context(SSL.TLSv1_2_METHOD)
+ctx1.set_verify(SSL.VERIFY_PEER, verify_callback)
+
+hostname = "example.com"
+
+conn = SSL.Connection(ctx1, socket.socket(socket.AF_INET, socket.SOCK_STREAM))
+conn.connect((hostname, 443))
+
+try:
+   conn.do_handshake()
+   verify_hostname(conn, hostname) # Compliant: workaround with service_identity.verify_hostname
+   # Do your super-secure stuff here.
+except SSL.Error as e:
+   print("TLS Handshake failed: {0!r}.".format(e.args[0]))
+except VerificationError:
+   print("Presented certificate is not valid for {0}.".format(hostname))
+finally:
+   conn.shutdown()
+   conn.close()
+</pre>
+<h2>See</h2>
+<p> * <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure</p>
+<p> * <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+Misconfiguration</p>
+<p> * <a href="https://cwe.mitre.org/data/definitions/297.html">MITRE, CWE-297</a> - Improper Validation of Certificate with Host Mismatch</p>
+
