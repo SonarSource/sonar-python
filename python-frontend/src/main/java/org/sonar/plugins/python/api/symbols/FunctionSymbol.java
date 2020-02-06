@@ -26,6 +26,14 @@ import org.sonar.plugins.python.api.LocationInFile;
 public interface FunctionSymbol extends Symbol {
   List<Parameter> parameters();
 
+  /**
+   * When true, it denotes a function symbol for a function stub.
+   * <pre>
+   *   def fn(p1, p2): ...
+   * </pre>
+   */
+  boolean isStub();
+
   boolean hasVariadicParameter();
 
   boolean isInstanceMethod();

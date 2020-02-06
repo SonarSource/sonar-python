@@ -59,6 +59,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
         FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
         if (functionSymbol.hasDecorators()
           || functionSymbol.hasVariadicParameter()
+          || functionSymbol.isStub()
           || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))) {
           return;
         }

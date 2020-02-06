@@ -131,6 +131,7 @@ public class FunctionSymbolTest {
   public void return_type() {
     Symbol strTypeSymbol = new SymbolImpl("str", "str");
     FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl("fn", "mod.fn", false, false, false, Collections.emptyList(), new Type(strTypeSymbol));
+    assertThat(fnSymbol.isStub()).isTrue();
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(

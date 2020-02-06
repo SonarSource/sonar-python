@@ -43,6 +43,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean isInstanceMethod;
   private final boolean hasDecorators;
   private Type returnType = null;
+  private boolean isStub = false;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
@@ -68,6 +69,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
     returnType = ((FunctionSymbolImpl) functionSymbol).returnType();
+    isStub = functionSymbol.isStub();
   }
 
   FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
@@ -80,6 +82,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.parameters.addAll(parameters);
     this.returnType = returnType;
     this.functionDefinitionLocation = null;
+    this.isStub = true;
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
@@ -114,6 +117,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   @Override
   public List<Parameter> parameters() {
     return parameters;
+  }
+
+  @Override
+  public boolean isStub() {
+    return isStub;
   }
 
   @Override
