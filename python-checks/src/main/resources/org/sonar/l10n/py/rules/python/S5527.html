@@ -1,0 +1,40 @@
+<p>To establish a SSL/TLS connection not vulnerable to man-in-the-middle attacks, it's essential to make sure the server presents the right
+certificate. </p>
+<p>The certificate's hostname-specific data should match the server hostname.</p>
+<p>It's not recommended to re-invent the wheel by implementing custom hostname verification.</p>
+<p>TLS/SSL libraries provide built-in hostname verification functions that should be used.</p>
+<h2>Noncompliant Code Example</h2>
+<p>Python ssl standard library</p>
+<pre>
+import ssl
+
+ctx = ssl._create_unverified_context() # Noncompliant: by default hostname verification is not done
+ctx = ssl._create_stdlib_context() # Noncompliant: by default hostname verification is not done
+
+ctx = ssl.create_default_context()
+ctx.check_hostname = False # Noncompliant
+
+ctx = ssl._create_default_https_context()
+ctx.check_hostname = False # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<p>Python ssl standard library</p>
+<pre>
+import ssl
+
+ctx = ssl._create_unverified_context()
+ctx.check_hostname = True # Compliant
+
+ctx = ssl._create_stdlib_context()
+ctx.check_hostname = True # Compliant
+
+ctx = ssl.create_default_context() # Compliant: by default hostname verification is enabled
+
+ctx = ssl._create_default_https_context() # Compliant: by default hostname verification is enabled
+</pre>
+<h2>See</h2>
+<p> * <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure</p>
+<p> * <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+Misconfiguration</p>
+<p> * <a href="https://cwe.mitre.org/data/definitions/297.html">MITRE, CWE-297</a> - Improper Validation of Certificate with Host Mismatch</p>
+
