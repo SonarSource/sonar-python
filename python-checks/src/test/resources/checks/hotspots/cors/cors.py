@@ -1,6 +1,8 @@
 # ------------- DJANGO ---------------------------
 
 CORS_ORIGIN_ALLOW_ALL = True # ok, not in Django "settings.py"
+class MyResponse:
+    pass
 
 def django_response():
     from django.http import HttpResponse
@@ -29,6 +31,10 @@ def django_response():
     responseUnknown = UnknownResponse()
     responseUnknown["Access-Control-Allow-Origin"] = "*"
 
+    a, b = 1, 2
+    r = MyResponse()
+    r["Access-Control-Allow-Origin", 42] = "*"
+    r["Access-Control-Allow-Origin"] = "*"
 
 # ------------- FLASK ---------------------------
 
@@ -70,6 +76,8 @@ def flask_cross_origin_decorator():
     @cross_origin(origins=["*"]) # Noncompliant
     @cross_origin(origins="trustedwebsite.com") # Compliant
     @cross_origin(origins=["trustedwebsite.com"]) # Compliant
+    @foo.cross_origin() # compliant
+    @foo_cross_origin() # compliant
     def foo():
         pass
 
@@ -82,8 +90,8 @@ def flask_response_headers():
 
 def werkzeug_headers():
     from werkzeug.datastructures import Headers
-    headers0 = Headers({"Access-Control-Allow-Origin": "*"}) # Noncompliant
-#                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    Headers({"Access-Control-Allow-Origin": "*"}) # Noncompliant
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     headers = Headers({"Access-Control-Allow-Origin": "trustedwebsite.com"}) # Compliant
     headers.set("Access-Control-Allow-Origin", "*") # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -96,3 +104,4 @@ def werkzeug_headers():
     headers.set("Access-Control-Max-Age", "") # Compliant
     headers.set("Access-Control-Allow-Methods", "") # Compliant
     headers.set("Access-Control-Allow-Headers", "") # Compliant
+    Headers(1, 2)
