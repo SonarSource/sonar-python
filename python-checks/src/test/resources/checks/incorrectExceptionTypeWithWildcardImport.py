@@ -6,8 +6,16 @@ def raise_a_custom_exception():
 def raise_some_class():
   raise SomeClass() # Noncompliant
 
+def raise_some_class_type_inference():
+  a = SomeClass()
+  raise a # Noncompliant
+
 def raise_a_derived_class():
   raise SomeDerivedClass() # Noncompliant
+
+def raise_a_derived_class():
+  a = SomeDerivedClass
+  raise a # FN
 
 def raise_a_derived_class_from_unknown():
   raise DerivedClassFromUnknown() # OK

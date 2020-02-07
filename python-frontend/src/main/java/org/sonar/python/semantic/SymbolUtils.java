@@ -99,6 +99,18 @@ public class SymbolUtils {
     return null;
   }
 
+  @CheckForNull
+  public static Symbol getTypeSymbol(@Nullable Symbol objectSymbol) {
+    if (objectSymbol == null) {
+      return null;
+    }
+    Type type = ((SymbolImpl) objectSymbol).type();
+    if (type != null) {
+      return type.symbol();
+    }
+    return null;
+  }
+
   private static class GlobalSymbolsBindingVisitor extends BaseTreeVisitor {
     private Map<String, Symbol> symbolsByName = new HashMap<>();
     private String fullyQualifiedModuleName;
