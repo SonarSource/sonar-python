@@ -54,9 +54,11 @@ def flask_cors():
     CORS(app, origins=0) # Compliant
     CORS(app, origins=["trustedwebsite.com"]) # Compliant
     CORS(app, resources=r"/api/*") # Noncompliant
+    CORS(app, resources=r"/api/*", origins="trustedwebsite.com") # OK
     CORS(app, resources=0) # OK
-    CORS(app, resources={r"/api/*": {"origins": "*"}}) # Noncompliant
+    CORS(app, resources={r"/api/1": {"origins": "*"}, r"/api/2": {"origins": "*"}}) # Noncompliant
     CORS(app, resources={r"/api/*": {"origins": r".*"}}) # Noncompliant
+    CORS(app, resources={r"/api/*": {"origins": r".*", "something_else": 42}}) # Noncompliant
     CORS(app, resources={r"/api/*": {"origins": r".+"}}) # Noncompliant
     CORS(app, resources={r"/api/*": {"origins": ["*"]}}) # Noncompliant
     CORS(app, resources={r"/api/*": {"foo": ["*"]}}) # OK

@@ -43,7 +43,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 
@@ -68,7 +67,6 @@ public class CorsCheck extends PythonSubscriptionCheck {
   private static final String DJANGO_ALLOW_ALL = "CORS_ORIGIN_ALLOW_ALL";
   private static final String DJANGO_WHITELIST = "CORS_ORIGIN_REGEX_WHITELIST";
 
-  private static final String API_STAR = "/api/*";
   private static final String STAR = "*";
 
   private static final List<String> REGEX_TO_REPORT = Arrays.asList(
@@ -172,13 +170,13 @@ public class CorsCheck extends PythonSubscriptionCheck {
       if (isSymbol(symbol, "flask_cors.cross_origin")) {
         ArgList arguments = decorator.arguments();
         if (arguments == null) {
-          addIssueOnDecorator(ctx, decorator);
+          ctx.addIssue(decorator, MESSAGE);
           return;
         }
 
         getArgument(arguments.arguments(), ORIGINS).ifPresent(argument -> {
           if (originsToReport(argument)) {
-            addIssueOnDecorator(ctx, decorator);
+            ctx.addIssue(decorator, MESSAGE);
           }
         });
 
@@ -225,16 +223,11 @@ public class CorsCheck extends PythonSubscriptionCheck {
   }
 
   private static <T extends Tree> void reportOnHeader(SubscriptionContext ctx, T element) {
-    getSingleValueInDictionary(element, ALLOW_ORIGIN).ifPresent(value -> {
+    getValueInDictionary(element, ALLOW_ORIGIN).ifPresent(value -> {
       if (isString(value, STAR)) {
         ctx.addIssue(element, MESSAGE);
       }
     });
-  }
-
-  private static void addIssueOnDecorator(SubscriptionContext ctx, Decorator decorator) {
-    Token lastToken = decorator.rightPar() != null ? decorator.rightPar() : decorator.name().lastToken();
-    ctx.addIssue(decorator.atToken(), lastToken, MESSAGE);
   }
 
   private static void checkFlaskCorsCall(SubscriptionContext ctx) {
@@ -249,23 +242,28 @@ public class CorsCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    getArgument(callExpression.arguments(), ORIGINS).ifPresent(argument -> {
+    Optional<Expression> originsArgument = getArgument(callExpression.arguments(), ORIGINS);
+    originsArgument.ifPresent(argument -> {
       if (originsToReport(argument)) {
         ctx.addIssue(callExpression, MESSAGE);
       }
     });
 
     getArgument(callExpression.arguments(), "resources").ifPresent(argument -> {
-      if (isString(argument, API_STAR)) {
+      if (argument.is(STRING_LITERAL) && !originsArgument.isPresent()) {
         ctx.addIssue(callExpression, MESSAGE);
-      } else {
-        getSingleValueInDictionary(argument, API_STAR).ifPresent(value ->
-          getSingleValueInDictionary(value, ORIGINS).ifPresent(origins -> {
-            if (originsToReport(origins)) {
-              ctx.addIssue(callExpression, MESSAGE);
-            }
-          })
-        );
+      } else if (argument.is(DICTIONARY_LITERAL)) {
+        List<DictionaryLiteralElement> elements = ((DictionaryLiteral) argument).elements();
+        for (DictionaryLiteralElement element : elements) {
+          if (!element.is(KEY_VALUE_PAIR)) {
+            return;
+          }
+          Optional<Expression> originsValue = getValueInDictionary(((KeyValuePair) element).value(), ORIGINS);
+          if (originsValue.isPresent() && originsToReport(originsValue.get())) {
+            ctx.addIssue(callExpression, MESSAGE);
+            return;
+          }
+        }
       }
     });
 
@@ -280,17 +278,20 @@ public class CorsCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static Optional<Expression> getSingleValueInDictionary(Tree tree, String key) {
+  private static Optional<Expression> getValueInDictionary(Tree tree, String key) {
     if (tree.is(DICTIONARY_LITERAL)) {
       List<DictionaryLiteralElement> elements = ((DictionaryLiteral) tree).elements();
-      if (elements.size() == 1 && elements.get(0).is(KEY_VALUE_PAIR)) {
-        KeyValuePair keyValuePair = (KeyValuePair) elements.get(0);
-        if (isString(keyValuePair.key(), key)) {
-          return Optional.of(keyValuePair.value());
+
+      for (DictionaryLiteralElement element : elements) {
+        if (element.is(KEY_VALUE_PAIR)) {
+          KeyValuePair keyValuePair = (KeyValuePair) elements.get(0);
+          if (isString(keyValuePair.key(), key)) {
+            return Optional.of(keyValuePair.value());
+          }
         }
       }
     } else if (tree.is(REGULAR_ARGUMENT)) {
-      return getSingleValueInDictionary(((RegularArgument) tree).expression(), key);
+      return getValueInDictionary(((RegularArgument) tree).expression(), key);
     }
 
     return Optional.empty();
