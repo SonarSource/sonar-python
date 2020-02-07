@@ -249,23 +249,28 @@ public class CorsCheck extends PythonSubscriptionCheck {
       }
     });
 
-    getArgument(callExpression.arguments(), "resources").ifPresent(argument -> {
-      if (argument.is(STRING_LITERAL) && !originsArgument.isPresent()) {
-        ctx.addIssue(callExpression, MESSAGE);
-      } else if (argument.is(DICTIONARY_LITERAL)) {
-        List<DictionaryLiteralElement> elements = ((DictionaryLiteral) argument).elements();
-        for (DictionaryLiteralElement element : elements) {
-          if (!element.is(KEY_VALUE_PAIR)) {
-            return;
-          }
-          Optional<Expression> originsValue = getValueInDictionary(((KeyValuePair) element).value(), ORIGINS);
-          if (originsValue.isPresent() && originsToReport(originsValue.get())) {
-            ctx.addIssue(callExpression, MESSAGE);
-            return;
-          }
+    Optional<Expression> resourcesArgumentOpt = getArgument(callExpression.arguments(), "resources");
+    if (!resourcesArgumentOpt.isPresent()) {
+      return;
+    }
+
+    Expression resourcesArgument = resourcesArgumentOpt.get();
+    if (resourcesArgument.is(STRING_LITERAL) && !originsArgument.isPresent()) {
+      ctx.addIssue(callExpression, MESSAGE);
+
+    } else if (resourcesArgument.is(DICTIONARY_LITERAL)) {
+      List<DictionaryLiteralElement> elements = ((DictionaryLiteral) resourcesArgument).elements();
+      for (DictionaryLiteralElement element : elements) {
+        if (!element.is(KEY_VALUE_PAIR)) {
+          continue;
+        }
+        Optional<Expression> originsValue = getValueInDictionary(((KeyValuePair) element).value(), ORIGINS);
+        if (originsValue.isPresent() && originsToReport(originsValue.get())) {
+          ctx.addIssue(callExpression, MESSAGE);
+          return;
         }
       }
-    });
+    }
 
   }
 

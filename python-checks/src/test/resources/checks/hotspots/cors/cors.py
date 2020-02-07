@@ -62,7 +62,7 @@ def flask_cors():
     CORS(app, resources={r"/api/*": {"origins": r".+"}}) # Noncompliant
     CORS(app, resources={r"/api/*": {"origins": ["*"]}}) # Noncompliant
     CORS(app, resources={r"/api/*": {"foo": ["*"]}}) # OK
-    CORS(app, resources={r"/api/*": {"origins": "trustedwebsite.com"}}) # Compliant
+    CORS(app, resources={r"/api/*": {"origins": "trustedwebsite.com"}, **unpack}) # Compliant
     CORS(app, resources={r"/api/*": {"origins": ["trustedwebsite.com"]}}) # Compliant
 
 def flask_cross_origin_decorator():
