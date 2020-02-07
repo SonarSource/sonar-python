@@ -51,6 +51,8 @@ class A:
         var1 = "&password='"+pwd+"'"                    # OK
 
         url = "http://user:azerty123@domain.com"      # Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
+        url = "https://user:azerty123@domain.com"      # Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
+        url = "ftp://user:azerty123@domain.com"      # Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
         url = "http://user:@domain.com"               # OK
         url = "http://user@domain.com:80"             # OK
         url = "http://user@domain.com"                # OK
