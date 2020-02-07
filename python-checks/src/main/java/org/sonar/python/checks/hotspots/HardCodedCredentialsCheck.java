@@ -246,6 +246,9 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isURLWithCredentials(StringLiteral stringLiteral) {
+    if (!stringLiteral.trimmedQuotesValue().contains("://")) {
+      return false;
+    }
     try {
       URL url = new URL(stringLiteral.trimmedQuotesValue());
       String userInfo = url.getUserInfo();
