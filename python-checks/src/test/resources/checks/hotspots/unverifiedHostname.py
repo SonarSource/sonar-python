@@ -3,7 +3,7 @@ import ssl
 
 # ValueError: Cannot set verify_mode to CERT_NONE when check_hostname is enabled
 
-ssl._create_unverified_context() # OK?
+ssl._create_unverified_context() # OK
 ctx1 = ssl._create_unverified_context() # Noncompliant
 
 ctx_unverified_ok = ssl._create_unverified_context() # Compliant
@@ -15,9 +15,6 @@ if ctx2.check_hostname:
 
 ctx3 = ssl.create_default_context() # Noncompliant
 ctx3.check_hostname = False
-
-r1 = urllib.request.urlopen('https://151.101.0.223', context=ctx)
-print(r1.status, r1.reason)
 
 ctx4 = ssl.create_default_context()
 ctx4.check_hostname = True # Compliant

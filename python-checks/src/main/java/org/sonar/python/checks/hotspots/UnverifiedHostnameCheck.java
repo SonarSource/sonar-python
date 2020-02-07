@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -40,8 +41,10 @@ import org.sonar.python.tree.TreeUtils;
 public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Enable server hostname verification on this SSL/TLS connection.";
-  private static final Set<String> SECURE_BY_DEFAULT = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("ssl.create_default_context", "ssl._create_default_https_context")));
-  private static final Set<String> UNSECURE_BY_DEFAULT = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("ssl._create_unverified_context", "ssl._create_stdlib_context")));
+
+  private static final Set<String> SECURE_BY_DEFAULT = new HashSet<>(Arrays.asList("ssl.create_default_context", "ssl._create_default_https_context"));
+  private static final Set<String> UNSECURE_BY_DEFAULT = new HashSet<>(Arrays.asList("ssl._create_unverified_context", "ssl._create_stdlib_context"));
+
   private static Set<String> functionsToCheck;
 
   private static Set<String> functionsToCheck() {
@@ -59,13 +62,13 @@ public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
       return;
     }
     if (parent.is(Tree.Kind.ASSIGNMENT_STMT)) {
-      AssignmentStatement parentAssignment = (AssignmentStatement) parent;
-      if (parentAssignment.lhsExpressions().get(0).expressions().get(0) instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) parentAssignment.lhsExpressions().get(0).expressions().get(0)).symbol();
+      Expression lhs = ((AssignmentStatement) parent).lhsExpressions().get(0).expressions().get(0);
+      if (lhs instanceof HasSymbol) {
+        Symbol symbol = ((HasSymbol) lhs).symbol();
         if (symbol == null) {
           return;
         }
-        if(hasUnsafeContextUsage(calleeSymbol, symbol)) {
+        if (isUnsafeContext(calleeSymbol, symbol)) {
           ctx.addIssue(callExpression, MESSAGE);
         }
       }
@@ -74,7 +77,7 @@ public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean hasUnsafeContextUsage(Symbol calleeSymbol, Symbol symbol) {
+  private static boolean isUnsafeContext(Symbol calleeSymbol, Symbol symbol) {
     for (Usage usage : symbol.usages()) {
       if (usage.kind().equals(Usage.Kind.OTHER)) {
         QualifiedExpression qualifiedExpression = (QualifiedExpression) TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.QUALIFIED_EXPR);
