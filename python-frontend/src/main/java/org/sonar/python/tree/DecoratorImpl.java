@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class DecoratorImpl extends PyTree implements Decorator {
+public class DecoratorImpl extends SimpleStatement implements Decorator {
   private final Token atToken;
   private final DottedName dottedName;
   private final Token lPar;
