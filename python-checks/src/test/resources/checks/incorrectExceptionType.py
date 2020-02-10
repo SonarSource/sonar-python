@@ -113,3 +113,21 @@ else:
   class MultipleBindings(BaseException): pass
 
 raise MultipleBindings() # OK
+
+# Type inference
+def raise_with_type_inference():
+  a = SomeClass()
+  raise a # Noncompliant
+
+def fn_type_inference():
+  a = SomeClass()
+  a = AnotherClass()
+  raise a # OK
+
+def raise_with_type_inference():
+  a = SomeDerivedError()
+  raise a # OK
+
+def raise_with_type_inference_fn():
+  a = AnotherClass
+  raise a # FN

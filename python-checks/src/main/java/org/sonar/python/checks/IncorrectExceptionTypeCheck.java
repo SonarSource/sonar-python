@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.BuiltinSymbols;
+import org.sonar.python.semantic.SymbolUtils;
 
 @Rule(key = "S5632")
 public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
@@ -81,6 +82,10 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
         }
       }
       return false;
+    }
+    Symbol type = SymbolUtils.getTypeSymbol(symbol);
+    if (type != null) {
+      return inheritsFromBaseException(type);
     }
     // returns true in case of unknown symbol
     return !BuiltinSymbols.all().contains(symbol.fullyQualifiedName());

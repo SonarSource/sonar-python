@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -89,12 +90,19 @@ public class SymbolUtils {
 
   @CheckForNull
   public static String getTypeName(@Nullable Symbol objectSymbol) {
+    return Optional.ofNullable(getTypeSymbol(objectSymbol))
+      .map(Symbol::fullyQualifiedName)
+      .orElse(null);
+  }
+
+  @CheckForNull
+  public static Symbol getTypeSymbol(@Nullable Symbol objectSymbol) {
     if (objectSymbol == null) {
       return null;
     }
     Type type = ((SymbolImpl) objectSymbol).type();
     if (type != null) {
-      return type.symbol().fullyQualifiedName();
+      return type.symbol();
     }
     return null;
   }

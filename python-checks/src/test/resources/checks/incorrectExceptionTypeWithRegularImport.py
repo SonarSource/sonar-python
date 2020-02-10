@@ -14,6 +14,14 @@ def raise_exception_derived():
 def raise_not_an_exception():
   raise incorrectExceptionTypeImported2.B() # Noncompliant
 
+def raise_not_an_exception_type_inference():
+  a = incorrectExceptionTypeImported2.B()
+  raise a # Noncompliant
+
+def raise_not_an_exception_type_inference_fn():
+  a = incorrectExceptionTypeImported2.B
+  raise a # FN
+
 def raise_not_an_exception_derived():
   raise incorrectExceptionTypeImported2.DerivedB() # Noncompliant
 
