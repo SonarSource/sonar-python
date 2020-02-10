@@ -1,3 +1,8 @@
+"""
+some docstring
+password=hello
+no issue
+"""
 from Crypto.Cipher import AES
 import base64
 import os
@@ -17,7 +22,10 @@ def getDecrypted(encodedtext):
     return cipher.decrypt(base64.b64decode(encodedtext))
 
 class A:
-
+    """
+    password=azerty123
+    OK
+    """
     passed = "passed"
     password = "azerty123" # Noncompliant
     password = "azerty123" # Noncompliant
@@ -27,6 +35,10 @@ class A:
     (a, b) = ("some", "thing")
 
     def __init__(self):
+        """
+        password=azerty123
+        OK
+        """
         self.passed = "passed"
         fieldNameWithPasswordInIt = "azerty123"            # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         fieldNameWithPasswordInIt = os.getenv("password", "")  # OK
