@@ -98,6 +98,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -1779,6 +1780,14 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(((Name) nestedInterpolation).name()).isEqualTo("x");
     assertThat(nestedInterpolation.firstToken().line()).isEqualTo(2);
     assertThat(nestedInterpolation.firstToken().column()).isEqualTo(15);
+
+    // interpolated expression contains curly braces
+    stringLiteral = (StringLiteral) parse("f'{ {element for element in [1, 2]} }'", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.interpolatedExpressions()).hasSize(1);
+    assertThat(elmt.interpolatedExpressions().get(0).is(Kind.COMP_FOR));
   }
 
   private Expression parseInterpolated(String interpolatedExpr) {
