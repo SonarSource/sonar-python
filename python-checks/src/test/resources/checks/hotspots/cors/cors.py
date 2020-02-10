@@ -49,6 +49,7 @@ def flask_cors():
     CORS(app, origins=r".+") # Noncompliant
     CORS(app, origins=r"^.*$") # Noncompliant
     CORS(app, origins=r"^.+$") # Noncompliant
+    CORS(app, origins=r"^.+") # Noncompliant
     CORS(app, origins=["*"]) # Noncompliant
     CORS(app, origins="trustedwebsite.com") # Compliant
     CORS(app, origins=0) # Compliant

@@ -74,6 +74,10 @@ public class CorsCheck extends PythonSubscriptionCheck {
     ".+",
     "^.*$",
     "^.+$",
+    ".*$",
+    ".+$",
+    "^.*",
+    "^.+",
     STAR
   );
 
