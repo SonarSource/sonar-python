@@ -38,10 +38,13 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
@@ -53,6 +56,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2068")
 public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
@@ -184,6 +188,9 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   }
 
   private void handleStringLiteral(StringLiteral stringLiteral, SubscriptionContext ctx) {
+    if (isDocString(stringLiteral)) {
+      return;
+    }
     if (stringLiteral.stringElements().stream().anyMatch(StringElement::isInterpolated)) {
       return;
     }
@@ -194,6 +201,15 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (isURLWithCredentials(stringLiteral)) {
       ctx.addIssue(stringLiteral, "Review this hard-coded URL, which may contain a credential.");
     }
+  }
+
+  private static boolean isDocString(StringLiteral stringLiteral) {
+    Tree parent = TreeUtils.firstAncestorOfKind(stringLiteral, Kind.FILE_INPUT, Kind.CLASSDEF, Kind.FUNCDEF);
+    return Optional.ofNullable(parent)
+      .map(p -> ((p.is(Kind.FILE_INPUT) && stringLiteral.equals(((FileInput) p).docstring()))
+        || (p.is(Kind.CLASSDEF) && stringLiteral.equals(((ClassDef) p).docstring()))
+        || (p.is(Kind.FUNCDEF) && stringLiteral.equals(((FunctionDef) p).docstring()))))
+      .orElse(false);
   }
 
   private static boolean isURLWithCredentials(StringLiteral stringLiteral) {
