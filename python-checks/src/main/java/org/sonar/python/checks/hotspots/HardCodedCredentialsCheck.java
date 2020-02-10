@@ -37,7 +37,6 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
-import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
@@ -48,7 +47,6 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -101,7 +99,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       // Avoid raising on prepared statements
       String credentials = Stream.of(credentialWords.split(","))
         .map(String::trim).collect(Collectors.joining("|"));
-      literalPatterns = toPatterns("=(?!.*(" + credentials + "))[^:%'?\\s]+");
+      literalPatterns = toPatterns("=(?!.*(" + credentials + "))[^:%'?{\\s]+");
     }
     return literalPatterns.stream();
   }
@@ -109,7 +107,6 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> handleAssignmentStatement((AssignmentStatement) ctx.syntaxNode(), ctx));
-    context.registerSyntaxNodeConsumer(Kind.COMPARISON, ctx -> handleBinaryExpression((BinaryExpression) ctx.syntaxNode(), ctx));
     context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ctx -> handleStringLiteral((StringLiteral) ctx.syntaxNode(), ctx));
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> handleCallExpression((CallExpression) ctx.syntaxNode(), ctx));
     context.registerSyntaxNodeConsumer(Kind.REGULAR_ARGUMENT, ctx -> handleRegularArgument((RegularArgument) ctx.syntaxNode(), ctx));
@@ -166,56 +163,10 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     if (callExpression.arguments().isEmpty()) {
       return;
     }
-    // Raising issues on pwd.__eq__("literal") calls
-    if (callExpression.callee().is(Kind.QUALIFIED_EXPR)) {
-      QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-      if (qualifiedExpression.name().name().equals("__eq__")) {
-        checkEqualsCall(callExpression, qualifiedExpression, ctx);
-      }
-    }
     Symbol calleeSymbol = callExpression.calleeSymbol();
     if (calleeSymbol != null && sensitiveArgumentByFQN().containsKey(calleeSymbol.fullyQualifiedName())) {
       checkSensitiveArgument(callExpression, sensitiveArgumentByFQN().get(calleeSymbol.fullyQualifiedName()), ctx);
     }
-  }
-
-  private void checkEqualsCall(CallExpression callExpression, QualifiedExpression qualifiedExpression, SubscriptionContext ctx) {
-    String matchedCredential = matchedCredentialFromQualifiedExpression(qualifiedExpression);
-    if (matchedCredential != null) {
-      if (isFirstArgumentAStringLiteral(callExpression)) {
-        ctx.addIssue(callExpression, String.format(MESSAGE, matchedCredential));
-      }
-    } else if (qualifiedExpression.qualifier().is(Kind.STRING_LITERAL)) {
-      String matched = firstArgumentCredential(callExpression);
-      if (matched != null) {
-        ctx.addIssue(callExpression, String.format(MESSAGE, matched));
-      }
-    }
-  }
-
-  private String firstArgumentCredential(CallExpression callExpression) {
-    Argument argument = callExpression.arguments().get(0);
-    String matchedCredential = null;
-    if (argument.is(Kind.REGULAR_ARGUMENT)) {
-      RegularArgument regularArgument = (RegularArgument) argument;
-      if (regularArgument.expression().is(Kind.NAME)) {
-        matchedCredential = matchedCredential(((Name) regularArgument.expression()).name(), variablePatterns());
-      }
-    }
-    return matchedCredential;
-  }
-
-  private static boolean isFirstArgumentAStringLiteral(CallExpression callExpression) {
-    return callExpression.arguments().get(0).is(Kind.REGULAR_ARGUMENT)
-      && ((RegularArgument) callExpression.arguments().get(0)).expression().is(Kind.STRING_LITERAL);
-  }
-
-  private String matchedCredentialFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    String matchedCredential = null;
-    if (qualifiedExpression.qualifier().is(Kind.NAME)) {
-      matchedCredential = matchedCredential(((Name) qualifiedExpression.qualifier()).name(), variablePatterns());
-    }
-    return matchedCredential;
   }
 
   private static void checkSensitiveArgument(CallExpression callExpression, int argNb, SubscriptionContext ctx) {
@@ -225,7 +176,7 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
         RegularArgument regularArgument = (RegularArgument) argument;
         if (regularArgument.keywordArgument() != null) {
           return;
-        } else if (i == argNb && regularArgument.expression().is(Kind.STRING_LITERAL)) {
+        } else if (i == argNb && regularArgument.expression().is(Kind.STRING_LITERAL) && !((StringLiteral) regularArgument.expression()).trimmedQuotesValue().isEmpty()) {
           ctx.addIssue(regularArgument, "Review this potentially hard-coded credential.");
         }
       }
@@ -259,19 +210,6 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       return false;
     }
     return false;
-  }
-
-  private void handleBinaryExpression(BinaryExpression binaryExpression, SubscriptionContext ctx) {
-    String matchedCredential = null;
-    if (binaryExpression.leftOperand() instanceof HasSymbol && binaryExpression.rightOperand().is(Tree.Kind.STRING_LITERAL)) {
-      matchedCredential = credentialSymbolName(((HasSymbol) binaryExpression.leftOperand()).symbol());
-    }
-    if (binaryExpression.rightOperand() instanceof HasSymbol && binaryExpression.leftOperand().is(Tree.Kind.STRING_LITERAL)) {
-      matchedCredential = credentialSymbolName(((HasSymbol) binaryExpression.rightOperand()).symbol());
-    }
-    if (matchedCredential != null) {
-      ctx.addIssue(binaryExpression, String.format(MESSAGE, matchedCredential));
-    }
   }
 
   private void handleAssignmentStatement(AssignmentStatement assignmentStatement, SubscriptionContext ctx) {

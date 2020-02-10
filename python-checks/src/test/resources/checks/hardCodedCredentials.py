@@ -49,6 +49,8 @@ class A:
         var1 = "&password=:password"                    # OK
         var1 = "&password=:param"                       # OK
         var1 = "&password='"+pwd+"'"                    # OK
+        var1 = f"&password={pwd}"                       # OK
+        var1 = "&password={something}"                  # OK
 
         url = "http://user:azerty123@domain.com"      # Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
         url = "https://user:azerty123@domain.com"      # Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
@@ -57,6 +59,8 @@ class A:
         url = "http://user@domain.com:80"             # OK
         url = "http://user@domain.com"                # OK
         url = "http://domain.com/user:azerty123"      # OK
+        url = "ssh://domain.com/user:azerty123"      # OK
+        url = "unknown://domain.com/user:azerty123"      # OK
 
         username = 'admin'        
         password = pwd
@@ -85,49 +89,25 @@ class A:
         CONNECTION_PASSWORD = "connection.password"               # OK
         RESETPWD = "/users/resetUserPassword"                     # OK
 
-        if password == 'Password123': # Noncompliant
+        # To avoid FPs, no issues raised on equality tests
+        if password == 'Azerty123': # OK
             pass
-        elif 'Password123' == password: # Noncompliant
+        elif password.__eq__('Azerty123'): # OK
             pass
-        elif password.__eq__('Password123'): # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
-            pass
-        elif something.__eq__('Password123'): # OK
-             pass
-        elif password.__eq__(something): # OK
-            pass
-        elif password.__eq__(*unpack): # OK
-            pass
-        elif 'Password123'.__eq__(password): # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
-            pass
-        elif 'Password123'.__eq__(something): # OK
-            pass
-        elif 'Password123'.__eq__(*unpack): # OK
-            pass
-        elif 'Password123'.__eq__("something"): # OK
-            pass
-        if password == None: # OK (FN?)
-            pass
-        if something == "something": # OK
-            pass
-        if password == '': # Noncompliant
-            pass
-        if password == "": # Noncompliant
-            pass
-        if password == pwd: # OK (FN?)
-            pass
-        if something.password == "Azerty123": # Noncompliant
-            pass
-        if foo.bar == "Azerty123": # OK
+        elif 'Azerty123'.__eq__(password): # OK
             pass
 
         hash_map = { 'password': "azerty123"} # Noncompliant {{"password" detected here, review this potentially hard-coded credential.}}
         hash_map = { ("a", "b") : "c"} # OK
         hash_map = { something : "c"} # OK
         hash_map = {'admin_form' : adminForm, **self.admin.context(request),} # OK
+        hash_map = { 'password': pwd} # OK
+        hash_map = { 'password': "password"} # OK
         hash_map['db_password'] = "azerty123" # Noncompliant
         hash_map['db_password'] = pwd # OK
         hash_map['something'] = "azerty123" # OK
         hash_map[something] = "something" # OK
+        hash_map['password'] = 'password' # OK
 
         encoded_user = 'gUhd9TxpnQppnZVAf7cv9pa5sgRo2sFmShrr/NK9dz0='
         encoded_password = 'gUhd9TxpnQppnZVAf7cv9uVnoE28Vq0bR2Cx6Ku1UQA=' # Noncompliant
@@ -139,6 +119,8 @@ class A:
         mysql.connector.connection.MySQLConnection(host='localhost', user='root', password='password')  # OK (avoid FPs)
         mysql.connector.connect(host='localhost', user='root', password=pwd)  # OK
         mysql.connector.connection.MySQLConnection(host='localhost', user='root', password=pwd)  # OK
+        mysql.connector.connection.MySQLConnection(host='localhost', user='root', password='')  # OK
+        mysql.connector.connection.MySQLConnection(host='localhost', user='root', "")  # OK
 
         pymysql.connect(host='localhost', user='root', password='Azerty123') # Noncompliant
         pymysql.connect('localhost', 'root', 'password') # Noncompliant {{Review this potentially hard-coded credential.}}
@@ -149,6 +131,10 @@ class A:
         pymysql.connect('localhost', 'root', pwd) # OK
         pymysql.connections.Connection(host='localhost', user='root', password=pwd) # OK
         pymysql.connections.Connection('localhost', 'root', pwd) # OK
+        pymysql.connect('localhost', 'root', '') # Compliant
+        pymysql.connect(host='localhost', user='root', password='') # Compliant
+        pymysql.connections.Connection(host='localhost', user='root', password='') # Compliant
+        pymysql.connections.Connection('localhost', 'root', '') # Compliant
 
         psycopg2.connect(host='localhost', user='postgres', password='Azerty123') # Noncompliant
         psycopg2.connect(host='localhost', user='postgres', password=pwd,) # OK
@@ -167,6 +153,8 @@ class A:
         pg.connect(None, 'localhost', 5432, None, 'postgres', 'password') # Noncompliant
         pg.connect(host='localhost', user='postgres', passwd=pwd) # OK
         pg.connect(None, 'localhost', 5432, None, 'postgres', pwd) # OK
+        pg.connect(host='localhost', user='postgres', passwd='') # Compliant
+        pg.connect(None, 'localhost', 5432, None, 'postgres', '') # Compliant
 
         random.call(None, password = 42) # OK
         random.call(None, password = "hello") # Noncompliant
