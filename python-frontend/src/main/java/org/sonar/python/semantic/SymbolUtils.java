@@ -300,11 +300,19 @@ public class SymbolUtils {
       classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest")
     )));
 
+    globalSymbols.put("django.http.response", new HashSet<>(Collections.singleton(
+      classSymbol("HttpResponse", "django.http.response.HttpResponse")
+    )));
+
     ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response");
     globalSymbols.put("flask", new HashSet<>(Arrays.asList(
       flaskResponse,
       new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList(), new Type(flaskResponse)),
       new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList(), new Type(flaskResponse))
+    )));
+
+    globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
+      classSymbol("Headers", "werkzeug.datastructures.Headers")
     )));
 
     return globalSymbols;

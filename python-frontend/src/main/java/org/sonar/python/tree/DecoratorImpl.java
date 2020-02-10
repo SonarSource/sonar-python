@@ -32,7 +32,11 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class DecoratorImpl extends PyTree implements Decorator {
+/**
+ * Even if decorator is not a statement, it extends {@code SimpleStatement} in order to properly resolve
+ * its last token as it's a newline token
+ */
+public class DecoratorImpl extends SimpleStatement implements Decorator {
   private final Token atToken;
   private final DottedName dottedName;
   private final Token lPar;
