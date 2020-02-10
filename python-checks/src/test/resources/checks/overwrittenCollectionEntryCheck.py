@@ -91,3 +91,13 @@ def non_trivial_collections(f, obj1, obj2):
 def valid_replacement(list1, foo, x):
     list1["foo"] = foo(x)
     list1["foo"] = list1["foo"].replace("a", "b")
+
+def used_collection(list1):
+    list1[1] = 42
+    list1[1] = foo(list1[1])
+
+    list1[2] = 42
+    list1[2] = foo(list1)
+
+    list[3] = 42
+    list[3] = list[1] # FN

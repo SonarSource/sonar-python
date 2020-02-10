@@ -106,7 +106,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     if (collection.is(Kind.SLICE_EXPR, Kind.SUBSCRIPTION)) {
       CollectionWrite nested = collectionWrite(assignment, collection);
       if (nested != null) {
-        return new CollectionWrite(nested.collectionKey.nest(key), nested.leftBracket, rBracket, assignment);
+        return new CollectionWrite(nested.collectionKey.nest(key), nested.leftBracket, rBracket, assignment, collection);
       }
     }
 
@@ -114,7 +114,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
       Symbol symbol = ((HasSymbol) collection).symbol();
       if (symbol != null) {
         CollectionKey collectionKey = new CollectionKey(symbol, key);
-        return new CollectionWrite(collectionKey, lBracket, rBracket, assignment);
+        return new CollectionWrite(collectionKey, lBracket, rBracket, assignment, collection);
       }
     }
 
@@ -163,8 +163,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
         CollectionWrite firstWrite = writes.get(0);
         CollectionWrite secondWrite = writes.get(1);
         AssignmentStatement assignment = secondWrite.assignment;
-        Expression lhs = lhs(assignment);
-        if (TreeUtils.hasDescendant(assignment.assignedValue(), t -> CheckUtils.areEquivalent(lhs, t))) {
+        if (TreeUtils.hasDescendant(assignment.assignedValue(), t -> CheckUtils.areEquivalent(firstWrite.collection, t))) {
           return;
         }
         String message = String.format(
@@ -192,12 +191,14 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     private final Token leftBracket;
     private final Token rightBracket;
     private final AssignmentStatement assignment;
+    private final Expression collection;
 
-    private CollectionWrite(CollectionKey collectionKey, Token leftBracket, Token rightBracket, AssignmentStatement assignment) {
+    private CollectionWrite(CollectionKey collectionKey, Token leftBracket, Token rightBracket, AssignmentStatement assignment, Expression collection) {
       this.collectionKey = collectionKey;
       this.leftBracket = leftBracket;
       this.rightBracket = rightBracket;
       this.assignment = assignment;
+      this.collection = collection;
     }
   }
 }
