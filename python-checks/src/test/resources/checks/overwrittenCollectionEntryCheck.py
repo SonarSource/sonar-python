@@ -98,3 +98,6 @@ def used_collection(list1):
 
     list1[2] = 42
     list1[2] = foo(list1)
+
+    list[3] = 42
+    list[3] = list[1] # FN
