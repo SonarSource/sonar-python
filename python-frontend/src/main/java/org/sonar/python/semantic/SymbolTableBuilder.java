@@ -399,8 +399,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitGlobalStatement(GlobalStatement pyGlobalStatementTree) {
       pyGlobalStatementTree.variables()
         .forEach(name -> {
-          currentScope().addGlobalName(name.name());
           moduleScope.addBindingUsage(name, Usage.Kind.GLOBAL_DECLARATION, null);
+          currentScope().addGlobalName(name.name());
         });
 
       super.visitGlobalStatement(pyGlobalStatementTree);

@@ -505,8 +505,12 @@ public class FullyQualifiedNameTest {
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
     SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a).isNull();
-    assertThat(qualifiedExpression.symbol()).isNull();
+    assertThat(a).isNotNull();
+    assertThat(a.name()).isEqualTo("a");
+    assertThat(a.fullyQualifiedName()).isNull();
+    assertThat(qualifiedExpression.symbol()).isNotNull();
+    assertThat(qualifiedExpression.symbol().name()).isEqualTo("foo");
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
   @Test
