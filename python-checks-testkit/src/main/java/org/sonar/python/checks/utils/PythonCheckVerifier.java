@@ -75,6 +75,13 @@ public class PythonCheckVerifier {
     createVerifier(files, check, globalSymbolsPerModule, baseDirFile).assertOneOrMoreIssues();
   }
 
+  public static void verifyNoIssue(List<String> paths, PythonCheck check) {
+    List<File> files = paths.stream().map(File::new).collect(Collectors.toList());
+    File baseDirFile = new File(files.get(0).getParent());
+    Map<String, Set<Symbol>> globalSymbolsPerModule = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
+    createVerifier(files, check, globalSymbolsPerModule, baseDirFile).assertNoIssues();
+  }
+
   private static MultiFileVerifier createVerifier(List<File> files, PythonCheck check, Map<String, Set<Symbol>> globalSymbolsPerModule, @Nullable File baseDir) {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {

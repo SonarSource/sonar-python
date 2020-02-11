@@ -38,6 +38,13 @@ public class UndeclaredNameUsageCheckTest {
   }
 
   @Test
+  public void test_wildcard_import_all_property() {
+    PythonCheckVerifier.verifyNoIssue(
+      Arrays.asList("src/test/resources/checks/undeclaredNameUsageImportWithAll.py", "src/test/resources/checks/undeclaredNameUsageAll/__init__.py"),
+      new UndeclaredNameUsageCheck());
+  }
+
+  @Test
   public void test_unresolved_wildcard_import() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undeclaredNameUsageWithUnresolvedWildcardImport.py", new UndeclaredNameUsageCheck());
   }

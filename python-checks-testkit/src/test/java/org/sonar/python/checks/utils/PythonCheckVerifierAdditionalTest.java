@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.utils;
 
+import java.util.Collections;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -57,6 +58,7 @@ public class PythonCheckVerifierAdditionalTest {
       }
     };
     PythonCheckVerifier.verifyNoIssue(BASE_DIR + "no_issue.py", check);
+    PythonCheckVerifier.verifyNoIssue(Collections.singletonList(BASE_DIR + "no_issue.py"), check);
 
     try {
       PythonCheckVerifier.verifyNoIssue(BASE_DIR + "file_issue.py", check);
