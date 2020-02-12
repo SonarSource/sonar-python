@@ -264,18 +264,22 @@ public class CorsCheck extends PythonSubscriptionCheck {
 
     } else if (resourcesArgument.is(DICTIONARY_LITERAL)) {
       List<DictionaryLiteralElement> elements = ((DictionaryLiteral) resourcesArgument).elements();
-      for (DictionaryLiteralElement element : elements) {
-        if (!element.is(KEY_VALUE_PAIR)) {
-          continue;
-        }
-        Optional<Expression> originsValue = getValueInDictionary(((KeyValuePair) element).value(), ORIGINS);
-        if (originsValue.isPresent() && originsToReport(originsValue.get())) {
-          ctx.addIssue(callExpression, MESSAGE);
-          return;
-        }
-      }
+      checkResourcesElements(ctx, callExpression, elements);
     }
 
+  }
+
+  private static void checkResourcesElements(SubscriptionContext ctx, CallExpression callExpression, List<DictionaryLiteralElement> elements) {
+    for (DictionaryLiteralElement element : elements) {
+      if (!element.is(KEY_VALUE_PAIR)) {
+        continue;
+      }
+      Optional<Expression> originsValue = getValueInDictionary(((KeyValuePair) element).value(), ORIGINS);
+      if (originsValue.isPresent() && originsToReport(originsValue.get())) {
+        ctx.addIssue(callExpression, MESSAGE);
+        return;
+      }
+    }
   }
 
   private static boolean originsToReport(Expression origins) {
