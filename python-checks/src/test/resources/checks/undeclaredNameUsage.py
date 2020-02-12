@@ -229,3 +229,6 @@ def use_glob3():
   print(x) # OK
   x = 42
 x = 24
+
+global GLOB3
+print(GLOB3) # FN
