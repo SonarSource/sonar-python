@@ -50,6 +50,9 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       FileInput fileInput = (FileInput) ctx.syntaxNode();
+      if (importsManipulatedAllProperty(fileInput)) {
+        return;
+      }
       UnresolvedSymbolsVisitor unresolvedSymbolsVisitor = new UnresolvedSymbolsVisitor();
       fileInput.accept(unresolvedSymbolsVisitor);
       if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasUnresolvedWildcardImport) {
@@ -71,6 +74,10 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
       Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
       cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block), unreachableBlocks, analysis, ignoredSymbols));
     });
+  }
+
+  private static boolean importsManipulatedAllProperty(FileInput fileInput) {
+    return fileInput.globalVariables().stream().anyMatch(s -> s.name().equals("__all__") && s.fullyQualifiedName() != null);
   }
 
   private static void checkCfgBlock(CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariables definedVariables,
