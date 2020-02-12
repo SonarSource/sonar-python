@@ -153,3 +153,8 @@ def keyword_usage():
 
 def comprehension_vars():
     [42 for [a] in range(3)]
+
+def parameter_default_value():
+    foo = 42
+    def func(x = foo):
+        foo = 43

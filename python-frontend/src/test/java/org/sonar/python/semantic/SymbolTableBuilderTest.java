@@ -23,9 +23,11 @@ import com.google.common.base.Functions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
@@ -46,6 +48,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -74,7 +77,7 @@ public class SymbolTableBuilderTest {
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
-      "using_builtin_symbol", "keyword_usage", "comprehension_vars");
+      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
@@ -376,6 +379,31 @@ public class SymbolTableBuilderTest {
     assertThat(symbolByName).hasSize(1);
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS);
+  }
+
+  @Test
+  public void parameter_default_value() {
+    FunctionDef functionTree = functionTreesByName.get("parameter_default_value");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
+    assertThat(symbolByName).hasSize(2);
+    Symbol foo = symbolByName.get("foo");
+    assertThat(foo.usages()).hasSize(2);
+    Usage assignmentUsage = foo.usages().get(0);
+    assertThat(assignmentUsage.kind()).isEqualTo(Usage.Kind.ASSIGNMENT_LHS);
+    Usage parameterUsage = foo.usages().get(1);
+    assertThat(parameterUsage.kind()).isEqualTo(Usage.Kind.OTHER);
+    assertThat(TreeUtils.firstAncestorOfKind(parameterUsage.tree(), Tree.Kind.PARAMETER)).isNotNull();
+
+    Symbol func = symbolByName.get("func");
+    assertThat(func.usages()).hasSize(1);
+    FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(func.usages().get(0).tree(), Tree.Kind.FUNCDEF);
+    assertThat(functionDef).isNotNull();
+    assertThat(functionDef.localVariables()).hasSize(2);
+
+    Symbol foo2 = functionDef.localVariables().stream().filter(s -> s.name().equals("foo")).findFirst().get();
+    assertThat(foo2.name()).isEqualTo("foo");
+    assertThat(foo2.usages()).hasSize(1);
+    assertThat(foo2.usages().get(0).kind()).isEqualTo(Usage.Kind.ASSIGNMENT_LHS);
   }
 
   @Test
