@@ -58,6 +58,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -248,6 +249,9 @@ public class PythonSensorTest {
     }
 
     assertThat(checkedIssues).isEqualTo(3);
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting global symbols computation");
+    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting rules execution");
+    assertThat(logTester.logs(LoggerLevel.INFO).stream().filter(line -> line.equals("1 source files to be analyzed")).count()).isEqualTo(2);
   }
 
   @Test

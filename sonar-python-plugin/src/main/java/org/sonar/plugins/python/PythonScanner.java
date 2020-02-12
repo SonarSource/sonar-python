@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -58,6 +60,7 @@ import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonarsource.analyzer.commons.ProgressReport;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
@@ -86,24 +89,37 @@ public class PythonScanner {
   }
 
   public void scanFiles() {
-    Map<String, Set<Symbol>> globalSymbolsByModuleName = globalSymbolsByModuleName();
+    List<String> filenames = inputFiles.stream().map(InputFile::toString).collect(Collectors.toList());
+    Map<String, Set<Symbol>> globalSymbolsByModuleName = globalSymbolsByModuleName(filenames);
+    ProgressReport progressReport = new ProgressReport("Analysis progress", TimeUnit.SECONDS.toMillis(10));
+    LOG.info("Starting rules execution");
+    progressReport.start(filenames);
     for (InputFile pythonFile : inputFiles) {
       if (context.isCancelled()) {
+        progressReport.cancel();
         return;
       }
       try {
         scanFile(pythonFile, globalSymbolsByModuleName);
       } catch (Exception e) {
         LOG.warn("Unable to analyze file '{}'. Error: {}", pythonFile.toString(), e);
+      } finally {
+        progressReport.nextFile();
       }
     }
+
+    progressReport.stop();
   }
 
-  private Map<String, Set<Symbol>> globalSymbolsByModuleName() {
+  private Map<String, Set<Symbol>> globalSymbolsByModuleName(List<String> filenames) {
     Map<String, Set<Symbol>> globalSymbols = SymbolUtils.externalModulesSymbols();
+    ProgressReport progressReport = new ProgressReport("Global symbols computation progress", TimeUnit.SECONDS.toMillis(10));
+    LOG.info("Starting global symbols computation");
+    progressReport.start(filenames);
 
     for (InputFile inputFile : inputFiles) {
       if (context.isCancelled()) {
+        progressReport.cancel();
         return globalSymbols;
       }
       try {
@@ -117,8 +133,12 @@ public class PythonScanner {
       } catch (Exception e) {
         LOG.debug("Unable to construct project-level symbol table for file: " + inputFile.toString());
         LOG.debug(e.getMessage());
+      } finally {
+        progressReport.nextFile();
       }
     }
+
+    progressReport.stop();
     return globalSymbols;
   }
 
