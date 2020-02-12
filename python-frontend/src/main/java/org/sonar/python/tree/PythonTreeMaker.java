@@ -99,11 +99,7 @@ import org.sonar.python.parser.PythonParser;
 
 public class PythonTreeMaker {
 
-  /**
-   * interpolated expressions takes escaping string in consideration.
-   */
-  private static final String INTERPOLATED_EXPR = "(('[^']*'|\"[^\"]*\"|[^{}])";
-  private static final Pattern INTERPOLATED_EXPR_PATTERN = Pattern.compile("(?<!\\{)\\{(\\{\\{)*" + INTERPOLATED_EXPR + "*)}");
+  private static final Pattern INTERPOLATED_EXPR_START_PATTERN = Pattern.compile("(?<!\\{)(\\{\\{)*\\{(?!\\{)\\s*");
   private static final PythonParser parser = PythonParser.create();
 
 
@@ -1299,14 +1295,17 @@ public class PythonTreeMaker {
     List<Expression> res = new ArrayList<>();
     parser.setRootRule(parser.getGrammar().rule(PythonGrammar.EXPR));
     // get escaped interpolation
-    Matcher matcher = INTERPOLATED_EXPR_PATTERN.matcher(literalValue);
-    while (matcher.find()) {
-      AstNode parse = parser.parse(matcher.group(2));
+    Matcher matcher = INTERPOLATED_EXPR_START_PATTERN.matcher(literalValue);
+    int index = 0;
+    while (matcher.find(index)) {
+      int end = matcher.end();
+      AstNode parse = parser.parse(literalValue.substring(end));
       Expression exp = expression(parse);
       setParents(exp);
-      int start = matcher.start(2);
-      updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, start);
+      updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, end);
       res.add(exp);
+      com.sonar.sslr.api.Token lastToken = parse.getLastToken();
+      index = end + lastToken.getColumn() + lastToken.getValue().length();
     }
     return res;
   }

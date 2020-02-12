@@ -208,3 +208,6 @@ print(f'{foo(param=3)}')  # OK, param is a keyword argument
 
 print(f'{foo(param)}')  # Noncompliant
 #            ^^^^^
+
+def test_print_list():
+    f"{ {element for element in [1, 2]} }" # OK
