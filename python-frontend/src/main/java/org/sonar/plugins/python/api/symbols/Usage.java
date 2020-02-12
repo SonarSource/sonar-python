@@ -24,7 +24,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public interface Usage {
 
   default boolean isBindingUsage() {
-    return kind() != Kind.OTHER;
+    return kind() != Kind.OTHER && kind() != Kind.GLOBAL_DECLARATION;
   }
 
   Tree tree();
