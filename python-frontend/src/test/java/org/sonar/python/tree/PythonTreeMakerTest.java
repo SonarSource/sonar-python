@@ -1787,7 +1787,7 @@ public class PythonTreeMakerTest extends RuleTest {
     elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.interpolatedExpressions()).hasSize(1);
-    assertThat(elmt.interpolatedExpressions().get(0).is(Kind.COMP_FOR));
+    assertThat(elmt.interpolatedExpressions().get(0).is(Kind.SET_COMPREHENSION)).isTrue();
   }
 
   private Expression parseInterpolated(String interpolatedExpr) {
