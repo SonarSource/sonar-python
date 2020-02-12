@@ -211,3 +211,24 @@ print(f'{foo(param)}')  # Noncompliant
 
 def test_print_list():
     f"{ {element for element in [1, 2]} }" # OK
+
+global GLOB  # OK
+GLOB = 42
+
+def use_glob():
+    print(GLOB)
+
+def use_glob2():
+    print(GLOB2)  # OK
+
+global GLOB2
+GLOB2 = 42
+
+def use_glob3():
+  global x
+  print(x) # OK
+  x = 42
+x = 24
+
+global GLOB3
+print(GLOB3) # FN

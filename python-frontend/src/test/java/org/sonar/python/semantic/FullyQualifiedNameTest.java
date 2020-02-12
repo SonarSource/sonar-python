@@ -494,7 +494,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void add_type_to_global_symbol() {
+  public void type_with_global_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "global a",
@@ -505,8 +505,21 @@ public class FullyQualifiedNameTest {
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
     SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a).isNull();
-    assertThat(qualifiedExpression.symbol()).isNull();
+    assertThat(a).isNotNull();
+    assertThat(a.name()).isEqualTo("a");
+    assertThat(a.fullyQualifiedName()).isNull();
+    assertThat(a.type()).isNotNull();
+
+    ClassDef classDef = getFirstChild(tree, t -> t.is(Tree.Kind.CLASSDEF));
+    Symbol type = SymbolUtils.getTypeSymbol(a);
+    assertThat(type).isNotNull();
+    assertThat(type.name()).isEqualTo("A");
+    assertThat(type.fullyQualifiedName()).isEqualTo("my_package.my_module.A");
+    assertThat(type).isSameAs(classDef.name().symbol());
+
+    assertThat(qualifiedExpression.symbol()).isNotNull();
+    assertThat(qualifiedExpression.symbol().name()).isEqualTo("foo");
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
   }
 
   @Test
