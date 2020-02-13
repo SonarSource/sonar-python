@@ -19,8 +19,12 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.RecognitionException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
@@ -32,8 +36,15 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.checks.CheckList;
+import org.sonar.python.parser.PythonParser;
+import org.sonar.python.tree.PythonTreeMaker;
 
 public final class PythonSensor implements Sensor {
 
@@ -67,13 +78,55 @@ public final class PythonSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    FilePredicates p = context.fileSystem().predicates();
-    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasType(InputFile.Type.MAIN), p.hasLanguage(Python.KEY)));
-    List<InputFile> list = new ArrayList<>();
-    it.forEach(list::add);
-    List<InputFile> inputFiles = Collections.unmodifiableList(list);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, inputFiles);
-    scanner.scanFiles();
+    List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
+    List<InputFile> testFiles = getInputFiles(Type.TEST, context);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles);
+    scanner.execute(mainFiles, context);
+    if (!testFiles.isEmpty()) {
+      new TestHighlightingScanner(context).execute(testFiles, context);
+    }
   }
 
+  private static List<InputFile> getInputFiles(InputFile.Type type, SensorContext context) {
+    FilePredicates p = context.fileSystem().predicates();
+    Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasType(type), p.hasLanguage(Python.KEY)));
+    List<InputFile> list = new ArrayList<>();
+    it.forEach(list::add);
+    return Collections.unmodifiableList(list);
+  }
+
+  private static class TestHighlightingScanner extends Scanner {
+
+    private static final Logger LOG = Loggers.get(TestHighlightingScanner.class);
+    private final PythonParser parser = PythonParser.create();
+
+    TestHighlightingScanner(SensorContext context) {
+      super(context);
+    }
+
+    @Override
+    protected String name() {
+      return "test sources highlighting";
+    }
+
+    @Override
+    protected void scanFile(InputFile inputFile) throws IOException {
+      try {
+        PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+        AstNode astNode = parser.parse(pythonFile.content());
+        FileInput parse = new PythonTreeMaker().fileInput(astNode);
+        // omitting package and symbols info as it's not required for highlighting
+        PythonVisitorContext visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), "", new HashMap<>());
+        new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+      } catch (RecognitionException e) {
+        LOG.error("Unable to parse file: " + inputFile.toString());
+        LOG.error(e.getMessage());
+      }
+    }
+
+    @Override
+    protected void processException(Exception e, InputFile file) {
+      LOG.warn("Unable to highlight test file: " + file.toString(), e);
+    }
+  }
 }

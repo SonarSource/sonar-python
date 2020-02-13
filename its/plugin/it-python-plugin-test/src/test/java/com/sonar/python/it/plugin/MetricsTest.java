@@ -20,6 +20,7 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
 import org.assertj.core.data.Offset;
@@ -66,6 +67,8 @@ public class MetricsTest {
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
+  private static BuildResult buildResult;
+
   @BeforeClass
   public static void startServer() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
@@ -75,8 +78,14 @@ public class MetricsTest {
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0-SNAPSHOT")
+      .setTestDirs("test")
       .setSourceDirs("src");
-    orchestrator.executeBuild(build);
+    buildResult = orchestrator.executeBuild(build);
+  }
+
+  @Test
+  public void test_files_highlighted() {
+    assertThat(buildResult.getLogs()).contains("Starting test sources highlighting");
   }
 
   @Test
