@@ -300,10 +300,44 @@ def recursion_in_try_block():
             print(e)
 
 def async_functions():
-    async def f():
-        await f() # OK
+    async def f(): # Noncompliant
+        await f()
 
 def global_variable(text):
     global global_variable
     global_variable = print
     global_variable(text)
+
+async def asyn(i): # Noncompliant
+    print(i)
+    return await asyn(i - 1)
+
+async def run():
+    var = await asyn(1000000)
+    for i in range(1000000):
+        var = await var  # OK, await on a call to another function.
+
+async def asyn2(i):
+    print(i)
+    return asyn2(i - 1) # OK, no await call
+
+async def asyn3(i): # OK, no unconditional await call
+  print(i)
+  if smth:
+    asyn3(i - 1)
+  else:
+    await asyn3(i - 1)
+
+async def asyn4(i): # Noncompliant
+  print(i)
+  if smth:
+    asyn4(i - 1)
+    await asyn4(i - 1)
+  else:
+    await asyn4(i - 1)
+
+async def asyn5(i): # OK, await is not on "asyn5" call
+  await some_call(asyn5(i-1), 42)
+
+async def asyn6(i): # Noncompliant
+  await some_call(await asyn6(i-1), 42)
