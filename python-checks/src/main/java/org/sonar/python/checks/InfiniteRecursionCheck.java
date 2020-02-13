@@ -68,9 +68,6 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      if (functionDef.asyncKeyword() != null) {
-        return;
-      }
       List<Tree> allRecursiveCalls = new ArrayList<>();
       boolean endBlockIsReachable = collectRecursiveCallsAndCheckIfEndBlockIsReachable(functionDef, ctx.pythonFile(), allRecursiveCalls);
       if (!allRecursiveCalls.isEmpty() && !endBlockIsReachable) {
@@ -127,11 +124,15 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     @Nullable
     private final String className;
     private boolean functionSymbolHasBeenReassigned = false;
+    private boolean isAsync = false;
     private final List<Tree> recursiveCalls = new ArrayList<>();
 
     private RecursiveCallCollector(FunctionDef currentFunction, Symbol functionSymbol) {
       isMethod = currentFunction.isMethodDefinition();
       this.functionSymbol = functionSymbol;
+      if (currentFunction.asyncKeyword() != null) {
+        isAsync = true;
+      }
       if (isMethod) {
         boolean isStatic = currentFunction.decorators().stream()
           .map(Decorator::name).map(DottedName::names).map(d -> d.get(d.size() - 1)).map(Name::name)
@@ -158,10 +159,15 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     @Override
     public void visitCallExpression(CallExpression callExpression) {
       Expression callee = callExpression.callee();
-      if (matchesLookupFunction(callee) || matchesLookupMethod(callee)) {
+      if (!isAsyncWithoutAwait(callExpression) && (matchesLookupFunction(callee) || matchesLookupMethod(callee))) {
         recursiveCalls.add(callee);
       }
       super.visitCallExpression(callExpression);
+    }
+
+    private boolean isAsyncWithoutAwait(CallExpression callExpression) {
+      Tree parent = TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.AWAIT, Tree.Kind.CALL_EXPR);
+      return isAsync && (parent == null || !parent.is(Tree.Kind.AWAIT));
     }
 
     @Override
