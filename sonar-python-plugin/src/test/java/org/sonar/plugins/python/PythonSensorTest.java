@@ -276,6 +276,42 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void test_test_file_highlighting() throws IOException {
+    activeRules = new ActiveRulesBuilder().build();
+
+    DefaultInputFile inputFile1 = spy(TestInputFileBuilder.create("moduleKey", FILE_1)
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(Type.TEST)
+      .setLanguage(Python.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, FILE_1), StandardCharsets.UTF_8))
+      .build());
+
+    DefaultInputFile inputFile2 = spy(TestInputFileBuilder.create("moduleKey", FILE_2)
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(Type.TEST)
+      .setLanguage(Python.KEY)
+      .build());
+
+    DefaultInputFile inputFile3 = spy(TestInputFileBuilder.create("moduleKey", "parse_error.py")
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(StandardCharsets.UTF_8)
+      .setType(Type.TEST)
+      .setLanguage(Python.KEY)
+      .build());
+
+    context.fileSystem().add(inputFile1);
+    context.fileSystem().add(inputFile2);
+    context.fileSystem().add(inputFile3);
+    sensor().execute(context);
+    assertThat(logTester.logs()).contains("Starting test sources highlighting");
+    assertThat(logTester.logs()).contains("Unable to parse file: parse_error.py");
+    assertThat(logTester.logs()).contains("Unable to highlight test file: file2.py");
+    assertThat(context.highlightingTypeAt(inputFile1.key(), 1, 2)).isNotEmpty();
+  }
+
+  @Test
   public void test_exception_does_not_fail_analysis() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
