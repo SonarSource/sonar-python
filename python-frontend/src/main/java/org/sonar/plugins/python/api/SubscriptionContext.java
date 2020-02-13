@@ -40,6 +40,9 @@ public interface SubscriptionContext {
 
   PythonFile pythonFile();
 
+  /**
+   * Returns null in case of Sonarlint context
+   */
   @CheckForNull
   File workingDirectory();
 }

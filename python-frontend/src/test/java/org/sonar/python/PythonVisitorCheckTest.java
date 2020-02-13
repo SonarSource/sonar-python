@@ -111,6 +111,22 @@ public class PythonVisitorCheckTest {
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }
 
+  @Test
+  public void working_directory_null() throws IOException {
+    PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(SubscriptionCheck.Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> assertThat(ctx.workingDirectory()).isNull());
+      }
+    };
+    File tmpFile = Files.createTempFile("foo", "py").toFile();
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile, null);
+    assertThat(context.workingDirectory()).isNull();
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
+    check.scanFile(context);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
+  }
+
   private static class TestPythonCheck extends PythonVisitorCheck {
 
   }

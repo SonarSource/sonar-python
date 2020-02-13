@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -103,7 +104,8 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), packageNames.get(inputFile), globalSymbolsByModuleName);
+      File workingDirectory = context.runtime().getProduct().equals(SonarProduct.SONARLINT) ? null : context.fileSystem().workDir();
+      visitorContext = new PythonVisitorContext(parse, pythonFile, workingDirectory, packageNames.get(inputFile), globalSymbolsByModuleName);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
