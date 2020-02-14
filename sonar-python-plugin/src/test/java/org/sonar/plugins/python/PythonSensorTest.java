@@ -170,6 +170,8 @@ public class PythonSensorTest {
     assertThat(context.highlightingTypeAt(key, 15, 2)).as(msg).hasSize(1);
 
     assertThat(context.allAnalysisErrors()).isEmpty();
+
+    assertThat(PythonScanner.getWorkingDirectory(context)).isNull();
   }
 
   @Test
@@ -252,6 +254,8 @@ public class PythonSensorTest {
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting global symbols computation");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting rules execution");
     assertThat(logTester.logs(LoggerLevel.INFO).stream().filter(line -> line.equals("1 source files to be analyzed")).count()).isEqualTo(2);
+
+    assertThat(PythonScanner.getWorkingDirectory(context)).isEqualTo(workDir.toFile());
   }
 
   @Test

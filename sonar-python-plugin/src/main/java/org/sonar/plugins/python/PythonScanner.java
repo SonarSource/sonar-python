@@ -104,8 +104,7 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      File workingDirectory = context.runtime().getProduct().equals(SonarProduct.SONARLINT) ? null : context.fileSystem().workDir();
-      visitorContext = new PythonVisitorContext(parse, pythonFile, workingDirectory, packageNames.get(inputFile), globalSymbolsByModuleName);
+      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), packageNames.get(inputFile), globalSymbolsByModuleName);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -132,6 +131,11 @@ public class PythonScanner extends Scanner {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
+  }
+
+  // visible for testing
+  static File getWorkingDirectory(SensorContext context) {
+    return context.runtime().getProduct().equals(SonarProduct.SONARLINT) ? null : context.fileSystem().workDir();
   }
 
   @Override
