@@ -16,13 +16,6 @@ vulnerability to steal session-cookies.</p>
   sensitive-security cookies. </li>
 </ul>
 <h2>Sensitive Code Examples</h2>
-<p>Python 3:</p>
-<pre>
-import http.cookies
-
-cookie = http.cookies.SimpleCookie()
-cookie['key'] = 'value' # Sensitive
-</pre>
 <p>Flask:</p>
 <pre>
 from flask import Response
@@ -34,14 +27,6 @@ def index():
     return response
 </pre>
 <h2>Compliant Solution</h2>
-<p>Python 3:</p>
-<pre>
-import http.cookies
-
-cookie = http.cookies.SimpleCookie()
-cookie['key'] = 'value'
-cookie['key']['httponly'] = True # Compliant
-</pre>
 <p>Flask:</p>
 <pre>
 from flask import Response
