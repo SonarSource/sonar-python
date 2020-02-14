@@ -28,7 +28,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -36,6 +38,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarsource.sonarlint.core.StandaloneSonarLintEngineImpl;
+import org.sonarsource.sonarlint.core.client.api.common.LogOutput;
 import org.sonarsource.sonarlint.core.client.api.common.analysis.ClientInputFile;
 import org.sonarsource.sonarlint.core.client.api.common.analysis.Issue;
 import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneAnalysisConfiguration;
@@ -84,8 +87,17 @@ public class SonarLintTest {
         .setBaseDir(baseDir.toPath())
         .addInputFile(inputFile)
         .build();
-    sonarlintEngine.analyze(configuration, issues::add, null, null);
 
+    Map<LogOutput.Level, List<String>> logsByLevel = new HashMap<>();
+    LogOutput logOutput = (s, level) -> {
+      List<String> logs = logsByLevel.getOrDefault(level, new ArrayList<>());
+      logs.add(s);
+      logsByLevel.putIfAbsent(level, logs);
+    };
+
+    sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
+
+    assertThat(logsByLevel.get(LogOutput.Level.WARN)).isNull();
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
       tuple("python:BackticksUsage", 2, inputFile.getPath(), "BLOCKER"),
       tuple("python:S1542", 1, inputFile.getPath(), "MAJOR"));
