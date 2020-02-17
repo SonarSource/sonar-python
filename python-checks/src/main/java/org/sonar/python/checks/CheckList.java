@@ -136,6 +136,7 @@ public final class CheckList {
       SameConditionCheck.class,
       SecureCookieCheck.class,
       SelfAssignmentCheck.class,
+      SillyIdentityCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
       StringLiteralDuplicationCheck.class,

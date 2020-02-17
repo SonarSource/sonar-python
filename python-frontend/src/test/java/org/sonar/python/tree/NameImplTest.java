@@ -17,17 +17,30 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.tree;
 
-import com.google.common.annotations.Beta;
+import org.junit.Test;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
-public interface Expression extends Tree {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
-  @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
+public class NameImplTest {
+
+  @Test
+  public void type() {
+    Token token = new TokenImpl(mock(com.sonar.sslr.api.Token.class));
+    NameImpl name = new NameImpl(token, true);
+    assertThat(name.type()).isEqualTo(InferredTypes.anyType());
+
+    SymbolImpl symbol = new SymbolImpl("x", null);
+    name.setSymbol(symbol);
+    assertThat(name.type()).isEqualTo(InferredTypes.anyType());
+    InferredType str = InferredTypes.runtimeType("str");
+    symbol.setInferredType(str);
+    assertThat(name.type()).isEqualTo(str);
   }
-
 }

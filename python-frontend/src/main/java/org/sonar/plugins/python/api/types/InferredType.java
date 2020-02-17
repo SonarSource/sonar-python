@@ -17,17 +17,14 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.plugins.python.api.types;
 
 import com.google.common.annotations.Beta;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
 
-public interface Expression extends Tree {
+@Beta
+public interface InferredType {
 
   @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
-  }
+  boolean isIdentityComparableWith(InferredType other);
 
 }

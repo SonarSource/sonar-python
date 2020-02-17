@@ -17,17 +17,46 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types;
 
-import com.google.common.annotations.Beta;
+import java.util.Objects;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
 
-public interface Expression extends Tree {
+class RuntimeType implements InferredType {
 
-  @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
+  private final String fullyQualifiedName;
+
+  RuntimeType(String fullyQualifiedName) {
+    this.fullyQualifiedName = fullyQualifiedName;
   }
 
+  @Override
+  public boolean isIdentityComparableWith(InferredType other) {
+    if (other == AnyType.ANY) {
+      return true;
+    }
+    return this.equals(other);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    RuntimeType that = (RuntimeType) o;
+    return Objects.equals(fullyQualifiedName, that.fullyQualifiedName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(fullyQualifiedName);
+  }
+
+  @Override
+  public String toString() {
+    return "RuntimeType(" + fullyQualifiedName + ')';
+  }
 }
