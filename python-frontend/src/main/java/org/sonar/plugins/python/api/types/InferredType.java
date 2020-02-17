@@ -19,8 +19,12 @@
  */
 package org.sonar.plugins.python.api.types;
 
+import com.google.common.annotations.Beta;
+
+@Beta
 public interface InferredType {
 
+  @Beta
   boolean isIdentityComparableWith(InferredType other);
 
 }
