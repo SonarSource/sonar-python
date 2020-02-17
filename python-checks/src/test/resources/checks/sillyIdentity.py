@@ -32,3 +32,17 @@ def numeric_literals():
     if 42.0 is 42.0: # OK
         pass
 
+
+def string_literals():
+    a = A()
+    if a is "foo": # Noncompliant
+        pass
+
+    if b"foo" is "foo": # Noncompliant
+        pass
+
+    if "foo" is "foo": # OK
+        pass
+
+    if 42 is "42": # Noncompliant
+        pass

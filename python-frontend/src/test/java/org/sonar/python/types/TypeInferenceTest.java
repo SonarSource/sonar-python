@@ -59,6 +59,19 @@ public class TypeInferenceTest {
     assertThat(lastExpression("42.0j").type()).isEqualTo(runtimeType("complex"));
   }
 
+  @Test
+  public void string_literals() {
+    assertThat(lastExpression("'hello world'").type()).isEqualTo(runtimeType("str"));
+    assertThat(lastExpression("f'hello world'").type()).isEqualTo(runtimeType("str"));
+    assertThat(lastExpression("'hello' 'world'").type()).isEqualTo(runtimeType("str"));
+
+    assertThat(lastExpression("b'hello'").type()).isEqualTo(runtimeType("bytes"));
+    assertThat(lastExpression("rb'hello'").type()).isEqualTo(runtimeType("bytes"));
+
+    // this throws a 'SyntaxError: cannot mix bytes and nonbytes literals'
+    assertThat(lastExpression("b'hello' 'world'").type()).isEqualTo(runtimeType("str"));
+  }
+
   private Expression lastExpression(String code) {
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
     List<Statement> statements = fileInput.statements().statements();

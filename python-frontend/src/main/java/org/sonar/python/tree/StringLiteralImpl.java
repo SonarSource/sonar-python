@@ -19,17 +19,23 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class StringLiteralImpl extends PyTree implements StringLiteral {
 
   private final List<StringElement> stringElements;
+  private static final Set<String> BYTES_PREFIXES = new HashSet<>(Arrays.asList("b", "B", "br", "Br", "bR", "BR", "rb", "rB", "Rb", "RB"));
 
   StringLiteralImpl(List<StringElement> stringElements) {
     this.stringElements = stringElements;
@@ -60,5 +66,14 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
     return stringElements().stream()
       .map(StringElement::trimmedQuotesValue)
       .collect(Collectors.joining());
+  }
+
+  // https://docs.python.org/3/reference/lexical_analysis.html#string-and-bytes-literals
+  @Override
+  public InferredType type() {
+    if (stringElements.size() == 1 && BYTES_PREFIXES.contains(stringElements.get(0).prefix())) {
+      return InferredTypes.runtimeType("bytes");
+    }
+    return InferredTypes.runtimeType("str");
   }
 }
