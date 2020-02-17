@@ -17,17 +17,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types;
 
-import com.google.common.annotations.Beta;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
+import org.junit.Test;
 
-public interface Expression extends Tree {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.types.AnyType.ANY;
 
-  @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
+public class AnyTypeTest {
+
+  @Test
+  public void isIdentityComparableWith() {
+    assertThat(ANY.isIdentityComparableWith(ANY)).isTrue();
+    assertThat(ANY.isIdentityComparableWith(new RuntimeType("int"))).isTrue();
   }
-
 }

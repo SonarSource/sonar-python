@@ -80,6 +80,7 @@ import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
@@ -565,6 +566,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       SymbolImpl symbol = currentScope().resolve(nameTree.name());
       if (symbol != null && symbol.usages().stream().filter(Usage::isBindingUsage).count() == 1) {
         symbol.setType(type);
+        if (type != null) {
+          symbol.setInferredType(InferredTypes.runtimeType(type.symbol().fullyQualifiedName()));
+        }
       }
     }
 

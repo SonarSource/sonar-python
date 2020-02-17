@@ -29,6 +29,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.SymbolImpl;
 
 public class NameImpl extends PyTree implements Name {
   private final Token token;
@@ -90,5 +92,10 @@ public class NameImpl extends PyTree implements Name {
 
   public void setUsage(Usage usage) {
     this.usage = usage;
+  }
+
+  @Override
+  public InferredType type() {
+    return ((SymbolImpl) symbol).inferredType();
   }
 }

@@ -30,7 +30,9 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.types.InferredTypes;
 
 public class SymbolImpl implements Symbol {
 
@@ -40,7 +42,9 @@ public class SymbolImpl implements Symbol {
   private final List<Usage> usages = new ArrayList<>();
   private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
   private Kind kind;
+  // TODO Drop "type" and use only "inferredType"
   private Type type;
+  private InferredType inferredType = InferredTypes.anyType();
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
@@ -115,5 +119,13 @@ public class SymbolImpl implements Symbol {
   @CheckForNull
   public Type type() {
     return type;
+  }
+
+  public InferredType inferredType() {
+    return inferredType;
+  }
+
+  public void setInferredType(InferredType inferredType) {
+    this.inferredType = inferredType;
   }
 }
