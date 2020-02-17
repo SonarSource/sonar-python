@@ -46,6 +46,19 @@ public class TypeInferenceTest {
     assertThat(lastExpression("class A: pass\na = A()\na").type()).isEqualTo(runtimeType("mod1.A"));
   }
 
+  @Test
+  public void numeric_literals() {
+    assertThat(lastExpression("42").type()).isEqualTo(runtimeType("int"));
+    assertThat(lastExpression("42_3").type()).isEqualTo(runtimeType("int"));
+    assertThat(lastExpression("0b101").type()).isEqualTo(runtimeType("int"));
+    assertThat(lastExpression("0x1F").type()).isEqualTo(runtimeType("int"));
+    assertThat(lastExpression("42.0").type()).isEqualTo(runtimeType("float"));
+    assertThat(lastExpression("1e100").type()).isEqualTo(runtimeType("float"));
+    assertThat(lastExpression("1E100").type()).isEqualTo(runtimeType("float"));
+    assertThat(lastExpression("42j").type()).isEqualTo(runtimeType("complex"));
+    assertThat(lastExpression("42.0j").type()).isEqualTo(runtimeType("complex"));
+  }
+
   private Expression lastExpression(String code) {
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
     List<Statement> statements = fileInput.statements().statements();
