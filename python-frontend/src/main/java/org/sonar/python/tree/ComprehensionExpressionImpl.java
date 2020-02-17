@@ -33,6 +33,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class ComprehensionExpressionImpl extends PyTree implements ComprehensionExpression {
 
@@ -84,5 +86,19 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
 
   public void addLocalVariableSymbol(Symbol symbol) {
     symbols.add(symbol);
+  }
+
+  @Override
+  public InferredType type() {
+    switch (kind) {
+      case LIST_COMPREHENSION:
+        return InferredTypes.runtimeType("list");
+      case SET_COMPREHENSION:
+        return InferredTypes.runtimeType("set");
+      case GENERATOR_EXPR:
+        return InferredTypes.runtimeType("generator");
+      default:
+        return InferredTypes.anyType();
+    }
   }
 }

@@ -27,6 +27,8 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class ListLiteralImpl extends PyTree implements ListLiteral {
 
@@ -68,5 +70,10 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
   @Override
   public List<Tree> computeChildren() {
     return Stream.of(leftBracket, elements, rightBracket).collect(Collectors.toList());
+  }
+
+  @Override
+  public InferredType type() {
+    return InferredTypes.runtimeType("list");
   }
 }

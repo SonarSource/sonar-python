@@ -46,3 +46,14 @@ def string_literals():
 
     if 42 is "42": # Noncompliant
         pass
+
+def other_literals():
+    a = A()
+    if a is []: # Noncompliant
+        pass
+
+    if [] is []: # FN
+        pass
+
+    if [] is {}: # Noncompliant
+        pass

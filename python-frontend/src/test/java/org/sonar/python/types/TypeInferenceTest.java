@@ -72,6 +72,40 @@ public class TypeInferenceTest {
     assertThat(lastExpression("b'hello' 'world'").type()).isEqualTo(runtimeType("str"));
   }
 
+  @Test
+  public void list_literals() {
+    assertThat(lastExpression("[]").type()).isEqualTo(runtimeType("list"));
+    assertThat(lastExpression("[42]").type()).isEqualTo(runtimeType("list"));
+
+    assertThat(lastExpression("[x for x in range(0, 100)]").type()).isEqualTo(runtimeType("list"));
+  }
+
+  @Test
+  public void dict_literals() {
+    assertThat(lastExpression("{}").type()).isEqualTo(runtimeType("dict"));
+    assertThat(lastExpression("{'x' : 1, 'y' : 2}").type()).isEqualTo(runtimeType("dict"));
+
+    assertThat(lastExpression("{ k:v for (k, v) in foo }").type()).isEqualTo(runtimeType("dict"));
+  }
+
+  @Test
+  public void set_literals() {
+    assertThat(lastExpression("{1, 2, 3}").type()).isEqualTo(runtimeType("set"));
+
+    assertThat(lastExpression("{ v for v in foo }").type()).isEqualTo(runtimeType("set"));
+  }
+
+  @Test
+  public void generator_literal() {
+    assertThat(lastExpression("(v for v in foo)").type()).isEqualTo(runtimeType("generator"));
+  }
+
+  @Test
+  public void tuple_literal() {
+    assertThat(lastExpression("()").type()).isEqualTo(runtimeType("tuple"));
+    assertThat(lastExpression("(1, 2)").type()).isEqualTo(runtimeType("tuple"));
+  }
+
   private Expression lastExpression(String code) {
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
     List<Statement> statements = fileInput.statements().statements();
