@@ -25,6 +25,8 @@ import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class NoneExpressionImpl extends PyTree implements NoneExpression {
   private final Token none;
@@ -51,5 +53,10 @@ public class NoneExpressionImpl extends PyTree implements NoneExpression {
   @Override
   public Kind getKind() {
     return Kind.NONE;
+  }
+
+  @Override
+  public InferredType type() {
+    return InferredTypes.NONE;
   }
 }

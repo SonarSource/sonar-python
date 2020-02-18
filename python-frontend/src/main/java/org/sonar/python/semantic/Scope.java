@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.types.InferredTypes;
 
 class Scope {
 
@@ -61,6 +62,9 @@ class Scope {
 
   void createBuiltinSymbol(String name) {
     SymbolImpl symbol = new SymbolImpl(name, name);
+    if ("True".equals(name) || "False".equals(name)) {
+      symbol.setInferredType(InferredTypes.BOOL);
+    }
     symbols.add(symbol);
     builtinSymbols.add(symbol);
     symbolsByName.put(name, symbol);

@@ -37,6 +37,10 @@ public class InferredTypes {
   public static final InferredType TUPLE = runtimeType("tuple");
   public static final InferredType GENERATOR = runtimeType("generator");
 
+  public static final InferredType NONE = runtimeType("NoneType");
+
+  public static final InferredType BOOL = runtimeType("bool");
+
   private InferredTypes() {
   }
 

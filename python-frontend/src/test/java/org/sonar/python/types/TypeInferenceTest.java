@@ -30,6 +30,7 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.BYTES;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DICT;
@@ -37,6 +38,7 @@ import static org.sonar.python.types.InferredTypes.FLOAT;
 import static org.sonar.python.types.InferredTypes.GENERATOR;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.LIST;
+import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.SET;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.TUPLE;
@@ -114,6 +116,17 @@ public class TypeInferenceTest {
   public void tuple_literal() {
     assertThat(lastExpression("()").type()).isEqualTo(TUPLE);
     assertThat(lastExpression("(1, 2)").type()).isEqualTo(TUPLE);
+  }
+
+  @Test
+  public void none_type() {
+    assertThat(lastExpression("None").type()).isEqualTo(NONE);
+  }
+
+  @Test
+  public void true_false_literal() {
+    assertThat(lastExpression("True").type()).isEqualTo(BOOL);
+    assertThat(lastExpression("False").type()).isEqualTo(BOOL);
   }
 
   private Expression lastExpression(String code) {
