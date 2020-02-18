@@ -18,6 +18,9 @@ def foo():
     if a is a2: # OK
         pass
 
+    if a is None: # Noncompliant
+        pass
+
 def literals():
     a = A()
     if a is 42: # Noncompliant
