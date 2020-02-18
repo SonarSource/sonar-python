@@ -49,8 +49,8 @@ public class TypeInference extends BaseTreeVisitor {
   public static void inferTypes(FunctionLike functionDef) {
     TypeInference visitor = new TypeInference(functionDef);
     functionDef.accept(visitor);
-    visitor.processDependencies();
     visitor.resetTypeOfSymbolWhenMissingAssignment();
+    visitor.processDependencies();
   }
 
   private TypeInference(FunctionLike functionDef) {
@@ -140,10 +140,10 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private static Set<Symbol> dependencies(Expression expression) {
+  private Set<Symbol> dependencies(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null) {
+      if (symbol != null && trackedVars.contains(symbol)) {
         return Collections.singleton(symbol);
       }
     }

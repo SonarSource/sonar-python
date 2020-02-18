@@ -74,7 +74,17 @@ public class TypeInferenceTest {
 
   @Test
   public void parameter() {
-    assertThat(lastExpression("def f(p): p = 42; p").type()).isEqualTo(anyType());
+    assertThat(lastExpression(
+      "def f(p):",
+      "  p = 42",
+      "  p").type()).isEqualTo(anyType());
+
+    assertThat(lastExpression(
+      "def f(p):",
+      "  a = p",
+      "  if cond:",
+      "    a = 42",
+      "  a").type()).isEqualTo(anyType());
   }
 
   @Test
@@ -130,15 +140,21 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void tuple_assignment() {
+  public void unsupported_assignment() {
     assertThat(lastExpressionInFunction(
-      "(a, b) = (42, 43)",
+      "(a, b) = foo()",
       "a").type()).isEqualTo(anyType());
 
     assertThat(lastExpressionInFunction(
-      "(a, b) = (42, 43)",
+      "(a, b) = foo()",
       "a = ''",
       "a").type()).isEqualTo(anyType());
+
+    assertThat(lastExpressionInFunction(
+      "(a, b) = foo()",
+      "a = ''",
+      "c = a",
+      "c").type()).isEqualTo(anyType());
   }
 
   @Test
