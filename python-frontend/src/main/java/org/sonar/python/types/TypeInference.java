@@ -55,11 +55,9 @@ public class TypeInference extends BaseTreeVisitor {
 
   private TypeInference(FunctionLike functionDef) {
     for (Symbol variable : functionDef.localVariables()) {
-      Set<Usage.Kind> unsupportedKinds = variable.usages().stream()
+      if (variable.usages().stream()
         .map(Usage::kind)
-        .filter(k -> k != Usage.Kind.ASSIGNMENT_LHS && k != Usage.Kind.OTHER)
-        .collect(Collectors.toSet());
-      if (unsupportedKinds.isEmpty()) {
+        .allMatch(k -> k == Usage.Kind.ASSIGNMENT_LHS || k == Usage.Kind.OTHER)) {
         trackedVars.add((SymbolImpl) variable);
       }
     }
