@@ -99,6 +99,6 @@ public class TupleImpl extends PyTree implements Tuple {
 
   @Override
   public InferredType type() {
-    return InferredTypes.runtimeType("tuple");
+    return InferredTypes.TUPLE;
   }
 }

@@ -32,13 +32,13 @@ import org.sonar.python.types.InferredTypes;
 public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   private final String valueAsString;
-  private final String valueAsStringLowerCase;
   private final Token token;
+  private final InferredType type;
 
   NumericLiteralImpl(Token token) {
     this.token = token;
     valueAsString = token.value();
-    valueAsStringLowerCase = token.value().toLowerCase(Locale.ROOT);
+    type = computeType();
   }
 
   @Override
@@ -73,15 +73,20 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
     return Collections.singletonList(token);
   }
 
-  // https://docs.python.org/3/reference/lexical_analysis.html#numeric-literals
   @Override
   public InferredType type() {
+    return type;
+  }
+
+  // https://docs.python.org/3/reference/lexical_analysis.html#numeric-literals
+  private InferredType computeType() {
+    String valueAsStringLowerCase = valueAsString.toLowerCase(Locale.ROOT);
     if (valueAsStringLowerCase.contains("j")) {
-      return InferredTypes.runtimeType("complex");
+      return InferredTypes.COMPLEX;
     }
     if (valueAsString.contains(".") || valueAsStringLowerCase.contains("e")) {
-      return InferredTypes.runtimeType("float");
+      return InferredTypes.FLOAT;
     }
-    return InferredTypes.runtimeType("int");
+    return InferredTypes.INT;
   }
 }

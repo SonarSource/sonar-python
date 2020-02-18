@@ -24,6 +24,19 @@ import org.sonar.plugins.python.api.types.InferredType;
 
 public class InferredTypes {
 
+  public static final InferredType INT = runtimeType("int");
+  public static final InferredType FLOAT = runtimeType("float");
+  public static final InferredType COMPLEX = runtimeType("complex");
+
+  public static final InferredType STR = runtimeType("str");
+  public static final InferredType BYTES = runtimeType("bytes");
+
+  public static final InferredType SET = runtimeType("set");
+  public static final InferredType DICT = runtimeType("dict");
+  public static final InferredType LIST = runtimeType("list");
+  public static final InferredType TUPLE = runtimeType("tuple");
+  public static final InferredType GENERATOR = runtimeType("generator");
+
   private InferredTypes() {
   }
 

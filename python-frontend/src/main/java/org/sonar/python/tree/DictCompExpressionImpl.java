@@ -101,6 +101,6 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   @Override
   public InferredType type() {
-    return InferredTypes.runtimeType("dict");
+    return InferredTypes.DICT;
   }
 }

@@ -72,8 +72,8 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
   @Override
   public InferredType type() {
     if (stringElements.size() == 1 && BYTES_PREFIXES.contains(stringElements.get(0).prefix())) {
-      return InferredTypes.runtimeType("bytes");
+      return InferredTypes.BYTES;
     }
-    return InferredTypes.runtimeType("str");
+    return InferredTypes.STR;
   }
 }

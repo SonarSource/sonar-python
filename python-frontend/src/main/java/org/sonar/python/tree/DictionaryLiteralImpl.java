@@ -44,6 +44,6 @@ public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<DictionaryLitera
 
   @Override
   public InferredType type() {
-    return InferredTypes.runtimeType("dict");
+    return InferredTypes.DICT;
   }
 }

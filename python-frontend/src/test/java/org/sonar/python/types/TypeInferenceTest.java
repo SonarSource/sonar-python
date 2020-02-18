@@ -30,6 +30,16 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.types.InferredTypes.BYTES;
+import static org.sonar.python.types.InferredTypes.COMPLEX;
+import static org.sonar.python.types.InferredTypes.DICT;
+import static org.sonar.python.types.InferredTypes.FLOAT;
+import static org.sonar.python.types.InferredTypes.GENERATOR;
+import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.LIST;
+import static org.sonar.python.types.InferredTypes.SET;
+import static org.sonar.python.types.InferredTypes.STR;
+import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 
@@ -48,62 +58,62 @@ public class TypeInferenceTest {
 
   @Test
   public void numeric_literals() {
-    assertThat(lastExpression("42").type()).isEqualTo(runtimeType("int"));
-    assertThat(lastExpression("42_3").type()).isEqualTo(runtimeType("int"));
-    assertThat(lastExpression("0b101").type()).isEqualTo(runtimeType("int"));
-    assertThat(lastExpression("0x1F").type()).isEqualTo(runtimeType("int"));
-    assertThat(lastExpression("42.0").type()).isEqualTo(runtimeType("float"));
-    assertThat(lastExpression("1e100").type()).isEqualTo(runtimeType("float"));
-    assertThat(lastExpression("1E100").type()).isEqualTo(runtimeType("float"));
-    assertThat(lastExpression("42j").type()).isEqualTo(runtimeType("complex"));
-    assertThat(lastExpression("42.0j").type()).isEqualTo(runtimeType("complex"));
+    assertThat(lastExpression("42").type()).isEqualTo(INT);
+    assertThat(lastExpression("42_3").type()).isEqualTo(INT);
+    assertThat(lastExpression("0b101").type()).isEqualTo(INT);
+    assertThat(lastExpression("0x1F").type()).isEqualTo(INT);
+    assertThat(lastExpression("42.0").type()).isEqualTo(FLOAT);
+    assertThat(lastExpression("1e100").type()).isEqualTo(FLOAT);
+    assertThat(lastExpression("1E100").type()).isEqualTo(FLOAT);
+    assertThat(lastExpression("42j").type()).isEqualTo(COMPLEX);
+    assertThat(lastExpression("42.0j").type()).isEqualTo(COMPLEX);
   }
 
   @Test
   public void string_literals() {
-    assertThat(lastExpression("'hello world'").type()).isEqualTo(runtimeType("str"));
-    assertThat(lastExpression("f'hello world'").type()).isEqualTo(runtimeType("str"));
-    assertThat(lastExpression("'hello' 'world'").type()).isEqualTo(runtimeType("str"));
+    assertThat(lastExpression("'hello world'").type()).isEqualTo(STR);
+    assertThat(lastExpression("f'hello world'").type()).isEqualTo(STR);
+    assertThat(lastExpression("'hello' 'world'").type()).isEqualTo(STR);
 
-    assertThat(lastExpression("b'hello'").type()).isEqualTo(runtimeType("bytes"));
-    assertThat(lastExpression("rb'hello'").type()).isEqualTo(runtimeType("bytes"));
+    assertThat(lastExpression("b'hello'").type()).isEqualTo(BYTES);
+    assertThat(lastExpression("rb'hello'").type()).isEqualTo(BYTES);
 
     // this throws a 'SyntaxError: cannot mix bytes and nonbytes literals'
-    assertThat(lastExpression("b'hello' 'world'").type()).isEqualTo(runtimeType("str"));
+    assertThat(lastExpression("b'hello' 'world'").type()).isEqualTo(STR);
   }
 
   @Test
   public void list_literals() {
-    assertThat(lastExpression("[]").type()).isEqualTo(runtimeType("list"));
-    assertThat(lastExpression("[42]").type()).isEqualTo(runtimeType("list"));
+    assertThat(lastExpression("[]").type()).isEqualTo(LIST);
+    assertThat(lastExpression("[42]").type()).isEqualTo(LIST);
 
-    assertThat(lastExpression("[x for x in range(0, 100)]").type()).isEqualTo(runtimeType("list"));
+    assertThat(lastExpression("[x for x in range(0, 100)]").type()).isEqualTo(LIST);
   }
 
   @Test
   public void dict_literals() {
-    assertThat(lastExpression("{}").type()).isEqualTo(runtimeType("dict"));
-    assertThat(lastExpression("{'x' : 1, 'y' : 2}").type()).isEqualTo(runtimeType("dict"));
+    assertThat(lastExpression("{}").type()).isEqualTo(DICT);
+    assertThat(lastExpression("{'x' : 1, 'y' : 2}").type()).isEqualTo(DICT);
 
-    assertThat(lastExpression("{ k:v for (k, v) in foo }").type()).isEqualTo(runtimeType("dict"));
+    assertThat(lastExpression("{ k:v for (k, v) in foo }").type()).isEqualTo(DICT);
   }
 
   @Test
   public void set_literals() {
-    assertThat(lastExpression("{1, 2, 3}").type()).isEqualTo(runtimeType("set"));
+    assertThat(lastExpression("{1, 2, 3}").type()).isEqualTo(SET);
 
-    assertThat(lastExpression("{ v for v in foo }").type()).isEqualTo(runtimeType("set"));
+    assertThat(lastExpression("{ v for v in foo }").type()).isEqualTo(SET);
   }
 
   @Test
   public void generator_literal() {
-    assertThat(lastExpression("(v for v in foo)").type()).isEqualTo(runtimeType("generator"));
+    assertThat(lastExpression("(v for v in foo)").type()).isEqualTo(GENERATOR);
   }
 
   @Test
   public void tuple_literal() {
-    assertThat(lastExpression("()").type()).isEqualTo(runtimeType("tuple"));
-    assertThat(lastExpression("(1, 2)").type()).isEqualTo(runtimeType("tuple"));
+    assertThat(lastExpression("()").type()).isEqualTo(TUPLE);
+    assertThat(lastExpression("(1, 2)").type()).isEqualTo(TUPLE);
   }
 
   private Expression lastExpression(String code) {

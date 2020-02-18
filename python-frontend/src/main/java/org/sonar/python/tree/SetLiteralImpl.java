@@ -44,6 +44,6 @@ public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements 
 
   @Override
   public InferredType type() {
-    return InferredTypes.runtimeType("set");
+    return InferredTypes.SET;
   }
 }

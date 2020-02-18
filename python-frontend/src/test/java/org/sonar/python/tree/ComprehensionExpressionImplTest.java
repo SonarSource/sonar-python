@@ -37,13 +37,13 @@ public class ComprehensionExpressionImplTest {
     ComprehensionFor compFor = mock(ComprehensionFor.class);
 
     ComprehensionExpressionImpl generator = new ComprehensionExpressionImpl(Kind.GENERATOR_EXPR, token, resultExpression, compFor, token);
-    assertThat(generator.type()).isEqualTo(InferredTypes.runtimeType("generator"));
+    assertThat(generator.type()).isEqualTo(InferredTypes.GENERATOR);
 
     ComprehensionExpressionImpl listComp = new ComprehensionExpressionImpl(Kind.LIST_COMPREHENSION, token, resultExpression, compFor, token);
-    assertThat(listComp.type()).isEqualTo(InferredTypes.runtimeType("list"));
+    assertThat(listComp.type()).isEqualTo(InferredTypes.LIST);
 
     ComprehensionExpressionImpl setComp = new ComprehensionExpressionImpl(Kind.SET_COMPREHENSION, token, resultExpression, compFor, token);
-    assertThat(setComp.type()).isEqualTo(InferredTypes.runtimeType("set"));
+    assertThat(setComp.type()).isEqualTo(InferredTypes.SET);
 
     // this will never happen, added for coverage
     ComprehensionExpressionImpl comprehensionExpression = new ComprehensionExpressionImpl(Kind.NAME, token, resultExpression, compFor, token);

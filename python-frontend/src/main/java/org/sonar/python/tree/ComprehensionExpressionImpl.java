@@ -92,11 +92,11 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   public InferredType type() {
     switch (kind) {
       case LIST_COMPREHENSION:
-        return InferredTypes.runtimeType("list");
+        return InferredTypes.LIST;
       case SET_COMPREHENSION:
-        return InferredTypes.runtimeType("set");
+        return InferredTypes.SET;
       case GENERATOR_EXPR:
-        return InferredTypes.runtimeType("generator");
+        return InferredTypes.GENERATOR;
       default:
         return InferredTypes.anyType();
     }
