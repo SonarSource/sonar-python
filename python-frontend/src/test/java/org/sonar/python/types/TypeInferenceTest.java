@@ -24,7 +24,9 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
@@ -49,13 +51,110 @@ public class TypeInferenceTest {
 
   @Test
   public void unknown_expression_type() {
-    assertThat(lastExpression("foo()").type()).isEqualTo(anyType());
+    assertThat(lastExpression("a.b").type()).isEqualTo(anyType());
+    assertThat(lastExpression("a[0]").type()).isEqualTo(anyType());
   }
 
   @Test
-  public void names() {
-    assertThat(lastExpression("a = A()\na").type()).isEqualTo(anyType());
-    assertThat(lastExpression("class A: pass\na = A()\na").type()).isEqualTo(runtimeType("mod1.A"));
+  public void call_expression() {
+    assertThat(lastExpression(
+      "f()").type()).isEqualTo(anyType());
+    assertThat(lastExpression(
+      "def f(): pass",
+      "f()").type()).isEqualTo(anyType());
+    assertThat(lastExpression(
+      "class A: pass",
+      "A()").type()).isEqualTo(runtimeType("mod1.A"));
+  }
+
+  @Test
+  public void variable_outside_function() {
+    assertThat(lastExpression("a = 42; a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void parameter() {
+    assertThat(lastExpression(
+      "def f(p):",
+      "  p = 42",
+      "  p").type()).isEqualTo(anyType());
+
+    assertThat(lastExpression(
+      "def f(p):",
+      "  a = p",
+      "  if cond:",
+      "    a = 42",
+      "  a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void local_variable() {
+    assertThat(lastExpressionInFunction(
+      "a = 42",
+      "a").type()).isEqualTo(INT);
+  }
+
+  @Test
+  public void global_variable() {
+    assertThat(lastExpressionInFunction(
+      "global a",
+      "a = 42",
+      "a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void simple_propagation_between_variables() {
+    assertThat(lastExpressionInFunction(
+      "a = ''",
+      "b = a",
+      "c = b",
+      "c").type()).isEqualTo(STR);
+  }
+
+  @Test
+  public void variable_read_appearing_before_initialization() {
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if i > 0: a = b",
+      "  else:     b = 1",
+      "a").type()).isEqualTo(INT);
+  }
+
+  @Test
+  public void cycle_between_variables_with_initialization() {
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if i > 1:  b = a",
+      "  elif i==1: a = b",
+      "  else:      b = 1",
+      "a").type()).isEqualTo(INT);
+  }
+
+  @Test
+  public void unresolvable_cycle_between_variables() {
+    assertThat(lastExpressionInFunction(
+      "if cond: a = b",
+      "else:    b = a",
+      "c = 1",
+      "a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void unsupported_assignment() {
+    assertThat(lastExpressionInFunction(
+      "(a, b) = foo()",
+      "a").type()).isEqualTo(anyType());
+
+    assertThat(lastExpressionInFunction(
+      "(a, b) = foo()",
+      "a = ''",
+      "a").type()).isEqualTo(anyType());
+
+    assertThat(lastExpressionInFunction(
+      "(a, b) = foo()",
+      "a = ''",
+      "c = a",
+      "c").type()).isEqualTo(anyType());
   }
 
   @Test
@@ -129,13 +228,28 @@ public class TypeInferenceTest {
     assertThat(lastExpression("False").type()).isEqualTo(BOOL);
   }
 
-  private Expression lastExpression(String code) {
+  private Expression lastExpression(String... lines) {
+    String code = String.join("\n", lines);
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
-    List<Statement> statements = fileInput.statements().statements();
-    Statement statement = statements.get(statements.size() - 1);
+    Statement statement = lastStatement(fileInput.statements());
+    if (!(statement instanceof ExpressionStatement)) {
+      assertThat(statement).isInstanceOf(FunctionDef.class);
+      FunctionDef fnDef = (FunctionDef) statement;
+      statement = lastStatement(fnDef.body());
+    }
     assertThat(statement).isInstanceOf(ExpressionStatement.class);
     List<Expression> expressions = ((ExpressionStatement) statement).expressions();
     return expressions.get(expressions.size() - 1);
+  }
+
+  private Statement lastStatement(StatementList statementList) {
+    List<Statement> statements = statementList.statements();
+    return statements.get(statements.size() - 1);
+  }
+
+  private Expression lastExpressionInFunction(String... lines) {
+    String code = "def f():\n  " + String.join("\n  ", lines);
+    return lastExpression(code);
   }
 
 }

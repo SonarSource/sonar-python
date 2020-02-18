@@ -17,29 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+@ParametersAreNonnullByDefault
 package org.sonar.python.types;
 
-import org.junit.Test;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.types.InferredTypes.anyType;
-import static org.sonar.python.types.InferredTypes.or;
-import static org.sonar.python.types.InferredTypes.runtimeType;
-
-public class InferredTypesTest {
-
-  @Test
-  public void test_runtimeType() {
-    assertThat(runtimeType(null)).isEqualTo(anyType());
-    assertThat(runtimeType("a.b")).isEqualTo(new RuntimeType("a.b"));
-  }
-
-  @Test
-  public void test_or() {
-    assertThat(or(anyType(), anyType())).isEqualTo(anyType());
-    assertThat(or(anyType(), runtimeType("a"))).isEqualTo(anyType());
-    assertThat(or(runtimeType("a"), anyType())).isEqualTo(anyType());
-    assertThat(or(runtimeType("a"), runtimeType("a"))).isEqualTo(runtimeType("a"));
-    assertThat(or(runtimeType("a"), runtimeType("b"))).isEqualTo(anyType());
-  }
-}
