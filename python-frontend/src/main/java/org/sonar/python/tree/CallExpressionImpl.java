@@ -25,13 +25,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class CallExpressionImpl extends PyTree implements CallExpression {
   private final Expression callee;
@@ -84,5 +88,15 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
   @Override
   public List<Tree> computeChildren() {
     return Stream.of(callee, leftPar, argumentList, rightPar).filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  @Override
+  public InferredType type() {
+    Symbol calleeSymbol = calleeSymbol();
+    if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
+      ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
+      return InferredTypes.runtimeType(classSymbol.fullyQualifiedName());
+    }
+    return InferredTypes.anyType();
   }
 }

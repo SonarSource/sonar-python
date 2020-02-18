@@ -55,4 +55,11 @@ public class InferredTypes {
     return new RuntimeType(fullyQualifiedName);
   }
 
+  public static InferredType or(InferredType t1, InferredType t2) {
+    if (t1.equals(t2)) {
+      return t1;
+    }
+    return InferredTypes.anyType();
+  }
+
 }
