@@ -24,6 +24,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements SetLiteral {
 
@@ -40,4 +42,8 @@ public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements 
     return Kind.SET_LITERAL;
   }
 
+  @Override
+  public InferredType type() {
+    return InferredTypes.SET;
+  }
 }

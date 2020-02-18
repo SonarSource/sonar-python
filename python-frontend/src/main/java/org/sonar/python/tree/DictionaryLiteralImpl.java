@@ -24,6 +24,8 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<DictionaryLiteralElement> implements DictionaryLiteral {
 
@@ -38,5 +40,10 @@ public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<DictionaryLitera
   @Override
   public Kind getKind() {
     return Kind.DICTIONARY_LITERAL;
+  }
+
+  @Override
+  public InferredType type() {
+    return InferredTypes.DICT;
   }
 }

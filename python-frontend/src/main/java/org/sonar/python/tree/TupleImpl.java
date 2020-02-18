@@ -28,6 +28,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class TupleImpl extends PyTree implements Tuple {
 
@@ -93,5 +95,10 @@ public class TupleImpl extends PyTree implements Tuple {
   @Override
   public Kind getKind() {
     return Kind.TUPLE;
+  }
+
+  @Override
+  public InferredType type() {
+    return InferredTypes.TUPLE;
   }
 }

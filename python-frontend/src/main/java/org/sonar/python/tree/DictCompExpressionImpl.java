@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class DictCompExpressionImpl extends PyTree implements DictCompExpression {
 
@@ -95,5 +97,10 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   public void addLocalVariableSymbol(Symbol symbol) {
     symbols.add(symbol);
+  }
+
+  @Override
+  public InferredType type() {
+    return InferredTypes.DICT;
   }
 }

@@ -18,3 +18,10 @@ def foo():
     if a is a2: # OK
         pass
 
+def literals():
+    a = A()
+    if a is 42: # Noncompliant
+        pass
+
+    if [] is []: # FN
+        pass

@@ -21,19 +21,24 @@ package org.sonar.python.tree;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   private final String valueAsString;
   private final Token token;
+  private final InferredType type;
 
   NumericLiteralImpl(Token token) {
     this.token = token;
     valueAsString = token.value();
+    type = computeType();
   }
 
   @Override
@@ -66,5 +71,22 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
   @Override
   public List<Tree> computeChildren() {
     return Collections.singletonList(token);
+  }
+
+  @Override
+  public InferredType type() {
+    return type;
+  }
+
+  // https://docs.python.org/3/reference/lexical_analysis.html#numeric-literals
+  private InferredType computeType() {
+    String valueAsStringLowerCase = valueAsString.toLowerCase(Locale.ROOT);
+    if (valueAsStringLowerCase.contains("j")) {
+      return InferredTypes.COMPLEX;
+    }
+    if (valueAsString.contains(".") || valueAsStringLowerCase.contains("e")) {
+      return InferredTypes.FLOAT;
+    }
+    return InferredTypes.INT;
   }
 }
