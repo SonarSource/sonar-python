@@ -20,6 +20,10 @@
 package org.sonar.python.types;
 
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 
 public class InferredTypes {
@@ -62,4 +66,12 @@ public class InferredTypes {
     return InferredTypes.anyType();
   }
 
+  public static InferredType declaredType(TypeAnnotation typeAnnotation) {
+    Expression expression = typeAnnotation.expression();
+    if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
+      // TODO change it to DeclaredType instance
+      return new RuntimeType(((Name) expression).name());
+    }
+    return InferredTypes.anyType();
+  }
 }

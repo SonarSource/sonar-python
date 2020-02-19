@@ -228,6 +228,14 @@ public class TypeInferenceTest {
     assertThat(lastExpression("False").type()).isEqualTo(BOOL);
   }
 
+  @Test
+  public void builtin_function_types() {
+    assertThat(lastExpression("all([1, 2, 3])").type()).isEqualTo(BOOL);
+    assertThat(lastExpression("round(42)").type()).isEqualTo(AnyType.ANY);
+    assertThat(lastExpression("range(42)").type()).isEqualTo(AnyType.ANY);
+    assertThat(lastExpression("getattr(42)").type()).isEqualTo(AnyType.ANY);
+  }
+
   private Expression lastExpression(String... lines) {
     String code = String.join("\n", lines);
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);

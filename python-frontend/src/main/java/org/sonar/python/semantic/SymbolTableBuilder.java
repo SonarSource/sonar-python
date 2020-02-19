@@ -81,6 +81,7 @@ import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.types.TypeInference;
+import org.sonar.python.types.TypeShedVisitor;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
@@ -185,7 +186,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       createScope(tree, null);
       enterScope(tree);
       moduleScope = currentScope();
-      BuiltinSymbols.all().forEach(currentScope()::createBuiltinSymbol);
+      Map<String, Symbol> typeShedSymbols = TypeShedVisitor.typeShedSymbols();
+      for (String name : BuiltinSymbols.all()) {
+        currentScope().createBuiltinSymbol(name, typeShedSymbols);
+      }
       super.visitFileInput(tree);
     }
 
