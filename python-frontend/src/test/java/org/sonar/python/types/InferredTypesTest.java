@@ -40,6 +40,7 @@ public class InferredTypesTest {
     assertThat(or(anyType(), runtimeType("a"))).isEqualTo(anyType());
     assertThat(or(runtimeType("a"), anyType())).isEqualTo(anyType());
     assertThat(or(runtimeType("a"), runtimeType("a"))).isEqualTo(runtimeType("a"));
-    assertThat(or(runtimeType("a"), runtimeType("b"))).isEqualTo(anyType());
+    assertThat(or(runtimeType("a"), runtimeType("b"))).isNotEqualTo(anyType());
+    assertThat(or(runtimeType("a"), runtimeType("b"))).isEqualTo(or(runtimeType("b"), runtimeType("a")));
   }
 }

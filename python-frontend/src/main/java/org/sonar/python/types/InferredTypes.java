@@ -60,10 +60,7 @@ public class InferredTypes {
   }
 
   public static InferredType or(InferredType t1, InferredType t2) {
-    if (t1.equals(t2)) {
-      return t1;
-    }
-    return InferredTypes.anyType();
+    return UnionType.or(t1, t2);
   }
 
   public static InferredType declaredType(TypeAnnotation typeAnnotation) {

@@ -19,26 +19,55 @@
  */
 package org.sonar.python.types;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import org.sonar.plugins.python.api.types.InferredType;
 
-class RuntimeType implements InferredType {
+import static org.sonar.python.types.InferredTypes.anyType;
 
-  private final String fullyQualifiedName;
+class UnionType implements InferredType {
 
-  RuntimeType(String fullyQualifiedName) {
-    this.fullyQualifiedName = fullyQualifiedName;
+  private final Set<InferredType> types;
+
+  private UnionType(Set<InferredType> types) {
+    this.types = types;
+  }
+
+  public static InferredType or(InferredType type1, InferredType type2) {
+    if (type1.equals(anyType()) || type2.equals(anyType())) {
+      return anyType();
+    }
+    if (type1.equals(type2)) {
+      return type1;
+    }
+    Set<InferredType> types = new HashSet<>();
+    addTypes(type1, types);
+    addTypes(type2, types);
+    return new UnionType(types);
+  }
+
+  private static void addTypes(InferredType type, Set<InferredType> types) {
+    if (type instanceof UnionType) {
+      types.addAll(((UnionType) type).types);
+    } else {
+      types.add(type);
+    }
   }
 
   @Override
   public boolean isIdentityComparableWith(InferredType other) {
-    if (other == AnyType.ANY) {
+    // TODO Use canBeOrExtend
+    if (other.equals(anyType())) {
       return true;
     }
     if (other instanceof UnionType) {
-      return other.isIdentityComparableWith(this);
+      Set<InferredType> allTypes = new HashSet<>(types);
+      Set<InferredType> otherTypes = ((UnionType) other).types;
+      allTypes.addAll(otherTypes);
+      return allTypes.size() != this.types.size() + otherTypes.size();
     }
-    return this.equals(other);
+    return types.contains(other);
   }
 
   @Override
@@ -49,17 +78,17 @@ class RuntimeType implements InferredType {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RuntimeType that = (RuntimeType) o;
-    return Objects.equals(fullyQualifiedName, that.fullyQualifiedName);
+    UnionType unionType = (UnionType) o;
+    return Objects.equals(types, unionType.types);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fullyQualifiedName);
+    return Objects.hash(types);
   }
 
   @Override
   public String toString() {
-    return "RuntimeType(" + fullyQualifiedName + ')';
+    return "UnionType" + types;
   }
 }

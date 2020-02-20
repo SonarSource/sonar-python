@@ -45,6 +45,7 @@ import static org.sonar.python.types.InferredTypes.SET;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
+import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 
 public class TypeInferenceTest {
@@ -155,6 +156,14 @@ public class TypeInferenceTest {
       "a = ''",
       "c = a",
       "c").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void multiple_types() {
+    assertThat(lastExpressionInFunction(
+      "if cond: a = ''",
+      "else:    a = 42",
+      "a").type()).isEqualTo(or(STR, INT));
   }
 
   @Test
