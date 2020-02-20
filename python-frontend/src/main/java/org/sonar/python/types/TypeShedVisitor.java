@@ -66,7 +66,7 @@ public class TypeShedVisitor extends BaseTreeVisitor {
         fileInput.accept(typeShedVisitor);
         typeShedSymbols = typeShedVisitor.symbolsByName;
       } catch (IOException | UncheckedIOException e) {
-        LOG.debug("Unable to read builtin types.");
+        LOG.info("Unable to read builtin types.", e);
       }
       TypeShedVisitor.typeShedSymbols = Collections.unmodifiableMap(typeShedSymbols);
     }
@@ -83,7 +83,7 @@ public class TypeShedVisitor extends BaseTreeVisitor {
       FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionName, functionName, false, false, false, Collections.emptyList(), null);
       TypeAnnotation returnTypeAnnotation = functionDef.returnTypeAnnotation();
       if (returnTypeAnnotation != null) {
-        functionSymbol.setInferredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
+        functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
       }
       symbolsByName.put(functionName, functionSymbol);
     }

@@ -101,7 +101,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
       }
       if (calleeSymbol.kind() == Symbol.Kind.FUNCTION) {
         FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) calleeSymbol;
-        return functionSymbol.inferredReturnType();
+        return functionSymbol.declaredReturnType();
       }
     }
     return InferredTypes.anyType();

@@ -45,7 +45,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean isInstanceMethod;
   private final boolean hasDecorators;
   private Type returnType = null;
-  private InferredType inferredReturnType = InferredTypes.anyType();
+  private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
@@ -72,7 +72,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
     returnType = ((FunctionSymbolImpl) functionSymbol).returnType();
-    inferredReturnType = ((FunctionSymbolImpl) functionSymbol).inferredReturnType();
+    declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
   }
 
@@ -153,12 +153,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     return returnType;
   }
 
-  public InferredType inferredReturnType() {
-    return inferredReturnType;
+  public InferredType declaredReturnType() {
+    return declaredReturnType;
   }
 
-  public void setInferredReturnType(InferredType inferredReturnType) {
-    this.inferredReturnType = inferredReturnType;
+  public void setDeclaredReturnType(InferredType declaredReturnType) {
+    this.declaredReturnType = declaredReturnType;
   }
 
   private static class ParameterImpl implements Parameter {
