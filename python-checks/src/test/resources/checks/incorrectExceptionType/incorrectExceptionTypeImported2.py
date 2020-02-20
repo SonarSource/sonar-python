@@ -1,3 +1,5 @@
+from incorrectExceptionTypeImported3 import Animal
+
 class A(BaseException):
   pass
 
@@ -12,3 +14,6 @@ class DerivedA(A):
 
 def func():
   pass
+
+class Dog(Animal):
+    pass

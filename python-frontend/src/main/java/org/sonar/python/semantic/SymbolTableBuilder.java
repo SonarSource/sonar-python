@@ -300,7 +300,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (fromModuleName != null) {
           currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByFQN);
         } else {
-          currentScope().addModuleSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByModuleName);
+          currentScope().addModuleSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByModuleName, globalSymbolsByFQN);
         }
       });
     }

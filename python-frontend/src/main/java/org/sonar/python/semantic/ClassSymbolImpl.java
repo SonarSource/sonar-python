@@ -37,6 +37,23 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.setKind(Kind.CLASS);
   }
 
+  /**
+   * Copy constructor.
+   * Note that it discards the usages.
+   */
+  ClassSymbolImpl(ClassSymbol classSymbol) {
+    super(classSymbol.name(), classSymbol.fullyQualifiedName());
+    for (Symbol globalVariable : classSymbol.superClasses()) {
+      if (globalVariable.kind() == Symbol.Kind.CLASS) {
+        superClasses.add(new ClassSymbolImpl((ClassSymbol) globalVariable));
+      } else {
+        superClasses.add(new SymbolImpl(globalVariable.name(), globalVariable.fullyQualifiedName()));
+      }
+    }
+    hasUnresolvedTypeHierarchy = classSymbol.hasUnresolvedTypeHierarchy();
+    this.setKind(Kind.CLASS);
+  }
+
   @Override
   public List<Symbol> superClasses() {
     return Collections.unmodifiableList(superClasses);

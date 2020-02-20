@@ -55,7 +55,7 @@ public class SymbolUtilsTest {
       "def fn(): pass",
       "class A: pass"
     );
-    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "mod", pythonFile("mod.py"));
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "", pythonFile("mod.py"));
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A");
     assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A");
     assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
@@ -131,13 +131,14 @@ public class SymbolUtilsTest {
   @Test
   public void classdef_with_missing_symbol() {
     FileInput fileInput = parseWithoutSymbols(
-      "global C",
       "class C: ",
-      "  pass");
-    //TODO: When global variables are present, class definitions do not have a symbol associated with them
+      "  pass",
+      "global C");
+
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod", pythonFile("mod.py"));
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
-    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isTrue());
+    // TODO: Global statements should not alter the kind of a symbol
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.OTHER.equals(k)).isTrue());
   }
 
   @Test
@@ -174,14 +175,17 @@ public class SymbolUtilsTest {
     cSymbol = symbols.get("C");
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    assertThat(((ClassSymbol) cSymbol).superClasses()).isEmpty();
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
   }
 
   @Test
   public void class_inheriting_from_imported_symbol() {
     FileInput fileInput = parseWithoutSymbols(
       "from mod import A",
+      "import mod2",
       "class C(A): ",
+      "  pass",
+      "class D(mod2.B):",
       "  pass");
 
     Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod", pythonFile("mod.py"));
@@ -189,7 +193,13 @@ public class SymbolUtilsTest {
     Symbol cSymbol = symbols.get("C");
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(0);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+    assertThat(((ClassSymbol) cSymbol).superClasses().get(0).fullyQualifiedName()).isEqualTo("mod.A");
+    Symbol dSymbol = symbols.get("D");
+    assertThat(dSymbol.name()).isEqualTo("D");
+    assertThat(dSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) dSymbol).superClasses()).hasSize(1);
+    assertThat(((ClassSymbol) dSymbol).superClasses().get(0).fullyQualifiedName()).isEqualTo("mod2.B");
   }
 
   @Test
