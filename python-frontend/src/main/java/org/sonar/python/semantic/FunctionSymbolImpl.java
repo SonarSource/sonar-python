@@ -32,7 +32,9 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.TokenLocation;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
@@ -43,6 +45,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean isInstanceMethod;
   private final boolean hasDecorators;
   private Type returnType = null;
+  private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
@@ -69,11 +72,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
     returnType = ((FunctionSymbolImpl) functionSymbol).returnType();
+    declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
   }
 
-  FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
-                     boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters, Type returnType) {
+  public FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
+                     boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters, @Nullable Type returnType) {
     super(name, fullyQualifiedName);
     setKind(Kind.FUNCTION);
     this.hasVariadicParameter = hasVariadicParameter;
@@ -147,6 +151,14 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   @CheckForNull
   Type returnType() {
     return returnType;
+  }
+
+  public InferredType declaredReturnType() {
+    return declaredReturnType;
+  }
+
+  public void setDeclaredReturnType(InferredType declaredReturnType) {
+    this.declaredReturnType = declaredReturnType;
   }
 
   private static class ParameterImpl implements Parameter {

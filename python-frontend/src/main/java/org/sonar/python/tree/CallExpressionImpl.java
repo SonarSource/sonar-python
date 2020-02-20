@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
 public class CallExpressionImpl extends PyTree implements CallExpression {
@@ -93,9 +94,15 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
   @Override
   public InferredType type() {
     Symbol calleeSymbol = calleeSymbol();
-    if (calleeSymbol != null && calleeSymbol.kind() == Symbol.Kind.CLASS) {
-      ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
-      return InferredTypes.runtimeType(classSymbol.fullyQualifiedName());
+    if (calleeSymbol != null) {
+      if (calleeSymbol.kind() == Symbol.Kind.CLASS) {
+        ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
+        return InferredTypes.runtimeType(classSymbol.fullyQualifiedName());
+      }
+      if (calleeSymbol.kind() == Symbol.Kind.FUNCTION) {
+        FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) calleeSymbol;
+        return functionSymbol.declaredReturnType();
+      }
     }
     return InferredTypes.anyType();
   }

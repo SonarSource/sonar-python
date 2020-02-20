@@ -21,6 +21,12 @@ def foo():
     if a is None: # Noncompliant
         pass
 
+    if a is all([1, 2, 3]): # Noncompliant
+        pass
+
+    if a is round(42): # FN
+        pass
+
 def literals():
     a = A()
     if a is 42: # Noncompliant

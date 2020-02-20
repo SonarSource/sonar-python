@@ -60,10 +60,16 @@ class Scope {
     return Collections.unmodifiableSet(symbols);
   }
 
-  void createBuiltinSymbol(String name) {
-    SymbolImpl symbol = new SymbolImpl(name, name);
-    if ("True".equals(name) || "False".equals(name)) {
-      symbol.setInferredType(InferredTypes.BOOL);
+  void createBuiltinSymbol(String name, Map<String, Symbol> typeShedSymbols) {
+    SymbolImpl symbol;
+    Symbol typeShedSymbol = typeShedSymbols.get(name);
+    if (typeShedSymbol != null && typeShedSymbol.kind() == Symbol.Kind.FUNCTION) {
+      symbol = new FunctionSymbolImpl(name, ((FunctionSymbol) typeShedSymbol));
+    } else {
+      symbol = new SymbolImpl(name, name);
+      if ("True".equals(name) || "False".equals(name)) {
+        symbol.setInferredType(InferredTypes.BOOL);
+      }
     }
     symbols.add(symbol);
     builtinSymbols.add(symbol);
