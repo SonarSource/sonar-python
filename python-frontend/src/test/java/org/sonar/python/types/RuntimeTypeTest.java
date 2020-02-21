@@ -22,17 +22,23 @@ package org.sonar.python.types;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.types.InferredTypes.or;
 
 public class RuntimeTypeTest {
   @Test
   public void isIdentityComparableWith() {
     RuntimeType intType = new RuntimeType("int");
     RuntimeType strType = new RuntimeType("str");
+    RuntimeType boolType = new RuntimeType("bool");
+
     assertThat(intType.isIdentityComparableWith(strType)).isFalse();
     assertThat(intType.isIdentityComparableWith(intType)).isTrue();
     assertThat(intType.isIdentityComparableWith(new RuntimeType("int"))).isTrue();
 
     assertThat(intType.isIdentityComparableWith(AnyType.ANY)).isTrue();
+
+    assertThat(intType.isIdentityComparableWith(or(intType, strType))).isTrue();
+    assertThat(intType.isIdentityComparableWith(or(boolType, strType))).isFalse();
   }
 
   @Test
