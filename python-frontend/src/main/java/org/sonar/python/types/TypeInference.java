@@ -19,7 +19,9 @@
  */
 package org.sonar.python.types;
 
+import java.util.ArrayDeque;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -121,13 +123,21 @@ public class TypeInference extends BaseTreeVisitor {
   }
 
   private Set<Symbol> dependencies(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
-      Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null && trackedVars.contains(symbol)) {
-        return Collections.singleton(symbol);
+    Set<Symbol> dependencies = new HashSet<>();
+    Deque<Expression> workList = new ArrayDeque<>();
+    workList.push(expression);
+    while (!workList.isEmpty()) {
+      Expression e = workList.pop();
+      if (e.is(Tree.Kind.NAME)) {
+        Symbol symbol = ((Name) e).symbol();
+        if (symbol != null && trackedVars.contains(symbol)) {
+          dependencies.add(symbol);
+        }
+      } else if (e instanceof HasTypeDependencies) {
+        workList.addAll(((HasTypeDependencies) e).typeDependencies());
       }
     }
-    return Collections.emptySet();
+    return dependencies;
   }
 
   private static class Assignment {
