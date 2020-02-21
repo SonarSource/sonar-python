@@ -156,6 +156,13 @@ public class TypeInferenceTest {
       "a = ''",
       "c = a",
       "c").type()).isEqualTo(anyType());
+
+    assertThat(lastExpressionInFunction(
+      "c = 42",
+      "if cond: a, b = foo()",
+      "else:    a = c",
+      "d = a",
+      "d").type()).isEqualTo(anyType());
   }
 
   @Test

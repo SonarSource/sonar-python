@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -43,36 +42,17 @@ public class TypeInference extends BaseTreeVisitor {
 
   private final Set<SymbolImpl> trackedVars = new HashSet<>();
   private final Set<Symbol> initializedVars = new HashSet<>();
-  private final Map<Symbol, Set<Assignment>> dependentAssignments = new HashMap<>();
-  private final Set<Name> visitedLhs = new HashSet<>();
+  private final Set<Assignment> assignments = new HashSet<>();
+  private final FunctionLike functionDef;
 
   public static void inferTypes(FunctionLike functionDef) {
     TypeInference visitor = new TypeInference(functionDef);
     functionDef.accept(visitor);
-    visitor.resetTypeOfSymbolWhenMissingAssignment();
-    visitor.processDependencies();
+    visitor.processAssignments();
   }
 
   private TypeInference(FunctionLike functionDef) {
-    for (Symbol variable : functionDef.localVariables()) {
-      if (variable.usages().stream()
-        .map(Usage::kind)
-        .allMatch(k -> k == Usage.Kind.ASSIGNMENT_LHS || k == Usage.Kind.OTHER)) {
-        trackedVars.add((SymbolImpl) variable);
-      }
-    }
-  }
-
-  private void resetTypeOfSymbolWhenMissingAssignment() {
-    for (SymbolImpl var : trackedVars) {
-      Optional<Usage> missedBindingUsage = var.usages().stream()
-        .filter(Usage::isBindingUsage)
-        .filter(u -> !visitedLhs.contains(u.tree()))
-        .findAny();
-      if (missedBindingUsage.isPresent()) {
-        var.setInferredType(InferredTypes.anyType());
-      }
-    }
+    this.functionDef = functionDef;
   }
 
   @Override
@@ -90,22 +70,38 @@ public class TypeInference extends BaseTreeVisitor {
     }
     Name lhs = (Name) lhsExpression;
     SymbolImpl symbol = (SymbolImpl) lhs.symbol();
-    if (symbol == null || !trackedVars.contains(symbol)) {
+    if (symbol == null) {
       return;
     }
-    visitedLhs.add(lhs);
 
     Expression rhs = assignmentStatement.assignedValue();
-    Set<Symbol> rhsDependencies = dependencies(rhs);
-    if (rhsDependencies.isEmpty()) {
-      propagateType(symbol, rhs);
-    } else {
-      Assignment assignment = new Assignment(symbol, rhs);
-      rhsDependencies.forEach(s -> dependentAssignments.computeIfAbsent(s, k -> new HashSet<>()).add(assignment));
-    }
+    assignments.add(new Assignment(symbol, lhs, rhs));
   }
 
-  private void processDependencies() {
+  private void processAssignments() {
+    Set<Name> assignedNames = assignments.stream().map(a -> a.lhsName).collect(Collectors.toSet());
+    for (Symbol variable : functionDef.localVariables()) {
+      boolean hasMissingBindingUsage = variable.usages().stream()
+        .filter(Usage::isBindingUsage)
+        .anyMatch(u -> !assignedNames.contains(u.tree()));
+      if (!hasMissingBindingUsage) {
+        trackedVars.add((SymbolImpl) variable);
+      }
+    }
+
+    Map<Symbol, Set<Assignment>> dependentAssignments = new HashMap<>();
+    for (Assignment assignment : assignments) {
+      if (!trackedVars.contains(assignment.lhs)) {
+        continue;
+      }
+      Set<Symbol> rhsDependencies = dependencies(assignment.rhs);
+      if (rhsDependencies.isEmpty()) {
+        propagateType(assignment.lhs, assignment.rhs);
+      } else {
+        rhsDependencies.forEach(s -> dependentAssignments.computeIfAbsent(s, k -> new HashSet<>()).add(assignment));
+      }
+    }
+
     Set<Assignment> workSet = new HashSet<>();
     for (Set<Assignment> dependent : dependentAssignments.values()) {
       workSet.addAll(dependent);
@@ -150,10 +146,12 @@ public class TypeInference extends BaseTreeVisitor {
 
   private static class Assignment {
     private final SymbolImpl lhs;
+    private final Name lhsName;
     private final Expression rhs;
 
-    private Assignment(SymbolImpl lhs, Expression rhs) {
+    private Assignment(SymbolImpl lhs, Name lhsName, Expression rhs) {
       this.lhs = lhs;
+      this.lhsName = lhsName;
       this.rhs = rhs;
     }
   }
