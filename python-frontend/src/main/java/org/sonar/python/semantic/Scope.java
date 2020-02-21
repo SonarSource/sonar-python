@@ -76,9 +76,9 @@ class Scope {
     symbolsByName.put(name, symbol);
   }
 
-  void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols) {
+  void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols, Map<String, Symbol> globalSymbolsByFQN) {
     importedSymbols.forEach(symbol -> {
-      Symbol importedSymbol = copySymbol(symbol.name(), symbol, Collections.emptyMap());
+      Symbol importedSymbol = copySymbol(symbol.name(), symbol, globalSymbolsByFQN);
       symbols.add(importedSymbol);
       symbolsByName.put(symbol.name(), importedSymbol);
     });
@@ -115,13 +115,12 @@ class Scope {
       for (Symbol originalSymbol : ((ClassSymbol) symbol).superClasses()) {
         Symbol globalSymbol = globalSymbolsByFQN.get(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
-          classSymbol.addSuperClass(globalSymbol);
+          classSymbol.addSuperClass(copySymbol(globalSymbol.name(), globalSymbol, globalSymbolsByFQN));
         } else {
           classSymbol.addSuperClass(originalSymbol);
         }
       }
-      classSymbol.setHasUnresolvedTypeHierarchy(classSymbol.superClasses().stream().anyMatch(
-        s -> s.kind() != Symbol.Kind.CLASS && !BuiltinSymbols.all().contains(s.fullyQualifiedName())));
+      classSymbol.setHasUnresolvedTypeHierarchy(classSymbol.superClasses().stream().anyMatch(s -> s.kind() != Symbol.Kind.CLASS));
       return classSymbol;
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());

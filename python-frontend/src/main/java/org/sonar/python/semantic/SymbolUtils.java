@@ -40,7 +40,6 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -84,7 +83,7 @@ public class SymbolUtils {
     Set<Symbol> globalSymbols = new HashSet<>();
     for (Symbol globalVariable : fileInput.globalVariables()) {
       if (globalVariable.kind() == Symbol.Kind.CLASS) {
-        globalSymbols.add(new ClassSymbolImpl((ClassSymbol) globalVariable));
+        globalSymbols.add(((ClassSymbolImpl) globalVariable).copyWithoutUsages());
       } else if (globalVariable.kind() == Symbol.Kind.FUNCTION) {
         globalSymbols.add(new FunctionSymbolImpl(globalVariable.name(), ((FunctionSymbol) globalVariable)));
       } else {
@@ -133,7 +132,7 @@ public class SymbolUtils {
       if (argumentSymbol == null) {
         classSymbol.setHasUnresolvedTypeHierarchy(true);
       } else {
-        if (!Symbol.Kind.CLASS.equals(argumentSymbol.kind()) && !BuiltinSymbols.all().contains(argumentSymbol.fullyQualifiedName())) {
+        if (!Symbol.Kind.CLASS.equals(argumentSymbol.kind())) {
           classSymbol.setHasUnresolvedTypeHierarchy(true);
         }
         classSymbol.addSuperClass(argumentSymbol);

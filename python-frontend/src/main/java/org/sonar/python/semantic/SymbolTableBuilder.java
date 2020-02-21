@@ -276,7 +276,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
         if (importedModuleSymbols != null) {
-          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols);
+          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, globalSymbolsByFQN);
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
         } else {
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(true);

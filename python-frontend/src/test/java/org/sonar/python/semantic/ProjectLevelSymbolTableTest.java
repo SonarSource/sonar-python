@@ -271,8 +271,59 @@ public class ProjectLevelSymbolTableTest {
     Symbol importedASymbol = tree.globalVariables().iterator().next();
     assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classA = (ClassSymbol) importedASymbol;
-    assertThat(classA.hasUnresolvedTypeHierarchy()).isEqualTo(false);
+    assertThat(classA.hasUnresolvedTypeHierarchy()).isEqualTo(true);
     assertThat(classA.superClasses()).hasSize(1);
     assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.OTHER);
+  }
+
+  @Test
+  public void multi_level_type_hierarchy() {
+    ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
+    classASymbol.addSuperClass(new SymbolImpl("B", "mod2.B"));
+    Set<Symbol> mod1Symbols = Collections.singleton(classASymbol);
+
+    ClassSymbolImpl classBSymbol = new ClassSymbolImpl("B", "mod2.B");
+    classBSymbol.addSuperClass(new SymbolImpl("C", "mod3.C"));
+    Set<Symbol> mod2Symbols = Collections.singleton(classBSymbol);
+
+    ClassSymbolImpl classCSymbol = new ClassSymbolImpl("C", "mod3.C");
+    Set<Symbol> mod3Symbols = Collections.singleton(classCSymbol);
+
+    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+    globalSymbols.put("mod1", mod1Symbols);
+    globalSymbols.put("mod2", mod2Symbols);
+    globalSymbols.put("mod3", mod3Symbols);
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      "from mod1 import A"
+    );
+    Symbol importedASymbol = tree.globalVariables().iterator().next();
+    assertThat(importedASymbol.name()).isEqualTo("A");
+    assertThat(importedASymbol.fullyQualifiedName()).isEqualTo("mod1.A");
+    assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    ClassSymbol classA = (ClassSymbol) importedASymbol;
+    assertThat(classA.hasUnresolvedTypeHierarchy()).isEqualTo(false);
+    assertThat(classA.superClasses()).hasSize(1);
+    assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
+
+    tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      "import mod1",
+      "mod1.A"
+    );
+
+    QualifiedExpression qualifiedExpression = PythonTestUtils.getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    importedASymbol = qualifiedExpression.name().symbol();
+    assertThat(importedASymbol.name()).isEqualTo("A");
+    assertThat(importedASymbol.fullyQualifiedName()).isEqualTo("mod1.A");
+    assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    classA = (ClassSymbol) importedASymbol;
+    assertThat(classA.hasUnresolvedTypeHierarchy()).isEqualTo(false);
+    assertThat(classA.superClasses()).hasSize(1);
+    assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
+
+    ClassSymbol classB = (ClassSymbol) classA.superClasses().get(0);
+    assertThat(classB.superClasses()).hasSize(1);
+    assertThat(classB.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
   }
 }
