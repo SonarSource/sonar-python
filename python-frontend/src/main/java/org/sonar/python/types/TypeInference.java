@@ -41,7 +41,6 @@ import org.sonar.python.semantic.SymbolImpl;
 public class TypeInference extends BaseTreeVisitor {
 
   private final Set<SymbolImpl> trackedVars = new HashSet<>();
-  private final Set<Symbol> initializedVars = new HashSet<>();
   private final Set<Assignment> assignments = new HashSet<>();
   private final FunctionLike functionDef;
 
@@ -89,6 +88,7 @@ public class TypeInference extends BaseTreeVisitor {
       }
     }
 
+    Set<Symbol> initializedVars = new HashSet<>();
     Map<Symbol, Set<Assignment>> dependentAssignments = new HashMap<>();
     for (Assignment assignment : assignments) {
       if (!trackedVars.contains(assignment.lhs)) {
@@ -96,7 +96,7 @@ public class TypeInference extends BaseTreeVisitor {
       }
       Set<Symbol> rhsDependencies = dependencies(assignment.rhs);
       if (rhsDependencies.isEmpty()) {
-        propagateType(assignment.lhs, assignment.rhs);
+        assignment.propagateType(initializedVars);
       } else {
         rhsDependencies.forEach(s -> dependentAssignments.computeIfAbsent(s, k -> new HashSet<>()).add(assignment));
       }
@@ -113,24 +113,10 @@ public class TypeInference extends BaseTreeVisitor {
       if (!initializedVars.containsAll(dependencies(assignment.rhs))) {
         continue;
       }
-      boolean learnt = propagateType(assignment.lhs, assignment.rhs);
+      boolean learnt = assignment.propagateType(initializedVars);
       if (learnt) {
         workSet.addAll(dependentAssignments.getOrDefault(assignment.lhs, Collections.emptySet()));
       }
-    }
-  }
-
-  /** @return true if the propagation effectively changed the inferred type of lhs */
-  private boolean propagateType(SymbolImpl lhs, Expression rhs) {
-    InferredType rhsType = rhs.type();
-    if (initializedVars.add(lhs)) {
-      lhs.setInferredType(rhsType);
-      return true;
-    } else {
-      InferredType currentType = lhs.inferredType();
-      InferredType newType = InferredTypes.or(rhsType, currentType);
-      lhs.setInferredType(newType);
-      return !newType.equals(currentType);
     }
   }
 
@@ -153,6 +139,20 @@ public class TypeInference extends BaseTreeVisitor {
       this.lhs = lhs;
       this.lhsName = lhsName;
       this.rhs = rhs;
+    }
+
+    /** @return true if the propagation effectively changed the inferred type of lhs */
+    private boolean propagateType(Set<Symbol> initializedVars) {
+      InferredType rhsType = rhs.type();
+      if (initializedVars.add(lhs)) {
+        lhs.setInferredType(rhsType);
+        return true;
+      } else {
+        InferredType currentType = lhs.inferredType();
+        InferredType newType = InferredTypes.or(rhsType, currentType);
+        lhs.setInferredType(newType);
+        return !newType.equals(currentType);
+      }
     }
   }
 
