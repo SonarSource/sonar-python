@@ -257,6 +257,7 @@ public class TypeInferenceTest {
     assertThat(lastExpression("42 if '' else 43").type()).isEqualTo(INT);
     assertThat(lastExpression("42 if cond else ''").type()).isEqualTo(or(INT, STR));
     assertThat(lastExpression("42 if '' else xxx").type()).isEqualTo(anyType());
+    assertThat(lastExpression("42 if cond1 else True if cond2 else ''").type()).isEqualTo(or(or(INT, STR), BOOL));
 
     assertThat(lastExpressionInFunction(
       "for i in range(3):",
@@ -264,6 +265,10 @@ public class TypeInferenceTest {
       "  elif i > 0: b = 42 if cond else a",
       "  else:       a = ''",
       "c").type()).isEqualTo(or(INT, STR));
+
+    assertThat(lastExpressionInFunction(
+      "c = 42 if '' else c",
+      "c").type()).isEqualTo(anyType());
   }
 
   private Expression lastExpression(String... lines) {
