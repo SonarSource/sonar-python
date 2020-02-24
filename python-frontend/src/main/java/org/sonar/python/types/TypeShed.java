@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -60,11 +61,12 @@ public class TypeShed {
         @Override
         public void visitFunctionDef(FunctionDef functionDef) {
           TypeAnnotation returnTypeAnnotation = functionDef.returnTypeAnnotation();
-          Symbol symbol = functionDef.name().symbol();
-          if (symbol.kind() == Symbol.Kind.FUNCTION && returnTypeAnnotation != null) {
-            FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-            functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
-          }
+          Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
+            if (symbol.kind() == Symbol.Kind.FUNCTION && returnTypeAnnotation != null) {
+              FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
+              functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
+            }
+          });
           super.visitFunctionDef(functionDef);
         }
       };
