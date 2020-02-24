@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,8 +29,11 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.HasTypeDependencies;
+import org.sonar.python.types.InferredTypes;
 
-public class ConditionalExpressionImpl extends PyTree implements ConditionalExpression {
+public class ConditionalExpressionImpl extends PyTree implements ConditionalExpression, HasTypeDependencies {
   private final Expression trueExpression;
   private final Token ifToken;
   private final Expression condition;
@@ -83,5 +87,15 @@ public class ConditionalExpressionImpl extends PyTree implements ConditionalExpr
   @Override
   public Kind getKind() {
     return Kind.CONDITIONAL_EXPR;
+  }
+
+  @Override
+  public InferredType type() {
+    return InferredTypes.or(trueExpression.type(), falseExpression.type());
+  }
+
+  @Override
+  public List<Expression> typeDependencies() {
+    return Arrays.asList(trueExpression, falseExpression);
   }
 }
