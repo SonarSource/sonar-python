@@ -39,7 +39,6 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionClause;
@@ -72,7 +71,6 @@ import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.PassStatement;
 import org.sonar.plugins.python.api.tree.PrintStatement;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -838,12 +836,6 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.NAME)) {
       return name(astNode);
     }
-    if (astNode.is(PythonGrammar.ATTRIBUTE_REF)) {
-      return qualifiedExpression(astNode);
-    }
-    if (astNode.is(PythonGrammar.CALL_EXPR)) {
-      return callExpression(astNode);
-    }
     if (astNode.is(PythonGrammar.EXPR, PythonGrammar.TEST, PythonGrammar.TEST_NOCOND)) {
       if (astNode.getChildren().size() == 1) {
         return expression(astNode.getFirstChild());
@@ -869,12 +861,6 @@ public class PythonTreeMaker {
     }
     if (astNode.is(PythonGrammar.STAR_EXPR)) {
       return new UnpackingExpressionImpl(toPyToken(astNode.getToken()), expression(astNode.getLastChild()));
-    }
-    if (astNode.is(PythonGrammar.SUBSCRIPTION_OR_SLICING)) {
-      Expression baseExpr = expression(astNode.getFirstChild(PythonGrammar.ATOM));
-      Token leftBracket = toPyToken(astNode.getFirstChild(PythonPunctuator.LBRACKET).getToken());
-      Token rightBracket = toPyToken(astNode.getFirstChild(PythonPunctuator.RBRACKET).getToken());
-      return subscriptionOrSlicing(baseExpr, leftBracket, astNode, rightBracket);
     }
     if (astNode.is(PythonKeyword.NONE)) {
       return new NoneExpressionImpl(toPyToken(astNode.getToken()));
@@ -979,7 +965,7 @@ public class PythonTreeMaker {
   }
 
   private Expression powerExpression(AstNode astNode) {
-    Expression expr = expression(astNode.getFirstChild(PythonGrammar.CALL_EXPR, PythonGrammar.ATTRIBUTE_REF, PythonGrammar.ATOM));
+    Expression expr = expression(astNode.getFirstChild(PythonGrammar.ATOM));
     for (AstNode trailer : astNode.getChildren(PythonGrammar.TRAILER)) {
       expr = withTrailer(expr, trailer);
     }
@@ -998,9 +984,13 @@ public class PythonTreeMaker {
 
     if (firstChild.is(PythonPunctuator.LPARENTHESIS)) {
       AstNode argListNode = trailer.getFirstChild(PythonGrammar.ARGLIST);
+      ArgList argumentList = argList(argListNode);
+      if (argumentList != null) {
+        checkGeneratorExpressionInArgument(argumentList.arguments());
+      }
       Token leftPar = toPyToken(firstChild.getToken());
       Token rightPar = toPyToken(trailer.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken());
-      return new CallExpressionImpl(expr, argList(argListNode), leftPar, rightPar);
+      return new CallExpressionImpl(expr, argumentList, leftPar, rightPar);
 
     } else if (firstChild.is(PythonPunctuator.LBRACKET)) {
       Token leftBracket = toPyToken(trailer.getFirstChild(PythonPunctuator.LBRACKET).getToken());
@@ -1110,30 +1100,6 @@ public class PythonTreeMaker {
       Token ifToken = toPyToken(child.getFirstChild(PythonKeyword.IF).getToken());
       return new ComprehensionIfImpl(ifToken, condition, nestedClause);
     }
-  }
-
-  public QualifiedExpression qualifiedExpression(AstNode astNode) {
-    Expression qualifier = expression(astNode.getFirstChild());
-    List<AstNode> names = astNode.getChildren(PythonGrammar.NAME);
-    AstNode lastNameNode = astNode.getLastChild();
-    for (AstNode nameNode : names) {
-      if (nameNode != lastNameNode) {
-        qualifier = new QualifiedExpressionImpl(name(nameNode), qualifier, toPyToken(nameNode.getPreviousSibling().getToken()));
-      }
-    }
-    return new QualifiedExpressionImpl(name(lastNameNode), qualifier, toPyToken(lastNameNode.getPreviousSibling().getToken()));
-  }
-
-  public CallExpression callExpression(AstNode astNode) {
-    Expression callee = expression(astNode.getFirstChild());
-    AstNode argListNode = astNode.getFirstChild(PythonGrammar.ARGLIST);
-    ArgList argumentList = argList(argListNode);
-    if (argumentList != null) {
-      checkGeneratorExpressionInArgument(argumentList.arguments());
-    }
-    Token leftPar = toPyToken(astNode.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken());
-    Token rightPar = toPyToken(astNode.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken());
-    return new CallExpressionImpl(callee, argumentList, leftPar, rightPar);
   }
 
   @CheckForNull

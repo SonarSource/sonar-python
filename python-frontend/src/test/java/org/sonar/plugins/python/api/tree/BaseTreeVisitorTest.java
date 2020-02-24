@@ -201,8 +201,8 @@ public class BaseTreeVisitorTest extends RuleTest {
 
   @Test
   public void qualified_expr() {
-    setRootRule(PythonGrammar.ATTRIBUTE_REF);
-    QualifiedExpression tree = parse("a.b", treeMaker::qualifiedExpression);
+    setRootRule(PythonGrammar.TEST);
+    QualifiedExpression tree = (QualifiedExpression) parse("a.b", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     visitor.visitQualifiedExpression(tree);
     verify(visitor).visitName(tree.name());

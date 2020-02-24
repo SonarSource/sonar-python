@@ -67,32 +67,8 @@ public class ExpressionTest extends RuleTest {
 
   @Test
   public void call_expression() {
-    assertCallExpression("func()");
-    assertCallExpression("func(1,2)");
-    assertCallExpression("func(*1,2)");
-    assertCallExpression("func(1,**2)");
-    assertCallExpression("func(value, parameter = value)");
-    assertCallExpression("a.func(value)");
-    assertCallExpression("a.b(value)");
-    assertCallExpression("a[2](value)");
-
     AstNode powerNode = p.parse("f()**g()").getFirstChild(PythonGrammar.POWER);
     assertThat(powerNode).isNotNull();
   }
 
-  @Test
-  public void attribute_ref() {
-    assertAttributeRef("a.prop");
-    assertAttributeRef("a.b.prop");
-  }
-
-  private void assertCallExpression(String sourceCode) {
-    AstNode node = p.parse(sourceCode);
-    assertThat(node.getFirstChild(PythonGrammar.CALL_EXPR)).isNotNull();
-  }
-
-  private void assertAttributeRef(String sourceCode) {
-    AstNode node = p.parse(sourceCode);
-    assertThat(node.getFirstChild(PythonGrammar.ATTRIBUTE_REF)).isNotNull();
-  }
 }

@@ -1329,8 +1329,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void call_expression() {
-    setRootRule(PythonGrammar.CALL_EXPR);
-    CallExpression callExpression = parse("foo()", treeMaker::callExpression);
+    setRootRule(PythonGrammar.EXPR);
+    CallExpression callExpression = (CallExpression) parse("foo()", treeMaker::expression);
     ArgList argList = callExpression.argumentList();
     assertThat(argList).isNull();
     assertThat(callExpression.firstToken().value()).isEqualTo("foo");
@@ -1342,7 +1342,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callExpression.leftPar().value()).isEqualTo("(");
     assertThat(callExpression.rightPar().value()).isEqualTo(")");
 
-    callExpression = parse("foo(x, y)", treeMaker::callExpression);
+    callExpression = (CallExpression) parse("foo(x, y)", treeMaker::expression);
     argList = callExpression.argumentList();
     assertThat(argList.children()).hasSize(3);
     assertThat(argList.children().get(0)).isEqualTo(argList.arguments().get(0));
@@ -1358,7 +1358,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(name.name()).isEqualTo("foo");
     assertThat(callExpression.children()).hasSize(4);
 
-    callExpression = parse("foo.bar()", treeMaker::callExpression);
+    callExpression = (CallExpression) parse("foo.bar()", treeMaker::expression);
     argList = callExpression.argumentList();
     assertThat(argList).isNull();
     QualifiedExpression callee = (QualifiedExpression) callExpression.callee();
@@ -1367,6 +1367,20 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callee.name().name()).isEqualTo("bar");
     assertThat(((Name) callee.qualifier()).name()).isEqualTo("foo");
     assertThat(callExpression.children()).hasSize(3);
+
+    assertCallExpression("func()");
+    assertCallExpression("func(1,2)");
+    assertCallExpression("func(*1,2)");
+    assertCallExpression("func(1,**2)");
+    assertCallExpression("func(value, parameter = value)");
+    assertCallExpression("a.func(value)");
+    assertCallExpression("a.b(value)");
+    assertCallExpression("a[2](value)");
+  }
+
+  private void assertCallExpression(String code) {
+    setRootRule(PythonGrammar.TEST);
+    assertThat(parse(code, treeMaker::expression)).isInstanceOf(CallExpression.class);
   }
 
   @Test
@@ -1393,8 +1407,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void attributeRef_expression() {
-    setRootRule(PythonGrammar.ATTRIBUTE_REF);
-    QualifiedExpression qualifiedExpression = parse("foo.bar", treeMaker::qualifiedExpression);
+    setRootRule(PythonGrammar.TEST);
+    QualifiedExpression qualifiedExpression = (QualifiedExpression) parse("foo.bar", treeMaker::expression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("bar");
     Expression qualifier = qualifiedExpression.qualifier();
     assertThat(qualifier).isInstanceOf(Name.class);
@@ -1404,7 +1418,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(((Token) qualifiedExpression.children().get(1)).type()).isEqualTo(PythonPunctuator.DOT);
     assertThat(((Name) qualifiedExpression.children().get(2)).name()).isEqualTo("bar");
 
-    qualifiedExpression = parse("foo.bar.baz", treeMaker::qualifiedExpression);
+    qualifiedExpression = (QualifiedExpression) parse("foo.bar.baz", treeMaker::expression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("baz");
     assertThat(qualifiedExpression.firstToken().value()).isEqualTo("foo");
     assertThat(qualifiedExpression.lastToken().value()).isEqualTo("baz");
@@ -1943,7 +1957,6 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(generator.resultExpression().getKind()).isEqualTo(Tree.Kind.MULTIPLICATION);
     assertThat(generator.comprehensionFor().iterable().getKind()).isEqualTo(Tree.Kind.CALL_EXPR);
 
-    setRootRule(PythonGrammar.CALL_EXPR);
     CallExpression call = (CallExpression) parse("foo(x*x for x in range(10))", treeMaker::expression);
     assertThat(call.arguments()).hasSize(1);
     Expression firstArg = ((RegularArgument) call.arguments().get(0)).expression();
@@ -2153,6 +2166,23 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(reprExpressionTree.expressionList().commas().get(0)).isSameAs(reprExpressionTree.expressionList().children().get(1));
     assertThat(reprExpressionTree.expressionList().expressions().get(0).getKind()).isEqualTo(Tree.Kind.NAME);
     assertThat(reprExpressionTree.expressionList().expressions().get(1).getKind()).isEqualTo(Tree.Kind.NAME);
+
+  }
+
+  @Test(timeout = 2000L)
+  public void should_not_require_exponential_time() {
+    try {
+      p.parse("((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+      fail("Expected RecognitionException");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(1);
+    }
+    try {
+      p.parse("````````````````````````````````````````````````````````````````````````````````");
+      fail("Expected RecognitionException");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(1);
+    }
   }
 
   @Test
@@ -2175,11 +2205,10 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void variables() {
-    setRootRule(PythonGrammar.ATOM);
+    setRootRule(PythonGrammar.EXPR);
     Name name = (Name) parse("foo", treeMaker::expression);
     assertThat(name.isVariable()).isTrue();
 
-    setRootRule(PythonGrammar.ATTRIBUTE_REF);
     QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) parse("a.b", treeMaker::expression);
     assertThat(qualifiedExpressionTree.name().isVariable()).isFalse();
 
