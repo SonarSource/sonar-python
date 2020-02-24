@@ -21,8 +21,11 @@ package org.sonar.python.semantic;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -31,6 +34,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private List<Symbol> superClasses = new ArrayList<>();
   private boolean hasUnresolvedTypeHierarchy = false;
+  private final Set<Symbol> members = new HashSet<>();
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
     super(name, fullyQualifiedName);
@@ -63,7 +67,16 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return hasUnresolvedTypeHierarchy;
   }
 
+  @Override
+  public Set<Symbol> declaredMembers() {
+    return members;
+  }
+
   public void setHasUnresolvedTypeHierarchy(boolean hasUnresolvedTypeHierarchy) {
     this.hasUnresolvedTypeHierarchy = hasUnresolvedTypeHierarchy;
+  }
+
+  public void addMembers(Collection<Symbol> members) {
+    this.members.addAll(members);
   }
 }
