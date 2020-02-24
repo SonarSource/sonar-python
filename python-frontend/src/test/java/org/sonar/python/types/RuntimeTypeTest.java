@@ -20,46 +20,52 @@
 package org.sonar.python.types;
 
 import org.junit.Test;
+import org.sonar.python.semantic.ClassSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.or;
 
 public class RuntimeTypeTest {
+
+  private final ClassSymbolImpl a = new ClassSymbolImpl("a", "a");
+  private final ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
+  private final ClassSymbolImpl c = new ClassSymbolImpl("c", "c");
+
   @Test
   public void isIdentityComparableWith() {
-    RuntimeType intType = new RuntimeType("int");
-    RuntimeType strType = new RuntimeType("str");
-    RuntimeType boolType = new RuntimeType("bool");
+    RuntimeType aType = new RuntimeType(a);
+    RuntimeType bType = new RuntimeType(b);
+    RuntimeType cType = new RuntimeType(c);
 
-    assertThat(intType.isIdentityComparableWith(strType)).isFalse();
-    assertThat(intType.isIdentityComparableWith(intType)).isTrue();
-    assertThat(intType.isIdentityComparableWith(new RuntimeType("int"))).isTrue();
+    assertThat(aType.isIdentityComparableWith(bType)).isFalse();
+    assertThat(aType.isIdentityComparableWith(aType)).isTrue();
+    assertThat(aType.isIdentityComparableWith(new RuntimeType(a))).isTrue();
 
-    assertThat(intType.isIdentityComparableWith(AnyType.ANY)).isTrue();
+    assertThat(aType.isIdentityComparableWith(AnyType.ANY)).isTrue();
 
-    assertThat(intType.isIdentityComparableWith(or(intType, strType))).isTrue();
-    assertThat(intType.isIdentityComparableWith(or(boolType, strType))).isFalse();
+    assertThat(aType.isIdentityComparableWith(or(aType, bType))).isTrue();
+    assertThat(aType.isIdentityComparableWith(or(cType, bType))).isFalse();
   }
 
   @Test
   public void test_equals() {
-    RuntimeType intType = new RuntimeType("int");
-    assertThat(intType.equals(intType)).isTrue();
-    assertThat(intType.equals(new RuntimeType("int"))).isTrue();
-    assertThat(intType.equals(new RuntimeType("str"))).isFalse();
-    assertThat(intType.equals("int")).isFalse();
-    assertThat(intType.equals(null)).isFalse();
+    RuntimeType aType = new RuntimeType(a);
+    assertThat(aType.equals(aType)).isTrue();
+    assertThat(aType.equals(new RuntimeType(a))).isTrue();
+    assertThat(aType.equals(new RuntimeType(b))).isFalse();
+    assertThat(aType.equals(a)).isFalse();
+    assertThat(aType.equals(null)).isFalse();
   }
 
   @Test
   public void test_hashCode() {
-    RuntimeType intType = new RuntimeType("int");
-    assertThat(intType.hashCode()).isEqualTo(new RuntimeType("int").hashCode());
-    assertThat(intType.hashCode()).isNotEqualTo(new RuntimeType("str").hashCode());
+    RuntimeType aType = new RuntimeType(a);
+    assertThat(aType.hashCode()).isEqualTo(new RuntimeType(a).hashCode());
+    assertThat(aType.hashCode()).isNotEqualTo(new RuntimeType(b).hashCode());
   }
 
   @Test
   public void test_toString() {
-    assertThat(new RuntimeType("a.b").toString()).isEqualTo("RuntimeType(a.b)");
+    assertThat(new RuntimeType(a).toString()).isEqualTo("RuntimeType(a)");
   }
 }

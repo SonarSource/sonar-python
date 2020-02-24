@@ -21,6 +21,8 @@ package org.sonar.python.types;
 
 import java.util.List;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -33,11 +35,9 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.InferredTypes.BOOL;
-import static org.sonar.python.types.InferredTypes.BYTES;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DICT;
 import static org.sonar.python.types.InferredTypes.FLOAT;
-import static org.sonar.python.types.InferredTypes.GENERATOR;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.LIST;
 import static org.sonar.python.types.InferredTypes.NONE;
@@ -47,6 +47,8 @@ import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
+
+//import static org.sonar.python.types.InferredTypes.BYTES;
 
 public class TypeInferenceTest {
 
@@ -63,9 +65,12 @@ public class TypeInferenceTest {
     assertThat(lastExpression(
       "def f(): pass",
       "f()").type()).isEqualTo(anyType());
-    assertThat(lastExpression(
+
+    CallExpression expression = (CallExpression) lastExpression(
       "class A: pass",
-      "A()").type()).isEqualTo(runtimeType("mod1.A"));
+      "A()");
+    assertThat(expression.calleeSymbol().fullyQualifiedName()).isEqualTo("mod1.A");
+    assertThat(expression.type()).isEqualTo(runtimeType((ClassSymbol) expression.calleeSymbol()));
   }
 
   @Test
@@ -192,8 +197,8 @@ public class TypeInferenceTest {
     assertThat(lastExpression("f'hello world'").type()).isEqualTo(STR);
     assertThat(lastExpression("'hello' 'world'").type()).isEqualTo(STR);
 
-    assertThat(lastExpression("b'hello'").type()).isEqualTo(BYTES);
-    assertThat(lastExpression("rb'hello'").type()).isEqualTo(BYTES);
+    assertThat(lastExpression("b'hello'").type()).isEqualTo(anyType());
+    assertThat(lastExpression("rb'hello'").type()).isEqualTo(anyType());
 
     // this throws a 'SyntaxError: cannot mix bytes and nonbytes literals'
     assertThat(lastExpression("b'hello' 'world'").type()).isEqualTo(STR);
@@ -224,7 +229,7 @@ public class TypeInferenceTest {
 
   @Test
   public void generator_literal() {
-    assertThat(lastExpression("(v for v in foo)").type()).isEqualTo(GENERATOR);
+    assertThat(lastExpression("(v for v in foo)").type()).isEqualTo(anyType());
   }
 
   @Test

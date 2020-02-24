@@ -21,6 +21,7 @@ package org.sonar.python.types;
 
 import org.junit.Test;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -28,10 +29,10 @@ import static org.sonar.python.types.UnionType.or;
 
 public class UnionTypeTest {
 
-  private final InferredType a = InferredTypes.runtimeType("a");
-  private final InferredType b = InferredTypes.runtimeType("b");
-  private final InferredType c = InferredTypes.runtimeType("c");
-  private final InferredType d = InferredTypes.runtimeType("d");
+  private final InferredType a = InferredTypes.runtimeType(new ClassSymbolImpl("a", "a"));
+  private final InferredType b = InferredTypes.runtimeType(new ClassSymbolImpl("b", "b"));
+  private final InferredType c = InferredTypes.runtimeType(new ClassSymbolImpl("c", "c"));
+  private final InferredType d = InferredTypes.runtimeType(new ClassSymbolImpl("d", "d"));
 
   @Test
   public void construction() {
