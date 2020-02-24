@@ -57,10 +57,14 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     if (parametersList != null) {
       createParameterNames(parametersList.all());
     }
-    TokenLocation functionName = new TokenLocation(functionDef.name().firstToken());
-    Path path = pathOf(pythonFile);
-    String fileId = path != null ? path.toString() : pythonFile.toString();
-    functionDefinitionLocation = new LocationInFile(fileId, functionName.startLine(), functionName.startLineOffset(), functionName.endLine(), functionName.endLineOffset());
+    if (SymbolUtils.isTypeShedFile(pythonFile)) {
+      functionDefinitionLocation = null;
+    } else {
+      TokenLocation functionName = new TokenLocation(functionDef.name().firstToken());
+      Path path = pathOf(pythonFile);
+      String fileId = path != null ? path.toString() : pythonFile.toString();
+      functionDefinitionLocation = new LocationInFile(fileId, functionName.startLine(), functionName.startLineOffset(), functionName.endLine(), functionName.endLineOffset());
+    }
   }
 
   FunctionSymbolImpl(String name, FunctionSymbol functionSymbol) {
