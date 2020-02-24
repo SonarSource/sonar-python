@@ -20,9 +20,12 @@
 package org.sonar.plugins.python.api.symbols;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ClassSymbol extends Symbol {
   List<Symbol> superClasses();
 
   boolean hasUnresolvedTypeHierarchy();
+
+  Set<Symbol> declaredMembers();
 }

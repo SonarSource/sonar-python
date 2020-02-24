@@ -19,13 +19,16 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Statement;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.groups.Tuple.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
 
 public class ClassSymbolTest {
@@ -247,5 +250,46 @@ public class ClassSymbolTest {
     Symbol symbol = classDef.name().symbol();
     //Currently, no symbol is created in case of nonlocal symbol
     assertThat(symbol instanceof ClassSymbol).isFalse();
+  }
+
+  @Test
+  public void class_members_empty() {
+    ClassSymbol symbol = lastClassSymbol(
+      "class C: ",
+      "  pass");
+    assertThat(symbol.declaredMembers()).isEmpty();
+  }
+
+  @Test
+  public void class_members() {
+    ClassSymbol symbol = lastClassSymbol(
+      "class C: ",
+      "  def foo(): pass");
+    assertThat(symbol.declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(tuple(Symbol.Kind.FUNCTION, "foo"));
+
+    symbol = lastClassSymbol(
+      "class C: ",
+      "  bar = 42");
+    assertThat(symbol.declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(tuple(Symbol.Kind.OTHER, "bar"));
+  }
+
+  @Test
+  public void class_members_with_inheritance() {
+    ClassSymbol symbol = lastClassSymbol(
+      "class A:",
+      "  def meth(): pass",
+      "class B(A): ",
+      "  def foo(): pass");
+
+    assertThat(symbol.declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(tuple(Symbol.Kind.FUNCTION, "foo"));
+    ClassSymbol classA = ((ClassSymbol) symbol.superClasses().get(0));
+    assertThat(classA.declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(tuple(Symbol.Kind.FUNCTION, "meth"));
+  }
+
+  private static ClassSymbol lastClassSymbol(String... code) {
+    FileInput fileInput = parse(code);
+    List<Statement> statements = fileInput.statements().statements();
+    ClassDef classDef = (ClassDef) statements.get(statements.size() - 1);
+    return (ClassSymbol) classDef.name().symbol();
   }
 }

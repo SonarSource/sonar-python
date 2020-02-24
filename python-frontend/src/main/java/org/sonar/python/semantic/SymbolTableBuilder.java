@@ -147,6 +147,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         ClassDefImpl classDef = (ClassDefImpl) scope.rootTree;
         scope.symbols().forEach(classDef::addClassField);
         scope.instanceAttributesByName.values().forEach(classDef::addInstanceField);
+        Symbol classSymbol = classDef.name().symbol();
+        Optional.ofNullable(classSymbol)
+          .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+          .ifPresent(symbol -> {
+            ((ClassSymbolImpl) symbol).addMembers(scope.symbols());
+            ((ClassSymbolImpl) symbol).addMembers(Collections.unmodifiableCollection(scope.instanceAttributesByName.values()));
+          });
+
       } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
         scope.symbols().stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(((FileInputImpl) fileInput)::addGlobalVariables);
       } else if (scope.rootTree.is(Kind.DICT_COMPREHENSION)) {
