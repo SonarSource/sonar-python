@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private List<Symbol> superClasses = new ArrayList<>();
-  private boolean hasUnresolvedTypeHierarchy = true;
+  private boolean hasUnresolvedTypeHierarchy = false;
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
     super(name, fullyQualifiedName);

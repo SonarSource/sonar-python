@@ -57,6 +57,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.python.types.TypeShedPythonFile;
 
 public class SymbolUtils {
 
@@ -251,4 +252,9 @@ public class SymbolUtils {
     classSymbol.setHasUnresolvedTypeHierarchy(false);
     return classSymbol;
   }
+
+  public static boolean isTypeShedFile(PythonFile pythonFile) {
+    return pythonFile instanceof TypeShedPythonFile;
+  }
+
 }
