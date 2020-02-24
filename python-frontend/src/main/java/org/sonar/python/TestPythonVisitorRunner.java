@@ -78,7 +78,7 @@ public class TestPythonVisitorRunner {
       FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
       String packageName = pythonPackageName(file, baseDir);
       String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
-      globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName, pythonFile));
+      globalSymbols.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, packageName, pythonFile));
     }
     return globalSymbols;
   }

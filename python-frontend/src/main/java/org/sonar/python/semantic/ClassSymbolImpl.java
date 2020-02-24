@@ -37,6 +37,18 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.setKind(Kind.CLASS);
   }
 
+  ClassSymbolImpl copyWithoutUsages() {
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName());
+    for (Symbol superClass : superClasses()) {
+      if (superClass.kind() == Symbol.Kind.CLASS) {
+        copiedClassSymbol.superClasses.add(((ClassSymbolImpl) superClass).copyWithoutUsages());
+      } else {
+        copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
+      }
+    }
+    return copiedClassSymbol;
+  }
+
   @Override
   public List<Symbol> superClasses() {
     return Collections.unmodifiableList(superClasses);

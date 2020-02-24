@@ -276,7 +276,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
         if (importedModuleSymbols != null) {
-          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols);
+          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, globalSymbolsByFQN);
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
         } else {
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(true);
@@ -300,7 +300,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (fromModuleName != null) {
           currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByFQN);
         } else {
-          currentScope().addModuleSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByModuleName);
+          currentScope().addModuleSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByModuleName, globalSymbolsByFQN);
         }
       });
     }

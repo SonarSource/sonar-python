@@ -27,21 +27,21 @@ public class IncorrectExceptionTypeCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/incorrectExceptionType.py", new IncorrectExceptionTypeCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/incorrectExceptionType/incorrectExceptionType.py", new IncorrectExceptionTypeCheck());
   }
 
   @Test
   public void test_wildcard_import() {
     PythonCheckVerifier.verify(
-      Arrays.asList("src/test/resources/checks/incorrectExceptionTypeWithWildcardImport.py","src/test/resources/checks/incorrectExceptionTypeImported.py" ),
+      Arrays.asList("src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeWithWildcardImport.py","src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported.py" ),
       new IncorrectExceptionTypeCheck());
   }
 
   @Test
   public void test_regular_import() {
     PythonCheckVerifier.verify(
-      Arrays.asList("src/test/resources/checks/incorrectExceptionTypeWithRegularImport.py","src/test/resources/checks/incorrectExceptionTypeImported2.py",
-        "src/test/resources/checks/incorrectExceptionTypeImported3.py", "src/test/resources/checks/incorrectExceptionTypeImported4.py"),
+      Arrays.asList("src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeWithRegularImport.py","src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported2.py",
+        "src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported3.py", "src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported4.py"),
       new IncorrectExceptionTypeCheck());
   }
 }

@@ -14,3 +14,6 @@ class SomeChildNotException(SomeNotException):
 class Enclosing:
   class Nested():
     pass
+
+class Animal:
+    pass

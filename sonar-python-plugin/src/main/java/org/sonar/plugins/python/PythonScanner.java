@@ -263,7 +263,7 @@ public class PythonScanner extends Scanner {
       packageNames.put(inputFile, packageName);
       String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      globalSymbolsByModuleName.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, fullyQualifiedModuleName, pythonFile));
+      globalSymbolsByModuleName.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, packageName, pythonFile));
     }
 
     @Override
