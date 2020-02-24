@@ -20,6 +20,8 @@
 package org.sonar.python.types;
 
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -28,22 +30,20 @@ import org.sonar.plugins.python.api.types.InferredType;
 
 public class InferredTypes {
 
-  public static final InferredType INT = runtimeType("int");
-  public static final InferredType FLOAT = runtimeType("float");
-  public static final InferredType COMPLEX = runtimeType("complex");
+  public static final InferredType INT = runtimeBuiltinType("int");
+  public static final InferredType FLOAT = runtimeBuiltinType("float");
+  public static final InferredType COMPLEX = runtimeBuiltinType("complex");
 
-  public static final InferredType STR = runtimeType("str");
-  public static final InferredType BYTES = runtimeType("bytes");
+  public static final InferredType STR = runtimeBuiltinType("str");
 
-  public static final InferredType SET = runtimeType("set");
-  public static final InferredType DICT = runtimeType("dict");
-  public static final InferredType LIST = runtimeType("list");
-  public static final InferredType TUPLE = runtimeType("tuple");
-  public static final InferredType GENERATOR = runtimeType("generator");
+  public static final InferredType SET = runtimeBuiltinType("set");
+  public static final InferredType DICT = runtimeBuiltinType("dict");
+  public static final InferredType LIST = runtimeBuiltinType("list");
+  public static final InferredType TUPLE = runtimeBuiltinType("tuple");
 
-  public static final InferredType NONE = runtimeType("NoneType");
+  public static final InferredType NONE = runtimeBuiltinType("NoneType");
 
-  public static final InferredType BOOL = runtimeType("bool");
+  public static final InferredType BOOL = runtimeBuiltinType("bool");
 
   private InferredTypes() {
   }
@@ -52,11 +52,15 @@ public class InferredTypes {
     return AnyType.ANY;
   }
 
-  public static InferredType runtimeType(@Nullable String fullyQualifiedName) {
-    if (fullyQualifiedName == null) {
-      return anyType();
+  private static InferredType runtimeBuiltinType(String fullyQualifiedName) {
+    return new RuntimeType(TypeShed.typeShedClass(fullyQualifiedName));
+  }
+
+  public static InferredType runtimeType(@Nullable Symbol typeClass) {
+    if (typeClass instanceof ClassSymbol) {
+      return new RuntimeType((ClassSymbol) typeClass);
     }
-    return new RuntimeType(fullyQualifiedName);
+    return anyType();
   }
 
   public static InferredType or(InferredType t1, InferredType t2) {
@@ -67,7 +71,7 @@ public class InferredTypes {
     Expression expression = typeAnnotation.expression();
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       // TODO change it to DeclaredType instance
-      return new RuntimeType(((Name) expression).name());
+      return InferredTypes.runtimeType(((Name) expression).symbol());
     }
     return InferredTypes.anyType();
   }

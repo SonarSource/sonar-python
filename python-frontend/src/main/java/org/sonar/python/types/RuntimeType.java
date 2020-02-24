@@ -20,14 +20,15 @@
 package org.sonar.python.types;
 
 import java.util.Objects;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.types.InferredType;
 
 class RuntimeType implements InferredType {
 
   private final String fullyQualifiedName;
 
-  RuntimeType(String fullyQualifiedName) {
-    this.fullyQualifiedName = fullyQualifiedName;
+  RuntimeType(ClassSymbol typeClass) {
+    this.fullyQualifiedName = typeClass.fullyQualifiedName();
   }
 
   @Override

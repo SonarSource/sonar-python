@@ -20,6 +20,9 @@
 package org.sonar.python.types;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -31,16 +34,20 @@ public class InferredTypesTest {
   @Test
   public void test_runtimeType() {
     assertThat(runtimeType(null)).isEqualTo(anyType());
-    assertThat(runtimeType("a.b")).isEqualTo(new RuntimeType("a.b"));
+    assertThat(runtimeType(new SymbolImpl("b", "a.b"))).isEqualTo(anyType());
+    ClassSymbol typeClass = new ClassSymbolImpl("b", "a.b");
+    assertThat(runtimeType(typeClass)).isEqualTo(new RuntimeType(typeClass));
   }
 
   @Test
   public void test_or() {
+    ClassSymbol a = new ClassSymbolImpl("a", "a");
+    ClassSymbol b = new ClassSymbolImpl("b", "b");
     assertThat(or(anyType(), anyType())).isEqualTo(anyType());
-    assertThat(or(anyType(), runtimeType("a"))).isEqualTo(anyType());
-    assertThat(or(runtimeType("a"), anyType())).isEqualTo(anyType());
-    assertThat(or(runtimeType("a"), runtimeType("a"))).isEqualTo(runtimeType("a"));
-    assertThat(or(runtimeType("a"), runtimeType("b"))).isNotEqualTo(anyType());
-    assertThat(or(runtimeType("a"), runtimeType("b"))).isEqualTo(or(runtimeType("b"), runtimeType("a")));
+    assertThat(or(anyType(), runtimeType(a))).isEqualTo(anyType());
+    assertThat(or(runtimeType(a), anyType())).isEqualTo(anyType());
+    assertThat(or(runtimeType(a), runtimeType(a))).isEqualTo(runtimeType(a));
+    assertThat(or(runtimeType(a), runtimeType(b))).isNotEqualTo(anyType());
+    assertThat(or(runtimeType(a), runtimeType(b))).isEqualTo(or(runtimeType(b), runtimeType(a)));
   }
 }

@@ -95,9 +95,8 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
         return InferredTypes.LIST;
       case SET_COMPREHENSION:
         return InferredTypes.SET;
-      case GENERATOR_EXPR:
-        return InferredTypes.GENERATOR;
       default:
+        // GENERATOR_EXPR: needs a class symbol for 'generator'
         return InferredTypes.anyType();
     }
   }

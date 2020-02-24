@@ -20,6 +20,7 @@
 package org.sonar.python.types;
 
 import org.junit.Test;
+import org.sonar.python.semantic.ClassSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.AnyType.ANY;
@@ -29,6 +30,6 @@ public class AnyTypeTest {
   @Test
   public void isIdentityComparableWith() {
     assertThat(ANY.isIdentityComparableWith(ANY)).isTrue();
-    assertThat(ANY.isIdentityComparableWith(new RuntimeType("int"))).isTrue();
+    assertThat(ANY.isIdentityComparableWith(new RuntimeType(new ClassSymbolImpl("a", "a")))).isTrue();
   }
 }

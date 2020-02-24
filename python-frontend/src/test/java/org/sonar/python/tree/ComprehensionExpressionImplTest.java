@@ -37,7 +37,7 @@ public class ComprehensionExpressionImplTest {
     ComprehensionFor compFor = mock(ComprehensionFor.class);
 
     ComprehensionExpressionImpl generator = new ComprehensionExpressionImpl(Kind.GENERATOR_EXPR, token, resultExpression, compFor, token);
-    assertThat(generator.type()).isEqualTo(InferredTypes.GENERATOR);
+    assertThat(generator.type()).isEqualTo(InferredTypes.anyType());
 
     ComprehensionExpressionImpl listComp = new ComprehensionExpressionImpl(Kind.LIST_COMPREHENSION, token, resultExpression, compFor, token);
     assertThat(listComp.type()).isEqualTo(InferredTypes.LIST);

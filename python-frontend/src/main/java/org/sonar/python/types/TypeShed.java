@@ -34,11 +34,14 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
 
 public class TypeShed {
+
+  private static final String NONE_TYPE = "NoneType";
 
   private static Map<String, Symbol> typeShedSymbols;
 
@@ -48,6 +51,7 @@ public class TypeShed {
   public static Map<String, Symbol> typeShedSymbols() {
     if (TypeShed.typeShedSymbols == null) {
       Map<String, Symbol> typeShedSymbols = new HashMap<>();
+      typeShedSymbols.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
       PythonFile file = new TypeShedPythonFile(resource);
       AstNode astNode = PythonParser.create().parse(file.content());

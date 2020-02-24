@@ -45,4 +45,9 @@ public class TypeShedTest {
     TypeShed.typeShedClass("xxx");
   }
 
+  @Test
+  public void none_type() {
+    ClassSymbol noneType = TypeShed.typeShedClass("NoneType");
+    assertThat(noneType.superClasses()).isEmpty();
+  }
 }

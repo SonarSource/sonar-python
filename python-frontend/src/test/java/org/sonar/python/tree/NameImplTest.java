@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
@@ -39,7 +40,7 @@ public class NameImplTest {
     SymbolImpl symbol = new SymbolImpl("x", null);
     name.setSymbol(symbol);
     assertThat(name.type()).isEqualTo(InferredTypes.anyType());
-    InferredType str = InferredTypes.runtimeType("str");
+    InferredType str = InferredTypes.runtimeType(new ClassSymbolImpl("str", "str"));
     symbol.setInferredType(str);
     assertThat(name.type()).isEqualTo(str);
   }
