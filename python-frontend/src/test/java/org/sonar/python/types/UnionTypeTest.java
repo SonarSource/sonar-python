@@ -19,12 +19,15 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collections;
 import org.junit.Test;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.anyType;
+import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.UnionType.or;
 
 public class UnionTypeTest {
@@ -55,6 +58,17 @@ public class UnionTypeTest {
   }
 
   @Test
+  public void canHaveMember() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    x.addMembers(Collections.singleton(new SymbolImpl("xxx", null)));
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
+    z.addMembers(Collections.singleton(new SymbolImpl("foo", null)));
+    assertThat(or(runtimeType(x), runtimeType(y)).canHaveMember("foo")).isFalse();
+    assertThat(or(runtimeType(x), runtimeType(z)).canHaveMember("foo")).isTrue();
+  }
+
+  @Test
   public void test_equals() {
     assertThat(or(a, b).equals(or(a, b))).isTrue();
     assertThat(or(a, b).equals(or(b, a))).isTrue();
@@ -73,6 +87,6 @@ public class UnionTypeTest {
 
   @Test
   public void test_toString() {
-    assertThat(or(a, b).toString()).isEqualTo("UnionType[RuntimeType(a), RuntimeType(b)]");
+    assertThat(or(a, b).toString()).isIn("UnionType[RuntimeType(a), RuntimeType(b)]", "UnionType[RuntimeType(b), RuntimeType(a)]");
   }
 }

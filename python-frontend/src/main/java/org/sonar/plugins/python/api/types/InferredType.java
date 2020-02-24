@@ -27,4 +27,7 @@ public interface InferredType {
   @Beta
   boolean isIdentityComparableWith(InferredType other);
 
+  @Beta
+  boolean canHaveMember(String memberName);
+
 }

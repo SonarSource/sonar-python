@@ -71,6 +71,11 @@ class UnionType implements InferredType {
   }
 
   @Override
+  public boolean canHaveMember(String memberName) {
+    return types.stream().anyMatch(t -> t.canHaveMember(memberName));
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;

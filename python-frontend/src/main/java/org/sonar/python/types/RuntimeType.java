@@ -19,16 +19,18 @@
  */
 package org.sonar.python.types;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 
 class RuntimeType implements InferredType {
 
-  private final String fullyQualifiedName;
+  private final ClassSymbol typeClass;
 
   RuntimeType(ClassSymbol typeClass) {
-    this.fullyQualifiedName = typeClass.fullyQualifiedName();
+    this.typeClass = typeClass;
   }
 
   @Override
@@ -43,6 +45,38 @@ class RuntimeType implements InferredType {
   }
 
   @Override
+  public boolean canHaveMember(String memberName) {
+    LinkedHashSet<ClassSymbol> classSymbols = classesToExplore();
+    if (classSymbols.stream().anyMatch(ClassSymbol::hasUnresolvedTypeHierarchy)) {
+      return true;
+    }
+    for (ClassSymbol classSymbol : classSymbols) {
+      for (Symbol member : classSymbol.declaredMembers()) {
+        if (member.name().equals(memberName)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private LinkedHashSet<ClassSymbol> classesToExplore() {
+    LinkedHashSet<ClassSymbol> set = new LinkedHashSet<>();
+    addClassesToExplore(typeClass, set);
+    return set;
+  }
+
+  private static void addClassesToExplore(ClassSymbol typeClass, LinkedHashSet<ClassSymbol> set) {
+    if (set.add(typeClass)) {
+      for (Symbol superClass : typeClass.superClasses()) {
+        if (superClass instanceof ClassSymbol) {
+          addClassesToExplore((ClassSymbol) superClass, set);
+        }
+      }
+    }
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -51,16 +85,16 @@ class RuntimeType implements InferredType {
       return false;
     }
     RuntimeType that = (RuntimeType) o;
-    return Objects.equals(fullyQualifiedName, that.fullyQualifiedName);
+    return Objects.equals(typeClass.fullyQualifiedName(), that.typeClass.fullyQualifiedName());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fullyQualifiedName);
+    return Objects.hash(typeClass.fullyQualifiedName());
   }
 
   @Override
   public String toString() {
-    return "RuntimeType(" + fullyQualifiedName + ')';
+    return "RuntimeType(" + typeClass.fullyQualifiedName() + ')';
   }
 }

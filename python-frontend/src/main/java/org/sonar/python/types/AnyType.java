@@ -28,4 +28,9 @@ enum AnyType implements InferredType {
   public boolean isIdentityComparableWith(InferredType other) {
     return true;
   }
+
+  @Override
+  public boolean canHaveMember(String memberName) {
+    return true;
+  }
 }
