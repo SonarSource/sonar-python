@@ -32,4 +32,9 @@ public class AnyTypeTest {
     assertThat(ANY.isIdentityComparableWith(ANY)).isTrue();
     assertThat(ANY.isIdentityComparableWith(new RuntimeType(new ClassSymbolImpl("a", "a")))).isTrue();
   }
+
+  @Test
+  public void canHaveMember() {
+    assertThat(ANY.canHaveMember("xxx")).isTrue();
+  }
 }

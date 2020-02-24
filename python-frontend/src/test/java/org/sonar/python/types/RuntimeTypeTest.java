@@ -21,7 +21,9 @@ package org.sonar.python.types;
 
 import org.junit.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.SymbolImpl;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.or;
 
@@ -45,6 +47,46 @@ public class RuntimeTypeTest {
 
     assertThat(aType.isIdentityComparableWith(or(aType, bType))).isTrue();
     assertThat(aType.isIdentityComparableWith(or(cType, bType))).isFalse();
+  }
+
+  @Test
+  public void canHaveMember() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    x.addMembers(singletonList(new SymbolImpl("foo", null)));
+    assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
+    assertThat(new RuntimeType(x).canHaveMember("bar")).isFalse();
+
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    x1.addSuperClass(x);
+    x1.addMembers(singletonList(new SymbolImpl("bar", null)));
+    assertThat(new RuntimeType(x1).canHaveMember("foo")).isTrue();
+    assertThat(new RuntimeType(x1).canHaveMember("bar")).isTrue();
+
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    assertThat(new RuntimeType(y).canHaveMember("foo")).isFalse();
+  }
+
+  @Test
+  public void cycle_between_super_types() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
+    x.addSuperClass(y);
+    y.addSuperClass(z);
+    z.addSuperClass(x);
+    assertThat(new RuntimeType(x).canHaveMember("foo")).isFalse();
+  }
+
+  @Test
+  public void unresolved_type_hierarchy() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    x.setHasUnresolvedTypeHierarchy(true);
+    assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
+
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    y.setHasUnresolvedTypeHierarchy(false);
+    y.addSuperClass(x);
+    assertThat(new RuntimeType(y).canHaveMember("foo")).isTrue();
   }
 
   @Test
