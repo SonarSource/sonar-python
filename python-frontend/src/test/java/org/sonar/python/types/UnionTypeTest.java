@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Arrays;
 import java.util.Collections;
 import org.junit.Test;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -66,6 +67,19 @@ public class UnionTypeTest {
     z.addMembers(Collections.singleton(new SymbolImpl("foo", null)));
     assertThat(or(runtimeType(x), runtimeType(y)).canHaveMember("foo")).isFalse();
     assertThat(or(runtimeType(x), runtimeType(z)).canHaveMember("foo")).isTrue();
+  }
+
+  @Test
+  public void resolveMember() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    SymbolImpl foo = new SymbolImpl("foo", null);
+    x.addMembers(Arrays.asList(foo, new SymbolImpl("bar", null)));
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
+    z.addMembers(Collections.singleton(new SymbolImpl("bar", null)));
+    assertThat(or(runtimeType(x), runtimeType(y)).resolveMember("foo")).contains(foo);
+    assertThat(or(runtimeType(x), runtimeType(z)).resolveMember("bar")).isEmpty();
+    assertThat(or(runtimeType(x), runtimeType(z)).resolveMember("xxx")).isEmpty();
   }
 
   @Test
