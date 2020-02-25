@@ -281,6 +281,23 @@ public class TypeInferenceTest {
       "c").type()).isEqualTo(anyType());
   }
 
+  @Test
+  public void logical_expressions() {
+    assertThat(lastExpression("not 42").type()).isEqualTo(BOOL);
+    assertThat(lastExpression("42 or 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("42 and 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("42 or ''").type()).isEqualTo(or(INT, STR));
+    assertThat(lastExpression("42 or xxx").type()).isEqualTo(anyType());
+    assertThat(lastExpression("42 or True or ''").type()).isEqualTo(or(or(INT, STR), BOOL));
+
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if   i > 1: c = b",
+      "  elif i > 0: b = 42 or a",
+      "  else:       a = ''",
+      "c").type()).isEqualTo(or(INT, STR));
+  }
+
   private Expression lastExpression(String... lines) {
     String code = String.join("\n", lines);
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);

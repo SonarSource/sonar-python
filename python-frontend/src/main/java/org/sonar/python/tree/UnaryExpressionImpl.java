@@ -30,6 +30,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
 
@@ -77,5 +79,13 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
   @Override
   public Kind getKind() {
     return kind;
+  }
+
+  @Override
+  public InferredType type() {
+    if (is(Kind.NOT)) {
+      return InferredTypes.BOOL;
+    }
+    return InferredTypes.anyType();
   }
 }
