@@ -27,6 +27,11 @@ def foo():
     if a is round(42): # FN
         pass
 
+    x = ""
+    x.capitalize() is 42 # Noncompliant
+
+    x.capitalize().isalnum() is "" # Noncompliant
+
 def literals():
     a = A()
     if a is 42: # Noncompliant
