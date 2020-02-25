@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -41,6 +42,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.setKind(Kind.CLASS);
   }
 
+  @Override
   ClassSymbolImpl copyWithoutUsages() {
     ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName());
     for (Symbol superClass : superClasses()) {
@@ -50,6 +52,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
         copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
       }
     }
+    copiedClassSymbol.addMembers(members.stream().map(m -> ((SymbolImpl) m).copyWithoutUsages()).collect(Collectors.toList()));
     return copiedClassSymbol;
   }
 
@@ -78,5 +81,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   public void addMembers(Collection<Symbol> members) {
     this.members.addAll(members);
+    members.stream()
+      .filter(m -> m.kind() == Kind.FUNCTION)
+      .forEach(m -> ((FunctionSymbolImpl) m).setOwner(this));
   }
 }

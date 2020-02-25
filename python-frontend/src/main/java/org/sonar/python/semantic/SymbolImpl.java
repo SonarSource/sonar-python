@@ -128,4 +128,9 @@ public class SymbolImpl implements Symbol {
   public void setInferredType(InferredType inferredType) {
     this.inferredType = inferredType;
   }
+
+  SymbolImpl copyWithoutUsages() {
+    return new SymbolImpl(name(), fullyQualifiedName);
+  }
+
 }

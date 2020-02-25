@@ -142,7 +142,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
             ((FunctionDefImpl) funcDef).addLocalVariableSymbol(symbol);
           }
         }
-        TypeInference.inferTypes(funcDef);
       } else if (scope.rootTree.is(Kind.CLASSDEF)) {
         ClassDefImpl classDef = (ClassDefImpl) scope.rootTree;
         scope.symbols().forEach(classDef::addClassField);
@@ -163,6 +162,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         scope.symbols().forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       }
     }
+    TypeInference.inferTypes(fileInput);
   }
 
   private class ScopeVisitor extends BaseTreeVisitor {
