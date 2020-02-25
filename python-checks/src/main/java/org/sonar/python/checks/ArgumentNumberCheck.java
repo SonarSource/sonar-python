@@ -19,13 +19,16 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -34,6 +37,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
@@ -57,18 +61,19 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       Symbol symbol = callExpression.calleeSymbol();
       if (symbol != null && symbol.kind() == Symbol.Kind.FUNCTION) {
         FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
-        if (functionSymbol.hasDecorators()
-          || functionSymbol.hasVariadicParameter()
-          || functionSymbol.isStub()
-          || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))) {
+        if (isException(callExpression, functionSymbol)) {
           return;
         }
         int nArguments = callExpression.arguments().size();
+        int self = 0;
+        if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+          self = 1;
+        }
         long minRequiredPositionalArguments = functionSymbol.parameters().stream()
           .filter(parameterName -> !parameterName.isKeywordOnly() && !parameterName.hasDefaultValue()).count();
-        if (nArguments < minRequiredPositionalArguments || nArguments > functionSymbol.parameters().size()) {
+        if ((nArguments + self < minRequiredPositionalArguments || nArguments + self > functionSymbol.parameters().size())) {
           PreciseIssue preciseIssue = ctx.addIssue(callExpression.callee(),
-            message(functionSymbol.name(), minRequiredPositionalArguments, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments));
+            message(functionSymbol.name(), minRequiredPositionalArguments - self, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments));
           addSecondary(functionSymbol, preciseIssue);
         }
 
@@ -76,6 +81,31 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       }
 
     });
+  }
+
+  private static boolean isException(CallExpression callExpression, FunctionSymbol functionSymbol) {
+    return functionSymbol.hasDecorators()
+      || functionSymbol.hasVariadicParameter()
+      || functionSymbol.isStub()
+      || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))
+      || extendsZopeInterface(((FunctionSymbolImpl) functionSymbol).owner());
+  }
+
+  private static boolean extendsZopeInterface(@Nullable Symbol symbol) {
+    if (symbol != null && symbol.kind() == Symbol.Kind.CLASS) {
+      Set<Symbol> superClasses = new HashSet<>();
+      addSuperClasses(symbol, superClasses);
+      return superClasses.stream().anyMatch(s -> "zope.interface.Interface".equals(s.fullyQualifiedName()));
+    }
+    return false;
+  }
+
+  private static void addSuperClasses(Symbol symbol, Set<Symbol> set) {
+    if (set.add(symbol) && symbol instanceof ClassSymbol) {
+      for (Symbol superClass : ((ClassSymbol) symbol).superClasses()) {
+        addSuperClasses(superClass, set);
+      }
+    }
   }
 
   private static void addSecondary(FunctionSymbol functionSymbol, PreciseIssue preciseIssue) {

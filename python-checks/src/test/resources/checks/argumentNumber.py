@@ -1,3 +1,4 @@
+import zope
 from argumentNumberImported import fn
 fn(1, 2) # OK, no project level information
 
@@ -65,6 +66,8 @@ def methods():
       def class_meth(cls, p1, p2): pass
       @staticmethod
       def static_meth(p1, p2): pass
+      def foo(p1): pass
+      foo(42)
 
     A.class_meth(42) # FN {{'class_meth' expects 2 positional arguments, but 1 was provided}}
 
@@ -73,4 +76,32 @@ def methods():
 
     A.static_meth(1, 2) # OK
     a = A()
-    a.meth(42) # FN - type inference is needed
+    a.meth(42, 43)
+    a.meth(42) # Noncompliant {{Add 1 missing arguments; 'meth' expects 2 positional arguments.}}
+    a.meth(42, 43, 44) # Noncompliant {{Remove 1 unexpected arguments; 'meth' expects 2 positional arguments.}}
+
+    A.foo() # FN
+    A.foo(42)
+
+    m = a.meth
+    m(42, 43) # OK
+    m(42) # FN
+
+    class MyInterface(zope.interface.Interface):
+        def foo(): pass
+    x = MyInterface()
+    x.foo()
+
+
+    # Coverage: loop in inheritance
+    class A1(A2):
+      def fn(self): pass
+
+    class A2(A3):
+      pass
+
+    class A3(A1):
+      pass
+
+    a1 = A1()
+    a1.fn(42) # Noncompliant

@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -144,7 +145,26 @@ public class FunctionSymbolTest {
     assertThat(((SymbolImpl) x).type().symbol()).isEqualTo(strTypeSymbol);
   }
 
-  private FunctionSymbol functionSymbol(String code) {
+  @Test
+  public void owner() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class A:",
+      "  def foo(self): pass"
+    );
+    ClassDef classDef = PythonTestUtils.getFirstDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    FunctionDef funcDef = PythonTestUtils.getFirstDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));
+    FunctionSymbolImpl functionSymbol = ((FunctionSymbolImpl) funcDef.name().symbol());
+    assertThat(functionSymbol.owner()).isEqualTo(classDef.name().symbol());
+
+    fileInput = PythonTestUtils.parse(
+      "def foo(): pass"
+    );
+    funcDef = PythonTestUtils.getFirstDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));
+    functionSymbol = ((FunctionSymbolImpl) funcDef.name().symbol());
+    assertThat(functionSymbol.owner()).isNull();
+  }
+
+  private FunctionSymbol functionSymbol(String... code) {
     FileInput tree = parse(code);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(tree, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     Symbol functionSymbol = functionDef.name().symbol();

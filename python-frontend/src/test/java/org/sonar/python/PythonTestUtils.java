@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
-import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -33,6 +32,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public final class PythonTestUtils {
 
@@ -88,15 +89,15 @@ public final class PythonTestUtils {
     return res;
   }
 
-  public static <T extends Tree> T getUniqueDescendant(Tree tree, Predicate<Tree> predicate) {
+  public static <T extends Tree> T getFirstDescendant(Tree tree, Predicate<Tree> predicate) {
     List<T> descendants = getAllDescendant(tree, predicate);
-    Assertions.assertThat(descendants).hasSize(1);
+    assertThat(descendants).isNotEmpty();
     return descendants.get(0);
   }
 
   public static <T extends Tree> T getLastDescendant(Tree tree, Predicate<Tree> predicate) {
     List<T> descendants = getAllDescendant(tree, predicate);
-    Assertions.assertThat(descendants).isNotEmpty();
+    assertThat(descendants).isNotEmpty();
     return descendants.get(descendants.size() - 1);
   }
 

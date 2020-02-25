@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
@@ -120,6 +121,10 @@ class Scope {
           classSymbol.addSuperClass(originalSymbol);
         }
       }
+      classSymbol.addMembers(((ClassSymbol) symbol)
+        .declaredMembers().stream()
+        .map(m -> ((SymbolImpl) m).copyWithoutUsages())
+        .collect(Collectors.toList()));
       classSymbol.setHasUnresolvedTypeHierarchy(classSymbol.superClasses().stream().anyMatch(s -> s.kind() != Symbol.Kind.CLASS));
       return classSymbol;
     }

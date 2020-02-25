@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -47,6 +48,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private Type returnType = null;
   private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
+  private Symbol owner;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
@@ -91,6 +93,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.returnType = returnType;
     this.functionDefinitionLocation = null;
     this.isStub = true;
+  }
+
+  @Override
+  FunctionSymbolImpl copyWithoutUsages() {
+    return new FunctionSymbolImpl(name(), this);
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
@@ -163,6 +170,14 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   public void setDeclaredReturnType(InferredType declaredReturnType) {
     this.declaredReturnType = declaredReturnType;
+  }
+
+  public Symbol owner() {
+    return owner;
+  }
+
+  public void setOwner(Symbol owner) {
+    this.owner = owner;
   }
 
   private static class ParameterImpl implements Parameter {

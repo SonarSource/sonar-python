@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -34,11 +35,15 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.FunctionLike;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.tree.NameImpl;
 
 public class TypeInference extends BaseTreeVisitor {
 
@@ -46,10 +51,30 @@ public class TypeInference extends BaseTreeVisitor {
   private final Set<Assignment> assignments = new HashSet<>();
   private final FunctionLike functionDef;
 
-  public static void inferTypes(FunctionLike functionDef) {
+  public static void inferTypes(FileInput fileInput) {
+    fileInput.accept(new BaseTreeVisitor() {
+      @Override
+      public void visitFunctionDef(FunctionDef funcDef) {
+        super.visitFunctionDef(funcDef);
+        inferTypes(funcDef);
+      }
+    });
+  }
+
+  private static void inferTypes(FunctionLike functionDef) {
     TypeInference visitor = new TypeInference(functionDef);
     functionDef.accept(visitor);
     visitor.processAssignments();
+    functionDef.accept(new BaseTreeVisitor() {
+      @Override
+      public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
+        super.visitQualifiedExpression(qualifiedExpression);
+        Name name = qualifiedExpression.name();
+        InferredType type = qualifiedExpression.qualifier().type();
+        Optional<Symbol> resolvedMember = type.resolveMember(name.name());
+        resolvedMember.ifPresent(((NameImpl) name)::setSymbol);
+      }
+    });
   }
 
   private TypeInference(FunctionLike functionDef) {
