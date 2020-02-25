@@ -19,6 +19,8 @@
  */
 package org.sonar.python.types;
 
+import java.util.Optional;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 
 enum AnyType implements InferredType {
@@ -32,5 +34,10 @@ enum AnyType implements InferredType {
   @Override
   public boolean canHaveMember(String memberName) {
     return true;
+  }
+
+  @Override
+  public Optional<Symbol> resolveMember(String memberName) {
+    return Optional.empty();
   }
 }

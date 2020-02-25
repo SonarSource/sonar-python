@@ -50,20 +50,46 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void canHaveMember() {
+  public void member() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
-    x.addMembers(singletonList(new SymbolImpl("foo", null)));
+    SymbolImpl foo = new SymbolImpl("foo", null);
+    x.addMembers(singletonList(foo));
     assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
     assertThat(new RuntimeType(x).canHaveMember("bar")).isFalse();
+    assertThat(new RuntimeType(x).resolveMember("foo")).contains(foo);
+    assertThat(new RuntimeType(x).resolveMember("bar")).isEmpty();
 
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     x1.addSuperClass(x);
     x1.addMembers(singletonList(new SymbolImpl("bar", null)));
     assertThat(new RuntimeType(x1).canHaveMember("foo")).isTrue();
     assertThat(new RuntimeType(x1).canHaveMember("bar")).isTrue();
+    assertThat(new RuntimeType(x1).resolveMember("foo")).contains(foo);
 
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
     assertThat(new RuntimeType(y).canHaveMember("foo")).isFalse();
+  }
+
+  @Test
+  public void overridden_symbol() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    SymbolImpl fooX = new SymbolImpl("foo", null);
+    x.addMembers(singletonList(fooX));
+    assertThat(new RuntimeType(x).resolveMember("foo")).contains(fooX);
+
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    SymbolImpl fooX1 = new SymbolImpl("foo", null);
+    x1.addSuperClass(x);
+    x1.addMembers(singletonList(fooX1));
+    assertThat(new RuntimeType(x1).resolveMember("foo")).contains(fooX1);
+
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    y.addMembers(singletonList(new SymbolImpl("foo", null)));
+    ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
+    z.addSuperClass(x);
+    z.addSuperClass(y);
+    // TODO should be empty when multiple superclasses have the same member name
+    assertThat(new RuntimeType(z).resolveMember("foo")).contains(fooX);
   }
 
   @Test

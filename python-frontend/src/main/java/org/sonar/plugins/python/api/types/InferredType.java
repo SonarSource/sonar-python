@@ -20,6 +20,8 @@
 package org.sonar.plugins.python.api.types;
 
 import com.google.common.annotations.Beta;
+import java.util.Optional;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Beta
 public interface InferredType {
@@ -29,5 +31,8 @@ public interface InferredType {
 
   @Beta
   boolean canHaveMember(String memberName);
+
+  @Beta
+  Optional<Symbol> resolveMember(String memberName);
 
 }

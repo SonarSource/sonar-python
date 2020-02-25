@@ -37,4 +37,9 @@ public class AnyTypeTest {
   public void canHaveMember() {
     assertThat(ANY.canHaveMember("xxx")).isTrue();
   }
+
+  @Test
+  public void resolveMember() {
+    assertThat(ANY.resolveMember("xxx")).isEmpty();
+  }
 }

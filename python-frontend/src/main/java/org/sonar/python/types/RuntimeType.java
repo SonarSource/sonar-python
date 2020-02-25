@@ -21,6 +21,7 @@ package org.sonar.python.types;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -58,6 +59,19 @@ class RuntimeType implements InferredType {
       }
     }
     return false;
+  }
+
+  @Override
+  public Optional<Symbol> resolveMember(String memberName) {
+    LinkedHashSet<ClassSymbol> classSymbols = classesToExplore();
+    for (ClassSymbol classSymbol : classSymbols) {
+      for (Symbol member : classSymbol.declaredMembers()) {
+        if (member.name().equals(memberName)) {
+          return Optional.of(member);
+        }
+      }
+    }
+    return Optional.empty();
   }
 
   private LinkedHashSet<ClassSymbol> classesToExplore() {

@@ -21,7 +21,10 @@ package org.sonar.python.types;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -73,6 +76,15 @@ class UnionType implements InferredType {
   @Override
   public boolean canHaveMember(String memberName) {
     return types.stream().anyMatch(t -> t.canHaveMember(memberName));
+  }
+
+  @Override
+  public Optional<Symbol> resolveMember(String memberName) {
+    Set<Optional<Symbol>> resolved = types.stream()
+      .map(t -> t.resolveMember(memberName))
+      .filter(Optional::isPresent)
+      .collect(Collectors.toSet());
+    return resolved.size() == 1 ? resolved.iterator().next() : Optional.empty();
   }
 
   @Override
