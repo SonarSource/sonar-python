@@ -314,6 +314,20 @@ public class TypeInferenceTest {
       "c").type()).isEqualTo(INT);
   }
 
+  @Test
+  public void parenthesized_expressions() {
+    assertThat(lastExpression("(42)").type()).isEqualTo(INT);
+    assertThat(lastExpression("('hello')").type()).isEqualTo(STR);
+    assertThat(lastExpression("(xxx)").type()).isEqualTo(InferredTypes.anyType());
+
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if   i > 1: c = b",
+      "  elif i > 0: b = (a)",
+      "  else:       a = 42",
+      "c").type()).isEqualTo(INT);
+  }
+
   private Expression lastExpression(String... lines) {
     String code = String.join("\n", lines);
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);

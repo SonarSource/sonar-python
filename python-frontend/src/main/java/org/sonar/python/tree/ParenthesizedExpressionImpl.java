@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,6 +28,7 @@ import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 
 public class ParenthesizedExpressionImpl extends PyTree implements ParenthesizedExpression {
 
@@ -68,5 +70,15 @@ public class ParenthesizedExpressionImpl extends PyTree implements Parenthesized
   @Override
   public Kind getKind() {
     return Kind.PARENTHESIZED;
+  }
+
+  @Override
+  public InferredType type() {
+    return expression.type();
+  }
+
+  @Override
+  public List<Expression> typeDependencies() {
+    return Collections.singletonList(expression);
   }
 }
