@@ -49,7 +49,7 @@ public class BinaryExpressionImplTest {
     assertThat(new BinaryExpressionImpl(left, or, right).type()).isEqualTo(or(INT, STR));
 
     Token plus = mock(Token.class);
-    when(plus.value()).thenReturn("+");
+    when(plus.value()).thenReturn("//");
     assertThat(new BinaryExpressionImpl(left, plus, right).type()).isEqualTo(InferredTypes.anyType());
   }
 }

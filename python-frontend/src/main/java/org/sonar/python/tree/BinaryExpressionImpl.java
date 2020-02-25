@@ -35,6 +35,9 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.STR;
+
 public class BinaryExpressionImpl extends PyTree implements BinaryExpression, HasTypeDependencies {
 
   private static final Map<String, Kind> KINDS_BY_OPERATOR = kindsByOperator();
@@ -112,6 +115,14 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
   public InferredType type() {
     if (is(Kind.AND, Kind.OR)) {
       return InferredTypes.or(leftOperand.type(), rightOperand.type());
+    }
+    if (is(Kind.PLUS)) {
+      if (leftOperand.type() == INT && rightOperand.type() == INT) {
+        return INT;
+      }
+      if (leftOperand.type() == STR && rightOperand.type() == STR) {
+        return STR;
+      }
     }
     return InferredTypes.anyType();
   }

@@ -298,6 +298,22 @@ public class TypeInferenceTest {
       "c").type()).isEqualTo(or(INT, STR));
   }
 
+  @Test
+  public void plus_binary_expressions() {
+    assertThat(lastExpression("42 + 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("'foo' + 'bar'").type()).isEqualTo(STR);
+    assertThat(lastExpression("True + False").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("42 + ''").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("'' + 42").type()).isEqualTo(InferredTypes.anyType());
+
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if   i > 1: c = b",
+      "  elif i > 0: b = 42 + a",
+      "  else:       a = 43",
+      "c").type()).isEqualTo(INT);
+  }
+
   private Expression lastExpression(String... lines) {
     String code = String.join("\n", lines);
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
