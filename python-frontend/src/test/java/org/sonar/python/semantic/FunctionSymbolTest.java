@@ -19,25 +19,18 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
-import static org.sonar.python.PythonTestUtils.pythonFile;
 
 public class FunctionSymbolTest {
 
@@ -126,23 +119,6 @@ public class FunctionSymbolTest {
     functionDef = (FunctionDef) tree.statements().statements().get(0);
     symbol = functionDef.name().symbol();
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.OTHER);
-  }
-
-  @Test
-  public void return_type() {
-    Symbol strTypeSymbol = new SymbolImpl("str", "str");
-    FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl("fn", "mod.fn", false, false, false, Collections.emptyList(), new Type(strTypeSymbol));
-    assertThat(fnSymbol.isStub()).isTrue();
-    List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
-    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
-    FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
-      "from mod import fn",
-      "x = fn()"
-    );
-    AssignmentStatement assignmentStatement = (AssignmentStatement) tree.statements().statements().get(1);
-    Symbol x = ((Name) assignmentStatement.lhsExpressions().get(0).expressions().get(0)).symbol();
-    assertThat(((SymbolImpl) x).type().symbol()).isEqualTo(strTypeSymbol);
   }
 
   @Test

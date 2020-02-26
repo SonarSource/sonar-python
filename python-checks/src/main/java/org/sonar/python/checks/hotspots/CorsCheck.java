@@ -57,7 +57,6 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.TUPLE;
-import static org.sonar.python.semantic.SymbolUtils.getTypeName;
 
 @Rule(key = "S5122")
 public class CorsCheck extends PythonSubscriptionCheck {
@@ -135,15 +134,12 @@ public class CorsCheck extends PythonSubscriptionCheck {
         return;
       }
 
-      Symbol symbol = ((Name) subscription.object()).symbol();
-      String typeName = getTypeName(symbol);
-
       List<Expression> subscripts = subscription.subscripts().expressions();
-      if (typeName == null || subscripts.size() != 1) {
+      if (subscripts.size() != 1) {
         return;
       }
 
-      if (TYPES_TO_CHECK.contains(typeName) && isString(subscripts.get(0), ALLOW_ORIGIN) && isString(assignment.assignedValue(), STAR)) {
+      if (TYPES_TO_CHECK.stream().anyMatch(t -> subscription.object().type().canOnlyBe(t)) && isString(subscripts.get(0), ALLOW_ORIGIN) && isString(assignment.assignedValue(), STAR)) {
         ctx.addIssue(assignment, MESSAGE);
       }
     }

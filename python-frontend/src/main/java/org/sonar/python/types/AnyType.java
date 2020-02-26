@@ -40,4 +40,9 @@ enum AnyType implements InferredType {
   public Optional<Symbol> resolveMember(String memberName) {
     return Optional.empty();
   }
+
+  @Override
+  public boolean canOnlyBe(String typeName) {
+    return false;
+  }
 }
