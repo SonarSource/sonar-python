@@ -121,7 +121,7 @@ public class ClassSymbolTest {
     assertThat(symbol.kind().equals(Symbol.Kind.CLASS)).isTrue();
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(2);
-    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
   }
 
   @Test

@@ -64,13 +64,19 @@ class Scope {
   void createBuiltinSymbol(String name, Map<String, Symbol> typeShedSymbols) {
     SymbolImpl symbol;
     Symbol typeShedSymbol = typeShedSymbols.get(name);
-    if (typeShedSymbol != null && typeShedSymbol.kind() == Symbol.Kind.FUNCTION) {
-      symbol = new FunctionSymbolImpl(name, ((FunctionSymbol) typeShedSymbol));
+    if (typeShedSymbol != null) {
+      if (typeShedSymbol.kind() == Symbol.Kind.CLASS) {
+        symbol = ((ClassSymbolImpl) typeShedSymbol).copyWithoutUsages();
+      } else if (typeShedSymbol.kind() == Symbol.Kind.FUNCTION) {
+        symbol = ((FunctionSymbolImpl) typeShedSymbol).copyWithoutUsages();
+      } else {
+        symbol = new SymbolImpl(typeShedSymbol.name(), typeShedSymbol.fullyQualifiedName());
+      }
     } else {
       symbol = new SymbolImpl(name, name);
-      if ("True".equals(name) || "False".equals(name)) {
-        symbol.setInferredType(InferredTypes.BOOL);
-      }
+    }
+    if ("True".equals(name) || "False".equals(name)) {
+      symbol.setInferredType(InferredTypes.BOOL);
     }
     symbols.add(symbol);
     builtinSymbols.add(symbol);

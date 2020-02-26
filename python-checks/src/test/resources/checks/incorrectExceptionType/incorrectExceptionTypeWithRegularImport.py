@@ -3,7 +3,7 @@ from incorrectExceptionTypeImported3 import SomeException, SomeNotException, Som
 from incorrectExceptionTypeImported4 import RedefinedBaseExceptionChild, ChildOfActualException
 
 def raise_exception():
-  raise SomeNotException() # FN
+  raise SomeNotException() # Noncompliant
 
 def raise_exception():
   raise incorrectExceptionTypeImported2.A() # OK
@@ -32,7 +32,7 @@ def raise_child_exception():
   raise SomeChildException()
 
 def raise_child_exception():
-  raise SomeChildNotException() # FN
+  raise SomeChildNotException() # Noncompliant
 
 def raise_nested_non_exception_class():
   raise Enclsoing.Nested() # FN as only top-level imported symbols are considered
