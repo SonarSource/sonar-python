@@ -71,7 +71,7 @@ def raise_regular_class():
   raise SomeClass() # Noncompliant
 
 def raise_regular_class_child():
-  raise AnotherClass() # FN
+  raise AnotherClass() # Noncompliant
 
 def raise_exception_child():
   raise SomeDerivedError() # OK
