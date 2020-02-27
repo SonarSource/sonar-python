@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import org.sonar.python.types.HasTypeDependencies;
-
 /**
  * <pre>
  *   ( {@link #expression()} )
@@ -28,7 +26,7 @@ import org.sonar.python.types.HasTypeDependencies;
  *
  * See https://docs.python.org/3/reference/expressions.html#parenthesized-forms
  */
-public interface ParenthesizedExpression extends Expression, HasTypeDependencies {
+public interface ParenthesizedExpression extends Expression {
 
   Token leftParenthesis();
 

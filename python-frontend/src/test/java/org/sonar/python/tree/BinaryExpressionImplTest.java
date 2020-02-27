@@ -20,36 +20,43 @@
 package org.sonar.python.tree;
 
 import org.junit.Test;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
+import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 
 public class BinaryExpressionImplTest {
 
   @Test
   public void type() {
-    Expression left = mock(Expression.class);
-    when(left.type()).thenReturn(INT);
-    Expression right = mock(Expression.class);
-    when(right.type()).thenReturn(STR);
+    assertThat(lastExpression("42 + 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("'foo' + 'bar'").type()).isEqualTo(STR);
+    assertThat(lastExpression("True + False").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("42 + ''").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("'' + 42").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("'' // 42").type()).isEqualTo(InferredTypes.anyType());
+  }
 
-    Token and = mock(Token.class);
-    when(and.value()).thenReturn("and");
-    assertThat(new BinaryExpressionImpl(left, and, right).type()).isEqualTo(or(INT, STR));
+  @Test
+  public void logical_expressions() {
+    assertThat(lastExpression("42 or 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("42 and 43").type()).isEqualTo(INT);
+    assertThat(lastExpression("42 or ''").type()).isEqualTo(or(INT, STR));
+    assertThat(lastExpression("42 or xxx").type()).isEqualTo(anyType());
+    assertThat(lastExpression("42 or True or ''").type()).isEqualTo(or(or(INT, STR), BOOL));
+  }
 
-    Token or = mock(Token.class);
-    when(or.value()).thenReturn("or");
-    assertThat(new BinaryExpressionImpl(left, or, right).type()).isEqualTo(or(INT, STR));
+  @Test
+  public void type_dependencies() {
+    BinaryExpressionImpl binary = ((BinaryExpressionImpl) lastExpression("42 or ''"));
+    assertThat(binary.typeDependencies()).containsExactly(binary.leftOperand(), binary.rightOperand());
 
-    Token plus = mock(Token.class);
-    when(plus.value()).thenReturn("//");
-    assertThat(new BinaryExpressionImpl(left, plus, right).type()).isEqualTo(InferredTypes.anyType());
+    binary = ((BinaryExpressionImpl) lastExpression("42 // ''"));
+    assertThat(binary.typeDependencies()).isEmpty();
   }
 }

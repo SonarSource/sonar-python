@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,10 +118,10 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
       return InferredTypes.or(leftOperand.type(), rightOperand.type());
     }
     if (is(Kind.PLUS)) {
-      if (leftOperand.type() == INT && rightOperand.type() == INT) {
+      if (leftOperand.type().equals(INT) && rightOperand.type().equals(INT)) {
         return INT;
       }
-      if (leftOperand.type() == STR && rightOperand.type() == STR) {
+      if (leftOperand.type().equals(STR) && rightOperand.type().equals(STR)) {
         return STR;
       }
     }
@@ -129,6 +130,9 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
 
   @Override
   public List<Expression> typeDependencies() {
-    return Arrays.asList(leftOperand, rightOperand);
+    if (is(Kind.AND, Kind.OR, Kind.PLUS)) {
+      return Arrays.asList(leftOperand, rightOperand);
+    }
+    return Collections.emptyList();
   }
 }

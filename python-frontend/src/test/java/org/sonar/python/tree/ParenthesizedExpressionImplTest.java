@@ -24,15 +24,21 @@ import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
-import static org.sonar.python.types.InferredTypes.BOOL;
+import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.STR;
 
-public class UnaryExpressionImplTest {
+public class ParenthesizedExpressionImplTest {
 
   @Test
   public void type() {
-    assertThat(lastExpression("not 42").type()).isEqualTo(BOOL);
-    assertThat(lastExpression("-42").type()).isEqualTo(InferredTypes.anyType());
-    assertThat(lastExpression("+42").type()).isEqualTo(InferredTypes.anyType());
-    assertThat(lastExpression("~42").type()).isEqualTo(InferredTypes.anyType());
+    assertThat(lastExpression("(42)").type()).isEqualTo(INT);
+    assertThat(lastExpression("('hello')").type()).isEqualTo(STR);
+    assertThat(lastExpression("(xxx)").type()).isEqualTo(InferredTypes.anyType());
+  }
+
+  @Test
+  public void typeDependencies() {
+    ParenthesizedExpressionImpl parenthesizedExpr = ((ParenthesizedExpressionImpl) lastExpression("(42)"));
+    assertThat(parenthesizedExpr.typeDependencies()).containsExactly(parenthesizedExpr.expression());
   }
 }

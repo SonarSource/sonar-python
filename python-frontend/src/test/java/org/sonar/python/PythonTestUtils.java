@@ -27,7 +27,12 @@ import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
@@ -110,5 +115,29 @@ public final class PythonTestUtils {
       throw new IllegalStateException("Cannot create temporary file");
     }
     return pythonFile;
+  }
+
+  public static Expression lastExpression(String... lines) {
+    String code = String.join("\n", lines);
+    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    Statement statement = lastStatement(fileInput.statements());
+    if (!(statement instanceof ExpressionStatement)) {
+      assertThat(statement).isInstanceOf(FunctionDef.class);
+      FunctionDef fnDef = (FunctionDef) statement;
+      statement = lastStatement(fnDef.body());
+    }
+    assertThat(statement).isInstanceOf(ExpressionStatement.class);
+    List<Expression> expressions = ((ExpressionStatement) statement).expressions();
+    return expressions.get(expressions.size() - 1);
+  }
+
+  private static Statement lastStatement(StatementList statementList) {
+    List<Statement> statements = statementList.statements();
+    return statements.get(statements.size() - 1);
+  }
+
+  public static Expression lastExpressionInFunction(String... lines) {
+    String code = "def f():\n  " + String.join("\n  ", lines);
+    return lastExpression(code);
   }
 }

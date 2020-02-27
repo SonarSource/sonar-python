@@ -19,21 +19,13 @@
  */
 package org.sonar.python.types;
 
-import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionStatement;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Statement;
-import org.sonar.plugins.python.api.tree.StatementList;
-import org.sonar.python.PythonTestUtils;
-import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DICT;
@@ -280,76 +272,4 @@ public class TypeInferenceTest {
       "c = 42 if '' else c",
       "c").type()).isEqualTo(anyType());
   }
-
-  @Test
-  public void logical_expressions() {
-    assertThat(lastExpression("not 42").type()).isEqualTo(BOOL);
-    assertThat(lastExpression("42 or 43").type()).isEqualTo(INT);
-    assertThat(lastExpression("42 and 43").type()).isEqualTo(INT);
-    assertThat(lastExpression("42 or ''").type()).isEqualTo(or(INT, STR));
-    assertThat(lastExpression("42 or xxx").type()).isEqualTo(anyType());
-    assertThat(lastExpression("42 or True or ''").type()).isEqualTo(or(or(INT, STR), BOOL));
-
-    assertThat(lastExpressionInFunction(
-      "for i in range(3):",
-      "  if   i > 1: c = b",
-      "  elif i > 0: b = 42 or a",
-      "  else:       a = ''",
-      "c").type()).isEqualTo(or(INT, STR));
-  }
-
-  @Test
-  public void plus_binary_expressions() {
-    assertThat(lastExpression("42 + 43").type()).isEqualTo(INT);
-    assertThat(lastExpression("'foo' + 'bar'").type()).isEqualTo(STR);
-    assertThat(lastExpression("True + False").type()).isEqualTo(InferredTypes.anyType());
-    assertThat(lastExpression("42 + ''").type()).isEqualTo(InferredTypes.anyType());
-    assertThat(lastExpression("'' + 42").type()).isEqualTo(InferredTypes.anyType());
-
-    assertThat(lastExpressionInFunction(
-      "for i in range(3):",
-      "  if   i > 1: c = b",
-      "  elif i > 0: b = 42 + a",
-      "  else:       a = 43",
-      "c").type()).isEqualTo(INT);
-  }
-
-  @Test
-  public void parenthesized_expressions() {
-    assertThat(lastExpression("(42)").type()).isEqualTo(INT);
-    assertThat(lastExpression("('hello')").type()).isEqualTo(STR);
-    assertThat(lastExpression("(xxx)").type()).isEqualTo(InferredTypes.anyType());
-
-    assertThat(lastExpressionInFunction(
-      "for i in range(3):",
-      "  if   i > 1: c = b",
-      "  elif i > 0: b = (a)",
-      "  else:       a = 42",
-      "c").type()).isEqualTo(INT);
-  }
-
-  private Expression lastExpression(String... lines) {
-    String code = String.join("\n", lines);
-    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
-    Statement statement = lastStatement(fileInput.statements());
-    if (!(statement instanceof ExpressionStatement)) {
-      assertThat(statement).isInstanceOf(FunctionDef.class);
-      FunctionDef fnDef = (FunctionDef) statement;
-      statement = lastStatement(fnDef.body());
-    }
-    assertThat(statement).isInstanceOf(ExpressionStatement.class);
-    List<Expression> expressions = ((ExpressionStatement) statement).expressions();
-    return expressions.get(expressions.size() - 1);
-  }
-
-  private Statement lastStatement(StatementList statementList) {
-    List<Statement> statements = statementList.statements();
-    return statements.get(statements.size() - 1);
-  }
-
-  private Expression lastExpressionInFunction(String... lines) {
-    String code = "def f():\n  " + String.join("\n  ", lines);
-    return lastExpression(code);
-  }
-
 }

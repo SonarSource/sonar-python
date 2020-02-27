@@ -26,11 +26,12 @@ import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.HasTypeDependencies;
 
-public class ParenthesizedExpressionImpl extends PyTree implements ParenthesizedExpression {
+public class ParenthesizedExpressionImpl extends PyTree implements ParenthesizedExpression, HasTypeDependencies {
 
   private final Token leftParenthesis;
   private final Expression expression;
