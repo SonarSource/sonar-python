@@ -59,13 +59,8 @@ public class TypeInference extends BaseTreeVisitor {
         inferTypes(funcDef);
       }
     });
-  }
 
-  private static void inferTypes(FunctionLike functionDef) {
-    TypeInference visitor = new TypeInference(functionDef);
-    functionDef.accept(visitor);
-    visitor.processAssignments();
-    functionDef.accept(new BaseTreeVisitor() {
+    fileInput.accept(new BaseTreeVisitor() {
       @Override
       public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
         super.visitQualifiedExpression(qualifiedExpression);
@@ -75,6 +70,12 @@ public class TypeInference extends BaseTreeVisitor {
         resolvedMember.ifPresent(((NameImpl) name)::setSymbol);
       }
     });
+  }
+
+  private static void inferTypes(FunctionLike functionDef) {
+    TypeInference visitor = new TypeInference(functionDef);
+    functionDef.accept(visitor);
+    visitor.processAssignments();
   }
 
   private TypeInference(FunctionLike functionDef) {
