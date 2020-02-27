@@ -19,6 +19,8 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +32,14 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.HasTypeDependencies;
+import org.sonar.python.types.InferredTypes;
 
-public class BinaryExpressionImpl extends PyTree implements BinaryExpression {
+import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.STR;
+
+public class BinaryExpressionImpl extends PyTree implements BinaryExpression, HasTypeDependencies {
 
   private static final Map<String, Kind> KINDS_BY_OPERATOR = kindsByOperator();
 
@@ -102,5 +110,29 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression {
   @Override
   public List<Tree> computeChildren() {
     return Stream.of(leftOperand, operator, rightOperand).filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  @Override
+  public InferredType type() {
+    if (is(Kind.AND, Kind.OR)) {
+      return InferredTypes.or(leftOperand.type(), rightOperand.type());
+    }
+    if (is(Kind.PLUS)) {
+      if (leftOperand.type().equals(INT) && rightOperand.type().equals(INT)) {
+        return INT;
+      }
+      if (leftOperand.type().equals(STR) && rightOperand.type().equals(STR)) {
+        return STR;
+      }
+    }
+    return InferredTypes.anyType();
+  }
+
+  @Override
+  public List<Expression> typeDependencies() {
+    if (is(Kind.AND, Kind.OR, Kind.PLUS)) {
+      return Arrays.asList(leftOperand, rightOperand);
+    }
+    return Collections.emptyList();
   }
 }

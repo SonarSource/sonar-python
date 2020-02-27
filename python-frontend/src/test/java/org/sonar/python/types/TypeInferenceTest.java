@@ -19,21 +19,13 @@
  */
 package org.sonar.python.types;
 
-import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionStatement;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Statement;
-import org.sonar.plugins.python.api.tree.StatementList;
-import org.sonar.python.PythonTestUtils;
-import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DICT;
@@ -280,29 +272,4 @@ public class TypeInferenceTest {
       "c = 42 if '' else c",
       "c").type()).isEqualTo(anyType());
   }
-
-  private Expression lastExpression(String... lines) {
-    String code = String.join("\n", lines);
-    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
-    Statement statement = lastStatement(fileInput.statements());
-    if (!(statement instanceof ExpressionStatement)) {
-      assertThat(statement).isInstanceOf(FunctionDef.class);
-      FunctionDef fnDef = (FunctionDef) statement;
-      statement = lastStatement(fnDef.body());
-    }
-    assertThat(statement).isInstanceOf(ExpressionStatement.class);
-    List<Expression> expressions = ((ExpressionStatement) statement).expressions();
-    return expressions.get(expressions.size() - 1);
-  }
-
-  private Statement lastStatement(StatementList statementList) {
-    List<Statement> statements = statementList.statements();
-    return statements.get(statements.size() - 1);
-  }
-
-  private Expression lastExpressionInFunction(String... lines) {
-    String code = "def f():\n  " + String.join("\n  ", lines);
-    return lastExpression(code);
-  }
-
 }
