@@ -16,7 +16,7 @@ def raise_not_an_exception():
 
 def raise_not_an_exception_type_inference():
   a = incorrectExceptionTypeImported2.B()
-  raise a # FN
+  raise a # Noncompliant
 
 def raise_not_an_exception_type_inference_fn():
   a = incorrectExceptionTypeImported2.B

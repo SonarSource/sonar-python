@@ -38,4 +38,7 @@ public interface InferredType {
   @Beta
   boolean canOnlyBe(String typeName);
 
+  @Beta
+  boolean canBeOrExtend(String typeName);
+
 }

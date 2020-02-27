@@ -110,4 +110,16 @@ public class UnionTypeTest {
     assertThat(or(a, a).canOnlyBe("a")).isTrue();
     assertThat(or(a, a).canOnlyBe("b")).isFalse();
   }
+
+  @Test
+  public void test_canBeOrExtend() {
+    assertThat(or(a, b).canBeOrExtend("a")).isTrue();
+    assertThat(or(a, b).canBeOrExtend("c")).isFalse();
+
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addSuperClass(x1);
+    assertThat(or(a, new RuntimeType(x2)).canBeOrExtend("x1")).isTrue();
+  }
+
 }
