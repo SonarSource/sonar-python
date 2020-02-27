@@ -8,7 +8,7 @@ def raise_some_class():
 
 def raise_some_class_type_inference():
   a = SomeClass()
-  raise a # FN
+  raise a # Noncompliant
 
 def raise_a_derived_class():
   raise SomeDerivedClass() # Noncompliant

@@ -142,4 +142,20 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(a).canOnlyBe("a")).isTrue();
     assertThat(new RuntimeType(b).canOnlyBe("a")).isFalse();
   }
+
+  @Test
+  public void test_canBeOrExtend() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    assertThat(new RuntimeType(x).canBeOrExtend("x")).isTrue();
+    assertThat(new RuntimeType(x).canBeOrExtend("y")).isFalse();
+
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addSuperClass(x1);
+    assertThat(new RuntimeType(x2).canBeOrExtend("x1")).isTrue();
+
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    y.setHasUnresolvedTypeHierarchy(true);
+    assertThat(new RuntimeType(y).canBeOrExtend("z")).isTrue();
+  }
 }

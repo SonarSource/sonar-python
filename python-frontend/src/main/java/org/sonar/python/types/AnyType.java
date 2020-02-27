@@ -45,4 +45,9 @@ enum AnyType implements InferredType {
   public boolean canOnlyBe(String typeName) {
     return false;
   }
+
+  @Override
+  public boolean canBeOrExtend(String typeName) {
+    return true;
+  }
 }

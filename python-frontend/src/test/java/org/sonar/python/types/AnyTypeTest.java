@@ -47,4 +47,9 @@ public class AnyTypeTest {
   public void test_canOnlyBe() {
     assertThat(ANY.canOnlyBe("a")).isFalse();
   }
+
+  @Test
+  public void test_canBeOrExtend() {
+    assertThat(ANY.canBeOrExtend("a")).isTrue();
+  }
 }

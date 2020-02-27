@@ -22,13 +22,14 @@ package org.sonar.python.checks;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.BuiltinSymbols;
+import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S5632")
 public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
@@ -42,26 +43,27 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       if (raiseStatement.expressions().isEmpty()) {
         return;
       }
-      if (raiseStatement.expressions().get(0).is(Tree.Kind.CALL_EXPR)) {
-        CallExpression callExpression = ((CallExpression) raiseStatement.expressions().get(0));
+      Expression raisedExpression = raiseStatement.expressions().get(0);
+      if (raisedExpression.is(Tree.Kind.CALL_EXPR)) {
+        CallExpression callExpression = ((CallExpression) raisedExpression);
         Symbol calleeSymbol = callExpression.calleeSymbol();
-        if (!inheritsFromBaseException(calleeSymbol)) {
+        if (!inheritsFromBaseException(calleeSymbol, raisedExpression)) {
           ctx.addIssue(raiseStatement, MESSAGE);
         }
       }
-      if (raiseStatement.expressions().get(0).is(Tree.Kind.NAME)) {
-        Symbol symbol = ((Name) raiseStatement.expressions().get(0)).symbol();
-        if (!inheritsFromBaseException(symbol)) {
+      if (raisedExpression.is(Tree.Kind.NAME)) {
+        Symbol symbol = ((Name) raisedExpression).symbol();
+        if (!inheritsFromBaseException(symbol, raisedExpression)) {
           ctx.addIssue(raiseStatement, MESSAGE);
         }
       }
-      if (raiseStatement.expressions().get(0).is(Tree.Kind.STRING_LITERAL)) {
+      if (raisedExpression.is(Tree.Kind.STRING_LITERAL)) {
         ctx.addIssue(raiseStatement, MESSAGE);
       }
     });
   }
 
-  private static boolean inheritsFromBaseException(@Nullable Symbol symbol) {
+  private static boolean inheritsFromBaseException(@Nullable Symbol symbol, Expression raisedExpression) {
     if (symbol == null) {
       // S3827 will raise the issue in this case
       return true;
@@ -70,19 +72,11 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       return true;
     }
     if (Symbol.Kind.CLASS.equals(symbol.kind())) {
-      // we know it's a class defined in the project
-      ClassSymbol classSymbol = (ClassSymbol) symbol;
-      if (classSymbol.hasUnresolvedTypeHierarchy()) {
-        return true;
-      }
-      for (Symbol parent : classSymbol.superClasses()) {
-        if (inheritsFromBaseException(parent)) {
-          return true;
-        }
-      }
+      return InferredTypes.runtimeType(symbol).canBeOrExtend("BaseException");
+    }
+    if (BuiltinSymbols.all().contains(symbol.fullyQualifiedName())) {
       return false;
     }
-    // returns true in case of unknown symbol
-    return !BuiltinSymbols.all().contains(symbol.fullyQualifiedName());
+    return raisedExpression.type().canBeOrExtend("BaseException");
   }
 }

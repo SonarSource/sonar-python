@@ -93,6 +93,11 @@ class UnionType implements InferredType {
   }
 
   @Override
+  public boolean canBeOrExtend(String typeName) {
+    return types.stream().anyMatch(t -> t.canBeOrExtend(typeName));
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
