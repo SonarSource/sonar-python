@@ -258,6 +258,11 @@ public class TypeInferenceTest {
   }
 
   @Test
+  public void builtin_method_types() {
+    assertThat(lastExpression("'abc'.capitalize()").type()).isEqualTo(STR);
+  }
+
+  @Test
   public void conditional_expressions() {
     assertThat(lastExpression("42 if '' else 43").type()).isEqualTo(INT);
     assertThat(lastExpression("42 if cond else ''").type()).isEqualTo(or(INT, STR));
