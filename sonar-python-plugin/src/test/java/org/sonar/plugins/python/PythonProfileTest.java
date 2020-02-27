@@ -21,7 +21,6 @@ package org.sonar.plugins.python;
 
 import com.sonar.plugins.security.api.PythonRules;
 import org.junit.Test;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActiveRule;
@@ -35,15 +34,15 @@ import static org.sonar.plugins.python.PythonProfile.getSecurityRuleKeys;
 public class PythonProfileTest {
 
 
-  public BuiltInQualityProfilesDefinition.BuiltInQualityProfile getProfile(SonarRuntime sonarRuntime) {
+  public BuiltInQualityProfilesDefinition.BuiltInQualityProfile getProfile() {
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
-    new PythonProfile(sonarRuntime).define(context);
+    new PythonProfile().define(context);
     return context.profile("py", "Sonar way");
   }
 
   @Test
   public void profile() {
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile(TestUtils.SONAR_RUNTIME_79);
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile();
     assertThat(profile.rules()).extracting("repoKey").containsOnly("python", "pythonsecurity");
     assertThat(profile.rules().size()).isGreaterThan(25);
     assertThat(profile.rules()).extracting(BuiltInActiveRule::ruleKey).contains("S100");

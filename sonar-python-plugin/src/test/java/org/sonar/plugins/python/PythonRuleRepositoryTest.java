@@ -98,7 +98,7 @@ public class PythonRuleRepositoryTest {
   }
 
   private static RulesDefinition.Repository buildRepository() {
-    PythonRuleRepository ruleRepository = new PythonRuleRepository(TestUtils.SONAR_RUNTIME_79);
+    PythonRuleRepository ruleRepository = new PythonRuleRepository();
     RulesDefinition.Context context = new RulesDefinition.Context();
     ruleRepository.define(context);
     return context.repository(CheckList.REPOSITORY_KEY);

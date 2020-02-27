@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.RuleMetadataLoader;
@@ -36,11 +35,6 @@ public class PythonRuleRepository implements RulesDefinition {
   static final String RESOURCE_FOLDER = "org/sonar/l10n/py/rules/python";
 
   private static final Set<String> TEMPLATE_RULE_KEYS = Collections.singleton("CommentRegularExpression");
-  private final SonarRuntime sonarRuntime;
-
-  public PythonRuleRepository(SonarRuntime sonarRuntime) {
-    this.sonarRuntime = sonarRuntime;
-  }
 
   @Override
   public void define(Context context) {
@@ -48,7 +42,7 @@ public class PythonRuleRepository implements RulesDefinition {
       .createRepository(CheckList.REPOSITORY_KEY, Python.KEY)
       .setName(REPOSITORY_NAME);
 
-    RuleMetadataLoader loader = new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION, sonarRuntime);
+    RuleMetadataLoader loader = new RuleMetadataLoader(RESOURCE_FOLDER, PythonProfile.PROFILE_LOCATION);
     loader.addRulesByAnnotatedClass(repository, getCheckClasses());
 
     repository.rules().stream()
