@@ -131,6 +131,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     scopesByRootTree = new HashMap<>();
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
+    addSymbolsToTree((FileInputImpl) fileInput);
+    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+      TypeInference.inferTypes(fileInput);
+    }
+  }
+
+  private void addSymbolsToTree(FileInputImpl fileInput) {
     for (Scope scope : scopesByRootTree.values()) {
       scope.symbols().forEach(symbol -> ((SymbolImpl) symbol).updateChildrenFQNBasedOnType());
       if (scope.rootTree instanceof FunctionLike) {
@@ -155,14 +162,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           });
 
       } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
-        scope.symbols().stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(((FileInputImpl) fileInput)::addGlobalVariables);
+        scope.symbols().stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(fileInput::addGlobalVariables);
       } else if (scope.rootTree.is(Kind.DICT_COMPREHENSION)) {
         scope.symbols().forEach(((DictCompExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       } else if (scope.rootTree instanceof ComprehensionExpression) {
         scope.symbols().forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       }
     }
-    TypeInference.inferTypes(fileInput);
   }
 
   private class ScopeVisitor extends BaseTreeVisitor {
