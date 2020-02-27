@@ -45,4 +45,19 @@ public class MemberResolutionTest {
     CallExpression call = getLastDescendant(fileInput, p -> p.is(Kind.CALL_EXPR));
     Assertions.assertThat(call.calleeSymbol()).isEqualTo(funcDef.name().symbol());
   }
+
+  @Test
+  public void super_method_resolution() {
+    FileInput fileInput = parse(
+      "class Base:",
+      "  def __reduce__(self, p1, p2): pass",
+      "class A(Base):",
+      "  def foo(self):",
+      "    s = super()",
+      "    s.__reduce__(1, 2)"
+    );
+    CallExpression call = getLastDescendant(fileInput, p -> p.is(Kind.CALL_EXPR));
+    // TODO: call.calleeSymbol().fullyQualifiedName() should be equal to "Base.__reduce__"
+    Assertions.assertThat(call.calleeSymbol().fullyQualifiedName()).isNotEqualTo("object.__reduce__");
+  }
 }

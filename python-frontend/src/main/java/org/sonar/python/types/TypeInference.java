@@ -65,9 +65,15 @@ public class TypeInference extends BaseTreeVisitor {
       public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
         super.visitQualifiedExpression(qualifiedExpression);
         Name name = qualifiedExpression.name();
-        InferredType type = qualifiedExpression.qualifier().type();
-        Optional<Symbol> resolvedMember = type.resolveMember(name.name());
-        resolvedMember.ifPresent(((NameImpl) name)::setSymbol);
+        Expression qualifier = qualifiedExpression.qualifier();
+        // The super() builtin is not specified precisely in typeshed.
+        // It should return a proxy object (temporary object of the superclass) that allows to access methods of the base class
+        // https://docs.python.org/3/library/functions.html#super
+        InferredType type = qualifier.type();
+        if (!type.equals(InferredTypes.runtimeType(TypeShed.typeShedClass("super")))) {
+          Optional<Symbol> resolvedMember = type.resolveMember(name.name());
+          resolvedMember.ifPresent(((NameImpl) name)::setSymbol);
+        }
       }
     });
   }

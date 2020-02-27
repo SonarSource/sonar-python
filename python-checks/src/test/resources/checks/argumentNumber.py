@@ -105,3 +105,12 @@ def methods():
 
     a1 = A1()
     a1.fn(42) # Noncompliant
+
+
+    class B1:
+      def __reduce__(self, p1, p2):
+        pass
+
+    class B2(B1):
+      def foo(self):
+        super().__reduce__(1, 2) # OK, __reduce__ is not 'object.__reduce__' but B1.__reduce__
