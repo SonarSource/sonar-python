@@ -36,9 +36,10 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
-public class CallExpressionImpl extends PyTree implements CallExpression {
+public class CallExpressionImpl extends PyTree implements CallExpression, HasTypeDependencies {
   private final Expression callee;
   private final ArgList argumentList;
   private final Token leftPar;
@@ -105,5 +106,10 @@ public class CallExpressionImpl extends PyTree implements CallExpression {
       }
     }
     return InferredTypes.anyType();
+  }
+
+  @Override
+  public List<Expression> typeDependencies() {
+    return Collections.singletonList(callee);
   }
 }

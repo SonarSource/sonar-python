@@ -163,6 +163,38 @@ public class TypeInferenceTest {
   }
 
   @Test
+  public void propagate_return_type_to_variable() {
+    assertThat(lastExpressionInFunction(
+      "a = 'abc'.capitalize()",
+      "a").type()).isEqualTo(STR);
+
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if i > 0: b = a.capitalize()",
+      "  else:     a = 'abc'",
+      "b").type()).isEqualTo(STR);
+
+    assertThat(lastExpressionInFunction(
+      "for i in range(3):",
+      "  if i > 0: b = a.capitalize().upper()",
+      "  else:     a = 'abc'",
+      "b").type()).isEqualTo(STR);
+
+    assertThat(lastExpressionInFunction(
+      "if cond:  a = 'abc'",
+      "else:     a = x.foo()",
+      "b = a.capitalize()",
+      "b").type()).isEqualTo(anyType());
+
+    assertThat(lastExpressionInFunction(
+      "global a",
+      "for i in range(3):",
+      "  if i > 0: b = a.capitalize()",
+      "  else:     a = 'abc'",
+      "b").type()).isEqualTo(anyType());
+  }
+
+  @Test
   public void multiple_types() {
     assertThat(lastExpressionInFunction(
       "if cond: a = ''",
