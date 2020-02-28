@@ -19,6 +19,7 @@
  */
 package org.sonar.python.tree;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,10 +28,16 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceList;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.HasTypeDependencies;
+import org.sonar.python.types.InferredTypes;
 
-public class SliceExpressionImpl extends PyTree implements SliceExpression {
+import static org.sonar.python.types.InferredTypes.LIST;
+import static org.sonar.python.types.InferredTypes.TUPLE;
+
+public class SliceExpressionImpl extends PyTree implements SliceExpression, HasTypeDependencies {
 
   private final Expression object;
   private final Token leftBracket;
@@ -77,5 +84,21 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression {
   @Override
   public Kind getKind() {
     return Kind.SLICE_EXPR;
+  }
+
+  @Override
+  public InferredType type() {
+    if (object.type().equals(LIST)) {
+      return LIST;
+    }
+    if (object.type().equals(TUPLE)) {
+      return TUPLE;
+    }
+    return InferredTypes.anyType();
+  }
+
+  @Override
+  public List<Expression> typeDependencies() {
+    return Collections.singletonList(object);
   }
 }
