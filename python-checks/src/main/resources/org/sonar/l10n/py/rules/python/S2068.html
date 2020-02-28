@@ -26,26 +26,16 @@ strings, and for variable names that match any of the patterns from the provided
 <h2>Sensitive Code Example</h2>
 <pre>
 username = 'admin'
-password = 'Password123'                                    # Sensitive
-usernamePassword = 'user=admin&amp;password=Password123'        # Sensitive
-usernamePassword1 = 'user=admin&amp;' + 'password=' + password  # Sensitive
+password = 'admin' # Sensitive
+usernamePassword = 'user=admin&amp;password=admin' # Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-from Crypto.Cipher import AES
-import base64
+import os
 
-secret_key = '1234567890123456'
-encoded_user = 'gUhd9TxpnQppnZVAf7cv9pa5sgRo2sFmShrr/NK9dz0='
-encoded_password = 'gUhd9TxpnQppnZVAf7cv9uVnoE28Vq0bR2Cx6Ku1UQA='
-
-def getDecrypted(encodedtext):
-    cipher = AES.new(secret_key, AES.MODE_ECB)
-    return cipher.decrypt(base64.b64decode(encodedtext))
-
-username = getDecrypted(encoded_user)                                                                    # Compliant
-password = getDecrypted(encoded_password)                                                                # Compliant
-usernamePassword = "user=%s&amp;password=%s" % (getDecrypted(encoded_user), getDecrypted(encoded_password))  # Compliant
+username = os.getenv("username") # Compliant
+password = os.getenv("password") # Compliant
+usernamePassword = 'user=%s&amp;password=%s' % (username, password) # Compliant{code}
 </pre>
 <h2>See</h2>
 <ul>
