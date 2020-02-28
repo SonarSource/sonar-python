@@ -24,7 +24,6 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
@@ -44,16 +43,11 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
   static final String SECURITY_RULES_CLASS_NAME = "com.sonar.plugins.security.api.PythonRules";
   static final String SECURITY_RULE_KEYS_METHOD_NAME = "getRuleKeys";
   static final String SECURITY_RULE_REPO_METHOD_NAME = "getRepositoryKey";
-  private final SonarRuntime sonarRuntime;
-
-  public PythonProfile(SonarRuntime sonarRuntime) {
-    this.sonarRuntime = sonarRuntime;
-  }
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(PROFILE_NAME, Python.KEY);
-    BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION, RESOURCE_FOLDER, sonarRuntime);
+    BuiltInQualityProfileJsonLoader.load(profile, CheckList.REPOSITORY_KEY, PROFILE_LOCATION);
     getSecurityRuleKeys(SECURITY_RULES_CLASS_NAME, SECURITY_RULE_KEYS_METHOD_NAME, SECURITY_RULE_REPO_METHOD_NAME)
       .forEach(key -> profile.activateRule(key.repository(), key.rule()));
     profile.done();
