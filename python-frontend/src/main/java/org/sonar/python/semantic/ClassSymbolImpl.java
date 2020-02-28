@@ -34,8 +34,9 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private List<Symbol> superClasses = new ArrayList<>();
-  private boolean hasUnresolvedTypeHierarchy = false;
+  private boolean hasSuperClassWithoutSymbol = false;
   private final Set<Symbol> members = new HashSet<>();
+  private boolean hasAlreadyReadSuperClasses = false;
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
     super(name, fullyQualifiedName);
@@ -53,22 +54,33 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       }
     }
     copiedClassSymbol.addMembers(members.stream().map(m -> ((SymbolImpl) m).copyWithoutUsages()).collect(Collectors.toList()));
-    copiedClassSymbol.setHasUnresolvedTypeHierarchy(hasUnresolvedTypeHierarchy);
+    if (hasSuperClassWithoutSymbol) {
+      copiedClassSymbol.setHasSuperClassWithoutSymbol();
+    }
     return copiedClassSymbol;
   }
 
   @Override
   public List<Symbol> superClasses() {
+    hasAlreadyReadSuperClasses = true;
     return Collections.unmodifiableList(superClasses);
   }
 
   public void addSuperClass(Symbol symbol) {
+    if (hasAlreadyReadSuperClasses) {
+      throw new IllegalStateException("Cannot call addSuperClass, super classes were already read");
+    }
     this.superClasses.add(symbol);
   }
 
   @Override
   public boolean hasUnresolvedTypeHierarchy() {
-    return hasUnresolvedTypeHierarchy;
+    for (ClassSymbol superClass : allSuperClasses()) {
+      if (superClass.superClasses().stream().anyMatch(s -> s.kind() != Kind.CLASS) || ((ClassSymbolImpl) superClass).hasSuperClassWithoutSymbol) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
@@ -76,14 +88,30 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return members;
   }
 
-  public void setHasUnresolvedTypeHierarchy(boolean hasUnresolvedTypeHierarchy) {
-    this.hasUnresolvedTypeHierarchy = hasUnresolvedTypeHierarchy;
-  }
-
   public void addMembers(Collection<Symbol> members) {
     this.members.addAll(members);
     members.stream()
       .filter(m -> m.kind() == Kind.FUNCTION)
       .forEach(m -> ((FunctionSymbolImpl) m).setOwner(this));
+  }
+
+  public void setHasSuperClassWithoutSymbol() {
+    this.hasSuperClassWithoutSymbol = true;
+  }
+
+  private Set<ClassSymbol> allSuperClasses() {
+    Set<ClassSymbol> set = new HashSet<>();
+    exploreSuperClasses(this, set);
+    return set;
+  }
+
+  private static void exploreSuperClasses(ClassSymbol classSymbol, Set<ClassSymbol> set) {
+    if (set.add(classSymbol)) {
+      for (Symbol superClass : classSymbol.superClasses()) {
+        if (superClass instanceof ClassSymbol) {
+          exploreSuperClasses((ClassSymbol) superClass, set);
+        }
+      }
+    }
   }
 }

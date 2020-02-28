@@ -104,25 +104,19 @@ public class SymbolUtils {
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
     ArgList argList = classDef.args();
-    classSymbol.setHasUnresolvedTypeHierarchy(false);
     if (argList == null) {
       return;
     }
     for (Argument argument : argList.arguments()) {
-      if (!argument.is(Kind.REGULAR_ARGUMENT) || !(((RegularArgument) argument).expression() instanceof HasSymbol)) {
-        classSymbol.setHasUnresolvedTypeHierarchy(true);
-        continue;
-      }
-      Expression expression = ((RegularArgument) argument).expression();
-      Symbol argumentSymbol = ((HasSymbol) expression).symbol();
-      if (argumentSymbol == null) {
-        classSymbol.setHasUnresolvedTypeHierarchy(true);
-      } else {
-        if (!Symbol.Kind.CLASS.equals(argumentSymbol.kind())) {
-          classSymbol.setHasUnresolvedTypeHierarchy(true);
+      if (argument.is(Kind.REGULAR_ARGUMENT) && (((RegularArgument) argument).expression() instanceof HasSymbol)) {
+        Expression expression = ((RegularArgument) argument).expression();
+        Symbol argumentSymbol = ((HasSymbol) expression).symbol();
+        if (argumentSymbol != null) {
+          classSymbol.addSuperClass(argumentSymbol);
+          continue;
         }
-        classSymbol.addSuperClass(argumentSymbol);
       }
+      classSymbol.setHasSuperClassWithoutSymbol();
     }
   }
 
@@ -242,7 +236,6 @@ public class SymbolUtils {
 
   private static ClassSymbolImpl classSymbol(String name, String fullyQualifiedName, String... members) {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
-    classSymbol.setHasUnresolvedTypeHierarchy(false);
     classSymbol.addMembers(Arrays.stream(members).map(m -> new SymbolImpl(m, fullyQualifiedName + "." + m)).collect(Collectors.toSet()));
     return classSymbol;
   }

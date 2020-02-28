@@ -106,11 +106,10 @@ public class RuntimeTypeTest {
   @Test
   public void unresolved_type_hierarchy() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
-    x.setHasUnresolvedTypeHierarchy(true);
+    x.setHasSuperClassWithoutSymbol();
     assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
 
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
-    y.setHasUnresolvedTypeHierarchy(false);
     y.addSuperClass(x);
     assertThat(new RuntimeType(y).canHaveMember("foo")).isTrue();
   }
