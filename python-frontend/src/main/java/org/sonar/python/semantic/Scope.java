@@ -131,7 +131,6 @@ class Scope {
         .declaredMembers().stream()
         .map(m -> ((SymbolImpl) m).copyWithoutUsages())
         .collect(Collectors.toList()));
-      classSymbol.setHasUnresolvedTypeHierarchy(classSymbol.superClasses().stream().anyMatch(s -> s.kind() != Symbol.Kind.CLASS));
       return classSymbol;
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());

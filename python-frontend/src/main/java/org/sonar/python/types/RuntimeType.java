@@ -47,11 +47,10 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    LinkedHashSet<ClassSymbol> classSymbols = classesToExplore();
-    if (classSymbols.stream().anyMatch(ClassSymbol::hasUnresolvedTypeHierarchy)) {
+    if (typeClass.hasUnresolvedTypeHierarchy()) {
       return true;
     }
-    for (ClassSymbol classSymbol : classSymbols) {
+    for (ClassSymbol classSymbol : classesToExplore()) {
       for (Symbol member : classSymbol.declaredMembers()) {
         if (member.name().equals(memberName)) {
           return true;
