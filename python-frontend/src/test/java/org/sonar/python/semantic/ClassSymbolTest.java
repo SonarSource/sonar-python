@@ -324,7 +324,6 @@ public class ClassSymbolTest {
     List<Symbol.Kind> kindMembers = classSymbol.declaredMembers().stream().map(Symbol::kind).collect(Collectors.toList());
     assertThat(copiedKindMembers).isEqualTo(kindMembers);
 
-    assertThat(copied.declaredMembers()).hasSize(classSymbol.declaredMembers().size());
     assertThat(copied.usages()).isEmpty();
   }
 
