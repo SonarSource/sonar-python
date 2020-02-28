@@ -53,6 +53,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       }
     }
     copiedClassSymbol.addMembers(members.stream().map(m -> ((SymbolImpl) m).copyWithoutUsages()).collect(Collectors.toList()));
+    copiedClassSymbol.setHasUnresolvedTypeHierarchy(hasUnresolvedTypeHierarchy);
     return copiedClassSymbol;
   }
 

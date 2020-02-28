@@ -20,6 +20,7 @@
 package org.sonar.python.semantic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -285,6 +286,47 @@ public class ClassSymbolTest {
     ClassSymbol classA = ((ClassSymbol) symbol.superClasses().get(0));
     assertThat(classA.declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(tuple(Symbol.Kind.FUNCTION, "meth"));
   }
+
+  @Test
+  public void copy_without_usages() {
+    ClassSymbolImpl classSymbol = ((ClassSymbolImpl) lastClassSymbol(
+      "class A(foo):",
+      "  def meth(): pass"));
+
+    assertEqualsWithoutUsages(classSymbol);
+
+    classSymbol = ((ClassSymbolImpl) lastClassSymbol(
+      "class A:",
+      "  def meth(): pass",
+      "class B(A): ",
+      "  def foo(): pass"));
+
+    assertEqualsWithoutUsages(classSymbol);
+  }
+
+  private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {
+    ClassSymbolImpl copied = classSymbol.copyWithoutUsages();
+    assertThat(copied.hasUnresolvedTypeHierarchy()).isEqualTo(classSymbol.hasUnresolvedTypeHierarchy());
+
+    List<String> copiedfqnSuperClasses = copied.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
+    List<String> fqnSuperClasses = classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
+    assertThat(copiedfqnSuperClasses).isEqualTo(fqnSuperClasses);
+
+    List<Symbol.Kind> copiedKindSuperClasses = copied.superClasses().stream().map(Symbol::kind).collect(Collectors.toList());
+    List<Symbol.Kind> kindSuperClasses = classSymbol.superClasses().stream().map(Symbol::kind).collect(Collectors.toList());
+    assertThat(copiedKindSuperClasses).isEqualTo(kindSuperClasses);
+
+    List<String> copiedFqnMembers = copied.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
+    List<String> fqnMembers = classSymbol.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
+    assertThat(copiedFqnMembers).isEqualTo(fqnMembers);
+
+    List<Symbol.Kind> copiedKindMembers = copied.declaredMembers().stream().map(Symbol::kind).collect(Collectors.toList());
+    List<Symbol.Kind> kindMembers = classSymbol.declaredMembers().stream().map(Symbol::kind).collect(Collectors.toList());
+    assertThat(copiedKindMembers).isEqualTo(kindMembers);
+
+    assertThat(copied.usages()).isEmpty();
+  }
+
 
   private static ClassSymbol lastClassSymbol(String... code) {
     FileInput fileInput = parse(code);
