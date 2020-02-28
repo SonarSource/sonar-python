@@ -41,3 +41,4 @@ def f():
     if 42 == ClassWithEq(): pass
     if 42 != ClassWithEq(): pass
     if 42 != ClassWithNe(): pass
+    if set([1, 2]) == frozenset([1, 2]): pass
