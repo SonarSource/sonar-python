@@ -27,24 +27,33 @@ href="https://blog.mozilla.org/security/2015/04/30/deprecating-non-secure-http">
 application or system. </p>
 <h2>Sensitive Code Example</h2>
 <pre>
-url = "http://exemple.com" # Sensitive
-url = "ftp://anonymous@exemple.com" # Sensitive
-url = "telnet://anonymous@exemple.com" # Sensitive
+url = "http://example.com" # Sensitive
+url = "ftp://anonymous@example.com" # Sensitive
+url = "telnet://anonymous@example.com" # Sensitive
 
 import telnetlib
 cnx = telnetlib.Telnet("towel.blinkenlights.nl") # Sensitive
 
 import ftplib
-cnx = ftplib.FTP("194.244.111.175") # Sensitive
+cnx = ftplib.FTP("ftp.example.com") # Sensitive
+
+import smtplib
+smtp = smtplib.SMTP("smtp.example.com", port=587) # Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-url = "https://exemple.com" # Compliant
-url = "sftp://anonymous@exemple.com" # Compliant
-url = "ssh://anonymous@exemple.com" # Compliant
+url = "https://example.com" # Compliant
+url = "sftp://anonymous@example.com" # Compliant
+url = "ssh://anonymous@example.com" # Compliant
 
 import ftplib
-cnx = ftplib.FTP_TLS("secure.example.com") # Compliant
+cnx = ftplib.FTP_TLS("ftp.example.com") # Compliant
+
+import smtplib
+smtp = smtplib.SMTP("smtp.example.com", port=587) # Compliant
+smtp.starttls(context=context)
+
+smtp_ssl = smtplib.SMTP_SSL("smtp.gmail.com", port=465) # Compliant
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is reported for the following cases because they are not considered sensitive:</p>
