@@ -33,13 +33,11 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.semantic.SymbolUtils;
 
 import static org.sonar.python.checks.Expressions.isFalsy;
 
@@ -105,8 +103,7 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
       .filter(lhs -> {
         if (lhs.is(Kind.SUBSCRIPTION)) {
           SubscriptionExpression sub = (SubscriptionExpression) lhs;
-          Symbol objectSymbol = getObjectSymbol(sub.object());
-          return "http.cookies.SimpleCookie".equals(SymbolUtils.getTypeName(objectSymbol));
+          return getObject(sub.object()).type().canOnlyBe("http.cookies.SimpleCookie");
         }
         return false;
       })
@@ -138,15 +135,11 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
     return expression.is(Kind.STRING_LITERAL) && ((StringLiteral) expression).trimmedQuotesValue().equalsIgnoreCase(value);
   }
 
-  @CheckForNull
-  private static Symbol getObjectSymbol(Expression object) {
+  private static Expression getObject(Expression object) {
     if (object.is(Kind.SUBSCRIPTION)) {
-      return getObjectSymbol(((SubscriptionExpression) object).object());
+      return getObject(((SubscriptionExpression) object).object());
     }
-    if (object instanceof HasSymbol) {
-      return ((HasSymbol) object).symbol();
-    }
-    return null;
+    return object;
   }
 
   abstract String flagName();

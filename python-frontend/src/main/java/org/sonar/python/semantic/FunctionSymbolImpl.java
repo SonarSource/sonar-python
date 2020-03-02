@@ -45,7 +45,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private boolean hasVariadicParameter = false;
   private final boolean isInstanceMethod;
   private final boolean hasDecorators;
-  private Type returnType = null;
   private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
   private Symbol owner;
@@ -77,20 +76,18 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     hasVariadicParameter = functionSymbol.hasVariadicParameter();
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
-    returnType = ((FunctionSymbolImpl) functionSymbol).returnType();
     declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
   }
 
   public FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
-                     boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters, @Nullable Type returnType) {
+                     boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters) {
     super(name, fullyQualifiedName);
     setKind(Kind.FUNCTION);
     this.hasVariadicParameter = hasVariadicParameter;
     this.isInstanceMethod = isInstanceMethod;
     this.hasDecorators = hasDecorators;
     this.parameters.addAll(parameters);
-    this.returnType = returnType;
     this.functionDefinitionLocation = null;
     this.isStub = true;
   }
@@ -157,11 +154,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   @Override
   public LocationInFile definitionLocation() {
     return functionDefinitionLocation;
-  }
-
-  @CheckForNull
-  Type returnType() {
-    return returnType;
   }
 
   public InferredType declaredReturnType() {

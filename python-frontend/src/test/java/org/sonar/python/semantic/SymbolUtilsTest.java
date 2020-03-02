@@ -40,8 +40,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
-import static org.sonar.python.semantic.SymbolUtils.getTypeName;
-import static org.sonar.python.semantic.SymbolUtils.getTypeSymbol;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
@@ -225,25 +223,4 @@ public class SymbolUtilsTest {
     Mockito.when(pythonFile.uri()).thenThrow(InvalidPathException.class);
     assertThat(pathOf(pythonFile)).isNull();
   }
-
-  @Test
-  public void type_name() {
-    assertThat(getTypeName(null)).isNull();
-    assertThat(getTypeSymbol(null)).isNull();
-
-    SymbolImpl symbol = new SymbolImpl("foo", "mod.foo");
-    assertThat(getTypeName(symbol)).isNull();
-    assertThat(getTypeSymbol(symbol)).isNull();
-
-    SymbolImpl typeSymbol = new SymbolImpl("x", "mod.x");
-    symbol.setType(new Type(typeSymbol));
-    assertThat(getTypeSymbol(symbol)).isEqualTo(typeSymbol);
-    assertThat(getTypeName(symbol)).isEqualTo("mod.x");
-
-    ClassSymbolImpl typeSymbol2 = new ClassSymbolImpl("A", "mod.A");
-    symbol.setType(new Type(typeSymbol2));
-    assertThat(getTypeSymbol(symbol)).isEqualTo(typeSymbol2);
-    assertThat(getTypeName(symbol)).isEqualTo("mod.A");
-  }
-
 }
