@@ -1,0 +1,83 @@
+<p>Using <code>return</code>, <code>break</code> or <code>continue</code> in a <code>finally</code> block suppresses the propagation of any unhandled
+exception which was raised in the <code>try</code>, <code>else</code> or <code>except</code> blocks.</p>
+<p>This rule raises an issue when a jump statement (<code>break</code>, <code>continue</code>, <code>return</code>) would force the control flow to
+leave a finally block.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def find_file_which_contains(expected_content, paths):
+    file = None
+    for path in paths:
+        try:
+            # "open" will raise IsADirectoryError if the provided path is a directory but it will be stopped by the  "return" and "continue"
+            file = open(path, 'r')
+            actual_content = file.read()
+        except FileNotFoundError as exception:
+            # This exception will never pass the "finally" block because of "return" and "continue"
+            raise ValueError(f"'paths' should only contain existing files. File ${path} does not exist.")
+        finally:
+            file.close()
+            if actual_content != expected_content:
+                # Note that "continue" is allowed in a "finally" block only since python 3.8
+                continue  # Noncompliant. This will prevent exceptions raised by the "try" block and "except" block from raising.
+            else:
+                return path # Noncompliant. Same as for "continue"
+    return None
+
+# This will return None instead of raising ValueError from the "except" block
+find_file_which_contains("some content", ["file_which_does_not_exist"])
+
+# This will return None instead of raising IsADirectoryError from the "try" block
+find_file_which_contains("some content", ["a_directory"])
+
+import sys
+
+while True:
+    try:
+        sys.exit(1)
+    except (SystemExit) as e:
+        print("Exiting")
+        raise
+    finally:
+        break  # This will prevent SystemExit from raising
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+# Note that using "with open(...) as" would be better. We keep the example as is just for demonstration purpose.
+
+def find_file_which_contains(expected_content, paths):
+    file = None
+    for path in paths:
+        try:
+            file = open(path, 'r')
+            actual_content = file.read()
+            if actual_content != expected_content:
+                continue
+            else:
+                return path
+        except FileNotFoundError as exception:
+            raise ValueError(f"'paths' should only contain existing files. File ${path} does not exist.")
+        finally:
+            if file:
+                file.close()
+    return None
+
+# This raises ValueError
+find_file_which_contains("some content", ["file_which_does_not_exist"])
+
+# This raises IsADirectoryError
+find_file_which_contains("some content", ["a_directory"])
+
+import sys
+
+while True:
+    try:
+        sys.exit(1)
+    except (SystemExit) as e:
+        print("Exiting")
+        raise # SystemExit is re-raised
+</pre>
+<h2>See</h2>
+<ul>
+  <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#except">the <code>try</code> statement</a> </li>
+</ul>
+
