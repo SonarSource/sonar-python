@@ -92,6 +92,7 @@ public final class CheckList {
       FixmeCommentCheck.class,
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,
+      GenericExceptionRaisedCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
       HashingDataCheck.class,
