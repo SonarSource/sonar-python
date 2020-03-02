@@ -117,7 +117,7 @@ raise MultipleBindings() # OK
 # Type inference
 def raise_with_type_inference():
   a = SomeClass()
-  raise a # Noncompliant
+  raise a # FN
 
 def fn_type_inference():
   a = SomeClass()

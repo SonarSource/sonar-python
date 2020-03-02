@@ -425,14 +425,12 @@ public class FullyQualifiedNameTest {
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
       "  def foo(): pass",
-      "a = A()",
-      "a.foo()"
+      "def foo():",
+      "  a = A()",
+      "  a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
     SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a.type()).isNotNull();
-    ClassDef classDef = getFirstChild(tree, t -> t.is(Tree.Kind.CLASSDEF));
-    assertThat(a.type().symbol()).isEqualTo(classDef.name().symbol());
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
   }
 
@@ -445,8 +443,6 @@ public class FullyQualifiedNameTest {
       "a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
@@ -461,8 +457,6 @@ public class FullyQualifiedNameTest {
       "b.foo()"
     );
     QualifiedExpression qualifiedExpression = (QualifiedExpression) getAllDescendant(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR)).get(1);
-    SymbolImpl b = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(b.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
@@ -475,8 +469,6 @@ public class FullyQualifiedNameTest {
       "a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
@@ -488,8 +480,6 @@ public class FullyQualifiedNameTest {
       "a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
@@ -508,18 +498,11 @@ public class FullyQualifiedNameTest {
     assertThat(a).isNotNull();
     assertThat(a.name()).isEqualTo("a");
     assertThat(a.fullyQualifiedName()).isNull();
-    assertThat(a.type()).isNotNull();
-
-    ClassDef classDef = getFirstChild(tree, t -> t.is(Tree.Kind.CLASSDEF));
-    Symbol type = SymbolUtils.getTypeSymbol(a);
-    assertThat(type).isNotNull();
-    assertThat(type.name()).isEqualTo("A");
-    assertThat(type.fullyQualifiedName()).isEqualTo("my_package.my_module.A");
-    assertThat(type).isSameAs(classDef.name().symbol());
 
     assertThat(qualifiedExpression.symbol()).isNotNull();
     assertThat(qualifiedExpression.symbol().name()).isEqualTo("foo");
-    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
+    // a may be modified by other modules
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
   @Test
@@ -535,8 +518,6 @@ public class FullyQualifiedNameTest {
       "a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    SymbolImpl a = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(a.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
@@ -551,8 +532,6 @@ public class FullyQualifiedNameTest {
       "b.method()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    SymbolImpl b = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(b.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
@@ -566,8 +545,6 @@ public class FullyQualifiedNameTest {
       "b.method()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    SymbolImpl b = (SymbolImpl) ((Name) qualifiedExpression.qualifier()).symbol();
-    assertThat(b.type()).isNull();
     assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 

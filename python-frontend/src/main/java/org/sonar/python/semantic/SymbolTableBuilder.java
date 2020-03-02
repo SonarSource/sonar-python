@@ -37,7 +37,6 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -45,7 +44,6 @@ import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
@@ -139,7 +137,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   private void addSymbolsToTree(FileInputImpl fileInput) {
     for (Scope scope : scopesByRootTree.values()) {
-      scope.symbols().forEach(symbol -> ((SymbolImpl) symbol).updateChildrenFQNBasedOnType());
       if (scope.rootTree instanceof FunctionLike) {
         FunctionLike funcDef = (FunctionLike) scope.rootTree;
         for (Symbol symbol : scope.symbols()) {
@@ -493,13 +490,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitAssignmentStatement(AssignmentStatement assignment) {
-      super.visitAssignmentStatement(assignment);
-      List<Expression> lhs = SymbolUtils.assignmentsLhs(assignment);
-      lhs.forEach(expression -> boundNamesFromExpression(expression).forEach(name -> addTypeToSymbol(name, assignment.assignedValue())));
-    }
-
-    @Override
     public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       enterScope(pyLambdaExpressionTree);
       super.visitLambda(pyLambdaExpressionTree);
@@ -581,35 +571,5 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         symbol.addUsage(nameTree, Usage.Kind.OTHER);
       }
     }
-
-    private void addTypeToSymbol(Name nameTree, Expression rhs) {
-      Type type = rhs.is(Kind.CALL_EXPR) ? getReturnType((CallExpression) rhs) : null;
-      SymbolImpl symbol = currentScope().resolve(nameTree.name());
-      if (symbol != null && symbol.usages().stream().filter(Usage::isBindingUsage).count() == 1) {
-        symbol.setType(type);
-      }
-    }
-
-    @CheckForNull
-    private Type getReturnType(CallExpression rhs) {
-      Symbol calleeSymbol = rhs.calleeSymbol();
-      if (calleeSymbol == null) {
-        return null;
-      }
-      if (calleeSymbol.kind() == Symbol.Kind.CLASS) {
-        ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
-        // type of inherited methods is not handled - See SONARPY-561
-        if (classSymbol.superClasses().isEmpty() && !classSymbol.hasUnresolvedTypeHierarchy()) {
-          return new Type(calleeSymbol);
-        }
-      } else if (calleeSymbol.kind() == Symbol.Kind.FUNCTION) {
-        Type returnType = ((FunctionSymbolImpl) calleeSymbol).returnType();
-        if (returnType != null) {
-          return new Type(returnType.symbol());
-        }
-      }
-      return null;
-    }
-
   }
 }

@@ -34,11 +34,11 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.Expressions;
-import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5332")
@@ -77,13 +77,13 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       // avoid potential FPs
       return;
     }
-    if (assignmentStatement.lhsExpressions().get(0).expressions().get(0) instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) assignmentStatement.lhsExpressions().get(0).expressions().get(0)).symbol();
+    Expression lhs = assignmentStatement.lhsExpressions().get(0).expressions().get(0);
+    if (lhs instanceof HasSymbol) {
+      Symbol symbol = ((HasSymbol) lhs).symbol();
       if (symbol == null) {
         return;
       }
-      String symbolTypeName = SymbolUtils.getTypeName(symbol);
-      if (symbolTypeName != null && symbolTypeName.equals("smtplib.SMTP")) {
+      if (lhs.type().canOnlyBe("smtplib.SMTP")) {
         boolean usesEncryption = symbol.usages().stream().anyMatch(u -> {
           Tree tree = TreeUtils.firstAncestorOfKind(u.tree(), Tree.Kind.CALL_EXPR);
           if (tree != null) {

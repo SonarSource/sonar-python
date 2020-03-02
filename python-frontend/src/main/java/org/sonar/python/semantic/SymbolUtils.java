@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,9 +56,14 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShedPythonFile;
 
 public class SymbolUtils {
+
+  private static final String SEND_MESSAGE = "send_message";
+  private static final String SET_COOKIE = "set_cookie";
+  private static final String SET_SIGNED_COOKIE = "set_signed_cookie";
 
   private SymbolUtils() {
   }
@@ -92,25 +96,6 @@ public class SymbolUtils {
       }
     }
     return globalSymbols;
-  }
-
-  @CheckForNull
-  public static String getTypeName(@Nullable Symbol objectSymbol) {
-    return Optional.ofNullable(getTypeSymbol(objectSymbol))
-      .map(Symbol::fullyQualifiedName)
-      .orElse(null);
-  }
-
-  @CheckForNull
-  public static Symbol getTypeSymbol(@Nullable Symbol objectSymbol) {
-    if (objectSymbol == null) {
-      return null;
-    }
-    Type type = ((SymbolImpl) objectSymbol).type();
-    if (type != null) {
-      return type.symbol();
-    }
-    return null;
   }
 
   static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol) {
@@ -205,51 +190,60 @@ public class SymbolUtils {
 
   public static Map<String, Set<Symbol>> externalModulesSymbols() {
     Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
+
     globalSymbols.put("flask_mail", new HashSet<>(Arrays.asList(
-      classSymbol("Mail", "flask_mail.Mail"),
-      classSymbol("Connection", "flask_mail.Connection")
+      classSymbol("Mail", "flask_mail.Mail", "send", SEND_MESSAGE),
+      classSymbol("Connection", "flask_mail.Connection", "send", SEND_MESSAGE)
       )));
     globalSymbols.put("smtplib", new HashSet<>(Arrays.asList(
-      classSymbol("SMTP", "smtplib.SMTP"),
-      classSymbol("SMTP_SSL", "smtplib.SMTP_SSL")
+      classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
+      classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
     )));
-    globalSymbols.put("zipfile", new HashSet<>(Collections.singleton(classSymbol("ZipFile", "zipfile.ZipFile"))));
+    globalSymbols.put("zipfile", Collections.singleton(classSymbol("ZipFile", "zipfile.ZipFile", "extractall")));
     globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(classSymbol("SimpleCookie", "http.cookies.SimpleCookie"))));
 
     globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
-      classSymbol("HttpResponse", "django.http.HttpResponse"),
-      classSymbol("HttpResponseRedirect", "django.http.HttpResponseRedirect"),
-      classSymbol("HttpResponsePermanentRedirect", "django.http.HttpResponsePermanentRedirect"),
-      classSymbol("HttpResponseNotModified", "django.http.HttpResponseNotModified"),
-      classSymbol("HttpResponseNotFound", "django.http.HttpResponseNotFound"),
-      classSymbol("HttpResponseForbidden", "django.http.HttpResponseForbidden"),
-      classSymbol("HttpResponseNotAllowed", "django.http.HttpResponseNotAllowed"),
-      classSymbol("HttpResponseGone", "django.http.HttpResponseGone"),
-      classSymbol("HttpResponseServerError", "django.http.HttpResponseServerError"),
-      classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest")
+      classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),
+      classSymbol("HttpResponseRedirect", "django.http.HttpResponseRedirect", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponsePermanentRedirect", "django.http.HttpResponsePermanentRedirect", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseNotModified", "django.http.HttpResponseNotModified", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseNotFound", "django.http.HttpResponseNotFound", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseForbidden", "django.http.HttpResponseForbidden", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseNotAllowed", "django.http.HttpResponseNotAllowed", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseGone", "django.http.HttpResponseGone", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseServerError", "django.http.HttpResponseServerError", SET_COOKIE, SET_SIGNED_COOKIE),
+      classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest", SET_COOKIE, SET_SIGNED_COOKIE)
     )));
 
     globalSymbols.put("django.http.response", new HashSet<>(Collections.singleton(
       classSymbol("HttpResponse", "django.http.response.HttpResponse")
     )));
 
-    ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response");
+    ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response", SET_COOKIE);
+
+    FunctionSymbolImpl makeResponse = new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList());
+    makeResponse.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
+
+    FunctionSymbolImpl redirect = new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList());
+    redirect.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
+
     globalSymbols.put("flask", new HashSet<>(Arrays.asList(
       flaskResponse,
-      new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList(), new Type(flaskResponse)),
-      new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList(), new Type(flaskResponse))
+      makeResponse,
+      redirect
     )));
 
     globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
-      classSymbol("Headers", "werkzeug.datastructures.Headers")
+      classSymbol("Headers", "werkzeug.datastructures.Headers", "set", "setdefault", "__setitem__")
     )));
 
     return globalSymbols;
   }
 
-  private static ClassSymbolImpl classSymbol(String name, String fullyQualifiedName) {
+  private static ClassSymbolImpl classSymbol(String name, String fullyQualifiedName, String... members) {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
     classSymbol.setHasUnresolvedTypeHierarchy(false);
+    classSymbol.addMembers(Arrays.stream(members).map(m -> new SymbolImpl(m, fullyQualifiedName + "." + m)).collect(Collectors.toSet()));
     return classSymbol;
   }
 
