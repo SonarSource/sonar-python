@@ -103,4 +103,11 @@ public class UnionTypeTest {
   public void test_toString() {
     assertThat(or(a, b).toString()).isIn("UnionType[RuntimeType(a), RuntimeType(b)]", "UnionType[RuntimeType(b), RuntimeType(a)]");
   }
+
+  @Test
+  public void test_canOnlyBe() {
+    assertThat(or(a, b).canOnlyBe("a")).isFalse();
+    assertThat(or(a, a).canOnlyBe("a")).isTrue();
+    assertThat(or(a, a).canOnlyBe("b")).isFalse();
+  }
 }
