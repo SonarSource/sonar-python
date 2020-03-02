@@ -136,4 +136,10 @@ public class RuntimeTypeTest {
   public void test_toString() {
     assertThat(new RuntimeType(a).toString()).isEqualTo("RuntimeType(a)");
   }
+
+  @Test
+  public void test_canOnlyBe() {
+    assertThat(new RuntimeType(a).canOnlyBe("a")).isTrue();
+    assertThat(new RuntimeType(b).canOnlyBe("a")).isFalse();
+  }
 }

@@ -74,6 +74,11 @@ class RuntimeType implements InferredType {
     return Optional.empty();
   }
 
+  @Override
+  public boolean canOnlyBe(String typeName) {
+    return typeName.equals(typeClass.fullyQualifiedName());
+  }
+
   private LinkedHashSet<ClassSymbol> classesToExplore() {
     LinkedHashSet<ClassSymbol> set = new LinkedHashSet<>();
     addClassesToExplore(typeClass, set);

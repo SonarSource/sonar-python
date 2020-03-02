@@ -42,4 +42,9 @@ public class AnyTypeTest {
   public void resolveMember() {
     assertThat(ANY.resolveMember("xxx")).isEmpty();
   }
+
+  @Test
+  public void test_canOnlyBe() {
+    assertThat(ANY.canOnlyBe("a")).isFalse();
+  }
 }

@@ -88,6 +88,11 @@ class UnionType implements InferredType {
   }
 
   @Override
+  public boolean canOnlyBe(String typeName) {
+    return false;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
