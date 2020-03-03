@@ -19,7 +19,6 @@
  */
 package org.sonar.python.types;
 
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -50,27 +49,12 @@ class RuntimeType implements InferredType {
     if (typeClass.hasUnresolvedTypeHierarchy()) {
       return true;
     }
-    for (ClassSymbol classSymbol : classesToExplore()) {
-      for (Symbol member : classSymbol.declaredMembers()) {
-        if (member.name().equals(memberName)) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return typeClass.resolveMember(memberName).isPresent();
   }
 
   @Override
   public Optional<Symbol> resolveMember(String memberName) {
-    LinkedHashSet<ClassSymbol> classSymbols = classesToExplore();
-    for (ClassSymbol classSymbol : classSymbols) {
-      for (Symbol member : classSymbol.declaredMembers()) {
-        if (member.name().equals(memberName)) {
-          return Optional.of(member);
-        }
-      }
-    }
-    return Optional.empty();
+    return typeClass.resolveMember(memberName);
   }
 
   @Override
@@ -80,24 +64,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canBeOrExtend(String typeName) {
-    return classesToExplore().stream().anyMatch(
-      classSymbol -> typeName.equals(classSymbol.fullyQualifiedName()) || classSymbol.hasUnresolvedTypeHierarchy());
-  }
-
-  private LinkedHashSet<ClassSymbol> classesToExplore() {
-    LinkedHashSet<ClassSymbol> set = new LinkedHashSet<>();
-    addClassesToExplore(typeClass, set);
-    return set;
-  }
-
-  private static void addClassesToExplore(ClassSymbol typeClass, LinkedHashSet<ClassSymbol> set) {
-    if (set.add(typeClass)) {
-      for (Symbol superClass : typeClass.superClasses()) {
-        if (superClass instanceof ClassSymbol) {
-          addClassesToExplore((ClassSymbol) superClass, set);
-        }
-      }
-    }
+    return typeClass.isOrExtends(typeName) || typeClass.hasUnresolvedTypeHierarchy();
   }
 
   @Override
