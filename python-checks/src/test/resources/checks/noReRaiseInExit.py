@@ -1,48 +1,12 @@
-class Context:
+class BareRaiseInExit:
     def __exit__(self, exc_type, exc_value, traceback):
         raise # Noncompliant {{Remove this "raise" statement and return "False" instead.}}
        #^^^^^
+
+class ReRaisingExceptionValue:
+    def __exit__(self, exc_type, exc_value, traceback):
         raise exc_value # Noncompliant
        #^^^^^^^^^^^^^^^
-        raise exc_type
-
-class DoNotMatchOnExit:
-    def foo(self):
-        raise
-
-def not_called_exit():
-    raise
-
-class TupleExit:
-    def __exit__((self, exc_type, exc_value, traceback)):
-        raise exc_value
-
-class AnotherContext:
-    def __exit__(self, exc_type, *, exc_value, traceback):
-        raise exc_value
-
-class PackedContext:
-    def __exit__(self, *args):
-        raise args[2] # Noncompliant
-        raise args[3] # Noncompliant
-        raise self[2]
-        raise foo()[2]
-
-class PackedContextWithoutName:
-    def __exit__(self, *):
-        raise # Noncompliant
-
-class PackedLikeParameterWithoutStarToken:
-    def __exit__(self, args):
-        pass
-
-class NoExitParamsContext:
-    def __exit__(self):
-        pass
-
-def __exit__():
-    pass
-
 
 class MyContextManager:
     def __enter__(self, stop_exceptions):
@@ -54,3 +18,68 @@ class MyContextManager:
             print("exception")
             raise  # No issue when raising another exception. The __exit__ method can fail and raise an exception
         raise MemoryError("No more memory")  # This is ok too.
+
+# Edge cases
+
+class RaisingOtherParamThanException:
+    def __exit__(self, exc_type, exc_value, traceback):
+        raise exc_type
+
+class ClassWithMethodNotCalledExit:
+    def foo(self):
+        raise
+
+def not_called_exit():
+    raise
+
+class ExitWithTupleParameters:
+    def __exit__((self, exc_type, exc_value, traceback)):
+        raise exc_value
+
+# Invalid __exit__ signatures
+class ExitWithMoreParameters:
+    def __exit__(self, exc_type, exc_value, traceback, dummy):
+        raise exc_value
+
+class ExitWithMoreParameters:
+    def __exit__(self, exc_type, exc_value, traceback, dummy):
+        raise # Noncompliant
+
+class ExitWithNamedParameters:
+    def __exit__(self, exc_type, *, exc_value, traceback):
+        raise exc_value
+
+class ExitWithNamedParametersInvalid:
+    def __exit__(self, exc_type, *, exc_value):
+        raise exc_value
+
+class ExitWithPackedParameters:
+    def __exit__(self, *args):
+        raise args[2] # Noncompliant
+
+class ExitWithPackedParameters2:
+    def __exit__(self, *args):
+        raise args[3] # Noncompliant
+
+class ExitWithPackedParameters3:
+    def __exit__(self, *args):
+        raise self[2]
+
+class ExitWithPackedParameters4:
+    def __exit__(self, *args):
+        raise foo()[2]
+
+class PackedContextWithoutName:
+    def __exit__(self, *):
+        raise # Noncompliant
+
+class PackedLikeParameterWithoutStarToken:
+    def __exit__(self, args):
+        pass
+
+class NoExitParams:
+    def __exit__(self):
+        pass
+
+def __exit__():
+    pass

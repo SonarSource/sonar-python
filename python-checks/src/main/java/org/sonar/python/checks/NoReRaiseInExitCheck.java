@@ -71,6 +71,40 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private Symbol extractPackedParameter(FunctionDef functionDef) {
+    if (functionDef.parameters().nonTuple().size() != 2) {
+      return null;
+    }
+
+    Parameter parameter = functionDef.parameters().nonTuple().get(1);
+    if (parameter.starToken() == null) {
+      return null;
+    }
+
+    Name name = parameter.name();
+    if (name != null) {
+      return name.symbol();
+    }
+
+    return null;
+  }
+
+  private Symbol extractCaughtExceptionParameter(FunctionDef functionDef) {
+    if (functionDef.parameters().nonTuple().size() != 4) {
+      // A valid signature has 4 parameters here: self, exc_type, exc_value, trace_back.
+      // Bail out early if the __exit__ method is declared differently.
+      return null;
+    }
+
+    Parameter parameter = functionDef.parameters().nonTuple().get(2);
+    Name name = parameter.name();
+    if (name != null) {
+      return name.symbol();
+    }
+
+    return null;
+  }
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
@@ -79,32 +113,8 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
         return;
       }
 
-      Symbol caughtException = null;
-      Symbol packedParameter = null;
-      if (functionDef.parameters().nonTuple().size() == 2) {
-        AnyParameter possiblyPackedParam = functionDef.parameters().nonTuple().get(1);
-        if (possiblyPackedParam.is(Tree.Kind.PARAMETER)) {
-          Parameter parameter = (Parameter) possiblyPackedParam;
-          if (parameter.starToken() == null) {
-            return;
-          }
-
-          Name name = parameter.name();
-          if (name != null) {
-            packedParameter = parameter.name().symbol();
-          }
-        }
-      } else if (functionDef.parameters().nonTuple().size() >= 3) {
-        AnyParameter exceptionParam = functionDef.parameters().nonTuple().get(2);
-        if (exceptionParam.is(Tree.Kind.PARAMETER)) {
-          Name name = ((Parameter) exceptionParam).name();
-          if (name != null) {
-            caughtException = ((Parameter) exceptionParam).name().symbol();
-          }
-        }
-      } else {
-        return;
-      }
+      Symbol caughtException = this.extractCaughtExceptionParameter(functionDef);
+      Symbol packedParameter = this.extractPackedParameter(functionDef);
 
       RaiseVisitor visitor = new RaiseVisitor(caughtException, packedParameter);
       functionDef.accept(visitor);
