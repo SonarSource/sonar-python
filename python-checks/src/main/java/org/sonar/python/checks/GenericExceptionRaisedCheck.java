@@ -31,14 +31,10 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.TypeShed;
 
 @Rule(key = "S112")
 public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
 
-  private static final InferredType EXCEPTION = InferredTypes.runtimeType(TypeShed.typeShedClass("Exception"));
-  private static final InferredType BASE_EXCEPTION = InferredTypes.runtimeType(TypeShed.typeShedClass("BaseException"));
   private static final Set<String> GENERIC_EXCEPTION_NAMES = new HashSet<>(Arrays.asList("Exception", "BaseException"));
 
   @Override
@@ -51,8 +47,7 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
       }
       Expression expression = expressions.get(0);
       InferredType type = expression.type();
-      // TODO use canOnlyBe once it's available (instead of comparing instances of InferredType with equals)
-      if (type.equals(EXCEPTION) || type.equals(BASE_EXCEPTION) || isGenericExceptionClass(expression)) {
+      if (GENERIC_EXCEPTION_NAMES.stream().anyMatch(type::canOnlyBe) || isGenericExceptionClass(expression)) {
         ctx.addIssue(expression, "Replace this generic exception class with a more specific one.");
       }
     });
