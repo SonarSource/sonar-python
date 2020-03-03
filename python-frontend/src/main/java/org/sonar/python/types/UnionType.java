@@ -60,17 +60,7 @@ class UnionType implements InferredType {
 
   @Override
   public boolean isIdentityComparableWith(InferredType other) {
-    // TODO Use canBeOrExtend
-    if (other.equals(anyType())) {
-      return true;
-    }
-    if (other instanceof UnionType) {
-      Set<InferredType> allTypes = new HashSet<>(types);
-      Set<InferredType> otherTypes = ((UnionType) other).types;
-      allTypes.addAll(otherTypes);
-      return allTypes.size() != this.types.size() + otherTypes.size();
-    }
-    return types.contains(other);
+    return types.stream().anyMatch(t -> t.isIdentityComparableWith(other));
   }
 
   @Override
