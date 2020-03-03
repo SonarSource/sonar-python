@@ -19,7 +19,9 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.Collections;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -57,6 +59,8 @@ public class ClassSymbolImplTest {
     y.addSuperClass(z);
     z.addSuperClass(x);
     assertThat(x.hasUnresolvedTypeHierarchy()).isFalse();
+    assertThat(x.isOrExtends("y")).isTrue();
+    assertThat(x.isOrExtends("a")).isFalse();
   }
 
   @Test
@@ -77,5 +81,56 @@ public class ClassSymbolImplTest {
     a.addSuperClass(b);
     assertThat(a.hasUnresolvedTypeHierarchy()).isFalse();
     assertThatThrownBy(() -> a.addSuperClass(c)).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void resolveMember() {
+    assertThat(new ClassSymbolImpl("a", null).resolveMember("foo")).isEmpty();
+
+    ClassSymbolImpl a = new ClassSymbolImpl("a", null);
+    Symbol fooA = new SymbolImpl("foo", "a.foo");
+    a.addMembers(Collections.singleton(fooA));
+    assertThat(a.resolveMember("foo")).contains(fooA);
+  }
+
+  @Test
+  public void resolve_inherited_member() {
+    ClassSymbolImpl a = new ClassSymbolImpl("a", null);
+    ClassSymbolImpl b = new ClassSymbolImpl("b", null);
+    Symbol fooB = new SymbolImpl("foo", "b.foo");
+    b.addMembers(Collections.singleton(fooB));
+    a.addSuperClass(b);
+    assertThat(a.resolveMember("foo")).contains(fooB);
+  }
+
+  @Test
+  public void resolve_overridden_member() {
+    ClassSymbolImpl a = new ClassSymbolImpl("a", null);
+    Symbol fooA = new SymbolImpl("foo", "a.foo");
+    a.addMembers(Collections.singleton(fooA));
+    ClassSymbolImpl b = new ClassSymbolImpl("b", null);
+    Symbol fooB = new SymbolImpl("foo", "b.foo");
+    b.addMembers(Collections.singleton(fooB));
+    a.addSuperClass(b);
+    assertThat(a.resolveMember("foo")).contains(fooA);
+  }
+
+  @Test
+  public void should_throw_when_adding_member_after_call_to_resolveMember() {
+    ClassSymbolImpl a = new ClassSymbolImpl("a", null);
+    a.addMembers(Collections.singleton(new SymbolImpl("m1", null)));
+    assertThat(a.resolveMember("m1")).isNotEmpty();
+    assertThatThrownBy(() -> a.addMembers(Collections.singleton(new SymbolImpl("m2", null)))).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void isOrExtends() {
+    ClassSymbolImpl a = new ClassSymbolImpl("a", "mod1.a");
+    ClassSymbolImpl b = new ClassSymbolImpl("b", "mod2.b");
+    a.addSuperClass(b);
+    assertThat(a.isOrExtends("a")).isFalse();
+    assertThat(a.isOrExtends("mod1.a")).isTrue();
+    assertThat(a.isOrExtends("mod2.b")).isTrue();
+    assertThat(a.isOrExtends("mod2.x")).isFalse();
   }
 }

@@ -154,7 +154,7 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(x2).canBeOrExtend("x1")).isTrue();
 
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
-    y.setHasUnresolvedTypeHierarchy(true);
+    y.addSuperClass(new SymbolImpl("unknown", null));
     assertThat(new RuntimeType(y).canBeOrExtend("z")).isTrue();
   }
 }

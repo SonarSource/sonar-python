@@ -19,7 +19,9 @@
  */
 package org.sonar.plugins.python.api.symbols;
 
+import com.google.common.annotations.Beta;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface ClassSymbol extends Symbol {
@@ -28,4 +30,10 @@ public interface ClassSymbol extends Symbol {
   boolean hasUnresolvedTypeHierarchy();
 
   Set<Symbol> declaredMembers();
+
+  @Beta
+  Optional<Symbol> resolveMember(String memberName);
+
+  @Beta
+  boolean isOrExtends(String fullyQualifiedClassName);
 }

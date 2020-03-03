@@ -24,7 +24,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -33,10 +36,13 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
-  private List<Symbol> superClasses = new ArrayList<>();
+  private final List<Symbol> superClasses = new ArrayList<>();
+  private Set<ClassSymbolImpl> allSuperClasses = null;
   private boolean hasSuperClassWithoutSymbol = false;
   private final Set<Symbol> members = new HashSet<>();
+  private Map<String, Symbol> membersByName = null;
   private boolean hasAlreadyReadSuperClasses = false;
+  private boolean hasAlreadyReadMembers = false;
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
     super(name, fullyQualifiedName);
@@ -75,8 +81,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean hasUnresolvedTypeHierarchy() {
-    for (ClassSymbol superClass : allSuperClasses()) {
-      if (superClass.superClasses().stream().anyMatch(s -> s.kind() != Kind.CLASS) || ((ClassSymbolImpl) superClass).hasSuperClassWithoutSymbol) {
+    for (ClassSymbolImpl superClass : allSuperClasses()) {
+      if (superClass.superClasses().stream().anyMatch(s -> s.kind() != Kind.CLASS) || superClass.hasSuperClassWithoutSymbol) {
         return true;
       }
     }
@@ -85,10 +91,37 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public Set<Symbol> declaredMembers() {
+    hasAlreadyReadMembers = true;
     return members;
   }
 
+  @Override
+  public Optional<Symbol> resolveMember(String memberName) {
+    for (ClassSymbolImpl classSymbol : allSuperClasses()) {
+      Symbol matchingMember = classSymbol.membersByName().get(memberName);
+      if (matchingMember != null) {
+        return Optional.of(matchingMember);
+      }
+    }
+    return Optional.empty();
+  }
+
+  @Override
+  public boolean isOrExtends(String fullyQualifiedClassName) {
+    return allSuperClasses().stream().anyMatch(c -> fullyQualifiedClassName.equals(c.fullyQualifiedName()));
+  }
+
+  private Map<String, Symbol> membersByName() {
+    if (membersByName == null) {
+      membersByName = declaredMembers().stream().collect(Collectors.toMap(Symbol::name, m -> m, (s1, s2) -> s1));
+    }
+    return membersByName;
+  }
+
   public void addMembers(Collection<Symbol> members) {
+    if (hasAlreadyReadMembers) {
+      throw new IllegalStateException("Cannot call addMembers, members were already read");
+    }
     this.members.addAll(members);
     members.stream()
       .filter(m -> m.kind() == Kind.FUNCTION)
@@ -99,17 +132,19 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.hasSuperClassWithoutSymbol = true;
   }
 
-  private Set<ClassSymbol> allSuperClasses() {
-    Set<ClassSymbol> set = new HashSet<>();
-    exploreSuperClasses(this, set);
-    return set;
+  private Set<ClassSymbolImpl> allSuperClasses() {
+    if (allSuperClasses == null) {
+      allSuperClasses = new LinkedHashSet<>();
+      exploreSuperClasses(this, allSuperClasses);
+    }
+    return allSuperClasses;
   }
 
-  private static void exploreSuperClasses(ClassSymbol classSymbol, Set<ClassSymbol> set) {
+  private static void exploreSuperClasses(ClassSymbolImpl classSymbol, Set<ClassSymbolImpl> set) {
     if (set.add(classSymbol)) {
       for (Symbol superClass : classSymbol.superClasses()) {
-        if (superClass instanceof ClassSymbol) {
-          exploreSuperClasses((ClassSymbol) superClass, set);
+        if (superClass instanceof ClassSymbolImpl) {
+          exploreSuperClasses((ClassSymbolImpl) superClass, set);
         }
       }
     }
