@@ -28,7 +28,6 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S2159")
 public class SillyEqualityCheck extends PythonSubscriptionCheck {
@@ -77,28 +76,28 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
   }
 
   private static String builtinTypeCategory(InferredType inferredType) {
-    if (inferredType.equals(InferredTypes.STR)) {
+    if (inferredType.canOnlyBe("str")) {
       return "str";
     }
-    if (inferredType.equals(InferredTypes.INT)
-      || inferredType.equals(InferredTypes.FLOAT)
-      || inferredType.equals(InferredTypes.COMPLEX)
-      || inferredType.equals(InferredTypes.BOOL)) {
+    if (inferredType.canOnlyBe("int")
+      || inferredType.canOnlyBe("float")
+      || inferredType.canOnlyBe("complex")
+      || inferredType.canOnlyBe("bool")) {
       return "number";
     }
-    if (inferredType.equals(InferredTypes.LIST)) {
+    if (inferredType.canOnlyBe("list")) {
       return "list";
     }
-    if (inferredType.equals(InferredTypes.SET)) {
+    if (inferredType.canOnlyBe("set")) {
       return "set";
     }
-    if (inferredType.equals(InferredTypes.DICT)) {
+    if (inferredType.canOnlyBe("dict")) {
       return "dict";
     }
-    if (inferredType.equals(InferredTypes.TUPLE)) {
+    if (inferredType.canOnlyBe("tuple")) {
       return "tuple";
     }
-    if (inferredType.equals(InferredTypes.NONE)) {
+    if (inferredType.canOnlyBe("NoneType")) {
       return "NoneType";
     }
     return null;
