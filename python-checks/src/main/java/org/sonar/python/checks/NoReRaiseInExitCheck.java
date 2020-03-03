@@ -22,7 +22,17 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.*;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ExceptClause;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.RaiseStatement;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +42,6 @@ import java.util.Objects;
 public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
 
   private static class RaiseVisitor extends BaseTreeVisitor {
-
     private Symbol caughtException;
     private Symbol packedParameter;
 
@@ -71,12 +80,12 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private Symbol extractPackedParameter(FunctionDef functionDef) {
-    if (functionDef.parameters().nonTuple().size() != 2) {
+  private static Symbol extractPackedParameter(ParameterList parameterList) {
+    if (parameterList.nonTuple().size() != 2) {
       return null;
     }
 
-    Parameter parameter = functionDef.parameters().nonTuple().get(1);
+    Parameter parameter = parameterList.nonTuple().get(1);
     if (parameter.starToken() == null) {
       return null;
     }
@@ -89,14 +98,14 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     return null;
   }
 
-  private Symbol extractCaughtExceptionParameter(FunctionDef functionDef) {
-    if (functionDef.parameters().nonTuple().size() != 4) {
+  private static Symbol extractCaughtExceptionParameter(ParameterList parameterList) {
+    if (parameterList.nonTuple().size() != 4) {
       // A valid signature has 4 parameters here: self, exc_type, exc_value, trace_back.
       // Bail out early if the __exit__ method is declared differently.
       return null;
     }
 
-    Parameter parameter = functionDef.parameters().nonTuple().get(2);
+    Parameter parameter = parameterList.nonTuple().get(2);
     Name name = parameter.name();
     if (name != null) {
       return name.symbol();
@@ -109,12 +118,13 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      if (!functionDef.name().name().equals("__exit__") || functionDef.parameters() == null) {
+      ParameterList parameterList = functionDef.parameters();
+      if (!functionDef.name().name().equals("__exit__") || parameterList == null) {
         return;
       }
 
-      Symbol caughtException = this.extractCaughtExceptionParameter(functionDef);
-      Symbol packedParameter = this.extractPackedParameter(functionDef);
+      Symbol caughtException = extractCaughtExceptionParameter(parameterList);
+      Symbol packedParameter = extractPackedParameter(parameterList);
 
       RaiseVisitor visitor = new RaiseVisitor(caughtException, packedParameter);
       functionDef.accept(visitor);
