@@ -103,6 +103,7 @@ public final class CheckList {
       InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,
       InvariantReturnCheck.class,
+      JumpInFinallyCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
       LoggersConfigurationCheck.class,
