@@ -23,11 +23,13 @@ def not_an_exception():
 def string():
     raise "Hello"
 
-def no_instantiation(cond):
-    if cond:
+def no_instantiation(p):
+    if p == 0:
         raise BaseException # Noncompliant
-    else:
+    elif p == 1:
         raise MyException
+    else:
+        raise UnknownSomething
 
 def variable(cond):
     if cond:
