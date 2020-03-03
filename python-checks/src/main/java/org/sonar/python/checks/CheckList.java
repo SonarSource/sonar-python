@@ -119,6 +119,7 @@ public final class CheckList {
       NestedControlFlowDepthCheck.class,
       NewStyleClassCheck.class,
       NoPersonReferenceInTodoCheck.class,
+      NoReRaiseInExitCheck.class,
       OneStatementPerLineCheck.class,
       OsExecCheck.class,
       OverwrittenCollectionEntryCheck.class,

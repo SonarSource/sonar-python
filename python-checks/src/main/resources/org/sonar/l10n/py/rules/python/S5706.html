@@ -1,0 +1,52 @@
+<p>The special method <a
+href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__"><code>__exit__</code></a> should only raise an
+exception when it fails. I should never raise the provided exception, it is the caller's responsibility.</p>
+<p>Raising this exception will make the stack trace difficult to understand.</p>
+<p>The <code>__exit__</code> method can filter passed-in exceptions by simply returning True or False.</p>
+<p>This rule raises an issue when:</p>
+<ul>
+  <li> an <code>__exit__</code> method has a bare <code>raise</code> outside of an <code>except</code> block. </li>
+  <li> an <code>__exit__</code> method raises the exception provided as parameter. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyContextManager:
+    def __enter__(self):
+        return self
+    def __exit__(self, *args):
+        raise  # Noncompliant
+        raise args[2]  # Noncompliant
+
+class MyContextManager:
+    def __enter__(self):
+        return self
+    def __exit__(self, exc_type, exc_value, traceback):
+        raise exc_value # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyContextManager:
+    def __enter__(self):
+        return self
+    def __exit__(self, exc_type, exc_value, traceback):
+        # by default the function will return None, which is always False, and the exc_value will naturally raise.
+        pass
+
+class MyContextManager:
+    def __enter__(self, stop_exceptions):
+        return self
+    def __exit__(self, *args):
+        try:
+            print("42")
+        except:
+            print("exception")
+            raise  # No issue when raising another exception. The __exit__ method can fail and raise an exception
+        raise MemoryError("No more memory")  # This is ok too.
+</pre>
+<h2>See</h2>
+<ul>
+  <li> Python documentation <del></del> <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__">The
+  <code>__exit__</code> special method</a> </li>
+  <li> PEP 343 <del></del> <a href="https://www.python.org/dev/peps/pep-0343/">The "with" Statement</a> </li>
+</ul>
+
