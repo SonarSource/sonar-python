@@ -51,14 +51,7 @@ public class BareRaiseInFinallyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isWithinExitFunction(RaiseStatement finallyClause) {
-    Tree functionParent = TreeUtils.firstAncestorOfKind(finallyClause, Tree.Kind.FUNCDEF);
-    while (functionParent != null) {
-      FunctionDef functionDef = (FunctionDef) functionParent;
-      if (functionDef.name().name().equals("__exit__")) {
-        return true;
-      }
-      functionParent = TreeUtils.firstAncestorOfKind(functionDef, Tree.Kind.FUNCDEF);
-    }
-    return false;
+    return TreeUtils.firstAncestor(finallyClause, t -> t.is(Tree.Kind.FUNCDEF)
+      && ((FunctionDef) t).name().name().equals("__exit__")) != null;
   }
 }
