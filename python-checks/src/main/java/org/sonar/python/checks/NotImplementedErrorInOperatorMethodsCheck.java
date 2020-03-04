@@ -26,9 +26,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return \"NotImplemented\" instead of raising \"NotImplementedError\"";
+  private static final String NOT_IMPLEMENTED_ERROR = "NotImplementedError";
 
   private static final List<String> OPERATOR_METHODS = Arrays.asList(
     "__lt__",
@@ -99,9 +100,11 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
       }
 
       Expression raisedException = pyRaiseStatementTree.expressions().get(0);
-      if (raisedException.is(Tree.Kind.CALL_EXPR)) {
-        Symbol callee = ((CallExpression) raisedException).calleeSymbol();
-        if (callee != null && callee.name().equals("NotImplementedError")) {
+      if (raisedException.type().canOnlyBe(NOT_IMPLEMENTED_ERROR)) {
+        nonCompliantRaises.add(pyRaiseStatementTree);
+      } else if (raisedException instanceof HasSymbol) {
+        Symbol symbol = ((HasSymbol) raisedException).symbol();
+        if (symbol != null && NOT_IMPLEMENTED_ERROR.equals(symbol.fullyQualifiedName())) {
           nonCompliantRaises.add(pyRaiseStatementTree);
         }
       }

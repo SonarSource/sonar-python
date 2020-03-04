@@ -9,6 +9,17 @@ class AllMethods(object):
     def __ne__(self, other):
         raise NotImplementedError() # Noncompliant
 
+    def __gt__(self, other):
+        raise NotImplementedError # Noncompliant
+    def __add__(self, other):
+        raise ValueError
+    def __sub__(self, other):
+        raise ThereIsNoSuchException
+
+    def __mul__(self, other):
+        ex = NotImplementedError()
+        raise ex # Noncompliant
+
     def foo(self):
         raise NotImplementedError()
 
