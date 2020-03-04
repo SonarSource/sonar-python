@@ -122,6 +122,7 @@ public final class CheckList {
       NewStyleClassCheck.class,
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
+      NotImplementedErrorInOperatorMethodsCheck.class,
       OneStatementPerLineCheck.class,
       OsExecCheck.class,
       OverwrittenCollectionEntryCheck.class,
