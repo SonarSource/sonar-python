@@ -153,6 +153,7 @@ public final class CheckList {
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       UndeclaredNameUsageCheck.class,
+      UnreachableExceptCheck.class,
       UnusedLocalVariableCheck.class,
       UnusedNestedDefinitionCheck.class,
       UnverifiedHostnameCheck.class,
