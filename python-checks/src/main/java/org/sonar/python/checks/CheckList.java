@@ -131,6 +131,7 @@ public final class CheckList {
       ProcessSignallingCheck.class,
       PseudoRandomCheck.class,
       PubliclyWritableDirectoriesCheck.class,
+      RaiseOutsideExceptCheck.class,
       RedundantJumpCheck.class,
       RegexCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
