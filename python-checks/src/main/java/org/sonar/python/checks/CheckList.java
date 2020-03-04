@@ -60,6 +60,7 @@ public final class CheckList {
       ArgumentNumberCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
+      BareRaiseInFinallyCheck.class,
       BreakContinueOutsideLoopCheck.class,
       ClassComplexityCheck.class,
       ClassNameCheck.class,
