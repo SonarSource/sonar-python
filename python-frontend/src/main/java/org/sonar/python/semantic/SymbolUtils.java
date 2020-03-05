@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
@@ -56,6 +55,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShedPythonFile;
 
@@ -123,17 +123,8 @@ public class SymbolUtils {
   static List<Expression> assignmentsLhs(AssignmentStatement assignmentStatement) {
     return assignmentStatement.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
-      .flatMap(SymbolUtils::flattenTuples)
+      .flatMap(TreeUtils::flattenTuples)
       .collect(Collectors.toList());
-  }
-
-  private static Stream<Expression> flattenTuples(Expression expression) {
-    if (expression.is(Kind.TUPLE)) {
-      Tuple tuple = (Tuple) expression;
-      return tuple.elements().stream().flatMap(SymbolUtils::flattenTuples);
-    } else {
-      return Stream.of(expression);
-    }
   }
 
   static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
