@@ -41,3 +41,15 @@ def other_assignments(e):
     e.__eq__ = NotAnException()
     e = NotAnException()
     e.__cause__ = f = NotAnException() # Noncompliant
+
+def type_given_by_except_clause():
+    try:
+        foo()
+    except MyException as e:
+        raise MyException() from e
+    except NotAnException as e:
+        raise MyException() from e # FN
+    except (ValueError, TypeError) as e:
+        raise MyException() from e
+    except (NotAnException, str) as e:
+        raise MyException() from e # FN
