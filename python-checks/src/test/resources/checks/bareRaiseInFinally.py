@@ -12,9 +12,10 @@ def bare_raise_in_finally(param):
     else:
       result = 1
       class SomeClass():
-        def func():
-          raise # Noncompliant {{Refactor this code so that any active exception raises naturally.}}
-#         ^^^^^
+        raise # OK (handled by S5747)
+      def func():
+        raise # OK (handled by S5747)
+
 
   return result
 

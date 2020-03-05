@@ -39,7 +39,8 @@ public class BareRaiseInFinallyCheck extends PythonSubscriptionCheck {
       if (isWithinExceptClause(raiseStatement) || isWithinExitFunction(raiseStatement)) {
         return;
       }
-      if (TreeUtils.firstAncestorOfKind(raiseStatement, Tree.Kind.FINALLY_CLAUSE) != null) {
+      Tree parent = TreeUtils.firstAncestorOfKind(raiseStatement, Tree.Kind.FINALLY_CLAUSE, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
+      if (parent != null && parent.is(Tree.Kind.FINALLY_CLAUSE)) {
         ctx.addIssue(raiseStatement, "Refactor this code so that any active exception raises naturally.");
       }
     });
