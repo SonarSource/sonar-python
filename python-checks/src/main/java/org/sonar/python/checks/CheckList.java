@@ -73,6 +73,7 @@ public final class CheckList {
       CommandLineArgsCheck.class,
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
+      ComparisonToNoneCheck.class,
       CorsCheck.class,
       DataEncryptionCheck.class,
       DbNoPasswordCheck.class,
