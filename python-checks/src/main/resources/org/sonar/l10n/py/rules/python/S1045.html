@@ -1,0 +1,63 @@
+<p>Exceptions handlers (<code>except:</code>) are evaluated in the order they are written. Once a match is found, the evaluation stops.</p>
+<p>In some contexts an except block is dead code as it will never catch any exception:</p>
+<ul>
+  <li> If there is a handler for a base class followed by a handler for class derived from that base class, the second handler will never trigger: The
+  handler for the base class will match the derived class, and will be the only executed handler. </li>
+  <li> When multiple <code>except</code> statements try to catch the same exception class, only the first one will be executed. </li>
+  <li> In python 3, <code>BaseException</code> is the parent of every exception class. When <code>BaseException</code> is caught and the same
+  try-except block has a bare <code>except:</code> statement, i.e. an <code>except</code> with no expression, the bare except will never catch
+  anything. </li>
+</ul>
+<p>This rule raises an issue when an <code>except</code> block catches every exception before a later <code>except</code> block could catch it.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def foo():
+    try:
+        raise FileExistsError()
+    except (OSError, RuntimeError) as e:
+        print(e)
+    except FileExistsError as e: # Noncompliant. FileExistsError is a subclass of OSError
+        print("Never executed")
+    except FileNotFoundError as e: # Noncompliant. FileNotFoundError is a subclass of OSError
+        print("Never executed")
+
+    try:
+        raise TypeError()
+    except TypeError as e:
+        print(e)
+    except TypeError as e: # Noncompliant. Duplicate Except.
+        print("Never executed")
+
+    try:
+        raise ValueError()
+    except BaseException as e:
+        print(e)
+    except: # Noncompliant. This is equivalent to "except BaseException" block
+        print("Never executed")
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def foo():
+    try:
+        raise FileExistsError()
+    except FileExistsError as e:
+        print("Never executed")
+    except FileNotFoundError as e:
+        print("Never executed")
+    except (OSError, RuntimeError) as e:
+        print(e)
+
+    try:
+        raise TypeError()
+    except TypeError as e:
+        print(e)
+
+    try:
+        raise ValueError()
+    except BaseException as e:
+        print(e)
+</pre>
+<h2>See</h2>
+<p> * Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code>
+statement</a></p>
+
