@@ -62,6 +62,7 @@ public final class CheckList {
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,
       BreakContinueOutsideLoopCheck.class,
+      CaughtExceptionsCheck.class,
       ClassComplexityCheck.class,
       ClassNameCheck.class,
       ClearTextProtocolsCheck.class,

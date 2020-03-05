@@ -26,10 +26,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.api.PythonTokenType;
 
 public class TreeUtils {
@@ -82,5 +85,14 @@ public class TreeUtils {
 
   public static boolean hasDescendant(Tree tree, Predicate<Tree> predicate) {
     return tree.children().stream().anyMatch(child -> predicate.test(child) || hasDescendant(child, predicate));
+  }
+
+  public static Stream<Expression> flattenTuples(Expression expression) {
+    if (expression.is(Kind.TUPLE)) {
+      Tuple tuple = (Tuple) expression;
+      return tuple.elements().stream().flatMap(TreeUtils::flattenTuples);
+    } else {
+      return Stream.of(expression);
+    }
   }
 }
