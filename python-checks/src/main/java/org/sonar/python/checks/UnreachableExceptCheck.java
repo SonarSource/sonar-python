@@ -54,7 +54,7 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
     Map<String, Expression> caughtInExceptClause = new HashMap<>();
     Expression exceptionExpression = exceptClause.exception();
     if (exceptionExpression == null) {
-      Expression baseExceptionExpression = caughtTypes.getOrDefault("BaseException", null);
+      Expression baseExceptionExpression = caughtTypes.get("BaseException");
       if (baseExceptionExpression != null) {
         ctx.addIssue(exceptClause.exceptKeyword(), "Merge this bare \"except:\" with the \"BaseException\" one.").secondary(baseExceptionExpression, null);
       }
