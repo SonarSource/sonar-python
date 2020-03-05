@@ -1,0 +1,97 @@
+<p>In Python, special methods corresponding to numeric operators, rich comparison operators and the <code>__length_hint__</code> method should return
+<code>NotImplemented</code> when the operation is not supported. These methods should not raise <code>NotImplementedError</code> as callers don't
+expect it and won't catch this exception.</p>
+<p>For example <code>A + B</code> is equivalent to calling <code>A.__add__(B)</code>. If this binary operation is not supported by class A,
+<code>A.__add__(B)</code> should return <code>NotImplemented</code>. The interpreter will then try the reverse operation, i.e.
+<code>B.__radd__(A)</code>. This enables adding new operations by changing only one class instead of two.</p>
+<p>This rule raises an issue when one of the following methods raises <code>NotImplementedError</code> instead of returning
+<code>NotImplemented</code>:</p>
+<p> * __lt__(self, other)</p>
+<ul>
+  <li> __le__(self, other) </li>
+  <li> __eq__(self, other) </li>
+  <li> __ne__(self, other) </li>
+  <li> __gt__(self, other) </li>
+  <li> __ge__(self, other) </li>
+  <li> __add__(self, other) </li>
+  <li> __sub__(self, other) </li>
+  <li> __mul__(self, other) </li>
+  <li> __matmul__(self, other) </li>
+  <li> __truediv__(self, other) </li>
+  <li> __floordiv__(self, other) </li>
+  <li> __mod__(self, other) </li>
+  <li> __divmod__(self, other) </li>
+  <li> __pow__(self, other[, modulo]) </li>
+  <li> __lshift__(self, other) </li>
+  <li> __rshift__(self, other) </li>
+  <li> __and__(self, other) </li>
+  <li> __xor__(self, other) </li>
+  <li> __or__(self, other) </li>
+  <li> __radd__(self, other) </li>
+  <li> __rsub__(self, other) </li>
+  <li> __rmul__(self, other) </li>
+  <li> __rmatmul__(self, other) </li>
+  <li> __rtruediv__(self, other) </li>
+  <li> __rfloordiv__(self, other) </li>
+  <li> __rmod__(self, other) </li>
+  <li> __rdivmod__(self, other) </li>
+  <li> __rpow__(self, other[, modulo]) </li>
+  <li> __rlshift__(self, other) </li>
+  <li> __rrshift__(self, other) </li>
+  <li> __rand__(self, other) </li>
+  <li> __rxor__(self, other) </li>
+  <li> __ror__(self, other) </li>
+  <li> __iadd__(self, other) </li>
+  <li> __isub__(self, other) </li>
+  <li> __imul__(self, other) </li>
+  <li> __imatmul__(self, other) </li>
+  <li> __itruediv__(self, other) </li>
+  <li> __ifloordiv__(self, other) </li>
+  <li> __imod__(self, other) </li>
+  <li> __ipow__(self, other[, modulo]) </li>
+  <li> __ilshift__(self, other) </li>
+  <li> __irshift__(self, other) </li>
+  <li> __iand__(self, other) </li>
+  <li> __ixor__(self, other) </li>
+  <li> __ior__(self, other) </li>
+  <li> __length_hint__(self) </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass:
+    def __add__(self, other):
+        raise NotImplementedError()  # Noncompliant
+    def __radd__(self, other):
+        raise NotImplementedError()  # Noncompliant
+
+class MyOtherClass:
+    def __add__(self, other):
+        return 42
+    def __radd__(self, other):
+        return 42
+
+MyClass() + MyOtherClass()  # This will raise NotImplementedError
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass:
+    def __add__(self, other):
+        return NotImplemented
+    def __radd__(self, other):
+        return NotImplemented
+
+class MyOtherClass:
+    def __add__(self, other):
+        return 42
+    def __radd__(self, other):
+        return 42
+
+MyClass() + MyOtherClass()  # This returns 42
+</pre>
+<h2>See</h2>
+<ul>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/constants.html#NotImplemented">Built-in Constants - NotImplemented</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/numbers.html#implementing-the-arithmetic-operations">Implementing the
+  arithmetic operations</a> </li>
+</ul>
+
