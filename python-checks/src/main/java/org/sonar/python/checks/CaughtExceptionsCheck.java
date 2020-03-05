@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -39,7 +40,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_CLAUSE;
 public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Change this expression to be a class deriving from BaseException or a tuple of such classes.";
-  private static final Set<String> NON_COMPLIANT_TYPES = new HashSet<>(Arrays.asList("list", "set", "NoneType"));
+  private static final Set<String> NON_COMPLIANT_TYPES = new HashSet<>(Arrays.asList("list", "set", "dict"));
 
   @Override
   public void initialize(Context context) {
@@ -49,15 +50,22 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
         return;
       }
       TreeUtils.flattenTuples(exception).forEach(expression -> {
-        if (NON_COMPLIANT_TYPES.stream().anyMatch(type -> expression.type().canOnlyBe(type))) {
-          ctx.addIssue(expression, MESSAGE);
-        }
-        if ((expression instanceof HasSymbol) && !inheritsFromBaseException(((HasSymbol) expression).symbol())) {
+        if (!canBeOrExtendBaseException(expression.type()) ||
+          ((expression instanceof HasSymbol) && !inheritsFromBaseException(((HasSymbol) expression).symbol()))) {
+
           ctx.addIssue(expression, MESSAGE);
         }
       });
-
     });
+  }
+
+  private static boolean canBeOrExtendBaseException(InferredType type) {
+    if (NON_COMPLIANT_TYPES.stream().anyMatch(type::canOnlyBe)) {
+      // due to some limitations in type inference engine,
+      // type.canBeOrExtend("list" | "set" | "dict") returns true
+      return false;
+    }
+    return type.canBeOrExtend("BaseException");
   }
 
   private static boolean inheritsFromBaseException(@Nullable Symbol symbol) {
@@ -65,6 +73,7 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
       // to avoid FP in case of e.g. OSError
       return true;
     }
-    return ((ClassSymbol) symbol).isOrExtends("BaseException") || ((ClassSymbol) symbol).hasUnresolvedTypeHierarchy();
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    return classSymbol.isOrExtends("BaseException") || classSymbol.hasUnresolvedTypeHierarchy();
   }
 }

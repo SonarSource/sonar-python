@@ -47,5 +47,5 @@ def foo():
 
   try:
     ...
-  except x: # FN
+  except x: # Noncompliant
     ...
