@@ -83,6 +83,7 @@ public final class CheckList {
       EmailSendingCheck.class,
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
+      ExceptionCauseTypeCheck.class,
       ExceptRethrowingCheck.class,
       ExecStatementUsageCheck.class,
       ExitHasBadArgumentsCheck.class,
