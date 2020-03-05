@@ -64,6 +64,7 @@ public final class CheckList {
       BooleanExpressionInExceptCheck.class,
       BreakContinueOutsideLoopCheck.class,
       CaughtExceptionsCheck.class,
+      ChildAndParentExceptionCaughtCheck.class,
       ClassComplexityCheck.class,
       ClassNameCheck.class,
       ClearTextProtocolsCheck.class,
