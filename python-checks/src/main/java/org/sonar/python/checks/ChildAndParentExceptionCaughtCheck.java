@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5713")
 public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck {
@@ -40,52 +40,42 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.EXCEPT_CLAUSE, ctx -> {
       ExceptClause exceptClause = (ExceptClause) ctx.syntaxNode();
-      Map<String, List<Expression>> caughtExceptionsByFQN = new HashMap<>();
+      Map<ClassSymbol, List<Expression>> caughtExceptionsBySymbol = new HashMap<>();
       Expression exceptionExpression = exceptClause.exception();
-      if (exceptionExpression == null || !exceptionExpression.is(Tree.Kind.TUPLE)) {
+      if (exceptionExpression == null) {
         return;
       }
-      Tuple exceptionsTuple = (Tuple) exceptionExpression;
-      exceptionsTuple.elements().forEach(e -> addExceptionExpression(e, caughtExceptionsByFQN));
-      checkCaughtExceptions(ctx, caughtExceptionsByFQN);
+      TreeUtils.flattenTuples(exceptionExpression).forEach(e -> addExceptionExpression(e, caughtExceptionsBySymbol));
+      checkCaughtExceptions(ctx, caughtExceptionsBySymbol);
     });
   }
 
-  private static void checkCaughtExceptions(SubscriptionContext ctx, Map<String, List<Expression>> caughtExceptionsByFQN) {
-    caughtExceptionsByFQN.forEach((fullyQualifiedName, caughtExceptionsWithSameFQN) -> {
-      Expression currentException = caughtExceptionsWithSameFQN.get(0);
-      ClassSymbol currentSymbol = (ClassSymbol) ((HasSymbol) currentException).symbol();
-      if (caughtExceptionsWithSameFQN.size() > 1) {
+  private static void checkCaughtExceptions(SubscriptionContext ctx, Map<ClassSymbol, List<Expression>> caughtExceptionsBySymbol) {
+    caughtExceptionsBySymbol.forEach((currentSymbol, caughtExceptionsWithSameSymbol) -> {
+      Expression currentException = caughtExceptionsWithSameSymbol.get(0);
+      if (caughtExceptionsWithSameSymbol.size() > 1) {
         PreciseIssue issue = ctx.addIssue(currentException, "Remove this duplicate Exception class.");
-        caughtExceptionsWithSameFQN.stream().filter(e -> e != currentException).forEach(e -> issue.secondary(e, null));
+        caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, null));
       }
       PreciseIssue issue = null;
-      for (List<Expression> otherCaughtExceptions : caughtExceptionsByFQN.values()) {
-        if (otherCaughtExceptions == caughtExceptionsWithSameFQN) {
-          continue;
-        }
-        Expression comparedException = otherCaughtExceptions.get(0);
-        ClassSymbol comparedSymbol = (ClassSymbol) ((HasSymbol) comparedException).symbol();
-        if (currentSymbol.isOrExtends(comparedSymbol.fullyQualifiedName())) {
+      for (Map.Entry<ClassSymbol, List<Expression>> otherEntry : caughtExceptionsBySymbol.entrySet()) {
+        ClassSymbol comparedSymbol = otherEntry.getKey();
+        if (currentSymbol != comparedSymbol && currentSymbol.isOrExtends(comparedSymbol)) {
           if (issue == null) {
             issue = ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
-            addSecondaryLocations(issue, otherCaughtExceptions);
-          } else {
-            addSecondaryLocations(issue, otherCaughtExceptions);
           }
+          addSecondaryLocations(issue, otherEntry.getValue());
         }
       }
     });
   }
 
-  private static void addExceptionExpression(Expression exceptionExpression, Map<String, List<Expression>> caughtExceptionsByFQN) {
+  private static void addExceptionExpression(Expression exceptionExpression, Map<ClassSymbol, List<Expression>> caughtExceptionsByFQN) {
     if (exceptionExpression instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) exceptionExpression).symbol();
       if (symbol != null && symbol.kind().equals(Symbol.Kind.CLASS)) {
         ClassSymbol classSymbol = (ClassSymbol) symbol;
-        List<Expression> exceptions = caughtExceptionsByFQN.getOrDefault(classSymbol.fullyQualifiedName(), new ArrayList<>());
-        exceptions.add(exceptionExpression);
-        caughtExceptionsByFQN.putIfAbsent(classSymbol.fullyQualifiedName(), exceptions);
+        caughtExceptionsByFQN.computeIfAbsent(classSymbol, k -> new ArrayList<>()).add(exceptionExpression);
       }
     }
   }

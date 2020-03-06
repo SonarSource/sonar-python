@@ -1,9 +1,17 @@
-def parent_with_child():
+def child_with_parent():
   try:
       raise NotImplementedError()
   except (NotImplementedError, RuntimeError):  # Noncompliant {{Remove this redundant Exception class; it derives from another which is already caught.}}
   #       ^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^<
       print("Foo")
+
+def parent_with_child():
+    try:
+        raise NotImplementedError()
+    except (RuntimeError, NotImplementedError):  # Noncompliant {{Remove this redundant Exception class; it derives from another which is already caught.}}
+        #   ^^^^^^^^^^^^> ^^^^^^^^^^^^^^^^^^^
+        print("Foo")
+
 
 def duplicate_exception_caught():
   try:
@@ -24,6 +32,11 @@ def duplicate_and_parent_with_child():
   except (RuntimeError, NotImplementedError, RuntimeError):  # Noncompliant 2
       print("Foo")
 
+def python2_supports_nested_tuples():
+    try:
+        ...
+    except (ValueError, (RuntimeError, NotImplementedError)): # Noncompliant
+        ...
 
 def compliant():
   try:
