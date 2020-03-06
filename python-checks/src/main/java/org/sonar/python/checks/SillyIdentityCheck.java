@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 
 @Rule(key = "S3403")
 public class SillyIdentityCheck extends PythonSubscriptionCheck {
@@ -32,7 +33,9 @@ public class SillyIdentityCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.IS, ctx -> {
       IsExpression isExpression = (IsExpression) ctx.syntaxNode();
-      if (!isExpression.leftOperand().type().isIdentityComparableWith(isExpression.rightOperand().type())) {
+      InferredType left = isExpression.leftOperand().type();
+      InferredType right = isExpression.rightOperand().type();
+      if (!left.isIdentityComparableWith(right) && !left.canOnlyBe("NoneType") && !right.canOnlyBe("NoneType")) {
         Token notToken = isExpression.notToken();
         String operator = notToken == null ? "is" : "is not";
         String result = notToken == null ? "False" : "True";

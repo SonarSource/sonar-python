@@ -18,7 +18,10 @@ def foo():
     if a is a2: # OK
         pass
 
-    if a is None: # Noncompliant
+    if a is None: # handled by S5727
+        pass
+
+    if None is a: # handled by S5727
         pass
 
     if a is all([1, 2, 3]): # Noncompliant
