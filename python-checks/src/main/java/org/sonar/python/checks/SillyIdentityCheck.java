@@ -26,6 +26,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 
+import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
+
 @Rule(key = "S3403")
 public class SillyIdentityCheck extends PythonSubscriptionCheck {
 
@@ -35,7 +37,7 @@ public class SillyIdentityCheck extends PythonSubscriptionCheck {
       IsExpression isExpression = (IsExpression) ctx.syntaxNode();
       InferredType left = isExpression.leftOperand().type();
       InferredType right = isExpression.rightOperand().type();
-      if (!left.isIdentityComparableWith(right) && !left.canOnlyBe("NoneType") && !right.canOnlyBe("NoneType")) {
+      if (!left.isIdentityComparableWith(right) && !left.canOnlyBe(NONE_TYPE) && !right.canOnlyBe(NONE_TYPE)) {
         Token notToken = isExpression.notToken();
         String operator = notToken == null ? "is" : "is not";
         String result = notToken == null ? "False" : "True";

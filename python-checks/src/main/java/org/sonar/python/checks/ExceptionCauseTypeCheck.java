@@ -31,6 +31,10 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.InferredType;
 
+import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.STR;
+
 @Rule(key = "S5707")
 public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
 
@@ -60,7 +64,7 @@ public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
     }
     InferredType causeType = cause.type();
     // TODO remove the test against str once type inference knows the complete hierarchy of str
-    if ((!causeType.canBeOrExtend("BaseException") && !causeType.canOnlyBe("NoneType")) || causeType.canOnlyBe("str")) {
+    if ((!causeType.canBeOrExtend(BASE_EXCEPTION) && !causeType.canOnlyBe(NONE_TYPE)) || causeType.canOnlyBe(STR)) {
       ctx.addIssue(cause, "Replace this expression with an exception or None");
     }
   }

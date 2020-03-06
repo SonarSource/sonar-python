@@ -26,24 +26,25 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
 public class InferredTypes {
 
-  public static final InferredType INT = runtimeBuiltinType("int");
-  public static final InferredType FLOAT = runtimeBuiltinType("float");
-  public static final InferredType COMPLEX = runtimeBuiltinType("complex");
+  public static final InferredType INT = runtimeBuiltinType(BuiltinTypes.INT);
+  public static final InferredType FLOAT = runtimeBuiltinType(BuiltinTypes.FLOAT);
+  public static final InferredType COMPLEX = runtimeBuiltinType(BuiltinTypes.COMPLEX);
 
-  public static final InferredType STR = runtimeBuiltinType("str");
+  public static final InferredType STR = runtimeBuiltinType(BuiltinTypes.STR);
 
-  public static final InferredType SET = runtimeBuiltinType("set");
-  public static final InferredType DICT = runtimeBuiltinType("dict");
-  public static final InferredType LIST = runtimeBuiltinType("list");
-  public static final InferredType TUPLE = runtimeBuiltinType("tuple");
+  public static final InferredType SET = runtimeBuiltinType(BuiltinTypes.SET);
+  public static final InferredType DICT = runtimeBuiltinType(BuiltinTypes.DICT);
+  public static final InferredType LIST = runtimeBuiltinType(BuiltinTypes.LIST);
+  public static final InferredType TUPLE = runtimeBuiltinType(BuiltinTypes.TUPLE);
 
-  public static final InferredType NONE = runtimeBuiltinType("NoneType");
+  public static final InferredType NONE = runtimeBuiltinType(BuiltinTypes.NONE_TYPE);
 
-  public static final InferredType BOOL = runtimeBuiltinType("bool");
+  public static final InferredType BOOL = runtimeBuiltinType(BuiltinTypes.BOOL);
 
   private InferredTypes() {
   }

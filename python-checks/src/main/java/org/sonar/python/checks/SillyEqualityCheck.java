@@ -27,7 +27,10 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+
+import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 @Rule(key = "S2159")
 public class SillyEqualityCheck extends PythonSubscriptionCheck {
@@ -47,7 +50,7 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
       InferredType leftType = left.type();
       InferredType rightType = right.type();
 
-      if (leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe("NoneType") || rightType.canOnlyBe("NoneType")) {
+      if (leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe(NONE_TYPE) || rightType.canOnlyBe(NONE_TYPE)) {
         return;
       }
 
@@ -76,26 +79,26 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
   }
 
   private static String builtinTypeCategory(InferredType inferredType) {
-    if (inferredType.canOnlyBe("str")) {
-      return "str";
+    if (inferredType.canOnlyBe(BuiltinTypes.STR)) {
+      return BuiltinTypes.STR;
     }
-    if (inferredType.canOnlyBe("int")
-      || inferredType.canOnlyBe("float")
-      || inferredType.canOnlyBe("complex")
-      || inferredType.canOnlyBe("bool")) {
+    if (inferredType.canOnlyBe(BuiltinTypes.INT)
+      || inferredType.canOnlyBe(BuiltinTypes.FLOAT)
+      || inferredType.canOnlyBe(BuiltinTypes.COMPLEX)
+      || inferredType.canOnlyBe(BuiltinTypes.BOOL)) {
       return "number";
     }
-    if (inferredType.canOnlyBe("list")) {
-      return "list";
+    if (inferredType.canOnlyBe(BuiltinTypes.LIST)) {
+      return BuiltinTypes.LIST;
     }
-    if (inferredType.canOnlyBe("set")) {
-      return "set";
+    if (inferredType.canOnlyBe(BuiltinTypes.SET)) {
+      return BuiltinTypes.SET;
     }
-    if (inferredType.canOnlyBe("dict")) {
-      return "dict";
+    if (inferredType.canOnlyBe(BuiltinTypes.DICT)) {
+      return BuiltinTypes.DICT;
     }
-    if (inferredType.canOnlyBe("tuple")) {
-      return "tuple";
+    if (inferredType.canOnlyBe(BuiltinTypes.TUPLE)) {
+      return BuiltinTypes.TUPLE;
     }
     return null;
   }
