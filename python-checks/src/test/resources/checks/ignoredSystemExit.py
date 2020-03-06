@@ -39,7 +39,7 @@ except SystemExit as ex: # Noncompliant
 
 try:
     foo()
-except KeyboardInterrupt as ex:
+except SystemExit as ex:
     try:
         bar()
     except SystemExit:
@@ -47,8 +47,6 @@ except KeyboardInterrupt as ex:
 
 try:
     foo()
-except KeyboardInterrupt:
-    pass
 except: # Noncompliant
     # This should not be compliant as SystemExit was not handled and the except clause below is unreachable
     pass

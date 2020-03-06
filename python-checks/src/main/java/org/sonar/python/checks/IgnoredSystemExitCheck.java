@@ -40,13 +40,10 @@ import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5754")
-public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptionCheck {
+public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
 
   private static final String BASE_EXCEPTION_NAME = "BaseException";
   private static final String SYSTEM_EXIT_EXCEPTION_NAME = "SystemExit";
-  private static final String KEYBOARD_INTERRUPT_NAME = "KeyboardInterrupt";
-
-  private static final List<String> INTERRUPT_EXCEPTIONS = Arrays.asList(SYSTEM_EXIT_EXCEPTION_NAME, KEYBOARD_INTERRUPT_NAME);
 
   private static final String MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION = "Reraise this exception to stop the application as the user expects";
   private static final String MESSAGE_BARE_EXCEPT = "Specify an exception class to catch or reraise the exception";
@@ -128,7 +125,7 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
    * Checks whether a possibly bare except clause is compliant and raises the issue if not.
    * Returns true if the except clause was bare, false otherwise.
    */
-  private static boolean handlePossibleBareException(SubscriptionContext ctx, ExceptClause exceptClause, Set<String> handledInterrupts) {
+  private static boolean handlePossibleBareException(SubscriptionContext ctx, ExceptClause exceptClause, boolean isSystemExitHandled) {
     Expression exceptionExpr = exceptClause.exception();
     if (exceptionExpr != null) {
       return false;
@@ -136,37 +133,43 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
 
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(null);
     exceptClause.accept(visitor);
-    if (!visitor.isReRaised && !handledInterrupts.containsAll(INTERRUPT_EXCEPTIONS)) {
+    if (!visitor.isReRaised && !isSystemExitHandled) {
       ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
     }
 
     return true;
   }
 
-  private static void handleCaughtException(SubscriptionContext ctx, Expression caughtException, Symbol exceptionInstanceSymbol,
-    Tree exceptionBody, Set<String> handledInterrupts) {
+  /**
+   * Checks whether the caught exception is properly handled.
+   * @return True if the handled exception was a SystemError, false otherwise.
+   */
+  private static boolean handleCaughtException(SubscriptionContext ctx, Expression caughtException, Symbol exceptionInstanceSymbol,
+    Tree exceptionBody, boolean handledSystemExit) {
     String caughtExceptionName = findExceptionName(caughtException);
     if (caughtExceptionName == null) {
       // The caught exception name is unknown, just skip to the next clause.
-      return;
+      return false;
     }
-
-    handledInterrupts.add(caughtExceptionName);
 
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(exceptionInstanceSymbol);
     exceptionBody.accept(visitor);
 
     if (visitor.isReRaised) {
       // The exception has been handled in the except clause
-      return;
+      return SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName);
     }
 
-    // If the KeyboardInterrupt error was handled in any way (even possibly ignored), do not raise an issue.
     if (SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName)) {
       ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
-    } else if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledInterrupts.containsAll(INTERRUPT_EXCEPTIONS)) {
+      return true;
+    }
+
+    if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledSystemExit) {
       ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
     }
+
+    return false;
   }
 
   @Override
@@ -175,9 +178,11 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
       TryStatement tryStatement = (TryStatement) ctx.syntaxNode();
       Set<String> handledInterrupts = new HashSet<>();
 
+      boolean isSystemExitHandled = false;
+
       for (ExceptClause exceptClause : tryStatement.exceptClauses()) {
         Expression exceptionExpr = exceptClause.exception();
-        if (handlePossibleBareException(ctx, exceptClause, handledInterrupts)) {
+        if (handlePossibleBareException(ctx, exceptClause, isSystemExitHandled)) {
           break;
         }
 
@@ -187,7 +192,7 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
 
         List<Expression> caughtExceptions = TreeUtils.flattenTuples(exceptionExpr).collect(Collectors.toList());
         for (Expression caughtException : caughtExceptions) {
-          handleCaughtException(ctx, caughtException, exceptionInstanceSymbol, exceptClause.body(), handledInterrupts);
+          isSystemExitHandled |= handleCaughtException(ctx, caughtException, exceptionInstanceSymbol, exceptClause.body(), isSystemExitHandled);
         }
       }
     });
