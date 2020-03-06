@@ -17,26 +17,16 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.symbols;
+package org.sonar.python.checks;
 
-import com.google.common.annotations.Beta;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public interface ClassSymbol extends Symbol {
-  List<Symbol> superClasses();
+public class ChildAndParentExceptionCaughtCheckTest {
 
-  boolean hasUnresolvedTypeHierarchy();
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/childAndParentExceptionCaughtCheck.py", new ChildAndParentExceptionCaughtCheck());
+  }
 
-  Set<Symbol> declaredMembers();
-
-  @Beta
-  Optional<Symbol> resolveMember(String memberName);
-
-  @Beta
-  boolean isOrExtends(String fullyQualifiedClassName);
-
-  @Beta
-  boolean isOrExtends(ClassSymbol other);
 }

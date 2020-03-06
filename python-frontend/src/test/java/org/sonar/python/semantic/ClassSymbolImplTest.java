@@ -132,5 +132,11 @@ public class ClassSymbolImplTest {
     assertThat(a.isOrExtends("mod1.a")).isTrue();
     assertThat(a.isOrExtends("mod2.b")).isTrue();
     assertThat(a.isOrExtends("mod2.x")).isFalse();
+
+    assertThat(a.isOrExtends(a)).isTrue();
+    assertThat(a.isOrExtends(b)).isTrue();
+    assertThat(b.isOrExtends(a)).isFalse();
+    ClassSymbolImpl c = new ClassSymbolImpl("c", "mod2.c");
+    assertThat(a.isOrExtends(c)).isFalse();
   }
 }

@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -109,6 +110,12 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   @Override
   public boolean isOrExtends(String fullyQualifiedClassName) {
     return allSuperClasses().stream().anyMatch(c -> fullyQualifiedClassName.equals(c.fullyQualifiedName()));
+  }
+
+  @Override
+  public boolean isOrExtends(ClassSymbol other) {
+    // TODO there should be only 1 class with a given fullyQualifiedName when analyzing a python file
+    return allSuperClasses().stream().anyMatch(c -> Objects.equals(c.fullyQualifiedName(), other.fullyQualifiedName()));
   }
 
   private Map<String, Symbol> membersByName() {
