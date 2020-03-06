@@ -61,6 +61,7 @@ public final class CheckList {
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,
+      BooleanExpressionInExceptCheck.class,
       BreakContinueOutsideLoopCheck.class,
       CaughtExceptionsCheck.class,
       ClassComplexityCheck.class,
