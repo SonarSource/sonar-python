@@ -1,0 +1,65 @@
+<p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a>&nbsp;is raised when <a
+href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. <a
+href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> is raised when the user asks the program
+to stop by pressing interrupt keys. Both exceptions are expected to propagate up until the application stops. It is ok to catch them when a clean-up
+is necessary but they should be raised again immediately.</p>
+<p>A <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">bare <code>except:</code> statement</a>, i.e. an
+<code>except</code> without any exception class, is equivalent to <a
+href="https://docs.python.org/3/library/exceptions.html#BaseException"><code>except BaseException</code></a>. Both statements will catch every
+exception, including <code>SystemExit</code> and <code>KeyboardInterrupt</code>. It is recommended to catch instead a specific exception. If it is not
+possible, the exception should be raised again.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+try:
+    open("foo.txt", "r")
+except SystemExit:  # Noncompliant
+    pass
+except KeyboardInterrupt:  # Noncompliant
+    pass
+
+try:
+    open("bar.txt", "r")
+except BaseException:  # Noncompliant
+    pass
+except:  # Noncompliant
+    pass
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+try:
+    open("foo.txt", "r")
+except SystemExit:
+    # clean-up
+    raise
+except KeyboardInterrupt:
+    # clean-up
+    raise
+
+try:
+    open("bar.txt", "r")
+except BaseException as e:
+    # clean-up
+    raise e
+except: # Noncompliant
+    # clean-up
+    raise
+
+# or use a more specific exception
+
+try:
+    open("bar.txt", "r")
+except FileNotFoundError:
+    # process the exception
+</pre>
+<h2>See</h2>
+<p> * PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#id5">Required Superclass for Exceptions</a></p>
+<p> * Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html">Built-in exceptions</a></p>
+<p> * Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code>
+statement</a></p>
+<p> * <a href="http://cwe.mitre.org/data/definitions/391.html">MITRE, CWE-391</a> - Unchecked Error Condition</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/391.html">MITRE, CWE-391</a> - Unchecked Error Condition </li>
+  <li> <a href="https://www.ibm.com/developerworks/java/library/j-jtp05236/index.html?ca=drs-#2.1">Dealing with InterruptedException</a> </li>
+</ul>
+

@@ -105,6 +105,7 @@ public final class CheckList {
       HashingDataCheck.class,
       HttpOnlyCookieCheck.class,
       IgnoredParameterCheck.class,
+      IgnoredSystemExitOrKeyboardInterruptCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
       IncorrectExceptionTypeCheck.class,
       InequalityUsageCheck.class,
