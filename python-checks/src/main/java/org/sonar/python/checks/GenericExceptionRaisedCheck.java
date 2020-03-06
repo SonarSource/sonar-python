@@ -32,10 +32,13 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.InferredType;
 
+import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
+
 @Rule(key = "S112")
 public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> GENERIC_EXCEPTION_NAMES = new HashSet<>(Arrays.asList("Exception", "BaseException"));
+  private static final Set<String> GENERIC_EXCEPTION_NAMES = new HashSet<>(Arrays.asList(EXCEPTION, BASE_EXCEPTION));
 
   @Override
   public void initialize(Context context) {

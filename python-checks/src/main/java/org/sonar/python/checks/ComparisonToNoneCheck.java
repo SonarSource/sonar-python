@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
 @Rule(key = "S5727")
@@ -67,10 +68,10 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isNone(InferredType type) {
-    return type.canOnlyBe("NoneType");
+    return type.canOnlyBe(BuiltinTypes.NONE_TYPE);
   }
 
   private static boolean cannotBeNone(InferredType type) {
-    return !type.canBeOrExtend("NoneType");
+    return !type.canBeOrExtend(BuiltinTypes.NONE_TYPE);
   }
 }

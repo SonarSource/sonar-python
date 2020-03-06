@@ -39,9 +39,9 @@ import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
 
-public class TypeShed {
+import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
-  private static final String NONE_TYPE = "NoneType";
+public class TypeShed {
 
   private static Map<String, Symbol> typeShedSymbols;
 

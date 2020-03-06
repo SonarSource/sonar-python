@@ -31,6 +31,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.BuiltinSymbols;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
+
 @Rule(key = "S5632")
 public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
 
@@ -72,11 +74,11 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       return true;
     }
     if (Symbol.Kind.CLASS.equals(symbol.kind())) {
-      return InferredTypes.runtimeType(symbol).canBeOrExtend("BaseException");
+      return InferredTypes.runtimeType(symbol).canBeOrExtend(BASE_EXCEPTION);
     }
     if (BuiltinSymbols.all().contains(symbol.fullyQualifiedName())) {
       return false;
     }
-    return raisedExpression.type().canBeOrExtend("BaseException");
+    return raisedExpression.type().canBeOrExtend(BASE_EXCEPTION);
   }
 }
