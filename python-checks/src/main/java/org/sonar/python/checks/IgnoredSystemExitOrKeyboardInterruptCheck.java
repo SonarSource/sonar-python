@@ -38,7 +38,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.python.tree.TreeUtils;
 
-@Rule(key="S2142")
+@Rule(key = "S2142")
 public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptionCheck {
 
   private static final List<String> INTERRUPT_EXCEPTIONS = Arrays.asList("SystemExit", "KeyboardInterrupt");
@@ -128,6 +128,25 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
     }
   }
 
+  private static void handleCaughtException(SubscriptionContext ctx, Expression caughtException, Symbol exceptionInstanceSymbol,
+    Tree exceptionBody, Set<String> handledInterrupts) {
+    String caughtExceptionName = findExceptionName(caughtException);
+    if (caughtExceptionName == null) {
+      // The caught exception name is unknown, just skip to the next clause.
+      return;
+    }
+
+    handledInterrupts.add(caughtExceptionName);
+
+    ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(exceptionInstanceSymbol);
+    exceptionBody.accept(visitor);
+
+    if (!visitor.isReRaised) {
+      // The exception has not been re-raised in the except clause
+      insertPossibleIssues(ctx, caughtException, caughtExceptionName, handledInterrupts);
+    }
+  }
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.TRY_STMT, ctx -> {
@@ -140,26 +159,13 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
           break;
         }
 
+        // Find the possible exception instance name
+        Expression exceptionInstance = exceptClause.exceptionInstance();
+        Symbol exceptionInstanceSymbol = findExceptionInstanceSymbol(exceptionInstance);
+
         List<Expression> caughtExceptions = TreeUtils.flattenTuples(exceptionExpr).collect(Collectors.toList());
         for (Expression caughtException : caughtExceptions) {
-          Expression exceptionInstance = exceptClause.exceptionInstance();
-          Symbol exceptionInstanceSymbol = findExceptionInstanceSymbol(exceptionInstance);
-
-          String caughtExceptionName = findExceptionName(caughtException);
-          if (caughtExceptionName == null) {
-            // The caught exception name is unknown, just skip to the next clause
-            continue;
-          }
-
-          handledInterrupts.add(caughtExceptionName);
-
-          ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(exceptionInstanceSymbol);
-          exceptClause.accept(visitor);
-
-          if (!visitor.isReRaised) {
-            // The exception has not been re-raised in the except clause
-            insertPossibleIssues(ctx, caughtException, caughtExceptionName, handledInterrupts);
-          }
+          handleCaughtException(ctx, caughtException, exceptionInstanceSymbol, exceptClause.body(), handledInterrupts);
         }
       }
     });
