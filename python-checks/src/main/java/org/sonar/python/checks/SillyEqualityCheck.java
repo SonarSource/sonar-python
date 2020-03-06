@@ -47,7 +47,7 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
       InferredType leftType = left.type();
       InferredType rightType = right.type();
 
-      if (leftType.isIdentityComparableWith(rightType)) {
+      if (leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe("NoneType") || rightType.canOnlyBe("NoneType")) {
         return;
       }
 
@@ -96,9 +96,6 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
     }
     if (inferredType.canOnlyBe("tuple")) {
       return "tuple";
-    }
-    if (inferredType.canOnlyBe("NoneType")) {
-      return "NoneType";
     }
     return null;
   }

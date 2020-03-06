@@ -30,7 +30,8 @@ def f():
     if A() == (): pass # Noncompliant
     if A() == {}: pass # Noncompliant
     if {42:''} == {1}: pass # Noncompliant
-    if A() == None: pass # Noncompliant
+    if A() == None: pass # handled by S5727
+    if None == A(): pass # handled by S5727
     if 'a' == True: pass # Noncompliant
     if 'a' == 42.42: pass # Noncompliant
     if 'a' == 42j: pass # Noncompliant
