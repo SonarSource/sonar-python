@@ -1,11 +1,33 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2020 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -14,6 +36,7 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key="S2142")
 public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptionCheck {
@@ -32,7 +55,7 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
     private Symbol exceptionInstance;
     private boolean isReRaised;
 
-    public ExceptionReRaiseCheckVisitor(Symbol exceptionInstance) {
+    public ExceptionReRaiseCheckVisitor(@Nullable Symbol exceptionInstance) {
       this.exceptionInstance = exceptionInstance;
     }
 
@@ -59,7 +82,7 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
     }
   }
 
-  private Symbol findExceptionInstanceSymbol(Expression exceptionInstance) {
+  private static Symbol findExceptionInstanceSymbol(Expression exceptionInstance) {
     Symbol exceptionInstanceSymbol = null;
     if (exceptionInstance instanceof HasSymbol) {
       exceptionInstanceSymbol = ((HasSymbol) exceptionInstance).symbol();
@@ -67,48 +90,79 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
     return exceptionInstanceSymbol;
   }
 
+  private static String findExceptionName(Expression exception) {
+    if (exception instanceof HasSymbol) {
+      Symbol exceptionSymbol = ((HasSymbol) exception).symbol();
+      if (exceptionSymbol != null) {
+        return exceptionSymbol.fullyQualifiedName();
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Checks whether a possibly bare except clause is compliant and raises the issue if not.
+   * Returns true if the except clause was bare, false otherwise.
+   */
+  private static boolean handlePossibleBareException(SubscriptionContext ctx, ExceptClause exceptClause, Set<String> handledInterrupts) {
+    Expression exceptionExpr = exceptClause.exception();
+    if (exceptionExpr != null) {
+      return false;
+    }
+
+    ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(null);
+    exceptClause.accept(visitor);
+    if (!visitor.isReRaised && !handledInterrupts.containsAll(INTERRUPT_EXCEPTIONS)) {
+      ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
+    }
+
+    return true;
+  }
+
+  private static void insertPossibleIssues(SubscriptionContext ctx, Expression caughtException, String caughtExceptionName, Set<String> handledInterrupts) {
+    if (INTERRUPT_EXCEPTIONS.contains(caughtExceptionName)) {
+      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+    } else if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledInterrupts.containsAll(INTERRUPT_EXCEPTIONS)) {
+      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
+    }
+  }
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.TRY_STMT, ctx -> {
       TryStatement tryStatement = (TryStatement) ctx.syntaxNode();
-
       Set<String> handledInterrupts = new HashSet<>();
+
       for (ExceptClause exceptClause : tryStatement.exceptClauses()) {
-        Expression caughtException = exceptClause.exception();
-        String caughtExceptionName = null;
-        if (caughtException instanceof HasSymbol) {
-          Symbol exceptionSymbol = ((HasSymbol) caughtException).symbol();
-          if (exceptionSymbol != null) {
-            caughtExceptionName = exceptionSymbol.fullyQualifiedName();
-          }
+        Expression exceptionExpr = exceptClause.exception();
+        if (handlePossibleBareException(ctx, exceptClause, handledInterrupts)) {
+          break;
         }
 
-        Expression exceptionInstance = exceptClause.exceptionInstance();
+        List<Expression> caughtExceptions = TreeUtils.flattenTuples(exceptionExpr).collect(Collectors.toList());
+        for (Expression caughtException : caughtExceptions) {
+          Expression exceptionInstance = exceptClause.exceptionInstance();
+          Symbol exceptionInstanceSymbol = findExceptionInstanceSymbol(exceptionInstance);
 
-        Symbol exceptionInstanceSymbol = findExceptionInstanceSymbol(exceptionInstance);
-        ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(exceptionInstanceSymbol);
-        exceptClause.accept(visitor);
-
-        if (visitor.isReRaised) {
-          // The exception has been re-raised in the except clause
-          continue;
-        }
-
-        if (caughtException == null) {
-          // This is a bare except clause, the code should have handled interrupts at this point.
-          if (handledInterrupts.size() != INTERRUPT_EXCEPTIONS.size()) {
-            ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
-            break;
+          String caughtExceptionName = findExceptionName(caughtException);
+          if (caughtExceptionName == null) {
+            // The caught exception name is unknown, just skip to the next clause
+            continue;
           }
-          handledInterrupts.addAll(INTERRUPT_EXCEPTIONS);
-        } else if (INTERRUPT_EXCEPTIONS.contains(caughtExceptionName)) {
-          ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+
           handledInterrupts.add(caughtExceptionName);
-        } else if (BASE_EXCEPTION_NAME.equals(caughtExceptionName)) {
-          ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
-          handledInterrupts.addAll(INTERRUPT_EXCEPTIONS);
+
+          ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(exceptionInstanceSymbol);
+          exceptClause.accept(visitor);
+
+          if (!visitor.isReRaised) {
+            // The exception has not been re-raised in the except clause
+            insertPossibleIssues(ctx, caughtException, caughtExceptionName, handledInterrupts);
+          }
         }
       }
     });
   }
+
 }

@@ -1,5 +1,5 @@
 try:
-    pass
+    foo()
 except SystemExit:  # Noncompliant {{Reraise this exception to stop the application as the user expects}}
       #^^^^^^^^^^
     pass
@@ -8,18 +8,18 @@ except KeyboardInterrupt as e:  # Noncompliant {{Reraise this exception to stop 
     pass
 
 try:
-    pass
+    foo()
 except:  # Noncompliant {{Specify an exception class to catch or reraise the exception}}
     pass
 
 try:
-    pass
+    foo()
 except BaseException: # Noncompliant {{Catch a more specific exception or reraise the exception}}
       #^^^^^^^^^^^^^
     pass
 
 try:
-    pass
+    foo()
 except ValueError:
     pass
 except SystemExit: # Noncompliant {{Reraise this exception to stop the application as the user expects}}
@@ -27,29 +27,29 @@ except SystemExit: # Noncompliant {{Reraise this exception to stop the applicati
     pass
 
 try:
-    pass
+    foo()
 except SystemExit:  # Noncompliant
     raise ValueError()
 
 try:
-    open("foo.txt", "r")
+    foo()
 except SystemExit as ex: # Noncompliant
       #^^^^^^^^^^
     try:
-        open("bar.txt", "r")
-    except SystemExit as ex2: # Compliant
+        bar()
+    except SystemExit as ex2:
         raise ex2
 
 try:
     foo()
 except KeyboardInterrupt as ex:
     try:
-        foo()
+        bar()
     except SystemExit:
         raise # FN
 
 try:
-    pass
+    foo()
 except KeyboardInterrupt: # Noncompliant
       #^^^^^^^^^^^^^^^^^
     pass
@@ -60,46 +60,82 @@ except SystemExit:
     raise
 
 try:
-    pass
-except (KeyboardInterrupt, SystemExit): # Noncompliant
-    pass
-
-try:
-    pass
-except (ValueError, KeyboardInterrupt):
-    pass
-except: # Noncompliant
+    foo()
+except (KeyboardInterrupt, SystemExit) as e:
+    raise e
+except:
     pass
 
 try:
+    foo()
+except (KeyboardInterrupt, SystemExit) as e:
+    raise e
+except BaseException:
     pass
+
+try:
+    foo()
+except (KeyboardInterrupt, SystemExit): # Noncompliant 2
+    pass
+
+try:
+    foo()
+except (KeyboardInterrupt, SystemExit) as e:
+    raise e
+
+try:
+    foo()
+except (ValueError, KeyboardInterrupt): # Noncompliant {{Reraise this exception to stop the application as the user expects}}
+                   #^^^^^^^^^^^^^^^^^
+    pass
+except: # Noncompliant {{Specify an exception class to catch or reraise the exception}}
+    pass
+
+try:
+    foo()
+except (ValueError, KeyboardInterrupt) as e:
+    raise e
+except: # Noncompliant {{Specify an exception class to catch or reraise the exception}}
+    pass
+
+try:
+    foo()
+except (ValueError, KeyboardInterrupt) as e:
+    raise e
+
+try:
+    foo()
 except SystemExit as e:
     raise e
 except KeyboardInterrupt:
     raise
 
 try:
-    pass
+    foo()
 except BaseException as e:
     raise e
 
 try:
-    pass
+    foo()
 except BaseException:
     raise
 except:
     raise
 
 try:
-    pass
+    foo()
 except:
     raise
 
 try:
-    pass
+    foo()
 except ThereIsNoExceptionWithThisName:
     raise
 except AndThereIsNoExceptionLikeThisEither as e:
     raise e
 except ValueError:
     raise ThisIsTheThirdNonExistingException()
+except NameError:
+    raise x
+except AnotherErrorKind and ThisErrorKind:
+    raise
