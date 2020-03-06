@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -38,18 +39,24 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.python.tree.TreeUtils;
 
-@Rule(key = "S2142")
+@Rule(key = "S5754")
 public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptionCheck {
 
-  private static final List<String> INTERRUPT_EXCEPTIONS = Arrays.asList("SystemExit", "KeyboardInterrupt");
   private static final String BASE_EXCEPTION_NAME = "BaseException";
+  private static final String SYSTEM_EXIT_EXCEPTION_NAME = "SystemExit";
+  private static final String KEYBOARD_INTERRUPT_NAME = "KeyboardInterrupt";
+
+  private static final List<String> INTERRUPT_EXCEPTIONS = Arrays.asList(SYSTEM_EXIT_EXCEPTION_NAME, KEYBOARD_INTERRUPT_NAME);
 
   private static final String MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION = "Reraise this exception to stop the application as the user expects";
   private static final String MESSAGE_BARE_EXCEPT = "Specify an exception class to catch or reraise the exception";
   private static final String MESSAGE_NOT_RERAISED_BASE_EXCEPTION = "Catch a more specific exception or reraise the exception";
 
+  private static final String SYSTEM_EXIT_FUNCTION_NAME = "sys.exit";
+  private static final String SYSTEM_EXC_INFO_NAME = "sys.exc_info";
+
   /**
-   * Checks that a given expression is re-raised eventually.
+   * Checks that a given expression is re-raised or eventually handled.
    */
   private static class ExceptionReRaiseCheckVisitor extends BaseTreeVisitor {
     private Symbol exceptionInstance;
@@ -68,6 +75,10 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
       }
 
       Expression raisedException = pyRaiseStatementTree.expressions().get(0);
+      if (raisedException.type().canOnlyBe(SYSTEM_EXIT_EXCEPTION_NAME)) {
+        this.isReRaised = true;
+      }
+
       if (raisedException instanceof HasSymbol) {
         Symbol symbol = ((HasSymbol) raisedException).symbol();
         if (symbol == null) {
@@ -79,6 +90,18 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
           this.isReRaised = true;
         }
       }
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression pyCallExpressionTree) {
+      Symbol symbol = pyCallExpressionTree.calleeSymbol();
+      if (symbol == null) {
+        return;
+      }
+
+      String fqn = symbol.fullyQualifiedName();
+      this.isReRaised |= SYSTEM_EXIT_FUNCTION_NAME.equals(fqn);
+      this.isReRaised |= SYSTEM_EXC_INFO_NAME.equals(fqn);
     }
   }
 
@@ -120,14 +143,6 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
     return true;
   }
 
-  private static void insertPossibleIssues(SubscriptionContext ctx, Expression caughtException, String caughtExceptionName, Set<String> handledInterrupts) {
-    if (INTERRUPT_EXCEPTIONS.contains(caughtExceptionName)) {
-      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
-    } else if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledInterrupts.containsAll(INTERRUPT_EXCEPTIONS)) {
-      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
-    }
-  }
-
   private static void handleCaughtException(SubscriptionContext ctx, Expression caughtException, Symbol exceptionInstanceSymbol,
     Tree exceptionBody, Set<String> handledInterrupts) {
     String caughtExceptionName = findExceptionName(caughtException);
@@ -141,9 +156,16 @@ public class IgnoredSystemExitOrKeyboardInterruptCheck extends PythonSubscriptio
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(exceptionInstanceSymbol);
     exceptionBody.accept(visitor);
 
-    if (!visitor.isReRaised) {
-      // The exception has not been re-raised in the except clause
-      insertPossibleIssues(ctx, caughtException, caughtExceptionName, handledInterrupts);
+    if (visitor.isReRaised) {
+      // The exception has been handled in the except clause
+      return;
+    }
+
+    // If the KeyboardInterrupt error was handled in any way (even possibly ignored), do not raise an issue.
+    if (SYSTEM_EXIT_EXCEPTION_NAME.equals(caughtExceptionName)) {
+      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_CAUGHT_EXCEPTION);
+    } else if (BASE_EXCEPTION_NAME.equals(caughtExceptionName) && !handledInterrupts.containsAll(INTERRUPT_EXCEPTIONS)) {
+      ctx.addIssue(caughtException, MESSAGE_NOT_RERAISED_BASE_EXCEPTION);
     }
   }
 

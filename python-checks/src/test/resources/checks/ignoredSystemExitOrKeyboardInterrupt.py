@@ -3,9 +3,6 @@ try:
 except SystemExit:  # Noncompliant {{Reraise this exception to stop the application as the user expects}}
       #^^^^^^^^^^
     pass
-except KeyboardInterrupt as e:  # Noncompliant {{Reraise this exception to stop the application as the user expects}}
-      #^^^^^^^^^^^^^^^^^
-    pass
 
 try:
     foo()
@@ -50,8 +47,7 @@ except KeyboardInterrupt as ex:
 
 try:
     foo()
-except KeyboardInterrupt: # Noncompliant
-      #^^^^^^^^^^^^^^^^^
+except KeyboardInterrupt:
     pass
 except: # Noncompliant
     # This should not be compliant as SystemExit was not handled and the except clause below is unreachable
@@ -75,7 +71,8 @@ except BaseException:
 
 try:
     foo()
-except (KeyboardInterrupt, SystemExit): # Noncompliant 2
+except (KeyboardInterrupt, SystemExit): # Noncompliant
+                          #^^^^^^^^^^
     pass
 
 try:
@@ -85,8 +82,7 @@ except (KeyboardInterrupt, SystemExit) as e:
 
 try:
     foo()
-except (ValueError, KeyboardInterrupt): # Noncompliant {{Reraise this exception to stop the application as the user expects}}
-                   #^^^^^^^^^^^^^^^^^
+except (ValueError, KeyboardInterrupt):
     pass
 except: # Noncompliant {{Specify an exception class to catch or reraise the exception}}
     pass
@@ -139,3 +135,27 @@ except NameError:
     raise x
 except AnotherErrorKind and ThisErrorKind:
     raise
+
+# Do not raise an issue in the case somebody calls sys.exit
+import sys
+
+try:
+    foo()
+except:
+    sys.exit(1)
+
+# If somebody calls sys.exc_info, just assume they know what they are doing
+try:
+    foo()
+except:
+    info = sys.exc_info()
+
+try:
+    foo()
+except:
+    raise SystemExit()
+
+try:
+    foo()
+except (KeyboardInterrupt, AnotherException):
+    sys.exit(1)

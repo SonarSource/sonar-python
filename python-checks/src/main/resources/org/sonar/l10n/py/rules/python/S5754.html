@@ -1,20 +1,22 @@
 <p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a>&nbsp;is raised when <a
-href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. <a
-href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> is raised when the user asks the program
-to stop by pressing interrupt keys. Both exceptions are expected to propagate up until the application stops. It is ok to catch them when a clean-up
-is necessary but they should be raised again immediately.</p>
+href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. This exception is expected to propagate up until the
+application stops. It is ok to catch it when a clean-up is necessary but it should be raised again immediately.</p>
 <p>A <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">bare <code>except:</code> statement</a>, i.e. an
 <code>except</code> without any exception class, is equivalent to <a
 href="https://docs.python.org/3/library/exceptions.html#BaseException"><code>except BaseException</code></a>. Both statements will catch every
-exception, including <code>SystemExit</code> and <code>KeyboardInterrupt</code>. It is recommended to catch instead a specific exception. If it is not
-possible, the exception should be raised again.</p>
+exception, including <code>SystemExit</code>. It is recommended to catch instead a specific exception. If it is not possible, the exception should be
+raised again.</p>
+<p>Note that it is also a good idea to reraise the <a
+href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> exception.</p>
+<p>This rule raises an issue when a bare <code>except:</code>, an <code>except BaseException</code> or an <code>except SystemExit</code> don't reraise
+the exception caught.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 try:
     open("foo.txt", "r")
 except SystemExit:  # Noncompliant
     pass
-except KeyboardInterrupt:  # Noncompliant
+except KeyboardInterrupt:  # No issue raised but be careful when you do this
     pass
 
 try:
@@ -57,9 +59,4 @@ except FileNotFoundError:
 <p> * Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code>
 statement</a></p>
 <p> * <a href="http://cwe.mitre.org/data/definitions/391.html">MITRE, CWE-391</a> - Unchecked Error Condition</p>
-<h2>See</h2>
-<ul>
-  <li> <a href="http://cwe.mitre.org/data/definitions/391.html">MITRE, CWE-391</a> - Unchecked Error Condition </li>
-  <li> <a href="https://www.ibm.com/developerworks/java/library/j-jtp05236/index.html?ca=drs-#2.1">Dealing with InterruptedException</a> </li>
-</ul>
 
