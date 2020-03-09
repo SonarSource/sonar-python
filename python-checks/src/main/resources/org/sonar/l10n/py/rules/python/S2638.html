@@ -1,0 +1,81 @@
+<p>Because a subclass instance may be used as an instance of the superclass, overriding methods should uphold the aspects of the superclass contract
+that relate to the Liskov Substitution Principle. Specifically, an overriding method should be callable with the parameters as the overriden one.</p>
+<p>The following modifications are ok:</p>
+<ul>
+  <li> Adding an optional parameter, i.e. with a default value, as long as they don't change the order of positional parameters. </li>
+  <li> Renaming a positional-only parameter. </li>
+  <li> Reordering keyword-only parameters. </li>
+  <li> Adding a default value to an existing parameter. </li>
+  <li> Changing the default value of an existing parameter. </li>
+  <li> Extend the ways a parameter can be provided, i.e. change a keyword-only or positional-only parameter to a keyword-or-positional parameter. This
+  is only true if the order of positional parameters doesn't change. New positional parameters should be placed at the end. </li>
+  <li> Adding a vararg parameter (<code>*args</code>). </li>
+  <li> Adding a keywords parameter (<code>**kwargs</code>). </li>
+</ul>
+<p>The following modifications are not ok:</p>
+<ul>
+  <li> Removing parameters, even when they have default values. </li>
+  <li> Adding mandatory parameters, i.e. without a default value. </li>
+  <li> Removing the default value of a parameter. </li>
+  <li> Renaming parameters, except when they are positional-only parameters. </li>
+  <li> Reordering parameters, except when they are keyword-only parameters. </li>
+  <li> Removing some ways of providing a parameter. If a parameter could be passed as keyword it should still be possible to pass it as keyword, and
+  the same is true for positional parameters. </li>
+  <li> Removing a vararg parameter (<code>*args</code>). </li>
+  <li> Removing a keywords parameter (<code>**kwargs</code>). </li>
+</ul>
+<p>This rule raises an issue when the signature of an overriding method does not accept the same parameters as the overriden one. Only instance
+methods are considered, class methods and static methods are ignored.</p>
+<h2>Noncompliant Code Example:</h2>
+<pre>
+class ParentClass(object):
+    def mymethod(self, param1):
+        pass
+
+class ChildClassMore(ParentClass):
+    def mymethod(self, param1, param2, param3): # Noncompliant * 2.
+        # Remove parameter "param2" or provide a default value.
+        # Remove parameter "param3" or provide a default value.
+        pass
+
+class ChildClassLess(ParentClass):
+    def mymethod(self): # Noncompliant. Add missing parameter "param1".
+        pass
+
+class ChildClassRenamed(ParentClass):
+    def mymethod(self, renamed): # Noncompliant. Rename this parameter as "param1".
+        pass
+
+class ChildClassReordered(ParentClass):
+    def mymethod(self, inserted, param1): # Noncompliant * 2.
+        # Move param1 in first position
+        # Remove parameters "inserted" or provide a default value.
+        pass
+</pre>
+<h2>Compliant Solution:</h2>
+<pre>
+class ParentClass(object):
+    def mymethod(self, param1):
+        pass
+
+class ChildClassMore(ParentClass):
+    def mymethod(self, param1, param2=None, param3=None):
+        pass
+
+class ChildClassLess(ParentClass):
+    def mymethod(self, param1=None):
+        pass
+
+class ChildClassRenamed(ParentClass):
+    def mymethod(self, param1):
+        pass
+
+class ChildClassReordered(ParentClass):
+    def mymethod(self, param1, inserted=None):
+        pass
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a> </li>
+</ul>
+

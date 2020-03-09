@@ -138,6 +138,17 @@ public class TreeUtilsTest {
     TreeUtils.getClassSymbolFromDef(classDef);
   }
 
+  @Test
+  public void nonTupleParameters() {
+    FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.nonTupleParameters(functionDef)).isEmpty();
+
+    fileInput = PythonTestUtils.parse("def foo(param1, param2): pass");
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.nonTupleParameters(functionDef)).isEqualTo(functionDef.parameters().nonTuple());
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }
