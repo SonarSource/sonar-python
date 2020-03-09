@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -35,10 +36,10 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 
-import static org.assertj.core.api.Assertions.allOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TreeUtilsTest {
@@ -109,6 +110,32 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("foo")))).isTrue();
     assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("bar")))).isFalse();
     assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.IF_STMT))).isFalse();
+  }
+
+  @Test
+  public void getClassSymbolFromDef() {
+    FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(): pass");
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+
+    Symbol symbolA = classDef.name().symbol();
+    assertThat(TreeUtils.getClassSymbolFromDef(classDef)).isEqualTo(symbolA);
+    assertThat(TreeUtils.getClassSymbolFromDef(null)).isNull();
+
+    fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    pass",
+      "A = 42"
+    );
+    classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    assertThat(TreeUtils.getClassSymbolFromDef(classDef)).isNull();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void getClassSymbolFromDef_illegalSymbol() {
+    FileInput fileInput = PythonTestUtils.parseWithoutSymbols("class A:\n  def foo(): pass");
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+
+    TreeUtils.getClassSymbolFromDef(classDef);
   }
 
   private static boolean isOuterFunction(Tree tree) {

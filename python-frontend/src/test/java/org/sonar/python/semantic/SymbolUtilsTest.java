@@ -28,14 +28,18 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -222,5 +226,19 @@ public class SymbolUtilsTest {
 
     Mockito.when(pythonFile.uri()).thenThrow(InvalidPathException.class);
     assertThat(pathOf(pythonFile)).isNull();
+  }
+
+  @Nullable
+  private static ClassDef findClassDefinition(Tree tree, String name) {
+    if (tree.is(Tree.Kind.CLASSDEF)) {
+      ClassDef classDef = (ClassDef) tree;
+      if (classDef.name().name().equals(name)) {
+        return classDef;
+      }
+    }
+    return tree.children().stream()
+      .map(child -> findClassDefinition(child, name))
+      .filter(Objects::nonNull)
+      .findFirst().orElse(null);
   }
 }

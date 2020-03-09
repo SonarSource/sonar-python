@@ -28,6 +28,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -94,5 +98,23 @@ public class TreeUtils {
     } else {
       return Stream.of(expression);
     }
+  }
+
+  @CheckForNull
+  public static ClassSymbol getClassSymbolFromDef(@Nullable ClassDef classDef) {
+    if (classDef == null) {
+      return null;
+    }
+
+    Symbol classNameSymbol = classDef.name().symbol();
+    if (classNameSymbol == null) {
+      throw new IllegalStateException("A ClassDef should always have a non-null symbol!");
+    }
+
+    if (classNameSymbol.kind() == Symbol.Kind.CLASS) {
+      return ((ClassSymbol) classNameSymbol);
+    }
+
+    return null;
   }
 }

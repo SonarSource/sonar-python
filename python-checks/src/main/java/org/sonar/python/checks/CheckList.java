@@ -151,6 +151,7 @@ public final class CheckList {
       SelfAssignmentCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
+      SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
       StringLiteralDuplicationCheck.class,
