@@ -1,13 +1,11 @@
 <p>The special method <a
 href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__"><code>__exit__</code></a> should only raise an
-exception when it fails. I should never raise the provided exception, it is the caller's responsibility.</p>
-<p>Raising this exception will make the stack trace difficult to understand.</p>
+exception when it fails. It should never raise the provided exception, it is the caller's responsibility.</p>
+<p> Raising this exception will make the stack trace difficult to understand.</p>
 <p>The <code>__exit__</code> method can filter passed-in exceptions by simply returning True or False.</p>
 <p>This rule raises an issue when:</p>
-<ul>
-  <li> an <code>__exit__</code> method has a bare <code>raise</code> outside of an <code>except</code> block. </li>
-  <li> an <code>__exit__</code> method raises the exception provided as parameter. </li>
-</ul>
+<p> * an <code>__exit__</code> method has a bare <code>raise</code> outside of an <code>except</code> block.</p>
+<p> * an <code>__exit__</code> method raises the exception provided as parameter.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 class MyContextManager:
@@ -44,9 +42,7 @@ class MyContextManager:
         raise MemoryError("No more memory")  # This is ok too.
 </pre>
 <h2>See</h2>
-<ul>
-  <li> Python documentation <del></del> <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__">The
-  <code>__exit__</code> special method</a> </li>
-  <li> PEP 343 <del></del> <a href="https://www.python.org/dev/peps/pep-0343/">The "with" Statement</a> </li>
-</ul>
+<p> * Python documentation – <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__">The
+<code>__exit__</code> special method</a></p>
+<p> * PEP 343 – <a href="https://www.python.org/dev/peps/pep-0343/">The "with" Statement</a></p>
 
