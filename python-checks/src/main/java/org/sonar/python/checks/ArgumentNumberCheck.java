@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -93,19 +92,9 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static boolean extendsZopeInterface(@Nullable Symbol symbol) {
     if (symbol != null && symbol.kind() == Symbol.Kind.CLASS) {
-      Set<Symbol> superClasses = new HashSet<>();
-      addSuperClasses(symbol, superClasses);
-      return superClasses.stream().anyMatch(s -> "zope.interface.Interface".equals(s.fullyQualifiedName()));
+      return ((ClassSymbol) symbol).isOrExtends("zope.interface.Interface");
     }
     return false;
-  }
-
-  private static void addSuperClasses(Symbol symbol, Set<Symbol> set) {
-    if (set.add(symbol) && symbol instanceof ClassSymbol) {
-      for (Symbol superClass : ((ClassSymbol) symbol).superClasses()) {
-        addSuperClasses(superClass, set);
-      }
-    }
   }
 
   private static void addSecondary(FunctionSymbol functionSymbol, PreciseIssue preciseIssue) {
