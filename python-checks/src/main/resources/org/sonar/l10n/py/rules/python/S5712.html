@@ -6,8 +6,8 @@ expect it and won't catch this exception.</p>
 <code>B.__radd__(A)</code>. This enables adding new operations by changing only one class instead of two.</p>
 <p>This rule raises an issue when one of the following methods raises <code>NotImplementedError</code> instead of returning
 <code>NotImplemented</code>:</p>
-<p> * __lt__(self, other)</p>
 <ul>
+  <li> __lt__(self, other) </li>
   <li> __le__(self, other) </li>
   <li> __eq__(self, other) </li>
   <li> __ne__(self, other) </li>

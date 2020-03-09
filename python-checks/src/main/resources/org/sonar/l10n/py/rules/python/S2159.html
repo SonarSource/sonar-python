@@ -1,17 +1,12 @@
 <p>In some cases a comparison with operators <code>==</code>, or <code>!=</code> will always return True or always return False. When this happens,
 the comparison and all its dependent code can simply be removed. This includes:</p>
 <ul>
-  <li> comparing <code>None</code> with a value which will always be <code>None</code>. </li>
   <li> comparing unrelated builtin types such as string and integer. </li>
-  <li> comparing class instances which do not implement <code>__eq__</code>, or <code>__ne__</code> if <code>!=</code> is used, to an object of a
-  different type (builtin or from an unrelated class which also doesn't implement <code>__eq__</code> or <code>__ne__</code>). </li>
+  <li> comparing class instances which do not implement <code>__eq__</code> or <code>__ne__</code> to an object of a different type (builtin or from
+  an unrelated class which also doesn't implement <code>__eq__</code> or <code>__ne__</code>). </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-mynone = None
-
-foo = mynone == None  # Noncompliant. Always True.
-
 foo = 1 == "1"  # Noncompliant. Always False.
 
 foo = 1 != "1"  # Noncompliant. Always True.
@@ -22,14 +17,6 @@ class A:
 myvar = A() == 1  # Noncompliant. Always False.
 myvar = A() != 1  # Noncompliant. Always True.
 
-class Ne:
-    def __ne__(self, other):
-        return True
-
-myvar = Ne() == 1  # Noncompliant. Always False. "__eq__" does not call "__ne__" by default
-myvar = 1 == Ne()  # Noncompliant. Always False.
-myvar = Ne() != 1  # Ok
-myvar = 1 != Ne()  # Ok
 </pre>
 <h2>Compliant Solution</h2>
 <pre>

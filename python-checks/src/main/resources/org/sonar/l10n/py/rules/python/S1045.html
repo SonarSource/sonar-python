@@ -13,12 +13,12 @@
 <pre>
 def foo():
     try:
-        raise FileExistsError()
-    except (OSError, RuntimeError) as e:
+        raise FloatingPointError()
+    except (ArithmeticError, RuntimeError) as e:
         print(e)
-    except FileExistsError as e: # Noncompliant. FileExistsError is a subclass of OSError
+    except FloatingPointError as e: # Noncompliant. FloatingPointError is a subclass of ArithmeticError
         print("Never executed")
-    except FileNotFoundError as e: # Noncompliant. FileNotFoundError is a subclass of OSError
+    except OverflowError as e: # Noncompliant. OverflowError is a subclass of ArithmeticError
         print("Never executed")
 
     try:
@@ -39,12 +39,12 @@ def foo():
 <pre>
 def foo():
     try:
-        raise FileExistsError()
-    except FileExistsError as e:
-        print("Never executed")
-    except FileNotFoundError as e:
-        print("Never executed")
-    except (OSError, RuntimeError) as e:
+        raise FloatingPointError()
+    except FloatingPointError as e:
+        print("Executed")
+    except OverflowError as e:
+        print("Executed")
+    except (ArithmeticError, RuntimeError) as e:
         print(e)
 
     try:
