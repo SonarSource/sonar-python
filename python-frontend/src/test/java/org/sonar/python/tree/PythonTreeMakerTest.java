@@ -33,11 +33,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.AssignementExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -1123,6 +1125,46 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
     assertThat(annAssign.assignedValue()).isNull();
     assertThat(annAssign.equalToken()).isNull();
+  }
+
+  @Test
+  public void assignement_expression() {
+    setRootRule(PythonGrammar.NAMED_EXPR_TEST);
+    AstNode astNode = p.parse("b := 12");
+    Expression expression = treeMaker.expression(astNode);
+    assertThat(expression.is(Kind.ASSIGNMENT_EXPRESSION)).isTrue();
+    AssignementExpression assignementExpression = (AssignementExpression) expression;
+    Name name = assignementExpression.name();
+    Token walrus = assignementExpression.walrusOperator();
+    Expression walrusExpression = assignementExpression.expression();
+    assertThat(name.name()).isEqualTo("b");
+    assertThat(walrus.value()).isEqualTo(":=");
+    assertThat(walrusExpression.is(Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(((NumericLiteral) walrusExpression).valueAsString()).isEqualTo("12");
+
+    assertThat(assignementExpression.children()).containsExactly(name, walrus, walrusExpression);
+
+    setRootRule(PythonGrammar.IF_STMT);
+    astNode = p.parse("if a or (b := foo()):\n" +
+                                      "  print(b)");
+    IfStatement ifStatement = treeMaker.ifStatement(astNode);
+    BinaryExpression condition = (BinaryExpression) ifStatement.condition();
+    ParenthesizedExpression parenthesized = ((ParenthesizedExpression) condition.rightOperand());
+
+    assignementExpression = (AssignementExpression) parenthesized.expression();
+
+    name = assignementExpression.name();
+    walrus = assignementExpression.walrusOperator();
+    walrusExpression = assignementExpression.expression();
+
+    assertThat(name.name()).isEqualTo("b");
+    assertThat(walrus.value()).isEqualTo(":=");
+    assertThat(walrusExpression.is(Kind.CALL_EXPR)).isTrue();
+    Expression callee = ((CallExpression) walrusExpression).callee();
+    assertThat(callee.is(Kind.NAME)).isTrue();
+    assertThat(((Name) callee).name()).isEqualTo("foo");
+
+    assertThat(assignementExpression.children()).containsExactly(name, walrus, walrusExpression);
   }
 
   @Test

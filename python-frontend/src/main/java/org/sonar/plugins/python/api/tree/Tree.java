@@ -200,6 +200,8 @@ public interface Tree {
     BITWISE_COMPLEMENT(UnaryExpression.class),
     NOT(UnaryExpression.class),
 
+    ASSIGNMENT_EXPRESSION(AssignementExpression.class),
+
     KEY_VALUE_PAIR(KeyValuePair.class),
     TOKEN(Token.class);
     final Class<? extends Tree> associatedInterface;

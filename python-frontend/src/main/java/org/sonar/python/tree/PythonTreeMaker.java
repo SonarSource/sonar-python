@@ -488,7 +488,7 @@ public class PythonTreeMaker {
   // Compound statements
   public IfStatement ifStatement(AstNode astNode) {
     Token ifToken = toPyToken(astNode.getTokens().get(0));
-    AstNode condition = astNode.getFirstChild(PythonGrammar.TEST);
+    AstNode condition = astNode.getFirstChild(PythonGrammar.NAMED_EXPR_TEST);
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(suite);
@@ -636,7 +636,7 @@ public class PythonTreeMaker {
   public WhileStatementImpl whileStatement(AstNode astNode) {
     Token whileKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.WHILE).getToken());
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
-    Expression condition = expression(astNode.getFirstChild(PythonGrammar.TEST));
+    Expression condition = expression(astNode.getFirstChild(PythonGrammar.NAMED_EXPR_TEST));
     AstNode firstSuite = astNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(firstSuite);
     AstNode lastSuite = astNode.getLastChild(PythonGrammar.SUITE);
@@ -687,7 +687,7 @@ public class PythonTreeMaker {
 
   private ExpressionList expressionList(AstNode astNode) {
     if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TESTLIST_COMP)) {
-      List<Expression> expressions = astNode.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
+      List<Expression> expressions = astNode.getChildren(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
         .map(this::expression)
         .collect(Collectors.toList());
       List<Token> commas = punctuators(astNode, PythonPunctuator.COMMA);
@@ -836,7 +836,10 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.NAME)) {
       return name(astNode);
     }
-    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.TEST, PythonGrammar.TEST_NOCOND)) {
+    if (astNode.is(PythonGrammar.NAMED_EXPR_TEST) && astNode.hasDirectChildren(PythonPunctuator.WALRUS_OPERATOR)) {
+      return assignmentExpression(astNode);
+    }
+    if (astNode.is(PythonGrammar.EXPR, PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.TEST, PythonGrammar.TEST_NOCOND)) {
       if (astNode.getChildren().size() == 1) {
         return expression(astNode.getFirstChild());
       } else {
@@ -869,6 +872,15 @@ public class PythonTreeMaker {
       return new EllipsisExpressionImpl(toPyToken(astNode.getTokens()));
     }
     throw new IllegalStateException("Expression " + astNode.getType() + " not correctly translated to strongly typed AST");
+  }
+
+  private Expression assignmentExpression(AstNode astNode) {
+    AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST);
+    Name name = name(nameNode.getFirstDescendant(PythonGrammar.NAME));
+    AstNode walrusNode = nameNode.getNextSibling();
+    Token walrusToken = toPyToken(walrusNode.getToken());
+    Expression expression = expression(walrusNode.getNextSibling());
+    return new AssignmentExpressionImpl(name, walrusToken, expression);
   }
 
   private Expression repr(AstNode astNode) {
@@ -1060,7 +1072,7 @@ public class PythonTreeMaker {
     if (testListComp != null) {
       AstNode compForNode = testListComp.getFirstChild(PythonGrammar.COMP_FOR);
       if (compForNode != null) {
-        Expression resultExpression = expression(testListComp.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
+        Expression resultExpression = expression(testListComp.getFirstChild(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.STAR_EXPR));
         return new ComprehensionExpressionImpl(Tree.Kind.LIST_COMPREHENSION, leftBracket, resultExpression, compFor(compForNode), rightBracket);
       }
       elements = expressionList(testListComp);

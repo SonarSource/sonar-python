@@ -81,6 +81,8 @@ public enum PythonGrammar implements GrammarRuleKey {
   AND_EXPR,
   OR_EXPR,
 
+  NAMED_EXPR_TEST,
+
   COMPARISON,
   COMP_OPERATOR,
 
@@ -186,6 +188,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));
 
+    b.rule(NAMED_EXPR_TEST).is(TEST, b.optional(PythonPunctuator.WALRUS_OPERATOR, TEST));
     b.rule(TEST).is(b.firstOf(
       b.sequence(OR_TEST, b.optional("if", OR_TEST, "else", TEST)),
       LAMBDEF));
@@ -215,7 +218,7 @@ public enum PythonGrammar implements GrammarRuleKey {
         ELLIPSIS,
         PythonKeyword.NONE));
     b.rule(ELLIPSIS).is(b.sequence(".", ".", "."));
-    b.rule(TESTLIST_COMP).is(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))));
+    b.rule(TESTLIST_COMP).is(b.firstOf(NAMED_EXPR_TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(NAMED_EXPR_TEST, STAR_EXPR)), b.optional(","))));
     b.rule(TRAILER).is(b.firstOf(
         b.sequence("(", b.optional(ARGLIST), ")"),
         b.sequence("[", SUBSCRIPTLIST, "]"),
@@ -380,8 +383,8 @@ public enum PythonGrammar implements GrammarRuleKey {
       COMPOUND_STMT));
     b.rule(STMT_LIST).is(SIMPLE_STMT, b.zeroOrMore(";", SIMPLE_STMT), b.optional(";"));
 
-    b.rule(IF_STMT).is("if", TEST, ":", SUITE, b.zeroOrMore("elif", TEST, ":", SUITE), b.optional("else", ":", SUITE));
-    b.rule(WHILE_STMT).is("while", TEST, ":", SUITE, b.optional("else", ":", SUITE));
+    b.rule(IF_STMT).is("if", NAMED_EXPR_TEST, ":", SUITE, b.zeroOrMore("elif", NAMED_EXPR_TEST, ":", SUITE), b.optional("else", ":", SUITE));
+    b.rule(WHILE_STMT).is("while", NAMED_EXPR_TEST, ":", SUITE, b.optional("else", ":", SUITE));
     b.rule(FOR_STMT).is("for", EXPRLIST, "in", TESTLIST, ":", SUITE, b.optional("else", ":", SUITE));
 
     b.rule(TRY_STMT).is("try", ":", SUITE, b.firstOf(

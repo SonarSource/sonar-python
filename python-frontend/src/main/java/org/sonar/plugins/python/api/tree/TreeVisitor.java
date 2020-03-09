@@ -95,6 +95,8 @@ public interface TreeVisitor {
 
   void visitAssignmentStatement(AssignmentStatement assignmentStatement);
 
+  void visitAssignmentExpression(AssignementExpression assignementExpression);
+
   void visitExpressionList(ExpressionList expressionList);
 
   void visitBinaryExpression(BinaryExpression binaryExpression);
