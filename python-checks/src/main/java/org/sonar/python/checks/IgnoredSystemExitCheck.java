@@ -19,11 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -102,7 +100,8 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static Symbol findExceptionInstanceSymbol(Expression exceptionInstance) {
+  @CheckForNull
+  private static Symbol findExceptionInstanceSymbol(@Nullable Expression exceptionInstance) {
     Symbol exceptionInstanceSymbol = null;
     if (exceptionInstance instanceof HasSymbol) {
       exceptionInstanceSymbol = ((HasSymbol) exceptionInstance).symbol();
@@ -110,6 +109,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
     return exceptionInstanceSymbol;
   }
 
+  @CheckForNull
   private static String findExceptionName(Expression exception) {
     if (exception instanceof HasSymbol) {
       Symbol exceptionSymbol = ((HasSymbol) exception).symbol();
@@ -125,26 +125,19 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
    * Checks whether a possibly bare except clause is compliant and raises the issue if not.
    * Returns true if the except clause was bare, false otherwise.
    */
-  private static boolean handlePossibleBareException(SubscriptionContext ctx, ExceptClause exceptClause, boolean isSystemExitHandled) {
-    Expression exceptionExpr = exceptClause.exception();
-    if (exceptionExpr != null) {
-      return false;
-    }
-
+  private static void handlePossibleBareException(SubscriptionContext ctx, ExceptClause exceptClause, boolean isSystemExitHandled) {
     ExceptionReRaiseCheckVisitor visitor = new ExceptionReRaiseCheckVisitor(null);
     exceptClause.accept(visitor);
     if (!visitor.isReRaised && !isSystemExitHandled) {
       ctx.addIssue(exceptClause.exceptKeyword(), MESSAGE_BARE_EXCEPT);
     }
-
-    return true;
   }
 
   /**
    * Checks whether the caught exception is properly handled.
-   * @return True if the handled exception was a SystemError, false otherwise.
+   * @return True if the handled exception was a SystemExit, false otherwise.
    */
-  private static boolean handleCaughtException(SubscriptionContext ctx, Expression caughtException, Symbol exceptionInstanceSymbol,
+  private static boolean handleCaughtException(SubscriptionContext ctx, Expression caughtException, @Nullable Symbol exceptionInstanceSymbol,
     Tree exceptionBody, boolean handledSystemExit) {
     String caughtExceptionName = findExceptionName(caughtException);
     if (caughtExceptionName == null) {
@@ -176,13 +169,12 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.TRY_STMT, ctx -> {
       TryStatement tryStatement = (TryStatement) ctx.syntaxNode();
-      Set<String> handledInterrupts = new HashSet<>();
-
       boolean isSystemExitHandled = false;
 
       for (ExceptClause exceptClause : tryStatement.exceptClauses()) {
         Expression exceptionExpr = exceptClause.exception();
-        if (handlePossibleBareException(ctx, exceptClause, isSystemExitHandled)) {
+        if (exceptionExpr == null) {
+          handlePossibleBareException(ctx, exceptClause, isSystemExitHandled);
           break;
         }
 
