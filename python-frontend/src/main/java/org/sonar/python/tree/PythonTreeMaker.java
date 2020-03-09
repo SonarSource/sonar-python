@@ -533,7 +533,7 @@ public class PythonTreeMaker {
     ParameterList parameterList = null;
     AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
     if (typedArgListNode != null) {
-      List<AnyParameter> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF, PythonPunctuator.MUL).stream()
+      List<AnyParameter> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF, PythonPunctuator.MUL, PythonPunctuator.DIV).stream()
         .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
       List<Token> commas = punctuators(typedArgListNode, PythonPunctuator.COMMA);
       parameterList = new ParameterListImpl(arguments, commas);
@@ -1195,8 +1195,8 @@ public class PythonTreeMaker {
     AstNode varArgsListNode = astNode.getFirstChild(PythonGrammar.VARARGSLIST);
     ParameterList argListTree = null;
     if (varArgsListNode != null) {
-      List<AnyParameter> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME).stream()
-        .map(this::parameter).collect(Collectors.toList());
+      List<AnyParameter> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME, PythonPunctuator.MUL, PythonPunctuator.DIV).stream()
+        .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
       List<Token> commas = punctuators(varArgsListNode, PythonPunctuator.COMMA);
       argListTree = new ParameterListImpl(parameters, commas);
     }
@@ -1205,9 +1205,12 @@ public class PythonTreeMaker {
   }
 
   private AnyParameter parameter(AstNode parameter) {
-    if(parameter.is(PythonPunctuator.MUL)) {
-      if(parameter.getNextSibling()==null || parameter.getNextSibling().is(PythonPunctuator.COMMA)) {
-        return new ParameterImpl(toPyToken(parameter.getToken()));
+    if (parameter.is(PythonPunctuator.DIV)) {
+      return new SeparatorParameterImpl(toPyToken(parameter.getToken()));
+    }
+    if (parameter.is(PythonPunctuator.MUL)) {
+      if (parameter.getNextSibling() == null || parameter.getNextSibling().is(PythonPunctuator.COMMA)) {
+        return new SeparatorParameterImpl(toPyToken(parameter.getToken()));
       }
       return null;
     }

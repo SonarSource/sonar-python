@@ -93,13 +93,11 @@ class Scope {
 
   void createSelfParameter(Parameter parameter) {
     Name nameTree = parameter.name();
-    if (nameTree != null) {
-      String symbolName = nameTree.name();
-      SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
-      symbols.add(symbol);
-      symbolsByName.put(symbolName, symbol);
-      symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
-    }
+    String symbolName = nameTree.name();
+    SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
+    symbols.add(symbol);
+    symbolsByName.put(symbolName, symbol);
+    symbol.addUsage(nameTree, Usage.Kind.PARAMETER);
   }
 
   void addFunctionSymbol(FunctionDef functionDef, @Nullable String fullyQualifiedName) {

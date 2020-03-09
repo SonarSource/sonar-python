@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -79,16 +80,16 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
       // if a method has no parameters then it can't be a instance method.
       return true;
     }
-    List<Parameter> params = parameters.nonTuple();
+    List<AnyParameter> params = parameters.all();
     if (params.isEmpty()) {
       return false;
     }
-    Parameter first = params.get(0);
-    Name paramName = first.name();
-    if(paramName == null) {
+    if (!params.get(0).is(Tree.Kind.PARAMETER)) {
       // star argument should not raise issue
       return true;
     }
+    Parameter first = (Parameter) params.get(0);
+    Name paramName = first.name();
     SelfVisitor visitor = new SelfVisitor(paramName.name());
     funcDef.body().accept(visitor);
     return visitor.isUsingSelfArg;

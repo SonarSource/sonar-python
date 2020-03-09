@@ -89,6 +89,7 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReprExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.SeparatorParameter;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
@@ -835,7 +836,36 @@ public class PythonTreeMakerTest extends RuleTest {
     functionDef = parse("def __call__(self, *, manager):\n  pass", treeMaker::funcDefStatement);
     assertThat(functionDef.parameters().all()).hasSize(3);
     functionDef = parse("def __call__(*):\n  pass", treeMaker::funcDefStatement);
-    assertThat(functionDef.parameters().all()).hasSize(1);
+    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Kind.SEPARATOR_PARAMETER);
+
+    functionDef = parse("def f(a, /): pass", treeMaker::funcDefStatement);
+    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Kind.PARAMETER, Kind.SEPARATOR_PARAMETER);
+    assertThat(((SeparatorParameter) functionDef.parameters().all().get(1)).starOrSlashToken().value()).isEqualTo("/");
+
+    assertThat(funcDef("def func(): ...").parameters()).isNull();
+    assertThat(funcDef("def func(a): ...").parameters().all()).hasSize(1);
+    assertThat(funcDef("def func(a, b): ...").parameters().all()).hasSize(2);
+    assertThat(funcDef("def func(a, *args): ...").parameters().all()).hasSize(2);
+    assertThat(funcDef("def func(a, **kwargs): ...").parameters().all()).hasSize(2);
+    assertThat(funcDef("def func(a, *args, **kwargs): ...").parameters().all()).hasSize(3);
+    assertThat(funcDef("def func(*args): ...").parameters().all()).hasSize(1);
+    assertThat(funcDef("def func(**kwargs): ...").parameters().all()).hasSize(1);
+    assertThat(funcDef("def func(*args, **kwargs): ...").parameters().all()).hasSize(2);
+    assertThat(funcDef("def func(*args, a, **kwargs): ...").parameters().all()).hasSize(3);
+    assertThat(funcDef("def func(*): ...").parameters().all()).hasSize(1);
+    assertThat(funcDef("def func(*, a): ...").parameters().all()).hasSize(2);
+    assertThat(funcDef("def func(a, b, *, c): ...").parameters().all()).hasSize(4);
+    assertThat(funcDef("def func(a, b, /): ...").parameters().all()).hasSize(3);
+    assertThat(funcDef("def func(a, b, /, c): ...").parameters().all()).hasSize(4);
+    assertThat(funcDef("def func(a, b, /, c, *args): ...").parameters().all()).hasSize(5);
+    assertThat(funcDef("def func(a, b, /, c, **kwargs): ...").parameters().all()).hasSize(5);
+    assertThat(funcDef("def func(a, b, /, *args): ...").parameters().all()).hasSize(4);
+    assertThat(funcDef("def func(a, b, /, **kwargs): ...").parameters().all()).hasSize(4);
+  }
+
+  private FunctionDef funcDef(String code) {
+    setRootRule(PythonGrammar.FUNCDEF);
+    return parse(code, treeMaker::funcDefStatement);
   }
 
   @Test
@@ -1767,6 +1797,20 @@ public class PythonTreeMakerTest extends RuleTest {
     lambdaExpressionTree = parse("lambda x: x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.getKind()).isEqualTo(Tree.Kind.LAMBDA);
     assertThat(lambdaExpressionTree.expression()).isInstanceOf(Name.class);
+
+    assertThat(lambda("lambda x, *args: x").parameters().all()).hasSize(2);
+    assertThat(lambda("lambda x, **kwargs: x").parameters().all()).hasSize(2);
+    assertThat(lambda("lambda x, *args, **kwargs: x").parameters().all()).hasSize(3);
+    assertThat(lambda("lambda x, *: x").parameters().all()).hasSize(2);
+    assertThat(lambda("lambda x, /: x").parameters().all()).hasSize(2);
+    assertThat(lambda("lambda x, /, *args, **kwargs: x").parameters().all()).hasSize(4);
+    assertThat(lambda("lambda *, x: x").parameters().all()).hasSize(2);
+    assertThat(lambda("lambda **kwargs: kwargs").parameters().all()).hasSize(1);
+  }
+
+  private LambdaExpression lambda(String code) {
+    setRootRule(PythonGrammar.LAMBDEF);
+    return parse(code, treeMaker::lambdaExpression);
   }
 
   @Test

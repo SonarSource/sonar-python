@@ -19,38 +19,20 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import javax.annotation.CheckForNull;
-
 /**
+ * "*" delimiting keyword only parameters or "/" delimiting positional only parameters.
+ *
+ * Examples:
  * <pre>
- *   {@link #name()} {@link #typeAnnotation()} = {@link #defaultValue()}
+ *   def foo(a, *, b)
  * </pre>
  *
- *
- * or
- *
  * <pre>
- *   {@link #starToken()} {@link #name()}
+ *   def foo(a, /, b)
  * </pre>
- *
- * See https://docs.python.org/3/reference/compound_stmts.html#grammar-token-parameter
  */
-public interface Parameter extends AnyParameter {
+public interface SeparatorParameter extends AnyParameter {
 
-  /**
-   * Represents both '*' and '**'
-   */
-  @CheckForNull
-  Token starToken();
+  Token starOrSlashToken();
 
-  Name name();
-
-  @CheckForNull
-  TypeAnnotation typeAnnotation();
-
-  @CheckForNull
-  Token equalToken();
-
-  @CheckForNull
-  Expression defaultValue();
 }

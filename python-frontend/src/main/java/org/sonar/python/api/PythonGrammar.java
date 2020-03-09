@@ -253,8 +253,15 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(NAME).is(IDENTIFIER);
 
     b.rule(VARARGSLIST).is(b.firstOf(
-      b.sequence(b.zeroOrMore(FPDEF, b.optional("=", TEST), ","), b.firstOf(b.sequence("*", NAME, b.optional(",", "**", NAME)), b.sequence("**", NAME))),
-      b.sequence(FPDEF, b.optional("=", TEST), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(","))));
+      b.sequence("**", NAME, b.optional(",")),
+      b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME), b.optional(",")),
+      b.sequence(FPDEF, b.optional("=", TEST),
+        b.zeroOrMore(",", FPDEF, b.optional("=", TEST)),
+        b.optional(",", "/", b.zeroOrMore(",", FPDEF, b.optional("=", TEST))),
+        b.optional(",", b.firstOf(
+          b.sequence("**", NAME),
+          b.sequence("*", b.optional(NAME), b.zeroOrMore(",", FPDEF, b.optional("=", TEST)), b.optional(",", "**", NAME))))
+        ), b.optional(",")));
     b.rule(FPDEF).is(b.firstOf(
         NAME,
         b.sequence("(", FPLIST, ")")));
@@ -263,9 +270,12 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(TYPEDARGSLIST).is(b.firstOf(
       b.sequence("**", TFPDEF, b.optional(",")),
       b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF), b.optional(",")),
-      b.sequence(TFPDEF, b.optional("=", TEST), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", b.optional(b.firstOf(
-        b.sequence("**", TFPDEF),
-        b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF))
+      b.sequence(TFPDEF, b.optional("=", TEST),
+        b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)),
+        b.optional(",", "/", b.zeroOrMore(",", TFPDEF, b.optional("=", TEST))),
+        b.optional(",", b.optional(b.firstOf(
+          b.sequence("**", TFPDEF),
+          b.sequence("*", b.optional(TFPDEF), b.zeroOrMore(",", TFPDEF, b.optional("=", TEST)), b.optional(",", "**", TFPDEF))
       ), b.optional(","))))
     ));
     b.rule(TFPDEF).is(b.firstOf(

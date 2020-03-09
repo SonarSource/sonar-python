@@ -300,6 +300,11 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
+  public void visitSeparatorParameter(SeparatorParameter parameter) {
+    // noop
+  }
+
+  @Override
   public void visitTypeAnnotation(TypeAnnotation tree) {
     scan(tree.expression());
   }
