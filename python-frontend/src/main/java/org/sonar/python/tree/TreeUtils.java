@@ -33,6 +33,9 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -116,5 +119,13 @@ public class TreeUtils {
     }
 
     return null;
+  }
+
+  public static List<Parameter> nonTupleParameters(FunctionDef functionDef) {
+    ParameterList parameterList = functionDef.parameters();
+    if (parameterList == null) {
+      return Collections.emptyList();
+    }
+    return parameterList.nonTuple();
   }
 }
