@@ -142,6 +142,6 @@ class MethodWithStarParam:
   def fun(*, b):
     print(1)
 
-class MethodTupleParam:
-    def fun((a, b), c):
+class MethodWithTupleParam:
+    def fun((a, b), c): # Noncompliant
         print(1)

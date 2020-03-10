@@ -84,7 +84,9 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
     if (params.isEmpty()) {
       return false;
     }
-    if (!params.get(0).is(Tree.Kind.PARAMETER)) {
+    if (params.get(0).is(Tree.Kind.TUPLE_PARAMETER)) {
+      return false;
+    } else if (params.get(0).is(Tree.Kind.SEPARATOR_PARAMETER)) {
       // star argument should not raise issue
       return true;
     }
