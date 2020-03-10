@@ -19,11 +19,18 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-public interface AssignementExpression extends Expression {
+/**
+ * <pre>
+ * {@link #lhsName()} := {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-assignment-expression
+ */
+public interface AssignmentExpression extends Expression {
 
-  Name name();
+  Name lhsName();
 
-  Token walrusOperator();
+  Token operator();
 
   Expression expression();
 }

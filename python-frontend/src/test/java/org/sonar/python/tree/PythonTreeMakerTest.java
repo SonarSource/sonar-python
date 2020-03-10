@@ -33,13 +33,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssertStatement;
-import org.sonar.plugins.python.api.tree.AssignementExpression;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -1133,16 +1132,16 @@ public class PythonTreeMakerTest extends RuleTest {
     AstNode astNode = p.parse("b := 12");
     Expression expression = treeMaker.expression(astNode);
     assertThat(expression.is(Kind.ASSIGNMENT_EXPRESSION)).isTrue();
-    AssignementExpression assignementExpression = (AssignementExpression) expression;
-    Name name = assignementExpression.name();
-    Token walrus = assignementExpression.walrusOperator();
-    Expression walrusExpression = assignementExpression.expression();
+    AssignmentExpression assignmentExpression = (AssignmentExpression) expression;
+    Name name = assignmentExpression.lhsName();
+    Token walrus = assignmentExpression.operator();
+    Expression walrusExpression = assignmentExpression.expression();
     assertThat(name.name()).isEqualTo("b");
     assertThat(walrus.value()).isEqualTo(":=");
     assertThat(walrusExpression.is(Kind.NUMERIC_LITERAL)).isTrue();
     assertThat(((NumericLiteral) walrusExpression).valueAsString()).isEqualTo("12");
 
-    assertThat(assignementExpression.children()).containsExactly(name, walrus, walrusExpression);
+    assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
 
     setRootRule(PythonGrammar.IF_STMT);
     astNode = p.parse("if a or (b := foo()):\n" +
@@ -1151,11 +1150,11 @@ public class PythonTreeMakerTest extends RuleTest {
     BinaryExpression condition = (BinaryExpression) ifStatement.condition();
     ParenthesizedExpression parenthesized = ((ParenthesizedExpression) condition.rightOperand());
 
-    assignementExpression = (AssignementExpression) parenthesized.expression();
+    assignmentExpression = (AssignmentExpression) parenthesized.expression();
 
-    name = assignementExpression.name();
-    walrus = assignementExpression.walrusOperator();
-    walrusExpression = assignementExpression.expression();
+    name = assignmentExpression.lhsName();
+    walrus = assignmentExpression.operator();
+    walrusExpression = assignmentExpression.expression();
 
     assertThat(name.name()).isEqualTo("b");
     assertThat(walrus.value()).isEqualTo(":=");
@@ -1164,7 +1163,16 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(callee.is(Kind.NAME)).isTrue();
     assertThat(((Name) callee).name()).isEqualTo("foo");
 
-    assertThat(assignementExpression.children()).containsExactly(name, walrus, walrusExpression);
+    assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
+
+    setRootRule(PythonGrammar.NAMED_EXPR_TEST);
+    try {
+      astNode = p.parse("a.b := 12");
+      expression = treeMaker.expression(astNode);
+      fail("Expected RecognitionException");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(1);
+    }
   }
 
   @Test

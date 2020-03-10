@@ -260,9 +260,9 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitAssignmentExpression(AssignementExpression assignementExpression) {
-    scan(assignementExpression.name());
-    scan(assignementExpression.expression());
+  public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
+    scan(assignmentExpression.lhsName());
+    scan(assignmentExpression.expression());
   }
 
   @Override

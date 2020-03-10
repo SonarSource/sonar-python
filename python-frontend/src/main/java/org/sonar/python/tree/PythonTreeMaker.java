@@ -876,11 +876,16 @@ public class PythonTreeMaker {
 
   private Expression assignmentExpression(AstNode astNode) {
     AstNode nameNode = astNode.getFirstChild(PythonGrammar.TEST);
-    Name name = name(nameNode.getFirstDescendant(PythonGrammar.NAME));
-    AstNode walrusNode = nameNode.getNextSibling();
-    Token walrusToken = toPyToken(walrusNode.getToken());
-    Expression expression = expression(walrusNode.getNextSibling());
-    return new AssignmentExpressionImpl(name, walrusToken, expression);
+    Expression nameExpression = expression(nameNode);
+    if (!nameExpression.is(Tree.Kind.NAME)) {
+      int line = nameNode.getTokenLine();
+      throw new RecognitionException(line, "Parse error at line " + line + ": The left-hand side of an assignment expression must be a name.");
+    }
+    Name name = (Name) nameExpression;
+    AstNode operatorNode = astNode.getFirstChild(PythonPunctuator.WALRUS_OPERATOR);
+    Token operatorToken = toPyToken(operatorNode.getToken());
+    Expression expression = expression(astNode.getLastChild(PythonGrammar.TEST));
+    return new AssignmentExpressionImpl(name, operatorToken, expression);
   }
 
   private Expression repr(AstNode astNode) {

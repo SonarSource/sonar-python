@@ -223,7 +223,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   public void assignment_expr() {
     setRootRule(PythonGrammar.NAMED_EXPR_TEST);
     AstNode astNode = p.parse("b := 42");
-    AssignementExpression assignmentExpression = (AssignementExpression) treeMaker.expression(astNode);
+    AssignmentExpression assignmentExpression = (AssignmentExpression) treeMaker.expression(astNode);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     assignmentExpression.accept(visitor);
     verify(visitor).visitNumericLiteral((NumericLiteral) assignmentExpression.expression());

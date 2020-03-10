@@ -21,14 +21,14 @@ package org.sonar.python.tree;
 
 import java.util.Arrays;
 import java.util.List;
-import org.sonar.plugins.python.api.tree.AssignementExpression;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class AssignmentExpressionImpl extends PyTree implements AssignementExpression {
+public class AssignmentExpressionImpl extends PyTree implements AssignmentExpression {
 
   private final Name name;
   private final Token walrusOperator;
@@ -41,12 +41,12 @@ public class AssignmentExpressionImpl extends PyTree implements AssignementExpre
   }
 
   @Override
-  public Name name() {
+  public Name lhsName() {
     return name;
   }
 
   @Override
-  public Token walrusOperator() {
+  public Token operator() {
     return walrusOperator;
   }
 
