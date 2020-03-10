@@ -450,3 +450,19 @@ def f_a_lot_of_binding(a):
     except NameError as e:
         d = 6
     return d
+
+def with_assignment_expression(a, b): # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  if (b := 12) == a:
+     return b
+#    ^^^^^^^^<
+  else:
+     return b
+#    ^^^^^^^^<
+
+def no_fp_on_assignment_expression(a, b):
+    if a:
+        a = (b := 42)
+        return b
+    else:
+        return b

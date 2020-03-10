@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -410,6 +411,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         addBindingUsage((Name) pyCompoundAssignmentStatementTree.lhsExpression(), Usage.Kind.COMPOUND_ASSIGNMENT_LHS);
       }
       super.visitCompoundAssignment(pyCompoundAssignmentStatementTree);
+    }
+
+    @Override
+    public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
+      addBindingUsage(assignmentExpression.lhsName(), Usage.Kind.ASSIGNMENT_LHS);
+      super.visitAssignmentExpression(assignmentExpression);
     }
 
     @Override
