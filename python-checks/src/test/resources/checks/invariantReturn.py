@@ -459,3 +459,10 @@ def with_assignment_expression(a, b): # Noncompliant
   else:
      return b
 #    ^^^^^^^^<
+
+def no_fp_on_assignment_expression(a, b):
+    if a:
+        a = (b := 42)
+        return b
+    else:
+        return b
