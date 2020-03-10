@@ -40,6 +40,9 @@ class Foo(object):
     def __exit__(self, *args):
         pass
 
+    def __exit__(self, *, a):
+        pass
+
     # Check if we raise correctly with a line break in the def
     def __gt__(self, a, b, c, # Noncompliant
                d):

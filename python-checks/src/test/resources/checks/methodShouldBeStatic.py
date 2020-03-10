@@ -141,3 +141,7 @@ def __abs__(x):
 class MethodWithStarParam:
   def fun(*, b):
     print(1)
+
+class MethodWithTupleParam:
+    def fun((a, b), c): # Noncompliant
+        print(1)

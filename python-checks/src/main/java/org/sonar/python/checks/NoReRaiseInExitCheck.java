@@ -19,6 +19,9 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -27,16 +30,11 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Rule(key="S5706")
 public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
@@ -90,28 +88,19 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
       return null;
     }
 
-    Name name = parameter.name();
-    if (name != null) {
-      return name.symbol();
-    }
-
-    return null;
+    return parameter.name().symbol();
   }
 
   private static Symbol extractCaughtExceptionParameter(ParameterList parameterList) {
-    if (parameterList.nonTuple().size() != 4) {
+    List<Parameter> regularParams = parameterList.nonTuple();
+    if (regularParams.size() != 4 || !regularParams.equals(parameterList.all())) {
       // A valid signature has 4 parameters here: self, exc_type, exc_value, trace_back.
       // Bail out early if the __exit__ method is declared differently.
       return null;
     }
 
-    Parameter parameter = parameterList.nonTuple().get(2);
-    Name name = parameter.name();
-    if (name != null) {
-      return name.symbol();
-    }
-
-    return null;
+    Parameter parameter = regularParams.get(2);
+    return parameter.name().symbol();
   }
 
   @Override

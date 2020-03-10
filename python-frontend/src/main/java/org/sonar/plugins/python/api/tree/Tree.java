@@ -137,7 +137,7 @@ public interface Tree {
     TRY_STMT(TryStatement.class),
 
     PARAMETER(Parameter.class),
-
+    SEPARATOR_PARAMETER(SeparatorParameter.class),
     TUPLE_PARAMETER(TupleParameter.class),
 
     VARIABLE_TYPE_ANNOTATION(TypeAnnotation.class),

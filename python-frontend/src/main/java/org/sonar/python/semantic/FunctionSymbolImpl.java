@@ -112,12 +112,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         org.sonar.plugins.python.api.tree.Parameter parameter = (org.sonar.plugins.python.api.tree.Parameter) anyParameter;
         Name parameterName = parameter.name();
-        if (parameterName != null) {
-          this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, keywordOnly));
-          if (parameter.starToken() != null) {
-            hasVariadicParameter = true;
-          }
-        } else {
+        this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, keywordOnly));
+        if (parameter.starToken() != null) {
+          hasVariadicParameter = true;
+        }
+      } else if (anyParameter.is(Tree.Kind.SEPARATOR_PARAMETER)) {
+        if (anyParameter.firstToken().value().equals("*")) {
           keywordOnly = true;
         }
       } else {
