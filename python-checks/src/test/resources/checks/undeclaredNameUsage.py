@@ -232,3 +232,11 @@ x = 24
 
 global GLOB3
 print(GLOB3) # FN
+
+def assignment_expression():
+  a = 41
+  dict = {(s := a + 1) : s} # OK
+
+def assignment_expression_fn():
+  b = 41
+  dict = {k: (k := b + 1)} # FN, key is evaluated first and value second
