@@ -23,11 +23,9 @@ import com.google.common.base.Functions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
@@ -77,7 +75,7 @@ public class SymbolTableBuilderTest {
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
-      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value");
+      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
@@ -86,7 +84,7 @@ public class SymbolTableBuilderTest {
       .filteredOn(symbol -> topLevelFunctions.contains(symbol.name()))
       .extracting(Symbol::kind).containsOnly(Symbol.Kind.FUNCTION);
 
-    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder(globalSymbols.toArray(new String[] {}));
+    assertThat(moduleSymbols).extracting(Symbol::name).containsExactlyInAnyOrder(globalSymbols.toArray(new String[]{}));
     moduleSymbols.stream().filter(s -> s.name().equals("global_var")).findFirst().ifPresent(s -> {
       assertThat(s.usages()).hasSize(3);
     });
@@ -416,6 +414,17 @@ public class SymbolTableBuilderTest {
     assertThat(a.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.COMP_DECLARATION);
   }
 
+  @Test
+  public void assignment_expression() {
+    FunctionDef functionDef = functionTreesByName.get("assignment_expression");
+    assertThat(functionDef.localVariables()).hasSize(1);
+    Symbol b = functionDef.localVariables().iterator().next();
+    assertThat(b.name()).isEqualTo("b");
+    assertThat(b.fullyQualifiedName()).isNull();
+    assertThat(b.usages()).hasSize(2);
+    assertThat(b.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+  }
+
   private static class TestVisitor extends BaseTreeVisitor {
     @Override
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
@@ -428,7 +437,7 @@ public class SymbolTableBuilderTest {
     List<Name> res = new ArrayList<>();
     if (tree.is(Tree.Kind.NAME)) {
       res.add(((Name) tree));
-    } else if(tree.is(Tree.Kind.TUPLE)) {
+    } else if (tree.is(Tree.Kind.TUPLE)) {
       ((Tuple) tree).elements().forEach(t -> res.addAll(getNameFromExpression(t)));
     }
     return res;

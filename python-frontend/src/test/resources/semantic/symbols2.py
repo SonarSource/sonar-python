@@ -158,3 +158,7 @@ def parameter_default_value():
     foo = 42
     def func(x = foo):
         foo = 43
+
+def assignment_expression():
+  if (b:=foo()) != 42:
+    bar(b)
