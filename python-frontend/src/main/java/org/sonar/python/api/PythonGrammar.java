@@ -248,7 +248,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(YIELD_EXPR).is(b.firstOf(
       b.sequence("yield", "from", TEST),
-      b.sequence("yield", b.optional(TESTLIST))));
+      b.sequence("yield", b.optional(TESTLIST_STAR_EXPR))));
 
     b.rule(NAME).is(IDENTIFIER);
 
@@ -336,7 +336,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(PASS_STMT).is("pass");
     b.rule(DEL_STMT).is("del", EXPRLIST);
-    b.rule(RETURN_STMT).is("return", b.optional(TESTLIST));
+    b.rule(RETURN_STMT).is("return", b.optional(TESTLIST_STAR_EXPR));
     b.rule(YIELD_STMT).is(YIELD_EXPR);
     b.rule(RAISE_STMT).is("raise", b.optional(TEST, b.optional(b.firstOf(b.sequence("from", TEST), b.sequence(",", TEST, b.optional(",", TEST))))));
     b.rule(BREAK_STMT).is("break");
