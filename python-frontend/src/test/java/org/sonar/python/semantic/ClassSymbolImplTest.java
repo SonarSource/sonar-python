@@ -48,6 +48,11 @@ public class ClassSymbolImplTest {
     ClassSymbolImpl e = new ClassSymbolImpl("x", null);
     e.setHasSuperClassWithoutSymbol();
     assertThat(e.hasUnresolvedTypeHierarchy()).isTrue();
+
+    ClassSymbolImpl f = new ClassSymbolImpl("x", null);
+    Symbol g = new SymbolImpl("g", null);
+    f.addSuperClass(g);
+    assertThat(f.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test
@@ -91,6 +96,11 @@ public class ClassSymbolImplTest {
     Symbol fooA = new SymbolImpl("foo", "a.foo");
     a.addMembers(Collections.singleton(fooA));
     assertThat(a.resolveMember("foo")).contains(fooA);
+
+    ClassSymbolImpl b = new ClassSymbolImpl("b", null);
+    Symbol c = new SymbolImpl("c", null);
+    b.addSuperClass(c);
+    assertThat(b.resolveMember("foo")).isEmpty();
   }
 
   @Test
@@ -138,5 +148,21 @@ public class ClassSymbolImplTest {
     assertThat(b.isOrExtends(a)).isFalse();
     ClassSymbolImpl c = new ClassSymbolImpl("c", "mod2.c");
     assertThat(a.isOrExtends(c)).isFalse();
+  }
+
+  @Test
+  public void isOrExtends_non_class_symbol() {
+    ClassSymbolImpl a = new ClassSymbolImpl("a", "mod1.a");
+    SymbolImpl b = new SymbolImpl("b", "mod2.b");
+    a.addSuperClass(b);
+
+    assertThat(a.isOrExtends("mod2.b")).isTrue();
+
+    ClassSymbolImpl c = new ClassSymbolImpl("c", "mod1.c");
+    SymbolImpl d = new SymbolImpl("d", null);
+    c.addSuperClass(d);
+
+    assertThat(c.isOrExtends("d")).isFalse();
+    assertThat(c.isOrExtends((String) null)).isFalse();
   }
 }
