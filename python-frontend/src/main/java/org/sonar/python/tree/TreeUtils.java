@@ -31,7 +31,9 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -130,11 +132,54 @@ public class TreeUtils {
     return null;
   }
 
+  @CheckForNull
+  public static FunctionSymbol getFunctionSymbolFromDef(@Nullable FunctionDef functionDef) {
+    if (functionDef == null) {
+      return null;
+    }
+
+    Symbol functionNameSymbol = functionDef.name().symbol();
+    if (functionNameSymbol == null) {
+      throw new IllegalStateException("A FunctionDef should always have a non-null symbol!");
+    }
+
+    if (functionNameSymbol.kind() == Symbol.Kind.FUNCTION) {
+      return ((FunctionSymbol) functionNameSymbol);
+    }
+
+    return null;
+  }
+
   public static List<Parameter> nonTupleParameters(FunctionDef functionDef) {
     ParameterList parameterList = functionDef.parameters();
     if (parameterList == null) {
       return Collections.emptyList();
     }
     return parameterList.nonTuple();
+  }
+
+  public static List<Parameter> positionalParameters(FunctionDef functionDef) {
+    ParameterList parameterList = functionDef.parameters();
+    if (parameterList == null) {
+      return Collections.emptyList();
+    }
+
+    List<Parameter> result = new ArrayList<>();
+    for (AnyParameter anyParameter : parameterList.all()) {
+      if (anyParameter instanceof Parameter) {
+        Parameter parameter = (Parameter) anyParameter;
+        Token starToken = parameter.starToken();
+        if (parameter.name() == null && starToken != null) {
+          if ("*".equals(starToken.value())) {
+            return result;
+          }
+          // Ignore the possible '/' parameter
+        } else {
+          result.add(parameter);
+        }
+      }
+    }
+
+    return result;
   }
 }

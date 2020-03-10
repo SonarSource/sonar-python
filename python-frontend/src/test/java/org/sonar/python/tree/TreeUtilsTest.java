@@ -21,10 +21,12 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -154,6 +156,32 @@ public class TreeUtilsTest {
   }
 
   @Test
+  public void getFunctionSymbolFromDef() {
+    FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+
+    Symbol symbolFoo = functionDef.name().symbol();
+    assertThat(TreeUtils.getFunctionSymbolFromDef(functionDef)).isEqualTo(symbolFoo);
+    assertThat(TreeUtils.getFunctionSymbolFromDef(null)).isNull();
+
+    fileInput = PythonTestUtils.parse(
+      "def foo():",
+      "    pass",
+      "foo = 42"
+    );
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.getFunctionSymbolFromDef(functionDef)).isNull();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void getFunctionSymbolFromDef_illegalSymbol() {
+    FileInput fileInput = PythonTestUtils.parseWithoutSymbols("def foo(): pass");
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+
+    TreeUtils.getFunctionSymbolFromDef(functionDef);
+  }
+
+  @Test
   public void nonTupleParameters() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
     FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
@@ -162,6 +190,36 @@ public class TreeUtilsTest {
     fileInput = PythonTestUtils.parse("def foo(param1, param2): pass");
     functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     assertThat(TreeUtils.nonTupleParameters(functionDef)).isEqualTo(functionDef.parameters().nonTuple());
+  }
+
+  @Test
+  public void positionalParameters() {
+    FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.positionalParameters(functionDef)).isEmpty();
+
+    fileInput = PythonTestUtils.parse("def foo(param1, param2): pass");
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(functionDef.parameters().all());
+
+    fileInput = PythonTestUtils.parse("def foo(param1, *param2): pass");
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(functionDef.parameters().all());
+
+    fileInput = PythonTestUtils.parse("def foo(param1, param2, *, kw1, kw2): pass");
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(functionDef.parameters().all().subList(0, 2));
+
+    fileInput = PythonTestUtils.parse("def foo((param1, param2), *, kw1, kw2): pass");
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    assertThat(TreeUtils.positionalParameters(functionDef)).isEmpty();
+
+    fileInput = PythonTestUtils.parse("def foo(param1, /, param2, *, kw1, kw2): pass");
+    functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+    List<AnyParameter> parameters = functionDef.parameters().all();
+    assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(
+      Arrays.asList(parameters.get(0), parameters.get(2)
+    ));
   }
 
   private static boolean isOuterFunction(Tree tree) {
