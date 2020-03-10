@@ -38,7 +38,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private final List<Symbol> superClasses = new ArrayList<>();
-  private Set<ClassSymbolImpl> allSuperClasses = null;
+  private Set<Symbol> allSuperClasses = null;
   private boolean hasSuperClassWithoutSymbol = false;
   private final Set<Symbol> members = new HashSet<>();
   private Map<String, Symbol> membersByName = null;
@@ -82,8 +82,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean hasUnresolvedTypeHierarchy() {
-    for (ClassSymbolImpl superClass : allSuperClasses()) {
-      if (superClass.superClasses().stream().anyMatch(s -> s.kind() != Kind.CLASS) || superClass.hasSuperClassWithoutSymbol) {
+    for (Symbol superClassSymbol : allSuperClasses()) {
+      if (superClassSymbol.kind() != Kind.CLASS) {
+        return true;
+      }
+
+      ClassSymbolImpl superClass = (ClassSymbolImpl) superClassSymbol;
+      if (superClass.hasSuperClassWithoutSymbol) {
         return true;
       }
     }
@@ -98,10 +103,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public Optional<Symbol> resolveMember(String memberName) {
-    for (ClassSymbolImpl classSymbol : allSuperClasses()) {
-      Symbol matchingMember = classSymbol.membersByName().get(memberName);
-      if (matchingMember != null) {
-        return Optional.of(matchingMember);
+    for (Symbol symbol : allSuperClasses()) {
+      if (symbol.kind() == Kind.CLASS) {
+        ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+        Symbol matchingMember = classSymbol.membersByName().get(memberName);
+        if (matchingMember != null) {
+          return Optional.of(matchingMember);
+        }
       }
     }
     return Optional.empty();
@@ -109,7 +117,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean isOrExtends(String fullyQualifiedClassName) {
-    return allSuperClasses().stream().anyMatch(c -> fullyQualifiedClassName.equals(c.fullyQualifiedName()));
+    return allSuperClasses().stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()));
   }
 
   @Override
@@ -139,7 +147,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.hasSuperClassWithoutSymbol = true;
   }
 
-  private Set<ClassSymbolImpl> allSuperClasses() {
+  private Set<Symbol> allSuperClasses() {
     if (allSuperClasses == null) {
       allSuperClasses = new LinkedHashSet<>();
       exploreSuperClasses(this, allSuperClasses);
@@ -147,12 +155,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return allSuperClasses;
   }
 
-  private static void exploreSuperClasses(ClassSymbolImpl classSymbol, Set<ClassSymbolImpl> set) {
-    if (set.add(classSymbol)) {
+  private static void exploreSuperClasses(Symbol symbol, Set<Symbol> set) {
+    if (set.add(symbol) && symbol.kind() == Kind.CLASS) {
+      ClassSymbol classSymbol = (ClassSymbol) symbol;
       for (Symbol superClass : classSymbol.superClasses()) {
-        if (superClass instanceof ClassSymbolImpl) {
-          exploreSuperClasses((ClassSymbolImpl) superClass, set);
-        }
+        exploreSuperClasses(superClass, set);
       }
     }
   }
