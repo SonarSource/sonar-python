@@ -260,6 +260,12 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
+  public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
+    scan(assignmentExpression.lhsName());
+    scan(assignmentExpression.expression());
+  }
+
+  @Override
   public void visitExpressionList(ExpressionList pyExpressionListTree) {
     scan(pyExpressionListTree.expressions());
   }

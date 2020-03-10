@@ -82,7 +82,8 @@ public enum PythonPunctuator implements TokenType {
   RIGHT_ASSIGN(">>="),
   LEFT_ASSIGN("<<="),
   MUL_MUL_ASSIGN("**="),
-  MATRIX_MULT_ASSIGN("@=")
+  MATRIX_MULT_ASSIGN("@="),
+  WALRUS_OPERATOR(":=");
 
   ;
 

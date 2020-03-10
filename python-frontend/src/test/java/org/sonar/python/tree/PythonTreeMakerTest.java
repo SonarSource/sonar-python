@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -1123,6 +1124,55 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
     assertThat(annAssign.assignedValue()).isNull();
     assertThat(annAssign.equalToken()).isNull();
+  }
+
+  @Test
+  public void assignement_expression() {
+    setRootRule(PythonGrammar.NAMED_EXPR_TEST);
+    AstNode astNode = p.parse("b := 12");
+    Expression expression = treeMaker.expression(astNode);
+    assertThat(expression.is(Kind.ASSIGNMENT_EXPRESSION)).isTrue();
+    AssignmentExpression assignmentExpression = (AssignmentExpression) expression;
+    Name name = assignmentExpression.lhsName();
+    Token walrus = assignmentExpression.operator();
+    Expression walrusExpression = assignmentExpression.expression();
+    assertThat(name.name()).isEqualTo("b");
+    assertThat(walrus.value()).isEqualTo(":=");
+    assertThat(walrusExpression.is(Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(((NumericLiteral) walrusExpression).valueAsString()).isEqualTo("12");
+
+    assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
+
+    setRootRule(PythonGrammar.IF_STMT);
+    astNode = p.parse("if a or (b := foo()):\n" +
+                                      "  print(b)");
+    IfStatement ifStatement = treeMaker.ifStatement(astNode);
+    BinaryExpression condition = (BinaryExpression) ifStatement.condition();
+    ParenthesizedExpression parenthesized = ((ParenthesizedExpression) condition.rightOperand());
+
+    assignmentExpression = (AssignmentExpression) parenthesized.expression();
+
+    name = assignmentExpression.lhsName();
+    walrus = assignmentExpression.operator();
+    walrusExpression = assignmentExpression.expression();
+
+    assertThat(name.name()).isEqualTo("b");
+    assertThat(walrus.value()).isEqualTo(":=");
+    assertThat(walrusExpression.is(Kind.CALL_EXPR)).isTrue();
+    Expression callee = ((CallExpression) walrusExpression).callee();
+    assertThat(callee.is(Kind.NAME)).isTrue();
+    assertThat(((Name) callee).name()).isEqualTo("foo");
+
+    assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
+
+    setRootRule(PythonGrammar.NAMED_EXPR_TEST);
+    try {
+      astNode = p.parse("a.b := 12");
+      expression = treeMaker.expression(astNode);
+      fail("Expected RecognitionException");
+    } catch (RecognitionException e) {
+      assertThat(e.getLine()).isEqualTo(1);
+    }
   }
 
   @Test

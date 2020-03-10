@@ -17,24 +17,20 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api;
+package org.sonar.plugins.python.api.tree;
 
-import com.sonar.sslr.api.AstNode;
-import org.junit.Test;
+/**
+ * <pre>
+ * {@link #lhsName()} := {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-assignment-expression
+ */
+public interface AssignmentExpression extends Expression {
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+  Name lhsName();
 
-public class PythonPunctuatorTest {
+  Token operator();
 
-  @Test
-  public void test() {
-    assertThat(PythonPunctuator.values()).hasSize(47);
-
-    AstNode astNode = mock(AstNode.class);
-    for (PythonPunctuator punctuator : PythonPunctuator.values()) {
-      assertThat(punctuator.hasToBeSkippedFromAst(astNode)).isFalse();
-    }
-  }
-
+  Expression expression();
 }
