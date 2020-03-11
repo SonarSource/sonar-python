@@ -51,3 +51,10 @@ a : type = import1
 
 if (python2):
 	unichr = unichr # ok, builtin
+
+def assignment_expression():
+  a = 42
+  if (a:=a): # Noncompliant
+    pass
+  if (b:=foo()):
+    b = b # Noncompliant
