@@ -425,6 +425,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(emptyExpressionList.children()).isEmpty();
     assertThat(emptyExpressionList.firstToken()).isNull();
     assertThat(emptyExpressionList.lastToken()).isNull();
+
+    astNode = p.parse("return foo(), *bar");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    returnStatement = treeMaker.returnStatement(statementWithSeparator);
+    assertThat(returnStatement.expressions()).extracting(Tree::getKind).containsExactly(Kind.CALL_EXPR, Kind.UNPACKING_EXPR);
   }
 
   @Test
@@ -469,6 +474,11 @@ public class PythonTreeMakerTest extends RuleTest {
     yieldStatement = treeMaker.yieldStatement(statementWithSeparator);
     assertThat(yieldStatement.children()).hasSize(1);
     assertThat(yieldStatement).isNotNull();
+
+    astNode = p.parse("yield foo(), *bar");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    yieldStatement = treeMaker.yieldStatement(statementWithSeparator);
+    assertThat(yieldStatement.yieldExpression().expressions()).extracting(Tree::getKind).containsExactly(Kind.CALL_EXPR, Kind.UNPACKING_EXPR);
   }
 
   @Test

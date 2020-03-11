@@ -337,10 +337,10 @@ public class PythonTreeMaker {
   public ReturnStatement returnStatement(StatementWithSeparator statementWithSeparator) {
     AstNode astNode = statementWithSeparator.statement();
     Separators separators = statementWithSeparator.separator();
-    AstNode testListNode = astNode.getFirstChild(PythonGrammar.TESTLIST);
+    AstNode testListNode = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR);
     List<Expression> expressionTrees = Collections.emptyList();
     if (testListNode != null) {
-      expressionTrees = expressionsFromTest(testListNode);
+      expressionTrees = expressionsFromTestListStarExpr(testListNode);
     }
     return new ReturnStatementImpl(toPyToken(astNode.getTokens()).get(0), expressionTrees, separators);
   }
@@ -356,11 +356,11 @@ public class PythonTreeMaker {
     AstNode nodeContainingExpression = astNode;
     AstNode fromKeyword = astNode.getFirstChild(PythonKeyword.FROM);
     if (fromKeyword == null) {
-      nodeContainingExpression = astNode.getFirstChild(PythonGrammar.TESTLIST);
+      nodeContainingExpression = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR);
     }
     List<Expression> expressionTrees = Collections.emptyList();
     if (nodeContainingExpression != null) {
-      expressionTrees = expressionsFromTest(nodeContainingExpression);
+      expressionTrees = expressionsFromTestListStarExpr(nodeContainingExpression);
     }
     return new YieldExpressionImpl(yieldKeyword, fromKeyword == null ? null : toPyToken(fromKeyword.getToken()), expressionTrees);
   }
@@ -784,6 +784,12 @@ public class PythonTreeMaker {
 
   private List<Expression> expressionsFromTest(AstNode astNode) {
     return astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+  }
+
+  private List<Expression> expressionsFromTestListStarExpr(AstNode astNode) {
+    return astNode
+      .getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR)
+      .stream().map(this::expression).collect(Collectors.toList());
   }
 
   private List<Expression> expressionsFromExprList(AstNode firstChild) {
