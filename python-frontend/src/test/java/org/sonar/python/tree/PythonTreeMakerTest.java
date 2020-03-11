@@ -1205,6 +1205,11 @@ public class PythonTreeMakerTest extends RuleTest {
 
     assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
 
+    setRootRule(PythonGrammar.EXPR);
+    astNode = p.parse("foo(a:=42)");
+    expression = treeMaker.expression(astNode);
+    assertThat(expression.is(Kind.CALL_EXPR)).isTrue();
+
     setRootRule(PythonGrammar.NAMED_EXPR_TEST);
     try {
       astNode = p.parse("a.b := 12");
