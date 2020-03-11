@@ -1205,10 +1205,21 @@ public class PythonTreeMakerTest extends RuleTest {
 
     assertThat(assignmentExpression.children()).containsExactly(name, walrus, walrusExpression);
 
+    setRootRule(PythonGrammar.EXPR);
+    astNode = p.parse("foo(a:=42)");
+    expression = treeMaker.expression(astNode);
+    assertThat(expression.is(Kind.CALL_EXPR)).isTrue();
+    Expression argumentExpression = ((RegularArgument) ((CallExpression) expression).arguments().get(0)).expression();
+    assertThat(argumentExpression.is(Kind.ASSIGNMENT_EXPRESSION)).isTrue();
+    assignmentExpression = (AssignmentExpression) argumentExpression;
+    assertThat(assignmentExpression.lhsName().name()).isEqualTo("a");
+    assertThat(assignmentExpression.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
+
+
     setRootRule(PythonGrammar.NAMED_EXPR_TEST);
     try {
       astNode = p.parse("a.b := 12");
-      expression = treeMaker.expression(astNode);
+      treeMaker.expression(astNode);
       fail("Expected RecognitionException");
     } catch (RecognitionException e) {
       assertThat(e.getLine()).isEqualTo(1);

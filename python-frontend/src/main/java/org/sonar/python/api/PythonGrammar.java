@@ -240,6 +240,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(ARGUMENT).is(b.firstOf(
       b.sequence("*", TEST),
       b.sequence("**", TEST),
+      b.sequence(TEST, PythonPunctuator.WALRUS_OPERATOR, TEST),
       b.sequence(TEST, "=", TEST),
       b.sequence(TEST, b.optional(COMP_FOR))));
     b.rule(COMP_ITER).is(b.firstOf(COMP_FOR, COMP_IF));

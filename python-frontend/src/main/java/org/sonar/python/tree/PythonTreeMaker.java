@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -1160,6 +1161,11 @@ public class PythonTreeMaker {
       ComprehensionExpression comprehension =
         new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, null, expression, compFor(compFor), null);
       return new RegularArgumentImpl(comprehension);
+    }
+    AstNode walrusOperator = astNode.getFirstChild(PythonPunctuator.WALRUS_OPERATOR);
+    if (walrusOperator != null) {
+      AssignmentExpression assignmentExpression = (AssignmentExpression) assignmentExpression(astNode);
+      return new RegularArgumentImpl(assignmentExpression);
     }
     AstNode assign = astNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token star = astNode.getFirstChild(PythonPunctuator.MUL) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.MUL).getToken());
