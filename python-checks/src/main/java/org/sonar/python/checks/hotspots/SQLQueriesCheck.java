@@ -24,11 +24,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -134,7 +136,7 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     if (!arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
       return Optional.empty();
     }
-    Expression expression = ((RegularArgument) arg).expression();
+    Expression expression = getExpression(((RegularArgument) arg).expression());
     if (expression.is(Tree.Kind.NAME)) {
       expression = Expressions.singleAssignedValue((Name) expression);
     }
@@ -164,6 +166,14 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
 
   private static boolean isAssignment(RegularArgument arg) {
     return arg.equalToken() != null;
+  }
+
+  private static Expression getExpression(@Nullable Expression expr) {
+    expr = Expressions.removeParentheses(expr);
+    if (expr.is(Tree.Kind.ASSIGNMENT_EXPRESSION)) {
+      return getExpression(((AssignmentExpression) expr).expression());
+    }
+    return expr;
   }
 
   private static class FormattedStringVisitor extends BaseTreeVisitor {

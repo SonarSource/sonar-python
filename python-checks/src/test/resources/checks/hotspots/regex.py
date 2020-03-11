@@ -16,7 +16,9 @@ RegexValidator('((a+)*') # Noncompliant
 RegexValidator('(a{1})+') # Noncompliant
 RegexValidator('(a+)+') # Noncompliant
 RegexValidator('(a{1}){2}') # Noncompliant
-
+RegexValidator(x:='(a+)+') # Noncompliant
+RegexValidator((x:='(a+)+')) # Noncompliant
+RegexValidator(42)
 
 
 def define_http_endpoint(path, view):
@@ -25,6 +27,8 @@ def define_http_endpoint(path, view):
     RegexValidator(regexp) # Noncompliant [[secondary=-1]]
 #                  ^^^^^^
     RegexValidator(*path)
+    something = 42
+    RegexValidator(something)
 
 import re
 from re import compile

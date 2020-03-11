@@ -19,11 +19,14 @@ class MyUser(models.Model):
         MyUser.objects.raw('SELECT * FROM mytable WHERE name = "%s"'.format(value))  # Noncompliant
         MyUser.objects.raw(f"SELECT * FROM mytable WHERE name = '{value}'")  # Noncompliant
         MyUser.objects.raw(F"SELECT * FROM mytable WHERE name = '{value}'")  # Noncompliant
+        MyUser.objects.raw(x := F"SELECT * FROM mytable WHERE name = '{value}'")  # Noncompliant
         MyUser.objects.raw(request)  # OK
         MyUser.objects.raw(hardcoded_request)  # OK
         MyUser.objects.raw(formatted_request)  #  Noncompliant [[secondary=-14]]
         MyUser.objects.raw(formatted_request2)  # Noncompliant
         MyUser.objects.raw(formatted_request3)  # Noncompliant
+        MyUser.objects.raw(y := formatted_request3)  # Noncompliant
+        MyUser.objects.raw((y := formatted_request3))  # Noncompliant
         MyUser.objects.raw(formatted_request4)  # FN, multiple assignments
         MyUser.objects.raw(formatted_request5)  # OK
         MyUser.objects.raw(*formatted_request5)  # OK
