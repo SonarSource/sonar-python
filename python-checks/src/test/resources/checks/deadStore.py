@@ -287,3 +287,17 @@ def annotated_assignments():
     y:str = 'foo' # Noncompliant
     y = 'bar'
     print(y)
+
+def assignment_expression():
+  foo(a:=3) # Noncompliant
+# ^^^^^^^^^
+  a = 2
+  print(a)
+
+def assignment_expression_fn():
+  a = 0 # FN (first dict key computation overwrites "a" before it's read)
+  dict = {'b' : (a:=3), 'c' : a}
+
+def assignment_expression_no_fp():
+  a = 3 # No fp: a will be read before it's written into
+  dict = {'b' : a, 'c' : (a:=3)} # FN (final assignment expression is unused)

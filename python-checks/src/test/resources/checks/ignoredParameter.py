@@ -41,3 +41,12 @@ def used_in_subfunction(p):
 
 def underscore_param(_): # OK
     _ = 42
+
+def assignment_expression(p): # Noncompliant
+  foo(p:=bar())
+
+def assignment_expression_fn(a): # FN (first dict key computation overwrites "a" before it's read)
+  dict = {'b' : (a:=3), 'c' : a}
+
+def assignment_expression_no_fp(a):
+  dict = {'b' : a, 'c' : (a:=3)} # OK, read before write
