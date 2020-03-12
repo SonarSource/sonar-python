@@ -275,6 +275,17 @@ public class ClassSymbolTest {
   }
 
   @Test
+  public void duplicated_class_member_self() {
+    ClassSymbol symbol = lastClassSymbol(
+      "class C:",
+      "  def f(self): ...",
+      "  def g(self): ",
+      "    self.f()"
+    );
+    assertThat(symbol.declaredMembers()).extracting(Symbol::name, Symbol::kind).containsExactlyInAnyOrder(tuple("f", Symbol.Kind.FUNCTION), tuple("g", Symbol.Kind.FUNCTION));
+  }
+
+  @Test
   public void class_members_with_inheritance() {
     ClassSymbol symbol = lastClassSymbol(
       "class A:",

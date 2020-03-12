@@ -44,7 +44,7 @@ class Scope {
   final Tree rootTree;
   private PythonFile pythonFile;
   private final Scope parent;
-  private final Map<String, Symbol> symbolsByName = new HashMap<>();
+  final Map<String, Symbol> symbolsByName = new HashMap<>();
   private final Set<Symbol> symbols = new HashSet<>();
   final Set<Symbol> builtinSymbols = new HashSet<>();
   private final Set<String> globalNames = new HashSet<>();
