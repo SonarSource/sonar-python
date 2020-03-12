@@ -1,0 +1,48 @@
+<p>Private attributes which are written but never read are a clear case of dead store. Changing their value is useless and most probably indicates a
+serious error in the code.</p>
+<p>Python has no real private attribute. Every attribute is accessible. There are however two conventions indicating that an attribute is not meant to
+be "public":</p>
+<ul>
+  <li> attributes with a name starting with a single underscore (ex: <code>_myattribute</code>) should be seen as non-public and might change without
+  prior notice. They should not be used by third-party libraries or software. It is ok to use those methods inside the library defining them but it
+  should be done with caution. </li>
+  <li> "class-private" attributes have a name which starts with at least two underscores and ends with at most one underscore. These attribute's names
+  will be automatically mangled to avoid collision with subclasses' attributes. For example <code>__myattribute</code> will be renamed as
+  <code>_classname__myattribute</code>, where <code>classname</code> is the attribute's class name without its leading underscore(s). They shouldn't
+  be used outside of the class defining the attribute. </li>
+</ul>
+<p>This rule raises an issue when a class-private attribute (two leading underscores, max one underscore at the end) is never read inside the class.
+It optionally raises an issue on unread attributes prefixed with a single underscore. Both class attribute and instance attributes will raise an
+issue.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Noncompliant:
+    _class_attr = 0  # Noncompliant if enable_single_underscore_issues is enabled
+    __mangled_class_attr = 1  # Noncompliant
+
+    def __init__(self, value):
+        self._attr = 0  # Noncompliant if enable_single_underscore_issues is enabled
+        self.__mangled_attr = 1  # Noncompliant
+
+    def compute(self, x):
+        return x * x
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Compliant:
+    _class_attr = 0
+    __mangled_class_attr = 1
+
+    def __init__(self, value):
+        self._attr = 0
+        self.__mangled_attr = 1
+
+    def compute(self, x):
+        return x * Compliant._class_attr * Compliant.__mangled_class_attr * self._attr * self.__mangled_attr
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation <del></del> Private Variables</a> </li>
+  <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 <del></del> Style Guide for Python Code</a> </li>
+</ul>
+
