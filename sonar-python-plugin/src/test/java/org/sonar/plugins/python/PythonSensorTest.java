@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -50,6 +51,7 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
@@ -67,6 +69,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -345,6 +348,20 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void test_exception_should_fail_analysis_if_configured_so() throws IOException {
+    DefaultInputFile inputFile = spy(createInputFile(FILE_1));
+    when(inputFile.contents()).thenThrow(FileNotFoundException.class);
+    context.fileSystem().add(inputFile);
+
+    activeRules = new ActiveRulesBuilder().build();
+    context.setSettings(new MapSettings().setProperty("sonar.internal.analysis.failFast", "true"));
+
+    assertThatThrownBy(() -> sensor().execute(context))
+      .isInstanceOf(IllegalStateException.class)
+      .hasCauseInstanceOf(FileNotFoundException.class);
+  }
+
+  @Test
   public void parse_error() {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
@@ -392,15 +409,19 @@ public class PythonSensorTest {
   }
 
   private InputFile inputFile(String name) {
-    DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", name)
-      .setModuleBaseDir(baseDir.toPath())
-      .setCharset(StandardCharsets.UTF_8)
-      .setType(Type.MAIN)
-      .setLanguage(Python.KEY)
-      .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
-      .build();
+    DefaultInputFile inputFile = createInputFile(name);
     context.fileSystem().add(inputFile);
     return inputFile;
+  }
+
+  private DefaultInputFile createInputFile(String name) {
+    return TestInputFileBuilder.create("moduleKey", name)
+        .setModuleBaseDir(baseDir.toPath())
+        .setCharset(StandardCharsets.UTF_8)
+        .setType(Type.MAIN)
+        .setLanguage(Python.KEY)
+        .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
+        .build();
   }
 
   private void verifyUsages(String componentKey, int line, int offset, TextRange... trs) {

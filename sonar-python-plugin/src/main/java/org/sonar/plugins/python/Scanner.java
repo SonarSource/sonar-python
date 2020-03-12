@@ -31,6 +31,7 @@ import org.sonarsource.analyzer.commons.ProgressReport;
 
 abstract class Scanner {
   private static final Logger LOG = Loggers.get(Scanner.class);
+  private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
   protected final SensorContext context;
 
   Scanner(SensorContext context) {
@@ -51,6 +52,9 @@ abstract class Scanner {
         this.scanFile(file);
       } catch (Exception e) {
         this.processException(e, file);
+        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false)) {
+          throw new IllegalStateException("Exception when analyzing " + file, e);
+        }
       } finally {
         progressReport.nextFile();
       }
