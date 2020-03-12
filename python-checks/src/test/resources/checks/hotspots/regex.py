@@ -18,6 +18,7 @@ RegexValidator('(a+)+') # Noncompliant
 RegexValidator('(a{1}){2}') # Noncompliant
 RegexValidator(x:='(a+)+') # Noncompliant
 RegexValidator((x:='(a+)+')) # Noncompliant
+RegexValidator(x:='a+')
 RegexValidator(42)
 
 
