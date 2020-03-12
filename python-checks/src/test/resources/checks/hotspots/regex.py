@@ -16,7 +16,10 @@ RegexValidator('((a+)*') # Noncompliant
 RegexValidator('(a{1})+') # Noncompliant
 RegexValidator('(a+)+') # Noncompliant
 RegexValidator('(a{1}){2}') # Noncompliant
-
+RegexValidator(x:='(a+)+') # Noncompliant
+RegexValidator((x:='(a+)+')) # Noncompliant
+RegexValidator(x:='a+')
+RegexValidator(42)
 
 
 def define_http_endpoint(path, view):
@@ -25,6 +28,8 @@ def define_http_endpoint(path, view):
     RegexValidator(regexp) # Noncompliant [[secondary=-1]]
 #                  ^^^^^^
     RegexValidator(*path)
+    something = 42
+    RegexValidator(something)
 
 import re
 from re import compile
@@ -58,3 +63,6 @@ def test_valid_numpy_version():
         res = re.match(version_pattern, np.__version__) # Noncompliant
     else:
         res = re.match(version_pattern + dev_suffix, np.__version__) # Noncompliant
+
+def formatted_regex():
+  pattern = re.compile(r'{}-\d+-{}$'.format(foo, bar))

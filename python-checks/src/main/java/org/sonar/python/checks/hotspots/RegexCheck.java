@@ -27,6 +27,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -61,7 +62,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkRegexArgument(Argument arg, SubscriptionContext ctx) {
-    String literal = arg.firstToken().value();
+    String literal = null;
     IssueLocation secondaryLocation = null;
     if (!arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
       return;
@@ -73,6 +74,11 @@ public class RegexCheck extends PythonSubscriptionCheck {
         secondaryLocation = IssueLocation.preciseLocation(expression, "");
         literal = Expressions.unescape((StringLiteral) expression);
       }
+    } else if (argExpression.is(Tree.Kind.STRING_LITERAL)) {
+      literal = Expressions.unescape((StringLiteral) argExpression);
+    }
+    if (literal == null) {
+      return;
     }
     if (isSuspiciousRegex(literal)) {
       PreciseIssue preciseIssue = ctx.addIssue(arg, MESSAGE);
@@ -83,11 +89,15 @@ public class RegexCheck extends PythonSubscriptionCheck {
   }
 
   private static Expression getExpression(@Nullable Expression expr) {
+    expr = Expressions.removeParentheses(expr);
     if (expr == null) {
       return null;
     }
     if (expr.is(Tree.Kind.MODULO) || expr.is(Tree.Kind.PLUS)) {
       return getExpression(((BinaryExpression) expr).leftOperand());
+    }
+    if (expr.is(Tree.Kind.ASSIGNMENT_EXPRESSION)) {
+      return getExpression(((AssignmentExpression) expr).expression());
     }
     return expr;
   }
