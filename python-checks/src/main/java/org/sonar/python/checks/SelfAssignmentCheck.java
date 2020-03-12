@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.python.PythonBuiltinFunctions;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -60,6 +61,15 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignement);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, this::checkAnnotatedAssignment);
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_EXPRESSION, this::checkAssignmentExpression);
+  }
+
+  private void checkAssignmentExpression(SubscriptionContext ctx) {
+    AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
+    if (CheckUtils.areEquivalent(assignmentExpression.lhsName(), assignmentExpression.expression())) {
+      ctx.addIssue(assignmentExpression.operator(), MESSAGE);
+    }
   }
 
   private void checkAssignement(SubscriptionContext ctx) {
