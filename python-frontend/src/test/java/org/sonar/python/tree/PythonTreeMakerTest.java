@@ -89,7 +89,6 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReprExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
-import org.sonar.plugins.python.api.tree.SeparatorParameter;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
@@ -846,11 +845,11 @@ public class PythonTreeMakerTest extends RuleTest {
     functionDef = parse("def __call__(self, *, manager):\n  pass", treeMaker::funcDefStatement);
     assertThat(functionDef.parameters().all()).hasSize(3);
     functionDef = parse("def __call__(*):\n  pass", treeMaker::funcDefStatement);
-    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Kind.SEPARATOR_PARAMETER);
+    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Kind.PARAMETER);
 
     functionDef = parse("def f(a, /): pass", treeMaker::funcDefStatement);
-    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Kind.PARAMETER, Kind.SEPARATOR_PARAMETER);
-    assertThat(((SeparatorParameter) functionDef.parameters().all().get(1)).starOrSlashToken().value()).isEqualTo("/");
+    assertThat(functionDef.parameters().all()).extracting(Tree::getKind).containsExactly(Kind.PARAMETER, Kind.PARAMETER);
+    assertThat(((Parameter) functionDef.parameters().all().get(1)).starToken().value()).isEqualTo("/");
 
     assertThat(funcDef("def func(): ...").parameters()).isNull();
     assertThat(funcDef("def func(a): ...").parameters().all()).hasSize(1);

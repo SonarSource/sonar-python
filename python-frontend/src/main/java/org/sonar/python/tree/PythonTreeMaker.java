@@ -1218,11 +1218,11 @@ public class PythonTreeMaker {
 
   private AnyParameter parameter(AstNode parameter) {
     if (parameter.is(PythonPunctuator.DIV)) {
-      return new SeparatorParameterImpl(toPyToken(parameter.getToken()));
+      return new ParameterImpl(toPyToken(parameter.getToken()));
     }
     if (parameter.is(PythonPunctuator.MUL)) {
       if (parameter.getNextSibling() == null || parameter.getNextSibling().is(PythonPunctuator.COMMA)) {
-        return new SeparatorParameterImpl(toPyToken(parameter.getToken()));
+        return new ParameterImpl(toPyToken(parameter.getToken()));
       }
       return null;
     }

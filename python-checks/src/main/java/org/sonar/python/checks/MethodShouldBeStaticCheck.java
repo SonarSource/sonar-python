@@ -86,12 +86,13 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
     }
     if (params.get(0).is(Tree.Kind.TUPLE_PARAMETER)) {
       return false;
-    } else if (params.get(0).is(Tree.Kind.SEPARATOR_PARAMETER)) {
-      // star argument should not raise issue
-      return true;
     }
     Parameter first = (Parameter) params.get(0);
     Name paramName = first.name();
+    if (paramName == null) {
+      // star argument should not raise issue
+      return true;
+    }
     SelfVisitor visitor = new SelfVisitor(paramName.name());
     funcDef.body().accept(visitor);
     return visitor.isUsingSelfArg;

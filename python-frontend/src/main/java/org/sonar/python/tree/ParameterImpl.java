@@ -50,12 +50,25 @@ public class ParameterImpl extends PyTree implements Parameter {
     this.defaultValue = defaultValue;
   }
 
+  /**
+   * constructor for star parameter syntax.
+   * def fun(arg1, *, arg2)
+   */
+  public ParameterImpl(Token starToken) {
+    this.starToken = starToken;
+    this.name = null;
+    this.annotation = null;
+    this.equalToken = null;
+    this.defaultValue = null;
+  }
+
   @CheckForNull
   @Override
   public Token starToken() {
     return starToken;
   }
 
+  @CheckForNull
   @Override
   public Name name() {
     return name;

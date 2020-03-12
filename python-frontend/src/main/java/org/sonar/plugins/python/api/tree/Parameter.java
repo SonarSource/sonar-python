@@ -43,6 +43,7 @@ public interface Parameter extends AnyParameter {
   @CheckForNull
   Token starToken();
 
+  @CheckForNull
   Name name();
 
   @CheckForNull

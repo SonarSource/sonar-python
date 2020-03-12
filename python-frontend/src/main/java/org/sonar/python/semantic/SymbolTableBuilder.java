@@ -29,6 +29,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -371,6 +372,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         .stream()
         .skip(hasSelf ? 1 : 0)
         .map(Parameter::name)
+        .filter(Objects::nonNull)
         .forEach(param -> addBindingUsage(param, Usage.Kind.PARAMETER));
 
       parameterList.all().stream()

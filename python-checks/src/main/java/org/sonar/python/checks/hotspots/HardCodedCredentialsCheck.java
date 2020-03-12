@@ -142,6 +142,9 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
   private void handleParameterList(ParameterList parameterList, SubscriptionContext ctx) {
     for (Parameter parameter : parameterList.nonTuple()) {
       Name parameterName = parameter.name();
+      if (parameterName == null) {
+        continue;
+      }
       Expression defaultValue = parameter.defaultValue();
       String matchedCredential = matchedCredential(parameterName.name(), variablePatterns());
       if (matchedCredential != null && defaultValue != null && isSuspiciousStringLiteral(defaultValue)) {

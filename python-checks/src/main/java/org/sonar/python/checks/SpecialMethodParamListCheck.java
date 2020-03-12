@@ -132,7 +132,7 @@ public class SpecialMethodParamListCheck extends PythonSubscriptionCheck {
       }
 
       // Check if the method was declared with packed arguments.
-      if (hasPackedOrKeywordParameter(parameterList) || parameterList.stream().anyMatch(p -> p.is(Tree.Kind.SEPARATOR_PARAMETER))) {
+      if (hasPackedOrKeywordParameter(parameterList)) {
         return;
       }
 

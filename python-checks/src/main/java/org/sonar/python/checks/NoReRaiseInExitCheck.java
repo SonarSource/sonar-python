@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
@@ -88,7 +89,11 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
       return null;
     }
 
-    return parameter.name().symbol();
+    Name name = parameter.name();
+    if (name == null) {
+      return null;
+    }
+    return name.symbol();
   }
 
   private static Symbol extractCaughtExceptionParameter(ParameterList parameterList) {
@@ -100,7 +105,11 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
     }
 
     Parameter parameter = regularParams.get(2);
-    return parameter.name().symbol();
+    Name name = parameter.name();
+    if (name == null) {
+      return null;
+    }
+    return name.symbol();
   }
 
   @Override
