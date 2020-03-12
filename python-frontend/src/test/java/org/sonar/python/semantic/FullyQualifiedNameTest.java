@@ -65,6 +65,15 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void submodule_alias() {
+    FileInput tree = parse(
+      "import mod.submod as alias",
+      "alias.fn()"
+    );
+    assertNameAndQualifiedName(tree, "fn", "mod.submod.fn");
+  }
+
+  @Test
   public void import_alias_reassigned() {
     FileInput tree = parse(
       "if x:",
@@ -373,6 +382,15 @@ public class FullyQualifiedNameTest {
       "g('foo')"
     );
     assertNameAndQualifiedName(tree, "g", "mod.fn");
+  }
+
+  @Test
+  public void from_import_submodule_alias() {
+    FileInput tree = parse(
+      "from mod.submod import fn as g",
+      "g('foo')"
+    );
+    assertNameAndQualifiedName(tree, "g", "mod.submod.fn");
   }
 
   @Test

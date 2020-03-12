@@ -320,8 +320,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         Name alias = module.alias();
         if (fromModuleName != null) {
           currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByFQN);
+        } else if (alias != null) {
+          String fullName = module.dottedName().names().stream().map(Name::name).collect(Collectors.joining("."));
+          currentScope().addModuleSymbol(alias, fullName, globalSymbolsByModuleName, globalSymbolsByFQN);
         } else {
-          currentScope().addModuleSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByModuleName, globalSymbolsByFQN);
+          // It's a simple case - no "from" imports or aliasing
+          currentScope().addModuleSymbol(nameTree, fullyQualifiedName, globalSymbolsByModuleName, globalSymbolsByFQN);
         }
       });
     }
