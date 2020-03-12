@@ -62,3 +62,6 @@ def test_valid_numpy_version():
         res = re.match(version_pattern, np.__version__) # Noncompliant
     else:
         res = re.match(version_pattern + dev_suffix, np.__version__) # Noncompliant
+
+def formatted_regex():
+  pattern = re.compile(r'{}-\d+-{}$'.format(foo, bar))
