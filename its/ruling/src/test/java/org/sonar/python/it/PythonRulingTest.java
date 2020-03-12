@@ -72,6 +72,7 @@ public class PythonRulingTest {
       .setProperty("dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("lits.differences", litsDifferencesFile.getAbsolutePath())
+      .setProperty("sonar.internal.analysis.failFast", "true")
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
     ORCHESTRATOR.executeBuild(build);
 
