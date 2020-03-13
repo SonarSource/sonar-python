@@ -126,7 +126,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return allSuperClasses().stream().anyMatch(c -> Objects.equals(c.fullyQualifiedName(), other.fullyQualifiedName()));
   }
 
-  private Map<String, Symbol> membersByName() {
+  Map<String, Symbol> membersByName() {
     if (membersByName == null) {
       membersByName = declaredMembers().stream().collect(Collectors.toMap(Symbol::name, m -> m, (s1, s2) -> s1));
     }

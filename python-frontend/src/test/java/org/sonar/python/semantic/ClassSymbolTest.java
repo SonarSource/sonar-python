@@ -20,10 +20,13 @@
 package org.sonar.python.semantic;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -313,6 +316,35 @@ public class ClassSymbolTest {
       "  def foo(): pass"));
 
     assertEqualsWithoutUsages(classSymbol);
+  }
+
+  @Test
+  public void static_member_usages() {
+    ClassSymbolImpl classSymbol = ((ClassSymbolImpl) lastClassSymbol(
+      "class A:",
+      "  foo = 42",
+      "  def __init__(self): ",
+      "    A.foo",
+      "    A.bar"
+    ));
+    Map<String, Symbol> members = classSymbol.declaredMembers().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol foo = members.get("foo");
+    assertThat(foo.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+
+    assertThat(members.get("bar")).isNull();
+
+    // receiver is not a class symbol
+    classSymbol = ((ClassSymbolImpl) lastClassSymbol(
+      "class A:",
+      "  foo1 = 42",
+      "  def __init__(self, x): ",
+      "    getClass().foo2", // receiver hasn't a symbol
+      "    x.foo3",          // receiver symbol isn't a class
+      "    unknown.foo4"     // receiver symbol unknown
+    ));
+    assertThat(classSymbol.declaredMembers())
+      .filteredOn("kind", Symbol.Kind.OTHER)
+      .extracting(Symbol::name).containsOnly("foo1");
   }
 
   private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {

@@ -34,9 +34,11 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S930")
 public class ArgumentNumberCheck extends PythonSubscriptionCheck {
@@ -82,12 +84,20 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     });
   }
 
+  private static boolean isReceiverClassSymbol(QualifiedExpression qualifiedExpression) {
+    return TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
+            .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+            .isPresent();
+  }
+
   private static boolean isException(CallExpression callExpression, FunctionSymbol functionSymbol) {
     return functionSymbol.hasDecorators()
       || functionSymbol.hasVariadicParameter()
       || functionSymbol.isStub()
       || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))
-      || extendsZopeInterface(((FunctionSymbolImpl) functionSymbol).owner());
+      || extendsZopeInterface(((FunctionSymbolImpl) functionSymbol).owner())
+      // TODO: distinguish between class methods (new and old style) from other methods
+      || (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR) && isReceiverClassSymbol(((QualifiedExpression) callExpression.callee())));
   }
 
   private static boolean extendsZopeInterface(@Nullable Symbol symbol) {

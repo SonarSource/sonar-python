@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
@@ -101,6 +103,13 @@ public class TreeUtils {
     } else {
       return Stream.of(expression);
     }
+  }
+
+  public static Optional<Symbol> getSymbolFromTree(@Nullable Tree tree) {
+    if (tree instanceof HasSymbol) {
+      return Optional.ofNullable(((HasSymbol) tree).symbol());
+    }
+    return Optional.empty();
   }
 
   @CheckForNull

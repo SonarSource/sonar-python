@@ -131,6 +131,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
     addSymbolsToTree((FileInputImpl) fileInput);
+    handleClassMemberAccess(fileInput);
     if (!SymbolUtils.isTypeShedFile(pythonFile)) {
       TypeInference.inferTypes(fileInput);
     }
@@ -171,6 +172,26 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         scope.symbols().forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       }
     }
+  }
+
+  private static void handleClassMemberAccess(FileInput fileInput) {
+    BaseTreeVisitor classMemberAccess = new BaseTreeVisitor() {
+      @Override
+      public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
+        super.visitQualifiedExpression(qualifiedExpression);
+        if (qualifiedExpression.qualifier() instanceof HasSymbol) {
+          Symbol symbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
+          if (symbol != null && symbol.kind() == Symbol.Kind.CLASS) {
+            Symbol member = ((ClassSymbolImpl) symbol).membersByName().get(qualifiedExpression.name().name());
+            if (member != null) {
+              Optional.ofNullable(qualifiedExpression.name().usage())
+                .ifPresent(usage -> ((SymbolImpl) member).addUsage(qualifiedExpression.name(), usage.kind()));
+            }
+          }
+        }
+      }
+    };
+    fileInput.accept(classMemberAccess);
   }
 
   private class ScopeVisitor extends BaseTreeVisitor {
