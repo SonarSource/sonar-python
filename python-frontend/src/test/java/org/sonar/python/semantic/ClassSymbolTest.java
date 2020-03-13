@@ -20,8 +20,6 @@
 package org.sonar.python.semantic;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -320,31 +318,30 @@ public class ClassSymbolTest {
 
   @Test
   public void static_member_usages() {
-    ClassSymbolImpl classSymbol = ((ClassSymbolImpl) lastClassSymbol(
-      "class A:",
-      "  foo = 42",
-      "  def __init__(self): ",
-      "    A.foo",
-      "    A.bar"
-    ));
-    Map<String, Symbol> members = classSymbol.declaredMembers().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
-    Symbol foo = members.get("foo");
+    ClassSymbol classSymbol = lastClassSymbol(
+            "class A:",
+            "  foo = 42",
+            "  def __init__(self): ",
+            "    A.foo",
+            "    A.foo = 0",
+            "    A.bar"
+    );
+    Symbol foo = classSymbol.resolveMember("foo").get();
+    assertThat(foo.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS,  Usage.Kind.OTHER, Usage.Kind.ASSIGNMENT_LHS);
+    assertThat(classSymbol.resolveMember("bar")).isEmpty();
+  }
+
+  @Test
+  public void inherited_static_member() {
+    ClassSymbol classSymbol = firstClassSymbol(
+            "class A:",
+            "  foo = 42",
+            "class B(A): pass",
+            "B.foo"
+    );
+
+    Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
-
-    assertThat(members.get("bar")).isNull();
-
-    // receiver is not a class symbol
-    classSymbol = ((ClassSymbolImpl) lastClassSymbol(
-      "class A:",
-      "  foo1 = 42",
-      "  def __init__(self, x): ",
-      "    getClass().foo2", // receiver hasn't a symbol
-      "    x.foo3",          // receiver symbol isn't a class
-      "    unknown.foo4"     // receiver symbol unknown
-    ));
-    assertThat(classSymbol.declaredMembers())
-      .filteredOn("kind", Symbol.Kind.OTHER)
-      .extracting(Symbol::name).containsOnly("foo1");
   }
 
   private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {
@@ -370,6 +367,13 @@ public class ClassSymbolTest {
     assertThat(copied.usages()).isEmpty();
   }
 
+
+  private static ClassSymbol firstClassSymbol(String... code) {
+    FileInput fileInput = parse(code);
+    List<Statement> statements = fileInput.statements().statements();
+    ClassDef classDef = (ClassDef) statements.get(0);
+    return (ClassSymbol) classDef.name().symbol();
+  }
 
   private static ClassSymbol lastClassSymbol(String... code) {
     FileInput fileInput = parse(code);
