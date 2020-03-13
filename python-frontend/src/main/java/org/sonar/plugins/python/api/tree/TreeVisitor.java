@@ -111,8 +111,6 @@ public interface TreeVisitor {
 
   void visitParameter(Parameter parameter);
 
-  void visitSeparatorParameter(SeparatorParameter parameter);
-
   void visitTypeAnnotation(TypeAnnotation typeAnnotation);
 
   void visitNumericLiteral(NumericLiteral numericLiteral);

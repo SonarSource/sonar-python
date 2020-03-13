@@ -93,6 +93,9 @@ class Scope {
 
   void createSelfParameter(Parameter parameter) {
     Name nameTree = parameter.name();
+    if (nameTree == null) {
+      return;
+    }
     String symbolName = nameTree.name();
     SymbolImpl symbol = new SelfSymbolImpl(symbolName, parent);
     symbols.add(symbol);

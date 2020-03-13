@@ -270,7 +270,7 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
         return null;
       }
       Name firstParameterName = params.get(0).name();
-      return firstParameterName.symbol();
+      return firstParameterName != null ? firstParameterName.symbol() : null;
     }
 
     @CheckForNull

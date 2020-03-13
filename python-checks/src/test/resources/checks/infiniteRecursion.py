@@ -341,3 +341,6 @@ async def asyn5(i): # OK, await is not on "asyn5" call
 
 async def asyn6(i): # Noncompliant
   await some_call(await asyn6(i-1), 42)
+
+class A:
+  def func(*, x, y): ...
