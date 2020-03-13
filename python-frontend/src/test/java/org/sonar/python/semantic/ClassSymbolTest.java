@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -315,6 +316,34 @@ public class ClassSymbolTest {
     assertEqualsWithoutUsages(classSymbol);
   }
 
+  @Test
+  public void static_member_usages() {
+    ClassSymbol classSymbol = lastClassSymbol(
+            "class A:",
+            "  foo = 42",
+            "  def __init__(self): ",
+            "    A.foo",
+            "    A.foo = 0",
+            "    A.bar"
+    );
+    Symbol foo = classSymbol.resolveMember("foo").get();
+    assertThat(foo.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS,  Usage.Kind.OTHER, Usage.Kind.ASSIGNMENT_LHS);
+    assertThat(classSymbol.resolveMember("bar")).isEmpty();
+  }
+
+  @Test
+  public void inherited_static_member() {
+    ClassSymbol classSymbol = firstClassSymbol(
+            "class A:",
+            "  foo = 42",
+            "class B(A): pass",
+            "B.foo"
+    );
+
+    Symbol foo = classSymbol.resolveMember("foo").get();
+    assertThat(foo.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+  }
+
   private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {
     ClassSymbolImpl copied = classSymbol.copyWithoutUsages();
     assertThat(copied.hasUnresolvedTypeHierarchy()).isEqualTo(classSymbol.hasUnresolvedTypeHierarchy());
@@ -338,6 +367,13 @@ public class ClassSymbolTest {
     assertThat(copied.usages()).isEmpty();
   }
 
+
+  private static ClassSymbol firstClassSymbol(String... code) {
+    FileInput fileInput = parse(code);
+    List<Statement> statements = fileInput.statements().statements();
+    ClassDef classDef = (ClassDef) statements.get(0);
+    return (ClassSymbol) classDef.name().symbol();
+  }
 
   private static ClassSymbol lastClassSymbol(String... code) {
     FileInput fileInput = parse(code);

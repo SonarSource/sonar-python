@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -79,6 +80,7 @@ import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
 
@@ -131,6 +133,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
     addSymbolsToTree((FileInputImpl) fileInput);
+    fileInput.accept(new ThirdPhaseVisitor());
     if (!SymbolUtils.isTypeShedFile(pythonFile)) {
       TypeInference.inferTypes(fileInput);
     }
@@ -581,6 +584,29 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (symbol != null && symbol.usages().stream().noneMatch(usage -> usage.tree().equals(nameTree))) {
         symbol.addUsage(nameTree, Usage.Kind.OTHER);
       }
+    }
+  }
+
+  /**
+   * Handle class member usages like the following:
+   * <pre>
+   *     class A:
+   *       foo = 42
+   *     print(A.foo)
+   * </pre>
+   */
+  private class ThirdPhaseVisitor extends BaseTreeVisitor {
+    @Override
+    public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
+      super.visitQualifiedExpression(qualifiedExpression);
+      TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
+        .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+        .map(ClassSymbol.class::cast)
+        .flatMap(classSymbol -> classSymbol.resolveMember(qualifiedExpression.name().name()))
+        .ifPresent(member -> {
+          Usage.Kind usageKind = assignmentLeftHandSides.contains(qualifiedExpression) ? Usage.Kind.ASSIGNMENT_LHS : Usage.Kind.OTHER;
+          ((SymbolImpl) member).addUsage(qualifiedExpression.name(), usageKind);
+        });
     }
   }
 }

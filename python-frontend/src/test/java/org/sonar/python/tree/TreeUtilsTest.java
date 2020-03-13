@@ -26,8 +26,10 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.PassStatement;
@@ -110,6 +112,19 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("foo")))).isTrue();
     assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("bar")))).isFalse();
     assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.IF_STMT))).isFalse();
+  }
+
+  @Test
+  public void getSymbolFromTree() {
+    assertThat(TreeUtils.getSymbolFromTree(null)).isEmpty();
+
+    Expression expression = PythonTestUtils.lastExpression(
+            "x = 42",
+            "x");
+    assertThat(TreeUtils.getSymbolFromTree(expression)).contains(((HasSymbol) expression).symbol());
+
+    expression = PythonTestUtils.lastExpression("foo()");
+    assertThat(TreeUtils.getSymbolFromTree(expression)).isEmpty();
   }
 
   @Test
