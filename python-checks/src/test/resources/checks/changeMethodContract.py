@@ -70,3 +70,11 @@ class Intermediate(ParentClass): ...
 class TransitivelyOverriding(Intermediate):
   def my_method(self): ... # Noncompliant
   def compliant(self, param1): ...
+
+class KeywordOnlyParameters(ParentClass):
+  def my_method(self, param1, *, param2): ... # Noncompliant
+#                                ^^^^^^
+
+class PositionalOnlyParameters(ParentClass):
+  def my_method(self, param1, /, param2): ... # Noncompliant
+#                                ^^^^^^

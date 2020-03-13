@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.tree.TreeUtils;
@@ -131,8 +132,9 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     List<Parameter> parameters = TreeUtils.nonTupleParameters(functionDef);
     for (int i = indexFirstExtraParams; i < parameters.size(); i++) {
       Parameter parameter = parameters.get(i);
-      if (parameter.defaultValue() == null) {
-        PreciseIssue preciseIssue = ctx.addIssue(parameter, "Remove parameter " + parameter.name().name() + " or provide default value.");
+      Name name = parameter.name();
+      if (parameter.defaultValue() == null && name != null) {
+        PreciseIssue preciseIssue = ctx.addIssue(parameter, "Remove parameter " + name.name() + " or provide default value.");
         addDefinitionSecondaryLocation(preciseIssue, definitionLocation);
       }
     }
