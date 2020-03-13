@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -26,7 +28,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -45,12 +49,30 @@ public class ConfusingWalrusCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       StringElement stringElement = (StringElement) ctx.syntaxNode();
       for (Expression expression : stringElement.interpolatedExpressions()) {
-        Expression nested = Expressions.removeParentheses(expression);
-        if (nested.is(Tree.Kind.ASSIGNMENT_EXPRESSION)) {
-          ctx.addIssue(nested, String.format(MOVE_MESSAGE, "f-string"));
-        }
+        checkNestedWalrus(ctx, expression, String.format(MOVE_MESSAGE, "interpolated expression"));
       }
     });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER, ctx -> {
+      Parameter parameter = (Parameter) ctx.syntaxNode();
+      checkNestedWalrus(ctx, parameter, String.format(MOVE_MESSAGE, "function definition"));
+    });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.ARG_LIST, ctx -> {
+      ArgList argList = (ArgList) ctx.syntaxNode();
+      if (argList != null && hasKeywordArguments(argList)) {
+        checkNestedWalrus(ctx, argList, String.format(MOVE_MESSAGE, "argument list"));
+      }
+    });
+  }
+
+  private static void checkNestedWalrus(SubscriptionContext ctx, Tree tree, String message) {
+    WalrusVisitor walrusVisitor = new WalrusVisitor();
+    tree.accept(walrusVisitor);
+    if (!walrusVisitor.assignmentExpressions.isEmpty()) {
+      PreciseIssue issue = ctx.addIssue(walrusVisitor.assignmentExpressions.get(0), message);
+      walrusVisitor.assignmentExpressions.stream().skip(1).forEach(a -> issue.secondary(a, null));
+    }
   }
 
   private void checkAssignmentExpression(SubscriptionContext ctx) {
@@ -60,28 +82,27 @@ public class ConfusingWalrusCheck extends PythonSubscriptionCheck {
       if (parent.is(Tree.Kind.ASSIGNMENT_STMT)) {
         ctx.addIssue(assignmentExpression, MESSAGE);
       }
-      if (parent.is(Tree.Kind.PARAMETER_TYPE_ANNOTATION)) {
-        ctx.addIssue(assignmentExpression, String.format(MOVE_MESSAGE, "function definition"));
-      }
-      if (parent.is(Tree.Kind.PARAMETER)) {
-        ctx.addIssue(assignmentExpression, String.format(MOVE_MESSAGE, "function definition"));
-      }
-      if (parent.is(Tree.Kind.REGULAR_ARGUMENT) && isInCallExprWithKeywordArguments(((RegularArgument) parent))) {
-        ctx.addIssue(assignmentExpression, String.format(MOVE_MESSAGE, "call expression"));
-      }
       if (parent.is(Tree.Kind.EXPRESSION_STMT)) {
         ctx.addIssue(assignmentExpression, MESSAGE);
       }
     });
   }
 
-  private static boolean isInCallExprWithKeywordArguments(RegularArgument regularArgument) {
-    ArgList argList = (ArgList) TreeUtils.firstAncestorOfKind(regularArgument, Tree.Kind.ARG_LIST);
+  private static boolean hasKeywordArguments(ArgList argList) {
     for (Argument argument : argList.arguments()) {
       if (argument.is(Tree.Kind.REGULAR_ARGUMENT) && ((RegularArgument) argument).keywordArgument() != null) {
         return true;
       }
     }
     return false;
+  }
+
+  private static class WalrusVisitor extends BaseTreeVisitor {
+    List<Tree> assignmentExpressions = new ArrayList<>();
+
+    @Override
+    public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
+      assignmentExpressions.add(assignmentExpression);
+    }
   }
 }
