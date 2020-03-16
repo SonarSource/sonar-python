@@ -60,7 +60,7 @@ public class ConfusingWalrusCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Tree.Kind.ARG_LIST, ctx -> {
       ArgList argList = (ArgList) ctx.syntaxNode();
-      if (argList != null && hasKeywordArguments(argList)) {
+      if (hasKeywordArguments(argList)) {
         checkNestedWalrus(ctx, argList, String.format(MOVE_MESSAGE, "argument list"));
       }
     });

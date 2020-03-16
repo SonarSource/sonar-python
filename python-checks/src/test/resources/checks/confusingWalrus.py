@@ -40,6 +40,9 @@ def func(param: p = 3):
 f'{(x:=10)}'  # Noncompliant
 f'{foo(x:=10)}' # Noncompliant
 #      ^^^^^
+
+f'{foo(x:=10) + bar(y:=42)}' # Noncompliant
+#      ^^^^^        ^^^^^<
 f'{x:=10}' # No issue raised but still not recommended. This is not an assignment expression. '=10' is passed to the f-string formatter.
 
 x = 10
