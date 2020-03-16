@@ -158,13 +158,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         Optional.ofNullable(classSymbol)
           .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
           .map(ClassSymbolImpl.class::cast)
-          .ifPresent(symbol -> {
-            symbol.addMembers(scope.symbols());
-            List<SymbolImpl> uniqueInstanceAttributes = scope.instanceAttributesByName.values().stream()
-              .filter(instanceSymbol -> !scope.symbolsByName.containsKey(instanceSymbol.name()))
-              .collect(Collectors.toList());
-            symbol.addMembers(Collections.unmodifiableCollection(uniqueInstanceAttributes));
-          });
+          .ifPresent(symbol -> symbol.addMembers(getClassMembers(scope.symbolsByName, scope.instanceAttributesByName)));
 
       } else if (scope.rootTree.is(Kind.FILE_INPUT)) {
         scope.symbols().stream().filter(s -> !scope.builtinSymbols.contains(s)).forEach(fileInput::addGlobalVariables);
@@ -174,6 +168,19 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         scope.symbols().forEach(((ComprehensionExpressionImpl) scope.rootTree)::addLocalVariableSymbol);
       }
     }
+  }
+
+  private static Set<Symbol> getClassMembers(Map<String, Symbol> classSymbols, Map<String, SymbolImpl> instanceAttributesByName) {
+    Set<Symbol> members = new HashSet<>(classSymbols.values());
+    for (SymbolImpl instanceAttribute : instanceAttributesByName.values()) {
+      SymbolImpl member = (SymbolImpl) classSymbols.get(instanceAttribute.name());
+      if (member != null) {
+        instanceAttribute.usages().forEach(usage -> member.addUsage(usage.tree(), usage.kind()));
+      } else {
+        members.add(instanceAttribute);
+      }
+    }
+    return members;
   }
 
   private class ScopeVisitor extends BaseTreeVisitor {

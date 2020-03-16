@@ -30,12 +30,14 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1845")
 public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
@@ -46,13 +48,14 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       ClassDef classDef = (ClassDef) ctx.syntaxNode();
-      Set<Symbol> allFields = new HashSet<>(classDef.classFields());
-      allFields.addAll(classDef.instanceFields());
+      ClassSymbol classSymbol = TreeUtils.getClassSymbolFromDef(classDef);
+      if (classSymbol == null) {
+        return;
+      }
       MethodVisitor methodVisitor = new MethodVisitor();
       classDef.body().accept(methodVisitor);
-      List<Tree> fieldNames = allFields.stream()
-        .filter(s -> s.usages().stream().anyMatch(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION))
-        .filter(s -> s.usages().stream().noneMatch(usage -> usage.kind() == Usage.Kind.CLASS_DECLARATION))
+      List<Tree> fieldNames = classSymbol.declaredMembers().stream()
+        .filter(s -> s.kind() == Symbol.Kind.OTHER)
         .map(s -> s.usages().stream().findFirst())
         .filter(Optional::isPresent)
         .map(usage -> usage.get().tree())

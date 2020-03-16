@@ -56,3 +56,16 @@ class C():
 class D():
     Foo = 10
     class FoO(): pass
+
+class Dup:
+    def l(self):
+        pass
+    def L(self): # Noncompliant
+        pass
+    def other(self):
+        print(self.L)
+
+class Redefined:
+    def m(self): pass
+    def M(self): pass
+Redefined = 42
