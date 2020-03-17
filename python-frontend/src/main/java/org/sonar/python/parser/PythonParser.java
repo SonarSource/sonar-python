@@ -26,7 +26,6 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.matcher.RuleDefinition;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.python.api.PythonGrammar;
@@ -74,8 +73,7 @@ public final class PythonParser {
       super(PythonGrammar.create());
       super.setRootRule(super.getGrammar().getRootRule());
       this.lexerState = new LexerState();
-      // We don't expose a method to parse anything else than a String, so we don't need to have a configurable charset
-      this.lexer = PythonLexer.create(StandardCharsets.UTF_8, lexerState);
+      this.lexer = PythonLexer.create(lexerState);
     }
 
     @Override

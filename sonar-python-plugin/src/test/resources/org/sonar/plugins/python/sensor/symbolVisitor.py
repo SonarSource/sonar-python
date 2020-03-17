@@ -45,3 +45,7 @@ f"symbol created and used inside interpolation: {[len(x) for x in []]}"
 v = 42
 f'use of equal specifier here {v=}, here {v=} and also {f"somewhere: \
         around here {v=}"}'
+
+def nested_f_string_using_symbol():
+    foo = 42
+    f'{bar(f"{foo}")}'

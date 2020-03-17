@@ -20,9 +20,9 @@
 package org.sonar.python.tree;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -42,6 +42,16 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   @Override
+  public Token firstToken() {
+    return token;
+  }
+
+  @Override
+  public Token lastToken() {
+    return token;
+  }
+
+  @Override
   public Kind getKind() {
     return Kind.STRING_ELEMENT;
   }
@@ -53,7 +63,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Collections.singletonList(token);
+    return Stream.concat(Stream.of(token), formattedExpressions.stream()).collect(Collectors.toList());
   }
 
   @Override
@@ -119,5 +129,18 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   private static boolean isCharQuote(char character) {
     return character == '\'' || character == '\"';
+  }
+
+  public int contentStartIndex() {
+    int prefixLength = 0;
+    while (!isCharQuote(value.charAt(prefixLength))) {
+      prefixLength++;
+    }
+    char quoteChar = value.charAt(prefixLength);
+    int start = prefixLength;
+    if (value.length() > start + 2 && value.charAt(start + 1) == quoteChar && value.charAt(start + 2) == quoteChar) {
+      return start + 3;
+    }
+    return start + 1;
   }
 }

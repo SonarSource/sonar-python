@@ -33,7 +33,6 @@ import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
@@ -50,7 +49,7 @@ public class PythonLexerTest {
 
   private static class TestLexer {
     private LexerState lexerState = new LexerState();
-    private Lexer lexer = PythonLexer.create(UTF_8, lexerState);
+    private Lexer lexer = PythonLexer.create(lexerState);
 
     List<Token> lex(String code) {
       lexerState.reset();

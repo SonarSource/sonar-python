@@ -28,6 +28,8 @@ public class LexerState {
 
   int brackets;
   boolean joined;
+  int initialLine = 1;
+  int initialColumn = 0;
 
   public void reset() {
     indentationStack.clear();
@@ -37,4 +39,9 @@ public class LexerState {
     joined = false;
   }
 
+  public void reset(int initialLine, int initialColumn) {
+    reset();
+    this.initialLine = initialLine;
+    this.initialColumn = initialColumn;
+  }
 }
