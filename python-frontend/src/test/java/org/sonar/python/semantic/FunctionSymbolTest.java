@@ -21,6 +21,7 @@ package org.sonar.python.semantic;
 
 import java.util.List;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -28,6 +29,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -142,6 +144,31 @@ public class FunctionSymbolTest {
     funcDef = PythonTestUtils.getFirstDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));
     functionSymbol = ((FunctionSymbolImpl) funcDef.name().symbol());
     assertThat(functionSymbol.owner()).isNull();
+  }
+
+  @Test
+  public void instance_method() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class A:",
+      "  def foo(self): pass",
+      "  def __new__(cls, a): pass",
+      "  @staticmethod",
+      "  def static_foo(): pass",
+      "  @classmethod",
+      "  def class_foo(): pass"
+    );
+    ClassSymbol classSymbol = TreeUtils.getClassSymbolFromDef(((ClassDef) fileInput.statements().statements().get(0)));
+    FunctionSymbol foo = (FunctionSymbol) classSymbol.resolveMember("foo").get();
+    assertThat(foo.isInstanceMethod()).isTrue();
+
+    FunctionSymbol static_foo = (FunctionSymbol) classSymbol.resolveMember("static_foo").get();
+    assertThat(static_foo.isInstanceMethod()).isFalse();
+
+    FunctionSymbol class_foo = (FunctionSymbol) classSymbol.resolveMember("class_foo").get();
+    assertThat(class_foo.isInstanceMethod()).isFalse();
+
+    FunctionSymbol newMethod = (FunctionSymbol) classSymbol.resolveMember("__new__").get();
+    assertThat(newMethod.isInstanceMethod()).isFalse();
   }
 
   private FunctionSymbol functionSymbol(String... code) {

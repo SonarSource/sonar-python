@@ -99,7 +99,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
-    return functionDef.isMethodDefinition() && functionDef.decorators().stream()
+    return !functionDef.name().name().equals("__new__") && functionDef.isMethodDefinition() && functionDef.decorators().stream()
       .map(decorator -> {
         List<Name> names = decorator.name().names();
         return names.get(names.size() - 1).name();

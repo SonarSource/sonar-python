@@ -59,6 +59,8 @@ def functions():
 def methods():
     def meth(p1, p2): pass
     class A:
+      def __new__(cls, a, b):
+          cls.__new__(A, 1, 2)
       def meth(self, p1, p2):
         meth(1, 2) # OK
         meth(1, 2, 3) # Noncompliant

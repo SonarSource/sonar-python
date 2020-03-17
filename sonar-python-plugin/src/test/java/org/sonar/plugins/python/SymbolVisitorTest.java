@@ -66,7 +66,7 @@ public class SymbolVisitorTest {
     verifyUsages(5, 4, reference(6, 4, 6, 5), reference(7, 4, 7, 5),
       reference(8, 8, 8, 9), reference(13, 9, 13, 10));
     verifyUsages(9, 4);
-    verifyUsages(16, 4);
+    verifyUsages(16, 4, reference(23, 13, 23, 18));
     verifyUsages(23, 13);
     verifyUsages(19, 13, reference(22, 13, 22, 14), reference(26, 13, 26, 14));
     verifyUsages(18, 17, reference(19, 8, 19, 12));
