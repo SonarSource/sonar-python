@@ -170,10 +170,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  private static Set<Symbol> getClassMembers(Map<String, Symbol> classSymbols, Map<String, SymbolImpl> instanceAttributesByName) {
-    Set<Symbol> members = new HashSet<>(classSymbols.values());
+  private static Set<Symbol> getClassMembers(Map<String, Symbol> symbolsInClass, Map<String, SymbolImpl> instanceAttributesByName) {
+    Set<Symbol> members = new HashSet<>(symbolsInClass.values());
     for (SymbolImpl instanceAttribute : instanceAttributesByName.values()) {
-      SymbolImpl member = (SymbolImpl) classSymbols.get(instanceAttribute.name());
+      SymbolImpl member = (SymbolImpl) symbolsInClass.get(instanceAttribute.name());
       if (member != null) {
         instanceAttribute.usages().forEach(usage -> member.addUsage(usage.tree(), usage.kind()));
       } else {
