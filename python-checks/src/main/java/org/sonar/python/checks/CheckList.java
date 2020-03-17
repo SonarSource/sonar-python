@@ -113,6 +113,7 @@ public final class CheckList {
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,
+      InstanceAndClassMethodsAtLeastOnePositionalCheck.class,
       InstanceMethodSelfAsFirstCheck.class,
       InvariantReturnCheck.class,
       JumpInFinallyCheck.class,

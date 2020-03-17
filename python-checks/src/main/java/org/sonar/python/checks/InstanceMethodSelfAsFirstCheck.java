@@ -30,9 +30,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -73,21 +70,6 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     return this.getExcludedDecorators().stream().anyMatch(fqn::contains);
   }
 
-  private static boolean isExceptionalUsage(Usage usage, ClassDef parentClass) {
-    Tree tree = usage.tree();
-    Tree parentTree = tree.parent();
-
-    // Check if the function is called inside a class body
-    if (!parentTree.is(Tree.Kind.CALL_EXPR)) {
-      return false;
-    }
-
-    CallExpression call = (CallExpression) parentTree;
-    return call.callee().equals(tree)
-      && TreeUtils.firstAncestorOfKind(call, Tree.Kind.FUNCDEF) == null
-      && parentClass.equals(TreeUtils.firstAncestorOfKind(call, Tree.Kind.CLASSDEF));
-  }
-
   private boolean isRelevantMethod(ClassDef classDef, ClassSymbol classSymbol, FunctionDef functionDef) {
     // Skip some known special methods
     if (EXCEPTIONS.contains(functionDef.name().name())) {
@@ -100,15 +82,11 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     }
 
     FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
-    if (functionSymbol == null) {
+    if (functionSymbol == null || CheckUtils.isCalledInClassBody(functionSymbol, classDef)) {
       return false;
     }
 
-    if (classSymbol.isOrExtends("zope.interface.Interface")) {
-      return false;
-    }
-
-    return functionSymbol.usages().stream().noneMatch(usage -> isExceptionalUsage(usage, classDef));
+    return !classSymbol.isOrExtends("zope.interface.Interface");
   }
 
   private void handleFunctionDef(SubscriptionContext ctx, ClassDef classDef, ClassSymbol classSymbol, FunctionDef functionDef) {
@@ -136,33 +114,9 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     if (possibleParent != null) {
       return false;
     }
-    
+
     // Do not raise on meta-classes
     return !classSymbol.isOrExtends("type");
-  }
-
-  /**
-   * A visitor class used to collect all function definitions within a class def.
-   * It is used to discover methods defined within "strange" constructs, such as
-   * <code>
-   *   class A:
-   *       if p:
-   *           def f(self): ...
-   * </code>
-   */
-  private static class CollectFunctionDefsVisitor extends BaseTreeVisitor {
-    private List<FunctionDef> functionDefs = new ArrayList<>();
-
-    @Override
-    public void visitClassDef(ClassDef pyClassDefTree) {
-      // Do not descend into nested classes
-    }
-
-    @Override
-    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-      this.functionDefs.add(pyFunctionDefTree);
-      // Do not descend into nested functions
-    }
   }
 
   @Override
@@ -174,10 +128,7 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
         return;
       }
 
-      CollectFunctionDefsVisitor visitor = new CollectFunctionDefsVisitor();
-      classDef.body().accept(visitor);
-
-      visitor.functionDefs.forEach(functionDef -> handleFunctionDef(ctx, classDef, classSymbol, functionDef));
+      TreeUtils.topLevelFunctionDefs(classDef).forEach(functionDef -> handleFunctionDef(ctx, classDef, classSymbol, functionDef));
     });
   }
 }
