@@ -132,3 +132,13 @@ def methods():
     class B2(B1):
       def foo(self):
         super().__reduce__(1, 2) # OK, __reduce__ is not 'object.__reduce__' but B1.__reduce__
+
+def builtin_method():
+    myList = list(42, 43)
+    myList.append(44)
+    myList.append(1, 2) # Noncompliant
+
+def builtin_method_different_for_python_2_and_3():
+    myList = list(42, 43)
+    myList.sort()
+    myList.sort(lambda x: x)
