@@ -95,7 +95,9 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   @Override
   FunctionSymbolImpl copyWithoutUsages() {
-    return new FunctionSymbolImpl(name(), this);
+    FunctionSymbolImpl copy = new FunctionSymbolImpl(name(), this);
+    copy.setKind(kind());
+    return copy;
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {

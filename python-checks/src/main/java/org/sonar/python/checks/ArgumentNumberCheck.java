@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,16 +46,6 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
   private static final String FUNCTION_DEFINITION = "Function definition.";
 
-  private static String message(String functionName, long minRequiredPositionalArguments, int nArguments, long nPositionalParamWithDefaultValue) {
-    String message = "";
-    if (minRequiredPositionalArguments > nArguments) {
-      message = "Add " + (minRequiredPositionalArguments - nArguments) + " missing arguments; ";
-    } else {
-      message = "Remove " + (nArguments - minRequiredPositionalArguments - nPositionalParamWithDefaultValue) + " unexpected arguments; ";
-    }
-    return message + "'" + functionName + "' expects " + minRequiredPositionalArguments + " positional arguments.";
-  }
-
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
@@ -65,29 +56,77 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
         if (isException(callExpression, functionSymbol)) {
           return;
         }
-        int nArguments = callExpression.arguments().size();
-        int self = 0;
-        if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-          self = 1;
-        }
-        long minRequiredPositionalArguments = functionSymbol.parameters().stream()
-          .filter(parameterName -> !parameterName.isKeywordOnly() && !parameterName.hasDefaultValue()).count();
-        if ((nArguments + self < minRequiredPositionalArguments || nArguments + self > functionSymbol.parameters().size())) {
-          PreciseIssue preciseIssue = ctx.addIssue(callExpression.callee(),
-            message(functionSymbol.name(), minRequiredPositionalArguments - self, nArguments, functionSymbol.parameters().size() - minRequiredPositionalArguments));
-          addSecondary(functionSymbol, preciseIssue);
-        }
-
+        checkPositionalParameters(ctx, callExpression, functionSymbol);
         checkKeywordArguments(ctx, callExpression, functionSymbol, callExpression.callee());
       }
 
     });
   }
 
+  private static void checkPositionalParameters(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol) {
+    int self = 0;
+    if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+      self = 1;
+    }
+    Set<String> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionSymbol);
+    long nbPositionalParamsWithDefault = functionSymbol.parameters().stream()
+      .filter(parameterName -> !parameterName.isKeywordOnly() && parameterName.hasDefaultValue())
+      .count();
+
+    List<RegularArgument> arguments = callExpression.arguments().stream()
+      .map(RegularArgument.class::cast)
+      .collect(Collectors.toList());
+    long nbPositionalArgs = arguments.stream().filter(a -> a.keywordArgument() == null).count();
+    long nbNonKeywordOnlyPassedWithKeyword = arguments.stream()
+      .map(RegularArgument::keywordArgument)
+      .filter(k -> k != null && positionalParamsWithoutDefault.contains(k.name()))
+      .count();
+
+    int minimumPositionalArgs = positionalParamsWithoutDefault.size();
+    String expected = "" + (minimumPositionalArgs - self);
+    long nbMissingArgs = minimumPositionalArgs - nbPositionalArgs - self - nbNonKeywordOnlyPassedWithKeyword;
+    if (nbMissingArgs > 0) {
+      String message = "Add " + nbMissingArgs + " missing arguments; ";
+      if (nbPositionalParamsWithDefault > 0) {
+        expected = "at least " + expected;
+      }
+      addPositionalIssue(ctx, callExpression.callee(), functionSymbol, message, expected);
+    } else if (nbMissingArgs + nbPositionalParamsWithDefault < 0) {
+      String message = "Remove " + (- nbMissingArgs - nbPositionalParamsWithDefault) + " unexpected arguments; ";
+      if (nbPositionalParamsWithDefault > 0) {
+        expected = "at most " + (minimumPositionalArgs - self + nbPositionalParamsWithDefault);
+      }
+      addPositionalIssue(ctx, callExpression.callee(), functionSymbol, message, expected);
+    }
+  }
+
+  private static Set<String> positionalParamsWithoutDefault(FunctionSymbol functionSymbol) {
+    int unnamedIndex = 0;
+    Set<String> result = new HashSet<>();
+    for (FunctionSymbol.Parameter parameter : functionSymbol.parameters()) {
+      if (!parameter.isKeywordOnly() && !parameter.hasDefaultValue()) {
+        String name = parameter.name();
+        if (name == null) {
+          result.add("!unnamed" + unnamedIndex);
+          unnamedIndex++;
+        } else {
+          result.add(name);
+        }
+      }
+    }
+    return result;
+  }
+
+  private static void addPositionalIssue(SubscriptionContext ctx, Tree tree, FunctionSymbol functionSymbol, String message, String expected) {
+    String msg = message + "'" + functionSymbol.name() + "' expects " + expected + " positional arguments.";
+    PreciseIssue preciseIssue = ctx.addIssue(tree, msg);
+    addSecondary(functionSymbol, preciseIssue);
+  }
+
   private static boolean isReceiverClassSymbol(QualifiedExpression qualifiedExpression) {
     return TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
-            .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
-            .isPresent();
+      .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+      .isPresent();
   }
 
   private static boolean isException(CallExpression callExpression, FunctionSymbol functionSymbol) {

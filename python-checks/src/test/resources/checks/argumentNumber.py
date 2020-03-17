@@ -12,9 +12,9 @@ def functions():
 
     foo(1,2,3) # Noncompliant {{Remove 1 unexpected arguments; 'foo' expects 2 positional arguments.}}
 #   ^^^
-    foo(1, x = 42) # Noncompliant {{Remove this unexpected named argument 'x'.}}
-#          ^^^^^^
-
+    foo(1, x = 42) # Noncompliant {{Add 1 missing arguments; 'foo' expects 2 positional arguments.}} {{Remove this unexpected named argument 'x'.}}
+    foo(1, 2, x = 42) # Noncompliant {{Remove this unexpected named argument 'x'.}}
+#             ^^^^^^
 
     foo(1, 2) # OK
     foo(1, p2 = 2) # OK
@@ -24,10 +24,15 @@ def functions():
 
     def foo_with_default_value(p1, p2 = 42): pass
 
-    foo_with_default_value() # Noncompliant {{Add 1 missing arguments; 'foo_with_default_value' expects 1 positional arguments.}}
+    foo_with_default_value() # Noncompliant {{Add 1 missing arguments; 'foo_with_default_value' expects at least 1 positional arguments.}}
 #   ^^^^^^^^^^^^^^^^^^^^^^
     foo_with_default_value(42) # OK
-    foo_with_default_value(1,2,3) # Noncompliant {{Remove 1 unexpected arguments; 'foo_with_default_value' expects 1 positional arguments.}}
+    foo_with_default_value(1,2,3) # Noncompliant {{Remove 1 unexpected arguments; 'foo_with_default_value' expects at most 2 positional arguments.}}
+
+    def default_values(p1, p2 = 42, p3 = 43): pass
+    default_values(1)
+    default_values(1, 2)
+    default_values(1, 2, 3)
 
     if True:
         def foo_with_multiple_binding(p1, p2): pass
@@ -49,12 +54,25 @@ def functions():
     foo_with_variadics(1, 2, 3) # OK
 
     def foo_with_optional_keyword_only(p1, *, p2 = 42): pass
+    foo_with_optional_keyword_only() # Noncompliant {{Add 1 missing arguments; 'foo_with_optional_keyword_only' expects 1 positional arguments.}}
     foo_with_optional_keyword_only(42) # OK
+    foo_with_optional_keyword_only(42, 43) # Noncompliant {{Remove 1 unexpected arguments; 'foo_with_optional_keyword_only' expects 1 positional arguments.}}
+    foo_with_optional_keyword_only(42, p2 = 43)
+
     from mod import dec
     @dec
     def foo_with_decorator(): pass
 
     foo_with_decorator(1, 2, 3) # OK
+
+    def python2_tuple_params(p1, (p2, p3)): pass
+    python2_tuple_params(1, something)
+    python2_tuple_params(1, (2, 3))
+    python2_tuple_params(1, (2, 3), 4) # Noncompliant
+    def python2_tuple_params2((p1, p2), (p3, p4)): pass
+    python2_tuple_params2(x) # Noncompliant
+    python2_tuple_params2(x, y)
+    python2_tuple_params2(x, y, z) # Noncompliant
 
 def methods():
     def meth(p1, p2): pass
@@ -116,3 +134,13 @@ def methods():
     class B2(B1):
       def foo(self):
         super().__reduce__(1, 2) # OK, __reduce__ is not 'object.__reduce__' but B1.__reduce__
+
+def builtin_method():
+    myList = list(42, 43)
+    myList.append(44)
+    myList.append(1, 2) # Noncompliant
+
+def builtin_method_different_for_python_2_and_3():
+    myList = list(42, 43)
+    myList.sort()
+    myList.sort(lambda x: x)
