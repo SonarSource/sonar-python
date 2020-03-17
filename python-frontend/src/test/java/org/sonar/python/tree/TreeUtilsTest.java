@@ -22,6 +22,7 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
@@ -220,6 +221,38 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(
       Arrays.asList(parameters.get(0), parameters.get(2)
     ));
+  }
+
+  @Test
+  public void topLevelFunctionDefs() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self): pass",
+      "    if x:",
+      "        def bar(self, x): return 1",
+      "    else:",
+      "        def baz(self, x, y): return x + y"
+    );
+
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
+    List<FunctionDef> functionDefs = PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
+
+    assertThat(TreeUtils.topLevelFunctionDefs(classDef)).containsAll(functionDefs);
+
+    fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self):",
+      "        def foo2(x, y): return x + y",
+      "        return foo2(1, 1)",
+      "    class B:",
+      "        def bar(self): pass"
+    );
+    classDef = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
+    FunctionDef fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
+
+    assertThat(TreeUtils.topLevelFunctionDefs(classDef)).isEqualTo(Collections.singletonList(fooDef));
   }
 
   private static boolean isOuterFunction(Tree tree) {

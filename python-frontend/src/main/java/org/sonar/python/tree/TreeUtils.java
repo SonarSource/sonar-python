@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -182,4 +183,36 @@ public class TreeUtils {
 
     return result;
   }
+
+  /**
+   * Collects all top-level function definitions within a class def.
+   * It is used to discover methods defined within "strange" constructs, such as
+   * <code>
+   *   class A:
+   *       if p:
+   *           def f(self): ...
+   * </code>
+   */
+  public static List<FunctionDef> topLevelFunctionDefs(ClassDef classDef) {
+    class CollectFunctionDefsVisitor extends BaseTreeVisitor {
+      private List<FunctionDef> functionDefs = new ArrayList<>();
+
+      @Override
+      public void visitClassDef(ClassDef pyClassDefTree) {
+        // Do not descend into nested classes
+      }
+
+      @Override
+      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+        this.functionDefs.add(pyFunctionDefTree);
+        // Do not descend into nested functions
+      }
+    }
+
+    CollectFunctionDefsVisitor visitor = new CollectFunctionDefsVisitor();
+    classDef.body().accept(visitor);
+
+    return visitor.functionDefs;
+  }
+
 }
