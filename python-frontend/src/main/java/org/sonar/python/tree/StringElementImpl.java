@@ -22,7 +22,9 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -32,7 +34,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   private final String value;
   private final Token token;
-  private List<Expression> interpolatedExpressions = new ArrayList<>();
+  private List<FormattedExpression> formattedExpressions = new ArrayList<>();
 
   public StringElementImpl(Token token) {
     value = token.value();
@@ -87,11 +89,16 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<Expression> interpolatedExpressions() {
-    return interpolatedExpressions;
+    return formattedExpressions.stream().map(FormattedExpression::expression).collect(Collectors.toList());
   }
 
-  void addInterpolatedExpression(Expression expression) {
-    interpolatedExpressions.add(expression);
+  @Override
+  public List<FormattedExpression> formattedExpressions() {
+    return formattedExpressions;
+  }
+
+  void addFormattedExpression(FormattedExpression formattedExpression) {
+    formattedExpressions.add(formattedExpression);
   }
 
 

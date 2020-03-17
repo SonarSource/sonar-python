@@ -41,3 +41,7 @@ nested = f'some: {f"nested interpolation：\
          {u} and then some {f"more {u}"}"}'
 
 f"symbol created and used inside interpolation: {[len(x) for x in []]}"
+
+v = 42
+f'use of equal specifier here {v=}, here {v=} and also {f"somewhere: \
+        around here {v=}"}'

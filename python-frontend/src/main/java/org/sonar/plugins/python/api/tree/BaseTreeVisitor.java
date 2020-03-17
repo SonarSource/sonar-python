@@ -317,7 +317,7 @@ public class BaseTreeVisitor implements TreeVisitor {
   @Override
   public void visitStringElement(StringElement tree) {
     if (tree.isInterpolated()) {
-      scan(tree.interpolatedExpressions());
+      scan(tree.formattedExpressions());
     }
   }
 
@@ -460,5 +460,10 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   public void visitToken(Token token) {
     // noop
+  }
+
+  @Override
+  public void visitFormattedExpression(FormattedExpression formattedExpression) {
+    scan(formattedExpression.expression());
   }
 }

@@ -65,6 +65,7 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
 import org.sonar.plugins.python.api.tree.IfStatement;
@@ -1875,15 +1876,15 @@ public class PythonTreeMakerTest extends RuleTest {
   @Test
   public void string_interpolation() {
     setRootRule(PythonGrammar.ATOM);
-    Expression expr = parseInterpolated("{x}");
+    Expression expr = parseInterpolated("{x}").expression();
     assertThat(expr.is(Tree.Kind.NAME)).isTrue();
     assertThat(((Name) expr).name()).isEqualTo("x");
 
-    expr = parseInterpolated("{\"}\" + value6}");
+    expr = parseInterpolated("{\"}\" + value6}").expression();
     assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
-    expr = parseInterpolated("{\"}}\" + value6}");
+    expr = parseInterpolated("{\"}}\" + value6}").expression();
     assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
-    expr = parseInterpolated("{{{\"}\" + value6}}}");
+    expr = parseInterpolated("{{{\"}\" + value6}}}").expression();
     assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
 
     Expression exp = parse("F'{{bar}}'", treeMaker::expression);
@@ -1891,7 +1892,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral.stringElements()).hasSize(1);
     StringElement elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
-    assertThat(elmt.interpolatedExpressions()).isEmpty();
+    assertThat(elmt.formattedExpressions()).isEmpty();
 
     exp = parse("f'Some nested {f\"string \\ \n" +
                       "interpolation {x}\"}'", treeMaker::expression);
@@ -1899,11 +1900,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral.stringElements()).hasSize(1);
     elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
-    assertThat(elmt.interpolatedExpressions()).hasSize(1);
-    StringLiteral interpolation = (StringLiteral) elmt.interpolatedExpressions().get(0);
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    StringLiteral interpolation = (StringLiteral) elmt.formattedExpressions().get(0).expression();
     StringElement stringElement = interpolation.stringElements().get(0);
     assertThat(stringElement.isInterpolated()).isTrue();
-    Expression nestedInterpolation = stringElement.interpolatedExpressions().get(0);
+    Expression nestedInterpolation = stringElement.formattedExpressions().get(0).expression();
     assertThat(nestedInterpolation.is(Tree.Kind.NAME)).isTrue();
     assertThat(((Name) nestedInterpolation).name()).isEqualTo("x");
     assertThat(nestedInterpolation.firstToken().line()).isEqualTo(2);
@@ -1914,18 +1915,52 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral.stringElements()).hasSize(1);
     elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
-    assertThat(elmt.interpolatedExpressions()).hasSize(1);
-    assertThat(elmt.interpolatedExpressions().get(0).is(Kind.SET_COMPREHENSION)).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.SET_COMPREHENSION)).isTrue();
   }
 
-  private Expression parseInterpolated(String interpolatedExpr) {
+  @Test
+  public void string_interpolation_equal_specifier() {
+    setRootRule(PythonGrammar.ATOM);
+    Expression exp = parse("F'{bar=}'", treeMaker::expression);
+    StringLiteral stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElement elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    FormattedExpression formattedExpression = elmt.formattedExpressions().get(0);
+    assertThat(formattedExpression.expression().is(Kind.NAME)).isTrue();
+    Token equalToken = formattedExpression.equalToken();
+    assertThat(equalToken).isNotNull();
+    assertThat(equalToken.value()).isEqualTo("=");
+
+    exp = parse("F'{foo=} and {bar}'", treeMaker::expression);
+    stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(2);
+
+    FormattedExpression formattedFoo = elmt.formattedExpressions().get(0);
+    assertThat(formattedFoo.expression().is(Kind.NAME)).isTrue();
+    assertThat(formattedFoo.equalToken()).isNotNull();
+
+    FormattedExpression formattedBar = elmt.formattedExpressions().get(1);
+    assertThat(formattedBar.expression().is(Kind.NAME)).isTrue();
+    assertThat(formattedBar.equalToken()).isNull();
+  }
+
+  private FormattedExpression parseInterpolated(String interpolatedExpr) {
     Expression exp = parse("f'" + interpolatedExpr + "'", treeMaker::expression);
     StringLiteral stringLiteral = (StringLiteral) exp;
     assertThat(stringLiteral.stringElements()).hasSize(1);
     StringElement elmt = stringLiteral.stringElements().get(0);
     assertThat(elmt.isInterpolated()).isTrue();
-    assertThat(elmt.interpolatedExpressions()).hasSize(1);
-    return elmt.interpolatedExpressions().get(0);
+    assertThat(elmt.formattedExpressions()).extracting(FormattedExpression::expression).containsExactlyElementsOf(elmt.interpolatedExpressions());
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    return elmt.formattedExpressions().get(0);
   }
 
   private void assertStringLiteral(String fullValue, String trimmedQuoteValue) {

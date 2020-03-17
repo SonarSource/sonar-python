@@ -82,6 +82,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   OR_EXPR,
 
   NAMED_EXPR_TEST,
+  FORMATTED_EXPR,
 
   COMPARISON,
   COMP_OPERATOR,
@@ -198,6 +199,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(STAR_EXPR).is("*", EXPR);
     b.rule(EXPR).is(XOR_EXPR, b.zeroOrMore("|", XOR_EXPR));
+    b.rule(FORMATTED_EXPR).is(b.sequence(EXPR, b.optional(PythonPunctuator.ASSIGN)));
 
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),

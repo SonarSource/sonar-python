@@ -168,4 +168,6 @@ public interface TreeVisitor {
   void visitDecorator(Decorator decorator);
 
   void visitToken(Token token);
+
+  void visitFormattedExpression(FormattedExpression formattedExpression);
 }
