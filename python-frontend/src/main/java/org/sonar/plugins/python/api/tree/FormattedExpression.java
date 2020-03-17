@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import javax.annotation.Nullable;
+import javax.annotation.CheckForNull;
 
 public interface FormattedExpression extends Tree {
 
@@ -28,6 +28,6 @@ public interface FormattedExpression extends Tree {
   /**
    * @return Optional equal specifier introduced in Python 3.8
    */
-  @Nullable
+  @CheckForNull
   Token equalToken();
 }

@@ -1300,7 +1300,8 @@ public class PythonTreeMaker {
       int end = matcher.end();
       AstNode parse = parser.parse(literalValue.substring(end));
       Expression exp = expression(parse.getFirstChild(PythonGrammar.EXPR));
-      Token equalToken = parse.getFirstChild(PythonPunctuator.ASSIGN) == null ? null : toPyToken(parse.getFirstChild(PythonPunctuator.ASSIGN).getToken());
+      AstNode equalNode = parse.getFirstChild(PythonPunctuator.ASSIGN);
+      Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
       FormattedExpression formattedExpression = new FormattedExpressionImpl(exp, equalToken);
       setParents(formattedExpression);
       updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, end);
