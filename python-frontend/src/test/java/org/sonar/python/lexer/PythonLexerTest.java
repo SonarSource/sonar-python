@@ -285,6 +285,7 @@ public class PythonLexerTest {
     assertThat(lexer.lex("line\\\r\nline"), not(hasToken(PythonTokenType.NEWLINE)));
     assertThat(lexer.lex("line\\\rline"), not(hasToken(PythonTokenType.NEWLINE)));
     assertThat(lexer.lex("line\\\nline"), not(hasToken(PythonTokenType.NEWLINE)));
+    assertThat(lexer.lex("line\\\n\nline"), hasToken(PythonTokenType.NEWLINE));
 
     assertThat(lexer.lex("line\\\n    line")).hasSize(3);
   }
