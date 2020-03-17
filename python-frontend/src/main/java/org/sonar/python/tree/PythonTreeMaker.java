@@ -60,6 +60,7 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
 import org.sonar.plugins.python.api.tree.IfStatement;
@@ -1280,28 +1281,30 @@ public class PythonTreeMaker {
       .map(node -> new StringElementImpl(toPyToken(node.getToken()))).collect(Collectors.toList());
     stringElements.stream()
       .filter(StringElement::isInterpolated)
-      .forEach(se -> interpolatedExpressions(se).forEach(se::addInterpolatedExpression));
+      .forEach(se -> interpolatedExpressions(se).forEach(se::addFormattedExpression));
     List<StringElement> stringElems = new ArrayList<>(stringElements);
     return new StringLiteralImpl(stringElems);
   }
 
-  private List<Expression> interpolatedExpressions(StringElementImpl se) {
+  private List<FormattedExpression> interpolatedExpressions(StringElementImpl se) {
     String literalValue = se.trimmedQuotesValue();
     Token token = se.firstToken();
     int startOfLiteral = token.value().indexOf(literalValue);
     LineOffsetCounter lineOffsetCounter = new LineOffsetCounter(literalValue);
-    List<Expression> res = new ArrayList<>();
-    parser.setRootRule(parser.getGrammar().rule(PythonGrammar.EXPR));
+    List<FormattedExpression> res = new ArrayList<>();
+    parser.setRootRule(parser.getGrammar().rule(PythonGrammar.FORMATTED_EXPR));
     // get escaped interpolation
     Matcher matcher = INTERPOLATED_EXPR_START_PATTERN.matcher(literalValue);
     int index = 0;
     while (matcher.find(index)) {
       int end = matcher.end();
       AstNode parse = parser.parse(literalValue.substring(end));
-      Expression exp = expression(parse);
-      setParents(exp);
+      Expression exp = expression(parse.getFirstChild(PythonGrammar.EXPR));
+      Token equalToken = parse.getFirstChild(PythonPunctuator.ASSIGN) == null ? null : toPyToken(parse.getFirstChild(PythonPunctuator.ASSIGN).getToken());
+      FormattedExpression formattedExpression = new FormattedExpressionImpl(exp, equalToken);
+      setParents(formattedExpression);
       updateTokensLineAndColumn(token, startOfLiteral, lineOffsetCounter, exp, end);
-      res.add(exp);
+      res.add(formattedExpression);
       com.sonar.sslr.api.Token lastToken = parse.getLastToken();
       index = end + lastToken.getColumn() + lastToken.getValue().length();
     }
@@ -1325,7 +1328,7 @@ public class PythonTreeMaker {
   }
 
   private static void adjustNestedInterpolations(StringElement se) {
-    se.interpolatedExpressions().forEach(e -> TreeUtils.tokens(e).forEach(t -> {
+    se.formattedExpressions().stream().map(FormattedExpression::expression).forEach(e -> TreeUtils.tokens(e).forEach(t -> {
       int newline = t.line() - 1 + se.firstToken().line();
       int col = t.line() == 1 ? (t.column() + se.firstToken().column()) : t.column();
       ((TokenImpl) t).setLineColumn(newline, col);

@@ -19,38 +19,15 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import java.util.List;
+import javax.annotation.Nullable;
 
-/**
- * <pre>
- *   {@link #prefix()}{@link #value()}
- * </pre>
- *
- * See https://docs.python.org/3/reference/lexical_analysis.html#grammar-token-stringliteral
- */
-public interface StringElement extends Tree {
-  /**
-   * @return the token value of this literal.
-   */
-  String value();
+public interface FormattedExpression extends Tree {
 
-  String trimmedQuotesValue();
-
-  String prefix();
-
-  boolean isTripleQuoted();
-
-  boolean isInterpolated();
+  Expression expression();
 
   /**
-   * @deprecated Use {@link #formattedExpressions()} instead.
+   * @return Optional equal specifier introduced in Python 3.8
    */
-  @Deprecated
-  List<Expression> interpolatedExpressions();
-
-  /**
-   * @return Formatted expressions of an f-string.
-   * Empty list if the string element is not an f-string.
-   */
-  List<FormattedExpression> formattedExpressions();
+  @Nullable
+  Token equalToken();
 }

@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -48,8 +49,8 @@ public class ConfusingWalrusCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       StringElement stringElement = (StringElement) ctx.syntaxNode();
-      for (Expression expression : stringElement.interpolatedExpressions()) {
-        checkNestedWalrus(ctx, expression, String.format(MOVE_MESSAGE, "interpolated expression"));
+      for (FormattedExpression formattedExpression : stringElement.formattedExpressions()) {
+        checkNestedWalrus(ctx, formattedExpression.expression(), String.format(MOVE_MESSAGE, "interpolated expression"));
       }
     });
 

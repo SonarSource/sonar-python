@@ -134,6 +134,8 @@ public interface Tree {
 
     STRING_ELEMENT(StringElement.class),
 
+    FORMATTED_EXPRESSION(FormattedExpression.class),
+
     TRY_STMT(TryStatement.class),
 
     PARAMETER(Parameter.class),
