@@ -194,25 +194,24 @@ public class TreeUtils {
    * </code>
    */
   public static List<FunctionDef> topLevelFunctionDefs(ClassDef classDef) {
-    class CollectFunctionDefsVisitor extends BaseTreeVisitor {
-      private List<FunctionDef> functionDefs = new ArrayList<>();
-
-      @Override
-      public void visitClassDef(ClassDef pyClassDefTree) {
-        // Do not descend into nested classes
-      }
-
-      @Override
-      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-        this.functionDefs.add(pyFunctionDefTree);
-        // Do not descend into nested functions
-      }
-    }
-
     CollectFunctionDefsVisitor visitor = new CollectFunctionDefsVisitor();
     classDef.body().accept(visitor);
 
     return visitor.functionDefs;
   }
+  
+  private static class CollectFunctionDefsVisitor extends BaseTreeVisitor {
+    private List<FunctionDef> functionDefs = new ArrayList<>();
 
+    @Override
+    public void visitClassDef(ClassDef pyClassDefTree) {
+      // Do not descend into nested classes
+    }
+
+    @Override
+    public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
+      this.functionDefs.add(pyFunctionDefTree);
+      // Do not descend into nested functions
+    }
+  }
 }
