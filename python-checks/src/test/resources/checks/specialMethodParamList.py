@@ -25,6 +25,26 @@ class Foo(object):
        #^^^^^^^              ^^^^^^^^^^<
         return 42
 
+    # Check if we raise correctly with a line break in the def
+    def __gt__(self, a, b, c, # Noncompliant
+               d):
+        pass
+
+    def __ge__(self, other, flag=flag): # OK, optional parameter
+        return flag
+
+    def __ipow__(self, other, modulo=None): # OK
+        return 42
+
+    def __get__(self, instance, owner=None): # OK
+        return 42
+
+    def __getitem__(self, (x, y)): # OK
+        return 42
+
+    def __setitem__(self, (x, y), value): # OK
+        return 42
+
     def __not_magic(self):
         pass
 
@@ -43,10 +63,6 @@ class Foo(object):
     def __exit__(self, *, a):
         pass
 
-    # Check if we raise correctly with a line break in the def
-    def __gt__(self, a, b, c, # Noncompliant
-               d):
-        pass
 
 def bar():
     pass

@@ -105,51 +105,58 @@ public class SpecialMethodParamListCheck extends PythonSubscriptionCheck {
     return name.startsWith("__") && name.endsWith("__");
   }
 
-  private static boolean hasPackedOrKeywordParameter(List<AnyParameter> parameterList) {
-    for (AnyParameter parameter : parameterList) {
-      if (parameter instanceof Parameter && ((Parameter) parameter).starToken() != null) {
-        return true;
-      }
+  private static boolean hasPackedOrKeywordParameter(List<AnyParameter> parameters) {
+    return parameters.stream().filter(p -> p.is(Tree.Kind.PARAMETER)).map(Parameter.class::cast).anyMatch(p -> p.starToken() != null);
+  }
+
+  private static boolean isRequiredParameter(AnyParameter parameter) {
+    if (parameter.is(Tree.Kind.TUPLE_PARAMETER)) {
+      return true;
     }
 
-    return false;
+    return parameter.is(Tree.Kind.PARAMETER) && ((Parameter) parameter).defaultValue() == null;
   }
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
-      FunctionDef def = (FunctionDef) ctx.syntaxNode();
-      if (!isRelevantMethodDefinition(def)) {
+      FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+      if (!isRelevantMethodDefinition(functionDef)) {
         return;
       }
 
-      String name = def.name().name();
-      ParameterList parameters = def.parameters();
+      String name = functionDef.name().name();
+      ParameterList parameterList = functionDef.parameters();
 
-      List<AnyParameter> parameterList = Collections.emptyList();
-      if (parameters != null) {
-        parameterList = parameters.all();
+      List<AnyParameter> parameters = Collections.emptyList();
+      if (parameterList != null) {
+        parameters = parameterList.all();
       }
 
-      // Check if the method was declared with packed arguments.
-      if (hasPackedOrKeywordParameter(parameterList)) {
+      // Do not raise and bail out if the method was declared with packed or keyword arguments.
+      if (hasPackedOrKeywordParameter(parameters)) {
         return;
       }
 
-      int actualParams = parameterList.size();
-      Integer expectedParams = numberOfParams.get(def.name().name());
+      Integer expectedParams = numberOfParams.get(functionDef.name().name());
       if (expectedParams == null) {
-        // The special method was not found in the map.q
+        // The special method was not found in the map.
         return;
       }
 
-      if (expectedParams > actualParams) {
-        ctx.addIssue(def.name(), lessThanExpectedMessage(name, expectedParams, actualParams));
-      } else if (expectedParams < actualParams) {
-        PreciseIssue issue = ctx.addIssue(def.name(), moreThanExpectedMessage(name, expectedParams, actualParams));
-        for (int i = expectedParams; i < parameterList.size(); ++i) {
-          issue.secondary(parameterList.get(i), null);
+      List<AnyParameter> nonOptionalParameters = parameters.stream()
+        .filter(SpecialMethodParamListCheck::isRequiredParameter)
+        .collect(Collectors.toList());
+      int numRequiredParams = nonOptionalParameters.size();
+      int numAllParams = parameters.size();
+
+      if (numRequiredParams > expectedParams) {
+        PreciseIssue issue = ctx.addIssue(functionDef.name(), moreThanExpectedMessage(name, expectedParams, numRequiredParams));
+        for (int i = expectedParams; i < nonOptionalParameters.size(); ++i) {
+          issue.secondary(nonOptionalParameters.get(i), null);
         }
+      } else if (numRequiredParams < expectedParams && numAllParams < expectedParams) {
+        ctx.addIssue(functionDef.name(), lessThanExpectedMessage(name, expectedParams, numAllParams));
       }
     });
   }
