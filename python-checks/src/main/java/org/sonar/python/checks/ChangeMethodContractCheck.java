@@ -33,12 +33,8 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -64,23 +60,30 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
         // ignore function declarations with packed params
         return;
       }
-      checkMethodContract(ctx, functionDef, functionSymbol);
+      checkMethodContract(ctx, functionSymbol);
     });
   }
 
-  private static void checkMethodContract(SubscriptionContext ctx, FunctionDef functionDef, FunctionSymbol functionSymbol) {
-    getOverriddenMethod(functionSymbol).ifPresent(overriddenMethod -> {
+  private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
+    getOverriddenMethod(method).ifPresent(overriddenMethod -> {
       if (overriddenMethod.hasVariadicParameter() || overriddenMethod.hasDecorators()) {
         // ignore function declarations with packed params
         return;
       }
-      int paramsDiff = functionSymbol.parameters().size() - overriddenMethod.parameters().size();
+
+      int paramsDiff = method.parameters().size() - overriddenMethod.parameters().size();
+
+      if (paramsDiff != 0 && overriddenMethod.parameters().stream().anyMatch(FunctionSymbol.Parameter::isKeywordOnly)) {
+        reportIssue(ctx, "Change this method signature to accept the same arguments as the method it overrides.", method.definitionLocation(), overriddenMethod);
+        return;
+      }
+
       if (paramsDiff > 0) {
-        reportOnExtraParameters(ctx, overriddenMethod.parameters().size(), functionDef, overriddenMethod.definitionLocation());
+        reportOnExtraParameters(ctx, method, overriddenMethod);
       } else if (paramsDiff < 0) {
-        reportOnMissingParameters(ctx, overriddenMethod, functionDef);
+        reportOnMissingParameters(ctx, method, overriddenMethod);
       } else {
-        checkDefaultValuesAndParamNames(ctx, overriddenMethod, functionSymbol, functionDef);
+        checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
       }
     });
   }
@@ -108,68 +111,83 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
 
-  private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol overriddenMethod, FunctionDef functionDef) {
-    int indexFirstMissingParam = TreeUtils.nonTupleParameters(functionDef).size();
-    List<FunctionSymbol.Parameter> overridenParams = overriddenMethod.parameters();
-    String missingParameters = overridenParams.subList(indexFirstMissingParam, overridenParams.size())
+  private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {
+    int indexFirstMissingParam = method.parameters().size();
+    List<FunctionSymbol.Parameter> overriddenParams = overriddenMethod.parameters();
+    String missingParameters = overriddenParams.subList(indexFirstMissingParam, overriddenParams.size())
       .stream()
-      .filter(parameter -> !parameter.hasDefaultValue())
       .map(FunctionSymbol.Parameter::name)
       .collect(Collectors.joining(" "));
     if (!missingParameters.isEmpty()) {
-      PreciseIssue preciseIssue = ctx.addIssue(functionDef.name(), "Add missing parameters " + missingParameters.trim() + ".");
-      addDefinitionSecondaryLocation(preciseIssue, overriddenMethod.definitionLocation());
+      reportIssue(ctx, "Add missing parameters " + missingParameters.trim() + ".", method.definitionLocation(), overriddenMethod);
     }
   }
 
-  private static void addDefinitionSecondaryLocation(PreciseIssue preciseIssue, @Nullable LocationInFile overriddenMethodLocation) {
-    if (overriddenMethodLocation != null) {
-      preciseIssue.secondary(overriddenMethodLocation, null);
-    }
-  }
-
-  private static void reportOnExtraParameters(SubscriptionContext ctx, int indexFirstExtraParams, FunctionDef functionDef, @Nullable LocationInFile definitionLocation) {
-    List<Parameter> parameters = TreeUtils.nonTupleParameters(functionDef);
-    for (int i = indexFirstExtraParams; i < parameters.size(); i++) {
-      Parameter parameter = parameters.get(i);
-      Name name = parameter.name();
-      if (parameter.defaultValue() == null && name != null) {
-        PreciseIssue preciseIssue = ctx.addIssue(parameter, "Remove parameter " + name.name() + " or provide default value.");
-        addDefinitionSecondaryLocation(preciseIssue, definitionLocation);
+  private static void reportIssue(SubscriptionContext ctx, String message, @Nullable LocationInFile location, FunctionSymbol overriddenMethod) {
+    Optional.ofNullable(location).ifPresent(issueLocation -> {
+      LocationInFile secondaryLocation = overriddenMethod.definitionLocation();
+      if (secondaryLocation != null) {
+        PreciseIssue preciseIssue = ctx.addIssue(issueLocation, message);
+        preciseIssue.secondary(secondaryLocation, "Overridden method's definition");
+      } else {
+        ctx.addIssue(issueLocation, message + " This method overrides " + overriddenMethod.fullyQualifiedName() + ".");
       }
+    });
+  }
+
+  private static void reportOnExtraParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {
+    long paramsWithoutDefaultValue = method.parameters().stream().filter(parameter -> !parameter.hasDefaultValue()).count();
+    if (paramsWithoutDefaultValue == overriddenMethod.parameters().size()) {
+      return;
     }
+    method.parameters().stream()
+      .filter(parameter -> !parameter.hasDefaultValue() && parameter.name() != null)
+      .filter(parameter -> overriddenMethod.parameters().stream().noneMatch(p -> Objects.equals(parameter.name(), p.name())))
+      .forEach(parameter -> reportIssue(ctx,"Remove parameter " + parameter.name() + " or provide default value.", parameter.location(), overriddenMethod));
   }
 
 
-  private static void checkDefaultValuesAndParamNames(SubscriptionContext ctx, FunctionSymbol overriddenMethod, FunctionSymbol functionSymbol, FunctionDef functionDef) {
+  private static void checkDefaultValuesAndParamNames(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {
     Map<String, Integer> mismatchedOverriddenParamPosition = new HashMap<>();
     Map<String, Integer> mismatchedParamPosition = new HashMap<>();
 
-    List<Parameter> parameters = TreeUtils.nonTupleParameters(functionDef);
+    List<FunctionSymbol.Parameter> parameters = method.parameters();
+
     for (int i = 0; i < overriddenMethod.parameters().size(); i++) {
       FunctionSymbol.Parameter overriddenParam = overriddenMethod.parameters().get(i);
-      FunctionSymbol.Parameter parameter = functionSymbol.parameters().get(i);
+      FunctionSymbol.Parameter parameter = method.parameters().get(i);
       if (!Objects.equals(overriddenParam.name(), parameter.name())) {
         mismatchedOverriddenParamPosition.put(overriddenParam.name(), i);
         mismatchedParamPosition.put(parameter.name(), i);
-      }
-      if (overriddenParam.hasDefaultValue() && !parameter.hasDefaultValue()) {
-        PreciseIssue preciseIssue = ctx.addIssue(parameters.get(i), "Add a default value to parameter " + parameter.name() + ".");
-        addDefinitionSecondaryLocation(preciseIssue, overriddenMethod.definitionLocation());
+      } else {
+        checkDefaultValueAndKeywordOnly(ctx, overriddenMethod, overriddenParam, parameter);
       }
     }
 
     mismatchedParamPosition.forEach((name, index) -> {
       Integer overriddenParamIndex = mismatchedOverriddenParamPosition.get(name);
-      AnyParameter parameter = parameters.get(index);
-      PreciseIssue preciseIssue;
-      if (overriddenParamIndex != null) {
-        preciseIssue = ctx.addIssue(parameter, "Move parameter " + name + " to position " + overriddenParamIndex + ".");
-      } else {
-        preciseIssue = ctx.addIssue(parameter, "Rename this parameter as \"" + overriddenMethod.parameters().get(index).name() +  "\".");
+      FunctionSymbol.Parameter parameter = parameters.get(index);
+      if (overriddenParamIndex != null && !parameter.isKeywordOnly()) {
+        reportIssue(ctx, "Move parameter " + name + " to position " + overriddenParamIndex + ".", parameter.location(), overriddenMethod);
       }
-      addDefinitionSecondaryLocation(preciseIssue, overriddenMethod.definitionLocation());
     });
 
+  }
+
+  private static void checkDefaultValueAndKeywordOnly(SubscriptionContext ctx, FunctionSymbol overriddenMethod, FunctionSymbol.Parameter overriddenParam,
+                                                      FunctionSymbol.Parameter parameter) {
+    String prefix = "Make parameter " + parameter.name();
+    if (overriddenParam.hasDefaultValue() && !parameter.hasDefaultValue()) {
+      reportIssue(ctx, "Add a default value to parameter " + parameter.name() + ".", parameter.location(), overriddenMethod);
+    }
+    if (!overriddenParam.isKeywordOnly() && parameter.isKeywordOnly()) {
+      reportIssue(ctx, prefix + " keyword-or-positional.", parameter.location(), overriddenMethod);
+    }
+    if (overriddenParam.isPositionalOnly() && !parameter.isPositionalOnly()) {
+      reportIssue(ctx, prefix + " positional only.", parameter.location(), overriddenMethod);
+    }
+    if (overriddenParam.isKeywordOnly() && parameter.isPositionalOnly()) {
+      reportIssue(ctx, prefix + " keyword only.", parameter.location(), overriddenMethod);
+    }
   }
 }
