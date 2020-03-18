@@ -19,11 +19,13 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.List;
 import org.junit.Test;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -33,6 +35,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public class FunctionSymbolTest {
 
@@ -171,12 +174,35 @@ public class FunctionSymbolTest {
     assertThat(newMethod.isInstanceMethod()).isFalse();
   }
 
+  @Test
+  public void locations() {
+    PythonFile foo = PythonTestUtils.pythonFile("foo");
+
+    FunctionSymbol functionSymbol = functionSymbol(foo, "def foo(param1, param2): ...");
+    assertThat(functionSymbol.parameters().get(0).location()).isEqualToComparingFieldByField(new LocationInFile(pathOf(foo).toString(), 1, 8, 1, 14));
+    assertThat(functionSymbol.parameters().get(1).location()).isEqualToComparingFieldByField(new LocationInFile(pathOf(foo).toString(), 1, 16, 1, 22));
+    assertThat(functionSymbol.definitionLocation()).isEqualToComparingFieldByField(new LocationInFile(pathOf(foo).toString(), 1, 4, 1, 7));
+
+    functionSymbol = functionSymbol(foo, "def foo(*param1): ...");
+    assertThat(functionSymbol.parameters().get(0).location()).isEqualToComparingFieldByField(new LocationInFile(pathOf(foo).toString(), 1, 8, 1, 15));
+
+    functionSymbol = functionSymbol(foo, "def foo((a, b)): ...");
+    assertThat(functionSymbol.parameters().get(0).location()).isEqualToComparingFieldByField(new LocationInFile(pathOf(foo).toString(), 1, 8, 1, 14));
+
+    FileInput fileInput = parse(new SymbolTableBuilder(foo), "all([1,2,3])");
+    CallExpression callExpression = (CallExpression) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CALL_EXPR)).get(0);
+    FunctionSymbol builtinFunctionSymbol = (FunctionSymbol) callExpression.calleeSymbol();
+    assertThat(builtinFunctionSymbol.definitionLocation()).isNull();
+    assertThat(builtinFunctionSymbol.parameters().get(0).location()).isNull();
+  }
+
+  private FunctionSymbol functionSymbol(PythonFile pythonFile, String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder(pythonFile), code);
+    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);;
+    return TreeUtils.getFunctionSymbolFromDef(functionDef);
+  }
+
   private FunctionSymbol functionSymbol(String... code) {
-    FileInput tree = parse(code);
-    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(tree, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
-    Symbol functionSymbol = functionDef.name().symbol();
-    assertThat(functionSymbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
-    List<FunctionSymbol.Parameter> parameters = ((FunctionSymbol) functionSymbol).parameters();
-    return ((FunctionSymbol) functionSymbol);
+    return functionSymbol(PythonTestUtils.pythonFile("foo"), code);
   }
 }

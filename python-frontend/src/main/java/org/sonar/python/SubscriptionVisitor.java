@@ -31,6 +31,7 @@ import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -101,6 +102,11 @@ public class SubscriptionVisitor {
     @Override
     public PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message) {
       return addIssue(IssueLocation.preciseLocation(element, message));
+    }
+
+    @Override
+    public PythonCheck.PreciseIssue addIssue(LocationInFile location, @Nullable String message) {
+      return addIssue(IssueLocation.preciseLocation(location, message));
     }
 
     @Override
