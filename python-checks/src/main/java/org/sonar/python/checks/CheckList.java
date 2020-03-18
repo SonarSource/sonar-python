@@ -142,6 +142,7 @@ public final class CheckList {
       PreIncrementDecrementCheck.class,
       PrintStatementUsageCheck.class,
       ProcessSignallingCheck.class,
+      PropertyAccessorParameterCountCheck.class,
       PseudoRandomCheck.class,
       PubliclyWritableDirectoriesCheck.class,
       RaiseOutsideExceptCheck.class,
