@@ -48,6 +48,7 @@ public interface FunctionSymbol extends Symbol {
     String name();
     boolean hasDefaultValue();
     boolean isKeywordOnly();
+    boolean isPositionalOnly();
     @CheckForNull
     LocationInFile location();
   }

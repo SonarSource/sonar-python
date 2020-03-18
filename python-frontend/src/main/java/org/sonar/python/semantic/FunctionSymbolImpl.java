@@ -118,24 +118,38 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
-    boolean keywordOnly = false;
+    ParameterState parameterState = new ParameterState();
     for (AnyParameter anyParameter : parameterTrees) {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
-        org.sonar.plugins.python.api.tree.Parameter parameter = (org.sonar.plugins.python.api.tree.Parameter) anyParameter;
-        Name parameterName = parameter.name();
-        Token starToken = parameter.starToken();
-        if (parameterName != null) {
-          this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, keywordOnly, locationInFile(anyParameter, fileId)));
-          if (starToken != null) {
-            hasVariadicParameter = true;
-          }
-        } else if (starToken != null && "*".equals(starToken.value())) {
-          keywordOnly = true;
-        }
+        addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, false, false, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterImpl(null, false, parameterState, locationInFile(anyParameter, fileId)));
       }
     }
+  }
+
+  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, ParameterState parameterState) {
+    Name parameterName = parameter.name();
+    Token starToken = parameter.starToken();
+    if (parameterName != null) {
+      this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, parameterState, locationInFile(parameter, fileId)));
+      if (starToken != null) {
+        hasVariadicParameter = true;
+      }
+    } else if (starToken != null) {
+      if ("*".equals(starToken.value())) {
+        parameterState.keywordOnly = true;
+        parameterState.positionalOnly = false;
+      }
+      if ("/".equals(starToken.value())) {
+        parameterState.positionalOnly = true;
+      }
+    }
+  }
+
+  private static class ParameterState {
+    boolean keywordOnly = false;
+    boolean positionalOnly = false;
   }
 
   @Override
@@ -189,12 +203,14 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final String name;
     private final boolean hasDefaultValue;
     private final boolean isKeywordOnly;
+    private final boolean isPositionalOnly;
     private final LocationInFile location;
 
-    ParameterImpl(@Nullable String name, boolean hasDefaultValue, boolean isKeywordOnly, @Nullable LocationInFile location) {
+    ParameterImpl(@Nullable String name, boolean hasDefaultValue, ParameterState parameterState, @Nullable LocationInFile location) {
       this.name = name;
       this.hasDefaultValue = hasDefaultValue;
-      this.isKeywordOnly = isKeywordOnly;
+      this.isKeywordOnly = parameterState.keywordOnly;
+      this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
     }
 
@@ -212,6 +228,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public boolean isKeywordOnly() {
       return isKeywordOnly;
+    }
+
+    @Override
+    public boolean isPositionalOnly() {
+      return isPositionalOnly;
     }
 
     @CheckForNull
