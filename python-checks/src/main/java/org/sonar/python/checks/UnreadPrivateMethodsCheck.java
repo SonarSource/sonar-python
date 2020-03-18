@@ -20,32 +20,24 @@
 package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
-import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
-@Rule(key = "S4487")
-public class UnreadPrivateAttributesCheck extends AbstractUnreadPrivateMembersCheck {
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 
-  private static final boolean DEFAULT_ENABLE_SINGLE_UNDERSCORE_ISSUES = false;
-
-  @RuleProperty(
-    key = "enableSingleUnderscoreIssues",
-    description = "Enable issues on unread attributes with a single underscore prefix",
-    defaultValue = "" + DEFAULT_ENABLE_SINGLE_UNDERSCORE_ISSUES)
-  public boolean enableSingleUnderscoreIssues = DEFAULT_ENABLE_SINGLE_UNDERSCORE_ISSUES;
-
+@Rule(key = "S1144")
+public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck {
   @Override
   String memberPrefix() {
-    return enableSingleUnderscoreIssues ? "_" : "__";
+    return "__";
   }
 
   @Override
   Symbol.Kind kind() {
-    return Symbol.Kind.OTHER;
+    return FUNCTION;
   }
 
   @Override
   String message(String memberName) {
-    return "Remove this unread private attribute '" + memberName + "' or refactor the code to use its value.";
+    return "Remove this unused class-private '" + memberName + "' method.";
   }
 }
