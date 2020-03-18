@@ -1,0 +1,57 @@
+<p>"Class-Private" methods that are never executed inside their enclosing class are dead code: unnecessary, inoperative code that should be removed.
+Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being
+introduced.</p>
+<p>Python has no real private methods. Every method is accessible. There are however two conventions indicating that a method is not meant to be
+"public":</p>
+<ul>
+  <li> methods with a name starting with a single underscore (ex: <code>_mymethod</code>) should be seen as non-public and might change without prior
+  notice. They should not be used by third-party libraries or software. It is ok to use those methods inside the library defining them but it should
+  be done with caution. </li>
+  <li> "class-private" methods have a name which starts with at least two underscores and ends with at most one underscore. These methods' names will
+  be automatically mangled to avoid collision with subclasses' methods. For example <code>__mymethod</code> will be renamed as
+  <code>_classname__mymethod</code>, where <code>classname</code> is the method's class name without its leading underscore(s). These methods
+  shouldn't be used outside of their enclosing class. </li>
+</ul>
+<p>This rule raises an issue when a class-private method (two leading underscores, max one underscore at the end) is never called inside the class.
+Class methods, static methods and instance methods will all raise an issue.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Noncompliant:
+
+    @classmethod
+    def __mangled_class_method(cls):  # Noncompliant
+        print("__mangled_class_method")
+
+    @staticmethod
+    def __mangled_static_method():  # Noncompliant
+        print("__mangled_static_method")
+
+    def __mangled_instance_method(self):  # Noncompliant
+        print("__mangled_instance_method")
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Compliant:
+
+    def __init__(self):
+        Compliant.__mangled_class_method()
+        Compliant.__mangled_static_method()
+        self.__mangled_instance_method()
+
+    @classmethod
+    def __mangled_class_method(cls):
+        print("__mangled_class_method")
+
+    @staticmethod
+    def __mangled_static_method():
+        print("__mangled_static_method")
+
+    def __mangled_instance_method(self):
+        print("__mangled_instance_method")
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3.8/tutorial/classes.html#private-variables">Python documentation <del></del> Private Variables</a> </li>
+  <li> <a href="https://www.python.org/dev/peps/pep-0008/#designing-for-inheritance">PEP 8 <del></del> Style Guide for Python Code</a> </li>
+</ul>
+
