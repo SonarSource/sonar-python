@@ -170,6 +170,7 @@ public final class CheckList {
       UndeclaredNameUsageCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
+      UnreadPrivateInnerClassesCheck.class,
       UnreadPrivateMethodsCheck.class,
       UnusedLocalVariableCheck.class,
       UnusedNestedDefinitionCheck.class,
