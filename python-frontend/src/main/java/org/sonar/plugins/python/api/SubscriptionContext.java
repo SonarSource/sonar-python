@@ -30,6 +30,8 @@ public interface SubscriptionContext {
 
   PythonCheck.PreciseIssue addIssue(Tree element, @Nullable String message);
 
+  PythonCheck.PreciseIssue addIssue(LocationInFile location, @Nullable String message);
+
   PythonCheck.PreciseIssue addIssue(Token token, @Nullable String message);
 
   PythonCheck.PreciseIssue addIssue(Token from, Token to, @Nullable String message);

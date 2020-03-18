@@ -55,18 +55,16 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     setKind(Kind.FUNCTION);
     isInstanceMethod = isInstanceMethod(functionDef);
     hasDecorators = !functionDef.decorators().isEmpty();
+    String fileId = null;
+    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+      Path path = pathOf(pythonFile);
+      fileId = path != null ? path.toString() : pythonFile.toString();
+    }
     ParameterList parametersList = functionDef.parameters();
     if (parametersList != null) {
-      createParameterNames(parametersList.all());
+      createParameterNames(parametersList.all(), fileId);
     }
-    if (SymbolUtils.isTypeShedFile(pythonFile)) {
-      functionDefinitionLocation = null;
-    } else {
-      TokenLocation functionName = new TokenLocation(functionDef.name().firstToken());
-      Path path = pathOf(pythonFile);
-      String fileId = path != null ? path.toString() : pythonFile.toString();
-      functionDefinitionLocation = new LocationInFile(fileId, functionName.startLine(), functionName.startLineOffset(), functionName.endLine(), functionName.endLineOffset());
-    }
+    functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
   }
 
   FunctionSymbolImpl(String name, FunctionSymbol functionSymbol) {
@@ -93,6 +91,16 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.isStub = true;
   }
 
+  @CheckForNull
+  private static LocationInFile locationInFile(Tree tree, @Nullable String fileId) {
+    if (fileId == null) {
+      return null;
+    }
+    TokenLocation firstToken = new TokenLocation(tree.firstToken());
+    TokenLocation lastToken = new TokenLocation(tree.lastToken());
+    return new LocationInFile(fileId, firstToken.startLine(), firstToken.startLineOffset(), lastToken.endLine(), lastToken.endLineOffset());
+  }
+
   @Override
   FunctionSymbolImpl copyWithoutUsages() {
     FunctionSymbolImpl copy = new FunctionSymbolImpl(name(), this);
@@ -109,7 +117,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       .noneMatch(decorator -> decorator.equals("staticmethod") || decorator.equals("classmethod"));
   }
 
-  private void createParameterNames(List<AnyParameter> parameterTrees) {
+  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
     boolean keywordOnly = false;
     for (AnyParameter anyParameter : parameterTrees) {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
@@ -117,7 +125,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         Name parameterName = parameter.name();
         Token starToken = parameter.starToken();
         if (parameterName != null) {
-          this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, keywordOnly));
+          this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, keywordOnly, locationInFile(anyParameter, fileId)));
           if (starToken != null) {
             hasVariadicParameter = true;
           }
@@ -125,7 +133,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
           keywordOnly = true;
         }
       } else {
-        parameters.add(new ParameterImpl(null, false, false));
+        parameters.add(new ParameterImpl(null, false, false, locationInFile(anyParameter, fileId)));
       }
     }
   }
@@ -181,11 +189,13 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final String name;
     private final boolean hasDefaultValue;
     private final boolean isKeywordOnly;
+    private final LocationInFile location;
 
-    ParameterImpl(@Nullable String name, boolean hasDefaultValue, boolean isKeywordOnly) {
+    ParameterImpl(@Nullable String name, boolean hasDefaultValue, boolean isKeywordOnly, @Nullable LocationInFile location) {
       this.name = name;
       this.hasDefaultValue = hasDefaultValue;
       this.isKeywordOnly = isKeywordOnly;
+      this.location = location;
     }
 
     @Override
@@ -202,6 +212,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public boolean isKeywordOnly() {
       return isKeywordOnly;
+    }
+
+    @CheckForNull
+    @Override
+    public LocationInFile location() {
+      return location;
     }
   }
 }
