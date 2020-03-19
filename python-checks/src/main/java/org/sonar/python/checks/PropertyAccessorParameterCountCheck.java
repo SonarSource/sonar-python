@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Argument;
@@ -38,6 +39,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
@@ -55,12 +58,18 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
     private Map<String, PropertyAccessorTriple> decoratorStyleProperties = new HashMap<>();
     private List<PropertyAccessorTriple> propertyCallStyleProperties = new ArrayList<>();
 
-    private static Optional<FunctionDef> findFunctionDefFromArgument(Expression argument) {
-      if (!(argument instanceof HasSymbol)) {
+    private static Optional<FunctionDef> findFunctionDefFromArgument(List<RegularArgument> arguments, int position) {
+      if (arguments.size() <= position) {
         return Optional.empty();
       }
 
-      Symbol symbol = ((HasSymbol) argument).symbol();
+      RegularArgument argument = arguments.get(position);
+      Expression argumentExpr = argument.expression();
+      if (!(argumentExpr instanceof HasSymbol)) {
+        return Optional.empty();
+      }
+
+      Symbol symbol = ((HasSymbol) argumentExpr).symbol();
       if (symbol == null) {
         return Optional.empty();
       }
@@ -81,22 +90,21 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
       }
 
       PropertyAccessorTriple triple = new PropertyAccessorTriple();
-      List<Argument> arguments = pyCallExpressionTree.arguments();
-      for (int i = 0; i < arguments.size(); ++i) {
-        Argument currentArg = arguments.get(i);
-        if (!currentArg.is(Tree.Kind.REGULAR_ARGUMENT)) {
-          continue;
-        }
 
-        Expression argExpr = ((RegularArgument) currentArg).expression();
-        switch (i) {
-          case 0: triple.getter = findFunctionDefFromArgument(argExpr); break;
-          case 1: triple.setter = findFunctionDefFromArgument(argExpr); break;
-          case 2: triple.deleter = findFunctionDefFromArgument(argExpr); break;
-          default:
-            break;
-        }
+      List<Argument> argumentList = pyCallExpressionTree.arguments();
+      List<RegularArgument> regularArguments = argumentList.stream()
+        .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
+        .map(RegularArgument.class::cast)
+        .collect(Collectors.toList());
+
+      // Do not bother with tuple arguments and keyword arguments
+      if (regularArguments.size() != argumentList.size() || regularArguments.stream().anyMatch(arg -> arg.keywordArgument() != null)) {
+        return;
       }
+
+      triple.getter = findFunctionDefFromArgument(regularArguments, 0);
+      triple.setter = findFunctionDefFromArgument(regularArguments, 1);
+      triple.deleter = findFunctionDefFromArgument(regularArguments, 2);
 
       propertyCallStyleProperties.add(triple);
     }
@@ -155,6 +163,36 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
     }
   }
 
+  private static long countRequiredParameters(FunctionDef functionDef) {
+    ParameterList parameterList = functionDef.parameters();
+    if (parameterList == null) {
+      return 0;
+    }
+
+    return parameterList.all().stream()
+      .filter(p -> p.is(Tree.Kind.TUPLE_PARAMETER)
+          || (p.is(Tree.Kind.PARAMETER) && ((Parameter) p).defaultValue() == null)
+      ).count();
+  }
+
+  private static void checkOnlySelfParameter(SubscriptionContext ctx, FunctionDef functionDef, String messageTemplate) {
+    long actualParams = countRequiredParameters(functionDef);
+    if (actualParams > 1) {
+      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), String.format(messageTemplate, actualParams - 1));
+    }
+  }
+
+  private static void checkSetterParameters(SubscriptionContext ctx, FunctionDef functionDef) {
+    long requiredParameters = countRequiredParameters(functionDef);
+
+    if (requiredParameters > 2) {
+      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), String.format(
+        "Remove %d parameters; property setter methods receive \"self\" and a value.", requiredParameters - 2));
+    } else if (requiredParameters < 2 && TreeUtils.positionalParameters(functionDef).size() < 2) {
+      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add the value parameter; property setter methods receive \"self\" and a value.");
+    }
+  }
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
@@ -165,29 +203,9 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
 
       List<PropertyAccessorTriple> propertyAccessors = visitor.propertyAccessors();
       for (PropertyAccessorTriple triple : propertyAccessors) {
-        triple.getter.ifPresent(functionDef -> {
-          int actualParams = TreeUtils.positionalParameters(functionDef).size();
-          if (actualParams > 1) {
-            ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), String.format(
-              "Remove %d parameters; property getter methods receive only \"self\".", actualParams - 1));
-          }
-        });
-        triple.setter.ifPresent(functionDef -> {
-          int actualParams = TreeUtils.positionalParameters(functionDef).size();
-          if (actualParams > 2) {
-            ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), String.format(
-              "Remove %d parameters; property setter methods receive \"self\" and a value.", actualParams - 2));
-          } else if (actualParams < 2) {
-            ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add the value parameter; property setter methods receive \"self\" and a value.");
-          }
-        });
-        triple.deleter.ifPresent(functionDef -> {
-          int actualParams = TreeUtils.positionalParameters(functionDef).size();
-          if (actualParams > 1) {
-            ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), String.format(
-              "Remove %d parameters; property deleter methods receive only \"self\".", actualParams - 1));
-          }
-        });
+        triple.getter.ifPresent(functionDef -> checkOnlySelfParameter(ctx, functionDef, "Remove %d parameters; property getter methods receive only \"self\"."));
+        triple.setter.ifPresent(functionDef -> checkSetterParameters(ctx, functionDef));
+        triple.deleter.ifPresent(functionDef -> checkOnlySelfParameter(ctx, functionDef, "Remove %d parameters; property deleter methods receive only \"self\"."));
       }
     });
   }
