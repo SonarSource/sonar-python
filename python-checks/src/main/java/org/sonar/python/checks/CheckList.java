@@ -67,6 +67,7 @@ public final class CheckList {
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,
       ClassComplexityCheck.class,
+      ClassMethodFirstArgumentNameCheck.class,
       ClassNameCheck.class,
       ClearTextProtocolsCheck.class,
       CognitiveComplexityFunctionCheck.class,
