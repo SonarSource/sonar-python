@@ -45,7 +45,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
-@Rule(key="S5724")
+@Rule(key = "S5724")
 public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck {
 
   private static class PropertyAccessorTriple {
@@ -89,8 +89,6 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
         return;
       }
 
-      PropertyAccessorTriple triple = new PropertyAccessorTriple();
-
       List<Argument> argumentList = pyCallExpressionTree.arguments();
       List<RegularArgument> regularArguments = argumentList.stream()
         .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
@@ -102,6 +100,7 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
         return;
       }
 
+      PropertyAccessorTriple triple = new PropertyAccessorTriple();
       triple.getter = findFunctionDefFromArgument(regularArguments, 0);
       triple.setter = findFunctionDefFromArgument(regularArguments, 1);
       triple.deleter = findFunctionDefFromArgument(regularArguments, 2);
@@ -135,20 +134,20 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
       setterOrDeleterDecoratorNames.ifPresent(names -> {
         String propertyName = names.get(0).name();
         String accessor = names.get(1).name();
-          decoratorStyleProperties.compute(propertyName, (key, value) -> {
-            if (value == null) {
-              // This should not happen in a valid python code (e.g. @foo.setter cannot be used before declaring foo), but be defensive.
-              value = new PropertyAccessorTriple();
-            }
+        decoratorStyleProperties.compute(propertyName, (key, value) -> {
+          if (value == null) {
+            // This should not happen in a valid python code (e.g. @foo.setter cannot be used before declaring foo), but be defensive.
+            value = new PropertyAccessorTriple();
+          }
 
-            if ("setter".equals(accessor)) {
-              value.setter = Optional.of(pyFunctionDefTree);
-            } else if ("deleter".equals(accessor)) {
-              value.deleter = Optional.of(pyFunctionDefTree);
-            }
+          if ("setter".equals(accessor)) {
+            value.setter = Optional.of(pyFunctionDefTree);
+          } else if ("deleter".equals(accessor)) {
+            value.deleter = Optional.of(pyFunctionDefTree);
+          }
 
-            return value;
-          });
+          return value;
+        });
       });
     }
 
@@ -171,8 +170,8 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
 
     return parameterList.all().stream()
       .filter(p -> p.is(Tree.Kind.TUPLE_PARAMETER)
-          || (p.is(Tree.Kind.PARAMETER) && ((Parameter) p).defaultValue() == null)
-      ).count();
+        || (p.is(Tree.Kind.PARAMETER) && ((Parameter) p).defaultValue() == null))
+      .count();
   }
 
   private static void checkOnlySelfParameter(SubscriptionContext ctx, FunctionDef functionDef, String messageTemplate) {
