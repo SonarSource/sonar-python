@@ -1,0 +1,78 @@
+<p>Property getter, setter and deleter methods are called by the python interpreter with a specific number or arguments:</p>
+<ul>
+  <li> only "self" for property getter and deleter methods. </li>
+  <li> "self" and a value for setter methods. </li>
+</ul>
+<p>Adding any other parameter, or removing these mandatory parameters will make method calls fail.</p>
+<p>This rule raises an issue when:</p>
+<ul>
+  <li> too many parameters are defined in a property getter, setter or deleter method. </li>
+  <li> the value parameter is missing in a property setter method. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class A:
+    @property
+    def foo(self, unexpected):  # Noncompliant. Too many parameters.
+        return self._foo
+
+    @foo.setter
+    def foo(self, value, unexpected):  # Noncompliant. Too many parameters.
+        self._foo = value
+
+    @foo.setter
+    def foo(self):  # Noncompliant. missing value
+        self._foo = 42
+
+    @foo.deleter
+    def foo(self, unexpected):  # Noncompliant. Too many parameters.
+        del self._foo
+
+class B:
+    def get_foo(self, unexpected):  # Noncompliant. Too many parameters.
+        return self._foo
+
+    def set_foo(self, value, unexpected):  # Noncompliant. Too many parameters.
+        self._foo = value
+
+    def set_foo2(self):  # Noncompliant. missing value
+        self._foo = 42
+
+    def del_foo(self, unexpected):  # Noncompliant. Too many parameters.
+        del self._foo
+
+    foo = property(get_foo, set_foo, del_foo, "'foo' property.")
+    foo2 = property(get_foo, set_foo2, del_foo, "'foo2' property.")
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class A:
+    @property
+    def foo(self):
+        return self._foo
+
+    @foo.setter
+    def foo(self, value):
+        self._foo = value
+
+    @foo.deleter
+    def foo(self):
+        del self._foo
+
+class B:
+    def get_foo(self):
+        return self._foo
+
+    def set_foo(self, value):
+        self._foo = value
+
+    def del_foo(self):
+        del self._foo
+
+    foo = property(get_foo, set_foo, del_foo, "'foo' property.")
+</pre>
+<h2>See</h2>
+<ul>
+  <li> Python Documentation - Built-in Functions - property[|https://docs.python.org/3/library/functions.html#property] </li>
+</ul>
+
