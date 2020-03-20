@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -38,6 +39,16 @@ import org.sonar.python.tree.TreeUtils;
 public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubscriptionCheck {
 
   private static final List<String> KNOWN_CLASS_METHODS = Arrays.asList("__new__", "__init_subclass__");
+
+  private static boolean isUsageInClassBody(Usage usage, ClassDef classDef) {
+    if (usage.kind() == Usage.Kind.FUNC_DECLARATION) {
+      return false;
+    }
+
+    Tree tree = usage.tree();
+    return classDef.equals(TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CLASSDEF))
+      && TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF) == null;
+  }
 
   private static void handleFunctionDef(SubscriptionContext ctx, ClassDef classDef, FunctionDef functionDef) {
     List<Parameter> parameters = TreeUtils.positionalParameters(functionDef);
@@ -51,7 +62,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
     }
 
     FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
-    if (functionSymbol == null || CheckUtils.isCalledInClassBody(functionSymbol, classDef)) {
+    if (functionSymbol == null || functionSymbol.usages().stream().anyMatch(usage -> isUsageInClassBody(usage, classDef))) {
       return;
     }
 
@@ -69,7 +80,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
     if (KNOWN_CLASS_METHODS.contains(name) || decoratorNames.contains("classmethod")) {
       ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a class parameter");
     } else {
-      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a \"self\" parameter");
+      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a \"self\" or class parameter\"");
     }
   }
 
