@@ -1,5 +1,5 @@
 class Foo:
-    def instance_method(): # Noncompliant {{Add a "self" parameter}}
+    def instance_method(): # Noncompliant {{Add a "self" or class parameter"}}
 #   ^^^^^^^^^^^^^^^^^^^^^
         pass
 
@@ -31,11 +31,22 @@ class Foo:
 
     x = _called_in_cls_body()
 
+    def referenced_in_cls_body():
+        return 1
+
+    options = [referenced_in_cls_body]
+
+    # FP
+    def referenced_outside(): # Noncompliant
+        return 2
+
     def no_pos_args(*, kw): # Noncompliant
         pass
 
     def varargs(*args, kwarg): # OK, unlimited number of positional args
         pass
+
+outside = [Foo.referenced_outside]
 
 import zope.interface as zi
 class MyInterface(zi.Interface):
