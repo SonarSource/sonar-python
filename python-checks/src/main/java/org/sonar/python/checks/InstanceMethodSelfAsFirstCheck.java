@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -38,14 +38,15 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
-@Rule(key="S5720")
+@Rule(key = "S5720")
 public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
 
   // We allow "_" as sometimes it is conventionally used to signal that self won't be used.
   private static final List<String> ALLOWED_NAMES = Arrays.asList("self", "_");
+  private static final List<String> ALLOWED_NAMES_IN_METACLASSES = Arrays.asList("cls", "mcs");
   private static final List<String> EXCEPTIONS = Arrays.asList("__init_subclass__", "__class_getitem__", "__new__");
 
-  private static final String DEFAULT_IGNORED_DECORATORS = "classproperty";
+  private static final String DEFAULT_IGNORED_DECORATORS = "abstractmethod";
   private List<String> decoratorsToExclude;
 
   @RuleProperty(
@@ -70,6 +71,11 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     return this.getExcludedDecorators().stream().anyMatch(fqn::contains);
   }
 
+  private static boolean isExceptionalUsageInClassBody(Usage usage, ClassDef parentClass) {
+    return usage.kind() != Usage.Kind.FUNC_DECLARATION
+     && parentClass.equals(TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF));
+  }
+
   private boolean isRelevantMethod(ClassDef classDef, ClassSymbol classSymbol, FunctionDef functionDef) {
     // Skip some known special methods
     if (EXCEPTIONS.contains(functionDef.name().name())) {
@@ -82,41 +88,15 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     }
 
     FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
-    if (functionSymbol == null || CheckUtils.isCalledInClassBody(functionSymbol, classDef)) {
+    if (functionSymbol == null || functionSymbol.usages().stream().anyMatch(usage -> isExceptionalUsageInClassBody(usage, classDef))) {
       return false;
     }
 
     return !classSymbol.isOrExtends("zope.interface.Interface");
   }
 
-  private void handleFunctionDef(SubscriptionContext ctx, ClassDef classDef, ClassSymbol classSymbol, FunctionDef functionDef) {
-    List<Parameter> parameters = TreeUtils.positionalParameters(functionDef);
-    if (parameters.isEmpty()) {
-      return;
-    }
-
-    Parameter first = parameters.get(0);
-    if (first.starToken() != null) {
-      return;
-    }
-
-    Optional<Name> paramName = Optional.ofNullable(first.name());
-    paramName.ifPresent(name -> {
-      if (!ALLOWED_NAMES.contains(name.name()) && isRelevantMethod(classDef, classSymbol, functionDef)) {
-        ctx.addIssue(first, String.format("Rename \"%s\" to \"self\" or add the missing \"self\" parameter.", name.name()));
-      }
-    });
-  }
-
-  private static boolean isRelevantClass(ClassDef classDef, ClassSymbol classSymbol) {
-    // Do not raise on nested classes - they might use a different name for "self" in order to avoid confusion.
-    Tree possibleParent = TreeUtils.firstAncestorOfKind(classDef, Tree.Kind.CLASSDEF);
-    if (possibleParent != null) {
-      return false;
-    }
-
-    // Do not raise on meta-classes
-    return !classSymbol.isOrExtends("type");
+  private static boolean isValidExceptionForCls(FunctionDef functionDef, String name, boolean mightBeMetaclass) {
+    return ALLOWED_NAMES_IN_METACLASSES.contains(name) && (mightBeMetaclass || !functionDef.decorators().isEmpty());
   }
 
   @Override
@@ -124,11 +104,41 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       ClassDef classDef = (ClassDef) ctx.syntaxNode();
       ClassSymbol classSymbol = TreeUtils.getClassSymbolFromDef(classDef);
-      if (classSymbol == null || !isRelevantClass(classDef, classSymbol)) {
+
+      // Do not raise on nested classes - they might use a different name for "self" in order to avoid confusion.
+      if (classSymbol == null || TreeUtils.firstAncestorOfKind(classDef, Tree.Kind.CLASSDEF) != null) {
         return;
       }
 
-      TreeUtils.topLevelFunctionDefs(classDef).forEach(functionDef -> handleFunctionDef(ctx, classDef, classSymbol, functionDef));
+      // We consider that a class MIGHT be a metaclass, either if the class is decorated, inherits from "type",
+      // "typing.Protocol" or has an unresolved type hiearchy. In this case we shall also accept "cls" or "mcs"
+      // as the name of the first parameter.
+      boolean mightBeMetaclass = !classDef.decorators().isEmpty()
+        || classSymbol.isOrExtends("type")
+        || classSymbol.isOrExtends("typing.Protocol")
+        || classSymbol.hasUnresolvedTypeHierarchy();
+
+      TreeUtils.topLevelFunctionDefs(classDef).forEach(functionDef -> {
+        List<Parameter> parameters = TreeUtils.positionalParameters(functionDef);
+        if (parameters.isEmpty()) {
+          return;
+        }
+
+        Parameter first = parameters.get(0);
+        if (first.starToken() != null) {
+          return;
+        }
+
+        Optional.ofNullable(first.name())
+          .map(Name::name)
+          .ifPresent(name -> {
+            if (!ALLOWED_NAMES.contains(name)
+              && isRelevantMethod(classDef, classSymbol, functionDef)
+              && !isValidExceptionForCls(functionDef, name, mightBeMetaclass)) {
+              ctx.addIssue(first, String.format("Rename \"%s\" to \"self\" or add the missing \"self\" parameter.", name));
+            }
+          });
+      });
     });
   }
 }

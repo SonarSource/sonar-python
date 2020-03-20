@@ -38,6 +38,11 @@ class Foo:
                            #^^^^^
         pass
 
+    # Exceptions with "cls" or "mcs"
+    @otherdecorator
+    def has_decorator_cls(cls, b, c): # OK
+        pass
+
     # Old-style decorators
     def old_style_class_method(cls):
         pass
@@ -60,6 +65,11 @@ class Foo:
         return 1
 
     some_prop = _called_in_cls_body(5)
+
+    def referenced_in_cls_body(x): # OK
+        return 1
+
+    options = [referenced_in_cls_body]
 
     def _private_method(x): # Noncompliant
         return x
@@ -99,6 +109,17 @@ class MetaClass(type):
     def foo(cls):
         pass
 
+import typing.Protocol
+
+class AnotherMetaClass(typing.Protocol):
+    def foo(cls):
+        pass
+
+@some_decorator
+class MightBeMetaclass():
+    def foo(mcs):
+        pass
+
 import django.utils.decorators.classproperty
 import django.utils.decorators as dud
 
@@ -113,6 +134,9 @@ class ClassProperty:
 
     @dud.classproperty
     def prop3(cls, x):
+        pass
+
+    def no_decorator(cls, x): # Noncompliant
         pass
 
 class EdgeCases:

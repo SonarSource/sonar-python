@@ -11,6 +11,6 @@ class Foo:
     def non_compliant_1(x): # FN "do_not_ignore_me" contains a ignored decorator "ignore_me"
         pass
 
-    @classproperty
+    @abstractmethod
     def non_compliant_2(x): # Noncompliant
         pass
