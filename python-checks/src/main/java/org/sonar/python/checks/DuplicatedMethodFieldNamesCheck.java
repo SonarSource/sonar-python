@@ -21,11 +21,9 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -36,7 +34,6 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1845")
