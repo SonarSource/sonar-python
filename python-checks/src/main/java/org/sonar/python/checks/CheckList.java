@@ -127,6 +127,7 @@ public final class CheckList {
       MethodShouldBeStaticCheck.class,
       MissingDocstringCheck.class,
       MissingNewlineAtEndOfFileCheck.class,
+      ModifiedParameterValueCheck.class,
       ModuleNameCheck.class,
       NeedlessPassCheck.class,
       NestedConditionalExpressionCheck.class,
