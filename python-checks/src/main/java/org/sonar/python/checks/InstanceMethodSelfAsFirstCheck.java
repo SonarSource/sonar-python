@@ -72,13 +72,8 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isExceptionalUsageInClassBody(Usage usage, ClassDef parentClass) {
-    if (usage.kind() == Usage.Kind.FUNC_DECLARATION) {
-      return false;
-    }
-
-    Tree tree = usage.tree();
-    return parentClass.equals(TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CLASSDEF))
-      && TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF) == null;
+    return usage.kind() != Usage.Kind.FUNC_DECLARATION
+     && parentClass.equals(TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF));
   }
 
   private boolean isRelevantMethod(ClassDef classDef, ClassSymbol classSymbol, FunctionDef functionDef) {
