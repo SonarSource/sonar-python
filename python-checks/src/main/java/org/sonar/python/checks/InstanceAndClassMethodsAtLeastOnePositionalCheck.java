@@ -41,13 +41,9 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
   private static final List<String> KNOWN_CLASS_METHODS = Arrays.asList("__new__", "__init_subclass__");
 
   private static boolean isUsageInClassBody(Usage usage, ClassDef classDef) {
-    if (usage.kind() == Usage.Kind.FUNC_DECLARATION) {
-      return false;
-    }
-
-    Tree tree = usage.tree();
-    return classDef.equals(TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CLASSDEF))
-      && TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF) == null;
+    // We want all usages that are not function declarations and their closes parent is the class definition
+    return usage.kind() != Usage.Kind.FUNC_DECLARATION
+      && classDef.equals(TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF));
   }
 
   private static void handleFunctionDef(SubscriptionContext ctx, ClassDef classDef, FunctionDef functionDef) {
