@@ -41,6 +41,8 @@ public final class PythonLexer {
   private static final String IMAGINARY_SUFFIX = "(j|J)";
   private static final String LONG_INTEGER_SUFFIX = "(l|L)";
   private static final String FORMATTED_STRING_PREFIX = "([fF][rR]?|[rR][fF]?)";
+  private static final String IDENTIFIER_START = "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_]";
+  private static final String IDENTIFIER_CONTINUE = "[" + IDENTIFIER_START + "\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}]";
 
   private PythonLexer() {
   }
@@ -87,7 +89,7 @@ public final class PythonLexer {
         .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
 
         // http://docs.python.org/reference/lexical_analysis.html#identifiers
-        .withChannel(new IdentifierAndKeywordChannel(and("[a-zA-Z_]", o2n("\\w")), true, PythonKeyword.values()))
+        .withChannel(new IdentifierAndKeywordChannel(and(IDENTIFIER_START, o2n(IDENTIFIER_CONTINUE)), true, PythonKeyword.values()))
 
         // http://docs.python.org/reference/lexical_analysis.html#operators
         // http://docs.python.org/reference/lexical_analysis.html#delimiters

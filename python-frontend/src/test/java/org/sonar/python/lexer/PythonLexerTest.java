@@ -304,4 +304,10 @@ public class PythonLexerTest {
 
   }
 
+  @Test
+  public void non_ascii_characters() {
+    assertThat(lexer.lex("_hello123"), hasToken(GenericTokenType.IDENTIFIER));
+    assertThat(lexer.lex("こんにちは"), hasToken(GenericTokenType.IDENTIFIER));
+    assertThat(lexer.lex("_你好"), hasToken(GenericTokenType.IDENTIFIER));
+  }
 }
