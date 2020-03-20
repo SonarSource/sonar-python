@@ -62,10 +62,10 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, this::checkAnnotatedAssignment);
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_EXPRESSION, this::checkAssignmentExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_EXPRESSION, SelfAssignmentCheck::checkAssignmentExpression);
   }
 
-  private void checkAssignmentExpression(SubscriptionContext ctx) {
+  private static void checkAssignmentExpression(SubscriptionContext ctx) {
     AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
     if (CheckUtils.areEquivalent(assignmentExpression.lhsName(), assignmentExpression.expression())) {
       ctx.addIssue(assignmentExpression.operator(), MESSAGE);

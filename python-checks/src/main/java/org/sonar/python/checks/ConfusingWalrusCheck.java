@@ -29,7 +29,6 @@ import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -45,7 +44,7 @@ public class ConfusingWalrusCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_EXPRESSION, this::checkAssignmentExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_EXPRESSION, ConfusingWalrusCheck::checkAssignmentExpression);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_ELEMENT, ctx -> {
       StringElement stringElement = (StringElement) ctx.syntaxNode();
@@ -76,7 +75,7 @@ public class ConfusingWalrusCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void checkAssignmentExpression(SubscriptionContext ctx) {
+  private static void checkAssignmentExpression(SubscriptionContext ctx) {
     AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
     Optional<Tree> parentTree = Optional.ofNullable(TreeUtils.firstAncestor(assignmentExpression, a -> !a.is(Tree.Kind.PARENTHESIZED)));
     parentTree.ifPresent(parent -> {
