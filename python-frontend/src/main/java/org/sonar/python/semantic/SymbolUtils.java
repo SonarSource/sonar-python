@@ -64,6 +64,7 @@ public class SymbolUtils {
   private static final String SEND_MESSAGE = "send_message";
   private static final String SET_COOKIE = "set_cookie";
   private static final String SET_SIGNED_COOKIE = "set_signed_cookie";
+  private static final String EQ = "__eq__";
 
   private SymbolUtils() {
   }
@@ -220,6 +221,17 @@ public class SymbolUtils {
 
     globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
       classSymbol("Headers", "werkzeug.datastructures.Headers", "set", "setdefault", "__setitem__")
+    )));
+
+    // TODO To be removed once we import 'collections' from typeshed
+    globalSymbols.put("collections", new HashSet<>(Arrays.asList(
+      classSymbol("deque", "collections.deque", EQ),
+      classSymbol("UserList", "collections.UserList", EQ),
+      classSymbol("UserDict", "collections.UserDict", EQ),
+      classSymbol("ChainMap", "collections.ChainMap", EQ),
+      classSymbol("Counter", "collections.Counter", EQ),
+      classSymbol("OrderedDict", "collections.OrderedDict", EQ),
+      classSymbol("defaultdict", "collections.defaultdict", EQ)
     )));
 
     return globalSymbols;
