@@ -39,20 +39,44 @@ public class FStringChannel extends Channel<Lexer> {
   @Override
   public boolean consume(CodeReader code, Lexer output) {
     setInitialLineAndColumn(code);
+    if (code.charAt(0) == '#') {
+      // disable comments
+      addUnknownCharToken("#", output, code.getLinePosition(), code.getColumnPosition());
+      code.pop();
+      return true;
+    }
     if (lexerState.brackets == 0) {
-      return consumeNonExpressionChars(code, output);
-    } else if (lexerState.brackets == 1) {
-      char c = code.charAt(0);
-      if (c == '}') {
-        code.pop();
-        lexerState.brackets = 0;
-        return true;
-      } else if (c == '!') {
-        code.pop();
-        code.pop();
+      int line = code.getLinePosition();
+      int column = code.getColumnPosition();
+      while (code.charAt(0) != EOF) {
+        char c = code.charAt(0);
+        if (c != '{') {
+          sb.append((char) code.pop());
+        } else if (code.charAt(1) == '{') {
+          sb.append((char) code.pop());
+          sb.append((char) code.pop());
+        } else {
+          break;
+        }
       }
+      if (sb.length() != 0) {
+        addUnknownCharToken(sb.toString(), output, line, column);
+        sb.setLength(0);
+        return true;
+      }
+      return false;
     }
     return false;
+  }
+
+  private static void addUnknownCharToken(String value, Lexer output, int line, int column) {
+    output.addToken(Token.builder()
+      .setType(GenericTokenType.UNKNOWN_CHAR)
+      .setValueAndOriginalValue(value)
+      .setURI(output.getURI())
+      .setLine(line)
+      .setColumn(column)
+      .build());
   }
 
   private void setInitialLineAndColumn(CodeReader code) {
@@ -60,37 +84,5 @@ public class FStringChannel extends Channel<Lexer> {
       code.setLinePosition(lexerState.initialLine);
       code.setColumnPosition(lexerState.initialColumn);
     }
-  }
-
-  private boolean consumeNonExpressionChars(CodeReader code, Lexer output) {
-    int line = code.getLinePosition();
-    int column = code.getColumnPosition();
-    while (code.charAt(0) != EOF) {
-      char c = code.charAt(0);
-      if (c != '{') {
-        sb.append((char) code.pop());
-      } else if (code.charAt(1) == '{') {
-        sb.append((char) code.pop());
-        sb.append((char) code.pop());
-      } else {
-        break;
-      }
-    }
-    if (code.charAt(0) == '{') {
-      sb.append((char) code.pop());
-      lexerState.brackets = 1;
-    }
-    if (sb.length() != 0) {
-      output.addToken(Token.builder()
-        .setType(GenericTokenType.UNKNOWN_CHAR)
-        .setValueAndOriginalValue(sb.toString())
-        .setURI(output.getURI())
-        .setLine(line)
-        .setColumn(column)
-        .build());
-      sb.setLength(0);
-      return true;
-    }
-    return false;
   }
 }

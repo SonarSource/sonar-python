@@ -51,20 +51,20 @@ public class FStringParserTest {
   public void name_expression() {
     List<AstNode> nodes = parse("f'hello {var}!'");
     assertThat(nodes).hasSize(1);
-    assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("var");
+    assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "var", "}");
   }
 
   @Test
   public void triple_quoted() {
     List<AstNode> nodes = parse("f'''hello '{var}'!'''");
     assertThat(nodes).hasSize(1);
-    assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("var");
+    assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "var", "}");
   }
 
   @Test
   public void escaped_curly_brace() {
     assertThat(parse("f'{{abc}}'")).isEmpty();
-    assertThat(parse("f'{{abc}}{xyz}'").get(0).getTokens()).extracting(Token::getValue).containsExactly("xyz");
+    assertThat(parse("f'{{abc}}{xyz}'").get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "xyz", "}");
   }
 
   @Test
@@ -74,14 +74,16 @@ public class FStringParserTest {
 
   @Test
   public void token_line_and_column() {
-    Token varToken = parse("f'hello {var}!'", 42, 5).get(0).getToken();
+    Token varToken = parse("f'hello {var}!'", 42, 5).get(0).getTokens().get(1);
+    assertThat(varToken.getValue()).isEqualTo("var");
     assertThat(varToken.getLine()).isEqualTo(42);
     assertThat(varToken.getColumn()).isEqualTo(14);
   }
 
   @Test
   public void token_line_and_column_in_multiline_f_string() {
-    Token varToken = parse("f'''hello\n {var}'''", 42, 5).get(0).getToken();
+    Token varToken = parse("f'''hello\n {var}'''", 42, 5).get(0).getTokens().get(1);
+    assertThat(varToken.getValue()).isEqualTo("var");
     assertThat(varToken.getLine()).isEqualTo(43);
     assertThat(varToken.getColumn()).isEqualTo(2);
   }

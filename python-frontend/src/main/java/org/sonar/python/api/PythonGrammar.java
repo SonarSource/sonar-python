@@ -201,8 +201,15 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(STAR_EXPR).is("*", EXPR);
     b.rule(EXPR).is(XOR_EXPR, b.zeroOrMore("|", XOR_EXPR));
-    b.rule(FORMATTED_EXPR).is(EXPR, b.optional(PythonPunctuator.ASSIGN));
+
     b.rule(F_STRING_CONTENT).is(b.zeroOrMore(b.firstOf(GenericTokenType.UNKNOWN_CHAR, FORMATTED_EXPR)));
+    b.rule(FORMATTED_EXPR).is(
+      PythonPunctuator.LCURLYBRACE,
+      EXPR,
+      b.optional(PythonPunctuator.ASSIGN),
+      b.optional("!", b.firstOf("s", "r", "a")),
+      b.optional(":", b.oneOrMore(b.firstOf(FORMATTED_EXPR, b.anyTokenButNot("}")))),
+      PythonPunctuator.RCURLYBRACE);
 
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),
