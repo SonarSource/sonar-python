@@ -59,8 +59,7 @@ public class PythonCheckVerifier {
 
 
   public static void verify(String path, PythonCheck check) {
-    File file = new File(path);
-    createVerifier(Collections.singletonList(file), check, Collections.emptyMap(), null).assertOneOrMoreIssues();
+    verify(Collections.singletonList(path), check);
   }
 
   public static void verifyNoIssue(String path, PythonCheck check) {
