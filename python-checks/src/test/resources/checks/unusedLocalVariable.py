@@ -28,6 +28,8 @@ def string_interpolation():
     foo(F'{value5} foo')
     value6 = ''
     print(f"{'}' + value6}")
+    value7 = ''
+    printf(rf'{value7}')
     return f'{value1}, {2*value2}, value3bis, value4'
 
 def function_with_lambdas():
