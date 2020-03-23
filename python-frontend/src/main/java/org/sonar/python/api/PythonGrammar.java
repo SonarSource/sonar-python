@@ -208,7 +208,7 @@ public enum PythonGrammar implements GrammarRuleKey {
       EXPR,
       b.optional(PythonPunctuator.ASSIGN),
       b.optional("!", b.firstOf("s", "r", "a")),
-      b.optional(":", b.oneOrMore(b.firstOf(FORMATTED_EXPR, b.anyTokenButNot("}")))),
+      b.optional(":", b.oneOrMore(b.firstOf(FORMATTED_EXPR, b.anyTokenButNot(PythonPunctuator.RCURLYBRACE)))),
       PythonPunctuator.RCURLYBRACE);
 
     b.rule(FACTOR).is(b.firstOf(

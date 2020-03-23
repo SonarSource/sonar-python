@@ -121,26 +121,26 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   private static String removePrefix(String value) {
-    if (isCharQuote(value.charAt(0))) {
-      return value;
-    }
-    return removePrefix(value.substring(1));
+    return value.substring(prefixLength(value));
   }
 
   private static boolean isCharQuote(char character) {
     return character == '\'' || character == '\"';
   }
 
-  public int contentStartIndex() {
+  private static int prefixLength(String value) {
     int prefixLength = 0;
     while (!isCharQuote(value.charAt(prefixLength))) {
       prefixLength++;
     }
-    char quoteChar = value.charAt(prefixLength);
-    int start = prefixLength;
-    if (value.length() > start + 2 && value.charAt(start + 1) == quoteChar && value.charAt(start + 2) == quoteChar) {
-      return start + 3;
+    return prefixLength;
+  }
+
+  public int contentStartIndex() {
+    int prefixLength = prefixLength(value);
+    if (isTripleQuote(value.substring(prefixLength))) {
+      return prefixLength + 3;
     }
-    return start + 1;
+    return prefixLength + 1;
   }
 }

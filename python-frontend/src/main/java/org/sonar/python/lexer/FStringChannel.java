@@ -64,7 +64,6 @@ public class FStringChannel extends Channel<Lexer> {
         sb.setLength(0);
         return true;
       }
-      return false;
     }
     return false;
   }
