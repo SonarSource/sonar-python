@@ -20,7 +20,6 @@
 package org.sonar.python;
 
 import com.sonar.sslr.impl.Lexer;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class TokenLocationTest {
   private List<Token> lex(String toLex) {
     LexerState lexerState = new LexerState();
     lexerState.reset();
-    Lexer lexer = PythonLexer.create(StandardCharsets.UTF_8, lexerState);
+    Lexer lexer = PythonLexer.create(lexerState);
     return lexer.lex(toLex).stream().map(TokenImpl::new).collect(Collectors.toList());
   }
 

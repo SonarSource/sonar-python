@@ -196,6 +196,7 @@ public class PythonSensorTest {
     verifyUsages(key, 2, 0, reference(3, 6, 3, 7), reference(10, 4, 10, 5), reference(32, 1, 32, 2));
     verifyUsages(key, 5, 4, reference(6, 4, 6, 5), reference(7, 4, 7, 5),
       reference(8, 8, 8, 9), reference(13, 9, 13, 10));
+    verifyUsages(key, 47, 5, reference(48, 14, 48, 17));
   }
 
   @Test

@@ -24,7 +24,6 @@ import com.sonar.sslr.impl.channel.BlackHoleChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
-import java.nio.charset.Charset;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -47,11 +46,21 @@ public final class PythonLexer {
   private PythonLexer() {
   }
 
-  public static Lexer create(Charset charset, LexerState lexerState) {
-    return Lexer.builder()
-        .withCharset(charset)
-        .withFailIfNoChannelToConsumeOneCharacter(true)
+  public static Lexer create(LexerState lexerState) {
+    Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
+    addCommonChannels(builder, lexerState);
+    return builder.build();
+  }
 
+  public static Lexer fStringLexer(LexerState lexerState) {
+    Lexer.Builder builder = Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true);
+    builder.withChannel(new FStringChannel(lexerState));
+    addCommonChannels(builder, lexerState);
+    return builder.build();
+  }
+
+  private static void addCommonChannels(Lexer.Builder builder, LexerState lexerState) {
+    builder
         .withChannel(new NewLineChannel(lexerState))
 
         .withChannel(new IndentationChannel(lexerState))
@@ -95,8 +104,6 @@ public final class PythonLexer {
         // http://docs.python.org/reference/lexical_analysis.html#delimiters
         .withChannel(new PunctuatorChannel(PythonPunctuator.values()))
 
-        .withChannel(new UnknownCharacterChannel())
-
-        .build();
+        .withChannel(new UnknownCharacterChannel());
   }
 }

@@ -32,14 +32,10 @@ public class TokenImpl extends PyTree implements Token {
 
   private com.sonar.sslr.api.Token token;
   private List<Trivia> trivia;
-  private int line;
-  private int column;
 
   public TokenImpl(com.sonar.sslr.api.Token token) {
     this.token = token;
     this.trivia = token.getTrivia().stream().map(tr -> new TriviaImpl(new TokenImpl(tr.getToken()))).collect(Collectors.toList());
-    line = token.getLine();
-    column = token.getColumn();
   }
 
   @Override
@@ -49,12 +45,12 @@ public class TokenImpl extends PyTree implements Token {
 
   @Override
   public int line() {
-    return line;
+    return token.getLine();
   }
 
   @Override
   public int column() {
-    return column;
+    return token.getColumn();
   }
 
   @Override
@@ -89,10 +85,5 @@ public class TokenImpl extends PyTree implements Token {
   @Override
   public Token lastToken() {
     return this;
-  }
-
-  void setLineColumn(int line, int col) {
-    this.line = line;
-    this.column = col;
   }
 }

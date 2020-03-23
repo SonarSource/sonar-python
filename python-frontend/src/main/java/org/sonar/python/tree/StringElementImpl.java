@@ -20,9 +20,9 @@
 package org.sonar.python.tree;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -42,6 +42,16 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   @Override
+  public Token firstToken() {
+    return token;
+  }
+
+  @Override
+  public Token lastToken() {
+    return token;
+  }
+
+  @Override
   public Kind getKind() {
     return Kind.STRING_ELEMENT;
   }
@@ -53,7 +63,10 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<Tree> computeChildren() {
-    return Collections.singletonList(token);
+    // Warning: in the case of f-strings, there's a kind of overlap between `token` and `formattedExpressions`: they
+    // are different representations of the same analyzed code.
+    // TreeUtils.tokens() doesn't contain the tokens of the formattedExpressions.
+    return Stream.concat(Stream.of(token), formattedExpressions.stream()).collect(Collectors.toList());
   }
 
   @Override
@@ -111,13 +124,26 @@ public class StringElementImpl extends PyTree implements StringElement {
   }
 
   private static String removePrefix(String value) {
-    if (isCharQuote(value.charAt(0))) {
-      return value;
-    }
-    return removePrefix(value.substring(1));
+    return value.substring(prefixLength(value));
   }
 
   private static boolean isCharQuote(char character) {
     return character == '\'' || character == '\"';
+  }
+
+  private static int prefixLength(String value) {
+    int prefixLength = 0;
+    while (!isCharQuote(value.charAt(prefixLength))) {
+      prefixLength++;
+    }
+    return prefixLength;
+  }
+
+  public int contentStartIndex() {
+    int prefixLength = prefixLength(value);
+    if (isTripleQuote(value.substring(prefixLength))) {
+      return prefixLength + 3;
+    }
+    return prefixLength + 1;
   }
 }

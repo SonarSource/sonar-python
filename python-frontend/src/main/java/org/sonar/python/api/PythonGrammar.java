@@ -19,6 +19,7 @@
  */
 package org.sonar.python.api;
 
+import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
@@ -83,6 +84,7 @@ public enum PythonGrammar implements GrammarRuleKey {
 
   NAMED_EXPR_TEST,
   FORMATTED_EXPR,
+  F_STRING_CONTENT,
 
   COMPARISON,
   COMP_OPERATOR,
@@ -199,7 +201,16 @@ public enum PythonGrammar implements GrammarRuleKey {
 
     b.rule(STAR_EXPR).is("*", EXPR);
     b.rule(EXPR).is(XOR_EXPR, b.zeroOrMore("|", XOR_EXPR));
-    b.rule(FORMATTED_EXPR).is(b.sequence(EXPR, b.optional(PythonPunctuator.ASSIGN)));
+
+    // https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals
+    b.rule(F_STRING_CONTENT).is(b.zeroOrMore(b.firstOf(GenericTokenType.UNKNOWN_CHAR, FORMATTED_EXPR)));
+    b.rule(FORMATTED_EXPR).is(
+      PythonPunctuator.LCURLYBRACE,
+      EXPR,
+      b.optional(PythonPunctuator.ASSIGN),
+      b.optional("!", b.firstOf("s", "r", "a")),
+      b.optional(":", b.oneOrMore(b.firstOf(FORMATTED_EXPR, b.anyTokenButNot(PythonPunctuator.RCURLYBRACE)))),
+      PythonPunctuator.RCURLYBRACE);
 
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),

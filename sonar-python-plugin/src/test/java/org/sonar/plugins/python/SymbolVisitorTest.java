@@ -75,11 +75,10 @@ public class SymbolVisitorTest {
     verifyUsages(28, 11, reference(28, 15, 28, 16), reference(28, 17, 28, 18));
     verifyUsages(29, 9, reference(29, 1, 29, 2));
     verifyUsages(30, 11, reference(30, 1, 30, 4));
-    verifyUsages(34, 0, reference(35, 42, 35, 43), reference(38, 1, 38, 2),
-      reference(41, 10, 41, 11), reference(41, 36, 41, 37));
-    verifyUsages(43, 61, reference(43, 54, 43, 55));
-    verifyUsages(45, 0, reference(46, 31, 46, 32), reference(46, 42, 46, 43),
-      reference(47, 21, 47, 22));
+    verifyUsages(34, 0, reference(35, 42, 35, 43), reference(38, 1, 38, 2));
+    verifyUsages(40, 61, reference(40, 54, 40, 55));
+    verifyUsages(42, 0, reference(43, 31, 43, 32), reference(43, 42, 43, 43),
+      reference(44, 21, 44, 22));
   }
 
   private void verifyUsages(int line, int offset, TextRange... trs) {
