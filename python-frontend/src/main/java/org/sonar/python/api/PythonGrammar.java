@@ -202,6 +202,7 @@ public enum PythonGrammar implements GrammarRuleKey {
     b.rule(STAR_EXPR).is("*", EXPR);
     b.rule(EXPR).is(XOR_EXPR, b.zeroOrMore("|", XOR_EXPR));
 
+    // https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals
     b.rule(F_STRING_CONTENT).is(b.zeroOrMore(b.firstOf(GenericTokenType.UNKNOWN_CHAR, FORMATTED_EXPR)));
     b.rule(FORMATTED_EXPR).is(
       PythonPunctuator.LCURLYBRACE,

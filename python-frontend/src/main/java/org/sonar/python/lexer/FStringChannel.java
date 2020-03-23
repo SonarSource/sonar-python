@@ -25,6 +25,10 @@ import com.sonar.sslr.impl.Lexer;
 import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
 
+/**
+ * A channel to handle the literal_char parts inside f-strings.
+ * See https://docs.python.org/3/reference/lexical_analysis.html#f-strings
+ */
 public class FStringChannel extends Channel<Lexer> {
 
   private static final char EOF = (char) -1;

@@ -63,6 +63,9 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<Tree> computeChildren() {
+    // Warning: in the case of f-strings, there's a kind of overlap between `token` and `formattedExpressions`: they
+    // are different representations of the same analyzed code.
+    // TreeUtils.tokens() doesn't contain the tokens of the formattedExpressions.
     return Stream.concat(Stream.of(token), formattedExpressions.stream()).collect(Collectors.toList());
   }
 
