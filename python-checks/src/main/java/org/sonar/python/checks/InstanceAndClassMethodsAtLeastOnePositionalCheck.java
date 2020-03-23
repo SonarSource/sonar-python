@@ -76,7 +76,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
     if (KNOWN_CLASS_METHODS.contains(name) || decoratorNames.contains("classmethod")) {
       ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a class parameter");
     } else {
-      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a \"self\" or class parameter\"");
+      ctx.addIssue(functionDef.defKeyword(), functionDef.rightPar(), "Add a \"self\" or class parameter");
     }
   }
 
