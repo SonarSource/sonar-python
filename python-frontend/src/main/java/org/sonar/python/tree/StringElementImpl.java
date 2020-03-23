@@ -87,7 +87,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public String prefix() {
-    return value.substring(0, value.length() - removePrefix(value).length());
+    return value.substring(0, prefixLength(value));
   }
 
   @Override
@@ -97,7 +97,8 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public boolean isInterpolated() {
-    return prefix().equalsIgnoreCase("F");
+    String prefix = prefix();
+    return prefix.indexOf('f') >= 0 || prefix.indexOf('F') >= 0;
   }
 
   @Override
