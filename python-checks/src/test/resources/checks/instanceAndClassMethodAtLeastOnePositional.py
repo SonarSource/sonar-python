@@ -1,5 +1,5 @@
 class Foo:
-    def instance_method(): # Noncompliant {{Add a "self" or class parameter"}}
+    def instance_method(): # Noncompliant {{Add a "self" or class parameter}}
 #   ^^^^^^^^^^^^^^^^^^^^^
         pass
 
