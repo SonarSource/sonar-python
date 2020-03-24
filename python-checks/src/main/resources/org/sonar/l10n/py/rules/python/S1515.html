@@ -1,0 +1,43 @@
+<p>Nested functions and lambdas can reference variables defined in enclosing scopes. This can create tricky bugs when the variable and the function
+are defined in a loop. If the function is called after the loop, it will see the variables last value instead of seeing the values corresponding to
+the iteration where the function was defined.</p>
+<p>This rule raises an issue when a nested function or lambda references a variable defined in an enclosing loop.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def run():
+    mylist = []
+    for i in range(5):
+        mylist.append(lambda: i)  # Noncompliant
+
+        def func():
+            return i  # Noncompliant
+        mylist.append(func)
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def run():
+    mylist = []
+    for i in range(5):
+        mylist.append(lambda i=i: i)  # passing the variable as a parameter with a default value
+
+        def func(i=i):  # same for nested functions
+            return i
+        mylist.append(func)
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised if the function or lambda is only called in the same loop.</p>
+<pre>
+def function_called_in_loop():
+    for i in range(10):
+        print((lambda param: param * i)(42))
+
+        def func(param):
+            return param * i
+
+        print(func(42))
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker's Guide to Python - Common Gotchas</a> </li>
+</ul>
+
