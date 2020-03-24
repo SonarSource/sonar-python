@@ -17,7 +17,6 @@ that relate to the Liskov Substitution Principle. Specifically, an overriding me
   <li> Removing parameters, even when they have default values. </li>
   <li> Adding mandatory parameters, i.e. without a default value. </li>
   <li> Removing the default value of a parameter. </li>
-  <li> Renaming parameters, except when they are positional-only parameters. </li>
   <li> Reordering parameters, except when they are keyword-only parameters. </li>
   <li> Removing some ways of providing a parameter. If a parameter could be passed as keyword it should still be possible to pass it as keyword, and
   the same is true for positional parameters. </li>
@@ -42,13 +41,8 @@ class ChildClassLess(ParentClass):
     def mymethod(self): # Noncompliant. Add missing parameter "param1".
         pass
 
-class ChildClassRenamed(ParentClass):
-    def mymethod(self, renamed): # Noncompliant. Rename this parameter as "param1".
-        pass
-
 class ChildClassReordered(ParentClass):
-    def mymethod(self, inserted, param1): # Noncompliant * 2.
-        # Move param1 in first position
+    def mymethod(self, inserted, param1): # Noncompliant
         # Remove parameters "inserted" or provide a default value.
         pass
 </pre>
@@ -66,16 +60,29 @@ class ChildClassLess(ParentClass):
     def mymethod(self, param1=None):
         pass
 
-class ChildClassRenamed(ParentClass):
+class ChildClassReordered(ParentClass):
+    def mymethod(self, param1, inserted=None):
+        pass
+</pre>
+<h2>Exceptions</h2>
+<p>In theory renaming parameters also breaks Liskov Substitution Principle. Arguments can't be passed via keyword arguments anymore. However, <a
+href="https://www.python.org/dev/peps/pep-0570/#consistency-in-subclasses">as PEP-570 says</a>, it is common to rename parameters when it improves
+code readability and when arguments are always passed by position.</p>
+<p>"Positional-Only Parameters" were introduced in python 3.8 to solve this problem. As most programs will need to support older versions of python,
+this rule won't raise an issue on renamed parameters.</p>
+<pre>
+class ParentClass(object):
     def mymethod(self, param1):
         pass
 
-class ChildClassReordered(ParentClass):
-    def mymethod(self, param1, inserted=None):
+class ChildClassRenamed(ParentClass):
+    def mymethod(self, renamed): # No issue but this is suspicious. Rename this parameter as "param1" or use positional only arguments if possible.
         pass
 </pre>
 <h2>See</h2>
 <ul>
   <li> <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a> </li>
+  <li> Python Enhancement Proposal (PEP) 3102 - <a href="https://www.python.org/dev/peps/pep-3102/">Keyword-Only Arguments</a> </li>
+  <li> Python Enhancement Proposal (PEP) 570 - <a href="https://www.python.org/dev/peps/pep-0570/">Python Positional-Only Parameters</a> </li>
 </ul>
 

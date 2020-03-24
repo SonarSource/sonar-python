@@ -13,16 +13,12 @@
 <pre>
 class A:
     @property
-    def foo(self, unexpected):  # Noncompliant. Too many parameters.
+    def foo(self, unexpected, unexpected2):  # Noncompliant. Too many parameters.
         return self._foo
 
     @foo.setter
     def foo(self, value, unexpected):  # Noncompliant. Too many parameters.
         self._foo = value
-
-    @foo.setter
-    def foo(self):  # Noncompliant. missing value
-        self._foo = 42
 
     @foo.deleter
     def foo(self, unexpected):  # Noncompliant. Too many parameters.
@@ -35,14 +31,10 @@ class B:
     def set_foo(self, value, unexpected):  # Noncompliant. Too many parameters.
         self._foo = value
 
-    def set_foo2(self):  # Noncompliant. missing value
-        self._foo = 42
-
     def del_foo(self, unexpected):  # Noncompliant. Too many parameters.
         del self._foo
 
     foo = property(get_foo, set_foo, del_foo, "'foo' property.")
-    foo2 = property(get_foo, set_foo2, del_foo, "'foo2' property.")
 </pre>
 <h2>Compliant Solution</h2>
 <pre>

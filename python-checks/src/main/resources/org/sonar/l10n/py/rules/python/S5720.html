@@ -2,22 +2,46 @@
 parameter. This parameter will reference the object instance on which the method is called. By convention, this first parameter is named "self".</p>
 <p>Naming the "self" parameter differently is confusing. It might also indicate that the "self" parameter was forgotten, in which case calling the
 method will most probably fail.</p>
+<p>Note also that creating methods which are used as static methods without the <code>@staticmethod</code> decorator is a bad practice because calling
+these methods on an instance will raise a `TypeError`. Either move the method out of the class or decorate it with <code>@staticmethod</code>.</p>
 <p>This rule raises an issue when the first parameter of an instance method is not called "self".</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 class MyClass:
     def send_request(request):  # Noncompliant. "self" was probably forgotten
         print("send_request")
+
+class ClassWithStaticMethod:
+    def static_method(param):  # Noncompliant
+        print(param)
+ClassWithStaticMethod().static_method(42)  # Method is available on the instance but calling it will raise a TypeError
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 class MyClass:
     def send_request(self, request):
         print("send_request")
+
+class ClassWithStaticMethod:
+    @staticmethod
+    def static_method(param):
+        print(param)
+ClassWithStaticMethod().static_method(42)
 </pre>
 <h2>Exceptions</h2>
+<p>This rule will also accept "cls" or "mcs" as first parameter's name for metaclasses' methods.</p>
 <p>No issue will be raised for methods called <code>__init_subclass__</code>, <code>__class_getitem__</code> or <code>__new__</code> as these methods'
 first parameter is a class.</p>
+<p>You can also disable issues on methods decorated with a specific decorator. Add these decorators to this rule's "ignoreDecorators" parameter.</p>
+<p>With "ignoredDecorators" set to "abstractmethod"</p>
+<pre>
+from abc import abstractmethod, ABC
+
+class MyClass(ABC):
+    @abstractmethod
+    def method():  # No issue, even if it is better in this case to also decorate with @staticmethod
+        pass
+</pre>
 <h2>See</h2>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3.8/tutorial/classes.html#method-objects">Method Objects</a> </li>
