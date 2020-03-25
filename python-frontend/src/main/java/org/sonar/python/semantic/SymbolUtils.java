@@ -121,7 +121,7 @@ public class SymbolUtils {
     }
   }
 
-  static List<Expression> assignmentsLhs(AssignmentStatement assignmentStatement) {
+  public static List<Expression> assignmentsLhs(AssignmentStatement assignmentStatement) {
     return assignmentStatement.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
       .flatMap(TreeUtils::flattenTuples)

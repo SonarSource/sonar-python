@@ -159,9 +159,9 @@ def no_binding_usage_in_loop():
     def func():
       foo(x)
 
-def lambda_assigned_to_tuple_FP():
+def lambda_assigned_to_tuple():
   for j in range(10):
-    (a, b) = (lambda: j, foo) # Noncompliant
+    (a, b) = (lambda: j, foo)
     return a
 
 def returned_lambda_multiple_assignment():
