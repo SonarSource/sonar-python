@@ -43,15 +43,15 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 public class TypeShed {
 
-  private static Map<String, Symbol> typeShedSymbols;
+  private static Map<String, Symbol> builtins;
 
   private TypeShed() {
   }
 
-  public static Map<String, Symbol> typeShedSymbols() {
-    if (TypeShed.typeShedSymbols == null) {
-      Map<String, Symbol> typeShedSymbols = new HashMap<>();
-      typeShedSymbols.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
+  public static Map<String, Symbol> builtinSymbols() {
+    if (TypeShed.builtins == null) {
+      Map<String, Symbol> builtins = new HashMap<>();
+      builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
       PythonFile file = new TypeShedPythonFile(resource);
       AstNode astNode = PythonParser.create().parse(file.content());
@@ -59,7 +59,7 @@ public class TypeShed {
       Map<String, Set<Symbol>> globalSymbols = Collections.emptyMap();
       new SymbolTableBuilder("", file, globalSymbols).visitFileInput(fileInput);
       for (Symbol globalVariable : fileInput.globalVariables()) {
-        typeShedSymbols.put(globalVariable.fullyQualifiedName(), globalVariable);
+        builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
       }
       BaseTreeVisitor visitor = new BaseTreeVisitor() {
         @Override
@@ -68,20 +68,20 @@ public class TypeShed {
           Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
             if (symbol.kind() == Symbol.Kind.FUNCTION && returnTypeAnnotation != null) {
               FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-              functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
+              functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation, builtins));
             }
           });
           super.visitFunctionDef(functionDef);
         }
       };
       fileInput.accept(visitor);
-      TypeShed.typeShedSymbols = Collections.unmodifiableMap(typeShedSymbols);
+      TypeShed.builtins = Collections.unmodifiableMap(builtins);
     }
-    return typeShedSymbols;
+    return builtins;
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
-    Symbol symbol = typeShedSymbols().get(fullyQualifiedName);
+    Symbol symbol = builtinSymbols().get(fullyQualifiedName);
     if (symbol == null) {
       throw new IllegalArgumentException("No TypeShed symbol found for name: " + fullyQualifiedName);
     }
