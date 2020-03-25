@@ -213,7 +213,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(tree);
       moduleScope = currentScope();
       if (!SymbolUtils.isTypeShedFile(pythonFile)) {
-        Map<String, Symbol> typeShedSymbols = TypeShed.typeShedSymbols();
+        Map<String, Symbol> typeShedSymbols = TypeShed.builtinSymbols();
         for (String name : BuiltinSymbols.all()) {
           currentScope().createBuiltinSymbol(name, typeShedSymbols);
         }

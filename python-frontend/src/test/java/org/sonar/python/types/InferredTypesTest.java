@@ -21,6 +21,9 @@ package org.sonar.python.types;
 
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
@@ -49,5 +52,24 @@ public class InferredTypesTest {
     assertThat(or(runtimeType(a), runtimeType(a))).isEqualTo(runtimeType(a));
     assertThat(or(runtimeType(a), runtimeType(b))).isNotEqualTo(anyType());
     assertThat(or(runtimeType(a), runtimeType(b))).isEqualTo(or(runtimeType(b), runtimeType(a)));
+  }
+
+  @Test
+  public void test_aliased_type_annotations() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import List",
+      "l : List[int]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.LIST);
+
+    typeAnnotation = typeAnnotation(
+      "from typing import Dict",
+      "l : Dict[int, string]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.DICT);
+  }
+
+  private TypeAnnotation typeAnnotation(String... code) {
+    return PythonTestUtils.getLastDescendant(PythonTestUtils.parse(code), tree -> tree.is(Tree.Kind.VARIABLE_TYPE_ANNOTATION));
   }
 }

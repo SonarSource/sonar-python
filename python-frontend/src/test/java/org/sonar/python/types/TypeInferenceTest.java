@@ -284,6 +284,7 @@ public class TypeInferenceTest {
   @Test
   public void builtin_method_types() {
     assertThat(lastExpression("'abc'.capitalize()").type()).isEqualTo(STR);
+    assertThat(lastExpression("list().copy()").type()).isEqualTo(LIST);
   }
 
   @Test
