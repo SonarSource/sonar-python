@@ -69,6 +69,48 @@ public class InferredTypesTest {
     assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.DICT);
   }
 
+  @Test
+  public void test_union_type_annotations() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import Union",
+      "l : Union[int, str]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
+
+    typeAnnotation = typeAnnotation(
+      "from typing import Union",
+      "l : Union[int, str, bool]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+
+    typeAnnotation = typeAnnotation(
+      "from typing import Union",
+      "l : Union[Union[int, str], bool]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+
+    typeAnnotation = typeAnnotation(
+      "from typing import Union",
+      "l : Union[bool]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.BOOL);
+  }
+
+  @Test
+  public void test_optional_type_annotations() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import Optional",
+      "l : Optional[int]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.NONE));
+
+    typeAnnotation = typeAnnotation(
+      "from typing import Optional",
+      "l : Optional[int, string]"
+    );
+    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.anyType());
+  }
+
   private TypeAnnotation typeAnnotation(String... code) {
     return PythonTestUtils.getLastDescendant(PythonTestUtils.parse(code), tree -> tree.is(Tree.Kind.VARIABLE_TYPE_ANNOTATION));
   }

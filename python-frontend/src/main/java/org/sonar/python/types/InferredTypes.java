@@ -20,6 +20,7 @@
 package org.sonar.python.types;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -85,7 +86,10 @@ public class InferredTypes {
   }
 
   public static InferredType declaredType(TypeAnnotation typeAnnotation, Map<String, Symbol> builtinSymbols) {
-    Expression expression = typeAnnotation.expression();
+    return declaredType(typeAnnotation.expression(), builtinSymbols);
+  }
+
+  private static InferredType declaredType(Expression expression, Map<String, Symbol> builtinSymbols) {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       // TODO change it to DeclaredType instance
       return InferredTypes.runtimeType(((Name) expression).symbol());
@@ -93,17 +97,37 @@ public class InferredTypes {
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
       return TreeUtils.getSymbolFromTree(subscription.object())
-        .map(symbol -> InferredTypes.genericType(symbol, builtinSymbols))
+        .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols))
         .orElse(InferredTypes.anyType());
     }
     return InferredTypes.anyType();
   }
 
-  private static InferredType genericType(Symbol symbol, Map<String, Symbol> builtinSymbols) {
+  private static InferredType genericType(Symbol symbol, List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
     String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
     if (builtinFqn == null) {
+      if ("typing.Optional".equals(symbol.fullyQualifiedName()) && subscripts.size() == 1) {
+        return optionalDeclaredType(subscripts, builtinSymbols);
+      }
+      if ("typing.Union".equals(symbol.fullyQualifiedName())) {
+        return unionDeclaredType(subscripts, builtinSymbols);
+      }
       return InferredTypes.runtimeType(symbol);
     }
     return InferredTypes.runtimeType(builtinSymbols.get(builtinFqn));
+  }
+
+  private static InferredType unionDeclaredType(List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
+    // subscripts cannot be empty by grammar definition
+    InferredType union = declaredType(subscripts.get(0), builtinSymbols);
+    for (int i = 1; i < subscripts.size(); i++) {
+      union = InferredTypes.or(union, declaredType(subscripts.get(i), builtinSymbols));
+    }
+    return union;
+  }
+
+  private static InferredType optionalDeclaredType(List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
+    InferredType noneType = InferredTypes.runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
+    return InferredTypes.or(declaredType(subscripts.get(0), builtinSymbols), noneType);
   }
 }
