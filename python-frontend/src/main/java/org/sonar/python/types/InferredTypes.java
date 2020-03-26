@@ -21,7 +21,6 @@ package org.sonar.python.types;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -94,14 +93,17 @@ public class InferredTypes {
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
       return TreeUtils.getSymbolFromTree(subscription.object())
-        .flatMap(symbol -> InferredTypes.genericType(symbol, builtinSymbols))
+        .map(symbol -> InferredTypes.genericType(symbol, builtinSymbols))
         .orElse(InferredTypes.anyType());
     }
     return InferredTypes.anyType();
   }
 
-  private static Optional<InferredType> genericType(Symbol symbol, Map<String, Symbol> builtinSymbols) {
-    return Optional.ofNullable(ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName()))
-      .map(fqn -> InferredTypes.runtimeType(builtinSymbols.get(fqn)));
+  private static InferredType genericType(Symbol symbol, Map<String, Symbol> builtinSymbols) {
+    String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
+    if (builtinFqn == null) {
+      return InferredTypes.runtimeType(symbol);
+    }
+    return InferredTypes.runtimeType(builtinSymbols.get(builtinFqn));
   }
 }

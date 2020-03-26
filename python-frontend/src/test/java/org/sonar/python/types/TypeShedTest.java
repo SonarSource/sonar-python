@@ -19,8 +19,12 @@
  */
 package org.sonar.python.types;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -49,5 +53,14 @@ public class TypeShedTest {
   public void none_type() {
     ClassSymbol noneType = TypeShed.typeShedClass("NoneType");
     assertThat(noneType.superClasses()).isEmpty();
+  }
+
+  @Test
+  public void typing_module() {
+    Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    // python3 specific
+    assertThat(symbols.get("Awaitable").kind()).isEqualTo(Symbol.Kind.CLASS);
+    // overlap btw python2 and python3
+    assertThat(symbols.get("Iterator").kind()).isEqualTo(Symbol.Kind.OTHER);
   }
 }

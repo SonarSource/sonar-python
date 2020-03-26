@@ -36,9 +36,11 @@ public class TypeShedPythonFile implements PythonFile {
   private static final Logger LOG = Loggers.get(TypeShedPythonFile.class);
 
   private final InputStream resourceAsStream;
+  private final String filename;
 
-  TypeShedPythonFile(InputStream resourceAsStream) {
+  TypeShedPythonFile(InputStream resourceAsStream, String filename) {
     this.resourceAsStream = resourceAsStream;
+    this.filename = filename;
   }
 
   @Override
@@ -53,7 +55,7 @@ public class TypeShedPythonFile implements PythonFile {
 
   @Override
   public String fileName() {
-    return "";
+    return filename;
   }
 
   @Override
