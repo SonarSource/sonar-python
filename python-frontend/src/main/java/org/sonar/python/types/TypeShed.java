@@ -23,9 +23,12 @@ import com.sonar.sslr.api.AstNode;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -36,6 +39,7 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -43,6 +47,7 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 public class TypeShed {
 
+  private static final String TYPING = "typing";
   private static Map<String, Symbol> builtins;
 
   private TypeShed() {
@@ -53,10 +58,10 @@ public class TypeShed {
       Map<String, Symbol> builtins = new HashMap<>();
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
-      PythonFile file = new TypeShedPythonFile(resource);
+      PythonFile file = new TypeShedPythonFile(resource, "");
       AstNode astNode = PythonParser.create().parse(file.content());
       FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-      Map<String, Set<Symbol>> globalSymbols = Collections.emptyMap();
+      Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap(TYPING, typingModuleSymbols());
       new SymbolTableBuilder("", file, globalSymbols).visitFileInput(fileInput);
       for (Symbol globalVariable : fileInput.globalVariables()) {
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
@@ -78,6 +83,38 @@ public class TypeShed {
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
     }
     return builtins;
+  }
+
+  // visible for testing
+  static Set<Symbol> typingModuleSymbols() {
+    Map<String, Symbol> typingPython3 = getModuleSymbols("3/typing.pyi", TYPING);
+    Map<String, Symbol> typingPython2 = getModuleSymbols("2/typing.pyi", TYPING);
+    Set<Symbol> typingModuleSymbols = new HashSet<>();
+    typingPython3.forEach((fqn, python3Symbol) -> {
+      Symbol python2Symbol = typingPython2.get(fqn);
+      if (python2Symbol == null) {
+        typingModuleSymbols.add(python3Symbol);
+      } else {
+        typingModuleSymbols.add(new SymbolImpl(python3Symbol.name(), python3Symbol.fullyQualifiedName()));
+      }
+    });
+
+    typingPython2.forEach((fqn, python2Symbol) -> {
+      if (typingPython3.get(fqn) == null) {
+        typingModuleSymbols.add(python2Symbol);
+      }
+    });
+
+    return typingModuleSymbols;
+  }
+
+  private static Map<String, Symbol> getModuleSymbols(String resourcePath, String moduleName) {
+    InputStream resource = TypeShed.class.getResourceAsStream(resourcePath);
+    PythonFile file = new TypeShedPythonFile(resource, moduleName);
+    AstNode astNode = PythonParser.create().parse(file.content());
+    FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
+    new SymbolTableBuilder("", file, Collections.emptyMap()).visitFileInput(fileInput);
+    return fileInput.globalVariables().stream().filter(s -> s.fullyQualifiedName() != null).collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {

@@ -35,7 +35,7 @@ public class TypeShedPythonFileTest {
 
   @Test
   public void existing_resource() {
-    TypeShedPythonFile typeShedPythonFile = new TypeShedPythonFile(TypeShedPythonFileTest.class.getResourceAsStream("/typeshed.pyi"));
+    TypeShedPythonFile typeShedPythonFile = new TypeShedPythonFile(TypeShedPythonFileTest.class.getResourceAsStream("/typeshed.pyi"), "");
     assertThat(typeShedPythonFile.uri()).isNull();
     assertThat(typeShedPythonFile.fileName()).isEmpty();
     assertThat(typeShedPythonFile.content()).isEqualTo("'hello'");
@@ -43,7 +43,7 @@ public class TypeShedPythonFileTest {
 
   @Test
   public void error_while_reading_resource() {
-    TypeShedPythonFile typeShedPythonFile = new TypeShedPythonFile(Mockito.mock(InputStream.class));
+    TypeShedPythonFile typeShedPythonFile = new TypeShedPythonFile(Mockito.mock(InputStream.class), "");
     assertThat(typeShedPythonFile.uri()).isNull();
     assertThat(typeShedPythonFile.fileName()).isEmpty();
     assertThat(typeShedPythonFile.content()).isEqualTo("");
