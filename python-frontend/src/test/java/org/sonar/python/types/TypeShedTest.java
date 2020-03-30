@@ -20,11 +20,14 @@
 package org.sonar.python.types;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,5 +65,20 @@ public class TypeShedTest {
     assertThat(symbols.get("Awaitable").kind()).isEqualTo(Symbol.Kind.CLASS);
     // overlap btw python2 and python3
     assertThat(symbols.get("Iterator").kind()).isEqualTo(Symbol.Kind.OTHER);
+  }
+
+  @Test
+  public void stdlib_symbols() {
+    Map<String, Symbol> mathSymbols = TypeShed.standardLibrarySymbols("math").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol acosSymbol = mathSymbols.get("acos");
+    assertThat(acosSymbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
+    assertThat(TypeShed.standardLibrarySymbol("math", "math.acos")).isSameAs(acosSymbol);
+
+    Map<String, Symbol> threadingSymbols = TypeShed.standardLibrarySymbols("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Symbol.Kind.CLASS);
+
+    Map<String, Symbol> imaplibSymbols = TypeShed.standardLibrarySymbols("imaplib").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(imaplibSymbols).isNotEmpty();
   }
 }

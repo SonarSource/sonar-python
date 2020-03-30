@@ -37,11 +37,13 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.PythonTestUtils;
@@ -75,7 +77,7 @@ public class SymbolTableBuilderTest {
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
-      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression");
+      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "importing_stdlib");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
@@ -259,6 +261,21 @@ public class SymbolTableBuilderTest {
 
     assertThat(symbolByName.get("x").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
     assertThat(symbolByName.get("z").usages()).extracting(Usage::kind).containsOnly(Usage.Kind.IMPORT);
+  }
+
+  @Test
+  public void importing_stdlib() {
+    FunctionDef functionDef = functionTreesByName.get("importing_stdlib");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName.keySet()).containsOnly("math");
+    assertThat(symbolByName.get("math").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.OTHER);
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(1)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol).isNotNull();
+    assertThat(qualifiedExpressionSymbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl) qualifiedExpressionSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
   }
 
   @Test

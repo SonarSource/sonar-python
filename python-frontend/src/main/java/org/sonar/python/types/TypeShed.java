@@ -50,6 +50,8 @@ public class TypeShed {
 
   private static final String TYPING = "typing";
   private static Map<String, Symbol> builtins;
+  private static Map<String, Set<Symbol>> standardLibrarySymbols = new HashMap<>();
+  private static Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
 
   private TypeShed() {
   }
@@ -68,14 +70,8 @@ public class TypeShed {
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
       }
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
-      BaseTreeVisitor visitor = new BaseTreeVisitor() {
-        @Override
-        public void visitFunctionDef(FunctionDef functionDef) {
-          Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> setDeclaredReturnType(symbol, functionDef));
-          super.visitFunctionDef(functionDef);
-        }
-      };
-      fileInput.accept(visitor);
+      fileInput.accept(new ReturnTypeVisitor());
+      TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
     }
     return builtins;
   }
@@ -125,6 +121,40 @@ public class TypeShed {
     return fileInput.globalVariables().stream().filter(s -> s.fullyQualifiedName() != null).collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
   }
 
+  public static Set<Symbol> standardLibrarySymbols(String stdlibModuleName) {
+    if (!TypeShed.standardLibrarySymbols.containsKey(stdlibModuleName)) {
+      Map<String, Symbol> result = readTypeShedSymbols("stdlib/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName);
+      if (result != null) {
+        standardLibrarySymbols.put(stdlibModuleName, result.values().stream().filter(s -> s.fullyQualifiedName() != null).collect(Collectors.toSet()));
+        return TypeShed.standardLibrarySymbols.get(stdlibModuleName);
+      }
+      return Collections.emptySet();
+    }
+    return TypeShed.standardLibrarySymbols.get(stdlibModuleName);
+  }
+
+  public static Symbol standardLibrarySymbol(String stdLibModuleName, String fullyQualifiedName) {
+    Set<Symbol> librarySymbols = standardLibrarySymbols(stdLibModuleName);
+    return librarySymbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+  }
+
+  public static Map<String, Symbol> readTypeShedSymbols(String fileName, String moduleName) {
+    Map<String, Symbol> typeShedSymbols = new HashMap<>();
+    InputStream resource = TypeShed.class.getResourceAsStream(fileName);
+    if (resource == null) {
+      return null;
+    }
+    PythonFile file = new TypeShedPythonFile(resource, moduleName);
+    AstNode astNode = PythonParser.create().parse(file.content());
+    FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
+    new SymbolTableBuilder("", file, builtinGlobalSymbols).visitFileInput(fileInput);
+    for (Symbol globalVariable : fileInput.globalVariables()) {
+      typeShedSymbols.put(globalVariable.fullyQualifiedName(), globalVariable);
+    }
+    fileInput.accept(new ReturnTypeVisitor());
+    return Collections.unmodifiableMap(typeShedSymbols);
+  }
+
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
     Symbol symbol = builtinSymbols().get(fullyQualifiedName);
     if (symbol == null) {
@@ -134,6 +164,15 @@ public class TypeShed {
       throw new IllegalArgumentException("TypeShed symbol " + fullyQualifiedName + " is not a class");
     }
     return (ClassSymbol) symbol;
+  }
+
+  static class ReturnTypeVisitor extends BaseTreeVisitor {
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> setDeclaredReturnType(symbol, functionDef));
+      super.visitFunctionDef(functionDef);
+    }
   }
 
 }

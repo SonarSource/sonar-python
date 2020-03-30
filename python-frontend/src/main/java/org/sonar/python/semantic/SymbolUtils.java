@@ -40,6 +40,7 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -88,6 +89,12 @@ public class SymbolUtils {
     fileInput.accept(symbolTableBuilder);
     Set<Symbol> globalSymbols = new HashSet<>();
     for (Symbol globalVariable : fileInput.globalVariables()) {
+      String fullyQualifiedVariableName = globalVariable.fullyQualifiedName();
+      if (((fullyQualifiedVariableName != null) && !fullyQualifiedVariableName.startsWith(fullyQualifiedModuleName)) ||
+        globalVariable.usages().stream().anyMatch(u -> u.kind().equals(Usage.Kind.IMPORT))) {
+        // TODO: We don't put builtin or imported names in global symbol table to avoid duplicate FQNs in project level symbol table (to fix with SONARPY-647)
+        continue;
+      }
       if (globalVariable.kind() == Symbol.Kind.CLASS) {
         globalSymbols.add(((ClassSymbolImpl) globalVariable).copyWithoutUsages());
       } else if (globalVariable.kind() == Symbol.Kind.FUNCTION) {
@@ -185,7 +192,6 @@ public class SymbolUtils {
       classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
       classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
     )));
-    globalSymbols.put("zipfile", Collections.singleton(classSymbol("ZipFile", "zipfile.ZipFile", "extractall")));
     globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(classSymbol("SimpleCookie", "http.cookies.SimpleCookie"))));
 
     globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
