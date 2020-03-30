@@ -67,6 +67,17 @@ public class SymbolImpl implements Symbol {
   }
 
   @Override
+  public boolean is(Kind... kinds) {
+    Kind symbolKind = kind();
+    for (Kind kindIter : kinds) {
+      if (symbolKind == kindIter) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override
   public Kind kind() {
     return this.kind;
   }
