@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -132,11 +133,71 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     scopesByRootTree = new HashMap<>();
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
+    createAmbiguousSymbols();
     addSymbolsToTree((FileInputImpl) fileInput);
     fileInput.accept(new ThirdPhaseVisitor());
     if (!SymbolUtils.isTypeShedFile(pythonFile)) {
       TypeInference.inferTypes(fileInput);
     }
+  }
+
+  private static class SymbolToUpdate {
+    final Symbol symbol;
+    final AmbiguousSymbol ambiguousSymbol;
+
+    SymbolToUpdate(Symbol symbol, AmbiguousSymbol ambiguousSymbol) {
+      this.symbol = symbol;
+      this.ambiguousSymbol = ambiguousSymbol;
+    }
+  }
+
+  private void createAmbiguousSymbols() {
+    for (Scope scope : scopesByRootTree.values()) {
+      Set<SymbolToUpdate> symbolsToUpdate = new HashSet<>();
+      for (Symbol symbol : scope.symbols()) {
+        if (symbol.kind() == Symbol.Kind.OTHER) {
+          List<Usage> bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).collect(Collectors.toList());
+          if (bindingUsages.size() > 1) {
+            Map<Tree, Symbol> symbolsByDeclarationTrees = new HashMap<>();
+            Set<Symbol> alternativeDefinitions = getAlternativeDefinitions(symbol, bindingUsages, symbolsByDeclarationTrees);
+            AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(alternativeDefinitions);
+            ((AmbiguousSymbolImpl) ambiguousSymbol).setSymbolsByDeclarationTree(symbolsByDeclarationTrees);
+            // update symbol and usage to newly created ambiguous symbol
+            symbol.usages().forEach(usage -> ((SymbolImpl) ambiguousSymbol).addUsage(usage.tree(), usage.kind()));
+            symbolsToUpdate.add(new SymbolToUpdate(symbol, ambiguousSymbol));
+          }
+        }
+      }
+      symbolsToUpdate.forEach(symbolToUpdate -> scope.replaceSymbolWithAmbiguousSymbol(symbolToUpdate.symbol, symbolToUpdate.ambiguousSymbol));
+    }
+  }
+
+  private Set<Symbol> getAlternativeDefinitions(Symbol symbol, List<Usage> bindingUsages, Map<Tree, Symbol> symbolsByDeclarationTrees) {
+    Set<Symbol> alternativeDefinitions = new HashSet<>();
+    for (Usage bindingUsage : bindingUsages) {
+      switch (bindingUsage.kind()) {
+        case FUNC_DECLARATION:
+          FunctionDef functionDef = (FunctionDef) bindingUsage.tree().parent();
+          FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, symbol.fullyQualifiedName(), pythonFile);
+          alternativeDefinitions.add(functionSymbol);
+          symbolsByDeclarationTrees.put(bindingUsage.tree(), functionSymbol);
+          break;
+        case CLASS_DECLARATION:
+          ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbol.name(), symbol.fullyQualifiedName());
+          ClassDef classDef = (ClassDef) bindingUsage.tree().parent();
+          resolveTypeHierarchy(classDef, classSymbol);
+          Scope classScope = scopesByRootTree.get(classDef);
+          classSymbol.addMembers(getClassMembers(classScope.symbolsByName, classScope.instanceAttributesByName));
+          alternativeDefinitions.add(classSymbol);
+          symbolsByDeclarationTrees.put(bindingUsage.tree(), classSymbol);
+          break;
+        default:
+          SymbolImpl alternativeSymbol = new SymbolImpl(symbol.name(), symbol.fullyQualifiedName());
+          alternativeDefinitions.add(alternativeSymbol);
+          symbolsByDeclarationTrees.put(bindingUsage.tree(), alternativeSymbol);
+      }
+    }
+    return alternativeDefinitions;
   }
 
   private void addSymbolsToTree(FileInputImpl fileInput) {

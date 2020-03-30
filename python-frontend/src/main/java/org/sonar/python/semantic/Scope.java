@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -65,13 +66,7 @@ class Scope {
     SymbolImpl symbol;
     Symbol typeShedSymbol = typeShedSymbols.get(name);
     if (typeShedSymbol != null) {
-      if (typeShedSymbol.kind() == Symbol.Kind.CLASS) {
-        symbol = ((ClassSymbolImpl) typeShedSymbol).copyWithoutUsages();
-      } else if (typeShedSymbol.kind() == Symbol.Kind.FUNCTION) {
-        symbol = ((FunctionSymbolImpl) typeShedSymbol).copyWithoutUsages();
-      } else {
-        symbol = new SymbolImpl(typeShedSymbol.name(), typeShedSymbol.fullyQualifiedName());
-      }
+      symbol = ((SymbolImpl) typeShedSymbol).copyWithoutUsages();
     } else {
       symbol = new SymbolImpl(name, name);
     }
@@ -116,9 +111,9 @@ class Scope {
   }
 
   private static Symbol copySymbol(String symbolName, Symbol symbol, Map<String, Symbol> globalSymbolsByFQN) {
-    if (symbol.kind() == Symbol.Kind.FUNCTION) {
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
-    } else if (symbol.kind() == Symbol.Kind.CLASS) {
+    } else if (symbol.is(Symbol.Kind.CLASS)) {
       ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, symbol.fullyQualifiedName());
       for (Symbol originalSymbol : ((ClassSymbol) symbol).superClasses()) {
         Symbol globalSymbol = globalSymbolsByFQN.get(originalSymbol.fullyQualifiedName());
@@ -133,6 +128,11 @@ class Scope {
         .map(m -> ((SymbolImpl) m).copyWithoutUsages())
         .collect(Collectors.toList()));
       return classSymbol;
+    } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+      Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).symbols().stream()
+        .map(s -> copySymbol(s.name(), s, globalSymbolsByFQN))
+        .collect(Collectors.toSet());
+      return AmbiguousSymbolImpl.create(alternativeSymbols);
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
   }
@@ -218,5 +218,12 @@ class Scope {
       symbolsByName.put(symbolName, classSymbol);
       classSymbol.addUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION);
     }
+  }
+
+  void replaceSymbolWithAmbiguousSymbol(Symbol symbol, AmbiguousSymbol ambiguousSymbol) {
+    symbols.remove(symbol);
+    symbols.add(ambiguousSymbol);
+    symbolsByName.remove(symbol.name());
+    symbolsByName.put(symbol.name(), ambiguousSymbol);
   }
 }
