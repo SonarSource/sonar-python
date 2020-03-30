@@ -97,6 +97,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Map<Tree, Scope> scopesByRootTree;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
+  private static final List<String> BASE_MODULES = Arrays.asList("", "typing");
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -271,7 +272,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       createScope(tree, null);
       enterScope(tree);
       moduleScope = currentScope();
-      if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+      if (!SymbolUtils.isTypeShedFile(pythonFile) || !BASE_MODULES.contains(pythonFile.fileName())) {
         Map<String, Symbol> typeShedSymbols = TypeShed.builtinSymbols();
         for (String name : BuiltinSymbols.all()) {
           currentScope().createBuiltinSymbol(name, typeShedSymbols);
@@ -362,7 +363,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         : null;
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
-        if (importedModuleSymbols != null) {
+        if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
+          importedModuleSymbols = TypeShed.standardLibrarySymbols(moduleName);
+        }
+        if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
           currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, globalSymbolsByFQN);
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
         } else {
@@ -385,7 +389,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         }
         Name alias = module.alias();
         if (fromModuleName != null) {
-          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, globalSymbolsByFQN);
+          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, fromModuleName, globalSymbolsByFQN);
         } else if (alias != null) {
           String fullName = module.dottedName().names().stream().map(Name::name).collect(Collectors.joining("."));
           currentScope().addModuleSymbol(alias, fullName, globalSymbolsByModuleName, globalSymbolsByFQN);
@@ -531,7 +535,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void createScope(Tree tree, @Nullable Scope parent) {
-      scopesByRootTree.put(tree, new Scope(parent, tree, pythonFile));
+      scopesByRootTree.put(tree, new Scope(parent, tree, pythonFile, fullyQualifiedModuleName));
     }
 
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {

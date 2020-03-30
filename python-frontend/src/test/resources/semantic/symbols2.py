@@ -162,3 +162,7 @@ def parameter_default_value():
 def assignment_expression():
   if (b:=foo()) != 42:
     bar(b)
+
+def importing_stdlib():
+  import math
+  math.acos(0)

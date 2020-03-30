@@ -39,11 +39,13 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 
 class Scope {
 
   final Tree rootTree;
   private PythonFile pythonFile;
+  private String fullyQualifiedModuleName;
   private final Scope parent;
   final Map<String, Symbol> symbolsByName = new HashMap<>();
   private final Set<Symbol> symbols = new HashSet<>();
@@ -52,10 +54,11 @@ class Scope {
   private final Set<String> nonlocalNames = new HashSet<>();
   final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
 
-  Scope(@Nullable Scope parent, Tree rootTree, PythonFile pythonFile) {
+  Scope(@Nullable Scope parent, Tree rootTree, PythonFile pythonFile, String fullyQualifiedModuleName) {
     this.parent = parent;
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
+    this.fullyQualifiedModuleName = fullyQualifiedModuleName;
   }
 
   Set<Symbol> symbols() {
@@ -145,13 +148,24 @@ class Scope {
       moduleExportedSymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol, globalSymbolsByFQN)));
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
+    } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
+      Set<Symbol> standardLibrarySymbols = TypeShed.standardLibrarySymbols(fullyQualifiedName);
+      if (!standardLibrarySymbols.isEmpty()) {
+        SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
+        standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol, globalSymbolsByFQN)));
+        this.symbols.add(moduleSymbol);
+        symbolsByName.put(symbolName, moduleSymbol);
+      }
     }
     addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
   }
 
-  void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, Map<String, Symbol> globalSymbolsByFQN) {
+  void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, String fromModuleName, Map<String, Symbol> globalSymbolsByFQN) {
     String symbolName = nameTree.name();
     Symbol globalSymbol = globalSymbolsByFQN.get(fullyQualifiedName);
+    if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
+      globalSymbol = TypeShed.standardLibrarySymbol(fromModuleName, fullyQualifiedName);
+    }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
       addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
     } else {

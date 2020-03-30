@@ -1,4 +1,7 @@
 import collections
+from math import acos
+from keyword import iskeyword
+import pwd
 
 class A:
     pass
@@ -46,3 +49,17 @@ def f():
     if 42 != ClassWithNe(): pass
     if set([1, 2]) == frozenset([1, 2]): pass
     if {} == collections.OrderedDict(): pass
+
+def stdlib():
+    if acos(1) == "0": pass # Noncompliant
+    if math.ceil(7.9) == "8": pass # FN: ceil defined twice in math for python 2 & python 3
+    if math.pow(2,3) == "8": pass # FN pow defined in builtin as well as math
+    if iskeyword("something") == "1": pass # Noncompliant
+    tuple = "name", "passwd", 123, 456, "gecos", "dir", "shell"
+    passwd = pwd.struct_passwd(tuple)
+    if passwd == "something": pass # Noncompliant
+    passwd_2 = pwd.struct_passwd(tuple)
+    if passwd == passwd_2: pass # OK
+    if passwd == pwd.getpwuid(1): pass # OK
+    if 42 == pwd.getpwuid(1): pass # FN, unresolved type hierarchy
+    if pwd.getpwall() == 42: pass # Noncompliant

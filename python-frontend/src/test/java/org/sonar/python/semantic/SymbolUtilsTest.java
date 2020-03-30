@@ -221,6 +221,29 @@ public class SymbolUtilsTest {
   }
 
   @Test
+  public void global_symbols_stdlib_imports() {
+    FileInput tree = parseWithoutSymbols(
+      "from time import time",
+      "from threading import Thread",
+      "from datetime import TimezoneMixin as tz",
+      "import unknown",
+      "from mod import *"
+    );
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "", pythonFile("mod.py"));
+    assertThat(globalSymbols).isEmpty();
+  }
+
+  @Test
+  public void module_importing_itself() {
+    FileInput tree = parseWithoutSymbols(
+      "from mod import *",
+      "from mod import smth"
+    );
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "", pythonFile("mod.py"));
+    assertThat(globalSymbols).isEmpty();
+  }
+
+  @Test
   public void path_of() throws IOException, URISyntaxException {
     PythonFile pythonFile = Mockito.mock(PythonFile.class);
     URI uri = Files.createTempFile("foo.py", "py").toUri();
