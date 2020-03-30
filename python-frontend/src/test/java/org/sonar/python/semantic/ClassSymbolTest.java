@@ -150,8 +150,8 @@ public class ClassSymbolTest {
       "C = \"hello\"");
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     Symbol symbol = classDef.name().symbol();
-    assertThat(symbol instanceof ClassSymbol).isTrue();
-    assertThat(symbol.kind().equals(Symbol.Kind.OTHER)).isTrue();
+    assertThat(symbol instanceof ClassSymbol).isFalse();
+    assertThat(symbol.kind().equals(Symbol.Kind.AMBIGUOUS)).isTrue();
   }
 
   @Test

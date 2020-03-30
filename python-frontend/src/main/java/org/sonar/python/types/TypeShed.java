@@ -41,6 +41,7 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
+import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
@@ -66,23 +67,30 @@ public class TypeShed {
       for (Symbol globalVariable : fileInput.globalVariables()) {
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
       }
+      TypeShed.builtins = Collections.unmodifiableMap(builtins);
       BaseTreeVisitor visitor = new BaseTreeVisitor() {
         @Override
         public void visitFunctionDef(FunctionDef functionDef) {
-          TypeAnnotation returnTypeAnnotation = functionDef.returnTypeAnnotation();
-          Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
-            if (symbol.kind() == Symbol.Kind.FUNCTION && returnTypeAnnotation != null) {
-              FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-              functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation, builtins));
-            }
-          });
+          Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> setDeclaredReturnType(symbol, functionDef));
           super.visitFunctionDef(functionDef);
         }
       };
       fileInput.accept(visitor);
-      TypeShed.builtins = Collections.unmodifiableMap(builtins);
     }
     return builtins;
+  }
+
+  private static void setDeclaredReturnType(Symbol symbol, FunctionDef functionDef) {
+    TypeAnnotation returnTypeAnnotation = functionDef.returnTypeAnnotation();
+    if (returnTypeAnnotation == null) {
+      return;
+    }
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
+      functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation, builtins));
+    } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+      Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setDeclaredReturnType(functionSymbol, functionDef));
+    }
   }
 
   // visible for testing

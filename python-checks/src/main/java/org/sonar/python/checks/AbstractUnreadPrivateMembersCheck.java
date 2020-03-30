@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Optional;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -37,9 +38,16 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
     context.registerSyntaxNodeConsumer(CLASSDEF, ctx -> {
       ClassDef classDef = (ClassDef) ctx.syntaxNode();
       Optional.ofNullable(getClassSymbolFromDef(classDef)).ifPresent(classSymbol -> classSymbol.declaredMembers().stream()
-        .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && s.kind() == kind() && isNeverRead(s))
+        .filter(s -> s.name().startsWith(memberPrefix) && !s.name().endsWith("__") && equalsToKind(s) && isNeverRead(s))
         .forEach(symbol -> reportIssue(ctx, symbol)));
     });
+  }
+
+  private boolean equalsToKind(Symbol symbol) {
+    if (symbol.kind().equals(Symbol.Kind.AMBIGUOUS)) {
+      return ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(s -> s.kind() == kind());
+    }
+    return symbol.kind() == kind();
   }
 
   private void reportIssue(SubscriptionContext ctx, Symbol symbol) {

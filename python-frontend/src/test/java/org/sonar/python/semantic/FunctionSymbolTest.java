@@ -117,7 +117,7 @@ public class FunctionSymbolTest {
     );
     FunctionDef functionDef = (FunctionDef) tree.statements().statements().get(0);
     Symbol symbol = functionDef.name().symbol();
-    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.OTHER);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
 
     tree = parse(
       "fn = 42",
@@ -125,7 +125,7 @@ public class FunctionSymbolTest {
     );
     functionDef = (FunctionDef) tree.statements().statements().get(1);
     symbol = functionDef.name().symbol();
-    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.OTHER);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
 
     tree = parse(
       "def fn(p1, p2): pass",
@@ -133,7 +133,7 @@ public class FunctionSymbolTest {
     );
     functionDef = (FunctionDef) tree.statements().statements().get(0);
     symbol = functionDef.name().symbol();
-    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.OTHER);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
   }
 
   @Test
