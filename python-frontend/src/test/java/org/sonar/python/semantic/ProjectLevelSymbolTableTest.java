@@ -326,4 +326,26 @@ public class ProjectLevelSymbolTableTest {
     assertThat(classB.superClasses()).hasSize(1);
     assertThat(classB.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
   }
+
+  @Test
+  public void ambiguous_imported_symbol() {
+    Set<Symbol> modSymbols = parse(
+      new SymbolTableBuilder("", pythonFile("mod")),
+      "@overload",
+      "def foo(a, b): ...",
+      "@overload",
+      "def foo(a, b, c): ..."
+    ).globalVariables();
+
+    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", modSymbols);
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      "from mod import foo"
+    );
+    Symbol importedFooSymbol = tree.globalVariables().iterator().next();
+    assertThat(importedFooSymbol.name()).isEqualTo("foo");
+    assertThat(importedFooSymbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
+    assertThat(importedFooSymbol.fullyQualifiedName()).isEqualTo("mod.foo");
+    assertThat(importedFooSymbol.usages()).hasSize(1);
+  }
 }

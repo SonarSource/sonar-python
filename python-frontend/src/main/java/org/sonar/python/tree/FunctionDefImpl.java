@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -59,6 +60,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private final boolean isMethodDefinition;
   private final StringLiteral docstring;
   private Set<Symbol> symbols = new HashSet<>();
+  private FunctionSymbol functionSymbol;
 
   public FunctionDefImpl(List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
                          Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
@@ -168,5 +170,14 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   public List<Tree> computeChildren() {
     return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  public void setFunctionSymbol(FunctionSymbol functionSymbol) {
+    this.functionSymbol = functionSymbol;
+  }
+
+  @CheckForNull
+  public FunctionSymbol functionSymbol() {
+    return functionSymbol;
   }
 }
