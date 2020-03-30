@@ -31,6 +31,8 @@ public interface Symbol {
   @CheckForNull
   String fullyQualifiedName();
 
+  boolean is(Kind... kinds);
+
   Kind kind();
 
   enum Kind {
