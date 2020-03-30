@@ -37,6 +37,7 @@ def f():
     if 'a' == True: pass # Noncompliant
     if 'a' == 42.42: pass # Noncompliant
     if 'a' == 42j: pass # Noncompliant
+    if 'foo'.partition('f') == "42": pass # Noncompliant
     if 1 == True: pass
     if ClassWithEq() == 42: pass
     if ClassWithEq() != 42: pass
