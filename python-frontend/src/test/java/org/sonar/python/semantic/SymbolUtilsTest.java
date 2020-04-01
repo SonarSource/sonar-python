@@ -213,6 +213,14 @@ public class SymbolUtilsTest {
   }
 
   @Test
+  public void class_having_itself_as_superclass_should_not_trigger_error() {
+    FileInput fileInput = parseWithoutSymbols("class A(A): pass");
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(fileInput, "mod", pythonFile("mod.py"));
+    ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
+    assertThat(a.superClasses()).containsExactly(a);
+  }
+
+  @Test
   public void path_of() throws IOException, URISyntaxException {
     PythonFile pythonFile = Mockito.mock(PythonFile.class);
     URI uri = Files.createTempFile("foo.py", "py").toUri();
