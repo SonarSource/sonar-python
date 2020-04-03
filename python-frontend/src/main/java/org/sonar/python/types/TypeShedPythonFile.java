@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonVersion;
 
 public class TypeShedPythonFile implements PythonFile {
 
@@ -61,5 +62,10 @@ public class TypeShedPythonFile implements PythonFile {
   @Override
   public URI uri() {
     return null;
+  }
+
+  @Override
+  public PythonVersion pythonVersion() {
+    return PythonVersion.allVersions();
   }
 }

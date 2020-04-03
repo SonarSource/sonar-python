@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.PythonVersion;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -40,16 +41,22 @@ public class SonarQubePythonFileTest {
   @Test
   public void known_file() throws Exception {
     when(inputFile.contents()).thenReturn("Hello 6.2!");
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile, PythonVersion.allVersions());
     assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
     assertThat(pythonFile.toString()).isEqualTo(inputFile.toString());
     assertThat(pythonFile.uri()).isEqualTo(inputFile.uri());
   }
 
   @Test
+  public void python_version() {
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile, PythonVersion.fromString("> 3"));
+    assertThat(pythonFile.pythonVersion().isPython3Only()).isTrue();
+  }
+
+  @Test
   public void unknown_file() throws Exception {
     when(inputFile.contents()).thenThrow(new FileNotFoundException());
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile, PythonVersion.allVersions());
     thrown.expect(IllegalStateException.class);
     pythonFile.content();
   }
