@@ -82,7 +82,9 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
           PreciseIssue issue = ctx.addIssue(exceptionExpression, "Catch this exception only once; it is already handled by a previous except clause.");
           handledExceptions.forEach(h -> issue.secondary(h, null));
         }
-        caughtInExceptClause.put(classSymbol.fullyQualifiedName(), exceptionExpression);
+      }
+      if (symbol != null) {
+        caughtInExceptClause.put(symbol.fullyQualifiedName(), exceptionExpression);
       }
     }
   }
