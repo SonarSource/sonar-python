@@ -17,7 +17,7 @@ def within_tuple():
     except (ImportError, OSError) as e:
 #           ^^^^^^^^^^^>
         print(e)
-    except (ModuleNotFoundError, FileExistsError) as e: # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
+    except (ModuleNotFoundError, TypeError) as e: # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
 #           ^^^^^^^^^^^^^^^^^^^
         print(e)
 
@@ -83,13 +83,13 @@ def fn_Exception_not_a_super_class():
 #        ^^^^^^^^^^^^
     print("Never executed")
 
-def fn_missing_hierarchy():
+def oserror_hierarchy():
     try:
         raise FileExistsError()
     except (OSError, RuntimeError) as e:  # Secondary x2
     #FileExistsError is a subclass of OSError
         print(e)
-    except FileExistsError as e:  # FN missing type hierarchy
+    except FileExistsError as e:  # Noncompliant
         print("Never executed")
-    except FileNotFoundError as e:  # FN missing type hierarchy
+    except FileNotFoundError as e:  # Noncompliant
         print("Never executed")
