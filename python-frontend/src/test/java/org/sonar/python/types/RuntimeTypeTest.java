@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collections;
 import org.junit.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
@@ -122,6 +123,24 @@ public class RuntimeTypeTest {
     assertThat(aType.equals(new RuntimeType(b))).isFalse();
     assertThat(aType.equals(a)).isFalse();
     assertThat(aType.equals(null)).isFalse();
+
+    ClassSymbolImpl aWithSuperClass = new ClassSymbolImpl("a", "a");
+    aWithSuperClass.addSuperClass(b);
+    RuntimeType aTypeWithSuperClass = new RuntimeType(aWithSuperClass);
+    ClassSymbolImpl aWithSuperClass2 = new ClassSymbolImpl("a", "a");
+    aWithSuperClass2.addSuperClass(b);
+    RuntimeType aTypeWithSuperClass2 = new RuntimeType(aWithSuperClass2);
+    assertThat(aTypeWithSuperClass).isNotEqualTo(aType);
+    assertThat(aTypeWithSuperClass).isEqualTo(aTypeWithSuperClass2);
+
+    ClassSymbolImpl aWithMember = new ClassSymbolImpl("a", "a");
+    aWithMember.addMembers(Collections.singleton(new SymbolImpl("fn", "a.fn")));
+    RuntimeType aTypeWithMember = new RuntimeType(aWithMember);
+    ClassSymbolImpl aWithMember2 = new ClassSymbolImpl("a", "a");
+    aWithMember2.addMembers(Collections.singleton(new SymbolImpl("fn", "a.fn")));
+    RuntimeType aTypeWithMember2 = new RuntimeType(aWithMember2);
+    assertThat(aTypeWithMember).isNotEqualTo(aType);
+    assertThat(aTypeWithMember).isEqualTo(aTypeWithMember2);
   }
 
   @Test

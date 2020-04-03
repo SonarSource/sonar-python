@@ -19,12 +19,14 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -96,14 +98,27 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   public InferredType type() {
     Symbol calleeSymbol = calleeSymbol();
     if (calleeSymbol != null) {
-      if (calleeSymbol.kind() == Symbol.Kind.CLASS) {
-        ClassSymbol classSymbol = (ClassSymbol) calleeSymbol;
-        return InferredTypes.runtimeType(classSymbol);
+      return getType(calleeSymbol);
+    }
+    return InferredTypes.anyType();
+  }
+
+  private static InferredType getType(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.CLASS)) {
+      ClassSymbol classSymbol = (ClassSymbol) symbol;
+      return InferredTypes.runtimeType(classSymbol);
+    }
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
+      return functionSymbol.declaredReturnType();
+    }
+    if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+      ArrayList<Symbol> symbols = new ArrayList<>(((AmbiguousSymbol) symbol).alternatives());
+      InferredType unionType = getType(symbols.get(0));
+      for (int i = 1; i < symbols.size(); i++) {
+        unionType = InferredTypes.or(unionType, getType(symbols.get(i)));
       }
-      if (calleeSymbol.kind() == Symbol.Kind.FUNCTION) {
-        FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) calleeSymbol;
-        return functionSymbol.declaredReturnType();
-      }
+      return unionType;
     }
     return InferredTypes.anyType();
   }

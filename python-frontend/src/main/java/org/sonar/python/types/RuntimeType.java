@@ -21,6 +21,8 @@ package org.sonar.python.types;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -28,6 +30,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 class RuntimeType implements InferredType {
 
   private final ClassSymbol typeClass;
+  private Set<String> typeClassSuperClassesFQN = null;
+  private Set<String> typeClassMembersFQN = null;
 
   RuntimeType(ClassSymbol typeClass) {
     this.typeClass = typeClass;
@@ -76,12 +80,28 @@ class RuntimeType implements InferredType {
       return false;
     }
     RuntimeType that = (RuntimeType) o;
-    return Objects.equals(typeClass.fullyQualifiedName(), that.typeClass.fullyQualifiedName());
+    return Objects.equals(typeClass.fullyQualifiedName(), that.typeClass.fullyQualifiedName())
+      && Objects.equals(typeClassSuperClassesFQN(), that.typeClassSuperClassesFQN())
+      && Objects.equals(typeClassMembersFQN(), that.typeClassMembersFQN());
+  }
+
+  private Set<String> typeClassSuperClassesFQN() {
+    if (typeClassSuperClassesFQN == null) {
+      typeClassSuperClassesFQN = typeClass.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
+    }
+    return typeClassSuperClassesFQN;
+  }
+
+  private Set<String> typeClassMembersFQN() {
+    if (typeClassMembersFQN == null) {
+      typeClassMembersFQN = typeClass.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
+    }
+    return typeClassMembersFQN;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(typeClass.fullyQualifiedName());
+    return Objects.hash(typeClass.fullyQualifiedName(), typeClassSuperClassesFQN(), typeClassMembersFQN());
   }
 
   @Override
