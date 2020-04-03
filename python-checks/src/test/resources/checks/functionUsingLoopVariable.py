@@ -60,8 +60,9 @@ def variable_ref_and_func_ref():
   mylist = []
   for j in range(5):  # Secondary location on "j", it is the only code updating j.
 #     ^> {{Assignment in the loop}}
-    mylist.append(lambda: j)  # Noncompliant {{Pass this variable as a parameter with a default value.}}
+    mylist.append(lambda: j)  # Noncompliant {{Add a parameter to the parent lambda function and use variable "j" as its default value; The value of "j" might change at the next loop iteration.}}
 #                         ^
+#                 ^^^^^^@-1< {{Lambda capturing the variable}}
     def func():
       return j  # Noncompliant
     mylist.append(func)
@@ -71,7 +72,7 @@ def list_comprehension_lambda_referenced():
   """Referencing a variable updated in the enclosing comprehension and returning a reference to the function is suspicious."""
   # Secondary location on "j" of "for j"
   return [lambda: j for j in range(5)]  # Noncompliant
-#                 ^     ^<
+#         ^^^^^^> ^     ^<
 
 
 def list_comprehension_lambda_called():
@@ -91,8 +92,8 @@ def all_iterating_variable():
     mylist.append(lambda: j)  # Noncompliant
 
     def func1():
-#       ^^^^^> {{Function definition}}
-      return computed # Noncompliant {{Pass this variable as a parameter with a default value.}}
+#       ^^^^^> {{Function capturing the variable}}
+      return computed # Noncompliant {{Add a parameter to function "func1" and use variable "computed" as its default value;The value of "computed" might change at the next loop iteration.}}
 #            ^^^^^^^^
     mylist.append(func1)
 
@@ -150,6 +151,7 @@ def lambda_variable_called_outside_the_loop():
     if j == 2:
       lamb = lambda: j  # Noncompliant
 #                    ^
+#            ^^^^^^@-1<
   print(lamb())
 
 
@@ -187,3 +189,65 @@ class ClassEnclosingScope:
 for j in range(10):
   def func():
     return j # Noncompliant
+
+
+def no_issue_when_using_nonlocal():
+    for i in range(10):
+        var = None
+        def foo():
+            nonlocal var, i  # OK
+            var = 42
+    foo()
+
+   for i in range(10):
+           var = None
+           def foo2():
+               global var, i  # OK
+               var = 42
+       foo()
+
+
+def no_issue_when_using_default_value():
+    """
+    The best way to use a loop variable in a function
+    s to pass it as a default value.
+    """
+    for i in range(10):
+        def nested1(i=i):  # Ok
+            return i
+
+        def nested2(i=[i]):
+            return i
+
+        def nested2(i=i.foo):
+            return i
+
+        def nested2(i=i + 1):
+            return i
+
+
+def no_issue_for_decorators():
+    for i in range(10):
+        decorator = lambda func: func
+        @decorator  # OK
+        def foo():
+            pass
+
+        decorator2 = lambda param: lambda func: func
+        @decorator2(i)  # OK
+        def bar():
+            pass
+
+def comprehension_lambda_referenced(value):
+    """
+    Referencing a variable updated in the enclosing
+    comprehension and returning a reference to the function is suspicious.
+    """
+    if value == "list":
+        return [lambda: j for j in range(5)]  # Noncompliant
+    elif value == "set":
+        return {lambda: j for j in range(5)}  # Noncompliant
+    elif value == "dict":
+        return {j: lambda: j for j in range(5)}  # Noncompliant
+    return 42
+
