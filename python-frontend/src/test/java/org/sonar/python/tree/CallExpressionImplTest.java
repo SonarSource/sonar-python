@@ -69,6 +69,25 @@ public class CallExpressionImplTest {
     InferredType firstClassType = InferredTypes.runtimeType(iterator.next());
     InferredType secondClassType = InferredTypes.runtimeType(iterator.next());
     assertThat(call.type()).isEqualTo(InferredTypes.or(firstClassType, secondClassType));
+    assertThat(call.type()).isEqualTo(firstClassType);
+    assertThat(call.type()).isEqualTo(secondClassType);
+
+    fileInput = parse(
+      "class Base: ...",
+      "class A(Base): ...",
+      "class A: ...",
+      "A()");
+
+    classDef = getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+    call = getLastDescendant(fileInput, t -> t.is(Tree.Kind.CALL_EXPR));
+
+    ambiguousSymbol = (AmbiguousSymbol) classDef.name().symbol();
+    iterator = ambiguousSymbol.alternatives().iterator();
+    firstClassType = InferredTypes.runtimeType(iterator.next());
+    secondClassType = InferredTypes.runtimeType(iterator.next());
+    assertThat(call.type()).isEqualTo(InferredTypes.or(firstClassType, secondClassType));
+    assertThat(call.type()).isNotEqualTo(firstClassType);
+    assertThat(call.type()).isNotEqualTo(secondClassType);
   }
 
   @Test
