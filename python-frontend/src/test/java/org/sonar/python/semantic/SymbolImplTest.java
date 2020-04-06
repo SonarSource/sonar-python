@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,6 +45,24 @@ public class SymbolImplTest {
     assertThat(foo.is(Symbol.Kind.FUNCTION)).isTrue();
     assertThat(foo.is(Symbol.Kind.OTHER)).isFalse();
     assertThat(foo.is(Symbol.Kind.OTHER, Symbol.Kind.FUNCTION)).isTrue();
+  }
+
+  @Test
+  public void removeUsages() {
+    Symbol x = symbols("x = 42").get("x");
+    assertThat(x.usages()).isNotEmpty();
+    ((SymbolImpl) x).removeUsages();
+    assertThat(x.usages()).isEmpty();
+
+    FileInput fileInput = parse(
+      "obj = {}",
+      "obj.foo");
+    QualifiedExpression qualifiedExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Tree.Kind.QUALIFIED_EXPR));
+    assertThat(qualifiedExpr.symbol().usages()).isNotEmpty();
+
+    Symbol obj = ((HasSymbol) qualifiedExpr.qualifier()).symbol();
+    ((SymbolImpl) obj).removeUsages();
+    assertThat(qualifiedExpr.symbol().usages()).isEmpty();
   }
 
   private Map<String, Symbol> symbols(String... code) {

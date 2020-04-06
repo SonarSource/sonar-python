@@ -106,3 +106,5 @@ class EdgeCase:
     @property
     def bar(self):
         return self._foo
+
+    p = property({}.__getitem__)

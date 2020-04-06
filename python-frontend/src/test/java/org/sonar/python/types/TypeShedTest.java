@@ -20,12 +20,10 @@
 package org.sonar.python.types;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 
@@ -38,7 +36,8 @@ public class TypeShedTest {
     ClassSymbol intClass = TypeShed.typeShedClass("int");
     assertThat(intClass.superClasses()).isEmpty();
     assertThat(intClass.hasUnresolvedTypeHierarchy()).isFalse();
-
+    assertThat(intClass.usages()).isEmpty();
+    assertThat(intClass.declaredMembers()).allMatch(member -> member.usages().isEmpty());
     assertThat(TypeShed.typeShedClass("bool").superClasses()).containsExactly(intClass);
   }
 
@@ -61,6 +60,7 @@ public class TypeShedTest {
   @Test
   public void typing_module() {
     Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
     assertThat(symbols.get("Awaitable").kind()).isEqualTo(Symbol.Kind.CLASS);
     // overlap btw python2 and python3
@@ -74,11 +74,14 @@ public class TypeShedTest {
     assertThat(acosSymbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
     assertThat(TypeShed.standardLibrarySymbol("math", "math.acos")).isSameAs(acosSymbol);
+    assertThat(mathSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
     Map<String, Symbol> threadingSymbols = TypeShed.standardLibrarySymbols("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(threadingSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
     Map<String, Symbol> imaplibSymbols = TypeShed.standardLibrarySymbols("imaplib").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     assertThat(imaplibSymbols).isNotEmpty();
+    assertThat(imaplibSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
   }
 }

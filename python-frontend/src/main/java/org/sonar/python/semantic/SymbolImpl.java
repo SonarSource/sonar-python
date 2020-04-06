@@ -124,4 +124,9 @@ public class SymbolImpl implements Symbol {
     return new SymbolImpl(name(), fullyQualifiedName);
   }
 
+  public void removeUsages() {
+    usages.clear();
+    childrenSymbolByName.values().forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
+  }
+
 }

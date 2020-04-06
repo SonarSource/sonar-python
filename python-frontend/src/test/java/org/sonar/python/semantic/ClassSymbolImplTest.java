@@ -21,10 +21,16 @@ package org.sonar.python.semantic;
 
 import java.util.Collections;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.sonar.python.PythonTestUtils.parse;
 
 public class ClassSymbolImplTest {
 
@@ -164,5 +170,21 @@ public class ClassSymbolImplTest {
 
     assertThat(c.isOrExtends("d")).isFalse();
     assertThat(c.isOrExtends((String) null)).isFalse();
+  }
+
+  @Test
+  public void removeUsages() {
+    FileInput fileInput = parse(
+      "class Base: ...",
+      "class A(Base):",
+      "  def meth(): ..."
+    );
+
+    ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Tree.Kind.CLASSDEF));
+    ClassSymbol symbol = (ClassSymbol) classDef.name().symbol();
+    ((SymbolImpl) symbol).removeUsages();
+    assertThat(symbol.usages()).isEmpty();
+    assertThat(symbol.declaredMembers()).allMatch(member -> member.usages().isEmpty());
+    assertThat(symbol.superClasses()).allMatch(superClass -> superClass.usages().isEmpty());
   }
 }

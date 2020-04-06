@@ -57,6 +57,20 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
+  public void remove_usages() {
+    Symbol fn = symbols(
+      "from typing import overload",
+      "@overload",
+      "def fn(a, b): ...",
+      "@overload",
+      "def fn(a): ..."
+    ).get("fn");
+    ((SymbolImpl) fn).removeUsages();
+    assertThat(fn.usages()).isEmpty();
+    assertThat(((AmbiguousSymbolImpl) fn).alternatives()).allMatch(symbol -> symbol.usages().isEmpty());
+  }
+
+  @Test
   public void redefined_class() {
     Symbol a = symbols(
       "class A:",
