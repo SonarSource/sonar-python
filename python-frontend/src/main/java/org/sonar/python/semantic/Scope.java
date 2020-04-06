@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -81,11 +82,19 @@ class Scope {
     symbolsByName.put(name, symbol);
   }
 
-  void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols, Map<String, Symbol> globalSymbolsByFQN) {
+  void createSymbolsFromWildcardImport(Set<Symbol> importedSymbols, ImportFrom importFrom, Map<String, Symbol> globalSymbolsByFQN) {
     importedSymbols.forEach(symbol -> {
       Symbol importedSymbol = copySymbol(symbol.name(), symbol, globalSymbolsByFQN);
-      symbols.add(importedSymbol);
-      symbolsByName.put(symbol.name(), importedSymbol);
+      if (!isExistingSymbol(importedSymbol.name())) {
+        symbols.add(importedSymbol);
+        symbolsByName.put(symbol.name(), importedSymbol);
+      } else {
+        SymbolImpl originalSymbol = resolve(symbol.name());
+        if (originalSymbol != null) {
+          resetSymbolInfo(importedSymbol.fullyQualifiedName(), originalSymbol);
+          originalSymbol.addUsage(importFrom, Usage.Kind.IMPORT);
+        }
+      }
     });
   }
 
@@ -189,16 +198,20 @@ class Scope {
     }
     SymbolImpl symbol = resolve(symbolName);
     if (symbol != null) {
-      if (!Symbol.Kind.OTHER.equals(symbol.kind())) {
-        symbol.setKind(Symbol.Kind.OTHER);
-      }
-      if (fullyQualifiedName != null && !fullyQualifiedName.equals(symbol.fullyQualifiedName)) {
-        symbol.fullyQualifiedName = null;
-      }
-      if (fullyQualifiedName == null && symbol.fullyQualifiedName != null) {
-        symbol.fullyQualifiedName = null;
-      }
+      resetSymbolInfo(fullyQualifiedName, symbol);
       symbol.addUsage(nameTree, kind);
+    }
+  }
+
+  private static void resetSymbolInfo(@Nullable String fullyQualifiedName, SymbolImpl symbol) {
+    if (!Symbol.Kind.OTHER.equals(symbol.kind())) {
+      symbol.setKind(Symbol.Kind.OTHER);
+    }
+    if (fullyQualifiedName != null && !fullyQualifiedName.equals(symbol.fullyQualifiedName)) {
+      symbol.fullyQualifiedName = null;
+    }
+    if (fullyQualifiedName == null && symbol.fullyQualifiedName != null) {
+      symbol.fullyQualifiedName = null;
     }
   }
 

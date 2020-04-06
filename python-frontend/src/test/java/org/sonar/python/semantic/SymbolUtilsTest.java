@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -202,6 +203,25 @@ public class SymbolUtilsTest {
     assertThat(dSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     assertThat(((ClassSymbol) dSymbol).superClasses()).hasSize(1);
     assertThat(((ClassSymbol) dSymbol).superClasses().get(0).fullyQualifiedName()).isEqualTo("mod2.B");
+  }
+
+  @Test
+  public void symbol_duplicated_by_wildcard_import() {
+    FileInput tree = parseWithoutSymbols(
+      "def nlargest(n, iterable): ...",
+      "from _heapq import *",
+      "def nlargest(n, iterable, key=None): ..."
+    );
+    Set<Symbol> globalSymbols = SymbolUtils.globalSymbols(tree, "", pythonFile("mod.py"));
+    assertThat(globalSymbols).isEmpty();
+
+    tree = parseWithoutSymbols(
+      "nonlocal nlargest",
+      "from _heapq import *",
+      "def nlargest(n, iterable, key=None): ..."
+    );
+    globalSymbols = SymbolUtils.globalSymbols(tree, "", pythonFile("mod.py"));
+    assertThat(globalSymbols).isEmpty();
   }
 
   @Test
