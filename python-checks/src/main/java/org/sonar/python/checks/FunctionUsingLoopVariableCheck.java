@@ -33,6 +33,8 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -57,7 +59,8 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
   private static void checkFunctionLike(SubscriptionContext ctx) {
     FunctionLike functionLike = (FunctionLike) ctx.syntaxNode();
     Tree enclosingLoop = enclosingLoop(functionLike);
-    if(enclosingLoop == null || !enclosingLoop.is(Tree.Kind.WHILE_STMT, Tree.Kind.FOR_STMT, Tree.Kind.GENERATOR_EXPR, Tree.Kind.LIST_COMPREHENSION)) {
+    if (enclosingLoop == null || !enclosingLoop.is(Tree.Kind.WHILE_STMT, Tree.Kind.FOR_STMT, Tree.Kind.GENERATOR_EXPR, Tree.Kind.LIST_COMPREHENSION,
+      Tree.Kind.SET_COMPREHENSION, Tree.Kind.DICT_COMPREHENSION)) {
       return;
     }
     if (isReturnedOrCalledWithinLoop(functionLike, enclosingLoop)) {
@@ -70,32 +73,59 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
       for (Usage usage : symbol.usages()) {
         Tree usageTree = usage.tree();
         if (isUsedInFunctionLike(usageTree, functionLike) && !usage.isBindingUsage()) {
+          if (TreeUtils.firstAncestor(usageTree, t -> t.is(Tree.Kind.NONLOCAL_STMT, Tree.Kind.GLOBAL_STMT)) != null) {
+            // We don't raise any issue on the variable if it's part of a nonlocal or global statement
+            problematicUsages.clear();
+            break;
+          }
           problematicUsages.add(usageTree);
         }
         if (usage.isBindingUsage() && isWithinEnclosingLoop(usageTree, enclosingLoop)) {
           bindingUsages.add(usageTree);
         }
       }
-      reportIssue(ctx, functionLike, problematicUsages, bindingUsages);
+      reportIssue(ctx, functionLike, problematicUsages, bindingUsages, symbol.name());
     }
   }
 
-  private static void reportIssue(SubscriptionContext ctx, FunctionLike functionLike, List<Tree> problematicUsages, List<Tree> bindingUsages) {
+  private static void reportIssue(SubscriptionContext ctx, FunctionLike functionLike, List<Tree> problematicUsages, List<Tree> bindingUsages, String symbolName) {
     if (!problematicUsages.isEmpty() && !bindingUsages.isEmpty()) {
-      PreciseIssue issue = ctx.addIssue(problematicUsages.get(0), "Pass this variable as a parameter with a default value.")
-        .secondary(bindingUsages.get(bindingUsages.size() - 1), "Assignment in the loop");
+      PreciseIssue issue;
       if (functionLike.is(Tree.Kind.FUNCDEF)) {
-        issue.secondary(((FunctionDef) functionLike).name(), "Function definition");
+        issue = ctx.addIssue(problematicUsages.get(0), String.format("Add a parameter to function \"%s\" and use variable \"%s\" as its default value;" +
+          "The value of \"%s\" might change at the next loop iteration.", ((FunctionDef) functionLike).name().name(), symbolName, symbolName))
+          .secondary(((FunctionDef) functionLike).name(), "Function capturing the variable");
+      } else {
+        issue = ctx.addIssue(problematicUsages.get(0),
+          String.format("Add a parameter to the parent lambda function and use variable \"%s\" as its default value; " +
+            "The value of \"%s\" might change at the next loop iteration.", symbolName, symbolName))
+          .secondary(((LambdaExpression) functionLike).lambdaKeyword(), "Lambda capturing the variable");
+      }
+      for (Tree bindingUsage : bindingUsages) {
+        issue.secondary(bindingUsage, "Assignment in the loop");
       }
     }
   }
 
   private static boolean isUsedInFunctionLike(Tree usageTree, FunctionLike functionLike) {
     ParameterList parameters = functionLike.parameters();
-    if (parameters != null && parameters.nonTuple().stream().anyMatch(p -> usageTree.equals(p.defaultValue()))) {
+    if (parameters != null && isUsedAsDefaultValue(usageTree, parameters)) {
       return false;
     }
+    if (functionLike.is(Tree.Kind.FUNCDEF)) {
+      FunctionDef functionDef = (FunctionDef) functionLike;
+      for (Decorator decorator : functionDef.decorators()) {
+        if (TreeUtils.hasDescendant(decorator, t -> t.equals(usageTree))) {
+          return false;
+        }
+      }
+    }
     return TreeUtils.hasDescendant(functionLike, tree -> tree.equals(usageTree));
+  }
+
+  private static boolean isUsedAsDefaultValue(Tree usageTree, ParameterList parameters) {
+    return parameters.nonTuple().stream().anyMatch(p ->
+      p.defaultValue() != null && (usageTree.equals(p.defaultValue()) || TreeUtils.hasDescendant(p.defaultValue(), t -> t.equals(usageTree))));
   }
 
   private static boolean isWithinEnclosingLoop(Tree usageTree, Tree enclosingLoop) {
@@ -103,11 +133,13 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
   }
 
   private static Set<Symbol> getEnclosingScopeSymbols(Tree enclosingLoop) {
-    if (enclosingLoop.is(Tree.Kind.LIST_COMPREHENSION) || enclosingLoop.is(Tree.Kind.GENERATOR_EXPR)) {
+    if (enclosingLoop.is(Tree.Kind.LIST_COMPREHENSION) || enclosingLoop.is(Tree.Kind.SET_COMPREHENSION) || enclosingLoop.is(Tree.Kind.GENERATOR_EXPR)) {
       return ((ComprehensionExpression) enclosingLoop).localVariables();
     }
-    Tree enclosingScope = TreeUtils.firstAncestor(enclosingLoop, tree -> tree.is(Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.FILE_INPUT, Tree.Kind.LIST_COMPREHENSION,
-      Tree.Kind.GENERATOR_EXPR));
+    if (enclosingLoop.is(Tree.Kind.DICT_COMPREHENSION)) {
+      return ((DictCompExpression) enclosingLoop).localVariables();
+    }
+    Tree enclosingScope = TreeUtils.firstAncestor(enclosingLoop, tree -> tree.is(Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.FILE_INPUT));
     if (enclosingScope == null) {
       return Collections.emptySet();
     }
@@ -122,7 +154,8 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
 
   private static Tree enclosingLoop(FunctionLike functionLike) {
     return TreeUtils.firstAncestor(functionLike, t -> t.is(Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.WHILE_STMT, Tree.Kind.FOR_STMT,
-      Tree.Kind.RETURN_STMT, Tree.Kind.YIELD_STMT, Tree.Kind.GENERATOR_EXPR, Tree.Kind.COMP_FOR, Tree.Kind.LIST_COMPREHENSION));
+      Tree.Kind.RETURN_STMT, Tree.Kind.YIELD_STMT, Tree.Kind.GENERATOR_EXPR, Tree.Kind.COMP_FOR,
+      Tree.Kind.LIST_COMPREHENSION, Tree.Kind.SET_COMPREHENSION, Tree.Kind.DICT_COMPREHENSION));
   }
 
   private static boolean isReturnedOrCalledWithinLoop(FunctionLike functionLike, Tree enclosingLoop) {
