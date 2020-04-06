@@ -109,8 +109,7 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
 
   private static boolean isUsedInFunctionLike(Tree usageTree, FunctionLike functionLike) {
     ParameterList parameters = functionLike.parameters();
-    if (parameters != null && parameters.nonTuple().stream().anyMatch(p ->
-      p.defaultValue() != null && (usageTree.equals(p.defaultValue()) || TreeUtils.hasDescendant(p.defaultValue(), t -> t.equals(usageTree))))) {
+    if (parameters != null && isUsedAsDefaultValue(usageTree, parameters)) {
       return false;
     }
     if (functionLike.is(Tree.Kind.FUNCDEF)) {
@@ -122,6 +121,11 @@ public class FunctionUsingLoopVariableCheck extends PythonSubscriptionCheck {
       }
     }
     return TreeUtils.hasDescendant(functionLike, tree -> tree.equals(usageTree));
+  }
+
+  private static boolean isUsedAsDefaultValue(Tree usageTree, ParameterList parameters) {
+    return parameters.nonTuple().stream().anyMatch(p ->
+      p.defaultValue() != null && (usageTree.equals(p.defaultValue()) || TreeUtils.hasDescendant(p.defaultValue(), t -> t.equals(usageTree))));
   }
 
   private static boolean isWithinEnclosingLoop(Tree usageTree, Tree enclosingLoop) {
