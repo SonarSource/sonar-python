@@ -67,6 +67,7 @@ public class TypeShed {
       Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap(TYPING, typingModuleSymbols());
       new SymbolTableBuilder("", file, globalSymbols).visitFileInput(fileInput);
       for (Symbol globalVariable : fileInput.globalVariables()) {
+        ((SymbolImpl) globalVariable).removeUsages();
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
       }
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
@@ -118,7 +119,13 @@ public class TypeShed {
     AstNode astNode = PythonParser.create().parse(file.content());
     FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
     new SymbolTableBuilder("", file, Collections.emptyMap()).visitFileInput(fileInput);
-    return fileInput.globalVariables().stream().filter(s -> s.fullyQualifiedName() != null).collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
+    return fileInput.globalVariables().stream()
+      .map(symbol -> {
+        ((SymbolImpl) symbol).removeUsages();
+        return symbol;
+      })
+      .filter(s -> s.fullyQualifiedName() != null)
+      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
   }
 
   public static Set<Symbol> standardLibrarySymbols(String stdlibModuleName) {
@@ -149,6 +156,7 @@ public class TypeShed {
     FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
     new SymbolTableBuilder("", file, builtinGlobalSymbols).visitFileInput(fileInput);
     for (Symbol globalVariable : fileInput.globalVariables()) {
+      ((SymbolImpl) globalVariable).removeUsages();
       typeShedSymbols.put(globalVariable.fullyQualifiedName(), globalVariable);
     }
     fileInput.accept(new ReturnTypeVisitor());

@@ -165,4 +165,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       }
     }
   }
+
+  @Override
+  public void removeUsages() {
+    super.removeUsages();
+    superClasses.forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
+    members.forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
+  }
 }

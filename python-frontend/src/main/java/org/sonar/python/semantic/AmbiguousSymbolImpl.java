@@ -64,4 +64,10 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
       .collect(Collectors.toSet());
     return ((AmbiguousSymbolImpl) create(Collections.unmodifiableSet(copiedAlternativeSymbols)));
   }
+
+  @Override
+  public void removeUsages() {
+    super.removeUsages();
+    symbols.forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
+  }
 }

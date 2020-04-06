@@ -36,4 +36,10 @@ class SelfSymbolImpl extends SymbolImpl {
     SymbolImpl symbol = classScope.instanceAttributesByName.computeIfAbsent(nameTree.name(), name -> new SymbolImpl(name, null));
     symbol.addUsage(nameTree, kind);
   }
+
+  @Override
+  public void removeUsages() {
+    super.removeUsages();
+    classScope.instanceAttributesByName.values().forEach(SymbolImpl::removeUsages);
+  }
 }
