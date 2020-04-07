@@ -88,6 +88,7 @@ class Scope {
       if (!isExistingSymbol(importedSymbol.name())) {
         symbols.add(importedSymbol);
         symbolsByName.put(symbol.name(), importedSymbol);
+        ((SymbolImpl) importedSymbol).addUsage(importFrom, Usage.Kind.IMPORT);
       } else {
         SymbolImpl originalSymbol = resolve(symbol.name());
         if (originalSymbol != null) {
