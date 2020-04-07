@@ -67,19 +67,19 @@ public class ProjectLevelSymbolTableTest {
     assertThat(exportedA.usages()).isEmpty();
     assertThat(a).isNotEqualTo(exportedA);
     assertThat(a.fullyQualifiedName()).isEqualTo("mod.a");
-    assertThat(a.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.OTHER);
+    assertThat(a.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.OTHER, Usage.Kind.IMPORT);
 
     Symbol b = getSymbolByName(tree).get("b");
     assertThat(exportedB.usages()).isEmpty();
     assertThat(b).isNotEqualTo(exportedB);
     assertThat(b.fullyQualifiedName()).isEqualTo("mod.b");
-    assertThat(b.usages()).isEmpty();
+    assertThat(b.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT);
 
     Symbol c = getSymbolByName(tree).get("C");
     assertThat(exportedC.usages()).isEmpty();
     assertThat(c).isNotEqualTo(exportedC);
     assertThat(c.fullyQualifiedName()).isEqualTo("mod.C");
-    assertThat(c.usages()).isEmpty();
+    assertThat(c.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT);
   }
 
   @Test
