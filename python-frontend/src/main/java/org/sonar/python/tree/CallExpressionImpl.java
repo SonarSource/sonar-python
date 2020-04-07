@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -113,12 +113,8 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
       return functionSymbol.declaredReturnType();
     }
     if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-      ArrayList<Symbol> symbols = new ArrayList<>(((AmbiguousSymbol) symbol).alternatives());
-      InferredType unionType = getType(symbols.get(0));
-      for (int i = 1; i < symbols.size(); i++) {
-        unionType = InferredTypes.or(unionType, getType(symbols.get(i)));
-      }
-      return unionType;
+      Collection<Symbol> alternatives = ((AmbiguousSymbol) symbol).alternatives();
+      return InferredTypes.union(alternatives.stream().map(CallExpressionImpl::getType));
     }
     return InferredTypes.anyType();
   }

@@ -19,11 +19,15 @@
  */
 package org.sonar.python.types;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
@@ -52,6 +56,14 @@ public class InferredTypesTest {
     assertThat(or(runtimeType(a), runtimeType(a))).isEqualTo(runtimeType(a));
     assertThat(or(runtimeType(a), runtimeType(b))).isNotEqualTo(anyType());
     assertThat(or(runtimeType(a), runtimeType(b))).isEqualTo(or(runtimeType(b), runtimeType(a)));
+  }
+
+  @Test
+  public void ambiguous_class_symbol() {
+    ClassSymbol a1 = new ClassSymbolImpl("a", "mod1.a");
+    ClassSymbol a2 = new ClassSymbolImpl("a", "mod2.a");
+    Symbol ambiguous = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(a1, a2)));
+    assertThat(runtimeType(ambiguous)).isEqualTo(or(runtimeType(a1), runtimeType(a2)));
   }
 
   @Test
