@@ -68,7 +68,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canBeOrExtend(String typeName) {
-    return typeClass.isOrExtends(typeName) || typeClass.hasUnresolvedTypeHierarchy();
+    return typeClass.canBeOrExtend(typeName);
   }
 
   @Override

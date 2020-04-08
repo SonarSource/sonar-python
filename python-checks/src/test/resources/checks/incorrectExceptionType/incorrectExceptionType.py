@@ -132,5 +132,8 @@ def raise_with_type_inference_fn():
   a = AnotherClass
   raise a # FN
   e = "hello "
-  raise e # FN
-  raise e + "world" # FN
+  raise e # Noncompliant
+  raise e + "world" # Noncompliant
+
+def raise_builtin_exception_with_fqn_null():
+  raise IOError()

@@ -106,11 +106,16 @@ public class SymbolUtils {
     return globalSymbols;
   }
 
-  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol) {
+  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, Map<Symbol, Set<Symbol>> subtypingRelations) {
     if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+    Set<Symbol> superClasses = subtypingRelations.get(classSymbol);
+    if (superClasses != null) {
+      superClasses.forEach(classSymbol::addSuperClass);
+      return;
+    }
     ArgList argList = classDef.args();
     if (argList == null) {
       return;
