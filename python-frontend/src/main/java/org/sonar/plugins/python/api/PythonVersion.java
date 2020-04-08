@@ -22,13 +22,17 @@ package org.sonar.plugins.python.api;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.CheckForNull;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import static java.lang.Double.MAX_VALUE;
+import static java.lang.Double.MIN_VALUE;
+import static java.lang.Double.max;
+import static java.lang.Double.min;
+
 public class PythonVersion {
 
-  private static final double MIN_VERSION = 2.7;
+  private static final double MIN_VERSION = 2.5;
   private static final double MAX_VERSION = 3.8;
   private static final Pattern PATTERN = Pattern.compile("^\\s*([<>]=?)\\s*([0-9]+(\\.[0-9]+)?)(\\.[0-9]+)?$");
   private static final Logger LOG = Loggers.get(PythonVersion.class);
@@ -47,51 +51,61 @@ public class PythonVersion {
       return PythonVersion.allVersions();
     }
     PythonVersion pythonVersion = new PythonVersion();
+    pythonVersion.minVersion = MIN_VALUE;
+    pythonVersion.maxVersion = MAX_VALUE;
     for (String interval : intervals) {
       Matcher matcher = PATTERN.matcher(interval);
       if (!matcher.find()) {
-        LOG.warn(
-          String.format(
-            Locale.ROOT, "Error while parsing value of parameter '%s' (%s). Versions must be between %.1f and %.1f.", PYTHON_VERSION_KEY, propertyValue, MIN_VERSION, MAX_VERSION));
+        LOG.warn(String.format(Locale.ROOT, parseErrorMessage(propertyValue.trim()), PYTHON_VERSION_KEY, propertyValue, MIN_VERSION, MAX_VERSION));
         return PythonVersion.allVersions();
       }
       String operator = matcher.group(1);
-      Double version = getVersion(matcher.group(2));
-      if (version != null) {
-        pythonVersion.setMinAndMaxVersion(operator, version);
-      } else {
-        return PythonVersion.allVersions();
-      }
+      pythonVersion.setMinAndMaxVersion(operator, Double.parseDouble(matcher.group(2)));
     }
+    if (pythonVersion.minVersion != MIN_VALUE && (pythonVersion.minVersion < MIN_VERSION || pythonVersion.minVersion > MAX_VERSION)) {
+      LOG.warn(String.format(Locale.ROOT, "Python version range '%s' is not supported. Versions must be between %.1f and %.1f.", propertyValue, MIN_VERSION, MAX_VERSION));
+      return PythonVersion.allVersions();
+    }
+    if (pythonVersion.maxVersion != MAX_VALUE && (pythonVersion.maxVersion > MAX_VERSION || pythonVersion.maxVersion < MIN_VERSION)) {
+      LOG.warn(String.format(Locale.ROOT, "Python version range '%s' is not supported. Versions must be between %.1f and %.1f.", propertyValue, MIN_VERSION, MAX_VERSION));
+      return PythonVersion.allVersions();
+    }
+    if (pythonVersion.minVersion > pythonVersion.maxVersion) {
+      return PythonVersion.allVersions();
+    }
+    pythonVersion.minVersion = max(pythonVersion.minVersion, MIN_VERSION);
+    pythonVersion.maxVersion = min(pythonVersion.maxVersion, MAX_VERSION);
     return pythonVersion;
+  }
+
+  protected static String parseErrorMessage(String propertyValue) {
+    String prefix = "Error while parsing value of parameter '%s' (%s). ";
+    if (propertyValue.startsWith(">") || propertyValue.startsWith("<")) {
+      return prefix + "Versions must be between %.1f and %.1f.";
+    }
+    return prefix + "Only intervals are supported (e.g. >= 3.6, < 3.8).";
   }
 
   public static PythonVersion allVersions() {
     return new PythonVersion();
   }
 
-  @CheckForNull
-  private static Double getVersion(String str) {
-    double version = Double.parseDouble(str);
-    if (version < MIN_VERSION || version > MAX_VERSION) {
-      LOG.warn(String.format(Locale.ROOT, "Python version %s is not supported. Versions must be between %.1f and %.1f.", str, MIN_VERSION, MAX_VERSION));
-      return null;
-    }
-    return version;
-  }
-
   private void setMinAndMaxVersion(String operator, double version) {
     if (operator.equals(">=")) {
-      minVersion = version;
+      minVersion = max(minVersion, version);
+      maxVersion = min(maxVersion, MAX_VALUE);
     }
     if (operator.equals(">")) {
-      minVersion = version + 0.1;
+      minVersion = max(minVersion, version + 0.1);
+      maxVersion = min(maxVersion, MAX_VALUE);
     }
     if (operator.equals("<=")) {
-      maxVersion = version;
+      minVersion = max(minVersion, MIN_VALUE);
+      maxVersion = min(maxVersion, version);
     }
     if (operator.equals("<")) {
-      maxVersion = version - 0.1;
+      minVersion = max(minVersion, MIN_VALUE);
+      maxVersion = min(maxVersion, version - 0.1);
     }
   }
 

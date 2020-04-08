@@ -32,7 +32,6 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.PythonVersion;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -109,11 +108,6 @@ public class TestPythonVisitorRunner {
     @Override
     public URI uri() {
       return file.toURI();
-    }
-
-    @Override
-    public PythonVersion pythonVersion() {
-      return PythonVersion.allVersions();
     }
 
   }

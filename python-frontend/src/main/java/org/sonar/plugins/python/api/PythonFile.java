@@ -29,6 +29,4 @@ public interface PythonFile {
 
   URI uri();
 
-  PythonVersion pythonVersion();
-
 }

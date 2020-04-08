@@ -433,17 +433,9 @@ public class PythonSensorTest {
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if(customRuleRepositories == null) {
-      if (analysisWarnings == null) {
-        return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
-      } else {
-        return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), analysisWarnings);
-      }
+      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), analysisWarnings);
     }
-    if (analysisWarnings == null){
-      return new PythonSensor(fileLinesContextFactory, checkFactory, customRuleRepositories, new NoSonarFilter());
-    } else {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories, analysisWarnings);
-    }
+    return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories, analysisWarnings);
   }
 
   private InputFile inputFile(String name) {

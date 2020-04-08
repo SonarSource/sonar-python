@@ -46,14 +46,6 @@ public class TestPythonVisitorRunnerTest {
   }
 
   @Test
-  public void python_version() throws IOException {
-    File tmpFile = Files.createTempFile("foo", "py").toFile();
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
-    assertThat(context.pythonFile().pythonVersion().isPython3Only()).isFalse();
-    assertThat(context.pythonFile().pythonVersion().isPython2Only()).isFalse();
-  }
-
-  @Test
   public void global_symbols() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     Map<String, Set<Symbol>> globalSymbols = TestPythonVisitorRunner.globalSymbols(Collections.singletonList(new File(baseDir, "file.py")), baseDir);

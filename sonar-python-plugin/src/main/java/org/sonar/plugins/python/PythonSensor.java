@@ -42,7 +42,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.PythonVersion;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.checks.CheckList;
@@ -112,8 +111,7 @@ public final class PythonSensor implements Sensor {
         analysisWarnings.addUnique(UNSET_VERSION_WARNING);
       }
     }
-    PythonVersion pythonVersion = pythonVersionParameter.map(PythonVersion::fromString).orElse(PythonVersion.allVersions());
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles, pythonVersion);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles);
     scanner.execute(mainFiles, context);
     if (!testFiles.isEmpty()) {
       new TestHighlightingScanner(context).execute(testFiles, context);
@@ -145,7 +143,7 @@ public final class PythonSensor implements Sensor {
     @Override
     protected void scanFile(InputFile inputFile) throws IOException {
       try {
-        PythonFile pythonFile = SonarQubePythonFile.create(inputFile, PythonVersion.allVersions());
+        PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
         AstNode astNode = parser.parse(pythonFile.content());
         FileInput parse = new PythonTreeMaker().fileInput(astNode);
         // omitting package and symbols info as it's not required for highlighting

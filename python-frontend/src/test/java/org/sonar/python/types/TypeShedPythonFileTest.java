@@ -49,11 +49,4 @@ public class TypeShedPythonFileTest {
     assertThat(typeShedPythonFile.content()).isEqualTo("");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Unable to read builtin types.");
   }
-
-  @Test
-  public void python_version() {
-    TypeShedPythonFile typeShedPythonFile = new TypeShedPythonFile(TypeShedPythonFileTest.class.getResourceAsStream("/typeshed.pyi"), "");
-    assertThat(typeShedPythonFile.pythonVersion().isPython3Only()).isFalse();
-    assertThat(typeShedPythonFile.pythonVersion().isPython2Only()).isFalse();
-  }
 }

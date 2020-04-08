@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.net.URI;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.PythonVersion;
 
 public abstract class SonarQubePythonFile implements PythonFile {
 
@@ -33,8 +32,8 @@ public abstract class SonarQubePythonFile implements PythonFile {
     this.inputFile = inputFile;
   }
 
-  public static PythonFile create(InputFile inputFile, PythonVersion pythonVersion) {
-    return new Sq62File(inputFile, pythonVersion);
+  public static PythonFile create(InputFile inputFile) {
+    return new Sq62File(inputFile);
   }
 
   @Override
@@ -58,11 +57,8 @@ public abstract class SonarQubePythonFile implements PythonFile {
 
   private static class Sq62File extends SonarQubePythonFile {
 
-    private final PythonVersion pythonVersion;
-
-    public Sq62File(InputFile inputFile, PythonVersion pythonVersion) {
+    public Sq62File(InputFile inputFile) {
       super(inputFile);
-      this.pythonVersion = pythonVersion;
     }
 
     @Override
@@ -74,10 +70,6 @@ public abstract class SonarQubePythonFile implements PythonFile {
       }
     }
 
-    @Override
-    public PythonVersion pythonVersion() {
-      return pythonVersion;
-    }
   }
 
 }
