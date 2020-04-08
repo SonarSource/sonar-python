@@ -58,7 +58,7 @@ def stdlib():
     if iskeyword("something") == "1": pass # Noncompliant
     tuple = "name", "passwd", 123, 456, "gecos", "dir", "shell"
     passwd = pwd.struct_passwd(tuple)
-    if passwd == "something": pass # Noncompliant
+    if passwd == "something": pass
     passwd_2 = pwd.struct_passwd(tuple)
     if passwd == passwd_2: pass # OK
     if passwd == pwd.getpwuid(1): pass # OK

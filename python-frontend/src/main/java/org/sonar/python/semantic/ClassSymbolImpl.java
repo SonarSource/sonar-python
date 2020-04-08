@@ -39,7 +39,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private final List<Symbol> superClasses = new ArrayList<>();
   private Set<Symbol> allSuperClasses = null;
-  private boolean hasSuperClassWithoutSymbol = false;
+  boolean hasSuperClassWithoutSymbol = false;
   private final Set<Symbol> members = new HashSet<>();
   private Map<String, Symbol> membersByName = null;
   private boolean hasAlreadyReadSuperClasses = false;
