@@ -58,6 +58,7 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
@@ -76,6 +77,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class PythonSensorTest {
@@ -125,6 +128,8 @@ public class PythonSensorTest {
   private SensorContextTester context;
 
   private ActiveRules activeRules;
+
+  private final AnalysisWarnings analysisWarning = mock(AnalysisWarnings.class);
 
   @org.junit.Rule
   public LogTester logTester = new LogTester();
@@ -312,7 +317,7 @@ public class PythonSensorTest {
     // "mod.py" created but not added to context
     InputFile modFile = createInputFile("mod.py");
     PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(mainFile, modFile));
-    sensor(CUSTOM_RULES, pythonIndexer).execute(context);
+    sensor(CUSTOM_RULES, pythonIndexer, null).execute(context);
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
     assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile);
@@ -334,7 +339,7 @@ public class PythonSensorTest {
 
     InputFile mainFile = inputFile("main.py");
     PythonIndexer pythonIndexer = pythonIndexer(Collections.singletonList(mainFile));
-    sensor(CUSTOM_RULES, pythonIndexer).execute(context);
+    sensor(CUSTOM_RULES, pythonIndexer, null).execute(context);
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
@@ -351,7 +356,7 @@ public class PythonSensorTest {
     InputFile mainFile = inputFile("modA.py");
     InputFile modFile = inputFile("modB.py");
     PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(mainFile, modFile));
-    sensor(null, pythonIndexer).execute(context);
+    sensor(null, pythonIndexer, null).execute(context);
 
     assertThat(context.allIssues()).hasSize(1);
   }
@@ -436,6 +441,30 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void test_python_version_parameter_warning() {
+    context.fileSystem().add(inputFile(FILE_1));
+
+    activeRules = new ActiveRulesBuilder().build();
+
+    sensor().execute(context);
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains(PythonSensor.UNSET_VERSION_WARNING);
+    verify(analysisWarning, times(1)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
+  }
+
+  @Test
+  public void test_python_version_parameter_no_warning() {
+    context.fileSystem().add(inputFile(FILE_1));
+
+    activeRules = new ActiveRulesBuilder().build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.8"));
+    sensor().execute(context);
+    assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
+    verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
+  }
+
+
+  @Test
   public void parse_error() {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
@@ -462,7 +491,7 @@ public class PythonSensorTest {
     InputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
-    sensor(null, null).execute(context);
+    sensor(null, null, null).execute(context);
     assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
@@ -527,24 +556,24 @@ public class PythonSensorTest {
   }
 
   private PythonSensor sensor() {
-    return sensor(CUSTOM_RULES, null);
+    return sensor(CUSTOM_RULES, null, analysisWarning);
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarnings analysisWarnings) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if (indexer == null && customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class));
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings);
     }
     if (indexer != null && customRuleRepositories == null) {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
     }
     if (indexer == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, analysisWarnings);
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {

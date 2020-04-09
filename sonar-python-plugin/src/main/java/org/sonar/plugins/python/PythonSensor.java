@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -37,6 +38,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
@@ -51,6 +53,8 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
+import static org.sonar.plugins.python.api.PythonVersion.PYTHON_VERSION_KEY;
+
 public final class PythonSensor implements Sensor {
 
   private static final String PERFORMANCE_MEASURE_PROPERTY = "sonar.python.performance.measure";
@@ -61,32 +65,39 @@ public final class PythonSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+  @Nullable
+  private final AnalysisWarnings analysisWarnings;
+  private static final Logger LOG = Loggers.get(PythonSensor.class);
+  static final String UNSET_VERSION_WARNING =
+    "Your code is analyzed as compatible with python 2 and 3 by default. This will prevent the detection of issues specific to python 2 or python 3." +
+    " You can get a more precise analysis by setting a python version in your configuration via the parameter \"sonar.python.version\"";
 
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null);
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, AnalysisWarnings analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
                       PythonIndexer indexer) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, null);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonCustomRuleRepository[] customRuleRepositories) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null);
+                      PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarnings analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer) {
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, @Nullable AnalysisWarnings analysisWarnings) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
+    this.analysisWarnings = analysisWarnings;
   }
 
   @Override
@@ -102,6 +113,13 @@ public final class PythonSensor implements Sensor {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
     List<InputFile> testFiles = getInputFiles(Type.TEST, context);
+    Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
+    if (!pythonVersionParameter.isPresent() && context.runtime().getProduct() != SonarProduct.SONARLINT) {
+      LOG.warn(UNSET_VERSION_WARNING);
+      if (analysisWarnings != null) {
+        analysisWarnings.addUnique(UNSET_VERSION_WARNING);
+      }
+    }
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(mainFiles, context);
