@@ -140,7 +140,7 @@ class Scope {
         .declaredMembers().stream()
         .map(m -> ((SymbolImpl) m).copyWithoutUsages())
         .collect(Collectors.toList()));
-      if (originalClassSymbol.hasSuperClassWithoutSymbol) {
+      if (originalClassSymbol.hasSuperClassWithoutSymbol()) {
         classSymbol.setHasSuperClassWithoutSymbol();
       }
       return classSymbol;
