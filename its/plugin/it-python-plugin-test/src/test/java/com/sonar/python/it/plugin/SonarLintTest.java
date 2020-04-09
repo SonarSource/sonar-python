@@ -97,7 +97,8 @@ public class SonarLintTest {
 
     sonarlintEngine.analyze(configuration, issues::add, logOutput, null);
 
-    assertThat(logsByLevel.get(LogOutput.Level.WARN)).isNull();
+    assertThat(logsByLevel.get(LogOutput.Level.WARN)).contains("Your code is analyzed as compatible with python 2 and 3 by default." +
+      " This will prevent the detection of issues specific to python 2 or python 3. You can get a more precise analysis by setting a python version in your configuration via the parameter \"sonar.python.version\"");
     assertThat(issues).extracting("ruleKey", "startLine", "inputFile.path", "severity").containsOnly(
       tuple("python:BackticksUsage", 2, inputFile.getPath(), "BLOCKER"),
       tuple("python:S1542", 1, inputFile.getPath(), "MAJOR"));
