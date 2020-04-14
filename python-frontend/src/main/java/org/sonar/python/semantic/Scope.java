@@ -29,7 +29,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -128,7 +127,8 @@ class Scope {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
     } else if (symbol.is(Symbol.Kind.CLASS)) {
       ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, symbol.fullyQualifiedName());
-      for (Symbol originalSymbol : ((ClassSymbol) symbol).superClasses()) {
+      ClassSymbolImpl originalClassSymbol = (ClassSymbolImpl) symbol;
+      for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = globalSymbolsByFQN.get(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
           classSymbol.addSuperClass(copySymbol(globalSymbol.name(), globalSymbol, globalSymbolsByFQN));
@@ -136,10 +136,13 @@ class Scope {
           classSymbol.addSuperClass(originalSymbol);
         }
       }
-      classSymbol.addMembers(((ClassSymbol) symbol)
+      classSymbol.addMembers(originalClassSymbol
         .declaredMembers().stream()
         .map(m -> ((SymbolImpl) m).copyWithoutUsages())
         .collect(Collectors.toList()));
+      if (originalClassSymbol.hasSuperClassWithoutSymbol()) {
+        classSymbol.setHasSuperClassWithoutSymbol();
+      }
       return classSymbol;
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).alternatives().stream()

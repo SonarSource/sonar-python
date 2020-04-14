@@ -348,4 +348,24 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFooSymbol.fullyQualifiedName()).isEqualTo("mod.foo");
     assertThat(importedFooSymbol.usages()).hasSize(1);
   }
+
+  @Test
+  public void imported_class_hasSuperClassWithoutSymbol() {
+    Set<Symbol> modSymbols = parse(
+      new SymbolTableBuilder("", pythonFile("mod")),
+      "def foo(): ...",
+      "class A(foo()): ..."
+    ).globalVariables();
+    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", modSymbols);
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      "from mod import A"
+    );
+    Symbol importedFooSymbol = tree.globalVariables().iterator().next();
+    assertThat(importedFooSymbol.name()).isEqualTo("A");
+    assertThat(importedFooSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(importedFooSymbol.fullyQualifiedName()).isEqualTo("mod.A");
+    ClassSymbol classSymbol = (ClassSymbol) importedFooSymbol;
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
+  }
 }

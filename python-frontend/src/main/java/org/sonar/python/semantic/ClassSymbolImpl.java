@@ -172,4 +172,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     superClasses.forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
     members.forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
   }
+
+  boolean hasSuperClassWithoutSymbol() {
+    return hasSuperClassWithoutSymbol;
+  }
 }
