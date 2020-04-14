@@ -122,27 +122,31 @@ public class SymbolUtils {
       return;
     }
     for (Argument argument : argList.arguments()) {
-      Symbol parentSymbol = getParentSymbol(argument);
-      if (parentSymbol == null) {
+      Symbol argumentSymbol = getSymbolFromArgument(argument);
+      if (argumentSymbol == null) {
         classSymbol.setHasSuperClassWithoutSymbol();
       } else {
-        Symbol resolvedParentSymbol = resolveParentSymbol(parentSymbol, pythonFile, symbolsByName);
-        if (resolvedParentSymbol != null) {
-          classSymbol.addSuperClass(resolvedParentSymbol);
+        Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
+        if (normalizedArgumentSymbol != null) {
+          classSymbol.addSuperClass(normalizedArgumentSymbol);
         }
       }
     }
   }
 
-  private static Symbol resolveParentSymbol(Symbol parentSymbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
-    if (isTypingFile(pythonFile) && (parentSymbol.name().equals("Protocol") || parentSymbol.name().equals("Generic"))) {
+  /**
+   * Hardcoding some 'typing' module symbols to avoid incomplete type hierarchy for type 'str'
+   */
+  @CheckForNull
+  private static Symbol normalizeSymbol(Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
+    if (isTypingFile(pythonFile) && (symbol.name().equals("Protocol") || symbol.name().equals("Generic"))) {
       // ignore Protocol and Generic to avoid having incomplete type hierarchies
       return null;
     }
-    if (isTypingFile(pythonFile) && parentSymbol.name().equals("_Collection")) {
+    if (isTypingFile(pythonFile) && symbol.name().equals("_Collection")) {
       return symbolsByName.get("Collection");
     }
-    return parentSymbol;
+    return symbol;
   }
 
   private static boolean isBuiltinTypeshedFile(PythonFile pythonFile) {
@@ -154,10 +158,11 @@ public class SymbolUtils {
   }
 
   @CheckForNull
-  private static Symbol getParentSymbol(Argument argument) {
+  private static Symbol getSymbolFromArgument(Argument argument) {
     if (argument.is(Kind.REGULAR_ARGUMENT)) {
       Expression expression = ((RegularArgument) argument).expression();
       while (expression.is(Kind.SUBSCRIPTION)) {
+        // to support using 'typing' symbols like 'List[str]'
         expression = ((SubscriptionExpression) expression).object();
       }
       if (expression instanceof HasSymbol) {
