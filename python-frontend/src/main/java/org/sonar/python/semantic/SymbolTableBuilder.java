@@ -86,7 +86,6 @@ import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
-import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
@@ -96,10 +95,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Map<String, Set<Symbol>> globalSymbolsByModuleName;
   private Map<String, Symbol> globalSymbolsByFQN;
   private Map<Tree, Scope> scopesByRootTree;
+  private FileInput fileInput = null;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
   private static final List<String> BASE_MODULES = Arrays.asList("", "typing");
-  private final Map<Symbol, Set<Symbol>> subtypingRelations = new HashMap<>();
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -133,24 +132,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   @Override
   public void visitFileInput(FileInput fileInput) {
+    this.fileInput = fileInput;
     scopesByRootTree = new HashMap<>();
     fileInput.accept(new FirstPhaseVisitor());
-    hardcodedSubtypingRelations(scopesByRootTree.get(fileInput).symbolsByName);
     fileInput.accept(new SecondPhaseVisitor());
     createAmbiguousSymbols();
     addSymbolsToTree((FileInputImpl) fileInput);
     fileInput.accept(new ThirdPhaseVisitor());
     if (!SymbolUtils.isTypeShedFile(pythonFile)) {
       TypeInference.inferTypes(fileInput);
-    }
-  }
-
-  private void hardcodedSubtypingRelations(Map<String, Symbol> symbolsByName) {
-    if (isTypeShedFile(pythonFile) && pythonFile.fileName().isEmpty()) {
-      Set<Symbol> superTypes = new HashSet<>();
-      superTypes.add(symbolsByName.get("object"));
-      superTypes.add(symbolsByName.get("Sequence"));
-      subtypingRelations.put(symbolsByName.get("str"), superTypes);
     }
   }
 
@@ -198,7 +188,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         case CLASS_DECLARATION:
           ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbol.name(), symbol.fullyQualifiedName());
           ClassDef classDef = (ClassDef) bindingUsage.tree().parent();
-          resolveTypeHierarchy(classDef, classSymbol, subtypingRelations);
+          resolveTypeHierarchy(classDef, classSymbol, pythonFile, scopesByRootTree.get(fileInput).symbolsByName);
           Scope classScope = scopesByRootTree.get(classDef);
           classSymbol.addMembers(getClassMembers(classScope.symbolsByName, classScope.instanceAttributesByName));
           alternativeDefinitions.add(classSymbol);
@@ -630,7 +620,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyClassDefTree);
       scan(pyClassDefTree.name());
       scan(pyClassDefTree.body());
-      resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol(), subtypingRelations);
+      resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol(), pythonFile, scopesByRootTree.get(fileInput).symbolsByName);
       leaveScope();
     }
 

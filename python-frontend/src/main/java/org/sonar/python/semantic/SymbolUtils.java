@@ -52,6 +52,7 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -106,14 +107,14 @@ public class SymbolUtils {
     return globalSymbols;
   }
 
-  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, Map<Symbol, Set<Symbol>> subtypingRelations) {
+  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
     if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
-    Set<Symbol> superClasses = subtypingRelations.get(classSymbol);
-    if (superClasses != null) {
-      superClasses.forEach(classSymbol::addSuperClass);
+    if (isBuiltinTypeshedFile(pythonFile) && "str".equals(classSymbol.fullyQualifiedName())) {
+      classSymbol.addSuperClass(symbolsByName.get("object"));
+      classSymbol.addSuperClass(symbolsByName.get("Sequence"));
       return;
     }
     ArgList argList = classDef.args();
@@ -121,16 +122,49 @@ public class SymbolUtils {
       return;
     }
     for (Argument argument : argList.arguments()) {
-      if (argument.is(Kind.REGULAR_ARGUMENT) && (((RegularArgument) argument).expression() instanceof HasSymbol)) {
-        Expression expression = ((RegularArgument) argument).expression();
-        Symbol argumentSymbol = ((HasSymbol) expression).symbol();
-        if (argumentSymbol != null) {
-          classSymbol.addSuperClass(argumentSymbol);
-          continue;
+      Symbol parentSymbol = getParentSymbol(argument);
+      if (parentSymbol == null) {
+        classSymbol.setHasSuperClassWithoutSymbol();
+      } else {
+        Symbol resolvedParentSymbol = resolveParentSymbol(parentSymbol, pythonFile, symbolsByName);
+        if (resolvedParentSymbol != null) {
+          classSymbol.addSuperClass(resolvedParentSymbol);
         }
       }
-      classSymbol.setHasSuperClassWithoutSymbol();
     }
+  }
+
+  private static Symbol resolveParentSymbol(Symbol parentSymbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
+    if (isTypingFile(pythonFile) && (parentSymbol.name().equals("Protocol") || parentSymbol.name().equals("Generic"))) {
+      // ignore Protocol and Generic to avoid having incomplete type hierarchies
+      return null;
+    }
+    if (isTypingFile(pythonFile) && parentSymbol.name().equals("_Collection")) {
+      return symbolsByName.get("Collection");
+    }
+    return parentSymbol;
+  }
+
+  private static boolean isBuiltinTypeshedFile(PythonFile pythonFile) {
+    return isTypeShedFile(pythonFile) && pythonFile.fileName().isEmpty();
+  }
+
+  private static boolean isTypingFile(PythonFile pythonFile) {
+    return isTypeShedFile(pythonFile) && pythonFile.fileName().equals("typing");
+  }
+
+  @CheckForNull
+  private static Symbol getParentSymbol(Argument argument) {
+    if (argument.is(Kind.REGULAR_ARGUMENT)) {
+      Expression expression = ((RegularArgument) argument).expression();
+      while (expression.is(Kind.SUBSCRIPTION)) {
+        expression = ((SubscriptionExpression) expression).object();
+      }
+      if (expression instanceof HasSymbol) {
+        return ((HasSymbol) expression).symbol();
+      }
+    }
+    return null;
   }
 
   public static List<Expression> assignmentsLhs(AssignmentStatement assignmentStatement) {

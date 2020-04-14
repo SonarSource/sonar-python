@@ -56,13 +56,13 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       } else if (raisedExpression.is(Tree.Kind.CALL_EXPR)) {
         symbol = ((CallExpression) raisedExpression).calleeSymbol();
       }
-      if (!inheritsFromBaseException(symbol)) {
+      if (!mayInheritFromBaseException(symbol)) {
         ctx.addIssue(raiseStatement, MESSAGE);
       }
     });
   }
 
-  private static boolean inheritsFromBaseException(@Nullable Symbol symbol) {
+  private static boolean mayInheritFromBaseException(@Nullable Symbol symbol) {
     if (symbol == null) {
       // S3827 will raise the issue in this case
       return true;
