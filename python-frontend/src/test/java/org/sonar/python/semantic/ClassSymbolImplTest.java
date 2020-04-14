@@ -20,7 +20,9 @@
 package org.sonar.python.semantic;
 
 import java.util.Collections;
+import java.util.HashSet;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -170,6 +172,35 @@ public class ClassSymbolImplTest {
 
     assertThat(c.isOrExtends("d")).isFalse();
     assertThat(c.isOrExtends((String) null)).isFalse();
+  }
+
+  @Test
+  public void canBeOrExtend() {
+    ClassSymbolImpl a = new ClassSymbolImpl("a", "mod1.a");
+    ClassSymbolImpl b = new ClassSymbolImpl("b", "mod2.b");
+    a.addSuperClass(b);
+    assertThat(a.canBeOrExtend("a")).isFalse();
+    assertThat(a.canBeOrExtend("mod1.a")).isTrue();
+    assertThat(a.canBeOrExtend("mod2.b")).isTrue();
+    assertThat(a.canBeOrExtend("mod2.x")).isFalse();
+
+    ClassSymbolImpl c = new ClassSymbolImpl("c", "mod1.c");
+    HashSet<Symbol> alternatives = new HashSet<>();
+    alternatives.add(a);
+    alternatives.add(new ClassSymbolImpl("a", "mod2.a"));
+    AmbiguousSymbol aOrB = AmbiguousSymbolImpl.create(alternatives);
+    c.addSuperClass(aOrB);
+    assertThat(c.canBeOrExtend("mod1.a")).isTrue();
+    assertThat(c.isOrExtends("mod1.a")).isFalse();
+    assertThat(c.canBeOrExtend("mod2.a")).isTrue();
+    assertThat(c.canBeOrExtend("mod3.a")).isFalse();
+
+    ClassSymbolImpl d = new ClassSymbolImpl("c", "mod1.c");
+    d.addSuperClass(aOrB);
+    d.setHasSuperClassWithoutSymbol();
+    assertThat(d.canBeOrExtend("mod1.a")).isTrue();
+    assertThat(d.canBeOrExtend("mod2.a")).isTrue();
+    assertThat(d.canBeOrExtend("mod3.a")).isTrue();
   }
 
   @Test

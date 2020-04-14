@@ -95,10 +95,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Map<String, Set<Symbol>> globalSymbolsByModuleName;
   private Map<String, Symbol> globalSymbolsByFQN;
   private Map<Tree, Scope> scopesByRootTree;
+  private FileInput fileInput = null;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
   private static final List<String> BASE_MODULES = Arrays.asList("", "typing");
-
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -132,6 +132,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   @Override
   public void visitFileInput(FileInput fileInput) {
+    this.fileInput = fileInput;
     scopesByRootTree = new HashMap<>();
     fileInput.accept(new FirstPhaseVisitor());
     fileInput.accept(new SecondPhaseVisitor());
@@ -187,7 +188,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         case CLASS_DECLARATION:
           ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbol.name(), symbol.fullyQualifiedName());
           ClassDef classDef = (ClassDef) bindingUsage.tree().parent();
-          resolveTypeHierarchy(classDef, classSymbol);
+          resolveTypeHierarchy(classDef, classSymbol, pythonFile, scopesByRootTree.get(fileInput).symbolsByName);
           Scope classScope = scopesByRootTree.get(classDef);
           classSymbol.addMembers(getClassMembers(classScope.symbolsByName, classScope.instanceAttributesByName));
           alternativeDefinitions.add(classSymbol);
@@ -619,7 +620,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       enterScope(pyClassDefTree);
       scan(pyClassDefTree.name());
       scan(pyClassDefTree.body());
-      resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol());
+      resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol(), pythonFile, scopesByRootTree.get(fileInput).symbolsByName);
       leaveScope();
     }
 

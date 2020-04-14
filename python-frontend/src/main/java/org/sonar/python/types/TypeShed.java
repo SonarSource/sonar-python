@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
@@ -100,7 +101,10 @@ public class TypeShed {
       if (python2Symbol == null) {
         typingModuleSymbols.add(python3Symbol);
       } else {
-        typingModuleSymbols.add(new SymbolImpl(python3Symbol.name(), python3Symbol.fullyQualifiedName()));
+        Set<Symbol> symbols = new HashSet<>();
+        symbols.add(python2Symbol);
+        symbols.add(python3Symbol);
+        typingModuleSymbols.add(AmbiguousSymbolImpl.create(symbols));
       }
     });
 

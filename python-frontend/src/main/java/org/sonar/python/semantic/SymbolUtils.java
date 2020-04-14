@@ -52,6 +52,7 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -106,26 +107,69 @@ public class SymbolUtils {
     return globalSymbols;
   }
 
-  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol) {
+  static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
     if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+    if (isBuiltinTypeshedFile(pythonFile) && "str".equals(classSymbol.fullyQualifiedName())) {
+      classSymbol.addSuperClass(symbolsByName.get("object"));
+      classSymbol.addSuperClass(symbolsByName.get("Sequence"));
+      return;
+    }
     ArgList argList = classDef.args();
     if (argList == null) {
       return;
     }
     for (Argument argument : argList.arguments()) {
-      if (argument.is(Kind.REGULAR_ARGUMENT) && (((RegularArgument) argument).expression() instanceof HasSymbol)) {
-        Expression expression = ((RegularArgument) argument).expression();
-        Symbol argumentSymbol = ((HasSymbol) expression).symbol();
-        if (argumentSymbol != null) {
-          classSymbol.addSuperClass(argumentSymbol);
-          continue;
+      Symbol argumentSymbol = getSymbolFromArgument(argument);
+      if (argumentSymbol == null) {
+        classSymbol.setHasSuperClassWithoutSymbol();
+      } else {
+        Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
+        if (normalizedArgumentSymbol != null) {
+          classSymbol.addSuperClass(normalizedArgumentSymbol);
         }
       }
-      classSymbol.setHasSuperClassWithoutSymbol();
     }
+  }
+
+  /**
+   * Hardcoding some 'typing' module symbols to avoid incomplete type hierarchy for type 'str'
+   */
+  @CheckForNull
+  private static Symbol normalizeSymbol(Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
+    if (isTypingFile(pythonFile) && (symbol.name().equals("Protocol") || symbol.name().equals("Generic"))) {
+      // ignore Protocol and Generic to avoid having incomplete type hierarchies
+      return null;
+    }
+    if (isTypingFile(pythonFile) && symbol.name().equals("_Collection")) {
+      return symbolsByName.get("Collection");
+    }
+    return symbol;
+  }
+
+  private static boolean isBuiltinTypeshedFile(PythonFile pythonFile) {
+    return isTypeShedFile(pythonFile) && pythonFile.fileName().isEmpty();
+  }
+
+  private static boolean isTypingFile(PythonFile pythonFile) {
+    return isTypeShedFile(pythonFile) && pythonFile.fileName().equals("typing");
+  }
+
+  @CheckForNull
+  private static Symbol getSymbolFromArgument(Argument argument) {
+    if (argument.is(Kind.REGULAR_ARGUMENT)) {
+      Expression expression = ((RegularArgument) argument).expression();
+      while (expression.is(Kind.SUBSCRIPTION)) {
+        // to support using 'typing' symbols like 'List[str]'
+        expression = ((SubscriptionExpression) expression).object();
+      }
+      if (expression instanceof HasSymbol) {
+        return ((HasSymbol) expression).symbol();
+      }
+    }
+    return null;
   }
 
   public static List<Expression> assignmentsLhs(AssignmentStatement assignmentStatement) {

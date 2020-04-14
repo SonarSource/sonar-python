@@ -25,9 +25,11 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public class TypeShedTest {
 
@@ -39,6 +41,13 @@ public class TypeShedTest {
     assertThat(intClass.usages()).isEmpty();
     assertThat(intClass.declaredMembers()).allMatch(member -> member.usages().isEmpty());
     assertThat(TypeShed.typeShedClass("bool").superClasses()).containsExactly(intClass);
+  }
+
+  @Test
+  public void str() {
+    ClassSymbol strClass = TypeShed.typeShedClass("str");
+    assertThat(strClass.hasUnresolvedTypeHierarchy()).isTrue();
+    assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"), tuple(Kind.AMBIGUOUS, "Sequence"));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -62,22 +71,22 @@ public class TypeShedTest {
     Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
-    assertThat(symbols.get("Awaitable").kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(symbols.get("Awaitable").kind()).isEqualTo(Kind.CLASS);
     // overlap btw python2 and python3
-    assertThat(symbols.get("Iterator").kind()).isEqualTo(Symbol.Kind.OTHER);
+    assertThat(symbols.get("Iterator").kind()).isEqualTo(Kind.AMBIGUOUS);
   }
 
   @Test
   public void stdlib_symbols() {
     Map<String, Symbol> mathSymbols = TypeShed.standardLibrarySymbols("math").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     Symbol acosSymbol = mathSymbols.get("acos");
-    assertThat(acosSymbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
+    assertThat(acosSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
     assertThat(TypeShed.standardLibrarySymbol("math", "math.acos")).isSameAs(acosSymbol);
     assertThat(mathSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
     Map<String, Symbol> threadingSymbols = TypeShed.standardLibrarySymbols("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
-    assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Kind.CLASS);
     assertThat(threadingSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
     Map<String, Symbol> imaplibSymbols = TypeShed.standardLibrarySymbols("imaplib").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));

@@ -32,6 +32,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
@@ -39,6 +40,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   private final List<Symbol> superClasses = new ArrayList<>();
   private Set<Symbol> allSuperClasses = null;
+  private Set<Symbol> allSuperClassesIncludingAmbiguousSymbols = null;
   private boolean hasSuperClassWithoutSymbol = false;
   private final Set<Symbol> members = new HashSet<>();
   private Map<String, Symbol> membersByName = null;
@@ -84,7 +86,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean hasUnresolvedTypeHierarchy() {
-    for (Symbol superClassSymbol : allSuperClasses()) {
+    return hasUnresolvedTypeHierarchy(false);
+  }
+
+  private boolean hasUnresolvedTypeHierarchy(boolean includeAmbiguousSymbols) {
+    for (Symbol superClassSymbol : allSuperClasses(includeAmbiguousSymbols)) {
       if (superClassSymbol.kind() != Kind.CLASS) {
         return true;
       }
@@ -105,7 +111,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public Optional<Symbol> resolveMember(String memberName) {
-    for (Symbol symbol : allSuperClasses()) {
+    for (Symbol symbol : allSuperClasses(false)) {
       if (symbol.kind() == Kind.CLASS) {
         ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
         Symbol matchingMember = classSymbol.membersByName().get(memberName);
@@ -119,13 +125,19 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean isOrExtends(String fullyQualifiedClassName) {
-    return allSuperClasses().stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()));
+    return allSuperClasses(false).stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()));
   }
 
   @Override
   public boolean isOrExtends(ClassSymbol other) {
     // TODO there should be only 1 class with a given fullyQualifiedName when analyzing a python file
-    return allSuperClasses().stream().anyMatch(c -> Objects.equals(c.fullyQualifiedName(), other.fullyQualifiedName()));
+    return allSuperClasses(false).stream().anyMatch(c -> Objects.equals(c.fullyQualifiedName(), other.fullyQualifiedName()));
+  }
+
+  @Override
+  public boolean canBeOrExtend(String fullyQualifiedClassName) {
+    return allSuperClasses(true).stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()))
+      || hasUnresolvedTypeHierarchy(true);
   }
 
   private Map<String, Symbol> membersByName() {
@@ -149,19 +161,31 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     this.hasSuperClassWithoutSymbol = true;
   }
 
-  private Set<Symbol> allSuperClasses() {
-    if (allSuperClasses == null) {
-      allSuperClasses = new LinkedHashSet<>();
-      exploreSuperClasses(this, allSuperClasses);
+  private Set<Symbol> allSuperClasses(boolean includeAmbiguousSymbols) {
+    if (!includeAmbiguousSymbols) {
+      if (allSuperClasses == null) {
+        allSuperClasses = new LinkedHashSet<>();
+        exploreSuperClasses(this, allSuperClasses, false);
+      }
+      return allSuperClasses;
     }
-    return allSuperClasses;
+    if (allSuperClassesIncludingAmbiguousSymbols == null) {
+      allSuperClassesIncludingAmbiguousSymbols = new LinkedHashSet<>();
+      exploreSuperClasses(this, allSuperClassesIncludingAmbiguousSymbols, true);
+    }
+    return allSuperClassesIncludingAmbiguousSymbols;
   }
 
-  private static void exploreSuperClasses(Symbol symbol, Set<Symbol> set) {
-    if (set.add(symbol) && symbol.kind() == Kind.CLASS) {
+  private static void exploreSuperClasses(Symbol symbol, Set<Symbol> set, boolean includeAmbiguousSymbols) {
+    if (symbol.is(Kind.AMBIGUOUS) && includeAmbiguousSymbols) {
+      AmbiguousSymbol ambiguousSymbol = (AmbiguousSymbol) symbol;
+      for (Symbol alternative : ambiguousSymbol.alternatives()) {
+        exploreSuperClasses(alternative, set, true);
+      }
+    } else if (set.add(symbol) && symbol.is(Kind.CLASS)) {
       ClassSymbol classSymbol = (ClassSymbol) symbol;
       for (Symbol superClass : classSymbol.superClasses()) {
-        exploreSuperClasses(superClass, set);
+        exploreSuperClasses(superClass, set, includeAmbiguousSymbols);
       }
     }
   }

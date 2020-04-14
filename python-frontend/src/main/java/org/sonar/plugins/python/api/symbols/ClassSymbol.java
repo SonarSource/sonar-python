@@ -39,4 +39,7 @@ public interface ClassSymbol extends Symbol {
 
   @Beta
   boolean isOrExtends(ClassSymbol other);
+
+  @Beta
+  boolean canBeOrExtend(String fullyQualifiedClassName);
 }

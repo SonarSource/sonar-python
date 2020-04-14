@@ -51,9 +51,9 @@ def raise_builtin_constant():
 def raise_builtin_function():
   raise object() # Noncompliant
 
-def raise_builtin_function_python2():
-  raise super2() # Noncompliant {{Change this code so that it raises an object deriving from BaseException.}}
-# ^^^^^^^^^^^^^^
+def incorrect_usage_of_NotImplemented():
+  raise NotImplemented("foo") # Noncompliant {{Change this code so that it raises an object deriving from BaseException.}}
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 def raise_BaseException_type():
   raise SomeError() # OK
@@ -132,5 +132,8 @@ def raise_with_type_inference_fn():
   a = AnotherClass
   raise a # FN
   e = "hello "
-  raise e # FN
-  raise e + "world" # FN
+  raise e # Noncompliant
+  raise e + "world" # Noncompliant
+
+def raise_builtin_exception_with_fqn_null():
+  raise IOError()
