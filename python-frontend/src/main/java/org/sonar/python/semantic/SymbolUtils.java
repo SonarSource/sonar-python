@@ -257,10 +257,12 @@ public class SymbolUtils {
 
     ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response", SET_COOKIE);
 
-    FunctionSymbolImpl makeResponse = new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList());
+    FunctionSymbolImpl makeResponse = new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList(),
+      Collections.emptyList());
     makeResponse.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
 
-    FunctionSymbolImpl redirect = new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList());
+    FunctionSymbolImpl redirect = new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList(),
+       Collections.emptyList());
     redirect.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
 
     globalSymbols.put("flask", new HashSet<>(Arrays.asList(

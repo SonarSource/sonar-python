@@ -31,10 +31,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
@@ -72,6 +74,7 @@ public class TypeShed {
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
       }
       TypeShed.builtins = Collections.unmodifiableMap(builtins);
+      InferredTypes.setBuiltinSymbols(builtins);
       fileInput.accept(new ReturnTypeVisitor());
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
     }
@@ -85,7 +88,7 @@ public class TypeShed {
     }
     if (symbol.is(Symbol.Kind.FUNCTION)) {
       FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-      functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation, builtins));
+      functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setDeclaredReturnType(functionSymbol, functionDef));
     }
@@ -182,8 +185,28 @@ public class TypeShed {
 
     @Override
     public void visitFunctionDef(FunctionDef functionDef) {
-      Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> setDeclaredReturnType(symbol, functionDef));
+      Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
+        setDeclaredReturnType(symbol, functionDef);
+        setParameterTypes(symbol, functionDef);
+      });
       super.visitFunctionDef(functionDef);
+    }
+
+    private static void setParameterTypes(Symbol symbol, FunctionDef functionDef) {
+      if (symbol.is(Symbol.Kind.FUNCTION)) {
+        FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
+        ParameterList parameters = functionDef.parameters();
+        if (parameters != null) {
+          // For builtin functions, we don't have type information from typings.pyi for the parameters when constructing the initial symbol table
+          // We need to recreate those with that information
+          functionSymbol.setParametersWithType(parameters);
+        }
+      } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+        FunctionSymbol funcDefSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+        if (funcDefSymbol != null) {
+          setParameterTypes(funcDefSymbol, functionDef);
+        }
+      }
     }
   }
 

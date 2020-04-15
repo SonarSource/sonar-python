@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 
@@ -116,6 +117,7 @@ class Scope {
       addBindingUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
     } else {
       FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, fullyQualifiedName, pythonFile);
+      ((FunctionDefImpl) functionDef).setFunctionSymbol(functionSymbol);
       symbols.add(functionSymbol);
       symbolsByName.put(symbolName, functionSymbol);
       functionSymbol.addUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION);

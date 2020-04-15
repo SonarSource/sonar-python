@@ -84,6 +84,9 @@ public class FunctionSymbolTest {
     assertThat(functionSymbol.parameters().get(0).hasDefaultValue()).isFalse();
     assertThat(functionSymbol.parameters().get(0).isKeywordOnly()).isFalse();
 
+    functionSymbol = functionSymbol("def fn(p1: int): pass");
+    assertThat(functionSymbol.parameters().get(0).declaredType().canOnlyBe("int")).isTrue();
+
     functionSymbol = functionSymbol("def fn(**kwargs): pass");
     assertThat(functionSymbol.parameters()).hasSize(1);
     assertThat(functionSymbol.hasVariadicParameter()).isTrue();
@@ -97,7 +100,13 @@ public class FunctionSymbolTest {
     functionSymbol = functionSymbol("class A:\n  def method(self, p1): pass");
     assertThat(functionSymbol.isInstanceMethod()).isTrue();
 
-    functionSymbol = functionSymbol("class A:\n  @staticmethod\n  def method(self, p1): pass");
+    functionSymbol = functionSymbol("class A:\n  def method(*args, p1): pass");
+    assertThat(functionSymbol.isInstanceMethod()).isTrue();
+
+    functionSymbol = functionSymbol("class A:\n  @staticmethod\n  def method((a, b), c): pass");
+    assertThat(functionSymbol.isInstanceMethod()).isFalse();
+
+    functionSymbol = functionSymbol("class A:\n  @staticmethod\n  def method(p1, p2): pass");
     assertThat(functionSymbol.isInstanceMethod()).isFalse();
 
     functionSymbol = functionSymbol("class A:\n  @classmethod\n  def method(self, p1): pass");
