@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -29,11 +30,13 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.types.InferredTypes;
@@ -42,6 +45,7 @@ import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final List<Parameter> parameters = new ArrayList<>();
+  private final List<String> decorators;
   private final LocationInFile functionDefinitionLocation;
   private boolean hasVariadicParameter = false;
   private final boolean isInstanceMethod;
@@ -49,22 +53,26 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
   private Symbol owner;
+  private static final String CLASS_METHOD_DECORATOR = "classmethod";
+  private static final String STATIC_METHOD_DECORATOR = "staticmethod";
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
     setKind(Kind.FUNCTION);
     isInstanceMethod = isInstanceMethod(functionDef);
     hasDecorators = !functionDef.decorators().isEmpty();
+    decorators = decorators(functionDef);
     String fileId = null;
     if (!SymbolUtils.isTypeShedFile(pythonFile)) {
       Path path = pathOf(pythonFile);
       fileId = path != null ? path.toString() : pythonFile.toString();
     }
-    ParameterList parametersList = functionDef.parameters();
-    if (parametersList != null) {
-      createParameterNames(parametersList.all(), fileId);
-    }
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
+  }
+
+  public void setParametersWithType(ParameterList parametersList) {
+    this.parameters.clear();
+    createParameterNames(parametersList.all(), functionDefinitionLocation == null ? null : functionDefinitionLocation.fileId());
   }
 
   FunctionSymbolImpl(String name, FunctionSymbol functionSymbol) {
@@ -72,6 +80,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     setKind(Kind.FUNCTION);
     isInstanceMethod = functionSymbol.isInstanceMethod();
     hasDecorators = functionSymbol.hasDecorators();
+    decorators = functionSymbol.decorators();
     hasVariadicParameter = functionSymbol.hasVariadicParameter();
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
@@ -80,12 +89,13 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
-                     boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters) {
+                            boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters, List<String> decorators) {
     super(name, fullyQualifiedName);
     setKind(Kind.FUNCTION);
     this.hasVariadicParameter = hasVariadicParameter;
     this.isInstanceMethod = isInstanceMethod;
     this.hasDecorators = hasDecorators;
+    this.decorators = decorators;
     this.parameters.addAll(parameters);
     this.functionDefinitionLocation = null;
     this.isStub = true;
@@ -114,7 +124,16 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         List<Name> names = decorator.name().names();
         return names.get(names.size() - 1).name();
       })
-      .noneMatch(decorator -> decorator.equals("staticmethod") || decorator.equals("classmethod"));
+      .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));
+  }
+
+  private static List<String> decorators(FunctionDef functionDef) {
+    List<String> decoratorNames = new ArrayList<>();
+    for (Decorator decorator : functionDef.decorators()) {
+      String name = decorator.name().names().stream().map(Name::name).collect(Collectors.joining("."));
+      decoratorNames.add(name);
+    }
+    return decoratorNames;
   }
 
   private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
@@ -123,7 +142,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, false, parameterState, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, parameterState, locationInFile(anyParameter, fileId)));
       }
     }
   }
@@ -132,7 +151,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      this.parameters.add(new ParameterImpl(parameterName.name(), parameter.defaultValue() != null, parameterState, locationInFile(parameter, fileId)));
+      TypeAnnotation typeAnnotation = parameter.typeAnnotation();
+      InferredType declaredType = InferredTypes.anyType();
+      if (typeAnnotation != null) {
+        declaredType = InferredTypes.declaredType(typeAnnotation);
+      }
+      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null, parameterState, locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
       }
@@ -145,6 +169,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         parameterState.positionalOnly = true;
       }
     }
+  }
+
+  @Override
+  public List<String> decorators() {
+    return decorators;
   }
 
   private static class ParameterState {
@@ -201,13 +230,15 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private static class ParameterImpl implements Parameter {
 
     private final String name;
+    private final InferredType declaredType;
     private final boolean hasDefaultValue;
     private final boolean isKeywordOnly;
     private final boolean isPositionalOnly;
     private final LocationInFile location;
 
-    ParameterImpl(@Nullable String name, boolean hasDefaultValue, ParameterState parameterState, @Nullable LocationInFile location) {
+    ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue, ParameterState parameterState, @Nullable LocationInFile location) {
       this.name = name;
+      this.declaredType = declaredType;
       this.hasDefaultValue = hasDefaultValue;
       this.isKeywordOnly = parameterState.keywordOnly;
       this.isPositionalOnly = parameterState.positionalOnly;
@@ -218,6 +249,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @CheckForNull
     public String name() {
       return name;
+    }
+
+    @Override
+    public InferredType declaredType() {
+      return declaredType;
     }
 
     @Override

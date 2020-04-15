@@ -22,6 +22,7 @@ package org.sonar.plugins.python.api.symbols;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.types.InferredType;
 
 public interface FunctionSymbol extends Symbol {
   List<Parameter> parameters();
@@ -38,6 +39,8 @@ public interface FunctionSymbol extends Symbol {
 
   boolean isInstanceMethod();
 
+  List<String> decorators();
+
   boolean hasDecorators();
 
   @CheckForNull
@@ -46,6 +49,7 @@ public interface FunctionSymbol extends Symbol {
   interface Parameter {
     @CheckForNull
     String name();
+    InferredType declaredType();
     boolean hasDefaultValue();
     boolean isKeywordOnly();
     boolean isPositionalOnly();

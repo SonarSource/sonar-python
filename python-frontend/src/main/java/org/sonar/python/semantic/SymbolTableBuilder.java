@@ -39,6 +39,7 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -619,8 +620,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scan(pyClassDefTree.decorators());
       enterScope(pyClassDefTree);
       scan(pyClassDefTree.name());
-      scan(pyClassDefTree.body());
       resolveTypeHierarchy(pyClassDefTree, pyClassDefTree.name().symbol(), pythonFile, scopesByRootTree.get(fileInput).symbolsByName);
+      scan(pyClassDefTree.body());
       leaveScope();
     }
 
@@ -663,15 +664,27 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
   }
 
-  /**
-   * Handle class member usages like the following:
-   * <pre>
-   *     class A:
-   *       foo = 42
-   *     print(A.foo)
-   * </pre>
-   */
   private class ThirdPhaseVisitor extends BaseTreeVisitor {
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+      ParameterList parameters = functionDef.parameters();
+      if (functionSymbol != null && parameters != null) {
+        FunctionSymbolImpl functionSymbolImpl = (FunctionSymbolImpl) functionSymbol;
+        functionSymbolImpl.setParametersWithType(parameters);
+      }
+      super.visitFunctionDef(functionDef);
+    }
+
+    /**
+     * Handle class member usages like the following:
+     * <pre>
+     *     class A:
+     *       foo = 42
+     *     print(A.foo)
+     * </pre>
+     */
     @Override
     public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
       super.visitQualifiedExpression(qualifiedExpression);
