@@ -41,4 +41,7 @@ public interface InferredType {
   @Beta
   boolean canBeOrExtend(String typeName);
 
+  @Beta
+  boolean isCompatibleWith(InferredType other);
+
 }

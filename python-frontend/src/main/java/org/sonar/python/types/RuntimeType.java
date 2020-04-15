@@ -72,6 +72,23 @@ class RuntimeType implements InferredType {
   }
 
   @Override
+  public boolean isCompatibleWith(InferredType other) {
+    if (other instanceof RuntimeType) {
+      RuntimeType otherRuntimeType = (RuntimeType) other;
+      String otherFullyQualifiedName = otherRuntimeType.typeClass.fullyQualifiedName();
+      boolean isDuckTypeCompatible = !otherRuntimeType.typeClass.declaredMembers().isEmpty() &&
+        otherRuntimeType.typeClass.declaredMembers().stream().allMatch(m -> typeClass.resolveMember(m.name()).isPresent());
+      boolean canBeOrExtend = otherFullyQualifiedName == null || this.canBeOrExtend(otherFullyQualifiedName);
+      return isDuckTypeCompatible || canBeOrExtend;
+    }
+    if (other instanceof UnionType) {
+      return ((UnionType) other).types().stream().anyMatch(this::isCompatibleWith);
+    }
+    // other is AnyType
+    return true;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;

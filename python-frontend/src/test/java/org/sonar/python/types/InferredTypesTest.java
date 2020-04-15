@@ -72,13 +72,13 @@ public class InferredTypesTest {
       "from typing import List",
       "l : List[int]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.LIST);
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.LIST);
 
     typeAnnotation = typeAnnotation(
       "from typing import Dict",
       "l : Dict[int, string]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.DICT);
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.DICT);
   }
 
   @Test
@@ -87,25 +87,25 @@ public class InferredTypesTest {
       "from typing import Union",
       "l : Union[int, str]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
 
     typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[int, str, bool]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
 
     typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[Union[int, str], bool]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
 
     typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[bool]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.BOOL);
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.BOOL);
   }
 
   @Test
@@ -114,13 +114,13 @@ public class InferredTypesTest {
       "from typing import Optional",
       "l : Optional[int]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.NONE));
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.NONE));
 
     typeAnnotation = typeAnnotation(
       "from typing import Optional",
       "l : Optional[int, string]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation, TypeShed.builtinSymbols())).isEqualTo(InferredTypes.anyType());
+    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.anyType());
   }
 
   private TypeAnnotation typeAnnotation(String... code) {
