@@ -58,6 +58,7 @@ public final class CheckList {
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
       ArgumentNumberCheck.class,
+      ArgumentTypeCheck.class,
       BackslashInStringCheck.class,
       BackticksUsageCheck.class,
       BareRaiseInFinallyCheck.class,

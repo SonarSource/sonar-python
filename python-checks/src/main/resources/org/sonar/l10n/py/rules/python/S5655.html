@@ -1,0 +1,16 @@
+<p>Python does not check the type of arguments provided to functions. However builtin functions and methods expect a specific type for each parameter.
+Providing an argument of the wrong type will make your program fail.</p>
+<p>This rule raises an issue when a builtin function is called with an argument of the wrong type.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+round("42.3")  # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+round(42.3)
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3/library/functions.html#built-in-funcs">Python documentation - builtins</a> </li>
+</ul>
+
