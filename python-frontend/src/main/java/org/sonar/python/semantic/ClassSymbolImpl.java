@@ -86,11 +86,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean hasUnresolvedTypeHierarchy() {
-    return hasUnresolvedTypeHierarchy(false);
-  }
-
-  private boolean hasUnresolvedTypeHierarchy(boolean includeAmbiguousSymbols) {
-    for (Symbol superClassSymbol : allSuperClasses(includeAmbiguousSymbols)) {
+    for (Symbol superClassSymbol : allSuperClasses(true)) {
       if (superClassSymbol.kind() != Kind.CLASS) {
         return true;
       }
@@ -137,7 +133,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   @Override
   public boolean canBeOrExtend(String fullyQualifiedClassName) {
     return allSuperClasses(true).stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()))
-      || hasUnresolvedTypeHierarchy(true);
+      || hasUnresolvedTypeHierarchy();
   }
 
   private Map<String, Symbol> membersByName() {

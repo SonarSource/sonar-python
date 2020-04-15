@@ -22,7 +22,9 @@ package org.sonar.python.types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -78,11 +80,18 @@ public class InferredTypes {
     if (typeClass instanceof ClassSymbol) {
       return new RuntimeType((ClassSymbol) typeClass);
     }
+    if (typeClass instanceof AmbiguousSymbol) {
+      return union(((AmbiguousSymbol) typeClass).alternatives().stream().map(InferredTypes::runtimeType));
+    }
     return anyType();
   }
 
   public static InferredType or(InferredType t1, InferredType t2) {
     return UnionType.or(t1, t2);
+  }
+
+  public static InferredType union(Stream<InferredType> types) {
+    return types.reduce(InferredTypes::or).orElse(anyType());
   }
 
   public static InferredType declaredType(TypeAnnotation typeAnnotation, Map<String, Symbol> builtinSymbols) {
@@ -118,12 +127,7 @@ public class InferredTypes {
   }
 
   private static InferredType unionDeclaredType(List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
-    // subscripts cannot be empty by grammar definition
-    InferredType union = declaredType(subscripts.get(0), builtinSymbols);
-    for (int i = 1; i < subscripts.size(); i++) {
-      union = InferredTypes.or(union, declaredType(subscripts.get(i), builtinSymbols));
-    }
-    return union;
+    return union(subscripts.stream().map(s -> declaredType(s, builtinSymbols)));
   }
 
   private static InferredType optionalDeclaredType(List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {

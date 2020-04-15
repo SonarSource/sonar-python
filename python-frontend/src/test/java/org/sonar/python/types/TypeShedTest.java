@@ -46,7 +46,7 @@ public class TypeShedTest {
   @Test
   public void str() {
     ClassSymbol strClass = TypeShed.typeShedClass("str");
-    assertThat(strClass.hasUnresolvedTypeHierarchy()).isTrue();
+    assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"), tuple(Kind.AMBIGUOUS, "Sequence"));
   }
 

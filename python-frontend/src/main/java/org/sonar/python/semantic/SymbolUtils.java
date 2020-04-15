@@ -139,7 +139,7 @@ public class SymbolUtils {
    */
   @CheckForNull
   private static Symbol normalizeSymbol(Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
-    if (isTypingFile(pythonFile) && (symbol.name().equals("Protocol") || symbol.name().equals("Generic"))) {
+    if (isTypeShedFile(pythonFile) && (symbol.name().equals("Protocol") || symbol.name().equals("Generic"))) {
       // ignore Protocol and Generic to avoid having incomplete type hierarchies
       return null;
     }
