@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,8 @@ public class InferredTypes {
 
   public static final InferredType BOOL = runtimeBuiltinType(BuiltinTypes.BOOL);
 
+  private static Map<String, Symbol> builtinSymbols;
+
   private InferredTypes() {
   }
 
@@ -86,6 +89,10 @@ public class InferredTypes {
     return anyType();
   }
 
+  static void setBuiltinSymbols(Map<String, Symbol> builtinSymbols) {
+    InferredTypes.builtinSymbols = Collections.unmodifiableMap(builtinSymbols);
+  }
+
   public static InferredType or(InferredType t1, InferredType t2) {
     return UnionType.or(t1, t2);
   }
@@ -94,8 +101,12 @@ public class InferredTypes {
     return types.reduce(InferredTypes::or).orElse(anyType());
   }
 
-  public static InferredType declaredType(TypeAnnotation typeAnnotation, Map<String, Symbol> builtinSymbols) {
-    return declaredType(typeAnnotation.expression(), builtinSymbols);
+  public static InferredType declaredType(TypeAnnotation typeAnnotation) {
+    if (builtinSymbols != null) {
+      return declaredType(typeAnnotation.expression(), builtinSymbols);
+    } else {
+      return declaredType(typeAnnotation.expression(), Collections.emptyMap());
+    }
   }
 
   private static InferredType declaredType(Expression expression, Map<String, Symbol> builtinSymbols) {

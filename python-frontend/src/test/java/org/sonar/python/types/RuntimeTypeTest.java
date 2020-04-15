@@ -19,9 +19,11 @@
  */
 package org.sonar.python.types;
 
+import java.util.Arrays;
 import java.util.Collections;
 import org.junit.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static java.util.Collections.singletonList;
@@ -175,5 +177,39 @@ public class RuntimeTypeTest {
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
     y.addSuperClass(new SymbolImpl("unknown", null));
     assertThat(new RuntimeType(y).canBeOrExtend("z")).isTrue();
+  }
+
+  @Test
+  public void test_isCompatibleWith() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addSuperClass(x1);
+
+    assertThat(new RuntimeType(x2).isCompatibleWith(new RuntimeType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x2))).isFalse();
+
+    ClassSymbolImpl a = new ClassSymbolImpl("a", null);
+    ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
+    assertThat(new RuntimeType(a).isCompatibleWith(new RuntimeType(b))).isFalse();
+    assertThat(new RuntimeType(b).isCompatibleWith(new RuntimeType(a))).isTrue();
+
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
+    y.addSuperClass(new SymbolImpl("unknown", null));
+    assertThat(new RuntimeType(y).isCompatibleWith(new RuntimeType(z))).isTrue();
+
+    ClassSymbolImpl duck = new ClassSymbolImpl("duck", "duck");
+    ClassSymbolImpl goose = new ClassSymbolImpl("goose", "goose");
+    FunctionSymbolImpl duckSwim = new FunctionSymbolImpl("swim", "duck.swim", false, false, false, Collections.emptyList(),
+      Collections.emptyList());
+    FunctionSymbolImpl duckQuack = new FunctionSymbolImpl("quack", "duck.quack", false, false, false, Collections.emptyList(),
+      Collections.emptyList());
+    FunctionSymbolImpl gooseSwim = new FunctionSymbolImpl("swim", "goose.swim", false, false, false, Collections.emptyList(),
+      Collections.emptyList());
+    duck.addMembers(Arrays.asList(duckSwim, duckQuack));
+    goose.addMembers(Collections.singleton(gooseSwim));
+    assertThat(new RuntimeType(duck).isCompatibleWith(new RuntimeType(goose))).isTrue();
+    assertThat(new RuntimeType(goose).isCompatibleWith(new RuntimeType(duck))).isFalse();
   }
 }

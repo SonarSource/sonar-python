@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -88,6 +89,11 @@ class UnionType implements InferredType {
   }
 
   @Override
+  public boolean isCompatibleWith(InferredType other) {
+    return types.stream().anyMatch(t -> t.isCompatibleWith(other));
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -107,5 +113,9 @@ class UnionType implements InferredType {
   @Override
   public String toString() {
     return "UnionType" + types;
+  }
+
+  Set<InferredType> types() {
+    return Collections.unmodifiableSet(types);
   }
 }
