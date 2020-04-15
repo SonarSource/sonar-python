@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -37,7 +36,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
@@ -48,43 +46,21 @@ import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
 
-import static org.sonar.plugins.python.api.PythonVersion.PYTHON_VERSION_KEY;
-
 public final class PythonSensor implements Sensor {
 
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
-  @Nullable
-  private final AnalysisWarnings analysisWarnings;
-  private static final Logger LOG = Loggers.get(PythonSensor.class);
-  static final String UNSET_VERSION_WARNING =
-    "Your code is analyzed as compatible with python 2 and 3 by default. This will prevent the detection of issues specific to python 2 or python 3." +
-    " You can get a more precise analysis by setting a python version in your configuration via the parameter \"sonar.python.version\"";
 
   /**
    * Constructor to be used by pico if no PythonCustomRuleRepository are to be found and injected.
    */
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-                      NoSonarFilter noSonarFilter, @Nullable AnalysisWarnings analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, analysisWarnings);
-  }
-
-  /**
-   * Required for SonarLint
-   */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null);
-  }
-
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable AnalysisWarnings analysisWarnings) {
-    this.analysisWarnings = analysisWarnings;
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
@@ -104,13 +80,6 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
     List<InputFile> testFiles = getInputFiles(Type.TEST, context);
-    Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
-    if (!pythonVersionParameter.isPresent()) {
-      LOG.warn(UNSET_VERSION_WARNING);
-      if (analysisWarnings != null) {
-        analysisWarnings.addUnique(UNSET_VERSION_WARNING);
-      }
-    }
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles);
     scanner.execute(mainFiles, context);
     if (!testFiles.isEmpty()) {

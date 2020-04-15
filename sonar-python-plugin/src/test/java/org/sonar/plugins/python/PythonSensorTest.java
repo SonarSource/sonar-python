@@ -57,7 +57,6 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
@@ -73,8 +72,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class PythonSensorTest {
@@ -124,8 +121,6 @@ public class PythonSensorTest {
   private SensorContextTester context;
 
   private ActiveRules activeRules;
-
-  private AnalysisWarnings analysisWarning = mock(AnalysisWarnings.class);
 
   @org.junit.Rule
   public LogTester logTester = new LogTester();
@@ -368,30 +363,6 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_python_version_parameter_warning() throws IOException {
-    context.fileSystem().add(inputFile(FILE_1));
-
-    activeRules = new ActiveRulesBuilder().build();
-
-    sensor().execute(context);
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains(PythonSensor.UNSET_VERSION_WARNING);
-    verify(analysisWarning, times(1)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
-  }
-
-  @Test
-  public void test_python_version_parameter_no_warning() throws IOException {
-    context.fileSystem().add(inputFile(FILE_1));
-
-    activeRules = new ActiveRulesBuilder().build();
-
-    context.setSettings(new MapSettings().setProperty("sonar.python.version", "> 3"));
-    sensor().execute(context);
-    assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
-    verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
-  }
-
-
-  @Test
   public void parse_error() {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
@@ -418,24 +389,24 @@ public class PythonSensorTest {
     InputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
-    sensor(null, null).execute(context);
+    sensor(null).execute(context);
     assertThat(context.measure(inputFile.key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
   private PythonSensor sensor() {
-    return sensor(CUSTOM_RULES, analysisWarning);
+    return sensor(CUSTOM_RULES);
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable AnalysisWarnings analysisWarnings) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if(customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories, analysisWarnings);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories);
   }
 
   private InputFile inputFile(String name) {
