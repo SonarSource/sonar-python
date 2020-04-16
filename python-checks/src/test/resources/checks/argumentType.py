@@ -6,6 +6,7 @@ import genericpath
 import _heapq
 import imaplib
 from typing import Dict, Tuple, Set
+from collections import OrderedDict, Counter
 
 class ExpectedClass():
   a = 42
@@ -92,6 +93,12 @@ def builtin_functions():
   repr(A)
   arr = []
   len(arr) # OK, duck type compatibility
+  values = OrderedDict((key, 0) for key in field_order)
+  len(values)
+  tld_counter = Counter()
+  len(tld_counter)
+  
+  str.ljust(str(1), 3)
 
 def type_aliases():
   def with_set(a : Set[int]): ...

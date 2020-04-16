@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -31,10 +32,13 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S5655")
 public class ArgumentTypeCheck extends PythonSubscriptionCheck {
@@ -55,13 +59,21 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       if (functionSymbol.hasVariadicParameter()) {
         return;
       }
-      checkFunctionCall(ctx, callExpression, functionSymbol);
+      boolean isStaticCall = false;
+      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
+        isStaticCall = TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
+          .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+          .isPresent();
+      }
+      checkFunctionCall(ctx, callExpression, functionSymbol, isStaticCall);
     });
   }
 
-  private static void checkFunctionCall(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol) {
+  private static void checkFunctionCall(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol, boolean isStaticCall) {
+
     boolean isKeyword = false;
-    int firstParameterOffset = firstParameterOffset(functionSymbol);
+    int firstParameterOffset = firstParameterOffset(functionSymbol, isStaticCall);
     if (firstParameterOffset < 0) {
       return;
     }
@@ -122,8 +134,8 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isIncompatibleTypes(InferredType argumentType, InferredType parameterType) {
-    return isNotDuckTypeCompatible(argumentType, parameterType)
-      || (!argumentType.isCompatibleWith(parameterType) && !couldBeDuckTypeCompatible(argumentType, parameterType));
+    return (isNotDuckTypeCompatible(argumentType, parameterType)
+      || (!argumentType.isCompatibleWith(parameterType) && !couldBeDuckTypeCompatible(argumentType, parameterType))) && !isException(argumentType);
   }
 
   private static boolean isNotDuckTypeCompatible(InferredType argumentType, InferredType parameterType) {
@@ -171,7 +183,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
   1 if there is an implicit first parameter
   -1 if unknown (intent is not clear from function definition)
    */
-  public static int firstParameterOffset(FunctionSymbol functionSymbol) {
+  private static int firstParameterOffset(FunctionSymbol functionSymbol, boolean isStaticCall) {
     List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();
     if (parameters.isEmpty()) {
       return 0;
@@ -181,21 +193,32 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       // Should never happen
       return -1;
     }
-    if (functionSymbol.isInstanceMethod() && firstParamName.equals("self")) {
-      // If first param is not "self", we can't rule out the possibility of a static method missing the "@staticmethod" annotation
-      return 1;
-    }
     List<String> decoratorNames = functionSymbol.decorators();
     if (decoratorNames.size() > 1) {
       // We want to avoid FP if there are many decorators
       return -1;
     }
+    if (functionSymbol.isInstanceMethod() && !isStaticCall) {
+      // regular instance call, takes self as first implicit parameter
+      return 1;
+    }
     if (decoratorNames.size() == 1 && decoratorNames.get(0).endsWith("classmethod")) {
+      // class method call, takes cls as first implicit parameter
       return 1;
     }
     if (!functionSymbol.isInstanceMethod()) {
+      // function or static method, no first implicit parameter
       return 0;
     }
     return -1;
+  }
+
+  /*
+  We exclude types which can be associated to hard-coded symbols with missing members
+   */
+  private static boolean isException(InferredType inferredType) {
+    return SymbolUtils.externalModulesSymbols().values()
+      .stream().flatMap(Collection::stream)
+      .anyMatch(symbol -> inferredType.canBeOrExtend(symbol.fullyQualifiedName()));
   }
 }
