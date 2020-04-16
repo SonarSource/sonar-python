@@ -5,7 +5,9 @@ import select
 import genericpath
 import _heapq
 import imaplib
+import unittest
 from typing import Dict, Tuple, Set
+from collections import OrderedDict, Counter
 
 class ExpectedClass():
   a = 42
@@ -92,6 +94,12 @@ def builtin_functions():
   repr(A)
   arr = []
   len(arr) # OK, duck type compatibility
+  values = OrderedDict((key, 0) for key in field_order)
+  len(values)
+  tld_counter = Counter()
+  len(tld_counter)
+
+  str.ljust(str(1), 3)
 
 def type_aliases():
   def with_set(a : Set[int]): ...
@@ -149,3 +157,8 @@ def edge_cases():
   SomeClass.class_method(42) # Noncompliant
   A.method_with_unknowndecorator(42) # OK, unknown decorator
   A.method_with_multiple_decorators(42) # OK, multiple decorators
+
+def exception_for_unittest_mock():
+  class SomeMock(unittest.Mock): ...
+  my_mock = SomeMock()
+  hex(my_mock) # OK
