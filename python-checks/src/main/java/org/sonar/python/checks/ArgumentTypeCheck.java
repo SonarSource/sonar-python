@@ -219,6 +219,6 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
   private static boolean isException(InferredType inferredType) {
     return SymbolUtils.externalModulesSymbols().values()
       .stream().flatMap(Collection::stream)
-      .anyMatch(symbol -> inferredType.canBeOrExtend(symbol.fullyQualifiedName()));
+      .anyMatch(symbol -> inferredType.canBeOrExtend(symbol.fullyQualifiedName())) || inferredType.canBeOrExtend("unittest.Mock");
   }
 }
