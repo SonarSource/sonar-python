@@ -21,8 +21,10 @@ package org.sonar.python.types;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import org.junit.Test;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
@@ -80,6 +82,10 @@ public class UnionTypeTest {
     assertThat(or(runtimeType(x), runtimeType(y)).resolveMember("foo")).contains(foo);
     assertThat(or(runtimeType(x), runtimeType(z)).resolveMember("bar")).isEmpty();
     assertThat(or(runtimeType(x), runtimeType(z)).resolveMember("xxx")).isEmpty();
+
+    ClassSymbolImpl classWithUnresolvedHierarchy = new ClassSymbolImpl("u", "u");
+    classWithUnresolvedHierarchy.addSuperClass(AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(x, new ClassSymbolImpl("x", "x")))));
+    assertThat(or(runtimeType(x), runtimeType(classWithUnresolvedHierarchy)).resolveMember("foo")).isEmpty();
   }
 
   @Test

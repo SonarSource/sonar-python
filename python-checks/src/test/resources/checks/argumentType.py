@@ -101,6 +101,10 @@ def builtin_functions():
 
   str.ljust(str(1), 3)
 
+  x = {}
+  x = []
+  x.pop(())
+
 def type_aliases():
   def with_set(a : Set[int]): ...
   def with_dict(a : Dict[int, int]): ...

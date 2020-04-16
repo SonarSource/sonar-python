@@ -86,7 +86,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean hasUnresolvedTypeHierarchy() {
-    for (Symbol superClassSymbol : allSuperClasses(true)) {
+    return hasUnresolvedTypeHierarchy(true);
+  }
+
+  public boolean hasUnresolvedTypeHierarchy(boolean includeAmbiguousSymbols) {
+    for (Symbol superClassSymbol : allSuperClasses(includeAmbiguousSymbols)) {
       if (superClassSymbol.kind() != Kind.CLASS) {
         return true;
       }
