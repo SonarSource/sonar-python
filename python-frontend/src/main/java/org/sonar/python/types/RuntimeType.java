@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
 
 class RuntimeType implements InferredType {
 
@@ -114,6 +115,10 @@ class RuntimeType implements InferredType {
       typeClassMembersFQN = typeClass.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toSet());
     }
     return typeClassMembersFQN;
+  }
+
+  boolean hasUnresolvedHierarchy() {
+    return ((ClassSymbolImpl) typeClass).hasUnresolvedTypeHierarchy(false);
   }
 
   @Override

@@ -93,6 +93,10 @@ def builtin_functions():
   arr = []
   len(arr) # OK, duck type compatibility
 
+  x = {}
+  x = []
+  x.pop(())
+
 def type_aliases():
   def with_set(a : Set[int]): ...
   def with_dict(a : Dict[int, int]): ...
