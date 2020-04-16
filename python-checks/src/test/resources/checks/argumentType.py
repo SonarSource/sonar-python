@@ -5,7 +5,7 @@ import select
 import genericpath
 import _heapq
 import imaplib
-import unittest
+from unittest.mock import Mock
 from typing import Dict, Tuple, Set
 from collections import OrderedDict, Counter
 
@@ -163,6 +163,6 @@ def edge_cases():
   A.method_with_multiple_decorators(42) # OK, multiple decorators
 
 def exception_for_unittest_mock():
-  class SomeMock(unittest.Mock): ...
+  class SomeMock(Mock): ...
   my_mock = SomeMock()
   hex(my_mock) # OK
