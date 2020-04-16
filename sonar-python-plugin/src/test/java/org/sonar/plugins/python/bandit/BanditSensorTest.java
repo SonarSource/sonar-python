@@ -173,7 +173,7 @@ public class BanditSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
-      .isEqualTo("Fail to resolve 22 file path(s) in Bandit report. No issues imported related to file(s): " +
+      .isEqualTo("Failed to resolve 22 file path(s) in Bandit report. No issues imported related to file(s): " +
         "bandit/unknown01.py;bandit/unknown02.py;bandit/unknown03py;bandit/unknown04.py;bandit/unknown05.py;" +
         "bandit/unknown06.py;bandit/unknown07.py;bandit/unknown08.py;bandit/unknown09.py;bandit/unknown10.py;" +
         "bandit/unknown11.py;bandit/unknown12.py;bandit/unknown13.py;bandit/unknown14.py;bandit/unknown15.py;" +
@@ -194,7 +194,7 @@ public class BanditSensorTest {
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
       .contains("100 is not a valid line for pointer. File bandit/file1.py has 8 line(s)");
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
-      .contains("Fail to resolve 1 file path(s) in Bandit report. No issues imported related to file(s): bandit/unknown.py");
+      .contains("Failed to resolve 1 file path(s) in Bandit report. No issues imported related to file(s): bandit/unknown.py");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 

@@ -1,0 +1,600 @@
+[
+  {
+    "key": "F401",
+    "name": "module imported but unused",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F402",
+    "name": "import module from line N shadowed by loop variable",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F403",
+    "name": "‘from module import *’ used; unable to detect undefined names",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F404",
+    "name": "future import(s) name after other statements",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F405",
+    "name": "name may be undefined, or defined from star imports: module",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F406",
+    "name": "‘from module import *’ only allowed at module level",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F407",
+    "name": "an undefined __future__ feature name was imported",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F601",
+    "name": "dictionary key name repeated with different values",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F602",
+    "name": "dictionary key variable name repeated with different values",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F621",
+    "name": "too many expressions in an assignment with star-unpacking",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F622",
+    "name": "two or more starred expressions in an assignment (a, *b, *c = d)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F631",
+    "name": "assertion test is a tuple, which are always True",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F632",
+    "name": "use ==/!= to compare str, bytes, and int literals",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F633",
+    "name": "use of >> is invalid with print function",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F701",
+    "name": "a break statement outside of a while or for loop",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F702",
+    "name": "a continue statement outside of a while or for loop",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F703",
+    "name": "a continue statement in a finally block in a loop",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F704",
+    "name": "a yield or yield from statement outside of a function",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F705",
+    "name": "a return statement with arguments inside a generator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F706",
+    "name": "a return statement outside of a function/method",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F707",
+    "name": "an except: block as not the last exception handler",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F721",
+    "name": "syntax error in doctest",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F722",
+    "name": "syntax error in forward annotation",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F723",
+    "name": "syntax error in type comment",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F811",
+    "name": "redefinition of unused name from line N",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F812",
+    "name": "list comprehension redefines name from line N",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F821",
+    "name": "undefined name name",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F822",
+    "name": "undefined name name in __all__",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F823",
+    "name": "local variable name … referenced before assignment",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F831",
+    "name": "duplicate argument name in function definition",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F841",
+    "name": "local variable name is assigned to but never used",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "F901",
+    "name": "raise NotImplemented should be raise NotImplementedError",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E101",
+    "name": "indentation contains mixed spaces and tabs",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E111",
+    "name": "indentation is not a multiple of four",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E112",
+    "name": "expected an indented block",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E113",
+    "name": "unexpected indentation",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E114",
+    "name": "indentation is not a multiple of four (comment)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E115",
+    "name": "expected an indented block (comment)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E116",
+    "name": "unexpected indentation (comment)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E117",
+    "name": "over-indented",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E121",
+    "name": "continuation line under-indented for hanging indent",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E122",
+    "name": "continuation line missing indentation or outdented",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E123",
+    "name": "closing bracket does not match indentation of opening bracket’s line",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E124",
+    "name": "closing bracket does not match visual indentation",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E125",
+    "name": "continuation line with same indent as next logical line",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E126",
+    "name": "continuation line over-indented for hanging indent",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E127",
+    "name": "continuation line over-indented for visual indent",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E128",
+    "name": "continuation line under-indented for visual indent",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E129",
+    "name": "visually indented line with same indent as next logical line",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E131",
+    "name": "continuation line unaligned for hanging indent",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E133",
+    "name": "closing bracket is missing indentation",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E201",
+    "name": "whitespace after ‘(‘",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E202",
+    "name": "whitespace before ‘)’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E203",
+    "name": "whitespace before ‘:’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E211",
+    "name": "whitespace before ‘(‘",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E221",
+    "name": "multiple spaces before operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E222",
+    "name": "multiple spaces after operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E223",
+    "name": "tab before operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E224",
+    "name": "tab after operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E225",
+    "name": "missing whitespace around operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E226",
+    "name": "missing whitespace around arithmetic operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E227",
+    "name": "missing whitespace around bitwise or shift operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E228",
+    "name": "missing whitespace around modulo operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E231",
+    "name": "missing whitespace after ‘,’, ‘;’, or ‘:’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E241",
+    "name": "multiple spaces after ‘,’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E242",
+    "name": "tab after ‘,’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E251",
+    "name": "unexpected spaces around keyword / parameter equals",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E261",
+    "name": "at least two spaces before inline comment",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E262",
+    "name": "inline comment should start with ‘# ‘",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E265",
+    "name": "block comment should start with ‘# ‘",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E266",
+    "name": "too many leading ‘#’ for block comment",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E271",
+    "name": "multiple spaces after keyword",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E272",
+    "name": "multiple spaces before keyword",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E273",
+    "name": "tab after keyword",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E274",
+    "name": "tab before keyword",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E275",
+    "name": "missing whitespace after keyword",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E301",
+    "name": "expected 1 blank line, found 0",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E302",
+    "name": "expected 2 blank lines, found 0",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E303",
+    "name": "too many blank lines (3)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E304",
+    "name": "blank lines found after function decorator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E305",
+    "name": "expected 2 blank lines after end of function or class",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E306",
+    "name": "expected 1 blank line before a nested definition",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E401",
+    "name": "multiple imports on one line",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E402",
+    "name": "module level import not at top of file",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E501",
+    "name": "line too long (82 > 79 characters)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E502",
+    "name": "the backslash is redundant between brackets",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E701",
+    "name": "multiple statements on one line (colon)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E702",
+    "name": "multiple statements on one line (semicolon)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E703",
+    "name": "statement ends with a semicolon",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E704",
+    "name": "multiple statements on one line (def)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E711",
+    "name": "comparison to None should be ‘if cond is None:’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E712",
+    "name": "comparison to True should be ‘if cond is True:’ or ‘if cond:’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E713",
+    "name": "test for membership should be ‘not in’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E714",
+    "name": "test for object identity should be ‘is not’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E721",
+    "name": "do not compare types, use ‘isinstance()’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E722",
+    "name": "do not use bare except, specify exception instead",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E731",
+    "name": "do not assign a lambda expression, use a def",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E741",
+    "name": "do not use variables named ‘l’, ‘O’, or ‘I’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E742",
+    "name": "do not define classes named ‘l’, ‘O’, or ‘I’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E743",
+    "name": "do not define functions named ‘l’, ‘O’, or ‘I’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "E901",
+    "name": "SyntaxError or IndentationError",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "E902",
+    "name": "IOError",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "W191",
+    "name": "indentation contains tabs",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "W291",
+    "name": "trailing whitespace",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W292",
+    "name": "no newline at end of file",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W293",
+    "name": "blank line contains whitespace",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "W391",
+    "name": "blank line at end of file",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "W503",
+    "name": "line break before binary operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W504",
+    "name": "line break after binary operator",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W505",
+    "name": "doc line too long (82 > 79 characters)",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+
+  {
+    "key": "W601",
+    "name": ".has_key() is deprecated, use ‘in’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W602",
+    "name": "deprecated form of raising exception",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W603",
+    "name": "‘<>’ is deprecated, use ‘!=’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W604",
+    "name": "backticks are deprecated, use ‘repr()’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W605",
+    "name": "invalid escape sequence ‘x’",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  },
+  {
+    "key": "W606",
+    "name": "‘async’ and ‘await’ are reserved keywords starting with Python 3.7",
+    "url": "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+  }
+]
