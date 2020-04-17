@@ -1,7 +1,17 @@
 <p>Nested functions and lambdas can reference variables defined in enclosing scopes. This can create tricky bugs when the variable and the function
-are defined in a loop. If the function is called after the loop, it will see the variables last value instead of seeing the values corresponding to
-the iteration where the function was defined.</p>
-<p>This rule raises an issue when a nested function or lambda references a variable defined in an enclosing loop.</p>
+are defined in a loop. If the function is called in another iteration or after the loop finishes, it will see the variables' last value instead of
+seeing the values corresponding to the iteration where the function was defined.</p>
+<p>Capturing loop variables might work for some time but:</p>
+<ul>
+  <li> it makes the code difficult to understand. </li>
+  <li> it increases the risk of introducing a bug when the code is refactored or when dependencies are updated. See an example with the builtin "map"
+  below. </li>
+</ul>
+<p>One solution is to add a parameter to the function/lambda and use the previously captured variable as its default value. Default values are only
+executed once, when the function is defined, which means that the parameter's value will remain the same even when the variable is reassigned in
+following iterations.</p>
+<p>Another solution is to pass the variable as an argument to the function/lambda when it is called.</p>
+<p>This rule raises an issue when a function or lambda references a variable defined in an enclosing loop.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 def run():
@@ -12,6 +22,20 @@ def run():
         def func():
             return i  # Noncompliant
         mylist.append(func)
+
+def example_of_api_change():
+    """"
+    Passing loop variable as default values also makes sure that the code is future-proof.
+    For example the following code will work as intended with python 2 but not python 3.
+    Why? because "map" behavior changed. It now returns an iterator and only executes
+    the lambda when required. The same is true for other functions such as "filter".
+    """
+    lst = []
+    for i in range(5):
+        lst.append(map(lambda x: x + i, range(3)))  # Noncompliant
+    for sublist in lst:
+        # prints [4, 5, 6] x 4 with python 3, with python 2 it prints [0, 1, 2], [1, 2, 3], ...
+        print(list(sublist))
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -23,21 +47,33 @@ def run():
         def func(i=i):  # same for nested functions
             return i
         mylist.append(func)
+
+def example_of_api_change():
+    """"
+    This will work for both python 2 and python 3.
+    """
+    lst = []
+    for i in range(5):
+        lst.append(map(lambda x, value=i: x + value, range(3)))  # Passing "i" as a default value
+    for sublist in lst:
+        print(list(sublist))
 </pre>
 <h2>Exceptions</h2>
-<p>No issue will be raised if the function or lambda is only called in the same loop.</p>
+<p>No issue will be raised if the function or lambda is directly called in the same loop. This still makes the design difficult to understand but it
+is less error prone.</p>
 <pre>
 def function_called_in_loop():
     for i in range(10):
-        print((lambda param: param * i)(42))
+        print((lambda param: param * i)(42)) # Calling the lambda directly
 
         def func(param):
             return param * i
 
-        print(func(42))
+        print(func(42))  # Calling "func" directly
 </pre>
 <h2>See</h2>
 <ul>
   <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker's Guide to Python - Common Gotchas</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Function definitions</a> </li>
 </ul>
 
