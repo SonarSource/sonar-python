@@ -154,6 +154,7 @@ public final class CheckList {
       RegexCheck.class,
       ReturnAndYieldInOneFunctionCheck.class,
       ReturnYieldOutsideFunctionCheck.class,
+      RobustCipherAlgorithmCheck.class,
       SameBranchCheck.class,
       SameConditionCheck.class,
       SecureCookieCheck.class,
