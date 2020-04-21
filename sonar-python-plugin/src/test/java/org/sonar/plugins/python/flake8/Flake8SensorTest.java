@@ -88,6 +88,9 @@ public class Flake8SensorTest {
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(1);
+    assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(firstTextRange.end().line()).isEqualTo(1);
+    assertThat(firstTextRange.end().lineOffset()).isEqualTo(1);
 
     ExternalIssue second = externalIssues.get(1);
     assertThat(second.ruleKey().toString()).isEqualTo("external_flake8:E302");
@@ -99,6 +102,9 @@ public class Flake8SensorTest {
     TextRange secondTextRange = secondPrimaryLoc.textRange();
     assertThat(secondTextRange).isNotNull();
     assertThat(secondTextRange.start().line()).isEqualTo(3);
+    assertThat(secondTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(secondTextRange.end().line()).isEqualTo(3);
+    assertThat(secondTextRange.end().lineOffset()).isEqualTo(1);
 
     assertNoErrorWarnDebugLogs(logTester);
   }
@@ -156,6 +162,8 @@ public class Flake8SensorTest {
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(1);
     assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(firstTextRange.end().line()).isEqualTo(1);
+    assertThat(firstTextRange.end().lineOffset()).isEqualTo(9);
 
     ExternalIssue second = externalIssues.get(1);
     assertThat(second.ruleKey().toString()).isEqualTo("external_flake8:E302");

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -68,11 +69,11 @@ public class Flake8ReportReader {
           int lineNumber = Integer.parseInt(m.group(2));
           String ruleKey = m.group(3);
           String message = m.group(4);
-          return new Issue(filePath, ruleKey, message, lineNumber, 0);
+          return new Issue(filePath, ruleKey, message, lineNumber, null);
         }
         LOG.debug("Cannot parse the line: {}", line);
       } else {
-        LOG.trace("Classifying as detail and ignoring line '{}'", line);
+        LOG.debug("Classifying as detail and ignoring line '{}'", line);
       }
     }
     return null;
@@ -95,7 +96,7 @@ public class Flake8ReportReader {
 
     Integer columnNumber;
 
-    public Issue(String filePath, String ruleKey, String message, Integer lineNumber, Integer columnNumber) {
+    public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber) {
       this.filePath = filePath;
       this.ruleKey = ruleKey;
       this.message = message;

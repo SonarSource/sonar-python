@@ -33,8 +33,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
-
 public class Flake8Sensor extends ExternalIssuesSensor {
 
   private static final Logger LOG = Loggers.get(Flake8Sensor.class);
@@ -72,7 +70,13 @@ public class Flake8Sensor extends ExternalIssuesSensor {
     NewIssueLocation primaryLocation = newExternalIssue.newLocation()
       .message(issue.message)
       .on(inputFile);
-    primaryLocation.at(inputFile.selectLine(issue.lineNumber));
+    if (issue.columnNumber != null && issue.columnNumber < inputFile.selectLine(issue.lineNumber).end().lineOffset() + 1) {
+      inputFile.selectLine(issue.lineNumber).end().lineOffset();
+      primaryLocation.at(inputFile.newRange(issue.lineNumber, issue.columnNumber - 1, issue.lineNumber, issue.columnNumber));
+    } else {
+      // Pylint formatted issues don't provide column information
+      primaryLocation.at(inputFile.selectLine(issue.lineNumber));
+    }
 
     newExternalIssue.at(primaryLocation);
     newExternalIssue.engineId(LINTER_KEY).ruleId(issue.ruleKey);
