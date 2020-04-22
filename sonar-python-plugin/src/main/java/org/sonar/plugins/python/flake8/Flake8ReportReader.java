@@ -53,7 +53,7 @@ public class Flake8ReportReader {
   private static Issue parseLine(String line) {
 
     if (line.length() > 0) {
-      if (!isDetail(line)) {
+      if (!startsWithWhitespace(line)) {
         Matcher m = DEFAULT_PATTERN.matcher(line);
         if (m.matches()) {
           String filePath = m.group(1);
@@ -79,7 +79,7 @@ public class Flake8ReportReader {
     return null;
   }
 
-  private static boolean isDetail(String line) {
+  private static boolean startsWithWhitespace(String line) {
     char first = line.charAt(0);
     return first == ' ' || first == '\t' || first == '\n';
   }
