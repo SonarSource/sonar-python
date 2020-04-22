@@ -31,6 +31,7 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -43,10 +44,12 @@ public class PylintSensor implements Sensor {
   private final PylintConfiguration conf;
   private final Configuration settings;
   private PylintIssuesAnalyzer analyzer;
+  private final AnalysisWarnings analysisWarnings;
 
-  public PylintSensor(PylintConfiguration conf, Configuration settings) {
+  public PylintSensor(PylintConfiguration conf, Configuration settings, AnalysisWarnings analysisWarnings) {
     this.conf = conf;
     this.settings = settings;
+    this.analysisWarnings = analysisWarnings;
   }
 
   @Override
@@ -65,12 +68,15 @@ public class PylintSensor implements Sensor {
   @Override
   public void execute(SensorContext sensorContext) {
     File workDir = new File(sensorContext.fileSystem().workDir(), "pylint");
-
+    if (!sensorContext.activeRules().findByRepository("Pylint").isEmpty()) {
+      analysisWarnings.addUnique("Deprecation notice and future breaking changes: The import of Pylint issues will soon change. " +
+        "Please read the documentation and follow its instructions \"Analyzing Source Code\" >> \"Languages\" >> \"Python\" >> \"Pylint\".");
+    }
     if (!shouldExecute() || !prepareWorkDir(workDir) || !initializeAnalyzer(sensorContext)) {
       return;
     }
 
-    LOG.warn("Execution of pylint by SonarPython is deprecated and will be removed." +
+    LOG.warn("Execution of Pylint by SonarPython is deprecated and will be removed." +
       " Instead, pylint should be executed before sonar-scanner and its report should be imported using the '" + PylintImportSensor.REPORT_PATH_KEY + "' property.");
 
     int i = 0;
