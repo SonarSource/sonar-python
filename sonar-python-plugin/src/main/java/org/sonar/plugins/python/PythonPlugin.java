@@ -29,6 +29,8 @@ import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
+import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
+import org.sonar.plugins.python.flake8.Flake8Sensor;
 import org.sonar.plugins.python.pylint.PylintConfiguration;
 import org.sonar.plugins.python.pylint.PylintImportSensor;
 import org.sonar.plugins.python.pylint.PylintRuleRepository;
@@ -79,6 +81,7 @@ public class PythonPlugin implements Plugin {
       addXUnitExtensions(context);
       addPylintExtensions(context);
       addBanditExtensions(context);
+      addFlake8Extensions(context);
     }
   }
 
@@ -183,6 +186,20 @@ public class PythonPlugin implements Plugin {
           .build(),
         BanditRulesDefinition.class);
     }
+  }
+
+  private static void addFlake8Extensions(Context context) {
+    context.addExtension(Flake8Sensor.class);
+    context.addExtensions(
+      PropertyDefinition.builder(Flake8Sensor.REPORT_PATH_KEY)
+        .name("Flake8 Report Files")
+        .description("Paths (absolute or relative) to report files with Flake8 issues.")
+        .category(EXTERNAL_ANALYZERS_CATEGORY)
+        .subCategory(PYTHON_CATEGORY)
+        .onQualifiers(Qualifiers.PROJECT)
+        .multiValues(true)
+        .build(),
+      Flake8RulesDefinition.class);
   }
 
 }
