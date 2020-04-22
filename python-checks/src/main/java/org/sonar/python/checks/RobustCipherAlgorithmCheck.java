@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
+import static java.util.Arrays.asList;
 
-import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -38,26 +38,27 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
   private static final Map<String, String> sensitiveCalleeFqnsAndMessages = new HashMap<>();
 
   static {
-    String desMessage = "DES works with 56-bit keys that allow attacks via exhaustive search";
-    String des3Message = "Triple DES is vulnerable to meet-in-the-middle attacks";
-    String rc2Message = "RC2 is vulnerable to a related-key attack";
-    String rc4Message = "RC4 is vulnerable to several attacks";
-    String blowfishMessage = "Blowfish uses a 64-bit block size, which makes it vulnerable to birthday attacks";
+    String desMessage = "DES works with 56-bit keys that allow attacks via exhaustive search.";
+    String des3Message = "Triple DES is vulnerable to meet-in-the-middle attacks.";
+    String rc2Message = "RC2 is vulnerable to a related-key attack.";
+    String rc4Message = "RC4 is vulnerable to several attacks.";
+    String blowfishMessage = "Blowfish uses a 64-bit block size, which makes it vulnerable to birthday attacks.";
 
     // Idea is listed under "Weak Algorithms" in pyca/cryptography documentation
     // https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/\
     // #cryptography.hazmat.primitives.ciphers.algorithms.IDEA
-    String ideaMessage = "IDEA-cipher is susceptible to attacks when using weak keys";
+    String ideaMessage = "IDEA-cipher is susceptible to attacks when using weak keys.";
 
     // `pycryptodomex`, `pycryptodome`, and `pycrypto` all share the same names of the algorithms,
     // moreover, `pycryptodome` is drop-in replacement for `pycrypto`, thus they share same name ("Crypto").
-    for (String libraryName : new String[] {"Cryptodome", "Crypto"}) {
-      for (Map.Entry<String, String> e : (Iterable<Map.Entry<String, String>>) Stream.of(
+    for (String libraryName : asList("Cryptodome", "Crypto")) {
+      for (Map.Entry<String, String> e : asList(
         entry("DES", desMessage),
         entry("DES3", des3Message),
         entry("ARC2", rc2Message),
         entry("ARC4", rc4Message),
-        entry("Blowfish", blowfishMessage))::iterator) {
+        entry("Blowfish", blowfishMessage))) {
+
         String methodName = e.getKey();
         String message = e.getValue();
         sensitiveCalleeFqnsAndMessages.put(String.format("%s.Cipher.%s.new", libraryName, methodName), message);
@@ -65,11 +66,12 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     }
 
     // pyca (pyca/cryptography)
-    for (Map.Entry<String, String> e : (Iterable<Map.Entry<String, String>>) Stream.of(
+    for (Map.Entry<String, String> e : asList(
       entry("TripleDES", des3Message),
       entry("Blowfish", blowfishMessage),
       entry("ARC4", rc4Message),
-      entry("IDEA", ideaMessage))::iterator) {
+      entry("IDEA", ideaMessage))) {
+
       String methodName = e.getKey();
       String message = e.getValue();
       sensitiveCalleeFqnsAndMessages.put(
