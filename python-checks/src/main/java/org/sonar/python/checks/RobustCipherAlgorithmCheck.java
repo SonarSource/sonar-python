@@ -37,29 +37,27 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
   private static final Map<String, String> sensitiveCalleeFqnsAndMessages = new HashMap<>();
 
-  private static String DES_MESSAGE = "DES works with 56-bit keys allow attacks via exhaustive search";
-  private static String DES3_MESSAGE = "Triple DES is vulnerable to meet-in-the-middle attack";
-  private static String RC2_MESSAGE = "RC2 is vulnerable to a related-key attack";
-  private static String RC4_MESSAGE = "vulnerable to several attacks (see https://en.wikipedia.org/wiki/RC4#Security)";
-  private static String BLOWFISH_MESSAGE = "Blowfish use a 64-bit block size makes it vulnerable to birthday attacks";
-
-  // Idea is listed under "Weak Algorithms" in pyca/cryptography documentation
-  // https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/\
-  // #cryptography.hazmat.primitives.ciphers.algorithms.IDEA
-  private static String IDEA_MESSAGE = "This cipher is susceptible to attacks when using weak keys. " +
-    "Don't use for new applications.";
-
   static {
+    String desMessage = "DES works with 56-bit keys that allow attacks via exhaustive search";
+    String des3Message = "Triple DES is vulnerable to meet-in-the-middle attacks";
+    String rc2Message = "RC2 is vulnerable to a related-key attack";
+    String rc4Message = "RC4 is vulnerable to several attacks";
+    String blowfishMessage = "Blowfish uses a 64-bit block size, which makes it vulnerable to birthday attacks";
+
+    // Idea is listed under "Weak Algorithms" in pyca/cryptography documentation
+    // https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/\
+    // #cryptography.hazmat.primitives.ciphers.algorithms.IDEA
+    String ideaMessage = "IDEA-cipher is susceptible to attacks when using weak keys";
 
     // `pycryptodomex`, `pycryptodome`, and `pycrypto` all share the same names of the algorithms,
     // moreover, `pycryptodome` is drop-in replacement for `pycrypto`, thus they share same name ("Crypto").
     for (String libraryName : new String[] {"Cryptodome", "Crypto"}) {
       for (Map.Entry<String, String> e : (Iterable<Map.Entry<String, String>>) Stream.of(
-        entry("DES", DES_MESSAGE),
-        entry("DES3", DES3_MESSAGE),
-        entry("ARC2", RC2_MESSAGE),
-        entry("ARC4", RC4_MESSAGE),
-        entry("Blowfish", BLOWFISH_MESSAGE))::iterator) {
+        entry("DES", desMessage),
+        entry("DES3", des3Message),
+        entry("ARC2", rc2Message),
+        entry("ARC4", rc4Message),
+        entry("Blowfish", blowfishMessage))::iterator) {
         String methodName = e.getKey();
         String message = e.getValue();
         sensitiveCalleeFqnsAndMessages.put(String.format("%s.Cipher.%s.new", libraryName, methodName), message);
@@ -68,10 +66,10 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
     // pyca (pyca/cryptography)
     for (Map.Entry<String, String> e : (Iterable<Map.Entry<String, String>>) Stream.of(
-      entry("TripleDES", DES3_MESSAGE),
-      entry("Blowfish", BLOWFISH_MESSAGE),
-      entry("ARC4", RC4_MESSAGE),
-      entry("IDEA", IDEA_MESSAGE))::iterator) {
+      entry("TripleDES", des3Message),
+      entry("Blowfish", blowfishMessage),
+      entry("ARC4", rc4Message),
+      entry("IDEA", ideaMessage))::iterator) {
       String methodName = e.getKey();
       String message = e.getValue();
       sensitiveCalleeFqnsAndMessages.put(
@@ -80,8 +78,8 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     }
 
     // pydes
-    sensitiveCalleeFqnsAndMessages.put("pyDes.des", DES_MESSAGE);
-    sensitiveCalleeFqnsAndMessages.put("pyDes.triple_des", DES3_MESSAGE);
+    sensitiveCalleeFqnsAndMessages.put("pyDes.des", desMessage);
+    sensitiveCalleeFqnsAndMessages.put("pyDes.triple_des", des3Message);
   }
 
   /** Pair constructor. */

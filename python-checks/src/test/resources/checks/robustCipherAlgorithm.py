@@ -3,11 +3,11 @@ def pycryptodomexExamples():
   from Cryptodome.Random import get_random_bytes
   
   key = b'-8B key-'
-  DES.new(key, DES.MODE_OFB) # Noncompliant {{DES works with 56-bit keys allow attacks via exhaustive search}}
+  DES.new(key, DES.MODE_OFB) # Noncompliant {{DES works with 56-bit keys that allow attacks via exhaustive search}}
 # ^^^^^^^
 
   key = DES3.adjust_key_parity(get_random_bytes(24))
-  cipher = DES3.new(key, DES3.MODE_CFB) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attack}}
+  cipher = DES3.new(key, DES3.MODE_CFB) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attacks}}
   #        ^^^^^^^^
 
   key = b'Sixteen byte key'
@@ -15,11 +15,11 @@ def pycryptodomexExamples():
   #        ^^^^^^^^
 
   key = b'Very long and confidential key'
-  cipher = ARC4.new(key) # Noncompliant {{vulnerable to several attacks (see https://en.wikipedia.org/wiki/RC4#Security)}}
+  cipher = ARC4.new(key) # Noncompliant {{RC4 is vulnerable to several attacks}}
   #        ^^^^^^^^
 
   key = b'An arbitrarily long key'
-  cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant {{Blowfish use a 64-bit block size makes it vulnerable to birthday attacks}}
+  cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant {{Blowfish uses a 64-bit block size, which makes it vulnerable to birthday attacks}}
   #        ^^^^^^^^^^^^
 
   key = b'Sixteen byte key'
@@ -38,20 +38,20 @@ def pycroptodomeExamples():
   from Crypto.Random import get_random_bytes
 
   key = b'-8B key-'
-  DES.new(key, DES.MODE_OFB) # Noncompliant {{DES works with 56-bit keys allow attacks via exhaustive search}}
+  DES.new(key, DES.MODE_OFB) # Noncompliant {{DES works with 56-bit keys that allow attacks via exhaustive search}}
 # ^^^^^^^
 
   key = DES3.adjust_key_parity(get_random_bytes(24))
-  cipher = DES3.new(key, DES3.MODE_CFB) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attack}}
+  cipher = DES3.new(key, DES3.MODE_CFB) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attacks}}
   #        ^^^^^^^^
   key = b'Sixteen byte key'
   cipher = ARC2.new(key, ARC2.MODE_CFB) # Noncompliant {{RC2 is vulnerable to a related-key attack}}
   #        ^^^^^^^^
   key = b'Very long and confidential key'
-  cipher = ARC4.new(key) # Noncompliant {{vulnerable to several attacks (see https://en.wikipedia.org/wiki/RC4#Security)}}
+  cipher = ARC4.new(key) # Noncompliant {{RC4 is vulnerable to several attacks}}
   #        ^^^^^^^^
   key = b'An arbitrarily long key'
-  cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant {{Blowfish use a 64-bit block size makes it vulnerable to birthday attacks}}
+  cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant {{Blowfish uses a 64-bit block size, which makes it vulnerable to birthday attacks}}
   #        ^^^^^^^^^^^^
 
 def pycaExamples():
@@ -62,23 +62,23 @@ def pycaExamples():
   key = os.urandom(16)
   iv = os.urandom(16)
 
-  tdes4 = Cipher(algorithms.TripleDES(key), mode=None, backend=default_backend()) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attack}}
+  tdes4 = Cipher(algorithms.TripleDES(key), mode=None, backend=default_backend()) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attacks}}
   #              ^^^^^^^^^^^^^^^^^^^^
-  bf3 = Cipher(algorithms.Blowfish(key), mode=None, backend=default_backend()) # Noncompliant {{Blowfish use a 64-bit block size makes it vulnerable to birthday attacks}}
+  bf3 = Cipher(algorithms.Blowfish(key), mode=None, backend=default_backend()) # Noncompliant {{Blowfish uses a 64-bit block size, which makes it vulnerable to birthday attacks}}
   #            ^^^^^^^^^^^^^^^^^^^
-  rc42 = Cipher(algorithms.ARC4(key), mode=None, backend=default_backend()) # Noncompliant {{vulnerable to several attacks (see https://en.wikipedia.org/wiki/RC4#Security)}}
+  rc42 = Cipher(algorithms.ARC4(key), mode=None, backend=default_backend()) # Noncompliant {{RC4 is vulnerable to several attacks}}
   #             ^^^^^^^^^^^^^^^
 
 def pydesExamples():
   import pyDes;
 
-  des1 = pyDes.des('ChangeIt')  # Noncompliant {{DES works with 56-bit keys allow attacks via exhaustive search}}
+  des1 = pyDes.des('ChangeIt')  # Noncompliant {{DES works with 56-bit keys that allow attacks via exhaustive search}}
   #      ^^^^^^^^^
-  des2 = pyDes.des('ChangeIt', pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant {{DES works with 56-bit keys allow attacks via exhaustive search}}
+  des2 = pyDes.des('ChangeIt', pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant {{DES works with 56-bit keys that allow attacks via exhaustive search}}
   #      ^^^^^^^^^
-  tdes1 = pyDes.triple_des('ChangeItWithYourKey!!!!!')  # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attack}}
+  tdes1 = pyDes.triple_des('ChangeItWithYourKey!!!!!')  # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attacks}}
   #       ^^^^^^^^^^^^^^^^
-  tdes2 = pyDes.triple_des('ChangeItWithYourKey!!!!!', pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attack}}
+  tdes2 = pyDes.triple_des('ChangeItWithYourKey!!!!!', pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant {{Triple DES is vulnerable to meet-in-the-middle attacks}}
   #       ^^^^^^^^^^^^^^^^
 
 def pycryptodomeCompliant():
