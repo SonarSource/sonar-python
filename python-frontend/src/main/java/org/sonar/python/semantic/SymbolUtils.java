@@ -286,6 +286,13 @@ public class SymbolUtils {
       classSymbol("defaultdict", "collections.defaultdict", EQ)
     )));
 
+
+    ClassSymbolImpl ldapObject = classSymbol("LDAPObject", "ldap.LDAPObject", "simple_bind", "simple_bind_s", "bind", "bind_s");
+    FunctionSymbolImpl initialize = new FunctionSymbolImpl(
+      "initialize", "ldap.initialize", false, false, false, Collections.emptyList(),Collections.emptyList());
+    initialize.setDeclaredReturnType(InferredTypes.runtimeType(ldapObject));
+    globalSymbols.put("ldap", new HashSet<>(Collections.singleton(initialize)));
+
     return globalSymbols;
   }
 

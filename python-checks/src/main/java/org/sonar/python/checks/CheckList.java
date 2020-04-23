@@ -120,6 +120,7 @@ public final class CheckList {
       InstanceMethodSelfAsFirstCheck.class,
       InvariantReturnCheck.class,
       JumpInFinallyCheck.class,
+      LdapAuthenticationCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
       LoggersConfigurationCheck.class,
