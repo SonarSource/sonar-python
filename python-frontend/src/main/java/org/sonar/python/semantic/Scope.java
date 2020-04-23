@@ -151,10 +151,23 @@ class Scope {
         .map(s -> copySymbol(s.name(), s, globalSymbolsByFQN))
         .collect(Collectors.toSet());
       return AmbiguousSymbolImpl.create(alternativeSymbols);
+    } else if (symbol.is(Symbol.Kind.OTHER)) {
+      SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName());
+      for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
+        res.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
+      }
+      return res;
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
   }
 
+  /**
+   *
+   * @param nameTree identifier of the imported name (e.g. module or class name)
+   * @param fullyQualifiedName Fully qualified name of the symbol that is being created
+   * @param globalSymbolsByModuleName Mapping from the name of a module to the set of symbols exported by that module
+   * @param globalSymbolsByFQN Global symbol table of entities that are identifiable by an FQN
+   */
   void addModuleSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, Map<String, Set<Symbol>> globalSymbolsByModuleName, Map<String, Symbol> globalSymbolsByFQN) {
     String symbolName = nameTree.name();
     Set<Symbol> moduleExportedSymbols = globalSymbolsByModuleName.get(fullyQualifiedName);

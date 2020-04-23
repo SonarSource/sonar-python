@@ -57,6 +57,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShedPythonFile;
@@ -67,6 +68,7 @@ public class SymbolUtils {
   private static final String SET_COOKIE = "set_cookie";
   private static final String SET_SIGNED_COOKIE = "set_signed_cookie";
   private static final String EQ = "__eq__";
+  private static final String SET_VERIFY = "set_verify";
 
   private SymbolUtils() {
   }
@@ -286,12 +288,16 @@ public class SymbolUtils {
       classSymbol("defaultdict", "collections.defaultdict", EQ)
     )));
 
-
     ClassSymbolImpl ldapObject = classSymbol("LDAPObject", "ldap.LDAPObject", "simple_bind", "simple_bind_s", "bind", "bind_s");
     FunctionSymbolImpl initialize = new FunctionSymbolImpl(
       "initialize", "ldap.initialize", false, false, false, Collections.emptyList(),Collections.emptyList());
     initialize.setDeclaredReturnType(InferredTypes.runtimeType(ldapObject));
     globalSymbols.put("ldap", new HashSet<>(Collections.singleton(initialize)));
+
+    ClassSymbolImpl OpenSSL_SSL_ContextClass =
+      classSymbol("Context", "OpenSSL.SSL.Context", SET_VERIFY);
+    SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", OpenSSL_SSL_ContextClass);
+    globalSymbols.put("OpenSSL", new HashSet<>(Arrays.asList(sslSubmodule)));
 
     return globalSymbols;
   }
@@ -300,6 +306,14 @@ public class SymbolUtils {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
     classSymbol.addMembers(Arrays.stream(members).map(m -> new SymbolImpl(m, fullyQualifiedName + "." + m)).collect(Collectors.toSet()));
     return classSymbol;
+  }
+
+  private static SymbolImpl moduleSymbol(String moduleName, String fullyQualifiedName, Symbol... childSymbols) {
+    SymbolImpl m = new SymbolImpl(moduleName, fullyQualifiedName);
+    for (Symbol c: childSymbols) {
+      m.addChildSymbol(c);
+    }
+    return m;
   }
 
   public static boolean isTypeShedFile(PythonFile pythonFile) {

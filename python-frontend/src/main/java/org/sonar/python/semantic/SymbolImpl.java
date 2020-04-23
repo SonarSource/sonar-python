@@ -129,4 +129,7 @@ public class SymbolImpl implements Symbol {
     childrenSymbolByName.values().forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
   }
 
+  Map<String, Symbol> getChildrenSymbolByName() {
+    return Collections.unmodifiableMap(childrenSymbolByName);
+  }
 }
