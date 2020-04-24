@@ -70,7 +70,7 @@ public class PylintSensor implements Sensor {
     File workDir = new File(sensorContext.fileSystem().workDir(), "pylint");
     if (!sensorContext.activeRules().findByRepository("Pylint").isEmpty()) {
       analysisWarnings.addUnique("Deprecation notice and future breaking changes: The import of Pylint issues will soon change. " +
-        "Please read the documentation and follow its instructions \"Analyzing Source Code\" >> \"Languages\" >> \"Python\" >> \"Pylint\".");
+        "Please follow the instructions in documentation’s section \"Analyzing Source Code\" >> \"Languages\" >> \"Python\" >> \"Pylint\".");
     }
     if (!shouldExecute() || !prepareWorkDir(workDir) || !initializeAnalyzer(sensorContext)) {
       return;

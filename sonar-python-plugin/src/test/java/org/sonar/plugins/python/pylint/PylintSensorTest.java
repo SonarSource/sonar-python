@@ -146,7 +146,7 @@ public class PylintSensorTest {
     assertThat(context.allIssues()).hasSize(0);
     assertThat(warnings).hasSize(1);
     assertThat(warnings.get(0)).isEqualTo("Deprecation notice and future breaking changes: The import of Pylint issues will soon change. " +
-      "Please read the documentation and follow its instructions \"Analyzing Source Code\" >> \"Languages\" >> \"Python\" >> \"Pylint\".");
+      "Please follow the instructions in documentation’s section \"Analyzing Source Code\" >> \"Languages\" >> \"Python\" >> \"Pylint\".");
 
     PylintImportSensor.clearLoggedWarnings();
     settings.clear();
