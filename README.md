@@ -9,6 +9,10 @@ SonarPython is a code analyzer for Python projects.
 * [Available rules](https://rules.sonarsource.com/python)
 * [SonarSource Community Forum](https://community.sonarsource.com) for feedback
 
+## Building the project
+
+SonarPython embeds [Typeshed](https://github.com/python/typeshed) as a Git submodule. Prior to building the project, you should therefore run `git submodule update --init` to retrieve the corresponding sources.
+
 ## License
 
 Copyright 2011-2018 SonarSource.
