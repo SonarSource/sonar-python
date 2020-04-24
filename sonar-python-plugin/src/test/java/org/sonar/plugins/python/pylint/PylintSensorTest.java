@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,11 +41,13 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
+import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -80,11 +84,13 @@ public class PylintSensorTest {
   @Test
   public void sensor_descriptor() {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new PylintSensor(conf, new ConfigurationBridge(new MapSettings())).describe(descriptor);
+    List<String> warnings = new ArrayList<>();
+    new PylintSensor(conf, new ConfigurationBridge(new MapSettings()), warnings::add).describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("PylintSensor");
     assertThat(descriptor.languages()).containsOnly("py");
     assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
     assertThat(descriptor.ruleRepositories()).containsExactly(PylintRuleRepository.REPOSITORY_KEY);
+    assertThat(warnings).isEmpty();
   }
 
   @Test
@@ -99,9 +105,11 @@ public class PylintSensorTest {
     context.fileSystem().setWorkDir(workDir.toPath());
     when(conf.getPylintPath()).thenReturn("[---/this/should/definitely/not/exist---]");
 
-    PylintSensor sensor = new PylintSensor(conf, new ConfigurationBridge(new MapSettings()));
+    List<String> warnings = new ArrayList<>();
+    PylintSensor sensor = new PylintSensor(conf, new ConfigurationBridge(new MapSettings()), warnings::add);
     sensor.execute(context);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Unable to use pylint for analysis. Error:");
+    assertThat(warnings).isEmpty();
   }
 
   @Test
@@ -125,7 +133,8 @@ public class PylintSensorTest {
 
     MapSettings settings = new MapSettings();
     settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, "report-is-set");
-    PylintSensor sensor = spy(new PylintSensor(conf, new ConfigurationBridge(settings)));
+    List<String> warnings = new ArrayList<>();
+    PylintSensor sensor = spy(new PylintSensor(conf, new ConfigurationBridge(settings), warnings::add));
     PylintIssuesAnalyzer analyzer = mock(PylintIssuesAnalyzer.class);
     String absolutePath = new File(FILE1_PATH).getAbsolutePath().replace("\\", "/");
     when(analyzer.analyze(Mockito.eq(absolutePath), any(), any())).thenReturn(asList(issue1, issue2, issue3));
@@ -135,6 +144,9 @@ public class PylintSensorTest {
 
     // sensor was not executed as the 'sonar.python.pylint.reportPath' is set
     assertThat(context.allIssues()).hasSize(0);
+    assertThat(warnings).hasSize(1);
+    assertThat(warnings.get(0)).isEqualTo("Deprecation notice and future breaking changes: The import of Pylint issues will soon change. " +
+      "Please follow the instructions in documentation’s section \"Analyzing Source Code\" >> \"Languages\" >> \"Python\" >> \"Pylint\".");
 
     PylintImportSensor.clearLoggedWarnings();
     settings.clear();
@@ -144,7 +156,7 @@ public class PylintSensorTest {
     assertThat(context.allIssues().iterator().next().ruleKey().rule()).isEqualTo(C0103_RULE_KEY);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Pylint rule 'C9999' is unknown in Sonar");
     assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain("Pylint rule 'C0111' is unknown in Sonar");
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Execution of pylint by SonarPython is deprecated and will be removed." +
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Execution of Pylint by SonarPython is deprecated and will be removed." +
       " Instead, pylint should be executed before sonar-scanner and its report should be imported using the 'sonar.python.pylint.reportPath' property.");
   }
 
@@ -156,13 +168,16 @@ public class PylintSensorTest {
     createInputFile(workDir, context, FILE1_PATH);
     createInputFile(workDir, context, "file2.py");
 
-    PylintSensor sensor = spy(new PylintSensor(conf, new ConfigurationBridge(new MapSettings())));
+    List<String> warnings = new ArrayList<>();
+    PylintSensor sensor = spy(new PylintSensor(conf, new ConfigurationBridge(new MapSettings()), warnings::add));
     PylintIssuesAnalyzer analyzer = mock(PylintIssuesAnalyzer.class);
     when(analyzer.analyze(any(), any(), any())).thenThrow(RuntimeException.class);
     doReturn(analyzer).when(sensor).createAnalyzer(any(), any());
 
     sensor.execute(context);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot analyse file 'file1.py', the following exception occurred:");
+    // no rule activated = no warning
+    assertThat(warnings).isEmpty();
     verify(analyzer, times(2)).analyze(any(), any(), any());
   }
 
@@ -180,7 +195,7 @@ public class PylintSensorTest {
     if (pylintReportPath != null) {
       settings.setProperty(PylintImportSensor.REPORT_PATH_KEY, pylintReportPath);
     }
-    PylintSensor sensor = new PylintSensor(conf, new ConfigurationBridge(settings));
+    PylintSensor sensor = new PylintSensor(conf, new ConfigurationBridge(settings), s -> {});
     return sensor.shouldExecute();
   }
 
