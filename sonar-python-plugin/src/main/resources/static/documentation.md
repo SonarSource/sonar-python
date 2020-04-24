@@ -125,5 +125,5 @@ Comment syntax is described [here](https://github.com/SonarSource/sonar-analyzer
 <!-- /sonarqube -->
 
 ## Related Pages
-* [Importing External Issues](/analysis/external-issues/) ([Pylint](http://www.pylint.org/), [Bandit](https://github.com/PyCQA/bandit/blob/master/README.rst))
+* [Importing External Issues](/analysis/external-issues/) ([Pylint](http://www.pylint.org/), [Bandit](https://github.com/PyCQA/bandit/blob/master/README.rst), [Flake8](https://flake8.pycqa.org/en/latest/))
 * [Test Coverage & Execution](/analysis/coverage/) (the [Coverage Tool](http://nedbatchelder.com/code/coverage/) provided by [Ned Batchelder](http://nedbatchelder.com/), [Nose](https://nose.readthedocs.org/en/latest/), [pytest](https://docs.pytest.org/en/latest/))
