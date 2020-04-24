@@ -58,6 +58,15 @@ public class Flake8ReportTest {
     assertThat(issue.getType()).isEqualTo(Common.RuleType.CODE_SMELL);
     assertThat(issue.getSeverity()).isEqualTo(Common.Severity.MAJOR);
     assertThat(issue.getEffort()).isEqualTo("5min");
+
+    // Issue for which we don't have metadata
+    issue = issues.get(4);
+    assertThat(issue.getComponent()).isEqualTo("flake8_project:src/file1.py");
+    assertThat(issue.getRule()).isEqualTo("external_flake8:C901");
+    assertThat(issue.getMessage()).isEqualTo("'bar' is too complex (6)");
+    assertThat(issue.getType()).isEqualTo(Common.RuleType.CODE_SMELL);
+    assertThat(issue.getSeverity()).isEqualTo(Common.Severity.MAJOR);
+    assertThat(issue.getEffort()).isEqualTo("5min");
   }
 
   private static List<Issues.Issue> issues() {

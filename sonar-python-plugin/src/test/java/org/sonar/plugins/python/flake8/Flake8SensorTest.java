@@ -75,7 +75,7 @@ public class Flake8SensorTest {
   @Test
   public void issues_with_sonarqube_79() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, FLAKE_8_REPORT);
-    assertThat(externalIssues).hasSize(2);
+    assertThat(externalIssues).hasSize(3);
 
     ExternalIssue first = externalIssues.get(0);
     assertThat(first.ruleKey().toString()).isEqualTo(FLAKE8_F401);
@@ -105,6 +105,14 @@ public class Flake8SensorTest {
     assertThat(secondTextRange.start().lineOffset()).isEqualTo(0);
     assertThat(secondTextRange.end().line()).isEqualTo(3);
     assertThat(secondTextRange.end().lineOffset()).isEqualTo(1);
+
+    ExternalIssue third = externalIssues.get(2);
+    assertThat(third.ruleKey().toString()).isEqualTo("external_flake8:C901");
+    assertThat(third.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(third.severity()).isEqualTo(Severity.MAJOR);
+    IssueLocation thirdPrimaryLoc = third.primaryLocation();
+    assertThat(thirdPrimaryLoc.inputComponent().key()).isEqualTo(FLAKE8_FILE);
+    assertThat(thirdPrimaryLoc.message()).isEqualTo("'bar' is too complex (6)");
 
     assertNoErrorWarnDebugLogs(logTester);
   }
