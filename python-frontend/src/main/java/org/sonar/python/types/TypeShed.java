@@ -63,7 +63,7 @@ public class TypeShed {
     if (TypeShed.builtins == null) {
       Map<String, Symbol> builtins = new HashMap<>();
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
-      InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
+      InputStream resource = TypeShed.class.getResourceAsStream("typeshed/stdlib/2and3/builtins.pyi");
       PythonFile file = new TypeShedPythonFile(resource, "");
       AstNode astNode = PythonParser.create().parse(file.content());
       FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
@@ -96,8 +96,8 @@ public class TypeShed {
 
   // visible for testing
   static Set<Symbol> typingModuleSymbols() {
-    Map<String, Symbol> typingPython3 = getModuleSymbols("3/typing.pyi", TYPING);
-    Map<String, Symbol> typingPython2 = getModuleSymbols("2/typing.pyi", TYPING);
+    Map<String, Symbol> typingPython3 = getModuleSymbols("typeshed/stdlib/3/typing.pyi", TYPING);
+    Map<String, Symbol> typingPython2 = getModuleSymbols("typeshed/stdlib/2/typing.pyi", TYPING);
     Set<Symbol> typingModuleSymbols = new HashSet<>();
     typingPython3.forEach((fqn, python3Symbol) -> {
       Symbol python2Symbol = typingPython2.get(fqn);
@@ -137,7 +137,7 @@ public class TypeShed {
 
   public static Set<Symbol> standardLibrarySymbols(String stdlibModuleName) {
     if (!TypeShed.standardLibrarySymbols.containsKey(stdlibModuleName)) {
-      Map<String, Symbol> result = readTypeShedSymbols("stdlib/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName);
+      Map<String, Symbol> result = readTypeShedSymbols("typeshed/stdlib/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName);
       if (result != null) {
         standardLibrarySymbols.put(stdlibModuleName, result.values().stream().filter(s -> s.fullyQualifiedName() != null).collect(Collectors.toSet()));
         return TypeShed.standardLibrarySymbols.get(stdlibModuleName);
