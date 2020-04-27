@@ -79,9 +79,4 @@ public class RegularArgumentImpl extends PyTree implements RegularArgument {
   public List<Tree> computeChildren() {
     return Stream.of(keywordArgument, equalToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
-
-  @Override
-  public String toString() {
-    return super.toString() + (keywordArgument == null ? "" : ("[" + keywordArgument.name() + "]"));
-  }
 }

@@ -55,6 +55,14 @@ def pyopensslTest():
   sock.shutdown()
   sock.close()
 
+  # Weird cases for code coverage only.
+  ctxC1 = SSL.Context(SSL.TLSv1_2_METHOD)
+  ctxC1.set_verify()
+  kwargs = { 'something': True }
+  ctxC1.set_verify(**kwargs)
+  ctxC1.set_verify(noSSL.THIS_DOESNT_EXIST)
+
+
 def requestsTests():
   # Mutably borrowed from here:
   # https://github.com/SonarSource/security-expected-issues/blob/master/python/rules/vulnerabilities/\
@@ -112,7 +120,6 @@ def requestsTests():
   requests.options('https://example.domain', verify=False) # Noncompliant {{Disabling certificate verification is dangerous.}}
   #                                                 ^^^^^
 
-
   requests.request(method='GET', url='https://example.domain') # Compliant
   requests.request(method='GET', url='https://example.domain', verify=True) # Compliant
   requests.request('GET', 'https://example.domain', verify='/path/to/CAbundle') # Compliant
@@ -131,6 +138,14 @@ def requestsTests():
   requests.options(url='https://example.domain') # Compliant
   requests.request('GET', 'https://example.domain', verify=range(42)) # Compliant
   requests.request('GET', 'https://example.domain', verify=range(2, 5)) # Compliant
+
+  # Pathological cases for test coverage
+  requests.request('GET', 'https://example.domain', verify=thatThingIsNotACollectionConstructor(0))
+  requests.request('GET', 'https://example.domain', verify=sorted([])) # FN, bool(sorted([])) == False
+  ft = { 'from': 10, 'to': 100 }
+  requests.request('GET', 'https://example.domain', verify=range(**ft))
+  requests.request('GET', 'https://example.domain', verify=range("not numeric"))
+  requests.request('GET', 'https://example.domain', verify=set(42))
 
 
 def urllibTests():
@@ -248,6 +263,18 @@ def urllibTests():
     ctxF.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
     #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
     print(r1.status, r1.reason)
+
+    # Corner cases for code coverage
+    ctxC1 = ssl.there_is_no_such_symbol()
+    ctxC1.verify_mode = ssl.CERT_REQUIRED
+
+    ctxC2 = ssl._create_default_https_context()
+    ctxC2.verify_mode = ssl.THAT_S_NOT_A_VALID_MODE
+
+    ambiguous = "" if 42 * 42 < 1700 else (lambda x: x * x)
+    ctxC3 = ambiguous._create_default_https_context()
+    ctxC4 = notASymbol()
+
 
   except: # catch *all* exceptions
     e = sys.exc_info()[0]
