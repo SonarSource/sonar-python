@@ -19,21 +19,34 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.RegularArgumentImpl;
+import static java.util.Optional.ofNullable;
 
 // https://jira.sonarsource.com/browse/SONARPY-357
 // https://jira.sonarsource.com/browse/RSPEC-4830
@@ -51,30 +64,35 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    */
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::requestsCheck);
+  }
 
-    final String setVerifyFqn = Fqn.context("set_verify");
+  /** Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>. */
+  private static final String SET_VERIFY = Fqn.context("set_verify");
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, subscriptionContext -> {
-      CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
+  /**
+   * Check for the <code>OpenSSL.SSL.Context.set_verify</code> flag settings.
+   *
+   * @param subscriptionContext the subscription context passed by <code>Context.registerSyntaxNodeConsumer</code>.
+   */
+  private static void sslSetVerifyCheck(SubscriptionContext subscriptionContext) {
 
-      boolean isSetVerifyInvocation = Optional
-        .ofNullable(callExpr.calleeSymbol())
-        .map(Symbol::fullyQualifiedName)
-        .filter(fqn -> fqn.equals(setVerifyFqn))
-        .isPresent();
+    CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
 
-      if (isSetVerifyInvocation) {
-        List<Argument> args = callExpr.arguments();
-        if (!args.isEmpty()) {
-          Tree flagsArgument = args.get(0);
-          if (flagsArgument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-            Set<QualifiedExpression> flags = extractFlags(((RegularArgumentImpl) flagsArgument).expression());
-            checkFlagSettings(flags).ifPresent(issue -> subscriptionContext.addIssue(issue.token, issue.message));
-          }
+    boolean isSetVerifyInvocation =
+      ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(SET_VERIFY::equals).isPresent();
+
+    if (isSetVerifyInvocation) {
+      List<Argument> args = callExpr.arguments();
+      if (!args.isEmpty()) {
+        Tree flagsArgument = args.get(0);
+        if (flagsArgument.is(Tree.Kind.REGULAR_ARGUMENT)) {
+          Set<QualifiedExpression> flags = extractFlags(((RegularArgumentImpl) flagsArgument).expression());
+          checkFlagSettings(flags).ifPresent(issue -> subscriptionContext.addIssue(issue.token, issue.message));
         }
       }
-
-    });
+    }
   }
 
   /** Helper methods for generating FQNs frequently used in this check. */
@@ -136,5 +154,125 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       this.message = message;
       this.token = token;
     }
+  }
+
+  /**
+   * Set of FQNs of methods in <code>requests</code>-module that have the vulnerable <code>verify</code>-option.
+   */
+  private static Set<String> requestsMethods = Stream
+    .of("request", "get", "head", "post", "put", "delete", "patch", "options")
+    .map(method -> "requests." + method)
+    .collect(Collectors.toSet());
+
+  private static void requestsCheck(SubscriptionContext subscriptionContext) {
+    CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
+    boolean isVulnerableMethod =
+      ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(requestsMethods::contains).isPresent();
+
+    if(isVulnerableMethod) {
+      // Apparently, this is as close as one can get to short-circuiting `opt1.or(opt2)` before Java 9.
+      // https://stackoverflow.com/a/24600021/2707792
+      // All it does is first attempting to get `verify = rhs` from named parameter, and then `verify: rhs` from kwargs.
+      // In any case, we want the `rhs`, so we can check later whether it's a falsy value.
+      Optional<Expression> verifyRhs =
+        searchVerifyAssignment(callExpr).map(Optional::of).orElseGet(() -> searchVerifyInKwargs(callExpr));
+
+      verifyRhs.ifPresent(rhs -> {
+        if (Expressions.isFalsy(rhs) || isFalsyCollection(rhs)) {
+          subscriptionContext.addIssue(
+            rhs.firstToken(),
+            rhs.lastToken(),
+            "Disabling certificate verification is dangerous."
+          );
+        }
+      });
+    }
+  }
+
+  /**
+   * Attempts to find the expression in <code>verify = expr</code> explicitly keyworded parameter assignment.
+   *
+   * @return The <code>expr</code> part on the right hand side of the assignment.
+   */
+  private static Optional<Expression> searchVerifyAssignment(CallExpression callExpr) {
+    for (Argument a : callExpr.arguments()) {
+      if (a instanceof RegularArgumentImpl) {
+        RegularArgumentImpl regArg = (RegularArgumentImpl) a;
+        Name keywordArgument = regArg.keywordArgument();
+        if (keywordArgument != null && "verify".equals(keywordArgument.name())) {
+          return Optional.of(regArg.expression());
+        }
+      }
+    }
+    return Optional.empty();
+  }
+
+  /**
+   * Attempts to find the <code>rhs</code> in some definition <code>kwargs = { 'verify': rhs }</code>
+   * of <code>kwargs</code> used in the arguments of the given <code>callExpression</code>.
+   */
+  private static Optional<Expression> searchVerifyInKwargs(CallExpression callExpression) {
+    return callExpression
+      .arguments()
+      .stream()
+      .filter(UnpackingExpression.class::isInstance)
+      .map(arg -> ((UnpackingExpression) arg).expression())
+      .filter(Name.class::isInstance)
+      .map(name -> Expressions.singleAssignedValue((Name) name))
+      .filter(DictionaryLiteral.class::isInstance)
+      .flatMap(dict -> ((DictionaryLiteral) dict).elements().stream()
+        .filter(KeyValuePair.class::isInstance)
+        .map(KeyValuePair.class::cast)
+        .filter(kvp -> Optional.of(kvp.key())
+          .filter(StringLiteral.class::isInstance)
+          .map(StringLiteral.class::cast)
+          .filter(strLit -> "verify".equals(strLit.trimmedQuotesValue()))
+          .isPresent()
+        )
+        .map(KeyValuePair::value)
+      ).findFirst();
+  }
+
+
+
+  /**
+   * Checks whether an expression is obviously a falsy collection (e.g. <code>set()</code> or <code>range(0)</code>).
+   */
+  private static boolean isFalsyCollection(Expression expr) {
+    if (expr instanceof CallExpression) {
+      CallExpression callExpr = (CallExpression) expr;
+      Optional<String> fqnOpt = Optional.ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName);
+      if (fqnOpt.isPresent()) {
+        String fqn = fqnOpt.get();
+        return isFalsyNoArgCollectionConstruction(callExpr, fqn) || isFalsyRange(callExpr, fqn);
+      }
+    }
+    return false;
+  }
+
+  /** FQNs of collection constructors that yield a falsy collection if invoked without arguments. */
+  private static final Set<String> NO_ARG_FALSY_COLLECTION_CONSTRUCTORS = new HashSet<>(Arrays.asList(
+    "set", "list", "dict"
+  ));
+
+  /** Detects expressions like <code>dict()</code> or <code>list()</code>. */
+  private static boolean isFalsyNoArgCollectionConstruction(CallExpression callExpr, String fqn) {
+    return NO_ARG_FALSY_COLLECTION_CONSTRUCTORS.contains(fqn) && callExpr.arguments().isEmpty();
+  }
+
+  private static boolean isFalsyRange(CallExpression callExpr, String fqn) {
+    if ("range".equals(fqn) && callExpr.arguments().size() == 1) {
+      // `range(0)` is also falsy
+      Argument firstArg = callExpr.arguments().get(0);
+      if (firstArg instanceof RegularArgument) {
+        RegularArgument regArg = (RegularArgument) firstArg;
+        Expression firstArgExpr = regArg.expression();
+        if (firstArgExpr.is(Tree.Kind.NUMERIC_LITERAL)) {
+          NumericLiteral num = (NumericLiteral) firstArgExpr;
+          return num.valueAsLong() == 0L;
+        }
+      }
+    }
+    return false;
   }
 }

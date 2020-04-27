@@ -57,7 +57,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShedPythonFile;
@@ -294,10 +293,10 @@ public class SymbolUtils {
     initialize.setDeclaredReturnType(InferredTypes.runtimeType(ldapObject));
     globalSymbols.put("ldap", new HashSet<>(Collections.singleton(initialize)));
 
-    ClassSymbolImpl OpenSSL_SSL_ContextClass =
+    ClassSymbolImpl sslContextClass =
       classSymbol("Context", "OpenSSL.SSL.Context", SET_VERIFY);
-    SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", OpenSSL_SSL_ContextClass);
-    globalSymbols.put("OpenSSL", new HashSet<>(Arrays.asList(sslSubmodule)));
+    SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", sslContextClass);
+    globalSymbols.put("OpenSSL", new HashSet<>(Collections.singletonList(sslSubmodule)));
 
     return globalSymbols;
   }
@@ -308,6 +307,7 @@ public class SymbolUtils {
     return classSymbol;
   }
 
+  @SuppressWarnings("SameParameterValue")
   private static SymbolImpl moduleSymbol(String moduleName, String fullyQualifiedName, Symbol... childSymbols) {
     SymbolImpl m = new SymbolImpl(moduleName, fullyQualifiedName);
     for (Symbol c: childSymbols) {
