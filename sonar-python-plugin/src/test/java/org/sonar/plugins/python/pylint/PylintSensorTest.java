@@ -41,13 +41,11 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
-import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -156,8 +154,8 @@ public class PylintSensorTest {
     assertThat(context.allIssues().iterator().next().ruleKey().rule()).isEqualTo(C0103_RULE_KEY);
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("Pylint rule 'C9999' is unknown in Sonar");
     assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain("Pylint rule 'C0111' is unknown in Sonar");
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Execution of Pylint by SonarPython is deprecated and will be removed." +
-      " Instead, pylint should be executed before sonar-scanner and its report should be imported using the 'sonar.python.pylint.reportPath' property.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Execution of Pylint is deprecated and will be removed." +
+      " Instead, Pylint should be executed before sonar-scanner and its report should be imported using the 'sonar.python.pylint.reportPath' property.");
   }
 
   @Test

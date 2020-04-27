@@ -1,6 +1,5 @@
-# SonarPython [![Build Status](https://api.cirrus-ci.com/github/SonarSource/sonar-python.svg?branch=master)](https://cirrus-ci.com/github/SonarSource/sonar-python)  [![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.python%3Apython&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython)
-
-SonarPython is a code analyzer for Python projects. 
+# Code Quality and Security for Python [![Build Status](https://api.cirrus-ci.com/github/SonarSource/sonar-python.svg?branch=master)](https://cirrus-ci.com/github/SonarSource/sonar-python)  [![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.python%3Apython&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython)
+#### Python analyzer for SonarQube, SonarCloud and SonarLint
 
 ## Useful links
 
@@ -11,7 +10,7 @@ SonarPython is a code analyzer for Python projects.
 
 ## Building the project
 
-SonarPython embeds [Typeshed](https://github.com/python/typeshed) as a Git submodule. Prior to building the project, you should therefore run `git submodule update --init` to retrieve the corresponding sources.
+sonar-python embeds [Typeshed](https://github.com/python/typeshed) as a Git submodule. Prior to building the project, you should therefore run `git submodule update --init` to retrieve the corresponding sources.
 
 ## License
 
