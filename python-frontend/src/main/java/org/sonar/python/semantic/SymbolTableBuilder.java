@@ -99,7 +99,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private FileInput fileInput = null;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
-  private static final List<String> BASE_MODULES = Arrays.asList("", "typing");
+  private static final List<String> BASE_MODULES = Arrays.asList("", "typing", "typing_extensions");
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -367,7 +367,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
         if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
-          importedModuleSymbols = TypeShed.standardLibrarySymbols(moduleName);
+          importedModuleSymbols = TypeShed.typeShedSymbols(moduleName);
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
           currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, importFrom, globalSymbolsByFQN);

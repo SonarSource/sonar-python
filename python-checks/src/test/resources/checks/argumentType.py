@@ -8,6 +8,7 @@ import imaplib
 from unittest.mock import Mock
 from typing import Dict, Tuple, Set
 from collections import OrderedDict, Counter
+from emoji import emojize
 
 class ExpectedClass():
   a = 42
@@ -104,6 +105,10 @@ def builtin_functions():
   x = {}
   x = []
   x.pop(())
+
+def third_party_functions():
+  emojize("Python is :thumbs_up:") # OK
+  emojize(42) # Noncompliant
 
 def type_aliases():
   def with_set(a : Set[int]): ...

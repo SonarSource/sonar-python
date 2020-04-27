@@ -164,7 +164,7 @@ class Scope {
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
     } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
-      Set<Symbol> standardLibrarySymbols = TypeShed.standardLibrarySymbols(fullyQualifiedName);
+      Set<Symbol> standardLibrarySymbols = TypeShed.typeShedSymbols(fullyQualifiedName);
       if (!standardLibrarySymbols.isEmpty()) {
         SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
         standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol, globalSymbolsByFQN)));
