@@ -1,7 +1,8 @@
 def pyopensslTest():
   # Mutably borrowed from here:
   # https://github.com/SonarSource/security-expected-issues/blob/master/python/rules/vulnerabilities/\
-  # RSPEC-4830%20Server%20certificates%20should%20be%20verified%20during%20SSL%E2%81%84TLS%20connections/pyopenssl-test.py
+  # RSPEC-4830%20Server%20certificates%20should%20be%20verified%20during%20SSL%E2%81%84TLS%20connections/\
+  # pyopenssl-test.py
 
   from OpenSSL import SSL
   import sys, os, select, socket
@@ -130,3 +131,125 @@ def requestsTests():
   requests.options(url='https://example.domain') # Compliant
   requests.request('GET', 'https://example.domain', verify=range(42)) # Compliant
   requests.request('GET', 'https://example.domain', verify=range(2, 5)) # Compliant
+
+
+def urllibTests():
+  # Mutably borrowed from
+  # https://raw.githubusercontent.com/SonarSource/security-expected-issues/master/python/rules/vulnerabilities/\
+  # RSPEC-4830%20Server%20certificates%20should%20be%20verified%20during%20SSL%E2%81%84TLS%20connections/\
+  # urllib-test.py
+  import urllib.request
+  import ssl
+  import sys
+
+  try:
+    print("test1-default")
+    # (S4830) - bydefault = ctx.verify_mode = ssl.CERT_NONE
+    ctx1 = ssl._create_unverified_context()  # Noncompliant {{Certificate verification is disabled by default, verify_mode should be updated.}}
+    #          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx1)
+    print(r1.status, r1.reason)
+
+    print("test1-1")
+    ctx2 = ssl._create_unverified_context()
+    ctx2.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+    #                      ^^^^^^^^^
+    r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx2)
+    print(r1.status, r1.reason)
+
+    print("test1-2")
+    ctx3 = ssl._create_unverified_context()
+    ctx3.verify_mode = ssl.CERT_OPTIONAL # Compliant (S4830)
+
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+    print("test1-3")
+    ctx4 = ssl._create_unverified_context()
+    ctx4.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+
+    print("test2-default")
+    # (S4830) - bydefault = ctx.verify_mode = ssl.CERT_NONE
+    ctx5 = ssl._create_stdlib_context() # Noncompliant {{Certificate verification is disabled by default, verify_mode should be updated.}}
+    #          ^^^^^^^^^^^^^^^^^^^^^^
+    r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx5)
+    print(r1.status, r1.reason)
+
+    print("test2-1")
+    ctx6 = ssl._create_stdlib_context()
+    ctx6.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+    #                      ^^^^^^^^^
+    r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx6)
+    print(r1.status, r1.reason)
+
+    print("test2-2")
+    ctx7 = ssl._create_stdlib_context()
+    ctx7.verify_mode = ssl.CERT_OPTIONAL # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+    print("test3-3")
+    ctx8 = ssl._create_stdlib_context()
+    ctx8.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+
+    print("test3-default")
+    ctx9 = ssl.create_default_context()  # Compliant (S4830) - bydefault = ctx.verify_mode = ssl.CERT_REQUIRED
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+    print("test3-1")
+    ctx9b = ssl.create_default_context()
+    ctx9b.check_hostname = False
+    ctx9b.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+    #                       ^^^^^^^^^
+    r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx9b)
+    print(r1.status, r1.reason)
+
+    print("test3-2")
+    ctxA = ssl.create_default_context()
+    ctxA.verify_mode = ssl.CERT_OPTIONAL # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+    print("test3-3")
+    ctxB = ssl.create_default_context()
+    ctxB.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+
+    print("test4-default")
+    ctxC = ssl._create_default_https_context() # Compliant (S4830) - bydefault = ctx.verify_mode = ssl.CERT_REQUIRED
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+    print("test4-1")
+    ctxD = ssl._create_default_https_context()
+    ctxD.check_hostname = False
+    ctxD.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+    #                      ^^^^^^^^^
+    r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctxD)
+    print(r1.status, r1.reason)
+
+    print("test4-2")
+    ctxE = ssl._create_default_https_context()
+    ctxE.verify_mode = ssl.CERT_OPTIONAL # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+    print("test4-3")
+    ctxF = ssl._create_default_https_context()
+    ctxF.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+    #r1 = urllib.request.urlopen('https://self-signed.badssl.com/', context=ctx)
+    print(r1.status, r1.reason)
+
+  except: # catch *all* exceptions
+    e = sys.exc_info()[0]
+    print( "<p>Error: %s</p>" % e )
+    raise

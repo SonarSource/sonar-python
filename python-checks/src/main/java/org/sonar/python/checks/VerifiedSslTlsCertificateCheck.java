@@ -21,8 +21,10 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,7 +33,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
@@ -66,6 +70,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::requestsCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::urllibCheck);
   }
 
   /** Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>. */
@@ -80,8 +85,10 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
     CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
 
-    boolean isSetVerifyInvocation =
-      ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(SET_VERIFY::equals).isPresent();
+    boolean isSetVerifyInvocation = ofNullable(callExpr.calleeSymbol())
+      .map(Symbol::fullyQualifiedName)
+      .filter(SET_VERIFY::equals)
+      .isPresent();
 
     if (isSetVerifyInvocation) {
       List<Argument> args = callExpr.arguments();
@@ -166,24 +173,26 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   private static void requestsCheck(SubscriptionContext subscriptionContext) {
     CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    boolean isVulnerableMethod =
-      ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName).filter(requestsMethods::contains).isPresent();
+    boolean isVulnerableMethod = ofNullable(callExpr.calleeSymbol())
+      .map(Symbol::fullyQualifiedName)
+      .filter(requestsMethods::contains)
+      .isPresent();
 
-    if(isVulnerableMethod) {
+    if (isVulnerableMethod) {
       // Apparently, this is as close as one can get to short-circuiting `opt1.or(opt2)` before Java 9.
       // https://stackoverflow.com/a/24600021/2707792
       // All it does is first attempting to get `verify = rhs` from named parameter, and then `verify: rhs` from kwargs.
       // In any case, we want the `rhs`, so we can check later whether it's a falsy value.
-      Optional<Expression> verifyRhs =
-        searchVerifyAssignment(callExpr).map(Optional::of).orElseGet(() -> searchVerifyInKwargs(callExpr));
+      Optional<Expression> verifyRhs = searchVerifyAssignment(callExpr)
+        .map(Optional::of)
+        .orElseGet(() -> searchVerifyInKwargs(callExpr));
 
       verifyRhs.ifPresent(rhs -> {
         if (Expressions.isFalsy(rhs) || isFalsyCollection(rhs)) {
           subscriptionContext.addIssue(
             rhs.firstToken(),
             rhs.lastToken(),
-            "Disabling certificate verification is dangerous."
-          );
+            "Disabling certificate verification is dangerous.");
         }
       });
     }
@@ -227,13 +236,10 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
           .filter(StringLiteral.class::isInstance)
           .map(StringLiteral.class::cast)
           .filter(strLit -> "verify".equals(strLit.trimmedQuotesValue()))
-          .isPresent()
-        )
-        .map(KeyValuePair::value)
-      ).findFirst();
+          .isPresent())
+        .map(KeyValuePair::value))
+      .findFirst();
   }
-
-
 
   /**
    * Checks whether an expression is obviously a falsy collection (e.g. <code>set()</code> or <code>range(0)</code>).
@@ -252,8 +258,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   /** FQNs of collection constructors that yield a falsy collection if invoked without arguments. */
   private static final Set<String> NO_ARG_FALSY_COLLECTION_CONSTRUCTORS = new HashSet<>(Arrays.asList(
-    "set", "list", "dict"
-  ));
+    "set", "list", "dict"));
 
   /** Detects expressions like <code>dict()</code> or <code>list()</code>. */
   private static boolean isFalsyNoArgCollectionConstruction(CallExpression callExpr, String fqn) {
@@ -274,5 +279,111 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       }
     }
     return false;
+  }
+
+  private static void urllibCheck(SubscriptionContext subscriptionContext) {
+    AssignmentStatement asgnStmt = (AssignmentStatement) subscriptionContext.syntaxNode();
+
+    Optional<VulnerabilityAndProblematicToken> vulnTokOpt = searchRhsForVulnerableMethod(asgnStmt.assignedValue());
+    vulnTokOpt.ifPresent(vulnTok -> asgnStmt
+      .lhsExpressions()
+      .stream()
+      .flatMap(it -> it.expressions().stream())
+      .findFirst()
+      .filter(Name.class::isInstance)
+      .map(expr -> ((Name) expr).symbol())
+      .ifPresent(symb -> {
+        for (Usage u : symb.usages()) {
+          searchForVerifyModeOverride(u).ifPresent(vulnTok::overrideBy);
+        }
+        if (vulnTok.isVulnerable) {
+          if (vulnTok.isInvisibleDefaultPreset) {
+            subscriptionContext.addIssue(
+              vulnTok.token,
+              "Certificate verification is disabled by default, verify_mode should be updated.");
+          } else {
+            subscriptionContext.addIssue(vulnTok.token, "Disabling certificate verification is dangerous.");
+          }
+        }
+      }));
+  }
+
+  /**
+   * Map from FQNs of sensitive context factories to the boolean that determines whether default settings are dangerous.
+   */
+  private static final Map<String, Boolean> VULNERABLE_CONTEXT_FACTORIES = new HashMap<>();
+  static {
+    VULNERABLE_CONTEXT_FACTORIES.put("ssl._create_unverified_context", true);
+    VULNERABLE_CONTEXT_FACTORIES.put("ssl._create_stdlib_context", true);
+    VULNERABLE_CONTEXT_FACTORIES.put("ssl.create_default_context", false);
+    VULNERABLE_CONTEXT_FACTORIES.put("ssl._create_default_https_context", false);
+  }
+
+  /** Pair and a mutable cell for combining all updates to <code>verify_mode</code>. */
+  private static class VulnerabilityAndProblematicToken {
+    boolean isInvisibleDefaultPreset;
+    boolean isVulnerable;
+    Token token;
+
+    VulnerabilityAndProblematicToken(
+      boolean isVulnerable,
+      Token token,
+      boolean isInvisibleDefaultPreset) {
+      this.isVulnerable = isVulnerable;
+      this.token = token;
+      this.isInvisibleDefaultPreset = isInvisibleDefaultPreset;
+    }
+
+    void overrideBy(VulnerabilityAndProblematicToken overridingAssignment) {
+      this.isInvisibleDefaultPreset = false;
+      this.isVulnerable = overridingAssignment.isVulnerable;
+      this.token = overridingAssignment.token;
+    }
+  }
+
+  /**
+   * Searches an expression for a factory invocation of shape <code>ssl.somehow_create_context</code>,
+   * if found, returns the token of the callee, together with the boolean that indicates whether the default settings
+   * are dangerous.
+   */
+  private static Optional<VulnerabilityAndProblematicToken> searchRhsForVulnerableMethod(Expression expr) {
+    if (expr instanceof CallExpression) {
+      CallExpression callExpression = (CallExpression) expr;
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      if (calleeSymbol != null) {
+        String fqn = calleeSymbol.fullyQualifiedName();
+        if (fqn != null && VULNERABLE_CONTEXT_FACTORIES.containsKey(fqn)) {
+          boolean isVulnerable = VULNERABLE_CONTEXT_FACTORIES.get(fqn);
+          return Optional.of(new VulnerabilityAndProblematicToken(
+            isVulnerable,
+            callExpression.callee().lastToken(),
+            true));
+        }
+      }
+    }
+    return Optional.empty();
+  }
+
+  private static Optional<VulnerabilityAndProblematicToken> searchForVerifyModeOverride(Usage u) {
+    if (!u.isBindingUsage()) {
+      return Optional.of(u)
+        .map(Usage::tree)
+        .map(Tree::parent)
+        .filter(QualifiedExpression.class::isInstance)
+        .map(QualifiedExpression.class::cast)
+        .filter(qe -> "verify_mode".equals(qe.name().name()))
+        .map(QualifiedExpression::parent)
+        .map(Tree::parent)
+        .filter(AssignmentStatement.class::isInstance)
+        .map(ae -> ((AssignmentStatement) ae).assignedValue())
+        .filter(QualifiedExpression.class::isInstance)
+        .flatMap(qe -> Optional
+          .ofNullable(((QualifiedExpression) qe).symbol())
+          .map(symb -> new VulnerabilityAndProblematicToken(
+            "ssl.CERT_NONE".equals(symb.fullyQualifiedName()),
+            qe.lastToken(),
+            false)));
+    }
+    return Optional.empty();
   }
 }

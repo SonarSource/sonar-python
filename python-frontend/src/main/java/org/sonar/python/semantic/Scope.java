@@ -161,13 +161,6 @@ class Scope {
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
   }
 
-  /**
-   *
-   * @param nameTree identifier of the imported name (e.g. module or class name)
-   * @param fullyQualifiedName Fully qualified name of the symbol that is being created
-   * @param globalSymbolsByModuleName Mapping from the name of a module to the set of symbols exported by that module
-   * @param globalSymbolsByFQN Global symbol table of entities that are identifiable by an FQN
-   */
   void addModuleSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, Map<String, Set<Symbol>> globalSymbolsByModuleName, Map<String, Symbol> globalSymbolsByFQN) {
     String symbolName = nameTree.name();
     Set<Symbol> moduleExportedSymbols = globalSymbolsByModuleName.get(fullyQualifiedName);
