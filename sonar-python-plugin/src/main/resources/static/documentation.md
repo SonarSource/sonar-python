@@ -17,7 +17,7 @@ key: python
 Discover and update the Python-specific [properties](/analysis/analysis-parameters/) in: <!-- sonarcloud -->Project <!-- /sonarcloud --> **[Administration > General Settings > Python](/#sonarqube-admin#/admin/settings?category=python)**.
 
 ## Pylint
-[Pylint](http://www.pylint.org/) is an external static source code analyzer, it can be used in conjunction with SonarPython.
+[Pylint](http://www.pylint.org/) is an external static source code analyzer, it can be used in conjunction with SonarSource Python analyzer.
 
 You can enable Pylint rules directly in your Python Quality Profile. Their rule keys start with "*Pylint:*".
 
