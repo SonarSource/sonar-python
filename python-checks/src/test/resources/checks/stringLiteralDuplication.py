@@ -98,3 +98,8 @@ def docstrings_should_be_excluded():
     def duplicated_docstring_3():
         """This is a duplicated docstring"""
         pass
+
+def type_hints_should_be_excluded():
+    a: "httpx.Response"
+    a: "httpx.Response"
+    a: "httpx.Response"
