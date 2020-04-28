@@ -183,16 +183,20 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       // https://stackoverflow.com/a/24600021/2707792
       // All it does is first attempting to get `verify = rhs` from named parameter, and then `verify: rhs` from kwargs.
       // In any case, we want the `rhs`, so we can check later whether it's a falsy value.
-      Optional<Expression> verifyRhs = searchVerifyAssignment(callExpr)
+      Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr)
         .map(Optional::of)
         .orElseGet(() -> searchVerifyInKwargs(callExpr));
 
-      verifyRhs.ifPresent(rhs -> {
+      verifyRhs.ifPresent(sensitiveSettingExpressions -> {
+        // The setting expression always comes last (`get` is safe: there can be only 1 or 2 elements)
+        Expression rhs = sensitiveSettingExpressions.get(sensitiveSettingExpressions.size() - 1);
         if (Expressions.isFalsy(rhs) || isFalsyCollection(rhs)) {
-          subscriptionContext.addIssue(
-            rhs.firstToken(),
-            rhs.lastToken(),
-            "Disabling certificate verification is dangerous.");
+          PreciseIssue issue = subscriptionContext.addIssue(rhs, "Disabling certificate verification is dangerous.");
+
+          // report everything except the last one as secondary locations.
+          for (int i = 0; i < sensitiveSettingExpressions.size() - 1; i++) {
+            issue.secondary(sensitiveSettingExpressions.get(i), "Dictionary is passed here as **kwargs.");
+          }
         }
       });
     }
@@ -203,13 +207,13 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    *
    * @return The <code>expr</code> part on the right hand side of the assignment.
    */
-  private static Optional<Expression> searchVerifyAssignment(CallExpression callExpr) {
+  private static Optional<List<Expression>> searchVerifyAssignment(CallExpression callExpr) {
     for (Argument a : callExpr.arguments()) {
-      if (a instanceof RegularArgumentImpl) {
-        RegularArgumentImpl regArg = (RegularArgumentImpl) a;
+      if (a.is(Tree.Kind.REGULAR_ARGUMENT)) {
+        RegularArgument regArg = (RegularArgument) a;
         Name keywordArgument = regArg.keywordArgument();
         if (keywordArgument != null && "verify".equals(keywordArgument.name())) {
-          return Optional.of(regArg.expression());
+          return Optional.of(Collections.singletonList(regArg.expression()));
         }
       }
     }
@@ -219,26 +223,38 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   /**
    * Attempts to find the <code>rhs</code> in some definition <code>kwargs = { 'verify': rhs }</code>
    * of <code>kwargs</code> used in the arguments of the given <code>callExpression</code>.
+   *
+   * Returns list of problematic expressions in the reverse order of importance (the <code>kwargs</code>-argument comes
+   * first, the setting in the dictionary comes last).
    */
-  private static Optional<Expression> searchVerifyInKwargs(CallExpression callExpression) {
-    return callExpression
-      .arguments()
-      .stream()
+  private static Optional<List<Expression>> searchVerifyInKwargs(CallExpression callExpression) {
+    // Finds first unpacking argument (**kwargs),
+    // attempts to find the definition with the dictionary,
+    // then attempts to find a bad setting in the dictionary,
+    // and finally returns the list with both the `kwargs`-argument and the bad setting in the dictionary.
+    return callExpression.arguments().stream()
       .filter(UnpackingExpression.class::isInstance)
       .map(arg -> ((UnpackingExpression) arg).expression())
       .filter(Name.class::isInstance)
-      .map(name -> Expressions.singleAssignedValue((Name) name))
-      .filter(DictionaryLiteral.class::isInstance)
-      .flatMap(dict -> ((DictionaryLiteral) dict).elements().stream()
-        .filter(KeyValuePair.class::isInstance)
-        .map(KeyValuePair.class::cast)
-        .filter(kvp -> Optional.of(kvp.key())
-          .filter(StringLiteral.class::isInstance)
-          .map(StringLiteral.class::cast)
-          .filter(strLit -> "verify".equals(strLit.trimmedQuotesValue()))
-          .isPresent())
-        .map(KeyValuePair::value))
-      .findFirst();
+      .findFirst()
+      .flatMap(name -> Optional.ofNullable(Expressions.singleAssignedValue((Name) name))
+        .filter(DictionaryLiteral.class::isInstance)
+        .flatMap(dict -> searchDangerousVerifySettingInDictionary((DictionaryLiteral) dict)
+          .map(settingInDict -> Arrays.asList(name, settingInDict))));
+  }
+
+  /** Searches for a dangerous falsy <code>verify: False</code> in a dictionary literal. */
+  private static Optional<Expression> searchDangerousVerifySettingInDictionary(DictionaryLiteral dict) {
+    return dict.elements().stream()
+      .filter(KeyValuePair.class::isInstance)
+      .map(KeyValuePair.class::cast)
+      .filter(kvp -> Optional.of(kvp.key())
+        .filter(StringLiteral.class::isInstance)
+        .map(StringLiteral.class::cast)
+        .filter(strLit -> "verify".equals(strLit.trimmedQuotesValue()))
+        .isPresent())
+      .findFirst()
+      .map(KeyValuePair::value);
   }
 
   /**

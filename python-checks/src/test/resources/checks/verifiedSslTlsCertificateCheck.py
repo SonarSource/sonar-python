@@ -60,12 +60,18 @@ def requestsTests():
   #                                                        ^^^^^^^^
   requests.request(verify=False, method='GET', url='https://example.domain') # Noncompliant {{Disabling certificate verification is dangerous.}}
   #                       ^^^^^
+
+
   kargs1 = {'verify': False} # Noncompliant {{Disabling certificate verification is dangerous.}}
   #                   ^^^^^
   requests.request('GET', 'https://example.domain', **kargs1)
+  #                                                   ^^^^^^ < 1
+
+
   kargs2 = {'method': 'GET', 'url': 'https://example.domain', 'verify': False} # Noncompliant {{Disabling certificate verification is dangerous.}}
   #                                                                     ^^^^^
   requests.request(**kargs2)
+  #                  ^^^^^^ < 1
 
   requests.get('https://example.domain', verify=False) # Noncompliant {{Disabling certificate verification is dangerous.}}
   #                                             ^^^^^

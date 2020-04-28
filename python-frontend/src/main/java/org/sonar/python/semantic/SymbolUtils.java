@@ -237,7 +237,7 @@ public class SymbolUtils {
       classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
       classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
     )));
-    globalSymbols.put("http.cookies", Collections.singleton(classSymbol("SimpleCookie", "http.cookies.SimpleCookie")));
+    globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(classSymbol("SimpleCookie", "http.cookies.SimpleCookie"))));
 
     globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
       classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),
@@ -252,9 +252,9 @@ public class SymbolUtils {
       classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest", SET_COOKIE, SET_SIGNED_COOKIE)
     )));
 
-    globalSymbols.put("django.http.response", Collections.singleton(
+    globalSymbols.put("django.http.response", new HashSet<>(Collections.singleton(
       classSymbol("HttpResponse", "django.http.response.HttpResponse")
-    ));
+    )));
 
     ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response", SET_COOKIE);
 
@@ -272,9 +272,9 @@ public class SymbolUtils {
       redirect
     )));
 
-    globalSymbols.put("werkzeug.datastructures", Collections.singleton(
+    globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
       classSymbol("Headers", "werkzeug.datastructures.Headers", "set", "setdefault", "__setitem__")
-    ));
+    )));
 
     // TODO To be removed once we import 'collections' from typeshed
     globalSymbols.put("collections", new HashSet<>(Arrays.asList(
@@ -292,7 +292,7 @@ public class SymbolUtils {
     FunctionSymbolImpl initialize = new FunctionSymbolImpl(
       "initialize", "ldap.initialize", false, false, false, Collections.emptyList(),Collections.emptyList());
     initialize.setDeclaredReturnType(InferredTypes.runtimeType(ldapObject));
-    globalSymbols.put("ldap", Collections.singleton(initialize));
+    globalSymbols.put("ldap", new HashSet<>(Collections.singleton(initialize)));
 
 
     ClassSymbolImpl sslContextClass =
