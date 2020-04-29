@@ -113,12 +113,10 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
   /** Raises issue whenever <code>@csrf_exempt</code> decorator is found. */
   private static void djangoCsrfExemptCheck(SubscriptionContext subscriptionContext) {
-    Decorator decorator = (Decorator) subscriptionContext;
+    Decorator decorator = (Decorator) subscriptionContext.syntaxNode();
     if (decorator.name().names().size() == 1 && "csrf_exempt".equals(decorator.name().names().get(0).name())) {
-      subscriptionContext.addIssue(decorator.lastToken(), "django.middleware.csrf.CsrfViewMiddleware is missing");
+      subscriptionContext.addIssue(decorator.lastToken(), "Disabling CSRF protection is dangerous.");
     }
   }
-
-  
 
 }

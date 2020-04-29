@@ -29,4 +29,11 @@ public class CsrfDisabledCheckTest {
             "src/test/resources/checks/csrfDisabledCheck/django/settings.py",
             new CsrfDisabledCheck());
     }
+
+    @Test
+    public void testCsrfExempt() {
+        PythonCheckVerifier.verify(
+          "src/test/resources/checks/csrfDisabledCheck/django/views.py",
+          new CsrfDisabledCheck());
+    }
 }
