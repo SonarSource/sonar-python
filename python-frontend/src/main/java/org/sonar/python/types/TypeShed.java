@@ -56,7 +56,6 @@ public class TypeShed {
   private static Map<String, Symbol> builtins;
   private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
-  private static boolean builtinsInitialized = false;
 
   private TypeShed() {
   }
@@ -84,7 +83,6 @@ public class TypeShed {
       fileInput.accept(new ReturnTypeVisitor());
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));
     }
-    builtinsInitialized = true;
     return builtins;
   }
 
@@ -148,11 +146,7 @@ public class TypeShed {
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
   }
 
-  public static Set<Symbol> typeShedSymbols(String stdlibModuleName) {
-    if (!builtinsInitialized) {
-      // Avoid cyclic dependencies when builtin and typing stubs import other stdlib symbols
-      return Collections.emptySet();
-    }
+  public static Set<Symbol> typeShedSymbolsForModule(String stdlibModuleName) {
     if (!TypeShed.typeShedSymbols.containsKey(stdlibModuleName)) {
       Map<String, Symbol> result = Optional.ofNullable(readTypeShedSymbols("typeshed/stdlib/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName))
         .orElseGet(() -> readTypeShedSymbols("typeshed/third_party/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName));
@@ -167,7 +161,7 @@ public class TypeShed {
   }
 
   public static Symbol standardLibrarySymbol(String stdLibModuleName, String fullyQualifiedName) {
-    Set<Symbol> librarySymbols = typeShedSymbols(stdLibModuleName);
+    Set<Symbol> librarySymbols = typeShedSymbolsForModule(stdLibModuleName);
     return librarySymbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
   }
 
