@@ -3,6 +3,7 @@ from math import acos
 from keyword import iskeyword
 import pwd
 from emoji import emojize
+import platform
 
 class A:
     pass
@@ -66,6 +67,7 @@ def stdlib():
     if 42 == pwd.getpwuid(1): pass # FN, unresolved type hierarchy
     if pwd.getpwall() == 42: pass # Noncompliant
     if zip(l1, l2) == 42: pass # Noncompliant
+    if platform.architecture() == '32bit': ... # Noncompliant
 
 def third_party():
   if emojize("Python is :thumbs_up:") == 42: ... # Noncompliant

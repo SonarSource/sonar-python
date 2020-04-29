@@ -158,6 +158,11 @@ public class TypeShed {
     if (!result.isEmpty()) {
       return new HashSet<>(result.values());
     }
+    Set<Symbol> commonStdLib = commonSymbols(getModuleSymbols("typeshed/stdlib/2/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols),
+      getModuleSymbols("typeshed/stdlib/3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols));
+    if (!commonStdLib.isEmpty()) {
+      return commonStdLib;
+    }
     return commonSymbols(getModuleSymbols("typeshed/third_party/2/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols),
       getModuleSymbols("typeshed/third_party/3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols));
   }
