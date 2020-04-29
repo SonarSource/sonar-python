@@ -101,5 +101,5 @@ def docstrings_should_be_excluded():
 
 def type_hints_should_be_excluded():
     a: "httpx.Response"
-    a: "httpx.Response"
-    a: "httpx.Response"
+    b: "httpx.Response"
+    c: "httpx.Response"
