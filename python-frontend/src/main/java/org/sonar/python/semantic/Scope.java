@@ -170,7 +170,7 @@ class Scope {
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
     } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
-      Set<Symbol> standardLibrarySymbols = TypeShed.typeShedSymbolsForModule(fullyQualifiedName);
+      Set<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName);
       if (!standardLibrarySymbols.isEmpty()) {
         SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
         standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol, globalSymbolsByFQN)));
@@ -185,7 +185,7 @@ class Scope {
     String symbolName = nameTree.name();
     Symbol globalSymbol = globalSymbolsByFQN.get(fullyQualifiedName);
     if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
-      globalSymbol = TypeShed.standardLibrarySymbol(fromModuleName, fullyQualifiedName);
+      globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
     }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
       addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);

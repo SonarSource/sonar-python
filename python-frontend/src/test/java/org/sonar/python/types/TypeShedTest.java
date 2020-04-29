@@ -78,28 +78,28 @@ public class TypeShedTest {
 
   @Test
   public void stdlib_symbols() {
-    Map<String, Symbol> mathSymbols = TypeShed.typeShedSymbolsForModule("math").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> mathSymbols = TypeShed.symbolsForModule("math").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     Symbol acosSymbol = mathSymbols.get("acos");
     assertThat(acosSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
-    assertThat(TypeShed.standardLibrarySymbol("math", "math.acos")).isSameAs(acosSymbol);
+    assertThat(TypeShed.symbolWithFQN("math", "math.acos")).isSameAs(acosSymbol);
     assertThat(mathSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
-    Map<String, Symbol> threadingSymbols = TypeShed.typeShedSymbolsForModule("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> threadingSymbols = TypeShed.symbolsForModule("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Kind.CLASS);
     assertThat(threadingSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
-    Map<String, Symbol> imaplibSymbols = TypeShed.typeShedSymbolsForModule("imaplib").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> imaplibSymbols = TypeShed.symbolsForModule("imaplib").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     assertThat(imaplibSymbols).isNotEmpty();
     assertThat(imaplibSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
   }
 
   @Test
   public void third_party_symbols() {
-    Map<String, Symbol> emojiSymbols = TypeShed.typeShedSymbolsForModule("emoji").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Map<String, Symbol> emojiSymbols = TypeShed.symbolsForModule("emoji").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     Symbol emojizeSymbol = emojiSymbols.get("emojize");
     assertThat(emojizeSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) emojizeSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
-    assertThat(TypeShed.standardLibrarySymbol("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
+    assertThat(TypeShed.symbolWithFQN("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
   }
 }
