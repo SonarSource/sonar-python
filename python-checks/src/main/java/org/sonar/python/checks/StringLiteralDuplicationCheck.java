@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1192")
@@ -103,5 +104,10 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   @Override
   public void visitDecorator(Decorator decorator) {
     // Ignore literals in decorators
+  }
+
+  @Override
+  public void visitTypeAnnotation(TypeAnnotation typeAnnotation) {
+    // Ignore literals in type annotations
   }
 }
