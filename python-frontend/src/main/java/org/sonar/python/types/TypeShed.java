@@ -157,7 +157,8 @@ public class TypeShed {
     if (!result.isEmpty()) {
       return new HashSet<>(result.values());
     }
-    return Collections.emptySet();
+    return commonSymbols(getModuleSymbols("typeshed/third_party/2/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols),
+      getModuleSymbols("typeshed/third_party/3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols));
   }
 
   private static Map<String, Symbol> getModuleSymbols(String resourcePath, String moduleName, Map<String, Set<Symbol>> initialSymbols) {

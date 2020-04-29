@@ -1,5 +1,7 @@
 import zope
 from argumentNumberImported import fn
+from contextvars import copy_context
+
 fn(1, 2) # OK, no project level information
 
 def functions():
@@ -144,3 +146,6 @@ def builtin_method_different_for_python_2_and_3():
     myList = list(42, 43)
     myList.sort()
     myList.sort(lambda x: x)
+
+def typeshed_third_party_methods():
+  copy_context(42) # Noncompliant
