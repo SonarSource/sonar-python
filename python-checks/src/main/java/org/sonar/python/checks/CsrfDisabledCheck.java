@@ -33,7 +33,9 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.SymbolUtils;
 
 // https://jira.sonarsource.com/browse/SONARPY-668
 // https://jira.sonarsource.com/browse/RSPEC-5792
@@ -43,6 +45,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, CsrfDisabledCheck::djangoMiddlewareArrayCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.DECORATOR, CsrfDisabledCheck::djangoCsrfExemptCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, CsrfDisabledCheck::flaskWtfCsrfEnabledFalseCheck);
   }
 
   private static final String CSRF_VIEW_MIDDLEWARE = "django.middleware.csrf.CsrfViewMiddleware";
@@ -116,6 +119,24 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     Decorator decorator = (Decorator) subscriptionContext.syntaxNode();
     if (decorator.name().names().size() == 1 && "csrf_exempt".equals(decorator.name().names().get(0).name())) {
       subscriptionContext.addIssue(decorator.lastToken(), "Disabling CSRF protection is dangerous.");
+    }
+  }
+
+  private static void flaskWtfCsrfEnabledFalseCheck(SubscriptionContext subscriptionContext) {
+    AssignmentStatement asgn = (AssignmentStatement) subscriptionContext.syntaxNode();
+    // Checks that the left hand side is some kind of subscription of `something['WTF_CSRF_ENABLED']`;
+    // Does not check what `something` is - overtainting seems extremely unlikely in this case.
+    boolean isWtfCsrfEnabledSubscription = asgn
+      .lhsExpressions()
+      .stream()
+      .flatMap(exprList -> exprList.expressions().stream())
+      .filter(expr -> expr.is(Tree.Kind.SUBSCRIPTION))
+      .flatMap(s -> ((SubscriptionExpression) s).subscripts().expressions().stream())
+      .filter(isString("WTF_CSRF_ENABLED"))
+      .findFirst()
+      .isPresent();
+    if (isWtfCsrfEnabledSubscription && Expressions.isFalsy(asgn.assignedValue())) {
+      subscriptionContext.addIssue(asgn.assignedValue(), "Disabling CSRF protection is dangerous.");
     }
   }
 

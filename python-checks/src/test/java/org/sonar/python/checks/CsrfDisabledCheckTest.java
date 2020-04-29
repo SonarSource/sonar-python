@@ -23,17 +23,25 @@ import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CsrfDisabledCheckTest {
-    @Test
-    public void testMiddlewareArray() {
-        PythonCheckVerifier.verify(
-            "src/test/resources/checks/csrfDisabledCheck/django/settings.py",
-            new CsrfDisabledCheck());
-    }
 
-    @Test
-    public void testCsrfExempt() {
-        PythonCheckVerifier.verify(
-          "src/test/resources/checks/csrfDisabledCheck/django/views.py",
-          new CsrfDisabledCheck());
-    }
+  private static void testFile(String relPath) {
+    String path = "src/test/resources/checks/csrfDisabledCheck/" + relPath;
+    PythonCheckVerifier.verify(path, new CsrfDisabledCheck());
+  }
+
+  @Test
+  public void testMiddlewareArray() {
+    testFile("django/settings.py");
+  }
+
+  @Test
+  public void testCsrfExempt() {
+    testFile("django/views.py");
+  }
+
+  @Test
+  public void testWtfCsrfEnabledFalse() {
+    testFile("flask/wtfCsrfEnabledFalse.py");
+  }
+
 }
