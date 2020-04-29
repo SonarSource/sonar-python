@@ -53,6 +53,7 @@ public final class CheckList {
   private CheckList() {
   }
 
+  @SuppressWarnings("squid:S138")
   public static Iterable<Class> getChecks() {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
@@ -80,6 +81,7 @@ public final class CheckList {
       ComparisonToNoneCheck.class,
       ConfusingWalrusCheck.class,
       CorsCheck.class,
+      CsrfDisabledCheck.class,
       DataEncryptionCheck.class,
       DbNoPasswordCheck.class,
       DeadStoreCheck.class,
