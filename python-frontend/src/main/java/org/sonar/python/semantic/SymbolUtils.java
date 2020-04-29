@@ -67,6 +67,7 @@ public class SymbolUtils {
   private static final String SET_COOKIE = "set_cookie";
   private static final String SET_SIGNED_COOKIE = "set_signed_cookie";
   private static final String EQ = "__eq__";
+  private static final String SET_VERIFY = "set_verify";
 
   private SymbolUtils() {
   }
@@ -293,6 +294,12 @@ public class SymbolUtils {
     initialize.setDeclaredReturnType(InferredTypes.runtimeType(ldapObject));
     globalSymbols.put("ldap", new HashSet<>(Collections.singleton(initialize)));
 
+
+    ClassSymbolImpl sslContextClass =
+      classSymbol("Context", "OpenSSL.SSL.Context", SET_VERIFY);
+    SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", sslContextClass);
+    globalSymbols.put("OpenSSL", Collections.singleton(sslSubmodule));
+
     return globalSymbols;
   }
 
@@ -300,6 +307,15 @@ public class SymbolUtils {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
     classSymbol.addMembers(Arrays.stream(members).map(m -> new SymbolImpl(m, fullyQualifiedName + "." + m)).collect(Collectors.toSet()));
     return classSymbol;
+  }
+
+  @SuppressWarnings("SameParameterValue")
+  private static SymbolImpl moduleSymbol(String moduleName, String fullyQualifiedName, Symbol... childSymbols) {
+    SymbolImpl m = new SymbolImpl(moduleName, fullyQualifiedName);
+    for (Symbol c: childSymbols) {
+      m.addChildSymbol(c);
+    }
+    return m;
   }
 
   public static boolean isTypeShedFile(PythonFile pythonFile) {

@@ -151,6 +151,12 @@ class Scope {
         .map(s -> copySymbol(s.name(), s, globalSymbolsByFQN))
         .collect(Collectors.toSet());
       return AmbiguousSymbolImpl.create(alternativeSymbols);
+    } else if (symbol.is(Symbol.Kind.OTHER)) {
+      SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName());
+      for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
+        res.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
+      }
+      return res;
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
   }
