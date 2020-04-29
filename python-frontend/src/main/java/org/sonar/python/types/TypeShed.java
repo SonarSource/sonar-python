@@ -150,12 +150,17 @@ public class TypeShed {
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {
-    Map<String, Symbol> result = getModuleSymbols("typeshed/stdlib/2and3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols);
-    if (result.isEmpty()) {
-      result = getModuleSymbols("typeshed/third_party/2and3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols);
+    Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols("typeshed/stdlib/2and3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols).values());
+    if (standardLibrarySymbols.isEmpty()) {
+      standardLibrarySymbols = commonSymbols(getModuleSymbols("typeshed/stdlib/2/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols),
+        getModuleSymbols("typeshed/stdlib/3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols));
     }
-    if (!result.isEmpty()) {
-      return new HashSet<>(result.values());
+    if (!standardLibrarySymbols.isEmpty()) {
+      return standardLibrarySymbols;
+    }
+    Set<Symbol> thirdPartySymbols = new HashSet<>(getModuleSymbols("typeshed/third_party/2and3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols).values());
+    if (!thirdPartySymbols.isEmpty()) {
+      return thirdPartySymbols;
     }
     return commonSymbols(getModuleSymbols("typeshed/third_party/2/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols),
       getModuleSymbols("typeshed/third_party/3/" + moduleName + ".pyi", moduleName, builtinGlobalSymbols));
