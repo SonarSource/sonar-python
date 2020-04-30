@@ -87,6 +87,7 @@ import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
+import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
@@ -140,7 +141,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     createAmbiguousSymbols();
     addSymbolsToTree((FileInputImpl) fileInput);
     fileInput.accept(new ThirdPhaseVisitor());
-    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+    if (!isTypeShedFile(pythonFile)) {
       TypeInference.inferTypes(fileInput);
     }
   }
@@ -366,8 +367,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         : null;
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
-        if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
-          importedModuleSymbols = TypeShed.typeShedSymbolsForModule(moduleName);
+        if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName) && !isTypeShedFile(pythonFile)) {
+          importedModuleSymbols = TypeShed.symbolsForModule(moduleName);
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
           currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, importFrom, globalSymbolsByFQN);

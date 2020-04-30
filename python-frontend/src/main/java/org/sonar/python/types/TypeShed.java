@@ -56,6 +56,13 @@ public class TypeShed {
   private static Map<String, Symbol> builtins;
   private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
+  
+  private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";
+  private static final String STDLIB_2 = "typeshed/stdlib/2/";
+  private static final String STDLIB_3 = "typeshed/stdlib/3/";
+  private static final String THIRD_PARTY_2AND3 = "typeshed/third_party/2and3/";
+  private static final String THIRD_PARTY_2 = "typeshed/third_party/2/";
+  private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
 
   private TypeShed() {
   }
@@ -101,42 +108,85 @@ public class TypeShed {
 
   // visible for testing
   static Set<Symbol> typingModuleSymbols() {
-    Map<String, Symbol> typingPython3 = getModuleSymbols("typeshed/stdlib/3/typing.pyi", TYPING, Collections.emptyMap());
-    Map<String, Symbol> typingPython2 = getModuleSymbols("typeshed/stdlib/2/typing.pyi", TYPING, Collections.emptyMap());
-    Set<Symbol> typingModuleSymbols = new HashSet<>();
-    typingPython3.forEach((fqn, python3Symbol) -> {
-      Symbol python2Symbol = typingPython2.get(fqn);
+    Map<String, Symbol> typingPython3 = getModuleSymbols(TYPING, STDLIB_3, Collections.emptyMap());
+    Map<String, Symbol> typingPython2 = getModuleSymbols(TYPING, STDLIB_2, Collections.emptyMap());
+    return commonSymbols(typingPython2, typingPython3);
+  }
+
+  private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3) {
+    Set<Symbol> commonSymbols = new HashSet<>();
+    symbolsPython3.forEach((fqn, python3Symbol) -> {
+      Symbol python2Symbol = symbolsPython2.get(fqn);
       if (python2Symbol == null) {
-        typingModuleSymbols.add(python3Symbol);
+        commonSymbols.add(python3Symbol);
       } else {
         Set<Symbol> symbols = new HashSet<>();
         symbols.add(python2Symbol);
         symbols.add(python3Symbol);
-        typingModuleSymbols.add(AmbiguousSymbolImpl.create(symbols));
+        commonSymbols.add(AmbiguousSymbolImpl.create(symbols));
       }
     });
 
-    typingPython2.forEach((fqn, python2Symbol) -> {
-      if (typingPython3.get(fqn) == null) {
-        typingModuleSymbols.add(python2Symbol);
+    symbolsPython2.forEach((fqn, python2Symbol) -> {
+      if (symbolsPython3.get(fqn) == null) {
+        commonSymbols.add(python2Symbol);
       }
     });
 
-    return typingModuleSymbols;
+    return commonSymbols;
   }
 
   static Set<Symbol> typingExtensionsSymbols(Map<String, Set<Symbol>> typingSymbols) {
-    Map<String, Symbol> typingExtensionSymbols = getModuleSymbols("typeshed/third_party/2and3/typing_extensions.pyi", TYPING_EXTENSIONS,
+    Map<String, Symbol> typingExtensionSymbols = getModuleSymbols(TYPING_EXTENSIONS, THIRD_PARTY_2AND3,
       typingSymbols);
-    return typingExtensionSymbols.values().stream().filter(s -> s.fullyQualifiedName().startsWith(TYPING_EXTENSIONS)).collect(Collectors.toSet());
+    return new HashSet<>(typingExtensionSymbols.values());
   }
 
-  private static Map<String, Symbol> getModuleSymbols(String resourcePath, String moduleName, Map<String, Set<Symbol>> initialSymbols) {
+  public static Set<Symbol> symbolsForModule(String moduleName) {
+    if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
+      Set<Symbol> symbols = searchTypeShedForModule(moduleName);
+      typeShedSymbols.put(moduleName, symbols);
+      return symbols;
+    }
+    return TypeShed.typeShedSymbols.get(moduleName);
+  }
+
+  public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
+    Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
+    return symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+  }
+
+  private static Set<Symbol> searchTypeShedForModule(String moduleName) {
+    if (isDefinedAsPackage(moduleName)) {
+      return Collections.emptySet();
+    }
+    Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols(moduleName, STDLIB_2AND3, builtinGlobalSymbols).values());
+    if (standardLibrarySymbols.isEmpty()) {
+      standardLibrarySymbols = commonSymbols(getModuleSymbols(moduleName, STDLIB_2, builtinGlobalSymbols),
+        getModuleSymbols(moduleName, STDLIB_3, builtinGlobalSymbols));
+    }
+    if (!standardLibrarySymbols.isEmpty()) {
+      return standardLibrarySymbols;
+    }
+    Set<Symbol> thirdPartySymbols = new HashSet<>(getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols).values());
+    if (!thirdPartySymbols.isEmpty()) {
+      return thirdPartySymbols;
+    }
+    return commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
+      getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols));
+  }
+
+  private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {
+    String resourcePath = categoryPath + moduleName + ".pyi";
     InputStream resource = TypeShed.class.getResourceAsStream(resourcePath);
+    if (resource == null) {
+      return Collections.emptyMap();
+    }
     PythonFile file = new TypeShedPythonFile(resource, moduleName);
     AstNode astNode = PythonParser.create().parse(file.content());
     FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
     new SymbolTableBuilder("", file, initialSymbols).visitFileInput(fileInput);
+    fileInput.accept(new ReturnTypeVisitor());
     return fileInput.globalVariables().stream()
       .map(symbol -> {
         ((SymbolImpl) symbol).removeUsages();
@@ -146,41 +196,13 @@ public class TypeShed {
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
   }
 
-  public static Set<Symbol> typeShedSymbolsForModule(String stdlibModuleName) {
-    if (!TypeShed.typeShedSymbols.containsKey(stdlibModuleName)) {
-      Map<String, Symbol> result = Optional.ofNullable(readTypeShedSymbols("typeshed/stdlib/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName))
-        .orElseGet(() -> readTypeShedSymbols("typeshed/third_party/2and3/" + stdlibModuleName + ".pyi", stdlibModuleName));
-      if (result != null) {
-        typeShedSymbols.put(stdlibModuleName, result.values().stream().filter(s -> s.fullyQualifiedName() != null).collect(Collectors.toSet()));
-        return TypeShed.typeShedSymbols.get(stdlibModuleName);
-      }
-      typeShedSymbols.put(stdlibModuleName, Collections.emptySet());
-      return Collections.emptySet();
-    }
-    return TypeShed.typeShedSymbols.get(stdlibModuleName);
-  }
-
-  public static Symbol standardLibrarySymbol(String stdLibModuleName, String fullyQualifiedName) {
-    Set<Symbol> librarySymbols = typeShedSymbolsForModule(stdLibModuleName);
-    return librarySymbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
-  }
-
-  private static Map<String, Symbol> readTypeShedSymbols(String fileName, String moduleName) {
-    Map<String, Symbol> typeShedSymbols = new HashMap<>();
-    InputStream resource = TypeShed.class.getResourceAsStream(fileName);
-    if (resource == null) {
-      return null;
-    }
-    PythonFile file = new TypeShedPythonFile(resource, moduleName);
-    AstNode astNode = PythonParser.create().parse(file.content());
-    FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-    new SymbolTableBuilder("", file, builtinGlobalSymbols).visitFileInput(fileInput);
-    for (Symbol globalVariable : fileInput.globalVariables()) {
-      ((SymbolImpl) globalVariable).removeUsages();
-      typeShedSymbols.put(globalVariable.fullyQualifiedName(), globalVariable);
-    }
-    fileInput.accept(new ReturnTypeVisitor());
-    return Collections.unmodifiableMap(typeShedSymbols);
+  private static boolean isDefinedAsPackage(String moduleName) {
+    return TypeShed.class.getResourceAsStream(STDLIB_2AND3 + moduleName + "/") != null ||
+      TypeShed.class.getResourceAsStream(THIRD_PARTY_2AND3 + moduleName + "/") != null ||
+      TypeShed.class.getResourceAsStream(STDLIB_2 + moduleName + "/") != null ||
+      TypeShed.class.getResourceAsStream(STDLIB_3 + moduleName + "/") != null ||
+      TypeShed.class.getResourceAsStream(THIRD_PARTY_2 + moduleName + "/") != null ||
+      TypeShed.class.getResourceAsStream(THIRD_PARTY_3 + moduleName + "/") != null;
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
