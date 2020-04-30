@@ -112,9 +112,7 @@ public class SecureModeEncryptionAlgorithmsCheck extends PythonSubscriptionCheck
       Argument argument = arguments.get(1);
       if (argument.is(REGULAR_ARGUMENT)) {
         Optional<Symbol> symbol = TreeUtils.getSymbolFromTree(((RegularArgument) argument).expression());
-        symbol.filter(s -> vulnerableModes.contains(s.fullyQualifiedName())).ifPresent(s -> {
-          ctx.addIssue(argument, MESSAGE);
-        });
+        symbol.filter(s -> vulnerableModes.contains(s.fullyQualifiedName())).ifPresent(s -> ctx.addIssue(argument, MESSAGE));
       }
     }
   }
