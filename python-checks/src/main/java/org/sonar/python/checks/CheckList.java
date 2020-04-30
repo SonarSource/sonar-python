@@ -159,6 +159,7 @@ public final class CheckList {
       SameBranchCheck.class,
       SameConditionCheck.class,
       SecureCookieCheck.class,
+      SecureModeEncryptionAlgorithmsCheck.class,
       SelfAssignmentCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
