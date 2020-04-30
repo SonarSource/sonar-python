@@ -4,7 +4,7 @@ from jinja2 import Environment
 myEnvironment = foo()
 env = myEnvironment()
 
-env = Environment() # Noncompliant
+env = Environment() # Noncompliant {{Make sure disabling auto-escaping feature is safe here.}}
 env = Environment(True) # Noncompliant
 env = Environment(autoescape=True)
 env = Environment(xx=False,autoescape=True)

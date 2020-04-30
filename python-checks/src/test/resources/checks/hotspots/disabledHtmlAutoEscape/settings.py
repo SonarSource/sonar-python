@@ -6,7 +6,7 @@ def foo():
 TEMPLATES = [
     {
         'BACKEND': 'xxx',
-        'OPTIONS': { 'autoescape': False }, # Noncompliant
+        'OPTIONS': { 'autoescape': False }, # Noncompliant {{Make sure disabling auto-escaping feature is safe here.}}
 #                    ^^^^^^^^^^^^^^^^^^^
     },
 ]

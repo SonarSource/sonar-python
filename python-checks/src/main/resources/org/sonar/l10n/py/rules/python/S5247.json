@@ -1,6 +1,6 @@
 {
-  "title": "HTML autoescape mechanism should not be globally disabled",
-  "type": "VULNERABILITY",
+  "title": "Disabling auto-escaping in template engines is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
   "status": "ready",
   "tags": [
     "cwe",
@@ -8,9 +8,9 @@
     "owasp-a9",
     "owasp-a7"
   ],
-  "defaultSeverity": "Blocker",
-  "ruleSpecification": "RSPEC-5439",
-  "sqKey": "S5439",
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-5247",
+  "sqKey": "S5247",
   "scope": "Main",
   "securityStandards": {
     "CWE": [

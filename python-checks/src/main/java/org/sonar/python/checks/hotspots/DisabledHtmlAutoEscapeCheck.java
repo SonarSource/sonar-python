@@ -38,11 +38,11 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.Expressions;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
-@Rule(key = "S5439")
+@Rule(key = "S5247")
 public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
 
   private static final String AUTO_ESCAPE = "autoescape";
-  private static final String MESSAGE = "Remove this configuration disabling autoescape globally.";
+  private static final String MESSAGE = "Make sure disabling auto-escaping feature is safe here.";
 
   @Override
   public void initialize(Context context) {
