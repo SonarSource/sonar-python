@@ -71,6 +71,12 @@ class Foo:
 
     options = [referenced_in_cls_body]
 
+    def used_as_decorator(method):  # OK
+        return method
+
+    @used_as_decorator
+    def decorated(self): ...
+
     def _private_method(x): # Noncompliant
         return x
 
