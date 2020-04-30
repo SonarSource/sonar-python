@@ -102,4 +102,14 @@ public class TypeShedTest {
     assertThat(((FunctionSymbolImpl) emojizeSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
     assertThat(TypeShed.symbolWithFQN("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
   }
+
+  @Test
+  public void should_not_resolve_packages() {
+    assertThat(TypeShed.symbolsForModule("ctypes")).isEmpty();
+    assertThat(TypeShed.symbolsForModule("cryptography")).isEmpty();
+    assertThat(TypeShed.symbolsForModule("email")).isEmpty();
+    assertThat(TypeShed.symbolsForModule("json")).isEmpty();
+    assertThat(TypeShed.symbolsForModule("kazoo")).isEmpty();
+    assertThat(TypeShed.symbolsForModule("docutils")).isEmpty();
+  }
 }
