@@ -23,6 +23,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -130,4 +131,5 @@ class RuntimeType implements InferredType {
   public String toString() {
     return "RuntimeType(" + typeClass.fullyQualifiedName() + ')';
   }
+
 }

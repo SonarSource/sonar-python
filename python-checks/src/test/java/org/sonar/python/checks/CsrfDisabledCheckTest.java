@@ -44,4 +44,24 @@ public class CsrfDisabledCheckTest {
     testFile("flask/wtfCsrfEnabledFalse.py");
   }
 
+  @Test
+  public void testThreeWaysToDeactivateCsrfInFlaskForm() {
+    testFile("flask/flaskform1.py");
+  }
+
+  @Test
+  public void testGloballyMissingCSRFProtect(){
+    testFile("flask/global.py");
+  }
+
+  @Test
+  public void testExemptDecorators() {
+    testFile("flask/flaskExempt.py");
+    testFile("django/djangoExempt.py");
+  }
+
+  @Test
+  public void testExemptAsFunction() {
+    testFile("flask/exemptAsFunction.py");
+  }
 }
