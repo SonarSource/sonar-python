@@ -6,8 +6,6 @@ def exemptExample():
   csrfProtect = CSRFProtect()
   csrfProtect.init_app(app) # Compliant
 
-  INSPECT(csrfProtect)
-
   @app.route('/csrftest1/', methods=['POST'])
   @csrfProtect.exempt # Noncompliant {{Disabling CSRF protection is dangerous.}}
   #            ^^^^^^

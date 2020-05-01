@@ -161,7 +161,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       .flatMap(exprList -> exprList.expressions().stream())
       .filter(expr -> expr.is(Tree.Kind.SUBSCRIPTION))
       .flatMap(s -> ((SubscriptionExpression) s).subscripts().expressions().stream())
-      .anyMatch(isString("WTF_CSRF_ENABLED"));
+      .anyMatch(isString(s -> "WTF_CSRF_ENABLED".equals(s) || "WTF_CSRF_CHECK_DEFAULT".equals(s)));
     if (isWtfCsrfEnabledSubscription && Expressions.isFalsy(asgn.assignedValue())) {
       subscriptionContext.addIssue(asgn.assignedValue(), DISABLING_CSRF_MESSAGE);
     }

@@ -8,7 +8,6 @@ def misconfiguredFlaskExamples():
 
   app2 = Flask(__name__)
   c2 = CSRFProtect()
-  INSPECT(c2)
   c2.init_app(app2) # Compliant
 
   app3 = Flask(__name__)
