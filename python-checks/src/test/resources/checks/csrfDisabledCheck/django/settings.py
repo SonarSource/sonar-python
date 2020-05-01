@@ -18,7 +18,7 @@ MIDDLEWARE = [
   ""
 ]
 
-MIDDLEWARE[42] = 'nope'
+MIDDLEWARE[42] = 'not an array'
 
 that_s_some_completely_unrelated_array = [
   'django.stuff.it.contains',
