@@ -28,6 +28,7 @@ import org.sonar.python.checks.hotspots.CorsCheck;
 import org.sonar.python.checks.hotspots.DataEncryptionCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
+import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeLegacyCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
@@ -85,6 +86,7 @@ public final class CheckList {
       DeadStoreCheck.class,
       DebugModeCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
+      DisabledHtmlAutoEscapeLegacyCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
       DynamicCodeExecutionCheck.class,

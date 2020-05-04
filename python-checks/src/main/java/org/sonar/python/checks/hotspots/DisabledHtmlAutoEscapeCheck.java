@@ -38,11 +38,11 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.Expressions;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
-@Rule(key = "S5439")
+@Rule(key = "S5247")
 public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
 
   private static final String AUTO_ESCAPE = "autoescape";
-  private static final String MESSAGE = "Remove this configuration disabling autoescape globally.";
+  private static final String MESSAGE = "Make sure disabling auto-escaping feature is safe here.";
 
   @Override
   public void initialize(Context context) {
@@ -54,12 +54,12 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
     );
   }
 
-  private static void checkKeyValuePair(SubscriptionContext ctx, KeyValuePair keyValue) {
+  private void checkKeyValuePair(SubscriptionContext ctx, KeyValuePair keyValue) {
     if (!"settings.py".equals(ctx.pythonFile().fileName())) {
       return;
     }
     if (isStringLiteral(keyValue.key(), AUTO_ESCAPE) && Expressions.isFalsy(keyValue.value())) {
-      ctx.addIssue(keyValue, MESSAGE);
+      ctx.addIssue(keyValue, message());
     }
   }
 
@@ -67,7 +67,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
     return tree.is(Kind.STRING_LITERAL) && testedValue.equals(Expressions.unescape((StringLiteral) tree));
   }
 
-  private static void checkCallExpression(SubscriptionContext ctx, CallExpression call) {
+  private void checkCallExpression(SubscriptionContext ctx, CallExpression call) {
     Symbol symbol = call.calleeSymbol();
 
     if (symbol != null && "jinja2.Environment".equals(symbol.fullyQualifiedName())) {
@@ -88,12 +88,12 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
         .map(RegularArgument.class::cast)
         .filter(DisabledHtmlAutoEscapeCheck::isAutoEscapeArgument);
       if (autoEscapeArgs.allMatch(arg -> Expressions.isFalsy(arg.expression()))) {
-        ctx.addIssue(call, MESSAGE);
+        ctx.addIssue(call, message());
       }
     }
   }
 
-  private static void checkJinjaOptions(SubscriptionContext ctx, CallExpression call, Name expression) {
+  private void checkJinjaOptions(SubscriptionContext ctx, CallExpression call, Name expression) {
     Expression options = Expressions.singleAssignedValue(expression);
     if (options != null && options.is(Kind.DICTIONARY_LITERAL)) {
       DictionaryLiteral dict = (DictionaryLiteral) options;
@@ -104,7 +104,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
         .map(KeyValuePair::value)
         .findFirst();
       if (!autoEscapeOption.isPresent() || Expressions.isFalsy(autoEscapeOption.get())) {
-        ctx.addIssue(call, MESSAGE);
+        ctx.addIssue(call, message());
       }
     }
   }
@@ -112,5 +112,9 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
   private static boolean isAutoEscapeArgument(RegularArgument argument) {
     Name keyword = argument.keywordArgument();
     return keyword != null && AUTO_ESCAPE.equals(keyword.name());
+  }
+
+  String message() {
+    return MESSAGE;
   }
 }
