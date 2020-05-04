@@ -2,7 +2,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 #    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-] # Noncompliant {{CSRF protection (django.middleware.csrf.CsrfViewMiddleware) is missing.}}
+] # Noncompliant {{Make sure not using CSRF protection (django.middleware.csrf.CsrfViewMiddleware) is safe here.}}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

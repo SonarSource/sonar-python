@@ -54,8 +54,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S4502")
 public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
-  private static final String DISABLING_CSRF_MESSAGE = "Disabling CSRF protection is dangerous.";
-  private static final String CSRFPROTECT_MISSING_MESSAGE = "CSRFProtect is missing.";
+  private static final String DISABLING_CSRF_MESSAGE = "Make sure disabling CSRF protection is safe here.";
+  private static final String CSRFPROTECT_MISSING_MESSAGE = "Make sure not using CSRFProtect is safe here.";
 
   @Override
   public void initialize(Context context) {
@@ -87,7 +87,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       if (!containsCsrfViewMiddleware) {
         subscriptionContext.addIssue(
           asgn.lastToken(),
-          "CSRF protection (django.middleware.csrf.CsrfViewMiddleware) is missing.");
+          "Make sure not using CSRF protection (" + CSRF_VIEW_MIDDLEWARE + ") is safe here.");
       }
     }
   }

@@ -6,13 +6,13 @@ def wtfCsrfEnabledExamples():
 
   app = Flask(__name__)
   app.config['WTF_CSRF_ENABLED'] = True # For code coverage only, shouldn't report anything here.
-  app.config['WTF_CSRF_ENABLED'] = False # Noncompliant {{Disabling CSRF protection is dangerous.}}
+  app.config['WTF_CSRF_ENABLED'] = False # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
   #                                ^^^^^
   csrfProtect = CSRFProtect()
   csrfProtect.init_app(app)
 
   app2 = Flask(__name__)
-  app2.config['WTF_CSRF_CHECK_DEFAULT'] = False # Noncompliant {{Disabling CSRF protection is dangerous.}}
+  app2.config['WTF_CSRF_CHECK_DEFAULT'] = False # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
   #                                       ^^^^^
 
   CSRFProtect(app2)

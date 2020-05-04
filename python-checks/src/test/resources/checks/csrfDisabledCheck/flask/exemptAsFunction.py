@@ -8,6 +8,6 @@ def exemptExample():
   
   csrf = CSRFProtect()
   csrf.init_app(app) 
-  csrf.exempt(simple_page) # Noncompliant {{Disabling CSRF protection is dangerous.}}
+  csrf.exempt(simple_page) # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
   #    ^^^^^^
   

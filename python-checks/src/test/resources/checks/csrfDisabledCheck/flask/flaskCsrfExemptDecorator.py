@@ -7,7 +7,7 @@ csrf = CSRFProtect()
 csrf.init_app(app) # Compliant
 
 @app.route('/csrftest1/', methods=['POST'])
-@csrf.exempt # Noncompliant {{Disabling CSRF protection is dangerous.}}
+@csrf.exempt # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
 #     ^^^^^^
 def csrftestpost():
     pass

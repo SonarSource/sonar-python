@@ -33,18 +33,18 @@ class TestForm2(FlaskForm):
     
 class TestUnprotectedForm(FlaskForm):
     class Meta:
-        csrf = False # Noncompliant {{Disabling CSRF protection is dangerous.}}
+        csrf = False # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
         #      ^^^^^ 
 
 @app.route('/unprotectedflaskform1', methods=['GET', 'POST'])
 def unprotectedflaskform1():
-    form = TestForm2(request.form, csrf_enabled=False) # Noncompliant {{Disabling CSRF protection is dangerous.}}
+    form = TestForm2(request.form, csrf_enabled=False) # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
     #                                           ^^^^^
      
 @app.route('/unprotectedflaskform2', methods=['GET', 'POST'])
 def unprotectedflaskform2():
     # This one wasn't originally marked as 'Sensitive', but spec suggested that it is
-    form = TestForm2(request.form, meta={'csrf': False}) # Noncompliant {{Disabling CSRF protection is dangerous.}}
+    form = TestForm2(request.form, meta={'csrf': False}) # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
     #                                            ^^^^^
 
 @app.route('/unprotectedflaskform3', methods=['GET', 'POST'])

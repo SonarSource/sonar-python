@@ -3,7 +3,7 @@ def misconfiguredFlaskExamples():
   from flask_wtf.csrf import CSRFProtect
   # from flask_wtf import csrf
 
-  app1 = Flask(__name__) # Noncompliant {{CSRFProtect is missing.}}
+  app1 = Flask(__name__) # Noncompliant {{Make sure not using CSRFProtect is safe here.}}
   #      ^^^^^^^^^^^^^^^
 
   app2 = Flask(__name__)
