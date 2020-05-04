@@ -44,10 +44,10 @@ import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 // https://jira.sonarsource.com/browse/SONARPY-668
 // https://jira.sonarsource.com/browse/RSPEC-5792
@@ -80,10 +80,10 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     // Check that the left hand side is called `MIDDLEWARE` and that there is at least one string entry starting with
     // "django" in that array.
     boolean isLhsCalledMiddleware = isLhsCalled("MIDDLEWARE").test(asgn);
-    boolean containsDjangoMiddleware = isListAnyMatch(isString(s -> s.startsWith("django"))).test(asgn.assignedValue());
+    boolean containsDjangoMiddleware = isListAnyMatch(isStringSatisfying(s -> s.startsWith("django"))).test(asgn.assignedValue());
     boolean isMiddlewareAssignment = isLhsCalledMiddleware && containsDjangoMiddleware;
     if (isMiddlewareAssignment) {
-      boolean containsCsrfViewMiddleware = isListAnyMatch(isString(CSRF_VIEW_MIDDLEWARE)).test(asgn.assignedValue());
+      boolean containsCsrfViewMiddleware = isListAnyMatch(isStringSatisfying(CSRF_VIEW_MIDDLEWARE)).test(asgn.assignedValue());
       if (!containsCsrfViewMiddleware) {
         subscriptionContext.addIssue(
           asgn.lastToken(),
@@ -100,11 +100,10 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
   }
 
   /** Checks whether an expression is a string literal satisfying a predicate. */
-  private static Predicate<Expression> isString(Predicate<String> pred) {
+  private static Predicate<Expression> isStringSatisfying(Predicate<String> pred) {
     return expr -> {
       if (expr.is(Tree.Kind.STRING_LITERAL)) {
-        List<StringElement> elems = ((StringLiteral) expr).stringElements();
-        return elems.size() == 1 && pred.test(elems.get(0).trimmedQuotesValue());
+        return pred.test(((StringLiteral) expr).trimmedQuotesValue());
       } else {
         return false;
       }
@@ -112,8 +111,8 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
   }
 
   /** Checks whether the expression is a string literal with value exactly equal to <code>s</code>. */
-  private static Predicate<Expression> isString(String s) {
-    return isString(s::equals);
+  private static Predicate<Expression> isStringSatisfying(String s) {
+    return isStringSatisfying(s::equals);
   }
 
   /** Checks that an expression is a list literal with at least one entry satisfying the predicate. */
@@ -134,6 +133,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     List<String> names = decorator.name().names().stream().map(Name::name).collect(Collectors.toList());
     // This is a temporary workaround until symbol resolution works for decorators.
     // Use the actual functions with FQNs from DANGEROUS_DECORATORS once that's fixed.
+    // Related ticket: https://jira.sonarsource.com/browse/SONARPY-681
     boolean isDangerous = names.stream().anyMatch(s -> s.toLowerCase(Locale.US).contains("csrf")) &&
       names.stream().anyMatch(s -> s.toLowerCase(Locale.US).contains("exempt"));
     if (isDangerous) {
@@ -161,7 +161,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       .flatMap(exprList -> exprList.expressions().stream())
       .filter(expr -> expr.is(Tree.Kind.SUBSCRIPTION))
       .flatMap(s -> ((SubscriptionExpression) s).subscripts().expressions().stream())
-      .anyMatch(isString(s -> "WTF_CSRF_ENABLED".equals(s) || "WTF_CSRF_CHECK_DEFAULT".equals(s)));
+      .anyMatch(isStringSatisfying(s -> "WTF_CSRF_ENABLED".equals(s) || "WTF_CSRF_CHECK_DEFAULT".equals(s)));
     if (isWtfCsrfEnabledSubscription && Expressions.isFalsy(asgn.assignedValue())) {
       subscriptionContext.addIssue(asgn.assignedValue(), DISABLING_CSRF_MESSAGE);
     }
@@ -180,36 +180,39 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
     boolean isWithinFlaskForm = Optional.ofNullable(classDef.parent())
       .map(Tree::parent)
-      .flatMap(tryCast(ClassDef.class))
+      .flatMap(filterIsInstance(ClassDef.class))
       .map(parentClassDef -> parentClassDef.name().symbol())
-      .flatMap(tryCast(ClassSymbol.class))
+      .flatMap(filterIsInstance(ClassSymbol.class))
       .filter(parentClassSymbol -> parentClassSymbol.canBeOrExtend("flask_wtf.FlaskForm"))
       .isPresent();
     if (!isWithinFlaskForm) {
       return;
     }
 
-    classDef.body().statements().forEach(stmt -> tryCast(AssignmentStatement.class, stmt)
+    classDef.body().statements().forEach(stmt -> filterIsInstance(AssignmentStatement.class, stmt)
       .filter(isLhsCalled("csrf"))
       .filter(asgn -> Expressions.isFalsy(asgn.assignedValue()))
       .ifPresent(asgn -> subscriptionContext.addIssue(asgn.assignedValue(), DISABLING_CSRF_MESSAGE)));
   }
 
-  /** Attempts to cast a value of type <code>A</code> as a <code>B</code>. */
-  private static <A, B> Optional<B> tryCast(Class<B> c, A a) {
+  /**
+   * Checks that a value is an instance of type <code>B</code>, and returns an option with the cast value, if possible.
+   * Returns an empty option if the cast is not possible.
+   */
+  private static <A, B> Optional<B> filterIsInstance(Class<B> c, A a) {
     return c.isInstance(a) ? Optional.of(c.cast(a)) : Optional.empty();
   }
 
-  /** Curried version of 2-ary <code>tryCast</code>, to be used inside <code>Optional.flatMap</code>. */
-  private static <A, B> Function<A, Optional<B>> tryCast(Class<B> c) {
-    return a -> tryCast(c, a);
+  /** Curried version of 2-ary <code>filterInstance</code>, to be used inside <code>Optional.flatMap</code>. */
+  private static <A, B> Function<A, Optional<B>> filterIsInstance(Class<B> c) {
+    return a -> filterIsInstance(c, a);
   }
 
   /** Checks that subclasses of <code>FlaskForm</code> are instantiated without bad CSRF settings. */
   private static void formInstantiationCheck(SubscriptionContext subscriptionContext) {
     CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
     boolean isFlaskFormInstantiation = Optional.ofNullable(callExpr.calleeSymbol())
-      .flatMap(tryCast(ClassSymbol.class))
+      .flatMap(filterIsInstance(ClassSymbol.class))
       .filter(c -> c.canBeOrExtend("flask_wtf.FlaskForm"))
       .isPresent();
     if (!isFlaskFormInstantiation) {
@@ -233,7 +236,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     if ("csrf_enabled".equals(name) && Expressions.isFalsy(regArg.expression())) {
       return Optional.of(regArg.expression());
     } else if ("meta".equals(name)) {
-      return tryCast(DictionaryLiteral.class, regArg.expression())
+      return filterIsInstance(DictionaryLiteral.class, regArg.expression())
         .flatMap(CsrfDisabledCheck::searchForBadCsrfSettingInDictionary);
     } else {
       return Optional.empty();
@@ -245,7 +248,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     return dict.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
-      .filter(kvp -> tryCast(StringLiteral.class, kvp.key())
+      .filter(kvp -> filterIsInstance(StringLiteral.class, kvp.key())
         .filter(strLit -> "csrf".equals(strLit.trimmedQuotesValue()))
         .isPresent())
       .findFirst()
@@ -259,7 +262,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       boolean isCsrfEnabledInThisFile = asgn.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
         .findFirst()
-        .flatMap(tryCast(Name.class))
+        .flatMap(filterIsInstance(Name.class))
         .flatMap(app -> Optional.of(app)
           .map(Name::symbol)
           .map(Symbol::usages)
@@ -273,10 +276,11 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
   /** Checks that an expression is some kind of <code>Flask(...)</code> constructor invocation. */
   private static boolean isFlaskAppInstantiation(Expression expr) {
-    return tryCast(CallExpression.class, expr)
-      .map(CallExpression::calleeSymbol)
-      .filter(symb -> "flask.Flask".equals(symb.fullyQualifiedName()))
-      .isPresent();
+    if (expr.is(Tree.Kind.CALL_EXPR)) {
+      Symbol s = ((CallExpression) expr).calleeSymbol();
+      return s != null && "flask.Flask".equals(s.fullyQualifiedName());
+    }
+    return false;
   }
 
   /** Detects usages like <code>CSRFProtect(a)</code>. */
@@ -286,16 +290,13 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       isWithinCall("flask_wtf.csrf.CSRFProtect.init_app", t);
   }
 
-  /** Checks that the surroundings of <code>t</code> look like <code>expectedCalleeFqn(t)</code> */
+  /** Checks that the surroundings of <code>t</code> look like <code>expectedCalleeFqn(someExpr(t))</code>. */
   private static boolean isWithinCall(String expectedCalleeFqn, Tree t) {
-    return Optional.ofNullable(t.parent()) // RegularArgument
-      .flatMap(tryCast(RegularArgument.class))
-      .map(Tree::parent) // ArgumentList
-      .map(Tree::parent) // CallExpr
-      .flatMap(tryCast(CallExpression.class))
-      .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter(expectedCalleeFqn::equals)
-      .isPresent();
+    Tree enclosingCallExpr = TreeUtils.firstAncestorOfKind(t, Tree.Kind.CALL_EXPR);
+    if (enclosingCallExpr != null) {
+      Symbol calleeSymbol = ((CallExpression) enclosingCallExpr).calleeSymbol();
+      return calleeSymbol != null && expectedCalleeFqn.equals(calleeSymbol.fullyQualifiedName());
+    }
+    return false;
   }
 }
