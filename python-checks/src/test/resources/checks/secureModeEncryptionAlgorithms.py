@@ -10,6 +10,7 @@ def pyca_tests():
   Cipher(algorithms.Blowfish(key), *args)  # Compliant
   Cipher(algorithms.Blowfish(key), modes.ECB())  # Noncompliant
   Cipher(algorithms.AES(key), modes.CBC(iv))  # Noncompliant
+  Cipher(mode = modes.CBC(iv), algorithm = algorithms.AES(key))  # Noncompliant
   Cipher(algorithms.AES(key), modes.OFB(iv))  # Compliant
   Cipher(algorithms.AES(key), modes.ECB())  # Noncompliant
 
@@ -18,9 +19,11 @@ def pyca_tests():
   ciphertext = public_key.encrypt(message, padding.OAEP())
 
   private_key.decrypt(ciphertext,padding.OAEP()) # Compliant
-  ciphertext = public_key.encrypt(message, padding.PKCS1v15()) # Noncompliant
-#                                          ^^^^^^^^^^^^^^^^^^
-  plaintext = private_key.decrypt(ciphertext,padding.PKCS1v15())  # Noncompliant
+  public_key.encrypt(message, padding.PKCS1v15()) # Noncompliant
+#                             ^^^^^^^^^^^^^^^^^^
+  public_key.encrypt(padding = padding.PKCS1v15(), plaintext = message) # Noncompliant
+  private_key.decrypt(ciphertext,padding.PKCS1v15())  # Noncompliant
+  private_key.decrypt(padding = padding.PKCS1v15(), ciphertext = ciphertext)  # Noncompliant
   print(padding.PKCS1v15()) # OK
 
 def pycrypto_tests():
@@ -28,6 +31,7 @@ def pycrypto_tests():
   from Crypto.Cipher import DES, CAST, DES3, ARC2, Blowfish, AES, PKCS1_OAEP, PKCS1_v1_5
 
   DES.new(key, DES.MODE_ECB) # Noncompliant
+  DES.new(mode = DES.MODE_ECB, key = key) # Noncompliant
   DES.new(key, DES.MODE_CBC, IV=iv)  # Noncompliant
   DES.new(key, DES.MODE_CFB, IV=iv)  # Compliant
   DES.new(key, DES.MODE_OFB, IV=iv)  # Compliant
@@ -44,6 +48,7 @@ def cryptodomex_test():
   from Cryptodome.Cipher import DES, PKCS1_v1_5
 
   DES.new(key, DES.MODE_ECB) # Noncompliant
+  DES.new(mode = DES.MODE_ECB, key = key) # Noncompliant
   DES.new(key, DES.MODE_CBC)  # Noncompliant
   DES.new() # Compliant
   args = []

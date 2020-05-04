@@ -30,29 +30,25 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 
 @Rule(key = "S5542")
 public class SecureModeEncryptionAlgorithmsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use secure mode and padding scheme.";
-  private static final Set<String> PYCA_ALGORITHM_METHODS = new HashSet<>(Arrays.asList(
-    "cryptography.hazmat.primitives.ciphers.Cipher",
+  private static final Set<String> PYCA_RSA_KEY_METHODS = new HashSet<>(Arrays.asList(
     "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.decrypt",
     "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.encrypt"
   ));
 
-  private static final Set<String> PYCA_VULNERABLE_MODES_AND_PADDING_SCHEMES = new HashSet<>(Arrays.asList(
+  private static final Set<String> PYCA_VULNERABLE_MODES = new HashSet<>(Arrays.asList(
     "cryptography.hazmat.primitives.ciphers.modes.CBC",
-    "cryptography.hazmat.primitives.ciphers.modes.ECB",
-    "cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15"
+    "cryptography.hazmat.primitives.ciphers.modes.ECB"
   ));
 
   private static final Map<String, List<String>> PYCRYPTO_VULNERABLE_MODES_BY_API = new HashMap<>();
@@ -105,30 +101,29 @@ public class SecureModeEncryptionAlgorithmsCheck extends PythonSubscriptionCheck
       CRYPTODOMEX_VULNERABLE_MODES_BY_API.get(calleeSymbol.fullyQualifiedName()));
 
     if (vulnerableModes != null) {
-      List<Argument> arguments = callExpression.arguments();
-      if (arguments.size() < 2) {
-        return;
-      }
-      Argument argument = arguments.get(1);
-      if (argument.is(REGULAR_ARGUMENT)) {
-        Optional<Symbol> symbol = TreeUtils.getSymbolFromTree(((RegularArgument) argument).expression());
-        symbol.filter(s -> vulnerableModes.contains(s.fullyQualifiedName())).ifPresent(s -> ctx.addIssue(argument, MESSAGE));
+      RegularArgument mode = TreeUtils.nthArgumentOrKeyword(1, "mode", callExpression.arguments());
+      if (mode != null) {
+        Optional<Symbol> symbol = TreeUtils.getSymbolFromTree(mode.expression());
+        symbol.filter(s -> vulnerableModes.contains(s.fullyQualifiedName())).ifPresent(s -> ctx.addIssue(mode, MESSAGE));
       }
     }
   }
 
   protected void checkPycaLibrary(SubscriptionContext ctx, CallExpression callExpression, Symbol calleeSymbol) {
-    if (PYCA_ALGORITHM_METHODS.contains(calleeSymbol.fullyQualifiedName())) {
-      List<Argument> arguments = callExpression.arguments();
-      if (arguments.size() < 2) {
-        return;
-      }
-      Argument argument = arguments.get(1);
-      if (argument.is(REGULAR_ARGUMENT)) {
-        InferredType type = ((RegularArgument) argument).expression().type();
-        if (PYCA_VULNERABLE_MODES_AND_PADDING_SCHEMES.stream().anyMatch(type::canOnlyBe)) {
-          ctx.addIssue(argument, MESSAGE);
+    if ("cryptography.hazmat.primitives.ciphers.Cipher".equals(calleeSymbol.fullyQualifiedName())) {
+      RegularArgument mode = TreeUtils.nthArgumentOrKeyword(1, "mode", callExpression.arguments());
+      if (mode != null) {
+        InferredType type = mode.expression().type();
+        if (PYCA_VULNERABLE_MODES.stream().anyMatch(type::canOnlyBe)) {
+          ctx.addIssue(mode, MESSAGE);
         }
+      }
+      return;
+    }
+    if (PYCA_RSA_KEY_METHODS.contains(calleeSymbol.fullyQualifiedName())) {
+      RegularArgument padding = TreeUtils.nthArgumentOrKeyword(1, "padding", callExpression.arguments());
+      if (padding != null && padding.expression().type().canOnlyBe("cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15")) {
+        ctx.addIssue(padding, MESSAGE);
       }
     }
   }
