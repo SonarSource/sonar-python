@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -84,7 +85,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     boolean containsDjangoMiddleware = isListAnyMatch(isStringSatisfying(s -> s.startsWith("django"))).test(asgn.assignedValue());
     boolean isMiddlewareAssignment = isLhsCalledMiddleware && containsDjangoMiddleware;
     if (isMiddlewareAssignment) {
-      boolean containsCsrfViewMiddleware = isListAnyMatch(isStringSatisfying(CSRF_VIEW_MIDDLEWARE)).test(asgn.assignedValue());
+      boolean containsCsrfViewMiddleware = isListAnyMatch(isStringEqual(CSRF_VIEW_MIDDLEWARE)).test(asgn.assignedValue());
       if (!containsCsrfViewMiddleware) {
         subscriptionContext.addIssue(
           asgn.lastToken(),
@@ -112,7 +113,8 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
   }
 
   /** Checks whether the expression is a string literal with value exactly equal to <code>s</code>. */
-  private static Predicate<Expression> isStringSatisfying(String s) {
+  @SuppressWarnings("SameParameterValue")
+  private static Predicate<Expression> isStringEqual(String s) {
     return isStringSatisfying(s::equals);
   }
 
@@ -179,17 +181,16 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    ;
     boolean isWithinFlaskForm = Optional.ofNullable(TreeUtils.firstAncestorOfKind(classDef, Tree.Kind.CLASSDEF))
       .map(parentClassDef -> ((ClassDef) parentClassDef).name().symbol())
-      .flatMap(as(ClassSymbol.class))
+      .flatMap(optCast(ClassSymbol.class))
       .filter(parentClassSymbol -> parentClassSymbol.canBeOrExtend("flask_wtf.FlaskForm"))
       .isPresent();
     if (!isWithinFlaskForm) {
       return;
     }
 
-    classDef.body().statements().forEach(stmt -> as(AssignmentStatement.class, stmt)
+    classDef.body().statements().forEach(stmt -> optCast(AssignmentStatement.class, stmt)
       .filter(isLhsCalled("csrf"))
       .filter(asgn -> Expressions.isFalsy(asgn.assignedValue()))
       .ifPresent(asgn -> subscriptionContext.addIssue(asgn.assignedValue(), DISABLING_CSRF_MESSAGE)));
@@ -199,20 +200,19 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
    * Checks that a value is an instance of type <code>B</code>, and returns an option with the cast value, if possible.
    * Returns an empty option if the cast is not possible.
    */
-  private static <A, B> Optional<B> as(Class<B> c, A a) {
+  private static <A, B> Optional<B> optCast(Class<B> c, @Nullable  A a) {
     return c.isInstance(a) ? Optional.of(c.cast(a)) : Optional.empty();
   }
 
-  /** Curried version of 2-ary <code>as</code>, to be used inside <code>Optional.flatMap</code>. */
-  private static <A, B> Function<A, Optional<B>> as(Class<B> c) {
-    return a -> as(c, a);
+  /** Curried version of 2-ary <code>optCast</code>, to be used inside <code>Optional.flatMap</code>. */
+  private static <A, B> Function<A, Optional<B>> optCast(Class<B> c) {
+    return a -> optCast(c, a);
   }
 
   /** Checks that subclasses of <code>FlaskForm</code> are instantiated without bad CSRF settings. */
   private static void formInstantiationCheck(SubscriptionContext subscriptionContext) {
     CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    boolean isFlaskFormInstantiation = Optional.ofNullable(callExpr.calleeSymbol())
-      .flatMap(as(ClassSymbol.class))
+    boolean isFlaskFormInstantiation = optCast(ClassSymbol.class, callExpr.calleeSymbol())
       .filter(c -> c.canBeOrExtend("flask_wtf.FlaskForm"))
       .isPresent();
     if (!isFlaskFormInstantiation) {
@@ -236,7 +236,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     if ("csrf_enabled".equals(name) && Expressions.isFalsy(regArg.expression())) {
       return Optional.of(regArg.expression());
     } else if ("meta".equals(name)) {
-      return as(DictionaryLiteral.class, regArg.expression())
+      return optCast(DictionaryLiteral.class, regArg.expression())
         .flatMap(CsrfDisabledCheck::searchForBadCsrfSettingInDictionary);
     } else {
       return Optional.empty();
@@ -248,7 +248,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     return dict.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
-      .filter(kvp -> as(StringLiteral.class, kvp.key())
+      .filter(kvp -> optCast(StringLiteral.class, kvp.key())
         .filter(strLit -> "csrf".equals(strLit.trimmedQuotesValue()))
         .isPresent())
       .findFirst()
@@ -262,7 +262,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       boolean isCsrfEnabledInThisFile = asgn.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
         .findFirst()
-        .flatMap(as(Name.class))
+        .flatMap(optCast(Name.class))
         .flatMap(app -> Optional.of(app)
           .map(Name::symbol)
           .map(Symbol::usages)
@@ -276,11 +276,10 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
   /** Checks that an expression is some kind of <code>Flask(...)</code> constructor invocation. */
   private static boolean isFlaskAppInstantiation(Expression expr) {
-    if (expr.is(Tree.Kind.CALL_EXPR)) {
-      Symbol s = ((CallExpression) expr).calleeSymbol();
-      return s != null && "flask.Flask".equals(s.fullyQualifiedName());
-    }
-    return false;
+    return optCast(CallExpression.class, expr)
+      .map(CallExpression::calleeSymbol)
+      .filter(symb -> "flask.Flask".equals(symb.fullyQualifiedName()))
+      .isPresent();
   }
 
   /** Detects usages like <code>CSRFProtect(a)</code>. */
@@ -292,11 +291,9 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
   /** Checks that the surroundings of <code>t</code> look like <code>expectedCalleeFqn(someExpr(t))</code>. */
   private static boolean isWithinCall(String expectedCalleeFqn, Tree t) {
-    Tree enclosingCallExpr = TreeUtils.firstAncestorOfKind(t, Tree.Kind.CALL_EXPR);
-    if (enclosingCallExpr != null) {
-      Symbol calleeSymbol = ((CallExpression) enclosingCallExpr).calleeSymbol();
-      return calleeSymbol != null && expectedCalleeFqn.equals(calleeSymbol.fullyQualifiedName());
-    }
-    return false;
+    return optCast(CallExpression.class, TreeUtils.firstAncestorOfKind(t, Tree.Kind.CALL_EXPR))
+      .map(CallExpression::calleeSymbol)
+      .filter(symb -> expectedCalleeFqn.equals(symb.fullyQualifiedName()))
+      .isPresent();
   }
 }

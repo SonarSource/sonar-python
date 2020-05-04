@@ -20,7 +20,6 @@
 package org.sonar.python.checks.hotspots;
 
 import org.junit.Test;
-import org.sonar.python.checks.hotspots.CsrfDisabledCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CsrfDisabledCheckTest {
