@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -35,7 +36,9 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.PassStatement;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -254,6 +257,48 @@ public class TreeUtilsTest {
 
     assertThat(TreeUtils.topLevelFunctionDefs(classDef)).isEqualTo(Collections.singletonList(fooDef));
   }
+
+  @Test
+  public void test_nthArgumentOrKeyword() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "def foo(p0, p1, p2): ...",
+      "foo(1, 2, p2 = 3)"
+    );
+    CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
+    assertThat(p1.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(((NumericLiteral) p1.expression()).valueAsLong()).isEqualTo(2);
+
+    RegularArgument p2 = TreeUtils.nthArgumentOrKeyword(2, "p2", callExpr.arguments());
+    assertThat(p2.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(((NumericLiteral) p2.expression()).valueAsLong()).isEqualTo(3);
+  }
+
+  @Test
+  public void test_nthArgumentOrKeyword_unpacking() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "def foo(p0, p1, p2): ...",
+      "args = [1, 2, 3]",
+      "foo(*args)"
+    );
+
+    CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
+    assertThat(p1).isNull();
+  }
+
+  @Test
+  public void test_nthArgumentOrKeyword_no_positional() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "def foo(p0, p1 = 2, p2 = 3): ...",
+      "foo(0, p2 = 4)"
+    );
+
+    CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
+    assertThat(p1).isNull();
+  }
+
 
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");

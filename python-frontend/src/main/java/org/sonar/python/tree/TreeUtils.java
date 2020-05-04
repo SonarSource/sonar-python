@@ -34,13 +34,16 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
@@ -215,5 +218,30 @@ public class TreeUtils {
       this.functionDefs.add(pyFunctionDefTree);
       // Do not descend into nested functions
     }
+  }
+
+  @CheckForNull
+  public static RegularArgument nthArgumentOrKeyword(int argPosition, String keyword, List<Argument> arguments) {
+    for (int i = 0; i < arguments.size(); i++) {
+      Argument argument = arguments.get(i);
+      if (hasKeyword(argument, keyword)) {
+        return ((RegularArgument) argument);
+      }
+      if (argument.is(Kind.REGULAR_ARGUMENT)) {
+        RegularArgument regularArgument = (RegularArgument) argument;
+        if (regularArgument.keywordArgument() == null && argPosition == i) {
+          return regularArgument;
+        }
+      }
+    }
+    return null;
+  }
+
+  private static boolean hasKeyword(Argument argument, String keyword) {
+    if (argument.is(Kind.REGULAR_ARGUMENT)) {
+      Name keywordArgument = ((RegularArgument) argument).keywordArgument();
+      return keywordArgument != null && keywordArgument.name().equals(keyword);
+    }
+    return false;
   }
 }

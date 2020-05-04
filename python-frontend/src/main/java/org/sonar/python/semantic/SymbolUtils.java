@@ -300,6 +300,27 @@ public class SymbolUtils {
     SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", sslContextClass);
     globalSymbols.put("OpenSSL", Collections.singleton(sslSubmodule));
 
+    ClassSymbolImpl modesCBC = classSymbol("CBC", "cryptography.hazmat.primitives.ciphers.modes.CBC");
+    ClassSymbolImpl modesECB = classSymbol("ECB", "cryptography.hazmat.primitives.ciphers.modes.ECB");
+    SymbolImpl cryptographyModesSubmodule = moduleSymbol("modes", "cryptography.hazmat.primitives.ciphers.modes", modesCBC, modesECB);
+    globalSymbols.put("cryptography.hazmat.primitives.ciphers", Collections.singleton(cryptographyModesSubmodule));
+
+    ClassSymbolImpl pkcs1v15 = classSymbol("PKCS1v15", "cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15");
+    SymbolImpl cryptographyPaddingSubmodule = moduleSymbol("padding", "cryptography.hazmat.primitives.asymmetric.padding", pkcs1v15);
+
+    FunctionSymbolImpl generatePrivateKey = new FunctionSymbolImpl(
+      "generate_private_key", "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key", false, false, false, Collections.emptyList(),Collections.emptyList());
+    ClassSymbolImpl rsaPrivateKey = classSymbol("RSAPrivateKey", "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey", "decrypt");
+    FunctionSymbolImpl publicKey = new FunctionSymbolImpl(
+      "public_key", "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key", false, false, false, Collections.emptyList(),Collections.emptyList());
+    ClassSymbolImpl rsaPublicKey = classSymbol("RSAPublicKey", "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey", "encrypt");
+    publicKey.setDeclaredReturnType(InferredTypes.runtimeType(rsaPublicKey));
+    rsaPrivateKey.addMembers(Collections.singleton(publicKey));
+    generatePrivateKey.setDeclaredReturnType(InferredTypes.runtimeType(rsaPrivateKey));
+    SymbolImpl cryptographyRsaSubmodule = moduleSymbol("rsa", "cryptography.hazmat.primitives.asymmetric.rsa", generatePrivateKey);
+
+    globalSymbols.put("cryptography.hazmat.primitives.asymmetric", new HashSet<>(Arrays.asList(cryptographyPaddingSubmodule, cryptographyRsaSubmodule)));
+
     return globalSymbols;
   }
 
