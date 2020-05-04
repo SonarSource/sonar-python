@@ -17,3 +17,9 @@ def misconfiguredFlaskExamples():
   @app3.route('/') # it's here just to make sure we don't somehow crash on usages within decorators
   def index():
       pass
+
+  # Corner cases for test coverage
+  notAnApp = UnknownSymbol()
+  app9 = Flask(__name__)
+  (lambda x: x)(app9)
+  CSRFProtect(app9)
