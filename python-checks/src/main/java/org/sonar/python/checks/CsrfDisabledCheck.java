@@ -51,7 +51,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 // https://jira.sonarsource.com/browse/SONARPY-668
 // https://jira.sonarsource.com/browse/RSPEC-5792
-@Rule(key = "S5792")
+@Rule(key = "S4502")
 public class CsrfDisabledCheck extends PythonSubscriptionCheck {
 
   private static final String DISABLING_CSRF_MESSAGE = "Disabling CSRF protection is dangerous.";
