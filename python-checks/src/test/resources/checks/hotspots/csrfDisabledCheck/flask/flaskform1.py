@@ -19,6 +19,10 @@ class TestProtectedForm(FlaskForm):
     class Meta:
         csrf = True # Not needed but compliant
 
+        somethingExceptCsrf = False # coverage only
+        def onlyForCoverage():
+            pass
+
 @app.route('/protectedflaskform1', methods=['GET', 'POST'])
 def protectedflaskform1():
     form = TestForm1(request.form) # Compliant by default
