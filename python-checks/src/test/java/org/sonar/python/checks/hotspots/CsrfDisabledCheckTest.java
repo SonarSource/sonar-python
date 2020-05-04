@@ -17,15 +17,16 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.checks.hotspots;
 
 import org.junit.Test;
+import org.sonar.python.checks.hotspots.CsrfDisabledCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class CsrfDisabledCheckTest {
 
   private static void testFile(String relPath) {
-    String path = "src/test/resources/checks/csrfDisabledCheck/" + relPath;
+    String path = "src/test/resources/checks/hotspots/csrfDisabledCheck/" + relPath;
     PythonCheckVerifier.verify(path, new CsrfDisabledCheck());
   }
 

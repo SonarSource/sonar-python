@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -47,6 +47,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 // https://jira.sonarsource.com/browse/SONARPY-668
@@ -178,18 +179,17 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    boolean isWithinFlaskForm = Optional.ofNullable(classDef.parent())
-      .map(Tree::parent)
-      .flatMap(filterIsInstance(ClassDef.class))
-      .map(parentClassDef -> parentClassDef.name().symbol())
-      .flatMap(filterIsInstance(ClassSymbol.class))
+    ;
+    boolean isWithinFlaskForm = Optional.ofNullable(TreeUtils.firstAncestorOfKind(classDef, Tree.Kind.CLASSDEF))
+      .map(parentClassDef -> ((ClassDef) parentClassDef).name().symbol())
+      .flatMap(as(ClassSymbol.class))
       .filter(parentClassSymbol -> parentClassSymbol.canBeOrExtend("flask_wtf.FlaskForm"))
       .isPresent();
     if (!isWithinFlaskForm) {
       return;
     }
 
-    classDef.body().statements().forEach(stmt -> filterIsInstance(AssignmentStatement.class, stmt)
+    classDef.body().statements().forEach(stmt -> as(AssignmentStatement.class, stmt)
       .filter(isLhsCalled("csrf"))
       .filter(asgn -> Expressions.isFalsy(asgn.assignedValue()))
       .ifPresent(asgn -> subscriptionContext.addIssue(asgn.assignedValue(), DISABLING_CSRF_MESSAGE)));
@@ -199,20 +199,20 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
    * Checks that a value is an instance of type <code>B</code>, and returns an option with the cast value, if possible.
    * Returns an empty option if the cast is not possible.
    */
-  private static <A, B> Optional<B> filterIsInstance(Class<B> c, A a) {
+  private static <A, B> Optional<B> as(Class<B> c, A a) {
     return c.isInstance(a) ? Optional.of(c.cast(a)) : Optional.empty();
   }
 
-  /** Curried version of 2-ary <code>filterInstance</code>, to be used inside <code>Optional.flatMap</code>. */
-  private static <A, B> Function<A, Optional<B>> filterIsInstance(Class<B> c) {
-    return a -> filterIsInstance(c, a);
+  /** Curried version of 2-ary <code>as</code>, to be used inside <code>Optional.flatMap</code>. */
+  private static <A, B> Function<A, Optional<B>> as(Class<B> c) {
+    return a -> as(c, a);
   }
 
   /** Checks that subclasses of <code>FlaskForm</code> are instantiated without bad CSRF settings. */
   private static void formInstantiationCheck(SubscriptionContext subscriptionContext) {
     CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
     boolean isFlaskFormInstantiation = Optional.ofNullable(callExpr.calleeSymbol())
-      .flatMap(filterIsInstance(ClassSymbol.class))
+      .flatMap(as(ClassSymbol.class))
       .filter(c -> c.canBeOrExtend("flask_wtf.FlaskForm"))
       .isPresent();
     if (!isFlaskFormInstantiation) {
@@ -236,7 +236,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     if ("csrf_enabled".equals(name) && Expressions.isFalsy(regArg.expression())) {
       return Optional.of(regArg.expression());
     } else if ("meta".equals(name)) {
-      return filterIsInstance(DictionaryLiteral.class, regArg.expression())
+      return as(DictionaryLiteral.class, regArg.expression())
         .flatMap(CsrfDisabledCheck::searchForBadCsrfSettingInDictionary);
     } else {
       return Optional.empty();
@@ -248,7 +248,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     return dict.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
-      .filter(kvp -> filterIsInstance(StringLiteral.class, kvp.key())
+      .filter(kvp -> as(StringLiteral.class, kvp.key())
         .filter(strLit -> "csrf".equals(strLit.trimmedQuotesValue()))
         .isPresent())
       .findFirst()
@@ -262,7 +262,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       boolean isCsrfEnabledInThisFile = asgn.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
         .findFirst()
-        .flatMap(filterIsInstance(Name.class))
+        .flatMap(as(Name.class))
         .flatMap(app -> Optional.of(app)
           .map(Name::symbol)
           .map(Symbol::usages)
