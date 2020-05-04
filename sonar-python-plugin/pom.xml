@@ -110,6 +110,13 @@
                     <exclude>NOTICE*</exclude>
                   </excludes>
                 </filter>
+                <filter>
+                <!--  Keeping all classes from python-frontend in case some class is not used (e.g. class is created for custom rules)  -->
+                <artifact>org.sonarsource.python:python-frontend</artifact>
+                <includes>
+                  <include>**</include>
+                </includes>
+              </filter>
               </filters>
             </configuration>
           </execution>
