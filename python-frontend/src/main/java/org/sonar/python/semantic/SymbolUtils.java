@@ -300,6 +300,12 @@ public class SymbolUtils {
     SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", sslContextClass);
     globalSymbols.put("OpenSSL", Collections.singleton(sslSubmodule));
 
+
+    ClassSymbolImpl csrfProtect =
+      classSymbol("CSRFProtect", "flask_wtf.csrf.CSRFProtect", "init_app", "exempt");
+    globalSymbols.put("flask_wtf.csrf", Collections.singleton(csrfProtect));
+
+
     ClassSymbolImpl modesCBC = classSymbol("CBC", "cryptography.hazmat.primitives.ciphers.modes.CBC");
     ClassSymbolImpl modesECB = classSymbol("ECB", "cryptography.hazmat.primitives.ciphers.modes.ECB");
     SymbolImpl cryptographyModesSubmodule = moduleSymbol("modes", "cryptography.hazmat.primitives.ciphers.modes", modesCBC, modesECB);

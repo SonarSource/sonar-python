@@ -1,0 +1,155 @@
+<p>CSRF vulnerabilities occur when attackers can trick a user to perform sensitive authenticated operations on a web application without his
+consent.</p>
+<pre>
+&lt;body onload="document.forms[0].submit()"&gt;
+&lt;form&gt;
+&lt;form action="http://mybank.com/account/transfer_money" method="POST"&gt;
+    &lt;input type="hidden" name="accountNo" value="attacker_account_123456"/&gt;
+    &lt;input type="hidden" name="amount" value="10000"/&gt;
+    &lt;input type="submit" value="Steal money"/&gt;
+&lt;/form&gt;
+</pre>
+<p>If an user visits the attacker's website which contains the above malicious code, his bank account will be debited without his consent and
+notice.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> There exist sensitive operations on the web application that can be performed when the user is authenticated. </li>
+  <li> The state / resources of the web application could be modified by doing HTTP POST or HTTP DELETE requests for example. </li>
+  <li> The web application is not only a public API designed to be requested by external websites. </li>
+</ul>
+<p>You are at risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Protection against CSRF attacks is strongly recommended:
+    <ul>
+      <li> to be activated by default for all <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">unsafe HTTP
+      methods</a>. </li>
+      <li> implemented, for example, with an unguessable CSRF token </li>
+    </ul> </li>
+  <li> Of course all sensitive operations should not be performed with <a
+  href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods">safe HTTP</a> methods like <code>GET</code> which are designed to be
+  used only for information retrieval. </li>
+</ul>
+<h2>Sensitive Code Example</h2>
+<p>For a <a href="https://docs.djangoproject.com/fr/3.0/ref/csrf/">Django</a> application, the code is sensitive when,</p>
+<ul>
+  <li> <code>django.middleware.csrf.CsrfViewMiddleware</code> is not used in the <a
+  href="https://docs.djangoproject.com/en/3.0/topics/settings/">Django settings</a>: </li>
+</ul>
+<pre>
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+] # Sensitive: django.middleware.csrf.CsrfViewMiddleware is missing
+</pre>
+<ul>
+  <li> the CSRF protection is disabled on a view: </li>
+</ul>
+<pre>
+@csrf_exempt # Sensitive
+def example(request):
+    return HttpResponse("default")
+</pre>
+<p>For a <a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask</a> application, the code is sensitive when,</p>
+<ul>
+  <li> the <code>WTF_CSRF_ENABLED</code> setting is set to <code>false</code>: </li>
+</ul>
+<pre>
+app = Flask(__name__)
+app.config['WTF_CSRF_ENABLED'] = False # Sensitive
+</pre>
+<ul>
+  <li> the application doesn't use the <code>CSRFProtect</code> module: </li>
+</ul>
+<pre>
+app = Flask(__name__) # Sensitive: CSRFProtect is missing
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+</pre>
+<ul>
+  <li> the CSRF protection is disabled on a view: </li>
+</ul>
+<pre>
+app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
+
+@app.route('/example/', methods=['POST'])
+@csrf.exempt # Sensitive
+def example():
+    return 'example '
+</pre>
+<ul>
+  <li> the CSRF protection is disabled on a form: </li>
+</ul>
+<pre>
+class unprotectedForm(FlaskForm):
+    class Meta:
+        csrf = False # Sensitive
+
+    name = TextField('name')
+    submit = SubmitField('submit')
+</pre>
+<h2>Compliant Solution</h2>
+<p>For a <a href="https://docs.djangoproject.com/fr/3.0/ref/csrf/">Django</a> application,</p>
+<ul>
+  <li> it is recommended to protect all the views with <code>django.middleware.csrf.CsrfViewMiddleware</code>: </li>
+</ul>
+<pre>
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware', # Compliant
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+</pre>
+<ul>
+  <li> and to not disable the CSRF protection on specific views: </li>
+</ul>
+<pre>
+def example(request): # Compliant
+    return HttpResponse("default")
+</pre>
+<p>For a <a href="https://flask-wtf.readthedocs.io/en/latest/csrf.html">Flask</a> application, </p>
+<ul>
+  <li> the <code>CSRFProtect</code> module should be used (and not disabled further with <code>WTF_CSRF_ENABLED</code> set to <code>false</code>):
+  </li>
+</ul>
+<pre>
+app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app) # Compliant
+</pre>
+<ul>
+  <li> and it is recommended to not disable the CSRF protection on specific views or forms: </li>
+</ul>
+<pre>
+@app.route('/example/', methods=['POST']) # Compliant
+def example():
+    return 'example '
+
+class unprotectedForm(FlaskForm):
+    class Meta:
+        csrf = True # Compliant
+
+    name = TextField('name')
+    submit = SubmitField('submit')
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/352.html">MITRE, CWE-352</a> - Cross-Site Request Forgery (CSRF) </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
+  <li> <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29">OWASP: Cross-Site Request Forgery</a> </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
+</ul>
+

@@ -25,6 +25,7 @@ import java.util.HashSet;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
+import org.sonar.python.checks.hotspots.CsrfDisabledCheck;
 import org.sonar.python.checks.hotspots.DataEncryptionCheck;
 import org.sonar.python.checks.hotspots.DebugModeCheck;
 import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeCheck;
@@ -81,6 +82,7 @@ public final class CheckList {
       ComparisonToNoneCheck.class,
       ConfusingWalrusCheck.class,
       CorsCheck.class,
+      CsrfDisabledCheck.class,
       DataEncryptionCheck.class,
       DbNoPasswordCheck.class,
       DeadStoreCheck.class,
