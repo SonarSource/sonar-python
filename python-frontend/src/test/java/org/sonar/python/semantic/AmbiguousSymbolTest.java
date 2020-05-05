@@ -150,6 +150,19 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
+  public void aliased_import() {
+    Symbol symbol = symbols(
+      "try:",
+      "  from gettext import gettext as _",
+      "except ImportError:",
+      "  def _(s): return s"
+    ).get("_");
+    assertThat(symbol.name()).isEqualTo("_");
+    assertThat(symbol.is(Symbol.Kind.AMBIGUOUS)).isTrue();
+    assertThat(((AmbiguousSymbol) symbol).alternatives()).extracting(Symbol::kind).containsExactlyInAnyOrder(Symbol.Kind.OTHER, Symbol.Kind.FUNCTION);
+  }
+
+  @Test
   public void copy_without_usages() {
     SymbolImpl foo = new SymbolImpl("foo", "mod1.foo");
     SymbolImpl otherFoo = new SymbolImpl("foo", "mod2.foo");
