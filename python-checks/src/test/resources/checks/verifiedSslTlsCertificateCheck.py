@@ -13,10 +13,10 @@ def pyopensslTest():
   ctx1.set_verify(SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT | VERIFY_CLIENT_ONCE, verify_callback) # Compliant
 
   ctx = SSL.Context(SSL.TLSv1_2_METHOD)
-  ctx.set_verify(SSL.VERIFY_NONE, verify_callback) # Noncompliant {{Omitting the check of the peer certificate is dangerous.}}
+  ctx.set_verify(SSL.VERIFY_NONE, verify_callback) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                  ^^^^^^^^^^^
 
-  ctx.set_verify(SSL.VERIFY_FAIL_IF_NO_PEER_CERT | SSL.VERIFY_NONE | SSL.VERIFY_CLIENT_ONCE) # Noncompliant {{Omitting the check of the peer certificate is dangerous.}}
+  ctx.set_verify(SSL.VERIFY_FAIL_IF_NO_PEER_CERT | SSL.VERIFY_NONE | SSL.VERIFY_CLIENT_ONCE) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                    ^^^^^^^^^^^
 
   # Weird cases for code coverage only.
@@ -34,50 +34,50 @@ def requestsTests():
   # requests-tests.py
   import requests
 
-  requests.request('GET', 'https://example.domain', verify=False) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^^^^
-  requests.request('GET', 'https://example.domain', verify='') # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify='') # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^
-  requests.request('GET', 'https://example.domain', verify=0) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=0) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^
-  requests.request('GET', 'https://example.domain', verify=0.0) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=0.0) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^^
-  requests.request('GET', 'https://example.domain', verify=0j) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=0j) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^
-  requests.request('GET', 'https://example.domain', verify="") # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify="") # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^
-  requests.request('GET', 'https://example.domain', verify=b'') # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=b'') # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^^
-  requests.request('GET', 'https://example.domain', verify=[]) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=[]) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^
-  requests.request('GET', 'https://example.domain', verify={}) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify={}) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^
-  requests.request('GET', 'https://example.domain', verify=()) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^
-  requests.request('GET', 'https://example.domain', verify=set()) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=set()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^^^^
-  requests.request('GET', 'https://example.domain', verify=range(0)) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request('GET', 'https://example.domain', verify=range(0)) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                        ^^^^^^^^
-  requests.request(verify=False, method='GET', url='https://example.domain') # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.request(verify=False, method='GET', url='https://example.domain') # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                       ^^^^^
 
 
-  kargs1 = {'verify': False} # Noncompliant {{Disabling certificate verification is dangerous.}}
+  kargs1 = {'verify': False} # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                   ^^^^^
   requests.request('GET', 'https://example.domain', **kargs1)
   #                                                   ^^^^^^ < 1
 
 
-  kargs2 = {'method': 'GET', 'url': 'https://example.domain', 'verify': False} # Noncompliant {{Disabling certificate verification is dangerous.}}
+  kargs2 = {'method': 'GET', 'url': 'https://example.domain', 'verify': False} # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                                     ^^^^^
   requests.request(**kargs2)
   #                  ^^^^^^ < 1
 
-  requests.get('https://example.domain', verify=False) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.get('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                             ^^^^^
-  requests.post('https://example.domain', verify=False) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.post('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                              ^^^^^
-  requests.options('https://example.domain', verify=False) # Noncompliant {{Disabling certificate verification is dangerous.}}
+  requests.options('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                                                 ^^^^^
 
   requests.request(method='GET', url='https://example.domain') # Compliant
@@ -118,11 +118,11 @@ def urllibTests():
   import sys
 
   # (S4830) - bydefault = ctx.verify_mode = ssl.CERT_NONE
-  ctx1 = ssl._create_unverified_context()  # Noncompliant {{Certificate verification is disabled by default, verify_mode should be updated.}}
+  ctx1 = ssl._create_unverified_context()  # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #          ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   ctx2 = ssl._create_unverified_context()
-  ctx2.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+  ctx2.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                      ^^^^^^^^^
 
   ctx3 = ssl._create_unverified_context()
@@ -131,11 +131,11 @@ def urllibTests():
   ctx4 = ssl._create_unverified_context()
   ctx4.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
 
-  ctx5 = ssl._create_stdlib_context() # Noncompliant {{Certificate verification is disabled by default, verify_mode should be updated.}}
+  ctx5 = ssl._create_stdlib_context() # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #          ^^^^^^^^^^^^^^^^^^^^^^
 
   ctx6 = ssl._create_stdlib_context()
-  ctx6.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+  ctx6.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                      ^^^^^^^^^
 
   ctx7 = ssl._create_stdlib_context()
@@ -148,7 +148,7 @@ def urllibTests():
 
   ctx9b = ssl.create_default_context()
   ctx9b.check_hostname = False
-  ctx9b.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+  ctx9b.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                       ^^^^^^^^^
 
   ctxA = ssl.create_default_context()
@@ -161,7 +161,7 @@ def urllibTests():
 
   ctxD = ssl._create_default_https_context()
   ctxD.check_hostname = False
-  ctxD.verify_mode = ssl.CERT_NONE # Noncompliant {{Disabling certificate verification is dangerous.}}
+  ctxD.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
   #                      ^^^^^^^^^
 
   ctxE = ssl._create_default_https_context()
@@ -180,3 +180,54 @@ def urllibTests():
   ambiguous = "" if 42 * 42 < 1700 else (lambda x: x * x)
   ctxC3 = ambiguous._create_default_https_context()
   ctxC4 = notASymbol()
+
+
+def multipleCtxReinitializationsWithFinalGoodSetting():
+    import ssl
+    ctx = ssl._create_unverified_context()  # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #                     ^^^^^^^^^
+
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+
+def multipleCtxReinitializationsWithFinalBadSetting():
+    import ssl
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+
+    ctx = ssl._create_stdlib_context()
+    ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #                     ^^^^^^^^^
+
+def multipleCtxReinitializationsWithGoodSettingBeforeFinalBadDefault():
+    import ssl
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+    ctx = ssl._create_unverified_context() # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+def multipleCtxReinitializationsWithBadSettingBeforeFinalGoodDefault():
+    import ssl
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #                     ^^^^^^^^^
+
+    ctx = ssl._create_default_https_context() # Compliant (S4830) - bydefault = ctx.verify_mode = ssl.CERT_REQUIRED
+
+def ctxSymbolSharedBetweenTwoIfBranches():
+    import ssl
+    if ca_file is not None and hasattr(ssl, 'create_default_context'):
+        ctx = ssl.create_default_context(cafile=ca_file)
+        ctx.verify_mode = ssl.CERT_REQUIRED
+        args['context'] = ctx
+
+    if not verify and parse.scheme == 'https' and (
+        hasattr(ssl, 'create_default_context')):
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+        #                     ^^^^^^^^^
