@@ -181,21 +181,53 @@ def urllibTests():
   ctxC3 = ambiguous._create_default_https_context()
   ctxC4 = notASymbol()
 
-def fixupRequestBulletPoint4ShouldNotReportAnything():
-  import ssl
-  ctx = ssl._create_unverified_context()
-  ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
 
-def fixupRequestBulletPoint5ShouldNotReportAnything():
-  import ssl
-  ctx = ssl._create_default_https_context() # Compliant (S4830) - bydefault = ctx.verify_mode = ssl.CERT_REQUIRED
+def multipleCtxReinitializationsWithFinalGoodSetting():
+    import ssl
+    ctx = ssl._create_unverified_context()  # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #         ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-def fixupRequestBulletPoint7(verify):
-  args = {}
-  import ssl
-  if not verify and parse.scheme == 'https' and (hasattr(ssl, 'create_default_context')):
-     ctx = ssl.create_default_context()
-     ctx.check_hostname = False
-     ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
-     #                     ^^^^^^^^^
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #                     ^^^^^^^^^
 
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+
+def multipleCtxReinitializationsWithFinalBadSetting():
+    import ssl
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+
+    ctx = ssl._create_stdlib_context()
+    ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #                     ^^^^^^^^^
+
+def multipleCtxReinitializationsWithGoodSettingBeforeFinalBadDefault():
+    import ssl
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_REQUIRED # Compliant (S4830)
+    ctx = ssl._create_unverified_context() # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+def multipleCtxReinitializationsWithBadSettingBeforeFinalGoodDefault():
+    import ssl
+    ctx = ssl._create_unverified_context()
+    ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+    #                     ^^^^^^^^^
+
+    ctx = ssl._create_default_https_context() # Compliant (S4830) - bydefault = ctx.verify_mode = ssl.CERT_REQUIRED
+
+def ctxSymbolSharedBetweenTwoIfBranches():
+    import ssl
+    if ca_file is not None and hasattr(ssl, 'create_default_context'):
+        ctx = ssl.create_default_context(cafile=ca_file)
+        ctx.verify_mode = ssl.CERT_REQUIRED
+        args['context'] = ctx
+
+    if not verify and parse.scheme == 'https' and (
+        hasattr(ssl, 'create_default_context')):
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+        #                     ^^^^^^^^^

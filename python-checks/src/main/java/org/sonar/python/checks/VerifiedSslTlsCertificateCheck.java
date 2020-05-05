@@ -19,8 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -330,13 +332,22 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     return closestHigher;
   }
 
-  /** Selects all non-binding usages between first assignment and next assignment. */
+  /**
+   * Selects all non-binding usages between first assignment and next assignment.
+   *
+   * We assume that in a vast majority of cases, there will be no complex control flow between the instantiation
+   * of the context and the modification of the settings, thus selecting and sorting usages by line numbers
+   * should suffice here.
+   */
   private static List<Usage> selectRelevantModifyingUsages(List<Usage> usages, int firstAssignmentLine) {
     int nextAssignmentLine = findNextAssignmentLine(usages, firstAssignmentLine);
-    return usages.stream().filter(u -> {
+    ArrayList<Usage> result = new ArrayList<Usage>();
+    usages.stream().filter(u -> {
       int line = u.tree().firstToken().line();
       return !u.isBindingUsage() && line > firstAssignmentLine && line < nextAssignmentLine;
-    }).collect(Collectors.toList());
+    }).forEach(u -> result.add(u));
+    result.sort(Comparator.comparing(u -> u.tree().firstToken().line()));
+    return result;
   }
 
   /**

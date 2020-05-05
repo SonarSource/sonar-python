@@ -29,19 +29,4 @@ public class VerifiedSslTlsCertificateCheckTest {
       "src/test/resources/checks/verifiedSslTlsCertificateCheck.py",
       new VerifiedSslTlsCertificateCheck());
   }
-
-  @Test
-  public void testWallOfFalseNegatives() {
-    PythonCheckVerifier.verify(
-      "src/test/resources/checks/verifiedSslTlsCertificateCheckFNs.py",
-      new VerifiedSslTlsCertificateCheck());
-  }
-
-  @Test
-  public void testContextInitializedAndConfiguredInTwoDifferentIfs() {
-    PythonCheckVerifier.verify(
-      "src/test/resources/checks/verifiedSslTlsCertificateCheckIfs.py",
-      new VerifiedSslTlsCertificateCheck());
-  }
-
 }
