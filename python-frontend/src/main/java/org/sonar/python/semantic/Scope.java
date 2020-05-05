@@ -149,7 +149,7 @@ class Scope {
       return classSymbol;
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).alternatives().stream()
-        .map(s -> copySymbol(s.name(), s, globalSymbolsByFQN))
+        .map(s -> copySymbol(symbolName, s, globalSymbolsByFQN))
         .collect(Collectors.toSet());
       return AmbiguousSymbolImpl.create(alternativeSymbols);
     } else if (symbol.is(Symbol.Kind.OTHER)) {
