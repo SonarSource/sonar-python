@@ -19,8 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import static java.util.Arrays.asList;
 
 import org.sonar.check.Rule;
@@ -34,17 +33,15 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S5547")
 public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
-  private static final Map<String, String> sensitiveCalleeFqnsAndMessages = new HashMap<>();
+  private static final String MESSAGE = "Use a strong cipher algorithm.";
+  private static final HashSet<String> sensitiveCalleeFqns = new HashSet<>();
 
   static {
-    String issueMessage = "Use a strong cipher algorithm.";
-
-
     // `pycryptodomex`, `pycryptodome`, and `pycrypto` all share the same names of the algorithms,
     // moreover, `pycryptodome` is drop-in replacement for `pycrypto`, thus they share same name ("Crypto").
     for (String libraryName : asList("Cryptodome", "Crypto")) {
       for (String vulnerableMethodName : asList("DES", "DES3", "ARC2", "ARC4", "Blowfish")) {
-        sensitiveCalleeFqnsAndMessages.put(String.format("%s.Cipher.%s.new", libraryName, vulnerableMethodName), issueMessage);
+        sensitiveCalleeFqns.add(String.format("%s.Cipher.%s.new", libraryName, vulnerableMethodName));
       }
     }
 
@@ -54,13 +51,12 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     // #cryptography.hazmat.primitives.ciphers.algorithms.IDEA
     // pyca (pyca/cryptography)
     for (String methodName : asList("TripleDES", "Blowfish", "ARC4", "IDEA")) {
-      sensitiveCalleeFqnsAndMessages.put(
-        String.format("cryptography.hazmat.primitives.ciphers.algorithms.%s", methodName), issueMessage);
+      sensitiveCalleeFqns.add(String.format("cryptography.hazmat.primitives.ciphers.algorithms.%s", methodName));
     }
 
     // pydes
-    sensitiveCalleeFqnsAndMessages.put("pyDes.des", issueMessage);
-    sensitiveCalleeFqnsAndMessages.put("pyDes.triple_des", issueMessage);
+    sensitiveCalleeFqns.add("pyDes.des");
+    sensitiveCalleeFqns.add("pyDes.triple_des");
   }
 
   @Override
@@ -70,8 +66,8 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
       Symbol calleeSymbol = callExpr.calleeSymbol();
       if (calleeSymbol != null) {
         String fqn = calleeSymbol.fullyQualifiedName();
-        if (fqn != null && sensitiveCalleeFqnsAndMessages.containsKey(fqn)) {
-          subscriptionContext.addIssue(callExpr.callee(), sensitiveCalleeFqnsAndMessages.get(fqn));
+        if (fqn != null && sensitiveCalleeFqns.contains(fqn)) {
+          subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
         }
       }
     });
