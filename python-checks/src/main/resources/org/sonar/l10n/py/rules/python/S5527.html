@@ -4,7 +4,7 @@ certificate. </p>
 <p>It's not recommended to re-invent the wheel by implementing custom hostname verification.</p>
 <p>TLS/SSL libraries provide built-in hostname verification functions that should be used.</p>
 <h2>Noncompliant Code Example</h2>
-<p>Python ssl standard library</p>
+<p>Python <a href="https://docs.python.org/3/library/ssl.html">ssl standard</a> library:</p>
 <pre>
 import ssl
 
@@ -18,7 +18,7 @@ ctx = ssl._create_default_https_context()
 ctx.check_hostname = False # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
-<p>Python ssl standard library</p>
+<p>Python <a href="https://docs.python.org/3/library/ssl.html">ssl standard</a> library:</p>
 <pre>
 import ssl
 
