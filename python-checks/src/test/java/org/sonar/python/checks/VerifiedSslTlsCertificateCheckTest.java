@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,7 +26,22 @@ public class VerifiedSslTlsCertificateCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify(
-      Arrays.asList("src/test/resources/checks/verifiedSslTlsCertificateCheck.py"),
+      "src/test/resources/checks/verifiedSslTlsCertificateCheck.py",
       new VerifiedSslTlsCertificateCheck());
   }
+
+  @Test
+  public void testWallOfFalseNegatives() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/verifiedSslTlsCertificateCheckFNs.py",
+      new VerifiedSslTlsCertificateCheck());
+  }
+
+  @Test
+  public void testContextInitializedAndConfiguredInTwoDifferentIfs() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/verifiedSslTlsCertificateCheckIfs.py",
+      new VerifiedSslTlsCertificateCheck());
+  }
+
 }

@@ -58,19 +58,14 @@ import static java.util.Optional.ofNullable;
 @Rule(key = "S4830")
 public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
+  private static final String MESSAGE = "Enable server certificate validation on this SSL/TLS connection.";
   private static final String VERIFY_NONE = Fqn.ssl("VERIFY_NONE");
 
-  /**
-   * Searches for `set_verify` invocations on instances of `OpenSSL.SSL.Context`,
-   * extracts the flags from the first argument, checks that the combination of flags is secure.
-   *
-   * @param context {@inheritDoc}
-   */
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::requestsCheck);
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::urllibCheck);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::standardSslCheck);
   }
 
   /** Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>. */
@@ -78,6 +73,9 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   /**
    * Check for the <code>OpenSSL.SSL.Context.set_verify</code> flag settings.
+   *
+   * Searches for `set_verify` invocations on instances of `OpenSSL.SSL.Context`,
+   * extracts the flags from the first argument, checks that the combination of flags is secure.
    *
    * @param subscriptionContext the subscription context passed by <code>Context.registerSyntaxNodeConsumer</code>.
    */
@@ -96,7 +94,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
         Tree flagsArgument = args.get(0);
         if (flagsArgument.is(Tree.Kind.REGULAR_ARGUMENT)) {
           Set<QualifiedExpression> flags = extractFlags(((RegularArgumentImpl) flagsArgument).expression());
-          checkFlagSettings(flags).ifPresent(issue -> subscriptionContext.addIssue(issue.token, issue.message));
+          checkFlagSettings(flags).ifPresent(issue -> subscriptionContext.addIssue(issue.token, MESSAGE));
         }
       }
     }
@@ -191,7 +189,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
         // The setting expression always comes last (`get` is safe: there can be only 1 or 2 elements)
         Expression rhs = sensitiveSettingExpressions.get(sensitiveSettingExpressions.size() - 1);
         if (Expressions.isFalsy(rhs) || isFalsyCollection(rhs)) {
-          PreciseIssue issue = subscriptionContext.addIssue(rhs, "Disabling certificate verification is dangerous.");
+          PreciseIssue issue = subscriptionContext.addIssue(rhs, MESSAGE);
 
           // report everything except the last one as secondary locations.
           for (int i = 0; i < sensitiveSettingExpressions.size() - 1; i++) {
@@ -297,7 +295,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static void urllibCheck(SubscriptionContext subscriptionContext) {
+  private static void standardSslCheck(SubscriptionContext subscriptionContext) {
     AssignmentStatement asgnStmt = (AssignmentStatement) subscriptionContext.syntaxNode();
 
     Optional<VulnerabilityAndProblematicToken> vulnTokOpt = searchRhsForVulnerableMethod(asgnStmt.assignedValue());
@@ -309,19 +307,36 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .filter(Name.class::isInstance)
       .map(expr -> ((Name) expr).symbol())
       .ifPresent(symb -> {
-        for (Usage u : symb.usages()) {
+        for (Usage u : selectRelevantModifyingUsages(symb.usages(), vulnTok.token.line())) {
           searchForVerifyModeOverride(u).ifPresent(vulnTok::overrideBy);
         }
         if (vulnTok.isVulnerable) {
-          if (vulnTok.isInvisibleDefaultPreset) {
-            subscriptionContext.addIssue(
-              vulnTok.token,
-              "Certificate verification is disabled by default, verify_mode should be updated.");
-          } else {
-            subscriptionContext.addIssue(vulnTok.token, "Disabling certificate verification is dangerous.");
-          }
+          subscriptionContext.addIssue(vulnTok.token, MESSAGE);
         }
       }));
+  }
+
+  /** Finds the next higher line where a binding usage occurs. */
+  private static int findNextAssignmentLine(List<Usage> usages, int firstAssignmentLine) {
+    int closestHigher = Integer.MAX_VALUE;
+    for (Usage u: usages) {
+      if (u.isBindingUsage()) {
+        int line = u.tree().firstToken().line();
+        if (line > firstAssignmentLine && line <= closestHigher) {
+          closestHigher = line;
+        }
+      }
+    }
+    return closestHigher;
+  }
+
+  /** Selects all non-binding usages between first assignment and next assignment. */
+  private static List<Usage> selectRelevantModifyingUsages(List<Usage> usages, int firstAssignmentLine) {
+    int nextAssignmentLine = findNextAssignmentLine(usages, firstAssignmentLine);
+    return usages.stream().filter(u -> {
+      int line = u.tree().firstToken().line();
+      return !u.isBindingUsage() && line > firstAssignmentLine && line < nextAssignmentLine;
+    }).collect(Collectors.toList());
   }
 
   /**
