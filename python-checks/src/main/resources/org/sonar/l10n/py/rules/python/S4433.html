@@ -12,24 +12,26 @@ strongly discouraged. </p>
 <pre>
 import ldap
 
-connect = ldap.initialize('ldap://example:1389')
+def init_ldap():
+   connect = ldap.initialize('ldap://example:1389')
 
-connect.simple_bind('cn=root') # Noncompliant
-connect.simple_bind_s('cn=root') # Noncompliant
-connect.bind_s('cn=root', None) # Noncompliant
-connect.bind('cn=root', None) # Noncompliant
+   connect.simple_bind('cn=root') # Noncompliant
+   connect.simple_bind_s('cn=root') # Noncompliant
+   connect.bind_s('cn=root', None) # Noncompliant
+   connect.bind('cn=root', None) # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 import ldap
 import os
 
-connect = ldap.initialize('ldap://example:1389')
+def init_ldap():
+   connect = ldap.initialize('ldap://example:1389')
 
-connect.simple_bind('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
-connect.simple_bind_s('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
-connect.bind_s('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
-connect.bind('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
+   connect.simple_bind('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
+   connect.simple_bind_s('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
+   connect.bind_s('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
+   connect.bind('cn=root', os.environ.get('LDAP_PASSWORD')) # Compliant
 </pre>
 <h2>See</h2>
 <ul>
