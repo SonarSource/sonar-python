@@ -64,4 +64,11 @@ public class CsrfDisabledCheckTest {
   public void testExemptAsFunction() {
     testFile("flask/exemptAsFunction.py");
   }
+
+  @Test
+  public void fixupTestsMoreRobustCSRFProtect() { testFile("flask/fixupTestsMoreRobustCSRFProtect.py"); }
+
+  @Test
+  public void fixupCsrfInGlobalScope() { testFile("flask/fixupCsrfInGlobalScope.py"); }
+
 }
