@@ -188,6 +188,7 @@ public final class CheckList {
       UnverifiedHostnameCheck.class,
       UselessParenthesisAfterKeywordCheck.class,
       UselessParenthesisCheck.class,
+      UselessStatementCheck.class,
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
       WrongAssignmentOperatorCheck.class

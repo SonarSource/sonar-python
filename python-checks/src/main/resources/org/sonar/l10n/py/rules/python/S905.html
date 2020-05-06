@@ -1,0 +1,32 @@
+<p>Any statement, other than a <code>pass</code>, <code>...</code> (ellipsis) or an empty statement (i.e. a single semicolon "<code>;</code>"), which
+has no side effect and does not result in a change of control flow will normally indicate a programming error, and therefore should be refactored.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+a == 1 # Noncompliant; was assignment intended?
+a &lt; b # Noncompliant; have we forgotten to assign the result to a variable?
+</pre>
+<h2>Exceptions</h2>
+<p><strong>Strings</strong></p>
+<p>Some projects use string literals as comments. By default, this rule will not raise an issue on these strings. Reporting on string literals can be
+enabled by setting the rule parameter "reportOnStrings" to "true".</p>
+<pre>
+class MyClass:
+    myattr = 42
+    """This is an attribute"""  # Noncompliant by default. Set "reportOnStrings" to "false"
+</pre>
+<p><strong>Operators</strong></p>
+<p>By default, this rule considers that no arithmetic operator has a side effect. Some rare projects redefine operators and add a side effect. You can
+list such operators in the rule parameter "ignoredOperators".</p>
+<pre>
+def process(p, beam):
+    """
+    Apache Beam redefines "|" and "&gt;&gt;" operators and they have a side effect.
+    Thus for Apache Beam projects "ignoredOperators"should be set to "|,&gt;&gt;"
+    """
+    p | "create" &gt;&gt; beam.Create()  # Noncompliant by default
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/482">MITRE, CWE-482</a> - Comparing instead of Assigning </li>
+</ul>
+
