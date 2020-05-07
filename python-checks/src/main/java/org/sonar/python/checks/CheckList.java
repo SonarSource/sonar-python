@@ -88,6 +88,7 @@ public final class CheckList {
       DbNoPasswordCheck.class,
       DeadStoreCheck.class,
       DebugModeCheck.class,
+      DictionaryDuplicateKeyCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
       DisabledHtmlAutoEscapeLegacyCheck.class,
       DuplicatedMethodFieldNamesCheck.class,
