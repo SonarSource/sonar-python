@@ -1,4 +1,8 @@
 # comment
+"""A module-level docstring.
+
+Following PEP-257.
+"""
 if 2 > 1:
 	
 	print "b"     # end of line comment
