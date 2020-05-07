@@ -50,7 +50,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
    * Tree.Kind.ELSE_CLAUSE is not in this list to avoid counting else: lines as executables.
    * This is to replicate behavior of some python coverage tools (like what is done by coveralls).
    */
-  private static final List<Tree.Kind> EXECUTABLE_LINES = Arrays.asList(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.COMPOUND_ASSIGNMENT, Tree.Kind.EXPRESSION_STMT, Tree.Kind.IMPORT_STMT,
+  private static final List<Tree.Kind> EXECUTABLE_LINES = Arrays.asList(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.COMPOUND_ASSIGNMENT, Tree.Kind.EXPRESSION_STMT, Tree.Kind.FILE_INPUT, Tree.Kind.IMPORT_STMT,
     Tree.Kind.IMPORT_NAME, Tree.Kind.IMPORT_FROM, Tree.Kind.CONTINUE_STMT, Tree.Kind.BREAK_STMT, Tree.Kind.YIELD_STMT, Tree.Kind.RETURN_STMT, Tree.Kind.PRINT_STMT,
     Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
     Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
@@ -70,18 +70,17 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> visitFile(ctx));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> visitFile());
     EXECUTABLE_LINES.forEach(kind -> context.registerSyntaxNodeConsumer(kind, this::visitNode));
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken((Token) ctx.syntaxNode()));
   }
 
-  private void visitFile(SubscriptionContext ctx) {
+  private void visitFile() {
     noSonar.clear();
     linesOfCode.clear();
     linesOfComments.clear();
     linesOfDocstring.clear();
     executableLines.clear();
-    visitNode(ctx);
   }
 
   private void visitNode(SubscriptionContext ctx) {
