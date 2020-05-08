@@ -53,7 +53,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private static final List<Tree.Kind> EXECUTABLE_LINES = Arrays.asList(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.COMPOUND_ASSIGNMENT, Tree.Kind.EXPRESSION_STMT, Tree.Kind.IMPORT_STMT,
     Tree.Kind.IMPORT_NAME, Tree.Kind.IMPORT_FROM, Tree.Kind.CONTINUE_STMT, Tree.Kind.BREAK_STMT, Tree.Kind.YIELD_STMT, Tree.Kind.RETURN_STMT, Tree.Kind.PRINT_STMT,
     Tree.Kind.PASS_STMT, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.RAISE_STMT, Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE,
-    Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF);
+    Tree.Kind.EXEC_STMT, Tree.Kind.ASSERT_STMT, Tree.Kind.DEL_STMT, Tree.Kind.GLOBAL_STMT, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT);
 
   private Set<Integer> noSonar = new HashSet<>();
   private Set<Integer> linesOfCode = new HashSet<>();
@@ -135,17 +135,13 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   }
 
   private void visitComment(Trivia trivia) {
-    String[] commentLines = getContents(trivia.token().value()).split("(\r)?\n|\r", -1);
+    String commentLine = getContents(trivia.token().value());
     int line = trivia.token().line();
-
-    for (String commentLine : commentLines) {
-      if (commentLine.contains("NOSONAR")) {
-        linesOfComments.remove(line);
-        noSonar.add(line);
-      } else if (!isBlank(commentLine) && !noSonar.contains(line)) {
-        linesOfComments.add(line);
-      }
-      line++;
+    if (commentLine.contains("NOSONAR")) {
+      linesOfComments.remove(line);
+      noSonar.add(line);
+    } else if (!isBlank(commentLine)) {
+      linesOfComments.add(line);
     }
   }
 
