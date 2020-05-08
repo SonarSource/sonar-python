@@ -135,17 +135,13 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   }
 
   private void visitComment(Trivia trivia) {
-    String[] commentLines = getContents(trivia.token().value()).split("(\r)?\n|\r", -1);
+    String commentLine = getContents(trivia.token().value());
     int line = trivia.token().line();
-
-    for (String commentLine : commentLines) {
-      if (commentLine.contains("NOSONAR")) {
-        linesOfComments.remove(line);
-        noSonar.add(line);
-      } else if (!isBlank(commentLine) && !noSonar.contains(line)) {
-        linesOfComments.add(line);
-      }
-      line++;
+    if (commentLine.contains("NOSONAR")) {
+      linesOfComments.remove(line);
+      noSonar.add(line);
+    } else if (!isBlank(commentLine)) {
+      linesOfComments.add(line);
     }
   }
 
