@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,5 +59,14 @@ public class BinaryExpressionImplTest {
 
     binary = ((BinaryExpressionImpl) lastExpression("42 // ''"));
     assertThat(binary.typeDependencies()).isEmpty();
+  }
+
+  @Test
+  public void long_sequence_binary_expressions() {
+    InferredType type = lastExpression(
+      "'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' +" +
+      " 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g'"
+    ).type();
+    assertThat(type.canOnlyBe("str")).isTrue();
   }
 }

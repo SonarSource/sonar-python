@@ -118,10 +118,12 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
       return InferredTypes.or(leftOperand.type(), rightOperand.type());
     }
     if (is(Kind.PLUS)) {
-      if (leftOperand.type().equals(INT) && rightOperand.type().equals(INT)) {
+      InferredType leftType = leftOperand.type();
+      InferredType rightType = rightOperand.type();
+      if (leftType.equals(INT) && rightType.equals(INT)) {
         return INT;
       }
-      if (leftOperand.type().equals(STR) && rightOperand.type().equals(STR)) {
+      if (leftType.equals(STR) && rightType.equals(STR)) {
         return STR;
       }
     }
