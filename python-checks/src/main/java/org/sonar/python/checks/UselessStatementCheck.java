@@ -125,7 +125,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     Symbol symbol = name.symbol();
     if (symbol != null && symbol.is(Symbol.Kind.CLASS)) {
       ClassSymbol classSymbol = (ClassSymbol) symbol;
-      //Creating an exception without raising it is covered by S3984
+      // Creating an exception without raising it is covered by S3984
       if (classSymbol.canBeOrExtend("BaseException")) {
         return;
       }
