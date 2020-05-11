@@ -93,7 +93,7 @@ def accessing_members(param):
 
 def corner_cases():
     try:
-        MyClass.attr # No issues when within a try/except
+        a_function # FN: we avoid raising issues when inside a try/except
     except AttributeError as e:
         pass
 
