@@ -60,12 +60,18 @@ public class FunctionSymbolTest {
     functionSymbol = functionSymbol("def fn(p1, /, p2): pass");
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::name).containsExactly("p1", "p2");
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isKeywordOnly).containsExactly(false, false);
-    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isPositionalOnly).containsExactly(false, true);
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isPositionalOnly).containsExactly(true, false);
 
     functionSymbol = functionSymbol("def fn(p1, /, p2, *, p3): pass");
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::name).containsExactly("p1", "p2", "p3");
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isKeywordOnly).containsExactly(false, false, true);
-    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isPositionalOnly).containsExactly(false, true, false);
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isPositionalOnly).containsExactly(true, false, false);
+
+    functionSymbol = functionSymbol("def fn(p1, /, p2, *p3, p4 = False): pass");
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::name).containsExactly("p1", "p2", "p3", "p4");
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isKeywordOnly).containsExactly(false, false, false, true);
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isPositionalOnly).containsExactly(true, false, false, false);
+    assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isVariadic).containsExactly(false, false, true, false);
 
     functionSymbol = functionSymbol("def fn(p1, p2=42): pass");
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::name).containsExactly("p1", "p2");

@@ -180,13 +180,13 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     if (overriddenParam.hasDefaultValue() && !parameter.hasDefaultValue()) {
       reportIssue(ctx, "Add a default value to parameter " + parameter.name() + ".", parameter.location(), overriddenMethod);
     }
-    if (!overriddenParam.isKeywordOnly() && parameter.isKeywordOnly()) {
+    if ((!overriddenParam.isKeywordOnly() && !overriddenParam.isPositionalOnly()) && (parameter.isKeywordOnly() || parameter.isPositionalOnly())) {
       reportIssue(ctx, prefix + " keyword-or-positional.", parameter.location(), overriddenMethod);
     }
     if (overriddenParam.isPositionalOnly() && !parameter.isPositionalOnly()) {
       reportIssue(ctx, prefix + " positional only.", parameter.location(), overriddenMethod);
     }
-    if (overriddenParam.isKeywordOnly() && parameter.isPositionalOnly()) {
+    if (overriddenParam.isKeywordOnly() && !parameter.isKeywordOnly()) {
       reportIssue(ctx, prefix + " keyword only.", parameter.location(), overriddenMethod);
     }
   }
