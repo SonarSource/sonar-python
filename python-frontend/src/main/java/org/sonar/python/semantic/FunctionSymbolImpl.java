@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -138,6 +139,13 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
     ParameterState parameterState = new ParameterState();
+    parameterState.positionalOnly = parameterTrees.stream().anyMatch(param -> Optional.of(param)
+      .filter(p -> p.is(Tree.Kind.PARAMETER))
+      .map(p -> ((org.sonar.plugins.python.api.tree.Parameter) p).starToken())
+      .map(Token::value)
+      .filter("/"::equals)
+      .isPresent()
+    );
     for (AnyParameter anyParameter : parameterTrees) {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
@@ -159,6 +167,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null, parameterState, locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
+        parameterState.keywordOnly = true;
+        parameterState.positionalOnly = false;
       }
     } else if (starToken != null) {
       if ("*".equals(starToken.value())) {
@@ -166,7 +176,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         parameterState.positionalOnly = false;
       }
       if ("/".equals(starToken.value())) {
-        parameterState.positionalOnly = true;
+        parameterState.positionalOnly = false;
       }
     }
   }
