@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.SetLiteral;
@@ -95,7 +94,7 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
   private static boolean isConstantCollectionLiteral(Expression condition) {
     switch (condition.getKind()) {
       case LIST_LITERAL:
-        return isAlwaysEmptyOrNonEmptyCollection(((ListLiteral) condition).elements());
+        return isAlwaysEmptyOrNonEmptyCollection(((ListLiteral) condition).elements().expressions());
       case DICTIONARY_LITERAL:
         return isAlwaysEmptyOrNonEmptyCollection(((DictionaryLiteral) condition).elements());
       case SET_LITERAL:
@@ -105,10 +104,6 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       default:
         return false;
     }
-  }
-
-  private static boolean isAlwaysEmptyOrNonEmptyCollection(ExpressionList elements) {
-    return isAlwaysEmptyOrNonEmptyCollection(elements.expressions());
   }
 
   private static boolean isAlwaysEmptyOrNonEmptyCollection(List<? extends Tree> elements) {
