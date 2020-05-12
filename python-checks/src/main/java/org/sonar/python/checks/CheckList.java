@@ -81,6 +81,7 @@ public final class CheckList {
       CommentRegularExpressionCheck.class,
       ComparisonToNoneCheck.class,
       ConfusingWalrusCheck.class,
+      ConstantConditionCheck.class,
       CorsCheck.class,
       CsrfDisabledCheck.class,
       DataEncryptionCheck.class,

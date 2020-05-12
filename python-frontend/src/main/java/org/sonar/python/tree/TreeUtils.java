@@ -244,4 +244,12 @@ public class TreeUtils {
     }
     return false;
   }
+
+  public static boolean isBooleanLiteral(Tree tree) {
+    if (tree.is(Kind.NAME)) {
+      String name = ((Name) tree).name();
+      return name.equals("True") || name.equals("False");
+    }
+    return false;
+  }
 }

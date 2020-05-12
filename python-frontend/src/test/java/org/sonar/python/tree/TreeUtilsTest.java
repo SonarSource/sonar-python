@@ -49,6 +49,7 @@ import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.lastExpression;
 
 public class TreeUtilsTest {
 
@@ -124,12 +125,12 @@ public class TreeUtilsTest {
   public void getSymbolFromTree() {
     assertThat(TreeUtils.getSymbolFromTree(null)).isEmpty();
 
-    Expression expression = PythonTestUtils.lastExpression(
+    Expression expression = lastExpression(
             "x = 42",
             "x");
     assertThat(TreeUtils.getSymbolFromTree(expression)).contains(((HasSymbol) expression).symbol());
 
-    expression = PythonTestUtils.lastExpression("foo()");
+    expression = lastExpression("foo()");
     assertThat(TreeUtils.getSymbolFromTree(expression)).isEmpty();
   }
 
@@ -299,6 +300,13 @@ public class TreeUtilsTest {
     assertThat(p1).isNull();
   }
 
+  @Test
+  public void test_isBooleanLiteral() {
+    assertThat(TreeUtils.isBooleanLiteral(lastExpression("True"))).isTrue();
+    assertThat(TreeUtils.isBooleanLiteral(lastExpression("False"))).isTrue();
+    assertThat(TreeUtils.isBooleanLiteral(lastExpression("x"))).isFalse();
+    assertThat(TreeUtils.isBooleanLiteral(lastExpression("foo()"))).isFalse();
+  }
 
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
