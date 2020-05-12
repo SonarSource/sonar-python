@@ -150,7 +150,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, parameterState, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterImpl(null, InferredTypes.anyType(), false, false, parameterState, locationInFile(anyParameter, fileId)));
       }
     }
   }
@@ -164,7 +164,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       if (typeAnnotation != null) {
         declaredType = InferredTypes.declaredType(typeAnnotation);
       }
-      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null, parameterState, locationInFile(parameter, fileId)));
+      this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
+        starToken != null, parameterState, locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;
@@ -242,14 +243,17 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     private final String name;
     private final InferredType declaredType;
     private final boolean hasDefaultValue;
+    private final boolean isVariadic;
     private final boolean isKeywordOnly;
     private final boolean isPositionalOnly;
     private final LocationInFile location;
 
-    ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue, ParameterState parameterState, @Nullable LocationInFile location) {
+    ParameterImpl(@Nullable String name, InferredType declaredType, boolean hasDefaultValue,
+                  boolean isVariadic, ParameterState parameterState, @Nullable LocationInFile location) {
       this.name = name;
       this.declaredType = declaredType;
       this.hasDefaultValue = hasDefaultValue;
+      this.isVariadic = isVariadic;
       this.isKeywordOnly = parameterState.keywordOnly;
       this.isPositionalOnly = parameterState.positionalOnly;
       this.location = location;
@@ -269,6 +273,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     @Override
     public boolean hasDefaultValue() {
       return hasDefaultValue;
+    }
+
+    @Override
+    public boolean isVariadic() {
+      return isVariadic;
     }
 
     @Override

@@ -51,6 +51,7 @@ public interface FunctionSymbol extends Symbol {
     String name();
     InferredType declaredType();
     boolean hasDefaultValue();
+    boolean isVariadic();
     boolean isKeywordOnly();
     boolean isPositionalOnly();
     @CheckForNull
