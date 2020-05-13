@@ -19,8 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -68,7 +69,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     if (functionSymbol.isInstanceMethod() && callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
       self = 1;
     }
-    Set<String> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionSymbol);
+    Map<String, FunctionSymbol.Parameter> positionalParamsWithoutDefault = positionalParamsWithoutDefault(functionSymbol);
     long nbPositionalParamsWithDefault = functionSymbol.parameters().stream()
       .filter(parameterName -> !parameterName.isKeywordOnly() && parameterName.hasDefaultValue())
       .count();
@@ -79,7 +80,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     long nbPositionalArgs = arguments.stream().filter(a -> a.keywordArgument() == null).count();
     long nbNonKeywordOnlyPassedWithKeyword = arguments.stream()
       .map(RegularArgument::keywordArgument)
-      .filter(k -> k != null && positionalParamsWithoutDefault.contains(k.name()))
+      .filter(k -> k != null && positionalParamsWithoutDefault.containsKey(k.name()) && !positionalParamsWithoutDefault.get(k.name()).isPositionalOnly())
       .count();
 
     int minimumPositionalArgs = positionalParamsWithoutDefault.size();
@@ -91,7 +92,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
         expected = "at least " + expected;
       }
       addPositionalIssue(ctx, callExpression.callee(), functionSymbol, message, expected);
-    } else if (nbMissingArgs + nbPositionalParamsWithDefault < 0) {
+    } else if (nbMissingArgs + nbPositionalParamsWithDefault + nbNonKeywordOnlyPassedWithKeyword < 0) {
       String message = "Remove " + (- nbMissingArgs - nbPositionalParamsWithDefault) + " unexpected arguments; ";
       if (nbPositionalParamsWithDefault > 0) {
         expected = "at most " + (minimumPositionalArgs - self + nbPositionalParamsWithDefault);
@@ -100,17 +101,17 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static Set<String> positionalParamsWithoutDefault(FunctionSymbol functionSymbol) {
+  private static Map<String, FunctionSymbol.Parameter> positionalParamsWithoutDefault(FunctionSymbol functionSymbol) {
     int unnamedIndex = 0;
-    Set<String> result = new HashSet<>();
+    Map<String, FunctionSymbol.Parameter> result = new HashMap<>();
     for (FunctionSymbol.Parameter parameter : functionSymbol.parameters()) {
       if (!parameter.isKeywordOnly() && !parameter.hasDefaultValue()) {
         String name = parameter.name();
         if (name == null) {
-          result.add("!unnamed" + unnamedIndex);
+          result.put("!unnamed" + unnamedIndex, parameter);
           unnamedIndex++;
         } else {
-          result.add(name);
+          result.put(parameter.name(), parameter);
         }
       }
     }
@@ -163,7 +164,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       RegularArgument arg = (RegularArgument) argument;
       Name keyword = arg.keywordArgument();
       if (keyword != null) {
-        if (parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()))) {
+        if (parameters.stream().noneMatch(parameter -> keyword.name().equals(parameter.name()) && !parameter.isPositionalOnly())) {
           PreciseIssue preciseIssue = ctx.addIssue(argument, "Remove this unexpected named argument '" + keyword.name() + "'.");
           addSecondary(functionSymbol, preciseIssue);
         } else {
