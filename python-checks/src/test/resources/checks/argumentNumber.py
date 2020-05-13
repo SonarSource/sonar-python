@@ -149,3 +149,22 @@ def builtin_method_different_for_python_2_and_3():
 
 def typeshed_third_party_methods():
   copy_context(42) # Noncompliant
+
+
+def no_overlap_with_S5549():
+  def keyword_only(a, *, b): ...
+  def positional_only(a, /, b): ...
+
+  keyword_only(1, b=2, a=2)  # S5549 scope
+  positional_only(1, 2, b=2)  # S5549 scope
+  positional_only(1, 2, a=2)  # Noncompliant
+  positional_only(1, a=2)  # Noncompliant 2
+
+  class MyClass:
+    def method1(self, a): ...
+    def method2(self, a):
+      self.method1(self, a)  # Noncompliant
+      self.method1(a, self=self) # S5549 scope
+      self.method1(self, a=a) # S5549 scope
+      "{self}".format(self=self)  # Ok
+

@@ -1,0 +1,26 @@
+<p>When a function is called, it accepts only one value per parameter. Python interpreters will raise a SyntaxError when they see something like
+<code>myfunction(a=1, a=2)</code>, but there are other cases which will only fail at runtime:</p>
+<ul>
+  <li> An argument is provided by value and position at the same time. </li>
+  <li> Some arguments are provided via unpacking and the same argument is provided twice. </li>
+</ul>
+<p>This rule raises an issue when a function is called with multiple values for the same parameter.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def func(a, b, c):
+    return a * b * c
+
+func(6, 93, 31, c=62) # Noncompliant: argument "c" is duplicated
+
+params = {'c':31}
+func(6, 93, 31, **params) # Noncompliant: argument "c" is duplicated
+func(6, 93, c=62, **params) # Noncompliant: argument "c" is duplicated
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def func(a, b, c):
+    return a * b * c
+
+print(func(c=31, b=93, a=6)) # Compliant
+</pre>
+
