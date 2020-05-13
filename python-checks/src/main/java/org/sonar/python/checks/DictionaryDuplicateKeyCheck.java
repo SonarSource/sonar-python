@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
 
 @Rule(key = "S5780")
 public class DictionaryDuplicateKeyCheck extends PythonSubscriptionCheck {
@@ -47,6 +48,9 @@ public class DictionaryDuplicateKeyCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.DICTIONARY_LITERAL, ctx -> {
       DictionaryLiteral dictionaryLiteral = (DictionaryLiteral) ctx.syntaxNode();
       Set<Integer> issueIndexes = new HashSet<>();
+      if (dictionaryLiteral.elements().size() > 100) {
+        return;
+      }
       for (int i = 0; i < dictionaryLiteral.elements().size(); i++) {
         if (!dictionaryLiteral.elements().get(i).is(Tree.Kind.KEY_VALUE_PAIR) || issueIndexes.contains(i)) {
           continue;
@@ -64,7 +68,7 @@ public class DictionaryDuplicateKeyCheck extends PythonSubscriptionCheck {
   private List<Tree> findIdenticalKeys(int startIndex, List<DictionaryLiteralElement> elements, Set<Integer> issueIndexes) {
     Expression key = ((KeyValuePair) elements.get(startIndex)).key();
     List<Tree> duplicates = new ArrayList<>();
-    for (int i = startIndex + 1; i < elements.size() ; i++) {
+    for (int i = startIndex + 1; i < elements.size(); i++) {
       if (!elements.get(i).is(Tree.Kind.KEY_VALUE_PAIR)) {
         continue;
       }
@@ -78,6 +82,9 @@ public class DictionaryDuplicateKeyCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isSameKey(Expression key, Expression comparedKey) {
+    if (key.is(Tree.Kind.TUPLE) && comparedKey.is(Tree.Kind.TUPLE)) {
+      return areEquivalentTuples((Tuple) key, (Tuple) comparedKey);
+    }
     if (key.is(Tree.Kind.STRING_LITERAL) && comparedKey.is(Tree.Kind.STRING_LITERAL)) {
       return areEquivalentStringLiterals((StringLiteral) key, (StringLiteral) comparedKey);
     }
@@ -87,7 +94,22 @@ public class DictionaryDuplicateKeyCheck extends PythonSubscriptionCheck {
     return !key.is(Tree.Kind.CALL_EXPR) && CheckUtils.areEquivalent(key, comparedKey);
   }
 
+  private boolean areEquivalentTuples(Tuple key, Tuple comparedKey) {
+    List<Expression> first = key.elements();
+    List<Expression> second = comparedKey.elements();
+    if (first.size() != second.size()) {
+      return false;
+    }
+    for (int i = 0; i < first.size(); i++) {
+      if (!isSameKey(first.get(i), second.get(i))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   private boolean areEquivalentNumbers(Tree key, Tree comparedKey) {
+    // BigDecimal#compareTo is required as equals() returns true only with identical scales
     return toBigDecimal(key).compareTo(toBigDecimal(comparedKey)) == 0;
   }
 

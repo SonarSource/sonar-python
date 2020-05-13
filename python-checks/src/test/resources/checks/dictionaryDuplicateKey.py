@@ -10,16 +10,16 @@ def strings():
   line""": 3}
 
   # We only raise if the strings have same values & prefixes, even if they would eventually evaluate to the same value
-  {"one": 1, "two": 2, u"one": 3}  # OK
-  {"one": 1, "two": 2, r"one": 3}  # OK
+  {"one": 1, "two": 2, u"one": 3}  # FN (ok)
+  {"one": 1, "two": 2, r"one": 3}  # FN (ok)
   {"on" "e": 1, "two": 2, "o" "ne": 2} # Noncompliant
   {"on" r"e": 1, "two": 2, "on" r"e": 2} # Noncompliant
-  {"on" r"e": 1, "two": 2, "o" r"ne": 2} # OK
+  {"on" r"e": 1, "two": 2, "o" r"ne": 2} # FN (ok)
 
   # No issue on f-strings to avoid any risk of FP
   p = 1
-  {f"one{p}": 1, "two": 2, f"one{p}": 3} # OK
-  {f"one{p()}": 1, "two": 2, f"one{p()}": 3} # OK
+  {f"one{p}": 1, "two": 2, f"one{p}": 3} # FN (ok)
+  {f"one{p()}": 1, "two": 2, f"one{p()}": 3} # FN (ok)
 
 def numbers():
   {1: "one", 2: "two", 1: "three"}  # Noncompliant
@@ -69,3 +69,27 @@ def repeated_variables(a1, a2, a3):
     {MyClass(): 1, a2: 2, MyClass(): 3}  # OK
     {a1(): 1, a2: 2, a1(): 3}  # OK
     {func(1, 2, 3): 1, a2: 2, func(1, 2, 3): 3}  # OK
+
+def tuples():
+  {(2, bar()): 1, (2, bar()): 2} # OK, function calls
+  { (0o10, 'a'): 1, (8, "a"): 2 } # Noncompliant
+  { (0o10, 'a'): 1, (8, "a", "b"): 2 } # OK
+  { (1,): 1, 1 : 2 } # OK
+
+
+def large_dict_literal():
+  # Accepted FNs to avoid performance issues
+  {
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b", "a": "b",
+  "a": "b"
+  }
