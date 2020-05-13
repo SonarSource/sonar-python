@@ -31,8 +31,11 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -48,6 +51,7 @@ import org.sonar.python.tree.TreeUtils;
 public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   private static final boolean DEFAULT_REPORT_ON_STRINGS = false;
+  private static final String DEFAULT_IGNORED_OPERATORS = "<<,>>,|";
 
   @RuleProperty(
     key = "reportOnStrings",
@@ -59,7 +63,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     key = "ignoredOperators",
     description = "Comma separated list of ignored operators",
     defaultValue = "")
-  public String ignoredOperators = "";
+  public String ignoredOperators = DEFAULT_IGNORED_OPERATORS;
 
   List<String> ignoredOperatorsList;
 
@@ -72,7 +76,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
   }
 
   private static final List<Kind> regularKinds = Arrays.asList(Kind.NUMERIC_LITERAL, Kind.LIST_LITERAL, Kind.SET_LITERAL, Kind.DICTIONARY_LITERAL,
-    Kind.NONE, Kind.CONDITIONAL_EXPR, Kind.LAMBDA);
+    Kind.NONE, Kind.LAMBDA);
 
   private static final List<Kind> binaryExpressionKinds = Arrays.asList(Kind.AND, Kind.OR, Kind.PLUS, Kind.MINUS,
     Kind.MULTIPLICATION, Kind.DIVISION, Kind.FLOOR_DIVISION, Kind.MODULO, Kind.MATRIX_MULTIPLICATION, Kind.SHIFT_EXPR,
@@ -87,6 +91,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, this::checkStringLiteral);
     context.registerSyntaxNodeConsumer(Kind.NAME, UselessStatementCheck::checkName);
     context.registerSyntaxNodeConsumer(Kind.QUALIFIED_EXPR, UselessStatementCheck::checkQualifiedExpression);
+    context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, UselessStatementCheck::checkConditionalExpression);
     binaryExpressionKinds.forEach(b -> context.registerSyntaxNodeConsumer(b, this::checkBinaryExpression));
     unaryExpressionKinds.forEach(u -> context.registerSyntaxNodeConsumer(u, this::checkUnaryExpression));
     regularKinds.forEach(r -> context.registerSyntaxNodeConsumer(r, UselessStatementCheck::checkNode));
@@ -112,6 +117,14 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     return (tree.is(Kind.AND) || tree.is(Kind.OR) || tree.is(Kind.NOT)) && (TreeUtils.hasDescendant(tree, t -> t.is(Kind.CALL_EXPR)));
   }
 
+  public static void checkConditionalExpression(SubscriptionContext ctx) {
+    ConditionalExpression conditionalExpression = (ConditionalExpression) ctx.syntaxNode();
+    if (TreeUtils.hasDescendant(conditionalExpression, t -> t.is(Kind.CALL_EXPR))) {
+      return;
+    }
+    checkNode(ctx);
+  }
+
   private void checkStringLiteral(SubscriptionContext ctx) {
     StringLiteral stringLiteral = (StringLiteral) ctx.syntaxNode();
     if (!reportOnStrings || isDocString(stringLiteral)) {
@@ -130,6 +143,10 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
         return;
       }
     }
+    if (symbol != null && symbol.usages().stream().anyMatch(u -> u.kind().equals(Usage.Kind.IMPORT)) && symbol.usages().size() == 2) {
+      // Avoid raising on useless statements made to suppress issues due to "unused" import
+      return;
+    }
     checkNode(ctx);
   }
 
@@ -147,7 +164,16 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     if (ignoredOperators().contains(operator.value())) {
       return;
     }
+    if (couldBePython2PrintStatement(binaryExpression)) {
+      return;
+    }
     checkNode(ctx);
+  }
+
+  private static boolean couldBePython2PrintStatement(BinaryExpression binaryExpression) {
+    return TreeUtils.hasDescendant(binaryExpression, t -> t.is(Kind.CALL_EXPR)
+        && ((CallExpression) t).callee().is(Kind.NAME)
+        && ((Name) ((CallExpression) t).callee()).name().equals("print"));
   }
 
   private void checkUnaryExpression(SubscriptionContext ctx) {
