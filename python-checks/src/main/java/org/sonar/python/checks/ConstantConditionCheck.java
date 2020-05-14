@@ -20,21 +20,26 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ListLiteral;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.AND;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NONE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NOT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
@@ -46,6 +51,13 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 public class ConstantConditionCheck extends PythonVisitorCheck {
 
   private static final String MESSAGE = "Replace this expression; used as a condition it will always be constant.";
+  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
+
+  @Override
+  public void visitFileInput(FileInput fileInput) {
+    reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(getContext().pythonFile());
+    super.visitFileInput(fileInput);
+  }
 
   @Override
   public void visitIfStatement(IfStatement ifStatement) {
@@ -70,9 +82,12 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
   }
 
   private static boolean isConstant(Expression condition) {
+    return isImmutableConstant(condition) || isConstantCollectionLiteral(condition);
+  }
+
+  private static boolean isImmutableConstant(Expression condition) {
     return TreeUtils.isBooleanLiteral(condition) ||
-      condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE) ||
-      isConstantCollectionLiteral(condition);
+      condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE);
   }
 
   private static Expression getConstantBooleanExpression(Expression condition) {
@@ -146,6 +161,14 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
   private void checkExpression(Expression expression) {
     if (isConstant(expression)) {
       addIssue(expression, MESSAGE);
+    } else if (expression.is(NAME)) {
+      Set<Expression> valuesAtLocation = reachingDefinitionsAnalysis.valuesAtLocation(((Name) expression));
+      if (valuesAtLocation.size() == 1) {
+        Expression lastAssignedValue = valuesAtLocation.iterator().next();
+        if (isImmutableConstant(lastAssignedValue)) {
+          addIssue(expression, MESSAGE).secondary(lastAssignedValue, "Last assignment.");
+        }
+      }
     }
   }
 }
