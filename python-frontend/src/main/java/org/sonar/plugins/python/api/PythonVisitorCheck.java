@@ -28,7 +28,7 @@ public abstract class PythonVisitorCheck extends BaseTreeVisitor implements Pyth
 
   private PythonVisitorContext context;
 
-  private PythonVisitorContext getContext() {
+  protected PythonVisitorContext getContext() {
     return context;
   }
 

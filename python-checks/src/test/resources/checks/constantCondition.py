@@ -56,3 +56,84 @@ def ignored():
   # builtin constructors are out of scope
   if list():
     pass
+
+def variables(param):
+  if param:
+    x = 1
+  else:
+    x = 2
+
+  x = 0
+#     ^> {{Last assignment.}}
+  if x:  ... # Noncompliant
+#    ^
+
+  y = 42
+  if y: ... # Noncompliant
+
+def variable_not_constant(param):
+  x = param
+  if x: ... # OK
+
+  if param:
+    z = 1
+  else:
+    z = 2
+  if z: ... # OK
+
+  i = 0
+  i += 1
+  if i: ...
+
+  for i in []:
+    isRunning = False
+    if param:
+      isRunning = True
+    if isRunning: ...
+
+
+def mutable_variable():
+  x = []
+  x.append(42)
+  if x: ... # FN, x is mutable
+
+#
+# Whatever the type of the value assigned to a variable, immutable or not, we don't consider it a constant if either:
+# * it is referenced as "nonlocal" in a function we consider that it is not a constant.
+# * it is defined in the global scope.
+# * if the variable is captured from another scope
+#
+glob = 42
+def nonlocal_reference():
+  loc = 0
+  def modifying():
+    nonlocal loc
+    loc = 2
+  foo(modifying)
+  if loc:  # Ok. loc has been captured as nonlocal by a nested function
+    print(loc)
+
+  global glob
+  if glob:  # Ok. glob is global
+    print(glob)
+
+  loc2 = 1
+  def capturing_loc():
+    if loc2:  # Ok. loc2 is captured from another scope
+      pass
+
+# If a variable with an immutable value is just captured, withut being nonlocal or global, we still consider it a constant.
+#
+def immutable_captured():
+  loc = 1
+  def different_variable_with_same_name():
+    loc = 2
+  different_variable_with_same_name()
+
+  def capturing_without_modifying():
+    print(loc + 42)
+  capturing_without_modifying()
+
+  if loc:  # Noncompliant
+    print(loc)
+
