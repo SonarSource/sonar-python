@@ -1,0 +1,35 @@
+<p>Identity operators <code>is</code> and <code>is not</code> check if the same object is on both sides, i.e. <code>a is b</code> returns
+<code>True</code> if <code>id(a) == id(b)</code>.</p>
+<p>Integers, bytes, floats, strings, frozensets and tuples should not be compared with identity operators because the result may not be as expected.
+If you need to compare these types you should use instead equality operators <code>==</code> or <code>!=</code>.</p>
+<p>The CPython interpreter caches certain builtin values for integers, bytes, floats, strings, frozensets and tuples. For example, the literal
+<code>1</code> will create the same object as <code>int("1")</code>, which means that <code>1 is int("1")</code> is True. However this works only by
+chance as other integer values are not cached, for example <code>int("1000") is 1000</code> will always be <code>False</code>. This behavior is not
+part of Python language specification and could vary between interpreters. CPython 3.8 even <a
+href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">warns about comparing literals using identity operators</a>.</p>
+<p>This rule raises an issue when at least one operand of an identity operator is of type <code>int</code>, <code>bytes</code>, <code>float</code>,
+<code>str</code>, <code>frozenset</code> or <code>tuple</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def literal_comparison(param):
+    param is 2000  # Noncompliant
+
+literal_comparison(2000)  # will return True
+literal_comparison(int("2000"))  # will return False
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def literal_comparison(param):
+    param == 2000
+
+literal_comparison(2000)  # will return True
+literal_comparison(int("2000"))  # will return True
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
+  with literals?</a> - Adam Johnson </li>
+  <li> <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs identity</a> - Trey Hunner
+  </li>
+</ul>
+
