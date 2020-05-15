@@ -89,7 +89,7 @@ def nestedLoops():
   # ^^^^
       print("hm...")
 
-def compiant():
+def compliant():
   for i in range(10):
     if i > 5:
       break
