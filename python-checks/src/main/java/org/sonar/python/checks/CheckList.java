@@ -94,6 +94,7 @@ public final class CheckList {
       DuplicatedMethodFieldNamesCheck.class,
       DuplicatedMethodImplementationCheck.class,
       DynamicCodeExecutionCheck.class,
+      ElseAfterLoopsWithoutBreakCheck.class,
       EmailSendingCheck.class,
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
