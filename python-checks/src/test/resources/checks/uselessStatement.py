@@ -1,3 +1,6 @@
+import math
+import numpy
+
 class MyClass:
     attr = 42
 
@@ -47,14 +50,16 @@ def unassigned_expressions(param):
 
 def conditional_expressions():
     1 if True else 2  # Noncompliant
-    1 if True else func()  # Noncompliant
+    1 if True else func()  # OK
+    foo() if True else None  # OK
+    None if True else foo()  # OK
     if True:
         1  # Noncompliant
     else:
         func()  # Ok
 
 def binary_and_unary_expressions():
-  """By default, no operator is ignored"""
+  """By default, ignored operators are ">>, <<, |" """
   param < 1  # Noncompliant
   param + param  # Noncompliant
   + param  # Noncompliant
@@ -62,6 +67,9 @@ def binary_and_unary_expressions():
   float16(65472)+float16(32) # Noncompliant
   float16(2**-13)/float16(2) # Noncompliant
   1 / 0 # Noncompliant
+  a << b # OK
+  a >> b # OK
+  a | b  # OK
 
 def expression_list():
   basic.LENGTH, basic.DATA, basic.COMMA, basic.NUMBER # OK (lazy loading)
@@ -104,3 +112,21 @@ def corner_cases():
     call(42) == "hello" # Noncompliant
     [a() for a in param]  #  No issue for comprehensions: might be used as a loop (although it's a code smell)
     a.addCallBack(42).unknown # OK
+
+def invalid_docstring(name):
+    class MyClass():
+        'Name is %s' % name  # Noncompliant
+        ...
+
+def print_statements():
+  print "a"
+  # In Python2 this is a simple print statement, which is compliant
+  # In Python3, this is a binary expression whose lhs is a call to print function (non compliant)
+  print ("hello") + " how are you" # OK (avoid Python2 FP)
+  something.print ("hello") + " how are you" # Noncompliant
+
+def pointless_statement_avoid_unused_import():
+  math # OK, only 1 reference, might be done to suppress unused import issues
+  numpy # Noncompliant
+  numpy # Noncompliant
+  pass
