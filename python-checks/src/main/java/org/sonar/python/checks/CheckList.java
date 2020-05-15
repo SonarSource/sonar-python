@@ -195,6 +195,7 @@ public final class CheckList {
       UselessStatementCheck.class,
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
+      WildcardImportCheck.class,
       WrongAssignmentOperatorCheck.class
     )));
   }
