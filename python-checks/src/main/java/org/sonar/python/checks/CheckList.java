@@ -118,6 +118,7 @@ public final class CheckList {
       IgnoredParameterCheck.class,
       IgnoredSystemExitCheck.class,
       IdenticalExpressionOnBinaryOperatorCheck.class,
+      IdentityComparisonWithCachedTypesCheck.class,
       IncorrectExceptionTypeCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
