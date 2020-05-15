@@ -88,3 +88,10 @@ def nestedLoops():
     else: # Noncompliant {{Add a "break" statement or remove this "else" clause.}}
   # ^^^^
       print("hm...")
+
+def compiant():
+  for i in range(10):
+    if i > 5:
+      break
+  else:
+    pass
