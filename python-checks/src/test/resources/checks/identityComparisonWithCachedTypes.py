@@ -1,6 +1,4 @@
 def literal_comparison(param):
-    param is 2000  # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
-    #     ^^
     3000 is param # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #    ^^
     param is 0.1 # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
@@ -11,16 +9,12 @@ def literal_comparison(param):
     #     ^^
     b'5363' is param # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #       ^^
-    param is 'str' # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
-    #     ^^
     'str' is param # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #     ^^
     param is frozenset([42, 58]) # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #     ^^
     frozenset(param) is param # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #                ^^
-    param is (1, 2, 3) # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
-    #     ^^
     (4, 5) is param # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #      ^^
 
@@ -35,8 +29,6 @@ def literal_comparison_compliant(param):
     (4, 5) == param
 
 def literal_comparison_with_not_token(param):
-    param is not 2000  # Noncompliant {{Replace this "is not" operator with "!="; identity operator is not reliable here.}}
-    #     ^^^^^^
     3000 is not param # Noncompliant {{Replace this "is not" operator with "!="; identity operator is not reliable here.}}
     #    ^^^^^^
     param is not (1, 2, 3) # Noncompliant {{Replace this "is not" operator with "!="; identity operator is not reliable here.}}
