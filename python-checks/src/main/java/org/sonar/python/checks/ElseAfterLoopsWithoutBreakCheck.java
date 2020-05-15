@@ -23,12 +23,10 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.ElseClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WhileStatement;
-import org.sonar.python.tree.TreeUtils;
 
 // https://jira.sonarsource.com/browse/RSPEC-2836
 // https://jira.sonarsource.com/browse/SONARPY-650
@@ -44,18 +42,37 @@ public class ElseAfterLoopsWithoutBreakCheck extends PythonSubscriptionCheck {
 
   private static void check(SubscriptionContext subscriptionContext) {
     Tree loop = subscriptionContext.syntaxNode();
-    ElseClause elseClause = loop.is(Tree.Kind.FOR_STMT) ?
-      ((ForStatement) loop).elseClause() :
-      ((WhileStatement) loop).elseClause();
+    ElseClause elseClause = getElseClause(loop);
 
-    if ((elseClause != null) &&
-      !TreeUtils.hasDescendant(loop, t -> t.is(Tree.Kind.BREAK_STMT) && (brokenLoop((BreakStatement) t) == loop))) {
-
+    if ((elseClause != null) && !containsFreeBreak(getLoopBody(loop))) {
       subscriptionContext.addIssue(elseClause.elseKeyword(), MESSAGE);
     }
   }
 
-  private static Tree brokenLoop(BreakStatement stmt) {
-    return TreeUtils.firstAncestorOfKind(stmt, Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT);
+  private static ElseClause getElseClause(Tree loop) {
+    return loop.is(Tree.Kind.FOR_STMT) ? ((ForStatement) loop).elseClause() : ((WhileStatement) loop).elseClause();
+  }
+
+  private static Tree getLoopBody(Tree loop) {
+    return loop.is(Tree.Kind.FOR_STMT) ? ((ForStatement) loop).body() : ((WhileStatement) loop).body();
+  }
+
+  /**
+   * Checks whether a tree has a "free" break (meaning that it is not bound by any loop, analogously to "free variable")
+   */
+  private static boolean containsFreeBreak(Tree t) {
+    if (t.is(Tree.Kind.BREAK_STMT)) {
+      return true;
+    } else if (t.is(Tree.Kind.WHILE_STMT, Tree.Kind.FOR_STMT)) {
+      // All breaks in the bodies of the loops are bound, check only the `else`-clause, if present
+      ElseClause elseClause = getElseClause(t);
+      if (elseClause != null) {
+        return containsFreeBreak(elseClause);
+      } else {
+        return false;
+      }
+    } else {
+      return t.children().stream().anyMatch(ElseAfterLoopsWithoutBreakCheck::containsFreeBreak);
+    }
   }
 }

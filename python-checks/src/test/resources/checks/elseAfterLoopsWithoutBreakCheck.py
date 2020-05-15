@@ -95,3 +95,14 @@ def compliant():
       break
   else:
     pass
+
+# insprired by an actual false positive in twisted-12.1.0/twisted/internet/test/test_unix.py, line 450
+def twistedNestedCompliant():
+  for logEvent in []:
+    for k, v in {'k': 'v'}:
+      if v != k:
+        break
+    else:
+        break
+  else:
+    pass
