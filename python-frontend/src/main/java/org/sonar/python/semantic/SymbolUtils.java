@@ -349,4 +349,40 @@ public class SymbolUtils {
     return pythonFile instanceof TypeShedPythonFile;
   }
 
+  /**
+   * @return the offset between parameter position and argument position:
+   *   0 if there is no implicit first parameter (self, cls, etc...)
+   *   1 if there is an implicit first parameter
+   *  -1 if unknown (intent is not clear from context)
+   */
+  public static int firstParameterOffset(FunctionSymbol functionSymbol, boolean isStaticCall) {
+    List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();
+    if (parameters.isEmpty()) {
+      return 0;
+    }
+    String firstParamName = parameters.get(0).name();
+    if (firstParamName == null) {
+      // First parameter is defined as a tuple
+      return -1;
+    }
+    List<String> decoratorNames = functionSymbol.decorators();
+    if (decoratorNames.size() > 1) {
+      // We want to avoid FP if there are many decorators
+      return -1;
+    }
+    if (!decoratorNames.isEmpty() && !decoratorNames.get(0).endsWith("classmethod") && !decoratorNames.get(0).endsWith("staticmethod")) {
+      // Unknown decorator which might alter the behaviour of the method
+      return -1;
+    }
+    if (functionSymbol.isInstanceMethod() && !isStaticCall) {
+      // regular instance call, takes self as first implicit parameter
+      return 1;
+    }
+    if (decoratorNames.size() == 1 && decoratorNames.get(0).endsWith("classmethod")) {
+      // class method call, takes cls as first implicit parameter
+      return 1;
+    }
+    // regular static call (function or method), no first implicit parameter
+    return 0;
+  }
 }

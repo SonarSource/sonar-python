@@ -34,6 +34,7 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.functionSymbol;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
@@ -217,15 +218,5 @@ public class FunctionSymbolTest {
     FunctionSymbol builtinFunctionSymbol = (FunctionSymbol) callExpression.calleeSymbol();
     assertThat(builtinFunctionSymbol.definitionLocation()).isNull();
     assertThat(builtinFunctionSymbol.parameters().get(0).location()).isNull();
-  }
-
-  private FunctionSymbol functionSymbol(PythonFile pythonFile, String... code) {
-    FileInput fileInput = parse(new SymbolTableBuilder(pythonFile), code);
-    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);;
-    return TreeUtils.getFunctionSymbolFromDef(functionDef);
-  }
-
-  private FunctionSymbol functionSymbol(String... code) {
-    return functionSymbol(PythonTestUtils.pythonFile("foo"), code);
   }
 }
