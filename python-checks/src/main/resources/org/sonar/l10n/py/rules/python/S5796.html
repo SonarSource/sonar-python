@@ -1,0 +1,44 @@
+<p>Identity operators <code>is</code> and <code>is not</code> check if the same object is on both sides, i.e. <code>a is b</code> returns
+<code>True</code> if <code>id(a) == id(b)</code>.</p>
+<p>When a new object is created it will have its own identity. Thus if an object is created and used only in an identity check it is not possible for
+the other operand to be the same object. The comparison is always <code>False</code> or always <code>True</code> depending on the operator used,
+<code>is</code> or <code>is not</code>. To avoid this problem the identity operator could be replaced with an equality operator (== or !=), which will
+use <code>__eq__</code> or <code>__ne__</code> methods under the hood.</p>
+<p>This rule raises an issue when at least one operand of an identity operator is a new object which has been created just for this check, i.e.:</p>
+<ul>
+  <li> When it is a dict, list or set literal. </li>
+  <li> When it is a call to <code>dict</code>, <code>set</code>, <code>list</code> or <code>complex</code> built-in functions. </li>
+  <li> When such a new object is assigned to only one variable and this variable is used in an identity check. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def func(param):
+    param is {1: 2}  # Noncompliant; always False
+    param is not {1, 2, 3}  # Noncompliant; always True
+    param is [1, 2, 3]  # Noncompliant; always False
+
+    param is dict(a=1)  # Noncompliant; always False
+
+    mylist = []  # mylist is assigned a new object
+    param is mylist  # Noncompliant; always False
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def func(param):
+    param == {1: 2}
+    param != {1, 2, 3}
+    param == [1, 2, 3]
+
+    param == dict(a=1)
+
+    mylist = []
+    param == mylist
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
+  with literals?</a> - Adam Johnson </li>
+  <li> <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs identity</a> - Trey Hunner
+  </li>
+</ul>
+
