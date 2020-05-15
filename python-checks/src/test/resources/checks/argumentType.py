@@ -159,7 +159,7 @@ def edge_cases():
   A.my_method("42") # Noncompliant
   A.my_method(42)
   SomeClass.ambiguous_static_method("some string")
-  SomeClass.ambiguous_static_method(42) # OK, ambiguous as not explicitly a static method
+  SomeClass.ambiguous_static_method(42) # Noncompliant
   A.static_method(42) # Noncompliant
   SomeClass.static_method(42) # Noncompliant
   A.class_method(42) # Noncompliant

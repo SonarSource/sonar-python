@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
@@ -73,7 +72,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
   private static void checkFunctionCall(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol, boolean isStaticCall) {
 
     boolean isKeyword = false;
-    int firstParameterOffset = firstParameterOffset(functionSymbol, isStaticCall);
+    int firstParameterOffset = SymbolUtils.firstParameterOffset(functionSymbol, isStaticCall);
     if (firstParameterOffset < 0) {
       return;
     }
@@ -175,42 +174,6 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       return BuiltinTypes.TUPLE;
     }
     return null;
-  }
-
-  /*
-  He were return the offset between parameter position and argument position:
-  0 if there is no implicit first parameter (self, cls, etc...)
-  1 if there is an implicit first parameter
-  -1 if unknown (intent is not clear from function definition)
-   */
-  private static int firstParameterOffset(FunctionSymbol functionSymbol, boolean isStaticCall) {
-    List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();
-    if (parameters.isEmpty()) {
-      return 0;
-    }
-    String firstParamName = parameters.get(0).name();
-    if (firstParamName == null) {
-      // Should never happen
-      return -1;
-    }
-    List<String> decoratorNames = functionSymbol.decorators();
-    if (decoratorNames.size() > 1) {
-      // We want to avoid FP if there are many decorators
-      return -1;
-    }
-    if (functionSymbol.isInstanceMethod() && !isStaticCall) {
-      // regular instance call, takes self as first implicit parameter
-      return 1;
-    }
-    if (decoratorNames.size() == 1 && decoratorNames.get(0).endsWith("classmethod")) {
-      // class method call, takes cls as first implicit parameter
-      return 1;
-    }
-    if (!functionSymbol.isInstanceMethod()) {
-      // function or static method, no first implicit parameter
-      return 0;
-    }
-    return -1;
   }
 
   /*

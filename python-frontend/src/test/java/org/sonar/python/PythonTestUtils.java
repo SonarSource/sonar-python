@@ -27,6 +27,7 @@ import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -37,6 +38,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -139,5 +141,15 @@ public final class PythonTestUtils {
   public static Expression lastExpressionInFunction(String... lines) {
     String code = "def f():\n  " + String.join("\n  ", lines);
     return lastExpression(code);
+  }
+
+  public static FunctionSymbol functionSymbol(PythonFile pythonFile, String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder(pythonFile), code);
+    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);;
+    return TreeUtils.getFunctionSymbolFromDef(functionDef);
+  }
+
+  public static FunctionSymbol functionSymbol(String... code) {
+    return functionSymbol(PythonTestUtils.pythonFile("foo"), code);
   }
 }
