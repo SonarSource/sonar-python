@@ -157,9 +157,6 @@ public class TypeShed {
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {
-    if (isDefinedAsPackage(moduleName)) {
-      return Collections.emptySet();
-    }
     Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols(moduleName, STDLIB_2AND3, builtinGlobalSymbols).values());
     if (standardLibrarySymbols.isEmpty()) {
       standardLibrarySymbols = commonSymbols(getModuleSymbols(moduleName, STDLIB_2, builtinGlobalSymbols),
@@ -176,9 +173,16 @@ public class TypeShed {
       getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols));
   }
 
+  private static InputStream getResourceForModule(String moduleName, String categoryPath) {
+    InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + ".pyi");
+    if (resource != null) {
+      return resource;
+    }
+    return TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
+  }
+
   private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {
-    String resourcePath = categoryPath + moduleName + ".pyi";
-    InputStream resource = TypeShed.class.getResourceAsStream(resourcePath);
+    InputStream resource = getResourceForModule(moduleName, categoryPath);
     if (resource == null) {
       return Collections.emptyMap();
     }
@@ -194,15 +198,6 @@ public class TypeShed {
       })
       .filter(s -> s.fullyQualifiedName() != null && s.fullyQualifiedName().startsWith(moduleName))
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
-  }
-
-  private static boolean isDefinedAsPackage(String moduleName) {
-    return TypeShed.class.getResourceAsStream(STDLIB_2AND3 + moduleName + "/") != null ||
-      TypeShed.class.getResourceAsStream(THIRD_PARTY_2AND3 + moduleName + "/") != null ||
-      TypeShed.class.getResourceAsStream(STDLIB_2 + moduleName + "/") != null ||
-      TypeShed.class.getResourceAsStream(STDLIB_3 + moduleName + "/") != null ||
-      TypeShed.class.getResourceAsStream(THIRD_PARTY_2 + moduleName + "/") != null ||
-      TypeShed.class.getResourceAsStream(THIRD_PARTY_3 + moduleName + "/") != null;
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
