@@ -21,6 +21,7 @@ package org.sonar.python.types;
 
 import com.sonar.sslr.api.AstNode;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -47,6 +48,8 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
+import javax.annotation.Nullable;
+
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 public class TypeShed {
@@ -56,7 +59,7 @@ public class TypeShed {
   private static Map<String, Symbol> builtins;
   private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
-  
+
   private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";
   private static final String STDLIB_2 = "typeshed/stdlib/2/";
   private static final String STDLIB_3 = "typeshed/stdlib/3/";
@@ -173,23 +176,35 @@ public class TypeShed {
       getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols));
   }
 
-  private static InputStream getResourceForModule(String moduleName, String categoryPath) {
-    InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + ".pyi");
-    if (resource != null) {
-      return resource;
+  @Nullable
+  private static ModuleDescription getResourceForModule(String moduleName, String categoryPath) {
+    String[] splittedName = moduleName.split("\\.");
+    String pathToModule = String.join("/", moduleName.split("\\."));
+    InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
+    if (resource == null) {
+      resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
+      if (resource == null) {
+        return null;
+      }
     }
-    return TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
+    String packageName = "";
+    String fileName = moduleName;
+    if (splittedName.length != 1) {
+      packageName = String.join(".", Arrays.copyOf(splittedName, splittedName.length - 1));
+      fileName = splittedName[splittedName.length - 1];
+    }
+    return new ModuleDescription(resource, fileName, packageName);
   }
 
   private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {
-    InputStream resource = getResourceForModule(moduleName, categoryPath);
-    if (resource == null) {
+    ModuleDescription moduleDescription = getResourceForModule(moduleName, categoryPath);
+    if (moduleDescription == null) {
       return Collections.emptyMap();
     }
-    PythonFile file = new TypeShedPythonFile(resource, moduleName);
+    PythonFile file = new TypeShedPythonFile(moduleDescription.resource, moduleDescription.fileName);
     AstNode astNode = PythonParser.create().parse(file.content());
     FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-    new SymbolTableBuilder("", file, initialSymbols).visitFileInput(fileInput);
+    new SymbolTableBuilder(moduleDescription.packageName, file, initialSymbols).visitFileInput(fileInput);
     fileInput.accept(new ReturnTypeVisitor());
     return fileInput.globalVariables().stream()
       .map(symbol -> {
@@ -237,6 +252,18 @@ public class TypeShed {
           setParameterTypes(funcDefSymbol, functionDef);
         }
       }
+    }
+  }
+
+  static class ModuleDescription {
+    InputStream resource;
+    String fileName;
+    String packageName;
+
+    ModuleDescription(InputStream resource, String fileName, String packageName) {
+      this.resource = resource;
+      this.fileName = fileName;
+      this.packageName = packageName;
     }
   }
 

@@ -110,6 +110,8 @@ public class TypeShedTest {
     assertThat(TypeShed.symbolsForModule("email")).isNotEmpty();
     assertThat(TypeShed.symbolsForModule("json")).isNotEmpty();
     assertThat(TypeShed.symbolsForModule("docutils")).isNotEmpty();
+    assertThat(TypeShed.symbolsForModule("ctypes.util")).isNotEmpty();
+    assertThat(TypeShed.symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
     // resolved but still empty
     assertThat(TypeShed.symbolsForModule("cryptography")).isEmpty();
     assertThat(TypeShed.symbolsForModule("kazoo")).isEmpty();
@@ -122,5 +124,22 @@ public class TypeShedTest {
     assertThat(wrapperSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) wrapperSymbol).declaredReturnType()).isEqualTo(AnyType.ANY);
     assertThat(TypeShed.symbolWithFQN("curses", "curses.wrapper")).isSameAs(wrapperSymbol);
+  }
+
+  @Test
+  public void package_submodules_symbols() {
+    Map<String, Symbol> asciiSymbols = TypeShed.symbolsForModule("curses.ascii").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol isalnumSymbol = asciiSymbols.get("isalnum");
+    assertThat(isalnumSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl) isalnumSymbol).declaredReturnType().canOnlyBe("bool")).isTrue();
+    assertThat(TypeShed.symbolWithFQN("curses.ascii", "curses.ascii.isalnum")).isSameAs(isalnumSymbol);
+  }
+
+  @Test
+  public void package_inner_submodules_symbols() {
+    Map<String, Symbol> driverSymbols = TypeShed.symbolsForModule("lib2to3.pgen2.driver").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol loadGrammarSymbol = driverSymbols.get("load_grammar");
+    assertThat(loadGrammarSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(TypeShed.symbolWithFQN("lib2to3.pgen2.driver", "lib2to3.pgen2.driver.load_grammar")).isSameAs(loadGrammarSymbol);
   }
 }
