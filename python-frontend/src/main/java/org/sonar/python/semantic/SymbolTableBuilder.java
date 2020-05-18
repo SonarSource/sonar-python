@@ -487,7 +487,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
       if (annotatedAssignment.variable().is(Kind.NAME)) {
-        addBindingUsage((Name) annotatedAssignment.variable(), Usage.Kind.ASSIGNMENT_LHS);
+        Name variable = (Name) annotatedAssignment.variable();
+        addBindingUsage(variable, Usage.Kind.ASSIGNMENT_LHS, getFullyQualifiedName(variable.name()));
       }
       super.visitAnnotatedAssignment(annotatedAssignment);
     }
@@ -543,7 +544,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {
-      currentScope().addBindingUsage(nameTree, usage, null);
+      addBindingUsage(nameTree, usage, null);
+    }
+
+    private void addBindingUsage(Name nameTree, Usage.Kind usage, @Nullable String fullyQualifiedName) {
+      currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
     }
   }
 
