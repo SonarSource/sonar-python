@@ -72,7 +72,7 @@ public class TypeShed {
   }
 
   public static Map<String, Symbol> builtinSymbols() {
-    if (TypeShed.builtins == null) {
+    if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
       Map<String, Symbol> builtins = new HashMap<>();
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
       InputStream resource = TypeShed.class.getResourceAsStream("typeshed/stdlib/2and3/builtins.pyi");
