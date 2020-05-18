@@ -1,0 +1,42 @@
+<p>Importing every public name from a module using a wildcard (<code>from mymodule import *</code>) is a bad idea because:</p>
+<ul>
+  <li> It could lead to conflicts between names defined locally and the ones imported. </li>
+  <li> It reduces code readability as developers will have a hard time knowing where names come from. </li>
+  <li> It clutters the local namespace, which makes debugging more difficult. </li>
+</ul>
+<p>Remember that imported names can change when you update your dependencies. A wildcard import which works today might be broken tomorrow.</p>
+<p>There are two ways to avoid a wildcard import:</p>
+<ul>
+  <li> Replace it with <code>import mymodule</code> and access module members as <code>mymodule.myfunction</code>. If the module name is too long,
+  alias it to a shorter name. Example: <code>import pandas as pd</code> </li>
+  <li> List every imported name. If necessary import statements can be split on multiple lines using parentheses (preferred solution) or backslashes.
+  </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+from math import *  # Noncompliant
+def exp(x):
+    pass
+print(exp(0))   # "None" will be printed
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+import math
+def exp(x):
+    pass
+print(math.exp(0))   # "1.0" will be printed
+</pre>
+<p>Or</p>
+<pre>
+from math import exp as m_exp
+def exp(x):
+    pass
+print(m_exp(0))   # "1.0" will be printed
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised in <code>__init__.py</code> files. Wildcard imports are a common way of populating these modules.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3.8/reference/simple_stmts.html#import">Python documentation - The import statement</a> </li>
+</ul>
+
