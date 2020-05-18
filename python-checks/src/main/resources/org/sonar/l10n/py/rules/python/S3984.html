@@ -1,0 +1,24 @@
+<p>Creating a new <code>Exception</code> without actually raising it has no effect and is probably due to a mistake.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+def func(x):
+    if not isinstance(x, int):
+        TypeError("Wrong type for parameter 'x'. func expects an integer")  # Noncompliant
+    if x &lt; 0:
+        ValueError
+    return x + 42
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+def func(x):
+    if not isinstance(x, int):
+        raise TypeError("Wrong type for parameter 'x'. func expects an integer")
+    if x &lt; 0:
+        raise ValueError
+    return x + 42
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3/tutorial/errors.html#raising-exceptions">Python documentation - Raising Exceptions</a> </li>
+</ul>
+

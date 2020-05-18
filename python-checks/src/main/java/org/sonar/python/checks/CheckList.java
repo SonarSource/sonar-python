@@ -98,6 +98,7 @@ public final class CheckList {
       EmptyFunctionCheck.class,
       EmptyNestedBlockCheck.class,
       ExceptionCauseTypeCheck.class,
+      ExceptionNotThrownCheck.class,
       ExceptionSuperClassDeclarationCheck.class,
       ExceptRethrowingCheck.class,
       ExecStatementUsageCheck.class,
