@@ -19,8 +19,10 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -43,6 +45,13 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
 
   private static final String AUTO_ESCAPE = "autoescape";
   private static final String MESSAGE = "Make sure disabling auto-escaping feature is safe here.";
+  private static final Set<String> JINJA_ENVIRONMNENT_FQN_SET;
+  static {
+    Set<String> environmentFqnSet = new HashSet<>();
+    environmentFqnSet.add("jinja2.Environment");
+    environmentFqnSet.add("jinja2.environment.Environment");
+    JINJA_ENVIRONMNENT_FQN_SET = environmentFqnSet;
+  }
 
   @Override
   public void initialize(Context context) {
@@ -70,7 +79,7 @@ public class DisabledHtmlAutoEscapeCheck extends PythonSubscriptionCheck {
   private void checkCallExpression(SubscriptionContext ctx, CallExpression call) {
     Symbol symbol = call.calleeSymbol();
 
-    if (symbol != null && "jinja2.Environment".equals(symbol.fullyQualifiedName())) {
+    if (symbol != null && JINJA_ENVIRONMNENT_FQN_SET.contains(symbol.fullyQualifiedName())) {
       List<Argument> arguments = call.arguments();
 
       for (Argument argument : arguments) {
