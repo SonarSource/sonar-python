@@ -29,6 +29,22 @@ def coverage():
 
   C2()
 
+def falseNegatives():
+
+  # Deeper inheritance hierarchies currently don't work.
+  class C1(TypeError):
+    pass
+
+  class C2(C1):
+    pass
+
+  C1() # FN. Doesn't report anything, because the inheritance hierarchy of exceptions is currently a linear list,
+       # and the isOrExtends is not used.
+
+  # Binders don't bind.
+  e = TypeError() # FN. The invocation of the `TypeError` constructor is not a statement, it's an expression.
+
+
 # rest mutably borrowed from `expected-issues`
 class CustomException(TypeError):
   pass
