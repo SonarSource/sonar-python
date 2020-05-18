@@ -104,12 +104,23 @@ public class TypeShedTest {
   }
 
   @Test
-  public void should_not_resolve_packages() {
-    assertThat(TypeShed.symbolsForModule("ctypes")).isEmpty();
+  public void should_resolve_packages() {
+    assertThat(TypeShed.symbolsForModule("urllib")).isNotEmpty();
+    assertThat(TypeShed.symbolsForModule("ctypes")).isNotEmpty();
+    assertThat(TypeShed.symbolsForModule("email")).isNotEmpty();
+    assertThat(TypeShed.symbolsForModule("json")).isNotEmpty();
+    assertThat(TypeShed.symbolsForModule("docutils")).isNotEmpty();
+    // resolved but still empty
     assertThat(TypeShed.symbolsForModule("cryptography")).isEmpty();
-    assertThat(TypeShed.symbolsForModule("email")).isEmpty();
-    assertThat(TypeShed.symbolsForModule("json")).isEmpty();
     assertThat(TypeShed.symbolsForModule("kazoo")).isEmpty();
-    assertThat(TypeShed.symbolsForModule("docutils")).isEmpty();
+  }
+
+  @Test
+  public void package_symbols() {
+    Map<String, Symbol> cursesSymbols = TypeShed.symbolsForModule("curses").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol wrapperSymbol = cursesSymbols.get("wrapper");
+    assertThat(wrapperSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl) wrapperSymbol).declaredReturnType()).isEqualTo(AnyType.ANY);
+    assertThat(TypeShed.symbolWithFQN("curses", "curses.wrapper")).isSameAs(wrapperSymbol);
   }
 }
