@@ -55,14 +55,14 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   @RuleProperty(
     key = "reportOnStrings",
-    description = "Enable issues on unread attributes with a single underscore prefix",
+    description = "Enable issues on string literals which are not assigned. Set this parameter to \"false\" if you use strings as comments.",
     defaultValue = "" + DEFAULT_REPORT_ON_STRINGS)
   public boolean reportOnStrings = DEFAULT_REPORT_ON_STRINGS;
 
   @RuleProperty(
     key = "ignoredOperators",
     description = "Comma separated list of ignored operators",
-    defaultValue = "")
+    defaultValue = DEFAULT_IGNORED_OPERATORS)
   public String ignoredOperators = DEFAULT_IGNORED_OPERATORS;
 
   List<String> ignoredOperatorsList;
