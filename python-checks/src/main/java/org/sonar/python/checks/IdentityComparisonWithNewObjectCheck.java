@@ -36,9 +36,11 @@ import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Arrays.asList;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 // https://jira.sonarsource.com/browse/RSPEC-5796
 // https://jira.sonarsource.com/browse/SONARPY-674
@@ -55,6 +57,14 @@ public class IdentityComparisonWithNewObjectCheck extends PythonSubscriptionChec
 
   private static void checkIsComparison(SubscriptionContext subscriptionContext) {
     final IsExpression isExpr = (IsExpression) subscriptionContext.syntaxNode();
+
+    // Exit early if we can infer that the types don't match to avoid overlap with RSPEC-3403, RSPEC-5727
+    InferredType t1 = isExpr.leftOperand().type();
+    InferredType t2 = isExpr.rightOperand().type();
+    if (!t1.isIdentityComparableWith(t2) || t1.canOnlyBe(NONE_TYPE) || t2.canOnlyBe(NONE_TYPE)) {
+      return;
+    }
+
     // The `if` merely ensures that an issue is reported at most once per operator.
     if (!checkOperand(isExpr.leftOperand(), isExpr, subscriptionContext)) {
       checkOperand(isExpr.rightOperand(), isExpr, subscriptionContext);

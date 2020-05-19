@@ -30,6 +30,7 @@ import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
@@ -86,7 +87,10 @@ public class Expressions {
           return null;
         }
         Tree parent = usage.tree().parent();
-        if (parent.is(Kind.EXPRESSION_LIST) && parent.parent().is(Kind.ASSIGNMENT_STMT)) {
+        if (parent.is(Kind.EXPRESSION_LIST) &&
+          ((ExpressionList) parent).expressions().size() == 1 &&
+          parent.parent().is(Kind.ASSIGNMENT_STMT)) {
+
           result = ((AssignmentStatement) parent.parent()).assignedValue();
         } else {
           return null;
