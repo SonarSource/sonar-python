@@ -38,7 +38,7 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
   // Avoid performance issues for big dictionary/set literals
   static final int SIZE_THRESHOLD = 100;
 
-  boolean isSameKey(Expression key, Expression comparedKey) {
+  protected boolean isSameKey(Expression key, Expression comparedKey) {
     if (key.is(Tree.Kind.TUPLE) && comparedKey.is(Tree.Kind.TUPLE)) {
       return areEquivalentTuples((Tuple) key, (Tuple) comparedKey);
     }
@@ -91,7 +91,7 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
     return false;
   }
 
-  public BigDecimal parseAsBigDecimal(String numberLiteralValue) {
+  private static BigDecimal parseAsBigDecimal(String numberLiteralValue) {
     String numberValue = numberLiteralValue.replace("_", "");
     if (numberValue.startsWith("0b") || numberValue.startsWith("0B")) {
       return new BigDecimal(new BigInteger(numberValue.substring(2), 2));
