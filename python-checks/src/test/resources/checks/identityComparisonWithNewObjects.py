@@ -56,7 +56,7 @@ x is y # repeatedly checked: required for coverage of an `if (symb != null) {`
 # Unpacking false positive from review
 def foo(param):
     a, b = list(param)
-    if a is None:  # This was a false positive. There is no way to know what value is assigned to "a".
+    if a is None:  # There is no simple way to know what value is assigned to "a" after unpacking assignment.
         pass
 
     x, y = list(p)
