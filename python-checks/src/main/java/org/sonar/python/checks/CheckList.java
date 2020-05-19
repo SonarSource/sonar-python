@@ -171,6 +171,7 @@ public final class CheckList {
       SecureCookieCheck.class,
       SecureModeEncryptionAlgorithmsCheck.class,
       SelfAssignmentCheck.class,
+      SetDuplicateKeyCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
       SpecialMethodParamListCheck.class,
