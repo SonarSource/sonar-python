@@ -346,12 +346,13 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       Symbol symbol = callExpression.calleeSymbol();
-      if (symbol == null || symbol.fullyQualifiedName() == null) {
+      if (symbol == null) {
         return null;
       }
 
-      if (PURE_FUNCTIONS.contains(symbol.fullyQualifiedName())) {
-        return new IgnoredPureOperation(callExpression.callee(), symbol.fullyQualifiedName());
+      String fqn = symbol.fullyQualifiedName();
+      if (fqn != null && PURE_FUNCTIONS.contains(fqn)) {
+        return new IgnoredPureOperation(callExpression.callee(), fqn);
       }
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = ((SubscriptionExpression) expression);

@@ -6,8 +6,8 @@ def basic_calls():
     x = y = round(1.3)
     round(1.3) + round(1.2)
     round(1.2), round(1.3) # Noncompliant 2
-
     print(x) # Ok
+    no_such_function(1)
 
 def string_calls():
     "hello".capitalize() # Noncompliant
@@ -41,10 +41,8 @@ def collection():
 
     d2 = defaultdict()
     d2['a'] # Ok - defaultdict.__geitem__ creates the key if missing
-
     d3 = MyDict()
     d3['a'] # Noncompliant
-
     foo = MyCollection
     'a' in foo # Ok
 
@@ -75,6 +73,12 @@ def exceptions_in_try_blocks():
     try:
         int("abc")  # Ok
         int("cde")  # Ok
+    except ValueError as e:
+        pass
+
+    try:
+        x = int("abc")  # Ok
+        y - int("cde")  # Ok
     except ValueError as e:
         pass
 
