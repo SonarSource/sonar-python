@@ -21,7 +21,7 @@ package org.sonar.python.types;
 
 import com.sonar.sslr.api.AstNode;
 import java.io.InputStream;
-import java.util.Arrays;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -178,22 +178,19 @@ public class TypeShed {
 
   @Nullable
   private static ModuleDescription getResourceForModule(String moduleName, String categoryPath) {
-    String[] splittedName = moduleName.split("\\.");
     String pathToModule = String.join("/", moduleName.split("\\."));
-    InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
+    String fullPathToModule = categoryPath + pathToModule + ".pyi";
+    InputStream resource = TypeShed.class.getResourceAsStream(fullPathToModule);
     if (resource == null) {
-      resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
+      fullPathToModule = categoryPath + moduleName + "/__init__.pyi";
+      resource = TypeShed.class.getResourceAsStream(fullPathToModule);
       if (resource == null) {
         return null;
       }
     }
-    String packageName = "";
-    String fileName = moduleName;
-    if (splittedName.length != 1) {
-      packageName = String.join(".", Arrays.copyOf(splittedName, splittedName.length - 1));
-      fileName = splittedName[splittedName.length - 1];
-    }
-    return new ModuleDescription(resource, fileName, packageName);
+    String fileName = Paths.get(fullPathToModule).getFileName().toString();
+    fileName = fileName.substring(0, fileName.length() - 4);
+    return new ModuleDescription(resource, fileName, moduleName);
   }
 
   private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {

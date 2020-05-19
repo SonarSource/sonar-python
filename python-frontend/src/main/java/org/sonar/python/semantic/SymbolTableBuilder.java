@@ -117,13 +117,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   public SymbolTableBuilder(String packageName, PythonFile pythonFile, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
     this.pythonFile = pythonFile;
     String fileName = pythonFile.fileName();
-    int extensionIndex = fileName.lastIndexOf('.');
-    String moduleName = extensionIndex > 0
-      ? fileName.substring(0, extensionIndex)
-      : fileName;
-    filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
-    filePath.add(moduleName);
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
+    filePath = new ArrayList<>(Arrays.asList(fullyQualifiedModuleName.split("\\.")));
     this.globalSymbolsByModuleName = globalSymbolsByModuleName;
     this.globalSymbolsByFQN = globalSymbolsByModuleName.values()
       .stream()
