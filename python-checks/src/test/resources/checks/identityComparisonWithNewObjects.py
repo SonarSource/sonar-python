@@ -52,6 +52,38 @@ def coverage():
 
 x is y # repeatedly checked: required for coverage of an `if (symb != null) {`
 
+
+# Unpacking false positive from review
+def foo(param):
+    a, b = list(param)
+    if a is None:  # This was a false positive. There is no way to know what value is assigned to "a".
+        pass
+
+    x, y = list(p)
+    if x is p: # that shouldn't report anything
+      pass
+
+
+# Clashes with S5727 and S3403
+# https://jira.sonarsource.com/browse/SONARPY-507
+def clashS5727Test(p):
+    a = list()
+    if a is None:  # Only S5727 should raise
+        pass
+
+    b = 42
+    if None is not b: # for coverage
+      pass
+
+    None is p
+    p is None
+
+def clashS3403Test():
+    a = list()
+    if a is "":  # Only S3403 should raise an issue
+        pass
+
+
 # rest is mutably borrowed from `expected-issues/python/src/RSPEC_5796`.
 def literal_comparison(param):
     # dict
@@ -121,9 +153,9 @@ def locations_and_messages(param):
     param is {1: 2, 3: 4}  # Noncompliant {{Replace this "is" operator with "==".}}
 #         ^^
 
-    {1: 2, 3: 4} is not complex(1, 2)  # Noncompliant {{Replace this "is not" operator with "!=".}}
-#                ^^^^^^
+    # {1: 2, 3: 4} is not complex(1, 2)  # Originally marked as "noncompliant", but clashes with RSPEC-3403
 
     mylist = [] # secondary should be here
     param is mylist  # Noncompliant {{Replace this "is" operator with "==".}}
 #         ^^
+
