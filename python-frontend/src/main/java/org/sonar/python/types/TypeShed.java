@@ -60,6 +60,7 @@ public class TypeShed {
   private static Map<String, Symbol> builtins;
   private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
+  private static final Set<String> modulesInProgress = new HashSet<>();
 
   private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";
   private static final String STDLIB_2 = "typeshed/stdlib/2/";
@@ -161,20 +162,24 @@ public class TypeShed {
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {
+    if (modulesInProgress.contains(moduleName)) return new HashSet<>();
+    modulesInProgress.add(moduleName);
     Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols(moduleName, STDLIB_2AND3, builtinGlobalSymbols).values());
     if (standardLibrarySymbols.isEmpty()) {
       standardLibrarySymbols = commonSymbols(getModuleSymbols(moduleName, STDLIB_2, builtinGlobalSymbols),
         getModuleSymbols(moduleName, STDLIB_3, builtinGlobalSymbols));
     }
     if (!standardLibrarySymbols.isEmpty()) {
+      modulesInProgress.remove(moduleName);
       return standardLibrarySymbols;
     }
     Set<Symbol> thirdPartySymbols = new HashSet<>(getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols).values());
-    if (!thirdPartySymbols.isEmpty()) {
-      return thirdPartySymbols;
+    if (thirdPartySymbols.isEmpty()) {
+      thirdPartySymbols = commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
+        getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols));
     }
-    return commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
-      getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols));
+    modulesInProgress.remove(moduleName);
+    return thirdPartySymbols;
   }
 
   @Nullable
