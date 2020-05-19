@@ -53,7 +53,7 @@ def coverage():
 x is y # repeatedly checked: required for coverage of an `if (symb != null) {`
 
 
-# Unpacking false positive from review
+# Making sure there are no false positives caused by unpacking assignments
 def foo(param):
     a, b = list(param)
     if a is None:  # There is no simple way to know what value is assigned to "a" after unpacking assignment.
