@@ -42,13 +42,17 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
       throw new IllegalArgumentException("Ambiguous symbol should contain at least two symbols");
     }
     Symbol firstSymbol = symbols.iterator().next();
+    String resultingSymbolName = firstSymbol.name();
     if (!symbols.stream().map(Symbol::name).allMatch(symbolName -> symbolName.equals(firstSymbol.name()))) {
-      throw new IllegalArgumentException("Ambiguous symbol should contain symbols with the same name");
+      if (!symbols.stream().map(Symbol::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
+        throw new IllegalArgumentException("Ambiguous symbol should contain symbols with the same name");
+      }
+      resultingSymbolName = "";
     }
     if (!symbols.stream().map(Symbol::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
-      return new AmbiguousSymbolImpl(firstSymbol.name(), null, symbols);
+      return new AmbiguousSymbolImpl(resultingSymbolName, null, symbols);
     }
-    return new AmbiguousSymbolImpl(firstSymbol.name(), firstSymbol.fullyQualifiedName(), symbols);
+    return new AmbiguousSymbolImpl(resultingSymbolName, firstSymbol.fullyQualifiedName(), symbols);
   }
 
   @Override
