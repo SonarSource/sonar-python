@@ -38,7 +38,7 @@ public class DictionaryDuplicateKeyCheck extends AbstractDuplicateKeyCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.DICTIONARY_LITERAL, ctx -> {
       DictionaryLiteral dictionaryLiteral = (DictionaryLiteral) ctx.syntaxNode();
       Set<Integer> issueIndexes = new HashSet<>();
-      if (dictionaryLiteral.elements().size() > 100) {
+      if (dictionaryLiteral.elements().size() > SIZE_THRESHOLD) {
         return;
       }
       for (int i = 0; i < dictionaryLiteral.elements().size(); i++) {

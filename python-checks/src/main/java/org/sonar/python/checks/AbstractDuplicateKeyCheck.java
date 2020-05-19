@@ -35,6 +35,9 @@ import org.sonar.plugins.python.api.tree.Tuple;
 
 public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck {
 
+  // Avoid performance issues for big dictionary/set literals
+  static final int SIZE_THRESHOLD = 100;
+
   boolean isSameKey(Expression key, Expression comparedKey) {
     if (key.is(Tree.Kind.TUPLE) && comparedKey.is(Tree.Kind.TUPLE)) {
       return areEquivalentTuples((Tuple) key, (Tuple) comparedKey);

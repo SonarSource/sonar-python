@@ -36,7 +36,7 @@ public class SetDuplicateKeyCheck extends AbstractDuplicateKeyCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.SET_LITERAL, ctx -> {
       SetLiteral setLiteral = (SetLiteral) ctx.syntaxNode();
       Set<Integer> issueIndexes = new HashSet<>();
-      if (setLiteral.elements().size() > 100) {
+      if (setLiteral.elements().size() > SIZE_THRESHOLD) {
         return;
       }
       for (int i = 0; i < setLiteral.elements().size(); i++) {
