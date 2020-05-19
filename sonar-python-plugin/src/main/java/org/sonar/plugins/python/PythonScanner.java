@@ -51,13 +51,13 @@ import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -73,7 +73,7 @@ public class PythonScanner extends Scanner {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
-  private final Map<String, Set<Symbol>> globalSymbolsByModuleName = SymbolUtils.externalModulesSymbols();
+  private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.from(SymbolUtils.externalModulesSymbols());
 
 
   public PythonScanner(
@@ -104,7 +104,7 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), packageNames.get(inputFile), globalSymbolsByModuleName);
+      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), packageNames.get(inputFile), projectLevelSymbolTable);
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -261,9 +261,8 @@ public class PythonScanner extends Scanner {
       FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
       String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
       packageNames.put(inputFile, packageName);
-      String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, inputFile.filename());
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      globalSymbolsByModuleName.put(fullyQualifiedModuleName, SymbolUtils.globalSymbols(astRoot, packageName, pythonFile));
+      projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
     }
 
     @Override

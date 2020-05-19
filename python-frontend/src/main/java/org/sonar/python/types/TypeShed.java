@@ -43,6 +43,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
@@ -83,7 +84,7 @@ public class TypeShed {
       globalSymbols.put(TYPING, typingModuleSymbols);
       Set<Symbol> typingExtensionsSymbols = typingExtensionsSymbols(Collections.singletonMap(TYPING, typingModuleSymbols));
       globalSymbols.put(TYPING_EXTENSIONS, typingExtensionsSymbols);
-      new SymbolTableBuilder("", file, globalSymbols).visitFileInput(fileInput);
+      new SymbolTableBuilder("", file, ProjectLevelSymbolTable.from(globalSymbols)).visitFileInput(fileInput);
       for (Symbol globalVariable : fileInput.globalVariables()) {
         ((SymbolImpl) globalVariable).removeUsages();
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
@@ -202,7 +203,7 @@ public class TypeShed {
     PythonFile file = new TypeShedPythonFile(moduleDescription.resource, moduleDescription.fileName);
     AstNode astNode = PythonParser.create().parse(file.content());
     FileInput fileInput = new PythonTreeMaker().fileInput(astNode);
-    new SymbolTableBuilder(moduleDescription.packageName, file, initialSymbols).visitFileInput(fileInput);
+    new SymbolTableBuilder(moduleDescription.packageName, file, ProjectLevelSymbolTable.from(initialSymbols)).visitFileInput(fileInput);
     fileInput.accept(new ReturnTypeVisitor());
     return fileInput.globalVariables().stream()
       .map(symbol -> {
