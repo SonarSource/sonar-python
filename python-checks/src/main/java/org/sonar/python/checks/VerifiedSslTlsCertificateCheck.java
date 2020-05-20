@@ -168,7 +168,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    */
   private static Set<String> requestsMethods = Stream
     .of("request", "get", "head", "post", "put", "delete", "patch", "options")
-    .map(method -> "requests." + method)
+    .map(method -> "requests.api." + method)
     .collect(Collectors.toSet());
 
   private static void requestsCheck(SubscriptionContext subscriptionContext) {

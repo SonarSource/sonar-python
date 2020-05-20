@@ -117,13 +117,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   public SymbolTableBuilder(String packageName, PythonFile pythonFile, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
     this.pythonFile = pythonFile;
     String fileName = pythonFile.fileName();
-    int extensionIndex = fileName.lastIndexOf('.');
-    String moduleName = extensionIndex > 0
-      ? fileName.substring(0, extensionIndex)
-      : fileName;
-    filePath = new ArrayList<>(Arrays.asList(packageName.split("\\.")));
-    filePath.add(moduleName);
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
+    filePath = new ArrayList<>(Arrays.asList(fullyQualifiedModuleName.split("\\.")));
+    if (SymbolUtils.getModuleFileName(fileName).equals("__init__")) {
+      filePath.add("");
+    }
     this.globalSymbolsByModuleName = globalSymbolsByModuleName;
     this.globalSymbolsByFQN = globalSymbolsByModuleName.values()
       .stream()
@@ -487,7 +485,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
       if (annotatedAssignment.variable().is(Kind.NAME)) {
-        addBindingUsage((Name) annotatedAssignment.variable(), Usage.Kind.ASSIGNMENT_LHS);
+        Name variable = (Name) annotatedAssignment.variable();
+        addBindingUsage(variable, Usage.Kind.ASSIGNMENT_LHS, getFullyQualifiedName(variable.name()));
       }
       super.visitAnnotatedAssignment(annotatedAssignment);
     }
@@ -543,7 +542,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {
-      currentScope().addBindingUsage(nameTree, usage, null);
+      addBindingUsage(nameTree, usage, null);
+    }
+
+    private void addBindingUsage(Name nameTree, Usage.Kind usage, @Nullable String fullyQualifiedName) {
+      currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
     }
   }
 
