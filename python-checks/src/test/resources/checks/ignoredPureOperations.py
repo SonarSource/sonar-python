@@ -42,7 +42,7 @@ def collection():
     d2 = defaultdict()
     d2['a'] # Ok - defaultdict.__geitem__ creates the key if missing
     d3 = MyDict()
-    d3['a'] # Noncompliant
+    d3['a'] # FN
     foo = MyCollection
     'a' in foo # Ok
 
@@ -62,7 +62,7 @@ def exceptions_in_try_blocks():
     except ValueError as e:
         pass
 
-    # We only allow the above behavior if there are only 2 statement in the try block
+    # We only allow the above behavior if there are only 2 statements in the try block
     try:
         int("abc") # Noncompliant
         int("abc") # Noncompliant

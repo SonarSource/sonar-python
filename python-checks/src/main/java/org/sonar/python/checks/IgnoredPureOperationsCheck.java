@@ -76,7 +76,6 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     "all",
     "any",
     "sorted",
-    //"map",
     "filter",
     "enumerate",
     "reversed",
@@ -355,13 +354,13 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
         return new IgnoredPureOperation(callExpression.callee(), fqn);
       }
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
-      SubscriptionExpression subscriptionExpression = ((SubscriptionExpression) expression);
+      SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
       InferredType type = subscriptionExpression.object().type();
-      if (PURE_GETITEM_TYPES.stream().anyMatch(type::canBeOrExtend)) {
+      if (PURE_GETITEM_TYPES.stream().anyMatch(type::canOnlyBe)) {
         return new IgnoredPureOperation(subscriptionExpression, "__getitem__");
       }
     } else if (expression.is(Tree.Kind.IN)) {
-      InExpression inExpression = ((InExpression) expression);
+      InExpression inExpression = (InExpression) expression;
       InferredType type = inExpression.rightOperand().type();
       if (PURE_CONTAINS_TYPES.stream().anyMatch(type::canOnlyBe)) {
         return new IgnoredPureOperation(inExpression, "__contains__");
