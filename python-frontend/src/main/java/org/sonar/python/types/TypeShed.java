@@ -21,7 +21,7 @@ package org.sonar.python.types;
 
 import com.sonar.sslr.api.AstNode;
 import java.io.InputStream;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -178,19 +178,22 @@ public class TypeShed {
 
   @Nullable
   private static ModuleDescription getResourceForModule(String moduleName, String categoryPath) {
-    String pathToModule = String.join("/", moduleName.split("\\."));
-    String fullPathToModule = categoryPath + pathToModule + ".pyi";
-    InputStream resource = TypeShed.class.getResourceAsStream(fullPathToModule);
+    String[] moduleNameHierarchy = moduleName.split("\\.");
+    String pathToModule = String.join("/", moduleNameHierarchy);
+    InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
     if (resource == null) {
-      fullPathToModule = categoryPath + moduleName + "/__init__.pyi";
-      resource = TypeShed.class.getResourceAsStream(fullPathToModule);
+      resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
       if (resource == null) {
         return null;
       }
     }
-    String fileName = Paths.get(fullPathToModule).getFileName().toString();
-    fileName = fileName.substring(0, fileName.length() - 4);
-    return new ModuleDescription(resource, fileName, moduleName);
+    String fileName = moduleNameHierarchy[moduleNameHierarchy.length - 1];
+    int pos = fileName.lastIndexOf('.');
+    if (pos > 0) {
+      fileName = fileName.substring(0, pos);
+    }
+    String targetModuleName = String.join(".", Arrays.copyOfRange(moduleNameHierarchy, 0, moduleNameHierarchy.length - 1));
+    return new ModuleDescription(resource, fileName, targetModuleName);
   }
 
   private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {

@@ -77,7 +77,7 @@ public class SymbolUtils {
     String moduleName = extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
       : fileName;
-    if (moduleName.equals("__init__") || packageName.endsWith("." + moduleName) || packageName.equals(moduleName)) {
+    if (moduleName.equals("__init__")) {
       return packageName;
     }
     return packageName.isEmpty()

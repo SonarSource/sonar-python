@@ -236,9 +236,8 @@ public class SymbolUtilsTest {
   public void fqn_by_package_with_subpackage() {
     assertThat(SymbolUtils.fullyQualifiedModuleName("", "foo.py")).isEqualTo("foo");
     assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "__init__.py")).isEqualTo("foo");
-    assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "foo.py")).isEqualTo("foo");
-    assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "foo")).isEqualTo("foo");
-    assertThat(SymbolUtils.fullyQualifiedModuleName("curses.ascii", "ascii.py")).isEqualTo("curses.ascii");
+    assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "foo.py")).isEqualTo("foo.foo");
+    assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "foo")).isEqualTo("foo.foo");
     assertThat(SymbolUtils.fullyQualifiedModuleName("curses", "ascii.py")).isEqualTo("curses.ascii");
   }
 
