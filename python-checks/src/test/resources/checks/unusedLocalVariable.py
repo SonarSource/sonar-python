@@ -30,6 +30,9 @@ def string_interpolation():
     print(f"{'}' + value6}")
     value7 = ''
     printf(rf'{value7}')
+    value8 = 10
+    value9 = 10
+    print(f"{3.14159265358979:{value8}.{value9 * 5}}")
     return f'{value1}, {2*value2}, value3bis, value4'
 
 def function_with_lambdas():

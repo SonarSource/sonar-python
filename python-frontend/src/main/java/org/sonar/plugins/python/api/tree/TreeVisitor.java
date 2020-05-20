@@ -170,4 +170,6 @@ public interface TreeVisitor {
   void visitToken(Token token);
 
   void visitFormattedExpression(FormattedExpression formattedExpression);
+
+  void visitFormatSpecifier(FormatSpecifier formatSpecifier);
 }

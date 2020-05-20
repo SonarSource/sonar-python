@@ -58,6 +58,8 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.FormatSpecifier;
+import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
 import org.sonar.plugins.python.api.tree.IfStatement;
@@ -1277,16 +1279,37 @@ public class PythonTreeMaker {
       com.sonar.sslr.api.Token token = elementNode.getToken();
       StringElementImpl element = new StringElementImpl(toPyToken(token));
       if (element.isInterpolated()) {
-        for (AstNode expressionNode : F_STRING_PARSER.fStringExpressions(token)) {
-          Expression exp = expression(expressionNode.getFirstChild(PythonGrammar.EXPR));
-          AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
-          Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
-          element.addFormattedExpression(new FormattedExpressionImpl(exp, equalToken));
-        }
+        F_STRING_PARSER.fStringExpressions(token).forEach(
+          expressionNode -> element.addFormattedExpression(formattedExpression(expressionNode))
+        );
       }
       elements.add(element);
     }
     return new StringLiteralImpl(elements);
+  }
+
+  private FormatSpecifier formatSpecifier(AstNode expressionNode) {
+    AstNode formatSpecifierNode = expressionNode.getFirstChild(PythonGrammar.FORMAT_SPECIFIER);
+    if (formatSpecifierNode == null) {
+      return null;
+    }
+
+    Token columnToken = toPyToken(formatSpecifierNode.getFirstChild(PythonPunctuator.COLON).getToken());
+    List<FormattedExpression> nestedExpressions = formatSpecifierNode.getChildren(PythonGrammar.FORMATTED_EXPR)
+      .stream()
+      .map(this::formattedExpression)
+      .collect(Collectors.toList());
+
+    return new FormatSpecifierImpl(columnToken, nestedExpressions);
+  }
+
+  private FormattedExpression formattedExpression(AstNode expressionNode) {
+    Expression exp = expression(expressionNode.getFirstChild(PythonGrammar.EXPR));
+    AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
+    Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
+    FormatSpecifier formatSpecifier = formatSpecifier(expressionNode);
+
+    return new FormattedExpressionImpl(exp, equalToken, formatSpecifier);
   }
 
   private static Token suiteIndent(AstNode suite) {

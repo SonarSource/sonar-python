@@ -19,57 +19,49 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 
-public class FormattedExpressionImpl extends PyTree implements FormattedExpression {
+public class FormatSpecifierImpl extends PyTree implements FormatSpecifier {
 
-  private final Expression expression;
-  private final Token equalToken;
-  private final FormatSpecifier formatSpecifier;
+  private Token columnToken;
+  private List<FormattedExpression> formatExpressions;
 
-  public FormattedExpressionImpl(Expression expression, @Nullable Token equalToken, @Nullable FormatSpecifier formatSpecifier) {
-    this.expression = expression;
-    this.equalToken = equalToken;
-    this.formatSpecifier = formatSpecifier;
+  public FormatSpecifierImpl(Token columnToken, List<FormattedExpression> formatExpressions) {
+    this.columnToken = columnToken;
+    this.formatExpressions = formatExpressions;
   }
 
   @Override
-  public Expression expression() {
-    return this.expression;
+  public Token columnToken() {
+    return columnToken;
   }
 
   @Override
-  public Token equalToken() {
-    return this.equalToken;
-  }
-
-  @Override
-  public FormatSpecifier formatSpecifier() {
-    return this.formatSpecifier;
+  public List<FormattedExpression> formatExpressions() {
+    return formatExpressions;
   }
 
   @Override
   List<Tree> computeChildren() {
-    return Stream.of(expression, equalToken).filter(Objects::nonNull).collect(Collectors.toList());
+    List<Tree> children = new ArrayList<>();
+    children.add(columnToken);
+    children.addAll(formatExpressions);
+    return children;
   }
 
   @Override
   public void accept(TreeVisitor visitor) {
-    visitor.visitFormattedExpression(this);
+    visitor.visitFormatSpecifier(this);
   }
 
   @Override
   public Kind getKind() {
-    return Kind.FORMATTED_EXPRESSION;
+    return Kind.FORMAT_SPECIFIER;
   }
 }

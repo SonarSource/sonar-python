@@ -465,5 +465,12 @@ public class BaseTreeVisitor implements TreeVisitor {
   @Override
   public void visitFormattedExpression(FormattedExpression formattedExpression) {
     scan(formattedExpression.expression());
+    scan(formattedExpression.formatSpecifier());
+  }
+
+  @Override
+  public void visitFormatSpecifier(FormatSpecifier formatSpecifier) {
+    scan(formatSpecifier.columnToken());
+    scan(formatSpecifier.formatExpressions());
   }
 }
