@@ -34,4 +34,13 @@ public class WildcardImportCheckTest {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/__init__.py", new WildcardImportCheck());
   }
 
+  @Test
+  public void test_allowed() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/wildcardImport_allowed.py", new WildcardImportCheck());
+  }
+
+  @Test
+  public void test_empty() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/wildcardImport_empty.py", new WildcardImportCheck());
+  }
 }
