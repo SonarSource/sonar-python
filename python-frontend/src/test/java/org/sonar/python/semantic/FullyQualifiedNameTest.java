@@ -302,7 +302,8 @@ public class FullyQualifiedNameTest {
   public void import_wildcard() {
     FileInput tree = parse(
       new SymbolTableBuilder("", pythonFile("my_module.py")),
-      "from my_module import *"
+      "from my_module import *",
+      "from . import *"
     );
     ImportFrom importStatement = getFirstChild(tree, t -> t.is(Tree.Kind.IMPORT_FROM));
     assertThat(importStatement.hasUnresolvedWildcardImport()).isTrue();
