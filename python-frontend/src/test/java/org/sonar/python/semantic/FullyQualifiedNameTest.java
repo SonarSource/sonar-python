@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -207,14 +208,6 @@ public class FullyQualifiedNameTest {
     b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
     assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.other_module.b");
 
-    // package with the same name
-    tree = parse(
-      new SymbolTableBuilder("", pythonFile("my_module.py")),
-      "from .my_module import b"
-    );
-    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
-    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_module.b");
-
     // no package
     tree = parse(
       new SymbolTableBuilder("", pythonFile("my_module.py")),
@@ -303,6 +296,16 @@ public class FullyQualifiedNameTest {
     );
     CallExpression callExpression = getCallExpression(tree);
     assertThat(callExpression.calleeSymbol().usages()).extracting(Usage::kind).containsExactly(Usage.Kind.OTHER, Usage.Kind.OTHER);
+  }
+
+  @Test
+  public void import_wildcard() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("", pythonFile("my_module.py")),
+      "from my_module import *"
+    );
+    ImportFrom importStatement = getFirstChild(tree, t -> t.is(Tree.Kind.IMPORT_FROM));
+    assertThat(importStatement.hasUnresolvedWildcardImport()).isTrue();
   }
 
   private static Name getNameEqualTo(FileInput tree, String strName) {
