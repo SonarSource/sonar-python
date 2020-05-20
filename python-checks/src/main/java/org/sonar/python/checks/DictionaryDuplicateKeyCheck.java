@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
@@ -37,34 +38,13 @@ public class DictionaryDuplicateKeyCheck extends AbstractDuplicateKeyCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.DICTIONARY_LITERAL, ctx -> {
       DictionaryLiteral dictionaryLiteral = (DictionaryLiteral) ctx.syntaxNode();
-      Set<Integer> issueIndexes = new HashSet<>();
-      for (int i = 0; i < dictionaryLiteral.elements().size(); i++) {
-        if (!dictionaryLiteral.elements().get(i).is(Tree.Kind.KEY_VALUE_PAIR) || issueIndexes.contains(i)) {
-          continue;
-        }
-        Expression key = ((KeyValuePair) dictionaryLiteral.elements().get(i)).key();
-        List<Tree> duplicateKeys = findIdenticalKeys(i, dictionaryLiteral.elements(), issueIndexes);
-        if (!duplicateKeys.isEmpty()) {
-          PreciseIssue issue = ctx.addIssue(key, "Change or remove duplicates of this key.");
-          duplicateKeys.forEach(d -> issue.secondary(d, "Duplicate key"));
-        }
-      }
+      List<Expression> keys = dictionaryLiteral
+        .elements()
+        .stream()
+        .filter(t -> t.is(Tree.Kind.KEY_VALUE_PAIR))
+        .map(dictLit -> ((KeyValuePair) dictLit).key())
+        .collect(Collectors.toList());
+      reportDuplicates(keys, ctx, "Change or remove duplicates of this key.", "Duplicate key");
     });
-  }
-
-  private List<Tree> findIdenticalKeys(int startIndex, List<DictionaryLiteralElement> elements, Set<Integer> issueIndexes) {
-    Expression key = ((KeyValuePair) elements.get(startIndex)).key();
-    List<Tree> duplicates = new ArrayList<>();
-    for (int i = startIndex + 1; i < elements.size(); i++) {
-      if (!elements.get(i).is(Tree.Kind.KEY_VALUE_PAIR)) {
-        continue;
-      }
-      Expression comparedKey = ((KeyValuePair) elements.get(i)).key();
-      if (isSameKey(key, comparedKey)) {
-        issueIndexes.add(i);
-        duplicates.add(comparedKey);
-      }
-    }
-    return duplicates;
   }
 }

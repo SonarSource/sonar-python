@@ -1,6 +1,6 @@
 def strings():
   {"one", "two"}
-  {"one", "two", "one"}  # Noncompliant {{Change or remove duplicates of this key.}}
+  {"one", "two", "one"}  # Noncompliant {{Change or remove duplicates of this value.}}
   #^^^^^         ^^^^^<
   {"one", "two", 'one'}  # Noncompliant
   {"""multi
@@ -18,7 +18,8 @@ def strings():
 
   # No issue on f-strings to avoid any risk of FP
   p = 1
-  {f"one{p}", "two", f"one{p}"} # FN (ok)
+  # Used to be an accepted FN, but there is no actual reason to not process it
+  {f"one{p}", "two", f"one{p}"} # Noncompliant
   {f"one{p()}", "two", f"one{p()}"} # FN (ok)
 
 def numbers():
@@ -77,20 +78,12 @@ def tuples():
   { (0o10, 'a'), (8, "a", "b")} # OK
   { (1,), 1 } # OK
 
+def coveragePreimageAttackCornerCases():
+  # Note: x -> (new java.math.BigDecimal(x)).stripTrailingZeros.hashCode has collisions for e.g.
+  # 138563169
+  # 158370000
 
-def large_dict_literal():
-  # Accepted FNs to avoid performance issues
-  {
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-  "a", "b"
-  }
+  { 138563169 : 'x', 158370000 : 'y' }
+  { ('a', 138563169) : 'x', ('a', 158370000) : 'y' }
+  { "AaAaAa": 1, "AaAaBB": 2 }
+  { AaAaAa: 1, AaAaBB: 2 }

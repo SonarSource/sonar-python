@@ -18,8 +18,10 @@ def strings():
 
   # No issue on f-strings to avoid any risk of FP
   p = 1
-  {f"one{p}": 1, "two": 2, f"one{p}": 3} # FN (ok)
   {f"one{p()}": 1, "two": 2, f"one{p()}": 3} # FN (ok)
+
+  # Used to be an accepted FN, now reported as duplicate
+  {f"one{p}": 1, "two": 2, f"one{p}": 3} # Noncompliant
 
 def numbers():
   {1: "one", 2: "two", 1: "three"}  # Noncompliant

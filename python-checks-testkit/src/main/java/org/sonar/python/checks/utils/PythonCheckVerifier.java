@@ -22,8 +22,6 @@ package org.sonar.python.checks.utils;
 import com.google.common.base.Preconditions;
 import com.sonarsource.checks.verifier.MultiFileVerifier;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -62,17 +60,6 @@ public class PythonCheckVerifier {
 
   public static void verify(String path, PythonCheck check) {
     verify(Collections.singletonList(path), check);
-  }
-
-  /** Creates a temporary python file with the specified content, and runs the check on it. */
-  public static void verifyTemp(String content, PythonCheck check) {
-    try {
-      Path tmpFilePath = Files.createTempFile("sonar-python-verifyTemp_", ".py");
-      Files.write(tmpFilePath, content.getBytes(UTF_8));
-      verify(Collections.singletonList(tmpFilePath.toAbsolutePath().toString()), check);
-    } catch (IOException e) {
-      throw new AssertionError(e);
-    }
   }
 
   public static void verifyNoIssue(String path, PythonCheck check) {

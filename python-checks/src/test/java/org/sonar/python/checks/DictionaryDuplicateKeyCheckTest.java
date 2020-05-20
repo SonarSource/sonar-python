@@ -19,8 +19,15 @@
  */
 package org.sonar.python.checks;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class DictionaryDuplicateKeyCheckTest {
 
@@ -44,25 +51,36 @@ public class DictionaryDuplicateKeyCheckTest {
     return contentBuilder.toString();
   }
 
-  @Test(timeout = 2000L)
+  @Test
   public void tinySyntheticDictionaryTest() {
-    PythonCheckVerifier.verifyTemp(
+    verifyGeneratedCode(
       dictionaryLiteral(10, "'a': 1, # Noncompliant", "'a': 2"),
       new DictionaryDuplicateKeyCheck());
   }
 
   @Test(timeout = 2000L)
   public void smallSyntheticDictionaryTest() {
-    PythonCheckVerifier.verifyTemp(
+    verifyGeneratedCode(
       dictionaryLiteral(97, "'a': 1, # Noncompliant", "'a': 2"),
       new DictionaryDuplicateKeyCheck());
   }
 
 
-  // @Test(timeout = 5000L)
+  @Test(timeout = 5000L)
   public void hugeSyntheticDictionaryTest() {
-    PythonCheckVerifier.verifyTemp(
+    verifyGeneratedCode(
       dictionaryLiteral(10000, "'a': 1, # Noncompliant", "'a': 2"),
       new DictionaryDuplicateKeyCheck());
+  }
+
+  /** Creates a temporary python file with the specified content, and runs the check on it. */
+  public static void verifyGeneratedCode(String code, PythonCheck check) {
+    try {
+      Path tmpFilePath = Files.createTempFile("sonar-python-verifyTemp_", ".py");
+      Files.write(tmpFilePath, code.getBytes(UTF_8));
+      PythonCheckVerifier.verify(Collections.singletonList(tmpFilePath.toAbsolutePath().toString()), check);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
   }
 }
