@@ -25,8 +25,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
@@ -34,11 +32,11 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -64,28 +62,28 @@ public class PythonCheckVerifier {
 
   public static void verifyNoIssue(String path, PythonCheck check) {
     File file = new File(path);
-    createVerifier(Collections.singletonList(file), check, Collections.emptyMap(), null).assertNoIssues();
+    createVerifier(Collections.singletonList(file), check, ProjectLevelSymbolTable.empty(), null).assertNoIssues();
   }
 
   public static void verify(List<String> paths, PythonCheck check) {
     List<File> files = paths.stream().map(File::new).collect(Collectors.toList());
     File baseDirFile = new File(files.get(0).getParent());
-    Map<String, Set<Symbol>> globalSymbolsPerModule = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
-    createVerifier(files, check, globalSymbolsPerModule, baseDirFile).assertOneOrMoreIssues();
+    ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
+    createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertOneOrMoreIssues();
   }
 
   public static void verifyNoIssue(List<String> paths, PythonCheck check) {
     List<File> files = paths.stream().map(File::new).collect(Collectors.toList());
     File baseDirFile = new File(files.get(0).getParent());
-    Map<String, Set<Symbol>> globalSymbolsPerModule = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
-    createVerifier(files, check, globalSymbolsPerModule, baseDirFile).assertNoIssues();
+    ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
+    createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertNoIssues();
   }
 
-  private static MultiFileVerifier createVerifier(List<File> files, PythonCheck check, Map<String, Set<Symbol>> globalSymbolsPerModule, @Nullable File baseDir) {
+  private static MultiFileVerifier createVerifier(List<File> files, PythonCheck check, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable File baseDir) {
     MultiFileVerifier multiFileVerifier = MultiFileVerifier.create(files.get(0).toPath(), UTF_8);
     for (File file : files) {
       PythonVisitorContext context = baseDir != null
-        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir), globalSymbolsPerModule)
+        ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir), projectLevelSymbolTable)
         : TestPythonVisitorRunner.createContext(file);
       addFileIssues(check, multiFileVerifier, file, context);
     }

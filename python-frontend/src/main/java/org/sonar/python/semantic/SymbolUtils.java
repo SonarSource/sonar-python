@@ -40,13 +40,11 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
@@ -87,29 +85,6 @@ public class SymbolUtils {
     return packageName.isEmpty()
       ? moduleName
       : (packageName + "." + moduleName);
-  }
-
-  public static Set<Symbol> globalSymbols(FileInput fileInput, String packageName, PythonFile pythonFile) {
-    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
-    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
-    fileInput.accept(symbolTableBuilder);
-    Set<Symbol> globalSymbols = new HashSet<>();
-    for (Symbol globalVariable : fileInput.globalVariables()) {
-      String fullyQualifiedVariableName = globalVariable.fullyQualifiedName();
-      if (((fullyQualifiedVariableName != null) && !fullyQualifiedVariableName.startsWith(fullyQualifiedModuleName)) ||
-        globalVariable.usages().stream().anyMatch(u -> u.kind().equals(Usage.Kind.IMPORT))) {
-        // TODO: We don't put builtin or imported names in global symbol table to avoid duplicate FQNs in project level symbol table (to fix with SONARPY-647)
-        continue;
-      }
-      if (globalVariable.kind() == Symbol.Kind.CLASS) {
-        globalSymbols.add(((ClassSymbolImpl) globalVariable).copyWithoutUsages());
-      } else if (globalVariable.kind() == Symbol.Kind.FUNCTION) {
-        globalSymbols.add(new FunctionSymbolImpl(globalVariable.name(), ((FunctionSymbol) globalVariable)));
-      } else {
-        globalSymbols.add(new SymbolImpl(globalVariable.name(), fullyQualifiedModuleName + "." + globalVariable.name()));
-      }
-    }
-    return globalSymbols;
   }
 
   static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
