@@ -24,7 +24,6 @@ import com.sonar.sslr.api.RecognitionException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
@@ -44,6 +43,7 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
 
 public final class PythonSensor implements Sensor {
@@ -116,7 +116,7 @@ public final class PythonSensor implements Sensor {
         AstNode astNode = parser.parse(pythonFile.content());
         FileInput parse = new PythonTreeMaker().fileInput(astNode);
         // omitting package and symbols info as it's not required for highlighting
-        PythonVisitorContext visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), "", new HashMap<>());
+        PythonVisitorContext visitorContext = new PythonVisitorContext(parse, pythonFile, context.fileSystem().workDir(), "", ProjectLevelSymbolTable.empty());
         new PythonHighlighter(context, inputFile).scanFile(visitorContext);
       } catch (RecognitionException e) {
         LOG.error("Unable to parse file: " + inputFile.toString());

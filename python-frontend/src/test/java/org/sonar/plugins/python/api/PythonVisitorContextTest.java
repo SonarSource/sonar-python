@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -81,7 +82,7 @@ public class PythonVisitorContextTest {
     Mockito.when(pythonFile.fileName()).thenReturn("my_module.py");
     List<Symbol> modSymbols = Arrays.asList(new SymbolImpl("a", null), new SymbolImpl("b", null));
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", globalSymbols);
+    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalSymbols));
     assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
   }
 }
