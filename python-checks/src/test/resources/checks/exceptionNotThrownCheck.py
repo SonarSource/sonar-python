@@ -1,7 +1,7 @@
 def notBasicBuiltinExceptions():
   TypeError() # Noncompliant
 # ^^^^^^^^^^^
-  Exception("") # Noncompliant {{Throw this exception or remove this useless statement.}}
+  Exception("") # Noncompliant {{Raise this exception or remove this useless statement.}}
 # ^^^^^^^^^^^^^
 
 # custom class inside same function
@@ -9,7 +9,7 @@ def notThrowingCustomException():
   class Custom(TypeError):
     pass
 
-  Custom() # Noncompliant {{Throw this exception or remove this useless statement.}}
+  Custom() # Noncompliant {{Raise this exception or remove this useless statement.}}
 # ^^^^^^^^
 
 # custom class outside of any function
@@ -17,7 +17,7 @@ class C1(TypeError):
           pass
 
 def customException():
-    C1()  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    C1()  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^
 
 def coverage():
@@ -45,27 +45,34 @@ def falseNegatives():
   e = TypeError() # FN. The invocation of the `TypeError` constructor is not a statement, it's an expression.
 
 
+# special treatment of WindowsError-s
+try:
+    WindowsError  # Ok. This will raise an exception if the program doesn't run on Windows
+    WindowsError()
+except NameError:
+    pass
+
 # rest mutably borrowed from `expected-issues`
 class CustomException(TypeError):
   pass
 
 def InstantiatedBuiltinExceptions():
-    BaseException()  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    BaseException()  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^^^^^^
-    Exception()  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    Exception()  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^^
-    ValueError()  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    ValueError()  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^^^
-    CustomException()  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    CustomException()  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^^^^^^^^
 
-    BaseException  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    BaseException  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^^^^
-    Exception  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    Exception  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^
-    ValueError  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    ValueError  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^
-    CustomException  # Noncompliant {{Throw this exception or remove this useless statement.}}
+    CustomException  # Noncompliant {{Raise this exception or remove this useless statement.}}
 #   ^^^^^^^^^^^^^^^
 
 
