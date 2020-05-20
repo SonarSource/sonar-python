@@ -123,6 +123,7 @@ public final class CheckList {
       IdenticalExpressionOnBinaryOperatorCheck.class,
       IdentityComparisonWithCachedTypesCheck.class,
       IdentityComparisonWithNewObjectCheck.class,
+      IgnoredPureOperationsCheck.class,
       IncorrectExceptionTypeCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
