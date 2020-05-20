@@ -215,8 +215,8 @@ public class TypeShed {
         ((SymbolImpl) symbol).removeUsages();
         return symbol;
       })
-      .filter(s -> s.fullyQualifiedName() != null && s.fullyQualifiedName().startsWith(moduleName))
-      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
+      .filter(s -> s.fullyQualifiedName() != null)
+      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::mergeTwoSymbols));
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {

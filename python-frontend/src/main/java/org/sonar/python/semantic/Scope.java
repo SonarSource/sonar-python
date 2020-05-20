@@ -41,7 +41,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
-import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 
 class Scope {
 
@@ -172,7 +171,7 @@ class Scope {
       moduleExportedSymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
-    } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName) && !isTypeShedFile(pythonFile)) {
+    } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
       Set<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName);
       if (!standardLibrarySymbols.isEmpty()) {
         SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
@@ -187,7 +186,7 @@ class Scope {
   void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, String fromModuleName) {
     String symbolName = nameTree.name();
     Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
-    if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName) && !isTypeShedFile(pythonFile)) {
+    if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
       //FIXME: Resolve imports from TypeShed files without trying to resolve cyclic dependencies
       globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
     }

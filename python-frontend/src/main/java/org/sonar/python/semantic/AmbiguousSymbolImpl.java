@@ -19,7 +19,9 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,6 +55,10 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
       return new AmbiguousSymbolImpl(resultingSymbolName, null, symbols);
     }
     return new AmbiguousSymbolImpl(resultingSymbolName, firstSymbol.fullyQualifiedName(), symbols);
+  }
+
+  public static AmbiguousSymbol mergeTwoSymbols(Symbol symbol1, Symbol symbol2) {
+    return create(new HashSet<>(Arrays.asList(symbol1, symbol2)));
   }
 
   @Override

@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Symbol.Kind;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -141,5 +142,20 @@ public class TypeShedTest {
     Symbol loadGrammarSymbol = driverSymbols.get("load_grammar");
     assertThat(loadGrammarSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(TypeShed.symbolWithFQN("lib2to3.pgen2.driver", "lib2to3.pgen2.driver.load_grammar")).isSameAs(loadGrammarSymbol);
+  }
+
+  @Test
+  public void package_relative_import() {
+    Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::mergeTwoSymbols));
+    Symbol sysSymbol = osSymbols.get("sys");
+    assertThat(sysSymbol.kind()).isEqualTo(Kind.AMBIGUOUS);
+
+    Symbol timesResult = osSymbols.get("times_result");
+    assertThat(timesResult.kind()).isEqualTo(Kind.CLASS);
+
+    Map<String, Symbol> requestsSymbols = TypeShed.symbolsForModule("requests").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::mergeTwoSymbols));
+    Symbol requestSymbol = requestsSymbols.get("request");
+    assertThat(requestSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(requestSymbol.fullyQualifiedName()).isEqualTo("requests.api.request");
   }
 }
