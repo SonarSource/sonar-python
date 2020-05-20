@@ -85,7 +85,7 @@ public class ProjectLevelSymbolTable {
         .stream()
         .flatMap(Collection::stream)
         .filter(symbol -> symbol.fullyQualifiedName() != null)
-        .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
+        .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::mergeTwoSymbols));
     }
     return globalSymbolsByFQN;
   }
