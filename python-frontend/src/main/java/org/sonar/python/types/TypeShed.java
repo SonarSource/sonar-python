@@ -181,7 +181,7 @@ public class TypeShed {
     String[] moduleNameHierarchy = moduleName.split("\\.");
     String pathToModule = String.join("/", moduleNameHierarchy);
     String moduleFileName = moduleNameHierarchy[moduleNameHierarchy.length - 1];
-    String targetModuleName = String.join(".", Arrays.copyOfRange(moduleNameHierarchy, 0, moduleNameHierarchy.length - 1));
+    String packageName = String.join(".", Arrays.copyOfRange(moduleNameHierarchy, 0, moduleNameHierarchy.length - 1));
     InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
     if (resource == null) {
       resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
@@ -189,9 +189,9 @@ public class TypeShed {
         return null;
       }
       moduleFileName = "__init__";
-      targetModuleName = moduleName;
+      packageName = moduleName;
     }
-    return new ModuleDescription(resource, moduleFileName, targetModuleName);
+    return new ModuleDescription(resource, moduleFileName, packageName);
   }
 
   private static Map<String, Symbol> getModuleSymbols(String moduleName, String categoryPath, Map<String, Set<Symbol>> initialSymbols) {
@@ -253,7 +253,7 @@ public class TypeShed {
     }
   }
 
-  static class ModuleDescription {
+  private static class ModuleDescription {
     InputStream resource;
     String fileName;
     String packageName;
