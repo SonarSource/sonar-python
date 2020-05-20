@@ -21,7 +21,6 @@ package org.sonar.python.semantic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -32,7 +31,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -94,8 +92,7 @@ import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
 public class SymbolTableBuilder extends BaseTreeVisitor {
   private String fullyQualifiedModuleName;
   private List<String> filePath;
-  private Map<String, Set<Symbol>> globalSymbolsByModuleName;
-  private Map<String, Symbol> globalSymbolsByFQN;
+  private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private Map<Tree, Scope> scopesByRootTree;
   private FileInput fileInput = null;
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
@@ -105,16 +102,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
     filePath = null;
-    globalSymbolsByModuleName = Collections.emptyMap();
-    globalSymbolsByFQN = Collections.emptyMap();
+    projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     this.pythonFile = pythonFile;
   }
 
   public SymbolTableBuilder(String packageName, PythonFile pythonFile) {
-    this(packageName, pythonFile, Collections.emptyMap());
+    this(packageName, pythonFile, ProjectLevelSymbolTable.empty());
   }
 
-  public SymbolTableBuilder(String packageName, PythonFile pythonFile, Map<String, Set<Symbol>> globalSymbolsByModuleName) {
+  public SymbolTableBuilder(String packageName, PythonFile pythonFile, ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.pythonFile = pythonFile;
     String fileName = pythonFile.fileName();
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
@@ -122,12 +118,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     if (SymbolUtils.getModuleFileName(fileName).equals("__init__")) {
       filePath.add("");
     }
-    this.globalSymbolsByModuleName = globalSymbolsByModuleName;
-    this.globalSymbolsByFQN = globalSymbolsByModuleName.values()
-      .stream()
-      .flatMap(Collection::stream)
-      .filter(symbol -> symbol.fullyQualifiedName() != null)
-      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity()));
+    this.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
   @Override
@@ -364,12 +355,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
         : null;
       if (importFrom.isWildcardImport()) {
-        Set<Symbol> importedModuleSymbols = globalSymbolsByModuleName.get(moduleName);
+        Set<Symbol> importedModuleSymbols = projectLevelSymbolTable.getSymbolsFromModule(moduleName);
         if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName) && !isTypeShedFile(pythonFile)) {
           importedModuleSymbols = TypeShed.symbolsForModule(moduleName);
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
-          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, importFrom, globalSymbolsByFQN);
+          currentScope().createSymbolsFromWildcardImport(importedModuleSymbols, importFrom);
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(false);
         } else {
           ((ImportFromImpl) importFrom).setHasUnresolvedWildcardImport(true);
@@ -391,13 +382,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         }
         Name alias = module.alias();
         if (fromModuleName != null) {
-          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, fromModuleName, globalSymbolsByFQN);
+          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, fromModuleName);
         } else if (alias != null) {
           String fullName = module.dottedName().names().stream().map(Name::name).collect(Collectors.joining("."));
-          currentScope().addModuleSymbol(alias, fullName, globalSymbolsByModuleName, globalSymbolsByFQN);
+          currentScope().addModuleSymbol(alias, fullName);
         } else {
           // It's a simple case - no "from" imports or aliasing
-          currentScope().addModuleSymbol(nameTree, fullyQualifiedName, globalSymbolsByModuleName, globalSymbolsByFQN);
+          currentScope().addModuleSymbol(nameTree, fullyQualifiedName);
         }
       });
     }
@@ -538,7 +529,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     private void createScope(Tree tree, @Nullable Scope parent) {
-      scopesByRootTree.put(tree, new Scope(parent, tree, pythonFile, fullyQualifiedModuleName));
+      scopesByRootTree.put(tree, new Scope(parent, tree, pythonFile, fullyQualifiedModuleName, projectLevelSymbolTable));
     }
 
     private void addBindingUsage(Name nameTree, Usage.Kind usage) {

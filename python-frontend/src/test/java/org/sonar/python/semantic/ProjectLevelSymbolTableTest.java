@@ -42,7 +42,10 @@ import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.semantic.ProjectLevelSymbolTable.empty;
+import static org.sonar.python.semantic.ProjectLevelSymbolTable.from;
 
 public class ProjectLevelSymbolTableTest {
 
@@ -58,7 +61,7 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Arrays.asList(exportedA, exportedB, exportedC);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod import *",
       "print(a)"
     );
@@ -85,7 +88,7 @@ public class ProjectLevelSymbolTableTest {
   @Test
   public void unresolved_wildcard_import() {
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), Collections.emptyMap()),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), empty()),
       "from external import *",
       "print(a)"
     );
@@ -100,7 +103,7 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod import fn",
       "fn(1, 2)"
     );
@@ -112,7 +115,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFnSymbol.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.IMPORT, Usage.Kind.OTHER);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "import mod",
       "mod.fn(1, 2)"
     );
@@ -124,7 +127,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFnSymbol.usages()).extracting(Usage::kind).containsExactlyInAnyOrder(Usage.Kind.OTHER);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "import mod as mod1",
       "mod1.fn(1, 2)"
     );
@@ -142,7 +145,7 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "fn = 42",
       "from mod import fn"
     );
@@ -153,7 +156,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFnSymbol.fullyQualifiedName()).isEqualTo(null);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "mod = 42",
       "import mod"
     );
@@ -170,7 +173,7 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Collections.singletonList(xSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod import x"
     );
     Symbol importedXSymbol = tree.globalVariables().iterator().next();
@@ -188,14 +191,14 @@ public class ProjectLevelSymbolTableTest {
     List<Symbol> modSymbols = Collections.singletonList(xSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod import x as y"
     );
     Symbol importedYSymbol = tree.globalVariables().iterator().next();
     assertThat(importedYSymbol.name()).isEqualTo("y");
 
     tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "import mod as mod1"
     );
     Symbol importedModSymbol = tree.globalVariables().iterator().next();
@@ -213,7 +216,7 @@ public class ProjectLevelSymbolTableTest {
     globalSymbols.put("mod1", mod1Symbols);
     globalSymbols.put("mod2", mod2Symbols);
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod1 import A"
     );
     Symbol importedASymbol = tree.globalVariables().iterator().next();
@@ -226,7 +229,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "import mod1",
       "mod1.A"
     );
@@ -247,7 +250,7 @@ public class ProjectLevelSymbolTableTest {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("foo", "mod1.foo"));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), Collections.singletonMap("mod1", Collections.singleton(classASymbol))),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(Collections.singletonMap("mod1", Collections.singleton(classASymbol)))),
       "from mod1 import A"
     );
 
@@ -264,7 +267,7 @@ public class ProjectLevelSymbolTableTest {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("BaseException", "BaseException"));
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), Collections.singletonMap("mod1", Collections.singleton(classASymbol))),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(Collections.singletonMap("mod1", Collections.singleton(classASymbol)))),
       "from mod1 import A"
     );
 
@@ -294,7 +297,7 @@ public class ProjectLevelSymbolTableTest {
     globalSymbols.put("mod2", mod2Symbols);
     globalSymbols.put("mod3", mod3Symbols);
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod1 import A"
     );
     Symbol importedASymbol = tree.globalVariables().iterator().next();
@@ -307,7 +310,7 @@ public class ProjectLevelSymbolTableTest {
     assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
 
     tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "import mod1",
       "mod1.A"
     );
@@ -339,7 +342,7 @@ public class ProjectLevelSymbolTableTest {
 
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", modSymbols);
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod import foo"
     );
     Symbol importedFooSymbol = tree.globalVariables().iterator().next();
@@ -358,7 +361,7 @@ public class ProjectLevelSymbolTableTest {
     ).globalVariables();
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", modSymbols);
     FileInput tree = parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), globalSymbols),
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
       "from mod import A"
     );
     Symbol importedFooSymbol = tree.globalVariables().iterator().next();
@@ -367,5 +370,216 @@ public class ProjectLevelSymbolTableTest {
     assertThat(importedFooSymbol.fullyQualifiedName()).isEqualTo("mod.A");
     ClassSymbol classSymbol = (ClassSymbol) importedFooSymbol;
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isTrue();
+  }
+
+  private static Set<Symbol> globalSymbols(FileInput fileInput, String packageName) {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(fileInput, packageName, pythonFile("mod.py"));
+    return projectLevelSymbolTable.getSymbolsFromModule(packageName.isEmpty() ? "mod" : packageName + ".mod");
+  }
+
+  @Test
+  public void global_symbols() {
+    FileInput tree = parseWithoutSymbols(
+      "obj1 = 42",
+      "obj2: int = 42",
+      "def fn(): pass",
+      "class A: pass"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("obj1", "obj2", "fn", "A");
+    assertThat(globalSymbols).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod.obj1", "mod.obj2", "mod.fn", "mod.A");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void global_symbols_private_by_convention() {
+    // although being private by convention, it's considered as exported
+    FileInput tree = parseWithoutSymbols(
+      "def _private_fn(): pass"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("_private_fn");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void local_symbols_not_exported() {
+    FileInput tree = parseWithoutSymbols(
+      "def fn():",
+      "  def inner(): pass",
+      "  class Inner_class: pass",
+      "class A:",
+      "  def meth(): pass"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "mod");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "A");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void redefined_symbols() {
+    FileInput tree = parseWithoutSymbols(
+      "def fn(): pass",
+      "def fn(): ...",
+      "if True:",
+      "  conditionally_defined = 1",
+      "else:",
+      "  conditionally_defined = 2"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "mod");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("fn", "conditionally_defined");
+    assertThat(globalSymbols).extracting(Symbol::usages).allSatisfy(usages -> assertThat(usages).isEmpty());
+  }
+
+  @Test
+  public void function_symbols() {
+    FileInput tree = parseWithoutSymbols(
+      "def fn(): pass"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "mod");
+    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.FUNCTION);
+
+    tree = parseWithoutSymbols(
+      "def fn(): pass",
+      "fn = 42"
+    );
+    globalSymbols = globalSymbols(tree, "mod");
+    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.OTHER);
+  }
+
+  @Test
+  public void redefined_class_symbol() {
+    FileInput fileInput = parseWithoutSymbols(
+      "C = \"hello\"",
+      "class C: ",
+      "  pass");
+    Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
+  }
+
+  @Test
+  public void classdef_with_missing_symbol() {
+    FileInput fileInput = parseWithoutSymbols(
+      "class C: ",
+      "  pass",
+      "global C");
+
+    Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
+    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
+    // TODO: Global statements should not alter the kind of a symbol
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.OTHER.equals(k)).isTrue());
+  }
+
+  @Test
+  public void class_symbol() {
+    FileInput fileInput = parseWithoutSymbols(
+      "class C: ",
+      "  pass");
+    Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
+    assertThat(globalSymbols).hasSize(1);
+    Symbol cSymbol = globalSymbols.iterator().next();
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).isEmpty();
+
+    fileInput = parseWithoutSymbols(
+      "class A: pass",
+      "class C(A): ",
+      "  pass");
+    globalSymbols = globalSymbols(fileInput, "mod");
+    Map<String, Symbol> symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    cSymbol = symbols.get("C");
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+
+    // for the time being, we only consider symbols defined in the global scope
+    fileInput = parseWithoutSymbols(
+      "class A:",
+      "  class A1: pass",
+      "class C(A.A1): ",
+      "  pass");
+    globalSymbols = globalSymbols(fileInput, "mod");
+    symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    cSymbol = symbols.get("C");
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+  }
+
+  @Test
+  public void class_inheriting_from_imported_symbol() {
+    FileInput fileInput = parseWithoutSymbols(
+      "from mod import A",
+      "import mod2",
+      "class C(A): ",
+      "  pass",
+      "class D(mod2.B):",
+      "  pass");
+
+    Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
+    Map<String, Symbol> symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    Symbol cSymbol = symbols.get("C");
+    assertThat(cSymbol.name()).isEqualTo("C");
+    assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+    assertThat(((ClassSymbol) cSymbol).superClasses().get(0).fullyQualifiedName()).isEqualTo("mod.A");
+    Symbol dSymbol = symbols.get("D");
+    assertThat(dSymbol.name()).isEqualTo("D");
+    assertThat(dSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    assertThat(((ClassSymbol) dSymbol).superClasses()).hasSize(1);
+    assertThat(((ClassSymbol) dSymbol).superClasses().get(0).fullyQualifiedName()).isEqualTo("mod2.B");
+  }
+
+  @Test
+  public void symbol_duplicated_by_wildcard_import() {
+    FileInput tree = parseWithoutSymbols(
+      "def nlargest(n, iterable): ...",
+      "from _heapq import *",
+      "def nlargest(n, iterable, key=None): ..."
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).isEmpty();
+
+    tree = parseWithoutSymbols(
+      "nonlocal nlargest",
+      "from _heapq import *",
+      "def nlargest(n, iterable, key=None): ..."
+    );
+    globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).isEmpty();
+  }
+
+  @Test
+  public void class_having_itself_as_superclass_should_not_trigger_error() {
+    FileInput fileInput = parseWithoutSymbols("class A(A): pass");
+    Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
+    ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
+    assertThat(a.superClasses()).containsExactly(a);
+  }
+
+  @Test
+  public void global_symbols_stdlib_imports() {
+    FileInput tree = parseWithoutSymbols(
+      "from time import time",
+      "from threading import Thread",
+      "from datetime import TimezoneMixin as tz",
+      "import unknown",
+      "from mod import *"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).isEmpty();
+  }
+
+  @Test
+  public void module_importing_itself() {
+    FileInput tree = parseWithoutSymbols(
+      "from mod import *",
+      "from mod import smth"
+    );
+    Set<Symbol> globalSymbols = globalSymbols(tree, "");
+    assertThat(globalSymbols).isEmpty();
   }
 }
