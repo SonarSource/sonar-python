@@ -137,3 +137,88 @@ def immutable_captured():
   if loc:  # Noncompliant
     print(loc)
 
+
+
+def modules():
+  from cms.utils.compat import DJANGO_2_0
+  if DJANGO_2_0: ... # OK
+  import math
+  if math: ...  # FN
+
+
+def functions():
+  def myfunction():
+      return 42
+
+  if myfunction:  # Noncompliant
+      pass
+  elif round:  # Noncompliant
+      pass
+
+def class_and_methods():
+  class MyClass:
+    def mymethod(self): ...
+    @staticmethod
+    def mystaticmethod(): ...
+    @property
+    def myproperty(self): ...
+    @cached_property
+    def mycachedproperty(self): ...
+
+  myinstance = MyClass()
+
+  if MyClass: ... # Noncompliant
+  elif MyClass.mymethod: ...   # Noncompliant
+  elif myinstance.mymethod: ...   # Noncompliant
+  elif myinstance.mystaticmethod: ...   # Noncompliant
+  elif myinstance.myproperty: ... # OK
+  elif myinstance.mycachedproperty: ... # OK
+
+def ambiguous_symbols():
+  if cond():
+    class ambiguous_class_or_function: ...
+  else:
+    def ambiguous_class_or_function(): ...
+  if ambiguous_class_or_function: ... # Noncompliant
+
+  if cond():
+      class true_ambiguous: ...
+    elif cond2():
+      def true_ambiguous(): ...
+    else:
+      true_ambiguous = 42
+  if true_ambiguous: ... # OK
+
+  if unknown_symbol: ... # OK
+
+def lambdas():
+  lamb = lambda: None
+  if lamb: ... # Noncompliant
+
+
+def generator_expressions():
+  gen_exp = (i for i in range(42))
+  if gen_exp: ... # Noncompliant
+
+def generator():
+  def generator_function():
+      yield
+
+  generator = generator_function()
+  if generator:  # FN
+      pass
+
+def comprehensions_and_generator_expressions():
+  max = 42
+  [i for i in range(42) if max]  # Noncompliant
+  [i for i in range(42) if 21]  # Noncompliant
+  # set
+  {i for i in range(42) if max}  # Noncompliant
+  # dict
+  {i: "a string" for i in range(42) if max}  # Noncompliant
+  # generator expression
+  (i for i in range(42) if max)  # Noncompliant
+  (i for i in range(42) if 21)  # Noncompliant
+
+  # variables defined in the comprehension should be ignored
+  [i for i in range(42) if i]  # Ok
