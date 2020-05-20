@@ -162,7 +162,9 @@ public class TypeShed {
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {
-    if (modulesInProgress.contains(moduleName)) return new HashSet<>();
+    if (modulesInProgress.contains(moduleName)) {
+      return new HashSet<>();
+    }
     modulesInProgress.add(moduleName);
     Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols(moduleName, STDLIB_2AND3, builtinGlobalSymbols).values());
     if (standardLibrarySymbols.isEmpty()) {
