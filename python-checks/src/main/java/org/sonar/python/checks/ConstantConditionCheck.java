@@ -23,11 +23,16 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.ComprehensionIf;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
@@ -39,11 +44,14 @@ import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.AND;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.GENERATOR_EXPR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.LAMBDA;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NONE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NOT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.OR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 
@@ -73,6 +81,12 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
     super.visitConditionalExpression(conditionalExpression);
   }
 
+  @Override
+  public void visitComprehensionIf(ComprehensionIf comprehensionIf) {
+    checkConstantCondition(comprehensionIf.condition());
+    super.visitComprehensionIf(comprehensionIf);
+  }
+
   private void checkConstantCondition(Expression condition) {
     Expression constantBooleanExpression = getConstantBooleanExpression(condition);
     if (constantBooleanExpression != null) {
@@ -87,7 +101,7 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
 
   private static boolean isImmutableConstant(Expression condition) {
     return TreeUtils.isBooleanLiteral(condition) ||
-      condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE);
+      condition.is(NUMERIC_LITERAL, STRING_LITERAL, NONE, LAMBDA, GENERATOR_EXPR);
   }
 
   private static Expression getConstantBooleanExpression(Expression condition) {
@@ -161,7 +175,16 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
   private void checkExpression(Expression expression) {
     if (isConstant(expression)) {
       addIssue(expression, MESSAGE);
-    } else if (expression.is(NAME)) {
+      return;
+    }
+    if (expression.is(NAME) || expression.is(QUALIFIED_EXPR)) {
+      Symbol symbol = ((HasSymbol) expression).symbol();
+      if (symbol != null && isClassOrFunction(symbol)) {
+        addIssue(expression, MESSAGE);
+        return;
+      }
+    }
+    if (expression.is(NAME)) {
       Set<Expression> valuesAtLocation = reachingDefinitionsAnalysis.valuesAtLocation(((Name) expression));
       if (valuesAtLocation.size() == 1) {
         Expression lastAssignedValue = valuesAtLocation.iterator().next();
@@ -170,5 +193,16 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
         }
       }
     }
+  }
+
+  private static boolean isClassOrFunction(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.CLASS)) {
+      return true;
+    }
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      // Avoid potential FPs with properties
+      return ((FunctionSymbol) symbol).decorators().stream().noneMatch(d -> d.equals("property") || d.equals("cached_property"));
+    }
+    return symbol.is(Symbol.Kind.AMBIGUOUS) && ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(ConstantConditionCheck::isClassOrFunction);
   }
 }
