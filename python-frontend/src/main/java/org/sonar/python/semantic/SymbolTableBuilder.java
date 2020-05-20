@@ -119,6 +119,9 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     String fileName = pythonFile.fileName();
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
     filePath = new ArrayList<>(Arrays.asList(fullyQualifiedModuleName.split("\\.")));
+    if (SymbolUtils.getModuleFileName(fileName).equals("__init__")) {
+      filePath.add("");
+    }
     this.globalSymbolsByModuleName = globalSymbolsByModuleName;
     this.globalSymbolsByFQN = globalSymbolsByModuleName.values()
       .stream()

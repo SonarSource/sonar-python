@@ -72,11 +72,15 @@ public class SymbolUtils {
   private SymbolUtils() {
   }
 
-  public static String fullyQualifiedModuleName(String packageName, String fileName) {
+  public static String getModuleFileName(String fileName) {
     int extensionIndex = fileName.lastIndexOf('.');
-    String moduleName = extensionIndex > 0
+    return extensionIndex > 0
       ? fileName.substring(0, extensionIndex)
       : fileName;
+  }
+
+  public static String fullyQualifiedModuleName(String packageName, String fileName) {
+    String moduleName = getModuleFileName(fileName);
     if (moduleName.equals("__init__")) {
       return packageName;
     }

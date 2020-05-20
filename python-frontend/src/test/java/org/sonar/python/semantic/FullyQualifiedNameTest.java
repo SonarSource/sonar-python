@@ -432,7 +432,7 @@ public class FullyQualifiedNameTest {
     PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
     fileInput = context.rootTree();
     CallExpression callExpression = (CallExpression) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
-    assertThat(callExpression.calleeSymbol().fullyQualifiedName()).isEqualTo("fn");
+    assertThat(callExpression.calleeSymbol().fullyQualifiedName()).isEqualTo("foo.fn");
     ClassDef classDef = (ClassDef) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CLASSDEF)).get(0);
     assertThat(classDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.A");
   }
