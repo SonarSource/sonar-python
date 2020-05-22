@@ -153,12 +153,14 @@ class Scope {
         .map(s -> copySymbol(symbolName, s))
         .collect(Collectors.toSet());
       return AmbiguousSymbolImpl.create(alternativeSymbols);
-    } else if (symbol.is(Symbol.Kind.OTHER)) {
-      SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName());
-      for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
-        res.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
-      }
-      return res;
+    } else if (symbol.is(Symbol.Kind.MODULE)) {
+      ModuleSymbolImpl moduleSymbol = new ModuleSymbolImpl(symbolName, symbol.fullyQualifiedName());
+      ModuleSymbolImpl originalModuleSymbol = (ModuleSymbolImpl) symbol;
+      moduleSymbol.addMembers(originalModuleSymbol
+        .declaredMembers().stream()
+        .map(m -> ((SymbolImpl) m).copyWithoutUsages())
+        .collect(Collectors.toList()));
+      return moduleSymbol;
     }
     return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
   }
@@ -167,17 +169,21 @@ class Scope {
     String symbolName = nameTree.name();
     Set<Symbol> moduleExportedSymbols = projectLevelSymbolTable.getSymbolsFromModule(fullyQualifiedName);
     if (moduleExportedSymbols != null && !isExistingSymbol(symbolName)) {
-      SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
-      moduleExportedSymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
+      ModuleSymbolImpl moduleSymbol = new ModuleSymbolImpl(symbolName, fullyQualifiedName);
+      moduleExportedSymbols.forEach(symbol -> moduleSymbol.addMember(copySymbol(symbol.name(), symbol)));
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
+      moduleSymbol.addUsage(nameTree, Usage.Kind.IMPORT);
+      return;
     } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
       Set<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName);
       if (!standardLibrarySymbols.isEmpty()) {
-        SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
-        standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
+        ModuleSymbolImpl moduleSymbol = new ModuleSymbolImpl(symbolName, fullyQualifiedName);
+        standardLibrarySymbols.forEach(symbol -> moduleSymbol.addMember(copySymbol(symbol.name(), symbol)));
         this.symbols.add(moduleSymbol);
         symbolsByName.put(symbolName, moduleSymbol);
+        moduleSymbol.addUsage(nameTree, Usage.Kind.IMPORT);
+        return;
       }
     }
     addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);

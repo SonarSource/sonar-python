@@ -19,27 +19,8 @@
  */
 package org.sonar.plugins.python.api.symbols;
 
-import java.util.List;
-import javax.annotation.CheckForNull;
+import java.util.Set;
 
-public interface Symbol {
-
-  String name();
-
-  List<Usage> usages();
-
-  @CheckForNull
-  String fullyQualifiedName();
-
-  boolean is(Kind... kinds);
-
-  Kind kind();
-
-  enum Kind {
-    FUNCTION,
-    CLASS,
-    MODULE,
-    AMBIGUOUS,
-    OTHER
-  }
+public interface ModuleSymbol extends Symbol {
+  Set<Symbol> declaredMembers();
 }

@@ -632,9 +632,28 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         Symbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
         if (qualifierSymbol != null) {
           Usage.Kind usageKind = assignmentLeftHandSides.contains(qualifiedExpression) ? Usage.Kind.ASSIGNMENT_LHS : Usage.Kind.OTHER;
-          ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name(), usageKind);
+          if (qualifierSymbol instanceof ModuleSymbolImpl) {
+            addUsageToModuleProperty(qualifiedExpression, (ModuleSymbolImpl) qualifierSymbol);
+          } else {
+            ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name(), usageKind);
+          }
         }
       }
+    }
+
+    private void addUsageToModuleProperty(QualifiedExpression qualifiedExpression, ModuleSymbolImpl qualifierSymbol) {
+      ModuleSymbolImpl moduleSymbol = qualifierSymbol;
+      String childSymbolName = qualifiedExpression.name().name();
+      Symbol moduleProperty = moduleSymbol.declaredMembers().stream()
+        .filter(s -> childSymbolName.equals(s.name())).findFirst().orElse(null);
+      if (moduleProperty == null) {
+        String childFullyQualifiedName = moduleSymbol.fullyQualifiedName() != null
+          ? (moduleSymbol.fullyQualifiedName() + "." + childSymbolName)
+          : null;
+        moduleProperty = new SymbolImpl(childSymbolName, childFullyQualifiedName);
+        moduleSymbol.addMember(moduleProperty);
+      }
+      ((SymbolImpl) moduleProperty).addUsage(qualifiedExpression.name(), Usage.Kind.OTHER);
     }
 
     @Override

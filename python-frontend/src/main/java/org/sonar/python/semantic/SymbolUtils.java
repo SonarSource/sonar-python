@@ -315,10 +315,10 @@ public class SymbolUtils {
   }
 
   @SuppressWarnings("SameParameterValue")
-  private static SymbolImpl moduleSymbol(String moduleName, String fullyQualifiedName, Symbol... childSymbols) {
-    SymbolImpl m = new SymbolImpl(moduleName, fullyQualifiedName);
-    for (Symbol c: childSymbols) {
-      m.addChildSymbol(c);
+  private static ModuleSymbolImpl moduleSymbol(String moduleName, String fullyQualifiedName, Symbol... childSymbols) {
+    ModuleSymbolImpl m = new ModuleSymbolImpl(moduleName, fullyQualifiedName);
+    for (Symbol c : childSymbols) {
+      m.addMember(c);
     }
     return m;
   }

@@ -108,10 +108,6 @@ public class SymbolImpl implements Symbol {
     ((SymbolImpl) symbol).addUsage(name, kind);
   }
 
-  void addChildSymbol(Symbol symbol) {
-    childrenSymbolByName.put(symbol.name(), symbol);
-  }
-
   public InferredType inferredType() {
     return inferredType;
   }
@@ -127,9 +123,5 @@ public class SymbolImpl implements Symbol {
   public void removeUsages() {
     usages.clear();
     childrenSymbolByName.values().forEach(symbol -> ((SymbolImpl) symbol).removeUsages());
-  }
-
-  Map<String, Symbol> getChildrenSymbolByName() {
-    return Collections.unmodifiableMap(childrenSymbolByName);
   }
 }
