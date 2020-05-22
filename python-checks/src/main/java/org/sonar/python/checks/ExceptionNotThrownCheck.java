@@ -40,7 +40,7 @@ import org.sonar.python.semantic.BuiltinSymbols;
 // https://jira.sonarsource.com/browse/SONARPY-666
 @Rule(key = "S3984")
 public class ExceptionNotThrownCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Throw this exception or remove this useless statement.";
+  private static final String MESSAGE = "Raise this exception or remove this useless statement.";
 
   @Override
   public void initialize(Context context) {
@@ -63,11 +63,12 @@ public class ExceptionNotThrownCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> BUILTIN_EXCEPTIONS_FQNS = Stream.of(
     BuiltinSymbols.EXCEPTIONS,
-    BuiltinSymbols.EXCEPTIONS_PYTHON2).flatMap(Set::stream).collect(Collectors.toSet());
+    BuiltinSymbols.EXCEPTIONS_PYTHON2).flatMap(Set::stream).filter(n -> !"WindowsError".equals(n)).collect(Collectors.toSet());
 
   private static boolean isThrowable(ClassSymbol cs) {
-    return BUILTIN_EXCEPTIONS_FQNS.contains(cs.fullyQualifiedName()) ||
-      cs.superClasses().stream().map(Symbol::fullyQualifiedName).anyMatch(BUILTIN_EXCEPTIONS_FQNS::contains);
+    return (BUILTIN_EXCEPTIONS_FQNS.contains(cs.fullyQualifiedName()) ||
+      cs.superClasses().stream().map(Symbol::fullyQualifiedName).anyMatch(BUILTIN_EXCEPTIONS_FQNS::contains)) &&
+      !"WindowsError".equals(cs.fullyQualifiedName());
   }
 
   @Nullable
