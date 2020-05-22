@@ -1967,6 +1967,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
     FormatSpecifier formatSpecifier = formattedExpression.formatSpecifier();
     assertThat(formatSpecifier).isNotNull();
+    assertThat(formatSpecifier.getKind()).isEqualTo(Kind.FORMAT_SPECIFIER);
+    assertThat(formatSpecifier.children()).hasSize(3);
     assertThat(formatSpecifier.formatExpressions()).hasSize(2);
     assertThat(formatSpecifier.formatExpressions().get(0).expression().is(Tree.Kind.NAME)).isTrue();
     assertThat(formatSpecifier.formatExpressions().get(1).expression().is(Kind.MULTIPLICATION)).isTrue();
