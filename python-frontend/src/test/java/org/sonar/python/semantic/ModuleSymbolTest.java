@@ -21,6 +21,7 @@ package org.sonar.python.semantic;
 
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.ModuleSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -30,10 +31,14 @@ import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 
 public class ModuleSymbolTest {
   @Test
@@ -72,6 +77,31 @@ public class ModuleSymbolTest {
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.MODULE);
     // But when it's referenced in the code - it is added to the module symbol
     assertThat(symbol.declaredMembers().stream().anyMatch(s -> "connections".equals(s.name()) && "pymysql.connections".equals(s.fullyQualifiedName()))).isTrue();
+  }
+
+  @Test
+  public void imported_module_from_project_level_symbol_table() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.from(SymbolUtils.externalModulesSymbols());
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), projectLevelSymbolTable),
+      "from OpenSSL import SSL"
+    );
+    Symbol importedSslSymbol = tree.globalVariables().iterator().next();
+    assertThat(importedSslSymbol.name()).isEqualTo("SSL");
+    assertThat(importedSslSymbol.kind()).isEqualTo(Symbol.Kind.MODULE);
+  }
+
+  @Test
+  public void copy_without_usages() {
+    ModuleSymbolImpl foo = new ModuleSymbolImpl("module", "mod1");
+    ModuleSymbolImpl otherFoo = new ModuleSymbolImpl("module", "mod2");
+    AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, otherFoo)));
+    AmbiguousSymbolImpl copy = ((AmbiguousSymbolImpl) ambiguousSymbol).copyWithoutUsages();
+    assertThat(copy.is(Symbol.Kind.AMBIGUOUS)).isTrue();
+    assertThat(copy.usages()).isEmpty();
+    assertThat(copy).isNotEqualTo(ambiguousSymbol);
+    assertThat(copy.alternatives()).doesNotContain(foo, otherFoo);
+    assertThat(copy.alternatives()).extracting(Symbol::name, Symbol::fullyQualifiedName).containsExactlyInAnyOrder(tuple("module", "mod1"), tuple("module", "mod2"));
   }
 
   private FunctionSymbol functionSymbol(PythonFile pythonFile, String... code) {
