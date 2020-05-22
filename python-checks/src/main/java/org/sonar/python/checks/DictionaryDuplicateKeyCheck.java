@@ -19,14 +19,10 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Tree;

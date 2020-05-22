@@ -19,12 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -35,7 +30,6 @@ public class SetDuplicateKeyCheck extends AbstractDuplicateKeyCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.SET_LITERAL, ctx -> {
       SetLiteral setLiteral = (SetLiteral) ctx.syntaxNode();
-      Set<Integer> issueIndexes = new HashSet<>();
       reportDuplicates(setLiteral.elements(), ctx, "Change or remove duplicates of this value.", "Duplicate value");
     });
   }
