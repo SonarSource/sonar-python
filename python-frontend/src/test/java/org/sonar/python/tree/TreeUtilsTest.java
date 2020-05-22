@@ -308,6 +308,55 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("foo()"))).isFalse();
   }
 
+  @Test
+  public void test_isStaticCall_called_within_class() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class MyClass:",
+      "  def mymethod(a, b): ...",
+      "  mymethod(1,2)"
+    );
+
+    CallExpression callExpression = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    assertThat(TreeUtils.isStaticCall(callExpression)).isTrue();
+  }
+
+  @Test
+  public void test_isStaticCall_called_from_class() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class MyClass:",
+      "  def mymethod(a, b): ...",
+      "MyClass.mymethod(1,2)"
+    );
+
+    CallExpression callExpression = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    assertThat(TreeUtils.isStaticCall(callExpression)).isTrue();
+  }
+
+  @Test
+  public void test_isStaticCall_called_from_object() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class MyClass:",
+      "  def mymethod(a, b): ...",
+      "my_instance = MyClass()",
+      "my_instance.mymethod(b)"
+    );
+
+    CallExpression callExpression = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    assertThat(TreeUtils.isStaticCall(callExpression)).isFalse();
+  }
+
+  @Test
+  public void test_isStaticCall_called_from_instantiation() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "class MyClass:",
+      "  def mymethod(a, b): ...",
+      "MyClass().mymethod(b)"
+    );
+
+    CallExpression callExpression = (CallExpression) PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR)).get(0);
+    assertThat(TreeUtils.isStaticCall(callExpression)).isFalse();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

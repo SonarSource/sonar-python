@@ -171,3 +171,7 @@ def exception_for_unittest_mock():
   class SomeMock(Mock): ...
   my_mock = SomeMock()
   hex(my_mock) # OK
+
+class StaticCallInsideClass:
+  def my_method(a: int, b: str): ...
+  my_method(1, "hello") # OK

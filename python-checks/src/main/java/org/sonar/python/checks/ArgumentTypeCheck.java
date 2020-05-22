@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -58,13 +57,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       if (functionSymbol.hasVariadicParameter()) {
         return;
       }
-      boolean isStaticCall = false;
-      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-        isStaticCall = TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
-          .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
-          .isPresent();
-      }
+      boolean isStaticCall = TreeUtils.isStaticCall(callExpression);
       checkFunctionCall(ctx, callExpression, functionSymbol, isStaticCall);
     });
   }

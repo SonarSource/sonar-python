@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -43,6 +44,7 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -204,7 +206,7 @@ public class TreeUtils {
 
     return visitor.functionDefs;
   }
-  
+
   private static class CollectFunctionDefsVisitor extends BaseTreeVisitor {
     private List<FunctionDef> functionDefs = new ArrayList<>();
 
@@ -251,5 +253,15 @@ public class TreeUtils {
       return name.equals("True") || name.equals("False");
     }
     return false;
+  }
+
+  /**
+   Returns true if the call expression is not an instance call.
+   */
+  public static boolean isStaticCall(CallExpression callExpression) {
+    return callExpression.callee().is(Tree.Kind.NAME) || Optional.of(callExpression.callee())
+      .filter(c -> c.is(Tree.Kind.QUALIFIED_EXPR))
+      .flatMap(q -> TreeUtils.getSymbolFromTree(((QualifiedExpression) q).qualifier()).filter(s -> s.is(Symbol.Kind.CLASS)))
+      .isPresent();
   }
 }

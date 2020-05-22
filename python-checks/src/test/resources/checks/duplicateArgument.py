@@ -122,3 +122,9 @@ def exceptions():
   a.method(b)
   MyClass.method(a, b)
   MyClass.method(a, b=b)
+
+class StaticCallInsideClass:
+  def my_method(a, b): ...
+  my_method(1,b=2) # OK
+
+

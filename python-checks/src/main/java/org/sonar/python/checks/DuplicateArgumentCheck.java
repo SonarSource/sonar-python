@@ -40,7 +40,6 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -62,13 +61,7 @@ public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
         return;
       }
       FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
-      boolean isStaticCall = false;
-      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-        isStaticCall = TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
-          .filter(s -> s.is(Symbol.Kind.CLASS))
-          .isPresent();
-      }
+      boolean isStaticCall = TreeUtils.isStaticCall(callExpression);
       int firstParameterOffset = SymbolUtils.firstParameterOffset(functionSymbol, isStaticCall);
       if (isException(functionSymbol) || firstParameterOffset == -1) {
         return;
