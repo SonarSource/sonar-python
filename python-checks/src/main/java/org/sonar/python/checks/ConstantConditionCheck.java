@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -59,6 +60,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 public class ConstantConditionCheck extends PythonVisitorCheck {
 
   private static final String MESSAGE = "Replace this expression; used as a condition it will always be constant.";
+  private static final List<String> ACCEPTED_DECORATORS = Arrays.asList("overload", "staticmethod", "classmethod");
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   @Override
@@ -200,8 +202,8 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       return true;
     }
     if (symbol.is(Symbol.Kind.FUNCTION)) {
-      // Avoid potential FPs with properties
-      return ((FunctionSymbol) symbol).decorators().stream().noneMatch(d -> d.equals("property") || d.equals("cached_property"));
+      // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
+      return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
     }
     return symbol.is(Symbol.Kind.AMBIGUOUS) && ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(ConstantConditionCheck::isClassOrFunction);
   }
