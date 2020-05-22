@@ -214,7 +214,7 @@ public class SymbolUtils {
   }
 
   @CheckForNull
-  static Path pathOf(PythonFile pythonFile) {
+  public static Path pathOf(PythonFile pythonFile) {
     try {
       URI uri = pythonFile.uri();
       if ("file".equalsIgnoreCase(uri.getScheme())) {

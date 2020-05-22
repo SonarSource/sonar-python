@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -45,10 +47,13 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 @Rule(key = "S5549")
 public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
@@ -139,11 +144,11 @@ public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
     passedParameters.forEach((key, list) -> {
       if (list.size() > 1) {
         PreciseIssue issue = ctx.addIssue(list.get(0), String.format("Remove duplicate values for parameter \"%s\" in \"%s\" call.", key, functionSymbol.name()));
-        list.stream().skip(1).forEach(t -> issue.secondary(t, "Argument is also passed here."));
         LocationInFile locationInFile = functionSymbol.definitionLocation();
         if (locationInFile != null) {
           issue.secondary(locationInFile, "Function definition.");
         }
+        list.stream().skip(1).forEach(t -> issue.secondary(locationFromTree(t, ctx), "Argument is also passed here."));
       }
     });
   }
@@ -197,5 +202,14 @@ public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
       return ((ClassSymbol) symbol).isOrExtends("zope.interface.Interface");
     }
     return false;
+  }
+
+  static LocationInFile locationFromTree(Tree tree, SubscriptionContext ctx) {
+    PythonFile pythonFile = ctx.pythonFile();
+    Path path = pathOf(pythonFile);
+    String fileId = path != null ? path.toString() : pythonFile.toString();
+    TokenLocation firstToken = new TokenLocation(tree.firstToken());
+    TokenLocation lastToken = new TokenLocation(tree.lastToken());
+    return new LocationInFile(fileId, firstToken.startLine(), firstToken.startLineOffset(), lastToken.endLine(), lastToken.endLineOffset());
   }
 }
