@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -68,14 +69,14 @@ public class WildcardImportCheck extends PythonSubscriptionCheck {
     @Override
     public void visitStatementList(StatementList statementList) {
       // We should raise if one of the statements may contain application logic
-      this.raiseIssuesIf(statementList.statements().stream().anyMatch(WildcardImportVisitor::mayContainApplicationLogic));
+      this.raiseIssuesIf(() -> statementList.statements().stream().anyMatch(WildcardImportVisitor::mayContainApplicationLogic));
       super.visitStatementList(statementList);
     }
 
     @Override
     public void visitAssignmentStatement(AssignmentStatement pyAssignmentStatementTree) {
       List<ExpressionList> lhsExpressions = pyAssignmentStatementTree.lhsExpressions();
-      this.raiseIssuesIf(lhsExpressions.stream().anyMatch(
+      this.raiseIssuesIf(() -> lhsExpressions.stream().anyMatch(
         expressionList -> expressionList.expressions().stream().anyMatch(WildcardImportVisitor::isDisallowedAssignment)
       ));
     }
@@ -83,11 +84,11 @@ public class WildcardImportCheck extends PythonSubscriptionCheck {
     @Override
     public void visitCallExpression(CallExpression pyCallExpressionTree) {
       Symbol symbol = pyCallExpressionTree.calleeSymbol();
-      this.raiseIssuesIf(symbol == null || !"warnings.warn".equals(symbol.fullyQualifiedName()));
+      this.raiseIssuesIf(() -> symbol == null || !"warnings.warn".equals(symbol.fullyQualifiedName()));
     }
 
-    private void raiseIssuesIf(boolean condition) {
-      shouldRaiseIssues |= condition;
+    private void raiseIssuesIf(BooleanSupplier condition) {
+      shouldRaiseIssues = shouldRaiseIssues || condition.getAsBoolean();
     }
 
     private static boolean isDisallowedAssignment(Expression expression) {
@@ -104,7 +105,7 @@ public class WildcardImportCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
       if (ctx.pythonFile().fileName().equals("__init__.py")) {
-        // Ignore __init__.py files, as wildcard import are commonly used to populate those.
+        // Ignore __init__.py files, as wildcard imports are commonly used to populate those.
         return;
       }
 

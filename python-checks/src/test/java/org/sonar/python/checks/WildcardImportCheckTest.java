@@ -30,6 +30,26 @@ public class WildcardImportCheckTest {
   }
 
   @Test
+  public void test_assignment() {
+    PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_assignment.py", new WildcardImportCheck());
+  }
+
+  @Test
+  public void test_invalid_assignment() {
+    PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_invalid_assignment.py", new WildcardImportCheck());
+  }
+
+  @Test
+  public void test_call() {
+    PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_call.py", new WildcardImportCheck());
+  }
+
+  @Test
+  public void test_invalid_call() {
+    PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_invalid_call.py", new WildcardImportCheck());
+  }
+
+  @Test
   public void test_init_py() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/__init__.py", new WildcardImportCheck());
   }
@@ -43,4 +63,5 @@ public class WildcardImportCheckTest {
   public void test_empty() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/wildcardImport_empty.py", new WildcardImportCheck());
   }
+
 }
