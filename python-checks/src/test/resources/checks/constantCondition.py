@@ -164,6 +164,8 @@ def class_and_methods():
     def myproperty(self): ...
     @cached_property
     def mycachedproperty(self): ...
+    @cache_readonly
+    def othercachedproperty(self): ...
 
   myinstance = MyClass()
 
@@ -173,6 +175,7 @@ def class_and_methods():
   elif myinstance.mystaticmethod: ...   # Noncompliant
   elif myinstance.myproperty: ... # OK
   elif myinstance.mycachedproperty: ... # OK
+  elif myinstance.othercachedproperty: ... # OK
 
 def ambiguous_symbols():
   if cond():
