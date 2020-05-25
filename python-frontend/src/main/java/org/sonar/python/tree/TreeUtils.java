@@ -204,7 +204,7 @@ public class TreeUtils {
 
     return visitor.functionDefs;
   }
-  
+
   private static class CollectFunctionDefsVisitor extends BaseTreeVisitor {
     private List<FunctionDef> functionDefs = new ArrayList<>();
 

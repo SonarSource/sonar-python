@@ -58,13 +58,10 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       if (functionSymbol.hasVariadicParameter()) {
         return;
       }
-      boolean isStaticCall = false;
-      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-        isStaticCall = TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
-          .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
-          .isPresent();
-      }
+      boolean isStaticCall = callExpression.callee().is(Tree.Kind.NAME) || Optional.of(callExpression.callee())
+        .filter(c -> c.is(Tree.Kind.QUALIFIED_EXPR))
+        .flatMap(q -> TreeUtils.getSymbolFromTree(((QualifiedExpression) q).qualifier()).filter(s -> s.is(Symbol.Kind.CLASS)))
+        .isPresent();
       checkFunctionCall(ctx, callExpression, functionSymbol, isStaticCall);
     });
   }

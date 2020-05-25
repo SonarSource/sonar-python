@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -67,13 +68,10 @@ public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
         return;
       }
       FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
-      boolean isStaticCall = false;
-      if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-        QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
-        isStaticCall = TreeUtils.getSymbolFromTree(qualifiedExpression.qualifier())
-          .filter(s -> s.is(Symbol.Kind.CLASS))
-          .isPresent();
-      }
+      boolean isStaticCall = callExpression.callee().is(Tree.Kind.NAME) || Optional.of(callExpression.callee())
+        .filter(c -> c.is(Tree.Kind.QUALIFIED_EXPR))
+        .flatMap(q -> TreeUtils.getSymbolFromTree(((QualifiedExpression) q).qualifier()).filter(s -> s.is(Symbol.Kind.CLASS)))
+        .isPresent();
       int firstParameterOffset = SymbolUtils.firstParameterOffset(functionSymbol, isStaticCall);
       if (isException(functionSymbol) || firstParameterOffset == -1) {
         return;
