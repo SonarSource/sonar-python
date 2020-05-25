@@ -23,6 +23,7 @@ import com.google.common.annotations.Beta;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.LocationInFile;
 
 public interface ClassSymbol extends Symbol {
@@ -32,6 +33,7 @@ public interface ClassSymbol extends Symbol {
 
   Set<Symbol> declaredMembers();
 
+  @CheckForNull
   LocationInFile definitionLocation();
 
   @Beta

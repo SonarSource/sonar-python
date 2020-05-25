@@ -29,7 +29,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -42,6 +41,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
+
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 
 class Scope {
@@ -130,8 +130,9 @@ class Scope {
     if (symbol.is(Symbol.Kind.FUNCTION)) {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
     } else if (symbol.is(Symbol.Kind.CLASS)) {
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl((ClassSymbol) symbol);
       ClassSymbolImpl originalClassSymbol = (ClassSymbolImpl) symbol;
+      // Must use symbolName to preserve import aliases
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation());
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = globalSymbolsByFQN.get(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {

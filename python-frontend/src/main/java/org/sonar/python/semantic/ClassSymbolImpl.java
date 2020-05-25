@@ -67,20 +67,18 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
-    super(name, fullyQualifiedName);
-    this.setKind(Kind.CLASS);
-    classDefinitionLocation = null;
+    this(name, fullyQualifiedName, null);
   }
 
-  public ClassSymbolImpl(ClassSymbol classSymbol) {
-    super(classSymbol.name(), classSymbol.fullyQualifiedName());
-    classDefinitionLocation = classSymbol.definitionLocation();
+  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation) {
+    super(name, fullyQualifiedName);
+    classDefinitionLocation = definitionLocation;
     setKind(Kind.CLASS);
   }
 
   @Override
   ClassSymbolImpl copyWithoutUsages() {
-    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(this);
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation());
     for (Symbol superClass : superClasses()) {
       if (superClass == this) {
         copiedClassSymbol.superClasses.add(copiedClassSymbol);
