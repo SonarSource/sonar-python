@@ -19,7 +19,9 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,13 +44,22 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
       throw new IllegalArgumentException("Ambiguous symbol should contain at least two symbols");
     }
     Symbol firstSymbol = symbols.iterator().next();
+    String resultingSymbolName = firstSymbol.name();
     if (!symbols.stream().map(Symbol::name).allMatch(symbolName -> symbolName.equals(firstSymbol.name()))) {
-      throw new IllegalArgumentException("Ambiguous symbol should contain symbols with the same name");
+      if (!symbols.stream().map(Symbol::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
+        throw new IllegalArgumentException("Ambiguous symbol should contain symbols with the same name");
+      }
+      // Here we have symbols having same FQN but different local names, so we cannot assign any name to resulting value
+      resultingSymbolName = "";
     }
     if (!symbols.stream().map(Symbol::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
-      return new AmbiguousSymbolImpl(firstSymbol.name(), null, symbols);
+      return new AmbiguousSymbolImpl(resultingSymbolName, null, symbols);
     }
-    return new AmbiguousSymbolImpl(firstSymbol.name(), firstSymbol.fullyQualifiedName(), symbols);
+    return new AmbiguousSymbolImpl(resultingSymbolName, firstSymbol.fullyQualifiedName(), symbols);
+  }
+
+  public static AmbiguousSymbol create(Symbol... symbols) {
+    return create(new HashSet<>(Arrays.asList(symbols)));
   }
 
   @Override

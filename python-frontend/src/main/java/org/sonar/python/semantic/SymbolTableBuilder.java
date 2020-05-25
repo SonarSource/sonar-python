@@ -356,7 +356,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         : null;
       if (importFrom.isWildcardImport()) {
         Set<Symbol> importedModuleSymbols = projectLevelSymbolTable.getSymbolsFromModule(moduleName);
-        if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName) && !isTypeShedFile(pythonFile)) {
+        if (importedModuleSymbols == null && moduleName != null && !moduleName.equals(fullyQualifiedModuleName)) {
           importedModuleSymbols = TypeShed.symbolsForModule(moduleName);
         }
         if (importedModuleSymbols != null && !importedModuleSymbols.isEmpty()) {
@@ -374,15 +374,19 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, List<Token> dottedPrefix) {
       importedNames.forEach(module -> {
         Name nameTree = module.dottedName().names().get(0);
-        String fullyQualifiedName = fromModuleName != null
-          ? (fromModuleName + "." + nameTree.name())
+        String targetModuleName = fromModuleName;
+        String fullyQualifiedName = targetModuleName != null
+          ? (targetModuleName + "." + nameTree.name())
           : nameTree.name();
         if (!dottedPrefix.isEmpty()) {
           fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
+          if (targetModuleName != null) {
+            targetModuleName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, targetModuleName);
+          }
         }
         Name alias = module.alias();
-        if (fromModuleName != null) {
-          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, fromModuleName);
+        if (targetModuleName != null) {
+          currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, targetModuleName);
         } else if (alias != null) {
           String fullName = module.dottedName().names().stream().map(Name::name).collect(Collectors.joining("."));
           currentScope().addModuleSymbol(alias, fullName);
@@ -398,7 +402,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       if (filePath == null || dottedPrefix.size() > filePath.size()) {
         return null;
       }
-      String resolvedPackageName = String.join("", filePath.subList(0, filePath.size() - dottedPrefix.size()));
+      String resolvedPackageName = String.join(".", filePath.subList(0, filePath.size() - dottedPrefix.size()));
       return resolvedPackageName.isEmpty() ? moduleName : (resolvedPackageName + "." + moduleName);
     }
 

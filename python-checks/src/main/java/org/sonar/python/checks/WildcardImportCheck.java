@@ -84,7 +84,7 @@ public class WildcardImportCheck extends PythonSubscriptionCheck {
     @Override
     public void visitCallExpression(CallExpression pyCallExpressionTree) {
       Symbol symbol = pyCallExpressionTree.calleeSymbol();
-      this.raiseIssuesIf(() -> symbol == null || !"warnings.warn".equals(symbol.fullyQualifiedName()));
+      this.raiseIssuesIf(() -> symbol == null || !"_warnings.warn".equals(symbol.fullyQualifiedName()));
     }
 
     private void raiseIssuesIf(BooleanSupplier condition) {
