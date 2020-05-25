@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -199,6 +200,13 @@ public class FullyQualifiedNameTest {
     );
     Name b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
     assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.b");
+
+    tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "from .other_module import b"
+    );
+    b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals("b"));
+    assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.other_module.b");
 
     // no package
     tree = parse(
