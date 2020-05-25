@@ -216,15 +216,10 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       // Avoid potential FPs with properties: only report on limited selection of "safe" decorators
       return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
     }
-    return symbol.is(Symbol.Kind.AMBIGUOUS) && ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(ConstantConditionCheck::isClassOrFunction);
+    return false;
   }
 
   private static LocationInFile locationForClassOrFunction(Symbol symbol) {
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
-      return ((FunctionSymbol) symbol).definitionLocation();
-    } else if (symbol.is(Symbol.Kind.CLASS)) {
-      return ((ClassSymbol) symbol).definitionLocation();
-    }
-    return null;
+    return symbol.is(Symbol.Kind.CLASS) ? ((ClassSymbol) symbol).definitionLocation() : ((FunctionSymbol) symbol).definitionLocation();
   }
 }

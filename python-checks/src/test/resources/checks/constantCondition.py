@@ -152,7 +152,9 @@ def functions():
 
   if myfunction:  # Noncompliant
       pass
-  elif round:  # Noncompliant
+  elif round:  # FN (ambiguous symbol)
+      pass
+  elif float.__add__: # Noncompliant
       pass
 
 def class_and_methods():
@@ -184,7 +186,7 @@ def ambiguous_symbols():
     class ambiguous_class_or_function: ...
   else:
     def ambiguous_class_or_function(): ...
-  if ambiguous_class_or_function: ... # Noncompliant
+  if ambiguous_class_or_function: ... # OK
 
   if cond():
       class true_ambiguous: ...
