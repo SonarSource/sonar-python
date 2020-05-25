@@ -49,6 +49,7 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
       if (!symbols.stream().map(Symbol::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
         throw new IllegalArgumentException("Ambiguous symbol should contain symbols with the same name");
       }
+      // Here we have symbols having same FQN but different local names, so we cannot assign any name to resulting value
       resultingSymbolName = "";
     }
     if (!symbols.stream().map(Symbol::fullyQualifiedName).allMatch(fqn -> Objects.equals(firstSymbol.fullyQualifiedName(), fqn))) {
@@ -57,8 +58,8 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
     return new AmbiguousSymbolImpl(resultingSymbolName, firstSymbol.fullyQualifiedName(), symbols);
   }
 
-  public static AmbiguousSymbol mergeTwoSymbols(Symbol symbol1, Symbol symbol2) {
-    return create(new HashSet<>(Arrays.asList(symbol1, symbol2)));
+  public static AmbiguousSymbol create(Symbol... symbols) {
+    return create(new HashSet<>(Arrays.asList(symbols)));
   }
 
   @Override

@@ -146,14 +146,15 @@ public class TypeShedTest {
 
   @Test
   public void package_relative_import() {
-    Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::mergeTwoSymbols));
+    Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
     Symbol sysSymbol = osSymbols.get("sys");
     assertThat(sysSymbol.kind()).isEqualTo(Kind.AMBIGUOUS);
 
     Symbol timesResult = osSymbols.get("times_result");
     assertThat(timesResult.kind()).isEqualTo(Kind.CLASS);
+    assertThat(timesResult.fullyQualifiedName()).isEqualTo("posix.times_result");
 
-    Map<String, Symbol> requestsSymbols = TypeShed.symbolsForModule("requests").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::mergeTwoSymbols));
+    Map<String, Symbol> requestsSymbols = TypeShed.symbolsForModule("requests").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
     Symbol requestSymbol = requestsSymbols.get("request");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(requestSymbol.fullyQualifiedName()).isEqualTo("requests.api.request");

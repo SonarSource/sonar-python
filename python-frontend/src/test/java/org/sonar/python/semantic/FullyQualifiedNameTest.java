@@ -298,17 +298,6 @@ public class FullyQualifiedNameTest {
     assertThat(callExpression.calleeSymbol().usages()).extracting(Usage::kind).containsExactly(Usage.Kind.OTHER, Usage.Kind.OTHER);
   }
 
-  @Test
-  public void import_wildcard() {
-    FileInput tree = parse(
-      new SymbolTableBuilder("", pythonFile("my_module.py")),
-      "from my_module import *",
-      "from . import *"
-    );
-    ImportFrom importStatement = getFirstChild(tree, t -> t.is(Tree.Kind.IMPORT_FROM));
-    assertThat(importStatement.hasUnresolvedWildcardImport()).isTrue();
-  }
-
   private static Name getNameEqualTo(FileInput tree, String strName) {
     return getFirstChild(tree, t -> t.is(Tree.Kind.NAME) && ((Name) t).name().equals(strName));
   }
