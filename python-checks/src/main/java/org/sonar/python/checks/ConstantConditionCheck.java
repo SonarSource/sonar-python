@@ -23,8 +23,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
@@ -182,7 +184,7 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
     if (expression.is(NAME) || expression.is(QUALIFIED_EXPR)) {
       Symbol symbol = ((HasSymbol) expression).symbol();
       if (symbol != null && isClassOrFunction(symbol)) {
-        addIssue(expression, MESSAGE);
+        raiseIssueOnClassOrFunction(expression, symbol);
         return;
       }
     }
@@ -197,6 +199,15 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
     }
   }
 
+  private void raiseIssueOnClassOrFunction(Expression expression, Symbol symbol) {
+    PreciseIssue issue = addIssue(expression, MESSAGE);
+    LocationInFile locationInFile = locationForClassOrFunction(symbol);
+    if (locationInFile != null) {
+      String type = symbol.is(Symbol.Kind.CLASS) ? "Class" : "Function";
+      issue.secondary(locationInFile, String.format("%s definition", type));
+    }
+  }
+
   private static boolean isClassOrFunction(Symbol symbol) {
     if (symbol.is(Symbol.Kind.CLASS)) {
       return true;
@@ -206,5 +217,14 @@ public class ConstantConditionCheck extends PythonVisitorCheck {
       return ACCEPTED_DECORATORS.containsAll(((FunctionSymbol) symbol).decorators());
     }
     return symbol.is(Symbol.Kind.AMBIGUOUS) && ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(ConstantConditionCheck::isClassOrFunction);
+  }
+
+  private static LocationInFile locationForClassOrFunction(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      return ((FunctionSymbol) symbol).definitionLocation();
+    } else if (symbol.is(Symbol.Kind.CLASS)) {
+      return ((ClassSymbol) symbol).definitionLocation();
+    }
+    return null;
   }
 }
