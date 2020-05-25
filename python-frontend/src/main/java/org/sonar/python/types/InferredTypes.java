@@ -71,6 +71,10 @@ public class InferredTypes {
   private InferredTypes() {
   }
 
+  public static boolean isInitialized() {
+    return  builtinSymbols != null;
+  }
+
   public static InferredType anyType() {
     return AnyType.ANY;
   }

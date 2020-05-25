@@ -133,10 +133,19 @@ public class AmbiguousSymbolTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void ambiguous_symbol_creation_different_name() {
+  public void ambiguous_symbol_creation_different_name_different_fqn() {
     SymbolImpl foo = new SymbolImpl("foo", "mod.foo");
     SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
     AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, bar)));
+  }
+
+  @Test
+  public void ambiguous_symbol_creation_different_name_same_fqn() {
+    SymbolImpl foo = new SymbolImpl("foo", "mod.bar");
+    SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
+    AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, bar)));
+    assertThat(ambiguousSymbol.fullyQualifiedName()).isEqualTo("mod.bar");
+    assertThat(ambiguousSymbol.name()).isEmpty();
   }
 
   @Test
