@@ -39,10 +39,10 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.TokenLocation;
 import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final List<Parameter> parameters = new ArrayList<>();
@@ -100,16 +100,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.parameters.addAll(parameters);
     this.functionDefinitionLocation = null;
     this.isStub = true;
-  }
-
-  @CheckForNull
-  private static LocationInFile locationInFile(Tree tree, @Nullable String fileId) {
-    if (fileId == null) {
-      return null;
-    }
-    TokenLocation firstToken = new TokenLocation(tree.firstToken());
-    TokenLocation lastToken = new TokenLocation(tree.lastToken());
-    return new LocationInFile(fileId, firstToken.startLine(), firstToken.startLineOffset(), lastToken.endLine(), lastToken.endLineOffset());
   }
 
   @Override

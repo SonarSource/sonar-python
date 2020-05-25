@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
@@ -54,7 +55,8 @@ public class ProjectLevelSymbolTableTest {
   public void wildcard_import() {
     SymbolImpl exportedA = new SymbolImpl("a", "mod.a");
     SymbolImpl exportedB = new SymbolImpl("b", "mod.b");
-    SymbolImpl exportedC = new ClassSymbolImpl("C", "mod.C");
+    ClassDef classDefC = (ClassDef) parse("class C: pass").statements().statements().get(0);
+    ClassSymbolImpl exportedC = new ClassSymbolImpl(classDefC,  "mod.C", pythonFile("mod.py"));
     List<Symbol> modSymbols = Arrays.asList(exportedA, exportedB, exportedC);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     FileInput tree = parse(
@@ -204,10 +206,13 @@ public class ProjectLevelSymbolTableTest {
 
   @Test
   public void type_hierarchy() {
-    ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
+    ClassDef classDefA = (ClassDef) parse("class A: pass").statements().statements().get(0);
+    ClassSymbolImpl classASymbol = new ClassSymbolImpl(classDefA, "mod1.A", pythonFile("mod1.py"));
     classASymbol.addSuperClass(new SymbolImpl("B", "mod2.B"));
     Set<Symbol> mod1Symbols = Collections.singleton(classASymbol);
-    ClassSymbolImpl classBSymbol = new ClassSymbolImpl("B", "mod2.B");
+
+    ClassDef classDefB = (ClassDef) parse("class B: pass").statements().statements().get(0);
+    ClassSymbolImpl classBSymbol = new ClassSymbolImpl(classDefB,  "mod2.B", pythonFile("mod2.py"));
     Set<Symbol> mod2Symbols = Collections.singleton(classBSymbol);
     Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
     globalSymbols.put("mod1", mod1Symbols);
@@ -244,7 +249,8 @@ public class ProjectLevelSymbolTableTest {
 
   @Test
   public void not_class_symbol_in_super_class() {
-    ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
+    ClassDef classDefA = (ClassDef) parse("class A: pass").statements().statements().get(0);
+    ClassSymbolImpl classASymbol = new ClassSymbolImpl(classDefA, "mod1.A", pythonFile("mod1.py"));
     classASymbol.addSuperClass(new SymbolImpl("foo", "mod1.foo"));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), Collections.singletonMap("mod1", Collections.singleton(classASymbol))),
@@ -261,7 +267,8 @@ public class ProjectLevelSymbolTableTest {
 
   @Test
   public void builtin_symbol_in_super_class() {
-    ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
+    ClassDef classDefA = (ClassDef) parse("class A: pass").statements().statements().get(0);
+    ClassSymbolImpl classASymbol = new ClassSymbolImpl(classDefA, "mod1.A", pythonFile("mod1.py"));
     classASymbol.addSuperClass(new SymbolImpl("BaseException", "BaseException"));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), Collections.singletonMap("mod1", Collections.singleton(classASymbol))),
@@ -278,15 +285,18 @@ public class ProjectLevelSymbolTableTest {
 
   @Test
   public void multi_level_type_hierarchy() {
-    ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
+    ClassDef classDefA = (ClassDef) parse("class A: pass").statements().statements().get(0);
+    ClassSymbolImpl classASymbol = new ClassSymbolImpl(classDefA, "mod1.A", pythonFile("mod1.py"));
     classASymbol.addSuperClass(new SymbolImpl("B", "mod2.B"));
     Set<Symbol> mod1Symbols = Collections.singleton(classASymbol);
 
-    ClassSymbolImpl classBSymbol = new ClassSymbolImpl("B", "mod2.B");
+    ClassDef classDefB = (ClassDef) parse("class B: pass").statements().statements().get(0);
+    ClassSymbolImpl classBSymbol = new ClassSymbolImpl(classDefB,  "mod2.B", pythonFile("mod2.py"));
     classBSymbol.addSuperClass(new SymbolImpl("C", "mod3.C"));
     Set<Symbol> mod2Symbols = Collections.singleton(classBSymbol);
 
-    ClassSymbolImpl classCSymbol = new ClassSymbolImpl("C", "mod3.C");
+    ClassDef classDefC = (ClassDef) parse("class C: pass").statements().statements().get(0);
+    ClassSymbolImpl classCSymbol = new ClassSymbolImpl(classDefC,  "mod3.C", pythonFile("mod3.py"));
     Set<Symbol> mod3Symbols = Collections.singleton(classCSymbol);
 
     Map<String, Set<Symbol>> globalSymbols = new HashMap<>();

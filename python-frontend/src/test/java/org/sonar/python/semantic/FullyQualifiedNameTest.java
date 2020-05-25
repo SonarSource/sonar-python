@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import java.net.URI;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -429,6 +430,7 @@ public class FullyQualifiedNameTest {
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
     PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
     when(pythonFile.fileName()).thenReturn("__init__.py");
+    when(pythonFile.uri()).thenReturn(URI.create("mod/__init__.py"));
     PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
     fileInput = context.rootTree();
     CallExpression callExpression = (CallExpression) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
