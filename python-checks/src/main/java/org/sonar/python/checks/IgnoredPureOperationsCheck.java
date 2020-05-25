@@ -19,25 +19,21 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.InExpression;
-import org.sonar.plugins.python.api.tree.Statement;
-import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2201")
 public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
@@ -45,18 +41,12 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_FORMAT = "The return value of \"%s\" must be used.";
 
   private static final Set<String> PURE_FUNCTIONS = new HashSet<>(Arrays.asList(
-    "list",
     "set",
     "dict",
     "frozenset",
-    "tuple",
     "str",
     "repr",
     "ascii",
-    "chr",
-    "int",
-    "float",
-    "complex",
     "ord",
     "hex",
     "oct",
@@ -65,7 +55,6 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     "bytes",
     "memoryview",
     "bytearray",
-    "hash",
     "abs",
     "round",
     "min",
@@ -73,14 +62,10 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     "divmod",
     "sum",
     "pow",
-    "all",
-    "any",
     "sorted",
     "filter",
     "enumerate",
     "reversed",
-    "len",
-    "iter",
     "range",
     "slice",
     "zip",
@@ -99,15 +84,11 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     "vars",
     "locals",
     "globals",
-    "getattr",
-    "hasattr",
-    "compile",
     "super",
     "str.capitalize",
     "str.casefold",
     "str.center",
     "str.count",
-    "str.encode",
     "str.endswith",
     "str.expandtabs",
     "str.find",
@@ -299,90 +280,49 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     ));
   }
 
-  private static class IgnoredPureOperation {
-    private Tree location;
-    private String functionName;
-
-    public IgnoredPureOperation(Tree location, String functionName) {
-      this.location = location;
-      this.functionName = functionName;
-    }
-  }
-
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.STATEMENT_LIST, ctx -> {
-      StatementList statementList = (StatementList) ctx.syntaxNode();
-
-      int numIssueStatements = 0;
-      List<IgnoredPureOperation> issueExpressions = new ArrayList<>();
-
-      for (Statement statement : statementList.statements()) {
-        if (statement.is(Tree.Kind.EXPRESSION_STMT)) {
-          ExpressionStatement expressionStatement = (ExpressionStatement) statement;
-          List<IgnoredPureOperation> issuesInExpressionStmt = getStatementIssues(expressionStatement);
-          issueExpressions.addAll(issuesInExpressionStmt);
-          if (!issuesInExpressionStmt.isEmpty()) {
-            numIssueStatements += 1;
-          }
-        }
+    context.registerSyntaxNodeConsumer(Tree.Kind.EXPRESSION_STMT, ctx -> {
+      ExpressionStatement expressionStatement = (ExpressionStatement) ctx.syntaxNode();
+      if (TreeUtils.firstAncestor(expressionStatement, IgnoredPureOperationsCheck::isInTryBlock) != null) {
+        return;
       }
 
-      if (!isExceptionalStatement(statementList, numIssueStatements)) {
-        issueExpressions.forEach(issue -> ctx.addIssue(issue.location, String.format(MESSAGE_FORMAT, issue.functionName)));
-      }
+      expressionStatement.expressions().forEach(expression -> checkExpression(ctx, expression));
     });
   }
 
-  private static List<IgnoredPureOperation> getStatementIssues(ExpressionStatement expressionStatement) {
-    return expressionStatement.expressions().stream()
-      .map(IgnoredPureOperationsCheck::checkExpression)
-      .filter(Objects::nonNull)
-      .collect(Collectors.toList());
-  }
-
-  private static IgnoredPureOperation checkExpression(Expression expression) {
+  private static void checkExpression(SubscriptionContext ctx, Expression expression) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       Symbol symbol = callExpression.calleeSymbol();
       if (symbol == null) {
-        return null;
+        return;
       }
 
       String fqn = symbol.fullyQualifiedName();
       if (fqn != null && PURE_FUNCTIONS.contains(fqn)) {
-        return new IgnoredPureOperation(callExpression.callee(), fqn);
+        ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, fqn));
       }
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
       InferredType type = subscriptionExpression.object().type();
       if (PURE_GETITEM_TYPES.stream().anyMatch(type::canOnlyBe)) {
-        return new IgnoredPureOperation(subscriptionExpression, "__getitem__");
+        ctx.addIssue(subscriptionExpression, String.format(MESSAGE_FORMAT, "__getitem__"));
       }
     } else if (expression.is(Tree.Kind.IN)) {
       InExpression inExpression = (InExpression) expression;
       InferredType type = inExpression.rightOperand().type();
       if (PURE_CONTAINS_TYPES.stream().anyMatch(type::canOnlyBe)) {
-        return new IgnoredPureOperation(inExpression, "__contains__");
+        ctx.addIssue(inExpression, String.format(MESSAGE_FORMAT, "__contains__"));
       }
     }
-
-    return null;
   }
 
-  private static boolean isExceptionalStatement(StatementList statementList, int numIssueStatements) {
-    if (!statementList.parent().is(Tree.Kind.TRY_STMT)) {
-      return false;
-    }
-
-    if (numIssueStatements == statementList.statements().size()) {
-      // Do not raise if all statements would be raising in a 'try' block.
-      return true;
-    }
-
-    // Do not raise if there are two statements and the other statement is a "return", a "break" or a "continue".
-    return statementList.statements().size() == 2
-      && statementList.statements().get(1).is(Tree.Kind.RETURN_STMT, Tree.Kind.BREAK_STMT, Tree.Kind.CONTINUE_STMT);
+  private static boolean isInTryBlock(Tree tree) {
+    // We need a direct STATEMENT_LIST descendant of a TRY_STATEMENT, other clauses are
+    // descendants of except or finally clauses.
+    return tree.is(Tree.Kind.STATEMENT_LIST) && tree.parent().is(Tree.Kind.TRY_STMT);
   }
 
 }
