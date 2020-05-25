@@ -73,6 +73,8 @@ public class TypeShed {
   }
 
   public static Map<String, Symbol> builtinSymbols() {
+    // InferredTypes class initialization requires builtInSymbols to be computed. Calling dummy method
+    // from it explicitly to overcome the issue of TypeShed.builtins being assigned twice
     if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
       Map<String, Symbol> builtins = new HashMap<>();
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));

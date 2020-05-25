@@ -187,7 +187,6 @@ class Scope {
     String symbolName = nameTree.name();
     Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
     if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
-      //FIXME: Resolve imports from TypeShed files without trying to resolve cyclic dependencies
       globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
     }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
