@@ -188,8 +188,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           alternativeDefinitions.add(functionSymbol);
           break;
         case CLASS_DECLARATION:
-          ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbol.name(), symbol.fullyQualifiedName());
           ClassDef classDef = (ClassDef) bindingUsage.tree().parent();
+          ClassSymbolImpl classSymbol = new ClassSymbolImpl(classDef, symbol.fullyQualifiedName(), pythonFile);
           resolveTypeHierarchy(classDef, classSymbol, pythonFile, scopesByRootTree.get(fileInput).symbolsByName);
           Scope classScope = scopesByRootTree.get(classDef);
           classSymbol.addMembers(getClassMembers(classScope.symbolsByName, classScope.instanceAttributesByName));

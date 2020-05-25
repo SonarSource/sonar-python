@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -48,6 +49,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
 
 public class TreeUtils {
@@ -251,5 +253,15 @@ public class TreeUtils {
       return name.equals("True") || name.equals("False");
     }
     return false;
+  }
+
+  @CheckForNull
+  public static LocationInFile locationInFile(Tree tree, @Nullable String fileId) {
+    if (fileId == null) {
+      return null;
+    }
+    TokenLocation firstToken = new TokenLocation(tree.firstToken());
+    TokenLocation lastToken = new TokenLocation(tree.lastToken());
+    return new LocationInFile(fileId, firstToken.startLine(), firstToken.startLineOffset(), lastToken.endLine(), lastToken.endLineOffset());
   }
 }

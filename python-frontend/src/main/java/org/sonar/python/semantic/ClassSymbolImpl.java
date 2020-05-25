@@ -20,6 +20,7 @@
 package org.sonar.python.semantic;
 
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,9 +33,15 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
+
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
@@ -46,15 +53,32 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private Map<String, Symbol> membersByName = null;
   private boolean hasAlreadyReadSuperClasses = false;
   private boolean hasAlreadyReadMembers = false;
+  private final LocationInFile classDefinitionLocation;
+
+  public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
+    super(classDef.name().name(), fullyQualifiedName);
+    this.setKind(Kind.CLASS);
+    String fileId = null;
+    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+      Path path = pathOf(pythonFile);
+      fileId = path != null ? path.toString() : pythonFile.toString();
+    }
+    classDefinitionLocation = locationInFile(classDef.name(), fileId);
+  }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
+    this(name, fullyQualifiedName, null);
+  }
+
+  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation) {
     super(name, fullyQualifiedName);
-    this.setKind(Kind.CLASS);
+    classDefinitionLocation = definitionLocation;
+    setKind(Kind.CLASS);
   }
 
   @Override
   ClassSymbolImpl copyWithoutUsages() {
-    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName());
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation());
     for (Symbol superClass : superClasses()) {
       if (superClass == this) {
         copiedClassSymbol.superClasses.add(copiedClassSymbol);
@@ -121,6 +145,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       }
     }
     return Optional.empty();
+  }
+
+  @Override
+  public LocationInFile definitionLocation() {
+    return classDefinitionLocation;
   }
 
   @Override

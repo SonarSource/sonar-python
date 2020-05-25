@@ -23,6 +23,8 @@ import com.google.common.annotations.Beta;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.LocationInFile;
 
 public interface ClassSymbol extends Symbol {
   List<Symbol> superClasses();
@@ -30,6 +32,9 @@ public interface ClassSymbol extends Symbol {
   boolean hasUnresolvedTypeHierarchy();
 
   Set<Symbol> declaredMembers();
+
+  @CheckForNull
+  LocationInFile definitionLocation();
 
   @Beta
   Optional<Symbol> resolveMember(String memberName);

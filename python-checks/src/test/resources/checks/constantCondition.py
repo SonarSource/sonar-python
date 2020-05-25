@@ -152,11 +152,14 @@ def functions():
 
   if myfunction:  # Noncompliant
       pass
-  elif round:  # Noncompliant
+  elif round:  # FN (ambiguous symbol)
+      pass
+  elif float.__add__: # Noncompliant
       pass
 
 def class_and_methods():
   class MyClass:
+  #     ^^^^^^^> {{Class definition.}}
     def mymethod(self): ...
     @staticmethod
     def mystaticmethod(): ...
@@ -169,7 +172,8 @@ def class_and_methods():
 
   myinstance = MyClass()
 
-  if MyClass: ... # Noncompliant
+  if MyClass: ... # Noncompliant {{Replace this expression; used as a condition it will always be constant.}}
+  #  ^^^^^^^
   elif MyClass.mymethod: ...   # Noncompliant
   elif myinstance.mymethod: ...   # Noncompliant
   elif myinstance.mystaticmethod: ...   # Noncompliant
@@ -182,7 +186,7 @@ def ambiguous_symbols():
     class ambiguous_class_or_function: ...
   else:
     def ambiguous_class_or_function(): ...
-  if ambiguous_class_or_function: ... # Noncompliant
+  if ambiguous_class_or_function: ... # OK
 
   if cond():
       class true_ambiguous: ...

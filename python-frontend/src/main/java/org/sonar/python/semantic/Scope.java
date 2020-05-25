@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
+
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 
 class Scope {
@@ -129,8 +130,9 @@ class Scope {
     if (symbol.is(Symbol.Kind.FUNCTION)) {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
     } else if (symbol.is(Symbol.Kind.CLASS)) {
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, symbol.fullyQualifiedName());
       ClassSymbolImpl originalClassSymbol = (ClassSymbolImpl) symbol;
+      // Must use symbolName to preserve import aliases
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation());
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = globalSymbolsByFQN.get(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
@@ -254,7 +256,7 @@ class Scope {
     if (isExistingSymbol(symbolName)) {
       addBindingUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
     } else {
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, fullyQualifiedName);
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(classDef, fullyQualifiedName, pythonFile);
       symbols.add(classSymbol);
       symbolsByName.put(symbolName, classSymbol);
       classSymbol.addUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION);
