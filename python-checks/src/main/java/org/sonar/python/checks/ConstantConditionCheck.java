@@ -25,7 +25,6 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
