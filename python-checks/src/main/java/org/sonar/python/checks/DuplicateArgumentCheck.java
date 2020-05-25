@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -40,6 +41,7 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -61,7 +63,10 @@ public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
         return;
       }
       FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
-      boolean isStaticCall = TreeUtils.isStaticCall(callExpression);
+      boolean isStaticCall = callExpression.callee().is(Tree.Kind.NAME) || Optional.of(callExpression.callee())
+        .filter(c -> c.is(Tree.Kind.QUALIFIED_EXPR))
+        .flatMap(q -> TreeUtils.getSymbolFromTree(((QualifiedExpression) q).qualifier()).filter(s -> s.is(Symbol.Kind.CLASS)))
+        .isPresent();
       int firstParameterOffset = SymbolUtils.firstParameterOffset(functionSymbol, isStaticCall);
       if (isException(functionSymbol) || firstParameterOffset == -1) {
         return;

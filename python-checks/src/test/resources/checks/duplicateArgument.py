@@ -127,4 +127,9 @@ class StaticCallInsideClass:
   def my_method(a, b): ...
   my_method(1,b=2) # OK
 
-
+def not_static_call():
+  class MyClass:
+    def foo(self, x): ...
+  a = MyClass()
+  f = a.foo
+  f(42, x=42) # FN
