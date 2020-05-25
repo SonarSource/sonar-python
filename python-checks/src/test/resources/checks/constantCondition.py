@@ -157,6 +157,7 @@ def functions():
 
 def class_and_methods():
   class MyClass:
+  #     ^^^^^^^> {{Class definition.}}
     def mymethod(self): ...
     @staticmethod
     def mystaticmethod(): ...
@@ -169,7 +170,8 @@ def class_and_methods():
 
   myinstance = MyClass()
 
-  if MyClass: ... # Noncompliant
+  if MyClass: ... # Noncompliant {{Replace this expression; used as a condition it will always be constant.}}
+  #  ^^^^^^^
   elif MyClass.mymethod: ...   # Noncompliant
   elif myinstance.mymethod: ...   # Noncompliant
   elif myinstance.mystaticmethod: ...   # Noncompliant
