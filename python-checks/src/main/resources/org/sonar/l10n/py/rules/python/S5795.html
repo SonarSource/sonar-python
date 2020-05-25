@@ -7,8 +7,13 @@ If you need to compare these types you should use instead equality operators <co
 chance as other integer values are not cached, for example <code>int("1000") is 1000</code> will always be <code>False</code>. This behavior is not
 part of Python language specification and could vary between interpreters. CPython 3.8 even <a
 href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">warns about comparing literals using identity operators</a>.</p>
-<p>This rule raises an issue when at least one operand of an identity operator is of type <code>int</code>, <code>bytes</code>, <code>float</code>,
-<code>str</code>, <code>frozenset</code> or <code>tuple</code>.</p>
+<p>The only case where using the "is" operator with a cached type is ok is with "interned" strings. Note however that interned strings don't
+necessarily have the same identity as string literals.</p>
+<p>This rule raises an issue when at least one operand of an identity operator:</p>
+<ul>
+  <li> is of type <code>int</code>, <code>bytes</code>, <code>float</code>, <code>frozenset</code> or <code>tuple</code>. </li>
+  <li> or it is a string literal. </li>
+</ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
 def literal_comparison(param):
@@ -16,6 +21,15 @@ def literal_comparison(param):
 
 literal_comparison(2000)  # will return True
 literal_comparison(int("2000"))  # will return False
+
+() is tuple()  # Noncompliant. Always True
+(1,) is tuple([1])  # Noncompliant. Always False
+
+from sys import intern
+
+with open("test.txt") as f:  # test.txt contains "blabla\n"
+    text = f.read()
+intern(text) is "blabla\n"  # Noncompliant. Always False
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -24,6 +38,15 @@ def literal_comparison(param):
 
 literal_comparison(2000)  # will return True
 literal_comparison(int("2000"))  # will return True
+
+() == tuple()  # Always True
+(1,) == tuple([1])  # Always True
+
+from sys import intern
+
+with open("tmp/test.txt") as f:  # test.txt contains "blabla\n"
+    text = f.read()
+intern(text) is intern("blabla\n")  # Always True
 </pre>
 <h2>See</h2>
 <ul>
@@ -31,5 +54,6 @@ literal_comparison(int("2000"))  # will return True
   with literals?</a> - Adam Johnson </li>
   <li> <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs identity</a> - Trey Hunner
   </li>
+  <li> <a href="https://docs.python.org/3.7/library/sys.html?highlight=sys.intern#sys.intern">Python documentation - sys.intern</a> </li>
 </ul>
 

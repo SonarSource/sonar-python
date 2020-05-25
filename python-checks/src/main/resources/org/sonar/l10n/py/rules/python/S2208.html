@@ -35,6 +35,15 @@ print(m_exp(0))   # "1.0" will be printed
 </pre>
 <h2>Exceptions</h2>
 <p>No issue will be raised in <code>__init__.py</code> files. Wildcard imports are a common way of populating these modules.</p>
+<p>No issue will be raised in modules doing only imports. Local modules are sometimes created as a proxy for third-party modules.</p>
+<pre>
+# file: mylibrary/pyplot.py
+try:
+    from guiqwt.pyplot import *  # Ok
+except Exception:
+    from matplotlib.pyplot import *  # Ok
+</pre>
+<p>Just keep in mind that wildcard imports might still create issues in these cases. It's always better to import only what you need.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.8/reference/simple_stmts.html#import">Python documentation - The import statement</a> </li>

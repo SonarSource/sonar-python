@@ -5,7 +5,7 @@ def func(x):
     if not isinstance(x, int):
         TypeError("Wrong type for parameter 'x'. func expects an integer")  # Noncompliant
     if x &lt; 0:
-        ValueError
+        ValueError  # Noncompliant
     return x + 42
 </pre>
 <h2>Compliant Solution</h2>
