@@ -1,7 +1,6 @@
 def basic_calls():
     round(1.3) # Noncompliant {{The return value of "round" must be used.}}
    #^^^^^
-    list([1, 2])  # Noncompliant
     x = round(1.3)
     x = y = round(1.3)
     round(1.3) + round(1.2)
@@ -52,35 +51,17 @@ def calling_instance_methods_via_string():
 
 def exceptions_in_try_blocks():
     try:
-        int("abc") # Ok
+        round(3.14) # Ok
     except ValueError as e:
-        int("abc")  # Noncompliant
+        round(3.14)  # Noncompliant
 
     try:
-        int("abc") # Ok
+        round(3.14) # Ok
+        if x:
+            round(3.14) # Ok
         return
     except ValueError as e:
-        pass
-
-    # We only allow the above behavior if there are only 2 statements in the try block
-    try:
-        int("abc") # Noncompliant
-        int("abc") # Noncompliant
-        return
-    except ValueError as e:
-        pass
-
-    try:
-        int("abc")  # Ok
-        int("cde")  # Ok
-    except ValueError as e:
-        pass
-
-    try:
-        x = int("abc")  # Ok
-        y - int("cde")  # Ok
-    except ValueError as e:
-        pass
+        round(3.14)  # Noncompliant
 
 def edge_case():
     round = 1
