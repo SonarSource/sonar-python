@@ -29,6 +29,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -129,7 +130,7 @@ class Scope {
     if (symbol.is(Symbol.Kind.FUNCTION)) {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
     } else if (symbol.is(Symbol.Kind.CLASS)) {
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, symbol.fullyQualifiedName());
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl((ClassSymbol) symbol);
       ClassSymbolImpl originalClassSymbol = (ClassSymbolImpl) symbol;
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = globalSymbolsByFQN.get(originalSymbol.fullyQualifiedName());
@@ -254,7 +255,7 @@ class Scope {
     if (isExistingSymbol(symbolName)) {
       addBindingUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION, fullyQualifiedName);
     } else {
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, fullyQualifiedName);
+      ClassSymbolImpl classSymbol = new ClassSymbolImpl(classDef, fullyQualifiedName, pythonFile);
       symbols.add(classSymbol);
       symbolsByName.put(symbolName, classSymbol);
       classSymbol.addUsage(classDef.name(), Usage.Kind.CLASS_DECLARATION);
