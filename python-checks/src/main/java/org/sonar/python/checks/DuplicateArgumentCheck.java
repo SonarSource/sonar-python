@@ -204,6 +204,8 @@ public class DuplicateArgumentCheck extends PythonSubscriptionCheck {
     return false;
   }
 
+  // Currently, secondary locations reported through a LocationInFile constitute a single issue flow
+  // Therefore, all secondary locations for this check are reported that way so they belong to the same flow
   static LocationInFile locationFromTree(Tree tree, SubscriptionContext ctx) {
     PythonFile pythonFile = ctx.pythonFile();
     Path path = pathOf(pythonFile);
