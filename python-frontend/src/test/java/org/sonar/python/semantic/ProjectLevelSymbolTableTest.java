@@ -582,4 +582,16 @@ public class ProjectLevelSymbolTableTest {
     Set<Symbol> globalSymbols = globalSymbols(tree, "");
     assertThat(globalSymbols).isEmpty();
   }
+
+  @Test
+  public void imports_wont_trigger_typeshed_lookup() {
+    // Imports from the file with the same name and with null name won't trigger TypeShed.symbolWithFQN
+    FileInput tree = parse(
+      new SymbolTableBuilder("", pythonFile("os.py"), empty()),
+      "from os import *",
+      "from . import *"
+    );
+    ImportFrom importFrom = ((ImportFrom) PythonTestUtils.getAllDescendant(tree, t -> t.is(Tree.Kind.IMPORT_FROM)).get(0));
+    assertThat(importFrom.hasUnresolvedWildcardImport()).isTrue();
+  }
 }
