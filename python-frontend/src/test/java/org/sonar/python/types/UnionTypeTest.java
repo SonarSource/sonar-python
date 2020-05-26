@@ -75,12 +75,13 @@ public class UnionTypeTest {
   public void resolveMember() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl foo = new SymbolImpl("foo", null);
-    x.addMembers(Arrays.asList(foo, new SymbolImpl("bar", null)));
+    SymbolImpl bar = new SymbolImpl("bar", null);
+    x.addMembers(Arrays.asList(foo, bar));
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
     ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
     z.addMembers(Collections.singleton(new SymbolImpl("bar", null)));
     assertThat(or(runtimeType(x), runtimeType(y)).resolveMember("foo")).contains(foo);
-    assertThat(or(runtimeType(x), runtimeType(z)).resolveMember("bar")).isEmpty();
+    assertThat(((AmbiguousSymbolImpl)or(runtimeType(x), runtimeType(z)).resolveMember("bar").orElse(null)).alternatives()).contains(bar);
     assertThat(or(runtimeType(x), runtimeType(z)).resolveMember("xxx")).isEmpty();
 
     ClassSymbolImpl classWithUnresolvedHierarchy = new ClassSymbolImpl("u", "u");
