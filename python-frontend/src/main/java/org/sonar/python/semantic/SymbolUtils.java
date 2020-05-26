@@ -212,7 +212,6 @@ public class SymbolUtils {
       classSymbol("Mail", "flask_mail.Mail", "send", SEND_MESSAGE),
       classSymbol("Connection", "flask_mail.Connection", "send", SEND_MESSAGE)
       )));
-    globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(classSymbol("SimpleCookie", "http.cookies.SimpleCookie"))));
 
     globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
       classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),
