@@ -470,7 +470,6 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitFormatSpecifier(FormatSpecifier formatSpecifier) {
-    scan(formatSpecifier.columnToken());
     scan(formatSpecifier.formatExpressions());
   }
 }
