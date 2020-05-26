@@ -65,6 +65,7 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.ForStatement;
+import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
@@ -1950,6 +1951,27 @@ public class PythonTreeMakerTest extends RuleTest {
     FormattedExpression formattedBar = elmt.formattedExpressions().get(1);
     assertThat(formattedBar.expression().is(Kind.NAME)).isTrue();
     assertThat(formattedBar.equalToken()).isNull();
+  }
+
+  @Test
+  public void string_interpolation_nested_expressions_in_format_specifier() {
+    setRootRule(PythonGrammar.ATOM);
+    Expression exp = parse("f'{3.1416:{width}.{prec * 5}}'", treeMaker::expression);
+    StringLiteral stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElement elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    FormattedExpression formattedExpression = elmt.formattedExpressions().get(0);
+
+    FormatSpecifier formatSpecifier = formattedExpression.formatSpecifier();
+    assertThat(formatSpecifier).isNotNull();
+    assertThat(formatSpecifier.getKind()).isEqualTo(Kind.FORMAT_SPECIFIER);
+    assertThat(formatSpecifier.children()).hasSize(3);
+    assertThat(formatSpecifier.formatExpressions()).hasSize(2);
+    assertThat(formatSpecifier.formatExpressions().get(0).expression().is(Tree.Kind.NAME)).isTrue();
+    assertThat(formatSpecifier.formatExpressions().get(1).expression().is(Kind.MULTIPLICATION)).isTrue();
   }
 
   private FormattedExpression parseInterpolated(String interpolatedExpr) {

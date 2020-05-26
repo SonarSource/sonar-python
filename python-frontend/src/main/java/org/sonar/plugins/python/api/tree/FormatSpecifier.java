@@ -19,22 +19,15 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import javax.annotation.CheckForNull;
+import java.util.List;
 
-public interface FormattedExpression extends Tree {
+public interface FormatSpecifier extends Tree {
 
-  Expression expression();
-
-  /**
-   * @return Optional equal specifier introduced in Python 3.8
-   */
-  @CheckForNull
-  Token equalToken();
+  Token columnToken();
 
   /**
-   * @return Optional format specifier.
+   * @return The nested expressions in the format specifier.
    */
-  @CheckForNull
-  FormatSpecifier formatSpecifier();
+  List<FormattedExpression> formatExpressions();
 
 }

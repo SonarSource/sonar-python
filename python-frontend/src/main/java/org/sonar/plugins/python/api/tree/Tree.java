@@ -136,6 +136,8 @@ public interface Tree {
 
     FORMATTED_EXPRESSION(FormattedExpression.class),
 
+    FORMAT_SPECIFIER(FormatSpecifier.class),
+
     TRY_STMT(TryStatement.class),
 
     PARAMETER(Parameter.class),
