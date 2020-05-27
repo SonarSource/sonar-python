@@ -230,18 +230,6 @@ public class SymbolUtils {
       classSymbol("HttpResponse", "django.http.response.HttpResponse")
     )));
 
-    // TODO To be removed once we import 'collections' from typeshed
-    globalSymbols.put("collections", new HashSet<>(Arrays.asList(
-      classSymbol("deque", "collections.deque", EQ),
-      classSymbol("UserList", "collections.UserList", EQ),
-      classSymbol("UserDict", "collections.UserDict", EQ),
-      classSymbol("ChainMap", "collections.ChainMap", EQ),
-      classSymbol("Counter", "collections.Counter", EQ),
-      classSymbol("OrderedDict", "collections.OrderedDict", EQ),
-      classSymbol("defaultdict", "collections.defaultdict", EQ)
-    )));
-
-
     ClassSymbolImpl ldapObject = classSymbol("LDAPObject", "ldap.LDAPObject", "simple_bind", "simple_bind_s", "bind", "bind_s");
     FunctionSymbolImpl initialize = new FunctionSymbolImpl(
       "initialize", "ldap.initialize", false, false, false, Collections.emptyList(),Collections.emptyList());
