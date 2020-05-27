@@ -27,12 +27,12 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -201,6 +201,20 @@ public class FullyQualifiedNameTest {
     );
     Name b = getFirstChild(tree, t -> t.is(Tree.Kind.NAME));
     assertThat(b.symbol().fullyQualifiedName()).isEqualTo("my_package.b");
+
+    tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "from . import b as b"
+    );
+    AliasedName aliasedName = getFirstChild(tree, t -> t.is(Tree.Kind.ALIASED_NAME));
+    assertThat(aliasedName.alias().symbol().fullyQualifiedName()).isEqualTo("my_package.b");
+
+    tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("__init__.py")),
+      "from . import b as b"
+    );
+    aliasedName = getFirstChild(tree, t -> t.is(Tree.Kind.ALIASED_NAME));
+    assertThat(aliasedName.alias().symbol().fullyQualifiedName()).isEqualTo("my_package.b");
 
     tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),

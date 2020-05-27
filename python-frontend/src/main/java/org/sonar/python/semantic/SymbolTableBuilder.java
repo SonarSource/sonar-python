@@ -380,9 +380,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
           : nameTree.name();
         if (!dottedPrefix.isEmpty()) {
           fullyQualifiedName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, fullyQualifiedName);
-          if (targetModuleName != null) {
-            targetModuleName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, targetModuleName);
-          }
+          targetModuleName = resolveFullyQualifiedNameBasedOnRelativeImport(dottedPrefix, targetModuleName);
         }
         Name alias = module.alias();
         if (targetModuleName != null) {
@@ -398,11 +396,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @CheckForNull
-    private String resolveFullyQualifiedNameBasedOnRelativeImport(List<Token> dottedPrefix, String moduleName) {
+    private String resolveFullyQualifiedNameBasedOnRelativeImport(List<Token> dottedPrefix, @Nullable String moduleName) {
       if (filePath == null || dottedPrefix.size() > filePath.size()) {
         return null;
       }
       String resolvedPackageName = String.join(".", filePath.subList(0, filePath.size() - dottedPrefix.size()));
+      if (moduleName == null) {
+        return resolvedPackageName;
+      }
       return resolvedPackageName.isEmpty() ? moduleName : (resolvedPackageName + "." + moduleName);
     }
 
