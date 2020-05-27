@@ -230,10 +230,6 @@ public class SymbolUtils {
       classSymbol("HttpResponse", "django.http.response.HttpResponse")
     )));
 
-    globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
-      classSymbol("Headers", "werkzeug.datastructures.Headers", "set", "setdefault", "__setitem__")
-    )));
-
     // TODO To be removed once we import 'collections' from typeshed
     globalSymbols.put("collections", new HashSet<>(Arrays.asList(
       classSymbol("deque", "collections.deque", EQ),
