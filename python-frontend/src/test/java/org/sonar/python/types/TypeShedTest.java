@@ -161,7 +161,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void flask_response_call_has_different_fqn() {
+  public void package_member_fqn_points_to_original_fqn() {
     Map<String, Symbol> symbols = TypeShed.symbolsForModule("flask").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     Symbol targetSymbol = symbols.get("Response");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");

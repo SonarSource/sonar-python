@@ -212,6 +212,10 @@ public class SymbolUtils {
       classSymbol("Mail", "flask_mail.Mail", "send", SEND_MESSAGE),
       classSymbol("Connection", "flask_mail.Connection", "send", SEND_MESSAGE)
       )));
+    globalSymbols.put("smtplib", new HashSet<>(Arrays.asList(
+      classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
+      classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
+    )));
 
     globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
       classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),

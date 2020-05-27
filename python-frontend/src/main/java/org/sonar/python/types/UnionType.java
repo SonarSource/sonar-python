@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.AmbiguousSymbolImpl;
 
 import static org.sonar.python.types.InferredTypes.anyType;
 
@@ -79,12 +78,7 @@ class UnionType implements InferredType {
       .map(t -> t.resolveMember(memberName))
       .filter(Optional::isPresent)
       .collect(Collectors.toSet());
-    if (resolved.isEmpty()) {
-      return Optional.empty();
-    } else if (resolved.size() == 1) {
-      return resolved.iterator().next();
-    }
-    return Optional.of(AmbiguousSymbolImpl.create(resolved.stream().map(s -> s.orElse(null)).filter(Objects::nonNull).collect(Collectors.toSet())));
+    return resolved.size() == 1 ? resolved.iterator().next() : Optional.empty();
   }
 
   @Override
