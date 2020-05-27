@@ -230,22 +230,6 @@ public class SymbolUtils {
       classSymbol("HttpResponse", "django.http.response.HttpResponse")
     )));
 
-    ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response", SET_COOKIE);
-
-    FunctionSymbolImpl makeResponse = new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList(),
-      Collections.emptyList());
-    makeResponse.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
-
-    FunctionSymbolImpl redirect = new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList(),
-       Collections.emptyList());
-    redirect.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
-
-    globalSymbols.put("flask", new HashSet<>(Arrays.asList(
-      flaskResponse,
-      makeResponse,
-      redirect
-    )));
-
     globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
       classSymbol("Headers", "werkzeug.datastructures.Headers", "set", "setdefault", "__setitem__")
     )));

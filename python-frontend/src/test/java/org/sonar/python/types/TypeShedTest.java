@@ -83,7 +83,7 @@ public class TypeShedTest {
     Symbol acosSymbol = mathSymbols.get("acos");
     assertThat(acosSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("math", "math.acos")).isSameAs(acosSymbol);
+    assertThat(TypeShed.symbolWithFQN("math", "math.acos", "acos")).isSameAs(acosSymbol);
     assertThat(mathSymbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
 
     Map<String, Symbol> threadingSymbols = TypeShed.symbolsForModule("threading").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
@@ -101,7 +101,7 @@ public class TypeShedTest {
     Symbol emojizeSymbol = emojiSymbols.get("emojize");
     assertThat(emojizeSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) emojizeSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
+    assertThat(TypeShed.symbolWithFQN("emoji", "emoji.emojize", "emojize")).isSameAs(emojizeSymbol);
   }
 
   @Test
@@ -124,7 +124,7 @@ public class TypeShedTest {
     Symbol wrapperSymbol = cursesSymbols.get("wrapper");
     assertThat(wrapperSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) wrapperSymbol).declaredReturnType()).isEqualTo(AnyType.ANY);
-    assertThat(TypeShed.symbolWithFQN("curses", "curses.wrapper")).isSameAs(wrapperSymbol);
+    assertThat(TypeShed.symbolWithFQN("curses", "curses.wrapper", "wrapper")).isSameAs(wrapperSymbol);
   }
 
   @Test
@@ -133,7 +133,7 @@ public class TypeShedTest {
     Symbol isalnumSymbol = asciiSymbols.get("isalnum");
     assertThat(isalnumSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl) isalnumSymbol).declaredReturnType().canOnlyBe("bool")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("curses.ascii", "curses.ascii.isalnum")).isSameAs(isalnumSymbol);
+    assertThat(TypeShed.symbolWithFQN("curses.ascii", "curses.ascii.isalnum", "isalnum")).isSameAs(isalnumSymbol);
   }
 
   @Test
@@ -141,7 +141,7 @@ public class TypeShedTest {
     Map<String, Symbol> driverSymbols = TypeShed.symbolsForModule("lib2to3.pgen2.driver").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     Symbol loadGrammarSymbol = driverSymbols.get("load_grammar");
     assertThat(loadGrammarSymbol.kind()).isEqualTo(Kind.FUNCTION);
-    assertThat(TypeShed.symbolWithFQN("lib2to3.pgen2.driver", "lib2to3.pgen2.driver.load_grammar")).isSameAs(loadGrammarSymbol);
+    assertThat(TypeShed.symbolWithFQN("lib2to3.pgen2.driver", "lib2to3.pgen2.driver.load_grammar", "load_grammar")).isSameAs(loadGrammarSymbol);
   }
 
   @Test
@@ -158,5 +158,13 @@ public class TypeShedTest {
     Symbol requestSymbol = requestsSymbols.get("request");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(requestSymbol.fullyQualifiedName()).isEqualTo("requests.api.request");
+  }
+
+  @Test
+  public void flask_response_call_has_different_fqn() {
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("flask").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol targetSymbol = symbols.get("Response");
+    assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");
+    assertThat(TypeShed.symbolWithFQN("flask", "flask.Response", "Response")).isSameAs(targetSymbol);
   }
 }

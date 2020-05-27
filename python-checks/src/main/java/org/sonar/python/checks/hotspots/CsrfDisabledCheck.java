@@ -261,7 +261,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
   private static boolean isFlaskAppInstantiation(Expression expr) {
     if (expr.is(Tree.Kind.CALL_EXPR)) {
       Symbol cs = ((CallExpression) expr).calleeSymbol();
-      return cs != null && "flask.Flask".equals(cs.fullyQualifiedName());
+      return cs != null && "flask.app.Flask".equals(cs.fullyQualifiedName());
     }
     return false;
   }

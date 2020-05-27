@@ -158,9 +158,19 @@ public class TypeShed {
     return TypeShed.typeShedSymbols.get(moduleName);
   }
 
-  public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
+  public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName, String localName) {
     Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
-    return symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+    Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+    if (symbolByFqn != null) {
+      return symbolByFqn;
+    }
+
+    Set<Symbol> matchByName = symbols.stream().filter(s -> localName.equals(s.name())).collect(Collectors.toSet());
+    if (matchByName.size() == 1) {
+      return matchByName.iterator().next();
+    }
+
+    return null;
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {

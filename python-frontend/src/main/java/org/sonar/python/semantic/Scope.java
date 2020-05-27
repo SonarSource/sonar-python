@@ -188,7 +188,7 @@ class Scope {
     String symbolName = nameTree.name();
     Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
     if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
-      globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
+      globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName, symbolName);
     }
     if (globalSymbol == null || isExistingSymbol(symbolName)) {
       addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
