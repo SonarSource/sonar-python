@@ -76,6 +76,15 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void alias_import_preserves_fqn() {
+    FileInput tree = parse(
+      "from flask import redirect as flask_redirect",
+      "flask_redirect()"
+    );
+    assertNameAndQualifiedName(tree, "flask_redirect", "werkzeug.utils.redirect");
+  }
+
+  @Test
   public void import_alias_reassigned() {
     FileInput tree = parse(
       "if x:",

@@ -158,14 +158,17 @@ public class TypeShed {
     return TypeShed.typeShedSymbols.get(moduleName);
   }
 
-  public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName, String localName) {
+  public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
     Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
     Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
-    if (symbolByFqn != null) {
+    if (symbolByFqn != null || !fullyQualifiedName.contains(".")) {
       return symbolByFqn;
     }
 
-    Set<Symbol> matchByName = symbols.stream().filter(s -> localName.equals(s.name())).collect(Collectors.toSet());
+    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
+    String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
+
+    Set<Symbol> matchByName = symbols.stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
     if (matchByName.size() == 1) {
       return matchByName.iterator().next();
     }
