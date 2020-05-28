@@ -50,7 +50,8 @@ public class SecureCookieCheck extends AbstractCookieFlagCheck {
     sensitiveArgumentByFQN.put("django.http.HttpResponseGone.set_signed_cookie", 7);
     sensitiveArgumentByFQN.put("django.http.HttpResponseServerError.set_cookie", 6);
     sensitiveArgumentByFQN.put("django.http.HttpResponseServerError.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("flask.Response.set_cookie", 6);
+    sensitiveArgumentByFQN.put("flask.wrappers.Response.set_cookie", 6);
+    sensitiveArgumentByFQN.put("werkzeug.wrappers.BaseResponse.set_cookie", 6);
     sensitiveArgumentByFQN = Collections.unmodifiableMap(sensitiveArgumentByFQN);
   }
 

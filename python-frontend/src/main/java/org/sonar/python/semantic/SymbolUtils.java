@@ -216,7 +216,6 @@ public class SymbolUtils {
       classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
       classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
     )));
-    globalSymbols.put("http.cookies", new HashSet<>(Collections.singletonList(classSymbol("SimpleCookie", "http.cookies.SimpleCookie"))));
 
     globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
       classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),
@@ -234,38 +233,6 @@ public class SymbolUtils {
     globalSymbols.put("django.http.response", new HashSet<>(Collections.singleton(
       classSymbol("HttpResponse", "django.http.response.HttpResponse")
     )));
-
-    ClassSymbolImpl flaskResponse = classSymbol("Response", "flask.Response", SET_COOKIE);
-
-    FunctionSymbolImpl makeResponse = new FunctionSymbolImpl("make_response", "flask.make_response", false, false, false, Collections.emptyList(),
-      Collections.emptyList());
-    makeResponse.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
-
-    FunctionSymbolImpl redirect = new FunctionSymbolImpl("redirect", "flask.redirect", false, false, false, Collections.emptyList(),
-       Collections.emptyList());
-    redirect.setDeclaredReturnType(InferredTypes.runtimeType(flaskResponse));
-
-    globalSymbols.put("flask", new HashSet<>(Arrays.asList(
-      flaskResponse,
-      makeResponse,
-      redirect
-    )));
-
-    globalSymbols.put("werkzeug.datastructures", new HashSet<>(Collections.singleton(
-      classSymbol("Headers", "werkzeug.datastructures.Headers", "set", "setdefault", "__setitem__")
-    )));
-
-    // TODO To be removed once we import 'collections' from typeshed
-    globalSymbols.put("collections", new HashSet<>(Arrays.asList(
-      classSymbol("deque", "collections.deque", EQ),
-      classSymbol("UserList", "collections.UserList", EQ),
-      classSymbol("UserDict", "collections.UserDict", EQ),
-      classSymbol("ChainMap", "collections.ChainMap", EQ),
-      classSymbol("Counter", "collections.Counter", EQ),
-      classSymbol("OrderedDict", "collections.OrderedDict", EQ),
-      classSymbol("defaultdict", "collections.defaultdict", EQ)
-    )));
-
 
     ClassSymbolImpl ldapObject = classSymbol("LDAPObject", "ldap.LDAPObject", "simple_bind", "simple_bind_s", "bind", "bind_s");
     FunctionSymbolImpl initialize = new FunctionSymbolImpl(
