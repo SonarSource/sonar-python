@@ -62,16 +62,16 @@ public class TypeShedTypesApiTest {
 
   @Test
   public void project_symbols_not_included() {
-    SymbolImpl exportedA = new SymbolImpl("a", "mod.a");
-    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(Collections.singletonList(exportedA)));
+    SymbolImpl exportedA = new SymbolImpl("a", "type_module.a");
+    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("type_module", new HashSet<>(Collections.singletonList(exportedA)));
     parse(
-      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
-      "from mod import *",
+      new SymbolTableBuilder("type_package", pythonFile("type_module_2.py"), from(globalSymbols)),
+      "from type_module import *",
       "print(a)"
     );
 
-    assertThat(TypeShedTypesApi.typeShedSymbols).doesNotContainKeys("mod", "my_package", "my_module");
-    assertThat(TypeShedTypesApi.builtinGlobalSymbols).doesNotContainKeys("mod", "my_package", "my_module");
+    assertThat(TypeShedTypesApi.typeShedSymbols).doesNotContainKeys("type_module", "type_module_2", "type_package");
+    assertThat(TypeShedTypesApi.builtinGlobalSymbols).doesNotContainKeys("type_module", "type_module_2", "type_package");
   }
 
   @Test
