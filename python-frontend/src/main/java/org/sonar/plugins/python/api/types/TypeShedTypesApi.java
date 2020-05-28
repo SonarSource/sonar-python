@@ -25,9 +25,16 @@ import java.util.Map;
 import java.util.Set;
 
 public class TypeShedTypesApi {
-  public static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
-  public static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
-  TypeShedTypesApi() {
+  private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
+  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
 
+  private TypeShedTypesApi() {}
+
+  public static Map<String, Set<Symbol>> getTypeShedSymbols() {
+    return typeShedSymbols;
+  }
+
+  public static Map<String, Set<Symbol>> getBuiltinGlobalSymbols() {
+    return builtinGlobalSymbols;
   }
 }

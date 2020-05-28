@@ -60,8 +60,8 @@ public class TypeShed {
   private static final String TYPING = "typing";
   private static final String TYPING_EXTENSIONS = "typing_extensions";
   private static Map<String, Symbol> builtins;
-  private static final Map<String, Set<Symbol>> typeShedSymbols = TypeShedTypesApi.typeShedSymbols;
-  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = TypeShedTypesApi.builtinGlobalSymbols;
+  private static final Map<String, Set<Symbol>> typeShedSymbols = TypeShedTypesApi.getTypeShedSymbols();
+  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = TypeShedTypesApi.getBuiltinGlobalSymbols();
   private static final Set<String> modulesInProgress = new HashSet<>();
 
   private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";

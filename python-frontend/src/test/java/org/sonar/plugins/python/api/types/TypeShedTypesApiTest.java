@@ -40,16 +40,16 @@ public class TypeShedTypesApiTest {
     parse(
       "import os"
     );
-    assertThat(TypeShedTypesApi.typeShedSymbols.get("os")).isNotEmpty();
+    assertThat(TypeShedTypesApi.getTypeShedSymbols().get("os")).isNotEmpty();
     // Transitive types will appear
-    assertThat(TypeShedTypesApi.typeShedSymbols.get("builtins")).isNotEmpty();
+    assertThat(TypeShedTypesApi.getTypeShedSymbols().get("builtins")).isNotEmpty();
 
     parse(
       "import io"
     );
-    assertThat(TypeShedTypesApi.typeShedSymbols.get("io")).isNotEmpty();
+    assertThat(TypeShedTypesApi.getTypeShedSymbols().get("io")).isNotEmpty();
     // Old imports not being erased
-    assertThat(TypeShedTypesApi.typeShedSymbols.get("os")).isNotEmpty();
+    assertThat(TypeShedTypesApi.getTypeShedSymbols().get("os")).isNotEmpty();
   }
 
   @Test
@@ -57,7 +57,7 @@ public class TypeShedTypesApiTest {
     parse(
       "import non_existing_package"
     );
-    assertThat(TypeShedTypesApi.typeShedSymbols.get("non_existing_package")).isEmpty();
+    assertThat(TypeShedTypesApi.getTypeShedSymbols().get("non_existing_package")).isEmpty();
   }
 
   @Test
@@ -70,8 +70,8 @@ public class TypeShedTypesApiTest {
       "print(a)"
     );
 
-    assertThat(TypeShedTypesApi.typeShedSymbols).doesNotContainKeys("type_module", "type_module_2", "type_package");
-    assertThat(TypeShedTypesApi.builtinGlobalSymbols).doesNotContainKeys("type_module", "type_module_2", "type_package");
+    assertThat(TypeShedTypesApi.getTypeShedSymbols()).doesNotContainKeys("type_module", "type_module_2", "type_package");
+    assertThat(TypeShedTypesApi.getBuiltinGlobalSymbols()).doesNotContainKeys("type_module", "type_module_2", "type_package");
   }
 
   @Test
@@ -79,6 +79,6 @@ public class TypeShedTypesApiTest {
     parse(
       "a = 1"
     );
-    assertThat(TypeShedTypesApi.builtinGlobalSymbols.get("")).filteredOn(s -> "int".equals(s.name())).isNotEmpty();
+    assertThat(TypeShedTypesApi.getBuiltinGlobalSymbols().get("")).filteredOn(s -> "int".equals(s.name())).isNotEmpty();
   }
 }
