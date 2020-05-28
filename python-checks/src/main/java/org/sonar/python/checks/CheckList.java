@@ -148,6 +148,7 @@ public final class CheckList {
       NestedConditionalExpressionCheck.class,
       NestedControlFlowDepthCheck.class,
       NewStyleClassCheck.class,
+      NonStringInAllPropertyCheck.class,
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
