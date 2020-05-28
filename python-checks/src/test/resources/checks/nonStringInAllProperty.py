@@ -33,8 +33,12 @@ __all__ = b = (MyClass, "bar") # Noncompliant
 a = MyClass()
 a.b = 42
 var = 42
+reassigned_var = var
+reassigned_class = a
 my_global_var = 42
 a_string = "MyClass"
+another_string = get_string()
+reassigned_string = another_string
 arr = []
 arr[0] = "a string"
 arr[1] = MyClass
@@ -49,7 +53,11 @@ __all__ = [
     a.b, # FN
     42,  # Noncompliant
     var,  # Noncompliant
+    reassigned_var, # Noncompliant
+    reassigned_class, # Noncompliant
     my_global_var, # OK, multiple assignments
+    another_string, # OK
+    reassigned_string, # OK
     abs, # Noncompliant
     round,  # Noncompliant
     my_func, # Noncompliant
@@ -70,3 +78,7 @@ __all__ = [
     unknown_symbol, # FN
     unknown_imported,
 ]
+
+
+def get_string():
+  return "some string"

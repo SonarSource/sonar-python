@@ -70,20 +70,13 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
     }
     List<Expression> expressions = getAllExpressions(assignedValue);
     for (Expression element : expressions) {
-      if (element instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) element).symbol();
-        if (isClassOrFunctionSymbol(symbol)) {
-          ctx.addIssue(element, MESSAGE);
-          continue;
-        }
-      }
       if (!couldBeString(element)) {
         ctx.addIssue(element, MESSAGE);
       }
     }
   }
 
-  private static boolean isClassOrFunctionSymbol(@Nullable  Symbol symbol) {
+  private static boolean isClassOrFunctionSymbol(@Nullable Symbol symbol) {
     if (symbol == null) {
       return false;
     }
@@ -107,6 +100,9 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean couldBeString(Expression expression) {
+    if (expression instanceof HasSymbol && isClassOrFunctionSymbol(((HasSymbol) expression).symbol())) {
+      return false;
+    }
     if (!expression.type().canBeOrExtend("str")) {
       return false;
     }
