@@ -159,4 +159,12 @@ public class TypeShedTest {
     assertThat(requestSymbol.kind()).isEqualTo(Kind.FUNCTION);
     assertThat(requestSymbol.fullyQualifiedName()).isEqualTo("requests.api.request");
   }
+
+  @Test
+  public void package_member_fqn_points_to_original_fqn() {
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("flask").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol targetSymbol = symbols.get("Response");
+    assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");
+    assertThat(TypeShed.symbolWithFQN("flask", "flask.Response")).isSameAs(targetSymbol);
+  }
 }

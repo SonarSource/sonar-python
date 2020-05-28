@@ -49,6 +49,7 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
@@ -158,9 +159,27 @@ public class TypeShed {
     return TypeShed.typeShedSymbols.get(moduleName);
   }
 
+  @CheckForNull
   public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
     Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
-    return symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+    Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
+    if (symbolByFqn != null || !fullyQualifiedName.contains(".")) {
+      return symbolByFqn;
+    }
+
+    // If FQN of the member does not match the pattern of "package_name.file_name.symbol_name"
+    // (e.g. it could be declared in package_name.file_name using import) or in case when
+    // we have import with an alias (from module import method as alias_method), we retrieve symbol_name out of
+    // FQN and try to look up by local symbol name, rather than FQN
+    String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
+    String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
+
+    Set<Symbol> matchByName = symbols.stream().filter(s -> symbolLocalNameFromFqn.equals(s.name())).collect(Collectors.toSet());
+    if (matchByName.size() == 1) {
+      return matchByName.iterator().next();
+    }
+
+    return null;
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {

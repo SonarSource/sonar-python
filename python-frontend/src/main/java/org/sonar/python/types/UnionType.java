@@ -83,7 +83,7 @@ class UnionType implements InferredType {
 
   @Override
   public boolean canOnlyBe(String typeName) {
-    return false;
+    return types.stream().allMatch(t -> t.canOnlyBe(typeName));
   }
 
   @Override
