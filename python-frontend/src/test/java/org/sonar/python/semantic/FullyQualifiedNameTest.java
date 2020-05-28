@@ -77,6 +77,7 @@ public class FullyQualifiedNameTest {
 
   @Test
   public void alias_import_preserves_fqn() {
+    // see org/sonar/python/types/typeshed/third_party/2and3/flask/__init__.pyi
     FileInput tree = parse(
       "from flask import redirect as flask_redirect",
       "flask_redirect()"

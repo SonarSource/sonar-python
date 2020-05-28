@@ -49,6 +49,7 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
@@ -158,6 +159,7 @@ public class TypeShed {
     return TypeShed.typeShedSymbols.get(moduleName);
   }
 
+  @CheckForNull
   public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
     Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
     Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
@@ -165,6 +167,10 @@ public class TypeShed {
       return symbolByFqn;
     }
 
+    // If FQN of the member does not match the pattern of "package_name.file_name.symbol_name"
+    // (e.g. it could be declared in package_name.file_name using import) or in case when
+    // we have import with an alias (from module import method as alias_method), we retrieve symbol_name out of
+    // FQN and try to look up by local symbol name, rather than FQN
     String[] fqnSplittedByDot = fullyQualifiedName.split("\\.");
     String symbolLocalNameFromFqn = fqnSplittedByDot[fqnSplittedByDot.length - 1];
 
