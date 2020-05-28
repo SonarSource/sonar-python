@@ -61,26 +61,30 @@ public class StringFormat {
     return this.replacementFields.size();
   }
 
-  // Format -> '%'[MapKey][Flag][Width]['.'Precision][Length]Type
+  public boolean hasPositionalFields() {
+    return this.replacementFields.stream().anyMatch(field -> field.mappingKey() == null);
+  }
+
+  public boolean hasNamedFields() {
+    return this.replacementFields.stream().anyMatch(field -> field.mappingKey() != null);
+  }
+
+  // Format -> '%'[MapKey][Flag*][Width]['.'Precision][Length]Type
   // MapKey -> '(' Str ')'
   // Flag -> '#' | '0' | '-' | ' ' | '+' | '-'
   // Length -> 'h' | 'H' | 'L'
   // Width -> '*' | Number
   // Precision -> '*' | Number
-  private static final String PRINTF_MAPKEY_PATTERN = "(?:\\((.*?)\\))?";
-  private static final String PRINTF_CONVERSION_TYPE_PATTERN = "([A-Za-z]|%)";
-
-  private static final Pattern PRTINF_PARAM_PATTERN = Pattern.compile(
-    "%" + PRINTF_MAPKEY_PATTERN + PRINTF_CONVERSION_TYPE_PATTERN
-  );
+  private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
+    "%" + "(?:\\((.*?)\\))?" + "([#\\-+0 ]*)?" + "([0-9]*|\\*)?" + "(\\.(?:[0-9]*|\\*))?" + "([hHL])?" + "([A-Za-z]|%)");
 
   public static StringFormat createFromPrintfStyle(String input) {
     List<ReplacementField> result = new ArrayList<>();
-    Matcher matcher = PRTINF_PARAM_PATTERN.matcher(input);
+    Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(input);
 
     while (matcher.find()) {
       String mapKey = matcher.group(1);
-      String conversionType = matcher.group(2);
+      String conversionType = matcher.group(6);
 
       if (conversionType.equals("%")) {
         // If the conversion type is '%', we are dealing with a '%%'

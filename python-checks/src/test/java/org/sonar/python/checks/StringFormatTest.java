@@ -36,6 +36,10 @@ public class StringFormatTest {
     assertPrintfFormat("%(k+ey\\\\)s", field("k+ey\\\\", "s"));
     assertPrintfFormat("Hello %s, %d!", field("s"), field("d"));
     assertPrintfFormat("%s %%s", field("s"));
+    assertPrintfFormat("%03d", field("d"));
+    assertPrintfFormat("%*.*f", field("f"));
+    assertPrintfFormat("%(name)+03.*Hf", field("name", "f"));
+    assertPrintfFormat("%10d", field("d"));
   }
 
   private static void assertPrintfFormat(String input, StringFormat.ReplacementField... fields) {

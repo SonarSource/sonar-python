@@ -20,16 +20,22 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 
-@Rule(key = "S2874")
+@Rule(key = "S2275")
 public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
   private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
@@ -56,8 +62,15 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
         }
       }
 
+      if (format.hasPositionalFields() && format.hasNamedFields()) {
+        ctx.addIssue(formatString, "Use only positional or only named field, don't mix them.");
+        return;
+      }
+
       if (expression.rightOperand().is(Tree.Kind.TUPLE)) {
         checkTuples(ctx, format, ((Tuple) expression.rightOperand()));
+      } else if (expression.rightOperand().is(Tree.Kind.DICTIONARY_LITERAL)) {
+        checkDictionaries(ctx, format, ((DictionaryLiteral) expression.rightOperand()));
       } else if (format.numExpectedArguments() == 1) {
         checkPrintfType(ctx, expression.rightOperand(), format.replacementFields().get(0));
       }
@@ -65,23 +78,72 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkTuples(SubscriptionContext ctx, StringFormat format, Tuple tuple) {
-    if (format.replacementFields().stream().anyMatch(field -> field.mappingKey() != null)) {
+    if (format.hasNamedFields()) {
       ctx.addIssue(tuple, "Replace this formatting argument with a mapping.");
       return;
     }
 
-    if (format.numExpectedArguments() > tuple.elements().size()) {
-      ctx.addIssue(tuple, String.format("Add %d missing argument(s).", format.numExpectedArguments() - tuple.elements().size()));
-      return;
-    }
-
-    if (format.numExpectedArguments() < tuple.elements().size()) {
-      ctx.addIssue(tuple, String.format("Remove %d unexpected argument(s).", tuple.elements().size() - format.numExpectedArguments()));
+    if (format.numExpectedArguments() != tuple.elements().size()) {
+      reportInvalidArgumentSize(ctx, tuple, format.numExpectedArguments(), tuple.elements().size());
       return;
     }
 
     for (int i = 0; i < tuple.elements().size(); ++i) {
       checkPrintfType(ctx, tuple.elements().get(i), format.replacementFields().get(i));
+    }
+  }
+
+  private static void checkDictionaries(SubscriptionContext ctx, StringFormat format, DictionaryLiteral dict) {
+    if (format.hasPositionalFields()) {
+      ctx.addIssue(dict, "Replace this formatting argument with a tuple.");
+      return;
+    }
+
+    if (dict.elements().stream().anyMatch(StringFormatMisuseCheck::isOutOfScopeDictionaryElement)) {
+      // Do not bother with dictionaries containing unpacking expressions or keys which are not string literals.
+      return;
+    }
+
+    if (format.numExpectedArguments() != dict.elements().size()) {
+      reportInvalidArgumentSize(ctx, dict, format.numExpectedArguments(), dict.elements().size());
+      return;
+    }
+
+    Map<String, StringFormat.ReplacementField> fieldMap = format.replacementFields().stream().collect(Collectors.toMap(
+      StringFormat.ReplacementField::mappingKey, Function.identity()
+    ));
+    for (int i = 0; i < dict.elements().size(); ++i) {
+      DictionaryLiteralElement element = dict.elements().get(i);
+      KeyValuePair pair = (KeyValuePair) element;
+      String key = ((StringLiteral) pair.key()).trimmedQuotesValue();
+
+      StringFormat.ReplacementField field = fieldMap.remove(key);
+      if (field == null) {
+        // No such field
+        continue;
+      }
+
+      checkPrintfType(ctx, pair.value(), field);
+    }
+
+    // Check if we have any unmatched field names left
+    fieldMap.keySet().forEach(fieldName -> ctx.addIssue(dict, String.format("Provide a value for field \"%s\".", fieldName)));
+  }
+
+  private static boolean isOutOfScopeDictionaryElement(DictionaryLiteralElement element) {
+    if (!element.is(Tree.Kind.KEY_VALUE_PAIR)) {
+      return true;
+    }
+
+    KeyValuePair keyValuePair = (KeyValuePair) element;
+    return !keyValuePair.key().is(Tree.Kind.STRING_LITERAL);
+  }
+
+  private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, int expected, int actual) {
+    if (expected > actual) {
+      ctx.addIssue(tree, String.format("Add %d missing argument(s).", expected - actual));
+    } else {
+      ctx.addIssue(tree, String.format("Remove %d unexpected argument(s).", actual - expected));
     }
   }
 
@@ -95,22 +157,22 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
       ctx.addIssue(expression, String.format("Replace this value with a number as \"%%%c\" requires.", conversionType));
     } else if (PRINTF_INTEGER_CONVERTERS.indexOf(conversionType) != -1 && cannotBeOfType(expression, "int")) {
       ctx.addIssue(expression, String.format("Replace this value with an integer as \"%%%c\" requires.", conversionType));
-    } else if (conversionType == 'c' && cannotBeOfType(expression, "int") && !canBeSingleCharString(expression)) {
+    } else if (conversionType == 'c' && cannotBeOfType(expression, "int") && cannotBeSingleCharString(expression)) {
       ctx.addIssue(expression, String.format("Replace this value with an integer or a single character string as \"%%%c\" requires.", conversionType));
     }
 
     // No case for '%s', '%r' and '%a' - anything can be formatted with those.
   }
 
-  private static boolean canBeSingleCharString(Expression expression) {
+  private static boolean cannotBeSingleCharString(Expression expression) {
     if (!expression.type().canBeOrExtend("str")) {
-      return false;
+      return true;
     }
 
     if (expression.is(Tree.Kind.STRING_LITERAL)) {
-      return ((StringLiteral) expression).trimmedQuotesValue().length() == 1;
+      return ((StringLiteral) expression).trimmedQuotesValue().length() != 1;
     }
 
-    return true;
+    return false;
   }
 }
