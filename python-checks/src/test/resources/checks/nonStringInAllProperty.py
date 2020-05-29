@@ -43,6 +43,9 @@ arr = []
 arr[0] = "a string"
 arr[1] = MyClass
 
+cyclic_def = my_cyclic_def
+my_cyclic_def = cyclic_def
+
 __all__ = [
     MyClass.__name__,
     "MyClass",
@@ -77,6 +80,7 @@ __all__ = [
     a.my_overloaded_stub, # FN (no type inference at module level)
     unknown_symbol, # FN
     unknown_imported,
+    my_cyclic_def
 ]
 
 
