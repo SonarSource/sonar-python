@@ -20,7 +20,9 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -70,7 +72,7 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
     }
     List<Expression> expressions = getAllExpressions(assignedValue);
     for (Expression element : expressions) {
-      if (!couldBeString(element)) {
+      if (!couldBeString(element, new HashSet<>())) {
         ctx.addIssue(element, MESSAGE);
       }
     }
@@ -99,7 +101,7 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
     return ((Tuple) expression).elements();
   }
 
-  private static boolean couldBeString(Expression expression) {
+  private static boolean couldBeString(Expression expression, Set<Tree> visitedTrees) {
     if (expression instanceof HasSymbol && isClassOrFunctionSymbol(((HasSymbol) expression).symbol())) {
       return false;
     }
@@ -109,9 +111,10 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
     if (expression.is(Tree.Kind.LAMBDA)) {
       return false;
     }
-    if (expression.is(Tree.Kind.NAME)) {
+    if (expression.is(Tree.Kind.NAME) && !visitedTrees.contains(expression)) {
+      visitedTrees.add(expression);
       Expression assignedValue = Expressions.singleAssignedValue((Name) expression);
-      return assignedValue == null || couldBeString(assignedValue);
+      return assignedValue == null || couldBeString(assignedValue, visitedTrees);
     }
     return true;
   }
