@@ -110,3 +110,8 @@ class ChildClassReorderingAndExtra(ParentClass):
 
 class ChildClassOneExtraDefault(ParentClass):
     def my_method(self, foo, other=42): ... # OK
+
+from io import BytesIO
+
+class StreamingBuffer(BytesIO):
+  def read(self): ... # FN
