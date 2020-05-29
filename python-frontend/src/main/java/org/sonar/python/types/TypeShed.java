@@ -123,8 +123,8 @@ public class TypeShed {
 
   private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3) {
     Set<Symbol> commonSymbols = new HashSet<>();
-    symbolsPython3.forEach((fqn, python3Symbol) -> {
-      Symbol python2Symbol = symbolsPython2.get(fqn);
+    symbolsPython3.forEach((localName, python3Symbol) -> {
+      Symbol python2Symbol = symbolsPython2.get(localName);
       if (python2Symbol == null) {
         commonSymbols.add(python3Symbol);
       } else {
@@ -135,8 +135,8 @@ public class TypeShed {
       }
     });
 
-    symbolsPython2.forEach((fqn, python2Symbol) -> {
-      if (symbolsPython3.get(fqn) == null) {
+    symbolsPython2.forEach((localName, python2Symbol) -> {
+      if (symbolsPython3.get(localName) == null) {
         commonSymbols.add(python2Symbol);
       }
     });
@@ -239,7 +239,7 @@ public class TypeShed {
         return symbol;
       })
       .filter(s -> s.fullyQualifiedName() != null)
-      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::create));
+      .collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
   }
 
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
