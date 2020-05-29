@@ -131,7 +131,7 @@ public class TypeShed {
         Set<Symbol> symbols = new HashSet<>();
         symbols.add(python2Symbol);
         symbols.add(python3Symbol);
-        commonSymbols.add(AmbiguousSymbolImpl.create(symbols));
+        commonSymbols.add(new AmbiguousSymbolImpl(python3Symbol.name(), python3Symbol.fullyQualifiedName(), symbols));
       }
     });
 

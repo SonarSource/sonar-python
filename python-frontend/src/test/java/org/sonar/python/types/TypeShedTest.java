@@ -177,4 +177,11 @@ public class TypeShedTest {
     assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
     assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.CLASS);
   }
+
+  @Test
+  public void two_exported_symbols_with_same_local_names_and_different_fqn() {
+    Symbol fileIO = TypeShed.symbolWithFQN("io", "io.FileIO");
+    assertThat(fileIO.fullyQualifiedName()).isNotNull();
+
+  }
 }
