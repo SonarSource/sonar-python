@@ -62,6 +62,7 @@ public class TypeShed {
   private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
   private static final Set<String> modulesInProgress = new HashSet<>();
+  private static final Map<String, String> externalModuleDefinitions = new HashMap<>();
 
   private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";
   private static final String STDLIB_2 = "typeshed/stdlib/2/";
@@ -69,6 +70,11 @@ public class TypeShed {
   private static final String THIRD_PARTY_2AND3 = "typeshed/third_party/2and3/";
   private static final String THIRD_PARTY_2 = "typeshed/third_party/2/";
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
+  private static final String DJANGO = "django-stubs/django-stubs/";
+
+  static {
+    externalModuleDefinitions.put("django", DJANGO);
+  }
 
   private TypeShed() {
   }
@@ -201,24 +207,60 @@ public class TypeShed {
       thirdPartySymbols = commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
         getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols), moduleName);
     }
+    String moduleCategoryPath = getNonTypeshedModuleCategoryPath(moduleName);
+    if (thirdPartySymbols.isEmpty() && moduleCategoryPath != null) {
+      thirdPartySymbols = new HashSet<>(getModuleSymbols(moduleName, moduleCategoryPath, builtinGlobalSymbols).values());
+    }
     modulesInProgress.remove(moduleName);
     return thirdPartySymbols;
   }
 
+  private static @Nullable String getNonTypeshedModuleCategoryPath(String moduleToInspect) {
+    String targetModule = moduleToInspect;
+    int dotIndex = targetModule.indexOf('.');
+    if (dotIndex > 0) {
+      targetModule = targetModule.substring(0, dotIndex);
+    }
+    return externalModuleDefinitions.get(targetModule);
+  }
+
   @Nullable
   private static ModuleDescription getResourceForModule(String moduleName, String categoryPath) {
-    String[] moduleNameHierarchy = moduleName.split("\\.");
+    String computedModuleName = moduleName;
+    String packageNamePrefix = "";
+    if (categoryPath.equals(getNonTypeshedModuleCategoryPath(computedModuleName))) {
+      // Non typeshed modules contain folder structure different from the one presented in typeshed
+      // E.g. for django module the path is django-stubs/__init__.py
+      // and for django.shortcuts module the path is django-stubs/shortcuts.py
+      // In this case - we are dropping the first part of the module (e.g. django) and adding it back
+      // when corresponding file was found
+      int dotIndex = computedModuleName.indexOf('.');
+      if (dotIndex > 0) {
+        packageNamePrefix = computedModuleName.substring(0, dotIndex);
+        computedModuleName = computedModuleName.substring(dotIndex + 1);
+      } else {
+        packageNamePrefix = computedModuleName;
+        computedModuleName = "";
+      }
+    }
+    String[] moduleNameHierarchy = computedModuleName.split("\\.");
     String pathToModule = String.join("/", moduleNameHierarchy);
     String moduleFileName = moduleNameHierarchy[moduleNameHierarchy.length - 1];
     String packageName = String.join(".", Arrays.copyOfRange(moduleNameHierarchy, 0, moduleNameHierarchy.length - 1));
     InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
     if (resource == null) {
-      resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
+      resource = TypeShed.class.getResourceAsStream(categoryPath + computedModuleName + "/__init__.pyi");
       if (resource == null) {
         return null;
       }
       moduleFileName = "__init__";
-      packageName = moduleName;
+      packageName = computedModuleName;
+    }
+    // Adding the removed part of package name if there is any
+    if (!packageNamePrefix.isEmpty() && packageName.isEmpty()) {
+      packageName = packageNamePrefix;
+    } else if (!packageNamePrefix.isEmpty()) {
+      packageName = packageNamePrefix + "." + packageName;
     }
     return new ModuleDescription(resource, moduleFileName, packageName);
   }

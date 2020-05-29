@@ -62,9 +62,6 @@ import org.sonar.python.types.TypeShedPythonFile;
 public class SymbolUtils {
 
   private static final String SEND_MESSAGE = "send_message";
-  private static final String SET_COOKIE = "set_cookie";
-  private static final String SET_SIGNED_COOKIE = "set_signed_cookie";
-  private static final String EQ = "__eq__";
   private static final String SET_VERIFY = "set_verify";
 
   private SymbolUtils() {
@@ -215,23 +212,6 @@ public class SymbolUtils {
     globalSymbols.put("smtplib", new HashSet<>(Arrays.asList(
       classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
       classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
-    )));
-
-    globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
-      classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),
-      classSymbol("HttpResponseRedirect", "django.http.HttpResponseRedirect", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponsePermanentRedirect", "django.http.HttpResponsePermanentRedirect", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseNotModified", "django.http.HttpResponseNotModified", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseNotFound", "django.http.HttpResponseNotFound", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseForbidden", "django.http.HttpResponseForbidden", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseNotAllowed", "django.http.HttpResponseNotAllowed", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseGone", "django.http.HttpResponseGone", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseServerError", "django.http.HttpResponseServerError", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest", SET_COOKIE, SET_SIGNED_COOKIE)
-    )));
-
-    globalSymbols.put("django.http.response", new HashSet<>(Collections.singleton(
-      classSymbol("HttpResponse", "django.http.response.HttpResponse")
     )));
 
     ClassSymbolImpl ldapObject = classSymbol("LDAPObject", "ldap.LDAPObject", "simple_bind", "simple_bind_s", "bind", "bind_s");

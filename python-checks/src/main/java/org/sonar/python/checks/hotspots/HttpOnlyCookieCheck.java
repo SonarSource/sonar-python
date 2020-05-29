@@ -35,6 +35,8 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
 
   static {
     sensitiveArgumentByFQN = new HashMap<>();
+    sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_cookie", 7);
+    sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_signed_cookie", 8);
     sensitiveArgumentByFQN.put("django.http.HttpResponse.set_cookie", 7);
     sensitiveArgumentByFQN.put("django.http.HttpResponse.set_signed_cookie", 8);
     sensitiveArgumentByFQN.put("django.http.HttpResponseRedirect.set_cookie", 7);

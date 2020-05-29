@@ -185,4 +185,17 @@ public class TypeShedTest {
     assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
     assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.AMBIGUOUS);
   }
+
+  @Test
+  public void package_django() {
+    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("django").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol setupSymbol = djangoSymbols.get("setup");
+    assertThat(setupSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(TypeShed.symbolWithFQN("django", "django.setup")).isSameAs(setupSymbol);
+
+    Map<String, Symbol> djangoShortcutSymbols = TypeShed.symbolsForModule("django.shortcuts").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol renderSymbol = djangoShortcutSymbols.get("render");
+    assertThat(renderSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(TypeShed.symbolWithFQN("django.shortcuts", "django.shortcuts.render")).isSameAs(renderSymbol);
+  }
 }
