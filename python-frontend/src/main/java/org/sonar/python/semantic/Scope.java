@@ -153,7 +153,7 @@ class Scope {
       Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).alternatives().stream()
         .map(s -> copySymbol(symbolName, s))
         .collect(Collectors.toSet());
-      return AmbiguousSymbolImpl.create(alternativeSymbols);
+      return new AmbiguousSymbolImpl(symbolName, symbol.fullyQualifiedName(), alternativeSymbols);
     } else if (symbol.is(Symbol.Kind.OTHER)) {
       SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName());
       for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {

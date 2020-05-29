@@ -33,7 +33,7 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
 
   private final Set<Symbol> symbols;
 
-  private AmbiguousSymbolImpl(String name, @Nullable String fullyQualifiedName, Set<Symbol> symbols) {
+  public AmbiguousSymbolImpl(String name, @Nullable String fullyQualifiedName, Set<Symbol> symbols) {
     super(name, fullyQualifiedName);
     setKind(Kind.AMBIGUOUS);
     this.symbols = symbols;

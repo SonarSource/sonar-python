@@ -118,10 +118,10 @@ public class TypeShed {
   static Set<Symbol> typingModuleSymbols() {
     Map<String, Symbol> typingPython3 = getModuleSymbols(TYPING, STDLIB_3, Collections.emptyMap());
     Map<String, Symbol> typingPython2 = getModuleSymbols(TYPING, STDLIB_2, Collections.emptyMap());
-    return commonSymbols(typingPython2, typingPython3);
+    return commonSymbols(typingPython2, typingPython3, TYPING);
   }
 
-  private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3) {
+  private static Set<Symbol> commonSymbols(Map<String, Symbol> symbolsPython2, Map<String, Symbol> symbolsPython3, String packageName) {
     Set<Symbol> commonSymbols = new HashSet<>();
     symbolsPython3.forEach((localName, python3Symbol) -> {
       Symbol python2Symbol = symbolsPython2.get(localName);
@@ -131,7 +131,7 @@ public class TypeShed {
         Set<Symbol> symbols = new HashSet<>();
         symbols.add(python2Symbol);
         symbols.add(python3Symbol);
-        commonSymbols.add(AmbiguousSymbolImpl.create(symbols));
+        commonSymbols.add(new AmbiguousSymbolImpl(localName, packageName + "." + localName, symbols));
       }
     });
 
@@ -190,7 +190,7 @@ public class TypeShed {
     Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols(moduleName, STDLIB_2AND3, builtinGlobalSymbols).values());
     if (standardLibrarySymbols.isEmpty()) {
       standardLibrarySymbols = commonSymbols(getModuleSymbols(moduleName, STDLIB_2, builtinGlobalSymbols),
-        getModuleSymbols(moduleName, STDLIB_3, builtinGlobalSymbols));
+        getModuleSymbols(moduleName, STDLIB_3, builtinGlobalSymbols), moduleName);
     }
     if (!standardLibrarySymbols.isEmpty()) {
       modulesInProgress.remove(moduleName);
@@ -199,7 +199,7 @@ public class TypeShed {
     Set<Symbol> thirdPartySymbols = new HashSet<>(getModuleSymbols(moduleName, THIRD_PARTY_2AND3, builtinGlobalSymbols).values());
     if (thirdPartySymbols.isEmpty()) {
       thirdPartySymbols = commonSymbols(getModuleSymbols(moduleName, THIRD_PARTY_2, builtinGlobalSymbols),
-        getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols));
+        getModuleSymbols(moduleName, THIRD_PARTY_3, builtinGlobalSymbols), moduleName);
     }
     modulesInProgress.remove(moduleName);
     return thirdPartySymbols;
