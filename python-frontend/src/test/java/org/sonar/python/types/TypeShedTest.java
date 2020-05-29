@@ -169,12 +169,20 @@ public class TypeShedTest {
   }
 
   @Test
+  public void package_member_ambigous_symbol_common_fqn() {
+    Map<String, Symbol> symbols = TypeShed.symbolsForModule("io").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol targetSymbol = symbols.get("FileIO");
+    assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("io.FileIO");
+    assertThat(TypeShed.symbolWithFQN("io", "io.FileIO")).isSameAs(targetSymbol);
+  }
+
+  @Test
   public void two_exported_symbols_with_same_local_names() {
     Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
     Map<String, Symbol> posixSymbols = TypeShed.symbolsForModule("posix").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
     Symbol setupSymbolFromPosix = posixSymbols.get("stat_result");
     Symbol setupSymbolFromOs = osSymbols.get("stat_result");
     assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
-    assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.CLASS);
+    assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.AMBIGUOUS);
   }
 }
