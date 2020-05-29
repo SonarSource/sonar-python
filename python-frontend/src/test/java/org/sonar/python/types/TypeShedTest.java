@@ -167,4 +167,14 @@ public class TypeShedTest {
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");
     assertThat(TypeShed.symbolWithFQN("flask", "flask.Response")).isSameAs(targetSymbol);
   }
+
+  @Test
+  public void two_exported_symbols_with_same_local_names() {
+    Map<String, Symbol> osSymbols = TypeShed.symbolsForModule("os").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Map<String, Symbol> posixSymbols = TypeShed.symbolsForModule("posix").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    Symbol setupSymbolFromPosix = posixSymbols.get("stat_result");
+    Symbol setupSymbolFromOs = osSymbols.get("stat_result");
+    assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
+    assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.CLASS);
+  }
 }
