@@ -189,6 +189,7 @@ public final class CheckList {
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       UndeclaredNameUsageCheck.class,
+      UndefinedNameAllPropertyCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,
       UnreadPrivateInnerClassesCheck.class,
