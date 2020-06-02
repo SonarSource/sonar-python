@@ -147,7 +147,7 @@ public class CorsCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkDjangoResponseSetItem(SubscriptionContext ctx) {
-    reportOnSetMethod(ctx, "django.http.HttpResponse.__setitem__");
+    reportOnSetMethod(ctx, "django.http.response.HttpResponseBase.__setitem__");
   }
 
   private static void reportOnSetMethod(SubscriptionContext ctx, String fqn) {

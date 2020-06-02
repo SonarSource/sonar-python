@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
@@ -131,7 +130,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
   private static boolean isIncompatibleTypes(InferredType argumentType, InferredType parameterType) {
     return (isNotDuckTypeCompatible(argumentType, parameterType)
-      || (!argumentType.isCompatibleWith(parameterType) && !couldBeDuckTypeCompatible(argumentType, parameterType))) && !isException(argumentType);
+      || (!argumentType.isCompatibleWith(parameterType) && !couldBeDuckTypeCompatible(argumentType, parameterType)));
   }
 
   private static boolean isNotDuckTypeCompatible(InferredType argumentType, InferredType parameterType) {
@@ -171,14 +170,5 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       return BuiltinTypes.TUPLE;
     }
     return null;
-  }
-
-  /*
-  We exclude types which can be associated to hard-coded symbols with missing members
-   */
-  private static boolean isException(InferredType inferredType) {
-    return SymbolUtils.externalModulesSymbols().values()
-      .stream().flatMap(Collection::stream)
-      .anyMatch(symbol -> inferredType.canBeOrExtend(symbol.fullyQualifiedName())) || inferredType.canBeOrExtend("unittest.mock.Mock");
   }
 }

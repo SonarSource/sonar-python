@@ -30,26 +30,8 @@ public class SecureCookieCheck extends AbstractCookieFlagCheck {
   private static Map<String, Integer> sensitiveArgumentByFQN;
   static {
     sensitiveArgumentByFQN = new HashMap<>();
-    sensitiveArgumentByFQN.put("django.http.HttpResponse.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponse.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseRedirect.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseRedirect.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponsePermanentRedirect.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponsePermanentRedirect.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseNotModified.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseNotModified.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseBadRequest.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseBadRequest.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseNotFound.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseNotFound.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseForbidden.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseForbidden.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseNotAllowed.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseNotAllowed.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseGone.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseGone.set_signed_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseServerError.set_cookie", 6);
-    sensitiveArgumentByFQN.put("django.http.HttpResponseServerError.set_signed_cookie", 7);
+    sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_cookie", 6);
+    sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_signed_cookie", 7);
     sensitiveArgumentByFQN.put("flask.wrappers.Response.set_cookie", 6);
     sensitiveArgumentByFQN.put("werkzeug.wrappers.BaseResponse.set_cookie", 6);
     sensitiveArgumentByFQN = Collections.unmodifiableMap(sensitiveArgumentByFQN);
