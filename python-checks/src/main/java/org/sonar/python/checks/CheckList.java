@@ -124,6 +124,7 @@ public final class CheckList {
       IdentityComparisonWithCachedTypesCheck.class,
       IdentityComparisonWithNewObjectCheck.class,
       IgnoredPureOperationsCheck.class,
+      ImplicitStringConcatenationCheck.class,
       IncorrectExceptionTypeCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
