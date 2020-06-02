@@ -99,8 +99,8 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
 
   private static boolean isUnknownSymbol(PythonFile pythonFile, Map<String, Symbol> symbolsByName, StringLiteral stringLiteral) {
     String name = stringLiteral.trimmedQuotesValue();
-    return stringLiteral.stringElements().stream().noneMatch(StringElement::isInterpolated) &&
-      !symbolsByName.containsKey(name)
+    return stringLiteral.stringElements().stream().noneMatch(StringElement::isInterpolated)
+      && !symbolsByName.containsKey(name)
       && !BuiltinSymbols.all().contains(name)
       && !isInitFileExportingModule(pythonFile, name);
   }
