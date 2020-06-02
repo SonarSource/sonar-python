@@ -71,7 +71,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
 
   private static void checkAllProperty(SubscriptionContext ctx, AssignmentStatement assignmentStatement) {
     Expression assignedValue = assignmentStatement.assignedValue();
-    if (!assignedValue.is(Tree.Kind.LIST_LITERAL) && !assignedValue.is(Tree.Kind.TUPLE)) {
+    if (!assignedValue.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)) {
       return;
     }
     List<Tree> stringExpressions = getStringExpressions(assignedValue);
@@ -98,12 +98,11 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isUnknownSymbol(PythonFile pythonFile, Map<String, Symbol> symbolsByName, StringLiteral stringLiteral) {
-    if (stringLiteral.stringElements().stream().anyMatch(StringElement::isInterpolated)) {
-      return false;
-    }
-    return !symbolsByName.containsKey(stringLiteral.trimmedQuotesValue())
-      && !BuiltinSymbols.all().contains(stringLiteral.trimmedQuotesValue())
-      && !isInitFileExportingModule(pythonFile, stringLiteral.trimmedQuotesValue());
+    String name = stringLiteral.trimmedQuotesValue();
+    return stringLiteral.stringElements().stream().noneMatch(StringElement::isInterpolated) &&
+      !symbolsByName.containsKey(name)
+      && !BuiltinSymbols.all().contains(name)
+      && !isInitFileExportingModule(pythonFile, name);
   }
 
   /**
@@ -122,17 +121,6 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     return ((Tuple) expression).elements().stream()
       .filter(UndefinedNameAllPropertyCheck::isString)
       .collect(Collectors.toList());
-  }
-
-  private static class UnresolvedWildcardImportVisitor extends BaseTreeVisitor {
-
-    private boolean hasUnresolvedWildcardImport = false;
-
-    @Override
-    public void visitImportFrom(ImportFrom importFrom) {
-      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
-      super.visitImportFrom(importFrom);
-    }
   }
 
   private static boolean existsFileWithName(@Nullable URI uri, String name) {
@@ -159,5 +147,16 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
       return (StringLiteral) tree;
     }
     return (StringLiteral) Expressions.singleAssignedValue((Name) tree);
+  }
+
+  private static class UnresolvedWildcardImportVisitor extends BaseTreeVisitor {
+
+    private boolean hasUnresolvedWildcardImport = false;
+
+    @Override
+    public void visitImportFrom(ImportFrom importFrom) {
+      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
+      super.visitImportFrom(importFrom);
+    }
   }
 }
