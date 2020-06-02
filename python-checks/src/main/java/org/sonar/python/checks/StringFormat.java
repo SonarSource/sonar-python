@@ -28,6 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -78,59 +79,61 @@ public class StringFormat {
 
   // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
   private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
-    "%" + "(?:\\((.*?)\\))?" + "([#\\-+0 ]*)?" + "([0-9]*|\\*)?" + "(?:\\.([0-9]*|\\*))?" + "([lLH])?" + "([A-Za-z]|%)");
+    "%" + "(?<field>(?:\\((?<mapkey>.*?)\\))?" + "(?<flags>[#\\-+0 ]*)?" + "(?<width>[0-9]*|\\*)?" +
+      "(?:\\.(?<precision>[0-9]*|\\*))?" + "(?:[lLH])?" + "(?<type>[diueEfFgGoxXrsac]|%))?");
 
   private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
   private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
-  private static final String PRINTF_VALID_CONVERTERS = PRINTF_NUMBER_CONVERTERS + PRINTF_INTEGER_CONVERTERS + "rsac";
 
-  public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Tree tree, String input) {
+  public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Tree tree, Tree secondary, String input) {
     List<ReplacementField> result = new ArrayList<>();
     Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(input);
 
     while (matcher.find()) {
-      String mapKey = matcher.group(1);
-      String conversionType = matcher.group(6);
+      if (matcher.group("field") == null) {
+        // We matched a '%' sign, but could not match the rest of the field, the syntax is erroneous.
+        reportSyntaxIssue(ctx, tree, secondary, "Fix this formatted string's syntax.");
+        return Optional.empty();
+      }
+
+      String mapKey = matcher.group("mapkey");
+      String conversionType = matcher.group("type");
 
       if (conversionType.equals("%")) {
         // If the conversion type is '%', we are dealing with a '%%'
         continue;
       }
 
-      char conversionTypeChar = conversionType.charAt(0);
-      if (PRINTF_VALID_CONVERTERS.indexOf(conversionTypeChar) == -1) {
-        ctx.addIssue(tree, String.format("Fix this formatted string's syntax; %%%c is not a valid conversion type.", conversionTypeChar));
-        return Optional.empty();
-      }
-
-      String width = matcher.group(3);
-      String precision = matcher.group(4);
+      String width = matcher.group("width");
+      String precision = matcher.group("precision");
       if ("*".equals(width)) {
-        result.add(new ReplacementField(printfWidthOrPrecValidator(ctx), mapKey));
+        result.add(new ReplacementField(printfWidthOrPrecisionValidator(ctx), null));
       }
       if ("*".equals(precision)) {
-        result.add(new ReplacementField(printfWidthOrPrecValidator(ctx), mapKey));
+        result.add(new ReplacementField(printfWidthOrPrecisionValidator(ctx), null));
       }
 
+      char conversionTypeChar = conversionType.charAt(0);
       result.add(new ReplacementField(printfConversionValidator(ctx, conversionTypeChar), mapKey));
-    }
-
-    if (input.contains("%") && result.isEmpty()) {
-      // We consider the format erroneous if it contains '%' and could not match any replacement fields.
-      ctx.addIssue(tree, "Fix this formatted string's syntax.");
-      return Optional.empty();
     }
 
     StringFormat format = new StringFormat(result);
     if (format.hasPositionalFields() && format.hasNamedFields()) {
-      ctx.addIssue(tree, "Use only positional or only named field, don't mix them.");
+      reportSyntaxIssue(ctx, tree, secondary, "Use only positional or only named field, don't mix them.");
       return Optional.empty();
     }
 
-    return Optional.of(new StringFormat(result));
+    return Optional.of(format);
   }
 
-  private static Consumer<Expression> printfWidthOrPrecValidator(SubscriptionContext ctx) {
+  private static void reportSyntaxIssue(SubscriptionContext ctx, Tree tree, Tree secondary, String message) {
+    PythonCheck.PreciseIssue preciseIssue = ctx.addIssue(tree, message);
+    if (tree != secondary) {
+      preciseIssue.secondary(secondary, null);
+    }
+  }
+
+  private static Consumer<Expression> printfWidthOrPrecisionValidator(SubscriptionContext ctx) {
     return expression -> {
       if (cannotBeOfType(expression, "int")) {
         ctx.addIssue(expression, "Replace this value with an integer as \"*\" requires.");
@@ -168,6 +171,8 @@ public class StringFormat {
   }
 
   private static boolean cannotBeOfType(Expression expression, String... types) {
+    // The best would be to use 'InferredType::isCompatibleWith' against types created from protocols such as
+    // 'SupportsFloat' and 'SupportsInt', but these are ambiguous symbols as they are defined both for Python 2 and 3.
     return Arrays.stream(types).noneMatch(type -> expression.type().canBeOrExtend(type));
   }
 

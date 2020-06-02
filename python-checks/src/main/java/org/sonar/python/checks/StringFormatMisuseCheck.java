@@ -29,7 +29,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -41,32 +43,50 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, ctx -> {
       BinaryExpression expression = (BinaryExpression) ctx.syntaxNode();
-      if (!expression.leftOperand().is(Tree.Kind.STRING_LITERAL)) {
+      StringLiteral formatString = extractStringLiteral(expression.leftOperand());
+      if (formatString == null) {
         return;
       }
 
-      StringLiteral formatString = ((StringLiteral) expression.leftOperand());
-      Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, formatString, formatString.trimmedQuotesValue());
-
+      Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, expression.leftOperand(), formatString, formatString.trimmedQuotesValue());
       if (!formatOptional.isPresent()) {
         // The string format contains invalid syntax.
         return;
       }
 
       StringFormat format = formatOptional.get();
-      if (expression.rightOperand().is(Tree.Kind.TUPLE)) {
-        checkTuples(ctx, format, ((Tuple) expression.rightOperand()));
-      } else if (expression.rightOperand().is(Tree.Kind.DICTIONARY_LITERAL)) {
-        checkDictionaries(ctx, format, ((DictionaryLiteral) expression.rightOperand()));
-      } else if (format.numExpectedArguments() == 1) {
-        format.replacementFields().get(0).validateArgument(expression.rightOperand());
+
+      Expression rhs = expression.rightOperand();
+      if (format.hasNamedFields()) {
+        checkNamed(ctx, format, rhs);
+      } else {
+        checkPositional(ctx, format, rhs);
       }
     });
   }
 
+  private static void checkNamed(SubscriptionContext ctx, StringFormat format, Expression rhs) {
+    if (rhs.is(Tree.Kind.DICTIONARY_LITERAL)) {
+      checkDictionaries(ctx, format, ((DictionaryLiteral) rhs));
+    } else if (rhs.type().canOnlyBe("list") || rhs.type().canOnlyBe("tuple") || !rhs.type().canHaveMember("__getitem__")) {
+      // We consider everything having __getitem__ a mapping, with the exception of list and tuple.
+      ctx.addIssue(rhs, "Replace this formatting argument with a mapping.");
+    }
+  }
+
+  private static void checkPositional(SubscriptionContext ctx, StringFormat format, Expression rhs) {
+    if (rhs.is(Tree.Kind.TUPLE)) {
+      checkTuples(ctx, format, ((Tuple) rhs));
+    } else if (format.numExpectedArguments() == 1) {
+      format.replacementFields().get(0).validateArgument(rhs);
+    } else if (!rhs.type().canBeOrExtend("tuple")) {
+      // Positional fields require tuples
+      ctx.addIssue(rhs, "Replace this formatting argument with a tuple.");
+    }
+  }
+
   private static void checkTuples(SubscriptionContext ctx, StringFormat format, Tuple tuple) {
-    if (format.hasNamedFields()) {
-      ctx.addIssue(tuple, "Replace this formatting argument with a mapping.");
+    if (tuple.elements().stream().anyMatch(expression -> expression.is(Tree.Kind.UNPACKING_EXPR))) {
       return;
     }
 
@@ -81,19 +101,26 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkDictionaries(SubscriptionContext ctx, StringFormat format, DictionaryLiteral dict) {
-    if (format.hasPositionalFields()) {
-      ctx.addIssue(dict, "Replace this formatting argument with a tuple.");
-      return;
-    }
+    // Check the keys - do not bother with dictionaries containing unpacking expressions or keys which are not string literals
+    for (DictionaryLiteralElement element : dict.elements()) {
+      if (!element.is(Tree.Kind.KEY_VALUE_PAIR)) {
+        return;
+      }
 
-    if (dict.elements().stream().anyMatch(StringFormatMisuseCheck::isOutOfScopeDictionaryElement)) {
-      // Do not bother with dictionaries containing unpacking expressions or keys which are not string literals.
-      return;
+      KeyValuePair pair = (KeyValuePair) element;
+      if (!pair.key().type().canOnlyBe("str")) {
+        ctx.addIssue(pair.key(), "Replace this key; %-format accepts only string keys.");
+        return;
+      }
+
+      if (!pair.key().is(Tree.Kind.STRING_LITERAL)) {
+        return;
+      }
     }
 
     Map<String, List<StringFormat.ReplacementField>> fieldMap = format.replacementFields().stream().collect(
       Collectors.groupingBy(StringFormat.ReplacementField::mappingKey));
-    if (fieldMap.size() != dict.elements().size()) {
+    if (fieldMap.size() > dict.elements().size()) {
       reportInvalidArgumentSize(ctx, dict, fieldMap.size(), dict.elements().size());
       return;
     }
@@ -115,15 +142,6 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
     fieldMap.keySet().forEach(fieldName -> ctx.addIssue(dict, String.format("Provide a value for field \"%s\".", fieldName)));
   }
 
-  private static boolean isOutOfScopeDictionaryElement(DictionaryLiteralElement element) {
-    if (!element.is(Tree.Kind.KEY_VALUE_PAIR)) {
-      return true;
-    }
-
-    KeyValuePair keyValuePair = (KeyValuePair) element;
-    return !keyValuePair.key().is(Tree.Kind.STRING_LITERAL);
-  }
-
   private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, int expected, int actual) {
     if (expected > actual) {
       ctx.addIssue(tree, String.format("Add %d missing argument(s).", expected - actual));
@@ -132,4 +150,18 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
     }
   }
 
+  private static StringLiteral extractStringLiteral(Tree tree) {
+    if (tree.is(Tree.Kind.STRING_LITERAL)) {
+      return (StringLiteral) tree;
+    }
+
+    if (tree.is(Tree.Kind.NAME)) {
+      Expression assignedValue = Expressions.singleAssignedValue(((Name) tree));
+      if (assignedValue != null && assignedValue.is(Tree.Kind.STRING_LITERAL)) {
+        return ((StringLiteral) assignedValue);
+      }
+    }
+
+    return null;
+  }
 }
