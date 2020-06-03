@@ -1,3 +1,5 @@
+from typing import Any
+
 class RSAPublicKey:
     def encrypt(self, plaintext: Any, padding: Any) -> Any: ...
 

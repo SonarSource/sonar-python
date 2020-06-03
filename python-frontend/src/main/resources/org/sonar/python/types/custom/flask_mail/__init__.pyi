@@ -1,3 +1,5 @@
+from typing import Any, Optional
+
 class Message: ...
 
 class Mail:

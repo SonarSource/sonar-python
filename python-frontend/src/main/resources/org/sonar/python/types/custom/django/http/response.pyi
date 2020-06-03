@@ -1,3 +1,5 @@
+from typing import Any, Iterable, Optional
+
 class HttpResponseBase(Iterable[Any]):
     def set_cookie(
             self,

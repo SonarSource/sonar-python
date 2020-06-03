@@ -1,3 +1,5 @@
+from typing import Any
+
 VERIFY_NONE: int
 
 class Context:

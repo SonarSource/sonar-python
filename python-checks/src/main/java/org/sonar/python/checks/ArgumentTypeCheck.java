@@ -172,9 +172,6 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
     return null;
   }
 
-  /*
-  We exclude types which can be associated to hard-coded symbols with missing members
-   */
   private static boolean isException(InferredType inferredType) {
     return inferredType.canBeOrExtend("unittest.mock.Mock");
   }
