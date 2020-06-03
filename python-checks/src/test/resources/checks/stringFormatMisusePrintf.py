@@ -60,7 +60,8 @@ def width_precision():
 
 
 def dict_arguments():
-    '%(first)s %(second)s %(third)s' % {'first': 'one', 'second': 'two'} # Noncompliant {{Add 1 missing argument(s).}}
+    '%(first)s %(second)s %(third)s' % {'first': 'one', 'second': 'two'} # Noncompliant {{Provide a value for field "third".}}
+    "%(a)s %(b)s %(c)s" % {"a": "str"}  # Noncompliant 2
     '%(first)s' % {'first': 'one', 'second': 'two'} # Ok - this is in the scope of S3457
     '%s %s' % {'first': 'one', 'second': 'two'} # Noncompliant {{Replace this formatting argument with a tuple.}}
              #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -81,6 +82,7 @@ def dict_arguments():
 
     '%(a)d %(a)s' % {"a": 1}  # Ok
     '%(a)d %(a)s' % {"a": "str"}  # Noncompliant
+    "%%(key)s" % {"other": "str"} # Ok
 
 def single_arguments():
     '%d' % 42 # Ok
@@ -99,6 +101,7 @@ def other():
               #^
     '%s %s' % ['a', 'b']  # Noncompliant {{Replace this formatting argument with a tuple.}}
     '%(field)s' % ['a'] # Noncompliant {{Replace this formatting argument with a mapping.}}
+    '%(field)s' % 'a' # Noncompliant
 
     class Map:
         def __getitem__(self, item):
@@ -126,7 +129,7 @@ def some_duck_typing():
 
     # FP
     undercover_float = MyCustomFloat(42.3)
-    print("hello %f" % undercover_float) # Noncompliant
+    "hello %f" % undercover_float # Noncompliant
 
 def edge_case():
     5 % 2
@@ -136,3 +139,5 @@ def edge_case():
     y = 6
     y % ('hello')
     '' % ('one') # Noncompliant
+    '' % ([]) # Ok
+    '' % [] # Ok

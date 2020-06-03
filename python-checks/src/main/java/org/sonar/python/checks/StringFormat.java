@@ -85,14 +85,14 @@ public class StringFormat {
   private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
   private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
 
-  public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Tree tree, Tree secondary, String input) {
+  public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Expression lhsOperand, StringLiteral literal) {
     List<ReplacementField> result = new ArrayList<>();
-    Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(input);
+    Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(literal.trimmedQuotesValue());
 
     while (matcher.find()) {
       if (matcher.group("field") == null) {
         // We matched a '%' sign, but could not match the rest of the field, the syntax is erroneous.
-        reportSyntaxIssue(ctx, tree, secondary, "Fix this formatted string's syntax.");
+        reportSyntaxIssue(ctx, lhsOperand, literal, "Fix this formatted string's syntax.");
         return Optional.empty();
       }
 
@@ -119,16 +119,16 @@ public class StringFormat {
 
     StringFormat format = new StringFormat(result);
     if (format.hasPositionalFields() && format.hasNamedFields()) {
-      reportSyntaxIssue(ctx, tree, secondary, "Use only positional or only named field, don't mix them.");
+      reportSyntaxIssue(ctx, lhsOperand, literal, "Use only positional or only named field, don't mix them.");
       return Optional.empty();
     }
 
     return Optional.of(format);
   }
 
-  private static void reportSyntaxIssue(SubscriptionContext ctx, Tree tree, Tree secondary, String message) {
-    PythonCheck.PreciseIssue preciseIssue = ctx.addIssue(tree, message);
-    if (tree != secondary) {
+  private static void reportSyntaxIssue(SubscriptionContext ctx, Tree primary, Tree secondary, String message) {
+    PythonCheck.PreciseIssue preciseIssue = ctx.addIssue(primary, message);
+    if (primary != secondary) {
       preciseIssue.secondary(secondary, null);
     }
   }

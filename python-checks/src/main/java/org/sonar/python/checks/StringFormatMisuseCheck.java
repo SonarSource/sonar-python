@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,6 +40,8 @@ import org.sonar.plugins.python.api.tree.Tuple;
 @Rule(key = "S2275")
 public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
+  private static final List<String> NOT_MAPPING_TYPES = Arrays.asList("list", "tuple", "str");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, ctx -> {
@@ -48,15 +51,19 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
         return;
       }
 
-      Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, expression.leftOperand(), formatString, formatString.trimmedQuotesValue());
+      Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, expression.leftOperand(), formatString);
       if (!formatOptional.isPresent()) {
         // The string format contains invalid syntax.
         return;
       }
 
       StringFormat format = formatOptional.get();
-
       Expression rhs = expression.rightOperand();
+      if (format.numExpectedArguments() == 0 && (isMapping(rhs) || rhs.type().canOnlyBe("list"))) {
+        // The format does not contain any replacement fields, but with a mapping or a list as RHS, it won't result in a runtime error.
+        return;
+      }
+
       if (format.hasNamedFields()) {
         checkNamed(ctx, format, rhs);
       } else {
@@ -68,8 +75,7 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
   private static void checkNamed(SubscriptionContext ctx, StringFormat format, Expression rhs) {
     if (rhs.is(Tree.Kind.DICTIONARY_LITERAL)) {
       checkDictionaries(ctx, format, ((DictionaryLiteral) rhs));
-    } else if (rhs.type().canOnlyBe("list") || rhs.type().canOnlyBe("tuple") || !rhs.type().canHaveMember("__getitem__")) {
-      // We consider everything having __getitem__ a mapping, with the exception of list and tuple.
+    } else if (!isMapping(rhs)) {
       ctx.addIssue(rhs, "Replace this formatting argument with a mapping.");
     }
   }
@@ -120,11 +126,6 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
     Map<String, List<StringFormat.ReplacementField>> fieldMap = format.replacementFields().stream().collect(
       Collectors.groupingBy(StringFormat.ReplacementField::mappingKey));
-    if (fieldMap.size() > dict.elements().size()) {
-      reportInvalidArgumentSize(ctx, dict, fieldMap.size(), dict.elements().size());
-      return;
-    }
-
     for (DictionaryLiteralElement element : dict.elements()) {
       KeyValuePair pair = (KeyValuePair) element;
       String key = ((StringLiteral) pair.key()).trimmedQuotesValue();
@@ -140,6 +141,12 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
     // Check if we have any unmatched field names left
     fieldMap.keySet().forEach(fieldName -> ctx.addIssue(dict, String.format("Provide a value for field \"%s\".", fieldName)));
+  }
+
+  private static boolean isMapping(Expression expression) {
+    // We consider everything having __getitem__ a mapping, with the exception of list and tuple.
+    return NOT_MAPPING_TYPES.stream().noneMatch(type -> expression.type().canOnlyBe(type))
+      && expression.type().canHaveMember("__getitem__");
   }
 
   private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, int expected, int actual) {
