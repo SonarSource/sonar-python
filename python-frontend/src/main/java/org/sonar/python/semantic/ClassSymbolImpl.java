@@ -229,4 +229,21 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   boolean hasSuperClassWithoutSymbol() {
     return hasSuperClassWithoutSymbol;
   }
+
+  @Override
+  Set<SerializableSymbol> serialize() {
+    boolean hasSuperClassWithoutFqn = hasSuperClassWithoutSymbol;
+    List<String> superClassFqns = new ArrayList<>();
+    for (Symbol superClass : superClasses) {
+      if (superClass.fullyQualifiedName() == null) {
+        hasSuperClassWithoutFqn = true;
+      } else {
+        superClassFqns.add(superClass.fullyQualifiedName());
+      }
+    }
+    Set<SerializableSymbol> serializedMembers = members.stream()
+      .flatMap(member -> ((SymbolImpl) member).serialize().stream())
+      .collect(Collectors.toSet());
+    return Collections.singleton(new SerializableClassSymbol(name(), fullyQualifiedName(), superClassFqns, serializedMembers, hasSuperClassWithoutFqn));
+  }
 }

@@ -77,7 +77,8 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean importsManipulatedAllProperty(FileInput fileInput) {
-    return fileInput.globalVariables().stream().anyMatch(s -> s.name().equals("__all__") && s.fullyQualifiedName() != null);
+    return fileInput.globalVariables().stream().anyMatch(s -> s.name().equals("__all__") &&
+      s.usages().stream().anyMatch(usage -> usage.kind() == Usage.Kind.IMPORT));
   }
 
   private static void checkCfgBlock(CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariables definedVariables,

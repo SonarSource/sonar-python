@@ -59,9 +59,10 @@ public class TypeShed {
   private static final String TYPING = "typing";
   private static final String TYPING_EXTENSIONS = "typing_extensions";
   private static Map<String, Symbol> builtins;
-  private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
+  private static final Map<String, Set<Symbol>> typeShedSymbolsByModuleName = new HashMap<>();
   private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
   private static final Set<String> modulesInProgress = new HashSet<>();
+  private static final Map<String, Symbol> typeShedSymbolByFqn = new HashMap<>();
 
   private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";
   private static final String STDLIB_2 = "typeshed/stdlib/2/";
@@ -152,16 +153,23 @@ public class TypeShed {
   }
 
   public static Set<Symbol> symbolsForModule(String moduleName) {
-    if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
+    if (!TypeShed.typeShedSymbolsByModuleName.containsKey(moduleName)) {
       Set<Symbol> symbols = searchTypeShedForModule(moduleName);
-      typeShedSymbols.put(moduleName, symbols);
+      typeShedSymbolsByModuleName.put(moduleName, symbols);
+      symbols.stream()
+        .filter(symbol -> symbol.fullyQualifiedName() != null)
+        .forEach(symbol -> typeShedSymbolByFqn.put(symbol.fullyQualifiedName(), symbol));
       return symbols;
     }
-    return TypeShed.typeShedSymbols.get(moduleName);
+    return TypeShed.typeShedSymbolsByModuleName.get(moduleName);
   }
 
   @CheckForNull
   public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
+    Symbol symbolWithFQN = symbolWithFQN(fullyQualifiedName);
+    if (symbolWithFQN != null) {
+      return symbolWithFQN;
+    }
     Set<Symbol> symbols = symbolsForModule(stdLibModuleName);
     Symbol symbolByFqn = symbols.stream().filter(s -> fullyQualifiedName.equals(s.fullyQualifiedName())).findFirst().orElse(null);
     if (symbolByFqn != null || !fullyQualifiedName.contains(".")) {
@@ -181,6 +189,14 @@ public class TypeShed {
     }
 
     return null;
+  }
+
+  @CheckForNull
+  public static Symbol symbolWithFQN(String fullyQualifiedName) {
+    if (builtins != null) {
+      return builtins.getOrDefault(fullyQualifiedName, typeShedSymbolByFqn.get(fullyQualifiedName));
+    }
+    return typeShedSymbolByFqn.get(fullyQualifiedName);
   }
 
   private static Set<Symbol> searchTypeShedForModule(String moduleName) {

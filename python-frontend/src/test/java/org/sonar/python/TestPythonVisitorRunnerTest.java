@@ -25,8 +25,8 @@ import java.nio.file.Files;
 import java.util.Collections;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SerializableSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,6 +48,6 @@ public class TestPythonVisitorRunnerTest {
   public void global_symbols() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(Collections.singletonList(new File(baseDir, "file.py")), baseDir);
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file")).extracting(Symbol::name).containsExactlyInAnyOrder("hello", "A");
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file")).extracting(SerializableSymbol::fullyQualifiedName).containsExactlyInAnyOrder("file.hello", "file.A");
   }
 }

@@ -48,6 +48,7 @@ class Scope {
   private PythonFile pythonFile;
   private String fullyQualifiedModuleName;
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
+  private final SymbolDeserializer symbolDeserializer;
   private final Scope parent;
   final Map<String, Symbol> symbolsByName = new HashMap<>();
   private final Set<Symbol> symbols = new HashSet<>();
@@ -56,12 +57,15 @@ class Scope {
   private final Set<String> nonlocalNames = new HashSet<>();
   final Map<String, SymbolImpl> instanceAttributesByName = new HashMap<>();
 
-  Scope(@Nullable Scope parent, Tree rootTree, PythonFile pythonFile, String fullyQualifiedModuleName, ProjectLevelSymbolTable projectLevelSymbolTable) {
+  Scope(@Nullable Scope parent, Tree rootTree, PythonFile pythonFile, String fullyQualifiedModuleName,
+        ProjectLevelSymbolTable projectLevelSymbolTable, SymbolDeserializer symbolDeserializer) {
+
     this.parent = parent;
     this.rootTree = rootTree;
     this.pythonFile = pythonFile;
     this.fullyQualifiedModuleName = fullyQualifiedModuleName;
     this.projectLevelSymbolTable = projectLevelSymbolTable;
+    this.symbolDeserializer = symbolDeserializer;
   }
 
   Set<Symbol> symbols() {
@@ -134,12 +138,7 @@ class Scope {
       // Must use symbolName to preserve import aliases
       ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation());
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
-        Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
-        if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
-          classSymbol.addSuperClass(copySymbol(globalSymbol.name(), globalSymbol));
-        } else {
-          classSymbol.addSuperClass(originalSymbol);
-        }
+        classSymbol.addSuperClass(originalSymbol);
       }
       classSymbol.addMembers(originalClassSymbol
         .declaredMembers().stream()
@@ -166,10 +165,11 @@ class Scope {
 
   void addModuleSymbol(Name nameTree, @CheckForNull String fullyQualifiedName) {
     String symbolName = nameTree.name();
-    Set<Symbol> moduleExportedSymbols = projectLevelSymbolTable.getSymbolsFromModule(fullyQualifiedName);
+    Set<Symbol> moduleExportedSymbols = symbolDeserializer.deserializeSymbols(
+      projectLevelSymbolTable.getSymbolsFromModule(fullyQualifiedName));
     if (moduleExportedSymbols != null && !isExistingSymbol(symbolName)) {
       SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
-      moduleExportedSymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
+      moduleExportedSymbols.forEach(moduleSymbol::addChildSymbol);
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
     } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
@@ -186,14 +186,22 @@ class Scope {
 
   void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, String fromModuleName) {
     String symbolName = nameTree.name();
-    Symbol globalSymbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
-    if (globalSymbol == null && fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
-      globalSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
+    Symbol importedSymbol = symbolDeserializer.deserializeSymbol(
+      projectLevelSymbolTable.getSymbol(fullyQualifiedName));
+    if (importedSymbol != null && !isExistingSymbol(symbolName)) {
+      ((SymbolImpl) importedSymbol).setName(symbolName);
+      this.symbols.add(importedSymbol);
+      symbolsByName.put(symbolName, importedSymbol);
+      ((SymbolImpl) importedSymbol).addUsage(nameTree, Usage.Kind.IMPORT);
+      return;
     }
-    if (globalSymbol == null || isExistingSymbol(symbolName)) {
+    if (fullyQualifiedName != null && !fromModuleName.equals(fullyQualifiedModuleName)) {
+      importedSymbol = TypeShed.symbolWithFQN(fromModuleName, fullyQualifiedName);
+    }
+    if (importedSymbol == null || isExistingSymbol(symbolName)) {
       addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
     } else {
-      Symbol symbol = copySymbol(symbolName, globalSymbol);
+      Symbol symbol = copySymbol(symbolName, importedSymbol);
       this.symbols.add(symbol);
       symbolsByName.put(symbolName, symbol);
       ((SymbolImpl) symbol).addUsage(nameTree, Usage.Kind.IMPORT);

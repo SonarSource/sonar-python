@@ -21,8 +21,10 @@ package org.sonar.python.semantic;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -100,6 +102,28 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     this.parameters.addAll(parameters);
     this.functionDefinitionLocation = null;
     this.isStub = true;
+  }
+
+  FunctionSymbolImpl(SerializableFunctionSymbol serializableFunctionSymbol) {
+    super(serializableFunctionSymbol.name(), serializableFunctionSymbol.fullyQualifiedName());
+    setKind(Kind.FUNCTION);
+    this.hasVariadicParameter = serializableFunctionSymbol.parameters().stream().anyMatch(SerializableParameter::isVariadic);
+    this.isInstanceMethod = serializableFunctionSymbol.isInstanceMethod();
+    this.hasDecorators = !serializableFunctionSymbol.decorators().isEmpty();
+    this.decorators = serializableFunctionSymbol.decorators();
+    this.functionDefinitionLocation = serializableFunctionSymbol.definitionLocation();
+    this.isStub = false;
+    this.parameters.addAll(fromSerializableParameter(serializableFunctionSymbol));
+  }
+
+  private static List<ParameterImpl> fromSerializableParameter(SerializableFunctionSymbol serializableFunctionSymbol) {
+    return serializableFunctionSymbol.parameters().stream().map(parameter -> {
+      ParameterState parameterState = new ParameterState();
+      parameterState.keywordOnly = parameter.isKeywordOnly();
+      parameterState.positionalOnly = parameter.isPositionalOnly();
+      return new ParameterImpl(
+        parameter.name(), InferredTypes.anyType(), parameter.hasDefaultValue(), parameter.isVariadic(), parameterState, parameter.location());
+    }).collect(Collectors.toList());
   }
 
   @Override
@@ -226,6 +250,15 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   public void setOwner(Symbol owner) {
     this.owner = owner;
+  }
+
+  @Override
+  Set<SerializableSymbol> serialize() {
+    List<SerializableParameter> serializableParameters = parameters.stream()
+      .map(SerializableParameter::new)
+      .collect(Collectors.toList());
+    return Collections.singleton(
+      new SerializableFunctionSymbol(name(), fullyQualifiedName(), serializableParameters, isStub, isInstanceMethod, decorators, functionDefinitionLocation));
   }
 
   private static class ParameterImpl implements Parameter {
