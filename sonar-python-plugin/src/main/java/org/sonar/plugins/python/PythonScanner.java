@@ -72,7 +72,7 @@ public class PythonScanner extends Scanner {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
-  private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+  private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
 
 
   public PythonScanner(

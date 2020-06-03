@@ -130,7 +130,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
   private static boolean isIncompatibleTypes(InferredType argumentType, InferredType parameterType) {
     return (isNotDuckTypeCompatible(argumentType, parameterType)
-      || (!argumentType.isCompatibleWith(parameterType) && !couldBeDuckTypeCompatible(argumentType, parameterType)));
+      || (!argumentType.isCompatibleWith(parameterType) && !couldBeDuckTypeCompatible(argumentType, parameterType))) && !isException(argumentType);
   }
 
   private static boolean isNotDuckTypeCompatible(InferredType argumentType, InferredType parameterType) {
@@ -170,5 +170,12 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
       return BuiltinTypes.TUPLE;
     }
     return null;
+  }
+
+  /*
+  We exclude types which can be associated to hard-coded symbols with missing members
+   */
+  private static boolean isException(InferredType inferredType) {
+    return inferredType.canBeOrExtend("unittest.mock.Mock");
   }
 }

@@ -67,7 +67,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
-    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     for (File file : files) {
       TestPythonFile pythonFile = new TestPythonFile(file);
       AstNode astNode = PythonParser.create().parse(pythonFile.content());
