@@ -86,6 +86,16 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
+  public void django_submodule_import_preserves_fqn() {
+    // see python-frontend/src/main/resources/org/sonar/python/types/custom/django/__init__.pyi
+    FileInput tree = parse(
+      "import django.http",
+      "django.http.HttpResponse()"
+    );
+    assertNameAndQualifiedName(tree, "HttpResponse", "django.http.response.HttpResponse");
+  }
+
+  @Test
   public void import_alias_reassigned() {
     FileInput tree = parse(
       "if x:",
