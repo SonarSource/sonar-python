@@ -33,7 +33,6 @@ import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
@@ -68,7 +67,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
-    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.from(SymbolUtils.externalModulesSymbols());
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     for (File file : files) {
       TestPythonFile pythonFile = new TestPythonFile(file);
       AstNode astNode = PythonParser.create().parse(pythonFile.content());

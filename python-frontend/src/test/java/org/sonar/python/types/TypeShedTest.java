@@ -185,4 +185,12 @@ public class TypeShedTest {
     assertThat(setupSymbolFromPosix.kind()).isEqualTo(Kind.AMBIGUOUS);
     assertThat(setupSymbolFromOs.kind()).isEqualTo(Kind.AMBIGUOUS);
   }
+
+  @Test
+  public void package_django() {
+    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("django.http").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Symbol responseSymbol = djangoSymbols.get("HttpResponse");
+    assertThat(responseSymbol.kind()).isEqualTo(Kind.CLASS);
+    assertThat(responseSymbol.fullyQualifiedName()).isEqualTo("django.http.response.HttpResponse");
+  }
 }

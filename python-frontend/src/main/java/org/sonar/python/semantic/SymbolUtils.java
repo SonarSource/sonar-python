@@ -26,14 +26,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -56,16 +51,9 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShedPythonFile;
 
 public class SymbolUtils {
-
-  private static final String SEND_MESSAGE = "send_message";
-  private static final String SET_COOKIE = "set_cookie";
-  private static final String SET_SIGNED_COOKIE = "set_signed_cookie";
-  private static final String EQ = "__eq__";
-  private static final String SET_VERIFY = "set_verify";
 
   private SymbolUtils() {
   }
@@ -203,92 +191,6 @@ public class SymbolUtils {
     } catch (InvalidPathException e) {
       return null;
     }
-  }
-
-  public static Map<String, Set<Symbol>> externalModulesSymbols() {
-    Map<String, Set<Symbol>> globalSymbols = new HashMap<>();
-
-    globalSymbols.put("flask_mail", new HashSet<>(Arrays.asList(
-      classSymbol("Mail", "flask_mail.Mail", "send", SEND_MESSAGE),
-      classSymbol("Connection", "flask_mail.Connection", "send", SEND_MESSAGE)
-      )));
-    globalSymbols.put("smtplib", new HashSet<>(Arrays.asList(
-      classSymbol("SMTP", "smtplib.SMTP", "sendmail", SEND_MESSAGE, "starttls"),
-      classSymbol("SMTP_SSL", "smtplib.SMTP_SSL", "sendmail", SEND_MESSAGE)
-    )));
-
-    globalSymbols.put("django.http", new HashSet<>(Arrays.asList(
-      classSymbol("HttpResponse", "django.http.HttpResponse", SET_COOKIE, SET_SIGNED_COOKIE, "__setitem__"),
-      classSymbol("HttpResponseRedirect", "django.http.HttpResponseRedirect", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponsePermanentRedirect", "django.http.HttpResponsePermanentRedirect", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseNotModified", "django.http.HttpResponseNotModified", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseNotFound", "django.http.HttpResponseNotFound", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseForbidden", "django.http.HttpResponseForbidden", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseNotAllowed", "django.http.HttpResponseNotAllowed", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseGone", "django.http.HttpResponseGone", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseServerError", "django.http.HttpResponseServerError", SET_COOKIE, SET_SIGNED_COOKIE),
-      classSymbol("HttpResponseBadRequest", "django.http.HttpResponseBadRequest", SET_COOKIE, SET_SIGNED_COOKIE)
-    )));
-
-    globalSymbols.put("django.http.response", new HashSet<>(Collections.singleton(
-      classSymbol("HttpResponse", "django.http.response.HttpResponse")
-    )));
-
-    ClassSymbolImpl ldapObject = classSymbol("LDAPObject", "ldap.LDAPObject", "simple_bind", "simple_bind_s", "bind", "bind_s");
-    FunctionSymbolImpl initialize = new FunctionSymbolImpl(
-      "initialize", "ldap.initialize", false, false, false, Collections.emptyList(),Collections.emptyList());
-    initialize.setDeclaredReturnType(InferredTypes.runtimeType(ldapObject));
-    globalSymbols.put("ldap", new HashSet<>(Collections.singleton(initialize)));
-
-
-    ClassSymbolImpl sslContextClass =
-      classSymbol("Context", "OpenSSL.SSL.Context", SET_VERIFY);
-    SymbolImpl sslSubmodule = moduleSymbol("SSL", "OpenSSL.SSL", sslContextClass);
-    globalSymbols.put("OpenSSL", Collections.singleton(sslSubmodule));
-
-
-    ClassSymbolImpl csrfProtect =
-      classSymbol("CSRFProtect", "flask_wtf.csrf.CSRFProtect", "init_app", "exempt");
-    globalSymbols.put("flask_wtf.csrf", Collections.singleton(csrfProtect));
-
-
-    ClassSymbolImpl modesCBC = classSymbol("CBC", "cryptography.hazmat.primitives.ciphers.modes.CBC");
-    ClassSymbolImpl modesECB = classSymbol("ECB", "cryptography.hazmat.primitives.ciphers.modes.ECB");
-    SymbolImpl cryptographyModesSubmodule = moduleSymbol("modes", "cryptography.hazmat.primitives.ciphers.modes", modesCBC, modesECB);
-    globalSymbols.put("cryptography.hazmat.primitives.ciphers", Collections.singleton(cryptographyModesSubmodule));
-
-    ClassSymbolImpl pkcs1v15 = classSymbol("PKCS1v15", "cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15");
-    SymbolImpl cryptographyPaddingSubmodule = moduleSymbol("padding", "cryptography.hazmat.primitives.asymmetric.padding", pkcs1v15);
-
-    FunctionSymbolImpl generatePrivateKey = new FunctionSymbolImpl(
-      "generate_private_key", "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key", false, false, false, Collections.emptyList(),Collections.emptyList());
-    ClassSymbolImpl rsaPrivateKey = classSymbol("RSAPrivateKey", "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey", "decrypt");
-    FunctionSymbolImpl publicKey = new FunctionSymbolImpl(
-      "public_key", "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key", false, false, false, Collections.emptyList(),Collections.emptyList());
-    ClassSymbolImpl rsaPublicKey = classSymbol("RSAPublicKey", "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey", "encrypt");
-    publicKey.setDeclaredReturnType(InferredTypes.runtimeType(rsaPublicKey));
-    rsaPrivateKey.addMembers(Collections.singleton(publicKey));
-    generatePrivateKey.setDeclaredReturnType(InferredTypes.runtimeType(rsaPrivateKey));
-    SymbolImpl cryptographyRsaSubmodule = moduleSymbol("rsa", "cryptography.hazmat.primitives.asymmetric.rsa", generatePrivateKey);
-
-    globalSymbols.put("cryptography.hazmat.primitives.asymmetric", new HashSet<>(Arrays.asList(cryptographyPaddingSubmodule, cryptographyRsaSubmodule)));
-
-    return globalSymbols;
-  }
-
-  private static ClassSymbolImpl classSymbol(String name, String fullyQualifiedName, String... members) {
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(name, fullyQualifiedName);
-    classSymbol.addMembers(Arrays.stream(members).map(m -> new SymbolImpl(m, fullyQualifiedName + "." + m)).collect(Collectors.toSet()));
-    return classSymbol;
-  }
-
-  @SuppressWarnings("SameParameterValue")
-  private static SymbolImpl moduleSymbol(String moduleName, String fullyQualifiedName, Symbol... childSymbols) {
-    SymbolImpl m = new SymbolImpl(moduleName, fullyQualifiedName);
-    for (Symbol c: childSymbols) {
-      m.addChildSymbol(c);
-    }
-    return m;
   }
 
   public static boolean isTypeShedFile(PythonFile pythonFile) {

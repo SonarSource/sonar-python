@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
 import org.sonar.check.Rule;
@@ -173,12 +172,7 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
     return null;
   }
 
-  /*
-  We exclude types which can be associated to hard-coded symbols with missing members
-   */
   private static boolean isException(InferredType inferredType) {
-    return SymbolUtils.externalModulesSymbols().values()
-      .stream().flatMap(Collection::stream)
-      .anyMatch(symbol -> inferredType.canBeOrExtend(symbol.fullyQualifiedName())) || inferredType.canBeOrExtend("unittest.mock.Mock");
+    return inferredType.canBeOrExtend("unittest.mock.Mock");
   }
 }

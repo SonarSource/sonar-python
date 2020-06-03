@@ -58,7 +58,6 @@ import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
@@ -73,7 +72,7 @@ public class PythonScanner extends Scanner {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
-  private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.from(SymbolUtils.externalModulesSymbols());
+  private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
 
 
   public PythonScanner(

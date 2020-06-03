@@ -69,6 +69,7 @@ public class TypeShed {
   private static final String THIRD_PARTY_2AND3 = "typeshed/third_party/2and3/";
   private static final String THIRD_PARTY_2 = "typeshed/third_party/2/";
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
+  private static final String CUSTOM_THIRD_PARTY = "custom/";
 
   private TypeShed() {
   }
@@ -187,6 +188,11 @@ public class TypeShed {
       return new HashSet<>();
     }
     modulesInProgress.add(moduleName);
+    Set<Symbol> customSymbols = new HashSet<>(getModuleSymbols(moduleName, CUSTOM_THIRD_PARTY, builtinGlobalSymbols).values());
+    if (!customSymbols.isEmpty()) {
+      modulesInProgress.remove(moduleName);
+      return customSymbols;
+    }
     Set<Symbol> standardLibrarySymbols = new HashSet<>(getModuleSymbols(moduleName, STDLIB_2AND3, builtinGlobalSymbols).values());
     if (standardLibrarySymbols.isEmpty()) {
       standardLibrarySymbols = commonSymbols(getModuleSymbols(moduleName, STDLIB_2, builtinGlobalSymbols),
@@ -213,7 +219,7 @@ public class TypeShed {
     String packageName = String.join(".", Arrays.copyOfRange(moduleNameHierarchy, 0, moduleNameHierarchy.length - 1));
     InputStream resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + ".pyi");
     if (resource == null) {
-      resource = TypeShed.class.getResourceAsStream(categoryPath + moduleName + "/__init__.pyi");
+      resource = TypeShed.class.getResourceAsStream(categoryPath + pathToModule + "/__init__.pyi");
       if (resource == null) {
         return null;
       }
