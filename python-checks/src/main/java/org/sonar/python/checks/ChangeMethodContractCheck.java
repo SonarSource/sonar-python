@@ -30,13 +30,10 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.python.semantic.FunctionSymbolImpl;
 
-import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 
@@ -65,7 +62,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
-    getOverriddenMethod(method).ifPresent(overriddenMethod -> {
+    CheckUtils.getOverriddenMethod(method).ifPresent(overriddenMethod -> {
       if (overriddenMethod.hasVariadicParameter() || overriddenMethod.hasDecorators()) {
         // ignore function declarations with packed params
         return;
@@ -87,29 +84,6 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
       }
     });
   }
-
-  private static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol) {
-    Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
-    if (owner == null || owner.kind() != CLASS) {
-      return Optional.empty();
-    }
-    ClassSymbol classSymbol = (ClassSymbol) owner;
-    if (classSymbol.superClasses().isEmpty()) {
-      return Optional.empty();
-    }
-    for (Symbol superClass : classSymbol.superClasses()) {
-      if (superClass.kind() == CLASS) {
-        Optional<FunctionSymbol> overriddenSymbol = ((ClassSymbol) superClass).resolveMember(functionSymbol.name())
-                .filter(symbol -> symbol.kind() == FUNCTION)
-                .map(FunctionSymbol.class::cast);
-        if (overriddenSymbol.isPresent()) {
-          return overriddenSymbol;
-        }
-      }
-    }
-    return Optional.empty();
-  }
-
 
   private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {
     int indexFirstMissingParam = method.parameters().size();

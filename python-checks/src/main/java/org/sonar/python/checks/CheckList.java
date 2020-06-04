@@ -66,6 +66,7 @@ public final class CheckList {
       BareRaiseInFinallyCheck.class,
       BooleanExpressionInExceptCheck.class,
       BreakContinueOutsideLoopCheck.class,
+      BuiltinShadowingAssignmentCheck.class,
       CaughtExceptionsCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,

@@ -20,17 +20,24 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Objects;
 import javax.annotation.Nullable;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.ArgListImpl;
+import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -134,11 +141,67 @@ public class CheckUtilsTest {
     assertThat(parent.name().name()).isEqualTo("A");
   }
 
+  @Test
+  public void get_overridden_method() {
+    FileInput file = (FileInput) parse("" +
+      "def foo(): pass\n" +
+      "def foo2():\n" +
+      "  def foo3(): pass\n\n" +
+      "class A:\n" +
+      "  def foo4(): pass\n" +
+      "class B:\n" +
+      "  def foo5(): pass\n" +
+      "  foo_int: int\n" +
+      "class C(B):\n" +
+      "  def foo5(): pass\n" +
+      "  def foo6(): pass\n" +
+      "  def foo_int(): pass\n" +
+      "class D(object):\n" +
+      "  def foo7(): pass\n" +
+      "class E(foo2):\n" +
+        "  def foo8(): pass\n"
+    );
+
+    FunctionSymbol foo = (FunctionSymbol) descendantFunction(file, "foo").name().symbol();
+    FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
+    FunctionSymbol foo3 = (FunctionSymbol) descendantFunction(file, "foo3").name().symbol();
+    FunctionSymbol foo4 = (FunctionSymbol) descendantFunction(file, "foo4").name().symbol();
+    FunctionSymbol foo5 = (FunctionSymbol) descendantFunction(file, "foo5").name().symbol();
+    FunctionSymbol foo5_override = (FunctionSymbol) ((FunctionDef) ((ClassDefImpl)file.statements().statements().get(4)).body().statements().get(0)).name().symbol();
+    FunctionSymbol foo6 = (FunctionSymbol) descendantFunction(file, "foo6").name().symbol();
+    FunctionSymbol foo7 = (FunctionSymbol) descendantFunction(file, "foo7").name().symbol();
+    FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
+    FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
+    assertThat(CheckUtils.getOverriddenMethod(foo)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo2)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo3)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo4)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo5)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
+    assertThat(CheckUtils.getOverriddenMethod(foo6)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo7)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo8)).isEmpty();
+    assertThat(CheckUtils.getOverriddenMethod(foo_int)).isEmpty();
+  }
+
   private Tree parse(String content) {
+    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder("my_package", pythonFile("my_module.py"));
     PythonParser parser = PythonParser.create();
     AstNode astNode = parser.parse(content);
     FileInput parse = new PythonTreeMaker().fileInput(astNode);
+    symbolTableBuilder.visitFileInput(parse);
     return parse;
+  }
+
+  private static PythonFile pythonFile(String fileName) {
+    PythonFile pythonFile = Mockito.mock(PythonFile.class);
+    Mockito.when(pythonFile.fileName()).thenReturn(fileName);
+    try {
+      Mockito.when(pythonFile.uri()).thenReturn(Files.createTempFile(fileName, "py").toUri());
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot create temporary file");
+    }
+    return pythonFile;
   }
 
   @Nullable
