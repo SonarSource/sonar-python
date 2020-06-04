@@ -39,6 +39,7 @@ import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.DICT;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.LIST;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.SET;
+import static org.sonar.plugins.python.api.types.BuiltinTypes.TUPLE;
 
 @Rule(key = "S5708")
 public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
@@ -68,6 +69,10 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
       // due to some limitations in type inference engine,
       // type.canBeOrExtend("list" | "set" | "dict") returns true
       return false;
+    }
+    if (type.canBeOrExtend(TUPLE)) {
+      // avoid FP on variables holding a tuple: SONARPY-713
+      return true;
     }
     return type.canBeOrExtend(BASE_EXCEPTION);
   }
