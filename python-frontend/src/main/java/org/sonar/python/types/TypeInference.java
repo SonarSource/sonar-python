@@ -92,6 +92,9 @@ public class TypeInference extends BaseTreeVisitor {
   @Override
   public void visitAssignmentStatement(AssignmentStatement assignmentStatement) {
     super.visitAssignmentStatement(assignmentStatement);
+    if (assignmentStatement.lhsExpressions().stream().anyMatch(expressionList -> !expressionList.commas().isEmpty())) {
+      return;
+    }
     List<Expression> lhsExpressions = assignmentStatement.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
       .collect(Collectors.toList());
