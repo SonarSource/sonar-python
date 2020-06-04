@@ -131,6 +131,7 @@ public final class CheckList {
       InitReturnsValueCheck.class,
       InstanceAndClassMethodsAtLeastOnePositionalCheck.class,
       InstanceMethodSelfAsFirstCheck.class,
+      InvalidOpenModeCheck.class,
       InvariantReturnCheck.class,
       JumpInFinallyCheck.class,
       LdapAuthenticationCheck.class,
