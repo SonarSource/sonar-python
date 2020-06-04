@@ -141,3 +141,7 @@ def edge_case():
     '' % ('one') # Noncompliant
     '' % ([]) # Ok
     '' % [] # Ok
+
+def unpacking_assignment():
+  x, = 42,
+  "%X" % x

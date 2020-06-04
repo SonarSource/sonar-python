@@ -53,6 +53,14 @@ public class TypeInferenceTest {
   }
 
   @Test
+  public void unpacking_assignment() {
+    assertThat(lastExpressionInFunction(
+      "x, = 42,",
+      "x"
+    ).type()).isEqualTo(anyType());
+  }
+
+  @Test
   public void call_expression() {
     assertThat(lastExpression(
       "f()").type()).isEqualTo(anyType());
