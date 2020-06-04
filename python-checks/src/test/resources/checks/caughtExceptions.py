@@ -49,3 +49,9 @@ def foo():
     ...
   except x: # Noncompliant
     ...
+
+  exceptions = (ZeroDivisionError, OverflowError)
+  try:
+    foo = 1/0
+  except exceptions:
+    foo = 0
