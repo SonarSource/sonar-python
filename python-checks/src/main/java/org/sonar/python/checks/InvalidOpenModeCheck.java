@@ -41,7 +41,7 @@ import org.sonar.python.tree.TreeUtils;
 public class InvalidOpenModeCheck extends PythonSubscriptionCheck {
 
   private static final String VALID_MODES = "rwatb+Ux";
-  private static final Pattern INVALID_CHARACTERS = Pattern.compile("[^rwatb+Ux]");
+  private static final Pattern INVALID_CHARACTERS = Pattern.compile("[^" + VALID_MODES + "]");
   private static final String MESSAGE = "Fix this invalid mode string.";
 
   @Override
