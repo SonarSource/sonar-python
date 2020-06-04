@@ -20,19 +20,28 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -68,6 +77,60 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
         checkNamed(ctx, format, rhs);
       } else {
         checkPositional(ctx, format, rhs);
+      }
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      Expression callee = callExpression.callee();
+      if (!callee.is(Tree.Kind.QUALIFIED_EXPR)) {
+        return;
+      }
+
+      Symbol symbol = callExpression.calleeSymbol();
+      if (symbol == null || !"str.format".equals(symbol.fullyQualifiedName())) {
+        return;
+      }
+
+      Expression qualifier = ((QualifiedExpression) callee).qualifier();
+      StringLiteral literal = extractStringLiteral(qualifier);
+
+      if (literal == null) {
+        return;
+      }
+
+      Optional<StringFormat> format = StringFormat.createFromStrFormatStyle(ctx, qualifier, literal);
+      if (!format.isPresent()) {
+        return;
+      }
+
+      if (callExpression.arguments().stream().anyMatch(argument -> !argument.is(Tree.Kind.REGULAR_ARGUMENT))) {
+        return;
+      }
+
+      List<RegularArgument> arguments = callExpression.arguments().stream()
+        .map(RegularArgument.class::cast)
+        .collect(Collectors.toList());
+
+      OptionalInt firstKwIdx = IntStream.range(0, arguments.size())
+        .filter(idx -> arguments.get(idx).keywordArgument() != null)
+        .findFirst();
+
+      Set<String> kwArguments = new HashSet<>();
+      if (firstKwIdx.isPresent()) {
+        arguments.subList(firstKwIdx.getAsInt(), arguments.size()).forEach(argument -> kwArguments.add(argument.keywordArgument().name()));
+      }
+      format.get().replacementFields().stream()
+        .filter(field -> field.isNamed() && !kwArguments.contains(field.name()))
+        .forEach(field -> reportIssue(ctx, qualifier, literal, String.format("Provide a value for field \"%s\".", field.name())));
+
+      int firstIdx = firstKwIdx.orElse(arguments.size());
+      String unmatchedPositionals = format.get().replacementFields().stream()
+        .filter(field -> field.isPositional() && field.position() >= firstIdx)
+        .map(field -> String.valueOf(field.position()))
+        .collect(Collectors.joining(", "));
+
+      if (!unmatchedPositionals.isEmpty()) {
+        reportIssue(ctx, qualifier, literal, String.format("Provide a value for field(s) with index %s.",  unmatchedPositionals));
       }
     });
   }
@@ -124,8 +187,8 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
       }
     }
 
-    Map<String, List<StringFormat.ReplacementField>> fieldMap = format.replacementFields().stream().collect(
-      Collectors.groupingBy(StringFormat.ReplacementField::mappingKey));
+    Map<String, List<StringFormat.ReplacementField>> fieldMap = format.replacementFields().stream()
+      .collect(Collectors.groupingBy(StringFormat.ReplacementField::name));
     for (DictionaryLiteralElement element : dict.elements()) {
       KeyValuePair pair = (KeyValuePair) element;
       String key = ((StringLiteral) pair.key()).trimmedQuotesValue();
@@ -149,7 +212,7 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
       && expression.type().canHaveMember("__getitem__");
   }
 
-  private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, int expected, int actual) {
+  private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, long expected, long actual) {
     if (expected > actual) {
       ctx.addIssue(tree, String.format("Add %d missing argument(s).", expected - actual));
     } else {
@@ -170,5 +233,12 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
     }
 
     return null;
+  }
+
+  private static void reportIssue(SubscriptionContext ctx, Tree primary, Tree secondary, String message) {
+    PythonCheck.PreciseIssue preciseIssue = ctx.addIssue(primary, message);
+    if (primary != secondary) {
+      preciseIssue.secondary(secondary, null);
+    }
   }
 }

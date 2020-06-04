@@ -28,4 +28,9 @@ public class StringFormatMisuseCheckTest {
   public void test_printf_style() {
     PythonCheckVerifier.verify("src/test/resources/checks/stringFormatMisusePrintf.py", new StringFormatMisuseCheck());
   }
+
+  @Test
+  public void test_str_format_style() {
+    PythonCheckVerifier.verify("src/test/resources/checks/stringFormatMisuseStrFormat.py", new StringFormatMisuseCheck());
+  }
 }
