@@ -26,13 +26,22 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
+import java.util.Objects;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
+import org.sonar.python.tree.ClassDefImpl;
+
+import javax.annotation.Nullable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.functionSymbol;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
@@ -99,5 +108,63 @@ public class SymbolUtilsTest {
 
     functionSymbol = functionSymbol("def function(): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(0);
+  }
+
+
+  @Test
+  public void get_overridden_method() {
+    FileInput file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "def foo(): pass",
+      "def foo2():",
+      "  def foo3(): pass",
+      "class A:",
+      "  def foo4(): pass",
+      "class B:",
+      "  def foo5(): pass",
+      "  foo_int: int",
+      "class C(B):",
+      "  def foo5(): pass",
+      "  def foo6(): pass",
+      "  def foo_int(): pass",
+      "class D(object):",
+      "  def foo7(): pass",
+      "class E(foo2):",
+      "  def foo8(): pass"
+    );
+
+    FunctionSymbol foo = (FunctionSymbol) descendantFunction(file, "foo").name().symbol();
+    FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
+    FunctionSymbol foo3 = (FunctionSymbol) descendantFunction(file, "foo3").name().symbol();
+    FunctionSymbol foo4 = (FunctionSymbol) descendantFunction(file, "foo4").name().symbol();
+    FunctionSymbol foo5 = (FunctionSymbol) descendantFunction(file, "foo5").name().symbol();
+    FunctionSymbol foo5_override = (FunctionSymbol) ((FunctionDef) ((ClassDefImpl)file.statements().statements().get(4)).body().statements().get(0)).name().symbol();
+    FunctionSymbol foo6 = (FunctionSymbol) descendantFunction(file, "foo6").name().symbol();
+    FunctionSymbol foo7 = (FunctionSymbol) descendantFunction(file, "foo7").name().symbol();
+    FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
+    FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
+    assertThat(SymbolUtils.getOverriddenMethod(foo)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo2)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo3)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo4)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo5)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
+    assertThat(SymbolUtils.getOverriddenMethod(foo6)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo7)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo8)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
+  }
+
+  @Nullable
+  private static FunctionDef descendantFunction(Tree tree, String name) {
+    if (tree.is(Tree.Kind.FUNCDEF)) {
+      FunctionDef functionDef = (FunctionDef) tree;
+      if (functionDef.name().name().equals(name)) {
+        return functionDef;
+      }
+    }
+    return tree.children().stream()
+      .map(child -> descendantFunction(child, name))
+      .filter(Objects::nonNull)
+      .findFirst().orElse(null);
   }
 }

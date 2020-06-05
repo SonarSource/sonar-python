@@ -1,0 +1,77 @@
+<p>Shadowing a builtin makes your code more difficult to read and maintain. You will need to refactor your code if you later need to access this
+builtin.</p>
+<p>If you want to use a similar name you can add a trailing underscore, as <a
+href="https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments">PEP8 suggests to do for reserved keywords</a>.</p>
+<p>This is also true for functions', methods' and lambdas' parameters. However developers can't choose a different name when the method overrides a
+method from a parent class, or when duck typing is used. Following <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov
+Substitution Principle</a> is more important than not shadowing builtins.</p>
+<p>This rule raises an issue when the name of a variable, class, function or import alias matches the name of a builtin type or function. It
+optionally raises on functions', methods' and lambdas' parameter names (see the rule parameter "reportOnParameters").</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+int = 42  # Noncompliant; int is a builtin
+
+def max(a, b):  # Noncompliant; max is a builtin
+    pass
+
+def process(object=[]):  # Noncompliant if "reportOnParameters" is set to true; object is a builtin
+    pass
+
+class MyClass:
+    def method(self, max=1):  # Noncompliant if "reportOnParameters" is set to true; max is a builtin
+        pass
+
+class SubClass(MyClass):
+    def method(self, max=1):  # Ok even if max is a builtin. Liskov Substitution Principle is more important.
+        pass
+
+class Exception():  # Noncompliant; Exception is a builtin
+    pass
+
+from my_module import my_max as max  # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+int_ = 42
+
+def max_(a, b):
+    pass
+
+def process(obj=[]):
+    pass
+
+class MyClass:
+    def method(self, max_=1):
+        pass
+
+class SubClass(MyClass):
+    def method(self, max_=1):
+        pass
+
+class MyException():
+    pass
+
+from my_module import my_max
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised when the name is imported without an alias. The imported module shouldn't have used a builtin name but this isn't your
+fault. It is still a good idea to alias the name to something else.</p>
+<pre>
+from my_module import max  # ok even if it might create some issues
+from my_module import max as my_max  # recommended
+</pre>
+<p>No issue will be raised when the name is defined at module level in an <code>except</code> clause, the <code>else</code> clause of a
+<code>try</code> or an <code>if</code> block. This is sometime used to support multiple versions of python.</p>
+<pre>
+from sys import version_info
+if version_info.major &gt;= 3:
+    long = int
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3.8/library/stdtypes.html">Python documentation - Built-in Types</a> </li>
+  <li> <a href="https://docs.python.org/3/library/functions.html">Python documentation - Built-in Functions</a> </li>
+  <li> <a href="https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments">PEP8 - Style Guide for Python Code - Function and Method
+  Arguments</a> </li>
+</ul>
+

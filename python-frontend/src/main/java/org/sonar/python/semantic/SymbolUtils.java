@@ -29,10 +29,12 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -52,6 +54,9 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.TypeShedPythonFile;
+
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 
 public class SymbolUtils {
 
@@ -232,5 +237,27 @@ public class SymbolUtils {
     }
     // regular static call (function or method), no first implicit parameter
     return 0;
+  }
+
+  public static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol) {
+    Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
+    if (owner == null || owner.kind() != CLASS) {
+      return Optional.empty();
+    }
+    ClassSymbol classSymbol = (ClassSymbol) owner;
+    if (classSymbol.superClasses().isEmpty()) {
+      return Optional.empty();
+    }
+    for (Symbol superClass : classSymbol.superClasses()) {
+      if (superClass.kind() == CLASS) {
+        Optional<FunctionSymbol> overriddenSymbol = ((ClassSymbol) superClass).resolveMember(functionSymbol.name())
+          .filter(symbol -> symbol.kind() == FUNCTION)
+          .map(FunctionSymbol.class::cast);
+        if (overriddenSymbol.isPresent()) {
+          return overriddenSymbol;
+        }
+      }
+    }
+    return Optional.empty();
   }
 }
