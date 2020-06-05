@@ -6,6 +6,7 @@ class Map:
         return 42
 
 def arguments():
+    '{a:{b[[]]}}'.format(a=3.14, b={'[': 10}) # Noncompliant {{Fix this formatted string's syntax.}}
     '{:{}} {:{}}'.format('one', 'two', 'three') # Noncompliant
     '{} {} {}'.format('one') # Noncompliant {{Provide a value for field(s) with index 1, 2.}}
    #^^^^^^^^^^
@@ -47,9 +48,15 @@ def format_syntax():
     '{0!s:{1}}'.format('one', 'two') # Ok
     '{foo!s:{bar}}'.format(foo='one', bar='two') # Ok
     '{foo!sar}'.format(foo='a') # Noncompliant {{Fix this formatted string's syntax.}}
+    "({t.__module__}.{t.__name__}, {f})".format(t='a', f='b') # Ok
+    "{[{}]}".format({'{}': 1}) # Ok
+    '{:%Y-%m-%d %H:%M:%S}'.format('a') # Ok
 
-    # Currently we produce false-positives with some weird keys containing braces and brackets.
-    '{a:{bbb]}'.format() # Noncompliant {{Fix this formatted string's syntax.}}
+    '{a:{b[[]]}}'.format(a=3.14, b={'[': 10}) # Noncompliant {{Fix this formatted string's syntax.}}
+
+    # These are valid and should only raise for the missing keys
+    '{a:{bbb]}}'.format(a='') # Noncompliant {{Provide a value for field "bbb]".}}
+    '{a:{]]}}'.format(a='') # Noncompliant {{Provide a value for field "]]".}}
 
 def nested_format():
     '{:{}} {:{}}'.format('one', 'two', 'three') # Noncompliant

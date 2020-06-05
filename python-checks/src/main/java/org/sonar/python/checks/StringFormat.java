@@ -36,6 +36,23 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 public class StringFormat {
 
+  private static final String SYNTAX_ERROR_MESSAGE = "Fix this formatted string's syntax.";
+
+  // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
+  private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
+    "%" + "(?<field>(?:\\((?<mapkey>.*?)\\))?" + "(?<flags>[#\\-+0 ]*)?" + "(?<width>[0-9]*|\\*)?" +
+      "(?:\\.(?<precision>[0-9]*|\\*))?" + "(?:[lLH])?" + "(?<type>[diueEfFgGoxXrsac]|%))?");
+
+  private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9_]+)|(?:\\[[^]]+]))*");
+  private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  private static final String FORMAT_VALID_CONVERSION_FLAGS = "rsa";
+
+  private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
+  private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
+
+  /**
+   * Represents a named or positional replacement field inside a format string.
+   */
   public abstract static class ReplacementField {
     private Consumer<Expression> validator;
 
@@ -147,27 +164,6 @@ public class StringFormat {
     return this.replacementFields.stream().anyMatch(ReplacementField::isNamed);
   }
 
-  // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
-  private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
-    "%" + "(?<field>(?:\\((?<mapkey>.*?)\\))?" + "(?<flags>[#\\-+0 ]*)?" + "(?<width>[0-9]*|\\*)?" +
-      "(?:\\.(?<precision>[0-9]*|\\*))?" + "(?:[lLH])?" + "(?<type>[diueEfFgGoxXrsac]|%))?");
-
-  private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
-  private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
-
-  private static final String FORMAT_FIELD_NAME_PATTERN = "(?<name>[^.\\[!:{}]+)?";
-  private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9]+)|(?:\\[[a-zA-Z_0-9]+]))*");
-
-  // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec] '}'
-  // FormatSpec -> '{' [Field] '}' | Character
-  // Field -> [Name] ('.' Name | '[' (Name | Number) ']')*
-  // See https://docs.python.org/3/library/string.html#formatstrings
-  private static final Pattern FORMAT_PARAMETER_PATTERN = Pattern.compile(
-    "\\{(?<field>\\{|(?:" + FORMAT_FIELD_NAME_PATTERN + "(?:(?:\\.[a-zA-Z0-9]+)|(?:\\[[a-zA-Z_0-9]+]))*(?:!(?<flag>[a-zA-Z]))?(:.*?)?}))?"
-  );
-  private static final String FORMAT_VALID_CONVERSION_FLAGS = "rsa";
-  private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");
-
   private enum ParseState
   {
     INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_FIELD
@@ -210,7 +206,7 @@ public class StringFormat {
             parseInitial(current);
             break;
           case LCURLY:
-            pos = parseLeftCurly(current, pos);
+            pos = parseFieldName(current, pos);
             break;
           case FIELD:
             if (!tryParseField(current)) {
@@ -241,7 +237,9 @@ public class StringFormat {
             pos = parseFormatCurly(pos);
             break;
           case FORMAT_FIELD:
-            parseFormatSpecifierField(current);
+            if (!tryParseFormatSpecifierField(current)) {
+              return Optional.empty();
+            }
             break;
         }
 
@@ -249,7 +247,7 @@ public class StringFormat {
       }
 
       if (!checkParserState()) {
-        // The parser has finished in a invalid state.
+        // The parser has reached the end of the string in a invalid state.
         return Optional.empty();
       }
 
@@ -258,7 +256,7 @@ public class StringFormat {
 
     private boolean checkParserState() {
       if (nesting != 0 || state != ParseState.INIT) {
-        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
         return false;
       }
 
@@ -270,16 +268,21 @@ public class StringFormat {
       return true;
     }
 
-    private void parseFormatSpecifierField(char current) {
-      if (current == '}') {
-        result.add(createField(nestedFieldName));
-        nesting--;
-        state = ParseState.FORMAT;
+    private boolean tryParseFormatSpecifierField(char current) {
+      if (current != '}') {
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        return false;
       }
+
+      result.add(createField(nestedFieldName));
+      nesting--;
+      state = ParseState.FORMAT;
+      return true;
     }
 
     private int parseFormatCurly(int pos) {
       if (matcher.region(pos, value.length()).find()) {
+        // This should always match (if nothing else, an empty string), but be defensive
         state = ParseState.FORMAT_FIELD;
         nestedFieldName = matcher.group("name");
         pos = matcher.end() - 1;
@@ -314,7 +317,7 @@ public class StringFormat {
         nesting--;
         state = ParseState.INIT;
       } else {
-        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
         return false;
       }
 
@@ -331,19 +334,20 @@ public class StringFormat {
         result.add(createField(currentFieldName));
         state = ParseState.INIT;
       } else {
-        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
         return false;
       }
       return true;
     }
 
-    private int parseLeftCurly(char current, int pos) {
+    private int parseFieldName(char current, int pos) {
       if (current == '{') {
         state = ParseState.INIT;
       } else {
         state = ParseState.FIELD;
         nesting++;
         if (matcher.region(pos, value.length()).find()) {
+          // This should always match (if nothing else, an empty string), but be defensive
           currentFieldName = matcher.group("name");
           pos = matcher.end() - 1;
         }
@@ -381,7 +385,7 @@ public class StringFormat {
     while (matcher.find()) {
       if (matcher.group("field") == null) {
         // We matched a '%' sign, but could not match the rest of the field, the syntax is erroneous.
-        reportSyntaxIssue(ctx, lhsOperand, literal, "Fix this formatted string's syntax.");
+        reportSyntaxIssue(ctx, lhsOperand, literal, SYNTAX_ERROR_MESSAGE);
         return Optional.empty();
       }
 

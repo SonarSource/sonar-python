@@ -32,6 +32,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
@@ -57,9 +58,10 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isQualifiedCallToStrFormat(CallExpression callExpression) {
+    Symbol symbol = callExpression.calleeSymbol();
     return callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)
-      && callExpression.calleeSymbol() != null
-      && "str.format".equals(callExpression.calleeSymbol().fullyQualifiedName());
+      && symbol != null
+      && "str.format".equals(symbol.fullyQualifiedName());
   }
 
   private static void checkStrFormatStyle(SubscriptionContext ctx) {
