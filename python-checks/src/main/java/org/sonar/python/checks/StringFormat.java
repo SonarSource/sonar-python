@@ -156,14 +156,11 @@ public class StringFormat {
   private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
 
   private static final String FORMAT_FIELD_NAME_PATTERN = "(?<name>[^.\\[!:{}]+)?";
-
+  private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9]+)|(?:\\[[a-zA-Z_0-9]+]))*");
 
   // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec] '}'
-  // FormatSpec -> '{' [FieldName] '}'
-
-  // Format -> '{' Field '}' | '{{' | '}}'
-  // Field -> [Name] ('.' Name | '[' (Name | Number) ']')* [Flag] [':' Format ]
-  // Flag -> '!' Character
+  // FormatSpec -> '{' [Field] '}' | Character
+  // Field -> [Name] ('.' Name | '[' (Name | Number) ']')*
   // See https://docs.python.org/3/library/string.html#formatstrings
   private static final Pattern FORMAT_PARAMETER_PATTERN = Pattern.compile(
     "\\{(?<field>\\{|(?:" + FORMAT_FIELD_NAME_PATTERN + "(?:(?:\\.[a-zA-Z0-9]+)|(?:\\[[a-zA-Z_0-9]+]))*(?:!(?<flag>[a-zA-Z]))?(:.*?)?}))?"
@@ -171,63 +168,209 @@ public class StringFormat {
   private static final String FORMAT_VALID_CONVERSION_FLAGS = "rsa";
   private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");
 
-  public static Optional<StringFormat> createFromStrFormatStyle(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
-    List<ReplacementField> result = new ArrayList<>();
-    Matcher matcher = FORMAT_PARAMETER_PATTERN.matcher(literal.trimmedQuotesValue());
-
-    int position = 0;
-    boolean hasManualNumbering = false;
-    while (matcher.find()) {
-      String field = matcher.group("field");
-      if (field == null) {
-        // We matched a '{', but the rest of the field could not be matched.
-        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
-        return Optional.empty();
-      }
-
-      if (field.equals("{")) {
-        // We have a double '{{'.
-        continue;
-      }
-
-      String name = matcher.group("name");
-      String flag = matcher.group("flag");
-
-      if (!checkFlag(flag, ctx, tree, literal)) {
-        return Optional.empty();
-      }
-
-      if (name == null) {
-        if (hasManualNumbering) {
-          reportSyntaxIssue(ctx, tree, literal, "Use only manual or only automatic field numbering, don't mix them.");
-          return Optional.empty();
-        }
-        result.add(new PositionalField(expression -> {}, position++));
-      } else if (FORMAT_NUMBER_PATTERN.matcher(name).find()) {
-        result.add(new PositionalField(expression -> {}, Integer.parseInt(name)));
-        hasManualNumbering = true;
-      } else {
-        result.add(new NamedField(expression -> {}, name));
-      }
-    }
-
-    StringFormat format = new StringFormat(result);
-
-    return Optional.of(format);
+  private enum ParseState
+  {
+    INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_FIELD
   }
 
-  private static boolean checkFlag(@Nullable String flag, SubscriptionContext ctx, Tree primary, Tree secondary) {
-    if (flag == null) {
+  private static class StrFormatParser
+  {
+    private boolean hasManualNumbering = false;
+    private boolean hasAutoNumbering = false;
+    private int autoNumberingPos = 0;
+
+    private String currentFieldName = null;
+    private String nestedFieldName = null;
+    private ParseState state = ParseState.INIT;
+    private int nesting = 0;
+    private List<ReplacementField> result;
+
+    private SubscriptionContext ctx;
+    private Tree tree;
+    private StringLiteral literal;
+    private String value;
+    private Matcher matcher;
+
+    public StrFormatParser(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
+      this.ctx = ctx;
+      this.tree = tree;
+      this.literal = literal;
+      this.value = literal.trimmedQuotesValue();
+      this.matcher = FORMAT_FIELD_PATTERN.matcher(this.value);
+    }
+
+    public Optional<StringFormat> parse() {
+      int pos = 0;
+      result = new ArrayList<>();
+
+      while (pos < value.length()) {
+        char current = value.charAt(pos);
+        switch (state) {
+          case INIT:
+            parseInitial(current);
+            break;
+          case LCURLY:
+            pos = parseLeftCurly(current, pos);
+            break;
+          case FIELD:
+            if (!tryParseField(current)) {
+              return Optional.empty();
+            }
+            break;
+          case RCURLY:
+            if (current == '}') {
+              state = ParseState.INIT;
+            }
+            break;
+          case FLAG:
+            if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
+              reportSyntaxIssue(ctx, tree, literal, String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+              return Optional.empty();
+            }
+            state = ParseState.FLAG_CHARACTER;
+            break;
+          case FLAG_CHARACTER:
+            if (!tryParseFlagCharacter(current)) {
+              return Optional.empty();
+            }
+            break;
+          case FORMAT:
+            parseFormatSpecifier(current);
+            break;
+          case FORMAT_LCURLY:
+            pos = parseFormatCurly(pos);
+            break;
+          case FORMAT_FIELD:
+            parseFormatSpecifierField(current);
+            break;
+        }
+
+        pos += 1;
+      }
+
+      if (!checkParserState()) {
+        // The parser has finished in a invalid state.
+        return Optional.empty();
+      }
+
+      return Optional.of(new StringFormat(result));
+    }
+
+    private boolean checkParserState() {
+      if (nesting != 0 || state != ParseState.INIT) {
+        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
+        return false;
+      }
+
+      if (hasManualNumbering && hasAutoNumbering) {
+        reportSyntaxIssue(ctx, tree, literal, "Use only manual or only automatic field numbering, don't mix them.");
+        return false;
+      }
+
       return true;
     }
 
-    char flagChar = flag.charAt(0);
-    if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(flagChar) == -1) {
-      reportSyntaxIssue(ctx, primary, secondary, String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", flagChar));
-      return false;
+    private void parseFormatSpecifierField(char current) {
+      if (current == '}') {
+        result.add(createField(nestedFieldName));
+        nesting--;
+        state = ParseState.FORMAT;
+      }
     }
 
-    return true;
+    private int parseFormatCurly(int pos) {
+      if (matcher.region(pos, value.length()).find()) {
+        state = ParseState.FORMAT_FIELD;
+        nestedFieldName = matcher.group("name");
+        pos = matcher.end() - 1;
+      }
+      return pos;
+    }
+
+    private void parseInitial(char current) {
+      if (current == '{') {
+        state = ParseState.LCURLY;
+      } else if (current == '}') {
+        state = ParseState.RCURLY;
+      }
+    }
+
+    private void parseFormatSpecifier(char current) {
+      if (current == '{') {
+        nesting++;
+        state = ParseState.FORMAT_LCURLY;
+      } else if (current == '}') {
+        result.add(createField(currentFieldName));
+        nesting--;
+        state = ParseState.INIT;
+      }
+    }
+
+    private boolean tryParseFlagCharacter(char current) {
+      if (current == ':') {
+        state = ParseState.FORMAT;
+      } else if (current == '}') {
+        result.add(createField(currentFieldName));
+        nesting--;
+        state = ParseState.INIT;
+      } else {
+        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
+        return false;
+      }
+
+      return true;
+    }
+
+    private boolean tryParseField(char current) {
+      if (current == '!') {
+        state = ParseState.FLAG;
+      } else if (current == ':') {
+        state = ParseState.FORMAT;
+      } else if (current == '}') {
+        nesting--;
+        result.add(createField(currentFieldName));
+        state = ParseState.INIT;
+      } else {
+        reportSyntaxIssue(ctx, tree, literal, "Fix this formatted string's syntax.");
+        return false;
+      }
+      return true;
+    }
+
+    private int parseLeftCurly(char current, int pos) {
+      if (current == '{') {
+        state = ParseState.INIT;
+      } else {
+        state = ParseState.FIELD;
+        nesting++;
+        if (matcher.region(pos, value.length()).find()) {
+          currentFieldName = matcher.group("name");
+          pos = matcher.end() - 1;
+        }
+      }
+
+      return pos;
+    }
+
+    private ReplacementField createField(@Nullable String name) {
+      if (name == null) {
+        hasAutoNumbering = true;
+        return new PositionalField(expression -> {}, autoNumberingPos++);
+      } else if (FORMAT_NUMBER_PATTERN.matcher(name).find()) {
+        hasManualNumbering = true;
+        return new PositionalField(expression -> {}, Integer.parseInt(name));
+      } else {
+        return new NamedField(expression -> {}, name);
+      }
+    }
+  }
+
+  public static Optional<StringFormat> createFromStrFormatStyle(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
+    // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec*] '}'
+    // FormatSpec -> '{' [FieldName] '}' | Character
+    // FieldName -> [Name] ('.' Name | '[' (Name | Number) ']')*
+    // See https://docs.python.org/3/library/string.html#formatstrings
+    return new StrFormatParser(ctx, tree, literal).parse();
   }
 
   public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Expression lhsOperand, StringLiteral literal) {

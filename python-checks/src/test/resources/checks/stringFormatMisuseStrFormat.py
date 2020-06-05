@@ -5,15 +5,8 @@ class Map:
     def __getitem__(self, key):
         return 42
 
-
-def edge_case():
-    var = '{} {}'.format
-    var(1)  # FN
-    var.lower()
-    fun = 'hello'
-    fun('')
-
 def arguments():
+    '{:{}} {:{}}'.format('one', 'two', 'three') # Noncompliant
     '{} {} {}'.format('one') # Noncompliant {{Provide a value for field(s) with index 1, 2.}}
    #^^^^^^^^^^
     '{0} {1}'.format('one') # Noncompliant {{Provide a value for field(s) with index 1.}}
@@ -34,6 +27,9 @@ def format_syntax():
     "{0".format(1)  # Noncompliant {{Fix this formatted string's syntax.}}
    #^^^^
     "0}".format(1)  # Noncompliant
+    "{[".format() # Noncompliant
+    "{a[]]}".format(a=0) # Noncompliant
+    "}0".format() # Noncompliant
     "{a.}".format(a=A())  # Noncompliant
     "{a.field.}".format(a=A())  # Noncompliant
     "{m[attr}".format(m=Map())  # Noncompliant
@@ -48,6 +44,23 @@ def format_syntax():
     '{0!z}'.format('str')  # Noncompliant  {{Fix this formatted string's syntax; !z is not a valid conversion flag.}}
     '{0} {}'.format('one', 'two') # Noncompliant {{Use only manual or only automatic field numbering, don't mix them.}}
     '{{}} {}'.format('one')  # Ok
+    '{0!s:{1}}'.format('one', 'two') # Ok
+    '{foo!s:{bar}}'.format(foo='one', bar='two') # Ok
+    '{foo!sar}'.format(foo='a') # Noncompliant {{Fix this formatted string's syntax.}}
+
+    # Currently we produce false-positives with some weird keys containing braces and brackets.
+    '{a:{bbb]}'.format() # Noncompliant {{Fix this formatted string's syntax.}}
+
+def nested_format():
+    '{:{}} {:{}}'.format('one', 'two', 'three') # Noncompliant
+    '{:{}} {:{}}'.format('one', 'two', 'three', 'four') # Ok
+    '{foo:{}} {:{bar}}'.format('one', 'two', foo='three', bar='four') # Ok
+    '{foo:{}} {:{bar}}'.format('one', 'two', foo='three') # Noncompliant
+    '{a:{b}{c}{d}}{:{}{e}}'.format('one', a='a', b='b', c='c', d='d', e='e') # Noncompliant {{Provide a value for field(s) with index 1.}}
+    '{a:{b}{c}{d}}{:{}{e}}'.format('one', 'two', a='a', b='b', c='c', d='d') # Noncompliant {{Provide a value for field "e".}}
+    '{a:{0}{1}{b}}{1:{2}{2}}'.format('one', 'two', a='a', b='b') # Noncompliant {{Provide a value for field(s) with index 2.}}
+    '{a:{b}{c}{d}}{:{}{e}}'.format('one', 'two', a='a', b='b', c='c', d='d', e='e') # OK
+    '{a:{0}{1}{b}}{0:{2}{2}}'.format('one', 'two', 'three', a='a', b='b') # OK
 
 def other():
     f1 = '{} {} {} {}'
