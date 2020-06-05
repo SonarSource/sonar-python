@@ -223,6 +223,17 @@ public class TreeUtils {
   }
 
   @CheckForNull
+  public static RegularArgument argumentByKeyword(String keyword, List<Argument> arguments) {
+    for (int i = 0; i < arguments.size(); i++) {
+      Argument argument = arguments.get(i);
+      if (hasKeyword(argument, keyword)) {
+        return ((RegularArgument) argument);
+      }
+    }
+    return null;
+  }
+
+  @CheckForNull
   public static RegularArgument nthArgumentOrKeyword(int argPosition, String keyword, List<Argument> arguments) {
     for (int i = 0; i < arguments.size(); i++) {
       Argument argument = arguments.get(i);
