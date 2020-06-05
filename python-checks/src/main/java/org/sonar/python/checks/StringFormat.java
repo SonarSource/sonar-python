@@ -357,7 +357,8 @@ public class StringFormat {
     private ReplacementField createField(@Nullable String name) {
       if (name == null) {
         hasAutoNumbering = true;
-        int currentPos = autoNumberingPos++;
+        int currentPos = autoNumberingPos;
+        autoNumberingPos++;
         return new PositionalField(expression -> {}, currentPos);
       } else if (FORMAT_NUMBER_PATTERN.matcher(name).find()) {
         hasManualNumbering = true;
@@ -399,11 +400,13 @@ public class StringFormat {
       String width = matcher.group("width");
       String precision = matcher.group("precision");
       if ("*".equals(width)) {
-        int currentPos = position++;
+        int currentPos = position;
+        position++;
         result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
       }
       if ("*".equals(precision)) {
-        int currentPos = position++;
+        int currentPos = position;
+        position++;
         result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
       }
 
@@ -411,7 +414,8 @@ public class StringFormat {
       if (mapKey != null) {
         result.add(new NamedField(printfConversionValidator(ctx, conversionTypeChar), mapKey));
       } else {
-        int currentPos = position++;
+        int currentPos = position;
+        position++;
         result.add(new PositionalField(printfConversionValidator(ctx, conversionTypeChar), currentPos));
       }
     }
