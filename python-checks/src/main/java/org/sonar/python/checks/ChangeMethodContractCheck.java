@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.python.semantic.SymbolUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
@@ -62,7 +63,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
-    CheckUtils.getOverriddenMethod(method).ifPresent(overriddenMethod -> {
+    SymbolUtils.getOverriddenMethod(method).ifPresent(overriddenMethod -> {
       if (overriddenMethod.hasVariadicParameter() || overriddenMethod.hasDecorators()) {
         // ignore function declarations with packed params
         return;

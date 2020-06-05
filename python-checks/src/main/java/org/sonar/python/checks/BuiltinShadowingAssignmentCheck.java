@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -133,7 +134,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
 
   private void checkParameterList(SubscriptionContext ctx) {
     ParameterList parameterList = (ParameterList) ctx.syntaxNode();
-    if (reportOnParameters && !checkIfMethodIsOverride(parameterList)) {
+    if (reportOnParameters && !isParentAMethodOverride(parameterList)) {
       for (Parameter parameter : parameterList.nonTuple()) {
         Name parameterName = parameter.name();
         if (parameterName != null && isBuiltInName(parameterName)) {
@@ -143,7 +144,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean checkIfMethodIsOverride(ParameterList parameterList) {
+  private static boolean isParentAMethodOverride(ParameterList parameterList) {
     Tree parent = parameterList.parent();
     if (parent.is(Tree.Kind.FUNCDEF) && ((FunctionDef) parent).isMethodDefinition()) {
       FunctionDef method = (FunctionDef) parent;
@@ -152,7 +153,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
         return false;
       }
       FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
-      return CheckUtils.getOverriddenMethod(functionSymbol).isPresent();
+      return SymbolUtils.getOverriddenMethod(functionSymbol).isPresent();
     }
     return false;
   }
