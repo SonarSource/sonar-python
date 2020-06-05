@@ -1,0 +1,3 @@
+import transitively_exported
+import another_transitively_exported as ti_alias
+def function_imported_through_wildcard(): ...

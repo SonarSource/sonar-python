@@ -28,7 +28,7 @@ public class UndefinedNameAllPropertyCheckTest {
   @Test
   public void test() {
     PythonCheckVerifier.verify(Arrays.asList("src/test/resources/checks/undefinedNameAllProperty/undefinedNameAllProperty.py",
-      "src/test/resources/checks/undefinedNameAllProperty/importedWithWildcard.py"), new UndefinedNameAllPropertyCheck());
+      "src/test/resources/checks/undefinedNameAllProperty/imported_with_wildcard.py"), new UndefinedNameAllPropertyCheck());
   }
 
   @Test
@@ -37,8 +37,29 @@ public class UndefinedNameAllPropertyCheckTest {
   }
 
   @Test
+  public void test_imports_manipulated_all() {
+    PythonCheckVerifier.verifyNoIssue(Arrays.asList("src/test/resources/checks/undefinedNameAllProperty/importing_manipulated_all.py",
+     "src/test/resources/checks/undefinedNameAllProperty/manipulates_globals.py"), new UndefinedNameAllPropertyCheck());
+  }
+
+  @Test
   public void test_init_exports_module() {
     PythonCheckVerifier.verify("src/test/resources/checks/undefinedNameAllProperty/__init__.py", new UndefinedNameAllPropertyCheck());
+  }
+
+  @Test
+  public void test_uses_getattr() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/defines_getattr.py", new UndefinedNameAllPropertyCheck());
+  }
+
+  @Test
+  public void test_manipulates_globals() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/manipulates_globals.py", new UndefinedNameAllPropertyCheck());
+  }
+
+  @Test
+  public void test_manipulates_sys_modules() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/manipulates_sys_modules.py", new UndefinedNameAllPropertyCheck());
   }
 
 }
