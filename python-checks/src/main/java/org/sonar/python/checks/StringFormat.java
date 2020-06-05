@@ -164,13 +164,11 @@ public class StringFormat {
     return this.replacementFields.stream().anyMatch(ReplacementField::isNamed);
   }
 
-  private enum ParseState
-  {
+  private enum ParseState {
     INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_FIELD
   }
 
-  private static class StrFormatParser
-  {
+  private static class StrFormatParser {
     private boolean hasManualNumbering = false;
     private boolean hasAutoNumbering = false;
     private int autoNumberingPos = 0;
@@ -359,7 +357,8 @@ public class StringFormat {
     private ReplacementField createField(@Nullable String name) {
       if (name == null) {
         hasAutoNumbering = true;
-        return new PositionalField(expression -> {}, autoNumberingPos++);
+        int currentPos = autoNumberingPos++;
+        return new PositionalField(expression -> {}, currentPos);
       } else if (FORMAT_NUMBER_PATTERN.matcher(name).find()) {
         hasManualNumbering = true;
         return new PositionalField(expression -> {}, Integer.parseInt(name));
@@ -400,17 +399,20 @@ public class StringFormat {
       String width = matcher.group("width");
       String precision = matcher.group("precision");
       if ("*".equals(width)) {
-        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), position++));
+        int currentPos = position++;
+        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
       }
       if ("*".equals(precision)) {
-        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), position++));
+        int currentPos = position++;
+        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
       }
 
       char conversionTypeChar = conversionType.charAt(0);
       if (mapKey != null) {
         result.add(new NamedField(printfConversionValidator(ctx, conversionTypeChar), mapKey));
       } else {
-        result.add(new PositionalField(printfConversionValidator(ctx, conversionTypeChar), position++));
+        int currentPos = position++;
+        result.add(new PositionalField(printfConversionValidator(ctx, conversionTypeChar), currentPos));
       }
     }
 
