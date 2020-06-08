@@ -55,7 +55,7 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
         if (!current.prefix().equalsIgnoreCase(previous.prefix()) || !haveSameQuotes(current, previous)) {
           continue;
         }
-        if (current.firstToken().line() == previous.firstToken().line() || (isWithinCollection(stringLiteral) && isABoolean(previous, current))) {
+        if (current.firstToken().line() == previous.firstToken().line() || (isWithinCollection(stringLiteral) && !isException(previous, current))) {
           ctx.addIssue(previous.firstToken(), MESSAGE).secondary(current.firstToken(), null);
           // Only raise 1 issue per string literal
           return;
@@ -64,11 +64,11 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static boolean isABoolean(StringElement first, StringElement second) {
+  private static boolean isException(StringElement first, StringElement second) {
     if (first.firstToken().column() + first.value().length() > MAX_COLUMN) {
-      return false;
+      return true;
     }
-    return !END_LINE_PATTERN.matcher(first.trimmedQuotesValue()).matches() && !START_LINE_PATTERN.matcher(second.trimmedQuotesValue()).matches();
+    return END_LINE_PATTERN.matcher(first.trimmedQuotesValue()).matches() || START_LINE_PATTERN.matcher(second.trimmedQuotesValue()).matches();
   }
 
   private static boolean isWithinCollection(StringLiteral stringLiteral) {
