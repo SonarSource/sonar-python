@@ -73,3 +73,20 @@ def edge_cases():
   # Noncompliant@+1
   ('1' '2 \
    3')
+
+
+def exceptions():
+  ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "b"]
+  ["a\n"
+    "b"]
+  ["a"
+    "\nb"]
+  ["a "
+    "b"]
+  ["a"
+    " b"]
+  ["a,"
+    "b"]
+  ["a"
+    ",b"]
