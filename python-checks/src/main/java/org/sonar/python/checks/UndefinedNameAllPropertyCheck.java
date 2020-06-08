@@ -161,7 +161,10 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean importsManipulatedAllProperty(FileInput fileInput) {
-    return fileInput.globalVariables().stream().anyMatch(s -> s.name().equals("__all__") && s.usages().stream().anyMatch(u -> u.kind().equals(Usage.Kind.IMPORT)));
+    return fileInput.globalVariables().stream()
+      .filter(s -> s.name().equals("__all__"))
+      .flatMap(s -> s.usages().stream())
+      .anyMatch(u -> u.kind() == Usage.Kind.IMPORT);
   }
 
   private static class UnknownNameSourcesVisitor extends BaseTreeVisitor {
@@ -179,7 +182,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     @Override
     public void visitCallExpression(CallExpression callExpression) {
       Symbol calleeSymbol = callExpression.calleeSymbol();
-      shouldNotReportIssue |= calleeSymbol != null && "globals".equals(calleeSymbol.fullyQualifiedName());
+      shouldNotReportIssue |= isSymbolWithFQN(calleeSymbol, "globals");
       super.visitCallExpression(callExpression);
     }
 
@@ -187,11 +190,14 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     public void visitSubscriptionExpression(SubscriptionExpression subscriptionExpression) {
       if (subscriptionExpression.object() instanceof HasSymbol) {
         Symbol symbol = ((HasSymbol) subscriptionExpression.object()).symbol();
-        shouldNotReportIssue |= symbol != null && "sys.module".equals(symbol.fullyQualifiedName());
+        shouldNotReportIssue |= isSymbolWithFQN(symbol, "sys.module");
       }
       super.visitSubscriptionExpression(subscriptionExpression);
     }
 
+    private static boolean isSymbolWithFQN(@Nullable Symbol symbol, String fullyQualifiedName) {
+      return symbol != null && fullyQualifiedName.equals(symbol.fullyQualifiedName());
+    }
   }
 
   private static class ModuleLevelVisitor extends BaseTreeVisitor {
