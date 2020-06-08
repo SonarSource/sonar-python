@@ -112,7 +112,7 @@ def other():
 
     ("%s" " %s" % (1,))  # Noncompliant
     ("%s" + " concatenated %d" % (1, 1))  # Noncompliant
-    ("%s" + " concatenated" % (1,))  # Noncompliant
+    ("%s" + " concatenated" % (1,))  # Noncompliant {{Add replacement field(s) to this formatted string.}}
     ("%s" + " %s" % (1,))  # Ok
     args = ("are you", "a good day")
     "hello %s, how %s, this is %s" % ("friend", *args) # Ok
@@ -131,6 +131,11 @@ def some_duck_typing():
     undercover_float = MyCustomFloat(42.3)
     "hello %f" % undercover_float # Noncompliant
 
+def byte_formatting():
+    # We do not handle byte formatting for now
+    b'%s %s' % ('one') # FN
+    b'(?P<%b>%b)' % (b'one') # FN
+
 def edge_case():
     5 % 2
     x = 5
@@ -138,7 +143,7 @@ def edge_case():
     y = 5
     y = 6
     y % ('hello')
-    '' % ('one') # Noncompliant
+    '' % ('one') # Noncompliant {{Add replacement field(s) to this formatted string.}}
     '' % ([]) # Ok
     '' % [] # Ok
 

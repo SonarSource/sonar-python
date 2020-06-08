@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -127,6 +128,11 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
       return;
     }
 
+    if (formatString.stringElements().stream().anyMatch(s -> s.prefix().toLowerCase(Locale.ENGLISH).contains("b"))) {
+      // Do not bother with byte formatting for now.
+      return;
+    }
+
     Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, expression.leftOperand(), formatString);
     if (!formatOptional.isPresent()) {
       // The string format contains invalid syntax.
@@ -135,8 +141,11 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
     StringFormat format = formatOptional.get();
     Expression rhs = expression.rightOperand();
-    if (format.numExpectedArguments() == 0 && (isMapping(rhs) || rhs.type().canOnlyBe(BuiltinTypes.LIST))) {
+    if (format.numExpectedArguments() == 0) {
       // The format does not contain any replacement fields, but with a mapping or a list as RHS, it won't result in a runtime error.
+      if (!isMapping(rhs) && !rhs.type().canOnlyBe(BuiltinTypes.LIST)) {
+        reportIssue(ctx, expression.leftOperand(), formatString, "Add replacement field(s) to this formatted string.");
+      }
       return;
     }
 
