@@ -1,5 +1,5 @@
 __all__ = [
-  'importedWithWildcard', # OK
+  'imported_with_wildcard', # OK
   'unknown_name', # Noncompliant
   'subpackage', # OK
   'undefinedNameAllProperty' # OK

@@ -32,16 +32,22 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.semantic.BuiltinSymbols;
@@ -76,13 +82,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     }
     List<Tree> stringExpressions = getStringExpressions(assignedValue);
     FileInput fileInput = (FileInput) TreeUtils.firstAncestorOfKind(assignedValue, Tree.Kind.FILE_INPUT);
-    if (fileInput == null) {
-      // Should never happen
-      return;
-    }
-    UnresolvedWildcardImportVisitor unresolvedWildcardImportVisitor = new UnresolvedWildcardImportVisitor();
-    fileInput.accept(unresolvedWildcardImportVisitor);
-    if (unresolvedWildcardImportVisitor.hasUnresolvedWildcardImport) {
+    if (fileInput == null || shouldExcludeFile(fileInput)) {
       return;
     }
     Map<String, Symbol> symbolsByName = fileInput.globalVariables().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
@@ -95,6 +95,17 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
         }
       }
     }
+  }
+
+  private static boolean shouldExcludeFile(FileInput fileInput) {
+    ModuleLevelVisitor moduleLevelVisitor = new ModuleLevelVisitor();
+    fileInput.accept(moduleLevelVisitor);
+    if (moduleLevelVisitor.hasGetAttrOrDirMethod) {
+      return true;
+    }
+    UnknownNameSourcesVisitor unknownNameSourcesVisitor = new UnknownNameSourcesVisitor();
+    fileInput.accept(unknownNameSourcesVisitor);
+    return unknownNameSourcesVisitor.shouldNotReportIssue || (unknownNameSourcesVisitor.hasWildcardImport && importsManipulatedAllProperty(fileInput));
   }
 
   private static boolean isUnknownSymbol(PythonFile pythonFile, Map<String, Symbol> symbolsByName, StringLiteral stringLiteral) {
@@ -149,14 +160,59 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     return (StringLiteral) Expressions.singleAssignedValue((Name) tree);
   }
 
-  private static class UnresolvedWildcardImportVisitor extends BaseTreeVisitor {
+  private static boolean importsManipulatedAllProperty(FileInput fileInput) {
+    return fileInput.globalVariables().stream()
+      .filter(s -> s.name().equals("__all__"))
+      .flatMap(s -> s.usages().stream())
+      .anyMatch(u -> u.kind() == Usage.Kind.IMPORT);
+  }
 
-    private boolean hasUnresolvedWildcardImport = false;
+  private static class UnknownNameSourcesVisitor extends BaseTreeVisitor {
+
+    private boolean shouldNotReportIssue = false;
+    private boolean hasWildcardImport = false;
 
     @Override
     public void visitImportFrom(ImportFrom importFrom) {
-      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
+      hasWildcardImport |= importFrom.isWildcardImport();
+      shouldNotReportIssue |= importFrom.hasUnresolvedWildcardImport();
       super.visitImportFrom(importFrom);
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      shouldNotReportIssue |= isSymbolWithFQN(calleeSymbol, "globals");
+      super.visitCallExpression(callExpression);
+    }
+
+    @Override
+    public void visitSubscriptionExpression(SubscriptionExpression subscriptionExpression) {
+      if (subscriptionExpression.object() instanceof HasSymbol) {
+        Symbol symbol = ((HasSymbol) subscriptionExpression.object()).symbol();
+        shouldNotReportIssue |= isSymbolWithFQN(symbol, "sys.module");
+      }
+      super.visitSubscriptionExpression(subscriptionExpression);
+    }
+
+    private static boolean isSymbolWithFQN(@Nullable Symbol symbol, String fullyQualifiedName) {
+      return symbol != null && fullyQualifiedName.equals(symbol.fullyQualifiedName());
+    }
+  }
+
+  private static class ModuleLevelVisitor extends BaseTreeVisitor {
+
+    private boolean hasGetAttrOrDirMethod = false;
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      hasGetAttrOrDirMethod |= functionDef.name().name().equals("__getattr__") || functionDef.name().name().equals("__dir__");
+      // Only visiting module-level functions
+    }
+
+    @Override
+    public void visitClassDef(ClassDef classDef) {
+      // Avoid visiting classes
     }
   }
 }
