@@ -183,14 +183,14 @@ public class StringFormat {
     private Tree tree;
     private StringLiteral literal;
     private String value;
-    private Matcher matcher;
+    private Matcher fieldContentMatcher;
 
     public StrFormatParser(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
       this.ctx = ctx;
       this.tree = tree;
       this.literal = literal;
       this.value = literal.trimmedQuotesValue();
-      this.matcher = FORMAT_FIELD_PATTERN.matcher(this.value);
+      this.fieldContentMatcher = FORMAT_FIELD_PATTERN.matcher(this.value);
     }
 
     public Optional<StringFormat> parse() {
@@ -279,11 +279,11 @@ public class StringFormat {
     }
 
     private int parseFormatCurly(int pos) {
-      if (matcher.region(pos, value.length()).find()) {
+      if (fieldContentMatcher.region(pos, value.length()).find()) {
         // This should always match (if nothing else, an empty string), but be defensive
         state = ParseState.FORMAT_FIELD;
-        nestedFieldName = matcher.group("name");
-        pos = matcher.end() - 1;
+        nestedFieldName = fieldContentMatcher.group("name");
+        pos = fieldContentMatcher.end() - 1;
       }
       return pos;
     }
@@ -344,10 +344,10 @@ public class StringFormat {
       } else {
         state = ParseState.FIELD;
         nesting++;
-        if (matcher.region(pos, value.length()).find()) {
+        if (fieldContentMatcher.region(pos, value.length()).find()) {
           // This should always match (if nothing else, an empty string), but be defensive
-          currentFieldName = matcher.group("name");
-          pos = matcher.end() - 1;
+          currentFieldName = fieldContentMatcher.group("name");
+          pos = fieldContentMatcher.end() - 1;
         }
       }
 

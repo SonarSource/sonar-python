@@ -53,6 +53,7 @@ def format_syntax():
     '{:%Y-%m-%d %H:%M:%S}'.format('a') # Ok
 
     '{a:{b[[]]}}'.format(a=3.14, b={'[': 10}) # Noncompliant {{Fix this formatted string's syntax.}}
+    '{a:{b[[]}}'.format(a=3.14, b={'[': 10}) # Ok
 
     # These are valid and should only raise for the missing keys
     '{a:{bbb]}}'.format(a='') # Noncompliant {{Provide a value for field "bbb]".}}

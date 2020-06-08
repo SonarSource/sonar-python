@@ -45,6 +45,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 
 @Rule(key = "S2275")
 public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
@@ -134,7 +135,7 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
     StringFormat format = formatOptional.get();
     Expression rhs = expression.rightOperand();
-    if (format.numExpectedArguments() == 0 && (isMapping(rhs) || rhs.type().canOnlyBe("list"))) {
+    if (format.numExpectedArguments() == 0 && (isMapping(rhs) || rhs.type().canOnlyBe(BuiltinTypes.LIST))) {
       // The format does not contain any replacement fields, but with a mapping or a list as RHS, it won't result in a runtime error.
       return;
     }
