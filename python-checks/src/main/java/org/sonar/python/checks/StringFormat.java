@@ -22,11 +22,11 @@ package org.sonar.python.checks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -36,22 +36,98 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 public class StringFormat {
 
-  public static class ReplacementField {
-    private Consumer<Expression> validator;
-    private String mappingKey;
+  private static final String SYNTAX_ERROR_MESSAGE = "Fix this formatted string's syntax.";
 
-    public ReplacementField(Consumer<Expression> validator, @Nullable String mappingKey) {
+  // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
+  private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
+    "%" + "(?<field>(?:\\((?<mapkey>.*?)\\))?" + "(?<flags>[#\\-+0 ]*)?" + "(?<width>[0-9]*|\\*)?" +
+      "(?:\\.(?<precision>[0-9]*|\\*))?" + "(?:[lLH])?" + "(?<type>[diueEfFgGoxXrsac]|%))?");
+
+  private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9_]+)|(?:\\[[^]]+]))*");
+  private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  private static final String FORMAT_VALID_CONVERSION_FLAGS = "rsa";
+
+  private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
+  private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
+
+  /**
+   * Represents a named or positional replacement field inside a format string.
+   */
+  public abstract static class ReplacementField {
+    private Consumer<Expression> validator;
+
+    private ReplacementField(Consumer<Expression> validator) {
       this.validator = validator;
-      this.mappingKey = mappingKey;
     }
+
+    public abstract boolean isNamed();
+
+    public abstract boolean isPositional();
+
+    public abstract String name();
+
+    public abstract int position();
 
     public void validateArgument(Expression expression) {
       this.validator.accept(expression);
     }
+  }
 
-    @CheckForNull
-    public String mappingKey() {
-      return mappingKey;
+  public static class NamedField extends ReplacementField {
+    private String name;
+
+    public NamedField(Consumer<Expression> validator, String name) {
+      super(validator);
+      this.name = name;
+    }
+
+    @Override
+    public boolean isNamed() {
+      return true;
+    }
+
+    @Override
+    public boolean isPositional() {
+      return false;
+    }
+
+    @Override
+    public String name() {
+      return this.name;
+    }
+
+    @Override
+    public int position() {
+      throw new NoSuchElementException();
+    }
+  }
+
+  public static class PositionalField extends ReplacementField {
+    private int position;
+
+    public PositionalField(Consumer<Expression> validator, int position) {
+      super(validator);
+      this.position = position;
+    }
+
+    @Override
+    public boolean isNamed() {
+      return false;
+    }
+
+    @Override
+    public boolean isPositional() {
+      return true;
+    }
+
+    @Override
+    public String name() {
+      throw new NoSuchElementException();
+    }
+
+    @Override
+    public int position() {
+      return this.position;
     }
   }
 
@@ -65,34 +141,251 @@ public class StringFormat {
     return this.replacementFields;
   }
 
-  public int numExpectedArguments() {
-    return this.replacementFields.size();
+  public long numExpectedArguments() {
+    long numPositional = this.replacementFields.stream()
+      .filter(ReplacementField::isPositional)
+      .map(ReplacementField::position)
+      .distinct()
+      .count();
+    long numNamed = this.replacementFields.stream()
+      .filter(ReplacementField::isNamed)
+      .map(ReplacementField::name)
+      .distinct()
+      .count();
+
+    return numPositional + numNamed;
   }
 
   public boolean hasPositionalFields() {
-    return this.replacementFields.stream().anyMatch(field -> field.mappingKey() == null);
+    return this.replacementFields.stream().anyMatch(ReplacementField::isPositional);
   }
 
   public boolean hasNamedFields() {
-    return this.replacementFields.stream().anyMatch(field -> field.mappingKey() != null);
+    return this.replacementFields.stream().anyMatch(ReplacementField::isNamed);
   }
 
-  // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
-  private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
-    "%" + "(?<field>(?:\\((?<mapkey>.*?)\\))?" + "(?<flags>[#\\-+0 ]*)?" + "(?<width>[0-9]*|\\*)?" +
-      "(?:\\.(?<precision>[0-9]*|\\*))?" + "(?:[lLH])?" + "(?<type>[diueEfFgGoxXrsac]|%))?");
+  private enum ParseState {
+    INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_FIELD
+  }
 
-  private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
-  private static final String PRINTF_INTEGER_CONVERTERS = "oxX";
+  private static class StrFormatParser {
+    private boolean hasManualNumbering = false;
+    private boolean hasAutoNumbering = false;
+    private int autoNumberingPos = 0;
+
+    private String currentFieldName = null;
+    private String nestedFieldName = null;
+    private ParseState state = ParseState.INIT;
+    private int nesting = 0;
+    private List<ReplacementField> result;
+
+    private SubscriptionContext ctx;
+    private Tree tree;
+    private StringLiteral literal;
+    private String value;
+    private Matcher fieldContentMatcher;
+
+    public StrFormatParser(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
+      this.ctx = ctx;
+      this.tree = tree;
+      this.literal = literal;
+      this.value = literal.trimmedQuotesValue();
+      this.fieldContentMatcher = FORMAT_FIELD_PATTERN.matcher(this.value);
+    }
+
+    public Optional<StringFormat> parse() {
+      int pos = 0;
+      result = new ArrayList<>();
+
+      while (pos < value.length()) {
+        char current = value.charAt(pos);
+        switch (state) {
+          case INIT:
+            parseInitial(current);
+            break;
+          case LCURLY:
+            pos = parseFieldName(current, pos);
+            break;
+          case FIELD:
+            if (!tryParseField(current)) {
+              return Optional.empty();
+            }
+            break;
+          case RCURLY:
+            if (current == '}') {
+              state = ParseState.INIT;
+            }
+            break;
+          case FLAG:
+            if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
+              reportSyntaxIssue(ctx, tree, literal, String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+              return Optional.empty();
+            }
+            state = ParseState.FLAG_CHARACTER;
+            break;
+          case FLAG_CHARACTER:
+            if (!tryParseFlagCharacter(current)) {
+              return Optional.empty();
+            }
+            break;
+          case FORMAT:
+            parseFormatSpecifier(current);
+            break;
+          case FORMAT_LCURLY:
+            pos = parseFormatCurly(pos);
+            break;
+          case FORMAT_FIELD:
+            if (!tryParseFormatSpecifierField(current)) {
+              return Optional.empty();
+            }
+            break;
+        }
+
+        pos += 1;
+      }
+
+      if (!checkParserState()) {
+        // The parser has reached the end of the string in a invalid state.
+        return Optional.empty();
+      }
+
+      return Optional.of(new StringFormat(result));
+    }
+
+    private boolean checkParserState() {
+      if (nesting != 0 || state != ParseState.INIT) {
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+
+      if (hasManualNumbering && hasAutoNumbering) {
+        reportSyntaxIssue(ctx, tree, literal, "Use only manual or only automatic field numbering, don't mix them.");
+        return false;
+      }
+
+      return true;
+    }
+
+    private boolean tryParseFormatSpecifierField(char current) {
+      if (current != '}') {
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+
+      result.add(createField(nestedFieldName));
+      nesting--;
+      state = ParseState.FORMAT;
+      return true;
+    }
+
+    private int parseFormatCurly(int pos) {
+      if (fieldContentMatcher.region(pos, value.length()).find()) {
+        // This should always match (if nothing else, an empty string), but be defensive
+        state = ParseState.FORMAT_FIELD;
+        nestedFieldName = fieldContentMatcher.group("name");
+        pos = fieldContentMatcher.end() - 1;
+      }
+      return pos;
+    }
+
+    private void parseInitial(char current) {
+      if (current == '{') {
+        state = ParseState.LCURLY;
+      } else if (current == '}') {
+        state = ParseState.RCURLY;
+      }
+    }
+
+    private void parseFormatSpecifier(char current) {
+      if (current == '{') {
+        nesting++;
+        state = ParseState.FORMAT_LCURLY;
+      } else if (current == '}') {
+        result.add(createField(currentFieldName));
+        nesting--;
+        state = ParseState.INIT;
+      }
+    }
+
+    private boolean tryParseFlagCharacter(char current) {
+      if (current == ':') {
+        state = ParseState.FORMAT;
+      } else if (current == '}') {
+        result.add(createField(currentFieldName));
+        nesting--;
+        state = ParseState.INIT;
+      } else {
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+
+      return true;
+    }
+
+    private boolean tryParseField(char current) {
+      if (current == '!') {
+        state = ParseState.FLAG;
+      } else if (current == ':') {
+        state = ParseState.FORMAT;
+      } else if (current == '}') {
+        nesting--;
+        result.add(createField(currentFieldName));
+        state = ParseState.INIT;
+      } else {
+        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+      return true;
+    }
+
+    private int parseFieldName(char current, int pos) {
+      if (current == '{') {
+        state = ParseState.INIT;
+      } else {
+        state = ParseState.FIELD;
+        nesting++;
+        if (fieldContentMatcher.region(pos, value.length()).find()) {
+          // This should always match (if nothing else, an empty string), but be defensive
+          currentFieldName = fieldContentMatcher.group("name");
+          pos = fieldContentMatcher.end() - 1;
+        }
+      }
+
+      return pos;
+    }
+
+    private ReplacementField createField(@Nullable String name) {
+      if (name == null) {
+        hasAutoNumbering = true;
+        int currentPos = autoNumberingPos;
+        autoNumberingPos++;
+        return new PositionalField(expression -> {}, currentPos);
+      } else if (FORMAT_NUMBER_PATTERN.matcher(name).find()) {
+        hasManualNumbering = true;
+        return new PositionalField(expression -> {}, Integer.parseInt(name));
+      } else {
+        return new NamedField(expression -> {}, name);
+      }
+    }
+  }
+
+  public static Optional<StringFormat> createFromStrFormatStyle(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
+    // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec*] '}'
+    // FormatSpec -> '{' [FieldName] '}' | Character
+    // FieldName -> [Name] ('.' Name | '[' (Name | Number) ']')*
+    // See https://docs.python.org/3/library/string.html#formatstrings
+    return new StrFormatParser(ctx, tree, literal).parse();
+  }
 
   public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Expression lhsOperand, StringLiteral literal) {
     List<ReplacementField> result = new ArrayList<>();
     Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(literal.trimmedQuotesValue());
 
+    int position = 0;
     while (matcher.find()) {
       if (matcher.group("field") == null) {
         // We matched a '%' sign, but could not match the rest of the field, the syntax is erroneous.
-        reportSyntaxIssue(ctx, lhsOperand, literal, "Fix this formatted string's syntax.");
+        reportSyntaxIssue(ctx, lhsOperand, literal, SYNTAX_ERROR_MESSAGE);
         return Optional.empty();
       }
 
@@ -107,14 +400,24 @@ public class StringFormat {
       String width = matcher.group("width");
       String precision = matcher.group("precision");
       if ("*".equals(width)) {
-        result.add(new ReplacementField(printfWidthOrPrecisionValidator(ctx), null));
+        int currentPos = position;
+        position++;
+        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
       }
       if ("*".equals(precision)) {
-        result.add(new ReplacementField(printfWidthOrPrecisionValidator(ctx), null));
+        int currentPos = position;
+        position++;
+        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
       }
 
       char conversionTypeChar = conversionType.charAt(0);
-      result.add(new ReplacementField(printfConversionValidator(ctx, conversionTypeChar), mapKey));
+      if (mapKey != null) {
+        result.add(new NamedField(printfConversionValidator(ctx, conversionTypeChar), mapKey));
+      } else {
+        int currentPos = position;
+        position++;
+        result.add(new PositionalField(printfConversionValidator(ctx, conversionTypeChar), currentPos));
+      }
     }
 
     StringFormat format = new StringFormat(result);

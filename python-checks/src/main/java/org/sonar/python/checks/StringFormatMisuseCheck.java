@@ -20,22 +20,32 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 
 @Rule(key = "S2275")
 public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
@@ -44,32 +54,97 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, ctx -> {
-      BinaryExpression expression = (BinaryExpression) ctx.syntaxNode();
-      StringLiteral formatString = extractStringLiteral(expression.leftOperand());
-      if (formatString == null) {
-        return;
-      }
+    context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, StringFormatMisuseCheck::checkPrintfStyle);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, StringFormatMisuseCheck::checkStrFormatStyle);
+  }
 
-      Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, expression.leftOperand(), formatString);
-      if (!formatOptional.isPresent()) {
-        // The string format contains invalid syntax.
-        return;
-      }
+  private static boolean isQualifiedCallToStrFormat(CallExpression callExpression) {
+    Symbol symbol = callExpression.calleeSymbol();
+    return callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)
+      && symbol != null
+      && "str.format".equals(symbol.fullyQualifiedName());
+  }
 
-      StringFormat format = formatOptional.get();
-      Expression rhs = expression.rightOperand();
-      if (format.numExpectedArguments() == 0 && (isMapping(rhs) || rhs.type().canOnlyBe("list"))) {
-        // The format does not contain any replacement fields, but with a mapping or a list as RHS, it won't result in a runtime error.
-        return;
-      }
+  private static void checkStrFormatStyle(SubscriptionContext ctx) {
+    CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+    if (!isQualifiedCallToStrFormat(callExpression)) {
+      return;
+    }
 
-      if (format.hasNamedFields()) {
-        checkNamed(ctx, format, rhs);
-      } else {
-        checkPositional(ctx, format, rhs);
-      }
-    });
+    Expression qualifier = ((QualifiedExpression) callExpression.callee()).qualifier();
+    StringLiteral literal = extractStringLiteral(qualifier);
+    if (literal == null) {
+      return;
+    }
+
+    // Check the arguments for out of scope cases before we try to parse the string
+    if (callExpression.arguments().stream().anyMatch(argument -> !argument.is(Tree.Kind.REGULAR_ARGUMENT))) {
+      return;
+    }
+
+    Optional<StringFormat> format = StringFormat.createFromStrFormatStyle(ctx, qualifier, literal);
+    if (!format.isPresent()) {
+      return;
+    }
+
+    List<RegularArgument> arguments = callExpression.arguments().stream()
+      .map(RegularArgument.class::cast)
+      .collect(Collectors.toList());
+
+    OptionalInt firstKwIdx = IntStream.range(0, arguments.size())
+      .filter(idx -> arguments.get(idx).keywordArgument() != null)
+      .findFirst();
+
+    // Check the keyword arguments - build a set of all provided keyword arguments and check if all named fields have
+    // a match in this set.
+    Set<String> kwArguments = new HashSet<>();
+    if (firstKwIdx.isPresent()) {
+      arguments.subList(firstKwIdx.getAsInt(), arguments.size()).forEach(argument -> kwArguments.add(argument.keywordArgument().name()));
+    }
+    format.get().replacementFields().stream()
+      .filter(field -> field.isNamed() && !kwArguments.contains(field.name()))
+      .forEach(field -> reportIssue(ctx, qualifier, literal, String.format("Provide a value for field \"%s\".", field.name())));
+
+    // Produce a list of unmatched positional indices and re-use it for the issue message.
+    // We basically want to see if there is a position in the field list that is larger than the number of
+    // the positional arguments provided.
+    int firstIdx = firstKwIdx.orElse(arguments.size());
+    String unmatchedPositionals = format.get().replacementFields().stream()
+      .filter(field -> field.isPositional() && field.position() >= firstIdx)
+      .map(field -> String.valueOf(field.position()))
+      .distinct()
+      .collect(Collectors.joining(", "));
+
+    if (!unmatchedPositionals.isEmpty()) {
+      reportIssue(ctx, qualifier, literal, String.format("Provide a value for field(s) with index %s.", unmatchedPositionals));
+    }
+  }
+
+  private static void checkPrintfStyle(SubscriptionContext ctx) {
+    BinaryExpression expression = (BinaryExpression) ctx.syntaxNode();
+    StringLiteral formatString = extractStringLiteral(expression.leftOperand());
+    if (formatString == null) {
+      return;
+    }
+
+    Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(ctx, expression.leftOperand(), formatString);
+    if (!formatOptional.isPresent()) {
+      // The string format contains invalid syntax.
+      return;
+    }
+
+    StringFormat format = formatOptional.get();
+    Expression rhs = expression.rightOperand();
+    if (format.numExpectedArguments() == 0 && (isMapping(rhs) || rhs.type().canOnlyBe(BuiltinTypes.LIST))) {
+      // The format does not contain any replacement fields, but with a mapping or a list as RHS, it won't result in a runtime error.
+      return;
+    }
+
+    if (format.hasNamedFields()) {
+      checkNamed(ctx, format, rhs);
+    } else {
+      checkPositional(ctx, format, rhs);
+    }
   }
 
   private static void checkNamed(SubscriptionContext ctx, StringFormat format, Expression rhs) {
@@ -124,8 +199,8 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
       }
     }
 
-    Map<String, List<StringFormat.ReplacementField>> fieldMap = format.replacementFields().stream().collect(
-      Collectors.groupingBy(StringFormat.ReplacementField::mappingKey));
+    Map<String, List<StringFormat.ReplacementField>> fieldMap = format.replacementFields().stream()
+      .collect(Collectors.groupingBy(StringFormat.ReplacementField::name));
     for (DictionaryLiteralElement element : dict.elements()) {
       KeyValuePair pair = (KeyValuePair) element;
       String key = ((StringLiteral) pair.key()).trimmedQuotesValue();
@@ -149,7 +224,7 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
       && expression.type().canHaveMember("__getitem__");
   }
 
-  private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, int expected, int actual) {
+  private static void reportInvalidArgumentSize(SubscriptionContext ctx, Tree tree, long expected, long actual) {
     if (expected > actual) {
       ctx.addIssue(tree, String.format("Add %d missing argument(s).", expected - actual));
     } else {
@@ -170,5 +245,12 @@ public class StringFormatMisuseCheck extends PythonSubscriptionCheck {
     }
 
     return null;
+  }
+
+  private static void reportIssue(SubscriptionContext ctx, Tree primary, Tree secondary, String message) {
+    PythonCheck.PreciseIssue preciseIssue = ctx.addIssue(primary, message);
+    if (primary != secondary) {
+      preciseIssue.secondary(secondary, null);
+    }
   }
 }
