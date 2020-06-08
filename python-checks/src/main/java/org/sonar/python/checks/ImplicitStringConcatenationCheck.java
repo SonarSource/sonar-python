@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.StringElement;
@@ -30,6 +31,11 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Add a \"+\" operator to make the string concatenation explicit; or did you forget a comma?";
+  // Column beyond which we assume the concatenation to be done intentionally for readability
+  private static final int MAX_COLUMN = 65;
+  // Won't report on line ending or starting with either \n, spaces or any punctuation
+  private static final Pattern END_LINE_PATTERN = Pattern.compile("^.*(\\\\n|\\s|\\p{IsPunct})$");
+  private static final Pattern START_LINE_PATTERN = Pattern.compile("^(\\\\n|\\s|\\p{IsPunct}).*");
 
   @Override
   public void initialize(Context context) {
@@ -49,13 +55,20 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
         if (!current.prefix().equalsIgnoreCase(previous.prefix()) || !haveSameQuotes(current, previous)) {
           continue;
         }
-        if (current.firstToken().line() == previous.firstToken().line() || isWithinCollection(stringLiteral)) {
+        if (current.firstToken().line() == previous.firstToken().line() || (isWithinCollection(stringLiteral) && isABoolean(previous, current))) {
           ctx.addIssue(previous.firstToken(), MESSAGE).secondary(current.firstToken(), null);
           // Only raise 1 issue per string literal
           return;
         }
       }
     });
+  }
+
+  private static boolean isABoolean(StringElement first, StringElement second) {
+    if (first.firstToken().column() + first.value().length() > MAX_COLUMN) {
+      return false;
+    }
+    return !END_LINE_PATTERN.matcher(first.trimmedQuotesValue()).matches() && !START_LINE_PATTERN.matcher(second.trimmedQuotesValue()).matches();
   }
 
   private static boolean isWithinCollection(StringLiteral stringLiteral) {
