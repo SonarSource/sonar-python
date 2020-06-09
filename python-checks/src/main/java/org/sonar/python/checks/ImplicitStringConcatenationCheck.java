@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -46,28 +47,31 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
         // if string formatting is used, explicit string concatenation with "+" might fail
         return;
       }
-      List<StringElement> stringElements = stringLiteral.stringElements();
-      if (stringElements.size() == 1) {
+      if (stringLiteral.stringElements().size() == 1) {
         return;
       }
-      for (int i = 1; i < stringElements.size(); i++) {
-        StringElement current = stringElements.get(i);
-        StringElement previous = stringElements.get(i-1);
-        if (!current.prefix().equalsIgnoreCase(previous.prefix()) || !haveSameQuotes(current, previous)) {
-          continue;
-        }
-        if (current.firstToken().line() == previous.firstToken().line()) {
-          ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null);
-          // Only raise 1 issue per string literal
-          return;
-        }
-        if ((isWithinCollection(stringLiteral) && !isException(previous, current))) {
-          ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null);
-          // Only raise 1 issue per string literal
-          return;
-        }
-      }
+      checkStringLiteral(stringLiteral, ctx);
     });
+  }
+
+  private static void checkStringLiteral(StringLiteral stringLiteral, SubscriptionContext ctx) {
+    List<StringElement> stringElements = stringLiteral.stringElements();
+    for (int i = 1; i < stringElements.size(); i++) {
+      StringElement current = stringElements.get(i);
+      StringElement previous = stringElements.get(i-1);
+      if (!current.prefix().equalsIgnoreCase(previous.prefix()) || !haveSameQuotes(current, previous)) {
+        continue;
+      }
+      if (current.firstToken().line() == previous.firstToken().line()) {
+        ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null);
+        // Only raise 1 issue per string literal
+        return;
+      }
+      if ((isWithinCollection(stringLiteral) && !isException(previous, current))) {
+        ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null);
+        return;
+      }
+    }
   }
 
   private static boolean isException(StringElement first, StringElement second) {
