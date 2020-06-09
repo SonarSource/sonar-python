@@ -130,10 +130,11 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private void raiseIssueForVariable(SubscriptionContext ctx, Name variable) {
-    if (variable.symbol() != null) {
-      Symbol variableSymbol = variable.symbol();
-      if (variableIssuesRaised.containsKey(variableSymbol)) {
-        variableIssuesRaised.get(variableSymbol).secondary(variable, REPEATED_VAR_MESSAGE);
+    Symbol variableSymbol = variable.symbol();
+    if (variableSymbol != null) {
+      PreciseIssue existingIssue = variableIssuesRaised.get(variableSymbol);
+      if (existingIssue != null) {
+        existingIssue.secondary(variable, REPEATED_VAR_MESSAGE);
       } else {
         variableIssuesRaised.put(variableSymbol, ctx.addIssue(variable, String.format(MESSAGE, VRBL_ISSUE_TYPE)));
       }

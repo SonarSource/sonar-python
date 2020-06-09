@@ -75,7 +75,7 @@ def abcd():
         def method(self, max=1):
             pass
 
-# Check is not working on global scope
+# Check is disabled on global scope
 int = 42
 a, int = 42
 
