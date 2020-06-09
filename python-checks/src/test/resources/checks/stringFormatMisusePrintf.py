@@ -2,7 +2,7 @@ class A:
     pass
 
 def format_syntax():
-    '%s %()s %(name)s' % ('one', 'two', 'three') # Noncompliant {{Use only positional or only named field, don't mix them.}}
+    '%s %()s %(name)s' % ('one', 'two', 'three') # Noncompliant {{Use only positional or only named fields, don't mix them.}}
    #^^^^^^^^^^^^^^^^^^
     '%q' % 42 # Noncompliant {{Fix this formatted string's syntax.}}
     'Hello % ' % 'name' # Noncompliant {{Fix this formatted string's syntax.}}
