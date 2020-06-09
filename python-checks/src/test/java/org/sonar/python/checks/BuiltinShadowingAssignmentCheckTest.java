@@ -25,20 +25,8 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class BuiltinShadowingAssignmentCheckTest {
 
   @Test
-  public void test() {
+  public void testVariableShadowing() {
     PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowing.py", new BuiltinShadowingAssignmentCheck());
-  }
-
-  @Test
-  public void testWithParams() {
-    BuiltinShadowingAssignmentCheck check = new BuiltinShadowingAssignmentCheck();
-    check.reportOnParameters = true;
-    PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowingCustom.py", check);
-  }
-
-  @Test
-  public void testVariableReassignment() {
-    PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowingReassignment.py", new BuiltinShadowingAssignmentCheck());
   }
 
 }
