@@ -1,15 +1,15 @@
 def func():
-    return "item1" "item2"  # Noncompliant {{Add a "+" operator to make the string concatenation explicit; or did you forget a comma?}}
+    return "item1" "item2"  # Noncompliant {{Merge these implicitly concatenated strings; or did you forget a comma?}}
 
 def func():
     return "item1", "item2" # OK
 
 def list_literals():
-  ['1' '2']  # Noncompliant
+  ['1' '2']  # Noncompliant {{Merge these implicitly concatenated strings; or did you forget a comma?}}
   ['1' '2', '3']  # Noncompliant
   ['1', '2' '3']  # Noncompliant
   ['1', '2' '3', '4']  # Noncompliant
-  ['a', 'b'  # Noncompliant
+  ['a', 'b'  # Noncompliant {{Add a "+" operator to make the string concatenation explicit; or did you forget a comma?}}
    'c']
   ["1",
    "2"  # Noncompliant

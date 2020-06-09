@@ -30,7 +30,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S5799")
 public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Add a \"+\" operator to make the string concatenation explicit; or did you forget a comma?";
+  private static final String MESSAGE_SINGLE_LINE = "Merge these implicitly concatenated strings; or did you forget a comma?";
+  private static final String MESSAGE_MULTIPLE_LINES = "Add a \"+\" operator to make the string concatenation explicit; or did you forget a comma?";
   // Column beyond which we assume the concatenation to be done intentionally for readability
   private static final int MAX_COLUMN = 65;
   // Won't report on line ending or starting with either \n, spaces or any punctuation
@@ -55,8 +56,13 @@ public class ImplicitStringConcatenationCheck extends PythonSubscriptionCheck {
         if (!current.prefix().equalsIgnoreCase(previous.prefix()) || !haveSameQuotes(current, previous)) {
           continue;
         }
-        if (current.firstToken().line() == previous.firstToken().line() || (isWithinCollection(stringLiteral) && !isException(previous, current))) {
-          ctx.addIssue(previous.firstToken(), MESSAGE).secondary(current.firstToken(), null);
+        if (current.firstToken().line() == previous.firstToken().line()) {
+          ctx.addIssue(previous.firstToken(), MESSAGE_SINGLE_LINE).secondary(current.firstToken(), null);
+          // Only raise 1 issue per string literal
+          return;
+        }
+        if ((isWithinCollection(stringLiteral) && !isException(previous, current))) {
+          ctx.addIssue(previous.firstToken(), MESSAGE_MULTIPLE_LINES).secondary(current.firstToken(), null);
           // Only raise 1 issue per string literal
           return;
         }
