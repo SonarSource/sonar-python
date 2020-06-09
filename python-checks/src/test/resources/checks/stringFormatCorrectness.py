@@ -78,6 +78,7 @@ def logger_format():
                  #^^^^
 
     logging.error("%(a)s", {"a": 1, "b": 2}) # OK - this will not log an error
+    logging.error("%d", 42, exc_info=True) # Ok
 
     logging.error("") # Ok
     logging.error("", 'too', 'many') # Noncompliant
@@ -97,6 +98,7 @@ def logger_format():
     logging.error()
     t = ('one', 'two')
     logging.error("%d", *t) # FN
+    logging.error(msg="%d", kw1='42')
 
 import logging as renamed_logging
 renamed_logging.error("Foo %s", "Bar", 'Too many')  # Noncompliant
