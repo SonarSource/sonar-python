@@ -123,27 +123,31 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     Token argIssueTo = arguments.get(arguments.size() - 1).lastToken();
 
     if (format.hasNamedFields()) {
-      // We can only have a second argument which should be a mapping.
-      Expression second = arguments.get(1).expression();
-      if (!isMapping(second)) {
-        ctx.addIssue(argIssueFrom, argIssueTo,"Replace formatting argument(s) with a mapping; Replacement fields are named.");
-        return;
-      }
-
-      if (arguments.size() > 2) {
-        ctx.addIssue(argIssueFrom, argIssueTo, "Change formatting arguments; the formatted string expects a single mapping.");
-        return;
-      }
-
-      if (second.is(Tree.Kind.DICTIONARY_LITERAL)) {
-        checkPrintfDictionary(ctx, format, ((DictionaryLiteral) second));
-      }
+      checkNamed(ctx, arguments, format, argIssueFrom, argIssueTo);
     } else {
       List<Expression> expressions = arguments.subList(1, arguments.size()).stream()
         .map(RegularArgument::expression)
         .collect(Collectors.toList());
 
       checkPrintfExpressionList(ctx, format, argIssueFrom, argIssueTo, expressions);
+    }
+  }
+
+  private static void checkNamed(SubscriptionContext ctx, List<RegularArgument> arguments, StringFormat format, Token argIssueFrom, Token argIssueTo) {
+    // We can only have a second argument which should be a mapping.
+    Expression second = arguments.get(1).expression();
+    if (!isMapping(second)) {
+      ctx.addIssue(argIssueFrom, argIssueTo,"Replace formatting argument(s) with a mapping; Replacement fields are named.");
+      return;
+    }
+
+    if (arguments.size() > 2) {
+      ctx.addIssue(argIssueFrom, argIssueTo, "Change formatting arguments; the formatted string expects a single mapping.");
+      return;
+    }
+
+    if (second.is(Tree.Kind.DICTIONARY_LITERAL)) {
+      checkPrintfDictionary(ctx, format, ((DictionaryLiteral) second));
     }
   }
 
