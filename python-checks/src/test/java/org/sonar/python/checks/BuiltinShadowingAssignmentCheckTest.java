@@ -36,4 +36,9 @@ public class BuiltinShadowingAssignmentCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowingCustom.py", check);
   }
 
+  @Test
+  public void testVairableReassignment() {
+    PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowingReassignment.py", new BuiltinShadowingAssignmentCheck());
+  }
+
 }

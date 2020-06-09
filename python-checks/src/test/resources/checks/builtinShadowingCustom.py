@@ -1,13 +1,14 @@
-def process(object=[]):  # Noncompliant {{Rename this parameter; it shadows a builtin.}}
-#           ^^^^^^
-    pass
+def foo():
+    def process(object=[]):  # Noncompliant {{Rename this parameter; it shadows a builtin.}}
+    #           ^^^^^^
+        pass
 
-def a(max, /):  # Noncompliant {{Rename this parameter; it shadows a builtin.}}
-    # ^^^
-    pass
+    def a(max, /):  # Noncompliant {{Rename this parameter; it shadows a builtin.}}
+        # ^^^
+        pass
 
-lambda max: max # Noncompliant {{Rename this parameter; it shadows a builtin.}}
-#      ^^^
+    lambda max: max # Noncompliant {{Rename this parameter; it shadows a builtin.}}
+    #      ^^^
 
 class MyClass:
     def method(self, max=1):  # Noncompliant {{Rename this parameter; it shadows a builtin.}}

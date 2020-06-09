@@ -41,7 +41,9 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -60,6 +62,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S5806";
 
   public static final String MESSAGE = "Rename this %s; it shadows a builtin.";
+  public static final String REPEATED_VAR_MESSAGE = "Variable also assigned here.";
 
   private final Set<String> reservedNames = new HashSet<>(Arrays.asList(
     "ArithmeticError", "AssertionError", "AttributeError", "BaseException", "BufferError", "BytesWarning", "DeprecationWarning",
@@ -78,6 +81,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   ));
 
   private static final String VRBL_ISSUE_TYPE = "variable";
+  private Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
 
   @Override
   public void initialize(Context context) {
@@ -95,7 +99,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
     AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
     Name lhsName = assignmentExpression.lhsName();
     if (shouldReportIssue(lhsName)) {
-      ctx.addIssue(lhsName, String.format(MESSAGE, VRBL_ISSUE_TYPE));
+      raiseIssueForVariable(ctx, lhsName);
     }
   }
 
@@ -106,7 +110,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
         for (Expression expression : assignment.lhsExpressions().get(i).expressions()) {
           if (shouldReportIssue(expression)) {
-            ctx.addIssue(expression, String.format(MESSAGE, VRBL_ISSUE_TYPE));
+            raiseIssueForVariable(ctx, (Name) expression);
           }
         }
       }
@@ -120,7 +124,18 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       Expression variable = assignment.variable();
       Token equalToken = assignment.equalToken();
       if (equalToken != null && shouldReportIssue(variable)) {
-        ctx.addIssue(variable, String.format(MESSAGE, VRBL_ISSUE_TYPE));
+        raiseIssueForVariable(ctx, (Name) variable);
+      }
+    }
+  }
+
+  private void raiseIssueForVariable(SubscriptionContext ctx, Name variable) {
+    if (variable.symbol() != null) {
+      Symbol variableSymbol = variable.symbol();
+      if (variableIssuesRaised.containsKey(variableSymbol)) {
+        variableIssuesRaised.get(variableSymbol).secondary(variable, REPEATED_VAR_MESSAGE);
+      } else {
+        variableIssuesRaised.put(variableSymbol, ctx.addIssue(variable, String.format(MESSAGE, VRBL_ISSUE_TYPE)));
       }
     }
   }
@@ -173,21 +188,10 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private boolean shouldReportIssue(Tree tree) {
-    return tree.is(Tree.Kind.NAME) && isBuiltInName((Name) tree) && !shouldSkipIssueCondition(tree.parent());
+    return tree.is(Tree.Kind.NAME) && isBuiltInName((Name) tree) && TreeUtils.firstAncestorOfKind(tree.parent(), Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF) != null;
   }
 
   private boolean isBuiltInName(Name name) {
     return reservedNames.contains(name.name());
-  }
-
-  private static boolean shouldSkipIssueCondition(Tree name) {
-    // No issue will be raised when the defined name is in an except clause,
-    // the else clause of a try or an if block at module level.
-    if (TreeUtils.firstAncestorOfKind(name, Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF) == null) {
-      return TreeUtils.firstAncestorOfKind(name, Tree.Kind.EXCEPT_CLAUSE) != null ||
-        TreeUtils.firstAncestorOfKind(name, Tree.Kind.IF_STMT) != null ||
-        TreeUtils.firstAncestorOfKind(name, Tree.Kind.ELSE_CLAUSE) != null;
-    }
-    return false;
   }
 }
