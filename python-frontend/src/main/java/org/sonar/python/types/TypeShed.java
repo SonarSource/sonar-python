@@ -39,7 +39,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
@@ -60,8 +59,8 @@ public class TypeShed {
   private static final String TYPING = "typing";
   private static final String TYPING_EXTENSIONS = "typing_extensions";
   private static Map<String, Symbol> builtins;
-  private static final Map<String, Set<Symbol>> typeShedSymbols = SubscriptionVisitor.getTypeShedSymbols();
-  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = SubscriptionVisitor.getBuiltinGlobalSymbols();
+  private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
+  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
   private static final Set<String> modulesInProgress = new HashSet<>();
 
   private static final String STDLIB_2AND3 = "typeshed/stdlib/2and3/";
@@ -258,6 +257,10 @@ public class TypeShed {
       throw new IllegalArgumentException("TypeShed symbol " + fullyQualifiedName + " is not a class");
     }
     return (ClassSymbol) symbol;
+  }
+
+  public static Map<String, Set<Symbol>> stubFilesSymbols() {
+    return typeShedSymbols;
   }
 
   static class ReturnTypeVisitor extends BaseTreeVisitor {

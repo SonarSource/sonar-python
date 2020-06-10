@@ -26,14 +26,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import com.google.common.annotations.Beta;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -46,22 +45,13 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.types.TypeShed;
 
 public class SubscriptionVisitor {
 
   private final EnumMap<Kind, List<SubscriptionContextImpl>> consumers = new EnumMap<>(Kind.class);
   private final PythonVisitorContext pythonVisitorContext;
   private Tree currentElement;
-  private static final Map<String, Set<Symbol>> typeShedSymbols = new HashMap<>();
-  private static final Map<String, Set<Symbol>> builtinGlobalSymbols = new HashMap<>();
-
-  public static Map<String, Set<Symbol>> getTypeShedSymbols() {
-    return typeShedSymbols;
-  }
-
-  public static Map<String, Set<Symbol>> getBuiltinGlobalSymbols() {
-    return builtinGlobalSymbols;
-  }
 
   public static void analyze(Collection<PythonSubscriptionCheck> checks, PythonVisitorContext pythonVisitorContext) {
     SubscriptionVisitor subscriptionVisitor = new SubscriptionVisitor(checks, pythonVisitorContext);
@@ -155,14 +145,16 @@ public class SubscriptionVisitor {
       return pythonVisitorContext.pythonFile();
     }
 
+    @Beta
     @Override
-    public Map<String, Set<Symbol>> getTypeShedSymbols() {
-      return SubscriptionVisitor.getTypeShedSymbols();
+    public Map<String, Set<Symbol>> stubFilesSymbols() {
+      return TypeShed.stubFilesSymbols();
     }
 
+    @Beta
     @Override
-    public Set<Symbol> getBuiltinGlobalSymbols() {
-      return SubscriptionVisitor.getBuiltinGlobalSymbols().getOrDefault("", new HashSet<>());
+    public Map<String, Symbol> builtinSymbols() {
+      return TypeShed.builtinSymbols();
     }
 
     @Override

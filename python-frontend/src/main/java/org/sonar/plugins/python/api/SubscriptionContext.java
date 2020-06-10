@@ -45,9 +45,9 @@ public interface SubscriptionContext {
 
   PythonFile pythonFile();
 
-  Map<String, Set<Symbol>> getTypeShedSymbols();
+  Map<String, Set<Symbol>> stubFilesSymbols();
 
-  Set<Symbol> getBuiltinGlobalSymbols();
+  Map<String, Symbol> builtinSymbols();
 
   /**
    * Returns null in case of Sonarlint context
