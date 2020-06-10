@@ -20,9 +20,11 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,41 +38,89 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3457")
 public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
 
-  private static final List<String> LOGGER_METHODS = Arrays.asList("logging.debug", "logging.info", "logging.warning", "logging.error", "logging.critical");
+  private static final Set<String> LOGGER_FULL_NAMES = new HashSet<>(Arrays.asList(
+    "logging.debug", "logging.info", "logging.warning", "logging.error", "logging.critical",
+    "logging.Logger.debug", "logging.Logger.info", "logging.Logger.warning", "logging.Logger.error", "logging.Logger.critical"
+  ));
+  private static final Set<String> LOGGER_METHOD_NAMES = new HashSet<>(Arrays.asList(
+    "debug", "info", "warning", "error", "critical"
+  ));
+
+  private Map<Name, Boolean> singleAssignedLoggers = new HashMap<>();
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, this::checkPrintfStyle);
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-
-      Symbol symbol = callExpression.calleeSymbol();
-      if (symbol == null || symbol.fullyQualifiedName() == null) {
-        return;
-      }
-
-      if (LOGGER_METHODS.contains(symbol.fullyQualifiedName())) {
-        checkLoggerLog(ctx, callExpression);
-      } else {
-        this.checkStrFormatStyle(ctx);
-      }
-    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
     context.registerSyntaxNodeConsumer(Tree.Kind.STRING_LITERAL, StringFormatCorrectnessCheck::checkFStringLiteral);
+  }
+
+  private void checkCallExpression(SubscriptionContext ctx) {
+    CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+    if (isCallToLog(callExpression)) {
+      checkLoggerLog(ctx, callExpression);
+    } else {
+      this.checkStrFormatStyle(ctx);
+    }
+  }
+
+  private boolean isCallToLog(CallExpression callExpression) {
+    Symbol symbol = callExpression.calleeSymbol();
+
+    if (symbol != null && LOGGER_FULL_NAMES.contains(symbol.fullyQualifiedName())) {
+      return true;
+    }
+
+    return isQualifiedCallToLogger(callExpression);
+  }
+
+  private boolean isQualifiedCallToLogger(CallExpression callExpression) {
+    if (!callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
+      return false;
+    }
+
+    QualifiedExpression qualifiedExpression = (QualifiedExpression) callExpression.callee();
+    if (!LOGGER_METHOD_NAMES.contains(qualifiedExpression.name().name())) {
+      return false;
+    }
+
+    Expression qualifier = qualifiedExpression.qualifier();
+    if (!qualifier.is(Tree.Kind.NAME)) {
+      return false;
+    }
+
+    Name name = (Name) qualifier;
+
+    return singleAssignedLoggers.computeIfAbsent(name, key -> {
+      Expression singleAssignedValue = Expressions.singleAssignedValue(key);
+      if (singleAssignedValue == null || !singleAssignedValue.is(Tree.Kind.CALL_EXPR)) {
+        return false;
+      }
+
+      CallExpression call = (CallExpression) singleAssignedValue;
+      Symbol symbol = call.calleeSymbol();
+      if (symbol == null) {
+        return false;
+      }
+
+      return "logging.getLogger".equals(symbol.fullyQualifiedName());
+    });
   }
 
   private static void checkFStringLiteral(SubscriptionContext ctx) {
     StringLiteral literal = (StringLiteral) ctx.syntaxNode();
-    if (TreeUtils.firstAncestorOfKind(literal, Tree.Kind.PLUS) != null) {
+    if (literal.parent().is(Tree.Kind.PLUS)) {
       // Do not handle these for now.
       return;
     }
@@ -230,5 +280,4 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
 
     unmatchedKeywordArgs.forEach(argument -> ctx.addIssue(argument, "Remove this unused argument."));
   }
-
 }

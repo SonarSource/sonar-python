@@ -1,4 +1,3 @@
-
 def f_strings():
     var = 42
     f"{var}" # Ok
@@ -23,7 +22,8 @@ def f_string_edge_case():
     2 + f"{var}"
     f"{var}" + 2
     2 + f"" + f"" + 2
-    f"" + (f"" + f"") # FM
+    f"" + (f"" + f"") # FN
+    foo(f"{var}") + bar(f"") # Noncompliant
 
 def printf_style():
     "%(key)s" % {"key": "str", "other": "key"}  # Noncompliant {{Remove this unused argument or add a replacement field.}}
@@ -103,9 +103,25 @@ def logger_format():
 import logging as renamed_logging
 renamed_logging.error("Foo %s", "Bar", 'Too many')  # Noncompliant
 
-module_logger = logging.getLogger('mylogger')
-module_logger.error("Foo %s", "Bar")
-module_logger.error("Foo %s", "Bar", "too many")  # FN
+l1 = logging.getLogger('l1')
+l1.error("Foo %s", "Bar")
+l1.error("Foo %s", "Bar", "too many")  # Noncompliant
+
+l2 = logging.getLogger('l2')
+l2 = logging.getLogger('l3')
+l2.error("Foo %s", "Bar")
+l2.error("Foo %s", "Bar", "too many")  # FN
+
+l3 = 'hello'
+l3.error("Foo %s", "Bar", "too many")  # FN
+
+x = [l1, l2]
+x[0].error("Foo %s", "Bar", "too many")  # FN
+
+def logger_in_function():
+    local_logger = logging.getLogger('mylogger')
+    local_logger.error("Foo %s", "Bar")
+    local_logger.error("Foo %s", "Bar", "too many")  # Noncompliant
 
 def fun():
     pass
@@ -114,3 +130,5 @@ def edge_case():
     fun = 'hello'
     fun('')
     no_such_function('hello')
+    l4 = no_such_function('')
+    l4.error("Foo %s", "Bar", "too many")  # FN
