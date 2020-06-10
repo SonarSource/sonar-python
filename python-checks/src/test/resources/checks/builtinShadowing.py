@@ -26,3 +26,7 @@ class efg():
 
 def safe():
     abs : int
+
+def redefine():
+    global __doc__
+    __doc__ = 42

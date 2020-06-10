@@ -23,6 +23,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -74,7 +75,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
     AssignmentExpression assignmentExpression = (AssignmentExpression) ctx.syntaxNode();
     Name lhsName = assignmentExpression.lhsName();
     if (shouldReportIssue(lhsName)) {
-      raiseIssueForVariable(ctx, lhsName);
+      raiseIssueForNonGlobalVariable(ctx, lhsName);
     }
   }
 
@@ -85,7 +86,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
         for (Expression expression : assignment.lhsExpressions().get(i).expressions()) {
           if (shouldReportIssue(expression)) {
-            raiseIssueForVariable(ctx, (Name) expression);
+            raiseIssueForNonGlobalVariable(ctx, (Name) expression);
           }
         }
       }
@@ -99,14 +100,14 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       Expression variable = assignment.variable();
       Token equalToken = assignment.equalToken();
       if (equalToken != null && shouldReportIssue(variable)) {
-        raiseIssueForVariable(ctx, (Name) variable);
+        raiseIssueForNonGlobalVariable(ctx, (Name) variable);
       }
     }
   }
 
-  private void raiseIssueForVariable(SubscriptionContext ctx, Name variable) {
+  private void raiseIssueForNonGlobalVariable(SubscriptionContext ctx, Name variable) {
     Symbol variableSymbol = variable.symbol();
-    if (variableSymbol != null) {
+    if (variableSymbol != null && variableSymbol.usages().stream().noneMatch(u -> u.kind().equals(Usage.Kind.GLOBAL_DECLARATION))) {
       PreciseIssue existingIssue = variableIssuesRaised.get(variableSymbol);
       if (existingIssue != null) {
         existingIssue.secondary(variable, REPEATED_VAR_MESSAGE);
