@@ -101,6 +101,8 @@ def other():
     # Even though the character escape is invalid, raising on that is out of the scope of this rule.
     '{} \N{} {}'.format('foo', 'bar') # OK
     '\N{}'.format('hello') # Out of scope (S3457)
+    '{}\n{}'.format('foo', 'bar') # OK
+    '{}\n{}'.format('foo') # Noncompliant
 
 def fun():
     pass
