@@ -1,29 +1,8 @@
+# Due to parsing errors with formatted expressions, the rule is disabled for f-strings: see SONARPY-726
 def f_strings():
     var = 42
     f"{var}" # Ok
-    f"[var]" # Noncompliant {{Add replacement fields or use a normal string instead of an f-string.}}
-   #^^^^^^^^
-    F"[var]" # Noncompliant
-    f'[var]' # Noncompliant
-    f"""[var]""" # Noncompliant
-    fr"[var]" # Noncompliant
-    "" # Ok - not an f-string
-    "{var}" # Ok - not an f-string
-
-    (f"a" f"b" f"c")  # Noncompliant {{Add replacement fields or use a normal string instead of an f-string.}}
-    #^^^^^^^^^^^^^^
-    (f"{var}" f"b" f"c") # Ok
-
-    (f"a" + f"b" + f"c") # FN
-    (f"{var}" + f"b" + f"c") # Ok
-
-def f_string_edge_case():
-    2 + 2
-    2 + f"{var}"
-    f"{var}" + 2
-    2 + f"" + f"" + 2
-    f"" + (f"" + f"") # FN
-    foo(f"{var}") + bar(f"") # Noncompliant
+    f"[var]" # FN {{Add replacement fields or use a normal string instead of an f-string.}}
 
 def printf_style():
     "%(key)s" % {"key": "str", "other": "key"}  # Noncompliant {{Remove this unused argument or add a replacement field.}}
