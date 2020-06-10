@@ -1,0 +1,52 @@
+<p>Formatting strings, either with the <code>%</code> operator or <code>str.format</code> method, requires a valid string and arguments matching this
+string's replacement fields.</p>
+<p>This also applies to loggers from the <code>logging</code> module. Internally they use <code>%-formatting</code>. The only difference is that they
+will log an error instead of raising an exception when provided arguments are invalid.</p>
+<p>Formatted string literals, also called "f-strings", are generally simpler to use, and any syntax mistake will fail at compile time. However it is
+easy to forget curly braces and it won't raise any error.</p>
+<p>This rule raises an issue when:</p>
+<ul>
+  <li> A string formatted with <code>%</code> will not return the expected string because some arguments are not used. </li>
+  <li> A string formatted with <code>str.format</code> will not return the expected string because some arguments are not used. </li>
+  <li> An "f-string" doesn't contain any replacement field, which probably means that some curly braces are missing. </li>
+  <li> Loggers will log an error because their message is not formatted properly. </li>
+</ul>
+<p>Rule {rule:python:S2275} covers cases where formatting a string will raise an exception.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+"Error %(message)s" % {"message": "something failed", "extra": "some dead code"}  # Noncompliant. Remove the unused argument "extra" or add a replacement field.
+
+"Error: User {} has not been able to access []".format("Alice", "MyFile")  # Noncompliant. Remove 1 unexpected argument or add a replacement field.
+
+user = "Alice"
+resource = "MyFile"
+message = f"Error: User [user] has not been able to access [resource]"  # Noncompliant. Add replacement fields or use a normal string instead of an f-string.
+
+import logging
+logging.error("Error: User %s has not been able to access %s", "Alice")  # Noncompliant. Add 1 missing argument.
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+"Error %(message)s" % {"message": "something failed"}
+
+"Error: User {} has not been able to access {}".format("Alice", "MyFile")
+
+user = "Alice"
+resource = "MyFile"
+message = f"Error: User {user} has not been able to access {resource}"
+
+import logging
+logging.error("Error: User %s has not been able to access %s", "Alice", "MyFile")
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3/library/string.html#format-string-syntax">Python documentation - Format String Syntax</a> </li>
+  <li> <a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">Python documentation - printf-style String
+  Formatting</a> </li>
+  <li> <a href="https://docs.python.org/3/howto/logging.html#loggers">Python documentation - Loggers</a> </li>
+  <li> <a href="https://docs.python.org/3/howto/logging-cookbook.html#using-particular-formatting-styles-throughout-your-application">Python
+  documentation - Using particular formatting styles throughout your application</a> </li>
+  <li> <a href="https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals">Python documentation - Formatted string
+  literals</a> </li>
+</ul>
+

@@ -183,6 +183,7 @@ public final class CheckList {
       SpecialMethodParamListCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
+      StringFormatCorrectnessCheck.class,
       StringFormatMisuseCheck.class,
       StringLiteralDuplicationCheck.class,
       StrongCryptographicKeysCheck.class,

@@ -24,11 +24,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
@@ -37,6 +37,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class StringFormat {
 
   private static final String SYNTAX_ERROR_MESSAGE = "Fix this formatted string's syntax.";
+
+  private static final BiConsumer<SubscriptionContext, Expression> DO_NOTHING_VALIDATOR = (ctx, expr) -> {};
 
   // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
   private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
@@ -54,9 +56,9 @@ public class StringFormat {
    * Represents a named or positional replacement field inside a format string.
    */
   public abstract static class ReplacementField {
-    private Consumer<Expression> validator;
+    private BiConsumer<SubscriptionContext, Expression> validator;
 
-    private ReplacementField(Consumer<Expression> validator) {
+    private ReplacementField(BiConsumer<SubscriptionContext, Expression> validator) {
       this.validator = validator;
     }
 
@@ -68,15 +70,15 @@ public class StringFormat {
 
     public abstract int position();
 
-    public void validateArgument(Expression expression) {
-      this.validator.accept(expression);
+    public void validateArgument(SubscriptionContext ctx, Expression expression) {
+      this.validator.accept(ctx, expression);
     }
   }
 
   public static class NamedField extends ReplacementField {
     private String name;
 
-    public NamedField(Consumer<Expression> validator, String name) {
+    public NamedField(BiConsumer<SubscriptionContext, Expression> validator, String name) {
       super(validator);
       this.name = name;
     }
@@ -105,7 +107,7 @@ public class StringFormat {
   public static class PositionalField extends ReplacementField {
     private int position;
 
-    public PositionalField(Consumer<Expression> validator, int position) {
+    public PositionalField(BiConsumer<SubscriptionContext, Expression> validator, int position) {
       super(validator);
       this.position = position;
     }
@@ -141,19 +143,22 @@ public class StringFormat {
     return this.replacementFields;
   }
 
-  public long numExpectedArguments() {
-    long numPositional = this.replacementFields.stream()
+  public long numExpectedPositional() {
+    return this.replacementFields.stream()
       .filter(ReplacementField::isPositional)
       .map(ReplacementField::position)
       .distinct()
       .count();
+  }
+
+  public long numExpectedArguments() {
     long numNamed = this.replacementFields.stream()
       .filter(ReplacementField::isNamed)
       .map(ReplacementField::name)
       .distinct()
       .count();
 
-    return numPositional + numNamed;
+    return this.numExpectedPositional() + numNamed;
   }
 
   public boolean hasPositionalFields() {
@@ -179,17 +184,13 @@ public class StringFormat {
     private int nesting = 0;
     private List<ReplacementField> result;
 
-    private SubscriptionContext ctx;
-    private Tree tree;
-    private StringLiteral literal;
+    private Consumer<String> issueReporter;
     private String value;
     private Matcher fieldContentMatcher;
 
-    public StrFormatParser(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
-      this.ctx = ctx;
-      this.tree = tree;
-      this.literal = literal;
-      this.value = literal.trimmedQuotesValue();
+    public StrFormatParser(Consumer<String> issueReporter, String value) {
+      this.issueReporter = issueReporter;
+      this.value = value;
       this.fieldContentMatcher = FORMAT_FIELD_PATTERN.matcher(this.value);
     }
 
@@ -218,7 +219,7 @@ public class StringFormat {
             break;
           case FLAG:
             if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
-              reportSyntaxIssue(ctx, tree, literal, String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+              issueReporter.accept(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
               return Optional.empty();
             }
             state = ParseState.FLAG_CHARACTER;
@@ -254,12 +255,12 @@ public class StringFormat {
 
     private boolean checkParserState() {
       if (nesting != 0 || state != ParseState.INIT) {
-        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return false;
       }
 
       if (hasManualNumbering && hasAutoNumbering) {
-        reportSyntaxIssue(ctx, tree, literal, "Use only manual or only automatic field numbering, don't mix them.");
+        issueReporter.accept("Use only manual or only automatic field numbering, don't mix them.");
         return false;
       }
 
@@ -268,7 +269,7 @@ public class StringFormat {
 
     private boolean tryParseFormatSpecifierField(char current) {
       if (current != '}') {
-        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return false;
       }
 
@@ -315,7 +316,7 @@ public class StringFormat {
         nesting--;
         state = ParseState.INIT;
       } else {
-        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return false;
       }
 
@@ -332,7 +333,7 @@ public class StringFormat {
         result.add(createField(currentFieldName));
         state = ParseState.INIT;
       } else {
-        reportSyntaxIssue(ctx, tree, literal, SYNTAX_ERROR_MESSAGE);
+        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return false;
       }
       return true;
@@ -359,33 +360,33 @@ public class StringFormat {
         hasAutoNumbering = true;
         int currentPos = autoNumberingPos;
         autoNumberingPos++;
-        return new PositionalField(expression -> {}, currentPos);
+        return new PositionalField(DO_NOTHING_VALIDATOR, currentPos);
       } else if (FORMAT_NUMBER_PATTERN.matcher(name).find()) {
         hasManualNumbering = true;
-        return new PositionalField(expression -> {}, Integer.parseInt(name));
+        return new PositionalField(DO_NOTHING_VALIDATOR, Integer.parseInt(name));
       } else {
-        return new NamedField(expression -> {}, name);
+        return new NamedField(DO_NOTHING_VALIDATOR, name);
       }
     }
   }
 
-  public static Optional<StringFormat> createFromStrFormatStyle(SubscriptionContext ctx, Tree tree, StringLiteral literal) {
+  public static Optional<StringFormat> createFromStrFormatStyle(Consumer<String> issueReporter, String value) {
     // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec*] '}'
     // FormatSpec -> '{' [FieldName] '}' | Character
     // FieldName -> [Name] ('.' Name | '[' (Name | Number) ']')*
     // See https://docs.python.org/3/library/string.html#formatstrings
-    return new StrFormatParser(ctx, tree, literal).parse();
+    return new StrFormatParser(issueReporter, value).parse();
   }
 
-  public static Optional<StringFormat> createFromPrintfStyle(SubscriptionContext ctx, Expression lhsOperand, StringLiteral literal) {
+  public static Optional<StringFormat> createFromPrintfStyle(Consumer<String> issueReporter, String value) {
     List<ReplacementField> result = new ArrayList<>();
-    Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(literal.trimmedQuotesValue());
+    Matcher matcher = PRINTF_PARAMETER_PATTERN.matcher(value);
 
     int position = 0;
     while (matcher.find()) {
       if (matcher.group("field") == null) {
         // We matched a '%' sign, but could not match the rest of the field, the syntax is erroneous.
-        reportSyntaxIssue(ctx, lhsOperand, literal, SYNTAX_ERROR_MESSAGE);
+        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return Optional.empty();
       }
 
@@ -402,75 +403,68 @@ public class StringFormat {
       if ("*".equals(width)) {
         int currentPos = position;
         position++;
-        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
+        result.add(new PositionalField(printfWidthOrPrecisionValidator(), currentPos));
       }
       if ("*".equals(precision)) {
         int currentPos = position;
         position++;
-        result.add(new PositionalField(printfWidthOrPrecisionValidator(ctx), currentPos));
+        result.add(new PositionalField(printfWidthOrPrecisionValidator(), currentPos));
       }
 
       char conversionTypeChar = conversionType.charAt(0);
       if (mapKey != null) {
-        result.add(new NamedField(printfConversionValidator(ctx, conversionTypeChar), mapKey));
+        result.add(new NamedField(printfConversionValidator(conversionTypeChar), mapKey));
       } else {
         int currentPos = position;
         position++;
-        result.add(new PositionalField(printfConversionValidator(ctx, conversionTypeChar), currentPos));
+        result.add(new PositionalField(printfConversionValidator(conversionTypeChar), currentPos));
       }
     }
 
     StringFormat format = new StringFormat(result);
     if (format.hasPositionalFields() && format.hasNamedFields()) {
-      reportSyntaxIssue(ctx, lhsOperand, literal, "Use only positional or only named field, don't mix them.");
+      issueReporter.accept("Use only positional or only named fields, don't mix them.");
       return Optional.empty();
     }
 
     return Optional.of(format);
   }
 
-  private static void reportSyntaxIssue(SubscriptionContext ctx, Tree primary, Tree secondary, String message) {
-    PythonCheck.PreciseIssue preciseIssue = ctx.addIssue(primary, message);
-    if (primary != secondary) {
-      preciseIssue.secondary(secondary, null);
-    }
-  }
-
-  private static Consumer<Expression> printfWidthOrPrecisionValidator(SubscriptionContext ctx) {
-    return expression -> {
+  private static BiConsumer<SubscriptionContext, Expression> printfWidthOrPrecisionValidator() {
+    return (ctx, expression) -> {
       if (cannotBeOfType(expression, "int")) {
         ctx.addIssue(expression, "Replace this value with an integer as \"*\" requires.");
       }
     };
   }
 
-  private static Consumer<Expression> printfConversionValidator(SubscriptionContext ctx, char conversionType) {
+  private static BiConsumer<SubscriptionContext, Expression> printfConversionValidator(char conversionType) {
     if (PRINTF_NUMBER_CONVERTERS.indexOf(conversionType) != -1) {
-      return expr -> {
-        if (cannotBeOfType(expr, "int", "float")) {
-          ctx.addIssue(expr, String.format("Replace this value with a number as \"%%%c\" requires.", conversionType));
+      return (ctx, expression) -> {
+        if (cannotBeOfType(expression, "int", "float")) {
+          ctx.addIssue(expression, String.format("Replace this value with a number as \"%%%c\" requires.", conversionType));
         }
       };
     }
 
     if (PRINTF_INTEGER_CONVERTERS.indexOf(conversionType) != -1) {
-      return expr -> {
-        if (cannotBeOfType(expr, "int")) {
-          ctx.addIssue(expr, String.format("Replace this value with an integer as \"%%%c\" requires.", conversionType));
+      return (ctx, expression) -> {
+        if (cannotBeOfType(expression, "int")) {
+          ctx.addIssue(expression, String.format("Replace this value with an integer as \"%%%c\" requires.", conversionType));
         }
       };
     }
 
     if (conversionType == 'c') {
-      return expr -> {
-        if (cannotBeOfType(expr, "int") && cannotBeSingleCharString(expr)) {
-          ctx.addIssue(expr, String.format("Replace this value with an integer or a single character string as \"%%%c\" requires.", conversionType));
+      return (ctx, expression) -> {
+        if (cannotBeOfType(expression, "int") && cannotBeSingleCharString(expression)) {
+          ctx.addIssue(expression, String.format("Replace this value with an integer or a single character string as \"%%%c\" requires.", conversionType));
         }
       };
     }
 
     // No case for '%s', '%r' and '%a' - anything can be formatted with those.
-    return expr -> {};
+    return (ctx, expression) -> {};
   }
 
   private static boolean cannotBeOfType(Expression expression, String... types) {
