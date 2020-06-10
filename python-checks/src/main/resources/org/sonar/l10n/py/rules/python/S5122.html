@@ -15,7 +15,7 @@ href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>, that act
   <li> You access control policy is dynamically defined by a user-controlled input like <a
   href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin"><code>origin</code></a> header. </li>
 </ul>
-<p>You are at risk if you answered yes to any of those questions.</p>
+<p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
   <li> The <code>Access-Control-Allow-Origin</code> header should be set only for a trusted origin and for specific resources. </li>
@@ -32,6 +32,19 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "True"}}) # Sensitive
+</pre>
+<h2>Compliant Solution</h2>
+<p>Django</p>
+<pre>
+CORS_ORIGIN_ALLOW_ALL = False # Compliant
+</pre>
+<p>Flask</p>
+<pre>
+from flask import Flask
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}}) # Compliant
 </pre>
 <h2>See</h2>
 <ul>

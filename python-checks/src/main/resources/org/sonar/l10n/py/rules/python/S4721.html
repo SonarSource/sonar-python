@@ -1,106 +1,94 @@
-<p>OS commands are security-sensitive. For example, their use has led in the past to the following vulnerabilities:</p>
+<p>Arbitrary OS commands can be executed by an attacker when:</p>
 <ul>
-  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12465">CVE-2018-12465</a> </li>
-  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7187">CVE-2018-7187</a> </li>
+  <li> The OS command name to execute is user-controlled. </li>
+  <li> A shell is spawn rather than a new process, in this case shell meta-chars can be used (when parameters are user-controlled for instance) to
+  inject OS commands. </li>
+  <li> The executable is searched in the directories specified by the PATH variable (which can contain user-controlled or malicious directories).
+  </li>
 </ul>
-<p>Applications that execute operating system commands or execute commands that interact with the underlying system should neutralize any
-externally-provided input used to construct those commands. Failure to do so could allow an attacker to execute unexpected or dangerous commands,
-potentially leading to loss of confidentiality, integrity or availability.</p>
-<p> </p>
-<p>This rule flags code that specifies the name of the command to run. The goal is to guide security code reviews.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the executed command is constructed by input that is externally-influenced, for example, user input (attacker). (*) </li>
-  <li> the command execution is not restricted to the right users. (*) </li>
-  <li> the application can be redesigned to not rely on external input to execute the command. </li>
+  <li> OS command name or parameters are user-controlled. </li>
+  <li> The relative path of the OS command is specified. </li>
+  <li> OS commands are not executed in an isolated/sandboxed environment. </li>
+  <li> OS command are executed with high privileges. </li>
 </ul>
-<p>(*) You are at risk if you answered yes to any of those questions.</p>
+<p>There is a risk if you answered yes to any of those questions.</p>
 <p> </p>
 <h2>Recommended Secure Coding Practices</h2>
-<p>Restrict the control given to the user over the executed command:</p>
 <ul>
-  <li> make the executed command part of a whitelist and reject all commands not part of this list. </li>
-  <li> sanitize the user input. </li>
+  <li> User-controlled inputs should not be used, for any reasons, to build a dynamically OS command (command name or even parameters when shell is
+  used). </li>
+  <li> Fully qualified/absolute path should be used to specify the OS command to execute. </li>
+  <li> If possible, set the lowest privileges to the new process/shell in which commands are executed. </li>
+  <li> If possible, execute the OS commands in an isolated environment. </li>
 </ul>
-<p> </p>
-<p>Restrict which users can have access to the command:</p>
-<ul>
-  <li> use a firewall to protect the process running the code, and to protect the network from the command. </li>
-  <li> authenticate the user and allow only some users to run the command. </li>
-</ul>
-<p>Reduce the damage the command can do:</p>
-<ul>
-  <li> execute the code in a sandbox environment that enforces strict boundaries between the operating system and the process. For example: a "jail".
-  </li>
-  <li> refuse to run the command if the process has too many privileges. For example: forbid running the code as "root". </li>
-</ul>
-<p> </p>
 <h2>Sensitive Code Example</h2>
 <p>Python 3</p>
 <pre>
-import subprocess
-import os
-
-params = ["ls", "-l"]
-
-subprocess.run(params)  # Sensitive
-subprocess.Popen(params)  # Sensitive
-
-# Older API
-
-subprocess.call(params)  # Sensitive
-subprocess.check_call(params)  # Sensitive
-subprocess.check_output(params)  # Sensitive
-
-cmd = "ls -l"
-os.system(cmd)  # Sensitive
-
-mode = os.P_WAIT
-file = "ls"
-path = "/bin/ls"
-env = os.environ
-os.spawnl(mode, path, *params)  # Sensitive
-os.spawnle(mode, path, *params, env)  # Sensitive
-os.spawnlp(mode, file, *params)  # Sensitive
-os.spawnlpe(mode, file, *params, env)  # Sensitive
-os.spawnv(mode, path, params)  # Sensitive
-os.spawnve(mode, path, params, env)  # Sensitive
-os.spawnvp(mode, file, params)  # Sensitive
-os.spawnvpe(mode, file, params, env)  # Sensitive
-
-mode = 'r'
-(child_stdout) = os.popen(cmd, mode, 1)  # Sensitive
-# print(child_stdout.read())
-
-(_, output) = subprocess.getstatusoutput(cmd)  # Sensitive
-
-out = subprocess.getoutput(cmd)  # Sensitive
-
-os.startfile(path)  # Sensitive
-
-os.execl(path, *params)  # Sensitive
-os.execle(path, *params, env)  # Sensitive
-os.execlp(file, *params)  # Sensitive
-os.execlpe(file, *params, env)  # Sensitive
-os.execv(path, params)  # Sensitive
-os.execve(path, params, env)  # Sensitive
-os.execvp(file, params)  # Sensitive
-os.execvpe(file, params, env)  # Sensitive
+subprocess.run(cmd, shell=True)  # Sensitive
+subprocess.Popen(cmd, shell=True)  # Sensitive
+subprocess.call(cmd, shell=True)  # Sensitive
+subprocess.check_call(cmd, shell=True)  # Sensitive
+subprocess.check_output(cmd, shell=True)  # Sensitive
+os.system(cmd)  # Sensitive: a shell is always spawn
 </pre>
 <p>Python 2</p>
 <pre>
-import os
-import popen2
+cmd = "when a string is passed through these function, a shell is spawn"
+(_, child_stdout, _) = os.popen2(cmd)  # Sensitive
+(_, child_stdout, _) = os.popen3(cmd)  # Sensitive
+(_, child_stdout) = os.popen4(cmd)  # Sensitive
 
-cmd = "ls -l"
-mode = "r"
-(_, child_stdout) = os.popen2(cmd, mode)  # Sensitive
-(_, child_stdout, _) = os.popen3(cmd, mode)  # Sensitive
-(_, child_stdout) = os.popen4(cmd, mode)  # Sensitive
 
 (child_stdout, _) = popen2.popen2(cmd)  # Sensitive
 (child_stdout, _, _) = popen2.popen3(cmd)  # Sensitive
 (child_stdout, _) = popen2.popen4(cmd)  # Sensitive
+</pre>
+<h2>Compliant Solution</h2>
+<p>Python 3</p>
+<pre>
+# by default shell=False, a shell is not spawn
+subprocess.run(cmd)  # Compliant
+subprocess.Popen(cmd)  # Compliant
+subprocess.call(cmd)  # Compliant
+subprocess.check_call(cmd)  # Compliant
+subprocess.check_output(cmd)  # Compliant
+
+# always in a subprocess:
+os.spawnl(mode, path, *cmd)  # Compliant
+os.spawnle(mode, path, *cmd, env)  # Compliant
+os.spawnlp(mode, file, *cmd)  # Compliant
+os.spawnlpe(mode, file, *cmd, env)  # Compliant
+os.spawnv(mode, path, cmd)  # Compliant
+os.spawnve(mode, path, cmd, env)  # Compliant
+os.spawnvp(mode, file, cmd)  # Compliant
+os.spawnvpe(mode, file, cmd, env)  # Compliant
+
+(child_stdout) = os.popen(cmd, mode, 1)  # Compliant
+(_, output) = subprocess.getstatusoutput(cmd)  # Compliant
+out = subprocess.getoutput(cmd)  # Compliant
+os.startfile(path)  # Compliant
+os.execl(path, *cmd)  # Compliant
+os.execle(path, *cmd, env)  # Compliant
+os.execlp(file, *cmd)  # Compliant
+os.execlpe(file, *cmd, env)  # Compliant
+os.execv(path, cmd)  # Compliant
+os.execve(path, cmd, env)  # Compliant
+os.execvp(file, cmd)  # Compliant
+os.execvpe(file, cmd, env)  # Compliant
+</pre>
+<p>Python 2</p>
+<pre>
+cmdsargs = ("use", "a", "sequence", "to", "directly", "start", "a", "subprocess")
+
+(_, child_stdout) = os.popen2(cmdsargs)  # Compliant
+(_, child_stdout, _) = os.popen3(cmdsargs)  # Compliant
+(_, child_stdout) = os.popen4(cmdsargs)  # Compliant
+
+(child_stdout, _) = popen2.popen2(cmdsargs)  # Compliant
+(child_stdout, _, _) = popen2.popen3(cmdsargs)  # Compliant
+(child_stdout, _) = popen2.popen4(cmdsargs)  # Compliant
 </pre>
 <h2>See</h2>
 <ul>
