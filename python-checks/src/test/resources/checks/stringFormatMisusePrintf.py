@@ -119,6 +119,9 @@ def other():
     args = ("are you")
     "hello %s, how %s, this is %s" % ("friend", *args) # FN
 
+    field = '%s'
+    f'{field} %s' % ('hello') # FN
+
 def some_duck_typing():
     class MyCustomFloat:
         def __init__(self, val):

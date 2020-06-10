@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Set;
@@ -50,11 +49,6 @@ public class StringFormatMisuseCheck extends AbstractStringFormatCheck {
 
   @Override
   protected void checkPrintfStyle(SubscriptionContext ctx, BinaryExpression modulo, StringLiteral literal) {
-    if (literal.stringElements().stream().anyMatch(s -> s.prefix().toLowerCase(Locale.ENGLISH).contains("b"))) {
-      // Do not bother with byte formatting for now.
-      return;
-    }
-
     Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(
       syntaxIssueReporter(ctx, modulo.leftOperand(), literal), literal.trimmedQuotesValue());
     if (!formatOptional.isPresent()) {

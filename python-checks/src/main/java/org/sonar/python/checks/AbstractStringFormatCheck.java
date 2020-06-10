@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -36,6 +37,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -55,6 +57,11 @@ public abstract class AbstractStringFormatCheck extends PythonSubscriptionCheck 
     BinaryExpression expression = (BinaryExpression) ctx.syntaxNode();
     StringLiteral literal = extractStringLiteral(expression.leftOperand());
     if (literal == null) {
+      return;
+    }
+
+    if (literal.stringElements().stream().anyMatch(AbstractStringFormatCheck::isFStringOrBytesLiteral)) {
+      // Do not bother with byte formatting and f-strings for now.
       return;
     }
 
@@ -123,6 +130,11 @@ public abstract class AbstractStringFormatCheck extends PythonSubscriptionCheck 
       return;
     }
 
+    if (literal.stringElements().stream().anyMatch(AbstractStringFormatCheck::isFStringOrBytesLiteral)) {
+      // Avoid raising on f-strings
+      return;
+    }
+
     this.checkStrFormatStyle(ctx, callExpression, qualifier, literal);
   }
 
@@ -174,4 +186,10 @@ public abstract class AbstractStringFormatCheck extends PythonSubscriptionCheck 
     return NOT_MAPPING_TYPES.stream().noneMatch(type -> expression.type().canOnlyBe(type))
       && expression.type().canHaveMember("__getitem__");
   }
+
+  private static boolean isFStringOrBytesLiteral(StringElement stringElement) {
+    String prefix = stringElement.prefix().toLowerCase(Locale.ENGLISH);
+    return prefix.contains("b") || prefix.contains("f");
+  }
+
 }
