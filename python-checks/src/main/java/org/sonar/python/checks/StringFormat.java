@@ -47,6 +47,8 @@ public class StringFormat {
 
   private static final Pattern FORMAT_FIELD_PATTERN = Pattern.compile("^(?<name>[^.\\[!:{}]+)?(?:(?:\\.[a-zA-Z0-9_]+)|(?:\\[[^]]+]))*");
   private static final Pattern FORMAT_NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  private static final Pattern FORMAT_UNICODE_PATTERN = Pattern.compile("^\\\\N\\{[a-zA-Z0-9-_\\s]*}");
+
   private static final String FORMAT_VALID_CONVERSION_FLAGS = "rsa";
 
   private static final String PRINTF_NUMBER_CONVERTERS = "diueEfFgG";
@@ -202,7 +204,7 @@ public class StringFormat {
         char current = value.charAt(pos);
         switch (state) {
           case INIT:
-            parseInitial(current);
+            pos = parseInitial(current, pos);
             break;
           case LCURLY:
             pos = parseFieldName(current, pos);
@@ -289,12 +291,20 @@ public class StringFormat {
       return pos;
     }
 
-    private void parseInitial(char current) {
+    private int parseInitial(char current, int pos) {
       if (current == '{') {
         state = ParseState.LCURLY;
       } else if (current == '}') {
         state = ParseState.RCURLY;
+      } else if (current == '\\') {
+        // See if this is a unicode escape
+        Matcher unicodeMatcher = FORMAT_UNICODE_PATTERN.matcher(this.value).region(pos, this.value.length());
+        if (unicodeMatcher.find()) {
+          pos = unicodeMatcher.end() - 1;
+        }
       }
+
+      return pos;
     }
 
     private void parseFormatSpecifier(char current) {

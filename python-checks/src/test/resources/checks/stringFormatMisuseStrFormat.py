@@ -87,6 +87,23 @@ def other():
     '{} {} {} {}'.format(*tuple_data)  # FN
     '{one} {two} {three}'.format(**dict_data)  # FN
 
+    # Do not raise on f-strings
+    f"{{0:{5}s}} {{1:{10}s}}".format('', 'foo') # Ok
+    f"{{0:{5}s}} {{1:{10}s}}".format('') # FN
+
+    # Handle prefixed unicode characters correctly
+    '{} \N{RIGHTWARDS ARROW} "{}"'.format('foo', 'bar') # OK
+    '{} \N{RIGHTWARDS ARROW} "{}"'.format('foo') # Noncompliant
+    '{} \N{EMOJI MODIFIER FITZPATRICK TYPE-1-2} {}'.format('foo', 'bar') # OK
+    '{foo} \N{RIGHTWARDS ARROW} "{bar}"'.format(foo='foo', bar='bar') # Ok
+    '{foo} \N{RIGHTWARDS ARROW} "{bar}"'.format(foo='foo') # Noncompliant
+
+    # Even though the character escape is invalid, raising on that is out of the scope of this rule.
+    '{} \N{} {}'.format('foo', 'bar') # OK
+    '\N{}'.format('hello') # Out of scope (S3457)
+    '{}\n{}'.format('foo', 'bar') # OK
+    '{}\n{}'.format('foo') # Noncompliant
+
 def fun():
     pass
 
