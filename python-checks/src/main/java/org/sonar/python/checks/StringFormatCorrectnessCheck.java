@@ -20,10 +20,8 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -55,8 +53,6 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     "debug", "info", "warning", "error", "critical"
   ));
 
-  private Map<Name, Boolean> singleAssignedLoggers = new HashMap<>();
-
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.MODULO, this::checkPrintfStyle);
@@ -72,7 +68,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     }
   }
 
-  private boolean isCallToLog(CallExpression callExpression) {
+  private static boolean isCallToLog(CallExpression callExpression) {
     Symbol symbol = callExpression.calleeSymbol();
 
     if (symbol != null && LOGGER_FULL_NAMES.contains(symbol.fullyQualifiedName())) {
@@ -82,7 +78,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     return isQualifiedCallToLogger(callExpression);
   }
 
-  private boolean isQualifiedCallToLogger(CallExpression callExpression) {
+  private static boolean isQualifiedCallToLogger(CallExpression callExpression) {
     if (!callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
       return false;
     }
@@ -97,22 +93,18 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
       return false;
     }
 
-    Name name = (Name) qualifier;
+    Expression singleAssignedValue = Expressions.singleAssignedValue((Name) qualifier);
+    if (singleAssignedValue == null || !singleAssignedValue.is(Tree.Kind.CALL_EXPR)) {
+      return false;
+    }
 
-    return singleAssignedLoggers.computeIfAbsent(name, key -> {
-      Expression singleAssignedValue = Expressions.singleAssignedValue(key);
-      if (singleAssignedValue == null || !singleAssignedValue.is(Tree.Kind.CALL_EXPR)) {
-        return false;
-      }
+    CallExpression call = (CallExpression) singleAssignedValue;
+    Symbol symbol = call.calleeSymbol();
+    if (symbol == null) {
+      return false;
+    }
 
-      CallExpression call = (CallExpression) singleAssignedValue;
-      Symbol symbol = call.calleeSymbol();
-      if (symbol == null) {
-        return false;
-      }
-
-      return "logging.getLogger".equals(symbol.fullyQualifiedName());
-    });
+    return "logging.getLogger".equals(symbol.fullyQualifiedName());
   }
 
   private static void checkLoggerLog(SubscriptionContext ctx, CallExpression callExpression) {
