@@ -1,7 +1,6 @@
 from math import exp
 from unresolved import Unresolved
 from .same_package import same_package_function
-from imported_with_wildcard import *
 
 var = "unknown"
 #     ^^^^^^^^^>
@@ -22,10 +21,6 @@ __all__ = [
     'NestedClass',  # Noncompliant
     exp.__name__,
     "unicode", # OK (builtin symbol)
-    'function_imported_through_wildcard',
-    # FP to fix with SONARPY-647
-    'transitively_exported', # Noncompliant
-    'ti_alias', # Noncompliant
     not_a_string, # Out of scope
     f'interpolated{var}', # Out of scope
     var  # Noncompliant {{Change or remove this string; "unknown" is not defined.}}

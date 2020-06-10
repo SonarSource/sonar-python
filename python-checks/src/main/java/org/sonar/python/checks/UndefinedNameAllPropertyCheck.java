@@ -32,7 +32,6 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -105,7 +104,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     }
     UnknownNameSourcesVisitor unknownNameSourcesVisitor = new UnknownNameSourcesVisitor();
     fileInput.accept(unknownNameSourcesVisitor);
-    return unknownNameSourcesVisitor.shouldNotReportIssue || (unknownNameSourcesVisitor.hasWildcardImport && importsManipulatedAllProperty(fileInput));
+    return unknownNameSourcesVisitor.shouldNotReportIssue;
   }
 
   private static boolean isUnknownSymbol(PythonFile pythonFile, Map<String, Symbol> symbolsByName, StringLiteral stringLiteral) {
@@ -160,22 +159,13 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     return (StringLiteral) Expressions.singleAssignedValue((Name) tree);
   }
 
-  private static boolean importsManipulatedAllProperty(FileInput fileInput) {
-    return fileInput.globalVariables().stream()
-      .filter(s -> s.name().equals("__all__"))
-      .flatMap(s -> s.usages().stream())
-      .anyMatch(u -> u.kind() == Usage.Kind.IMPORT);
-  }
-
   private static class UnknownNameSourcesVisitor extends BaseTreeVisitor {
 
     private boolean shouldNotReportIssue = false;
-    private boolean hasWildcardImport = false;
 
     @Override
     public void visitImportFrom(ImportFrom importFrom) {
-      hasWildcardImport |= importFrom.isWildcardImport();
-      shouldNotReportIssue |= importFrom.hasUnresolvedWildcardImport();
+      shouldNotReportIssue |= importFrom.isWildcardImport();
       super.visitImportFrom(importFrom);
     }
 

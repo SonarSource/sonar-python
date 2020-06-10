@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,19 +26,12 @@ public class UndefinedNameAllPropertyCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify(Arrays.asList("src/test/resources/checks/undefinedNameAllProperty/undefinedNameAllProperty.py",
-      "src/test/resources/checks/undefinedNameAllProperty/imported_with_wildcard.py"), new UndefinedNameAllPropertyCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/undefinedNameAllProperty/undefinedNameAllProperty.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
-  public void test_unresolved_wildcard_import() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/with_unresolved_wildcard_import.py", new UndefinedNameAllPropertyCheck());
-  }
-
-  @Test
-  public void test_imports_manipulated_all() {
-    PythonCheckVerifier.verifyNoIssue(Arrays.asList("src/test/resources/checks/undefinedNameAllProperty/importing_manipulated_all.py",
-     "src/test/resources/checks/undefinedNameAllProperty/manipulates_globals.py"), new UndefinedNameAllPropertyCheck());
+  public void test_wildcard_import() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/with_wildcard_import.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
