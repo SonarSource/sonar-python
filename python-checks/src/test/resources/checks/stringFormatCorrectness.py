@@ -113,7 +113,7 @@ l2.error("Foo %s", "Bar")
 l2.error("Foo %s", "Bar", "too many")  # FN
 
 l3 = 'hello'
-l3.error("Foo %s", "Bar", "too many")  # FN
+l3.error("Foo %s", "Bar", "too many")
 
 x = [l1, l2]
 x[0].error("Foo %s", "Bar", "too many")  # FN
@@ -131,4 +131,4 @@ def edge_case():
     fun('')
     no_such_function('hello')
     l4 = no_such_function('')
-    l4.error("Foo %s", "Bar", "too many")  # FN
+    l4.error("Foo %s", "Bar", "too many")
