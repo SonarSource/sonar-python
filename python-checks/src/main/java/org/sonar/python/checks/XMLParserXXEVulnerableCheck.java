@@ -36,12 +36,10 @@ import javax.annotation.Nullable;
 
 import static java.util.Optional.ofNullable;
 
-@Rule(key = XMLParserXXEVulnerableCheck.CHECK_KEY)
+@Rule(key = "S2755")
 public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
 
-  public static final String CHECK_KEY = "S2755";
-
-  public static final String MESSAGE = "Remove or correct this useless self-assignment.";
+  public static final String MESSAGE = "Disable access to external entities in XML parsing.";
 
   private static final String LXML_XMLPARSER = "lxml.etree.XMLParser";
   private static final String LXML_XSLT = "lxml.etree.XSLT";

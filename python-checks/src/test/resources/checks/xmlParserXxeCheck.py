@@ -1,7 +1,7 @@
 from lxml import etree
 
 def case1():
-    parser = etree.XMLParser() # Noncompliant
+    parser = etree.XMLParser() # Noncompliant {{Disable access to external entities in XML parsing.}}
     #        ^^^^^^^^^^^^^^^^^
     tree1 = etree.parse('ressources/xxe.xml', parser)
     #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
