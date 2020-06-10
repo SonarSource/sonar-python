@@ -20,8 +20,11 @@
 package org.sonar.plugins.python.api;
 
 import java.io.File;
+import java.util.Map;
+import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -41,6 +44,10 @@ public interface SubscriptionContext {
   PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
 
   PythonFile pythonFile();
+
+  Map<String, Set<Symbol>> getTypeShedSymbols();
+
+  Set<Symbol> getBuiltinGlobalSymbols();
 
   /**
    * Returns null in case of Sonarlint context
