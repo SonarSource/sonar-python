@@ -180,7 +180,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
     public void visitSubscriptionExpression(SubscriptionExpression subscriptionExpression) {
       if (subscriptionExpression.object() instanceof HasSymbol) {
         Symbol symbol = ((HasSymbol) subscriptionExpression.object()).symbol();
-        shouldNotReportIssue |= isSymbolWithFQN(symbol, "sys.module");
+        shouldNotReportIssue |= isSymbolWithFQN(symbol, "sys.modules");
       }
       super.visitSubscriptionExpression(subscriptionExpression);
     }
