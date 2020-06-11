@@ -27,12 +27,9 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import com.google.common.annotations.Beta;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -145,16 +142,9 @@ public class SubscriptionVisitor {
       return pythonVisitorContext.pythonFile();
     }
 
-    @Beta
     @Override
-    public Map<String, Set<Symbol>> stubFilesSymbols() {
+    public Collection<Symbol> stubFilesSymbols() {
       return TypeShed.stubFilesSymbols();
-    }
-
-    @Beta
-    @Override
-    public Map<String, Symbol> builtinSymbols() {
-      return TypeShed.builtinSymbols();
     }
 
     @Override

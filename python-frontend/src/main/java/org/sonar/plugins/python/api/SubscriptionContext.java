@@ -19,9 +19,9 @@
  */
 package org.sonar.plugins.python.api;
 
+import com.google.common.annotations.Beta;
 import java.io.File;
-import java.util.Map;
-import java.util.Set;
+import java.util.Collection;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -45,9 +45,11 @@ public interface SubscriptionContext {
 
   PythonFile pythonFile();
 
-  Map<String, Set<Symbol>> stubFilesSymbols();
-
-  Map<String, Symbol> builtinSymbols();
+  /**
+   * Returns externally declared symbols available in this context.
+   */
+  @Beta
+  Collection<Symbol> stubFilesSymbols();
 
   /**
    * Returns null in case of Sonarlint context
