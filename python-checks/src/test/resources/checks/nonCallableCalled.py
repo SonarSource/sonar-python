@@ -27,7 +27,10 @@ def call_noncallable():
     dict_var()  # Noncompliant
 
     set_var = set()
-    set_var()  # FN (set has unresolved type hierarchy)
+    set_var()  # Noncompliant
+
+    frozenset_var = frozenset()
+    frozenset_var() # Noncompliant
 
 def flow_sensitivity():
   my_var = "hello"

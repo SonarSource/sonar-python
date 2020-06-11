@@ -19,26 +19,32 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 
 @Rule(key = "S5756")
 public class NonCallableCalledCheck extends PythonSubscriptionCheck {
+
+  // List of non callable types with unresolved type hierarchies
+  private static final List<String> NON_CALLABLE_TYPES = Arrays.asList("set", "frozenset");
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Expression callee = callExpression.callee();
-      if (!callee.type().canHaveMember("__call__")) {
-        Optional<String> nameOptional = nameFromExpression(callee);
-        if (nameOptional.isPresent()) {
-          ctx.addIssue(callee, String.format("Fix this call; \"%s\" is not callable.", nameOptional.get()));
+      InferredType calleeType = callee.type();
+      if (!calleeType.canHaveMember("__call__") || NON_CALLABLE_TYPES.stream().anyMatch(calleeType::canOnlyBe)) {
+        String name = nameFromExpression(callee);
+        if (name != null) {
+          ctx.addIssue(callee, String.format("Fix this call; \"%s\" is not callable.", name));
         } else {
           ctx.addIssue(callee, "Fix this call; this expression is not callable.");
         }
@@ -46,10 +52,10 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static Optional<String> nameFromExpression(Expression expression) {
+  private static String nameFromExpression(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
-      return Optional.of(((Name) expression).name());
+      return ((Name) expression).name();
     }
-    return Optional.empty();
+    return null;
   }
 }
