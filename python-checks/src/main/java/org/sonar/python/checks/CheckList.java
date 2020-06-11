@@ -151,6 +151,7 @@ public final class CheckList {
       NestedConditionalExpressionCheck.class,
       NestedControlFlowDepthCheck.class,
       NewStyleClassCheck.class,
+      NonCallableCalledCheck.class,
       NonStringInAllPropertyCheck.class,
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
