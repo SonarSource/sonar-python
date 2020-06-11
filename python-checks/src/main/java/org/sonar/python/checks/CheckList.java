@@ -208,7 +208,8 @@ public final class CheckList {
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
       WildcardImportCheck.class,
-      WrongAssignmentOperatorCheck.class
+      WrongAssignmentOperatorCheck.class,
+      XMLParserXXEVulnerableCheck.class
     )));
   }
 

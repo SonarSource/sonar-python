@@ -301,6 +301,25 @@ public class TreeUtilsTest {
   }
 
   @Test
+  public void test_argumentByKeyword() {
+    FileInput fileInput = PythonTestUtils.parse(
+      "def foo(p0, p1, p2): ...",
+      "foo(p1 = 1, p2 = 2)"
+    );
+    CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
+    RegularArgument p1 = TreeUtils.argumentByKeyword("p1", callExpr.arguments());
+    assertThat(p1.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(((NumericLiteral) p1.expression()).valueAsLong()).isEqualTo(1);
+
+    RegularArgument p2 = TreeUtils.argumentByKeyword("p2", callExpr.arguments());
+    assertThat(p2.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
+    assertThat(((NumericLiteral) p2.expression()).valueAsLong()).isEqualTo(2);
+
+    RegularArgument p3 = TreeUtils.argumentByKeyword("p3", callExpr.arguments());
+    assertThat(p3).isNull();
+  }
+
+  @Test
   public void test_isBooleanLiteral() {
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("True"))).isTrue();
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("False"))).isTrue();
