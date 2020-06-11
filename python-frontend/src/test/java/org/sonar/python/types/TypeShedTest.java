@@ -202,7 +202,8 @@ public class TypeShedTest {
     Set<Symbol> djangoHttpSymbols = TypeShed.symbolsForModule("django.http");
 
     Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
-    assertThat(symbols).containsAll(mathSymbols);
-    assertThat(symbols).containsAll(djangoHttpSymbols);
+    assertThat(symbols)
+      .containsAll(mathSymbols)
+      .containsAll(djangoHttpSymbols);
   }
 }
