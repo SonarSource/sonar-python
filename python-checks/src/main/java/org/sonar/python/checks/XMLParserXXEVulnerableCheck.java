@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -146,11 +147,20 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    RegularArgument first = (RegularArgument) arguments.get(0);
-    RegularArgument second = (RegularArgument) arguments.get(1);
-    return first.expression().is(Tree.Kind.NAME) &&
-      "feature_external_ges".equals(((NameImpl) first.expression()).name()) &&
-      !Expressions.isFalsy(second.expression());
+    Expression first = ((RegularArgument) arguments.get(0)).expression();
+    Expression second = ((RegularArgument) arguments.get(1)).expression();
+
+    if (!(first instanceof HasSymbol)) {
+      return false;
+    }
+
+    Symbol symbol = ((HasSymbol) first).symbol();
+    if (symbol == null) {
+      return false;
+    }
+
+    return "xml.sax.handler.feature_external_ges".equals(symbol.fullyQualifiedName())
+      && !Expressions.isFalsy(second);
   }
 
   private static boolean isCallToSetFeature(CallExpression callExpression) {

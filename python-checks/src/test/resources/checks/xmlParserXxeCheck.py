@@ -81,18 +81,28 @@ def parse_unpacking_args():
 
 import xml.sax
 
+from xml.sax.handler import feature_external_ges
+import xml.sax.handler as sax_handler
+
 def set_feature():
     parser = xml.sax.make_parser()
     #       >^^^^^^^^^^^^^^^^^^^^^
+    parser.setFeature(xml.sax.handler.feature_external_ges, True) # Noncompliant
+   #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     parser.setFeature(feature_external_ges, True) # Noncompliant
-   #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    parser.setFeature(sax_handler.feature_external_ges, True) # Noncompliant
+    parser.setFeature(sax_handler.feature_external_ges, False) # Ok
+    parser.setFeature(no_such_module.feature_external_ges, True) # Ok
+
+    foo = ''
+    parser.setFeature(foo, True) # Ok
 
 def set_feature_unknown_parser():
     no_such_parser.setFeature()
-    no_such_parser.setFeature(feature_external_ges)
-    no_such_parser.setFeature(feature_external_ges, True)
-    no_such_parser.setFeature(feature_external_ges, False)
-    no_such_parser.setFeature(feature_external_ges123, False)
+    no_such_parser.setFeature(xml.sax.handler.feature_external_ges)
+    no_such_parser.setFeature(xml.sax.handler.feature_external_ges, True)
+    no_such_parser.setFeature(xml.sax.handler.feature_external_ges, False)
+    no_such_parser.setFeature(xml.sax.handler.feature_external_ges, False)
     no_such_parser.setFeature(foo(), False)
 
 def set_feature_edge_cases():
