@@ -79,6 +79,8 @@ def logger_format():
     logging.error("%d", *t) # FN
     logging.error(msg="%d", kw1='42')
 
+    logging.error("This is valid % % %") # Ok
+
 import logging as renamed_logging
 renamed_logging.error("Foo %s", "Bar", 'Too many')  # Noncompliant
 

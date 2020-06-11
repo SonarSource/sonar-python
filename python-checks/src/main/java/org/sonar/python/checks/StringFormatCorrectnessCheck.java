@@ -128,6 +128,17 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
       return;
     }
 
+    if (arguments.size() == 1) {
+      // If the logger is called without additional arguments, the message will not be parsed as a string format.
+      // However, we still want to report if we see a valid string format without any format arguments.
+      StringFormat.createFromPrintfStyle(IGNORE_SYNTAX_ERRORS, literal.trimmedQuotesValue()).ifPresent(format -> {
+        if (format.numExpectedArguments() != 0) {
+          reportIssue(ctx, firstArgument, literal, "Add argument(s) corresponding to the message's replacement field(s).");
+        }
+      });
+      return;
+    }
+
     Optional<StringFormat> formatOptional = StringFormat.createFromPrintfStyle(
       syntaxIssueReporter(ctx, firstArgument, literal), literal.trimmedQuotesValue());
     if (!formatOptional.isPresent()) {
@@ -135,13 +146,6 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     }
 
     StringFormat format = formatOptional.get();
-    if (arguments.size() == 1) {
-      if (format.numExpectedArguments() != 0) {
-        reportIssue(ctx, firstArgument, literal, "Add argument(s) corresponding to the message's replacement field(s).");
-      }
-      return;
-    }
-
     Token argIssueFrom = arguments.get(1).firstToken();
     Token argIssueTo = arguments.get(arguments.size() - 1).lastToken();
 
