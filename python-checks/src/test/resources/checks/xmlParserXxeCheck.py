@@ -1,104 +1,104 @@
 from lxml import etree
 
-def case1():
+def xml_parser_simple():
     parser = etree.XMLParser() # Noncompliant {{Disable access to external entities in XML parsing.}}
     #        ^^^^^^^^^^^^^^^^^
     tree1 = etree.parse('ressources/xxe.xml', parser)
     #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
 
-def case2():
+def xml_parser_simple_resolve_entities():
     parser = etree.XMLParser(resolve_entities=True) # Noncompliant
     #        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     tree1 = etree.parse('ressources/xxe.xml', parser)
     #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
 
-def case3():
+def xml_parser_simple_resolve_entities_inline():
     tree1 = etree.parse('ressources/xxe.xml', etree.XMLParser(resolve_entities=True)) # Noncompliant
     #      >^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-def case4():
-    parser = etree.XMLParser(resolve_entities=False) # compliant
-    tree1 = etree.parse('ressources/xxe.xml', parser)  # compliant
+def xml_parser_resolve_entities_off():
+    parser = etree.XMLParser(resolve_entities=False) # Compliant (default is no_network=True)
+    tree1 = etree.parse('ressources/xxe.xml', parser)  # Compliant
 
-def case5():
+def xml_parser_no_network():
     parser = etree.XMLParser(no_network=False) # Noncompliant
     #        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     tree1 = etree.parse('ressources/xxe.xml', parser)
     #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
 
-def case6():
-    parser = etree.XMLParser(resolve_entities=False) # Compliant by default no_network=True
-    tree1 = etree.parse('ressources/xxe.xml', parser)  # Compliant
-
-def case7():
+def xml_parser_resolve_entities_off_no_network():
     parser = etree.XMLParser(resolve_entities=False, no_network=True) # compliant
     tree1 = etree.parse('ressources/xxe.xml', parser)  # Compliant
 
-def case8():
+def xslt_ac_write_network_off():
     ac = etree.XSLTAccessControl(read_network=True, write_network=False)  # Noncompliant
     #    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     transform = etree.XSLT(rootxsl, access_control=ac)
     #           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
 
-def case9():
+def xslt_ac_read_write_network_off():
     ac = etree.XSLTAccessControl(read_network=False, write_network=False)  # Compliant
     transform = etree.XSLT(rootxsl, access_control=ac) # Compliant
 
-def case10():
+def xslt_ac_deny_all():
     ac = etree.XSLTAccessControl.DENY_ALL # Compliant
     transform = etree.XSLT(rootxsl, access_control=ac) # Compliant
 
-def case11():
+def xslt_ac_default():
     ac = etree.XSLTAccessControl()  # Noncompliant
     #    ^^^^^^^^^^^^^^^^^^^^^^^^^
     transform = etree.XSLT(rootxsl, access_control=ac)
     #           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
 
-def case12():
+def xslt_no_ac():
     transform = etree.XSLT(rootxsl) # Noncompliant
     #           ^^^^^^^^^^^^^^^^^^^
 
-def case13():
+def xslt_inline_ac():
     transform = etree.XSLT(rootxsl, access_control=etree.XSLTAccessControl()) # Noncompliant
     #           >^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-def case14():
+def xslt_no_such_ac():
+    transform = etree.XSLT(rootxsl, access_control=no_such_ac)
+
+def xslt_ac_unknown_source():
+    ac = no_such_function()
     transform = etree.XSLT(rootxsl, access_control=ac)
 
-def case15():
-    ac = foo()
-    transform = etree.XSLT(rootxsl, access_control=ac)
-
-def case16():
-    tree1 = etree.parse('ressources/xxe.xml', parser)
+def parse_edge_cases():
+    tree1 = etree.parse('ressources/xxe.xml', no_such_parser)
     tree1 = etree.parse('ressources/xxe.xml')
     tree1 = etree.parse('ressources/xxe.xml', a.b.c)
 
-def case17():
-    parser = foo()
+def parse_unknown_parser_source():
+    parser = no_such_function()
     tree1 = etree.parse('ressources/xxe.xml', parser)
+
+def parse_unpacking_args():
+    parser = etree.XMLParser()
+    args = ['ressources/xxe.xml', parser]
+    etree.parse(*args) # FN
 
 import xml.sax
 
-def case18():
+def set_feature():
     parser = xml.sax.make_parser()
     #       >^^^^^^^^^^^^^^^^^^^^^
     parser.setFeature(feature_external_ges, True) # Noncompliant
    #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-def case19():
-    parser.setFeature()
-    parser.setFeature(feature_external_ges)
-    parser.setFeature(feature_external_ges, True)
-    parser.setFeature(feature_external_ges, False)
-    parser.setFeature(feature_external_ges123, False)
-    parser.setFeature(foo(), False)
+def set_feature_unknown_parser():
+    no_such_parser.setFeature()
+    no_such_parser.setFeature(feature_external_ges)
+    no_such_parser.setFeature(feature_external_ges, True)
+    no_such_parser.setFeature(feature_external_ges, False)
+    no_such_parser.setFeature(feature_external_ges123, False)
+    no_such_parser.setFeature(foo(), False)
 
-def case20():
+def set_feature_edge_cases():
+    parser = no_such_function()
     parser.setFeature(feature_external_ges, True)
-
-def case21():
-    parser = foo()
-    parser.setFeature(feature_external_ges, True)
+    args = ['foo', 'bar']
+    parser.setFeature(*args, 'baz')
     prs = 42
     prs.setFeature(feature_external_ges, True)

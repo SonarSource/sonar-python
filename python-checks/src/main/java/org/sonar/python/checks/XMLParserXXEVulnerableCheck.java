@@ -19,10 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -68,7 +70,7 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
         getArgValueAsCallExpression(
           TreeUtils.nthArgumentOrKeyword(1, "parser", callExpression.arguments())));
       if (parserCall != null && isUnsafeParserUsage(parserCall)) {
-        ctx.addIssue(parserCall, MESSAGE).secondary(callExpression, MESSAGE);
+        ctx.addIssue(parserCall, MESSAGE).secondary(callExpression, null);
       }
     }
   }
@@ -115,7 +117,7 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
         if (xsltAclCall != null && checkCallExpressionFqn(xsltAclCall, LXML_ACCESS_CONTROL)) {
           RegularArgument readNetwork = TreeUtils.argumentByKeyword("read_network", xsltAclCall.arguments());
           if (readNetwork == null || !Expressions.isFalsy(readNetwork.expression())) {
-            ctx.addIssue(xsltAclCall, MESSAGE).secondary(callExpression, MESSAGE);
+            ctx.addIssue(xsltAclCall, MESSAGE).secondary(callExpression, null);
           }
         }
       } else {
@@ -139,14 +141,16 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean checkSettingFeatureGesToTrue(CallExpression callExpression) {
-    if (callExpression.arguments().size() == 2) {
-      RegularArgument first = (RegularArgument) callExpression.arguments().get(0);
-      RegularArgument second = (RegularArgument) callExpression.arguments().get(1);
-      return first.expression().is(Tree.Kind.NAME) &&
-        "feature_external_ges".equals(((NameImpl) first.expression()).name()) &&
-        !Expressions.isFalsy(second.expression());
+    List<Argument> arguments = callExpression.arguments();
+    if (arguments.size() != 2 || arguments.stream().anyMatch(argument -> !argument.is(Tree.Kind.REGULAR_ARGUMENT))) {
+      return false;
     }
-    return false;
+
+    RegularArgument first = (RegularArgument) arguments.get(0);
+    RegularArgument second = (RegularArgument) arguments.get(1);
+    return first.expression().is(Tree.Kind.NAME) &&
+      "feature_external_ges".equals(((NameImpl) first.expression()).name()) &&
+      !Expressions.isFalsy(second.expression());
   }
 
   private static boolean isCallToSetFeature(CallExpression callExpression) {
