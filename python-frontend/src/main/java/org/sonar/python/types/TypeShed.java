@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import com.sonar.sslr.api.AstNode;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,6 +31,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -51,9 +54,6 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.PythonTreeMaker;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
@@ -260,6 +260,12 @@ public class TypeShed {
       throw new IllegalArgumentException("TypeShed symbol " + fullyQualifiedName + " is not a class");
     }
     return (ClassSymbol) symbol;
+  }
+
+  public static Collection<Symbol> stubFilesSymbols() {
+    Set<Symbol> symbols = new HashSet<>(TypeShed.builtinSymbols().values());
+    typeShedSymbols.values().forEach(symbols::addAll);
+    return symbols;
   }
 
   static class ReturnTypeVisitor extends BaseTreeVisitor {
