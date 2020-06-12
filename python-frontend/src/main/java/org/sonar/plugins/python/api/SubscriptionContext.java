@@ -46,7 +46,7 @@ public interface SubscriptionContext {
   PythonFile pythonFile();
 
   /**
-   * Returns externally declared symbols available in this context.
+   * Returns symbols declared in stub files (e.g. typeshed) used in the analyzed project.
    */
   @Beta
   Collection<Symbol> stubFilesSymbols();
