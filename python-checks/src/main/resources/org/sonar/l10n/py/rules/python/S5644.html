@@ -1,0 +1,73 @@
+<p>Getting, setting and deleting items using square brackets requires the accessed object to have special methods:</p>
+<ul>
+  <li> Getting items such as <code>my_variable[key]</code> requires <code>my_variable</code> to have the <a
+  href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__"><code>__getitem__</code></a> method, or the <a
+  href="https://docs.python.org/3/reference/datamodel.html#object.__class_getitem__"><code>__class_getitem__</code></a> method if
+  <code>my_variable</code> is a class. </li>
+  <li> Setting items such as <code>my_variable[key] = 42</code> requires <code>my_variable</code> to have the <a
+  href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__"><code>__setitem__</code></a> method. </li>
+  <li> Deleting items such as <code>del my_variable[key]</code> requires <code>my_variable</code> to have the <a
+  href="https://docs.python.org/3/reference/datamodel.html#object.__delitem__"><code>__delitem__</code></a> method. </li>
+</ul>
+<p>This rule raises an issue when an item operation is performed on an object which doesn't have the corresponding method.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+del (1, 2)[0]  # Noncompliant, tuples are immutable
+(1, 2)[0] = 42  # Noncompliant
+(1, 2)[0]
+
+class A:
+    def __init__(self, values):
+        self._values = values
+
+a = A([0,1,2])
+
+a[0]  # Noncompliant
+del a[0]  # Noncompliant
+a[0] = 42  # Noncompliant
+
+class B:
+    pass
+
+B[0]  # Noncompliant
+
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+del [1, 2][0]  # Lists are mutable
+[1, 2][0] = 42
+[1, 2][0]
+
+class A:
+    def __init__(self, values):
+        self._values = values
+
+    def __getitem__(self, key):
+        return self._values[key]
+
+    def __setitem__(self, key, value):
+        self._values[key] = value
+
+    def __delitem__(self, key):
+        del self._values[key]
+
+a = A([0,1,2])
+
+a[0]
+del a[0]
+a[0] = 42
+
+class B:
+    def __class_getitem__(cls, key):
+        return [0, 1, 2, 3][key]
+
+B[0]
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__">Python documentation - __getitem__ method</a> </li>
+  <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__">Python documentation - __setitem__ method</a> </li>
+  <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__delitem__">Python documentation - __delitem__ method</a> </li>
+  <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__class_getitem__">Python documentation - __class_getitem__ method</a> </li>
+</ul>
+
