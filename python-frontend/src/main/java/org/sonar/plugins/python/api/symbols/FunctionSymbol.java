@@ -35,6 +35,8 @@ public interface FunctionSymbol extends Symbol {
    */
   boolean isStub();
 
+  boolean isAsynchronous();
+
   boolean hasVariadicParameter();
 
   boolean isInstanceMethod();
