@@ -37,10 +37,12 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.types.TypeShed;
 
 public class SubscriptionVisitor {
 
@@ -138,6 +140,11 @@ public class SubscriptionVisitor {
     @Override
     public PythonFile pythonFile() {
       return pythonVisitorContext.pythonFile();
+    }
+
+    @Override
+    public Collection<Symbol> stubFilesSymbols() {
+      return TypeShed.stubFilesSymbols();
     }
 
     @Override

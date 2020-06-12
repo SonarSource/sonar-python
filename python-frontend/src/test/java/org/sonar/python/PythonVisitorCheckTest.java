@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
@@ -33,9 +34,11 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.SubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -127,7 +130,26 @@ public class PythonVisitorCheckTest {
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
   }
 
+  @Test
+  public void stubFilesSymbols() {
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(FILE);
+
+    SymbolsRecordingCheck check = new SymbolsRecordingCheck();
+    check.scanFile(context);
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
+
+    assertThat(check.symbols).isEqualTo(TypeShed.stubFilesSymbols());
+  }
+
   private static class TestPythonCheck extends PythonVisitorCheck {
 
+  }
+
+  private static class SymbolsRecordingCheck extends PythonSubscriptionCheck {
+    public Collection<Symbol> symbols;
+    @Override
+    public void initialize(Context context) {
+      context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> symbols = ctx.stubFilesSymbols());
+    }
   }
 }
