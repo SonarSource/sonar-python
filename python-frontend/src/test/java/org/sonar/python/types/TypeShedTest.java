@@ -19,7 +19,9 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
@@ -192,5 +194,16 @@ public class TypeShedTest {
     Symbol responseSymbol = djangoSymbols.get("HttpResponse");
     assertThat(responseSymbol.kind()).isEqualTo(Kind.CLASS);
     assertThat(responseSymbol.fullyQualifiedName()).isEqualTo("django.http.response.HttpResponse");
+  }
+
+  @Test
+  public void stub_files_symbols() {
+    Set<Symbol> mathSymbols = TypeShed.symbolsForModule("math");
+    Set<Symbol> djangoHttpSymbols = TypeShed.symbolsForModule("django.http");
+
+    Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
+    assertThat(symbols)
+      .containsAll(mathSymbols)
+      .containsAll(djangoHttpSymbols);
   }
 }
