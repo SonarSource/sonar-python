@@ -43,12 +43,14 @@ public class FunctionSymbolTest {
   @Test
   public void arity() {
     FunctionSymbol functionSymbol = functionSymbol("def fn(): pass");
+    assertThat(functionSymbol.isAsynchronous()).isFalse();
     assertThat(functionSymbol.parameters()).isEmpty();
 
-    functionSymbol = functionSymbol("def fn(p1, p2, p3): pass");
+    functionSymbol = functionSymbol("async def fn(p1, p2, p3): pass");
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::name).containsExactly("p1", "p2", "p3");
     assertThat(functionSymbol.hasVariadicParameter()).isFalse();
     assertThat(functionSymbol.isInstanceMethod()).isFalse();
+    assertThat(functionSymbol.isAsynchronous()).isTrue();
     assertThat(functionSymbol.hasDecorators()).isFalse();
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::hasDefaultValue).containsExactly(false, false, false);
     assertThat(functionSymbol.parameters()).extracting(FunctionSymbol.Parameter::isKeywordOnly).containsExactly(false, false, false);

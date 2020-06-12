@@ -50,6 +50,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final LocationInFile functionDefinitionLocation;
   private boolean hasVariadicParameter = false;
   private final boolean isInstanceMethod;
+  private final boolean isAsynchronous;
   private final boolean hasDecorators;
   private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
@@ -61,6 +62,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     super(functionDef.name().name(), fullyQualifiedName);
     setKind(Kind.FUNCTION);
     isInstanceMethod = isInstanceMethod(functionDef);
+    isAsynchronous = functionDef.asyncKeyword() != null;
     hasDecorators = !functionDef.decorators().isEmpty();
     decorators = decorators(functionDef);
     String fileId = null;
@@ -80,6 +82,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     super(name, functionSymbol.fullyQualifiedName());
     setKind(Kind.FUNCTION);
     isInstanceMethod = functionSymbol.isInstanceMethod();
+    isAsynchronous = functionSymbol.isAsynchronous();
     hasDecorators = functionSymbol.hasDecorators();
     decorators = functionSymbol.decorators();
     hasVariadicParameter = functionSymbol.hasVariadicParameter();
@@ -90,11 +93,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   }
 
   public FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
-                            boolean isInstanceMethod, boolean hasDecorators, List<Parameter> parameters, List<String> decorators) {
+                            boolean isInstanceMethod, boolean isAsynchronous, boolean hasDecorators, List<Parameter> parameters, List<String> decorators) {
     super(name, fullyQualifiedName);
     setKind(Kind.FUNCTION);
     this.hasVariadicParameter = hasVariadicParameter;
     this.isInstanceMethod = isInstanceMethod;
+    this.isAsynchronous = isAsynchronous;
     this.hasDecorators = hasDecorators;
     this.decorators = decorators;
     this.parameters.addAll(parameters);
@@ -190,6 +194,11 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   @Override
   public boolean isStub() {
     return isStub;
+  }
+
+  @Override
+  public boolean isAsynchronous() {
+    return isAsynchronous;
   }
 
   @Override

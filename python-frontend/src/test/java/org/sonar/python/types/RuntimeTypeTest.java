@@ -201,11 +201,11 @@ public class RuntimeTypeTest {
 
     ClassSymbolImpl duck = new ClassSymbolImpl("duck", "duck");
     ClassSymbolImpl goose = new ClassSymbolImpl("goose", "goose");
-    FunctionSymbolImpl duckSwim = new FunctionSymbolImpl("swim", "duck.swim", false, false, false, Collections.emptyList(),
+    FunctionSymbolImpl duckSwim = new FunctionSymbolImpl("swim", "duck.swim", false, false, false, false, Collections.emptyList(),
       Collections.emptyList());
-    FunctionSymbolImpl duckQuack = new FunctionSymbolImpl("quack", "duck.quack", false, false, false, Collections.emptyList(),
+    FunctionSymbolImpl duckQuack = new FunctionSymbolImpl("quack", "duck.quack", false, false, false, false, Collections.emptyList(),
       Collections.emptyList());
-    FunctionSymbolImpl gooseSwim = new FunctionSymbolImpl("swim", "goose.swim", false, false, false, Collections.emptyList(),
+    FunctionSymbolImpl gooseSwim = new FunctionSymbolImpl("swim", "goose.swim", false, false, false, false, Collections.emptyList(),
       Collections.emptyList());
     duck.addMembers(Arrays.asList(duckSwim, duckQuack));
     goose.addMembers(Collections.singleton(gooseSwim));
