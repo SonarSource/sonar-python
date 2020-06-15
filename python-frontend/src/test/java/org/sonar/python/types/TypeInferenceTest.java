@@ -19,15 +19,21 @@
  */
 package org.sonar.python.types;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
+import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DICT;
@@ -318,5 +324,56 @@ public class TypeInferenceTest {
     assertThat(lastExpressionInFunction(
       "c = 42 if '' else c",
       "c").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void flow_sensitive_type_inference() {
+    assertThat(lastExpressionInFunction(
+      "x = 42",
+      "x = '42'",
+      "x"
+    ).type()).isEqualTo(STR);
+
+
+    FileInput fileInput = parse(
+      "def f(p):",
+      "  if p:",
+      "    x = 42",
+      "    type(x)",
+      "  else:",
+      "    x = 'foo'",
+      "    type(x)",
+      "  type(x)"
+    );
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(firstX.expression().type()).isEqualTo(INT);
+    assertThat(secondX.expression().type()).isEqualTo(STR);
+    assertThat(thirdX.expression().type()).isEqualTo(or(INT, STR));
+  }
+
+  @Test
+  public void flow_insensitive_when_try_except() {
+    FileInput fileInput = parse(
+      "def f(p):",
+      "  try:",
+      "    if p:",
+      "      x = 42",
+      "      type(x)",
+      "    else:",
+      "      x = 'foo'",
+      "      type(x)",
+      "  except:",
+      "    type(x)"
+    );
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(firstX.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(secondX.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(thirdX.expression().type()).isEqualTo(or(INT, STR));
   }
 }

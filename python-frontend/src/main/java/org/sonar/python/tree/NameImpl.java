@@ -22,15 +22,14 @@ package org.sonar.python.tree;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
 public class NameImpl extends PyTree implements Name {
@@ -39,6 +38,9 @@ public class NameImpl extends PyTree implements Name {
   private final boolean isVariable;
   private Symbol symbol;
   private Usage usage;
+  private InferredType inferredType = InferredTypes.anyType();
+  private static final String TRUE = "True";
+  private static final String FALSE = "False";
 
   public NameImpl(Token token, boolean isVariable) {
     this.token = token;
@@ -97,9 +99,18 @@ public class NameImpl extends PyTree implements Name {
 
   @Override
   public InferredType type() {
-    if (symbol == null) {
-      return InferredTypes.anyType();
+    if (symbol != null && isBooleanBuiltinSymbol()) {
+      return InferredTypes.BOOL;
     }
-    return ((SymbolImpl) symbol).inferredType();
+    return inferredType;
+  }
+
+  private boolean isBooleanBuiltinSymbol() {
+    return (TRUE.equals(symbol.name()) && TRUE.equals(symbol.fullyQualifiedName())) ||
+      (FALSE.equals(symbol.name()) && FALSE.equals(symbol.fullyQualifiedName()));
+  }
+
+  public void setInferredType(InferredType inferredType) {
+    this.inferredType = inferredType;
   }
 }
