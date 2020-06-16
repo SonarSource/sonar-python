@@ -1,0 +1,78 @@
+<p>For-in loops, <a href="https://docs.python.org/3/whatsnew/3.3.html#pep-380-syntax-for-delegating-to-a-subgenerator"><code>yield from</code></a> and
+iterable unpacking only work with <a href="https://docs.python.org/3/glossary.html#term-iterable">iterable objects</a>. In order to be iterable, an
+object should have either an <code>__iter__</code> method or a <code>__getitem__</code> method implementing the <a
+href="https://docs.python.org/3/glossary.html#term-sequence">Sequence</a> semantic.</p>
+<p>Note also that iterating over an <a href="https://docs.python.org/3/glossary.html#term-asynchronous-iterable">asynchronous iterable</a>, i.e. an
+object having the <code>__aiter__</code> method, requires the use of <a
+href="https://docs.python.org/3/reference/compound_stmts.html#the-async-for-statement"><code>async for ... in</code></a> instead of <code>for ...
+in</code>.</p>
+<p>This rule raises an issue when a non iterable object is used in a <code>for-in</code> loop, in a <code>yield from</code> or when it is
+unpacked.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Empty:
+    pass
+
+empty = Empty()
+
+for a in empty:  # Noncompliant
+    print(a)
+
+a, b, c = empty  # Noncompliant
+
+print(*empty)  # Noncompliant
+
+[1, 2, 3, *empty]  # Noncompliant
+
+# yield from
+def generator():
+    yield from Empty()  # Noncompliant
+
+# async generators
+async def async_generator():
+    yield 1
+
+a, *rest = async_generator()  # Noncompliant
+for a in async_generator():  # Noncompliant; "async" is missing before "for"
+    print(a)
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyIterable:
+    def __init__(self, values):
+        self._values = values
+
+    def __iter__(self):
+        return iter(self._values)
+
+my_iterable = MyIterable(range(10))
+
+for a in my_iterable:
+    print(a)
+
+a, b, *c = my_iterable
+
+print(*my_iterable)
+
+[1, 2, 3, *my_iterable]
+
+# yield from
+def generator():
+    yield from subgenerator()
+
+def subgenerator():
+    yield 1
+
+# async generators
+async def async_generator():
+    yield 1
+
+async for a in async_generator():
+    print(a)
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.python.org/dev/peps/pep-0234/#python-api-specification">PEP 234 - Iterators</a> </li>
+  <li> <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Python documentation - Iterator Types</a> </li>
+</ul>
+

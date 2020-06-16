@@ -356,7 +356,7 @@ public class ClassSymbolTest {
       "class B(A): ..."
     );
 
-    assertThat(classSymbol.resolveMember("foo").isPresent()).isFalse();
+    assertThat(classSymbol.resolveMember("foo")).isNotPresent();
     assertThat(classSymbol.canHaveMember("foo")).isTrue();
   }
 
@@ -369,7 +369,7 @@ public class ClassSymbolTest {
       "class B(func()): ..."
     );
 
-    assertThat(classSymbol.resolveMember("foo").isPresent()).isFalse();
+    assertThat(classSymbol.resolveMember("foo")).isNotPresent();
     assertThat(classSymbol.canHaveMember("foo")).isTrue();
   }
 
