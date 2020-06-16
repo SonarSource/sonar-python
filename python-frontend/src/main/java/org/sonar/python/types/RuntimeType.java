@@ -51,10 +51,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    if (typeClass.hasUnresolvedTypeHierarchy()) {
-      return true;
-    }
-    return typeClass.resolveMember(memberName).isPresent();
+    return typeClass.canHaveMember(memberName);
   }
 
   @Override

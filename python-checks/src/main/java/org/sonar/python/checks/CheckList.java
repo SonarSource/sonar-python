@@ -135,6 +135,7 @@ public final class CheckList {
       InvalidOpenModeCheck.class,
       InvariantReturnCheck.class,
       ItemOperationsTypeCheck.class,
+      IterationOnNonIterableCheck.class,
       JumpInFinallyCheck.class,
       LdapAuthenticationCheck.class,
       LineLengthCheck.class,

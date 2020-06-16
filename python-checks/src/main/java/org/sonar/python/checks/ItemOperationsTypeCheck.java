@@ -120,9 +120,8 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
       return ((FunctionSymbol) symbol).hasDecorators();
     }
     ClassSymbol classSymbol = (ClassSymbol) symbol;
-    return classSymbol.hasUnresolvedTypeHierarchy()
-      || classSymbol.resolveMember(requiredMethod).isPresent()
-      || (classRequiredMethod != null && classSymbol.resolveMember(classRequiredMethod).isPresent());
+    return classSymbol.canHaveMember(requiredMethod)
+      || (classRequiredMethod != null && classSymbol.canHaveMember(classRequiredMethod));
   }
 
   private static void reportIssue(SubscriptionExpression subscriptionExpression, Expression subscriptionObject, String missingMethod, SubscriptionContext ctx) {
