@@ -66,6 +66,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
+    variableIssuesRaised.clear();
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignment);
     context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, this::checkAnnotatedAssignment);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_EXPRESSION, this::checkAssignmentExpression);
