@@ -32,9 +32,12 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
+import static org.sonar.python.types.TypeShed.typeShedClass;
 
 public class InferredTypesTest {
 
@@ -121,6 +124,17 @@ public class InferredTypesTest {
       "l : Optional[int, string]"
     );
     assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.anyType());
+  }
+
+  @Test
+  public void test_typeSymbol() {
+    assertThat(InferredTypes.typeSymbols(STR)).containsExactly(typeShedClass("str"));
+
+    ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
+    assertThat(InferredTypes.typeSymbols(new RuntimeType(a))).containsExactly(a);
+
+    assertThat(InferredTypes.typeSymbols(or(STR, INT))).containsExactlyInAnyOrder(typeShedClass("str"), typeShedClass("int"));
+    assertThat(InferredTypes.typeSymbols(InferredTypes.anyType())).isEmpty();
   }
 
   private TypeAnnotation typeAnnotation(String... code) {
