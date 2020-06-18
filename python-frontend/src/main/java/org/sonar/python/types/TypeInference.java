@@ -21,7 +21,6 @@ package org.sonar.python.types;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,14 +43,9 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
-import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
-
-import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 
 public class TypeInference extends BaseTreeVisitor {
 
@@ -173,7 +167,8 @@ public class TypeInference extends BaseTreeVisitor {
    *     else:     a = 'abc'
    */
   private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars) {
-    FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(trackedVars);
+    FlowSensitiveTypeInference flowSensitiveTypeInference =
+      new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement);
 
     flowSensitiveTypeInference.compute(cfg);
     flowSensitiveTypeInference.compute(cfg);
@@ -254,10 +249,10 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private class Assignment extends Propagation {
-    private final SymbolImpl lhs;
+  class Assignment extends Propagation {
+    final SymbolImpl lhs;
     private final Name lhsName;
-    private final Expression rhs;
+    final Expression rhs;
 
     private Assignment(SymbolImpl lhs, Name lhsName, Expression rhs) {
       this.lhs = lhs;
@@ -281,7 +276,7 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private class MemberAccess extends Propagation {
+  class MemberAccess extends Propagation {
 
     private final QualifiedExpression qualifiedExpression;
     private final Symbol symbolWithoutTypeInference;
@@ -307,80 +302,6 @@ public class TypeInference extends BaseTreeVisitor {
         }
       }
       return false;
-    }
-  }
-
-  private class FlowSensitiveTypeInference extends ForwardAnalysis {
-    private final Set<Symbol> trackedVars;
-
-    public FlowSensitiveTypeInference(Set<Symbol> trackedVars) {
-      this.trackedVars = trackedVars;
-    }
-
-    @Override
-    public ProgramState initialState() {
-      TypeInferenceProgramState initialState = new TypeInferenceProgramState();
-      for (Symbol variable : trackedVars) {
-        initialState.setType(variable, Collections.emptySet());
-      }
-      return initialState;
-    }
-
-    @Override
-    public void updateProgramState(Tree element, ProgramState programState) {
-      TypeInferenceProgramState state = (TypeInferenceProgramState) programState;
-      if (element.is(ASSIGNMENT_STMT)) {
-        AssignmentStatement assignment = (AssignmentStatement) element;
-        // update rhs
-        updateTree(assignment.assignedValue(), state);
-        handleAssignment(assignment, state);
-        // update lhs
-        assignment.lhsExpressions().forEach(lhs -> updateTree(lhs, state));
-      } else {
-        updateTree(element, state);
-      }
-    }
-
-    private void updateTree(Tree tree, TypeInferenceProgramState state) {
-      tree.accept(new BaseTreeVisitor() {
-        @Override
-        public void visitName(Name name) {
-          Optional.ofNullable(name.symbol()).ifPresent(symbol -> {
-            Set<InferredType> inferredTypes = state.getTypes(symbol);
-            if (!inferredTypes.isEmpty()) {
-              ((NameImpl) name).setInferredType(InferredTypes.union(inferredTypes.stream()));
-            }
-          });
-          super.visitName(name);
-        }
-
-        @Override
-        public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-          // skip inner functions
-        }
-
-        @Override
-        public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
-          super.visitQualifiedExpression(qualifiedExpression);
-          Optional.ofNullable(memberAccessesByQualifiedExpr.get(qualifiedExpression))
-            .ifPresent(memberAccess -> memberAccess.propagate(Collections.emptySet()));
-        }
-      });
-    }
-
-    private void handleAssignment(AssignmentStatement assignmentStatement, TypeInferenceProgramState programState) {
-      Optional.ofNullable(assignmentsByAssignmentStatement.get(assignmentStatement)).ifPresent(assignment -> {
-        if (trackedVars.contains(assignment.lhs)) {
-          Expression rhs = assignment.rhs;
-          // strong update
-          if (rhs.is(NAME) && trackedVars.contains(((Name) rhs).symbol())) {
-            Symbol rhsSymbol = ((Name) rhs).symbol();
-            programState.setType(assignment.lhs, programState.getTypes(rhsSymbol));
-          } else {
-            programState.setType(assignment.lhs, Collections.singleton(rhs.type()));
-          }
-        }
-      });
     }
   }
 }

@@ -53,28 +53,28 @@ public class TypeInferenceProgramStateTest {
       .isNotEqualTo(otherProgramState)
       .isNotEqualTo(null);
 
-    typeInferenceProgramState.setType(a, Collections.singleton(InferredTypes.INT));
-    typeInferenceProgramState.setType(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
+    typeInferenceProgramState.setTypes(a, Collections.singleton(InferredTypes.INT));
+    typeInferenceProgramState.setTypes(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
     TypeInferenceProgramState other = new TypeInferenceProgramState();
-    other.setType(a, Collections.singleton(InferredTypes.INT));
-    other.setType(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
+    other.setTypes(a, Collections.singleton(InferredTypes.INT));
+    other.setTypes(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
     assertThat(typeInferenceProgramState).isEqualTo(other);
 
     other = new TypeInferenceProgramState();
-    other.setType(a, Collections.singleton(InferredTypes.INT));
-    other.setType(b,  new HashSet<>(Arrays.asList(InferredTypes.INT, InferredTypes.STR)));
+    other.setTypes(a, Collections.singleton(InferredTypes.INT));
+    other.setTypes(b,  new HashSet<>(Arrays.asList(InferredTypes.INT, InferredTypes.STR)));
     assertThat(typeInferenceProgramState).isNotEqualTo(other);
   }
 
   @Test
   public void test_hashcode() {
     TypeInferenceProgramState typeInferenceProgramState = new TypeInferenceProgramState();
-    typeInferenceProgramState.setType(a, Collections.singleton(InferredTypes.INT));
-    typeInferenceProgramState.setType(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
+    typeInferenceProgramState.setTypes(a, Collections.singleton(InferredTypes.INT));
+    typeInferenceProgramState.setTypes(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
 
     TypeInferenceProgramState other = new TypeInferenceProgramState();
-    other.setType(a, Collections.singleton(InferredTypes.INT));
-    other.setType(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
+    other.setTypes(a, Collections.singleton(InferredTypes.INT));
+    other.setTypes(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
 
     assertThat(typeInferenceProgramState.hashCode()).isEqualTo(other.hashCode());
     assertThat(typeInferenceProgramState.hashCode()).isNotEqualTo(new TypeInferenceProgramState().hashCode());
@@ -83,10 +83,9 @@ public class TypeInferenceProgramStateTest {
   @Test
   public void test_toString() {
     TypeInferenceProgramState typeInferenceProgramState = new TypeInferenceProgramState();
-    typeInferenceProgramState.setType(a, Collections.singleton(InferredTypes.INT));
-    typeInferenceProgramState.setType(b, new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
-    System.out.println(typeInferenceProgramState.toString());
-    assertThat(typeInferenceProgramState.toString()).contains("b = RuntimeType(bool),RuntimeType(str)");
-    assertThat(typeInferenceProgramState.toString()).contains("a = RuntimeType(int),");
+    typeInferenceProgramState.setTypes(a, Collections.singleton(InferredTypes.INT));
+    typeInferenceProgramState.setTypes(b, new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
+    assertThat(typeInferenceProgramState.toString()).contains("b = RuntimeType(bool), RuntimeType(str)");
+    assertThat(typeInferenceProgramState.toString()).contains("a = RuntimeType(int)");
   }
 }

@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -38,7 +39,7 @@ public class TypeInferenceProgramState implements ProgramState {
     this.inferredTypesBySymbol = new HashMap<>();
   }
 
-  void setType(Symbol symbol, Set<InferredType> types) {
+  void setTypes(Symbol symbol, Set<InferredType> types) {
     inferredTypesBySymbol.put(symbol, types);
   }
 
@@ -69,11 +70,10 @@ public class TypeInferenceProgramState implements ProgramState {
     for (Map.Entry<Symbol, Set<InferredType>> entry : inferredTypesBySymbol.entrySet()) {
       Symbol symbol = entry.getKey();
       Set<InferredType> inferredTypes = entry.getValue();
-      result.append(symbol.name()).append(" = ");
-      for (InferredType inferredType : inferredTypes) {
-        result.append(inferredType.toString()).append(",");
-      }
-      result.append(System.lineSeparator());
+      result
+        .append(symbol.name()).append(" = ")
+        .append(inferredTypes.stream().map(Objects::toString).collect(Collectors.joining(", ")))
+        .append(System.lineSeparator());
     }
     return result.toString();
   }
@@ -84,11 +84,11 @@ public class TypeInferenceProgramState implements ProgramState {
     ((TypeInferenceProgramState) otherState).inferredTypesBySymbol.forEach(((symbol, types) -> {
       HashSet<InferredType> union = new HashSet<>(types);
       union.addAll(inferredTypesBySymbol.getOrDefault(symbol, Collections.emptySet()));
-      result.setType(symbol, union);
+      result.setTypes(symbol, union);
     }));
     inferredTypesBySymbol.forEach(((symbol, types) -> {
       if (!result.inferredTypesBySymbol.containsKey(symbol)) {
-        result.setType(symbol, types);
+        result.setTypes(symbol, types);
       }
     }));
     return result;
