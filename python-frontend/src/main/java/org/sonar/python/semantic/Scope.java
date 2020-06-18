@@ -39,7 +39,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.FunctionDefImpl;
-import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 
 class Scope {
@@ -75,9 +74,6 @@ class Scope {
       symbol = ((SymbolImpl) typeShedSymbol).copyWithoutUsages();
     } else {
       symbol = new SymbolImpl(name, name);
-    }
-    if ("True".equals(name) || "False".equals(name)) {
-      symbol.setInferredType(InferredTypes.BOOL);
     }
     symbols.add(symbol);
     builtinSymbols.add(symbol);

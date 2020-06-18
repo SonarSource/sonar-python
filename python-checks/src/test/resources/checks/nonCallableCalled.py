@@ -40,7 +40,7 @@ def flow_sensitivity():
   my_other_var = func
   my_other_var() # OK
   my_other_var = 42
-  my_other_var() # FN
+  my_other_var() # Noncompliant
 
 def member_access():
   my_callable = MyCallable()

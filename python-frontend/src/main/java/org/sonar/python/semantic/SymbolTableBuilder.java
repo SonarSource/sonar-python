@@ -131,7 +131,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     addSymbolsToTree((FileInputImpl) fileInput);
     fileInput.accept(new ThirdPhaseVisitor());
     if (!isTypeShedFile(pythonFile)) {
-      TypeInference.inferTypes(fileInput);
+      TypeInference.inferTypes(fileInput, pythonFile);
     }
   }
 

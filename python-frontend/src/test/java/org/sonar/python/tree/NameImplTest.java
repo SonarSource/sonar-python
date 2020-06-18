@@ -22,8 +22,8 @@ package org.sonar.python.tree;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,11 +37,25 @@ public class NameImplTest {
     NameImpl name = new NameImpl(token, true);
     assertThat(name.type()).isEqualTo(InferredTypes.anyType());
 
-    SymbolImpl symbol = new SymbolImpl("x", null);
-    name.setSymbol(symbol);
     assertThat(name.type()).isEqualTo(InferredTypes.anyType());
     InferredType str = InferredTypes.runtimeType(new ClassSymbolImpl("str", "str"));
-    symbol.setInferredType(str);
+    name.setInferredType(str);
     assertThat(name.type()).isEqualTo(str);
+  }
+
+  @Test
+  public void type_of_boolean() {
+    assertThat(PythonTestUtils.lastExpressionInFunction("True").type()).isEqualTo(InferredTypes.BOOL);
+    assertThat(PythonTestUtils.lastExpressionInFunction("False").type()).isEqualTo(InferredTypes.BOOL);
+
+    assertThat(PythonTestUtils.lastExpressionInFunction(
+      "False = 42",
+      "False"
+    ).type()).isEqualTo(InferredTypes.INT);
+
+    assertThat(PythonTestUtils.lastExpressionInFunction(
+      "True = '42'",
+      "True"
+    ).type()).isEqualTo(InferredTypes.STR);
   }
 }

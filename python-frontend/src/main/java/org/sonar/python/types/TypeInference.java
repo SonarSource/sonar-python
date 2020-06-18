@@ -30,6 +30,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -37,13 +39,13 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.FunctionLike;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 
 public class TypeInference extends BaseTreeVisitor {
 
@@ -52,16 +54,16 @@ public class TypeInference extends BaseTreeVisitor {
   // https://docs.python.org/3/library/functions.html#super
   private static final InferredType TYPE_OF_SUPER = InferredTypes.runtimeType(TypeShed.typeShedClass("super"));
 
-  private final FunctionLike functionDef;
   private final Map<Symbol, Set<Assignment>> assignmentsByLhs = new HashMap<>();
   private final Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr = new HashMap<>();
+  private final Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement = new HashMap<>();
 
-  public static void inferTypes(FileInput fileInput) {
+  public static void inferTypes(FileInput fileInput, PythonFile pythonFile) {
     fileInput.accept(new BaseTreeVisitor() {
       @Override
       public void visitFunctionDef(FunctionDef funcDef) {
         super.visitFunctionDef(funcDef);
-        inferTypesAndMemberAccessSymbols(funcDef);
+        inferTypesAndMemberAccessSymbols(funcDef, pythonFile);
       }
     });
 
@@ -79,14 +81,41 @@ public class TypeInference extends BaseTreeVisitor {
     });
   }
 
-  private static void inferTypesAndMemberAccessSymbols(FunctionLike functionDef) {
-    TypeInference visitor = new TypeInference(functionDef);
+  private static void inferTypesAndMemberAccessSymbols(FunctionDef functionDef, PythonFile pythonFile) {
+    TypeInference visitor = new TypeInference();
     functionDef.accept(visitor);
-    visitor.processPropagations();
-  }
+    Set<Symbol> trackedVars = new HashSet<>();
+    Set<Name> assignedNames = visitor.assignmentsByLhs.values().stream()
+      .flatMap(Collection::stream)
+      .map(a -> a.lhsName)
+      .collect(Collectors.toSet());
+    for (Symbol variable : functionDef.localVariables()) {
+      boolean hasMissingBindingUsage = variable.usages().stream()
+        .filter(Usage::isBindingUsage)
+        .anyMatch(u -> !assignedNames.contains(u.tree()));
+      if (!hasMissingBindingUsage) {
+        trackedVars.add(variable);
+      }
+    }
 
-  private TypeInference(FunctionLike functionDef) {
-    this.functionDef = functionDef;
+    if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
+      // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
+      visitor.processPropagations(trackedVars);
+      functionDef.accept(new BaseTreeVisitor() {
+        @Override
+        public void visitName(Name name) {
+          Optional.ofNullable(name.symbol()).ifPresent(symbol ->
+            ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
+          super.visitName(name);
+        }
+      });
+    } else {
+      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, pythonFile);
+      if (cfg == null) {
+        return;
+      }
+      visitor.flowSensitiveTypeInference(cfg, trackedVars);
+    }
   }
 
   @Override
@@ -113,6 +142,7 @@ public class TypeInference extends BaseTreeVisitor {
 
     Expression rhs = assignmentStatement.assignedValue();
     Assignment assignment = new Assignment(symbol, lhs, rhs);
+    assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
     assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
   }
 
@@ -122,21 +152,29 @@ public class TypeInference extends BaseTreeVisitor {
     memberAccessesByQualifiedExpr.put(qualifiedExpression, new MemberAccess(qualifiedExpression));
   }
 
-  private void processPropagations() {
-    Set<Symbol> trackedVars = new HashSet<>();
-    Set<Name> assignedNames = assignmentsByLhs.values().stream()
-      .flatMap(Collection::stream)
-      .map(a -> a.lhsName)
-      .collect(Collectors.toSet());
-    for (Symbol variable : functionDef.localVariables()) {
-      boolean hasMissingBindingUsage = variable.usages().stream()
-        .filter(Usage::isBindingUsage)
-        .anyMatch(u -> !assignedNames.contains(u.tree()));
-      if (!hasMissingBindingUsage) {
-        trackedVars.add(variable);
-      }
-    }
+  /**
+   * Type inference is computed twice because:
+   * - at the end of the first execution target object of member accesses have been resolved to the correct class symbol.
+   *
+   *   for i in range(3):
+   *     if i > 0: b = a.capitalize() # at the end of first execution, type of b is inferred to be "ANY or STR" (hence ANY)
+   *     else:     a = 'abc'
+   *
+   * - at the end of second execution types are inferred again keeping into account resolved method symbols.
+   *
+   *   for i in range(3):
+   *     if i > 0: b = a.capitalize() # at the end of second execution, type of b is inferred to be "STR"
+   *     else:     a = 'abc'
+   */
+  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars) {
+    FlowSensitiveTypeInference flowSensitiveTypeInference =
+      new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement);
 
+    flowSensitiveTypeInference.compute(cfg);
+    flowSensitiveTypeInference.compute(cfg);
+  }
+
+  private void processPropagations(Set<Symbol> trackedVars) {
     Set<Propagation> propagations = new HashSet<>();
     Set<Symbol> initializedVars = new HashSet<>();
 
@@ -211,10 +249,10 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private class Assignment extends Propagation {
-    private final SymbolImpl lhs;
+  class Assignment extends Propagation {
+    final SymbolImpl lhs;
     private final Name lhsName;
-    private final Expression rhs;
+    final Expression rhs;
 
     private Assignment(SymbolImpl lhs, Name lhsName, Expression rhs) {
       this.lhs = lhs;
@@ -238,7 +276,7 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private class MemberAccess extends Propagation {
+  class MemberAccess extends Propagation {
 
     private final QualifiedExpression qualifiedExpression;
     private final Symbol symbolWithoutTypeInference;

@@ -133,6 +133,11 @@ def raise_with_type_inference_fn():
   raise a # FN
   e = "hello "
   raise e # Noncompliant
+
+def raise_with_str_concat():
+  a = AnotherClass
+  raise a # FN
+  e = "hello "
   raise e + "world" # Noncompliant
 
 def raise_builtin_exception_with_fqn_null():

@@ -46,7 +46,7 @@ def converters():
 
     x = 'c'
     x = 2.5
-    '%c' % (x, ) # Ok - we do not know the type of 'x'
+    '%c' % (x, ) # Noncompliant
     a_string = 'a string'
     '%d' % a_string  # Noncompliant
 

@@ -104,7 +104,7 @@ def builtin_functions():
 
   x = {}
   x = []
-  x.pop(())
+  x.pop(()) # Noncompliant
 
 def third_party_functions():
   emojize("Python is :thumbs_up:") # OK
