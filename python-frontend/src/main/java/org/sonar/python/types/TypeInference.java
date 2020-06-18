@@ -330,10 +330,19 @@ public class TypeInference extends BaseTreeVisitor {
     public void updateProgramState(Tree element, ProgramState programState) {
       TypeInferenceProgramState state = (TypeInferenceProgramState) programState;
       if (element.is(ASSIGNMENT_STMT)) {
-        handleAssignment((AssignmentStatement) element, state);
+        AssignmentStatement assignment = (AssignmentStatement) element;
+        // update rhs
+        updateTree(assignment.assignedValue(), state);
+        handleAssignment(assignment, state);
+        // update lhs
+        assignment.lhsExpressions().forEach(lhs -> updateTree(lhs, state));
+      } else {
+        updateTree(element, state);
       }
+    }
 
-      element.accept(new BaseTreeVisitor() {
+    private void updateTree(Tree tree, TypeInferenceProgramState state) {
+      tree.accept(new BaseTreeVisitor() {
         @Override
         public void visitName(Name name) {
           Optional.ofNullable(name.symbol()).ifPresent(symbol -> {

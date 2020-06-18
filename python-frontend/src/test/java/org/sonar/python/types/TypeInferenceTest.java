@@ -24,13 +24,16 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -375,5 +378,21 @@ public class TypeInferenceTest {
     assertThat(firstX.expression().type()).isEqualTo(or(INT, STR));
     assertThat(secondX.expression().type()).isEqualTo(or(INT, STR));
     assertThat(thirdX.expression().type()).isEqualTo(or(INT, STR));
+  }
+
+  @Test
+  public void execution_order_assignment_statement() {
+    FileInput fileInput = parse(
+      "def foo():",
+      "  x = 42",
+      "  x = str(x)"
+    );
+    AssignmentStatement assignment = getLastDescendant(fileInput, tree -> tree.is(Tree.Kind.ASSIGNMENT_STMT));
+    CallExpression call = (CallExpression) assignment.assignedValue();
+    RegularArgument xRhs = (RegularArgument) call.arguments().get(0);
+    assertThat(xRhs.expression().type()).isEqualTo(INT);
+
+    Expression xLhs = assignment.lhsExpressions().get(0).expressions().get(0);
+    assertThat(xLhs.type()).isEqualTo(STR);
   }
 }
