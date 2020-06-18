@@ -143,6 +143,10 @@ public class RuntimeTypeTest {
     RuntimeType aTypeWithMember2 = new RuntimeType(aWithMember2);
     assertThat(aTypeWithMember).isNotEqualTo(aType);
     assertThat(aTypeWithMember).isEqualTo(aTypeWithMember2);
+
+    RuntimeType x = new RuntimeType(new ClassSymbolImpl("X", null));
+    RuntimeType y = new RuntimeType(new ClassSymbolImpl("Y", null));
+    assertThat(x).isNotEqualTo(y);
   }
 
   @Test
@@ -150,6 +154,10 @@ public class RuntimeTypeTest {
     RuntimeType aType = new RuntimeType(a);
     assertThat(aType.hashCode()).isEqualTo(new RuntimeType(a).hashCode());
     assertThat(aType.hashCode()).isNotEqualTo(new RuntimeType(b).hashCode());
+
+    RuntimeType x = new RuntimeType(new ClassSymbolImpl("X", null));
+    RuntimeType y = new RuntimeType(new ClassSymbolImpl("Y", null));
+    assertThat(x.hashCode()).isNotEqualTo(y.hashCode());
   }
 
   @Test
