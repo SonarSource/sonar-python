@@ -131,4 +131,8 @@ class RuntimeType implements InferredType {
   public String toString() {
     return "RuntimeType(" + typeClass.fullyQualifiedName() + ')';
   }
+
+  public ClassSymbol getTypeClass() {
+    return typeClass;
+  }
 }

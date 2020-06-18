@@ -19,10 +19,13 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -148,5 +151,17 @@ public class InferredTypes {
   private static InferredType optionalDeclaredType(List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
     InferredType noneType = InferredTypes.runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
     return InferredTypes.or(declaredType(subscripts.get(0), builtinSymbols), noneType);
+  }
+
+  public static Collection<ClassSymbol> typeSymbols(InferredType inferredType) {
+    if (inferredType instanceof RuntimeType) {
+      return Collections.singleton(((RuntimeType) inferredType).getTypeClass());
+    }
+    if (inferredType instanceof UnionType) {
+      Set<ClassSymbol> typeClasses = new HashSet<>();
+      ((UnionType) inferredType).types().forEach(type -> typeClasses.addAll(typeSymbols(type)));
+      return typeClasses;
+    }
+    return Collections.emptySet();
   }
 }
