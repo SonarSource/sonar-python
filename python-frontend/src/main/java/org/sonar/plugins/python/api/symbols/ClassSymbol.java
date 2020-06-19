@@ -40,6 +40,9 @@ public interface ClassSymbol extends Symbol {
   Optional<Symbol> resolveMember(String memberName);
 
   @Beta
+  boolean canHaveMember(String memberName);
+
+  @Beta
   boolean isOrExtends(String fullyQualifiedClassName);
 
   @Beta

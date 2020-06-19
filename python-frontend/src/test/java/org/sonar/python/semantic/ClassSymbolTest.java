@@ -340,8 +340,37 @@ public class ClassSymbolTest {
             "B.foo"
     );
 
+    assertThat(classSymbol.canHaveMember("foo")).isTrue();
     Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+  }
+
+  @Test
+  public void inherits_from_ambiguous_symbol() {
+    ClassSymbol classSymbol = lastClassSymbol(
+      "if x:",
+      "  class A: ...",
+      "else:",
+      "  class A:",
+      "    def foo(): ...",
+      "class B(A): ..."
+    );
+
+    assertThat(classSymbol.resolveMember("foo").isPresent()).isFalse();
+    assertThat(classSymbol.canHaveMember("foo")).isTrue();
+  }
+
+  @Test
+  public void inherits_from_function_call() {
+    ClassSymbol classSymbol = lastClassSymbol(
+      "class A:",
+      "  def foo(): ...",
+      "def func(): return A",
+      "class B(func()): ..."
+    );
+
+    assertThat(classSymbol.resolveMember("foo").isPresent()).isFalse();
+    assertThat(classSymbol.canHaveMember("foo")).isTrue();
   }
 
   private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {
