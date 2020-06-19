@@ -148,6 +148,23 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   @Override
+  public boolean canHaveMember(String memberName) {
+    if (hasUnresolvedTypeHierarchy()) {
+      return true;
+    }
+    for (Symbol symbol : allSuperClasses(true)) {
+      if (symbol.kind() == Kind.CLASS) {
+        ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+        Symbol matchingMember = classSymbol.membersByName().get(memberName);
+        if (matchingMember != null) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  @Override
   public LocationInFile definitionLocation() {
     return classDefinitionLocation;
   }
