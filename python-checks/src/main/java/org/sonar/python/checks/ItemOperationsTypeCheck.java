@@ -53,6 +53,9 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
 
   private static void checkSubscription(SubscriptionContext ctx) {
     SubscriptionExpression subscriptionExpression = (SubscriptionExpression) ctx.syntaxNode();
+    if (isWithinTypeAnnotation(subscriptionExpression)) {
+      return;
+    }
     Expression subscriptionObject = subscriptionExpression.object();
     if (isWithinDelStatement(subscriptionExpression)) {
       if (!isValidSubscription(subscriptionObject, "__delitem__", null, NON_DELITEM_TYPES)) {
@@ -69,6 +72,11 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
     if (!isValidSubscription(subscriptionObject, "__getitem__", "__class_getitem__", NON_GET_SET_ITEM_TYPES)) {
       reportIssue(subscriptionExpression, subscriptionObject, "__getitem__", ctx);
     }
+  }
+
+  private static boolean isWithinTypeAnnotation(SubscriptionExpression subscriptionExpression) {
+    return TreeUtils.firstAncestor(subscriptionExpression,
+      t -> t.is(Tree.Kind.PARAMETER_TYPE_ANNOTATION, Tree.Kind.RETURN_TYPE_ANNOTATION, Tree.Kind.VARIABLE_TYPE_ANNOTATION)) != null;
   }
 
   private static boolean isWithinDelStatement(SubscriptionExpression subscriptionExpression) {

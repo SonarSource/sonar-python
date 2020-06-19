@@ -153,3 +153,10 @@ def meta_classes():
 
   MetaclassedWithoutGet[0]  # Noncompliant
   MetaclassedWithoutGet()[0]  # Noncompliant
+
+def type_annotations():
+  """No issue as type annotations do no call item methods"""
+  from typing import Awaitable
+  def my_func() -> Awaitable[bool]: ... # OK
+  def my_other_func(arg: Awaitable[bool]): ... # OK
+  x: Awaitable[bool] # OK
