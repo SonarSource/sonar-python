@@ -119,7 +119,11 @@ public class InferredTypes {
   private static InferredType declaredType(Expression expression, Map<String, Symbol> builtinSymbols) {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       // TODO change it to DeclaredType instance
-      return InferredTypes.runtimeType(((Name) expression).symbol());
+      Symbol symbol = ((Name) expression).symbol();
+      if (symbol != null && "typing.Text".equals(symbol.fullyQualifiedName())) {
+        return InferredTypes.runtimeType(builtinSymbols.get("str"));
+      }
+      return InferredTypes.runtimeType(symbol);
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
