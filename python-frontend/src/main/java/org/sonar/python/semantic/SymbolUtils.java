@@ -81,7 +81,7 @@ public class SymbolUtils {
   }
 
   static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
-    if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
+    if (symbol == null || !CLASS.equals(symbol.kind())) {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
@@ -95,14 +95,31 @@ public class SymbolUtils {
       return;
     }
     for (Argument argument : argList.arguments()) {
-      Symbol argumentSymbol = getSymbolFromArgument(argument);
-      if (argumentSymbol == null) {
+      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
         classSymbol.setHasSuperClassWithoutSymbol();
+        continue;
+      }
+      addParentClass(pythonFile, symbolsByName, classSymbol, (RegularArgument) argument);
+    }
+  }
+
+  private static void addParentClass(PythonFile pythonFile, Map<String, Symbol> symbolsByName, ClassSymbolImpl classSymbol, RegularArgument regularArgument) {
+    Name keyword = regularArgument.keywordArgument();
+    if (keyword != null) {
+      if (keyword.name().equals("metaclass")) {
+        classSymbol.setHasMetaClass();
       } else {
-        Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
-        if (normalizedArgumentSymbol != null) {
-          classSymbol.addSuperClass(normalizedArgumentSymbol);
-        }
+        classSymbol.setHasSuperClassWithoutSymbol();
+      }
+      return;
+    }
+    Symbol argumentSymbol = getSymbolFromArgument(regularArgument);
+    if (argumentSymbol == null) {
+      classSymbol.setHasSuperClassWithoutSymbol();
+    } else {
+      Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
+      if (normalizedArgumentSymbol != null) {
+        classSymbol.addSuperClass(normalizedArgumentSymbol);
       }
     }
   }
@@ -131,16 +148,14 @@ public class SymbolUtils {
   }
 
   @CheckForNull
-  private static Symbol getSymbolFromArgument(Argument argument) {
-    if (argument.is(Kind.REGULAR_ARGUMENT)) {
-      Expression expression = ((RegularArgument) argument).expression();
-      while (expression.is(Kind.SUBSCRIPTION)) {
-        // to support using 'typing' symbols like 'List[str]'
-        expression = ((SubscriptionExpression) expression).object();
-      }
-      if (expression instanceof HasSymbol) {
-        return ((HasSymbol) expression).symbol();
-      }
+  private static Symbol getSymbolFromArgument(RegularArgument regularArgument) {
+    Expression expression = regularArgument.expression();
+    while (expression.is(Kind.SUBSCRIPTION)) {
+      // to support using 'typing' symbols like 'List[str]'
+      expression = ((SubscriptionExpression) expression).object();
+    }
+    if (expression instanceof HasSymbol) {
+      return ((HasSymbol) expression).symbol();
     }
     return null;
   }
@@ -204,9 +219,9 @@ public class SymbolUtils {
 
   /**
    * @return the offset between parameter position and argument position:
-   *   0 if there is no implicit first parameter (self, cls, etc...)
-   *   1 if there is an implicit first parameter
-   *  -1 if unknown (intent is not clear from context)
+   * 0 if there is no implicit first parameter (self, cls, etc...)
+   * 1 if there is an implicit first parameter
+   * -1 if unknown (intent is not clear from context)
    */
   public static int firstParameterOffset(FunctionSymbol functionSymbol, boolean isStaticCall) {
     List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();

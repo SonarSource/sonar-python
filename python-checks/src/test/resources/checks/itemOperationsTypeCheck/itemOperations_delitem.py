@@ -146,8 +146,8 @@ def meta_classes():
   class MetaclassedWithDelete(metaclass=MyMetaClassWithDelete):
       pass
 
-  del MetaclassedWithDelete[0]  # Ok
-  del MetaclassedWithDelete()[0]  # Ok. Pylint False Positive
+  del MetaclassedWithDelete[0]  # OK
+  del MetaclassedWithDelete()[0]  # OK
 
 
   class MyMetaClassWithoutDelete(type):
@@ -156,5 +156,5 @@ def meta_classes():
   class MetaclassedWithoutDelete(metaclass=MyMetaClassWithoutDelete):
       pass
 
-  del MetaclassedWithoutDelete[0]  # Noncompliant
-  del MetaclassedWithoutDelete()[0]  # Noncompliant
+  del MetaclassedWithoutDelete[0]  # FN
+  del MetaclassedWithoutDelete()[0]  # FN

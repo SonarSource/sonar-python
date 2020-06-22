@@ -148,15 +148,15 @@ def meta_classes():
 
   class MetaclassedWithGet(metaclass=MyMetaClassWithGet): ...
 
-  MetaclassedWithGet[0]  # Ok
-  MetaclassedWithGet()[0]  # Ok. Pylint False Positive
+  MetaclassedWithGet[0]  # OK
+  MetaclassedWithGet()[0]  # OK
 
 
   class MyMetaClassWithoutGet(type): ...
   class MetaclassedWithoutGet(metaclass=MyMetaClassWithoutGet): ...
 
-  MetaclassedWithoutGet[0]  # Noncompliant
-  MetaclassedWithoutGet()[0]  # Noncompliant
+  MetaclassedWithoutGet[0]  # FN
+  MetaclassedWithoutGet()[0]  # FN
 
 def type_annotations():
   """No issue as type annotations do no call item methods"""
