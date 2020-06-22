@@ -50,4 +50,7 @@ public interface ClassSymbol extends Symbol {
 
   @Beta
   boolean canBeOrExtend(String fullyQualifiedClassName);
+
+  @Beta
+  boolean hasDecorators();
 }
