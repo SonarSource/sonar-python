@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import org.junit.Test;
 import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.SymbolImpl;
@@ -84,7 +85,7 @@ public class TypeInferenceProgramStateTest {
   public void test_toString() {
     TypeInferenceProgramState typeInferenceProgramState = new TypeInferenceProgramState();
     typeInferenceProgramState.setTypes(a, Collections.singleton(InferredTypes.INT));
-    typeInferenceProgramState.setTypes(b, new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
+    typeInferenceProgramState.setTypes(b, new LinkedHashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
     assertThat(typeInferenceProgramState.toString()).contains("b = RuntimeType(bool), RuntimeType(str)");
     assertThat(typeInferenceProgramState.toString()).contains("a = RuntimeType(int)");
   }
