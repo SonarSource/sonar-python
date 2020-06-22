@@ -128,7 +128,8 @@ class Scope {
     } else if (symbol.is(Symbol.Kind.CLASS)) {
       ClassSymbolImpl originalClassSymbol = (ClassSymbolImpl) symbol;
       // Must use symbolName to preserve import aliases
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation());
+      ClassSymbolImpl classSymbol =
+        new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation(), originalClassSymbol.hasDecorators());
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {

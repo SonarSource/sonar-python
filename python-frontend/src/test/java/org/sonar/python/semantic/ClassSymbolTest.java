@@ -373,6 +373,20 @@ public class ClassSymbolTest {
     assertThat(classSymbol.canHaveMember("foo")).isTrue();
   }
 
+  @Test
+  public void has_decorators() {
+    ClassSymbol classSymbol = firstClassSymbol(
+      "@foo",
+      "class A: ..."
+    );
+    assertThat(classSymbol.hasDecorators()).isTrue();
+
+    classSymbol = firstClassSymbol(
+      "class A: ..."
+    );
+    assertThat(classSymbol.hasDecorators()).isFalse();
+  }
+
   private static void assertEqualsWithoutUsages(ClassSymbolImpl classSymbol) {
     ClassSymbolImpl copied = classSymbol.copyWithoutUsages();
     assertThat(copied.hasUnresolvedTypeHierarchy()).isEqualTo(classSymbol.hasUnresolvedTypeHierarchy());

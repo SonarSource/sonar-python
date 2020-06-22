@@ -53,6 +53,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private Map<String, Symbol> membersByName = null;
   private boolean hasAlreadyReadSuperClasses = false;
   private boolean hasAlreadyReadMembers = false;
+  private boolean hasDecorators = false;
   private final LocationInFile classDefinitionLocation;
 
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
@@ -63,22 +64,24 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       Path path = pathOf(pythonFile);
       fileId = path != null ? path.toString() : pythonFile.toString();
     }
+    hasDecorators = !classDef.decorators().isEmpty();
     classDefinitionLocation = locationInFile(classDef.name(), fileId);
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
-    this(name, fullyQualifiedName, null);
+    this(name, fullyQualifiedName, null, false);
   }
 
-  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation) {
+  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation, boolean hasDecorators) {
     super(name, fullyQualifiedName);
     classDefinitionLocation = definitionLocation;
+    this.hasDecorators = hasDecorators;
     setKind(Kind.CLASS);
   }
 
   @Override
   ClassSymbolImpl copyWithoutUsages() {
-    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation());
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators);
     for (Symbol superClass : superClasses()) {
       if (superClass == this) {
         copiedClassSymbol.superClasses.add(copiedClassSymbol);
@@ -184,6 +187,11 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   public boolean canBeOrExtend(String fullyQualifiedClassName) {
     return allSuperClasses(true).stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()))
       || hasUnresolvedTypeHierarchy();
+  }
+
+  @Override
+  public boolean hasDecorators() {
+    return hasDecorators;
   }
 
   private Map<String, Symbol> membersByName() {
