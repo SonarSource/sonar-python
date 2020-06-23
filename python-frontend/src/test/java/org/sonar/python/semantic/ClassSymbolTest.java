@@ -231,6 +231,61 @@ public class ClassSymbolTest {
   }
 
   @Test
+  public void defines_metaclass() {
+    FileInput fileInput = parse(
+      "class A: ",
+      "  pass",
+      "class B(metaclass=A): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
+    assertThat(classSymbol.superClasses()).isEmpty();
+    assertThat(classSymbol.hasMetaClass()).isTrue();
+    assertThat(classSymbol.canHaveMember("foo")).isTrue();
+  }
+
+  @Test
+  public void defines_metaclass_python_2() {
+    FileInput fileInput = parse(
+      "class A: ",
+      "  pass",
+      "class B(): ",
+      "  __metaclass__ = A");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
+    assertThat(classSymbol.superClasses()).isEmpty();
+    assertThat(classSymbol.hasMetaClass()).isTrue();
+    assertThat(classSymbol.canHaveMember("foo")).isTrue();
+  }
+
+  @Test
+  public void defines_attrs() {
+    FileInput fileInput = parse(
+      "class A: ",
+      "  pass",
+      "class B(A, attrs=...): ",
+      "  pass");
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
+    Symbol symbol = classDef.name().symbol();
+    assertThat(symbol).isInstanceOf(ClassSymbol.class);
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
+    assertThat(classSymbol.superClasses()).hasSize(1);
+    assertThat(classSymbol.superClasses()).extracting(Symbol::name).containsExactly("A");
+    assertThat(classSymbol.hasMetaClass()).isFalse();
+    assertThat(classSymbol.canHaveMember("foo")).isFalse();
+  }
+
+  @Test
   public void class_with_global_statement() {
     FileInput fileInput = parse(
       "global B",

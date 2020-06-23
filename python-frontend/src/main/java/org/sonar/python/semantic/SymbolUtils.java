@@ -81,7 +81,7 @@ public class SymbolUtils {
   }
 
   static void resolveTypeHierarchy(ClassDef classDef, @Nullable Symbol symbol, PythonFile pythonFile, Map<String, Symbol> symbolsByName) {
-    if (symbol == null || !Symbol.Kind.CLASS.equals(symbol.kind())) {
+    if (symbol == null || !CLASS.equals(symbol.kind())) {
       return;
     }
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
@@ -95,14 +95,29 @@ public class SymbolUtils {
       return;
     }
     for (Argument argument : argList.arguments()) {
-      Symbol argumentSymbol = getSymbolFromArgument(argument);
-      if (argumentSymbol == null) {
+      if (!argument.is(Kind.REGULAR_ARGUMENT)) {
         classSymbol.setHasSuperClassWithoutSymbol();
       } else {
-        Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
-        if (normalizedArgumentSymbol != null) {
-          classSymbol.addSuperClass(normalizedArgumentSymbol);
-        }
+        addParentClass(pythonFile, symbolsByName, classSymbol, (RegularArgument) argument);
+      }
+    }
+  }
+
+  private static void addParentClass(PythonFile pythonFile, Map<String, Symbol> symbolsByName, ClassSymbolImpl classSymbol, RegularArgument regularArgument) {
+    Name keyword = regularArgument.keywordArgument();
+    if (keyword != null) {
+      if (keyword.name().equals("metaclass")) {
+        classSymbol.setHasMetaClass();
+      }
+      return;
+    }
+    Symbol argumentSymbol = getSymbolFromArgument(regularArgument);
+    if (argumentSymbol == null) {
+      classSymbol.setHasSuperClassWithoutSymbol();
+    } else {
+      Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
+      if (normalizedArgumentSymbol != null) {
+        classSymbol.addSuperClass(normalizedArgumentSymbol);
       }
     }
   }
@@ -131,16 +146,14 @@ public class SymbolUtils {
   }
 
   @CheckForNull
-  private static Symbol getSymbolFromArgument(Argument argument) {
-    if (argument.is(Kind.REGULAR_ARGUMENT)) {
-      Expression expression = ((RegularArgument) argument).expression();
-      while (expression.is(Kind.SUBSCRIPTION)) {
-        // to support using 'typing' symbols like 'List[str]'
-        expression = ((SubscriptionExpression) expression).object();
-      }
-      if (expression instanceof HasSymbol) {
-        return ((HasSymbol) expression).symbol();
-      }
+  private static Symbol getSymbolFromArgument(RegularArgument regularArgument) {
+    Expression expression = regularArgument.expression();
+    while (expression.is(Kind.SUBSCRIPTION)) {
+      // to support using 'typing' symbols like 'List[str]'
+      expression = ((SubscriptionExpression) expression).object();
+    }
+    if (expression instanceof HasSymbol) {
+      return ((HasSymbol) expression).symbol();
     }
     return null;
   }

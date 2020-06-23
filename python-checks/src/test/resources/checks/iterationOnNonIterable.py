@@ -177,8 +177,8 @@ def metaclasses():
   class MetaclassedNonIterable(metaclass=MyMetaClassWithoutIter): ...
 
   # Accepted FNs
-  a, *rest = MetaclassedNonIterable  # Noncompliant
-  a, *rest = MetaclassedNonIterable() # Noncompliant
+  a, *rest = MetaclassedNonIterable  # FN
+  a, *rest = MetaclassedNonIterable() # FN
 
   def myiter(self):
     return iter(range(10))
@@ -191,8 +191,7 @@ def metaclasses():
 
   class MetaclassedIterable(metaclass=MyMetaClassWithIter): ...
 
-  # FP (SONARPY-733)
-  a, *rest = MetaclassedIterable() # Noncompliant
+  a, *rest = MetaclassedIterable() # OK
 
 def attributes_and_properties():
   """Out of scope: Detecting when a non-iterable class and instance attribute is iterated over."""

@@ -147,13 +147,13 @@ def meta_classes():
   class MetaclassedWithSet(metaclass=MyMetaClassWithSet):
       pass
 
-  MetaclassedWithSet[0] = 42  # Ok
-  MetaclassedWithSet()[0] = 42  # Ok. Pylint False Positive
+  MetaclassedWithSet[0] = 42  # OK
+  MetaclassedWithSet()[0] = 42  # OK
 
 
   class MyMetaClassWithoutSet(type): ...
 
   class MetaclassedWithoutSet(metaclass=MyMetaClassWithoutSet): ...
 
-  MetaclassedWithoutSet[0] = 42  # Noncompliant
-  MetaclassedWithoutSet()[0] = 42  # Noncompliant
+  MetaclassedWithoutSet[0] = 42  # FN
+  MetaclassedWithoutSet()[0] = 42  # FN

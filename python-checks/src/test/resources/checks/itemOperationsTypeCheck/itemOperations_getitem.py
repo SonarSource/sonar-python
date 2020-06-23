@@ -148,15 +148,15 @@ def meta_classes():
 
   class MetaclassedWithGet(metaclass=MyMetaClassWithGet): ...
 
-  MetaclassedWithGet[0]  # Ok
-  MetaclassedWithGet()[0]  # Ok. Pylint False Positive
+  MetaclassedWithGet[0]  # OK
+  MetaclassedWithGet()[0]  # OK
 
 
   class MyMetaClassWithoutGet(type): ...
   class MetaclassedWithoutGet(metaclass=MyMetaClassWithoutGet): ...
 
-  MetaclassedWithoutGet[0]  # Noncompliant
-  MetaclassedWithoutGet()[0]  # Noncompliant
+  MetaclassedWithoutGet[0]  # FN
+  MetaclassedWithoutGet()[0]  # FN
 
 def type_annotations():
   """No issue as type annotations do no call item methods"""
@@ -164,3 +164,13 @@ def type_annotations():
   def my_func() -> Awaitable[bool]: ... # OK
   def my_other_func(arg: Awaitable[bool]): ... # OK
   x: Awaitable[bool] # OK
+
+
+def decorated_classes():
+  import enum
+  @enum.unique
+  class MyEnum(enum.Enum):
+      first = 0
+      second = 1
+
+  print(MyEnum["first"]) # OK

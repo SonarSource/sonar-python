@@ -54,6 +54,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private boolean hasAlreadyReadSuperClasses = false;
   private boolean hasAlreadyReadMembers = false;
   private boolean hasDecorators = false;
+  private boolean hasMetaClass = false;
   private final LocationInFile classDefinitionLocation;
 
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
@@ -151,8 +152,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   @Override
+  public boolean hasMetaClass() {
+    return hasMetaClass || membersByName().get("__metaclass__") != null;
+  }
+
+  @Override
   public boolean canHaveMember(String memberName) {
-    if (hasUnresolvedTypeHierarchy()) {
+    if (hasUnresolvedTypeHierarchy() || hasMetaClass()) {
       return true;
     }
     for (Symbol symbol : allSuperClasses(true)) {
@@ -213,6 +219,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   public void setHasSuperClassWithoutSymbol() {
     this.hasSuperClassWithoutSymbol = true;
+  }
+
+  public void setHasMetaClass() {
+    this.hasMetaClass = true;
   }
 
   private Set<Symbol> allSuperClasses(boolean includeAmbiguousSymbols) {
