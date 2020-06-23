@@ -19,10 +19,14 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -36,7 +40,9 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S3862")
 public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
@@ -55,8 +61,9 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
   private static void checkAssignment(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatement = (AssignmentStatement) ctx.syntaxNode();
     ExpressionList expressionList = assignmentStatement.lhsExpressions().get(0);
-    if (isLhsIterable(expressionList) && !isValidIterable(assignmentStatement.assignedValue())) {
-      ctx.addIssue(assignmentStatement.assignedValue(), MESSAGE);
+    List<LocationInFile> secondaries = new ArrayList<>();
+    if (isLhsIterable(expressionList) && !isValidIterable(assignmentStatement.assignedValue(), secondaries)) {
+      reportIssue(ctx, assignmentStatement.assignedValue(), secondaries, MESSAGE);
     }
   }
 
@@ -71,9 +78,15 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
   private static void checkForComprehension(SubscriptionContext ctx) {
     ComprehensionFor comprehensionFor = (ComprehensionFor) ctx.syntaxNode();
     Expression expression = comprehensionFor.iterable();
-    if (!isValidIterable(expression)) {
-      ctx.addIssue(expression, MESSAGE);
+    List<LocationInFile> secondaries = new ArrayList<>();
+    if (!isValidIterable(expression, secondaries)) {
+      reportIssue(ctx, expression, secondaries, MESSAGE);
     }
+  }
+
+  private static void reportIssue(SubscriptionContext ctx, Expression expression, List<LocationInFile> secondaries, String message) {
+    PreciseIssue preciseIssue = ctx.addIssue(expression, message);
+    secondaries.stream().filter(Objects::nonNull).forEach(location -> preciseIssue.secondary(location, null));
   }
 
   private static void checkYieldStatement(SubscriptionContext ctx) {
@@ -83,8 +96,9 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = yieldExpression.expressions().get(0);
-    if (!isValidIterable(expression)) {
-      ctx.addIssue(expression, MESSAGE);
+    List<LocationInFile> secondaries = new ArrayList<>();
+    if (!isValidIterable(expression, secondaries)) {
+      reportIssue(ctx, expression, secondaries, MESSAGE);
     }
   }
 
@@ -94,8 +108,9 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = unpackingExpression.expression();
-    if (!isValidIterable(expression)) {
-      ctx.addIssue(expression, MESSAGE);
+    List<LocationInFile> secondaries = new ArrayList<>();
+    if (!isValidIterable(expression, secondaries)) {
+      reportIssue(ctx, expression, secondaries, MESSAGE);
     }
   }
 
@@ -107,9 +122,10 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = testExpressions.get(0);
-    if (!isAsync && !isValidIterable(expression)) {
+    List<LocationInFile> secondaries = new ArrayList<>();
+    if (!isAsync && !isValidIterable(expression, secondaries)) {
       String message = isAsyncIterable(expression) ? "Add \"async\" before \"for\"; This expression is an async generator." : MESSAGE;
-      ctx.addIssue(expression, message);
+      reportIssue(ctx, expression, secondaries, message);
     }
   }
 
@@ -124,11 +140,12 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
     return expression.type().canHaveMember("__aiter__");
   }
 
-  private static boolean isValidIterable(Expression expression) {
+  private static boolean isValidIterable(Expression expression, List<LocationInFile> secondaries) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       Symbol calleeSymbol = callExpression.calleeSymbol();
       if (calleeSymbol != null && calleeSymbol.is(Symbol.Kind.FUNCTION) && ((FunctionSymbol) calleeSymbol).isAsynchronous()) {
+        secondaries.add(((FunctionSymbol) calleeSymbol).definitionLocation());
         return false;
       }
     }
@@ -137,13 +154,17 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
       if (symbol != null) {
         if (symbol.is(Symbol.Kind.FUNCTION)) {
           FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
+          secondaries.add(functionSymbol.definitionLocation());
           return functionSymbol.hasDecorators();
         }
         if (symbol.is(Symbol.Kind.CLASS)) {
+          secondaries.add(((ClassSymbol) symbol).definitionLocation());
           return false;
         }
       }
     }
-    return expression.type().canHaveMember("__iter__") || expression.type().canHaveMember("__getitem__");
+    InferredType type = expression.type();
+    secondaries.add(InferredTypes.typeClassLocation(type));
+    return type.canHaveMember("__iter__") || type.canHaveMember("__getitem__");
   }
 }

@@ -19,11 +19,14 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -39,6 +42,10 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
+import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 @Rule(key = "S5644")
 public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
@@ -56,21 +63,22 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
     if (isWithinTypeAnnotation(subscriptionExpression)) {
       return;
     }
+    List<LocationInFile> secondaries = new ArrayList<>();
     Expression subscriptionObject = subscriptionExpression.object();
     if (isWithinDelStatement(subscriptionExpression)) {
-      if (!isValidSubscription(subscriptionObject, "__delitem__", null, NON_DELITEM_TYPES)) {
-        reportIssue(subscriptionExpression, subscriptionObject, "__delitem__", ctx);
+      if (!isValidSubscription(subscriptionObject, "__delitem__", null, NON_DELITEM_TYPES, secondaries)) {
+        reportIssue(subscriptionExpression, subscriptionObject, "__delitem__", ctx, secondaries);
       }
       return;
     }
     if (isWithinAssignment(subscriptionExpression)) {
-      if (!isValidSubscription(subscriptionObject, "__setitem__", null, NON_GET_SET_ITEM_TYPES)) {
-        reportIssue(subscriptionExpression, subscriptionObject, "__setitem__", ctx);
+      if (!isValidSubscription(subscriptionObject, "__setitem__", null, NON_GET_SET_ITEM_TYPES, secondaries)) {
+        reportIssue(subscriptionExpression, subscriptionObject, "__setitem__", ctx, secondaries);
       }
       return;
     }
-    if (!isValidSubscription(subscriptionObject, "__getitem__", "__class_getitem__", NON_GET_SET_ITEM_TYPES)) {
-      reportIssue(subscriptionExpression, subscriptionObject, "__getitem__", ctx);
+    if (!isValidSubscription(subscriptionObject, "__getitem__", "__class_getitem__", NON_GET_SET_ITEM_TYPES, secondaries)) {
+      reportIssue(subscriptionExpression, subscriptionObject, "__getitem__", ctx, secondaries);
     }
   }
 
@@ -91,13 +99,16 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
         .anyMatch(e -> e.equals(subscriptionExpression))) != null;
   }
 
-  private static boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod, List<String> invalidTypes) {
+  private static boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
+                                             List<String> invalidTypes, List<LocationInFile> secondaries) {
+
     if (subscriptionObject.is(Tree.Kind.GENERATOR_EXPR)) {
       return false;
     }
     if (subscriptionObject.is(Tree.Kind.CALL_EXPR)) {
       Symbol subscriptionCalleeSymbol = ((CallExpression) subscriptionObject).calleeSymbol();
-      if (subscriptionCalleeSymbol != null && subscriptionCalleeSymbol.is(Symbol.Kind.FUNCTION) && ((FunctionSymbol) subscriptionCalleeSymbol).isAsynchronous()) {
+      if (subscriptionCalleeSymbol != null && subscriptionCalleeSymbol.is(FUNCTION) && ((FunctionSymbol) subscriptionCalleeSymbol).isAsynchronous()) {
+        secondaries.add(((FunctionSymbol) subscriptionCalleeSymbol).definitionLocation());
         return false;
       }
     }
@@ -106,16 +117,18 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
       if (symbol == null) {
         return true;
       }
-      if (symbol.is(Symbol.Kind.FUNCTION, Symbol.Kind.CLASS)) {
+      if (symbol.is(FUNCTION, CLASS)) {
+        secondaries.add(symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation());
         return canHaveMethod(symbol, requiredMethod, classRequiredMethod);
       }
     }
     InferredType type = subscriptionObject.type();
+    secondaries.add(typeClassLocation(type));
     return type.canHaveMember(requiredMethod) && invalidTypes.stream().noneMatch(type::canOnlyBe);
   }
 
   private static boolean canHaveMethod(Symbol symbol, String requiredMethod, @Nullable String classRequiredMethod) {
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
+    if (symbol.is(FUNCTION)) {
       // Avoid FPs for properties
       return ((FunctionSymbol) symbol).hasDecorators();
     }
@@ -124,13 +137,17 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
       || (classRequiredMethod != null && classSymbol.canHaveMember(classRequiredMethod));
   }
 
-  private static void reportIssue(SubscriptionExpression subscriptionExpression, Expression subscriptionObject, String missingMethod, SubscriptionContext ctx) {
+  private static void reportIssue(SubscriptionExpression subscriptionExpression, Expression subscriptionObject,
+                                  String missingMethod, SubscriptionContext ctx, List<LocationInFile> secondaries) {
+
     String name = nameFromExpression(subscriptionObject);
+    PreciseIssue preciseIssue;
     if (name != null) {
-      ctx.addIssue(subscriptionExpression, String.format("Fix this code; \"%s\" does not have a \"%s\" method.", name, missingMethod));
+      preciseIssue = ctx.addIssue(subscriptionExpression, String.format("Fix this code; \"%s\" does not have a \"%s\" method.", name, missingMethod));
     } else {
-      ctx.addIssue(subscriptionObject, String.format("Fix this code; this expression does not have a \"%s\" method.", missingMethod));
+      preciseIssue = ctx.addIssue(subscriptionObject, String.format("Fix this code; this expression does not have a \"%s\" method.", missingMethod));
     }
+    secondaries.stream().filter(Objects::nonNull).forEach(locationInFile -> preciseIssue.secondary(locationInFile, null));
   }
 
   private static String nameFromExpression(Expression expression) {

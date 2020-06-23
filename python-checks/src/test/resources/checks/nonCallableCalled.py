@@ -1,4 +1,5 @@
 class MyNonCallable: ...
+#     ^^^^^^^^^^^^^>
 
 class MyCallable:
     def __call__(self):
@@ -6,16 +7,16 @@ class MyCallable:
 
 def func(): ...
 
-def call_noncallable():
+def call_noncallable(p):
     myvar = MyNonCallable()
-    myvar()  # Noncompliant {{Fix this call; "myvar" is not callable.}}
+    myvar()  # Noncompliant {{Fix this call; "myvar" has type MyNonCallable and it is not callable.}}
 #   ^^^^^
 
     none_var = None
-    none_var()  # Noncompliant
+    none_var()  # Noncompliant {{Fix this call; "none_var" has type NoneType and it is not callable.}}
 
     int_var = 42
-    int_var()  # Noncompliant
+    int_var()  # Noncompliant {{Fix this call; "int_var" has type int and it is not callable.}}
 
     list_var = []
     list_var()  # Noncompliant
@@ -31,6 +32,12 @@ def call_noncallable():
 
     frozenset_var = frozenset()
     frozenset_var() # Noncompliant
+
+    if p:
+      x = 42
+    else:
+      x = 'str'
+    x() # Noncompliant {{Fix this call; "x" is not callable.}}
 
 def flow_sensitivity():
   my_var = "hello"
@@ -49,7 +56,7 @@ def member_access():
 
 def types_from_typeshed():
   from math import acos
-  acos(42)() # Noncompliant {{Fix this call; this expression is not callable.}}
+  acos(42)() # Noncompliant {{Fix this call; this expression has type float and it is not callable.}}
 # ^^^^^^^^
 
 #######################################

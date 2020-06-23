@@ -76,8 +76,9 @@ def iteration_on_builtins():
   a, *rest = NotImplemented  # FN: Any type
 
   def function(): ...
-
+#     ^^^^^^^^>
   a, *rest = function  # Noncompliant
+#            ^^^^^^^^
 
   # generators
   def generator():

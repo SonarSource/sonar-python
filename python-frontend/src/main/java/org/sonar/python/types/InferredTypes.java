@@ -27,7 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -167,5 +169,23 @@ public class InferredTypes {
       return typeClasses;
     }
     return Collections.emptySet();
+  }
+
+  @CheckForNull
+  public static String typeName(InferredType inferredType) {
+    Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
+    if (typeClasses.size() == 1) {
+      return typeClasses.iterator().next().name();
+    }
+    return null;
+  }
+
+  @CheckForNull
+  public static LocationInFile typeClassLocation(InferredType inferredType) {
+    Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
+    if (typeClasses.size() == 1) {
+      return typeClasses.iterator().next().definitionLocation();
+    }
+    return null;
   }
 }

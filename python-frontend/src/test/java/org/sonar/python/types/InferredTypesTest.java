@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.junit.Test;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -135,6 +136,31 @@ public class InferredTypesTest {
 
     assertThat(InferredTypes.typeSymbols(or(STR, INT))).containsExactlyInAnyOrder(typeShedClass("str"), typeShedClass("int"));
     assertThat(InferredTypes.typeSymbols(InferredTypes.anyType())).isEmpty();
+  }
+
+  @Test
+  public void test_typeName() {
+    assertThat(InferredTypes.typeName(STR)).isEqualTo("str");
+
+    ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
+    assertThat(InferredTypes.typeName(new RuntimeType(a))).isEqualTo("A");
+
+    assertThat(InferredTypes.typeName(or(STR, INT))).isNull();
+    assertThat(InferredTypes.typeName(InferredTypes.anyType())).isNull();
+  }
+
+  @Test
+  public void test_typeLocation() {
+    assertThat(InferredTypes.typeClassLocation(STR)).isNull();
+
+    LocationInFile locationA = new LocationInFile("foo.py", 1, 1, 1, 1);
+    RuntimeType aType = new RuntimeType(new ClassSymbolImpl("A", "mod.A", locationA, false));
+    assertThat(InferredTypes.typeClassLocation(aType)).isEqualTo(locationA);
+
+    LocationInFile locationB = new LocationInFile("foo.py", 1, 2, 1, 2);
+    RuntimeType bType = new RuntimeType(new ClassSymbolImpl("B", "mod.B", locationB, false));
+    assertThat(InferredTypes.typeClassLocation(or(aType, bType))).isNull();
+    assertThat(InferredTypes.typeClassLocation(InferredTypes.anyType())).isNull();
   }
 
   private TypeAnnotation typeAnnotation(String... code) {
