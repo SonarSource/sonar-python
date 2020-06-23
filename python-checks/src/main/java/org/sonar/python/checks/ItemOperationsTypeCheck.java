@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
@@ -116,7 +117,7 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
       if (symbol == null) {
         return true;
       }
-      if (symbol.is(FUNCTION, Symbol.Kind.CLASS)) {
+      if (symbol.is(FUNCTION, CLASS)) {
         secondaries.add(symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation());
         return canHaveMethod(symbol, requiredMethod, classRequiredMethod);
       }
