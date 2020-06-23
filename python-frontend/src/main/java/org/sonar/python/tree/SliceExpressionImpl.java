@@ -88,10 +88,11 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression, HasT
 
   @Override
   public InferredType type() {
-    if (object.type().equals(LIST)) {
+    InferredType objectType = object.type();
+    if (objectType.equals(LIST)) {
       return LIST;
     }
-    if (object.type().equals(TUPLE)) {
+    if (objectType.equals(TUPLE)) {
       return TUPLE;
     }
     return InferredTypes.anyType();
