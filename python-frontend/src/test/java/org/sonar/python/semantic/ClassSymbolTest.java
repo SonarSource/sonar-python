@@ -339,6 +339,15 @@ public class ClassSymbolTest {
       "    self.f()"
     );
     assertThat(symbol.declaredMembers()).extracting(Symbol::name, Symbol::kind).containsExactlyInAnyOrder(tuple("f", Symbol.Kind.FUNCTION), tuple("g", Symbol.Kind.FUNCTION));
+
+    ClassSymbol classSymbol = lastClassSymbol(
+      "class A:",
+      "  def __init__(self):",
+      "    self.foo = []",
+      "  def foo(self): ..."
+    );
+    assertThat(classSymbol.declaredMembers()).extracting(Symbol::name, Symbol::kind)
+      .containsExactlyInAnyOrder(tuple("foo", Symbol.Kind.OTHER), tuple("__init__", Symbol.Kind.FUNCTION));
   }
 
   @Test

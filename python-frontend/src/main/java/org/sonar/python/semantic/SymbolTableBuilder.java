@@ -228,7 +228,13 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     for (SymbolImpl instanceAttribute : instanceAttributesByName.values()) {
       SymbolImpl member = (SymbolImpl) symbolsInClass.get(instanceAttribute.name());
       if (member != null) {
-        instanceAttribute.usages().forEach(usage -> member.addUsage(usage.tree(), usage.kind()));
+        for (Usage usage : instanceAttribute.usages()) {
+          if (usage.isBindingUsage()) {
+            // TODO: should be an Ambiguous Symbol
+            member.setKind(Symbol.Kind.OTHER);
+          }
+          member.addUsage(usage.tree(), usage.kind());
+        }
       } else {
         members.add(instanceAttribute);
       }

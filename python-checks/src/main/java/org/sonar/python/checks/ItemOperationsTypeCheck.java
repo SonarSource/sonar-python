@@ -117,6 +117,11 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
       if (symbol == null) {
         return true;
       }
+      String fullyQualifiedName = symbol.fullyQualifiedName();
+      // avoid FP for typing symbols like 'Awaitable[None]'
+      if (fullyQualifiedName != null && fullyQualifiedName.startsWith("typing")) {
+        return true;
+      }
       if (symbol.is(FUNCTION, CLASS)) {
         secondaries.add(symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation());
         return canHaveMethod(symbol, requiredMethod, classRequiredMethod);
