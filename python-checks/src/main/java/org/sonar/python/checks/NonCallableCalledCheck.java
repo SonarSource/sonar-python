@@ -22,12 +22,16 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
+
+import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 @Rule(key = "S5756")
 public class NonCallableCalledCheck extends PythonSubscriptionCheck {
@@ -43,10 +47,15 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       InferredType calleeType = callee.type();
       if (!calleeType.canHaveMember("__call__") || NON_CALLABLE_TYPES.stream().anyMatch(calleeType::canOnlyBe)) {
         String name = nameFromExpression(callee);
+        PreciseIssue preciseIssue;
         if (name != null) {
-          ctx.addIssue(callee, String.format("Fix this call; \"%s\" is not callable.", name));
+          preciseIssue = ctx.addIssue(callee, String.format("Fix this call; \"%s\"%s is not callable.", name, addTypeName(calleeType)));
         } else {
-          ctx.addIssue(callee, "Fix this call; this expression is not callable.");
+          preciseIssue = ctx.addIssue(callee, String.format("Fix this call; this expression%s is not callable.", addTypeName(calleeType)));
+        }
+        LocationInFile location = typeClassLocation(calleeType);
+        if (location != null) {
+          preciseIssue.secondary(location, null);
         }
       }
     });
@@ -57,5 +66,13 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       return ((Name) expression).name();
     }
     return null;
+  }
+
+  private static String addTypeName(InferredType type) {
+    String typeName = InferredTypes.typeName(type);
+    if (typeName != null) {
+      return " has type " + typeName + " and it";
+    }
+    return "";
   }
 }

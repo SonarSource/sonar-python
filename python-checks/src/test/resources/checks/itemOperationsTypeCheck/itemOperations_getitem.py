@@ -57,8 +57,10 @@ def builtins_not_supporting_getitem():
   NotImplemented[0]  # FN: Any type
 
   def function(): ...
+#     ^^^^^^^^>
 
   function[0]  # Noncompliant
+# ^^^^^^^^^^^
 
   def generator():
       yield 1
@@ -100,12 +102,14 @@ def standard_library():
 
 def custom_classes():
   class A:
+#       ^>
       def __init__(self, values):
           self._values = values
 
   a = A([0,1,2])
 
   a[0]  # Noncompliant
+# ^^^^
 
   class B: ...
 

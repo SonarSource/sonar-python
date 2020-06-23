@@ -1,10 +1,17 @@
-def builtin_noncompliant():
-  1 < "1"  # Noncompliant {{Fix this invalid "<" operation between incompatible types.}}
+def builtin_noncompliant(p):
+  1 < "1"  # Noncompliant {{Fix this invalid "<" operation between incompatible types (int and str).}}
 #   ^
   complex(1) < complex(1)  # Noncompliant
   [1] < (1,)  # Noncompliant
 
-  "1" > 1 # Noncompliant {{Fix this invalid ">" operation between incompatible types.}}
+  "1" > 1 # Noncompliant {{Fix this invalid ">" operation between incompatible types (str and int).}}
+
+  if p:
+    x = 42
+  else:
+    x = complex(1)
+  x > "1" # Noncompliant {{Fix this invalid ">" operation between incompatible types.}}
+  "1" < x # Noncompliant
 
 
 def builtin_compliant():

@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.COMPLEX;
@@ -122,7 +123,7 @@ public class IncompatibleOperandsCheck extends PythonVisitorCheck {
     boolean canHaveLeftSpecialMethod = left.canHaveMember(specialMethodNames.left);
     boolean canHaveRightSpecialMethod = right.canHaveMember(specialMethodNames.right);
     if (!canHaveLeftSpecialMethod && !canHaveRightSpecialMethod) {
-      addIssue(operator, message(operator));
+      addIssue(operator, message(operator, left, right));
       return;
     }
 
@@ -135,12 +136,18 @@ public class IncompatibleOperandsCheck extends PythonVisitorCheck {
     boolean hasIncompatibleLeftSpecialMethod = hasIncompatibleTypeOrAbsentSpecialMethod(leftSpecialMethod, right);
     boolean hasIncompatibleRightSpecialMethod = hasIncompatibleTypeOrAbsentSpecialMethod(rightSpecialMethod, left);
     if (hasIncompatibleLeftSpecialMethod && hasIncompatibleRightSpecialMethod) {
-      addIssue(operator, message(operator));
+      addIssue(operator, message(operator, left, right));
     }
   }
 
-  private static String message(Token operator) {
-    return "Fix this invalid \"" + operator.value() + "\" operation between incompatible types.";
+  private static String message(Token operator, InferredType left, InferredType right) {
+    String leftTypeName = InferredTypes.typeName(left);
+    String rightTypeName = InferredTypes.typeName(right);
+    String message = "Fix this invalid \"" + operator.value() + "\" operation between incompatible types";
+    if (leftTypeName != null && rightTypeName != null) {
+      message += " (" + leftTypeName + " and " + rightTypeName + ")";
+    }
+    return message + ".";
   }
 
   private static boolean hasUnresolvedMethod(boolean canHaveMethod, @Nullable Symbol method) {
