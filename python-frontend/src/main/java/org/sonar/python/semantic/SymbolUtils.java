@@ -97,9 +97,9 @@ public class SymbolUtils {
     for (Argument argument : argList.arguments()) {
       if (!argument.is(Kind.REGULAR_ARGUMENT)) {
         classSymbol.setHasSuperClassWithoutSymbol();
-        continue;
+      } else {
+        addParentClass(pythonFile, symbolsByName, classSymbol, (RegularArgument) argument);
       }
-      addParentClass(pythonFile, symbolsByName, classSymbol, (RegularArgument) argument);
     }
   }
 
@@ -108,8 +108,6 @@ public class SymbolUtils {
     if (keyword != null) {
       if (keyword.name().equals("metaclass")) {
         classSymbol.setHasMetaClass();
-      } else {
-        classSymbol.setHasSuperClassWithoutSymbol();
       }
       return;
     }
@@ -219,9 +217,9 @@ public class SymbolUtils {
 
   /**
    * @return the offset between parameter position and argument position:
-   * 0 if there is no implicit first parameter (self, cls, etc...)
-   * 1 if there is an implicit first parameter
-   * -1 if unknown (intent is not clear from context)
+   *   0 if there is no implicit first parameter (self, cls, etc...)
+   *   1 if there is an implicit first parameter
+   *  -1 if unknown (intent is not clear from context)
    */
   public static int firstParameterOffset(FunctionSymbol functionSymbol, boolean isStaticCall) {
     List<FunctionSymbol.Parameter> parameters = functionSymbol.parameters();

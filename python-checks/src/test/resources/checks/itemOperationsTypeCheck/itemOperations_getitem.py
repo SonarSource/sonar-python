@@ -166,7 +166,7 @@ def type_annotations():
   x: Awaitable[bool] # OK
 
 
-def annotated_classes():
+def decorated_classes():
   import enum
   @enum.unique
   class MyEnum(enum.Enum):
