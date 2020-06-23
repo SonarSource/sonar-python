@@ -164,3 +164,13 @@ def type_annotations():
   def my_func() -> Awaitable[bool]: ... # OK
   def my_other_func(arg: Awaitable[bool]): ... # OK
   x: Awaitable[bool] # OK
+
+
+def annotated_classes():
+  import enum
+  @enum.unique
+  class MyEnum(enum.Enum):
+      first = 0
+      second = 1
+
+  print(MyEnum["first"]) # OK

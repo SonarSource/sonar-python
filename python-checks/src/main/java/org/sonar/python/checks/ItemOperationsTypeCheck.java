@@ -134,7 +134,8 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
     }
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     return classSymbol.canHaveMember(requiredMethod)
-      || (classRequiredMethod != null && classSymbol.canHaveMember(classRequiredMethod));
+      || (classRequiredMethod != null && classSymbol.canHaveMember(classRequiredMethod))
+      || classSymbol.hasDecorators();
   }
 
   private static void reportIssue(SubscriptionExpression subscriptionExpression, Expression subscriptionObject,
