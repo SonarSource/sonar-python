@@ -246,6 +246,17 @@ public class ClassSymbolTest {
     assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasMetaClass()).isTrue();
     assertThat(classSymbol.canHaveMember("foo")).isTrue();
+
+    ClassSymbol C = lastClassSymbol(
+      "class A: ",
+      "  pass",
+      "class B(metaclass=A): ",
+      "  pass",
+      "class C(B):",
+      "  pass");
+
+    assertThat(C.canHaveMember("foo")).isTrue();
+
   }
 
   @Test

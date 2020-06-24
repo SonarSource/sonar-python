@@ -59,6 +59,13 @@ def types_from_typeshed():
   acos(42)() # Noncompliant {{Fix this call; this expression has type float and it is not callable.}}
 # ^^^^^^^^
 
+def with_metaclass():
+  class Factory: ...
+  class Base(metaclass=Factory): ...
+  class A(Base): ...
+  a = A()
+  a() # OK
+
 #######################################
 # Valid case: Calling a callable object
 #######################################

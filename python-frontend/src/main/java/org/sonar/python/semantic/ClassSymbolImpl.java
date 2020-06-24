@@ -158,7 +158,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    if (hasUnresolvedTypeHierarchy() || hasMetaClass()) {
+    if (hasUnresolvedTypeHierarchy() || hasSuperClassWithMetaClass()) {
       return true;
     }
     for (Symbol symbol : allSuperClasses(true)) {
@@ -171,6 +171,10 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       }
     }
     return false;
+  }
+
+  private boolean hasSuperClassWithMetaClass() {
+    return allSuperClasses(true).stream().anyMatch(s -> s.is(Kind.CLASS) && ((ClassSymbol) s).hasMetaClass());
   }
 
   @Override
