@@ -6,6 +6,8 @@ string's replacement fields.</p>
 <pre>
 print('Error code %d' % '42')  # Noncompliant. Replace this value with a number as %d requires.
 
+print('User {1} is not allowed to perform this action'.format('Bob'))  # Noncompliant. Replacement field numbering should start at 0.
+
 print('User {0} has not been able to access {}'.format('Alice', 'MyFile'))  # Noncompliant. Use only manual or only automatic field numbering, don't mix them.
 
 print('User {a} has not been able to access {b}'.format(a='Alice'))  # Noncompliant. Provide a value for field "b".
@@ -13,6 +15,8 @@ print('User {a} has not been able to access {b}'.format(a='Alice'))  # Noncompli
 <h2>Compliant Solution</h2>
 <pre>
 print('Error code %d' % 42)
+
+print('User {0} is not allowed to perform this action'.format('Bob'))
 
 print('User {0} has not been able to access {1}'.format('Alice', 'MyFile'))
 

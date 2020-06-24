@@ -8,6 +8,7 @@ easy to forget curly braces and it won't raise any error.</p>
 <ul>
   <li> A string formatted with <code>%</code> will not return the expected string because some arguments are not used. </li>
   <li> A string formatted with <code>str.format</code> will not return the expected string because some arguments are not used. </li>
+  <li> An "f-string" doesn't contain any replacement field, which probably means that some curly braces are missing. </li>
   <li> Loggers will log an error because their message is not formatted properly. </li>
 </ul>
 <p>Rule {rule:python:S2275} covers cases where formatting a string will raise an exception.</p>
@@ -17,6 +18,10 @@ easy to forget curly braces and it won't raise any error.</p>
 
 "Error: User {} has not been able to access []".format("Alice", "MyFile")  # Noncompliant. Remove 1 unexpected argument or add a replacement field.
 
+user = "Alice"
+resource = "MyFile"
+message = f"Error: User [user] has not been able to access [resource]"  # Noncompliant. Add replacement fields or use a normal string instead of an f-string.
+
 import logging
 logging.error("Error: User %s has not been able to access %s", "Alice")  # Noncompliant. Add 1 missing argument.
 </pre>
@@ -25,6 +30,10 @@ logging.error("Error: User %s has not been able to access %s", "Alice")  # Nonco
 "Error %(message)s" % {"message": "something failed"}
 
 "Error: User {} has not been able to access {}".format("Alice", "MyFile")
+
+user = "Alice"
+resource = "MyFile"
+message = f"Error: User {user} has not been able to access {resource}"
 
 import logging
 logging.error("Error: User %s has not been able to access %s", "Alice", "MyFile")
