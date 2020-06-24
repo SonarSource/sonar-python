@@ -157,7 +157,6 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return Optional.empty();
   }
 
-  @Override
   public boolean hasMetaClass() {
     return hasMetaClass || membersByName().get("__metaclass__") != null;
   }

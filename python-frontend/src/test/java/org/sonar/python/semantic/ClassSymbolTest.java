@@ -241,7 +241,7 @@ public class ClassSymbolTest {
     Symbol symbol = classDef.name().symbol();
     assertThat(symbol).isInstanceOf(ClassSymbol.class);
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasMetaClass()).isTrue();
@@ -290,7 +290,7 @@ public class ClassSymbolTest {
     Symbol symbol = classDef.name().symbol();
     assertThat(symbol).isInstanceOf(ClassSymbol.class);
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasMetaClass()).isTrue();
@@ -308,7 +308,7 @@ public class ClassSymbolTest {
     Symbol symbol = classDef.name().symbol();
     assertThat(symbol).isInstanceOf(ClassSymbol.class);
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(classSymbol.superClasses()).hasSize(1);
     assertThat(classSymbol.superClasses()).extracting(Symbol::name).containsExactly("A");
