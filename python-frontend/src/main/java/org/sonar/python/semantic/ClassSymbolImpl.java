@@ -179,7 +179,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return false;
   }
 
-  private boolean hasSuperClassWithUnknownMetaClass() {
+  public boolean hasSuperClassWithUnknownMetaClass() {
     for (Symbol symbol : allSuperClasses(true)) {
       if (symbol.is(Kind.CLASS)) {
         ClassSymbolImpl superClass = (ClassSymbolImpl) symbol;

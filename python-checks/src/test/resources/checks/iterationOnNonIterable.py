@@ -234,3 +234,11 @@ def collections_no_issue():
   a, *rest = Counter(['a', 'b'])
   a, *rest = OrderedDict.fromkeys('abc')
   a, *rest = defaultdict(int, {0:0})
+
+def inherits_from_metaclassed():
+  import enum
+  class MyEnum(enum.Enum):
+      first = 0
+      second = 1
+
+  for elem in MyEnum: ... # OK
