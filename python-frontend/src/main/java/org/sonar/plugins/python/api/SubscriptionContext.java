@@ -19,12 +19,9 @@
  */
 package org.sonar.plugins.python.api;
 
-import com.google.common.annotations.Beta;
 import java.io.File;
-import java.util.Collection;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -44,12 +41,6 @@ public interface SubscriptionContext {
   PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber);
 
   PythonFile pythonFile();
-
-  /**
-   * Returns symbols declared in stub files (e.g. typeshed) used in the analyzed project.
-   */
-  @Beta
-  Collection<Symbol> stubFilesSymbols();
 
   /**
    * Returns null in case of Sonarlint context
