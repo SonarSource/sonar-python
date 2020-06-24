@@ -57,6 +57,7 @@ import org.sonar.python.types.TypeShedPythonFile;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
+import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 
 public class SymbolUtils {
 
@@ -108,6 +109,9 @@ public class SymbolUtils {
     if (keyword != null) {
       if (keyword.name().equals("metaclass")) {
         classSymbol.setHasMetaClass();
+        getSymbolFromTree(regularArgument.expression())
+          .map(Symbol::fullyQualifiedName)
+          .ifPresent(classSymbol::setMetaclassFQN);
       }
       return;
     }

@@ -263,6 +263,25 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  public void metaclass_in_imported_symbol() {
+    Set<Symbol> globalsMod = parse(
+      new SymbolTableBuilder("", pythonFile("mod1")),
+      "from abc import ABCMeta",
+      "class A(metaclass=ABCMeta): ..."
+    ).globalVariables();
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(Collections.singletonMap("mod1", globalsMod))),
+      "from mod1 import A"
+    );
+
+    Symbol importedASymbol = tree.globalVariables().iterator().next();
+    assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
+    ClassSymbol classA = (ClassSymbol) importedASymbol;
+    assertThat(classA.hasMetaClass()).isTrue();
+    assertThat(((ClassSymbolImpl) classA).metaclassFQN()).isEqualTo("abc.ABCMeta");
+  }
+
+  @Test
   public void builtin_symbol_in_super_class() {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("BaseException", "BaseException"));

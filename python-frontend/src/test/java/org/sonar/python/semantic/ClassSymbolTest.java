@@ -246,6 +246,37 @@ public class ClassSymbolTest {
     assertThat(classSymbol.superClasses()).isEmpty();
     assertThat(classSymbol.hasMetaClass()).isTrue();
     assertThat(classSymbol.canHaveMember("foo")).isTrue();
+
+    ClassSymbol C = lastClassSymbol(
+      "class A: ",
+      "  pass",
+      "class B(metaclass=A): ",
+      "  pass",
+      "class C(B):",
+      "  pass");
+
+    assertThat(C.canHaveMember("foo")).isTrue();
+
+    C = lastClassSymbol(
+      "from abc import ABCMeta",
+      "class B(metaclass=ABCMeta): ",
+      "  pass",
+      "class C(B):",
+      "  pass");
+
+    assertThat(C.canHaveMember("foo")).isFalse();
+
+    C = lastClassSymbol(
+      "from abc import ABCMeta",
+      "class Factory: ...",
+      "class A(metaclass=Factory): ",
+      "  pass",
+      "class B(A, metaclass=ABCMeta): ",
+      "  pass",
+      "class C(B):",
+      "  pass");
+
+    assertThat(C.canHaveMember("foo")).isTrue();
   }
 
   @Test
