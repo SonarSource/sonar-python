@@ -161,7 +161,8 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
         if (symbol.is(Symbol.Kind.CLASS)) {
           secondaries.add(((ClassSymbol) symbol).definitionLocation());
           // Metaclasses might add the method by default
-          return ((ClassSymbolImpl) symbol).hasSuperClassWithUnknownMetaClass();
+          ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+          return classSymbol.hasSuperClassWithUnknownMetaClass() || classSymbol.hasUnresolvedTypeHierarchy();
         }
       }
     }

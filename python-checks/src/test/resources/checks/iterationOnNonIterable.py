@@ -242,3 +242,15 @@ def inherits_from_metaclassed():
       second = 1
 
   for elem in MyEnum: ... # OK
+
+def enum_unresolved_type_hierarchy():
+  try:
+    from enum import Enum
+  except ImportError:
+    from foo.enum import Enum
+
+  class MyEnumFoo(Enum):
+    first = 0
+    second = 1
+
+  for elem in MyEnumFoo: ... # OK
