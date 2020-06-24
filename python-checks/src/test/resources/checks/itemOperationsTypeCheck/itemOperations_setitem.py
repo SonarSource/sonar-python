@@ -33,7 +33,7 @@ def builtin_types_not_supporting_setitem():
   1.0[0] = 42  # Noncompliant
   complex(1,1)[0] = 42  # Noncompliant {{Fix this code; this expression does not have a "__setitem__" method.}}
 # ^^^^^^^^^^^^
-  Fraction(1,1)[0] = 42  # FN
+  Fraction(1,1)[0] = 42  # Noncompliant
   Decimal(1)[0] = 42  # Noncompliant
   True[0] = 42  # Noncompliant
 

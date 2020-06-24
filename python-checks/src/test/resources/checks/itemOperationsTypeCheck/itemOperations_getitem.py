@@ -38,7 +38,7 @@ def builtins_not_supporting_getitem():
   1.0[0]  # Noncompliant
   complex(1,1)[0]  # Noncompliant {{Fix this code; this expression does not have a "__getitem__" method.}}
 # ^^^^^^^^^^^^
-  Fraction(1,1)[0]  # FN
+  Fraction(1,1)[0]  # Noncompliant
   Decimal(1)[0]  # Noncompliant
   True[0]  # Noncompliant
 

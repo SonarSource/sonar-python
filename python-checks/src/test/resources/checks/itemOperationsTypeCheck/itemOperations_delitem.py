@@ -30,7 +30,7 @@ def builtin_types_not_supporting_delitem():
   del 1.0[0]  # Noncompliant
   del complex(1,1)[0]  # Noncompliant {{Fix this code; this expression does not have a "__delitem__" method.}}
 #     ^^^^^^^^^^^^
-  del Fraction(1,1)[0]  # FN
+  del Fraction(1,1)[0]  # Noncompliant
   del Decimal(1)[0]  # Noncompliant
   del True[0]  # Noncompliant {{Fix this code; "True" does not have a "__delitem__" method.}}
 #     ^^^^^^^

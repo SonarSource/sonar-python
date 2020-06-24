@@ -69,7 +69,7 @@ def iteration_on_builtins():
   a, *rest = 1  # Noncompliant
   a, *rest = 1.0  # Noncompliant
   a, *rest = complex(1,1)  # Noncompliant
-  a, *rest = Fraction(1,1)  # FN
+  a, *rest = Fraction(1,1)  # Noncompliant
   a, *rest = Decimal(1)  # Noncompliant
   a, *rest = True  # Noncompliant
   a, *rest = None  # Noncompliant

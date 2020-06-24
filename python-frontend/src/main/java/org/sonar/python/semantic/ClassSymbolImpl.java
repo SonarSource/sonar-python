@@ -32,6 +32,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -56,6 +57,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private boolean hasDecorators = false;
   private boolean hasMetaClass = false;
   private final LocationInFile classDefinitionLocation;
+  @Nullable
+  private String metaclassFQN = null;
 
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(classDef.name().name(), fullyQualifiedName);
@@ -70,19 +73,22 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
-    this(name, fullyQualifiedName, null, false);
+    this(name, fullyQualifiedName, null, false, false, null);
   }
 
-  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation, boolean hasDecorators) {
+  public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation,
+                         boolean hasDecorators, boolean hasMetaClass, @Nullable String metaclassFQN) {
     super(name, fullyQualifiedName);
     classDefinitionLocation = definitionLocation;
     this.hasDecorators = hasDecorators;
+    this.hasMetaClass = hasMetaClass;
+    this.metaclassFQN = metaclassFQN;
     setKind(Kind.CLASS);
   }
 
   @Override
   ClassSymbolImpl copyWithoutUsages() {
-    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators);
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators, hasMetaClass, metaclassFQN);
     for (Symbol superClass : superClasses()) {
       if (superClass == this) {
         copiedClassSymbol.superClasses.add(copiedClassSymbol);
@@ -158,7 +164,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    if (hasUnresolvedTypeHierarchy() || hasSuperClassWithMetaClass()) {
+    if (hasUnresolvedTypeHierarchy() || hasSuperClassWithUnknownMetaClass()) {
       return true;
     }
     for (Symbol symbol : allSuperClasses(true)) {
@@ -173,8 +179,17 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
     return false;
   }
 
-  private boolean hasSuperClassWithMetaClass() {
-    return allSuperClasses(true).stream().anyMatch(s -> s.is(Kind.CLASS) && ((ClassSymbol) s).hasMetaClass());
+  private boolean hasSuperClassWithUnknownMetaClass() {
+    for (Symbol symbol : allSuperClasses(true)) {
+      if (symbol.is(Kind.CLASS)) {
+        ClassSymbolImpl superClass = (ClassSymbolImpl) symbol;
+        // excluding ABCMeta because it doesn't add extra methods and to avoid FN for typeshed symbols
+        if (superClass.hasMetaClass() && !"abc.ABCMeta".equals(superClass.metaclassFQN())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   @Override
@@ -227,6 +242,15 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   public void setHasMetaClass() {
     this.hasMetaClass = true;
+  }
+
+  public void setMetaclassFQN(String metaclassFQN) {
+    this.metaclassFQN = metaclassFQN;
+  }
+
+  @CheckForNull
+  public String metaclassFQN() {
+    return metaclassFQN;
   }
 
   private Set<Symbol> allSuperClasses(boolean includeAmbiguousSymbols) {
