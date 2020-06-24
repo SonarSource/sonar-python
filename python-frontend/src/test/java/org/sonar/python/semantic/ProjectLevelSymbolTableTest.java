@@ -276,9 +276,9 @@ public class ProjectLevelSymbolTableTest {
 
     Symbol importedASymbol = tree.globalVariables().iterator().next();
     assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
-    ClassSymbol classA = (ClassSymbol) importedASymbol;
+    ClassSymbolImpl classA = (ClassSymbolImpl) importedASymbol;
     assertThat(classA.hasMetaClass()).isTrue();
-    assertThat(((ClassSymbolImpl) classA).metaclassFQN()).isEqualTo("abc.ABCMeta");
+    assertThat(classA.metaclassFQN()).isEqualTo("abc.ABCMeta");
   }
 
   @Test

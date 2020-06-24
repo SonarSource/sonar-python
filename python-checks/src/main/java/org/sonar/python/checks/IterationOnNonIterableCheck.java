@@ -42,6 +42,7 @@ import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S3862")
@@ -160,7 +161,7 @@ public class IterationOnNonIterableCheck extends PythonSubscriptionCheck {
         if (symbol.is(Symbol.Kind.CLASS)) {
           secondaries.add(((ClassSymbol) symbol).definitionLocation());
           // Metaclasses might add the method by default
-          return ((ClassSymbol) symbol).hasMetaClass();
+          return ((ClassSymbolImpl) symbol).hasSuperClassWithUnknownMetaClass();
         }
       }
     }
