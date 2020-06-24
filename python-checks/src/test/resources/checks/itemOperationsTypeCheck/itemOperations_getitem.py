@@ -164,7 +164,7 @@ def type_annotations():
   def my_func() -> Awaitable[bool]: ... # OK
   def my_other_func(arg: Awaitable[bool]): ... # OK
   x: Awaitable[bool] # OK
-
+  Awaitable[None]
 
 def decorated_classes():
   import enum
@@ -174,3 +174,11 @@ def decorated_classes():
       second = 1
 
   print(MyEnum["first"]) # OK
+
+class A:
+  def __init__(self):
+    self.data = [1, 2, 3]
+  def data(self):
+    ...
+  def f(self):
+    self.data[1] # OK

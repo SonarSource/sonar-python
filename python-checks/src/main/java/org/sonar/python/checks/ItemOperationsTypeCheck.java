@@ -114,7 +114,7 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
     }
     if (subscriptionObject instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) subscriptionObject).symbol();
-      if (symbol == null) {
+      if (symbol == null || isTypingSymbol(symbol)) {
         return true;
       }
       if (symbol.is(FUNCTION, CLASS)) {
@@ -125,6 +125,12 @@ public class ItemOperationsTypeCheck extends PythonSubscriptionCheck {
     InferredType type = subscriptionObject.type();
     secondaries.add(typeClassLocation(type));
     return type.canHaveMember(requiredMethod) && invalidTypes.stream().noneMatch(type::canOnlyBe);
+  }
+
+  private static boolean isTypingSymbol(Symbol symbol) {
+    String fullyQualifiedName = symbol.fullyQualifiedName();
+    // avoid FP for typing symbols like 'Awaitable[None]'
+    return fullyQualifiedName != null && fullyQualifiedName.startsWith("typing");
   }
 
   private static boolean canHaveMethod(Symbol symbol, String requiredMethod, @Nullable String classRequiredMethod) {
