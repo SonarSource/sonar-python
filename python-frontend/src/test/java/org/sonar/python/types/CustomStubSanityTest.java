@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,9 +38,9 @@ import static org.assertj.core.api.Assertions.fail;
 public class CustomStubSanityTest {
 
   @Test
-  public void test() throws IOException {
+  public void test() throws IOException, URISyntaxException {
     URL customStubsURL = CustomStubSanityTest.class.getResource("/org/sonar/python/types/custom");
-    Path customStubsPath = Paths.get(customStubsURL.getPath());
+    Path customStubsPath = Paths.get(customStubsURL.toURI());
 
     Set<String> moduleNames = Files.find(customStubsPath, Integer.MAX_VALUE, ((path, basicFileAttributes) -> basicFileAttributes.isRegularFile()))
       .map(customStubsPath::relativize)
