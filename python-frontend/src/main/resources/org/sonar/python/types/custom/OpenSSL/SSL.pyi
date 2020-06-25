@@ -2,5 +2,5 @@ from typing import Any
 
 VERIFY_NONE: int
 
-class Context:
-    def set_verify(self, mode: Any, callback: Any) -> None: ...
+class Context(CustomStubBase):
+    def set_verify(self, *args, **kwargs) -> None: ...

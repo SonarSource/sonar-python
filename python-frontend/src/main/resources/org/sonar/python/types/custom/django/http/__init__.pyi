@@ -1,3 +1,6 @@
+import django.http.request as request
+import django.http.response as response
+
 from .response import (
     HttpResponse as HttpResponse,
     HttpResponseBadRequest as HttpResponseBadRequest,
