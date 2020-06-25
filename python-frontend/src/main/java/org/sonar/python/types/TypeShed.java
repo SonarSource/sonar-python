@@ -34,10 +34,13 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
@@ -266,8 +269,35 @@ public class TypeShed {
       Optional.ofNullable(functionDef.name().symbol()).ifPresent(symbol -> {
         setDeclaredReturnType(symbol, functionDef);
         setParameterTypes(symbol, functionDef);
+        setAnnotatedReturnType(symbol, functionDef);
       });
       super.visitFunctionDef(functionDef);
+    }
+
+    @Override
+    public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
+      if (annotatedAssignment.variable().is(Tree.Kind.NAME)) {
+        Name variable = (Name) annotatedAssignment.variable();
+        Optional.ofNullable(variable.symbol()).ifPresent(symbol -> setAnnotatedType(symbol, annotatedAssignment));
+      }
+      super.visitAnnotatedAssignment(annotatedAssignment);
+    }
+
+    private static void setAnnotatedType(Symbol symbol, AnnotatedAssignment annotatedAssignment) {
+      TypeAnnotation typeAnnotation = annotatedAssignment.annotation();
+      if (symbol.is(Symbol.Kind.OTHER)) {
+        SymbolImpl other = (SymbolImpl) symbol;
+        other.setAnnotatedTypeName(typeAnnotation);
+      }
+    }
+
+    private static void setAnnotatedReturnType(Symbol symbol, FunctionDef functionDef) {
+      TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
+      if (symbol.is(Symbol.Kind.FUNCTION)) {
+        ((FunctionSymbolImpl) symbol).setAnnotatedReturnTypeName(typeAnnotation);
+      } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+        Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setAnnotatedReturnType(functionSymbol, functionDef));
+      }
     }
 
     private static void setParameterTypes(Symbol symbol, FunctionDef functionDef) {

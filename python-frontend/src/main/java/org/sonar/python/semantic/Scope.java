@@ -153,7 +153,7 @@ class Scope {
         .collect(Collectors.toSet());
       return new AmbiguousSymbolImpl(symbolName, symbol.fullyQualifiedName(), alternativeSymbols);
     } else if (symbol.is(Symbol.Kind.OTHER)) {
-      SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName());
+      SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName(), symbol.annotatedTypeName());
       for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
         res.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
       }

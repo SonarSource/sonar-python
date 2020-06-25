@@ -52,6 +52,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean isInstanceMethod;
   private final boolean isAsynchronous;
   private final boolean hasDecorators;
+  private String annotatedReturnTypeName = null;
   private InferredType declaredReturnType = InferredTypes.anyType();
   private boolean isStub = false;
   private Symbol owner;
@@ -85,6 +86,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     isAsynchronous = functionSymbol.isAsynchronous();
     hasDecorators = functionSymbol.hasDecorators();
     decorators = functionSymbol.decorators();
+    annotatedReturnTypeName = functionSymbol.annotatedReturnTypeName();
     hasVariadicParameter = functionSymbol.hasVariadicParameter();
     parameters.addAll(functionSymbol.parameters());
     functionDefinitionLocation = functionSymbol.definitionLocation();
@@ -223,6 +225,19 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   public InferredType declaredReturnType() {
     return declaredReturnType;
+  }
+
+  public void setAnnotatedReturnTypeName(@Nullable TypeAnnotation returnTypeAnnotation) {
+    annotatedReturnTypeName = Optional.ofNullable(returnTypeAnnotation)
+      .map(TypeAnnotation::expression)
+      .map(SymbolImpl::getTypeSymbolFromExpression)
+      .map(Symbol::fullyQualifiedName)
+      .orElse(null);
+  }
+
+  @Override
+  public String annotatedReturnTypeName() {
+    return annotatedReturnTypeName;
   }
 
   public void setDeclaredReturnType(InferredType declaredReturnType) {
