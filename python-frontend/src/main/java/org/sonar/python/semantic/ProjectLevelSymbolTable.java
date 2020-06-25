@@ -73,7 +73,7 @@ public class ProjectLevelSymbolTable {
       } else if (globalVariable.kind() == Symbol.Kind.FUNCTION) {
         globalSymbols.add(new FunctionSymbolImpl(globalVariable.name(), ((FunctionSymbol) globalVariable)));
       } else {
-        globalSymbols.add(new SymbolImpl(globalVariable.name(), fullyQualifiedModuleName + "." + globalVariable.name()));
+        globalSymbols.add(new SymbolImpl(globalVariable.name(), fullyQualifiedModuleName + "." + globalVariable.name(), globalVariable.annotatedTypeName()));
       }
     }
     globalSymbolsByModuleName.put(fullyQualifiedModuleName, globalSymbols);

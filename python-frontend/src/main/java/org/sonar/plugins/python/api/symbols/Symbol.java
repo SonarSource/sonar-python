@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.api.symbols;
 
+import com.google.common.annotations.Beta;
 import java.util.List;
 import javax.annotation.CheckForNull;
 
@@ -34,6 +35,13 @@ public interface Symbol {
   boolean is(Kind... kinds);
 
   Kind kind();
+
+  /**
+   * Returns fully qualified name of the type if any
+   */
+  @Beta
+  @CheckForNull
+  String annotatedTypeName();
 
   enum Kind {
     FUNCTION,
