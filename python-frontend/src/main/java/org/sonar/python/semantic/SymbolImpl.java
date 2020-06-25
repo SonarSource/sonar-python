@@ -24,12 +24,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.InferredTypes;
@@ -43,10 +48,18 @@ public class SymbolImpl implements Symbol {
   private Map<String, Symbol> childrenSymbolByName = new HashMap<>();
   private Kind kind;
   private InferredType inferredType = InferredTypes.anyType();
+  private String annotatedTypeName = null;
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
+    this.kind = Kind.OTHER;
+  }
+
+  public SymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedTypeName) {
+    this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
+    this.annotatedTypeName = annotatedTypeName;
     this.kind = Kind.OTHER;
   }
 
@@ -120,8 +133,17 @@ public class SymbolImpl implements Symbol {
     this.inferredType = inferredType;
   }
 
+  @Override
+  public String annotatedTypeName() {
+    return annotatedTypeName;
+  }
+
+  public void setAnnotatedTypeName(TypeAnnotation typeAnnotation) {
+    this.annotatedTypeName = Optional.ofNullable(getTypeSymbolFromExpression(typeAnnotation.expression())).map(Symbol::fullyQualifiedName).orElse(null);
+  }
+
   SymbolImpl copyWithoutUsages() {
-    return new SymbolImpl(name(), fullyQualifiedName);
+    return new SymbolImpl(name(), fullyQualifiedName, annotatedTypeName);
   }
 
   public void removeUsages() {
@@ -131,5 +153,17 @@ public class SymbolImpl implements Symbol {
 
   Map<String, Symbol> getChildrenSymbolByName() {
     return Collections.unmodifiableMap(childrenSymbolByName);
+  }
+
+  @Nullable
+  static Symbol getTypeSymbolFromExpression(Expression expression) {
+    if (expression.is(Tree.Kind.SUBSCRIPTION)) {
+      SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
+      return getTypeSymbolFromExpression(subscriptionExpression.object());
+    }
+    if (expression instanceof HasSymbol) {
+      return ((HasSymbol) expression).symbol();
+    }
+    return null;
   }
 }

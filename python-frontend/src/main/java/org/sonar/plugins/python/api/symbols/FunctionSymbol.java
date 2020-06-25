@@ -21,6 +21,7 @@ package org.sonar.plugins.python.api.symbols;
 
 import java.util.List;
 import javax.annotation.CheckForNull;
+import com.google.common.annotations.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.types.InferredType;
 
@@ -47,6 +48,13 @@ public interface FunctionSymbol extends Symbol {
 
   @CheckForNull
   LocationInFile definitionLocation();
+
+  /**
+   * Returns fully qualified name of the return type if any
+   */
+  @Beta
+  @CheckForNull
+  String annotatedReturnTypeName();
 
   interface Parameter {
     @CheckForNull

@@ -19,11 +19,14 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
@@ -192,5 +195,40 @@ public class TypeShedTest {
     Symbol responseSymbol = djangoSymbols.get("HttpResponse");
     assertThat(responseSymbol.kind()).isEqualTo(Kind.CLASS);
     assertThat(responseSymbol.fullyQualifiedName()).isEqualTo("django.http.response.HttpResponse");
+  }
+
+  @Test
+  public void return_type_hints() {
+    Map<String, Symbol> symbols = TypeShed.typingModuleSymbols().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("typing.Tuple");
+    symbols = TypeShed.symbolsForModule("flask_mail").stream().collect(Collectors.toMap(Symbol::name, Function.identity()));
+    ClassSymbol mail = (ClassSymbol) symbols.get("Mail");
+    assertThat(((FunctionSymbol) mail.declaredMembers().stream().iterator().next()).annotatedReturnTypeName()).isNull();
+  }
+
+  @Test
+  public void package_django_class_property_type() {
+    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("django.http.request").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Symbol requestSymbol = djangoSymbols.get("HttpRequest");
+    assertThat(requestSymbol.kind()).isEqualTo(Kind.CLASS);
+    assertThat(((ClassSymbol) requestSymbol).declaredMembers().iterator().next().annotatedTypeName()).isEqualTo("django.http.request.QueryDict");
+  }
+
+  @Test
+  public void package_sqlite3_connect_type_in_ambiguous_symbol() {
+    Map<String, Symbol> djangoSymbols = TypeShed.symbolsForModule("sqlite3").stream().collect(Collectors.toMap(Symbol::name, Function.identity(), AmbiguousSymbolImpl::create));
+    Symbol requestSymbol = djangoSymbols.get("connect");
+    assertThat(((FunctionSymbolImpl) ((((AmbiguousSymbolImpl) requestSymbol).alternatives()).toArray()[0])).annotatedReturnTypeName()).isEqualTo("sqlite3.dbapi2.Connection");
+  }
+
+  @Test
+  public void stub_files_symbols() {
+    Set<Symbol> mathSymbols = TypeShed.symbolsForModule("math");
+    Set<Symbol> djangoHttpSymbols = TypeShed.symbolsForModule("django.http");
+
+    Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
+    assertThat(symbols)
+      .containsAll(mathSymbols)
+      .containsAll(djangoHttpSymbols);
   }
 }

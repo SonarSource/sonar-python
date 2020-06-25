@@ -44,8 +44,8 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.UNPACKING_EXPR;
 public class LdapAuthenticationCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> LDAP_OBJECT_SENSITIVE_METHODS = new HashSet<>(
-    Arrays.asList("ldap.ldapobject.LDAPObject.simple_bind", "ldap.ldapobject.LDAPObject.simple_bind_s", "ldap.ldapobject.LDAPObject.bind", "ldap.ldapobject.LDAPObject.bind_s")
-  );
+    Arrays.asList("ldap.ldapobject.SimpleLDAPObject.simple_bind", "ldap.ldapobject.SimpleLDAPObject.simple_bind_s",
+      "ldap.ldapobject.SimpleLDAPObject.bind", "ldap.ldapobject.SimpleLDAPObject.bind_s"));
 
   @Override
   public void initialize(Context context) {

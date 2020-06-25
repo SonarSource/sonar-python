@@ -45,7 +45,7 @@ public class RegexCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Make sure that using a regular expression is safe here.";
   private static final int REGEX_ARGUMENT = 0;
   private static final Set<String> questionableFunctions = new HashSet<>(Arrays.asList(
-    "django.core.validators.RegexValidator", "django.urls.re_path",
+    "django.core.validators.RegexValidator", "django.urls.conf.re_path",
     "re.compile", "re.match", "re.search", "re.fullmatch", "re.split", "re.findall", "re.finditer", "re.sub", "re.subn",
     "regex.compile", "regex.match", "regex.search", "regex.fullmatch", "regex.split", "regex.findall", "regex.finditer", "regex.sub", "regex.subn",
     "regex.subf", "regex.subfn", "regex.splititer"));
