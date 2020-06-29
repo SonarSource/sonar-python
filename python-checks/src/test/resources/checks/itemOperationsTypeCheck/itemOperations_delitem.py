@@ -85,7 +85,7 @@ def standard_library():
   del open("foo.py")[0]  # Noncompliant
 
   import os
-  del os.popen('ls')[0]  # Noncompliant
+  del os.popen('ls')[0]  # FN
 
   from array import array
   a = array('b', [0, 1, 2])
