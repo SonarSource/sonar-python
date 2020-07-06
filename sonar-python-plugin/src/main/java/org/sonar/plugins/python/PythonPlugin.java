@@ -31,10 +31,6 @@ import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
 import org.sonar.plugins.python.flake8.Flake8Sensor;
-import org.sonar.plugins.python.pylint.PylintConfiguration;
-import org.sonar.plugins.python.pylint.PylintImportSensor;
-import org.sonar.plugins.python.pylint.PylintRuleRepository;
-import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
@@ -79,7 +75,6 @@ public class PythonPlugin implements Plugin {
       context.addExtension(DefaultAnalysisWarningsWrapper.class);
       addCoberturaExtensions(context);
       addXUnitExtensions(context);
-      addPylintExtensions(context);
       addBanditExtensions(context);
       addFlake8Extensions(context);
     }
@@ -134,41 +129,6 @@ public class PythonPlugin implements Plugin {
         .defaultValue(PythonXUnitSensor.DEFAULT_REPORT_PATH)
         .build(),
       PythonXUnitSensor.class);
-  }
-
-  private static void addPylintExtensions(Context context) {
-    context.addExtensions(
-      PropertyDefinition.builder(PylintConfiguration.PYLINT_CONFIG_KEY)
-        .index(30)
-        .name("Pylint configuration")
-        .description("Path to the pylint configuration file to use in pylint analysis. Set to empty to use the default.")
-        .category(PYTHON_CATEGORY)
-        .subCategory(PYLINT)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue("")
-        .build(),
-      PropertyDefinition.builder(PylintConfiguration.PYLINT_KEY)
-        .index(31)
-        .name("Pylint executable")
-        .description("Path to the pylint executable to use in pylint analysis. Set to empty to use the default one.")
-        .category(PYTHON_CATEGORY)
-        .subCategory(PYLINT)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue("")
-        .build(),
-      PropertyDefinition.builder(PylintImportSensor.REPORT_PATH_KEY)
-        .index(32)
-        .name("Pylint's reports")
-        .description("Path to Pylint's report file, relative to projects root")
-        .category(PYTHON_CATEGORY)
-        .subCategory(PYLINT)
-        .onQualifiers(Qualifiers.PROJECT)
-        .defaultValue("")
-        .build(),
-      PylintConfiguration.class,
-      PylintSensor.class,
-      PylintImportSensor.class,
-      PylintRuleRepository.class);
   }
 
   private static void addBanditExtensions(Context context) {
