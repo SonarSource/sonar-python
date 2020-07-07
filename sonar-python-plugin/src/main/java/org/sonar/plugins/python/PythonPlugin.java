@@ -31,6 +31,8 @@ import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
 import org.sonar.plugins.python.flake8.Flake8RulesDefinition;
 import org.sonar.plugins.python.flake8.Flake8Sensor;
+import org.sonar.plugins.python.pylint.PylintRulesDefinition;
+import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonar.plugins.python.warnings.DefaultAnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
@@ -75,6 +77,7 @@ public class PythonPlugin implements Plugin {
       context.addExtension(DefaultAnalysisWarningsWrapper.class);
       addCoberturaExtensions(context);
       addXUnitExtensions(context);
+      addPylintExtensions(context);
       addBanditExtensions(context);
       addFlake8Extensions(context);
     }
@@ -146,6 +149,20 @@ public class PythonPlugin implements Plugin {
           .build(),
         BanditRulesDefinition.class);
     }
+  }
+
+  private static void addPylintExtensions(Context context) {
+    context.addExtension(PylintSensor.class);
+    context.addExtensions(
+      PropertyDefinition.builder(PylintSensor.REPORT_PATH_KEY)
+        .name("Pylint Report Files")
+        .description("Paths (absolute or relative) to report files with Pylint issues.")
+        .category(EXTERNAL_ANALYZERS_CATEGORY)
+        .subCategory(PYTHON_CATEGORY)
+        .onQualifiers(Qualifiers.PROJECT)
+        .multiValues(true)
+        .build(),
+      PylintRulesDefinition.class);
   }
 
   private static void addFlake8Extensions(Context context) {
