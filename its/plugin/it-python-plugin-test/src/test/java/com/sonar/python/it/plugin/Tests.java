@@ -50,7 +50,6 @@ import static org.assertj.core.api.Assertions.assertThat;
   MetricsTest.class,
   CPDTest.class,
   CoverageTest.class,
-  PylintReportTest.class,
   TestReportTest.class,
   NoSonarTest.class,
   SonarLintTest.class
