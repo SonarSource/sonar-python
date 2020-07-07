@@ -19,38 +19,19 @@
  */
 package org.sonar.plugins.python.flake8;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.python.TextReportReader;
 
-public class Flake8ReportReader {
+public class Flake8ReportReader extends TextReportReader {
 
   private static final Logger LOG = Loggers.get(Flake8ReportReader.class);
   private static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+) (.*)");
   private static final Pattern PYLINT_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
 
-  public List<Issue> parse(File report, FileSystem fileSystem) throws IOException {
-    List<Issue> issues = new ArrayList<>();
-    try (Scanner scanner = new Scanner(report.toPath(), fileSystem.encoding().name())) {
-      while (scanner.hasNextLine()) {
-        Issue issue = parseLine(scanner.nextLine());
-        if (issue != null) {
-          issues.add(issue);
-        }
-      }
-    }
-    return issues;
-  }
-
-  private static Issue parseLine(String line) {
+  protected Issue parseLine(String line) {
 
     if (line.length() > 0) {
       if (!startsWithWhitespace(line)) {
@@ -77,31 +58,5 @@ public class Flake8ReportReader {
       }
     }
     return null;
-  }
-
-  private static boolean startsWithWhitespace(String line) {
-    char first = line.charAt(0);
-    return first == ' ' || first == '\t' || first == '\n';
-  }
-
-  public static class Issue {
-
-    String filePath;
-
-    String ruleKey;
-
-    String message;
-
-    Integer lineNumber;
-
-    Integer columnNumber;
-
-    public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber) {
-      this.filePath = filePath;
-      this.ruleKey = ruleKey;
-      this.message = message;
-      this.lineNumber = lineNumber;
-      this.columnNumber = columnNumber;
-    }
   }
 }

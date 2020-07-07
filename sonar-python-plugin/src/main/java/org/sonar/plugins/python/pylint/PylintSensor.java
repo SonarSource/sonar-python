@@ -32,6 +32,7 @@ import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
+import org.sonar.plugins.python.TextReportReader.Issue;
 
 public class PylintSensor extends ExternalIssuesSensor {
 
@@ -46,7 +47,7 @@ public class PylintSensor extends ExternalIssuesSensor {
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) {
     try {
-      List<PylintReportReader.Issue> issues = new PylintReportReader().parse(reportPath, context.fileSystem());
+      List<Issue> issues = new PylintReportReader().parse(reportPath, context.fileSystem());
       issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles));
     } catch (IOException e) {
       LOG.error("No issues information will be saved as the report file '{}' can't be read. " +
@@ -54,7 +55,7 @@ public class PylintSensor extends ExternalIssuesSensor {
     }
   }
 
-  private static void saveIssue(SensorContext context, PylintReportReader.Issue issue, Set<String> unresolvedInputFiles) {
+  private static void saveIssue(SensorContext context, Issue issue, Set<String> unresolvedInputFiles) {
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasPath(issue.filePath));
     if (inputFile == null) {
       unresolvedInputFiles.add(issue.filePath);
