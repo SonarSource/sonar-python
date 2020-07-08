@@ -24,6 +24,11 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.rule.Severity;
+import org.sonar.api.batch.sensor.issue.NewExternalIssue;
+import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.log.Logger;
 import java.util.stream.Collectors;
 import org.sonar.api.batch.sensor.Sensor;
@@ -34,6 +39,7 @@ import org.sonarsource.analyzer.commons.ExternalReportProvider;
 public abstract class ExternalIssuesSensor implements Sensor {
 
   private static final int MAX_LOGGED_FILE_NAMES = 20;
+  private static final Long DEFAULT_CONSTANT_DEBT_MINUTES = 5L;
 
   @Override
   public void describe(SensorDescriptor descriptor) {
@@ -60,6 +66,34 @@ public abstract class ExternalIssuesSensor implements Sensor {
       fileList += ";...";
     }
     logger().warn("Failed to resolve {} file path(s) in " + linterName() + " report. No issues imported related to file(s): {}", unresolvedInputFiles.size(), fileList);
+  }
+
+  protected void saveIssue(SensorContext context, TextReportReader.Issue issue, Set<String> unresolvedInputFiles, String linterKey) {
+    InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasPath(issue.filePath));
+    if (inputFile == null) {
+      unresolvedInputFiles.add(issue.filePath);
+      return;
+    }
+
+    NewExternalIssue newExternalIssue = context.newExternalIssue();
+    newExternalIssue
+      .type(RuleType.CODE_SMELL)
+      .severity(Severity.MAJOR)
+      .remediationEffortMinutes(DEFAULT_CONSTANT_DEBT_MINUTES);
+
+    NewIssueLocation primaryLocation = newExternalIssue.newLocation()
+      .message(issue.message)
+      .on(inputFile);
+    if (issue.columnNumber != null && issue.columnNumber < inputFile.selectLine(issue.lineNumber).end().lineOffset()) {
+      primaryLocation.at(inputFile.newRange(issue.lineNumber, issue.columnNumber, issue.lineNumber, issue.columnNumber + 1));
+    } else {
+      // Pylint formatted issues might not provide column information
+      primaryLocation.at(inputFile.selectLine(issue.lineNumber));
+    }
+
+    newExternalIssue.at(primaryLocation);
+    newExternalIssue.engineId(linterKey).ruleId(issue.ruleKey);
+    newExternalIssue.save();
   }
 
   protected abstract void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles);

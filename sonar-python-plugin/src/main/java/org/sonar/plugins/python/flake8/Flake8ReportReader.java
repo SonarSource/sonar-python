@@ -40,6 +40,8 @@ public class Flake8ReportReader extends TextReportReader {
           String filePath = m.group(1);
           int lineNumber = Integer.parseInt(m.group(2));
           int columnNumber = Integer.parseInt(m.group(3));
+          // Flake8 issues are off by 1 compared to SQ conventions
+          columnNumber -= 1;
           String ruleKey = m.group(4);
           String message = m.group(5);
           return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);

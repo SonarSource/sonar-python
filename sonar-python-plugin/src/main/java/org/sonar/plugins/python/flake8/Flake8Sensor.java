@@ -23,12 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.issue.NewExternalIssue;
-import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
@@ -42,46 +37,15 @@ public class Flake8Sensor extends ExternalIssuesSensor {
   public static final String LINTER_KEY = "flake8";
   public static final String REPORT_PATH_KEY = "sonar.python.flake8.reportPaths";
 
-  private static final Long DEFAULT_CONSTANT_DEBT_MINUTES = 5L;
-
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) {
     try {
       List<Issue> issues = new Flake8ReportReader().parse(reportPath, context.fileSystem());
-      issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles));
+      issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
     } catch (IOException e) {
       LOG.error("No issues information will be saved as the report file '{}' can't be read. " +
         e.getClass().getSimpleName() + ": " + e.getMessage(), reportPath, e);
     }
-  }
-
-  private static void saveIssue(SensorContext context, Issue issue, Set<String> unresolvedInputFiles) {
-    InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasPath(issue.filePath));
-    if (inputFile == null) {
-      unresolvedInputFiles.add(issue.filePath);
-      return;
-    }
-
-    NewExternalIssue newExternalIssue = context.newExternalIssue();
-    newExternalIssue
-      .type(RuleType.CODE_SMELL)
-      .severity(Severity.MAJOR)
-      .remediationEffortMinutes(DEFAULT_CONSTANT_DEBT_MINUTES);
-
-    NewIssueLocation primaryLocation = newExternalIssue.newLocation()
-      .message(issue.message)
-      .on(inputFile);
-    if (issue.columnNumber != null && issue.columnNumber < inputFile.selectLine(issue.lineNumber).end().lineOffset() + 1) {
-      inputFile.selectLine(issue.lineNumber).end().lineOffset();
-      primaryLocation.at(inputFile.newRange(issue.lineNumber, issue.columnNumber - 1, issue.lineNumber, issue.columnNumber));
-    } else {
-      // Pylint formatted issues don't provide column information
-      primaryLocation.at(inputFile.selectLine(issue.lineNumber));
-    }
-
-    newExternalIssue.at(primaryLocation);
-    newExternalIssue.engineId(LINTER_KEY).ruleId(issue.ruleKey);
-    newExternalIssue.save();
   }
 
   @Override
