@@ -35,32 +35,28 @@ public class PylintReportReader extends TextReportReader {
   protected Issue parseLine(String line) {
 
     if (line.length() > 0) {
-      if (!startsWithWhitespace(line)) {
-        Matcher m = PYLINT_DEFAULT.matcher(line);
-        if (m.matches()) {
-          String filePath = m.group(1);
-          int lineNumber = Integer.parseInt(m.group(2));
-          int columnNumber = Integer.parseInt(m.group(3));
-          String ruleKey = m.group(4);
-          String message = m.group(5);
-          return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
-        }
-        m = PATTERN_LEGACY.matcher(line);
-        if (m.matches()) {
-          String filePath = m.group(1);
-          int lineNumber = Integer.parseInt(m.group(2));
-          String ruleKey = m.group(3);
-          int lastIndex = Math.min(ruleKey.indexOf(","), ruleKey.indexOf("("));
-          if (lastIndex > 0) {
-            ruleKey = ruleKey.substring(0, lastIndex);
-          }
-          String message = m.group(4);
-          return new Issue(filePath, ruleKey, message, lineNumber, null);
-        }
-        LOG.debug("Cannot parse the line: {}", line);
-      } else {
-        LOG.debug("Classifying as detail and ignoring line '{}'", line);
+      Matcher m = PYLINT_DEFAULT.matcher(line);
+      if (m.matches()) {
+        String filePath = m.group(1);
+        int lineNumber = Integer.parseInt(m.group(2));
+        int columnNumber = Integer.parseInt(m.group(3));
+        String ruleKey = m.group(4);
+        String message = m.group(5);
+        return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
       }
+      m = PATTERN_LEGACY.matcher(line);
+      if (m.matches()) {
+        String filePath = m.group(1);
+        int lineNumber = Integer.parseInt(m.group(2));
+        String ruleKey = m.group(3);
+        int lastIndex = Math.min(ruleKey.indexOf(","), ruleKey.indexOf("("));
+        if (lastIndex > 0) {
+          ruleKey = ruleKey.substring(0, lastIndex);
+        }
+        String message = m.group(4);
+        return new Issue(filePath, ruleKey, message, lineNumber, null);
+      }
+      LOG.debug("Cannot parse the line: {}", line);
     }
     return null;
   }

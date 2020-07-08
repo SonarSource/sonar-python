@@ -34,30 +34,26 @@ public class Flake8ReportReader extends TextReportReader {
   protected Issue parseLine(String line) {
 
     if (line.length() > 0) {
-      if (!startsWithWhitespace(line)) {
-        Matcher m = DEFAULT_PATTERN.matcher(line);
-        if (m.matches()) {
-          String filePath = m.group(1);
-          int lineNumber = Integer.parseInt(m.group(2));
-          int columnNumber = Integer.parseInt(m.group(3));
-          // Flake8 issues are off by 1 compared to SQ conventions
-          columnNumber -= 1;
-          String ruleKey = m.group(4);
-          String message = m.group(5);
-          return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
-        }
-        m = PYLINT_PATTERN.matcher(line);
-        if (m.matches()) {
-          String filePath = m.group(1);
-          int lineNumber = Integer.parseInt(m.group(2));
-          String ruleKey = m.group(3);
-          String message = m.group(4);
-          return new Issue(filePath, ruleKey, message, lineNumber, null);
-        }
-        LOG.debug("Cannot parse the line: {}", line);
-      } else {
-        LOG.debug("Classifying as detail and ignoring line '{}'", line);
+      Matcher m = DEFAULT_PATTERN.matcher(line);
+      if (m.matches()) {
+        String filePath = m.group(1);
+        int lineNumber = Integer.parseInt(m.group(2));
+        int columnNumber = Integer.parseInt(m.group(3));
+        // Flake8 issues are off by 1 compared to SQ conventions
+        columnNumber -= 1;
+        String ruleKey = m.group(4);
+        String message = m.group(5);
+        return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
       }
+      m = PYLINT_PATTERN.matcher(line);
+      if (m.matches()) {
+        String filePath = m.group(1);
+        int lineNumber = Integer.parseInt(m.group(2));
+        String ruleKey = m.group(3);
+        String message = m.group(4);
+        return new Issue(filePath, ruleKey, message, lineNumber, null);
+      }
+      LOG.debug("Cannot parse the line: {}", line);
     }
     return null;
   }

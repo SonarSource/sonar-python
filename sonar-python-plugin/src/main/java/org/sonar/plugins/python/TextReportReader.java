@@ -44,11 +44,6 @@ public abstract class TextReportReader {
 
   protected abstract Issue parseLine(String line);
 
-  protected static boolean startsWithWhitespace(String line) {
-    char first = line.charAt(0);
-    return first == ' ' || first == '\t' || first == '\n';
-  }
-
   public static class Issue {
 
     public final String filePath;
