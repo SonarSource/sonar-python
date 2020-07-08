@@ -38,14 +38,9 @@ public class Flake8Sensor extends ExternalIssuesSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.flake8.reportPaths";
 
   @Override
-  protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) {
-    try {
-      List<Issue> issues = new Flake8ReportReader().parse(reportPath, context.fileSystem());
-      issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
-    } catch (IOException e) {
-      LOG.error("No issues information will be saved as the report file '{}' can't be read. " +
-        e.getClass().getSimpleName() + ": " + e.getMessage(), reportPath, e);
-    }
+  protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
+    List<Issue> issues = new Flake8ReportReader().parse(reportPath, context.fileSystem());
+    issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
   }
 
   @Override

@@ -21,20 +21,22 @@ package org.sonar.plugins.python;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.Severity;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewExternalIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.log.Logger;
-import java.util.stream.Collectors;
-import org.sonar.api.batch.sensor.Sensor;
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonarsource.analyzer.commons.ExternalReportProvider;
+import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
 public abstract class ExternalIssuesSensor implements Sensor {
 
@@ -53,8 +55,16 @@ public abstract class ExternalIssuesSensor implements Sensor {
   public void execute(SensorContext context) {
     Set<String> unresolvedInputFiles = new HashSet<>();
     List<File> reportFiles = ExternalReportProvider.getReportFiles(context, reportPathKey());
-    reportFiles.forEach(report -> importReport(report, context, unresolvedInputFiles));
+    reportFiles.forEach(report -> importExternalReport(report, context, unresolvedInputFiles));
     logUnresolvedInputFiles(unresolvedInputFiles);
+  }
+
+  private void importExternalReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) {
+    try {
+      importReport(reportPath, context, unresolvedInputFiles);
+    } catch (IOException | ParseException | RuntimeException e) {
+      logFileCantBeRead(e, reportPath);
+    }
   }
 
   private void logUnresolvedInputFiles(Set<String> unresolvedInputFiles) {
@@ -66,6 +76,11 @@ public abstract class ExternalIssuesSensor implements Sensor {
       fileList += ";...";
     }
     logger().warn("Failed to resolve {} file path(s) in " + linterName() + " report. No issues imported related to file(s): {}", unresolvedInputFiles.size(), fileList);
+  }
+
+  private void logFileCantBeRead(Exception e, File reportPath) {
+    logger().error("No issues information will be saved as the report file '{}' can't be read. " +
+      e.getClass().getSimpleName() + ": " + e.getMessage(), reportPath, e);
   }
 
   protected void saveIssue(SensorContext context, TextReportReader.Issue issue, Set<String> unresolvedInputFiles, String linterKey) {
@@ -96,7 +111,7 @@ public abstract class ExternalIssuesSensor implements Sensor {
     newExternalIssue.save();
   }
 
-  protected abstract void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles);
+  protected abstract void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException, ParseException;
 
   protected abstract String linterName();
 
