@@ -36,38 +36,46 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PylintReportTest {
 
   private static final String PROJECT = "pylint_project";
+  private static final String DEFAULT_PROPERTY = "sonar.python.pylint.reportPaths";
+  private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
   public void import_report() {
-    analyseProjectWithReport("pylint-report.txt");
+    analyseProjectWithReport(DEFAULT_PROPERTY, "pylint-report.txt");
+    assertThat(issues()).hasSize(4);
+  }
+
+  @Test
+  public void import_report_legacy_key() {
+    analyseProjectWithReport(LEGACY_PROPERTY, "pylint-report.txt");
     assertThat(issues()).hasSize(4);
   }
 
   @Test
   public void missing_report() {
-    analyseProjectWithReport("missing");
+    analyseProjectWithReport(DEFAULT_PROPERTY, "missing");
     assertThat(issues()).isEmpty();
   }
 
   @Test
   public void invalid_report() {
-    BuildResult result = analyseProjectWithReport("invalid.txt");
+    BuildResult result = analyseProjectWithReport(DEFAULT_PROPERTY, "invalid.txt");
     assertThat(result.getLogs()).contains("Cannot parse the line: trash");
     assertThat(issues()).isEmpty();
   }
 
   @Test
   public void unknown_rule() {
-    BuildResult result = analyseProjectWithReport("rule-unknown.txt");
+    BuildResult result = analyseProjectWithReport(DEFAULT_PROPERTY, "rule-unknown.txt");
     assertThat(issues()).hasSize(4);
   }
 
   @Test
   public void multiple_reports() {
-    analyseProjectWithReport("pylint-report.txt, rule-unknown.txt");
+    analyseProjectWithReport(DEFAULT_PROPERTY, "pylint-report.txt, rule-unknown.txt");
     assertThat(issues()).hasSize(8);
   }
 
@@ -75,7 +83,7 @@ public class PylintReportTest {
     return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(PROJECT))).getIssuesList();
   }
 
-  private static BuildResult analyseProjectWithReport(String reportPaths) {
+  private static BuildResult analyseProjectWithReport(String property, String reportPaths) {
     ORCHESTRATOR.resetData();
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
@@ -84,7 +92,7 @@ public class PylintReportTest {
       SonarScanner.create()
         .setDebugLogs(true)
         .setProjectDir(new File("projects/pylint_project"))
-        .setProperty("sonar.python.pylint.reportPaths", reportPaths));
+        .setProperty(property, reportPaths));
   }
 
 }

@@ -29,6 +29,7 @@ import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewExternalIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
@@ -57,6 +58,7 @@ public class BanditSensor extends ExternalIssuesSensor {
     boolean engineIdIsSupported = context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(7, 4));
     BanditJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles, engineIdIsSupported));
   }
+
 
   private static void saveIssue(SensorContext context, Issue issue, Set<String> unresolvedInputFiles, boolean engineIdIsSupported) {
     if (isEmpty(issue.ruleKey) || isEmpty(issue.filePath) || isEmpty(issue.message)) {
@@ -104,6 +106,11 @@ public class BanditSensor extends ExternalIssuesSensor {
     } else {
       return Severity.MINOR;
     }
+  }
+
+  @Override
+  protected boolean shouldExecute(Configuration conf) {
+    return conf.hasKey(REPORT_PATH_KEY);
   }
 
   @Override
