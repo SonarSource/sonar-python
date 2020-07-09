@@ -40,7 +40,7 @@ public class PylintSensor extends ExternalIssuesSensor {
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
-    List<Issue> issues = new TextReportReader(0).parse(reportPath, context.fileSystem());
+    List<Issue> issues = new TextReportReader(TextReportReader.COLUMN_ZERO_BASED).parse(reportPath, context.fileSystem());
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
   }
 

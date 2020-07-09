@@ -36,10 +36,13 @@ import org.sonar.api.utils.log.Loggers;
  */
 public class TextReportReader {
 
-  private final int reportOffset;
   protected static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+[^:]):? (.*)");
   protected static final Pattern LEGACY_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
   private static final Logger LOG = Loggers.get(TextReportReader.class);
+  public static final int COLUMN_ZERO_BASED = 0;
+  public static final int COLUMN_ONE_BASED = 1;
+
+  private final int reportOffset;
 
   public TextReportReader(int columnStartIndex) {
     this.reportOffset = columnStartIndex;

@@ -40,7 +40,7 @@ public class Flake8Sensor extends ExternalIssuesSensor {
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
-    List<Issue> issues = new TextReportReader(1).parse(reportPath, context.fileSystem());
+    List<Issue> issues = new TextReportReader(TextReportReader.COLUMN_ONE_BASED).parse(reportPath, context.fileSystem());
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
   }
 
