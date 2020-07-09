@@ -27,6 +27,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
+import org.sonar.plugins.python.TextReportReader;
 import org.sonar.plugins.python.TextReportReader.Issue;
 
 public class PylintSensor extends ExternalIssuesSensor {
@@ -39,18 +40,18 @@ public class PylintSensor extends ExternalIssuesSensor {
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
-    List<Issue> issues = new PylintReportReader().parse(reportPath, context.fileSystem());
+    List<Issue> issues = new TextReportReader(0).parse(reportPath, context.fileSystem());
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
-  }
-
-  @Override
-  protected String linterName() {
-    return LINTER_NAME;
   }
 
   @Override
   protected String reportPathKey() {
     return REPORT_PATH_KEY;
+  }
+
+  @Override
+  protected String linterName() {
+    return LINTER_NAME;
   }
 
   @Override

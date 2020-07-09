@@ -79,8 +79,8 @@ public abstract class ExternalIssuesSensor implements Sensor {
   }
 
   private void logFileCantBeRead(Exception e, File reportPath) {
-    logger().error("No issues information will be saved as the report file '{}' can't be read. " +
-      e.getClass().getSimpleName() + ": " + e.getMessage(), reportPath, e);
+    logger().error("No issues information will be saved as the report file '{}' can't be read. {}: {}"
+      , reportPath, e.getClass().getSimpleName(), e.getMessage());
   }
 
   protected void saveIssue(SensorContext context, TextReportReader.Issue issue, Set<String> unresolvedInputFiles, String linterKey) {

@@ -27,6 +27,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
+import org.sonar.plugins.python.TextReportReader;
 import org.sonar.plugins.python.TextReportReader.Issue;
 
 public class Flake8Sensor extends ExternalIssuesSensor {
@@ -39,7 +40,7 @@ public class Flake8Sensor extends ExternalIssuesSensor {
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
-    List<Issue> issues = new Flake8ReportReader().parse(reportPath, context.fileSystem());
+    List<Issue> issues = new TextReportReader(1).parse(reportPath, context.fileSystem());
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
   }
 

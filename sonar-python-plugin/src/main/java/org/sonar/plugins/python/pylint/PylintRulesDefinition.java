@@ -26,7 +26,6 @@ import org.sonarsource.analyzer.commons.ExternalRuleLoader;
 public class PylintRulesDefinition implements RulesDefinition {
 
   private static final String RULES_JSON = "org/sonar/plugins/python/pylint/rules.json";
-
   private static final ExternalRuleLoader RULE_LOADER = new ExternalRuleLoader(PylintSensor.LINTER_KEY, PylintSensor.LINTER_NAME, RULES_JSON, Python.KEY);
 
 

@@ -24,10 +24,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
-public abstract class TextReportReader {
+/**
+ * Common implementation to parse Flake8 and Pylint reports
+ */
+public class TextReportReader {
+
+  private final int reportOffset;
+  protected static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+[^:]):? (.*)");
+  protected static final Pattern LEGACY_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
+  private static final Logger LOG = Loggers.get(TextReportReader.class);
+
+  public TextReportReader(int columnStartIndex) {
+    this.reportOffset = columnStartIndex;
+  }
 
   public List<Issue> parse(File report, FileSystem fileSystem) throws IOException {
     List<Issue> issues = new ArrayList<>();
@@ -42,7 +58,43 @@ public abstract class TextReportReader {
     return issues;
   }
 
-  protected abstract Issue parseLine(String line);
+  private Issue parseLine(String line) {
+    if (line.length() > 0) {
+      Matcher m = TextReportReader.DEFAULT_PATTERN.matcher(line);
+      if (m.matches()) {
+        return extractDefaultStyleIssue(m, reportOffset);
+      }
+      m = TextReportReader.LEGACY_PATTERN.matcher(line);
+      if (m.matches()) {
+        return extractLegacyStyleIssue(m);
+      }
+      LOG.debug("Cannot parse the line: {}", line);
+    }
+    return null;
+  }
+
+  private static Issue extractDefaultStyleIssue(Matcher m, int columnOffset) {
+    String filePath = m.group(1);
+    int lineNumber = Integer.parseInt(m.group(2));
+    int columnNumber = Integer.parseInt(m.group(3));
+    // Flake8 column numbering starts at 1
+    columnNumber -= columnOffset;
+    String ruleKey = m.group(4);
+    String message = m.group(5);
+    return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
+  }
+
+  private static Issue extractLegacyStyleIssue(Matcher m) {
+    String filePath = m.group(1);
+    int lineNumber = Integer.parseInt(m.group(2));
+    String ruleKey = m.group(3);
+    int lastIndex = Math.min(ruleKey.indexOf(","), ruleKey.indexOf("("));
+    if (lastIndex > 0) {
+      ruleKey = ruleKey.substring(0, lastIndex);
+    }
+    String message = m.group(4);
+    return new Issue(filePath, ruleKey, message, lineNumber, null);
+  }
 
   public static class Issue {
 
