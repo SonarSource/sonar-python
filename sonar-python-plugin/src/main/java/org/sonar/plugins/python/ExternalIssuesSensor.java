@@ -33,8 +33,10 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewExternalIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.log.Logger;
+import org.sonar.plugins.python.pylint.PylintSensor;
 import org.sonarsource.analyzer.commons.ExternalReportProvider;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
@@ -42,19 +44,30 @@ public abstract class ExternalIssuesSensor implements Sensor {
 
   private static final int MAX_LOGGED_FILE_NAMES = 20;
   private static final Long DEFAULT_CONSTANT_DEBT_MINUTES = 5L;
+  private static final String PYLINT_LEGACY_KEY = "sonar.python.pylint.reportPath";
 
   @Override
   public void describe(SensorDescriptor descriptor) {
     descriptor
-      .onlyWhenConfiguration(conf -> conf.hasKey(reportPathKey()))
+      .onlyWhenConfiguration(conf -> conf.hasKey(reportPathKey()) || hasPylintLegacyConfig(conf))
       .onlyOnLanguage(Python.KEY)
       .name("Import of " + linterName() + " issues");
+  }
+
+  private boolean hasPylintLegacyConfig(Configuration conf) {
+    // Only for PylintSensor
+    return reportPathKey().equals(PylintSensor.REPORT_PATH_KEY) &&
+      conf.hasKey(PYLINT_LEGACY_KEY);
   }
 
   @Override
   public void execute(SensorContext context) {
     Set<String> unresolvedInputFiles = new HashSet<>();
     List<File> reportFiles = ExternalReportProvider.getReportFiles(context, reportPathKey());
+    if (reportFiles.isEmpty() && context.config().hasKey(PYLINT_LEGACY_KEY)) {
+      reportFiles = ExternalReportProvider.getReportFiles(context, PYLINT_LEGACY_KEY);
+      logger().warn("The use of '{}' is deprecated. Please use the '{}' property instead.", PYLINT_LEGACY_KEY, PylintSensor.REPORT_PATH_KEY);
+    }
     reportFiles.forEach(report -> importExternalReport(report, context, unresolvedInputFiles));
     logUnresolvedInputFiles(unresolvedInputFiles);
   }

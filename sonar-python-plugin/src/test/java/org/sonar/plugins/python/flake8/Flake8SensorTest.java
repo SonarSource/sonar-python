@@ -53,6 +53,7 @@ public class Flake8SensorTest {
   private static final String FLAKE8_FILE = "python-project:flake8/file1.py";
   private static final String FLAKE8_F401 = "external_flake8:F401";
   private static final String FLAKE_8_REPORT = "flake8-report.txt";
+  private static final String FLAKE_8_PROPERTY = "sonar.python.flake8.reportPaths";
   private static final String FLAKE_8_REPORT_UNKNOWN_FILES = "flake8-report-unknown-files.txt";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "flake8");
@@ -70,6 +71,16 @@ public class Flake8SensorTest {
     assertThat(sensorDescriptor.languages()).containsOnly("py");
     assertThat(sensorDescriptor.configurationPredicate()).isNotNull();
     assertNoErrorWarnDebugLogs(logTester);
+
+    Path baseDir = PROJECT_DIR.getParent();
+    SensorContextTester context = SensorContextTester.create(baseDir);
+    context.settings().setProperty(FLAKE_8_PROPERTY, "path/to/report");
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isTrue();
+
+    context = SensorContextTester.create(baseDir);
+    context.settings().setProperty("sonar.python.flake8.reportPath", "path/to/report");
+    // No support of "reportPath" property for Flake8
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isFalse();
   }
 
   @Test
