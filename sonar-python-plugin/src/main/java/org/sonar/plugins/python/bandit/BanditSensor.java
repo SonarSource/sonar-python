@@ -51,15 +51,11 @@ public class BanditSensor extends ExternalIssuesSensor {
   private static final Long DEFAULT_CONSTANT_DEBT_MINUTES = 5L;
 
   @Override
-  protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) {
-    try (InputStream in = new FileInputStream(reportPath)) {
-      LOG.info("Importing {}", reportPath);
-      boolean engineIdIsSupported = context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(7, 4));
-      BanditJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles, engineIdIsSupported));
-    } catch (IOException | ParseException | RuntimeException e) {
-      LOG.error("No issues information will be saved as the report file '{}' can't be read. " +
-        e.getClass().getSimpleName() + ": " + e.getMessage(), reportPath, e);
-    }
+  protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException, ParseException {
+    InputStream in = new FileInputStream(reportPath);
+    LOG.info("Importing {}", reportPath);
+    boolean engineIdIsSupported = context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(7, 4));
+    BanditJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles, engineIdIsSupported));
   }
 
   private static void saveIssue(SensorContext context, Issue issue, Set<String> unresolvedInputFiles, boolean engineIdIsSupported) {

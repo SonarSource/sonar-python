@@ -49,38 +49,42 @@ public class PylintReportTest {
   @Test
   public void missing_report() {
     analyseProjectWithReport("missing");
-    assertThat(issues()).hasSize(0);
+    assertThat(issues()).isEmpty();
   }
 
   @Test
   public void invalid_report() {
     BuildResult result = analyseProjectWithReport("invalid.txt");
     assertThat(result.getLogs()).contains("Cannot parse the line: trash");
-    assertThat(issues()).hasSize(0);
+    assertThat(issues()).isEmpty();
   }
 
   @Test
   public void unknown_rule() {
     BuildResult result = analyseProjectWithReport("rule-unknown.txt");
-    assertThat(result.getLogs()).doesNotContain("Pylint rule 'C0102' is unknown");
-    assertThat(result.getLogs()).containsOnlyOnce("Pylint rule 'C8888' is unknown");
-    assertThat(result.getLogs()).containsOnlyOnce("Pylint rule 'C9999' is unknown");
-    assertThat(issues()).hasSize(0);
+    assertThat(issues()).hasSize(4);
+  }
+
+  @Test
+  public void multiple_reports() {
+    analyseProjectWithReport("pylint-report.txt, rule-unknown.txt");
+    assertThat(issues()).hasSize(8);
   }
 
   private static List<Issue> issues() {
     return newWsClient().issues().search(new SearchRequest().setProjects(singletonList(PROJECT))).getIssuesList();
   }
 
-  private static BuildResult analyseProjectWithReport(String reportPath) {
+  private static BuildResult analyseProjectWithReport(String reportPaths) {
     ORCHESTRATOR.resetData();
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
-    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "pylint-rules");
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
+
     return ORCHESTRATOR.executeBuild(
       SonarScanner.create()
         .setDebugLogs(true)
         .setProjectDir(new File("projects/pylint_project"))
-        .setProperty("sonar.python.pylint.reportPath", reportPath));
+        .setProperty("sonar.python.pylint.reportPaths", reportPaths));
   }
 
 }

@@ -1,0 +1,122 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2020 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.plugins.python;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.annotation.Nullable;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
+/**
+ * Common implementation to parse Flake8 and Pylint reports
+ */
+public class TextReportReader {
+
+  protected static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+[^:]):? (.*)");
+  protected static final Pattern LEGACY_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
+  private static final Logger LOG = Loggers.get(TextReportReader.class);
+  public static final int COLUMN_ZERO_BASED = 0;
+  public static final int COLUMN_ONE_BASED = 1;
+
+  private final int reportOffset;
+
+  public TextReportReader(int columnStartIndex) {
+    this.reportOffset = columnStartIndex;
+  }
+
+  public List<Issue> parse(File report, FileSystem fileSystem) throws IOException {
+    List<Issue> issues = new ArrayList<>();
+    try (Scanner scanner = new Scanner(report.toPath(), fileSystem.encoding().name())) {
+      while (scanner.hasNextLine()) {
+        Issue issue = parseLine(scanner.nextLine());
+        if (issue != null) {
+          issues.add(issue);
+        }
+      }
+    }
+    return issues;
+  }
+
+  private Issue parseLine(String line) {
+    if (line.length() > 0) {
+      Matcher m = TextReportReader.DEFAULT_PATTERN.matcher(line);
+      if (m.matches()) {
+        return extractDefaultStyleIssue(m, reportOffset);
+      }
+      m = TextReportReader.LEGACY_PATTERN.matcher(line);
+      if (m.matches()) {
+        return extractLegacyStyleIssue(m);
+      }
+      LOG.debug("Cannot parse the line: {}", line);
+    }
+    return null;
+  }
+
+  private static Issue extractDefaultStyleIssue(Matcher m, int columnOffset) {
+    String filePath = m.group(1);
+    int lineNumber = Integer.parseInt(m.group(2));
+    int columnNumber = Integer.parseInt(m.group(3));
+    // Flake8 column numbering starts at 1
+    columnNumber -= columnOffset;
+    String ruleKey = m.group(4);
+    String message = m.group(5);
+    return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
+  }
+
+  private static Issue extractLegacyStyleIssue(Matcher m) {
+    String filePath = m.group(1);
+    int lineNumber = Integer.parseInt(m.group(2));
+    String ruleKey = m.group(3);
+    int lastIndex = Math.min(ruleKey.indexOf(","), ruleKey.indexOf("("));
+    if (lastIndex > 0) {
+      ruleKey = ruleKey.substring(0, lastIndex);
+    }
+    String message = m.group(4);
+    return new Issue(filePath, ruleKey, message, lineNumber, null);
+  }
+
+  public static class Issue {
+
+    public final String filePath;
+
+    public final String ruleKey;
+
+    public final String message;
+
+    public final Integer lineNumber;
+
+    public final Integer columnNumber;
+
+    public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber) {
+      this.filePath = filePath;
+      this.ruleKey = ruleKey;
+      this.message = message;
+      this.lineNumber = lineNumber;
+      this.columnNumber = columnNumber;
+    }
+  }
+}
