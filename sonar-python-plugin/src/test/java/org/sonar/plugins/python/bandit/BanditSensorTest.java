@@ -52,6 +52,7 @@ public class BanditSensorTest {
 
   private static final String BANDIT_FILE = "python-project:bandit/file1.py";
   private static final String BANDIT_B413 = "external_bandit:B413";
+  private static final String BANDIT_PROPERTY = "sonar.python.bandit.reportPaths";
   private static final String BANDIT_REPORT_JSON = "bandit-report.json";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "bandit");
@@ -69,6 +70,16 @@ public class BanditSensorTest {
     assertThat(sensorDescriptor.languages()).containsOnly("py");
     assertThat(sensorDescriptor.configurationPredicate()).isNotNull();
     assertNoErrorWarnDebugLogs(logTester);
+
+    Path baseDir = PROJECT_DIR.getParent();
+    SensorContextTester context = SensorContextTester.create(baseDir);
+    context.settings().setProperty(BANDIT_PROPERTY, "path/to/report");
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isTrue();
+
+    context = SensorContextTester.create(baseDir);
+    context.settings().setProperty("sonar.python.bandit.reportPath", "path/to/report");
+    // No support of "reportPath" property for Bandit
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isFalse();
   }
 
 

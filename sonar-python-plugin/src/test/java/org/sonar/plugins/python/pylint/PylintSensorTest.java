@@ -53,6 +53,8 @@ public class PylintSensorTest {
   private static final String PYLINT_FILE = "python-project:pylint/file1.py";
   private static final String PYLINT_REPORT_DEFAULT_FORMAT = "pylint_report_default_format.txt";
   private static final String PYLINT_REPORT_NO_COLUMN = "pylint_report_no_column.txt";
+  private static final String DEFAULT_PROPERTY = "sonar.python.pylint.reportPaths";
+  private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "pylint");
 
@@ -69,11 +71,25 @@ public class PylintSensorTest {
     assertThat(sensorDescriptor.languages()).containsOnly("py");
     assertThat(sensorDescriptor.configurationPredicate()).isNotNull();
     assertNoErrorWarnLogs(logTester);
+
+    Path baseDir = PROJECT_DIR.getParent();
+    SensorContextTester context = SensorContextTester.create(baseDir);
+    context.settings().setProperty(DEFAULT_PROPERTY, "path/to/report");
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isTrue();
+
+    context = SensorContextTester.create(baseDir);
+    context.settings().setProperty(LEGACY_PROPERTY, "path/to/report");
+    // Support of legacy "reportPath" property for Pylint
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isTrue();
+
+    context = SensorContextTester.create(baseDir);
+    context.settings().setProperty("random.key", "path/to/report");
+    assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isFalse();
   }
 
   @Test
   public void issues_default_format() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, PYLINT_REPORT_DEFAULT_FORMAT);
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, PYLINT_REPORT_DEFAULT_FORMAT, false);
     assertThat(externalIssues).hasSize(10);
 
     ExternalIssue first = externalIssues.get(0);
@@ -106,7 +122,7 @@ public class PylintSensorTest {
 
   @Test
   public void issues_no_column_info() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, PYLINT_REPORT_NO_COLUMN);
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, PYLINT_REPORT_NO_COLUMN, false);
     assertThat(externalIssues).hasSize(3);
 
     ExternalIssue first = externalIssues.get(0);
@@ -153,7 +169,7 @@ public class PylintSensorTest {
 
   @Test
   public void issues_other_formats() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_brackets.txt");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_brackets.txt", false);
     assertThat(externalIssues).hasSize(10);
     ExternalIssue first = externalIssues.get(0);
     assertThat(first.ruleKey()).hasToString("external_pylint:E1300");
@@ -164,7 +180,7 @@ public class PylintSensorTest {
     assertThat(firstPrimaryLoc.message())
       .isEqualTo("message");
 
-    externalIssues = executeSensorImporting(7, 9, "pylint_names_in_brackets.txt");
+    externalIssues = executeSensorImporting(7, 9, "pylint_names_in_brackets.txt", false);
     assertThat(externalIssues).hasSize(1);
     first = externalIssues.get(0);
     assertThat(first.ruleKey()).hasToString("external_pylint:C0111");
@@ -178,7 +194,7 @@ public class PylintSensorTest {
 
   @Test
   public void no_issues_unknown_files() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_report_unknown_files.txt");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_report_unknown_files.txt", false);
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN))).hasToString("Failed to resolve 1 file path(s) in Pylint report. " +
       "No issues imported related to file(s): pylint/unknown_file.py");
@@ -186,14 +202,22 @@ public class PylintSensorTest {
 
   @Test
   public void no_issues_with_invalid_report_path() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt", false);
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("invalid-path.txt' can't be read.");
   }
 
-  private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName) throws IOException {
+  @Test
+  public void import_with_legacy_property() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_brackets.txt", true);
+    assertThat(externalIssues).hasSize(10);
+    assertThat(onlyOneLogElement(logTester.logs())).hasToString("The use of 'sonar.python.pylint.reportPath' is deprecated." +
+      " Please use the 'sonar.python.pylint.reportPaths' property instead.");
+  }
+
+  private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName, boolean useLegacyKey) throws IOException {
     Path baseDir = PROJECT_DIR.getParent();
     SensorContextTester context = SensorContextTester.create(baseDir);
     try (Stream<Path> fileStream = Files.list(PROJECT_DIR)) {
@@ -201,7 +225,11 @@ public class PylintSensorTest {
       context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER, SonarEdition.DEVELOPER));
       if (fileName != null) {
         String path = PROJECT_DIR.resolve(fileName).toAbsolutePath().toString();
-        context.settings().setProperty("sonar.python.pylint.reportPaths", path);
+        if (useLegacyKey) {
+          context.settings().setProperty(LEGACY_PROPERTY, path);
+        } else {
+          context.settings().setProperty(DEFAULT_PROPERTY, path);
+        }
       }
       pylintSensor.execute(context);
       return new ArrayList<>(context.allExternalIssues());
