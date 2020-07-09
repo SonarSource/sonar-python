@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.flake8;
+package org.sonar.plugins.python;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,11 +31,22 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-public class Flake8ReportReader {
+/**
+ * Common implementation to parse Flake8 and Pylint reports
+ */
+public class TextReportReader {
 
-  private static final Logger LOG = Loggers.get(Flake8ReportReader.class);
-  private static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+) (.*)");
-  private static final Pattern PYLINT_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
+  private static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+[^:]):? (.*)");
+  private static final Pattern LEGACY_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
+  private static final Logger LOG = Loggers.get(TextReportReader.class);
+  public static final int COLUMN_ZERO_BASED = 0;
+  public static final int COLUMN_ONE_BASED = 1;
+
+  private final int reportOffset;
+
+  public TextReportReader(int columnStartIndex) {
+    this.reportOffset = columnStartIndex;
+  }
 
   public List<Issue> parse(File report, FileSystem fileSystem) throws IOException {
     List<Issue> issues = new ArrayList<>();
@@ -50,51 +61,55 @@ public class Flake8ReportReader {
     return issues;
   }
 
-  private static Issue parseLine(String line) {
-
+  private Issue parseLine(String line) {
     if (line.length() > 0) {
-      if (!startsWithWhitespace(line)) {
-        Matcher m = DEFAULT_PATTERN.matcher(line);
-        if (m.matches()) {
-          String filePath = m.group(1);
-          int lineNumber = Integer.parseInt(m.group(2));
-          int columnNumber = Integer.parseInt(m.group(3));
-          String ruleKey = m.group(4);
-          String message = m.group(5);
-          return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
-        }
-        m = PYLINT_PATTERN.matcher(line);
-        if (m.matches()) {
-          String filePath = m.group(1);
-          int lineNumber = Integer.parseInt(m.group(2));
-          String ruleKey = m.group(3);
-          String message = m.group(4);
-          return new Issue(filePath, ruleKey, message, lineNumber, null);
-        }
-        LOG.debug("Cannot parse the line: {}", line);
-      } else {
-        LOG.debug("Classifying as detail and ignoring line '{}'", line);
+      Matcher m = TextReportReader.DEFAULT_PATTERN.matcher(line);
+      if (m.matches()) {
+        return extractDefaultStyleIssue(m);
       }
+      m = TextReportReader.LEGACY_PATTERN.matcher(line);
+      if (m.matches()) {
+        return extractLegacyStyleIssue(m);
+      }
+      LOG.debug("Cannot parse the line: {}", line);
     }
     return null;
   }
 
-  private static boolean startsWithWhitespace(String line) {
-    char first = line.charAt(0);
-    return first == ' ' || first == '\t' || first == '\n';
+  private Issue extractDefaultStyleIssue(Matcher m) {
+    String filePath = m.group(1);
+    int lineNumber = Integer.parseInt(m.group(2));
+    int columnNumber = Integer.parseInt(m.group(3));
+    // Flake8 column numbering starts at 1
+    columnNumber -= this.reportOffset;
+    String ruleKey = m.group(4);
+    String message = m.group(5);
+    return new Issue(filePath, ruleKey, message, lineNumber, columnNumber);
+  }
+
+  private static Issue extractLegacyStyleIssue(Matcher m) {
+    String filePath = m.group(1);
+    int lineNumber = Integer.parseInt(m.group(2));
+    String ruleKey = m.group(3);
+    int keyLastIndex = ruleKey.indexOf("(");
+    if (keyLastIndex > 0) {
+      ruleKey = ruleKey.substring(0, keyLastIndex);
+    }
+    String message = m.group(4);
+    return new Issue(filePath, ruleKey, message, lineNumber, null);
   }
 
   public static class Issue {
 
-    String filePath;
+    public final String filePath;
 
-    String ruleKey;
+    public final String ruleKey;
 
-    String message;
+    public final String message;
 
-    Integer lineNumber;
+    public final Integer lineNumber;
 
-    Integer columnNumber;
+    public final Integer columnNumber;
 
     public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber) {
       this.filePath = filePath;

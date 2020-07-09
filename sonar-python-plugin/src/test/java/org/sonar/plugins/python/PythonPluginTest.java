@@ -35,11 +35,11 @@ public class PythonPluginTest {
 
   @Test
   public void testGetExtensions() {
-    Version v74 = Version.create(7, 9);
-    SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v74, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
-    assertThat(extensions(runtime)).hasSize(18);
+    Version v79 = Version.create(7, 9);
+    SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v79, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
+    assertThat(extensions(runtime)).hasSize(21);
     assertThat(extensions(runtime)).contains(DefaultAnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v74))).hasSize(5);
+    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79))).hasSize(5);
   }
 
   private static List extensions(SonarRuntime runtime) {

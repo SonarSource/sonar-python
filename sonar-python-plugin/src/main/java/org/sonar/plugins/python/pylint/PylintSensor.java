@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.flake8;
+package org.sonar.plugins.python.pylint;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,23 +30,18 @@ import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.TextReportReader;
 import org.sonar.plugins.python.TextReportReader.Issue;
 
-public class Flake8Sensor extends ExternalIssuesSensor {
+public class PylintSensor extends ExternalIssuesSensor {
 
-  private static final Logger LOG = Loggers.get(Flake8Sensor.class);
+  private static final Logger LOG = Loggers.get(PylintSensor.class);
 
-  public static final String LINTER_NAME = "Flake8";
-  public static final String LINTER_KEY = "flake8";
-  public static final String REPORT_PATH_KEY = "sonar.python.flake8.reportPaths";
+  public static final String LINTER_NAME = "Pylint";
+  public static final String LINTER_KEY = "pylint";
+  public static final String REPORT_PATH_KEY = "sonar.python.pylint.reportPaths";
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
-    List<Issue> issues = new TextReportReader(TextReportReader.COLUMN_ONE_BASED).parse(reportPath, context.fileSystem());
+    List<Issue> issues = new TextReportReader(TextReportReader.COLUMN_ZERO_BASED).parse(reportPath, context.fileSystem());
     issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
-  }
-
-  @Override
-  protected String linterName() {
-    return LINTER_NAME;
   }
 
   @Override
@@ -55,8 +50,12 @@ public class Flake8Sensor extends ExternalIssuesSensor {
   }
 
   @Override
+  protected String linterName() {
+    return LINTER_NAME;
+  }
+
+  @Override
   protected Logger logger() {
     return LOG;
   }
-
 }
