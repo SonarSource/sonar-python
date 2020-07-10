@@ -108,3 +108,51 @@ def werkzeug_headers():
     headers.set("Access-Control-Allow-Methods", "") # Compliant
     headers.set("Access-Control-Allow-Headers", "") # Compliant
     Headers(1, 2)
+
+from flask import Flask
+
+app = Flask()
+
+@app.after_request
+def flask_add_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*') # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    my.response.headers.add('Access-Control-Allow-Origin', '*')
+    response.non_headers.add('Access-Control-Allow-Origin', '*')
+
+
+def flask_add_headers_nullable_arg(a, /):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+def flask_add_headers_not_a_first_param(response, secondparam):
+    secondparam.headers.add('Access-Control-Allow-Origin', '*')
+
+def flask_add_headers_no_args():
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+# not defined in a function
+response.headers.add('Access-Control-Allow-Origin', '*')
+
+from flask import make_response
+
+@app.route("/")
+def flask_make_response_headers_set():
+    resp = make_response("hello")
+    resp.headers['Access-Control-Allow-Origin'] = '*' # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return resp
+
+
+@app.route("/")
+def flask_app_response_headers_set():
+    resp = app.Response("Foo bar baz")
+    resp.headers['Access-Control-Allow-Origin'] = '*' # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    resp.non_headers['Access-Control-Allow-Origin'] = '*'
+    resp.resp.headers['Access-Control-Allow-Origin'] = '*'
+    unknown_response.headers['Access-Control-Allow-Origin'] = '*'
+    non_response = 42
+    non_response.headers['Access-Control-Allow-Origin'] = '*'
+    non_call_response = app.NonResponse("Foo bar baz")
+    non_call_response.headers['Access-Control-Allow-Origin'] = '*'
+    return resp

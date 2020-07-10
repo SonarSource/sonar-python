@@ -37,14 +37,20 @@ import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.checks.Expressions;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
@@ -89,6 +95,10 @@ public class CorsCheck extends PythonSubscriptionCheck {
     "werkzeug.datastructures.Headers"
   );
 
+  private static final List<String> REQUEST_SET_HEADER_QUALIFIER = Arrays.asList("headers", "add");
+
+  private static final String WERKZEUG_BASERESPONSE_HEADERS = "werkzeug.wrappers.BaseResponse.headers";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(ASSIGNMENT_STMT, CorsCheck::checkDjangoSettings);
@@ -101,6 +111,8 @@ public class CorsCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(CALL_EXPR, CorsCheck::checkFlaskResponse);
 
     context.registerSyntaxNodeConsumer(CALL_EXPR, CorsCheck::checkWerkzeugHeaders);
+
+    context.registerSyntaxNodeConsumer(CALL_EXPR, CorsCheck::checkResponseHeadersAdd);
   }
 
   private static void checkDjangoSettings(SubscriptionContext ctx) {
@@ -129,20 +141,40 @@ public class CorsCheck extends PythonSubscriptionCheck {
 
     if (lhs.isPresent() && lhs.get().is(SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) lhs.get();
-
-      if (!subscription.object().is(NAME)) {
-        return;
-      }
-
       List<Expression> subscripts = subscription.subscripts().expressions();
       if (subscripts.size() != 1) {
         return;
       }
 
-      if (TYPES_TO_CHECK.stream().anyMatch(t -> subscription.object().type().canOnlyBe(t))
-        && isString(subscripts.get(0), ALLOW_ORIGIN) && isString(assignment.assignedValue(), STAR)) {
-        ctx.addIssue(assignment, MESSAGE);
+      if (subscription.object().is(NAME) && TYPES_TO_CHECK.stream().anyMatch(t -> subscription.object().type().canOnlyBe(t))) {
+        reportIfAllowOriginIsSet(ctx, assignment, subscripts.get(0));
+      } else {
+        checkAllowOriginPropertyQualifiedExpr(ctx, assignment, subscription, subscripts);
       }
+    }
+  }
+
+  private static void checkAllowOriginPropertyQualifiedExpr(SubscriptionContext ctx, AssignmentStatement assignment, SubscriptionExpression subscr, List<Expression> subscripts) {
+    if (subscr.object().is(Tree.Kind.QUALIFIED_EXPR)) {
+      if (isSymbol(((QualifiedExpression) subscr.object()).symbol(), WERKZEUG_BASERESPONSE_HEADERS)) {
+        // flask.make_response().headers['Access-Control-Allow-Origin'] = '*'
+        reportIfAllowOriginIsSet(ctx, assignment, subscripts.get(0));
+      } else {
+        // resp.headers['Access-Control-Allow-Origin'] = '*', where resp instantiated from app.Response()
+        Expression expr = getQualifierPrecedingNameSequence(subscr.object(), Collections.singletonList("headers"));
+        if (expr != null && expr.is(NAME)) {
+          Expression value = Expressions.singleAssignedValue((Name) expr);
+          if (value != null && value.is(CALL_EXPR) && getQualifierPrecedingNameSequence(((CallExpression) value).callee(), Collections.singletonList("Response")) != null) {
+            reportIfAllowOriginIsSet(ctx, assignment, subscripts.get(0));
+          }
+        }
+      }
+    }
+  }
+
+  private static void reportIfAllowOriginIsSet(SubscriptionContext ctx, AssignmentStatement assignment, Expression expression) {
+    if (isString(expression, ALLOW_ORIGIN) && isString(assignment.assignedValue(), STAR)) {
+      ctx.addIssue(assignment, MESSAGE);
     }
   }
 
@@ -154,11 +186,49 @@ public class CorsCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Symbol calleeSymbol = callExpression.calleeSymbol();
     if (callExpression.arguments().size() == 2 && isSymbol(calleeSymbol, fqn)) {
-      Argument arg0 = callExpression.arguments().get(0);
-      Argument arg1 = callExpression.arguments().get(1);
-      if (isString(arg0, ALLOW_ORIGIN) && isString(arg1, STAR)) {
-        ctx.addIssue(callExpression, MESSAGE);
+      reportIfAllowOriginIsStar(ctx, callExpression);
+    }
+  }
+
+  private static Expression getQualifierPrecedingNameSequence(Expression expression, List<String> nameParts) {
+    if (expression.is(Tree.Kind.QUALIFIED_EXPR) && nameParts.get(nameParts.size() - 1).equals(((QualifiedExpression) expression).name().name())) {
+      if (nameParts.size() != 1) {
+        return getQualifierPrecedingNameSequence(((QualifiedExpression) expression).qualifier(), nameParts.subList(0, nameParts.size() - 1));
       }
+      return ((QualifiedExpression) expression).qualifier();
+    }
+    return null;
+  }
+
+  private static boolean firstParameterOfFunctionMatchesName(FunctionDef functionDef, String targetName) {
+    ParameterList parameterList = functionDef.parameters();
+    if (parameterList != null) {
+      return parameterList.nonTuple().stream().findFirst()
+        .map(Parameter::name).map(Name::name).map(targetName::equals).orElse(false);
+    }
+    return false;
+  }
+
+  // response.headers.add, where response is a first parameter inside flask handler function
+  private static void checkResponseHeadersAdd(SubscriptionContext ctx) {
+    CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+    if (callExpression.arguments().size() == 2) {
+      Expression parent = getQualifierPrecedingNameSequence(callExpression.callee(), REQUEST_SET_HEADER_QUALIFIER);
+      if (parent != null && parent.is(NAME)) {
+        FunctionDef functionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.FUNCDEF);
+        String objectName = ((Name) parent).name();
+        if (functionDef != null && firstParameterOfFunctionMatchesName(functionDef, objectName)) {
+          reportIfAllowOriginIsStar(ctx, callExpression);
+        }
+      }
+    }
+  }
+
+  private static void reportIfAllowOriginIsStar(SubscriptionContext ctx, CallExpression callExpression) {
+    Argument arg0 = callExpression.arguments().get(0);
+    Argument arg1 = callExpression.arguments().get(1);
+    if (isString(arg0, ALLOW_ORIGIN) && isString(arg1, STAR)) {
+      ctx.addIssue(callExpression, MESSAGE);
     }
   }
 
