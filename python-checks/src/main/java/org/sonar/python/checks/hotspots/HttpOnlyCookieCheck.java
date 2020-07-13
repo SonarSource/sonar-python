@@ -101,9 +101,7 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
   private void dictionarySessionCookieHttponlyCheck(SubscriptionContext ctx) {
     DictionaryLiteral dict = (DictionaryLiteral) ctx.syntaxNode();
     Optional<Expression> falsySetting = searchForFalsySessionCookieHttponlyInDictionary(dict);
-    if (falsySetting.isPresent()) {
-      ctx.addIssue(falsySetting.get(), message());
-    }
+    falsySetting.ifPresent(expression -> ctx.addIssue(expression, message()));
   }
 
   private static Optional<Expression> searchForFalsySessionCookieHttponlyInDictionary(DictionaryLiteral dict) {
@@ -123,9 +121,7 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
   private void dictConstructorSessionCookieHttponlyCheck(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional<Expression> falsySetting = searchForFalsySessionCookieHttponlyInDictCons(callExpression);
-    if (falsySetting.isPresent()) {
-      ctx.addIssue(falsySetting.get(), message());
-    }
+    falsySetting.ifPresent(expression -> ctx.addIssue(expression, message()));
   }
 
   private static Optional<Expression> searchForFalsySessionCookieHttponlyInDictCons(CallExpression callExpression) {
