@@ -22,7 +22,22 @@ package org.sonar.python.checks.hotspots;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.Expressions;
 
 @Rule(key = "S3330")
 public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
@@ -50,5 +65,88 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
   @Override
   Map<String, Integer> sensitiveArgumentByFQN() {
     return sensitiveArgumentByFQN;
+  }
+
+  @Override
+  public void initialize(Context context) {
+    super.initialize(context);
+    context.registerSyntaxNodeConsumer(
+      Tree.Kind.ASSIGNMENT_STMT,
+      this::subscriptionSessionCookieHttponlyCheck
+    );
+    context.registerSyntaxNodeConsumer(
+      Tree.Kind.DICTIONARY_LITERAL,
+      this::dictionarySessionCookieHttponlyCheck
+    );
+    context.registerSyntaxNodeConsumer(
+      Tree.Kind.CALL_EXPR,
+      this::dictConstructorSessionCookieHttponlyCheck
+    );
+  }
+
+  private void subscriptionSessionCookieHttponlyCheck(SubscriptionContext ctx) {
+    AssignmentStatement assignmentStatement = (AssignmentStatement) ctx.syntaxNode();
+    boolean isSubscriptionToSessionCookieHttponly = assignmentStatement
+      .lhsExpressions()
+      .stream()
+      .flatMap(exprList -> exprList.expressions().stream())
+      .filter(expr -> expr.is(Tree.Kind.SUBSCRIPTION))
+      .flatMap(subscription -> ((SubscriptionExpression) subscription).subscripts().expressions().stream())
+      .anyMatch(HttpOnlyCookieCheck::isSessionCookieHttponlyStringLiteral);
+    if (isSubscriptionToSessionCookieHttponly && Expressions.isFalsy(assignmentStatement.assignedValue())) {
+      ctx.addIssue(assignmentStatement.assignedValue(), message());
+    }
+  }
+
+  private void dictionarySessionCookieHttponlyCheck(SubscriptionContext ctx) {
+    DictionaryLiteral dict = (DictionaryLiteral) ctx.syntaxNode();
+    Optional<Expression> falsySetting = searchForFalsySessionCookieHttponlyInDictionary(dict);
+    falsySetting.ifPresent(expression -> ctx.addIssue(expression, message()));
+  }
+
+  private static Optional<Expression> searchForFalsySessionCookieHttponlyInDictionary(DictionaryLiteral dict) {
+    return dict.elements().stream()
+      .filter(e -> e.is(Tree.Kind.KEY_VALUE_PAIR))
+      .map(KeyValuePair.class::cast)
+      .filter(kvp -> Optional.ofNullable(kvp.key())
+        .filter(HttpOnlyCookieCheck::isSessionCookieHttponlyStringLiteral)
+        .isPresent())
+      .findFirst()
+      .filter(kvp -> Expressions.isFalsy(kvp.value()))
+      .map(KeyValuePair::value);
+  }
+
+  private static final String SESSION_COOKIE_HTTPONLY = "SESSION_COOKIE_HTTPONLY";
+
+  private void dictConstructorSessionCookieHttponlyCheck(SubscriptionContext ctx) {
+    CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+    Optional<Expression> falsySetting = searchForFalsySessionCookieHttponlyInDictCons(callExpression);
+    falsySetting.ifPresent(expression -> ctx.addIssue(expression, message()));
+  }
+
+  private static Optional<Expression> searchForFalsySessionCookieHttponlyInDictCons(CallExpression callExpression) {
+    Symbol callee = callExpression.calleeSymbol();
+    if (callee != null && "dict".equals(callee.fullyQualifiedName())) {
+      for (Argument arg: callExpression.arguments()) {
+        if (arg.is(Tree.Kind.REGULAR_ARGUMENT)) {
+          RegularArgument regArg = (RegularArgument) arg;
+          Name key = regArg.keywordArgument();
+          if (
+            key != null &&
+              SESSION_COOKIE_HTTPONLY.equals(key.name()) &&
+              Expressions.isFalsy(regArg.expression())
+          ) {
+            return Optional.of(regArg.expression());
+          }
+        }
+      }
+    }
+    return Optional.empty();
+  }
+
+  private static boolean isSessionCookieHttponlyStringLiteral(Expression expr) {
+    return
+      expr.is(Tree.Kind.STRING_LITERAL) &&
+        SESSION_COOKIE_HTTPONLY.equals(((StringLiteral) expr).trimmedQuotesValue());
   }
 }

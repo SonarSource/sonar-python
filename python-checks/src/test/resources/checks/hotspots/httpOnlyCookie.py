@@ -83,3 +83,38 @@ def flask_tests():
 
     response4 = redirect()
     response4.set_cookie('c', 'value') # FN
+
+def flask_SessionCookieHttpOnlyFalse():
+    from flask import Flask, request, url_for, render_template, redirect, make_response, request, session
+
+    app = Flask(__name__, static_url_path='/static', static_folder='static')
+
+    app.config['DEBUG'] = True
+    app.config['SESSION_COOKIE_HTTPONLY'] = True # Ok
+    app.config['SESSION_COOKIE_HTTPONLY'] = False # Noncompliant
+    #                                       ^^^^^
+    # Load default config and override config from an environment variable
+    app.config.update({
+        'SECRET_KEY': "woopie",
+        'SESSION_COOKIE_HTTPONLY': False # Noncompliant
+        #                          ^^^^^
+    })
+    app.config.update({
+        'SECRET_KEY': "woopie",
+        'SESSION_COOKIE_HTTPONLY': True # Ok
+    })
+    app.config.update(dict(
+        SECRET_KEY = "woopie",
+        SESSION_COOKIE_HTTPONLY = False # Noncompliant
+        #                         ^^^^^
+    ))
+    app.config.update(dict(
+        SECRET_KEY = "woopie",
+        SESSION_COOKIE_HTTPONLY = True # Ok
+    ))
+    app.config.update(dict(
+        42,
+        **{'unpacking': 1},
+        SECRET_KEY = "woopie",
+        SESSION_COOKIE_HTTPONLY = True # Ok
+    ))
