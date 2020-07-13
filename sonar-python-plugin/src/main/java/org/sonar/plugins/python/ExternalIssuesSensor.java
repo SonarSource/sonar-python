@@ -104,10 +104,11 @@ public abstract class ExternalIssuesSensor implements Sensor {
     }
 
     NewExternalIssue newExternalIssue = context.newExternalIssue();
+    Long defaultConstantDebtMinutes = issue.getDebRemediationEffort() != null ? issue.getDebRemediationEffort() : DEFAULT_CONSTANT_DEBT_MINUTES;
     newExternalIssue
       .type(RuleType.CODE_SMELL)
       .severity(Severity.MAJOR)
-      .remediationEffortMinutes(DEFAULT_CONSTANT_DEBT_MINUTES);
+      .remediationEffortMinutes(defaultConstantDebtMinutes);
 
     NewIssueLocation primaryLocation = newExternalIssue.newLocation()
       .message(issue.message)

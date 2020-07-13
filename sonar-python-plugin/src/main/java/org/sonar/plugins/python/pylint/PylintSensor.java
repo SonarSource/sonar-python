@@ -22,8 +22,11 @@ package org.sonar.plugins.python.pylint;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.server.debt.DebtRemediationFunction;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
@@ -37,11 +40,27 @@ public class PylintSensor extends ExternalIssuesSensor {
   public static final String LINTER_NAME = "Pylint";
   public static final String LINTER_KEY = "pylint";
   public static final String REPORT_PATH_KEY = "sonar.python.pylint.reportPaths";
+  private static final RulesDefinition.Repository ruleRepository;
+
+  static {
+    RulesDefinition.Context ruleDefinitionContext = new RulesDefinition.Context();
+    PylintRulesDefinition rulesDefinition = new PylintRulesDefinition();
+    rulesDefinition.define(ruleDefinitionContext);
+    ruleRepository = ruleDefinitionContext.repository("external_pylint");
+  }
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException {
     List<Issue> issues = new TextReportReader(TextReportReader.COLUMN_ZERO_BASED).parse(reportPath, context.fileSystem());
-    issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
+    issues.forEach(issue -> {
+      Optional.ofNullable(ruleRepository)
+        .map(r -> r.rule(issue.ruleKey))
+        .map(RulesDefinition.Rule::debtRemediationFunction)
+        .map(DebtRemediationFunction::baseEffort)
+        .map(b -> Long.valueOf(b.split("[^0-9]+")[0]))
+        .ifPresent(issue::setDebRemediationEffort);
+      saveIssue(context, issue, unresolvedInputFiles, LINTER_KEY);
+    });
   }
 
   @Override

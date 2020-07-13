@@ -96,6 +96,7 @@ public class PylintSensorTest {
     assertThat(first.ruleKey()).hasToString("external_pylint:C0114");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    assertThat(first.remediationEffort()).isEqualTo(5);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(PYLINT_FILE);
     assertThat(firstPrimaryLoc.message())
@@ -129,6 +130,7 @@ public class PylintSensorTest {
     assertThat(first.ruleKey()).hasToString("external_pylint:C0111");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    assertThat(first.remediationEffort()).isEqualTo(5);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(PYLINT_FILE);
     assertThat(firstPrimaryLoc.message())
@@ -175,6 +177,7 @@ public class PylintSensorTest {
     assertThat(first.ruleKey()).hasToString("external_pylint:E1300");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    assertThat(first.remediationEffort()).isEqualTo(3);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(PYLINT_FILE);
     assertThat(firstPrimaryLoc.message())

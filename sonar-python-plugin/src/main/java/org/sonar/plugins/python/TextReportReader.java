@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.utils.log.Logger;
@@ -111,12 +112,23 @@ public class TextReportReader {
 
     public final Integer columnNumber;
 
+    private Long debRemediationEffort;
+
     public Issue(String filePath, String ruleKey, String message, Integer lineNumber, @Nullable Integer columnNumber) {
       this.filePath = filePath;
       this.ruleKey = ruleKey;
       this.message = message;
       this.lineNumber = lineNumber;
       this.columnNumber = columnNumber;
+    }
+
+    @CheckForNull
+    public Long getDebRemediationEffort() {
+      return debRemediationEffort;
+    }
+
+    public void setDebRemediationEffort(Long debRemediationEffort) {
+      this.debRemediationEffort = debRemediationEffort;
     }
   }
 }

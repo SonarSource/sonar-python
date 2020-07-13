@@ -43,7 +43,7 @@ public class PylintRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule("C0121");
     assertThat(rule).isNotNull();
     assertThat(rule.name()).isEqualTo("Singleton comparison");
-    assertThat(rule.htmlDescription()).isEqualTo("This is external rule <code>pylint:C0121</code>. No details are available.");
+    assertThat(rule.htmlDescription()).isEqualTo("Used when an expression is compared to singleton values like True, False or None.");
     assertThat(rule.debtRemediationFunction().type().name()).isEqualTo("CONSTANT_ISSUE");
     assertThat(rule.debtRemediationFunction().baseEffort()).isEqualTo("20min");
     assertThat(rule.tags()).isEmpty();
