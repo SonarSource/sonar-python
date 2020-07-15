@@ -55,12 +55,11 @@ public class BanditSensor extends ExternalIssuesSensor {
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException, ParseException {
     InputStream in = new FileInputStream(reportPath);
     LOG.info("Importing {}", reportPath);
-    boolean engineIdIsSupported = context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(7, 4));
-    BanditJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles, engineIdIsSupported));
+    BanditJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles));
   }
 
 
-  private static void saveIssue(SensorContext context, Issue issue, Set<String> unresolvedInputFiles, boolean engineIdIsSupported) {
+  private static void saveIssue(SensorContext context, Issue issue, Set<String> unresolvedInputFiles) {
     if (isEmpty(issue.ruleKey) || isEmpty(issue.filePath) || isEmpty(issue.message)) {
       LOG.debug("Missing information for ruleKey:'{}', filePath:'{}', message:'{}'", issue.ruleKey, issue.filePath, issue.message);
       return;
@@ -87,15 +86,8 @@ public class BanditSensor extends ExternalIssuesSensor {
     }
 
     newExternalIssue.at(primaryLocation);
-
-    if (engineIdIsSupported) {
-      newExternalIssue.engineId(LINTER_KEY).ruleId(issue.ruleKey);
-    } else {
-      // Call the deprecated "forRule" method to support SQ 7.2
-      newExternalIssue.forRule(RuleKey.of(LINTER_KEY, issue.ruleKey));
-    }
-
-    newExternalIssue.save();
+    newExternalIssue.engineId(LINTER_KEY);
+    newExternalIssue.ruleId(issue.ruleKey).save();
   }
 
   private static Severity toSonarQubeSeverity(String severity, String confidence) {

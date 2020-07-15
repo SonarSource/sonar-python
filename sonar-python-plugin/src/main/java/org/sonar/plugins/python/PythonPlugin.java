@@ -25,7 +25,6 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
-import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -44,7 +43,6 @@ public class PythonPlugin implements Plugin {
   private static final String GENERAL = "General";
   private static final String TEST_AND_COVERAGE = "Tests and Coverage";
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
-  private static final String PYLINT = "Pylint";
   private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATHS_KEY + " instead. ";
 
   public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
@@ -135,20 +133,16 @@ public class PythonPlugin implements Plugin {
   }
 
   private static void addBanditExtensions(Context context) {
-    context.addExtension(BanditSensor.class);
-    boolean externalIssuesSupported = context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(7, 2));
-    if (externalIssuesSupported) {
-      context.addExtensions(
-        PropertyDefinition.builder(BanditSensor.REPORT_PATH_KEY)
-          .name("Bandit Report Files")
-          .description("Paths (absolute or relative) to json files with Bandit issues.")
-          .category(EXTERNAL_ANALYZERS_CATEGORY)
-          .subCategory(PYTHON_CATEGORY)
-          .onQualifiers(Qualifiers.PROJECT)
-          .multiValues(true)
-          .build(),
-        BanditRulesDefinition.class);
-    }
+    context.addExtensions(BanditSensor.class,
+      PropertyDefinition.builder(BanditSensor.REPORT_PATH_KEY)
+        .name("Bandit Report Files")
+        .description("Paths (absolute or relative) to json files with Bandit issues.")
+        .category(EXTERNAL_ANALYZERS_CATEGORY)
+        .subCategory(PYTHON_CATEGORY)
+        .onQualifiers(Qualifiers.PROJECT)
+        .multiValues(true)
+        .build(),
+      BanditRulesDefinition.class);
   }
 
   private static void addPylintExtensions(Context context) {

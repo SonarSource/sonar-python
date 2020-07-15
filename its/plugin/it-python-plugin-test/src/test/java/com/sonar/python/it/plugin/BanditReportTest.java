@@ -50,19 +50,14 @@ public class BanditReportTest {
         .setProjectDir(new File("projects/bandit_project")));
 
     List<Issues.Issue> issues = issues();
-    boolean externalIssuesSupported = ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(7, 2);
-    if (externalIssuesSupported) {
-      assertThat(issues).hasSize(1);
-      Issues.Issue issue = issues.get(0);
-      assertThat(issue.getComponent()).isEqualTo("bandit_project:src/file1.py");
-      assertThat(issue.getRule()).isEqualTo("external_bandit:B107");
-      assertThat(issue.getMessage()).isEqualTo("Possible hardcoded password: 'secret'");
-      assertThat(issue.getType()).isEqualTo(Common.RuleType.VULNERABILITY);
-      assertThat(issue.getSeverity()).isEqualTo(Common.Severity.MINOR);
-      assertThat(issue.getEffort()).isEqualTo("5min");
-    } else {
-      assertThat(issues).hasSize(0);
-    }
+    assertThat(issues).hasSize(1);
+    Issues.Issue issue = issues.get(0);
+    assertThat(issue.getComponent()).isEqualTo("bandit_project:src/file1.py");
+    assertThat(issue.getRule()).isEqualTo("external_bandit:B107");
+    assertThat(issue.getMessage()).isEqualTo("Possible hardcoded password: 'secret'");
+    assertThat(issue.getType()).isEqualTo(Common.RuleType.VULNERABILITY);
+    assertThat(issue.getSeverity()).isEqualTo(Common.Severity.MINOR);
+    assertThat(issue.getEffort()).isEqualTo("5min");
   }
 
   private static List<Issues.Issue> issues() {
