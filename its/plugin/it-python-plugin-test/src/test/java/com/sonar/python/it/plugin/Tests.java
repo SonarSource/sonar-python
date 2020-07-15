@@ -48,6 +48,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Suite.SuiteClasses({
   BanditReportTest.class,
   PylintReportTest.class,
+  Flake8ReportTest.class,
   MetricsTest.class,
   CPDTest.class,
   CoverageTest.class,
