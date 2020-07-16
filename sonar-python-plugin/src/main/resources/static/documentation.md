@@ -16,19 +16,6 @@ key: python
 
 Discover and update the Python-specific [properties](/analysis/analysis-parameters/) in: <!-- sonarcloud -->Project <!-- /sonarcloud --> **[Administration > General Settings > Python](/#sonarqube-admin#/admin/settings?category=python)**.
 
-## Pylint
-[Pylint](http://www.pylint.org/) is an external static source code analyzer, it can be used in conjunction with SonarSource Python analyzer.
-
-It is possible to import Pylint reports by passing a comma-delimited list of report paths to the `sonar.python.pylint.reportPaths` property.
-
-In order to generate such report, you can use the following command:
-```
-pylint <module_or_package> -r n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" > <report_file>
-```
-The supported message templates are:
-* `{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}`
-* `{path}:{line}:{column}: {msg_id}: {msg}`
-
 ## Custom Rules
 
 ### Overview
