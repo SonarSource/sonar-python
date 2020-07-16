@@ -16,38 +16,6 @@ key: python
 
 Discover and update the Python-specific [properties](/analysis/analysis-parameters/) in: <!-- sonarcloud -->Project <!-- /sonarcloud --> **[Administration > General Settings > Python](/#sonarqube-admin#/admin/settings?category=python)**.
 
-## Pylint
-[Pylint](http://www.pylint.org/) is an external static source code analyzer, it can be used in conjunction with SonarSource Python analyzer.
-
-You can enable Pylint rules directly in your Python Quality Profile. Their rule keys start with "*Pylint:*".
-
-Once the rules are activated you should run Pylint and import its report:
-```
-pylint <module_or_package> -r n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" > <report_file>
-```
-Then pass the generated report path to analysis via the `sonar.python.pylint.reportPath` property.
-
-### **WARNING: Future breaking changes for Pylint issues import**
-
-Pylint issues will soon be imported as external issues. You can expects multiple improvements from this:
-
-- It will simplify your configuration. Activating or disabling a rule in Pylint configuration will be enough. Currently you need to activate these rules in both {instance} and Pylint.
-- You will be able to use Pylint plugins.
-
-There will however be a few breaking changes:
-
-- It will not be possible to change issues' resolution (fixed/removed/won't fix) in SonarQube. Every issue reported by Pylint will be displayed as open. In order to remove an issue you will need to either change the code or disable the rule in your Pylint configuration or in your code.
-- Pylint issues will lose their history, resolution, assigned people and comments.
-- {instance}'s Python analyzer won't execute Pylint anymore. This feature was deprecated and will be removed.
-
-**How to prepare for these changes**
-
-If you closed Pylint issues in {instance} you need to instead add pragma comments in your code.
-If you have many closed Pylint issues you can list them using SonarQube API.
-
-If you let {instance} execute Pylint you need to instead execute it yourself, generate a report and import the report via the parameter `sonar.python.pylint.reportPath`.
-<!-- sonarqube -->
-
 ## Custom Rules
 
 ### Overview
