@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
-import org.sonar.python.PythonBuiltinFunctions;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -38,6 +37,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.python.semantic.BuiltinSymbols;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)
 public class SelfAssignmentCheck extends PythonSubscriptionCheck {
@@ -110,7 +110,7 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isAllowedName(Name name) {
-    return importedNames.contains(name.name()) || PythonBuiltinFunctions.contains(name.name());
+    return importedNames.contains(name.name()) || BuiltinSymbols.all().contains(name.name());
   }
 
   private static boolean inClassDef(Tree tree) {
