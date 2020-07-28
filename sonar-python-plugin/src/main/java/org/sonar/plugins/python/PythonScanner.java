@@ -87,8 +87,11 @@ public class PythonScanner extends Scanner {
     this.parser = PythonParser.create();
 
     // computes "globalSymbolsByModuleName"
+    long startTime = System.currentTimeMillis();
     GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
     globalSymbolsStep.execute(files, context);
+    long stopTime = System.currentTimeMillis() - startTime;
+    LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
   }
 
   @Override
