@@ -112,7 +112,7 @@ public class TypeShed {
     }
     if (symbol.is(Symbol.Kind.FUNCTION)) {
       FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
-      functionSymbol.setDeclaredReturnType(InferredTypes.declaredType(returnTypeAnnotation));
+      functionSymbol.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(returnTypeAnnotation, true));
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol -> setDeclaredReturnType(functionSymbol, functionDef));
     }

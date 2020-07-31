@@ -72,6 +72,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TupleParameter;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
@@ -81,6 +82,7 @@ import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
 
@@ -676,9 +678,15 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitFunctionDef(FunctionDef functionDef) {
       FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
       ParameterList parameters = functionDef.parameters();
-      if (functionSymbol != null && parameters != null) {
+      if (functionSymbol != null) {
         FunctionSymbolImpl functionSymbolImpl = (FunctionSymbolImpl) functionSymbol;
-        functionSymbolImpl.setParametersWithType(parameters);
+        if (parameters != null) {
+          functionSymbolImpl.setParametersWithType(parameters);
+        }
+        TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
+        if (typeAnnotation != null && !isTypeShedFile(pythonFile)) {
+          functionSymbolImpl.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(typeAnnotation, false));
+        }
       }
       super.visitFunctionDef(functionDef);
     }
