@@ -40,7 +40,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean isIdentityComparableWith(InferredType other) {
-    if (other == AnyType.ANY) {
+    if (other == AnyType.ANY || other instanceof DeclaredType) {
       return true;
     }
     if (other instanceof UnionType) {
@@ -71,11 +71,11 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean isCompatibleWith(InferredType other) {
-    if (other instanceof RuntimeType) {
-      RuntimeType otherRuntimeType = (RuntimeType) other;
-      String otherFullyQualifiedName = otherRuntimeType.typeClass.fullyQualifiedName();
-      boolean isDuckTypeCompatible = !otherRuntimeType.typeClass.declaredMembers().isEmpty() &&
-        otherRuntimeType.typeClass.declaredMembers().stream().allMatch(m -> typeClass.resolveMember(m.name()).isPresent());
+    if (other instanceof RuntimeType || other instanceof DeclaredType) {
+      ClassSymbol otherTypeClass = InferredTypes.typeSymbols(other).iterator().next();
+      String otherFullyQualifiedName = otherTypeClass.fullyQualifiedName();
+      boolean isDuckTypeCompatible = !otherTypeClass.declaredMembers().isEmpty() &&
+        otherTypeClass.declaredMembers().stream().allMatch(m -> this.typeClass.resolveMember(m.name()).isPresent());
       boolean canBeOrExtend = otherFullyQualifiedName == null || this.canBeOrExtend(otherFullyQualifiedName);
       return isDuckTypeCompatible || canBeOrExtend;
     }

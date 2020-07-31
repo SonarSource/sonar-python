@@ -38,6 +38,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.python.types.InferredTypes.typeName;
+
 @Rule(key = "S5655")
 public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
@@ -135,8 +137,8 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
 
   private static boolean isNotDuckTypeCompatible(InferredType argumentType, InferredType parameterType) {
     // Avoid FNs if builtins have incomplete type hierarchy when we are certain of their type
-    String firstBuiltin = matchBuiltinCategory(argumentType::canOnlyBe);
-    String secondBuiltin = matchBuiltinCategory(parameterType::canOnlyBe);
+    String firstBuiltin = matchBuiltinCategory(name -> name.equals(typeName(argumentType)));
+    String secondBuiltin = matchBuiltinCategory(name -> name.equals(typeName(parameterType)));
     return firstBuiltin != null && secondBuiltin != null && !firstBuiltin.equals(secondBuiltin);
   }
 

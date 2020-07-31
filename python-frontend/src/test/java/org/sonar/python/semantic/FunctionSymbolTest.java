@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.functionSymbol;
@@ -95,7 +96,7 @@ public class FunctionSymbolTest {
     assertThat(functionSymbol.parameters().get(0).isVariadic()).isFalse();
 
     functionSymbol = functionSymbol("def fn(p1: int): pass");
-    assertThat(functionSymbol.parameters().get(0).declaredType().canOnlyBe("int")).isTrue();
+    assertThat(functionSymbol.parameters().get(0).declaredType().canBeOrExtend("int")).isTrue();
 
     functionSymbol = functionSymbol("def fn(**kwargs): pass");
     assertThat(functionSymbol.parameters()).hasSize(1);
@@ -220,5 +221,12 @@ public class FunctionSymbolTest {
     FunctionSymbol builtinFunctionSymbol = (FunctionSymbol) callExpression.calleeSymbol();
     assertThat(builtinFunctionSymbol.definitionLocation()).isNull();
     assertThat(builtinFunctionSymbol.parameters().get(0).location()).isNull();
+  }
+
+  @Test
+  public void declared_return_type() {
+    FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) functionSymbol("def foo() -> int: ...");
+    assertThat(functionSymbol.declaredReturnType().canBeOrExtend("int")).isTrue();
+    assertThat(InferredTypes.typeName(functionSymbol.declaredReturnType())).isEqualTo("int");
   }
 }

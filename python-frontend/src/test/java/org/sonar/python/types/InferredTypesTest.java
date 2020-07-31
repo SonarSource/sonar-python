@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
@@ -36,6 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
+import static org.sonar.python.types.InferredTypes.declaredType;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.TypeShed.typeShedClass;
@@ -48,6 +50,22 @@ public class InferredTypesTest {
     assertThat(runtimeType(new SymbolImpl("b", "a.b"))).isEqualTo(anyType());
     ClassSymbol typeClass = new ClassSymbolImpl("b", "a.b");
     assertThat(runtimeType(typeClass)).isEqualTo(new RuntimeType(typeClass));
+  }
+
+  @Test
+  public void test_declaredType() {
+    assertThat(declaredType(null)).isEqualTo(anyType());
+    assertThat(declaredType(new SymbolImpl("b", "a.b"))).isEqualTo(anyType());
+    ClassSymbol typeClass = new ClassSymbolImpl("b", "a.b");
+    assertThat(declaredType(typeClass).canOnlyBe("a.b")).isFalse();
+    assertThat(declaredType(typeClass).canBeOrExtend("a.b")).isTrue();
+
+    ClassSymbol typeClass1 = new ClassSymbolImpl("b", "a1.b");
+    ClassSymbol typeClass2 = new ClassSymbolImpl("b", "a2.b");
+    InferredType declaredType = declaredType(AmbiguousSymbolImpl.create(typeClass1, typeClass2));
+    assertThat(declaredType.canBeOrExtend("a1.b")).isTrue();
+    assertThat(declaredType.canBeOrExtend("a2.b")).isTrue();
+    assertThat(declaredType.canOnlyBe("a1.b")).isFalse();
   }
 
   @Test
@@ -76,13 +94,13 @@ public class InferredTypesTest {
       "from typing import List",
       "l : List[int]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.LIST);
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.LIST);
 
     typeAnnotation = typeAnnotation(
       "from typing import Dict",
       "l : Dict[int, string]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.DICT);
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.DICT);
   }
 
   @Test
@@ -91,25 +109,25 @@ public class InferredTypesTest {
       "from typing import Union",
       "l : Union[int, str]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.STR));
 
     typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[int, str, bool]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
 
     typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[Union[int, str], bool]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.or(InferredTypes.or(InferredTypes.INT, InferredTypes.STR), InferredTypes.BOOL));
 
     typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[bool]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.BOOL);
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.BOOL);
   }
 
   @Test
@@ -118,13 +136,13 @@ public class InferredTypesTest {
       "from typing import Optional",
       "l : Optional[int]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.NONE));
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.NONE));
 
     typeAnnotation = typeAnnotation(
       "from typing import Optional",
       "l : Optional[int, string]"
     );
-    assertThat(InferredTypes.declaredType(typeAnnotation)).isEqualTo(InferredTypes.anyType());
+    assertThat(InferredTypes.fromTypeAnnotation(typeAnnotation, true)).isEqualTo(InferredTypes.anyType());
   }
 
   @Test

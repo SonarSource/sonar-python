@@ -50,6 +50,9 @@ public class RuntimeTypeTest {
 
     assertThat(aType.isIdentityComparableWith(or(aType, bType))).isTrue();
     assertThat(aType.isIdentityComparableWith(or(cType, bType))).isFalse();
+
+    assertThat(aType.isIdentityComparableWith(new DeclaredType(a))).isTrue();
+    assertThat(aType.isIdentityComparableWith(new DeclaredType(b))).isTrue();
   }
 
   @Test
@@ -196,6 +199,10 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(x2).isCompatibleWith(new RuntimeType(x1))).isTrue();
     assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x1))).isTrue();
     assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x2))).isFalse();
+
+    assertThat(new RuntimeType(x2).isCompatibleWith(new DeclaredType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(x2))).isFalse();
 
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
