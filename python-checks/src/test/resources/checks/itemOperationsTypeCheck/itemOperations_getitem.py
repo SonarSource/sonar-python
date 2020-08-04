@@ -98,7 +98,7 @@ def standard_library():
   math[0]  # FN: type unknown
 
   import os
-  os.popen('ls')[0]  # FN
+  os.popen('ls')[0]  # Noncompliant
 
 def custom_classes():
   class A:
