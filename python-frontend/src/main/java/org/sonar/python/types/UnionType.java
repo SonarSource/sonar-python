@@ -20,7 +20,7 @@
 package org.sonar.python.types;
 
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -45,7 +45,7 @@ class UnionType implements InferredType {
     if (type1.equals(type2)) {
       return type1;
     }
-    Set<InferredType> types = new HashSet<>();
+    Set<InferredType> types = new LinkedHashSet<>();
     addTypes(type1, types);
     addTypes(type2, types);
     return new UnionType(types);
