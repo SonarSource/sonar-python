@@ -37,7 +37,7 @@ def call_noncallable(p):
       x = 42
     else:
       x = 'str'
-    x() # Noncompliant {{Fix this call; "x" is not callable.}}
+    x() # Noncompliant {{Fix this call; "x" has type Union[int, str] and it is not callable.}}
 
 def flow_sensitivity():
   my_var = "hello"

@@ -23,9 +23,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -164,7 +166,7 @@ public class InferredTypes {
       return Collections.singleton(((RuntimeType) inferredType).getTypeClass());
     }
     if (inferredType instanceof UnionType) {
-      Set<ClassSymbol> typeClasses = new HashSet<>();
+      Set<ClassSymbol> typeClasses = new LinkedHashSet<>();
       ((UnionType) inferredType).types().forEach(type -> typeClasses.addAll(typeSymbols(type)));
       return typeClasses;
     }
@@ -176,6 +178,8 @@ public class InferredTypes {
     Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
     if (typeClasses.size() == 1) {
       return typeClasses.iterator().next().name();
+    } else if (typeClasses.size() > 1) {
+      return "Union[" + typeClasses.stream().map(ClassSymbol::name).collect(Collectors.joining(", ")) + "]";
     }
     return null;
   }

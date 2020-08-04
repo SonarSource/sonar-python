@@ -10,7 +10,7 @@ def builtin_noncompliant(p):
     x = 42
   else:
     x = complex(1)
-  x > "1" # Noncompliant {{Fix this invalid ">" operation between incompatible types.}}
+  x > "1" # Noncompliant {{Fix this invalid ">" operation between incompatible types (Union[int, complex] and str).}}
   "1" < x # Noncompliant
 
 

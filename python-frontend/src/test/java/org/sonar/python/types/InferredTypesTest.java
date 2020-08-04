@@ -145,7 +145,7 @@ public class InferredTypesTest {
     ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
     assertThat(InferredTypes.typeName(new RuntimeType(a))).isEqualTo("A");
 
-    assertThat(InferredTypes.typeName(or(STR, INT))).isNull();
+    assertThat(InferredTypes.typeName(or(STR, INT))).isEqualTo("Union[str, int]");
     assertThat(InferredTypes.typeName(InferredTypes.anyType())).isNull();
   }
 
