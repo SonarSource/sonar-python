@@ -74,6 +74,8 @@ public class TypeShed {
   private static final String THIRD_PARTY_3 = "typeshed/third_party/3/";
   private static final String CUSTOM_THIRD_PARTY = "custom/";
 
+  private static final ClassSymbol NONE_TYPE_SYMBOL = new ClassSymbolImpl(NONE_TYPE, NONE_TYPE);
+
   private TypeShed() {
   }
 
@@ -82,7 +84,7 @@ public class TypeShed {
     // from it explicitly to overcome the issue of TypeShed.builtins being assigned twice
     if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
       Map<String, Symbol> builtins = new HashMap<>();
-      builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
+      builtins.put(NONE_TYPE, NONE_TYPE_SYMBOL);
       InputStream resource = TypeShed.class.getResourceAsStream("typeshed/stdlib/2and3/builtins.pyi");
       PythonFile file = new TypeShedPythonFile(resource, "");
       AstNode astNode = PythonParser.create().parse(file.content());
@@ -97,7 +99,7 @@ public class TypeShed {
         ((SymbolImpl) globalVariable).removeUsages();
         builtins.put(globalVariable.fullyQualifiedName(), globalVariable);
       }
-      TypeShed.builtins = Collections.unmodifiableMap(builtins);
+      TypeShed.builtins = new HashMap<>(builtins);
       InferredTypes.setBuiltinSymbols(builtins);
       fileInput.accept(new ReturnTypeVisitor());
       TypeShed.builtinGlobalSymbols.put("", new HashSet<>(builtins.values()));

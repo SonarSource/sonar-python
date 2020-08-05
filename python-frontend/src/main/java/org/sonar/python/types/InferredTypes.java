@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 
 public class InferredTypes {
@@ -133,16 +134,22 @@ public class InferredTypes {
   private static InferredType fromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols, boolean isFromTypeshed) {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null && "typing.Text".equals(symbol.fullyQualifiedName())) {
-        return InferredTypes.fromTypeAnnotation(builtinSymbols.get("str"), isFromTypeshed);
+      if (symbol != null ) {
+        if ("typing.Text".equals(symbol.fullyQualifiedName())) {
+          return InferredTypes.fromTypeAnnotation(builtinSymbols.get("str"), isFromTypeshed);
+        }
+        return InferredTypes.genericType(symbol, Collections.emptyList(), builtinSymbols, isFromTypeshed);
       }
-      return InferredTypes.fromTypeAnnotation(symbol, isFromTypeshed);
+      return InferredTypes.anyType();
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
       return TreeUtils.getSymbolFromTree(subscription.object())
         .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols, isFromTypeshed))
         .orElse(InferredTypes.anyType());
+    }
+    if (expression.is(Kind.NONE)) {
+      return InferredTypes.fromTypeAnnotation(builtinSymbols.get(BuiltinTypes.NONE_TYPE), isFromTypeshed);
     }
     return InferredTypes.anyType();
   }
