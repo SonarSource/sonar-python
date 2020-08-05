@@ -183,3 +183,24 @@ def not_static_call():
   f = a.foo
   f("hello", "hello") # FN
   f(42, "hello") # OK
+
+
+def duck_typing_no_member():
+  class Parent():
+    def do_something(self): ...
+
+
+  class ChildA(Parent): ...
+
+  class ChildB(Parent):
+    def do_something_else(): ...
+
+  def a_function(param: ChildA):
+    param.do_something()
+
+  def another_function(param: ChildB):
+    param.do_something_else()
+
+  a_function(Parent())  # OK, still duck type compatible with ChildA
+  another_function(Parent())  # Noncompliant
+

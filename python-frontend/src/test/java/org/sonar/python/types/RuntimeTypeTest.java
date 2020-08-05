@@ -195,11 +195,11 @@ public class RuntimeTypeTest {
 
     assertThat(new RuntimeType(x2).isCompatibleWith(new RuntimeType(x1))).isTrue();
     assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x1))).isTrue();
-    assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x2))).isFalse();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x2))).isTrue();
 
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
-    assertThat(new RuntimeType(a).isCompatibleWith(new RuntimeType(b))).isFalse();
+    assertThat(new RuntimeType(a).isCompatibleWith(new RuntimeType(b))).isTrue();
     assertThat(new RuntimeType(b).isCompatibleWith(new RuntimeType(a))).isTrue();
 
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
@@ -219,5 +219,16 @@ public class RuntimeTypeTest {
     goose.addMembers(Collections.singleton(gooseSwim));
     assertThat(new RuntimeType(duck).isCompatibleWith(new RuntimeType(goose))).isTrue();
     assertThat(new RuntimeType(goose).isCompatibleWith(new RuntimeType(duck))).isFalse();
+  }
+
+  @Test
+  public void test_isCompatibleWith_NoneType() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    x1.addMembers(Collections.singletonList(new SymbolImpl("foo", null)));
+    ClassSymbolImpl none = new ClassSymbolImpl("NoneType", "NoneType");
+
+    assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(none))).isFalse();
+    assertThat(new RuntimeType(none).isCompatibleWith(new RuntimeType(x1))).isFalse();
+    assertThat(new RuntimeType(none).isCompatibleWith(new RuntimeType(none))).isTrue();
   }
 }
