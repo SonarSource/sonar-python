@@ -25,7 +25,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -41,6 +43,8 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 
 public class InferredTypes {
 
@@ -98,17 +102,13 @@ public class InferredTypes {
     return anyType();
   }
 
-  public static InferredType declaredType(@Nullable Symbol typeClass) {
-    if (typeClass instanceof ClassSymbol) {
-      return new DeclaredType((ClassSymbol) typeClass);
-    }
-    if (typeClass instanceof AmbiguousSymbol) {
-      return union(((AmbiguousSymbol) typeClass).alternatives().stream().map(InferredTypes::declaredType));
-    }
-    return anyType();
+  public static InferredType declaredType(@Nullable Symbol typeClass, List<DeclaredType> typeArgs) {
+    return typeClass != null ? new DeclaredType(typeClass, typeArgs) : InferredTypes.anyType();
   }
 
-
+  public static InferredType declaredType(@Nullable Symbol typeClass) {
+    return declaredType(typeClass, Collections.emptyList());
+  }
 
   static void setBuiltinSymbols(Map<String, Symbol> builtinSymbols) {
     InferredTypes.builtinSymbols = Collections.unmodifiableMap(builtinSymbols);
@@ -123,47 +123,73 @@ public class InferredTypes {
   }
 
   public static InferredType fromTypeAnnotation(TypeAnnotation typeAnnotation, boolean isFromTypeshed) {
-    if (builtinSymbols != null) {
-      return fromTypeAnnotation(typeAnnotation.expression(), builtinSymbols, isFromTypeshed);
-    } else {
-      return fromTypeAnnotation(typeAnnotation.expression(), Collections.emptyMap(), isFromTypeshed);
+    Map<String, Symbol> builtins = InferredTypes.builtinSymbols != null ? InferredTypes.builtinSymbols : Collections.emptyMap();
+    if (isFromTypeshed) {
+      return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
     }
+    DeclaredType declaredType = declaredTypeFromTypeAnnotation(typeAnnotation.expression(), builtins);
+    if (declaredType == null) {
+      return InferredTypes.anyType();
+    }
+    return declaredType;
   }
 
-  private static InferredType fromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols, boolean isFromTypeshed) {
+  @CheckForNull
+  private static DeclaredType declaredTypeFromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null && "typing.Text".equals(symbol.fullyQualifiedName())) {
-        return InferredTypes.fromTypeAnnotation(builtinSymbols.get("str"), isFromTypeshed);
+      if (symbol != null) {
+        return new DeclaredType(symbol);
       }
-      return InferredTypes.fromTypeAnnotation(symbol, isFromTypeshed);
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
       return TreeUtils.getSymbolFromTree(subscription.object())
-        .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols, isFromTypeshed))
+        .map(symbol -> {
+          List<DeclaredType> args = subscription.subscripts().expressions().stream()
+              .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
+              .collect(Collectors.toList());
+          if (args.stream().anyMatch(Objects::isNull)) {
+            args = Collections.emptyList();
+          }
+          String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
+          return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn), args) : new DeclaredType(symbol, args);
+        })
+        .orElse(null);
+    }
+    return null;
+  }
+
+  private static InferredType runtimeTypefromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
+    if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
+      Symbol symbol = ((Name) expression).symbol();
+      if (symbol != null && "typing.Text".equals(symbol.fullyQualifiedName())) {
+        return InferredTypes.runtimeType(builtinSymbols.get("str"));
+      }
+      return InferredTypes.runtimeType(symbol);
+    }
+    if (expression.is(Kind.SUBSCRIPTION)) {
+      SubscriptionExpression subscription = (SubscriptionExpression) expression;
+      return TreeUtils.getSymbolFromTree(subscription.object())
+        .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols))
         .orElse(InferredTypes.anyType());
     }
     return InferredTypes.anyType();
   }
 
-  private static InferredType fromTypeAnnotation(@Nullable Symbol typeClass, boolean isFromTypeshed) {
-    return isFromTypeshed ? InferredTypes.runtimeType(typeClass) : InferredTypes.declaredType(typeClass);
-  }
-
-  private static InferredType genericType(Symbol symbol, List<Expression> subscripts, Map<String, Symbol> builtinSymbols, boolean isFromTypeshed) {
+  private static InferredType genericType(Symbol symbol, List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
     String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
     if (builtinFqn == null) {
       if ("typing.Optional".equals(symbol.fullyQualifiedName()) && subscripts.size() == 1) {
-        InferredType noneType = InferredTypes.fromTypeAnnotation(builtinSymbols.get(BuiltinTypes.NONE_TYPE), isFromTypeshed);
-        return InferredTypes.or(fromTypeAnnotation(subscripts.get(0), builtinSymbols, isFromTypeshed), noneType);
+        InferredType noneType = InferredTypes.runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
+        return InferredTypes.or(runtimeTypefromTypeAnnotation(subscripts.get(0), builtinSymbols), noneType);
       }
       if ("typing.Union".equals(symbol.fullyQualifiedName())) {
-        return union(subscripts.stream().map(s -> fromTypeAnnotation(s, builtinSymbols, isFromTypeshed)));
+        return union(subscripts.stream().map(s -> runtimeTypefromTypeAnnotation(s, builtinSymbols)));
       }
-      return InferredTypes.fromTypeAnnotation(symbol, isFromTypeshed);
+      return InferredTypes.runtimeType(symbol);
     }
-    return InferredTypes.fromTypeAnnotation(builtinSymbols.get(builtinFqn), isFromTypeshed);
+    return InferredTypes.runtimeType(builtinSymbols.get(builtinFqn));
   }
 
   public static Collection<ClassSymbol> typeSymbols(InferredType inferredType) {
@@ -171,7 +197,8 @@ public class InferredTypes {
       return Collections.singleton(((RuntimeType) inferredType).getTypeClass());
     }
     if (inferredType instanceof DeclaredType) {
-      return Collections.singleton(((DeclaredType) inferredType).getTypeClass());
+      Symbol typeClass = ((DeclaredType) inferredType).getTypeClass();
+      return typeClass.is(CLASS) ? Collections.singleton(((ClassSymbol) typeClass)) : Collections.emptySet();
     }
     if (inferredType instanceof UnionType) {
       Set<ClassSymbol> typeClasses = new HashSet<>();
@@ -183,6 +210,9 @@ public class InferredTypes {
 
   @CheckForNull
   public static String typeName(InferredType inferredType) {
+    if (inferredType instanceof DeclaredType) {
+      return ((DeclaredType) inferredType).typeName();
+    }
     Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
     if (typeClasses.size() == 1) {
       return typeClasses.iterator().next().name();

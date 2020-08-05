@@ -19,17 +19,47 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
 public class DeclaredType implements InferredType {
 
-  private final ClassSymbol typeClass;
+  private final Symbol typeClass;
+  private final List<DeclaredType> typeArgs;
+  private final Set<Symbol> alternativeTypeSymbols;
 
-  DeclaredType(ClassSymbol typeClass) {
+  DeclaredType(Symbol typeClass, List<DeclaredType> typeArgs) {
     this.typeClass = typeClass;
+    this.typeArgs = typeArgs;
+    alternativeTypeSymbols = resolveAlternativeSymbols(typeClass, typeArgs);
+  }
+
+  private static Set<Symbol> resolveAlternativeSymbols(Symbol typeClass, List<DeclaredType> typeArgs) {
+    Set<Symbol> symbols = new HashSet<>();
+    if ("typing.Optional".equals(typeClass.fullyQualifiedName()) && typeArgs.size() == 1) {
+      Symbol noneType = TypeShed.typeShedClass(BuiltinTypes.NONE_TYPE);
+      symbols.add(noneType);
+      DeclaredType argType = typeArgs.get(0);
+      symbols.addAll(resolveAlternativeSymbols(argType.typeClass, argType.typeArgs));
+    } else if ("typing.Union".equals(typeClass.fullyQualifiedName())) {
+      symbols.addAll(typeArgs.stream().flatMap(arg -> resolveAlternativeSymbols(arg.typeClass, arg.typeArgs).stream()).collect(Collectors.toSet()));
+    } else if ("typing.Text".equals(typeClass.fullyQualifiedName())) {
+      symbols.add(TypeShed.typeShedClass("str"));
+    } else {
+      symbols.add(typeClass);
+    }
+    return symbols;
+  }
+
+  DeclaredType(Symbol typeClass) {
+    this(typeClass, Collections.emptyList());
   }
 
   @Override
@@ -64,10 +94,24 @@ public class DeclaredType implements InferredType {
 
   @Override
   public String toString() {
-    return "DeclaredType(" + typeClass.fullyQualifiedName() + ')';
+    return "DeclaredType(" + typeName() + ')';
   }
 
-  ClassSymbol getTypeClass() {
+  public String typeName() {
+    StringBuilder str = new StringBuilder(typeClass.name());
+    if (!typeArgs.isEmpty()) {
+      str.append("[");
+      typeArgs.forEach(arg -> str.append(arg.typeName()));
+      str.append("]");
+    }
+    return str.toString();
+  }
+
+  Symbol getTypeClass() {
     return typeClass;
+  }
+
+  Set<Symbol> alternativeTypeSymbols() {
+    return alternativeTypeSymbols;
   }
 }

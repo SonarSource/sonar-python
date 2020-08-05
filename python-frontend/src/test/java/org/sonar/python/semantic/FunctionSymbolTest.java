@@ -228,5 +228,12 @@ public class FunctionSymbolTest {
     FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) functionSymbol("def foo() -> int: ...");
     assertThat(functionSymbol.declaredReturnType().canBeOrExtend("int")).isTrue();
     assertThat(InferredTypes.typeName(functionSymbol.declaredReturnType())).isEqualTo("int");
+
+    functionSymbol = (FunctionSymbolImpl) functionSymbol(
+      "from typing import Optional",
+      "def foo() -> Optional[int]: ..."
+    );
+    assertThat(functionSymbol.declaredReturnType().canBeOrExtend("int")).isTrue();
+    assertThat(InferredTypes.typeName(functionSymbol.declaredReturnType())).isEqualTo("Optional[int]");
   }
 }

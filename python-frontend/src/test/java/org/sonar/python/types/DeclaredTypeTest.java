@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Collections;
 import org.junit.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
@@ -63,6 +64,7 @@ public class DeclaredTypeTest {
   @Test
   public void test_toString() {
     assertThat(new DeclaredType(a)).hasToString("DeclaredType(a)");
+    assertThat(new DeclaredType(a, Collections.singletonList(new DeclaredType(b)))).hasToString("DeclaredType(a[b])");
   }
 
   @Test
