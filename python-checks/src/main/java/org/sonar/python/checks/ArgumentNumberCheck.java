@@ -133,7 +133,6 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
   private static boolean isException(CallExpression callExpression, FunctionSymbol functionSymbol) {
     return functionSymbol.hasDecorators()
       || functionSymbol.hasVariadicParameter()
-      || functionSymbol.isStub()
       || callExpression.arguments().stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR))
       || extendsZopeInterface(((FunctionSymbolImpl) functionSymbol).owner())
       // TODO: distinguish between class methods (new and old style) from other methods

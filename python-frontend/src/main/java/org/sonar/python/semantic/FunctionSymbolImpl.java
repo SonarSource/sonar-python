@@ -55,11 +55,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean hasDecorators;
   private String annotatedReturnTypeName = null;
   private InferredType declaredReturnType = InferredTypes.anyType();
-  private boolean isStub = false;
+  private final boolean isStub;
   private Symbol owner;
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
-  private final boolean isFromTypeshed;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
@@ -69,12 +68,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     hasDecorators = !functionDef.decorators().isEmpty();
     decorators = decorators(functionDef);
     String fileId = null;
-    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+    if (!isTypeShedFile(pythonFile)) {
       Path path = pathOf(pythonFile);
       fileId = path != null ? path.toString() : pythonFile.toString();
     }
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
-    isFromTypeshed = isTypeShedFile(pythonFile);
+    isStub = isTypeShedFile(pythonFile);
   }
 
   public void setParametersWithType(ParameterList parametersList) {
@@ -95,22 +94,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = functionSymbol.definitionLocation();
     declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
-    isFromTypeshed = ((FunctionSymbolImpl) functionSymbol).isFromTypeshed;
-  }
-
-  public FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
-                            boolean isInstanceMethod, boolean isAsynchronous, boolean hasDecorators, List<Parameter> parameters, List<String> decorators) {
-    super(name, fullyQualifiedName);
-    setKind(Kind.FUNCTION);
-    this.hasVariadicParameter = hasVariadicParameter;
-    this.isInstanceMethod = isInstanceMethod;
-    this.isAsynchronous = isAsynchronous;
-    this.hasDecorators = hasDecorators;
-    this.decorators = decorators;
-    this.parameters.addAll(parameters);
-    this.functionDefinitionLocation = null;
-    this.isStub = true;
-    this.isFromTypeshed = false;
   }
 
   @Override
@@ -163,7 +146,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       TypeAnnotation typeAnnotation = parameter.typeAnnotation();
       InferredType declaredType = InferredTypes.anyType();
       if (typeAnnotation != null) {
-        declaredType = InferredTypes.fromTypeAnnotation(typeAnnotation, isFromTypeshed);
+        declaredType = InferredTypes.fromTypeAnnotation(typeAnnotation, isStub);
       }
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId)));
