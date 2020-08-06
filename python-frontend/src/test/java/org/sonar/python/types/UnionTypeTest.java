@@ -159,4 +159,15 @@ public class UnionTypeTest {
     assertThat(or(new RuntimeType(x1), new RuntimeType(none)).isCompatibleWith(or(new RuntimeType(x2), new RuntimeType(none)))).isTrue();
   }
 
+  @Test
+  public void test_mustBeOrExtend() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addSuperClass(x1);
+
+    assertThat(or(new RuntimeType(x1), new RuntimeType(x2)).mustBeOrExtend("x1")).isTrue();
+    assertThat(or(new RuntimeType(x1), new RuntimeType(x2)).mustBeOrExtend("x2")).isFalse();
+
+    assertThat(or(new RuntimeType(x1), new RuntimeType(x1)).mustBeOrExtend("x1")).isTrue();
+  }
 }

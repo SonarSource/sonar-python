@@ -55,4 +55,9 @@ enum AnyType implements InferredType {
   public boolean isCompatibleWith(InferredType other) {
     return true;
   }
+
+  @Override
+  public boolean mustBeOrExtend(String typeName) {
+    return false;
+  }
 }
