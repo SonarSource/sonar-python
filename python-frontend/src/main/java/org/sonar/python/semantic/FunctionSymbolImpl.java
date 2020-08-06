@@ -70,12 +70,12 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     hasDecorators = !functionDef.decorators().isEmpty();
     decorators = decorators(functionDef);
     String fileId = null;
-    if (!isTypeShedFile(pythonFile)) {
+    isStub = isTypeShedFile(pythonFile);
+    if (!isStub) {
       Path path = pathOf(pythonFile);
       fileId = path != null ? path.toString() : pythonFile.toString();
     }
     functionDefinitionLocation = locationInFile(functionDef.name(), fileId);
-    isStub = isTypeShedFile(pythonFile);
   }
 
   public void setParametersWithType(ParameterList parametersList) {

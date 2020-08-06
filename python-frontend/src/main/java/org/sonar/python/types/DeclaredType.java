@@ -101,7 +101,7 @@ public class DeclaredType implements InferredType {
     StringBuilder str = new StringBuilder(typeClass.name());
     if (!typeArgs.isEmpty()) {
       str.append("[");
-      typeArgs.forEach(arg -> str.append(arg.typeName()));
+      str.append(typeArgs.stream().map(DeclaredType::typeName).collect(Collectors.joining(", ")));
       str.append("]");
     }
     return str.toString();

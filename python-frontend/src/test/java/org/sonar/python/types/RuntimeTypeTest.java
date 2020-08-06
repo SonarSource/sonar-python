@@ -210,8 +210,6 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(x2))).isTrue();
     assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(new SymbolImpl("foo", "foo")))).isTrue();
 
-    new DeclaredType(a);
-
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
     assertThat(new RuntimeType(a).isCompatibleWith(new RuntimeType(b))).isTrue();
