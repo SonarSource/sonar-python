@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -132,13 +133,30 @@ public class UnionTypeTest {
   public void test_isCompatibleWith() {
     assertThat(a.isCompatibleWith(or(a, b))).isTrue();
     assertThat(or(a, b).isCompatibleWith(a)).isTrue();
-    assertThat(c.isCompatibleWith(or(a, b))).isFalse();
+    assertThat(c.isCompatibleWith(or(a, b))).isTrue();
 
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    ClassSymbolImpl x3 = new ClassSymbolImpl("x3", "x3");
     x2.addSuperClass(x1);
-    assertThat(or(a, new RuntimeType(x2)).isCompatibleWith(new RuntimeType(x1))).isTrue();
-    assertThat(new RuntimeType(x1).isCompatibleWith(or(a, new RuntimeType(x2)))).isFalse();
+    x2.addMembers(Collections.singleton(new SymbolImpl("foo", null)));
+    x3.addMembers(Collections.singleton(new SymbolImpl("bar", null)));
+    assertThat(or(new RuntimeType(x2), new RuntimeType(x3)).isCompatibleWith(new RuntimeType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(or(new RuntimeType(x2), new RuntimeType(x3)))).isFalse();
+  }
+
+  @Test
+  public void test_isCompatibleWith_NoneType() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    x1.addMembers(Collections.singletonList(new SymbolImpl("foo", null)));
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addMembers(Collections.singletonList(new SymbolImpl("bar", null)));
+    ClassSymbolImpl none = new ClassSymbolImpl("NoneType", "NoneType");
+
+    assertThat(or(new RuntimeType(x1), new RuntimeType(none)).isCompatibleWith(new RuntimeType(none))).isTrue();
+    assertThat(or(new RuntimeType(x1), new RuntimeType(none)).isCompatibleWith(new RuntimeType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(or(new RuntimeType(x2), new RuntimeType(none)))).isFalse();
+    assertThat(or(new RuntimeType(x1), new RuntimeType(none)).isCompatibleWith(or(new RuntimeType(x2), new RuntimeType(none)))).isTrue();
   }
 
 }
