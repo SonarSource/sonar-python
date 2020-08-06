@@ -113,6 +113,7 @@ public final class CheckList {
       FixmeCommentCheck.class,
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,
+      FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
       GenericExceptionRaisedCheck.class,
       HardCodedCredentialsCheck.class,
