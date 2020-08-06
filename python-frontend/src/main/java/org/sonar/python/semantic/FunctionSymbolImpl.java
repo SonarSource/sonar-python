@@ -44,6 +44,8 @@ import org.sonar.python.types.InferredTypes;
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
+import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
+import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
 
 public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final List<Parameter> parameters = new ArrayList<>();
@@ -146,7 +148,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       TypeAnnotation typeAnnotation = parameter.typeAnnotation();
       InferredType declaredType = InferredTypes.anyType();
       if (typeAnnotation != null) {
-        declaredType = InferredTypes.fromTypeAnnotation(typeAnnotation, isStub);
+        declaredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
       }
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId)));

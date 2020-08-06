@@ -102,14 +102,6 @@ public class InferredTypes {
     return anyType();
   }
 
-  public static InferredType declaredType(@Nullable Symbol typeClass, List<DeclaredType> typeArgs) {
-    return typeClass != null ? new DeclaredType(typeClass, typeArgs) : InferredTypes.anyType();
-  }
-
-  public static InferredType declaredType(@Nullable Symbol typeClass) {
-    return declaredType(typeClass, Collections.emptyList());
-  }
-
   static void setBuiltinSymbols(Map<String, Symbol> builtinSymbols) {
     InferredTypes.builtinSymbols = Collections.unmodifiableMap(builtinSymbols);
   }
@@ -122,16 +114,18 @@ public class InferredTypes {
     return types.reduce(InferredTypes::or).orElse(anyType());
   }
 
-  public static InferredType fromTypeAnnotation(TypeAnnotation typeAnnotation, boolean isFromTypeshed) {
+  public static InferredType fromTypeAnnotation(TypeAnnotation typeAnnotation) {
     Map<String, Symbol> builtins = InferredTypes.builtinSymbols != null ? InferredTypes.builtinSymbols : Collections.emptyMap();
-    if (isFromTypeshed) {
-      return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
-    }
     DeclaredType declaredType = declaredTypeFromTypeAnnotation(typeAnnotation.expression(), builtins);
     if (declaredType == null) {
       return InferredTypes.anyType();
     }
     return declaredType;
+  }
+
+  public static InferredType fromTypeshedTypeAnnotation(TypeAnnotation typeAnnotation) {
+    Map<String, Symbol> builtins = InferredTypes.builtinSymbols != null ? InferredTypes.builtinSymbols : Collections.emptyMap();
+    return runtimeTypefromTypeAnnotation(typeAnnotation.expression(), builtins);
   }
 
   @CheckForNull

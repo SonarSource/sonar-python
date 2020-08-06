@@ -685,7 +685,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         }
         TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
         if (typeAnnotation != null && !isTypeShedFile(pythonFile)) {
-          functionSymbolImpl.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(typeAnnotation, false));
+          functionSymbolImpl.setDeclaredReturnType(InferredTypes.fromTypeAnnotation(typeAnnotation));
         }
       }
       super.visitFunctionDef(functionDef);

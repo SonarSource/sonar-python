@@ -90,4 +90,10 @@ public class DeclaredTypeTest {
     assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x1))).isTrue();
     assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x2))).isTrue();
   }
+
+  @Test
+  public void test_getClass() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    assertThat(new DeclaredType(x1).getTypeClass()).isEqualTo(x1);
+  }
 }
