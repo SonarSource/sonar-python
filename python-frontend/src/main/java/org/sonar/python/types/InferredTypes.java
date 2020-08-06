@@ -131,7 +131,8 @@ public class InferredTypes {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       Symbol symbol = ((Name) expression).symbol();
       if (symbol != null) {
-        return new DeclaredType(symbol);
+        String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
+        return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn)) : new DeclaredType(symbol);
       }
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
@@ -149,22 +150,31 @@ public class InferredTypes {
         })
         .orElse(null);
     }
+    if (expression.is(Kind.NONE)) {
+      return new DeclaredType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
+    }
     return null;
   }
 
   private static InferredType runtimeTypefromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null && "typing.Text".equals(symbol.fullyQualifiedName())) {
-        return InferredTypes.runtimeType(builtinSymbols.get("str"));
+      if (symbol != null ) {
+        if ("typing.Text".equals(symbol.fullyQualifiedName())) {
+          return InferredTypes.runtimeType(builtinSymbols.get("str"));
+        }
+        return InferredTypes.genericType(symbol, Collections.emptyList(), builtinSymbols);
       }
-      return InferredTypes.runtimeType(symbol);
+      return InferredTypes.anyType();
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
       return TreeUtils.getSymbolFromTree(subscription.object())
         .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols))
         .orElse(InferredTypes.anyType());
+    }
+    if (expression.is(Kind.NONE)) {
+      return InferredTypes.runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
     }
     return InferredTypes.anyType();
   }
