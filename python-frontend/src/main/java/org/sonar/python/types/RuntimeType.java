@@ -28,6 +28,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
+
 class RuntimeType implements InferredType {
 
   private final ClassSymbol typeClass;
@@ -40,7 +42,7 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean isIdentityComparableWith(InferredType other) {
-    if (other == AnyType.ANY) {
+    if (other == AnyType.ANY || other instanceof DeclaredType) {
       return true;
     }
     if (other instanceof UnionType) {
@@ -72,18 +74,28 @@ class RuntimeType implements InferredType {
   @Override
   public boolean isCompatibleWith(InferredType other) {
     if (other instanceof RuntimeType) {
-      RuntimeType otherRuntimeType = (RuntimeType) other;
-      String otherFullyQualifiedName = otherRuntimeType.typeClass.fullyQualifiedName();
-      boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
-        otherRuntimeType.typeClass.declaredMembers().stream().allMatch(m -> typeClass.resolveMember(m.name()).isPresent());
-      boolean canBeOrExtend = otherFullyQualifiedName == null || this.canBeOrExtend(otherFullyQualifiedName);
-      return isDuckTypeCompatible || canBeOrExtend;
+      return areSymbolsCompatible(((RuntimeType) other).getTypeClass());
+    }
+    if (other instanceof DeclaredType) {
+      return ((DeclaredType) other).alternativeTypeSymbols().stream().anyMatch(this::areSymbolsCompatible);
     }
     if (other instanceof UnionType) {
       return ((UnionType) other).types().stream().anyMatch(this::isCompatibleWith);
     }
     // other is AnyType
     return true;
+  }
+
+  private boolean areSymbolsCompatible(Symbol other) {
+    if (!other.is(CLASS)) {
+      return true;
+    }
+    ClassSymbol otherTypeClass = (ClassSymbol) other;
+    String otherFullyQualifiedName = otherTypeClass.fullyQualifiedName();
+    boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
+      otherTypeClass.declaredMembers().stream().allMatch(m -> this.typeClass.resolveMember(m.name()).isPresent());
+    boolean canBeOrExtend = otherFullyQualifiedName == null || this.canBeOrExtend(otherFullyQualifiedName);
+    return isDuckTypeCompatible || canBeOrExtend;
   }
 
   @Override

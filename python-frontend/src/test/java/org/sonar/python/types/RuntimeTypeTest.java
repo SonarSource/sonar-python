@@ -19,12 +19,17 @@
  */
 package org.sonar.python.types;
 
-import java.util.Arrays;
 import java.util.Collections;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.semantic.SymbolTableBuilder;
+import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,6 +55,9 @@ public class RuntimeTypeTest {
 
     assertThat(aType.isIdentityComparableWith(or(aType, bType))).isTrue();
     assertThat(aType.isIdentityComparableWith(or(cType, bType))).isFalse();
+
+    assertThat(aType.isIdentityComparableWith(new DeclaredType(a))).isTrue();
+    assertThat(aType.isIdentityComparableWith(new DeclaredType(b))).isTrue();
   }
 
   @Test
@@ -197,6 +205,11 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x1))).isTrue();
     assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(x2))).isTrue();
 
+    assertThat(new RuntimeType(x2).isCompatibleWith(new DeclaredType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(x1))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(x2))).isTrue();
+    assertThat(new RuntimeType(x1).isCompatibleWith(new DeclaredType(new SymbolImpl("foo", "foo")))).isTrue();
+
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
     assertThat(new RuntimeType(a).isCompatibleWith(new RuntimeType(b))).isTrue();
@@ -207,16 +220,18 @@ public class RuntimeTypeTest {
     y.addSuperClass(new SymbolImpl("unknown", null));
     assertThat(new RuntimeType(y).isCompatibleWith(new RuntimeType(z))).isTrue();
 
-    ClassSymbolImpl duck = new ClassSymbolImpl("duck", "duck");
-    ClassSymbolImpl goose = new ClassSymbolImpl("goose", "goose");
-    FunctionSymbolImpl duckSwim = new FunctionSymbolImpl("swim", "duck.swim", false, false, false, false, Collections.emptyList(),
-      Collections.emptyList());
-    FunctionSymbolImpl duckQuack = new FunctionSymbolImpl("quack", "duck.quack", false, false, false, false, Collections.emptyList(),
-      Collections.emptyList());
-    FunctionSymbolImpl gooseSwim = new FunctionSymbolImpl("swim", "goose.swim", false, false, false, false, Collections.emptyList(),
-      Collections.emptyList());
-    duck.addMembers(Arrays.asList(duckSwim, duckQuack));
-    goose.addMembers(Collections.singleton(gooseSwim));
+    FileInput fileInput = PythonTestUtils.parse(
+      new SymbolTableBuilder("animals", PythonTestUtils.pythonFile("foo")),
+      "class duck:",
+      "  def swim(): ...",
+      "  def quack(): ...",
+      "class goose:",
+      "  def swim(): ...");
+
+    ClassDef duckClass = PythonTestUtils.getFirstDescendant(fileInput, tree -> tree.is(Tree.Kind.CLASSDEF));
+    ClassDef gooseClass = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Tree.Kind.CLASSDEF));
+    ClassSymbol duck = TreeUtils.getClassSymbolFromDef(duckClass);
+    ClassSymbol goose = TreeUtils.getClassSymbolFromDef(gooseClass);
     assertThat(new RuntimeType(duck).isCompatibleWith(new RuntimeType(goose))).isTrue();
     assertThat(new RuntimeType(goose).isCompatibleWith(new RuntimeType(duck))).isFalse();
   }

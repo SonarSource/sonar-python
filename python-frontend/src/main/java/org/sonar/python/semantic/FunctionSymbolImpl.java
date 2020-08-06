@@ -41,8 +41,11 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
+import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
+import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
 
 public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final List<Parameter> parameters = new ArrayList<>();
@@ -54,7 +57,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private final boolean hasDecorators;
   private String annotatedReturnTypeName = null;
   private InferredType declaredReturnType = InferredTypes.anyType();
-  private boolean isStub = false;
+  private final boolean isStub;
   private Symbol owner;
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
@@ -67,7 +70,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     hasDecorators = !functionDef.decorators().isEmpty();
     decorators = decorators(functionDef);
     String fileId = null;
-    if (!SymbolUtils.isTypeShedFile(pythonFile)) {
+    isStub = isTypeShedFile(pythonFile);
+    if (!isStub) {
       Path path = pathOf(pythonFile);
       fileId = path != null ? path.toString() : pythonFile.toString();
     }
@@ -92,20 +96,6 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = functionSymbol.definitionLocation();
     declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
-  }
-
-  public FunctionSymbolImpl(String name, @Nullable String fullyQualifiedName, boolean hasVariadicParameter,
-                            boolean isInstanceMethod, boolean isAsynchronous, boolean hasDecorators, List<Parameter> parameters, List<String> decorators) {
-    super(name, fullyQualifiedName);
-    setKind(Kind.FUNCTION);
-    this.hasVariadicParameter = hasVariadicParameter;
-    this.isInstanceMethod = isInstanceMethod;
-    this.isAsynchronous = isAsynchronous;
-    this.hasDecorators = hasDecorators;
-    this.decorators = decorators;
-    this.parameters.addAll(parameters);
-    this.functionDefinitionLocation = null;
-    this.isStub = true;
   }
 
   @Override
@@ -158,7 +148,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       TypeAnnotation typeAnnotation = parameter.typeAnnotation();
       InferredType declaredType = InferredTypes.anyType();
       if (typeAnnotation != null) {
-        declaredType = InferredTypes.declaredType(typeAnnotation);
+        declaredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
       }
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId)));
