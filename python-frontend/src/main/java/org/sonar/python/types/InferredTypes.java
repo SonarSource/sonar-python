@@ -55,8 +55,6 @@ public class InferredTypes {
     ALIASED_ANNOTATIONS.put("typing.Dict", BuiltinTypes.DICT);
     ALIASED_ANNOTATIONS.put("typing.Set", BuiltinTypes.SET);
     ALIASED_ANNOTATIONS.put("typing.FrozenSet", "frozenset");
-    ALIASED_ANNOTATIONS.put("typing.Deque", "deque");
-    ALIASED_ANNOTATIONS.put("typing.DefaultDict", "defaultdict");
     ALIASED_ANNOTATIONS.put("typing.Type", "type");
   }
 
