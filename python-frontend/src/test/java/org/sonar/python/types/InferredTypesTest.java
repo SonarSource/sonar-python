@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
@@ -41,6 +42,8 @@ import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
+import static org.sonar.python.types.InferredTypes.typeName;
+import static org.sonar.python.types.InferredTypes.typeSymbols;
 import static org.sonar.python.types.TypeShed.typeShedClass;
 
 public class InferredTypesTest {
@@ -92,17 +95,55 @@ public class InferredTypesTest {
 
   @Test
   public void test_aliased_type_annotations() {
-    TypeAnnotation typeAnnotation = typeAnnotation(
+    assertAliasedTypeAnnotation(BuiltinTypes.LIST,
       "from typing import List",
-      "l : List[int]"
+      "l : List[int]");
+
+    assertAliasedTypeAnnotation(BuiltinTypes.TUPLE,
+      "from typing import Tuple",
+      "l : Tuple[int]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.LIST);
+
+    assertAliasedTypeAnnotation(BuiltinTypes.DICT,
+      "from typing import Dict",
+      "l : Dict[int, str]"
+    );
+
+    assertAliasedTypeAnnotation(BuiltinTypes.SET,
+      "from typing import Set",
+      "l : Set[int]"
+    );
+
+    assertAliasedTypeAnnotation("frozenset",
+      "from typing import FrozenSet",
+      "l : FrozenSet[int]"
+    );
+
+    assertAliasedTypeAnnotation("type",
+      "from typing import Type",
+      "l : Type[int]"
+    );
+
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import DefaultDict",
+      "l : DefaultDict[int, str]"
+    );
+    InferredType type = fromTypeAnnotation(typeAnnotation);
+    assertThat(typeName(type)).isEqualTo("DefaultDict[int, str]");
 
     typeAnnotation = typeAnnotation(
-      "from typing import Dict",
-      "l : Dict[int, string]"
+      "from typing import Deque",
+      "l : Deque[int]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.DICT);
+    type = fromTypeAnnotation(typeAnnotation);
+    assertThat(typeName(type)).isEqualTo("Deque[int]");
+  }
+
+  private void assertAliasedTypeAnnotation(String type, String... code) {
+    TypeAnnotation typeAnnotation = typeAnnotation(code);
+    ClassSymbol typeClass = typeShedClass(type);
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(runtimeType(typeClass));
+    assertThat(typeSymbols(fromTypeAnnotation(typeAnnotation))).containsExactly(typeClass);
   }
 
   @Test
