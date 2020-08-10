@@ -128,7 +128,7 @@ def functions_with_try_except():
       value = 42
     else:
       value = "hello"
-    return value  # FN (SONARPY-775)
+    return value  # Noncompliant {{Return a value of type "list[str]" or update function "my_list_union_nok" type hint.}}
 
 def custom_classes():
   class A: ...

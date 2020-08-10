@@ -36,16 +36,17 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.NameImpl;
-import org.sonar.python.tree.TreeUtils;
 
 public class TypeInference extends BaseTreeVisitor {
 
@@ -98,10 +99,17 @@ public class TypeInference extends BaseTreeVisitor {
       }
     }
 
-    if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(functionDef);
+    functionDef.body().accept(tryStatementVisitor);
+    if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
       visitor.processPropagations(trackedVars);
-      functionDef.accept(new BaseTreeVisitor() {
+      functionDef.body().accept(new BaseTreeVisitor() {
+        @Override
+        public void visitFunctionDef(FunctionDef visited) {
+          // Don't visit nested functions
+        }
+
         @Override
         public void visitName(Name name) {
           Optional.ofNullable(name.symbol()).ifPresent(symbol ->
@@ -115,6 +123,30 @@ public class TypeInference extends BaseTreeVisitor {
         return;
       }
       visitor.flowSensitiveTypeInference(cfg, trackedVars);
+    }
+  }
+
+  private static class TryStatementVisitor extends BaseTreeVisitor {
+    FunctionDef functionDef;
+    boolean hasTryStatement = false;
+
+    TryStatementVisitor(FunctionDef functionDef) {
+      this.functionDef = functionDef;
+    }
+
+    @Override
+    public void visitClassDef(ClassDef classDef) {
+      // Don't visit nested classes
+    }
+
+    @Override
+    public void visitFunctionDef(FunctionDef visited) {
+      // Don't visit nested functions
+    }
+
+    @Override
+    public void visitTryStatement(TryStatement tryStatement) {
+      hasTryStatement = true;
     }
   }
 
