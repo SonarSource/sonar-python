@@ -59,3 +59,9 @@ def assignment_expression():
     pass
   if (b:=foo()):
     b = b # Noncompliant
+
+def unpacking():
+  x = [1]
+  x, = x  # OK
+  y, = x = x # Noncompliant
+#        ^

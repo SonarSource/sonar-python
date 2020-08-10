@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
@@ -58,7 +59,7 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME, ctx ->
       ((ImportName) ctx.syntaxNode()).modules().forEach(this::addImportedName));
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignement);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignment);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, this::checkAnnotatedAssignment);
 
@@ -72,12 +73,12 @@ public class SelfAssignmentCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void checkAssignement(SubscriptionContext ctx) {
+  private void checkAssignment(SubscriptionContext ctx) {
     AssignmentStatement assignment = (AssignmentStatement) ctx.syntaxNode();
     Expression assignedValue = assignment.assignedValue();
     for (int i = 0; i < assignment.lhsExpressions().size(); i++) {
-      List<Expression> expressions = assignment.lhsExpressions().get(i).expressions();
-      if (expressions.size() == 1 && CheckUtils.areEquivalent(assignedValue, expressions.get(0)) && !isException(assignment, assignedValue)) {
+      ExpressionList expressionList = assignment.lhsExpressions().get(i);
+      if (expressionList.commas().isEmpty() && CheckUtils.areEquivalent(assignedValue, expressionList.expressions().get(0)) && !isException(assignment, assignedValue)) {
         ctx.addIssue(assignment.equalTokens().get(i), MESSAGE);
       }
     }
