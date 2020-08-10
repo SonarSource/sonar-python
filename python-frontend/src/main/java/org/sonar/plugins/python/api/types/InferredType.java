@@ -44,4 +44,13 @@ public interface InferredType {
   @Beta
   boolean isCompatibleWith(InferredType other);
 
+  /**
+   * mustBeOrExtend implies we know for sure the given type is either of the given typeName or a subtype of it.
+   * As opposed to "canBeOrExtend", this will return true only when we are sure the subtyping relationship is present.
+   * For types inferred from type annotations (DeclaredType), the actual underlying type might be different from what has been declared,
+   * but it must be or extend the declared type.
+   */
+  @Beta
+  boolean mustBeOrExtend(String typeName);
+
 }

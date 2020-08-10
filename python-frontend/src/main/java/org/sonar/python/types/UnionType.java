@@ -96,6 +96,10 @@ class UnionType implements InferredType {
     return types.stream().anyMatch(t -> t.isCompatibleWith(other));
   }
 
+  public boolean mustBeOrExtend(String fullyQualifiedName) {
+    return types.stream().allMatch(t -> t.mustBeOrExtend(fullyQualifiedName));
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

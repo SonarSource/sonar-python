@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -79,6 +82,9 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean canBeOrExtend(String typeName) {
+    if (typeName.equals("typing.Tuple") || typeName.equals("tuple")) {
+      return alternativeTypeSymbols().stream().map(Symbol::fullyQualifiedName).anyMatch(fqn -> "typing.Tuple".equals(fqn) || "tuple".equals(fqn));
+    }
     return true;
   }
 
@@ -90,6 +96,16 @@ public class DeclaredType implements InferredType {
   @Override
   public boolean isCompatibleWith(InferredType other) {
     return true;
+  }
+
+  @Override
+  public boolean mustBeOrExtend(String typeName) {
+    return alternativeTypeSymbols().stream().flatMap(a -> {
+      if (a.is(Symbol.Kind.AMBIGUOUS)) {
+        return ((AmbiguousSymbol) a).alternatives().stream().filter(alternative -> alternative.is(Symbol.Kind.CLASS));
+      }
+      return Stream.of(a);
+    }).allMatch(a -> ((ClassSymbol) a).isOrExtends(typeName));
   }
 
   @Override

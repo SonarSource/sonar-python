@@ -54,4 +54,9 @@ public class AnyTypeTest {
     assertThat(InferredTypes.INT.isCompatibleWith(ANY)).isTrue();
     assertThat(ANY.isCompatibleWith(InferredTypes.INT)).isTrue();
   }
+
+  @Test
+  public void test_mustBeOrExtend() {
+    assertThat(ANY.mustBeOrExtend("a")).isFalse();
+  }
 }

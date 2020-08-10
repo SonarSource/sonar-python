@@ -21,7 +21,12 @@ package org.sonar.python.types;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
@@ -78,8 +83,16 @@ public class DeclaredTypeTest {
   @Test
   public void test_canBeOrExtend() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    ClassSymbolImpl tuple = new ClassSymbolImpl("tuple", "tuple");
     assertThat(new DeclaredType(x).canBeOrExtend("x")).isTrue();
     assertThat(new DeclaredType(x).canBeOrExtend("y")).isTrue();
+    assertThat(new DeclaredType(x).canBeOrExtend("tuple")).isFalse();
+    assertThat(new DeclaredType(x).canBeOrExtend("typing.Tuple")).isFalse();
+    assertThat(new DeclaredType(tuple).canBeOrExtend("typing.Tuple")).isTrue();
+    assertThat(new DeclaredType(tuple).canBeOrExtend("tuple")).isTrue();
+    ClassSymbolImpl typingTuple = new ClassSymbolImpl("Tuple", "typing.Tuple");
+    assertThat(new DeclaredType(typingTuple).canBeOrExtend("typing.Tuple")).isTrue();
+    assertThat(new DeclaredType(typingTuple).canBeOrExtend("tuple")).isTrue();
   }
 
   @Test
@@ -91,6 +104,28 @@ public class DeclaredTypeTest {
     assertThat(new DeclaredType(x2).isCompatibleWith(new DeclaredType(x1))).isTrue();
     assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x1))).isTrue();
     assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x2))).isTrue();
+  }
+
+  @Test
+  public void test_mustBeOrExtend() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addSuperClass(x1);
+
+    DeclaredType typeX1 = new DeclaredType(x1);
+    DeclaredType typeX2 = new DeclaredType(x2);
+
+    assertThat(typeX1.mustBeOrExtend("x1")).isTrue();
+    assertThat(typeX1.mustBeOrExtend("x2")).isFalse();
+
+    assertThat(typeX2.mustBeOrExtend("x1")).isTrue();
+    assertThat(typeX2.mustBeOrExtend("x2")).isTrue();
+
+    ClassSymbolImpl otherX1 = new ClassSymbolImpl("x1", "x1");
+    Set<Symbol> symbols = new HashSet<>(Arrays.asList(x1, otherX1));
+    AmbiguousSymbol ambiguousSymbol = new AmbiguousSymbolImpl("x1", "x1", symbols);
+    DeclaredType typeAmbiguousX1 = new DeclaredType(ambiguousSymbol);
+    assertThat(typeAmbiguousX1.mustBeOrExtend("x1")).isTrue();
   }
 
   @Test

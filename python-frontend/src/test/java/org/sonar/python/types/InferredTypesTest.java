@@ -36,6 +36,7 @@ import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
@@ -137,6 +138,13 @@ public class InferredTypesTest {
     );
     type = fromTypeAnnotation(typeAnnotation);
     assertThat(typeName(type)).isEqualTo("Deque[int]");
+
+    typeAnnotation = typeAnnotation(
+      "from typing import List",
+      "l : List"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.LIST);
+    assertThat(((DeclaredType) fromTypeAnnotation(typeAnnotation)).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactly("list");
   }
 
   private void assertAliasedTypeAnnotation(String type, String... code) {
@@ -203,12 +211,24 @@ public class InferredTypesTest {
   }
 
   @Test
+  public void test_none_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "l : None"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(NONE);
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(DeclaredType.class);
+    assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder("NoneType");
+  }
+
+  @Test
   public void test_optional_type_annotations() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Optional",
       "l : Optional[int]"
     );
-    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, InferredTypes.NONE));
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.or(InferredTypes.INT, NONE));
     InferredType declaredType = fromTypeAnnotation(typeAnnotation);
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)

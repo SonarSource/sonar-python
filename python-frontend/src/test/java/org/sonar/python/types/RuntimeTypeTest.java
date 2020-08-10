@@ -246,4 +246,20 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(none).isCompatibleWith(new RuntimeType(x1))).isFalse();
     assertThat(new RuntimeType(none).isCompatibleWith(new RuntimeType(none))).isTrue();
   }
+
+  @Test
+  public void test_mustBeOrExtend() {
+    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
+    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
+    x2.addSuperClass(x1);
+
+    RuntimeType typeX1 = new RuntimeType(x1);
+    RuntimeType typeX2 = new RuntimeType(x2);
+
+    assertThat(typeX1.mustBeOrExtend("x1")).isTrue();
+    assertThat(typeX1.mustBeOrExtend("x2")).isFalse();
+
+    assertThat(typeX2.mustBeOrExtend("x1")).isTrue();
+    assertThat(typeX2.mustBeOrExtend("x2")).isTrue();
+  }
 }

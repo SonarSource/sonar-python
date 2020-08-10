@@ -17,47 +17,15 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types;
+package org.sonar.python.checks;
 
-import java.util.Optional;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.types.InferredType;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-enum AnyType implements InferredType {
-  ANY;
+public class FunctionReturnTypeCheckTest {
 
-  @Override
-  public boolean isIdentityComparableWith(InferredType other) {
-    return true;
-  }
-
-  @Override
-  public boolean canHaveMember(String memberName) {
-    return true;
-  }
-
-  @Override
-  public Optional<Symbol> resolveMember(String memberName) {
-    return Optional.empty();
-  }
-
-  @Override
-  public boolean canOnlyBe(String typeName) {
-    return false;
-  }
-
-  @Override
-  public boolean canBeOrExtend(String typeName) {
-    return true;
-  }
-
-  @Override
-  public boolean isCompatibleWith(InferredType other) {
-    return true;
-  }
-
-  @Override
-  public boolean mustBeOrExtend(String typeName) {
-    return false;
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/functionReturnType.py", new FunctionReturnTypeCheck());
   }
 }

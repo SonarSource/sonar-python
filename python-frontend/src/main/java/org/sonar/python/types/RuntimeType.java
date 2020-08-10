@@ -86,6 +86,10 @@ class RuntimeType implements InferredType {
     return true;
   }
 
+  public boolean mustBeOrExtend(String fullyQualifiedName) {
+    return typeClass.isOrExtends(fullyQualifiedName);
+  }
+
   private boolean areSymbolsCompatible(Symbol other) {
     if (!other.is(CLASS)) {
       return true;
