@@ -49,6 +49,7 @@ import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 public class InferredTypes {
 
   private static final Map<String, String> ALIASED_ANNOTATIONS = new HashMap<>();
+
   static {
     ALIASED_ANNOTATIONS.put("typing.List", BuiltinTypes.LIST);
     ALIASED_ANNOTATIONS.put("typing.Tuple", BuiltinTypes.TUPLE);
@@ -79,7 +80,7 @@ public class InferredTypes {
   }
 
   public static boolean isInitialized() {
-    return  builtinSymbols != null;
+    return builtinSymbols != null;
   }
 
   public static InferredType anyType() {
@@ -140,8 +141,8 @@ public class InferredTypes {
       return TreeUtils.getSymbolFromTree(subscription.object())
         .map(symbol -> {
           List<DeclaredType> args = subscription.subscripts().expressions().stream()
-              .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
-              .collect(Collectors.toList());
+            .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
+            .collect(Collectors.toList());
           if (args.stream().anyMatch(Objects::isNull)) {
             args = Collections.emptyList();
           }
@@ -159,7 +160,7 @@ public class InferredTypes {
   private static InferredType runtimeTypefromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
     if (expression.is(Kind.NAME) && !((Name) expression).name().equals("Any")) {
       Symbol symbol = ((Name) expression).symbol();
-      if (symbol != null ) {
+      if (symbol != null) {
         if ("typing.Text".equals(symbol.fullyQualifiedName())) {
           return InferredTypes.runtimeType(builtinSymbols.get("str"));
         }
