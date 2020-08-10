@@ -49,6 +49,18 @@ def flow_sensitivity():
   my_other_var = 42
   my_other_var() # Noncompliant
 
+def flow_sensitivity_nested_try_except():
+  def func_with_try_except():
+    try:
+      ...
+    except:
+      ...
+
+  def other_func():
+    my_var = "hello"
+    my_var = 42
+    my_var() # Noncompliant
+
 def member_access():
   my_callable = MyCallable()
   my_callable.non_callable = 42

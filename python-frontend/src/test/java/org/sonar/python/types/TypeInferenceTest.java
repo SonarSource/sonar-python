@@ -381,6 +381,111 @@ public class TypeInferenceTest {
   }
 
   @Test
+  public void nested_try_except() {
+    FileInput fileInput = parse(
+      "def func(cond):",
+      "  def f(p):",
+      "    try:",
+      "      if p:",
+      "        x = 42",
+      "        type(x)",
+      "      else:",
+      "        x = 'foo'",
+      "        type(x)",
+      "    except:",
+      "      type(x)",
+      "  def g(p):",
+      "    if p:",
+      "      y = 42",
+      "      type(y)",
+      "    else:",
+      "      y = \"hello\"",
+      "      type(y)",
+      "    type(y)",
+      "  if cond:",
+      "    z = 42",
+      "    type(z)",
+      "  else:",
+      "    z = \"hello\"",
+      "    type(z)",
+      "  type(z)"
+    );
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(firstX.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(secondX.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(thirdX.expression().type()).isEqualTo(or(INT, STR));
+
+    RegularArgument firstY = (RegularArgument) calls.get(3).arguments().get(0);
+    RegularArgument secondY = (RegularArgument) calls.get(4).arguments().get(0);
+    RegularArgument thirdY = (RegularArgument) calls.get(5).arguments().get(0);
+    assertThat(firstY.expression().type()).isEqualTo(INT);
+    assertThat(secondY.expression().type()).isEqualTo(STR);
+    assertThat(thirdY.expression().type()).isEqualTo(or(INT, STR));
+
+    RegularArgument firstZ = (RegularArgument) calls.get(6).arguments().get(0);
+    RegularArgument secondZ = (RegularArgument) calls.get(7).arguments().get(0);
+    RegularArgument thirdZ = (RegularArgument) calls.get(8).arguments().get(0);
+    assertThat(firstZ.expression().type()).isEqualTo(INT);
+    assertThat(secondZ.expression().type()).isEqualTo(STR);
+    assertThat(thirdZ.expression().type()).isEqualTo(or(INT, STR));
+  }
+
+  @Test
+  public void nested_try_except_2() {
+    FileInput fileInput = parse(
+      "def func(cond):",
+      "  try:",
+      "    if p:",
+      "      x = 42",
+      "      type(x)",
+      "    else:",
+      "      x = 'foo'",
+      "      type(x)",
+      "  except:",
+      "    type(x)",
+      "  def g(p):",
+      "    if p:",
+      "      y = 42",
+      "      type(y)",
+      "    else:",
+      "      y = \"hello\"",
+      "      type(y)",
+      "    type(y)",
+      "  if cond:",
+      "    z = 42",
+      "    type(z)",
+      "  else:",
+      "    z = \"hello\"",
+      "    type(z)",
+      "  type(z)"
+    );
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(firstX.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(secondX.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(thirdX.expression().type()).isEqualTo(or(INT, STR));
+
+    RegularArgument firstY = (RegularArgument) calls.get(3).arguments().get(0);
+    RegularArgument secondY = (RegularArgument) calls.get(4).arguments().get(0);
+    RegularArgument thirdY = (RegularArgument) calls.get(5).arguments().get(0);
+    assertThat(firstY.expression().type()).isEqualTo(INT);
+    assertThat(secondY.expression().type()).isEqualTo(STR);
+    assertThat(thirdY.expression().type()).isEqualTo(or(INT, STR));
+
+    RegularArgument firstZ = (RegularArgument) calls.get(6).arguments().get(0);
+    RegularArgument secondZ = (RegularArgument) calls.get(7).arguments().get(0);
+    RegularArgument thirdZ = (RegularArgument) calls.get(8).arguments().get(0);
+    assertThat(firstZ.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(secondZ.expression().type()).isEqualTo(or(INT, STR));
+    assertThat(thirdZ.expression().type()).isEqualTo(or(INT, STR));
+  }
+
+  @Test
   public void execution_order_assignment_statement() {
     FileInput fileInput = parse(
       "def foo():",
