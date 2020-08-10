@@ -100,16 +100,14 @@ public class TypeInference extends BaseTreeVisitor {
     }
 
     TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(functionDef);
-    functionDef.accept(tryStatementVisitor);
+    functionDef.body().accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
       visitor.processPropagations(trackedVars);
-      functionDef.accept(new BaseTreeVisitor() {
+      functionDef.body().accept(new BaseTreeVisitor() {
         @Override
         public void visitFunctionDef(FunctionDef visited) {
-          if (functionDef == visited) {
-            super.visitFunctionDef(functionDef);
-          }
+          // Don't visit nested functions
         }
 
         @Override
@@ -138,14 +136,12 @@ public class TypeInference extends BaseTreeVisitor {
 
     @Override
     public void visitClassDef(ClassDef classDef) {
-      // don't visit nested classes
+      // Don't visit nested classes
     }
 
     @Override
     public void visitFunctionDef(FunctionDef visited) {
-      if (functionDef == visited) {
-        super.visitFunctionDef(functionDef);
-      }
+      // Don't visit nested functions
     }
 
     @Override
