@@ -94,6 +94,8 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
         copiedClassSymbol.superClasses.add(copiedClassSymbol);
       } else if (superClass.kind() == Symbol.Kind.CLASS) {
         copiedClassSymbol.superClasses.add(((ClassSymbolImpl) superClass).copyWithoutUsages());
+      } else if (superClass.is(Kind.AMBIGUOUS)) {
+        copiedClassSymbol.superClasses.add(((AmbiguousSymbolImpl) superClass).copyWithoutUsages());
       } else {
         copiedClassSymbol.superClasses.add(new SymbolImpl(superClass.name(), superClass.fullyQualifiedName()));
       }
