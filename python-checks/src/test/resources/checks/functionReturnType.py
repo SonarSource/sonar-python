@@ -1,4 +1,5 @@
-from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr
+from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr, Iterator, Iterable, Callable, Optional
+import numpy as np
 
 def builtins():
   def my_str_nok() -> str:
@@ -25,6 +26,17 @@ def builtins():
     if param:
       return
     print("hello")
+
+  def my_object() -> object:
+    d = dict()
+    return d  # OK
+
+def numbers():
+  def my_float() -> float:
+    return 0  # OK
+
+  def my_optional_float() -> Optional[float]:
+    return 0  # OK
 
 def tuples():
   def my_tuple_nok() -> int:
@@ -53,6 +65,16 @@ def tuples():
       return 1, 2
     else:
       return False
+
+  def my_union_unknown_type_tuple() -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
+    return 1, 2, 3  # OK
+
+  def my_optional_tuple() -> Optional[Tuple]:
+    return 1, 2, 3 # OK
+
+  def my_one_element_tuple() -> tuple:
+    # FP (SONARPY-779)
+    return 1,  # Noncompliant
 
 def collections():
     def my_list_nok() -> List:
@@ -90,6 +112,16 @@ def type_aliases():
   def returns_text() -> Text:
     return "Hello"  # OK
 
+  Checkers = Tuple[Callable[[Expression], None], Callable[[Type], None]]
+  def my_checkers() -> Checkers:
+    return 1, 2
+
+  def unknown_union() -> Union["GenericFixed", "Table"]:
+    return TypeError("error")
+
+  def my_str_union(typ: int) -> Union[str, np.dtype]:
+    return str(typ)
+
 def other_returns():
   def my_int(param) -> int:
     if param:
@@ -113,6 +145,11 @@ def other_returns():
     else:
       value = "hello"
     return value  # Noncompliant {{Return a value of type "list[str]" or update function "my_list_union_nok" type hint.}}
+
+  def nested_func() -> int:
+    def my_nested() -> str:
+      return "hello"  # OK
+    return 42  # OK
 
 def functions_with_try_except():
   def my_int_try_except(cond) -> int:
@@ -158,7 +195,30 @@ def generators():
     if param:
       return "hello" # Noncompliant {{Return a value of type "int" instead of "str" or update function "not_a_generator" type hint.}}
     else:
-      yield 42  # Noncompliant {{Remove this yield statement or annotate function "not_a_generator" with "typing.Generator".}}
+      yield 42  # Noncompliant {{Remove this yield statement or annotate function "not_a_generator" with "typing.Generator" or one of its supertypes.}}
+
+  def empty_iterator() -> Iterator[None]:
+    yield  # OK
+
+  JsonDict = Dict[str, Any]
+  def my_iterable_with_alias(chunks: Iterable[JsonDict]) -> Iterable[JsonDict]:
+    for chunk in chunks:
+      yield chunk  # OK
+
+  def my_conditional_iterator(cond) -> Iterator[Tuple[object, object]]:
+    if cond:
+      return  # OK
+    else:
+      yield
+
+  class MyIter:
+    def __iter__(self):
+      return iter("hello")
+
+  def my_custom_iterable() -> MyIter:
+    my_iter = MyIter()
+    for elem in my_iter:
+      yield elem  # Noncompliant {{Remove this yield statement or annotate function "my_custom_iterable" with "typing.Generator" or one of its supertypes.}}
 
 def missing_return():
   """No issue if functions do not return as it might be due to custom error handling or a stub definition"""

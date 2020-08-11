@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -40,6 +41,7 @@ import org.sonar.python.types.InferredTypes;
 public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
+  private static final List<String> ITERABLE_TYPES = Arrays.asList("typing.Generator", "typing.Iterator", "typing.Iterable");
 
   @Override
   public void initialize(Context context) {
@@ -55,7 +57,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
         return;
       }
       ReturnTypeVisitor returnTypeVisitor = new ReturnTypeVisitor(declaredReturnType);
-      functionDef.accept(returnTypeVisitor);
+      functionDef.body().accept(returnTypeVisitor);
       raiseIssues(ctx, functionDef, declaredReturnType, returnTypeVisitor);
     });
   }
@@ -64,11 +66,11 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
     String functionName = functionDef.name().name();
     String returnTypeName = InferredTypes.typeName(declaredReturnType);
     if (!returnTypeVisitor.yieldStatements.isEmpty()) {
-      if (declaredReturnType.mustBeOrExtend("typing.Generator")) {
+      if (ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend)) {
         return;
       }
       returnTypeVisitor.yieldStatements
-        .forEach(y -> ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"typing.Generator\".", functionName)));
+        .forEach(y -> ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"typing.Generator\" or one of its supertypes.", functionName)));
     }
     returnTypeVisitor.invalidReturnStatements.forEach(i -> {
       PreciseIssue issue;
@@ -99,6 +101,11 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
     ReturnTypeVisitor(InferredType returnType) {
       this.returnType = returnType;
+    }
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      // Don't visit nested functions
     }
 
     @Override
