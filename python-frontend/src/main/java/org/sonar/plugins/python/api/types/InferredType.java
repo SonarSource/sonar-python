@@ -32,6 +32,13 @@ public interface InferredType {
   @Beta
   boolean canHaveMember(String memberName);
 
+  /**
+   * Used to handle uncertainty of declared types. It return false when a member is not present in a declared type,
+   * while canHaveMember returns true because one of its subtype may have it.
+   */
+  @Beta
+  boolean declaresMember(String memberName);
+
   @Beta
   Optional<Symbol> resolveMember(String memberName);
 

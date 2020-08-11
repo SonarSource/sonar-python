@@ -32,6 +32,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
+
 public class DeclaredType implements InferredType {
 
   private final Symbol typeClass;
@@ -68,6 +70,11 @@ public class DeclaredType implements InferredType {
   @Override
   public boolean canHaveMember(String memberName) {
     return true;
+  }
+
+  @Override
+  public boolean declaresMember(String memberName) {
+    return alternativeTypeSymbols.stream().anyMatch(symbol -> !symbol.is(CLASS) || ((ClassSymbol) symbol).canHaveMember(memberName));
   }
 
   @Override

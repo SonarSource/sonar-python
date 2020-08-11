@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -70,6 +69,19 @@ public class UnionTypeTest {
     z.addMembers(Collections.singleton(new SymbolImpl("foo", null)));
     assertThat(or(runtimeType(x), runtimeType(y)).canHaveMember("foo")).isFalse();
     assertThat(or(runtimeType(x), runtimeType(z)).canHaveMember("foo")).isTrue();
+  }
+
+  @Test
+  public void declareMember() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    x.addMembers(Collections.singleton(new SymbolImpl("xxx", null)));
+    ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
+    ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
+    z.addMembers(Collections.singleton(new SymbolImpl("foo", null)));
+    assertThat(or(runtimeType(x), runtimeType(y)).declaresMember("foo")).isFalse();
+    assertThat(or(runtimeType(x), runtimeType(z)).declaresMember("foo")).isTrue();
+    assertThat(or(new DeclaredType(x), new DeclaredType(z)).declaresMember("foo")).isTrue();
+    assertThat(or(new RuntimeType(x), new DeclaredType(y)).declaresMember("xxx")).isTrue();
   }
 
   @Test

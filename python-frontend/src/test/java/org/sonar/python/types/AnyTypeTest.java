@@ -59,4 +59,9 @@ public class AnyTypeTest {
   public void test_mustBeOrExtend() {
     assertThat(ANY.mustBeOrExtend("a")).isFalse();
   }
+
+  @Test
+  public void test_declaresMember() {
+    assertThat(ANY.declaresMember("foo")).isTrue();
+  }
 }

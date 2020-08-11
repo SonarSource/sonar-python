@@ -22,16 +22,22 @@ package org.sonar.python.types;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.InferredTypes.or;
 
 public class DeclaredTypeTest {
@@ -65,6 +71,27 @@ public class DeclaredTypeTest {
     assertThat(new DeclaredType(x).canHaveMember("bar")).isTrue();
     assertThat(new DeclaredType(x).resolveMember("foo")).isEmpty();
     assertThat(new DeclaredType(x).resolveMember("bar")).isEmpty();
+
+    ClassSymbol classSymbol = lastClassSymbol(
+      "class C:",
+      "  def foo(): ..."
+    );
+    DeclaredType declaredType = new DeclaredType(classSymbol);
+    assertThat(declaredType.declaresMember("foo")).isTrue();
+    assertThat(declaredType.declaresMember("bar")).isFalse();
+
+    classSymbol = lastClassSymbol(
+      "class Base:",
+      "  def bar(): ...",
+      "class C(Base):",
+      "  def foo(): ..."
+    );
+    declaredType = new DeclaredType(classSymbol);
+    assertThat(declaredType.declaresMember("foo")).isTrue();
+    assertThat(declaredType.declaresMember("bar")).isTrue();
+    assertThat(declaredType.declaresMember("other")).isFalse();
+
+    assertThat(new DeclaredType(new SymbolImpl("x", "foo.x")).declaresMember("member")).isTrue();
   }
 
   @Test
@@ -124,5 +151,12 @@ public class DeclaredTypeTest {
   public void test_getClass() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     assertThat(new DeclaredType(x1).getTypeClass()).isEqualTo(x1);
+  }
+
+  private static ClassSymbol lastClassSymbol(String... code) {
+    FileInput fileInput = parse(code);
+    List<Statement> statements = fileInput.statements().statements();
+    ClassDef classDef = (ClassDef) statements.get(statements.size() - 1);
+    return (ClassSymbol) classDef.name().symbol();
   }
 }

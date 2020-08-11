@@ -70,6 +70,11 @@ class UnionType implements InferredType {
   }
 
   @Override
+  public boolean declaresMember(String memberName) {
+    return types.stream().anyMatch(t -> t.declaresMember(memberName));
+  }
+
+  @Override
   public Optional<Symbol> resolveMember(String memberName) {
     if (types.stream().anyMatch(type -> type instanceof RuntimeType && ((RuntimeType) type).hasUnresolvedHierarchy())) {
       return Optional.empty();

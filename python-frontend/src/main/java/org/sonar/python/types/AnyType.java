@@ -37,6 +37,11 @@ enum AnyType implements InferredType {
   }
 
   @Override
+  public boolean declaresMember(String memberName) {
+    return true;
+  }
+
+  @Override
   public Optional<Symbol> resolveMember(String memberName) {
     return Optional.empty();
   }
