@@ -30,6 +30,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,6 +52,7 @@ import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
+import static org.sonar.python.types.InferredTypes.typeName;
 
 //import static org.sonar.python.types.InferredTypes.BYTES;
 
@@ -102,6 +105,26 @@ public class TypeInferenceTest {
       "  if cond:",
       "    a = 42",
       "  a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void parameter_with_annotation() {
+    assertDeclaredType(lastExpression("def f(p: int): p").type(), BuiltinTypes.INT);
+    assertDeclaredType(lastExpression("def f(p: str): p").type(), BuiltinTypes.STR);
+    assertDeclaredType(lastExpression("class A: ...\ndef f(p: A): p").type(), "A");
+    assertThat(lastExpression("def f(p: unknown): p").type()).isEqualTo(InferredTypes.anyType());
+    assertDeclaredType(lastExpression("def f(p1: int, *, p2: str): p2").type(), BuiltinTypes.STR);
+
+    assertThat(lastExpression(
+      "def f(p: int):",
+      "  p = 'str'",
+      "  p").type()).isEqualTo(STR);
+
+    assertThat(lastExpression(
+      "def f(p: int):",
+      "  try: ...",
+      "  except: ...",
+      "  p").type()).isEqualTo(anyType());
   }
 
   @Test
@@ -499,5 +522,10 @@ public class TypeInferenceTest {
 
     Expression xLhs = assignment.lhsExpressions().get(0).expressions().get(0);
     assertThat(xLhs.type()).isEqualTo(STR);
+  }
+
+  private static void assertDeclaredType(InferredType type, String typeName) {
+    assertThat(type).isInstanceOf(DeclaredType.class);
+    assertThat(typeName(type)).isEqualTo(typeName);
   }
 }

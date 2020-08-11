@@ -45,19 +45,22 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<Symbol> trackedVars;
   private final Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr;
   private final Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement;
+  private final Map<String, InferredType> parameterTypesByName;
 
   public FlowSensitiveTypeInference(Set<Symbol> trackedVars, Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr,
-                                    Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement) {
+                                    Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement, Map<String, InferredType> parameterTypesByName) {
     this.trackedVars = trackedVars;
     this.memberAccessesByQualifiedExpr = memberAccessesByQualifiedExpr;
     this.assignmentsByAssignmentStatement = assignmentsByAssignmentStatement;
+    this.parameterTypesByName = parameterTypesByName;
   }
 
   @Override
   public ProgramState initialState() {
     TypeInferenceProgramState initialState = new TypeInferenceProgramState();
     for (Symbol variable : trackedVars) {
-      initialState.setTypes(variable, Collections.emptySet());
+      InferredType inferredType = parameterTypesByName.get(variable.name());
+      initialState.setTypes(variable, inferredType != null ? Collections.singleton(inferredType) : Collections.emptySet());
     }
     return initialState;
   }
