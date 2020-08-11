@@ -67,6 +67,8 @@ public class RuntimeTypeTest {
     x.addMembers(singletonList(foo));
     assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
     assertThat(new RuntimeType(x).canHaveMember("bar")).isFalse();
+    assertThat(new RuntimeType(x).declaresMember("foo")).isTrue();
+    assertThat(new RuntimeType(x).declaresMember("bar")).isFalse();
     assertThat(new RuntimeType(x).resolveMember("foo")).contains(foo);
     assertThat(new RuntimeType(x).resolveMember("bar")).isEmpty();
 
