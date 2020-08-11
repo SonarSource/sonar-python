@@ -21,21 +21,30 @@ package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.types.InferredType;
 
-@Rule(key = "S5756")
-public class NonCallableCalledCheck extends NonCallableCalled {
-
+@Rule(key = "S5864")
+public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
   @Override
-  public boolean isNonCallableType(InferredType type) {
-    return !type.canHaveMember("__call__");
+  public void initialize(Context context) {
+    new NonCallableCalledCheck().initialize(context);
   }
 
-  @Override
-  public String message(InferredType calleeType, @Nullable String name) {
-    if (name != null) {
-      return String.format("Fix this call; \"%s\"%s is not callable.", name, addTypeName(calleeType));
+  private static class NonCallableCalledCheck extends NonCallableCalled {
+
+    @Override
+    public boolean isNonCallableType(InferredType type) {
+      // Calling type.canHaveMember to avoid raising twice an issue already handled by the corresponding bug rule
+      return type.canHaveMember("__call__") && !type.declaresMember("__call__");
     }
-    return String.format("Fix this call; this expression%s is not callable.", addTypeName(calleeType));
+
+    @Override
+    public String message(InferredType calleeType, @Nullable String name) {
+      if (name != null) {
+        return String.format("Fix this call; Previous type checks suggest that \"%s\"%s is not callable.", name, addTypeName(calleeType));
+      }
+      return String.format("Fix this call; Previous type checks suggest that this expression%s is not callable.", addTypeName(calleeType));
+    }
   }
 }

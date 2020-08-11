@@ -19,23 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import javax.annotation.Nullable;
-import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.types.InferredType;
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-@Rule(key = "S5756")
-public class NonCallableCalledCheck extends NonCallableCalled {
+public class ConfusingTypeCheckingCheckTest {
 
-  @Override
-  public boolean isNonCallableType(InferredType type) {
-    return !type.canHaveMember("__call__");
+  @Test
+  public void non_callable_called() {
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/nonCallableCalled.py", new ConfusingTypeCheckingCheck());
   }
 
-  @Override
-  public String message(InferredType calleeType, @Nullable String name) {
-    if (name != null) {
-      return String.format("Fix this call; \"%s\"%s is not callable.", name, addTypeName(calleeType));
-    }
-    return String.format("Fix this call; this expression%s is not callable.", addTypeName(calleeType));
-  }
 }
