@@ -45,28 +45,36 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
       if (!CONSIDERED_OPERATORS.contains(operator)) {
         return;
       }
-      Expression left = binaryExpression.leftOperand();
-      Expression right = binaryExpression.rightOperand();
-      InferredType leftType = left.type();
-      InferredType rightType = right.type();
-
-      if (leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe(NONE_TYPE) || rightType.canOnlyBe(NONE_TYPE)) {
-        return;
-      }
-
-      String leftCategory = builtinTypeCategory(leftType);
-      String rightCategory = builtinTypeCategory(rightType);
-      boolean leftCanImplementEqOrNe = canImplementEqOrNe(left);
-      boolean rightCanImplementEqOrNe = canImplementEqOrNe(right);
-
-      if ((!leftCanImplementEqOrNe && !rightCanImplementEqOrNe)
-        || (leftCategory != null && rightCategory != null && !leftCategory.equals(rightCategory))
-        || (leftCategory != null && !rightCanImplementEqOrNe)
-        || (rightCategory != null && !leftCanImplementEqOrNe)) {
-
-        raiseIssue(ctx, binaryExpression, operator);
-      }
+      checkIncompatibleTypes(ctx, binaryExpression);
     });
+  }
+
+  private static void checkIncompatibleTypes(SubscriptionContext ctx, BinaryExpression binaryExpression) {
+    Expression left = binaryExpression.leftOperand();
+    Expression right = binaryExpression.rightOperand();
+    InferredType leftType = left.type();
+    InferredType rightType = right.type();
+
+    if (leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe(NONE_TYPE) || rightType.canOnlyBe(NONE_TYPE)) {
+      return;
+    }
+
+    String leftCategory = builtinTypeCategory(leftType);
+    String rightCategory = builtinTypeCategory(rightType);
+    boolean leftCanImplementEqOrNe = canImplementEqOrNe(left);
+    boolean rightCanImplementEqOrNe = canImplementEqOrNe(right);
+
+    if ((leftCategory != null && leftCategory.equals(rightCategory))) {
+      return;
+    }
+
+    if ((!leftCanImplementEqOrNe && !rightCanImplementEqOrNe)
+      || (leftCategory != null && rightCategory != null)
+      || (leftCategory != null && !rightCanImplementEqOrNe)
+      || (rightCategory != null && !leftCanImplementEqOrNe)) {
+
+      raiseIssue(ctx, binaryExpression, binaryExpression.operator().value());
+    }
   }
 
   private static void raiseIssue(SubscriptionContext ctx, BinaryExpression binaryExpression, String operator) {
@@ -91,7 +99,7 @@ public class SillyEqualityCheck extends PythonSubscriptionCheck {
     if (inferredType.canOnlyBe(BuiltinTypes.LIST)) {
       return BuiltinTypes.LIST;
     }
-    if (inferredType.canOnlyBe(BuiltinTypes.SET)) {
+    if (inferredType.canOnlyBe(BuiltinTypes.SET) || inferredType.canOnlyBe("frozenset")) {
       return BuiltinTypes.SET;
     }
     if (inferredType.canOnlyBe(BuiltinTypes.DICT)) {

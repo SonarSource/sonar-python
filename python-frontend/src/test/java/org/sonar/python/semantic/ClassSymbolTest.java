@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -409,6 +410,12 @@ public class ClassSymbolTest {
       "  def foo(): pass"));
 
     assertEqualsWithoutUsages(classSymbol);
+
+    ClassSymbolImpl classSymbolWithAmbiguousParent = new ClassSymbolImpl("B", "foo.B");
+    AmbiguousSymbol ambiguousParent = AmbiguousSymbolImpl.create(new SymbolImpl("x", "foo.x"), new SymbolImpl("x", "bar.x"));
+    classSymbolWithAmbiguousParent.addSuperClass(ambiguousParent);
+
+    assertEqualsWithoutUsages(classSymbolWithAmbiguousParent);
   }
 
   @Test
