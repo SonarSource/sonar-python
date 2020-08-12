@@ -237,6 +237,16 @@ public class RuntimeTypeTest {
   }
 
   @Test
+  public void test_isCompatibleWith_numbers() {
+    assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.INT)).isTrue();
+    assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.FLOAT)).isTrue();
+    assertThat(InferredTypes.FLOAT.isCompatibleWith(InferredTypes.COMPLEX)).isTrue();
+    assertThat(InferredTypes.FLOAT.isCompatibleWith(InferredTypes.FLOAT)).isTrue();
+    assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.COMPLEX)).isTrue();
+    assertThat(InferredTypes.COMPLEX.isCompatibleWith(InferredTypes.COMPLEX)).isTrue();
+  }
+
+  @Test
   public void test_isCompatibleWith_NoneType() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     x1.addMembers(Collections.singletonList(new SymbolImpl("foo", null)));
@@ -245,6 +255,13 @@ public class RuntimeTypeTest {
     assertThat(new RuntimeType(x1).isCompatibleWith(new RuntimeType(none))).isFalse();
     assertThat(new RuntimeType(none).isCompatibleWith(new RuntimeType(x1))).isFalse();
     assertThat(new RuntimeType(none).isCompatibleWith(new RuntimeType(none))).isTrue();
+  }
+
+  @Test
+  public void test_isCompatibleWith_declared_union_with_missing_symbols() {
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    ClassSymbolImpl union = new ClassSymbolImpl("union", "typing.Union");
+    assertThat(new RuntimeType(x).isCompatibleWith(new DeclaredType(union))).isTrue();
   }
 
   @Test

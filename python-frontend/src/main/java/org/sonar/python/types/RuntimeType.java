@@ -77,6 +77,9 @@ class RuntimeType implements InferredType {
       return areSymbolsCompatible(((RuntimeType) other).getTypeClass());
     }
     if (other instanceof DeclaredType) {
+      if (((DeclaredType) other).alternativeTypeSymbols().isEmpty()) {
+        return true;
+      }
       return ((DeclaredType) other).alternativeTypeSymbols().stream().anyMatch(this::areSymbolsCompatible);
     }
     if (other instanceof UnionType) {
@@ -96,10 +99,27 @@ class RuntimeType implements InferredType {
     }
     ClassSymbol otherTypeClass = (ClassSymbol) other;
     String otherFullyQualifiedName = otherTypeClass.fullyQualifiedName();
+    boolean isCompatibleNumber = isCompatibleNumber(other);
     boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
       otherTypeClass.declaredMembers().stream().allMatch(m -> this.typeClass.resolveMember(m.name()).isPresent());
     boolean canBeOrExtend = otherFullyQualifiedName == null || this.canBeOrExtend(otherFullyQualifiedName);
-    return isDuckTypeCompatible || canBeOrExtend;
+    return isCompatibleNumber || isDuckTypeCompatible || canBeOrExtend;
+  }
+
+  private boolean isCompatibleNumber(Symbol other) {
+    String thisFQN = this.typeClass.fullyQualifiedName();
+    String otherFQN = other.fullyQualifiedName();
+    if (otherFQN == null) {
+      return false;
+    }
+    boolean floatCompatible = otherFQN.equals(thisFQN) || "int".equals(thisFQN);
+    if ("float".equals(otherFQN)) {
+      return floatCompatible;
+    }
+    if ("complex".equals(otherFQN)) {
+      return floatCompatible || "float".equals(thisFQN);
+    }
+    return false;
   }
 
   @Override
