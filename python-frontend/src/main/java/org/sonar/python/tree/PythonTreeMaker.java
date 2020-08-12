@@ -338,10 +338,12 @@ public class PythonTreeMaker {
     Separators separators = statementWithSeparator.separator();
     AstNode testListNode = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR);
     List<Expression> expressionTrees = Collections.emptyList();
+    List<Token> commas = Collections.emptyList();
     if (testListNode != null) {
       expressionTrees = expressionsFromTestListStarExpr(testListNode);
+      commas = punctuators(testListNode, PythonPunctuator.COMMA);
     }
-    return new ReturnStatementImpl(toPyToken(astNode.getTokens()).get(0), expressionTrees, separators);
+    return new ReturnStatementImpl(toPyToken(astNode.getTokens()).get(0), expressionTrees, commas, separators);
   }
 
   public YieldStatement yieldStatement(StatementWithSeparator statementWithSeparator) {

@@ -32,4 +32,6 @@ public interface ReturnStatement extends Statement {
   Token returnKeyword();
 
   List<Expression> expressions();
+
+  List<Token> commas();
 }

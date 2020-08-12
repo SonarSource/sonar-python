@@ -73,8 +73,7 @@ def tuples():
     return 1, 2, 3 # OK
 
   def my_one_element_tuple() -> tuple:
-    # FP (SONARPY-779)
-    return 1,  # Noncompliant
+    return 1,  # OK
 
 def collections():
   def my_list_nok() -> List:

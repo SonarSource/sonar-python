@@ -398,6 +398,7 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(returnStatement).isNotNull();
     assertThat(returnStatement.returnKeyword().value()).isEqualTo("return");
     assertThat(returnStatement.expressions()).hasSize(1);
+    assertThat(returnStatement.commas()).isEmpty();
     assertThat(returnStatement.children()).hasSize(2);
 
     astNode = p.parse("return foo, bar");
@@ -406,14 +407,17 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(returnStatement).isNotNull();
     assertThat(returnStatement.returnKeyword().value()).isEqualTo("return");
     assertThat(returnStatement.expressions()).hasSize(2);
-    assertThat(returnStatement.children()).hasSize(3);
+    assertThat(returnStatement.commas()).hasSize(1);
+    assertThat(returnStatement.children()).hasSize(4);
+    assertThat(returnStatement.children().get(2).is(Kind.TOKEN)).isTrue();
 
     astNode = p.parse("return");
     statementWithSeparator = new StatementWithSeparator(astNode, null);
     returnStatement = treeMaker.returnStatement(statementWithSeparator);
     assertThat(returnStatement).isNotNull();
     assertThat(returnStatement.returnKeyword().value()).isEqualTo("return");
-    assertThat(returnStatement.expressions()).hasSize(0);
+    assertThat(returnStatement.expressions()).isEmpty();
+    assertThat(returnStatement.commas()).isEmpty();
     assertThat(returnStatement.children()).hasSize(1);
 
     astNode = p.parse("return []");
