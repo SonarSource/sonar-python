@@ -77,32 +77,32 @@ def tuples():
     return 1,  # Noncompliant
 
 def collections():
-    def my_list_nok() -> List:
-      return 42  # Noncompliant
+  def my_list_nok() -> List:
+    return 42  # Noncompliant
 
-    def my_list_nok_2() -> List[int]:
-      return 42  # Noncompliant
+  def my_list_nok_2() -> List[int]:
+    return 42  # Noncompliant
 
-    def my_list_ok() -> List:
-      return [42]
+  def my_list_ok() -> List:
+    return [42]
 
-    def my_set_nok() -> Set:
-      # {} is Empty dict literal
-      return {}  # Noncompliant
+  def my_set_nok() -> Set:
+    # {} is Empty dict literal
+    return {}  # Noncompliant
 
-    def my_set_nok_2() -> Set[str]:
-      # {} is Empty dict literal
-      return {}  # Noncompliant
+  def my_set_nok_2() -> Set[str]:
+    # {} is Empty dict literal
+    return {}  # Noncompliant
 
-    def my_set_ok() -> Set:
-      return {42}  # OK
+  def my_set_ok() -> Set:
+    return {42}  # OK
 
-    def my_dict() -> Dict:
-      return {}  # OK
+  def my_dict() -> Dict:
+    return {}  # OK
 
 
 def type_aliases():
-    """We should avoid FPs for type aliases used as type hint"""
+  """We should avoid FPs for type aliases used as type hint"""
   def my_supports_float() -> SupportsFloat:
     return 42  # OK
 
@@ -250,8 +250,8 @@ def missing_return():
 
 def out_of_scope():
   def my_noreturn() -> NoReturn:
-      """NoReturn functions should never return normally. To be checked with actual usage on Peach to avoid noise"""
-      return None  # FN
+    """NoReturn functions should never return normally. To be checked with actual usage on Peach to avoid noise"""
+    return None  # FN
 
   def my_list_oos() -> List[str]:
     return [1, 2, 3]  # FN
