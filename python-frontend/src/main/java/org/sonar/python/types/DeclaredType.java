@@ -97,12 +97,13 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean mustBeOrExtend(String typeName) {
+    // TODO: change its implementation to reflect semantic of 'RuntimeType.canOnlyBe'
     return alternativeTypeSymbols().stream().flatMap(a -> {
       if (a.is(Symbol.Kind.AMBIGUOUS)) {
         return ((AmbiguousSymbol) a).alternatives().stream().filter(alternative -> alternative.is(Symbol.Kind.CLASS));
       }
       return Stream.of(a);
-    }).allMatch(a -> ((ClassSymbol) a).isOrExtends(typeName));
+    }).filter(a -> a.is(Symbol.Kind.CLASS)).allMatch(a -> ((ClassSymbol) a).isOrExtends(typeName));
   }
 
   @Override
