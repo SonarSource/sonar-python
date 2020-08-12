@@ -82,12 +82,6 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean canBeOrExtend(String typeName) {
-    if (typeName.equals("typing.Tuple") || typeName.equals("tuple")) {
-      if (alternativeTypeSymbols().isEmpty() || alternativeTypeSymbols().stream().anyMatch(s -> !s.is(Symbol.Kind.CLASS))) {
-        return true;
-      }
-      return alternativeTypeSymbols().stream().map(Symbol::fullyQualifiedName).anyMatch(fqn -> "typing.Tuple".equals(fqn) || "tuple".equals(fqn));
-    }
     return true;
   }
 

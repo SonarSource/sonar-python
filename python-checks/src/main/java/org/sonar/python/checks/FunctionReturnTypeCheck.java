@@ -116,7 +116,8 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
           invalidReturnStatements.add(returnStatement);
         }
       } else if (expressions.size() > 1) {
-        if (!returnType.canBeOrExtend("tuple")) {
+        // Hardcoded "tuple" type due to a limitation on extracting type information from tuple literals
+        if (!InferredTypes.TUPLE.isCompatibleWith(returnType)) {
           invalidReturnStatements.add(returnStatement);
         }
       } else {

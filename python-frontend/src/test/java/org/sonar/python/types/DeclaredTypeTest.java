@@ -83,28 +83,8 @@ public class DeclaredTypeTest {
   @Test
   public void test_canBeOrExtend() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
-    ClassSymbolImpl tuple = new ClassSymbolImpl("tuple", "tuple");
     assertThat(new DeclaredType(x).canBeOrExtend("x")).isTrue();
     assertThat(new DeclaredType(x).canBeOrExtend("y")).isTrue();
-    assertThat(new DeclaredType(x).canBeOrExtend("tuple")).isFalse();
-    assertThat(new DeclaredType(x).canBeOrExtend("typing.Tuple")).isFalse();
-    assertThat(new DeclaredType(tuple).canBeOrExtend("typing.Tuple")).isTrue();
-    assertThat(new DeclaredType(tuple).canBeOrExtend("tuple")).isTrue();
-    ClassSymbolImpl typingTuple = new ClassSymbolImpl("Tuple", "typing.Tuple");
-    assertThat(new DeclaredType(typingTuple).canBeOrExtend("typing.Tuple")).isTrue();
-    assertThat(new DeclaredType(typingTuple).canBeOrExtend("tuple")).isTrue();
-
-    ClassSymbolImpl union = new ClassSymbolImpl("union", "typing.Union");
-    assertThat(new DeclaredType(union).canBeOrExtend("tuple")).isTrue();
-  }
-
-  @Test
-  public void test_canBeOrExtend_tuple_ambiguous() {
-    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
-    ClassSymbolImpl otherX = new ClassSymbolImpl("x", "x");
-    Set<Symbol> symbols = new HashSet<>(Arrays.asList(x, otherX));
-    AmbiguousSymbol ambiguousSymbol = new AmbiguousSymbolImpl("ambiguous", null, symbols);
-    assertThat(new DeclaredType(ambiguousSymbol).canBeOrExtend("tuple")).isTrue();
   }
 
   @Test
