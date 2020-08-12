@@ -121,6 +121,11 @@ def type_aliases():
   def my_str_union(typ: int) -> Union[str, np.dtype]:
     return str(typ)
 
+  from typing import NoneType
+  MyNone = NoneType
+  def my_none() -> MyNone:
+    return
+
 def other_returns():
   def my_int(param) -> int:
     if param:
