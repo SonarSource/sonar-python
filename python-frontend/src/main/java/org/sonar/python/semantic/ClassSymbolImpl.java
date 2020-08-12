@@ -203,12 +203,18 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   @Override
   public boolean isOrExtends(ClassSymbol other) {
+    if ("object".equals(other.fullyQualifiedName())) {
+      return true;
+    }
     // TODO there should be only 1 class with a given fullyQualifiedName when analyzing a python file
     return allSuperClasses(false).stream().anyMatch(c -> Objects.equals(c.fullyQualifiedName(), other.fullyQualifiedName()));
   }
 
   @Override
   public boolean canBeOrExtend(String fullyQualifiedClassName) {
+    if ("object".equals(fullyQualifiedClassName)) {
+      return true;
+    }
     return allSuperClasses(true).stream().anyMatch(c -> c.fullyQualifiedName() != null && Objects.equals(fullyQualifiedClassName, c.fullyQualifiedName()))
       || hasUnresolvedTypeHierarchy();
   }

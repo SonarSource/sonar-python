@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -156,6 +157,9 @@ public class ClassSymbolImplTest {
     assertThat(b.isOrExtends(a)).isFalse();
     ClassSymbolImpl c = new ClassSymbolImpl("c", "mod2.c");
     assertThat(a.isOrExtends(c)).isFalse();
+
+    assertThat(new ClassSymbolImpl("foo", "foo").isOrExtends(TypeShed.typeShedClass("object"))).isTrue();
+    assertThat(a.isOrExtends(TypeShed.typeShedClass("object"))).isTrue();
   }
 
   @Test
@@ -201,6 +205,9 @@ public class ClassSymbolImplTest {
     assertThat(d.canBeOrExtend("mod1.a")).isTrue();
     assertThat(d.canBeOrExtend("mod2.a")).isTrue();
     assertThat(d.canBeOrExtend("mod3.a")).isTrue();
+
+    assertThat(new ClassSymbolImpl("foo", "foo").canBeOrExtend("object")).isTrue();
+    assertThat(a.canBeOrExtend("object")).isTrue();
   }
 
   @Test
