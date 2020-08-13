@@ -159,6 +159,37 @@ public class DeclaredTypeTest {
     assertThat(new DeclaredType(x1).getTypeClass()).isEqualTo(x1);
   }
 
+
+  @Test
+  public void test_equals() {
+    DeclaredType aType = new DeclaredType(a);
+    assertThat(aType)
+      .isEqualTo(aType)
+      .isEqualTo(new DeclaredType(a))
+      .isNotEqualTo(new DeclaredType(b))
+      .isNotEqualTo(a)
+      .isNotEqualTo(null)
+      .isNotEqualTo(new DeclaredType(a, Arrays.asList(new DeclaredType(b), new DeclaredType(c))))
+      .isEqualTo(new DeclaredType(new SymbolImpl("a", "a")))
+      .isNotEqualTo(new DeclaredType(new SymbolImpl("a", "b")));
+
+    DeclaredType x = new DeclaredType(new ClassSymbolImpl("X", null));
+    DeclaredType y = new DeclaredType(new ClassSymbolImpl("Y", null));
+    assertThat(x).isNotEqualTo(y);
+  }
+
+  @Test
+  public void test_hashCode() {
+    DeclaredType aType = new DeclaredType(a);
+    assertThat(aType.hashCode()).isEqualTo(new DeclaredType(a).hashCode());
+    assertThat(aType.hashCode()).isNotEqualTo(new DeclaredType(b).hashCode());
+    assertThat(aType.hashCode()).isNotEqualTo(new DeclaredType(a, Arrays.asList(new DeclaredType(b), new DeclaredType(c))).hashCode());
+
+    DeclaredType x = new DeclaredType(new ClassSymbolImpl("X", null));
+    DeclaredType y = new DeclaredType(new ClassSymbolImpl("Y", null));
+    assertThat(x.hashCode()).isNotEqualTo(y.hashCode());
+  }
+
   private static ClassSymbol lastClassSymbol(String... code) {
     FileInput fileInput = parse(code);
     List<Statement> statements = fileInput.statements().statements();

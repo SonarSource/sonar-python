@@ -30,7 +30,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 
@@ -41,6 +40,8 @@ import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
+import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.DICT;
 import static org.sonar.python.types.InferredTypes.FLOAT;
 import static org.sonar.python.types.InferredTypes.INT;
@@ -53,8 +54,6 @@ import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.InferredTypes.typeName;
-
-//import static org.sonar.python.types.InferredTypes.BYTES;
 
 public class TypeInferenceTest {
 
@@ -109,11 +108,13 @@ public class TypeInferenceTest {
 
   @Test
   public void parameter_with_annotation() {
-    assertDeclaredType(lastExpression("def f(p: int): p").type(), BuiltinTypes.INT);
-    assertDeclaredType(lastExpression("def f(p: str): p").type(), BuiltinTypes.STR);
-    assertDeclaredType(lastExpression("class A: ...\ndef f(p: A): p").type(), "A");
-    assertThat(lastExpression("def f(p: unknown): p").type()).isEqualTo(InferredTypes.anyType());
-    assertDeclaredType(lastExpression("def f(p1: int, *, p2: str): p2").type(), BuiltinTypes.STR);
+    assertThat(lastExpression("def f(p: int): p").type()).isEqualTo(DECL_INT);
+    assertThat(lastExpression("def f(p: str): p").type()).isEqualTo(DECL_STR);
+    InferredType typeA = lastExpression("class A: ...\ndef f(p: A): p").type();
+    assertThat(typeA).isInstanceOf(DeclaredType.class);
+    assertThat(typeName(typeA)).isEqualTo("A");
+    assertThat(lastExpression("def f(p: unknown): p").type()).isEqualTo(anyType());
+    assertThat(lastExpression("def f(p1: int, *, p2: str): p2").type()).isEqualTo(DECL_STR);
 
     assertThat(lastExpression(
       "def f(p: int):",
@@ -524,8 +525,4 @@ public class TypeInferenceTest {
     assertThat(xLhs.type()).isEqualTo(STR);
   }
 
-  private static void assertDeclaredType(InferredType type, String typeName) {
-    assertThat(type).isInstanceOf(DeclaredType.class);
-    assertThat(typeName(type)).isEqualTo(typeName);
-  }
 }

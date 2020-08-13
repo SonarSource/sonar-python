@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -134,5 +135,24 @@ public class DeclaredType implements InferredType {
 
   Set<Symbol> alternativeTypeSymbols() {
     return alternativeTypeSymbols;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    DeclaredType that = (DeclaredType) o;
+    return Objects.equals(typeClass.name(), that.typeClass.name()) &&
+      Objects.equals(typeClass.fullyQualifiedName(), that.typeClass.fullyQualifiedName()) &&
+      Objects.equals(typeArgs, that.typeArgs);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(typeClass.name(), typeClass.fullyQualifiedName(), typeArgs);
   }
 }
