@@ -20,6 +20,9 @@
 package org.sonar.python.tree;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -28,12 +31,18 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_STR;
+import static org.sonar.python.types.InferredTypes.anyType;
+import static org.sonar.python.types.InferredTypes.typeName;
 
 public class CallExpressionImplTest {
 
@@ -101,5 +110,96 @@ public class CallExpressionImplTest {
   @Test
   public void null_callee_symbol_type() {
     assertThat(lastExpression("x()").type()).isEqualTo(InferredTypes.anyType());
+  }
+
+  @Test
+  public void method_call_with_declared_type() {
+    assertThat(lastExpression(
+      "def foo(param: str):",
+      "  x = param.capitalize()",
+      "  x"
+    ).type()).isEqualTo(DECL_STR);
+
+    assertThat(lastExpression(
+      "def foo(param: A):",
+      "  x = param.capitalize()",
+      "  x"
+    ).type()).isEqualTo(anyType());
+
+    assertThat(lastExpression(
+      "def foo(param):",
+      "  x = param.capitalize()",
+      "  x"
+    ).type()).isEqualTo(anyType());
+
+    // TODO: handle member access dependencies for declared type (SONARPY-781)
+    assertThat(lastExpression(
+      "def foo(param: str):",
+      "  x = param.capitalize().capitalize()",
+      "  x"
+    ).type()).isEqualTo(anyType());
+
+    assertThat(lastExpression(
+      "class A:",
+      "  def meth() -> int: ...",
+      "def foo(param: A):",
+      "  x = param.meth()",
+      "  x"
+    ).type()).isEqualTo(DECL_INT);
+  }
+
+  @Test
+  public void method_call_with_declared_type_union_and_optional() {
+    ClassSymbolImpl union = new ClassSymbolImpl("Union", "typing.Union");
+    List<DeclaredType> typeArgs = Stream.of(DECL_INT, DECL_STR).map(DeclaredType.class::cast).collect(Collectors.toList());
+    assertThat(lastExpression(
+      "from typing import Union",
+      "class A:",
+      "  def meth() -> Union[int, str]: ...",
+      "def foo(param: A):",
+      "  x = param.meth()",
+      "  x"
+    ).type()).isEqualTo(new DeclaredType(union, typeArgs));
+
+    // TODO: handle UnionType of annotation coming from typeshed (SONARPY-782)
+    assertThat(lastExpression(
+      // object.__reduce__ returns 'Union[str, Tuple[Any, ...]]'
+      "def foo(param: object):",
+      "  x = param.__reduce__()",
+      "  x"
+    ).type()).isEqualTo(anyType());
+
+    ClassSymbolImpl optional = new ClassSymbolImpl("Optional", "typing.Optional");
+    typeArgs = Stream.of(DECL_STR).map(DeclaredType.class::cast).collect(Collectors.toList());
+    assertThat(lastExpression(
+      "from typing import Optional",
+      "class A:",
+      "  def meth() -> Optional[str]: ...",
+      "def foo(param: A):",
+      "  x = param.meth()",
+      "  x"
+    ).type()).isEqualTo(new DeclaredType(optional, typeArgs));
+
+    assertThat(lastExpression(
+      "from typing import Optional",
+      "class A:",
+      "  def meth() -> str: ...",
+      "def foo(param: Optional[A]):",
+      "  x = param.meth()",
+      "  x"
+    ).type()).isEqualTo(DECL_STR);
+  }
+
+  @Test
+  public void inner_class_constructor_declared_type() {
+    InferredType type = lastExpression(
+      "class A:",
+      "  class B: ...",
+      "def foo(param: A):",
+      "  x = param.B()",
+      "  x"
+    ).type();
+    assertThat(type).isInstanceOf(DeclaredType.class);
+    assertThat(typeName(type)).isEqualTo("B");
   }
 }

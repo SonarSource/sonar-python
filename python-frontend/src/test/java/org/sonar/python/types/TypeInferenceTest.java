@@ -524,5 +524,4 @@ public class TypeInferenceTest {
     Expression xLhs = assignment.lhsExpressions().get(0).expressions().get(0);
     assertThat(xLhs.type()).isEqualTo(STR);
   }
-
 }

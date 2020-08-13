@@ -38,6 +38,11 @@ import org.sonar.python.semantic.SymbolImpl;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.types.DeclaredType.fromInferredType;
+import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.INT;
+import static org.sonar.python.types.InferredTypes.STR;
+import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 
 public class DeclaredTypeTest {
@@ -188,6 +193,14 @@ public class DeclaredTypeTest {
     DeclaredType x = new DeclaredType(new ClassSymbolImpl("X", null));
     DeclaredType y = new DeclaredType(new ClassSymbolImpl("Y", null));
     assertThat(x.hashCode()).isNotEqualTo(y.hashCode());
+  }
+
+  @Test
+  public void test_fromInferredType() {
+    assertThat(fromInferredType(anyType())).isEqualTo(anyType());
+    assertThat(fromInferredType(INT)).isEqualTo(DECL_INT);
+    assertThat(fromInferredType(DECL_INT)).isEqualTo(DECL_INT);
+    assertThat(fromInferredType(or(INT, STR))).isEqualTo(anyType());
   }
 
   private static ClassSymbol lastClassSymbol(String... code) {
