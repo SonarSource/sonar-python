@@ -18,4 +18,4 @@ def derived(x: int):
   y = x or 'str'
   y() # Noncompliant
   z = x + 42
-  z() # FN
+  z() # Noncompliant
