@@ -129,7 +129,7 @@ public class DeclaredType implements InferredType {
     return str.toString();
   }
 
-  Symbol getTypeClass() {
+  public Symbol getTypeClass() {
     return typeClass;
   }
 

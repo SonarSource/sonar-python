@@ -245,4 +245,12 @@ public class InferredTypes {
     }
     return null;
   }
+
+  public static boolean isDeclaredTypeWithTypeClass(InferredType type, String typeName) {
+    if (type instanceof DeclaredType) {
+      Symbol typeClass = ((DeclaredType) type).getTypeClass();
+      return typeName.equals(typeClass.fullyQualifiedName());
+    }
+    return false;
+  }
 }
