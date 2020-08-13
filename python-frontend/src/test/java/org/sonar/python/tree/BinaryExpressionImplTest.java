@@ -26,6 +26,9 @@ import org.sonar.python.types.InferredTypes;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.BOOL;
+import static org.sonar.python.types.InferredTypes.DECL_BOOL;
+import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -41,6 +44,16 @@ public class BinaryExpressionImplTest {
     assertThat(lastExpression("42 + ''").type()).isEqualTo(InferredTypes.anyType());
     assertThat(lastExpression("'' + 42").type()).isEqualTo(InferredTypes.anyType());
     assertThat(lastExpression("'' // 42").type()).isEqualTo(InferredTypes.anyType());
+
+    assertThat(lastExpression("def f(x: int, y: int): x + y").type()).isEqualTo(DECL_INT);
+    assertThat(lastExpression("def f(x: int, y: int): x + 42").type()).isEqualTo(DECL_INT);
+    assertThat(lastExpression("def f(x: int, y: int): 42 + y").type()).isEqualTo(DECL_INT);
+    assertThat(lastExpression("def f(x: str, y: str): x + y").type()).isEqualTo(DECL_STR);
+    assertThat(lastExpression("def f(x: str, y: str): x + 'foo'").type()).isEqualTo(DECL_STR);
+    assertThat(lastExpression("def f(x: str, y: str): 'foo' + y").type()).isEqualTo(DECL_STR);
+    assertThat(lastExpression("def f(x: str, y: int): x + y").type()).isEqualTo(anyType());
+    assertThat(lastExpression("def f(x: int, y: str): x + y").type()).isEqualTo(anyType());
+    assertThat(lastExpression("def f(x: int, y: str): x + 'foo'").type()).isEqualTo(anyType());
   }
 
   @Test
@@ -50,6 +63,12 @@ public class BinaryExpressionImplTest {
     assertThat(lastExpression("42 or ''").type()).isEqualTo(or(INT, STR));
     assertThat(lastExpression("42 or xxx").type()).isEqualTo(anyType());
     assertThat(lastExpression("42 or True or ''").type()).isEqualTo(or(or(INT, STR), BOOL));
+
+    assertThat(lastExpression("def f(x: int, y: int): x or y").type()).isEqualTo(DECL_INT);
+    assertThat(lastExpression("def f(x: int, y: int): x and y").type()).isEqualTo(DECL_INT);
+    assertThat(lastExpression("def f(x: int, y: str): x or y").type()).isEqualTo(or(DECL_INT, DECL_STR));
+    assertThat(lastExpression("def f(x: int, y): x or y").type()).isEqualTo(anyType());
+    assertThat(lastExpression("def f(x: int, y: bool, z: str): x or y or z").type()).isEqualTo(or(or(DECL_INT, DECL_STR), DECL_BOOL));
   }
 
   @Test

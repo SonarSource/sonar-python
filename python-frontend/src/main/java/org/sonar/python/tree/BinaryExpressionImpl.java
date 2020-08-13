@@ -36,6 +36,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 
@@ -126,8 +128,26 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
       if (leftType.equals(STR) && rightType.equals(STR)) {
         return STR;
       }
+      if (shouldReturnDeclaredInt(leftType, rightType)) {
+        return DECL_INT;
+      }
+      if (shouldReturnDeclaredStr(leftType, rightType)) {
+        return DECL_STR;
+      }
     }
     return InferredTypes.anyType();
+  }
+
+  private static boolean shouldReturnDeclaredStr(InferredType leftType, InferredType rightType) {
+    return (leftType.equals(DECL_STR) && rightType.equals(DECL_STR)) ||
+      (leftType.equals(STR) && rightType.equals(DECL_STR)) ||
+      (leftType.equals(DECL_STR) && rightType.equals(STR));
+  }
+
+  private static boolean shouldReturnDeclaredInt(InferredType leftType, InferredType rightType) {
+    return (leftType.equals(DECL_INT) && rightType.equals(DECL_INT)) ||
+      (leftType.equals(INT) && rightType.equals(DECL_INT)) ||
+      (leftType.equals(DECL_INT) && rightType.equals(INT));
   }
 
   @Override
