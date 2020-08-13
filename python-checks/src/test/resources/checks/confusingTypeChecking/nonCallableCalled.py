@@ -14,7 +14,7 @@ def foo(param1: int, param2: Set[int], param3: FrozenSet[int]):
   fs() # OK, raised by S5756
 
 def derived(x: int):
-  x.conjugate()() # FN
+  x.conjugate()() # NonCompliant
   y = x or 'str'
   y() # Noncompliant
   z = x + 42

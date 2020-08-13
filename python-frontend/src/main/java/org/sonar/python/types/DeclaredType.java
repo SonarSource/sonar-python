@@ -41,7 +41,7 @@ public class DeclaredType implements InferredType {
   private final List<DeclaredType> typeArgs;
   private final Set<Symbol> alternativeTypeSymbols;
 
-  DeclaredType(Symbol typeClass, List<DeclaredType> typeArgs) {
+  public DeclaredType(Symbol typeClass, List<DeclaredType> typeArgs) {
     this.typeClass = typeClass;
     this.typeArgs = typeArgs;
     alternativeTypeSymbols = resolveAlternativeSymbols(typeClass, typeArgs);
@@ -129,11 +129,11 @@ public class DeclaredType implements InferredType {
     return str.toString();
   }
 
-  public Symbol getTypeClass() {
+  Symbol getTypeClass() {
     return typeClass;
   }
 
-  Set<Symbol> alternativeTypeSymbols() {
+  public Set<Symbol> alternativeTypeSymbols() {
     return alternativeTypeSymbols;
   }
 
@@ -154,5 +154,16 @@ public class DeclaredType implements InferredType {
   @Override
   public int hashCode() {
     return Objects.hash(typeClass.name(), typeClass.fullyQualifiedName(), typeArgs);
+  }
+
+  public static InferredType fromInferredType(InferredType inferredType) {
+    if (inferredType instanceof RuntimeType) {
+      ClassSymbol typeClass = ((RuntimeType) inferredType).getTypeClass();
+      return new DeclaredType(typeClass);
+    }
+    if (inferredType instanceof DeclaredType) {
+      return inferredType;
+    }
+    return InferredTypes.anyType();
   }
 }

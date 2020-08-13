@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -33,11 +35,13 @@ import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
@@ -98,7 +102,32 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   public InferredType type() {
     Symbol calleeSymbol = calleeSymbol();
     if (calleeSymbol != null) {
-      return getType(calleeSymbol);
+      InferredType type = getType(calleeSymbol);
+      if (type.equals(InferredTypes.anyType()) && callee.is(Kind.QUALIFIED_EXPR)) {
+        return getDeclaredType(callee);
+      }
+      return type;
+    }
+    return InferredTypes.anyType();
+  }
+
+  private static InferredType getDeclaredType(Expression callee) {
+    QualifiedExpression qualifiedCallee = (QualifiedExpression) callee;
+    InferredType qualifierType = qualifiedCallee.qualifier().type();
+    if (qualifierType instanceof DeclaredType) {
+      Set<Optional<Symbol>> resolvedMembers = ((DeclaredType) qualifierType).alternativeTypeSymbols().stream()
+        .filter(s -> s.is(Symbol.Kind.CLASS))
+        .map(ClassSymbol.class::cast)
+        .map(t -> t.resolveMember(qualifiedCallee.name().name()))
+        .filter(Optional::isPresent)
+        .collect(Collectors.toSet());
+
+      if (resolvedMembers.size() == 1) {
+        return resolvedMembers.iterator().next()
+          .map(CallExpressionImpl::getType)
+          .map(DeclaredType::fromInferredType)
+          .orElse(InferredTypes.anyType());
+      }
     }
     return InferredTypes.anyType();
   }
