@@ -60,19 +60,29 @@ public class InferredTypes {
   }
 
   public static final InferredType INT = runtimeBuiltinType(BuiltinTypes.INT);
+  public static final InferredType DECL_INT = declaredBuiltinType(BuiltinTypes.INT);
   public static final InferredType FLOAT = runtimeBuiltinType(BuiltinTypes.FLOAT);
+  public static final InferredType DECL_FLOAT = declaredBuiltinType(BuiltinTypes.FLOAT);
   public static final InferredType COMPLEX = runtimeBuiltinType(BuiltinTypes.COMPLEX);
+  public static final InferredType DECL_COMPLEX = declaredBuiltinType(BuiltinTypes.COMPLEX);
 
   public static final InferredType STR = runtimeBuiltinType(BuiltinTypes.STR);
+  public static final InferredType DECL_STR = declaredBuiltinType(BuiltinTypes.STR);
 
   public static final InferredType SET = runtimeBuiltinType(BuiltinTypes.SET);
+  public static final InferredType DECL_SET = declaredBuiltinType(BuiltinTypes.SET);
   public static final InferredType DICT = runtimeBuiltinType(BuiltinTypes.DICT);
+  public static final InferredType DECL_DICT = declaredBuiltinType(BuiltinTypes.DICT);
   public static final InferredType LIST = runtimeBuiltinType(BuiltinTypes.LIST);
+  public static final InferredType DECL_LIST = declaredBuiltinType(BuiltinTypes.LIST);
   public static final InferredType TUPLE = runtimeBuiltinType(BuiltinTypes.TUPLE);
+  public static final InferredType DECL_TUPLE = declaredBuiltinType(BuiltinTypes.TUPLE);
 
   public static final InferredType NONE = runtimeBuiltinType(BuiltinTypes.NONE_TYPE);
+  public static final InferredType DECL_NONE = declaredBuiltinType(BuiltinTypes.NONE_TYPE);
 
   public static final InferredType BOOL = runtimeBuiltinType(BuiltinTypes.BOOL);
+  public static final InferredType DECL_BOOL = declaredBuiltinType(BuiltinTypes.BOOL);
 
   private static Map<String, Symbol> builtinSymbols;
 
@@ -89,6 +99,10 @@ public class InferredTypes {
 
   private static InferredType runtimeBuiltinType(String fullyQualifiedName) {
     return new RuntimeType(TypeShed.typeShedClass(fullyQualifiedName));
+  }
+
+  private static InferredType declaredBuiltinType(String fullyQualifiedName) {
+    return new DeclaredType(TypeShed.typeShedClass(fullyQualifiedName));
   }
 
   public static InferredType runtimeType(@Nullable Symbol typeClass) {
