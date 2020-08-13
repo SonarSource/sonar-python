@@ -30,12 +30,14 @@ import org.sonar.plugins.python.api.tree.SliceList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.types.InferredTypes.LIST;
 import static org.sonar.python.types.InferredTypes.TUPLE;
+import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 
 public class SliceExpressionImpl extends PyTree implements SliceExpression, HasTypeDependencies {
 
@@ -92,8 +94,14 @@ public class SliceExpressionImpl extends PyTree implements SliceExpression, HasT
     if (objectType.equals(LIST)) {
       return LIST;
     }
+    if (isDeclaredTypeWithTypeClass(objectType, BuiltinTypes.LIST)) {
+      return objectType;
+    }
     if (objectType.equals(TUPLE)) {
       return TUPLE;
+    }
+    if (isDeclaredTypeWithTypeClass(objectType, BuiltinTypes.TUPLE)) {
+      return objectType;
     }
     return InferredTypes.anyType();
   }

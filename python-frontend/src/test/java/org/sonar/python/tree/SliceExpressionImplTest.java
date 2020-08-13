@@ -20,12 +20,15 @@
 package org.sonar.python.tree;
 
 import org.junit.Test;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.LIST;
 import static org.sonar.python.types.InferredTypes.TUPLE;
+import static org.sonar.python.types.InferredTypes.anyType;
+import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 
 public class SliceExpressionImplTest {
 
@@ -34,6 +37,21 @@ public class SliceExpressionImplTest {
     assertThat(lastExpression("[42, 43][1:2]").type()).isEqualTo(LIST);
     assertThat(lastExpression("(42, 43)[1:2]").type()).isEqualTo(TUPLE);
     assertThat(lastExpression("foo()[1:2]").type()).isEqualTo(InferredTypes.anyType());
+
+    assertThat(isDeclaredTypeWithTypeClass(lastExpression(
+      "from typing import List",
+      "def f(x: List[int]): x[1:2]"
+    ).type(), BuiltinTypes.LIST)).isTrue();
+
+    assertThat(isDeclaredTypeWithTypeClass(lastExpression(
+      "from typing import Tuple",
+      "def f(x: Tuple[int]): x[1:2]"
+    ).type(), BuiltinTypes.TUPLE)).isTrue();
+
+    assertThat(lastExpression(
+      "from typing import Set",
+      "def f(x: Set[int]): x[1:2]"
+    ).type()).isEqualTo(anyType());
   }
 
   @Test

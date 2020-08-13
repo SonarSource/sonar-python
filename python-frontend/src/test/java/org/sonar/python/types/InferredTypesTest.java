@@ -35,12 +35,15 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
+import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.InferredTypes.typeName;
@@ -293,6 +296,16 @@ public class InferredTypesTest {
     RuntimeType bType = new RuntimeType(new ClassSymbolImpl("B", "mod.B", locationB, false, false, null));
     assertThat(InferredTypes.typeClassLocation(or(aType, bType))).isNull();
     assertThat(InferredTypes.typeClassLocation(InferredTypes.anyType())).isNull();
+  }
+
+  @Test
+  public void test_isDeclaredTypeWithTypeClass() {
+    assertThat(isDeclaredTypeWithTypeClass(DECL_INT, "int")).isTrue();
+    assertThat(isDeclaredTypeWithTypeClass(INT, "int")).isFalse();
+    assertThat(isDeclaredTypeWithTypeClass(lastExpression(
+      "from typing import List",
+      "def f(p: List[int]): p"
+    ).type(), "list")).isTrue();
   }
 
   private TypeAnnotation typeAnnotation(String... code) {
