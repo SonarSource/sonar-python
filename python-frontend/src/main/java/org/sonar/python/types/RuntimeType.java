@@ -28,8 +28,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 
-import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
-
 class RuntimeType implements InferredType {
 
   private final ClassSymbol typeClass;
@@ -83,53 +81,11 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean isCompatibleWith(InferredType other) {
-    if (other instanceof RuntimeType) {
-      return areSymbolsCompatible(((RuntimeType) other).getTypeClass());
-    }
-    if (other instanceof DeclaredType) {
-      if (((DeclaredType) other).alternativeTypeSymbols().isEmpty()) {
-        return true;
-      }
-      return ((DeclaredType) other).alternativeTypeSymbols().stream().anyMatch(this::areSymbolsCompatible);
-    }
-    if (other instanceof UnionType) {
-      return ((UnionType) other).types().stream().anyMatch(this::isCompatibleWith);
-    }
-    // other is AnyType
-    return true;
+    return InferredTypes.isTypeClassCompatibleWith(typeClass, other);
   }
 
   public boolean mustBeOrExtend(String fullyQualifiedName) {
     return typeClass.isOrExtends(fullyQualifiedName);
-  }
-
-  private boolean areSymbolsCompatible(Symbol other) {
-    if (!other.is(CLASS)) {
-      return true;
-    }
-    ClassSymbol otherTypeClass = (ClassSymbol) other;
-    String otherFullyQualifiedName = otherTypeClass.fullyQualifiedName();
-    boolean isCompatibleNumber = isCompatibleNumber(other);
-    boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
-      otherTypeClass.declaredMembers().stream().allMatch(m -> this.typeClass.resolveMember(m.name()).isPresent());
-    boolean canBeOrExtend = otherFullyQualifiedName == null || this.canBeOrExtend(otherFullyQualifiedName);
-    return isCompatibleNumber || isDuckTypeCompatible || canBeOrExtend;
-  }
-
-  private boolean isCompatibleNumber(Symbol other) {
-    String thisFQN = this.typeClass.fullyQualifiedName();
-    String otherFQN = other.fullyQualifiedName();
-    if (otherFQN == null) {
-      return false;
-    }
-    boolean floatCompatible = otherFQN.equals(thisFQN) || "int".equals(thisFQN);
-    if ("float".equals(otherFQN)) {
-      return floatCompatible;
-    }
-    if ("complex".equals(otherFQN)) {
-      return floatCompatible || "float".equals(thisFQN);
-    }
-    return false;
   }
 
   @Override

@@ -114,7 +114,10 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean isCompatibleWith(InferredType other) {
-    return true;
+    if (alternativeTypeSymbols().isEmpty()) {
+      return true;
+    }
+    return alternativeTypeSymbols().stream().anyMatch(typeSymbol -> InferredTypes.isTypeClassCompatibleWith(typeSymbol, other));
   }
 
   @Override

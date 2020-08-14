@@ -253,4 +253,51 @@ public class InferredTypes {
     }
     return false;
   }
+
+  static boolean isTypeClassCompatibleWith(Symbol typeClass, InferredType other) {
+    if (other instanceof RuntimeType) {
+      return InferredTypes.areSymbolsCompatible(typeClass, ((RuntimeType) other).getTypeClass());
+    }
+    if (other instanceof DeclaredType) {
+      if (((DeclaredType) other).alternativeTypeSymbols().isEmpty()) {
+        return true;
+      }
+      return ((DeclaredType) other).alternativeTypeSymbols().stream().anyMatch(a -> InferredTypes.areSymbolsCompatible(typeClass, a));
+    }
+    if (other instanceof UnionType) {
+      return ((UnionType) other).types().stream().anyMatch(t -> InferredTypes.isTypeClassCompatibleWith(typeClass, t));
+    }
+    // other is AnyType
+    return true;
+  }
+
+  static boolean areSymbolsCompatible(Symbol actual, Symbol expected) {
+    if (!expected.is(CLASS) || !actual.is(CLASS)) {
+      return true;
+    }
+    ClassSymbol actualTypeClass = (ClassSymbol) actual;
+    ClassSymbol expectedTypeClass = (ClassSymbol) expected;
+    String otherFullyQualifiedName = expectedTypeClass.fullyQualifiedName();
+    boolean isCompatibleNumber = isCompatibleNumber(actual, expected);
+    boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
+      expectedTypeClass.declaredMembers().stream().allMatch(m -> actualTypeClass.resolveMember(m.name()).isPresent());
+    boolean canBeOrExtend = otherFullyQualifiedName == null || actualTypeClass.canBeOrExtend(otherFullyQualifiedName);
+    return isCompatibleNumber || isDuckTypeCompatible || canBeOrExtend;
+  }
+
+  private static boolean isCompatibleNumber(Symbol actual, Symbol expected) {
+    String actualFQN = actual.fullyQualifiedName();
+    String expectedFQN = expected.fullyQualifiedName();
+    if (expectedFQN == null) {
+      return false;
+    }
+    boolean floatCompatible = expectedFQN.equals(actualFQN) || "int".equals(actualFQN);
+    if ("float".equals(expectedFQN)) {
+      return floatCompatible;
+    }
+    if ("complex".equals(expectedFQN)) {
+      return floatCompatible || "float".equals(actualFQN);
+    }
+    return false;
+  }
 }
