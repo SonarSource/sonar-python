@@ -34,10 +34,12 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.DeclaredType.fromInferredType;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.INT;
@@ -121,13 +123,22 @@ public class DeclaredTypeTest {
 
   @Test
   public void test_isCompatibleWith() {
-    ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
-    ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
-    x2.addSuperClass(x1);
+    ClassSymbol x1 = lastClassSymbol(
+      "class X1:",
+      "  def foo(): ..."
+    );
+    ClassSymbol x2 = lastClassSymbol(
+      "class X2:",
+      "  def bar(): ..."
+    );
+    ((ClassSymbolImpl) x2).addSuperClass(x1);
 
     assertThat(new DeclaredType(x2).isCompatibleWith(new DeclaredType(x1))).isTrue();
     assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x1))).isTrue();
-    assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x2))).isTrue();
+    assertThat(new DeclaredType(x1).isCompatibleWith(new DeclaredType(x2))).isFalse();
+    assertThat(new DeclaredType(x1).isCompatibleWith(INT)).isFalse();
+    DeclaredType emptyUnion = new DeclaredType(new SymbolImpl("Union", "typing.Union"));
+    assertThat(emptyUnion.isCompatibleWith(INT)).isTrue();
   }
 
   @Test
@@ -237,7 +248,7 @@ public class DeclaredTypeTest {
   }
 
   private static ClassSymbol lastClassSymbol(String... code) {
-    FileInput fileInput = parse(code);
+    FileInput fileInput = parse(new SymbolTableBuilder("my_package", pythonFile("my_module.py")), code);
     List<Statement> statements = fileInput.statements().statements();
     ClassDef classDef = (ClassDef) statements.get(statements.size() - 1);
     return (ClassSymbol) classDef.name().symbol();
