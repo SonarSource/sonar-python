@@ -22,21 +22,26 @@ package org.sonar.python.checks;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
+
+import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 
 @Rule(key = "S5864")
 public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     new NonCallableCalledCheck().initialize(context);
+    new IncompatibleOperandsCheck().initialize(context);
   }
 
   private static class NonCallableCalledCheck extends NonCallableCalled {
 
     @Override
     public boolean isNonCallableType(InferredType type) {
-      // Calling type.canHaveMember to avoid raising twice an issue already handled by the corresponding bug rule
-      return type.canHaveMember("__call__") && !type.declaresMember("__call__");
+      return containsDeclaredType(type) && !type.declaresMember("__call__");
     }
 
     @Override
@@ -45,6 +50,31 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
         return String.format("Fix this call; Previous type checks suggest that \"%s\"%s is not callable.", name, addTypeName(calleeType));
       }
       return String.format("Fix this call; Previous type checks suggest that this expression%s is not callable.", addTypeName(calleeType));
+    }
+  }
+
+  private static class IncompatibleOperandsCheck extends IncompatibleOperands {
+    @Override
+    public SpecialMethod resolveMethod(InferredType type, String method) {
+      Symbol symbol = type.resolveDeclaredMember(method).orElse(null);
+      boolean isUnresolved = !containsDeclaredType(type) || (symbol == null && type.declaresMember(method));
+      return new SpecialMethod(symbol, isUnresolved);
+    }
+
+    @Override
+    public String message(Token operator, InferredType left, InferredType right) {
+      String leftTypeName = InferredTypes.typeName(left);
+      String rightTypeName = InferredTypes.typeName(right);
+      String message = "Fix this \"" + operator.value() + "\" operation; Previous type checks suggest that operands have incompatible types";
+      if (leftTypeName != null && rightTypeName != null) {
+        message += " (" + leftTypeName + " and " + rightTypeName + ")";
+      }
+      return message + ".";
+    }
+
+    @Override
+    public String message(Token operator) {
+      return "Fix this \"" + operator.value() + "\" operation; Previous type checks suggest that operand has incompatible type.";
     }
   }
 }

@@ -19,14 +19,36 @@
  */
 package org.sonar.python.checks;
 
+import java.io.File;
+import java.util.Collections;
 import org.junit.Test;
+import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfusingTypeCheckingCheckTest {
 
+  private final ConfusingTypeCheckingCheck check = new ConfusingTypeCheckingCheck();
+
   @Test
   public void non_callable_called() {
-    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/nonCallableCalled.py", new ConfusingTypeCheckingCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/nonCallableCalled.py", check);
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/nonCallableCalled.py");
   }
 
+  @Test
+  public void incompatible_operands() {
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/incompatibleOperands.py", check);
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/incompatibleOperands/comparison.py");
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/incompatibleOperands/arithmetic.py");
+  }
+
+  private void assertNoIssuesInCorrespondingBugRule(String path) {
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File(path));
+    SubscriptionVisitor.analyze(Collections.singletonList(check), context);
+    assertThat(context.getIssues()).isEmpty();
+  }
 }

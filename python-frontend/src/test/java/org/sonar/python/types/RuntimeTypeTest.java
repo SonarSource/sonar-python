@@ -25,6 +25,7 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
@@ -34,6 +35,7 @@ import org.sonar.python.tree.TreeUtils;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.or;
+import static org.sonar.python.types.InferredTypes.runtimeBuiltinType;
 
 public class RuntimeTypeTest {
 
@@ -242,10 +244,25 @@ public class RuntimeTypeTest {
   public void test_isCompatibleWith_numbers() {
     assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.INT)).isTrue();
     assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.FLOAT)).isTrue();
+    assertThat(InferredTypes.FLOAT.isCompatibleWith(InferredTypes.INT)).isFalse();
     assertThat(InferredTypes.FLOAT.isCompatibleWith(InferredTypes.COMPLEX)).isTrue();
     assertThat(InferredTypes.FLOAT.isCompatibleWith(InferredTypes.FLOAT)).isTrue();
     assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.COMPLEX)).isTrue();
     assertThat(InferredTypes.COMPLEX.isCompatibleWith(InferredTypes.COMPLEX)).isTrue();
+    assertThat(InferredTypes.COMPLEX.isCompatibleWith(InferredTypes.FLOAT)).isFalse();
+    assertThat(InferredTypes.COMPLEX.isCompatibleWith(InferredTypes.INT)).isFalse();
+  }
+
+  @Test
+  public void test_isCompatibleWith_str() {
+    InferredType unicode = runtimeBuiltinType("unicode");
+    assertThat(InferredTypes.STR.isCompatibleWith(unicode)).isTrue();
+    assertThat(InferredTypes.STR.isCompatibleWith(InferredTypes.STR)).isTrue();
+    assertThat(unicode.isCompatibleWith(InferredTypes.STR)).isFalse();
+
+    InferredType memoryView = runtimeBuiltinType("memoryview");
+    assertThat(memoryView.isCompatibleWith(InferredTypes.STR)).isTrue();
+    assertThat(InferredTypes.STR.isCompatibleWith(memoryView)).isFalse();
   }
 
   @Test
