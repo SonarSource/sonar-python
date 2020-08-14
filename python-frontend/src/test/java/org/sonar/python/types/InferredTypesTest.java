@@ -41,6 +41,7 @@ import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
+import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.fromTypeshedTypeAnnotation;
 import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
@@ -306,6 +307,15 @@ public class InferredTypesTest {
       "from typing import List",
       "def f(p: List[int]): p"
     ).type(), "list")).isTrue();
+  }
+
+  @Test
+  public void test_containsDeclaredType() {
+    assertThat(containsDeclaredType(INT)).isFalse();
+    DeclaredType declaredType = new DeclaredType(new SymbolImpl("foo", "foo"));
+    assertThat(containsDeclaredType(declaredType)).isTrue();
+    assertThat(containsDeclaredType(or(declaredType, INT))).isTrue();
+    assertThat(containsDeclaredType(anyType())).isFalse();
   }
 
   private TypeAnnotation typeAnnotation(String... code) {

@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -86,6 +87,17 @@ public class InferredTypes {
 
   private static Map<String, Symbol> builtinSymbols;
 
+  private static final String UNICODE = "unicode";
+  // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
+  private static final Map<String, Set<String>> HARDCODED_COMPATIBLE_TYPES = new HashMap<>();
+  static {
+    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
+    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(Collections.singletonList(BuiltinTypes.COMPLEX)));
+    HARDCODED_COMPATIBLE_TYPES.put("bytearray", new HashSet<>(Arrays.asList("bytes", BuiltinTypes.STR, UNICODE)));
+    HARDCODED_COMPATIBLE_TYPES.put("memoryview", new HashSet<>(Arrays.asList("bytes", BuiltinTypes.STR, UNICODE)));
+    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.STR, new HashSet<>(Collections.singletonList(UNICODE)));
+  }
+
   private InferredTypes() {
   }
 
@@ -97,7 +109,7 @@ public class InferredTypes {
     return AnyType.ANY;
   }
 
-  private static InferredType runtimeBuiltinType(String fullyQualifiedName) {
+  static InferredType runtimeBuiltinType(String fullyQualifiedName) {
     return new RuntimeType(TypeShed.typeShedClass(fullyQualifiedName));
   }
 
@@ -278,25 +290,24 @@ public class InferredTypes {
     ClassSymbol actualTypeClass = (ClassSymbol) actual;
     ClassSymbol expectedTypeClass = (ClassSymbol) expected;
     String otherFullyQualifiedName = expectedTypeClass.fullyQualifiedName();
-    boolean isCompatibleNumber = isCompatibleNumber(actual, expected);
+    boolean areHardcodedCompatible = areHardcodedCompatible(actualTypeClass, expectedTypeClass);
     boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
       expectedTypeClass.declaredMembers().stream().allMatch(m -> actualTypeClass.resolveMember(m.name()).isPresent());
     boolean canBeOrExtend = otherFullyQualifiedName == null || actualTypeClass.canBeOrExtend(otherFullyQualifiedName);
-    return isCompatibleNumber || isDuckTypeCompatible || canBeOrExtend;
+    return areHardcodedCompatible || isDuckTypeCompatible || canBeOrExtend;
   }
 
-  private static boolean isCompatibleNumber(Symbol actual, Symbol expected) {
-    String actualFQN = actual.fullyQualifiedName();
-    String expectedFQN = expected.fullyQualifiedName();
-    if (expectedFQN == null) {
-      return false;
+  private static boolean areHardcodedCompatible(ClassSymbol actual, ClassSymbol expected) {
+    Set<String> compatibleTypes = HARDCODED_COMPATIBLE_TYPES.getOrDefault(actual.fullyQualifiedName(), Collections.emptySet());
+    return compatibleTypes.stream().anyMatch(expected::canBeOrExtend);
+  }
+
+  public static boolean containsDeclaredType(InferredType type) {
+    if (type instanceof DeclaredType) {
+      return true;
     }
-    boolean floatCompatible = expectedFQN.equals(actualFQN) || "int".equals(actualFQN);
-    if ("float".equals(expectedFQN)) {
-      return floatCompatible;
-    }
-    if ("complex".equals(expectedFQN)) {
-      return floatCompatible || "float".equals(actualFQN);
+    if (type instanceof UnionType) {
+      return ((UnionType) type).types().stream().anyMatch(InferredTypes::containsDeclaredType);
     }
     return false;
   }
