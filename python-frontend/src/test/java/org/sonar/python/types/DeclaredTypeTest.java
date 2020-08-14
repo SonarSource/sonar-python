@@ -164,7 +164,6 @@ public class DeclaredTypeTest {
     assertThat(new DeclaredType(x1).getTypeClass()).isEqualTo(x1);
   }
 
-
   @Test
   public void test_equals() {
     DeclaredType aType = new DeclaredType(a);
@@ -201,6 +200,40 @@ public class DeclaredTypeTest {
     assertThat(fromInferredType(INT)).isEqualTo(DECL_INT);
     assertThat(fromInferredType(DECL_INT)).isEqualTo(DECL_INT);
     assertThat(fromInferredType(or(INT, STR))).isEqualTo(anyType());
+  }
+
+  @Test
+  public void test_resolveDeclaredMember() {
+    ClassSymbolImpl typeClassX = new ClassSymbolImpl("x", "x");
+    SymbolImpl fooX = new SymbolImpl("foo", "x.foo");
+    typeClassX.addMembers(Collections.singletonList(fooX));
+    DeclaredType declaredTypeX = new DeclaredType(typeClassX);
+    assertThat(declaredTypeX.resolveDeclaredMember("foo")).contains(fooX);
+    assertThat(declaredTypeX.resolveDeclaredMember("bar")).isEmpty();
+
+    ClassSymbolImpl typeClassY = new ClassSymbolImpl("y", "y");
+    SymbolImpl fooY = new SymbolImpl("foo", "y.foo");
+    typeClassY.addMembers(Collections.singletonList(fooY));
+    DeclaredType declaredTypeY = new DeclaredType(typeClassY);
+    DeclaredType union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), Arrays.asList(declaredTypeX, declaredTypeY));
+    assertThat(union.resolveDeclaredMember("foo")).isEmpty();
+    assertThat(union.resolveDeclaredMember("bar")).isEmpty();
+
+    DeclaredType unresolved = new DeclaredType(new SymbolImpl("unresolved", "unresolved"));
+    union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), Arrays.asList(declaredTypeX, unresolved));
+    assertThat(union.resolveDeclaredMember("foo")).isEmpty();
+  }
+
+  @Test
+  public void test_hasUnresolvedHierarchy() {
+    ClassSymbolImpl typeClassX = new ClassSymbolImpl("x", "x");
+    DeclaredType declaredTypeX = new DeclaredType(typeClassX);
+    assertThat(declaredTypeX.hasUnresolvedHierarchy()).isFalse();
+    DeclaredType union = new DeclaredType(new SymbolImpl("Union", "typing.Union"));
+    assertThat(union.hasUnresolvedHierarchy()).isTrue();
+    DeclaredType unresolved = new DeclaredType(new SymbolImpl("unresolved", "unresolved"));
+    union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), Arrays.asList(declaredTypeX, unresolved));
+    assertThat(union.hasUnresolvedHierarchy()).isTrue();
   }
 
   private static ClassSymbol lastClassSymbol(String... code) {

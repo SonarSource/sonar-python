@@ -43,6 +43,9 @@ public interface InferredType {
   Optional<Symbol> resolveMember(String memberName);
 
   @Beta
+  Optional<Symbol> resolveDeclaredMember(String memberName);
+
+  @Beta
   boolean canOnlyBe(String typeName);
 
   @Beta

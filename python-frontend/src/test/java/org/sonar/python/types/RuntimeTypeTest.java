@@ -281,4 +281,14 @@ public class RuntimeTypeTest {
     assertThat(typeX2.mustBeOrExtend("x1")).isTrue();
     assertThat(typeX2.mustBeOrExtend("x2")).isTrue();
   }
+
+  @Test
+  public void test_resolveDeclaredMember() {
+    ClassSymbolImpl typeClass = new ClassSymbolImpl("x", "x");
+    SymbolImpl foo = new SymbolImpl("foo", "foo");
+    typeClass.addMembers(Collections.singletonList(foo));
+    RuntimeType runtimeType = new RuntimeType(typeClass);
+    assertThat(runtimeType.resolveDeclaredMember("foo")).contains(foo);
+    assertThat(runtimeType.resolveDeclaredMember("bar")).isEmpty();
+  }
 }

@@ -76,7 +76,7 @@ class UnionType implements InferredType {
 
   @Override
   public Optional<Symbol> resolveMember(String memberName) {
-    if (types.stream().anyMatch(type -> type instanceof RuntimeType && ((RuntimeType) type).hasUnresolvedHierarchy())) {
+    if (hasUnresolvedHierarchy()) {
       return Optional.empty();
     }
     Set<Optional<Symbol>> resolved = types.stream()
@@ -84,6 +84,30 @@ class UnionType implements InferredType {
       .filter(Optional::isPresent)
       .collect(Collectors.toSet());
     return resolved.size() == 1 ? resolved.iterator().next() : Optional.empty();
+  }
+
+  @Override
+  public Optional<Symbol> resolveDeclaredMember(String memberName) {
+    if (hasUnresolvedHierarchy()) {
+      return Optional.empty();
+    }
+    Set<Optional<Symbol>> resolved = types.stream()
+      .map(t -> t.resolveDeclaredMember(memberName))
+      .filter(Optional::isPresent)
+      .collect(Collectors.toSet());
+    return resolved.size() == 1 ? resolved.iterator().next() : Optional.empty();
+  }
+
+  private boolean hasUnresolvedHierarchy() {
+    for (InferredType type : types) {
+      if (type instanceof RuntimeType && ((RuntimeType) type).hasUnresolvedHierarchy()) {
+        return true;
+      }
+      if (type instanceof DeclaredType && ((DeclaredType) type).hasUnresolvedHierarchy()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override

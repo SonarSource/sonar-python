@@ -182,4 +182,34 @@ public class UnionTypeTest {
 
     assertThat(or(new RuntimeType(x1), new RuntimeType(x1)).mustBeOrExtend("x1")).isTrue();
   }
+
+  @Test
+  public void test_resolveDeclaredMember() {
+    ClassSymbolImpl typeClassX = new ClassSymbolImpl("x", "x");
+    SymbolImpl fooX = new SymbolImpl("foo", "x.foo");
+    typeClassX.addMembers(Collections.singletonList(fooX));
+    DeclaredType declaredTypeX = new DeclaredType(typeClassX);
+
+    ClassSymbolImpl typeClassY = new ClassSymbolImpl("y", "y");
+    SymbolImpl fooY = new SymbolImpl("bar", "y.bar");
+    typeClassY.addMembers(Collections.singletonList(fooY));
+    DeclaredType declaredTypeY = new DeclaredType(typeClassY);
+
+    InferredType union = or(declaredTypeX, declaredTypeY);
+    assertThat(union.resolveDeclaredMember("foo")).contains(fooX);
+    assertThat(union.resolveDeclaredMember("baz")).isEmpty();
+
+    ClassSymbolImpl typeClass = new ClassSymbolImpl("x", "x");
+    typeClass.addMembers(Collections.singletonList(new SymbolImpl("capitalize", "x.capitalize")));
+    InferredType strOrX = or(InferredTypes.STR, new DeclaredType(typeClass));
+    assertThat(strOrX.resolveDeclaredMember("capitalize")).isEmpty();
+
+    ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
+    SymbolImpl foo = new SymbolImpl("foo", null);
+    x.addMembers(Arrays.asList(foo, new SymbolImpl("bar", null)));
+    ClassSymbolImpl classWithUnresolvedHierarchy = new ClassSymbolImpl("u", "u");
+    classWithUnresolvedHierarchy.addSuperClass(new SymbolImpl("unresolved", "unresolved"));
+    assertThat(or(runtimeType(x), runtimeType(classWithUnresolvedHierarchy)).resolveDeclaredMember("foo")).isEmpty();
+    assertThat(or(new DeclaredType(x), new DeclaredType(classWithUnresolvedHierarchy)).resolveDeclaredMember("foo")).isEmpty();
+  }
 }
