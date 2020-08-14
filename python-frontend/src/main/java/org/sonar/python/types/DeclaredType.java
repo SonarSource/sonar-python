@@ -89,6 +89,20 @@ public class DeclaredType implements InferredType {
   }
 
   @Override
+  public Optional<Symbol> resolveDeclaredMember(String memberName) {
+    if (hasUnresolvedHierarchy()) {
+      return Optional.empty();
+    }
+    Set<Optional<Symbol>> resolvedMembers = alternativeTypeSymbols().stream()
+      .filter(s -> s.is(CLASS))
+      .map(ClassSymbol.class::cast)
+      .map(t -> t.resolveMember(memberName))
+      .filter(Optional::isPresent)
+      .collect(Collectors.toSet());
+    return resolvedMembers.size() == 1 ? resolvedMembers.iterator().next() : Optional.empty();
+  }
+
+  @Override
   public boolean canBeOrExtend(String typeName) {
     return true;
   }
@@ -165,5 +179,17 @@ public class DeclaredType implements InferredType {
       return inferredType;
     }
     return InferredTypes.anyType();
+  }
+
+  boolean hasUnresolvedHierarchy() {
+    if (alternativeTypeSymbols.isEmpty()) {
+      return true;
+    }
+    for (Symbol alternativeTypeSymbol : alternativeTypeSymbols) {
+      if (!alternativeTypeSymbol.is(CLASS) || ((ClassSymbol) alternativeTypeSymbol).hasUnresolvedTypeHierarchy()) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -67,6 +67,11 @@ class RuntimeType implements InferredType {
   }
 
   @Override
+  public Optional<Symbol> resolveDeclaredMember(String memberName) {
+    return resolveMember(memberName);
+  }
+
+  @Override
   public boolean canOnlyBe(String typeName) {
     return typeName.equals(typeClass.fullyQualifiedName());
   }
