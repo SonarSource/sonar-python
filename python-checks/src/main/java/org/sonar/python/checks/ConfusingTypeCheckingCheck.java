@@ -62,6 +62,11 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     }
 
     @Override
+    public String message(Token operator) {
+      return "Fix this \"" + operator.value() + "\" operation; Previous type checks suggest that operand has incompatible type.";
+    }
+
+    @Override
     public String message(Token operator, InferredType left, InferredType right) {
       String leftTypeName = InferredTypes.typeName(left);
       String rightTypeName = InferredTypes.typeName(right);
@@ -70,11 +75,6 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
         message += " (" + leftTypeName + " and " + rightTypeName + ")";
       }
       return message + ".";
-    }
-
-    @Override
-    public String message(Token operator) {
-      return "Fix this \"" + operator.value() + "\" operation; Previous type checks suggest that operand has incompatible type.";
     }
   }
 }

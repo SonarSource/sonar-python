@@ -292,3 +292,13 @@ def out_of_scope():
       return bytes("hello")
     elif param == 5:
       return 42  # FN
+
+  class Base:
+    def meth(self): ...
+  class C(Base):
+    def another_meth(self): ...
+
+  def declared_type(param: Base) -> Optional[C]:
+    if isinstance(param, C):
+      return param # OK
+    return None
