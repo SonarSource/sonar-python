@@ -70,7 +70,11 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
         return;
       }
       returnTypeVisitor.yieldStatements
-        .forEach(y -> ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"typing.Generator\" or one of its supertypes.", functionName)));
+        .forEach(y -> {
+          PreciseIssue issue =
+            ctx.addIssue(y, String.format("Remove this yield statement or annotate function \"%s\" with \"typing.Generator\" or one of its supertypes.", functionName));
+          addSecondaries(issue, functionDef);
+        });
     }
     returnTypeVisitor.invalidReturnStatements.forEach(i -> {
       PreciseIssue issue;
