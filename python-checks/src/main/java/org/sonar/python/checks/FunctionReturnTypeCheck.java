@@ -112,10 +112,10 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
     public void visitReturnStatement(ReturnStatement returnStatement) {
       List<Expression> expressions = returnStatement.expressions();
       if (expressions.isEmpty()) {
-        if (!returnType.mustBeOrExtend("NoneType")) {
+        if (!InferredTypes.NONE.isCompatibleWith(returnType)) {
           invalidReturnStatements.add(returnStatement);
         }
-      } else if (expressions.size() > 1) {
+      } else if (!returnStatement.commas().isEmpty()) {
         // Hardcoded "tuple" type due to a limitation on extracting type information from tuple literals
         if (!InferredTypes.TUPLE.isCompatibleWith(returnType)) {
           invalidReturnStatements.add(returnStatement);

@@ -19,11 +19,8 @@
  */
 package org.sonar.python.tree;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Token;
@@ -33,11 +30,13 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 public class ReturnStatementImpl extends SimpleStatement implements ReturnStatement {
   private final Token returnKeyword;
   private final List<Expression> expressionTrees;
+  private final List<Token> commas;
   private final Separators separators;
 
-  public ReturnStatementImpl(Token returnKeyword, List<Expression> expressionTrees, Separators separators) {
+  public ReturnStatementImpl(Token returnKeyword, List<Expression> expressionTrees, List<Token> commas, Separators separators) {
     this.returnKeyword = returnKeyword;
     this.expressionTrees = expressionTrees;
+    this.commas = commas;
     this.separators = separators;
   }
 
@@ -52,6 +51,11 @@ public class ReturnStatementImpl extends SimpleStatement implements ReturnStatem
   }
 
   @Override
+  public List<Token> commas() {
+    return commas;
+  }
+
+  @Override
   public Kind getKind() {
     return Kind.RETURN_STMT;
   }
@@ -63,8 +67,18 @@ public class ReturnStatementImpl extends SimpleStatement implements ReturnStatem
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(Collections.singletonList(returnKeyword), expressionTrees, separators.elements())
-      .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
+    List<Tree> children = new ArrayList<>();
+    children.add(returnKeyword);
+    int i = 0;
+    for (Expression expression : expressionTrees) {
+      children.add(expression);
+      if (i < commas.size()) {
+        children.add(commas.get(i));
+      }
+      i++;
+    }
+    children.addAll(separators.elements());
+    return children;
   }
 
   @Override

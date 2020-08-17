@@ -73,8 +73,7 @@ def tuples():
     return 1, 2, 3 # OK
 
   def my_one_element_tuple() -> tuple:
-    # FP (SONARPY-779)
-    return 1,  # Noncompliant
+    return 1,  # OK
 
 def collections():
   def my_list_nok() -> List:
@@ -121,6 +120,11 @@ def type_aliases():
 
   def my_str_union(typ: int) -> Union[str, np.dtype]:
     return str(typ)
+
+  from typing import NoneType
+  MyNone = NoneType
+  def my_none() -> MyNone:
+    return
 
 def other_returns():
   def my_int(param) -> int:
