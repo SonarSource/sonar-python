@@ -220,9 +220,11 @@ def generators():
       return iter("hello")
 
   def my_custom_iterable() -> MyIter:
+#     ^^^^^^^^^^^^^^^^^^>     ^^^^^^>
     my_iter = MyIter()
     for elem in my_iter:
       yield elem  # Noncompliant {{Remove this yield statement or annotate function "my_custom_iterable" with "typing.Generator" or one of its supertypes.}}
+#     ^^^^^^^^^^
 
 def missing_return():
   """No issue if functions do not return as it might be due to custom error handling or a stub definition"""
