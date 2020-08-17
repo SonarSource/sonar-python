@@ -37,6 +37,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.python.types.InferredTypes.containsDeclaredType;
+
 @Rule(key = "S5886")
 public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
@@ -127,7 +129,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       } else {
         Expression expression = expressions.get(0);
         InferredType inferredType = expression.type();
-        if (!inferredType.isCompatibleWith(returnType)) {
+        if (!containsDeclaredType(inferredType) && !inferredType.isCompatibleWith(returnType)) {
           invalidReturnStatements.add(returnStatement);
         }
       }
