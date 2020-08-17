@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import com.google.common.annotations.Beta;
 import java.util.List;
 
 /**
@@ -33,5 +34,6 @@ public interface ReturnStatement extends Statement {
 
   List<Expression> expressions();
 
+  @Beta
   List<Token> commas();
 }
