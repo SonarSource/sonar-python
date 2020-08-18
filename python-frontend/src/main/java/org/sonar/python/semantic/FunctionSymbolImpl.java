@@ -145,11 +145,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      TypeAnnotation typeAnnotation = parameter.typeAnnotation();
-      InferredType declaredType = InferredTypes.anyType();
-      if (typeAnnotation != null) {
-        declaredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
-      }
+      InferredType declaredType = getParameterType(parameter, starToken);
       this.parameters.add(new ParameterImpl(parameterName.name(), declaredType, parameter.defaultValue() != null,
         starToken != null, parameterState, locationInFile(parameter, fileId)));
       if (starToken != null) {
@@ -166,6 +162,26 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
         parameterState.positionalOnly = false;
       }
     }
+  }
+
+  private InferredType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable Token starToken) {
+    if (starToken != null) {
+      // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
+      if ("*".equals(starToken.value())) {
+        // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
+        return InferredTypes.TUPLE;
+      }
+      if ("**".equals(starToken.value())) {
+        //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
+        return InferredTypes.DICT;
+      }
+    }
+    InferredType declaredType = InferredTypes.anyType();
+    TypeAnnotation typeAnnotation = parameter.typeAnnotation();
+    if (typeAnnotation != null) {
+      declaredType = isStub ? fromTypeshedTypeAnnotation(typeAnnotation) : fromTypeAnnotation(typeAnnotation);
+    }
+    return declaredType;
   }
 
   @Override
