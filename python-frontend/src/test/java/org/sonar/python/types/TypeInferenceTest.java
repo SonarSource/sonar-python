@@ -126,6 +126,9 @@ public class TypeInferenceTest {
       "  try: ...",
       "  except: ...",
       "  p").type()).isEqualTo(anyType());
+
+    assertThat(lastExpression("def f(*p: int): p").type()).isEqualTo(TUPLE);
+    assertThat(lastExpression("def f(**p: int): p").type()).isEqualTo(DICT);
   }
 
   @Test
