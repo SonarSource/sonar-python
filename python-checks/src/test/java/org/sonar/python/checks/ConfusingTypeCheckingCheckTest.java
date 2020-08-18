@@ -46,6 +46,14 @@ public class ConfusingTypeCheckingCheckTest {
     assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/incompatibleOperands/arithmetic.py");
   }
 
+  @Test
+  public void item_operations() {
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/itemOperations.py", check);
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_delitem.py");
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_getitem.py");
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_setitem.py");
+  }
+
   private void assertNoIssuesInCorrespondingBugRule(String path) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File(path));
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);

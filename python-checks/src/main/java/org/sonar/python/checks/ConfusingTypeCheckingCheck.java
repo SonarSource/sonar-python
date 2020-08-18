@@ -19,15 +19,19 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
+import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 @Rule(key = "S5864")
 public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
@@ -35,6 +39,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     new NonCallableCalledCheck().initialize(context);
     new IncompatibleOperandsCheck().initialize(context);
+    new ItemOperationsTypeCheck().initialize(context);
   }
 
   private static class NonCallableCalledCheck extends NonCallableCalled {
@@ -75,6 +80,30 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
         message += " (" + leftTypeName + " and " + rightTypeName + ")";
       }
       return message + ".";
+    }
+  }
+
+  private static class ItemOperationsTypeCheck extends ItemOperationsType {
+
+    @Override
+    public boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
+                                       List<LocationInFile> secondaries) {
+
+      InferredType type = subscriptionObject.type();
+      secondaries.add(typeClassLocation(type));
+      if (!InferredTypes.containsDeclaredType(type)) {
+        // handled by S5644
+        return true;
+      }
+      return type.declaresMember(requiredMethod);
+    }
+
+    @Override
+    public String message(@Nullable String name, String missingMethod) {
+      if (name != null) {
+        return String.format("Fix this \"%s\" operation; Previous type checks suggest that \"%s\" does not have this method.", missingMethod, name);
+      }
+      return String.format("Fix this \"%s\" operation; Previous type checks suggest that this expression does not have this method.", missingMethod);
     }
   }
 }
