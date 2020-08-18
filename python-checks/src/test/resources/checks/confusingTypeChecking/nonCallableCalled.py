@@ -22,3 +22,10 @@ def derived(x: int):
   y() # Noncompliant
   z = x + 42
   z() # Noncompliant
+
+class Base: ...
+class CallableBase:
+  def __call__(self, *args, **kwargs): ...
+def with_isinstance(x: Base):
+  if isinstance(x, CallableBase):
+    x()
