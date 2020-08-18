@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -533,6 +534,15 @@ public class TypeInferenceTest {
       "    ...",
       "  x"
       ).type()).isEqualTo(anyType());
+
+    FileInput fileInput = parse(
+      "def f(x: int):",
+      "  if isinstance(x, Foo):",
+      "    x"
+    );
+    ExpressionStatement expressionStatement = getLastDescendant(fileInput, tree -> tree.is(Tree.Kind.EXPRESSION_STMT));
+    Expression x = expressionStatement.expressions().get(0);
+    assertThat(x.type()).isEqualTo(anyType());
 
     assertThat(lastExpression(
       "def f(x: int):",
