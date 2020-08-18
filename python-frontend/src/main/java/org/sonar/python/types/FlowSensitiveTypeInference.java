@@ -23,13 +23,17 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
@@ -39,7 +43,9 @@ import org.sonar.python.types.TypeInference.Assignment;
 import org.sonar.python.types.TypeInference.MemberAccess;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 
 class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<Symbol> trackedVars;
@@ -75,9 +81,36 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
       handleAssignment(assignment, state);
       // update lhs
       assignment.lhsExpressions().forEach(lhs -> updateTree(lhs, state));
+    } else if (isIsInstanceCall(element)) {
+      Symbol firstArgumentSymbol = getFirstArgumentSymbol(((CallExpression) element), state);
+      if (firstArgumentSymbol != null) {
+        state.setTypes(firstArgumentSymbol, Collections.singleton(InferredTypes.anyType()));
+      }
+      updateTree(element, state);
     } else {
       updateTree(element, state);
     }
+  }
+
+  private static boolean isIsInstanceCall(Tree tree) {
+    if (tree.is(CALL_EXPR)) {
+      CallExpression callExpression = (CallExpression) tree;
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      return calleeSymbol != null && "isinstance".equals(calleeSymbol.fullyQualifiedName()) && callExpression.arguments().size() == 2;
+    }
+    return false;
+  }
+
+  @CheckForNull
+  private static Symbol getFirstArgumentSymbol(CallExpression callExpression, TypeInferenceProgramState state) {
+    Argument argument = callExpression.arguments().get(0);
+    if (argument.is(REGULAR_ARGUMENT) && ((RegularArgument) argument).expression().is(NAME)) {
+      Name variableName = (Name) ((RegularArgument) argument).expression();
+      if (state.getTypes(variableName.symbol()).stream().anyMatch(InferredTypes::containsDeclaredType)) {
+        return variableName.symbol();
+      }
+    }
+    return null;
   }
 
   private void updateTree(Tree tree, TypeInferenceProgramState state) {
