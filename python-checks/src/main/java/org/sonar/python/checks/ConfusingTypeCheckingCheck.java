@@ -26,7 +26,9 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 
@@ -40,6 +42,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     new NonCallableCalledCheck().initialize(context);
     new IncompatibleOperandsCheck().initialize(context);
     new ItemOperationsTypeCheck().initialize(context);
+    new IterationOnNonIterableCheck().initialize(context);
   }
 
   private static class NonCallableCalledCheck extends NonCallableCalled {
@@ -104,6 +107,40 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
         return String.format("Fix this \"%s\" operation; Previous type checks suggest that \"%s\" does not have this method.", missingMethod, name);
       }
       return String.format("Fix this \"%s\" operation; Previous type checks suggest that this expression does not have this method.", missingMethod);
+    }
+  }
+
+  private static class IterationOnNonIterableCheck extends IterationOnNonIterable {
+
+    @Override
+    boolean isValidIterable(Expression expression, List<LocationInFile> secondaries) {
+      InferredType type = expression.type();
+      secondaries.add(InferredTypes.typeClassLocation(type));
+      return !containsDeclaredType(type) || type.declaresMember("__iter__") || type.declaresMember("__getitem__");
+    }
+
+    @Override
+    String message(Expression expression, boolean isForLoop) {
+      String typeName = InferredTypes.typeName(expression.type());
+      String expressionName = nameFromExpression(expression);
+      String expressionNameString = expressionName != null ? String.format("\"%s\"", expressionName) : "it";
+      String typeNameString = typeName != null ? String.format("has type \"%s\" and", typeName) : "";
+      return isForLoop && isAsyncIterable(expression) ?
+        String.format("Add \"async\" before \"for\"; Previous type checks suggest that %s %s is an async generator.", expressionNameString, typeNameString) :
+        String.format("Replace this expression; Previous type checks suggest that %s %s isn't iterable.", expressionNameString, typeNameString);
+    }
+
+    @Override
+    boolean isAsyncIterable(Expression expression) {
+      InferredType type = expression.type();
+      return type.declaresMember("__aiter__");
+    }
+
+    private static String nameFromExpression(Expression expression) {
+      if (expression.is(Tree.Kind.NAME)) {
+        return ((Name) expression).name();
+      }
+      return null;
     }
   }
 }

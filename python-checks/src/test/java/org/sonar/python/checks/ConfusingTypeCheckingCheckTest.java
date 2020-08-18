@@ -54,6 +54,12 @@ public class ConfusingTypeCheckingCheckTest {
     assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_setitem.py");
   }
 
+  @Test
+  public void iteration_on_non_iterable() {
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/iterationOnNonIterable.py", check);
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/iterationOnNonIterable.py");
+  }
+
   private void assertNoIssuesInCorrespondingBugRule(String path) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File(path));
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
