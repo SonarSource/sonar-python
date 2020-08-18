@@ -1,4 +1,7 @@
-from typing import Set, FrozenSet
+from typing import Set, FrozenSet, Union
+
+def empty_union(x: Union['A', 'B']):
+  x()
 
 def foo(param1: int, param2: Set[int], param3: FrozenSet[int]):
   param1() # Noncompliant {{Fix this call; Previous type checks suggest that "param1" has type int and it is not callable.}}

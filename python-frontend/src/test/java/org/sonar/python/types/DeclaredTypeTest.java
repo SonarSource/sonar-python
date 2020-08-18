@@ -87,6 +87,9 @@ public class DeclaredTypeTest {
     assertThat(declaredType.declaresMember("foo")).isTrue();
     assertThat(declaredType.declaresMember("bar")).isFalse();
 
+    DeclaredType emptyUnion = new DeclaredType(new SymbolImpl("Union", "typing.Union"));
+    assertThat(emptyUnion.declaresMember("foo")).isTrue();
+
     classSymbol = lastClassSymbol(
       "class Base:",
       "  def bar(): ...",
