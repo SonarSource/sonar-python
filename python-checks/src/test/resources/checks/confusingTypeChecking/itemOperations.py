@@ -15,3 +15,8 @@ def builtin(param1: memoryview, param2: frozenset, param3: List[int]):
 def derived(param1: int, param2: int, *param3: int):
   (param1 + param2)[0] # Noncompliant {{Fix this "__getitem__" operation; Previous type checks suggest that this expression does not have this method.}}
   param3[42] # OK
+
+def f(val: object):
+  if not isinstance(val, tuple):
+    ...
+  val[0]
