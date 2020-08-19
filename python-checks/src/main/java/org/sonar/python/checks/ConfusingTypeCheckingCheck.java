@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -26,8 +27,10 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
@@ -51,6 +54,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     new IterationOnNonIterableCheck().initialize(context);
     new SillyEqualityCheck().initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ConfusingTypeCheckingCheck::checkIncorrectExceptionType);
+    context.registerSyntaxNodeConsumer(Tree.Kind.IS, ConfusingTypeCheckingCheck::checkSillyIdentity);
   }
 
   private static class NonCallableCalledCheck extends NonCallableCalled {
@@ -175,12 +179,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
 
     @Override
     boolean areIdentityComparableOrNone(InferredType leftType, InferredType rightType) {
-      if (!containsDeclaredType(leftType) && !containsDeclaredType(rightType)) {
-        return true;
-      }
-      return leftType.equals(rightType)
-        || (typeSymbols(leftType).stream().map(Symbol::fullyQualifiedName).allMatch("NoneType"::equals))
-        || (typeSymbols(rightType).stream().map(Symbol::fullyQualifiedName).allMatch("NoneType"::equals));
+      return ConfusingTypeCheckingCheck.areIdentityComparableOrNone(leftType, rightType);
     }
 
     @Override
@@ -202,6 +201,29 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     @Override
     String message(String result) {
       return "Fix this equality check; Previous type checks suggest that operands have incompatible types.";
+    }
+  }
+
+  private static boolean areIdentityComparableOrNone(InferredType leftType, InferredType rightType) {
+    if (!containsDeclaredType(leftType) && !containsDeclaredType(rightType)) {
+      return true;
+    }
+    Collection<ClassSymbol> leftSymbols = typeSymbols(leftType);
+    Collection<ClassSymbol> rightSymbols = typeSymbols(rightType);
+    return leftSymbols.stream().map(Symbol::fullyQualifiedName).anyMatch(fqn -> fqn == null || rightSymbols.stream().anyMatch(rs -> rs.canBeOrExtend(fqn)))
+      || rightSymbols.stream().map(Symbol::fullyQualifiedName).anyMatch(fqn -> fqn == null || leftSymbols.stream().anyMatch(ls -> ls.canBeOrExtend(fqn)))
+      || (typeSymbols(leftType).stream().map(Symbol::fullyQualifiedName).allMatch("NoneType"::equals))
+      || (typeSymbols(rightType).stream().map(Symbol::fullyQualifiedName).allMatch("NoneType"::equals));
+  }
+
+  private static void checkSillyIdentity(SubscriptionContext ctx) {
+    IsExpression isExpression = (IsExpression) ctx.syntaxNode();
+    InferredType left = isExpression.leftOperand().type();
+    InferredType right = isExpression.rightOperand().type();
+    if (!areIdentityComparableOrNone(left, right)) {
+      Token notToken = isExpression.notToken();
+      Token lastToken = notToken == null ? isExpression.operator() : notToken;
+      ctx.addIssue(isExpression.operator(), lastToken, "Fix this identity check; Previous type checks suggest that operands have incompatible types.");
     }
   }
 }

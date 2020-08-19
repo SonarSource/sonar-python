@@ -72,6 +72,12 @@ public class ConfusingTypeCheckingCheckTest {
     assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/sillyEquality.py");
   }
 
+  @Test
+  public void silly_identity() {
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/sillyIdentity.py", check);
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/sillyIdentity.py");
+  }
+
   private void assertNoIssuesInCorrespondingBugRule(String path) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File(path));
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
