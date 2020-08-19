@@ -129,6 +129,10 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       } else {
         Expression expression = expressions.get(0);
         InferredType inferredType = expression.type();
+        if (returnType.mustBeOrExtend("typing.TypedDict")) {
+          // Avoid FPs for TypedDict
+          return;
+        }
         if (!containsDeclaredType(inferredType) && !inferredType.isCompatibleWith(returnType)) {
           invalidReturnStatements.add(returnStatement);
         }
