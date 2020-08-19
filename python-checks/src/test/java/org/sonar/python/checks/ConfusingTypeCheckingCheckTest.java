@@ -60,6 +60,12 @@ public class ConfusingTypeCheckingCheckTest {
     assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/iterationOnNonIterable.py");
   }
 
+  @Test
+  public void incorrect_exception_type() {
+    PythonCheckVerifier.verify("src/test/resources/checks/confusingTypeChecking/incorrectExceptionType.py", check);
+    assertNoIssuesInCorrespondingBugRule("src/test/resources/checks/incorrectExceptionType/incorrectExceptionType.py");
+  }
+
   private void assertNoIssuesInCorrespondingBugRule(String path) {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File(path));
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);

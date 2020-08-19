@@ -24,16 +24,20 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.typeClassLocation;
+import static org.sonar.python.types.InferredTypes.typeName;
 
 @Rule(key = "S5864")
 public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
@@ -43,6 +47,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     new IncompatibleOperandsCheck().initialize(context);
     new ItemOperationsTypeCheck().initialize(context);
     new IterationOnNonIterableCheck().initialize(context);
+    context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ConfusingTypeCheckingCheck::checkIncorrectExceptionType);
   }
 
   private static class NonCallableCalledCheck extends NonCallableCalled {
@@ -136,12 +141,30 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
       // No need to check again if the type contains a declared type
       return type.declaresMember("__aiter__");
     }
+  }
 
-    private static String nameFromExpression(Expression expression) {
-      if (expression.is(Tree.Kind.NAME)) {
-        return ((Name) expression).name();
-      }
-      return null;
+  private static void checkIncorrectExceptionType(SubscriptionContext ctx) {
+    RaiseStatement raiseStatement = (RaiseStatement) ctx.syntaxNode();
+    if (raiseStatement.expressions().isEmpty()) {
+      return;
     }
+    Expression raisedExpression = raiseStatement.expressions().get(0);
+    InferredType type = raisedExpression.type();
+    if (!containsDeclaredType(type)) {
+      return;
+    }
+    if (!type.isCompatibleWith(InferredTypes.runtimeType(TypeShed.typeShedClass("BaseException")))) {
+      String expressionName = nameFromExpression(raisedExpression) != null ? String.format("\"%s\"", nameFromExpression(raisedExpression)) : "this expression";
+      String typeName = typeName(type);
+      ctx.addIssue(raiseStatement, String.format("Fix this \"raise\" statement; Previous type checks suggest that %s has type \"%s\" and is not an exception.",
+        expressionName, typeName));
+    }
+  }
+
+  private static String nameFromExpression(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return ((Name) expression).name();
+    }
+    return null;
   }
 }
