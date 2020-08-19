@@ -133,6 +133,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     @Override
     boolean isAsyncIterable(Expression expression) {
       InferredType type = expression.type();
+      // No need to check again if the type contains a declared type
       return type.declaresMember("__aiter__");
     }
 
