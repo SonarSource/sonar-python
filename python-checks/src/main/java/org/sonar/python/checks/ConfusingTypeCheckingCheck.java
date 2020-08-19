@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -38,6 +39,7 @@ import org.sonar.python.types.TypeShed;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.typeClassLocation;
 import static org.sonar.python.types.InferredTypes.typeName;
+import static org.sonar.python.types.InferredTypes.typeSymbols;
 
 @Rule(key = "S5864")
 public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
@@ -47,6 +49,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     new IncompatibleOperandsCheck().initialize(context);
     new ItemOperationsTypeCheck().initialize(context);
     new IterationOnNonIterableCheck().initialize(context);
+    new SillyEqualityCheck().initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ConfusingTypeCheckingCheck::checkIncorrectExceptionType);
   }
 
@@ -99,7 +102,7 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
 
       InferredType type = subscriptionObject.type();
       secondaries.add(typeClassLocation(type));
-      if (!InferredTypes.containsDeclaredType(type)) {
+      if (!containsDeclaredType(type)) {
         // handled by S5644
         return true;
       }
@@ -166,5 +169,39 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
       return ((Name) expression).name();
     }
     return null;
+  }
+
+  private static class SillyEqualityCheck extends SillyEquality {
+
+    @Override
+    boolean areIdentityComparableOrNone(InferredType leftType, InferredType rightType) {
+      if (!containsDeclaredType(leftType) && !containsDeclaredType(rightType)) {
+        return true;
+      }
+      return leftType.equals(rightType)
+        || (typeSymbols(leftType).stream().map(Symbol::fullyQualifiedName).allMatch("NoneType"::equals))
+        || (typeSymbols(rightType).stream().map(Symbol::fullyQualifiedName).allMatch("NoneType"::equals));
+    }
+
+    @Override
+    public boolean canImplementEqOrNe(Expression expression) {
+      InferredType type = expression.type();
+      // inferredType will always contain a declared type because of the check done inside 'areIdentityComparableOrNone'
+      return type.declaresMember("__eq__") || type.declaresMember("__ne__");
+    }
+
+    @CheckForNull
+    @Override
+    String builtinTypeCategory(InferredType inferredType) {
+      // inferredType will always contain a declared type because of the check done inside 'areIdentityComparableOrNone'
+      return BUILTINS_TYPE_CATEGORY.keySet().stream()
+        .filter(typeName -> typeSymbols(inferredType).stream().map(Symbol::fullyQualifiedName).allMatch(typeName::equals))
+        .map(BUILTINS_TYPE_CATEGORY::get).findFirst().orElse(null);
+    }
+
+    @Override
+    String message(String result) {
+      return "Fix this equality check; Previous type checks suggest that operands have incompatible types.";
+    }
   }
 }

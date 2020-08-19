@@ -19,95 +19,37 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 @Rule(key = "S2159")
-public class SillyEqualityCheck extends PythonSubscriptionCheck {
-
-  private static final HashSet<String> CONSIDERED_OPERATORS = new HashSet<>(Arrays.asList("==", "!="));
+public class SillyEqualityCheck extends SillyEquality {
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> {
-      BinaryExpression binaryExpression = (BinaryExpression) ctx.syntaxNode();
-      String operator = binaryExpression.operator().value();
-      if (!CONSIDERED_OPERATORS.contains(operator)) {
-        return;
-      }
-      checkIncompatibleTypes(ctx, binaryExpression);
-    });
+  boolean areIdentityComparableOrNone(InferredType leftType, InferredType rightType) {
+    return leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe(NONE_TYPE) || rightType.canOnlyBe(NONE_TYPE);
   }
 
-  private static void checkIncompatibleTypes(SubscriptionContext ctx, BinaryExpression binaryExpression) {
-    Expression left = binaryExpression.leftOperand();
-    Expression right = binaryExpression.rightOperand();
-    InferredType leftType = left.type();
-    InferredType rightType = right.type();
-
-    if (leftType.isIdentityComparableWith(rightType) || leftType.canOnlyBe(NONE_TYPE) || rightType.canOnlyBe(NONE_TYPE)) {
-      return;
-    }
-
-    String leftCategory = builtinTypeCategory(leftType);
-    String rightCategory = builtinTypeCategory(rightType);
-    boolean leftCanImplementEqOrNe = canImplementEqOrNe(left);
-    boolean rightCanImplementEqOrNe = canImplementEqOrNe(right);
-
-    if ((leftCategory != null && leftCategory.equals(rightCategory))) {
-      return;
-    }
-
-    if ((!leftCanImplementEqOrNe && !rightCanImplementEqOrNe)
-      || (leftCategory != null && rightCategory != null)
-      || (leftCategory != null && !rightCanImplementEqOrNe)
-      || (rightCategory != null && !leftCanImplementEqOrNe)) {
-
-      raiseIssue(ctx, binaryExpression, binaryExpression.operator().value());
-    }
+  @Override
+  public boolean canImplementEqOrNe(Expression expression) {
+    InferredType type = expression.type();
+    return type.canHaveMember("__eq__") || type.canHaveMember("__ne__");
   }
 
-  private static void raiseIssue(SubscriptionContext ctx, BinaryExpression binaryExpression, String operator) {
-    String result = operator.equals("==") ? "False" : "True";
-    ctx.addIssue(binaryExpression.operator(), String.format("Remove this equality check between incompatible types; it will always return %s.", result));
+  @CheckForNull
+  @Override
+  String builtinTypeCategory(InferredType inferredType) {
+    return BUILTINS_TYPE_CATEGORY.keySet().stream()
+      .filter(inferredType::canOnlyBe)
+      .map(BUILTINS_TYPE_CATEGORY::get).findFirst().orElse(null);
   }
 
-  private static boolean canImplementEqOrNe(Expression expression) {
-    return expression.type().canHaveMember("__eq__") || expression.type().canHaveMember("__ne__");
-  }
-
-  private static String builtinTypeCategory(InferredType inferredType) {
-    if (inferredType.canOnlyBe(BuiltinTypes.STR)) {
-      return BuiltinTypes.STR;
-    }
-    if (inferredType.canOnlyBe(BuiltinTypes.INT)
-      || inferredType.canOnlyBe(BuiltinTypes.FLOAT)
-      || inferredType.canOnlyBe(BuiltinTypes.COMPLEX)
-      || inferredType.canOnlyBe(BuiltinTypes.BOOL)) {
-      return "number";
-    }
-    if (inferredType.canOnlyBe(BuiltinTypes.LIST)) {
-      return BuiltinTypes.LIST;
-    }
-    if (inferredType.canOnlyBe(BuiltinTypes.SET) || inferredType.canOnlyBe("frozenset")) {
-      return BuiltinTypes.SET;
-    }
-    if (inferredType.canOnlyBe(BuiltinTypes.DICT)) {
-      return BuiltinTypes.DICT;
-    }
-    if (inferredType.canOnlyBe(BuiltinTypes.TUPLE)) {
-      return BuiltinTypes.TUPLE;
-    }
-    return null;
+  @Override
+  String message(String result) {
+    return String.format("Remove this equality check between incompatible types; it will always return %s.", result);
   }
 }
