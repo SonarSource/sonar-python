@@ -538,6 +538,13 @@ public class TypeInferenceTest {
       "  x"
       ).type()).isEqualTo(anyType());
 
+    assertThat(lastExpression(
+      "def f(x: int):",
+      "  if not isinstance(x, Foo):",
+      "    ...",
+      "  x"
+    ).type()).isEqualTo(anyType());
+
     FileInput fileInput = parse(
       "def f(x: int):",
       "  if isinstance(x, Foo):",

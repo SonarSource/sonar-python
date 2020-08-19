@@ -43,7 +43,6 @@ import org.sonar.python.types.TypeInference.Assignment;
 import org.sonar.python.types.TypeInference.MemberAccess;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 
@@ -81,36 +80,42 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
       handleAssignment(assignment, state);
       // update lhs
       assignment.lhsExpressions().forEach(lhs -> updateTree(lhs, state));
-    } else if (isIsInstanceCall(element)) {
-      Symbol firstArgumentSymbol = getFirstArgumentSymbol(((CallExpression) element), state);
-      if (firstArgumentSymbol != null) {
-        state.setTypes(firstArgumentSymbol, Collections.singleton(InferredTypes.anyType()));
-      }
-      updateTree(element, state);
     } else {
+      element.accept(new IsInstanceVisitor(state));
       updateTree(element, state);
     }
   }
 
-  private static boolean isIsInstanceCall(Tree tree) {
-    if (tree.is(CALL_EXPR)) {
-      CallExpression callExpression = (CallExpression) tree;
-      Symbol calleeSymbol = callExpression.calleeSymbol();
-      return calleeSymbol != null && "isinstance".equals(calleeSymbol.fullyQualifiedName()) && callExpression.arguments().size() == 2;
-    }
-    return false;
-  }
+  private static class IsInstanceVisitor extends BaseTreeVisitor {
+    private final TypeInferenceProgramState state;
 
-  @CheckForNull
-  private static Symbol getFirstArgumentSymbol(CallExpression callExpression, TypeInferenceProgramState state) {
-    Argument argument = callExpression.arguments().get(0);
-    if (argument.is(REGULAR_ARGUMENT) && ((RegularArgument) argument).expression().is(NAME)) {
-      Name variableName = (Name) ((RegularArgument) argument).expression();
-      if (state.getTypes(variableName.symbol()).stream().anyMatch(InferredTypes::containsDeclaredType)) {
-        return variableName.symbol();
-      }
+    public IsInstanceVisitor(TypeInferenceProgramState state) {
+      this.state = state;
     }
-    return null;
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      if (calleeSymbol != null && "isinstance".equals(calleeSymbol.fullyQualifiedName()) && callExpression.arguments().size() == 2) {
+        Symbol firstArgumentSymbol = getFirstArgumentSymbol(callExpression);
+        if (firstArgumentSymbol != null) {
+          state.setTypes(firstArgumentSymbol, Collections.singleton(InferredTypes.anyType()));
+        }
+      }
+      super.visitCallExpression(callExpression);
+    }
+
+    @CheckForNull
+    private Symbol getFirstArgumentSymbol(CallExpression callExpression) {
+      Argument argument = callExpression.arguments().get(0);
+      if (argument.is(REGULAR_ARGUMENT) && ((RegularArgument) argument).expression().is(NAME)) {
+        Name variableName = (Name) ((RegularArgument) argument).expression();
+        if (state.getTypes(variableName.symbol()).stream().anyMatch(InferredTypes::containsDeclaredType)) {
+          return variableName.symbol();
+        }
+      }
+      return null;
+    }
   }
 
   private void updateTree(Tree tree, TypeInferenceProgramState state) {
