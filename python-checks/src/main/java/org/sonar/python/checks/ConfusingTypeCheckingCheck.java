@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -39,6 +38,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 
+import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.typeClassLocation;
 import static org.sonar.python.types.InferredTypes.typeName;
@@ -166,13 +166,6 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
       ctx.addIssue(raiseStatement, String.format("Fix this \"raise\" statement; Previous type checks suggest that %s has type \"%s\" and is not an exception.",
         expressionName, typeName));
     }
-  }
-
-  private static String nameFromExpression(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
-      return ((Name) expression).name();
-    }
-    return null;
   }
 
   private static class SillyEqualityCheck extends SillyEquality {
