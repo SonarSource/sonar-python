@@ -129,6 +129,7 @@ public final class CheckList {
       IgnoredPureOperationsCheck.class,
       ImplicitStringConcatenationCheck.class,
       IncompatibleOperandsCheck.class,
+      InconsistentTypeHintCheck.class,
       IncorrectExceptionTypeCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
