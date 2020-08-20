@@ -1,4 +1,4 @@
-from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr, Iterator, Iterable, Callable, Optional
+from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr, Iterator, Iterable, Callable, Optional, TypedDict
 import numpy as np
 
 def builtins():
@@ -302,3 +302,14 @@ def out_of_scope():
     if isinstance(param, C):
       return param # OK
     return None
+
+
+def type_dict():
+  class MyCustomDict(TypedDict):
+    user_ids: Set[int]
+    message_ids: Set[int]
+
+  def my_dict() -> MyCustomDict:
+    users = {1,2,3}
+    messages = {1,2,3}
+    return dict(user_ids=users, message_ids=messages)
