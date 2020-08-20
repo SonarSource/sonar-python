@@ -34,6 +34,8 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
+import static org.sonar.python.tree.TreeUtils.nameFromExpression;
+
 public abstract class ItemOperationsType extends PythonSubscriptionCheck {
 
   @Override
@@ -88,13 +90,6 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
     String name = nameFromExpression(subscriptionObject);
     PreciseIssue preciseIssue = ctx.addIssue(name != null ? subscriptionExpression : subscriptionObject, message(name, missingMethod));
     secondaries.stream().filter(Objects::nonNull).forEach(locationInFile -> preciseIssue.secondary(locationInFile, null));
-  }
-
-  private static String nameFromExpression(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
-      return ((Name) expression).name();
-    }
-    return null;
   }
 
   public abstract boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod, List<LocationInFile> secondaries);

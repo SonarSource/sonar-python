@@ -327,6 +327,14 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("foo()"))).isFalse();
   }
 
+  @Test
+  public void test_nameFromExpression() {
+    assertThat(TreeUtils.nameFromExpression(lastExpression("my_var"))).isEqualTo("my_var");
+    assertThat(TreeUtils.nameFromExpression(lastExpression("self.my_var"))).isNullOrEmpty();
+    assertThat(TreeUtils.nameFromExpression(lastExpression("my_call()"))).isNullOrEmpty();
+    assertThat(TreeUtils.nameFromExpression(lastExpression("a == b"))).isNullOrEmpty();
+  }
+
   private static boolean isOuterFunction(Tree tree) {
     return tree.is(Kind.FUNCDEF) && ((FunctionDef) tree).name().name().equals("outer");
   }

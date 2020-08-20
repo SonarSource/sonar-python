@@ -24,11 +24,11 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 
+import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 public abstract class NonCallableCalled extends PythonSubscriptionCheck {
@@ -47,13 +47,6 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
         }
       }
     });
-  }
-
-  private static String nameFromExpression(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
-      return ((Name) expression).name();
-    }
-    return null;
   }
 
   protected static String addTypeName(InferredType type) {

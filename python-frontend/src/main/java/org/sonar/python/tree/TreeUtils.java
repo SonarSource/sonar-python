@@ -266,6 +266,13 @@ public class TreeUtils {
     return false;
   }
 
+  public static String nameFromExpression(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return ((Name) expression).name();
+    }
+    return null;
+  }
+
   @CheckForNull
   public static LocationInFile locationInFile(Tree tree, @Nullable String fileId) {
     if (fileId == null) {
