@@ -1,4 +1,4 @@
-from typing import SupportsFloat, List, Iterable, Generator, Set, Union, Type
+from typing import SupportsFloat, List, Iterable, Generator, Set, Union, Type, TypedDict
 
 def assigned_directly():
   my_int_nok: int = "hello"  # Noncompliant  {{Assign to "my_int_nok" a value of type "int" instead of "str" or update its type hint.}}
@@ -107,3 +107,14 @@ def metaclasses():
   def a_function(): ...
   another_var: Type = a_function  # Accepted FN
   another_var: Type = unknown_symbol
+
+def type_dict():
+  class MyCustomDict(TypedDict):
+    user_ids: Set[int]
+    message_ids: Set[int]
+
+  def my_dict() -> MyCustomDict:
+    users = {1,2,3}
+    messages = {1,2,3}
+    my_dict: MyCustomDict = dict(user_ids=users, message_ids=messages)  # OK
+    return my_dict

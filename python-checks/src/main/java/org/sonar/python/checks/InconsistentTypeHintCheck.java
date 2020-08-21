@@ -52,6 +52,10 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
     InferredType inferredType = assignedExpression.type();
     TypeAnnotation annotation = annotatedAssignment.annotation();
     InferredType expectedType = InferredTypes.fromTypeAnnotation(annotation);
+    if (expectedType.mustBeOrExtend("typing.TypedDict")) {
+      // Avoid FPs for TypedDict
+      return;
+    }
     if (!inferredType.isCompatibleWith(expectedType) || isTypeUsedInsteadOfInstance(assignedExpression, expectedType)) {
       String inferredTypeName = InferredTypes.typeName(inferredType);
       String inferredTypeNameMessage = inferredTypeName != null ? String.format(" instead of \"%s\"", inferredTypeName) : "";
