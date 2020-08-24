@@ -19,19 +19,30 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
 public class TooManyParametersCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S107";
   private static final String MESSAGE = "%s has %s parameters, which is greater than the %s authorized.";
 
-  private static final int DEFAULT_MAX = 7;
+  private static final int DEFAULT_MAX = 13;
 
   @RuleProperty(
     key = "max",
@@ -41,29 +52,71 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
-      FunctionDef tree = (FunctionDef) ctx.syntaxNode();
-      if (tree.parameters() != null) {
-        int nbParameters = tree.parameters().all().size();
-        if (nbParameters > max) {
-          String typeName = tree.isMethodDefinition() ? "Method" : "Function";
-          String name = String.format("%s \"%s\"", typeName, tree.name().name());
-          String message = String.format(MESSAGE, name, nbParameters, max);
-          ctx.addIssue(tree.parameters(), message);
-        }
-      }
-    });
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, this::checkFunctionDef);
 
     context.registerSyntaxNodeConsumer(Kind.LAMBDA, ctx -> {
       LambdaExpression tree = (LambdaExpression) ctx.syntaxNode();
-      if (tree.parameters() != null) {
-        int nbParameters = tree.parameters().all().size();
+      ParameterList parameters = tree.parameters();
+      if (parameters != null) {
+        int nbParameters = parameters.all().size();
         if (nbParameters > max) {
           String name = "Lambda";
           String message = String.format(MESSAGE, name, nbParameters, max);
-          ctx.addIssue(tree.parameters(), message);
+          ctx.addIssue(parameters, message);
         }
       }
     });
+  }
+
+  private void checkFunctionDef(SubscriptionContext ctx) {
+    FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+    ParameterList parameters = functionDef.parameters();
+    if (parameters != null) {
+      long nbParameters = parameters.nonTuple().stream().filter(s -> s.starToken() == null || s.name() != null).count();
+      boolean isMethod = functionDef.isMethodDefinition();
+      if (isMethod && functionDef.decorators().stream().noneMatch(d -> d.name().names().stream().anyMatch(n -> n.name().equals("staticmethod")))) {
+        // First parameter is implicitly passed: either "self" or "cls"
+        nbParameters -= 1;
+      }
+      if (nbParameters > max) {
+        if (isMethod && isAlreadyReportedInParent(functionDef)) {
+          return;
+        }
+        String typeName = isMethod ? "Method" : "Function";
+        String name = String.format("%s \"%s\"", typeName, functionDef.name().name());
+        String message = String.format(MESSAGE, name, nbParameters, max);
+        ctx.addIssue(parameters, message);
+      }
+    }
+  }
+
+  private boolean isAlreadyReportedInParent(FunctionDef functionDef) {
+    // If the rule would already raise an issue on a parent class, don't raise the issue twice
+    ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(functionDef, Kind.CLASSDEF);
+    Symbol symbol = classDef.name().symbol();
+    String functionName = functionDef.name().name();
+    if (symbol == null) {
+      // Should never happen
+      return false;
+    }
+    if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+      return ((AmbiguousSymbol) symbol).alternatives().stream().filter(a -> a.is(Symbol.Kind.CLASS)).anyMatch(c -> hasParentMethodWithIssue((ClassSymbol) c, functionName));
+    }
+    ClassSymbol classSymbol = (ClassSymbol) symbol;
+    return hasParentMethodWithIssue(classSymbol, functionName);
+  }
+
+  private boolean hasParentMethodWithIssue(ClassSymbol classSymbol, String functionName) {
+    List<Symbol> functionSymbols = classSymbol.superClasses().stream()
+      .filter(s -> s.is(Symbol.Kind.CLASS, Symbol.Kind.AMBIGUOUS))
+      .flatMap(s -> {
+        if (s.is(Symbol.Kind.AMBIGUOUS)) {
+          return ((AmbiguousSymbol) s).alternatives().stream().filter(a -> a.is(Symbol.Kind.CLASS));
+        }
+        return Stream.of(s);
+      })
+      .flatMap(c -> ((ClassSymbol) c).declaredMembers().stream().filter(d -> d.is(Symbol.Kind.FUNCTION) &&
+        functionName.equals(d.name()))).collect(Collectors.toList());
+    return functionSymbols.stream().map(s -> (FunctionSymbol) s).map(f -> (long) f.parameters().size()).anyMatch(l -> l > max);
   }
 }

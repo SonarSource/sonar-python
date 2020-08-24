@@ -1,0 +1,21 @@
+from io import TextIOWrapper
+
+def func(p1, p2, p3, p4): ...  # Noncompliant
+#        ^^^^^^^^^^^^^^
+
+class MyTextIOWrapper(TextIOWrapper):
+  def __init__(
+          self,
+          buffer: IO[bytes],
+          encoding: Optional[str] = ...,
+          errors: Optional[str] = ...,
+          newline: Optional[str] = ...,
+          line_buffering: bool = ...,
+          write_through: bool = ...,
+      ) -> None: ...  # OK (parent is already non compliant)
+
+  def readline(self, __size: int = ..., p2, p3, p4) -> str: ...  # Noncompliant
+
+  def new_method_ok(self, p1, p2, *, p3) -> str: ...
+
+  def new_method_nok(self, p1, p2, p3, p4) -> str: ...  # Noncompliant
