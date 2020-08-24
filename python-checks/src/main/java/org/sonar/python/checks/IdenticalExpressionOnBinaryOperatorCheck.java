@@ -47,13 +47,16 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscription
     Expression leftOperand = binaryExpression.leftOperand();
     Expression rightOperand = binaryExpression.rightOperand();
     Token operator = binaryExpression.operator();
-    if (leftOperand.is(Tree.Kind.CALL_EXPR) || TreeUtils.hasDescendant(leftOperand, t -> t.is(Tree.Kind.CALL_EXPR))) {
-      return;
-    }
-    if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator)) {
+    if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator) && !isException(leftOperand)) {
       ctx.addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator.value() + "\".")
         .secondary(leftOperand, "");
     }
+  }
+
+  private static boolean isException(Expression leftOperand) {
+    // Avoid raising issue if operands are function calls or within try/except blocks
+    return leftOperand.is(Tree.Kind.CALL_EXPR) || TreeUtils.hasDescendant(leftOperand, t -> t.is(Tree.Kind.CALL_EXPR))
+      || TreeUtils.firstAncestorOfKind(leftOperand, Tree.Kind.TRY_STMT) != null;
   }
 
   private static boolean isLeftShiftBy1(Expression leftOperand, Token operator) {
