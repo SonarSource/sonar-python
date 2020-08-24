@@ -53,3 +53,9 @@ def no_issues_on_function_calls():
   if MyClass() == MyClass(): ...
   my_class = MyClass()
   if my_class.bar() == my_class.bar(): ...
+
+def no_issues_within_try_except():
+  try:
+    foo(c)
+  except ValueError:
+    return c / c
