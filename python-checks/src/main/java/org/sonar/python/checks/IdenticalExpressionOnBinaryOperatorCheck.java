@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1764")
 public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscriptionCheck {
@@ -46,6 +47,9 @@ public class IdenticalExpressionOnBinaryOperatorCheck extends PythonSubscription
     Expression leftOperand = binaryExpression.leftOperand();
     Expression rightOperand = binaryExpression.rightOperand();
     Token operator = binaryExpression.operator();
+    if (leftOperand.is(Tree.Kind.CALL_EXPR) || TreeUtils.hasDescendant(leftOperand, t -> t.is(Tree.Kind.CALL_EXPR))) {
+      return;
+    }
     if (CheckUtils.areEquivalent(leftOperand, rightOperand) && !isLeftShiftBy1(leftOperand, operator)) {
       ctx.addIssue(rightOperand, "Correct one of the identical sub-expressions on both sides of operator \"" + operator.value() + "\".")
         .secondary(leftOperand, "");
