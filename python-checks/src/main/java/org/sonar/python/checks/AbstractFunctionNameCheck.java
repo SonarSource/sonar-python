@@ -26,7 +26,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 public abstract class AbstractFunctionNameCheck extends AbstractNameCheck {
 
-  private static final String DEFAULT = "^[a-z_][a-z0-9_]{2,}$";
+  private static final String DEFAULT = "^[a-z_][a-z0-9_]*$";
   private static final String MESSAGE = "Rename %s \"%s\" to match the regular expression %s.";
 
   @RuleProperty(

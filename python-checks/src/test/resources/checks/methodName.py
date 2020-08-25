@@ -2,7 +2,7 @@ class MyClass:
     def correct_method_name():
         pass
 
-    def Incorrect_Method_Name():  # Noncompliant {{Rename method "Incorrect_Method_Name" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.}}
+    def Incorrect_Method_Name():  # Noncompliant {{Rename method "Incorrect_Method_Name" to match the regular expression ^[a-z_][a-z0-9_]*$.}}
 #       ^^^^^^^^^^^^^^^^^^^^^
         pass
 
@@ -38,3 +38,21 @@ class B(SuperClass):
     if 1:
         def Badly_Named(self): # compliant, might be overriding
             pass
+
+
+class DatabaseModel:
+  @property
+  def db(self):  # OK
+    raiseNotImplementedError()
+
+class Coordinate:
+  @property
+  def x(self):  # OK
+    return 42
+
+  @property
+  def y(self):  # OK
+    return 42
+
+  def _v(self):
+    ...
