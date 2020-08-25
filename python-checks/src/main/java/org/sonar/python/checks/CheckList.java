@@ -200,7 +200,7 @@ public final class CheckList {
       TooManyReturnsCheck.class,
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
-      UndeclaredNameUsageCheck.class,
+      ReferencedBeforeAssignmentCheck.class,
       UndefinedNameAllPropertyCheck.class,
       UnreachableExceptCheck.class,
       UnreadPrivateAttributesCheck.class,

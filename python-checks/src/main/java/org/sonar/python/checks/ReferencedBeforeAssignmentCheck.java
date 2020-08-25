@@ -39,7 +39,7 @@ import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis.DefinedVariables;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3827")
-public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
+public class ReferencedBeforeAssignmentCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
