@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class ClassNameCheck extends AbstractNameCheck {
 
   public static final String CHECK_KEY = "S101";
-  private static final String DEFAULT = "^[A-Z_][a-zA-Z0-9]+$";
+  private static final String DEFAULT = "^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$";
   private static final String MESSAGE = "Rename class \"%s\" to match the regular expression %s.";
 
   @RuleProperty(
