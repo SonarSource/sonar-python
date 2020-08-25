@@ -29,36 +29,20 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.ImportFrom;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis;
 import org.sonar.python.cfg.fixpoint.DefinedVariablesAnalysis.DefinedVariables;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3827")
-public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
+public class ReferencedBeforeAssignmentCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
-      FileInput fileInput = (FileInput) ctx.syntaxNode();
-      if (importsManipulatedAllProperty(fileInput)) {
-        return;
-      }
-      UnresolvedSymbolsVisitor unresolvedSymbolsVisitor = new UnresolvedSymbolsVisitor();
-      fileInput.accept(unresolvedSymbolsVisitor);
-      if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasUnresolvedWildcardImport) {
-        addNameIssues(unresolvedSymbolsVisitor.nameIssues, ctx);
-      }
-    });
 
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       List<Symbol> ignoredSymbols = new ArrayList<>();
@@ -74,10 +58,6 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
       Set<CfgBlock> unreachableBlocks = CfgUtils.unreachableBlocks(cfg);
       cfg.blocks().forEach(block -> checkCfgBlock(block, ctx, analysis.getDefinedVariables(block), unreachableBlocks, analysis, ignoredSymbols));
     });
-  }
-
-  private static boolean importsManipulatedAllProperty(FileInput fileInput) {
-    return fileInput.globalVariables().stream().anyMatch(s -> s.name().equals("__all__") && s.fullyQualifiedName() != null);
   }
 
   private static void checkCfgBlock(CfgBlock cfgBlock, SubscriptionContext ctx, DefinedVariables definedVariables,
@@ -110,42 +90,5 @@ public class UndeclaredNameUsageCheck extends PythonSubscriptionCheck {
 
   private static boolean isUndefined(DefinedVariablesAnalysis.VariableDefinition varDef) {
     return varDef == DefinedVariablesAnalysis.VariableDefinition.UNDEFINED;
-  }
-
-  private static void addNameIssues(Map<String, List<Name>> nameIssues, SubscriptionContext subscriptionContext) {
-    nameIssues.forEach((name, list) -> {
-      Name first = list.get(0);
-      PreciseIssue issue = subscriptionContext.addIssue(first, first.name() + " is not defined. Change its name or define it before using it");
-      list.stream().skip(1).forEach(n -> issue.secondary(n, null));
-    });
-  }
-
-  private static class UnresolvedSymbolsVisitor extends BaseTreeVisitor {
-
-    private boolean hasUnresolvedWildcardImport = false;
-    private boolean callGlobalsOrLocals = false;
-    private Map<String, List<Name>> nameIssues = new HashMap<>();
-
-    @Override
-    public void visitName(Name name) {
-      if (name.isVariable() && name.symbol() == null) {
-        nameIssues.computeIfAbsent(name.name(), k -> new ArrayList<>()).add(name);
-      }
-    }
-
-    @Override
-    public void visitImportFrom(ImportFrom importFrom) {
-      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
-      super.visitImportFrom(importFrom);
-    }
-
-    @Override
-    public void visitCallExpression(CallExpression callExpression) {
-      if (callExpression.callee().is(Tree.Kind.NAME)) {
-        String name = ((Name) callExpression.callee()).name();
-        callGlobalsOrLocals |= name.equals("globals") || name.equals("locals");
-      }
-      super.visitCallExpression(callExpression);
-    }
   }
 }

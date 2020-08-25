@@ -1,4 +1,4 @@
-from mod import *
+from another_mod import *
 from external_lib import *
 
 def f():
