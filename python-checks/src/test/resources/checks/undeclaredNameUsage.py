@@ -1,38 +1,5 @@
 def f():
-    print(a) # Noncompliant {{a is not defined. Change its name or define it before using it}}
-#         ^
-
-x = 10
-def from_parent_scope():
-    print(x) # OK
-
-def use_global_x():
-    global x
-    print(x) # OK
-    global y
-    y = 42
-    print(y)
-
-def use_imported_name():
-    from mod import fn # mod is OK, not a variable
-    print(fn) # OK
-
-print(foo = 10) # OK, keywords arguments are not variables
-
-
-from mod import DecParam, Foo
-
-@Foo(DecParam)
-class A:
-    pass
-
-def types() -> float:
-    x: int = 42 # type def OK
-
-def comprehension_scope():
-    [y for i in range(1,10)]
-    # FP in Python 2 because of difference in scoping
-    print(i) # Noncompliant
+    print(a) # OK, handled by S5953
 
 def used_before_definition():
     print(y) # Noncompliant
@@ -62,10 +29,6 @@ def class_def_ok():
     class MyClass:
         pass
     MyClass()
-
-def loop():
-    for x in [0, 1, 2]: pass
-    print(x)  # Ok. variables are accessible after a loop
 
 def conditional():
     if False:
@@ -153,22 +116,6 @@ def declaration_in_try_with_break():
             raise TypeError()
     return res # OK
 
-def one_issue_per_unresolved_name():
-  print(xxx) # Noncompliant {{xxx is not defined. Change its name or define it before using it}}
-#       ^^^
-  print(xxx) # OK, don't raise the same issue multiple times
-#       ^^^<
-
-def one_issue_per_unresolved_name_2():
-  print(xxx) # OK, don't raise the same issue multiple times
-#       ^^^<
-
-def one_issue_per_unresolved_name_3():
-  print(yyy) # Noncompliant
-  def inner():
-      pass
-  print(yyy) # OK, don't raise the same issue multiple times
-
 def one_issue_per_symbol():
   print(xxx) # Noncompliant {{xxx is used before it is defined. Move the definition before.}}
 #       ^^^
@@ -200,14 +147,6 @@ class A:
     _ATTR = 42
     @decorator(_ATTR)  # OK
     class Foo: pass
-
-def foo(param):
-    return 42
-
-print(f'{foo(param=3)}')  # OK, param is a keyword argument
-
-print(f'{foo(param)}')  # Noncompliant
-#            ^^^^^
 
 def test_print_list():
     f"{ {element for element in [1, 2]} }" # OK
