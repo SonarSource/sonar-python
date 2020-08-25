@@ -40,9 +40,11 @@ import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.PythonCfgBranchingBlock;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S3516")
 public class InvariantReturnCheck extends PythonSubscriptionCheck {
@@ -81,12 +83,26 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
     List<LatestExecutedBlock> collectedBlocks = new ArrayList<>();
     for (CfgBlock predecessor : cfg.end().predecessors()) {
       if (predecessor instanceof PythonCfgBranchingBlock) {
-        collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, (PythonCfgBranchingBlock) predecessor);
+        collectBranchingBlock(collectedBlocks, (PythonCfgBranchingBlock) predecessor);
       } else if (!endsWithElementKind(predecessor, Kind.RAISE_STMT)) {
         collectedBlocks.add(new LatestExecutedBlock(predecessor));
       }
     }
     return collectedBlocks;
+  }
+
+  private static void collectBranchingBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
+    Tree branchingTree = branchingBlock.branchingTree();
+    if (branchingTree.is(Kind.TRY_STMT)) {
+      TryStatement tryStatement = (TryStatement) branchingTree;
+      if (!TreeUtils.hasDescendant(tryStatement.body(), t -> t.is(Kind.RETURN_STMT))) {
+        collectedBlocks.add(new LatestExecutedBlock(branchingBlock));
+      }
+    } else if (branchingTree.is(Kind.IF_STMT)) {
+      collectedBlocks.add(new LatestExecutedBlock(branchingBlock));
+    } else {
+      collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, branchingBlock);
+    }
   }
 
   private static void collectBlocksHavingReturnBeforeExceptOrFinallyBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
