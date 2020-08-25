@@ -23,35 +23,35 @@ import java.util.Arrays;
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnresolvedSymbolsCheckTest {
+public class UndefinedSymbolsCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/unresolvedSymbols/unresolvedSymbols.py", new UnresolvedSymbolsCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/undefinedSymbols/undefinedSymbols.py", new UndefinedSymbolsCheck());
   }
 
   @Test
   public void test_wildcard_import() {
     PythonCheckVerifier.verify(
-            Arrays.asList("src/test/resources/checks/unresolvedSymbols/unresolvedSymbolsWithWildcardImport.py","src/test/resources/checks/unresolvedSymbols/unresolvedSymbolsImported.py" ),
-            new UnresolvedSymbolsCheck());
+            Arrays.asList("src/test/resources/checks/undefinedSymbols/withWildcardImport.py","src/test/resources/checks/undefinedSymbols/mod.py" ),
+            new UndefinedSymbolsCheck());
   }
 
   @Test
   public void test_wildcard_import_all_property() {
     PythonCheckVerifier.verifyNoIssue(
-            Arrays.asList("src/test/resources/checks/unresolvedSymbols/unresolvedSymbolsImportWithAll.py", "src/test/resources/checks/unresolvedSymbols/unresolvedSymbolsAll/__init__.py"),
-            new UnresolvedSymbolsCheck());
+            Arrays.asList("src/test/resources/checks/undefinedSymbols/importWithAll.py", "src/test/resources/checks/undefinedSymbols/packageUsingAll/__init__.py"),
+            new UndefinedSymbolsCheck());
   }
 
   @Test
   public void test_unresolved_wildcard_import() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/unresolvedSymbols/unresolvedSymbolsWithUnresolvedWildcardImport.py", new UnresolvedSymbolsCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedSymbols/withUnresolvedWildcardImport.py", new UndefinedSymbolsCheck());
   }
 
   @Test
   public void test_dynamic_globals() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/unresolvedSymbols/unresolvedSymbolsWithGlobals.py", new UnresolvedSymbolsCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedSymbols/withGlobals.py", new UndefinedSymbolsCheck());
   }
 
 }

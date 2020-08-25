@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S5953")
-public class UnresolvedSymbolsCheck extends PythonSubscriptionCheck {
+public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {

@@ -206,7 +206,7 @@ public final class CheckList {
       UnreadPrivateAttributesCheck.class,
       UnreadPrivateInnerClassesCheck.class,
       UnreadPrivateMethodsCheck.class,
-      UnresolvedSymbolsCheck.class,
+      UndefinedSymbolsCheck.class,
       UnusedLocalVariableCheck.class,
       UnusedNestedDefinitionCheck.class,
       UnverifiedHostnameCheck.class,
