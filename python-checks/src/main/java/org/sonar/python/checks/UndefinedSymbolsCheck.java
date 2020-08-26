@@ -45,7 +45,7 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
       }
       UnresolvedSymbolsVisitor unresolvedSymbolsVisitor = new UnresolvedSymbolsVisitor();
       fileInput.accept(unresolvedSymbolsVisitor);
-      if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasUnresolvedWildcardImport) {
+      if (!unresolvedSymbolsVisitor.callGlobalsOrLocals && !unresolvedSymbolsVisitor.hasWildcardImport) {
         addNameIssues(unresolvedSymbolsVisitor.nameIssues, ctx);
       }
     });
@@ -65,7 +65,7 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
 
   private static class UnresolvedSymbolsVisitor extends BaseTreeVisitor {
 
-    private boolean hasUnresolvedWildcardImport = false;
+    private boolean hasWildcardImport = false;
     private boolean callGlobalsOrLocals = false;
     private final Map<String, List<Name>> nameIssues = new HashMap<>();
 
@@ -78,7 +78,7 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitImportFrom(ImportFrom importFrom) {
-      hasUnresolvedWildcardImport |= importFrom.hasUnresolvedWildcardImport();
+      hasWildcardImport |= importFrom.wildcard() != null;
       super.visitImportFrom(importFrom);
     }
 

@@ -32,7 +32,7 @@ public class UndefinedSymbolsCheckTest {
 
   @Test
   public void test_wildcard_import() {
-    PythonCheckVerifier.verify(
+    PythonCheckVerifier.verifyNoIssue(
             Arrays.asList("src/test/resources/checks/undefinedSymbols/withWildcardImport.py","src/test/resources/checks/undefinedSymbols/mod.py" ),
             new UndefinedSymbolsCheck());
   }
