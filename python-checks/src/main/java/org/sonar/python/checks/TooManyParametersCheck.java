@@ -19,23 +19,17 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.tree.FunctionDefImpl;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
 public class TooManyParametersCheck extends PythonSubscriptionCheck {
@@ -71,15 +65,16 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
   private void checkFunctionDef(SubscriptionContext ctx) {
     FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
     ParameterList parameters = functionDef.parameters();
-    if (parameters != null) {
-      long nbParameters = parameters.nonTuple().stream().filter(s -> s.starToken() == null || s.name() != null).count();
+    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+    if (parameters != null && functionSymbol != null) {
+      long nbParameters = functionSymbol.parameters().size();
       boolean isMethod = functionDef.isMethodDefinition();
-      if (isMethod && functionDef.decorators().stream().noneMatch(d -> d.name().names().stream().anyMatch(n -> n.name().equals("staticmethod")))) {
+      if (isMethod && functionSymbol.decorators().stream().noneMatch(d -> d.contains("staticmethod"))) {
         // First parameter is implicitly passed: either "self" or "cls"
         nbParameters -= 1;
       }
       if (nbParameters > max) {
-        if (isMethod && isAlreadyReportedInParent(functionDef)) {
+        if (isMethod && isAlreadyReportedInParent(functionSymbol)) {
           return;
         }
         String typeName = isMethod ? "Method" : "Function";
@@ -90,33 +85,14 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private boolean isAlreadyReportedInParent(FunctionDef functionDef) {
+  private boolean isAlreadyReportedInParent(FunctionSymbol functionSymbol) {
     // If the rule would already raise an issue on a parent class, don't raise the issue twice
-    ClassDef classDef = (ClassDef) TreeUtils.firstAncestorOfKind(functionDef, Kind.CLASSDEF);
-    Symbol symbol = classDef.name().symbol();
-    String functionName = functionDef.name().name();
-    if (symbol == null) {
-      // Should never happen
-      return false;
-    }
-    if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-      return ((AmbiguousSymbol) symbol).alternatives().stream().filter(a -> a.is(Symbol.Kind.CLASS)).anyMatch(c -> hasParentMethodWithIssue((ClassSymbol) c, functionName));
-    }
-    ClassSymbol classSymbol = (ClassSymbol) symbol;
-    return hasParentMethodWithIssue(classSymbol, functionName);
-  }
-
-  private boolean hasParentMethodWithIssue(ClassSymbol classSymbol, String functionName) {
-    List<Symbol> functionSymbols = classSymbol.superClasses().stream()
-      .filter(s -> s.is(Symbol.Kind.CLASS, Symbol.Kind.AMBIGUOUS))
-      .flatMap(s -> {
-        if (s.is(Symbol.Kind.AMBIGUOUS)) {
-          return ((AmbiguousSymbol) s).alternatives().stream().filter(a -> a.is(Symbol.Kind.CLASS));
-        }
-        return Stream.of(s);
-      })
-      .flatMap(c -> ((ClassSymbol) c).declaredMembers().stream().filter(d -> d.is(Symbol.Kind.FUNCTION) &&
-        functionName.equals(d.name()))).collect(Collectors.toList());
-    return functionSymbols.stream().map(s -> (FunctionSymbol) s).map(f -> (long) f.parameters().size()).anyMatch(l -> l > max);
+    return SymbolUtils.getOverriddenMethod(functionSymbol).map(f -> {
+      int nbParameters = f.parameters().size();
+      if (f.decorators().stream().anyMatch(d -> d.contains("staticmethod"))) {
+        nbParameters -= 1;
+      }
+      return nbParameters > max;
+    }).orElse(false);
   }
 }
