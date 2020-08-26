@@ -466,3 +466,35 @@ def no_fp_on_assignment_expression(a, b):
         return b
     else:
         return b
+
+def no_fp_implicit_return_none(a, b):
+  if a:
+    return 42
+  elif b:
+    return 42
+  # implicitly returns "None"
+
+def cannot_open_file(path):
+  try:
+    open(path)
+  except FileNotFoundError as e:
+    return True
+  except IsADirectoryError as e:
+    return True
+ # implicitly returns "None"
+
+
+def fp_try_statement_reachable_implicit_none_return(cond):  # Noncompliant
+  try:
+    if cond:
+      return 42
+  except FileNotFoundError:
+    return 42
+  # implicitly returns "None"
+
+def unreachable_implicit_return_none(cond):  # Noncompliant
+  try:
+    return 42
+  except Exception:
+    return 42
+  # Implicit "None" return is unreachable
