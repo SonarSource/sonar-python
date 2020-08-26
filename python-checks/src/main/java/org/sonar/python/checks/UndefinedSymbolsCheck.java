@@ -71,7 +71,7 @@ public class UndefinedSymbolsCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitName(Name name) {
-      if (name.isVariable() && name.symbol() == null) {
+      if (name.isVariable() && name.symbol() == null && !name.name().startsWith("_")) {
         nameIssues.computeIfAbsent(name.name(), k -> new ArrayList<>()).add(name);
       }
     }

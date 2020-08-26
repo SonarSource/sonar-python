@@ -102,3 +102,6 @@ x = 24
 
 global GLOB3
 print(GLOB3) # FN
+
+_some_implicit_global_vars # ok we exclude variables starting with `_`
+__some_implicit_global_vars__ # ok
