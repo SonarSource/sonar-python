@@ -22,16 +22,21 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.tree.FunctionDefImpl;
 
 @Rule(key = TooManyParametersCheck.CHECK_KEY)
 public class TooManyParametersCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S107";
   private static final String MESSAGE = "%s has %s parameters, which is greater than the %s authorized.";
 
-  private static final int DEFAULT_MAX = 7;
+  private static final int DEFAULT_MAX = 13;
 
   @RuleProperty(
     key = "max",
@@ -41,29 +46,53 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> {
-      FunctionDef tree = (FunctionDef) ctx.syntaxNode();
-      if (tree.parameters() != null) {
-        int nbParameters = tree.parameters().all().size();
-        if (nbParameters > max) {
-          String typeName = tree.isMethodDefinition() ? "Method" : "Function";
-          String name = String.format("%s \"%s\"", typeName, tree.name().name());
-          String message = String.format(MESSAGE, name, nbParameters, max);
-          ctx.addIssue(tree.parameters(), message);
-        }
-      }
-    });
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, this::checkFunctionDef);
 
     context.registerSyntaxNodeConsumer(Kind.LAMBDA, ctx -> {
       LambdaExpression tree = (LambdaExpression) ctx.syntaxNode();
-      if (tree.parameters() != null) {
-        int nbParameters = tree.parameters().all().size();
+      ParameterList parameters = tree.parameters();
+      if (parameters != null) {
+        int nbParameters = parameters.all().size();
         if (nbParameters > max) {
           String name = "Lambda";
           String message = String.format(MESSAGE, name, nbParameters, max);
-          ctx.addIssue(tree.parameters(), message);
+          ctx.addIssue(parameters, message);
         }
       }
     });
+  }
+
+  private void checkFunctionDef(SubscriptionContext ctx) {
+    FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
+    ParameterList parameters = functionDef.parameters();
+    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+    if (parameters != null && functionSymbol != null) {
+      long nbParameters = functionSymbol.parameters().size();
+      boolean isMethod = functionDef.isMethodDefinition();
+      if (isMethod && functionSymbol.decorators().stream().noneMatch(d -> d.contains("staticmethod"))) {
+        // First parameter is implicitly passed: either "self" or "cls"
+        nbParameters -= 1;
+      }
+      if (nbParameters > max) {
+        if (isMethod && isAlreadyReportedInParent(functionSymbol)) {
+          return;
+        }
+        String typeName = isMethod ? "Method" : "Function";
+        String name = String.format("%s \"%s\"", typeName, functionDef.name().name());
+        String message = String.format(MESSAGE, name, nbParameters, max);
+        ctx.addIssue(parameters, message);
+      }
+    }
+  }
+
+  private boolean isAlreadyReportedInParent(FunctionSymbol functionSymbol) {
+    // If the rule would already raise an issue on a parent class, don't raise the issue twice
+    return SymbolUtils.getOverriddenMethod(functionSymbol).map(f -> {
+      int nbParameters = f.parameters().size();
+      if (f.decorators().stream().anyMatch(d -> d.contains("staticmethod"))) {
+        nbParameters -= 1;
+      }
+      return nbParameters > max;
+    }).orElse(false);
   }
 }
