@@ -130,3 +130,9 @@ def pointless_statement_avoid_unused_import():
   numpy # Noncompliant
   numpy # Noncompliant
   pass
+
+def no_issue_within_contextlib_suppress(a):
+  from contextlib import suppress
+  with suppress(TypeError):
+    a + ''  # OK
+    return a

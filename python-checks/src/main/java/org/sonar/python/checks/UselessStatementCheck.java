@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,6 +46,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.tree.WithItem;
+import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S905")
@@ -110,7 +113,24 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     if (parent == null || !parent.is(Kind.EXPRESSION_STMT)) {
       return;
     }
+    if (isWithinContextlibSuppress(tree)) {
+      return;
+    }
     ctx.addIssue(tree, MESSAGE);
+  }
+
+  private static boolean isWithinContextlibSuppress(Tree tree) {
+    Tree withParent = TreeUtils.firstAncestorOfKind(tree, Kind.WITH_STMT);
+    if (withParent != null) {
+      WithStatement withStatement = (WithStatement) withParent;
+      return withStatement.withItems().stream()
+        .map(WithItem::test)
+        .filter(item -> item.is(Kind.CALL_EXPR))
+        .map(item -> ((CallExpression) item).calleeSymbol())
+        .filter(Objects::nonNull)
+        .anyMatch(s -> "contextlib.suppress".equals(s.fullyQualifiedName()));
+    }
+    return false;
   }
 
   private static boolean isBooleanExpressionWithCalls(Tree tree) {
@@ -172,8 +192,8 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   private static boolean couldBePython2PrintStatement(BinaryExpression binaryExpression) {
     return TreeUtils.hasDescendant(binaryExpression, t -> t.is(Kind.CALL_EXPR)
-        && ((CallExpression) t).callee().is(Kind.NAME)
-        && ((Name) ((CallExpression) t).callee()).name().equals("print"));
+      && ((CallExpression) t).callee().is(Kind.NAME)
+      && ((Name) ((CallExpression) t).callee()).name().equals("print"));
   }
 
   private void checkUnaryExpression(SubscriptionContext ctx) {
