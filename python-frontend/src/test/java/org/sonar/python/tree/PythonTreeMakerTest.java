@@ -1169,6 +1169,23 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(((Name) annAssign.annotation().expression()).name()).isEqualTo("string");
     assertThat(annAssign.assignedValue()).isNull();
     assertThat(annAssign.equalToken()).isNull();
+
+    astNode = p.parse("y: int = yield _bar(x)");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    annAssign = treeMaker.annotatedAssignment(statementWithSeparator);
+    assertThat(annAssign.variable().is(Kind.NAME)).isTrue();
+    assertThat(((Name) annAssign.variable()).name()).isEqualTo("y");
+    assertThat(annAssign.assignedValue().is(Kind.YIELD_EXPR)).isTrue();
+    assertThat(((YieldExpression) annAssign.assignedValue()).expressions().size()).isEqualTo(1);
+    assertThat(((YieldExpression) annAssign.assignedValue()).expressions().get(0).is(Kind.CALL_EXPR)).isTrue();
+
+    astNode = p.parse("y: Tuple = a, b, c");
+    statementWithSeparator = new StatementWithSeparator(astNode, null);
+    annAssign = treeMaker.annotatedAssignment(statementWithSeparator);
+    assertThat(annAssign.variable().is(Kind.NAME)).isTrue();
+    assertThat(((Name) annAssign.variable()).name()).isEqualTo("y");
+    assertThat(annAssign.assignedValue().is(Kind.TUPLE)).isTrue();
+    assertThat(((Tuple) annAssign.assignedValue()).elements().size()).isEqualTo(3);
   }
 
   @Test
