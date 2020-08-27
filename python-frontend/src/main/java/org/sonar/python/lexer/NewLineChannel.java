@@ -46,8 +46,10 @@ public class NewLineChannel extends Channel<Lexer> {
     if ((ch == '\\') && isNewLine(code.charAt(1))) {
       // Explicit line joining
       code.pop();
-      consumeEOL(code);
-      lexerState.joined = true;
+      if (!areTwoConsecutiveEOL(code)) {
+        consumeEOL(code);
+        lexerState.joined = true;
+      }
       return true;
     }
 
@@ -118,6 +120,15 @@ public class NewLineChannel extends Channel<Lexer> {
       // \r or \n
       code.pop();
     }
+  }
+
+  private static boolean areTwoConsecutiveEOL(CodeReader code) {
+    if ((code.charAt(0) == '\r') && (code.charAt(1) == '\n') && (code.charAt(2) == '\r') && (code.charAt(3) == '\n')) {
+      // \r\n\r\n
+      return true;
+    }
+    // \n\n
+    return code.charAt(0) == '\n' && code.charAt(1) == '\n';
   }
 
   private static boolean isNewLine(char ch) {
