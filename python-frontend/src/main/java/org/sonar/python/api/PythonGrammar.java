@@ -186,8 +186,8 @@ public enum PythonGrammar implements GrammarRuleKey {
         b.sequence(AUGASSIGN, b.firstOf(YIELD_EXPR, TESTLIST)),
         b.zeroOrMore("=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR))));
 
-    // https://github.com/python/cpython/blob/v3.6.4/Grammar/Grammar#L43
-    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", b.firstOf(YIELD_EXPR, TEST)));
+    // https://github.com/python/cpython/blob/v3.8.0/Grammar/Grammar#L87
+    b.rule(ANNASSIGN).is(":", TEST, b.optional( "=", b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR)));
 
     b.rule(TESTLIST_STAR_EXPR).is(b.firstOf(TEST, STAR_EXPR), b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","));
     b.rule(AUGASSIGN).is(b.firstOf("+=", "-=", "*=", "/=", "//=", "%=", "**=", ">>=", "<<=", "&=", "^=", "|=", "@="));

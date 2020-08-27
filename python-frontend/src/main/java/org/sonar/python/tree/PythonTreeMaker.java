@@ -878,6 +878,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ELLIPSIS)) {
       return new EllipsisExpressionImpl(toPyToken(astNode.getTokens()));
     }
+    if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR)) {
+      return exprListOrTestList(astNode);
+    }
     throw new IllegalStateException("Expression " + astNode.getType() + " not correctly translated to strongly typed AST");
   }
 
