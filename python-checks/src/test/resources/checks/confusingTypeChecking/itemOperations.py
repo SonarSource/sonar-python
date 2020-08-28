@@ -20,3 +20,15 @@ def f(val: object):
   if not isinstance(val, tuple):
     ...
   val[0]
+
+def checked_with_in(obj: object, other: object, prop):
+  if prop in obj:
+    obj[prop]
+  if other in obj:
+    other[prop] # Noncompliant
+
+def checked_with_not_in(obj: object, prop):
+  if prop not in obj:
+    return
+  obj[prop]
+
