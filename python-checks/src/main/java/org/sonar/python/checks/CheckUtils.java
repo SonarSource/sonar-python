@@ -92,25 +92,4 @@ public class CheckUtils {
     }
     return arguments.size() != 1 || !"object".equals(arguments.get(0).firstToken().value());
   }
-
-  public static boolean isCalledInClassBody(Symbol symbol, ClassDef classDef) {
-    return symbol.usages().stream().anyMatch(usage -> {
-      Tree tree = usage.tree();
-      Tree parentTree = tree.parent();
-
-      if (!parentTree.is(Tree.Kind.CALL_EXPR)) {
-        return false;
-      }
-
-      // We want a call expression which
-      //  1) is a call to our function
-      //  2) is not in a call within another function
-      //  3) it has a class body ancestor AND it is classDef
-      CallExpression call = (CallExpression) parentTree;
-      return call.callee().equals(tree)
-        && TreeUtils.firstAncestorOfKind(call, Tree.Kind.FUNCDEF) == null
-        && classDef.equals(TreeUtils.firstAncestorOfKind(call, Tree.Kind.CLASSDEF));
-    });
-  }
-
 }

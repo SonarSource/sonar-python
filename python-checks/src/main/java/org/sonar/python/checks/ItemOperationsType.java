@@ -29,7 +29,6 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.DelStatement;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
