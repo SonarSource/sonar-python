@@ -1,28 +1,13 @@
-<p>Arbitrary OS commands can be executed by an attacker when:</p>
-<ul>
-  <li> The OS command name to execute is user-controlled. </li>
-  <li> A shell is spawn rather than a new process, in this case shell meta-chars can be used (when parameters are user-controlled for instance) to
-  inject OS commands. </li>
-  <li> The executable is searched in the directories specified by the PATH variable (which can contain user-controlled or malicious directories).
-  </li>
-</ul>
+<p>Arbitrary OS command injection vulnerabilities are more likely when a shell is spawned rather than a new process, indeed shell meta-chars can be
+used (when parameters are user-controlled for instance) to inject OS commands.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> OS command name or parameters are user-controlled. </li>
-  <li> The relative path of the OS command is specified. </li>
-  <li> OS commands are not executed in an isolated/sandboxed environment. </li>
-  <li> OS command are executed with high privileges. </li>
 </ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
+<p>There is a risk if you answered yes to this question.</p>
 <p> </p>
 <h2>Recommended Secure Coding Practices</h2>
-<ul>
-  <li> User-controlled inputs should not be used, for any reasons, to build a dynamically OS command (command name or even parameters when shell is
-  used). </li>
-  <li> Fully qualified/absolute path should be used to specify the OS command to execute. </li>
-  <li> If possible, set the lowest privileges to the new process/shell in which commands are executed. </li>
-  <li> If possible, execute the OS commands in an isolated environment. </li>
-</ul>
+<p>Use functions that don't spawn a shell.</p>
 <h2>Sensitive Code Example</h2>
 <p>Python 3</p>
 <pre>

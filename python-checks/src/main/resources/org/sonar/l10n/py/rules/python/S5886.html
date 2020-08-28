@@ -5,20 +5,11 @@ different type might not fail. It is however likely to be unintended and will le
 <pre>
 def hello() -&gt; str:
     return 42  # Noncompliant. Function's type hint asks for a string return value
-
-def should_return_a_string(condition) -&gt; str:
-    if condition:
-        return "a string"
-    # Noncompliant. The function returns None if the condition is not met
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 def hello() -&gt; str:
     return "Hello"
-
-def should_return_a_string() -&gt; Optional[str]:
-    if condition:
-        return "a string"
 </pre>
 <h2>See</h2>
 <ul>
