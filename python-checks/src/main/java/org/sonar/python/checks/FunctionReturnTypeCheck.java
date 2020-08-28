@@ -68,6 +68,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
     String functionName = functionDef.name().name();
     String returnTypeName = InferredTypes.typeName(declaredReturnType);
     if (!returnTypeVisitor.yieldStatements.isEmpty()) {
+      // Here we should probably use an equivalent of "canBeOrExtend" (accepting uncertainty) instead of "mustBeOrExtend"
       if (ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend)) {
         return;
       }

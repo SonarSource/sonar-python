@@ -47,6 +47,7 @@ public class SelfSymbolImplTest {
     ((SymbolImpl) selfSymbol).removeUsages();
     assertThat(selfSymbol.usages()).isEmpty();
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Tree.Kind.CLASSDEF));
+    assertThat(classDef.instanceFields()).isNotEmpty();
     assertThat(classDef.instanceFields()).allMatch(symbol -> symbol.usages().isEmpty());
   }
 
