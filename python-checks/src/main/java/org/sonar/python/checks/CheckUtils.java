@@ -21,14 +21,11 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.tree.TreeUtils;
 
 public class CheckUtils {
 
