@@ -30,11 +30,13 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 
@@ -110,7 +112,21 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
         // handled by S5644
         return true;
       }
-      return type.declaresMember(requiredMethod);
+      return isUsedInsideInExpression(subscriptionObject) || type.declaresMember(requiredMethod);
+    }
+
+    private static boolean isUsedInsideInExpression(Expression subscriptionObject) {
+      return TreeUtils.getSymbolFromTree(subscriptionObject)
+        .filter(symbol -> symbol.usages().stream().anyMatch(usage -> isRightOperandInExpression(usage.tree())))
+        .isPresent();
+    }
+
+    private static boolean isRightOperandInExpression(Tree tree) {
+      Tree parent = tree.parent();
+      if (parent instanceof InExpression) {
+        return ((InExpression) parent).rightOperand() == tree;
+      }
+      return false;
     }
 
     @Override
