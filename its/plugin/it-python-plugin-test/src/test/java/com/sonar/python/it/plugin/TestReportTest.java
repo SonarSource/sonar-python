@@ -29,7 +29,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -38,7 +37,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestReportTest {
 
-  private static final String PROJECT = "nosetests_project";
   public static final String TESTS = "tests";
   public static final String TEST_FAILURES = "test_failures";
   public static final String TEST_ERRORS = "test_errors";
@@ -49,22 +47,20 @@ public class TestReportTest {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
-  @Before
-  public void before() {
-    ORCHESTRATOR.resetData();
-  }
-
-  private static SonarScanner createBuild(String testReportPath) {
+  private static SonarScanner createBuild(String projectKey, String testReportPath) {
     return SonarScanner.create()
+      .setProjectKey(projectKey)
+      .setProjectName(projectKey)
       .setProjectDir(new File("projects/nosetests_project"))
       .setProperty("sonar.python.xunit.reportPath", testReportPath);
   }
 
   @Test
   public void import_report() {
+    final String projectKey = "nosetests_project";
     // sonar.python.xunit.skipDetails=false by default
-    ORCHESTRATOR.executeBuild(createBuild("nosetests.xml"));
-    assertProjectMeasures(PROJECT, new ImmutableMap.Builder<String, Integer>()
+    ORCHESTRATOR.executeBuild(createBuild(projectKey, "nosetests.xml"));
+    assertProjectMeasures(projectKey, new ImmutableMap.Builder<String, Integer>()
       .put(TESTS, 3)
       .put(TEST_FAILURES, 1)
       .put(TEST_ERRORS, 1)
@@ -76,8 +72,9 @@ public class TestReportTest {
 
   @Test
   public void import_pytest_report() {
-    ORCHESTRATOR.executeBuild(createBuild("pytest.xml"));
-    assertProjectMeasures(PROJECT, new ImmutableMap.Builder<String, Integer>()
+    final String projectKey = "pytest";
+    ORCHESTRATOR.executeBuild(createBuild(projectKey, "pytest.xml"));
+    assertProjectMeasures(projectKey, new ImmutableMap.Builder<String, Integer>()
       .put(TESTS, 3)
       .put(TEST_FAILURES, 2)
       .put(TEST_ERRORS, 0)
@@ -89,7 +86,8 @@ public class TestReportTest {
 
   @Test
   public void simple_mode() {
-    ORCHESTRATOR.executeBuild(createBuild("nosetests.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
+    final String projectKey = "nosetests_simple";
+    ORCHESTRATOR.executeBuild(createBuild(projectKey, "nosetests.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
     Map<String, Integer> values = new HashMap<>();
     values.put(TESTS, 3);
     values.put(TEST_FAILURES, 1);
@@ -98,24 +96,27 @@ public class TestReportTest {
     values.put(TEST_EXECUTION_TIME, 1);
     values.put(TEST_SUCCESS_DENSITY, null);
 
-    assertProjectMeasures(PROJECT, values);
+    assertProjectMeasures(projectKey, values);
   }
 
   @Test
   public void missing_test_report() {
-    ORCHESTRATOR.executeBuild(createBuild("missing.xml"));
-    assertProjectMeasures(PROJECT, nullMeasures());
+    final String projectKey = "nosetests_missing";
+    ORCHESTRATOR.executeBuild(createBuild(projectKey, "missing.xml"));
+    assertProjectMeasures(projectKey, nullMeasures());
   }
 
   @Test
   public void missing_test_report_with_simple_mode() {
-    ORCHESTRATOR.executeBuild(createBuild("missing.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
-    assertProjectMeasures(PROJECT, nullMeasures());
+    final String projectKey = "nosetests_missing_simple";
+    ORCHESTRATOR.executeBuild(createBuild(projectKey, "missing.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
+    assertProjectMeasures(projectKey, nullMeasures());
   }
 
   @Test
   public void invalid_test_report() {
-    BuildResult result = ORCHESTRATOR.executeBuildQuietly(createBuild("invalid_report.xml"));
+    final String projectKey = "nosetests_invalid";
+    BuildResult result = ORCHESTRATOR.executeBuildQuietly(createBuild(projectKey, "invalid_report.xml"));
     assertThat(result.isSuccess()).isTrue();
     assertThat(result.getLogs()).contains("Cannot read report 'invalid_report.xml', the following exception occurred:" +
       " Unexpected character 't' (code 116) in prolog; expected '<'\n" +
