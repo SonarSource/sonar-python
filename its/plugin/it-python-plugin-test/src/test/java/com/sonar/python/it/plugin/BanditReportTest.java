@@ -42,7 +42,6 @@ public class BanditReportTest {
 
   @Test
   public void import_report() {
-    ORCHESTRATOR.resetData();
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
     ORCHESTRATOR.executeBuild(
