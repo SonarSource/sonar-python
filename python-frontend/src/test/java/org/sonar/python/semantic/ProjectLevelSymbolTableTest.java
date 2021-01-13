@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Test;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -41,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
@@ -613,4 +615,58 @@ public class ProjectLevelSymbolTableTest {
     ImportFrom importFrom = ((ImportFrom) PythonTestUtils.getAllDescendant(tree, t -> t.is(Tree.Kind.IMPORT_FROM)).get(0));
     assertThat(importFrom.hasUnresolvedWildcardImport()).isTrue();
   }
+
+  @Test
+  public void loop_in_class_inheritance() {
+    String[] foo = {
+      "from bar import B",
+      "class A(B): ..."
+    };
+    String[] bar = {
+      "from foo import A",
+      "class B(A): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
+
+    Map<String, Symbol> barSymbols = getSymbolByName(parse(new SymbolTableBuilder("", pythonFile("bar.py"), projectSymbolTable), bar));
+
+    ClassSymbol classB = (ClassSymbol) barSymbols.get("B");
+    assertThat(classB.superClasses())
+      .extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactly(tuple(Symbol.Kind.CLASS, "foo.A"));
+
+    ClassSymbolImpl importedA = (ClassSymbolImpl) barSymbols.get("A");
+    assertThat(importedA.superClasses())
+      .extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactly(tuple(Symbol.Kind.CLASS, "bar.B"));
+
+    // at this level, parent of imported class is not Class Symbol anymore because of the loop in  class inheritance
+    ClassSymbolImpl parentOfImportedA = (ClassSymbolImpl) importedA.superClasses().iterator().next();
+    assertThat(parentOfImportedA.superClasses())
+      .extracting(Symbol::kind, Symbol::fullyQualifiedName)
+      .containsExactly(tuple(Symbol.Kind.OTHER, "foo.A"));
+  }
+
+  @Test
+  public void loop_in_class_inheritance_wildcard_import() {
+    String[] foo = {
+      "class A: ..."
+    };
+    String[] bar = {
+      "from foo import *",
+      "class A(A): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
+    projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
+
+    Map<String, Symbol> symbols = getSymbolByName(parse(new SymbolTableBuilder("", pythonFile("bar.py"), projectSymbolTable), "from bar import A"));
+    AmbiguousSymbol a = (AmbiguousSymbol) symbols.get("A");
+    assertThat(a.alternatives()).extracting(Symbol::kind).containsExactlyInAnyOrder(Symbol.Kind.OTHER, Symbol.Kind.CLASS);
+  }
+
 }
