@@ -123,6 +123,11 @@ class Scope {
   }
 
   private Symbol copySymbol(String symbolName, Symbol symbol) {
+    return copySymbol(symbolName, symbol, new HashSet<>());
+  }
+
+  private Symbol copySymbol(String symbolName, Symbol symbol, Set<Symbol> alreadyVisitedSymbols) {
+    alreadyVisitedSymbols.add(symbol);
     if (symbol.is(Symbol.Kind.FUNCTION)) {
       return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
     } else if (symbol.is(Symbol.Kind.CLASS)) {
@@ -134,7 +139,10 @@ class Scope {
       for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
         Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
         if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
-          classSymbol.addSuperClass(copySymbol(globalSymbol.name(), globalSymbol));
+          Symbol parentClass = alreadyVisitedSymbols.contains(globalSymbol)
+            ? new SymbolImpl(globalSymbol.name(), globalSymbol.fullyQualifiedName())
+            : copySymbol(globalSymbol.name(), globalSymbol, alreadyVisitedSymbols);
+          classSymbol.addSuperClass(parentClass);
         } else {
           classSymbol.addSuperClass(originalSymbol);
         }
@@ -149,7 +157,7 @@ class Scope {
       return classSymbol;
     } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
       Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).alternatives().stream()
-        .map(s -> copySymbol(symbolName, s))
+        .map(s -> copySymbol(symbolName, s, alreadyVisitedSymbols))
         .collect(Collectors.toSet());
       return new AmbiguousSymbolImpl(symbolName, symbol.fullyQualifiedName(), alternativeSymbols);
     } else if (symbol.is(Symbol.Kind.OTHER)) {
