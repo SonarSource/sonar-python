@@ -128,46 +128,49 @@ class Scope {
 
   private Symbol copySymbol(String symbolName, Symbol symbol, Set<Symbol> alreadyVisitedSymbols) {
     alreadyVisitedSymbols.add(symbol);
-    if (symbol.is(Symbol.Kind.FUNCTION)) {
-      return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
-    } else if (symbol.is(Symbol.Kind.CLASS)) {
-      ClassSymbolImpl originalClassSymbol = (ClassSymbolImpl) symbol;
-      // Must use symbolName to preserve import aliases
-      ClassSymbolImpl classSymbol =
-        new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(),
-          originalClassSymbol.definitionLocation(), originalClassSymbol.hasDecorators(), originalClassSymbol.hasMetaClass(), originalClassSymbol.metaclassFQN());
-      for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
-        Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
-        if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
-          Symbol parentClass = alreadyVisitedSymbols.contains(globalSymbol)
-            ? new SymbolImpl(globalSymbol.name(), globalSymbol.fullyQualifiedName())
-            : copySymbol(globalSymbol.name(), globalSymbol, alreadyVisitedSymbols);
-          classSymbol.addSuperClass(parentClass);
-        } else {
-          classSymbol.addSuperClass(originalSymbol);
+    switch (symbol.kind()) {
+      case FUNCTION:
+        return new FunctionSymbolImpl(symbolName, (FunctionSymbol) symbol);
+      case CLASS:
+        return copyClassSymbol(symbolName, (ClassSymbolImpl) symbol, alreadyVisitedSymbols);
+      case AMBIGUOUS:
+        Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).alternatives().stream()
+          .map(s -> copySymbol(symbolName, s, alreadyVisitedSymbols))
+          .collect(Collectors.toSet());
+        return new AmbiguousSymbolImpl(symbolName, symbol.fullyQualifiedName(), alternativeSymbols);
+      default:
+        SymbolImpl copiedSymbol = new SymbolImpl(symbolName, symbol.fullyQualifiedName(), symbol.annotatedTypeName());
+        for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
+          copiedSymbol.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
         }
-      }
-      classSymbol.addMembers(originalClassSymbol
-        .declaredMembers().stream()
-        .map(m -> ((SymbolImpl) m).copyWithoutUsages())
-        .collect(Collectors.toList()));
-      if (originalClassSymbol.hasSuperClassWithoutSymbol()) {
-        classSymbol.setHasSuperClassWithoutSymbol();
-      }
-      return classSymbol;
-    } else if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
-      Set<Symbol> alternativeSymbols = ((AmbiguousSymbol) symbol).alternatives().stream()
-        .map(s -> copySymbol(symbolName, s, alreadyVisitedSymbols))
-        .collect(Collectors.toSet());
-      return new AmbiguousSymbolImpl(symbolName, symbol.fullyQualifiedName(), alternativeSymbols);
-    } else if (symbol.is(Symbol.Kind.OTHER)) {
-      SymbolImpl res = new SymbolImpl(symbolName, symbol.fullyQualifiedName(), symbol.annotatedTypeName());
-      for (Map.Entry<String, Symbol> kv: ((SymbolImpl) symbol).getChildrenSymbolByName().entrySet()) {
-        res.addChildSymbol(((SymbolImpl) kv.getValue()).copyWithoutUsages());
-      }
-      return res;
+        return copiedSymbol;
     }
-    return new SymbolImpl(symbolName, symbol.fullyQualifiedName());
+  }
+
+  private ClassSymbolImpl copyClassSymbol(String symbolName, ClassSymbolImpl originalClassSymbol, Set<Symbol> alreadyVisitedSymbols) {
+    // Must use symbolName to preserve import aliases
+    ClassSymbolImpl classSymbol = new ClassSymbolImpl(symbolName, originalClassSymbol.fullyQualifiedName(), originalClassSymbol.definitionLocation(),
+      originalClassSymbol.hasDecorators(), originalClassSymbol.hasMetaClass(), originalClassSymbol.metaclassFQN());
+
+    for (Symbol originalSymbol : originalClassSymbol.superClasses()) {
+      Symbol globalSymbol = projectLevelSymbolTable.getSymbol(originalSymbol.fullyQualifiedName());
+      if (globalSymbol != null && globalSymbol.kind() == Symbol.Kind.CLASS) {
+        Symbol parentClass = alreadyVisitedSymbols.contains(globalSymbol)
+          ? new SymbolImpl(globalSymbol.name(), globalSymbol.fullyQualifiedName())
+          : copySymbol(globalSymbol.name(), globalSymbol, alreadyVisitedSymbols);
+        classSymbol.addSuperClass(parentClass);
+      } else {
+        classSymbol.addSuperClass(originalSymbol);
+      }
+    }
+    classSymbol.addMembers(originalClassSymbol
+      .declaredMembers().stream()
+      .map(m -> ((SymbolImpl) m).copyWithoutUsages())
+      .collect(Collectors.toList()));
+    if (originalClassSymbol.hasSuperClassWithoutSymbol()) {
+      classSymbol.setHasSuperClassWithoutSymbol();
+    }
+    return classSymbol;
   }
 
   void addModuleSymbol(Name nameTree, @CheckForNull String fullyQualifiedName) {
