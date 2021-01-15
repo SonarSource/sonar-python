@@ -284,6 +284,21 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void loop_in_class_hierarchy() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S2710"))
+        .build())
+      .build();
+
+    inputFile("modA.py");
+    inputFile("modB.py");
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+  }
+
+  @Test
   public void test_test_file_highlighting() throws IOException {
     activeRules = new ActiveRulesBuilder().build();
 
