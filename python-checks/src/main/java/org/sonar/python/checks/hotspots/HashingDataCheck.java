@@ -19,12 +19,15 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -32,13 +35,20 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
 import org.sonar.python.checks.Expressions;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
+import static org.sonar.python.checks.Expressions.singleAssignedValue;
 
 @Rule(key = HashingDataCheck.CHECK_KEY)
 public class HashingDataCheck extends AbstractCallExpressionCheck {
@@ -46,9 +56,8 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   private static final String MESSAGE = "Make sure that hashing data is safe here.";
   private static final Set<String> questionableFunctions = immutableSet(
     "hashlib.new",
-    "cryptography.hazmat.primitives.hashes.Hash",
-    "cryptography.hazmat.primitives.hashes.MD5",
     "cryptography.hazmat.primitives.hashes.SHA1",
+    "cryptography.hazmat.primitives.hashes.MD5",
     "django.contrib.auth.hashers.make_password",
     "werkzeug.security.generate_password_hash",
     // https://github.com/Legrandin/pycryptodome
@@ -57,91 +66,94 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     "Cryptodome.Hash.MD5.new",
     "Cryptodome.Hash.SHA.new",
     "Cryptodome.Hash.SHA224.new",
-    "Cryptodome.Hash.SHA256.new",
-    "Cryptodome.Hash.SHA384.new",
-    "Cryptodome.Hash.SHA512.new",
-    "Cryptodome.Hash.HMAC.new",
     // https://github.com/dlitz/pycrypto
     "Crypto.Hash.MD2.new",
     "Crypto.Hash.MD4.new",
     "Crypto.Hash.MD5.new",
     "Crypto.Hash.SHA.new",
-    "Crypto.Hash.SHA224.new",
-    "Crypto.Hash.SHA256.new",
-    "Crypto.Hash.SHA384.new",
-    "Crypto.Hash.SHA512.new",
-    "Crypto.Hash.HMAC.new"
+    "Crypto.Hash.SHA224.new"
     );
-  private static final Set<String> questionableHashlibAlgorithm = Stream.of(
-    "blake2b", "blake2s", "md5", "pbkdf2_hmac", "sha1", "sha224",
-    "sha256", "sha384", "sha3_224", "sha3_256", "sha3_384", "sha3_512",
-    "sha512", "shake_128", "shake_256", "scrypt")
-    .map(hasher -> "hashlib." + hasher)
-    .collect(Collectors.toSet());
+  private static final Set<String> questionableHashlibAlgorithm = immutableSet(
+    "hashlib.md5",
+    "hashlib.sha224"
+  );
 
   private static final Set<String> questionablePasslibAlgorithm = Stream.of(
-    "apr_md5_crypt", "argon2", "atlassian_pbkdf2_sha1", "bcrypt",
-    "bcrypt_sha256", "bigcrypt", "bsd_nthash", "bsdi_crypt",
+    "apr_md5_crypt", "bigcrypt", "bsd_nthash", "bsdi_crypt",
     "cisco_asa", "cisco_pix", "cisco_type7", "crypt16",
-    "cta_pbkdf2_sha1", "des_crypt", "django_argon2", "django_bcrypt",
-    "django_bcrypt_sha256", "django_des_crypt", "django_disabled",
-    "django_pbkdf2_sha1", "django_pbkdf2_sha256", "django_salted_md5",
-    "django_salted_sha1", "dlitz_pbkdf2_sha1", "fshp", "grub_pbkdf2_sha512",
-    "hex_md4", "hex_md5", "hex_sha1", "hex_sha256", "hex_sha512",
-    "htdigest", "ldap_bcrypt", "ldap_bsdi_crypt", "ldap_des_crypt", "ldap_hex_md5",
-    "ldap_hex_sha1", "ldap_md5", "ldap_md5_crypt", "ldap_pbkdf2_sha1",
-    "ldap_pbkdf2_sha256", "ldap_pbkdf2_sha512", "ldap_plaintext", "ldap_salted_md5",
-    "ldap_salted_sha1", "ldap_sha1", "ldap_sha1_crypt", "ldap_sha256_crypt",
-    "ldap_sha512_crypt", "lmhash", "md5_crypt", "msdcc", "msdcc2",
-    "mssql2000", "mssql2005", "mysql323", "mysql41", "nthash", "oracle10",
-    "oracle11", "pbkdf2_sha1", "pbkdf2_sha256", "pbkdf2_sha512", "phpass", "plaintext",
-    "postgres_md5", "roundup_plaintext", "scram", "scrypt", "sha1_crypt", "sha256_crypt",
-    "sha512_crypt", "sun_md5_crypt", "unix_disabled", "unix_fallback")
+    "des_crypt", "django_des_crypt", "django_salted_md5",
+    "django_salted_sha1", "dlitz_pbkdf2_sha1",
+    "hex_md4", "hex_md5", "hex_sha1", "ldap_bsdi_crypt", "ldap_des_crypt", "ldap_hex_md5",
+    "ldap_plaintext", "ldap_salted_md5",
+    "ldap_salted_sha1", "ldap_sha1", "ldap_sha1_crypt", "lmhash", "md5_crypt", "mssql2000",
+    "mssql2005", "mysql323", "mysql41", "nthash", "oracle10", "plaintext",
+    "postgres_md5", "roundup_plaintext", "sha1_crypt", "sun_md5_crypt")
     .map(hasher -> "passlib.hash." + hasher)
     .collect(Collectors.toSet());
 
 
   private static final Set<String> questionableDjangoHashers = Stream.of(
-    "PBKDF2PasswordHasher", "PBKDF2SHA1PasswordHasher", "Argon2PasswordHasher",
-    "BCryptSHA256PasswordHasher", "BasePasswordHasher", "BCryptPasswordHasher", "SHA1PasswordHasher", "MD5PasswordHasher",
-    "UnsaltedSHA1PasswordHasher", "UnsaltedMD5PasswordHasher", "CryptPasswordHasher")
+    "SHA1PasswordHasher", "MD5PasswordHasher", "UnsaltedSHA1PasswordHasher",
+    "UnsaltedMD5PasswordHasher", "CryptPasswordHasher")
     .map(hasher -> "django.contrib.auth.hashers." + hasher)
     .collect(Collectors.toSet());
+
+  private static final Set<String> questionableHasher = immutableSet("crypt", "unsalted_sha1", "unsalted_md5", "sha1", "md5");
 
   @Override
   public void initialize(Context context) {
     super.initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, HashingDataCheck::checkOverwriteDjangoHashers);
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, HashingDataCheck::checkCreatingCustomHasher);
-    context.registerSyntaxNodeConsumer(Tree.Kind.NAME, HashingDataCheck::checkQuestionableHashingAlgorithm);
+    context.registerSyntaxNodeConsumer(NAME, HashingDataCheck::checkQuestionableHashingAlgorithm);
   }
 
-  /**
-   * `make_password(password, salt, hasher)` function is sensitive when it's used with a specific
-   * hasher name or salt.
-   * No issue should be raised when only the password is provided.
-   * <p>
-   * make_password(password, salt=salt)  # Sensitive
-   * make_password(password, hasher=hasher)  # Sensitive
-   * make_password(password, salt=salt, hasher=hasher)  # Sensitive
-   * make_password(password)  # OK
-   */
   @Override
   protected boolean isException(CallExpression callExpression) {
-    return isDjangoMakePasswordFunctionWithoutSaltAndHasher(callExpression);
+    return isSafeDjangoMakePasswordFunction(callExpression) || isSafeWerkzeugHashFunction(callExpression);
   }
 
-  private static boolean isDjangoMakePasswordFunctionWithoutSaltAndHasher(CallExpression callExpression) {
-    return callExpression.calleeSymbol() != null
-      && "django.contrib.auth.hashers.make_password".equals(callExpression.calleeSymbol().fullyQualifiedName())
-      && callExpression.arguments().size() == 1;
+  private static boolean isSafeDjangoMakePasswordFunction(CallExpression callExpression) {
+    Symbol calleeSymbol = callExpression.calleeSymbol();
+    if (calleeSymbol != null
+      && "django.contrib.auth.hashers.make_password".equals(calleeSymbol.fullyQualifiedName())) {
+      RegularArgument hasher = TreeUtils.nthArgumentOrKeyword(2, "hasher", callExpression.arguments());
+      if (hasher == null) {
+        return true;
+      }
+      StringLiteral value = (StringLiteral) getValue(hasher.expression(), STRING_LITERAL);
+      return value == null || !questionableHasher.contains(value.trimmedQuotesValue());
+    }
+    return false;
+  }
+
+  private static boolean isSafeWerkzeugHashFunction(CallExpression callExpression) {
+    Symbol calleeSymbol = callExpression.calleeSymbol();
+    if (calleeSymbol != null
+      && "werkzeug.security.generate_password_hash".equals(calleeSymbol.fullyQualifiedName())) {
+      RegularArgument method = TreeUtils.nthArgumentOrKeyword(1, "method", callExpression.arguments());
+      if (method == null) {
+        return true;
+      }
+      StringLiteral value = (StringLiteral) getValue(method.expression(), STRING_LITERAL);
+      if (value == null) {
+        return true;
+      }
+      String val = value.trimmedQuotesValue();
+      return !val.equals("md5") && !val.equals("sha224");
+    }
+    return false;
   }
 
   private static void checkOverwriteDjangoHashers(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
 
     if (isOverwritingDjangoHashers(assignmentStatementTree.lhsExpressions())) {
-      ctx.addIssue(assignmentStatementTree, MESSAGE);
+      List<Expression> weakHashers = getWeakHashers(assignmentStatementTree.assignedValue());
+      if (!weakHashers.isEmpty()) {
+        PreciseIssue preciseIssue = ctx.addIssue(assignmentStatementTree, MESSAGE);
+        weakHashers.forEach(expression -> preciseIssue.secondary(expression, null));
+      }
       return;
     }
 
@@ -150,8 +162,39 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
       assignmentStatementTree.lhsExpressions().stream()
         .flatMap(pelt -> pelt.expressions().stream())
         .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
-      ctx.addIssue(assignmentStatementTree, MESSAGE);
+      List<Expression> weakHashers = getWeakHashers(assignmentStatementTree.assignedValue());
+      if (!weakHashers.isEmpty()) {
+        PreciseIssue preciseIssue = ctx.addIssue(assignmentStatementTree, MESSAGE);
+        weakHashers.forEach(expression -> preciseIssue.secondary(expression, null));
+      }
     }
+  }
+
+  private static List<Expression> getWeakHashers(Expression assignedValue) {
+    ListLiteral listLiteral = (ListLiteral) getValue(assignedValue, LIST_LITERAL);
+    if (listLiteral != null) {
+      return listLiteral.elements().expressions().stream()
+        .filter(HashingDataCheck::isWeakHasher)
+        .collect(Collectors.toList());
+    }
+    return Collections.emptyList();
+  }
+
+  private static boolean isWeakHasher(Expression expression) {
+    StringLiteral value = (StringLiteral) getValue(expression, STRING_LITERAL);
+    return value != null && questionableDjangoHashers.contains(value.trimmedQuotesValue());
+  }
+
+  @CheckForNull
+  private static Expression getValue(Expression expression, Tree.Kind kind) {
+    Expression expr = expression;
+    if (expression.is(NAME)) {
+      expr = singleAssignedValue(((Name) expression));
+    }
+    if (expr != null && expr.is(kind)) {
+      return expr;
+    }
+    return null;
   }
 
   /**
