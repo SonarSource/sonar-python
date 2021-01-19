@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.List;
 import org.junit.Test;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -109,6 +110,18 @@ public class FunctionSymbolTest {
     functionSymbol = functionSymbol("def fn(p1, *args): pass");
     assertThat(functionSymbol.hasVariadicParameter()).isTrue();
 
+    functionSymbol = functionSymbol("@something\ndef fn(p1, *args): pass");
+    assertThat(functionSymbol.hasDecorators()).isTrue();
+    List<String> decorators = functionSymbol.decorators();
+    assertThat(decorators).hasSize(1);
+    assertThat(decorators.get(0)).isEqualTo("something");
+
+    functionSymbol = functionSymbol("@something[\"else\"]\ndef fn(p1, *args): pass");
+    assertThat(functionSymbol.hasDecorators()).isTrue();
+    decorators = functionSymbol.decorators();
+    assertThat(decorators).isEmpty();
+    assertThat(functionSymbol.isInstanceMethod()).isFalse();
+
     functionSymbol = functionSymbol("class A:\n  def method(self, p1): pass");
     assertThat(functionSymbol.isInstanceMethod()).isTrue();
 
@@ -126,6 +139,10 @@ public class FunctionSymbolTest {
     assertThat(functionSymbol.hasDecorators()).isTrue();
 
     functionSymbol = functionSymbol("class A:\n  @dec\n  def method(self, p1): pass");
+    assertThat(functionSymbol.isInstanceMethod()).isTrue();
+    assertThat(functionSymbol.hasDecorators()).isTrue();
+
+    functionSymbol = functionSymbol("class A:\n  @some[\"thing\"]\n  def method(self, p1): pass");
     assertThat(functionSymbol.isInstanceMethod()).isTrue();
     assertThat(functionSymbol.hasDecorators()).isTrue();
   }

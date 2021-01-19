@@ -648,8 +648,11 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitDecorator(Decorator decorator) {
-      Name nameTree = decorator.name().names().get(0);
-      addSymbolUsage(nameTree);
+      DottedName dottedName = decorator.name();
+      if (dottedName != null) {
+        Name nameTree = dottedName.names().get(0);
+        addSymbolUsage(nameTree);
+      }
       super.visitDecorator(decorator);
     }
 

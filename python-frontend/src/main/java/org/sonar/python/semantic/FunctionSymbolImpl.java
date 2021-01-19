@@ -22,6 +22,7 @@ package org.sonar.python.semantic;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
@@ -32,6 +33,7 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParameterList;
@@ -108,17 +110,24 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private static boolean isInstanceMethod(FunctionDef functionDef) {
     return !functionDef.name().name().equals("__new__") && functionDef.isMethodDefinition() && functionDef.decorators().stream()
       .map(decorator -> {
-        List<Name> names = decorator.name().names();
-        return names.get(names.size() - 1).name();
-      })
+        DottedName dottedName = decorator.name();
+        if (dottedName != null) {
+          List<Name> names = dottedName.names();
+          return names.get(names.size() - 1).name();
+        }
+        return null;
+      }).filter(Objects::nonNull)
       .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));
   }
 
   private static List<String> decorators(FunctionDef functionDef) {
     List<String> decoratorNames = new ArrayList<>();
     for (Decorator decorator : functionDef.decorators()) {
-      String name = decorator.name().names().stream().map(Name::name).collect(Collectors.joining("."));
-      decoratorNames.add(name);
+      DottedName dottedName = decorator.name();
+      if (dottedName != null) {
+        String name = dottedName.names().stream().map(Name::name).collect(Collectors.joining("."));
+        decoratorNames.add(name);
+      }
     }
     return decoratorNames;
   }

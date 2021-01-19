@@ -33,6 +33,7 @@ import javax.annotation.CheckForNull;
 public interface Decorator extends Tree {
   Token atToken();
 
+  @CheckForNull
   DottedName name();
 
   @CheckForNull
@@ -43,4 +44,9 @@ public interface Decorator extends Tree {
 
   @CheckForNull
   Token rightPar();
+
+  Expression expression();
+
+  @CheckForNull
+  String nameAsString();
 }
