@@ -47,6 +47,8 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   private static final Set<String> questionableFunctions = immutableSet(
     "hashlib.new",
     "cryptography.hazmat.primitives.hashes.Hash",
+    "cryptography.hazmat.primitives.hashes.MD5",
+    "cryptography.hazmat.primitives.hashes.SHA1",
     "django.contrib.auth.hashers.make_password",
     "werkzeug.security.generate_password_hash",
     // https://github.com/Legrandin/pycryptodome
