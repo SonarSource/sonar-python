@@ -10,6 +10,10 @@ from cryptography.hazmat.primitives import hashes
 def my_hash(algorithm):
     hashes.Hash(algorithm)  # Noncompliant {{Make sure that hashing data is safe here.}}
 #   ^^^^^^^^^^^
+    hashes.MD5() # Noncompliant
+    hashes.SHA1() # Noncompliant
+    hashes.SHA256()
+    hashes.SHA3_256()
     foo(hashes) #coverage
 hashes #coverage
 ############################################
