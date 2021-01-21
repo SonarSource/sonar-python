@@ -113,11 +113,14 @@ import hashlib
 from hashlib import md5
 
 def hash_data(algorithm):
-    hashlib.new(algorithm)  # Noncompliant
+    hashlib.new(algorithm)  # OK
 
     hashlib.md5  # Noncompliant
+    hashlib.sha1() # Noncompliant
+    hashlib.sha224() # Noncompliant
 
-    hashlib.new(algorithm)  # Noncompliant
+    alg = 'md5'
+    hashlib.new(alg)  # Noncompliant
 
     md5  # Noncompliant
 
@@ -146,13 +149,13 @@ def cryptodome():
     from Cryptodome.Hash import MD2
     from Cryptodome.Hash import MD4
     from Cryptodome.Hash import MD5
-    from Cryptodome.Hash import SHA
+    from Cryptodome.Hash import SHA1
 
     Cryptodome.Hash.MD2.new() # Noncompliant
     MD2.new()                 # Noncompliant
     MD4.new()                 # Noncompliant
     MD5.new()                 # Noncompliant
-    SHA.new()                 # Noncompliant
+    SHA1.new()                 # Noncompliant
 
 ############################################
 ###                PyCrypto              ###
@@ -163,12 +166,12 @@ def pycrypto():
     from Crypto.Hash import MD2
     from Crypto.Hash import MD4
     from Crypto.Hash import MD5
-    from Crypto.Hash import SHA
+    from Crypto.Hash import SHA1
     from Crypto.Hash import SHA224
 
     Crypto.Hash.MD2.new() # Noncompliant
     MD2.new() # Noncompliant
     MD4.new() # Noncompliant
     MD5.new() # Noncompliant
-    SHA.new() # Noncompliant
+    SHA1.new() # Noncompliant
     SHA224.new() # Noncompliant

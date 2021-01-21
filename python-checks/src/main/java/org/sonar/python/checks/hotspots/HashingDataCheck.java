@@ -64,19 +64,22 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     "Cryptodome.Hash.MD2.new",
     "Cryptodome.Hash.MD4.new",
     "Cryptodome.Hash.MD5.new",
-    "Cryptodome.Hash.SHA.new",
+    "Cryptodome.Hash.SHA1.new",
     "Cryptodome.Hash.SHA224.new",
     // https://github.com/dlitz/pycrypto
     "Crypto.Hash.MD2.new",
     "Crypto.Hash.MD4.new",
     "Crypto.Hash.MD5.new",
-    "Crypto.Hash.SHA.new",
+    "Crypto.Hash.SHA1.new",
     "Crypto.Hash.SHA224.new"
     );
   private static final Set<String> questionableHashlibAlgorithm = immutableSet(
     "hashlib.md5",
+    "hashlib.sha1",
     "hashlib.sha224"
   );
+
+  private static final Set<String> unsafeAlgorithms = immutableSet("sha1", "md5", "sha224");
 
   private static final Set<String> questionablePasslibAlgorithm = Stream.of(
     "apr_md5_crypt", "bigcrypt", "bsd_nthash", "bsdi_crypt",
@@ -110,37 +113,20 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
 
   @Override
   protected boolean isException(CallExpression callExpression) {
-    return isSafeDjangoMakePasswordFunction(callExpression) || isSafeWerkzeugHashFunction(callExpression);
+    return hasSafeArgument(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHasher) ||
+      hasSafeArgument(callExpression, "hashlib.new", 0, "name", unsafeAlgorithms) ||
+      hasSafeArgument(callExpression, "werkzeug.security.generate_password_hash", 1, "method", unsafeAlgorithms);
   }
 
-  private static boolean isSafeDjangoMakePasswordFunction(CallExpression callExpression) {
+  private static boolean hasSafeArgument(CallExpression callExpression, String fqn, int argPosition, String keyword, Set<String> unsafeAlgorithms) {
     Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol != null
-      && "django.contrib.auth.hashers.make_password".equals(calleeSymbol.fullyQualifiedName())) {
-      RegularArgument hasher = TreeUtils.nthArgumentOrKeyword(2, "hasher", callExpression.arguments());
-      if (hasher == null) {
+    if (calleeSymbol != null && fqn.equals(calleeSymbol.fullyQualifiedName())) {
+      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(argPosition, keyword, callExpression.arguments());
+      if (argument == null) {
         return true;
       }
-      StringLiteral value = (StringLiteral) getValue(hasher.expression(), STRING_LITERAL);
-      return value == null || !questionableHasher.contains(value.trimmedQuotesValue());
-    }
-    return false;
-  }
-
-  private static boolean isSafeWerkzeugHashFunction(CallExpression callExpression) {
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol != null
-      && "werkzeug.security.generate_password_hash".equals(calleeSymbol.fullyQualifiedName())) {
-      RegularArgument method = TreeUtils.nthArgumentOrKeyword(1, "method", callExpression.arguments());
-      if (method == null) {
-        return true;
-      }
-      StringLiteral value = (StringLiteral) getValue(method.expression(), STRING_LITERAL);
-      if (value == null) {
-        return true;
-      }
-      String val = value.trimmedQuotesValue();
-      return !val.equals("md5") && !val.equals("sha224");
+      StringLiteral value = (StringLiteral) getValue(argument.expression(), STRING_LITERAL);
+      return value == null || !unsafeAlgorithms.contains(value.trimmedQuotesValue());
     }
     return false;
   }
