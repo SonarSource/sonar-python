@@ -101,7 +101,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     .map(hasher -> "django.contrib.auth.hashers." + hasher)
     .collect(Collectors.toSet());
 
-  private static final Set<String> questionableHasher = immutableSet("crypt", "unsalted_sha1", "unsalted_md5", "sha1", "md5");
+  private static final Set<String> questionableHashers = immutableSet("crypt", "unsalted_sha1", "unsalted_md5", "sha1", "md5");
 
   @Override
   public void initialize(Context context) {
@@ -113,7 +113,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
 
   @Override
   protected boolean isException(CallExpression callExpression) {
-    return hasSafeArgument(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHasher) ||
+    return hasSafeArgument(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHashers) ||
       hasSafeArgument(callExpression, "hashlib.new", 0, "name", unsafeAlgorithms) ||
       hasSafeArgument(callExpression, "werkzeug.security.generate_password_hash", 1, "method", unsafeAlgorithms);
   }
@@ -134,20 +134,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   private static void checkOverwriteDjangoHashers(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
 
-    if (isOverwritingDjangoHashers(assignmentStatementTree.lhsExpressions())) {
-      List<Expression> weakHashers = getWeakHashers(assignmentStatementTree.assignedValue());
-      if (!weakHashers.isEmpty()) {
-        PreciseIssue preciseIssue = ctx.addIssue(assignmentStatementTree, MESSAGE);
-        weakHashers.forEach(expression -> preciseIssue.secondary(expression, null));
-      }
-      return;
-    }
-
-    // checks for `PASSWORD_HASHERS = []` in a global_settings.py file
-    if (ctx.pythonFile().fileName().equals("global_settings.py") &&
-      assignmentStatementTree.lhsExpressions().stream()
-        .flatMap(pelt -> pelt.expressions().stream())
-        .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
+    if (isOverwritingDjangoHashers(assignmentStatementTree.lhsExpressions(), ctx.pythonFile().fileName())) {
       List<Expression> weakHashers = getWeakHashers(assignmentStatementTree.assignedValue());
       if (!weakHashers.isEmpty()) {
         PreciseIssue preciseIssue = ctx.addIssue(assignmentStatementTree, MESSAGE);
@@ -183,17 +170,23 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     return null;
   }
 
-  /**
-   * checks for `settings.PASSWORD_HASHERS = value`
-   */
-  private static boolean isOverwritingDjangoHashers(List<ExpressionList> lhsExpressions) {
+  private static boolean isOverwritingDjangoHashers(List<ExpressionList> lhsExpressions, String filename) {
+    // checks for `PASSWORD_HASHERS = []` in a global_settings.py file
+    if (filename.equals("global_settings.py") &&
+        lhsExpressions.stream()
+          .flatMap(pelt -> pelt.expressions().stream())
+          .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
+
+      return true;
+    }
+    // checks for `settings.PASSWORD_HASHERS = value`
     for (ExpressionList expr : lhsExpressions) {
       for (Expression expression : expr.expressions()) {
         Expression baseExpr = Expressions.removeParentheses(expression);
         if (baseExpr.is(Tree.Kind.QUALIFIED_EXPR)) {
           QualifiedExpression qualifiedExpression = (QualifiedExpression) baseExpr;
-          if (qualifiedExpression.symbol() != null
-            && "django.conf.settings.PASSWORD_HASHERS".equals(qualifiedExpression.symbol().fullyQualifiedName())) {
+          Symbol symbol = qualifiedExpression.symbol();
+          if (symbol != null && "django.conf.settings.PASSWORD_HASHERS".equals(symbol.fullyQualifiedName())) {
             return true;
           }
         }

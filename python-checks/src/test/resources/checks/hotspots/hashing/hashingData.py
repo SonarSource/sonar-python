@@ -150,12 +150,22 @@ def cryptodome():
     from Cryptodome.Hash import MD4
     from Cryptodome.Hash import MD5
     from Cryptodome.Hash import SHA1
+    from Cryptodome.Hash import SHA224
+    from Cryptodome.Hash import SHA256
+    from Cryptodome.Hash import SHA384
+    from Cryptodome.Hash import SHA512
+    from Cryptodome.Hash import HMAC
 
     Cryptodome.Hash.MD2.new() # Noncompliant
     MD2.new()                 # Noncompliant
     MD4.new()                 # Noncompliant
     MD5.new()                 # Noncompliant
-    SHA1.new()                 # Noncompliant
+    SHA1.new()                # Noncompliant
+    SHA224.new()              # Noncompliant
+    SHA256.new()              # OK
+    SHA384.new()              # OK
+    SHA512.new()              # OK
+    HMAC.new(b"\x00")         # OK
 
 ############################################
 ###                PyCrypto              ###
@@ -168,6 +178,10 @@ def pycrypto():
     from Crypto.Hash import MD5
     from Crypto.Hash import SHA1
     from Crypto.Hash import SHA224
+    from Crypto.Hash import SHA256
+    from Crypto.Hash import SHA384
+    from Crypto.Hash import SHA512
+    from Crypto.Hash import HMAC
 
     Crypto.Hash.MD2.new() # Noncompliant
     MD2.new() # Noncompliant
@@ -175,3 +189,7 @@ def pycrypto():
     MD5.new() # Noncompliant
     SHA1.new() # Noncompliant
     SHA224.new() # Noncompliant
+    SHA256.new() # OK
+    SHA384.new() # OK
+    SHA512.new() # OK
+    HMAC.new(b"\x00") # OK
