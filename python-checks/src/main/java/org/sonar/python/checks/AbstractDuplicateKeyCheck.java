@@ -93,6 +93,9 @@ public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck 
 
   public BigDecimal parseAsBigDecimal(String numberLiteralValue) {
     String numberValue = numberLiteralValue.replace("_", "");
+    if (numberValue.endsWith("L") || numberValue.endsWith("l")) {
+      numberValue = numberValue.substring(0, numberValue.length() - 1);
+    }
     if (numberValue.startsWith("0b") || numberValue.startsWith("0B")) {
       return new BigDecimal(new BigInteger(numberValue.substring(2), 2));
     }

@@ -22,10 +22,14 @@ def strings():
   {f"one{p()}": 1, "two": 2, f"one{p()}": 3} # FN (ok)
 
 def numbers():
+  {1: "one", 2: "two", 3: "three"}
   {1: "one", 2: "two", 1: "three"}  # Noncompliant
+  {1.0: "one", 2.0: "two", 3.0: "three"}
   {1.0: "one", 2.0: "two", 1.0: "three"}  # Noncompliant
   {0o1: "one", 0o2: "two", 0O1: "three"}  # Noncompliant
   {0x1: "one", 0x3: "two", 0X1: "three"}  # Noncompliant
+  {0xB1E70073L: "1", 0xB1E70073L: "1"} # Noncompliant [[only valid for python 2]]
+  {0xB1E70073l: "1", 0xB1E70073l: "1"} # Noncompliant [[only valid for python 2]]
   {0b1: "one", 0o2: "two", 0B1: "three"}  # Noncompliant
   {True: "one", False: "two", True: "three"}  # Noncompliant
 
