@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,6 +36,8 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -112,8 +115,8 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       // First check if the function definition has a @property decorator
       boolean hasPropertyDecorator = pyFunctionDefTree.decorators().stream()
-        .map(decorator -> decorator.name().names())
-        .anyMatch(names -> names.size() == 1 && "property".equals(names.get(0).name()));
+        .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+        .anyMatch("property"::equals);
 
       if (hasPropertyDecorator) {
         decoratorStyleProperties.compute(pyFunctionDefTree.name().name(), (key, value) -> {
@@ -127,7 +130,9 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
       }
 
       Optional<List<Name>> setterOrDeleterDecoratorNames = pyFunctionDefTree.decorators().stream()
-        .map(decorator -> decorator.name().names())
+        .map(Decorator::name)
+        .filter(Objects::nonNull)
+        .map(DottedName::names)
         .filter(names -> names.size() == 2 && ("setter".equals(names.get(1).name()) || "deleter".equals(names.get(1).name())))
         .findFirst();
 

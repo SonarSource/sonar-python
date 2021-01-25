@@ -21,6 +21,7 @@ package org.sonar.python.semantic;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.semantic.SymbolUtils.isTypeShedFile;
@@ -109,14 +111,9 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {
     return !functionDef.name().name().equals("__new__") && functionDef.isMethodDefinition() && functionDef.decorators().stream()
-      .map(decorator -> {
-        DottedName dottedName = decorator.name();
-        if (dottedName != null) {
-          List<Name> names = dottedName.names();
-          return names.get(names.size() - 1).name();
-        }
-        return null;
-      }).filter(Objects::nonNull)
+      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .filter(Objects::nonNull)
+      .flatMap(s -> Arrays.stream(s.split("\\.")))
       .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));
   }
 

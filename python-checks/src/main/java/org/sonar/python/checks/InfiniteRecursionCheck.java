@@ -135,8 +135,8 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
       }
       if (isMethod) {
         boolean isStatic = currentFunction.decorators().stream()
-          .map(Decorator::name).map(DottedName::names).map(d -> d.get(d.size() - 1)).map(Name::name)
-          .anyMatch(decorator -> decorator.equals("staticmethod") || decorator.equals("classmethod"));
+          .map(d -> TreeUtils.decoratorNameFromExpression(d.expression()))
+          .anyMatch(decorator -> "staticmethod".equals(decorator) || "classmethod".equals(decorator));
         if (isStatic) {
           selfSymbol = null;
           className = findParentClassName(currentFunction);

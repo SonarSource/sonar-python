@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -68,8 +69,8 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isNonInstanceMethodDecorator(Decorator decorator) {
-    String fqn = decorator.name().names().stream().map(Name::name).collect(Collectors.joining("."));
-    return this.getExcludedDecorators().stream().anyMatch(fqn::contains);
+    String fqn = TreeUtils.decoratorNameFromExpression(decorator.expression());
+    return fqn != null && this.getExcludedDecorators().stream().anyMatch(fqn::contains);
   }
 
   private static boolean isExceptionalUsageInClassBody(Usage usage, ClassDef parentClass) {
@@ -83,7 +84,9 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   private static boolean isUsedAsDecorator(@Nullable Tree tree, Tree usageTree) {
     if (tree instanceof FunctionDef) {
       return ((FunctionDef) tree).decorators().stream()
-        .flatMap(decorator -> decorator.name().names().stream())
+        .map(Decorator::name)
+        .filter(Objects::nonNull)
+        .flatMap(dottedName -> dottedName.names().stream())
         .anyMatch(name -> name.equals(usageTree));
     }
     return false;

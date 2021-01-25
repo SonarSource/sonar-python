@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2710")
 public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
@@ -67,7 +68,8 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
         return;
       }
       for (Decorator decorator : functionDef.decorators()) {
-        if (decorator.name().names().size() == 1 && decorator.name().names().get(0).name().equals("classmethod")) {
+        String decoratorName = TreeUtils.decoratorNameFromExpression(decorator.expression());
+        if ("classmethod".equals(decoratorName)) {
           checkFirstParameterName(functionDef, ctx);
         }
       }

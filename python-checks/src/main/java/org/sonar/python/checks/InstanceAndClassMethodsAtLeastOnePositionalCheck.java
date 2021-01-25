@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -65,8 +66,8 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
     List<String> decoratorNames = functionDef.decorators()
       .stream()
       .map(decorator ->
-        decorator.name().names().stream().map(Name::name).collect(Collectors.joining("."))
-      ).collect(Collectors.toList());
+        TreeUtils.decoratorNameFromExpression(decorator.expression())
+      ).filter(Objects::nonNull).collect(Collectors.toList());
 
     if (decoratorNames.contains("staticmethod")) {
       return;

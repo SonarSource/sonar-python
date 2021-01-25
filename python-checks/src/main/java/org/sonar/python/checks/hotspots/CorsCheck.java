@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DictionaryLiteralElement;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -234,7 +235,8 @@ public class CorsCheck extends PythonSubscriptionCheck {
 
   private static void checkFlaskDecorator(SubscriptionContext ctx) {
     Decorator decorator = (Decorator) ctx.syntaxNode();
-    List<Name> names = decorator.name().names();
+    DottedName dottedName = decorator.name();
+    List<Name> names = dottedName != null ? dottedName.names() : Collections.emptyList();
 
     if (names.size() == 1) {
       Symbol symbol = names.get(0).symbol();

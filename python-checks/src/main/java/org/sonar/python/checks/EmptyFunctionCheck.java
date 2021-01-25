@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -39,8 +40,10 @@ public class EmptyFunctionCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (functionDef.decorators().stream()
-        .map(d -> d.name().names().get(d.name().names().size() - 1))
-        .anyMatch(n -> ABC_DECORATORS.contains(n.name()))) {
+        .map(d -> TreeUtils.decoratorNameFromExpression(d.expression()))
+        .filter(Objects::nonNull)
+        .flatMap(s -> Arrays.stream(s.split("\\.")))
+        .anyMatch(ABC_DECORATORS::contains)) {
         return;
       }
 
