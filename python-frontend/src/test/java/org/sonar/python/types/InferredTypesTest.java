@@ -202,6 +202,19 @@ public class InferredTypesTest {
   }
 
   @Test
+  public void test_annotated_type_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import Annotated",
+      "x : Annotated[str, y]"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(STR);
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(DeclaredType.class);
+    assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
+      .containsExactlyInAnyOrder("str");
+  }
+
+  @Test
   public void test_text_annotation() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Text",

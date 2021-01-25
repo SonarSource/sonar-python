@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -164,6 +165,9 @@ public class InferredTypes {
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
+      if (isAnnotatedSubscription(subscription)) {
+        return declaredTypeFromTypeAnnotation(subscription.subscripts().expressions().get(0), builtinSymbols);
+      }
       return TreeUtils.getSymbolFromTree(subscription.object())
         .map(symbol -> {
           List<DeclaredType> args = subscription.subscripts().expressions().stream()
@@ -196,6 +200,9 @@ public class InferredTypes {
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
+      if (isAnnotatedSubscription(subscription)) {
+        return runtimeTypefromTypeAnnotation(subscription.subscripts().expressions().get(0), builtinSymbols);
+      }
       return TreeUtils.getSymbolFromTree(subscription.object())
         .map(symbol -> InferredTypes.genericType(symbol, subscription.subscripts().expressions(), builtinSymbols))
         .orElse(InferredTypes.anyType());
@@ -204,6 +211,11 @@ public class InferredTypes {
       return InferredTypes.runtimeType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
     }
     return InferredTypes.anyType();
+  }
+
+  private static boolean isAnnotatedSubscription(SubscriptionExpression subscription) {
+    Optional<Symbol> objectSymbol = TreeUtils.getSymbolFromTree(subscription.object());
+    return objectSymbol.isPresent() && "typing.Annotated".equals(objectSymbol.get().fullyQualifiedName());
   }
 
   private static InferredType genericType(Symbol symbol, List<Expression> subscripts, Map<String, Symbol> builtinSymbols) {
