@@ -164,27 +164,31 @@ public class InferredTypes {
       }
     }
     if (expression.is(Kind.SUBSCRIPTION)) {
-      SubscriptionExpression subscription = (SubscriptionExpression) expression;
-      if (isAnnotatedSubscription(subscription)) {
-        return declaredTypeFromTypeAnnotation(subscription.subscripts().expressions().get(0), builtinSymbols);
-      }
-      return TreeUtils.getSymbolFromTree(subscription.object())
-        .map(symbol -> {
-          List<DeclaredType> args = subscription.subscripts().expressions().stream()
-            .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
-            .collect(Collectors.toList());
-          if (args.stream().anyMatch(Objects::isNull)) {
-            args = Collections.emptyList();
-          }
-          String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
-          return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn), args) : new DeclaredType(symbol, args);
-        })
-        .orElse(null);
+      return declaredTypeFromTypeAnnotationSubscription((SubscriptionExpression) expression, builtinSymbols);
     }
     if (expression.is(Kind.NONE)) {
       return new DeclaredType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
     }
     return null;
+  }
+
+  @CheckForNull
+  private static DeclaredType declaredTypeFromTypeAnnotationSubscription(SubscriptionExpression subscription, Map<String, Symbol> builtinSymbols) {
+    if (isAnnotatedSubscription(subscription)) {
+      return declaredTypeFromTypeAnnotation(subscription.subscripts().expressions().get(0), builtinSymbols);
+    }
+    return TreeUtils.getSymbolFromTree(subscription.object())
+      .map(symbol -> {
+        List<DeclaredType> args = subscription.subscripts().expressions().stream()
+          .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
+          .collect(Collectors.toList());
+        if (args.stream().anyMatch(Objects::isNull)) {
+          args = Collections.emptyList();
+        }
+        String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
+        return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn), args) : new DeclaredType(symbol, args);
+      })
+      .orElse(null);
   }
 
   private static InferredType runtimeTypefromTypeAnnotation(Expression expression, Map<String, Symbol> builtinSymbols) {
