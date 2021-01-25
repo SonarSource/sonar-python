@@ -46,7 +46,4 @@ public interface Decorator extends Tree {
   Token rightPar();
 
   Expression expression();
-
-  @CheckForNull
-  String nameAsString();
 }

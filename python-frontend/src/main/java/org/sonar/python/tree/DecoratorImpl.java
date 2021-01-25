@@ -47,32 +47,6 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
   private final Token newLineToken;
   private final Expression expression;
   private final DottedName name;
-  private String nameAsString;
-
-  private String nameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    String exprName = qualifiedExpression.name().name();
-    Expression qualifier = qualifiedExpression.qualifier();
-    String nameOfQualifier = decoratorNameFromExpression(qualifier);
-    if (nameOfQualifier != null) {
-      exprName = nameOfQualifier + "." + exprName;
-    } else {
-      exprName = null;
-    }
-    return exprName;
-  }
-
-  private String decoratorNameFromExpression(Expression expression) {
-    if (expression.is(Kind.NAME)) {
-      return ((Name) expression).name();
-    }
-    if (expression.is(Kind.QUALIFIED_EXPR)) {
-      return nameFromQualifiedExpression((QualifiedExpression) expression);
-    }
-    if (expression.is(Kind.CALL_EXPR)) {
-      return decoratorNameFromExpression(((CallExpression) expression).callee());
-    }
-    return null;
-  }
 
   private DottedName dottedNameFromExpression(Expression expression) {
     if (expression.is(Kind.NAME)) {
@@ -103,7 +77,6 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
     this.atToken = atToken;
     this.expression = expression;
     this.name = dottedNameFromExpression(expression);
-    this.nameAsString = decoratorNameFromExpression(expression);
     this.newLineToken = newLineToken != null ? newLineToken : null;
   }
 
@@ -147,11 +120,6 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
   @Override
   public Expression expression() {
     return expression;
-  }
-
-  @Override
-  public String nameAsString() {
-    return nameAsString;
   }
 
   @Override
