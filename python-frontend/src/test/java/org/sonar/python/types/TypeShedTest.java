@@ -52,6 +52,9 @@ public class TypeShedTest {
     ClassSymbol strClass = TypeShed.typeShedClass("str");
     assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "object"), tuple(Kind.AMBIGUOUS, "Sequence"));
+    // python 3.9 support
+    assertThat(strClass.resolveMember("removeprefix")).isNotEmpty();
+    assertThat(strClass.resolveMember("removesuffix")).isNotEmpty();
   }
 
   @Test(expected = IllegalArgumentException.class)

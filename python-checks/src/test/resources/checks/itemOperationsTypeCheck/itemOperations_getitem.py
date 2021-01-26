@@ -182,3 +182,8 @@ class A:
     ...
   def f(self):
     self.data[1] # OK
+
+def python3_9():
+  from asyncio import Future
+  class A(Future[TSource]): ...
+
