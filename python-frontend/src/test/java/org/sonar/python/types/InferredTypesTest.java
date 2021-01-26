@@ -37,6 +37,7 @@ import org.sonar.python.semantic.SymbolImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.STR;
@@ -199,6 +200,16 @@ public class InferredTypesTest {
     assertThat(declaredType).isInstanceOf(DeclaredType.class);
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("bool");
+  }
+
+  @Test
+  public void test_annotated_type_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import Annotated",
+      "x : Annotated[str, y]"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(STR);
+    assertThat(fromTypeAnnotation(typeAnnotation)).isEqualTo(DECL_STR);
   }
 
   @Test
