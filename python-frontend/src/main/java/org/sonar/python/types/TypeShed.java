@@ -83,7 +83,11 @@ public class TypeShed {
     if (TypeShed.builtins == null && !InferredTypes.isInitialized()) {
       Map<String, Symbol> builtins = new HashMap<>();
       builtins.put(NONE_TYPE, new ClassSymbolImpl(NONE_TYPE, NONE_TYPE));
-      InputStream resource = TypeShed.class.getResourceAsStream("typeshed/stdlib/2and3/builtins.pyi");
+      // 2and3/builtins.pyi has been split into 2/builtins.pyi and 3/builtins.pyi
+      // for the time being sonar-python still relies on a copied version of '2and3/builtins.pyi'
+      // (https://github.com/python/typeshed/blob/b0f4900c9fbf5092ee40936f0b831641d6f49e03/stdlib/2and3/builtins.pyi)
+      // TODO: change logic to automatically merge 2/builtins.pyi and 3/builtins.pyi
+      InputStream resource = TypeShed.class.getResourceAsStream("builtins.pyi");
       PythonFile file = new TypeShedPythonFile(resource, "");
       AstNode astNode = PythonParser.create().parse(file.content());
       FileInput fileInput = new PythonTreeMaker().fileInput(astNode);

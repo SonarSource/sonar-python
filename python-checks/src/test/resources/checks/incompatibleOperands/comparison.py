@@ -18,6 +18,9 @@ def builtin_compliant():
   1 < int("1")
   4 > 3
   float(4) < 4
+  d1 = dict()
+  d2 = dict()
+  r = d1 | d2
 
 
 def custom_noncompliant():
