@@ -54,9 +54,16 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkDocString(ctx, ((FileInput) ctx.syntaxNode()).docstring()));
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> checkFileInput(ctx, (FileInput) ctx.syntaxNode()));
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkDocString(ctx, ((FunctionDef) ctx.syntaxNode()).docstring()));
     context.registerSyntaxNodeConsumer(Kind.CLASSDEF, ctx -> checkDocString(ctx, ((ClassDef) ctx.syntaxNode()).docstring()));
+  }
+
+  private static void checkFileInput(SubscriptionContext ctx, FileInput fileInput) {
+    if ("__init__.py".equals(ctx.pythonFile().fileName()) && fileInput.statements() == null) {
+      return;
+    }
+    checkDocString(ctx, fileInput.docstring());
   }
 
   private static void checkDocString(SubscriptionContext ctx, @CheckForNull StringLiteral docstring) {

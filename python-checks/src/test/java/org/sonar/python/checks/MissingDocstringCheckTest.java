@@ -26,17 +26,22 @@ public class MissingDocstringCheckTest {
 
   @Test
   public void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/missingDocstring.py", new MissingDocstringCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/missingDocstring.py", new MissingDocstringCheck());
   }
 
   @Test
   public void testMissingDocStringAtModuleLevel() {
-    PythonCheckVerifier.verify("src/test/resources/checks/missingDocstringAtModuleLevel.py", new MissingDocstringCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/missingDocstringAtModuleLevel.py", new MissingDocstringCheck());
   }
 
   @Test
   public void testEmptyModule() {
-    PythonCheckVerifier.verify("src/test/resources/checks/emptyModule.py", new MissingDocstringCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/emptyModule.py", new MissingDocstringCheck());
   }
 
+  @Test
+  public void __init__without_docstring() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/missing_docstring/empty_init/__init__.py", new MissingDocstringCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/nonempty_init/__init__.py", new MissingDocstringCheck());
+  }
 }
