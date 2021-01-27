@@ -19,8 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -32,8 +30,6 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
@@ -48,35 +44,10 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
   private final Expression expression;
   private final DottedName name;
 
-  private DottedName dottedNameFromExpression(Expression expression) {
-    if (expression.is(Kind.NAME)) {
-      return new DottedNameImpl(Collections.singletonList((Name) expression));
-    } else if (expression.is(Kind.QUALIFIED_EXPR)) {
-      return dottedNameFromQualifiedExpression((QualifiedExpression) expression);
-    } else if (expression.is(Kind.CALL_EXPR)) {
-      CallExpression callExpression = (CallExpression) expression;
-      Expression callee = callExpression.callee();
-      return dottedNameFromExpression(callee);
-    }
-    return null;
-  }
-
-  private DottedName dottedNameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    Name exprName = qualifiedExpression.name();
-    Expression qualifier = qualifiedExpression.qualifier();
-    DottedName dottedNameOfQualifier = dottedNameFromExpression(qualifier);
-    if (dottedNameOfQualifier != null) {
-      List<Name> names = new ArrayList<>(dottedNameOfQualifier.names());
-      names.add(exprName);
-      return new DottedNameImpl(names);
-    }
-    return null;
-  }
-
   public DecoratorImpl(Token atToken, Expression expression, @Nullable Token newLineToken) {
     this.atToken = atToken;
     this.expression = expression;
-    this.name = dottedNameFromExpression(expression);
+    this.name = new DottedNameImpl(TreeUtils.nameTreesFromExpression(expression));
     this.newLineToken = newLineToken != null ? newLineToken : null;
   }
 

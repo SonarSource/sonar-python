@@ -120,10 +120,9 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private static List<String> decorators(FunctionDef functionDef) {
     List<String> decoratorNames = new ArrayList<>();
     for (Decorator decorator : functionDef.decorators()) {
-      DottedName dottedName = decorator.name();
-      if (dottedName != null) {
-        String name = dottedName.names().stream().map(Name::name).collect(Collectors.joining("."));
-        decoratorNames.add(name);
+      String decoratorName = TreeUtils.decoratorNameFromExpression(decorator.expression());
+      if (decoratorName != null) {
+        decoratorNames.add(decoratorName);
       }
     }
     return decoratorNames;

@@ -22,9 +22,7 @@ package org.sonar.python.checks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -84,9 +82,8 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   private static boolean isUsedAsDecorator(@Nullable Tree tree, Tree usageTree) {
     if (tree instanceof FunctionDef) {
       return ((FunctionDef) tree).decorators().stream()
-        .map(Decorator::name)
-        .filter(Objects::nonNull)
-        .flatMap(dottedName -> dottedName.names().stream())
+        .map(Decorator::expression)
+        .flatMap(expr -> TreeUtils.nameTreesFromExpression(expr).stream())
         .anyMatch(name -> name.equals(usageTree));
     }
     return false;

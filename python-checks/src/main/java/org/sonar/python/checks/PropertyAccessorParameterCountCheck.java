@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,8 +35,6 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
-import org.sonar.plugins.python.api.tree.Decorator;
-import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -130,9 +127,7 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
       }
 
       Optional<List<Name>> setterOrDeleterDecoratorNames = pyFunctionDefTree.decorators().stream()
-        .map(Decorator::name)
-        .filter(Objects::nonNull)
-        .map(DottedName::names)
+        .map(decorator -> TreeUtils.nameTreesFromExpression(decorator.expression()))
         .filter(names -> names.size() == 2 && ("setter".equals(names.get(1).name()) || "deleter".equals(names.get(1).name())))
         .findFirst();
 

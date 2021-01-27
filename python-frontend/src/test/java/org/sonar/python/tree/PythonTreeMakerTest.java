@@ -901,7 +901,7 @@ public class PythonTreeMakerTest extends RuleTest {
     decorators = functionDef.decorators();
     assertThat(decorators).hasSize(1);
     decorator = decorators.get(0);
-    assertThat(decorator.name()).isNull();
+    assertThat(decorator.name().names()).isEmpty();
     assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isNull();
     assertThat(decorator.expression().is(Kind.QUALIFIED_EXPR)).isTrue();
   }
