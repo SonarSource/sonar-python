@@ -59,6 +59,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   private final LocationInFile classDefinitionLocation;
   @Nullable
   private String metaclassFQN = null;
+  private boolean supportsGenerics = false;
 
   public ClassSymbolImpl(ClassDef classDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(classDef.name().name(), fullyQualifiedName);
@@ -73,22 +74,23 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName) {
-    this(name, fullyQualifiedName, null, false, false, null);
+    this(name, fullyQualifiedName, null, false, false, null, false);
   }
 
   public ClassSymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable LocationInFile definitionLocation,
-                         boolean hasDecorators, boolean hasMetaClass, @Nullable String metaclassFQN) {
+                         boolean hasDecorators, boolean hasMetaClass, @Nullable String metaclassFQN, boolean supportsGenerics) {
     super(name, fullyQualifiedName);
     classDefinitionLocation = definitionLocation;
     this.hasDecorators = hasDecorators;
     this.hasMetaClass = hasMetaClass;
     this.metaclassFQN = metaclassFQN;
+    this.supportsGenerics = supportsGenerics;
     setKind(Kind.CLASS);
   }
 
   @Override
   ClassSymbolImpl copyWithoutUsages() {
-    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators, hasMetaClass, metaclassFQN);
+    ClassSymbolImpl copiedClassSymbol = new ClassSymbolImpl(name(), fullyQualifiedName(), definitionLocation(), hasDecorators, hasMetaClass, metaclassFQN, supportsGenerics);
     for (Symbol superClass : superClasses()) {
       if (superClass == this) {
         copiedClassSymbol.superClasses.add(copiedClassSymbol);
@@ -298,5 +300,13 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
 
   boolean hasSuperClassWithoutSymbol() {
     return hasSuperClassWithoutSymbol;
+  }
+
+  public boolean supportsGenerics() {
+    return supportsGenerics;
+  }
+
+  public void setSupportsGenerics(boolean supportsGenerics) {
+    this.supportsGenerics = supportsGenerics;
   }
 }

@@ -36,14 +36,20 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
+
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
+import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 
 public class CallExpressionImpl extends PyTree implements CallExpression, HasTypeDependencies {
   private final Expression callee;
@@ -108,7 +114,24 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
       }
       return type;
     }
+    if (callee.is(SUBSCRIPTION)) {
+      return getSymbolFromTree(((SubscriptionExpression) callee).object())
+        .filter(CallExpressionImpl::supportsGenerics)
+        .map(InferredTypes::runtimeType)
+        .orElse(InferredTypes.anyType());
+    }
     return InferredTypes.anyType();
+  }
+
+  private static boolean supportsGenerics(Symbol symbol) {
+    switch (symbol.kind()) {
+      case CLASS:
+        return ((ClassSymbolImpl) symbol).supportsGenerics();
+      case AMBIGUOUS:
+        return ((AmbiguousSymbol) symbol).alternatives().stream().allMatch(CallExpressionImpl::supportsGenerics);
+      default:
+        return false;
+    }
   }
 
   private static InferredType getDeclaredType(Expression callee) {
@@ -116,7 +139,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
     InferredType qualifierType = qualifiedCallee.qualifier().type();
     if (qualifierType instanceof DeclaredType) {
       Set<Optional<Symbol>> resolvedMembers = ((DeclaredType) qualifierType).alternativeTypeSymbols().stream()
-        .filter(s -> s.is(Symbol.Kind.CLASS))
+        .filter(s -> s.is(CLASS))
         .map(ClassSymbol.class::cast)
         .map(t -> t.resolveMember(qualifiedCallee.name().name()))
         .filter(Optional::isPresent)
@@ -133,7 +156,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   }
 
   private static InferredType getType(Symbol symbol) {
-    if (symbol.is(Symbol.Kind.CLASS)) {
+    if (symbol.is(CLASS)) {
       ClassSymbol classSymbol = (ClassSymbol) symbol;
       return InferredTypes.runtimeType(classSymbol);
     }

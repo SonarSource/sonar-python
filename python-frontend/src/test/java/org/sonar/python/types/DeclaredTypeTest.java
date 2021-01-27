@@ -38,10 +38,12 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.DeclaredType.fromInferredType;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_LIST;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
@@ -248,6 +250,19 @@ public class DeclaredTypeTest {
     DeclaredType unresolved = new DeclaredType(new SymbolImpl("unresolved", "unresolved"));
     union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), Arrays.asList(declaredTypeX, unresolved));
     assertThat(union.hasUnresolvedHierarchy()).isTrue();
+  }
+
+  @Test
+  public void test_generic_collections() {
+    assertThat(lastExpression(
+      "def f(x: list):",
+      "  x"
+    ).type()).isEqualTo(DECL_LIST);
+
+    assertThat(((DeclaredType) lastExpression(
+      "def f(x: list[int]):",
+      "  x"
+    ).type()).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactly("list");
   }
 
   private static ClassSymbol lastClassSymbol(String... code) {
