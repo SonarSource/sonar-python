@@ -60,4 +60,10 @@ public class FileLinesVisitorTest {
     assertThat(visitor.getExecutableLines()).containsOnly(1, 2, 4, 7, 11, 13, 14, 15, 16, 18, 20, 21, 22, 23, 25, 27, 28, 29);
   }
 
+  @Test
+  public void empty_file() {
+    FileLinesVisitor visitor = new FileLinesVisitor();
+    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "empty.py"), visitor);
+    assertThat(visitor.getExecutableLines()).isEmpty();
+  }
 }
