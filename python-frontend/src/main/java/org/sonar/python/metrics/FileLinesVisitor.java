@@ -86,8 +86,10 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private void visitNode(SubscriptionContext ctx) {
     Tree tree = ctx.syntaxNode();
     if (tree.is(Tree.Kind.FILE_INPUT)) {
-      statements--;
       handleDocString(((FileInput) tree).docstring());
+    } else {
+      statements++;
+      executableLines.add(tree.firstToken().line());
     }
     if (tree.is(Tree.Kind.CLASSDEF)) {
       classDefs++;
@@ -96,8 +98,6 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     if (tree.is(Tree.Kind.FUNCDEF)) {
       handleDocString(((FunctionDef) tree).docstring());
     }
-    statements++;
-    executableLines.add(tree.firstToken().line());
   }
 
   private void handleDocString(@Nullable StringLiteral docstring) {
