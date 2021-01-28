@@ -220,7 +220,8 @@ public class CallExpressionImplTest {
     assertThat(lastExpressionInFunction("from collections import OrderedDict; OrderedDict[str, int]()").type().canOnlyBe("collections.OrderedDict")).isTrue();
     assertThat(lastExpressionInFunction("from collections import Counter; Counter[int]()").type().canOnlyBe("collections.Counter")).isTrue();
     assertThat(lastExpressionInFunction("from collections import ChainMap; ChainMap[str, int]()").type().canOnlyBe("collections.ChainMap")).isTrue();
-    assertThat(lastExpressionInFunction("from foo import bar; bar[str]()").type().canOnlyBe("bar.foo")).isFalse();
+    assertThat(lastExpressionInFunction("from foo import bar; bar[str]()").type()).isEqualTo(anyType());
+    assertThat(lastExpressionInFunction("int[str]()").type()).isEqualTo(anyType());
   }
 
 }
