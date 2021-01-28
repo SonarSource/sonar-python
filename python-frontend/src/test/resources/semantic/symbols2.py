@@ -66,7 +66,13 @@ def func_wrapping_class():
 
 def var_with_usages_in_decorator():
     x = 10
+    y = 10
+    z = 10
     @x
+    def foo(): pass
+    @y.bar
+    def foo(): pass
+    @z.bar()
     def foo(): pass
 
 def function_with_unused_import():

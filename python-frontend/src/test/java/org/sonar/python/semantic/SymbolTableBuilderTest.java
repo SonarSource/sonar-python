@@ -245,9 +245,13 @@ public class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("var_with_usages_in_decorator");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
-    assertThat(symbolByName.keySet()).containsOnly("x", "foo");
+    assertThat(symbolByName.keySet()).containsOnly("x", "y", "z", "foo");
     Symbol x = symbolByName.get("x");
     assertThat(x.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+    Symbol y = symbolByName.get("y");
+    assertThat(y.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+    Symbol z= symbolByName.get("z");
+    assertThat(z.usages()).extracting(Usage::kind).containsOnly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
   }
 
   @Test
@@ -320,9 +324,9 @@ public class SymbolTableBuilderTest {
     FunctionDef functionTree = functionTreesByName.get("scope_of_comprehension");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).containsOnlyKeys("x");
-    assertThat(symbolByName.get("x").usages()).extracting(u -> u.tree().firstToken().line()).containsExactly(102, 104).doesNotContain(103);
+    assertThat(symbolByName.get("x").usages()).extracting(u -> u.tree().firstToken().line()).containsExactly(108, 110).doesNotContain(109);
     Name name = (Name) ((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0)).comprehensionFor().loopExpression();
-    assertThat(name.symbol().usages()).extracting(u -> u.tree().firstToken().line()).doesNotContain(102, 104).containsExactly(103, 103);
+    assertThat(name.symbol().usages()).extracting(u -> u.tree().firstToken().line()).doesNotContain(108, 110).containsExactly(109, 109);
   }
 
   @Test

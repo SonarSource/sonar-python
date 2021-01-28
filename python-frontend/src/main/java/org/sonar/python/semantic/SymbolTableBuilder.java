@@ -647,11 +647,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitDecorator(Decorator decorator) {
-      super.visitDecorator(decorator);
-    }
-
-    @Override
     public void visitName(Name pyNameTree) {
       if (!pyNameTree.isVariable()) {
         return;

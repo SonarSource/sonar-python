@@ -287,6 +287,7 @@ public class TreeUtils {
     return exprName;
   }
 
+  @CheckForNull
   public static String decoratorNameFromExpression(Expression expression) {
     if (expression.is(Kind.NAME)) {
       return ((Name) expression).name();
