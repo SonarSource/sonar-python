@@ -47,7 +47,6 @@ public interface Decorator extends Tree {
   Token leftPar();
 
   @CheckForNull
-  @Deprecated
   ArgList arguments();
 
   @CheckForNull

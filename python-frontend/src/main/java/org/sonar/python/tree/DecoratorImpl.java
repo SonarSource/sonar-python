@@ -78,7 +78,6 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
 
   @CheckForNull
   @Override
-  @Deprecated
   public ArgList arguments() {
     if (expression.is(Kind.CALL_EXPR)) {
       return ((CallExpression) expression).argumentList();
