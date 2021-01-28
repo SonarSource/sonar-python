@@ -300,31 +300,6 @@ public class TreeUtils {
     return null;
   }
 
-  public static List<Name> nameTreesFromExpression(Expression expression) {
-    if (expression.is(Kind.NAME)) {
-      List<Name> result = new ArrayList<>();
-      result.add((Name) expression);
-      return result;
-    } else if (expression.is(Kind.QUALIFIED_EXPR)) {
-      return nameTreesFromQualifiedExpression((QualifiedExpression) expression);
-    } else if (expression.is(Kind.CALL_EXPR)) {
-      CallExpression callExpression = (CallExpression) expression;
-      Expression callee = callExpression.callee();
-      return nameTreesFromExpression(callee);
-    }
-    return Collections.emptyList();
-  }
-
-  private static List<Name> nameTreesFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    Name exprName = qualifiedExpression.name();
-    Expression qualifier = qualifiedExpression.qualifier();
-    List<Name> names = nameTreesFromExpression(qualifier);
-    if (!names.isEmpty()) {
-      names.add(exprName);
-    }
-    return names;
-  }
-
   @CheckForNull
   public static LocationInFile locationInFile(Tree tree, @Nullable String fileId) {
     if (fileId == null) {

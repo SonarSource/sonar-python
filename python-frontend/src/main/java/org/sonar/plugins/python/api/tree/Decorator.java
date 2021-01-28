@@ -43,11 +43,14 @@ public interface Decorator extends Tree {
   DottedName name();
 
   @CheckForNull
+  @Deprecated
   Token leftPar();
 
   @CheckForNull
+  @Deprecated
   ArgList arguments();
 
   @CheckForNull
+  @Deprecated
   Token rightPar();
 }

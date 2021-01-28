@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -83,8 +84,8 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
     if (tree instanceof FunctionDef) {
       return ((FunctionDef) tree).decorators().stream()
         .map(Decorator::expression)
-        .flatMap(expr -> TreeUtils.nameTreesFromExpression(expr).stream())
-        .anyMatch(name -> name.equals(usageTree));
+        .map(expression -> expression.is(Tree.Kind.CALL_EXPR) ? ((CallExpression) expression).callee() : expression)
+        .anyMatch(expression -> expression.equals(usageTree));
     }
     return false;
   }

@@ -19,6 +19,8 @@
  */
 package org.sonar.python.tree;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,6 +32,8 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
@@ -47,7 +51,7 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
   public DecoratorImpl(Token atToken, Expression expression, @Nullable Token newLineToken) {
     this.atToken = atToken;
     this.expression = expression;
-    this.name = new DottedNameImpl(TreeUtils.nameTreesFromExpression(expression));
+    this.name = new DottedNameImpl(nameTreesFromExpression(expression));
     this.newLineToken = newLineToken != null ? newLineToken : null;
   }
 
@@ -57,12 +61,14 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
   }
 
   @Override
+  @Deprecated
   public DottedName name() {
     return name;
   }
 
   @CheckForNull
   @Override
+  @Deprecated
   public Token leftPar() {
     if (expression.is(Kind.CALL_EXPR)) {
       return ((CallExpression) expression).leftPar();
@@ -72,6 +78,7 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
 
   @CheckForNull
   @Override
+  @Deprecated
   public ArgList arguments() {
     if (expression.is(Kind.CALL_EXPR)) {
       return ((CallExpression) expression).argumentList();
@@ -81,6 +88,7 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
 
   @CheckForNull
   @Override
+  @Deprecated
   public Token rightPar() {
     if (expression.is(Kind.CALL_EXPR)) {
       return ((CallExpression) expression).rightPar();
@@ -106,5 +114,30 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
   @Override
   public Kind getKind() {
     return Kind.DECORATOR;
+  }
+
+  private static List<Name> nameTreesFromExpression(Expression expression) {
+    if (expression.is(Kind.NAME)) {
+      List<Name> result = new ArrayList<>();
+      result.add((Name) expression);
+      return result;
+    } else if (expression.is(Kind.QUALIFIED_EXPR)) {
+      return nameTreesFromQualifiedExpression((QualifiedExpression) expression);
+    } else if (expression.is(Kind.CALL_EXPR)) {
+      CallExpression callExpression = (CallExpression) expression;
+      Expression callee = callExpression.callee();
+      return nameTreesFromExpression(callee);
+    }
+    return Collections.emptyList();
+  }
+
+  private static List<Name> nameTreesFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
+    Name exprName = qualifiedExpression.name();
+    Expression qualifier = qualifiedExpression.qualifier();
+    List<Name> names = nameTreesFromExpression(qualifier);
+    if (!names.isEmpty()) {
+      names.add(exprName);
+    }
+    return names;
   }
 }
