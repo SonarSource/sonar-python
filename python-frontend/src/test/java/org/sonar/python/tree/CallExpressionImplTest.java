@@ -38,9 +38,14 @@ import org.sonar.python.types.InferredTypes;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
+import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
+import static org.sonar.python.types.InferredTypes.DICT;
+import static org.sonar.python.types.InferredTypes.LIST;
+import static org.sonar.python.types.InferredTypes.SET;
+import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.typeName;
 
@@ -202,4 +207,21 @@ public class CallExpressionImplTest {
     assertThat(type).isInstanceOf(DeclaredType.class);
     assertThat(typeName(type)).isEqualTo("B");
   }
+
+  @Test
+  public void test_generic_collections() {
+    assertThat(lastExpressionInFunction("list[int]()").type()).isEqualTo(LIST);
+    assertThat(lastExpressionInFunction("tuple[int]()").type()).isEqualTo(TUPLE);
+    assertThat(lastExpressionInFunction("dict[str, int]()").type()).isEqualTo(DICT);
+    assertThat(lastExpressionInFunction("set[int]()").type()).isEqualTo(SET);
+    assertThat(lastExpressionInFunction("frozenset[int]()").type().canOnlyBe("frozenset")).isTrue();
+    assertThat(lastExpressionInFunction("from collections import deque; deque[int]()").type().canOnlyBe("collections.deque")).isTrue();
+    assertThat(lastExpressionInFunction("from collections import defaultdict; defaultdict[str, int]()").type().canOnlyBe("collections.defaultdict")).isTrue();
+    assertThat(lastExpressionInFunction("from collections import OrderedDict; OrderedDict[str, int]()").type().canOnlyBe("collections.OrderedDict")).isTrue();
+    assertThat(lastExpressionInFunction("from collections import Counter; Counter[int]()").type().canOnlyBe("collections.Counter")).isTrue();
+    assertThat(lastExpressionInFunction("from collections import ChainMap; ChainMap[str, int]()").type().canOnlyBe("collections.ChainMap")).isTrue();
+    assertThat(lastExpressionInFunction("from foo import bar; bar[str]()").type()).isEqualTo(anyType());
+    assertThat(lastExpressionInFunction("int[str]()").type()).isEqualTo(anyType());
+  }
+
 }

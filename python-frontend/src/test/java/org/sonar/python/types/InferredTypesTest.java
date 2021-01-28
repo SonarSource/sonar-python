@@ -301,11 +301,11 @@ public class InferredTypesTest {
     assertThat(InferredTypes.typeClassLocation(STR)).isNull();
 
     LocationInFile locationA = new LocationInFile("foo.py", 1, 1, 1, 1);
-    RuntimeType aType = new RuntimeType(new ClassSymbolImpl("A", "mod.A", locationA, false, false, null));
+    RuntimeType aType = new RuntimeType(new ClassSymbolImpl("A", "mod.A", locationA, false, false, null, false));
     assertThat(InferredTypes.typeClassLocation(aType)).isEqualTo(locationA);
 
     LocationInFile locationB = new LocationInFile("foo.py", 1, 2, 1, 2);
-    RuntimeType bType = new RuntimeType(new ClassSymbolImpl("B", "mod.B", locationB, false, false, null));
+    RuntimeType bType = new RuntimeType(new ClassSymbolImpl("B", "mod.B", locationB, false, false, null, false));
     assertThat(InferredTypes.typeClassLocation(or(aType, bType))).isNull();
     assertThat(InferredTypes.typeClassLocation(InferredTypes.anyType())).isNull();
   }

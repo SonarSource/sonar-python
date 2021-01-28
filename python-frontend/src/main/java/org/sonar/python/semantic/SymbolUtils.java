@@ -119,6 +119,9 @@ public class SymbolUtils {
     if (argumentSymbol == null) {
       classSymbol.setHasSuperClassWithoutSymbol();
     } else {
+      if ("typing.Generic".equals(argumentSymbol.fullyQualifiedName())) {
+        classSymbol.setSupportsGenerics(true);
+      }
       Symbol normalizedArgumentSymbol = normalizeSymbol(argumentSymbol, pythonFile, symbolsByName);
       if (normalizedArgumentSymbol != null) {
         classSymbol.addSuperClass(normalizedArgumentSymbol);
