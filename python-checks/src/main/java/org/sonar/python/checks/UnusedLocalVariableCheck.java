@@ -24,6 +24,7 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
@@ -72,8 +73,16 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static boolean hasOnlyBindingUsages(Symbol symbol) {
     List<Usage> usages = symbol.usages();
+    if (isOnlyTypeAnnotation(usages)) {
+      return false;
+    }
     return usages.stream().noneMatch(usage -> usage.kind() == Usage.Kind.IMPORT)
       && usages.stream().allMatch(Usage::isBindingUsage);
+  }
+
+  private static boolean isOnlyTypeAnnotation(List<Usage> usages) {
+    return usages.size() == 1 && usages.get(0).isBindingUsage() &&
+      TreeUtils.firstAncestor(usages.get(0).tree(), t -> t.is(Kind.ANNOTATED_ASSIGNMENT) && ((AnnotatedAssignment) t).assignedValue() == null) != null;
   }
 
   private static boolean isTupleDeclaration(Tree tree) {
