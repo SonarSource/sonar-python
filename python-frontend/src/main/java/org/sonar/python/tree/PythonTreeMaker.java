@@ -566,12 +566,9 @@ public class PythonTreeMaker {
 
   private Decorator decorator(AstNode astNode) {
     Token atToken = toPyToken(astNode.getFirstChild(PythonPunctuator.AT).getToken());
-    DottedName dottedName = dottedName(astNode.getFirstChild(PythonGrammar.DOTTED_NAME));
-    Token lPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken());
-    Token rPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS) == null ? null : toPyToken(astNode.getFirstChild(PythonPunctuator.RPARENTHESIS).getToken());
-    ArgList argListTree = argList(astNode.getFirstChild(PythonGrammar.ARGLIST));
+    Expression expression = expression(astNode.getFirstChild(PythonGrammar.EXPR));
     Token newLineToken = astNode.getFirstChild(PythonTokenType.NEWLINE) == null ? null : toPyToken(astNode.getFirstChild(PythonTokenType.NEWLINE).getToken());
-    return new DecoratorImpl(atToken, dottedName, lPar, argListTree, rPar, newLineToken);
+    return new DecoratorImpl(atToken, expression, newLineToken);
   }
 
   private static boolean isMethodDefinition(AstNode node) {

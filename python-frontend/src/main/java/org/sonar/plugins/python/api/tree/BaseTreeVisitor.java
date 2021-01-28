@@ -454,8 +454,7 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitDecorator(Decorator decorator) {
-    scan(decorator.name());
-    scan(decorator.arguments());
+    scan(decorator.expression());
   }
 
   public void visitToken(Token token) {

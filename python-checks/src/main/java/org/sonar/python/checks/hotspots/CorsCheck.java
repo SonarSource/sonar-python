@@ -234,10 +234,11 @@ public class CorsCheck extends PythonSubscriptionCheck {
 
   private static void checkFlaskDecorator(SubscriptionContext ctx) {
     Decorator decorator = (Decorator) ctx.syntaxNode();
-    List<Name> names = decorator.name().names();
-
-    if (names.size() == 1) {
-      Symbol symbol = names.get(0).symbol();
+    Expression expression = decorator.expression();
+    if (expression.is(CALL_EXPR)) {
+      expression = ((CallExpression) expression).callee();
+    }
+    TreeUtils.getSymbolFromTree(expression).ifPresent(symbol -> {
       if (isSymbol(symbol, "flask_cors.cross_origin")) {
         ArgList arguments = decorator.arguments();
         if (arguments == null) {
@@ -250,9 +251,8 @@ public class CorsCheck extends PythonSubscriptionCheck {
             ctx.addIssue(decorator, MESSAGE);
           }
         });
-
       }
-    }
+    });
   }
 
   private static void checkWerkzeugHeaders(SubscriptionContext ctx) {

@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -44,6 +45,7 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -269,6 +271,32 @@ public class TreeUtils {
   public static String nameFromExpression(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       return ((Name) expression).name();
+    }
+    return null;
+  }
+
+  private static String nameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
+    String exprName = qualifiedExpression.name().name();
+    Expression qualifier = qualifiedExpression.qualifier();
+    String nameOfQualifier = decoratorNameFromExpression(qualifier);
+    if (nameOfQualifier != null) {
+      exprName = nameOfQualifier + "." + exprName;
+    } else {
+      exprName = null;
+    }
+    return exprName;
+  }
+
+  @CheckForNull
+  public static String decoratorNameFromExpression(Expression expression) {
+    if (expression.is(Kind.NAME)) {
+      return ((Name) expression).name();
+    }
+    if (expression.is(Kind.QUALIFIED_EXPR)) {
+      return nameFromQualifiedExpression((QualifiedExpression) expression);
+    }
+    if (expression.is(Kind.CALL_EXPR)) {
+      return decoratorNameFromExpression(((CallExpression) expression).callee());
     }
     return null;
   }

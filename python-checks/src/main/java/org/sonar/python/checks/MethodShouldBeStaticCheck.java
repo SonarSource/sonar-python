@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.CheckUtils.classHasInheritance;
 import static org.sonar.python.checks.CheckUtils.getParentClassDef;
@@ -100,8 +101,8 @@ public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {
 
   private static boolean isStatic(FunctionDef funcDef) {
     return funcDef.decorators().stream()
-      .map(d -> d.name().names().get(d.name().names().size() - 1))
-      .anyMatch(n -> n.name().equals("staticmethod") || n.name().equals("classmethod"));
+      .map(d -> TreeUtils.decoratorNameFromExpression(d.expression()))
+      .anyMatch(n -> "staticmethod".equals(n) || "classmethod".equals(n));
   }
 
   private static boolean isBuiltInMethod(FunctionDef funcDef) {

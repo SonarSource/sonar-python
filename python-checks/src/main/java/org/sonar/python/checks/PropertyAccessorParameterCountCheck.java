@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -112,8 +113,8 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
     public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
       // First check if the function definition has a @property decorator
       boolean hasPropertyDecorator = pyFunctionDefTree.decorators().stream()
-        .map(decorator -> decorator.name().names())
-        .anyMatch(names -> names.size() == 1 && "property".equals(names.get(0).name()));
+        .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+        .anyMatch("property"::equals);
 
       if (hasPropertyDecorator) {
         decoratorStyleProperties.compute(pyFunctionDefTree.name().name(), (key, value) -> {
@@ -126,14 +127,16 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
         return;
       }
 
-      Optional<List<Name>> setterOrDeleterDecoratorNames = pyFunctionDefTree.decorators().stream()
-        .map(decorator -> decorator.name().names())
-        .filter(names -> names.size() == 2 && ("setter".equals(names.get(1).name()) || "deleter".equals(names.get(1).name())))
+      Optional<String[]> setterOrDeleterDecoratorNames = pyFunctionDefTree.decorators().stream()
+        .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+        .filter(Objects::nonNull)
+        .map(decoratorName -> decoratorName.split("\\."))
+        .filter(names -> names.length == 2 && ("setter".equals(names[1]) || "deleter".equals(names[1])))
         .findFirst();
 
       setterOrDeleterDecoratorNames.ifPresent(names -> {
-        String propertyName = names.get(0).name();
-        String accessor = names.get(1).name();
+        String propertyName = names[0];
+        String accessor = names[1];
         decoratorStyleProperties.compute(propertyName, (key, value) -> {
           if (value == null) {
             // This should not happen in a valid python code (e.g. @foo.setter cannot be used before declaring foo), but be defensive.

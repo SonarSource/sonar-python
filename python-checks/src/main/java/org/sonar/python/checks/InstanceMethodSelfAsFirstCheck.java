@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -31,6 +30,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -68,8 +68,8 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isNonInstanceMethodDecorator(Decorator decorator) {
-    String fqn = decorator.name().names().stream().map(Name::name).collect(Collectors.joining("."));
-    return this.getExcludedDecorators().stream().anyMatch(fqn::contains);
+    String fqn = TreeUtils.decoratorNameFromExpression(decorator.expression());
+    return fqn != null && this.getExcludedDecorators().stream().anyMatch(fqn::contains);
   }
 
   private static boolean isExceptionalUsageInClassBody(Usage usage, ClassDef parentClass) {
@@ -83,8 +83,9 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   private static boolean isUsedAsDecorator(@Nullable Tree tree, Tree usageTree) {
     if (tree instanceof FunctionDef) {
       return ((FunctionDef) tree).decorators().stream()
-        .flatMap(decorator -> decorator.name().names().stream())
-        .anyMatch(name -> name.equals(usageTree));
+        .map(Decorator::expression)
+        .map(expression -> expression.is(Tree.Kind.CALL_EXPR) ? ((CallExpression) expression).callee() : expression)
+        .anyMatch(expression -> expression.equals(usageTree));
     }
     return false;
   }

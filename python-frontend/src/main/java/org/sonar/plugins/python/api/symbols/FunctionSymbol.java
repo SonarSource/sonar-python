@@ -42,6 +42,11 @@ public interface FunctionSymbol extends Symbol {
 
   boolean isInstanceMethod();
 
+  /**
+   * Returns the known names of the decorators.
+   * It might not be a reliable way to infer the number of decorators
+   * as they can take more complex expressions since Python 3.9
+   */
   List<String> decorators();
 
   boolean hasDecorators();

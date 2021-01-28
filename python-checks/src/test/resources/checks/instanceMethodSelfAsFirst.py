@@ -176,3 +176,9 @@ class AnotherEdgeCase:
         pass
 
 AnotherEdgeCase = 1
+
+def used_as_decorator_call(method):  # OK
+  return method
+
+@used_as_decorator_call()
+def decorated(self): ...

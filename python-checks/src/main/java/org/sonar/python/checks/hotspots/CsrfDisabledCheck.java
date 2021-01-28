@@ -24,11 +24,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -121,7 +123,10 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
   /** Raises issue whenever a decorator with something about "CSRF" and "exempt" in the combined name is found. */
   private static void decoratorCsrfExemptCheck(SubscriptionContext subscriptionContext) {
     Decorator decorator = (Decorator) subscriptionContext.syntaxNode();
-    List<String> names = decorator.name().names().stream().map(Name::name).collect(Collectors.toList());
+    List<String> names = Stream.of(TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .filter(Objects::nonNull)
+      .flatMap(s -> Arrays.stream(s.split("\\.")))
+      .collect(Collectors.toList());
     // This is a temporary workaround until symbol resolution works for decorators.
     // Use the actual functions with FQNs from DANGEROUS_DECORATORS once that's fixed.
     // Related ticket: https://jira.sonarsource.com/browse/SONARPY-681

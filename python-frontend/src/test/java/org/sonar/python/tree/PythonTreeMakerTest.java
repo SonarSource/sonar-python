@@ -878,6 +878,34 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(funcDef("def func(a, b, /, **kwargs): ...").parameters().all()).hasSize(4);
   }
 
+  @Test
+  public void decorators() {
+    FunctionDef functionDef = funcDef("@foo()\n@bar(1)\ndef func(x): pass");
+    List<Decorator> decorators = functionDef.decorators();
+    assertThat(decorators).hasSize(2);
+    Decorator decorator = decorators.get(0);
+    assertThat(decorator.name().names().get(0).name()).isEqualTo("foo");
+    assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isEqualTo("foo");
+    assertThat(decorator.expression().is(Kind.CALL_EXPR)).isTrue();
+
+    functionDef = funcDef("@foo.bar(1)\ndef func(x): pass");
+    decorators = functionDef.decorators();
+    assertThat(decorators).hasSize(1);
+    decorator = decorators.get(0);
+    assertThat(decorator.name().names().get(0).name()).isEqualTo("foo");
+    assertThat(decorator.name().names().get(1).name()).isEqualTo("bar");
+    assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isEqualTo("foo.bar");
+    assertThat(decorator.expression().is(Kind.CALL_EXPR)).isTrue();
+
+    functionDef = funcDef("@buttons[\"hello\"].clicked.connect\ndef func(x): pass");
+    decorators = functionDef.decorators();
+    assertThat(decorators).hasSize(1);
+    decorator = decorators.get(0);
+    assertThat(decorator.name().names()).isEmpty();
+    assertThat(TreeUtils.decoratorNameFromExpression(decorator.expression())).isNull();
+    assertThat(decorator.expression().is(Kind.QUALIFIED_EXPR)).isTrue();
+  }
+
   private FunctionDef funcDef(String code) {
     setRootRule(PythonGrammar.FUNCDEF);
     return parse(code, treeMaker::funcDefStatement);
