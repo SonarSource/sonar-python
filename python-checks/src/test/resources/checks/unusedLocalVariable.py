@@ -66,3 +66,14 @@ def for_loops():
 def unused_import():
     import foo        # OK, should be handled in a dedicated rule
     from x import y   # OK, should be handled in a dedicated rule
+
+def no_fp_type_annotation():
+    value: str  # OK
+
+def no_fp_type_annotation_2():
+    value: str  # OK
+    return [int(value) for value in something()]
+
+def no_fn_type_annotation_with_assignment():
+    value: str = "hello"  # Noncompliant
+    return [int(value) for value in something()]
