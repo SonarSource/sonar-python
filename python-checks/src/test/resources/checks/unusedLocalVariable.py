@@ -77,3 +77,11 @@ def no_fp_type_annotation_2():
 def no_fn_type_annotation_with_assignment():
     value: str = "hello"  # Noncompliant
     return [int(value) for value in something()]
+
+def no_fp_f_string_conditional_expr(p):
+    x = 42 # OK
+    f"{x if p != 0 else 0}"
+
+def no_fp_f_string_conditional_expr_2(p):
+    x = 42 # OK
+    f"something {x if p != 0 else 0} something"
