@@ -1306,7 +1306,7 @@ public class PythonTreeMaker {
   }
 
   private FormattedExpression formattedExpression(AstNode expressionNode) {
-    Expression exp = expression(expressionNode.getFirstChild(PythonGrammar.EXPR));
+    Expression exp = expression(expressionNode.getFirstChild(PythonGrammar.TEST));
     AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
     FormatSpecifier formatSpecifier = formatSpecifier(expressionNode);

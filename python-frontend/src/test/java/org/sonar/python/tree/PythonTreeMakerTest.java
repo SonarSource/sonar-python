@@ -1930,6 +1930,11 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(expr.is(Tree.Kind.NAME)).isTrue();
     assertThat(((Name) expr).name()).isEqualTo("x");
 
+    expr = parseInterpolated("{x if p != 0 else 0}").expression();
+    assertThat(expr.is(Kind.CONDITIONAL_EXPR)).isTrue();
+    assertThat(((ConditionalExpression) expr).trueExpression().is(Kind.NAME)).isTrue();
+    assertThat(((ConditionalExpression) expr).falseExpression().is(Kind.NUMERIC_LITERAL)).isTrue();
+
     expr = parseInterpolated("{\"}\" + value6}").expression();
     assertThat(expr.is(Tree.Kind.PLUS)).isTrue();
     expr = parseInterpolated("{\"}}\" + value6}").expression();
@@ -1967,6 +1972,20 @@ public class PythonTreeMakerTest extends RuleTest {
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.formattedExpressions()).hasSize(1);
     assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.SET_COMPREHENSION)).isTrue();
+
+    stringLiteral = (StringLiteral) parse("f\"{x if p != 0 else 0}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.CONDITIONAL_EXPR)).isTrue();
+
+    stringLiteral = (StringLiteral) parse("f\"missing {'previous C' if pCatom is None else 'N'} atom\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.CONDITIONAL_EXPR)).isTrue();
   }
 
   @Test
