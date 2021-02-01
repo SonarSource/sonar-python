@@ -1,7 +1,7 @@
 <p>To perform secure cryptography, operation modes and padding scheme are essentials and should be used correctly according to the encryption
 algorithm:</p>
 <ul>
-  <li> For block cipher encryption algorithms (like AES), the GCM (Galois Counter Mode) mode, which <a
+  <li> For block cipher encryption algorithms (like AES), the GCM (Galois Counter Mode) mode that <a
   href="https://en.wikipedia.org/wiki/Galois/Counter_Mode#Mathematical_basis">works internally</a> with zero/no padding scheme, is recommended. At the
   opposite, these modes and/or schemes are highly discouraged:
     <ul>
@@ -70,7 +70,7 @@ AES.new(key, AES.MODE_GCM)  # Compliant
 # RSA is the recommended asymmetric cipher with OAEP padding
 cipher = PKCS1_OAEP.new(key) # Compliant
 </pre>
-<p><a href="https://cryptography.io/en/latest/installation/">pyca</a> library:</p>
+<p><a href="https://cryptography.io/en/latest/">pyca</a> library:</p>
 <pre>
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -104,8 +104,8 @@ plaintext = private_key.decrypt(
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
   Misconfiguration </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/VwAZAg">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/x/hDdGBQ">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 

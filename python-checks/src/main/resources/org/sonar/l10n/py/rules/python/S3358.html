@@ -4,15 +4,19 @@ you) scratching their heads and cursing.</p>
 <p>Instead, err on the side of clarity, and use another line to express the nested operation as a separate statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-def get_title(person):
-    return "Mr. " if person.gender == Person.MALE else "Mrs. " if person.is_married() else "Miss "  # Noncompliant
+class Job:
+    @property
+    def readable_status(self):
+        return "Running" if job.is_running else "Failed" if job.errors else "Succeeded"  # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-def get_title(person):
-    if person.gender == Person.MALE:
-        return "Mr. "
-    return "Mrs. " if person.is_married() else "Miss "
+class Job:
+    @property
+    def readable_status(self):
+        if job.is_running:
+            return "Running"
+        return "Failed" if job.errors else "Succeeded"
 </pre>
 <h2>Exceptions</h2>
 <p>No issue is raised on conditional expressions in comprehensions.</p>

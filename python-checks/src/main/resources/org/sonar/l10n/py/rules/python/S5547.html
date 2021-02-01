@@ -1,5 +1,5 @@
 <p><a href="https://en.wikipedia.org/wiki/Strong_cryptography">Strong cipher algorithms</a> are cryptographic systems resistant to cryptanalysis, they
-are not vulnerable to well-known attacks like brute force attacks for example. </p>
+are not vulnerable to well-known attacks like brute force attacks for example.</p>
 <p>A general recommendation is to only use cipher algorithms intensively tested and promoted by the cryptographic community.</p>
 <p>More specifically for block cipher, it's not recommended to use algorithm with a block size inferior than 128 bits.</p>
 <h2>Noncompliant Code Examples</h2>
@@ -23,7 +23,7 @@ cipher = ARC4.new(key) # Noncompliant: vulnerable to several attacks (see https:
 key = b'An arbitrarily long key'
 cipher = Blowfish.new(key, Blowfish.MODE_CBC) # Noncompliant: Blowfish use a 64-bit block size makes it vulnerable to birthday attacks
 </pre>
-<p><a href="https://cryptography.io/en/latest/installation/">pyca</a> library:</p>
+<p><a href="https://cryptography.io/en/latest/">pyca</a> library:</p>
 <pre>
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -71,7 +71,7 @@ from Crypto.Cipher import AES
 key = b'Sixteen byte key'
 cipher = AES.new(key, AES.MODE_CCM) # Compliant
 </pre>
-<p><a href="https://cryptography.io/en/latest/installation/">pyca</a> library:</p>
+<p><a href="https://cryptography.io/en/latest/">pyca</a> library:</p>
 <pre>
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -92,8 +92,8 @@ aes1 = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456') # Compliant
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
   </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/VwAZAg">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/x/hDdGBQ">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 
