@@ -1,4 +1,4 @@
-<p>Operating systems have global directories where any user have write access. Those folders are mostly used as temporary storage areas like
+<p>Operating systems have global directories where any user has write access. Those folders are mostly used as temporary storage areas like
 <code>/tmp</code> in Linux based systems. An application manipulating files from these folders is exposed to race conditions on filenames: a malicious
 user can try to create a file with a predictable name before the application does. A successful attack can result in other files being accessed,
 modified, corrupted or deleted. This risk is even higher if the application runs with elevated permissions.</p>
@@ -7,8 +7,8 @@ modified, corrupted or deleted. This risk is even higher if the application runs
   <li> <a href="https://nvd.nist.gov/vuln/detail/CVE-2012-2451">CVE-2012-2451</a> </li>
   <li> <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-1838">CVE-2015-1838</a> </li>
 </ul>
-<p>This rule raises an issue whenever it detects a hard-coded path to a publicly writable directory like <code>/tmp</code> (see complete list bellow).
-It also detects access to <code>TMP</code> and <code>TMPDIR</code> environment variables.</p>
+<p>This rule raises an issue whenever it detects a hard-coded path to a publicly writable directory like <code>/tmp</code> (see examples bellow). It
+also detects access to environment variables that point to publicly writable directories, e.g., <code>TMP</code> and <code>TMPDIR</code>.</p>
 <ul>
   <li> <code>/tmp</code> </li>
   <li> <code>/var/tmp</code> </li>
