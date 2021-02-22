@@ -29,6 +29,7 @@ os.umask(0)    # Noncompliant
 
 # chmod functions
 os.chmod("/tmp/fs", 0o770)  # Compliant
+os.chmod("/tmp/fs", 0770)  # Compliant (Python 2 syntax)
 os.chmod(mode=0o777)  # Compliant
 os.chmod(mode=unknown.something, path="/tmp/fs")  # Compliant
 os.chmod("/tmp/fs", "something")  # Compliant
