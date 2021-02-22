@@ -57,6 +57,9 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
     if (literalValue.startsWith("0b") || literalValue.startsWith("0B")) {
       return Integer.valueOf(literalValue.substring(2), 2);
     }
+    if (literalValue.startsWith("0o") || literalValue.startsWith("0O")) {
+      return Integer.valueOf(literalValue.substring(2), 8);
+    }
     if (valueAsString.endsWith("L") || valueAsString.endsWith("l")) {
       literalValue = literalValue.substring(0, literalValue.length() - 1);
     }
