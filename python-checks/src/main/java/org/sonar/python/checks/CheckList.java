@@ -111,6 +111,7 @@ public final class CheckList {
       FieldDuplicatesClassNameCheck.class,
       FieldNameCheck.class,
       FileComplexityCheck.class,
+      FilePermissionsCheck.class,
       FixmeCommentCheck.class,
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,

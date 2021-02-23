@@ -1886,6 +1886,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
   @Test
   public void numeric_literal_expression() {
+    testNumericLiteral("0", 0L);
     testNumericLiteral("12", 12L);
     testNumericLiteral("12L", 12L);
     testNumericLiteral("3_0", 30L);
@@ -1893,6 +1894,9 @@ public class PythonTreeMakerTest extends RuleTest {
     testNumericLiteral("0B01", 1L);
     testNumericLiteral("0B01", 1L);
     testNumericLiteral("0B101", 5L);
+    testNumericLiteral("0o777", 511L);
+    testNumericLiteral("0O777", 511L);
+    testNumericLiteral("0777", 511L);
   }
 
   private void testNumericLiteral(String code, Long expectedValue) {
