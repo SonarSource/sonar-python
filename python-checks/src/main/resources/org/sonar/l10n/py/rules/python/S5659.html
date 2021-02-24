@@ -1,0 +1,32 @@
+<p>If a JSON Web Token (JWT) is not signed with a strong cipher algorithm (or not signed at all) an attacker can forge it and impersonate user
+identities.</p>
+<ul>
+  <li> Don't use <code>none</code> algorithm to sign or verify the validity of a token. </li>
+  <li> Don't use a token without verifying its signature before. </li>
+</ul>
+<h2>Noncompliant Code Examples</h2>
+<p>For <a href="https://github.com/jpadilla/pyjwt">PyJWT</a>:</p>
+<pre>
+jwt.decode(token, verify = False)  # Noncompliant
+</pre>
+<p>For <a href="https://github.com/davedoesdev/python-jwt">python-jwt</a>:</p>
+<pre>
+jwt.process_jwt(token)  # Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<p>For <a href="https://github.com/jpadilla/pyjwt">PyJWT</a>:</p>
+<pre>
+jwt.decode(token, key, algo)
+</pre>
+<p>For <a href="https://github.com/davedoesdev/python-jwt">python-jwt</a>:</p>
+<pre>
+jwt.process_jwt(token)  #  Compliant because followed by verify_jwt()
+jwt.verify_jwt(token, key, algo)
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/347.html">MITRE, CWE-347</a> - Improper Verification of Cryptographic Signature </li>
+</ul>
+

@@ -142,6 +142,7 @@ public final class CheckList {
       ItemOperationsTypeCheck.class,
       IterationOnNonIterableCheck.class,
       JumpInFinallyCheck.class,
+      JwtVerificationCheck.class,
       LdapAuthenticationCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
