@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -75,21 +76,29 @@ public class FilePermissionsCheck extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = modeArgument.expression();
+    if(isUnsafeExpression(expression, safeModulo)) {
+      ctx.addIssue(modeArgument, MESSAGE);
+    }
+  }
+
+  private static boolean isUnsafeExpression(Expression expression, int safeModulo) {
     if (expression instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) expression).symbol();
       if (symbol != null && SENSITIVE_CONSTANTS.contains(symbol.fullyQualifiedName())) {
-        ctx.addIssue(modeArgument, MESSAGE);
-        return;
+        return true;
       }
+    }
+    if (expression.is(Tree.Kind.BITWISE_OR)) {
+      BinaryExpression binaryExpression = (BinaryExpression) expression;
+      return isUnsafeExpression(binaryExpression.leftOperand(), safeModulo) || isUnsafeExpression(binaryExpression.rightOperand(), safeModulo);
     }
     if (expression.is(Tree.Kind.NAME)) {
       expression = Expressions.singleAssignedValue(((Name) expression));
     }
     if (expression != null && expression.is(Tree.Kind.NUMERIC_LITERAL)) {
       NumericLiteral numericLiteral = (NumericLiteral) expression;
-      if (numericLiteral.valueAsLong() % 8 != safeModulo) {
-        ctx.addIssue(modeArgument, MESSAGE);
-      }
+      return numericLiteral.valueAsLong() % 8 != safeModulo;
     }
+    return false;
   }
 }

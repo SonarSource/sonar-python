@@ -81,5 +81,5 @@ os.chmod("/tmp/fs", stat.S_IROTH)  # Noncompliant
 os.chmod("/tmp/fs", stat.S_IWOTH)  # Noncompliant
 os.chmod("/tmp/fs", stat.S_IXOTH)  # Noncompliant
 os.chmod("/tmp/fs", stat.S_IRWXO)  # Noncompliant
-os.chmod("/tmp/fs", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)  # FN
-os.chmod("/tmp/fs", stat.S_IROTH | stat.S_IRGRP | stat.S_IRUSR)  # FN
+os.chmod("/tmp/fs", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)  # Noncompliant {{Make sure this permission is safe.}}
+os.chmod("/tmp/fs", stat.S_IROTH | stat.S_IRGRP | stat.S_IRUSR)  # Noncompliant {{Make sure this permission is safe.}}
