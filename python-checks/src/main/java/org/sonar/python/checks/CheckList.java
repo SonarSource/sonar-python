@@ -37,6 +37,7 @@ import org.sonar.python.checks.hotspots.HardCodedCredentialsCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpOnlyCookieCheck;
 import org.sonar.python.checks.hotspots.LoggersConfigurationCheck;
+import org.sonar.python.checks.hotspots.NonStandardCryptographicAlgorithmCheck;
 import org.sonar.python.checks.hotspots.OsExecCheck;
 import org.sonar.python.checks.hotspots.ProcessSignallingCheck;
 import org.sonar.python.checks.hotspots.PseudoRandomCheck;
@@ -158,6 +159,7 @@ public final class CheckList {
       NestedControlFlowDepthCheck.class,
       NewStyleClassCheck.class,
       NonCallableCalledCheck.class,
+      NonStandardCryptographicAlgorithmCheck.class,
       NonStringInAllPropertyCheck.class,
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
