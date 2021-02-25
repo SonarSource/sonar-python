@@ -33,12 +33,19 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+
+import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
+import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectLevelSymbolTable {
 
   private final Map<String, Set<Symbol>> globalSymbolsByModuleName;
   private Map<String, Symbol> globalSymbolsByFQN;
+  private final Set<String> djangoViewsFQN = new HashSet<>();
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -77,6 +84,8 @@ public class ProjectLevelSymbolTable {
       }
     }
     globalSymbolsByModuleName.put(fullyQualifiedModuleName, globalSymbols);
+    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
+    fileInput.accept(djangoViewsVisitor);
   }
 
   private Map<String, Symbol> globalSymbolsByFQN() {
@@ -98,5 +107,27 @@ public class ProjectLevelSymbolTable {
   @CheckForNull
   public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
     return globalSymbolsByModuleName.get(moduleName);
+  }
+
+  public boolean isDjangoView(@Nullable String fqn) {
+    return djangoViewsFQN.contains(fqn);
+  }
+
+  private class DjangoViewsVisitor extends BaseTreeVisitor {
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      Symbol calleeSymbol = callExpression.calleeSymbol();
+      if (calleeSymbol == null) {
+        return;
+      }
+      if ("django.urls.conf.path".equals(calleeSymbol.fullyQualifiedName())) {
+        RegularArgument viewArgument = nthArgumentOrKeyword(1, "view", callExpression.arguments());
+        if (viewArgument != null) {
+          getSymbolFromTree(viewArgument.expression())
+            .filter(symbol -> symbol.fullyQualifiedName() != null)
+            .ifPresent(symbol -> djangoViewsFQN.add(symbol.fullyQualifiedName()));
+        }
+      }
+    }
   }
 }

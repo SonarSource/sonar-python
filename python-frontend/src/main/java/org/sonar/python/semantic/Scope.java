@@ -115,6 +115,7 @@ class Scope {
       addBindingUsage(functionDef.name(), Usage.Kind.FUNC_DECLARATION, fullyQualifiedName);
     } else {
       FunctionSymbolImpl functionSymbol = new FunctionSymbolImpl(functionDef, fullyQualifiedName, pythonFile);
+      functionSymbol.setIsDjangoView(projectLevelSymbolTable.isDjangoView(fullyQualifiedName));
       ((FunctionDefImpl) functionDef).setFunctionSymbol(functionSymbol);
       symbols.add(functionSymbol);
       symbolsByName.put(symbolName, functionSymbol);

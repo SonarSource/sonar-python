@@ -649,4 +649,31 @@ public class ProjectLevelSymbolTableTest {
       .containsExactly(tuple(Symbol.Kind.OTHER, "foo.A"));
   }
 
+  @Test
+  public void django_views() {
+    String[] urls = {
+      "from django.urls import path, other",
+      "import views",
+      "urlpatterns = [path('foo', views.foo, name='foo'), path('baz')]",
+      "other(views.bar)",
+      "unknown()",
+    };
+    String[] views = {
+      "def foo(): ...",
+      "def bar(): ..."
+    };
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(urls), "", pythonFile("urls.py"));
+
+    assertThat(projectSymbolTable.isDjangoView("views.foo")).isTrue();
+
+    FileInput fileInput = parse(new SymbolTableBuilder("", pythonFile("views.py"), projectSymbolTable), views);
+    Map<String, Symbol> symbolByName = getSymbolByName(fileInput);
+    FunctionSymbolImpl foo = ((FunctionSymbolImpl) symbolByName.get("foo"));
+    FunctionSymbolImpl bar = ((FunctionSymbolImpl) symbolByName.get("bar"));
+    assertThat(foo.isDjangoView()).isTrue();
+    assertThat(bar.isDjangoView()).isFalse();
+  }
+
 }
