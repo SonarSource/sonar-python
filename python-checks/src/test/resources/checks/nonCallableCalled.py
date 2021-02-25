@@ -1,5 +1,5 @@
 class MyNonCallable: ...
-#     ^^^^^^^^^^^^^>
+#     ^^^^^^^^^^^^^>  {{Definition.}}
 
 class MyCallable:
     def __call__(self):
