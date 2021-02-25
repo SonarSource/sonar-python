@@ -45,7 +45,7 @@ public class NestedConditionalExpressionCheck extends PythonSubscriptionCheck {
         boolean isInsideComprehension = TreeUtils.firstAncestorOfKind(conditionalExpression, COMPREHENSION_KINDS) != null;
         if (!isInsideComprehension) {
           ctx.addIssue(conditionalExpression, "Extract this nested conditional expression into an independent statement.")
-            .secondary(((ConditionalExpression) parentConditional).ifKeyword(), null);
+            .secondary(((ConditionalExpression) parentConditional).ifKeyword(), "Parent conditional expression.");
         }
       }
     });
