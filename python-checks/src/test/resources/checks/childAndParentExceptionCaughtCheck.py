@@ -2,7 +2,7 @@ def child_with_parent():
   try:
       raise NotImplementedError()
   except (NotImplementedError, RuntimeError):  # Noncompliant {{Remove this redundant Exception class; it derives from another which is already caught.}}
-  #       ^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^<
+  #       ^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^< {{Parent class.}}
       print("Foo")
 
 def parent_with_child():
@@ -17,7 +17,7 @@ def duplicate_exception_caught():
   try:
       raise NotImplementedError()
   except (RuntimeError, RuntimeError):  # Noncompliant {{Remove this duplicate Exception class.}}
-#         ^^^^^^^^^^^^  ^^^^^^^^^^^^<
+#         ^^^^^^^^^^^^  ^^^^^^^^^^^^< {{Duplicate.}}
       print("Foo")
 
 def multiple_parents():

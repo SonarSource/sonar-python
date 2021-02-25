@@ -55,7 +55,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
       Expression currentException = caughtExceptionsWithSameSymbol.get(0);
       if (caughtExceptionsWithSameSymbol.size() > 1) {
         PreciseIssue issue = ctx.addIssue(currentException, "Remove this duplicate Exception class.");
-        caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, null));
+        caughtExceptionsWithSameSymbol.stream().skip(1).forEach(e -> issue.secondary(e, "Duplicate."));
       }
       PreciseIssue issue = null;
       for (Map.Entry<ClassSymbol, List<Expression>> otherEntry : caughtExceptionsBySymbol.entrySet()) {
@@ -82,7 +82,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
 
   private static void addSecondaryLocations(PreciseIssue issue, List<Expression> others) {
     for (Expression other : others) {
-      issue.secondary(other, null);
+      issue.secondary(other, "Parent class.");
     }
   }
 }
