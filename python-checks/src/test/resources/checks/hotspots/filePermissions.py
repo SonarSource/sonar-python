@@ -83,3 +83,12 @@ os.chmod("/tmp/fs", stat.S_IXOTH)  # Noncompliant
 os.chmod("/tmp/fs", stat.S_IRWXO)  # Noncompliant
 os.chmod("/tmp/fs", stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)  # Noncompliant {{Make sure this permission is safe.}}
 os.chmod("/tmp/fs", stat.S_IROTH | stat.S_IRGRP | stat.S_IRUSR)  # Noncompliant {{Make sure this permission is safe.}}
+x = stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO
+os.chmod("/tmp/fs", x) # Noncompliant
+y = stat.S_IRWXO
+os.chmod("/tmp/fs", y) # Noncompliant
+
+def no_soe():
+  some_val = other_val
+  other_val = some_val
+  os.chmod("/tmp/fs", other_val) # OK

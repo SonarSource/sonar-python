@@ -20,7 +20,9 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -76,12 +78,16 @@ public class FilePermissionsCheck extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = modeArgument.expression();
-    if(isUnsafeExpression(expression, safeModulo)) {
+    if(isUnsafeExpression(expression, safeModulo, new HashSet<>())) {
       ctx.addIssue(modeArgument, MESSAGE);
     }
   }
 
-  private static boolean isUnsafeExpression(Expression expression, int safeModulo) {
+  private static boolean isUnsafeExpression(Expression expression, int safeModulo, Set<Expression> checkedExpressions) {
+    if (checkedExpressions.contains(expression)) {
+      return false;
+    }
+    checkedExpressions.add(expression);
     if (expression instanceof HasSymbol) {
       Symbol symbol = ((HasSymbol) expression).symbol();
       if (symbol != null && SENSITIVE_CONSTANTS.contains(symbol.fullyQualifiedName())) {
@@ -90,14 +96,19 @@ public class FilePermissionsCheck extends PythonSubscriptionCheck {
     }
     if (expression.is(Tree.Kind.BITWISE_OR)) {
       BinaryExpression binaryExpression = (BinaryExpression) expression;
-      return isUnsafeExpression(binaryExpression.leftOperand(), safeModulo) || isUnsafeExpression(binaryExpression.rightOperand(), safeModulo);
+      return isUnsafeExpression(binaryExpression.leftOperand(), safeModulo, checkedExpressions)
+        || isUnsafeExpression(binaryExpression.rightOperand(), safeModulo, checkedExpressions);
     }
-    if (expression.is(Tree.Kind.NAME)) {
-      expression = Expressions.singleAssignedValue(((Name) expression));
-    }
-    if (expression != null && expression.is(Tree.Kind.NUMERIC_LITERAL)) {
+    if (expression.is(Tree.Kind.NUMERIC_LITERAL)) {
       NumericLiteral numericLiteral = (NumericLiteral) expression;
       return numericLiteral.valueAsLong() % 8 != safeModulo;
+    }
+    if (expression.is(Tree.Kind.NAME)) {
+      Expression singleAssignedValue = Expressions.singleAssignedValue(((Name) expression));
+      if (singleAssignedValue == null) {
+        return false;
+      }
+      return isUnsafeExpression(singleAssignedValue, safeModulo, checkedExpressions);
     }
     return false;
   }
