@@ -1,0 +1,26 @@
+{
+  "title": "Allowing both safe and unsafe HTTP methods is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cwe",
+    "sans-top25-insecure",
+    "owasp-a5"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-3752",
+  "sqKey": "S3752",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      352
+    ],
+    "OWASP": [
+      "A5"
+    ]
+  }
+}
