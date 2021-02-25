@@ -37,6 +37,9 @@ import org.sonar.plugins.python.api.tree.Tuple;
 
 @Rule(key = "S1045")
 public class UnreachableExceptCheck extends PythonSubscriptionCheck {
+
+  private static final String SECONDARY_MESSAGE = "Exceptions will be caught here.";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.TRY_STMT, ctx -> {
@@ -56,7 +59,8 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
     if (exceptionExpression == null) {
       Expression baseExceptionExpression = caughtTypes.get("BaseException");
       if (baseExceptionExpression != null) {
-        ctx.addIssue(exceptClause.exceptKeyword(), "Merge this bare \"except:\" with the \"BaseException\" one.").secondary(baseExceptionExpression, null);
+        ctx.addIssue(exceptClause.exceptKeyword(), "Merge this bare \"except:\" with the \"BaseException\" one.")
+          .secondary(baseExceptionExpression, SECONDARY_MESSAGE);
       }
       return;
     }
@@ -80,7 +84,7 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
         List<Expression> handledExceptions = retrieveAlreadyHandledExceptions(classSymbol, caughtTypes);
         if (!handledExceptions.isEmpty()) {
           PreciseIssue issue = ctx.addIssue(exceptionExpression, "Catch this exception only once; it is already handled by a previous except clause.");
-          handledExceptions.forEach(h -> issue.secondary(h, null));
+          handledExceptions.forEach(h -> issue.secondary(h, SECONDARY_MESSAGE));
         }
       }
       if (symbol != null) {

@@ -2,7 +2,7 @@ def duplicate_except():
   try:
     raise TypeError()
   except TypeError as e:
-#        ^^^^^^^^^>
+#        ^^^^^^^^^> {{Exceptions will be caught here.}}
     print(e)
   except TypeError as e:  # Noncompliant {{Catch this exception only once; it is already handled by a previous except clause.}}
 #        ^^^^^^^^^
@@ -25,7 +25,7 @@ def bare_except():
   try:
     raise ValueError()
   except BaseException:
-#        ^^^^^^^^^^^^^>
+#        ^^^^^^^^^^^^^> {{Exceptions will be caught here.}}
     pass
   except: # Noncompliant {{Merge this bare "except:" with the "BaseException" one.}}
 # ^^^^^^
