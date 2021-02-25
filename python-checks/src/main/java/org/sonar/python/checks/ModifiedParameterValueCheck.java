@@ -114,7 +114,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
         List<Tree> mutations = getMutations(parameter);
         if (!mutations.isEmpty()) {
           PreciseIssue preciseIssue = ctx.addIssue(parameter, "Change this default value to \"None\" and initialize this parameter inside the function/method.");
-          mutations.forEach(mutation -> preciseIssue.secondary(mutation, null));
+          mutations.forEach(mutation -> preciseIssue.secondary(mutation, "The parameter is modified."));
         }
       }
     });

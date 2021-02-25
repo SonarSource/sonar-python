@@ -3,7 +3,7 @@ import collections
 def list_modified(param=list()):  # Noncompliant {{Change this default value to "None" and initialize this parameter inside the function/method.}}
 #                 ^^^^^^^^^^^^
     param.append('a')
-#   ^^^^^^^^^^^^<
+#   ^^^^^^^^^^^^<  {{The parameter is modified.}}
     return param
 
 def set_modifed(param = set()): # Noncompliant
