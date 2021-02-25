@@ -62,6 +62,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
   private Symbol owner;
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
+  private boolean isDjangoView = false;
 
   FunctionSymbolImpl(FunctionDef functionDef, @Nullable String fullyQualifiedName, PythonFile pythonFile) {
     super(functionDef.name().name(), fullyQualifiedName);
@@ -97,6 +98,7 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     functionDefinitionLocation = functionSymbol.definitionLocation();
     declaredReturnType = ((FunctionSymbolImpl) functionSymbol).declaredReturnType();
     isStub = functionSymbol.isStub();
+    isDjangoView = ((FunctionSymbolImpl) functionSymbol).isDjangoView();
   }
 
   @Override
@@ -257,6 +259,14 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
 
   public void setOwner(Symbol owner) {
     this.owner = owner;
+  }
+
+  public boolean isDjangoView() {
+    return isDjangoView;
+  }
+
+  public void setIsDjangoView(boolean isDjangoView) {
+    this.isDjangoView = isDjangoView;
   }
 
   private static class ParameterImpl implements Parameter {
