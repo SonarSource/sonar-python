@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -141,9 +142,11 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
   private static class IterationOnNonIterableCheck extends IterationOnNonIterable {
 
     @Override
-    boolean isValidIterable(Expression expression, List<LocationInFile> secondaries) {
+    boolean isValidIterable(Expression expression, Map<LocationInFile, String> secondaries) {
       InferredType type = expression.type();
-      secondaries.add(InferredTypes.typeClassLocation(type));
+      String typeName = InferredTypes.typeName(type);
+      String secondaryMessage = typeName != null ? String.format(SECONDARY_MESSAGE, typeName) : DEFAULT_SECONDARY_MESSAGE;
+      secondaries.put(InferredTypes.typeClassLocation(type), secondaryMessage);
       return !containsDeclaredType(type) || type.declaresMember("__iter__") || type.declaresMember("__getitem__");
     }
 

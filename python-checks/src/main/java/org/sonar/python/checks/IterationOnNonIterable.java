@@ -19,8 +19,9 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -38,6 +39,9 @@ import org.sonar.python.api.PythonPunctuator;
 
 public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
 
+  static final String SECONDARY_MESSAGE = "Definition of \"%s\".";
+  static final String DEFAULT_SECONDARY_MESSAGE = "Type definition.";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.UNPACKING_EXPR, this::checkUnpackingExpression);
@@ -50,7 +54,7 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
   private void checkAssignment(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatement = (AssignmentStatement) ctx.syntaxNode();
     ExpressionList expressionList = assignmentStatement.lhsExpressions().get(0);
-    List<LocationInFile> secondaries = new ArrayList<>();
+    Map<LocationInFile, String> secondaries = new HashMap<>();
     if (isLhsIterable(expressionList) && !isValidIterable(assignmentStatement.assignedValue(), secondaries)) {
       reportIssue(ctx, assignmentStatement.assignedValue(), secondaries, message(assignmentStatement.assignedValue(), false));
     }
@@ -67,15 +71,15 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
   private void checkForComprehension(SubscriptionContext ctx) {
     ComprehensionFor comprehensionFor = (ComprehensionFor) ctx.syntaxNode();
     Expression expression = comprehensionFor.iterable();
-    List<LocationInFile> secondaries = new ArrayList<>();
+    Map<LocationInFile, String> secondaries = new HashMap<>();
     if (!isValidIterable(expression, secondaries)) {
       reportIssue(ctx, expression, secondaries, message(expression, false));
     }
   }
 
-  private static void reportIssue(SubscriptionContext ctx, Expression expression, List<LocationInFile> secondaries, String message) {
+  private static void reportIssue(SubscriptionContext ctx, Expression expression, Map<LocationInFile, String> secondaries, String message) {
     PreciseIssue preciseIssue = ctx.addIssue(expression, message);
-    secondaries.stream().filter(Objects::nonNull).forEach(location -> preciseIssue.secondary(location, null));
+    secondaries.keySet().stream().filter(Objects::nonNull).forEach(location -> preciseIssue.secondary(location, secondaries.get(location)));
   }
 
   private void checkYieldStatement(SubscriptionContext ctx) {
@@ -85,7 +89,7 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = yieldExpression.expressions().get(0);
-    List<LocationInFile> secondaries = new ArrayList<>();
+    Map<LocationInFile, String> secondaries = new HashMap<>();
     if (!isValidIterable(expression, secondaries)) {
       reportIssue(ctx, expression, secondaries, message(expression, false));
     }
@@ -97,7 +101,7 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = unpackingExpression.expression();
-    List<LocationInFile> secondaries = new ArrayList<>();
+    Map<LocationInFile, String> secondaries = new HashMap<>();
     if (!isValidIterable(expression, secondaries)) {
       reportIssue(ctx, expression, secondaries, message(expression, false));
     }
@@ -111,7 +115,7 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
       return;
     }
     Expression expression = testExpressions.get(0);
-    List<LocationInFile> secondaries = new ArrayList<>();
+    Map<LocationInFile, String> secondaries = new HashMap<>();
     if (!isAsync && !isValidIterable(expression, secondaries)) {
       reportIssue(ctx, expression, secondaries, message(expression, true));
     }
@@ -119,7 +123,7 @@ public abstract class IterationOnNonIterable extends PythonSubscriptionCheck {
 
   abstract boolean isAsyncIterable(Expression expression);
 
-  abstract boolean isValidIterable(Expression expression, List<LocationInFile> secondaries);
+  abstract boolean isValidIterable(Expression expression, Map<LocationInFile, String> secondaries);
 
   abstract String message(Expression expression, boolean isForLoop);
 }
