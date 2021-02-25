@@ -43,6 +43,7 @@ import static java.util.Optional.ofNullable;
 public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Disable access to external entities in XML parsing.";
+  public static final String SECONDARY_MESSAGE = "This function loads the XML code and triggers the vulnerability.";
 
   private static final String LXML_XMLPARSER = "lxml.etree.XMLParser";
   private static final String LXML_XSLT = "lxml.etree.XSLT";
@@ -71,7 +72,7 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
         getArgValueAsCallExpression(
           TreeUtils.nthArgumentOrKeyword(1, "parser", callExpression.arguments())));
       if (parserCall != null && isUnsafeParserUsage(parserCall)) {
-        ctx.addIssue(parserCall, MESSAGE).secondary(callExpression, null);
+        ctx.addIssue(parserCall, MESSAGE).secondary(callExpression, SECONDARY_MESSAGE);
       }
     }
   }
@@ -118,7 +119,7 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
         if (xsltAclCall != null && checkCallExpressionFqn(xsltAclCall, LXML_ACCESS_CONTROL)) {
           RegularArgument readNetwork = TreeUtils.argumentByKeyword("read_network", xsltAclCall.arguments());
           if (readNetwork == null || !Expressions.isFalsy(readNetwork.expression())) {
-            ctx.addIssue(xsltAclCall, MESSAGE).secondary(callExpression, null);
+            ctx.addIssue(xsltAclCall, MESSAGE).secondary(callExpression, SECONDARY_MESSAGE);
           }
         }
       } else {
@@ -136,7 +137,7 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
       if (makeParserCall != null &&
         makeParserCall.is(Tree.Kind.CALL_EXPR) &&
         checkCallExpressionFqn((CallExpression) makeParserCall, XML_SAX_MAKE_PARSER)) {
-        ctx.addIssue(callExpression, MESSAGE).secondary(makeParserCall, MESSAGE);
+        ctx.addIssue(callExpression, MESSAGE).secondary(makeParserCall, SECONDARY_MESSAGE);
       }
     }
   }
