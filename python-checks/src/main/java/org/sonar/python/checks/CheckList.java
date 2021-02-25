@@ -71,6 +71,7 @@ public final class CheckList {
       CaughtExceptionsCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,
+      CipherBlockChainingCheck.class,
       ClassComplexityCheck.class,
       ClassMethodFirstArgumentNameCheck.class,
       ClassNameCheck.class,
