@@ -22,6 +22,7 @@ package org.sonar.python.checks.hotspots;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -33,18 +34,22 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.FILE_INPUT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
+import static org.sonar.python.tree.TreeUtils.argumentByKeyword;
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 
 @Rule(key = "S3752")
@@ -65,6 +70,8 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (isDjangoView(functionDef)) {
         checkDjangoView(functionDef, ctx);
+      } else {
+        getFlaskViewDecorator(functionDef).ifPresent(callExpression -> checkFlaskView(callExpression, ctx));
       }
     });
   }
@@ -119,6 +126,41 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     return Optional.ofNullable(functionSymbol)
       .map(FunctionSymbolImpl.class::cast)
       .filter(FunctionSymbolImpl::isDjangoView)
+      .isPresent();
+  }
+
+  private static Optional<CallExpression> getFlaskViewDecorator(FunctionDef functionDef) {
+    return functionDef.decorators().stream()
+      .map(Decorator::expression)
+      .filter(expression -> expression.is(CALL_EXPR))
+      .map(CallExpression.class::cast)
+      .filter(UnsafeHttpMethodsCheck::isFlaskRouteDecorator)
+      .findFirst();
+  }
+
+  private static boolean isFlaskRouteDecorator(CallExpression callExpression) {
+    Symbol calleeSymbol = callExpression.calleeSymbol();
+    if (calleeSymbol == null) {
+      return false;
+    }
+    return calleeSymbol.name().equals("route");
+  }
+
+  private static void checkFlaskView(CallExpression callExpression, SubscriptionContext ctx) {
+    RegularArgument methodsArg = argumentByKeyword("methods", callExpression.arguments());
+    if (methodsArg != null && hasBothUnsafeAndSafeHttpMethods(methodsArg) && isFlaskImported(callExpression)) {
+      ctx.addIssue(callExpression, MESSAGE);
+    }
+  }
+
+  private static boolean isFlaskImported(CallExpression callExpression) {
+    // When SONARPY-834 will be implemented we can have a cleaner implementation
+    // checking decorator fqn to be equal to flask.blueprints.Blueprint.route
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, FILE_INPUT))
+      .filter(fileInput -> ((FileInput) fileInput).globalVariables().stream()
+          .map(Symbol::fullyQualifiedName)
+          .filter(Objects::nonNull)
+          .anyMatch(fqn -> fqn.contains("flask")))
       .isPresent();
   }
 }
