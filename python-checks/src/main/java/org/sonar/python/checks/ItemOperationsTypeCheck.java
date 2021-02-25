@@ -19,7 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
+import java.util.Map;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
@@ -41,7 +42,7 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
 
   @Override
   public boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
-                                     List<LocationInFile> secondaries) {
+                                     Map<LocationInFile, String> secondaries) {
 
     if (subscriptionObject.is(Tree.Kind.GENERATOR_EXPR)) {
       return false;
@@ -49,7 +50,8 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     if (subscriptionObject.is(Tree.Kind.CALL_EXPR)) {
       Symbol subscriptionCalleeSymbol = ((CallExpression) subscriptionObject).calleeSymbol();
       if (subscriptionCalleeSymbol != null && subscriptionCalleeSymbol.is(FUNCTION) && ((FunctionSymbol) subscriptionCalleeSymbol).isAsynchronous()) {
-        secondaries.add(((FunctionSymbol) subscriptionCalleeSymbol).definitionLocation());
+        FunctionSymbol functionSymbol = (FunctionSymbol) subscriptionCalleeSymbol;
+        secondaries.put(functionSymbol.definitionLocation(), String.format(SECONDARY_MESSAGE, functionSymbol.name()));
         return false;
       }
     }
@@ -59,12 +61,15 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
         return true;
       }
       if (symbol.is(FUNCTION, CLASS)) {
-        secondaries.add(symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation());
+        secondaries.put(symbol.is(FUNCTION) ?
+          ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation(), String.format(SECONDARY_MESSAGE, symbol.name()));
         return canHaveMethod(symbol, requiredMethod, classRequiredMethod);
       }
     }
     InferredType type = subscriptionObject.type();
-    secondaries.add(typeClassLocation(type));
+    String typeName = InferredTypes.typeName(type);
+    String secondaryMessage = typeName != null ? String.format(SECONDARY_MESSAGE, typeName) : DEFAULT_SECONDARY_MESSAGE;
+    secondaries.put(typeClassLocation(type), secondaryMessage);
     return type.canHaveMember(requiredMethod);
   }
 
