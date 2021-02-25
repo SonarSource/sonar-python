@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.HashSet;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -40,14 +41,14 @@ import static java.util.Arrays.asList;
 @Rule(key = "S3329")
 public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
 
-  private static final HashSet<String> pyCryptoSensitiveFQNs = new HashSet<>();
+  private static final HashSet<String> PYCRYPTO_SENSITIVE_FQNS = new HashSet<>();
   private static final String CRYPTOGRAPHY_SENSITIVE_FQN = "cryptography.hazmat.primitives.ciphers.Cipher";
   private static final String MESSAGE = "Use a dynamically-generated, random IV.";
 
   static {
     for (String libraryName : asList("Cryptodome", "Crypto")) {
       for (String vulnerableMethodName : asList("AES", "ARC2", "Blowfish", "CAST", "DES", "DES3")) {
-        pyCryptoSensitiveFQNs.add(String.format("%s.Cipher.%s.new", libraryName, vulnerableMethodName));
+        PYCRYPTO_SENSITIVE_FQNS.add(String.format("%s.Cipher.%s.new", libraryName, vulnerableMethodName));
       }
     }
   }
@@ -63,7 +64,7 @@ public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
     if (calleeSymbol == null || calleeSymbol.fullyQualifiedName() == null) {
       return;
     }
-    if (pyCryptoSensitiveFQNs.contains(calleeSymbol.fullyQualifiedName())) {
+    if (PYCRYPTO_SENSITIVE_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
       checkPyCryptoCall(callExpression, ctx);
     }
     if (CRYPTOGRAPHY_SENSITIVE_FQN.equals(calleeSymbol.fullyQualifiedName())) {
@@ -86,7 +87,7 @@ public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
       return;
     }
     RegularArgument initializationVector = TreeUtils.nthArgumentOrKeyword(0, "initialization_vector", modeCallExpression.arguments());
-    if (initializationVector == null || !isStaticInitializationVector(initializationVector.expression())) {
+    if (initializationVector == null || !isStaticInitializationVector(initializationVector.expression(), new HashSet<>())) {
       return;
     }
     AssignmentStatement assignmentStatement = (AssignmentStatement) TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.ASSIGNMENT_STMT);
@@ -110,7 +111,7 @@ public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
       return;
     }
     RegularArgument ivArgument = TreeUtils.nthArgumentOrKeyword(2, "iv", callExpression.arguments());
-    if (ivArgument == null || !isStaticInitializationVector(ivArgument.expression())) {
+    if (ivArgument == null || !isStaticInitializationVector(ivArgument.expression(), new HashSet<>())) {
       return;
     }
     AssignmentStatement assignmentStatement = (AssignmentStatement) TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.ASSIGNMENT_STMT);
@@ -146,7 +147,11 @@ public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
     return callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR) && ((QualifiedExpression) callExpression.callee()).name().name().equals(calleeName);
   }
 
-  private static boolean isStaticInitializationVector(Expression expression) {
+  private static boolean isStaticInitializationVector(Expression expression, Set<Expression> checkedExpressions) {
+    if (checkedExpressions.contains(expression)) {
+      return false;
+    }
+    checkedExpressions.add(expression);
     if (expression.is(Tree.Kind.CALL_EXPR) || TreeUtils.hasDescendant(expression, tree -> tree.is(Tree.Kind.CALL_EXPR))) {
       return false;
     }
@@ -155,7 +160,7 @@ public class CipherBlockChainingCheck extends PythonSubscriptionCheck {
       if (singleAssignedValue == null) {
         return false;
       }
-      return isStaticInitializationVector(singleAssignedValue);
+      return isStaticInitializationVector(singleAssignedValue, checkedExpressions);
     }
     return true;
   }

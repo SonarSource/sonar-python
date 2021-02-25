@@ -87,3 +87,9 @@ def cryptography():
   random_vector_2 = urandom(16) + 42
   enc10 = Cipher(algorithms.AES(key), modes.CBC(random_vector_2))
   enc10.encryptor()  # Compliant
+
+def no_stack_overflow_on_mutual_assignments():
+    static_vector = other_static
+    other_static = static_vector
+    enc2 = AES.new(key, AES.MODE_CBC, static_vector)
+    cipher_text = enc2.encrypt(pad(data, AES.block_size))  # OK
