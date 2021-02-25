@@ -34,4 +34,12 @@ public class UnsafeHttpMethodsCheckTest {
       ),
       new UnsafeHttpMethodsCheck());
   }
+
+  @Test
+  public void test_flask() {
+    PythonCheckVerifier.verify(Arrays.asList(
+      "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/views.py",
+      "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/otherDecorator.py"
+    ), new UnsafeHttpMethodsCheck());
+  }
 }
