@@ -57,7 +57,7 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
       if (i == 0) {
         preciseIssue = ctx.addIssue(usage.tree(), message(symbol.name()));
       } else {
-        preciseIssue.secondary(usage.tree(), null);
+        preciseIssue.secondary(usage.tree(), secondaryMessage());
       }
     }
   }
@@ -71,4 +71,6 @@ public abstract class AbstractUnreadPrivateMembersCheck extends PythonSubscripti
   abstract Symbol.Kind kind();
 
   abstract String message(String memberName);
+
+  abstract String secondaryMessage();
 }

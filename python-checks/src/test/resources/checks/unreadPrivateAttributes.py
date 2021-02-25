@@ -2,7 +2,7 @@ class A:
   __foo = 42 # Noncompliant {{Remove this unread private attribute '__foo' or refactor the code to use its value.}}
 # ^^^^^
   __foo = 43
-# ^^^^^<
+# ^^^^^< {{Also modified here.}}
   foo = 42
 
   __bar = 42

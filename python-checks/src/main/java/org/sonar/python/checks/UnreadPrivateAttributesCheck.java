@@ -48,4 +48,9 @@ public class UnreadPrivateAttributesCheck extends AbstractUnreadPrivateMembersCh
   String message(String memberName) {
     return "Remove this unread private attribute '" + memberName + "' or refactor the code to use its value.";
   }
+
+  @Override
+  String secondaryMessage() {
+    return "Also modified here.";
+  }
 }
