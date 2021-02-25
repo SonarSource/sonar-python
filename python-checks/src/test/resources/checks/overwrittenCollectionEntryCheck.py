@@ -1,7 +1,7 @@
 def numeric_key(list1, foo):
     list1[1] = "a"
     list1[2] = "a"
-#        ^^^>
+#        ^^^> {{Original value.}}
     list1[2] = "a" # Noncompliant {{Verify this is the key that was intended; a value has already been saved for it on line 3.}}
 #        ^^^
     list1[3] = "a"

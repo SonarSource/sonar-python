@@ -170,7 +170,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
           "Verify this is the key that was intended; a value has already been saved for it on line %s.",
           firstWrite.leftBracket.line());
         ctx.addIssue(secondWrite.leftBracket, secondWrite.rightBracket, message)
-          .secondary(IssueLocation.preciseLocation(firstWrite.leftBracket, firstWrite.rightBracket, null));
+          .secondary(IssueLocation.preciseLocation(firstWrite.leftBracket, firstWrite.rightBracket, "Original value."));
       }
     });
   }
