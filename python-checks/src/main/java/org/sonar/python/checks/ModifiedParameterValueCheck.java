@@ -162,7 +162,6 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     Map<Tree, String> mutations = new HashMap<>();
     for (Usage usage : paramSymbol.get().usages()) {
       getKindOfWriteUsage(paramSymbol, defaultValueType, typeMutatingMethods, usage).ifPresent(s -> mutations.put(usage.tree().parent(), s));
-
     }
     return mutations;
   }

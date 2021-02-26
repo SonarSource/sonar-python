@@ -57,11 +57,10 @@ public class IterationOnNonIterableCheck extends IterationOnNonIterable {
           return functionSymbol.hasDecorators();
         }
         if (symbol.is(Symbol.Kind.CLASS)) {
-          ClassSymbol classSymbol = (ClassSymbol) symbol;
+          ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
           secondaries.put(classSymbol.definitionLocation(), String.format(SECONDARY_MESSAGE, classSymbol.name()));
           // Metaclasses might add the method by default
-          ClassSymbolImpl classSymbolImpl = (ClassSymbolImpl) symbol;
-          return classSymbolImpl.hasSuperClassWithUnknownMetaClass() || classSymbolImpl.hasUnresolvedTypeHierarchy();
+          return classSymbol.hasSuperClassWithUnknownMetaClass() || classSymbol.hasUnresolvedTypeHierarchy();
         }
       }
     }
