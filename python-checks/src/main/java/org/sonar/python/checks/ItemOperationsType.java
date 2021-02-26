@@ -19,8 +19,8 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -37,6 +37,9 @@ import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 
 public abstract class ItemOperationsType extends PythonSubscriptionCheck {
 
+  static final String SECONDARY_MESSAGE = "Definition of \"%s\".";
+  static final String DEFAULT_SECONDARY_MESSAGE = "Type definition.";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.SUBSCRIPTION, this::checkSubscription);
@@ -47,7 +50,7 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
     if (isWithinTypeAnnotation(subscriptionExpression)) {
       return;
     }
-    List<LocationInFile> secondaries = new ArrayList<>();
+    Map<LocationInFile, String> secondaries = new HashMap<>();
     Expression subscriptionObject = subscriptionExpression.object();
     if (isWithinDelStatement(subscriptionExpression)) {
       if (!isValidSubscription(subscriptionObject, "__delitem__", null, secondaries)) {
@@ -84,13 +87,14 @@ public abstract class ItemOperationsType extends PythonSubscriptionCheck {
   }
 
   private void reportIssue(SubscriptionExpression subscriptionExpression, Expression subscriptionObject,
-                                  String missingMethod, SubscriptionContext ctx, List<LocationInFile> secondaries) {
+                           String missingMethod, SubscriptionContext ctx, Map<LocationInFile, String> secondaries) {
 
     String name = nameFromExpression(subscriptionObject);
     PreciseIssue preciseIssue = ctx.addIssue(name != null ? subscriptionExpression : subscriptionObject, message(name, missingMethod));
-    secondaries.stream().filter(Objects::nonNull).forEach(locationInFile -> preciseIssue.secondary(locationInFile, null));
+    secondaries.keySet().stream().filter(Objects::nonNull).forEach(location -> preciseIssue.secondary(location, secondaries.get(location)));
   }
 
-  public abstract boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod, List<LocationInFile> secondaries);
+  public abstract boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod, Map<LocationInFile, String> secondaries);
+
   public abstract String message(@Nullable String name, String missingMethod);
 }

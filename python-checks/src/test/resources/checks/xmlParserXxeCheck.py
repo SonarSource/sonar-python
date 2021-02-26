@@ -4,7 +4,7 @@ def xml_parser_simple():
     parser = etree.XMLParser() # Noncompliant {{Disable access to external entities in XML parsing.}}
     #        ^^^^^^^^^^^^^^^^^
     tree1 = etree.parse('ressources/xxe.xml', parser)
-    #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
+    #       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<  {{This function loads the XML code and triggers the vulnerability.}}
 
 def xml_parser_simple_resolve_entities():
     parser = etree.XMLParser(resolve_entities=True) # Noncompliant
@@ -14,7 +14,7 @@ def xml_parser_simple_resolve_entities():
 
 def xml_parser_simple_resolve_entities_inline():
     tree1 = etree.parse('ressources/xxe.xml', etree.XMLParser(resolve_entities=True)) # Noncompliant
-    #      >^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    #      >^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{This function loads the XML code and triggers the vulnerability.}}
 
 def xml_parser_resolve_entities_off():
     parser = etree.XMLParser(resolve_entities=False) # Compliant (default is no_network=True)

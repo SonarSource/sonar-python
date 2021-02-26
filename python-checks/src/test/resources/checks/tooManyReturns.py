@@ -3,12 +3,16 @@ def fun1():
         return 1
     else:
         def fun2(): # Noncompliant {{This function has 3 returns or yields, which is more than the 2 allowed.}}
+#           ^^^^
             if True:
                 return 1
+#               ^^^^^^^^< {{"return" statement.}}
             elif False:
                 return 2
+#               ^^^^^^^^< {{"return" statement.}}
             else:
                 return 3
+#               ^^^^^^^^< {{"return" statement.}}
         return 2
 
 

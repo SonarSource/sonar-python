@@ -90,7 +90,7 @@ public class UndefinedNameAllPropertyCheck extends PythonSubscriptionCheck {
       if (isUnknownSymbol(ctx.pythonFile(), symbolsByName, stringLiteral)) {
         PreciseIssue issue = ctx.addIssue(stringExpression, String.format("Change or remove this string; \"%s\" is not defined.", stringLiteral.trimmedQuotesValue()));
         if (stringExpression != stringLiteral) {
-          issue.secondary(stringLiteral, null);
+          issue.secondary(stringLiteral, "Assigned here.");
         }
       }
     }

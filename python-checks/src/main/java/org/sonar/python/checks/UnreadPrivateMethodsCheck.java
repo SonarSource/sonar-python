@@ -40,4 +40,9 @@ public class UnreadPrivateMethodsCheck extends AbstractUnreadPrivateMembersCheck
   String message(String memberName) {
     return "Remove this unused class-private '" + memberName + "' method.";
   }
+
+  @Override
+  String secondaryMessage() {
+    return null;
+  }
 }

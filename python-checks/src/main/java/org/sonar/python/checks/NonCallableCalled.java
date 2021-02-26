@@ -43,7 +43,7 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(calleeType, name));
         LocationInFile location = typeClassLocation(calleeType);
         if (location != null) {
-          preciseIssue.secondary(location, null);
+          preciseIssue.secondary(location, "Definition.");
         }
       }
     });

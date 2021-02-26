@@ -7,7 +7,9 @@ for i in range(1):
 
 for i in range(1):
     break
-    print("a") # Noncompliant [[sc=5;el=11;ec=15]]
+#   ^^^^^> {{Statement exiting the current code block.}}
+    print("a") # Noncompliant {{Delete this unreachable code or refactor the code to make it reachable.}}
+#   ^[el=+2;ec=14]
     print("b")
 
 for i in range(1):

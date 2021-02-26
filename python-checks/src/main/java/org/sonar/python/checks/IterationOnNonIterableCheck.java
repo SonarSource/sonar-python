@@ -19,7 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
+import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -38,12 +38,13 @@ public class IterationOnNonIterableCheck extends IterationOnNonIterable {
 
   private static final String MESSAGE = "Replace this expression with an iterable object.";
 
-  boolean isValidIterable(Expression expression, List<LocationInFile> secondaries) {
+  boolean isValidIterable(Expression expression, Map<LocationInFile, String> secondaries) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       Symbol calleeSymbol = callExpression.calleeSymbol();
       if (calleeSymbol != null && calleeSymbol.is(Symbol.Kind.FUNCTION) && ((FunctionSymbol) calleeSymbol).isAsynchronous()) {
-        secondaries.add(((FunctionSymbol) calleeSymbol).definitionLocation());
+        FunctionSymbol functionSymbol = (FunctionSymbol) calleeSymbol;
+        secondaries.put(functionSymbol.definitionLocation(), String.format(SECONDARY_MESSAGE, functionSymbol.name()));
         return false;
       }
     }
@@ -52,19 +53,21 @@ public class IterationOnNonIterableCheck extends IterationOnNonIterable {
       if (symbol != null) {
         if (symbol.is(Symbol.Kind.FUNCTION)) {
           FunctionSymbol functionSymbol = (FunctionSymbol) symbol;
-          secondaries.add(functionSymbol.definitionLocation());
+          secondaries.put(functionSymbol.definitionLocation(), String.format(SECONDARY_MESSAGE, functionSymbol.name()));
           return functionSymbol.hasDecorators();
         }
         if (symbol.is(Symbol.Kind.CLASS)) {
-          secondaries.add(((ClassSymbol) symbol).definitionLocation());
-          // Metaclasses might add the method by default
           ClassSymbolImpl classSymbol = (ClassSymbolImpl) symbol;
+          secondaries.put(classSymbol.definitionLocation(), String.format(SECONDARY_MESSAGE, classSymbol.name()));
+          // Metaclasses might add the method by default
           return classSymbol.hasSuperClassWithUnknownMetaClass() || classSymbol.hasUnresolvedTypeHierarchy();
         }
       }
     }
     InferredType type = expression.type();
-    secondaries.add(InferredTypes.typeClassLocation(type));
+    String typeName = InferredTypes.typeName(type);
+    String secondaryMessage = typeName != null ? String.format(SECONDARY_MESSAGE, typeName) : DEFAULT_SECONDARY_MESSAGE;
+    secondaries.put(InferredTypes.typeClassLocation(type), secondaryMessage);
     return type.canHaveMember("__iter__") || type.canHaveMember("__getitem__");
   }
 

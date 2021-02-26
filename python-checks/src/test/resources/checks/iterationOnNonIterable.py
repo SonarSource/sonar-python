@@ -76,7 +76,7 @@ def iteration_on_builtins():
   a, *rest = NotImplemented  # FN: Any type
 
   def function(): ...
-#     ^^^^^^^^>
+#     ^^^^^^^^> {{Definition of "function".}}
   a, *rest = function  # Noncompliant
 #            ^^^^^^^^
 

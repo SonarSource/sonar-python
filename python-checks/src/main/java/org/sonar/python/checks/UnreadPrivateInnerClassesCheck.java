@@ -40,4 +40,9 @@ public class UnreadPrivateInnerClassesCheck extends AbstractUnreadPrivateMembers
   String message(String memberName) {
     return "Remove this unused private '" + memberName + "' class.";
   }
+
+  @Override
+  String secondaryMessage() {
+    return null;
+  }
 }

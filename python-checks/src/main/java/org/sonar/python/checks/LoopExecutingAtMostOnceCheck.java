@@ -91,7 +91,7 @@ public class LoopExecutingAtMostOnceCheck extends PythonSubscriptionCheck {
       return;
     }
     PreciseIssue issue = ctx.addIssue(loop.firstToken(), "Refactor this loop to do more than one iteration.");
-    jumps.forEach(j -> issue.secondary(j, null));
+    jumps.forEach(j -> issue.secondary(j, "The loop stops here."));
   }
 
   private static boolean breakOfInnerLoop(CfgBlock block, CfgBranchingBlock loopBlock) {

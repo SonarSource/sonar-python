@@ -72,7 +72,7 @@ public class AfterJumpStatementCheck extends PythonSubscriptionCheck {
         cfg.blocks().stream()
           .filter(block -> cfgBlock.equals(block.syntacticSuccessor()))
           .map(block -> block.elements().get(block.elements().size() - 1))
-          .forEach(jumpStatement -> issue.secondary(jumpStatement, null));
+          .forEach(jumpStatement -> issue.secondary(jumpStatement, "Statement exiting the current code block."));
       }
     }
   }

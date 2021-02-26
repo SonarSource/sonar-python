@@ -57,7 +57,7 @@ def builtins_not_supporting_getitem():
   NotImplemented[0]  # FN: Any type
 
   def function(): ...
-#     ^^^^^^^^>
+#     ^^^^^^^^> {{Definition of "function".}}
 
   function[0]  # Noncompliant
 # ^^^^^^^^^^^

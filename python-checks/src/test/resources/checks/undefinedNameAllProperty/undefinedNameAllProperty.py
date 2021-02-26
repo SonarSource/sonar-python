@@ -3,7 +3,7 @@ from unresolved import Unresolved
 from .same_package import same_package_function
 
 var = "unknown"
-#     ^^^^^^^^^>
+#     ^^^^^^^^^> {{Assigned here.}}
 not_a_string = 42
 
 __all__ = [

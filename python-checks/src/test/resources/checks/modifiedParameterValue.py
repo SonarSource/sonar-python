@@ -3,7 +3,7 @@ import collections
 def list_modified(param=list()):  # Noncompliant {{Change this default value to "None" and initialize this parameter inside the function/method.}}
 #                 ^^^^^^^^^^^^
     param.append('a')
-#   ^^^^^^^^^^^^<
+#   ^^^^^^^^^^^^<  {{The parameter is modified.}}
     return param
 
 def set_modifed(param = set()): # Noncompliant
@@ -73,6 +73,10 @@ class B:
   def referenced_outside(self, param1 = list(), param2=list()): # Noncompliant 2
       self.l = param1
       self[l] = param2
+  def referenced_outside_secondary(self, param1 = list(), param2=list()): # Noncompliant {{Change this default value to "None" and initialize this parameter inside the function/method.}}
+#                                        ^^^^^^^^^^^^^^^
+      self.l = param1
+#     ^^^^^^^^^^^^^^^< {{The parameter is stored in another object.}}
   def referenced_outside_2(self, param = list()): # OK, not on self
       global g_var
       g_var = param

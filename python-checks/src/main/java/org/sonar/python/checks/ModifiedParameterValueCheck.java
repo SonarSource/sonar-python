@@ -60,6 +60,9 @@ import static org.sonar.python.tree.TreeUtils.nonTupleParameters;
 @Rule(key = "S5717")
 public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
 
+  private static final String MODIFIED_SECONDARY = "The parameter is modified.";
+  private static final String ASSIGNED_SECONDARY = "The parameter is stored in another object.";
+
   private static final Set<String> COMMON_MUTATING_METHODS = new HashSet<>(Arrays.asList("__delitem__", "__setitem__"));
   private static final String CLEAR = "clear";
   private static final Set<String> LIST_MUTATING_METHODS = new HashSet<>(Arrays.asList("append", CLEAR, "extend", "insert", "pop", "remove", "reverse", "sort"));
@@ -111,10 +114,10 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
         return;
       }
       for (Parameter parameter : nonTupleParameters(functionDef)) {
-        List<Tree> mutations = getMutations(parameter);
+        Map<Tree, String> mutations = getMutations(parameter);
         if (!mutations.isEmpty()) {
           PreciseIssue preciseIssue = ctx.addIssue(parameter, "Change this default value to \"None\" and initialize this parameter inside the function/method.");
-          mutations.forEach(mutation -> preciseIssue.secondary(mutation, null));
+          mutations.keySet().forEach(t -> preciseIssue.secondary(t, mutations.get(t)));
         }
       }
     });
@@ -134,46 +137,49 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     return symbol.name().contains("cache") || symbol.name().contains("memo");
   }
 
-  private static List<Tree> getMutations(Parameter parameter) {
+  private static Map<Tree, String> getMutations(Parameter parameter) {
     Expression defaultValue = parameter.defaultValue();
     if (defaultValue == null) {
-      return Collections.emptyList();
+      return Collections.emptyMap();
     }
 
     Optional<Symbol> paramSymbol = getSymbolFromTree(parameter.name());
     if (!paramSymbol.isPresent() || isUsingMemoization(paramSymbol.get())) {
-      return Collections.emptyList();
+      return Collections.emptyMap();
     }
 
     if (!defaultValue.type().canOnlyBe(BuiltinTypes.NONE_TYPE)) {
       List<Tree> attributeSet = getAttributeSet(paramSymbol.get());
       if (!attributeSet.isEmpty()) {
-        return attributeSet;
+        return attributeSet.stream().collect(Collectors.toMap(tree -> tree, tree -> MODIFIED_SECONDARY));
       }
     }
     String defaultValueType = defaultValueType(defaultValue);
     Set<String> typeMutatingMethods = MUTATING_METHODS.get(defaultValueType);
     if (typeMutatingMethods == null) {
-      return Collections.emptyList();
+      return Collections.emptyMap();
     }
-    return paramSymbol.get().usages().stream()
-      .filter(usage -> isWriteUsage(paramSymbol, defaultValueType, typeMutatingMethods, usage))
-      .map(usage -> usage.tree().parent())
-      .collect(Collectors.toList());
+    Map<Tree, String> mutations = new HashMap<>();
+    for (Usage usage : paramSymbol.get().usages()) {
+      getKindOfWriteUsage(paramSymbol, defaultValueType, typeMutatingMethods, usage).ifPresent(s -> mutations.put(usage.tree().parent(), s));
+    }
+    return mutations;
   }
 
-  private static boolean isWriteUsage(Optional<Symbol> paramSymbol, @Nullable String defaultValueType, Set<String> typeMutatingMethods, Usage usage) {
+  private static Optional<String> getKindOfWriteUsage(Optional<Symbol> paramSymbol, @Nullable String defaultValueType, Set<String> typeMutatingMethods, Usage usage) {
     Tree parent = usage.tree().parent();
     if (parent.is(QUALIFIED_EXPR)) {
       QualifiedExpression qualifiedExpression = (QualifiedExpression) parent;
-      return getSymbolFromTree(qualifiedExpression.qualifier()).equals(paramSymbol) && isMutatingMethod(typeMutatingMethods, qualifiedExpression.name().name());
+      return getSymbolFromTree(qualifiedExpression.qualifier()).equals(paramSymbol) && isMutatingMethod(typeMutatingMethods, qualifiedExpression.name().name()) ?
+        Optional.of(MODIFIED_SECONDARY) : Optional.empty();
     }
-
-    return isUsedInDelStatement(usage.tree()) ||
+    if (isUsedInDelStatement(usage.tree()) ||
       isUsedInLhsOfAssignment(usage.tree(), exp -> isAccessingExpression(exp, usage.tree())) ||
       isUsedInLhsOfCompoundAssignment(usage.tree()) ||
-      isGetItemOnDefaultDict(defaultValueType, usage.tree()) ||
-      mightBeReferencedOutsideOfFunction(usage.tree());
+      isGetItemOnDefaultDict(defaultValueType, usage.tree())) {
+      return Optional.of(MODIFIED_SECONDARY);
+    }
+    return mightBeReferencedOutsideOfFunction(usage.tree()) ? Optional.of(ASSIGNED_SECONDARY) : Optional.empty();
   }
 
   /**

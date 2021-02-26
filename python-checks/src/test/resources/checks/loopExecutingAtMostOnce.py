@@ -9,9 +9,10 @@ def foo(cond, cond2):
     while cond:
         continue
 
-    while cond: # Noncompliant [[secondary=+2]]
+    while cond: # Noncompliant
 #   ^^^^^
         break
+#       ^^^^^< {{The loop stops here.}}
 
     while cond:
         if cond2:

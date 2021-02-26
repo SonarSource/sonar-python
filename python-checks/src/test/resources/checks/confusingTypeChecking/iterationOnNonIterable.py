@@ -1,7 +1,7 @@
 from typing import Union
 
 class A: ...
-#     ^>
+#     ^> {{Definition of "A".}}
 
 class NewStyleIterable:
   def __iter__(self): ...

@@ -1,9 +1,11 @@
 from typing import List
 
 class A: ...
+#     ^> {{Definition of "A".}}
 
 def custom(param: A):
   param[42] # Noncompliant {{Fix this "__getitem__" operation; Previous type checks suggest that "param" does not have this method.}}
+# ^^^^^^^^^
   param[42] = 42 # Noncompliant {{Fix this "__setitem__" operation; Previous type checks suggest that "param" does not have this method.}}
   del param[42] # Noncompliant {{Fix this "__delitem__" operation; Previous type checks suggest that "param" does not have this method.}}
 
