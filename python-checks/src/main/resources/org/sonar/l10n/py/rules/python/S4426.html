@@ -1,11 +1,11 @@
-<p>When generating cryptographic keys (or key pairs), it is important to use strong parameters. Key length, for instance, should provides enough
+<p>When generating cryptographic keys (or key pairs), it is important to use strong parameters. Key length, for instance, should provide enough
 entropy against brute-force attacks. </p>
 <ul>
   <li> For <code>RSA</code> and <code>DSA</code> algorithms key size should be at least 2048 bits long </li>
   <li> For <code>ECC</code> (elliptic curve cryptography) algorithms key size should be at least 224 bits long </li>
   <li> For <code>RSA</code> public key exponent should be at least 65537. </li>
 </ul>
-<p>This rule raises an issue when an <code>RSA</code>, <code>DSA</code> or <code>ECC</code> key-pair generator is initialized using weak parameters.
+<p>This rule raises an issue when a <code>RSA</code>, <code>DSA</code> or <code>ECC</code> key-pair generator is initialized using weak parameters.
 </p>
 <p>It supports the following libraries:</p>
 <ul>
@@ -37,6 +37,6 @@ ec.generate_private_key(curve=ec.SECT409R1, backend=backend) # Compliant
   Misconfiguration </li>
   <li> <a href="https://www.ssi.gouv.fr/uploads/2014/11/RGS_v-2-0_B1.pdf">ANSSI RGSv2</a> - Référentiel Général de Sécurité version 2 </li>
   <li> <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">NIST FIPS 186-4</a> - Digital Signature Standard (DSS) </li>
-  <li> <a href="http://cwe.mitre.org/data/definitions/326.html">MITRE, CWE-326</a> - Inadequate Encryption Strength </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/326.html">MITRE, CWE-326</a> - Inadequate Encryption Strength </li>
 </ul>
 

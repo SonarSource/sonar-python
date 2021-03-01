@@ -69,7 +69,7 @@ parser.parse("ressources/xxe.xml")
 <h2>Compliant Solution</h2>
 <p><a href="https://lxml.de/">lxml</a> module:</p>
 <ul>
-  <li> When parsing XML, disable <em>resolve</em>entities_ and <em>network access</em>: </li>
+  <li> When parsing XML, disable <code>resolve_entities</code> and <em>network access</em>: </li>
 </ul>
 <pre>
 parser = etree.XMLParser(resolve_entities=False, no_network=True) # Compliant
