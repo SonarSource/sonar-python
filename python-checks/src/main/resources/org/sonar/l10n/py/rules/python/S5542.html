@@ -12,7 +12,20 @@ algorithm:</p>
   <li> RSA encryption algorithm should be used with the recommended padding scheme (OAEP) </li>
 </ul>
 <h2>Noncompliant Code Examples</h2>
-<p><a href="https://pycryptodome.readthedocs.io">pycryptodome/pycryptodomex</a> library:</p>
+<p><a href="https://pycryptodome.readthedocs.io">pycryptodomex</a> library:</p>
+<pre>
+from Cryptodome.Cipher import AES, PKCS1_OAEP,  PKCS1_v1_5
+from Cryptodome.Random import get_random_bytes
+from Cryptodome.PublicKey import RSA
+
+# Example for a symmetric cipher: AES
+AES.new(key, AES.MODE_ECB)  # Noncompliant
+AES.new(key, AES.MODE_CBC)  # Noncompliant
+
+# Example for a asymmetric cipher: RSA
+cipher = PKCS1_v1_5.new(key) # Noncompliant
+</pre>
+<p><a href="https://cryptography.io/en/latest/">pyca</a> library:</p>
 <pre>
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -42,7 +55,7 @@ des = pyDes.des('ChangeIt') # Noncompliant
 des = pyDes.des('ChangeIt', pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant
 des = pyDes.des('ChangeIt', pyDes.ECB, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant
 </pre>
-<p><a href="https://pycrypto.readthedocs.io/en/latest/ ">pycrypto</a> library is not maintained and therefore should not be used:</p>
+<p><a href="https://pycrypto.readthedocs.io/en/latest/">pycrypto</a> library is not maintained and therefore should not be used:</p>
 <pre>
 # https://pycrypto.readthedocs.io/en/latest/
 from Crypto.Cipher import *
@@ -58,7 +71,7 @@ AES.new(key, AES.MODE_CBC, IV=iv)  # Noncompliant
 cipher = PKCS1_v1_5.new(key) # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
-<p><a href="https://pycryptodome.readthedocs.io">pycryptodome/pycryptodomex</a> library:</p>
+<p><a href="https://pycryptodome.readthedocs.io">pycryptodomex</a> library:</p>
 <pre>
 from Cryptodome.Cipher import AES
 from Cryptodome.Random import get_random_bytes
@@ -105,7 +118,6 @@ plaintext = private_key.decrypt(
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
   Misconfiguration </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
-  <li> <a href="https://wiki.sei.cmu.edu/confluence/x/hDdGBQ">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 

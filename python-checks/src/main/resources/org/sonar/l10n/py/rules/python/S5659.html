@@ -5,20 +5,21 @@ identities.</p>
   <li> Don't use a token without verifying its signature before. </li>
 </ul>
 <h2>Noncompliant Code Examples</h2>
-<p>For <a href="https://github.com/jpadilla/pyjwt">PyJWT</a>:</p>
+<p>For <a href="https://github.com/jpadilla/pyjwt">pyjwt</a> module:</p>
 <pre>
 jwt.decode(token, verify = False)  # Noncompliant
+jwt.decode(token, key, options={"verify_signature": False})  # Noncompliant
 </pre>
-<p>For <a href="https://github.com/davedoesdev/python-jwt">python-jwt</a>:</p>
+<p>For <a href="https://github.com/davedoesdev/python-jwt">python_jwt</a> module:</p>
 <pre>
 jwt.process_jwt(token)  # Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
-<p>For <a href="https://github.com/jpadilla/pyjwt">PyJWT</a>:</p>
+<p>For <a href="https://github.com/jpadilla/pyjwt">pyjwt</a> module:</p>
 <pre>
 jwt.decode(token, key, algo)
 </pre>
-<p>For <a href="https://github.com/davedoesdev/python-jwt">python-jwt</a>:</p>
+<p>For <a href="https://github.com/davedoesdev/python-jwt">python_jwt</a> module:</p>
 <pre>
 jwt.process_jwt(token)  #  Compliant because followed by verify_jwt()
 jwt.verify_jwt(token, key, algo)

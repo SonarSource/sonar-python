@@ -3,7 +3,8 @@ parameter. This parameter will reference the object instance on which the method
 <p>Naming the "self" parameter differently is confusing. It might also indicate that the "self" parameter was forgotten, in which case calling the
 method will most probably fail.</p>
 <p>Note also that creating methods which are used as static methods without the <code>@staticmethod</code> decorator is a bad practice because calling
-these methods on an instance will raise a `TypeError`. Either move the method out of the class or decorate it with <code>@staticmethod</code>.</p>
+these methods on an instance will raise a <code>TypeError</code>. Either move the method out of the class or decorate it with
+<code>@staticmethod</code>.</p>
 <p>This rule raises an issue when the first parameter of an instance method is not called "self".</p>
 <h2>Noncompliant Code Example</h2>
 <pre>

@@ -22,11 +22,15 @@ Although modern libraries are filtering new line character by default, user data
 </ul>
 <p>You are at risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
-<p> * Use an email library which sanitizes headers (Flask-Mail or django.core.mail).</p>
-<p> * Use html escape functions to sanitize every piece of data used to in the email body.</p>
-<p> * Verify application logic to make sure that email base feature can not be abuse to:</p>
-<p> <strong></strong> Send arbitrary email for spamming or fishing</p>
-<p> <strong></strong> Disclose sensitive email content</p>
+<ul>
+  <li> Use an email library which sanitizes headers (Flask-Mail or django.core.mail). </li>
+  <li> Use html escape functions to sanitize every piece of data used to in the email body. </li>
+  <li> Verify application logic to make sure that email base feature can not be abuse to:
+    <ul>
+      <li> Send arbitrary email for spamming or fishing </li>
+      <li> Disclose sensitive email content </li>
+    </ul> </li>
+</ul>
 <h2>Sensitive Code Example</h2>
 <p>smtplib</p>
 <pre>

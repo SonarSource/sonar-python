@@ -76,7 +76,6 @@ regex.findall('(a*)*b', input)  # Sensitive
 regex.finditer('(a*)*b',input)  # Sensitive
 regex.sub('(a*)*b', replacement, input)  # Sensitive
 regex.subn('(a*)*b', replacement, input)  # Sensitive
-
 </pre>
 <h2>Exceptions</h2>
 <p>Some corner-case regular expressions will not raise an issue even though they might be vulnerable. For example: <code>(a|aa)+</code>,
