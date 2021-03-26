@@ -58,6 +58,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.scanner.fs.ProjectFileWalker;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
@@ -418,10 +419,11 @@ public class PythonSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
+    PythonIndexer indexer = new PythonIndexer(mock(ProjectFileWalker.class));
     if(customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter());
+      return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), indexer);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, new NoSonarFilter(), customRuleRepositories, indexer);
   }
 
   private InputFile inputFile(String name) {

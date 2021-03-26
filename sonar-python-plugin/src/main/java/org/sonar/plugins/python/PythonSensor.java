@@ -35,6 +35,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.scanner.fs.ProjectFileWalker;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
@@ -51,21 +52,25 @@ public final class PythonSensor implements Sensor {
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private final PythonIndexer indexer;
+  private final ProjectFileWalker projectFileWalker;
 
   /**
    * Constructor to be used by pico if no PythonCustomRuleRepository are to be found and injected.
    */
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer, ProjectFileWalker projectFileWalker) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, projectFileWalker);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, PythonIndexer indexer, ProjectFileWalker projectFileWalker) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
+    this.indexer = indexer;
+    this.projectFileWalker = projectFileWalker;
   }
 
   @Override
@@ -80,7 +85,7 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
     List<InputFile> testFiles = getInputFiles(Type.TEST, context);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, indexer, projectFileWalker);
     scanner.execute(mainFiles, context);
     if (!testFiles.isEmpty()) {
       new TestHighlightingScanner(context).execute(testFiles, context);

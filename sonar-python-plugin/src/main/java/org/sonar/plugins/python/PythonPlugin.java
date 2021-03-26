@@ -68,7 +68,8 @@ public class PythonPlugin implements Plugin {
       PythonProfile.class,
 
       PythonSensor.class,
-      PythonRuleRepository.class);
+      PythonRuleRepository.class,
+      PythonIndexer.class);
 
     SonarRuntime sonarRuntime = context.getRuntime();
     if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {
