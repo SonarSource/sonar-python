@@ -40,9 +40,8 @@ import org.sonar.python.tree.PythonTreeMaker;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
-import static org.sonarsource.api.sonarlint.SonarLintSide.MULTIPLE_ANALYSES;
 
-@SonarLintSide(lifespan = MULTIPLE_ANALYSES)
+@SonarLintSide(scope = SonarLintSide.Scope.MODULE)
 public class PythonIndexer {
 
   private static final Logger LOG = Loggers.get(PythonIndexer.class);
