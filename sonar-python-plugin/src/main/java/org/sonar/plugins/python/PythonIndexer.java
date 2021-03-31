@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.scanner.fs.ProjectFileEvent;
+import org.sonar.api.scanner.fs.ProjectFileListener;
 import org.sonar.api.scanner.fs.ProjectFileWalker;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -43,7 +45,7 @@ import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 import static org.sonarsource.api.sonarlint.SonarLintSide.MULTIPLE_ANALYSES;
 
 @SonarLintSide(lifespan = MULTIPLE_ANALYSES)
-public class PythonIndexer {
+public class PythonIndexer implements ProjectFileListener {
 
   private static final Logger LOG = Loggers.get(PythonIndexer.class);
 
@@ -63,6 +65,12 @@ public class PythonIndexer {
       long stopTime = System.currentTimeMillis() - startTime;
       LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
     }
+  }
+
+  @Override
+  public void process(ProjectFileEvent projectFileEvent) {
+    // TODO Refresh/drop symbols for module implemented in projectFileEvent.getTarget()
+    LOG.debug("Received %s event for %s", projectFileEvent.getType(), projectFileEvent.getTarget().uri());
   }
 
   private List<InputFile> getInputFiles(ProjectFileWalker projectFileWalker) {
