@@ -26,7 +26,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -152,7 +151,7 @@ public class Expressions {
    *                       <code>b'\u0061' == b'\\u0061'</code>
    * @return unescaped value
    */
-  @VisibleForTesting
+  // Visible for testing
   static String unescapeString(String value, boolean isBytesLiteral) {
     if (value.indexOf('\\') == -1) {
       return value;
