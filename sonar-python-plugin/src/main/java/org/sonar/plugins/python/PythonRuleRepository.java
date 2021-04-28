@@ -52,8 +52,9 @@ public class PythonRuleRepository implements RulesDefinition {
     repository.done();
   }
 
-  private static List<Class> getCheckClasses() {
+  private static List<Class<?>> getCheckClasses() {
     return StreamSupport.stream(CheckList.getChecks().spliterator(), false)
+      .map(check -> (Class<?>) check)
       .collect(Collectors.toList());
   }
 

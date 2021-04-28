@@ -257,7 +257,7 @@ public class PythonSensorTest {
     assertThat(checkedIssues).isEqualTo(3);
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting global symbols computation");
     assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting rules execution");
-    assertThat(logTester.logs(LoggerLevel.INFO).stream().filter(line -> line.equals("1 source files to be analyzed")).count()).isEqualTo(2);
+    assertThat(logTester.logs(LoggerLevel.INFO).stream().filter(line -> line.equals("1 source file to be analyzed")).count()).isEqualTo(2);
 
     assertThat(PythonScanner.getWorkingDirectory(context)).isEqualTo(workDir.toFile());
   }

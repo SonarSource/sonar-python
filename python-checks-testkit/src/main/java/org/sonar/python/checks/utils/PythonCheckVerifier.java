@@ -20,7 +20,6 @@
 package org.sonar.python.checks.utils;
 
 import com.google.common.base.Preconditions;
-import com.sonarsource.checks.verifier.MultiFileVerifier;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Collections;
@@ -38,6 +37,7 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
+import org.sonarsource.analyzer.commons.checks.verifier.MultiFileVerifier;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
