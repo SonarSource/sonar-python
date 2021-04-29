@@ -42,7 +42,7 @@ jobs:
   maven-central-sync:
     runs-on: ubuntu-latest
     needs:
-      - sonar_release
+      - lt_release
     steps:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v1
