@@ -56,7 +56,7 @@ tdes4 = Cipher(algorithms.TripleDES(key), mode=None, backend=default_backend()) 
 bf3 = Cipher(algorithms.Blowfish(key), mode=None, backend=default_backend()) # Noncompliant: Blowfish use a 64-bit block size makes it vulnerable to birthday attacks
 rc42 = Cipher(algorithms.ARC4(key), mode=None, backend=default_backend()) # Noncompliant: vulnerable to several attacks (see https://en.wikipedia.org/wiki/RC4#Security)
 </pre>
-<p><a href="http://whitemans.ca/des.html">pydes</a> library:</p>
+<p><a href="https://pypi.org/project/pyDes/">pydes</a> library:</p>
 <pre>
 import pyDes;
 
