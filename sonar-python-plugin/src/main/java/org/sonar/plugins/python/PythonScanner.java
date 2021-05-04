@@ -22,13 +22,10 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.api.SonarProduct;
@@ -57,22 +54,18 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
-
-import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class PythonScanner extends Scanner {
 
   private static final Logger LOG = Loggers.get(PythonScanner.class);
 
   private final PythonParser parser;
-  private final Map<InputFile, String> packageNames = new HashMap<>();
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
-  private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+  private final PythonIndexer indexer;
 
 
   public PythonScanner(
@@ -85,13 +78,8 @@ public class PythonScanner extends Scanner {
     this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.parser = PythonParser.create();
-
-    // computes "globalSymbolsByModuleName"
-    long startTime = System.currentTimeMillis();
-    GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
-    globalSymbolsStep.execute(files, context);
-    long stopTime = System.currentTimeMillis() - startTime;
-    LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
+    this.indexer = new PythonIndexer();
+    this.indexer.buildOnce(context, files);
   }
 
   @Override
@@ -106,7 +94,7 @@ public class PythonScanner extends Scanner {
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       FileInput parse = new PythonTreeMaker().fileInput(astNode);
-      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), packageNames.get(inputFile), projectLevelSymbolTable);
+      visitorContext = new PythonVisitorContext(parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable());
       saveMeasures(inputFile, visitorContext);
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e);
@@ -244,33 +232,5 @@ public class PythonScanner extends Scanner {
       .forMetric(metric)
       .on(inputFile)
       .save();
-  }
-
-  private class GlobalSymbolsScanner extends Scanner {
-
-    private GlobalSymbolsScanner(SensorContext context) {
-      super(context);
-    }
-
-    @Override
-    protected String name() {
-      return "global symbols computation";
-    }
-
-    @Override
-    protected void scanFile(InputFile inputFile) throws IOException {
-      AstNode astNode = parser.parse(inputFile.contents());
-      FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-      String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
-      packageNames.put(inputFile, packageName);
-      PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
-    }
-
-    @Override
-    protected void processException(Exception e, InputFile file) {
-      LOG.debug("Unable to construct project-level symbol table for file: " + file.toString());
-      LOG.debug(e.getMessage());
-    }
   }
 }
