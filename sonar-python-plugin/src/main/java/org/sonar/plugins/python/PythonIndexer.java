@@ -21,6 +21,7 @@ package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
 import java.io.IOException;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class PythonIndexer {
 
   private static final Logger LOG = Loggers.get(PythonIndexer.class);
 
-  private final Map<InputFile, String> packageNames = new HashMap<>();
+  private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
 
@@ -55,8 +56,8 @@ public class PythonIndexer {
     LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
   }
 
-  String packageName(InputFile inputFile) {
-    return packageNames.get(inputFile);
+  String packageName(URI uri) {
+    return packageNames.get(uri);
   }
 
   ProjectLevelSymbolTable projectLevelSymbolTable() {
@@ -79,7 +80,7 @@ public class PythonIndexer {
       AstNode astNode = parser.parse(inputFile.contents());
       FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
       String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
-      packageNames.put(inputFile, packageName);
+      packageNames.put(inputFile.uri(), packageName);
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
       projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
     }
