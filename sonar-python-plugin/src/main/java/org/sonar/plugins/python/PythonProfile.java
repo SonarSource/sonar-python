@@ -24,7 +24,6 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
@@ -53,7 +52,7 @@ public class PythonProfile implements BuiltInQualityProfilesDefinition {
     profile.done();
   }
 
-  @VisibleForTesting
+  // Visible for testing
   static Set<RuleKey> getSecurityRuleKeys(String className, String ruleKeysMethodName, String ruleRepoMethodName) {
     try {
 
