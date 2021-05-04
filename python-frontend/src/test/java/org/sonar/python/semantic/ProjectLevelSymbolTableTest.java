@@ -399,6 +399,18 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  public void test_remove_module() {
+    FileInput tree = parseWithoutSymbols(
+      "class A: pass"
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).extracting(Symbol::name).containsExactlyInAnyOrder("A");
+    projectLevelSymbolTable.removeModule("", pythonFile("mod.py"));
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
+  }
+
+  @Test
   public void global_symbols() {
     FileInput tree = parseWithoutSymbols(
       "obj1 = 42",

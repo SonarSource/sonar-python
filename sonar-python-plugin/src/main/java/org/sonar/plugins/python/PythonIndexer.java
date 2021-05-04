@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
@@ -44,9 +45,11 @@ public class PythonIndexer {
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+  private File projectBaseDir;
 
 
   void buildOnce(SensorContext context, List<InputFile> files) {
+    this.projectBaseDir = context.fileSystem().baseDir();
     LOG.debug("Input files for indexing: " + files);
     // computes "globalSymbolsByModuleName"
     long startTime = System.currentTimeMillis();
@@ -64,6 +67,22 @@ public class PythonIndexer {
     return projectLevelSymbolTable;
   }
 
+  void removeFileFromProjectSymbolTable(InputFile inputFile) {
+    String packageName = packageNames.get(inputFile.uri());
+    packageNames.remove(inputFile.uri());
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+    projectLevelSymbolTable.removeModule(packageName, pythonFile);
+  }
+
+  void addFileToProjectSymbolTable(InputFile inputFile) throws IOException {
+    AstNode astNode = parser.parse(inputFile.contents());
+    FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
+    String packageName = pythonPackageName(inputFile.file(), projectBaseDir);
+    packageNames.put(inputFile.uri(), packageName);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+    projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
+  }
+
   private class GlobalSymbolsScanner extends Scanner {
 
     private GlobalSymbolsScanner(SensorContext context) {
@@ -77,12 +96,7 @@ public class PythonIndexer {
 
     @Override
     protected void scanFile(InputFile inputFile) throws IOException {
-      AstNode astNode = parser.parse(inputFile.contents());
-      FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-      String packageName = pythonPackageName(inputFile.file(), context.fileSystem().baseDir());
-      packageNames.put(inputFile.uri(), packageName);
-      PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
+      addFileToProjectSymbolTable(inputFile);
     }
 
     @Override
