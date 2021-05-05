@@ -70,16 +70,15 @@ public class PythonScanner extends Scanner {
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> files
-  ) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.parser = PythonParser.create();
-    this.indexer = new PythonIndexer();
-    this.indexer.buildOnce(context, files);
+    this.indexer = indexer;
+    this.indexer.buildOnce(context);
   }
 
   @Override

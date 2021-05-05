@@ -79,6 +79,9 @@ public class PythonPlugin implements Plugin {
       addBanditExtensions(context);
       addFlake8Extensions(context);
     }
+    if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
+      context.addExtension(SonarLintPythonIndexer.class);
+    }
   }
 
   private static void addCoberturaExtensions(Context context) {
