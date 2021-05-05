@@ -25,10 +25,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +69,7 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.checks.CheckList;
+import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -284,6 +287,39 @@ public class PythonSensorTest {
   }
 
   @Test
+  public void no_cross_file_issues_only_one_file() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    InputFile mainFile = inputFile("main.py");
+    // modFile exists but is not added to context
+    InputFile modFile = createInputFile("mod.py");
+    sensor().execute(context);
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+  @Test
+  public void cross_files_issues_only_one_file_analyzed() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    InputFile mainFile = inputFile("main.py");
+    InputFile modFile = createInputFile("mod.py");
+    TestModuleFileSystem testModuleFileSystem = new TestModuleFileSystem(Arrays.asList(mainFile, modFile));
+    sensor(CUSTOM_RULES, testModuleFileSystem).execute(context);
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile);
+    assertThat(issue.flows()).isEmpty();
+  }
+
+  @Test
   public void loop_in_class_hierarchy() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -410,18 +446,20 @@ public class PythonSensorTest {
   }
 
   private PythonSensor sensor() {
-    return sensor(CUSTOM_RULES);
+    return sensor(CUSTOM_RULES, null);
   }
 
   private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories) {
+    return sensor(customRuleRepositories, null);
+  }
+
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable ModuleFileSystem moduleFileSystem) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    if(customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class));
-    }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories);
+    PythonIndexer indexer = new PythonIndexer();
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, moduleFileSystem);
   }
 
   private InputFile inputFile(String name) {
@@ -447,5 +485,19 @@ public class PythonSensorTest {
 
   private static TextRange reference(int lineStart, int columnStart, int lineEnd, int columnEnd) {
     return new DefaultTextRange(new DefaultTextPointer(lineStart, columnStart), new DefaultTextPointer(lineEnd, columnEnd));
+  }
+
+  private class TestModuleFileSystem implements ModuleFileSystem {
+
+    private final List<InputFile> inputFiles;
+
+    private TestModuleFileSystem(List<InputFile> inputFiles) {
+      this.inputFiles = inputFiles;
+    }
+
+    @Override
+    public void files(String s, Type type, Consumer<InputFile> consumer) {
+      inputFiles.forEach(consumer);
+    }
   }
 }
