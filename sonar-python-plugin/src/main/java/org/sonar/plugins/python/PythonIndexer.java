@@ -67,14 +67,14 @@ public class PythonIndexer {
     return projectLevelSymbolTable;
   }
 
-  void removeFileFromProjectSymbolTable(InputFile inputFile) {
+  void removeFile(InputFile inputFile) {
     String packageName = packageNames.get(inputFile.uri());
     packageNames.remove(inputFile.uri());
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     projectLevelSymbolTable.removeModule(packageName, pythonFile);
   }
 
-  void addFileToProjectSymbolTable(InputFile inputFile) throws IOException {
+  void addFile(InputFile inputFile) throws IOException {
     AstNode astNode = parser.parse(inputFile.contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
     String packageName = pythonPackageName(inputFile.file(), projectBaseDir);
@@ -96,7 +96,7 @@ public class PythonIndexer {
 
     @Override
     protected void scanFile(InputFile inputFile) throws IOException {
-      addFileToProjectSymbolTable(inputFile);
+      addFile(inputFile);
     }
 
     @Override

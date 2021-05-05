@@ -25,6 +25,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -70,16 +72,11 @@ public class PythonIndexerTest {
     InputFile file2 = inputFile("mod.py");
     pythonIndexer.buildOnce(context, Arrays.asList(file1, file2));
     ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).hasSize(1);
-    Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
-    assertThat(modAddSymbol).isNotNull();
-    assertThat(modAddSymbol.is(Symbol.Kind.FUNCTION)).isTrue();
 
-    pythonIndexer.removeFileFromProjectSymbolTable(file2);
+    pythonIndexer.removeFile(file2);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
-    modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
+    Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
     assertThat(modAddSymbol).isNull();
   }
 
@@ -90,14 +87,9 @@ public class PythonIndexerTest {
     InputFile file2 = inputFile("mod.py");
     pythonIndexer.buildOnce(context, Arrays.asList(file1, file2));
     ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).hasSize(1);
-    Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
-    assertThat(modAddSymbol).isNotNull();
-    assertThat(modAddSymbol.is(Symbol.Kind.FUNCTION)).isTrue();
 
-    InputFile file3 = inputFile("added.py");
-    pythonIndexer.addFileToProjectSymbolTable(file3);
+    InputFile file3 = createInputFile("added.py");
+    pythonIndexer.addFile(file3);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("added")).hasSize(1);
     Symbol newFuncSymbol = projectLevelSymbolTable.getSymbol("added.new_func");
