@@ -23,10 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -37,45 +34,24 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
-import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener;
-import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
-public class PythonIndexer implements ModuleFileListener {
+public abstract class PythonIndexer {
 
-  private static final Logger LOG = Loggers.get(PythonIndexer.class);
+  static final Logger LOG = Loggers.get(PythonIndexer.class);
+  File projectBaseDir;
 
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-  private File projectBaseDir;
 
-  void buildOnce(SensorContext context, ModuleFileSystem moduleFileSystem) {
-    this.projectBaseDir = context.fileSystem().baseDir();
-    List<InputFile> files = getInputFiles(moduleFileSystem);
-    LOG.debug("Input files for indexing: " + files);
-    // computes "globalSymbolsByModuleName"
-    long startTime = System.currentTimeMillis();
-    GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
-    globalSymbolsStep.execute(files, context);
-    long stopTime = System.currentTimeMillis() - startTime;
-    LOG.debug("Time to build the project level symbol table: " + stopTime + "ms");
-  }
-
-  private List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
-    List<InputFile> files = new ArrayList<>();
-    moduleFileSystem.files(Python.KEY, InputFile.Type.MAIN, files::add);
-    return Collections.unmodifiableList(files);
+  ProjectLevelSymbolTable projectLevelSymbolTable() {
+    return projectLevelSymbolTable;
   }
 
   String packageName(URI uri) {
     return packageNames.get(uri);
-  }
-
-  ProjectLevelSymbolTable projectLevelSymbolTable() {
-    return projectLevelSymbolTable;
   }
 
   void removeFile(InputFile inputFile) {
@@ -94,25 +70,11 @@ public class PythonIndexer implements ModuleFileListener {
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
   }
 
-  @Override
-  public void process(ModuleFileEvent moduleFileEvent) {
-    InputFile target = moduleFileEvent.getTarget();
-    ModuleFileEvent.Type type = moduleFileEvent.getType();
-    if (type.equals(ModuleFileEvent.Type.DELETED) || type.equals(ModuleFileEvent.Type.MODIFIED)) {
-      removeFile(target);
-    }
-    if (type.equals(ModuleFileEvent.Type.CREATED) || type.equals(ModuleFileEvent.Type.MODIFIED)) {
-      try {
-        addFile(target);
-      } catch (IOException e) {
-        LOG.warn("Failed to load file \"{}\" to the project symbol table", target.filename());
-      }
-    }
-  }
+  abstract void buildOnce(SensorContext context);
 
-  private class GlobalSymbolsScanner extends Scanner {
+  class GlobalSymbolsScanner extends Scanner {
 
-    private GlobalSymbolsScanner(SensorContext context) {
+    GlobalSymbolsScanner(SensorContext context) {
       super(context);
     }
 

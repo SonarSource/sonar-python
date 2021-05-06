@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -46,7 +45,6 @@ import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 
 public final class PythonSensor implements Sensor {
 
@@ -54,44 +52,32 @@ public final class PythonSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
-  private ModuleFileSystem moduleFileSystem;
 
   /**
    * Constructor to be used by pico if no PythonCustomRuleRepository are to be found and injected.
    */
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, null);
+  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonIndexer indexer, ModuleFileSystem moduleFileSystem) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, moduleFileSystem);
+                      SonarLintPythonIndexer indexer) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonIndexer indexer, PythonCustomRuleRepository[] customRuleRepositories) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, indexer, null);
+                      PythonCustomRuleRepository[] customRuleRepositories) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, PythonIndexer indexer) {
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
-  }
-
-  public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, PythonIndexer indexer, @Nullable ModuleFileSystem moduleFileSystem) {
-    this.checks = new PythonChecks(checkFactory)
-      .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
-      .addCustomChecks(customRuleRepositories);
-    this.fileLinesContextFactory = fileLinesContextFactory;
-    this.noSonarFilter = noSonarFilter;
-    this.indexer = indexer;
-    this.moduleFileSystem = moduleFileSystem;
   }
 
   @Override
@@ -106,8 +92,8 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     List<InputFile> mainFiles = getInputFiles(Type.MAIN, context);
     List<InputFile> testFiles = getInputFiles(Type.TEST, context);
-    ModuleFileSystem modFileSystem = this.moduleFileSystem != null ? this.moduleFileSystem : new ModuleFileSystemScanner(mainFiles);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, mainFiles, indexer, modFileSystem);
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(mainFiles);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, pythonIndexer);
     scanner.execute(mainFiles, context);
     if (!testFiles.isEmpty()) {
       new TestHighlightingScanner(context).execute(testFiles, context);

@@ -39,25 +39,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PythonIndexerTest {
+public class SonarLintPythonIndexerTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
   private SensorContextTester context;
-  private static Path workDir;
 
   @Before
   public void init() throws IOException {
     context = SensorContextTester.create(baseDir);
-    workDir = Files.createTempDirectory("workDir");
+    Path workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
   }
 
   @Test
   public void test_indexer() {
-    PythonIndexer pythonIndexer = new PythonIndexer();
     InputFile file1 = inputFile("main.py");
     InputFile file2 = inputFile("mod.py");
-    pythonIndexer.buildOnce(context, new ModuleFileSystemScanner(Arrays.asList(file1, file2)));
+    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
+    pythonIndexer.buildOnce(context);
     ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).hasSize(1);
@@ -68,10 +67,10 @@ public class PythonIndexerTest {
 
   @Test
   public void test_indexer_removed_file() {
-    PythonIndexer pythonIndexer = new PythonIndexer();
     InputFile file1 = inputFile("main.py");
     InputFile file2 = inputFile("mod.py");
-    pythonIndexer.buildOnce(context, new ModuleFileSystemScanner(Arrays.asList(file1, file2)));
+    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
+    pythonIndexer.buildOnce(context);
     ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
 
     pythonIndexer.removeFile(file2);
@@ -83,10 +82,10 @@ public class PythonIndexerTest {
 
   @Test
   public void test_indexer_added_file() throws IOException {
-    PythonIndexer pythonIndexer = new PythonIndexer();
     InputFile file1 = inputFile("main.py");
     InputFile file2 = inputFile("mod.py");
-    pythonIndexer.buildOnce(context, new ModuleFileSystemScanner(Arrays.asList(file1, file2)));
+    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
+    pythonIndexer.buildOnce(context);
     ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
 
     InputFile file3 = createInputFile("added.py");
@@ -100,10 +99,10 @@ public class PythonIndexerTest {
 
   @Test
   public void test_indexer_file_event() throws IOException {
-    PythonIndexer pythonIndexer = new PythonIndexer();
     InputFile file1 = inputFile("main.py");
     InputFile file2 = inputFile("mod.py");
-    pythonIndexer.buildOnce(context, new ModuleFileSystemScanner(Arrays.asList(file1, file2)));
+    SonarLintPythonIndexer pythonIndexer = new SonarLintPythonIndexer(new TestModuleFileSystem(Arrays.asList(file1, file2)));
+    pythonIndexer.buildOnce(context);
     ProjectLevelSymbolTable projectLevelSymbolTable = pythonIndexer.projectLevelSymbolTable();
 
     InputFile file3 = inputFile("added.py");

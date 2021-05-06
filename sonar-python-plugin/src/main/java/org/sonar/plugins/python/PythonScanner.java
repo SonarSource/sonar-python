@@ -55,7 +55,6 @@ import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 
 public class PythonScanner extends Scanner {
 
@@ -71,8 +70,7 @@ public class PythonScanner extends Scanner {
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, List<InputFile> files, PythonIndexer indexer, ModuleFileSystem moduleFileSystem
-  ) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
@@ -80,7 +78,7 @@ public class PythonScanner extends Scanner {
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.parser = PythonParser.create();
     this.indexer = indexer;
-    this.indexer.buildOnce(context, moduleFileSystem);
+    this.indexer.buildOnce(context);
   }
 
   @Override

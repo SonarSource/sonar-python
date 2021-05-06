@@ -30,7 +30,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
@@ -458,8 +457,8 @@ public class PythonSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    PythonIndexer indexer = new PythonIndexer();
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, moduleFileSystem);
+    PythonIndexer indexer = moduleFileSystem != null ? new SonarLintPythonIndexer(moduleFileSystem) : null;
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer);
   }
 
   private InputFile inputFile(String name) {
@@ -485,19 +484,5 @@ public class PythonSensorTest {
 
   private static TextRange reference(int lineStart, int columnStart, int lineEnd, int columnEnd) {
     return new DefaultTextRange(new DefaultTextPointer(lineStart, columnStart), new DefaultTextPointer(lineEnd, columnEnd));
-  }
-
-  private class TestModuleFileSystem implements ModuleFileSystem {
-
-    private final List<InputFile> inputFiles;
-
-    private TestModuleFileSystem(List<InputFile> inputFiles) {
-      this.inputFiles = inputFiles;
-    }
-
-    @Override
-    public void files(String s, Type type, Consumer<InputFile> consumer) {
-      inputFiles.forEach(consumer);
-    }
   }
 }
