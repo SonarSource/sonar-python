@@ -63,6 +63,13 @@ public class ProjectLevelSymbolTable {
     this.globalSymbolsByModuleName = new HashMap<>(globalSymbolsByModuleName);
   }
 
+  public void removeModule(String packageName, PythonFile pythonFile) {
+    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+    globalSymbolsByModuleName.remove(fullyQualifiedModuleName);
+    // ensure globalSymbolsByFQN is re-computed
+    this.globalSymbolsByFQN = null;
+  }
+
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
@@ -84,8 +91,19 @@ public class ProjectLevelSymbolTable {
       }
     }
     globalSymbolsByModuleName.put(fullyQualifiedModuleName, globalSymbols);
+    if (globalSymbolsByFQN != null) {
+      // TODO: build globalSymbolsByFQN incrementally
+      addModuleToGlobalSymbolsByFQN(globalSymbols);
+    }
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
     fileInput.accept(djangoViewsVisitor);
+  }
+
+  private void addModuleToGlobalSymbolsByFQN(Set<Symbol> symbols) {
+    Map<String, Symbol> moduleSymbolsByFQN = symbols.stream()
+      .filter(symbol -> symbol.fullyQualifiedName() != null)
+      .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::create));
+    globalSymbolsByFQN.putAll(moduleSymbolsByFQN);
   }
 
   private Map<String, Symbol> globalSymbolsByFQN() {
