@@ -92,6 +92,7 @@ public class ProjectLevelSymbolTable {
     }
     globalSymbolsByModuleName.put(fullyQualifiedModuleName, globalSymbols);
     if (globalSymbolsByFQN != null) {
+      // TODO: build globalSymbolsByFQN incrementally
       addModuleToGlobalSymbolsByFQN(globalSymbols);
     }
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
