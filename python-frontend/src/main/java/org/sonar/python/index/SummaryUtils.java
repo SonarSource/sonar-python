@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 
 public class SummaryUtils {
@@ -53,7 +54,12 @@ public class SummaryUtils {
       .withFullyQualifiedName(classSymbol.fullyQualifiedName())
       .withMembers(classSymbol.declaredMembers().stream().flatMap(s -> summary(s).stream()).collect(Collectors.toList()))
       .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList()))
-      .withDefinitionLocation(classSymbol.definitionLocation());
+      .withDefinitionLocation(classSymbol.definitionLocation())
+      .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
+      .withHasSuperClassWithoutSymbol(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol())
+      .withMetaclassFQN(((ClassSymbolImpl) classSymbol).metaclassFQN())
+      .withHasDecorators(classSymbol.hasDecorators())
+      .withSupportsGenerics(((ClassSymbolImpl) classSymbol).supportsGenerics());
 
     return classSummary.build();
   }

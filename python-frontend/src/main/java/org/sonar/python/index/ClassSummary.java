@@ -20,6 +20,7 @@
 package org.sonar.python.index;
 
 import java.util.Collection;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 
 public class ClassSummary implements Summary {
@@ -81,20 +82,21 @@ public class ClassSummary implements Summary {
   }
 
   public boolean hasMetaClass() {
-    return false;
+    return hasMetaClass;
   }
 
   public String metaclassFQN() {
-    return null;
+    return metaclassFQN;
   }
 
   public boolean supportsGenerics() {
-    return false;
+    return supportsGenerics;
   }
 
   public static class ClassSummaryBuilder {
 
     private String name;
+    @Nullable
     private String fullyQualifiedName;
     private Collection<String> superClasses;
     private Collection<Summary> members;
@@ -110,7 +112,7 @@ public class ClassSummary implements Summary {
       return this;
     }
 
-    public ClassSummaryBuilder withFullyQualifiedName(String fullyQualifiedName) {
+    public ClassSummaryBuilder withFullyQualifiedName(@Nullable String fullyQualifiedName) {
       this.fullyQualifiedName = fullyQualifiedName;
       return this;
     }
@@ -156,7 +158,8 @@ public class ClassSummary implements Summary {
     }
 
     public ClassSummary build() {
-      return new ClassSummary(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation, hasSuperClassWithoutSymbol, hasMetaClass, metaclassFQN, supportsGenerics);
+      return new ClassSummary(name, fullyQualifiedName, superClasses, members, hasDecorators, definitionLocation,
+        hasSuperClassWithoutSymbol, hasMetaClass, metaclassFQN, supportsGenerics);
     }
   }
 }
