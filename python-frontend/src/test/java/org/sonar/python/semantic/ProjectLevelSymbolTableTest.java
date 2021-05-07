@@ -294,9 +294,9 @@ public class ProjectLevelSymbolTableTest {
     Symbol importedASymbol = tree.globalVariables().iterator().next();
     assertThat(importedASymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     ClassSymbol classA = (ClassSymbol) importedASymbol;
-    assertThat(classA.hasUnresolvedTypeHierarchy()).isEqualTo(true);
+    assertThat(classA.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(classA.superClasses()).hasSize(1);
-    assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.OTHER);
+    assertThat(classA.superClasses().get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
   }
 
   @Test
