@@ -48,6 +48,6 @@ public class TestPythonVisitorRunnerTest {
   public void global_symbols() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(Collections.singletonList(new File(baseDir, "file.py")), baseDir);
-    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file")).extracting(Symbol::name).containsExactlyInAnyOrder("hello", "A");
+    assertThat(projectLevelSymbolTable.getSymbolsFromModule("file", Collections.emptySet())).extracting(Symbol::name).containsExactlyInAnyOrder("hello", "A");
   }
 }

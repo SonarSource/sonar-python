@@ -34,7 +34,7 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.TypeShed;
 
 public class SymbolBuilder {
-  private Collection<Summary> summaries;
+  private Collection<Summary> summaries = new HashSet<>();
   private final Map<String, Symbol> existingSymbols;
   private final ProjectSummary projectSummary;
   @Nullable
@@ -111,7 +111,7 @@ public class SymbolBuilder {
       if (superClassSymbol != null) {
         classSymbol.addSuperClass(superClassSymbol);
       } else {
-        classSymbol.setHasSuperClassWithoutSymbol();
+        classSymbol.addSuperClass(new SymbolImpl(fullyQualifiedName, fullyQualifiedName));
       }
     }
   }

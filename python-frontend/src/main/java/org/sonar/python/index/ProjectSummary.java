@@ -40,8 +40,16 @@ import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectSummary {
-  private final Map<String, ModuleSummary> modules = new HashMap<>();
+  private final Map<String, ModuleSummary> modules;
   private final Set<String> djangoViewsFQN = new HashSet<>();
+
+  public ProjectSummary() {
+    this.modules = new HashMap<>();
+  }
+
+  public ProjectSummary(Map<String, ModuleSummary> modules) {
+    this.modules = modules;
+  }
 
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
@@ -50,7 +58,7 @@ public class ProjectSummary {
 
     List<Summary> summaries = fileInput.globalVariables().stream()
       // TODO: We don't put builtin or imported names in global symbol table to avoid duplicate FQNs in project level symbol table (to fix with SONARPY-647)
-      .filter(symbol -> isBuiltInOrImportedName(fullyQualifiedModuleName, symbol))
+      .filter(symbol -> !isBuiltInOrImportedName(fullyQualifiedModuleName, symbol))
       .flatMap(s -> SummaryUtils.summary(s).stream())
       .collect(Collectors.toList());
 

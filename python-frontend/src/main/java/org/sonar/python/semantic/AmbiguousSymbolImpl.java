@@ -35,6 +35,9 @@ public class AmbiguousSymbolImpl extends SymbolImpl implements AmbiguousSymbol {
 
   public AmbiguousSymbolImpl(String name, @Nullable String fullyQualifiedName, Set<Symbol> symbols) {
     super(name, fullyQualifiedName);
+    if (symbols.size() < 2) {
+      throw new IllegalArgumentException("Ambiguous symbol should contain at least two symbols");
+    }
     setKind(Kind.AMBIGUOUS);
     this.symbols = symbols;
   }

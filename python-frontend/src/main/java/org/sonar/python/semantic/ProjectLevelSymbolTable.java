@@ -19,33 +19,26 @@
  */
 package org.sonar.python.semantic;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.RegularArgument;
-
-import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
-import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
+import org.sonar.python.index.ModuleSummary;
+import org.sonar.python.index.ProjectSummary;
+import org.sonar.python.index.Summary;
+import org.sonar.python.index.SummaryUtils;
+import org.sonar.python.index.SymbolBuilder;
 
 public class ProjectLevelSymbolTable {
 
-  private final Map<String, Set<Symbol>> globalSymbolsByModuleName;
-  private Map<String, Symbol> globalSymbolsByFQN;
-  private final Set<String> djangoViewsFQN = new HashSet<>();
+  private final ProjectSummary projectSummary;
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -56,78 +49,46 @@ public class ProjectLevelSymbolTable {
   }
 
   public ProjectLevelSymbolTable() {
-    this.globalSymbolsByModuleName = new HashMap<>();
+    this.projectSummary = new ProjectSummary();
   }
 
   private ProjectLevelSymbolTable(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
-    this.globalSymbolsByModuleName = new HashMap<>(globalSymbolsByModuleName);
+    Map<String, ModuleSummary> modules = new HashMap<>();
+    for (Map.Entry<String, Set<Symbol>> entry : globalSymbolsByModuleName.entrySet()) {
+      String moduleName = entry.getKey();
+      Set<Symbol> exportedSymbols = entry.getValue();
+      List<Summary> summaries = exportedSymbols.stream()
+        .flatMap(s -> SummaryUtils.summary(s).stream())
+        .collect(Collectors.toList());
+      // TODO: Extract last dotted name from ModuleName?
+      modules.put(moduleName, new ModuleSummary(moduleName, moduleName, summaries));
+    }
+    this.projectSummary = new ProjectSummary(modules);
   }
 
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
-    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
-    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
-    fileInput.accept(symbolTableBuilder);
-    Set<Symbol> globalSymbols = new HashSet<>();
-    for (Symbol globalVariable : fileInput.globalVariables()) {
-      String fullyQualifiedVariableName = globalVariable.fullyQualifiedName();
-      if (((fullyQualifiedVariableName != null) && !fullyQualifiedVariableName.startsWith(fullyQualifiedModuleName)) ||
-        globalVariable.usages().stream().anyMatch(u -> u.kind().equals(Usage.Kind.IMPORT))) {
-        // TODO: We don't put builtin or imported names in global symbol table to avoid duplicate FQNs in project level symbol table (to fix with SONARPY-647)
-        continue;
-      }
-      if (globalVariable.kind() == Symbol.Kind.CLASS) {
-        globalSymbols.add(((ClassSymbolImpl) globalVariable).copyWithoutUsages());
-      } else if (globalVariable.kind() == Symbol.Kind.FUNCTION) {
-        globalSymbols.add(new FunctionSymbolImpl(globalVariable.name(), ((FunctionSymbol) globalVariable)));
-      } else {
-        globalSymbols.add(new SymbolImpl(globalVariable.name(), fullyQualifiedModuleName + "." + globalVariable.name(), globalVariable.annotatedTypeName()));
-      }
-    }
-    globalSymbolsByModuleName.put(fullyQualifiedModuleName, globalSymbols);
-    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
-    fileInput.accept(djangoViewsVisitor);
-  }
-
-  private Map<String, Symbol> globalSymbolsByFQN() {
-    if (globalSymbolsByFQN == null) {
-      globalSymbolsByFQN = globalSymbolsByModuleName.values()
-        .stream()
-        .flatMap(Collection::stream)
-        .filter(symbol -> symbol.fullyQualifiedName() != null)
-        .collect(Collectors.toMap(Symbol::fullyQualifiedName, Function.identity(), AmbiguousSymbolImpl::create));
-    }
-    return globalSymbolsByFQN;
+    projectSummary.addModule(fileInput, packageName, pythonFile);
   }
 
   @CheckForNull
-  public Symbol getSymbol(@Nullable String fullyQualifiedName) {
-    return globalSymbolsByFQN().get(fullyQualifiedName);
+  public Symbol getSymbol(@Nullable String fullyQualifiedName, Set<Symbol> existingSymbols) {
+    return new SymbolBuilder(Collections.emptyMap(), projectSummary)
+      .fromFullyQualifiedName(fullyQualifiedName)
+      .build();
   }
 
   @CheckForNull
-  public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName) {
-    return globalSymbolsByModuleName.get(moduleName);
+  public Set<Symbol> getSymbolsFromModule(@Nullable String moduleName,Set<Symbol> existingSymbols) {
+    ModuleSummary moduleSummary = projectSummary.modules().get(moduleName);
+    if (moduleSummary == null) {
+      return null;
+    }
+    return moduleSummary.summariesByFQN().values().stream()
+      .map(summaries -> new SymbolBuilder(Collections.emptyMap(), projectSummary).fromSummaries(summaries).build())
+      .collect(Collectors.toSet());
   }
 
   public boolean isDjangoView(@Nullable String fqn) {
-    return djangoViewsFQN.contains(fqn);
-  }
-
-  private class DjangoViewsVisitor extends BaseTreeVisitor {
-    @Override
-    public void visitCallExpression(CallExpression callExpression) {
-      Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol == null) {
-        return;
-      }
-      if ("django.urls.conf.path".equals(calleeSymbol.fullyQualifiedName())) {
-        RegularArgument viewArgument = nthArgumentOrKeyword(1, "view", callExpression.arguments());
-        if (viewArgument != null) {
-          getSymbolFromTree(viewArgument.expression())
-            .filter(symbol -> symbol.fullyQualifiedName() != null)
-            .ifPresent(symbol -> djangoViewsFQN.add(symbol.fullyQualifiedName()));
-        }
-      }
-    }
+    return projectSummary.isDjangoView(fqn);
   }
 }

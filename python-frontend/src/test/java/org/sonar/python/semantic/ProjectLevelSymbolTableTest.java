@@ -395,7 +395,7 @@ public class ProjectLevelSymbolTableTest {
   private static Set<Symbol> globalSymbols(FileInput fileInput, String packageName) {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     projectLevelSymbolTable.addModule(fileInput, packageName, pythonFile("mod.py"));
-    return projectLevelSymbolTable.getSymbolsFromModule(packageName.isEmpty() ? "mod" : packageName + ".mod");
+    return projectLevelSymbolTable.getSymbolsFromModule(packageName.isEmpty() ? "mod" : packageName + ".mod", Collections.emptySet());
   }
 
   @Test

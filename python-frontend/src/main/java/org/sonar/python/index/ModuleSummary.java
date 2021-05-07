@@ -80,4 +80,7 @@ public class ModuleSummary implements Summary {
     return summariesByFQN.getOrDefault(fullyQualifiedName, Collections.emptySet());
   }
 
+  public Map<String, Collection<Summary>> summariesByFQN() {
+    return summariesByFQN;
+  }
 }
